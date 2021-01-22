@@ -880,7 +880,6 @@ namespace Thumper___Leaf_Editor
 
 
 		bool _savelvl = true;
-		bool test = false;
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Split('\n').ToList();
 		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();

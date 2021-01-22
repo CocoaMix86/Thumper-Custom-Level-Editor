@@ -105,8 +105,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\LeafEditor_Assets\paths.txt" />
-    <None Include="bin\Debug\LeafEditor_Assets\track objects.txt" />
+    <Content Include="text assets\paths.txt" />
+    <Content Include="text assets\track objects.txt" />
     <Content Include="ThumperIconEditor.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
