@@ -1667,6 +1667,7 @@
 			this.btnLvlSeqAdd.Text = "+";
 			this.btnLvlSeqAdd.UseCompatibleTextRendering = true;
 			this.btnLvlSeqAdd.UseVisualStyleBackColor = false;
+			this.btnLvlSeqAdd.Click += new System.EventHandler(this.btnLvlSeqAdd_Click);
 			// 
 			// btnLvlSeqDown
 			// 
@@ -1709,6 +1710,7 @@
 			this.btnLvlSeqDelete.Text = "-";
 			this.btnLvlSeqDelete.UseCompatibleTextRendering = true;
 			this.btnLvlSeqDelete.UseVisualStyleBackColor = false;
+			this.btnLvlSeqDelete.Click += new System.EventHandler(this.btnLvlSeqDelete_Click);
 			// 
 			// label12
 			// 

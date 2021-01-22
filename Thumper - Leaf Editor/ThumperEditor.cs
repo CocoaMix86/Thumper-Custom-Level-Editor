@@ -881,6 +881,8 @@ namespace Thumper___Leaf_Editor
 
 		bool _savelvl = true;
 
+		int _lvllength = 0;
+
 		List<string> _lvlpaths = (Properties.Resources.paths).Split('\n').ToList();
 		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();
 
@@ -924,10 +926,12 @@ namespace Thumper___Leaf_Editor
 		{
 			//clear dgv
 			lvlLeafList.RowCount = 0;
+			_lvllength = 0;
 			//repopulate dgv from list
 			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
 			for (int x = 0; x < _lvlleafs.Count; x++) {
 				lvlLeafList.Rows.Add(new object[] { _lvlleafs[x].leafname, _lvlleafs[x].beats });
+				_lvllength += _lvlleafs[x].beats;
 			}
 			lvlLeafList.RowEnter += lvlLeafList_RowEnter;
 			//set selected index. Mainly used when moving items
@@ -939,6 +943,8 @@ namespace Thumper___Leaf_Editor
 			//enable/disable path buttons if leaf exists
 			btnLvlPathAdd.Enabled = lvlLeafList.Rows.Count > 0 ? true : false;
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
+
+			lvlSeqObjs.ColumnCount = _lvllength;
 		}
 
 
@@ -965,6 +971,7 @@ namespace Thumper___Leaf_Editor
 							paths = new List<string>()
 						};
 						_lvlleafs.Add(_temp);
+						//select the newly added leaf to load it
 						lvlLeafList.CurrentCell = lvlLeafList.Rows[_lvlleafs.Count - 1].Cells[0];
 					//display any error if found when importing
 					} catch (Exception ex) { MessageBox.Show("Unable to open file \"" + ofd.FileName + "\". Are you sure this was created by the editor?\n\n" + ex); }
@@ -1096,6 +1103,26 @@ namespace Thumper___Leaf_Editor
 			//for each path in the selected leaf, populate the paths DGV
 			for (int x = 0; x < _lvlleafs[index].paths.Count; x++)
 				lvlLeafPaths.Rows.Add(new object[] { _lvlleafs[index].paths[x] });
+		}
+
+		private void btnLvlSeqAdd_Click(object sender, EventArgs e)
+		{
+			lvlSeqObjs.RowCount++;
+			lvlSeqObjs.Rows[lvlSeqObjs.Rows.Count - 1].HeaderCell.Value = "Volume Track " + (lvlSeqObjs.Rows.Count - 1);
+			btnLvlSeqDelete.Enabled = true;
+		}
+
+		private void btnLvlSeqDelete_Click(object sender, EventArgs e)
+		{
+			bool _empty = true;
+			foreach (DataGridViewCell dgvc in lvlSeqObjs.CurrentRow.Cells) {
+				if (dgvc?.Value != null || dgvc?.Value.ToString() != "") {
+					_empty = false;
+					break;
+				}
+			}
+			if (_empty || (!_empty && MessageBox.Show("This track has data. Do you still want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes))
+				lvlSeqObjs.Rows.Remove(lvlSeqObjs.CurrentRow);
 		}
 	}
 }
