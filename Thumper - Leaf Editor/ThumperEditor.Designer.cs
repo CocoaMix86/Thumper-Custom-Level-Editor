@@ -797,7 +797,8 @@
 			this.btnTrackClear.BackColor = System.Drawing.Color.Gray;
 			this.btnTrackClear.Enabled = false;
 			this.btnTrackClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnTrackClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackClear.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackClear.ForeColor = System.Drawing.Color.Black;
 			this.btnTrackClear.Location = new System.Drawing.Point(189, 114);
 			this.btnTrackClear.Name = "btnTrackClear";
 			this.btnTrackClear.Size = new System.Drawing.Size(22, 22);
@@ -995,7 +996,8 @@
 			// 
 			this.btnTrackAdd.BackColor = System.Drawing.Color.Gray;
 			this.btnTrackAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnTrackAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackAdd.ForeColor = System.Drawing.Color.Black;
 			this.btnTrackAdd.Location = new System.Drawing.Point(189, 20);
 			this.btnTrackAdd.Name = "btnTrackAdd";
 			this.btnTrackAdd.Size = new System.Drawing.Size(22, 22);
@@ -1010,7 +1012,8 @@
 			this.btnTrackDown.BackColor = System.Drawing.Color.Gray;
 			this.btnTrackDown.Enabled = false;
 			this.btnTrackDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnTrackDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackDown.ForeColor = System.Drawing.Color.Black;
 			this.btnTrackDown.Location = new System.Drawing.Point(189, 86);
 			this.btnTrackDown.Name = "btnTrackDown";
 			this.btnTrackDown.Size = new System.Drawing.Size(22, 22);
@@ -1025,7 +1028,8 @@
 			this.btnTrackUp.BackColor = System.Drawing.Color.Gray;
 			this.btnTrackUp.Enabled = false;
 			this.btnTrackUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnTrackUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackUp.ForeColor = System.Drawing.Color.Black;
 			this.btnTrackUp.Location = new System.Drawing.Point(189, 64);
 			this.btnTrackUp.Name = "btnTrackUp";
 			this.btnTrackUp.Size = new System.Drawing.Size(22, 22);
@@ -1040,7 +1044,8 @@
 			this.btnTrackDelete.BackColor = System.Drawing.Color.Gray;
 			this.btnTrackDelete.Enabled = false;
 			this.btnTrackDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnTrackDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnTrackDelete.ForeColor = System.Drawing.Color.Black;
 			this.btnTrackDelete.Location = new System.Drawing.Point(189, 42);
 			this.btnTrackDelete.Name = "btnTrackDelete";
 			this.btnTrackDelete.Size = new System.Drawing.Size(22, 22);
@@ -1237,7 +1242,8 @@
 			// 
 			this.btnLvlLoopAdd.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLoopAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlLoopAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLoopAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLoopAdd.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlLoopAdd.Location = new System.Drawing.Point(452, 223);
 			this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
 			this.btnLvlLoopAdd.Size = new System.Drawing.Size(22, 22);
@@ -1271,7 +1277,8 @@
 			this.btnLvlLoopDelete.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLoopDelete.Enabled = false;
 			this.btnLvlLoopDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlLoopDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLoopDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLoopDelete.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlLoopDelete.Location = new System.Drawing.Point(452, 245);
 			this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
 			this.btnLvlLoopDelete.Size = new System.Drawing.Size(22, 22);
@@ -1286,7 +1293,8 @@
 			this.btnLvlPathAdd.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlPathAdd.Enabled = false;
 			this.btnLvlPathAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlPathAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlPathAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlPathAdd.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlPathAdd.Location = new System.Drawing.Point(204, 223);
 			this.btnLvlPathAdd.Name = "btnLvlPathAdd";
 			this.btnLvlPathAdd.Size = new System.Drawing.Size(22, 22);
@@ -1301,7 +1309,8 @@
 			this.btnLvlPathDelete.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlPathDelete.Enabled = false;
 			this.btnLvlPathDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlPathDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlPathDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlPathDelete.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlPathDelete.Location = new System.Drawing.Point(204, 245);
 			this.btnLvlPathDelete.Name = "btnLvlPathDelete";
 			this.btnLvlPathDelete.Size = new System.Drawing.Size(22, 22);
@@ -1535,7 +1544,8 @@
 			// 
 			this.btnLvlLeafAdd.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLeafAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlLeafAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLeafAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLeafAdd.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlLeafAdd.Location = new System.Drawing.Point(3, 206);
 			this.btnLvlLeafAdd.Name = "btnLvlLeafAdd";
 			this.btnLvlLeafAdd.Size = new System.Drawing.Size(22, 22);
@@ -1550,7 +1560,8 @@
 			this.btnLvlLeafDown.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLeafDown.Enabled = false;
 			this.btnLvlLeafDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlLeafDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLeafDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLeafDown.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlLeafDown.Location = new System.Drawing.Point(69, 206);
 			this.btnLvlLeafDown.Name = "btnLvlLeafDown";
 			this.btnLvlLeafDown.Size = new System.Drawing.Size(22, 22);
@@ -1565,7 +1576,8 @@
 			this.btnLvlLeafUp.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLeafUp.Enabled = false;
 			this.btnLvlLeafUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlLeafUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLeafUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLeafUp.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlLeafUp.Location = new System.Drawing.Point(47, 206);
 			this.btnLvlLeafUp.Name = "btnLvlLeafUp";
 			this.btnLvlLeafUp.Size = new System.Drawing.Size(22, 22);
@@ -1580,7 +1592,8 @@
 			this.btnLvlLeafDelete.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLeafDelete.Enabled = false;
 			this.btnLvlLeafDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlLeafDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLeafDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlLeafDelete.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlLeafDelete.Location = new System.Drawing.Point(25, 206);
 			this.btnLvlLeafDelete.Name = "btnLvlLeafDelete";
 			this.btnLvlLeafDelete.Size = new System.Drawing.Size(22, 22);
@@ -1646,7 +1659,8 @@
 			this.btnLvlSeqClear.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlSeqClear.Enabled = false;
 			this.btnLvlSeqClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlSeqClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqClear.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqClear.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlSeqClear.Location = new System.Drawing.Point(204, 113);
 			this.btnLvlSeqClear.Name = "btnLvlSeqClear";
 			this.btnLvlSeqClear.Size = new System.Drawing.Size(22, 22);
@@ -1658,8 +1672,10 @@
 			// btnLvlSeqAdd
 			// 
 			this.btnLvlSeqAdd.BackColor = System.Drawing.Color.Gray;
+			this.btnLvlSeqAdd.Enabled = false;
 			this.btnLvlSeqAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlSeqAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqAdd.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlSeqAdd.Location = new System.Drawing.Point(204, 19);
 			this.btnLvlSeqAdd.Name = "btnLvlSeqAdd";
 			this.btnLvlSeqAdd.Size = new System.Drawing.Size(22, 22);
@@ -1674,7 +1690,8 @@
 			this.btnLvlSeqDown.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlSeqDown.Enabled = false;
 			this.btnLvlSeqDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlSeqDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqDown.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlSeqDown.Location = new System.Drawing.Point(204, 85);
 			this.btnLvlSeqDown.Name = "btnLvlSeqDown";
 			this.btnLvlSeqDown.Size = new System.Drawing.Size(22, 22);
@@ -1688,7 +1705,8 @@
 			this.btnLvlSeqUp.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlSeqUp.Enabled = false;
 			this.btnLvlSeqUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlSeqUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqUp.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlSeqUp.Location = new System.Drawing.Point(204, 63);
 			this.btnLvlSeqUp.Name = "btnLvlSeqUp";
 			this.btnLvlSeqUp.Size = new System.Drawing.Size(22, 22);
@@ -1702,7 +1720,8 @@
 			this.btnLvlSeqDelete.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlSeqDelete.Enabled = false;
 			this.btnLvlSeqDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlSeqDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLvlSeqDelete.ForeColor = System.Drawing.Color.Black;
 			this.btnLvlSeqDelete.Location = new System.Drawing.Point(204, 41);
 			this.btnLvlSeqDelete.Name = "btnLvlSeqDelete";
 			this.btnLvlSeqDelete.Size = new System.Drawing.Size(22, 22);
