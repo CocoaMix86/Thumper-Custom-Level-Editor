@@ -217,6 +217,8 @@ namespace Thumper___Leaf_Editor
 					//if cell does not have the value, set it
 					if (_cell.Value != _val)
 						_cell.Value = _val;
+					if (_cell.Value.ToString() == "")
+						_cell.Value = null;
 
 					decimal i = 0;
 					//clear cell styling, in case it now falls out of highlighting scope
@@ -361,7 +363,7 @@ namespace Thumper___Leaf_Editor
 				_save += '#';
 
 				for (int x = 0; x < trackEditor.ColumnCount; x++) {
-					if (trackEditor.Rows[_tracks.IndexOf(_track)].Cells[x].Value != null)
+					if (!string.IsNullOrEmpty(trackEditor.Rows[_tracks.IndexOf(_track)].Cells[x].Value?.ToString()))
 						_out += x + ":" + trackEditor.Rows[_tracks.IndexOf(_track)].Cells[x].Value + ",";
 				}
 				_save += _out + '\n';
@@ -418,9 +420,9 @@ namespace Thumper___Leaf_Editor
 					_export += "'param_path': '" + _ls[2] + "',\n";
 					_export += "'trait_type': '" + _ls[6] + "',\n";
 					_export += "'data_points': {\n";
-
+					
 					for (int x = 0; x < trackEditor.ColumnCount; x++) {
-						if (trackEditor.Rows[_tracks.IndexOf(_ls)].Cells[x].Value != null)
+						if (!string.IsNullOrEmpty(trackEditor.Rows[_tracks.IndexOf(_ls)].Cells[x].Value?.ToString()))
 							_export += x + ":" + trackEditor.Rows[_tracks.IndexOf(_ls)].Cells[x].Value + ",";
 					}
 
