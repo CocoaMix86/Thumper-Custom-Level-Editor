@@ -15,6 +15,7 @@ namespace Thumper___Leaf_Editor
 {
 	public partial class FormLeafEditor : Form
 	{
+		#region Global
 		///Toolstrip - ABOUT
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e) => new AboutThumperEditor().Show();
 		///Toolstrip - INTERPOLATOR
@@ -53,22 +54,10 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
+		#endregion
 
-		// GLOBAL STUFF ^^^^^
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// LEAF EDITOR vvvvvv
-
-
+		#region Leaf_Editor
+		#region Variables
 		bool _saveleaf = true;
 
 		int _beats = 0;
@@ -81,12 +70,13 @@ namespace Thumper___Leaf_Editor
 		public List<Object_Params> _objects = new List<Object_Params>();
 		public List<string> _timesig = new List<string>() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
 		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02"};
+		#endregion
 
 		public FormLeafEditor()
 		{
 			InitializeComponent();
 		}
-
+		#region EventHandlers
 		///        ///
 		/// EVENTS ///
 		///        ///
@@ -294,7 +284,7 @@ namespace Thumper___Leaf_Editor
 		{
 			_beats = (int)numericUpDown_LeafLength.Value;
 			trackEditor.ColumnCount = _beats;
-			GenerateColumnStyle(trackEditor);
+			GenerateColumnStyle(trackEditor, _beats);
 			//sets flag that leaf has unsaved changes
 			SaveLeaf(false);
 		}
@@ -394,7 +384,7 @@ namespace Thumper___Leaf_Editor
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
 				_tracks.Clear();
-				List<string> _load = new List<string>();
+				List<string> _load;
 
 				using (var ofd = new OpenFileDialog()) {
 					ofd.Filter = "Thumper Editor Leaf Tracks (*.teleaf)|*.teleaf";
@@ -469,9 +459,8 @@ namespace Thumper___Leaf_Editor
 			//sets flag that leaf has unsaved changes
 			SaveLeaf(false);
 		}
-
-
-
+		#endregion
+		#region Buttons
 		///         ///
 		/// BUTTONS ///
 		///         ///
@@ -672,9 +661,8 @@ namespace Thumper___Leaf_Editor
 				lblTrackFileName.Text = "Leaf Editor";
 			}
 		}
-
-
-
+		#endregion
+		#region Methods
 		///         ///
 		/// METHODS ///
 		///         ///
@@ -711,13 +699,13 @@ namespace Thumper___Leaf_Editor
 				PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
 				pi.SetValue(grid, true, null);
 			}
-			GenerateColumnStyle(grid);
+			GenerateColumnStyle(grid, _beats);
 		}
 
-		public void GenerateColumnStyle(DataGridView grid)
+		public void GenerateColumnStyle(DataGridView grid, int _cells)
 		{
 			//stylize track grid/columns
-			for (int i = 0; i < _beats; i++) {
+			for (int i = 0; i < _cells; i++) {
 				grid.Columns[i].Name = i.ToString();
 				grid.Columns[i].Resizable = DataGridViewTriState.False;
 				grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -790,7 +778,7 @@ namespace Thumper___Leaf_Editor
 		///Updates cell highlighting in the DGV
 		public void TrackUpdateHighlighting(DataGridViewRow r)
 		{
-			float i = 0;
+			float i;
 			//iterate over column count - that's how many cells there are in the row
 			for (int x = 0; x < trackEditor.ColumnCount; x++) {
 				//remove any current styling, in case it now falls out of scope
@@ -862,32 +850,20 @@ namespace Thumper___Leaf_Editor
 			else
 				panelLeaf.Location = panelLevel.Location;
 		}
+		#endregion
+		#endregion
 
-
-		// LEAF EDITOR ^^^^^
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/////////////////////////////////////////////////////////////////egg////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// LVL EDITOR vvvvvv
-
-
+		#region Lvl_Editor
+		#region Variables
 		bool _savelvl = true;
 
-		int _lvllength = 0;
+		int _lvllength;
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Split('\n').ToList();
 		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();
+		#endregion
 
-
-
+		#region EventHandlers
 		///         ///
 		/// EVENTS  ///
 		///         ///
@@ -919,7 +895,7 @@ namespace Thumper___Leaf_Editor
 					_lvlleafs[lvlLeafList.CurrentRow.Index].paths.Add(lvlLeafPaths.Rows[x].Cells[0].Value.ToString());
 			}
 
-			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0 ? true : false;
+			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
 		}
 		///_LVLLEAF - Triggers when the collection changes
 		public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -937,23 +913,28 @@ namespace Thumper___Leaf_Editor
 			//set selected index. Mainly used when moving items
 			///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
 			//enable certain buttons if there are enough items for them
-			btnLvlLeafDelete.Enabled = lvlLeafList.Rows.Count > 0 ? true : false;
-			btnLvlLeafUp.Enabled = lvlLeafList.Rows.Count > 1 ? true : false;
-			btnLvlLeafDown.Enabled = lvlLeafList.Rows.Count > 1 ? true : false;
+			btnLvlLeafDelete.Enabled = _lvlleafs.Count > 0;
+			btnLvlLeafUp.Enabled = _lvlleafs.Count > 1;
+			btnLvlLeafDown.Enabled = _lvlleafs.Count > 1;
 			//enable/disable path buttons if leaf exists
-			btnLvlPathAdd.Enabled = lvlLeafList.Rows.Count > 0 ? true : false;
+			btnLvlPathAdd.Enabled = _lvlleafs.Count > 0;
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
+			//enable/disable seqObjs buttons
+			btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
 
 			lvlSeqObjs.ColumnCount = _lvllength;
+			GenerateColumnStyle(lvlSeqObjs, _lvllength);
 		}
+		#endregion
 
-
-
+		#region Buttons
 		///         ///
 		/// BUTTONS ///
 		///         ///
 
+
 		private void btnLvlLeafDelete_Click(object sender, EventArgs e) => _lvlleafs.RemoveAt(lvlLeafList.CurrentRow.Index);
+
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
 			using (var ofd = new OpenFileDialog()) {
@@ -1044,9 +1025,9 @@ namespace Thumper___Leaf_Editor
 				r.HeaderCell.Value = "Volume Track " + r.Index;
 			}
 		}
+		#endregion
 
-
-
+		#region Methods
 		///         ///
 		/// METHODS ///
 		///         ///
@@ -1101,8 +1082,8 @@ namespace Thumper___Leaf_Editor
 		{
 			lvlLeafPaths.Rows.Clear();
 			//for each path in the selected leaf, populate the paths DGV
-			for (int x = 0; x < _lvlleafs[index].paths.Count; x++)
-				lvlLeafPaths.Rows.Add(new object[] { _lvlleafs[index].paths[x] });
+			foreach (string path in _lvlleafs[index].paths)
+				lvlLeafPaths.Rows.Add(new object[] { path });
 		}
 
 		private void btnLvlSeqAdd_Click(object sender, EventArgs e)
@@ -1115,14 +1096,24 @@ namespace Thumper___Leaf_Editor
 		private void btnLvlSeqDelete_Click(object sender, EventArgs e)
 		{
 			bool _empty = true;
+			//iterate over cells in current row. If there is a value, set bool to false and break loop
 			foreach (DataGridViewCell dgvc in lvlSeqObjs.CurrentRow.Cells) {
-				if (dgvc?.Value != null || dgvc?.Value.ToString() != "") {
+				if (dgvc?.Value != null) {
 					_empty = false;
 					break;
 				}
 			}
-			if (_empty || (!_empty && MessageBox.Show("This track has data. Do you still want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes))
+			//prompt user to say YES if row is not empty. Then delete selected track
+			if (_empty || (!_empty && MessageBox.Show("This track has data. Do you still want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)) {
 				lvlSeqObjs.Rows.Remove(lvlSeqObjs.CurrentRow);
+				//after deleting, rename all headers so they're in order again
+				foreach (DataGridViewRow r in lvlSeqObjs.Rows)
+					r.HeaderCell.Value = "Volume Track " + r.Index;
+			}
+			//disable this button if there are no more rows
+			btnLvlSeqDelete.Enabled = lvlSeqObjs.Rows.Count != 0;
 		}
+		#endregion
+		#endregion
 	}
 }
