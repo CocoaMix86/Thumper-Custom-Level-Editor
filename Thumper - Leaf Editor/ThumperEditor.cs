@@ -257,7 +257,7 @@ namespace Thumper___Leaf_Editor
 			}
 			e.Handled = true;
 		}
-		//Keypress Delete - clear selected cells
+		//Keypress Delete - clear selected cellss
 		private void trackEditor_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Delete) {
