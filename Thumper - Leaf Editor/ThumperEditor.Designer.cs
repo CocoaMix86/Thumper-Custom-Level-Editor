@@ -665,6 +665,7 @@
 			this.trackEditor.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDoubleClick);
 			this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
 			this.trackEditor.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_RowEnter);
+			this.trackEditor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.trackEditor_KeyPress);
 			// 
 			// trackZoom
 			// 

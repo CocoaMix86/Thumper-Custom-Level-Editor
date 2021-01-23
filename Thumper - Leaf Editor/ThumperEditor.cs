@@ -247,6 +247,16 @@ namespace Thumper___Leaf_Editor
 
 			trackEditor.CurrentCell.Value = val;
 		}
+		//Keypress Backspace or Delete - clear selected cells
+		private void trackEditor_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Delete) {
+				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
+					dgvc.Value = null;
+				TrackUpdateHighlighting(trackEditor.CurrentRow);
+			}
+			e.Handled = true;
+		}
 		///PANEL LABELS - change size or close
 		private void lblMasterClose_Click(object sender, EventArgs e) => masterEditorToolStripMenuItem.PerformClick();
 		private void lblLvlClose_Click(object sender, EventArgs e) => levelEditorToolStripMenuItem.PerformClick();
@@ -410,7 +420,7 @@ namespace Thumper___Leaf_Editor
 
 			string _export = "[\n{\n" +
 				"'obj_type': 'SequinLeaf',\n" +
-				"'obj_name': '" + _loadedleaf + ".leaf',\n" +
+				"'obj_name': '" + _loadedleaf.Replace(".teleaf","") + ".leaf',\n" +
 				"'seq_objs': [\n\n";
 
 			foreach (List<string> _ls in _tracks) {
@@ -1116,6 +1126,7 @@ namespace Thumper___Leaf_Editor
 			btnLvlSeqDelete.Enabled = lvlSeqObjs.Rows.Count != 0;
 		}
 		#endregion
+
 		#endregion
 	}
 }
