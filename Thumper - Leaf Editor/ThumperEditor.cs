@@ -394,6 +394,10 @@ namespace Thumper___Leaf_Editor
 				sfd.FilterIndex = 1;
 
 				if (sfd.ShowDialog() == DialogResult.OK) {
+					if (sfd.FileName.Contains("leaf_")) {
+						MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");
+						return;
+					}
 					File.WriteAllText(sfd.FileName, _save);
 					lblTrackFileName.Text = "Leaf Editor - " + Path.GetFileName(sfd.FileName);
 					_loadedleaf = Path.GetFileName(sfd.FileName).Replace(".teleaf", "");
