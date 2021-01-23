@@ -247,10 +247,20 @@ namespace Thumper___Leaf_Editor
 
 			trackEditor.CurrentCell.Value = val;
 		}
-		//Keypress Backspace or Delete - clear selected cells
+		//Keypress Backspace - clear selected cells
 		private void trackEditor_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (e.KeyChar == (char)Keys.Back || e.KeyChar == (char)Keys.Delete) {
+			if (e.KeyChar == (char)Keys.Back) {
+				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
+					dgvc.Value = null;
+				TrackUpdateHighlighting(trackEditor.CurrentRow);
+			}
+			e.Handled = true;
+		}
+		//Keypress Delete - clear selected cells
+		private void trackEditor_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete) {
 				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
 					dgvc.Value = null;
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
@@ -1110,7 +1120,7 @@ namespace Thumper___Leaf_Editor
 			bool _empty = true;
 			//iterate over cells in current row. If there is a value, set bool to false and break loop
 			foreach (DataGridViewCell dgvc in lvlSeqObjs.CurrentRow.Cells) {
-				if (dgvc?.Value != null) {
+				if (!string.IsNullOrEmpty(dgvc?.Value?.ToString())) {
 					_empty = false;
 					break;
 				}
