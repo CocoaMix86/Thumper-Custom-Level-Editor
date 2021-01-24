@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 
@@ -208,7 +205,6 @@ namespace Thumper___Leaf_Editor
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			ShowRawTrackData();
 			var _val = trackEditor.CurrentCell.Value;
 
 			try {
@@ -234,6 +230,8 @@ namespace Thumper___Leaf_Editor
 					SaveLeaf(false);
 				}
 			} catch { }
+
+			ShowRawTrackData();
 		}
 		//Cell double click
 		private void trackEditor_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -806,7 +804,7 @@ namespace Thumper___Leaf_Editor
 		{
 			float i;
 			//iterate over column count - that's how many cells there are in the row
-			for (int x = 0; x < trackEditor.ColumnCount; x++) {
+			for (int x = 0; x < r.Cells.Count; x++) {
 				//remove any current styling, in case it now falls out of scope
 				r.Cells[x].Style = null;
 				try {
@@ -882,10 +880,13 @@ namespace Thumper___Leaf_Editor
 		#region Lvl_Editor
 		#region Variables
 		bool _savelvl = true;
-
 		int _lvllength;
+		string _loadedlvl;
 
-		List<string> _lvlpaths = (Properties.Resources.paths).Split('\n').ToList();
+		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n","\n").Split('\n').ToList();
+		List<string> _SampleLevels = new List<string>();
+		List<List<string>> _SampleSamples = new List<List<string>>();
+
 		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();
 		#endregion
 
@@ -912,16 +913,56 @@ namespace Thumper___Leaf_Editor
 		//Cell value changed
 		private void lvlLeafPaths_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			//if a path is set to blank, remove the row
 			if (lvlLeafPaths.CurrentCell.Value.ToString() == " ")
 				lvlLeafPaths.Rows.Remove(lvlLeafPaths.CurrentRow);
-
+			//clear List storing the paths and repopulate it
 			_lvlleafs[lvlLeafList.CurrentRow.Index].paths.Clear();
 			for (int x = 0; x < lvlLeafPaths.Rows.Count; x++) {
 				if (lvlLeafPaths.Rows[x].Cells[0].Value != null)
 					_lvlleafs[lvlLeafList.CurrentRow.Index].paths.Add(lvlLeafPaths.Rows[x].Cells[0].Value.ToString());
 			}
-
+			//Delete button enabled/disabled if rows exist
 			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
+		}
+		/// DGV LVLLOOPTRACKS
+		//Cell value changed
+		private void lvlLoopTracks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.ColumnIndex == 0) {
+				DataGridViewComboBoxCell _combocell = lvlLoopTracks[1, e.RowIndex] as DataGridViewComboBoxCell;
+				_combocell.DataSource = _SampleSamples[_SampleLevels.IndexOf(lvlLoopTracks[e.ColumnIndex, e.RowIndex].Value.ToString())];
+			}
+		}
+		/// DGV LVLSEQOBJS
+		//Cell value changed
+		private void lvlSeqObjs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+			try {
+				var _cell = lvlSeqObjs[e.ColumnIndex, e.RowIndex];
+				if (!string.IsNullOrEmpty(_cell?.Value?.ToString()))
+					_cell.Style.BackColor = Color.Blue;
+				else if (_cell != null)
+					_cell.Style = null;
+			} catch { }
+		}
+		//Press Delete to clear cells
+		private void lvlSeqObjs_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete) {
+				foreach (DataGridViewCell dgvc in lvlSeqObjs.SelectedCells)
+					dgvc.Value = null;
+			}
+			e.Handled = true;
+		}
+		//Press Backspace to clear cells
+		private void lvlSeqObjs_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Back) {
+				foreach (DataGridViewCell dgvc in lvlSeqObjs.SelectedCells)
+					dgvc.Value = null;
+			}
+			e.Handled = true;
 		}
 		///_LVLLEAF - Triggers when the collection changes
 		public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -951,13 +992,62 @@ namespace Thumper___Leaf_Editor
 			lvlSeqObjs.ColumnCount = _lvllength;
 			GenerateColumnStyle(lvlSeqObjs, _lvllength);
 		}
+		/// LVL SAVE
+		private void saveToolStripMenuItem2_Click(object sender, EventArgs e)
+		{
+			//start with Approach, Volume, Input, and Tutorial at the top of the file
+			string _export = $"{NUD_lvlApproach.Value};{NUD_lvlVolume.Value};{dropLvlInput.Text};{dropLvlTutorial.Text}\n##\n";
+			//add each row of Loop Tracks to the file. Empty cells are ignored and values are ';' separated
+			foreach (DataGridViewRow r in lvlLoopTracks.Rows)
+				_export += string.Join(";", r.Cells.Cast<DataGridViewCell>().Where(c => !string.IsNullOrEmpty(c?.Value?.ToString())).Select(c => c.Value.ToString()).ToArray()) + "\n";
+			_export += "##\n";
+			//add each row of seq_objs to the file. Empty cells are ignored. Data cells have their column index and value added in {index:value} format. Cells are ';' separated
+			foreach (DataGridViewRow r in lvlSeqObjs.Rows)
+				_export += string.Join(";", r.Cells.Cast<DataGridViewCell>().Where(c => !string.IsNullOrEmpty(c?.Value?.ToString())).Select(c => $"{c.ColumnIndex}:{c.Value}").ToArray()) + "\n";
+			_export += "##\n";
+			foreach (LvlLeafData l in _lvlleafs)
+				_export += $"{l.filepath};{l.leafname};{l.beats}#{string.Join(";", l.paths)}\n";
+
+			using (var sfd = new SaveFileDialog()) {
+				sfd.Filter = "Thumper Editor Lvl File (*.telvl)|*.telvl";
+				sfd.FilterIndex = 1;
+
+				if (sfd.ShowDialog() == DialogResult.OK) {
+					if (sfd.FileName.Contains("lvl_")) {
+						MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
+						return;
+					}
+					File.WriteAllText(sfd.FileName, _export);
+					lblLvlName.Text = "Level Editor - " + Path.GetFileName(sfd.FileName);
+					_loadedlvl = Path.GetFileName(sfd.FileName).Replace(".telvl", "");
+					SaveLeaf(true);
+				}
+			}
+		}
+		/// LVL LOAD
+		private void openToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+				string _load;
+
+				using (var ofd = new OpenFileDialog()) {
+					ofd.Filter = "Thumper Editor Lvl File (*.telvl)|*.telvl";
+					ofd.Title = "Load a Thumper Editor Lvl file";
+					if (ofd.ShowDialog() == DialogResult.OK) {
+						_loadedlvl = Path.GetFileName(ofd.FileName);
+						lblLvlName.Text = "Level Editor - " + _loadedlvl;
+						_load = File.ReadAllText(ofd.FileName);
+						LoadLvl(_load);
+					}
+				}
+			}
+		}
 		#endregion
 
 		#region Buttons
 		///         ///
 		/// BUTTONS ///
 		///         ///
-
 
 		private void btnLvlLeafDelete_Click(object sender, EventArgs e) => _lvlleafs.RemoveAt(lvlLeafList.CurrentRow.Index);
 
@@ -1058,9 +1148,64 @@ namespace Thumper___Leaf_Editor
 		/// METHODS ///
 		///         ///
 
-		public void LoadLvl()
+		public void LoadLvl(string _lvl)
 		{
+			//Clear DGVs so new data can load
+			lvlLoopTracks.Rows.Clear();
+			_lvlleafs.Clear();
+			lvlLeafList.Rows.Clear();
+			lvlSeqObjs.Rows.Clear();
 
+			var _load = _lvl.Split(new string[] { "##\n"}, StringSplitOptions.None).ToList();
+			//populate the non-DGV elements on the form with info, stored in line 1 of the file
+			NUD_lvlApproach.Value = decimal.Parse(_load[0].Split(';')[0]);
+			NUD_lvlVolume.Value = decimal.Parse(_load[0].Split(';')[1]);
+			dropLvlInput.Text = _load[0].Split(';')[2];
+			dropLvlTutorial.Text = _load[0].Split(';')[3];
+			//load loop track names and paths to lvlLoopTracks DGV
+			var _loadlooptracks = _load[1].Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+			for (int x = 0; x < _loadlooptracks.Count; x++) {
+				var _loadloopdata = _loadlooptracks[x].Split(';');
+				//first add "level source" cell and force the CellValueChanged event
+				//Forcing the event is required to populate the second combobox with the correct options
+				lvlLoopTracks.Rows.Add(_loadloopdata[0]);
+				lvlLoopTracks_CellValueChanged(lvlLoopTracks, new DataGridViewCellEventArgs(0, x));
+				//_loadloopdata[1] contains track name, if exists
+				if (_loadloopdata.Length > 1)
+					lvlLoopTracks[1, x].Value = _loadloopdata[1];
+				//_loadloopdata[2] contains "beats per loop", if exists
+				if (_loadloopdata.Length > 2)
+					lvlLoopTracks[2, x].Value = _loadloopdata[2];
+			}
+			//load leafs associated with this lvl
+			var _loadlvlleafs = _load[3].Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+			foreach (string s in _loadlvlleafs) {
+				//splitting on '#' gives the primary leaf data in [0] and any associated tunnels/paths in [1]
+				var ss = s.Split('#').ToList();
+				_lvlleafs.Add(new LvlLeafData() {
+					//splitting [0] on ';' gives the data in order
+					filepath = ss[0].Split(';')[0],
+					leafname = ss[0].Split(';')[1],
+					beats = int.Parse(ss[0].Split(';')[2]),
+					//splitting [1] on ';' gives each tunnel/path separaretly
+					paths = ss[1].Split(';').ToList()
+				});
+			}
+			//load volume sequencer data
+			_loadlooptracks = _load[2].Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+			for (int x = 0; x < _loadlooptracks.Count; x++) {
+				lvlSeqObjs.RowCount++;
+				//only cells containing data are stored, in {columnIndex:data} format. ';' separates each cell
+				foreach (string ss in _loadlooptracks[x].Split(';')) {
+					//splitting on ':' gives the index [0] and the data [1]
+					lvlSeqObjs[ss.Split(':')[0], x].Value = ss.Split(':')[1];
+				}
+			}
+			//add headers to rows after importing their data
+			foreach (DataGridViewRow r in lvlSeqObjs.Rows)
+				r.HeaderCell.Value = "Volume Track " + r.Index;
+			foreach (DataGridViewRow r in lvlLoopTracks.Rows)
+				r.HeaderCell.Value = "Volume Track " + r.Index;
 		}
 
 		public void InitializeLvlStuff()
@@ -1095,13 +1240,40 @@ namespace Thumper___Leaf_Editor
 
 			///customize Loop Track list a bit
 			//custom column containing comboboxes per cell
-			DataGridViewComboBoxColumn _dgvlvlloops = new DataGridViewComboBoxColumn() {
-				DataSource = _lvlpaths,
+			DataGridViewComboBoxColumn _dgvlvllooplevels = new DataGridViewComboBoxColumn() {
+				DataSource = _SampleLevels,
+				HeaderText = "Level"
+			};
+			DataGridViewComboBoxColumn _dgvlvlloopsamples = new DataGridViewComboBoxColumn() {
+				DataSource = null,
 				HeaderText = "Loop Track"
 			};
-			lvlLoopTracks.Columns.Add(_dgvlvlloops);
-			lvlLoopTracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			lvlLoopTracks.Columns.Add(_dgvlvllooplevels);
+			lvlLoopTracks.Columns.Add(_dgvlvlloopsamples);
+			lvlLoopTracks.ColumnCount = 3;
+			lvlLoopTracks.Columns[2].HeaderText = "Beats per loop";
+			lvlLoopTracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 			///
+
+			///import sample names
+			//split on ### to separate each set of levels
+			var _import = Properties.Resources.samples.Replace("\r\n", "\n").Split(new string[] { "\n###\n" }, StringSplitOptions.None);
+			foreach (string _s in _import) {
+				//split on \n to separate each individual sample
+				foreach (string _s2 in _s.Split('\n')) {
+					//split on ',' to separate each data point of a sample
+					var _s3 = _s2.Split(',');
+					//for every new level name found, add it to the Levels list,
+					//and create a new List<string> for its respective samples to be stored 
+					if (!_SampleLevels.Contains(_s3[0])) {
+						_SampleLevels.Add(_s3[0]);
+						_SampleSamples.Add(new List<string>());
+					}
+					//_s3[1] and [2] store the sample type (drone or drum) and the sample name
+					//getting IndexOf(_s3[0]) puts the sample into the correct list
+					_SampleSamples[_SampleLevels.IndexOf(_s3[0])].Add(_s3[1] + "\\" + _s3[2]);
+				}
+			}
 		}
 
 		public void LvlUpdatePaths(int index)

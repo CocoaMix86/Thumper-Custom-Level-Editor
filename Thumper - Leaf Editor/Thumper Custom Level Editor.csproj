@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="text assets\paths.txt" />
+    <None Include="text assets\samples.txt" />
     <Content Include="text assets\track objects.txt" />
     <Content Include="ThumperIconEditor.ico" />
   </ItemGroup>

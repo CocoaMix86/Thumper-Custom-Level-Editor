@@ -142,13 +142,17 @@
 			this.btnLvlSeqDown = new System.Windows.Forms.Button();
 			this.btnLvlSeqUp = new System.Windows.Forms.Button();
 			this.btnLvlSeqDelete = new System.Windows.Forms.Button();
-			this.label12 = new System.Windows.Forms.Label();
+			this.lblLvlName = new System.Windows.Forms.Label();
 			this.panelMaster = new System.Windows.Forms.Panel();
 			this.lblMasterMax = new System.Windows.Forms.Label();
 			this.lblMasterClose = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+			this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -252,6 +256,11 @@
 			// levelToolStripMenuItem
 			// 
 			this.levelToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.levelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem1,
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem2,
+            this.exportToolStripMenuItem1});
 			this.levelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
 			this.levelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
@@ -324,9 +333,9 @@
 			this.moveTrackUpToolStripMenuItem.Enabled = false;
 			this.moveTrackUpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.moveTrackUpToolStripMenuItem.Name = "moveTrackUpToolStripMenuItem";
-			this.moveTrackUpToolStripMenuItem.ShortcutKeyDisplayString = "";
+			this.moveTrackUpToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+ +";
 			this.moveTrackUpToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.U)));
+            | System.Windows.Forms.Keys.Oemplus)));
 			this.moveTrackUpToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
 			this.moveTrackUpToolStripMenuItem.Text = "Move Track Up";
 			this.moveTrackUpToolStripMenuItem.Click += new System.EventHandler(this.moveTrackUpToolStripMenuItem_Click);
@@ -337,9 +346,9 @@
 			this.moveTrackDownToolStripMenuItem.Enabled = false;
 			this.moveTrackDownToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.moveTrackDownToolStripMenuItem.Name = "moveTrackDownToolStripMenuItem";
-			this.moveTrackDownToolStripMenuItem.ShortcutKeyDisplayString = "";
+			this.moveTrackDownToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+ -";
 			this.moveTrackDownToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.D)));
+            | System.Windows.Forms.Keys.OemMinus)));
 			this.moveTrackDownToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
 			this.moveTrackDownToolStripMenuItem.Text = "Move Track Down";
 			this.moveTrackDownToolStripMenuItem.Click += new System.EventHandler(this.moveTrackDownToolStripMenuItem_Click);
@@ -1127,7 +1136,7 @@
 			this.panelLevel.Controls.Add(this.btnLvlSeqDown);
 			this.panelLevel.Controls.Add(this.btnLvlSeqUp);
 			this.panelLevel.Controls.Add(this.btnLvlSeqDelete);
-			this.panelLevel.Controls.Add(this.label12);
+			this.panelLevel.Controls.Add(this.lblLvlName);
 			this.panelLevel.Location = new System.Drawing.Point(278, 27);
 			this.panelLevel.Name = "panelLevel";
 			this.panelLevel.Size = new System.Drawing.Size(691, 536);
@@ -1386,6 +1395,7 @@
 			this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.lvlLoopTracks.Size = new System.Drawing.Size(209, 133);
 			this.lvlLoopTracks.TabIndex = 81;
+			this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
 			// 
 			// lblLevelMax
 			// 
@@ -1465,6 +1475,9 @@
 			this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.lvlSeqObjs.Size = new System.Drawing.Size(457, 185);
 			this.lvlSeqObjs.TabIndex = 68;
+			this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
+			this.lvlSeqObjs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvlSeqObjs_KeyDown);
+			this.lvlSeqObjs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lvlSeqObjs_KeyPress);
 			// 
 			// label21
 			// 
@@ -1733,16 +1746,16 @@
 			this.btnLvlSeqDelete.UseVisualStyleBackColor = false;
 			this.btnLvlSeqDelete.Click += new System.EventHandler(this.btnLvlSeqDelete_Click);
 			// 
-			// label12
+			// lblLvlName
 			// 
-			this.label12.AutoSize = true;
-			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label12.ForeColor = System.Drawing.Color.White;
-			this.label12.Location = new System.Drawing.Point(-2, 0);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(63, 13);
-			this.label12.TabIndex = 48;
-			this.label12.Text = "Level Editor";
+			this.lblLvlName.AutoSize = true;
+			this.lblLvlName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblLvlName.ForeColor = System.Drawing.Color.White;
+			this.lblLvlName.Location = new System.Drawing.Point(-2, 0);
+			this.lblLvlName.Name = "lblLvlName";
+			this.lblLvlName.Size = new System.Drawing.Size(63, 13);
+			this.lblLvlName.TabIndex = 48;
+			this.lblLvlName.Text = "Level Editor";
 			// 
 			// panelMaster
 			// 
@@ -1795,6 +1808,40 @@
 			this.label13.Size = new System.Drawing.Size(69, 13);
 			this.label13.TabIndex = 49;
 			this.label13.Text = "Master Editor";
+			// 
+			// newToolStripMenuItem1
+			// 
+			this.newToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.newToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+			this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
+			this.newToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.newToolStripMenuItem1.Text = "New";
+			// 
+			// openToolStripMenuItem
+			// 
+			this.openToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.openToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.openToolStripMenuItem.Text = "Open";
+			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+			// 
+			// saveToolStripMenuItem2
+			// 
+			this.saveToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.saveToolStripMenuItem2.ForeColor = System.Drawing.Color.White;
+			this.saveToolStripMenuItem2.Name = "saveToolStripMenuItem2";
+			this.saveToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+			this.saveToolStripMenuItem2.Text = "Save";
+			this.saveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
+			// 
+			// exportToolStripMenuItem1
+			// 
+			this.exportToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.exportToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+			this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
+			this.exportToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.exportToolStripMenuItem1.Text = "Export";
 			// 
 			// FormLeafEditor
 			// 
@@ -1875,7 +1922,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox dropTimeSig;
 		private System.Windows.Forms.Label lblTrackFileName;
-		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label lblLvlName;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.Button btnTrackDown;
@@ -1949,6 +1996,10 @@
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem2;
+		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem1;
 	}
 }
 

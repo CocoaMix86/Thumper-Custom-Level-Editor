@@ -92,6 +92,28 @@ namespace Thumper___Leaf_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to level_2,drums,crakhed_pattern1.wav
+        ///level_2,drums,crakhed_pattern2.wav
+        ///level_2,drums,crakhed_pattern3.wav
+        ///level_2,drums,crakhed_pattern4.wav
+        ///level_2,drums,drums_boss_pattern1.wav
+        ///level_2,drums,drums_boss_pattern2.wav
+        ///level_2,drums,drums_boss_pattern3.wav
+        ///level_2,drums,drums_boss_pattern4.wav
+        ///level_2,drums,drums_jagged_pattern1.wav
+        ///level_2,drums,drums_jagged_pattern2.wav
+        ///level_2,drums,drums_jagged_pattern3.wav
+        ///level_2,drums,drums_jagged_pattern4_sparse.wav
+        ///level_2,drums,drums_long_pattern1.wav
+        ///le [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string samples {
+            get {
+                return ResourceManager.GetString("samples", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TRACK EFFECTS
         ///leafname
         ///leafname;pitch;pitch;kTraitFloat;True;1.25;(4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0)
