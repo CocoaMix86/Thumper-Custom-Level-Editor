@@ -51,6 +51,10 @@
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.levelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.trackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,8 +143,6 @@
 			this.lvlLeafList = new System.Windows.Forms.DataGridView();
 			this.btnLvlSeqClear = new System.Windows.Forms.Button();
 			this.btnLvlSeqAdd = new System.Windows.Forms.Button();
-			this.btnLvlSeqDown = new System.Windows.Forms.Button();
-			this.btnLvlSeqUp = new System.Windows.Forms.Button();
 			this.btnLvlSeqDelete = new System.Windows.Forms.Button();
 			this.lblLvlName = new System.Windows.Forms.Label();
 			this.panelMaster = new System.Windows.Forms.Panel();
@@ -149,10 +151,6 @@
 			this.label13 = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-			this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-			this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -230,7 +228,7 @@
 			this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
 			this.loadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
 			this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.loadToolStripMenuItem.Text = "Load";
+			this.loadToolStripMenuItem.Text = "Open";
 			this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
 			// 
 			// saveToolStripMenuItem
@@ -265,6 +263,46 @@
 			this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
 			this.levelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.levelToolStripMenuItem.Text = "Level...";
+			// 
+			// newToolStripMenuItem1
+			// 
+			this.newToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.newToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+			this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
+			this.newToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
+			this.newToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.newToolStripMenuItem1.Text = "New";
+			this.newToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
+			// 
+			// openToolStripMenuItem
+			// 
+			this.openToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.openToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.openToolStripMenuItem.Text = "Open";
+			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+			// 
+			// saveToolStripMenuItem2
+			// 
+			this.saveToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.saveToolStripMenuItem2.ForeColor = System.Drawing.Color.White;
+			this.saveToolStripMenuItem2.Name = "saveToolStripMenuItem2";
+			this.saveToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
+			this.saveToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+			this.saveToolStripMenuItem2.Text = "Save";
+			this.saveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
+			// 
+			// exportToolStripMenuItem1
+			// 
+			this.exportToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.exportToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+			this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
+			this.exportToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
+			this.exportToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.exportToolStripMenuItem1.Text = "Export";
+			this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
 			// 
 			// masterToolStripMenuItem
 			// 
@@ -1133,8 +1171,6 @@
 			this.panelLevel.Controls.Add(this.lvlLeafList);
 			this.panelLevel.Controls.Add(this.btnLvlSeqClear);
 			this.panelLevel.Controls.Add(this.btnLvlSeqAdd);
-			this.panelLevel.Controls.Add(this.btnLvlSeqDown);
-			this.panelLevel.Controls.Add(this.btnLvlSeqUp);
 			this.panelLevel.Controls.Add(this.btnLvlSeqDelete);
 			this.panelLevel.Controls.Add(this.lblLvlName);
 			this.panelLevel.Location = new System.Drawing.Point(278, 27);
@@ -1162,6 +1198,7 @@
 			this.dropLvlTutorial.Size = new System.Drawing.Size(115, 21);
 			this.dropLvlTutorial.TabIndex = 90;
 			this.dropLvlTutorial.Text = "TUTORIAL_NONE";
+			this.dropLvlTutorial.SelectedIndexChanged += new System.EventHandler(this.dropLvlTutorial_SelectedIndexChanged);
 			// 
 			// label26
 			// 
@@ -1188,6 +1225,7 @@
 			this.dropLvlInput.Size = new System.Drawing.Size(72, 21);
 			this.dropLvlInput.TabIndex = 68;
 			this.dropLvlInput.Text = "True";
+			this.dropLvlInput.SelectedIndexChanged += new System.EventHandler(this.dropLvlInput_SelectedIndexChanged);
 			// 
 			// label25
 			// 
@@ -1235,6 +1273,7 @@
             0,
             0,
             131072});
+			this.NUD_lvlVolume.ValueChanged += new System.EventHandler(this.NUD_lvlVolume_ValueChanged);
 			// 
 			// label23
 			// 
@@ -1282,6 +1321,7 @@
             0,
             0,
             0});
+			this.NUD_lvlApproach.ValueChanged += new System.EventHandler(this.NUD_lvlApproach_ValueChanged);
 			// 
 			// btnLvlLoopDelete
 			// 
@@ -1676,13 +1716,14 @@
 			this.btnLvlSeqClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLvlSeqClear.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnLvlSeqClear.ForeColor = System.Drawing.Color.Black;
-			this.btnLvlSeqClear.Location = new System.Drawing.Point(204, 113);
+			this.btnLvlSeqClear.Location = new System.Drawing.Point(204, 69);
 			this.btnLvlSeqClear.Name = "btnLvlSeqClear";
 			this.btnLvlSeqClear.Size = new System.Drawing.Size(22, 22);
 			this.btnLvlSeqClear.TabIndex = 73;
 			this.btnLvlSeqClear.Text = "C";
 			this.btnLvlSeqClear.UseCompatibleTextRendering = true;
 			this.btnLvlSeqClear.UseVisualStyleBackColor = false;
+			this.btnLvlSeqClear.Click += new System.EventHandler(this.btnLvlSeqClear_Click);
 			// 
 			// btnLvlSeqAdd
 			// 
@@ -1699,36 +1740,6 @@
 			this.btnLvlSeqAdd.UseCompatibleTextRendering = true;
 			this.btnLvlSeqAdd.UseVisualStyleBackColor = false;
 			this.btnLvlSeqAdd.Click += new System.EventHandler(this.btnLvlSeqAdd_Click);
-			// 
-			// btnLvlSeqDown
-			// 
-			this.btnLvlSeqDown.BackColor = System.Drawing.Color.Gray;
-			this.btnLvlSeqDown.Enabled = false;
-			this.btnLvlSeqDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlSeqDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnLvlSeqDown.ForeColor = System.Drawing.Color.Black;
-			this.btnLvlSeqDown.Location = new System.Drawing.Point(204, 85);
-			this.btnLvlSeqDown.Name = "btnLvlSeqDown";
-			this.btnLvlSeqDown.Size = new System.Drawing.Size(22, 22);
-			this.btnLvlSeqDown.TabIndex = 72;
-			this.btnLvlSeqDown.Text = "↓";
-			this.btnLvlSeqDown.UseCompatibleTextRendering = true;
-			this.btnLvlSeqDown.UseVisualStyleBackColor = false;
-			// 
-			// btnLvlSeqUp
-			// 
-			this.btnLvlSeqUp.BackColor = System.Drawing.Color.Gray;
-			this.btnLvlSeqUp.Enabled = false;
-			this.btnLvlSeqUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLvlSeqUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnLvlSeqUp.ForeColor = System.Drawing.Color.Black;
-			this.btnLvlSeqUp.Location = new System.Drawing.Point(204, 63);
-			this.btnLvlSeqUp.Name = "btnLvlSeqUp";
-			this.btnLvlSeqUp.Size = new System.Drawing.Size(22, 22);
-			this.btnLvlSeqUp.TabIndex = 71;
-			this.btnLvlSeqUp.Text = "↑";
-			this.btnLvlSeqUp.UseCompatibleTextRendering = true;
-			this.btnLvlSeqUp.UseVisualStyleBackColor = false;
 			// 
 			// btnLvlSeqDelete
 			// 
@@ -1808,40 +1819,6 @@
 			this.label13.Size = new System.Drawing.Size(69, 13);
 			this.label13.TabIndex = 49;
 			this.label13.Text = "Master Editor";
-			// 
-			// newToolStripMenuItem1
-			// 
-			this.newToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.newToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-			this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
-			this.newToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-			this.newToolStripMenuItem1.Text = "New";
-			// 
-			// openToolStripMenuItem
-			// 
-			this.openToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.openToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.openToolStripMenuItem.Text = "Open";
-			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-			// 
-			// saveToolStripMenuItem2
-			// 
-			this.saveToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.saveToolStripMenuItem2.ForeColor = System.Drawing.Color.White;
-			this.saveToolStripMenuItem2.Name = "saveToolStripMenuItem2";
-			this.saveToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-			this.saveToolStripMenuItem2.Text = "Save";
-			this.saveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
-			// 
-			// exportToolStripMenuItem1
-			// 
-			this.exportToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.exportToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-			this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-			this.exportToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-			this.exportToolStripMenuItem1.Text = "Export";
 			// 
 			// FormLeafEditor
 			// 
@@ -1965,8 +1942,6 @@
 		private System.Windows.Forms.Label lblMasterClose;
 		private System.Windows.Forms.Button btnLvlSeqClear;
 		private System.Windows.Forms.Button btnLvlSeqAdd;
-		private System.Windows.Forms.Button btnLvlSeqDown;
-		private System.Windows.Forms.Button btnLvlSeqUp;
 		private System.Windows.Forms.Button btnLvlSeqDelete;
 		private System.Windows.Forms.DataGridView lvlSeqObjs;
 		private System.Windows.Forms.DataGridView lvlLeafList;
