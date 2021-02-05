@@ -1,90 +1,121 @@
 ﻿TRACK EFFECTS
 leafname
-leafname;pitch;pitch;kTraitFloat;True;1.25;(4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;roll;roll;kTraitFloat;True;0;(4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;turn;turn;kTraitFloat;True;0;(4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;turn_auto;turn_auto;kTraitFloat;True;0;(4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;scale_x;sclae_x;kTraitFloat;True;1;(4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;scale_y;scale_y;kTraitFloat;True;1;(4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;scale_z;scale_z;kTraitFloat;True;1;(4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;lane left 2;visibla01;kTraitFloat;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;lane left 1;visibla02;kTraitFloat;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;lane center;visible;kTraitFloat;True;1;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;lane right 1;visiblz01;kTraitFloat;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-leafname;lane right 2;visiblz02;kTraitFloat;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+leafname;pitch;pitch;kTraitFloat;True;1.25;[4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;roll;roll;kTraitFloat;True;0;[4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;turn;turn;kTraitFloat;True;0;[4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;turn_auto;turn_auto;kTraitFloat;True;0;[4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;scale_x;scale_x;kTraitFloat;True;1;[4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;scale_y;scale_y;kTraitFloat;True;1;[4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;scale_z;scale_z;kTraitFloat;True;1;[4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;lane left 2;visibla01;kTraitFloat;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;lane left 1;visibla02;kTraitFloat;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;lane center;visible;kTraitFloat;True;1;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;lane right 1;visiblz01;kTraitFloat;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+leafname;lane right 2;visiblz02;kTraitFloat;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 THUMPS
 thump.spn
-thump.spn;thump;thump_rails.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-thump.spn;thump(fast);thump_rails_fast_activat.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-thump.spn;thump(checkpoint);thump_checkpoint.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-thump.spn;thump(boss bonus);thump_boss_bonus.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+thump.spn;thump;thump_rails.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+thump.spn;thump[fast];thump_rails_fast_activat.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+thump.spn;thump[checkpoint];thump_checkpoint.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+thump.spn;thump[boss bonus];thump_boss_bonus.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 BARS
 grindable.spn
-grindable.spn;bar;grindable_still.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-grindable.spn;bar(left);left_multi.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-grindable.spn;bar(center);center_multi.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-grindable.spn;bar(right);right_multi.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+grindable.spn;bar;grindable_still.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+grindable.spn;bar[left];left_multi.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+grindable.spn;bar[center];center_multi.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+grindable.spn;bar[right];right_multi.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 BARS - MULTI
 grindable_multi.spn
-grindable_multi.spn;bar and thump;grindable_with_thump.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-grindable_multi.spn;bar(double);grindable_double.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-grindable_multi.spn;bar(triple);grindable_thirds.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-grindable_multi.spn;bar(quad);grindable_quarters.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+grindable_multi.spn;bar and thump;grindable_with_thump.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+grindable_multi.spn;bar[double];grindable_double.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+grindable_multi.spn;bar[triple];grindable_thirds.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+grindable_multi.spn;bar[quad];grindable_quarters.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 RINGS
 ducker.spn
-ducker.spn;ring;ducker_crak.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+ducker.spn;ring;ducker_crak.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 JUMPS/SPIKES
 jump.spn
-jump.spn;mushroom(1 beat);jumper_1_step.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-jump.spn;mushroom(1 beat);jumper_boss.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-jump.spn;mushroon(6 beat);jumper_6_step.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-jump_high.spn;tall spike(2 beat);jump_high_2.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-jump_high.spn;tall spike(4 beat);jump_high_4.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-jump_high.spn;tall spike(6 beat);jump_high_6.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-jump_high.spn;tall spike(8 beat);jump_high.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-jump_high.spn;wide spike(4 beat);jump_boss.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-jumper_big_trees.spn;spike decorator, 4 beat;trees_4.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+jump.spn;mushroom[1 beat];jumper_1_step.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+jump.spn;mushroom[1 beat];jumper_boss.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+jump.spn;mushroon[6 beat];jumper_6_step.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+jump_high.spn;tall spike[2 beat];jump_high_2.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+jump_high.spn;tall spike[4 beat];jump_high_4.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+jump_high.spn;tall spike[6 beat];jump_high_6.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+jump_high.spn;tall spike[8 beat];jump_high.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+jump_high.spn;wide spike[4 beat];jump_boss.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+jumper_big_trees.spn;spike decorator, 4 beat;trees_4.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+###
+TENTACLES
+tentacle
+decorative_rails.spn;fingers1_gate;fingers1_gate.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level1_fingers.spn;level 1 fingers1;fingers1.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level1_fingers.spn;level 1 fingers1_short;fingers1_short.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level1_fingers.spn;level 1 fingers1_gate;fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2_fingers.spn;level 2 fingers1;fingers1.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2_fingers.spn;level 2 fingers1_gate;fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2_fingers.spn;level 2 fingers1_unison;fingers1_unison.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2_fingers.spn;level 2 fingers1_wave_in;fingers1_wave_in.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2_fingers.spn;level 2 fingers1_long;fingers1_long.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2_fingers.spn;level 2 fingers1_long_20;fingers1_long_20.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2b_fingers_set.spn;level 2b fingers1;fingers1.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2b_fingers_set.spn;level 2b fingers1_gate;fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2b_fingers_set.spn;level 2b fingers1_unison;fingers1_unison.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2b_fingers_set.spn;level 2b fingers1_wave_in;fingers1_wave_in.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2c_fingers_set.spn;level 2c fingers1;fingers1.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2c_fingers_set.spn;level 2c fingers1_gate;fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2c_fingers_set.spn;level 2c fingers1_unison;fingers1_unison.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level2c_fingers_set.spn;level 2c fingers1_wave_in;fingers1_wave_in.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level8b_fingers.spn;level 8b fingers1_gate;fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 MILLIPEDES
 millipede_quarter.spn
-millipede_quarter.spn;millipede(2 beat);millipede_quarter.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-millipede_half.spn;millipede(4 beat);swerve_off.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+millipede_quarter.spn;millipede[2 beat];millipede_quarter.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+millipede_half.spn;millipede[4 beat];swerve_off.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 SENTRY
 sentry.spn
-sentry.spn;single lane(55 beats);level_5.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-sentry.spn;multi lane(126 beats);level_8_multi.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+sentry.spn;single lane[55 beats];level_5.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+sentry.spn;multi lane[126 beats];level_8_multi.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 SKYBOX
 skybox_colors.flow
-skybox_colors.flow;black;black;kTraitAction;False;0;(1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)
-skybox_colors.flow;dark blue;dark_blue;kTraitAction;False;0;(1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)
-skybox_colors.flow;dark green;dark_green;kTraitAction;False;0;(1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)
-skybox_colors.flow;dark red;dark_red;kTraitAction;False;0;(1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)
-skybox_colors.flow;light blue;light_blue;kTraitAction;False;0;(1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)
-skybox_colors.flow;light green;light_green;kTraitAction;False;0;(1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)
-skybox_colors.flow;light red;light_red;kTraitAction;False;0;(1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)
+skybox_colors.flow;gamma;gamma;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+skybox_colors.flow;black;black;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+skybox_colors.flow;dark blue;dark_blue;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+skybox_colors.flow;dark green;dark_green;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+skybox_colors.flow;dark red;dark_red;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+skybox_colors.flow;light blue;light_blue;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+skybox_colors.flow;light green;light_green;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+skybox_colors.flow;light red;light_red;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
 FX
 ambient_fx.spn
-ambient_fx.spn;aurora.ent;aurora.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;boss_7_tunnel_enter;boss_7_tunnel_enter.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;boss_damage_stage1;boss_damage_stage1.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;boss_damage_stage2;boss_damage_stage2.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;boss_damage_stage3;boss_damage_stage3.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;boss_damage_stage4;boss_damage_stage4.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;crakhed_damage;crakhed_damage.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;crakhed_destroy;crakhed_destroy.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;data_streaks_radial;data_streaks_radial.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;death_shatter;death_shatter.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;smoke;smoke.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;speed_streaks_RGB;speed_streaks_RGB.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;speed_streaks_short;speed_streaks_short.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;stalactites;stalactites.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;vortex_decorator;vortex_decorator.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
-ambient_fx.spn;win_debris;win_debris.ent;kTraitBool;True;0;(2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0)
+ambient_fx.spn;aurora;aurora.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;boss_7_tunnel_enter;boss_7_tunnel_enter.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;boss_damage_stage1;boss_damage_stage1.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;boss_damage_stage2;boss_damage_stage2.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;boss_damage_stage3;boss_damage_stage3.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;boss_damage_stage4;boss_damage_stage4.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;crakhed_damage;crakhed_damage.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;crakhed_destroy;crakhed_destroy.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;data_streaks_radial;data_streaks_radial.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;death_shatter;death_shatter.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+final_twirlies.spn;final_twirlies_sparse;final_twirlies_sparse.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;smoke;smoke.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;speed_streaks_RGB;speed_streaks_RGB.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;speed_streaks_short;speed_streaks_short.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;stalactites;stalactites.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;vortex_decorator;vortex_decorator.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+ambient_fx.spn;win_debris;win_debris.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+###
+MISC
+avatar.lib
+avatar.lib;speed;sequin_speed;kTraitFloat;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+avatar.lib;win;win;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+avatar.lib;win checkpoint;win_checkpoint;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+fade.pp;fade;fade;kTraitFloat;False;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
