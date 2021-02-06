@@ -73,9 +73,12 @@ level2c_fingers_set.spn;level 2c fingers1_wave_in;fingers1_wave_in.ent;kTraitAct
 level8b_fingers.spn;level 8b fingers1_gate;fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 MILLIPEDES
-millipede_quarter.spn
+millipedes
 millipede_quarter.spn;millipede[2 beat];millipede_quarter.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+millipede_quarter.spn;millipede[2 beat] v2;millipede_quarter_phrase.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 millipede_half.spn;millipede[4 beat];swerve_off.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+millipede_half.spn;millipede[4 beat] v2;millipede_half.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+millipede_half.spn;millipede[4 beat] v3;millipede_half_phrase.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 SENTRY
 sentry.spn
