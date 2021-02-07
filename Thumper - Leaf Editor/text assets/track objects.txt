@@ -70,6 +70,8 @@ level2c_fingers_set.spn;level 2c fingers1;fingers1.ent;kTraitAction;True;0;[2,1,
 level2c_fingers_set.spn;level 2c fingers1_gate;fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level2c_fingers_set.spn;level 2c fingers1_unison;fingers1_unison.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level2c_fingers_set.spn;level 2c fingers1_wave_in;fingers1_wave_in.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+fingers6b.spn;level 6 fingers1;fingers1.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+fingers7.spn;level 7 fingers1;fingers1.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level8b_fingers.spn;level 8b fingers1_gate;fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 MILLIPEDES
