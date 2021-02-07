@@ -295,7 +295,7 @@ namespace Thumper___Leaf_Editor
 			}
 			_save.Add("seq_objs", seq_objs);
 
-			_save.Add("beat_cnt", numericUpDown_LeafLength.Value);
+			_save.Add("beat_cnt", (int)numericUpDown_LeafLength.Value);
 			_save.Add("time_sig", dropTimeSig.Text);
 			///end building JSON output
 
@@ -663,11 +663,20 @@ namespace Thumper___Leaf_Editor
 			//get highlighting value and color
 			float _f = _tracks[r.Index].highlight_value;
 			Color _color = Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color));
+			//check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
+			//Ask the user if they want to expand the leaf to accomadate the data point
+			if (data_points.Count > 0 && int.Parse(((JProperty)data_points.Last()).Name) >= r.Cells.Count) {
+				if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {r.HeaderCell.Value}\nData point: {data_points.Last()}", "Leaf too short", MessageBoxButtons.YesNo) == DialogResult.Yes)
+					numericUpDown_LeafLength.Value = int.Parse(((JProperty)data_points.Last()).Name) + 1;
+			}
 			//iterate over each data point, and fill cells
 			foreach (JProperty data_point in data_points) {
-				r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
-				if (Math.Abs((float)data_point.Value) >= _f)
-					r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
+				try {
+					r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
+					if (Math.Abs((float)data_point.Value) >= _f)
+						r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
+				}
+				catch (ArgumentOutOfRangeException) { /*MessageBox.Show($"Data point {data_point.Name} is beyond the leaf beatcount of {numericUpDown_LeafLength.Value} for object {r.HeaderCell.Value}");*/ }
 			}
 		}
 		///Updates row headers to be the Object and Param_Path
