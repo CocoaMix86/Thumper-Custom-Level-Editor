@@ -14,6 +14,17 @@ namespace Thumper___Leaf_Editor
 {
 	public partial class FormLeafEditor : Form
 	{
+		public string workingfolder {
+			get { return _workingfolder; }
+			set
+			{
+				if (_workingfolder != value)
+					this.Text = $"Thumper Custom Level Editor (working folder: {value})";
+				_workingfolder = value;
+			}
+		}
+		private string _workingfolder;
+
 		public FormLeafEditor() => InitializeComponent();
 
 		Panel _formactive;
@@ -126,7 +137,35 @@ namespace Thumper___Leaf_Editor
 
 			lblLeafMax_Click(null, null);
 		}
+
+		//////
 		///FORM RESIZE
+		//////
+		///PANEL LABELS - change size or close
+		private void lblMasterClose_Click(object sender, EventArgs e) => masterEditorToolStripMenuItem.PerformClick();
+		private void lblLvlClose_Click(object sender, EventArgs e) => levelEditorToolStripMenuItem.PerformClick();
+		private void lblLeafClose_Click(object sender, EventArgs e) => leafEditorToolStripMenuItem.PerformClick();
+		private void lblLeafMax_Click(object sender, EventArgs e)
+		{
+			panelMaster.Width = Math.Min(100, this.Width / 5);
+			panelLevel.Width = Math.Min(100, this.Width / 5);
+			PanelVisibleResize();
+			_formactive = panelLeaf;
+		}
+		private void lblLevelMax_Click(object sender, EventArgs e)
+		{
+			panelMaster.Width = Math.Min(100, this.Width / 4);
+			panelLevel.Width = (int)(this.Width * 0.8) - 12;
+			PanelVisibleResize();
+			_formactive = panelLevel;
+		}
+		private void lblMasterMax_Click(object sender, EventArgs e)
+		{
+			panelMaster.Width = (int)(this.Width * 0.8) - 12;
+			panelLevel.Width = Math.Min(100, this.Width / 4);
+			PanelVisibleResize();
+			_formactive = panelMaster;
+		}
 		private void FormLeafEditor_Resize(object sender, EventArgs e)
 		{
 			panelMaster.Width = 100;
@@ -135,6 +174,28 @@ namespace Thumper___Leaf_Editor
 			if (_formactive != panelLeaf && _formactive != null)
 				_formactive.Width = (int)(this.Width * 0.8) - 12;
 			PanelVisibleResize();
+		}
+		///Resizes and Repositions panels based on which ones are visible
+		public void PanelVisibleResize()
+		{
+			//if Master is invisible, first move Leaf to Level, then move Level to Master
+			if (!panelMaster.Visible) {
+				panelLeaf.Location = panelLevel.Location;
+				panelLevel.Location = panelMaster.Location;
+			}
+			//if Level is invisible, move Leaf to Level
+			if (!panelLevel.Visible)
+				panelLeaf.Location = panelLevel.Location;
+			//if Master is visible, move Level over
+			if (panelMaster.Visible)
+				panelLevel.Location = new Point(panelMaster.Location.X + panelMaster.Size.Width + 6, panelMaster.Location.Y);
+			//if Level is visible, move Leaf over. Else move Leaf to Level
+			if (panelLevel.Visible)
+				panelLeaf.Location = new Point(panelLevel.Location.X + panelLevel.Size.Width + 6, panelMaster.Location.Y);
+			else
+				panelLeaf.Location = panelLevel.Location;
+
+			panelLeaf.Width = this.Width - panelLeaf.Location.X - 20;
 		}
 	}
 }

@@ -48,6 +48,7 @@ tube_diamond_chrome_glass_add.path
 tube_triangle_flipped_chrome.path
 tube_triangle_flipped_bright.path
 occlusion_tube02_white.path
+cave_diamond_chrome.path
 cave_square_chrome.path
 cave_square_bright.path
 cave_pyramid_bright.path

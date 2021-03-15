@@ -155,31 +155,6 @@ namespace Thumper___Leaf_Editor
 			}
 			e.Handled = true;
 		}
-		///PANEL LABELS - change size or close
-		private void lblMasterClose_Click(object sender, EventArgs e) => masterEditorToolStripMenuItem.PerformClick();
-		private void lblLvlClose_Click(object sender, EventArgs e) => levelEditorToolStripMenuItem.PerformClick();
-		private void lblLeafClose_Click(object sender, EventArgs e) => leafEditorToolStripMenuItem.PerformClick();
-		private void lblLeafMax_Click(object sender, EventArgs e)
-		{
-			panelMaster.Width = Math.Min(100, this.Width / 5);
-			panelLevel.Width = Math.Min(100, this.Width / 5);
-			PanelVisibleResize();
-			_formactive = panelLeaf;
-		}
-		private void lblLevelMax_Click(object sender, EventArgs e)
-		{
-			panelMaster.Width = Math.Min(100, this.Width / 4);
-			panelLevel.Width = (int)(this.Width * 0.8) - 12;
-			PanelVisibleResize();
-			_formactive = panelLeaf;
-		}
-		private void lblMasterMax_Click(object sender, EventArgs e)
-		{
-			panelMaster.Width = (int)(this.Width * 0.8) - 12;
-			panelLevel.Width = Math.Min(100, this.Width / 4);
-			PanelVisibleResize();
-			_formactive = panelMaster;
-		}
 		///TOOLSTRIP
 		///Toolstrip - TRACK
 		//Add Track (row)
@@ -327,7 +302,7 @@ namespace Thumper___Leaf_Editor
 					ofd.Filter = "Thumper Leaf File (*.txt)|*.txt";
 					ofd.Title = "Load a Thumper Leaf file";
 					if (ofd.ShowDialog() == DialogResult.OK) {
-						_loadedleaf = Path.GetFileName(ofd.FileName);
+						_loadedleaf = ofd.FileName;
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLeaf(_load);
 					}
@@ -744,8 +719,9 @@ namespace Thumper___Leaf_Editor
 				return;
 			}
 
-			lblTrackFileName.Text = "Leaf Editor - " + _loadedleaf;
+			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
 			txtLeafName.Text = ((string)_load["obj_name"]).Replace(".leaf","");
+			workingfolder = Path.GetDirectoryName(_loadedleaf);
 			//clear existing tracks
 			_tracks.Clear();
 			//set beat_cnt and time_sig
@@ -803,28 +779,6 @@ namespace Thumper___Leaf_Editor
 			NUD_TrackDoubleclick.Enabled = true;
 			NUD_TrackHighlight.Enabled = true;
 			SaveLeaf(true);
-		}
-		///Resizes and Repositions panels based on which ones are visible
-		public void PanelVisibleResize()
-		{
-			//if Master is invisible, first move Leaf to Level, then move Level to Master
-			if (!panelMaster.Visible) {
-				panelLeaf.Location = panelLevel.Location;
-				panelLevel.Location = panelMaster.Location;
-			}
-			//if Level is invisible, move Leaf to Level
-			if (!panelLevel.Visible)
-				panelLeaf.Location = panelLevel.Location;
-			//if Master is visible, move Level over
-			if (panelMaster.Visible)
-				panelLevel.Location = new Point(panelMaster.Location.X + panelMaster.Size.Width + 6, panelMaster.Location.Y);
-			//if Level is visible, move Leaf over. Else move Leaf to Level
-			if (panelLevel.Visible)
-				panelLeaf.Location = new Point(panelLevel.Location.X + panelLevel.Size.Width + 6, panelMaster.Location.Y);
-			else
-				panelLeaf.Location = panelLevel.Location;
-
-			panelLeaf.Width = this.Width - panelLeaf.Location.X - 20;
 		}
 		#endregion
 	}
