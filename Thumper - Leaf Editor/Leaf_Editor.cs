@@ -242,38 +242,6 @@ namespace Thumper___Leaf_Editor
 		///LEAF - SAVE FILE
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			///start building JSON output
-			JObject _save = new JObject();
-			_save.Add("obj_type", "SequinLeaf");
-			_save.Add("obj_name", txtLeafName.Text + ".leaf");
-
-			JArray seq_objs = new JArray();
-			foreach (Sequencer_Object seq_obj in _tracks) {
-				JObject s = new JObject();
-				s.Add("obj_name", _save["obj_name"]);
-				s.Add("param_path", seq_obj.param_path);
-				s.Add("trait_type", seq_obj.trait_type);
-
-				JObject data_points = new JObject();
-				for (int x = 0; x < trackEditor.ColumnCount; x++) {
-					if (!string.IsNullOrEmpty(trackEditor[x, _tracks.IndexOf(seq_obj)].Value?.ToString()))
-						data_points.Add(x.ToString(), float.Parse(trackEditor[x, _tracks.IndexOf(seq_obj)].Value.ToString()));
-				}
-				s.Add("data_points", data_points);
-
-				s.Add("step", seq_obj.step);
-				s.Add("default", seq_obj._default);
-				s.Add("footer", seq_obj.footer);
-				s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color, seq_obj.highlight_value } });
-
-				seq_objs.Add(s);
-			}
-			_save.Add("seq_objs", seq_objs);
-
-			_save.Add("beat_cnt", (int)numericUpDown_LeafLength.Value);
-			_save.Add("time_sig", dropTimeSig.Text);
-			///end building JSON output
-
 			using (var sfd = new SaveFileDialog()) {
 				//filter .txt only
 				sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
@@ -287,17 +255,19 @@ namespace Thumper___Leaf_Editor
 						MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");
 						return;
 					}
+					//get contents to save
+					var _save = LeafBuildSave(Path.GetFileName(sfd.FileName));
 					//serialize JSON object to a string, and write it to the file
 					File.WriteAllText($@"{storePath}\leaf_{tempFileName}", JsonConvert.SerializeObject(_save));
 					//set a few visual elementsto show what file is being worked on
-					lblTrackFileName.Text = "Leaf Editor - " + Path.GetFileName(sfd.FileName);
+					lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
 					_loadedleaf = sfd.FileName;
 					SaveLeaf(true);
 				}
 			}
 		}
-			///LEAF - LOAD FILE
-			private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+		///LEAF - LOAD FILE
+		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
 				using (var ofd = new OpenFileDialog()) {
@@ -310,60 +280,6 @@ namespace Thumper___Leaf_Editor
 					}
 				}
 			}
-		}
-		///LEAF - EXPORT TO leaf_*.txt
-		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
-		{/*
-			if (string.IsNullOrEmpty(_loadedleaf) || !_saveleaf) {
-				MessageBox.Show("Please save your leaf before exporting");
-				return;
-			}
-
-			string _export = "[\n{\n" +
-				"'obj_type': 'SequinLeaf',\n" +
-				"'obj_name': '" + _loadedleaf.Replace(".teleaf", "") + ".leaf',\n" +
-				"'seq_objs': [\n\n";
-
-			foreach (Sequencer_Object _ls in _tracks) {
-				if (_ls[0].Length > 1) {
-					_export += "{\n";
-					_export += "'obj_name': '" + _ls[0] + "',\n";
-					_export += "'param_path': '" + _ls[2] + "',\n";
-					_export += "'trait_type': '" + _ls[6] + "',\n";
-					_export += "'data_points': {\n";
-
-					for (int x = 0; x < trackEditor.ColumnCount; x++) {
-						if (!string.IsNullOrEmpty(trackEditor.Rows[_tracks.IndexOf(_ls)].Cells[x].Value?.ToString()))
-							_export += x + ":" + trackEditor.Rows[_tracks.IndexOf(_ls)].Cells[x].Value + ",";
-					}
-
-					_export += "\n},\n";
-					_export += "'step': " + _ls[5] + ",\n";
-					_export += "'default': " + _ls[4] + ",\n";
-					_export += "'footer': " + _ls[10];
-					_export += "\n},\n";
-				}
-			}
-
-			_export += "],\n\n" +
-				"'beat_cnt': " + _beats + "\n}\n]";
-
-			_export = _export.Replace("leafname", _loadedleaf.Replace(".teleaf", "") + ".leaf");
-
-			using (var sfd = new SaveFileDialog()) {
-				sfd.Filter = "Thumper Editor Leaf File (*.txt)|*.txt";
-				sfd.FilterIndex = 1;
-
-				if (sfd.ShowDialog() == DialogResult.OK) {
-					string storePath = Path.GetDirectoryName(sfd.FileName);
-					string tempFileName = Path.GetFileName(sfd.FileName);
-					if (tempFileName.Substring(0, 5) != "leaf_")
-						sfd.FileName = storePath + "\\leaf_" + tempFileName;
-					File.WriteAllText(sfd.FileName, _export);
-
-					MessageBox.Show("Leaf successfully exported as '" + Path.GetFileName(sfd.FileName) + "'.");
-				}
-			}*/
 		}
 		///DEFAULT TRACK VALUE CHANGED
 		private void txtDefault_ValueChanged(object sender, EventArgs e)
@@ -785,6 +701,44 @@ namespace Thumper___Leaf_Editor
 			NUD_TrackDoubleclick.Enabled = true;
 			NUD_TrackHighlight.Enabled = true;
 			SaveLeaf(true);
+		}
+
+		public JObject LeafBuildSave(string _leafname)
+		{
+			_leafname = Regex.Replace(_leafname, "[.].*", ".leaf");
+			///start building JSON output
+			JObject _save = new JObject();
+			_save.Add("obj_type", "SequinLeaf");
+			_save.Add("obj_name", _leafname);
+
+			JArray seq_objs = new JArray();
+			foreach (Sequencer_Object seq_obj in _tracks) {
+				JObject s = new JObject();
+				s.Add("obj_name", _save["obj_name"]);
+				s.Add("param_path", seq_obj.param_path);
+				s.Add("trait_type", seq_obj.trait_type);
+
+				JObject data_points = new JObject();
+				for (int x = 0; x < trackEditor.ColumnCount; x++) {
+					if (!string.IsNullOrEmpty(trackEditor[x, _tracks.IndexOf(seq_obj)].Value?.ToString()))
+						data_points.Add(x.ToString(), float.Parse(trackEditor[x, _tracks.IndexOf(seq_obj)].Value.ToString()));
+				}
+				s.Add("data_points", data_points);
+
+				s.Add("step", seq_obj.step);
+				s.Add("default", seq_obj._default);
+				s.Add("footer", seq_obj.footer);
+				s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color, seq_obj.highlight_value } });
+
+				seq_objs.Add(s);
+			}
+			_save.Add("seq_objs", seq_objs);
+
+			_save.Add("beat_cnt", (int)numericUpDown_LeafLength.Value);
+			_save.Add("time_sig", dropTimeSig.Text);
+			///end building JSON output
+			
+			return _save;
 		}
 		#endregion
 	}
