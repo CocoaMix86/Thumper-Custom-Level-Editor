@@ -44,6 +44,7 @@ tube_octagon_chrome.path
 occlusion_tube_diamondoid.path
 occlusion_ring_pentagon_glass.path
 occlusion_tube05_glass.path
+occlusion_tube04_psych.path
 tube_diamond_chrome_glass_add.path
 tube_triangle_flipped_chrome.path
 tube_triangle_flipped_bright.path

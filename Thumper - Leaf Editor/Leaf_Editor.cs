@@ -278,18 +278,20 @@ namespace Thumper___Leaf_Editor
 				//filter .txt only
 				sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
 				sfd.FilterIndex = 1;
-
 				if (sfd.ShowDialog() == DialogResult.OK) {
+					//separate path and filename
 					string storePath = Path.GetDirectoryName(sfd.FileName);
 					string tempFileName = Path.GetFileName(sfd.FileName);
-					//check if file starts with "leaf_". If not, add it
-					if (tempFileName.Substring(0, 5) != "leaf_")
-						sfd.FileName = storePath + "\\leaf_" + tempFileName;
+					//check if user input "leaf_", and deny save if so
+					if (Path.GetFileName(sfd.FileName).Contains("leaf_")) {
+						MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");
+						return;
+					}
 					//serialize JSON object to a string, and write it to the file
-					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save));
+					File.WriteAllText($@"{storePath}\leaf_{tempFileName}", JsonConvert.SerializeObject(_save));
 					//set a few visual elementsto show what file is being worked on
 					lblTrackFileName.Text = "Leaf Editor - " + Path.GetFileName(sfd.FileName);
-					_loadedleaf = Path.GetFileName(sfd.FileName);
+					_loadedleaf = sfd.FileName;
 					SaveLeaf(true);
 				}
 			}
@@ -730,6 +732,10 @@ namespace Thumper___Leaf_Editor
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
 			//each object in the seq_objs[] list becomes a track
 			foreach (var seq_obj in _load["seq_objs"]) {
+				if (seq_obj.ContainsKey("param_path_hash")) {
+					MessageBox.Show($"Skipping {seq_obj["obj_name"]} due to 'param_path_hash' being present.");
+					continue;
+				}
 				Sequencer_Object _s = new Sequencer_Object() {
 					obj_name = seq_obj["obj_name"],
 					param_path = seq_obj["param_path"],

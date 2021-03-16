@@ -66,16 +66,6 @@ namespace Thumper___Leaf_Editor
 		//Cell value changed
 		private void lvlLoopTracks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			/*
-			if (e.ColumnIndex == 0) {
-				DataGridViewComboBoxCell _combocell = lvlLoopTracks[1, e.RowIndex] as DataGridViewComboBoxCell;
-				_combocell.DataSource = _SampleSamples[_SampleLevels.IndexOf(lvlLoopTracks[e.ColumnIndex, e.RowIndex].Value.ToString())];
-			}
-			if (e.ColumnIndex == 1) {
-				lvlLoopTracks[2, e.RowIndex].ReadOnly = false;
-				lvlLoopTracks[2, e.RowIndex].Style.BackColor = Color.FromArgb(40, 40, 40);
-			}*/
-			//set lvl save flag to false
 			SaveLvl(false);
 		}
 		/// DGV LVLSEQOBJS
@@ -176,33 +166,25 @@ namespace Thumper___Leaf_Editor
 		/// LVL SAVE
 		private void saveToolStripMenuItem2_Click(object sender, EventArgs e)
 		{
-			string _export = "";
-			/*
-			//start with Approach, Volume, Input, and Tutorial at the top of the file
-			string _export = $"{NUD_lvlApproach.Value};{NUD_lvlVolume.Value};{dropLvlInput.Text};{dropLvlTutorial.SelectedItem}\n##\n";
-			//add each row of Loop Tracks to the file. Empty cells are ignored and values are ';' separated
-			foreach (DataGridViewRow r in lvlLoopTracks.Rows)
-				_export += string.Join(";", r.Cells.Cast<DataGridViewCell>().Where(c => !string.IsNullOrEmpty(c?.Value?.ToString())).Select(c => c.Value.ToString()).ToArray()) + "\n";
-			_export += "##\n";
-			//add each row of seq_objs to the file. Empty cells are ignored. Data cells have their column index and value added in {index:value} format. Cells are ';' separated
-			foreach (DataGridViewRow r in lvlSeqObjs.Rows)
-				_export += string.Join(";", r.Cells.Cast<DataGridViewCell>().Where(c => !string.IsNullOrEmpty(c?.Value?.ToString())).Select(c => $"{c.ColumnIndex}:{c.Value}").ToArray()) + "\n";
-			_export += "##\n";
-			foreach (LvlLeafData l in _lvlleafs)
-				_export += $"{l.filepath};{l.leafname};{l.beats}#{string.Join(";", l.paths)}\n";
-			*/
 			using (var sfd = new SaveFileDialog()) {
-				sfd.Filter = "Thumper Editor Lvl File (*.telvl)|*.telvl";
+				sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
 				sfd.FilterIndex = 1;
-
 				if (sfd.ShowDialog() == DialogResult.OK) {
-					if (sfd.FileName.Contains("lvl_")) {
+					//separate path and filename
+					string storePath = Path.GetDirectoryName(sfd.FileName);
+					string tempFileName = Path.GetFileName(sfd.FileName);
+					//check if user input "lvl_", and deny save if so
+					if (Path.GetFileName(sfd.FileName).Contains("lvl_")) {
 						MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
 						return;
 					}
-					File.WriteAllText(sfd.FileName, _export);
-					lblLvlName.Text = "Level Editor - " + Path.GetFileName(sfd.FileName);
-					_loadedlvl = Path.GetFileName(sfd.FileName).Replace(".telvl", "");
+					//get contents to save
+					var _save = LvlBuildSave(Path.GetFileName(sfd.FileName));
+					//serialize JSON object to a string, and write it to the file
+					File.WriteAllText($@"{storePath}\leaf_{tempFileName}", JsonConvert.SerializeObject(_save));
+					//set a few visual elements to show what file is being worked on
+					lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
+					_loadedlvl = sfd.FileName;
 					SaveLvl(true);
 				}
 			}
@@ -219,91 +201,6 @@ namespace Thumper___Leaf_Editor
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLvl(_load);
 					}
-				}
-			}
-		}
-		/// LVL EXPORT
-		private void exportToolStripMenuItem1_Click(object sender, EventArgs e)
-		{
-			//check if lvl has been saved before exporting
-			if (string.IsNullOrEmpty(_loadedlvl) || !_savelvl) {
-				MessageBox.Show("Please save your leaf before exporting");
-				return;
-			}
-
-			string _export = $@"[
-{{
-'obj_type': 'SequinLevel',
-'obj_name': '{_loadedlvl.Replace(".telvl", "")}.lvl',
-'approach_beats': {NUD_lvlApproach.Value},
-'seq_objs': [";
-			//this section adds the volume control data to the 'seq_objs: []' list, one row at a time.
-			//each row gets it's own volume track, denoted by 'layer_volume,{x}'
-			for (int x = 0; x < lvlSeqObjs.Rows.Count; x++) {
-				_export += $@"
-	{{
-	'obj_name': '{_loadedlvl.Replace(".telvl", "")}.lvl',
-	'param_path': 'layer_volume,{x}',
-	'trait_type': 'kTraitFloat',
-	'data_points': {{
-		{string.Join(";", lvlSeqObjs.Rows[x].Cells.Cast<DataGridViewCell>().Where(c => !string.IsNullOrEmpty(c?.Value?.ToString())).Select(c => $"{c.ColumnIndex}:{c.Value}").ToArray())}
-	}},
-	'step': False,
-	'default': 0,
-	'footer': (1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0)
-	}},";
-			}
-			//close the 'seq_objs: []' section, and start 'leaf_seq': []
-			_export += "\n],\n'leaf_seq': [";
-			//this section adds each leaf associated with the lvl to the 'leaf_seq': [] list
-			//a sub list sub_paths': [] gets filled with the tunnels/paths set too
-			foreach (LvlLeafData l in _lvlleafs) {
-				_export += $@"
-	{{
-	'beat_cnt': {l.beats},
-	'leaf_name': '{l.leafname.Replace(".teleaf", ".leaf")}',
-	'main_path': 'default.path',
-	'sub_paths': ['{string.Join("','", l.paths)}'],
-	'pos': (0, 0, 0),
-	'rot_x': (1, 0, 0),
-	'rot_y': (0, 1, 0),
-	'rot_z': (0, 0, 1),
-	'scale': (0, 0, 0)
-	}},";
-			}
-			//close the 'leaf_seq: []' section, and start 'loops': []
-			_export += "\n],\n'loops': [";
-			//this section adds each loop track specified to the 'loops': [] list
-			//while on the form it displays if "drums" or "drones", the lvl does not actually need that (that data exists in samp_ files)
-			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
-				_export += $@"
-	{{
-	'samp_name': '{r.Cells[1].Value.ToString().Replace("drones\\", "").Replace("drums\\", "").Replace(".wav", ".samp")}',
-	'beats_per_loop': {r.Cells[2].Value},
-	}},";
-			}
-			//close the 'loops: []' section, and now finish up the lvl file
-			_export += $@"
-],
-'volume': {NUD_lvlVolume.Value},
-'input_allowed': {dropLvlInput.Text},
-'tutorial_type': {dropLvlTutorial.SelectedItem},
-'start_angle_fracs': (1, 1, 1)
-}}
-]";
-
-			using (var sfd = new SaveFileDialog()) {
-				sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
-				sfd.FilterIndex = 1;
-
-				if (sfd.ShowDialog() == DialogResult.OK) {
-					string storePath = Path.GetDirectoryName(sfd.FileName);
-					string tempFileName = Path.GetFileName(sfd.FileName);
-					if (tempFileName.Substring(0, 4) != "lvl_")
-						sfd.FileName = storePath + "\\lvl_" + tempFileName;
-					File.WriteAllText(sfd.FileName, _export);
-
-					MessageBox.Show("Level successfully exported as '" + Path.GetFileName(sfd.FileName) + "'.");
 				}
 			}
 		}
@@ -617,6 +514,140 @@ namespace Thumper___Leaf_Editor
 				}
 				catch (ArgumentOutOfRangeException) { }
 			}
+		}
+
+		public JObject LvlBuildSave(string _lvlname)
+		{
+			_lvlname = Regex.Replace(_lvlname, "[.].*", ".lvl");
+			///start building JSON output
+			JObject _save = new JObject();
+			_save.Add("obj_type", "SequinLevel");
+			_save.Add("obj_name", $"{_lvlname}");
+			_save.Add("approach_beats", NUD_lvlApproach.Value);
+			//this section adds all colume sequencer controls
+			JArray seq_objs = new JArray();
+			foreach (DataGridViewRow seq_obj in lvlSeqObjs.Rows) {
+				JObject s = new JObject();
+				s.Add("obj_name", $"{_lvlname}");
+				s.Add("param_path", $"layer_volume,{seq_obj.Index}");
+				s.Add("trait_type", "kTraitFloat");
+
+				JObject data_points = new JObject();
+				for (int x = 0; x < seq_obj.Cells.Count; x++) {
+					if (!string.IsNullOrEmpty(seq_obj.Cells[x].Value?.ToString()))
+						data_points.Add(x.ToString(), float.Parse(seq_obj.Cells[x].Value.ToString()));
+				}
+				s.Add("data_points", data_points);
+
+				s.Add("step", "False");
+				s.Add("default", "0");
+				s.Add("footer", new JArray() { new object[] { 1, 1, 2, 1, 2, "kIntensityScale", "kIntensityScale", 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0 } });
+
+				seq_objs.Add(s);
+			}
+			_save.Add("seq_objs", seq_objs);
+			//this section adds all leafs
+			JArray leaf_seq = new JArray();
+			foreach (LvlLeafData _leaf in _lvlleafs) {
+				JObject s = new JObject();
+				s.Add("beat_cnt", _leaf.beats);
+				s.Add("leaf_name", _leaf.leafname);
+				s.Add("main_path", "default.path");
+				s.Add("sub_paths", JArray.FromObject(_leaf.paths));
+				s.Add("pos", new JArray() { 0, 0, 0 });
+				s.Add("rot_x", new JArray() { 1, 0, 0 });
+				s.Add("rot_y", new JArray() { 0, 1, 0 });
+				s.Add("rot_z", new JArray() { 0, 0, 1 });
+				s.Add("scale", new JArray() { 1, 1, 1 });
+
+				leaf_seq.Add(s);
+			}
+			_save.Add("leaf_seq", leaf_seq);
+			//this section adds the loop tracks
+			JArray loops = new JArray();
+			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
+				JObject s = new JObject();
+				s.Add("samp_name", (string)r.Cells[0].Value);
+				s.Add("beats_per_loop", (int)r.Cells[1].Value);
+
+				loops.Add(s);
+			}
+			_save.Add("loops", loops);
+			//final keys
+			_save.Add("volume", NUD_lvlVolume.Value);
+			_save.Add("input_allowed", dropLvlInput.Text);
+			_save.Add("tutorial_type", dropLvlTutorial.Text);
+			_save.Add("start_angle_fracs", new JArray() { 1, 1, 1 });
+			///end building JSON output
+
+			return _save;
+		}
+
+		public string LvlBuildSaveText(string _lvlname)
+		{
+			_lvlname = Regex.Replace(_lvlname, "[.].*", ".lvl");
+			string _save = $@"[
+{{
+'obj_type': 'SequinLevel',
+'obj_name': '{_lvlname}',
+'approach_beats': {NUD_lvlApproach.Value},
+'seq_objs': [";
+			//this section adds the volume control data to the 'seq_objs: []' list, one row at a time.
+			//each row gets it's own volume track, denoted by 'layer_volume,{x}'
+			for (int x = 0; x < lvlSeqObjs.Rows.Count; x++) {
+				_save += $@"
+	{{
+	'obj_name': '{_lvlname}',
+	'param_path': 'layer_volume,{x}',
+	'trait_type': 'kTraitFloat',
+	'data_points': {{
+		{string.Join(";", lvlSeqObjs.Rows[x].Cells.Cast<DataGridViewCell>().Where(c => !string.IsNullOrEmpty(c?.Value?.ToString())).Select(c => $"{c.ColumnIndex}:{c.Value}").ToArray())}
+	}},
+	'step': False,
+	'default': 0,
+	'footer': [1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+	}},";
+			}
+			//close the 'seq_objs: []' section, and start 'leaf_seq': []
+			_save += "\n],\n'leaf_seq': [";
+			//this section adds each leaf associated with the lvl to the 'leaf_seq': [] list
+			//a sub list sub_paths': [] gets filled with the tunnels/paths set too
+			foreach (LvlLeafData l in _lvlleafs) {
+				_save += $@"
+	{{
+	'beat_cnt': {l.beats},
+	'leaf_name': '{l.leafname}',
+	'main_path': 'default.path',
+	'sub_paths': ['{string.Join("','", l.paths)}'],
+	'pos': [0, 0, 0],
+	'rot_x': [1, 0, 0],
+	'rot_y': [0, 1, 0],
+	'rot_z': [0, 0, 1],
+	'scale': [0, 0, 0]
+	}},";
+			}
+			//close the 'leaf_seq: []' section, and start 'loops': []
+			_save += "\n],\n'loops': [";
+			//this section adds each loop track specified to the 'loops': [] list
+			//while on the form it displays if "drums" or "drones", the lvl does not actually need that (that data exists in samp_ files)
+			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
+				_save += $@"
+	{{
+	'samp_name': '{r.Cells[1].Value}',
+	'beats_per_loop': {r.Cells[2].Value},
+	}},";
+			}
+			//close the 'loops: []' section, and now finish up the lvl file
+			_save += $@"
+],
+'volume': {NUD_lvlVolume.Value},
+'input_allowed': {dropLvlInput.Text},
+'tutorial_type': {dropLvlTutorial.SelectedItem},
+'start_angle_fracs': [1, 1, 1]
+}}
+]";
+
+			return _save;
 		}
 		#endregion
 	}
