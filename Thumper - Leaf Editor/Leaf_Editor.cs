@@ -272,7 +272,7 @@ namespace Thumper___Leaf_Editor
 					//get contents to save
 					var _save = LeafBuildSave(Path.GetFileName(sfd.FileName));
 					//serialize JSON object to a string, and write it to the file
-					sfd.FileName = $@"{storePath}\lvl_{tempFileName}";
+					sfd.FileName = $@"{storePath}\leaf_{tempFileName}";
 					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save));
 					//set a few visual elementsto show what file is being worked on
 					lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
