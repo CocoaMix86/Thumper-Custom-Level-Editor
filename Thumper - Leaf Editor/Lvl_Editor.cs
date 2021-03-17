@@ -19,6 +19,7 @@ namespace Thumper___Leaf_Editor
 		bool _savelvl = true;
 		int _lvllength;
 		string _loadedlvl;
+		string _loadedlvltemp;
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
 		List<string> _lvlsamples = new List<string>();
@@ -37,12 +38,18 @@ namespace Thumper___Leaf_Editor
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
 				string _file = (_lvlleafs[e.RowIndex].leafname).Replace(".leaf", "");
-				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{_file}.txt"), "#.*", ""));
+				dynamic _load;
+				try {
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{_file}.txt"), "#.*", ""));
+				} catch { 
+					MessageBox.Show($@"Could not locate ""leaf_{_file}.txt"" in the same folder as this lvl. Did you add this leaf from a different folder?");
+					return;
+				}
+
 				_loadedleaf = $@"{workingfolder}\leaf_{_file}.txt";
 				LoadLeaf(_load);
+				LvlUpdatePaths(e.RowIndex);
 			}
-
-			LvlUpdatePaths(e.RowIndex);
 		}
 		///DGV LVLLEAFPATHS
 		//Cell value changed
@@ -161,12 +168,28 @@ namespace Thumper___Leaf_Editor
 				lblLvlName.Text = "Level Editor";
 				//set saved flag to true, because nothing is loaded
 				SaveLvl(true);
+				lvlsaveToolStripMenuItem2.PerformClick();
 			}
 		}
 		/// LVL SAVE
 		private void saveToolStripMenuItem2_Click(object sender, EventArgs e)
 		{
+			//if _loadedlvl is somehow not set, force Save As instead
+			if (_loadedlvl == null) {
+				lvlsaveAsToolStripMenuItem.PerformClick();
+				return;
+			}
+			//write contents direct to file without prompting save dialog
+			var _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
+			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save));
+			SaveLvl(true);
+			lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
+		}
+		/// LVL SAVE AS
+		private void lvlsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 			using (var sfd = new SaveFileDialog()) {
+				//filter .txt only
 				sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
 				sfd.FilterIndex = 1;
 				if (sfd.ShowDialog() == DialogResult.OK) {
@@ -181,11 +204,13 @@ namespace Thumper___Leaf_Editor
 					//get contents to save
 					var _save = LvlBuildSave(Path.GetFileName(sfd.FileName));
 					//serialize JSON object to a string, and write it to the file
-					File.WriteAllText($@"{storePath}\leaf_{tempFileName}", JsonConvert.SerializeObject(_save));
+					sfd.FileName = $@"{storePath}\lvl_{tempFileName}";
+					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save));
 					//set a few visual elements to show what file is being worked on
 					lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
 					_loadedlvl = sfd.FileName;
 					SaveLvl(true);
+					lvlPanelNew.Visible = false;
 				}
 			}
 		}
@@ -197,7 +222,8 @@ namespace Thumper___Leaf_Editor
 					ofd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
 					ofd.Title = "Load a Thumper Lvl file";
 					if (ofd.ShowDialog() == DialogResult.OK) {
-						_loadedlvl = ofd.FileName;
+						_loadedlvltemp = ofd.FileName;
+						//load json from file into _load. The regex strips any comments from the text.
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLvl(_load);
 					}
@@ -358,6 +384,16 @@ namespace Thumper___Leaf_Editor
 			LvlReloadSamples();
 			MessageBox.Show($"Found and loaded {_lvlsamples.Count} samples for the current working folder.");
 		}
+
+		private void btnlvlPanelOpen_Click(object sender, EventArgs e)
+		{
+			lvlopenToolStripMenuItem.PerformClick();
+		}
+
+		private void btnlvlPanelNew_Click(object sender, EventArgs e)
+		{
+			lvlnewToolStripMenuItem1.PerformClick();
+		}
 		#endregion
 
 		#region Methods
@@ -371,9 +407,12 @@ namespace Thumper___Leaf_Editor
 				MessageBox.Show("This does not appear to be a lvl file!");
 				return;
 			}
-
-			lblLvlName.Text = $@"Lvl Editor - {_load["obj_name"]}";
+			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
+			_loadedlvl = _loadedlvltemp;
 			workingfolder = Path.GetDirectoryName(_loadedlvl);
+			//set some visual elements
+			lblLvlName.Text = $@"Lvl Editor - {_load["obj_name"]}";
+			lvlPanelNew.Visible = false;
 
 			///Clear DGVs so new data can load
 			lvlLoopTracks.Rows.Clear();
@@ -568,7 +607,7 @@ namespace Thumper___Leaf_Editor
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
 				JObject s = new JObject();
 				s.Add("samp_name", (string)r.Cells[0].Value);
-				s.Add("beats_per_loop", (int)r.Cells[1].Value);
+				s.Add("beats_per_loop", (decimal)r.Cells[1].Value);
 
 				loops.Add(s);
 			}

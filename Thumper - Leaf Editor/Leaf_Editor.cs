@@ -242,6 +242,20 @@ namespace Thumper___Leaf_Editor
 		///LEAF - SAVE FILE
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			//if _loadedlvl is somehow not set, force Save As instead
+			if (_loadedleaf == null) {
+				leafsaveAsToolStripMenuItem.PerformClick();
+				return;
+			}
+			//write contents direct to file without prompting save dialog
+			var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
+			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save));
+			SaveLeaf(true);
+			lblLvlName.Text = $"Leaf Editor - {_save["obj_name"]}";
+		}
+		///LEAF - SAVE AS
+		private void leafsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 			using (var sfd = new SaveFileDialog()) {
 				//filter .txt only
 				sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
@@ -258,7 +272,8 @@ namespace Thumper___Leaf_Editor
 					//get contents to save
 					var _save = LeafBuildSave(Path.GetFileName(sfd.FileName));
 					//serialize JSON object to a string, and write it to the file
-					File.WriteAllText($@"{storePath}\leaf_{tempFileName}", JsonConvert.SerializeObject(_save));
+					sfd.FileName = $@"{storePath}\lvl_{tempFileName}";
+					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save));
 					//set a few visual elementsto show what file is being worked on
 					lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
 					_loadedleaf = sfd.FileName;
@@ -639,7 +654,6 @@ namespace Thumper___Leaf_Editor
 
 			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
 			txtLeafName.Text = ((string)_load["obj_name"]).Replace(".leaf","");
-			workingfolder = Path.GetDirectoryName(_loadedleaf);
 			//clear existing tracks
 			_tracks.Clear();
 			//set beat_cnt and time_sig
@@ -714,7 +728,7 @@ namespace Thumper___Leaf_Editor
 			JArray seq_objs = new JArray();
 			foreach (Sequencer_Object seq_obj in _tracks) {
 				JObject s = new JObject();
-				s.Add("obj_name", _save["obj_name"]);
+				s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
 				s.Add("param_path", seq_obj.param_path);
 				s.Add("trait_type", seq_obj.trait_type);
 
