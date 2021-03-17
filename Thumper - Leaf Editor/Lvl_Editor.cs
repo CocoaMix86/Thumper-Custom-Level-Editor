@@ -607,7 +607,7 @@ namespace Thumper___Leaf_Editor
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
 				JObject s = new JObject();
 				s.Add("samp_name", (string)r.Cells[0].Value);
-				s.Add("beats_per_loop", (decimal)r.Cells[1].Value);
+				s.Add("beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()));
 
 				loops.Add(s);
 			}
