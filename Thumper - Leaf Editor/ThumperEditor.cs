@@ -25,6 +25,7 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 		private string _workingfolder;
+		public dynamic helptext;
 
 		public FormLeafEditor() => InitializeComponent();
 
@@ -75,7 +76,9 @@ namespace Thumper___Leaf_Editor
 			InitializeTracks(trackEditor);
 			InitializeTracks(lvlSeqObjs);
 			InitializeTracks(lvlLeafList);
+			InitializeTracks(masterLvlList);
 			InitializeLvlStuff();
+			InitializeMasterStuff();
 			//_formactive is the panel that was last set to Max
 			_formactive = panelLeaf;
 			//set panels to be resizeable
@@ -83,6 +86,9 @@ namespace Thumper___Leaf_Editor
 			ControlMoverOrResizer.Init(panelLevel);
 			ControlMoverOrResizer.Init(panelMaster);
 			ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
+
+			///import help text
+			helptext = JsonConvert.DeserializeObject(Properties.Resources.helptext);
 
 			///import selectable objects from file and parse them into lists for manipulation
 			//splits input at "###". Each section is a collection of param_paths
@@ -207,6 +213,15 @@ namespace Thumper___Leaf_Editor
 				panelLeaf.Location = panelLevel.Location;
 
 			panelLeaf.Width = this.Width - panelLeaf.Location.X - 20;
+		}
+
+
+		/// 
+		/// VARIOUS POPUPS FOR HELP TEXT
+		/// 
+		private void lblMasterlvllistHelp_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show((string)helptext["masterLvlList"], "Master Editor Help");
 		}
 	}
 }

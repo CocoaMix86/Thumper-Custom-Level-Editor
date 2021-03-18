@@ -160,6 +160,7 @@
 			this.label28 = new System.Windows.Forms.Label();
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
 			this.panelMaster = new System.Windows.Forms.Panel();
+			this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
 			this.label30 = new System.Windows.Forms.Label();
 			this.btnMasterLvlAdd = new System.Windows.Forms.Button();
 			this.btnMasterLvlDown = new System.Windows.Forms.Button();
@@ -168,7 +169,7 @@
 			this.masterLvlList = new System.Windows.Forms.DataGridView();
 			this.lblMasterMax = new System.Windows.Forms.Label();
 			this.lblMasterClose = new System.Windows.Forms.Label();
-			this.label13 = new System.Windows.Forms.Label();
+			this.lblMasterName = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
 			this.menuStrip.SuspendLayout();
@@ -1954,6 +1955,7 @@
 			// 
 			this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
 			this.panelMaster.Controls.Add(this.label30);
 			this.panelMaster.Controls.Add(this.btnMasterLvlAdd);
 			this.panelMaster.Controls.Add(this.btnMasterLvlDown);
@@ -1962,11 +1964,24 @@
 			this.panelMaster.Controls.Add(this.masterLvlList);
 			this.panelMaster.Controls.Add(this.lblMasterMax);
 			this.panelMaster.Controls.Add(this.lblMasterClose);
-			this.panelMaster.Controls.Add(this.label13);
+			this.panelMaster.Controls.Add(this.lblMasterName);
 			this.panelMaster.Location = new System.Drawing.Point(4, 29);
 			this.panelMaster.Name = "panelMaster";
 			this.panelMaster.Size = new System.Drawing.Size(802, 423);
 			this.panelMaster.TabIndex = 47;
+			// 
+			// lblMasterlvllistHelp
+			// 
+			this.lblMasterlvllistHelp.AutoSize = true;
+			this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+			this.lblMasterlvllistHelp.Location = new System.Drawing.Point(282, 18);
+			this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
+			this.lblMasterlvllistHelp.Size = new System.Drawing.Size(16, 16);
+			this.lblMasterlvllistHelp.TabIndex = 95;
+			this.lblMasterlvllistHelp.Text = "?";
+			this.lblMasterlvllistHelp.Click += new System.EventHandler(this.lblMasterlvllistHelp_Click);
 			// 
 			// label30
 			// 
@@ -1978,7 +1993,6 @@
 			this.label30.Size = new System.Drawing.Size(48, 13);
 			this.label30.TabIndex = 94;
 			this.label30.Text = "Lvl List";
-			this.label30.Visible = false;
 			// 
 			// btnMasterLvlAdd
 			// 
@@ -1993,7 +2007,6 @@
 			this.btnMasterLvlAdd.Text = "+";
 			this.btnMasterLvlAdd.UseCompatibleTextRendering = true;
 			this.btnMasterLvlAdd.UseVisualStyleBackColor = false;
-			this.btnMasterLvlAdd.Visible = false;
 			this.btnMasterLvlAdd.Click += new System.EventHandler(this.btnMasterLvlAdd_Click);
 			// 
 			// btnMasterLvlDown
@@ -2010,7 +2023,6 @@
 			this.btnMasterLvlDown.Text = "↓";
 			this.btnMasterLvlDown.UseCompatibleTextRendering = true;
 			this.btnMasterLvlDown.UseVisualStyleBackColor = false;
-			this.btnMasterLvlDown.Visible = false;
 			this.btnMasterLvlDown.Click += new System.EventHandler(this.btnMasterLvlDown_Click);
 			// 
 			// btnMasterLvlUp
@@ -2027,7 +2039,6 @@
 			this.btnMasterLvlUp.Text = "↑";
 			this.btnMasterLvlUp.UseCompatibleTextRendering = true;
 			this.btnMasterLvlUp.UseVisualStyleBackColor = false;
-			this.btnMasterLvlUp.Visible = false;
 			this.btnMasterLvlUp.Click += new System.EventHandler(this.btnMasterLvlUp_Click);
 			// 
 			// btnMasterLvlDelete
@@ -2044,7 +2055,6 @@
 			this.btnMasterLvlDelete.Text = "-";
 			this.btnMasterLvlDelete.UseCompatibleTextRendering = true;
 			this.btnMasterLvlDelete.UseVisualStyleBackColor = false;
-			this.btnMasterLvlDelete.Visible = false;
 			this.btnMasterLvlDelete.Click += new System.EventHandler(this.btnMasterLvlDelete_Click);
 			// 
 			// masterLvlList
@@ -2096,7 +2106,7 @@
 			this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.masterLvlList.Size = new System.Drawing.Size(295, 185);
 			this.masterLvlList.TabIndex = 79;
-			this.masterLvlList.Visible = false;
+			this.masterLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_RowEnter);
 			// 
 			// lblMasterMax
 			// 
@@ -2125,16 +2135,16 @@
 			this.lblMasterClose.Text = "x";
 			this.lblMasterClose.Click += new System.EventHandler(this.lblMasterClose_Click);
 			// 
-			// label13
+			// lblMasterName
 			// 
-			this.label13.AutoSize = true;
-			this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label13.ForeColor = System.Drawing.Color.White;
-			this.label13.Location = new System.Drawing.Point(-3, 0);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(69, 13);
-			this.label13.TabIndex = 49;
-			this.label13.Text = "Master Editor";
+			this.lblMasterName.AutoSize = true;
+			this.lblMasterName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblMasterName.ForeColor = System.Drawing.Color.White;
+			this.lblMasterName.Location = new System.Drawing.Point(-3, 0);
+			this.lblMasterName.Name = "lblMasterName";
+			this.lblMasterName.Size = new System.Drawing.Size(69, 13);
+			this.lblMasterName.TabIndex = 49;
+			this.lblMasterName.Text = "Master Editor";
 			// 
 			// FormLeafEditor
 			// 
@@ -2220,7 +2230,7 @@
 		private System.Windows.Forms.ComboBox dropTimeSig;
 		private System.Windows.Forms.Label lblTrackFileName;
 		private System.Windows.Forms.Label lblLvlName;
-		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.Label lblMasterName;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.Button btnTrackDown;
 		private System.Windows.Forms.Button btnTrackUp;
@@ -2312,6 +2322,7 @@
 		private System.Windows.Forms.Button btnMasterLvlUp;
 		private System.Windows.Forms.Button btnMasterLvlDelete;
 		private System.Windows.Forms.DataGridView masterLvlList;
+		private System.Windows.Forms.Label lblMasterlvllistHelp;
 	}
 }
 

@@ -61,6 +61,17 @@ namespace Thumper___Leaf_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.&quot;
+        ///}.
+        /// </summary>
+        internal static string helptext {
+            get {
+                return ResourceManager.GetString("helptext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  
         ///lattice5.path
         ///tube_hexagon_bright.path
@@ -116,11 +127,11 @@ namespace Thumper___Leaf_Editor.Properties {
         /// <summary>
         ///   Looks up a localized string similar to TRACK EFFECTS
         ///leafname
-        ///leafname;pitch;pitch;kTraitFloat;True;1.25;(4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0)
-        ///leafname;roll;roll;kTraitFloat;True;0;(4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0)
-        ///leafname;turn;turn;kTraitFloat;True;0;(4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0)
-        ///leafname;turn_auto;turn_auto;kTraitFloat;True;0;(4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0)
-        ///leafname;scale_x;sclae_x;kTraitFloat [rest of string was truncated]&quot;;.
+        ///leafname;pitch;pitch;kTraitFloat;True;1.25;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
+        ///leafname;roll;roll;kTraitFloat;True;0;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
+        ///leafname;turn;turn;kTraitFloat;True;0;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
+        ///leafname;turn_auto;turn_auto;kTraitFloat;True;0;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
+        ///leafname;scale_x;scale_x;kTraitFloat [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string track_objects {
             get {
