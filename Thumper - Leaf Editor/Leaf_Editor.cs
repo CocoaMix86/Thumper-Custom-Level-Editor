@@ -67,21 +67,23 @@ namespace Thumper___Leaf_Editor
 				dropObjects.SelectedIndex = dropObjects.FindStringExact(_tracks[_selecttrack].friendly_type);
 				dropParamPath.SelectedIndex = dropParamPath.FindStringExact(_params[0]);
 				dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[1]);
-				txtStep.Text = _tracks[_selecttrack].step;
 				txtTrait.Text = _tracks[_selecttrack].trait_type;
 				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color));
 				//remove event handlers from a few controls so they don't trigger when their values change
 				NUD_TrackDoubleclick.ValueChanged -= new EventHandler(NUD_TrackDoubleclick_ValueChanged);
 				NUD_TrackHighlight.ValueChanged -= new EventHandler(NUD_TrackHighlight_ValueChanged);
 				txtDefault.ValueChanged -= new EventHandler(txtDefault_ValueChanged);
+				dropLeafStep.SelectedIndexChanged -= new EventHandler(dropLeafStep_SelectedIndexChanged);
 				//set values from _tracks
 				//NUD_TrackDoubleclick.Value = Decimal.Parse(_tracks[_selecttrack][8]);
 				NUD_TrackHighlight.Value = (decimal)_tracks[_selecttrack].highlight_value;
 				txtDefault.Value = (decimal)_tracks[_selecttrack]._default;
+				dropLeafStep.SelectedItem = _tracks[_selecttrack].step;
 				//re-add event handlers
 				NUD_TrackDoubleclick.ValueChanged += new EventHandler(NUD_TrackDoubleclick_ValueChanged);
 				NUD_TrackHighlight.ValueChanged += new EventHandler(NUD_TrackHighlight_ValueChanged);
 				txtDefault.ValueChanged += new EventHandler(txtDefault_ValueChanged);
+				dropLeafStep.SelectedIndexChanged += new EventHandler(dropLeafStep_SelectedIndexChanged);
 
 				//check if the current track has param_path set. If not, disable some controls
 				if (_tracks[_selecttrack].param_path != null)
@@ -243,7 +245,7 @@ namespace Thumper___Leaf_Editor
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			//if _loadedlvl is somehow not set, force Save As instead
-			if (_loadedleaf == null) {
+			if (_loadedleaf == "") {
 				leafsaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
@@ -301,6 +303,12 @@ namespace Thumper___Leaf_Editor
 		{
 			_tracks[trackEditor.CurrentRow.Index]._default = (float)txtDefault.Value;
 			//sets flag that leaf has unsaved changes
+			SaveLeaf(false);
+		}
+		///STEP CHANGED
+		private void dropLeafStep_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			_tracks[trackEditor.CurrentRow.Index].step = dropLeafStep.Text;
 			SaveLeaf(false);
 		}
 		#endregion
@@ -377,6 +385,7 @@ namespace Thumper___Leaf_Editor
 			dropObjects.SelectedIndex = 0;
 			if (dropObjects.SelectedIndex == -1 || dropParamPath.SelectedIndex == -1)
 				btnTrackApply.Enabled = false;
+			else btnTrackApply.Enabled = true;
 			//sets flag that leaf has unsaved changes
 			SaveLeaf(false);
 		}
@@ -456,7 +465,7 @@ namespace Thumper___Leaf_Editor
 		{
 			//fill object properties on the form
 			txtDefault.Text = _objects[dropObjects.SelectedIndex].def[dropParamPath.SelectedIndex];
-			txtStep.Text = _objects[dropObjects.SelectedIndex].step[dropParamPath.SelectedIndex];
+			dropLeafStep.Text = _objects[dropObjects.SelectedIndex].step[dropParamPath.SelectedIndex];
 			txtTrait.Text = _objects[dropObjects.SelectedIndex].trait_type[dropParamPath.SelectedIndex];
 			//enable track highlighting tools
 			btnTrackColorDialog.Enabled = true;

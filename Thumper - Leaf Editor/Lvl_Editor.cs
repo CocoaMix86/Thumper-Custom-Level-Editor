@@ -174,7 +174,7 @@ namespace Thumper___Leaf_Editor
 		private void saveToolStripMenuItem2_Click(object sender, EventArgs e)
 		{
 			//if _loadedlvl is somehow not set, force Save As instead
-			if (_loadedlvl == null) {
+			if (_loadedlvl.Length < 1) {
 				lvlsaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
@@ -208,7 +208,7 @@ namespace Thumper___Leaf_Editor
 					//set a few visual elements to show what file is being worked on
 					lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
 					_loadedlvl = sfd.FileName;
-					workingfolder = Path.GetFileName(_loadedlvl);
+					workingfolder = Path.GetDirectoryName(_loadedlvl);
 					//set save flag
 					SaveLvl(true);
 				}
@@ -241,7 +241,6 @@ namespace Thumper___Leaf_Editor
 		///         ///
 
 		private void btnLvlLeafDelete_Click(object sender, EventArgs e) => _lvlleafs.RemoveAt(lvlLeafList.CurrentRow.Index);
-
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
 			using (var ofd = new OpenFileDialog()) {
@@ -286,9 +285,8 @@ namespace Thumper___Leaf_Editor
 				_lvlleafs.Insert(rowIndex - 1, selectedLeaf);
 				//move selected cell up a row to follow the moved item
 				lvlLeafList.Rows[rowIndex - 1].Cells[0].Selected = true;
-				//sets flag that leaf has unsaved changes
-				///SaveLeaf(false);
-				lvlLeafList.CurrentCell = lvlLeafList.Rows[rowIndex - 1].Cells[0];
+				//sets flag that lvl has unsaved changes
+				SaveLvl(false);
 			}
 			catch { }
 		}
@@ -306,9 +304,8 @@ namespace Thumper___Leaf_Editor
 				_lvlleafs.Insert(rowIndex + 1, selectedLeaf);
 				//move selected cell up a row to follow the moved item
 				lvlLeafList.Rows[rowIndex + 1].Cells[0].Selected = true;
-				//sets flag that leaf has unsaved changes
-				///SaveLeaf(false);
-				lvlLeafList.CurrentCell = lvlLeafList.Rows[rowIndex + 1].Cells[0];
+				//sets flag that lvl has unsaved changes
+				SaveLvl(false);
 			}
 			catch { }
 		}

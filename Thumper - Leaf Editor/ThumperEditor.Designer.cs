@@ -87,7 +87,6 @@
 			this.dropParamPath = new System.Windows.Forms.ComboBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
-			this.txtStep = new System.Windows.Forms.TextBox();
 			this.txtTrait = new System.Windows.Forms.TextBox();
 			this.label9 = new System.Windows.Forms.Label();
 			this.trackEditor = new System.Windows.Forms.DataGridView();
@@ -96,6 +95,7 @@
 			this.panelZoom = new System.Windows.Forms.Panel();
 			this.btnRawImport = new System.Windows.Forms.Button();
 			this.panelLeaf = new System.Windows.Forms.Panel();
+			this.dropLeafStep = new System.Windows.Forms.ComboBox();
 			this.label12 = new System.Windows.Forms.Label();
 			this.txtLeafName = new System.Windows.Forms.TextBox();
 			this.lblLeafMax = new System.Windows.Forms.Label();
@@ -660,15 +660,6 @@
 			this.label8.TabIndex = 36;
 			this.label8.Text = "Step";
 			// 
-			// txtStep
-			// 
-			this.txtStep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.txtStep.ForeColor = System.Drawing.Color.White;
-			this.txtStep.Location = new System.Drawing.Point(81, 278);
-			this.txtStep.Name = "txtStep";
-			this.txtStep.Size = new System.Drawing.Size(86, 20);
-			this.txtStep.TabIndex = 37;
-			// 
 			// txtTrait
 			// 
 			this.txtTrait.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -799,6 +790,7 @@
 			// 
 			this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelLeaf.Controls.Add(this.dropLeafStep);
 			this.panelLeaf.Controls.Add(this.label12);
 			this.panelLeaf.Controls.Add(this.txtLeafName);
 			this.panelLeaf.Controls.Add(this.lblLeafMax);
@@ -824,7 +816,6 @@
 			this.panelLeaf.Controls.Add(this.lblTrackFileName);
 			this.panelLeaf.Controls.Add(this.label2);
 			this.panelLeaf.Controls.Add(this.dropTimeSig);
-			this.panelLeaf.Controls.Add(this.txtStep);
 			this.panelLeaf.Controls.Add(this.txtTrait);
 			this.panelLeaf.Controls.Add(this.label9);
 			this.panelLeaf.Controls.Add(this.btnRawImport);
@@ -842,10 +833,26 @@
 			this.panelLeaf.Controls.Add(this.label4);
 			this.panelLeaf.Controls.Add(this.dropObjects);
 			this.panelLeaf.Controls.Add(this.label27);
-			this.panelLeaf.Location = new System.Drawing.Point(810, 27);
+			this.panelLeaf.Location = new System.Drawing.Point(607, 29);
 			this.panelLeaf.Name = "panelLeaf";
 			this.panelLeaf.Size = new System.Drawing.Size(652, 536);
 			this.panelLeaf.TabIndex = 45;
+			// 
+			// dropLeafStep
+			// 
+			this.dropLeafStep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.dropLeafStep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.dropLeafStep.ForeColor = System.Drawing.Color.White;
+			this.dropLeafStep.FormattingEnabled = true;
+			this.dropLeafStep.Items.AddRange(new object[] {
+            "True",
+            "False"});
+			this.dropLeafStep.Location = new System.Drawing.Point(81, 278);
+			this.dropLeafStep.Name = "dropLeafStep";
+			this.dropLeafStep.Size = new System.Drawing.Size(86, 21);
+			this.dropLeafStep.TabIndex = 94;
+			this.dropLeafStep.Text = "True";
+			this.dropLeafStep.SelectedIndexChanged += new System.EventHandler(this.dropLeafStep_SelectedIndexChanged);
 			// 
 			// label12
 			// 
@@ -1244,7 +1251,7 @@
 			this.panelLevel.Controls.Add(this.btnLvlSeqDelete);
 			this.panelLevel.Controls.Add(this.lblLvlName);
 			this.panelLevel.Controls.Add(this.panel1);
-			this.panelLevel.Location = new System.Drawing.Point(53, 458);
+			this.panelLevel.Location = new System.Drawing.Point(4, 335);
 			this.panelLevel.Name = "panelLevel";
 			this.panelLevel.Size = new System.Drawing.Size(802, 402);
 			this.panelLevel.TabIndex = 46;
@@ -1254,7 +1261,7 @@
 			this.label29.AutoSize = true;
 			this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label29.ForeColor = System.Drawing.Color.White;
-			this.label29.Location = new System.Drawing.Point(88, 4);
+			this.label29.Location = new System.Drawing.Point(0, 14);
 			this.label29.Name = "label29";
 			this.label29.Size = new System.Drawing.Size(56, 13);
 			this.label29.TabIndex = 93;
@@ -1266,7 +1273,7 @@
 			this.btnlvlPanelOpen.BackColor = System.Drawing.Color.Gray;
 			this.btnlvlPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnlvlPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnlvlPanelOpen.Location = new System.Drawing.Point(9, 66);
+			this.btnlvlPanelOpen.Location = new System.Drawing.Point(9, 76);
 			this.btnlvlPanelOpen.Name = "btnlvlPanelOpen";
 			this.btnlvlPanelOpen.Size = new System.Drawing.Size(82, 40);
 			this.btnlvlPanelOpen.TabIndex = 1;
@@ -1328,7 +1335,7 @@
 			this.btnlvlPanelNew.BackColor = System.Drawing.Color.Gray;
 			this.btnlvlPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnlvlPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnlvlPanelNew.Location = new System.Drawing.Point(9, 24);
+			this.btnlvlPanelNew.Location = new System.Drawing.Point(9, 34);
 			this.btnlvlPanelNew.Name = "btnlvlPanelNew";
 			this.btnlvlPanelNew.Size = new System.Drawing.Size(82, 40);
 			this.btnlvlPanelNew.TabIndex = 0;
@@ -1742,7 +1749,7 @@
 			this.btnLvlLeafAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLvlLeafAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnLvlLeafAdd.ForeColor = System.Drawing.Color.Black;
-			this.btnLvlLeafAdd.Location = new System.Drawing.Point(3, 206);
+			this.btnLvlLeafAdd.Location = new System.Drawing.Point(3, 216);
 			this.btnLvlLeafAdd.Name = "btnLvlLeafAdd";
 			this.btnLvlLeafAdd.Size = new System.Drawing.Size(22, 22);
 			this.btnLvlLeafAdd.TabIndex = 75;
@@ -1759,7 +1766,7 @@
 			this.btnLvlLeafDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLvlLeafDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnLvlLeafDown.ForeColor = System.Drawing.Color.Black;
-			this.btnLvlLeafDown.Location = new System.Drawing.Point(69, 206);
+			this.btnLvlLeafDown.Location = new System.Drawing.Point(69, 216);
 			this.btnLvlLeafDown.Name = "btnLvlLeafDown";
 			this.btnLvlLeafDown.Size = new System.Drawing.Size(22, 22);
 			this.btnLvlLeafDown.TabIndex = 78;
@@ -1776,7 +1783,7 @@
 			this.btnLvlLeafUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLvlLeafUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnLvlLeafUp.ForeColor = System.Drawing.Color.Black;
-			this.btnLvlLeafUp.Location = new System.Drawing.Point(47, 206);
+			this.btnLvlLeafUp.Location = new System.Drawing.Point(47, 216);
 			this.btnLvlLeafUp.Name = "btnLvlLeafUp";
 			this.btnLvlLeafUp.Size = new System.Drawing.Size(22, 22);
 			this.btnLvlLeafUp.TabIndex = 77;
@@ -1793,7 +1800,7 @@
 			this.btnLvlLeafDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLvlLeafDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnLvlLeafDelete.ForeColor = System.Drawing.Color.Black;
-			this.btnLvlLeafDelete.Location = new System.Drawing.Point(25, 206);
+			this.btnLvlLeafDelete.Location = new System.Drawing.Point(25, 216);
 			this.btnLvlLeafDelete.Name = "btnLvlLeafDelete";
 			this.btnLvlLeafDelete.Size = new System.Drawing.Size(22, 22);
 			this.btnLvlLeafDelete.TabIndex = 76;
@@ -1834,7 +1841,7 @@
 			this.lvlLeafList.DefaultCellStyle = dataGridViewCellStyle14;
 			this.lvlLeafList.EnableHeadersVisualStyles = false;
 			this.lvlLeafList.GridColor = System.Drawing.Color.Black;
-			this.lvlLeafList.Location = new System.Drawing.Point(3, 20);
+			this.lvlLeafList.Location = new System.Drawing.Point(3, 30);
 			this.lvlLeafList.MultiSelect = false;
 			this.lvlLeafList.Name = "lvlLeafList";
 			this.lvlLeafList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -1967,7 +1974,7 @@
 			this.panelMaster.Controls.Add(this.lblMasterName);
 			this.panelMaster.Location = new System.Drawing.Point(4, 29);
 			this.panelMaster.Name = "panelMaster";
-			this.panelMaster.Size = new System.Drawing.Size(802, 423);
+			this.panelMaster.Size = new System.Drawing.Size(597, 296);
 			this.panelMaster.TabIndex = 47;
 			// 
 			// lblMasterlvllistHelp
@@ -2106,6 +2113,7 @@
 			this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.masterLvlList.Size = new System.Drawing.Size(295, 185);
 			this.masterLvlList.TabIndex = 79;
+			this.masterLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellValueChanged);
 			this.masterLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_RowEnter);
 			// 
 			// lblMasterMax
@@ -2114,7 +2122,7 @@
 			this.lblMasterMax.AutoSize = true;
 			this.lblMasterMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterMax.Location = new System.Drawing.Point(765, 1);
+			this.lblMasterMax.Location = new System.Drawing.Point(560, 1);
 			this.lblMasterMax.Name = "lblMasterMax";
 			this.lblMasterMax.Size = new System.Drawing.Size(16, 15);
 			this.lblMasterMax.TabIndex = 52;
@@ -2127,7 +2135,7 @@
 			this.lblMasterClose.AutoSize = true;
 			this.lblMasterClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterClose.Location = new System.Drawing.Point(781, 1);
+			this.lblMasterClose.Location = new System.Drawing.Point(576, 1);
 			this.lblMasterClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblMasterClose.Name = "lblMasterClose";
 			this.lblMasterClose.Size = new System.Drawing.Size(16, 15);
@@ -2152,9 +2160,9 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.ClientSize = new System.Drawing.Size(1460, 763);
+			this.Controls.Add(this.panelLeaf);
 			this.Controls.Add(this.panelMaster);
 			this.Controls.Add(this.panelLevel);
-			this.Controls.Add(this.panelLeaf);
 			this.Controls.Add(this.menuStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(1000, 39);
@@ -2215,7 +2223,6 @@
 		private System.Windows.Forms.ComboBox dropParamPath;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.TextBox txtStep;
 		private System.Windows.Forms.TextBox txtTrait;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.DataGridView trackEditor;
@@ -2323,6 +2330,7 @@
 		private System.Windows.Forms.Button btnMasterLvlDelete;
 		private System.Windows.Forms.DataGridView masterLvlList;
 		private System.Windows.Forms.Label lblMasterlvllistHelp;
+		private System.Windows.Forms.ComboBox dropLeafStep;
 	}
 }
 

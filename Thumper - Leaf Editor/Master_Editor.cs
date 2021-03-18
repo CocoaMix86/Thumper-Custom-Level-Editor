@@ -28,9 +28,18 @@ namespace Thumper___Leaf_Editor
 		///         ///
 
 		/// DGV MASTERLVLLIST
+		//Row Enter (load the selected lvl)
 		private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
 
+		}
+		//Cell value changed (for checkboxes)
+		private void masterLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+			try {
+				_masterlvls[e.RowIndex].checkpoint = bool.Parse(masterLvlList[1, e.RowIndex].Value.ToString());
+				_masterlvls[e.RowIndex].playplus = bool.Parse(masterLvlList[2, e.RowIndex].Value.ToString());
+			} catch { }
 		}
 
 		public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -46,9 +55,9 @@ namespace Thumper___Leaf_Editor
 			//set selected index. Mainly used when moving items
 			///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
 			//enable certain buttons if there are enough items for them
-			btnMasterLvlDelete.Enabled = _lvlleafs.Count > 0;
-			btnMasterLvlUp.Enabled = _lvlleafs.Count > 1;
-			btnMasterLvlDown.Enabled = _lvlleafs.Count > 1;
+			btnMasterLvlDelete.Enabled = _masterlvls.Count > 0;
+			btnMasterLvlUp.Enabled = _masterlvls.Count > 1;
+			btnMasterLvlDown.Enabled = _masterlvls.Count > 1;
 
 			//set lvl save flag to false
 			SaveMaster(false);
@@ -59,6 +68,8 @@ namespace Thumper___Leaf_Editor
 		///         ///
 		/// BUTTONS ///
 		///         ///
+		        
+		private void btnMasterLvlDelete_Click(object sender, EventArgs e) => _masterlvls.RemoveAt(masterLvlList.CurrentRow.Index);
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
 			using (var ofd = new OpenFileDialog()) {
@@ -91,19 +102,42 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
-		private void btnMasterLvlDelete_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		private void btnMasterLvlUp_Click(object sender, EventArgs e)
 		{
-
+			try {
+				// get index of the row for the selected cell
+				int rowIndex = masterLvlList.CurrentRow.Index;
+				if (rowIndex == 0)
+					return;
+				//move leaf in list
+				var selectedLvl = _masterlvls[rowIndex];
+				_masterlvls.Remove(selectedLvl);
+				_masterlvls.Insert(rowIndex - 1, selectedLvl);
+				//move selected cell up a row to follow the moved item
+				masterLvlList.Rows[rowIndex - 1].Cells[0].Selected = true;
+				//sets flag that lvl has unsaved changes
+				SaveMaster(false);
+			}
+			catch { }
 		}
 
 		private void btnMasterLvlDown_Click(object sender, EventArgs e)
 		{
-
+			try {
+				// get index of the row for the selected cell
+				int rowIndex = masterLvlList.CurrentRow.Index;
+				if (rowIndex == _masterlvls.Count - 1)
+					return;
+				//move leaf in list
+				var selectedLvl = _masterlvls[rowIndex];
+				_masterlvls.Remove(selectedLvl);
+				_masterlvls.Insert(rowIndex + 1, selectedLvl);
+				//move selected cell up a row to follow the moved item
+				masterLvlList.Rows[rowIndex + 1].Cells[0].Selected = true;
+				//sets flag that lvl has unsaved changes
+				SaveMaster(false);
+			}
+			catch { }
 		}
 		#endregion
 
