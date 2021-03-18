@@ -42,6 +42,9 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLeafEditor));
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,11 +123,12 @@
 			this.dropTimeSig = new System.Windows.Forms.ComboBox();
 			this.label27 = new System.Windows.Forms.Label();
 			this.panelLevel = new System.Windows.Forms.Panel();
+			this.label29 = new System.Windows.Forms.Label();
 			this.btnlvlPanelOpen = new System.Windows.Forms.Button();
 			this.btnLvlLoopRefresh = new System.Windows.Forms.Button();
-			this.btnlvlPanelNew = new System.Windows.Forms.Button();
 			this.dropLvlTutorial = new System.Windows.Forms.ComboBox();
 			this.label26 = new System.Windows.Forms.Label();
+			this.btnlvlPanelNew = new System.Windows.Forms.Button();
 			this.dropLvlInput = new System.Windows.Forms.ComboBox();
 			this.label25 = new System.Windows.Forms.Label();
 			this.label24 = new System.Windows.Forms.Label();
@@ -156,6 +160,12 @@
 			this.label28 = new System.Windows.Forms.Label();
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
 			this.panelMaster = new System.Windows.Forms.Panel();
+			this.label30 = new System.Windows.Forms.Label();
+			this.btnMasterLvlAdd = new System.Windows.Forms.Button();
+			this.btnMasterLvlDown = new System.Windows.Forms.Button();
+			this.btnMasterLvlUp = new System.Windows.Forms.Button();
+			this.btnMasterLvlDelete = new System.Windows.Forms.Button();
+			this.masterLvlList = new System.Windows.Forms.DataGridView();
 			this.lblMasterMax = new System.Windows.Forms.Label();
 			this.lblMasterClose = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
@@ -180,6 +190,7 @@
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).BeginInit();
 			this.panelMaster.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -195,7 +206,7 @@
             this.helpToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
-			this.menuStrip.Size = new System.Drawing.Size(1360, 24);
+			this.menuStrip.Size = new System.Drawing.Size(1460, 24);
 			this.menuStrip.TabIndex = 20;
 			this.menuStrip.Text = "mnuLeafEditor";
 			// 
@@ -830,7 +841,7 @@
 			this.panelLeaf.Controls.Add(this.label4);
 			this.panelLeaf.Controls.Add(this.dropObjects);
 			this.panelLeaf.Controls.Add(this.label27);
-			this.panelLeaf.Location = new System.Drawing.Point(701, 26);
+			this.panelLeaf.Location = new System.Drawing.Point(810, 27);
 			this.panelLeaf.Name = "panelLeaf";
 			this.panelLeaf.Size = new System.Drawing.Size(652, 536);
 			this.panelLeaf.TabIndex = 45;
@@ -1198,6 +1209,7 @@
 			// 
 			this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelLevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelLevel.Controls.Add(this.label29);
 			this.panelLevel.Controls.Add(this.btnlvlPanelOpen);
 			this.panelLevel.Controls.Add(this.btnLvlLoopRefresh);
 			this.panelLevel.Controls.Add(this.dropLvlTutorial);
@@ -1231,10 +1243,22 @@
 			this.panelLevel.Controls.Add(this.btnLvlSeqDelete);
 			this.panelLevel.Controls.Add(this.lblLvlName);
 			this.panelLevel.Controls.Add(this.panel1);
-			this.panelLevel.Location = new System.Drawing.Point(0, 27);
+			this.panelLevel.Location = new System.Drawing.Point(53, 458);
 			this.panelLevel.Name = "panelLevel";
-			this.panelLevel.Size = new System.Drawing.Size(1245, 402);
+			this.panelLevel.Size = new System.Drawing.Size(802, 402);
 			this.panelLevel.TabIndex = 46;
+			// 
+			// label29
+			// 
+			this.label29.AutoSize = true;
+			this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label29.ForeColor = System.Drawing.Color.White;
+			this.label29.Location = new System.Drawing.Point(88, 4);
+			this.label29.Name = "label29";
+			this.label29.Size = new System.Drawing.Size(56, 13);
+			this.label29.TabIndex = 93;
+			this.label29.Text = "Leaf List";
+			this.label29.Visible = false;
 			// 
 			// btnlvlPanelOpen
 			// 
@@ -1262,19 +1286,6 @@
 			this.btnLvlLoopRefresh.UseVisualStyleBackColor = false;
 			this.btnLvlLoopRefresh.Visible = false;
 			this.btnLvlLoopRefresh.Click += new System.EventHandler(this.btnLvlLoopRefresh_Click);
-			// 
-			// btnlvlPanelNew
-			// 
-			this.btnlvlPanelNew.BackColor = System.Drawing.Color.Gray;
-			this.btnlvlPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnlvlPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnlvlPanelNew.Location = new System.Drawing.Point(9, 24);
-			this.btnlvlPanelNew.Name = "btnlvlPanelNew";
-			this.btnlvlPanelNew.Size = new System.Drawing.Size(82, 40);
-			this.btnlvlPanelNew.TabIndex = 0;
-			this.btnlvlPanelNew.Text = "New Lvl";
-			this.btnlvlPanelNew.UseVisualStyleBackColor = false;
-			this.btnlvlPanelNew.Click += new System.EventHandler(this.btnlvlPanelNew_Click);
 			// 
 			// dropLvlTutorial
 			// 
@@ -1310,6 +1321,19 @@
 			this.label26.TabIndex = 91;
 			this.label26.Text = "Tutorial Type";
 			this.label26.Visible = false;
+			// 
+			// btnlvlPanelNew
+			// 
+			this.btnlvlPanelNew.BackColor = System.Drawing.Color.Gray;
+			this.btnlvlPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnlvlPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnlvlPanelNew.Location = new System.Drawing.Point(9, 24);
+			this.btnlvlPanelNew.Name = "btnlvlPanelNew";
+			this.btnlvlPanelNew.Size = new System.Drawing.Size(82, 40);
+			this.btnlvlPanelNew.TabIndex = 0;
+			this.btnlvlPanelNew.Text = "New Lvl";
+			this.btnlvlPanelNew.UseVisualStyleBackColor = false;
+			this.btnlvlPanelNew.Click += new System.EventHandler(this.btnlvlPanelNew_Click);
 			// 
 			// dropLvlInput
 			// 
@@ -1544,7 +1568,7 @@
 			this.lvlLoopTracks.RowTemplate.Height = 20;
 			this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.lvlLoopTracks.Size = new System.Drawing.Size(648, 133);
+			this.lvlLoopTracks.Size = new System.Drawing.Size(205, 133);
 			this.lvlLoopTracks.TabIndex = 81;
 			this.lvlLoopTracks.Visible = false;
 			this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
@@ -1555,7 +1579,7 @@
 			this.lblLevelMax.AutoSize = true;
 			this.lblLevelMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLevelMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLevelMax.Location = new System.Drawing.Point(1208, 1);
+			this.lblLevelMax.Location = new System.Drawing.Point(765, 1);
 			this.lblLevelMax.Name = "lblLevelMax";
 			this.lblLevelMax.Size = new System.Drawing.Size(16, 15);
 			this.lblLevelMax.TabIndex = 50;
@@ -1568,7 +1592,7 @@
 			this.lblLvlClose.AutoSize = true;
 			this.lblLvlClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLvlClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLvlClose.Location = new System.Drawing.Point(1224, 1);
+			this.lblLvlClose.Location = new System.Drawing.Point(781, 1);
 			this.lblLvlClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblLvlClose.Name = "lblLvlClose";
 			this.lblLvlClose.Size = new System.Drawing.Size(16, 15);
@@ -1625,7 +1649,7 @@
 			this.lvlSeqObjs.RowTemplate.Height = 200;
 			this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.lvlSeqObjs.Size = new System.Drawing.Size(897, 185);
+			this.lvlSeqObjs.Size = new System.Drawing.Size(454, 185);
 			this.lvlSeqObjs.TabIndex = 68;
 			this.lvlSeqObjs.Visible = false;
 			this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
@@ -1897,7 +1921,7 @@
 			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panel1.Controls.Add(this.label28);
 			this.panel1.Controls.Add(this.trackLvlVolumeZoom);
-			this.panel1.Location = new System.Drawing.Point(1071, -5);
+			this.panel1.Location = new System.Drawing.Point(628, -5);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(131, 27);
 			this.panel1.TabIndex = 92;
@@ -1930,13 +1954,149 @@
 			// 
 			this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelMaster.Controls.Add(this.label30);
+			this.panelMaster.Controls.Add(this.btnMasterLvlAdd);
+			this.panelMaster.Controls.Add(this.btnMasterLvlDown);
+			this.panelMaster.Controls.Add(this.btnMasterLvlUp);
+			this.panelMaster.Controls.Add(this.btnMasterLvlDelete);
+			this.panelMaster.Controls.Add(this.masterLvlList);
 			this.panelMaster.Controls.Add(this.lblMasterMax);
 			this.panelMaster.Controls.Add(this.lblMasterClose);
 			this.panelMaster.Controls.Add(this.label13);
-			this.panelMaster.Location = new System.Drawing.Point(17, 437);
+			this.panelMaster.Location = new System.Drawing.Point(4, 29);
 			this.panelMaster.Name = "panelMaster";
-			this.panelMaster.Size = new System.Drawing.Size(486, 423);
+			this.panelMaster.Size = new System.Drawing.Size(802, 423);
 			this.panelMaster.TabIndex = 47;
+			// 
+			// label30
+			// 
+			this.label30.AutoSize = true;
+			this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label30.ForeColor = System.Drawing.Color.White;
+			this.label30.Location = new System.Drawing.Point(3, 18);
+			this.label30.Name = "label30";
+			this.label30.Size = new System.Drawing.Size(48, 13);
+			this.label30.TabIndex = 94;
+			this.label30.Text = "Lvl List";
+			this.label30.Visible = false;
+			// 
+			// btnMasterLvlAdd
+			// 
+			this.btnMasterLvlAdd.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterLvlAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMasterLvlAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterLvlAdd.ForeColor = System.Drawing.Color.Black;
+			this.btnMasterLvlAdd.Location = new System.Drawing.Point(3, 220);
+			this.btnMasterLvlAdd.Name = "btnMasterLvlAdd";
+			this.btnMasterLvlAdd.Size = new System.Drawing.Size(22, 22);
+			this.btnMasterLvlAdd.TabIndex = 80;
+			this.btnMasterLvlAdd.Text = "+";
+			this.btnMasterLvlAdd.UseCompatibleTextRendering = true;
+			this.btnMasterLvlAdd.UseVisualStyleBackColor = false;
+			this.btnMasterLvlAdd.Visible = false;
+			this.btnMasterLvlAdd.Click += new System.EventHandler(this.btnMasterLvlAdd_Click);
+			// 
+			// btnMasterLvlDown
+			// 
+			this.btnMasterLvlDown.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterLvlDown.Enabled = false;
+			this.btnMasterLvlDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMasterLvlDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterLvlDown.ForeColor = System.Drawing.Color.Black;
+			this.btnMasterLvlDown.Location = new System.Drawing.Point(69, 220);
+			this.btnMasterLvlDown.Name = "btnMasterLvlDown";
+			this.btnMasterLvlDown.Size = new System.Drawing.Size(22, 22);
+			this.btnMasterLvlDown.TabIndex = 83;
+			this.btnMasterLvlDown.Text = "↓";
+			this.btnMasterLvlDown.UseCompatibleTextRendering = true;
+			this.btnMasterLvlDown.UseVisualStyleBackColor = false;
+			this.btnMasterLvlDown.Visible = false;
+			this.btnMasterLvlDown.Click += new System.EventHandler(this.btnMasterLvlDown_Click);
+			// 
+			// btnMasterLvlUp
+			// 
+			this.btnMasterLvlUp.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterLvlUp.Enabled = false;
+			this.btnMasterLvlUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMasterLvlUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterLvlUp.ForeColor = System.Drawing.Color.Black;
+			this.btnMasterLvlUp.Location = new System.Drawing.Point(47, 220);
+			this.btnMasterLvlUp.Name = "btnMasterLvlUp";
+			this.btnMasterLvlUp.Size = new System.Drawing.Size(22, 22);
+			this.btnMasterLvlUp.TabIndex = 82;
+			this.btnMasterLvlUp.Text = "↑";
+			this.btnMasterLvlUp.UseCompatibleTextRendering = true;
+			this.btnMasterLvlUp.UseVisualStyleBackColor = false;
+			this.btnMasterLvlUp.Visible = false;
+			this.btnMasterLvlUp.Click += new System.EventHandler(this.btnMasterLvlUp_Click);
+			// 
+			// btnMasterLvlDelete
+			// 
+			this.btnMasterLvlDelete.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterLvlDelete.Enabled = false;
+			this.btnMasterLvlDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMasterLvlDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterLvlDelete.ForeColor = System.Drawing.Color.Black;
+			this.btnMasterLvlDelete.Location = new System.Drawing.Point(25, 220);
+			this.btnMasterLvlDelete.Name = "btnMasterLvlDelete";
+			this.btnMasterLvlDelete.Size = new System.Drawing.Size(22, 22);
+			this.btnMasterLvlDelete.TabIndex = 81;
+			this.btnMasterLvlDelete.Text = "-";
+			this.btnMasterLvlDelete.UseCompatibleTextRendering = true;
+			this.btnMasterLvlDelete.UseVisualStyleBackColor = false;
+			this.btnMasterLvlDelete.Visible = false;
+			this.btnMasterLvlDelete.Click += new System.EventHandler(this.btnMasterLvlDelete_Click);
+			// 
+			// masterLvlList
+			// 
+			this.masterLvlList.AllowUserToAddRows = false;
+			this.masterLvlList.AllowUserToDeleteRows = false;
+			this.masterLvlList.AllowUserToResizeRows = false;
+			this.masterLvlList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+			this.masterLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			dataGridViewCellStyle16.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+			this.masterLvlList.ColumnHeadersHeight = 20;
+			this.masterLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			dataGridViewCellStyle17.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle17.Format = "N2";
+			dataGridViewCellStyle17.NullValue = null;
+			dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle17;
+			this.masterLvlList.EnableHeadersVisualStyles = false;
+			this.masterLvlList.GridColor = System.Drawing.Color.Black;
+			this.masterLvlList.Location = new System.Drawing.Point(3, 34);
+			this.masterLvlList.MultiSelect = false;
+			this.masterLvlList.Name = "masterLvlList";
+			this.masterLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+			dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+			this.masterLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.masterLvlList.RowTemplate.Height = 200;
+			this.masterLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+			this.masterLvlList.Size = new System.Drawing.Size(295, 185);
+			this.masterLvlList.TabIndex = 79;
+			this.masterLvlList.Visible = false;
 			// 
 			// lblMasterMax
 			// 
@@ -1944,7 +2104,7 @@
 			this.lblMasterMax.AutoSize = true;
 			this.lblMasterMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterMax.Location = new System.Drawing.Point(449, 1);
+			this.lblMasterMax.Location = new System.Drawing.Point(765, 1);
 			this.lblMasterMax.Name = "lblMasterMax";
 			this.lblMasterMax.Size = new System.Drawing.Size(16, 15);
 			this.lblMasterMax.TabIndex = 52;
@@ -1957,7 +2117,7 @@
 			this.lblMasterClose.AutoSize = true;
 			this.lblMasterClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterClose.Location = new System.Drawing.Point(465, 1);
+			this.lblMasterClose.Location = new System.Drawing.Point(781, 1);
 			this.lblMasterClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblMasterClose.Name = "lblMasterClose";
 			this.lblMasterClose.Size = new System.Drawing.Size(16, 15);
@@ -1981,10 +2141,10 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.ClientSize = new System.Drawing.Size(1360, 763);
-			this.Controls.Add(this.panelLeaf);
+			this.ClientSize = new System.Drawing.Size(1460, 763);
 			this.Controls.Add(this.panelMaster);
 			this.Controls.Add(this.panelLevel);
+			this.Controls.Add(this.panelLeaf);
 			this.Controls.Add(this.menuStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(1000, 39);
@@ -2019,6 +2179,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).EndInit();
 			this.panelMaster.ResumeLayout(false);
 			this.panelMaster.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -2144,6 +2305,13 @@
 		private System.Windows.Forms.Button btnlvlPanelNew;
 		private System.Windows.Forms.ToolStripMenuItem lvlsaveAsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem leafsaveAsToolStripMenuItem;
+		private System.Windows.Forms.Label label29;
+		private System.Windows.Forms.Label label30;
+		private System.Windows.Forms.Button btnMasterLvlAdd;
+		private System.Windows.Forms.Button btnMasterLvlDown;
+		private System.Windows.Forms.Button btnMasterLvlUp;
+		private System.Windows.Forms.Button btnMasterLvlDelete;
+		private System.Windows.Forms.DataGridView masterLvlList;
 	}
 }
 

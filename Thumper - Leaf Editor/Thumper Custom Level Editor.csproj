@@ -76,6 +76,9 @@
     <Compile Include="Lvl_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Master_Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Object_Params.cs" />
     <Compile Include="Sequencer_Object.cs" />
     <Compile Include="ThumperEditor.cs">

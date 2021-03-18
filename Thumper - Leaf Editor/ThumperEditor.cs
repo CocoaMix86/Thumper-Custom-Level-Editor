@@ -37,19 +37,16 @@ namespace Thumper___Leaf_Editor
 		private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			panelLeaf.Visible = leafEditorToolStripMenuItem.Checked;
-			PanelVisibleResize();
 		}
 		//Visible - Level Editor
 		private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			panelLevel.Visible = levelEditorToolStripMenuItem.Checked;
-			PanelVisibleResize();
 		}
 		//Visible - Master Editor
 		private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			panelMaster.Visible = masterEditorToolStripMenuItem.Checked;
-			PanelVisibleResize();
 		}
 		///Toolstrip - HELP
 		//About...
