@@ -76,6 +76,7 @@
     <Compile Include="Lvl_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MasterLvlData.cs" />
     <Compile Include="Master_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +138,9 @@
   </Target>
   <ItemGroup>
     <PackageReference Include="ILMerge" Version="3.0.29" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="text assets\helptext.txt" />
   </ItemGroup>
   <Target Name="ILMerge">
     <!-- the ILMergePath property points to the location of ILMerge.exe console application -->
