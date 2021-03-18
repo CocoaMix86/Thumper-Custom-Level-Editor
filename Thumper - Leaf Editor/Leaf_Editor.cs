@@ -251,7 +251,7 @@ namespace Thumper___Leaf_Editor
 			var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
 			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save));
 			SaveLeaf(true);
-			lblLvlName.Text = $"Leaf Editor - {_save["obj_name"]}";
+			lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
 		}
 		///LEAF - SAVE AS
 		private void leafsaveAsToolStripMenuItem_Click(object sender, EventArgs e)

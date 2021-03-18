@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ControlManager;
 
 namespace Thumper___Leaf_Editor
 {
@@ -18,8 +19,8 @@ namespace Thumper___Leaf_Editor
 			get { return _workingfolder; }
 			set
 			{
-				if (_workingfolder != value)
-					this.Text = $"Thumper Custom Level Editor (working folder: {value})";
+				//if (_workingfolder != value)
+					//this.Text = $"Thumper Custom Level Editor (working folder: {value})";
 				_workingfolder = value;
 			}
 		}
@@ -79,7 +80,12 @@ namespace Thumper___Leaf_Editor
 			InitializeTracks(lvlLeafList);
 			InitializeLvlStuff();
 			//_formactive is the panel that was last set to Max
-			_formactive = panelLeaf; 
+			_formactive = panelLeaf;
+			//set panels to be resizeable
+			ControlMoverOrResizer.Init(panelLeaf);
+			ControlMoverOrResizer.Init(panelLevel);
+			ControlMoverOrResizer.Init(panelMaster);
+			ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
 
 			///import selectable objects from file and parse them into lists for manipulation
 			//splits input at "###". Each section is a collection of param_paths
@@ -147,33 +153,41 @@ namespace Thumper___Leaf_Editor
 		private void lblLeafClose_Click(object sender, EventArgs e) => leafEditorToolStripMenuItem.PerformClick();
 		private void lblLeafMax_Click(object sender, EventArgs e)
 		{
+			/*
 			panelMaster.Width = Math.Min(100, this.Width / 5);
 			panelLevel.Width = Math.Min(100, this.Width / 5);
 			PanelVisibleResize();
 			_formactive = panelLeaf;
+			*/
 		}
 		private void lblLevelMax_Click(object sender, EventArgs e)
 		{
+			/*
 			panelMaster.Width = Math.Min(100, this.Width / 4);
 			panelLevel.Width = (int)(this.Width * 0.8) - 12;
 			PanelVisibleResize();
 			_formactive = panelLevel;
+			*/
 		}
 		private void lblMasterMax_Click(object sender, EventArgs e)
 		{
+			/*
 			panelMaster.Width = (int)(this.Width * 0.8) - 12;
 			panelLevel.Width = Math.Min(100, this.Width / 4);
 			PanelVisibleResize();
 			_formactive = panelMaster;
+			*/
 		}
 		private void FormLeafEditor_Resize(object sender, EventArgs e)
 		{
+			/*
 			panelMaster.Width = 100;
 			panelLevel.Width = 100;
 			panelLeaf.Width = 100;
 			if (_formactive != panelLeaf && _formactive != null)
 				_formactive.Width = (int)(this.Width * 0.8) - 12;
 			PanelVisibleResize();
+			*/
 		}
 		///Resizes and Repositions panels based on which ones are visible
 		public void PanelVisibleResize()

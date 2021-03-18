@@ -62,6 +62,7 @@
     <Compile Include="AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlMoverOrResizer.cs" />
     <Compile Include="Interpolator.cs">
       <SubType>Form</SubType>
     </Compile>

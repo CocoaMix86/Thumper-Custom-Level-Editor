@@ -133,7 +133,6 @@ namespace Thumper___Leaf_Editor
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
 			//enable/disable seqObjs buttons
 			btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
-			btnLvlLoopRefresh.Enabled = _lvlleafs.Count > 0;
 
 			lvlSeqObjs.ColumnCount = _lvllength;
 			GenerateColumnStyle(lvlSeqObjs, _lvllength);
@@ -168,7 +167,7 @@ namespace Thumper___Leaf_Editor
 				lblLvlName.Text = "Level Editor";
 				//set saved flag to true, because nothing is loaded
 				SaveLvl(true);
-				lvlsaveToolStripMenuItem2.PerformClick();
+				lvlsaveAsToolStripMenuItem.PerformClick();
 			}
 		}
 		/// LVL SAVE
@@ -209,8 +208,9 @@ namespace Thumper___Leaf_Editor
 					//set a few visual elements to show what file is being worked on
 					lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
 					_loadedlvl = sfd.FileName;
+					workingfolder = Path.GetFileName(_loadedlvl);
+					//set save flag
 					SaveLvl(true);
-					lvlPanelNew.Visible = false;
 				}
 			}
 		}
@@ -226,6 +226,9 @@ namespace Thumper___Leaf_Editor
 						//load json from file into _load. The regex strips any comments from the text.
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLvl(_load);
+						//select the first leaf
+						if (_lvlleafs.Count > 0)
+							lvlLeafList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
 					}
 				}
 			}
@@ -245,14 +248,22 @@ namespace Thumper___Leaf_Editor
 				ofd.Filter = "Thumper Leaf File (*.txt)|*.txt";
 				ofd.Title = "Load a Thumper Leaf file";
 				if (ofd.ShowDialog() == DialogResult.OK) {
+					//parse leaf to JSON
 					dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 					//check if file being loaded is actually a leaf. Can do so by checking the JSON key
 					if ((string)_load["obj_type"] != "SequinLeaf") {
-						MessageBox.Show("This does not appear to be a leaf file!");
+						MessageBox.Show("This does not appear to be a leaf file!", "Leaf load error");
 						return;
 					}
-					//update working folder to wherever this leaf is
-					workingfolder = Path.GetDirectoryName(ofd.FileName);
+					//check if leaf exists in the same folder as the lvl. If not, allow user to copy file.
+					//this is why I utilize workingfolder
+					if (Path.GetDirectoryName(ofd.FileName) != workingfolder) {
+						if (MessageBox.Show("The leaf you chose does not exist in the same folder as this lvl. Do you want to copy it to this folder and load it?", "Leaf load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+							File.Copy(ofd.FileName, $@"{workingfolder}\{Path.GetFileName(ofd.FileName)}");
+						else
+							return;
+					}
+					//add leaf data to the list
 					_lvlleafs.Add(new LvlLeafData() {
 						leafname = (string)_load["obj_name"],
 						beats = (int)_load["beat_cnt"],
@@ -388,11 +399,13 @@ namespace Thumper___Leaf_Editor
 		private void btnlvlPanelOpen_Click(object sender, EventArgs e)
 		{
 			lvlopenToolStripMenuItem.PerformClick();
+			LvlEditorVisible();
 		}
 
 		private void btnlvlPanelNew_Click(object sender, EventArgs e)
 		{
 			lvlnewToolStripMenuItem1.PerformClick();
+			LvlEditorVisible();
 		}
 		#endregion
 
@@ -412,7 +425,6 @@ namespace Thumper___Leaf_Editor
 			workingfolder = Path.GetDirectoryName(_loadedlvl);
 			//set some visual elements
 			lblLvlName.Text = $@"Lvl Editor - {_load["obj_name"]}";
-			lvlPanelNew.Visible = false;
 
 			///Clear DGVs so new data can load
 			lvlLoopTracks.Rows.Clear();
@@ -500,12 +512,23 @@ namespace Thumper___Leaf_Editor
 			SaveLvl(true);
 		}
 
+		public void LvlEditorVisible()
+		{
+			if (workingfolder != null) {
+				foreach (Control c in panelLevel.Controls)
+					c.Visible = true;
+				btnlvlPanelNew.Visible = false;
+				btnlvlPanelOpen.Visible = false;
+			}
+		}
+
 		public void LvlUpdatePaths(int index)
 		{
 			lvlLeafPaths.Rows.Clear();
 			//for each path in the selected leaf, populate the paths DGV
 			foreach (string path in _lvlleafs[index].paths)
 				lvlLeafPaths.Rows.Add(new object[] { path });
+			//monke
 		}
 
 		public void LvlReloadSamples()
