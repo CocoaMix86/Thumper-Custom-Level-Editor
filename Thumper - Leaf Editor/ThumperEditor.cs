@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.ComponentModel;
 using System.Reflection;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
@@ -15,21 +16,30 @@ namespace Thumper___Leaf_Editor
 {
 	public partial class FormLeafEditor : Form
 	{
+		#region Variables
 		public string workingfolder {
 			get { return _workingfolder; }
 			set
 			{
-				//if (_workingfolder != value)
-					//this.Text = $"Thumper Custom Level Editor (working folder: {value})";
 				_workingfolder = value;
+				lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
+				lvlsinworkfolder.Add("");
+				lvlsinworkfolder.Sort();
+				///add lvl list as datasources to dropdowns
+				dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
+				dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
+				dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
+				dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
 			}
 		}
 		private string _workingfolder;
 		public dynamic helptext;
+		public List<string> lvlsinworkfolder = new List<string>();
+		Panel _formactive;
+		#endregion
+
 
 		public FormLeafEditor() => InitializeComponent();
-
-		Panel _formactive;
 
 		///Toolstrip - INTERPOLATOR
 		private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e) => new Interpolator().Show();
@@ -63,7 +73,7 @@ namespace Thumper___Leaf_Editor
 		///FORM CLOSING - check if anything is unsaved
 		private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!_saveleaf || !_savelvl)
+			if (!_saveleaf || !_savelvl || !_savemaster)
 			{
 				if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No)
 					e.Cancel = true;
@@ -142,9 +152,6 @@ namespace Thumper___Leaf_Editor
 			numericUpDown_LeafLength_ValueChanged(null, null);
 			//tell the app that everything is saved, because it just initialized
 			SaveLeaf(true);
-
-
-			lblLeafMax_Click(null, null);
 		}
 
 		//////
@@ -219,9 +226,8 @@ namespace Thumper___Leaf_Editor
 		/// 
 		/// VARIOUS POPUPS FOR HELP TEXT
 		/// 
-		private void lblMasterlvllistHelp_Click(object sender, EventArgs e)
-		{
-			MessageBox.Show((string)helptext["masterLvlList"], "Master Editor Help");
-		}
+		private void lblMasterlvllistHelp_Click(object sender, EventArgs e) => MessageBox.Show((string)helptext["masterLvlList"], "Master Editor Help");
+		private void lblMasterRestHelp_Click(object sender, EventArgs e) => MessageBox.Show((string) helptext["masterRest"], "Master Editor Help");
+		private void lblMasterCheckpointLeaderHelp_Click(object sender, EventArgs e) => MessageBox.Show((string)helptext["masterCheckLeader"], "Master Editor Help");
 	}
 }
