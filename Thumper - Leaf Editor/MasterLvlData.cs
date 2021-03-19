@@ -8,5 +8,7 @@ namespace Thumper___Leaf_Editor
 		public string lvlname { get; set; }
 		public bool playplus { get; set; }
 		public bool checkpoint { get; set; }
+		public string checkpoint_leader { get; set; }
+		public string rest { get; set; }
 	}
 }

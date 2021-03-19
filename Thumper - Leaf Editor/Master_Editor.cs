@@ -16,8 +16,9 @@ namespace Thumper___Leaf_Editor
 	public partial class FormLeafEditor : Form
 	{
 		#region Variables
-		bool _savemaster;
+		bool _savemaster = true;
 		string _loadedmaster;
+		string _loadedmastertemp;
 
 		ObservableCollection<MasterLvlData> _masterlvls = new ObservableCollection<MasterLvlData>();
 		#endregion
@@ -31,7 +32,24 @@ namespace Thumper___Leaf_Editor
 		//Row Enter (load the selected lvl)
 		private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
+			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+				string _file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
+				dynamic _load;
+				try {
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
+				}
+				catch {
+					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
+					return;
+				}
 
+				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
+				LoadLvl(_load);
+
+				//load lvl specific things into dropdown menues
+				dropMasterLvlLeader.SelectedItem = _masterlvls[e.RowIndex].checkpoint_leader;
+				dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
+			}
 		}
 		//Cell value changed (for checkboxes)
 		private void masterLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -62,13 +80,44 @@ namespace Thumper___Leaf_Editor
 			//set lvl save flag to false
 			SaveMaster(false);
 		}
+
+		private void masternewToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
+				using (var ofd = new OpenFileDialog()) {
+					ofd.Filter = "Thumper Master File (*.txt)|*.txt";
+					ofd.Title = "Load a Thumper Master file";
+					if (ofd.ShowDialog() == DialogResult.OK) {
+						_loadedmastertemp = ofd.FileName;
+						//load json from file into _load. The regex strips any comments from the text.
+						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+						LoadMaster(_load);
+					}
+				}
+			}
+		}
+
+		private void mastersaveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
 		#endregion
 
 		#region Buttons
 		///         ///
 		/// BUTTONS ///
 		///         ///
-		        
+
 		private void btnMasterLvlDelete_Click(object sender, EventArgs e) => _masterlvls.RemoveAt(masterLvlList.CurrentRow.Index);
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
@@ -145,7 +194,7 @@ namespace Thumper___Leaf_Editor
 		///         ///
 		/// METHODS ///
 		///         ///
-		///         
+		         
 		public void InitializeMasterStuff()
 		{
 			_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
@@ -173,6 +222,40 @@ namespace Thumper___Leaf_Editor
 				ReadOnly = false
 			};
 			masterLvlList.Columns.Add(_dgvmasterplayplus);
+		}
+
+		public void LoadMaster(dynamic _load)
+		{
+			if ((string)_load["obj_type"] != "SequinMaster") {
+				MessageBox.Show("This does not appear to be a master file!");
+				return;
+			}
+			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
+			_loadedmaster = _loadedmastertemp;
+			workingfolder = Path.GetDirectoryName(_loadedmaster);
+			//set some visual elements
+			lblMasterName.Text = $@"Master Editor - {_load["obj_name"]}";
+
+			///Clear form elements so new data can load
+			_masterlvls.Clear();
+
+			///load lvls associated with this master
+			foreach (dynamic _lvl in _load["groupings"]) {
+				_masterlvls.Add(new MasterLvlData() {
+					lvlname = _lvl["lvl_name"],
+					checkpoint = _lvl["checkpoint"],
+					playplus = _lvl["play_plus"],
+					checkpoint_leader = _lvl["checkpoint_leader_lvl_name"],
+					rest = _lvl["rest_lvl_name"]
+				});
+			}
+			///load stand-alone master data
+			dropMasterSkybox.SelectedItem = _load["skybox_name"];
+			dropMasterIntro.SelectedItem = _load["intro_lvl_name"];
+			dropMasterCheck.SelectedItem = _load["checkpoint_lvl_name"];
+			//select the first lvl
+			if (_masterlvls.Count > 0)
+				masterLvlList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
 		}
 
 		public void SaveMaster(bool save)

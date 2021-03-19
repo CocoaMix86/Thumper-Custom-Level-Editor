@@ -18,7 +18,17 @@ namespace Thumper___Leaf_Editor
 		#region Variables
 		bool _savelvl = true;
 		int _lvllength;
-		string _loadedlvl;
+		public string _loadedlvl {
+			get { return loadedlvl; }
+			set
+			{
+				if (loadedlvl != value) {
+					loadedlvl = value;
+					LvlEditorVisible();
+				}
+			}
+		}
+		private string loadedlvl;
 		string _loadedlvltemp;
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
@@ -183,6 +193,8 @@ namespace Thumper___Leaf_Editor
 			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save));
 			SaveLvl(true);
 			lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
+			//reload samples on save
+			LvlReloadSamples();
 		}
 		/// LVL SAVE AS
 		private void lvlsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -226,9 +238,6 @@ namespace Thumper___Leaf_Editor
 						//load json from file into _load. The regex strips any comments from the text.
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLvl(_load);
-						//select the first leaf
-						if (_lvlleafs.Count > 0)
-							lvlLeafList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
 					}
 				}
 			}
@@ -396,13 +405,11 @@ namespace Thumper___Leaf_Editor
 		private void btnlvlPanelOpen_Click(object sender, EventArgs e)
 		{
 			lvlopenToolStripMenuItem.PerformClick();
-			LvlEditorVisible();
 		}
 
 		private void btnlvlPanelNew_Click(object sender, EventArgs e)
 		{
 			lvlnewToolStripMenuItem1.PerformClick();
-			LvlEditorVisible();
 		}
 		#endregion
 
@@ -429,7 +436,7 @@ namespace Thumper___Leaf_Editor
 			lvlLeafList.Rows.Clear();
 			lvlSeqObjs.Rows.Clear();
 
-			///populate the non-DGV elements on the form with info, stored in line 1 of the file
+			///populate the non-DGV elements on the form with info from the JSON
 			NUD_lvlApproach.Value = (decimal)_load["approach_beats"];
 			NUD_lvlVolume.Value = (decimal)_load["volume"];
 			dropLvlInput.Text = (string)_load["input_allowed"];
@@ -461,6 +468,9 @@ namespace Thumper___Leaf_Editor
 				r.HeaderCell.Value = "Volume Track " + r.Index;
 			///mark that lvl is saved (just freshly loaded)
 			SaveLvl(true);
+			//select the first leaf
+			if (_lvlleafs.Count > 0)
+				lvlLeafList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
 		}
 
 		public void InitializeLvlStuff()
@@ -532,7 +542,7 @@ namespace Thumper___Leaf_Editor
 		{
 			_lvlsamples.Clear();
 			//find all samp_ files in the level folder
-			var _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt").ToList();
+			var _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt");
 			//iterate over each file
 			foreach (string f in _sampfiles) {
 				//parse file to JSON
