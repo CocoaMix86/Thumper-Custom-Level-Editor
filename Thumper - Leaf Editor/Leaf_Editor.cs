@@ -723,6 +723,9 @@ namespace Thumper___Leaf_Editor
 			btnTrackColorDialog.Enabled = true;
 			NUD_TrackDoubleclick.Enabled = true;
 			NUD_TrackHighlight.Enabled = true;
+			btnTrackDelete.Enabled = _tracks.Count > 0;
+			btnTrackUp.Enabled = _tracks.Count > 1;
+			btnTrackDown.Enabled = _tracks.Count > 1;
 			SaveLeaf(true);
 		}
 
