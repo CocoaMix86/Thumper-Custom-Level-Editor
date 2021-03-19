@@ -17,7 +17,17 @@ namespace Thumper___Leaf_Editor
 	{
 		#region Variables
 		bool _savemaster = true;
-		string _loadedmaster;
+		string _loadedmaster {
+			get { return loadedmaster; }
+			set
+			{
+				if (loadedmaster != value) {
+					loadedmaster = value;
+					MasterEditorVisible();
+				}
+			}
+		}
+		private string loadedmaster;
 		string _loadedmastertemp;
 
 		ObservableCollection<MasterLvlData> _masterlvls = new ObservableCollection<MasterLvlData>();
@@ -83,7 +93,14 @@ namespace Thumper___Leaf_Editor
 
 		private void masternewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-
+			if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
+				//reset things to default values
+				_masterlvls.Clear();
+				lblMasterName.Text = "Master Editor";
+				//set saved flag to true, because nothing is loaded
+				SaveMaster(true);
+				mastersaveAsToolStripMenuItem.PerformClick();
+			}
 		}
 
 		private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,12 +121,41 @@ namespace Thumper___Leaf_Editor
 
 		private void mastersaveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-
+			//if _loadedmaster is somehow not set, force Save As instead
+			if (_loadedmaster.Length < 1) {
+				mastersaveAsToolStripMenuItem.PerformClick();
+				return;
+			}
+			//write contents direct to file without prompting save dialog
+			var _save = MasterBuildSave();
+			File.WriteAllText(_loadedmaster, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			SaveMaster(true);
+			lblMasterName.Text = $"Master Editor - sequin.master";
 		}
 
 		private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-
+			using (var sfd = new SaveFileDialog()) {
+				//filter .txt only
+				sfd.Filter = "Thumper Master File (*.txt)|*.txt";
+				sfd.FilterIndex = 1;
+				if (sfd.ShowDialog() == DialogResult.OK) {
+					//separate path and filename
+					string storePath = Path.GetDirectoryName(sfd.FileName);
+					string tempFileName = Path.GetFileName(sfd.FileName);
+					//get contents to save
+					var _save = MasterBuildSave();
+					//serialize JSON object to a string, and write it to the file
+					sfd.FileName = $@"{storePath}\master_sequin.txt";
+					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
+					//set a few visual elements to show what file is being worked on
+					lblMasterName.Text = $"Master Editor - sequin.master";
+					_loadedmaster = sfd.FileName;
+					workingfolder = Path.GetDirectoryName(_loadedmaster);
+					//set save flag
+					SaveMaster(true);
+				}
+			}
 		}
 		#endregion
 
@@ -134,13 +180,13 @@ namespace Thumper___Leaf_Editor
 					}
 					//check if lvl exists in the same folder as the master. If not, allow user to copy file.
 					//this is why I utilize workingfolder
-					/*
+					
 					if (Path.GetDirectoryName(ofd.FileName) != workingfolder) {
 						if (MessageBox.Show("The lvl you chose does not exist in the same folder as this master. Do you want to copy it to this folder and load it?", "Lvl load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
 							File.Copy(ofd.FileName, $@"{workingfolder}\{Path.GetFileName(ofd.FileName)}");
 						else
 							return;
-					}*/
+					}
 					//add leaf data to the list
 					_masterlvls.Add(new MasterLvlData() {
 						lvlname = (string)_load["obj_name"],
@@ -188,13 +234,23 @@ namespace Thumper___Leaf_Editor
 			}
 			catch { }
 		}
+
+		private void btnMasterPanelNew_Click(object sender, EventArgs e)
+		{
+			masternewToolStripMenuItem.PerformClick();
+		}
+
+		private void btnMasterPanelOpen_Click(object sender, EventArgs e)
+		{
+			masteropenToolStripMenuItem.PerformClick();
+		}
 		#endregion
 
 		#region Methods
 		///         ///
 		/// METHODS ///
 		///         ///
-		         
+
 		public void InitializeMasterStuff()
 		{
 			_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
@@ -231,10 +287,10 @@ namespace Thumper___Leaf_Editor
 				return;
 			}
 			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
+			workingfolder = Path.GetDirectoryName(_loadedmastertemp);
 			_loadedmaster = _loadedmastertemp;
-			workingfolder = Path.GetDirectoryName(_loadedmaster);
 			//set some visual elements
-			lblMasterName.Text = $@"Master Editor - {_load["obj_name"]}";
+			lblMasterName.Text = $"Master Editor - sequin.master";
 
 			///Clear form elements so new data can load
 			_masterlvls.Clear();
@@ -243,6 +299,7 @@ namespace Thumper___Leaf_Editor
 			foreach (dynamic _lvl in _load["groupings"]) {
 				_masterlvls.Add(new MasterLvlData() {
 					lvlname = _lvl["lvl_name"],
+					gatename = _lvl["gate_name"],
 					checkpoint = _lvl["checkpoint"],
 					playplus = _lvl["play_plus"],
 					checkpoint_leader = _lvl["checkpoint_leader_lvl_name"],
@@ -253,9 +310,21 @@ namespace Thumper___Leaf_Editor
 			dropMasterSkybox.SelectedItem = _load["skybox_name"];
 			dropMasterIntro.SelectedItem = _load["intro_lvl_name"];
 			dropMasterCheck.SelectedItem = _load["checkpoint_lvl_name"];
-			//select the first lvl
+			///set save flag (master just loaded, has no changes)
+			SaveMaster(true);
+			///select the first lvl
 			if (_masterlvls.Count > 0)
 				masterLvlList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
+		}
+
+		public void MasterEditorVisible()
+		{
+			if (workingfolder != null) {
+				foreach (Control c in panelMaster.Controls)
+					c.Visible = true;
+				btnMasterPanelNew.Visible = false;
+				btnMasterPanelOpen.Visible = false;
+			}
 		}
 
 		public void SaveMaster(bool save)
@@ -268,6 +337,30 @@ namespace Thumper___Leaf_Editor
 			else {
 				lblMasterName.Text = lblMasterName.Text.Replace(" (unsaved)", "");
 			}
+		}
+
+		public JObject MasterBuildSave()
+		{
+			JObject _save = new JObject();
+			_save.Add("obj_type", "SequinMaster");
+			_save.Add("obj_name", "sequin.master");
+			_save.Add("skybox_name", dropMasterSkybox.SelectedText);
+			_save.Add("intro_lvl_name", dropMasterIntro.SelectedText);
+			JArray groupings = new JArray();
+			foreach (MasterLvlData group in _masterlvls) {
+				JObject s = new JObject();
+				s.Add("lvl_name", group.lvlname ?? "");
+				s.Add("gate_name", group.gatename ?? "");
+				s.Add("checkpoint", group.checkpoint.ToString());
+				s.Add("checkpoint_leader_lvl_name", group.checkpoint_leader ?? "");
+				s.Add("rest_lvl_name", group.rest ?? "");
+				s.Add("play_plus", group.playplus.ToString());
+
+				groupings.Add(s);
+			}
+			_save.Add("groupings", groupings);
+			_save.Add("checkpoint_lvl_name", dropMasterCheck.SelectedText);
+			return _save;
 		}
 		#endregion
 	}

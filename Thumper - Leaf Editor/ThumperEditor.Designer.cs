@@ -164,6 +164,8 @@
 			this.label28 = new System.Windows.Forms.Label();
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
 			this.panelMaster = new System.Windows.Forms.Panel();
+			this.lblMasterRestHelp = new System.Windows.Forms.Label();
+			this.lblMasterCheckpointLeaderHelp = new System.Windows.Forms.Label();
 			this.dropMasterLvlRest = new System.Windows.Forms.ComboBox();
 			this.label35 = new System.Windows.Forms.Label();
 			this.dropMasterLvlLeader = new System.Windows.Forms.ComboBox();
@@ -187,8 +189,8 @@
 			this.lblMasterName = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-			this.lblMasterCheckpointLeaderHelp = new System.Windows.Forms.Label();
-			this.lblMasterRestHelp = new System.Windows.Forms.Label();
+			this.btnMasterPanelOpen = new System.Windows.Forms.Button();
+			this.btnMasterPanelNew = new System.Windows.Forms.Button();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -2028,7 +2030,9 @@
 			// 
 			this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelMaster.Controls.Add(this.btnMasterPanelOpen);
 			this.panelMaster.Controls.Add(this.lblMasterRestHelp);
+			this.panelMaster.Controls.Add(this.btnMasterPanelNew);
 			this.panelMaster.Controls.Add(this.lblMasterCheckpointLeaderHelp);
 			this.panelMaster.Controls.Add(this.dropMasterLvlRest);
 			this.panelMaster.Controls.Add(this.label35);
@@ -2056,6 +2060,36 @@
 			this.panelMaster.Size = new System.Drawing.Size(445, 296);
 			this.panelMaster.TabIndex = 47;
 			// 
+			// lblMasterRestHelp
+			// 
+			this.lblMasterRestHelp.AutoSize = true;
+			this.lblMasterRestHelp.BackColor = System.Drawing.Color.Transparent;
+			this.lblMasterRestHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.lblMasterRestHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblMasterRestHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+			this.lblMasterRestHelp.Location = new System.Drawing.Point(235, 247);
+			this.lblMasterRestHelp.Name = "lblMasterRestHelp";
+			this.lblMasterRestHelp.Size = new System.Drawing.Size(16, 16);
+			this.lblMasterRestHelp.TabIndex = 107;
+			this.lblMasterRestHelp.Text = "?";
+			this.lblMasterRestHelp.Visible = false;
+			this.lblMasterRestHelp.Click += new System.EventHandler(this.lblMasterRestHelp_Click);
+			// 
+			// lblMasterCheckpointLeaderHelp
+			// 
+			this.lblMasterCheckpointLeaderHelp.AutoSize = true;
+			this.lblMasterCheckpointLeaderHelp.BackColor = System.Drawing.Color.Transparent;
+			this.lblMasterCheckpointLeaderHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.lblMasterCheckpointLeaderHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblMasterCheckpointLeaderHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+			this.lblMasterCheckpointLeaderHelp.Location = new System.Drawing.Point(113, 247);
+			this.lblMasterCheckpointLeaderHelp.Name = "lblMasterCheckpointLeaderHelp";
+			this.lblMasterCheckpointLeaderHelp.Size = new System.Drawing.Size(16, 16);
+			this.lblMasterCheckpointLeaderHelp.TabIndex = 106;
+			this.lblMasterCheckpointLeaderHelp.Text = "?";
+			this.lblMasterCheckpointLeaderHelp.Visible = false;
+			this.lblMasterCheckpointLeaderHelp.Click += new System.EventHandler(this.lblMasterCheckpointLeaderHelp_Click);
+			// 
 			// dropMasterLvlRest
 			// 
 			this.dropMasterLvlRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -2068,6 +2102,7 @@
 			this.dropMasterLvlRest.Name = "dropMasterLvlRest";
 			this.dropMasterLvlRest.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterLvlRest.TabIndex = 105;
+			this.dropMasterLvlRest.Visible = false;
 			// 
 			// label35
 			// 
@@ -2079,6 +2114,7 @@
 			this.label35.Size = new System.Drawing.Size(46, 13);
 			this.label35.TabIndex = 104;
 			this.label35.Text = "Rest Lvl";
+			this.label35.Visible = false;
 			// 
 			// dropMasterLvlLeader
 			// 
@@ -2092,6 +2128,7 @@
 			this.dropMasterLvlLeader.Name = "dropMasterLvlLeader";
 			this.dropMasterLvlLeader.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterLvlLeader.TabIndex = 103;
+			this.dropMasterLvlLeader.Visible = false;
 			// 
 			// label34
 			// 
@@ -2103,6 +2140,7 @@
 			this.label34.Size = new System.Drawing.Size(114, 13);
 			this.label34.TabIndex = 102;
 			this.label34.Text = "Checkpoint Leader Lvl";
+			this.label34.Visible = false;
 			// 
 			// label33
 			// 
@@ -2114,6 +2152,7 @@
 			this.label33.Size = new System.Drawing.Size(78, 13);
 			this.label33.TabIndex = 101;
 			this.label33.Text = "Checkpoint Lvl";
+			this.label33.Visible = false;
 			// 
 			// dropMasterCheck
 			// 
@@ -2127,6 +2166,7 @@
 			this.dropMasterCheck.Name = "dropMasterCheck";
 			this.dropMasterCheck.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterCheck.TabIndex = 100;
+			this.dropMasterCheck.Visible = false;
 			// 
 			// label32
 			// 
@@ -2138,6 +2178,7 @@
 			this.label32.Size = new System.Drawing.Size(45, 13);
 			this.label32.TabIndex = 99;
 			this.label32.Text = "Intro Lvl";
+			this.label32.Visible = false;
 			// 
 			// dropMasterIntro
 			// 
@@ -2151,6 +2192,7 @@
 			this.dropMasterIntro.Name = "dropMasterIntro";
 			this.dropMasterIntro.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterIntro.TabIndex = 98;
+			this.dropMasterIntro.Visible = false;
 			// 
 			// dropMasterSkybox
 			// 
@@ -2164,6 +2206,7 @@
 			this.dropMasterSkybox.Name = "dropMasterSkybox";
 			this.dropMasterSkybox.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterSkybox.TabIndex = 95;
+			this.dropMasterSkybox.Visible = false;
 			// 
 			// label31
 			// 
@@ -2175,6 +2218,7 @@
 			this.label31.Size = new System.Drawing.Size(42, 13);
 			this.label31.TabIndex = 97;
 			this.label31.Text = "Skybox";
+			this.label31.Visible = false;
 			// 
 			// label13
 			// 
@@ -2186,6 +2230,7 @@
 			this.label13.Size = new System.Drawing.Size(92, 13);
 			this.label13.TabIndex = 96;
 			this.label13.Text = "Master Options";
+			this.label13.Visible = false;
 			// 
 			// lblMasterlvllistHelp
 			// 
@@ -2199,6 +2244,7 @@
 			this.lblMasterlvllistHelp.Size = new System.Drawing.Size(16, 16);
 			this.lblMasterlvllistHelp.TabIndex = 95;
 			this.lblMasterlvllistHelp.Text = "?";
+			this.lblMasterlvllistHelp.Visible = false;
 			this.lblMasterlvllistHelp.Click += new System.EventHandler(this.lblMasterlvllistHelp_Click);
 			// 
 			// label30
@@ -2211,6 +2257,7 @@
 			this.label30.Size = new System.Drawing.Size(48, 13);
 			this.label30.TabIndex = 94;
 			this.label30.Text = "Lvl List";
+			this.label30.Visible = false;
 			// 
 			// btnMasterLvlAdd
 			// 
@@ -2225,6 +2272,7 @@
 			this.btnMasterLvlAdd.Text = "+";
 			this.btnMasterLvlAdd.UseCompatibleTextRendering = true;
 			this.btnMasterLvlAdd.UseVisualStyleBackColor = false;
+			this.btnMasterLvlAdd.Visible = false;
 			this.btnMasterLvlAdd.Click += new System.EventHandler(this.btnMasterLvlAdd_Click);
 			// 
 			// btnMasterLvlDown
@@ -2241,6 +2289,7 @@
 			this.btnMasterLvlDown.Text = "↓";
 			this.btnMasterLvlDown.UseCompatibleTextRendering = true;
 			this.btnMasterLvlDown.UseVisualStyleBackColor = false;
+			this.btnMasterLvlDown.Visible = false;
 			this.btnMasterLvlDown.Click += new System.EventHandler(this.btnMasterLvlDown_Click);
 			// 
 			// btnMasterLvlUp
@@ -2257,6 +2306,7 @@
 			this.btnMasterLvlUp.Text = "↑";
 			this.btnMasterLvlUp.UseCompatibleTextRendering = true;
 			this.btnMasterLvlUp.UseVisualStyleBackColor = false;
+			this.btnMasterLvlUp.Visible = false;
 			this.btnMasterLvlUp.Click += new System.EventHandler(this.btnMasterLvlUp_Click);
 			// 
 			// btnMasterLvlDelete
@@ -2273,6 +2323,7 @@
 			this.btnMasterLvlDelete.Text = "-";
 			this.btnMasterLvlDelete.UseCompatibleTextRendering = true;
 			this.btnMasterLvlDelete.UseVisualStyleBackColor = false;
+			this.btnMasterLvlDelete.Visible = false;
 			this.btnMasterLvlDelete.Click += new System.EventHandler(this.btnMasterLvlDelete_Click);
 			// 
 			// masterLvlList
@@ -2324,6 +2375,7 @@
 			this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.masterLvlList.Size = new System.Drawing.Size(295, 185);
 			this.masterLvlList.TabIndex = 79;
+			this.masterLvlList.Visible = false;
 			this.masterLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellValueChanged);
 			this.masterLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_RowEnter);
 			// 
@@ -2365,33 +2417,31 @@
 			this.lblMasterName.TabIndex = 49;
 			this.lblMasterName.Text = "Master Editor";
 			// 
-			// lblMasterCheckpointLeaderHelp
+			// btnMasterPanelOpen
 			// 
-			this.lblMasterCheckpointLeaderHelp.AutoSize = true;
-			this.lblMasterCheckpointLeaderHelp.BackColor = System.Drawing.Color.Transparent;
-			this.lblMasterCheckpointLeaderHelp.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lblMasterCheckpointLeaderHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterCheckpointLeaderHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-			this.lblMasterCheckpointLeaderHelp.Location = new System.Drawing.Point(113, 247);
-			this.lblMasterCheckpointLeaderHelp.Name = "lblMasterCheckpointLeaderHelp";
-			this.lblMasterCheckpointLeaderHelp.Size = new System.Drawing.Size(16, 16);
-			this.lblMasterCheckpointLeaderHelp.TabIndex = 106;
-			this.lblMasterCheckpointLeaderHelp.Text = "?";
-			this.lblMasterCheckpointLeaderHelp.Click += new System.EventHandler(this.lblMasterCheckpointLeaderHelp_Click);
+			this.btnMasterPanelOpen.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMasterPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterPanelOpen.Location = new System.Drawing.Point(9, 80);
+			this.btnMasterPanelOpen.Name = "btnMasterPanelOpen";
+			this.btnMasterPanelOpen.Size = new System.Drawing.Size(108, 40);
+			this.btnMasterPanelOpen.TabIndex = 95;
+			this.btnMasterPanelOpen.Text = "Open Master";
+			this.btnMasterPanelOpen.UseVisualStyleBackColor = false;
+			this.btnMasterPanelOpen.Click += new System.EventHandler(this.btnMasterPanelOpen_Click);
 			// 
-			// lblMasterRestHelp
+			// btnMasterPanelNew
 			// 
-			this.lblMasterRestHelp.AutoSize = true;
-			this.lblMasterRestHelp.BackColor = System.Drawing.Color.Transparent;
-			this.lblMasterRestHelp.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lblMasterRestHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterRestHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-			this.lblMasterRestHelp.Location = new System.Drawing.Point(235, 247);
-			this.lblMasterRestHelp.Name = "lblMasterRestHelp";
-			this.lblMasterRestHelp.Size = new System.Drawing.Size(16, 16);
-			this.lblMasterRestHelp.TabIndex = 107;
-			this.lblMasterRestHelp.Text = "?";
-			this.lblMasterRestHelp.Click += new System.EventHandler(this.lblMasterRestHelp_Click);
+			this.btnMasterPanelNew.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMasterPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterPanelNew.Location = new System.Drawing.Point(9, 38);
+			this.btnMasterPanelNew.Name = "btnMasterPanelNew";
+			this.btnMasterPanelNew.Size = new System.Drawing.Size(108, 40);
+			this.btnMasterPanelNew.TabIndex = 94;
+			this.btnMasterPanelNew.Text = "New Master";
+			this.btnMasterPanelNew.UseVisualStyleBackColor = false;
+			this.btnMasterPanelNew.Click += new System.EventHandler(this.btnMasterPanelNew_Click);
 			// 
 			// FormLeafEditor
 			// 
@@ -2587,6 +2637,8 @@
 		private System.Windows.Forms.Label label34;
 		private System.Windows.Forms.Label lblMasterRestHelp;
 		private System.Windows.Forms.Label lblMasterCheckpointLeaderHelp;
+		private System.Windows.Forms.Button btnMasterPanelOpen;
+		private System.Windows.Forms.Button btnMasterPanelNew;
 	}
 }
 

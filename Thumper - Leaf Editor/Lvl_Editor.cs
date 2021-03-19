@@ -425,8 +425,8 @@ namespace Thumper___Leaf_Editor
 				return;
 			}
 			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
+			workingfolder = Path.GetDirectoryName(_loadedlvltemp);
 			_loadedlvl = _loadedlvltemp;
-			workingfolder = Path.GetDirectoryName(_loadedlvl);
 			//set some visual elements
 			lblLvlName.Text = $@"Lvl Editor - {_load["obj_name"]}";
 
