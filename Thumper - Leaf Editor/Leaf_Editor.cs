@@ -243,6 +243,19 @@ namespace Thumper___Leaf_Editor
 			//sets flag that leaf has unsaved changes
 			SaveLeaf(false);
 		}
+		///LEAF - NEW
+		private void newToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
+				_tracks.Clear();
+				trackEditor.Rows.Clear();
+				lblTrackFileName.Text = "Leaf Editor";
+				dropObjects.Enabled = dropParamPath.Enabled = btnTrackApply.Enabled = false;
+				//
+				SaveLeaf(true);
+				leafsaveAsToolStripMenuItem_Click(null, null);
+			}
+		}
 		///LEAF - SAVE FILE
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -507,19 +520,6 @@ namespace Thumper___Leaf_Editor
 			//call method to update coloring of track
 			TrackUpdateHighlighting(trackEditor.CurrentRow);
 		}
-		///Sets up new leaf file
-		private void newToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-				_tracks.Clear();
-				trackEditor.Rows.Clear();
-				lblTrackFileName.Text = "Leaf Editor";
-				dropObjects.Enabled = dropParamPath.Enabled = btnTrackApply.Enabled = false;
-				//
-				SaveLeaf(true);
-				leafsaveAsToolStripMenuItem.PerformClick();
-			}
-		}
 
 		private void btnLeafPanelNew_Click(object sender, EventArgs e)
 		{
@@ -551,7 +551,7 @@ namespace Thumper___Leaf_Editor
 		public void InitializeTracks(DataGridView grid)
 		{
 			//track editor cell formatting
-			grid.DefaultCellStyle.Font = new Font(new FontFamily("Arial"), 12, FontStyle.Bold);
+			grid.DefaultCellStyle.Font = new Font(new FontFamily("Arial"), 10, FontStyle.Bold);
 			grid.DefaultCellStyle.ForeColor = Color.FromArgb(0, 0, 0);
 			grid.DefaultCellStyle.SelectionBackColor = Color.FromName("Highlight");
 			grid.DefaultCellStyle.SelectionForeColor = Color.FromName("HighlightText");

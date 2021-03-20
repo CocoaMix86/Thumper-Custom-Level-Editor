@@ -122,7 +122,7 @@ namespace Thumper___Leaf_Editor
 				lblMasterName.Text = "Master Editor";
 				//set saved flag to true, because nothing is loaded
 				SaveMaster(true);
-				mastersaveAsToolStripMenuItem.PerformClick();
+				mastersaveAsToolStripMenuItem_Click(null, null);
 			}
 		}
 

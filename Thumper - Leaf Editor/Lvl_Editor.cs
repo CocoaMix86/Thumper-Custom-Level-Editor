@@ -179,7 +179,7 @@ namespace Thumper___Leaf_Editor
 				lblLvlName.Text = "Level Editor";
 				//set saved flag to true, because nothing is loaded
 				SaveLvl(true);
-				lvlsaveAsToolStripMenuItem.PerformClick();
+				lvlsaveAsToolStripMenuItem_Click(null, null);
 			}
 		}
 		/// LVL SAVE

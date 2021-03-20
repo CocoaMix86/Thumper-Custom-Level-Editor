@@ -645,9 +645,9 @@
 			this.richRawTrackData.DetectUrls = false;
 			this.richRawTrackData.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richRawTrackData.ForeColor = System.Drawing.Color.White;
-			this.richRawTrackData.Location = new System.Drawing.Point(212, 429);
+			this.richRawTrackData.Location = new System.Drawing.Point(212, 448);
 			this.richRawTrackData.Name = "richRawTrackData";
-			this.richRawTrackData.Size = new System.Drawing.Size(419, 74);
+			this.richRawTrackData.Size = new System.Drawing.Size(1192, 74);
 			this.richRawTrackData.TabIndex = 26;
 			this.richRawTrackData.Text = "raw track data";
 			this.richRawTrackData.Visible = false;
@@ -826,7 +826,7 @@
 			this.trackEditor.RowTemplate.Height = 200;
 			this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.trackEditor.Size = new System.Drawing.Size(419, 403);
+			this.trackEditor.Size = new System.Drawing.Size(1192, 422);
 			this.trackEditor.TabIndex = 40;
 			this.trackEditor.Visible = false;
 			this.trackEditor.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDoubleClick);
@@ -863,7 +863,7 @@
 			this.panelZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelZoom.Controls.Add(this.label10);
 			this.panelZoom.Controls.Add(this.trackZoom);
-			this.panelZoom.Location = new System.Drawing.Point(481, -5);
+			this.panelZoom.Location = new System.Drawing.Point(1254, -5);
 			this.panelZoom.Name = "panelZoom";
 			this.panelZoom.Size = new System.Drawing.Size(131, 27);
 			this.panelZoom.TabIndex = 43;
@@ -874,7 +874,7 @@
 			this.btnRawImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnRawImport.BackColor = System.Drawing.Color.Gray;
 			this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnRawImport.Location = new System.Drawing.Point(136, 459);
+			this.btnRawImport.Location = new System.Drawing.Point(136, 478);
 			this.btnRawImport.Name = "btnRawImport";
 			this.btnRawImport.Size = new System.Drawing.Size(75, 44);
 			this.btnRawImport.TabIndex = 44;
@@ -929,9 +929,9 @@
 			this.panelLeaf.Controls.Add(this.label3);
 			this.panelLeaf.Controls.Add(this.label4);
 			this.panelLeaf.Controls.Add(this.dropObjects);
-			this.panelLeaf.Location = new System.Drawing.Point(607, 29);
+			this.panelLeaf.Location = new System.Drawing.Point(9, 418);
 			this.panelLeaf.Name = "panelLeaf";
-			this.panelLeaf.Size = new System.Drawing.Size(652, 536);
+			this.panelLeaf.Size = new System.Drawing.Size(1425, 555);
 			this.panelLeaf.TabIndex = 45;
 			// 
 			// btnLeafPanelOpen
@@ -983,7 +983,7 @@
 			this.lblLeafMax.AutoSize = true;
 			this.lblLeafMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLeafMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLeafMax.Location = new System.Drawing.Point(615, 1);
+			this.lblLeafMax.Location = new System.Drawing.Point(1388, 1);
 			this.lblLeafMax.Name = "lblLeafMax";
 			this.lblLeafMax.Size = new System.Drawing.Size(16, 15);
 			this.lblLeafMax.TabIndex = 52;
@@ -996,7 +996,7 @@
 			this.lblLeafClose.AutoSize = true;
 			this.lblLeafClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLeafClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLeafClose.Location = new System.Drawing.Point(631, 1);
+			this.lblLeafClose.Location = new System.Drawing.Point(1404, 1);
 			this.lblLeafClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblLeafClose.Name = "lblLeafClose";
 			this.lblLeafClose.Size = new System.Drawing.Size(16, 15);
@@ -1363,9 +1363,9 @@
 			this.panelLevel.Controls.Add(this.btnLvlSeqDelete);
 			this.panelLevel.Controls.Add(this.lblLvlName);
 			this.panelLevel.Controls.Add(this.panel1);
-			this.panelLevel.Location = new System.Drawing.Point(4, 335);
+			this.panelLevel.Location = new System.Drawing.Point(470, 29);
 			this.panelLevel.Name = "panelLevel";
-			this.panelLevel.Size = new System.Drawing.Size(802, 402);
+			this.panelLevel.Size = new System.Drawing.Size(964, 388);
 			this.panelLevel.TabIndex = 46;
 			// 
 			// label29
@@ -1688,7 +1688,7 @@
 			this.lvlLoopTracks.RowTemplate.Height = 20;
 			this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.lvlLoopTracks.Size = new System.Drawing.Size(205, 133);
+			this.lvlLoopTracks.Size = new System.Drawing.Size(367, 133);
 			this.lvlLoopTracks.TabIndex = 81;
 			this.lvlLoopTracks.Visible = false;
 			this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
@@ -1699,7 +1699,7 @@
 			this.lblLevelMax.AutoSize = true;
 			this.lblLevelMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLevelMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLevelMax.Location = new System.Drawing.Point(765, 1);
+			this.lblLevelMax.Location = new System.Drawing.Point(927, 1);
 			this.lblLevelMax.Name = "lblLevelMax";
 			this.lblLevelMax.Size = new System.Drawing.Size(16, 15);
 			this.lblLevelMax.TabIndex = 50;
@@ -1712,7 +1712,7 @@
 			this.lblLvlClose.AutoSize = true;
 			this.lblLvlClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLvlClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLvlClose.Location = new System.Drawing.Point(781, 1);
+			this.lblLvlClose.Location = new System.Drawing.Point(943, 1);
 			this.lblLvlClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblLvlClose.Name = "lblLvlClose";
 			this.lblLvlClose.Size = new System.Drawing.Size(16, 15);
@@ -1769,7 +1769,7 @@
 			this.lvlSeqObjs.RowTemplate.Height = 200;
 			this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.lvlSeqObjs.Size = new System.Drawing.Size(454, 185);
+			this.lvlSeqObjs.Size = new System.Drawing.Size(616, 185);
 			this.lvlSeqObjs.TabIndex = 68;
 			this.lvlSeqObjs.Visible = false;
 			this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
@@ -2041,7 +2041,7 @@
 			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panel1.Controls.Add(this.label28);
 			this.panel1.Controls.Add(this.trackLvlVolumeZoom);
-			this.panel1.Location = new System.Drawing.Point(628, -5);
+			this.panel1.Location = new System.Drawing.Point(790, -5);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(131, 27);
 			this.panel1.TabIndex = 92;
@@ -2074,6 +2074,7 @@
 			// 
 			this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
 			this.panelMaster.Controls.Add(this.label27);
 			this.panelMaster.Controls.Add(this.NUD_ConfigBPM);
 			this.panelMaster.Controls.Add(this.label12);
@@ -2095,7 +2096,6 @@
 			this.panelMaster.Controls.Add(this.dropMasterSkybox);
 			this.panelMaster.Controls.Add(this.label31);
 			this.panelMaster.Controls.Add(this.label13);
-			this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
 			this.panelMaster.Controls.Add(this.label30);
 			this.panelMaster.Controls.Add(this.btnMasterLvlAdd);
 			this.panelMaster.Controls.Add(this.btnMasterLvlDown);

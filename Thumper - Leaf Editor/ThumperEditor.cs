@@ -137,6 +137,8 @@ namespace Thumper___Leaf_Editor
 			dropParamPath.Enabled = false;
 			//set timesig datasource
 			dropTimeSig.DataSource = _timesig;
+			//
+			SaveLeaf(true);
 		}
 
 		
