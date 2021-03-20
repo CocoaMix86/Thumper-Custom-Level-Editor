@@ -100,8 +100,6 @@
 			this.btnRawImport = new System.Windows.Forms.Button();
 			this.panelLeaf = new System.Windows.Forms.Panel();
 			this.dropLeafStep = new System.Windows.Forms.ComboBox();
-			this.label12 = new System.Windows.Forms.Label();
-			this.txtLeafName = new System.Windows.Forms.TextBox();
 			this.lblLeafMax = new System.Windows.Forms.Label();
 			this.lblLeafClose = new System.Windows.Forms.Label();
 			this.btnTrackClear = new System.Windows.Forms.Button();
@@ -125,7 +123,6 @@
 			this.lblTrackFileName = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.dropTimeSig = new System.Windows.Forms.ComboBox();
-			this.label27 = new System.Windows.Forms.Label();
 			this.panelLevel = new System.Windows.Forms.Panel();
 			this.label29 = new System.Windows.Forms.Label();
 			this.btnlvlPanelOpen = new System.Windows.Forms.Button();
@@ -164,7 +161,9 @@
 			this.label28 = new System.Windows.Forms.Label();
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
 			this.panelMaster = new System.Windows.Forms.Panel();
+			this.btnMasterPanelOpen = new System.Windows.Forms.Button();
 			this.lblMasterRestHelp = new System.Windows.Forms.Label();
+			this.btnMasterPanelNew = new System.Windows.Forms.Button();
 			this.lblMasterCheckpointLeaderHelp = new System.Windows.Forms.Label();
 			this.dropMasterLvlRest = new System.Windows.Forms.ComboBox();
 			this.label35 = new System.Windows.Forms.Label();
@@ -189,8 +188,8 @@
 			this.lblMasterName = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-			this.btnMasterPanelOpen = new System.Windows.Forms.Button();
-			this.btnMasterPanelNew = new System.Windows.Forms.Button();
+			this.btnLeafPanelOpen = new System.Windows.Forms.Button();
+			this.btnLeafPanelNew = new System.Windows.Forms.Button();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -600,6 +599,7 @@
 			this.label1.Size = new System.Drawing.Size(75, 13);
 			this.label1.TabIndex = 22;
 			this.label1.Text = "Leaf Length";
+			this.label1.Visible = false;
 			// 
 			// numericUpDown_LeafLength
 			// 
@@ -619,6 +619,7 @@
             0,
             0,
             0});
+			this.numericUpDown_LeafLength.Visible = false;
 			this.numericUpDown_LeafLength.ValueChanged += new System.EventHandler(this.numericUpDown_LeafLength_ValueChanged);
 			// 
 			// richRawTrackData
@@ -635,6 +636,7 @@
 			this.richRawTrackData.Size = new System.Drawing.Size(419, 74);
 			this.richRawTrackData.TabIndex = 26;
 			this.richRawTrackData.Text = "raw track data";
+			this.richRawTrackData.Visible = false;
 			// 
 			// label3
 			// 
@@ -646,6 +648,7 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(160, 2);
 			this.label3.TabIndex = 28;
+			this.label3.Visible = false;
 			// 
 			// label4
 			// 
@@ -657,6 +660,7 @@
 			this.label4.Size = new System.Drawing.Size(81, 13);
 			this.label4.TabIndex = 29;
 			this.label4.Text = "Track Object";
+			this.label4.Visible = false;
 			// 
 			// dropObjects
 			// 
@@ -669,6 +673,7 @@
 			this.dropObjects.Name = "dropObjects";
 			this.dropObjects.Size = new System.Drawing.Size(161, 21);
 			this.dropObjects.TabIndex = 30;
+			this.dropObjects.Visible = false;
 			this.dropObjects.SelectedValueChanged += new System.EventHandler(this.dropObjects_SelectedValueChanged);
 			// 
 			// label5
@@ -681,6 +686,7 @@
 			this.label5.Size = new System.Drawing.Size(83, 13);
 			this.label5.TabIndex = 31;
 			this.label5.Text = "Tracks Editor";
+			this.label5.Visible = false;
 			// 
 			// label6
 			// 
@@ -692,6 +698,7 @@
 			this.label6.Size = new System.Drawing.Size(113, 13);
 			this.label6.TabIndex = 32;
 			this.label6.Text = "Type (param_path)";
+			this.label6.Visible = false;
 			// 
 			// dropParamPath
 			// 
@@ -704,6 +711,7 @@
 			this.dropParamPath.Name = "dropParamPath";
 			this.dropParamPath.Size = new System.Drawing.Size(161, 21);
 			this.dropParamPath.TabIndex = 33;
+			this.dropParamPath.Visible = false;
 			this.dropParamPath.SelectedIndexChanged += new System.EventHandler(this.dropParamPath_SelectedIndexChanged);
 			// 
 			// label7
@@ -716,6 +724,7 @@
 			this.label7.Size = new System.Drawing.Size(48, 13);
 			this.label7.TabIndex = 34;
 			this.label7.Text = "Default";
+			this.label7.Visible = false;
 			// 
 			// label8
 			// 
@@ -727,6 +736,7 @@
 			this.label8.Size = new System.Drawing.Size(33, 13);
 			this.label8.TabIndex = 36;
 			this.label8.Text = "Step";
+			this.label8.Visible = false;
 			// 
 			// txtTrait
 			// 
@@ -738,6 +748,7 @@
 			this.txtTrait.Size = new System.Drawing.Size(86, 20);
 			this.txtTrait.TabIndex = 38;
 			this.txtTrait.Text = "kTraitBool";
+			this.txtTrait.Visible = false;
 			// 
 			// label9
 			// 
@@ -749,6 +760,7 @@
 			this.label9.Size = new System.Drawing.Size(33, 13);
 			this.label9.TabIndex = 39;
 			this.label9.Text = "Trait";
+			this.label9.Visible = false;
 			// 
 			// trackEditor
 			// 
@@ -802,6 +814,7 @@
 			this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.trackEditor.Size = new System.Drawing.Size(419, 403);
 			this.trackEditor.TabIndex = 40;
+			this.trackEditor.Visible = false;
 			this.trackEditor.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDoubleClick);
 			this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
 			this.trackEditor.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_RowEnter);
@@ -840,6 +853,7 @@
 			this.panelZoom.Name = "panelZoom";
 			this.panelZoom.Size = new System.Drawing.Size(131, 27);
 			this.panelZoom.TabIndex = 43;
+			this.panelZoom.Visible = false;
 			// 
 			// btnRawImport
 			// 
@@ -852,15 +866,16 @@
 			this.btnRawImport.TabIndex = 44;
 			this.btnRawImport.Text = "Import Raw to Track";
 			this.btnRawImport.UseVisualStyleBackColor = false;
+			this.btnRawImport.Visible = false;
 			this.btnRawImport.Click += new System.EventHandler(this.btnRawImport_Click);
 			// 
 			// panelLeaf
 			// 
 			this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelLeaf.Controls.Add(this.btnLeafPanelOpen);
 			this.panelLeaf.Controls.Add(this.dropLeafStep);
-			this.panelLeaf.Controls.Add(this.label12);
-			this.panelLeaf.Controls.Add(this.txtLeafName);
+			this.panelLeaf.Controls.Add(this.btnLeafPanelNew);
 			this.panelLeaf.Controls.Add(this.lblLeafMax);
 			this.panelLeaf.Controls.Add(this.lblLeafClose);
 			this.panelLeaf.Controls.Add(this.btnTrackClear);
@@ -900,7 +915,6 @@
 			this.panelLeaf.Controls.Add(this.label3);
 			this.panelLeaf.Controls.Add(this.label4);
 			this.panelLeaf.Controls.Add(this.dropObjects);
-			this.panelLeaf.Controls.Add(this.label27);
 			this.panelLeaf.Location = new System.Drawing.Point(607, 29);
 			this.panelLeaf.Name = "panelLeaf";
 			this.panelLeaf.Size = new System.Drawing.Size(652, 536);
@@ -920,30 +934,8 @@
 			this.dropLeafStep.Size = new System.Drawing.Size(86, 21);
 			this.dropLeafStep.TabIndex = 94;
 			this.dropLeafStep.Text = "True";
+			this.dropLeafStep.Visible = false;
 			this.dropLeafStep.SelectedIndexChanged += new System.EventHandler(this.dropLeafStep_SelectedIndexChanged);
-			// 
-			// label12
-			// 
-			this.label12.AutoSize = true;
-			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label12.ForeColor = System.Drawing.Color.White;
-			this.label12.Location = new System.Drawing.Point(19, 29);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(68, 13);
-			this.label12.TabIndex = 69;
-			this.label12.Text = "Leaf Name";
-			this.label12.Visible = false;
-			// 
-			// txtLeafName
-			// 
-			this.txtLeafName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.txtLeafName.ForeColor = System.Drawing.Color.White;
-			this.txtLeafName.Location = new System.Drawing.Point(19, 41);
-			this.txtLeafName.Name = "txtLeafName";
-			this.txtLeafName.Size = new System.Drawing.Size(110, 20);
-			this.txtLeafName.TabIndex = 68;
-			this.txtLeafName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-			this.txtLeafName.Visible = false;
 			// 
 			// lblLeafMax
 			// 
@@ -986,6 +978,7 @@
 			this.btnTrackClear.Text = "C";
 			this.btnTrackClear.UseCompatibleTextRendering = true;
 			this.btnTrackClear.UseVisualStyleBackColor = false;
+			this.btnTrackClear.Visible = false;
 			this.btnTrackClear.Click += new System.EventHandler(this.btnTrackClear_Click);
 			// 
 			// label11
@@ -998,6 +991,7 @@
 			this.label11.Size = new System.Drawing.Size(35, 13);
 			this.label11.TabIndex = 66;
 			this.label11.Text = "Lane";
+			this.label11.Visible = false;
 			// 
 			// dropTrackLane
 			// 
@@ -1016,6 +1010,7 @@
 			this.dropTrackLane.Name = "dropTrackLane";
 			this.dropTrackLane.Size = new System.Drawing.Size(87, 21);
 			this.dropTrackLane.TabIndex = 65;
+			this.dropTrackLane.Visible = false;
 			this.dropTrackLane.SelectedIndexChanged += new System.EventHandler(this.dropTrackLane_SelectedIndexChanged);
 			// 
 			// txtDefault
@@ -1033,6 +1028,7 @@
 			this.txtDefault.Name = "txtDefault";
 			this.txtDefault.Size = new System.Drawing.Size(87, 20);
 			this.txtDefault.TabIndex = 64;
+			this.txtDefault.Visible = false;
 			this.txtDefault.ValueChanged += new System.EventHandler(this.txtDefault_ValueChanged);
 			// 
 			// NUD_TrackDoubleclick
@@ -1055,6 +1051,7 @@
             0,
             0,
             0});
+			this.NUD_TrackDoubleclick.Visible = false;
 			this.NUD_TrackDoubleclick.ValueChanged += new System.EventHandler(this.NUD_TrackDoubleclick_ValueChanged);
 			// 
 			// NUD_TrackHighlight
@@ -1077,6 +1074,7 @@
             0,
             0,
             0});
+			this.NUD_TrackHighlight.Visible = false;
 			this.NUD_TrackHighlight.ValueChanged += new System.EventHandler(this.NUD_TrackHighlight_ValueChanged);
 			// 
 			// label19
@@ -1089,6 +1087,7 @@
 			this.label19.Size = new System.Drawing.Size(85, 13);
 			this.label19.TabIndex = 61;
 			this.label19.Text = "Track Properties";
+			this.label19.Visible = false;
 			// 
 			// label18
 			// 
@@ -1100,6 +1099,7 @@
 			this.label18.Size = new System.Drawing.Size(105, 13);
 			this.label18.TabIndex = 60;
 			this.label18.Text = "Track Visual Options";
+			this.label18.Visible = false;
 			// 
 			// label17
 			// 
@@ -1111,6 +1111,7 @@
 			this.label17.Size = new System.Drawing.Size(107, 13);
 			this.label17.TabIndex = 59;
 			this.label17.Text = "Highlight at value";
+			this.label17.Visible = false;
 			// 
 			// label16
 			// 
@@ -1122,6 +1123,7 @@
 			this.label16.Size = new System.Drawing.Size(110, 13);
 			this.label16.TabIndex = 56;
 			this.label16.Text = "Doubleclick Value";
+			this.label16.Visible = false;
 			// 
 			// btnTrackColorDialog
 			// 
@@ -1134,6 +1136,7 @@
 			this.btnTrackColorDialog.TabIndex = 55;
 			this.btnTrackColorDialog.Text = "click";
 			this.btnTrackColorDialog.UseVisualStyleBackColor = false;
+			this.btnTrackColorDialog.Visible = false;
 			this.btnTrackColorDialog.Click += new System.EventHandler(this.btnTrackColorDialog_Click);
 			// 
 			// label15
@@ -1146,6 +1149,7 @@
 			this.label15.Size = new System.Drawing.Size(82, 13);
 			this.label15.TabIndex = 54;
 			this.label15.Text = "Cell Highlight";
+			this.label15.Visible = false;
 			// 
 			// label14
 			// 
@@ -1157,6 +1161,7 @@
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(160, 2);
 			this.label14.TabIndex = 53;
+			this.label14.Visible = false;
 			// 
 			// btnTrackApply
 			// 
@@ -1170,6 +1175,7 @@
 			this.btnTrackApply.TabIndex = 52;
 			this.btnTrackApply.Text = "Apply to Track";
 			this.btnTrackApply.UseVisualStyleBackColor = false;
+			this.btnTrackApply.Visible = false;
 			this.btnTrackApply.Click += new System.EventHandler(this.btnTrackApply_Click);
 			// 
 			// btnTrackAdd
@@ -1185,6 +1191,7 @@
 			this.btnTrackAdd.Text = "+";
 			this.btnTrackAdd.UseCompatibleTextRendering = true;
 			this.btnTrackAdd.UseVisualStyleBackColor = false;
+			this.btnTrackAdd.Visible = false;
 			this.btnTrackAdd.Click += new System.EventHandler(this.btnTrackAdd_Click);
 			// 
 			// btnTrackDown
@@ -1201,6 +1208,7 @@
 			this.btnTrackDown.Text = "↓";
 			this.btnTrackDown.UseCompatibleTextRendering = true;
 			this.btnTrackDown.UseVisualStyleBackColor = false;
+			this.btnTrackDown.Visible = false;
 			this.btnTrackDown.Click += new System.EventHandler(this.btnTrackDown_Click);
 			// 
 			// btnTrackUp
@@ -1217,6 +1225,7 @@
 			this.btnTrackUp.Text = "↑";
 			this.btnTrackUp.UseCompatibleTextRendering = true;
 			this.btnTrackUp.UseVisualStyleBackColor = false;
+			this.btnTrackUp.Visible = false;
 			this.btnTrackUp.Click += new System.EventHandler(this.btnTrackUp_Click);
 			// 
 			// btnTrackDelete
@@ -1233,6 +1242,7 @@
 			this.btnTrackDelete.Text = "-";
 			this.btnTrackDelete.UseCompatibleTextRendering = true;
 			this.btnTrackDelete.UseVisualStyleBackColor = false;
+			this.btnTrackDelete.Visible = false;
 			this.btnTrackDelete.Click += new System.EventHandler(this.btnTrackDelete_Click);
 			// 
 			// lblTrackFileName
@@ -1256,6 +1266,7 @@
 			this.label2.Size = new System.Drawing.Size(60, 13);
 			this.label2.TabIndex = 46;
 			this.label2.Text = "Time Sig.";
+			this.label2.Visible = false;
 			// 
 			// dropTimeSig
 			// 
@@ -1267,19 +1278,8 @@
 			this.dropTimeSig.Name = "dropTimeSig";
 			this.dropTimeSig.Size = new System.Drawing.Size(72, 21);
 			this.dropTimeSig.TabIndex = 45;
+			this.dropTimeSig.Visible = false;
 			this.dropTimeSig.SelectedIndexChanged += new System.EventHandler(this.dropTimeSig_SelectedIndexChanged);
-			// 
-			// label27
-			// 
-			this.label27.AutoSize = true;
-			this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label27.ForeColor = System.Drawing.Color.White;
-			this.label27.Location = new System.Drawing.Point(127, 44);
-			this.label27.Name = "label27";
-			this.label27.Size = new System.Drawing.Size(32, 13);
-			this.label27.TabIndex = 70;
-			this.label27.Text = ".leaf";
-			this.label27.Visible = false;
 			// 
 			// panelLevel
 			// 
@@ -2060,6 +2060,19 @@
 			this.panelMaster.Size = new System.Drawing.Size(445, 296);
 			this.panelMaster.TabIndex = 47;
 			// 
+			// btnMasterPanelOpen
+			// 
+			this.btnMasterPanelOpen.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMasterPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterPanelOpen.Location = new System.Drawing.Point(9, 80);
+			this.btnMasterPanelOpen.Name = "btnMasterPanelOpen";
+			this.btnMasterPanelOpen.Size = new System.Drawing.Size(108, 40);
+			this.btnMasterPanelOpen.TabIndex = 95;
+			this.btnMasterPanelOpen.Text = "Open Master";
+			this.btnMasterPanelOpen.UseVisualStyleBackColor = false;
+			this.btnMasterPanelOpen.Click += new System.EventHandler(this.btnMasterPanelOpen_Click);
+			// 
 			// lblMasterRestHelp
 			// 
 			this.lblMasterRestHelp.AutoSize = true;
@@ -2074,6 +2087,19 @@
 			this.lblMasterRestHelp.Text = "?";
 			this.lblMasterRestHelp.Visible = false;
 			this.lblMasterRestHelp.Click += new System.EventHandler(this.lblMasterRestHelp_Click);
+			// 
+			// btnMasterPanelNew
+			// 
+			this.btnMasterPanelNew.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMasterPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterPanelNew.Location = new System.Drawing.Point(9, 38);
+			this.btnMasterPanelNew.Name = "btnMasterPanelNew";
+			this.btnMasterPanelNew.Size = new System.Drawing.Size(108, 40);
+			this.btnMasterPanelNew.TabIndex = 94;
+			this.btnMasterPanelNew.Text = "New Master";
+			this.btnMasterPanelNew.UseVisualStyleBackColor = false;
+			this.btnMasterPanelNew.Click += new System.EventHandler(this.btnMasterPanelNew_Click);
 			// 
 			// lblMasterCheckpointLeaderHelp
 			// 
@@ -2417,31 +2443,31 @@
 			this.lblMasterName.TabIndex = 49;
 			this.lblMasterName.Text = "Master Editor";
 			// 
-			// btnMasterPanelOpen
+			// btnLeafPanelOpen
 			// 
-			this.btnMasterPanelOpen.BackColor = System.Drawing.Color.Gray;
-			this.btnMasterPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnMasterPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnMasterPanelOpen.Location = new System.Drawing.Point(9, 80);
-			this.btnMasterPanelOpen.Name = "btnMasterPanelOpen";
-			this.btnMasterPanelOpen.Size = new System.Drawing.Size(108, 40);
-			this.btnMasterPanelOpen.TabIndex = 95;
-			this.btnMasterPanelOpen.Text = "Open Master";
-			this.btnMasterPanelOpen.UseVisualStyleBackColor = false;
-			this.btnMasterPanelOpen.Click += new System.EventHandler(this.btnMasterPanelOpen_Click);
+			this.btnLeafPanelOpen.BackColor = System.Drawing.Color.Gray;
+			this.btnLeafPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnLeafPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLeafPanelOpen.Location = new System.Drawing.Point(9, 62);
+			this.btnLeafPanelOpen.Name = "btnLeafPanelOpen";
+			this.btnLeafPanelOpen.Size = new System.Drawing.Size(101, 40);
+			this.btnLeafPanelOpen.TabIndex = 95;
+			this.btnLeafPanelOpen.Text = "Open Leaf";
+			this.btnLeafPanelOpen.UseVisualStyleBackColor = false;
+			this.btnLeafPanelOpen.Click += new System.EventHandler(this.btnLeafPanelOpen_Click);
 			// 
-			// btnMasterPanelNew
+			// btnLeafPanelNew
 			// 
-			this.btnMasterPanelNew.BackColor = System.Drawing.Color.Gray;
-			this.btnMasterPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnMasterPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnMasterPanelNew.Location = new System.Drawing.Point(9, 38);
-			this.btnMasterPanelNew.Name = "btnMasterPanelNew";
-			this.btnMasterPanelNew.Size = new System.Drawing.Size(108, 40);
-			this.btnMasterPanelNew.TabIndex = 94;
-			this.btnMasterPanelNew.Text = "New Master";
-			this.btnMasterPanelNew.UseVisualStyleBackColor = false;
-			this.btnMasterPanelNew.Click += new System.EventHandler(this.btnMasterPanelNew_Click);
+			this.btnLeafPanelNew.BackColor = System.Drawing.Color.Gray;
+			this.btnLeafPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnLeafPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLeafPanelNew.Location = new System.Drawing.Point(9, 20);
+			this.btnLeafPanelNew.Name = "btnLeafPanelNew";
+			this.btnLeafPanelNew.Size = new System.Drawing.Size(101, 40);
+			this.btnLeafPanelNew.TabIndex = 94;
+			this.btnLeafPanelNew.Text = "New Leaf";
+			this.btnLeafPanelNew.UseVisualStyleBackColor = false;
+			this.btnLeafPanelNew.Click += new System.EventHandler(this.btnLeafPanelNew_Click);
 			// 
 			// FormLeafEditor
 			// 
@@ -2599,9 +2625,6 @@
 		private System.Windows.Forms.ToolStripMenuItem lvlnewToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem lvlopenToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem lvlsaveToolStripMenuItem2;
-		private System.Windows.Forms.Label label12;
-		private System.Windows.Forms.TextBox txtLeafName;
-		private System.Windows.Forms.Label label27;
 		private System.Windows.Forms.ToolStripMenuItem tentaclesPathsToolStripMenuItem;
 		private System.Windows.Forms.Button btnLvlLoopRefresh;
 		private System.Windows.Forms.Panel panel1;
@@ -2639,6 +2662,8 @@
 		private System.Windows.Forms.Label lblMasterCheckpointLeaderHelp;
 		private System.Windows.Forms.Button btnMasterPanelOpen;
 		private System.Windows.Forms.Button btnMasterPanelNew;
+		private System.Windows.Forms.Button btnLeafPanelOpen;
+		private System.Windows.Forms.Button btnLeafPanelNew;
 	}
 }
 

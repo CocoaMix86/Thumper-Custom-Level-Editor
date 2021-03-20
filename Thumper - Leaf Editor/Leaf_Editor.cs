@@ -22,7 +22,18 @@ namespace Thumper___Leaf_Editor
 		int _selecttrack = 0;
 
 		string _errorlog = "";
-		string _loadedleaf = "";
+		public string _loadedleaf
+		{
+			get { return loadedleaf; }
+			set
+			{
+				if (loadedleaf != value) {
+					loadedleaf = value;
+					LeafEditorVisible();
+				}
+			}
+		}
+		private string loadedleaf;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
@@ -245,7 +256,7 @@ namespace Thumper___Leaf_Editor
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			//if _loadedlvl is somehow not set, force Save As instead
-			if (_loadedleaf == "") {
+			if (_loadedleaf == null) {
 				leafsaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
@@ -514,6 +525,16 @@ namespace Thumper___Leaf_Editor
 				lblTrackFileName.Text = "Leaf Editor";
 			}
 		}
+
+		private void btnLeafPanelNew_Click(object sender, EventArgs e)
+		{
+			leafnewToolStripMenuItem.PerformClick();
+		}
+
+		private void btnLeafPanelOpen_Click(object sender, EventArgs e)
+		{
+			leafloadToolStripMenuItem.PerformClick();
+		}
 		#endregion
 		#region Methods
 		///         ///
@@ -653,6 +674,15 @@ namespace Thumper___Leaf_Editor
 				catch { }
 			}
 		}
+
+		public void LeafEditorVisible()
+		{
+			foreach (Control c in panelLeaf.Controls)
+				c.Visible = true;
+			btnLeafPanelNew.Visible = false;
+			btnLeafPanelOpen.Visible = false;
+		}
+
 		///Update DGV from _tracks
 		public void LoadLeaf(dynamic _load /*List<string> _load*/)
 		{
@@ -662,7 +692,6 @@ namespace Thumper___Leaf_Editor
 			}
 
 			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
-			txtLeafName.Text = ((string)_load["obj_name"]).Replace(".leaf","");
 			//clear existing tracks
 			_tracks.Clear();
 			//set beat_cnt and time_sig
