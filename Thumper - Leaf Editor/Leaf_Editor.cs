@@ -81,7 +81,6 @@ namespace Thumper___Leaf_Editor
 				txtTrait.Text = _tracks[_selecttrack].trait_type;
 				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color));
 				//remove event handlers from a few controls so they don't trigger when their values change
-				NUD_TrackDoubleclick.ValueChanged -= new EventHandler(NUD_TrackDoubleclick_ValueChanged);
 				NUD_TrackHighlight.ValueChanged -= new EventHandler(NUD_TrackHighlight_ValueChanged);
 				txtDefault.ValueChanged -= new EventHandler(txtDefault_ValueChanged);
 				dropLeafStep.SelectedIndexChanged -= new EventHandler(dropLeafStep_SelectedIndexChanged);
@@ -91,7 +90,6 @@ namespace Thumper___Leaf_Editor
 				txtDefault.Value = (decimal)_tracks[_selecttrack]._default;
 				dropLeafStep.SelectedItem = _tracks[_selecttrack].step;
 				//re-add event handlers
-				NUD_TrackDoubleclick.ValueChanged += new EventHandler(NUD_TrackDoubleclick_ValueChanged);
 				NUD_TrackHighlight.ValueChanged += new EventHandler(NUD_TrackHighlight_ValueChanged);
 				txtDefault.ValueChanged += new EventHandler(txtDefault_ValueChanged);
 				dropLeafStep.SelectedIndexChanged += new EventHandler(dropLeafStep_SelectedIndexChanged);
@@ -244,13 +242,6 @@ namespace Thumper___Leaf_Editor
 			TrackUpdateHighlighting(trackEditor.CurrentRow);
 			//sets flag that leaf has unsaved changes
 			SaveLeaf(false);
-		}
-		///NUMERIC_UPDOWN TRACK DOUBLECLICK VALUE
-		private void NUD_TrackDoubleclick_ValueChanged(object sender, EventArgs e)
-		{
-			//_tracks[_selecttrack][8] = NUD_TrackDoubleclick.Value.ToString();
-			//sets flag that leaf has unsaved changes
-			//SaveLeaf(false);
 		}
 		///LEAF - SAVE FILE
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)

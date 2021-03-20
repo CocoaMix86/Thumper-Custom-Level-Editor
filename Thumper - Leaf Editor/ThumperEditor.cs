@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -40,22 +39,15 @@ namespace Thumper___Leaf_Editor
 
 		///Toolstrip - INTERPOLATOR
 		private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e) => new Interpolator().Show();
+
 		///Toolstrip - VIEW MENU
 		//Visible - LEaf Editor
-		private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			panelLeaf.Visible = leafEditorToolStripMenuItem.Checked;
-		}
+		private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelLeaf.Visible = leafEditorToolStripMenuItem.Checked;
 		//Visible - Level Editor
-		private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			panelLevel.Visible = levelEditorToolStripMenuItem.Checked;
-		}
+		private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelLevel.Visible = levelEditorToolStripMenuItem.Checked;
 		//Visible - Master Editor
-		private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			panelMaster.Visible = masterEditorToolStripMenuItem.Checked;
-		}
+		private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelMaster.Visible = masterEditorToolStripMenuItem.Checked;
+
 		///Toolstrip - HELP
 		//About...
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e) => new AboutThumperEditor().Show();
@@ -145,80 +137,23 @@ namespace Thumper___Leaf_Editor
 			dropParamPath.Enabled = false;
 			//set timesig datasource
 			dropTimeSig.DataSource = _timesig;
-			//ping the beat counter to update column count
-			numericUpDown_LeafLength_ValueChanged(null, null);
-			//tell the app that everything is saved, because it just initialized
-			SaveLeaf(true);
 		}
 
-		//////
+		
 		///FORM RESIZE
-		//////
 		///PANEL LABELS - change size or close
 		private void lblMasterClose_Click(object sender, EventArgs e) => masterEditorToolStripMenuItem.PerformClick();
 		private void lblLvlClose_Click(object sender, EventArgs e) => levelEditorToolStripMenuItem.PerformClick();
 		private void lblLeafClose_Click(object sender, EventArgs e) => leafEditorToolStripMenuItem.PerformClick();
 		private void lblLeafMax_Click(object sender, EventArgs e)
 		{
-			/*
-			panelMaster.Width = Math.Min(100, this.Width / 5);
-			panelLevel.Width = Math.Min(100, this.Width / 5);
-			PanelVisibleResize();
-			_formactive = panelLeaf;
-			*/
 		}
 		private void lblLevelMax_Click(object sender, EventArgs e)
 		{
-			/*
-			panelMaster.Width = Math.Min(100, this.Width / 4);
-			panelLevel.Width = (int)(this.Width * 0.8) - 12;
-			PanelVisibleResize();
-			_formactive = panelLevel;
-			*/
 		}
 		private void lblMasterMax_Click(object sender, EventArgs e)
 		{
-			/*
-			panelMaster.Width = (int)(this.Width * 0.8) - 12;
-			panelLevel.Width = Math.Min(100, this.Width / 4);
-			PanelVisibleResize();
-			_formactive = panelMaster;
-			*/
 		}
-		private void FormLeafEditor_Resize(object sender, EventArgs e)
-		{
-			/*
-			panelMaster.Width = 100;
-			panelLevel.Width = 100;
-			panelLeaf.Width = 100;
-			if (_formactive != panelLeaf && _formactive != null)
-				_formactive.Width = (int)(this.Width * 0.8) - 12;
-			PanelVisibleResize();
-			*/
-		}
-		///Resizes and Repositions panels based on which ones are visible
-		public void PanelVisibleResize()
-		{
-			//if Master is invisible, first move Leaf to Level, then move Level to Master
-			if (!panelMaster.Visible) {
-				panelLeaf.Location = panelLevel.Location;
-				panelLevel.Location = panelMaster.Location;
-			}
-			//if Level is invisible, move Leaf to Level
-			if (!panelLevel.Visible)
-				panelLeaf.Location = panelLevel.Location;
-			//if Master is visible, move Level over
-			if (panelMaster.Visible)
-				panelLevel.Location = new Point(panelMaster.Location.X + panelMaster.Size.Width + 6, panelMaster.Location.Y);
-			//if Level is visible, move Leaf over. Else move Leaf to Level
-			if (panelLevel.Visible)
-				panelLeaf.Location = new Point(panelLevel.Location.X + panelLevel.Size.Width + 6, panelMaster.Location.Y);
-			else
-				panelLeaf.Location = panelLevel.Location;
-
-			panelLeaf.Width = this.Width - panelLeaf.Location.X - 20;
-		}
-
 
 		/// 
 		/// VARIOUS POPUPS FOR HELP TEXT

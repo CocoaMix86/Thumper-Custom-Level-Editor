@@ -333,8 +333,6 @@ namespace Thumper___Leaf_Editor
 		{
 			lvlLoopTracks.RowCount++;
 			lvlLoopTracks.Rows[lvlLoopTracks.Rows.Count - 1].HeaderCell.Value = "Volume Track " + (lvlLoopTracks.Rows.Count - 1);
-			//lvlLoopTracks[2, lvlLoopTracks.Rows.Count - 1].ReadOnly = true;
-			//lvlLoopTracks[2, lvlLoopTracks.Rows.Count - 1].Style.BackColor = Color.Black;
 			btnLvlLoopDelete.Enabled = true;
 		}
 

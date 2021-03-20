@@ -258,7 +258,7 @@
             this.leafsaveAsToolStripMenuItem});
 			this.saveToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
 			this.saveToolStripMenuItem1.Text = "Leaf...";
 			// 
 			// leafnewToolStripMenuItem
@@ -267,7 +267,7 @@
 			this.leafnewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafnewToolStripMenuItem.Name = "leafnewToolStripMenuItem";
 			this.leafnewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.leafnewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.leafnewToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
 			this.leafnewToolStripMenuItem.Text = "New";
 			this.leafnewToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
@@ -277,7 +277,7 @@
 			this.leafloadToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafloadToolStripMenuItem.Name = "leafloadToolStripMenuItem";
 			this.leafloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.leafloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.leafloadToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
 			this.leafloadToolStripMenuItem.Text = "Open";
 			this.leafloadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
 			// 
@@ -288,7 +288,7 @@
 			this.leafsaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafsaveToolStripMenuItem.Name = "leafsaveToolStripMenuItem";
 			this.leafsaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.leafsaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.leafsaveToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
 			this.leafsaveToolStripMenuItem.Text = "Save";
 			this.leafsaveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
@@ -299,7 +299,7 @@
 			this.leafsaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafsaveAsToolStripMenuItem.Name = "leafsaveAsToolStripMenuItem";
 			this.leafsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-			this.leafsaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.leafsaveAsToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
 			this.leafsaveAsToolStripMenuItem.Text = "Save As";
 			this.leafsaveAsToolStripMenuItem.Click += new System.EventHandler(this.leafsaveAsToolStripMenuItem_Click);
 			// 
@@ -313,7 +313,7 @@
             this.lvlsaveAsToolStripMenuItem});
 			this.levelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-			this.levelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.levelToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
 			this.levelToolStripMenuItem.Text = "Level...";
 			// 
 			// lvlnewToolStripMenuItem1
@@ -322,7 +322,7 @@
 			this.lvlnewToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.lvlnewToolStripMenuItem1.Name = "lvlnewToolStripMenuItem1";
 			this.lvlnewToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
-			this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
 			this.lvlnewToolStripMenuItem1.Text = "New";
 			this.lvlnewToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
 			// 
@@ -332,7 +332,7 @@
 			this.lvlopenToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.lvlopenToolStripMenuItem.Name = "lvlopenToolStripMenuItem";
 			this.lvlopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-			this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
 			this.lvlopenToolStripMenuItem.Text = "Open";
 			this.lvlopenToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
@@ -343,7 +343,7 @@
 			this.lvlsaveToolStripMenuItem2.ForeColor = System.Drawing.Color.White;
 			this.lvlsaveToolStripMenuItem2.Name = "lvlsaveToolStripMenuItem2";
 			this.lvlsaveToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-			this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+			this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(154, 22);
 			this.lvlsaveToolStripMenuItem2.Text = "Save";
 			this.lvlsaveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
 			// 
@@ -354,7 +354,7 @@
 			this.lvlsaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.lvlsaveAsToolStripMenuItem.Name = "lvlsaveAsToolStripMenuItem";
 			this.lvlsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-			this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
 			this.lvlsaveAsToolStripMenuItem.Text = "Save As";
 			this.lvlsaveAsToolStripMenuItem.Click += new System.EventHandler(this.lvlsaveAsToolStripMenuItem_Click);
 			// 
@@ -368,7 +368,7 @@
             this.mastersaveAsToolStripMenuItem});
 			this.masterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
-			this.masterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.masterToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
 			this.masterToolStripMenuItem.Text = "Master...";
 			// 
 			// masternewToolStripMenuItem
@@ -1097,7 +1097,6 @@
             0,
             0});
 			this.NUD_TrackDoubleclick.Visible = false;
-			this.NUD_TrackDoubleclick.ValueChanged += new System.EventHandler(this.NUD_TrackDoubleclick_ValueChanged);
 			// 
 			// NUD_TrackHighlight
 			// 
@@ -2583,7 +2582,7 @@
 			this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-			this.lblConfigColorHelp.Location = new System.Drawing.Point(420, 196);
+			this.lblConfigColorHelp.Location = new System.Drawing.Point(420, 209);
 			this.lblConfigColorHelp.Name = "lblConfigColorHelp";
 			this.lblConfigColorHelp.Size = new System.Drawing.Size(16, 16);
 			this.lblConfigColorHelp.TabIndex = 112;
@@ -2608,7 +2607,6 @@
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLeafEditor_FormClosing);
 			this.Load += new System.EventHandler(this.FormLeafEditor_Load);
-			this.Resize += new System.EventHandler(this.FormLeafEditor_Resize);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).EndInit();
