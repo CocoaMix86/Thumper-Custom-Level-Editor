@@ -62,8 +62,9 @@ namespace Thumper___Leaf_Editor.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.&quot;
-        ///}.
+        ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.&quot;,
+        ///&quot;masterCheckLeader&quot;: &quot;If not empty, this lvl will play...&quot;,
+        ///&quot;masterRest&quot;: &quot;If not empty, this lvl will play before the main lvl. Usually used as a lo [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string helptext {
             get {
@@ -99,6 +100,16 @@ namespace Thumper___Leaf_Editor.Properties {
         internal static string paths {
             get {
                 return ResourceManager.GetString("paths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap railcolorhelp {
+            get {
+                object obj = ResourceManager.GetObject("railcolorhelp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
