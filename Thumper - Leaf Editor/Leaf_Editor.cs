@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -523,6 +521,10 @@ namespace Thumper___Leaf_Editor
 				_tracks.Clear();
 				trackEditor.Rows.Clear();
 				lblTrackFileName.Text = "Leaf Editor";
+				dropObjects.Enabled = dropParamPath.Enabled = btnTrackApply.Enabled = false;
+				//
+				SaveLeaf(true);
+				leafsaveAsToolStripMenuItem.PerformClick();
 			}
 		}
 

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -361,11 +358,31 @@ namespace Thumper___Leaf_Editor
 					rest = _lvl["rest_lvl_name"]
 				});
 			}
+			///load Config data (if file exists)
+			LoadConfig();
 			///set save flag (master just loaded, has no changes)
 			SaveMaster(true);
 			///select the first lvl
 			if (_masterlvls.Count > 0)
 				masterLvlList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
+		}
+
+		public void LoadConfig()
+		{
+			var _configfile = Directory.GetFiles(workingfolder, "config_*.txt").ToList();
+			if (_configfile.Count > 0) {
+				dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_configfile[0]), "#.*", ""));
+				NUD_ConfigBPM.Value = (int)_load["bpm"];
+				btnConfigRailColor.BackColor = Color.FromArgb((int)((float)_load["rails_color"][0] * 255), (int)((float)_load["rails_color"][1] * 255), (int)((float)_load["rails_color"][2] * 255));
+				btnConfigGlowColor.BackColor = Color.FromArgb((int)((float)_load["rails_glow_color"][0] * 255), (int)((float)_load["rails_glow_color"][1] * 255), (int)((float)_load["rails_glow_color"][2] * 255));
+				btnConfigPathColor.BackColor = Color.FromArgb((int)((float)_load["path_color"][0] * 255), (int)((float)_load["path_color"][1] * 255), (int)((float)_load["path_color"][2] * 255));
+			}
+			else {
+				NUD_ConfigBPM.Value = 420;
+				btnConfigRailColor.BackColor = Color.White;
+				btnConfigGlowColor.BackColor = Color.White;
+				btnConfigPathColor.BackColor = Color.White;
+			}
 		}
 
 		public void MasterEditorVisible()
@@ -392,6 +409,8 @@ namespace Thumper___Leaf_Editor
 
 		public JObject MasterBuildSave()
 		{
+			int checkpoints = 0;
+			///being build Master JSON object
 			JObject _save = new JObject();
 			_save.Add("obj_type", "SequinMaster");
 			_save.Add("obj_name", "sequin.master");
@@ -406,11 +425,63 @@ namespace Thumper___Leaf_Editor
 				s.Add("checkpoint_leader_lvl_name", group.checkpoint_leader ?? "");
 				s.Add("rest_lvl_name", group.rest ?? "");
 				s.Add("play_plus", group.playplus.ToString());
+				//increment checkpoints if this lvl has "checkpoint" true
+				if ((string)s["checkpoint"] == "True")
+					checkpoints++;
 
 				groupings.Add(s);
 			}
 			_save.Add("groupings", groupings);
 			_save.Add("checkpoint_lvl_name", dropMasterCheck.Text);
+			///end build
+			///
+			///begin building Config JSON object
+			JObject _config = new JObject();
+			_config.Add("obj_type", "LevelLib");
+			_config.Add("bpm", NUD_ConfigBPM.Value);
+			//for each lvl in Master that has checkpoint:True, Config requires a "SECTION_LINEAR"
+			JArray level_sections = new JArray();
+			for (int x = 0; x < checkpoints; x++)
+				level_sections.Add("SECTION_LINEAR");
+			_config.Add("level_sections", level_sections);
+			//
+			//add rail color
+			JArray rails_color = new JArray();
+			rails_color.Add(Decimal.Round((decimal)btnConfigRailColor.BackColor.R / 255, 2));
+			rails_color.Add(Decimal.Round((decimal)btnConfigRailColor.BackColor.G / 255, 2));
+			rails_color.Add(Decimal.Round((decimal)btnConfigRailColor.BackColor.B / 255, 2));
+			rails_color.Add(Decimal.Round((decimal)btnConfigRailColor.BackColor.A / 255, 2));
+			_config.Add("rails_color", rails_color);
+			//
+			//add rail glow color
+			JArray rails_glow_color = new JArray();
+			rails_glow_color.Add(Decimal.Round((decimal)btnConfigGlowColor.BackColor.R / 255, 2));
+			rails_glow_color.Add(Decimal.Round((decimal)btnConfigGlowColor.BackColor.G / 255, 2));
+			rails_glow_color.Add(Decimal.Round((decimal)btnConfigGlowColor.BackColor.B / 255, 2));
+			rails_glow_color.Add(Decimal.Round((decimal)btnConfigGlowColor.BackColor.A / 255, 2));
+			_config.Add("rails_glow_color", rails_glow_color);
+			//
+			//add path color
+			JArray path_color = new JArray();
+			path_color.Add(Decimal.Round((decimal)btnConfigPathColor.BackColor.R / 255, 2));
+			path_color.Add(Decimal.Round((decimal)btnConfigPathColor.BackColor.G / 255, 2));
+			path_color.Add(Decimal.Round((decimal)btnConfigPathColor.BackColor.B / 255, 2));
+			path_color.Add(Decimal.Round((decimal)btnConfigPathColor.BackColor.A / 255, 2));
+			_config.Add("path_color", path_color);
+			//
+			//add joy color
+			JArray joy_color = new JArray(new object[] { 1, 1, 1, 1 });
+			_config.Add("joy_color", joy_color);
+			//
+			///end build
+
+			///Delete extra config_ files in the folder, then write Config to file
+			var _files = Directory.GetFiles(workingfolder, "config_*.txt");
+			foreach (string s in _files)
+				File.Delete(s);
+			File.WriteAllText($@"{workingfolder}\config_{Path.GetFileName(workingfolder)}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
+
+			///only need to return _save, since _config is written already
 			return _save;
 		}
 		#endregion

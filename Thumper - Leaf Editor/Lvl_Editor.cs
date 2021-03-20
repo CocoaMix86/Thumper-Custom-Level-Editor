@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -129,8 +127,11 @@ namespace Thumper___Leaf_Editor
 			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
 			for (int x = 0; x < _lvlleafs.Count; x++) {
 				lvlLeafList.Rows.Add(new object[] { _lvlleafs[x].leafname, _lvlleafs[x].beats });
+				//total length of all leafs. This value is used for the volume sequencer
 				_lvllength += _lvlleafs[x].beats;
 			}
+			//add approach to lvl length
+			_lvllength += +(int)NUD_lvlApproach.Value;
 			lvlLeafList.RowEnter += lvlLeafList_RowEnter;
 			//set selected index. Mainly used when moving items
 			///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
@@ -138,15 +139,14 @@ namespace Thumper___Leaf_Editor
 			btnLvlLeafDelete.Enabled = _lvlleafs.Count > 0;
 			btnLvlLeafUp.Enabled = _lvlleafs.Count > 1;
 			btnLvlLeafDown.Enabled = _lvlleafs.Count > 1;
-			//enable/disable path buttons if leaf exists
+			//enable/disable buttons if leaf exists or not
 			btnLvlPathAdd.Enabled = _lvlleafs.Count > 0;
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
-			//enable/disable seqObjs buttons
 			btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
-
+			//set volume sequencer column total to length of all leafs + approach
 			lvlSeqObjs.ColumnCount = _lvllength;
+			//some styles
 			GenerateColumnStyle(lvlSeqObjs, _lvllength);
-			//set lvl save flag to false
 			SaveLvl(false);
 		}
 		/// Set "saved" flag to false for LVL when these events happen
@@ -219,8 +219,8 @@ namespace Thumper___Leaf_Editor
 					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save));
 					//set a few visual elements to show what file is being worked on
 					lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
+					workingfolder = Path.GetDirectoryName(sfd.FileName);
 					_loadedlvl = sfd.FileName;
-					workingfolder = Path.GetDirectoryName(_loadedlvl);
 					//set save flag
 					SaveLvl(true);
 				}
@@ -649,73 +649,6 @@ namespace Thumper___Leaf_Editor
 			_save.Add("tutorial_type", dropLvlTutorial.Text);
 			_save.Add("start_angle_fracs", new JArray() { 1, 1, 1 });
 			///end building JSON output
-
-			return _save;
-		}
-
-		public string LvlBuildSaveText(string _lvlname)
-		{
-			_lvlname = Regex.Replace(_lvlname, "[.].*", ".lvl");
-			string _save = $@"[
-{{
-'obj_type': 'SequinLevel',
-'obj_name': '{_lvlname}',
-'approach_beats': {NUD_lvlApproach.Value},
-'seq_objs': [";
-			//this section adds the volume control data to the 'seq_objs: []' list, one row at a time.
-			//each row gets it's own volume track, denoted by 'layer_volume,{x}'
-			for (int x = 0; x < lvlSeqObjs.Rows.Count; x++) {
-				_save += $@"
-	{{
-	'obj_name': '{_lvlname}',
-	'param_path': 'layer_volume,{x}',
-	'trait_type': 'kTraitFloat',
-	'data_points': {{
-		{string.Join(";", lvlSeqObjs.Rows[x].Cells.Cast<DataGridViewCell>().Where(c => !string.IsNullOrEmpty(c?.Value?.ToString())).Select(c => $"{c.ColumnIndex}:{c.Value}").ToArray())}
-	}},
-	'step': False,
-	'default': 0,
-	'footer': [1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-	}},";
-			}
-			//close the 'seq_objs: []' section, and start 'leaf_seq': []
-			_save += "\n],\n'leaf_seq': [";
-			//this section adds each leaf associated with the lvl to the 'leaf_seq': [] list
-			//a sub list sub_paths': [] gets filled with the tunnels/paths set too
-			foreach (LvlLeafData l in _lvlleafs) {
-				_save += $@"
-	{{
-	'beat_cnt': {l.beats},
-	'leaf_name': '{l.leafname}',
-	'main_path': 'default.path',
-	'sub_paths': ['{string.Join("','", l.paths)}'],
-	'pos': [0, 0, 0],
-	'rot_x': [1, 0, 0],
-	'rot_y': [0, 1, 0],
-	'rot_z': [0, 0, 1],
-	'scale': [0, 0, 0]
-	}},";
-			}
-			//close the 'leaf_seq: []' section, and start 'loops': []
-			_save += "\n],\n'loops': [";
-			//this section adds each loop track specified to the 'loops': [] list
-			//while on the form it displays if "drums" or "drones", the lvl does not actually need that (that data exists in samp_ files)
-			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
-				_save += $@"
-	{{
-	'samp_name': '{r.Cells[1].Value}',
-	'beats_per_loop': {r.Cells[2].Value},
-	}},";
-			}
-			//close the 'loops: []' section, and now finish up the lvl file
-			_save += $@"
-],
-'volume': {NUD_lvlVolume.Value},
-'input_allowed': {dropLvlInput.Text},
-'tutorial_type': {dropLvlTutorial.SelectedItem},
-'start_angle_fracs': [1, 1, 1]
-}}
-]";
 
 			return _save;
 		}

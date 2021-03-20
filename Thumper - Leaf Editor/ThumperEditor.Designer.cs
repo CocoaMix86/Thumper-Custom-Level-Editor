@@ -194,9 +194,9 @@
 			this.lblMasterMax = new System.Windows.Forms.Label();
 			this.lblMasterClose = new System.Windows.Forms.Label();
 			this.lblMasterName = new System.Windows.Forms.Label();
+			this.lblConfigColorHelp = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-			this.lblConfigColorHelp = new System.Windows.Forms.Label();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -2103,7 +2103,7 @@
 			this.panelMaster.Controls.Add(this.lblConfigColorHelp);
 			this.panelMaster.Location = new System.Drawing.Point(4, 29);
 			this.panelMaster.Name = "panelMaster";
-			this.panelMaster.Size = new System.Drawing.Size(460, 332);
+			this.panelMaster.Size = new System.Drawing.Size(460, 343);
 			this.panelMaster.TabIndex = 47;
 			// 
 			// label27
@@ -2111,7 +2111,7 @@
 			this.label27.AutoSize = true;
 			this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label27.ForeColor = System.Drawing.Color.White;
-			this.label27.Location = new System.Drawing.Point(304, 186);
+			this.label27.Location = new System.Drawing.Point(304, 183);
 			this.label27.Name = "label27";
 			this.label27.Size = new System.Drawing.Size(30, 13);
 			this.label27.TabIndex = 111;
@@ -2123,7 +2123,7 @@
 			this.NUD_ConfigBPM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.NUD_ConfigBPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.NUD_ConfigBPM.ForeColor = System.Drawing.Color.White;
-			this.NUD_ConfigBPM.Location = new System.Drawing.Point(340, 183);
+			this.NUD_ConfigBPM.Location = new System.Drawing.Point(340, 180);
 			this.NUD_ConfigBPM.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -2139,7 +2139,7 @@
 			this.label12.AutoSize = true;
 			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label12.ForeColor = System.Drawing.Color.White;
-			this.label12.Location = new System.Drawing.Point(304, 167);
+			this.label12.Location = new System.Drawing.Point(304, 164);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(90, 13);
 			this.label12.TabIndex = 110;
@@ -2150,7 +2150,7 @@
 			// 
 			this.btnConfigPathColor.BackColor = System.Drawing.Color.White;
 			this.btnConfigPathColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnConfigPathColor.Location = new System.Drawing.Point(307, 267);
+			this.btnConfigPathColor.Location = new System.Drawing.Point(307, 264);
 			this.btnConfigPathColor.Name = "btnConfigPathColor";
 			this.btnConfigPathColor.Size = new System.Drawing.Size(116, 23);
 			this.btnConfigPathColor.TabIndex = 109;
@@ -2163,7 +2163,7 @@
 			// 
 			this.btnConfigGlowColor.BackColor = System.Drawing.Color.White;
 			this.btnConfigGlowColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnConfigGlowColor.Location = new System.Drawing.Point(307, 238);
+			this.btnConfigGlowColor.Location = new System.Drawing.Point(307, 235);
 			this.btnConfigGlowColor.Name = "btnConfigGlowColor";
 			this.btnConfigGlowColor.Size = new System.Drawing.Size(116, 23);
 			this.btnConfigGlowColor.TabIndex = 108;
@@ -2176,7 +2176,7 @@
 			// 
 			this.btnConfigRailColor.BackColor = System.Drawing.Color.White;
 			this.btnConfigRailColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnConfigRailColor.Location = new System.Drawing.Point(307, 209);
+			this.btnConfigRailColor.Location = new System.Drawing.Point(307, 206);
 			this.btnConfigRailColor.Name = "btnConfigRailColor";
 			this.btnConfigRailColor.Size = new System.Drawing.Size(116, 23);
 			this.btnConfigRailColor.TabIndex = 96;
@@ -2300,7 +2300,7 @@
 			this.label33.AutoSize = true;
 			this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label33.ForeColor = System.Drawing.Color.White;
-			this.label33.Location = new System.Drawing.Point(304, 115);
+			this.label33.Location = new System.Drawing.Point(304, 110);
 			this.label33.Name = "label33";
 			this.label33.Size = new System.Drawing.Size(78, 13);
 			this.label33.TabIndex = 101;
@@ -2315,7 +2315,7 @@
 			this.dropMasterCheck.FormattingEnabled = true;
 			this.dropMasterCheck.Items.AddRange(new object[] {
             "skybox_cube"});
-			this.dropMasterCheck.Location = new System.Drawing.Point(307, 129);
+			this.dropMasterCheck.Location = new System.Drawing.Point(307, 124);
 			this.dropMasterCheck.Name = "dropMasterCheck";
 			this.dropMasterCheck.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterCheck.TabIndex = 100;
@@ -2326,7 +2326,7 @@
 			this.label32.AutoSize = true;
 			this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label32.ForeColor = System.Drawing.Color.White;
-			this.label32.Location = new System.Drawing.Point(304, 77);
+			this.label32.Location = new System.Drawing.Point(304, 72);
 			this.label32.Name = "label32";
 			this.label32.Size = new System.Drawing.Size(45, 13);
 			this.label32.TabIndex = 99;
@@ -2341,7 +2341,7 @@
 			this.dropMasterIntro.FormattingEnabled = true;
 			this.dropMasterIntro.Items.AddRange(new object[] {
             "skybox_cube"});
-			this.dropMasterIntro.Location = new System.Drawing.Point(307, 91);
+			this.dropMasterIntro.Location = new System.Drawing.Point(307, 86);
 			this.dropMasterIntro.Name = "dropMasterIntro";
 			this.dropMasterIntro.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterIntro.TabIndex = 98;
@@ -2355,7 +2355,7 @@
 			this.dropMasterSkybox.FormattingEnabled = true;
 			this.dropMasterSkybox.Items.AddRange(new object[] {
             "skybox_cube"});
-			this.dropMasterSkybox.Location = new System.Drawing.Point(307, 53);
+			this.dropMasterSkybox.Location = new System.Drawing.Point(307, 48);
 			this.dropMasterSkybox.Name = "dropMasterSkybox";
 			this.dropMasterSkybox.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterSkybox.TabIndex = 95;
@@ -2366,7 +2366,7 @@
 			this.label31.AutoSize = true;
 			this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label31.ForeColor = System.Drawing.Color.White;
-			this.label31.Location = new System.Drawing.Point(304, 39);
+			this.label31.Location = new System.Drawing.Point(304, 34);
 			this.label31.Name = "label31";
 			this.label31.Size = new System.Drawing.Size(42, 13);
 			this.label31.TabIndex = 97;
@@ -2577,7 +2577,7 @@
 			this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-			this.lblConfigColorHelp.Location = new System.Drawing.Point(420, 212);
+			this.lblConfigColorHelp.Location = new System.Drawing.Point(420, 196);
 			this.lblConfigColorHelp.Name = "lblConfigColorHelp";
 			this.lblConfigColorHelp.Size = new System.Drawing.Size(16, 16);
 			this.lblConfigColorHelp.TabIndex = 112;
