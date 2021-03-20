@@ -28,6 +28,8 @@ namespace Thumper___Leaf_Editor
 				if (loadedleaf != value) {
 					loadedleaf = value;
 					LeafEditorVisible();
+					leafsaveAsToolStripMenuItem.Enabled = true;
+					leafsaveToolStripMenuItem.Enabled = true;
 				}
 			}
 		}
@@ -770,6 +772,9 @@ namespace Thumper___Leaf_Editor
 
 			JArray seq_objs = new JArray();
 			foreach (Sequencer_Object seq_obj in _tracks) {
+				//skip blank tracks
+				if (seq_obj.friendly_param == null)
+					continue;
 				JObject s = new JObject();
 				s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
 				s.Add("param_path", seq_obj.param_path);

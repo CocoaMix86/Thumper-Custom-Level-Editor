@@ -23,6 +23,8 @@ namespace Thumper___Leaf_Editor
 				if (loadedlvl != value) {
 					loadedlvl = value;
 					LvlEditorVisible();
+					lvlsaveAsToolStripMenuItem.Enabled = true;
+					lvlsaveToolStripMenuItem2.Enabled = true;
 				}
 			}
 		}

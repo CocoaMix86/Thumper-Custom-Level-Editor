@@ -21,6 +21,8 @@ namespace Thumper___Leaf_Editor
 				if (loadedmaster != value) {
 					loadedmaster = value;
 					MasterEditorVisible();
+					mastersaveAsToolStripMenuItem.Enabled = true;
+					mastersaveToolStripMenuItem.Enabled = true;
 				}
 			}
 		}

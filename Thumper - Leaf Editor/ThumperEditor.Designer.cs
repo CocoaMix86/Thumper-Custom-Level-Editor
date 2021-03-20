@@ -258,7 +258,7 @@
             this.leafsaveAsToolStripMenuItem});
 			this.saveToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
 			this.saveToolStripMenuItem1.Text = "Leaf...";
 			// 
 			// leafnewToolStripMenuItem
@@ -267,7 +267,7 @@
 			this.leafnewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafnewToolStripMenuItem.Name = "leafnewToolStripMenuItem";
 			this.leafnewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.leafnewToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.leafnewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.leafnewToolStripMenuItem.Text = "New";
 			this.leafnewToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
@@ -277,27 +277,29 @@
 			this.leafloadToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafloadToolStripMenuItem.Name = "leafloadToolStripMenuItem";
 			this.leafloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.leafloadToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.leafloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.leafloadToolStripMenuItem.Text = "Open";
 			this.leafloadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
 			// 
 			// leafsaveToolStripMenuItem
 			// 
 			this.leafsaveToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.leafsaveToolStripMenuItem.Enabled = false;
 			this.leafsaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafsaveToolStripMenuItem.Name = "leafsaveToolStripMenuItem";
 			this.leafsaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.leafsaveToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.leafsaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.leafsaveToolStripMenuItem.Text = "Save";
 			this.leafsaveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
 			// leafsaveAsToolStripMenuItem
 			// 
 			this.leafsaveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.leafsaveAsToolStripMenuItem.Enabled = false;
 			this.leafsaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafsaveAsToolStripMenuItem.Name = "leafsaveAsToolStripMenuItem";
 			this.leafsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-			this.leafsaveAsToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.leafsaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.leafsaveAsToolStripMenuItem.Text = "Save As";
 			this.leafsaveAsToolStripMenuItem.Click += new System.EventHandler(this.leafsaveAsToolStripMenuItem_Click);
 			// 
@@ -311,7 +313,7 @@
             this.lvlsaveAsToolStripMenuItem});
 			this.levelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-			this.levelToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+			this.levelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.levelToolStripMenuItem.Text = "Level...";
 			// 
 			// lvlnewToolStripMenuItem1
@@ -320,7 +322,7 @@
 			this.lvlnewToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.lvlnewToolStripMenuItem1.Name = "lvlnewToolStripMenuItem1";
 			this.lvlnewToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
-			this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+			this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
 			this.lvlnewToolStripMenuItem1.Text = "New";
 			this.lvlnewToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
 			// 
@@ -330,27 +332,29 @@
 			this.lvlopenToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.lvlopenToolStripMenuItem.Name = "lvlopenToolStripMenuItem";
 			this.lvlopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-			this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+			this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.lvlopenToolStripMenuItem.Text = "Open";
 			this.lvlopenToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
 			// lvlsaveToolStripMenuItem2
 			// 
 			this.lvlsaveToolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.lvlsaveToolStripMenuItem2.Enabled = false;
 			this.lvlsaveToolStripMenuItem2.ForeColor = System.Drawing.Color.White;
 			this.lvlsaveToolStripMenuItem2.Name = "lvlsaveToolStripMenuItem2";
 			this.lvlsaveToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-			this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(154, 22);
+			this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
 			this.lvlsaveToolStripMenuItem2.Text = "Save";
 			this.lvlsaveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
 			// 
 			// lvlsaveAsToolStripMenuItem
 			// 
 			this.lvlsaveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.lvlsaveAsToolStripMenuItem.Enabled = false;
 			this.lvlsaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.lvlsaveAsToolStripMenuItem.Name = "lvlsaveAsToolStripMenuItem";
 			this.lvlsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-			this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+			this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.lvlsaveAsToolStripMenuItem.Text = "Save As";
 			this.lvlsaveAsToolStripMenuItem.Click += new System.EventHandler(this.lvlsaveAsToolStripMenuItem_Click);
 			// 
@@ -364,7 +368,7 @@
             this.mastersaveAsToolStripMenuItem});
 			this.masterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
-			this.masterToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+			this.masterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.masterToolStripMenuItem.Text = "Master...";
 			// 
 			// masternewToolStripMenuItem
@@ -392,6 +396,7 @@
 			// mastersaveToolStripMenuItem
 			// 
 			this.mastersaveToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.mastersaveToolStripMenuItem.Enabled = false;
 			this.mastersaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.mastersaveToolStripMenuItem.Name = "mastersaveToolStripMenuItem";
 			this.mastersaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
@@ -403,6 +408,7 @@
 			// mastersaveAsToolStripMenuItem
 			// 
 			this.mastersaveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.mastersaveAsToolStripMenuItem.Enabled = false;
 			this.mastersaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.mastersaveAsToolStripMenuItem.Name = "mastersaveAsToolStripMenuItem";
 			this.mastersaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
