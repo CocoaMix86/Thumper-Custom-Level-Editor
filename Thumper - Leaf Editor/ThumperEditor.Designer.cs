@@ -99,7 +99,9 @@
 			this.panelZoom = new System.Windows.Forms.Panel();
 			this.btnRawImport = new System.Windows.Forms.Button();
 			this.panelLeaf = new System.Windows.Forms.Panel();
+			this.btnLeafPanelOpen = new System.Windows.Forms.Button();
 			this.dropLeafStep = new System.Windows.Forms.ComboBox();
+			this.btnLeafPanelNew = new System.Windows.Forms.Button();
 			this.lblLeafMax = new System.Windows.Forms.Label();
 			this.lblLeafClose = new System.Windows.Forms.Label();
 			this.btnTrackClear = new System.Windows.Forms.Button();
@@ -161,6 +163,12 @@
 			this.label28 = new System.Windows.Forms.Label();
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
 			this.panelMaster = new System.Windows.Forms.Panel();
+			this.label27 = new System.Windows.Forms.Label();
+			this.NUD_ConfigBPM = new System.Windows.Forms.NumericUpDown();
+			this.label12 = new System.Windows.Forms.Label();
+			this.btnConfigPathColor = new System.Windows.Forms.Button();
+			this.btnConfigGlowColor = new System.Windows.Forms.Button();
+			this.btnConfigRailColor = new System.Windows.Forms.Button();
 			this.btnMasterPanelOpen = new System.Windows.Forms.Button();
 			this.lblMasterRestHelp = new System.Windows.Forms.Label();
 			this.btnMasterPanelNew = new System.Windows.Forms.Button();
@@ -188,8 +196,7 @@
 			this.lblMasterName = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-			this.btnLeafPanelOpen = new System.Windows.Forms.Button();
-			this.btnLeafPanelNew = new System.Windows.Forms.Button();
+			this.lblConfigColorHelp = new System.Windows.Forms.Label();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -209,6 +216,7 @@
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).BeginInit();
 			this.panelMaster.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -567,7 +575,7 @@
 			this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
 			this.aboutToolStripMenuItem.Text = "About...";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
@@ -576,7 +584,7 @@
 			this.helpToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.helpToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-			this.helpToolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
+			this.helpToolStripMenuItem1.Size = new System.Drawing.Size(205, 22);
 			this.helpToolStripMenuItem1.Text = "Help...";
 			this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
 			// 
@@ -585,8 +593,8 @@
 			this.tentaclesPathsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.tentaclesPathsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.tentaclesPathsToolStripMenuItem.Name = "tentaclesPathsToolStripMenuItem";
-			this.tentaclesPathsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-			this.tentaclesPathsToolStripMenuItem.Text = "Tentacles, Paths...";
+			this.tentaclesPathsToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+			this.tentaclesPathsToolStripMenuItem.Text = "Tentacles/Paths Visuals";
 			this.tentaclesPathsToolStripMenuItem.Click += new System.EventHandler(this.tentaclesPathsToolStripMenuItem_Click);
 			// 
 			// label1
@@ -920,6 +928,19 @@
 			this.panelLeaf.Size = new System.Drawing.Size(652, 536);
 			this.panelLeaf.TabIndex = 45;
 			// 
+			// btnLeafPanelOpen
+			// 
+			this.btnLeafPanelOpen.BackColor = System.Drawing.Color.Gray;
+			this.btnLeafPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnLeafPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLeafPanelOpen.Location = new System.Drawing.Point(9, 62);
+			this.btnLeafPanelOpen.Name = "btnLeafPanelOpen";
+			this.btnLeafPanelOpen.Size = new System.Drawing.Size(101, 40);
+			this.btnLeafPanelOpen.TabIndex = 95;
+			this.btnLeafPanelOpen.Text = "Open Leaf";
+			this.btnLeafPanelOpen.UseVisualStyleBackColor = false;
+			this.btnLeafPanelOpen.Click += new System.EventHandler(this.btnLeafPanelOpen_Click);
+			// 
 			// dropLeafStep
 			// 
 			this.dropLeafStep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -936,6 +957,19 @@
 			this.dropLeafStep.Text = "True";
 			this.dropLeafStep.Visible = false;
 			this.dropLeafStep.SelectedIndexChanged += new System.EventHandler(this.dropLeafStep_SelectedIndexChanged);
+			// 
+			// btnLeafPanelNew
+			// 
+			this.btnLeafPanelNew.BackColor = System.Drawing.Color.Gray;
+			this.btnLeafPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnLeafPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLeafPanelNew.Location = new System.Drawing.Point(9, 20);
+			this.btnLeafPanelNew.Name = "btnLeafPanelNew";
+			this.btnLeafPanelNew.Size = new System.Drawing.Size(101, 40);
+			this.btnLeafPanelNew.TabIndex = 94;
+			this.btnLeafPanelNew.Text = "New Leaf";
+			this.btnLeafPanelNew.UseVisualStyleBackColor = false;
+			this.btnLeafPanelNew.Click += new System.EventHandler(this.btnLeafPanelNew_Click);
 			// 
 			// lblLeafMax
 			// 
@@ -1025,6 +1059,11 @@
             0,
             0,
             0});
+			this.txtDefault.Minimum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            -2147483648});
 			this.txtDefault.Name = "txtDefault";
 			this.txtDefault.Size = new System.Drawing.Size(87, 20);
 			this.txtDefault.TabIndex = 64;
@@ -1461,7 +1500,7 @@
             5,
             0,
             0,
-            65536});
+            131072});
 			this.NUD_lvlVolume.Location = new System.Drawing.Point(106, 290);
 			this.NUD_lvlVolume.Maximum = new decimal(new int[] {
             10,
@@ -2030,6 +2069,12 @@
 			// 
 			this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelMaster.Controls.Add(this.label27);
+			this.panelMaster.Controls.Add(this.NUD_ConfigBPM);
+			this.panelMaster.Controls.Add(this.label12);
+			this.panelMaster.Controls.Add(this.btnConfigPathColor);
+			this.panelMaster.Controls.Add(this.btnConfigGlowColor);
+			this.panelMaster.Controls.Add(this.btnConfigRailColor);
 			this.panelMaster.Controls.Add(this.btnMasterPanelOpen);
 			this.panelMaster.Controls.Add(this.lblMasterRestHelp);
 			this.panelMaster.Controls.Add(this.btnMasterPanelNew);
@@ -2055,10 +2100,90 @@
 			this.panelMaster.Controls.Add(this.lblMasterMax);
 			this.panelMaster.Controls.Add(this.lblMasterClose);
 			this.panelMaster.Controls.Add(this.lblMasterName);
+			this.panelMaster.Controls.Add(this.lblConfigColorHelp);
 			this.panelMaster.Location = new System.Drawing.Point(4, 29);
 			this.panelMaster.Name = "panelMaster";
-			this.panelMaster.Size = new System.Drawing.Size(445, 296);
+			this.panelMaster.Size = new System.Drawing.Size(460, 332);
 			this.panelMaster.TabIndex = 47;
+			// 
+			// label27
+			// 
+			this.label27.AutoSize = true;
+			this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label27.ForeColor = System.Drawing.Color.White;
+			this.label27.Location = new System.Drawing.Point(304, 186);
+			this.label27.Name = "label27";
+			this.label27.Size = new System.Drawing.Size(30, 13);
+			this.label27.TabIndex = 111;
+			this.label27.Text = "BPM";
+			this.label27.Visible = false;
+			// 
+			// NUD_ConfigBPM
+			// 
+			this.NUD_ConfigBPM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.NUD_ConfigBPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.NUD_ConfigBPM.ForeColor = System.Drawing.Color.White;
+			this.NUD_ConfigBPM.Location = new System.Drawing.Point(340, 183);
+			this.NUD_ConfigBPM.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+			this.NUD_ConfigBPM.Name = "NUD_ConfigBPM";
+			this.NUD_ConfigBPM.Size = new System.Drawing.Size(83, 20);
+			this.NUD_ConfigBPM.TabIndex = 96;
+			this.NUD_ConfigBPM.Visible = false;
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label12.ForeColor = System.Drawing.Color.White;
+			this.label12.Location = new System.Drawing.Point(304, 167);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(90, 13);
+			this.label12.TabIndex = 110;
+			this.label12.Text = "Config Options";
+			this.label12.Visible = false;
+			// 
+			// btnConfigPathColor
+			// 
+			this.btnConfigPathColor.BackColor = System.Drawing.Color.White;
+			this.btnConfigPathColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnConfigPathColor.Location = new System.Drawing.Point(307, 267);
+			this.btnConfigPathColor.Name = "btnConfigPathColor";
+			this.btnConfigPathColor.Size = new System.Drawing.Size(116, 23);
+			this.btnConfigPathColor.TabIndex = 109;
+			this.btnConfigPathColor.Text = "Path Colour";
+			this.btnConfigPathColor.UseVisualStyleBackColor = false;
+			this.btnConfigPathColor.Visible = false;
+			this.btnConfigPathColor.Click += new System.EventHandler(this.btnConfigPathColor_Click);
+			// 
+			// btnConfigGlowColor
+			// 
+			this.btnConfigGlowColor.BackColor = System.Drawing.Color.White;
+			this.btnConfigGlowColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnConfigGlowColor.Location = new System.Drawing.Point(307, 238);
+			this.btnConfigGlowColor.Name = "btnConfigGlowColor";
+			this.btnConfigGlowColor.Size = new System.Drawing.Size(116, 23);
+			this.btnConfigGlowColor.TabIndex = 108;
+			this.btnConfigGlowColor.Text = "Rail Glow Colour";
+			this.btnConfigGlowColor.UseVisualStyleBackColor = false;
+			this.btnConfigGlowColor.Visible = false;
+			this.btnConfigGlowColor.Click += new System.EventHandler(this.btnConfigGlowColor_Click);
+			// 
+			// btnConfigRailColor
+			// 
+			this.btnConfigRailColor.BackColor = System.Drawing.Color.White;
+			this.btnConfigRailColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnConfigRailColor.Location = new System.Drawing.Point(307, 209);
+			this.btnConfigRailColor.Name = "btnConfigRailColor";
+			this.btnConfigRailColor.Size = new System.Drawing.Size(116, 23);
+			this.btnConfigRailColor.TabIndex = 96;
+			this.btnConfigRailColor.Text = "Rail Colour";
+			this.btnConfigRailColor.UseVisualStyleBackColor = false;
+			this.btnConfigRailColor.Visible = false;
+			this.btnConfigRailColor.Click += new System.EventHandler(this.btnConfigRailColor_Click);
 			// 
 			// btnMasterPanelOpen
 			// 
@@ -2129,6 +2254,7 @@
 			this.dropMasterLvlRest.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterLvlRest.TabIndex = 105;
 			this.dropMasterLvlRest.Visible = false;
+			this.dropMasterLvlRest.SelectedIndexChanged += new System.EventHandler(this.dropMasterLvlRest_SelectedIndexChanged);
 			// 
 			// label35
 			// 
@@ -2155,6 +2281,7 @@
 			this.dropMasterLvlLeader.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterLvlLeader.TabIndex = 103;
 			this.dropMasterLvlLeader.Visible = false;
+			this.dropMasterLvlLeader.SelectedIndexChanged += new System.EventHandler(this.dropMasterLvlLeader_SelectedIndexChanged);
 			// 
 			// label34
 			// 
@@ -2411,7 +2538,7 @@
 			this.lblMasterMax.AutoSize = true;
 			this.lblMasterMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterMax.Location = new System.Drawing.Point(408, 1);
+			this.lblMasterMax.Location = new System.Drawing.Point(423, 1);
 			this.lblMasterMax.Name = "lblMasterMax";
 			this.lblMasterMax.Size = new System.Drawing.Size(16, 15);
 			this.lblMasterMax.TabIndex = 52;
@@ -2424,7 +2551,7 @@
 			this.lblMasterClose.AutoSize = true;
 			this.lblMasterClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterClose.Location = new System.Drawing.Point(424, 1);
+			this.lblMasterClose.Location = new System.Drawing.Point(439, 1);
 			this.lblMasterClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblMasterClose.Name = "lblMasterClose";
 			this.lblMasterClose.Size = new System.Drawing.Size(16, 15);
@@ -2443,31 +2570,20 @@
 			this.lblMasterName.TabIndex = 49;
 			this.lblMasterName.Text = "Master Editor";
 			// 
-			// btnLeafPanelOpen
+			// lblConfigColorHelp
 			// 
-			this.btnLeafPanelOpen.BackColor = System.Drawing.Color.Gray;
-			this.btnLeafPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLeafPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnLeafPanelOpen.Location = new System.Drawing.Point(9, 62);
-			this.btnLeafPanelOpen.Name = "btnLeafPanelOpen";
-			this.btnLeafPanelOpen.Size = new System.Drawing.Size(101, 40);
-			this.btnLeafPanelOpen.TabIndex = 95;
-			this.btnLeafPanelOpen.Text = "Open Leaf";
-			this.btnLeafPanelOpen.UseVisualStyleBackColor = false;
-			this.btnLeafPanelOpen.Click += new System.EventHandler(this.btnLeafPanelOpen_Click);
-			// 
-			// btnLeafPanelNew
-			// 
-			this.btnLeafPanelNew.BackColor = System.Drawing.Color.Gray;
-			this.btnLeafPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnLeafPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnLeafPanelNew.Location = new System.Drawing.Point(9, 20);
-			this.btnLeafPanelNew.Name = "btnLeafPanelNew";
-			this.btnLeafPanelNew.Size = new System.Drawing.Size(101, 40);
-			this.btnLeafPanelNew.TabIndex = 94;
-			this.btnLeafPanelNew.Text = "New Leaf";
-			this.btnLeafPanelNew.UseVisualStyleBackColor = false;
-			this.btnLeafPanelNew.Click += new System.EventHandler(this.btnLeafPanelNew_Click);
+			this.lblConfigColorHelp.AutoSize = true;
+			this.lblConfigColorHelp.BackColor = System.Drawing.Color.Transparent;
+			this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+			this.lblConfigColorHelp.Location = new System.Drawing.Point(420, 212);
+			this.lblConfigColorHelp.Name = "lblConfigColorHelp";
+			this.lblConfigColorHelp.Size = new System.Drawing.Size(16, 16);
+			this.lblConfigColorHelp.TabIndex = 112;
+			this.lblConfigColorHelp.Text = "?";
+			this.lblConfigColorHelp.Visible = false;
+			this.lblConfigColorHelp.Click += new System.EventHandler(this.lblConfigColorHelp_Click);
 			// 
 			// FormLeafEditor
 			// 
@@ -2512,6 +2628,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).EndInit();
 			this.panelMaster.ResumeLayout(false);
 			this.panelMaster.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -2649,7 +2766,6 @@
 		private System.Windows.Forms.ToolStripMenuItem mastersaveAsToolStripMenuItem;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.ComboBox dropMasterSkybox;
-		private System.Windows.Forms.Label label31;
 		private System.Windows.Forms.Label label33;
 		private System.Windows.Forms.ComboBox dropMasterCheck;
 		private System.Windows.Forms.Label label32;
@@ -2664,6 +2780,14 @@
 		private System.Windows.Forms.Button btnMasterPanelNew;
 		private System.Windows.Forms.Button btnLeafPanelOpen;
 		private System.Windows.Forms.Button btnLeafPanelNew;
+		private System.Windows.Forms.Button btnConfigPathColor;
+		private System.Windows.Forms.Button btnConfigGlowColor;
+		private System.Windows.Forms.Button btnConfigRailColor;
+		private System.Windows.Forms.Label label27;
+		private System.Windows.Forms.NumericUpDown NUD_ConfigBPM;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label label31;
+		private System.Windows.Forms.Label lblConfigColorHelp;
 	}
 }
 

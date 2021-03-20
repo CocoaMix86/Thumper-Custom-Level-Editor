@@ -234,6 +234,7 @@ namespace Thumper___Leaf_Editor
 					ofd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
 					ofd.Title = "Load a Thumper Lvl file";
 					if (ofd.ShowDialog() == DialogResult.OK) {
+						//storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
 						_loadedlvltemp = ofd.FileName;
 						//load json from file into _load. The regex strips any comments from the text.
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));

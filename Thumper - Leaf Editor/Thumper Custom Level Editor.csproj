@@ -63,6 +63,12 @@
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlMoverOrResizer.cs" />
+    <Compile Include="ImageMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageMessageBox.Designer.cs">
+      <DependentUpon>ImageMessageBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interpolator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageMessageBox.resx">
+      <DependentUpon>ImageMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interpolator.resx">
       <DependentUpon>Interpolator.cs</DependentUpon>
@@ -124,6 +133,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="image assets\railcolorhelp.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <Content Include="text assets\track objects.txt" />
