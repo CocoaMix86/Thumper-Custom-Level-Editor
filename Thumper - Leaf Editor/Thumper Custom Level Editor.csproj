@@ -63,6 +63,9 @@
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlMoverOrResizer.cs" />
+    <Compile Include="Gate_Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ImageMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="image assets\railcolorhelp.png" />
-    <None Include="text assets\leaf_template.txt" />
     <None Include="text assets\leaf_singletrack.txt" />
     <None Include="text assets\leaf_multitrack.txt" />
     <Content Include="text assets\paths.txt" />
