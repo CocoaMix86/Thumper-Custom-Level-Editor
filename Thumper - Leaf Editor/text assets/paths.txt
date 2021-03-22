@@ -26,6 +26,7 @@ lattice2_purple.path
 scaffold_hex.path
 scaffold_hex_bright.path
 cave_diamond_glass.path
+cave_diamond_bright.path
 occlusion_ring_pentagon.path
 cave_diamond_chrome_ring.path
 tube_triangle_flipped_bright.path
@@ -49,6 +50,7 @@ tube_diamond_chrome_glass_add.path
 tube_triangle_flipped_chrome.path
 tube_triangle_flipped_bright.path
 occlusion_tube02_white.path
+occlusion_tube02_psych.path
 cave_diamond_chrome.path
 cave_square_chrome.path
 cave_square_bright.path

@@ -63,12 +63,30 @@ namespace Thumper___Leaf_Editor.Properties {
         /// <summary>
         ///   Looks up a localized string similar to {
         ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.&quot;,
-        ///&quot;masterCheckLeader&quot;: &quot;If not empty, this lvl will play...&quot;,
-        ///&quot;masterRest&quot;: &quot;If not empty, this lvl will play before the main lvl. Usually used as a lo [rest of string was truncated]&quot;;.
+        ///&quot;masterCheckLeader&quot;: &quot;Currently unsure what exactly this does.&quot;,
+        ///&quot;masterRest&quot;: &quot;If not empty, this lvl will play before the main lvl. Usually used as [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string helptext {
             get {
                 return ResourceManager.GetString("helptext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_da [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string leaf_multitrack {
+            get {
+                return ResourceManager.GetString("leaf_multitrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string leaf_singletrack {
+            get {
+                return ResourceManager.GetString("leaf_singletrack", resourceCulture);
             }
         }
         

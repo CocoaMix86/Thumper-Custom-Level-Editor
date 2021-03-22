@@ -17,15 +17,17 @@ namespace Thumper___Leaf_Editor
 			get { return _workingfolder; }
 			set
 			{
-				_workingfolder = value;
-				lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
-				lvlsinworkfolder.Add("");
-				lvlsinworkfolder.Sort();
-				///add lvl list as datasources to dropdowns
-				dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
-				dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
-				dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
-				dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
+				if (_workingfolder != value) {
+					_workingfolder = value;
+					lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
+					lvlsinworkfolder.Add("");
+					lvlsinworkfolder.Sort();
+					///add lvl list as datasources to dropdowns
+					dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
+					dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
+					dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
+					dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
+				}
 			}
 		}
 		private string _workingfolder;
@@ -139,6 +141,13 @@ namespace Thumper___Leaf_Editor
 			dropTimeSig.DataSource = _timesig;
 			//
 			SaveLeaf(true);
+
+			///Create directory for leaf templates
+			if (!Directory.Exists(@"templates")) {
+				Directory.CreateDirectory(@"templates");
+				File.WriteAllText(@"templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
+				File.WriteAllText(@"templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
+			}
 		}
 
 		

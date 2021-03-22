@@ -134,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="image assets\railcolorhelp.png" />
+    <None Include="text assets\leaf_template.txt" />
+    <None Include="text assets\leaf_singletrack.txt" />
+    <None Include="text assets\leaf_multitrack.txt" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <Content Include="text assets\track objects.txt" />

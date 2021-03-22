@@ -53,6 +53,8 @@
 			this.leafloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.leafsaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.leafsaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.leafTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lvlnewToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.lvlopenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,11 +68,11 @@
 			this.levelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.trackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moveTrackUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moveTrackDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.trackColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.interpolatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.leafEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,6 +101,7 @@
 			this.panelZoom = new System.Windows.Forms.Panel();
 			this.btnRawImport = new System.Windows.Forms.Button();
 			this.panelLeaf = new System.Windows.Forms.Panel();
+			this.btnLeafPanelTemplate = new System.Windows.Forms.Button();
 			this.btnLeafPanelOpen = new System.Windows.Forms.Button();
 			this.dropLeafStep = new System.Windows.Forms.ComboBox();
 			this.btnLeafPanelNew = new System.Windows.Forms.Button();
@@ -163,6 +166,9 @@
 			this.label28 = new System.Windows.Forms.Label();
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
 			this.panelMaster = new System.Windows.Forms.Panel();
+			this.btnMasterOpenCheckpoint = new System.Windows.Forms.Button();
+			this.btnMasterOpenIntro = new System.Windows.Forms.Button();
+			this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
 			this.label27 = new System.Windows.Forms.Label();
 			this.NUD_ConfigBPM = new System.Windows.Forms.NumericUpDown();
 			this.label12 = new System.Windows.Forms.Label();
@@ -184,7 +190,6 @@
 			this.dropMasterSkybox = new System.Windows.Forms.ComboBox();
 			this.label31 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
-			this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
 			this.label30 = new System.Windows.Forms.Label();
 			this.btnMasterLvlAdd = new System.Windows.Forms.Button();
 			this.btnMasterLvlDown = new System.Windows.Forms.Button();
@@ -255,7 +260,9 @@
             this.leafnewToolStripMenuItem,
             this.leafloadToolStripMenuItem,
             this.leafsaveToolStripMenuItem,
-            this.leafsaveAsToolStripMenuItem});
+            this.leafsaveAsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.leafTemplateToolStripMenuItem});
 			this.saveToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
 			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
@@ -267,7 +274,7 @@
 			this.leafnewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafnewToolStripMenuItem.Name = "leafnewToolStripMenuItem";
 			this.leafnewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.leafnewToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.leafnewToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.leafnewToolStripMenuItem.Text = "New";
 			this.leafnewToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
@@ -277,7 +284,7 @@
 			this.leafloadToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafloadToolStripMenuItem.Name = "leafloadToolStripMenuItem";
 			this.leafloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.leafloadToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.leafloadToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.leafloadToolStripMenuItem.Text = "Open";
 			this.leafloadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
 			// 
@@ -288,7 +295,7 @@
 			this.leafsaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafsaveToolStripMenuItem.Name = "leafsaveToolStripMenuItem";
 			this.leafsaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.leafsaveToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.leafsaveToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.leafsaveToolStripMenuItem.Text = "Save";
 			this.leafsaveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
@@ -299,9 +306,26 @@
 			this.leafsaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafsaveAsToolStripMenuItem.Name = "leafsaveAsToolStripMenuItem";
 			this.leafsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-			this.leafsaveAsToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.leafsaveAsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
 			this.leafsaveAsToolStripMenuItem.Text = "Save As";
 			this.leafsaveAsToolStripMenuItem.Click += new System.EventHandler(this.leafsaveAsToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.toolStripSeparator1.ForeColor = System.Drawing.Color.Black;
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
+			// 
+			// leafTemplateToolStripMenuItem
+			// 
+			this.leafTemplateToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.leafTemplateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.leafTemplateToolStripMenuItem.Name = "leafTemplateToolStripMenuItem";
+			this.leafTemplateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+			this.leafTemplateToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.leafTemplateToolStripMenuItem.Text = "Load Template";
+			this.leafTemplateToolStripMenuItem.Click += new System.EventHandler(this.leafTemplateToolStripMenuItem_Click);
 			// 
 			// levelToolStripMenuItem
 			// 
@@ -428,11 +452,11 @@
 			// 
 			this.trackToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
-            this.toolStripMenuItem1,
             this.deleteToolStripMenuItem,
             this.moveTrackUpToolStripMenuItem,
             this.moveTrackDownToolStripMenuItem,
-            this.trackColorToolStripMenuItem});
+            this.trackColorToolStripMenuItem,
+            this.toolStripMenuItem1});
 			this.trackToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.trackToolStripMenuItem.Name = "trackToolStripMenuItem";
 			this.trackToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
@@ -449,13 +473,6 @@
 			this.addToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
 			this.addToolStripMenuItem.Text = "Add Track";
 			this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
-			// 
-			// toolStripMenuItem1
-			// 
-			this.toolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Black;
-			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(239, 6);
 			// 
 			// deleteToolStripMenuItem
 			// 
@@ -507,6 +524,13 @@
 			this.trackColorToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
 			this.trackColorToolStripMenuItem.Text = "Track Color";
 			this.trackColorToolStripMenuItem.Click += new System.EventHandler(this.trackColorToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Black;
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(239, 6);
 			// 
 			// interpolatorToolStripMenuItem
 			// 
@@ -628,11 +652,6 @@
 			this.numericUpDown_LeafLength.Name = "numericUpDown_LeafLength";
 			this.numericUpDown_LeafLength.Size = new System.Drawing.Size(72, 20);
 			this.numericUpDown_LeafLength.TabIndex = 23;
-			this.numericUpDown_LeafLength.Value = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
 			this.numericUpDown_LeafLength.Visible = false;
 			this.numericUpDown_LeafLength.ValueChanged += new System.EventHandler(this.numericUpDown_LeafLength_ValueChanged);
 			// 
@@ -887,6 +906,7 @@
 			// 
 			this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelLeaf.Controls.Add(this.btnLeafPanelTemplate);
 			this.panelLeaf.Controls.Add(this.btnLeafPanelOpen);
 			this.panelLeaf.Controls.Add(this.dropLeafStep);
 			this.panelLeaf.Controls.Add(this.btnLeafPanelNew);
@@ -934,12 +954,25 @@
 			this.panelLeaf.Size = new System.Drawing.Size(1425, 555);
 			this.panelLeaf.TabIndex = 45;
 			// 
+			// btnLeafPanelTemplate
+			// 
+			this.btnLeafPanelTemplate.BackColor = System.Drawing.Color.Gray;
+			this.btnLeafPanelTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnLeafPanelTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnLeafPanelTemplate.Location = new System.Drawing.Point(9, 100);
+			this.btnLeafPanelTemplate.Name = "btnLeafPanelTemplate";
+			this.btnLeafPanelTemplate.Size = new System.Drawing.Size(101, 42);
+			this.btnLeafPanelTemplate.TabIndex = 96;
+			this.btnLeafPanelTemplate.Text = "Open Template";
+			this.btnLeafPanelTemplate.UseVisualStyleBackColor = false;
+			this.btnLeafPanelTemplate.Click += new System.EventHandler(this.btnLeafPanelTemplate_Click);
+			// 
 			// btnLeafPanelOpen
 			// 
 			this.btnLeafPanelOpen.BackColor = System.Drawing.Color.Gray;
 			this.btnLeafPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLeafPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnLeafPanelOpen.Location = new System.Drawing.Point(9, 62);
+			this.btnLeafPanelOpen.Location = new System.Drawing.Point(9, 60);
 			this.btnLeafPanelOpen.Name = "btnLeafPanelOpen";
 			this.btnLeafPanelOpen.Size = new System.Drawing.Size(101, 40);
 			this.btnLeafPanelOpen.TabIndex = 95;
@@ -1385,7 +1418,7 @@
 			this.btnlvlPanelOpen.BackColor = System.Drawing.Color.Gray;
 			this.btnlvlPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnlvlPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnlvlPanelOpen.Location = new System.Drawing.Point(9, 76);
+			this.btnlvlPanelOpen.Location = new System.Drawing.Point(9, 74);
 			this.btnlvlPanelOpen.Name = "btnlvlPanelOpen";
 			this.btnlvlPanelOpen.Size = new System.Drawing.Size(82, 40);
 			this.btnlvlPanelOpen.TabIndex = 1;
@@ -1409,6 +1442,7 @@
 			// 
 			// dropLvlTutorial
 			// 
+			this.dropLvlTutorial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.dropLvlTutorial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.dropLvlTutorial.DropDownWidth = 200;
 			this.dropLvlTutorial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1432,6 +1466,7 @@
 			// 
 			// label26
 			// 
+			this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label26.AutoSize = true;
 			this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label26.ForeColor = System.Drawing.Color.White;
@@ -1457,6 +1492,7 @@
 			// 
 			// dropLvlInput
 			// 
+			this.dropLvlInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.dropLvlInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.dropLvlInput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.dropLvlInput.ForeColor = System.Drawing.Color.White;
@@ -1474,6 +1510,7 @@
 			// 
 			// label25
 			// 
+			this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label25.AutoSize = true;
 			this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label25.ForeColor = System.Drawing.Color.White;
@@ -1486,6 +1523,7 @@
 			// 
 			// label24
 			// 
+			this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label24.AutoSize = true;
 			this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label24.ForeColor = System.Drawing.Color.White;
@@ -1498,6 +1536,7 @@
 			// 
 			// NUD_lvlVolume
 			// 
+			this.NUD_lvlVolume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.NUD_lvlVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.NUD_lvlVolume.DecimalPlaces = 2;
 			this.NUD_lvlVolume.ForeColor = System.Drawing.Color.White;
@@ -1525,6 +1564,7 @@
 			// 
 			// label23
 			// 
+			this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label23.AutoSize = true;
 			this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label23.ForeColor = System.Drawing.Color.White;
@@ -1555,6 +1595,7 @@
 			// 
 			// NUD_lvlApproach
 			// 
+			this.NUD_lvlApproach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.NUD_lvlApproach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.NUD_lvlApproach.ForeColor = System.Drawing.Color.White;
 			this.NUD_lvlApproach.Location = new System.Drawing.Point(106, 269);
@@ -1857,6 +1898,7 @@
 			// 
 			// btnLvlLeafAdd
 			// 
+			this.btnLvlLeafAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnLvlLeafAdd.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLeafAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnLvlLeafAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1873,6 +1915,7 @@
 			// 
 			// btnLvlLeafDown
 			// 
+			this.btnLvlLeafDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnLvlLeafDown.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLeafDown.Enabled = false;
 			this.btnLvlLeafDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1890,6 +1933,7 @@
 			// 
 			// btnLvlLeafUp
 			// 
+			this.btnLvlLeafUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnLvlLeafUp.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLeafUp.Enabled = false;
 			this.btnLvlLeafUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1907,6 +1951,7 @@
 			// 
 			// btnLvlLeafDelete
 			// 
+			this.btnLvlLeafDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnLvlLeafDelete.BackColor = System.Drawing.Color.Gray;
 			this.btnLvlLeafDelete.Enabled = false;
 			this.btnLvlLeafDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1927,6 +1972,8 @@
 			this.lvlLeafList.AllowUserToAddRows = false;
 			this.lvlLeafList.AllowUserToDeleteRows = false;
 			this.lvlLeafList.AllowUserToResizeRows = false;
+			this.lvlLeafList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.lvlLeafList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.lvlLeafList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.lvlLeafList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -2032,9 +2079,9 @@
 			this.lblLvlName.ForeColor = System.Drawing.Color.White;
 			this.lblLvlName.Location = new System.Drawing.Point(-2, 0);
 			this.lblLvlName.Name = "lblLvlName";
-			this.lblLvlName.Size = new System.Drawing.Size(63, 13);
+			this.lblLvlName.Size = new System.Drawing.Size(51, 13);
 			this.lblLvlName.TabIndex = 48;
-			this.lblLvlName.Text = "Level Editor";
+			this.lblLvlName.Text = "Lvl Editor";
 			// 
 			// panel1
 			// 
@@ -2074,6 +2121,8 @@
 			// 
 			this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelMaster.Controls.Add(this.btnMasterOpenCheckpoint);
+			this.panelMaster.Controls.Add(this.btnMasterOpenIntro);
 			this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
 			this.panelMaster.Controls.Add(this.label27);
 			this.panelMaster.Controls.Add(this.NUD_ConfigBPM);
@@ -2108,8 +2157,57 @@
 			this.panelMaster.Controls.Add(this.lblConfigColorHelp);
 			this.panelMaster.Location = new System.Drawing.Point(4, 29);
 			this.panelMaster.Name = "panelMaster";
-			this.panelMaster.Size = new System.Drawing.Size(460, 343);
+			this.panelMaster.Size = new System.Drawing.Size(462, 307);
 			this.panelMaster.TabIndex = 47;
+			// 
+			// btnMasterOpenCheckpoint
+			// 
+			this.btnMasterOpenCheckpoint.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterOpenCheckpoint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.btnMasterOpenCheckpoint.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
+			this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(424, 124);
+			this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
+			this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(21, 21);
+			this.btnMasterOpenCheckpoint.TabIndex = 115;
+			this.btnMasterOpenCheckpoint.Text = "📂";
+			this.btnMasterOpenCheckpoint.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.btnMasterOpenCheckpoint.UseVisualStyleBackColor = false;
+			this.btnMasterOpenCheckpoint.Visible = false;
+			this.btnMasterOpenCheckpoint.Click += new System.EventHandler(this.btnMasterOpenCheckpoint_Click);
+			// 
+			// btnMasterOpenIntro
+			// 
+			this.btnMasterOpenIntro.BackColor = System.Drawing.Color.Gray;
+			this.btnMasterOpenIntro.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.btnMasterOpenIntro.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
+			this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.btnMasterOpenIntro.Location = new System.Drawing.Point(424, 86);
+			this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
+			this.btnMasterOpenIntro.Size = new System.Drawing.Size(21, 21);
+			this.btnMasterOpenIntro.TabIndex = 114;
+			this.btnMasterOpenIntro.Text = "📂";
+			this.btnMasterOpenIntro.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			this.btnMasterOpenIntro.UseVisualStyleBackColor = false;
+			this.btnMasterOpenIntro.Visible = false;
+			this.btnMasterOpenIntro.Click += new System.EventHandler(this.btnMasterOpenIntro_Click);
+			// 
+			// lblMasterlvllistHelp
+			// 
+			this.lblMasterlvllistHelp.AutoSize = true;
+			this.lblMasterlvllistHelp.BackColor = System.Drawing.Color.Transparent;
+			this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+			this.lblMasterlvllistHelp.Location = new System.Drawing.Point(280, 201);
+			this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
+			this.lblMasterlvllistHelp.Size = new System.Drawing.Size(16, 16);
+			this.lblMasterlvllistHelp.TabIndex = 95;
+			this.lblMasterlvllistHelp.Text = "?";
+			this.lblMasterlvllistHelp.Visible = false;
+			this.lblMasterlvllistHelp.Click += new System.EventHandler(this.lblMasterlvllistHelp_Click);
 			// 
 			// label27
 			// 
@@ -2195,7 +2293,7 @@
 			this.btnMasterPanelOpen.BackColor = System.Drawing.Color.Gray;
 			this.btnMasterPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnMasterPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnMasterPanelOpen.Location = new System.Drawing.Point(9, 80);
+			this.btnMasterPanelOpen.Location = new System.Drawing.Point(9, 78);
 			this.btnMasterPanelOpen.Name = "btnMasterPanelOpen";
 			this.btnMasterPanelOpen.Size = new System.Drawing.Size(108, 40);
 			this.btnMasterPanelOpen.TabIndex = 95;
@@ -2205,6 +2303,7 @@
 			// 
 			// lblMasterRestHelp
 			// 
+			this.lblMasterRestHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.lblMasterRestHelp.AutoSize = true;
 			this.lblMasterRestHelp.BackColor = System.Drawing.Color.Transparent;
 			this.lblMasterRestHelp.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -2233,6 +2332,7 @@
 			// 
 			// lblMasterCheckpointLeaderHelp
 			// 
+			this.lblMasterCheckpointLeaderHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.lblMasterCheckpointLeaderHelp.AutoSize = true;
 			this.lblMasterCheckpointLeaderHelp.BackColor = System.Drawing.Color.Transparent;
 			this.lblMasterCheckpointLeaderHelp.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -2248,6 +2348,7 @@
 			// 
 			// dropMasterLvlRest
 			// 
+			this.dropMasterLvlRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.dropMasterLvlRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.dropMasterLvlRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.dropMasterLvlRest.ForeColor = System.Drawing.Color.White;
@@ -2263,6 +2364,7 @@
 			// 
 			// label35
 			// 
+			this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label35.AutoSize = true;
 			this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label35.ForeColor = System.Drawing.Color.White;
@@ -2275,6 +2377,7 @@
 			// 
 			// dropMasterLvlLeader
 			// 
+			this.dropMasterLvlLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.dropMasterLvlLeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.dropMasterLvlLeader.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.dropMasterLvlLeader.ForeColor = System.Drawing.Color.White;
@@ -2290,6 +2393,7 @@
 			// 
 			// label34
 			// 
+			this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label34.AutoSize = true;
 			this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label34.ForeColor = System.Drawing.Color.White;
@@ -2390,21 +2494,6 @@
 			this.label13.Text = "Master Options";
 			this.label13.Visible = false;
 			// 
-			// lblMasterlvllistHelp
-			// 
-			this.lblMasterlvllistHelp.AutoSize = true;
-			this.lblMasterlvllistHelp.BackColor = System.Drawing.Color.Transparent;
-			this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-			this.lblMasterlvllistHelp.Location = new System.Drawing.Point(280, 201);
-			this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
-			this.lblMasterlvllistHelp.Size = new System.Drawing.Size(16, 16);
-			this.lblMasterlvllistHelp.TabIndex = 95;
-			this.lblMasterlvllistHelp.Text = "?";
-			this.lblMasterlvllistHelp.Visible = false;
-			this.lblMasterlvllistHelp.Click += new System.EventHandler(this.lblMasterlvllistHelp_Click);
-			// 
 			// label30
 			// 
 			this.label30.AutoSize = true;
@@ -2412,13 +2501,14 @@
 			this.label30.ForeColor = System.Drawing.Color.White;
 			this.label30.Location = new System.Drawing.Point(3, 18);
 			this.label30.Name = "label30";
-			this.label30.Size = new System.Drawing.Size(48, 13);
+			this.label30.Size = new System.Drawing.Size(81, 13);
 			this.label30.TabIndex = 94;
-			this.label30.Text = "Lvl List";
+			this.label30.Text = "Lvl/Gate List";
 			this.label30.Visible = false;
 			// 
 			// btnMasterLvlAdd
 			// 
+			this.btnMasterLvlAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnMasterLvlAdd.BackColor = System.Drawing.Color.Gray;
 			this.btnMasterLvlAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnMasterLvlAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2435,6 +2525,7 @@
 			// 
 			// btnMasterLvlDown
 			// 
+			this.btnMasterLvlDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnMasterLvlDown.BackColor = System.Drawing.Color.Gray;
 			this.btnMasterLvlDown.Enabled = false;
 			this.btnMasterLvlDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -2452,6 +2543,7 @@
 			// 
 			// btnMasterLvlUp
 			// 
+			this.btnMasterLvlUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnMasterLvlUp.BackColor = System.Drawing.Color.Gray;
 			this.btnMasterLvlUp.Enabled = false;
 			this.btnMasterLvlUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -2469,6 +2561,7 @@
 			// 
 			// btnMasterLvlDelete
 			// 
+			this.btnMasterLvlDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnMasterLvlDelete.BackColor = System.Drawing.Color.Gray;
 			this.btnMasterLvlDelete.Enabled = false;
 			this.btnMasterLvlDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -2489,6 +2582,8 @@
 			this.masterLvlList.AllowUserToAddRows = false;
 			this.masterLvlList.AllowUserToDeleteRows = false;
 			this.masterLvlList.AllowUserToResizeRows = false;
+			this.masterLvlList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.masterLvlList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -2543,7 +2638,7 @@
 			this.lblMasterMax.AutoSize = true;
 			this.lblMasterMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterMax.Location = new System.Drawing.Point(423, 1);
+			this.lblMasterMax.Location = new System.Drawing.Point(425, 1);
 			this.lblMasterMax.Name = "lblMasterMax";
 			this.lblMasterMax.Size = new System.Drawing.Size(16, 15);
 			this.lblMasterMax.TabIndex = 52;
@@ -2556,7 +2651,7 @@
 			this.lblMasterClose.AutoSize = true;
 			this.lblMasterClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterClose.Location = new System.Drawing.Point(439, 1);
+			this.lblMasterClose.Location = new System.Drawing.Point(441, 1);
 			this.lblMasterClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblMasterClose.Name = "lblMasterClose";
 			this.lblMasterClose.Size = new System.Drawing.Size(16, 15);
@@ -2596,10 +2691,10 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.ClientSize = new System.Drawing.Size(1460, 763);
+			this.Controls.Add(this.menuStrip);
 			this.Controls.Add(this.panelLeaf);
 			this.Controls.Add(this.panelMaster);
 			this.Controls.Add(this.panelLevel);
-			this.Controls.Add(this.menuStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(1000, 39);
 			this.Name = "FormLeafEditor";
@@ -2792,6 +2887,11 @@
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label31;
 		private System.Windows.Forms.Label lblConfigColorHelp;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripMenuItem leafTemplateToolStripMenuItem;
+		private System.Windows.Forms.Button btnLeafPanelTemplate;
+		private System.Windows.Forms.Button btnMasterOpenCheckpoint;
+		private System.Windows.Forms.Button btnMasterOpenIntro;
 	}
 }
 

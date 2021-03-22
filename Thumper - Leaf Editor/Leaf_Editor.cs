@@ -150,9 +150,10 @@ namespace Thumper___Leaf_Editor
 		private void trackEditor_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Back) {
-				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
+				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) 
 					dgvc.Value = null;
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
+				SaveLeaf(false);
 			}
 			e.Handled = true;
 		}
@@ -160,9 +161,10 @@ namespace Thumper___Leaf_Editor
 		private void trackEditor_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Delete) {
-				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
+				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) 
 					dgvc.Value = null;
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
+				SaveLeaf(false);
 			}
 			e.Handled = true;
 		}
@@ -303,12 +305,31 @@ namespace Thumper___Leaf_Editor
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
 				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Leaf File (*.txt)|*.txt";
+					ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
 					ofd.Title = "Load a Thumper Leaf file";
 					if (ofd.ShowDialog() == DialogResult.OK) {
 						_loadedleaf = ofd.FileName;
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLeaf(_load);
+					}
+				}
+			}
+		}
+		/// LEAF - LOAD TEMPLATE
+		private void leafTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
+				using (var ofd = new OpenFileDialog()) {
+					ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
+					ofd.Title = "Load a Thumper Leaf file";
+					//set folder to the templates location
+					ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
+					if (ofd.ShowDialog() == DialogResult.OK) {
+						_loadedleaf = ofd.FileName;
+						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+						LoadLeaf(_load);
+						//set this to null, as it's a template. Next time on save, the user can save the file elsewhere
+						_loadedleaf = null;
 					}
 				}
 			}
@@ -520,17 +541,12 @@ namespace Thumper___Leaf_Editor
 			//call method to update coloring of track
 			TrackUpdateHighlighting(trackEditor.CurrentRow);
 		}
-
-		private void btnLeafPanelNew_Click(object sender, EventArgs e)
-		{
-			leafnewToolStripMenuItem.PerformClick();
-		}
-
-		private void btnLeafPanelOpen_Click(object sender, EventArgs e)
-		{
-			leafloadToolStripMenuItem.PerformClick();
-		}
+		/// These buttons are the initial visible elements, and disappear once a leaf loads
+		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
+		private void btnLeafPanelOpen_Click(object sender, EventArgs e) => leafloadToolStripMenuItem.PerformClick();
+		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => leafTemplateToolStripMenuItem.PerformClick();
 		#endregion
+
 		#region Methods
 		///         ///
 		/// METHODS ///
@@ -585,6 +601,7 @@ namespace Thumper___Leaf_Editor
 				grid.Columns[i].MinimumWidth = 2;
 				grid.Columns[i].ReadOnly = false;
 				grid.Columns[i].ValueType = typeof(string);
+				grid.Columns[i].DefaultCellStyle.Format = "0.######";
 			}
 		}
 		///Import raw text from rich text box to selected row
@@ -676,6 +693,7 @@ namespace Thumper___Leaf_Editor
 				c.Visible = true;
 			btnLeafPanelNew.Visible = false;
 			btnLeafPanelOpen.Visible = false;
+			btnLeafPanelTemplate.Visible = false;
 		}
 
 		///Update DGV from _tracks
@@ -767,6 +785,9 @@ namespace Thumper___Leaf_Editor
 				if (seq_obj.friendly_param == null)
 					continue;
 				JObject s = new JObject();
+				//if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
+				if (seq_obj.obj_name.Contains(".leaf"))
+					seq_obj.obj_name = (string)_save["obj_name"];
 				s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
 				s.Add("param_path", seq_obj.param_path);
 				s.Add("trait_type", seq_obj.trait_type);
@@ -774,7 +795,7 @@ namespace Thumper___Leaf_Editor
 				JObject data_points = new JObject();
 				for (int x = 0; x < trackEditor.ColumnCount; x++) {
 					if (!string.IsNullOrEmpty(trackEditor[x, _tracks.IndexOf(seq_obj)].Value?.ToString()))
-						data_points.Add(x.ToString(), float.Parse(trackEditor[x, _tracks.IndexOf(seq_obj)].Value.ToString()));
+						data_points.Add(x.ToString(), decimal.Parse(trackEditor[x, _tracks.IndexOf(seq_obj)].Value.ToString()));
 				}
 				s.Add("data_points", data_points);
 

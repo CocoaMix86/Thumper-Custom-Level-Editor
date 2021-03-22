@@ -130,7 +130,7 @@ namespace Thumper___Leaf_Editor
 		{
 			if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
 				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Master File (*.txt)|*.txt";
+					ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
 					ofd.Title = "Load a Thumper Master file";
 					if (ofd.ShowDialog() == DialogResult.OK) {
 						//storing the filename in temp so it doesn't overwrite _loadedmaster in case it fails the check in LoadMaster()
@@ -199,7 +199,7 @@ namespace Thumper___Leaf_Editor
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
 			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "Thumper Lvl File (*.txt)|*.txt";
+				ofd.Filter = "Thumper Lvl File (*.txt)|lvl_*.txt";
 				ofd.Title = "Load a Thumper Lvl file";
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					//parse leaf to JSON
@@ -296,6 +296,42 @@ namespace Thumper___Leaf_Editor
 			if (colorDialog1.ShowDialog() == DialogResult.OK) {
 				btnConfigPathColor.BackColor = colorDialog1.Color;
 				SaveMaster(false);
+			}
+		}
+
+		private void btnMasterOpenIntro_Click(object sender, EventArgs e)
+		{
+			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+				string _file = dropMasterIntro.SelectedItem.ToString().Replace(".lvl", "");
+				dynamic _load;
+				try {
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
+				}
+				catch {
+					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
+					return;
+				}
+				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
+				//load the selected lvl
+				LoadLvl(_load);
+			}
+		}
+
+		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e)
+		{
+			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+				string _file = dropMasterCheck.SelectedItem.ToString().Replace(".lvl", "");
+				dynamic _load;
+				try {
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
+				}
+				catch {
+					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
+					return;
+				}
+				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
+				//load the selected lvl
+				LoadLvl(_load);
 			}
 		}
 		#endregion

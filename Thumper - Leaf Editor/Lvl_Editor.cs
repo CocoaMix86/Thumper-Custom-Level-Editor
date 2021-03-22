@@ -176,7 +176,7 @@ namespace Thumper___Leaf_Editor
 				NUD_lvlVolume.Value = 0.5M;
 				dropLvlInput.SelectedIndex = 0;
 				dropLvlTutorial.SelectedIndex = 0;
-				lblLvlName.Text = "Level Editor";
+				lblLvlName.Text = "Lvl Editor";
 				//set saved flag to true, because nothing is loaded
 				SaveLvl(true);
 				lvlsaveAsToolStripMenuItem_Click(null, null);
@@ -194,7 +194,7 @@ namespace Thumper___Leaf_Editor
 			var _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
 			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save));
 			SaveLvl(true);
-			lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
+			lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
 			//reload samples on save
 			LvlReloadSamples();
 		}
@@ -220,7 +220,7 @@ namespace Thumper___Leaf_Editor
 					sfd.FileName = $@"{storePath}\lvl_{tempFileName}";
 					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save));
 					//set a few visual elements to show what file is being worked on
-					lblLvlName.Text = $"Level Editor - {_save["obj_name"]}";
+					lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
 					workingfolder = Path.GetDirectoryName(sfd.FileName);
 					_loadedlvl = sfd.FileName;
 					//set save flag
@@ -233,7 +233,7 @@ namespace Thumper___Leaf_Editor
 		{
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
 				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
+					ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
 					ofd.Title = "Load a Thumper Lvl file";
 					if (ofd.ShowDialog() == DialogResult.OK) {
 						//storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
@@ -256,7 +256,7 @@ namespace Thumper___Leaf_Editor
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
 			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "Thumper Leaf File (*.txt)|*.txt";
+				ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
 				ofd.Title = "Load a Thumper Leaf file";
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					//parse leaf to JSON
@@ -485,7 +485,8 @@ namespace Thumper___Leaf_Editor
 			lvlLeafList.RowHeadersVisible = false;
 			lvlLeafList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
 				ForeColor = Color.White,
-				Font = new Font("Arial", 15, GraphicsUnit.Pixel)
+				Font = new Font("Arial", 15, GraphicsUnit.Pixel),
+				Format = "0.#"
 			};
 			lvlLeafList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 			lvlLeafList.Columns[0].HeaderText = "Leaf";
@@ -513,6 +514,7 @@ namespace Thumper___Leaf_Editor
 			lvlLoopTracks.Columns.Add(_dgvlvlloopsamples);
 			lvlLoopTracks.ColumnCount = 2;
 			lvlLoopTracks.Columns[1].HeaderText = "Beats per loop";
+			lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
 			lvlLoopTracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 			///
 			
