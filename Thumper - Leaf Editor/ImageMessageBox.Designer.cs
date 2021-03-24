@@ -34,11 +34,16 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.ClientSize = new System.Drawing.Size(434, 268);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ImageMessageBox";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
 			this.Text = "ImageMessageBox";
+			this.TopMost = true;
 			this.ResumeLayout(false);
 
 		}

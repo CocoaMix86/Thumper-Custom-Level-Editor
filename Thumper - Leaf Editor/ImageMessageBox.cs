@@ -14,8 +14,16 @@ namespace Thumper___Leaf_Editor
 		{
 			if (path == "railcolorhelp") {
 				this.BackgroundImage = Properties.Resources.railcolorhelp;
-				this.Size = this.BackgroundImage.Size;
+				this.BackgroundImageLayout = ImageLayout.Center;
+				this.Text = "Rail Color Explanation";
 			}
+			if (path == "difficultyhelp") {
+				this.BackgroundImage = Properties.Resources.difficultyhelp;
+				this.BackgroundImageLayout = ImageLayout.Center;
+				this.Text = "Difficulty Explanation";
+			}
+			this.Size = this.BackgroundImage.Size;
+			this.Height += 40;
 		}
 	}
 }
