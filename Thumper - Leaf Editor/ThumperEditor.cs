@@ -61,6 +61,37 @@ namespace Thumper___Leaf_Editor
 		//Tentacles, Paths...
 		private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1wG1Ik_50sd2KeUaX19H8e1jjgl-avf-d8SqZk7rxrkQ");
 
+		/// NEW CUSTOM LEVEL FOLDER
+		private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DialogInput customlevel = new DialogInput();
+			if (customlevel.ShowDialog() == DialogResult.OK) {
+				JObject level_details = new JObject();
+				level_details.Add("level_name", customlevel.txtCustomName.Text);
+				level_details.Add("difficulty", customlevel.txtCustomDiff.Text);
+				level_details.Add("description", customlevel.txtDesc.Text);
+				level_details.Add("author", customlevel.txtCustomAuthor.Text);
+				File.WriteAllText($@"{customlevel.txtCustomPath.Text}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+
+				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\leaf_pyramid_outro.txt")) {
+					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
+				}
+				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\samp_default.txt")) {
+					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\samp_default.txt", Properties.Resources.samp_default);
+				}
+				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\spn_default.txt")) {
+					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\spn_default.txt", Properties.Resources.spn_default);
+				}
+				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\xfm_default.txt")) {
+					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\xfm_default.txt", Properties.Resources.xfm_default);
+				}
+			}
+			else {
+
+			}
+			customlevel.Dispose();
+		}
+
 		///FORM CLOSING - check if anything is unsaved
 		private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
 		{

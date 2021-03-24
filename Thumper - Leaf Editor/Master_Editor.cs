@@ -299,9 +299,34 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
+		private void btnMasterRefreshLvl_Click(object sender, EventArgs e)
+		{
+			lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
+			lvlsinworkfolder.Add("");
+			lvlsinworkfolder.Sort();
+			///add lvl list as datasources to dropdowns
+			var _select = dropMasterCheck.SelectedItem;
+			dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
+			dropMasterCheck.SelectedItem = _select;
+
+			_select = dropMasterIntro.SelectedItem;
+			dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
+			dropMasterIntro.SelectedItem = _select;
+
+			_select = dropMasterLvlLeader.SelectedItem;
+			dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
+			dropMasterLvlLeader.SelectedItem = _select;
+
+			_select = dropMasterLvlRest.SelectedItem;
+			dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
+			dropMasterLvlRest.SelectedItem = _select;
+		}
+
 		private void btnMasterOpenIntro_Click(object sender, EventArgs e)
 		{
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+				if (!dropMasterIntro.SelectedItem.ToString().Contains(".lvl"))
+					return;
 				string _file = dropMasterIntro.SelectedItem.ToString().Replace(".lvl", "");
 				dynamic _load;
 				try {
@@ -320,6 +345,8 @@ namespace Thumper___Leaf_Editor
 		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e)
 		{
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+				if (!dropMasterCheck.SelectedItem.ToString().Contains(".lvl"))
+					return;
 				string _file = dropMasterCheck.SelectedItem.ToString().Replace(".lvl", "");
 				dynamic _load;
 				try {
