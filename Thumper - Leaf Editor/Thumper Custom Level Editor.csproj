@@ -63,6 +63,12 @@
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlMoverOrResizer.cs" />
+    <Compile Include="DialogInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogInput.Designer.cs">
+      <DependentUpon>DialogInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gate_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     <EmbeddedResource Include="AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DialogInput.resx">
+      <DependentUpon>DialogInput.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageMessageBox.resx">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,7 +121,7 @@
       <DependentUpon>ThumperEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -139,9 +148,16 @@
     <None Include="image assets\railcolorhelp.png" />
     <None Include="text assets\leaf_singletrack.txt" />
     <None Include="text assets\leaf_multitrack.txt" />
+    <None Include="image assets\difficultyhelp.png" />
+    <None Include="Resources\difficultyhelp.png" />
+    <None Include="Resources\railcolorhelp.png" />
+    <None Include="text assets\leaf_pyramid_outro.txt" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
+    <None Include="text assets\samp_default.txt" />
+    <None Include="text assets\spn_default.txt" />
     <Content Include="text assets\track objects.txt" />
+    <None Include="text assets\xfm_default.txt" />
     <Content Include="ThumperIconEditor.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
