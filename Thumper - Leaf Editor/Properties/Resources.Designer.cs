@@ -22,7 +22,7 @@ namespace Thumper___Leaf_Editor.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Thumper___Leaf_Editor.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Thumper___Leaf_Editor.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Thumper___Leaf_Editor.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,12 +61,22 @@ namespace Thumper___Leaf_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap difficultyhelp {
+            get {
+                object obj = ResourceManager.GetObject("difficultyhelp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.&quot;,
         ///&quot;masterCheckLeader&quot;: &quot;Currently unsure what exactly this does.&quot;,
         ///&quot;masterRest&quot;: &quot;If not empty, this lvl will play before the main lvl. Usually used as [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string helptext {
+        public static string helptext {
             get {
                 return ResourceManager.GetString("helptext", resourceCulture);
             }
@@ -75,16 +85,34 @@ namespace Thumper___Leaf_Editor.Properties {
         /// <summary>
         ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_da [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string leaf_multitrack {
+        public static string leaf_multitrack {
             get {
                 return ResourceManager.GetString("leaf_multitrack", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;obj_type&apos;: &apos;SequinLeaf&apos;,
+        ///&apos;obj_name&apos;: &apos;pyramid_outro.leaf&apos;,
+        ///&apos;seq_objs&apos;: [
+        ///    {
+        ///    &apos;obj_name&apos;: &apos;pyramid_outro.leaf&apos;,
+        ///    &apos;param_path&apos;: &apos;pitch&apos;,
+        ///    &apos;trait_type&apos;: &apos;kTraitFloat&apos;,
+        ///    &apos;data_points&apos;: {
+        ///        0: 0.96875, 1: 0.96875, 2: 0.96875, 3: 0.96875, 4: 0.96875, 5: 0.96875, 6: 0.96875, 7: 0.96875, 8: 0.96875, 9: 0.96875, 10: 0.96875, 11: 0.96875, 12: 0.96875, 13: 0.96875, 14: 0.96875, 15: 0.96875, 16: 0.96875, 17: 0.96875, 18: 0.96875, 19: 0.96875, 20: 0.96875, 21: 0.96875, 22: 0.96875, 23: 0 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string leaf_pyramid_outro {
+            get {
+                return ResourceManager.GetString("leaf_pyramid_outro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string leaf_singletrack {
+        public static string leaf_singletrack {
             get {
                 return ResourceManager.GetString("leaf_singletrack", resourceCulture);
             }
@@ -115,7 +143,7 @@ namespace Thumper___Leaf_Editor.Properties {
         ///lattice5_chrome_large.path
         ///tube_diamond_chrome_ar [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string paths {
+        public static string paths {
             get {
                 return ResourceManager.GetString("paths", resourceCulture);
             }
@@ -124,10 +152,41 @@ namespace Thumper___Leaf_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap railcolorhelp {
+        public static System.Drawing.Bitmap railcolorhelp {
             get {
                 object obj = ResourceManager.GetObject("railcolorhelp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_drone.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_6/drones/level_drone_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 0.7799999713897705,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;drums_sparse_pattern5.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_9/drums/drums_sparse_pattern5.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;sequi [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_default {
+            get {
+                return ResourceManager.GetString("samp_default", resourceCulture);
             }
         }
         
@@ -147,9 +206,41 @@ namespace Thumper___Leaf_Editor.Properties {
         ///level_2,drums,drums_long_pattern1.wav
         ///le [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string samples {
+        public static string samples {
             get {
                 return ResourceManager.GetString("samples", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;EntitySpawner&apos;,
+        ///&apos;obj_name&apos;: &apos;thump.spn&apos;,
+        ///&apos;xfm_name&apos;: &apos;&apos;,
+        ///&apos;constraint&apos;: &apos;kConstraintParent&apos;,
+        ///&apos;pos&apos;: [0, 0, 0],
+        ///&apos;rot_x&apos;: [1, 0, 0],
+        ///&apos;rot_y&apos;: [0, 1, 0],
+        ///&apos;rot_z&apos;: [0, 0, 1],
+        ///&apos;scale&apos;: [1, 1, 1],
+        ///&apos;objlib_path&apos;: &apos;decorators/thump_rails.objlib&apos;,
+        ///&apos;bucket&apos;: &apos;kBucketEffect&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;EntitySpawner&apos;,
+        ///&apos;obj_name&apos;: &apos;level_fingers3.spn&apos;,
+        ///&apos;xfm_name&apos;: &apos;&apos;,
+        ///&apos;constraint&apos;: &apos;kConstraintParent&apos;,
+        ///&apos;pos&apos;: [0, 0, 0],
+        ///&apos;rot_x&apos;: [1, 0, 0],
+        ///&apos;rot_y&apos;: [0, 1, 0],
+        ///&apos;rot_z&apos;: [0, 0, 1],        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string spn_default {
+            get {
+                return ResourceManager.GetString("spn_default", resourceCulture);
             }
         }
         
@@ -162,9 +253,27 @@ namespace Thumper___Leaf_Editor.Properties {
         ///leafname;turn_auto;turn_auto;kTraitFloat;True;0;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
         ///leafname;scale_x;scale_x;kTraitFloat [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string track_objects {
+        public static string track_objects {
             get {
                 return ResourceManager.GetString("track_objects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;obj_type&apos;: &apos;Xfmer&apos;,
+        ///&apos;xfm_name&apos;: &apos;&apos;,
+        ///&apos;constraint&apos;: &apos;kConstraintParent&apos;,
+        ///&apos;pos&apos;: [0, 0, 0],
+        ///&apos;rot_x&apos;: [1, 0, 0],
+        ///&apos;rot_y&apos;: [0, 1, 0],
+        ///&apos;rot_z&apos;: [0, 0, 1],
+        ///&apos;scale&apos;: [1, 1, 1]
+        ///}.
+        /// </summary>
+        public static string xfm_default {
+            get {
+                return ResourceManager.GetString("xfm_default", resourceCulture);
             }
         }
     }
