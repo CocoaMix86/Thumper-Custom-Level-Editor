@@ -536,8 +536,12 @@ namespace Thumper___Leaf_Editor
 		{
 			lvlLeafPaths.Rows.Clear();
 			//for each path in the selected leaf, populate the paths DGV
-			foreach (string path in _lvlleafs[index].paths)
-				lvlLeafPaths.Rows.Add(new object[] { path });
+			foreach (string path in _lvlleafs[index].paths) {
+				if (_lvlpaths.Contains("path"))
+					lvlLeafPaths.Rows.Add(new object[] { path });
+				else
+					MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");
+			}
 			//monke
 		}
 

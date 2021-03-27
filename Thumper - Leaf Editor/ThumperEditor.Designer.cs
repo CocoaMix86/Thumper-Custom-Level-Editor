@@ -45,6 +45,9 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLeafEditor));
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +73,10 @@
 			this.masteropenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mastersaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mastersaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.newLevelFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.levelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.trackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,12 +84,12 @@
 			this.moveTrackUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moveTrackDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.trackColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.interpolatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.leafEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.levelEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.masterEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.levelEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.gateEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -209,11 +216,18 @@
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
 			this.panelGate = new System.Windows.Forms.Panel();
+			this.btnGateLvlAdd = new System.Windows.Forms.Button();
+			this.btnGateLvlDown = new System.Windows.Forms.Button();
+			this.btnGateLvlUp = new System.Windows.Forms.Button();
+			this.btnGateLvlDelete = new System.Windows.Forms.Button();
+			this.label36 = new System.Windows.Forms.Label();
+			this.gateLvlList = new System.Windows.Forms.DataGridView();
+			this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.label48 = new System.Windows.Forms.Label();
 			this.lblGateClose = new System.Windows.Forms.Label();
 			this.lblGateName = new System.Windows.Forms.Label();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.newLevelFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.label37 = new System.Windows.Forms.Label();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -236,6 +250,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
 			this.panelGate.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -262,8 +277,10 @@
             this.levelToolStripMenuItem,
             this.gateToolStripMenuItem,
             this.masterToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.newLevelFolderToolStripMenuItem,
             this.toolStripSeparator2,
-            this.newLevelFolderToolStripMenuItem});
+            this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
 			this.fileToolStripMenuItem1.Size = new System.Drawing.Size(38, 20);
@@ -281,7 +298,7 @@
             this.leafTemplateToolStripMenuItem});
 			this.saveToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
 			this.saveToolStripMenuItem1.Text = "Leaf...";
 			// 
 			// leafnewToolStripMenuItem
@@ -332,6 +349,7 @@
 			this.toolStripSeparator1.ForeColor = System.Drawing.Color.Black;
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
+			this.toolStripSeparator1.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
 			// 
 			// leafTemplateToolStripMenuItem
 			// 
@@ -353,7 +371,7 @@
             this.lvlsaveAsToolStripMenuItem});
 			this.levelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-			this.levelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.levelToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.levelToolStripMenuItem.Text = "Level...";
 			// 
 			// lvlnewToolStripMenuItem1
@@ -408,7 +426,7 @@
             this.gatesaveAsToolStripMenuItem});
 			this.gateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gateToolStripMenuItem.Name = "gateToolStripMenuItem";
-			this.gateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.gateToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.gateToolStripMenuItem.Text = "Gate...";
 			// 
 			// gatenewToolStripMenuItem
@@ -416,7 +434,7 @@
 			this.gatenewToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.gatenewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gatenewToolStripMenuItem.Name = "gatenewToolStripMenuItem";
-			this.gatenewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.gatenewToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
 			this.gatenewToolStripMenuItem.Text = "New";
 			// 
 			// gateopenToolStripMenuItem
@@ -424,23 +442,25 @@
 			this.gateopenToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.gateopenToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gateopenToolStripMenuItem.Name = "gateopenToolStripMenuItem";
-			this.gateopenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.gateopenToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
 			this.gateopenToolStripMenuItem.Text = "Open";
 			// 
 			// gatesaveToolStripMenuItem
 			// 
 			this.gatesaveToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.gatesaveToolStripMenuItem.Enabled = false;
 			this.gatesaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gatesaveToolStripMenuItem.Name = "gatesaveToolStripMenuItem";
-			this.gatesaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.gatesaveToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
 			this.gatesaveToolStripMenuItem.Text = "Save";
 			// 
 			// gatesaveAsToolStripMenuItem
 			// 
 			this.gatesaveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.gatesaveAsToolStripMenuItem.Enabled = false;
 			this.gatesaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gatesaveAsToolStripMenuItem.Name = "gatesaveAsToolStripMenuItem";
-			this.gatesaveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.gatesaveAsToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
 			this.gatesaveAsToolStripMenuItem.Text = "Save As";
 			// 
 			// masterToolStripMenuItem
@@ -453,7 +473,7 @@
             this.mastersaveAsToolStripMenuItem});
 			this.masterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
-			this.masterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.masterToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.masterToolStripMenuItem.Text = "Master...";
 			// 
 			// masternewToolStripMenuItem
@@ -502,6 +522,40 @@
 			this.mastersaveAsToolStripMenuItem.Text = "Save As";
 			this.mastersaveAsToolStripMenuItem.Click += new System.EventHandler(this.mastersaveAsToolStripMenuItem_Click);
 			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.toolStripSeparator3.ForeColor = System.Drawing.Color.Black;
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(166, 6);
+			this.toolStripSeparator3.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
+			// 
+			// newLevelFolderToolStripMenuItem
+			// 
+			this.newLevelFolderToolStripMenuItem.BackColor = System.Drawing.Color.ForestGreen;
+			this.newLevelFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.newLevelFolderToolStripMenuItem.Name = "newLevelFolderToolStripMenuItem";
+			this.newLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.newLevelFolderToolStripMenuItem.Text = "New Level Folder";
+			this.newLevelFolderToolStripMenuItem.Click += new System.EventHandler(this.newLevelFolderToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.toolStripSeparator2.ForeColor = System.Drawing.Color.Black;
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
+			this.toolStripSeparator2.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			// 
 			// levelToolStripMenuItem1
 			// 
 			this.levelToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
@@ -516,8 +570,7 @@
             this.deleteToolStripMenuItem,
             this.moveTrackUpToolStripMenuItem,
             this.moveTrackDownToolStripMenuItem,
-            this.trackColorToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.trackColorToolStripMenuItem});
 			this.trackToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.trackToolStripMenuItem.Name = "trackToolStripMenuItem";
 			this.trackToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
@@ -586,13 +639,6 @@
 			this.trackColorToolStripMenuItem.Text = "Track Color";
 			this.trackColorToolStripMenuItem.Click += new System.EventHandler(this.trackColorToolStripMenuItem_Click);
 			// 
-			// toolStripMenuItem1
-			// 
-			this.toolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Black;
-			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(239, 6);
-			// 
 			// interpolatorToolStripMenuItem
 			// 
 			this.interpolatorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
@@ -607,8 +653,9 @@
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.leafEditorToolStripMenuItem,
-            this.levelEditorToolStripMenuItem,
-            this.masterEditorToolStripMenuItem});
+            this.masterEditorToolStripMenuItem,
+            this.gateEditorToolStripMenuItem,
+            this.levelEditorToolStripMenuItem});
 			this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
@@ -622,21 +669,9 @@
 			this.leafEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.leafEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafEditorToolStripMenuItem.Name = "leafEditorToolStripMenuItem";
-			this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+			this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.leafEditorToolStripMenuItem.Text = "Leaf Editor";
 			this.leafEditorToolStripMenuItem.Click += new System.EventHandler(this.leafEditorToolStripMenuItem_Click);
-			// 
-			// levelEditorToolStripMenuItem
-			// 
-			this.levelEditorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.levelEditorToolStripMenuItem.Checked = true;
-			this.levelEditorToolStripMenuItem.CheckOnClick = true;
-			this.levelEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.levelEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-			this.levelEditorToolStripMenuItem.Name = "levelEditorToolStripMenuItem";
-			this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-			this.levelEditorToolStripMenuItem.Text = "Level Editor";
-			this.levelEditorToolStripMenuItem.Click += new System.EventHandler(this.levelEditorToolStripMenuItem_Click);
 			// 
 			// masterEditorToolStripMenuItem
 			// 
@@ -646,9 +681,33 @@
 			this.masterEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.masterEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.masterEditorToolStripMenuItem.Name = "masterEditorToolStripMenuItem";
-			this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+			this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.masterEditorToolStripMenuItem.Text = "Master Editor";
 			this.masterEditorToolStripMenuItem.Click += new System.EventHandler(this.masterEditorToolStripMenuItem_Click);
+			// 
+			// levelEditorToolStripMenuItem
+			// 
+			this.levelEditorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.levelEditorToolStripMenuItem.Checked = true;
+			this.levelEditorToolStripMenuItem.CheckOnClick = true;
+			this.levelEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.levelEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.levelEditorToolStripMenuItem.Name = "levelEditorToolStripMenuItem";
+			this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.levelEditorToolStripMenuItem.Text = "Level Editor";
+			this.levelEditorToolStripMenuItem.Click += new System.EventHandler(this.levelEditorToolStripMenuItem_Click);
+			// 
+			// gateEditorToolStripMenuItem
+			// 
+			this.gateEditorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.gateEditorToolStripMenuItem.Checked = true;
+			this.gateEditorToolStripMenuItem.CheckOnClick = true;
+			this.gateEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.gateEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.gateEditorToolStripMenuItem.Name = "gateEditorToolStripMenuItem";
+			this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.gateEditorToolStripMenuItem.Text = "Gate Editor";
+			this.gateEditorToolStripMenuItem.Click += new System.EventHandler(this.gateEditorToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -1459,7 +1518,7 @@
 			this.panelLevel.Controls.Add(this.panel1);
 			this.panelLevel.Location = new System.Drawing.Point(1024, 29);
 			this.panelLevel.Name = "panelLevel";
-			this.panelLevel.Size = new System.Drawing.Size(739, 383);
+			this.panelLevel.Size = new System.Drawing.Size(997, 383);
 			this.panelLevel.TabIndex = 46;
 			// 
 			// label29
@@ -1790,7 +1849,7 @@
 			this.lvlLoopTracks.RowTemplate.Height = 20;
 			this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.lvlLoopTracks.Size = new System.Drawing.Size(142, 133);
+			this.lvlLoopTracks.Size = new System.Drawing.Size(400, 133);
 			this.lvlLoopTracks.TabIndex = 81;
 			this.lvlLoopTracks.Visible = false;
 			this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
@@ -1801,7 +1860,7 @@
 			this.lblLevelMax.AutoSize = true;
 			this.lblLevelMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLevelMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLevelMax.Location = new System.Drawing.Point(702, 1);
+			this.lblLevelMax.Location = new System.Drawing.Point(960, 1);
 			this.lblLevelMax.Name = "lblLevelMax";
 			this.lblLevelMax.Size = new System.Drawing.Size(16, 15);
 			this.lblLevelMax.TabIndex = 50;
@@ -1814,7 +1873,7 @@
 			this.lblLvlClose.AutoSize = true;
 			this.lblLvlClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLvlClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLvlClose.Location = new System.Drawing.Point(718, 1);
+			this.lblLvlClose.Location = new System.Drawing.Point(976, 1);
 			this.lblLvlClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblLvlClose.Name = "lblLvlClose";
 			this.lblLvlClose.Size = new System.Drawing.Size(16, 15);
@@ -1871,7 +1930,7 @@
 			this.lvlSeqObjs.RowTemplate.Height = 200;
 			this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.lvlSeqObjs.Size = new System.Drawing.Size(391, 185);
+			this.lvlSeqObjs.Size = new System.Drawing.Size(649, 185);
 			this.lvlSeqObjs.TabIndex = 68;
 			this.lvlSeqObjs.Visible = false;
 			this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
@@ -2149,7 +2208,7 @@
 			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panel1.Controls.Add(this.label28);
 			this.panel1.Controls.Add(this.trackLvlVolumeZoom);
-			this.panel1.Location = new System.Drawing.Point(565, -5);
+			this.panel1.Location = new System.Drawing.Point(823, -5);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(131, 27);
 			this.panel1.TabIndex = 92;
@@ -2182,6 +2241,7 @@
 			// 
 			this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelMaster.Controls.Add(this.label37);
 			this.panelMaster.Controls.Add(this.btnMasterRefreshLvl);
 			this.panelMaster.Controls.Add(this.btnMasterOpenCheckpoint);
 			this.panelMaster.Controls.Add(this.btnMasterOpenIntro);
@@ -2219,7 +2279,7 @@
 			this.panelMaster.Controls.Add(this.lblConfigColorHelp);
 			this.panelMaster.Location = new System.Drawing.Point(4, 29);
 			this.panelMaster.Name = "panelMaster";
-			this.panelMaster.Size = new System.Drawing.Size(462, 335);
+			this.panelMaster.Size = new System.Drawing.Size(462, 348);
 			this.panelMaster.TabIndex = 47;
 			// 
 			// btnMasterRefreshLvl
@@ -2277,7 +2337,7 @@
 			this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-			this.lblMasterlvllistHelp.Location = new System.Drawing.Point(280, 201);
+			this.lblMasterlvllistHelp.Location = new System.Drawing.Point(279, 37);
 			this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
 			this.lblMasterlvllistHelp.Size = new System.Drawing.Size(16, 16);
 			this.lblMasterlvllistHelp.TabIndex = 95;
@@ -2385,7 +2445,7 @@
 			this.lblMasterRestHelp.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.lblMasterRestHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblMasterRestHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-			this.lblMasterRestHelp.Location = new System.Drawing.Point(235, 275);
+			this.lblMasterRestHelp.Location = new System.Drawing.Point(235, 301);
 			this.lblMasterRestHelp.Name = "lblMasterRestHelp";
 			this.lblMasterRestHelp.Size = new System.Drawing.Size(16, 16);
 			this.lblMasterRestHelp.TabIndex = 107;
@@ -2414,7 +2474,7 @@
 			this.lblMasterCheckpointLeaderHelp.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.lblMasterCheckpointLeaderHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblMasterCheckpointLeaderHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-			this.lblMasterCheckpointLeaderHelp.Location = new System.Drawing.Point(113, 275);
+			this.lblMasterCheckpointLeaderHelp.Location = new System.Drawing.Point(113, 301);
 			this.lblMasterCheckpointLeaderHelp.Name = "lblMasterCheckpointLeaderHelp";
 			this.lblMasterCheckpointLeaderHelp.Size = new System.Drawing.Size(16, 16);
 			this.lblMasterCheckpointLeaderHelp.TabIndex = 106;
@@ -2431,7 +2491,7 @@
 			this.dropMasterLvlRest.FormattingEnabled = true;
 			this.dropMasterLvlRest.Items.AddRange(new object[] {
             "skybox_cube"});
-			this.dropMasterLvlRest.Location = new System.Drawing.Point(135, 291);
+			this.dropMasterLvlRest.Location = new System.Drawing.Point(135, 317);
 			this.dropMasterLvlRest.Name = "dropMasterLvlRest";
 			this.dropMasterLvlRest.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterLvlRest.TabIndex = 105;
@@ -2444,7 +2504,7 @@
 			this.label35.AutoSize = true;
 			this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label35.ForeColor = System.Drawing.Color.White;
-			this.label35.Location = new System.Drawing.Point(132, 277);
+			this.label35.Location = new System.Drawing.Point(132, 303);
 			this.label35.Name = "label35";
 			this.label35.Size = new System.Drawing.Size(46, 13);
 			this.label35.TabIndex = 104;
@@ -2460,7 +2520,7 @@
 			this.dropMasterLvlLeader.FormattingEnabled = true;
 			this.dropMasterLvlLeader.Items.AddRange(new object[] {
             "skybox_cube"});
-			this.dropMasterLvlLeader.Location = new System.Drawing.Point(6, 291);
+			this.dropMasterLvlLeader.Location = new System.Drawing.Point(6, 317);
 			this.dropMasterLvlLeader.Name = "dropMasterLvlLeader";
 			this.dropMasterLvlLeader.Size = new System.Drawing.Size(116, 21);
 			this.dropMasterLvlLeader.TabIndex = 103;
@@ -2473,7 +2533,7 @@
 			this.label34.AutoSize = true;
 			this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label34.ForeColor = System.Drawing.Color.White;
-			this.label34.Location = new System.Drawing.Point(3, 277);
+			this.label34.Location = new System.Drawing.Point(3, 303);
 			this.label34.Name = "label34";
 			this.label34.Size = new System.Drawing.Size(114, 13);
 			this.label34.TabIndex = 102;
@@ -2589,7 +2649,7 @@
 			this.btnMasterLvlAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnMasterLvlAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMasterLvlAdd.ForeColor = System.Drawing.Color.Black;
-			this.btnMasterLvlAdd.Location = new System.Drawing.Point(3, 248);
+			this.btnMasterLvlAdd.Location = new System.Drawing.Point(3, 261);
 			this.btnMasterLvlAdd.Name = "btnMasterLvlAdd";
 			this.btnMasterLvlAdd.Size = new System.Drawing.Size(22, 22);
 			this.btnMasterLvlAdd.TabIndex = 80;
@@ -2607,7 +2667,7 @@
 			this.btnMasterLvlDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnMasterLvlDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMasterLvlDown.ForeColor = System.Drawing.Color.Black;
-			this.btnMasterLvlDown.Location = new System.Drawing.Point(69, 248);
+			this.btnMasterLvlDown.Location = new System.Drawing.Point(69, 261);
 			this.btnMasterLvlDown.Name = "btnMasterLvlDown";
 			this.btnMasterLvlDown.Size = new System.Drawing.Size(22, 22);
 			this.btnMasterLvlDown.TabIndex = 83;
@@ -2625,7 +2685,7 @@
 			this.btnMasterLvlUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnMasterLvlUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMasterLvlUp.ForeColor = System.Drawing.Color.Black;
-			this.btnMasterLvlUp.Location = new System.Drawing.Point(47, 248);
+			this.btnMasterLvlUp.Location = new System.Drawing.Point(47, 261);
 			this.btnMasterLvlUp.Name = "btnMasterLvlUp";
 			this.btnMasterLvlUp.Size = new System.Drawing.Size(22, 22);
 			this.btnMasterLvlUp.TabIndex = 82;
@@ -2643,7 +2703,7 @@
 			this.btnMasterLvlDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnMasterLvlDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMasterLvlDelete.ForeColor = System.Drawing.Color.Black;
-			this.btnMasterLvlDelete.Location = new System.Drawing.Point(25, 248);
+			this.btnMasterLvlDelete.Location = new System.Drawing.Point(25, 261);
 			this.btnMasterLvlDelete.Name = "btnMasterLvlDelete";
 			this.btnMasterLvlDelete.Size = new System.Drawing.Size(22, 22);
 			this.btnMasterLvlDelete.TabIndex = 81;
@@ -2702,7 +2762,7 @@
 			this.masterLvlList.RowTemplate.Height = 200;
 			this.masterLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.masterLvlList.Size = new System.Drawing.Size(295, 213);
+			this.masterLvlList.Size = new System.Drawing.Size(295, 226);
 			this.masterLvlList.TabIndex = 79;
 			this.masterLvlList.Visible = false;
 			this.masterLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellValueChanged);
@@ -2765,6 +2825,12 @@
 			// 
 			this.panelGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelGate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelGate.Controls.Add(this.btnGateLvlAdd);
+			this.panelGate.Controls.Add(this.btnGateLvlDown);
+			this.panelGate.Controls.Add(this.btnGateLvlUp);
+			this.panelGate.Controls.Add(this.btnGateLvlDelete);
+			this.panelGate.Controls.Add(this.label36);
+			this.panelGate.Controls.Add(this.gateLvlList);
 			this.panelGate.Controls.Add(this.label48);
 			this.panelGate.Controls.Add(this.lblGateClose);
 			this.panelGate.Controls.Add(this.lblGateName);
@@ -2772,6 +2838,155 @@
 			this.panelGate.Name = "panelGate";
 			this.panelGate.Size = new System.Drawing.Size(546, 383);
 			this.panelGate.TabIndex = 116;
+			// 
+			// btnGateLvlAdd
+			// 
+			this.btnGateLvlAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnGateLvlAdd.BackColor = System.Drawing.Color.Gray;
+			this.btnGateLvlAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnGateLvlAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnGateLvlAdd.ForeColor = System.Drawing.Color.Black;
+			this.btnGateLvlAdd.Location = new System.Drawing.Point(3, 171);
+			this.btnGateLvlAdd.Name = "btnGateLvlAdd";
+			this.btnGateLvlAdd.Size = new System.Drawing.Size(22, 22);
+			this.btnGateLvlAdd.TabIndex = 117;
+			this.btnGateLvlAdd.Text = "+";
+			this.btnGateLvlAdd.UseCompatibleTextRendering = true;
+			this.btnGateLvlAdd.UseVisualStyleBackColor = false;
+			this.btnGateLvlAdd.Click += new System.EventHandler(this.btnGateLvlAdd_Click);
+			// 
+			// btnGateLvlDown
+			// 
+			this.btnGateLvlDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnGateLvlDown.BackColor = System.Drawing.Color.Gray;
+			this.btnGateLvlDown.Enabled = false;
+			this.btnGateLvlDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnGateLvlDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnGateLvlDown.ForeColor = System.Drawing.Color.Black;
+			this.btnGateLvlDown.Location = new System.Drawing.Point(69, 171);
+			this.btnGateLvlDown.Name = "btnGateLvlDown";
+			this.btnGateLvlDown.Size = new System.Drawing.Size(22, 22);
+			this.btnGateLvlDown.TabIndex = 120;
+			this.btnGateLvlDown.Text = "↓";
+			this.btnGateLvlDown.UseCompatibleTextRendering = true;
+			this.btnGateLvlDown.UseVisualStyleBackColor = false;
+			this.btnGateLvlDown.Click += new System.EventHandler(this.btnGateLvlDown_Click);
+			// 
+			// btnGateLvlUp
+			// 
+			this.btnGateLvlUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnGateLvlUp.BackColor = System.Drawing.Color.Gray;
+			this.btnGateLvlUp.Enabled = false;
+			this.btnGateLvlUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnGateLvlUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnGateLvlUp.ForeColor = System.Drawing.Color.Black;
+			this.btnGateLvlUp.Location = new System.Drawing.Point(47, 171);
+			this.btnGateLvlUp.Name = "btnGateLvlUp";
+			this.btnGateLvlUp.Size = new System.Drawing.Size(22, 22);
+			this.btnGateLvlUp.TabIndex = 119;
+			this.btnGateLvlUp.Text = "↑";
+			this.btnGateLvlUp.UseCompatibleTextRendering = true;
+			this.btnGateLvlUp.UseVisualStyleBackColor = false;
+			this.btnGateLvlUp.Click += new System.EventHandler(this.btnGateLvlUp_Click);
+			// 
+			// btnGateLvlDelete
+			// 
+			this.btnGateLvlDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnGateLvlDelete.BackColor = System.Drawing.Color.Gray;
+			this.btnGateLvlDelete.Enabled = false;
+			this.btnGateLvlDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnGateLvlDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnGateLvlDelete.ForeColor = System.Drawing.Color.Black;
+			this.btnGateLvlDelete.Location = new System.Drawing.Point(25, 171);
+			this.btnGateLvlDelete.Name = "btnGateLvlDelete";
+			this.btnGateLvlDelete.Size = new System.Drawing.Size(22, 22);
+			this.btnGateLvlDelete.TabIndex = 118;
+			this.btnGateLvlDelete.Text = "-";
+			this.btnGateLvlDelete.UseCompatibleTextRendering = true;
+			this.btnGateLvlDelete.UseVisualStyleBackColor = false;
+			this.btnGateLvlDelete.Click += new System.EventHandler(this.btnGateLvlDelete_Click);
+			// 
+			// label36
+			// 
+			this.label36.AutoSize = true;
+			this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label36.ForeColor = System.Drawing.Color.White;
+			this.label36.Location = new System.Drawing.Point(3, 18);
+			this.label36.Name = "label36";
+			this.label36.Size = new System.Drawing.Size(69, 13);
+			this.label36.TabIndex = 116;
+			this.label36.Text = "Lvl Phases";
+			// 
+			// gateLvlList
+			// 
+			this.gateLvlList.AllowUserToAddRows = false;
+			this.gateLvlList.AllowUserToDeleteRows = false;
+			this.gateLvlList.AllowUserToResizeRows = false;
+			this.gateLvlList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.gateLvlList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.gateLvlList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.gateLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+			this.gateLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+			dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle19.ForeColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.gateLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+			this.gateLvlList.ColumnHeadersHeight = 20;
+			this.gateLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.gateLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Lvl,
+            this.Sentry});
+			dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle20.Format = "N2";
+			dataGridViewCellStyle20.NullValue = null;
+			dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.gateLvlList.DefaultCellStyle = dataGridViewCellStyle20;
+			this.gateLvlList.EnableHeadersVisualStyles = false;
+			this.gateLvlList.GridColor = System.Drawing.Color.Black;
+			this.gateLvlList.Location = new System.Drawing.Point(3, 34);
+			this.gateLvlList.MultiSelect = false;
+			this.gateLvlList.Name = "gateLvlList";
+			this.gateLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+			dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.gateLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
+			this.gateLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.gateLvlList.RowTemplate.Height = 200;
+			this.gateLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.gateLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+			this.gateLvlList.Size = new System.Drawing.Size(370, 136);
+			this.gateLvlList.TabIndex = 80;
+			this.gateLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_RowEnter);
+			// 
+			// Lvl
+			// 
+			this.Lvl.HeaderText = "Lvl";
+			this.Lvl.Name = "Lvl";
+			this.Lvl.ReadOnly = true;
+			// 
+			// Sentry
+			// 
+			this.Sentry.HeaderText = "Sentry";
+			this.Sentry.Items.AddRange(new object[] {
+            "SENTRY_NONE",
+            "SENTRY_SINGLE_LANE",
+            "SENTRY_MULTI_LANE"});
+			this.Sentry.Name = "Sentry";
 			// 
 			// label48
 			// 
@@ -2809,20 +3024,17 @@
 			this.lblGateName.TabIndex = 49;
 			this.lblGateName.Text = "Gate Editor";
 			// 
-			// toolStripSeparator2
+			// label37
 			// 
-			this.toolStripSeparator2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.toolStripSeparator2.ForeColor = System.Drawing.Color.Black;
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
-			// 
-			// newLevelFolderToolStripMenuItem
-			// 
-			this.newLevelFolderToolStripMenuItem.BackColor = System.Drawing.Color.ForestGreen;
-			this.newLevelFolderToolStripMenuItem.Name = "newLevelFolderToolStripMenuItem";
-			this.newLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.newLevelFolderToolStripMenuItem.Text = "New Level Folder";
-			this.newLevelFolderToolStripMenuItem.Click += new System.EventHandler(this.newLevelFolderToolStripMenuItem_Click);
+			this.label37.AutoSize = true;
+			this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label37.ForeColor = System.Drawing.Color.White;
+			this.label37.Location = new System.Drawing.Point(3, 288);
+			this.label37.Name = "label37";
+			this.label37.Size = new System.Drawing.Size(103, 13);
+			this.label37.TabIndex = 116;
+			this.label37.Text = "Sublevel Options";
+			this.label37.Visible = false;
 			// 
 			// FormLeafEditor
 			// 
@@ -2871,6 +3083,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
 			this.panelGate.ResumeLayout(false);
 			this.panelGate.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -2929,7 +3142,6 @@
 		private System.Windows.Forms.NumericUpDown NUD_TrackHighlight;
 		private System.Windows.Forms.ToolStripMenuItem leafsaveToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem leafloadToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem moveTrackUpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem moveTrackDownToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem trackColorToolStripMenuItem;
@@ -3046,6 +3258,18 @@
 		private System.Windows.Forms.Button btnMasterRefreshLvl;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem newLevelFolderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+		private System.Windows.Forms.Label label36;
+		private System.Windows.Forms.DataGridView gateLvlList;
+		private System.Windows.Forms.Button btnGateLvlAdd;
+		private System.Windows.Forms.Button btnGateLvlDown;
+		private System.Windows.Forms.Button btnGateLvlUp;
+		private System.Windows.Forms.Button btnGateLvlDelete;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
+		private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
+		private System.Windows.Forms.ToolStripMenuItem gateEditorToolStripMenuItem;
+		private System.Windows.Forms.Label label37;
 	}
 }
 

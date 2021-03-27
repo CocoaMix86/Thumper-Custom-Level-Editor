@@ -377,7 +377,7 @@ namespace Thumper___Leaf_Editor
 			masterLvlList.RowHeadersVisible = false;
 			masterLvlList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
 				ForeColor = Color.White,
-				Font = new Font("Arial", 15, GraphicsUnit.Pixel)
+				Font = new Font("Arial", 12, GraphicsUnit.Pixel)
 			};
 			masterLvlList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 			masterLvlList.Columns[0].HeaderText = "Lvl";

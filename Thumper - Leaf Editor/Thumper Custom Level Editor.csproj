@@ -69,6 +69,7 @@
     <Compile Include="DialogInput.Designer.cs">
       <DependentUpon>DialogInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="GateLvlData.cs" />
     <Compile Include="Gate_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,9 +111,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogInput.resx">
       <DependentUpon>DialogInput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImageMessageBox.resx">
-      <DependentUpon>ImageMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interpolator.resx">
       <DependentUpon>Interpolator.cs</DependentUpon>

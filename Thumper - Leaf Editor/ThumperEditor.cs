@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ControlManager;
+using System.Drawing;
 
 namespace Thumper___Leaf_Editor
 {
@@ -17,12 +18,15 @@ namespace Thumper___Leaf_Editor
 			get { return _workingfolder; }
 			set
 			{
+				//check if `set` value is different than current stored value
 				if (_workingfolder != value) {
+					//if different, set it, then repopulate lvls in workingfolder
+					//these are used in the Master Editor panel
 					_workingfolder = value;
 					lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
 					lvlsinworkfolder.Add("");
 					lvlsinworkfolder.Sort();
-					///add lvl list as datasources to dropdowns
+					//add lvl list as datasources to dropdowns
 					dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
 					dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
 					dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
@@ -39,6 +43,15 @@ namespace Thumper___Leaf_Editor
 
 		public FormLeafEditor() => InitializeComponent();
 
+		///Repaints toolstrip separators to have gray backgrounds
+		private void toolStripSeparator_Paint(object sender, PaintEventArgs e)
+		{
+			ToolStripSeparator sep = (ToolStripSeparator)sender;
+			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, 40, 40)), 0, 0, sep.Width, sep.Height);
+			e.Graphics.DrawLine(new Pen(Color.White), 30, sep.Height / 2, sep.Width - 4, sep.Height / 2);
+
+		}
+
 		///Toolstrip - INTERPOLATOR
 		private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e) => new Interpolator().Show();
 
@@ -47,6 +60,8 @@ namespace Thumper___Leaf_Editor
 		private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelLeaf.Visible = leafEditorToolStripMenuItem.Checked;
 		//Visible - Level Editor
 		private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelLevel.Visible = levelEditorToolStripMenuItem.Checked;
+		//Visble - Gate Editor
+		private void gateEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelGate.Visible = gateEditorToolStripMenuItem.Checked;
 		//Visible - Master Editor
 		private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelMaster.Visible = masterEditorToolStripMenuItem.Checked;
 
@@ -65,14 +80,18 @@ namespace Thumper___Leaf_Editor
 		private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DialogInput customlevel = new DialogInput();
+			//show the new level folder dialog box
 			if (customlevel.ShowDialog() == DialogResult.OK) {
+				//if all OK, populate new JObject with data from the form
 				JObject level_details = new JObject();
 				level_details.Add("level_name", customlevel.txtCustomName.Text);
 				level_details.Add("difficulty", customlevel.txtCustomDiff.Text);
 				level_details.Add("description", customlevel.txtDesc.Text);
 				level_details.Add("author", customlevel.txtCustomAuthor.Text);
+				//then write the file to the new folder that was created from the form
 				File.WriteAllText($@"{customlevel.txtCustomPath.Text}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
-
+				//these 4 files below are required defaults of new levels.
+				//create them if they don't exist
 				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\leaf_pyramid_outro.txt")) {
 					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
 				}
@@ -86,12 +105,14 @@ namespace Thumper___Leaf_Editor
 					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\xfm_default.txt", Properties.Resources.xfm_default);
 				}
 			}
-			else {
-
-			}
 			customlevel.Dispose();
 		}
 
+		///EXIT APP
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 		///FORM CLOSING - check if anything is unsaved
 		private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
 		{
@@ -109,14 +130,17 @@ namespace Thumper___Leaf_Editor
 			InitializeTracks(lvlSeqObjs);
 			InitializeTracks(lvlLeafList);
 			InitializeTracks(masterLvlList);
+			InitializeTracks(gateLvlList);
 			InitializeLvlStuff();
 			InitializeMasterStuff();
+			InitializeGateStuff();
 			//_formactive is the panel that was last set to Max
 			_formactive = panelLeaf;
 			//set panels to be resizeable
 			ControlMoverOrResizer.Init(panelLeaf);
 			ControlMoverOrResizer.Init(panelLevel);
 			ControlMoverOrResizer.Init(panelMaster);
+			ControlMoverOrResizer.Init(panelGate);
 			ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
 
 			///import help text
