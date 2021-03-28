@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Collections.ObjectModel;
@@ -29,7 +30,76 @@ namespace Thumper___Leaf_Editor
 		}
 		private string loadedgate;
 		string _loadedgatetemp;
-
+		List<string> boss_name = new List<string>() {
+			"Level 1 - triangle 1",
+			"Level 1 - triangle 2",
+			"Level 1 - crakhed",
+			"Level 2 - circle",
+			"Level 2 - crakhed",
+			"Level 3 - triangle",
+			"Level 3 - array",
+			"Level 3 - crakhed",
+			"Level 4 - triangle",
+			"Level 4 - zillapede",
+			"Level 4 - crakhed",
+			"Level 5 - spiral",
+			"Level 5 - crakhed",
+			"Level 6 - spirograph",
+			"Level 6 - crakhed",
+			"Level 7 - tube",
+			"Level 7 - crakhed",
+			"Level 8 - starfish",
+			"Level 8 - crakhed",
+			"Level 9 - fractal",
+			"Level 9 - crakhed"
+		};
+		List<string> boss_spn = new List<string>() {
+			"gate_tutorial_thumps.spn",
+			"boss_gate.spn2",
+			"gate_crakhed1.spn",
+			"gate_jump.spn",
+			"crakhed2.spn",
+			"pound_tutorial_boss.spn",
+			"boss_array.spn",
+			"crakhed3.spn",
+			"triangle_boss.spn",
+			"zillapede.spn",
+			"crakhed4.spn",
+			"boss_spiral.spn",
+			"crakhed5.spn",
+			"spirograph.spn",
+			"crakhed6.spn",
+			"boss_tube.spn",
+			"crakhed7.spn",
+			"gate_starfish.spn",
+			"crakhed8.spn",
+			"gate_frac.spn",
+			"crakhed9.spn"
+		};
+		List<string> boss_ent = new List<string>() {
+			"Level 1 - triangle 1",
+			"Level 1 - triangle 2",
+			"Level 1 - crakhed",
+			"Level 2 - circle",
+			"Level 2 - crakhed",
+			"Level 3 - triangle",
+			"Level 3 - array",
+			"Level 3 - crakhed",
+			"Level 4 - triangle",
+			"Level 4 - zillapede",
+			"Level 4 - crakhed",
+			"Level 5 - spiral",
+			"Level 5 - crakhed",
+			"Level 6 - spirograph",
+			"Level 6 - crakhed",
+			"Level 7 - tube",
+			"Level 7 - crakhed",
+			"Level 8 - starfish",
+			"Level 8 - crakhed",
+			"Level 9 - fractal",
+			"Level 9 - crakhed"
+		};
+		List<BossData> bossdata = new List<BossData>();
 		ObservableCollection<GateLvlData> _gatelvls = new ObservableCollection<GateLvlData>();
 		#endregion
 
@@ -146,6 +216,19 @@ namespace Thumper___Leaf_Editor
 				Font = new Font("Arial", 12, GraphicsUnit.Pixel)
 			};
 			gateLvlList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+			///populate boss data
+			foreach (string s in boss_name) {
+				bossdata.Add(new BossData() {
+					boss_name = s,
+					boss_spn = boss_spn[boss_name.IndexOf(s)],
+					boss_ent = boss_ent[boss_name.IndexOf(s)]
+				});
+			}
+			///add boss data to dropdown
+			dropGateBoss.DataSource = bossdata;
+			dropGateBoss.DisplayMember = "boss_name";
+			dropGateBoss.ValueMember = "boss_spn";
 		}
 
 		public void SaveGate(bool save)
