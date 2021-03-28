@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ControlManager;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace Thumper___Leaf_Editor
 {
@@ -31,6 +32,16 @@ namespace Thumper___Leaf_Editor
 					dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
 					dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
 					dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
+
+					//set Working Folder panel data
+					workingfolderFiles.Rows.Clear();
+					foreach (string file in Directory.GetFiles(workingfolder)) {
+						workingfolderFiles.Rows.Add(Path.GetFileName(file));
+					}
+					lblWorkingFolder.Text = $"Working Folder - {value}";
+					btnWorkRefresh.Enabled = true;
+					editLevelDetailsToolStripMenuItem.Enabled = true;
+					regenerateDefaultFilesToolStripMenuItem.Enabled = true;
 				}
 			}
 		}
@@ -64,6 +75,8 @@ namespace Thumper___Leaf_Editor
 		private void gateEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelGate.Visible = gateEditorToolStripMenuItem.Checked;
 		//Visible - Master Editor
 		private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelMaster.Visible = masterEditorToolStripMenuItem.Checked;
+		//Visbile - Working Folder
+		private void workingFolderToolStripMenuItem_Click(object sender, EventArgs e) => panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked;
 
 		///Toolstrip - HELP
 		//About...
@@ -83,27 +96,7 @@ namespace Thumper___Leaf_Editor
 			//show the new level folder dialog box
 			if (customlevel.ShowDialog() == DialogResult.OK) {
 				//if all OK, populate new JObject with data from the form
-				JObject level_details = new JObject();
-				level_details.Add("level_name", customlevel.txtCustomName.Text);
-				level_details.Add("difficulty", customlevel.txtCustomDiff.Text);
-				level_details.Add("description", customlevel.txtDesc.Text);
-				level_details.Add("author", customlevel.txtCustomAuthor.Text);
-				//then write the file to the new folder that was created from the form
-				File.WriteAllText($@"{customlevel.txtCustomPath.Text}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
-				//these 4 files below are required defaults of new levels.
-				//create them if they don't exist
-				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\leaf_pyramid_outro.txt")) {
-					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
-				}
-				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\samp_default.txt")) {
-					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\samp_default.txt", Properties.Resources.samp_default);
-				}
-				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\spn_default.txt")) {
-					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\spn_default.txt", Properties.Resources.spn_default);
-				}
-				if (!File.Exists($@"{customlevel.txtCustomPath.Text}\xfm_default.txt")) {
-					File.WriteAllText($@"{customlevel.txtCustomPath.Text}\xfm_default.txt", Properties.Resources.xfm_default);
-				}
+				CreateCustomLevelFolder(customlevel);
 			}
 			customlevel.Dispose();
 		}
@@ -131,6 +124,7 @@ namespace Thumper___Leaf_Editor
 			InitializeTracks(lvlLeafList);
 			InitializeTracks(masterLvlList);
 			InitializeTracks(gateLvlList);
+			InitializeTracks(workingfolderFiles);
 			InitializeLvlStuff();
 			InitializeMasterStuff();
 			InitializeGateStuff();
@@ -141,6 +135,7 @@ namespace Thumper___Leaf_Editor
 			ControlMoverOrResizer.Init(panelLevel);
 			ControlMoverOrResizer.Init(panelMaster);
 			ControlMoverOrResizer.Init(panelGate);
+			ControlMoverOrResizer.Init(panelWorkingFolder);
 			ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
 
 			///import help text
@@ -205,12 +200,41 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
+		public void CreateCustomLevelFolder(DialogInput input)
+		{
+			JObject level_details = new JObject();
+			level_details.Add("level_name", input.txtCustomName.Text);
+			level_details.Add("difficulty", input.txtCustomDiff.Text);
+			level_details.Add("description", input.txtDesc.Text);
+			level_details.Add("author", input.txtCustomAuthor.Text);
+			//then write the file to the new folder that was created from the form
+			File.WriteAllText($@"{input.txtCustomPath.Text}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+			//these 4 files below are required defaults of new levels.
+			//create them if they don't exist
+			if (!File.Exists($@"{input.txtCustomPath.Text}\leaf_pyramid_outro.txt")) {
+				File.WriteAllText($@"{input.txtCustomPath.Text}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
+			}
+			if (!File.Exists($@"{input.txtCustomPath.Text}\samp_default.txt")) {
+				File.WriteAllText($@"{input.txtCustomPath.Text}\samp_default.txt", Properties.Resources.samp_default);
+			}
+			if (!File.Exists($@"{input.txtCustomPath.Text}\spn_default.txt")) {
+				File.WriteAllText($@"{input.txtCustomPath.Text}\spn_default.txt", Properties.Resources.spn_default);
+			}
+			if (!File.Exists($@"{input.txtCustomPath.Text}\xfm_default.txt")) {
+				File.WriteAllText($@"{input.txtCustomPath.Text}\xfm_default.txt", Properties.Resources.xfm_default);
+			}
+			//finally, set workingfolder
+			workingfolder = input.txtCustomPath.Text;
+		}
+
 		
 		///FORM RESIZE
 		///PANEL LABELS - change size or close
 		private void lblMasterClose_Click(object sender, EventArgs e) => masterEditorToolStripMenuItem.PerformClick();
 		private void lblLvlClose_Click(object sender, EventArgs e) => levelEditorToolStripMenuItem.PerformClick();
 		private void lblLeafClose_Click(object sender, EventArgs e) => leafEditorToolStripMenuItem.PerformClick();
+		private void lblGateClose_Click(object sender, EventArgs e) => gateEditorToolStripMenuItem.PerformClick();
+		private void lblWorkClose_Click(object sender, EventArgs e) => workingFolderToolStripMenuItem.PerformClick();
 		private void lblLeafMax_Click(object sender, EventArgs e)
 		{
 		}
@@ -228,5 +252,39 @@ namespace Thumper___Leaf_Editor
 		private void lblMasterRestHelp_Click(object sender, EventArgs e) => MessageBox.Show((string) helptext["masterRest"], "Master Editor Help");
 		private void lblMasterCheckpointLeaderHelp_Click(object sender, EventArgs e) => MessageBox.Show((string)helptext["masterCheckLeader"], "Master Editor Help");
 		private void lblConfigColorHelp_Click(object sender, EventArgs e) => new ImageMessageBox("railcolorhelp").Show();
+
+		private void editLevelDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			dynamic _load = new JObject();
+			try {
+				//atempt to parse JSON of LEVEL DETAILS. This wil lalso take care of the situation if it doesn't exist
+				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt"), "#.*", ""));
+			}
+			catch {	}
+			DialogInput customlevel = new DialogInput();
+			//set the form text fields to whatever is in LEVEL DETAILS
+			customlevel.txtCustomPath.Text = workingfolder;
+			//if the LEVEL DETAILS file is missing, or missing parameters, this fill fill the blanks will empty space
+			customlevel.txtCustomName.Text = _load.ContainsKey("level_name") ? (string)_load["level_name"] : "";
+			customlevel.txtCustomDiff.Text = _load.ContainsKey("difficulty") ? (string)_load["difficulty"] : "";
+			customlevel.txtDesc.Text = _load.ContainsKey("description") ? (string)_load["description"] : "";
+			customlevel.txtCustomAuthor.Text = _load.ContainsKey("author") ? (string)_load["author"] : "";
+			//show the new level folder dialog box
+			if (customlevel.ShowDialog() == DialogResult.OK) {
+				//if all OK, populate new JObject with data from the form
+				CreateCustomLevelFolder(customlevel);
+			}
+			customlevel.Dispose();
+		}
+
+		private void regenerateDefaultFilesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (MessageBox.Show("This will overwrite the \"default\" files in the working folder. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+				File.WriteAllText($@"{workingfolder}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
+				File.WriteAllText($@"{workingfolder}\samp_default.txt", Properties.Resources.samp_default);
+				File.WriteAllText($@"{workingfolder}\spn_default.txt", Properties.Resources.spn_default);
+				File.WriteAllText($@"{workingfolder}\xfm_default.txt", Properties.Resources.xfm_default);
+			}
+		}
 	}
 }

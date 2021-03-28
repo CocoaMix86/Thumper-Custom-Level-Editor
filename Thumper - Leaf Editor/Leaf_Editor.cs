@@ -166,7 +166,6 @@ namespace Thumper___Leaf_Editor
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
 				SaveLeaf(false);
 			}
-			e.Handled = true;
 		}
 		///TOOLSTRIP
 		///Toolstrip - TRACK

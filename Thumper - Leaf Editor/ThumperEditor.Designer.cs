@@ -48,6 +48,10 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLeafEditor));
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +79,8 @@
 			this.mastersaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.newLevelFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.editLevelDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.regenerateDefaultFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.levelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,8 +94,9 @@
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.leafEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.masterEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.levelEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gateEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.levelEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.workingFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,6 +185,7 @@
 			this.label28 = new System.Windows.Forms.Label();
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
 			this.panelMaster = new System.Windows.Forms.Panel();
+			this.label37 = new System.Windows.Forms.Label();
 			this.btnMasterRefreshLvl = new System.Windows.Forms.Button();
 			this.btnMasterOpenCheckpoint = new System.Windows.Forms.Button();
 			this.btnMasterOpenIntro = new System.Windows.Forms.Button();
@@ -216,6 +224,8 @@
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.helpProvider1 = new System.Windows.Forms.HelpProvider();
 			this.panelGate = new System.Windows.Forms.Panel();
+			this.label38 = new System.Windows.Forms.Label();
+			this.dropGateBoss = new System.Windows.Forms.ComboBox();
 			this.btnGateLvlAdd = new System.Windows.Forms.Button();
 			this.btnGateLvlDown = new System.Windows.Forms.Button();
 			this.btnGateLvlUp = new System.Windows.Forms.Button();
@@ -227,7 +237,13 @@
 			this.label48 = new System.Windows.Forms.Label();
 			this.lblGateClose = new System.Windows.Forms.Label();
 			this.lblGateName = new System.Windows.Forms.Label();
-			this.label37 = new System.Windows.Forms.Label();
+			this.panelWorkingFolder = new System.Windows.Forms.Panel();
+			this.btnWorkDelete = new System.Windows.Forms.Button();
+			this.btnWorkRefresh = new System.Windows.Forms.Button();
+			this.workingfolderFiles = new System.Windows.Forms.DataGridView();
+			this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.lblWorkClose = new System.Windows.Forms.Label();
+			this.lblWorkingFolder = new System.Windows.Forms.Label();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -251,6 +267,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
 			this.panelGate.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
+			this.panelWorkingFolder.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -279,6 +297,8 @@
             this.masterToolStripMenuItem,
             this.toolStripSeparator3,
             this.newLevelFolderToolStripMenuItem,
+            this.editLevelDetailsToolStripMenuItem,
+            this.regenerateDefaultFilesToolStripMenuItem,
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
@@ -298,7 +318,7 @@
             this.leafTemplateToolStripMenuItem});
 			this.saveToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
+			this.saveToolStripMenuItem1.Size = new System.Drawing.Size(208, 22);
 			this.saveToolStripMenuItem1.Text = "Leaf...";
 			// 
 			// leafnewToolStripMenuItem
@@ -371,7 +391,7 @@
             this.lvlsaveAsToolStripMenuItem});
 			this.levelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-			this.levelToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.levelToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.levelToolStripMenuItem.Text = "Level...";
 			// 
 			// lvlnewToolStripMenuItem1
@@ -426,7 +446,7 @@
             this.gatesaveAsToolStripMenuItem});
 			this.gateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gateToolStripMenuItem.Name = "gateToolStripMenuItem";
-			this.gateToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.gateToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.gateToolStripMenuItem.Text = "Gate...";
 			// 
 			// gatenewToolStripMenuItem
@@ -473,7 +493,7 @@
             this.mastersaveAsToolStripMenuItem});
 			this.masterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
-			this.masterToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.masterToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.masterToolStripMenuItem.Text = "Master...";
 			// 
 			// masternewToolStripMenuItem
@@ -527,7 +547,7 @@
 			this.toolStripSeparator3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.toolStripSeparator3.ForeColor = System.Drawing.Color.Black;
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(166, 6);
+			this.toolStripSeparator3.Size = new System.Drawing.Size(205, 6);
 			this.toolStripSeparator3.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
 			// 
 			// newLevelFolderToolStripMenuItem
@@ -535,16 +555,36 @@
 			this.newLevelFolderToolStripMenuItem.BackColor = System.Drawing.Color.ForestGreen;
 			this.newLevelFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.newLevelFolderToolStripMenuItem.Name = "newLevelFolderToolStripMenuItem";
-			this.newLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.newLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.newLevelFolderToolStripMenuItem.Text = "New Level Folder";
 			this.newLevelFolderToolStripMenuItem.Click += new System.EventHandler(this.newLevelFolderToolStripMenuItem_Click);
+			// 
+			// editLevelDetailsToolStripMenuItem
+			// 
+			this.editLevelDetailsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.editLevelDetailsToolStripMenuItem.Enabled = false;
+			this.editLevelDetailsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.editLevelDetailsToolStripMenuItem.Name = "editLevelDetailsToolStripMenuItem";
+			this.editLevelDetailsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.editLevelDetailsToolStripMenuItem.Text = "Edit Level Details";
+			this.editLevelDetailsToolStripMenuItem.Click += new System.EventHandler(this.editLevelDetailsToolStripMenuItem_Click);
+			// 
+			// regenerateDefaultFilesToolStripMenuItem
+			// 
+			this.regenerateDefaultFilesToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.regenerateDefaultFilesToolStripMenuItem.Enabled = false;
+			this.regenerateDefaultFilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.regenerateDefaultFilesToolStripMenuItem.Name = "regenerateDefaultFilesToolStripMenuItem";
+			this.regenerateDefaultFilesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+			this.regenerateDefaultFilesToolStripMenuItem.Text = "Regenerate Default Files";
+			this.regenerateDefaultFilesToolStripMenuItem.Click += new System.EventHandler(this.regenerateDefaultFilesToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.toolStripSeparator2.ForeColor = System.Drawing.Color.Black;
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(205, 6);
 			this.toolStripSeparator2.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
 			// 
 			// exitToolStripMenuItem
@@ -552,7 +592,7 @@
 			this.exitToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -655,7 +695,8 @@
             this.leafEditorToolStripMenuItem,
             this.masterEditorToolStripMenuItem,
             this.gateEditorToolStripMenuItem,
-            this.levelEditorToolStripMenuItem});
+            this.levelEditorToolStripMenuItem,
+            this.workingFolderToolStripMenuItem});
 			this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
@@ -669,7 +710,7 @@
 			this.leafEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.leafEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafEditorToolStripMenuItem.Name = "leafEditorToolStripMenuItem";
-			this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.leafEditorToolStripMenuItem.Text = "Leaf Editor";
 			this.leafEditorToolStripMenuItem.Click += new System.EventHandler(this.leafEditorToolStripMenuItem_Click);
 			// 
@@ -681,21 +722,9 @@
 			this.masterEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.masterEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.masterEditorToolStripMenuItem.Name = "masterEditorToolStripMenuItem";
-			this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.masterEditorToolStripMenuItem.Text = "Master Editor";
 			this.masterEditorToolStripMenuItem.Click += new System.EventHandler(this.masterEditorToolStripMenuItem_Click);
-			// 
-			// levelEditorToolStripMenuItem
-			// 
-			this.levelEditorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-			this.levelEditorToolStripMenuItem.Checked = true;
-			this.levelEditorToolStripMenuItem.CheckOnClick = true;
-			this.levelEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.levelEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-			this.levelEditorToolStripMenuItem.Name = "levelEditorToolStripMenuItem";
-			this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.levelEditorToolStripMenuItem.Text = "Level Editor";
-			this.levelEditorToolStripMenuItem.Click += new System.EventHandler(this.levelEditorToolStripMenuItem_Click);
 			// 
 			// gateEditorToolStripMenuItem
 			// 
@@ -705,9 +734,33 @@
 			this.gateEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.gateEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gateEditorToolStripMenuItem.Name = "gateEditorToolStripMenuItem";
-			this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.gateEditorToolStripMenuItem.Text = "Gate Editor";
 			this.gateEditorToolStripMenuItem.Click += new System.EventHandler(this.gateEditorToolStripMenuItem_Click);
+			// 
+			// levelEditorToolStripMenuItem
+			// 
+			this.levelEditorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.levelEditorToolStripMenuItem.Checked = true;
+			this.levelEditorToolStripMenuItem.CheckOnClick = true;
+			this.levelEditorToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.levelEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.levelEditorToolStripMenuItem.Name = "levelEditorToolStripMenuItem";
+			this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.levelEditorToolStripMenuItem.Text = "Level Editor";
+			this.levelEditorToolStripMenuItem.Click += new System.EventHandler(this.levelEditorToolStripMenuItem_Click);
+			// 
+			// workingFolderToolStripMenuItem
+			// 
+			this.workingFolderToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.workingFolderToolStripMenuItem.Checked = true;
+			this.workingFolderToolStripMenuItem.CheckOnClick = true;
+			this.workingFolderToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.workingFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.workingFolderToolStripMenuItem.Name = "workingFolderToolStripMenuItem";
+			this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.workingFolderToolStripMenuItem.Text = "Working Folder";
+			this.workingFolderToolStripMenuItem.Click += new System.EventHandler(this.workingFolderToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -1069,7 +1122,7 @@
 			this.panelLeaf.Controls.Add(this.label3);
 			this.panelLeaf.Controls.Add(this.label4);
 			this.panelLeaf.Controls.Add(this.dropObjects);
-			this.panelLeaf.Location = new System.Drawing.Point(9, 418);
+			this.panelLeaf.Location = new System.Drawing.Point(312, 418);
 			this.panelLeaf.Name = "panelLeaf";
 			this.panelLeaf.Size = new System.Drawing.Size(1425, 555);
 			this.panelLeaf.TabIndex = 45;
@@ -1516,7 +1569,7 @@
 			this.panelLevel.Controls.Add(this.btnLvlSeqDelete);
 			this.panelLevel.Controls.Add(this.lblLvlName);
 			this.panelLevel.Controls.Add(this.panel1);
-			this.panelLevel.Location = new System.Drawing.Point(1024, 29);
+			this.panelLevel.Location = new System.Drawing.Point(864, 29);
 			this.panelLevel.Name = "panelLevel";
 			this.panelLevel.Size = new System.Drawing.Size(997, 383);
 			this.panelLevel.TabIndex = 46;
@@ -2282,6 +2335,18 @@
 			this.panelMaster.Size = new System.Drawing.Size(462, 348);
 			this.panelMaster.TabIndex = 47;
 			// 
+			// label37
+			// 
+			this.label37.AutoSize = true;
+			this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label37.ForeColor = System.Drawing.Color.White;
+			this.label37.Location = new System.Drawing.Point(3, 288);
+			this.label37.Name = "label37";
+			this.label37.Size = new System.Drawing.Size(103, 13);
+			this.label37.TabIndex = 116;
+			this.label37.Text = "Sublevel Options";
+			this.label37.Visible = false;
+			// 
 			// btnMasterRefreshLvl
 			// 
 			this.btnMasterRefreshLvl.BackColor = System.Drawing.Color.Gray;
@@ -2825,6 +2890,8 @@
 			// 
 			this.panelGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelGate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelGate.Controls.Add(this.label38);
+			this.panelGate.Controls.Add(this.dropGateBoss);
 			this.panelGate.Controls.Add(this.btnGateLvlAdd);
 			this.panelGate.Controls.Add(this.btnGateLvlDown);
 			this.panelGate.Controls.Add(this.btnGateLvlUp);
@@ -2836,8 +2903,34 @@
 			this.panelGate.Controls.Add(this.lblGateName);
 			this.panelGate.Location = new System.Drawing.Point(472, 29);
 			this.panelGate.Name = "panelGate";
-			this.panelGate.Size = new System.Drawing.Size(546, 383);
+			this.panelGate.Size = new System.Drawing.Size(386, 383);
 			this.panelGate.TabIndex = 116;
+			// 
+			// label38
+			// 
+			this.label38.AutoSize = true;
+			this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label38.ForeColor = System.Drawing.Color.White;
+			this.label38.Location = new System.Drawing.Point(0, 200);
+			this.label38.Name = "label38";
+			this.label38.Size = new System.Drawing.Size(34, 13);
+			this.label38.TabIndex = 117;
+			this.label38.Text = "Boss";
+			// 
+			// dropGateBoss
+			// 
+			this.dropGateBoss.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.dropGateBoss.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.dropGateBoss.DisplayMember = "plos";
+			this.dropGateBoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.dropGateBoss.ForeColor = System.Drawing.Color.White;
+			this.dropGateBoss.FormattingEnabled = true;
+			this.dropGateBoss.Items.AddRange(new object[] {
+            "skybox_cube"});
+			this.dropGateBoss.Location = new System.Drawing.Point(40, 197);
+			this.dropGateBoss.Name = "dropGateBoss";
+			this.dropGateBoss.Size = new System.Drawing.Size(136, 21);
+			this.dropGateBoss.TabIndex = 117;
 			// 
 			// btnGateLvlAdd
 			// 
@@ -2994,7 +3087,7 @@
 			this.label48.AutoSize = true;
 			this.label48.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label48.Location = new System.Drawing.Point(509, 1);
+			this.label48.Location = new System.Drawing.Point(349, 1);
 			this.label48.Name = "label48";
 			this.label48.Size = new System.Drawing.Size(16, 15);
 			this.label48.TabIndex = 52;
@@ -3006,12 +3099,13 @@
 			this.lblGateClose.AutoSize = true;
 			this.lblGateClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblGateClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblGateClose.Location = new System.Drawing.Point(525, 1);
+			this.lblGateClose.Location = new System.Drawing.Point(365, 1);
 			this.lblGateClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblGateClose.Name = "lblGateClose";
 			this.lblGateClose.Size = new System.Drawing.Size(16, 15);
 			this.lblGateClose.TabIndex = 51;
 			this.lblGateClose.Text = "x";
+			this.lblGateClose.Click += new System.EventHandler(this.lblGateClose_Click);
 			// 
 			// lblGateName
 			// 
@@ -3024,24 +3118,151 @@
 			this.lblGateName.TabIndex = 49;
 			this.lblGateName.Text = "Gate Editor";
 			// 
-			// label37
+			// panelWorkingFolder
 			// 
-			this.label37.AutoSize = true;
-			this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label37.ForeColor = System.Drawing.Color.White;
-			this.label37.Location = new System.Drawing.Point(3, 288);
-			this.label37.Name = "label37";
-			this.label37.Size = new System.Drawing.Size(103, 13);
-			this.label37.TabIndex = 116;
-			this.label37.Text = "Sublevel Options";
-			this.label37.Visible = false;
+			this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+			this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelWorkingFolder.Controls.Add(this.btnWorkDelete);
+			this.panelWorkingFolder.Controls.Add(this.btnWorkRefresh);
+			this.panelWorkingFolder.Controls.Add(this.workingfolderFiles);
+			this.panelWorkingFolder.Controls.Add(this.lblWorkClose);
+			this.panelWorkingFolder.Controls.Add(this.lblWorkingFolder);
+			this.panelWorkingFolder.Location = new System.Drawing.Point(4, 385);
+			this.panelWorkingFolder.Name = "panelWorkingFolder";
+			this.panelWorkingFolder.Size = new System.Drawing.Size(297, 453);
+			this.panelWorkingFolder.TabIndex = 117;
+			this.panelWorkingFolder.SizeChanged += new System.EventHandler(this.panelWorkingFolder_SizeChanged);
+			// 
+			// btnWorkDelete
+			// 
+			this.btnWorkDelete.BackColor = System.Drawing.Color.Gray;
+			this.btnWorkDelete.Enabled = false;
+			this.btnWorkDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnWorkDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnWorkDelete.Location = new System.Drawing.Point(125, 34);
+			this.btnWorkDelete.Name = "btnWorkDelete";
+			this.btnWorkDelete.Size = new System.Drawing.Size(67, 23);
+			this.btnWorkDelete.TabIndex = 118;
+			this.btnWorkDelete.Text = "Delete";
+			this.btnWorkDelete.UseVisualStyleBackColor = false;
+			this.btnWorkDelete.Click += new System.EventHandler(this.btnWorkDelete_Click);
+			// 
+			// btnWorkRefresh
+			// 
+			this.btnWorkRefresh.BackColor = System.Drawing.Color.Gray;
+			this.btnWorkRefresh.Enabled = false;
+			this.btnWorkRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnWorkRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnWorkRefresh.Location = new System.Drawing.Point(2, 34);
+			this.btnWorkRefresh.Name = "btnWorkRefresh";
+			this.btnWorkRefresh.Size = new System.Drawing.Size(67, 23);
+			this.btnWorkRefresh.TabIndex = 117;
+			this.btnWorkRefresh.Text = "Refresh";
+			this.btnWorkRefresh.UseVisualStyleBackColor = false;
+			this.btnWorkRefresh.Click += new System.EventHandler(this.btnWorkRefresh_Click);
+			// 
+			// workingfolderFiles
+			// 
+			this.workingfolderFiles.AllowUserToAddRows = false;
+			this.workingfolderFiles.AllowUserToDeleteRows = false;
+			this.workingfolderFiles.AllowUserToResizeRows = false;
+			this.workingfolderFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.workingfolderFiles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.workingfolderFiles.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.workingfolderFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+			this.workingfolderFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+			dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			dataGridViewCellStyle22.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle22.ForeColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.workingfolderFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+			this.workingfolderFiles.ColumnHeadersHeight = 20;
+			this.workingfolderFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.workingfolderFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FileName});
+			dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle24.ForeColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle24.Format = "N2";
+			dataGridViewCellStyle24.NullValue = null;
+			dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle24;
+			this.workingfolderFiles.EnableHeadersVisualStyles = false;
+			this.workingfolderFiles.GridColor = System.Drawing.Color.Black;
+			this.workingfolderFiles.Location = new System.Drawing.Point(2, 58);
+			this.workingfolderFiles.MultiSelect = false;
+			this.workingfolderFiles.Name = "workingfolderFiles";
+			this.workingfolderFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+			dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.workingfolderFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle25;
+			this.workingfolderFiles.RowHeadersVisible = false;
+			this.workingfolderFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.workingfolderFiles.RowTemplate.Height = 200;
+			this.workingfolderFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+			this.workingfolderFiles.Size = new System.Drawing.Size(288, 388);
+			this.workingfolderFiles.TabIndex = 80;
+			this.workingfolderFiles.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_RowEnter);
+			this.workingfolderFiles.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.workingfolderFiles_RowsAdded);
+			this.workingfolderFiles.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.workingfolderFiles_RowsRemoved);
+			// 
+			// FileName
+			// 
+			this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
+			this.FileName.DefaultCellStyle = dataGridViewCellStyle23;
+			this.FileName.HeaderText = "File Name";
+			this.FileName.Name = "FileName";
+			this.FileName.ReadOnly = true;
+			this.FileName.Width = 84;
+			// 
+			// lblWorkClose
+			// 
+			this.lblWorkClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblWorkClose.AutoSize = true;
+			this.lblWorkClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.lblWorkClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblWorkClose.Location = new System.Drawing.Point(276, 1);
+			this.lblWorkClose.MinimumSize = new System.Drawing.Size(16, 2);
+			this.lblWorkClose.Name = "lblWorkClose";
+			this.lblWorkClose.Size = new System.Drawing.Size(16, 15);
+			this.lblWorkClose.TabIndex = 51;
+			this.lblWorkClose.Text = "x";
+			this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
+			// 
+			// lblWorkingFolder
+			// 
+			this.lblWorkingFolder.AutoSize = true;
+			this.lblWorkingFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblWorkingFolder.ForeColor = System.Drawing.Color.White;
+			this.lblWorkingFolder.Location = new System.Drawing.Point(-3, 0);
+			this.lblWorkingFolder.MaximumSize = new System.Drawing.Size(281, 0);
+			this.lblWorkingFolder.Name = "lblWorkingFolder";
+			this.lblWorkingFolder.Size = new System.Drawing.Size(79, 13);
+			this.lblWorkingFolder.TabIndex = 49;
+			this.lblWorkingFolder.Text = "Working Folder";
 			// 
 			// FormLeafEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.ClientSize = new System.Drawing.Size(1460, 763);
+			this.ClientSize = new System.Drawing.Size(1460, 869);
+			this.Controls.Add(this.panelWorkingFolder);
 			this.Controls.Add(this.panelLevel);
 			this.Controls.Add(this.panelGate);
 			this.Controls.Add(this.menuStrip);
@@ -3084,6 +3305,9 @@
 			this.panelGate.ResumeLayout(false);
 			this.panelGate.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).EndInit();
+			this.panelWorkingFolder.ResumeLayout(false);
+			this.panelWorkingFolder.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -3270,6 +3494,18 @@
 		private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
 		private System.Windows.Forms.ToolStripMenuItem gateEditorToolStripMenuItem;
 		private System.Windows.Forms.Label label37;
+		private System.Windows.Forms.Label label38;
+		private System.Windows.Forms.ComboBox dropGateBoss;
+		private System.Windows.Forms.Panel panelWorkingFolder;
+		private System.Windows.Forms.Label lblWorkClose;
+		private System.Windows.Forms.Label lblWorkingFolder;
+		private System.Windows.Forms.Button btnWorkRefresh;
+		private System.Windows.Forms.DataGridView workingfolderFiles;
+		private System.Windows.Forms.Button btnWorkDelete;
+		private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+		private System.Windows.Forms.ToolStripMenuItem workingFolderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem editLevelDetailsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem regenerateDefaultFilesToolStripMenuItem;
 	}
 }
 
