@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Thumper___Leaf_Editor
@@ -61,9 +54,6 @@ namespace Thumper___Leaf_Editor
 			if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1)) {
 				e.Handled = true;
 			}
-			if ((e.KeyChar == '-') && ((sender as TextBox).Text.IndexOf('.') > -1)) {
-				e.Handled = true;
-			}
 		}
 
 		private void txtSmooth_angleTarget_KeyPress(object sender, KeyPressEventArgs e)
@@ -74,9 +64,6 @@ namespace Thumper___Leaf_Editor
 			}
 			// only allow one decimal point
 			if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1)) {
-				e.Handled = true;
-			}
-			if ((e.KeyChar == '-') && ((sender as TextBox).Text.IndexOf('.') > -1)) {
 				e.Handled = true;
 			}
 		}
@@ -91,10 +78,6 @@ namespace Thumper___Leaf_Editor
 		///
 		///TAB 1 - Turn Constant
 		///
-		private void btnTurnConstant_output_Click(object sender, EventArgs e)
-		{
-		}
-
 		private void btnConstant_output_Click(object sender, EventArgs e)
 		{
 			bool _skipNo = radioNone.Checked;
@@ -110,12 +93,16 @@ namespace Thumper___Leaf_Editor
 
 			for (int x = 1; _start <= _end; _start++) {
 				if (!_skipNo) {
+					//check if beat should be skipped. If skipNthbeat is on, and beat%N = 0, skip it
+					//if SkipNRow is on, write the beat
 					if ((_skipNthBeat && x % _nbeats != 0) || _skipNRow)
 						_output += _start + ":" + _pitch + ",";
+					//Also if SkipNRow is on, add N beats to the loop to skip that many
 					if (_skipNRow)
 						_start += _nbeats;
 					x++;
 				}
+				//if no skip is specified, write the beat normally
 				else
 					_output += _start + ":" + _pitch + ",";
 			}
@@ -128,18 +115,6 @@ namespace Thumper___Leaf_Editor
 		///
 		///TAB 2 - Smooth Turns
 		///
-		private void radioReturn_zero_CheckedChanged(object sender, EventArgs e)
-		{
-		}
-
-		private void radioReturn_start_CheckedChanged(object sender, EventArgs e)
-		{
-		}
-
-		private void radioReturn_none_CheckedChanged(object sender, EventArgs e)
-		{
-		}
-
 		private void btnSmooth_output_Click(object sender, EventArgs e)
 		{
 			int _beatStart = int.Parse(txtSmoothTurn_bStart.Text);
@@ -186,7 +161,7 @@ namespace Thumper___Leaf_Editor
 			}
 			catch (Exception) {
 				_offset = 0;
-				MessageBox.Show("Offset was not a number. Defaulting to '0'");
+				MessageBox.Show("Offset was not an integer. Defaulting to '0'");
 			}
 			string _in = txtOffset_In.Text;
 			string _out = "";
@@ -204,6 +179,7 @@ namespace Thumper___Leaf_Editor
 			}
 
 			richTextBox1.Text = _out;
+			/// egg
 		}
 	}
 }
