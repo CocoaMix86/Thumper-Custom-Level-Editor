@@ -173,7 +173,6 @@ namespace Thumper___Leaf_Editor
 				if (sfd.ShowDialog() == DialogResult.OK) {
 					//separate path and filename
 					string storePath = Path.GetDirectoryName(sfd.FileName);
-					string tempFileName = Path.GetFileName(sfd.FileName);
 					//get contents to save
 					var _save = MasterBuildSave();
 					//serialize JSON object to a string, and write it to the file
@@ -322,45 +321,10 @@ namespace Thumper___Leaf_Editor
 			dropMasterLvlRest.SelectedItem = _select;
 		}
 
-		private void btnMasterOpenIntro_Click(object sender, EventArgs e)
-		{
-			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
-				if (!dropMasterIntro.SelectedItem.ToString().Contains(".lvl"))
-					return;
-				string _file = dropMasterIntro.SelectedItem.ToString().Replace(".lvl", "");
-				dynamic _load;
-				try {
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
-				}
-				catch {
-					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
-					return;
-				}
-				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
-				//load the selected lvl
-				LoadLvl(_load);
-			}
-		}
-
-		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e)
-		{
-			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
-				if (!dropMasterCheck.SelectedItem.ToString().Contains(".lvl"))
-					return;
-				string _file = dropMasterCheck.SelectedItem.ToString().Replace(".lvl", "");
-				dynamic _load;
-				try {
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
-				}
-				catch {
-					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
-					return;
-				}
-				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
-				//load the selected lvl
-				LoadLvl(_load);
-			}
-		}
+		private void btnMasterOpenIntro_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterIntro.SelectedItem.ToString());
+		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterCheck.SelectedItem.ToString());
+		private void btnMasterOpenLeader_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlLeader.SelectedItem.ToString());
+		private void btnMasterOpenRest_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlRest.SelectedItem.ToString());
 		#endregion
 
 		#region Methods
@@ -450,6 +414,26 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
+		public void MasterLoadLvl(string path)
+		{
+			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+				if (!path.Contains(".lvl"))
+					return;
+				string _file = path.Replace(".lvl", "");
+				dynamic _load;
+				try {
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
+				}
+				catch {
+					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
+					return;
+				}
+				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
+				//load the selected lvl
+				LoadLvl(_load);
+			}
+		}
+
 		public void MasterEditorVisible()
 		{
 			if (workingfolder != null) {
@@ -511,27 +495,30 @@ namespace Thumper___Leaf_Editor
 			_config.Add("level_sections", level_sections);
 			//
 			//add rail color
-			JArray rails_color = new JArray();
-			rails_color.Add(Decimal.Round((decimal)btnConfigRailColor.BackColor.R / 255, 2));
-			rails_color.Add(Decimal.Round((decimal)btnConfigRailColor.BackColor.G / 255, 2));
-			rails_color.Add(Decimal.Round((decimal)btnConfigRailColor.BackColor.B / 255, 2));
-			rails_color.Add(Decimal.Round((decimal)btnConfigRailColor.BackColor.A / 255, 2));
+			JArray rails_color = new JArray {
+				Decimal.Round((decimal)btnConfigRailColor.BackColor.R / 255, 2),
+				Decimal.Round((decimal)btnConfigRailColor.BackColor.G / 255, 2),
+				Decimal.Round((decimal)btnConfigRailColor.BackColor.B / 255, 2),
+				Decimal.Round((decimal)btnConfigRailColor.BackColor.A / 255, 2)
+			};
 			_config.Add("rails_color", rails_color);
 			//
 			//add rail glow color
-			JArray rails_glow_color = new JArray();
-			rails_glow_color.Add(Decimal.Round((decimal)btnConfigGlowColor.BackColor.R / 255, 2));
-			rails_glow_color.Add(Decimal.Round((decimal)btnConfigGlowColor.BackColor.G / 255, 2));
-			rails_glow_color.Add(Decimal.Round((decimal)btnConfigGlowColor.BackColor.B / 255, 2));
-			rails_glow_color.Add(Decimal.Round((decimal)btnConfigGlowColor.BackColor.A / 255, 2));
+			JArray rails_glow_color = new JArray {
+				Decimal.Round((decimal)btnConfigGlowColor.BackColor.R / 255, 2),
+				Decimal.Round((decimal)btnConfigGlowColor.BackColor.G / 255, 2),
+				Decimal.Round((decimal)btnConfigGlowColor.BackColor.B / 255, 2),
+				Decimal.Round((decimal)btnConfigGlowColor.BackColor.A / 255, 2)
+			};
 			_config.Add("rails_glow_color", rails_glow_color);
 			//
 			//add path color
-			JArray path_color = new JArray();
-			path_color.Add(Decimal.Round((decimal)btnConfigPathColor.BackColor.R / 255, 2));
-			path_color.Add(Decimal.Round((decimal)btnConfigPathColor.BackColor.G / 255, 2));
-			path_color.Add(Decimal.Round((decimal)btnConfigPathColor.BackColor.B / 255, 2));
-			path_color.Add(Decimal.Round((decimal)btnConfigPathColor.BackColor.A / 255, 2));
+			JArray path_color = new JArray {
+				Decimal.Round((decimal)btnConfigPathColor.BackColor.R / 255, 2),
+				Decimal.Round((decimal)btnConfigPathColor.BackColor.G / 255, 2),
+				Decimal.Round((decimal)btnConfigPathColor.BackColor.B / 255, 2),
+				Decimal.Round((decimal)btnConfigPathColor.BackColor.A / 255, 2)
+			};
 			_config.Add("path_color", path_color);
 			//
 			//add joy color

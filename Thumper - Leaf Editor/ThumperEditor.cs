@@ -198,15 +198,25 @@ namespace Thumper___Leaf_Editor
 				File.WriteAllText(@"templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
 				File.WriteAllText(@"templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
 			}
+
+			///set a bunch of tool tips
+			//Leaf tooltips
+			toolTip1.SetToolTip(btnTrackClear, "Clears the selected track of data");
+			//Lvl tooltips
+			toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track of data");
+			//Master tooltips
+			toolTip1.SetToolTip(btnMasterOpenCheckpoint, "Opens the selected checkpoint in the Lvl Editor");
+			toolTip1.SetToolTip(btnMasterOpenIntro, "Opens the selected intro in the Lvl Editor");
 		}
 
 		public void CreateCustomLevelFolder(DialogInput input)
 		{
-			JObject level_details = new JObject();
-			level_details.Add("level_name", input.txtCustomName.Text);
-			level_details.Add("difficulty", input.txtCustomDiff.Text);
-			level_details.Add("description", input.txtDesc.Text);
-			level_details.Add("author", input.txtCustomAuthor.Text);
+			JObject level_details = new JObject {
+				{ "level_name", input.txtCustomName.Text },
+				{ "difficulty", input.txtCustomDiff.Text },
+				{ "description", input.txtDesc.Text },
+				{ "author", input.txtCustomAuthor.Text }
+			};
 			//then write the file to the new folder that was created from the form
 			File.WriteAllText($@"{input.txtCustomPath.Text}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
 			//these 4 files below are required defaults of new levels.

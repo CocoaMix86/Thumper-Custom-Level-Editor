@@ -537,7 +537,7 @@ namespace Thumper___Leaf_Editor
 			lvlLeafPaths.Rows.Clear();
 			//for each path in the selected leaf, populate the paths DGV
 			foreach (string path in _lvlleafs[index].paths) {
-				if (_lvlpaths.Contains("path"))
+				if (_lvlpaths.Contains(path))
 					lvlLeafPaths.Rows.Add(new object[] { path });
 				else
 					MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");
@@ -625,16 +625,17 @@ namespace Thumper___Leaf_Editor
 			//this section adds all leafs
 			JArray leaf_seq = new JArray();
 			foreach (LvlLeafData _leaf in _lvlleafs) {
-				JObject s = new JObject();
-				s.Add("beat_cnt", _leaf.beats);
-				s.Add("leaf_name", _leaf.leafname);
-				s.Add("main_path", "default.path");
-				s.Add("sub_paths", JArray.FromObject(_leaf.paths));
-				s.Add("pos", new JArray() { 0, 0, 0 });
-				s.Add("rot_x", new JArray() { 1, 0, 0 });
-				s.Add("rot_y", new JArray() { 0, 1, 0 });
-				s.Add("rot_z", new JArray() { 0, 0, 1 });
-				s.Add("scale", new JArray() { 1, 1, 1 });
+				JObject s = new JObject {
+					{ "beat_cnt", _leaf.beats },
+					{ "leaf_name", _leaf.leafname },
+					{ "main_path", "default.path" },
+					{ "sub_paths", JArray.FromObject(_leaf.paths) },
+					{ "pos", new JArray() { 0, 0, 0 } },
+					{ "rot_x", new JArray() { 1, 0, 0 } },
+					{ "rot_y", new JArray() { 0, 1, 0 } },
+					{ "rot_z", new JArray() { 0, 0, 1 } },
+					{ "scale", new JArray() { 1, 1, 1 } }
+				};
 
 				leaf_seq.Add(s);
 			}
@@ -642,9 +643,10 @@ namespace Thumper___Leaf_Editor
 			//this section adds the loop tracks
 			JArray loops = new JArray();
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
-				JObject s = new JObject();
-				s.Add("samp_name", (string)r.Cells[0].Value);
-				s.Add("beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()));
+				JObject s = new JObject {
+					{ "samp_name", (string)r.Cells[0].Value },
+					{ "beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()) }
+				};
 
 				loops.Add(s);
 			}
