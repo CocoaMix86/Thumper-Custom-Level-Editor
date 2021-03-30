@@ -120,6 +120,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ThumperEditor.resx">
       <DependentUpon>ThumperEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -153,6 +154,17 @@
     <None Include="Resources\difficultyhelp.png" />
     <None Include="Resources\railcolorhelp.png" />
     <None Include="text assets\leaf_pyramid_outro.txt" />
+    <None Include="image assets\exit.png" />
+    <None Include="image assets\gate.png" />
+    <None Include="image assets\icon_interp.png" />
+    <None Include="image assets\icon_newfile.png" />
+    <None Include="image assets\icon_openfile.png" />
+    <None Include="image assets\icon_save.png" />
+    <None Include="image assets\icon_saveas.png" />
+    <None Include="image assets\icon_template.png" />
+    <None Include="image assets\leaf.png" />
+    <None Include="image assets\lvl.png" />
+    <None Include="image assets\master.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
