@@ -22,6 +22,11 @@ namespace Thumper___Leaf_Editor
 				this.BackgroundImageLayout = ImageLayout.Center;
 				this.Text = "Difficulty Explanation";
 			}
+			if (path == "bosssectionhelp") {
+				this.BackgroundImage = Properties.Resources.bosssectionhelp;
+				this.BackgroundImageLayout = ImageLayout.Center;
+				this.Text = "Boss Section Explanation";
+			}
 			this.Size = this.BackgroundImage.Size;
 			this.Height += 40;
 		}
