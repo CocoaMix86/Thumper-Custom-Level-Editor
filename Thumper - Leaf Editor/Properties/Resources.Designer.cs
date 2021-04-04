@@ -63,6 +63,16 @@ namespace Thumper___Leaf_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap bosssectionhelp {
+            get {
+                object obj = ResourceManager.GetObject("bosssectionhelp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap difficultyhelp {
             get {
                 object obj = ResourceManager.GetObject("difficultyhelp", resourceCulture);

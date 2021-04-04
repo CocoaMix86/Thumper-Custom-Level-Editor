@@ -1,5 +1,6 @@
 ﻿{
 "masterLvlList": "CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.",
 "masterCheckLeader": "Currently unsure what exactly this does.",
-"masterRest": "If not empty, this lvl will play before the main lvl. Usually used as a longer rest segment."
+"masterRest": "If not empty, this lvl will play before the main lvl. Usually used as a longer rest segment.",
+"gatePre": "PRE LVL\nThis lvl plays at the very start of the gate sublevel. The boss does not spawn in yet. Can be blank, unless you are using the Triangle boss.\n\nPOST LVL\nPlays immediately after the Pre lvl. The boss spawns in at this point. The boss phases play immediately after this lvl is finished. Can be blank.\n\nRESTART LVL\nThis lvl plays when restarting the boss, and skips playing the pre and post lvls. Can be blank.",
 }
