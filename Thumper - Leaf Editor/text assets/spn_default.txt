@@ -287,9 +287,6 @@
 'bucket': 'kBucketEffect'
 },
 
-#
-#BOSSES
-#
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'gate_tutorial_thumps.spn',
@@ -318,7 +315,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'gate_crakhed1.spn',
+'obj_name': 'crakhed1.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -331,7 +328,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'gate_jump.spn',
+'obj_name': 'boss_jump.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -357,7 +354,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'pound_tutorial_boss.spn',
+'obj_name': 'boss_pound_tutorial.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -396,7 +393,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'triangle_boss.spn',
+'obj_name': 'boss_triangle.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -461,7 +458,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'spirograph.spn',
+'obj_name': 'boss_spirograph.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -513,7 +510,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'gate_starfish.spn',
+'obj_name': 'boss_starfish.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -539,7 +536,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'gate_frac.spn',
+'obj_name': 'boss_fractal.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],

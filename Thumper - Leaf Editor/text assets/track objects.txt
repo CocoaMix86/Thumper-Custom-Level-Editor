@@ -125,3 +125,7 @@ avatar.lib;speed;sequin_speed;kTraitFloat;False;1;[1,1,2,1,2,'kIntensityScale','
 avatar.lib;win;win;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 avatar.lib;win checkpoint;win_checkpoint;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 fade.pp;fade;fade;kTraitFloat;False;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+###
+CUSTOM
+custom
+your;data;here;
