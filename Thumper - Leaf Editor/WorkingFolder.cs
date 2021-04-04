@@ -78,9 +78,11 @@ namespace Thumper___Leaf_Editor
 		{
 			//clear the dgv and reload files in the folder
 			workingfolderFiles.Rows.Clear();
+			workingfolderFiles.RowEnter -= new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
 			foreach (string file in Directory.GetFiles(workingfolder)) {
 				workingfolderFiles.Rows.Add(Path.GetFileName(file));
 			}
+			workingfolderFiles.RowEnter += new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
 		}
 
 		private void btnWorkDelete_Click(object sender, EventArgs e)

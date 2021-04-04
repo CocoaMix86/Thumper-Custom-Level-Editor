@@ -119,6 +119,11 @@ namespace Thumper___Leaf_Editor
 			}
 			e.Handled = true;
 		}
+		//Fill weight - allows for more columns
+		private void lvlSeqObjs_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+		{
+			e.Column.FillWeight = 10;
+		}
 		///_LVLLEAF - Triggers when the collection changes
 		public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
@@ -205,6 +210,7 @@ namespace Thumper___Leaf_Editor
 				//filter .txt only
 				sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
 				sfd.FilterIndex = 1;
+				sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				if (sfd.ShowDialog() == DialogResult.OK) {
 					//separate path and filename
 					string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -235,6 +241,7 @@ namespace Thumper___Leaf_Editor
 				using (var ofd = new OpenFileDialog()) {
 					ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
 					ofd.Title = "Load a Thumper Lvl file";
+					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 					if (ofd.ShowDialog() == DialogResult.OK) {
 						//storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
 						_loadedlvltemp = ofd.FileName;
@@ -537,7 +544,9 @@ namespace Thumper___Leaf_Editor
 			lvlLeafPaths.Rows.Clear();
 			//for each path in the selected leaf, populate the paths DGV
 			foreach (string path in _lvlleafs[index].paths) {
-				if (_lvlpaths.Contains(path))
+				if (path == "")
+					continue;
+				else if (_lvlpaths.Contains(path))
 					lvlLeafPaths.Rows.Add(new object[] { path });
 				else
 					MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");

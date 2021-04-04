@@ -167,18 +167,6 @@ namespace Thumper___Leaf_Editor
 				SaveLeaf(false);
 			}
 		}
-		///TOOLSTRIP
-		///Toolstrip - TRACK
-		//Add Track (row)
-		private void addToolStripMenuItem_Click(object sender, EventArgs e) => btnTrackAdd.PerformClick();
-		//Delete Track (row)
-		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => btnTrackDelete.PerformClick();
-		//Move Track Up
-		private void moveTrackUpToolStripMenuItem_Click(object sender, EventArgs e) => btnTrackUp.PerformClick();
-		//Move Track Down
-		private void moveTrackDownToolStripMenuItem_Click(object sender, EventArgs e) => btnTrackDown.PerformClick();
-		//Set Track Color
-		private void trackColorToolStripMenuItem_Click(object sender, EventArgs e) => btnTrackColorDialog.PerformClick();
 		///LEAF LENGTH
 		private void numericUpDown_LeafLength_ValueChanged(object sender, EventArgs e)
 		{
@@ -225,6 +213,7 @@ namespace Thumper___Leaf_Editor
 		///DROPDOWN TRACK LANE
 		private void dropTrackLane_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			//if the the selected param path can be set to a lane, keep Apply button disabled until a lane is selected
 			if (dropTrackLane.Enabled && dropTrackLane.SelectedIndex != -1) {
 				btnTrackApply.Enabled = true;
 			}
@@ -278,6 +267,7 @@ namespace Thumper___Leaf_Editor
 				//filter .txt only
 				sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
 				sfd.FilterIndex = 1;
+				sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				if (sfd.ShowDialog() == DialogResult.OK) {
 					//separate path and filename
 					string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -306,6 +296,7 @@ namespace Thumper___Leaf_Editor
 				using (var ofd = new OpenFileDialog()) {
 					ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
 					ofd.Title = "Load a Thumper Leaf file";
+					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 					if (ofd.ShowDialog() == DialogResult.OK) {
 						_loadedleaf = ofd.FileName;
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
@@ -390,11 +381,6 @@ namespace Thumper___Leaf_Editor
 				btnTrackUp.Enabled = false;
 				btnTrackDown.Enabled = false;
 				btnTrackClear.Enabled = false;
-
-				deleteToolStripMenuItem.Enabled = false;
-				moveTrackUpToolStripMenuItem.Enabled = false;
-				moveTrackDownToolStripMenuItem.Enabled = false;
-				trackColorToolStripMenuItem.Enabled = false;
 			}
 		}
 
@@ -407,11 +393,6 @@ namespace Thumper___Leaf_Editor
 			btnTrackUp.Enabled = true;
 			btnTrackDown.Enabled = true;
 			btnTrackClear.Enabled = true;
-
-			deleteToolStripMenuItem.Enabled = true;
-			moveTrackUpToolStripMenuItem.Enabled = true;
-			moveTrackDownToolStripMenuItem.Enabled = true;
-			trackColorToolStripMenuItem.Enabled = true;
 
 			_tracks.Add(new Sequencer_Object() { highlight_color = "-8355585", highlight_value = 1 });
 			trackEditor.RowCount++;
@@ -653,8 +634,10 @@ namespace Thumper___Leaf_Editor
 		public void TrackTimeSigHighlighting()
 		{
 			bool _switch = true;
+			//grab the first part of the time sig. This represents how many beats are in a bar
 			int beats = int.Parse(dropTimeSig.SelectedValue.ToString().Split('/')[0]);
 			for (int i = 0; i < _beats; i++) {
+				//whenever `i` is a multiple of the time sig, switch colors
 				if (i % beats == 0)
 					_switch = !_switch;
 				if (_switch)
@@ -790,14 +773,15 @@ namespace Thumper___Leaf_Editor
 				s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
 				s.Add("param_path", seq_obj.param_path);
 				s.Add("trait_type", seq_obj.trait_type);
-
+				///start building all data points into an object
 				JObject data_points = new JObject();
 				for (int x = 0; x < trackEditor.ColumnCount; x++) {
 					if (!string.IsNullOrEmpty(trackEditor[x, _tracks.IndexOf(seq_obj)].Value?.ToString()))
 						data_points.Add(x.ToString(), decimal.Parse(trackEditor[x, _tracks.IndexOf(seq_obj)].Value.ToString()));
 				}
 				s.Add("data_points", data_points);
-
+				///end
+				//add the rest of the keys to this seq_obj
 				s.Add("step", seq_obj.step);
 				s.Add("default", seq_obj._default);
 				s.Add("footer", seq_obj.footer);
@@ -805,8 +789,9 @@ namespace Thumper___Leaf_Editor
 
 				seq_objs.Add(s);
 			}
+			//add all seq_objs to the overall leaf
 			_save.Add("seq_objs", seq_objs);
-
+			//end leaf with final keys
 			_save.Add("beat_cnt", (int)numericUpDown_LeafLength.Value);
 			_save.Add("time_sig", dropTimeSig.Text);
 			///end building JSON output

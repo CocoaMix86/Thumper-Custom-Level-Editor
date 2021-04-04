@@ -32,12 +32,17 @@ namespace Thumper___Leaf_Editor
 					dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
 					dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
 					dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
+					dropGatePre.DataSource = lvlsinworkfolder.ToList();
+					dropGatePost.DataSource = lvlsinworkfolder.ToList();
+					dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 
 					//set Working Folder panel data
 					workingfolderFiles.Rows.Clear();
-					foreach (string file in Directory.GetFiles(workingfolder)) {
+					workingfolderFiles.RowEnter -= new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
+					foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt"))) {
 						workingfolderFiles.Rows.Add(Path.GetFileName(file));
 					}
+					workingfolderFiles.RowEnter += new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
 					lblWorkingFolder.Text = $"Working Folder - {value}";
 					btnWorkRefresh.Enabled = true;
 					editLevelDetailsToolStripMenuItem.Enabled = true;
@@ -136,14 +141,24 @@ namespace Thumper___Leaf_Editor
 			ControlMoverOrResizer.Init(panelMaster);
 			ControlMoverOrResizer.Init(panelGate);
 			ControlMoverOrResizer.Init(panelWorkingFolder);
+			ControlMoverOrResizer.Init(workingfolderFiles, panelWorkingFolder);
 			ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
 
 			///import help text
 			helptext = JsonConvert.DeserializeObject(Properties.Resources.helptext);
 
+			///Create directory for leaf templates
+			if (!Directory.Exists(@"templates")) {
+				Directory.CreateDirectory(@"templates");
+				File.WriteAllText(@"templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
+				File.WriteAllText(@"templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
+			}
+
 			///import selectable objects from file and parse them into lists for manipulation
 			//splits input at "###". Each section is a collection of param_paths
-			var import = (Properties.Resources.track_objects).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
+			if (!File.Exists(@"templates\track_objects.txt"))
+				File.WriteAllText(@"templates\track_objects.txt", Properties.Resources.track_objects);
+			var import = (File.ReadAllText(@"templates\track_objects.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
 			for (int x = 0; x < import.Count; x++) {
 				//split each section into individual lines
 				var import2 = import[x].Split('\n').ToList();
@@ -192,13 +207,6 @@ namespace Thumper___Leaf_Editor
 			//
 			SaveLeaf(true);
 
-			///Create directory for leaf templates
-			if (!Directory.Exists(@"templates")) {
-				Directory.CreateDirectory(@"templates");
-				File.WriteAllText(@"templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
-				File.WriteAllText(@"templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
-			}
-
 			///set a bunch of tool tips
 			//Leaf tooltips
 			toolTip1.SetToolTip(btnTrackClear, "Clears the selected track of data");
@@ -206,7 +214,13 @@ namespace Thumper___Leaf_Editor
 			toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track of data");
 			//Master tooltips
 			toolTip1.SetToolTip(btnMasterOpenCheckpoint, "Opens the selected checkpoint in the Lvl Editor");
-			toolTip1.SetToolTip(btnMasterOpenIntro, "Opens the selected intro in the Lvl Editor");
+			toolTip1.SetToolTip(btnMasterOpenIntro, "Opens the selected intro lvl in the Lvl Editor");
+			toolTip1.SetToolTip(btnMasterOpenLeader, "Opens the selected leader lvl in the Lvl Editor");
+			toolTip1.SetToolTip(btnMasterOpenRest, "Opens the selected rest lvl in the Lvl Editor");
+			//Gate tooltips
+			toolTip1.SetToolTip(btnGateOpenPre, "Opens the selected Pre lvl in the Lvl Editor");
+			toolTip1.SetToolTip(btnGateOpenPost, "Opens the selected Post lvl in the Lvl Editor");
+			toolTip1.SetToolTip(btnGateOpenRestart, "Opens the selected Restart lvl in the Lvl Editor");
 		}
 
 		public void CreateCustomLevelFolder(DialogInput input)
@@ -262,6 +276,8 @@ namespace Thumper___Leaf_Editor
 		private void lblMasterRestHelp_Click(object sender, EventArgs e) => MessageBox.Show((string) helptext["masterRest"], "Master Editor Help");
 		private void lblMasterCheckpointLeaderHelp_Click(object sender, EventArgs e) => MessageBox.Show((string)helptext["masterCheckLeader"], "Master Editor Help");
 		private void lblConfigColorHelp_Click(object sender, EventArgs e) => new ImageMessageBox("railcolorhelp").Show();
+		private void lblGatePreHelp_Click(object sender, EventArgs e) => MessageBox.Show((string)helptext["gatePre"], "Gate Editor Help");
+		private void lblGateSectionHelp_Click(object sender, EventArgs e) => new ImageMessageBox("bosssectionhelp").Show();
 
 		private void editLevelDetailsToolStripMenuItem_Click(object sender, EventArgs e)
 		{

@@ -22,7 +22,7 @@ namespace Thumper___Leaf_Editor
 			{
 				if (loadedgate != value) {
 					loadedgate = value;
-					MasterEditorVisible();
+					GateEditorVisible();
 					gatesaveAsToolStripMenuItem.Enabled = true;
 					gatesaveToolStripMenuItem.Enabled = true;
 				}
@@ -30,13 +30,11 @@ namespace Thumper___Leaf_Editor
 		}
 		private string loadedgate;
 		string _loadedgatetemp;
+		string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
 		List<string> boss_name = new List<string>() {
-			"Level 1 - triangle 1",
-			"Level 1 - triangle 2",
 			"Level 1 - crakhed",
 			"Level 2 - circle",
 			"Level 2 - crakhed",
-			"Level 3 - triangle",
 			"Level 3 - array",
 			"Level 3 - crakhed",
 			"Level 4 - triangle",
@@ -54,50 +52,44 @@ namespace Thumper___Leaf_Editor
 			"Level 9 - crakhed"
 		};
 		List<string> boss_spn = new List<string>() {
-			"gate_tutorial_thumps.spn",
-			"boss_gate.spn2",
-			"gate_crakhed1.spn",
-			"gate_jump.spn",
+			"crakhed1.spn",
+			"boss_jump.spn",
 			"crakhed2.spn",
-			"pound_tutorial_boss.spn",
 			"boss_array.spn",
 			"crakhed3.spn",
-			"triangle_boss.spn",
+			"boss_triangle.spn",
 			"zillapede.spn",
 			"crakhed4.spn",
 			"boss_spiral.spn",
 			"crakhed5.spn",
-			"spirograph.spn",
+			"boss_spirograph.spn",
 			"crakhed6.spn",
 			"boss_tube.spn",
 			"crakhed7.spn",
-			"gate_starfish.spn",
+			"boss_starfish.spn",
 			"crakhed8.spn",
-			"gate_frac.spn",
+			"boss_frac.spn",
 			"crakhed9.spn"
 		};
 		List<string> boss_ent = new List<string>() {
-			"Level 1 - triangle 1",
-			"Level 1 - triangle 2",
-			"Level 1 - crakhed",
-			"Level 2 - circle",
-			"Level 2 - crakhed",
-			"Level 3 - triangle",
-			"Level 3 - array",
-			"Level 3 - crakhed",
-			"Level 4 - triangle",
-			"Level 4 - zillapede",
-			"Level 4 - crakhed",
-			"Level 5 - spiral",
-			"Level 5 - crakhed",
-			"Level 6 - spirograph",
-			"Level 6 - crakhed",
-			"Level 7 - tube",
-			"Level 7 - crakhed",
-			"Level 8 - starfish",
-			"Level 8 - crakhed",
-			"Level 9 - fractal",
-			"Level 9 - crakhed"
+			"crakhed.ent",
+			"boss_gate_pellet.ent",
+			"crakhed.ent",
+			"boss_gate_pellet.ent",
+			"crakhed.ent",
+			"tutorial_thumps.ent",
+			"zillapede_gate.ent",
+			"crakhed.ent",
+			"boss_gate_pellet.ent",
+			"crakhed.ent",
+			"boss_gate_pellet.ent",
+			"crakhed.ent",
+			"boss_gate_pellet.ent",
+			"crakhed.ent",
+			"boss_gate_pellet.ent",
+			"crakhed.ent",
+			"boss_gate_pellet.ent",
+			"crakhed.ent"
 		};
 		List<BossData> bossdata = new List<BossData>();
 		ObservableCollection<GateLvlData> _gatelvls = new ObservableCollection<GateLvlData>();
@@ -126,6 +118,13 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
+		private void gateLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+			try {
+				_gatelvls[e.RowIndex].sentrytype = gateLvlList[1, e.RowIndex].Value.ToString();
+			} catch { }
+		}
+
 		public void gatelvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 			//clear dgv
@@ -147,6 +146,83 @@ namespace Thumper___Leaf_Editor
 			//set lvl save flag to false
 			SaveGate(false);
 		}
+
+		private void gatenewToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if ((!_savegate && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
+				//reset things to default values
+				_gatelvls.Clear();
+				lblGateName.Text = "Gate Editor";
+				//set saved flag to true, because nothing is loaded
+				SaveGate(true);
+				gatesaveAsToolStripMenuItem_Click(null, null);
+			}
+		}
+
+		private void gateopenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if ((!_savegate && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
+				using (var ofd = new OpenFileDialog()) {
+					ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
+					ofd.Title = "Load a Thumper Gate file";
+					if (ofd.ShowDialog() == DialogResult.OK) {
+						//storing the filename in temp so it doesn't overwrite _loadedmaster in case it fails the check in LoadMaster()
+						_loadedgatetemp = ofd.FileName;
+						//load json from file into _load. The regex strips any comments from the text.
+						dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+						LoadGate(_load);
+					}
+				}
+			}
+		}
+
+		private void gatesaveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			//if _loadedmaster is somehow not set, force Save As instead
+			if (_loadedgate == null) {
+				gatesaveAsToolStripMenuItem.PerformClick();
+				return;
+			}
+			//write contents direct to file without prompting save dialog
+			var _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
+			File.WriteAllText(_loadedgate, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			SaveGate(true);
+			lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
+		}
+
+		private void gatesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (var sfd = new SaveFileDialog()) {
+				//filter .txt only
+				sfd.Filter = "Thumper Gate File (*.txt)|*.txt";
+				sfd.FilterIndex = 1;
+				sfd.InitialDirectory = workingfolder;
+				if (sfd.ShowDialog() == DialogResult.OK) {
+					//separate path and filename
+					string storePath = Path.GetDirectoryName(sfd.FileName);
+					string tempFileName = Path.GetFileName(sfd.FileName);
+					//check if user input "gate_", and deny save if so
+					if (Path.GetFileName(sfd.FileName).Contains("gate_")) {
+						MessageBox.Show("File not saved. Do not include 'gate_' in your file name.", "File not saved");
+						return;
+					}
+					//get contents to save
+					var _save = GateBuildSave(Path.GetFileName(sfd.FileName));
+					//serialize JSON object to a string, and write it to the file
+					sfd.FileName = $@"{storePath}\gate_{tempFileName}";
+					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
+					//set a few visual elements to show what file is being worked on
+					lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
+					workingfolder = Path.GetDirectoryName(sfd.FileName);
+					_loadedgate = sfd.FileName;
+					//set save flag
+					SaveGate(true);
+				}
+			}
+		}
+
+		/// All dropdowns of Gate Editor call this
+		private void dropGateBoss_SelectedIndexChanged(object sender, EventArgs e) => SaveGate(false);
 		#endregion
 
 		#region Buttons
@@ -193,20 +269,56 @@ namespace Thumper___Leaf_Editor
 
 		private void btnGateLvlUp_Click(object sender, EventArgs e)
 		{
-
+			try {
+				// get index of the row for the selected cell
+				int rowIndex = gateLvlList.CurrentRow.Index;
+				if (rowIndex == 0)
+					return;
+				//move leaf in list
+				var selectedLvl = _gatelvls[rowIndex];
+				_gatelvls.Remove(selectedLvl);
+				_gatelvls.Insert(rowIndex - 1, selectedLvl);
+				//move selected cell up a row to follow the moved item
+				gateLvlList.Rows[rowIndex - 1].Cells[0].Selected = true;
+				//sets flag that lvl has unsaved changes
+				SaveGate(false);
+			}
+			catch { }
 		}
 
 		private void btnGateLvlDown_Click(object sender, EventArgs e)
 		{
-
+			try {
+				// get index of the row for the selected cell
+				int rowIndex = gateLvlList.CurrentRow.Index;
+				if (rowIndex == _gatelvls.Count - 1)
+					return;
+				//move lvl in list
+				var selectedLvl = _gatelvls[rowIndex];
+				_gatelvls.Remove(selectedLvl);
+				_gatelvls.Insert(rowIndex + 1, selectedLvl);
+				//move selected cell up a row to follow the moved item
+				gateLvlList.Rows[rowIndex + 1].Cells[0].Selected = true;
+				//sets flag that lvl has unsaved changes
+				SaveGate(false);
+			}
+			catch { }
 		}
+
+		//buttons that click other buttons
+		private void btnGatePanelNew_Click(object sender, EventArgs e) => gatenewToolStripMenuItem.PerformClick();
+		private void btnGatePanelOpen_Click(object sender, EventArgs e) => gateopenToolStripMenuItem.PerformClick();
+		//I use MasterLoadLvl on these because it's the exact same code to load a lvl
+		private void btnGateOpenPre_Click(object sender, EventArgs e) => MasterLoadLvl(dropGatePre.Text);
+		private void btnGateOpenPost_Click(object sender, EventArgs e) => MasterLoadLvl(dropGatePost.Text);
+		private void btnGateOpenRestart_Click(object sender, EventArgs e) => MasterLoadLvl(dropGateRestart.Text);
 		#endregion
 
 		#region Methods
 		///         ///
 		/// Methods ///
 		///         ///
-		         
+
 		public void InitializeGateStuff()
 		{
 			_gatelvls.CollectionChanged += gatelvls_CollectionChanged;
@@ -229,6 +341,45 @@ namespace Thumper___Leaf_Editor
 			dropGateBoss.DataSource = bossdata;
 			dropGateBoss.DisplayMember = "boss_name";
 			dropGateBoss.ValueMember = "boss_spn";
+			//
+			dropGateSection.SelectedIndex = 0;
+			SaveGate(true);
+		}
+
+		public void LoadGate(dynamic _load)
+		{
+			if ((string)_load["obj_type"] != "SequinGate") {
+				MessageBox.Show("This does not appear to be a gate file!");
+				return;
+			}
+			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
+			workingfolder = Path.GetDirectoryName(_loadedgatetemp);
+			_loadedgate = _loadedgatetemp;
+			//set some visual elements
+			lblGateName.Text = $"Gate Editor - {_load["obj_name"]}";
+
+			///Clear form elements so new data can load
+			_gatelvls.Clear();
+			///load lvls associated with this master
+			foreach (dynamic _lvl in _load["boss_patterns"]) {
+				_gatelvls.Add(new GateLvlData() {
+					lvlname = _lvl["lvl_name"],
+					sentrytype = _lvl["sentry_type"]
+				});
+			}
+			///select the first lvl
+			if (_gatelvls.Count > 0)
+				gateLvlList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
+
+			//populate dropdowns
+			dropGateBoss.SelectedValue = (string)_load["spn_name"];
+			dropGatePre.SelectedItem = (string)_load["pre_lvl_name"];
+			dropGatePost.SelectedItem = (string)_load["post_lvl_name"];
+			dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"];
+			dropGateSection.SelectedItem = (string)_load["section_type"];
+
+			///set save flag (master just loaded, has no changes)
+			SaveGate(true);
 		}
 
 		public void SaveGate(bool save)
@@ -241,6 +392,45 @@ namespace Thumper___Leaf_Editor
 			else {
 				lblGateName.Text = lblGateName.Text.Replace(" (unsaved)", "");
 			}
+		}
+
+		public void GateEditorVisible()
+		{
+			if (workingfolder != null) {
+				foreach (Control c in panelGate.Controls)
+					c.Visible = true;
+				btnGatePanelNew.Visible = false;
+				btnGatePanelOpen.Visible = false;
+			}
+		}
+
+		public JObject GateBuildSave(string _gatename)
+		{
+			_gatename = Regex.Replace(_gatename, "[.].*", ".gate");
+			///being build Master JSON object
+			JObject _save = new JObject {
+				{ "obj_type", "SequinGate" },
+				{ "obj_name", _gatename },
+				{ "spn_name", dropGateBoss.SelectedValue.ToString() },
+				{ "param_path", boss_ent[dropGateBoss.SelectedIndex] },
+				{ "pre_lvl_name", dropGatePre.Text },
+				{ "post_lvl_name", dropGatePost.Text },
+				{ "restart_lvl_name", dropGateRestart.Text },
+				{ "section_type", dropGateSection.Text },
+				{ "random_type", "LEVEL_RANDOM_NONE" }
+			};
+			JArray boss_patterns = new JArray();
+			for (int x = 0; x < _gatelvls.Count; x++) {
+				JObject s = new JObject {
+					{ "node_name_hash", node_name_hash[x] },
+					{ "lvl_name", _gatelvls[x].lvlname },
+					{ "sentry_type", _gatelvls[x].sentrytype },
+					{ "bucket_num", 0 }
+				};
+				boss_patterns.Add(s);
+			}
+			_save.Add("boss_patterns", boss_patterns);
+			return _save;
 		}
 		#endregion
 	}

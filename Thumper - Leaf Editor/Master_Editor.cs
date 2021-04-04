@@ -41,28 +41,48 @@ namespace Thumper___Leaf_Editor
 		//Row Enter (load the selected lvl)
 		private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
-			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
-				string _file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
-				dynamic _load;
+			string _file;
+			dynamic _load = null;
+			//show a different confirmation message if the selected item is gate or lvl
+			if (masterLvlList[0, e.RowIndex].Value.ToString().Contains(".gate")) {
+				if ((!_savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
+					_file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
+					try {
+						_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\gate_{_file}.txt"), "#.*", ""));
+					}
+					catch {
+						MessageBox.Show($@"Could not locate ""gate_{_file}.txt"" in the same folder as this master. Did you add this gate from a different folder?");
+						return;
+					}
+					_loadedgatetemp = $@"{workingfolder}\gate_{_file}.txt";
+				}
+			}
+			else if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+				_file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
 				try {
 					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
 				}
 				catch {
-					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
+					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this lvl from a different folder?");
 					return;
 				}
 				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
-				//remove event handlers from a few controls so they don't trigger when their values change
-				dropMasterLvlLeader.SelectedIndexChanged -= new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
-				dropMasterLvlRest.SelectedIndexChanged -= new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
-				//load the selected lvl
-				LoadLvl(_load);
-				dropMasterLvlLeader.SelectedItem = _masterlvls[e.RowIndex].checkpoint_leader;
-				dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
-				//re-add event handlers
-				dropMasterLvlLeader.SelectedIndexChanged += new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
-				dropMasterLvlRest.SelectedIndexChanged += new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
 			}
+
+			//remove event handlers from a few controls so they don't trigger when their values change
+			dropMasterLvlLeader.SelectedIndexChanged -= new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
+			dropMasterLvlRest.SelectedIndexChanged -= new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
+			//load the selected item
+			if ((string)_load["obj_type"] == "SequinLevel")
+				LoadLvl(_load);
+			else if ((string)_load["obj_type"] == "SequinGate")
+				LoadGate(_load);
+			dropMasterLvlLeader.SelectedItem = _masterlvls[e.RowIndex].checkpoint_leader;
+			dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
+			//re-add event handlers
+			dropMasterLvlLeader.SelectedIndexChanged += new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
+			dropMasterLvlRest.SelectedIndexChanged += new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
+
 		}
 		//Cell value changed (for checkboxes)
 		private void masterLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -82,7 +102,11 @@ namespace Thumper___Leaf_Editor
 			//repopulate dgv from list
 			masterLvlList.RowEnter -= masterLvlList_RowEnter;
 			for (int x = 0; x < _masterlvls.Count; x++) {
-				masterLvlList.Rows.Add(new object[] { _masterlvls[x].lvlname, _masterlvls[x].checkpoint, _masterlvls[x].playplus });
+				//detect if lvl in list is actually a lvl or a gate. If it's a gate, the lvlname won't be set
+				if (!String.IsNullOrEmpty(_masterlvls[x].lvlname))
+					masterLvlList.Rows.Add(new object[] { _masterlvls[x].lvlname, _masterlvls[x].checkpoint, _masterlvls[x].playplus });
+				else
+					masterLvlList.Rows.Add(new object[] { _masterlvls[x].gatename, _masterlvls[x].checkpoint, _masterlvls[x].playplus });
 			}
 			masterLvlList.RowEnter += masterLvlList_RowEnter;
 			//set selected index. Mainly used when moving items
@@ -95,6 +119,8 @@ namespace Thumper___Leaf_Editor
 			//set lvl save flag to false
 			SaveMaster(false);
 		}
+		///Other dropdowns on Master Editor
+		private void dropMasterIntro_SelectedIndexChanged(object sender, EventArgs e) => SaveMaster(false);
 		/// DROP-REST LEVEL Update
 		private void dropMasterLvlRest_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -132,6 +158,7 @@ namespace Thumper___Leaf_Editor
 				using (var ofd = new OpenFileDialog()) {
 					ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
 					ofd.Title = "Load a Thumper Master file";
+					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 					if (ofd.ShowDialog() == DialogResult.OK) {
 						//storing the filename in temp so it doesn't overwrite _loadedmaster in case it fails the check in LoadMaster()
 						_loadedmastertemp = ofd.FileName;
@@ -170,6 +197,7 @@ namespace Thumper___Leaf_Editor
 				//filter .txt only
 				sfd.Filter = "Thumper Master File (*.txt)|*.txt";
 				sfd.FilterIndex = 1;
+				sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				if (sfd.ShowDialog() == DialogResult.OK) {
 					//separate path and filename
 					string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -198,30 +226,37 @@ namespace Thumper___Leaf_Editor
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
 			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "Thumper Lvl File (*.txt)|lvl_*.txt";
-				ofd.Title = "Load a Thumper Lvl file";
+				ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
+				ofd.Title = "Load a Thumper Lvl/Gate file";
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					//parse leaf to JSON
 					dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 					//check if file being loaded is actually a leaf. Can do so by checking the JSON key
-					if ((string)_load["obj_type"] != "SequinLevel") {
-						MessageBox.Show("This does not appear to be a lvl file!", "Lvl load error");
+					if ((string)_load["obj_type"] != "SequinLevel" && (string)_load["obj_type"] != "SequinGate") {
+						MessageBox.Show("This does not appear to be a lvl or a gate file!", "File load error");
 						return;
 					}
 					//check if lvl exists in the same folder as the master. If not, allow user to copy file.
 					//this is why I utilize workingfolder
 					if (Path.GetDirectoryName(ofd.FileName) != workingfolder) {
-						if (MessageBox.Show("The lvl you chose does not exist in the same folder as this master. Do you want to copy it to this folder and load it?", "Lvl load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+						if (MessageBox.Show("The item you chose does not exist in the same folder as this master. Do you want to copy it to this folder and load it?", "File load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
 							File.Copy(ofd.FileName, $@"{workingfolder}\{Path.GetFileName(ofd.FileName)}");
 						else
 							return;
 					}
-					//add leaf data to the list
-					_masterlvls.Add(new MasterLvlData() {
-						lvlname = (string)_load["obj_name"],
-						playplus = true,
-						checkpoint = true
-					});
+					//add lvl/gate data to the list
+					if (_load["obj_type"] == "SequinLevel")
+						_masterlvls.Add(new MasterLvlData() {
+							lvlname = (string)_load["obj_name"],
+							playplus = true,
+							checkpoint = true
+						});
+					else if (_load["obj_type"] == "SequinGate")
+						_masterlvls.Add(new MasterLvlData() {
+							gatename = (string)_load["obj_name"],
+							playplus = true,
+							checkpoint = true
+						});
 				}
 			}
 		}
@@ -233,7 +268,7 @@ namespace Thumper___Leaf_Editor
 				int rowIndex = masterLvlList.CurrentRow.Index;
 				if (rowIndex == 0)
 					return;
-				//move leaf in list
+				//move lvl in list
 				var selectedLvl = _masterlvls[rowIndex];
 				_masterlvls.Remove(selectedLvl);
 				_masterlvls.Insert(rowIndex - 1, selectedLvl);
@@ -252,7 +287,7 @@ namespace Thumper___Leaf_Editor
 				int rowIndex = masterLvlList.CurrentRow.Index;
 				if (rowIndex == _masterlvls.Count - 1)
 					return;
-				//move leaf in list
+				//move lvl in list
 				var selectedLvl = _masterlvls[rowIndex];
 				_masterlvls.Remove(selectedLvl);
 				_masterlvls.Insert(rowIndex + 1, selectedLvl);
@@ -262,16 +297,6 @@ namespace Thumper___Leaf_Editor
 				SaveMaster(false);
 			}
 			catch { }
-		}
-
-		private void btnMasterPanelNew_Click(object sender, EventArgs e)
-		{
-			masternewToolStripMenuItem.PerformClick();
-		}
-
-		private void btnMasterPanelOpen_Click(object sender, EventArgs e)
-		{
-			masteropenToolStripMenuItem.PerformClick();
 		}
 
 		private void btnConfigRailColor_Click(object sender, EventArgs e)
@@ -321,6 +346,10 @@ namespace Thumper___Leaf_Editor
 			dropMasterLvlRest.SelectedItem = _select;
 		}
 
+		//buttons that click other buttons
+		private void btnMasterPanelNew_Click(object sender, EventArgs e) => masternewToolStripMenuItem.PerformClick();
+		private void btnMasterPanelOpen_Click(object sender, EventArgs e) => masteropenToolStripMenuItem.PerformClick();
+		//these all load a lvl
 		private void btnMasterOpenIntro_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterIntro.SelectedItem.ToString());
 		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterCheck.SelectedItem.ToString());
 		private void btnMasterOpenLeader_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlLeader.SelectedItem.ToString());
