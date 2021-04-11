@@ -20,7 +20,7 @@ namespace Thumper___Leaf_Editor
 			{
 				if (loadedmaster != value) {
 					loadedmaster = value;
-					MasterEditorVisible();
+					MasterEditorVisible(true);
 					mastersaveAsToolStripMenuItem.Enabled = true;
 					mastersaveToolStripMenuItem.Enabled = true;
 				}
@@ -121,6 +121,7 @@ namespace Thumper___Leaf_Editor
 		}
 		///Other dropdowns on Master Editor
 		private void dropMasterIntro_SelectedIndexChanged(object sender, EventArgs e) => SaveMaster(false);
+		private void NUD_ConfigBPM_ValueChanged(object sender, EventArgs e) => SaveMaster(false);
 		/// DROP-REST LEVEL Update
 		private void dropMasterLvlRest_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -463,13 +464,13 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
-		public void MasterEditorVisible()
+		public void MasterEditorVisible(bool visible)
 		{
 			if (workingfolder != null) {
 				foreach (Control c in panelMaster.Controls)
-					c.Visible = true;
-				btnMasterPanelNew.Visible = false;
-				btnMasterPanelOpen.Visible = false;
+					c.Visible = visible;
+				btnMasterPanelNew.Visible = !visible;
+				btnMasterPanelOpen.Visible = !visible;
 			}
 		}
 

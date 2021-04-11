@@ -40,6 +40,10 @@ namespace Thumper___Leaf_Editor
 				_loadedmastertemp = $@"{workingfolder}\{workingfolderFiles[0, e.RowIndex].Value}";
 				LoadMaster(_load);
 			}
+			else if ((string)_load["obj_type"] == "SequinGate") {
+				_loadedgatetemp = $@"{workingfolder}\{workingfolderFiles[0, e.RowIndex].Value}";
+				LoadGate(_load);
+			}
 			else if ((string)_load["obj_type"] == "SequinLevel") {
 				_loadedlvltemp = $@"{workingfolder}\{workingfolderFiles[0, e.RowIndex].Value}";
 				LoadLvl(_load);
@@ -79,7 +83,8 @@ namespace Thumper___Leaf_Editor
 			//clear the dgv and reload files in the folder
 			workingfolderFiles.Rows.Clear();
 			workingfolderFiles.RowEnter -= new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
-			foreach (string file in Directory.GetFiles(workingfolder)) {
+			//filter for specific files
+			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS")))) {
 				workingfolderFiles.Rows.Add(Path.GetFileName(file));
 			}
 			workingfolderFiles.RowEnter += new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);

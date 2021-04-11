@@ -22,7 +22,7 @@ namespace Thumper___Leaf_Editor
 			{
 				if (loadedgate != value) {
 					loadedgate = value;
-					GateEditorVisible();
+					GateEditorVisible(true);
 					gatesaveAsToolStripMenuItem.Enabled = true;
 					gatesaveToolStripMenuItem.Enabled = true;
 				}
@@ -155,7 +155,8 @@ namespace Thumper___Leaf_Editor
 				lblGateName.Text = "Gate Editor";
 				//set saved flag to true, because nothing is loaded
 				SaveGate(true);
-				gatesaveAsToolStripMenuItem_Click(null, null);
+				if (e != null)
+					gatesaveAsToolStripMenuItem_Click(null, null);
 			}
 		}
 
@@ -305,6 +306,25 @@ namespace Thumper___Leaf_Editor
 			catch { }
 		}
 
+		private void btnGateRefresh_Click(object sender, EventArgs e)
+		{
+			lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
+			lvlsinworkfolder.Add("");
+			lvlsinworkfolder.Sort();
+			///add lvl list as datasources to dropdowns
+			var _select = dropGatePre.SelectedItem;
+			dropGatePre.DataSource = lvlsinworkfolder.ToList();
+			dropGatePre.SelectedItem = _select;
+
+			_select = dropGatePost.SelectedItem;
+			dropGatePost.DataSource = lvlsinworkfolder.ToList();
+			dropGatePost.SelectedItem = _select;
+
+			_select = dropGateRestart.SelectedItem;
+			dropGateRestart.DataSource = lvlsinworkfolder.ToList();
+			dropGateRestart.SelectedItem = _select;
+		}
+
 		//buttons that click other buttons
 		private void btnGatePanelNew_Click(object sender, EventArgs e) => gatenewToolStripMenuItem.PerformClick();
 		private void btnGatePanelOpen_Click(object sender, EventArgs e) => gateopenToolStripMenuItem.PerformClick();
@@ -394,13 +414,13 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
-		public void GateEditorVisible()
+		public void GateEditorVisible(bool visible)
 		{
 			if (workingfolder != null) {
 				foreach (Control c in panelGate.Controls)
-					c.Visible = true;
-				btnGatePanelNew.Visible = false;
-				btnGatePanelOpen.Visible = false;
+					c.Visible = visible;
+				btnGatePanelNew.Visible = !visible;
+				btnGatePanelOpen.Visible = !visible;
 			}
 		}
 
@@ -419,14 +439,24 @@ namespace Thumper___Leaf_Editor
 				{ "section_type", dropGateSection.Text },
 				{ "random_type", "LEVEL_RANDOM_NONE" }
 			};
+			//setup boss_patterns
 			JArray boss_patterns = new JArray();
 			for (int x = 0; x < _gatelvls.Count; x++) {
 				JObject s = new JObject {
-					{ "node_name_hash", node_name_hash[x] },
 					{ "lvl_name", _gatelvls[x].lvlname },
 					{ "sentry_type", _gatelvls[x].sentrytype },
 					{ "bucket_num", 0 }
 				};
+				//hash of phase 4 needs to be different depending if its crakhed or not
+				if (x == 3) {
+					if (_save["spn_name"].ToString().Contains("crakhed") || _save["spn_name"].ToString().Contains("triangle"))
+						s.Add("node_name_hash", "6b39151f");
+					else
+						s.Add("node_name_hash", "3428c8e3");
+				}
+				else
+					s.Add("node_name_hash", node_name_hash[x]);
+
 				boss_patterns.Add(s);
 			}
 			_save.Add("boss_patterns", boss_patterns);

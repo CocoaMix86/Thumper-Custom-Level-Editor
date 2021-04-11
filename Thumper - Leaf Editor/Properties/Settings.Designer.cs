@@ -22,5 +22,125 @@ namespace Thumper___Leaf_Editor.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1430, 555")]
+        public global::System.Drawing.Size leafeditorsize {
+            get {
+                return ((global::System.Drawing.Size)(this["leafeditorsize"]));
+            }
+            set {
+                this["leafeditorsize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("307, 418")]
+        public global::System.Drawing.Point leafeditorloc {
+            get {
+                return ((global::System.Drawing.Point)(this["leafeditorloc"]));
+            }
+            set {
+                this["leafeditorloc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("997, 383")]
+        public global::System.Drawing.Size lvleditorsize {
+            get {
+                return ((global::System.Drawing.Size)(this["lvleditorsize"]));
+            }
+            set {
+                this["lvleditorsize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("864, 29")]
+        public global::System.Drawing.Point lvleditorloc {
+            get {
+                return ((global::System.Drawing.Point)(this["lvleditorloc"]));
+            }
+            set {
+                this["lvleditorloc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("386, 383")]
+        public global::System.Drawing.Size gateeditorsize {
+            get {
+                return ((global::System.Drawing.Size)(this["gateeditorsize"]));
+            }
+            set {
+                this["gateeditorsize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("472, 29")]
+        public global::System.Drawing.Point gateeditorloc {
+            get {
+                return ((global::System.Drawing.Point)(this["gateeditorloc"]));
+            }
+            set {
+                this["gateeditorloc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("462, 383")]
+        public global::System.Drawing.Size mastereditorsize {
+            get {
+                return ((global::System.Drawing.Size)(this["mastereditorsize"]));
+            }
+            set {
+                this["mastereditorsize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4, 29")]
+        public global::System.Drawing.Point mastereditorloc {
+            get {
+                return ((global::System.Drawing.Point)(this["mastereditorloc"]));
+            }
+            set {
+                this["mastereditorloc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("297, 444")]
+        public global::System.Drawing.Size foldersize {
+            get {
+                return ((global::System.Drawing.Size)(this["foldersize"]));
+            }
+            set {
+                this["foldersize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4, 418")]
+        public global::System.Drawing.Point folderloc {
+            get {
+                return ((global::System.Drawing.Point)(this["folderloc"]));
+            }
+            set {
+                this["folderloc"] = value;
+            }
+        }
     }
 }

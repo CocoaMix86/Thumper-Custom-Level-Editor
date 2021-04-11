@@ -21,6 +21,11 @@ namespace Thumper___Leaf_Editor
 			{
 				//check if `set` value is different than current stored value
 				if (_workingfolder != value) {
+					//also only change workingfolders if user says yes to data loss
+					if (!_saveleaf || !_savelvl || !_savemaster || !_savegate) {
+						if (MessageBox.Show("Some files are unsaved. Are you sure you want to change working folders?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No)
+							return;
+					}
 					//if different, set it, then repopulate lvls in workingfolder
 					//these are used in the Master Editor panel
 					_workingfolder = value;
@@ -36,10 +41,16 @@ namespace Thumper___Leaf_Editor
 					dropGatePost.DataSource = lvlsinworkfolder.ToList();
 					dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 
+					//when workingfolder changes, reset panels
+					LeafEditorVisible(false); SaveLeaf(true);
+					LvlEditorVisible(false); SaveLvl(true);
+					GateEditorVisible(false); SaveGate(true);
+					MasterEditorVisible(false); SaveMaster(true);
+
 					//set Working Folder panel data
 					workingfolderFiles.Rows.Clear();
 					workingfolderFiles.RowEnter -= new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
-					foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt"))) {
+					foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS")))) {
 						workingfolderFiles.Rows.Add(Path.GetFileName(file));
 					}
 					workingfolderFiles.RowEnter += new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
@@ -114,11 +125,24 @@ namespace Thumper___Leaf_Editor
 		///FORM CLOSING - check if anything is unsaved
 		private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!_saveleaf || !_savelvl || !_savemaster)
+			if (!_saveleaf || !_savelvl || !_savemaster || !_savegate)
 			{
 				if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No)
 					e.Cancel = true;
 			}
+			//save panel sizes and locations
+			Properties.Settings.Default.leafeditorloc = panelLeaf.Location;
+			Properties.Settings.Default.leafeditorsize = panelLeaf.Size;
+			Properties.Settings.Default.lvleditorloc = panelLevel.Location;
+			Properties.Settings.Default.lvleditorsize = panelLevel.Size;
+			Properties.Settings.Default.gateeditorloc = panelGate.Location;
+			Properties.Settings.Default.gateeditorsize = panelGate.Size;
+			Properties.Settings.Default.mastereditorloc = panelMaster.Location;
+			Properties.Settings.Default.mastereditorsize = panelMaster.Size;
+			Properties.Settings.Default.folderloc = panelWorkingFolder.Location;
+			Properties.Settings.Default.foldersize = panelWorkingFolder.Size;
+
+			Properties.Settings.Default.Save();
 		}
 		///FORM
 		private void FormLeafEditor_Load(object sender, EventArgs e)
@@ -221,6 +245,18 @@ namespace Thumper___Leaf_Editor
 			toolTip1.SetToolTip(btnGateOpenPre, "Opens the selected Pre lvl in the Lvl Editor");
 			toolTip1.SetToolTip(btnGateOpenPost, "Opens the selected Post lvl in the Lvl Editor");
 			toolTip1.SetToolTip(btnGateOpenRestart, "Opens the selected Restart lvl in the Lvl Editor");
+
+			//load size and location data for panels
+			panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
+			panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
+			panelLevel.Location = Properties.Settings.Default.lvleditorloc;
+			panelLevel.Size = Properties.Settings.Default.lvleditorsize;
+			panelGate.Location = Properties.Settings.Default.gateeditorloc;
+			panelGate.Size = Properties.Settings.Default.gateeditorsize;
+			panelMaster.Location = Properties.Settings.Default.mastereditorloc;
+			panelMaster.Size = Properties.Settings.Default.mastereditorsize;
+			panelWorkingFolder.Location = Properties.Settings.Default.folderloc;
+			panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
 		}
 
 		public void CreateCustomLevelFolder(DialogInput input)

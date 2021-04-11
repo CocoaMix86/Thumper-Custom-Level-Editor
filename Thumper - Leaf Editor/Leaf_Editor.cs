@@ -27,7 +27,7 @@ namespace Thumper___Leaf_Editor
 			{
 				if (loadedleaf != value) {
 					loadedleaf = value;
-					LeafEditorVisible();
+					LeafEditorVisible(true);
 					leafsaveAsToolStripMenuItem.Enabled = true;
 					leafsaveToolStripMenuItem.Enabled = true;
 				}
@@ -669,13 +669,13 @@ namespace Thumper___Leaf_Editor
 			}
 		}
 
-		public void LeafEditorVisible()
+		public void LeafEditorVisible(bool visible)
 		{
 			foreach (Control c in panelLeaf.Controls)
-				c.Visible = true;
-			btnLeafPanelNew.Visible = false;
-			btnLeafPanelOpen.Visible = false;
-			btnLeafPanelTemplate.Visible = false;
+				c.Visible = visible;
+			btnLeafPanelNew.Visible = !visible;
+			btnLeafPanelOpen.Visible = !visible;
+			btnLeafPanelTemplate.Visible = !visible;
 		}
 
 		///Update DGV from _tracks
@@ -695,13 +695,8 @@ namespace Thumper___Leaf_Editor
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
 			//each object in the seq_objs[] list becomes a track
 			foreach (var seq_obj in _load["seq_objs"]) {
-				if (seq_obj.ContainsKey("param_path_hash")) {
-					MessageBox.Show($"Skipping {seq_obj["obj_name"]} due to 'param_path_hash' being present.");
-					continue;
-				}
 				Sequencer_Object _s = new Sequencer_Object() {
 					obj_name = seq_obj["obj_name"],
-					param_path = seq_obj["param_path"],
 					trait_type = seq_obj["trait_type"],
 					data_points = seq_obj["data_points"],
 					step = seq_obj["step"],
@@ -709,6 +704,7 @@ namespace Thumper___Leaf_Editor
 					footer = seq_obj["footer"]
 				};
 				//if the leaf has definitions for these, add them. If not, set to defaults
+				_s.param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"];
 				_s.highlight_color = seq_obj.ContainsKey("editor_data") ? (string)seq_obj["editor_data"][0] : "-8355585";
 				_s.highlight_value = seq_obj.ContainsKey("editor_data") ? (float)seq_obj["editor_data"][1] : 1;
 				//iterate over every _object to find where a param_path is located
@@ -771,7 +767,11 @@ namespace Thumper___Leaf_Editor
 				if (seq_obj.obj_name.Contains(".leaf"))
 					seq_obj.obj_name = (string)_save["obj_name"];
 				s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
-				s.Add("param_path", seq_obj.param_path);
+				//write param_path or param_path_hash
+				if (seq_obj.param_path.StartsWith("0x"))
+					s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
+				else
+					s.Add("param_path", seq_obj.param_path);
 				s.Add("trait_type", seq_obj.trait_type);
 				///start building all data points into an object
 				JObject data_points = new JObject();

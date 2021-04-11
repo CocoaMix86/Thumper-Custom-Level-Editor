@@ -22,7 +22,7 @@ namespace Thumper___Leaf_Editor
 			{
 				if (loadedlvl != value) {
 					loadedlvl = value;
-					LvlEditorVisible();
+					LvlEditorVisible(true);
 					lvlsaveAsToolStripMenuItem.Enabled = true;
 					lvlsaveToolStripMenuItem2.Enabled = true;
 				}
@@ -529,13 +529,13 @@ namespace Thumper___Leaf_Editor
 			SaveLvl(true);
 		}
 
-		public void LvlEditorVisible()
+		public void LvlEditorVisible(bool visible)
 		{
 			if (workingfolder != null) {
 				foreach (Control c in panelLevel.Controls)
-					c.Visible = true;
-				btnlvlPanelNew.Visible = false;
-				btnlvlPanelOpen.Visible = false;
+					c.Visible = visible;
+				btnlvlPanelNew.Visible = !visible;
+				btnlvlPanelOpen.Visible = !visible;
 			}
 		}
 

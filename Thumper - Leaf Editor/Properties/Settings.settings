@@ -1,5 +1,36 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Thumper___Leaf_Editor.Properties" GeneratedClassName="Settings">
   <Profiles />
-  <Settings />
+  <Settings>
+    <Setting Name="leafeditorsize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1430, 555</Value>
+    </Setting>
+    <Setting Name="leafeditorloc" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">307, 418</Value>
+    </Setting>
+    <Setting Name="lvleditorsize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">997, 383</Value>
+    </Setting>
+    <Setting Name="lvleditorloc" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">864, 29</Value>
+    </Setting>
+    <Setting Name="gateeditorsize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">386, 383</Value>
+    </Setting>
+    <Setting Name="gateeditorloc" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">472, 29</Value>
+    </Setting>
+    <Setting Name="mastereditorsize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">462, 383</Value>
+    </Setting>
+    <Setting Name="mastereditorloc" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">4, 29</Value>
+    </Setting>
+    <Setting Name="foldersize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">297, 444</Value>
+    </Setting>
+    <Setting Name="folderloc" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">4, 418</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

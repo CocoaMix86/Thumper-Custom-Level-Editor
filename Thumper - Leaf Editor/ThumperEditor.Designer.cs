@@ -220,6 +220,7 @@
 			this.lblConfigColorHelp = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.panelGate = new System.Windows.Forms.Panel();
+			this.btnGateRefresh = new System.Windows.Forms.Button();
 			this.btnGatePanelOpen = new System.Windows.Forms.Button();
 			this.btnGateOpenRestart = new System.Windows.Forms.Button();
 			this.btnGatePanelNew = new System.Windows.Forms.Button();
@@ -480,7 +481,9 @@
 			this.gatenewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gatenewToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_newfile;
 			this.gatenewToolStripMenuItem.Name = "gatenewToolStripMenuItem";
-			this.gatenewToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+			this.gatenewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+			this.gatenewToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
 			this.gatenewToolStripMenuItem.Text = "New";
 			this.gatenewToolStripMenuItem.Click += new System.EventHandler(this.gatenewToolStripMenuItem_Click);
 			// 
@@ -490,7 +493,9 @@
 			this.gateopenToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gateopenToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_openfile;
 			this.gateopenToolStripMenuItem.Name = "gateopenToolStripMenuItem";
-			this.gateopenToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+			this.gateopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
+			this.gateopenToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
 			this.gateopenToolStripMenuItem.Text = "Open";
 			this.gateopenToolStripMenuItem.Click += new System.EventHandler(this.gateopenToolStripMenuItem_Click);
 			// 
@@ -501,7 +506,9 @@
 			this.gatesaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gatesaveToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
 			this.gatesaveToolStripMenuItem.Name = "gatesaveToolStripMenuItem";
-			this.gatesaveToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+			this.gatesaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+			this.gatesaveToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
 			this.gatesaveToolStripMenuItem.Text = "Save";
 			this.gatesaveToolStripMenuItem.Click += new System.EventHandler(this.gatesaveToolStripMenuItem_Click);
 			// 
@@ -512,7 +519,9 @@
 			this.gatesaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gatesaveAsToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_saveas;
 			this.gatesaveAsToolStripMenuItem.Name = "gatesaveAsToolStripMenuItem";
-			this.gatesaveAsToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+			this.gatesaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
+			this.gatesaveAsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
 			this.gatesaveAsToolStripMenuItem.Text = "Save As";
 			this.gatesaveAsToolStripMenuItem.Click += new System.EventHandler(this.gatesaveAsToolStripMenuItem_Click);
 			// 
@@ -2363,7 +2372,7 @@
 			this.btnMasterRefreshLvl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMasterRefreshLvl.Location = new System.Drawing.Point(306, 146);
 			this.btnMasterRefreshLvl.Name = "btnMasterRefreshLvl";
-			this.btnMasterRefreshLvl.Size = new System.Drawing.Size(76, 24);
+			this.btnMasterRefreshLvl.Size = new System.Drawing.Size(76, 23);
 			this.btnMasterRefreshLvl.TabIndex = 94;
 			this.btnMasterRefreshLvl.Text = "Refresh Lvls";
 			this.btnMasterRefreshLvl.UseVisualStyleBackColor = false;
@@ -2451,6 +2460,7 @@
             0,
             0});
 			this.NUD_ConfigBPM.Visible = false;
+			this.NUD_ConfigBPM.ValueChanged += new System.EventHandler(this.NUD_ConfigBPM_ValueChanged);
 			// 
 			// label12
 			// 
@@ -2908,6 +2918,7 @@
 			// 
 			this.panelGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.panelGate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelGate.Controls.Add(this.btnGateRefresh);
 			this.panelGate.Controls.Add(this.btnGatePanelOpen);
 			this.panelGate.Controls.Add(this.btnGateOpenRestart);
 			this.panelGate.Controls.Add(this.btnGatePanelNew);
@@ -2939,6 +2950,20 @@
 			this.panelGate.Name = "panelGate";
 			this.panelGate.Size = new System.Drawing.Size(386, 383);
 			this.panelGate.TabIndex = 116;
+			// 
+			// btnGateRefresh
+			// 
+			this.btnGateRefresh.BackColor = System.Drawing.Color.Gray;
+			this.btnGateRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnGateRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnGateRefresh.Location = new System.Drawing.Point(249, 236);
+			this.btnGateRefresh.Name = "btnGateRefresh";
+			this.btnGateRefresh.Size = new System.Drawing.Size(76, 23);
+			this.btnGateRefresh.TabIndex = 119;
+			this.btnGateRefresh.Text = "Refresh Lvls";
+			this.btnGateRefresh.UseVisualStyleBackColor = false;
+			this.btnGateRefresh.Visible = false;
+			this.btnGateRefresh.Click += new System.EventHandler(this.btnGateRefresh_Click);
 			// 
 			// btnGatePanelOpen
 			// 
@@ -3501,6 +3526,7 @@
 			// FileName
 			// 
 			this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
 			this.FileName.DefaultCellStyle = dataGridViewCellStyle23;
 			this.FileName.HeaderText = "File Name";
@@ -3772,7 +3798,6 @@
 		private System.Windows.Forms.Button btnWorkRefresh;
 		private System.Windows.Forms.DataGridView workingfolderFiles;
 		private System.Windows.Forms.Button btnWorkDelete;
-		private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
 		private System.Windows.Forms.ToolStripMenuItem workingFolderToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem editLevelDetailsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem regenerateDefaultFilesToolStripMenuItem;
@@ -3796,6 +3821,8 @@
 		private System.Windows.Forms.Button btnGateOpenPre;
 		private System.Windows.Forms.Button btnGatePanelOpen;
 		private System.Windows.Forms.Button btnGatePanelNew;
+		private System.Windows.Forms.Button btnGateRefresh;
+		private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
 	}
 }
 
