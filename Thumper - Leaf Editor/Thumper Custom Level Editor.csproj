@@ -185,6 +185,14 @@
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
     <None Include="text assets\spn_default.txt" />
+    <None Include="text assets\samp_level2_340bpm.txt" />
+    <None Include="text assets\samp_level3_360bpm.txt" />
+    <None Include="text assets\samp_level4_380bpm.txt" />
+    <None Include="text assets\samp_level5_400bpm.txt" />
+    <None Include="text assets\samp_level6_420bpm.txt" />
+    <None Include="text assets\samp_level7_440bpm.txt" />
+    <None Include="text assets\samp_level8_460bpm.txt" />
+    <None Include="text assets\samp_level9_480bpm.txt" />
     <Content Include="text assets\track objects.txt" />
     <None Include="text assets\xfm_default.txt" />
     <Content Include="ThumperIconEditor.ico" />

@@ -311,6 +311,274 @@ namespace Thumper___Leaf_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_2-drums-crakhed_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_2/drums/crakhed_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_2-drums-crakhed_pattern2.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_2/drums/crakhed_pattern2.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sampl [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level2_340bpm {
+            get {
+                return ResourceManager.GetString("samp_level2_340bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_3-drones-boss_drone_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_3/drones/boss_drone_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_3-drones-boss_drone_pattern2.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_3/drones/boss_drone_pattern2.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;o [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level3_360bpm {
+            get {
+                return ResourceManager.GetString("samp_level3_360bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_4-drums-crakhed_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_4/drums/crakhed_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_4-drums-crakhed_pattern2.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_4/drums/crakhed_pattern2.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sampl [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level4_380bpm {
+            get {
+                return ResourceManager.GetString("samp_level4_380bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_5-drones-boss_drone_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_5/drones/boss_drone_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_5-drones-boss_drone_pattern2.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_5/drones/boss_drone_pattern2.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;o [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level5_400bpm {
+            get {
+                return ResourceManager.GetString("samp_level5_400bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_6-drones-level_drone_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_6/drones/level_drone_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_6-drums-crakhed_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_6/drums/crakhed_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_typ [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level6_420bpm {
+            get {
+                return ResourceManager.GetString("samp_level6_420bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_7-drones-turn_anticipation_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_7/drones/turn_anticipation_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_7-drones-turn_anticipation_pattern2.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_7/drones/turn_anticipation_pattern2.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level7_440bpm {
+            get {
+                return ResourceManager.GetString("samp_level7_440bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_8-drones-boss_drone_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_8/drones/boss_drone_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_8-drones-boss_drone_pattern2.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_8/drones/boss_drone_pattern2.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;o [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level8_460bpm {
+            get {
+                return ResourceManager.GetString("samp_level8_460bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_9-drones-boss_drone_pattern1.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_9/drones/boss_drone_pattern1.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;level_9-drones-boss_drone_pattern2.samp&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/levels/level_9/drones/boss_drone_pattern2.wav&apos;
+        ///&apos;volume&apos;: &apos;1.0
+        ///&apos;pitch&apos;: &apos;1.0
+        ///&apos;pan&apos;: &apos;0.0
+        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///}
+        ///{
+        ///&apos;o [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level9_480bpm {
+            get {
+                return ResourceManager.GetString("samp_level9_480bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to level_2,drums,crakhed_pattern1.wav
         ///level_2,drums,crakhed_pattern2.wav
         ///level_2,drums,crakhed_pattern3.wav
