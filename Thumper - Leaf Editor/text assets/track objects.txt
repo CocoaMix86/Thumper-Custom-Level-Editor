@@ -99,6 +99,13 @@ skybox_colors.flow;light blue;light_blue;kTraitAction;False;0;[1,2,2,1,2,'kInten
 skybox_colors.flow;light green;light_green;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 skybox_colors.flow;light red;light_red;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
+CAMERA
+camera
+camera_floats.flow;camera height;0xac75d66e;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+camera_floats.flow;camera forward and backward;0x9f75fd34;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+cam_shake.flow;camera x axis;0x4bf4650d;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+cam_shake.xfmer;camera pitch;0x8ab4684d;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+###
 FX
 ambient_fx.spn
 ambient_fx.spn;aurora;aurora.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
@@ -119,7 +126,7 @@ ambient_fx.spn;stalactites;stalactites.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntens
 ambient_fx.spn;vortex_decorator;vortex_decorator.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ambient_fx.spn;win_debris;win_debris.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
-MISC
+WIN/MISC
 avatar.lib
 avatar.lib;speed;sequin_speed;kTraitFloat;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 avatar.lib;win;win;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
