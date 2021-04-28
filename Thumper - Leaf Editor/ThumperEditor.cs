@@ -273,10 +273,10 @@ namespace Thumper___Leaf_Editor
 			//create them if they don't exist
 			if (!File.Exists($@"{input.txtCustomPath.Text}\leaf_pyramid_outro.txt")) {
 				File.WriteAllText($@"{input.txtCustomPath.Text}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
-			}/*
+			}
 			if (!File.Exists($@"{input.txtCustomPath.Text}\samp_default.txt")) {
 				File.WriteAllText($@"{input.txtCustomPath.Text}\samp_default.txt", Properties.Resources.samp_default);
-			}*/
+			}
 			if (!File.Exists($@"{input.txtCustomPath.Text}\spn_default.txt")) {
 				File.WriteAllText($@"{input.txtCustomPath.Text}\spn_default.txt", Properties.Resources.spn_default);
 			}

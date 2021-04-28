@@ -558,7 +558,7 @@ namespace Thumper___Leaf_Editor
 		{
 			_lvlsamples.Clear();
 			//find all samp_ files in the level folder
-			var _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt");
+			var _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt").Where(x => !x.Contains("samp_default"));
 			//iterate over each file
 			foreach (string f in _sampfiles) {
 				//parse file to JSON
