@@ -273,10 +273,10 @@ namespace Thumper___Leaf_Editor
 			//create them if they don't exist
 			if (!File.Exists($@"{input.txtCustomPath.Text}\leaf_pyramid_outro.txt")) {
 				File.WriteAllText($@"{input.txtCustomPath.Text}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
-			}
+			}/*
 			if (!File.Exists($@"{input.txtCustomPath.Text}\samp_default.txt")) {
 				File.WriteAllText($@"{input.txtCustomPath.Text}\samp_default.txt", Properties.Resources.samp_default);
-			}
+			}*/
 			if (!File.Exists($@"{input.txtCustomPath.Text}\spn_default.txt")) {
 				File.WriteAllText($@"{input.txtCustomPath.Text}\spn_default.txt", Properties.Resources.spn_default);
 			}
@@ -285,6 +285,47 @@ namespace Thumper___Leaf_Editor
 			}
 			//finally, set workingfolder
 			workingfolder = input.txtCustomPath.Text;
+			///create samp_ files if any boxes are checked
+			//level 2
+			if (input.chkLevel2.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level2_340bpm.txt", Properties.Resources.samp_level2_340bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level2_340bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level2_340bpm.txt");
+			//level 3
+			if (input.chkLevel3.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level3_360bpm.txt", Properties.Resources.samp_level3_360bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level3_360bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level3_360bpm.txt");
+			//level 4
+			if (input.chkLevel4.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level4_380bpm.txt", Properties.Resources.samp_level4_380bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level4_380bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level4_380bpm.txt");
+			//level 5
+			if (input.chkLevel5.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level5_400bpm.txt", Properties.Resources.samp_level5_400bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level5_400bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level5_400bpm.txt");
+			//level 6
+			if (input.chkLevel6.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level6_420bpm.txt", Properties.Resources.samp_level6_420bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level6_420bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level6_420bpm.txt");
+			//level 7
+			if (input.chkLevel7.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level7_440bpm.txt", Properties.Resources.samp_level7_440bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level7_440bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level7_440bpm.txt");
+			//level 8
+			if (input.chkLevel8.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level8_460bpm.txt", Properties.Resources.samp_level8_460bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level8_460bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level8_460bpm.txt");
+			//level 9
+			if (input.chkLevel9.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level9_480bpm.txt", Properties.Resources.samp_level9_480bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level9_480bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level9_480bpm.txt");
 		}
 
 		
@@ -331,6 +372,15 @@ namespace Thumper___Leaf_Editor
 			customlevel.txtCustomDiff.Text = _load.ContainsKey("difficulty") ? (string)_load["difficulty"] : "";
 			customlevel.txtDesc.Text = _load.ContainsKey("description") ? (string)_load["description"] : "";
 			customlevel.txtCustomAuthor.Text = _load.ContainsKey("author") ? (string)_load["author"] : "";
+			//set samp pack checks
+			customlevel.chkLevel2.Checked = File.Exists($@"{workingfolder}\samp_level2_340bpm.txt");
+			customlevel.chkLevel3.Checked = File.Exists($@"{workingfolder}\samp_level3_360bpm.txt");
+			customlevel.chkLevel4.Checked = File.Exists($@"{workingfolder}\samp_level4_380bpm.txt");
+			customlevel.chkLevel5.Checked = File.Exists($@"{workingfolder}\samp_level5_400bpm.txt");
+			customlevel.chkLevel6.Checked = File.Exists($@"{workingfolder}\samp_level6_420bpm.txt");
+			customlevel.chkLevel7.Checked = File.Exists($@"{workingfolder}\samp_level7_440bpm.txt");
+			customlevel.chkLevel8.Checked = File.Exists($@"{workingfolder}\samp_level8_460bpm.txt");
+			customlevel.chkLevel9.Checked = File.Exists($@"{workingfolder}\samp_level9_480bpm.txt");
 			//show the new level folder dialog box
 			if (customlevel.ShowDialog() == DialogResult.OK) {
 				//if all OK, populate new JObject with data from the form

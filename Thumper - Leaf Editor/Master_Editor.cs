@@ -202,14 +202,14 @@ namespace Thumper___Leaf_Editor
 				if (sfd.ShowDialog() == DialogResult.OK) {
 					//separate path and filename
 					string storePath = Path.GetDirectoryName(sfd.FileName);
+					sfd.FileName = $@"{storePath}\master_sequin.txt";
+					workingfolder = Path.GetDirectoryName(sfd.FileName);
 					//get contents to save
 					var _save = MasterBuildSave();
 					//serialize JSON object to a string, and write it to the file
-					sfd.FileName = $@"{storePath}\master_sequin.txt";
 					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
 					//set a few visual elements to show what file is being worked on
 					lblMasterName.Text = $"Master Editor - sequin.master";
-					workingfolder = Path.GetDirectoryName(sfd.FileName);
 					_loadedmaster = sfd.FileName;
 					//set save flag
 					SaveMaster(true);

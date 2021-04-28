@@ -53,18 +53,7 @@ namespace Thumper___Leaf_Editor
 				LoadLeaf(_load);
 			}
 			else if (workingfolderFiles[0, e.RowIndex].Value.ToString().Contains("LEVEL DETAILS")) {
-				DialogInput customlevel = new DialogInput();
-				customlevel.txtCustomPath.Text = workingfolder;
-				customlevel.txtCustomName.Text = (string)_load["level_name"];
-				customlevel.txtCustomDiff.Text = (string)_load["difficulty"];
-				customlevel.txtDesc.Text = (string)_load["description"];
-				customlevel.txtCustomAuthor.Text = (string)_load["author"];
-				//show the new level folder dialog box
-				if (customlevel.ShowDialog() == DialogResult.OK) {
-					//if all OK, populate new JObject with data from the form
-					CreateCustomLevelFolder(customlevel);
-				}
-				customlevel.Dispose();
+				editLevelDetailsToolStripMenuItem_Click(null, null);
 			}
 		}
 
