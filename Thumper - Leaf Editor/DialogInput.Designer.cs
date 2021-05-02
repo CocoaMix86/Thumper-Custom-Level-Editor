@@ -53,6 +53,11 @@ namespace Thumper___Leaf_Editor
 			this.chkLevel8 = new System.Windows.Forms.CheckBox();
 			this.chkLevel7 = new System.Windows.Forms.CheckBox();
 			this.chkLevel6 = new System.Windows.Forms.CheckBox();
+			this.chkLevel1 = new System.Windows.Forms.CheckBox();
+			this.chkMisc = new System.Windows.Forms.CheckBox();
+			this.chkRests = new System.Windows.Forms.CheckBox();
+			this.chkGlobal = new System.Windows.Forms.CheckBox();
+			this.chkDissonance = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// txtCustomPath
@@ -101,7 +106,7 @@ namespace Thumper___Leaf_Editor
 			this.btnCustomCancel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnCustomCancel.ForeColor = System.Drawing.Color.Black;
 			this.btnCustomCancel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.btnCustomCancel.Location = new System.Drawing.Point(362, 364);
+			this.btnCustomCancel.Location = new System.Drawing.Point(384, 406);
 			this.btnCustomCancel.Name = "btnCustomCancel";
 			this.btnCustomCancel.Size = new System.Drawing.Size(60, 24);
 			this.btnCustomCancel.TabIndex = 116;
@@ -117,7 +122,7 @@ namespace Thumper___Leaf_Editor
 			this.btnCustomSave.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnCustomSave.ForeColor = System.Drawing.Color.Black;
 			this.btnCustomSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-			this.btnCustomSave.Location = new System.Drawing.Point(299, 364);
+			this.btnCustomSave.Location = new System.Drawing.Point(321, 406);
 			this.btnCustomSave.Name = "btnCustomSave";
 			this.btnCustomSave.Size = new System.Drawing.Size(60, 24);
 			this.btnCustomSave.TabIndex = 117;
@@ -248,7 +253,7 @@ namespace Thumper___Leaf_Editor
 			this.label7.AutoSize = true;
 			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label7.ForeColor = System.Drawing.Color.White;
-			this.label7.Location = new System.Drawing.Point(12, 287);
+			this.label7.Location = new System.Drawing.Point(12, 291);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(221, 13);
 			this.label7.TabIndex = 128;
@@ -258,7 +263,7 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.chkLevel2.AutoSize = true;
 			this.chkLevel2.ForeColor = System.Drawing.Color.White;
-			this.chkLevel2.Location = new System.Drawing.Point(15, 303);
+			this.chkLevel2.Location = new System.Drawing.Point(15, 326);
 			this.chkLevel2.Name = "chkLevel2";
 			this.chkLevel2.Size = new System.Drawing.Size(108, 17);
 			this.chkLevel2.TabIndex = 129;
@@ -269,7 +274,7 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.chkLevel3.AutoSize = true;
 			this.chkLevel3.ForeColor = System.Drawing.Color.White;
-			this.chkLevel3.Location = new System.Drawing.Point(15, 322);
+			this.chkLevel3.Location = new System.Drawing.Point(15, 345);
 			this.chkLevel3.Name = "chkLevel3";
 			this.chkLevel3.Size = new System.Drawing.Size(108, 17);
 			this.chkLevel3.TabIndex = 130;
@@ -280,7 +285,7 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.chkLevel4.AutoSize = true;
 			this.chkLevel4.ForeColor = System.Drawing.Color.White;
-			this.chkLevel4.Location = new System.Drawing.Point(15, 341);
+			this.chkLevel4.Location = new System.Drawing.Point(15, 364);
 			this.chkLevel4.Name = "chkLevel4";
 			this.chkLevel4.Size = new System.Drawing.Size(108, 17);
 			this.chkLevel4.TabIndex = 131;
@@ -291,7 +296,7 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.chkLevel5.AutoSize = true;
 			this.chkLevel5.ForeColor = System.Drawing.Color.White;
-			this.chkLevel5.Location = new System.Drawing.Point(15, 360);
+			this.chkLevel5.Location = new System.Drawing.Point(15, 383);
 			this.chkLevel5.Name = "chkLevel5";
 			this.chkLevel5.Size = new System.Drawing.Size(108, 17);
 			this.chkLevel5.TabIndex = 132;
@@ -302,7 +307,7 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.chkLevel9.AutoSize = true;
 			this.chkLevel9.ForeColor = System.Drawing.Color.White;
-			this.chkLevel9.Location = new System.Drawing.Point(129, 360);
+			this.chkLevel9.Location = new System.Drawing.Point(129, 364);
 			this.chkLevel9.Name = "chkLevel9";
 			this.chkLevel9.Size = new System.Drawing.Size(108, 17);
 			this.chkLevel9.TabIndex = 136;
@@ -313,7 +318,7 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.chkLevel8.AutoSize = true;
 			this.chkLevel8.ForeColor = System.Drawing.Color.White;
-			this.chkLevel8.Location = new System.Drawing.Point(129, 341);
+			this.chkLevel8.Location = new System.Drawing.Point(129, 345);
 			this.chkLevel8.Name = "chkLevel8";
 			this.chkLevel8.Size = new System.Drawing.Size(108, 17);
 			this.chkLevel8.TabIndex = 135;
@@ -324,7 +329,7 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.chkLevel7.AutoSize = true;
 			this.chkLevel7.ForeColor = System.Drawing.Color.White;
-			this.chkLevel7.Location = new System.Drawing.Point(129, 322);
+			this.chkLevel7.Location = new System.Drawing.Point(129, 326);
 			this.chkLevel7.Name = "chkLevel7";
 			this.chkLevel7.Size = new System.Drawing.Size(108, 17);
 			this.chkLevel7.TabIndex = 134;
@@ -335,20 +340,80 @@ namespace Thumper___Leaf_Editor
 			// 
 			this.chkLevel6.AutoSize = true;
 			this.chkLevel6.ForeColor = System.Drawing.Color.White;
-			this.chkLevel6.Location = new System.Drawing.Point(129, 303);
+			this.chkLevel6.Location = new System.Drawing.Point(129, 307);
 			this.chkLevel6.Name = "chkLevel6";
 			this.chkLevel6.Size = new System.Drawing.Size(108, 17);
 			this.chkLevel6.TabIndex = 133;
 			this.chkLevel6.Text = "Level 6 (420bpm)";
 			this.chkLevel6.UseVisualStyleBackColor = true;
 			// 
+			// chkLevel1
+			// 
+			this.chkLevel1.AutoSize = true;
+			this.chkLevel1.ForeColor = System.Drawing.Color.White;
+			this.chkLevel1.Location = new System.Drawing.Point(15, 307);
+			this.chkLevel1.Name = "chkLevel1";
+			this.chkLevel1.Size = new System.Drawing.Size(108, 17);
+			this.chkLevel1.TabIndex = 137;
+			this.chkLevel1.Text = "Level 1 (320bpm)";
+			this.chkLevel1.UseVisualStyleBackColor = true;
+			// 
+			// chkMisc
+			// 
+			this.chkMisc.AutoSize = true;
+			this.chkMisc.ForeColor = System.Drawing.Color.White;
+			this.chkMisc.Location = new System.Drawing.Point(243, 364);
+			this.chkMisc.Name = "chkMisc";
+			this.chkMisc.Size = new System.Drawing.Size(51, 17);
+			this.chkMisc.TabIndex = 141;
+			this.chkMisc.Text = "Misc.";
+			this.chkMisc.UseVisualStyleBackColor = true;
+			// 
+			// chkRests
+			// 
+			this.chkRests.AutoSize = true;
+			this.chkRests.ForeColor = System.Drawing.Color.White;
+			this.chkRests.Location = new System.Drawing.Point(243, 345);
+			this.chkRests.Name = "chkRests";
+			this.chkRests.Size = new System.Drawing.Size(53, 17);
+			this.chkRests.TabIndex = 140;
+			this.chkRests.Text = "Rests";
+			this.chkRests.UseVisualStyleBackColor = true;
+			// 
+			// chkGlobal
+			// 
+			this.chkGlobal.AutoSize = true;
+			this.chkGlobal.ForeColor = System.Drawing.Color.White;
+			this.chkGlobal.Location = new System.Drawing.Point(243, 326);
+			this.chkGlobal.Name = "chkGlobal";
+			this.chkGlobal.Size = new System.Drawing.Size(93, 17);
+			this.chkGlobal.TabIndex = 139;
+			this.chkGlobal.Text = "Global Drones";
+			this.chkGlobal.UseVisualStyleBackColor = true;
+			// 
+			// chkDissonance
+			// 
+			this.chkDissonance.AutoSize = true;
+			this.chkDissonance.ForeColor = System.Drawing.Color.White;
+			this.chkDissonance.Location = new System.Drawing.Point(243, 307);
+			this.chkDissonance.Name = "chkDissonance";
+			this.chkDissonance.Size = new System.Drawing.Size(76, 17);
+			this.chkDissonance.TabIndex = 138;
+			this.chkDissonance.Text = "Dissoance";
+			this.chkDissonance.UseVisualStyleBackColor = true;
+			// 
 			// DialogInput
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.ClientSize = new System.Drawing.Size(425, 390);
+			this.ClientSize = new System.Drawing.Size(449, 436);
 			this.ControlBox = false;
+			this.Controls.Add(this.chkMisc);
+			this.Controls.Add(this.chkRests);
+			this.Controls.Add(this.chkGlobal);
+			this.Controls.Add(this.chkDissonance);
+			this.Controls.Add(this.chkLevel1);
 			this.Controls.Add(this.chkLevel9);
 			this.Controls.Add(this.chkLevel8);
 			this.Controls.Add(this.chkLevel7);
@@ -408,5 +473,10 @@ namespace Thumper___Leaf_Editor
 		public System.Windows.Forms.CheckBox chkLevel8;
 		public System.Windows.Forms.CheckBox chkLevel7;
 		public System.Windows.Forms.CheckBox chkLevel6;
+		public System.Windows.Forms.CheckBox chkLevel1;
+		public System.Windows.Forms.CheckBox chkMisc;
+		public System.Windows.Forms.CheckBox chkRests;
+		public System.Windows.Forms.CheckBox chkGlobal;
+		public System.Windows.Forms.CheckBox chkDissonance;
 	}
 }

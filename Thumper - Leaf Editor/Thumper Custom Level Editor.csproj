@@ -193,6 +193,11 @@
     <None Include="text assets\samp_level7_440bpm.txt" />
     <None Include="text assets\samp_level8_460bpm.txt" />
     <None Include="text assets\samp_level9_480bpm.txt" />
+    <None Include="text assets\samp_dissonant.txt" />
+    <None Include="text assets\samp_globaldrones.txt" />
+    <None Include="text assets\samp_level1_320bpm.txt" />
+    <None Include="text assets\samp_misc.txt" />
+    <None Include="text assets\samp_rests.txt" />
     <Content Include="text assets\track objects.txt" />
     <None Include="text assets\xfm_default.txt" />
     <Content Include="ThumperIconEditor.ico" />

@@ -286,6 +286,11 @@ namespace Thumper___Leaf_Editor
 			//finally, set workingfolder
 			workingfolder = input.txtCustomPath.Text;
 			///create samp_ files if any boxes are checked
+			//level 1
+			if (input.chkLevel1.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_level1_320bpm.txt", Properties.Resources.samp_level1_320bpm);
+			else if (File.Exists($@"{workingfolder}\samp_level1_320bpm.txt"))
+				File.Delete($@"{workingfolder}\samp_level1_320bpm.txt");
 			//level 2
 			if (input.chkLevel2.Checked)
 				File.WriteAllText($@"{workingfolder}\samp_level2_340bpm.txt", Properties.Resources.samp_level2_340bpm);
@@ -326,6 +331,26 @@ namespace Thumper___Leaf_Editor
 				File.WriteAllText($@"{workingfolder}\samp_level9_480bpm.txt", Properties.Resources.samp_level9_480bpm);
 			else if (File.Exists($@"{workingfolder}\samp_level9_480bpm.txt"))
 				File.Delete($@"{workingfolder}\samp_level9_480bpm.txt");
+			//Dissonance
+			if (input.chkDissonance.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_dissonant.txt", Properties.Resources.samp_dissonant);
+			else if (File.Exists($@"{workingfolder}\samp_dissonant.txt"))
+				File.Delete($@"{workingfolder}\samp_dissonant.txt");
+			//Global Drones
+			if (input.chkGlobal.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_globaldrones.txt", Properties.Resources.samp_globaldrones);
+			else if (File.Exists($@"{workingfolder}\samp_globaldrones.txt"))
+				File.Delete($@"{workingfolder}\samp_globaldrones.txt");
+			//Rests
+			if (input.chkRests.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_rests.txt", Properties.Resources.samp_rests);
+			else if (File.Exists($@"{workingfolder}\samp_rests.txt"))
+				File.Delete($@"{workingfolder}\samp_rests.txt");
+			//Misc
+			if (input.chkMisc.Checked)
+				File.WriteAllText($@"{workingfolder}\samp_misc.txt", Properties.Resources.samp_misc);
+			else if (File.Exists($@"{workingfolder}\samp_misc.txt"))
+				File.Delete($@"{workingfolder}\samp_misc.txt");
 		}
 
 		
@@ -373,6 +398,7 @@ namespace Thumper___Leaf_Editor
 			customlevel.txtDesc.Text = _load.ContainsKey("description") ? (string)_load["description"] : "";
 			customlevel.txtCustomAuthor.Text = _load.ContainsKey("author") ? (string)_load["author"] : "";
 			//set samp pack checks
+			customlevel.chkLevel1.Checked = File.Exists($@"{workingfolder}\samp_level1_320bpm.txt");
 			customlevel.chkLevel2.Checked = File.Exists($@"{workingfolder}\samp_level2_340bpm.txt");
 			customlevel.chkLevel3.Checked = File.Exists($@"{workingfolder}\samp_level3_360bpm.txt");
 			customlevel.chkLevel4.Checked = File.Exists($@"{workingfolder}\samp_level4_380bpm.txt");
@@ -381,6 +407,10 @@ namespace Thumper___Leaf_Editor
 			customlevel.chkLevel7.Checked = File.Exists($@"{workingfolder}\samp_level7_440bpm.txt");
 			customlevel.chkLevel8.Checked = File.Exists($@"{workingfolder}\samp_level8_460bpm.txt");
 			customlevel.chkLevel9.Checked = File.Exists($@"{workingfolder}\samp_level9_480bpm.txt");
+			customlevel.chkDissonance.Checked = File.Exists($@"{workingfolder}\samp_dissonant.txt");
+			customlevel.chkGlobal.Checked = File.Exists($@"{workingfolder}\samp_globaldrones.txt");
+			customlevel.chkRests.Checked = File.Exists($@"{workingfolder}\samp_rests.txt");
+			customlevel.chkMisc.Checked = File.Exists($@"{workingfolder}\samp_misc.txt");
 			//show the new level folder dialog box
 			if (customlevel.ShowDialog() == DialogResult.OK) {
 				//if all OK, populate new JObject with data from the form

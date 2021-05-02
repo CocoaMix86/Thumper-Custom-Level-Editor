@@ -214,4 +214,19 @@
   <data name="samp_level9_480bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\samp_level9_480bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
+  <data name="samp_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_dissonant.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_globaldrones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_globaldrones.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level1_320bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level1_320bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_misc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_misc.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
 </root>

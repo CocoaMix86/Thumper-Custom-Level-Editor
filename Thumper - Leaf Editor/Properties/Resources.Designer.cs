@@ -239,29 +239,30 @@ namespace Thumper___Leaf_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  
-        ///lattice5.path
-        ///tube_hexagon_bright.path
-        ///tube_hexagon_chrome.path
-        ///lattice4_red.path
-        ///spaceship3_chrome.path
-        ///spaceship3_dark.path
-        ///glass_hex.path
+        ///   Looks up a localized string similar to arms_deca.path
+        ///arms_diamond.path
         ///arms_hex.path
-        ///occlusion_tube01_psych.path
-        ///occlusion_tube_horizontal.path
-        ///occlusion_ring_octagon.path
-        ///occlusion_tube02_purple.path
-        ///lattice4_blue.path
+        ///arms_oct.path
+        ///arms_pentagon.path
+        ///arms_sept.path
+        ///arms_square.path
+        ///arms_triangle.path
+        ///black_tunnel.path
+        ///boss_bright_A.path
+        ///boss_bright_B.path
+        ///boss_tube_path.path
+        ///boss_tube_path_no_end.path
+        ///boss_tunnel_effect.path
+        ///cave_dec_bright.path
+        ///cave_dec_chrome.path
+        ///cave_diamond_bright.path
+        ///cave_diamond_chrome.path
+        ///cave_diamond_chrome_ring.path
+        ///cave_diamond_glass.path
         ///cave_hexagon_bright.path
         ///cave_hexagon_chrome.path
-        ///lattice2_green.path
-        ///lattice2_red.path
-        ///lattice5_blue.path
-        ///lattice4_chrome.path
-        ///lattice5_chrome.path
-        ///lattice5_chrome_large.path
-        ///tube_diamond_chrome_ar [rest of string was truncated]&quot;;.
+        ///cave_octo_bright.path
+        ///cave_octo_chr [rest of string was truncated]&quot;;.
         /// </summary>
         public static string paths {
             get {
@@ -315,28 +316,132 @@ namespace Thumper___Leaf_Editor.Properties {
         ///&apos;items&apos;: [
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;dissonant-dissonant_additive_pad.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/dissonant/dissonant_additive_pad.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;dissonant-dissonant_affecting_preciousness.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/dissonant/dissonant_affecting_preciousness.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;o [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_dissonant {
+            get {
+                return ResourceManager.GetString("samp_dissonant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;global_drones-beneath_ice_pattern1.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/Levels/global_drones/beneath_ice_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;global_drones-beneath_ice_pattern2.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/Levels/global_drones/beneath_ice_pattern2.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_globaldrones {
+            get {
+                return ResourceManager.GetString("samp_globaldrones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;drums-level1-basic1.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/drums/level1/basic1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;drums-level1-basic4.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/drums/level1/basic4.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;drums-level1-basic4_cymbal.wav&apos;,
+        ///&apos;mode&apos; [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_level1_320bpm {
+            get {
+                return ResourceManager.GetString("samp_level1_320bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_2-drums-crakhed_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_2/drums/crakhed_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_2/drums/crakhed_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_2-drums-crakhed_pattern2.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_2/drums/crakhed_pattern2.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_2/drums/crakhed_pattern2.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
-        ///&apos;obj_type&apos;: &apos;Sampl [rest of string was truncated]&quot;;.
+        ///&apos;obj_type&apos;: &apos;S [rest of string was truncated]&quot;;.
         /// </summary>
         public static string samp_level2_340bpm {
             get {
@@ -351,26 +456,25 @@ namespace Thumper___Leaf_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_3-drones-boss_drone_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_3/drones/boss_drone_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_3/drones/boss_drone_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_3-drones-boss_drone_pattern2.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_3/drones/boss_drone_pattern2.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_3/drones/boss_drone_pattern2.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
-        ///{
-        ///&apos;o [rest of string was truncated]&quot;;.
+        ///},
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string samp_level3_360bpm {
             get {
@@ -385,26 +489,26 @@ namespace Thumper___Leaf_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_4-drums-crakhed_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_4/drums/crakhed_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_4/drums/crakhed_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_4-drums-crakhed_pattern2.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_4/drums/crakhed_pattern2.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_4/drums/crakhed_pattern2.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
-        ///&apos;obj_type&apos;: &apos;Sampl [rest of string was truncated]&quot;;.
+        ///&apos;obj_type&apos;: &apos;S [rest of string was truncated]&quot;;.
         /// </summary>
         public static string samp_level4_380bpm {
             get {
@@ -419,26 +523,25 @@ namespace Thumper___Leaf_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_5-drones-boss_drone_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_5/drones/boss_drone_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_5/drones/boss_drone_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_5-drones-boss_drone_pattern2.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_5/drones/boss_drone_pattern2.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_5/drones/boss_drone_pattern2.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
-        ///{
-        ///&apos;o [rest of string was truncated]&quot;;.
+        ///},
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string samp_level5_400bpm {
             get {
@@ -453,26 +556,26 @@ namespace Thumper___Leaf_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_6-drones-level_drone_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_6/drones/level_drone_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_6/drones/level_drone_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_6-drums-crakhed_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_6/drums/crakhed_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_6/drums/crakhed_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
-        ///&apos;obj_typ [rest of string was truncated]&quot;;.
+        ///&apos;obj [rest of string was truncated]&quot;;.
         /// </summary>
         public static string samp_level6_420bpm {
             get {
@@ -487,22 +590,22 @@ namespace Thumper___Leaf_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_7-drones-turn_anticipation_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_7/drones/turn_anticipation_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_7/drones/turn_anticipation_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_7-drones-turn_anticipation_pattern2.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_7/drones/turn_anticipation_pattern2.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0 [rest of string was truncated]&quot;;.
+        ///&apos;path&apos;: &apos;samples/levels/level_7/drones/turn_anticipation_pattern2.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string samp_level7_440bpm {
             get {
@@ -517,26 +620,25 @@ namespace Thumper___Leaf_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_8-drones-boss_drone_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_8/drones/boss_drone_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_8/drones/boss_drone_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_8-drones-boss_drone_pattern2.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_8/drones/boss_drone_pattern2.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_8/drones/boss_drone_pattern2.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
-        ///{
-        ///&apos;o [rest of string was truncated]&quot;;.
+        ///},
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string samp_level8_460bpm {
             get {
@@ -551,30 +653,99 @@ namespace Thumper___Leaf_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_9-drones-boss_drone_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_9/drones/boss_drone_pattern1.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_9/drones/boss_drone_pattern1.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
+        ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;level_9-drones-boss_drone_pattern2.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_9/drones/boss_drone_pattern2.wav&apos;
-        ///&apos;volume&apos;: &apos;1.0
-        ///&apos;pitch&apos;: &apos;1.0
-        ///&apos;pan&apos;: &apos;0.0
-        ///&apos;offset&apos;: &apos;0.0
+        ///&apos;path&apos;: &apos;samples/levels/level_9/drones/boss_drone_pattern2.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;&apos;
-        ///}
-        ///{
-        ///&apos;o [rest of string was truncated]&quot;;.
+        ///},
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string samp_level9_480bpm {
             get {
                 return ResourceManager.GetString("samp_level9_480bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;misc-beautiful-beautiful_sensuality.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/beautiful/beautiful_sensuality.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;misc-boss-ending_sequence.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/boss/ending_sequence.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;misc- [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_misc {
+            get {
+                return ResourceManager.GetString("samp_misc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&apos;items&apos;: [
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;rests-rests_level8a.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/Levels/rests/rests_level8a.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;rests-rests_level8b.wav&apos;,
+        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
+        ///&apos;path&apos;: &apos;samples/Levels/rests/rests_level8b.wav&apos;,
+        ///&apos;volume&apos;: 1.0,
+        ///&apos;pitch&apos;: 1.0,
+        ///&apos;pan&apos;: 0.0,
+        ///&apos;offset&apos;: 0.0,
+        ///&apos;channel_group&apos;: &apos;&apos;
+        ///},
+        ///{
+        ///&apos;obj_type&apos;: &apos;Sample&apos;,
+        ///&apos;obj_name&apos;: &apos;rests-rests_level9a.wav&apos;, [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string samp_rests {
+            get {
+                return ResourceManager.GetString("samp_rests", resourceCulture);
             }
         }
         
