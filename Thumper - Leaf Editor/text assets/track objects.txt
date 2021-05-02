@@ -88,9 +88,8 @@ sentry.spn
 sentry.spn;single lane[55 beats];level_5.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 sentry.spn;multi lane[126 beats];level_8_multi.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
-SKYBOX
+SKYBOX COLORS
 skybox_colors.flow
-skybox_colors.flow;gamma;gamma;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 skybox_colors.flow;black;black;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 skybox_colors.flow;dark blue;dark_blue;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 skybox_colors.flow;dark green;dark_green;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
@@ -98,6 +97,33 @@ skybox_colors.flow;dark red;dark_red;kTraitAction;False;0;[1,2,2,1,2,'kIntensity
 skybox_colors.flow;light blue;light_blue;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 skybox_colors.flow;light green;light_green;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 skybox_colors.flow;light red;light_red;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+crakhed_colors.flow;crakhed_colors color1;color1;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+crakhed_colors.flow;crakhed_colors color2;color2;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+crakhed_colors.flow;crakhed_colors color3;color3;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+crakhed_colors.flow;crakhed_colors color4;color4;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+pyramid_colors.flow;pyramid_colors color1;color1;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+pyramid_colors.flow;pyramid_colors color2;color2;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+pyramid_colors.flow;pyramid_colors color3;color3;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+pyramid_colors.flow;pyramid_colors color4;color4;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+diamond_colors.flow;diamond_colors color1;color1;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+diamond_colors.flow;diamond_colors color2;color2;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+diamond_colors.flow;diamond_colors color3;color3;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+diamond_colors.flow;diamond_colors color4;color4;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+level_colors.flow;level_colors color1;color1;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+level_colors.flow;level_colors color2;color2;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+level_colors.flow;level_colors color3;color3;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+level_colors.flow;level_colors color4;color4;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+boss_colors.flow;boss_colors color1;color1;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+boss_colors.flow;boss_colors color2;color2;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+boss_colors.flow;boss_colors color3;color3;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+boss_colors.flow;boss_colors color4;color4;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+ending_sequence.flow;white;0x58c0f90f;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+###
+GAMMA
+gamma
+gamma_floats.flow;red;0xd61447d3;kTraitFloat;True;1;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+gamma_floats.flow;blue;0x8c17f344;kTraitFloat;True;1;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+gamma_floats.flow;green;0x8c8b5767;kTraitFloat;True;1;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
 CAMERA
 camera
