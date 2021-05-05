@@ -18,6 +18,11 @@ namespace Thumper___Leaf_Editor
 			lblWorkingFolder.MaximumSize = new Size(panelWorkingFolder.Width - 16, 0);
 		}
 
+		private void workingfolderFiles_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			workingfolderFiles_RowEnter(sender, e);
+		}
+
 		private void workingfolderFiles_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
 			dynamic _load = null;

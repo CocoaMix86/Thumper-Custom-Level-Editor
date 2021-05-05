@@ -1547,6 +1547,7 @@
 			// 
 			// label39
 			// 
+			this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label39.AutoSize = true;
 			this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label39.ForeColor = System.Drawing.Color.White;
@@ -3519,6 +3520,7 @@
 			this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.workingfolderFiles.Size = new System.Drawing.Size(288, 379);
 			this.workingfolderFiles.TabIndex = 80;
+			this.workingfolderFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellClick);
 			this.workingfolderFiles.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_RowEnter);
 			this.workingfolderFiles.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.workingfolderFiles_RowsAdded);
 			this.workingfolderFiles.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.workingfolderFiles_RowsRemoved);
