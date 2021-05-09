@@ -445,7 +445,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'demo_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -458,7 +458,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'demo_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -471,7 +471,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level1_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -484,7 +484,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level2b_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -497,7 +497,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level2b_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -510,7 +510,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level2c_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -523,7 +523,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level2c_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -536,7 +536,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level2_angled_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -549,7 +549,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level2_angled_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -562,7 +562,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level2_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -575,7 +575,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level3b_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -588,7 +588,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level3b_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -601,7 +601,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level3c_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -614,7 +614,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level3c_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -627,7 +627,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level3d_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -640,7 +640,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level3d_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -653,7 +653,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level3_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -666,7 +666,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level3_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -679,7 +679,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level4b_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -692,7 +692,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level4b_small_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -705,7 +705,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level4c_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -718,7 +718,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level4c_small_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -731,7 +731,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level4_small_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -744,7 +744,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level4_small_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -757,7 +757,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level5b_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -770,7 +770,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level5b_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -783,7 +783,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level5c_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -796,7 +796,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level5c_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -809,7 +809,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level5d_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -822,7 +822,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level5e_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -835,7 +835,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level5e_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -848,7 +848,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level5f_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -861,7 +861,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level6b_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -874,7 +874,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level6b_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -887,7 +887,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level6c_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -900,7 +900,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level6c_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -913,7 +913,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level7b_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -926,7 +926,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level7b_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -939,7 +939,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level7c_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -952,7 +952,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level7c_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -965,7 +965,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level7d_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -978,7 +978,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level7_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -991,7 +991,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level7_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1004,7 +1004,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level8b_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1017,7 +1017,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level8b_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1030,7 +1030,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level8_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1043,7 +1043,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level8_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1056,7 +1056,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level9b_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1069,7 +1069,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level9b_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1082,7 +1082,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level9c_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1095,7 +1095,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level9c_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1108,7 +1108,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level9d_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1121,7 +1121,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level9d_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1134,7 +1134,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level9_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1147,7 +1147,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level9_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1160,7 +1160,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1173,7 +1173,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1_angled_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1186,7 +1186,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1_glass.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1199,7 +1199,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1_lattice.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1212,7 +1212,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1_latticeb.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1225,7 +1225,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1_latticeb_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1238,7 +1238,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1_lattice_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1251,7 +1251,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1264,7 +1264,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree1_set_glass.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1277,7 +1277,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree2.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1290,7 +1290,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree2_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1303,7 +1303,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree3.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1316,7 +1316,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree3_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1329,7 +1329,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree3_transparent.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1342,7 +1342,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree3_transparent_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1355,7 +1355,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree4.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1368,7 +1368,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree4_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1381,7 +1381,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree5_long_straight.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1394,7 +1394,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree5_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1407,7 +1407,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree8.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1420,7 +1420,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'level_tree8_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1433,7 +1433,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'spiral_fingers.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
@@ -1446,7 +1446,7 @@
 {
 'obj_type': 'EntitySpawner',
 'obj_name': 'spiral_fingers_set.spn',
-'xfm_mode': '',
+'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
 'rot_x': [1, 0, 0],
