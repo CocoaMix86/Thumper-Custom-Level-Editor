@@ -709,13 +709,17 @@ namespace Thumper___Leaf_Editor
 				_s.highlight_value = seq_obj.ContainsKey("editor_data") ? (float)seq_obj["editor_data"][1] : 1;
 				//iterate over every _object to find where a param_path is located
 				//this was the best way to do this I could come up with
-				for (int x = 0; x < _objects.Count; x++) {
+				foreach (Object_Params _obj in _objects) {
 					//replace .z01 .z02 .a01 .a02 with .ent, so that it's found in the param list
 					var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
 					//if found, set the friendly names
-					if (_objects[x].param_path.Contains(reg_param)) {
-						_s.friendly_param = _objects[x].param_displayname[_objects[x].param_path.IndexOf(reg_param)];
-						_s.friendly_type = _objects[x].obj_displayname;
+					for (int x = 0; x < _obj.param_path.Count; x++) {
+						if (_obj.param_path[x] == reg_param && _obj.obj_name[x] == _s.obj_name.Replace((string)_load["obj_name"], "leafname")) {
+							//_s.friendly_param = _obj.param_displayname[_obj.param_path.IndexOf(reg_param)];
+							_s.friendly_param = _obj.param_displayname[x];
+							_s.friendly_type = _obj.obj_displayname;
+							break;
+						}
 					}
 				}
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this

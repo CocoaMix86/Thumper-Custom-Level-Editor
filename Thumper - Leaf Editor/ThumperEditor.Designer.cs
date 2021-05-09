@@ -677,7 +677,7 @@
 			this.leafEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.leaf;
 			this.leafEditorToolStripMenuItem.Name = "leafEditorToolStripMenuItem";
-			this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.leafEditorToolStripMenuItem.Text = "Leaf Editor";
 			this.leafEditorToolStripMenuItem.Click += new System.EventHandler(this.leafEditorToolStripMenuItem_Click);
 			// 
@@ -690,7 +690,7 @@
 			this.levelEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.levelEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.lvl;
 			this.levelEditorToolStripMenuItem.Name = "levelEditorToolStripMenuItem";
-			this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.levelEditorToolStripMenuItem.Text = "Lvl Editor";
 			this.levelEditorToolStripMenuItem.Click += new System.EventHandler(this.levelEditorToolStripMenuItem_Click);
 			// 
@@ -703,7 +703,7 @@
 			this.gateEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gateEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.gate;
 			this.gateEditorToolStripMenuItem.Name = "gateEditorToolStripMenuItem";
-			this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.gateEditorToolStripMenuItem.Text = "Gate Editor";
 			this.gateEditorToolStripMenuItem.Click += new System.EventHandler(this.gateEditorToolStripMenuItem_Click);
 			// 
@@ -716,7 +716,7 @@
 			this.masterEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.masterEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.master;
 			this.masterEditorToolStripMenuItem.Name = "masterEditorToolStripMenuItem";
-			this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.masterEditorToolStripMenuItem.Text = "Master Editor";
 			this.masterEditorToolStripMenuItem.Click += new System.EventHandler(this.masterEditorToolStripMenuItem_Click);
 			// 
@@ -728,7 +728,7 @@
 			this.workingFolderToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.workingFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.workingFolderToolStripMenuItem.Name = "workingFolderToolStripMenuItem";
-			this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.workingFolderToolStripMenuItem.Text = "Working Folder";
 			this.workingFolderToolStripMenuItem.Click += new System.EventHandler(this.workingFolderToolStripMenuItem_Click);
 			// 

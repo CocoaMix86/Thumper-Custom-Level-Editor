@@ -454,6 +454,7 @@ namespace Thumper___Leaf_Editor
 			foreach (dynamic samp in _load["loops"]) {
 				lvlLoopTracks.Rows.Add(new object[] { (string)samp["samp_name"], (int)samp["beats_per_loop"]});
 			}
+			btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
 			///load leafs associated with this lvl
 			foreach (dynamic leaf in _load["leaf_seq"]) {
 				_lvlleafs.Add(new LvlLeafData() {
@@ -551,6 +552,7 @@ namespace Thumper___Leaf_Editor
 				else
 					MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");
 			}
+			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
 			//monke
 		}
 
