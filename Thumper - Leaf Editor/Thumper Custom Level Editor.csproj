@@ -111,6 +111,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Object_Params.cs" />
+    <Compile Include="Sample_Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sequencer_Object.cs" />
     <Compile Include="ThumperEditor.cs">
       <SubType>Form</SubType>
@@ -181,6 +184,7 @@
     <None Include="image assets\lvl.png" />
     <None Include="image assets\master.png" />
     <None Include="image assets\bosssectionhelp.png" />
+    <None Include="image assets\sample.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

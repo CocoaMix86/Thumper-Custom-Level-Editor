@@ -39,10 +39,12 @@ namespace Thumper___Leaf_Editor
 
 		/// DGV MASTERLVLLIST
 		//Row Enter (load the selected lvl)
-		private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
+
+		private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			string _file;
 			dynamic _load = null;
+
 			//show a different confirmation message if the selected item is gate or lvl
 			if (masterLvlList[0, e.RowIndex].Value.ToString().Contains(".gate")) {
 				if ((!_savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
@@ -82,7 +84,12 @@ namespace Thumper___Leaf_Editor
 			//re-add event handlers
 			dropMasterLvlLeader.SelectedIndexChanged += new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
 			dropMasterLvlRest.SelectedIndexChanged += new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
-
+		}
+		private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
+		{
+			if (_dgfocus != "masterLvlList") {
+				_dgfocus = "masterLvlList";
+			}
 		}
 		//Cell value changed (for checkboxes)
 		private void masterLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)

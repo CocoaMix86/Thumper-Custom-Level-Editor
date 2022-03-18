@@ -681,11 +681,12 @@ namespace Thumper___Leaf_Editor
 		///Update DGV from _tracks
 		public void LoadLeaf(dynamic _load /*List<string> _load*/)
 		{
+			//detect if file is actually Leaf or not
 			if ((string)_load["obj_type"] != "SequinLeaf") {
 				MessageBox.Show("This does not appear to be a leaf file!");
 				return;
 			}
-
+			//set the panel name to the file name
 			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
 			//clear existing tracks
 			_tracks.Clear();
@@ -735,11 +736,14 @@ namespace Thumper___Leaf_Editor
 			trackEditor.RowCount = _tracks.Count;
 			//foreach row, import data points associated with it
 			foreach (DataGridViewRow r in trackEditor.Rows) {
-				if (_tracks[r.Index].friendly_param.Length > 1) {
-					r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].friendly_param + ")";
-					//pass _griddata per row to be imported to the DGV
-					TrackRawImport(r, _tracks[r.Index].data_points);
+				try {
+					if (_tracks[r.Index].friendly_param.Length > 1) {
+						r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].friendly_param + ")";
+						//pass _griddata per row to be imported to the DGV
+						TrackRawImport(r, _tracks[r.Index].data_points);
+					}
 				}
+				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}"); }
 			}
 			//enable a bunch of elements now that a leaf is loaded.
 			dropObjects.Enabled = true;

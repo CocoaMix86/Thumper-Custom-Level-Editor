@@ -100,8 +100,9 @@ namespace Thumper___Leaf_Editor
 		/// EVENTS ///
 		///        ///
 
-		private void gateLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
+		private void gateLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
+			//gateLvlList_RowEnter(sender, e);
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
 				string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");
 				dynamic _load;
@@ -115,6 +116,12 @@ namespace Thumper___Leaf_Editor
 				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 				//load the selected lvl
 				LoadLvl(_load);
+			}
+		}
+		private void gateLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
+		{
+			if (_dgfocus != "gateLvlList") {
+				_dgfocus = "gateLvlList";
 			}
 		}
 

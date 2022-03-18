@@ -20,11 +20,7 @@ namespace Thumper___Leaf_Editor
 
 		private void workingfolderFiles_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			workingfolderFiles_RowEnter(sender, e);
-		}
-
-		private void workingfolderFiles_RowEnter(object sender, DataGridViewCellEventArgs e)
-		{
+			//workingfolderFiles_RowEnter(sender, e);
 			dynamic _load = null;
 			//attempt to load file listed in the dGV
 			try {
@@ -35,7 +31,8 @@ namespace Thumper___Leaf_Editor
 				}
 				//atempt to parse JSON
 				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\{workingfolderFiles[0, e.RowIndex].Value}"), "#.*", ""));
-			} catch {
+			}
+			catch {
 				//return method if parse fails
 				MessageBox.Show("The selected file could not be parsed as JSON.");
 				return;
@@ -59,6 +56,14 @@ namespace Thumper___Leaf_Editor
 			}
 			else if (workingfolderFiles[0, e.RowIndex].Value.ToString().Contains("LEVEL DETAILS")) {
 				editLevelDetailsToolStripMenuItem_Click(null, null);
+			}
+			else
+				MessageBox.Show("this is not a valid Custom Level file.");
+		}
+		private void workingfolderFiles_RowEnter(object sender, DataGridViewCellEventArgs e)
+		{
+			if (_dgfocus != "workingfolderFiles") {
+				_dgfocus = "workingfolderFiles";
 			}
 		}
 

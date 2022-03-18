@@ -53,6 +53,9 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLeafEditor));
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,6 +94,7 @@
 			this.gateEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.masterEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.workingFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.sampleEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -258,6 +262,11 @@
 			this.lblWorkClose = new System.Windows.Forms.Label();
 			this.lblWorkingFolder = new System.Windows.Forms.Label();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.panelSample = new System.Windows.Forms.Panel();
+			this.label54 = new System.Windows.Forms.Label();
+			this.sampleList = new System.Windows.Forms.DataGridView();
+			this.lblSampleClose = new System.Windows.Forms.Label();
+			this.label57 = new System.Windows.Forms.Label();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -283,6 +292,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
 			this.panelWorkingFolder.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
+			this.panelSample.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip
@@ -297,7 +308,7 @@
 			this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
-			this.menuStrip.Size = new System.Drawing.Size(1460, 24);
+			this.menuStrip.Size = new System.Drawing.Size(1745, 24);
 			this.menuStrip.TabIndex = 20;
 			this.menuStrip.Text = "mnuLeafEditor";
 			// 
@@ -662,7 +673,8 @@
             this.levelEditorToolStripMenuItem,
             this.gateEditorToolStripMenuItem,
             this.masterEditorToolStripMenuItem,
-            this.workingFolderToolStripMenuItem});
+            this.workingFolderToolStripMenuItem,
+            this.sampleEditorToolStripMenuItem});
 			this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 18);
@@ -677,7 +689,7 @@
 			this.leafEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.leafEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.leaf;
 			this.leafEditorToolStripMenuItem.Name = "leafEditorToolStripMenuItem";
-			this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.leafEditorToolStripMenuItem.Text = "Leaf Editor";
 			this.leafEditorToolStripMenuItem.Click += new System.EventHandler(this.leafEditorToolStripMenuItem_Click);
 			// 
@@ -690,7 +702,7 @@
 			this.levelEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.levelEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.lvl;
 			this.levelEditorToolStripMenuItem.Name = "levelEditorToolStripMenuItem";
-			this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.levelEditorToolStripMenuItem.Text = "Lvl Editor";
 			this.levelEditorToolStripMenuItem.Click += new System.EventHandler(this.levelEditorToolStripMenuItem_Click);
 			// 
@@ -703,7 +715,7 @@
 			this.gateEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.gateEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.gate;
 			this.gateEditorToolStripMenuItem.Name = "gateEditorToolStripMenuItem";
-			this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.gateEditorToolStripMenuItem.Text = "Gate Editor";
 			this.gateEditorToolStripMenuItem.Click += new System.EventHandler(this.gateEditorToolStripMenuItem_Click);
 			// 
@@ -716,7 +728,7 @@
 			this.masterEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.masterEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.master;
 			this.masterEditorToolStripMenuItem.Name = "masterEditorToolStripMenuItem";
-			this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.masterEditorToolStripMenuItem.Text = "Master Editor";
 			this.masterEditorToolStripMenuItem.Click += new System.EventHandler(this.masterEditorToolStripMenuItem_Click);
 			// 
@@ -728,9 +740,20 @@
 			this.workingFolderToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.workingFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.workingFolderToolStripMenuItem.Name = "workingFolderToolStripMenuItem";
-			this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.workingFolderToolStripMenuItem.Text = "Working Folder";
 			this.workingFolderToolStripMenuItem.Click += new System.EventHandler(this.workingFolderToolStripMenuItem_Click);
+			// 
+			// sampleEditorToolStripMenuItem
+			// 
+			this.sampleEditorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.sampleEditorToolStripMenuItem.CheckOnClick = true;
+			this.sampleEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.sampleEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.sample;
+			this.sampleEditorToolStripMenuItem.Name = "sampleEditorToolStripMenuItem";
+			this.sampleEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.sampleEditorToolStripMenuItem.Text = "Sample Editor";
+			this.sampleEditorToolStripMenuItem.Click += new System.EventHandler(this.sampleEditorToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -807,9 +830,9 @@
 			this.richRawTrackData.DetectUrls = false;
 			this.richRawTrackData.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.richRawTrackData.ForeColor = System.Drawing.Color.White;
-			this.richRawTrackData.Location = new System.Drawing.Point(212, 448);
+			this.richRawTrackData.Location = new System.Drawing.Point(212, 388);
 			this.richRawTrackData.Name = "richRawTrackData";
-			this.richRawTrackData.Size = new System.Drawing.Size(1197, 74);
+			this.richRawTrackData.Size = new System.Drawing.Size(1198, 74);
 			this.richRawTrackData.TabIndex = 26;
 			this.richRawTrackData.Text = "raw track data";
 			this.richRawTrackData.Visible = false;
@@ -988,7 +1011,7 @@
 			this.trackEditor.RowTemplate.Height = 200;
 			this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.trackEditor.Size = new System.Drawing.Size(1197, 422);
+			this.trackEditor.Size = new System.Drawing.Size(1198, 362);
 			this.trackEditor.TabIndex = 40;
 			this.trackEditor.Visible = false;
 			this.trackEditor.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDoubleClick);
@@ -1025,7 +1048,7 @@
 			this.panelZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelZoom.Controls.Add(this.label10);
 			this.panelZoom.Controls.Add(this.trackZoom);
-			this.panelZoom.Location = new System.Drawing.Point(1259, -5);
+			this.panelZoom.Location = new System.Drawing.Point(1260, -5);
 			this.panelZoom.Name = "panelZoom";
 			this.panelZoom.Size = new System.Drawing.Size(131, 27);
 			this.panelZoom.TabIndex = 43;
@@ -1036,7 +1059,7 @@
 			this.btnRawImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnRawImport.BackColor = System.Drawing.Color.Gray;
 			this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnRawImport.Location = new System.Drawing.Point(136, 478);
+			this.btnRawImport.Location = new System.Drawing.Point(136, 418);
 			this.btnRawImport.Name = "btnRawImport";
 			this.btnRawImport.Size = new System.Drawing.Size(75, 44);
 			this.btnRawImport.TabIndex = 44;
@@ -1080,7 +1103,6 @@
 			this.panelLeaf.Controls.Add(this.label9);
 			this.panelLeaf.Controls.Add(this.btnRawImport);
 			this.panelLeaf.Controls.Add(this.label1);
-			this.panelLeaf.Controls.Add(this.trackEditor);
 			this.panelLeaf.Controls.Add(this.label8);
 			this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
 			this.panelLeaf.Controls.Add(this.label7);
@@ -1092,9 +1114,10 @@
 			this.panelLeaf.Controls.Add(this.label3);
 			this.panelLeaf.Controls.Add(this.label4);
 			this.panelLeaf.Controls.Add(this.dropObjects);
-			this.panelLeaf.Location = new System.Drawing.Point(307, 418);
+			this.panelLeaf.Controls.Add(this.trackEditor);
+			this.panelLeaf.Location = new System.Drawing.Point(308, 478);
 			this.panelLeaf.Name = "panelLeaf";
-			this.panelLeaf.Size = new System.Drawing.Size(1430, 555);
+			this.panelLeaf.Size = new System.Drawing.Size(1431, 495);
 			this.panelLeaf.TabIndex = 45;
 			// 
 			// btnLeafPanelTemplate
@@ -1159,12 +1182,11 @@
 			this.lblLeafMax.AutoSize = true;
 			this.lblLeafMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLeafMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLeafMax.Location = new System.Drawing.Point(1393, 1);
+			this.lblLeafMax.Location = new System.Drawing.Point(1394, 1);
 			this.lblLeafMax.Name = "lblLeafMax";
 			this.lblLeafMax.Size = new System.Drawing.Size(16, 15);
 			this.lblLeafMax.TabIndex = 52;
 			this.lblLeafMax.Text = "□";
-			this.lblLeafMax.Click += new System.EventHandler(this.lblLeafMax_Click);
 			// 
 			// lblLeafClose
 			// 
@@ -1172,13 +1194,15 @@
 			this.lblLeafClose.AutoSize = true;
 			this.lblLeafClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLeafClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLeafClose.Location = new System.Drawing.Point(1409, 1);
+			this.lblLeafClose.Location = new System.Drawing.Point(1410, 1);
 			this.lblLeafClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblLeafClose.Name = "lblLeafClose";
 			this.lblLeafClose.Size = new System.Drawing.Size(16, 15);
 			this.lblLeafClose.TabIndex = 51;
 			this.lblLeafClose.Text = "x";
 			this.lblLeafClose.Click += new System.EventHandler(this.lblLeafClose_Click);
+			this.lblLeafClose.MouseEnter += new System.EventHandler(this.lblLeafClose_MouseEnter);
+			this.lblLeafClose.MouseLeave += new System.EventHandler(this.lblLeafClose_MouseLeave);
 			// 
 			// btnTrackClear
 			// 
@@ -1542,7 +1566,7 @@
 			this.panelLevel.Controls.Add(this.panel1);
 			this.panelLevel.Location = new System.Drawing.Point(864, 29);
 			this.panelLevel.Name = "panelLevel";
-			this.panelLevel.Size = new System.Drawing.Size(997, 383);
+			this.panelLevel.Size = new System.Drawing.Size(875, 383);
 			this.panelLevel.TabIndex = 46;
 			// 
 			// label39
@@ -1884,7 +1908,7 @@
 			this.lvlLoopTracks.RowTemplate.Height = 20;
 			this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.lvlLoopTracks.Size = new System.Drawing.Size(400, 133);
+			this.lvlLoopTracks.Size = new System.Drawing.Size(278, 133);
 			this.lvlLoopTracks.TabIndex = 81;
 			this.lvlLoopTracks.Visible = false;
 			this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
@@ -1895,12 +1919,11 @@
 			this.lblLevelMax.AutoSize = true;
 			this.lblLevelMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLevelMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLevelMax.Location = new System.Drawing.Point(960, 1);
+			this.lblLevelMax.Location = new System.Drawing.Point(838, 1);
 			this.lblLevelMax.Name = "lblLevelMax";
 			this.lblLevelMax.Size = new System.Drawing.Size(16, 15);
 			this.lblLevelMax.TabIndex = 50;
 			this.lblLevelMax.Text = "□";
-			this.lblLevelMax.Click += new System.EventHandler(this.lblLevelMax_Click);
 			// 
 			// lblLvlClose
 			// 
@@ -1908,13 +1931,15 @@
 			this.lblLvlClose.AutoSize = true;
 			this.lblLvlClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLvlClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLvlClose.Location = new System.Drawing.Point(976, 1);
+			this.lblLvlClose.Location = new System.Drawing.Point(854, 1);
 			this.lblLvlClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblLvlClose.Name = "lblLvlClose";
 			this.lblLvlClose.Size = new System.Drawing.Size(16, 15);
 			this.lblLvlClose.TabIndex = 49;
 			this.lblLvlClose.Text = "x";
 			this.lblLvlClose.Click += new System.EventHandler(this.lblLvlClose_Click);
+			this.lblLvlClose.MouseEnter += new System.EventHandler(this.lblLvlClose_MouseEnter);
+			this.lblLvlClose.MouseLeave += new System.EventHandler(this.lblLvlClose_MouseLeave);
 			// 
 			// lvlSeqObjs
 			// 
@@ -1965,7 +1990,7 @@
 			this.lvlSeqObjs.RowTemplate.Height = 200;
 			this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.lvlSeqObjs.Size = new System.Drawing.Size(649, 185);
+			this.lvlSeqObjs.Size = new System.Drawing.Size(527, 185);
 			this.lvlSeqObjs.TabIndex = 68;
 			this.lvlSeqObjs.Visible = false;
 			this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
@@ -2175,6 +2200,7 @@
 			this.lvlLeafList.Size = new System.Drawing.Size(295, 180);
 			this.lvlLeafList.TabIndex = 74;
 			this.lvlLeafList.Visible = false;
+			this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
 			this.lvlLeafList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_RowEnter);
 			// 
 			// btnLvlSeqClear
@@ -2244,7 +2270,7 @@
 			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panel1.Controls.Add(this.label28);
 			this.panel1.Controls.Add(this.trackLvlVolumeZoom);
-			this.panel1.Location = new System.Drawing.Point(823, -5);
+			this.panel1.Location = new System.Drawing.Point(701, -5);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(131, 27);
 			this.panel1.TabIndex = 92;
@@ -2858,6 +2884,7 @@
 			this.masterLvlList.Size = new System.Drawing.Size(295, 226);
 			this.masterLvlList.TabIndex = 79;
 			this.masterLvlList.Visible = false;
+			this.masterLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellClick);
 			this.masterLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellValueChanged);
 			this.masterLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_RowEnter);
 			// 
@@ -2872,7 +2899,6 @@
 			this.lblMasterMax.Size = new System.Drawing.Size(16, 15);
 			this.lblMasterMax.TabIndex = 52;
 			this.lblMasterMax.Text = "□";
-			this.lblMasterMax.Click += new System.EventHandler(this.lblMasterMax_Click);
 			// 
 			// lblMasterClose
 			// 
@@ -2887,6 +2913,8 @@
 			this.lblMasterClose.TabIndex = 51;
 			this.lblMasterClose.Text = "x";
 			this.lblMasterClose.Click += new System.EventHandler(this.lblMasterClose_Click);
+			this.lblMasterClose.MouseEnter += new System.EventHandler(this.lblMasterClose_MouseEnter);
+			this.lblMasterClose.MouseLeave += new System.EventHandler(this.lblMasterClose_MouseLeave);
 			// 
 			// lblMasterName
 			// 
@@ -3367,6 +3395,7 @@
 			this.gateLvlList.Size = new System.Drawing.Size(370, 136);
 			this.gateLvlList.TabIndex = 80;
 			this.gateLvlList.Visible = false;
+			this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
 			this.gateLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellValueChanged);
 			this.gateLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_RowEnter);
 			// 
@@ -3410,6 +3439,8 @@
 			this.lblGateClose.TabIndex = 51;
 			this.lblGateClose.Text = "x";
 			this.lblGateClose.Click += new System.EventHandler(this.lblGateClose_Click);
+			this.lblGateClose.MouseEnter += new System.EventHandler(this.lblGateClose_MouseEnter);
+			this.lblGateClose.MouseLeave += new System.EventHandler(this.lblGateClose_MouseLeave);
 			// 
 			// lblGateName
 			// 
@@ -3549,6 +3580,8 @@
 			this.lblWorkClose.TabIndex = 51;
 			this.lblWorkClose.Text = "x";
 			this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
+			this.lblWorkClose.MouseEnter += new System.EventHandler(this.lblWorkClose_MouseEnter);
+			this.lblWorkClose.MouseLeave += new System.EventHandler(this.lblWorkClose_MouseLeave);
 			// 
 			// lblWorkingFolder
 			// 
@@ -3562,12 +3595,119 @@
 			this.lblWorkingFolder.TabIndex = 49;
 			this.lblWorkingFolder.Text = "Working Folder";
 			// 
+			// panelSample
+			// 
+			this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+			this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.panelSample.Controls.Add(this.label54);
+			this.panelSample.Controls.Add(this.sampleList);
+			this.panelSample.Controls.Add(this.lblSampleClose);
+			this.panelSample.Controls.Add(this.label57);
+			this.panelSample.Location = new System.Drawing.Point(372, 106);
+			this.panelSample.Name = "panelSample";
+			this.panelSample.Size = new System.Drawing.Size(454, 383);
+			this.panelSample.TabIndex = 134;
+			this.panelSample.Visible = false;
+			// 
+			// label54
+			// 
+			this.label54.AutoSize = true;
+			this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label54.ForeColor = System.Drawing.Color.White;
+			this.label54.Location = new System.Drawing.Point(3, 18);
+			this.label54.Name = "label54";
+			this.label54.Size = new System.Drawing.Size(54, 13);
+			this.label54.TabIndex = 116;
+			this.label54.Text = "Samples";
+			this.label54.Visible = false;
+			// 
+			// sampleList
+			// 
+			this.sampleList.AllowUserToAddRows = false;
+			this.sampleList.AllowUserToDeleteRows = false;
+			this.sampleList.AllowUserToResizeRows = false;
+			this.sampleList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.sampleList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.sampleList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+			this.sampleList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+			dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			dataGridViewCellStyle26.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle26.ForeColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.sampleList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
+			this.sampleList.ColumnHeadersHeight = 20;
+			this.sampleList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			dataGridViewCellStyle27.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle27.ForeColor = System.Drawing.Color.Silver;
+			dataGridViewCellStyle27.Format = "N2";
+			dataGridViewCellStyle27.NullValue = null;
+			dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.sampleList.DefaultCellStyle = dataGridViewCellStyle27;
+			this.sampleList.EnableHeadersVisualStyles = false;
+			this.sampleList.GridColor = System.Drawing.Color.Black;
+			this.sampleList.Location = new System.Drawing.Point(3, 34);
+			this.sampleList.MultiSelect = false;
+			this.sampleList.Name = "sampleList";
+			this.sampleList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+			dataGridViewCellStyle28.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
+			this.sampleList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.sampleList.RowTemplate.Height = 200;
+			this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+			this.sampleList.Size = new System.Drawing.Size(370, 136);
+			this.sampleList.TabIndex = 80;
+			this.sampleList.Visible = false;
+			// 
+			// lblSampleClose
+			// 
+			this.lblSampleClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblSampleClose.AutoSize = true;
+			this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblSampleClose.Location = new System.Drawing.Point(433, 1);
+			this.lblSampleClose.MinimumSize = new System.Drawing.Size(16, 2);
+			this.lblSampleClose.Name = "lblSampleClose";
+			this.lblSampleClose.Size = new System.Drawing.Size(16, 15);
+			this.lblSampleClose.TabIndex = 51;
+			this.lblSampleClose.Text = "x";
+			this.lblSampleClose.Click += new System.EventHandler(this.lblSampleClose_Click);
+			this.lblSampleClose.MouseEnter += new System.EventHandler(this.lblSampleClose_MouseEnter);
+			this.lblSampleClose.MouseLeave += new System.EventHandler(this.lblSampleClose_MouseLeave);
+			// 
+			// label57
+			// 
+			this.label57.AutoSize = true;
+			this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label57.ForeColor = System.Drawing.Color.White;
+			this.label57.Location = new System.Drawing.Point(-3, 0);
+			this.label57.Name = "label57";
+			this.label57.Size = new System.Drawing.Size(72, 13);
+			this.label57.TabIndex = 49;
+			this.label57.Text = "Sample Editor";
+			// 
 			// FormLeafEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.ClientSize = new System.Drawing.Size(1460, 869);
+			this.ClientSize = new System.Drawing.Size(1745, 869);
+			this.Controls.Add(this.panelSample);
 			this.Controls.Add(this.panelWorkingFolder);
 			this.Controls.Add(this.panelLevel);
 			this.Controls.Add(this.panelGate);
@@ -3614,6 +3754,9 @@
 			this.panelWorkingFolder.ResumeLayout(false);
 			this.panelWorkingFolder.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
+			this.panelSample.ResumeLayout(false);
+			this.panelSample.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -3825,6 +3968,12 @@
 		private System.Windows.Forms.Button btnGatePanelNew;
 		private System.Windows.Forms.Button btnGateRefresh;
 		private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+		private System.Windows.Forms.Panel panelSample;
+		private System.Windows.Forms.Label label54;
+		private System.Windows.Forms.DataGridView sampleList;
+		private System.Windows.Forms.Label lblSampleClose;
+		private System.Windows.Forms.Label label57;
+		private System.Windows.Forms.ToolStripMenuItem sampleEditorToolStripMenuItem;
 	}
 }
 

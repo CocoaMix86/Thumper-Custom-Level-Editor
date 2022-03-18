@@ -32,5 +32,11 @@
     <Setting Name="folderloc" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">4, 418</Value>
     </Setting>
+    <Setting Name="sampleeditorsize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">450, 380</Value>
+    </Setting>
+    <Setting Name="sampleeditorloc" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">370, 100</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

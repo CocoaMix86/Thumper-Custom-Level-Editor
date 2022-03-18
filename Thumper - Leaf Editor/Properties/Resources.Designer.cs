@@ -750,6 +750,16 @@ namespace Thumper___Leaf_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap sample {
+            get {
+                object obj = ResourceManager.GetObject("sample", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to level_2,drums,crakhed_pattern1.wav
         ///level_2,drums,crakhed_pattern2.wav
         ///level_2,drums,crakhed_pattern3.wav
@@ -789,13 +799,14 @@ namespace Thumper___Leaf_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;EntitySpawner&apos;,
-        ///&apos;obj_name&apos;: &apos;level_fingers3.spn&apos;,
+        ///&apos;obj_name&apos;: &apos;pyramid.spn&apos;,
         ///&apos;xfm_name&apos;: &apos;&apos;,
         ///&apos;constraint&apos;: &apos;kConstraintParent&apos;,
         ///&apos;pos&apos;: [0, 0, 0],
         ///&apos;rot_x&apos;: [1, 0, 0],
         ///&apos;rot_y&apos;: [0, 1, 0],
-        ///&apos;rot_z&apos;: [0, 0, 1],        /// [rest of string was truncated]&quot;;.
+        ///&apos;rot_z&apos;: [0, 0, 1],
+        ///&apos;scale [rest of string was truncated]&quot;;.
         /// </summary>
         public static string spn_default {
             get {

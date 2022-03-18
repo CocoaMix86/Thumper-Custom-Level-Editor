@@ -64,7 +64,7 @@ namespace Thumper___Leaf_Editor
 		private string _workingfolder;
 		public dynamic helptext;
 		public List<string> lvlsinworkfolder = new List<string>();
-		Panel _formactive;
+		public string _dgfocus;
 		#endregion
 
 
@@ -93,6 +93,8 @@ namespace Thumper___Leaf_Editor
 		private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelMaster.Visible = masterEditorToolStripMenuItem.Checked;
 		//Visbile - Working Folder
 		private void workingFolderToolStripMenuItem_Click(object sender, EventArgs e) => panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked;
+		//Visble - Sample Editor
+		private void sampleEditorToolStripMenuItem_Click(object sender, EventArgs e) => panelSample.Visible = sampleEditorToolStripMenuItem.Checked;
 
 		///Toolstrip - HELP
 		//About...
@@ -141,6 +143,8 @@ namespace Thumper___Leaf_Editor
 			Properties.Settings.Default.mastereditorsize = panelMaster.Size;
 			Properties.Settings.Default.folderloc = panelWorkingFolder.Location;
 			Properties.Settings.Default.foldersize = panelWorkingFolder.Size;
+			Properties.Settings.Default.sampleeditorsize = panelSample.Size;
+			Properties.Settings.Default.sampleeditorloc = panelSample.Location;
 
 			Properties.Settings.Default.Save();
 		}
@@ -157,8 +161,6 @@ namespace Thumper___Leaf_Editor
 			InitializeLvlStuff();
 			InitializeMasterStuff();
 			InitializeGateStuff();
-			//_formactive is the panel that was last set to Max
-			_formactive = panelLeaf;
 			//set panels to be resizeable
 			ControlMoverOrResizer.Init(panelLeaf);
 			ControlMoverOrResizer.Init(panelLevel);
@@ -166,6 +168,7 @@ namespace Thumper___Leaf_Editor
 			ControlMoverOrResizer.Init(panelGate);
 			ControlMoverOrResizer.Init(panelWorkingFolder);
 			ControlMoverOrResizer.Init(workingfolderFiles, panelWorkingFolder);
+			ControlMoverOrResizer.Init(panelSample);
 			ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
 
 			///import help text
@@ -257,6 +260,8 @@ namespace Thumper___Leaf_Editor
 			panelMaster.Size = Properties.Settings.Default.mastereditorsize;
 			panelWorkingFolder.Location = Properties.Settings.Default.folderloc;
 			panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
+			panelSample.Size = Properties.Settings.Default.sampleeditorsize;
+			panelSample.Location = Properties.Settings.Default.sampleeditorloc;
 		}
 
 		public void CreateCustomLevelFolder(DialogInput input)
@@ -357,18 +362,70 @@ namespace Thumper___Leaf_Editor
 		///FORM RESIZE
 		///PANEL LABELS - change size or close
 		private void lblMasterClose_Click(object sender, EventArgs e) => masterEditorToolStripMenuItem.PerformClick();
+		private void lblMasterClose_MouseEnter(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.Red;
+			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
+		}
+		private void lblMasterClose_MouseLeave(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
+			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
+		}
 		private void lblLvlClose_Click(object sender, EventArgs e) => levelEditorToolStripMenuItem.PerformClick();
+		private void lblLvlClose_MouseEnter(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.Red;
+			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
+		}
+		private void lblLvlClose_MouseLeave(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
+			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
+		}
 		private void lblLeafClose_Click(object sender, EventArgs e) => leafEditorToolStripMenuItem.PerformClick();
+		private void lblLeafClose_MouseEnter(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.Red;
+			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
+		}
+		private void lblLeafClose_MouseLeave(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
+			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
+		}
 		private void lblGateClose_Click(object sender, EventArgs e) => gateEditorToolStripMenuItem.PerformClick();
+		private void lblGateClose_MouseEnter(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.Red;
+			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
+		}
+		private void lblGateClose_MouseLeave(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
+			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
+		}
 		private void lblWorkClose_Click(object sender, EventArgs e) => workingFolderToolStripMenuItem.PerformClick();
-		private void lblLeafMax_Click(object sender, EventArgs e)
+		private void lblWorkClose_MouseEnter(object sender, EventArgs e)
 		{
+			(sender as Label).BackColor = Color.Red;
+			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
 		}
-		private void lblLevelMax_Click(object sender, EventArgs e)
+		private void lblWorkClose_MouseLeave(object sender, EventArgs e)
 		{
+			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
+			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
 		}
-		private void lblMasterMax_Click(object sender, EventArgs e)
+		private void lblSampleClose_Click(object sender, EventArgs e) => sampleEditorToolStripMenuItem.PerformClick();
+		private void lblSampleClose_MouseEnter(object sender, EventArgs e)
 		{
+			(sender as Label).BackColor = Color.Red;
+			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
+		}
+		private void lblSampleClose_MouseLeave(object sender, EventArgs e)
+		{
+			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
+			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
 		}
 
 		/// 

@@ -142,5 +142,29 @@ namespace Thumper___Leaf_Editor.Properties {
                 this["folderloc"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("450, 380")]
+        public global::System.Drawing.Size sampleeditorsize {
+            get {
+                return ((global::System.Drawing.Size)(this["sampleeditorsize"]));
+            }
+            set {
+                this["sampleeditorsize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("370, 100")]
+        public global::System.Drawing.Point sampleeditorloc {
+            get {
+                return ((global::System.Drawing.Point)(this["sampleeditorloc"]));
+            }
+            set {
+                this["sampleeditorloc"] = value;
+            }
+        }
     }
 }

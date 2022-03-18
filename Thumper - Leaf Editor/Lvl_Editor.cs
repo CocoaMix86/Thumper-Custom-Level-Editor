@@ -44,9 +44,32 @@ namespace Thumper___Leaf_Editor
 
 		///DGV LVLLEAFLIST
 		//Selected row changed
+
+		private void lvlLeafList_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			//lvlLeafList_RowEnter(sender, e);
+			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
+				string _file = (_lvlleafs[e.RowIndex].leafname).Replace(".leaf", "");
+				dynamic _load;
+				try {
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{_file}.txt"), "#.*", ""));
+				}
+				catch {
+					MessageBox.Show($@"Could not locate ""leaf_{_file}.txt"" in the same folder as this lvl. Did you add this leaf from a different folder?");
+					return;
+				}
+
+				_loadedleaf = $@"{workingfolder}\leaf_{_file}.txt";
+				LoadLeaf(_load);
+				LvlUpdatePaths(e.RowIndex);
+			}
+		}
 		private void lvlLeafList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
-			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
+			if (_dgfocus != "lvlLeafList") {
+				_dgfocus = "lvlLeafList";
+			}/*
+			else if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
 				string _file = (_lvlleafs[e.RowIndex].leafname).Replace(".leaf", "");
 				dynamic _load;
 				try {
@@ -59,7 +82,7 @@ namespace Thumper___Leaf_Editor
 				_loadedleaf = $@"{workingfolder}\leaf_{_file}.txt";
 				LoadLeaf(_load);
 				LvlUpdatePaths(e.RowIndex);
-			}
+			}*/
 		}
 		///DGV LVLLEAFPATHS
 		//Cell value changed
