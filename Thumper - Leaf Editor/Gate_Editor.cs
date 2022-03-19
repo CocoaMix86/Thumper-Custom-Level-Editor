@@ -375,6 +375,10 @@ namespace Thumper___Leaf_Editor
 
 		public void LoadGate(dynamic _load)
 		{
+			//if Gate Editor is hidden, show it when selecting a gate
+			if (panelGate.Visible == false)
+				gateEditorToolStripMenuItem.PerformClick();
+			//detect if file is actually Gate or not
 			if ((string)_load["obj_type"] != "SequinGate") {
 				MessageBox.Show("This does not appear to be a gate file!");
 				return;
@@ -394,9 +398,6 @@ namespace Thumper___Leaf_Editor
 					sentrytype = _lvl["sentry_type"]
 				});
 			}
-			///select the first lvl
-			if (_gatelvls.Count > 0)
-				gateLvlList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
 
 			//populate dropdowns
 			dropGateBoss.SelectedValue = (string)_load["spn_name"];

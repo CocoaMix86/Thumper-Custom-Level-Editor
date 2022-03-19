@@ -99,6 +99,14 @@
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.tentaclesPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.bringToFrontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bTFLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bTFLvlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bTFGateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bTFMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bTFFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bTFSampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.label1 = new System.Windows.Forms.Label();
 			this.numericUpDown_LeafLength = new System.Windows.Forms.NumericUpDown();
 			this.richRawTrackData = new System.Windows.Forms.RichTextBox();
@@ -145,6 +153,7 @@
 			this.lblTrackFileName = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.dropTimeSig = new System.Windows.Forms.ComboBox();
+			this.btnSaveLeaf = new System.Windows.Forms.Button();
 			this.panelLevel = new System.Windows.Forms.Panel();
 			this.label39 = new System.Windows.Forms.Label();
 			this.label29 = new System.Windows.Forms.Label();
@@ -304,7 +313,15 @@
             this.fileToolStripMenuItem1,
             this.interpolatorToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.bringToFrontToolStripMenuItem,
+            this.bTFLeafToolStripMenuItem,
+            this.bTFLvlToolStripMenuItem,
+            this.bTFGateToolStripMenuItem,
+            this.bTFMasterToolStripMenuItem,
+            this.bTFFolderToolStripMenuItem,
+            this.bTFSampleToolStripMenuItem});
 			this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
@@ -328,7 +345,7 @@
 			this.fileToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
 			this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
 			this.fileToolStripMenuItem1.Size = new System.Drawing.Size(38, 18);
-			this.fileToolStripMenuItem1.Text = "File";
+			this.fileToolStripMenuItem1.Text = "&File";
 			// 
 			// saveToolStripMenuItem1
 			// 
@@ -663,7 +680,7 @@
 			this.interpolatorToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+i";
 			this.interpolatorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
 			this.interpolatorToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-			this.interpolatorToolStripMenuItem.Text = "Interpolator";
+			this.interpolatorToolStripMenuItem.Text = "&Interpolator";
 			this.interpolatorToolStripMenuItem.Click += new System.EventHandler(this.interpolatorToolStripMenuItem_Click);
 			// 
 			// viewToolStripMenuItem
@@ -678,7 +695,7 @@
 			this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 18);
-			this.viewToolStripMenuItem.Text = "View";
+			this.viewToolStripMenuItem.Text = "&View";
 			// 
 			// leafEditorToolStripMenuItem
 			// 
@@ -764,7 +781,7 @@
 			this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(43, 18);
-			this.helpToolStripMenuItem.Text = "Help";
+			this.helpToolStripMenuItem.Text = "&Help";
 			// 
 			// aboutToolStripMenuItem
 			// 
@@ -792,6 +809,85 @@
 			this.tentaclesPathsToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
 			this.tentaclesPathsToolStripMenuItem.Text = "Tentacles/Paths Visuals";
 			this.tentaclesPathsToolStripMenuItem.Click += new System.EventHandler(this.tentaclesPathsToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Enabled = false;
+			this.toolStripMenuItem1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.toolStripMenuItem1.Margin = new System.Windows.Forms.Padding(-10, 0, -10, 0);
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.ShowShortcutKeys = false;
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(23, 20);
+			this.toolStripMenuItem1.Text = "|";
+			// 
+			// bringToFrontToolStripMenuItem
+			// 
+			this.bringToFrontToolStripMenuItem.Enabled = false;
+			this.bringToFrontToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
+			this.bringToFrontToolStripMenuItem.ShowShortcutKeys = false;
+			this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(94, 18);
+			this.bringToFrontToolStripMenuItem.Text = "Bring to Front";
+			// 
+			// bTFLeafToolStripMenuItem
+			// 
+			this.bTFLeafToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.bTFLeafToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.leaf;
+			this.bTFLeafToolStripMenuItem.Margin = new System.Windows.Forms.Padding(-10, 0, 0, 0);
+			this.bTFLeafToolStripMenuItem.Name = "bTFLeafToolStripMenuItem";
+			this.bTFLeafToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+			this.bTFLeafToolStripMenuItem.Text = "BTF_Leaf";
+			this.bTFLeafToolStripMenuItem.Click += new System.EventHandler(this.bTFLeafToolStripMenuItem_Click);
+			// 
+			// bTFLvlToolStripMenuItem
+			// 
+			this.bTFLvlToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.bTFLvlToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.lvl;
+			this.bTFLvlToolStripMenuItem.Margin = new System.Windows.Forms.Padding(-5, 0, 0, 0);
+			this.bTFLvlToolStripMenuItem.Name = "bTFLvlToolStripMenuItem";
+			this.bTFLvlToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+			this.bTFLvlToolStripMenuItem.Text = "BTF_Lvl";
+			this.bTFLvlToolStripMenuItem.Click += new System.EventHandler(this.bTFLvlToolStripMenuItem_Click);
+			// 
+			// bTFGateToolStripMenuItem
+			// 
+			this.bTFGateToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.bTFGateToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.gate;
+			this.bTFGateToolStripMenuItem.Margin = new System.Windows.Forms.Padding(-5, 0, 0, 0);
+			this.bTFGateToolStripMenuItem.Name = "bTFGateToolStripMenuItem";
+			this.bTFGateToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+			this.bTFGateToolStripMenuItem.Text = "BTF_Gate";
+			this.bTFGateToolStripMenuItem.Click += new System.EventHandler(this.bTFGateToolStripMenuItem_Click);
+			// 
+			// bTFMasterToolStripMenuItem
+			// 
+			this.bTFMasterToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.bTFMasterToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.master;
+			this.bTFMasterToolStripMenuItem.Margin = new System.Windows.Forms.Padding(-5, 0, 0, 0);
+			this.bTFMasterToolStripMenuItem.Name = "bTFMasterToolStripMenuItem";
+			this.bTFMasterToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+			this.bTFMasterToolStripMenuItem.Text = "BTF_Master";
+			this.bTFMasterToolStripMenuItem.Click += new System.EventHandler(this.bTFMasterToolStripMenuItem_Click);
+			// 
+			// bTFFolderToolStripMenuItem
+			// 
+			this.bTFFolderToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.bTFFolderToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_openfile;
+			this.bTFFolderToolStripMenuItem.Margin = new System.Windows.Forms.Padding(-5, 0, 0, 0);
+			this.bTFFolderToolStripMenuItem.Name = "bTFFolderToolStripMenuItem";
+			this.bTFFolderToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+			this.bTFFolderToolStripMenuItem.Text = "BTF_Folder";
+			this.bTFFolderToolStripMenuItem.Click += new System.EventHandler(this.bTFFolderToolStripMenuItem_Click);
+			// 
+			// bTFSampleToolStripMenuItem
+			// 
+			this.bTFSampleToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.bTFSampleToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.sample;
+			this.bTFSampleToolStripMenuItem.Margin = new System.Windows.Forms.Padding(-5, 0, 0, 0);
+			this.bTFSampleToolStripMenuItem.Name = "bTFSampleToolStripMenuItem";
+			this.bTFSampleToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+			this.bTFSampleToolStripMenuItem.Text = "BTF_Sample";
+			this.bTFSampleToolStripMenuItem.Click += new System.EventHandler(this.bTFSampleToolStripMenuItem_Click);
 			// 
 			// label1
 			// 
@@ -1106,15 +1202,16 @@
 			this.panelLeaf.Controls.Add(this.label8);
 			this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
 			this.panelLeaf.Controls.Add(this.label7);
-			this.panelLeaf.Controls.Add(this.panelZoom);
 			this.panelLeaf.Controls.Add(this.dropParamPath);
-			this.panelLeaf.Controls.Add(this.label5);
 			this.panelLeaf.Controls.Add(this.label6);
 			this.panelLeaf.Controls.Add(this.richRawTrackData);
 			this.panelLeaf.Controls.Add(this.label3);
 			this.panelLeaf.Controls.Add(this.label4);
 			this.panelLeaf.Controls.Add(this.dropObjects);
 			this.panelLeaf.Controls.Add(this.trackEditor);
+			this.panelLeaf.Controls.Add(this.btnSaveLeaf);
+			this.panelLeaf.Controls.Add(this.label5);
+			this.panelLeaf.Controls.Add(this.panelZoom);
 			this.panelLeaf.Location = new System.Drawing.Point(308, 478);
 			this.panelLeaf.Name = "panelLeaf";
 			this.panelLeaf.Size = new System.Drawing.Size(1431, 495);
@@ -1492,6 +1589,7 @@
 			// lblTrackFileName
 			// 
 			this.lblTrackFileName.AutoSize = true;
+			this.lblTrackFileName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.lblTrackFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblTrackFileName.ForeColor = System.Drawing.Color.White;
 			this.lblTrackFileName.Location = new System.Drawing.Point(-2, 0);
@@ -1524,6 +1622,20 @@
 			this.dropTimeSig.TabIndex = 45;
 			this.dropTimeSig.Visible = false;
 			this.dropTimeSig.SelectedIndexChanged += new System.EventHandler(this.dropTimeSig_SelectedIndexChanged);
+			// 
+			// btnSaveLeaf
+			// 
+			this.btnSaveLeaf.Enabled = false;
+			this.btnSaveLeaf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnSaveLeaf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+			this.btnSaveLeaf.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
+			this.btnSaveLeaf.Location = new System.Drawing.Point(53, -5);
+			this.btnSaveLeaf.Name = "btnSaveLeaf";
+			this.btnSaveLeaf.Size = new System.Drawing.Size(25, 25);
+			this.btnSaveLeaf.TabIndex = 97;
+			this.btnSaveLeaf.UseVisualStyleBackColor = true;
+			this.btnSaveLeaf.Visible = false;
+			this.btnSaveLeaf.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
 			// panelLevel
 			// 
@@ -3603,7 +3715,7 @@
 			this.panelSample.Controls.Add(this.sampleList);
 			this.panelSample.Controls.Add(this.lblSampleClose);
 			this.panelSample.Controls.Add(this.label57);
-			this.panelSample.Location = new System.Drawing.Point(372, 106);
+			this.panelSample.Location = new System.Drawing.Point(372, 79);
 			this.panelSample.Name = "panelSample";
 			this.panelSample.Size = new System.Drawing.Size(454, 383);
 			this.panelSample.TabIndex = 134;
@@ -3974,6 +4086,15 @@
 		private System.Windows.Forms.Label lblSampleClose;
 		private System.Windows.Forms.Label label57;
 		private System.Windows.Forms.ToolStripMenuItem sampleEditorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem bringToFrontToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bTFLeafToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bTFLvlToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bTFGateToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bTFMasterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bTFFolderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bTFSampleToolStripMenuItem;
+		private System.Windows.Forms.Button btnSaveLeaf;
 	}
 }
 

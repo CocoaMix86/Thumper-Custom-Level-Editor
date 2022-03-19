@@ -75,9 +75,9 @@ namespace Thumper___Leaf_Editor
 			dropMasterLvlLeader.SelectedIndexChanged -= new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
 			dropMasterLvlRest.SelectedIndexChanged -= new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
 			//load the selected item
-			if ((string)_load["obj_type"] == "SequinLevel")
+			if ((string)_load["obj_type"] == "SequinLevel") 
 				LoadLvl(_load);
-			else if ((string)_load["obj_type"] == "SequinGate")
+			else if ((string)_load["obj_type"] == "SequinGate") 
 				LoadGate(_load);
 			dropMasterLvlLeader.SelectedItem = _masterlvls[e.RowIndex].checkpoint_leader;
 			dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
@@ -428,9 +428,6 @@ namespace Thumper___Leaf_Editor
 			LoadConfig();
 			///set save flag (master just loaded, has no changes)
 			SaveMaster(true);
-			///select the first lvl
-			if (_masterlvls.Count > 0)
-				masterLvlList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
 		}
 
 		public void LoadConfig()

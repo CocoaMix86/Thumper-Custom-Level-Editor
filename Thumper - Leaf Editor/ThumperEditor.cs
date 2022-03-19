@@ -107,6 +107,14 @@ namespace Thumper___Leaf_Editor
 		//Tentacles, Paths...
 		private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1wG1Ik_50sd2KeUaX19H8e1jjgl-avf-d8SqZk7rxrkQ");
 
+		///Toolstrip - BRING TO FRONT items
+		private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) => panelLeaf.BringToFront();
+		private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) => panelLevel.BringToFront();
+		private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) => panelGate.BringToFront();
+		private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) => panelMaster.BringToFront();
+		private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) => panelWorkingFolder.BringToFront();
+		private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) => panelSample.BringToFront();
+
 		/// NEW CUSTOM LEVEL FOLDER
 		private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
 		{

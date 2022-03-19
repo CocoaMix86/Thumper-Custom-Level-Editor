@@ -41,18 +41,26 @@ namespace Thumper___Leaf_Editor
 			if ((string)_load["obj_type"] == "SequinMaster") {
 				_loadedmastertemp = $@"{workingfolder}\{workingfolderFiles[0, e.RowIndex].Value}";
 				LoadMaster(_load);
+				if (panelMaster.Visible == false)
+					masterEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinGate") {
 				_loadedgatetemp = $@"{workingfolder}\{workingfolderFiles[0, e.RowIndex].Value}";
 				LoadGate(_load);
+				if (panelGate.Visible == false)
+					gateEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLevel") {
 				_loadedlvltemp = $@"{workingfolder}\{workingfolderFiles[0, e.RowIndex].Value}";
 				LoadLvl(_load);
+				if (panelLevel.Visible == false)
+					levelEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLeaf") {
 				_loadedleaf = $@"{workingfolder}\{workingfolderFiles[0, e.RowIndex].Value}";
 				LoadLeaf(_load);
+				if (panelLeaf.Visible == false)
+					leafEditorToolStripMenuItem.PerformClick();
 			}
 			else if (workingfolderFiles[0, e.RowIndex].Value.ToString().Contains("LEVEL DETAILS")) {
 				editLevelDetailsToolStripMenuItem_Click(null, null);

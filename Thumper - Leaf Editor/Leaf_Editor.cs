@@ -538,9 +538,15 @@ namespace Thumper___Leaf_Editor
 			if (!save) {
 				if (!lblTrackFileName.Text.Contains("(unsaved)"))
 					lblTrackFileName.Text += " (unsaved)";
+				btnSaveLeaf.Location = new Point(lblTrackFileName.Location.X + lblTrackFileName.Size.Width, btnSaveLeaf.Location.Y);
+				btnSaveLeaf.Enabled = true;
+				lblTrackFileName.BackColor = Color.Maroon;
 			}
 			else {
 				lblTrackFileName.Text = lblTrackFileName.Text.Replace(" (unsaved)", "");
+				btnSaveLeaf.Location = new Point(lblTrackFileName.Location.X + lblTrackFileName.Size.Width, btnSaveLeaf.Location.Y);
+				btnSaveLeaf.Enabled = false;
+				lblTrackFileName.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}
 
@@ -681,6 +687,9 @@ namespace Thumper___Leaf_Editor
 		///Update DGV from _tracks
 		public void LoadLeaf(dynamic _load /*List<string> _load*/)
 		{
+			//if Leaf Editor is hidden, show it when a leaf is selected
+			if (panelLeaf.Visible == false)
+				leafEditorToolStripMenuItem.PerformClick();
 			//detect if file is actually Leaf or not
 			if ((string)_load["obj_type"] != "SequinLeaf") {
 				MessageBox.Show("This does not appear to be a leaf file!");

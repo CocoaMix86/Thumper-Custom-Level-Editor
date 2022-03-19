@@ -451,6 +451,10 @@ namespace Thumper___Leaf_Editor
 
 		public void LoadLvl(dynamic _load)
 		{
+			//if Lvl Editor is hidden, show it when a lvl is selected from anywhere
+			if (panelLevel.Visible == false)
+				levelEditorToolStripMenuItem.PerformClick();
+			//detect if file is actually Lvl or not
 			if ((string)_load["obj_type"] != "SequinLevel") {
 				MessageBox.Show("This does not appear to be a lvl file!");
 				return;
@@ -500,9 +504,6 @@ namespace Thumper___Leaf_Editor
 				r.HeaderCell.Value = "Volume Track " + r.Index;
 			///mark that lvl is saved (just freshly loaded)
 			SaveLvl(true);
-			//select the first leaf
-			if (_lvlleafs.Count > 0)
-				lvlLeafList_RowEnter(null, new DataGridViewCellEventArgs(0, 0));
 		}
 
 		public void InitializeLvlStuff()
