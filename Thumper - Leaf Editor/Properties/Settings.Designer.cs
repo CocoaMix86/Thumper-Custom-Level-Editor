@@ -166,5 +166,41 @@ namespace Thumper___Leaf_Editor.Properties {
                 this["sampleeditorloc"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("64, 0, 0")]
+        public global::System.Drawing.Color custom_bgcolor {
+            get {
+                return ((global::System.Drawing.Color)(this["custom_bgcolor"]));
+            }
+            set {
+                this["custom_bgcolor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Maroon")]
+        public global::System.Drawing.Color custom_menucolor {
+            get {
+                return ((global::System.Drawing.Color)(this["custom_menucolor"]));
+            }
+            set {
+                this["custom_menucolor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color custom_panelcolor {
+            get {
+                return ((global::System.Drawing.Color)(this["custom_panelcolor"]));
+            }
+            set {
+                this["custom_panelcolor"] = value;
+            }
+        }
     }
 }

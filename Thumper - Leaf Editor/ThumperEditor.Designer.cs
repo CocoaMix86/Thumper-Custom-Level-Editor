@@ -95,6 +95,8 @@
 			this.masterEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.workingFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.sampleEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+			this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -194,7 +196,6 @@
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
 			this.btnSaveLvl = new System.Windows.Forms.Button();
 			this.panelMaster = new System.Windows.Forms.Panel();
-			this.btnSaveMaster = new System.Windows.Forms.Button();
 			this.btnMasterOpenRest = new System.Windows.Forms.Button();
 			this.btnMasterOpenLeader = new System.Windows.Forms.Button();
 			this.label37 = new System.Windows.Forms.Label();
@@ -233,6 +234,7 @@
 			this.lblMasterClose = new System.Windows.Forms.Label();
 			this.lblMasterName = new System.Windows.Forms.Label();
 			this.lblConfigColorHelp = new System.Windows.Forms.Label();
+			this.btnSaveMaster = new System.Windows.Forms.Button();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.panelGate = new System.Windows.Forms.Panel();
 			this.btnGateRefresh = new System.Windows.Forms.Button();
@@ -694,7 +696,9 @@
             this.gateEditorToolStripMenuItem,
             this.masterEditorToolStripMenuItem,
             this.workingFolderToolStripMenuItem,
-            this.sampleEditorToolStripMenuItem});
+            this.sampleEditorToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.customizeToolStripMenuItem});
 			this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 18);
@@ -774,6 +778,21 @@
 			this.sampleEditorToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
 			this.sampleEditorToolStripMenuItem.Text = "Sample Editor";
 			this.sampleEditorToolStripMenuItem.Click += new System.EventHandler(this.sampleEditorToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(155, 6);
+			this.toolStripMenuItem2.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
+			// 
+			// customizeToolStripMenuItem
+			// 
+			this.customizeToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+			this.customizeToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+			this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
+			this.customizeToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+			this.customizeToolStripMenuItem.Text = "Customize...";
+			this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -1282,7 +1301,7 @@
 			this.lblLeafMax.AutoSize = true;
 			this.lblLeafMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLeafMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLeafMax.Location = new System.Drawing.Point(1394, 1);
+			this.lblLeafMax.Location = new System.Drawing.Point(1395, -1);
 			this.lblLeafMax.Name = "lblLeafMax";
 			this.lblLeafMax.Size = new System.Drawing.Size(16, 15);
 			this.lblLeafMax.TabIndex = 52;
@@ -1294,15 +1313,15 @@
 			this.lblLeafClose.AutoSize = true;
 			this.lblLeafClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLeafClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLeafClose.Location = new System.Drawing.Point(1410, 1);
+			this.lblLeafClose.Location = new System.Drawing.Point(1411, -1);
 			this.lblLeafClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblLeafClose.Name = "lblLeafClose";
 			this.lblLeafClose.Size = new System.Drawing.Size(16, 15);
 			this.lblLeafClose.TabIndex = 51;
 			this.lblLeafClose.Text = "x";
 			this.lblLeafClose.Click += new System.EventHandler(this.lblLeafClose_Click);
-			this.lblLeafClose.MouseEnter += new System.EventHandler(this.lblLeafClose_MouseEnter);
-			this.lblLeafClose.MouseLeave += new System.EventHandler(this.lblLeafClose_MouseLeave);
+			this.lblLeafClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
+			this.lblLeafClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
 			// 
 			// btnTrackClear
 			// 
@@ -2036,7 +2055,7 @@
 			this.lblLevelMax.AutoSize = true;
 			this.lblLevelMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLevelMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLevelMax.Location = new System.Drawing.Point(838, 1);
+			this.lblLevelMax.Location = new System.Drawing.Point(839, -1);
 			this.lblLevelMax.Name = "lblLevelMax";
 			this.lblLevelMax.Size = new System.Drawing.Size(16, 15);
 			this.lblLevelMax.TabIndex = 50;
@@ -2048,15 +2067,15 @@
 			this.lblLvlClose.AutoSize = true;
 			this.lblLvlClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblLvlClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblLvlClose.Location = new System.Drawing.Point(854, 1);
+			this.lblLvlClose.Location = new System.Drawing.Point(855, -1);
 			this.lblLvlClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblLvlClose.Name = "lblLvlClose";
 			this.lblLvlClose.Size = new System.Drawing.Size(16, 15);
 			this.lblLvlClose.TabIndex = 49;
 			this.lblLvlClose.Text = "x";
 			this.lblLvlClose.Click += new System.EventHandler(this.lblLvlClose_Click);
-			this.lblLvlClose.MouseEnter += new System.EventHandler(this.lblLvlClose_MouseEnter);
-			this.lblLvlClose.MouseLeave += new System.EventHandler(this.lblLvlClose_MouseLeave);
+			this.lblLvlClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
+			this.lblLvlClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
 			// 
 			// lvlSeqObjs
 			// 
@@ -2478,20 +2497,6 @@
 			this.panelMaster.Name = "panelMaster";
 			this.panelMaster.Size = new System.Drawing.Size(462, 383);
 			this.panelMaster.TabIndex = 47;
-			// 
-			// btnSaveMaster
-			// 
-			this.btnSaveMaster.Enabled = false;
-			this.btnSaveMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnSaveMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-			this.btnSaveMaster.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
-			this.btnSaveMaster.Location = new System.Drawing.Point(64, -5);
-			this.btnSaveMaster.Name = "btnSaveMaster";
-			this.btnSaveMaster.Size = new System.Drawing.Size(25, 25);
-			this.btnSaveMaster.TabIndex = 134;
-			this.btnSaveMaster.UseVisualStyleBackColor = true;
-			this.btnSaveMaster.Visible = false;
-			this.btnSaveMaster.Click += new System.EventHandler(this.mastersaveToolStripMenuItem_Click);
 			// 
 			// btnMasterOpenRest
 			// 
@@ -3041,7 +3046,7 @@
 			this.lblMasterMax.AutoSize = true;
 			this.lblMasterMax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterMax.Location = new System.Drawing.Point(425, 1);
+			this.lblMasterMax.Location = new System.Drawing.Point(426, -1);
 			this.lblMasterMax.Name = "lblMasterMax";
 			this.lblMasterMax.Size = new System.Drawing.Size(16, 15);
 			this.lblMasterMax.TabIndex = 52;
@@ -3053,15 +3058,15 @@
 			this.lblMasterClose.AutoSize = true;
 			this.lblMasterClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblMasterClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblMasterClose.Location = new System.Drawing.Point(441, 1);
+			this.lblMasterClose.Location = new System.Drawing.Point(442, -1);
 			this.lblMasterClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblMasterClose.Name = "lblMasterClose";
 			this.lblMasterClose.Size = new System.Drawing.Size(16, 15);
 			this.lblMasterClose.TabIndex = 51;
 			this.lblMasterClose.Text = "x";
 			this.lblMasterClose.Click += new System.EventHandler(this.lblMasterClose_Click);
-			this.lblMasterClose.MouseEnter += new System.EventHandler(this.lblMasterClose_MouseEnter);
-			this.lblMasterClose.MouseLeave += new System.EventHandler(this.lblMasterClose_MouseLeave);
+			this.lblMasterClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
+			this.lblMasterClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
 			// 
 			// lblMasterName
 			// 
@@ -3090,6 +3095,20 @@
 			this.lblConfigColorHelp.Text = "?";
 			this.lblConfigColorHelp.Visible = false;
 			this.lblConfigColorHelp.Click += new System.EventHandler(this.lblConfigColorHelp_Click);
+			// 
+			// btnSaveMaster
+			// 
+			this.btnSaveMaster.Enabled = false;
+			this.btnSaveMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnSaveMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+			this.btnSaveMaster.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
+			this.btnSaveMaster.Location = new System.Drawing.Point(64, -5);
+			this.btnSaveMaster.Name = "btnSaveMaster";
+			this.btnSaveMaster.Size = new System.Drawing.Size(25, 25);
+			this.btnSaveMaster.TabIndex = 134;
+			this.btnSaveMaster.UseVisualStyleBackColor = true;
+			this.btnSaveMaster.Visible = false;
+			this.btnSaveMaster.Click += new System.EventHandler(this.mastersaveToolStripMenuItem_Click);
 			// 
 			// panelGate
 			// 
@@ -3569,7 +3588,7 @@
 			this.label48.AutoSize = true;
 			this.label48.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label48.Location = new System.Drawing.Point(349, 1);
+			this.label48.Location = new System.Drawing.Point(350, -1);
 			this.label48.Name = "label48";
 			this.label48.Size = new System.Drawing.Size(16, 15);
 			this.label48.TabIndex = 52;
@@ -3581,15 +3600,15 @@
 			this.lblGateClose.AutoSize = true;
 			this.lblGateClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblGateClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblGateClose.Location = new System.Drawing.Point(365, 1);
+			this.lblGateClose.Location = new System.Drawing.Point(366, -1);
 			this.lblGateClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblGateClose.Name = "lblGateClose";
 			this.lblGateClose.Size = new System.Drawing.Size(16, 15);
 			this.lblGateClose.TabIndex = 51;
 			this.lblGateClose.Text = "x";
 			this.lblGateClose.Click += new System.EventHandler(this.lblGateClose_Click);
-			this.lblGateClose.MouseEnter += new System.EventHandler(this.lblGateClose_MouseEnter);
-			this.lblGateClose.MouseLeave += new System.EventHandler(this.lblGateClose_MouseLeave);
+			this.lblGateClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
+			this.lblGateClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
 			// 
 			// lblGateName
 			// 
@@ -3737,15 +3756,15 @@
 			this.lblWorkClose.AutoSize = true;
 			this.lblWorkClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblWorkClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblWorkClose.Location = new System.Drawing.Point(276, 1);
+			this.lblWorkClose.Location = new System.Drawing.Point(277, -1);
 			this.lblWorkClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblWorkClose.Name = "lblWorkClose";
 			this.lblWorkClose.Size = new System.Drawing.Size(16, 15);
 			this.lblWorkClose.TabIndex = 51;
 			this.lblWorkClose.Text = "x";
 			this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
-			this.lblWorkClose.MouseEnter += new System.EventHandler(this.lblWorkClose_MouseEnter);
-			this.lblWorkClose.MouseLeave += new System.EventHandler(this.lblWorkClose_MouseLeave);
+			this.lblWorkClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
+			this.lblWorkClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
 			// 
 			// lblWorkingFolder
 			// 
@@ -3844,15 +3863,15 @@
 			this.lblSampleClose.AutoSize = true;
 			this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblSampleClose.Location = new System.Drawing.Point(433, 1);
+			this.lblSampleClose.Location = new System.Drawing.Point(434, -1);
 			this.lblSampleClose.MinimumSize = new System.Drawing.Size(16, 2);
 			this.lblSampleClose.Name = "lblSampleClose";
 			this.lblSampleClose.Size = new System.Drawing.Size(16, 15);
 			this.lblSampleClose.TabIndex = 51;
 			this.lblSampleClose.Text = "x";
 			this.lblSampleClose.Click += new System.EventHandler(this.lblSampleClose_Click);
-			this.lblSampleClose.MouseEnter += new System.EventHandler(this.lblSampleClose_MouseEnter);
-			this.lblSampleClose.MouseLeave += new System.EventHandler(this.lblSampleClose_MouseLeave);
+			this.lblSampleClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
+			this.lblSampleClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
 			// 
 			// label57
 			// 
@@ -3867,8 +3886,7 @@
 			// 
 			// FormLeafEditor
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.ClientSize = new System.Drawing.Size(1745, 869);
 			this.Controls.Add(this.panelSample);
@@ -4150,6 +4168,8 @@
 		private System.Windows.Forms.Button btnSaveLvl;
 		private System.Windows.Forms.Button btnSaveGate;
 		private System.Windows.Forms.Button btnSaveMaster;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
 	}
 }
 

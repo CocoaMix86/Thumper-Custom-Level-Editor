@@ -68,7 +68,23 @@ namespace Thumper___Leaf_Editor
 		#endregion
 
 
-		public FormLeafEditor() => InitializeComponent();
+		public FormLeafEditor()
+		{
+			InitializeComponent();
+			ColorFormElements();
+		}
+		///Color elements based on set properties
+		private void ColorFormElements()
+		{
+			this.BackColor = Properties.Settings.Default.custom_bgcolor;
+			menuStrip.BackColor = Properties.Settings.Default.custom_menucolor;
+			panelLeaf.BackColor = Properties.Settings.Default.custom_panelcolor;
+			panelLevel.BackColor = Properties.Settings.Default.custom_panelcolor;
+			panelGate.BackColor = Properties.Settings.Default.custom_panelcolor;
+			panelMaster.BackColor = Properties.Settings.Default.custom_panelcolor;
+			panelSample.BackColor = Properties.Settings.Default.custom_panelcolor;
+			panelWorkingFolder.BackColor = Properties.Settings.Default.custom_panelcolor;
+		}
 
 		///Repaints toolstrip separators to have gray backgrounds
 		private void toolStripSeparator_Paint(object sender, PaintEventArgs e)
@@ -76,7 +92,6 @@ namespace Thumper___Leaf_Editor
 			ToolStripSeparator sep = (ToolStripSeparator)sender;
 			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, 40, 40)), 0, 0, sep.Width, sep.Height);
 			e.Graphics.DrawLine(new Pen(Color.White), 30, sep.Height / 2, sep.Width - 4, sep.Height / 2);
-
 		}
 
 		///Toolstrip - INTERPOLATOR
@@ -370,67 +385,18 @@ namespace Thumper___Leaf_Editor
 		///FORM RESIZE
 		///PANEL LABELS - change size or close
 		private void lblMasterClose_Click(object sender, EventArgs e) => masterEditorToolStripMenuItem.PerformClick();
-		private void lblMasterClose_MouseEnter(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.Red;
-			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
-		}
-		private void lblMasterClose_MouseLeave(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
-			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
-		}
 		private void lblLvlClose_Click(object sender, EventArgs e) => levelEditorToolStripMenuItem.PerformClick();
-		private void lblLvlClose_MouseEnter(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.Red;
-			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
-		}
-		private void lblLvlClose_MouseLeave(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
-			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
-		}
 		private void lblLeafClose_Click(object sender, EventArgs e) => leafEditorToolStripMenuItem.PerformClick();
-		private void lblLeafClose_MouseEnter(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.Red;
-			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
-		}
-		private void lblLeafClose_MouseLeave(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
-			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
-		}
 		private void lblGateClose_Click(object sender, EventArgs e) => gateEditorToolStripMenuItem.PerformClick();
-		private void lblGateClose_MouseEnter(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.Red;
-			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
-		}
-		private void lblGateClose_MouseLeave(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
-			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
-		}
 		private void lblWorkClose_Click(object sender, EventArgs e) => workingFolderToolStripMenuItem.PerformClick();
-		private void lblWorkClose_MouseEnter(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.Red;
-			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
-		}
-		private void lblWorkClose_MouseLeave(object sender, EventArgs e)
-		{
-			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
-			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
-		}
 		private void lblSampleClose_Click(object sender, EventArgs e) => sampleEditorToolStripMenuItem.PerformClick();
-		private void lblSampleClose_MouseEnter(object sender, EventArgs e)
+		private void Close_MouseEnter(object sender, EventArgs e)
 		{
 			(sender as Label).BackColor = Color.Red;
 			(sender as Label).BorderStyle = BorderStyle.Fixed3D;
 		}
-		private void lblSampleClose_MouseLeave(object sender, EventArgs e)
+
+		private void Close_MouseLeave(object sender, EventArgs e)
 		{
 			(sender as Label).BackColor = Color.FromArgb(55, 55, 55);
 			(sender as Label).BorderStyle = BorderStyle.FixedSingle;
@@ -491,6 +457,14 @@ namespace Thumper___Leaf_Editor
 				File.WriteAllText($@"{workingfolder}\samp_default.txt", Properties.Resources.samp_default);
 				File.WriteAllText($@"{workingfolder}\spn_default.txt", Properties.Resources.spn_default);
 				File.WriteAllText($@"{workingfolder}\xfm_default.txt", Properties.Resources.xfm_default);
+			}
+		}
+
+		private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CustomizeWorkspace custom = new CustomizeWorkspace();
+			if (custom.ShowDialog() == DialogResult.OK) {
+				ColorFormElements();
 			}
 		}
 	}

@@ -38,5 +38,14 @@
     <Setting Name="sampleeditorloc" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">370, 100</Value>
     </Setting>
+    <Setting Name="custom_bgcolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">64, 0, 0</Value>
+    </Setting>
+    <Setting Name="custom_menucolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Maroon</Value>
+    </Setting>
+    <Setting Name="custom_panelcolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
