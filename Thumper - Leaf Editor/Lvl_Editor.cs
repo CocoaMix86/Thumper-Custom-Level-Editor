@@ -603,9 +603,15 @@ namespace Thumper___Leaf_Editor
 			if (!save) {
 				if (!lblLvlName.Text.Contains("(unsaved)"))
 					lblLvlName.Text += " (unsaved)";
+				btnSaveLvl.Location = new Point(lblLvlName.Location.X + lblLvlName.Size.Width, btnSaveLvl.Location.Y);
+				btnSaveLvl.Enabled = true;
+				lblLvlName.BackColor = Color.Maroon;
 			}
 			else {
 				lblLvlName.Text = lblLvlName.Text.Replace(" (unsaved)", "");
+				btnSaveLvl.Location = new Point(lblLvlName.Location.X + lblLvlName.Size.Width, btnSaveLvl.Location.Y);
+				btnSaveLvl.Enabled = false;
+				lblLvlName.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}
 

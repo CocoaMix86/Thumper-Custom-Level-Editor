@@ -192,7 +192,9 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label28 = new System.Windows.Forms.Label();
 			this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
+			this.btnSaveLvl = new System.Windows.Forms.Button();
 			this.panelMaster = new System.Windows.Forms.Panel();
+			this.btnSaveMaster = new System.Windows.Forms.Button();
 			this.btnMasterOpenRest = new System.Windows.Forms.Button();
 			this.btnMasterOpenLeader = new System.Windows.Forms.Button();
 			this.label37 = new System.Windows.Forms.Label();
@@ -263,6 +265,7 @@
 			this.label48 = new System.Windows.Forms.Label();
 			this.lblGateClose = new System.Windows.Forms.Label();
 			this.lblGateName = new System.Windows.Forms.Label();
+			this.btnSaveGate = new System.Windows.Forms.Button();
 			this.panelWorkingFolder = new System.Windows.Forms.Panel();
 			this.btnWorkDelete = new System.Windows.Forms.Button();
 			this.btnWorkRefresh = new System.Windows.Forms.Button();
@@ -1676,6 +1679,7 @@
 			this.panelLevel.Controls.Add(this.btnLvlSeqDelete);
 			this.panelLevel.Controls.Add(this.lblLvlName);
 			this.panelLevel.Controls.Add(this.panel1);
+			this.panelLevel.Controls.Add(this.btnSaveLvl);
 			this.panelLevel.Location = new System.Drawing.Point(864, 29);
 			this.panelLevel.Name = "panelLevel";
 			this.panelLevel.Size = new System.Drawing.Size(875, 383);
@@ -1697,6 +1701,7 @@
 			// label29
 			// 
 			this.label29.AutoSize = true;
+			this.label29.BackColor = System.Drawing.Color.Transparent;
 			this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label29.ForeColor = System.Drawing.Color.White;
 			this.label29.Location = new System.Drawing.Point(0, 14);
@@ -2369,6 +2374,7 @@
 			// lblLvlName
 			// 
 			this.lblLvlName.AutoSize = true;
+			this.lblLvlName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.lblLvlName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblLvlName.ForeColor = System.Drawing.Color.White;
 			this.lblLvlName.Location = new System.Drawing.Point(-2, 0);
@@ -2410,6 +2416,20 @@
 			this.trackLvlVolumeZoom.TickStyle = System.Windows.Forms.TickStyle.None;
 			this.trackLvlVolumeZoom.Value = 60;
 			this.trackLvlVolumeZoom.Scroll += new System.EventHandler(this.trackLvlVolumeZoom_Scroll);
+			// 
+			// btnSaveLvl
+			// 
+			this.btnSaveLvl.Enabled = false;
+			this.btnSaveLvl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnSaveLvl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+			this.btnSaveLvl.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
+			this.btnSaveLvl.Location = new System.Drawing.Point(46, -5);
+			this.btnSaveLvl.Name = "btnSaveLvl";
+			this.btnSaveLvl.Size = new System.Drawing.Size(25, 25);
+			this.btnSaveLvl.TabIndex = 118;
+			this.btnSaveLvl.UseVisualStyleBackColor = true;
+			this.btnSaveLvl.Visible = false;
+			this.btnSaveLvl.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
 			// 
 			// panelMaster
 			// 
@@ -2453,10 +2473,25 @@
 			this.panelMaster.Controls.Add(this.lblMasterClose);
 			this.panelMaster.Controls.Add(this.lblMasterName);
 			this.panelMaster.Controls.Add(this.lblConfigColorHelp);
+			this.panelMaster.Controls.Add(this.btnSaveMaster);
 			this.panelMaster.Location = new System.Drawing.Point(4, 29);
 			this.panelMaster.Name = "panelMaster";
 			this.panelMaster.Size = new System.Drawing.Size(462, 383);
 			this.panelMaster.TabIndex = 47;
+			// 
+			// btnSaveMaster
+			// 
+			this.btnSaveMaster.Enabled = false;
+			this.btnSaveMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnSaveMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+			this.btnSaveMaster.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
+			this.btnSaveMaster.Location = new System.Drawing.Point(64, -5);
+			this.btnSaveMaster.Name = "btnSaveMaster";
+			this.btnSaveMaster.Size = new System.Drawing.Size(25, 25);
+			this.btnSaveMaster.TabIndex = 134;
+			this.btnSaveMaster.UseVisualStyleBackColor = true;
+			this.btnSaveMaster.Visible = false;
+			this.btnSaveMaster.Click += new System.EventHandler(this.mastersaveToolStripMenuItem_Click);
 			// 
 			// btnMasterOpenRest
 			// 
@@ -3031,6 +3066,7 @@
 			// lblMasterName
 			// 
 			this.lblMasterName.AutoSize = true;
+			this.lblMasterName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.lblMasterName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblMasterName.ForeColor = System.Drawing.Color.White;
 			this.lblMasterName.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3087,6 +3123,7 @@
 			this.panelGate.Controls.Add(this.label48);
 			this.panelGate.Controls.Add(this.lblGateClose);
 			this.panelGate.Controls.Add(this.lblGateName);
+			this.panelGate.Controls.Add(this.btnSaveGate);
 			this.panelGate.Location = new System.Drawing.Point(472, 29);
 			this.panelGate.Name = "panelGate";
 			this.panelGate.Size = new System.Drawing.Size(386, 383);
@@ -3557,6 +3594,7 @@
 			// lblGateName
 			// 
 			this.lblGateName.AutoSize = true;
+			this.lblGateName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
 			this.lblGateName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblGateName.ForeColor = System.Drawing.Color.White;
 			this.lblGateName.Location = new System.Drawing.Point(-3, 0);
@@ -3564,6 +3602,20 @@
 			this.lblGateName.Size = new System.Drawing.Size(60, 13);
 			this.lblGateName.TabIndex = 49;
 			this.lblGateName.Text = "Gate Editor";
+			// 
+			// btnSaveGate
+			// 
+			this.btnSaveGate.Enabled = false;
+			this.btnSaveGate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnSaveGate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+			this.btnSaveGate.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
+			this.btnSaveGate.Location = new System.Drawing.Point(54, -5);
+			this.btnSaveGate.Name = "btnSaveGate";
+			this.btnSaveGate.Size = new System.Drawing.Size(25, 25);
+			this.btnSaveGate.TabIndex = 119;
+			this.btnSaveGate.UseVisualStyleBackColor = true;
+			this.btnSaveGate.Visible = false;
+			this.btnSaveGate.Click += new System.EventHandler(this.gatesaveToolStripMenuItem_Click);
 			// 
 			// panelWorkingFolder
 			// 
@@ -3715,7 +3767,7 @@
 			this.panelSample.Controls.Add(this.sampleList);
 			this.panelSample.Controls.Add(this.lblSampleClose);
 			this.panelSample.Controls.Add(this.label57);
-			this.panelSample.Location = new System.Drawing.Point(372, 79);
+			this.panelSample.Location = new System.Drawing.Point(747, 421);
 			this.panelSample.Name = "panelSample";
 			this.panelSample.Size = new System.Drawing.Size(454, 383);
 			this.panelSample.TabIndex = 134;
@@ -3766,7 +3818,7 @@
 			this.sampleList.DefaultCellStyle = dataGridViewCellStyle27;
 			this.sampleList.EnableHeadersVisualStyles = false;
 			this.sampleList.GridColor = System.Drawing.Color.Black;
-			this.sampleList.Location = new System.Drawing.Point(3, 34);
+			this.sampleList.Location = new System.Drawing.Point(6, 34);
 			this.sampleList.MultiSelect = false;
 			this.sampleList.Name = "sampleList";
 			this.sampleList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -4095,6 +4147,9 @@
 		private System.Windows.Forms.ToolStripMenuItem bTFFolderToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem bTFSampleToolStripMenuItem;
 		private System.Windows.Forms.Button btnSaveLeaf;
+		private System.Windows.Forms.Button btnSaveLvl;
+		private System.Windows.Forms.Button btnSaveGate;
+		private System.Windows.Forms.Button btnSaveMaster;
 	}
 }
 
