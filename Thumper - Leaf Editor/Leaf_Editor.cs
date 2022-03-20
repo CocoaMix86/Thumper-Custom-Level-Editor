@@ -126,6 +126,12 @@ namespace Thumper___Leaf_Editor
 					if (Math.Abs(i) >= _tracks[_cell.RowIndex]._default)
 						_cell.Style.BackColor = Color.FromArgb(int.Parse(_tracks[_cell.RowIndex].highlight_color));
 
+					//change cell font color so text is readable on dark/light backgrounds
+					Color _c = _cell.Style.BackColor;
+					if (_c.R < 150 && _c.G < 150 && _c.B < 150)
+						_cell.Style.ForeColor = Color.White;
+					else
+						_cell.Style.ForeColor = Color.Black;
 					//sets flag that leaf has unsaved changes
 					SaveLeaf(false);
 				}
@@ -593,26 +599,21 @@ namespace Thumper___Leaf_Editor
 		///Import raw text from rich text box to selected row
 		public void TrackRawImport(DataGridViewRow r, JObject _rawdata)
 		{
-			//_rawdata contains a list of all data points. By getting Properties() of it,
-			//each point becomes its own index
+			///_rawdata contains a list of all data points. By getting Properties() of it,
+			///each point becomes its own index
 			var data_points = _rawdata.Properties().ToList();
-			//get highlighting value and color
-			float _f = _tracks[r.Index].highlight_value;
-			Color _color = Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color));
-			//check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
-			//Ask the user if they want to expand the leaf to accomadate the data point
+			///check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
+			///Ask the user if they want to expand the leaf to accomadate the data point
 			if (data_points.Count > 0 && int.Parse(((JProperty)data_points.Last()).Name) >= r.Cells.Count) {
 				if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {r.HeaderCell.Value}\nData point: {data_points.Last()}", "Leaf too short", MessageBoxButtons.YesNo) == DialogResult.Yes)
 					numericUpDown_LeafLength.Value = int.Parse(((JProperty)data_points.Last()).Name) + 1;
 			}
-			//iterate over each data point, and fill cells
+			///iterate over each data point, and fill cells
 			foreach (JProperty data_point in data_points) {
 				try {
 					r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
-					if (Math.Abs((float)data_point.Value) >= _f)
-						r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
 				}
-				catch (ArgumentOutOfRangeException) { /*MessageBox.Show($"Data point {data_point.Name} is beyond the leaf beatcount of {numericUpDown_LeafLength.Value} for object {r.HeaderCell.Value}");*/ }
+				catch (ArgumentOutOfRangeException) { }
 			}
 		}
 		///Updates row headers to be the Object and Param_Path
@@ -663,15 +664,19 @@ namespace Thumper___Leaf_Editor
 				try {
 					//parse value. If not parseable, set to 0
 					i = float.TryParse(r.Cells[x].Value.ToString(), out i) ? i : 0;
-				}
-				catch { i = 0; }
+				} catch { i = 0; }
 				//if the cell value is greater than the criteria of the row, highlight it with that row's color
 				try {
 					if (Math.Abs(i) >= _tracks[r.Index].highlight_value) {
 						r.Cells[x].Style.BackColor = Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color));
 					}
-				}
-				catch { }
+				} catch { }
+				//change cell font color so text is readable on dark/light backgrounds
+				Color _c = r.Cells[x].Style.BackColor;
+				if (_c.R < 150 && _c.G < 150 && _c.B < 150)
+					r.Cells[x].Style.ForeColor = Color.White;
+				else
+					r.Cells[x].Style.ForeColor = Color.Black;
 			}
 		}
 
@@ -750,6 +755,7 @@ namespace Thumper___Leaf_Editor
 						r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].friendly_param + ")";
 						//pass _griddata per row to be imported to the DGV
 						TrackRawImport(r, _tracks[r.Index].data_points);
+						TrackUpdateHighlighting(r);
 					}
 				}
 				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}"); }
