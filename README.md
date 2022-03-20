@@ -1,3 +1,7 @@
+# Modding does not work on the current release  
+You must downpatch the game to create and play custom levels. A guide has been written on how to do so:  
+https://docs.google.com/document/d/1KoEmOhp3_zOhdk9adiMaXFcmCWqn0phrtdZnhgTwLxQ/edit?usp=sharing
+
 ## Thumper Custom Level Editor
 
 [Download the latest release](https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/releases)
