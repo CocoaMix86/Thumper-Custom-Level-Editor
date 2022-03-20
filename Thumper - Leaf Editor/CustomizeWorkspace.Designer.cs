@@ -41,6 +41,7 @@ namespace Thumper___Leaf_Editor
 			this.btnBGColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.btnBGColor.FlatAppearance.BorderSize = 4;
 			this.btnBGColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnBGColor.ForeColor = System.Drawing.Color.Black;
 			this.btnBGColor.Location = new System.Drawing.Point(12, 12);
 			this.btnBGColor.Name = "btnBGColor";
 			this.btnBGColor.Size = new System.Drawing.Size(211, 37);
@@ -69,6 +70,7 @@ namespace Thumper___Leaf_Editor
 			this.btnMenuColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.btnMenuColor.FlatAppearance.BorderSize = 4;
 			this.btnMenuColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnMenuColor.ForeColor = System.Drawing.Color.Black;
 			this.btnMenuColor.Location = new System.Drawing.Point(12, 55);
 			this.btnMenuColor.Name = "btnMenuColor";
 			this.btnMenuColor.Size = new System.Drawing.Size(211, 37);
@@ -84,6 +86,7 @@ namespace Thumper___Leaf_Editor
 			this.btnPanelColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.btnPanelColor.FlatAppearance.BorderSize = 4;
 			this.btnPanelColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnPanelColor.ForeColor = System.Drawing.Color.Black;
 			this.btnPanelColor.Location = new System.Drawing.Point(12, 98);
 			this.btnPanelColor.Name = "btnPanelColor";
 			this.btnPanelColor.Size = new System.Drawing.Size(211, 37);
