@@ -254,6 +254,8 @@ namespace Thumper___Leaf_Editor
 					_loadedlvl = sfd.FileName;
 					//set save flag
 					SaveLvl(true);
+					//reload samples on save
+					LvlReloadSamples();
 				}
 			}
 		}
