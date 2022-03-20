@@ -1,5 +1,7 @@
 # Thumper-Custom-Level-Editor
 
+[Download the latest release](https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/releases)
+
 How to use the editor:
 https://youtu.be/bxDgG2yeUk8
 
