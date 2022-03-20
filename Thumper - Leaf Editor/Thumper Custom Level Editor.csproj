@@ -76,6 +76,7 @@
     <Compile Include="AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="clsResize.cs" />
     <Compile Include="ControlMoverOrResizer.cs" />
     <Compile Include="CustomizeWorkspace.cs">
       <SubType>Form</SubType>

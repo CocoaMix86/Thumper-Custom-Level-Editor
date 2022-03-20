@@ -116,11 +116,10 @@ namespace Thumper___Leaf_Editor
 		}
 
 		#endregion
-
-		private System.Windows.Forms.Button btnBGColor;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.ColorDialog colorDialog1;
-		private System.Windows.Forms.Button btnMenuColor;
-		private System.Windows.Forms.Button btnPanelColor;
+		public System.Windows.Forms.Button btnBGColor;
+		public System.Windows.Forms.Button btnMenuColor;
+		public System.Windows.Forms.Button btnPanelColor;
 	}
 }

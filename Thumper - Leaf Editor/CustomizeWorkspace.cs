@@ -26,7 +26,6 @@ namespace Thumper___Leaf_Editor
 		{
 			if (colorDialog1.ShowDialog() == DialogResult.OK) {
 				btnBGColor.BackColor = colorDialog1.Color;
-				Properties.Settings.Default.custom_bgcolor = colorDialog1.Color;
 			}
 		}
 
@@ -34,7 +33,6 @@ namespace Thumper___Leaf_Editor
 		{
 			if (colorDialog1.ShowDialog() == DialogResult.OK) {
 				btnMenuColor.BackColor = colorDialog1.Color;
-				Properties.Settings.Default.custom_menucolor = colorDialog1.Color;
 			}
 		}
 
@@ -42,7 +40,6 @@ namespace Thumper___Leaf_Editor
 		{
 			if (colorDialog1.ShowDialog() == DialogResult.OK) {
 				btnPanelColor.BackColor = colorDialog1.Color;
-				Properties.Settings.Default.custom_panelcolor = colorDialog1.Color;
 			}
 		}
 	}

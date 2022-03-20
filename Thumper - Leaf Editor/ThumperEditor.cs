@@ -73,6 +73,7 @@ namespace Thumper___Leaf_Editor
 			InitializeComponent();
 			ColorFormElements();
 		}
+
 		///Color elements based on set properties
 		private void ColorFormElements()
 		{
@@ -428,7 +429,7 @@ namespace Thumper___Leaf_Editor
 			customlevel.txtCustomDiff.Text = _load.ContainsKey("difficulty") ? (string)_load["difficulty"] : "";
 			customlevel.txtDesc.Text = _load.ContainsKey("description") ? (string)_load["description"] : "";
 			customlevel.txtCustomAuthor.Text = _load.ContainsKey("author") ? (string)_load["author"] : "";
-			//set samp pack checks
+			//set samp pack checkboxes
 			customlevel.chkLevel1.Checked = File.Exists($@"{workingfolder}\samp_level1_320bpm.txt");
 			customlevel.chkLevel2.Checked = File.Exists($@"{workingfolder}\samp_level2_340bpm.txt");
 			customlevel.chkLevel3.Checked = File.Exists($@"{workingfolder}\samp_level3_360bpm.txt");
@@ -462,10 +463,16 @@ namespace Thumper___Leaf_Editor
 
 		private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			//Show the CustomWorkspace form. If form OK, then save the settings to app properties
+			//then call method to recolor the form elements immediately
 			CustomizeWorkspace custom = new CustomizeWorkspace();
 			if (custom.ShowDialog() == DialogResult.OK) {
+				Properties.Settings.Default.custom_bgcolor = custom.btnBGColor.BackColor;
+				Properties.Settings.Default.custom_menucolor = custom.btnMenuColor.BackColor;
+				Properties.Settings.Default.custom_panelcolor = custom.btnPanelColor.BackColor;
 				ColorFormElements();
 			}
+			custom.Dispose();
 		}
 	}
 }
