@@ -65,6 +65,8 @@ namespace Thumper___Leaf_Editor
 		public dynamic helptext;
 		public List<string> lvlsinworkfolder = new List<string>();
 		public string _dgfocus;
+
+		clsResize _form_resize;
 		#endregion
 
 
@@ -72,8 +74,13 @@ namespace Thumper___Leaf_Editor
 		{
 			InitializeComponent();
 			ColorFormElements();
+			_form_resize = new clsResize(this);
+			this.Load += new EventHandler(_Load);
 		}
-
+		private void _Load(object sender, EventArgs e)
+		{
+			_form_resize._get_initial_size();
+		}
 		///Color elements based on set properties
 		private void ColorFormElements()
 		{

@@ -3162,6 +3162,7 @@
 			// 
 			// btnGateRefresh
 			// 
+			this.btnGateRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnGateRefresh.BackColor = System.Drawing.Color.Gray;
 			this.btnGateRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnGateRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3189,6 +3190,7 @@
 			// 
 			// btnGateOpenRestart
 			// 
+			this.btnGateOpenRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnGateOpenRestart.BackColor = System.Drawing.Color.Gray;
 			this.btnGateOpenRestart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnGateOpenRestart.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3219,6 +3221,7 @@
 			// 
 			// btnGateOpenPost
 			// 
+			this.btnGateOpenPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnGateOpenPost.BackColor = System.Drawing.Color.Gray;
 			this.btnGateOpenPost.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnGateOpenPost.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3236,6 +3239,7 @@
 			// 
 			// btnGateOpenPre
 			// 
+			this.btnGateOpenPre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnGateOpenPre.BackColor = System.Drawing.Color.Gray;
 			this.btnGateOpenPre.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnGateOpenPre.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

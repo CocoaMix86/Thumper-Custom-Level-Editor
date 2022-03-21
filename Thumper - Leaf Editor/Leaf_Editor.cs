@@ -749,6 +749,7 @@ namespace Thumper___Leaf_Editor
 			trackEditor.Rows.Clear();
 			trackEditor.RowCount = _tracks.Count;
 			//foreach row, import data points associated with it
+			trackEditor.RowHeadersVisible = true;
 			foreach (DataGridViewRow r in trackEditor.Rows) {
 				try {
 					if (_tracks[r.Index].friendly_param.Length > 1) {
