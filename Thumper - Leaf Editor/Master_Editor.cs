@@ -97,6 +97,7 @@ namespace Thumper___Leaf_Editor
 			try {
 				_masterlvls[e.RowIndex].checkpoint = bool.Parse(masterLvlList[1, e.RowIndex].Value.ToString());
 				_masterlvls[e.RowIndex].playplus = bool.Parse(masterLvlList[2, e.RowIndex].Value.ToString());
+				_masterlvls[e.RowIndex].isolate = bool.Parse(masterLvlList[3, e.RowIndex].Value.ToString());
 				//set lvl save flag to false
 				SaveMaster(false);
 			} catch { }
@@ -111,9 +112,9 @@ namespace Thumper___Leaf_Editor
 			for (int x = 0; x < _masterlvls.Count; x++) {
 				//detect if lvl in list is actually a lvl or a gate. If it's a gate, the lvlname won't be set
 				if (!String.IsNullOrEmpty(_masterlvls[x].lvlname))
-					masterLvlList.Rows.Add(new object[] { _masterlvls[x].lvlname, _masterlvls[x].checkpoint, _masterlvls[x].playplus });
+					masterLvlList.Rows.Add(new object[] { _masterlvls[x].lvlname, _masterlvls[x].checkpoint, _masterlvls[x].playplus, _masterlvls[x].isolate });
 				else
-					masterLvlList.Rows.Add(new object[] { _masterlvls[x].gatename, _masterlvls[x].checkpoint, _masterlvls[x].playplus });
+					masterLvlList.Rows.Add(new object[] { _masterlvls[x].gatename, _masterlvls[x].checkpoint, _masterlvls[x].playplus, _masterlvls[x].isolate });
 			}
 			masterLvlList.RowEnter += masterLvlList_RowEnter;
 			//set selected index. Mainly used when moving items
@@ -396,6 +397,13 @@ namespace Thumper___Leaf_Editor
 				ReadOnly = false
 			};
 			masterLvlList.Columns.Add(_dgvmasterplayplus);
+			///add checkbox column for denoting if a lvl shows in play+ or not
+			DataGridViewCheckBoxColumn _dgvmasterisolate = new DataGridViewCheckBoxColumn()
+			{
+				HeaderText = "Isolate",
+				ReadOnly = false
+			};
+			masterLvlList.Columns.Add(_dgvmasterisolate);
 		}
 
 		public void LoadMaster(dynamic _load)
@@ -420,6 +428,7 @@ namespace Thumper___Leaf_Editor
 					gatename = _lvl["gate_name"],
 					checkpoint = _lvl["checkpoint"],
 					playplus = _lvl["play_plus"],
+					isolate = _lvl["isolate"] ?? false,
 					checkpoint_leader = _lvl["checkpoint_leader_lvl_name"],
 					rest = _lvl["rest_lvl_name"]
 				});
@@ -499,6 +508,7 @@ namespace Thumper___Leaf_Editor
 		public JObject MasterBuildSave()
 		{
 			int checkpoints = 0;
+			bool isolate_tracks = false;
 			///being build Master JSON object
 			JObject _save = new JObject();
 			_save.Add("obj_type", "SequinMaster");
@@ -514,6 +524,9 @@ namespace Thumper___Leaf_Editor
 				s.Add("checkpoint_leader_lvl_name", group.checkpoint_leader ?? "");
 				s.Add("rest_lvl_name", group.rest ?? "");
 				s.Add("play_plus", group.playplus.ToString());
+				s.Add("isolate", group.isolate.ToString());
+				if (group.isolate == true)
+					isolate_tracks = true;
 				//increment checkpoints if this lvl has "checkpoint" true
 				if ((string)s["checkpoint"] == "True")
 					checkpoints++;
@@ -521,6 +534,7 @@ namespace Thumper___Leaf_Editor
 				groupings.Add(s);
 			}
 			_save.Add("groupings", groupings);
+			_save.Add("isolate_tracks", isolate_tracks.ToString());
 			_save.Add("checkpoint_lvl_name", dropMasterCheck.Text);
 			///end build
 			///

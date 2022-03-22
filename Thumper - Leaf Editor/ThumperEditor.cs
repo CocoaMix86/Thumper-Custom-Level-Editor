@@ -151,10 +151,7 @@ namespace Thumper___Leaf_Editor
 		}
 
 		///EXIT APP
-		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
 		///FORM CLOSING - check if anything is unsaved
 		private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
 		{
