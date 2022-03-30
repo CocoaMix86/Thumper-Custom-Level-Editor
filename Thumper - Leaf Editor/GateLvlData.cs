@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Thumper___Leaf_Editor
+﻿namespace Thumper___Leaf_Editor
 {
 	class GateLvlData
 	{

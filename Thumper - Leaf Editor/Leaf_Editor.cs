@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Thumper___Leaf_Editor
 {
-	public partial class FormLeafEditor : Form
+	public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _saveleaf = true;
@@ -30,6 +30,7 @@ namespace Thumper___Leaf_Editor
 					LeafEditorVisible(true);
 					leafsaveAsToolStripMenuItem.Enabled = true;
 					leafsaveToolStripMenuItem.Enabled = true;
+					trackEditor.RowHeadersVisible = true;
 				}
 			}
 		}
@@ -599,16 +600,16 @@ namespace Thumper___Leaf_Editor
 		///Import raw text from rich text box to selected row
 		public void TrackRawImport(DataGridViewRow r, JObject _rawdata)
 		{
-			///_rawdata contains a list of all data points. By getting Properties() of it,
-			///each point becomes its own index
+			//_rawdata contains a list of all data points. By getting Properties() of it,
+			//each point becomes its own index
 			var data_points = _rawdata.Properties().ToList();
-			///check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
-			///Ask the user if they want to expand the leaf to accomadate the data point
+			//check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
+			//Ask the user if they want to expand the leaf to accomadate the data point
 			if (data_points.Count > 0 && int.Parse(((JProperty)data_points.Last()).Name) >= r.Cells.Count) {
 				if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {r.HeaderCell.Value}\nData point: {data_points.Last()}", "Leaf too short", MessageBoxButtons.YesNo) == DialogResult.Yes)
 					numericUpDown_LeafLength.Value = int.Parse(((JProperty)data_points.Last()).Name) + 1;
 			}
-			///iterate over each data point, and fill cells
+			//iterate over each data point, and fill cells
 			foreach (JProperty data_point in data_points) {
 				try {
 					r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
@@ -759,7 +760,7 @@ namespace Thumper___Leaf_Editor
 						TrackUpdateHighlighting(r);
 					}
 				}
-				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}"); }
+				catch (Exception) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}"); }
 			}
 			//enable a bunch of elements now that a leaf is loaded.
 			dropObjects.Enabled = true;
@@ -776,12 +777,14 @@ namespace Thumper___Leaf_Editor
 		public JObject LeafBuildSave(string _leafname)
 		{
 			_leafname = Regex.Replace(_leafname, "[.].*", ".leaf");
-			///start building JSON output
-			JObject _save = new JObject();
-			_save.Add("obj_type", "SequinLeaf");
-			_save.Add("obj_name", _leafname);
+            ///start building JSON output
+            JObject _save = new JObject
+            {
+                { "obj_type", "SequinLeaf" },
+                { "obj_name", _leafname }
+            };
 
-			JArray seq_objs = new JArray();
+            JArray seq_objs = new JArray();
 			foreach (Sequencer_Object seq_obj in _tracks) {
 				//skip blank tracks
 				if (seq_obj.friendly_param == null)

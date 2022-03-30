@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace Thumper___Leaf_Editor
 {
-	public partial class FormLeafEditor : Form
+	public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _savemaster = true;
@@ -509,23 +509,27 @@ namespace Thumper___Leaf_Editor
 		{
 			int checkpoints = 0;
 			bool isolate_tracks = false;
-			///being build Master JSON object
-			JObject _save = new JObject();
-			_save.Add("obj_type", "SequinMaster");
-			_save.Add("obj_name", "sequin.master");
-			_save.Add("skybox_name", dropMasterSkybox.Text);
-			_save.Add("intro_lvl_name", dropMasterIntro.Text);
-			JArray groupings = new JArray();
+            ///being build Master JSON object
+            JObject _save = new JObject
+            {
+                { "obj_type", "SequinMaster" },
+                { "obj_name", "sequin.master" },
+                { "skybox_name", dropMasterSkybox.Text },
+                { "intro_lvl_name", dropMasterIntro.Text }
+            };
+            JArray groupings = new JArray();
 			foreach (MasterLvlData group in _masterlvls) {
-				JObject s = new JObject();
-				s.Add("lvl_name", group.lvlname ?? "");
-				s.Add("gate_name", group.gatename ?? "");
-				s.Add("checkpoint", group.checkpoint.ToString());
-				s.Add("checkpoint_leader_lvl_name", group.checkpoint_leader ?? "");
-				s.Add("rest_lvl_name", group.rest ?? "");
-				s.Add("play_plus", group.playplus.ToString());
-				s.Add("isolate", group.isolate.ToString());
-				if (group.isolate == true)
+                JObject s = new JObject
+                {
+                    { "lvl_name", group.lvlname ?? "" },
+                    { "gate_name", group.gatename ?? "" },
+                    { "checkpoint", group.checkpoint.ToString() },
+                    { "checkpoint_leader_lvl_name", group.checkpoint_leader ?? "" },
+                    { "rest_lvl_name", group.rest ?? "" },
+                    { "play_plus", group.playplus.ToString() },
+                    { "isolate", group.isolate.ToString() }
+                };
+                if (group.isolate == true)
 					isolate_tracks = true;
 				//increment checkpoints if this lvl has "checkpoint" true
 				if ((string)s["checkpoint"] == "True")
@@ -536,14 +540,16 @@ namespace Thumper___Leaf_Editor
 			_save.Add("groupings", groupings);
 			_save.Add("isolate_tracks", isolate_tracks.ToString());
 			_save.Add("checkpoint_lvl_name", dropMasterCheck.Text);
-			///end build
-			///
-			///begin building Config JSON object
-			JObject _config = new JObject();
-			_config.Add("obj_type", "LevelLib");
-			_config.Add("bpm", NUD_ConfigBPM.Value);
-			//for each lvl in Master that has checkpoint:True, Config requires a "SECTION_LINEAR"
-			JArray level_sections = new JArray();
+            ///end build
+            ///
+            ///begin building Config JSON object
+            JObject _config = new JObject
+            {
+                { "obj_type", "LevelLib" },
+                { "bpm", NUD_ConfigBPM.Value }
+            };
+            //for each lvl in Master that has checkpoint:True, Config requires a "SECTION_LINEAR"
+            JArray level_sections = new JArray();
 			for (int x = 0; x < checkpoints; x++)
 				level_sections.Add("SECTION_LINEAR");
 			_config.Add("level_sections", level_sections);

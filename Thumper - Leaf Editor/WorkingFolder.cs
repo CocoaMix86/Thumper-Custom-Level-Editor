@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Drawing;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 
 namespace Thumper___Leaf_Editor
 {
-	public partial class FormLeafEditor : Form
+	public partial class FormLeafEditor
 	{
 		private void panelWorkingFolder_SizeChanged(object sender, EventArgs e)
 		{
@@ -21,7 +18,7 @@ namespace Thumper___Leaf_Editor
 		private void workingfolderFiles_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//workingfolderFiles_RowEnter(sender, e);
-			dynamic _load = null;
+			dynamic _load;
 			//attempt to load file listed in the dGV
 			try {
 				//first check if it exists

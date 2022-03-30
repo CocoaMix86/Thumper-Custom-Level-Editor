@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Thumper___Leaf_Editor
 {
-	public partial class FormLeafEditor : Form
+	public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _savegate = true;
@@ -30,8 +30,8 @@ namespace Thumper___Leaf_Editor
 		}
 		private string loadedgate;
 		string _loadedgatetemp;
-		string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
-		List<string> boss_name = new List<string>() {
+        readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
+		readonly List<string> boss_name = new List<string>() {
 			"Level 1 - crakhed",
 			"Level 2 - circle",
 			"Level 2 - crakhed",
@@ -51,7 +51,7 @@ namespace Thumper___Leaf_Editor
 			"Level 9 - fractal",
 			"Level 9 - crakhed"
 		};
-		List<string> boss_spn = new List<string>() {
+		readonly List<string> boss_spn = new List<string>() {
 			"crakhed1.spn",
 			"boss_jump.spn",
 			"crakhed2.spn",
@@ -71,7 +71,7 @@ namespace Thumper___Leaf_Editor
 			"boss_frac.spn",
 			"crakhed9.spn"
 		};
-		List<string> boss_ent = new List<string>() {
+		readonly List<string> boss_ent = new List<string>() {
 			"crakhed.ent",
 			"boss_gate_pellet.ent",
 			"crakhed.ent",

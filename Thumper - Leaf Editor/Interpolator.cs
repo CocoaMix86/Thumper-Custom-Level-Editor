@@ -155,7 +155,7 @@ namespace Thumper___Leaf_Editor
 		///
 		private void btnOffset_Out_Click(object sender, EventArgs e)
 		{
-			int _offset = 0;
+			int _offset;
 			try {
 				_offset = int.Parse(txtOffset_beat.Text);
 			}

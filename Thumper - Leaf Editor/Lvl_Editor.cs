@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Thumper___Leaf_Editor
 {
-	public partial class FormLeafEditor : Form
+	public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _savelvl = true;
@@ -519,7 +519,7 @@ namespace Thumper___Leaf_Editor
 			lvlLeafList.RowHeadersVisible = false;
 			lvlLeafList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
 				ForeColor = Color.White,
-				Font = new Font("Arial", 15, GraphicsUnit.Pixel),
+				Font = new Font("Arial", 12, GraphicsUnit.Pixel),
 				Format = "0.#"
 			};
 			lvlLeafList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -638,20 +638,24 @@ namespace Thumper___Leaf_Editor
 		public JObject LvlBuildSave(string _lvlname)
 		{
 			_lvlname = Regex.Replace(_lvlname, "[.].*", ".lvl");
-			///start building JSON output
-			JObject _save = new JObject();
-			_save.Add("obj_type", "SequinLevel");
-			_save.Add("obj_name", $"{_lvlname}");
-			_save.Add("approach_beats", NUD_lvlApproach.Value);
-			//this section adds all colume sequencer controls
-			JArray seq_objs = new JArray();
+            ///start building JSON output
+            JObject _save = new JObject
+            {
+                { "obj_type", "SequinLevel" },
+                { "obj_name", $"{_lvlname}" },
+                { "approach_beats", NUD_lvlApproach.Value }
+            };
+            //this section adds all colume sequencer controls
+            JArray seq_objs = new JArray();
 			foreach (DataGridViewRow seq_obj in lvlSeqObjs.Rows) {
-				JObject s = new JObject();
-				s.Add("obj_name", $"{_lvlname}");
-				s.Add("param_path", $"layer_volume,{seq_obj.Index}");
-				s.Add("trait_type", "kTraitFloat");
+                JObject s = new JObject
+                {
+                    { "obj_name", $"{_lvlname}" },
+                    { "param_path", $"layer_volume,{seq_obj.Index}" },
+                    { "trait_type", "kTraitFloat" }
+                };
 
-				JObject data_points = new JObject();
+                JObject data_points = new JObject();
 				for (int x = 0; x < seq_obj.Cells.Count; x++) {
 					if (!string.IsNullOrEmpty(seq_obj.Cells[x].Value?.ToString()))
 						data_points.Add(x.ToString(), float.Parse(seq_obj.Cells[x].Value.ToString()));

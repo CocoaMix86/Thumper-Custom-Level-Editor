@@ -91,7 +91,6 @@
     <Compile Include="AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="clsResize.cs" />
     <Compile Include="ControlMoverOrResizer.cs" />
     <Compile Include="CustomizeWorkspace.cs">
       <SubType>Form</SubType>
@@ -109,6 +108,7 @@
     <Compile Include="Gate_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ImageMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
