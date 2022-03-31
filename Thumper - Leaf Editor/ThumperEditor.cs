@@ -468,5 +468,13 @@ namespace Thumper___Leaf_Editor
 			}
 			custom.Dispose();
 		}
-	}
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+			byte[] bytes = BitConverter.GetBytes(Hash32("Asamples/levels/custom/rose.wav"));
+			Array.Reverse(bytes);
+			foreach (byte b in bytes)
+				lbltest.Text += b.ToString("X").PadLeft(2, '0').ToLower();
+		}
+    }
 }

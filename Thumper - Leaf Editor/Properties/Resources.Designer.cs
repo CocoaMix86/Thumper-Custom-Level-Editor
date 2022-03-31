@@ -19,7 +19,7 @@ namespace Thumper___Leaf_Editor.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -102,9 +102,8 @@ namespace Thumper___Leaf_Editor.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.&quot;,
-        ///&quot;masterCheckLeader&quot;: &quot;Currently unsure what exactly this does.&quot;,
-        ///&quot;masterRest&quot;: &quot;If not empty, this lvl will play before the main lvl. Usually used as [rest of string was truncated]&quot;;.
+        ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.\n\nISOLATE\nWhen checked, only isolated levels will play in game. Useful for testing specific sublevels without replaying the entire thing.&quot;,
+        ///&quot;masterChe [rest of string was truncated]&quot;;.
         /// </summary>
         public static string helptext {
             get {

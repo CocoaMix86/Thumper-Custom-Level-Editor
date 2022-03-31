@@ -52,10 +52,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLeafEditor));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -272,16 +272,18 @@
             this.btnWorkDelete = new System.Windows.Forms.Button();
             this.btnWorkRefresh = new System.Windows.Forms.Button();
             this.workingfolderFiles = new System.Windows.Forms.DataGridView();
+            this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblWorkClose = new System.Windows.Forms.Label();
             this.lblWorkingFolder = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelSample = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
-            this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbltest = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -3763,6 +3765,26 @@
             this.workingfolderFiles.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.workingfolderFiles_RowsAdded);
             this.workingfolderFiles.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.workingfolderFiles_RowsRemoved);
             // 
+            // FileType
+            // 
+            this.FileType.HeaderText = "";
+            this.FileType.Name = "FileType";
+            this.FileType.ReadOnly = true;
+            this.FileType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.FileType.Width = 16;
+            // 
+            // FileName
+            // 
+            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
+            this.FileName.DefaultCellStyle = dataGridViewCellStyle23;
+            this.FileName.HeaderText = "File Name";
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
+            this.FileName.Width = 84;
+            // 
             // lblWorkClose
             // 
             this.lblWorkClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -3795,6 +3817,8 @@
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSample.Controls.Add(this.lbltest);
+            this.panelSample.Controls.Add(this.button1);
             this.panelSample.Controls.Add(this.label54);
             this.panelSample.Controls.Add(this.sampleList);
             this.panelSample.Controls.Add(this.lblSampleClose);
@@ -3804,6 +3828,16 @@
             this.panelSample.Size = new System.Drawing.Size(454, 383);
             this.panelSample.TabIndex = 134;
             this.panelSample.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(88, 200);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 117;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label54
             // 
@@ -3897,25 +3931,16 @@
             this.label57.TabIndex = 49;
             this.label57.Text = "Sample Editor";
             // 
-            // FileType
+            // lbltest
             // 
-            this.FileType.HeaderText = "";
-            this.FileType.Name = "FileType";
-            this.FileType.ReadOnly = true;
-            this.FileType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FileType.Width = 16;
-            // 
-            // FileName
-            // 
-            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
-            this.FileName.DefaultCellStyle = dataGridViewCellStyle23;
-            this.FileName.HeaderText = "File Name";
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
-            this.FileName.Width = 84;
+            this.lbltest.AutoSize = true;
+            this.lbltest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltest.ForeColor = System.Drawing.Color.White;
+            this.lbltest.Location = new System.Drawing.Point(101, 226);
+            this.lbltest.Name = "lbltest";
+            this.lbltest.Size = new System.Drawing.Size(72, 13);
+            this.lbltest.TabIndex = 118;
+            this.lbltest.Text = "Sample Editor";
             // 
             // FormLeafEditor
             // 
@@ -4204,6 +4229,8 @@
 		private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn FileType;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lbltest;
     }
 }
 

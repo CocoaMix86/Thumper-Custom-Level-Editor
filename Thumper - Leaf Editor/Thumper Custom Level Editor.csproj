@@ -64,7 +64,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Thumper Custom Level Editor SHA key.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -85,58 +86,64 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutThumperEditor.cs">
+    <Compile Include="Extra Forms\AboutThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutThumperEditor.Designer.cs">
+    <Compile Include="Extra Forms\AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlMoverOrResizer.cs" />
-    <Compile Include="CustomizeWorkspace.cs">
+    <Compile Include="Extra Classes\ControlMoverOrResizer.cs" />
+    <Compile Include="Extra Forms\CustomizeWorkspace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomizeWorkspace.Designer.cs">
+    <Compile Include="Extra Forms\CustomizeWorkspace.Designer.cs">
       <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
     </Compile>
-    <Compile Include="DialogInput.cs">
+    <Compile Include="Extra Forms\DialogInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DialogInput.Designer.cs">
+    <Compile Include="Extra Forms\DialogInput.Designer.cs">
       <DependentUpon>DialogInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="GateLvlData.cs" />
-    <Compile Include="Gate_Editor.cs">
+    <Compile Include="Editor Panels\GateLvlData.cs" />
+    <Compile Include="Editor Panels\Gate_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="ImageMessageBox.cs">
+    <Compile Include="Extra Classes\GlobalSuppressions.cs" />
+    <Compile Include="Extra Forms\ImageMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImageMessageBox.Designer.cs">
+    <Compile Include="Extra Forms\ImageMessageBox.Designer.cs">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interpolator.cs">
+    <Compile Include="Extra Forms\Interpolator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interpolator.Designer.cs">
+    <Compile Include="Extra Forms\Interpolator.Designer.cs">
       <DependentUpon>Interpolator.cs</DependentUpon>
     </Compile>
-    <Compile Include="Leaf_Editor.cs">
+    <Compile Include="Editor Panels\Leaf_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LvlLeafData.cs" />
-    <Compile Include="Lvl_Editor.cs">
+    <Compile Include="Editor Panels\LvlLeafData.cs" />
+    <Compile Include="Editor Panels\Lvl_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MasterLvlData.cs" />
-    <Compile Include="Master_Editor.cs">
+    <Compile Include="Editor Panels\MasterLvlData.cs" />
+    <Compile Include="Editor Panels\Master_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Object_Params.cs" />
-    <Compile Include="Sample_Editor.cs">
+    <Compile Include="Editor Panels\Object_Params.cs" />
+    <Compile Include="Editor Panels\SampleData.cs" />
+    <Compile Include="Editor Panels\Sample_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sequencer_Object.cs" />
+    <Compile Include="Editor Panels\Sequencer_Object.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,19 +152,19 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorkingFolder.cs">
+    <Compile Include="Editor Panels\WorkingFolder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <EmbeddedResource Include="AboutThumperEditor.resx">
+    <EmbeddedResource Include="Extra Forms\AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomizeWorkspace.resx">
+    <EmbeddedResource Include="Extra Forms\CustomizeWorkspace.resx">
       <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DialogInput.resx">
+    <EmbeddedResource Include="Extra Forms\DialogInput.resx">
       <DependentUpon>DialogInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interpolator.resx">
+    <EmbeddedResource Include="Extra Forms\Interpolator.resx">
       <DependentUpon>Interpolator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThumperEditor.resx">
@@ -166,15 +173,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="packages.config" />
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -184,18 +186,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Thumper Custom Level Editor SHA key.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="image assets\railcolorhelp.png" />
     <None Include="text assets\leaf_singletrack.txt" />
     <None Include="text assets\leaf_multitrack.txt" />
     <None Include="image assets\difficultyhelp.png" />
-    <None Include="Resources\difficultyhelp.png" />
-    <None Include="Resources\railcolorhelp.png" />
     <None Include="text assets\leaf_pyramid_outro.txt" />
     <None Include="image assets\exit.png" />
     <None Include="image assets\gate.png" />
@@ -239,9 +235,6 @@
     <Error Condition="!Exists('..\packages\ILMerge.3.0.29\build\ILMerge.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILMerge.3.0.29\build\ILMerge.props'))" />
   </Target>
   <ItemGroup>
-    <PackageReference Include="ILMerge" Version="3.0.29" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="text assets\helptext.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +248,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Target Name="ILMerge">
     <!-- the ILMergePath property points to the location of ILMerge.exe console application -->
