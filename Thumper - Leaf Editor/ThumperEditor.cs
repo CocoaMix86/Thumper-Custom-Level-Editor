@@ -48,16 +48,14 @@ namespace Thumper___Leaf_Editor
 					MasterEditorVisible(false); SaveMaster(true);
 
 					//set Working Folder panel data
-					workingfolderFiles.Rows.Clear();
-					workingfolderFiles.RowEnter -= new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
-					foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS")))) {
-						workingfolderFiles.Rows.Add(Path.GetFileName(file));
-					}
-					workingfolderFiles.RowEnter += new DataGridViewCellEventHandler(workingfolderFiles_RowEnter);
+					btnWorkRefresh_Click(null, null);
+
 					lblWorkingFolder.Text = $"Working Folder - {value}";
 					btnWorkRefresh.Enabled = true;
 					editLevelDetailsToolStripMenuItem.Enabled = true;
 					regenerateDefaultFilesToolStripMenuItem.Enabled = true;
+					//set window name to the level name
+					this.Text = "Thumper Custom Level Editor - " + new DirectoryInfo(workingfolder).Name;
 				}
 			}
 		}

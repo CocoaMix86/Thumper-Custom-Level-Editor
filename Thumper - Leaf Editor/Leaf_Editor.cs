@@ -783,7 +783,7 @@ namespace Thumper___Leaf_Editor
                 { "obj_type", "SequinLeaf" },
                 { "obj_name", _leafname }
             };
-
+			
             JArray seq_objs = new JArray();
 			foreach (Sequencer_Object seq_obj in _tracks) {
 				//skip blank tracks

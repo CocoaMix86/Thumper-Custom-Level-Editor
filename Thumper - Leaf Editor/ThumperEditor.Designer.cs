@@ -280,6 +280,7 @@
             this.sampleList = new System.Windows.Forms.DataGridView();
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
+            this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
@@ -3725,6 +3726,7 @@
             this.workingfolderFiles.ColumnHeadersHeight = 20;
             this.workingfolderFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.workingfolderFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FileType,
             this.FileName});
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -3758,7 +3760,6 @@
             this.workingfolderFiles.Size = new System.Drawing.Size(288, 379);
             this.workingfolderFiles.TabIndex = 80;
             this.workingfolderFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellClick);
-            this.workingfolderFiles.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_RowEnter);
             this.workingfolderFiles.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.workingfolderFiles_RowsAdded);
             this.workingfolderFiles.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.workingfolderFiles_RowsRemoved);
             // 
@@ -3895,6 +3896,14 @@
             this.label57.Size = new System.Drawing.Size(72, 13);
             this.label57.TabIndex = 49;
             this.label57.Text = "Sample Editor";
+            // 
+            // FileType
+            // 
+            this.FileType.HeaderText = "";
+            this.FileType.Name = "FileType";
+            this.FileType.ReadOnly = true;
+            this.FileType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.FileType.Width = 16;
             // 
             // FileName
             // 
@@ -4193,6 +4202,7 @@
 		private System.Windows.Forms.Button btnSaveMaster;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewImageColumn FileType;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
     }
 }
