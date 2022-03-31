@@ -148,8 +148,10 @@ namespace Thumper___Leaf_Editor
 			string val;
 			if (trackEditor.CurrentCell.Value == null)
 				val = NUD_TrackDoubleclick.Value.ToString();
-			else
+			else {
 				val = null;
+				trackEditor.CurrentCell.Style = null;
+			}
 
 			trackEditor.CurrentCell.Value = val;
 		}
