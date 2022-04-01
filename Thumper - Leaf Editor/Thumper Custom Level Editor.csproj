@@ -55,7 +55,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ThumperIconEditor.ico</ApplicationIcon>
+    <ApplicationIcon>image assets\ThumperIconEditor.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -92,7 +92,7 @@
     <Compile Include="Extra Forms\AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extra Classes\ControlMoverOrResizer.cs" />
+    <Compile Include="Utility Classes\ControlMoverOrResizer.cs" />
     <Compile Include="Extra Forms\CustomizeWorkspace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,7 +109,7 @@
     <Compile Include="Editor Panels\Gate_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Classes\GlobalSuppressions.cs" />
+    <Compile Include="Utility Classes\GlobalSuppressions.cs" />
     <Compile Include="Extra Forms\ImageMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +153,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Editor Panels\WorkingFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utility Classes\Leaf Playback.cs">
       <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="Extra Forms\AboutThumperEditor.resx">
@@ -225,7 +228,7 @@
     <None Include="text assets\samp_rests.txt" />
     <Content Include="text assets\track objects.txt" />
     <None Include="text assets\xfm_default.txt" />
-    <Content Include="ThumperIconEditor.ico" />
+    <Content Include="image assets\ThumperIconEditor.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

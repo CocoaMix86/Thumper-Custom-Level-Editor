@@ -128,6 +128,7 @@
             this.panelZoom = new System.Windows.Forms.Panel();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
+            this.btnTrackPlayback = new System.Windows.Forms.Button();
             this.btnLeafPanelTemplate = new System.Windows.Forms.Button();
             this.btnLeafPanelOpen = new System.Windows.Forms.Button();
             this.dropLeafStep = new System.Windows.Forms.ComboBox();
@@ -278,12 +279,13 @@
             this.lblWorkingFolder = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelSample = new System.Windows.Forms.Panel();
+            this.lbltest = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
-            this.lbltest = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -1198,6 +1200,7 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLeaf.Controls.Add(this.btnTrackPlayback);
             this.panelLeaf.Controls.Add(this.btnLeafPanelTemplate);
             this.panelLeaf.Controls.Add(this.btnLeafPanelOpen);
             this.panelLeaf.Controls.Add(this.dropLeafStep);
@@ -1242,10 +1245,27 @@
             this.panelLeaf.Controls.Add(this.btnSaveLeaf);
             this.panelLeaf.Controls.Add(this.label5);
             this.panelLeaf.Controls.Add(this.panelZoom);
-            this.panelLeaf.Location = new System.Drawing.Point(308, 478);
+            this.panelLeaf.Location = new System.Drawing.Point(306, 418);
             this.panelLeaf.Name = "panelLeaf";
             this.panelLeaf.Size = new System.Drawing.Size(1431, 495);
             this.panelLeaf.TabIndex = 45;
+            // 
+            // btnTrackPlayback
+            // 
+            this.btnTrackPlayback.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackPlayback.BackgroundImage = global::Thumper___Leaf_Editor.Properties.Resources.sample;
+            this.btnTrackPlayback.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnTrackPlayback.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackPlayback.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackPlayback.ForeColor = System.Drawing.Color.Black;
+            this.btnTrackPlayback.Location = new System.Drawing.Point(189, 145);
+            this.btnTrackPlayback.Name = "btnTrackPlayback";
+            this.btnTrackPlayback.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackPlayback.TabIndex = 98;
+            this.btnTrackPlayback.UseCompatibleTextRendering = true;
+            this.btnTrackPlayback.UseVisualStyleBackColor = false;
+            this.btnTrackPlayback.Visible = false;
+            this.btnTrackPlayback.Click += new System.EventHandler(this.btnTrackPlayback_Click);
             // 
             // btnLeafPanelTemplate
             // 
@@ -3823,11 +3843,22 @@
             this.panelSample.Controls.Add(this.sampleList);
             this.panelSample.Controls.Add(this.lblSampleClose);
             this.panelSample.Controls.Add(this.label57);
-            this.panelSample.Location = new System.Drawing.Point(747, 421);
+            this.panelSample.Location = new System.Drawing.Point(748, 51);
             this.panelSample.Name = "panelSample";
-            this.panelSample.Size = new System.Drawing.Size(454, 383);
+            this.panelSample.Size = new System.Drawing.Size(454, 392);
             this.panelSample.TabIndex = 134;
             this.panelSample.Visible = false;
+            // 
+            // lbltest
+            // 
+            this.lbltest.AutoSize = true;
+            this.lbltest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltest.ForeColor = System.Drawing.Color.White;
+            this.lbltest.Location = new System.Drawing.Point(101, 226);
+            this.lbltest.Name = "lbltest";
+            this.lbltest.Size = new System.Drawing.Size(72, 13);
+            this.lbltest.TabIndex = 118;
+            this.lbltest.Text = "Sample Editor";
             // 
             // button1
             // 
@@ -3900,7 +3931,7 @@
             this.sampleList.RowTemplate.Height = 200;
             this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.sampleList.Size = new System.Drawing.Size(370, 136);
+            this.sampleList.Size = new System.Drawing.Size(370, 145);
             this.sampleList.TabIndex = 80;
             this.sampleList.Visible = false;
             // 
@@ -3931,16 +3962,9 @@
             this.label57.TabIndex = 49;
             this.label57.Text = "Sample Editor";
             // 
-            // lbltest
+            // timer1
             // 
-            this.lbltest.AutoSize = true;
-            this.lbltest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltest.ForeColor = System.Drawing.Color.White;
-            this.lbltest.Location = new System.Drawing.Point(101, 226);
-            this.lbltest.Name = "lbltest";
-            this.lbltest.Size = new System.Drawing.Size(72, 13);
-            this.lbltest.TabIndex = 118;
-            this.lbltest.Text = "Sample Editor";
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FormLeafEditor
             // 
@@ -4231,6 +4255,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lbltest;
+        private System.Windows.Forms.Button btnTrackPlayback;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

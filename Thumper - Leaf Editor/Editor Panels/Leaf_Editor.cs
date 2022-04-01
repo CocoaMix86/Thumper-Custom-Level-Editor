@@ -534,6 +534,8 @@ namespace Thumper___Leaf_Editor
 		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
 		private void btnLeafPanelOpen_Click(object sender, EventArgs e) => leafloadToolStripMenuItem.PerformClick();
 		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => leafTemplateToolStripMenuItem.PerformClick();
+
+		
 		#endregion
 
 		#region Methods
