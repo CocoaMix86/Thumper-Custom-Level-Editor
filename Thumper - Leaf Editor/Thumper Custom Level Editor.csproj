@@ -154,6 +154,7 @@
     <Compile Include="Utility Classes\Leaf Playback.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utility Classes\Timer.cs" />
     <EmbeddedResource Include="Extra Forms\AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </EmbeddedResource>

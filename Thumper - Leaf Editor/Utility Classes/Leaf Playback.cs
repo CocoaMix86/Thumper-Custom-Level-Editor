@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Media;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Thumper___Leaf_Editor
 {
@@ -14,12 +15,14 @@ namespace Thumper___Leaf_Editor
 		bool turning = false;
 		bool playing = false;
 
+		Multimedia.Timer timer = new Multimedia.Timer();
+
 		private void btnTrackPlayback_Click(object sender, EventArgs e)
 		{
 			//if the playback is active, stop it. Otherwise, continue below
 			if (playing) {
 				playing = false;
-				timer1.Enabled = false;
+				timer.Stop();
 				btnTrackPlayback.ForeColor = Color.Green;
 				return;
             }
@@ -38,7 +41,7 @@ namespace Thumper___Leaf_Editor
 					_sequence = 0;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null)
-							_toplay[_sequence] = new Tuple<int, int>(150, 50);
+							_toplay[_sequence] = new Tuple<int, int>(150, 60);
 						_sequence++;
 					}
 				}
@@ -53,12 +56,21 @@ namespace Thumper___Leaf_Editor
 						if (Math.Abs(_s) >= 15) {
 							//if the previous beat was already a turn, don't make another beep.
 							if (turning == false) {
-								_toplay[_sequence] = new Tuple<int, int>(400, 50);
+								_toplay[_sequence] = new Tuple<int, int>(400, 60);
 								turning = true;
 							}
 						}
 						else
 							turning = false;
+						_sequence++;
+					}
+				}
+				//Takes care of bars and rings
+				if (dgvr.HeaderCell.Value.ToString().Contains("BARS") || dgvr.HeaderCell.Value.ToString().Contains("RINGS")) {
+					_sequence = 0;
+					foreach (DataGridViewCell dgvc in dgvr.Cells) {
+						if (dgvc.Value != null)
+							_toplay[_sequence] = new Tuple<int, int>(500, 60);
 						_sequence++;
 					}
 				}
@@ -68,26 +80,27 @@ namespace Thumper___Leaf_Editor
 			btnTrackPlayback.ForeColor = Color.Red;
 			_playbackbeat = 0;
 			//the speed of the timer is reliant on the level's BPM
-			timer1.Interval = (int)(1000 * (60 / NUD_ConfigBPM.Value));
-			timer1.Enabled = true;
+			timer.Period = (int)(1000 * (60 / NUD_ConfigBPM.Value));
+			timer.Start();
 		}
 
-		private void timer1_Tick(object sender, EventArgs e)
+		private void timer_Tick(object source, EventArgs e)
 		{
-			BeepBeep(100, _toplay[_playbackbeat].Item1, _toplay[_playbackbeat].Item2);
+			//Task.Run(() => BeepBeep(_toplay[_playbackbeat].Item1, _toplay[_playbackbeat].Item2)).ConfigureAwait(false);
+			BeepBeep(_toplay[_playbackbeat].Item1, _toplay[_playbackbeat].Item2);
 			_playbackbeat++;
 			//once playback reaches the end of the leaf, stop it
-			if (_playbackbeat >= _toplay.Length) {
-				timer1.Enabled = false;
+			if (_playbackbeat >= _toplay.Length - 1) {
+				timer.Stop();
 				playing = false;
 				btnTrackPlayback.ForeColor = Color.Green;
 			}
 		}
 
 		/// CREDIT: https://social.msdn.microsoft.com/Forums/vstudio/en-US/18fe83f0-5658-4bcf-bafc-2e02e187eb80/beep-beep
-		public static void BeepBeep(int Amplitude, int Frequency, int Duration)
+		private static void BeepBeep(int Frequency, int Duration)
 		{
-			double A = ((Amplitude * (System.Math.Pow(2, 15))) / 1000) - 1;
+			double A = ((100 * Math.Pow(2, 15)) / 1000) - 1;
 			double DeltaFT = 2 * Math.PI * Frequency / 44100.0;
 
 			int Samples = 441 * Duration / 10;
@@ -106,7 +119,7 @@ namespace Thumper___Leaf_Editor
 					BW.Flush();
 					MS.Seek(0, SeekOrigin.Begin);
 					using (SoundPlayer SP = new SoundPlayer(MS)) {
-						SP.PlaySync();
+						SP.Play();
 					}
 				}
 			}

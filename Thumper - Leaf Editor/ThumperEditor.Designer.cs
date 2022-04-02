@@ -285,7 +285,6 @@
             this.sampleList = new System.Windows.Forms.DataGridView();
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -3965,10 +3964,6 @@
             this.label57.TabIndex = 49;
             this.label57.Text = "Sample Editor";
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4259,7 +4254,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lbltest;
         private System.Windows.Forms.Button btnTrackPlayback;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

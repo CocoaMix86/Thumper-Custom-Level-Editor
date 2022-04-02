@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using ControlManager;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Timers;
 
 namespace Thumper___Leaf_Editor
 {
@@ -280,6 +281,8 @@ namespace Thumper___Leaf_Editor
 			panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
 			panelSample.Size = Properties.Settings.Default.sampleeditorsize;
 			panelSample.Location = Properties.Settings.Default.sampleeditorloc;
+
+			timer.Tick += new EventHandler(timer_Tick);
 		}
 
 		public void CreateCustomLevelFolder(DialogInput input)
