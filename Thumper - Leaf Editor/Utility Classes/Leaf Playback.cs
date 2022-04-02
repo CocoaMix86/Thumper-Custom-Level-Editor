@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Media;
+using System.Drawing;
 
 namespace Thumper___Leaf_Editor
 {
@@ -10,61 +11,80 @@ namespace Thumper___Leaf_Editor
 		Tuple<int, int>[] _toplay;
 		int _playbackbeat;
 		int _sequence;
+		bool turning = false;
+		bool playing = false;
 
 		private void btnTrackPlayback_Click(object sender, EventArgs e)
 		{
+			//if the playback is active, stop it. Otherwise, continue below
+			if (playing) {
+				playing = false;
+				timer1.Enabled = false;
+				btnTrackPlayback.ForeColor = Color.Green;
+				return;
+            }
+
+			//initialize a new array of the sounds to play
 			_toplay = new Tuple<int, int>[(int)numericUpDown_LeafLength.Value];
 			for (int x = 0; x < _toplay.Length; x++)
 				_toplay[x] = new Tuple<int, int>(0, 0);
 
+			//iterate over each row in the lead to find the tracks with the important sound-making objects
 			foreach (DataGridViewRow dgvr in trackEditor.Rows)
 			{
+				//Takes care of Thumps
 				if (dgvr.HeaderCell.Value.ToString().Contains("THUMPS"))
 				{
 					_sequence = 0;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null)
 							_toplay[_sequence] = new Tuple<int, int>(150, 50);
-						//else
-							//_toplay[_sequence] = new Tuple<int, int>(37, 1);
 						_sequence++;
 					}
 				}
+				//Takes care of turns
 				if (dgvr.HeaderCell.Value.ToString().Contains("(turn)"))
 				{
 					_sequence = 0;
 					foreach (DataGridViewCell dgvc in dgvr.Cells)
 					{
 						decimal _s = dgvc.Value == null ? 0 : decimal.Parse(dgvc.Value.ToString());
-						if (Math.Abs(_s) >= 15)
-							_toplay[_sequence] = new Tuple<int, int>(400, 50);
-						//else
-							//_toplay[_sequence] = new Tuple<int, int>(37, 1);
+						//only makes a sound if the turn is 15deg or larger
+						if (Math.Abs(_s) >= 15) {
+							//if the previous beat was already a turn, don't make another beep.
+							if (turning == false) {
+								_toplay[_sequence] = new Tuple<int, int>(400, 50);
+								turning = true;
+							}
+						}
+						else
+							turning = false;
 						_sequence++;
 					}
 				}
 			}
-
+			//enable the timer and start playback
+			playing = true;
+			btnTrackPlayback.ForeColor = Color.Red;
 			_playbackbeat = 0;
+			//the speed of the timer is reliant on the level's BPM
 			timer1.Interval = (int)(1000 * (60 / NUD_ConfigBPM.Value));
 			timer1.Enabled = true;
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
 		{
-
-			//Console.Beep(_toplay[_playbackbeat].Item1, _toplay[_playbackbeat].Item2);
-			Beep.BeepBeep(100, _toplay[_playbackbeat].Item1, _toplay[_playbackbeat].Item2);
+			BeepBeep(100, _toplay[_playbackbeat].Item1, _toplay[_playbackbeat].Item2);
 			_playbackbeat++;
-			if (_playbackbeat >= _toplay.Length)
+			//once playback reaches the end of the leaf, stop it
+			if (_playbackbeat >= _toplay.Length) {
 				timer1.Enabled = false;
+				playing = false;
+				btnTrackPlayback.ForeColor = Color.Green;
+			}
 		}
-	}
 
-
-	/// CREDIT: https://social.msdn.microsoft.com/Forums/vstudio/en-US/18fe83f0-5658-4bcf-bafc-2e02e187eb80/beep-beep
-	public class Beep
-	{
+		/// CREDIT: https://social.msdn.microsoft.com/Forums/vstudio/en-US/18fe83f0-5658-4bcf-bafc-2e02e187eb80/beep-beep
 		public static void BeepBeep(int Amplitude, int Frequency, int Duration)
 		{
 			double A = ((Amplitude * (System.Math.Pow(2, 15))) / 1000) - 1;
@@ -73,24 +93,19 @@ namespace Thumper___Leaf_Editor
 			int Samples = 441 * Duration / 10;
 			int Bytes = Samples * 4;
 			int[] Hdr = { 0X46464952, 36 + Bytes, 0X45564157, 0X20746D66, 16, 0X20001, 44100, 176400, 0X100004, 0X61746164, Bytes };
-			using (MemoryStream MS = new MemoryStream(44 + Bytes))
-			{
-				using (BinaryWriter BW = new BinaryWriter(MS))
-				{
-					for (int I = 0; I < Hdr.Length; I++)
-					{
+			using (MemoryStream MS = new MemoryStream(44 + Bytes)) {
+				using (BinaryWriter BW = new BinaryWriter(MS)) {
+					for (int I = 0; I < Hdr.Length; I++) {
 						BW.Write(Hdr[I]);
 					}
-					for (int T = 0; T < Samples; T++)
-					{
+					for (int T = 0; T < Samples; T++) {
 						short Sample = System.Convert.ToInt16(A * Math.Sin(DeltaFT * T));
 						BW.Write(Sample);
 						BW.Write(Sample);
 					}
 					BW.Flush();
 					MS.Seek(0, SeekOrigin.Begin);
-					using (SoundPlayer SP = new SoundPlayer(MS))
-					{
+					using (SoundPlayer SP = new SoundPlayer(MS)) {
 						SP.PlaySync();
 					}
 				}

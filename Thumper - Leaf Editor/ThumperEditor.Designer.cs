@@ -1253,15 +1253,18 @@
             // btnTrackPlayback
             // 
             this.btnTrackPlayback.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackPlayback.BackgroundImage = global::Thumper___Leaf_Editor.Properties.Resources.sample;
             this.btnTrackPlayback.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnTrackPlayback.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackPlayback.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackPlayback.ForeColor = System.Drawing.Color.Black;
+            this.btnTrackPlayback.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackPlayback.ForeColor = System.Drawing.Color.Green;
             this.btnTrackPlayback.Location = new System.Drawing.Point(189, 145);
             this.btnTrackPlayback.Name = "btnTrackPlayback";
-            this.btnTrackPlayback.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackPlayback.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnTrackPlayback.Size = new System.Drawing.Size(22, 27);
             this.btnTrackPlayback.TabIndex = 98;
+            this.btnTrackPlayback.Text = "P";
+            this.toolTip1.SetToolTip(this.btnTrackPlayback, "Click to playback the track. Only plays back thumps and turns.\r\nSpeed is dependan" +
+        "t on the Master BPM.");
             this.btnTrackPlayback.UseCompatibleTextRendering = true;
             this.btnTrackPlayback.UseVisualStyleBackColor = false;
             this.btnTrackPlayback.Visible = false;
