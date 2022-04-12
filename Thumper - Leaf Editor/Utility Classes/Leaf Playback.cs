@@ -3,7 +3,6 @@ using System.IO;
 using System.Windows.Forms;
 using System.Media;
 using System.Drawing;
-using System.Threading.Tasks;
 
 namespace Thumper___Leaf_Editor
 {
