@@ -128,6 +128,8 @@
             this.panelZoom = new System.Windows.Forms.Panel();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
+            this.btnTrackColorImport = new System.Windows.Forms.Button();
+            this.btnTrackColorExport = new System.Windows.Forms.Button();
             this.btnTrackPlayback = new System.Windows.Forms.Button();
             this.btnLeafPanelTemplate = new System.Windows.Forms.Button();
             this.btnLeafPanelOpen = new System.Windows.Forms.Button();
@@ -1199,6 +1201,8 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLeaf.Controls.Add(this.btnTrackColorImport);
+            this.panelLeaf.Controls.Add(this.btnTrackColorExport);
             this.panelLeaf.Controls.Add(this.btnTrackPlayback);
             this.panelLeaf.Controls.Add(this.btnLeafPanelTemplate);
             this.panelLeaf.Controls.Add(this.btnLeafPanelOpen);
@@ -1248,6 +1252,32 @@
             this.panelLeaf.Name = "panelLeaf";
             this.panelLeaf.Size = new System.Drawing.Size(1431, 495);
             this.panelLeaf.TabIndex = 45;
+            // 
+            // btnTrackColorImport
+            // 
+            this.btnTrackColorImport.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackColorImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackColorImport.Location = new System.Drawing.Point(3, 445);
+            this.btnTrackColorImport.Name = "btnTrackColorImport";
+            this.btnTrackColorImport.Size = new System.Drawing.Size(112, 23);
+            this.btnTrackColorImport.TabIndex = 100;
+            this.btnTrackColorImport.Text = "Import Color Profile";
+            this.btnTrackColorImport.UseVisualStyleBackColor = false;
+            this.btnTrackColorImport.Visible = false;
+            this.btnTrackColorImport.Click += new System.EventHandler(this.btnTrackColorImport_Click);
+            // 
+            // btnTrackColorExport
+            // 
+            this.btnTrackColorExport.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackColorExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackColorExport.Location = new System.Drawing.Point(3, 423);
+            this.btnTrackColorExport.Name = "btnTrackColorExport";
+            this.btnTrackColorExport.Size = new System.Drawing.Size(112, 23);
+            this.btnTrackColorExport.TabIndex = 99;
+            this.btnTrackColorExport.Text = "Export Color Profile";
+            this.btnTrackColorExport.UseVisualStyleBackColor = false;
+            this.btnTrackColorExport.Visible = false;
+            this.btnTrackColorExport.Click += new System.EventHandler(this.btnTrackColorExport_Click);
             // 
             // btnTrackPlayback
             // 
@@ -1558,7 +1588,7 @@
             // 
             // btnTrackApply
             // 
-            this.btnTrackApply.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackApply.BackColor = System.Drawing.Color.Green;
             this.btnTrackApply.Enabled = false;
             this.btnTrackApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3968,7 +3998,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ClientSize = new System.Drawing.Size(1745, 869);
+            this.ClientSize = new System.Drawing.Size(1745, 892);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelSample);
             this.Controls.Add(this.panelWorkingFolder);
@@ -4254,6 +4284,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lbltest;
         private System.Windows.Forms.Button btnTrackPlayback;
+        private System.Windows.Forms.Button btnTrackColorImport;
+        private System.Windows.Forms.Button btnTrackColorExport;
     }
 }
 

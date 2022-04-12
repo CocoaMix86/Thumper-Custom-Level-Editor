@@ -119,7 +119,7 @@ namespace Thumper___Leaf_Editor
 
 		}
 		//Tentacles, Paths...
-		private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1wG1Ik_50sd2KeUaX19H8e1jjgl-avf-d8SqZk7rxrkQ");
+		private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0");
 
 		///Toolstrip - BRING TO FRONT items
 		private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) => panelLeaf.BringToFront();
@@ -281,7 +281,7 @@ namespace Thumper___Leaf_Editor
 			panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
 			panelSample.Size = Properties.Settings.Default.sampleeditorsize;
 			panelSample.Location = Properties.Settings.Default.sampleeditorloc;
-
+			//add a Tick event to the timer over in Leaf Playback.cs
 			timer.Tick += new EventHandler(timer_Tick);
 		}
 

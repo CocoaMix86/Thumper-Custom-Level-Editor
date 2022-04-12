@@ -530,6 +530,44 @@ namespace Thumper___Leaf_Editor
 			//call method to update coloring of track
 			TrackUpdateHighlighting(trackEditor.CurrentRow);
 		}
+		/// This grabs the highlighting color from each track and then exports them into a file for use in later imports
+		private void btnTrackColorExport_Click(object sender, EventArgs e)
+		{
+			string _out = "";
+			//iterate over each track in the editor, writing its highlighting color to the _out string
+			foreach (Sequencer_Object seq in _tracks) {
+				_out += seq.highlight_color.ToString() + '\n';
+			}
+			using (var sfd = new SaveFileDialog()) {
+				sfd.Filter = "Thumper Color Profile (*.color)|*.color";
+				sfd.FilterIndex = 1;
+				sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
+				if (sfd.ShowDialog() == DialogResult.OK) {
+					//save _out to file with .color extension
+					File.WriteAllText(sfd.FileName, _out);
+				}
+			}
+		}
+		/// Imports colors from file to the current loaded leaf
+		private void btnTrackColorImport_Click(object sender, EventArgs e)
+		{
+			using (var ofd = new OpenFileDialog()) {
+				ofd.Filter = "Thumper Color Profile (*.color)|*.color";
+				ofd.FilterIndex = 1;
+				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+				if (ofd.ShowDialog() == DialogResult.OK) {
+					//import all colors in the file to this array
+					var _colors = File.ReadAllLines(ofd.FileName);
+					//then iterate over each track in the editor, applying the colors in the array in order
+					for (int x = 0; x < _tracks.Count; x++) {
+						if (x < _colors.Length)
+							_tracks[x].highlight_color = _colors[x];
+						//call this method to update the colors once the value has been assigned
+						TrackUpdateHighlighting(trackEditor.Rows[x]);
+                    }
+                }
+			}
+		}
 		/// These buttons are the initial visible elements, and disappear once a leaf loads
 		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
 		private void btnLeafPanelOpen_Click(object sender, EventArgs e) => leafloadToolStripMenuItem.PerformClick();
