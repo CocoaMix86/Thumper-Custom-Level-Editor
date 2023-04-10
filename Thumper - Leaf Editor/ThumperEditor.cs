@@ -199,7 +199,48 @@ namespace Thumper___Leaf_Editor
 				File.WriteAllText(@"templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
 				File.WriteAllText(@"templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
 			}
+			ImportObjects();
+			
+			//set timesig datasource
+			dropTimeSig.DataSource = _timesig;
+			//
+			SaveLeaf(true);
 
+			///set a bunch of tool tips
+			//Leaf tooltips
+			toolTip1.SetToolTip(btnTrackClear, "Clears the selected track of data");
+			//Lvl tooltips
+			toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track of data");
+			//Master tooltips
+			toolTip1.SetToolTip(btnMasterOpenCheckpoint, "Opens the selected checkpoint in the Lvl Editor");
+			toolTip1.SetToolTip(btnMasterOpenIntro, "Opens the selected intro lvl in the Lvl Editor");
+			toolTip1.SetToolTip(btnMasterOpenLeader, "Opens the selected leader lvl in the Lvl Editor");
+			toolTip1.SetToolTip(btnMasterOpenRest, "Opens the selected rest lvl in the Lvl Editor");
+			//Gate tooltips
+			toolTip1.SetToolTip(btnGateOpenPre, "Opens the selected Pre lvl in the Lvl Editor");
+			toolTip1.SetToolTip(btnGateOpenPost, "Opens the selected Post lvl in the Lvl Editor");
+			toolTip1.SetToolTip(btnGateOpenRestart, "Opens the selected Restart lvl in the Lvl Editor");
+
+			//load size and location data for panels
+			panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
+			panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
+			panelLevel.Location = Properties.Settings.Default.lvleditorloc;
+			panelLevel.Size = Properties.Settings.Default.lvleditorsize;
+			panelGate.Location = Properties.Settings.Default.gateeditorloc;
+			panelGate.Size = Properties.Settings.Default.gateeditorsize;
+			panelMaster.Location = Properties.Settings.Default.mastereditorloc;
+			panelMaster.Size = Properties.Settings.Default.mastereditorsize;
+			panelWorkingFolder.Location = Properties.Settings.Default.folderloc;
+			panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
+			panelSample.Size = Properties.Settings.Default.sampleeditorsize;
+			panelSample.Location = Properties.Settings.Default.sampleeditorloc;
+			//add a Tick event to the timer over in Leaf Playback.cs
+			timer.Tick += new EventHandler(timer_Tick);
+		}
+
+		public void ImportObjects()
+        {
+			_objects.Clear();
 			///import selectable objects from file and parse them into lists for manipulation
 			//splits input at "###". Each section is a collection of param_paths
 			if (!File.Exists(@"templates\track_objects.txt"))
@@ -248,41 +289,6 @@ namespace Thumper___Leaf_Editor
 			dropObjects.ValueMember = "obj_displayname";
 			dropObjects.DataSource = _objects;
 			dropParamPath.Enabled = false;
-			//set timesig datasource
-			dropTimeSig.DataSource = _timesig;
-			//
-			SaveLeaf(true);
-
-			///set a bunch of tool tips
-			//Leaf tooltips
-			toolTip1.SetToolTip(btnTrackClear, "Clears the selected track of data");
-			//Lvl tooltips
-			toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track of data");
-			//Master tooltips
-			toolTip1.SetToolTip(btnMasterOpenCheckpoint, "Opens the selected checkpoint in the Lvl Editor");
-			toolTip1.SetToolTip(btnMasterOpenIntro, "Opens the selected intro lvl in the Lvl Editor");
-			toolTip1.SetToolTip(btnMasterOpenLeader, "Opens the selected leader lvl in the Lvl Editor");
-			toolTip1.SetToolTip(btnMasterOpenRest, "Opens the selected rest lvl in the Lvl Editor");
-			//Gate tooltips
-			toolTip1.SetToolTip(btnGateOpenPre, "Opens the selected Pre lvl in the Lvl Editor");
-			toolTip1.SetToolTip(btnGateOpenPost, "Opens the selected Post lvl in the Lvl Editor");
-			toolTip1.SetToolTip(btnGateOpenRestart, "Opens the selected Restart lvl in the Lvl Editor");
-
-			//load size and location data for panels
-			panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
-			panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
-			panelLevel.Location = Properties.Settings.Default.lvleditorloc;
-			panelLevel.Size = Properties.Settings.Default.lvleditorsize;
-			panelGate.Location = Properties.Settings.Default.gateeditorloc;
-			panelGate.Size = Properties.Settings.Default.gateeditorsize;
-			panelMaster.Location = Properties.Settings.Default.mastereditorloc;
-			panelMaster.Size = Properties.Settings.Default.mastereditorsize;
-			panelWorkingFolder.Location = Properties.Settings.Default.folderloc;
-			panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
-			panelSample.Size = Properties.Settings.Default.sampleeditorsize;
-			panelSample.Location = Properties.Settings.Default.sampleeditorloc;
-			//add a Tick event to the timer over in Leaf Playback.cs
-			timer.Tick += new EventHandler(timer_Tick);
 		}
 
 		public void CreateCustomLevelFolder(DialogInput input)

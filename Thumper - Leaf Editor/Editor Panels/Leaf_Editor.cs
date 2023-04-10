@@ -568,6 +568,12 @@ namespace Thumper___Leaf_Editor
                 }
 			}
 		}
+
+		private void btnLeafObjRefresh_Click(object sender, EventArgs e)
+		{
+			ImportObjects();
+		}
+
 		/// These buttons are the initial visible elements, and disappear once a leaf loads
 		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
 		private void btnLeafPanelOpen_Click(object sender, EventArgs e) => leafloadToolStripMenuItem.PerformClick();

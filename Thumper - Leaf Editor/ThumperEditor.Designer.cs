@@ -159,6 +159,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dropTimeSig = new System.Windows.Forms.ComboBox();
             this.btnSaveLeaf = new System.Windows.Forms.Button();
+            this.btnLeafObjRefresh = new System.Windows.Forms.Button();
             this.panelLevel = new System.Windows.Forms.Panel();
             this.label39 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
@@ -1248,6 +1249,7 @@
             this.panelLeaf.Controls.Add(this.btnSaveLeaf);
             this.panelLeaf.Controls.Add(this.label5);
             this.panelLeaf.Controls.Add(this.panelZoom);
+            this.panelLeaf.Controls.Add(this.btnLeafObjRefresh);
             this.panelLeaf.Location = new System.Drawing.Point(306, 418);
             this.panelLeaf.Name = "panelLeaf";
             this.panelLeaf.Size = new System.Drawing.Size(1431, 495);
@@ -1718,6 +1720,22 @@
             this.btnSaveLeaf.UseVisualStyleBackColor = true;
             this.btnSaveLeaf.Visible = false;
             this.btnSaveLeaf.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // btnLeafObjRefresh
+            // 
+            this.btnLeafObjRefresh.BackColor = System.Drawing.Color.IndianRed;
+            this.btnLeafObjRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeafObjRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeafObjRefresh.ForeColor = System.Drawing.Color.Black;
+            this.btnLeafObjRefresh.Location = new System.Drawing.Point(102, 124);
+            this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
+            this.btnLeafObjRefresh.Size = new System.Drawing.Size(67, 22);
+            this.btnLeafObjRefresh.TabIndex = 101;
+            this.btnLeafObjRefresh.Text = "Refresh";
+            this.btnLeafObjRefresh.UseCompatibleTextRendering = true;
+            this.btnLeafObjRefresh.UseVisualStyleBackColor = false;
+            this.btnLeafObjRefresh.Visible = false;
+            this.btnLeafObjRefresh.Click += new System.EventHandler(this.btnLeafObjRefresh_Click);
             // 
             // panelLevel
             // 
@@ -4286,6 +4304,7 @@
         private System.Windows.Forms.Button btnTrackPlayback;
         private System.Windows.Forms.Button btnTrackColorImport;
         private System.Windows.Forms.Button btnTrackColorExport;
+        private System.Windows.Forms.Button btnLeafObjRefresh;
     }
 }
 
