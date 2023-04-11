@@ -10,7 +10,7 @@ namespace Thumper___Leaf_Editor
 		public dynamic data_points { get; set; }
 		public string step { get; set; }
 		public float _default { get; set; }
-		public JArray footer { get; set; }
+		public string footer { get; set; }
 
 		public string friendly_type { get; set; }
 		public string friendly_param { get; set; }

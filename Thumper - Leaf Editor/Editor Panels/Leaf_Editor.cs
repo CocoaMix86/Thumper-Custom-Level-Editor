@@ -265,7 +265,7 @@ namespace Thumper___Leaf_Editor
 			}
 			//write contents direct to file without prompting save dialog
 			var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save));
+			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveLeaf(true);
 			lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
 		}
@@ -290,7 +290,7 @@ namespace Thumper___Leaf_Editor
 					var _save = LeafBuildSave(Path.GetFileName(sfd.FileName));
 					//serialize JSON object to a string, and write it to the file
 					sfd.FileName = $@"{storePath}\leaf_{tempFileName}";
-					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save));
+					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
 					//set a few visual elementsto show what file is being worked on
 					lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
 					_loadedleaf = sfd.FileName;

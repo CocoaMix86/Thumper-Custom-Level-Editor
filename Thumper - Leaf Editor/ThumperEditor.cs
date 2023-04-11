@@ -209,6 +209,7 @@ namespace Thumper___Leaf_Editor
 			///set a bunch of tool tips
 			//Leaf tooltips
 			toolTip1.SetToolTip(btnTrackClear, "Clears the selected track of data");
+			toolTip1.SetToolTip(btnLeafObjRefresh, "Reloads objects from templates\\track_objects.txt");
 			//Lvl tooltips
 			toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track of data");
 			//Master tooltips
@@ -259,7 +260,7 @@ namespace Thumper___Leaf_Editor
 					trait_type = new List<string>(),
 					step = new List<string>(),
 					def = new List<string>(),
-					footer = new List<JArray>()
+					footer = new List<string>()
 				};
 
 				for (int y = 2; y < import2.Count - 1; y++) {
@@ -272,7 +273,7 @@ namespace Thumper___Leaf_Editor
 						objpar.trait_type.Add(import3[3]);
 						objpar.step.Add(import3[4]);
 						objpar.def.Add(import3[5]);
-						objpar.footer.Add(JArray.Parse(import3[6]));
+						objpar.footer.Add(import3[6]);
 					}
 					catch {
 						_errorlog += "failed to import all properties of param_path " + import3[0] + " of object " + objpar.obj_name + ".\n";

@@ -1390,7 +1390,7 @@
             this.btnTrackClear.BackColor = System.Drawing.Color.Gray;
             this.btnTrackClear.Enabled = false;
             this.btnTrackClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackClear.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackClear.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTrackClear.ForeColor = System.Drawing.Color.Black;
             this.btnTrackClear.Location = new System.Drawing.Point(189, 114);
             this.btnTrackClear.Name = "btnTrackClear";
@@ -1723,15 +1723,16 @@
             // 
             // btnLeafObjRefresh
             // 
-            this.btnLeafObjRefresh.BackColor = System.Drawing.Color.IndianRed;
+            this.btnLeafObjRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.btnLeafObjRefresh.FlatAppearance.BorderSize = 0;
             this.btnLeafObjRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeafObjRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafObjRefresh.ForeColor = System.Drawing.Color.Black;
-            this.btnLeafObjRefresh.Location = new System.Drawing.Point(102, 124);
+            this.btnLeafObjRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeafObjRefresh.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnLeafObjRefresh.Location = new System.Drawing.Point(149, 125);
             this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
-            this.btnLeafObjRefresh.Size = new System.Drawing.Size(67, 22);
+            this.btnLeafObjRefresh.Size = new System.Drawing.Size(20, 22);
             this.btnLeafObjRefresh.TabIndex = 101;
-            this.btnLeafObjRefresh.Text = "Refresh";
+            this.btnLeafObjRefresh.Text = "↻";
             this.btnLeafObjRefresh.UseCompatibleTextRendering = true;
             this.btnLeafObjRefresh.UseVisualStyleBackColor = false;
             this.btnLeafObjRefresh.Visible = false;

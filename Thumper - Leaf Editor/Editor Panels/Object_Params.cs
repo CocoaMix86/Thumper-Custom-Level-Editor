@@ -12,6 +12,6 @@ namespace Thumper___Leaf_Editor
 		public List<string> trait_type { get; set; }
 		public List<string> step { get; set; }
 		public List<string> def { get; set; }
-		public List<JArray> footer { get; set; }
+		public List<string> footer { get; set; }
 	}
 }
