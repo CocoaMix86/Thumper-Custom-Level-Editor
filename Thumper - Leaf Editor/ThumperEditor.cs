@@ -273,7 +273,7 @@ namespace Thumper___Leaf_Editor
 						objpar.trait_type.Add(import3[3]);
 						objpar.step.Add(import3[4]);
 						objpar.def.Add(import3[5]);
-						objpar.footer.Add(import3[6]);
+						objpar.footer.Add(import3[6].Replace("[", "").Replace("]", ""));
 					}
 					catch {
 						_errorlog += "failed to import all properties of param_path " + import3[0] + " of object " + objpar.obj_name + ".\n";
