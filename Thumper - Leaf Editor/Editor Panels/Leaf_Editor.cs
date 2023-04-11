@@ -765,7 +765,7 @@ namespace Thumper___Leaf_Editor
 					data_points = seq_obj["data_points"],
 					step = seq_obj["step"],
 					_default = seq_obj["default"],
-					footer = seq_obj["footer"]
+					footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", "")
 				};
 				//if the leaf has definitions for these, add them. If not, set to defaults
 				_s.param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"];
