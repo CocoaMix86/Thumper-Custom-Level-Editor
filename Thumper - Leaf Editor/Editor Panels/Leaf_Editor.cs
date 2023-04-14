@@ -78,7 +78,11 @@ namespace Thumper___Leaf_Editor
 				//set all controls to their values stored in _tracks
 				dropObjects.SelectedIndex = dropObjects.FindStringExact(_tracks[_selecttrack].friendly_type);
 				dropParamPath.SelectedIndex = dropParamPath.FindStringExact(_params[0]);
-				dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[1]);
+				//needs a different selection method if it's a sample
+				if (_tracks[_selecttrack].obj_name.Contains(".samp"))
+					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_tracks[_selecttrack].obj_name);
+				else
+					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[1]);
 				txtTrait.Text = _tracks[_selecttrack].trait_type;
 				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color));
 				//remove event handlers from a few controls so they don't trigger when their values change
@@ -191,6 +195,8 @@ namespace Thumper___Leaf_Editor
 			//this gets triggered when the program starts, when no rows exist, and then it throws an error
 			//this is only here to stop that
 			try {
+				label11.Text = "Lane";
+				dropTrackLane.DataSource = new List<string>() { "left 2", "left 1", "middle", "right 1", "right 2" };
 				//when an object is chosen, unlock the param_path options and set datasource
 				dropParamPath.DataSource = _objects[dropObjects.SelectedIndex].param_displayname;
 				//switch index back and forth to trigger event
@@ -199,6 +205,13 @@ namespace Thumper___Leaf_Editor
 				dropParamPath.Enabled = true;
 				//set default lane to 'middle'
 				dropTrackLane.SelectedIndex = 2;
+
+				if ((string)dropObjects.SelectedValue == "PLAY SAMPLE") {
+					label11.Text = "Samples";
+					LvlReloadSamples();
+					dropTrackLane.DataSource = _lvlsamples;
+					dropTrackLane.SelectedIndex = -1;
+				}
 			}
 			catch { };
 		}
@@ -207,7 +220,7 @@ namespace Thumper___Leaf_Editor
 		{
 			if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
 				//if the param_path is .ent, enable lane choice
-				if (_objects[dropObjects.SelectedIndex].param_path[dropParamPath.SelectedIndex].EndsWith(".ent")) {
+				if (_objects[dropObjects.SelectedIndex].param_path[dropParamPath.SelectedIndex].EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
 					dropTrackLane.Enabled = true;
 					btnTrackApply.Enabled = true;
 				}
@@ -509,6 +522,9 @@ namespace Thumper___Leaf_Editor
 				highlight_value = 1,
 				footer = _objects[dropObjects.SelectedIndex].footer[dropParamPath.SelectedIndex]
 			};
+			//alter the data if it's a sample object being added. Save the sample name instead
+			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
+				_tracks[_selecttrack].obj_name = (string)dropTrackLane.SelectedValue;
 			//if lane is not middle, edit the param_path and friendly_param to match
 			if (_tracks[_selecttrack].param_path.Contains(".ent")) {
 				_tracks[_selecttrack].param_path = _tracks[_selecttrack].param_path.Replace(".ent", _tracklane[dropTrackLane.SelectedIndex]);
@@ -668,7 +684,11 @@ namespace Thumper___Leaf_Editor
 		///Updates row headers to be the Object and Param_Path
 		public void ChangeTrackName()
 		{
-			trackEditor.CurrentRow.HeaderCell.Value = _tracks[_selecttrack].friendly_type + " (" + _tracks[_selecttrack].friendly_param + ")";
+			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
+				//show the sample name instead
+				trackEditor.CurrentRow.HeaderCell.Value = _tracks[_selecttrack].friendly_type + " (" + _tracks[_selecttrack].obj_name + ")";
+			else
+				trackEditor.CurrentRow.HeaderCell.Value = _tracks[_selecttrack].friendly_type + " (" + _tracks[_selecttrack].friendly_param + ")";
 		}
 		///Takes values in a row and puts in them in the rich text box, condensed
 		public void ShowRawTrackData()
@@ -791,6 +811,12 @@ namespace Thumper___Leaf_Editor
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
 					_s.friendly_param += $", {dropTrackLane.Items[_tracklane.IndexOf($".{_s.param_path.Split('.')[1]}")]}";
 
+				//if object is a .samp, fix the friendly_param and friendly_type
+				if (_s.obj_name.Contains(".samp")) {
+					_s.friendly_type = "PLAY SAMPLE";
+					_s.friendly_param = _s.param_path;
+                }
+
 				//finally, add the completed seq_obj to tracks
 				_tracks.Add(_s);
 			}
@@ -802,7 +828,10 @@ namespace Thumper___Leaf_Editor
 			foreach (DataGridViewRow r in trackEditor.Rows) {
 				try {
 					if (_tracks[r.Index].friendly_param.Length > 1) {
-						r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].friendly_param + ")";
+						if (_tracks[r.Index].obj_name.Contains(".samp"))
+							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].param_path}, {_tracks[r.Index].obj_name})";
+						else
+							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].friendly_param})";
 						//pass _griddata per row to be imported to the DGV
 						TrackRawImport(r, _tracks[r.Index].data_points);
 						TrackUpdateHighlighting(r);

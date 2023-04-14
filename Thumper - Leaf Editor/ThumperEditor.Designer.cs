@@ -1032,6 +1032,7 @@
             // dropParamPath
             // 
             this.dropParamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropParamPath.DropDownWidth = 180;
             this.dropParamPath.Enabled = false;
             this.dropParamPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropParamPath.ForeColor = System.Drawing.Color.White;
@@ -1407,16 +1408,19 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(43, 208);
+            this.label11.Location = new System.Drawing.Point(27, 208);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 13);
+            this.label11.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label11.Size = new System.Drawing.Size(54, 13);
             this.label11.TabIndex = 66;
-            this.label11.Text = "Lane";
+            this.label11.Text = "Samples";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label11.Visible = false;
             // 
             // dropTrackLane
             // 
             this.dropTrackLane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropTrackLane.DropDownWidth = 180;
             this.dropTrackLane.Enabled = false;
             this.dropTrackLane.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropTrackLane.ForeColor = System.Drawing.Color.White;
