@@ -280,6 +280,16 @@ namespace Thumper___Leaf_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap samp {
+            get {
+                object obj = ResourceManager.GetObject("samp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///&apos;items&apos;: [
         ///{
@@ -745,16 +755,6 @@ namespace Thumper___Leaf_Editor.Properties {
         public static string samp_rests {
             get {
                 return ResourceManager.GetString("samp_rests", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap sample {
-            get {
-                object obj = ResourceManager.GetObject("sample", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

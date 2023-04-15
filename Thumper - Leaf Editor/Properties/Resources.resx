@@ -223,7 +223,7 @@
   <data name="leaf_multitrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="samp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\sample.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="railcolorhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
