@@ -31,11 +31,17 @@ namespace Thumper___Leaf_Editor
 			}
 			catch {
 				//return method if parse fails
-				MessageBox.Show("The selected file could not be parsed as JSON.");
+				MessageBox.Show("The selected file could not be parsed as JSON.", "File load error");
 				return;
 			}
 			///Send file off to different load methods based on the file type
-			if ((string)_load["obj_type"] == "SequinMaster") {
+			//process SAMP first, since its JSON structure is different, and detectable
+			if (_load.ContainsKey("items")) {
+				LoadSample();
+				if (panelSample.Visible == false)
+					sampleEditorToolStripMenuItem.PerformClick();
+            }
+			else if ((string)_load["obj_type"] == "SequinMaster") {
 				_loadedmastertemp = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}";
 				LoadMaster(_load);
 				if (panelMaster.Visible == false)
@@ -81,7 +87,7 @@ namespace Thumper___Leaf_Editor
 			//clear the dgv and reload files in the folder
 			workingfolderFiles.Rows.Clear();
 			//filter for specific files
-			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS")))) {
+			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS") || x.Contains("samp_custom")))) {
 				var filetype = Path.GetFileName(file).Split('_')[0];
 				workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileName(file));
 			}

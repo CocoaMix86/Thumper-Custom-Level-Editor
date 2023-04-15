@@ -14,7 +14,7 @@ namespace Thumper___Leaf_Editor
 	public partial class FormLeafEditor
 	{
 		#region Variables
-
+		ObservableCollection<LvlLeafData> _samplelist = new ObservableCollection<LvlLeafData>();
 		#endregion
 
 		#region EventHandlers
@@ -35,8 +35,12 @@ namespace Thumper___Leaf_Editor
 		///         ///
 		/// METHODS ///
 		///         ///
-		
-		private uint Hash32(string s)
+		public void LoadSample()
+        {
+
+        }
+
+		public uint Hash32(string s)
 		{
 			//this hashes stuff. Don't know why it does it this why.
 			//this is ripped directly from the game's code

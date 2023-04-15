@@ -282,12 +282,22 @@
             this.lblWorkingFolder = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelSample = new System.Windows.Forms.Panel();
-            this.lbltest = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.NUDsampOffset = new System.Windows.Forms.NumericUpDown();
+            this.label49 = new System.Windows.Forms.Label();
+            this.NUDsampPan = new System.Windows.Forms.NumericUpDown();
+            this.label47 = new System.Windows.Forms.Label();
+            this.NUDsampPitch = new System.Windows.Forms.NumericUpDown();
+            this.label46 = new System.Windows.Forms.Label();
+            this.NUDsampVolume = new System.Windows.Forms.NumericUpDown();
+            this.label45 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
             this.lblSampleClose = new System.Windows.Forms.Label();
-            this.label57 = new System.Windows.Forms.Label();
+            this.lblSampleEditor = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.txtSampPath = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -314,6 +324,10 @@
             this.panelWorkingFolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.panelSample.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDsampOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDsampPan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDsampPitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDsampVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -783,7 +797,7 @@
             this.sampleEditorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.sampleEditorToolStripMenuItem.CheckOnClick = true;
             this.sampleEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.sampleEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.sample;
+            this.sampleEditorToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.samp;
             this.sampleEditorToolStripMenuItem.Name = "sampleEditorToolStripMenuItem";
             this.sampleEditorToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.sampleEditorToolStripMenuItem.Text = "Sample Editor";
@@ -916,7 +930,7 @@
             // bTFSampleToolStripMenuItem
             // 
             this.bTFSampleToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bTFSampleToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.sample;
+            this.bTFSampleToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.samp;
             this.bTFSampleToolStripMenuItem.Margin = new System.Windows.Forms.Padding(-5, 0, 0, 0);
             this.bTFSampleToolStripMenuItem.Name = "bTFSampleToolStripMenuItem";
             this.bTFSampleToolStripMenuItem.Size = new System.Drawing.Size(32, 24);
@@ -3892,38 +3906,196 @@
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelSample.Controls.Add(this.lbltest);
-            this.panelSample.Controls.Add(this.button1);
+            this.panelSample.Controls.Add(this.txtSampPath);
+            this.panelSample.Controls.Add(this.label50);
+            this.panelSample.Controls.Add(this.NUDsampOffset);
+            this.panelSample.Controls.Add(this.label49);
+            this.panelSample.Controls.Add(this.NUDsampPan);
+            this.panelSample.Controls.Add(this.label47);
+            this.panelSample.Controls.Add(this.NUDsampPitch);
+            this.panelSample.Controls.Add(this.label46);
+            this.panelSample.Controls.Add(this.NUDsampVolume);
+            this.panelSample.Controls.Add(this.label45);
+            this.panelSample.Controls.Add(this.button2);
+            this.panelSample.Controls.Add(this.button3);
             this.panelSample.Controls.Add(this.label54);
             this.panelSample.Controls.Add(this.sampleList);
             this.panelSample.Controls.Add(this.lblSampleClose);
-            this.panelSample.Controls.Add(this.label57);
+            this.panelSample.Controls.Add(this.lblSampleEditor);
             this.panelSample.Location = new System.Drawing.Point(748, 51);
             this.panelSample.Name = "panelSample";
-            this.panelSample.Size = new System.Drawing.Size(454, 392);
+            this.panelSample.Size = new System.Drawing.Size(339, 469);
             this.panelSample.TabIndex = 134;
             this.panelSample.Visible = false;
             // 
-            // lbltest
+            // NUDsampOffset
             // 
-            this.lbltest.AutoSize = true;
-            this.lbltest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltest.ForeColor = System.Drawing.Color.White;
-            this.lbltest.Location = new System.Drawing.Point(101, 226);
-            this.lbltest.Name = "lbltest";
-            this.lbltest.Size = new System.Drawing.Size(72, 13);
-            this.lbltest.TabIndex = 118;
-            this.lbltest.Text = "Sample Editor";
+            this.NUDsampOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDsampOffset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NUDsampOffset.DecimalPlaces = 2;
+            this.NUDsampOffset.ForeColor = System.Drawing.Color.White;
+            this.NUDsampOffset.Location = new System.Drawing.Point(57, 355);
+            this.NUDsampOffset.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.NUDsampOffset.Minimum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            -2147483648});
+            this.NUDsampOffset.Name = "NUDsampOffset";
+            this.NUDsampOffset.Size = new System.Drawing.Size(64, 20);
+            this.NUDsampOffset.TabIndex = 128;
             // 
-            // button1
+            // label49
             // 
-            this.button1.Location = new System.Drawing.Point(88, 200);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 117;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label49.ForeColor = System.Drawing.Color.White;
+            this.label49.Location = new System.Drawing.Point(10, 357);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(41, 13);
+            this.label49.TabIndex = 127;
+            this.label49.Text = "Offset";
+            // 
+            // NUDsampPan
+            // 
+            this.NUDsampPan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDsampPan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NUDsampPan.DecimalPlaces = 2;
+            this.NUDsampPan.ForeColor = System.Drawing.Color.White;
+            this.NUDsampPan.Location = new System.Drawing.Point(57, 334);
+            this.NUDsampPan.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.NUDsampPan.Minimum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            -2147483648});
+            this.NUDsampPan.Name = "NUDsampPan";
+            this.NUDsampPan.Size = new System.Drawing.Size(64, 20);
+            this.NUDsampPan.TabIndex = 126;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label47.ForeColor = System.Drawing.Color.White;
+            this.label47.Location = new System.Drawing.Point(22, 336);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(29, 13);
+            this.label47.TabIndex = 125;
+            this.label47.Text = "Pan";
+            // 
+            // NUDsampPitch
+            // 
+            this.NUDsampPitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDsampPitch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NUDsampPitch.DecimalPlaces = 2;
+            this.NUDsampPitch.ForeColor = System.Drawing.Color.White;
+            this.NUDsampPitch.Location = new System.Drawing.Point(57, 313);
+            this.NUDsampPitch.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.NUDsampPitch.Minimum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            -2147483648});
+            this.NUDsampPitch.Name = "NUDsampPitch";
+            this.NUDsampPitch.Size = new System.Drawing.Size(64, 20);
+            this.NUDsampPitch.TabIndex = 124;
+            this.NUDsampPitch.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label46.ForeColor = System.Drawing.Color.White;
+            this.label46.Location = new System.Drawing.Point(15, 315);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(36, 13);
+            this.label46.TabIndex = 123;
+            this.label46.Text = "Pitch";
+            // 
+            // NUDsampVolume
+            // 
+            this.NUDsampVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDsampVolume.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NUDsampVolume.DecimalPlaces = 2;
+            this.NUDsampVolume.ForeColor = System.Drawing.Color.White;
+            this.NUDsampVolume.Location = new System.Drawing.Point(57, 291);
+            this.NUDsampVolume.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.NUDsampVolume.Minimum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            -2147483648});
+            this.NUDsampVolume.Name = "NUDsampVolume";
+            this.NUDsampVolume.Size = new System.Drawing.Size(64, 20);
+            this.NUDsampVolume.TabIndex = 122;
+            this.NUDsampVolume.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.ForeColor = System.Drawing.Color.White;
+            this.label45.Location = new System.Drawing.Point(3, 295);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(48, 13);
+            this.label45.TabIndex = 121;
+            this.label45.Text = "Volume";
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.BackColor = System.Drawing.Color.Gray;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Location = new System.Drawing.Point(6, 257);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(22, 22);
+            this.button2.TabIndex = 119;
+            this.button2.Text = "+";
+            this.button2.UseCompatibleTextRendering = true;
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.BackColor = System.Drawing.Color.Gray;
+            this.button3.Enabled = false;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(28, 257);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(22, 22);
+            this.button3.TabIndex = 120;
+            this.button3.Text = "-";
+            this.button3.UseCompatibleTextRendering = true;
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // label54
             // 
@@ -3935,15 +4107,15 @@
             this.label54.Size = new System.Drawing.Size(54, 13);
             this.label54.TabIndex = 116;
             this.label54.Text = "Samples";
-            this.label54.Visible = false;
             // 
             // sampleList
             // 
             this.sampleList.AllowUserToAddRows = false;
             this.sampleList.AllowUserToDeleteRows = false;
             this.sampleList.AllowUserToResizeRows = false;
-            this.sampleList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.sampleList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.sampleList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.sampleList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -3986,9 +4158,8 @@
             this.sampleList.RowTemplate.Height = 200;
             this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.sampleList.Size = new System.Drawing.Size(370, 145);
+            this.sampleList.Size = new System.Drawing.Size(322, 222);
             this.sampleList.TabIndex = 80;
-            this.sampleList.Visible = false;
             // 
             // lblSampleClose
             // 
@@ -3996,7 +4167,7 @@
             this.lblSampleClose.AutoSize = true;
             this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleClose.Location = new System.Drawing.Point(434, -1);
+            this.lblSampleClose.Location = new System.Drawing.Point(319, -1);
             this.lblSampleClose.MinimumSize = new System.Drawing.Size(16, 2);
             this.lblSampleClose.Name = "lblSampleClose";
             this.lblSampleClose.Size = new System.Drawing.Size(16, 15);
@@ -4006,16 +4177,38 @@
             this.lblSampleClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
             this.lblSampleClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
             // 
-            // label57
+            // lblSampleEditor
             // 
-            this.label57.AutoSize = true;
-            this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label57.ForeColor = System.Drawing.Color.White;
-            this.label57.Location = new System.Drawing.Point(-3, 0);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(72, 13);
-            this.label57.TabIndex = 49;
-            this.label57.Text = "Sample Editor";
+            this.lblSampleEditor.AutoSize = true;
+            this.lblSampleEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.lblSampleEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSampleEditor.ForeColor = System.Drawing.Color.White;
+            this.lblSampleEditor.Location = new System.Drawing.Point(-3, 0);
+            this.lblSampleEditor.Name = "lblSampleEditor";
+            this.lblSampleEditor.Size = new System.Drawing.Size(72, 13);
+            this.lblSampleEditor.TabIndex = 49;
+            this.lblSampleEditor.Text = "Sample Editor";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.ForeColor = System.Drawing.Color.White;
+            this.label50.Location = new System.Drawing.Point(16, 379);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(33, 13);
+            this.label50.TabIndex = 129;
+            this.label50.Text = "Path";
+            // 
+            // txtSampPath
+            // 
+            this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.txtSampPath.Enabled = false;
+            this.txtSampPath.ForeColor = System.Drawing.Color.White;
+            this.txtSampPath.Location = new System.Drawing.Point(56, 376);
+            this.txtSampPath.Name = "txtSampPath";
+            this.txtSampPath.Size = new System.Drawing.Size(208, 20);
+            this.txtSampPath.TabIndex = 130;
             // 
             // FormLeafEditor
             // 
@@ -4071,6 +4264,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
             this.panelSample.ResumeLayout(false);
             this.panelSample.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDsampOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDsampPan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDsampPitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDsampVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -4286,7 +4483,7 @@
 		private System.Windows.Forms.Label label54;
 		private System.Windows.Forms.DataGridView sampleList;
 		private System.Windows.Forms.Label lblSampleClose;
-		private System.Windows.Forms.Label label57;
+		private System.Windows.Forms.Label lblSampleEditor;
 		private System.Windows.Forms.ToolStripMenuItem sampleEditorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem bringToFrontToolStripMenuItem;
@@ -4304,12 +4501,22 @@
 		private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
         private System.Windows.Forms.DataGridViewImageColumn FileType;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label lbltest;
         private System.Windows.Forms.Button btnTrackPlayback;
         private System.Windows.Forms.Button btnTrackColorImport;
         private System.Windows.Forms.Button btnTrackColorExport;
         private System.Windows.Forms.Button btnLeafObjRefresh;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.NumericUpDown NUDsampOffset;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.NumericUpDown NUDsampPan;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.NumericUpDown NUDsampPitch;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.NumericUpDown NUDsampVolume;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox txtSampPath;
+        private System.Windows.Forms.Label label50;
     }
 }
 
