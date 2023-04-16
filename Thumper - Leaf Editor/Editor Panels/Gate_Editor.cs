@@ -174,7 +174,7 @@ namespace Thumper___Leaf_Editor
 					ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
 					ofd.Title = "Load a Thumper Gate file";
 					if (ofd.ShowDialog() == DialogResult.OK) {
-						//storing the filename in temp so it doesn't overwrite _loadedmaster in case it fails the check in LoadMaster()
+						//storing the filename in temp so it doesn't overwrite _loadedgate in case it fails the check in LoadGate()
 						_loadedgatetemp = ofd.FileName;
 						//load json from file into _load. The regex strips any comments from the text.
 						dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
@@ -406,7 +406,7 @@ namespace Thumper___Leaf_Editor
 			dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"];
 			dropGateSection.SelectedItem = (string)_load["section_type"];
 
-			///set save flag (master just loaded, has no changes)
+			///set save flag (gate just loaded, has no changes)
 			SaveGate(true);
 		}
 
