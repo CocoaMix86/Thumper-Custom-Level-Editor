@@ -17,17 +17,18 @@ namespace Thumper___Leaf_Editor
 
 		private void workingfolderFiles_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			//workingfolderFiles_RowEnter(sender, e);
 			dynamic _load;
+			string _selectedfilename;
 			//attempt to load file listed in the dGV
 			try {
 				//first check if it exists
-				if (!File.Exists($@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}")) {
+				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}";
+				if (!File.Exists(_selectedfilename)) {
 					MessageBox.Show($"File {workingfolderFiles[1, e.RowIndex].Value} could not be found in the folder. Was it moved or deleted?", "File load error");
 					return;
 				}
 				//atempt to parse JSON
-				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}"), "#.*", ""));
+				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_selectedfilename), "#.*", ""));
 			}
 			catch {
 				//return method if parse fails
@@ -37,30 +38,31 @@ namespace Thumper___Leaf_Editor
 			///Send file off to different load methods based on the file type
 			//process SAMP first, since its JSON structure is different, and detectable
 			if (_load.ContainsKey("items")) {
-				LoadSample();
+				_loadedsampletemp = _selectedfilename;
+				LoadSample(_load);
 				if (panelSample.Visible == false)
 					sampleEditorToolStripMenuItem.PerformClick();
             }
 			else if ((string)_load["obj_type"] == "SequinMaster") {
-				_loadedmastertemp = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}";
+				_loadedmastertemp = _selectedfilename;
 				LoadMaster(_load);
 				if (panelMaster.Visible == false)
 					masterEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinGate") {
-				_loadedgatetemp = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}";
+				_loadedgatetemp = _selectedfilename;
 				LoadGate(_load);
 				if (panelGate.Visible == false)
 					gateEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLevel") {
-				_loadedlvltemp = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}";
+				_loadedlvltemp = _selectedfilename;
 				LoadLvl(_load);
 				if (panelLevel.Visible == false)
 					levelEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLeaf") {
-				_loadedleaf = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}";
+				_loadedleaf = _selectedfilename;
 				LoadLeaf(_load);
 				if (panelLeaf.Visible == false)
 					leafEditorToolStripMenuItem.PerformClick();
@@ -87,7 +89,7 @@ namespace Thumper___Leaf_Editor
 			//clear the dgv and reload files in the folder
 			workingfolderFiles.Rows.Clear();
 			//filter for specific files
-			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS") || x.Contains("samp_custom")))) {
+			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS") || x.Contains("samp_")))) {
 				var filetype = Path.GetFileName(file).Split('_')[0];
 				workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileName(file));
 			}

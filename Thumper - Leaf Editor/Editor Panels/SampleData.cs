@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Thumper___Leaf_Editor
 {
-    internal class SampleData
+    public class SampleData
     {
-        string obj_name;
-        string path;
-        decimal volume;
-        decimal pitch;
-        decimal pan;
-        decimal offset;
+        public string obj_name { get; set; }
+        public string path { get; set; }
+        public decimal volume { get; set; }
+        public decimal pitch { get; set; }
+        public decimal pan { get; set; }
+        public decimal offset { get; set; }
     }
 }

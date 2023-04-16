@@ -71,6 +71,11 @@
             this.lvlopenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lvlsaveToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.lvlsaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SamplenewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SampleopenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SamplesaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SamplesaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gatenewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gateopenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -282,6 +287,11 @@
             this.lblWorkingFolder = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelSample = new System.Windows.Forms.Panel();
+            this.btnSampPanelOpen = new System.Windows.Forms.Button();
+            this.btnSampPanelNew = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtSampPath = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
             this.NUDsampOffset = new System.Windows.Forms.NumericUpDown();
             this.label49 = new System.Windows.Forms.Label();
             this.NUDsampPan = new System.Windows.Forms.NumericUpDown();
@@ -290,14 +300,18 @@
             this.label46 = new System.Windows.Forms.Label();
             this.NUDsampVolume = new System.Windows.Forms.NumericUpDown();
             this.label45 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnSampleAdd = new System.Windows.Forms.Button();
+            this.btnSampleDelete = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.lblSampleEditor = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.txtSampPath = new System.Windows.Forms.TextBox();
+            this.btnSaveSample = new System.Windows.Forms.Button();
+            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -361,6 +375,7 @@
             this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem1,
             this.levelToolStripMenuItem,
+            this.sampleToolStripMenuItem,
             this.gateToolStripMenuItem,
             this.masterToolStripMenuItem,
             this.toolStripSeparator3,
@@ -435,7 +450,7 @@
             this.leafsaveAsToolStripMenuItem.Name = "leafsaveAsToolStripMenuItem";
             this.leafsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.leafsaveAsToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-            this.leafsaveAsToolStripMenuItem.Text = "Save As";
+            this.leafsaveAsToolStripMenuItem.Text = "Save As...";
             this.leafsaveAsToolStripMenuItem.Click += new System.EventHandler(this.leafsaveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -478,7 +493,7 @@
             this.lvlnewToolStripMenuItem1.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_newfile;
             this.lvlnewToolStripMenuItem1.Name = "lvlnewToolStripMenuItem1";
             this.lvlnewToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
-            this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(158, 26);
+            this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(167, 26);
             this.lvlnewToolStripMenuItem1.Text = "New";
             this.lvlnewToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
             // 
@@ -489,7 +504,7 @@
             this.lvlopenToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_openfile;
             this.lvlopenToolStripMenuItem.Name = "lvlopenToolStripMenuItem";
             this.lvlopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-            this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
+            this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.lvlopenToolStripMenuItem.Text = "Open";
             this.lvlopenToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -501,7 +516,7 @@
             this.lvlsaveToolStripMenuItem2.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
             this.lvlsaveToolStripMenuItem2.Name = "lvlsaveToolStripMenuItem2";
             this.lvlsaveToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(158, 26);
+            this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(167, 26);
             this.lvlsaveToolStripMenuItem2.Text = "Save";
             this.lvlsaveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
             // 
@@ -513,9 +528,65 @@
             this.lvlsaveAsToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_saveas;
             this.lvlsaveAsToolStripMenuItem.Name = "lvlsaveAsToolStripMenuItem";
             this.lvlsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
-            this.lvlsaveAsToolStripMenuItem.Text = "Save As";
+            this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.lvlsaveAsToolStripMenuItem.Text = "Save As...";
             this.lvlsaveAsToolStripMenuItem.Click += new System.EventHandler(this.lvlsaveAsToolStripMenuItem_Click);
+            // 
+            // sampleToolStripMenuItem
+            // 
+            this.sampleToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.sampleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SamplenewToolStripMenuItem,
+            this.SampleopenToolStripMenuItem,
+            this.SamplesaveToolStripMenuItem,
+            this.SamplesaveAsToolStripMenuItem});
+            this.sampleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.sampleToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.samp;
+            this.sampleToolStripMenuItem.Name = "sampleToolStripMenuItem";
+            this.sampleToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.sampleToolStripMenuItem.Text = "Sample...";
+            // 
+            // SamplenewToolStripMenuItem
+            // 
+            this.SamplenewToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.SamplenewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.SamplenewToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_newfile;
+            this.SamplenewToolStripMenuItem.Name = "SamplenewToolStripMenuItem";
+            this.SamplenewToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.SamplenewToolStripMenuItem.Text = "New";
+            this.SamplenewToolStripMenuItem.Click += new System.EventHandler(this.SamplenewToolStripMenuItem_Click);
+            // 
+            // SampleopenToolStripMenuItem
+            // 
+            this.SampleopenToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.SampleopenToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.SampleopenToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_openfile;
+            this.SampleopenToolStripMenuItem.Name = "SampleopenToolStripMenuItem";
+            this.SampleopenToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.SampleopenToolStripMenuItem.Text = "Open";
+            this.SampleopenToolStripMenuItem.Click += new System.EventHandler(this.SampleopenToolStripMenuItem_Click);
+            // 
+            // SamplesaveToolStripMenuItem
+            // 
+            this.SamplesaveToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.SamplesaveToolStripMenuItem.Enabled = false;
+            this.SamplesaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.SamplesaveToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
+            this.SamplesaveToolStripMenuItem.Name = "SamplesaveToolStripMenuItem";
+            this.SamplesaveToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.SamplesaveToolStripMenuItem.Text = "Save";
+            this.SamplesaveToolStripMenuItem.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
+            // 
+            // SamplesaveAsToolStripMenuItem
+            // 
+            this.SamplesaveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.SamplesaveAsToolStripMenuItem.Enabled = false;
+            this.SamplesaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.SamplesaveAsToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_saveas;
+            this.SamplesaveAsToolStripMenuItem.Name = "SamplesaveAsToolStripMenuItem";
+            this.SamplesaveAsToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.SamplesaveAsToolStripMenuItem.Text = "Save As...";
+            this.SamplesaveAsToolStripMenuItem.Click += new System.EventHandler(this.SamplesaveAsToolStripMenuItem_Click);
             // 
             // gateToolStripMenuItem
             // 
@@ -539,7 +610,7 @@
             this.gatenewToolStripMenuItem.Name = "gatenewToolStripMenuItem";
             this.gatenewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
-            this.gatenewToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.gatenewToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.gatenewToolStripMenuItem.Text = "New";
             this.gatenewToolStripMenuItem.Click += new System.EventHandler(this.gatenewToolStripMenuItem_Click);
             // 
@@ -551,7 +622,7 @@
             this.gateopenToolStripMenuItem.Name = "gateopenToolStripMenuItem";
             this.gateopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
-            this.gateopenToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.gateopenToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.gateopenToolStripMenuItem.Text = "Open";
             this.gateopenToolStripMenuItem.Click += new System.EventHandler(this.gateopenToolStripMenuItem_Click);
             // 
@@ -564,7 +635,7 @@
             this.gatesaveToolStripMenuItem.Name = "gatesaveToolStripMenuItem";
             this.gatesaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.gatesaveToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.gatesaveToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
             this.gatesaveToolStripMenuItem.Text = "Save";
             this.gatesaveToolStripMenuItem.Click += new System.EventHandler(this.gatesaveToolStripMenuItem_Click);
             // 
@@ -577,8 +648,8 @@
             this.gatesaveAsToolStripMenuItem.Name = "gatesaveAsToolStripMenuItem";
             this.gatesaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.A)));
-            this.gatesaveAsToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
-            this.gatesaveAsToolStripMenuItem.Text = "Save As";
+            this.gatesaveAsToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.gatesaveAsToolStripMenuItem.Text = "Save As...";
             this.gatesaveAsToolStripMenuItem.Click += new System.EventHandler(this.gatesaveAsToolStripMenuItem_Click);
             // 
             // masterToolStripMenuItem
@@ -603,7 +674,7 @@
             this.masternewToolStripMenuItem.Name = "masternewToolStripMenuItem";
             this.masternewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.N)));
-            this.masternewToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.masternewToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.masternewToolStripMenuItem.Text = "New";
             this.masternewToolStripMenuItem.Click += new System.EventHandler(this.masternewToolStripMenuItem_Click);
             // 
@@ -615,7 +686,7 @@
             this.masteropenToolStripMenuItem.Name = "masteropenToolStripMenuItem";
             this.masteropenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.O)));
-            this.masteropenToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.masteropenToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.masteropenToolStripMenuItem.Text = "Open";
             this.masteropenToolStripMenuItem.Click += new System.EventHandler(this.masteropenToolStripMenuItem_Click);
             // 
@@ -628,7 +699,7 @@
             this.mastersaveToolStripMenuItem.Name = "mastersaveToolStripMenuItem";
             this.mastersaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.mastersaveToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.mastersaveToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.mastersaveToolStripMenuItem.Text = "Save";
             this.mastersaveToolStripMenuItem.Click += new System.EventHandler(this.mastersaveToolStripMenuItem_Click);
             // 
@@ -641,8 +712,8 @@
             this.mastersaveAsToolStripMenuItem.Name = "mastersaveAsToolStripMenuItem";
             this.mastersaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.A)));
-            this.mastersaveAsToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
-            this.mastersaveAsToolStripMenuItem.Text = "Save As";
+            this.mastersaveAsToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.mastersaveAsToolStripMenuItem.Text = "Save As...";
             this.mastersaveAsToolStripMenuItem.Click += new System.EventHandler(this.mastersaveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
@@ -864,8 +935,8 @@
             this.toolStripMenuItem1.Margin = new System.Windows.Forms.Padding(-10, 1, -10, 0);
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.ShowShortcutKeys = false;
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(22, 20);
-            this.toolStripMenuItem1.Text = "|";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(25, 20);
+            this.toolStripMenuItem1.Text = "||";
             // 
             // bringToFrontToolStripMenuItem
             // 
@@ -3906,6 +3977,9 @@
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSample.Controls.Add(this.btnSampPanelOpen);
+            this.panelSample.Controls.Add(this.btnSampPanelNew);
+            this.panelSample.Controls.Add(this.button1);
             this.panelSample.Controls.Add(this.txtSampPath);
             this.panelSample.Controls.Add(this.label50);
             this.panelSample.Controls.Add(this.NUDsampOffset);
@@ -3916,25 +3990,97 @@
             this.panelSample.Controls.Add(this.label46);
             this.panelSample.Controls.Add(this.NUDsampVolume);
             this.panelSample.Controls.Add(this.label45);
-            this.panelSample.Controls.Add(this.button2);
-            this.panelSample.Controls.Add(this.button3);
+            this.panelSample.Controls.Add(this.btnSampleAdd);
+            this.panelSample.Controls.Add(this.btnSampleDelete);
             this.panelSample.Controls.Add(this.label54);
             this.panelSample.Controls.Add(this.sampleList);
             this.panelSample.Controls.Add(this.lblSampleClose);
             this.panelSample.Controls.Add(this.lblSampleEditor);
-            this.panelSample.Location = new System.Drawing.Point(748, 51);
+            this.panelSample.Controls.Add(this.btnSaveSample);
+            this.panelSample.Location = new System.Drawing.Point(685, 86);
             this.panelSample.Name = "panelSample";
-            this.panelSample.Size = new System.Drawing.Size(339, 469);
+            this.panelSample.Size = new System.Drawing.Size(502, 549);
             this.panelSample.TabIndex = 134;
             this.panelSample.Visible = false;
+            this.panelSample.SizeChanged += new System.EventHandler(this.panelSample_SizeChanged);
+            // 
+            // btnSampPanelOpen
+            // 
+            this.btnSampPanelOpen.BackColor = System.Drawing.Color.Gray;
+            this.btnSampPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSampPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSampPanelOpen.Location = new System.Drawing.Point(16, 58);
+            this.btnSampPanelOpen.Name = "btnSampPanelOpen";
+            this.btnSampPanelOpen.Size = new System.Drawing.Size(125, 40);
+            this.btnSampPanelOpen.TabIndex = 134;
+            this.btnSampPanelOpen.Text = "Open Samples";
+            this.btnSampPanelOpen.UseVisualStyleBackColor = false;
+            this.btnSampPanelOpen.Click += new System.EventHandler(this.btnSampPanelOpen_Click);
+            // 
+            // btnSampPanelNew
+            // 
+            this.btnSampPanelNew.BackColor = System.Drawing.Color.Gray;
+            this.btnSampPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSampPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSampPanelNew.Location = new System.Drawing.Point(16, 18);
+            this.btnSampPanelNew.Name = "btnSampPanelNew";
+            this.btnSampPanelNew.Size = new System.Drawing.Size(125, 40);
+            this.btnSampPanelNew.TabIndex = 133;
+            this.btnSampPanelNew.Text = "New Samples";
+            this.btnSampPanelNew.UseVisualStyleBackColor = false;
+            this.btnSampPanelNew.Click += new System.EventHandler(this.btnSampPanelNew_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.BackColor = System.Drawing.Color.Gray;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(57, 391);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(134, 22);
+            this.button1.TabIndex = 131;
+            this.button1.Text = "Import .FSB to Sample";
+            this.button1.UseCompatibleTextRendering = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
+            // 
+            // txtSampPath
+            // 
+            this.txtSampPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.txtSampPath.Enabled = false;
+            this.txtSampPath.ForeColor = System.Drawing.Color.White;
+            this.txtSampPath.Location = new System.Drawing.Point(56, 513);
+            this.txtSampPath.Name = "txtSampPath";
+            this.txtSampPath.Size = new System.Drawing.Size(435, 20);
+            this.txtSampPath.TabIndex = 130;
+            this.txtSampPath.Visible = false;
+            this.txtSampPath.TextChanged += new System.EventHandler(this.txtSampPath_TextChanged);
+            // 
+            // label50
+            // 
+            this.label50.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.ForeColor = System.Drawing.Color.White;
+            this.label50.Location = new System.Drawing.Point(16, 516);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(33, 13);
+            this.label50.TabIndex = 129;
+            this.label50.Text = "Path";
+            this.label50.Visible = false;
             // 
             // NUDsampOffset
             // 
+            this.NUDsampOffset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NUDsampOffset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.NUDsampOffset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NUDsampOffset.DecimalPlaces = 2;
             this.NUDsampOffset.ForeColor = System.Drawing.Color.White;
-            this.NUDsampOffset.Location = new System.Drawing.Point(57, 355);
+            this.NUDsampOffset.Location = new System.Drawing.Point(57, 492);
             this.NUDsampOffset.Maximum = new decimal(new int[] {
             720,
             0,
@@ -3948,25 +4094,30 @@
             this.NUDsampOffset.Name = "NUDsampOffset";
             this.NUDsampOffset.Size = new System.Drawing.Size(64, 20);
             this.NUDsampOffset.TabIndex = 128;
+            this.NUDsampOffset.Visible = false;
+            this.NUDsampOffset.ValueChanged += new System.EventHandler(this.NUDsampOffset_ValueChanged);
             // 
             // label49
             // 
+            this.label49.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label49.ForeColor = System.Drawing.Color.White;
-            this.label49.Location = new System.Drawing.Point(10, 357);
+            this.label49.Location = new System.Drawing.Point(10, 494);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(41, 13);
             this.label49.TabIndex = 127;
             this.label49.Text = "Offset";
+            this.label49.Visible = false;
             // 
             // NUDsampPan
             // 
+            this.NUDsampPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NUDsampPan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.NUDsampPan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NUDsampPan.DecimalPlaces = 2;
             this.NUDsampPan.ForeColor = System.Drawing.Color.White;
-            this.NUDsampPan.Location = new System.Drawing.Point(57, 334);
+            this.NUDsampPan.Location = new System.Drawing.Point(57, 471);
             this.NUDsampPan.Maximum = new decimal(new int[] {
             720,
             0,
@@ -3980,25 +4131,30 @@
             this.NUDsampPan.Name = "NUDsampPan";
             this.NUDsampPan.Size = new System.Drawing.Size(64, 20);
             this.NUDsampPan.TabIndex = 126;
+            this.NUDsampPan.Visible = false;
+            this.NUDsampPan.ValueChanged += new System.EventHandler(this.NUDsampPan_ValueChanged);
             // 
             // label47
             // 
+            this.label47.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label47.ForeColor = System.Drawing.Color.White;
-            this.label47.Location = new System.Drawing.Point(22, 336);
+            this.label47.Location = new System.Drawing.Point(22, 473);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(29, 13);
             this.label47.TabIndex = 125;
             this.label47.Text = "Pan";
+            this.label47.Visible = false;
             // 
             // NUDsampPitch
             // 
+            this.NUDsampPitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NUDsampPitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.NUDsampPitch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NUDsampPitch.DecimalPlaces = 2;
             this.NUDsampPitch.ForeColor = System.Drawing.Color.White;
-            this.NUDsampPitch.Location = new System.Drawing.Point(57, 313);
+            this.NUDsampPitch.Location = new System.Drawing.Point(57, 450);
             this.NUDsampPitch.Maximum = new decimal(new int[] {
             720,
             0,
@@ -4017,25 +4173,30 @@
             0,
             0,
             0});
+            this.NUDsampPitch.Visible = false;
+            this.NUDsampPitch.ValueChanged += new System.EventHandler(this.NUDsampPitch_ValueChanged);
             // 
             // label46
             // 
+            this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label46.AutoSize = true;
             this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label46.ForeColor = System.Drawing.Color.White;
-            this.label46.Location = new System.Drawing.Point(15, 315);
+            this.label46.Location = new System.Drawing.Point(15, 452);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(36, 13);
             this.label46.TabIndex = 123;
             this.label46.Text = "Pitch";
+            this.label46.Visible = false;
             // 
             // NUDsampVolume
             // 
+            this.NUDsampVolume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NUDsampVolume.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.NUDsampVolume.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NUDsampVolume.DecimalPlaces = 2;
             this.NUDsampVolume.ForeColor = System.Drawing.Color.White;
-            this.NUDsampVolume.Location = new System.Drawing.Point(57, 291);
+            this.NUDsampVolume.Location = new System.Drawing.Point(57, 428);
             this.NUDsampVolume.Maximum = new decimal(new int[] {
             720,
             0,
@@ -4054,48 +4215,56 @@
             0,
             0,
             0});
+            this.NUDsampVolume.Visible = false;
+            this.NUDsampVolume.ValueChanged += new System.EventHandler(this.NUDsampVolume_ValueChanged);
             // 
             // label45
             // 
+            this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label45.AutoSize = true;
             this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label45.ForeColor = System.Drawing.Color.White;
-            this.label45.Location = new System.Drawing.Point(3, 295);
+            this.label45.Location = new System.Drawing.Point(3, 432);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(48, 13);
             this.label45.TabIndex = 121;
             this.label45.Text = "Volume";
+            this.label45.Visible = false;
             // 
-            // button2
+            // btnSampleAdd
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.BackColor = System.Drawing.Color.Gray;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(6, 257);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(22, 22);
-            this.button2.TabIndex = 119;
-            this.button2.Text = "+";
-            this.button2.UseCompatibleTextRendering = true;
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnSampleAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSampleAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnSampleAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSampleAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSampleAdd.ForeColor = System.Drawing.Color.Black;
+            this.btnSampleAdd.Location = new System.Drawing.Point(6, 391);
+            this.btnSampleAdd.Name = "btnSampleAdd";
+            this.btnSampleAdd.Size = new System.Drawing.Size(22, 22);
+            this.btnSampleAdd.TabIndex = 119;
+            this.btnSampleAdd.Text = "+";
+            this.btnSampleAdd.UseCompatibleTextRendering = true;
+            this.btnSampleAdd.UseVisualStyleBackColor = false;
+            this.btnSampleAdd.Visible = false;
+            this.btnSampleAdd.Click += new System.EventHandler(this.btnSampleAdd_Click);
             // 
-            // button3
+            // btnSampleDelete
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.BackColor = System.Drawing.Color.Gray;
-            this.button3.Enabled = false;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(28, 257);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(22, 22);
-            this.button3.TabIndex = 120;
-            this.button3.Text = "-";
-            this.button3.UseCompatibleTextRendering = true;
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnSampleDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSampleDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnSampleDelete.Enabled = false;
+            this.btnSampleDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSampleDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSampleDelete.ForeColor = System.Drawing.Color.Black;
+            this.btnSampleDelete.Location = new System.Drawing.Point(28, 391);
+            this.btnSampleDelete.Name = "btnSampleDelete";
+            this.btnSampleDelete.Size = new System.Drawing.Size(22, 22);
+            this.btnSampleDelete.TabIndex = 120;
+            this.btnSampleDelete.Text = "-";
+            this.btnSampleDelete.UseCompatibleTextRendering = true;
+            this.btnSampleDelete.UseVisualStyleBackColor = false;
+            this.btnSampleDelete.Visible = false;
+            this.btnSampleDelete.Click += new System.EventHandler(this.btnSampleDelete_Click);
             // 
             // label54
             // 
@@ -4107,6 +4276,7 @@
             this.label54.Size = new System.Drawing.Size(54, 13);
             this.label54.TabIndex = 116;
             this.label54.Text = "Samples";
+            this.label54.Visible = false;
             // 
             // sampleList
             // 
@@ -4116,6 +4286,7 @@
             this.sampleList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.sampleList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.sampleList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.sampleList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -4130,6 +4301,12 @@
             this.sampleList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.sampleList.ColumnHeadersHeight = 20;
             this.sampleList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.sampleList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SampleName,
+            this.Volume,
+            this.Pitch,
+            this.Pan,
+            this.Offset});
             dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle27.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4154,12 +4331,16 @@
             dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            this.sampleList.RowHeadersVisible = false;
             this.sampleList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.sampleList.RowTemplate.Height = 200;
+            this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.sampleList.Size = new System.Drawing.Size(322, 222);
+            this.sampleList.Size = new System.Drawing.Size(485, 356);
             this.sampleList.TabIndex = 80;
+            this.sampleList.Visible = false;
+            this.sampleList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellClick);
+            this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             // 
             // lblSampleClose
             // 
@@ -4167,7 +4348,7 @@
             this.lblSampleClose.AutoSize = true;
             this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleClose.Location = new System.Drawing.Point(319, -1);
+            this.lblSampleClose.Location = new System.Drawing.Point(482, -1);
             this.lblSampleClose.MinimumSize = new System.Drawing.Size(16, 2);
             this.lblSampleClose.Name = "lblSampleClose";
             this.lblSampleClose.Size = new System.Drawing.Size(16, 15);
@@ -4189,26 +4370,49 @@
             this.lblSampleEditor.TabIndex = 49;
             this.lblSampleEditor.Text = "Sample Editor";
             // 
-            // label50
+            // btnSaveSample
             // 
-            this.label50.AutoSize = true;
-            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label50.ForeColor = System.Drawing.Color.White;
-            this.label50.Location = new System.Drawing.Point(16, 379);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(33, 13);
-            this.label50.TabIndex = 129;
-            this.label50.Text = "Path";
+            this.btnSaveSample.Enabled = false;
+            this.btnSaveSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveSample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.btnSaveSample.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
+            this.btnSaveSample.Location = new System.Drawing.Point(65, -5);
+            this.btnSaveSample.Name = "btnSaveSample";
+            this.btnSaveSample.Size = new System.Drawing.Size(25, 25);
+            this.btnSaveSample.TabIndex = 132;
+            this.btnSaveSample.UseVisualStyleBackColor = true;
+            this.btnSaveSample.Visible = false;
+            this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
             // 
-            // txtSampPath
+            // SampleName
             // 
-            this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.txtSampPath.Enabled = false;
-            this.txtSampPath.ForeColor = System.Drawing.Color.White;
-            this.txtSampPath.Location = new System.Drawing.Point(56, 376);
-            this.txtSampPath.Name = "txtSampPath";
-            this.txtSampPath.Size = new System.Drawing.Size(208, 20);
-            this.txtSampPath.TabIndex = 130;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.Width = 106;
+            // 
+            // Volume
+            // 
+            this.Volume.HeaderText = "Volume";
+            this.Volume.Name = "Volume";
+            this.Volume.Width = 73;
+            // 
+            // Pitch
+            // 
+            this.Pitch.HeaderText = "Pitch";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.Width = 58;
+            // 
+            // Pan
+            // 
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.Width = 51;
+            // 
+            // Offset
+            // 
+            this.Offset.HeaderText = "Offset";
+            this.Offset.Name = "Offset";
+            this.Offset.Width = 65;
             // 
             // FormLeafEditor
             // 
@@ -4505,8 +4709,8 @@
         private System.Windows.Forms.Button btnTrackColorImport;
         private System.Windows.Forms.Button btnTrackColorExport;
         private System.Windows.Forms.Button btnLeafObjRefresh;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSampleAdd;
+        private System.Windows.Forms.Button btnSampleDelete;
         private System.Windows.Forms.NumericUpDown NUDsampOffset;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.NumericUpDown NUDsampPan;
@@ -4517,6 +4721,20 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.TextBox txtSampPath;
         private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.ToolStripMenuItem sampleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SamplenewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SampleopenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SamplesaveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SamplesaveAsToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSaveSample;
+        private System.Windows.Forms.Button btnSampPanelOpen;
+        private System.Windows.Forms.Button btnSampPanelNew;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
     }
 }
 
