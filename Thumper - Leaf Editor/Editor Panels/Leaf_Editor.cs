@@ -108,6 +108,19 @@ namespace Thumper___Leaf_Editor
 			}
 			catch { }
 		}
+		//cell input sanitization
+		private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+		{
+			//during editing of a cell in trackEditor, check and sanitize input so it's numeric only
+			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
+			if (sampleList.CurrentCell.ColumnIndex != -1) //Desired Column
+			{
+				TextBox tb = e.Control as TextBox;
+				if (tb != null) {
+					tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);
+				}
+			}
+		}
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
