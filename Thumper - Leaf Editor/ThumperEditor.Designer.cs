@@ -365,9 +365,9 @@
             this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem1,
             this.levelToolStripMenuItem,
-            this.sampleToolStripMenuItem,
             this.gateToolStripMenuItem,
             this.masterToolStripMenuItem,
+            this.sampleToolStripMenuItem,
             this.toolStripSeparator3,
             this.newLevelFolderToolStripMenuItem,
             this.editLevelDetailsToolStripMenuItem,
@@ -483,7 +483,7 @@
             this.lvlnewToolStripMenuItem1.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_newfile;
             this.lvlnewToolStripMenuItem1.Name = "lvlnewToolStripMenuItem1";
             this.lvlnewToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
-            this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(167, 26);
+            this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(184, 26);
             this.lvlnewToolStripMenuItem1.Text = "New";
             this.lvlnewToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
             // 
@@ -494,7 +494,7 @@
             this.lvlopenToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_openfile;
             this.lvlopenToolStripMenuItem.Name = "lvlopenToolStripMenuItem";
             this.lvlopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-            this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.lvlopenToolStripMenuItem.Text = "Open";
             this.lvlopenToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -506,7 +506,7 @@
             this.lvlsaveToolStripMenuItem2.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
             this.lvlsaveToolStripMenuItem2.Name = "lvlsaveToolStripMenuItem2";
             this.lvlsaveToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(167, 26);
+            this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(184, 26);
             this.lvlsaveToolStripMenuItem2.Text = "Save";
             this.lvlsaveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
             // 
@@ -518,7 +518,7 @@
             this.lvlsaveAsToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_saveas;
             this.lvlsaveAsToolStripMenuItem.Name = "lvlsaveAsToolStripMenuItem";
             this.lvlsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.lvlsaveAsToolStripMenuItem.Text = "Save As...";
             this.lvlsaveAsToolStripMenuItem.Click += new System.EventHandler(this.lvlsaveAsToolStripMenuItem_Click);
             // 
@@ -542,7 +542,9 @@
             this.SamplenewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.SamplenewToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_newfile;
             this.SamplenewToolStripMenuItem.Name = "SamplenewToolStripMenuItem";
-            this.SamplenewToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.SamplenewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+            this.SamplenewToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.SamplenewToolStripMenuItem.Text = "New";
             this.SamplenewToolStripMenuItem.Click += new System.EventHandler(this.SamplenewToolStripMenuItem_Click);
             // 
@@ -552,7 +554,9 @@
             this.SampleopenToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.SampleopenToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_openfile;
             this.SampleopenToolStripMenuItem.Name = "SampleopenToolStripMenuItem";
-            this.SampleopenToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.SampleopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
+            this.SampleopenToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.SampleopenToolStripMenuItem.Text = "Open";
             this.SampleopenToolStripMenuItem.Click += new System.EventHandler(this.SampleopenToolStripMenuItem_Click);
             // 
@@ -563,7 +567,9 @@
             this.SamplesaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.SamplesaveToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_save;
             this.SamplesaveToolStripMenuItem.Name = "SamplesaveToolStripMenuItem";
-            this.SamplesaveToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.SamplesaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.SamplesaveToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.SamplesaveToolStripMenuItem.Text = "Save";
             this.SamplesaveToolStripMenuItem.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
             // 
@@ -574,7 +580,9 @@
             this.SamplesaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.SamplesaveAsToolStripMenuItem.Image = global::Thumper___Leaf_Editor.Properties.Resources.icon_saveas;
             this.SamplesaveAsToolStripMenuItem.Name = "SamplesaveAsToolStripMenuItem";
-            this.SamplesaveAsToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
+            this.SamplesaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
+            this.SamplesaveAsToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.SamplesaveAsToolStripMenuItem.Text = "Save As...";
             this.SamplesaveAsToolStripMenuItem.Click += new System.EventHandler(this.SamplesaveAsToolStripMenuItem_Click);
             // 
