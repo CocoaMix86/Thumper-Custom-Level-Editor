@@ -287,6 +287,8 @@
             this.lblWorkingFolder = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelSample = new System.Windows.Forms.Panel();
+            this.lblSampleFSBhelp = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
             this.btnSampPanelOpen = new System.Windows.Forms.Button();
             this.btnSampPanelNew = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -296,16 +298,14 @@
             this.btnSampleDelete = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
-            this.lblSampleClose = new System.Windows.Forms.Label();
-            this.lblSampleEditor = new System.Windows.Forms.Label();
-            this.btnSaveSample = new System.Windows.Forms.Button();
-            this.label45 = new System.Windows.Forms.Label();
             this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblSampleFSBhelp = new System.Windows.Forms.Label();
+            this.lblSampleClose = new System.Windows.Forms.Label();
+            this.lblSampleEditor = new System.Windows.Forms.Label();
+            this.btnSaveSample = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -3989,6 +3989,35 @@
             this.panelSample.Visible = false;
             this.panelSample.SizeChanged += new System.EventHandler(this.panelSample_SizeChanged);
             // 
+            // lblSampleFSBhelp
+            // 
+            this.lblSampleFSBhelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSampleFSBhelp.AutoSize = true;
+            this.lblSampleFSBhelp.BackColor = System.Drawing.Color.Transparent;
+            this.lblSampleFSBhelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSampleFSBhelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSampleFSBhelp.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblSampleFSBhelp.Location = new System.Drawing.Point(191, 465);
+            this.lblSampleFSBhelp.Name = "lblSampleFSBhelp";
+            this.lblSampleFSBhelp.Size = new System.Drawing.Size(167, 13);
+            this.lblSampleFSBhelp.TabIndex = 136;
+            this.lblSampleFSBhelp.Text = "How to get a .FSB audio file";
+            this.lblSampleFSBhelp.Visible = false;
+            this.lblSampleFSBhelp.Click += new System.EventHandler(this.lblSampleFSBhelp_Click);
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.ForeColor = System.Drawing.Color.White;
+            this.label45.Location = new System.Drawing.Point(147, 21);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(157, 13);
+            this.label45.TabIndex = 135;
+            this.label45.Text = "all fields in the table are editable";
+            this.label45.Visible = false;
+            // 
             // btnSampPanelOpen
             // 
             this.btnSampPanelOpen.BackColor = System.Drawing.Color.Gray;
@@ -4170,6 +4199,46 @@
             this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.SampleName.Width = 87;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Volume.HeaderText = "Volume";
+            this.Volume.Name = "Volume";
+            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Volume.Width = 54;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pitch.HeaderText = "Pitch";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pitch.Width = 39;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pan.Width = 32;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Offset.HeaderText = "Offset";
+            this.Offset.Name = "Offset";
+            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Offset.Width = 46;
+            // 
             // lblSampleClose
             // 
             this.lblSampleClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -4211,75 +4280,6 @@
             this.btnSaveSample.UseVisualStyleBackColor = true;
             this.btnSaveSample.Visible = false;
             this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.ForeColor = System.Drawing.Color.White;
-            this.label45.Location = new System.Drawing.Point(147, 21);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(157, 13);
-            this.label45.TabIndex = 135;
-            this.label45.Text = "all fields in the table are editable";
-            this.label45.Visible = false;
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.SampleName.Width = 87;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Volume.HeaderText = "Volume";
-            this.Volume.Name = "Volume";
-            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Volume.Width = 54;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pitch.HeaderText = "Pitch";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pitch.Width = 39;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pan.Width = 32;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Offset.HeaderText = "Offset";
-            this.Offset.Name = "Offset";
-            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Offset.Width = 46;
-            // 
-            // lblSampleFSBhelp
-            // 
-            this.lblSampleFSBhelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSampleFSBhelp.AutoSize = true;
-            this.lblSampleFSBhelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblSampleFSBhelp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblSampleFSBhelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleFSBhelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblSampleFSBhelp.Location = new System.Drawing.Point(191, 464);
-            this.lblSampleFSBhelp.Name = "lblSampleFSBhelp";
-            this.lblSampleFSBhelp.Size = new System.Drawing.Size(15, 16);
-            this.lblSampleFSBhelp.TabIndex = 136;
-            this.lblSampleFSBhelp.Text = "?";
-            this.lblSampleFSBhelp.Visible = false;
-            this.lblSampleFSBhelp.Click += new System.EventHandler(this.lblSampleFSBhelp_Click);
             // 
             // FormLeafEditor
             // 
