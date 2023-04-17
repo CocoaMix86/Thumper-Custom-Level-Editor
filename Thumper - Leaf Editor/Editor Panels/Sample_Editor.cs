@@ -64,6 +64,7 @@ namespace Thumper___Leaf_Editor
 				offset = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[4].Value.ToString()),
 				path = txtSampPath.Text
 			};
+			SaveSample(false);
 		}
 
 		private void sampleList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -141,8 +142,17 @@ namespace Thumper___Leaf_Editor
 
 		private void SamplesaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
+			//if _loadedgate is somehow not set, force Save As instead
+			if (_loadedsample == null) {
+				SamplesaveAsToolStripMenuItem.PerformClick();
+				return;
+			}
+			//write contents direct to file without prompting save dialog
+			var _save = SampleBuildSave();
+			File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			SaveSample(true);
+			lblSampleEditor.Text = $"Sample Editor - {_loadedsample}";
+		}
 
 		private void SamplesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -203,7 +213,7 @@ namespace Thumper___Leaf_Editor
 			///load lvls associated with this master
 			foreach (dynamic _samp in _load["items"]) {
 				_samplelist.Add(new SampleData() {
-					obj_name = _samp["obj_name"],
+					obj_name = ((string)_samp["obj_name"]).Replace(".samp", ""),
 					path = _samp["path"],
 					volume = _samp["volume"],
 					pitch = _samp["pitch"],
@@ -232,6 +242,28 @@ namespace Thumper___Leaf_Editor
 				btnSaveSample.Enabled = false;
 				lblSampleEditor.BackColor = Color.FromArgb(40, 40, 40);
 			}
+		}
+
+		public JObject SampleBuildSave()
+        {
+			JObject _save = new JObject();
+			JArray _items = new JArray();
+			foreach (SampleData _sample in _samplelist) {
+				JObject _samp = new JObject {
+					{ "obj_type", "Sample"},
+					{ "obj_name", _sample.obj_name + ".samp" },
+					{ "mode", "kSampleOneOff" },
+					{ "path", _sample.path },
+					{ "volume", _sample.volume },
+					{ "pitch", _sample.pitch },
+					{ "pan", _sample.pan },
+					{ "offset", _sample.offset },
+					{ "channel_group", "" }
+				};
+				_items.Add(_samp);
+            }
+			_save.Add("items", _items);
+			return _save;
 		}
 
 		public void SampleEditorVisible(bool visible)
