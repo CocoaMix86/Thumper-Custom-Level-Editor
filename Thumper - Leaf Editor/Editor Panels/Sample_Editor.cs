@@ -46,22 +46,10 @@ namespace Thumper___Leaf_Editor
 		private void sampleList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//remove event handlers so they don't trigger when the values change
-			NUDsampVolume.ValueChanged -= NUDsampVolume_ValueChanged;
-			NUDsampPitch.ValueChanged -= NUDsampPitch_ValueChanged;
-			NUDsampPan.ValueChanged -= NUDsampPan_ValueChanged;
-			NUDsampOffset.ValueChanged -= NUDsampOffset_ValueChanged;
 			txtSampPath.TextChanged -= txtSampPath_TextChanged;
 			//update values with selected data
-			NUDsampVolume.Value = _samplelist[e.RowIndex].volume;
-			NUDsampPitch.Value = _samplelist[e.RowIndex].pitch;
-			NUDsampPan.Value = _samplelist[e.RowIndex].pan;
-			NUDsampOffset.Value = _samplelist[e.RowIndex].offset;
 			txtSampPath.Text = _samplelist[e.RowIndex].path;
 			//re-add the event handlers
-			NUDsampVolume.ValueChanged += NUDsampVolume_ValueChanged;
-			NUDsampPitch.ValueChanged += NUDsampPitch_ValueChanged;
-			NUDsampPan.ValueChanged += NUDsampPan_ValueChanged;
-			NUDsampOffset.ValueChanged += NUDsampOffset_ValueChanged;
 			txtSampPath.TextChanged += txtSampPath_TextChanged;
 		}
 
@@ -86,31 +74,6 @@ namespace Thumper___Leaf_Editor
 			btnGateLvlDelete.Enabled = _gatelvls.Count > 0;
 
 			//set lvl save flag to false
-			SaveGate(false);
-		}
-
-
-		private void NUDsampVolume_ValueChanged(object sender, EventArgs e)
-		{
-			_samplelist[sampleList.CurrentRow.Index].volume = NUDsampVolume.Value;
-			SaveSample(false);
-		}
-
-		private void NUDsampPitch_ValueChanged(object sender, EventArgs e)
-		{
-			_samplelist[sampleList.CurrentRow.Index].pitch = NUDsampPitch.Value;
-			SaveSample(false);
-		}
-
-		private void NUDsampPan_ValueChanged(object sender, EventArgs e)
-		{
-			_samplelist[sampleList.CurrentRow.Index].pan = NUDsampPan.Value;
-			SaveSample(false);
-		}
-
-		private void NUDsampOffset_ValueChanged(object sender, EventArgs e)
-		{
-			_samplelist[sampleList.CurrentRow.Index].offset = NUDsampOffset.Value;
 			SaveSample(false);
 		}
 

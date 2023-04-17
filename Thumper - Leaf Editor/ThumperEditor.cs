@@ -22,7 +22,7 @@ namespace Thumper___Leaf_Editor
                 //check if `set` value is different than current stored value
                 if (_workingfolder != value) {
                     //also only change workingfolders if user says yes to data loss
-                    if (!_saveleaf || !_savelvl || !_savemaster || !_savegate) {
+                    if (!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample) {
                         if (MessageBox.Show("Some files are unsaved. Are you sure you want to change working folders?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                             return;
                         }
@@ -147,7 +147,7 @@ namespace Thumper___Leaf_Editor
         ///FORM CLOSING - check if anything is unsaved
         private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!_saveleaf || !_savelvl || !_savemaster || !_savegate) {
+            if (!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample) {
                 if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }

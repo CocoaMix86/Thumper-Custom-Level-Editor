@@ -369,7 +369,7 @@ namespace Thumper___Leaf_Editor
 			dropGateBoss.DisplayMember = "boss_name";
 			dropGateBoss.ValueMember = "boss_spn";
 			//
-			dropGateSection.SelectedIndex = 0;
+			dropGateSection.SelectedIndex = -1;
 			SaveGate(true);
 		}
 
