@@ -121,6 +121,8 @@ namespace Thumper___Leaf_Editor
         }
         //Tentacles, Paths...
         private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0");
+        //How to create an FSB
+        private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
         ///Toolstrip - BRING TO FRONT items
         private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) => panelLeaf.BringToFront();
@@ -526,6 +528,5 @@ namespace Thumper___Leaf_Editor
                 e.Handled = true;
             }
         }
-
     }
 }
