@@ -4162,6 +4162,8 @@
             this.sampleList.TabIndex = 80;
             this.sampleList.Visible = false;
             this.sampleList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellClick);
+            this.sampleList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEndEdit);
+            this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             // 
             // SampleName

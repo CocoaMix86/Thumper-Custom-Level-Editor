@@ -53,6 +53,32 @@ namespace Thumper___Leaf_Editor
 			txtSampPath.TextChanged += txtSampPath_TextChanged;
 		}
 
+		private void sampleList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+		{
+			//When a cell is finished editing, resave the row to _samplelist
+			_samplelist[e.RowIndex] = new SampleData() {
+				obj_name = (string)sampleList.Rows[e.RowIndex].Cells[0].Value.ToString(),
+				volume = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[1].Value.ToString()),
+				pitch = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[2].Value.ToString()),
+				pan = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[3].Value.ToString()),
+				offset = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[4].Value.ToString()),
+				path = txtSampPath.Text
+			};
+		}
+
+		private void sampleList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+		{
+			//during editing of a cell in sampleList, check and sanitize input so it's numeric only
+			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
+			if (sampleList.CurrentCell.ColumnIndex == 1 || sampleList.CurrentCell.ColumnIndex == 2 || sampleList.CurrentCell.ColumnIndex == 3 || sampleList.CurrentCell.ColumnIndex == 4) //Desired Column
+			{
+				TextBox tb = e.Control as TextBox;
+				if (tb != null) {
+					tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);
+				}
+			}
+		}
+
 		private void sampleList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
 			if (_dgfocus != "sampleList") {
