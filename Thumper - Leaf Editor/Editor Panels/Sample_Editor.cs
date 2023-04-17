@@ -268,7 +268,8 @@ namespace Thumper_Custom_Level_Editor
 					volume = _samp["volume"],
 					pitch = _samp["pitch"],
 					pan = _samp["pan"],
-					offset = _samp["offset"]
+					offset = _samp["offset"],
+					channel_group = _samp["channel_group"]
 				});
 			}
 			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
@@ -310,8 +311,8 @@ namespace Thumper_Custom_Level_Editor
 					{ "pitch", _sample.pitch },
 					{ "pan", _sample.pan },
 					{ "offset", _sample.offset },
-					{ "channel_group", "" }
-				};
+                    { "channel_group", _sample.channel_group }
+                };
 				_items.Add(_samp);
             }
 			_save.Add("items", _items);
