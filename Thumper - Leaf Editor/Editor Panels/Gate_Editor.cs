@@ -186,7 +186,7 @@ namespace Thumper___Leaf_Editor
 
 		private void gatesaveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//if _loadedmaster is somehow not set, force Save As instead
+			//if _loadedgate is somehow not set, force Save As instead
 			if (_loadedgate == null) {
 				gatesaveAsToolStripMenuItem.PerformClick();
 				return;
