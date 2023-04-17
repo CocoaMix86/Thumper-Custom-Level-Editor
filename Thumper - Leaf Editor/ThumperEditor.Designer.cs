@@ -4032,7 +4032,6 @@
             this.txtSampPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.txtSampPath.Enabled = false;
             this.txtSampPath.ForeColor = System.Drawing.Color.White;
             this.txtSampPath.Location = new System.Drawing.Point(56, 490);
             this.txtSampPath.Name = "txtSampPath";
@@ -4162,8 +4161,8 @@
             this.sampleList.Size = new System.Drawing.Size(485, 425);
             this.sampleList.TabIndex = 80;
             this.sampleList.Visible = false;
-            this.sampleList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellClick);
             this.sampleList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEndEdit);
+            this.sampleList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEnter);
             this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             // 

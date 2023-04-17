@@ -43,8 +43,10 @@ namespace Thumper___Leaf_Editor
 			btnSaveSample.Location = new Point(lblSampleEditor.Location.X + lblSampleEditor.Size.Width, btnSaveSample.Location.Y);
 		}
 
-		private void sampleList_CellClick(object sender, DataGridViewCellEventArgs e)
+		private void sampleList_CellEnter(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex < 0)
+				return;
 			//remove event handlers so they don't trigger when the values change
 			txtSampPath.TextChanged -= txtSampPath_TextChanged;
 			//update values with selected data
@@ -56,14 +58,24 @@ namespace Thumper___Leaf_Editor
 		private void sampleList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
 		{
 			//When a cell is finished editing, resave the row to _samplelist
-			_samplelist[e.RowIndex] = new SampleData() {
-				obj_name = (string)sampleList.Rows[e.RowIndex].Cells[0].Value.ToString(),
-				volume = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[1].Value.ToString()),
-				pitch = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[2].Value.ToString()),
-				pan = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[3].Value.ToString()),
-				offset = Decimal.Parse(sampleList.Rows[e.RowIndex].Cells[4].Value.ToString()),
-				path = txtSampPath.Text
-			};
+			int _index = e.RowIndex;
+			switch (e.ColumnIndex) {
+				case 0:
+					_samplelist[_index].obj_name = (string)sampleList.Rows[_index].Cells[0].Value;
+					break;
+				case 1:
+					_samplelist[_index].volume = (decimal)sampleList.Rows[_index].Cells[1].Value;
+					break;
+				case 2:
+					_samplelist[_index].pitch = (decimal)sampleList.Rows[_index].Cells[2].Value;
+					break;
+				case 3:
+					_samplelist[_index].pan = (decimal)sampleList.Rows[_index].Cells[3].Value;
+					break;
+				case 4:
+					_samplelist[_index].offset = (decimal)sampleList.Rows[_index].Cells[4].Value;
+					break;
+			}
 			SaveSample(false);
 		}
 
@@ -89,6 +101,9 @@ namespace Thumper___Leaf_Editor
 
 		public void _samplelist_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+			//sort the list alphabetically
+			_samplelist = new ObservableCollection<SampleData>(_samplelist.OrderBy(x => x.obj_name).ToList());
+			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
 			//clear dgv
 			sampleList.RowCount = 0;
 			//repopulate dgv from list
@@ -98,7 +113,7 @@ namespace Thumper___Leaf_Editor
 			}
 			sampleList.RowEnter += sampleList_RowEnter;
 			//enable certain buttons if there are enough items for them
-			btnGateLvlDelete.Enabled = _gatelvls.Count > 0;
+			btnSampleDelete.Enabled = _samplelist.Count > 0;
 
 			//set lvl save flag to false
 			SaveSample(false);
@@ -156,8 +171,34 @@ namespace Thumper___Leaf_Editor
 
 		private void SamplesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
+			using (var sfd = new SaveFileDialog()) {
+				//filter .txt only
+				sfd.Filter = "Thumper Sample File (*.txt)|*.txt";
+				sfd.FilterIndex = 1;
+				sfd.InitialDirectory = workingfolder;
+				if (sfd.ShowDialog() == DialogResult.OK) {
+					//separate path and filename
+					string storePath = Path.GetDirectoryName(sfd.FileName);
+					string tempFileName = Path.GetFileName(sfd.FileName);
+					//check if user input "gate_", and deny save if so
+					if (Path.GetFileName(sfd.FileName).Contains("samp_")) {
+						MessageBox.Show("File not saved. Do not include 'samp_' in your file name.", "File not saved");
+						return;
+					}
+					//get contents to save
+					var _save = SampleBuildSave();
+					//serialize JSON object to a string, and write it to the file
+					sfd.FileName = $@"{storePath}\samp_{tempFileName}";
+					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
+					//set a few visual elements to show what file is being worked on
+					workingfolder = Path.GetDirectoryName(sfd.FileName);
+					_loadedsample = sfd.FileName;
+					lblSampleEditor.Text = $"Sample Editor - {_loadedsample}";
+					//set save flag
+					SaveSample(true);
+				}
+			}
+		}
 
 		#endregion
 
@@ -165,13 +206,18 @@ namespace Thumper___Leaf_Editor
 		///         ///
 		/// BUTTONS ///
 		///         ///
-
+		//add and remove sample entries
 		private void btnSampleDelete_Click(object sender, EventArgs e) => _samplelist.RemoveAt(sampleList.CurrentRow.Index);
 		private void btnSampleAdd_Click(object sender, EventArgs e)
 		{
-
+			SampleData newsample = new SampleData { 
+				obj_name = "new", volume = 1, pitch = 1, pan = 0, offset = 0, path = "samples/levels/custom/new.wav"
+			};
+			_samplelist.Add(newsample);
+			int _index = _samplelist.IndexOf(newsample);
+			sampleList.Rows[_index].Cells[0].Selected = true;
 		}
-
+		//open or new sample file
 		private void btnSampPanelNew_Click(object sender, EventArgs e) => SamplenewToolStripMenuItem.PerformClick();
 		private void btnSampPanelOpen_Click(object sender, EventArgs e) => SampleopenToolStripMenuItem.PerformClick();
 
@@ -184,12 +230,16 @@ namespace Thumper___Leaf_Editor
 
 		public void InitializeSampleStuff()
         {
-			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
 			///Customize Lvl list a bit
 			sampleList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
 				ForeColor = Color.White,
 				Font = new Font("Arial", 12, GraphicsUnit.Pixel)
 			};
+			sampleList.Columns[0].ValueType = typeof(string);
+			sampleList.Columns[1].ValueType = typeof(decimal);
+			sampleList.Columns[2].ValueType = typeof(decimal);
+			sampleList.Columns[3].ValueType = typeof(decimal);
+			sampleList.Columns[4].ValueType = typeof(decimal);
 		}
 		
 		public void LoadSample(dynamic _load)
@@ -221,6 +271,8 @@ namespace Thumper___Leaf_Editor
 					offset = _samp["offset"]
 				});
 			}
+			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
+			_samplelist_CollectionChanged(null, null);
 
 			///set save flag (samples just loaded, has no changes)
 			SaveSample(true);
