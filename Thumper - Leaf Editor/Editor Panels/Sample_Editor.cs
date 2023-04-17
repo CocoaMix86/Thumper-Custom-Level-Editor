@@ -80,7 +80,7 @@ namespace Thumper___Leaf_Editor
 		}
 
 		private void sampleList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-		{
+		{ 
 			//during editing of a cell in sampleList, check and sanitize input so it's numeric only
 			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
 			if (sampleList.CurrentCell.ColumnIndex == 1 || sampleList.CurrentCell.ColumnIndex == 2 || sampleList.CurrentCell.ColumnIndex == 3 || sampleList.CurrentCell.ColumnIndex == 4) //Desired Column
