@@ -296,14 +296,14 @@
             this.btnSampleDelete = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
-            this.lblSampleClose = new System.Windows.Forms.Label();
-            this.lblSampleEditor = new System.Windows.Forms.Label();
-            this.btnSaveSample = new System.Windows.Forms.Button();
             this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblSampleClose = new System.Windows.Forms.Label();
+            this.lblSampleEditor = new System.Windows.Forms.Label();
+            this.btnSaveSample = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -1175,7 +1175,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackEditor.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.trackEditor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.trackEditor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.trackEditor.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -2161,7 +2161,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvlLoopTracks.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lvlLoopTracks.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lvlLoopTracks.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlLoopTracks.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlLoopTracks.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -2245,7 +2245,7 @@
             this.lvlSeqObjs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvlSeqObjs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lvlSeqObjs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lvlSeqObjs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlSeqObjs.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlSeqObjs.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -2314,7 +2314,7 @@
             this.lvlLeafPaths.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lvlLeafPaths.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lvlLeafPaths.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lvlLeafPaths.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlLeafPaths.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlLeafPaths.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -2453,7 +2453,7 @@
             this.lvlLeafList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lvlLeafList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lvlLeafList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lvlLeafList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlLeafList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlLeafList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -2763,7 +2763,7 @@
             this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(279, 37);
+            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(282, 35);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new System.Drawing.Size(15, 16);
             this.lblMasterlvllistHelp.TabIndex = 95;
@@ -3156,7 +3156,7 @@
             this.masterLvlList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.masterLvlList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.masterLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -3691,7 +3691,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gateLvlList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.gateLvlList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.gateLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gateLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.gateLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -3863,7 +3863,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.workingfolderFiles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.workingfolderFiles.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.workingfolderFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.workingfolderFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.workingfolderFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -4111,7 +4111,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sampleList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.sampleList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sampleList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.sampleList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -4167,6 +4167,41 @@
             this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.Width = 106;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Volume.HeaderText = "Volume";
+            this.Volume.Name = "Volume";
+            this.Volume.Width = 73;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pitch.HeaderText = "Pitch";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.Width = 58;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.Width = 51;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Offset.HeaderText = "Offset";
+            this.Offset.Name = "Offset";
+            this.Offset.Width = 65;
+            // 
             // lblSampleClose
             // 
             this.lblSampleClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -4208,41 +4243,6 @@
             this.btnSaveSample.UseVisualStyleBackColor = true;
             this.btnSaveSample.Visible = false;
             this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.Width = 106;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Volume.HeaderText = "Volume";
-            this.Volume.Name = "Volume";
-            this.Volume.Width = 73;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pitch.HeaderText = "Pitch";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.Width = 58;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.Width = 51;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Offset.HeaderText = "Offset";
-            this.Offset.Name = "Offset";
-            this.Offset.Width = 65;
             // 
             // FormLeafEditor
             // 
