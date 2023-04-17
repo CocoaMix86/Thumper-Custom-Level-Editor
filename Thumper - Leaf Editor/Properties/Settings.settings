@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Thumper___Leaf_Editor.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Thumper_Custom_Level_Editor.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="leafeditorsize" Type="System.Drawing.Size" Scope="User">
