@@ -1,4 +1,4 @@
-﻿namespace Thumper___Leaf_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
 	class GateLvlData
 	{

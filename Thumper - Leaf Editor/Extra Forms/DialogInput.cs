@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Thumper___Leaf_Editor
+namespace Thumper_Custom_Level_Editor
 {
 	public partial class DialogInput : Form
 	{

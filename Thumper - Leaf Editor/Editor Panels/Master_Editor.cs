@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 
-namespace Thumper___Leaf_Editor
+namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{

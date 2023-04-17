@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Thumper___Leaf_Editor
+namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {

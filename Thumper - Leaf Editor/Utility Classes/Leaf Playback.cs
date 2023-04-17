@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Media;
 using System.Drawing;
 
-namespace Thumper___Leaf_Editor
+namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{

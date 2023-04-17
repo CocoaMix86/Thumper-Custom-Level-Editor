@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
-namespace Thumper___Leaf_Editor
+namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{
