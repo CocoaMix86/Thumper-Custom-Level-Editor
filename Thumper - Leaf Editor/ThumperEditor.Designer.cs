@@ -71,11 +71,6 @@
             this.lvlopenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lvlsaveToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.lvlsaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SamplenewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SampleopenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SamplesaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SamplesaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gatenewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gateopenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,6 +81,11 @@
             this.masteropenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mastersaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mastersaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SamplenewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SampleopenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SamplesaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SamplesaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.newLevelFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editLevelDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -291,7 +291,7 @@
             this.label45 = new System.Windows.Forms.Label();
             this.btnSampPanelOpen = new System.Windows.Forms.Button();
             this.btnSampPanelNew = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.FSBtoSamp = new System.Windows.Forms.Button();
             this.txtSampPath = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
             this.btnSampleAdd = new System.Windows.Forms.Button();
@@ -483,7 +483,7 @@
             this.lvlnewToolStripMenuItem1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_newfile;
             this.lvlnewToolStripMenuItem1.Name = "lvlnewToolStripMenuItem1";
             this.lvlnewToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
-            this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(184, 26);
+            this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(167, 26);
             this.lvlnewToolStripMenuItem1.Text = "New";
             this.lvlnewToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
             // 
@@ -494,7 +494,7 @@
             this.lvlopenToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.lvlopenToolStripMenuItem.Name = "lvlopenToolStripMenuItem";
             this.lvlopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-            this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.lvlopenToolStripMenuItem.Text = "Open";
             this.lvlopenToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -506,7 +506,7 @@
             this.lvlsaveToolStripMenuItem2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
             this.lvlsaveToolStripMenuItem2.Name = "lvlsaveToolStripMenuItem2";
             this.lvlsaveToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(184, 26);
+            this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(167, 26);
             this.lvlsaveToolStripMenuItem2.Text = "Save";
             this.lvlsaveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
             // 
@@ -518,73 +518,9 @@
             this.lvlsaveAsToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_saveas;
             this.lvlsaveAsToolStripMenuItem.Name = "lvlsaveAsToolStripMenuItem";
             this.lvlsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.lvlsaveAsToolStripMenuItem.Text = "Save As...";
             this.lvlsaveAsToolStripMenuItem.Click += new System.EventHandler(this.lvlsaveAsToolStripMenuItem_Click);
-            // 
-            // sampleToolStripMenuItem
-            // 
-            this.sampleToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.sampleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SamplenewToolStripMenuItem,
-            this.SampleopenToolStripMenuItem,
-            this.SamplesaveToolStripMenuItem,
-            this.SamplesaveAsToolStripMenuItem});
-            this.sampleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.sampleToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
-            this.sampleToolStripMenuItem.Name = "sampleToolStripMenuItem";
-            this.sampleToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
-            this.sampleToolStripMenuItem.Text = "Sample...";
-            // 
-            // SamplenewToolStripMenuItem
-            // 
-            this.SamplenewToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.SamplenewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.SamplenewToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_newfile;
-            this.SamplenewToolStripMenuItem.Name = "SamplenewToolStripMenuItem";
-            this.SamplenewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.N)));
-            this.SamplenewToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-            this.SamplenewToolStripMenuItem.Text = "New";
-            this.SamplenewToolStripMenuItem.Click += new System.EventHandler(this.SamplenewToolStripMenuItem_Click);
-            // 
-            // SampleopenToolStripMenuItem
-            // 
-            this.SampleopenToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.SampleopenToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.SampleopenToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
-            this.SampleopenToolStripMenuItem.Name = "SampleopenToolStripMenuItem";
-            this.SampleopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.O)));
-            this.SampleopenToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-            this.SampleopenToolStripMenuItem.Text = "Open";
-            this.SampleopenToolStripMenuItem.Click += new System.EventHandler(this.SampleopenToolStripMenuItem_Click);
-            // 
-            // SamplesaveToolStripMenuItem
-            // 
-            this.SamplesaveToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.SamplesaveToolStripMenuItem.Enabled = false;
-            this.SamplesaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.SamplesaveToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
-            this.SamplesaveToolStripMenuItem.Name = "SamplesaveToolStripMenuItem";
-            this.SamplesaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.SamplesaveToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-            this.SamplesaveToolStripMenuItem.Text = "Save";
-            this.SamplesaveToolStripMenuItem.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
-            // 
-            // SamplesaveAsToolStripMenuItem
-            // 
-            this.SamplesaveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.SamplesaveAsToolStripMenuItem.Enabled = false;
-            this.SamplesaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.SamplesaveAsToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_saveas;
-            this.SamplesaveAsToolStripMenuItem.Name = "SamplesaveAsToolStripMenuItem";
-            this.SamplesaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.A)));
-            this.SamplesaveAsToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-            this.SamplesaveAsToolStripMenuItem.Text = "Save As...";
-            this.SamplesaveAsToolStripMenuItem.Click += new System.EventHandler(this.SamplesaveAsToolStripMenuItem_Click);
             // 
             // gateToolStripMenuItem
             // 
@@ -713,6 +649,70 @@
             this.mastersaveAsToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.mastersaveAsToolStripMenuItem.Text = "Save As...";
             this.mastersaveAsToolStripMenuItem.Click += new System.EventHandler(this.mastersaveAsToolStripMenuItem_Click);
+            // 
+            // sampleToolStripMenuItem
+            // 
+            this.sampleToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.sampleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SamplenewToolStripMenuItem,
+            this.SampleopenToolStripMenuItem,
+            this.SamplesaveToolStripMenuItem,
+            this.SamplesaveAsToolStripMenuItem});
+            this.sampleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.sampleToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
+            this.sampleToolStripMenuItem.Name = "sampleToolStripMenuItem";
+            this.sampleToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
+            this.sampleToolStripMenuItem.Text = "Sample...";
+            // 
+            // SamplenewToolStripMenuItem
+            // 
+            this.SamplenewToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.SamplenewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.SamplenewToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_newfile;
+            this.SamplenewToolStripMenuItem.Name = "SamplenewToolStripMenuItem";
+            this.SamplenewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+            this.SamplenewToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.SamplenewToolStripMenuItem.Text = "New";
+            this.SamplenewToolStripMenuItem.Click += new System.EventHandler(this.SamplenewToolStripMenuItem_Click);
+            // 
+            // SampleopenToolStripMenuItem
+            // 
+            this.SampleopenToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.SampleopenToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.SampleopenToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
+            this.SampleopenToolStripMenuItem.Name = "SampleopenToolStripMenuItem";
+            this.SampleopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
+            this.SampleopenToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.SampleopenToolStripMenuItem.Text = "Open";
+            this.SampleopenToolStripMenuItem.Click += new System.EventHandler(this.SampleopenToolStripMenuItem_Click);
+            // 
+            // SamplesaveToolStripMenuItem
+            // 
+            this.SamplesaveToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.SamplesaveToolStripMenuItem.Enabled = false;
+            this.SamplesaveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.SamplesaveToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
+            this.SamplesaveToolStripMenuItem.Name = "SamplesaveToolStripMenuItem";
+            this.SamplesaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.SamplesaveToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.SamplesaveToolStripMenuItem.Text = "Save";
+            this.SamplesaveToolStripMenuItem.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
+            // 
+            // SamplesaveAsToolStripMenuItem
+            // 
+            this.SamplesaveAsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.SamplesaveAsToolStripMenuItem.Enabled = false;
+            this.SamplesaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.SamplesaveAsToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_saveas;
+            this.SamplesaveAsToolStripMenuItem.Name = "SamplesaveAsToolStripMenuItem";
+            this.SamplesaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.A)));
+            this.SamplesaveAsToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.SamplesaveAsToolStripMenuItem.Text = "Save As...";
+            this.SamplesaveAsToolStripMenuItem.Click += new System.EventHandler(this.SamplesaveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -3980,7 +3980,7 @@
             this.panelSample.Controls.Add(this.label45);
             this.panelSample.Controls.Add(this.btnSampPanelOpen);
             this.panelSample.Controls.Add(this.btnSampPanelNew);
-            this.panelSample.Controls.Add(this.button1);
+            this.panelSample.Controls.Add(this.FSBtoSamp);
             this.panelSample.Controls.Add(this.txtSampPath);
             this.panelSample.Controls.Add(this.label50);
             this.panelSample.Controls.Add(this.btnSampleAdd);
@@ -4052,21 +4052,22 @@
             this.btnSampPanelNew.UseVisualStyleBackColor = false;
             this.btnSampPanelNew.Click += new System.EventHandler(this.btnSampPanelNew_Click);
             // 
-            // button1
+            // FSBtoSamp
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.BackColor = System.Drawing.Color.Gray;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(57, 461);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 22);
-            this.button1.TabIndex = 131;
-            this.button1.Text = "Import .FSB to Sample";
-            this.button1.UseCompatibleTextRendering = true;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
+            this.FSBtoSamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.FSBtoSamp.BackColor = System.Drawing.Color.Gray;
+            this.FSBtoSamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FSBtoSamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FSBtoSamp.ForeColor = System.Drawing.Color.Black;
+            this.FSBtoSamp.Location = new System.Drawing.Point(57, 461);
+            this.FSBtoSamp.Name = "FSBtoSamp";
+            this.FSBtoSamp.Size = new System.Drawing.Size(134, 22);
+            this.FSBtoSamp.TabIndex = 131;
+            this.FSBtoSamp.Text = "Import .FSB to Sample";
+            this.FSBtoSamp.UseCompatibleTextRendering = true;
+            this.FSBtoSamp.UseVisualStyleBackColor = false;
+            this.FSBtoSamp.Visible = false;
+            this.FSBtoSamp.Click += new System.EventHandler(this.FSBtoSamp_Click);
             // 
             // txtSampPath
             // 
@@ -4589,7 +4590,7 @@
         private System.Windows.Forms.ToolStripMenuItem SampleopenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveAsToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button FSBtoSamp;
         private System.Windows.Forms.Button btnSaveSample;
         private System.Windows.Forms.Button btnSampPanelOpen;
         private System.Windows.Forms.Button btnSampPanelNew;
