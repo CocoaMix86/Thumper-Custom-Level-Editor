@@ -202,5 +202,77 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["custom_panelcolor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool leafeditorvisible {
+            get {
+                return ((bool)(this["leafeditorvisible"]));
+            }
+            set {
+                this["leafeditorvisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool lvleditorvisible {
+            get {
+                return ((bool)(this["lvleditorvisible"]));
+            }
+            set {
+                this["lvleditorvisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool gateeditorvisible {
+            get {
+                return ((bool)(this["gateeditorvisible"]));
+            }
+            set {
+                this["gateeditorvisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool mastereditorvisible {
+            get {
+                return ((bool)(this["mastereditorvisible"]));
+            }
+            set {
+                this["mastereditorvisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool workingfoldervisible {
+            get {
+                return ((bool)(this["workingfoldervisible"]));
+            }
+            set {
+                this["workingfoldervisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool sampleeditorvisible {
+            get {
+                return ((bool)(this["sampleeditorvisible"]));
+            }
+            set {
+                this["sampleeditorvisible"] = value;
+            }
+        }
     }
 }
