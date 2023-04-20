@@ -113,7 +113,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//during editing of a cell in trackEditor, check and sanitize input so it's numeric only
 			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
-			if (sampleList.CurrentCell.ColumnIndex != -1) //Desired Column
+			if (trackEditor.CurrentCell.ColumnIndex != -1) //Desired Column
 			{
 				TextBox tb = e.Control as TextBox;
 				if (tb != null) {
