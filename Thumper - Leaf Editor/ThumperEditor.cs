@@ -530,13 +530,16 @@ namespace Thumper_Custom_Level_Editor
         /// Used to allow only numbers and a single decimal during input
         private void NumericInputSanitize(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.') {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-') {
                 e.Handled = true;
             }
 
+            //only allow `-` at beginning
+            if (e.KeyChar == '-' && (sender as TextBox).SelectionStart != 0)
+                e.Handled = true;
+
             // only allow one decimal point
-            if (e.KeyChar == '.'
-                && (sender as TextBox).Text.IndexOf('.') > -1) {
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1) {
                 e.Handled = true;
             }
         }
