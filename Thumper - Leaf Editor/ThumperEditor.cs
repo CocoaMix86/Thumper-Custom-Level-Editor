@@ -543,5 +543,10 @@ namespace Thumper_Custom_Level_Editor
                 e.Handled = true;
             }
         }
+
+        private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
+        {
+            SampleData _samp = _samplelist[sampleList.CurrentRow.Index];
+        }
     }
 }

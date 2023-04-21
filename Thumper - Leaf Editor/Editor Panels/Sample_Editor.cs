@@ -51,6 +51,7 @@ namespace Thumper_Custom_Level_Editor
 			txtSampPath.TextChanged -= txtSampPath_TextChanged;
 			//update values with selected data
 			txtSampPath.Text = _samplelist[e.RowIndex].path;
+			btnSampEditorPlaySamp.Enabled = true;
 			//re-add the event handlers
 			txtSampPath.TextChanged += txtSampPath_TextChanged;
 		}
@@ -109,7 +110,7 @@ namespace Thumper_Custom_Level_Editor
 			//repopulate dgv from list
 			sampleList.RowEnter -= sampleList_RowEnter;
 			foreach (SampleData _samp in _samplelist) {
-				sampleList.Rows.Add(new object[] { _samp.obj_name, _samp.volume, _samp.pitch, _samp.pan, _samp.offset });
+				sampleList.Rows.Add(new object[] { _samp.obj_name, _samp.volume, _samp.pitch, _samp.pan, _samp.offset, _samp.channel_group });
 			}
 			sampleList.RowEnter += sampleList_RowEnter;
 			//enable certain buttons if there are enough items for them
@@ -211,7 +212,7 @@ namespace Thumper_Custom_Level_Editor
 		private void btnSampleAdd_Click(object sender, EventArgs e)
 		{
 			SampleData newsample = new SampleData { 
-				obj_name = "new", volume = 1, pitch = 1, pan = 0, offset = 0, path = "samples/levels/custom/new.wav", channel_group = ""
+				obj_name = "new", volume = 1, pitch = 1, pan = 0, offset = 0, path = "samples/levels/custom/new.wav", channel_group = "sequin.ch"
 			};
 			_samplelist.Add(newsample);
 			int _index = _samplelist.IndexOf(newsample);
@@ -264,7 +265,7 @@ namespace Thumper_Custom_Level_Editor
 						pan = 0,
 						offset = 0,
 						path = $"samples/levels/custom/{_filename}.wav",
-						channel_group = ""
+						channel_group = "sequin.ch"
 					};
 					_samplelist.Add(newsample);
 					int _index = _samplelist.IndexOf(newsample);
@@ -291,6 +292,7 @@ namespace Thumper_Custom_Level_Editor
 			sampleList.Columns[2].ValueType = typeof(decimal);
 			sampleList.Columns[3].ValueType = typeof(decimal);
 			sampleList.Columns[4].ValueType = typeof(decimal);
+			sampleList.Columns[5].ValueType = typeof(string);
 		}
 		
 		public void LoadSample(dynamic _load)

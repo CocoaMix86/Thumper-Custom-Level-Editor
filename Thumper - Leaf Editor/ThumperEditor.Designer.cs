@@ -287,6 +287,7 @@
             this.lblWorkingFolder = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelSample = new System.Windows.Forms.Panel();
+            this.btnSampEditorPlaySamp = new System.Windows.Forms.Button();
             this.lblSampleFSBhelp = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.btnSampPanelOpen = new System.Windows.Forms.Button();
@@ -303,6 +304,7 @@
             this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Channel = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.lblSampleEditor = new System.Windows.Forms.Label();
             this.btnSaveSample = new System.Windows.Forms.Button();
@@ -3976,6 +3978,7 @@
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSample.Controls.Add(this.btnSampEditorPlaySamp);
             this.panelSample.Controls.Add(this.lblSampleFSBhelp);
             this.panelSample.Controls.Add(this.label45);
             this.panelSample.Controls.Add(this.btnSampPanelOpen);
@@ -3996,6 +3999,24 @@
             this.panelSample.TabIndex = 134;
             this.panelSample.Visible = false;
             this.panelSample.SizeChanged += new System.EventHandler(this.panelSample_SizeChanged);
+            // 
+            // btnSampEditorPlaySamp
+            // 
+            this.btnSampEditorPlaySamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSampEditorPlaySamp.BackColor = System.Drawing.Color.White;
+            this.btnSampEditorPlaySamp.Enabled = false;
+            this.btnSampEditorPlaySamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSampEditorPlaySamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSampEditorPlaySamp.ForeColor = System.Drawing.Color.Green;
+            this.btnSampEditorPlaySamp.Location = new System.Drawing.Point(405, 460);
+            this.btnSampEditorPlaySamp.Name = "btnSampEditorPlaySamp";
+            this.btnSampEditorPlaySamp.Size = new System.Drawing.Size(86, 22);
+            this.btnSampEditorPlaySamp.TabIndex = 137;
+            this.btnSampEditorPlaySamp.Text = "Play Sample";
+            this.btnSampEditorPlaySamp.UseCompatibleTextRendering = true;
+            this.btnSampEditorPlaySamp.UseVisualStyleBackColor = false;
+            this.btnSampEditorPlaySamp.Visible = false;
+            this.btnSampEditorPlaySamp.Click += new System.EventHandler(this.btnSampEditorPlaySamp_Click);
             // 
             // lblSampleFSBhelp
             // 
@@ -4170,7 +4191,8 @@
             this.Volume,
             this.Pitch,
             this.Pan,
-            this.Offset});
+            this.Offset,
+            this.Channel});
             dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle27.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4247,6 +4269,14 @@
             this.Offset.Name = "Offset";
             this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Offset.Width = 46;
+            // 
+            // Channel
+            // 
+            this.Channel.HeaderText = "Channel";
+            this.Channel.Name = "Channel";
+            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Channel.Width = 76;
             // 
             // lblSampleClose
             // 
@@ -4595,12 +4625,14 @@
         private System.Windows.Forms.Button btnSampPanelOpen;
         private System.Windows.Forms.Button btnSampPanelNew;
         private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label lblSampleFSBhelp;
         private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
         private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
-        private System.Windows.Forms.Label lblSampleFSBhelp;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Channel;
+        private System.Windows.Forms.Button btnSampEditorPlaySamp;
     }
 }
 
