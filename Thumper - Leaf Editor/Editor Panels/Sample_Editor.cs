@@ -34,8 +34,8 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedsample;
 		string _loadedsampletemp;
 		ObservableCollection<SampleData> _samplelist = new ObservableCollection<SampleData>();
-		//private VorbisWaveReader? vorbis = null;
-		//private WaveOut? oggPlayer = null;
+		private VorbisWaveReader? vorbis = null;
+		private WaveOut? oggPlayer = null;
 		#endregion
 
 		#region EventHandlers
