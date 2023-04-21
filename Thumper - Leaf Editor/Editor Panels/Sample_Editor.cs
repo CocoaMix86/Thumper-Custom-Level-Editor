@@ -8,6 +8,10 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using Fmod5Sharp;
+using Fmod5Sharp.FmodTypes;
+using NAudio.Vorbis;
+using NAudio.Wave;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -30,6 +34,8 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedsample;
 		string _loadedsampletemp;
 		ObservableCollection<SampleData> _samplelist = new ObservableCollection<SampleData>();
+		//private VorbisWaveReader? vorbis = null;
+		//private WaveOut? oggPlayer = null;
 		#endregion
 
 		#region EventHandlers
@@ -273,6 +279,16 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 		}
+
+		private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
+		{
+			var _samp = _samplelist[sampleList.CurrentRow.Index];
+
+			if (!Directory.GetFiles(@"temp").Contains($@"{_samp.obj_name}.wav"))
+				PCtoOGG(_samp);
+
+
+		}
 		#endregion
 
 		#region Methods
@@ -396,6 +412,27 @@ namespace Thumper_Custom_Level_Editor
 			h = (h * 0x21) & 0xffffffff;
 
 			return h;
+		}
+
+		public void PCtoOGG(SampleData _samp)
+        {
+			//get the hash of this filename. This will be used to locate the sample's .PC file
+			string _hashedname = "";
+			byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{_samp.path}"));
+			Array.Reverse(hashbytes);
+			foreach (byte b in hashbytes)
+				_hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+			//if the hashed name starts with a '0', remove it
+			if (_hashedname[0] == '0')
+				_hashedname = _hashedname.Substring(1);
+
+			byte[] _bytes = File.ReadAllBytes($@"C:\Program Files (x86)\Steam\steamapps\common\Thumper\cache\{_hashedname}.pc");
+			_bytes = _bytes.Skip(4).ToArray();
+			FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
+			List<FmodSample> samples = bank.Samples;
+			samples[0].RebuildAsStandardFileFormat(out var dataBytes, out var fileExtension);
+
+			File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
 		}
 		#endregion
 	}

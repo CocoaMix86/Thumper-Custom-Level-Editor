@@ -299,15 +299,15 @@
             this.btnSampleDelete = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
+            this.lblSampleClose = new System.Windows.Forms.Label();
+            this.lblSampleEditor = new System.Windows.Forms.Label();
+            this.btnSaveSample = new System.Windows.Forms.Button();
             this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.lblSampleClose = new System.Windows.Forms.Label();
-            this.lblSampleEditor = new System.Windows.Forms.Label();
-            this.btnSaveSample = new System.Windows.Forms.Button();
+            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -4230,6 +4230,48 @@
             this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             // 
+            // lblSampleClose
+            // 
+            this.lblSampleClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSampleClose.AutoSize = true;
+            this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSampleClose.Location = new System.Drawing.Point(482, -1);
+            this.lblSampleClose.MinimumSize = new System.Drawing.Size(16, 2);
+            this.lblSampleClose.Name = "lblSampleClose";
+            this.lblSampleClose.Size = new System.Drawing.Size(16, 15);
+            this.lblSampleClose.TabIndex = 51;
+            this.lblSampleClose.Text = "x";
+            this.lblSampleClose.Click += new System.EventHandler(this.lblSampleClose_Click);
+            this.lblSampleClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
+            this.lblSampleClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
+            // 
+            // lblSampleEditor
+            // 
+            this.lblSampleEditor.AutoSize = true;
+            this.lblSampleEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.lblSampleEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSampleEditor.ForeColor = System.Drawing.Color.White;
+            this.lblSampleEditor.Location = new System.Drawing.Point(-3, 0);
+            this.lblSampleEditor.Name = "lblSampleEditor";
+            this.lblSampleEditor.Size = new System.Drawing.Size(72, 13);
+            this.lblSampleEditor.TabIndex = 49;
+            this.lblSampleEditor.Text = "Sample Editor";
+            // 
+            // btnSaveSample
+            // 
+            this.btnSaveSample.Enabled = false;
+            this.btnSaveSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveSample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.btnSaveSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
+            this.btnSaveSample.Location = new System.Drawing.Point(65, -5);
+            this.btnSaveSample.Name = "btnSaveSample";
+            this.btnSaveSample.Size = new System.Drawing.Size(25, 25);
+            this.btnSaveSample.TabIndex = 132;
+            this.btnSaveSample.UseVisualStyleBackColor = true;
+            this.btnSaveSample.Visible = false;
+            this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
+            // 
             // SampleName
             // 
             this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -4275,50 +4317,7 @@
             this.Channel.HeaderText = "Channel";
             this.Channel.Name = "Channel";
             this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Channel.Width = 76;
-            // 
-            // lblSampleClose
-            // 
-            this.lblSampleClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSampleClose.AutoSize = true;
-            this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleClose.Location = new System.Drawing.Point(482, -1);
-            this.lblSampleClose.MinimumSize = new System.Drawing.Size(16, 2);
-            this.lblSampleClose.Name = "lblSampleClose";
-            this.lblSampleClose.Size = new System.Drawing.Size(16, 15);
-            this.lblSampleClose.TabIndex = 51;
-            this.lblSampleClose.Text = "x";
-            this.lblSampleClose.Click += new System.EventHandler(this.lblSampleClose_Click);
-            this.lblSampleClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
-            this.lblSampleClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
-            // 
-            // lblSampleEditor
-            // 
-            this.lblSampleEditor.AutoSize = true;
-            this.lblSampleEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.lblSampleEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleEditor.ForeColor = System.Drawing.Color.White;
-            this.lblSampleEditor.Location = new System.Drawing.Point(-3, 0);
-            this.lblSampleEditor.Name = "lblSampleEditor";
-            this.lblSampleEditor.Size = new System.Drawing.Size(72, 13);
-            this.lblSampleEditor.TabIndex = 49;
-            this.lblSampleEditor.Text = "Sample Editor";
-            // 
-            // btnSaveSample
-            // 
-            this.btnSaveSample.Enabled = false;
-            this.btnSaveSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveSample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.btnSaveSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
-            this.btnSaveSample.Location = new System.Drawing.Point(65, -5);
-            this.btnSaveSample.Name = "btnSaveSample";
-            this.btnSaveSample.Size = new System.Drawing.Size(25, 25);
-            this.btnSaveSample.TabIndex = 132;
-            this.btnSaveSample.UseVisualStyleBackColor = true;
-            this.btnSaveSample.Visible = false;
-            this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
             // 
             // FormLeafEditor
             // 
@@ -4626,13 +4625,13 @@
         private System.Windows.Forms.Button btnSampPanelNew;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label lblSampleFSBhelp;
+        private System.Windows.Forms.Button btnSampEditorPlaySamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
         private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Channel;
-        private System.Windows.Forms.Button btnSampEditorPlaySamp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
     }
 }
 

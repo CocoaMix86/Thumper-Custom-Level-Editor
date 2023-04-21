@@ -154,6 +154,9 @@ namespace Thumper_Custom_Level_Editor
                     e.Cancel = true;
                 }
             }
+            if (Directory.Exists(@"temp")) {
+                Directory.Delete(@"temp", true);
+            }
             //save panel sizes and locations
             Properties.Settings.Default.leafeditorloc = panelLeaf.Location;
             Properties.Settings.Default.leafeditorsize = panelLeaf.Size;
@@ -208,6 +211,9 @@ namespace Thumper_Custom_Level_Editor
                 Directory.CreateDirectory(@"templates");
                 File.WriteAllText(@"templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
                 File.WriteAllText(@"templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
+            }
+            if (!Directory.Exists(@"temp")) {
+                Directory.CreateDirectory(@"temp");
             }
             //call method that imports objects from track_objects.txt (for Leaf editing)
             ImportObjects();
@@ -542,11 +548,6 @@ namespace Thumper_Custom_Level_Editor
             if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1) {
                 e.Handled = true;
             }
-        }
-
-        private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
-        {
-            SampleData _samp = _samplelist[sampleList.CurrentRow.Index];
         }
     }
 }
