@@ -284,10 +284,14 @@ namespace Thumper_Custom_Level_Editor
 		{
 			var _samp = _samplelist[sampleList.CurrentRow.Index];
 
-			if (!Directory.GetFiles(@"temp").Contains($@"{_samp.obj_name}.wav"))
+			if (!File.Exists($@"temp\{_samp.obj_name}.ogg")) {
 				PCtoOGG(_samp);
+			}
 
-
+			vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.ogg");
+			oggPlayer = WaveOutInit(vorbis);
+			oggPlayer.Play();
+			btnSampEditorPlaySamp.Enabled = false;
 		}
 		#endregion
 
@@ -426,14 +430,42 @@ namespace Thumper_Custom_Level_Editor
 			if (_hashedname[0] == '0')
 				_hashedname = _hashedname.Substring(1);
 
+			//read the .pc file as bytes, and skip the first 4 header bytes
 			byte[] _bytes = File.ReadAllBytes($@"C:\Program Files (x86)\Steam\steamapps\common\Thumper\cache\{_hashedname}.pc");
 			_bytes = _bytes.Skip(4).ToArray();
+
+			// credit to https://github.com/SamboyCoding/Fmod5Sharp
 			FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
 			List<FmodSample> samples = bank.Samples;
 			samples[0].RebuildAsStandardFileFormat(out var dataBytes, out var fileExtension);
 
 			File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
 		}
+
+		/// These are specifically for audio playback. Don't touch them
+		/// IDK how they work
+		/// https://stackoverflow.com/questions/74605784/using-vorbis-and-naudio-to-play-ogg-files-in-c-sharp
+		private WaveOut WaveOutInit(IWaveProvider reader)
+		{
+			var waveOut = new WaveOut();
+			waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
+			waveOut.Init(reader);
+			return waveOut;
+		}
+		private void WaveOut_PlaybackStopped(object? sender, StoppedEventArgs e)
+		{
+			WaveOutReset(oggPlayer, vorbis);
+			btnSampEditorPlaySamp.Enabled = true;
+		}
+		private void WaveOutReset(WaveOut? player, VorbisWaveReader? reader)
+		{
+			if (player != null) {
+				player.PlaybackStopped -= WaveOut_PlaybackStopped;
+				player.Dispose();
+			}
+			reader?.Dispose();
+		}
+
 		#endregion
 	}
 }
