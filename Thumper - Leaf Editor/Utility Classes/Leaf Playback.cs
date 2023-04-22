@@ -8,6 +8,11 @@ namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{
+		private void btnTrackPlayback_Click(object sender, EventArgs e)
+		{
+
+		}
+		/*
 		Tuple<int, int>[] _toplay;
 		int _playbackbeat;
 		int _sequence;
@@ -24,7 +29,7 @@ namespace Thumper_Custom_Level_Editor
 				timer.Stop();
 				btnTrackPlayback.ForeColor = Color.Green;
 				return;
-            }
+			}
 
 			//initialize a new array of the sounds to play
 			_toplay = new Tuple<int, int>[(int)numericUpDown_LeafLength.Value];
@@ -123,5 +128,6 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 		}
+		*/
 	}
 }
