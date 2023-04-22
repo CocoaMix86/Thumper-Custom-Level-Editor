@@ -96,6 +96,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utility Classes\AudioPlaybackEngine.cs" />
     <Compile Include="Utility Classes\ControlMoverOrResizer.cs" />
     <Compile Include="Extra Forms\CustomizeWorkspace.cs">
       <SubType>Form</SubType>
@@ -179,6 +180,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

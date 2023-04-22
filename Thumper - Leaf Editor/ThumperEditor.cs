@@ -215,6 +215,19 @@ namespace Thumper_Custom_Level_Editor
             if (!Directory.Exists(@"temp")) {
                 Directory.CreateDirectory(@"temp");
             }
+            //write required audio files for playback
+            if (!File.Exists(@"temp\coin_collect.ogg")) File.WriteAllBytes(@"temp\coin_collect.ogg", Properties.Resources.coin_collect);
+            if (!File.Exists(@"temp\ducker_ring_approach.ogg")) File.WriteAllBytes(@"temp\ducker_ring_approach.ogg", Properties.Resources.ducker_ring_approach);
+            if (!File.Exists(@"temp\grindable_birth2.ogg")) File.WriteAllBytes(@"temp\grindable_birth2.ogg", Properties.Resources.grindable_birth2);
+            if (!File.Exists(@"temp\hammer_two_handed_hit.ogg")) File.WriteAllBytes(@"temp\hammer_two_handed_hit.ogg", Properties.Resources.hammer_two_handed_hit);
+            if (!File.Exists(@"temp\high_jump.ogg")) File.WriteAllBytes(@"temp\high_jump.ogg", Properties.Resources.high_jump);
+            if (!File.Exists(@"temp\thump_birth1.ogg")) File.WriteAllBytes(@"temp\thump_birth1.ogg", Properties.Resources.thump_birth1);
+            if (!File.Exists(@"temp\thump1b.ogg")) File.WriteAllBytes(@"temp\thump1b.ogg", Properties.Resources.thump1b);
+            if (!File.Exists(@"temp\turn_birth.ogg")) File.WriteAllBytes(@"temp\turn_birth.ogg", Properties.Resources.turn_birth);
+            if (!File.Exists(@"temp\turn_birth_lft.ogg")) File.WriteAllBytes(@"temp\turn_birth_lft.ogg", Properties.Resources.turn_birth_lft);
+            if (!File.Exists(@"temp\turn_hit_perfect2.ogg")) File.WriteAllBytes(@"temp\turn_hit_perfect2.ogg", Properties.Resources.turn_hit_perfect2);
+            InitializeSounds();
+            _playbacktimer.Tick += _playbacktimer_Tick;
             //call method that imports objects from track_objects.txt (for Leaf editing)
             ImportObjects();
 

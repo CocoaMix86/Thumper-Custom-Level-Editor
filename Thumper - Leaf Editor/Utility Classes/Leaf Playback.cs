@@ -6,34 +6,59 @@ using System.Media;
 using System.Drawing;
 using NAudio.Vorbis;
 using NAudio.Wave;
+using System.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{
 		Multimedia.Timer _playbacktimer = new Multimedia.Timer();
-		List<List<VorbisWaveReader>> vorbis = new List<List<VorbisWaveReader>>();
+		List<List<CachedSound>> vorbis;
 		bool _playing = false;
 		int _playbackbeat;
 		int _sequence;
 
+		CachedSound ring;
+		CachedSound ring_approach;
+		CachedSound bar_approach;
+		CachedSound bar;
+		CachedSound spikes;
+		CachedSound thump_approach;
+		CachedSound thump;
+		CachedSound turn_approachR;
+		CachedSound turn_approachL;
+		CachedSound turn;
+
+		private void InitializeSounds()
+        {
+			/*ring = new CachedSound(@"temp\coin_collect.ogg");
+			ring_approach = new CachedSound(@"temp\ducker_ring_approach.ogg");
+			bar_approach = new CachedSound(@"temp\grindable_birth2.ogg");
+			bar = new CachedSound(@"temp\hammer_two_handed_hit.ogg");
+			spikes = new CachedSound(@"temp\high_jump.ogg");
+			thump_approach = new CachedSound(@"temp\thump_birth1.ogg");
+			thump = new CachedSound(@"temp\thump1b.ogg");
+			turn_approachR = new CachedSound(@"temp\turn_birth.ogg");
+			turn_approachL = new CachedSound(@"temp\turn_birth_lft.ogg");
+			turn = new CachedSound(@"temp\turn_hit_perfect2.ogg");*/
+		}
+
 		private void btnTrackPlayback_Click(object sender, EventArgs e)
 		{
-			_playbacktimer.Tick += _playbacktimer_Tick;
-			vorbis.Clear();
 			//if the playback is active, stop it. Otherwise, continue below
 			if (_playing) {
 				_playing = false;
 				_playbacktimer.Stop();
 				btnTrackPlayback.ForeColor = Color.Green;
-				_playbacktimer.Tick -= _playbacktimer_Tick;
 				return;
 			}
 
+			//make sure the sample list is up to date
+			LvlReloadSamples();
 			//for each beat in the leaf, fill the list with new lists to hold playable data
-			vorbis = new List<List<VorbisWaveReader>>((int)numericUpDown_LeafLength.Value + 8);
+			vorbis = new List<List<CachedSound>>((int)numericUpDown_LeafLength.Value + 8);
 			for (int x = 0; x < numericUpDown_LeafLength.Value + 8; x++) {
-				vorbis.Add(new List<VorbisWaveReader>());
+				vorbis.Add(new List<CachedSound>());
 			}
 
 			//iterate over each row in the lead to find the tracks with the important sound-making objects
@@ -44,8 +69,8 @@ namespace Thumper_Custom_Level_Editor
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
-							vorbis[_sequence].Add(new VorbisWaveReader(new MemoryStream(Properties.Resources.thump1b), false));
-							vorbis[_sequence - 8].Add(new VorbisWaveReader(new MemoryStream(Properties.Resources.thump_birth1), false));
+							vorbis[_sequence].Add(new CachedSound(@"temp\thump1b.ogg"));
+							vorbis[_sequence - 8].Add(new CachedSound(@"temp\thump_birth1.ogg"));
 						}
 						_sequence++;
 					}
@@ -55,8 +80,8 @@ namespace Thumper_Custom_Level_Editor
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
-							vorbis[_sequence].Add(new VorbisWaveReader(new MemoryStream(Properties.Resources.turn_hit_perfect2), false));
-							vorbis[_sequence - 8].Add(new VorbisWaveReader(new MemoryStream(Properties.Resources.turn_birth), false));
+							vorbis[_sequence].Add(new CachedSound(@"temp\turn_hit_perfect2.ogg"));
+							vorbis[_sequence - 8].Add(new CachedSound(@"temp\turn_birth.ogg"));
 						}
 						_sequence++;
 					}
@@ -67,10 +92,12 @@ namespace Thumper_Custom_Level_Editor
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
-							if (!File.Exists($@"temp\{_tracks[dgvr.Index].obj_name.Replace(".samp", "")}.ogg"))
-								//PCtoOGG(_samp);
-							vorbis[_sequence].Add(new VorbisWaveReader(new MemoryStream(Properties.Resources.thump1b), false));
-							vorbis[_sequence - 8].Add(new VorbisWaveReader(new MemoryStream(Properties.Resources.thump_birth1), false));
+							if (!File.Exists($@"temp\{_tracks[dgvr.Index].obj_name.Replace(".samp", "")}.ogg")) {
+								//using LINQ, I can enumerate over the sample list, locate the obj_name, and then pull out the entire object from that!
+								var _samplocate = _lvlsamples.First(item => item.obj_name == _tracks[dgvr.Index].obj_name.Replace(".samp", ""));
+								PCtoOGG(_samplocate);
+							}
+							vorbis[_sequence].Add(new CachedSound($@"temp\{_tracks[dgvr.Index].obj_name.Replace(".samp", "")}.ogg"));
 						}
 						_sequence++;
 					}
@@ -82,22 +109,20 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackPlayback.ForeColor = Color.Red;
 			_playbackbeat = 0;
 			//the speed of the timer is reliant on the level's BPM
-			_playbacktimer.Period = (int)(1000 * (60 / NUD_ConfigBPM.Value));
+			_playbacktimer.Period = (int)Math.Round(1000 * ((float)60 / (float)NUD_ConfigBPM.Value), MidpointRounding.AwayFromZero);
 			_playbacktimer.Start();
 		}
 
 		private void _playbacktimer_Tick(object source, EventArgs e)
 		{
 			foreach (var _sample in vorbis[_playbackbeat]) {
-				WaveOut oggPlayer = WaveOutInit(_sample);
-				oggPlayer.Play();
+				AudioPlaybackEngine.Instance.PlaySound(_sample);
 			}
 			_playbackbeat++;
 			if (_playbackbeat >= vorbis.Count) {
 				_playbacktimer.Stop();
 				_playing = false;
 				btnTrackPlayback.ForeColor = Color.Green;
-				_playbacktimer.Tick -= _playbacktimer_Tick;
 			}
 		}
 			/*

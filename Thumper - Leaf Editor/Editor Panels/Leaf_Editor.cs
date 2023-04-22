@@ -79,7 +79,7 @@ namespace Thumper_Custom_Level_Editor
 				dropObjects.SelectedIndex = dropObjects.FindStringExact(_tracks[_selecttrack].friendly_type);
 				dropParamPath.SelectedIndex = dropParamPath.FindStringExact(_params[0]);
 				//needs a different selection method if it's a sample
-				if (_tracks[_selecttrack].obj_name.Contains(".samp"))
+				if (_tracks[_selecttrack].param_path == "play")
 					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_tracks[_selecttrack].obj_name);
 				else
 					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[1]);
@@ -537,7 +537,7 @@ namespace Thumper_Custom_Level_Editor
 			};
 			//alter the data if it's a sample object being added. Save the sample name instead
 			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
-				_tracks[_selecttrack].obj_name = dropTrackLane.SelectedValue.ToString();
+				_tracks[_selecttrack].obj_name = dropTrackLane.SelectedValue.ToString() + ".samp";
 			//if lane is not middle, edit the param_path and friendly_param to match
 			if (_tracks[_selecttrack].param_path.Contains(".ent")) {
 				_tracks[_selecttrack].param_path = _tracks[_selecttrack].param_path.Replace(".ent", _tracklane[dropTrackLane.SelectedIndex]);
@@ -545,6 +545,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//change row header to reflect what the track is
 			ChangeTrackName();
+			SaveLeaf(false);
 		}
 		///Sets highlighting color of current track
 		private void btnTrackColorDialog_Click(object sender, EventArgs e)
@@ -825,7 +826,7 @@ namespace Thumper_Custom_Level_Editor
 					_s.friendly_param += $", {dropTrackLane.Items[_tracklane.IndexOf($".{_s.param_path.Split('.')[1]}")]}";
 
 				//if object is a .samp, fix the friendly_param and friendly_type
-				if (_s.obj_name.Contains(".samp")) {
+				if (_s.param_path == "play") {
 					_s.friendly_type = "PLAY SAMPLE";
 					_s.friendly_param = _s.param_path;
                 }
@@ -841,8 +842,8 @@ namespace Thumper_Custom_Level_Editor
 			foreach (DataGridViewRow r in trackEditor.Rows) {
 				try {
 					if (_tracks[r.Index].friendly_param.Length > 1) {
-						if (_tracks[r.Index].obj_name.Contains(".samp"))
-							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].param_path}, {_tracks[r.Index].obj_name})";
+						if (_tracks[r.Index].param_path == "play")
+							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].obj_name})";
 						else
 							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].friendly_param})";
 						//pass _griddata per row to be imported to the DGV
