@@ -50,6 +50,7 @@ namespace Thumper_Custom_Level_Editor
 				_playing = false;
 				_playbacktimer.Stop();
 				btnTrackPlayback.ForeColor = Color.Green;
+				btnTrackPlayback.Image = Properties.Resources.icon_play;
 				return;
 			}
 
@@ -107,6 +108,7 @@ namespace Thumper_Custom_Level_Editor
 			//enable the timer and start playback
 			_playing = true;
 			btnTrackPlayback.ForeColor = Color.Red;
+			btnTrackPlayback.Image = Properties.Resources.icon_pause16;
 			_playbackbeat = 0;
 			//the speed of the timer is reliant on the level's BPM
 			_playbacktimer.Period = (int)Math.Round(1000 * ((float)60 / (float)NUD_ConfigBPM.Value), MidpointRounding.AwayFromZero);
@@ -123,6 +125,7 @@ namespace Thumper_Custom_Level_Editor
 				_playbacktimer.Stop();
 				_playing = false;
 				btnTrackPlayback.ForeColor = Color.Green;
+				btnTrackPlayback.Image = Properties.Resources.icon_play;
 			}
 		}
 			/*

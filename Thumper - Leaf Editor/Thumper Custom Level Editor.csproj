@@ -223,6 +223,11 @@
     <None Include="audio assets\turn_birth.ogg" />
     <None Include="audio assets\turn_birth_lft.ogg" />
     <None Include="audio assets\turn_hit_perfect2.ogg" />
+    <None Include="image assets\icon-pause.png" />
+    <None Include="image assets\icon-play.png" />
+    <None Include="image assets\icon-pause16.png" />
+    <None Include="image assets\icons-play16.png" />
+    <None Include="image assets\icon-trash.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
