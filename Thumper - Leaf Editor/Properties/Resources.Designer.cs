@@ -71,12 +71,32 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] coin_collect {
+            get {
+                object obj = ResourceManager.GetObject("coin_collect", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap difficultyhelp {
             get {
                 object obj = ResourceManager.GetObject("difficultyhelp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] ducker_ring_approach {
+            get {
+                object obj = ResourceManager.GetObject("ducker_ring_approach", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -101,6 +121,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] grindable_birth2 {
+            get {
+                object obj = ResourceManager.GetObject("grindable_birth2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] hammer_two_handed_hit {
+            get {
+                object obj = ResourceManager.GetObject("hammer_two_handed_hit", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.\n\nISOLATE\nWhen checked, only isolated levels will play in game. Useful for testing specific sublevels without replaying the entire thing.&quot;,
         ///&quot;masterChe [rest of string was truncated]&quot;;.
@@ -108,6 +148,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static string helptext {
             get {
                 return ResourceManager.GetString("helptext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] high_jump {
+            get {
+                object obj = ResourceManager.GetObject("high_jump", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -814,6 +864,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] thump_birth1 {
+            get {
+                object obj = ResourceManager.GetObject("thump_birth1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] thump1b {
+            get {
+                object obj = ResourceManager.GetObject("thump1b", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TRACK EFFECTS
         ///leafname
         ///leafname;pitch;pitch;kTraitFloat;True;1.25;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
@@ -825,6 +895,36 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static string track_objects {
             get {
                 return ResourceManager.GetString("track_objects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] turn_birth {
+            get {
+                object obj = ResourceManager.GetObject("turn_birth", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] turn_birth_lft {
+            get {
+                object obj = ResourceManager.GetObject("turn_birth_lft", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] turn_hit_perfect2 {
+            get {
+                object obj = ResourceManager.GetObject("turn_hit_perfect2", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

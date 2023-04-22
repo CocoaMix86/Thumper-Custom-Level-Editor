@@ -34,8 +34,6 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedsample;
 		string _loadedsampletemp;
 		ObservableCollection<SampleData> _samplelist = new ObservableCollection<SampleData>();
-		private VorbisWaveReader? vorbis = null;
-		private WaveOut? oggPlayer = null;
 		#endregion
 
 		#region EventHandlers
@@ -287,11 +285,10 @@ namespace Thumper_Custom_Level_Editor
 			if (!File.Exists($@"temp\{_samp.obj_name}.ogg")) {
 				PCtoOGG(_samp);
 			}
-
-			vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.ogg");
-			oggPlayer = WaveOutInit(vorbis);
+			
+			VorbisWaveReader vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.ogg");
+			WaveOut oggPlayer = WaveOutInit(vorbis);
 			oggPlayer.Play();
-			btnSampEditorPlaySamp.Enabled = false;
 		}
 		#endregion
 
@@ -454,8 +451,8 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void WaveOut_PlaybackStopped(object? sender, StoppedEventArgs e)
 		{
-			WaveOutReset(oggPlayer, vorbis);
-			btnSampEditorPlaySamp.Enabled = true;
+			//WaveOutReset(oggPlayer, vorbis);
+			//btnSampEditorPlaySamp.Enabled = true;
 		}
 		private void WaveOutReset(WaveOut? player, VorbisWaveReader? reader)
 		{

@@ -10,7 +10,7 @@
     <RootNamespace>Thumper_Custom_Level_Editor</RootNamespace>
     <AssemblyName>Thumper Custom Level Editor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-	<Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>10.0</LangVersion>
     <FileAlignment>512</FileAlignment>
@@ -91,6 +91,11 @@
     <Compile Include="Extra Forms\AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utility Classes\ControlMoverOrResizer.cs" />
     <Compile Include="Extra Forms\CustomizeWorkspace.cs">
       <SubType>Form</SubType>
@@ -138,11 +143,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor Panels\Sequencer_Object.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="ThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +209,16 @@
     <None Include="image assets\master.png" />
     <None Include="image assets\bosssectionhelp.png" />
     <None Include="image assets\sample.png" />
+    <None Include="audio assets\coin_collect.ogg" />
+    <None Include="audio assets\ducker_ring_approach.ogg" />
+    <None Include="audio assets\grindable_birth2.ogg" />
+    <None Include="audio assets\hammer_two_handed_hit.ogg" />
+    <None Include="audio assets\high_jump.ogg" />
+    <None Include="audio assets\thump_birth1.ogg" />
+    <None Include="audio assets\thump1b.ogg" />
+    <None Include="audio assets\turn_birth.ogg" />
+    <None Include="audio assets\turn_birth_lft.ogg" />
+    <None Include="audio assets\turn_hit_perfect2.ogg" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
@@ -265,6 +275,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Target Name="ILMerge">
     <!-- the ILMergePath property points to the location of ILMerge.exe console application -->

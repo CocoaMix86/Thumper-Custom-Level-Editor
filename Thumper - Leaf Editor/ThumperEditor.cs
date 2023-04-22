@@ -155,7 +155,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             if (Directory.Exists(@"temp")) {
-                Directory.Delete(@"temp", true);
+                //Directory.Delete(@"temp", true);
             }
             //save panel sizes and locations
             Properties.Settings.Default.leafeditorloc = panelLeaf.Location;
