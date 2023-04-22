@@ -53,6 +53,11 @@ namespace Thumper_Custom_Level_Editor
 				btnTrackPlayback.Image = Properties.Resources.icon_play;
 				return;
 			}
+			//check if master file is loaded
+			if (_loadedmaster == null) {
+				MessageBox.Show("A master file needs to be loaded to get the BPM", "Cannot start playback");
+				return;
+            }
 
 			//make sure the sample list is up to date
 			LvlReloadSamples();
@@ -76,7 +81,7 @@ namespace Thumper_Custom_Level_Editor
 						_sequence++;
 					}
 				}
-
+				//Takes care of Turns
 				if (dgvr.HeaderCell.Value.ToString().Contains("(turn)")) {
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
@@ -93,6 +98,7 @@ namespace Thumper_Custom_Level_Editor
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
+							//if the audio file doesn't exist in the temp folder, we need to extract it first
 							if (!File.Exists($@"temp\{_tracks[dgvr.Index].obj_name.Replace(".samp", "")}.ogg")) {
 								//using LINQ, I can enumerate over the sample list, locate the obj_name, and then pull out the entire object from that!
 								var _samplocate = _lvlsamples.First(item => item.obj_name == _tracks[dgvr.Index].obj_name.Replace(".samp", ""));

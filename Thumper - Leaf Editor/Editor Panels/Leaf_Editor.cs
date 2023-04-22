@@ -493,6 +493,26 @@ namespace Thumper_Custom_Level_Editor
 			catch { }
 		}
 
+		private void btnTrackCopy_Click(object sender, EventArgs e)
+		{
+			DataGridView dgv = trackEditor;
+			try {
+				int _index = trackEditor.CurrentCell.RowIndex;
+				//copy item and insert it back in the track list, index +1
+				Sequencer_Object selectedTrack = _tracks[_index];
+				_tracks.Insert(_index + 1, selectedTrack);
+				//clone the row as well
+				DataGridViewRow _row = (DataGridViewRow)dgv.Rows[_index].Clone();
+				for (int i = 0; i < _row.Cells.Count; i++) {
+					_row.Cells[i].Value = dgv.Rows[_index].Cells[i].Value;
+				}
+				dgv.Rows.Insert(_index + 1, _row);
+				//sets flag that leaf has unsaved changes
+				SaveLeaf(false);
+			}
+			catch { }
+		}
+
 		private void btnTrackClear_Click(object sender, EventArgs e)
 		{
 			bool _empty = true;
@@ -644,7 +664,6 @@ namespace Thumper_Custom_Level_Editor
 			grid.DefaultCellStyle.SelectionForeColor = Color.FromName("HighlightText");
 			grid.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 			grid.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
-			grid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 			grid.ReadOnly = false;
 			grid.RowTemplate.Height = 20;
 
@@ -862,6 +881,9 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackDelete.Enabled = _tracks.Count > 0;
 			btnTrackUp.Enabled = _tracks.Count > 1;
 			btnTrackDown.Enabled = _tracks.Count > 1;
+			btnTrackClear.Enabled = _tracks.Count > 0;
+			btnTrackCopy.Enabled = _tracks.Count > 0;
+			//set save flag to true, since it just barely loaded
 			SaveLeaf(true);
 		}
 
