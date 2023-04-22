@@ -537,7 +537,7 @@ namespace Thumper_Custom_Level_Editor
 			};
 			//alter the data if it's a sample object being added. Save the sample name instead
 			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
-				_tracks[_selecttrack].obj_name = (string)dropTrackLane.SelectedValue;
+				_tracks[_selecttrack].obj_name = dropTrackLane.SelectedValue.ToString();
 			//if lane is not middle, edit the param_path and friendly_param to match
 			if (_tracks[_selecttrack].param_path.Contains(".ent")) {
 				_tracks[_selecttrack].param_path = _tracks[_selecttrack].param_path.Replace(".ent", _tracklane[dropTrackLane.SelectedIndex]);

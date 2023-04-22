@@ -15,5 +15,10 @@ namespace Thumper_Custom_Level_Editor
         public decimal pan { get; set; }
         public decimal offset { get; set; }
         public string channel_group { get; set; }
+
+        public override string ToString()
+        {
+            return obj_name;
+        }
     }
 }

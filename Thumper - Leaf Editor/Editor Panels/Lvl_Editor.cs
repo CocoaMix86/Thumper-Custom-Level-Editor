@@ -32,7 +32,7 @@ namespace Thumper_Custom_Level_Editor
 		string _loadedlvltemp;
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
-		List<string> _lvlsamples = new List<string>();
+		List<SampleData> _lvlsamples = new List<SampleData>();
 
 		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();
 		#endregion
@@ -592,11 +592,19 @@ namespace Thumper_Custom_Level_Editor
 				//parse file to JSON
 				dynamic _in = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(f), "#.*", ""));
 				//iterate over items:[] list to get each sample and add names to list
-				foreach (dynamic samp in _in["items"]) {
-					_lvlsamples.Add((string)samp["obj_name"]);
+				foreach (dynamic _samp in _in["items"]) {
+					_lvlsamples.Add(new SampleData {
+						obj_name = ((string)_samp["obj_name"]).Replace(".samp", ""),
+						path = _samp["path"],
+						volume = _samp["volume"],
+						pitch = _samp["pitch"],
+						pan = _samp["pan"],
+						offset = _samp["offset"],
+						channel_group = _samp["channel_group"]
+					});
 				}
 			}
-			_lvlsamples.Sort();
+			_lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
 		}
 
 		public void SaveLvl(bool save)

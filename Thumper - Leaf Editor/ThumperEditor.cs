@@ -258,8 +258,6 @@ namespace Thumper_Custom_Level_Editor
             panelSample.Size = Properties.Settings.Default.sampleeditorsize;
             panelSample.Location = Properties.Settings.Default.sampleeditorloc;
             panelSample.Visible = Properties.Settings.Default.sampleeditorvisible;
-            //add a Tick event to the timer over in Leaf Playback.cs
-            timer.Tick += new EventHandler(timer_Tick);
         }
 
         public void ImportObjects()
