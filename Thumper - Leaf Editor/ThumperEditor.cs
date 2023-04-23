@@ -238,10 +238,10 @@ namespace Thumper_Custom_Level_Editor
 
             ///set a bunch of tool tips
             //Leaf tooltips
-            toolTip1.SetToolTip(btnTrackClear, "Clears the selected track of data");
+            toolTip1.SetToolTip(btnTrackClear, "Clears the selected track's data points");
             toolTip1.SetToolTip(btnLeafObjRefresh, "Reloads objects from templates\\track_objects.txt");
             //Lvl tooltips
-            toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track of data");
+            toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track's data points");
             //Master tooltips
             toolTip1.SetToolTip(btnMasterOpenCheckpoint, "Opens the selected checkpoint in the Lvl Editor");
             toolTip1.SetToolTip(btnMasterOpenIntro, "Opens the selected intro lvl in the Lvl Editor");
@@ -559,11 +559,6 @@ namespace Thumper_Custom_Level_Editor
             if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1) {
                 e.Handled = true;
             }
-        }
-
-        private void btnWorkDelete_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
