@@ -560,5 +560,10 @@ namespace Thumper_Custom_Level_Editor
                 e.Handled = true;
             }
         }
+
+        private void btnWorkDelete_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
