@@ -22,9 +22,9 @@ namespace Thumper_Custom_Level_Editor
 			//attempt to load file listed in the dGV
 			try {
 				//first check if it exists
-				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}";
+				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}.txt";
 				if (!File.Exists(_selectedfilename)) {
-					MessageBox.Show($"File {workingfolderFiles[1, e.RowIndex].Value} could not be found in the folder. Was it moved or deleted?", "File load error");
+					MessageBox.Show($"File {workingfolderFiles[1, e.RowIndex].Value}.txt could not be found in the folder. Was it moved or deleted?", "File load error");
 					return;
 				}
 				//atempt to parse JSON
@@ -91,7 +91,7 @@ namespace Thumper_Custom_Level_Editor
 			//filter for specific files
 			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS") || x.Contains("samp_")))) {
 				var filetype = Path.GetFileName(file).Split('_')[0];
-				workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileName(file));
+				workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 			}
 		}
 
@@ -102,7 +102,22 @@ namespace Thumper_Custom_Level_Editor
 				//check if file being deleted is LEVEL DETAILS
 				if (workingfolderFiles.CurrentRow.Cells[1].Value.ToString().Contains("LEVEL DETAILS") && MessageBox.Show("You are about to delete the LEVEL DETAILS file. This file is required for the mod loader tool to load the level. Are you sure you want to delete it?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.No)
 					return;
-				File.Delete($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}");
+				File.Delete($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt");
+				//call the refresh method so the dgv updates
+				btnWorkRefresh_Click(null, null);
+			}
+		}
+
+		private void btnWorkCopy_Click(object sender, EventArgs e)
+		{
+			//make user confirm file duplication
+			if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show("Copy selected file?", "Confirm duplication", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+				//check if file being copied is LEVEL DETAILS
+				if (workingfolderFiles.CurrentRow.Cells[1].Value.ToString().Contains("LEVEL DETAILS")) {
+					MessageBox.Show("You may not duplicate Level Details", "You cannot do that");
+					return;
+				}
+				File.Copy($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt", $@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value} (2).txt");
 				//call the refresh method so the dgv updates
 				btnWorkRefresh_Click(null, null);
 			}
