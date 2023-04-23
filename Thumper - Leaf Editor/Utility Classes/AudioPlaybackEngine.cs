@@ -22,6 +22,7 @@ namespace Thumper_Custom_Level_Editor
             outputDevice = new WaveOutEvent();
             mixer = new MixingSampleProvider(WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channelCount));
             mixer.ReadFully = true;
+            outputDevice.Volume = 0.1f;
             outputDevice.Init(mixer);
             outputDevice.Play();
         }
@@ -50,7 +51,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void AddMixerInput(ISampleProvider input)
         {
-            mixer.AddMixerInput(ConvertToRightChannelCount(input));
+            mixer.AddMixerInput(/*ConvertToRightChannelCount(input)*/input);
         }
 
         public void Dispose()
