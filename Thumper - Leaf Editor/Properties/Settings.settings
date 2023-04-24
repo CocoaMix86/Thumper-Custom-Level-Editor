@@ -44,7 +44,7 @@
     <Setting Name="custom_menucolor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Maroon</Value>
     </Setting>
-    <Setting Name="custom_panelcolor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="custom_mastercolor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">55, 55, 55</Value>
     </Setting>
     <Setting Name="leafeditorvisible" Type="System.Boolean" Scope="User">
@@ -64,6 +64,18 @@
     </Setting>
     <Setting Name="sampleeditorvisible" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="custom_gatecolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="custom_lvlcolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="custom_leafcolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="custom_samplecolor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
     </Setting>
   </Settings>
 </SettingsFile>

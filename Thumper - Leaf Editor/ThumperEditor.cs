@@ -79,12 +79,11 @@ namespace Thumper_Custom_Level_Editor
         {
             this.BackColor = Properties.Settings.Default.custom_bgcolor;
             menuStrip.BackColor = Properties.Settings.Default.custom_menucolor;
-            panelLeaf.BackColor = Properties.Settings.Default.custom_panelcolor;
-            panelLevel.BackColor = Properties.Settings.Default.custom_panelcolor;
-            panelGate.BackColor = Properties.Settings.Default.custom_panelcolor;
-            panelMaster.BackColor = Properties.Settings.Default.custom_panelcolor;
-            panelSample.BackColor = Properties.Settings.Default.custom_panelcolor;
-            panelWorkingFolder.BackColor = Properties.Settings.Default.custom_panelcolor;
+            panelLeaf.BackColor = Properties.Settings.Default.custom_leafcolor;
+            panelLevel.BackColor = Properties.Settings.Default.custom_lvlcolor;
+            panelGate.BackColor = Properties.Settings.Default.custom_gatecolor;
+            panelMaster.BackColor = Properties.Settings.Default.custom_mastercolor;
+            panelSample.BackColor = Properties.Settings.Default.custom_samplecolor;
         }
 
         ///Repaints toolstrip separators to have gray backgrounds
@@ -539,7 +538,11 @@ namespace Thumper_Custom_Level_Editor
             if (custom.ShowDialog() == DialogResult.OK) {
                 Properties.Settings.Default.custom_bgcolor = custom.btnBGColor.BackColor;
                 Properties.Settings.Default.custom_menucolor = custom.btnMenuColor.BackColor;
-                Properties.Settings.Default.custom_panelcolor = custom.btnPanelColor.BackColor;
+                Properties.Settings.Default.custom_mastercolor = custom.btnMasterColor.BackColor;
+                Properties.Settings.Default.custom_gatecolor = custom.btnGateColor.BackColor;
+                Properties.Settings.Default.custom_lvlcolor = custom.btnLvlColor.BackColor;
+                Properties.Settings.Default.custom_leafcolor = custom.btnLeafColor.BackColor;
+                Properties.Settings.Default.custom_samplecolor = custom.btnSampleColor.BackColor;
                 ColorFormElements();
             }
             custom.Dispose();
