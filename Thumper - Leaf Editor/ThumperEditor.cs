@@ -73,6 +73,7 @@ namespace Thumper_Custom_Level_Editor
         {
             InitializeComponent();
             ColorFormElements();
+            menuStrip.Renderer = new MyRenderer();
         }
         ///Color elements based on set properties
         private void ColorFormElements()

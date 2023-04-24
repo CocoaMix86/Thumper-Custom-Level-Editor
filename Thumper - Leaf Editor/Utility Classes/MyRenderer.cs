@@ -30,5 +30,17 @@ namespace Thumper_Custom_Level_Editor
         {
             get { return Color.Red; }
         }
+        public override Color MenuItemBorder
+        {
+            get { return Color.Magenta; }
+        }
+        public override Color MenuItemPressedGradientBegin
+        {
+            get { return Color.DarkRed; }
+        }
+        public override Color MenuItemPressedGradientEnd
+        {
+            get { return Color.Red; }
+        }
     }
 }
