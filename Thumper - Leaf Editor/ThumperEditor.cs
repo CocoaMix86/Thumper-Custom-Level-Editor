@@ -54,6 +54,7 @@ namespace Thumper_Custom_Level_Editor
 
                     lblWorkingFolder.Text = $"Working Folder - {value}";
                     btnWorkRefresh.Enabled = true;
+                    btnWorkCopy.Enabled = true;
                     editLevelDetailsToolStripMenuItem.Enabled = true;
                     regenerateDefaultFilesToolStripMenuItem.Enabled = true;
                     //set window name to the level name
