@@ -362,6 +362,7 @@
             this.menuStrip.Size = new System.Drawing.Size(1745, 28);
             this.menuStrip.TabIndex = 20;
             this.menuStrip.Text = "mnuLeafEditor";
+            this.menuStrip.Renderer = new MyRenderer();
             // 
             // fileToolStripMenuItem1
             // 
