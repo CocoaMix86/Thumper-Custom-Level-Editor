@@ -361,6 +361,15 @@ namespace Thumper_Custom_Level_Editor
 			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
 		}
 
+		private void btnLvlCopyTunnel_Click(object sender, EventArgs e)
+		{
+			//if you're on the first row, do nothing
+			if (lvlLeafList.CurrentRow.Index == 0)
+				return;
+			//copies the tunnels of the .leaf above the current select .leaf, to the selected .leaf
+			_lvlleafs[lvlLeafList.CurrentRow.Index].paths = _lvlleafs[lvlLeafList.CurrentRow.Index - 1].paths;
+		}
+
 		private void btnLvlLoopAdd_Click(object sender, EventArgs e)
 		{
 			lvlLoopTracks.RowCount++;

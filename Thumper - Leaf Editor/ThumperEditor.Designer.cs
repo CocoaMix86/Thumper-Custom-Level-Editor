@@ -167,6 +167,7 @@
             this.btnSaveLeaf = new System.Windows.Forms.Button();
             this.btnLeafObjRefresh = new System.Windows.Forms.Button();
             this.panelLevel = new System.Windows.Forms.Panel();
+            this.btnLvlCopyTunnel = new System.Windows.Forms.Button();
             this.label39 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.btnlvlPanelOpen = new System.Windows.Forms.Button();
@@ -808,7 +809,7 @@
             this.leafEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.leafEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.leafEditorToolStripMenuItem.Name = "leafEditorToolStripMenuItem";
-            this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.leafEditorToolStripMenuItem.Text = "Leaf Editor";
             this.leafEditorToolStripMenuItem.Click += new System.EventHandler(this.leafEditorToolStripMenuItem_Click);
             // 
@@ -821,7 +822,7 @@
             this.levelEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.levelEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
             this.levelEditorToolStripMenuItem.Name = "levelEditorToolStripMenuItem";
-            this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.levelEditorToolStripMenuItem.Text = "Lvl Editor";
             this.levelEditorToolStripMenuItem.Click += new System.EventHandler(this.levelEditorToolStripMenuItem_Click);
             // 
@@ -834,7 +835,7 @@
             this.gateEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.gateEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
             this.gateEditorToolStripMenuItem.Name = "gateEditorToolStripMenuItem";
-            this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.gateEditorToolStripMenuItem.Text = "Gate Editor";
             this.gateEditorToolStripMenuItem.Click += new System.EventHandler(this.gateEditorToolStripMenuItem_Click);
             // 
@@ -847,7 +848,7 @@
             this.masterEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.masterEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.masterEditorToolStripMenuItem.Name = "masterEditorToolStripMenuItem";
-            this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.masterEditorToolStripMenuItem.Text = "Master Editor";
             this.masterEditorToolStripMenuItem.Click += new System.EventHandler(this.masterEditorToolStripMenuItem_Click);
             // 
@@ -859,7 +860,7 @@
             this.workingFolderToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.workingFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.workingFolderToolStripMenuItem.Name = "workingFolderToolStripMenuItem";
-            this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.workingFolderToolStripMenuItem.Text = "Working Folder";
             this.workingFolderToolStripMenuItem.Click += new System.EventHandler(this.workingFolderToolStripMenuItem_Click);
             // 
@@ -870,14 +871,14 @@
             this.sampleEditorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.sampleEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
             this.sampleEditorToolStripMenuItem.Name = "sampleEditorToolStripMenuItem";
-            this.sampleEditorToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.sampleEditorToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.sampleEditorToolStripMenuItem.Text = "Sample Editor";
             this.sampleEditorToolStripMenuItem.Click += new System.EventHandler(this.sampleEditorToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(181, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(159, 6);
             this.toolStripMenuItem2.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
             // 
             // customizeToolStripMenuItem
@@ -885,7 +886,7 @@
             this.customizeToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.customizeToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.customizeToolStripMenuItem.Size = new System.Drawing.Size(162, 26);
             this.customizeToolStripMenuItem.Text = "Customize...";
             this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
             // 
@@ -1851,6 +1852,7 @@
             // 
             this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLevel.Controls.Add(this.btnLvlCopyTunnel);
             this.panelLevel.Controls.Add(this.label39);
             this.panelLevel.Controls.Add(this.label29);
             this.panelLevel.Controls.Add(this.btnlvlPanelOpen);
@@ -1891,6 +1893,21 @@
             this.panelLevel.Name = "panelLevel";
             this.panelLevel.Size = new System.Drawing.Size(875, 383);
             this.panelLevel.TabIndex = 46;
+            // 
+            // btnLvlCopyTunnel
+            // 
+            this.btnLvlCopyTunnel.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlCopyTunnel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLvlCopyTunnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLvlCopyTunnel.ForeColor = System.Drawing.Color.PaleGreen;
+            this.btnLvlCopyTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy;
+            this.btnLvlCopyTunnel.Location = new System.Drawing.Point(304, 268);
+            this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
+            this.btnLvlCopyTunnel.Size = new System.Drawing.Size(22, 22);
+            this.btnLvlCopyTunnel.TabIndex = 120;
+            this.toolTip1.SetToolTip(this.btnLvlCopyTunnel, "Copy the tunnels of the prior .leaf to this .leaf");
+            this.btnLvlCopyTunnel.UseVisualStyleBackColor = false;
+            this.btnLvlCopyTunnel.Click += new System.EventHandler(this.btnLvlCopyTunnel_Click);
             // 
             // label39
             // 
@@ -4672,6 +4689,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
         private System.Windows.Forms.Button btnTrackCopy;
         private System.Windows.Forms.Button btnWorkCopy;
+        private System.Windows.Forms.Button btnLvlCopyTunnel;
     }
 }
 
