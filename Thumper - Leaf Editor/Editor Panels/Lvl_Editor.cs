@@ -498,6 +498,8 @@ namespace Thumper_Custom_Level_Editor
 			dropLvlTutorial.Text = (string)_load["tutorial_type"];
 			///load loop track names and paths to lvlLoopTracks DGV
 			LvlReloadSamples();
+			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = null;
+			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			foreach (dynamic samp in _load["loops"]) {
 				lvlLoopTracks.Rows.Add(new object[] { (string)samp["samp_name"], (int)samp["beats_per_loop"]});
 			}
@@ -562,13 +564,12 @@ namespace Thumper_Custom_Level_Editor
 			DataGridViewComboBoxColumn _dgvlvlloopsamples = new DataGridViewComboBoxColumn() {
 				DataSource = _lvlsamples,
 				HeaderText = "Loop Track Name",
-				ValueType = typeof(int)
+				AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 			};
 			lvlLoopTracks.Columns.Add(_dgvlvlloopsamples);
 			lvlLoopTracks.ColumnCount = 2;
 			lvlLoopTracks.Columns[1].HeaderText = "Beats per loop";
 			lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
-			lvlLoopTracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 			///
 			
 			///set Saved flag to true, since nothing is loaded
@@ -605,7 +606,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			_lvlsamples.Clear();
 			//find all samp_ files in the level folder
-			var _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt").Where(x => !x.Contains("samp_default"));
+			var _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt");
 			//iterate over each file
 			foreach (string f in _sampfiles) {
 				//parse file to JSON

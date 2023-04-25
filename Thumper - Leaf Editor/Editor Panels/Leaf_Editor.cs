@@ -222,6 +222,7 @@ namespace Thumper_Custom_Level_Editor
 				if ((string)dropObjects.SelectedValue == "PLAY SAMPLE") {
 					label11.Text = "Samples";
 					LvlReloadSamples();
+					dropTrackLane.DataSource = null;
 					dropTrackLane.DataSource = _lvlsamples;
 					dropTrackLane.SelectedIndex = -1;
 				}

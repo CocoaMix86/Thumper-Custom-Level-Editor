@@ -568,6 +568,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
+            MessageBox.Show($"{e.RowIndex},{e.ColumnIndex}\n{e.Context.ToString()}");
             e.Cancel = true;
         }
     }
