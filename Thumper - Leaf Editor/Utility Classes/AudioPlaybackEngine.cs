@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NAudio.Vorbis;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 
 namespace Thumper_Custom_Level_Editor
 {
-    /// <summary>
+    /// 
     /// http://mark-dot-net.blogspot.com/2014/02/fire-and-forget-audio-playback-with.html
-    /// </summary>
+    ///
     class AudioPlaybackEngine : IDisposable
     {
         private readonly IWavePlayer outputDevice;
@@ -22,7 +20,7 @@ namespace Thumper_Custom_Level_Editor
             outputDevice = new WaveOutEvent();
             mixer = new MixingSampleProvider(WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channelCount));
             mixer.ReadFully = true;
-            outputDevice.Volume = 0.1f;
+            outputDevice.Volume = 0.5f;
             outputDevice.Init(mixer);
             outputDevice.Play();
         }

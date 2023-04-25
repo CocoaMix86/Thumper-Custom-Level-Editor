@@ -104,6 +104,18 @@ namespace Thumper_Custom_Level_Editor
 						_sequence++;
 					}
 				}
+				//Takes care of Rings
+				if (dgvr.HeaderCell.Value.ToString().Contains("RING")) {
+					_sequence = 8;
+					foreach (DataGridViewCell dgvc in dgvr.Cells) {
+						if (dgvc.Value != null) {
+							vorbis[_sequence].Add(new CachedSound(@"temp\coin_collect.ogg"));
+							vorbis[_sequence].Add(new CachedSound(@"temp\hammer_two_handed_hit.ogg"));
+							vorbis[_sequence - 8].Add(new CachedSound(@"temp\ducker_ring_approach.ogg"));
+						}
+						_sequence++;
+					}
+				}
 
 				//Takes care of PLAY SAMPLE
 				if (dgvr.HeaderCell.Value.ToString().Contains("PLAY SAMPLE")) {
