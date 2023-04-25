@@ -382,6 +382,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			lvlLoopTracks.RowCount++;
 			lvlLoopTracks.Rows[lvlLoopTracks.Rows.Count - 1].HeaderCell.Value = "Volume Track " + (lvlLoopTracks.Rows.Count - 1);
+			lvlLoopTracks.Rows[lvlLoopTracks.Rows.Count - 1].Cells[1].Value = 0;
 			btnLvlLoopDelete.Enabled = true;
 		}
 
@@ -560,7 +561,8 @@ namespace Thumper_Custom_Level_Editor
 			//custom column containing comboboxes per cell
 			DataGridViewComboBoxColumn _dgvlvlloopsamples = new DataGridViewComboBoxColumn() {
 				DataSource = _lvlsamples,
-				HeaderText = "Loop Track Name"
+				HeaderText = "Loop Track Name",
+				ValueType = typeof(int)
 			};
 			lvlLoopTracks.Columns.Add(_dgvlvlloopsamples);
 			lvlLoopTracks.ColumnCount = 2;
