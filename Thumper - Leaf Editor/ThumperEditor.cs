@@ -565,11 +565,5 @@ namespace Thumper_Custom_Level_Editor
                 e.Handled = true;
             }
         }
-
-        private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            MessageBox.Show(e.Context.ToString());
-            //e.Cancel = true;
-        }
     }
 }

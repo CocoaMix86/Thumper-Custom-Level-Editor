@@ -108,6 +108,22 @@ namespace Thumper_Custom_Level_Editor
 		{
 			SaveLvl(false);
 		}
+
+		private void lvlLoopTracks_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+		{
+			DataGridViewCell dgvc = sender as DataGridViewCell;
+			try {
+				if (e.ColumnIndex == 0) {
+					var _samplocate = _lvlsamples.First(item => item.obj_name == ((string)lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value));
+					lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value = _samplocate;
+				}
+			}
+			catch { }
+		}
+		private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
+		{
+			e.Cancel = true;
+		}
 		/// DGV LVLSEQOBJS
 		//Cell value changed
 		private void lvlSeqObjs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -563,6 +579,7 @@ namespace Thumper_Custom_Level_Editor
 			///customize Loop Track list a bit
 			//custom column containing comboboxes per cell
 			lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
+			//lvlLoopTracks.Columns[0].ValueType = typeof(SampleData);
 			///
 			
 			///set Saved flag to true, since nothing is loaded
@@ -712,7 +729,7 @@ namespace Thumper_Custom_Level_Editor
 			JArray loops = new JArray();
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
 				JObject s = new JObject {
-					{ "samp_name", (string)r.Cells[0].Value },
+					{ "samp_name", ((SampleData)r.Cells[0].Value).obj_name + ".samp"},
 					{ "beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()) }
 				};
 

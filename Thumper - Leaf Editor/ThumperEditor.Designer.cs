@@ -188,6 +188,8 @@
             this.btnLvlPathDelete = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.lvlLoopTracks = new System.Windows.Forms.DataGridView();
+            this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblLevelMax = new System.Windows.Forms.Label();
             this.lblLvlClose = new System.Windows.Forms.Label();
             this.lvlSeqObjs = new System.Windows.Forms.DataGridView();
@@ -312,8 +314,6 @@
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.lblSampleEditor = new System.Windows.Forms.Label();
             this.btnSaveSample = new System.Windows.Forms.Button();
-            this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -2280,8 +2280,22 @@
             this.lvlLoopTracks.Size = new System.Drawing.Size(278, 133);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.Visible = false;
+            this.lvlLoopTracks.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.lvlLoopTracks_CellValidating);
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
             this.lvlLoopTracks.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.lvlLoopTracks_DataError);
+            // 
+            // LoopSample
+            // 
+            this.LoopSample.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.LoopSample.HeaderText = "Loop Sample";
+            this.LoopSample.MaxDropDownItems = 20;
+            this.LoopSample.Name = "LoopSample";
+            this.LoopSample.Width = 84;
+            // 
+            // BeatsPerLoop
+            // 
+            this.BeatsPerLoop.HeaderText = "Beats Per Loop";
+            this.BeatsPerLoop.Name = "BeatsPerLoop";
             // 
             // lblLevelMax
             // 
@@ -4400,19 +4414,6 @@
             this.btnSaveSample.UseVisualStyleBackColor = true;
             this.btnSaveSample.Visible = false;
             this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
-            // 
-            // LoopSample
-            // 
-            this.LoopSample.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.LoopSample.HeaderText = "Loop Sample";
-            this.LoopSample.MaxDropDownItems = 20;
-            this.LoopSample.Name = "LoopSample";
-            this.LoopSample.Width = 84;
-            // 
-            // BeatsPerLoop
-            // 
-            this.BeatsPerLoop.HeaderText = "Beats Per Loop";
-            this.BeatsPerLoop.Name = "BeatsPerLoop";
             // 
             // FormLeafEditor
             // 
