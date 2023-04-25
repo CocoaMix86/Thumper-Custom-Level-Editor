@@ -106,19 +106,14 @@ namespace Thumper_Custom_Level_Editor
 		//Cell value changed
 		private void lvlLoopTracks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			SaveLvl(false);
-		}
-
-		private void lvlLoopTracks_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-		{
 			DataGridViewCell dgvc = sender as DataGridViewCell;
 			try {
 				if (e.ColumnIndex == 0) {
 					var _samplocate = _lvlsamples.First(item => item.obj_name == ((string)lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value));
 					lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value = _samplocate;
 				}
-			}
-			catch { }
+			} catch { }
+			SaveLvl(false);
 		}
 		private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
 		{

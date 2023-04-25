@@ -2280,7 +2280,6 @@
             this.lvlLoopTracks.Size = new System.Drawing.Size(278, 133);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.Visible = false;
-            this.lvlLoopTracks.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.lvlLoopTracks_CellValidating);
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
             this.lvlLoopTracks.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.lvlLoopTracks_DataError);
             // 
