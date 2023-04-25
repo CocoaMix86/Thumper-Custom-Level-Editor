@@ -107,12 +107,14 @@ namespace Thumper_Custom_Level_Editor
 		private void lvlLoopTracks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			DataGridViewCell dgvc = sender as DataGridViewCell;
-			try {
+			try { //try is here because this gets triggered upon app load, when there's no data
 				if (e.ColumnIndex == 0) {
+					//search _lvlsamples for the value in the cell. Cell value is a string, so we need to apply the SampleData object instead
 					var _samplocate = _lvlsamples.First(item => item.obj_name == ((string)lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value));
 					lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value = _samplocate;
 				}
 			} catch { }
+			//set lvl save flag to false
 			SaveLvl(false);
 		}
 		private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)

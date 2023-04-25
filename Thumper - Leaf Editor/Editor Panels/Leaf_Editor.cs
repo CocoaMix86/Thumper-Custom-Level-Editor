@@ -186,9 +186,17 @@ namespace Thumper_Custom_Level_Editor
 		//Keypress Delete - clear selected cellss
 		private void trackEditor_KeyDown(object sender, KeyEventArgs e)
 		{
+			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
-				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) 
+				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
 					dgvc.Value = null;
+				TrackUpdateHighlighting(trackEditor.CurrentRow);
+				SaveLeaf(false);
+			}
+			//detect ctrl+v for cell pasting
+			if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control) {
+				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
+					dgvc.Value = Clipboard.GetText();
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
 				SaveLeaf(false);
 			}
