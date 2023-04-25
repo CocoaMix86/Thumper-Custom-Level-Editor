@@ -220,7 +220,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//write contents direct to file without prompting save dialog
 			var _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
-			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save));
+			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveLvl(true);
 			lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
 			//reload samples on save
@@ -247,7 +247,7 @@ namespace Thumper_Custom_Level_Editor
 					var _save = LvlBuildSave(Path.GetFileName(sfd.FileName));
 					//serialize JSON object to a string, and write it to the file
 					sfd.FileName = $@"{storePath}\lvl_{tempFileName}";
-					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save));
+					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
 					//set a few visual elements to show what file is being worked on
 					lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
 					workingfolder = Path.GetDirectoryName(sfd.FileName);
@@ -501,7 +501,8 @@ namespace Thumper_Custom_Level_Editor
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = null;
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			foreach (dynamic samp in _load["loops"]) {
-				lvlLoopTracks.Rows.Add(new object[] { (string)samp["samp_name"], (int)samp["beats_per_loop"]});
+				var _samplocate = _lvlsamples.First(item => item.obj_name == ((string)samp["samp_name"]).Replace(".samp", ""));
+				lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int)samp["beats_per_loop"]});
 			}
 			btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
 			///load leafs associated with this lvl
@@ -561,14 +562,6 @@ namespace Thumper_Custom_Level_Editor
 
 			///customize Loop Track list a bit
 			//custom column containing comboboxes per cell
-			DataGridViewComboBoxColumn _dgvlvlloopsamples = new DataGridViewComboBoxColumn() {
-				DataSource = _lvlsamples,
-				HeaderText = "Loop Track Name",
-				AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-			};
-			lvlLoopTracks.Columns.Add(_dgvlvlloopsamples);
-			lvlLoopTracks.ColumnCount = 2;
-			lvlLoopTracks.Columns[1].HeaderText = "Beats per loop";
 			lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
 			///
 			
@@ -692,7 +685,7 @@ namespace Thumper_Custom_Level_Editor
 
 				s.Add("step", "False");
 				s.Add("default", "0");
-				s.Add("footer", new JArray() { new object[] { 1, 1, 2, 1, 2, "kIntensityScale", "kIntensityScale", 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0 } });
+				s.Add("footer", "1, 1, 2, 1, 2, kIntensityScale, kIntensityScale, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0");
 
 				seq_objs.Add(s);
 			}

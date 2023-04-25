@@ -312,6 +312,8 @@
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.lblSampleEditor = new System.Windows.Forms.Label();
             this.btnSaveSample = new System.Windows.Forms.Button();
+            this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -2242,6 +2244,9 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLoopTracks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.lvlLoopTracks.ColumnHeadersHeight = 20;
+            this.lvlLoopTracks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.LoopSample,
+            this.BeatsPerLoop});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4396,6 +4401,19 @@
             this.btnSaveSample.Visible = false;
             this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
             // 
+            // LoopSample
+            // 
+            this.LoopSample.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.LoopSample.HeaderText = "Loop Sample";
+            this.LoopSample.MaxDropDownItems = 20;
+            this.LoopSample.Name = "LoopSample";
+            this.LoopSample.Width = 84;
+            // 
+            // BeatsPerLoop
+            // 
+            this.BeatsPerLoop.HeaderText = "Beats Per Loop";
+            this.BeatsPerLoop.Name = "BeatsPerLoop";
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4713,6 +4731,8 @@
         private System.Windows.Forms.Button btnWorkCopy;
         private System.Windows.Forms.Button btnLvlCopyTunnel;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.DataGridViewComboBoxColumn LoopSample;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BeatsPerLoop;
     }
 }
 
