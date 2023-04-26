@@ -2,7 +2,6 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Media;
 using System.Drawing;
 using NAudio.Vorbis;
 using NAudio.Wave;
@@ -86,7 +85,7 @@ namespace Thumper_Custom_Level_Editor
 				if (dgvr.HeaderCell.Value.ToString().Contains("(turn)")) {
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
-						if (dgvc.Value != null) {
+						if (dgvc.Value != null && decimal.Parse(dgvc.Value.ToString()) >= 15) {
 							vorbis[_sequence].Add(new CachedSound(@"temp\turn_hit_perfect2.ogg"));
 							vorbis[_sequence - 8].Add(new CachedSound(@"temp\turn_birth.ogg"));
 						}
@@ -112,6 +111,16 @@ namespace Thumper_Custom_Level_Editor
 							vorbis[_sequence].Add(new CachedSound(@"temp\coin_collect.ogg"));
 							vorbis[_sequence].Add(new CachedSound(@"temp\hammer_two_handed_hit.ogg"));
 							vorbis[_sequence - 8].Add(new CachedSound(@"temp\ducker_ring_approach.ogg"));
+						}
+						_sequence++;
+					}
+				}
+				//Takes care of Spikes
+				if (dgvr.HeaderCell.Value.ToString().Contains("JUMPS")) {
+					_sequence = 8;
+					foreach (DataGridViewCell dgvc in dgvr.Cells) {
+						if (dgvc.Value != null) {
+							vorbis[_sequence - 8].Add(new CachedSound(@"temp\high_jump.ogg"));
 						}
 						_sequence++;
 					}
