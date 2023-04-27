@@ -82,22 +82,24 @@ namespace Thumper_Custom_Level_Editor
 					}
 				}
 				//Takes care of Turns
-				if (dgvr.HeaderCell.Value.ToString().Contains("(turn)")) {
+				else if (dgvr.HeaderCell.Value.ToString().Contains("(turn)")) {
 					_sequence = 8;
 					bool _turning = false;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
-						if (dgvc.Value != null && decimal.Parse(dgvc.Value.ToString()) >= 15 && !_turning) {
+						if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15 && !_turning) {
 							_turning = true;
 							vorbis[_sequence].Add(new CachedSound(@"temp\turn_hit_perfect2.ogg"));
 							vorbis[_sequence - 8].Add(new CachedSound(@"temp\turn_birth.ogg"));
 						}
+						else if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15)
+							_turning = true;
 						else
 							_turning = false;
 						_sequence++;
 					}
 				}
 				//Takes care of Bars
-				if (dgvr.HeaderCell.Value.ToString().Contains("BARS")) {
+				else if (dgvr.HeaderCell.Value.ToString().Contains("BARS")) {
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
@@ -108,7 +110,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 				}
 				//Takes care of Rings
-				if (dgvr.HeaderCell.Value.ToString().Contains("RING")) {
+				else if (dgvr.HeaderCell.Value.ToString().Contains("RING")) {
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
@@ -120,7 +122,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 				}
 				//Takes care of Spikes
-				if (dgvr.HeaderCell.Value.ToString().Contains("JUMPS")) {
+				else if (dgvr.HeaderCell.Value.ToString().Contains("JUMPS")) {
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
@@ -131,7 +133,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 
 				//Takes care of PLAY SAMPLE
-				if (dgvr.HeaderCell.Value.ToString().Contains("PLAY SAMPLE")) {
+				else if (dgvr.HeaderCell.Value.ToString().Contains("PLAY SAMPLE")) {
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
