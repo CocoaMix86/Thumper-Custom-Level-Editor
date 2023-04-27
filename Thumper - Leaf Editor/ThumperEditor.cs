@@ -262,6 +262,8 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists(@"temp\turn_birth.ogg")) File.WriteAllBytes(@"temp\turn_birth.ogg", Properties.Resources.turn_birth);
             if (!File.Exists(@"temp\turn_birth_lft.ogg")) File.WriteAllBytes(@"temp\turn_birth_lft.ogg", Properties.Resources.turn_birth_lft);
             if (!File.Exists(@"temp\turn_hit_perfect2.ogg")) File.WriteAllBytes(@"temp\turn_hit_perfect2.ogg", Properties.Resources.turn_hit_perfect2);
+            if (!File.Exists(@"temp\turn_long_lft.ogg")) File.WriteAllBytes(@"temp\turn_long_lft.ogg", Properties.Resources.turn_long_lft);
+            if (!File.Exists(@"temp\jumper_approach.ogg")) File.WriteAllBytes(@"temp\jumper_approach.ogg", Properties.Resources.jumper_approach);
             InitializeSounds();
             _playbacktimer.Tick += _playbacktimer_Tick;
             //call method that imports objects from track_objects.txt (for Leaf editing)

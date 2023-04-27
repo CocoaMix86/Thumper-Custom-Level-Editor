@@ -262,6 +262,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] jumper_approach {
+            get {
+                object obj = ResourceManager.GetObject("jumper_approach", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap leaf {
@@ -964,6 +974,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static byte[] turn_hit_perfect2 {
             get {
                 object obj = ResourceManager.GetObject("turn_hit_perfect2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] turn_long_lft {
+            get {
+                object obj = ResourceManager.GetObject("turn_long_lft", resourceCulture);
                 return ((byte[])(obj));
             }
         }

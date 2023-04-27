@@ -85,16 +85,21 @@ namespace Thumper_Custom_Level_Editor
 				else if (dgvr.HeaderCell.Value.ToString().Contains("(turn)")) {
 					_sequence = 8;
 					bool _turning = false;
+					bool _played = false;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15 && !_turning) {
 							_turning = true;
 							vorbis[_sequence].Add(new CachedSound(@"temp\turn_hit_perfect2.ogg"));
-							vorbis[_sequence - 8].Add(new CachedSound(@"temp\turn_birth.ogg"));
 						}
-						else if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15)
-							_turning = true;
-						else
+						else if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15) {
+							if (!_played) vorbis[_sequence - 9].Add(new CachedSound(@"temp\turn_long_lft.ogg"));
+							_played = true;
+						}
+						else if (_turning) {
+							vorbis[_sequence - 9].Add(new CachedSound(@"temp\turn_birth.ogg"));
 							_turning = false;
+							_played = false;
+						}
 						_sequence++;
 					}
 				}
@@ -125,8 +130,11 @@ namespace Thumper_Custom_Level_Editor
 				else if (dgvr.HeaderCell.Value.ToString().Contains("JUMPS")) {
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
-						if (dgvc.Value != null) {
+						if (dgvc.Value != null && dgvc.Value.ToString().Contains("spike")) {
 							vorbis[_sequence - 8].Add(new CachedSound(@"temp\high_jump.ogg"));
+						}
+						if (dgvc.Value != null && dgvc.Value.ToString().Contains("mushroom")) {
+							vorbis[_sequence - 8].Add(new CachedSound(@"temp\jumperapproach.ogg"));
 						}
 						_sequence++;
 					}
