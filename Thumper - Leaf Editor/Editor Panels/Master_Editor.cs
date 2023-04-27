@@ -42,6 +42,10 @@ namespace Thumper_Custom_Level_Editor
 
 		private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
+			//if not selecting the file column, return and do nothing
+			if (e.ColumnIndex != 0)
+				return;
+
 			string _file;
 			dynamic _load = null;
 
@@ -58,6 +62,8 @@ namespace Thumper_Custom_Level_Editor
 					}
 					_loadedgatetemp = $@"{workingfolder}\gate_{_file}.txt";
 				}
+				else
+					return;
 			}
 			else if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
 				_file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
@@ -70,6 +76,8 @@ namespace Thumper_Custom_Level_Editor
 				}
 				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 			}
+			else
+				return;
 
 			//remove event handlers from a few controls so they don't trigger when their values change
 			dropMasterLvlLeader.SelectedIndexChanged -= new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
