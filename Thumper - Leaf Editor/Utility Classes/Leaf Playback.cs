@@ -172,7 +172,8 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackPlayback.Image = Properties.Resources.icon_pause16;
 			_playbackbeat = 0;
 			//the speed of the timer is reliant on the level's BPM
-			_playbacktimer.Period = (int)Math.Round(1000 * ((float)60 / (float)NUD_ConfigBPM.Value), MidpointRounding.AwayFromZero);
+			_playbacktimer.Period = (int)Math.Round(60000f / (float)NUD_ConfigBPM.Value, MidpointRounding.AwayFromZero);
+			//_playbacktimer.Period = (int)Math.Round(1000 * ((float)60 / (float)NUD_ConfigBPM.Value), MidpointRounding.AwayFromZero);
 			_playbacktimer.Start();
 		}
 
