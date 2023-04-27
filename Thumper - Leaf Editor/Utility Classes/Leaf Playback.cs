@@ -89,6 +89,7 @@ namespace Thumper_Custom_Level_Editor
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						//check if NOT turning. This marks the first beat of the turn
 						if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15 && !_turning) {
+							_played = false;
 							_turning = true;
 							vorbis[_sequence].Add(new CachedSound(@"temp\turn_hit_perfect2.ogg"));
 						}
@@ -135,11 +136,11 @@ namespace Thumper_Custom_Level_Editor
 				else if (dgvr.HeaderCell.Value.ToString().Contains("JUMPS")) {
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
-						if (dgvc.Value != null && dgvc.Value.ToString().Contains("spike")) {
+						if (dgvc.Value != null && dgvr.HeaderCell.Value.ToString().Contains("spike")) {
 							vorbis[_sequence - 8].Add(new CachedSound(@"temp\high_jump.ogg"));
 						}
-						if (dgvc.Value != null && dgvc.Value.ToString().Contains("mushroom")) {
-							vorbis[_sequence - 8].Add(new CachedSound(@"temp\jumperapproach.ogg"));
+						if (dgvc.Value != null && dgvr.HeaderCell.Value.ToString().Contains("mushroom")) {
+							vorbis[_sequence - 8].Add(new CachedSound(@"temp\jumper_approach.ogg"));
 						}
 						_sequence++;
 					}
