@@ -132,6 +132,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			try {
 				_gatelvls[e.RowIndex].sentrytype = gateLvlList[1, e.RowIndex].Value.ToString();
+				SaveGate(false);
 			} catch { }
 		}
 
