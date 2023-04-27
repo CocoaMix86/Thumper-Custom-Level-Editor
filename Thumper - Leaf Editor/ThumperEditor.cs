@@ -623,13 +623,5 @@ namespace Thumper_Custom_Level_Editor
             //update the DGV with new data
             lvlleaf_CollectionChanged(null, null);
         }
-
-        private void panelGate_Paint(object sender, PaintEventArgs e)
-        {
-            Color col = Color.Black;
-            ButtonBorderStyle bbs = ButtonBorderStyle.Solid;
-            int thickness = 4;
-            ControlPaint.DrawBorder(e.Graphics, this.panelGate.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
-        }
     }
 }
