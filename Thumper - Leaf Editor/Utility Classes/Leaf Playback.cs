@@ -84,11 +84,15 @@ namespace Thumper_Custom_Level_Editor
 				//Takes care of Turns
 				if (dgvr.HeaderCell.Value.ToString().Contains("(turn)")) {
 					_sequence = 8;
+					bool _turning = false;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
-						if (dgvc.Value != null && decimal.Parse(dgvc.Value.ToString()) >= 15) {
+						if (dgvc.Value != null && decimal.Parse(dgvc.Value.ToString()) >= 15 && !_turning) {
+							_turning = true;
 							vorbis[_sequence].Add(new CachedSound(@"temp\turn_hit_perfect2.ogg"));
 							vorbis[_sequence - 8].Add(new CachedSound(@"temp\turn_birth.ogg"));
 						}
+						else
+							_turning = false;
 						_sequence++;
 					}
 				}
