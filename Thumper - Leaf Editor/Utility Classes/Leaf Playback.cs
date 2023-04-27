@@ -87,16 +87,21 @@ namespace Thumper_Custom_Level_Editor
 					bool _turning = false;
 					bool _played = false;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
+						//check if NOT turning. This marks the first beat of the turn
 						if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15 && !_turning) {
 							_turning = true;
 							vorbis[_sequence].Add(new CachedSound(@"temp\turn_hit_perfect2.ogg"));
 						}
+						//check if still turning
 						else if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15) {
+							//only need the turn call sound one time
 							if (!_played) vorbis[_sequence - 9].Add(new CachedSound(@"temp\turn_long_lft.ogg"));
 							_played = true;
 						}
+						//if no longer turning
 						else if (_turning) {
-							vorbis[_sequence - 9].Add(new CachedSound(@"temp\turn_birth.ogg"));
+							//check if long turn played. If not, add regular turn sound.
+							if (!_played) vorbis[_sequence - 9].Add(new CachedSound(@"temp\turn_birth.ogg"));
 							_turning = false;
 							_played = false;
 						}
