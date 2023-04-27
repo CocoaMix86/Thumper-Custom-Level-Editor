@@ -102,6 +102,9 @@ namespace Thumper_Custom_Level_Editor
 
 		private void gateLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
+			//Do nothing if not selecting the lvl name
+			if (e.ColumnIndex != 0)
+				return;
 			//gateLvlList_RowEnter(sender, e);
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
 				string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");
