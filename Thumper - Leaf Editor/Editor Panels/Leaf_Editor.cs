@@ -176,9 +176,10 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Back) {
-				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) 
+				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
 					dgvc.Value = null;
-				TrackUpdateHighlighting(trackEditor.CurrentRow);
+					TrackUpdateHighlightingSingleCell(dgvc);
+				}
 				SaveLeaf(false);
 			}
 			e.Handled = true;
@@ -193,13 +194,37 @@ namespace Thumper_Custom_Level_Editor
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
 				SaveLeaf(false);
 			}
+			if (e.Control && e.KeyCode == Keys.C) {
+				DataObject d = trackEditor.GetClipboardContent();
+				Clipboard.SetDataObject(d, true);
+				e.Handled = true;
+			}
+			if (e.Control && e.KeyCode == Keys.V) {
+				string s = Clipboard.GetText().Replace("\r\n", "\n");
+				string[] lines = s.Split('\n');
+				int row = trackEditor.CurrentCell.RowIndex;
+				int col = trackEditor.CurrentCell.ColumnIndex;
+				for (int _line = 0; _line < lines.Length; _line++) {
+					if (row + _line >= trackEditor.RowCount)
+						break;
+					string[] cells = lines[_line].Split('\t');
+					int cellsSelected = cells.Length;
+					for (int i = 0; i < cellsSelected; i++) {
+						if (col + i >= trackEditor.ColumnCount)
+							break;
+						trackEditor[col + i, row + _line].Value = cells[i];
+					}
+					TrackUpdateHighlighting(trackEditor.Rows[row + _line]);
+				}
+			}
 			//detect ctrl+v for cell pasting
+			/*
 			if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control) {
 				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
 					dgvc.Value = Clipboard.GetText();
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
 				SaveLeaf(false);
-			}
+			}*/
 		}
 		///LEAF LENGTH
 		private void numericUpDown_LeafLength_ValueChanged(object sender, EventArgs e)
@@ -767,28 +792,33 @@ namespace Thumper_Custom_Level_Editor
 		///Updates cell highlighting in the DGV
 		public void TrackUpdateHighlighting(DataGridViewRow r)
 		{
-			float i;
-			//iterate over column count - that's how many cells there are in the row
-			for (int x = 0; x < r.Cells.Count; x++) {
-				//remove any current styling, in case it now falls out of scope
-				r.Cells[x].Style = null;
-				try {
-					//parse value. If not parseable, set to 0
-					i = float.TryParse(r.Cells[x].Value.ToString(), out i) ? i : 0;
-				} catch { i = 0; }
-				//if the cell value is greater than the criteria of the row, highlight it with that row's color
-				try {
-					if (Math.Abs(i) >= _tracks[r.Index].highlight_value) {
-						r.Cells[x].Style.BackColor = Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color));
-					}
-				} catch { }
-				//change cell font color so text is readable on dark/light backgrounds
-				Color _c = r.Cells[x].Style.BackColor;
-				if (_c.R < 150 && _c.G < 150 && _c.B < 150)
-					r.Cells[x].Style.ForeColor = Color.White;
-				else
-					r.Cells[x].Style.ForeColor = Color.Black;
+			//iterate over all cells in the row
+			foreach (DataGridViewCell dgvc in r.Cells) {
+				TrackUpdateHighlightingSingleCell(dgvc);
 			}
+		}
+		public void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc)
+		{
+			float i;
+			dgvc.Style = null;
+			try {
+				//parse value. If not parseable, set to 0
+				i = float.TryParse(dgvc.Value.ToString(), out i) ? i : 0;
+			}
+			catch { i = 0; }
+			//if the cell value is greater than the criteria of the row, highlight it with that row's color
+			try {
+				if (Math.Abs(i) >= _tracks[dgvc.RowIndex].highlight_value) {
+					dgvc.Style.BackColor = Color.FromArgb(int.Parse(_tracks[dgvc.RowIndex].highlight_color));
+				}
+			}
+			catch { }
+			//change cell font color so text is readable on dark/light backgrounds
+			Color _c = dgvc.Style.BackColor;
+			if (_c.R < 150 && _c.G < 150 && _c.B < 150)
+				dgvc.Style.ForeColor = Color.White;
+			else
+				dgvc.Style.ForeColor = Color.Black;
 		}
 
 		public void LeafEditorVisible(bool visible)
