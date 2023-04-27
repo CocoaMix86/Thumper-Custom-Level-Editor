@@ -232,6 +232,7 @@
     <None Include="image assets\icon-copy.png" />
     <None Include="audio assets\jumper_approach.ogg" />
     <None Include="audio assets\turn_long_lft.ogg" />
+    <None Include="image assets\icon-refresh.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

@@ -170,6 +170,7 @@
             this.btnSaveLeaf = new System.Windows.Forms.Button();
             this.btnLeafObjRefresh = new System.Windows.Forms.Button();
             this.panelLevel = new System.Windows.Forms.Panel();
+            this.btnLvlRefreshBeats = new System.Windows.Forms.Button();
             this.btnLvlCopyTunnel = new System.Windows.Forms.Button();
             this.label39 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
@@ -1896,6 +1897,7 @@
             // 
             this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLevel.Controls.Add(this.btnLvlRefreshBeats);
             this.panelLevel.Controls.Add(this.btnLvlCopyTunnel);
             this.panelLevel.Controls.Add(this.label39);
             this.panelLevel.Controls.Add(this.label29);
@@ -1937,6 +1939,24 @@
             this.panelLevel.Name = "panelLevel";
             this.panelLevel.Size = new System.Drawing.Size(875, 383);
             this.panelLevel.TabIndex = 46;
+            // 
+            // btnLvlRefreshBeats
+            // 
+            this.btnLvlRefreshBeats.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlRefreshBeats.Enabled = false;
+            this.btnLvlRefreshBeats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLvlRefreshBeats.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLvlRefreshBeats.ForeColor = System.Drawing.Color.Aqua;
+            this.btnLvlRefreshBeats.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
+            this.btnLvlRefreshBeats.Location = new System.Drawing.Point(217, 31);
+            this.btnLvlRefreshBeats.Name = "btnLvlRefreshBeats";
+            this.btnLvlRefreshBeats.Size = new System.Drawing.Size(22, 22);
+            this.btnLvlRefreshBeats.TabIndex = 121;
+            this.toolTip1.SetToolTip(this.btnLvlRefreshBeats, "Refreshes the beat count column without having to remove and re-add a leaf");
+            this.btnLvlRefreshBeats.UseCompatibleTextRendering = true;
+            this.btnLvlRefreshBeats.UseVisualStyleBackColor = false;
+            this.btnLvlRefreshBeats.Visible = false;
+            this.btnLvlRefreshBeats.Click += new System.EventHandler(this.btnLvlRefreshBeats_Click);
             // 
             // btnLvlCopyTunnel
             // 
@@ -2604,7 +2624,7 @@
             this.lvlLeafList.RowTemplate.Height = 200;
             this.lvlLeafList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLeafList.Size = new System.Drawing.Size(295, 180);
+            this.lvlLeafList.Size = new System.Drawing.Size(236, 180);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.Visible = false;
             this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
@@ -4441,10 +4461,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.Controls.Add(this.panelLevel);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelSample);
             this.Controls.Add(this.panelWorkingFolder);
-            this.Controls.Add(this.panelLevel);
             this.Controls.Add(this.panelGate);
             this.Controls.Add(this.panelLeaf);
             this.Controls.Add(this.panelMaster);
@@ -4757,6 +4777,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BeatsPerLoop;
         private System.Windows.Forms.ToolStripMenuItem SaveAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.Button btnLvlRefreshBeats;
     }
 }
 
