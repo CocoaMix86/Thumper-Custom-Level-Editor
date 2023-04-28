@@ -131,6 +131,7 @@ namespace Thumper_Custom_Level_Editor
 			btnMasterLvlDelete.Enabled = _masterlvls.Count > 0;
 			btnMasterLvlUp.Enabled = _masterlvls.Count > 1;
 			btnMasterLvlDown.Enabled = _masterlvls.Count > 1;
+			btnMasterLvlCopy.Enabled = _masterlvls.Count > 0;
 
 			//set lvl save flag to false
 			SaveMaster(false);
