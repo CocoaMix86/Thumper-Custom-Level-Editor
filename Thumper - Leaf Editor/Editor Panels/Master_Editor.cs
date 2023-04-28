@@ -316,6 +316,12 @@ namespace Thumper_Custom_Level_Editor
 			catch { }
 		}
 
+		private void btnMasterLvlCopy_Click(object sender, EventArgs e)
+		{
+			MasterLvlData _lvl = _masterlvls[masterLvlList.SelectedCells[0].RowIndex];
+			_masterlvls.Add(_lvl);
+		}
+
 		private void btnConfigRailColor_Click(object sender, EventArgs e)
 		{
 			if (colorDialog1.ShowDialog() == DialogResult.OK) {

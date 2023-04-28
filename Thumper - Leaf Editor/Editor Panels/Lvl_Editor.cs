@@ -169,6 +169,7 @@ namespace Thumper_Custom_Level_Editor
 			btnLvlLeafUp.Enabled = _lvlleafs.Count > 1;
 			btnLvlLeafDown.Enabled = _lvlleafs.Count > 1;
 			btnLvlRefreshBeats.Enabled = _lvlleafs.Count > 0;
+			btnLvlLeafCopy.Enabled = _lvlleafs.Count > 0;
 			//enable/disable buttons if leaf exists or not
 			btnLvlPathAdd.Enabled = _lvlleafs.Count > 0;
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
@@ -352,6 +353,12 @@ namespace Thumper_Custom_Level_Editor
 				SaveLvl(false);
 			}
 			catch { }
+		}
+
+		private void btnLvlLeafCopy_Click(object sender, EventArgs e)
+		{
+			LvlLeafData _lvl = _lvlleafs[lvlLeafList.CurrentRow.Index];
+			_lvlleafs.Add(_lvl);
 		}
 
 		private void btnLvlPathAdd_Click(object sender, EventArgs e)

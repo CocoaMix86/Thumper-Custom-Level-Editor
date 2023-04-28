@@ -169,6 +169,7 @@
             this.btnSaveLeaf = new System.Windows.Forms.Button();
             this.btnLeafObjRefresh = new System.Windows.Forms.Button();
             this.panelLevel = new System.Windows.Forms.Panel();
+            this.btnLvlLeafCopy = new System.Windows.Forms.Button();
             this.btnLvlRefreshBeats = new System.Windows.Forms.Button();
             this.btnLvlCopyTunnel = new System.Windows.Forms.Button();
             this.label39 = new System.Windows.Forms.Label();
@@ -310,16 +311,17 @@
             this.btnSampleAdd = new System.Windows.Forms.Button();
             this.btnSampleDelete = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
-            this.sampleList = new System.Windows.Forms.DataGridView();
             this.lblSampleClose = new System.Windows.Forms.Label();
             this.lblSampleEditor = new System.Windows.Forms.Label();
             this.btnSaveSample = new System.Windows.Forms.Button();
+            this.sampleList = new System.Windows.Forms.DataGridView();
             this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnMasterLvlCopy = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -1887,6 +1889,7 @@
             // 
             this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLevel.Controls.Add(this.btnLvlLeafCopy);
             this.panelLevel.Controls.Add(this.btnLvlRefreshBeats);
             this.panelLevel.Controls.Add(this.btnLvlCopyTunnel);
             this.panelLevel.Controls.Add(this.label39);
@@ -1928,6 +1931,24 @@
             this.panelLevel.Name = "panelLevel";
             this.panelLevel.Size = new System.Drawing.Size(875, 383);
             this.panelLevel.TabIndex = 46;
+            // 
+            // btnLvlLeafCopy
+            // 
+            this.btnLvlLeafCopy.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLeafCopy.Enabled = false;
+            this.btnLvlLeafCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLvlLeafCopy.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLvlLeafCopy.ForeColor = System.Drawing.Color.PaleGreen;
+            this.btnLvlLeafCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy;
+            this.btnLvlLeafCopy.Location = new System.Drawing.Point(92, 211);
+            this.btnLvlLeafCopy.Name = "btnLvlLeafCopy";
+            this.btnLvlLeafCopy.Size = new System.Drawing.Size(22, 22);
+            this.btnLvlLeafCopy.TabIndex = 122;
+            this.toolTip1.SetToolTip(this.btnLvlLeafCopy, "Duplicates the selected leaf.");
+            this.btnLvlLeafCopy.UseCompatibleTextRendering = true;
+            this.btnLvlLeafCopy.UseVisualStyleBackColor = false;
+            this.btnLvlLeafCopy.Visible = false;
+            this.btnLvlLeafCopy.Click += new System.EventHandler(this.btnLvlLeafCopy_Click);
             // 
             // btnLvlRefreshBeats
             // 
@@ -2743,6 +2764,7 @@
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelMaster.Controls.Add(this.btnMasterLvlCopy);
             this.panelMaster.Controls.Add(this.btnMasterOpenRest);
             this.panelMaster.Controls.Add(this.btnMasterOpenLeader);
             this.panelMaster.Controls.Add(this.label37);
@@ -4323,6 +4345,48 @@
             this.label54.Text = "Samples";
             this.label54.Visible = false;
             // 
+            // lblSampleClose
+            // 
+            this.lblSampleClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSampleClose.AutoSize = true;
+            this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSampleClose.Location = new System.Drawing.Point(482, -1);
+            this.lblSampleClose.MinimumSize = new System.Drawing.Size(16, 2);
+            this.lblSampleClose.Name = "lblSampleClose";
+            this.lblSampleClose.Size = new System.Drawing.Size(16, 15);
+            this.lblSampleClose.TabIndex = 51;
+            this.lblSampleClose.Text = "x";
+            this.lblSampleClose.Click += new System.EventHandler(this.lblSampleClose_Click);
+            this.lblSampleClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
+            this.lblSampleClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
+            // 
+            // lblSampleEditor
+            // 
+            this.lblSampleEditor.AutoSize = true;
+            this.lblSampleEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.lblSampleEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSampleEditor.ForeColor = System.Drawing.Color.White;
+            this.lblSampleEditor.Location = new System.Drawing.Point(-3, 0);
+            this.lblSampleEditor.Name = "lblSampleEditor";
+            this.lblSampleEditor.Size = new System.Drawing.Size(72, 13);
+            this.lblSampleEditor.TabIndex = 49;
+            this.lblSampleEditor.Text = "Sample Editor";
+            // 
+            // btnSaveSample
+            // 
+            this.btnSaveSample.Enabled = false;
+            this.btnSaveSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveSample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.btnSaveSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
+            this.btnSaveSample.Location = new System.Drawing.Point(65, -5);
+            this.btnSaveSample.Name = "btnSaveSample";
+            this.btnSaveSample.Size = new System.Drawing.Size(25, 25);
+            this.btnSaveSample.TabIndex = 132;
+            this.btnSaveSample.UseVisualStyleBackColor = true;
+            this.btnSaveSample.Visible = false;
+            this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
+            // 
             // sampleList
             // 
             this.sampleList.AllowUserToAddRows = false;
@@ -4390,48 +4454,6 @@
             this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             // 
-            // lblSampleClose
-            // 
-            this.lblSampleClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSampleClose.AutoSize = true;
-            this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleClose.Location = new System.Drawing.Point(482, -1);
-            this.lblSampleClose.MinimumSize = new System.Drawing.Size(16, 2);
-            this.lblSampleClose.Name = "lblSampleClose";
-            this.lblSampleClose.Size = new System.Drawing.Size(16, 15);
-            this.lblSampleClose.TabIndex = 51;
-            this.lblSampleClose.Text = "x";
-            this.lblSampleClose.Click += new System.EventHandler(this.lblSampleClose_Click);
-            this.lblSampleClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
-            this.lblSampleClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
-            // 
-            // lblSampleEditor
-            // 
-            this.lblSampleEditor.AutoSize = true;
-            this.lblSampleEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.lblSampleEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleEditor.ForeColor = System.Drawing.Color.White;
-            this.lblSampleEditor.Location = new System.Drawing.Point(-3, 0);
-            this.lblSampleEditor.Name = "lblSampleEditor";
-            this.lblSampleEditor.Size = new System.Drawing.Size(72, 13);
-            this.lblSampleEditor.TabIndex = 49;
-            this.lblSampleEditor.Text = "Sample Editor";
-            // 
-            // btnSaveSample
-            // 
-            this.btnSaveSample.Enabled = false;
-            this.btnSaveSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveSample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.btnSaveSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
-            this.btnSaveSample.Location = new System.Drawing.Point(65, -5);
-            this.btnSaveSample.Name = "btnSaveSample";
-            this.btnSaveSample.Size = new System.Drawing.Size(25, 25);
-            this.btnSaveSample.TabIndex = 132;
-            this.btnSaveSample.UseVisualStyleBackColor = true;
-            this.btnSaveSample.Visible = false;
-            this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
-            // 
             // SampleName
             // 
             this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -4482,6 +4504,24 @@
             this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Channel.Width = 76;
             // 
+            // btnMasterLvlCopy
+            // 
+            this.btnMasterLvlCopy.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterLvlCopy.Enabled = false;
+            this.btnMasterLvlCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMasterLvlCopy.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterLvlCopy.ForeColor = System.Drawing.Color.PaleGreen;
+            this.btnMasterLvlCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy;
+            this.btnMasterLvlCopy.Location = new System.Drawing.Point(91, 261);
+            this.btnMasterLvlCopy.Name = "btnMasterLvlCopy";
+            this.btnMasterLvlCopy.Size = new System.Drawing.Size(22, 22);
+            this.btnMasterLvlCopy.TabIndex = 135;
+            this.toolTip1.SetToolTip(this.btnMasterLvlCopy, "Duplicates the selected lvl");
+            this.btnMasterLvlCopy.UseCompatibleTextRendering = true;
+            this.btnMasterLvlCopy.UseVisualStyleBackColor = false;
+            this.btnMasterLvlCopy.Visible = false;
+            this.btnMasterLvlCopy.Click += new System.EventHandler(this.btnMasterLvlCopy_Click);
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4489,8 +4529,8 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
-            this.Controls.Add(this.panelSample);
             this.Controls.Add(this.panelLevel);
+            this.Controls.Add(this.panelSample);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelWorkingFolder);
             this.Controls.Add(this.panelGate);
@@ -4811,6 +4851,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
         private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
         private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
+        private System.Windows.Forms.Button btnLvlLeafCopy;
+        private System.Windows.Forms.Button btnMasterLvlCopy;
     }
 }
 
