@@ -383,6 +383,7 @@ namespace Thumper_Custom_Level_Editor
 			_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
 
 			///customize Lvl List a bit
+			/*
 			masterLvlList.ColumnCount = 1;
 			masterLvlList.RowHeadersVisible = false;
 			masterLvlList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
@@ -412,6 +413,7 @@ namespace Thumper_Custom_Level_Editor
 				ReadOnly = false
 			};
 			masterLvlList.Columns.Add(_dgvmasterisolate);
+			*/
 		}
 
 		public void LoadMaster(dynamic _load)

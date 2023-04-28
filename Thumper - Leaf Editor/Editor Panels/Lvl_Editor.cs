@@ -533,21 +533,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//add event handler to this collection
 			_lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
-
 			_lvlpaths.Sort();
-			///customize Leaf List a bit
-			lvlLeafList.ColumnCount = 2;
-			lvlLeafList.RowHeadersVisible = false;
-			lvlLeafList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
-				ForeColor = Color.White,
-				Font = new Font("Arial", 12, GraphicsUnit.Pixel),
-				Format = "0.#"
-			};
-			lvlLeafList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-			lvlLeafList.Columns[0].HeaderText = "Leaf";
-			lvlLeafList.Columns[1].HeaderText = "Beats";
-			lvlLeafList.ReadOnly = true;
-			///
 
 			///customize Paths List a bit
 			//custom column containing comboboxes per cell

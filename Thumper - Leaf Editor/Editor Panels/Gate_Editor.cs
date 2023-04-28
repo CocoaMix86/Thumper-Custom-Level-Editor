@@ -18,8 +18,7 @@ namespace Thumper_Custom_Level_Editor
 		string _loadedgate
 		{
 			get { return loadedgate; }
-			set
-			{
+			set {
 				if (loadedgate != value) {
 					loadedgate = value;
 					GateEditorVisible(true);
@@ -30,68 +29,27 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private string loadedgate;
 		string _loadedgatetemp;
-        readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
-		readonly List<string> boss_name = new List<string>() {
-			"Level 1 - crakhed",
-			"Level 2 - circle",
-			"Level 2 - crakhed",
-			"Level 3 - array",
-			"Level 3 - crakhed",
-			"Level 4 - triangle",
-			"Level 4 - zillapede",
-			"Level 4 - crakhed",
-			"Level 5 - spiral",
-			"Level 5 - crakhed",
-			"Level 6 - spirograph",
-			"Level 6 - crakhed",
-			"Level 7 - tube",
-			"Level 7 - crakhed",
-			"Level 8 - starfish",
-			"Level 8 - crakhed",
-			"Level 9 - fractal",
-			"Level 9 - crakhed"
+		readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
+		List<BossData> bossdata = new List<BossData> {
+			new BossData() {boss_name = "Level 1 - crakhed", boss_spn = "crakhed1.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 2 - circle", boss_spn = "boss_jump.spn", boss_ent = "boss_gate_pellet.ent"},
+			new BossData() {boss_name = "Level 2 - crakhed", boss_spn = "crakhed2.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 3 - array", boss_spn = "boss_array.spn", boss_ent = "boss_gate_pellet.ent"},
+			new BossData() {boss_name = "Level 3 - crakhed", boss_spn = "crakhed3.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 4 - triangle", boss_spn = "boss_triangle.spn", boss_ent = "tutorial_thumps.ent"},
+			new BossData() {boss_name = "Level 4 - zillapede", boss_spn = "zillapede.spn", boss_ent = "zillapede_gate.ent"},
+			new BossData() {boss_name = "Level 4 - crakhed", boss_spn = "crakhed4.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 5 - spiral", boss_spn = "boss_spiral.spn", boss_ent = "boss_gate_pellet.ent"},
+			new BossData() {boss_name = "Level 5 - crakhed", boss_spn = "crakhed5.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 6 - spirograph", boss_spn = "boss_spirograph.spn", boss_ent = "boss_gate_pellet.ent"},
+			new BossData() {boss_name = "Level 6 - crakhed", boss_spn = "crakhed6.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 7 - tube", boss_spn = "boss_tube.spn", boss_ent = "boss_gate_pellet.ent"},
+			new BossData() {boss_name = "Level 7 - crakhed", boss_spn = "crakhed7.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 8 - starfish", boss_spn = "boss_starfish.spn", boss_ent = "boss_gate_pellet.ent"},
+			new BossData() {boss_name = "Level 8 - crakhed", boss_spn = "crakhed8.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 9 - fractal", boss_spn = "boss_frac.spn", boss_ent = "boss_gate_pellet.ent"},
+			new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"}
 		};
-		readonly List<string> boss_spn = new List<string>() {
-			"crakhed1.spn",
-			"boss_jump.spn",
-			"crakhed2.spn",
-			"boss_array.spn",
-			"crakhed3.spn",
-			"boss_triangle.spn",
-			"zillapede.spn",
-			"crakhed4.spn",
-			"boss_spiral.spn",
-			"crakhed5.spn",
-			"boss_spirograph.spn",
-			"crakhed6.spn",
-			"boss_tube.spn",
-			"crakhed7.spn",
-			"boss_starfish.spn",
-			"crakhed8.spn",
-			"boss_frac.spn",
-			"crakhed9.spn"
-		};
-		readonly List<string> boss_ent = new List<string>() {
-			"crakhed.ent",
-			"boss_gate_pellet.ent",
-			"crakhed.ent",
-			"boss_gate_pellet.ent",
-			"crakhed.ent",
-			"tutorial_thumps.ent",
-			"zillapede_gate.ent",
-			"crakhed.ent",
-			"boss_gate_pellet.ent",
-			"crakhed.ent",
-			"boss_gate_pellet.ent",
-			"crakhed.ent",
-			"boss_gate_pellet.ent",
-			"crakhed.ent",
-			"boss_gate_pellet.ent",
-			"crakhed.ent",
-			"boss_gate_pellet.ent",
-			"crakhed.ent"
-		};
-		List<BossData> bossdata = new List<BossData>();
 		ObservableCollection<GateLvlData> _gatelvls = new ObservableCollection<GateLvlData>();
 		#endregion
 
@@ -353,25 +311,11 @@ namespace Thumper_Custom_Level_Editor
 		public void InitializeGateStuff()
 		{
 			_gatelvls.CollectionChanged += gatelvls_CollectionChanged;
-			///Customize Lvl list a bit
-			gateLvlList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
-				ForeColor = Color.White,
-				Font = new Font("Arial", 12, GraphicsUnit.Pixel)
-			};
-			gateLvlList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-			///populate boss data
-			foreach (string s in boss_name) {
-				bossdata.Add(new BossData() {
-					boss_name = s,
-					boss_spn = boss_spn[boss_name.IndexOf(s)],
-					boss_ent = boss_ent[boss_name.IndexOf(s)]
-				});
-			}
 			///add boss data to dropdown
-			dropGateBoss.DataSource = bossdata;
 			dropGateBoss.DisplayMember = "boss_name";
 			dropGateBoss.ValueMember = "boss_spn";
+			dropGateBoss.DataSource = bossdata;
 			//
 			dropGateSection.SelectedIndex = -1;
 			SaveGate(true);
@@ -450,7 +394,7 @@ namespace Thumper_Custom_Level_Editor
 				{ "obj_type", "SequinGate" },
 				{ "obj_name", _gatename },
 				{ "spn_name", dropGateBoss.SelectedValue.ToString() },
-				{ "param_path", boss_ent[dropGateBoss.SelectedIndex] },
+				{ "param_path", bossdata[dropGateBoss.SelectedIndex].boss_ent },
 				{ "pre_lvl_name", dropGatePre.Text },
 				{ "post_lvl_name", dropGatePost.Text },
 				{ "restart_lvl_name", dropGateRestart.Text },

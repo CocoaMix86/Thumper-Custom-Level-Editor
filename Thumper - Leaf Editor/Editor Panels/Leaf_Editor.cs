@@ -689,17 +689,19 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		public void InitializeTracks(DataGridView grid)
+		public void InitializeTracks(DataGridView grid, bool format, bool columnstyle)
 		{
 			//track editor cell formatting
-			grid.DefaultCellStyle.Font = new Font(new FontFamily("Arial"), 10, FontStyle.Bold);
-			grid.DefaultCellStyle.ForeColor = Color.FromArgb(0, 0, 0);
-			grid.DefaultCellStyle.SelectionBackColor = Color.FromName("Highlight");
-			grid.DefaultCellStyle.SelectionForeColor = Color.FromName("HighlightText");
-			grid.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-			grid.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
-			grid.ReadOnly = false;
-			grid.RowTemplate.Height = 20;
+			if (format) {
+				grid.DefaultCellStyle.Font = new Font(new FontFamily("Arial"), 10, FontStyle.Bold);
+				grid.DefaultCellStyle.ForeColor = Color.FromArgb(0, 0, 0);
+				grid.DefaultCellStyle.SelectionBackColor = Color.FromName("Highlight");
+				grid.DefaultCellStyle.SelectionForeColor = Color.FromName("HighlightText");
+				grid.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+				grid.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+				grid.ReadOnly = false;
+				grid.RowTemplate.Height = 20;
+			}
 
 			//double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
 			//used to significantly improve rendering performance
@@ -708,7 +710,9 @@ namespace Thumper_Custom_Level_Editor
 				PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
 				pi.SetValue(grid, true, null);
 			}
-			GenerateColumnStyle(grid, _beats);
+
+			if (columnstyle)
+				GenerateColumnStyle(grid, _beats);
 		}
 
 		public void GenerateColumnStyle(DataGridView grid, int _cells)

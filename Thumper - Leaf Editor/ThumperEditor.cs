@@ -219,12 +219,12 @@ namespace Thumper_Custom_Level_Editor
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
             //setup datagrids with proper formatting
-            InitializeTracks(trackEditor);
-            InitializeTracks(lvlSeqObjs);
-            InitializeTracks(lvlLeafList);
-            InitializeTracks(masterLvlList);
-            InitializeTracks(gateLvlList);
-            InitializeTracks(workingfolderFiles);
+            InitializeTracks(trackEditor, true, true);
+            InitializeTracks(lvlSeqObjs, true, true);
+            InitializeTracks(lvlLeafList, false, false);
+            InitializeTracks(masterLvlList, false, false);
+            InitializeTracks(gateLvlList, false, false);
+            InitializeTracks(workingfolderFiles, false, false);
             InitializeLvlStuff();
             InitializeMasterStuff();
             InitializeGateStuff();

@@ -1,12 +1,12 @@
 ﻿namespace Thumper_Custom_Level_Editor
 {
-	class GateLvlData
+	public class GateLvlData
 	{
 		public string lvlname { get; set; }
 		public string sentrytype { get; set; }
 	}
 
-	class BossData
+	public class BossData
 	{
 		public string boss_name { get; set; }
 		public string boss_spn { get; set; }
