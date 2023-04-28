@@ -234,6 +234,12 @@
     <None Include="audio assets\turn_long_lft.ogg" />
     <None Include="image assets\icon-refresh.png" />
     <None Include="image assets\Thumper_logo.png" />
+    <None Include="image assets\beeble.png" />
+    <None Include="image assets\beeble_happy.png" />
+    <None Include="image assets\beeble_love.png" />
+    <None Include="image assets\beeble_smol.png" />
+    <None Include="image assets\beeble_stare.png" />
+    <None Include="image assets\beeble_yes.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
