@@ -48,7 +48,8 @@ namespace Thumper_Custom_Level_Editor
 			new BossData() {boss_name = "Level 8 - starfish", boss_spn = "boss_starfish.spn", boss_ent = "boss_gate_pellet.ent"},
 			new BossData() {boss_name = "Level 8 - crakhed", boss_spn = "crakhed8.spn", boss_ent = "crakhed.ent"},
 			new BossData() {boss_name = "Level 9 - fractal", boss_spn = "boss_frac.spn", boss_ent = "boss_gate_pellet.ent"},
-			new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"}
+			new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"},
+			new BossData() {boss_name = "Level 9 - pyramid",  boss_spn = "pyramid.spn", boss_ent = "crakhed.ent"}
 		};
 		ObservableCollection<GateLvlData> _gatelvls = new ObservableCollection<GateLvlData>();
 		#endregion
@@ -192,7 +193,14 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		/// All dropdowns of Gate Editor call this
-		private void dropGateBoss_SelectedIndexChanged(object sender, EventArgs e) => SaveGate(false);
+		private void dropGateBoss_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn")
+				lblPyramidWarn.Visible = true;
+			else
+				lblPyramidWarn.Visible = false;
+			SaveGate(false);
+		}
 		#endregion
 
 		#region Buttons
@@ -204,8 +212,12 @@ namespace Thumper_Custom_Level_Editor
 		private void btnGateLvlAdd_Click(object sender, EventArgs e)
 		{
 			//don't load new lvl if gate has 4 phases
-			if (_gatelvls.Count == 4) {
-				MessageBox.Show("You can only add 4 phases to a boss.");
+			if (_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn") {
+				MessageBox.Show("You can only add 4 phases to a boss.", "Gate Info");
+				return;
+			}
+			if (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") {
+				MessageBox.Show("Pyramid requires only 5 phases.", "Gate Info");
 				return;
 			}
 			//show file dialog
@@ -411,11 +423,14 @@ namespace Thumper_Custom_Level_Editor
 				};
 				//hash of phase 4 needs to be different depending if its crakhed or not
 				if (x == 3) {
-					if (_save["spn_name"].ToString().Contains("crakhed") || _save["spn_name"].ToString().Contains("triangle"))
+					if (_save["spn_name"].ToString().Contains("crakhed") || _save["spn_name"].ToString().Contains("triangle") || _save["spn_name"].ToString().Contains("pyramid"))
 						s.Add("node_name_hash", "6b39151f");
 					else
 						s.Add("node_name_hash", "3428c8e3");
 				}
+				//for pyramid only, requires 5 phases
+				else if (x == 4)
+					s.Add("node_name_hash", "07f819c9");
 				else
 					s.Add("node_name_hash", node_name_hash[x]);
 
