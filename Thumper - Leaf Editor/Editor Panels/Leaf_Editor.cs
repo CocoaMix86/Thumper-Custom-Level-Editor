@@ -827,11 +827,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public void LeafEditorVisible(bool visible)
 		{
-			foreach (Control c in panelLeaf.Controls)
-				c.Visible = visible;
-			btnLeafPanelNew.Visible = !visible;
-			btnLeafPanelOpen.Visible = !visible;
-			btnLeafPanelTemplate.Visible = !visible;
+			panelLeaf.Visible = visible;
 		}
 
 		///Update DGV from _tracks

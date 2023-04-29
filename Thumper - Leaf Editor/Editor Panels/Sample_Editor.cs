@@ -391,12 +391,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public void SampleEditorVisible(bool visible)
 		{
-			if (workingfolder != null) {
-				foreach (Control c in panelSample.Controls)
-					c.Visible = visible;
-				btnSampPanelNew.Visible = !visible;
-				btnSampPanelOpen.Visible = !visible;
-			}
+			panelSample.Visible = visible;
 		}
 
 		public uint Hash32(string s)

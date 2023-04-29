@@ -565,12 +565,14 @@ namespace Thumper_Custom_Level_Editor
 
 		public void LvlEditorVisible(bool visible)
 		{
+			panelLevel.Visible = visible;
+			/*
 			if (workingfolder != null) {
 				foreach (Control c in panelLevel.Controls)
 					c.Visible = visible;
 				btnlvlPanelNew.Visible = !visible;
 				btnlvlPanelOpen.Visible = !visible;
-			}
+			}*/
 		}
 
 		public void LvlUpdatePaths(int index)

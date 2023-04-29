@@ -390,12 +390,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public void GateEditorVisible(bool visible)
 		{
-			if (workingfolder != null) {
-				foreach (Control c in panelGate.Controls)
-					c.Visible = visible;
-				btnGatePanelNew.Visible = !visible;
-				btnGatePanelOpen.Visible = !visible;
-			}
+			panelGate.Visible = visible;
 		}
 
 		public JObject GateBuildSave(string _gatename)

@@ -496,12 +496,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public void MasterEditorVisible(bool visible)
 		{
-			if (workingfolder != null) {
-				foreach (Control c in panelMaster.Controls)
-					c.Visible = visible;
-				btnMasterPanelNew.Visible = !visible;
-				btnMasterPanelOpen.Visible = !visible;
-			}
+			panelMaster.Visible = visible;
 		}
 
 		public void SaveMaster(bool save)
