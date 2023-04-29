@@ -293,22 +293,22 @@ namespace Thumper_Custom_Level_Editor
             //load size and location data for panels
             panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
             panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
-            panelLeaf.Visible = Properties.Settings.Default.leafeditorvisible;
+            panelLeaf.Visible = leafEditorToolStripMenuItem.Checked = Properties.Settings.Default.leafeditorvisible;
             panelLevel.Location = Properties.Settings.Default.lvleditorloc;
             panelLevel.Size = Properties.Settings.Default.lvleditorsize;
-            panelLevel.Visible = Properties.Settings.Default.lvleditorvisible;
+            panelLevel.Visible = levelEditorToolStripMenuItem.Checked = Properties.Settings.Default.lvleditorvisible;
             panelGate.Location = Properties.Settings.Default.gateeditorloc;
             panelGate.Size = Properties.Settings.Default.gateeditorsize;
-            panelGate.Visible = Properties.Settings.Default.gateeditorvisible;
+            panelGate.Visible = gateEditorToolStripMenuItem.Checked = Properties.Settings.Default.gateeditorvisible;
             panelMaster.Location = Properties.Settings.Default.mastereditorloc;
             panelMaster.Size = Properties.Settings.Default.mastereditorsize;
-            panelMaster.Visible = Properties.Settings.Default.mastereditorvisible;
+            panelMaster.Visible = masterEditorToolStripMenuItem.Checked = Properties.Settings.Default.mastereditorvisible;
             panelWorkingFolder.Location = Properties.Settings.Default.folderloc;
             panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
-            panelWorkingFolder.Visible = Properties.Settings.Default.workingfoldervisible;
+            panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked = Properties.Settings.Default.workingfoldervisible;
             panelSample.Size = Properties.Settings.Default.sampleeditorsize;
             panelSample.Location = Properties.Settings.Default.sampleeditorloc;
-            panelSample.Visible = Properties.Settings.Default.sampleeditorvisible;
+            panelSample.Visible = sampleEditorToolStripMenuItem.Checked = Properties.Settings.Default.sampleeditorvisible;
         }
 
         public void ImportObjects()
