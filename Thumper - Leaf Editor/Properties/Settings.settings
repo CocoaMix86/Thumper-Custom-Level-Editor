@@ -77,5 +77,8 @@
     <Setting Name="custom_samplecolor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">55, 55, 55</Value>
     </Setting>
+    <Setting Name="game_dir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">none</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

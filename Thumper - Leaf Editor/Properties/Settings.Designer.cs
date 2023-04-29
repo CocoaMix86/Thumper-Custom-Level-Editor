@@ -322,5 +322,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["custom_samplecolor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("none")]
+        public string game_dir {
+            get {
+                return ((string)(this["game_dir"]));
+            }
+            set {
+                this["game_dir"] = value;
+            }
+        }
     }
 }

@@ -225,6 +225,7 @@ namespace Thumper_Custom_Level_Editor
             InitializeTracks(masterLvlList, false, false);
             InitializeTracks(gateLvlList, false, false);
             InitializeTracks(workingfolderFiles, false, false);
+            InitializeTracks(sampleList, false, false);
             InitializeLvlStuff();
             InitializeMasterStuff();
             InitializeGateStuff();
