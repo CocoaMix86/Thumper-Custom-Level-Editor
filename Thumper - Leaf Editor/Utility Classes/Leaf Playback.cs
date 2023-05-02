@@ -163,9 +163,9 @@ namespace Thumper_Custom_Level_Editor
 								PCtoOGG(_samplocate);
 							}
 
-							if (!File.Exists($@"{_samplename}.ogg"))
+							if (File.Exists($@"{_samplename}.ogg"))
 								vorbis[_sequence].Add(new CachedSound($@"{_samplename}.ogg"));
-							if (!File.Exists($@"{_samplename}.wav"))
+							if (File.Exists($@"{_samplename}.wav"))
 								vorbis[_sequence].Add(new CachedSound($@"{_samplename}.wav"));
 						}
 						_sequence++;
