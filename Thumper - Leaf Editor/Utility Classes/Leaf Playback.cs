@@ -22,24 +22,28 @@ namespace Thumper_Custom_Level_Editor
 		CachedSound bar_approach;
 		CachedSound bar;
 		CachedSound spikes;
+		CachedSound mushroom;
 		CachedSound thump_approach;
 		CachedSound thump;
 		CachedSound turn_approachR;
 		CachedSound turn_approachL;
 		CachedSound turn;
+		CachedSound turn_long;
 
 		private void InitializeSounds()
         {
-			/*ring = new CachedSound(@"temp\coin_collect.ogg");
+			ring = new CachedSound(@"temp\coin_collect.ogg");
 			ring_approach = new CachedSound(@"temp\ducker_ring_approach.ogg");
 			bar_approach = new CachedSound(@"temp\grindable_birth2.ogg");
 			bar = new CachedSound(@"temp\hammer_two_handed_hit.ogg");
 			spikes = new CachedSound(@"temp\high_jump.ogg");
+			mushroom = new CachedSound(@"temp\jumper_approach.ogg");
 			thump_approach = new CachedSound(@"temp\thump_birth1.ogg");
 			thump = new CachedSound(@"temp\thump1b.ogg");
 			turn_approachR = new CachedSound(@"temp\turn_birth.ogg");
 			turn_approachL = new CachedSound(@"temp\turn_birth_lft.ogg");
-			turn = new CachedSound(@"temp\turn_hit_perfect2.ogg");*/
+			turn = new CachedSound(@"temp\turn_hit_perfect2.ogg");
+			turn_long = new CachedSound(@"temp\turn_long_lft.ogg");
 		}
 
 		private void btnTrackPlayback_Click(object sender, EventArgs e)
@@ -75,8 +79,8 @@ namespace Thumper_Custom_Level_Editor
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
-							vorbis[_sequence].Add(new CachedSound(@"temp\thump1b.ogg"));
-							vorbis[_sequence - 8].Add(new CachedSound(@"temp\thump_birth1.ogg"));
+							vorbis[_sequence].Add(thump);
+							vorbis[_sequence - 8].Add(thump_approach);
 						}
 						_sequence++;
 					}
@@ -91,18 +95,18 @@ namespace Thumper_Custom_Level_Editor
 						if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15 && !_turning) {
 							_played = false;
 							_turning = true;
-							vorbis[_sequence].Add(new CachedSound(@"temp\turn_hit_perfect2.ogg"));
+							vorbis[_sequence].Add(turn);
 						}
 						//check if still turning
 						else if (dgvc.Value != null && Math.Abs(decimal.Parse(dgvc.Value.ToString())) >= 15) {
 							//only need the turn call sound one time
-							if (!_played) vorbis[_sequence - 9].Add(new CachedSound(@"temp\turn_long_lft.ogg"));
+							if (!_played) vorbis[_sequence - 9].Add(turn_long);
 							_played = true;
 						}
 						//if no longer turning
 						else if (_turning) {
 							//check if long turn played. If not, add regular turn sound.
-							if (!_played) vorbis[_sequence - 9].Add(new CachedSound(@"temp\turn_birth.ogg"));
+							if (!_played) vorbis[_sequence - 9].Add(turn_approachR);
 							_turning = false;
 							_played = false;
 						}
@@ -114,8 +118,8 @@ namespace Thumper_Custom_Level_Editor
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
-							vorbis[_sequence].Add(new CachedSound(@"temp\hammer_two_handed_hit.ogg"));
-							vorbis[_sequence - 8].Add(new CachedSound(@"temp\grindable_birth2.ogg"));
+							vorbis[_sequence].Add(bar);
+							vorbis[_sequence - 8].Add(bar_approach);
 						}
 						_sequence++;
 					}
@@ -125,9 +129,9 @@ namespace Thumper_Custom_Level_Editor
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
-							vorbis[_sequence].Add(new CachedSound(@"temp\coin_collect.ogg"));
-							vorbis[_sequence].Add(new CachedSound(@"temp\hammer_two_handed_hit.ogg"));
-							vorbis[_sequence - 8].Add(new CachedSound(@"temp\ducker_ring_approach.ogg"));
+							vorbis[_sequence].Add(ring);
+							vorbis[_sequence].Add(bar);
+							vorbis[_sequence - 8].Add(ring_approach);
 						}
 						_sequence++;
 					}
@@ -137,10 +141,10 @@ namespace Thumper_Custom_Level_Editor
 					_sequence = 8;
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null && dgvr.HeaderCell.Value.ToString().Contains("spike")) {
-							vorbis[_sequence - 8].Add(new CachedSound(@"temp\high_jump.ogg"));
+							vorbis[_sequence - 8].Add(spikes);
 						}
 						if (dgvc.Value != null && dgvr.HeaderCell.Value.ToString().Contains("mushroom")) {
-							vorbis[_sequence - 8].Add(new CachedSound(@"temp\jumper_approach.ogg"));
+							vorbis[_sequence - 8].Add(mushroom);
 						}
 						_sequence++;
 					}
@@ -149,15 +153,20 @@ namespace Thumper_Custom_Level_Editor
 				//Takes care of PLAY SAMPLE
 				else if (dgvr.HeaderCell.Value.ToString().Contains("PLAY SAMPLE")) {
 					_sequence = 8;
+					string _samplename = $@"temp\{_tracks[dgvr.Index].obj_name.Replace(".samp", "")}";
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
 							//if the audio file doesn't exist in the temp folder, we need to extract it first
-							if (!File.Exists($@"temp\{_tracks[dgvr.Index].obj_name.Replace(".samp", "")}.ogg")) {
+							if (!File.Exists($@"{_samplename}.ogg") && !File.Exists($@"{_samplename}.wav")) {
 								//using LINQ, I can enumerate over the sample list, locate the obj_name, and then pull out the entire object from that!
 								var _samplocate = _lvlsamples.First(item => item.obj_name == _tracks[dgvr.Index].obj_name.Replace(".samp", ""));
 								PCtoOGG(_samplocate);
 							}
-							vorbis[_sequence].Add(new CachedSound($@"temp\{_tracks[dgvr.Index].obj_name.Replace(".samp", "")}.ogg"));
+
+							if (!File.Exists($@"{_samplename}.ogg"))
+								vorbis[_sequence].Add(new CachedSound($@"{_samplename}.ogg"));
+							if (!File.Exists($@"{_samplename}.wav"))
+								vorbis[_sequence].Add(new CachedSound($@"{_samplename}.wav"));
 						}
 						_sequence++;
 					}

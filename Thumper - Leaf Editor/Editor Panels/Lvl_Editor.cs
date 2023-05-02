@@ -460,6 +460,27 @@ namespace Thumper_Custom_Level_Editor
 			MessageBox.Show($"Found and loaded {_lvlsamples.Count} samples for the current working folder.");
 		}
 
+		private void btnLvlRefreshBeats_Click(object sender, EventArgs e)
+		{
+			foreach (LvlLeafData _leaf in _lvlleafs) {
+				string _file = (_leaf.leafname).Replace(".leaf", "");
+				dynamic _load;
+				try {
+					//I need to load the entire document to grab one field from it
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{_file}.txt"), "#.*", ""));
+					//if beat_cnt is different than what is loaded, replace it and mark the save flag
+					if (_leaf.beats != (int)_load["beat_cnt"]) {
+						_leaf.beats = (int)_load["beat_cnt"];
+						SaveLvl(false);
+					}
+				}
+				catch { }
+			}
+
+			//update the DGV with new data
+			lvlleaf_CollectionChanged(null, null);
+		}
+
 		private void btnlvlPanelOpen_Click(object sender, EventArgs e)
 		{
 			lvlopenToolStripMenuItem.PerformClick();

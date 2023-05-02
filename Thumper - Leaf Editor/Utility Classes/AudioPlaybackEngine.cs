@@ -66,17 +66,38 @@ namespace Thumper_Custom_Level_Editor
         public WaveFormat WaveFormat { get; private set; }
         public CachedSound(string audioFileName)
         {
-            using (var vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
-                // TODO: could add resampling in here if required
-                WaveFormat = vorbisWaveReader.WaveFormat;
-                var wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
-                var readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
-                int samplesRead;
-                while ((samplesRead = vorbisWaveReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {
-                    wholeFile.AddRange(readBuffer.Take(samplesRead));
+            if (audioFileName.Contains(".ogg")) {
+                using (var vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
+                    // TODO: could add resampling in here if required
+                    WaveFormat = vorbisWaveReader.WaveFormat;
+                    var wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
+                    var readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
+                    int samplesRead;
+                    while ((samplesRead = vorbisWaveReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {
+                        wholeFile.AddRange(readBuffer.Take(samplesRead));
+                    }
+                    AudioData = wholeFile.ToArray();
                 }
-                AudioData = wholeFile.ToArray();
             }
+            
+            else if (audioFileName.Contains(".wav")) {
+                using (var wavWaveReader = new AudioFileReader(audioFileName)) {
+                    //need to resample wav to 44100 sample rate
+                    ///https://markheath.net/post/how-to-resample-audio-with-naudio
+                    ///https://markheath.net/post/convert-16-bit-pcm-to-ieee-float
+                    var outFormat = new WaveFormat(44100, wavWaveReader.WaveFormat.Channels);
+                    var resampler = new WdlResamplingSampleProvider(wavWaveReader, 44100);
+                    WaveFormat = resampler.WaveFormat;
+                    var wholeFile = new List<float>((int)(wavWaveReader.Length / 4));
+                    var readBuffer = new float[resampler.WaveFormat.SampleRate * resampler.WaveFormat.Channels];
+                    int samplesRead;
+                    while ((samplesRead = resampler.Read(readBuffer, 0, readBuffer.Length)) > 0) {
+                        wholeFile.AddRange(readBuffer.Take(samplesRead));
+                    }
+                    AudioData = wholeFile.ToArray();
+                }
+            }
+
         }
     }
 
@@ -126,4 +147,86 @@ namespace Thumper_Custom_Level_Editor
 
         public WaveFormat WaveFormat { get; private set; }
     }
+    /*
+    /// <summary>
+    /// Converts 16 bit PCM to IEEE float, optionally adjusting volume along the way
+    /// </summary>
+    public class Wave16toIeeeProvider : IWaveProvider
+    {
+        private IWaveProvider sourceProvider;
+        private readonly WaveFormat waveFormat;
+        private volatile float volume;
+        private byte[] sourceBuffer;
+
+        /// <summary>
+        /// Creates a new Wave16toIeeeProvider
+        /// </summary>
+        /// <param name="sourceStream">the source stream</param>
+        /// <param name="volume">stream volume (1 is 0dB)</param>
+        /// <param name="pan">pan control (-1 to 1)</param>
+        public Wave16toIeeeProvider(IWaveProvider sourceProvider)
+        {
+            if (sourceProvider.WaveFormat.Encoding != WaveFormatEncoding.Pcm)
+                throw new ApplicationException("Only PCM supported");
+            if (sourceProvider.WaveFormat.BitsPerSample != 16)
+                throw new ApplicationException("Only 16 bit audio supported");
+
+            waveFormat = WaveFormat.CreateIeeeFloatWaveFormat(sourceProvider.WaveFormat.SampleRate, sourceProvider.WaveFormat.Channels);
+
+            this.sourceProvider = sourceProvider;
+            this.volume = 1.0f;
+        }
+
+        /// <summary>
+        /// Helper function to avoid creating a new buffer every read
+        /// </summary>
+        byte[] GetSourceBuffer(int bytesRequired)
+        {
+            if (sourceBuffer == null || sourceBuffer.Length < bytesRequired) {
+                sourceBuffer = new byte[bytesRequired];
+            }
+            return sourceBuffer;
+        }
+
+        /// <summary>
+        /// Reads bytes from this wave stream
+        /// </summary>
+        /// <param name="destBuffer">The destination buffer</param>
+        /// <param name="offset">Offset into the destination buffer</param>
+        /// <param name="numBytes">Number of bytes read</param>
+        /// <returns>Number of bytes read.</returns>
+        public int Read(byte[] destBuffer, int offset, int numBytes)
+        {
+            int sourceBytesRequired = numBytes / 2;
+            byte[] sourceBuffer = GetSourceBuffer(sourceBytesRequired);
+            int sourceBytesRead = sourceProvider.Read(sourceBuffer, offset, sourceBytesRequired);
+            WaveBuffer sourceWaveBuffer = new WaveBuffer(sourceBuffer);
+            WaveBuffer destWaveBuffer = new WaveBuffer(destBuffer);
+
+            int sourceSamples = sourceBytesRead / 2;
+            int destOffset = offset / 4;
+            for (int sample = 0; sample < sourceSamples; sample++) {
+                destWaveBuffer.FloatBuffer[destOffset++] = (sourceWaveBuffer.ShortBuffer[sample] / 32768f) * volume;
+            }
+
+            return sourceSamples * 4;
+        }
+
+        /// <summary>
+        /// <see cref="IWaveProvider.WaveFormat"/>
+        /// </summary>
+        public WaveFormat WaveFormat
+        {
+            get { return waveFormat; }
+        }
+
+        /// <summary>
+        /// Volume of this channel. 1.0 = full scale
+        /// </summary>
+        public float Volume
+        {
+            get { return volume; }
+            set { volume = value; }
+        }
+    }*/
 }

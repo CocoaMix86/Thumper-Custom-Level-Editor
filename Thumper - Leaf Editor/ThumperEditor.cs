@@ -604,25 +604,26 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private void btnLvlRefreshBeats_Click(object sender, EventArgs e)
+        private void Read_Config(bool skip)
         {
-            foreach (LvlLeafData _leaf in _lvlleafs) {
-                string _file = (_leaf.leafname).Replace(".leaf", "");
-                dynamic _load;
-                try {
-                    //I need to load the entire document to grab one field from it
-                    _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{_file}.txt"), "#.*", ""));
-                    //if beat_cnt is different than what is loaded, replace it and mark the save flag
-                    if (_leaf.beats != (int)_load["beat_cnt"]) {
-                        _leaf.beats = (int)_load["beat_cnt"];
-                        SaveLvl(false);
-                    }
+            if (!skip && Properties.Settings.Default.game_dir != "none")
+                return;
+            using (var fbd = new FolderBrowserDialog()) {
+                fbd.Description = "Select the folder where Thumper is installed";
+                fbd.RootFolder = Environment.SpecialFolder.MyComputer;
+                //check if the game_dir has been set before. It'll be empty if starting for the first time
+                if (Properties.Settings.Default.game_dir == "none")
+                    fbd.SelectedPath = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
+                //if it's not empty, initialize the FolderBrowser to be whatever was selected last
+                else
+                    fbd.SelectedPath = Properties.Settings.Default.game_dir;
+                //show FolderBrowser, and then set "game_dir" to whatever is chosen
+                if (fbd.ShowDialog() == DialogResult.OK) {
+                    Properties.Settings.Default.game_dir = fbd.SelectedPath;
                 }
-                catch { }
             }
 
-            //update the DGV with new data
-            lvlleaf_CollectionChanged(null, null);
+            Properties.Settings.Default.Save();
         }
     }
 }

@@ -281,14 +281,21 @@ namespace Thumper_Custom_Level_Editor
 		private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
 		{
 			var _samp = _samplelist[sampleList.CurrentRow.Index];
+			string _filetype = "";
 
-			if (!File.Exists($@"temp\{_samp.obj_name}.ogg")) {
+			if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
 				PCtoOGG(_samp);
 			}
-			
-			VorbisWaveReader vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.ogg");
-			WaveOut oggPlayer = WaveOutInit(vorbis);
-			oggPlayer.Play();
+			//check extension of the sample to play
+			if (File.Exists($@"temp\{_samp.obj_name}.ogg"))
+				_filetype = "ogg";
+			if (File.Exists($@"temp\{_samp.obj_name}.wav"))
+				_filetype = "wav";
+
+			AudioPlaybackEngine.Instance.PlaySound(new CachedSound($@"temp\{_samp.obj_name}.{_filetype}"));
+			//VorbisWaveReader vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
+			//WaveOut oggPlayer = WaveOutInit(vorbis);
+			//oggPlayer.Play();
 		}
 		#endregion
 
@@ -410,8 +417,14 @@ namespace Thumper_Custom_Level_Editor
 			return h;
 		}
 
-		public void PCtoOGG(SampleData _samp)
+		public string PCtoOGG(SampleData _samp)
         {
+			//check if the gamedir has been set so the method can find the .pc files
+			if (Properties.Settings.Default.game_dir == "none") {
+				Read_Config(false);
+            }
+
+			byte[] _bytes;
 			//get the hash of this filename. This will be used to locate the sample's .PC file
 			string _hashedname = "";
 			byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{_samp.path}"));
@@ -422,8 +435,27 @@ namespace Thumper_Custom_Level_Editor
 			if (_hashedname[0] == '0')
 				_hashedname = _hashedname.Substring(1);
 
-			//read the .pc file as bytes, and skip the first 4 header bytes
-			byte[] _bytes = File.ReadAllBytes($@"C:\Program Files (x86)\Steam\steamapps\common\Thumper\cache\{_hashedname}.pc");
+			//check if sample is custom or not. This changes where we load audio from
+			if (_samp.path.Contains("custom")) {
+				//attempt to locate file. But error and return safely if nothing found
+				try {
+					//read the .pc file as bytes, and skip the first 4 header bytes
+					_bytes = File.ReadAllBytes($@"{workingfolder}\extras\{_hashedname}.pc");
+				} catch {
+					MessageBox.Show($@"Unable to locate file {workingfolder}\extras\{_hashedname}.pc to play sample. Is the custom audio file in the extras folder?");
+					return null;
+                }
+			}
+			else {
+				//attempt to locate file. But error and return safely if nothing found
+				try {
+					//read the .pc file as bytes, and skip the first 4 header bytes
+					_bytes = File.ReadAllBytes($@"C:\Program Files (x86)\Steam\steamapps\common\Thumper\cache\{_hashedname}.pc");
+				} catch {
+					MessageBox.Show($@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc to play sample. If you need to change your Game Directory, go to the the Help menu.");
+					return null;
+				}
+			}
 			_bytes = _bytes.Skip(4).ToArray();
 
 			// credit to https://github.com/SamboyCoding/Fmod5Sharp
@@ -432,6 +464,7 @@ namespace Thumper_Custom_Level_Editor
 			samples[0].RebuildAsStandardFileFormat(out var dataBytes, out var fileExtension);
 
 			File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
+			return fileExtension;
 		}
 
 		/// These are specifically for audio playback. Don't touch them
