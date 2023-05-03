@@ -185,7 +185,7 @@ namespace Thumper_Custom_Level_Editor
 			mTimer1 = new AccurateTimer(this, new Action(_playbacktimer_Tick), _period);
 		}
 
-		private async void _playbacktimer_Tick()
+		private void _playbacktimer_Tick()
 		{
 			foreach (var _sample in vorbis[_playbackbeat]) {
 				AudioPlaybackEngine.Instance.PlaySound(_sample);
