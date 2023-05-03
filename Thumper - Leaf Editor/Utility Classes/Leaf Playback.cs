@@ -3,16 +3,15 @@ using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
-using NAudio.Vorbis;
-using NAudio.Wave;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{
-		Multimedia.Timer _playbacktimer = new Multimedia.Timer();
-		System.Threading.Timer _threadtimer;
+		AccurateTimer mTimer1;
 		List<List<CachedSound>> vorbis;
 		bool _playing = false;
 		int _playbackbeat;
@@ -52,7 +51,6 @@ namespace Thumper_Custom_Level_Editor
 			//if the playback is active, stop it. Otherwise, continue below
 			if (_playing) {
 				_playing = false;
-				_playbacktimer.Stop();
 				btnTrackPlayback.ForeColor = Color.Green;
 				btnTrackPlayback.Image = Properties.Resources.icon_play;
 				trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
@@ -81,7 +79,7 @@ namespace Thumper_Custom_Level_Editor
 					foreach (DataGridViewCell dgvc in dgvr.Cells) {
 						if (dgvc.Value != null) {
 							vorbis[_sequence].Add(thump);
-							vorbis[_sequence - 8].Add(thump_approach);
+							//vorbis[_sequence - 8].Add(thump_approach);
 						}
 						_sequence++;
 					}
@@ -107,7 +105,8 @@ namespace Thumper_Custom_Level_Editor
 						//if no longer turning
 						else if (_turning) {
 							//check if long turn played. If not, add regular turn sound.
-							if (!_played) vorbis[_sequence - 9].Add(turn_approachR);
+							if (!_played) { //vorbis[_sequence - 9].Add(turn_approachR);
+											}
 							_turning = false;
 							_played = false;
 						}
@@ -182,27 +181,24 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackPlayback.Image = Properties.Resources.icon_pause16;
 			_playbackbeat = 0;
 			//the speed of the timer is reliant on the level's BPM
-			_playbacktimer.Period = (int)Math.Round(60000f / (float)NUD_ConfigBPM.Value, MidpointRounding.AwayFromZero);
-			//_playbacktimer.Period = (int)Math.Round(1000 * ((float)60 / (float)NUD_ConfigBPM.Value), MidpointRounding.AwayFromZero);
-			//_playbacktimer.Start();
-
-			_threadtimer = new System.Threading.Timer(_ => _playbacktimer_Tick(null, null), null, 0, (int)Math.Round(60000f / (float)NUD_ConfigBPM.Value, MidpointRounding.AwayFromZero));
+			int _period = (int)Math.Round(60000f / (float)NUD_ConfigBPM.Value, MidpointRounding.AwayFromZero);
+			mTimer1 = new AccurateTimer(this, new Action(_playbacktimer_Tick), _period);
 		}
 
-		private void _playbacktimer_Tick(object source, EventArgs e)
+		private async void _playbacktimer_Tick()
 		{
 			foreach (var _sample in vorbis[_playbackbeat]) {
 				AudioPlaybackEngine.Instance.PlaySound(_sample);
 			}
-			/*try {
+			try {
 				trackEditor.ClearSelection();
 				trackEditor.Columns[_playbackbeat - 8].Selected = true;
-			} catch { }*/
+			}
+			catch { }
 
 			_playbackbeat++;
 			if (_playbackbeat >= vorbis.Count) {
-				_threadtimer.Dispose();
-				_playbacktimer.Stop();
+				mTimer1.Stop();
 				_playing = false;
 				btnTrackPlayback.ForeColor = Color.Green;
 				btnTrackPlayback.Image = Properties.Resources.icon_play;

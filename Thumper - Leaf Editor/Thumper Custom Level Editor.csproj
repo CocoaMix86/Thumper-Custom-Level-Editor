@@ -96,6 +96,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utility Classes\AccurateTimer.cs" />
     <Compile Include="Utility Classes\AudioPlaybackEngine.cs" />
     <Compile Include="Utility Classes\ControlMoverOrResizer.cs" />
     <Compile Include="Extra Forms\CustomizeWorkspace.cs">
