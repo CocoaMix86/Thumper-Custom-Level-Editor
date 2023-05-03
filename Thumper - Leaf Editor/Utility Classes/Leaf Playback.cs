@@ -12,6 +12,7 @@ namespace Thumper_Custom_Level_Editor
 	public partial class FormLeafEditor
 	{
 		Multimedia.Timer _playbacktimer = new Multimedia.Timer();
+		System.Threading.Timer _threadtimer;
 		List<List<CachedSound>> vorbis;
 		bool _playing = false;
 		int _playbackbeat;
@@ -183,7 +184,9 @@ namespace Thumper_Custom_Level_Editor
 			//the speed of the timer is reliant on the level's BPM
 			_playbacktimer.Period = (int)Math.Round(60000f / (float)NUD_ConfigBPM.Value, MidpointRounding.AwayFromZero);
 			//_playbacktimer.Period = (int)Math.Round(1000 * ((float)60 / (float)NUD_ConfigBPM.Value), MidpointRounding.AwayFromZero);
-			_playbacktimer.Start();
+			//_playbacktimer.Start();
+
+			_threadtimer = new System.Threading.Timer(_ => _playbacktimer_Tick(null, null), null, 0, (int)Math.Round(60000f / (float)NUD_ConfigBPM.Value, MidpointRounding.AwayFromZero));
 		}
 
 		private void _playbacktimer_Tick(object source, EventArgs e)
@@ -191,13 +194,14 @@ namespace Thumper_Custom_Level_Editor
 			foreach (var _sample in vorbis[_playbackbeat]) {
 				AudioPlaybackEngine.Instance.PlaySound(_sample);
 			}
-			try {
+			/*try {
 				trackEditor.ClearSelection();
 				trackEditor.Columns[_playbackbeat - 8].Selected = true;
-			} catch { }
+			} catch { }*/
 
 			_playbackbeat++;
 			if (_playbackbeat >= vorbis.Count) {
+				_threadtimer.Dispose();
 				_playbacktimer.Stop();
 				_playing = false;
 				btnTrackPlayback.ForeColor = Color.Green;
