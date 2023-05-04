@@ -624,5 +624,10 @@ namespace Thumper_Custom_Level_Editor
 
             Properties.Settings.Default.Save();
         }
+
+        private void btnTrackAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
