@@ -138,7 +138,6 @@
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
             this.label47 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnLEafInterpLinear = new System.Windows.Forms.Button();
             this.btnTrackCopy = new System.Windows.Forms.Button();
             this.btnTrackColorImport = new System.Windows.Forms.Button();
@@ -1324,7 +1323,6 @@
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelLeaf.Controls.Add(this.label47);
-            this.panelLeaf.Controls.Add(this.button1);
             this.panelLeaf.Controls.Add(this.btnLEafInterpLinear);
             this.panelLeaf.Controls.Add(this.btnTrackCopy);
             this.panelLeaf.Controls.Add(this.btnTrackColorImport);
@@ -1387,22 +1385,6 @@
             this.label47.Size = new System.Drawing.Size(78, 13);
             this.label47.TabIndex = 106;
             this.label47.Text = "Interpolation";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Gray;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(462, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(58, 22);
-            this.button1.TabIndex = 104;
-            this.button1.Text = "Q. Interp";
-            this.toolTip1.SetToolTip(this.button1, "Quadratic interpolation between selected start and end beats.");
-            this.button1.UseCompatibleTextRendering = true;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnLEafInterpLinear
             // 
@@ -4787,7 +4769,6 @@
         private System.Windows.Forms.Button btnLvlLeafCopy;
         private System.Windows.Forms.Button btnMasterLvlCopy;
         private System.Windows.Forms.Button btnLEafInterpLinear;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label47;
     }
 }

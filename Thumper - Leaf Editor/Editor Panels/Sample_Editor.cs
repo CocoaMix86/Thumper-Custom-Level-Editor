@@ -80,6 +80,9 @@ namespace Thumper_Custom_Level_Editor
 				case 4:
 					_samplelist[_index].offset = (decimal)sampleList.Rows[_index].Cells[4].Value;
 					break;
+				case 5:
+					_samplelist[_index].channel_group = sampleList.Rows[_index].Cells[5].Value.ToString();
+					break;
 			}
 			SaveSample(false);
 		}
