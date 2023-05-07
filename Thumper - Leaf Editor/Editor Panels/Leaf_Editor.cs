@@ -467,7 +467,7 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.RowCount++;
 			trackEditor.CurrentCell = trackEditor.Rows[_tracks.Count - 1].Cells[0];
 			//disable Apply button if object is not set
-			dropObjects.SelectedIndex = 0;
+			//dropObjects.SelectedIndex = 0;
 			if (dropObjects.SelectedIndex == -1 || dropParamPath.SelectedIndex == -1)
 				btnTrackApply.Enabled = false;
 			else btnTrackApply.Enabled = true;
