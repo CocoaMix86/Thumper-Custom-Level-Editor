@@ -241,6 +241,8 @@
     <None Include="image assets\beeble_smol.png" />
     <None Include="image assets\beeble_stare.png" />
     <None Include="image assets\beeble_yes.png" />
+    <None Include="image assets\icon-color-wheel.png" />
+    <None Include="image assets\icon-graph.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
