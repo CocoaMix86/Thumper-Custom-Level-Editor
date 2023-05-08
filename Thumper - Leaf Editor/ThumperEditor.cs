@@ -666,5 +666,20 @@ namespace Thumper_Custom_Level_Editor
             //re-enable this
             trackEditor.CellValueChanged += trackEditor_CellValueChanged;
         }
+
+        private void btnLeafColors_Click(object sender, EventArgs e)
+        {
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK) {
+                foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
+                    if (_tracks[_cell.RowIndex].trait_type == "kTraitColor") {
+                        _cell.Style.BackColor = colorDialog1.Color;
+                        _cell.Value = colorDialog1.Color.ToArgb();
+                        //sets flag that leaf has unsaved changes
+                        SaveLeaf(false);
+                    }
+                }
+            }
+        }
     }
 }
