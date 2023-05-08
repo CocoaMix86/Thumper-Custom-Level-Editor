@@ -336,7 +336,7 @@ namespace Thumper_Custom_Level_Editor
 			workingfolder = Path.GetDirectoryName(_loadedsampletemp);
 			_loadedsample = _loadedsampletemp;
 			//set some visual elements
-			lblSampleEditor.Text = $"Sample Editor - {loadedsample}";
+			lblSampleEditor.Text = $"Sample Editor - {Path.GetFileNameWithoutExtension(loadedsample)}";
 
 			///Clear form elements so new data can load
 			_samplelist.Clear();
