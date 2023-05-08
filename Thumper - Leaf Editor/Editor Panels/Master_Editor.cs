@@ -568,28 +568,28 @@ namespace Thumper_Custom_Level_Editor
 			//
 			//add rail color
 			JArray rails_color = new JArray {
-				Decimal.Round((decimal)btnConfigRailColor.BackColor.R / 255, 2),
-				Decimal.Round((decimal)btnConfigRailColor.BackColor.G / 255, 2),
-				Decimal.Round((decimal)btnConfigRailColor.BackColor.B / 255, 2),
-				Decimal.Round((decimal)btnConfigRailColor.BackColor.A / 255, 2)
+				Decimal.Round((decimal)btnConfigRailColor.BackColor.R / 255, 3),
+				Decimal.Round((decimal)btnConfigRailColor.BackColor.G / 255, 3),
+				Decimal.Round((decimal)btnConfigRailColor.BackColor.B / 255, 3),
+				Decimal.Round((decimal)btnConfigRailColor.BackColor.A / 255, 3)
 			};
 			_config.Add("rails_color", rails_color);
 			//
 			//add rail glow color
 			JArray rails_glow_color = new JArray {
-				Decimal.Round((decimal)btnConfigGlowColor.BackColor.R / 255, 2),
-				Decimal.Round((decimal)btnConfigGlowColor.BackColor.G / 255, 2),
-				Decimal.Round((decimal)btnConfigGlowColor.BackColor.B / 255, 2),
-				Decimal.Round((decimal)btnConfigGlowColor.BackColor.A / 255, 2)
+				Decimal.Round((decimal)btnConfigGlowColor.BackColor.R / 255, 3),
+				Decimal.Round((decimal)btnConfigGlowColor.BackColor.G / 255, 3),
+				Decimal.Round((decimal)btnConfigGlowColor.BackColor.B / 255, 3),
+				Decimal.Round((decimal)btnConfigGlowColor.BackColor.A / 255, 3)
 			};
 			_config.Add("rails_glow_color", rails_glow_color);
 			//
 			//add path color
 			JArray path_color = new JArray {
-				Decimal.Round((decimal)btnConfigPathColor.BackColor.R / 255, 2),
-				Decimal.Round((decimal)btnConfigPathColor.BackColor.G / 255, 2),
-				Decimal.Round((decimal)btnConfigPathColor.BackColor.B / 255, 2),
-				Decimal.Round((decimal)btnConfigPathColor.BackColor.A / 255, 2)
+				Decimal.Round((decimal)btnConfigPathColor.BackColor.R / 255, 3),
+				Decimal.Round((decimal)btnConfigPathColor.BackColor.G / 255, 3),
+				Decimal.Round((decimal)btnConfigPathColor.BackColor.B / 255, 3),
+				Decimal.Round((decimal)btnConfigPathColor.BackColor.A / 255, 3)
 			};
 			_config.Add("path_color", path_color);
 			//
