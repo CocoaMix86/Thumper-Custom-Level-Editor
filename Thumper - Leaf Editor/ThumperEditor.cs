@@ -673,8 +673,8 @@ namespace Thumper_Custom_Level_Editor
             if (result == DialogResult.OK) {
                 foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
                     if (_tracks[_cell.RowIndex].trait_type == "kTraitColor") {
-                        _cell.Style.BackColor = colorDialog1.Color;
                         _cell.Value = colorDialog1.Color.ToArgb();
+                        _cell.Style.BackColor = colorDialog1.Color;
                         //sets flag that leaf has unsaved changes
                         SaveLeaf(false);
                     }
