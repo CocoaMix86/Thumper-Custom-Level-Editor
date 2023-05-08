@@ -358,7 +358,11 @@ namespace Thumper_Custom_Level_Editor
 		private void btnLvlLeafCopy_Click(object sender, EventArgs e)
 		{
 			LvlLeafData _lvl = _lvlleafs[lvlLeafList.CurrentRow.Index];
-			_lvlleafs.Add(_lvl);
+			_lvlleafs.Add(new LvlLeafData { 
+				leafname = _lvl.leafname,
+				beats = _lvl.beats,
+				paths = _lvl.paths
+			});
 		}
 
 		private void btnLvlPathAdd_Click(object sender, EventArgs e)
