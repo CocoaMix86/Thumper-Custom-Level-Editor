@@ -790,17 +790,14 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if it is kTraitColor, color the background differently
 			if (_tracks[dgvc.RowIndex].trait_type == "kTraitColor") {
-				dgvc.Style.BackColor = Color.FromArgb(int.TryParse(dgvc.Value.ToString(), out int j) ? j : 0);
+				dgvc.Style.BackColor = Color.FromArgb(int.TryParse($"{dgvc.Value}", out int j) ? j : 0);
 				return;
             }
 
 			float i;
 			dgvc.Style = null;
-			try {
-				//parse value. If not parseable, set to 0
-				i = float.TryParse(dgvc.Value.ToString(), out i) ? i : 0;
-			}
-			catch { i = 0; }
+			//parse value. If not parseable, set to 0
+			i = float.TryParse($"{dgvc.Value}", out i) ? i : 0;
 			//if the cell value is greater than the criteria of the row, highlight it with that row's color
 			try {
 				if (Math.Abs(i) >= _tracks[dgvc.RowIndex].highlight_value) {
