@@ -134,22 +134,7 @@ namespace Thumper_Custom_Level_Editor
 					if (_cell.Value.ToString() == "")
 						_cell.Value = null;
 
-					float i = 0;
-					//clear cell styling, in case it now falls out of highlighting scope
-					_cell.Style = null;
-					//try parsing the value. If it doesn't work, i = 0
-					i = float.TryParse(_cell.Value.ToString(), out i) ? i : 0;
-					//check Absolute value of cell against highlughting value of track
-					//we check Absolute because this catches negatives too
-					if (Math.Abs(i) >= _tracks[_cell.RowIndex]._default)
-						_cell.Style.BackColor = Color.FromArgb(int.Parse(_tracks[_cell.RowIndex].highlight_color));
-
-					//change cell font color so text is readable on dark/light backgrounds
-					Color _c = _cell.Style.BackColor;
-					if (_c.R < 150 && _c.G < 150 && _c.B < 150)
-						_cell.Style.ForeColor = Color.White;
-					else
-						_cell.Style.ForeColor = Color.Black;
+					TrackUpdateHighlightingSingleCell(_cell);
 					//sets flag that leaf has unsaved changes
 					SaveLeaf(false);
 				}
