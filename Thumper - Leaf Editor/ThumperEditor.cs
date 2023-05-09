@@ -657,6 +657,9 @@ namespace Thumper_Custom_Level_Editor
             
             for (int x = 1; x < _beats; x++) {
                 _inc = Decimal.Round(_inc + _diff, 4);
+                //if interpolating for Color, remove the decimals
+                if (_tracks[_listcell[0].RowIndex].trait_type == "kTraitColor")
+                    _inc = Math.Truncate(_inc);
                 trackEditor[_listcell[0].ColumnIndex + x, _listcell[0].RowIndex].Value = _inc;
             }
             trackEditor[_listcell[1].ColumnIndex, _listcell[1].RowIndex].Value = _end;

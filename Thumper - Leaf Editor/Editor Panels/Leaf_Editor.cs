@@ -790,7 +790,9 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if it is kTraitColor, color the background differently
 			if (_tracks[dgvc.RowIndex].trait_type == "kTraitColor") {
-				dgvc.Style.BackColor = Color.FromArgb(int.TryParse($"{dgvc.Value}", out int j) ? j : 0);
+				bool _parsed = int.TryParse($"{dgvc.Value}", out int j);
+				if (_parsed)
+					dgvc.Style.BackColor = Color.FromArgb(j);
 				return;
             }
 
