@@ -781,9 +781,6 @@ namespace Thumper_Custom_Level_Editor
 		///Updates cell highlighting in the DGV
 		public void TrackUpdateHighlighting(DataGridViewRow r)
 		{
-			//if the row uses kTraitColor, do nothing, as it is colored in a special way
-			if (_tracks[r.Index].trait_type == "kTraitColor")
-				return;
 			//iterate over all cells in the row
 			foreach (DataGridViewCell dgvc in r.Cells) {
 				TrackUpdateHighlightingSingleCell(dgvc);
