@@ -732,7 +732,7 @@ namespace Thumper_Custom_Level_Editor
 			//iterate over each data point, and fill cells
 			foreach (JProperty data_point in data_points) {
 				try {
-					r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
+					r.Cells[int.Parse(data_point.Name)].Value = (decimal)data_point.Value;
 				}
 				catch (ArgumentOutOfRangeException) { }
 			}
@@ -755,7 +755,7 @@ namespace Thumper_Custom_Level_Editor
 				for (int x = 0; x < trackEditor.ColumnCount; x++) {
 					//if no value, leave it out
 					if (trackEditor.Rows[_selecttrack].Cells[x].Value != null && trackEditor.Rows[_selecttrack].Cells[x].Value.ToString() != "")
-						_out += x + ":" + trackEditor.Rows[_selecttrack].Cells[x].Value + ",";
+						_out += $"{x}:{trackEditor.Rows[_selecttrack].Cells[x].Value},";
 				}
 				//output final result
 				richRawTrackData.Text = _out.Remove(_out.Length - 1);
@@ -788,6 +788,9 @@ namespace Thumper_Custom_Level_Editor
 		}
 		public void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc)
 		{
+			float i;
+			dgvc.Style = null;
+
 			//if it is kTraitColor, color the background differently
 			if (_tracks[dgvc.RowIndex].trait_type == "kTraitColor") {
 				bool _parsed = int.TryParse($"{dgvc.Value}", out int j);
@@ -796,8 +799,6 @@ namespace Thumper_Custom_Level_Editor
 				return;
             }
 
-			float i;
-			dgvc.Style = null;
 			//parse value. If not parseable, set to 0
 			i = float.TryParse($"{dgvc.Value}", out i) ? i : 0;
 			//if the cell value is greater than the criteria of the row, highlight it with that row's color
