@@ -627,9 +627,16 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
+        /// 
+        /// Collection of event handlers for moving the menustrip when the form scrolls
         private void FormLeafEditor_Scroll(object sender, ScrollEventArgs e) => menuStrip.Location = new Point(_menuloc.X, _menuloc.Y);
         private void FormLeafEditor_Scroll(object sender, MouseEventArgs e) => menuStrip.Location = _menuloc;
         private void menuStrip_MouseDown(object sender, MouseEventArgs e) => _menuloc = menuStrip.Location;
         private void menuStrip_MouseUp(object sender, MouseEventArgs e) => _menuloc = menuStrip.Location;
+        private void resetMenuPositionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            menuStrip.Location = new Point(0, 0);
+            _menuloc = new Point(0, 0);
+        }
     }
 }

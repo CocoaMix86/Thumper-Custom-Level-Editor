@@ -325,6 +325,7 @@
             this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.resetMenuPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -837,7 +838,8 @@
             this.workingFolderToolStripMenuItem,
             this.sampleEditorToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.customizeToolStripMenuItem});
+            this.customizeToolStripMenuItem,
+            this.resetMenuPositionToolStripMenuItem});
             this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
@@ -4466,6 +4468,15 @@
             this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Channel.Width = 76;
             // 
+            // resetMenuPositionToolStripMenuItem
+            // 
+            this.resetMenuPositionToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.resetMenuPositionToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.resetMenuPositionToolStripMenuItem.Name = "resetMenuPositionToolStripMenuItem";
+            this.resetMenuPositionToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.resetMenuPositionToolStripMenuItem.Text = "Reset Menu Position";
+            this.resetMenuPositionToolStripMenuItem.Click += new System.EventHandler(this.resetMenuPositionToolStripMenuItem_Click);
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4802,6 +4813,7 @@
         private System.Windows.Forms.Button btnMasterLvlCopy;
         private System.Windows.Forms.Button btnLEafInterpLinear;
         private System.Windows.Forms.Button btnLeafColors;
+        private System.Windows.Forms.ToolStripMenuItem resetMenuPositionToolStripMenuItem;
     }
 }
 
