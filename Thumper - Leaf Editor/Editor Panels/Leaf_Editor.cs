@@ -94,6 +94,7 @@ namespace Thumper_Custom_Level_Editor
 				NUD_TrackHighlight.Value = (decimal)_tracks[_selecttrack].highlight_value;
 				txtDefault.Value = (decimal)_tracks[_selecttrack]._default;
 				dropLeafStep.SelectedItem = _tracks[_selecttrack].step;
+				dropLeafInterp.SelectedItem = _tracks[_selecttrack].default_interp;
 				//re-add event handlers
 				NUD_TrackHighlight.ValueChanged += new EventHandler(NUD_TrackHighlight_ValueChanged);
 				txtDefault.ValueChanged += new EventHandler(txtDefault_ValueChanged);
@@ -389,6 +390,12 @@ namespace Thumper_Custom_Level_Editor
 		private void dropLeafStep_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_tracks[trackEditor.CurrentRow.Index].step = dropLeafStep.Text;
+			SaveLeaf(false);
+		}
+		///INTERP CHANGED
+		private void dropLeafInterp_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			_tracks[trackEditor.CurrentRow.Index].default_interp = dropLeafInterp.Text;
 			SaveLeaf(false);
 		}
 		#endregion
@@ -914,6 +921,7 @@ namespace Thumper_Custom_Level_Editor
 				_s.param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"];
 				_s.highlight_color = seq_obj.ContainsKey("editor_data") ? (string)seq_obj["editor_data"][0] : "-8355585";
 				_s.highlight_value = seq_obj.ContainsKey("editor_data") ? (float)seq_obj["editor_data"][1] : 1;
+				_s.default_interp = seq_obj.ContainsKey("default_interp") ? (string)seq_obj["default_interp"] : "kTraitInterpLinear";
 				//iterate over every _object to find where a param_path is located
 				//this was the best way to do this I could come up with
 				foreach (Object_Params _obj in _objects) {
@@ -1003,6 +1011,7 @@ namespace Thumper_Custom_Level_Editor
 				else
 					s.Add("param_path", seq_obj.param_path);
 				s.Add("trait_type", seq_obj.trait_type);
+				s.Add("default_interp", seq_obj.default_interp);
 				///start building all data points into an object
 				JObject data_points = new JObject();
 				for (int x = 0; x < trackEditor.ColumnCount; x++) {
