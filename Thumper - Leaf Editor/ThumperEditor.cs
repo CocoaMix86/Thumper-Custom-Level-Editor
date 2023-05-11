@@ -66,6 +66,7 @@ namespace Thumper_Custom_Level_Editor
         public dynamic helptext;
         public List<string> lvlsinworkfolder = new List<string>();
         public string _dgfocus;
+        public Point _menuloc;
         #endregion
 
 
@@ -238,6 +239,7 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(panelWorkingFolder);
             ControlMoverOrResizer.Init(workingfolderFiles, panelWorkingFolder);
             ControlMoverOrResizer.Init(panelSample);
+            ControlMoverOrResizer.Init(menuStrip);
             ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
 
             ///import help text
@@ -625,64 +627,9 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        private void btnLEafInterpLinear_Click(object sender, EventArgs e)
-        {
-            var _cells = trackEditor.SelectedCells;
-            //interpolation requires 2 cells only
-            if (_cells.Count != 2) {
-                MessageBox.Show("Interpolation works with only 2 cells selected", "Interpolation error");
-                return;
-            }
-            //check if cells are in the same row
-            if (_cells[0].RowIndex != _cells[1].RowIndex) {
-                MessageBox.Show("Interpolation works only if selected cells are in the same row", "Interpolation error");
-                return;
-            }
-
-            //temporarily disable this so it doesn't trigger when cells update
-            trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-
-            List<DataGridViewCell> _listcell = new List<DataGridViewCell>() { _cells[0], _cells[1] };
-            //if cell with higher column index is in [0], we need to move it to [1].
-            //The order changes depending which cell is selected first
-            if (_cells[0].ColumnIndex > _cells[1].ColumnIndex) {
-                _listcell = new List<DataGridViewCell>() { _cells[1], _cells[0]};
-            }
-            //basic math to figure out the rate of change across the amount of beats between selections
-            decimal _start = decimal.TryParse($"{_listcell[0].Value}", out decimal i) ? i : 0;
-            decimal _end = decimal.TryParse($"{_listcell[1].Value}", out decimal j) ? j : 0;
-            decimal _inc = _start;
-            int _beats = _listcell[1].ColumnIndex - _listcell[0].ColumnIndex;
-            decimal _diff = (_end - _start) / _beats;
-            
-            for (int x = 1; x < _beats; x++) {
-                _inc = Decimal.Round(_inc + _diff, 4);
-                //if interpolating for Color, remove the decimals
-                if (_tracks[_listcell[0].RowIndex].trait_type == "kTraitColor")
-                    _inc = Math.Truncate(_inc);
-                trackEditor[_listcell[0].ColumnIndex + x, _listcell[0].RowIndex].Value = _inc;
-            }
-            trackEditor[_listcell[1].ColumnIndex, _listcell[1].RowIndex].Value = _end;
-            trackEditor[_listcell[0].ColumnIndex, _listcell[0].RowIndex].Value = _start;
-            //recolor cells after populating
-            TrackUpdateHighlighting(trackEditor.Rows[_listcell[0].RowIndex]);
-            //re-enable this
-            trackEditor.CellValueChanged += trackEditor_CellValueChanged;
-        }
-
-        private void btnLeafColors_Click(object sender, EventArgs e)
-        {
-            DialogResult result = colorDialog1.ShowDialog();
-            if (result == DialogResult.OK) {
-                foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
-                    if (_tracks[_cell.RowIndex].trait_type == "kTraitColor") {
-                        _cell.Value = colorDialog1.Color.ToArgb();
-                        _cell.Style.BackColor = colorDialog1.Color;
-                        //sets flag that leaf has unsaved changes
-                        SaveLeaf(false);
-                    }
-                }
-            }
-        }
+        private void FormLeafEditor_Scroll(object sender, ScrollEventArgs e) => menuStrip.Location = new Point(_menuloc.X, _menuloc.Y);
+        private void FormLeafEditor_Scroll(object sender, MouseEventArgs e) => menuStrip.Location = _menuloc;
+        private void menuStrip_MouseDown(object sender, MouseEventArgs e) => _menuloc = menuStrip.Location;
+        private void menuStrip_MouseUp(object sender, MouseEventArgs e) => _menuloc = menuStrip.Location;
     }
 }
