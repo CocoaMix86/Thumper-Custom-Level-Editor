@@ -89,6 +89,7 @@ namespace Thumper_Custom_Level_Editor
 				NUD_TrackHighlight.ValueChanged -= new EventHandler(NUD_TrackHighlight_ValueChanged);
 				txtDefault.ValueChanged -= new EventHandler(txtDefault_ValueChanged);
 				dropLeafStep.SelectedIndexChanged -= new EventHandler(dropLeafStep_SelectedIndexChanged);
+				dropLeafInterp.SelectedIndexChanged -= new EventHandler(dropLeafInterp_SelectedIndexChanged);
 				//set values from _tracks
 				//NUD_TrackDoubleclick.Value = Decimal.Parse(_tracks[_selecttrack][8]);
 				NUD_TrackHighlight.Value = (decimal)_tracks[_selecttrack].highlight_value;
@@ -99,6 +100,7 @@ namespace Thumper_Custom_Level_Editor
 				NUD_TrackHighlight.ValueChanged += new EventHandler(NUD_TrackHighlight_ValueChanged);
 				txtDefault.ValueChanged += new EventHandler(txtDefault_ValueChanged);
 				dropLeafStep.SelectedIndexChanged += new EventHandler(dropLeafStep_SelectedIndexChanged);
+				dropLeafInterp.SelectedIndexChanged += new EventHandler(dropLeafInterp_SelectedIndexChanged);
 
 				//check if the current track has param_path set. If not, disable some controls
 				if (_tracks[_selecttrack].param_path != null)
