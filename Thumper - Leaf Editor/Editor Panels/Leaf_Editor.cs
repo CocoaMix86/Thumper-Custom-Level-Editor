@@ -581,7 +581,8 @@ namespace Thumper_Custom_Level_Editor
 				trait_type = _objects[dropObjects.SelectedIndex].trait_type[dropParamPath.SelectedIndex],
 				highlight_color = "-8355585",
 				highlight_value = 1,
-				footer = _objects[dropObjects.SelectedIndex].footer[dropParamPath.SelectedIndex]
+				footer = _objects[dropObjects.SelectedIndex].footer[dropParamPath.SelectedIndex],
+				default_interp = "kTraitInterpLinear"
 			};
 			//alter the data if it's a sample object being added. Save the sample name instead
 			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
