@@ -103,11 +103,23 @@ namespace Thumper_Custom_Level_Editor
 				dropLeafInterp.SelectedIndexChanged += new EventHandler(dropLeafInterp_SelectedIndexChanged);
 
 				//check if the current track has param_path set. If not, disable some controls
+				/*
 				if (_tracks[_selecttrack].param_path != null)
 					return;
 				btnTrackColorDialog.Enabled = false;
 				NUD_TrackDoubleclick.Enabled = false;
 				NUD_TrackHighlight.Enabled = false;
+				*/
+				if (txtTrait.Text == "kTraitBool")
+					toolTip1.SetToolTip(txtTrait, "BOOL: accepts values 1 (on) or 0 (off).");
+				else if (txtTrait.Text == "kTraitAction")
+					toolTip1.SetToolTip(txtTrait, "ACTION: accepts values 1 (activate).");
+				else if (txtTrait.Text == "kTraitFloat")
+					toolTip1.SetToolTip(txtTrait, "FLOAT: accepts decimal values from -32000.0000 to 32000.0000.");
+				else if (txtTrait.Text == "kTraitInt")
+					toolTip1.SetToolTip(txtTrait, "INT: accepts integer (no decimal) values from -32000 to 32000.");
+				else if (txtTrait.Text == "kTraitColor")
+					toolTip1.SetToolTip(txtTrait, "COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors.");
 			}
 			catch { }
 		}
