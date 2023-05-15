@@ -1494,7 +1494,7 @@
             // 
             this.btnTrackColorImport.BackColor = System.Drawing.Color.Gray;
             this.btnTrackColorImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorImport.Location = new System.Drawing.Point(3, 439);
+            this.btnTrackColorImport.Location = new System.Drawing.Point(3, 458);
             this.btnTrackColorImport.Name = "btnTrackColorImport";
             this.btnTrackColorImport.Size = new System.Drawing.Size(112, 23);
             this.btnTrackColorImport.TabIndex = 100;
@@ -1506,7 +1506,7 @@
             // 
             this.btnTrackColorExport.BackColor = System.Drawing.Color.Gray;
             this.btnTrackColorExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorExport.Location = new System.Drawing.Point(3, 417);
+            this.btnTrackColorExport.Location = new System.Drawing.Point(3, 436);
             this.btnTrackColorExport.Name = "btnTrackColorExport";
             this.btnTrackColorExport.Size = new System.Drawing.Size(112, 23);
             this.btnTrackColorExport.TabIndex = 99;
@@ -1642,7 +1642,7 @@
             this.NUD_TrackDoubleclick.DecimalPlaces = 2;
             this.NUD_TrackDoubleclick.Enabled = false;
             this.NUD_TrackDoubleclick.ForeColor = System.Drawing.Color.White;
-            this.NUD_TrackDoubleclick.Location = new System.Drawing.Point(113, 387);
+            this.NUD_TrackDoubleclick.Location = new System.Drawing.Point(113, 406);
             this.NUD_TrackDoubleclick.Maximum = new decimal(new int[] {
             720,
             0,
@@ -1663,7 +1663,7 @@
             this.NUD_TrackHighlight.DecimalPlaces = 2;
             this.NUD_TrackHighlight.Enabled = false;
             this.NUD_TrackHighlight.ForeColor = System.Drawing.Color.White;
-            this.NUD_TrackHighlight.Location = new System.Drawing.Point(113, 364);
+            this.NUD_TrackHighlight.Location = new System.Drawing.Point(113, 383);
             this.NUD_TrackHighlight.Maximum = new decimal(new int[] {
             720,
             0,
@@ -1695,7 +1695,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(6, 315);
+            this.label18.Location = new System.Drawing.Point(6, 334);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(113, 13);
             this.label18.TabIndex = 60;
@@ -1706,7 +1706,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(18, 366);
+            this.label17.Location = new System.Drawing.Point(18, 385);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(89, 13);
             this.label17.TabIndex = 59;
@@ -1717,7 +1717,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(14, 389);
+            this.label16.Location = new System.Drawing.Point(14, 408);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(93, 13);
             this.label16.TabIndex = 56;
@@ -1728,7 +1728,7 @@
             this.btnTrackColorDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnTrackColorDialog.Enabled = false;
             this.btnTrackColorDialog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorDialog.Location = new System.Drawing.Point(113, 338);
+            this.btnTrackColorDialog.Location = new System.Drawing.Point(113, 357);
             this.btnTrackColorDialog.Name = "btnTrackColorDialog";
             this.btnTrackColorDialog.Size = new System.Drawing.Size(57, 23);
             this.btnTrackColorDialog.TabIndex = 55;
@@ -1741,7 +1741,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(39, 343);
+            this.label15.Location = new System.Drawing.Point(39, 362);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(68, 13);
             this.label15.TabIndex = 54;
@@ -1751,7 +1751,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label14.Location = new System.Drawing.Point(8, 310);
+            this.label14.Location = new System.Drawing.Point(8, 329);
             this.label14.MaximumSize = new System.Drawing.Size(0, 2);
             this.label14.MinimumSize = new System.Drawing.Size(160, 0);
             this.label14.Name = "label14";
@@ -1860,7 +1860,7 @@
             // 
             // dropTimeSig
             // 
-            this.dropTimeSig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropTimeSig.BackColor = System.Drawing.Color.Black;
             this.dropTimeSig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropTimeSig.ForeColor = System.Drawing.Color.White;
             this.dropTimeSig.FormattingEnabled = true;
