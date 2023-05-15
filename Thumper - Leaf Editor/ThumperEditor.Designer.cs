@@ -1468,7 +1468,8 @@
             this.btnLEafInterpLinear.Name = "btnLEafInterpLinear";
             this.btnLEafInterpLinear.Size = new System.Drawing.Size(25, 25);
             this.btnLEafInterpLinear.TabIndex = 103;
-            this.toolTip1.SetToolTip(this.btnLEafInterpLinear, "Linear interpolation between selected start and end beats.");
+            this.toolTip1.SetToolTip(this.btnLEafInterpLinear, "Linear interpolation between selected start and end beats.\r\nHold CTRL to select m" +
+        "ultiple cells.");
             this.btnLEafInterpLinear.UseCompatibleTextRendering = true;
             this.btnLEafInterpLinear.UseVisualStyleBackColor = false;
             this.btnLEafInterpLinear.Click += new System.EventHandler(this.btnLEafInterpLinear_Click);
@@ -1991,6 +1992,7 @@
             // 
             // btnLvlLeafCopy
             // 
+            this.btnLvlLeafCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLvlLeafCopy.BackColor = System.Drawing.Color.Gray;
             this.btnLvlLeafCopy.Enabled = false;
             this.btnLvlLeafCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -4521,7 +4523,6 @@
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;

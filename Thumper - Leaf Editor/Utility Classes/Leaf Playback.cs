@@ -50,6 +50,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if the playback is active, stop it. Otherwise, continue below
 			if (_playing) {
+				mTimer1.Stop();
 				_playing = false;
 				btnTrackPlayback.ForeColor = Color.Green;
 				btnTrackPlayback.Image = Properties.Resources.icon_play;
