@@ -287,6 +287,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Cyotek.Windows.Forms.ColorPicker">
+      <Version>1.7.2</Version>
+    </PackageReference>
     <PackageReference Include="Fmod5Sharp">
       <Version>3.0.1</Version>
     </PackageReference>
