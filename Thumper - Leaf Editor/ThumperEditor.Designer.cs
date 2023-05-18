@@ -1601,16 +1601,15 @@
             // 
             // btnLeafObjRefresh
             // 
-            this.btnLeafObjRefresh.BackColor = System.Drawing.Color.Transparent;
-            this.btnLeafObjRefresh.FlatAppearance.BorderSize = 0;
+            this.btnLeafObjRefresh.BackColor = System.Drawing.Color.Gray;
             this.btnLeafObjRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeafObjRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafObjRefresh.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnLeafObjRefresh.Location = new System.Drawing.Point(150, 15);
+            this.btnLeafObjRefresh.ForeColor = System.Drawing.Color.Aqua;
+            this.btnLeafObjRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
+            this.btnLeafObjRefresh.Location = new System.Drawing.Point(146, 10);
             this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
-            this.btnLeafObjRefresh.Size = new System.Drawing.Size(20, 22);
+            this.btnLeafObjRefresh.Size = new System.Drawing.Size(22, 22);
             this.btnLeafObjRefresh.TabIndex = 101;
-            this.btnLeafObjRefresh.Text = "↻";
             this.toolTip1.SetToolTip(this.btnLeafObjRefresh, "Reload list of available objects from track_objects.txt");
             this.btnLeafObjRefresh.UseCompatibleTextRendering = true;
             this.btnLeafObjRefresh.UseVisualStyleBackColor = false;
@@ -2041,13 +2040,14 @@
             this.btnLvlRefreshBeats.BackColor = System.Drawing.Color.Gray;
             this.btnLvlRefreshBeats.Enabled = false;
             this.btnLvlRefreshBeats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLvlRefreshBeats.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLvlRefreshBeats.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlRefreshBeats.ForeColor = System.Drawing.Color.Aqua;
             this.btnLvlRefreshBeats.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
             this.btnLvlRefreshBeats.Location = new System.Drawing.Point(217, 31);
             this.btnLvlRefreshBeats.Name = "btnLvlRefreshBeats";
             this.btnLvlRefreshBeats.Size = new System.Drawing.Size(22, 22);
             this.btnLvlRefreshBeats.TabIndex = 121;
+            this.btnLvlRefreshBeats.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolTip1.SetToolTip(this.btnLvlRefreshBeats, "Refreshes the beat count column without having to remove and re-add a leaf");
             this.btnLvlRefreshBeats.UseCompatibleTextRendering = true;
             this.btnLvlRefreshBeats.UseVisualStyleBackColor = false;
@@ -2098,11 +2098,13 @@
             this.btnLvlLoopRefresh.BackColor = System.Drawing.Color.Gray;
             this.btnLvlLoopRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLoopRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLvlLoopRefresh.Location = new System.Drawing.Point(520, 357);
+            this.btnLvlLoopRefresh.ForeColor = System.Drawing.Color.Aqua;
+            this.btnLvlLoopRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
+            this.btnLvlLoopRefresh.Location = new System.Drawing.Point(499, 268);
             this.btnLvlLoopRefresh.Name = "btnLvlLoopRefresh";
-            this.btnLvlLoopRefresh.Size = new System.Drawing.Size(102, 24);
+            this.btnLvlLoopRefresh.Size = new System.Drawing.Size(22, 22);
             this.btnLvlLoopRefresh.TabIndex = 71;
-            this.btnLvlLoopRefresh.Text = "Refresh Samples";
+            this.toolTip1.SetToolTip(this.btnLvlLoopRefresh, "Reloads list of available samples from samp_ files in the Working Folder");
             this.btnLvlLoopRefresh.UseVisualStyleBackColor = false;
             this.btnLvlLoopRefresh.Click += new System.EventHandler(this.btnLvlLoopRefresh_Click);
             // 
@@ -2826,11 +2828,11 @@
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelMaster.Controls.Add(this.btnMasterRefreshLvl);
             this.panelMaster.Controls.Add(this.btnMasterLvlCopy);
             this.panelMaster.Controls.Add(this.btnMasterOpenRest);
             this.panelMaster.Controls.Add(this.btnMasterOpenLeader);
             this.panelMaster.Controls.Add(this.label37);
-            this.panelMaster.Controls.Add(this.btnMasterRefreshLvl);
             this.panelMaster.Controls.Add(this.btnMasterOpenCheckpoint);
             this.panelMaster.Controls.Add(this.btnMasterOpenIntro);
             this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
@@ -2901,6 +2903,7 @@
             this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenRest.TabIndex = 118;
             this.btnMasterOpenRest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenRest, "Load lvl into Lvl Editor");
             this.btnMasterOpenRest.UseVisualStyleBackColor = false;
             this.btnMasterOpenRest.Click += new System.EventHandler(this.btnMasterOpenRest_Click);
             // 
@@ -2918,6 +2921,7 @@
             this.btnMasterOpenLeader.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenLeader.TabIndex = 117;
             this.btnMasterOpenLeader.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenLeader, "Load lvl into Lvl Editor");
             this.btnMasterOpenLeader.UseVisualStyleBackColor = false;
             this.btnMasterOpenLeader.Click += new System.EventHandler(this.btnMasterOpenLeader_Click);
             // 
@@ -2939,11 +2943,13 @@
             this.btnMasterRefreshLvl.BackColor = System.Drawing.Color.Gray;
             this.btnMasterRefreshLvl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterRefreshLvl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterRefreshLvl.Location = new System.Drawing.Point(306, 146);
+            this.btnMasterRefreshLvl.ForeColor = System.Drawing.Color.Aqua;
+            this.btnMasterRefreshLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
+            this.btnMasterRefreshLvl.Location = new System.Drawing.Point(401, 83);
             this.btnMasterRefreshLvl.Name = "btnMasterRefreshLvl";
-            this.btnMasterRefreshLvl.Size = new System.Drawing.Size(76, 23);
+            this.btnMasterRefreshLvl.Size = new System.Drawing.Size(22, 22);
             this.btnMasterRefreshLvl.TabIndex = 94;
-            this.btnMasterRefreshLvl.Text = "Refresh Lvls";
+            this.toolTip1.SetToolTip(this.btnMasterRefreshLvl, "Refresh list of available lvl\'s");
             this.btnMasterRefreshLvl.UseVisualStyleBackColor = false;
             this.btnMasterRefreshLvl.Click += new System.EventHandler(this.btnMasterRefreshLvl_Click);
             // 
@@ -2956,11 +2962,12 @@
             this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenCheckpoint.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(424, 123);
+            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(424, 143);
             this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
             this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenCheckpoint.TabIndex = 115;
             this.btnMasterOpenCheckpoint.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenCheckpoint, "Load lvl into Lvl Editor");
             this.btnMasterOpenCheckpoint.UseVisualStyleBackColor = false;
             this.btnMasterOpenCheckpoint.Click += new System.EventHandler(this.btnMasterOpenCheckpoint_Click);
             // 
@@ -2973,11 +2980,12 @@
             this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenIntro.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenIntro.Location = new System.Drawing.Point(424, 85);
+            this.btnMasterOpenIntro.Location = new System.Drawing.Point(424, 105);
             this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
             this.btnMasterOpenIntro.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenIntro.TabIndex = 114;
             this.btnMasterOpenIntro.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenIntro, "Load lvl into Lvl Editor");
             this.btnMasterOpenIntro.UseVisualStyleBackColor = false;
             this.btnMasterOpenIntro.Click += new System.EventHandler(this.btnMasterOpenIntro_Click);
             // 
@@ -3170,7 +3178,7 @@
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(304, 110);
+            this.label33.Location = new System.Drawing.Point(304, 130);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(78, 13);
             this.label33.TabIndex = 101;
@@ -3185,7 +3193,7 @@
             this.dropMasterCheck.FormattingEnabled = true;
             this.dropMasterCheck.Items.AddRange(new object[] {
             "skybox_cube"});
-            this.dropMasterCheck.Location = new System.Drawing.Point(307, 124);
+            this.dropMasterCheck.Location = new System.Drawing.Point(307, 144);
             this.dropMasterCheck.Name = "dropMasterCheck";
             this.dropMasterCheck.Size = new System.Drawing.Size(116, 21);
             this.dropMasterCheck.TabIndex = 100;
@@ -3197,7 +3205,7 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.White;
-            this.label32.Location = new System.Drawing.Point(304, 72);
+            this.label32.Location = new System.Drawing.Point(304, 92);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(45, 13);
             this.label32.TabIndex = 99;
@@ -3214,7 +3222,7 @@
             this.dropMasterIntro.FormattingEnabled = true;
             this.dropMasterIntro.Items.AddRange(new object[] {
             "skybox_cube"});
-            this.dropMasterIntro.Location = new System.Drawing.Point(307, 86);
+            this.dropMasterIntro.Location = new System.Drawing.Point(307, 106);
             this.dropMasterIntro.Name = "dropMasterIntro";
             this.dropMasterIntro.Size = new System.Drawing.Size(116, 21);
             this.dropMasterIntro.TabIndex = 98;
@@ -3572,11 +3580,13 @@
             this.btnGateRefresh.BackColor = System.Drawing.Color.Gray;
             this.btnGateRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGateRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGateRefresh.Location = new System.Drawing.Point(249, 236);
+            this.btnGateRefresh.ForeColor = System.Drawing.Color.Aqua;
+            this.btnGateRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
+            this.btnGateRefresh.Location = new System.Drawing.Point(246, 236);
             this.btnGateRefresh.Name = "btnGateRefresh";
-            this.btnGateRefresh.Size = new System.Drawing.Size(76, 23);
+            this.btnGateRefresh.Size = new System.Drawing.Size(23, 23);
             this.btnGateRefresh.TabIndex = 119;
-            this.btnGateRefresh.Text = "Refresh Lvls";
+            this.toolTip1.SetToolTip(this.btnGateRefresh, "Refresh list of available lvl\'s");
             this.btnGateRefresh.UseVisualStyleBackColor = false;
             this.btnGateRefresh.Click += new System.EventHandler(this.btnGateRefresh_Click);
             // 
@@ -3594,6 +3604,7 @@
             this.btnGateOpenRestart.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenRestart.TabIndex = 133;
             this.btnGateOpenRestart.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnGateOpenRestart, "Load lvl into Lvl Editor");
             this.btnGateOpenRestart.UseVisualStyleBackColor = false;
             this.btnGateOpenRestart.Click += new System.EventHandler(this.btnGateOpenRestart_Click);
             // 
@@ -3611,6 +3622,7 @@
             this.btnGateOpenPost.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPost.TabIndex = 132;
             this.btnGateOpenPost.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnGateOpenPost, "Load lvl into Lvl Editor");
             this.btnGateOpenPost.UseVisualStyleBackColor = false;
             this.btnGateOpenPost.Click += new System.EventHandler(this.btnGateOpenPost_Click);
             // 
@@ -3628,6 +3640,7 @@
             this.btnGateOpenPre.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPre.TabIndex = 119;
             this.btnGateOpenPre.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnGateOpenPre, "Load lvl into Lvl Editor");
             this.btnGateOpenPre.UseVisualStyleBackColor = false;
             this.btnGateOpenPre.Click += new System.EventHandler(this.btnGateOpenPre_Click);
             // 
@@ -4572,12 +4585,12 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.Controls.Add(this.panelGate);
             this.Controls.Add(this.panelLeaf);
             this.Controls.Add(this.panelLevel);
             this.Controls.Add(this.panelSample);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelWorkingFolder);
-            this.Controls.Add(this.panelGate);
             this.Controls.Add(this.panelMaster);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
