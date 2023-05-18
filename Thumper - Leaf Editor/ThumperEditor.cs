@@ -638,10 +638,5 @@ namespace Thumper_Custom_Level_Editor
             menuStrip.Location = new Point(0, 0);
             _menuloc = new Point(0, 0);
         }
-
-        private void btnLvlRefreshBeats_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
