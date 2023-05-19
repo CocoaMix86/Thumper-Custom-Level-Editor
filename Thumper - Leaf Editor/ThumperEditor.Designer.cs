@@ -328,6 +328,7 @@
             this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -358,6 +359,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.panelSample.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -4031,6 +4033,7 @@
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelWorkingFolder.Controls.Add(this.pictureBox1);
             this.panelWorkingFolder.Controls.Add(this.btnWorkCopy);
             this.panelWorkingFolder.Controls.Add(this.btnWorkDelete);
             this.panelWorkingFolder.Controls.Add(this.btnGatePanelOpen);
@@ -4558,6 +4561,16 @@
             this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Channel.Width = 76;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
+            this.pictureBox1.Location = new System.Drawing.Point(211, 357);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 60);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 135;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4625,6 +4638,7 @@
             this.panelSample.ResumeLayout(false);
             this.panelSample.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4902,6 +4916,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

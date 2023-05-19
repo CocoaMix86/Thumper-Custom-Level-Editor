@@ -63,6 +63,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap beeble {
+            get {
+                object obj = ResourceManager.GetObject("beeble", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap bosssectionhelp {
             get {
                 object obj = ResourceManager.GetObject("bosssectionhelp", resourceCulture);
@@ -143,7 +153,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized string similar to {
         ///&quot;masterLvlList&quot;: &quot;CHECKPOINT COLUMN\nIf checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a checkpoint and will flow into the next lvl.\n\nPLAY+ COLUMN\nIf checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. This is useful for tutorial levels in Play, and then removing them for Play+.\n\nISOLATE\nWhen checked, only isolated levels will play in game. Useful for testing specific sublevels without replaying the entire thing.&quot;,
-        ///&quot;masterChe [rest of string was truncated]&quot;;.
+        ///&quot;gatePre&quot;: [rest of string was truncated]&quot;;.
         /// </summary>
         public static string helptext {
             get {
