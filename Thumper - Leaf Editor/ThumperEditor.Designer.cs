@@ -1321,7 +1321,7 @@
             this.panelZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelZoom.Controls.Add(this.label10);
             this.panelZoom.Controls.Add(this.trackZoom);
-            this.panelZoom.Location = new System.Drawing.Point(1260, -5);
+            this.panelZoom.Location = new System.Drawing.Point(506, 1);
             this.panelZoom.Name = "panelZoom";
             this.panelZoom.Size = new System.Drawing.Size(131, 27);
             this.panelZoom.TabIndex = 43;
@@ -2066,7 +2066,7 @@
             this.btnLvlCopyTunnel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlCopyTunnel.ForeColor = System.Drawing.Color.PaleGreen;
             this.btnLvlCopyTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy;
-            this.btnLvlCopyTunnel.Location = new System.Drawing.Point(250, 268);
+            this.btnLvlCopyTunnel.Location = new System.Drawing.Point(250, 274);
             this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
             this.btnLvlCopyTunnel.Size = new System.Drawing.Size(22, 22);
             this.btnLvlCopyTunnel.TabIndex = 120;
@@ -2105,7 +2105,7 @@
             this.btnLvlLoopRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlLoopRefresh.ForeColor = System.Drawing.Color.Aqua;
             this.btnLvlLoopRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
-            this.btnLvlLoopRefresh.Location = new System.Drawing.Point(499, 268);
+            this.btnLvlLoopRefresh.Location = new System.Drawing.Point(499, 274);
             this.btnLvlLoopRefresh.Name = "btnLvlLoopRefresh";
             this.btnLvlLoopRefresh.Size = new System.Drawing.Size(22, 22);
             this.btnLvlLoopRefresh.TabIndex = 71;
@@ -2236,7 +2236,7 @@
             this.btnLvlLoopAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLoopAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlLoopAdd.ForeColor = System.Drawing.Color.Black;
-            this.btnLvlLoopAdd.Location = new System.Drawing.Point(499, 223);
+            this.btnLvlLoopAdd.Location = new System.Drawing.Point(499, 229);
             this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
             this.btnLvlLoopAdd.Size = new System.Drawing.Size(22, 22);
             this.btnLvlLoopAdd.TabIndex = 85;
@@ -2273,7 +2273,7 @@
             this.btnLvlLoopDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLoopDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlLoopDelete.ForeColor = System.Drawing.Color.Black;
-            this.btnLvlLoopDelete.Location = new System.Drawing.Point(499, 245);
+            this.btnLvlLoopDelete.Location = new System.Drawing.Point(499, 251);
             this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
             this.btnLvlLoopDelete.Size = new System.Drawing.Size(22, 22);
             this.btnLvlLoopDelete.TabIndex = 86;
@@ -2289,7 +2289,7 @@
             this.btnLvlPathAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlPathAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlPathAdd.ForeColor = System.Drawing.Color.Black;
-            this.btnLvlPathAdd.Location = new System.Drawing.Point(250, 223);
+            this.btnLvlPathAdd.Location = new System.Drawing.Point(250, 229);
             this.btnLvlPathAdd.Name = "btnLvlPathAdd";
             this.btnLvlPathAdd.Size = new System.Drawing.Size(22, 22);
             this.btnLvlPathAdd.TabIndex = 83;
@@ -2305,7 +2305,7 @@
             this.btnLvlPathDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlPathDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlPathDelete.ForeColor = System.Drawing.Color.Black;
-            this.btnLvlPathDelete.Location = new System.Drawing.Point(250, 245);
+            this.btnLvlPathDelete.Location = new System.Drawing.Point(250, 251);
             this.btnLvlPathDelete.Name = "btnLvlPathDelete";
             this.btnLvlPathDelete.Size = new System.Drawing.Size(22, 22);
             this.btnLvlPathDelete.TabIndex = 84;
@@ -2320,7 +2320,7 @@
             this.label22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(522, 210);
+            this.label22.Location = new System.Drawing.Point(522, 216);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(99, 13);
             this.label22.TabIndex = 82;
@@ -2363,7 +2363,7 @@
             this.lvlLoopTracks.DefaultCellStyle = dataGridViewCellStyle6;
             this.lvlLoopTracks.EnableHeadersVisualStyles = false;
             this.lvlLoopTracks.GridColor = System.Drawing.Color.Black;
-            this.lvlLoopTracks.Location = new System.Drawing.Point(522, 223);
+            this.lvlLoopTracks.Location = new System.Drawing.Point(522, 229);
             this.lvlLoopTracks.MultiSelect = false;
             this.lvlLoopTracks.Name = "lvlLoopTracks";
             this.lvlLoopTracks.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -2450,7 +2450,7 @@
             this.lvlSeqObjs.DefaultCellStyle = dataGridViewCellStyle9;
             this.lvlSeqObjs.EnableHeadersVisualStyles = false;
             this.lvlSeqObjs.GridColor = System.Drawing.Color.Black;
-            this.lvlSeqObjs.Location = new System.Drawing.Point(273, 19);
+            this.lvlSeqObjs.Location = new System.Drawing.Point(273, 30);
             this.lvlSeqObjs.Name = "lvlSeqObjs";
             this.lvlSeqObjs.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -2465,7 +2465,7 @@
             this.lvlSeqObjs.RowTemplate.Height = 200;
             this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlSeqObjs.Size = new System.Drawing.Size(595, 185);
+            this.lvlSeqObjs.Size = new System.Drawing.Size(595, 180);
             this.lvlSeqObjs.TabIndex = 68;
             this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
             this.lvlSeqObjs.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.lvlSeqObjs_ColumnAdded);
@@ -2478,7 +2478,7 @@
             this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(273, 210);
+            this.label21.Location = new System.Drawing.Point(273, 216);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(150, 13);
             this.label21.TabIndex = 80;
@@ -2519,7 +2519,7 @@
             this.lvlLeafPaths.DefaultCellStyle = dataGridViewCellStyle12;
             this.lvlLeafPaths.EnableHeadersVisualStyles = false;
             this.lvlLeafPaths.GridColor = System.Drawing.Color.Black;
-            this.lvlLeafPaths.Location = new System.Drawing.Point(273, 223);
+            this.lvlLeafPaths.Location = new System.Drawing.Point(273, 229);
             this.lvlLeafPaths.MultiSelect = false;
             this.lvlLeafPaths.Name = "lvlLeafPaths";
             this.lvlLeafPaths.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -2547,7 +2547,7 @@
             this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(273, 6);
+            this.label20.Location = new System.Drawing.Point(273, 17);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(182, 13);
             this.label20.TabIndex = 68;
@@ -2629,7 +2629,7 @@
             this.btnLvlSeqClear.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlSeqClear.ForeColor = System.Drawing.Color.Red;
             this.btnLvlSeqClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_trash;
-            this.btnLvlSeqClear.Location = new System.Drawing.Point(250, 69);
+            this.btnLvlSeqClear.Location = new System.Drawing.Point(250, 79);
             this.btnLvlSeqClear.Name = "btnLvlSeqClear";
             this.btnLvlSeqClear.Size = new System.Drawing.Size(22, 22);
             this.btnLvlSeqClear.TabIndex = 73;
@@ -2644,7 +2644,7 @@
             this.btnLvlSeqAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlSeqAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlSeqAdd.ForeColor = System.Drawing.Color.Black;
-            this.btnLvlSeqAdd.Location = new System.Drawing.Point(250, 19);
+            this.btnLvlSeqAdd.Location = new System.Drawing.Point(250, 29);
             this.btnLvlSeqAdd.Name = "btnLvlSeqAdd";
             this.btnLvlSeqAdd.Size = new System.Drawing.Size(22, 22);
             this.btnLvlSeqAdd.TabIndex = 69;
@@ -2660,7 +2660,7 @@
             this.btnLvlSeqDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlSeqDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlSeqDelete.ForeColor = System.Drawing.Color.Black;
-            this.btnLvlSeqDelete.Location = new System.Drawing.Point(250, 41);
+            this.btnLvlSeqDelete.Location = new System.Drawing.Point(250, 51);
             this.btnLvlSeqDelete.Name = "btnLvlSeqDelete";
             this.btnLvlSeqDelete.Size = new System.Drawing.Size(22, 22);
             this.btnLvlSeqDelete.TabIndex = 70;
@@ -2686,7 +2686,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.label28);
             this.panel1.Controls.Add(this.trackLvlVolumeZoom);
-            this.panel1.Location = new System.Drawing.Point(701, -5);
+            this.panel1.Location = new System.Drawing.Point(457, 7);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(131, 27);
             this.panel1.TabIndex = 92;
@@ -2696,7 +2696,7 @@
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.White;
-            this.label28.Location = new System.Drawing.Point(3, 6);
+            this.label28.Location = new System.Drawing.Point(1, 6);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(38, 13);
             this.label28.TabIndex = 42;
@@ -4567,10 +4567,10 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
-            this.Controls.Add(this.panelSample);
-            this.Controls.Add(this.panelGate);
             this.Controls.Add(this.panelLeaf);
             this.Controls.Add(this.panelLevel);
+            this.Controls.Add(this.panelSample);
+            this.Controls.Add(this.panelGate);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelWorkingFolder);
             this.Controls.Add(this.panelMaster);
