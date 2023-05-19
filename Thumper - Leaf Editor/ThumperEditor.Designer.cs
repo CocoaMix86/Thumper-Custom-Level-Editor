@@ -1318,7 +1318,6 @@
             // 
             // panelZoom
             // 
-            this.panelZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelZoom.Controls.Add(this.label10);
             this.panelZoom.Controls.Add(this.trackZoom);
             this.panelZoom.Location = new System.Drawing.Point(506, 1);
@@ -2683,7 +2682,6 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.label28);
             this.panel1.Controls.Add(this.trackLvlVolumeZoom);
             this.panel1.Location = new System.Drawing.Point(457, 7);
@@ -3001,7 +2999,7 @@
             this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(283, 17);
+            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(220, 17);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new System.Drawing.Size(15, 16);
             this.lblMasterlvllistHelp.TabIndex = 95;
