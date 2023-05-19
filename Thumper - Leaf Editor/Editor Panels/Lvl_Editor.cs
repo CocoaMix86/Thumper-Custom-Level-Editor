@@ -559,6 +559,8 @@ namespace Thumper_Custom_Level_Editor
 				r.HeaderCell.Value = "Volume Track " + r.Index;
 			///mark that lvl is saved (just freshly loaded)
 			SaveLvl(true);
+			//
+			trackLvlVolumeZoom_Scroll(null, null);
 		}
 
 		public void InitializeLvlStuff()

@@ -998,6 +998,8 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackCopy.Enabled = _tracks.Count > 0;
 			//set save flag to true, since it just barely loaded
 			SaveLeaf(true);
+			//re-set the zoom level
+			trackZoom_Scroll(null, null);
 		}
 
 		public JObject LeafBuildSave(string _leafname)
