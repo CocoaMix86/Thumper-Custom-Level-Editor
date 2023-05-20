@@ -798,7 +798,7 @@ namespace Thumper_Custom_Level_Editor
 				grid.Columns[i].Width = 60;
 				grid.Columns[i].MinimumWidth = 2;
 				grid.Columns[i].ReadOnly = false;
-				grid.Columns[i].ValueType = typeof(decimal);
+				//grid.Columns[i].ValueType = typeof(decimal);
 				grid.Columns[i].DefaultCellStyle.Format = "0.######";
 			}
 		}
