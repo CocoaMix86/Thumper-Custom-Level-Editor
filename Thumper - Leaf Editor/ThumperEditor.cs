@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -240,6 +241,8 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(workingfolderFiles, panelWorkingFolder);
             ControlMoverOrResizer.Init(panelSample);
             ControlMoverOrResizer.Init(menuStrip);
+            ControlMoverOrResizer.Init(panelBeeble);
+            ControlMoverOrResizer.Init(pictureBox1, panelBeeble);
             ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
 
             ///import help text
@@ -635,6 +638,41 @@ namespace Thumper_Custom_Level_Editor
         {
             menuStrip.Location = new Point(0, 0);
             _menuloc = new Point(0, 0);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            int i = new Random().Next(0, 7);
+            switch (i) {
+                case 0:
+                    pictureBox1.Image = Properties.Resources.beeblehappy;
+                    break;
+                case 1:
+                    pictureBox1.Image = Properties.Resources.beebleconfuse;
+                    break;
+                case 2:
+                    pictureBox1.Image = Properties.Resources.beeblecool;
+                    break;
+                case 3:
+                    pictureBox1.Image = Properties.Resources.beeblederp;
+                    break;
+                case 4:
+                    pictureBox1.Image = Properties.Resources.beeblelaugh;
+                    break;
+                case 5:
+                    pictureBox1.Image = Properties.Resources.beeblestare;
+                    break;
+                case 6:
+                    pictureBox1.Image = Properties.Resources.beeblethink;
+                    break;
+            }
+            timerBeeble.Start();
+        }
+
+        private void timerBeeble_Tick(object sender, EventArgs e)
+        {
+            timerBeeble.Stop();
+            pictureBox1.Image = Properties.Resources.beeble;
         }
     }
 }

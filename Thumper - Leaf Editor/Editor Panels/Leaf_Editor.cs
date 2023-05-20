@@ -740,6 +740,9 @@ namespace Thumper_Custom_Level_Editor
 
 		public void SaveLeaf(bool save)
 		{
+			//make the beeble emote
+			pictureBox1_Click(null, null);
+
 			_saveleaf = save;
 			if (!save) {
 				if (!lblTrackFileName.Text.Contains("(unsaved)"))

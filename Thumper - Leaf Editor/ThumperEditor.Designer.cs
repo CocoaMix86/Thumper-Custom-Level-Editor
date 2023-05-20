@@ -329,6 +329,8 @@
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panelBeeble = new System.Windows.Forms.Panel();
+            this.timerBeeble = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -360,6 +362,7 @@
             this.panelSample.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelBeeble.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -4033,7 +4036,6 @@
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelWorkingFolder.Controls.Add(this.pictureBox1);
             this.panelWorkingFolder.Controls.Add(this.btnWorkCopy);
             this.panelWorkingFolder.Controls.Add(this.btnWorkDelete);
             this.panelWorkingFolder.Controls.Add(this.btnGatePanelOpen);
@@ -4563,13 +4565,30 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
-            this.pictureBox1.Location = new System.Drawing.Point(211, 357);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(70, 60);
+            this.pictureBox1.Size = new System.Drawing.Size(76, 66);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 135;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // panelBeeble
+            // 
+            this.panelBeeble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.panelBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelBeeble.Controls.Add(this.pictureBox1);
+            this.panelBeeble.Location = new System.Drawing.Point(41, 780);
+            this.panelBeeble.Name = "panelBeeble";
+            this.panelBeeble.Size = new System.Drawing.Size(80, 70);
+            this.panelBeeble.TabIndex = 135;
+            // 
+            // timerBeeble
+            // 
+            this.timerBeeble.Interval = 300;
+            this.timerBeeble.Tick += new System.EventHandler(this.timerBeeble_Tick);
             // 
             // FormLeafEditor
             // 
@@ -4578,6 +4597,7 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.Controls.Add(this.panelBeeble);
             this.Controls.Add(this.panelLeaf);
             this.Controls.Add(this.panelLevel);
             this.Controls.Add(this.panelSample);
@@ -4639,6 +4659,7 @@
             this.panelSample.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelBeeble.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4917,6 +4938,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panelBeeble;
+        private System.Windows.Forms.Timer timerBeeble;
     }
 }
 

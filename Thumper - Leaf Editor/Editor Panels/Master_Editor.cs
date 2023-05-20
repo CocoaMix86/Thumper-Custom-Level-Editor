@@ -501,6 +501,9 @@ namespace Thumper_Custom_Level_Editor
 
 		public void SaveMaster(bool save)
 		{
+			//make the beeble emote
+			pictureBox1_Click(null, null);
+
 			_savemaster = save;
 			if (!save) {
 				if (!lblMasterName.Text.Contains("(unsaved)"))
