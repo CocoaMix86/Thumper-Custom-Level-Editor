@@ -573,11 +573,10 @@ namespace Thumper_Custom_Level_Editor
 			//custom column containing comboboxes per cell
 			DataGridViewComboBoxColumn _dgvlvlpaths = new DataGridViewComboBoxColumn() {
 				DataSource = _lvlpaths,
-				HeaderText = "Path Name"
+				HeaderText = "Path Name",
+				AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 			};
 			lvlLeafPaths.Columns.Add(_dgvlvlpaths);
-			lvlLeafPaths.RowHeadersVisible = false;
-			lvlLeafPaths.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			///
 
 			///customize Loop Track list a bit

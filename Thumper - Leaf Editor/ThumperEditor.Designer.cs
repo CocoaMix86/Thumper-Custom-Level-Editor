@@ -2534,6 +2534,7 @@
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.lvlLeafPaths.RowHeadersVisible = false;
             this.lvlLeafPaths.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.lvlLeafPaths.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.lvlLeafPaths.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
