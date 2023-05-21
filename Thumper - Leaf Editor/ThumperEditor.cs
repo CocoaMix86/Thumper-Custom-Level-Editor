@@ -643,9 +643,9 @@ namespace Thumper_Custom_Level_Editor
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             int i = new Random().Next(0, 101);
-            
+
             if (i >= 0 && i < 10)
-                   pictureBox1.Image = Properties.Resources.beeblehappy;
+                pictureBox1.Image = Properties.Resources.beeblehappy;
             else if (i >= 10 && i < 20)
                 pictureBox1.Image = Properties.Resources.beebleconfuse;
             else if (i >= 20 && i < 30)
@@ -660,8 +660,8 @@ namespace Thumper_Custom_Level_Editor
                 pictureBox1.Image = Properties.Resources.beeblethink;
             else if (i >= 70 && i < 80)
                 pictureBox1.Image = Properties.Resources.beebletiny;
-            else if (i >= 80 && i < 90)
-                pictureBox1.Image = Properties.Resources.beebledance;
+            else if (i >= 80 && i < 90) 
+                pictureBox1.Image = Properties.Resources.beeblelove;
             else if (i >= 90 && i < 100)
                 pictureBox1.Image = Properties.Resources.beeblespin;
             else if (i == 100)

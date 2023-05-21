@@ -247,6 +247,7 @@
     <None Include="image assets\beeblegold.png" />
     <None Include="image assets\beeblespin.gif" />
     <None Include="image assets\beebledance.gif" />
+    <None Include="image assets\beeblelove.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
