@@ -1801,7 +1801,7 @@
             this.panel4.Controls.Add(this.NUD_TrackDoubleclick);
             this.panel4.Location = new System.Drawing.Point(5, 325);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(180, 168);
+            this.panel4.Size = new System.Drawing.Size(180, 154);
             this.panel4.TabIndex = 110;
             // 
             // label18
