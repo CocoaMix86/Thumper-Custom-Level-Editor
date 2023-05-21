@@ -70,19 +70,21 @@ namespace Thumper_Custom_Level_Editor
 
 			try {
 				//if track is a multi-lane object, split param_path from lane so both values can be used to update their dropdown boxes
-				if (_tracks[_selecttrack].friendly_param.Contains("right") || _tracks[_selecttrack].friendly_param.Contains("left") || _tracks[_selecttrack].friendly_param.Contains("middle")) {
+				if (_tracks[_selecttrack].friendly_param.Contains("right") || _tracks[_selecttrack].friendly_param.Contains("left") || _tracks[_selecttrack].friendly_param.Contains("center")) {
 					_params = _tracks[_selecttrack].friendly_param.Split(new string[] { ", " }, StringSplitOptions.None).ToList();
 				}
 				else
-					_params = new List<string>() { _tracks[_selecttrack].friendly_param, "middle" };
+					_params = new List<string>() { _tracks[_selecttrack].friendly_param, "center" };
 				//set all controls to their values stored in _tracks
 				dropObjects.SelectedIndex = dropObjects.FindStringExact(_tracks[_selecttrack].friendly_type);
 				dropParamPath.SelectedIndex = dropParamPath.FindStringExact(_params[0]);
 				//needs a different selection method if it's a sample
 				if (_tracks[_selecttrack].param_path == "play")
 					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_tracks[_selecttrack].obj_name);
-				else
+				else if (_params.Count >= 2)
 					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[1]);
+				else //track lane only uses param[0]
+					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[0]);
 				txtTrait.Text = _tracks[_selecttrack].trait_type;
 				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color));
 				//remove event handlers from a few controls so they don't trigger when their values change
@@ -93,6 +95,7 @@ namespace Thumper_Custom_Level_Editor
 				//set values from _tracks
 				//NUD_TrackDoubleclick.Value = Decimal.Parse(_tracks[_selecttrack][8]);
 				NUD_TrackHighlight.Value = (decimal)_tracks[_selecttrack].highlight_value;
+				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color));
 				txtDefault.Value = (decimal)_tracks[_selecttrack]._default;
 				dropLeafStep.SelectedItem = _tracks[_selecttrack].step;
 				dropLeafInterp.SelectedItem = _tracks[_selecttrack].default_interp;
@@ -242,7 +245,7 @@ namespace Thumper_Custom_Level_Editor
 			//this is only here to stop that
 			try {
 				label11.Text = "Lane";
-				dropTrackLane.DataSource = new List<string>() { "left 2", "left 1", "middle", "right 1", "right 2" };
+				dropTrackLane.DataSource = new List<string>() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
 				//when an object is chosen, unlock the param_path options and set datasource
 				dropParamPath.DataSource = _objects[dropObjects.SelectedIndex].param_displayname;
 				//switch index back and forth to trigger event

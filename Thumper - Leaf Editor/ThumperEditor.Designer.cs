@@ -1634,11 +1634,11 @@
             this.dropTrackLane.ForeColor = System.Drawing.Color.White;
             this.dropTrackLane.FormattingEnabled = true;
             this.dropTrackLane.Items.AddRange(new object[] {
-            "left 2",
-            "left 1",
-            "middle",
-            "right 1",
-            "right 2"});
+            "lane left 2",
+            "lane left 1",
+            "lane center",
+            "lane right 1",
+            "lane right 2"});
             this.dropTrackLane.Location = new System.Drawing.Point(74, 96);
             this.dropTrackLane.Name = "dropTrackLane";
             this.dropTrackLane.RightToLeft = System.Windows.Forms.RightToLeft.No;
