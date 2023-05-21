@@ -93,9 +93,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap beebledance {
+            get {
+                object obj = ResourceManager.GetObject("beebledance", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap beeblederp {
             get {
                 object obj = ResourceManager.GetObject("beeblederp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap beeblegold {
+            get {
+                object obj = ResourceManager.GetObject("beeblegold", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,6 +143,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap beeblespin {
+            get {
+                object obj = ResourceManager.GetObject("beeblespin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap beeblestare {
             get {
                 object obj = ResourceManager.GetObject("beeblestare", resourceCulture);
@@ -136,6 +166,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static System.Drawing.Bitmap beeblethink {
             get {
                 object obj = ResourceManager.GetObject("beeblethink", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap beebletiny {
+            get {
+                object obj = ResourceManager.GetObject("beebletiny", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

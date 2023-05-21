@@ -642,30 +642,31 @@ namespace Thumper_Custom_Level_Editor
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            int i = new Random().Next(0, 7);
-            switch (i) {
-                case 0:
-                    pictureBox1.Image = Properties.Resources.beeblehappy;
-                    break;
-                case 1:
-                    pictureBox1.Image = Properties.Resources.beebleconfuse;
-                    break;
-                case 2:
-                    pictureBox1.Image = Properties.Resources.beeblecool;
-                    break;
-                case 3:
-                    pictureBox1.Image = Properties.Resources.beeblederp;
-                    break;
-                case 4:
-                    pictureBox1.Image = Properties.Resources.beeblelaugh;
-                    break;
-                case 5:
-                    pictureBox1.Image = Properties.Resources.beeblestare;
-                    break;
-                case 6:
-                    pictureBox1.Image = Properties.Resources.beeblethink;
-                    break;
-            }
+            int i = new Random().Next(0, 101);
+            
+            if (i >= 0 && i < 10)
+                   pictureBox1.Image = Properties.Resources.beeblehappy;
+            else if (i >= 10 && i < 20)
+                pictureBox1.Image = Properties.Resources.beebleconfuse;
+            else if (i >= 20 && i < 30)
+                pictureBox1.Image = Properties.Resources.beeblecool;
+            else if (i >= 30 && i < 40)
+                pictureBox1.Image = Properties.Resources.beeblederp;
+            else if (i >= 40 && i < 50)
+                pictureBox1.Image = Properties.Resources.beeblelaugh;
+            else if (i >= 50 && i < 60)
+                pictureBox1.Image = Properties.Resources.beeblestare;
+            else if (i >= 60 && i < 70)
+                pictureBox1.Image = Properties.Resources.beeblethink;
+            else if (i >= 70 && i < 80)
+                pictureBox1.Image = Properties.Resources.beebletiny;
+            else if (i >= 80 && i < 90)
+                pictureBox1.Image = Properties.Resources.beebledance;
+            else if (i >= 90 && i < 100)
+                pictureBox1.Image = Properties.Resources.beeblespin;
+            else if (i == 100)
+                pictureBox1.Image = Properties.Resources.beeblegold;
+
             timerBeeble.Start();
         }
 
