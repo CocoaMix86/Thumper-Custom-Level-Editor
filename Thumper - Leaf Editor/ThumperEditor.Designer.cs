@@ -1264,7 +1264,7 @@
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Format = "N4";
+            dataGridViewCellStyle2.NullValue = null;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -1284,7 +1284,6 @@
             this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.trackEditor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Format = "N4";
             this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -1475,6 +1474,7 @@
             this.btnTrackClear.Name = "btnTrackClear";
             this.btnTrackClear.Size = new System.Drawing.Size(22, 22);
             this.btnTrackClear.TabIndex = 67;
+            this.toolTip1.SetToolTip(this.btnTrackClear, "Clears the selected track\'s data points. CANNOT BE UNDONE");
             this.btnTrackClear.UseCompatibleTextRendering = true;
             this.btnTrackClear.UseVisualStyleBackColor = false;
             this.btnTrackClear.Click += new System.EventHandler(this.btnTrackClear_Click);
@@ -2636,6 +2636,7 @@
             this.btnLvlSeqClear.Name = "btnLvlSeqClear";
             this.btnLvlSeqClear.Size = new System.Drawing.Size(22, 22);
             this.btnLvlSeqClear.TabIndex = 73;
+            this.toolTip1.SetToolTip(this.btnLvlSeqClear, "Clears the selected track\'s data points. CANNOT BE UNDONE.\r\n");
             this.btnLvlSeqClear.UseCompatibleTextRendering = true;
             this.btnLvlSeqClear.UseVisualStyleBackColor = false;
             this.btnLvlSeqClear.Click += new System.EventHandler(this.btnLvlSeqClear_Click);

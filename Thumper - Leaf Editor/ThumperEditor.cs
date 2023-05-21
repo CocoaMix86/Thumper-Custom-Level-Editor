@@ -279,13 +279,6 @@ namespace Thumper_Custom_Level_Editor
             //
             SaveLeaf(true);
 
-            ///set a bunch of tool tips
-            //Leaf tooltips
-            toolTip1.SetToolTip(btnTrackClear, "Clears the selected track's data points");
-            toolTip1.SetToolTip(btnLeafObjRefresh, "Reloads objects from templates\\track_objects.txt");
-            //Lvl tooltips
-            toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track's data points");
-
             //load size and location data for panels
             panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
             panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
