@@ -285,15 +285,6 @@ namespace Thumper_Custom_Level_Editor
             toolTip1.SetToolTip(btnLeafObjRefresh, "Reloads objects from templates\\track_objects.txt");
             //Lvl tooltips
             toolTip1.SetToolTip(btnLvlSeqClear, "Clears the selected track's data points");
-            //Master tooltips
-            toolTip1.SetToolTip(btnMasterOpenCheckpoint, "Opens the selected checkpoint in the Lvl Editor");
-            toolTip1.SetToolTip(btnMasterOpenIntro, "Opens the selected intro lvl in the Lvl Editor");
-            toolTip1.SetToolTip(btnMasterOpenLeader, "Opens the selected leader lvl in the Lvl Editor");
-            toolTip1.SetToolTip(btnMasterOpenRest, "Opens the selected rest lvl in the Lvl Editor");
-            //Gate tooltips
-            toolTip1.SetToolTip(btnGateOpenPre, "Opens the selected Pre lvl in the Lvl Editor");
-            toolTip1.SetToolTip(btnGateOpenPost, "Opens the selected Post lvl in the Lvl Editor");
-            toolTip1.SetToolTip(btnGateOpenRestart, "Opens the selected Restart lvl in the Lvl Editor");
 
             //load size and location data for panels
             panelLeaf.Size = Properties.Settings.Default.leafeditorsize;

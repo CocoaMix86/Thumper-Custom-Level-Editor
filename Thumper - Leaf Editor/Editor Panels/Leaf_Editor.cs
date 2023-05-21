@@ -765,6 +765,7 @@ namespace Thumper_Custom_Level_Editor
 		public void InitializeTracks(DataGridView grid, bool format, bool columnstyle)
 		{
 			//track editor cell formatting
+			/*
 			if (format) {
 				grid.DefaultCellStyle.Font = new Font(new FontFamily("Arial"), 10, FontStyle.Bold);
 				grid.DefaultCellStyle.ForeColor = Color.FromArgb(0, 0, 0);
@@ -774,7 +775,7 @@ namespace Thumper_Custom_Level_Editor
 				grid.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
 				grid.ReadOnly = false;
 				grid.RowTemplate.Height = 20;
-			}
+			}*/
 
 			//double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
 			//used to significantly improve rendering performance
