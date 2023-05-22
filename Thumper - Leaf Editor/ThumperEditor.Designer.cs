@@ -1439,8 +1439,7 @@
             this.btnTrackPlayback.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnTrackPlayback.Size = new System.Drawing.Size(22, 22);
             this.btnTrackPlayback.TabIndex = 98;
-            this.toolTip1.SetToolTip(this.btnTrackPlayback, "Click to playback the track. Only plays back thumps and turns.\r\nSpeed is dependan" +
-        "t on the Master BPM.");
+            this.toolTip1.SetToolTip(this.btnTrackPlayback, resources.GetString("btnTrackPlayback.ToolTip"));
             this.btnTrackPlayback.UseCompatibleTextRendering = true;
             this.btnTrackPlayback.UseVisualStyleBackColor = false;
             this.btnTrackPlayback.Click += new System.EventHandler(this.btnTrackPlayback_Click);

@@ -141,6 +141,18 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
         AABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnTrackPlayback.ToolTip" xml:space="preserve">
+    <value>***CURRENTLY BUGGY. SKIPS BEATS SOMETIMES***
+Click to playback the entire leaf. Plays these objects in time:
+-Thumps
+-Turns
+-Bars and Rings
+-Jumps
+-Millipedes
+-Samples
+
+Playback speed is dependant on the Master BPM.</value>
+  </data>
   <data name="label46.ToolTip" xml:space="preserve">
     <value>Interpolation type between beat values. Higher interpolation = smoother transitions/curves,
 but higher intensity calculation. Can decrease FPS.
