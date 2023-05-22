@@ -472,7 +472,7 @@ brightness.pp;brightness1, funny rainbow colors;0xf646d5e7;kTraitFloat;False;0;[
 RAIL COLORS
 rails_color.flow
 rails_color.flow;glow_color;0x9b4504d6;kTraitColor;True;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-rails_color.flow;rail_color;0xc8b4047e;kTraitColor;True;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+rails_color.flow;rail_color;0x283c6e78;kTraitColor;True;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 rails_color.flow;path_color;0x887ca5dd;kTraitColor;True;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
 PLAY SAMPLE
