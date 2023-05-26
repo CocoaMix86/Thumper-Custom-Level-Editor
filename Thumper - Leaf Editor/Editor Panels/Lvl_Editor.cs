@@ -710,7 +710,7 @@ namespace Thumper_Custom_Level_Editor
 
 				s.Add("step", "False");
 				s.Add("default", "0");
-				s.Add("footer", "1, 1, 2, 1, 2, kIntensityScale, kIntensityScale, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0");
+				s.Add("footer", "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0");
 
 				seq_objs.Add(s);
 			}
