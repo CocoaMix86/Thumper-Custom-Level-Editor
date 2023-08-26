@@ -110,6 +110,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tentaclesPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeGameDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.bringToFrontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bTFLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,6 +137,7 @@
             this.panelZoom = new System.Windows.Forms.Panel();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
+            this.btnTrackPaste = new System.Windows.Forms.Button();
             this.btnLeafColors = new System.Windows.Forms.Button();
             this.btnLEafInterpLinear = new System.Windows.Forms.Button();
             this.btnTrackCopy = new System.Windows.Forms.Button();
@@ -958,7 +960,8 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
             this.helpToolStripMenuItem1,
-            this.tentaclesPathsToolStripMenuItem});
+            this.tentaclesPathsToolStripMenuItem,
+            this.changeGameDirectoryToolStripMenuItem});
             this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
@@ -991,6 +994,15 @@
             this.tentaclesPathsToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.tentaclesPathsToolStripMenuItem.Text = "Tentacles/Paths Visuals";
             this.tentaclesPathsToolStripMenuItem.Click += new System.EventHandler(this.tentaclesPathsToolStripMenuItem_Click);
+            // 
+            // changeGameDirectoryToolStripMenuItem
+            // 
+            this.changeGameDirectoryToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.changeGameDirectoryToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.changeGameDirectoryToolStripMenuItem.Name = "changeGameDirectoryToolStripMenuItem";
+            this.changeGameDirectoryToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.changeGameDirectoryToolStripMenuItem.Text = "Change Game Directory";
+            this.changeGameDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeGameDirectoryToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -1346,6 +1358,7 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLeaf.Controls.Add(this.btnTrackPaste);
             this.panelLeaf.Controls.Add(this.btnLeafColors);
             this.panelLeaf.Controls.Add(this.btnLEafInterpLinear);
             this.panelLeaf.Controls.Add(this.btnTrackCopy);
@@ -1375,6 +1388,23 @@
             this.panelLeaf.Size = new System.Drawing.Size(1431, 495);
             this.panelLeaf.TabIndex = 45;
             this.panelLeaf.Visible = false;
+            // 
+            // btnTrackPaste
+            // 
+            this.btnTrackPaste.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackPaste.Enabled = false;
+            this.btnTrackPaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackPaste.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackPaste.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnTrackPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste;
+            this.btnTrackPaste.Location = new System.Drawing.Point(189, 137);
+            this.btnTrackPaste.Name = "btnTrackPaste";
+            this.btnTrackPaste.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackPaste.TabIndex = 111;
+            this.toolTip1.SetToolTip(this.btnTrackPaste, "Paste track from clipboard");
+            this.btnTrackPaste.UseCompatibleTextRendering = true;
+            this.btnTrackPaste.UseVisualStyleBackColor = false;
+            this.btnTrackPaste.Click += new System.EventHandler(this.btnTrackPaste_Click);
             // 
             // btnLeafColors
             // 
@@ -1421,7 +1451,7 @@
             this.btnTrackCopy.Name = "btnTrackCopy";
             this.btnTrackCopy.Size = new System.Drawing.Size(22, 22);
             this.btnTrackCopy.TabIndex = 102;
-            this.toolTip1.SetToolTip(this.btnTrackCopy, "Duplicate Track");
+            this.toolTip1.SetToolTip(this.btnTrackCopy, "Copy track to clipboard");
             this.btnTrackCopy.UseCompatibleTextRendering = true;
             this.btnTrackCopy.UseVisualStyleBackColor = false;
             this.btnTrackCopy.Click += new System.EventHandler(this.btnTrackCopy_Click);
@@ -1434,7 +1464,7 @@
             this.btnTrackPlayback.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTrackPlayback.ForeColor = System.Drawing.Color.Green;
             this.btnTrackPlayback.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackPlayback.Image")));
-            this.btnTrackPlayback.Location = new System.Drawing.Point(189, 165);
+            this.btnTrackPlayback.Location = new System.Drawing.Point(189, 188);
             this.btnTrackPlayback.Name = "btnTrackPlayback";
             this.btnTrackPlayback.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnTrackPlayback.Size = new System.Drawing.Size(22, 22);
@@ -1469,7 +1499,7 @@
             this.btnTrackClear.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTrackClear.ForeColor = System.Drawing.Color.Red;
             this.btnTrackClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_trash;
-            this.btnTrackClear.Location = new System.Drawing.Point(189, 138);
+            this.btnTrackClear.Location = new System.Drawing.Point(189, 160);
             this.btnTrackClear.Name = "btnTrackClear";
             this.btnTrackClear.Size = new System.Drawing.Size(22, 22);
             this.btnTrackClear.TabIndex = 67;
@@ -4940,6 +4970,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panelBeeble;
         private System.Windows.Forms.Timer timerBeeble;
+        private System.Windows.Forms.ToolStripMenuItem changeGameDirectoryToolStripMenuItem;
+        private System.Windows.Forms.Button btnTrackPaste;
     }
 }
 

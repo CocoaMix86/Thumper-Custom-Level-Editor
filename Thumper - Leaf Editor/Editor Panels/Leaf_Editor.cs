@@ -41,6 +41,9 @@ namespace Thumper_Custom_Level_Editor
 		public List<Object_Params> _objects = new List<Object_Params>();
 		public List<string> _timesig = new List<string>() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
 		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02" };
+
+		public Sequencer_Object clipboard_track;
+		public DataGridViewRow clipboard_row;
 		#endregion
 		#region EventHandlers
 		///        ///
@@ -541,19 +544,30 @@ namespace Thumper_Custom_Level_Editor
 			DataGridView dgv = trackEditor;
 			try {
 				int _index = trackEditor.CurrentCell.RowIndex;
-				//copy item and insert it back in the track list, index +1
-				Sequencer_Object selectedTrack = _tracks[_index];
-				_tracks.Insert(_index + 1, selectedTrack);
-				//clone the row as well
-				DataGridViewRow _row = (DataGridViewRow)dgv.Rows[_index].Clone();
-				for (int i = 0; i < _row.Cells.Count; i++) {
-					_row.Cells[i].Value = dgv.Rows[_index].Cells[i].Value;
+				clipboard_track = _tracks[_index];
+				clipboard_row = (DataGridViewRow)dgv.Rows[_index].Clone();
+				for (int i = 0; i < clipboard_row.Cells.Count; i++) {
+					clipboard_row.Cells[i].Value = dgv.Rows[_index].Cells[i].Value;
 				}
-				dgv.Rows.Insert(_index + 1, _row);
-				//sets flag that leaf has unsaved changes
-				SaveLeaf(false);
+				btnTrackPaste.Enabled = true;
 			}
-			catch { }
+			catch (Exception ex) { MessageBox.Show("something went wrong with copying. Show this error to the dev.\n\n" + ex); }
+		}
+
+		private void btnTrackPaste_Click(object sender, EventArgs e)
+		{
+			DataGridView dgv = trackEditor;
+			try {
+				int _index = trackEditor.CurrentCell.RowIndex;
+				_tracks.Insert(_index + 1, clipboard_track);
+				DataGridViewRow dgrow = (DataGridViewRow)clipboard_row.Clone();
+				for (int i = 0; i < clipboard_row.Cells.Count; i++) {
+					dgrow.Cells[i].Value = clipboard_row.Cells[i].Value;
+				}
+				dgv.Rows.Insert(_index + 1, dgrow);
+			}
+			catch (Exception ex){ MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex); }
+			SaveLeaf(false);
 		}
 
 		private void btnTrackClear_Click(object sender, EventArgs e)
