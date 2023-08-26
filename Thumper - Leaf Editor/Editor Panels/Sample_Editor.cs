@@ -287,7 +287,9 @@ namespace Thumper_Custom_Level_Editor
 			string _filetype = "";
 
 			if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
-				PCtoOGG(_samp);
+				var _result = PCtoOGG(_samp);
+				if (_result == null)
+					return;
 			}
 			//check extension of the sample to play
 			if (File.Exists($@"temp\{_samp.obj_name}.ogg"))
@@ -427,7 +429,7 @@ namespace Thumper_Custom_Level_Editor
         {
 			//check if the gamedir has been set so the method can find the .pc files
 			if (Properties.Settings.Default.game_dir == "none") {
-				Read_Config(false);
+				Read_Config();
             }
 
 			byte[] _bytes;
@@ -456,7 +458,7 @@ namespace Thumper_Custom_Level_Editor
 				//attempt to locate file. But error and return safely if nothing found
 				try {
 					//read the .pc file as bytes, and skip the first 4 header bytes
-					_bytes = File.ReadAllBytes($@"C:\Program Files (x86)\Steam\steamapps\common\Thumper\cache\{_hashedname}.pc");
+					_bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
 				} catch {
 					MessageBox.Show($@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc to play sample. If you need to change your Game Directory, go to the the Help menu.");
 					return null;
