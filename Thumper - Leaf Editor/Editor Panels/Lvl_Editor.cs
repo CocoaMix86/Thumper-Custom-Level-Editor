@@ -306,27 +306,7 @@ namespace Thumper_Custom_Level_Editor
 				ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
 				ofd.Title = "Load a Thumper Leaf file";
 				if (ofd.ShowDialog() == DialogResult.OK) {
-					//parse leaf to JSON
-					dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-					//check if file being loaded is actually a leaf. Can do so by checking the JSON key
-					if ((string)_load["obj_type"] != "SequinLeaf") {
-						MessageBox.Show("This does not appear to be a leaf file!", "Leaf load error");
-						return;
-					}
-					//check if leaf exists in the same folder as the lvl. If not, allow user to copy file.
-					//this is why I utilize workingfolder
-					if (Path.GetDirectoryName(ofd.FileName) != workingfolder) {
-						if (MessageBox.Show("The leaf you chose does not exist in the same folder as this lvl. Do you want to copy it to this folder and load it?", "Leaf load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-							File.Copy(ofd.FileName, $@"{workingfolder}\{Path.GetFileName(ofd.FileName)}");
-						else
-							return;
-					}
-					//add leaf data to the list
-					_lvlleafs.Add(new LvlLeafData() {
-						leafname = (string)_load["obj_name"],
-						beats = (int)_load["beat_cnt"],
-						paths = new List<string>()
-					});
+					AddLeaftoLvl(ofd.FileName);
 				}
 			}
 		}
@@ -625,6 +605,31 @@ namespace Thumper_Custom_Level_Editor
 				btnlvlPanelNew.Visible = !visible;
 				btnlvlPanelOpen.Visible = !visible;
 			}*/
+		}
+
+		public void AddLeaftoLvl(string path)
+        {
+			//parse leaf to JSON
+			dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(path), "#.*", ""));
+			//check if file being loaded is actually a leaf. Can do so by checking the JSON key
+			if ((string)_load["obj_type"] != "SequinLeaf") {
+				MessageBox.Show("This does not appear to be a leaf file!", "Leaf load error");
+				return;
+			}
+			//check if leaf exists in the same folder as the lvl. If not, allow user to copy file.
+			//this is why I utilize workingfolder
+			if (Path.GetDirectoryName(path) != workingfolder) {
+				if (MessageBox.Show("The leaf you chose does not exist in the same folder as this lvl. Do you want to copy it to this folder and load it?", "Leaf load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+					File.Copy(path, $@"{workingfolder}\{Path.GetFileName(path)}");
+				else
+					return;
+			}
+			//add leaf data to the list
+			_lvlleafs.Add(new LvlLeafData() {
+				leafname = (string)_load["obj_name"],
+				beats = (int)_load["beat_cnt"],
+				paths = new List<string>()
+			});
 		}
 
 		public void LvlUpdatePaths(int index)

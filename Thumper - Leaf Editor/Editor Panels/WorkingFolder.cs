@@ -74,6 +74,39 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show("this is not a valid Custom Level file.");
 		}
 
+		private void workingfolderFiles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			dynamic _load;
+			string _selectedfilename;
+			//attempt to load file listed in the dGV
+			try {
+				//first check if it exists
+				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}.txt";
+				if (!File.Exists(_selectedfilename)) {
+					MessageBox.Show($"File {workingfolderFiles[1, e.RowIndex].Value}.txt could not be found in the folder. Was it moved or deleted?", "File load error");
+					return;
+				}
+				//atempt to parse JSON
+				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_selectedfilename), "#.*", ""));
+			}
+			catch {
+				//return method if parse fails
+				MessageBox.Show("The selected file could not be parsed as JSON.", "File load error");
+				return;
+			}
+			///Send file off to different load methods based on the file type
+			if ((string)_load["obj_type"] == "SequinGate") {
+
+			}
+			else if ((string)_load["obj_type"] == "SequinLevel") {
+
+			}
+			else if ((string)_load["obj_type"] == "SequinLeaf") {
+				if (_loadedlvl != null)
+					AddLeaftoLvl(_selectedfilename);
+			}
+		}
+
 		private void workingfolderFiles_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
 		{
 			btnWorkDelete.Enabled = true;
@@ -132,6 +165,6 @@ namespace Thumper_Custom_Level_Editor
 		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; btnWorkRefresh_Click(null, null); }
 		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); }
 		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); }
-			private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); }
-			}
+		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); }
+	}
 }

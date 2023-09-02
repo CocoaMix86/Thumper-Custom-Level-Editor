@@ -243,7 +243,6 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(panelMaster);
             ControlMoverOrResizer.Init(panelGate);
             ControlMoverOrResizer.Init(panelWorkingFolder);
-            ControlMoverOrResizer.Init(workingfolderFiles, panelWorkingFolder);
             ControlMoverOrResizer.Init(panelSample);
             ControlMoverOrResizer.Init(menuStrip);
             ControlMoverOrResizer.Init(panelBeeble);
