@@ -410,7 +410,7 @@ namespace Thumper_Custom_Level_Editor
 			if (lvlLeafList.CurrentRow.Index == 0)
 				return;
 			//copies the tunnels of the .leaf above the current select .leaf, to the selected .leaf
-			_lvlleafs[lvlLeafList.CurrentRow.Index].paths = _lvlleafs[lvlLeafList.CurrentRow.Index - 1].paths;
+			_lvlleafs[lvlLeafList.CurrentRow.Index].paths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index - 1].paths);
 			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
 			SaveLvl(false);
 		}
