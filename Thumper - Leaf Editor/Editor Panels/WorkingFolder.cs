@@ -42,7 +42,7 @@ namespace Thumper_Custom_Level_Editor
 				LoadSample(_load);
 				if (panelSample.Visible == false)
 					sampleEditorToolStripMenuItem.PerformClick();
-            }
+			}
 			else if ((string)_load["obj_type"] == "SequinMaster") {
 				_loadedmastertemp = _selectedfilename;
 				LoadMaster(_load);
@@ -91,7 +91,11 @@ namespace Thumper_Custom_Level_Editor
 			//filter for specific files
 			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS") || x.Contains("samp_")))) {
 				var filetype = Path.GetFileName(file).Split('_')[0];
-				workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
+
+				if (!filterleaf && !filterlvl && !filtergate && !filtermaster && !filtersamp)
+					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
+				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp))
+					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 			}
 		}
 
@@ -122,5 +126,12 @@ namespace Thumper_Custom_Level_Editor
 				btnWorkRefresh_Click(null, null);
 			}
 		}
-	}
+
+		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;
+		private void filterLeaf_CheckedChanged(object sender, EventArgs e) {filterleaf = filterLeaf.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); }
+			private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); }
+			}
 }
