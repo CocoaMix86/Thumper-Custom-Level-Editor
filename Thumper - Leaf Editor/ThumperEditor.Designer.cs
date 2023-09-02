@@ -1306,6 +1306,7 @@
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
             this.trackEditor.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.trackEditor_EditingControlShowing);
             this.trackEditor.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_RowEnter);
+            this.trackEditor.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_RowHeaderMouseClick);
             this.trackEditor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trackEditor_KeyDown);
             this.trackEditor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.trackEditor_KeyPress);
             // 
