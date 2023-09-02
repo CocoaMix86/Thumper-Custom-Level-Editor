@@ -35,6 +35,8 @@ namespace Thumper_Custom_Level_Editor
 		List<SampleData> _lvlsamples = new List<SampleData>();
 
 		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();
+
+		LvlLeafData clipboardleaf = new LvlLeafData(); 
 		#endregion
 
 		#region EventHandlers
@@ -69,6 +71,10 @@ namespace Thumper_Custom_Level_Editor
 			if (_dgfocus != "lvlLeafList") {
 				_dgfocus = "lvlLeafList";
 			}
+		}
+		private void lvlLeafList_CellEnter(object sender, DataGridViewCellEventArgs e)
+		{
+			lvlLeafList_CellClick(sender, e);
 		}
 		///DGV LVLLEAFPATHS
 		//Cell value changed
@@ -285,7 +291,15 @@ namespace Thumper_Custom_Level_Editor
 		/// BUTTONS ///
 		///         ///
 
-		private void btnLvlLeafDelete_Click(object sender, EventArgs e) => _lvlleafs.RemoveAt(lvlLeafList.CurrentRow.Index);
+		private void btnLvlLeafDelete_Click(object sender, EventArgs e)
+		{
+			int _in = lvlLeafList.CurrentRow.Index;
+			_lvlleafs.RemoveAt(_in);
+			if (_in > 0) {
+				lvlLeafList.CurrentCell = lvlLeafList.Rows[_in - 1].Cells[0];
+				lvlLeafList.Rows[_in - 1].Cells[0].Selected = true;
+			}
+		}
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
 			using (var ofd = new OpenFileDialog()) {
@@ -355,14 +369,26 @@ namespace Thumper_Custom_Level_Editor
 			catch { }
 		}
 
+		///COPY PASTE of leaf
 		private void btnLvlLeafCopy_Click(object sender, EventArgs e)
 		{
-			LvlLeafData _lvl = _lvlleafs[lvlLeafList.CurrentRow.Index];
-			_lvlleafs.Add(new LvlLeafData { 
-				leafname = _lvl.leafname,
-				beats = _lvl.beats,
-				paths = _lvl.paths
+			clipboardleaf = _lvlleafs[lvlLeafList.CurrentRow.Index];
+			btnLvlLeafPaste.Enabled = true;
+		}
+		private void btnLvlLeafPaste_Click(object sender, EventArgs e)
+		{
+			//save index of paste position, since it gets reset whenever the leaf collection changes
+			int _in = lvlLeafList.CurrentRow.Index;
+			_lvlleafs.Insert(lvlLeafList.CurrentRow.Index + 1, new LvlLeafData {
+				leafname = clipboardleaf.leafname,
+				beats = clipboardleaf.beats,
+				paths = new List<string>(clipboardleaf.paths)
 			});
+			//after adding the leaf, set selected position to that item
+			lvlLeafList.CurrentCell = lvlLeafList.Rows[_in + 1].Cells[0];
+			lvlLeafList.Rows[_in + 1].Cells[0].Selected = true;
+			//set save flag
+			SaveLvl(false);
 		}
 
 		private void btnLvlPathAdd_Click(object sender, EventArgs e)
