@@ -238,6 +238,8 @@ namespace Thumper_Custom_Level_Editor
 			_beats = (int)numericUpDown_LeafLength.Value;
 			trackEditor.ColumnCount = _beats;
 			GenerateColumnStyle(trackEditor, _beats);
+			//set cell zoom
+			trackZoom_Scroll(null, null);
 			//sets flag that leaf has unsaved changes
 			SaveLeaf(false);
 		}
