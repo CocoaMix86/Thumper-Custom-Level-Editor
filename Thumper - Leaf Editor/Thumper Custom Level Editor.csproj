@@ -324,8 +324,12 @@
     <EmbeddedResource Include="DLLs\System.ValueTuple.dll">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\Fmod5Sharp.dll" />
-    <EmbeddedResource Include="DLLs\IndexRange.dll" />
+    <EmbeddedResource Include="DLLs\Fmod5Sharp.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\IndexRange.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
