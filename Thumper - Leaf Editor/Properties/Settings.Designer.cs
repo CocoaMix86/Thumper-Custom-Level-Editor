@@ -334,5 +334,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["game_dir"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("76, 66")]
+        public global::System.Drawing.Size beeblesize {
+            get {
+                return ((global::System.Drawing.Size)(this["beeblesize"]));
+            }
+            set {
+                this["beeblesize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100, 10")]
+        public global::System.Drawing.Point beebleloc {
+            get {
+                return ((global::System.Drawing.Point)(this["beebleloc"]));
+            }
+            set {
+                this["beebleloc"] = value;
+            }
+        }
     }
 }

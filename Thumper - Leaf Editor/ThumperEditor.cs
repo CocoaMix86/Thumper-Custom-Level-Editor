@@ -217,6 +217,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.mastereditorvisible = panelMaster.Visible;
             Properties.Settings.Default.sampleeditorvisible = panelSample.Visible;
             Properties.Settings.Default.workingfoldervisible = panelWorkingFolder.Visible;
+            Properties.Settings.Default.beeblesize = panelBeeble.Size;
+            Properties.Settings.Default.beebleloc = panelBeeble.Location;
 
             Properties.Settings.Default.Save();
         }
@@ -301,6 +303,8 @@ namespace Thumper_Custom_Level_Editor
             panelSample.Size = Properties.Settings.Default.sampleeditorsize;
             panelSample.Location = Properties.Settings.Default.sampleeditorloc;
             panelSample.Visible = sampleEditorToolStripMenuItem.Checked = Properties.Settings.Default.sampleeditorvisible;
+            panelBeeble.Size = Properties.Settings.Default.beeblesize;
+            panelBeeble.Location = Properties.Settings.Default.beebleloc;
         }
 
         public void ImportObjects()

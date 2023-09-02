@@ -80,5 +80,11 @@
     <Setting Name="game_dir" Type="System.String" Scope="User">
       <Value Profile="(Default)">none</Value>
     </Setting>
+    <Setting Name="beeblesize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">76, 66</Value>
+    </Setting>
+    <Setting Name="beebleloc" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">100, 10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
