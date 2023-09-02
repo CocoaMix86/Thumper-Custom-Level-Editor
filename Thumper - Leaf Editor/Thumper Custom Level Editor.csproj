@@ -71,8 +71,134 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fmod5Sharp, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\Fmod5Sharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="IndexRange, Version=1.0.2.0, Culture=neutral, PublicKeyToken=35e6a3c4212514c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\IndexRange.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\Microsoft.Win32.Registry.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.5.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.5.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NAudio, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NAudio.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NAudio.Asio, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NAudio.Asio.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NAudio.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NAudio.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NAudio.Midi, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NAudio.Midi.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NAudio.Vorbis, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NAudio.Vorbis.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NAudio.Wasapi, Version=22.0.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NAudio.Wasapi.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NAudio.WinForms, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NAudio.WinForms.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NAudio.WinMM, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NAudio.WinMM.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NVorbis, Version=0.10.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\NVorbis.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="OggVorbisEncoder, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\OggVorbisEncoder.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Buffers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Memory.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Security.AccessControl.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Security.Principal.Windows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Text.Encodings.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Text.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLLs\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -249,87 +375,33 @@
     <None Include="image assets\beebledance.gif" />
     <None Include="image assets\beeblelove.png" />
     <None Include="image assets\icon-paste.png" />
-    <EmbeddedResource Include="DLLs\Microsoft.Bcl.AsyncInterfaces.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\Microsoft.Win32.Registry.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.Shell.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NAudio.Asio.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NAudio.Core.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NAudio.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NAudio.Midi.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NAudio.Vorbis.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NAudio.Wasapi.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NAudio.WinForms.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NAudio.WinMM.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\Newtonsoft.Json.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\NVorbis.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\OggVorbisEncoder.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Buffers.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Memory.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Numerics.Vectors.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Runtime.CompilerServices.Unsafe.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Security.AccessControl.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Security.Principal.Windows.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Text.Encodings.Web.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Text.Json.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.Threading.Tasks.Extensions.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\System.ValueTuple.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\Fmod5Sharp.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DLLs\IndexRange.dll">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <EmbeddedResource Include="DLLs\Microsoft.Win32.Registry.dll" />
+    <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.dll" />
+    <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <EmbeddedResource Include="DLLs\NAudio.Asio.dll" />
+    <EmbeddedResource Include="DLLs\NAudio.Core.dll" />
+    <EmbeddedResource Include="DLLs\NAudio.dll" />
+    <EmbeddedResource Include="DLLs\NAudio.Midi.dll" />
+    <EmbeddedResource Include="DLLs\NAudio.Vorbis.dll" />
+    <EmbeddedResource Include="DLLs\NAudio.Wasapi.dll" />
+    <EmbeddedResource Include="DLLs\NAudio.WinForms.dll" />
+    <EmbeddedResource Include="DLLs\NAudio.WinMM.dll" />
+    <EmbeddedResource Include="DLLs\Newtonsoft.Json.dll" />
+    <EmbeddedResource Include="DLLs\NVorbis.dll" />
+    <EmbeddedResource Include="DLLs\OggVorbisEncoder.dll" />
+    <EmbeddedResource Include="DLLs\System.Buffers.dll" />
+    <EmbeddedResource Include="DLLs\System.Memory.dll" />
+    <EmbeddedResource Include="DLLs\System.Numerics.Vectors.dll" />
+    <EmbeddedResource Include="DLLs\System.Runtime.CompilerServices.Unsafe.dll" />
+    <EmbeddedResource Include="DLLs\System.Security.AccessControl.dll" />
+    <EmbeddedResource Include="DLLs\System.Security.Principal.Windows.dll" />
+    <EmbeddedResource Include="DLLs\System.Text.Encodings.Web.dll" />
+    <EmbeddedResource Include="DLLs\System.Text.Json.dll" />
+    <EmbeddedResource Include="DLLs\System.Threading.Tasks.Extensions.dll" />
+    <EmbeddedResource Include="DLLs\System.ValueTuple.dll" />
+    <EmbeddedResource Include="DLLs\Fmod5Sharp.dll" />
+    <EmbeddedResource Include="DLLs\IndexRange.dll" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
@@ -372,26 +444,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Fmod5Sharp">
-      <Version>3.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft-WindowsAPICodePack-Core">
-      <Version>1.1.5</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft-WindowsAPICodePack-Shell">
-      <Version>1.1.5</Version>
-    </PackageReference>
-    <PackageReference Include="NAudio">
-      <Version>2.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="NAudio.Vorbis">
-      <Version>1.5.0</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.3</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
