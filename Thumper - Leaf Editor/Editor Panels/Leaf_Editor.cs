@@ -240,6 +240,8 @@ namespace Thumper_Custom_Level_Editor
 			GenerateColumnStyle(trackEditor, _beats);
 			//set cell zoom
 			trackZoom_Scroll(null, null);
+			//make sure new cells follow the time sig
+			TrackTimeSigHighlighting();
 			//sets flag that leaf has unsaved changes
 			SaveLeaf(false);
 		}
