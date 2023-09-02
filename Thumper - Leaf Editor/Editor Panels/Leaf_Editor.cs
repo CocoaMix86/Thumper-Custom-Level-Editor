@@ -557,14 +557,34 @@ namespace Thumper_Custom_Level_Editor
 		private void btnTrackPaste_Click(object sender, EventArgs e)
 		{
 			DataGridView dgv = trackEditor;
+			DataGridViewRow _temp = (DataGridViewRow)clipboard_row.Clone();
 			try {
-				int _index = trackEditor.CurrentCell.RowIndex;
-				_tracks.Insert(_index + 1, clipboard_track);
-				DataGridViewRow dgrow = (DataGridViewRow)clipboard_row.Clone();
-				for (int i = 0; i < clipboard_row.Cells.Count; i++) {
-					dgrow.Cells[i].Value = clipboard_row.Cells[i].Value;
+				int _index = trackEditor.CurrentRow.Index;
+				//check if copied row is longer than the leaf beat length
+				if (clipboard_row.Cells.Count > _beats) {
+					DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
+					//YES = extend the leaf and then paste
+					if (_paste == DialogResult.Yes) {
+						numericUpDown_LeafLength.Value = clipboard_row.Cells.Count;
+					}
+					//NO = do not extend leaf and then paste
+					else if (_paste == DialogResult.No) {
+						while (_temp.Cells.Count > _beats)
+							_temp.Cells.RemoveAt(_temp.Cells.Count - 1);
+					}
+					//CANCEL = do nothing
+					else if (_paste == DialogResult.Cancel) {
+						return;
+					}
 				}
-				dgv.Rows.Insert(_index + 1, dgrow);
+				//add copied Sequencer_Object to main _tracks list
+				_tracks.Insert(_index + 1, clipboard_track);
+				//copy over values from clipboard to temp row, since clone() doesn't clone values
+				for (int i = 0; i < _temp.Cells.Count; i++) {
+					_temp.Cells[i].Value = clipboard_row.Cells[i].Value;
+				}
+				//add row to DGV
+				dgv.Rows.Insert(_index + 1, _temp);
 			}
 			catch (Exception ex){ MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex); }
 			SaveLeaf(false);
