@@ -249,31 +249,83 @@
     <None Include="image assets\beebledance.gif" />
     <None Include="image assets\beeblelove.png" />
     <None Include="image assets\icon-paste.png" />
-    <EmbeddedResource Include="DLLs\Microsoft.Bcl.AsyncInterfaces.dll" />
-    <EmbeddedResource Include="DLLs\Microsoft.Win32.Registry.dll" />
-    <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.dll" />
-    <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.Shell.dll" />
-    <EmbeddedResource Include="DLLs\NAudio.Asio.dll" />
-    <EmbeddedResource Include="DLLs\NAudio.Core.dll" />
-    <EmbeddedResource Include="DLLs\NAudio.dll" />
-    <EmbeddedResource Include="DLLs\NAudio.Midi.dll" />
-    <EmbeddedResource Include="DLLs\NAudio.Vorbis.dll" />
-    <EmbeddedResource Include="DLLs\NAudio.Wasapi.dll" />
-    <EmbeddedResource Include="DLLs\NAudio.WinForms.dll" />
-    <EmbeddedResource Include="DLLs\NAudio.WinMM.dll" />
-    <EmbeddedResource Include="DLLs\Newtonsoft.Json.dll" />
-    <EmbeddedResource Include="DLLs\NVorbis.dll" />
-    <EmbeddedResource Include="DLLs\OggVorbisEncoder.dll" />
-    <EmbeddedResource Include="DLLs\System.Buffers.dll" />
-    <EmbeddedResource Include="DLLs\System.Memory.dll" />
-    <EmbeddedResource Include="DLLs\System.Numerics.Vectors.dll" />
-    <EmbeddedResource Include="DLLs\System.Runtime.CompilerServices.Unsafe.dll" />
-    <EmbeddedResource Include="DLLs\System.Security.AccessControl.dll" />
-    <EmbeddedResource Include="DLLs\System.Security.Principal.Windows.dll" />
-    <EmbeddedResource Include="DLLs\System.Text.Encodings.Web.dll" />
-    <EmbeddedResource Include="DLLs\System.Text.Json.dll" />
-    <EmbeddedResource Include="DLLs\System.Threading.Tasks.Extensions.dll" />
-    <EmbeddedResource Include="DLLs\System.ValueTuple.dll" />
+    <EmbeddedResource Include="DLLs\Microsoft.Bcl.AsyncInterfaces.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\Microsoft.Win32.Registry.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\Microsoft.WindowsAPICodePack.Shell.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NAudio.Asio.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NAudio.Core.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NAudio.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NAudio.Midi.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NAudio.Vorbis.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NAudio.Wasapi.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NAudio.WinForms.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NAudio.WinMM.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\NVorbis.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\OggVorbisEncoder.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Buffers.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Memory.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Numerics.Vectors.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Runtime.CompilerServices.Unsafe.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Security.AccessControl.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Security.Principal.Windows.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Text.Encodings.Web.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Text.Json.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.Threading.Tasks.Extensions.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\System.ValueTuple.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DLLs\Fmod5Sharp.dll" />
+    <EmbeddedResource Include="DLLs\IndexRange.dll" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
