@@ -163,6 +163,10 @@ namespace Thumper_Custom_Level_Editor
 
 			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
 			int _in = e.NewStartingIndex;
+
+			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
+				lvlLeafList.RowCount = 0;
+			}
 			//if action ADD, add new row to the lvl DGV
 			//NewStartingIndex and OldStartingIndex track where the changes were made
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {

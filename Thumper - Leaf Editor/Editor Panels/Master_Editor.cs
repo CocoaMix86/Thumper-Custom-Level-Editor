@@ -113,6 +113,9 @@ namespace Thumper_Custom_Level_Editor
 
 		public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
+			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
+				masterLvlList.RowCount = 0;
+            }
 			//if action ADD, add new row to the master DGV
 			//NewStartingIndex and OldStartingIndex track where the changes were made
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
