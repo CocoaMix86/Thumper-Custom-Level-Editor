@@ -190,9 +190,9 @@ namespace Thumper_Custom_Level_Editor
 			}
 			e.Handled = true;
 		}
-		//Keypress Delete - clear selected cellss
 		private void trackEditor_KeyDown(object sender, KeyEventArgs e)
 		{
+			//Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
 				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
@@ -200,11 +200,13 @@ namespace Thumper_Custom_Level_Editor
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
 				SaveLeaf(false);
 			}
+			//copies selected cells
 			if (e.Control && e.KeyCode == Keys.C) {
 				DataObject d = trackEditor.GetClipboardContent();
 				Clipboard.SetDataObject(d, true);
 				e.Handled = true;
 			}
+			//pastes cell data from clipboard
 			if (e.Control && e.KeyCode == Keys.V) {
 				string s = Clipboard.GetText().Replace("\r\n", "\n");
 				string[] lines = s.Split('\n');
@@ -214,23 +216,16 @@ namespace Thumper_Custom_Level_Editor
 					if (row + _line >= trackEditor.RowCount)
 						break;
 					string[] cells = lines[_line].Split('\t');
-					int cellsSelected = cells.Length;
-					for (int i = 0; i < cellsSelected; i++) {
+					for (int i = 0; i < cells.Length; i++) {
 						if (col + i >= trackEditor.ColumnCount)
 							break;
-						trackEditor[col + i, row + _line].Value = cells[i];
+						//don't paste if cell is blank
+						if (cells[i] != "")
+							trackEditor[col + i, row + _line].Value = cells[i];
 					}
 					TrackUpdateHighlighting(trackEditor.Rows[row + _line]);
 				}
 			}
-			//detect ctrl+v for cell pasting
-			/*
-			if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control) {
-				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
-					dgvc.Value = Clipboard.GetText();
-				TrackUpdateHighlighting(trackEditor.CurrentRow);
-				SaveLeaf(false);
-			}*/
 		}
 		//Clicking row headers to select the row
 		private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
