@@ -113,17 +113,21 @@ namespace Thumper_Custom_Level_Editor
 
 		public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			//clear dgv
-			masterLvlList.RowCount = 0;
-			//repopulate dgv from list
-			masterLvlList.RowEnter -= masterLvlList_RowEnter;
-			for (int x = 0; x < _masterlvls.Count; x++) {
-				//detect if lvl in list is actually a lvl or a gate. If it's a gate, the lvlname won't be set
-				if (!String.IsNullOrEmpty(_masterlvls[x].lvlname))
-					masterLvlList.Rows.Add(new object[] { _masterlvls[x].lvlname, _masterlvls[x].checkpoint, _masterlvls[x].playplus, _masterlvls[x].isolate });
+			//if action ADD, add new row to the master DGV
+			//NewStartingIndex and OldStartingIndex track where the changes were made
+			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
+				int _in = e.NewStartingIndex;
+				//detect if lvl or a gate. If it's a gate, the lvlname won't be set
+				if (!String.IsNullOrEmpty(_masterlvls[_in].lvlname))
+					masterLvlList.Rows.Insert(_in, new object[] { _masterlvls[_in].lvlname, _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
 				else
-					masterLvlList.Rows.Add(new object[] { _masterlvls[x].gatename, _masterlvls[x].checkpoint, _masterlvls[x].playplus, _masterlvls[x].isolate });
+					masterLvlList.Rows.Insert(_in, new object[] { _masterlvls[_in].gatename, _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
 			}
+			//if action REMOVE, remove row from the master DGV
+			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
+				masterLvlList.Rows.RemoveAt(e.OldStartingIndex);
+			}
+
 			masterLvlList.RowEnter += masterLvlList_RowEnter;
 			//set selected index. Mainly used when moving items
 			///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
