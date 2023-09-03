@@ -155,21 +155,23 @@ namespace Thumper_Custom_Level_Editor
 		///_LVLLEAF - Triggers when the collection changes
 		public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			//clear dgv
-			lvlLeafList.RowCount = 0;
-			_lvllength = 0;
-			//repopulate dgv from list
-			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
-			for (int x = 0; x < _lvlleafs.Count; x++) {
-				lvlLeafList.Rows.Add(new object[] { _lvlleafs[x].leafname, _lvlleafs[x].beats });
+			_lvllength = (int)NUD_lvlApproach.Value;
+			foreach (LvlLeafData _leaf in _lvlleafs) {
 				//total length of all leafs. This value is used for the volume sequencer
-				_lvllength += _lvlleafs[x].beats;
+				_lvllength += _leaf.beats;
 			}
-			//add approach to lvl length
-			_lvllength += +(int)NUD_lvlApproach.Value;
+
+			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
+			int _in = e.NewStartingIndex;
+			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
+				lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] { _lvlleafs[_in].leafname, _lvlleafs[_in].beats });
+			}
+			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
+				lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
+			}
 			lvlLeafList.RowEnter += lvlLeafList_RowEnter;
-			//set selected index. Mainly used when moving items
-			///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
+
+
 			//enable certain buttons if there are enough items for them
 			btnLvlLeafDelete.Enabled = _lvlleafs.Count > 0;
 			btnLvlLeafUp.Enabled = _lvlleafs.Count > 1;
