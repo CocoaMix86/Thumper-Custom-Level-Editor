@@ -15,16 +15,20 @@ namespace Thumper_Custom_Level_Editor
 			lblWorkingFolder.MaximumSize = new Size(panelWorkingFolder.Width - 16, 0);
 		}
 
-		private void workingfolderFiles_CellClick(object sender, DataGridViewCellEventArgs e)
+		private void workingfolderFiles_SelectionChanged(object sender, EventArgs e)
 		{
+			//do nothing if selection changes to 0
+			if (workingfolderFiles.SelectedCells.Count == 0)
+				return;
+
 			dynamic _load;
 			string _selectedfilename;
 			//attempt to load file listed in the dGV
 			try {
 				//first check if it exists
-				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}.txt";
+				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.SelectedCells[0].RowIndex].Value}.txt";
 				if (!File.Exists(_selectedfilename)) {
-					MessageBox.Show($"File {workingfolderFiles[1, e.RowIndex].Value}.txt could not be found in the folder. Was it moved or deleted?", "File load error");
+					MessageBox.Show($"File {workingfolderFiles[1, workingfolderFiles.SelectedCells[0].RowIndex].Value}.txt could not be found in the folder. Was it moved or deleted?", "File load error");
 					return;
 				}
 				//atempt to parse JSON
@@ -67,7 +71,7 @@ namespace Thumper_Custom_Level_Editor
 				if (panelLeaf.Visible == false)
 					leafEditorToolStripMenuItem.PerformClick();
 			}
-			else if (workingfolderFiles[1, e.RowIndex].Value.ToString().Contains("LEVEL DETAILS")) {
+			else if (workingfolderFiles[1, workingfolderFiles.SelectedCells[0].RowIndex].Value.ToString().Contains("LEVEL DETAILS")) {
 				editLevelDetailsToolStripMenuItem_Click(null, null);
 			}
 			else
@@ -107,16 +111,6 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		private void workingfolderFiles_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-		{
-			btnWorkDelete.Enabled = true;
-		}
-
-		private void workingfolderFiles_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-		{
-			if (workingfolderFiles.RowCount == 0) btnWorkDelete.Enabled = false;
-		}
-
 		private void btnWorkRefresh_Click(object sender, EventArgs e)
 		{
 			//clear the dgv and reload files in the folder
@@ -130,6 +124,8 @@ namespace Thumper_Custom_Level_Editor
 				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp))
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 			}
+			//enable button
+			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
 		}
 
 		private void btnWorkDelete_Click(object sender, EventArgs e)
@@ -166,5 +162,76 @@ namespace Thumper_Custom_Level_Editor
 		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); }
 		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); }
 		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); }
+
+
+		//Handles right-click of cells to bring up context menu
+		private void workingfolderFiles_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == MouseButtons.Right) {
+				DataGridViewCell c = (sender as DataGridView)[e.ColumnIndex, e.RowIndex];
+				if (!c.Selected) {
+					c.DataGridView.CurrentCell = c;
+					c.Selected = true;
+				}
+			}
+		}
+
+		///Contect menu actions
+		//Rename
+		string filetype = "";
+		private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (workingfolderFiles.SelectedCells.Count < 1)
+				return;
+			//set textbox with name of selected file
+			string[] file = workingfolderFiles.SelectedCells[1].Value.ToString().Split(new[] { '_' }, 2);
+			filetype = file[0];
+			//check if file is valid to be renamed
+			if (filetype == "master" || filetype == "LEVEL DETAILS") {
+				MessageBox.Show("You cannot rename this file.", "File error");
+				return;
+			}
+			txtWorkingRename.Text = file[1];
+			lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
+			//show the panel
+			panelWorkRename.Location = workingfolderFiles.Location;
+			panelWorkRename.BringToFront();
+			panelWorkRename.Visible = true;
+		}
+		//Duplicate file
+		private void duplicateToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkCopy_Click(null, null);
+		//Delete file
+		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkDelete_Click(null, null);
+
+		private void btnWorkRenameYes_Click(object sender, EventArgs e)
+		{
+			string newfilepath = $@"{workingfolder}\{filetype}_{txtWorkingRename.Text}.txt";
+			File.Move(_loadedleaf, newfilepath);
+			workingfolderFiles.SelectedCells[1].Value = $@"{filetype}_{txtWorkingRename.Text}";
+
+			if (filetype == "leaf") {
+				//change current leaf's loaded path and then save it to make sure new name is in fact saved
+				_loadedleaf = newfilepath;
+				saveToolStripMenuItem_Click(null, null);
+			}
+			if (filetype == "lvl") {
+				_loadedlvl = newfilepath;
+				saveToolStripMenuItem2_Click(null, null);
+			}
+			if (filetype == "gate") {
+				_loadedgate = newfilepath;
+				gatesaveToolStripMenuItem_Click(null, null);
+            }
+			if (filetype == "samp") {
+				_loadedsample = newfilepath;
+				SamplesaveToolStripMenuItem_Click(null, null);
+            }
+			panelWorkRename.Visible = false;
+		}
+
+		private void btnWorkRenameNo_Click(object sender, EventArgs e)
+		{
+			panelWorkRename.Visible = false;
+		}
 	}
 }

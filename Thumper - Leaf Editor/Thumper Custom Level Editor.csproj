@@ -402,6 +402,8 @@
     <EmbeddedResource Include="DLLs\System.ValueTuple.dll" />
     <EmbeddedResource Include="DLLs\Fmod5Sharp.dll" />
     <EmbeddedResource Include="DLLs\IndexRange.dll" />
+    <None Include="image assets\icon-pencil.png" />
+    <None Include="image assets\icon-gear.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
