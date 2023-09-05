@@ -143,17 +143,39 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnWorkCopy_Click(object sender, EventArgs e)
 		{
-			//make user confirm file duplication
-			if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show("Copy selected file?", "Confirm duplication", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-				//check if file being copied is LEVEL DETAILS
-				if (workingfolderFiles.CurrentRow.Cells[1].Value.ToString().Contains("LEVEL DETAILS")) {
-					MessageBox.Show("You may not duplicate Level Details", "You cannot do that");
-					return;
-				}
-				File.Copy($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt", $@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value} (2).txt");
-				//call the refresh method so the dgv updates
-				btnWorkRefresh_Click(null, null);
+			//split file type from file name
+			//check if it is copy-able
+			string[] file = workingfolderFiles.SelectedCells[1].Value.ToString().Split(new[] { '_' }, 2);
+			if (file[0] == "LEVEL DETAILS" || file[0] == "master") {
+				MessageBox.Show("You may not duplicate that file", "You cannot do that");
+				return;
 			}
+			//make user confirm file duplication
+			if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show("Copy selected file?", "Confirm duplication", MessageBoxButtons.YesNo) != DialogResult.Yes)
+				return;
+
+			string newfilename = "";
+			//create file renaming dialog and show it
+			FileNameDialog filenamedialog = new FileNameDialog();
+			filenamedialog.StartPosition = FormStartPosition.Manual;
+			filenamedialog.Location = MousePosition;
+			filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
+			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
+				newfilename = filenamedialog.txtWorkingRename.Text;
+			}
+			//if NOT yes, return and skip everything else below
+			else
+				return;
+			//check if the chosen name exists in the level folder
+			if (File.Exists($@"{workingfolder}\{file[0]}_{newfilename}.txt")) {
+				MessageBox.Show("File name already exists in the Working Folder", "File duplicate error");
+				return;
+			}
+
+
+			File.Copy($@"{workingfolder}\{file[0]}_{file[1]}.txt", $@"{workingfolder}\{file[0]}_{newfilename}.txt");
+			//call the refresh method so the dgv updates
+			btnWorkRefresh_Click(null, null);
 		}
 
 		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;

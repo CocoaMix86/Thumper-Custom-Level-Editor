@@ -781,6 +781,7 @@ namespace Thumper_Custom_Level_Editor
 			string newfilename = "";
 			//create file renaming dialog and show it
 			FileNameDialog filenamedialog = new FileNameDialog();
+			filenamedialog.StartPosition = FormStartPosition.Manual;
 			filenamedialog.Location = MousePosition;
 			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
 				newfilename = filenamedialog.txtWorkingRename.Text;
