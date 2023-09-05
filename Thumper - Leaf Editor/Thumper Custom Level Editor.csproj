@@ -217,6 +217,12 @@
     <Compile Include="Extra Forms\AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extra Forms\FileNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Extra Forms\FileNameDialog.Designer.cs">
+      <DependentUpon>FileNameDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Extra Forms\DialogInput.resx">
       <DependentUpon>DialogInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extra Forms\FileNameDialog.resx">
+      <DependentUpon>FileNameDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Extra Forms\Interpolator.resx">
       <DependentUpon>Interpolator.cs</DependentUpon>
@@ -404,6 +413,7 @@
     <EmbeddedResource Include="DLLs\IndexRange.dll" />
     <None Include="image assets\icon-pencil.png" />
     <None Include="image assets\icon-gear.png" />
+    <None Include="image assets\icon-divider.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

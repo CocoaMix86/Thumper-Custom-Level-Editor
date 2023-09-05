@@ -191,23 +191,22 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show("You cannot rename this file.", "File error");
 				return;
 			}
-			txtWorkingRename.Text = file[1];
-			lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
-			//show the panel
-			panelWorkRename.Location = workingfolderFiles.Location;
-			panelWorkRename.BringToFront();
-			panelWorkRename.Visible = true;
-		}
-		//Duplicate file
-		private void duplicateToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkCopy_Click(null, null);
-		//Delete file
-		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkDelete_Click(null, null);
 
-		private void btnWorkRenameYes_Click(object sender, EventArgs e)
-		{
-			string newfilepath = $@"{workingfolder}\{filetype}_{txtWorkingRename.Text}.txt";
-			File.Move(_loadedleaf, newfilepath);
-			workingfolderFiles.SelectedCells[1].Value = $@"{filetype}_{txtWorkingRename.Text}";
+			string newfilepath = "";
+			//setup file name dialog and then show it
+			FileNameDialog filenamedialog = new FileNameDialog();
+			filenamedialog.txtWorkingRename.Text = file[1];
+			filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
+			//if YES, rename file
+			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
+				newfilepath = $@"{workingfolder}\{filetype}_{filenamedialog.txtWorkingRename.Text}.txt";
+				workingfolderFiles.SelectedCells[1].Value = $@"{filetype}_{filenamedialog.txtWorkingRename.Text}";
+				File.Move(_loadedleaf, newfilepath);
+			}
+			//if NO, return and skip the rest below
+			else
+				return;
+		
 
 			if (filetype == "leaf") {
 				//change current leaf's loaded path and then save it to make sure new name is in fact saved
@@ -221,17 +220,15 @@ namespace Thumper_Custom_Level_Editor
 			if (filetype == "gate") {
 				_loadedgate = newfilepath;
 				gatesaveToolStripMenuItem_Click(null, null);
-            }
+			}
 			if (filetype == "samp") {
 				_loadedsample = newfilepath;
 				SamplesaveToolStripMenuItem_Click(null, null);
-            }
-			panelWorkRename.Visible = false;
+			}
 		}
-
-		private void btnWorkRenameNo_Click(object sender, EventArgs e)
-		{
-			panelWorkRename.Visible = false;
-		}
+		//Duplicate file
+		private void duplicateToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkCopy_Click(null, null);
+		//Delete file
+		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkDelete_Click(null, null);
 	}
 }

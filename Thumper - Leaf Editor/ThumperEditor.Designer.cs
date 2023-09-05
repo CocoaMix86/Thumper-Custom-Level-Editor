@@ -137,6 +137,7 @@
             this.panelZoom = new System.Windows.Forms.Panel();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
+            this.btnLeafSplit = new System.Windows.Forms.Button();
             this.btnTrackPaste = new System.Windows.Forms.Button();
             this.btnLeafColors = new System.Windows.Forms.Button();
             this.btnLEafInterpLinear = new System.Windows.Forms.Button();
@@ -300,11 +301,6 @@
             this.btnGatePanelOpen = new System.Windows.Forms.Button();
             this.btnGatePanelNew = new System.Windows.Forms.Button();
             this.panelWorkingFolder = new System.Windows.Forms.Panel();
-            this.panelWorkRename = new System.Windows.Forms.Panel();
-            this.btnWorkRenameNo = new System.Windows.Forms.Button();
-            this.btnWorkRenameYes = new System.Windows.Forms.Button();
-            this.label47 = new System.Windows.Forms.Label();
-            this.txtWorkingRename = new System.Windows.Forms.TextBox();
             this.filterLvl = new System.Windows.Forms.CheckBox();
             this.filterGate = new System.Windows.Forms.CheckBox();
             this.filterMaster = new System.Windows.Forms.CheckBox();
@@ -349,7 +345,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelBeeble = new System.Windows.Forms.Panel();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
-            this.lblRenameFileType = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -377,7 +372,6 @@
             this.panelGate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
             this.panelWorkingFolder.SuspendLayout();
-            this.panelWorkRename.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.workingfolderRightClick.SuspendLayout();
             this.panelSample.SuspendLayout();
@@ -1356,7 +1350,7 @@
             // 
             this.panelZoom.Controls.Add(this.label10);
             this.panelZoom.Controls.Add(this.trackZoom);
-            this.panelZoom.Location = new System.Drawing.Point(506, 1);
+            this.panelZoom.Location = new System.Drawing.Point(533, 1);
             this.panelZoom.Name = "panelZoom";
             this.panelZoom.Size = new System.Drawing.Size(131, 27);
             this.panelZoom.TabIndex = 43;
@@ -1378,6 +1372,7 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelLeaf.Controls.Add(this.btnLeafSplit);
             this.panelLeaf.Controls.Add(this.btnTrackPaste);
             this.panelLeaf.Controls.Add(this.btnLeafColors);
             this.panelLeaf.Controls.Add(this.btnLEafInterpLinear);
@@ -1408,6 +1403,22 @@
             this.panelLeaf.Size = new System.Drawing.Size(1431, 495);
             this.panelLeaf.TabIndex = 45;
             this.panelLeaf.Visible = false;
+            // 
+            // btnLeafSplit
+            // 
+            this.btnLeafSplit.BackColor = System.Drawing.Color.Black;
+            this.btnLeafSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeafSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeafSplit.ForeColor = System.Drawing.Color.Black;
+            this.btnLeafSplit.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_divider;
+            this.btnLeafSplit.Location = new System.Drawing.Point(370, 1);
+            this.btnLeafSplit.Name = "btnLeafSplit";
+            this.btnLeafSplit.Size = new System.Drawing.Size(25, 25);
+            this.btnLeafSplit.TabIndex = 112;
+            this.toolTip1.SetToolTip(this.btnLeafSplit, "Split leaf at selected beat into 2 leafs");
+            this.btnLeafSplit.UseCompatibleTextRendering = true;
+            this.btnLeafSplit.UseVisualStyleBackColor = false;
+            this.btnLeafSplit.Click += new System.EventHandler(this.btnLeafSplit_Click);
             // 
             // btnTrackPaste
             // 
@@ -1597,7 +1608,7 @@
             this.dropTimeSig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropTimeSig.ForeColor = System.Drawing.Color.White;
             this.dropTimeSig.FormattingEnabled = true;
-            this.dropTimeSig.Location = new System.Drawing.Point(430, 3);
+            this.dropTimeSig.Location = new System.Drawing.Point(457, 3);
             this.dropTimeSig.Name = "dropTimeSig";
             this.dropTimeSig.Size = new System.Drawing.Size(72, 21);
             this.dropTimeSig.TabIndex = 45;
@@ -1957,7 +1968,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(372, 6);
+            this.label2.Location = new System.Drawing.Point(399, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 46;
@@ -4108,7 +4119,6 @@
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelWorkingFolder.Controls.Add(this.panelWorkRename);
             this.panelWorkingFolder.Controls.Add(this.filterLvl);
             this.panelWorkingFolder.Controls.Add(this.filterGate);
             this.panelWorkingFolder.Controls.Add(this.filterMaster);
@@ -4137,69 +4147,6 @@
             this.panelWorkingFolder.Size = new System.Drawing.Size(297, 444);
             this.panelWorkingFolder.TabIndex = 117;
             this.panelWorkingFolder.SizeChanged += new System.EventHandler(this.panelWorkingFolder_SizeChanged);
-            // 
-            // panelWorkRename
-            // 
-            this.panelWorkRename.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelWorkRename.Controls.Add(this.lblRenameFileType);
-            this.panelWorkRename.Controls.Add(this.btnWorkRenameNo);
-            this.panelWorkRename.Controls.Add(this.btnWorkRenameYes);
-            this.panelWorkRename.Controls.Add(this.label47);
-            this.panelWorkRename.Controls.Add(this.txtWorkingRename);
-            this.panelWorkRename.Location = new System.Drawing.Point(96, 4);
-            this.panelWorkRename.Name = "panelWorkRename";
-            this.panelWorkRename.Size = new System.Drawing.Size(174, 75);
-            this.panelWorkRename.TabIndex = 136;
-            this.panelWorkRename.Visible = false;
-            // 
-            // btnWorkRenameNo
-            // 
-            this.btnWorkRenameNo.BackColor = System.Drawing.Color.Red;
-            this.btnWorkRenameNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWorkRenameNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWorkRenameNo.ForeColor = System.Drawing.Color.White;
-            this.btnWorkRenameNo.Location = new System.Drawing.Point(88, 44);
-            this.btnWorkRenameNo.Name = "btnWorkRenameNo";
-            this.btnWorkRenameNo.Size = new System.Drawing.Size(81, 24);
-            this.btnWorkRenameNo.TabIndex = 94;
-            this.btnWorkRenameNo.Text = "Cancel";
-            this.btnWorkRenameNo.UseVisualStyleBackColor = false;
-            this.btnWorkRenameNo.Click += new System.EventHandler(this.btnWorkRenameNo_Click);
-            // 
-            // btnWorkRenameYes
-            // 
-            this.btnWorkRenameYes.BackColor = System.Drawing.Color.Green;
-            this.btnWorkRenameYes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWorkRenameYes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWorkRenameYes.ForeColor = System.Drawing.Color.White;
-            this.btnWorkRenameYes.Location = new System.Drawing.Point(2, 44);
-            this.btnWorkRenameYes.Name = "btnWorkRenameYes";
-            this.btnWorkRenameYes.Size = new System.Drawing.Size(81, 24);
-            this.btnWorkRenameYes.TabIndex = 93;
-            this.btnWorkRenameYes.Text = "Confirm";
-            this.btnWorkRenameYes.UseVisualStyleBackColor = false;
-            this.btnWorkRenameYes.Click += new System.EventHandler(this.btnWorkRenameYes_Click);
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.ForeColor = System.Drawing.Color.White;
-            this.label47.Location = new System.Drawing.Point(4, 4);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(100, 13);
-            this.label47.TabIndex = 92;
-            this.label47.Text = "Enter new file name";
-            // 
-            // txtWorkingRename
-            // 
-            this.txtWorkingRename.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.txtWorkingRename.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWorkingRename.ForeColor = System.Drawing.Color.White;
-            this.txtWorkingRename.Location = new System.Drawing.Point(21, 21);
-            this.txtWorkingRename.Name = "txtWorkingRename";
-            this.txtWorkingRename.Size = new System.Drawing.Size(149, 22);
-            this.txtWorkingRename.TabIndex = 0;
             // 
             // filterLvl
             // 
@@ -4850,18 +4797,6 @@
             this.timerBeeble.Interval = 300;
             this.timerBeeble.Tick += new System.EventHandler(this.timerBeeble_Tick);
             // 
-            // lblRenameFileType
-            // 
-            this.lblRenameFileType.AutoSize = true;
-            this.lblRenameFileType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRenameFileType.ForeColor = System.Drawing.Color.White;
-            this.lblRenameFileType.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
-            this.lblRenameFileType.Location = new System.Drawing.Point(3, 24);
-            this.lblRenameFileType.MinimumSize = new System.Drawing.Size(16, 16);
-            this.lblRenameFileType.Name = "lblRenameFileType";
-            this.lblRenameFileType.Size = new System.Drawing.Size(16, 16);
-            this.lblRenameFileType.TabIndex = 95;
-            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -4926,8 +4861,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).EndInit();
             this.panelWorkingFolder.ResumeLayout(false);
             this.panelWorkingFolder.PerformLayout();
-            this.panelWorkRename.ResumeLayout(false);
-            this.panelWorkRename.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
             this.workingfolderRightClick.ResumeLayout(false);
             this.panelSample.ResumeLayout(false);
@@ -5228,12 +5161,7 @@
         private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.Panel panelWorkRename;
-        private System.Windows.Forms.Button btnWorkRenameNo;
-        private System.Windows.Forms.Button btnWorkRenameYes;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.TextBox txtWorkingRename;
-        private System.Windows.Forms.Label lblRenameFileType;
+        private System.Windows.Forms.Button btnLeafSplit;
     }
 }
 

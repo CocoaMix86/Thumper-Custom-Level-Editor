@@ -748,6 +748,9 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLeafColors_Click(object sender, EventArgs e)
 		{
+			//do nothing if no cells selected
+			if (trackEditor.SelectedCells.Count == 0)
+				return;
 			DialogResult result = colorDialog1.ShowDialog();
 			if (result == DialogResult.OK) {
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
@@ -759,6 +762,24 @@ namespace Thumper_Custom_Level_Editor
 					}
 				}
 			}
+		}
+
+		private void btnLeafSplit_Click(object sender, EventArgs e)
+		{
+			//do nothing if no cells selected
+			if (trackEditor.SelectedCells.Count == 0)
+				return;
+			if (trackEditor.SelectedCells.Count > 1) {
+				MessageBox.Show("Select only 1 cell to be the split point", "Leaf split error");
+				return;
+			}
+			//split leaf into 2 leafs
+			int splitindex = trackEditor.CurrentCell.ColumnIndex;
+			if (MessageBox.Show(@$"Split this leaf at beat {splitindex}?", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
+				return;
+
+			DataGridViewRowCollection splitdgvr = trackEditor.Rows;
+			;
 		}
 
 		private void btnLeafObjRefresh_Click(object sender, EventArgs e)
