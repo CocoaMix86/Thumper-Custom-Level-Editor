@@ -775,11 +775,69 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//split leaf into 2 leafs
 			int splitindex = trackEditor.CurrentCell.ColumnIndex;
-			if (MessageBox.Show(@$"Split this leaf at beat {splitindex}?", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
+			if (MessageBox.Show(@$"Split this leaf at beat {splitindex}? THIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
 				return;
 
-			DataGridViewRowCollection splitdgvr = trackEditor.Rows;
-			;
+			string newfilename = "";
+			//create file renaming dialog and show it
+			FileNameDialog filenamedialog = new FileNameDialog();
+			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
+				newfilename = filenamedialog.txtWorkingRename.Text;
+				//check if the chosen name exists in the level folder
+				if (File.Exists($@"{workingfolder}\leaf_{newfilename}.txt")) {
+					MessageBox.Show("File name already exists.", "Leaf split error");
+					return;
+                }
+			}
+			//if NOT yes, return and skip everything else below
+			else
+				return;
+
+			///SPLIT THAT LEAF
+			//build the leaf JSON so we can manipulate it
+			var _leafsplitbefore = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
+			//enumerate over each sequencer object and it's values to figure out which ones to keep
+			foreach (JObject seq_obj in _leafsplitbefore["seq_objs"]) {             
+				//data_points contains a list of all data points. By getting Properties() of it,
+				//each point becomes its own index
+				var data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
+				//iterate over each data point. If it's less than the splitindex, add it to a new list
+				JObject newdata = new JObject();
+				foreach (JProperty data_point in data_points) {
+					if (int.Parse(data_point.Name) < splitindex)
+						newdata.Add(data_point.Name, data_point.Value);
+				}
+				seq_obj.Remove("data_points");
+				seq_obj.Add("data_points", newdata);
+			}
+			//set new beat count
+			_leafsplitbefore.Remove("beat_cnt");
+			_leafsplitbefore.Add("beat_cnt", splitindex);
+			//write data back to file
+			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_leafsplitbefore, Formatting.Indented));
+
+			///repeat all above for after split file
+			var _leafsplitafter = LeafBuildSave(newfilename + ".txt");
+			foreach (JObject seq_obj in _leafsplitafter["seq_objs"]) {
+				var data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
+				JObject newdata = new JObject();
+				foreach (JProperty data_point in data_points) {
+					if (int.Parse(data_point.Name) >= splitindex)
+						//shift beats back to starting position
+						newdata.Add((int.Parse(data_point.Name) - splitindex).ToString(), data_point.Value);
+				}
+				seq_obj.Remove("data_points");
+				seq_obj.Add("data_points", newdata);
+			}
+			//set new beat count
+			_leafsplitafter.Remove("beat_cnt");
+			_leafsplitafter.Add("beat_cnt", numericUpDown_LeafLength.Value - splitindex);
+			//write data back to file
+			File.WriteAllText($@"{workingfolder}\leaf_{newfilename}.txt", JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
+
+			//load new leaf that was just split
+			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
+			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
 		}
 
 		private void btnLeafObjRefresh_Click(object sender, EventArgs e)
