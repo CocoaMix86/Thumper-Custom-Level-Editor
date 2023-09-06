@@ -174,8 +174,10 @@ namespace Thumper_Custom_Level_Editor
 
 
 			File.Copy($@"{workingfolder}\{file[0]}_{file[1]}.txt", $@"{workingfolder}\{file[0]}_{newfilename}.txt");
-			//call the refresh method so the dgv updates
-			btnWorkRefresh_Click(null, null);
+			//add new file to workingfolder DGV
+			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject(file[0]), $@"{file[0]}_{newfilename}"});
+			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
+			SaveFileType(file[0], $@"{workingfolder}\{file[0]}_{newfilename}.txt");
 		}
 
 		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;
@@ -228,8 +230,16 @@ namespace Thumper_Custom_Level_Editor
 			//if NO, return and skip the rest below
 			else
 				return;
-		
 
+			SaveFileType(filetype, newfilepath);
+		}
+		//Duplicate file
+		private void duplicateToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkCopy_Click(null, null);
+		//Delete file
+		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkDelete_Click(null, null);
+
+		private void SaveFileType(string filetype, string newfilepath)
+        {
 			if (filetype == "leaf") {
 				//change current leaf's loaded path and then save it to make sure new name is in fact saved
 				_loadedleaf = newfilepath;
@@ -248,9 +258,5 @@ namespace Thumper_Custom_Level_Editor
 				SamplesaveToolStripMenuItem_Click(null, null);
 			}
 		}
-		//Duplicate file
-		private void duplicateToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkCopy_Click(null, null);
-		//Delete file
-		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkDelete_Click(null, null);
 	}
 }
