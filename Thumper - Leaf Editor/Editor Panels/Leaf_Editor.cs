@@ -493,13 +493,25 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackUp_Click(object sender, EventArgs e)
 		{
+			List<Tuple<Sequencer_Object, DataGridViewRow>> _selectedtracks = new List<Tuple<Sequencer_Object, DataGridViewRow>>();
 			DataGridView dgv = trackEditor;
 			try {
-				int totalRows = dgv.Rows.Count;
-				// get index of the row for the selected cell
-				int rowIndex = dgv.SelectedCells[0].OwningRow.Index;
-				if (rowIndex == 0)
-					return;
+				//finds each distinct row across all selected cells
+				foreach (DataGridViewRow dgvr in dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct()) {
+					//check if one of the rows is the top row. If it is, stop
+					if (dgvr.Index == 0)
+						return;
+
+					_selectedtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow>(_tracks[dgvr.Index], dgvr));
+                }
+				//iterate over rows and shift them up 1 index
+				foreach(Tuple<Sequencer_Object, DataGridViewRow> _newtrack in _selectedtracks) {
+					_tracks.Remove(_newtrack.Item1);
+					dgv.Rows.Remove(_newtrack.Item2);
+					_tracks.Insert(_newtrack.Item2.Index - 1, _newtrack.Item1);
+					dgv.Rows.Insert(_newtrack.Item2.Index - 1, _newtrack.Item2);
+                }
+				/*
 				//move track in list
 				Sequencer_Object selectedTrack = _tracks[rowIndex];
 				_tracks.Remove(selectedTrack);
@@ -511,10 +523,11 @@ namespace Thumper_Custom_Level_Editor
 				dgv.Rows.Insert(rowIndex - 1, selectedRow);
 				dgv.ClearSelection();
 				dgv.Rows[rowIndex - 1].Cells[colIndex].Selected = true;
+				*/
 				//sets flag that leaf has unsaved changes
 				SaveLeaf(false);
 			}
-			catch { }
+			catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
 		}
 
 		private void btnTrackDown_Click(object sender, EventArgs e)
@@ -540,7 +553,7 @@ namespace Thumper_Custom_Level_Editor
 				//sets flag that leaf has unsaved changes
 				SaveLeaf(false);
 			}
-			catch { }
+			catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
 		}
 
 		private void btnTrackCopy_Click(object sender, EventArgs e)
