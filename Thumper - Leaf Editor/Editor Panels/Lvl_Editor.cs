@@ -638,11 +638,16 @@ namespace Thumper_Custom_Level_Editor
 				else
 					return;
 			}
+			//Setup list of tunnels if copy check is enabled
+			List<string> copytunnels = new List<string>();
+			if (chkTunnelCopy.Checked) {
+				copytunnels = new List<string>(_lvlleafs.Last().paths);
+			}
 			//add leaf data to the list
 			_lvlleafs.Add(new LvlLeafData() {
 				leafname = (string)_load["obj_name"],
 				beats = (int)_load["beat_cnt"],
-				paths = new List<string>()
+				paths = new List<string>(copytunnels)
 			});
 		}
 
