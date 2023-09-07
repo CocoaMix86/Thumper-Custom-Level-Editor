@@ -437,17 +437,20 @@ namespace Thumper_Custom_Level_Editor
 		{
 			bool _empty = true;
 			//iterate over current row to see if any cells have data
-			foreach (DataGridViewCell dgvc in trackEditor.CurrentRow.Cells) {
+			foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
 				if (dgvc.Value != null) {
 					_empty = false;
 					break;
 				}
 			}
 			//if row is not empty, show confirmation box. Otherwise just delete the row
-			if ((!_empty && MessageBox.Show("This track has data. Are you sure you want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
+			if ((!_empty && MessageBox.Show("Some cells in the selected tracks have data. Are you sure you want to delete?", "Confirm delete", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
 				try {
-					_tracks.RemoveAt(trackEditor.CurrentRow.Index);
-					trackEditor.Rows.Remove(trackEditor.CurrentRow);
+					var selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+					foreach (DataGridViewRow dgvr in selectedrows) {
+						_tracks.RemoveAt(dgvr.Index);
+						trackEditor.Rows.Remove(dgvr);
+					}
 					//sets flag that leaf has unsaved changes
 					SaveLeaf(false);
 				}
@@ -493,37 +496,32 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackUp_Click(object sender, EventArgs e)
 		{
-			List<Tuple<Sequencer_Object, DataGridViewRow>> _selectedtracks = new List<Tuple<Sequencer_Object, DataGridViewRow>>();
+			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new List<Tuple<Sequencer_Object, DataGridViewRow, int>>();
 			DataGridView dgv = trackEditor;
 			try {
 				//finds each distinct row across all selected cells
-				foreach (DataGridViewRow dgvr in dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct()) {
+				var selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+				selectedrows.Sort((row, row2) => row.Index.CompareTo(row2.Index));
+				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => new { cell.ColumnIndex, cell.RowIndex }).ToList();
+				foreach (DataGridViewRow dgvr in selectedrows) {
 					//check if one of the rows is the top row. If it is, stop
 					if (dgvr.Index == 0)
 						return;
 
-					_selectedtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow>(_tracks[dgvr.Index], dgvr));
-                }
+					_selectedtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow, int>(_tracks[dgvr.Index], dgvr, dgvr.Index));
+				}
 				//iterate over rows and shift them up 1 index
-				foreach(Tuple<Sequencer_Object, DataGridViewRow> _newtrack in _selectedtracks) {
+				foreach (Tuple<Sequencer_Object, DataGridViewRow, int> _newtrack in _selectedtracks) {
 					_tracks.Remove(_newtrack.Item1);
 					dgv.Rows.Remove(_newtrack.Item2);
-					_tracks.Insert(_newtrack.Item2.Index - 1, _newtrack.Item1);
-					dgv.Rows.Insert(_newtrack.Item2.Index - 1, _newtrack.Item2);
-                }
-				/*
-				//move track in list
-				Sequencer_Object selectedTrack = _tracks[rowIndex];
-				_tracks.Remove(selectedTrack);
-				_tracks.Insert(rowIndex - 1, selectedTrack);
-				// get index of the column for the selected cell
-				int colIndex = dgv.SelectedCells[0].OwningColumn.Index;
-				DataGridViewRow selectedRow = dgv.Rows[rowIndex];
-				dgv.Rows.Remove(selectedRow);
-				dgv.Rows.Insert(rowIndex - 1, selectedRow);
+					_tracks.Insert(_newtrack.Item3 - 1, _newtrack.Item1);
+					dgv.Rows.Insert(_newtrack.Item3 - 1, _newtrack.Item2);
+				}
+				//clear selected cells and shift them up
 				dgv.ClearSelection();
-				dgv.Rows[rowIndex - 1].Cells[colIndex].Selected = true;
-				*/
+				foreach (var cell in selectedcells) {
+					dgv[cell.ColumnIndex, cell.RowIndex - 1].Selected = true;
+				}
 				//sets flag that leaf has unsaved changes
 				SaveLeaf(false);
 			}
@@ -532,24 +530,32 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackDown_Click(object sender, EventArgs e)
 		{
+			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new List<Tuple<Sequencer_Object, DataGridViewRow, int>>();
 			DataGridView dgv = trackEditor;
 			try {
-				int totalRows = dgv.Rows.Count;
-				// get index of the row for the selected cell
-				int rowIndex = dgv.SelectedCells[0].OwningRow.Index;
-				if (rowIndex == totalRows - 1)
-					return;
-				//move track in list
-				Sequencer_Object selectedTrack = _tracks[rowIndex];
-				_tracks.Remove(selectedTrack);
-				_tracks.Insert(rowIndex + 1, selectedTrack);
-				// get index of the column for the selected cell
-				int colIndex = dgv.SelectedCells[0].OwningColumn.Index;
-				DataGridViewRow selectedRow = dgv.Rows[rowIndex];
-				dgv.Rows.Remove(selectedRow);
-				dgv.Rows.Insert(rowIndex + 1, selectedRow);
+				//finds each distinct row across all selected cells
+				var selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+				selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
+				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => new { cell.ColumnIndex, cell.RowIndex }).ToList();
+				foreach (DataGridViewRow dgvr in selectedrows) {
+					//check if one of the rows is the top row. If it is, stop
+					if (dgvr.Index >= dgv.RowCount - 1)
+						return;
+
+					_selectedtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow, int>(_tracks[dgvr.Index], dgvr, dgvr.Index));
+				}
+				//iterate over rows and shift them up 1 index
+				foreach (Tuple<Sequencer_Object, DataGridViewRow, int> _newtrack in _selectedtracks) {
+					_tracks.Remove(_newtrack.Item1);
+					dgv.Rows.Remove(_newtrack.Item2);
+					_tracks.Insert(_newtrack.Item3 + 1, _newtrack.Item1);
+					dgv.Rows.Insert(_newtrack.Item3 + 1, _newtrack.Item2);
+				}
+				//clear selected cells and shift them up
 				dgv.ClearSelection();
-				dgv.Rows[rowIndex + 1].Cells[colIndex].Selected = true;
+				foreach (var cell in selectedcells) {
+					dgv[cell.ColumnIndex, cell.RowIndex + 1].Selected = true;
+				}
 				//sets flag that leaf has unsaved changes
 				SaveLeaf(false);
 			}
