@@ -361,7 +361,12 @@ namespace Thumper_Custom_Level_Editor
 		///COPY PASTE of leaf
 		private void btnLvlLeafCopy_Click(object sender, EventArgs e)
 		{
-			clipboardleaf = _lvlleafs[lvlLeafList.CurrentRow.Index];
+			LvlLeafData temp = _lvlleafs[lvlLeafList.CurrentRow.Index];
+			clipboardleaf = new LvlLeafData() {
+				beats = temp.beats,
+				leafname = temp.leafname,
+				paths = temp.paths
+			};
 			btnLvlLeafPaste.Enabled = true;
 		}
 		private void btnLvlLeafPaste_Click(object sender, EventArgs e)
