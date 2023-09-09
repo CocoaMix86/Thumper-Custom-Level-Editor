@@ -208,6 +208,31 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
+		///Detect dragon-and-drop of files and then load them to Sample files
+		private void sampleList_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+				string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+				if (File.Exists(data[0])) {
+					e.Effect = DragDropEffects.Copy;
+					return;
+				}
+			}
+			e.Effect = DragDropEffects.None;
+		}
+		///Detect dragon-and-drop of files and then load them to Sample files
+		private void sampleList_DragDrop(object sender, DragEventArgs e)
+		{
+			if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+			string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+			foreach (string dir in data) {
+				if (File.Exists(dir) && Path.GetExtension(dir) == ".fsb")
+					FSBtoSAMP(dir);
+				else
+					MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
+			}
+		}
+
 		#endregion
 
 		#region Buttons
