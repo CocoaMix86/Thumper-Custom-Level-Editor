@@ -43,7 +43,7 @@ namespace Thumper_Custom_Level_Editor
 		private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//if not selecting the file column, return and do nothing
-			if (e.ColumnIndex != 0)
+			if (e.ColumnIndex != 0 || e.RowIndex == -1)
 				return;
 
 			string _file;
