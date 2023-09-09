@@ -100,10 +100,12 @@ namespace Thumper_Custom_Level_Editor
 			}
 			///Send file off to different load methods based on the file type
 			if ((string)_load["obj_type"] == "SequinGate") {
-
+				if (_loadedmaster != null)
+					AddFiletoMaster(_selectedfilename);
 			}
 			else if ((string)_load["obj_type"] == "SequinLevel") {
-
+				if (_loadedmaster != null)
+					AddFiletoMaster(_selectedfilename);
 			}
 			else if ((string)_load["obj_type"] == "SequinLeaf") {
 				if (_loadedlvl != null)

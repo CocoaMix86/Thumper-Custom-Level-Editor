@@ -254,36 +254,41 @@ namespace Thumper_Custom_Level_Editor
 				ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
 				ofd.Title = "Load a Thumper Lvl/Gate file";
 				if (ofd.ShowDialog() == DialogResult.OK) {
-					//parse leaf to JSON
-					dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-					//check if file being loaded is actually a leaf. Can do so by checking the JSON key
-					if ((string)_load["obj_type"] != "SequinLevel" && (string)_load["obj_type"] != "SequinGate") {
-						MessageBox.Show("This does not appear to be a lvl or a gate file!", "File load error");
-						return;
-					}
-					//check if lvl exists in the same folder as the master. If not, allow user to copy file.
-					//this is why I utilize workingfolder
-					if (Path.GetDirectoryName(ofd.FileName) != workingfolder) {
-						if (MessageBox.Show("The item you chose does not exist in the same folder as this master. Do you want to copy it to this folder and load it?", "File load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-							File.Copy(ofd.FileName, $@"{workingfolder}\{Path.GetFileName(ofd.FileName)}");
-						else
-							return;
-					}
-					//add lvl/gate data to the list
-					if (_load["obj_type"] == "SequinLevel")
-						_masterlvls.Add(new MasterLvlData() {
-							lvlname = (string)_load["obj_name"],
-							playplus = true,
-							checkpoint = true
-						});
-					else if (_load["obj_type"] == "SequinGate")
-						_masterlvls.Add(new MasterLvlData() {
-							gatename = (string)_load["obj_name"],
-							playplus = true,
-							checkpoint = true
-						});
+					AddFiletoMaster(ofd.FileName);
 				}
 			}
+		}
+
+		private void AddFiletoMaster(string path)
+        {
+			//parse leaf to JSON
+			dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(path), "#.*", ""));
+			//check if file being loaded is actually a leaf. Can do so by checking the JSON key
+			if ((string)_load["obj_type"] != "SequinLevel" && (string)_load["obj_type"] != "SequinGate") {
+				MessageBox.Show("This does not appear to be a lvl or a gate file!", "File load error");
+				return;
+			}
+			//check if lvl exists in the same folder as the master. If not, allow user to copy file.
+			//this is why I utilize workingfolder
+			if (Path.GetDirectoryName(path) != workingfolder) {
+				if (MessageBox.Show("The item you chose does not exist in the same folder as this master. Do you want to copy it to this folder and load it?", "File load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+					File.Copy(path, $@"{workingfolder}\{Path.GetFileName(path)}");
+				else
+					return;
+			}
+			//add lvl/gate data to the list
+			if (_load["obj_type"] == "SequinLevel")
+				_masterlvls.Add(new MasterLvlData() {
+					lvlname = (string)_load["obj_name"],
+					playplus = true,
+					checkpoint = true
+				});
+			else if (_load["obj_type"] == "SequinGate")
+				_masterlvls.Add(new MasterLvlData() {
+					gatename = (string)_load["obj_name"],
+					playplus = true,
+					checkpoint = true
+				});
 		}
 
 		private void btnMasterLvlUp_Click(object sender, EventArgs e)
