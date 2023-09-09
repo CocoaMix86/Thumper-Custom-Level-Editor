@@ -232,51 +232,56 @@ namespace Thumper_Custom_Level_Editor
 		//Opens an .FSB audio file, hashes the name, and adds it to the loaded SAMP_ file
 		private void FSBtoSamp_Click(object sender, EventArgs e)
 		{
+			using (var ofd = new OpenFileDialog()) {
+				ofd.Filter = "FSB Audio File (*.fsb)|*.fsb";
+				ofd.Title = "Load a FSB Audio file";
+				if (ofd.ShowDialog() == DialogResult.OK) {
+					FSBtoSAMP(ofd.FileName);
+				}
+			}
+		}
+
+		private void FSBtoSAMP(string filepath)
+		{
 			string _filename;
 			byte[] _bytes;
 			byte[] _header = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
 			string _hashedname = "";
 
-			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "FSB Audio File (*.fsb)|*.fsb";
-				ofd.Title = "Load a FSB Audio file";
-				if (ofd.ShowDialog() == DialogResult.OK) {
-					//save relevant data of the chosen file
-					_filename = Path.GetFileNameWithoutExtension(ofd.FileName);
-					_bytes = File.ReadAllBytes(ofd.FileName);
-					//get the hash of the FSB filename. This will be used to name the final .PC file
-					byte[] hashbytes = BitConverter.GetBytes(Hash32($"Asamples/levels/custom/{_filename}.wav"));
-					Array.Reverse(hashbytes);
-					foreach (byte b in hashbytes)
-						_hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
-					//if the hashed name starts with a '0', remove it
-					if (_hashedname[0] == '0')
-						_hashedname = _hashedname.Substring(1);
+			//save relevant data of the chosen file
+			_filename = Path.GetFileNameWithoutExtension(filepath);
+			_bytes = File.ReadAllBytes(filepath);
+			//get the hash of the FSB filename. This will be used to name the final .PC file
+			byte[] hashbytes = BitConverter.GetBytes(Hash32($"Asamples/levels/custom/{_filename}.wav"));
+			Array.Reverse(hashbytes);
+			foreach (byte b in hashbytes)
+				_hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+			//if the hashed name starts with a '0', remove it
+			if (_hashedname[0] == '0')
+				_hashedname = _hashedname.Substring(1);
 
-					///With hashing complete, can now save the file to a .PC
-					//if the `extras` folder doesn't exist, make it
-					Directory.CreateDirectory($@"{workingfolder}\extras");
-					//write header and bytes of fsb to new file
-					using (FileStream f = File.Open($@"{workingfolder}\extras\{_hashedname}.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
-						f.Write(_header, 0, _header.Length);
-						f.Write(_bytes, 0, _bytes.Length);
-					}
-
-					//Add new sample entry to the loaded samp_ file
-					SampleData newsample = new SampleData {
-						obj_name = $"{_filename}",
-						volume = 1,
-						pitch = 1,
-						pan = 0,
-						offset = 0,
-						path = $"samples/levels/custom/{_filename}.wav",
-						channel_group = "sequin.ch"
-					};
-					_samplelist.Add(newsample);
-					int _index = _samplelist.IndexOf(newsample);
-					sampleList.Rows[_index].Cells[0].Selected = true;
-				}
+			///With hashing complete, can now save the file to a .PC
+			//if the `extras` folder doesn't exist, make it
+			Directory.CreateDirectory($@"{workingfolder}\extras");
+			//write header and bytes of fsb to new file
+			using (FileStream f = File.Open($@"{workingfolder}\extras\{_hashedname}.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
+				f.Write(_header, 0, _header.Length);
+				f.Write(_bytes, 0, _bytes.Length);
 			}
+
+			//Add new sample entry to the loaded samp_ file
+			SampleData newsample = new SampleData {
+				obj_name = $"{_filename}",
+				volume = 1,
+				pitch = 1,
+				pan = 0,
+				offset = 0,
+				path = $"samples/levels/custom/{_filename}.wav",
+				channel_group = "sequin.ch"
+			};
+			_samplelist.Add(newsample);
+			int _index = _samplelist.IndexOf(newsample);
+			sampleList.Rows[_index].Cells[0].Selected = true;
 		}
 
 		private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
