@@ -232,7 +232,6 @@ namespace Thumper_Custom_Level_Editor
 		//Opens an .FSB audio file, hashes the name, and adds it to the loaded SAMP_ file
 		private void FSBtoSamp_Click(object sender, EventArgs e)
 		{
-			string _filepath;
 			string _filename;
 			byte[] _bytes;
 			byte[] _header = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
@@ -243,9 +242,8 @@ namespace Thumper_Custom_Level_Editor
 				ofd.Title = "Load a FSB Audio file";
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					//save relevant data of the chosen file
-					_filepath = ofd.FileName;
 					_filename = Path.GetFileNameWithoutExtension(ofd.FileName);
-					_bytes = File.ReadAllBytes(_filepath);
+					_bytes = File.ReadAllBytes(ofd.FileName);
 					//get the hash of the FSB filename. This will be used to name the final .PC file
 					byte[] hashbytes = BitConverter.GetBytes(Hash32($"Asamples/levels/custom/{_filename}.wav"));
 					Array.Reverse(hashbytes);
