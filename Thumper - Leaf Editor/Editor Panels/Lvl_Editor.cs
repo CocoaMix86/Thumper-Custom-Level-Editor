@@ -499,15 +499,13 @@ namespace Thumper_Custom_Level_Editor
 					//if beat_cnt is different than what is loaded, replace it and mark the save flag
 					if (_leaf.beats != (int)_load["beat_cnt"]) {
 						_leaf.beats = (int)_load["beat_cnt"];
+						//and update the dgv cell with new beat value
 						lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].Cells[1].Value = _leaf.beats;
 						SaveLvl(false);
 					}
 				}
 				catch { }
 			}
-
-			//update the DGV with new data
-			//lvlleaf_CollectionChanged(null, null);
 		}
 
 		private void btnlvlPanelOpen_Click(object sender, EventArgs e)
