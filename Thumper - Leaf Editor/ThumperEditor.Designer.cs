@@ -4340,6 +4340,7 @@
             // 
             // workingfolderFiles
             // 
+            this.workingfolderFiles.AllowDrop = true;
             this.workingfolderFiles.AllowUserToAddRows = false;
             this.workingfolderFiles.AllowUserToDeleteRows = false;
             this.workingfolderFiles.AllowUserToResizeRows = false;
@@ -4399,6 +4400,8 @@
             this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
             this.workingfolderFiles.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseDown);
             this.workingfolderFiles.SelectionChanged += new System.EventHandler(this.workingfolderFiles_SelectionChanged);
+            this.workingfolderFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.workingfolderFiles_DragDrop);
+            this.workingfolderFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.workingfolderFiles_DragEnter);
             // 
             // FileType
             // 

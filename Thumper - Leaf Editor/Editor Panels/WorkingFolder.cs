@@ -189,6 +189,32 @@ namespace Thumper_Custom_Level_Editor
 		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); }
 		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); }
 
+		///Drag and drop files to copy them to the workingfolder
+		private void workingfolderFiles_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+				string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+				if (File.Exists(data[0])) {
+					e.Effect = DragDropEffects.Copy;
+					return;
+				}
+			}
+			e.Effect = DragDropEffects.None;
+		}
+		private void workingfolderFiles_DragDrop(object sender, DragEventArgs e)
+		{
+			if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+			string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+			foreach (string filepath in data) {
+				if (!File.Exists($@"{workingfolder}\{Path.GetFileName(filepath)}")) {
+					File.Copy(filepath, $@"{workingfolder}\{Path.GetFileName(filepath)}");
+					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(Path.GetFileNameWithoutExtension(filepath).Split('_')[0]), Path.GetFileNameWithoutExtension(filepath));
+					workingfolderFiles.Sort(workingfolderFiles.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
+				}
+				else
+					MessageBox.Show($@"{Path.GetFileName(filepath)} exists in the working folder. File not added.", "Load file error");
+			}
+		}
 
 		//Handles right-click of cells to bring up context menu
 		private void workingfolderFiles_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
