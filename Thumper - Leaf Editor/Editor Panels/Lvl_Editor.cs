@@ -504,7 +504,7 @@ namespace Thumper_Custom_Level_Editor
 						SaveLvl(false);
 					}
 				}
-				catch { }
+				catch (Exception ex) { MessageBox.Show("Problem occured when refreshing lvl beats. Show this error to the dev.\n" + ex, "Lvl beat refresh error"); }
 			}
 		}
 
