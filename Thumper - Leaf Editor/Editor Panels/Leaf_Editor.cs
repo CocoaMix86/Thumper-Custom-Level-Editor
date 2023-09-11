@@ -657,7 +657,7 @@ namespace Thumper_Custom_Level_Editor
 				_default = float.Parse(_objects[dropObjects.SelectedIndex].def[dropParamPath.SelectedIndex]),
 				step = _objects[dropObjects.SelectedIndex].step[dropParamPath.SelectedIndex],
 				trait_type = _objects[dropObjects.SelectedIndex].trait_type[dropParamPath.SelectedIndex],
-				highlight_color = "-8355585",
+				highlight_color = _tracks[_selecttrack] != null ? _tracks[_selecttrack].highlight_color : "-8355585",
 				highlight_value = 1,
 				footer = _objects[dropObjects.SelectedIndex].footer[dropParamPath.SelectedIndex],
 				default_interp = "kTraitInterpLinear"
