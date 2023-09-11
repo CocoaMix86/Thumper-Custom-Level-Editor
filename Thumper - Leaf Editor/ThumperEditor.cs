@@ -102,39 +102,11 @@ namespace Thumper_Custom_Level_Editor
         private void SaveAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Call all save methods for files with the save flag False
-            if (!_savemaster) {
-                var _save = MasterBuildSave();
-                File.WriteAllText(_loadedmaster, JsonConvert.SerializeObject(_save, Formatting.Indented));
-                SaveMaster(true);
-                lblMasterName.Text = $"Master Editor - sequin.master";
-            }
-            if (!_savegate) {
-                var _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
-                File.WriteAllText(_loadedgate, JsonConvert.SerializeObject(_save, Formatting.Indented));
-                SaveGate(true);
-                lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
-            }
-            if (!_savelvl) {
-                var _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
-                File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save, Formatting.Indented));
-                SaveLvl(true);
-                lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
-            }
-            if (!_saveleaf) {
-                var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-                File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
-                SaveLeaf(true);
-                lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
-                //update beat counts in loaded lvl if need be
-                if (_loadedlvl != null)
-                    btnLvlRefreshBeats.PerformClick();
-            }
-            if (!_savesample) {
-                var _save = SampleBuildSave();
-                File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
-                SaveSample(true);
-                lblSampleEditor.Text = $"Sample Editor - {_loadedsample}";
-            }
+            if (!_savemaster) mastersaveToolStripMenuItem_Click(null, null);
+            if (!_savegate) gatesaveToolStripMenuItem_Click(null, null);
+            if (!_savelvl) saveToolStripMenuItem2_Click(null, null);
+            if (!_saveleaf) saveToolStripMenuItem_Click(null, null);
+            if (!_savesample) SamplesaveToolStripMenuItem_Click(null, null);
         }
         ///Toolstrip - INTERPOLATOR
         private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e) => new Interpolator().Show();
