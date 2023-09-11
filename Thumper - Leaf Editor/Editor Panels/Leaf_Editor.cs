@@ -338,6 +338,9 @@ namespace Thumper_Custom_Level_Editor
 			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveLeaf(true);
 			lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
+			//update beat counts in loaded lvl if need be
+			if (_loadedlvl != null)
+				btnLvlRefreshBeats.PerformClick();
 		}
 		///LEAF - SAVE AS
 		private void leafsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -365,6 +368,9 @@ namespace Thumper_Custom_Level_Editor
 					lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
 					_loadedleaf = sfd.FileName;
 					SaveLeaf(true);
+					//update beat counts in loaded lvl if need be
+					if (_loadedlvl != null)
+						btnLvlRefreshBeats.PerformClick();
 				}
 			}
 		}
@@ -859,6 +865,10 @@ namespace Thumper_Custom_Level_Editor
 			//load new leaf that was just split
 			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
 			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
+			
+			//update beat counts in loaded lvl if need be
+			if (_loadedlvl != null)
+				btnLvlRefreshBeats.PerformClick();
 		}
 
 		private void btnLeafObjRefresh_Click(object sender, EventArgs e)
@@ -1183,7 +1193,7 @@ namespace Thumper_Custom_Level_Editor
 			_save.Add("beat_cnt", (int)numericUpDown_LeafLength.Value);
 			_save.Add("time_sig", dropTimeSig.Text);
 			///end building JSON output
-			
+
 			return _save;
 		}
 		#endregion

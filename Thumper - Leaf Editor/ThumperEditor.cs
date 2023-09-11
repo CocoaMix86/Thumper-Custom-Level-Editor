@@ -125,6 +125,9 @@ namespace Thumper_Custom_Level_Editor
                 File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
                 SaveLeaf(true);
                 lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
+                //update beat counts in loaded lvl if need be
+                if (_loadedlvl != null)
+                    btnLvlRefreshBeats.PerformClick();
             }
             if (!_savesample) {
                 var _save = SampleBuildSave();
