@@ -268,6 +268,8 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
+		public bool _sampleplaying = false;
+		AudioPlaybackEngine ape = new AudioPlaybackEngine();
 		private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
 		{
 			var _samp = _samplelist[sampleList.CurrentRow.Index];
@@ -284,10 +286,21 @@ namespace Thumper_Custom_Level_Editor
 			if (File.Exists($@"temp\{_samp.obj_name}.wav"))
 				_filetype = "wav";
 
-			AudioPlaybackEngine.Instance.PlaySound(new CachedSound($@"temp\{_samp.obj_name}.{_filetype}"));
-			//VorbisWaveReader vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
-			//WaveOut oggPlayer = WaveOutInit(vorbis);
-			//oggPlayer.Play();
+			//creates new instance of the playback engine, since it gets disposed when stopping
+			if (!_sampleplaying) {
+				ape = new AudioPlaybackEngine();
+				ape.PlaySound(new CachedSound($@"temp\{_samp.obj_name}.{_filetype}"));
+				_sampleplaying = true;
+				btnSampEditorPlaySamp.Text = "Stop";
+				btnSampEditorPlaySamp.ForeColor = Color.Red;
+			}
+			//stop current playback by disposing the object
+			else {
+				ape.Dispose();
+				_sampleplaying = false;
+				btnSampEditorPlaySamp.Text = "Play Sample";
+				btnSampEditorPlaySamp.ForeColor = Color.Green;
+			}
 		}
 		#endregion
 
@@ -504,31 +517,6 @@ namespace Thumper_Custom_Level_Editor
 			File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
 			return fileExtension;
 		}
-
-		/// These are specifically for audio playback. Don't touch them
-		/// IDK how they work
-		/// https://stackoverflow.com/questions/74605784/using-vorbis-and-naudio-to-play-ogg-files-in-c-sharp
-		private WaveOut WaveOutInit(IWaveProvider reader)
-		{
-			var waveOut = new WaveOut();
-			waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
-			waveOut.Init(reader);
-			return waveOut;
-		}
-		private void WaveOut_PlaybackStopped(object? sender, StoppedEventArgs e)
-		{
-			//WaveOutReset(oggPlayer, vorbis);
-			//btnSampEditorPlaySamp.Enabled = true;
-		}
-		private void WaveOutReset(WaveOut? player, VorbisWaveReader? reader)
-		{
-			if (player != null) {
-				player.PlaybackStopped -= WaveOut_PlaybackStopped;
-				player.Dispose();
-			}
-			reader?.Dispose();
-		}
-
 		#endregion
 	}
 }
