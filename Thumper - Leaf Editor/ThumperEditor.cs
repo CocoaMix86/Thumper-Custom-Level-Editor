@@ -735,10 +735,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Label lbl = sender as Label;
             //get parent panel where lbl was clicked
-            var parent = lbl.Parent; ;
-            //remove panel from main, set some settings
-            this.Controls.Remove(parent);
-            parent.Dock = DockStyle.Fill;
+            var parent = lbl.Parent;
             //re-add panel to a splitter panel so it is now docked.
             //check all 6 and add to the earliest one
             if (splitTop1.Panel1.Controls.Count == 0)
@@ -754,6 +751,7 @@ namespace Thumper_Custom_Level_Editor
             else if (splitBottom2.Panel2.Controls.Count == 0)
                 splitBottom2.Panel2.Controls.Add(parent);
             //stop ability to freely move
+            parent.Dock = DockStyle.Fill;
             ControlMoverOrResizer.Dispose(parent);
             //switch click event
             lbl.Click -= lblPopin_Click;
