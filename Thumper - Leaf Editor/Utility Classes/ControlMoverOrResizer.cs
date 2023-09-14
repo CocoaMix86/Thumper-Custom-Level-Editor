@@ -49,9 +49,20 @@ namespace ControlManager
             MouseIsInTopEdge = false;
             MouseIsInBottomEdge = false;
             WorkType = MoveOrResize.MoveAndResize;
-            control.MouseDown += (sender, e) => StartMovingOrResizing(control, e);
-            control.MouseUp += (sender, e) => StopDragOrResizing(control);
-            control.MouseMove += (sender, e) => MoveControl(container, e);
+            control.MouseDown += StartMovingOrResizing;
+            control.MouseUp += StopDragOrResizing;
+            control.MouseMove += MoveControl;
+        }
+
+        internal static void Dispose(Control control)
+        {
+            Dispose(control, control);
+        }
+        internal static void Dispose(Control control, Control container)
+        {
+            control.MouseDown -= StartMovingOrResizing;
+            control.MouseUp -= StopDragOrResizing;
+            control.MouseMove -= MoveControl;
         }
 
         private static void UpdateMouseEdgeProperties(Control control, Point mouseLocationInControl)
@@ -117,8 +128,9 @@ namespace ControlManager
             }
         }
 
-        private static void StartMovingOrResizing(Control control, MouseEventArgs e)
+        private static void StartMovingOrResizing(object control1, MouseEventArgs e)
         {
+            Control control = control1 as Control;
             //if a control is in the process of being moved/resized, do not reprocess this section
             if (_moving || _resizing)
                 return;
@@ -138,8 +150,9 @@ namespace ControlManager
             control.Capture = true;
         }
 
-        private static void MoveControl(Control control, MouseEventArgs e)
+        private static void MoveControl(object control1, MouseEventArgs e)
         {
+            Control control = control1 as Control;
             if (!_resizing && ! _moving)
             {
                 UpdateMouseEdgeProperties(control, new Point(e.X, e.Y));
@@ -198,7 +211,7 @@ namespace ControlManager
                 }
                 else
                 {
-                     StopDragOrResizing(control);
+                     StopDragOrResizing(control, null);
                 }
             }
             else if (_moving)
@@ -214,8 +227,9 @@ namespace ControlManager
             }
         }
 
-        private static void StopDragOrResizing(Control control)
+        private static void StopDragOrResizing(object control1, MouseEventArgs e)
         {
+            Control control = control1 as Control;
             _resizing = false;
             _moving = false;
             control.Capture = false;
