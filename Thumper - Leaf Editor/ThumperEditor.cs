@@ -66,7 +66,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private string _workingfolder;
-        public dynamic helptext;
         public List<string> lvlsinworkfolder = new List<string>();
         public string _dgfocus;
         public Point _menuloc;
