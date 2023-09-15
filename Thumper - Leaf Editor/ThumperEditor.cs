@@ -303,12 +303,13 @@ namespace Thumper_Custom_Level_Editor
         public void ImportObjects()
         {
             _objects.Clear();
-            ///import selectable objects from file and parse them into lists for manipulation
-            //splits input at "###". Each section is a collection of param_paths
+            //check if the track_objects exists or not, but do not overwrite it
             if (!File.Exists(@"templates\track_objects.txt")) {
                 File.WriteAllText(@"templates\track_objects.txt", Properties.Resources.track_objects);
             }
 
+            ///import selectable objects from file and parse them into lists for manipulation
+            //splits input at "###". Each section is a collection of param_paths
             var import = (File.ReadAllText(@"templates\track_objects.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
             for (int x = 0; x < import.Count; x++) {
                 //split each section into individual lines
