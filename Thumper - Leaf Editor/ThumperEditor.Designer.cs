@@ -1188,7 +1188,7 @@
             this.richRawTrackData.DetectUrls = false;
             this.richRawTrackData.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richRawTrackData.ForeColor = System.Drawing.Color.White;
-            this.richRawTrackData.Location = new System.Drawing.Point(293, 411);
+            this.richRawTrackData.Location = new System.Drawing.Point(293, 429);
             this.richRawTrackData.Name = "richRawTrackData";
             this.richRawTrackData.Size = new System.Drawing.Size(718, 74);
             this.richRawTrackData.TabIndex = 26;
@@ -1346,7 +1346,7 @@
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.trackEditor.Size = new System.Drawing.Size(799, 378);
+            this.trackEditor.Size = new System.Drawing.Size(799, 396);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDoubleClick);
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
@@ -1393,7 +1393,7 @@
             this.btnRawImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRawImport.BackColor = System.Drawing.Color.Gray;
             this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRawImport.Location = new System.Drawing.Point(212, 441);
+            this.btnRawImport.Location = new System.Drawing.Point(212, 459);
             this.btnRawImport.Name = "btnRawImport";
             this.btnRawImport.Size = new System.Drawing.Size(75, 44);
             this.btnRawImport.TabIndex = 44;
@@ -2558,7 +2558,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new System.Drawing.Size(361, 101);
+            this.lvlLoopTracks.Size = new System.Drawing.Size(361, 115);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
             this.lvlLoopTracks.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.lvlLoopTracks_DataError);
@@ -2714,7 +2714,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 101);
+            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 115);
             this.lvlLeafPaths.TabIndex = 79;
             this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
             // 
