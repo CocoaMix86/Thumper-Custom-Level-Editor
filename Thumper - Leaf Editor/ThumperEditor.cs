@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -77,7 +78,36 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             ColorFormElements();
             menuStrip.Renderer = new MyRenderer();
+            LoopDoubleBuffer(this);
         }
+        ///
+        ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
+        public static void SetDoubleBuffered(System.Windows.Forms.Control c)
+        {
+            if (System.Windows.Forms.SystemInformation.TerminalServerSession)
+                return;
+            System.Reflection.PropertyInfo aProp = typeof(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            aProp.SetValue(c, true, null);
+        }
+        protected override CreateParams CreateParams
+        {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
+        public void LoopDoubleBuffer(Control c)
+        {
+            foreach (Control _c in c.Controls) {
+                if (_c.Controls.Count > 1)
+                    LoopDoubleBuffer(_c);
+                SetDoubleBuffered(_c);
+            }
+        }
+        ///END DOUBLEBUFFERING
+        /// 
+        
         ///Color elements based on set properties
         private void ColorFormElements()
         {
