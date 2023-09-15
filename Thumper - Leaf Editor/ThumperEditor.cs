@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -53,7 +52,7 @@ namespace Thumper_Custom_Level_Editor
                     SampleEditorVisible(false); SaveSample(true);
 
                     //set Working Folder panel data
-                    btnWorkRefresh_Click(null, null);
+                    btnWorkRefresh.PerformClick();
 
                     lblWorkingFolder.Text = $"Working Folder - {value}";
                     btnWorkRefresh.Enabled = true;
