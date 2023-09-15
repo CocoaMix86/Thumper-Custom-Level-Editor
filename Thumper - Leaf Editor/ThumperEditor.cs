@@ -243,21 +243,8 @@ namespace Thumper_Custom_Level_Editor
             InitializeGateStuff();
             InitializeSampleStuff();
             //set panels to be resizeable
-            /*
-            ControlMoverOrResizer.Init(panelLeaf);
-            ControlMoverOrResizer.Init(panelLevel);
-            ControlMoverOrResizer.Init(panelMaster);
-            ControlMoverOrResizer.Init(panelGate);
-            ControlMoverOrResizer.Init(panelWorkingFolder);
-            ControlMoverOrResizer.Init(panelSample);
-            ControlMoverOrResizer.Init(menuStrip);
-            ControlMoverOrResizer.WorkType = ControlMoverOrResizer.MoveOrResize.MoveAndResize;
-            */
             ControlMoverOrResizer.Init(panelBeeble);
             ControlMoverOrResizer.Init(pictureBox1, panelBeeble);
-
-            ///import help text
-            helptext = JsonConvert.DeserializeObject(Properties.Resources.helptext);
 
             ///Create directory for leaf templates
             if (!Directory.Exists(@"templates")) {
