@@ -516,9 +516,7 @@ namespace Thumper_Custom_Level_Editor
         /// 
         /// VARIOUS POPUPS FOR HELP TEXT
         /// 
-        private void lblMasterlvllistHelp_Click(object sender, EventArgs e) => MessageBox.Show((string)helptext["masterLvlList"], "Master Editor Help");
         private void lblConfigColorHelp_Click(object sender, EventArgs e) => new ImageMessageBox("railcolorhelp").Show();
-        private void lblGatePreHelp_Click(object sender, EventArgs e) => MessageBox.Show((string)helptext["gatePre"], "Gate Editor Help");
         private void lblGateSectionHelp_Click(object sender, EventArgs e) => new ImageMessageBox("bosssectionhelp").Show();
 
         private void editLevelDetailsToolStripMenuItem_Click(object sender, EventArgs e)

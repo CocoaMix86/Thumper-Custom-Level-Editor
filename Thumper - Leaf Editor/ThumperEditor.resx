@@ -123,6 +123,9 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>246, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>246, 17</value>
+  </metadata>
   <data name="label8.ToolTip" xml:space="preserve">
     <value>Whether the value changes every beat (step = TRUE)(utilizing default on empty beats),
 or interoplates between set data points (step = FALSE)
@@ -179,6 +182,19 @@ don't drown out other sounds at specific times.</value>
   <metadata name="Beats.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="lblMasterlvllistHelp.ToolTip" xml:space="preserve">
+    <value>CHECKPOINT COLUMN
+If checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a 
+checkpoint and will flow into the next lvl.
+
+PLAY+ COLUMN
+If checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. 
+This is useful for tutorial levels in Play, and then removing them for Play+.
+
+ISOLATE
+When checked, only isolated levels will play in game. Useful for testing specific sublevels 
+without replaying the entire thing.</value>
+  </data>
   <metadata name="masterLvl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -194,6 +210,19 @@ don't drown out other sounds at specific times.</value>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>125, 17</value>
   </metadata>
+  <data name="lblGatePreHelp.ToolTip" xml:space="preserve">
+    <value>PRE LVL
+This lvl plays at the very start of the gate sublevel. The boss does not spawn in yet. 
+Can be blank, unless you are using the Triangle boss.
+
+POST LVL
+Plays immediately after the Pre lvl. The boss spawns in at this point. The boss phases 
+play immediately after this lvl is finished. Can be blank.
+
+RESTART LVL
+This lvl plays when restarting the boss, and skips playing the pre and post lvls. 
+Can be blank.</value>
+  </data>
   <metadata name="Lvl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
