@@ -211,6 +211,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editor Panels\DockingPanels.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Extra Forms\AboutThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>
