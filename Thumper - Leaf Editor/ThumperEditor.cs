@@ -76,10 +76,11 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             ColorFormElements();
             menuStrip.Renderer = new MyRenderer();
-            LoopDoubleBuffer(this);
+            //LoopDoubleBuffer(this);
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
+        /*
         public static void SetDoubleBuffered(System.Windows.Forms.Control c)
         {
             if (System.Windows.Forms.SystemInformation.TerminalServerSession)
@@ -87,25 +88,29 @@ namespace Thumper_Custom_Level_Editor
             System.Reflection.PropertyInfo aProp = typeof(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             aProp.SetValue(c, true, null);
         }
-        protected override CreateParams CreateParams
-        {
-            get {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;
-                return cp;
-            }
-        }
         public void LoopDoubleBuffer(Control c)
         {
             foreach (Control _c in c.Controls) {
                 if (_c.Controls.Count > 1)
                     LoopDoubleBuffer(_c);
+                if (_c.GetType() == typeof(SplitContainer)) {
+                    LoopDoubleBuffer(((SplitContainer)_c).Panel1);
+                    LoopDoubleBuffer(((SplitContainer)_c).Panel2);
+                }
                 SetDoubleBuffered(_c);
+            }
+        }*/
+        protected override CreateParams CreateParams
+        {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
             }
         }
         ///END DOUBLEBUFFERING
         /// 
-        
+
         ///Color elements based on set properties
         private void ColorFormElements()
         {
