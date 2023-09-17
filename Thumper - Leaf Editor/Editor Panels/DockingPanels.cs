@@ -226,6 +226,11 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
+        private void UndockPanel(Control control)
+        {
+
+        }
+
         private void SetDockLocations()
         {
             var settings = Properties.Settings.Default;

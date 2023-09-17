@@ -660,5 +660,10 @@ namespace Thumper_Custom_Level_Editor
             timerBeeble.Stop();
             pictureBox1.Image = Properties.Resources.beeble;
         }
+
+        private void splitTop1_Panel1_DragEnter(object sender, DragEventArgs e)
+        {
+            MessageBox.Show("drag");
+        }
     }
 }
