@@ -231,8 +231,8 @@ namespace Thumper_Custom_Level_Editor
             InitializeGateStuff();
             InitializeSampleStuff();
             //set panels to be resizeable
-            ControlMoverOrResizer.Init(panelBeeble);
             ControlMoverOrResizer.Init(pictureBox1, panelBeeble);
+            ControlMoverOrResizer.Init(panelBeeble);
             ControlMoverOrResizer.Init(panelLeaf);
             ControlMoverOrResizer.Init(panelLevel);
             ControlMoverOrResizer.Init(panelGate);

@@ -50,7 +50,7 @@ namespace ControlManager
             WorkType = MoveOrResize.MoveAndResize;
             control.MouseDown += StartMovingOrResizing;
             control.MouseUp += StopDragOrResizing;
-            control.MouseMove += MoveControl;
+            control.MouseMove += (sender, e) => MoveControl(container, e);
         }
 
         internal static void Dispose(Control control)
