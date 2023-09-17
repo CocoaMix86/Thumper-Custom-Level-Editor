@@ -151,6 +151,42 @@ namespace Thumper_Custom_Level_Editor
             }
             Properties.Settings.Default.Save();
         }
+
+        private void dockbtn_Click(object sender, EventArgs e)
+        {
+            Control c = (Control)sender;
+            c.ContextMenuStrip.Show(c, new Point(5, 5));
+        }
+
+        private void contextdockLvl_Click(object sender, EventArgs e)
+        {
+            Control parentdock = null;
+            ToolStripItem item = (sender as ToolStripItem);
+            var text = item.Text;
+            //this block finds what button called the contextmenu, and gets its parent
+            //will use the parent to then dock the selected panel
+            if (item != null) {
+                ContextMenuStrip owner = item.Owner as ContextMenuStrip;
+                if (owner != null) {
+                    parentdock = owner.SourceControl.Parent;
+                }
+            }
+            //set text to the exact panel name
+            if (text == "Leaf Editor")
+                text = "panelLeaf";
+            if (text == "Lvl Editor")
+                text = "panelLevel";
+            if (text == "Gate Editor")
+                text = "panelGate";
+            if (text == "Master Editor")
+                text = "panelMaster";
+            if (text == "Sample Editor")
+                text = "panelSample";
+            if (text == "Working Folder")
+                text = "panelWorkingFolder";
+            //search for panel and add it to the dock
+            DockPanel(this.Controls.Find(text, true).First(), parentdock);
+        }
         #endregion
 
 
@@ -166,17 +202,23 @@ namespace Thumper_Custom_Level_Editor
             dockbtn.Click += lblPopout_Click;
             //change tooltip
             toolTip1.SetToolTip(dockbtn, "Undock panel");
-        }
+            panel.BringToFront();
+            panel.Visible = true;
 
-        private void dockbtn_Click(object sender, EventArgs e)
-        {
-            Control c = (Control)sender;
-            c.ContextMenuStrip.Show(c, new Point(5, 5));
-        }
-
-        private void contextdockLvl_Click(object sender, EventArgs e)
-        {
-
+            //save settings
+            if (dock == splitTop1.Panel1)
+                Properties.Settings.Default.dock1 = panel.Name;
+            if (dock == splitTop2.Panel1)
+                Properties.Settings.Default.dock2 = panel.Name;
+            if (dock == splitTop2.Panel2)
+                Properties.Settings.Default.dock3 = panel.Name;
+            if (dock == splitBottom1.Panel1)
+                Properties.Settings.Default.dock4 = panel.Name;
+            if (dock == splitBottom2.Panel1)
+                Properties.Settings.Default.dock5 = panel.Name;
+            if (dock == splitBottom2.Panel2)
+                Properties.Settings.Default.dock6 = panel.Name;
+            Properties.Settings.Default.Save();
         }
         #endregion
     }
