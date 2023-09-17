@@ -829,5 +829,11 @@ namespace Thumper_Custom_Level_Editor
             //change tooltip
             toolTip1.SetToolTip(dockbtn, "Undock panel");
         }
+
+        private void dockbtn_Click(object sender, EventArgs e)
+        {
+            Control c = (Control)sender;
+            c.ContextMenuStrip.Show(c, new Point(5, 5));
+        }
     }
 }

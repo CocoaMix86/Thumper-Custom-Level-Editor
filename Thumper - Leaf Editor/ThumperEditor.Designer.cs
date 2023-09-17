@@ -331,7 +331,18 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblPopoutSamp = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
+            this.contextMenuDock = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextdockLeaf = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockLvl = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockGate = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockMaster = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockSample = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockWork = new System.Windows.Forms.ToolStripMenuItem();
             this.label49 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
             this.panelSample = new System.Windows.Forms.Panel();
             this.btnSampEditorPlaySamp = new System.Windows.Forms.Button();
             this.lblSampleFSBhelp = new System.Windows.Forms.Label();
@@ -360,17 +371,6 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
-            this.contextMenuDock = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.contextdockLeaf = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextdockWork = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextdockMaster = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextdockGate = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextdockLvl = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextdockSample = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -400,6 +400,7 @@
             this.panelWorkingFolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.workingfolderRightClick.SuspendLayout();
+            this.contextMenuDock.SuspendLayout();
             this.panelSample.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -424,7 +425,6 @@
             this.splitBottom2.Panel1.SuspendLayout();
             this.splitBottom2.Panel2.SuspendLayout();
             this.splitBottom2.SuspendLayout();
-            this.contextMenuDock.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -4677,8 +4677,69 @@
             this.label48.Text = "▲";
             this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label48, "Dock panel");
+            this.label48.Click += new System.EventHandler(this.dockbtn_Click);
             this.label48.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.label48.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
+            // 
+            // contextMenuDock
+            // 
+            this.contextMenuDock.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextdockLeaf,
+            this.contextdockLvl,
+            this.contextdockGate,
+            this.contextdockMaster,
+            this.contextdockSample,
+            this.contextdockWork});
+            this.contextMenuDock.Name = "workingfolderRightClick";
+            this.contextMenuDock.Size = new System.Drawing.Size(156, 136);
+            // 
+            // contextdockLeaf
+            // 
+            this.contextdockLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockLeaf.ForeColor = System.Drawing.Color.White;
+            this.contextdockLeaf.Name = "contextdockLeaf";
+            this.contextdockLeaf.Size = new System.Drawing.Size(155, 22);
+            this.contextdockLeaf.Text = "Leaf Editor";
+            // 
+            // contextdockLvl
+            // 
+            this.contextdockLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockLvl.ForeColor = System.Drawing.Color.White;
+            this.contextdockLvl.Name = "contextdockLvl";
+            this.contextdockLvl.Size = new System.Drawing.Size(155, 22);
+            this.contextdockLvl.Text = "Lvl Editor";
+            // 
+            // contextdockGate
+            // 
+            this.contextdockGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockGate.ForeColor = System.Drawing.Color.White;
+            this.contextdockGate.Name = "contextdockGate";
+            this.contextdockGate.Size = new System.Drawing.Size(155, 22);
+            this.contextdockGate.Text = "Gate Editor";
+            // 
+            // contextdockMaster
+            // 
+            this.contextdockMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockMaster.ForeColor = System.Drawing.Color.White;
+            this.contextdockMaster.Name = "contextdockMaster";
+            this.contextdockMaster.Size = new System.Drawing.Size(155, 22);
+            this.contextdockMaster.Text = "Master Editor";
+            // 
+            // contextdockSample
+            // 
+            this.contextdockSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockSample.ForeColor = System.Drawing.Color.White;
+            this.contextdockSample.Name = "contextdockSample";
+            this.contextdockSample.Size = new System.Drawing.Size(155, 22);
+            this.contextdockSample.Text = "Sample Editor";
+            // 
+            // contextdockWork
+            // 
+            this.contextdockWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockWork.ForeColor = System.Drawing.Color.White;
+            this.contextdockWork.Name = "contextdockWork";
+            this.contextdockWork.Size = new System.Drawing.Size(155, 22);
+            this.contextdockWork.Text = "Working Folder";
             // 
             // label49
             // 
@@ -4697,8 +4758,93 @@
             this.label49.Text = "▲";
             this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label49, "Dock panel");
+            this.label49.Click += new System.EventHandler(this.dockbtn_Click);
             this.label49.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.label49.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.label51.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label51.ContextMenuStrip = this.contextMenuDock;
+            this.label51.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label51.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label51.Location = new System.Drawing.Point(0, 0);
+            this.label51.MinimumSize = new System.Drawing.Size(20, 20);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(20, 20);
+            this.label51.TabIndex = 139;
+            this.label51.Text = "▲";
+            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label51, "Dock panel");
+            this.label51.Click += new System.EventHandler(this.dockbtn_Click);
+            this.label51.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
+            this.label51.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.label52.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label52.ContextMenuStrip = this.contextMenuDock;
+            this.label52.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label52.Location = new System.Drawing.Point(0, 0);
+            this.label52.MinimumSize = new System.Drawing.Size(20, 20);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(20, 20);
+            this.label52.TabIndex = 139;
+            this.label52.Text = "▲";
+            this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label52, "Dock panel");
+            this.label52.Click += new System.EventHandler(this.dockbtn_Click);
+            this.label52.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
+            this.label52.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.label53.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label53.ContextMenuStrip = this.contextMenuDock;
+            this.label53.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label53.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label53.Location = new System.Drawing.Point(0, 0);
+            this.label53.MinimumSize = new System.Drawing.Size(20, 20);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(20, 20);
+            this.label53.TabIndex = 139;
+            this.label53.Text = "▲";
+            this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label53, "Dock panel");
+            this.label53.Click += new System.EventHandler(this.dockbtn_Click);
+            this.label53.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
+            this.label53.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.label55.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label55.ContextMenuStrip = this.contextMenuDock;
+            this.label55.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label55.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label55.Location = new System.Drawing.Point(0, 0);
+            this.label55.MinimumSize = new System.Drawing.Size(20, 20);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(20, 20);
+            this.label55.TabIndex = 139;
+            this.label55.Text = "▲";
+            this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.label55, "Dock panel");
+            this.label55.Click += new System.EventHandler(this.dockbtn_Click);
+            this.label55.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
+            this.label55.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
             // panelSample
             // 
@@ -5146,146 +5292,6 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.label51.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label51.ContextMenuStrip = this.contextMenuDock;
-            this.label51.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label51.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label51.Location = new System.Drawing.Point(0, 0);
-            this.label51.MinimumSize = new System.Drawing.Size(20, 20);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(20, 20);
-            this.label51.TabIndex = 139;
-            this.label51.Text = "▲";
-            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label51, "Dock panel");
-            this.label51.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
-            this.label51.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.label52.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label52.ContextMenuStrip = this.contextMenuDock;
-            this.label52.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label52.Location = new System.Drawing.Point(0, 0);
-            this.label52.MinimumSize = new System.Drawing.Size(20, 20);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(20, 20);
-            this.label52.TabIndex = 139;
-            this.label52.Text = "▲";
-            this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label52, "Dock panel");
-            this.label52.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
-            this.label52.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.label53.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label53.ContextMenuStrip = this.contextMenuDock;
-            this.label53.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label53.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label53.Location = new System.Drawing.Point(0, 0);
-            this.label53.MinimumSize = new System.Drawing.Size(20, 20);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(20, 20);
-            this.label53.TabIndex = 139;
-            this.label53.Text = "▲";
-            this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label53, "Dock panel");
-            this.label53.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
-            this.label53.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.label55.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label55.ContextMenuStrip = this.contextMenuDock;
-            this.label55.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label55.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label55.Location = new System.Drawing.Point(0, 0);
-            this.label55.MinimumSize = new System.Drawing.Size(20, 20);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(20, 20);
-            this.label55.TabIndex = 139;
-            this.label55.Text = "▲";
-            this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.label55, "Dock panel");
-            this.label55.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
-            this.label55.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
-            // 
-            // contextMenuDock
-            // 
-            this.contextMenuDock.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contextdockLeaf,
-            this.contextdockLvl,
-            this.contextdockGate,
-            this.contextdockMaster,
-            this.contextdockSample,
-            this.contextdockWork});
-            this.contextMenuDock.Name = "workingfolderRightClick";
-            this.contextMenuDock.Size = new System.Drawing.Size(156, 136);
-            // 
-            // contextdockLeaf
-            // 
-            this.contextdockLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockLeaf.ForeColor = System.Drawing.Color.White;
-            this.contextdockLeaf.Name = "contextdockLeaf";
-            this.contextdockLeaf.Size = new System.Drawing.Size(155, 22);
-            this.contextdockLeaf.Text = "Leaf Editor";
-            // 
-            // contextdockWork
-            // 
-            this.contextdockWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockWork.ForeColor = System.Drawing.Color.White;
-            this.contextdockWork.Name = "contextdockWork";
-            this.contextdockWork.Size = new System.Drawing.Size(155, 22);
-            this.contextdockWork.Text = "Working Folder";
-            // 
-            // contextdockMaster
-            // 
-            this.contextdockMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockMaster.ForeColor = System.Drawing.Color.White;
-            this.contextdockMaster.Name = "contextdockMaster";
-            this.contextdockMaster.Size = new System.Drawing.Size(155, 22);
-            this.contextdockMaster.Text = "Master Editor";
-            // 
-            // contextdockGate
-            // 
-            this.contextdockGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockGate.ForeColor = System.Drawing.Color.White;
-            this.contextdockGate.Name = "contextdockGate";
-            this.contextdockGate.Size = new System.Drawing.Size(155, 22);
-            this.contextdockGate.Text = "Gate Editor";
-            // 
-            // contextdockLvl
-            // 
-            this.contextdockLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockLvl.ForeColor = System.Drawing.Color.White;
-            this.contextdockLvl.Name = "contextdockLvl";
-            this.contextdockLvl.Size = new System.Drawing.Size(155, 22);
-            this.contextdockLvl.Text = "Lvl Editor";
-            // 
-            // contextdockSample
-            // 
-            this.contextdockSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockSample.ForeColor = System.Drawing.Color.White;
-            this.contextdockSample.Name = "contextdockSample";
-            this.contextdockSample.Size = new System.Drawing.Size(155, 22);
-            this.contextdockSample.Text = "Sample Editor";
-            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5353,6 +5359,7 @@
             this.panelWorkingFolder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
             this.workingfolderRightClick.ResumeLayout(false);
+            this.contextMenuDock.ResumeLayout(false);
             this.panelSample.ResumeLayout(false);
             this.panelSample.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
@@ -5384,7 +5391,6 @@
             this.splitBottom2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitBottom2)).EndInit();
             this.splitBottom2.ResumeLayout(false);
-            this.contextMenuDock.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
