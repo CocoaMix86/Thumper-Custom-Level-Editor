@@ -790,27 +790,27 @@ namespace Thumper_Custom_Level_Editor
             //re-add panel to a splitter panel so it is now docked.
             //check all 6 and add to the earliest one
             //also set what dock the panel is in, so it is remembered on restart
-            if (splitTop1.Panel1.Controls.Count == 0) {
+            if (splitTop1.Panel1.Controls.Count == 1) {
                 DockPanel(parent, splitTop1.Panel1);
                 Properties.Settings.Default.dock1 = parent.Name;
             }
-            else if (splitTop2.Panel1.Controls.Count == 0) {
+            else if (splitTop2.Panel1.Controls.Count == 1) {
                 DockPanel(parent, splitTop2.Panel1);
                 Properties.Settings.Default.dock2 = parent.Name;
             }
-            else if (splitTop2.Panel2.Controls.Count == 0) {
+            else if (splitTop2.Panel2.Controls.Count == 1) {
                 DockPanel(parent, splitTop2.Panel2);
                 Properties.Settings.Default.dock3 = parent.Name;
             }
-            else if (splitBottom1.Panel1.Controls.Count == 0) {
+            else if (splitBottom1.Panel1.Controls.Count == 1) {
                 DockPanel(parent, splitBottom1.Panel1);
                 Properties.Settings.Default.dock4 = parent.Name;
             }
-            else if (splitBottom2.Panel1.Controls.Count == 0) {
+            else if (splitBottom2.Panel1.Controls.Count == 1) {
                 DockPanel(parent, splitBottom2.Panel1);
                 Properties.Settings.Default.dock5 = parent.Name;
             }
-            else if (splitBottom2.Panel2.Controls.Count == 0) {
+            else if (splitBottom2.Panel2.Controls.Count == 1) {
                 DockPanel(parent, splitBottom2.Panel2);
                 Properties.Settings.Default.dock6 = parent.Name;
             }
@@ -828,6 +828,21 @@ namespace Thumper_Custom_Level_Editor
             dockbtn.Click += lblPopout_Click;
             //change tooltip
             toolTip1.SetToolTip(dockbtn, "Undock panel");
+        }
+
+        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
