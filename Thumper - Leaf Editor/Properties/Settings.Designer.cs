@@ -430,5 +430,65 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["dock6"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int splitterHorz1 {
+            get {
+                return ((int)(this["splitterHorz1"]));
+            }
+            set {
+                this["splitterHorz1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int splitterVert1 {
+            get {
+                return ((int)(this["splitterVert1"]));
+            }
+            set {
+                this["splitterVert1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int splitterVert2 {
+            get {
+                return ((int)(this["splitterVert2"]));
+            }
+            set {
+                this["splitterVert2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int splitterVert3 {
+            get {
+                return ((int)(this["splitterVert3"]));
+            }
+            set {
+                this["splitterVert3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int splitterVert4 {
+            get {
+                return ((int)(this["splitterVert4"]));
+            }
+            set {
+                this["splitterVert4"] = value;
+            }
+        }
     }
 }

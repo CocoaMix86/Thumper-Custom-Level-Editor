@@ -206,6 +206,12 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.workingfoldervisible = panelWorkingFolder.Visible;
             Properties.Settings.Default.beeblesize = panelBeeble.Size;
             Properties.Settings.Default.beebleloc = panelBeeble.Location;
+            //splitter distances
+            Properties.Settings.Default.splitterHorz1 = splitHorizontal.SplitterDistance;
+            Properties.Settings.Default.splitterVert1 = splitTop1.SplitterDistance;
+            Properties.Settings.Default.splitterVert2 = splitTop2.SplitterDistance;
+            Properties.Settings.Default.splitterVert3 = splitBottom1.SplitterDistance;
+            Properties.Settings.Default.splitterVert4 = splitBottom2.SplitterDistance;
 
             Properties.Settings.Default.Save();
         }
@@ -264,33 +270,8 @@ namespace Thumper_Custom_Level_Editor
             dropTimeSig.DataSource = _timesig;
             //
             SaveLeaf(true);
-
-            //set dock locations for panels
-            if (Properties.Settings.Default.dock1 != "empty") {
-                Control _c = this.Controls.Find(Properties.Settings.Default.dock1, true).First();
-                DockPanel(_c, splitTop1.Panel1);
-            }
-            if (Properties.Settings.Default.dock2 != "empty") {
-                Control _c = this.Controls.Find(Properties.Settings.Default.dock2, true).First();
-                DockPanel(_c, splitTop2.Panel1);
-            }
-            if (Properties.Settings.Default.dock3 != "empty") {
-                Control _c = this.Controls.Find(Properties.Settings.Default.dock3, true).First();
-                DockPanel(_c, splitTop2.Panel2);
-            }
-            if (Properties.Settings.Default.dock4 != "empty") {
-                Control _c = this.Controls.Find(Properties.Settings.Default.dock4, true).First();
-                DockPanel(_c, splitBottom1.Panel1);
-            }
-            if (Properties.Settings.Default.dock5 != "empty") {
-                Control _c = this.Controls.Find(Properties.Settings.Default.dock5, true).First();
-                DockPanel(_c, splitBottom2.Panel1);
-            }
-            if (Properties.Settings.Default.dock6 != "empty") {
-                Control _c = this.Controls.Find(Properties.Settings.Default.dock6, true).First();
-                DockPanel(_c, splitBottom2.Panel2);
-            }
-
+            //set panels to their last saved dock
+            SetDockLocations();
             //load size and location data for panels
             panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
             panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
