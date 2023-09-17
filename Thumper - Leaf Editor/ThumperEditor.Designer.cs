@@ -452,7 +452,7 @@
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.menuStrip.ShowItemToolTips = true;
-            this.menuStrip.Size = new System.Drawing.Size(626, 29);
+            this.menuStrip.Size = new System.Drawing.Size(600, 29);
             this.menuStrip.TabIndex = 20;
             this.menuStrip.Text = "mnuLeafEditor";
             this.menuStrip.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip_MouseDown);
@@ -4690,21 +4690,21 @@
             // contextMenuDock
             // 
             this.contextMenuDock.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contextdockWork,
-            this.contextdockSample,
-            this.contextdockMaster,
-            this.contextdockGate,
             this.contextdockLeaf,
-            this.contextdockLvl});
+            this.contextdockLvl,
+            this.contextdockGate,
+            this.contextdockMaster,
+            this.contextdockSample,
+            this.contextdockWork});
             this.contextMenuDock.Name = "workingfolderRightClick";
-            this.contextMenuDock.Size = new System.Drawing.Size(156, 136);
+            this.contextMenuDock.Size = new System.Drawing.Size(181, 158);
             // 
             // contextdockWork
             // 
             this.contextdockWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockWork.ForeColor = System.Drawing.Color.White;
             this.contextdockWork.Name = "contextdockWork";
-            this.contextdockWork.Size = new System.Drawing.Size(155, 22);
+            this.contextdockWork.Size = new System.Drawing.Size(180, 22);
             this.contextdockWork.Text = "Working Folder";
             this.contextdockWork.Click += new System.EventHandler(this.contextdockLvl_Click);
             // 
@@ -4713,7 +4713,7 @@
             this.contextdockSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockSample.ForeColor = System.Drawing.Color.White;
             this.contextdockSample.Name = "contextdockSample";
-            this.contextdockSample.Size = new System.Drawing.Size(155, 22);
+            this.contextdockSample.Size = new System.Drawing.Size(180, 22);
             this.contextdockSample.Text = "Sample Editor";
             this.contextdockSample.Click += new System.EventHandler(this.contextdockLvl_Click);
             // 
@@ -4722,7 +4722,7 @@
             this.contextdockMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockMaster.ForeColor = System.Drawing.Color.White;
             this.contextdockMaster.Name = "contextdockMaster";
-            this.contextdockMaster.Size = new System.Drawing.Size(155, 22);
+            this.contextdockMaster.Size = new System.Drawing.Size(180, 22);
             this.contextdockMaster.Text = "Master Editor";
             this.contextdockMaster.Click += new System.EventHandler(this.contextdockLvl_Click);
             // 
@@ -4731,7 +4731,7 @@
             this.contextdockGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockGate.ForeColor = System.Drawing.Color.White;
             this.contextdockGate.Name = "contextdockGate";
-            this.contextdockGate.Size = new System.Drawing.Size(155, 22);
+            this.contextdockGate.Size = new System.Drawing.Size(180, 22);
             this.contextdockGate.Text = "Gate Editor";
             this.contextdockGate.Click += new System.EventHandler(this.contextdockLvl_Click);
             // 
@@ -4740,7 +4740,7 @@
             this.contextdockLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockLeaf.ForeColor = System.Drawing.Color.White;
             this.contextdockLeaf.Name = "contextdockLeaf";
-            this.contextdockLeaf.Size = new System.Drawing.Size(155, 22);
+            this.contextdockLeaf.Size = new System.Drawing.Size(180, 22);
             this.contextdockLeaf.Text = "Leaf Editor";
             this.contextdockLeaf.Click += new System.EventHandler(this.contextdockLvl_Click);
             // 
@@ -4749,7 +4749,7 @@
             this.contextdockLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockLvl.ForeColor = System.Drawing.Color.White;
             this.contextdockLvl.Name = "contextdockLvl";
-            this.contextdockLvl.Size = new System.Drawing.Size(155, 22);
+            this.contextdockLvl.Size = new System.Drawing.Size(180, 22);
             this.contextdockLvl.Text = "Lvl Editor";
             this.contextdockLvl.Click += new System.EventHandler(this.contextdockLvl_Click);
             // 

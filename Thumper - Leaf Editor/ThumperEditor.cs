@@ -125,17 +125,17 @@ namespace Thumper_Custom_Level_Editor
 
         ///Toolstrip - VIEW MENU
         //Visible - LEaf Editor
-        private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.Visible = leafEditorToolStripMenuItem.Checked; panelLeaf.BringToFront(); }
+        private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelLeaf); panelLeaf.Visible = leafEditorToolStripMenuItem.Checked; panelLeaf.BringToFront(); }
         //Visible - Level Editor
-        private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e) { panelLevel.Visible = levelEditorToolStripMenuItem.Checked; panelLevel.BringToFront(); }
+        private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelLevel) ; panelLevel.Visible = levelEditorToolStripMenuItem.Checked; panelLevel.BringToFront(); }
         //Visble - Gate Editor
-        private void gateEditorToolStripMenuItem_Click(object sender, EventArgs e) { panelGate.Visible = gateEditorToolStripMenuItem.Checked; panelGate.BringToFront(); }
+        private void gateEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelGate); panelGate.Visible = gateEditorToolStripMenuItem.Checked; panelGate.BringToFront(); }
         //Visible - Master Editor
-        private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e) { panelMaster.Visible = masterEditorToolStripMenuItem.Checked; panelMaster.BringToFront(); }
+        private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelMaster); panelMaster.Visible = masterEditorToolStripMenuItem.Checked; panelMaster.BringToFront(); }
         //Visbile - Working Folder
-        private void workingFolderToolStripMenuItem_Click(object sender, EventArgs e) { panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked; panelWorkingFolder.BringToFront(); }
+        private void workingFolderToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelWorkingFolder); panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked; panelWorkingFolder.BringToFront(); }
         //Visble - Sample Editor
-        private void sampleEditorToolStripMenuItem_Click(object sender, EventArgs e) { panelSample.Visible = sampleEditorToolStripMenuItem.Checked; panelSample.BringToFront(); }
+        private void sampleEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelSample); panelSample.Visible = sampleEditorToolStripMenuItem.Checked; panelSample.BringToFront(); }
 
         ///Toolstrip - HELP
         //About...

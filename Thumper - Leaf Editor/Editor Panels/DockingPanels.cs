@@ -85,37 +85,7 @@ namespace Thumper_Custom_Level_Editor
             Label lbl = sender as Label;
             //get parent panel where lbl was clicked
             var parent = lbl.Parent;
-            //find what dock it came from and remove the setting
-            var dock = parent.Parent;
-            if (dock == splitTop1.Panel1) {
-                Properties.Settings.Default.dock1 = "empty";
-            }
-            if (dock == splitTop2.Panel1) {
-                Properties.Settings.Default.dock2 = "empty";
-            }
-            if (dock == splitTop2.Panel2) {
-                Properties.Settings.Default.dock3 = "empty";
-            }
-            if (dock == splitBottom1.Panel1) {
-                Properties.Settings.Default.dock4 = "empty";
-            }
-            if (dock == splitBottom2.Panel1) {
-                Properties.Settings.Default.dock5 = "empty";
-            }
-            if (dock == splitBottom2.Panel2) {
-                Properties.Settings.Default.dock6 = "empty";
-            }
-            //remove panel from splitter
-            parent.Dock = DockStyle.None;
-            parent.Size = new Size(dock.Width, dock.Height);
-            this.Controls.Add(parent);
-            parent.Location = new Point(MousePosition.X - parent.Width + 35, MousePosition.Y - 25);
-            //
-            parent.BringToFront();
-            lbl.Click -= lblPopout_Click;
-            lbl.Click += lblPopin_Click;
-            //change tooltip
-            toolTip1.SetToolTip(lbl, "Dock panel");
+            UndockPanel(parent);
         }
         private void lblPopin_Click(object sender, EventArgs e)
         {
@@ -226,9 +196,46 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        private void UndockPanel(Control control)
+        private void UndockPanel(Control panel)
         {
+            if (panel.Parent.GetType() != typeof(SplitterPanel))
+                return;
 
+            var dock = panel.Parent;
+            panel.Dock = DockStyle.None;
+            this.Controls.Add(panel);
+            panel.Size = new Size(dock.Width, dock.Height);
+            panel.Location = new Point(MousePosition.X - panel.Width + 35, MousePosition.Y - 25);
+            //locate the dock button in the panel
+            var dockbtn = panel.Controls.OfType<Label>().Where(x => x.Text == "▲").First();
+            //then change its click event and tooltip
+            dockbtn.Click += lblPopin_Click;
+            dockbtn.Click -= lblPopout_Click;
+            //change tooltip
+            toolTip1.SetToolTip(dockbtn, "Dock panel");
+            panel.BringToFront();
+            panel.Visible = true;
+
+            //save settings
+            if (dock == splitTop1.Panel1) {
+                Properties.Settings.Default.dock1 = "empty";
+            }
+            if (dock == splitTop2.Panel1) {
+                Properties.Settings.Default.dock2 = "empty";
+            }
+            if (dock == splitTop2.Panel2) {
+                Properties.Settings.Default.dock3 = "empty";
+            }
+            if (dock == splitBottom1.Panel1) {
+                Properties.Settings.Default.dock4 = "empty";
+            }
+            if (dock == splitBottom2.Panel1) {
+                Properties.Settings.Default.dock5 = "empty";
+            }
+            if (dock == splitBottom2.Panel2) {
+                Properties.Settings.Default.dock6 = "empty";
+            }
+            Properties.Settings.Default.Save();
         }
 
         private void SetDockLocations()
