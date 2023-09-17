@@ -227,6 +227,12 @@ namespace Thumper_Custom_Level_Editor
             //set panels to be resizeable
             ControlMoverOrResizer.Init(panelBeeble);
             ControlMoverOrResizer.Init(pictureBox1, panelBeeble);
+            ControlMoverOrResizer.Init(panelLeaf);
+            ControlMoverOrResizer.Init(panelLevel);
+            ControlMoverOrResizer.Init(panelGate);
+            ControlMoverOrResizer.Init(panelMaster);
+            ControlMoverOrResizer.Init(panelSample);
+            ControlMoverOrResizer.Init(panelWorkingFolder);
 
             ///Create directory for leaf templates
             if (!Directory.Exists(@"templates")) {
@@ -262,33 +268,27 @@ namespace Thumper_Custom_Level_Editor
             //set dock locations for panels
             if (Properties.Settings.Default.dock1 != "empty") {
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock1, true).First();
-                splitTop1.Panel1.Controls.Add(_c);
-                _c.Dock = DockStyle.Fill;
+                DockPanel(_c, splitTop1.Panel1);
             }
             if (Properties.Settings.Default.dock2 != "empty") {
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock2, true).First();
-                splitTop2.Panel1.Controls.Add(_c);
-                _c.Dock = DockStyle.Fill;
+                DockPanel(_c, splitTop2.Panel1);
             }
             if (Properties.Settings.Default.dock3 != "empty") {
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock3, true).First();
-                splitTop2.Panel2.Controls.Add(_c);
-                _c.Dock = DockStyle.Fill;
+                DockPanel(_c, splitTop2.Panel2);
             }
             if (Properties.Settings.Default.dock4 != "empty") {
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock4, true).First();
-                splitBottom1.Panel1.Controls.Add(_c);
-                _c.Dock = DockStyle.Fill;
+                DockPanel(_c, splitBottom1.Panel1);
             }
             if (Properties.Settings.Default.dock5 != "empty") {
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock5, true).First();
-                splitBottom2.Panel1.Controls.Add(_c);
-                _c.Dock = DockStyle.Fill;
+                DockPanel(_c, splitBottom2.Panel1);
             }
             if (Properties.Settings.Default.dock6 != "empty") {
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock6, true).First();
-                splitBottom2.Panel2.Controls.Add(_c);
-                _c.Dock = DockStyle.Fill;
+                DockPanel(_c, splitBottom2.Panel2);
             }
 
             //load size and location data for panels
@@ -771,13 +771,12 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.dock6 = "empty";
             }
             //remove panel from splitter
-            this.Controls.Add(parent);
             parent.Dock = DockStyle.None;
-            parent.Location = new Point(0, 0);
-            parent.Size = Properties.Settings.Default.mastereditorsize;
+            parent.Size = new Size(dock.Width, dock.Height);
+            this.Controls.Add(parent);
+            parent.Location = new Point(MousePosition.X - parent.Width + 35, MousePosition.Y - 25);
+            //
             parent.BringToFront();
-            //initialize ability to be resized and moved
-            ControlMoverOrResizer.Init(parent);
             lbl.Click -= lblPopout_Click;
             lbl.Click += lblPopin_Click;
             //change tooltip
@@ -792,38 +791,43 @@ namespace Thumper_Custom_Level_Editor
             //check all 6 and add to the earliest one
             //also set what dock the panel is in, so it is remembered on restart
             if (splitTop1.Panel1.Controls.Count == 0) {
-                splitTop1.Panel1.Controls.Add(parent);
+                DockPanel(parent, splitTop1.Panel1);
                 Properties.Settings.Default.dock1 = parent.Name;
             }
             else if (splitTop2.Panel1.Controls.Count == 0) {
-                splitTop2.Panel1.Controls.Add(parent);
+                DockPanel(parent, splitTop2.Panel1);
                 Properties.Settings.Default.dock2 = parent.Name;
             }
             else if (splitTop2.Panel2.Controls.Count == 0) {
-                splitTop2.Panel2.Controls.Add(parent);
+                DockPanel(parent, splitTop2.Panel2);
                 Properties.Settings.Default.dock3 = parent.Name;
             }
             else if (splitBottom1.Panel1.Controls.Count == 0) {
-                splitBottom1.Panel1.Controls.Add(parent);
+                DockPanel(parent, splitBottom1.Panel1);
                 Properties.Settings.Default.dock4 = parent.Name;
             }
             else if (splitBottom2.Panel1.Controls.Count == 0) {
-                splitBottom2.Panel1.Controls.Add(parent);
+                DockPanel(parent, splitBottom2.Panel1);
                 Properties.Settings.Default.dock5 = parent.Name;
             }
             else if (splitBottom2.Panel2.Controls.Count == 0) {
-                splitBottom2.Panel2.Controls.Add(parent);
+                DockPanel(parent, splitBottom2.Panel2);
                 Properties.Settings.Default.dock6 = parent.Name;
             }
             Properties.Settings.Default.Save();
-            //stop ability to freely move
-            parent.Dock = DockStyle.Fill;
-            ControlMoverOrResizer.Dispose(parent);
-            //switch click event
-            lbl.Click -= lblPopin_Click;
-            lbl.Click += lblPopout_Click;
+        }
+
+        private void DockPanel(Control panel, Control dock)
+        {
+            dock.Controls.Add(panel);
+            panel.Dock = DockStyle.Fill;
+            //locate the dock button in the panel
+            var dockbtn = panel.Controls.OfType<Label>().Where(x => x.Text == "▲").First();
+            //then change its click event and tooltip
+            dockbtn.Click -= lblPopin_Click;
+            dockbtn.Click += lblPopout_Click;
             //change tooltip
-            toolTip1.SetToolTip(lbl, "Undock panel");
+            toolTip1.SetToolTip(dockbtn, "Undock panel");
         }
     }
 }

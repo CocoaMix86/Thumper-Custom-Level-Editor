@@ -1446,8 +1446,8 @@
             this.lblPopoutLeaf.TabIndex = 138;
             this.lblPopoutLeaf.Text = "▲";
             this.lblPopoutLeaf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPopoutLeaf, "Undock panel");
-            this.lblPopoutLeaf.Click += new System.EventHandler(this.lblPopout_Click);
+            this.toolTip1.SetToolTip(this.lblPopoutLeaf, "Dock panel");
+            this.lblPopoutLeaf.Click += new System.EventHandler(this.lblPopin_Click);
             this.lblPopoutLeaf.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.lblPopoutLeaf.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
@@ -2154,8 +2154,8 @@
             this.lblPopoutLvl.TabIndex = 138;
             this.lblPopoutLvl.Text = "▲";
             this.lblPopoutLvl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPopoutLvl, "Undock panel");
-            this.lblPopoutLvl.Click += new System.EventHandler(this.lblPopout_Click);
+            this.toolTip1.SetToolTip(this.lblPopoutLvl, "Dock panel");
+            this.lblPopoutLvl.Click += new System.EventHandler(this.lblPopin_Click);
             this.lblPopoutLvl.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.lblPopoutLvl.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
@@ -3063,8 +3063,8 @@
             this.lblPopoutMaster.TabIndex = 137;
             this.lblPopoutMaster.Text = "▲";
             this.lblPopoutMaster.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPopoutMaster, "Undock panel");
-            this.lblPopoutMaster.Click += new System.EventHandler(this.lblPopout_Click);
+            this.toolTip1.SetToolTip(this.lblPopoutMaster, "Dock panel");
+            this.lblPopoutMaster.Click += new System.EventHandler(this.lblPopin_Click);
             this.lblPopoutMaster.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.lblPopoutMaster.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
@@ -3761,8 +3761,8 @@
             this.lblPopoutGate.TabIndex = 138;
             this.lblPopoutGate.Text = "▲";
             this.lblPopoutGate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPopoutGate, "Undock panel");
-            this.lblPopoutGate.Click += new System.EventHandler(this.lblPopout_Click);
+            this.toolTip1.SetToolTip(this.lblPopoutGate, "Dock panel");
+            this.lblPopoutGate.Click += new System.EventHandler(this.lblPopin_Click);
             this.lblPopoutGate.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.lblPopoutGate.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
@@ -4302,8 +4302,8 @@
             this.lblPopoutWork.TabIndex = 146;
             this.lblPopoutWork.Text = "▲";
             this.lblPopoutWork.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPopoutWork, "Undock panel");
-            this.lblPopoutWork.Click += new System.EventHandler(this.lblPopout_Click);
+            this.toolTip1.SetToolTip(this.lblPopoutWork, "Dock panel");
+            this.lblPopoutWork.Click += new System.EventHandler(this.lblPopin_Click);
             this.lblPopoutWork.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.lblPopoutWork.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
@@ -4635,8 +4635,8 @@
             this.lblPopoutSamp.TabIndex = 138;
             this.lblPopoutSamp.Text = "▲";
             this.lblPopoutSamp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPopoutSamp, "Undock panel");
-            this.lblPopoutSamp.Click += new System.EventHandler(this.lblPopout_Click);
+            this.toolTip1.SetToolTip(this.lblPopoutSamp, "Dock panel");
+            this.lblPopoutSamp.Click += new System.EventHandler(this.lblPopin_Click);
             this.lblPopoutSamp.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.lblPopoutSamp.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
@@ -5068,13 +5068,13 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.Controls.Add(this.panelBeeble);
             this.Controls.Add(this.panelWorkingFolder);
             this.Controls.Add(this.panelLeaf);
             this.Controls.Add(this.panelSample);
             this.Controls.Add(this.panelGate);
             this.Controls.Add(this.panelLevel);
             this.Controls.Add(this.panelMaster);
-            this.Controls.Add(this.panelBeeble);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.splitHorizontal);
             this.DoubleBuffered = true;
