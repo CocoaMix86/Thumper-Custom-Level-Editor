@@ -749,6 +749,8 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(parent);
             lbl.Click -= lblPopout_Click;
             lbl.Click += lblPopin_Click;
+            //change tooltip
+            toolTip1.SetToolTip(lbl, "Dock panel");
         }
         private void lblPopin_Click(object sender, EventArgs e)
         {
@@ -775,6 +777,8 @@ namespace Thumper_Custom_Level_Editor
             //switch click event
             lbl.Click -= lblPopin_Click;
             lbl.Click += lblPopout_Click;
+            //change tooltip
+            toolTip1.SetToolTip(lbl, "Undock panel");
         }
     }
 }
