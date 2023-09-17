@@ -829,20 +829,5 @@ namespace Thumper_Custom_Level_Editor
             //change tooltip
             toolTip1.SetToolTip(dockbtn, "Undock panel");
         }
-
-        private void renameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
