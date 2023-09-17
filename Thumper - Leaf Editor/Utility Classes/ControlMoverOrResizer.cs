@@ -44,7 +44,6 @@ namespace ControlManager
             _moveIsInterNal = false;
             _cursorStartPoint = Point.Empty;
             MouseIsInLeftEdge = false;
-            MouseIsInLeftEdge = false;
             MouseIsInRightEdge = false;
             MouseIsInTopEdge = false;
             MouseIsInBottomEdge = false;
@@ -158,6 +157,7 @@ namespace ControlManager
                 UpdateMouseEdgeProperties(control, new Point(e.X, e.Y));
                 UpdateMouseCursor(control);
             }
+            control.Refresh();
             if (_resizing)
             {
                 if (MouseIsInLeftEdge)
