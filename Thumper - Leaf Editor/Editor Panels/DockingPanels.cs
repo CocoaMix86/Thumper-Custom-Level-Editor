@@ -152,6 +152,11 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
+        private void lblPopoutMaster_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
         private void dockbtn_Click(object sender, EventArgs e)
         {
             Control c = (Control)sender;
