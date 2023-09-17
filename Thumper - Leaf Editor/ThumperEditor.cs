@@ -76,30 +76,9 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             ColorFormElements();
             menuStrip.Renderer = new MyRenderer();
-            //LoopDoubleBuffer(this);
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
-        /*
-        public static void SetDoubleBuffered(System.Windows.Forms.Control c)
-        {
-            if (System.Windows.Forms.SystemInformation.TerminalServerSession)
-                return;
-            System.Reflection.PropertyInfo aProp = typeof(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            aProp.SetValue(c, true, null);
-        }
-        public void LoopDoubleBuffer(Control c)
-        {
-            foreach (Control _c in c.Controls) {
-                if (_c.Controls.Count > 1)
-                    LoopDoubleBuffer(_c);
-                if (_c.GetType() == typeof(SplitContainer)) {
-                    LoopDoubleBuffer(((SplitContainer)_c).Panel1);
-                    LoopDoubleBuffer(((SplitContainer)_c).Panel2);
-                }
-                SetDoubleBuffered(_c);
-            }
-        }*/
         protected override CreateParams CreateParams
         {
             get {
@@ -279,6 +258,38 @@ namespace Thumper_Custom_Level_Editor
             dropTimeSig.DataSource = _timesig;
             //
             SaveLeaf(true);
+
+            //set dock locations for panels
+            if (Properties.Settings.Default.dock1 != "empty") {
+                Control _c = this.Controls.Find(Properties.Settings.Default.dock1, true).First();
+                splitTop1.Panel1.Controls.Add(_c);
+                _c.Dock = DockStyle.Fill;
+            }
+            if (Properties.Settings.Default.dock2 != "empty") {
+                Control _c = this.Controls.Find(Properties.Settings.Default.dock2, true).First();
+                splitTop2.Panel1.Controls.Add(_c);
+                _c.Dock = DockStyle.Fill;
+            }
+            if (Properties.Settings.Default.dock3 != "empty") {
+                Control _c = this.Controls.Find(Properties.Settings.Default.dock3, true).First();
+                splitTop2.Panel2.Controls.Add(_c);
+                _c.Dock = DockStyle.Fill;
+            }
+            if (Properties.Settings.Default.dock4 != "empty") {
+                Control _c = this.Controls.Find(Properties.Settings.Default.dock4, true).First();
+                splitBottom1.Panel1.Controls.Add(_c);
+                _c.Dock = DockStyle.Fill;
+            }
+            if (Properties.Settings.Default.dock5 != "empty") {
+                Control _c = this.Controls.Find(Properties.Settings.Default.dock5, true).First();
+                splitBottom2.Panel1.Controls.Add(_c);
+                _c.Dock = DockStyle.Fill;
+            }
+            if (Properties.Settings.Default.dock6 != "empty") {
+                Control _c = this.Controls.Find(Properties.Settings.Default.dock6, true).First();
+                splitBottom2.Panel2.Controls.Add(_c);
+                _c.Dock = DockStyle.Fill;
+            }
 
             //load size and location data for panels
             panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
@@ -739,6 +750,26 @@ namespace Thumper_Custom_Level_Editor
             Label lbl = sender as Label;
             //get parent panel where lbl was clicked
             var parent = lbl.Parent;
+            //find what dock it came from and remove the setting
+            var dock = parent.Parent;
+            if (dock == splitTop1.Panel1) {
+                Properties.Settings.Default.dock1 = "empty";
+            }
+            if (dock == splitTop2.Panel1) {
+                Properties.Settings.Default.dock2 = "empty";
+            }
+            if (dock == splitTop2.Panel2) {
+                Properties.Settings.Default.dock3 = "empty";
+            }
+            if (dock == splitBottom1.Panel1) {
+                Properties.Settings.Default.dock4 = "empty";
+            }
+            if (dock == splitBottom2.Panel1) {
+                Properties.Settings.Default.dock5 = "empty";
+            }
+            if (dock == splitBottom2.Panel2) {
+                Properties.Settings.Default.dock6 = "empty";
+            }
             //remove panel from splitter
             this.Controls.Add(parent);
             parent.Dock = DockStyle.None;
@@ -759,18 +790,32 @@ namespace Thumper_Custom_Level_Editor
             var parent = lbl.Parent;
             //re-add panel to a splitter panel so it is now docked.
             //check all 6 and add to the earliest one
-            if (splitTop1.Panel1.Controls.Count == 0)
+            //also set what dock the panel is in, so it is remembered on restart
+            if (splitTop1.Panel1.Controls.Count == 0) {
                 splitTop1.Panel1.Controls.Add(parent);
-            else if (splitTop2.Panel1.Controls.Count == 0)
+                Properties.Settings.Default.dock1 = parent.Name;
+            }
+            else if (splitTop2.Panel1.Controls.Count == 0) {
                 splitTop2.Panel1.Controls.Add(parent);
-            else if (splitTop2.Panel2.Controls.Count == 0)
+                Properties.Settings.Default.dock2 = parent.Name;
+            }
+            else if (splitTop2.Panel2.Controls.Count == 0) {
                 splitTop2.Panel2.Controls.Add(parent);
-            else if (splitBottom1.Panel1.Controls.Count == 0)
+                Properties.Settings.Default.dock3 = parent.Name;
+            }
+            else if (splitBottom1.Panel1.Controls.Count == 0) {
                 splitBottom1.Panel1.Controls.Add(parent);
-            else if (splitBottom2.Panel1.Controls.Count == 0)
+                Properties.Settings.Default.dock4 = parent.Name;
+            }
+            else if (splitBottom2.Panel1.Controls.Count == 0) {
                 splitBottom2.Panel1.Controls.Add(parent);
-            else if (splitBottom2.Panel2.Controls.Count == 0)
+                Properties.Settings.Default.dock5 = parent.Name;
+            }
+            else if (splitBottom2.Panel2.Controls.Count == 0) {
                 splitBottom2.Panel2.Controls.Add(parent);
+                Properties.Settings.Default.dock6 = parent.Name;
+            }
+            Properties.Settings.Default.Save();
             //stop ability to freely move
             parent.Dock = DockStyle.Fill;
             ControlMoverOrResizer.Dispose(parent);

@@ -358,5 +358,77 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["beebleloc"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
+        public string dock1 {
+            get {
+                return ((string)(this["dock1"]));
+            }
+            set {
+                this["dock1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
+        public string dock2 {
+            get {
+                return ((string)(this["dock2"]));
+            }
+            set {
+                this["dock2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
+        public string dock3 {
+            get {
+                return ((string)(this["dock3"]));
+            }
+            set {
+                this["dock3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
+        public string dock4 {
+            get {
+                return ((string)(this["dock4"]));
+            }
+            set {
+                this["dock4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
+        public string dock5 {
+            get {
+                return ((string)(this["dock5"]));
+            }
+            set {
+                this["dock5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
+        public string dock6 {
+            get {
+                return ((string)(this["dock6"]));
+            }
+            set {
+                this["dock6"] = value;
+            }
+        }
     }
 }
