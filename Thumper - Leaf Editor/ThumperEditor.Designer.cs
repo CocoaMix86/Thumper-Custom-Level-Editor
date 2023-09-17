@@ -3439,6 +3439,7 @@
             this.dropMasterSkybox.ForeColor = System.Drawing.Color.White;
             this.dropMasterSkybox.FormattingEnabled = true;
             this.dropMasterSkybox.Items.AddRange(new object[] {
+            "",
             "skybox_cube"});
             this.dropMasterSkybox.Location = new System.Drawing.Point(303, 48);
             this.dropMasterSkybox.Name = "dropMasterSkybox";
@@ -5299,6 +5300,7 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.Controls.Add(this.panelMaster);
             this.Controls.Add(this.splitHorizontal);
             this.Controls.Add(this.panelBeeble);
             this.Controls.Add(this.panelWorkingFolder);
@@ -5306,7 +5308,6 @@
             this.Controls.Add(this.panelSample);
             this.Controls.Add(this.panelGate);
             this.Controls.Add(this.panelLevel);
-            this.Controls.Add(this.panelMaster);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
