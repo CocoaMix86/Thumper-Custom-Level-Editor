@@ -143,7 +143,7 @@ namespace Thumper_Custom_Level_Editor
             if (item != null) {
                 ContextMenuStrip owner = item.Owner as ContextMenuStrip;
                 if (owner != null) {
-                    parentdock = owner.SourceControl.Parent;
+                    parentdock = owner.SourceControl;
                 }
             }
             //set text to the exact panel name

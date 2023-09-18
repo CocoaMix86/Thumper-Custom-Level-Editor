@@ -667,8 +667,8 @@ namespace Thumper_Custom_Level_Editor
         {
             Control c = (Control)sender;
             Graphics g = e.Graphics;
-            Brush brush = new SolidBrush(Color.FromArgb(130, Color.Gray));
-            g.FillRectangle(brush, 5, 5, c.Width - 5, c.Height - 5);
+            Brush brush = new SolidBrush(Color.FromArgb(130, 70, 70, 70));
+            g.FillRectangle(brush, 5, 5, c.Width - 10, c.Height - 10);
         }
     }
 }
