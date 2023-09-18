@@ -661,9 +661,12 @@ namespace Thumper_Custom_Level_Editor
             pictureBox1.Image = Properties.Resources.beeble;
         }
 
-        private void splitTop1_Panel1_DragEnter(object sender, DragEventArgs e)
+        private void splitPanel_Paint(object sender, PaintEventArgs e)
         {
-            MessageBox.Show("drag");
+            Control c = (Control)sender;
+            Graphics g = e.Graphics;
+            Brush brush = new SolidBrush(Color.FromArgb(130, Color.Gray));
+            g.FillRectangle(brush, 5, 5, c.Width - 5, c.Height - 5);
         }
     }
 }

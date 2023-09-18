@@ -332,12 +332,12 @@
             this.lblPopoutSamp = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.contextMenuDock = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.contextdockWork = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextdockSample = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextdockMaster = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextdockGate = new System.Windows.Forms.ToolStripMenuItem();
             this.contextdockLeaf = new System.Windows.Forms.ToolStripMenuItem();
             this.contextdockLvl = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockGate = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockMaster = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockSample = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextdockWork = new System.Windows.Forms.ToolStripMenuItem();
             this.label49 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
@@ -4697,50 +4697,14 @@
             this.contextdockSample,
             this.contextdockWork});
             this.contextMenuDock.Name = "workingfolderRightClick";
-            this.contextMenuDock.Size = new System.Drawing.Size(181, 158);
-            // 
-            // contextdockWork
-            // 
-            this.contextdockWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockWork.ForeColor = System.Drawing.Color.White;
-            this.contextdockWork.Name = "contextdockWork";
-            this.contextdockWork.Size = new System.Drawing.Size(180, 22);
-            this.contextdockWork.Text = "Working Folder";
-            this.contextdockWork.Click += new System.EventHandler(this.contextdockLvl_Click);
-            // 
-            // contextdockSample
-            // 
-            this.contextdockSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockSample.ForeColor = System.Drawing.Color.White;
-            this.contextdockSample.Name = "contextdockSample";
-            this.contextdockSample.Size = new System.Drawing.Size(180, 22);
-            this.contextdockSample.Text = "Sample Editor";
-            this.contextdockSample.Click += new System.EventHandler(this.contextdockLvl_Click);
-            // 
-            // contextdockMaster
-            // 
-            this.contextdockMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockMaster.ForeColor = System.Drawing.Color.White;
-            this.contextdockMaster.Name = "contextdockMaster";
-            this.contextdockMaster.Size = new System.Drawing.Size(180, 22);
-            this.contextdockMaster.Text = "Master Editor";
-            this.contextdockMaster.Click += new System.EventHandler(this.contextdockLvl_Click);
-            // 
-            // contextdockGate
-            // 
-            this.contextdockGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockGate.ForeColor = System.Drawing.Color.White;
-            this.contextdockGate.Name = "contextdockGate";
-            this.contextdockGate.Size = new System.Drawing.Size(180, 22);
-            this.contextdockGate.Text = "Gate Editor";
-            this.contextdockGate.Click += new System.EventHandler(this.contextdockLvl_Click);
+            this.contextMenuDock.Size = new System.Drawing.Size(156, 136);
             // 
             // contextdockLeaf
             // 
             this.contextdockLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockLeaf.ForeColor = System.Drawing.Color.White;
             this.contextdockLeaf.Name = "contextdockLeaf";
-            this.contextdockLeaf.Size = new System.Drawing.Size(180, 22);
+            this.contextdockLeaf.Size = new System.Drawing.Size(155, 22);
             this.contextdockLeaf.Text = "Leaf Editor";
             this.contextdockLeaf.Click += new System.EventHandler(this.contextdockLvl_Click);
             // 
@@ -4749,9 +4713,45 @@
             this.contextdockLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockLvl.ForeColor = System.Drawing.Color.White;
             this.contextdockLvl.Name = "contextdockLvl";
-            this.contextdockLvl.Size = new System.Drawing.Size(180, 22);
+            this.contextdockLvl.Size = new System.Drawing.Size(155, 22);
             this.contextdockLvl.Text = "Lvl Editor";
             this.contextdockLvl.Click += new System.EventHandler(this.contextdockLvl_Click);
+            // 
+            // contextdockGate
+            // 
+            this.contextdockGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockGate.ForeColor = System.Drawing.Color.White;
+            this.contextdockGate.Name = "contextdockGate";
+            this.contextdockGate.Size = new System.Drawing.Size(155, 22);
+            this.contextdockGate.Text = "Gate Editor";
+            this.contextdockGate.Click += new System.EventHandler(this.contextdockLvl_Click);
+            // 
+            // contextdockMaster
+            // 
+            this.contextdockMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockMaster.ForeColor = System.Drawing.Color.White;
+            this.contextdockMaster.Name = "contextdockMaster";
+            this.contextdockMaster.Size = new System.Drawing.Size(155, 22);
+            this.contextdockMaster.Text = "Master Editor";
+            this.contextdockMaster.Click += new System.EventHandler(this.contextdockLvl_Click);
+            // 
+            // contextdockSample
+            // 
+            this.contextdockSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockSample.ForeColor = System.Drawing.Color.White;
+            this.contextdockSample.Name = "contextdockSample";
+            this.contextdockSample.Size = new System.Drawing.Size(155, 22);
+            this.contextdockSample.Text = "Sample Editor";
+            this.contextdockSample.Click += new System.EventHandler(this.contextdockLvl_Click);
+            // 
+            // contextdockWork
+            // 
+            this.contextdockWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.contextdockWork.ForeColor = System.Drawing.Color.White;
+            this.contextdockWork.Name = "contextdockWork";
+            this.contextdockWork.Size = new System.Drawing.Size(155, 22);
+            this.contextdockWork.Text = "Working Folder";
+            this.contextdockWork.Click += new System.EventHandler(this.contextdockLvl_Click);
             // 
             // label49
             // 
@@ -5227,8 +5227,9 @@
             // 
             // splitTop1.Panel1
             // 
+            this.splitTop1.Panel1.ContextMenuStrip = this.contextMenuDock;
             this.splitTop1.Panel1.Controls.Add(this.label48);
-            this.splitTop1.Panel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.splitTop1_Panel1_DragEnter);
+            this.splitTop1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
             // 
             // splitTop1.Panel2
             // 
@@ -5248,11 +5249,15 @@
             // 
             // splitTop2.Panel1
             // 
+            this.splitTop2.Panel1.ContextMenuStrip = this.contextMenuDock;
             this.splitTop2.Panel1.Controls.Add(this.label49);
+            this.splitTop2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
             // 
             // splitTop2.Panel2
             // 
+            this.splitTop2.Panel2.ContextMenuStrip = this.contextMenuDock;
             this.splitTop2.Panel2.Controls.Add(this.label51);
+            this.splitTop2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
             this.splitTop2.Size = new System.Drawing.Size(1280, 351);
             this.splitTop2.SplitterDistance = 890;
             this.splitTop2.TabIndex = 47;
@@ -5268,7 +5273,9 @@
             // 
             // splitBottom1.Panel1
             // 
+            this.splitBottom1.Panel1.ContextMenuStrip = this.contextMenuDock;
             this.splitBottom1.Panel1.Controls.Add(this.label52);
+            this.splitBottom1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
             // 
             // splitBottom1.Panel2
             // 
@@ -5288,11 +5295,15 @@
             // 
             // splitBottom2.Panel1
             // 
+            this.splitBottom2.Panel1.ContextMenuStrip = this.contextMenuDock;
             this.splitBottom2.Panel1.Controls.Add(this.label53);
+            this.splitBottom2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
             // 
             // splitBottom2.Panel2
             // 
+            this.splitBottom2.Panel2.ContextMenuStrip = this.contextMenuDock;
             this.splitBottom2.Panel2.Controls.Add(this.label55);
+            this.splitBottom2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
             this.splitBottom2.Size = new System.Drawing.Size(1421, 511);
             this.splitBottom2.SplitterDistance = 1032;
             this.splitBottom2.TabIndex = 46;
