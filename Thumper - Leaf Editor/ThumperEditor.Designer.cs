@@ -1013,7 +1013,7 @@
             this.resetMenuPositionToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.resetMenuPositionToolStripMenuItem.Name = "resetMenuPositionToolStripMenuItem";
             this.resetMenuPositionToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
-            this.resetMenuPositionToolStripMenuItem.Text = "Reset Menu Position";
+            this.resetMenuPositionToolStripMenuItem.Text = "Reset View";
             this.resetMenuPositionToolStripMenuItem.Click += new System.EventHandler(this.resetMenuPositionToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -1083,8 +1083,8 @@
             this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
             this.bringToFrontToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.bringToFrontToolStripMenuItem.ShowShortcutKeys = false;
-            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(100, 28);
-            this.bringToFrontToolStripMenuItem.Text = "Bring to Front →";
+            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(89, 28);
+            this.bringToFrontToolStripMenuItem.Text = "Show Panel →";
             // 
             // bTFLeafToolStripMenuItem
             // 

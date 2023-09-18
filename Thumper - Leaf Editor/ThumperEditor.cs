@@ -154,12 +154,12 @@ namespace Thumper_Custom_Level_Editor
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
         ///Toolstrip - BRING TO FRONT items
-        private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) => panelLeaf.BringToFront();
-        private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) => panelLevel.BringToFront();
-        private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) => panelGate.BringToFront();
-        private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) => panelMaster.BringToFront();
-        private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) => panelWorkingFolder.BringToFront();
-        private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) => panelSample.BringToFront();
+        private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.BringToFront(); panelLeaf.Visible = true; }
+        private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) { panelLevel.BringToFront(); panelLevel.Visible = true; }
+        private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) { panelGate.BringToFront(); panelGate.Visible = true; }
+        private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) { panelMaster.BringToFront(); panelMaster.Visible = true; }
+        private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) { panelWorkingFolder.BringToFront(); panelWorkingFolder.Visible = true; }
+        private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) { panelSample.BringToFront(); panelSample.Visible = true; }
 
         /// NEW CUSTOM LEVEL FOLDER
         private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -622,8 +622,20 @@ namespace Thumper_Custom_Level_Editor
         private void menuStrip_MouseUp(object sender, MouseEventArgs e) => _menuloc = menuStrip.Location;
         private void resetMenuPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            menuStrip.Location = new Point(0, 0);
-            _menuloc = new Point(0, 0);
+            panelMaster.Location = new Point(0, 30);
+            panelLevel.Location = new Point(this.Width / 3, 30);
+            panelGate.Location = new Point((int)(this.Width * 0.66), 30);
+            panelWorkingFolder.Location = new Point(0, this.Height / 2);
+            panelLeaf.Location = new Point(this.Width / 3, this.Height / 2);
+            panelSample.Location = new Point((int)(this.Width * 0.66), this.Height / 2);
+
+            panelLeaf.Visible = panelLevel.Visible = panelGate.Visible = panelMaster.Visible = panelWorkingFolder.Visible = panelSample.Visible = true;
+            panelLeaf.BringToFront();
+            panelLevel.BringToFront();
+            panelGate.BringToFront();
+            panelMaster.BringToFront();
+            panelWorkingFolder.BringToFront();
+            panelSample.BringToFront();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
