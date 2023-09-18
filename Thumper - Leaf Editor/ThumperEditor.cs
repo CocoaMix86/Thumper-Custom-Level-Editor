@@ -52,13 +52,12 @@ namespace Thumper_Custom_Level_Editor
                     SampleEditorVisible(false); SaveSample(true);
 
                     //set Working Folder panel data
-                    btnWorkRefresh.PerformClick();
-
                     lblWorkingFolder.Text = $"Working Folder - {value}";
                     btnWorkRefresh.Enabled = true;
                     btnWorkCopy.Enabled = true;
                     editLevelDetailsToolStripMenuItem.Enabled = true;
                     regenerateDefaultFilesToolStripMenuItem.Enabled = true;
+                    btnWorkRefresh.PerformClick();
                     //set window name to the level name
                     this.Text = "Thumper Custom Level Editor - " + new DirectoryInfo(workingfolder).Name;
                 }

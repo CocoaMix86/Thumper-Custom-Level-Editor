@@ -115,6 +115,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnWorkRefresh_Click(object sender, EventArgs e)
 		{
+			workingfolderFiles.SelectionChanged -= workingfolderFiles_SelectionChanged;
+
 			if (workingfolder == null)
 				return;
 			//clear the dgv and reload files in the folder
@@ -130,6 +132,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//enable button
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
+			workingfolderFiles.SelectionChanged += workingfolderFiles_SelectionChanged;
 		}
 
 		private void btnWorkDelete_Click(object sender, EventArgs e)
