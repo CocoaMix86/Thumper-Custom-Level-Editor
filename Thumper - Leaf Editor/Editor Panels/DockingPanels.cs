@@ -146,6 +146,8 @@ namespace Thumper_Custom_Level_Editor
                     parentdock = owner.SourceControl;
                 }
             }
+            if (parentdock.GetType() == typeof(Label))
+                parentdock = parentdock.Parent;
             //set text to the exact panel name
             if (text == "Leaf Editor")
                 text = "panelLeaf";

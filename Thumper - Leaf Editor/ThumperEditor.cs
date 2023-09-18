@@ -670,5 +670,18 @@ namespace Thumper_Custom_Level_Editor
             Brush brush = new SolidBrush(Color.FromArgb(130, 70, 70, 70));
             g.FillRectangle(brush, 5, 5, c.Width - 10, c.Height - 10);
         }
+
+        private void splitHorizontal_Paint(object sender, PaintEventArgs e)
+        {
+            SplitContainer s = sender as SplitContainer;
+            e.Graphics.FillRectangle(Brushes.Gray, s.SplitterRectangle);
+            if (s.SplitterRectangle.Width > s.SplitterRectangle.Height) {
+                e.Graphics.FillRectangle(Brushes.Black, (float)(s.SplitterRectangle.Width * 0.5) - 20, s.SplitterRectangle.Location.Y, 40, s.SplitterRectangle.Height);
+                e.Graphics.FillRectangle(Brushes.Black, (float)(s.SplitterRectangle.Width * 0.20) - 20, s.SplitterRectangle.Location.Y, 40, s.SplitterRectangle.Height);
+                e.Graphics.FillRectangle(Brushes.Black, (float)(s.SplitterRectangle.Width * 0.80) - 20, s.SplitterRectangle.Location.Y, 40, s.SplitterRectangle.Height);
+            }
+            if (s.SplitterRectangle.Width < s.SplitterRectangle.Height)
+                e.Graphics.FillRectangle(Brushes.Black, s.SplitterRectangle.Location.X, (s.SplitterRectangle.Height / 2) - 20, s.SplitterRectangle.Width, 40);
+        }
     }
 }
