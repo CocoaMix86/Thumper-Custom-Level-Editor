@@ -106,6 +106,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetMenuPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetDocksStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -453,7 +454,7 @@
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.menuStrip.ShowItemToolTips = true;
-            this.menuStrip.Size = new System.Drawing.Size(600, 29);
+            this.menuStrip.Size = new System.Drawing.Size(615, 29);
             this.menuStrip.TabIndex = 20;
             this.menuStrip.Text = "mnuLeafEditor";
             this.menuStrip.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip_MouseDown);
@@ -913,7 +914,8 @@
             this.sampleEditorToolStripMenuItem,
             this.toolStripMenuItem2,
             this.customizeToolStripMenuItem,
-            this.resetMenuPositionToolStripMenuItem});
+            this.resetMenuPositionToolStripMenuItem,
+            this.resetDocksStripMenuItem});
             this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
@@ -1015,6 +1017,15 @@
             this.resetMenuPositionToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.resetMenuPositionToolStripMenuItem.Text = "Reset View";
             this.resetMenuPositionToolStripMenuItem.Click += new System.EventHandler(this.resetMenuPositionToolStripMenuItem_Click);
+            // 
+            // resetDocksStripMenuItem
+            // 
+            this.resetDocksStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.resetDocksStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.resetDocksStripMenuItem.Name = "resetDocksStripMenuItem";
+            this.resetDocksStripMenuItem.Size = new System.Drawing.Size(196, 26);
+            this.resetDocksStripMenuItem.Text = "Reset Docks";
+            this.resetDocksStripMenuItem.Click += new System.EventHandler(this.resetDocksStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -5335,7 +5346,6 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
-            this.Controls.Add(this.splitHorizontal);
             this.Controls.Add(this.panelMaster);
             this.Controls.Add(this.panelBeeble);
             this.Controls.Add(this.panelWorkingFolder);
@@ -5344,6 +5354,7 @@
             this.Controls.Add(this.panelGate);
             this.Controls.Add(this.panelLevel);
             this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.splitHorizontal);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
@@ -5748,6 +5759,7 @@
         private System.Windows.Forms.ToolStripMenuItem contextdockSample;
         private System.Windows.Forms.ToolStripMenuItem contextdockWork;
         private System.Windows.Forms.ToolStripMenuItem pickAPanelToDockItHereToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetDocksStripMenuItem;
     }
 }
 

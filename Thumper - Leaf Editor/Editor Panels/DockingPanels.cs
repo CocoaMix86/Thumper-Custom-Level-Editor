@@ -164,6 +164,22 @@ namespace Thumper_Custom_Level_Editor
             //search for panel and add it to the dock
             DockPanel(this.Controls.Find(text, true).First(), parentdock);
         }
+
+        private void resetDocksStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DockPanel(panelMaster, splitTop1.Panel1);
+            DockPanel(panelLevel, splitTop2.Panel1);
+            DockPanel(panelGate, splitTop2.Panel2);
+            DockPanel(panelWorkingFolder, splitBottom1.Panel1);
+            DockPanel(panelLeaf, splitBottom2.Panel1);
+            DockPanel(panelSample, splitBottom2.Panel2);
+
+            splitHorizontal.SplitterDistance = splitHorizontal.Height / 2;
+            splitTop1.SplitterDistance = splitTop1.Width / 3;
+            splitTop2.SplitterDistance = splitTop2.Width / 2;
+            splitBottom1.SplitterDistance = splitBottom1.Width / 3;
+            splitBottom2.SplitterDistance = splitBottom2.Width / 2;
+        }
         #endregion
 
 
