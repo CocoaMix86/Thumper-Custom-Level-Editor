@@ -429,6 +429,26 @@ namespace Thumper_Custom_Level_Editor
 			_tracks[trackEditor.CurrentRow.Index].default_interp = dropLeafInterp.Text;
 			SaveLeaf(false);
 		}
+
+		///DETECT SCROLL
+		private void trackEditor_Scroll(object sender, ScrollEventArgs e)
+		{
+			if (e.Type != ScrollEventType.EndScroll)
+				return;
+
+			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
+			if (match != -1)
+				_scrollpositions[match] = new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex);
+			else
+				_scrollpositions.Add(new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex));
+		}
+		private void AddScrollListener(DataGridView dgv, ScrollEventHandler scrollEventHandler)
+		{
+			HScrollBar scrollBar = dgv.Controls.OfType<HScrollBar>().First();
+			VScrollBar vscrollBar = dgv.Controls.OfType<VScrollBar>().First();
+			scrollBar.Scroll += scrollEventHandler;
+			vscrollBar.Scroll += scrollEventHandler;
+		}
 		#endregion
 		#region Buttons
 		///         ///

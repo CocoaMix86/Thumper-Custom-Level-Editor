@@ -697,23 +697,5 @@ namespace Thumper_Custom_Level_Editor
             if (s.SplitterRectangle.Width < s.SplitterRectangle.Height)
                 e.Graphics.FillRectangle(Brushes.Black, s.SplitterRectangle.Location.X, (s.SplitterRectangle.Height / 2) - 20, s.SplitterRectangle.Width, 40);
         }
-        private void trackEditor_Scroll(object sender, ScrollEventArgs e)
-        {
-            if (e.Type != ScrollEventType.EndScroll)
-                return;
-
-            var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
-            if (match != -1)
-                _scrollpositions[match] = new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex);
-            else
-                _scrollpositions.Add(new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex));
-        }
-        private void AddScrollListener(DataGridView dgv, ScrollEventHandler scrollEventHandler)
-        {
-            HScrollBar scrollBar = dgv.Controls.OfType<HScrollBar>().First();
-            VScrollBar vscrollBar = dgv.Controls.OfType<VScrollBar>().First();
-            scrollBar.Scroll += scrollEventHandler;
-            vscrollBar.Scroll += scrollEventHandler;
-        }
     }
 }
