@@ -35,13 +35,14 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 		private string loadedleaf;
+		public string leafobj;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
 		public List<Object_Params> _objects = new List<Object_Params>();
 		public List<string> _timesig = new List<string>() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
 		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02" };
-
+		public List<Tuple<string, int, int>> _scrollpositions = new List<Tuple<string, int, int>>();
 		public Sequencer_Object clipboard_track;
 		public DataGridViewRow clipboard_row;
 		#endregion
@@ -1058,6 +1059,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//set the panel name to the file name
 			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
+			leafobj = _load["obj_name"];
 			//clear existing tracks
 			_tracks.Clear();
 			//set beat_cnt and time_sig
@@ -1142,6 +1144,12 @@ namespace Thumper_Custom_Level_Editor
 			SaveLeaf(true);
 			//re-set the zoom level
 			trackZoom_Scroll(null, null);
+			//set scrollbar positions (if set last time this leaf was open)
+			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
+			if (match != -1) {
+				trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
+				trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;
+			}
 		}
 
 		public JObject LeafBuildSave(string _leafname)
