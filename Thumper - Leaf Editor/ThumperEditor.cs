@@ -639,6 +639,7 @@ namespace Thumper_Custom_Level_Editor
             panelSample.Location = new Point((int)(this.Width * 0.66), this.Height / 2);
 
             panelLeaf.Visible = panelLevel.Visible = panelGate.Visible = panelMaster.Visible = panelWorkingFolder.Visible = panelSample.Visible = true;
+            panelBeeble.BringToFront();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
