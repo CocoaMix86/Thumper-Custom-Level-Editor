@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -290,6 +291,17 @@ namespace Thumper_Custom_Level_Editor
 				_loadedsample = newfilepath;
 				SamplesaveToolStripMenuItem_Click(null, null);
 			}
+		}
+
+		private void btnLevelFolder_Click(object sender, EventArgs e)
+		{
+			cfd_lvl.Title = "Select the level folder";
+			//check if the game_dir has been set before. It'll be empty if starting for the first time
+			cfd_lvl.InitialDirectory = System.Reflection.Assembly.GetExecutingAssembly().Location;
+			//show FolderBrowser, and then set "game_dir" to whatever is chosen
+			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
+				workingfolder = cfd_lvl.FileName;
+            }
 		}
 	}
 }

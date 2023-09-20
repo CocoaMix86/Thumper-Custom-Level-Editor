@@ -45,11 +45,11 @@ namespace Thumper_Custom_Level_Editor
                     dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 
                     //when workingfolder changes, reset panels
-                    LeafEditorVisible(false); SaveLeaf(true);
-                    LvlEditorVisible(false); SaveLvl(true);
-                    GateEditorVisible(false); SaveGate(true);
-                    MasterEditorVisible(false); SaveMaster(true);
-                    SampleEditorVisible(false); SaveSample(true);
+                    SaveLeaf(true);
+                    SaveLvl(true);
+                    SaveGate(true);
+                    SaveMaster(true);
+                    SaveSample(true);
 
                     //set Working Folder panel data
                     lblWorkingFolder.Text = $"Working Folder - {value}";
