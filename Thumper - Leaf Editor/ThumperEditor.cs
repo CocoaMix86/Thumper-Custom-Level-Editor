@@ -639,6 +639,9 @@ namespace Thumper_Custom_Level_Editor
             panelSample.Location = new Point((int)(this.Width * 0.66), this.Height / 2);
 
             panelLeaf.Visible = panelLevel.Visible = panelGate.Visible = panelMaster.Visible = panelWorkingFolder.Visible = panelSample.Visible = true;
+
+            panelBeeble.Location = new Point(25, 25);
+            panelBeeble.Size = new Size(40, 40);
             panelBeeble.BringToFront();
         }
 
