@@ -691,7 +691,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         private void splitHorizontal_Paint(object sender, PaintEventArgs e)
-        {
+        {/*
             SplitContainer s = sender as SplitContainer;
             e.Graphics.FillRectangle(Brushes.Gray, s.SplitterRectangle);
             if (s.SplitterRectangle.Width > s.SplitterRectangle.Height) {
@@ -700,13 +700,41 @@ namespace Thumper_Custom_Level_Editor
                 e.Graphics.FillRectangle(Brushes.Black, (float)(s.SplitterRectangle.Width * 0.80) - 20, s.SplitterRectangle.Location.Y, 40, s.SplitterRectangle.Height);
             }
             if (s.SplitterRectangle.Width < s.SplitterRectangle.Height)
-                e.Graphics.FillRectangle(Brushes.Black, s.SplitterRectangle.Location.X, (s.SplitterRectangle.Height / 2) - 20, s.SplitterRectangle.Width, 40);
+                e.Graphics.FillRectangle(Brushes.Black, s.SplitterRectangle.Location.X, (s.SplitterRectangle.Height / 2) - 20, s.SplitterRectangle.Width, 40);*/
         }
 
         private void ShowPanel(bool visible, Control panel)
         {
             panel.Visible = visible;
             panel.BringToFront();
+        }
+
+        private void panelMaster_Enter(object sender, EventArgs e)
+        {
+            MessageBox.Show("active");
+        }
+
+        private void editorpanelFocus(object sender, EventArgs e)
+        {
+            Panel control = (Panel)sender;
+            control.Paint += editorpanel_PaintBorder;
+            control.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        private void editorpanelUnfocus(object sender, EventArgs e)
+        {
+            Panel control = (Panel)sender;
+            control.Paint -= editorpanel_PaintBorder;
+            control.BorderStyle = BorderStyle.None;
+        }
+
+        private void editorpanel_PaintBorder(object sender, PaintEventArgs e)
+        {
+            Panel control = (Panel)sender;
+            Color col = Color.CornflowerBlue;
+            ButtonBorderStyle bbs = ButtonBorderStyle.Solid;
+            int thickness = 2;
+            ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
         }
     }
 }
