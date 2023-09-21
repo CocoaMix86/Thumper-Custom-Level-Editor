@@ -52,7 +52,8 @@ namespace Thumper_Custom_Level_Editor
                     SaveSample(true);
 
                     //set Working Folder panel data
-                    lblWorkingFolder.Text = $"Working Folder - {value}";
+                    lblWorkingFolder.Text = $"Working Folder - {new DirectoryInfo(value).Name}";
+                    toolTip1.SetToolTip(lblWorkingFolder, $"Working Folder - {value}");
                     btnWorkRefresh.Enabled = true;
                     btnWorkCopy.Enabled = true;
                     editLevelDetailsToolStripMenuItem.Enabled = true;
