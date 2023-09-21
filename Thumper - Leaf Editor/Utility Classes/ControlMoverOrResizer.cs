@@ -48,9 +48,12 @@ namespace ControlManager
             MouseIsInTopEdge = false;
             MouseIsInBottomEdge = false;
             WorkType = MoveOrResize.MoveAndResize;
+            control.MouseDown -= StartMovingOrResizing;
             control.MouseDown += StartMovingOrResizing;
+            control.MouseUp -= StopDragOrResizing;
             control.MouseUp += StopDragOrResizing;
-            control.MouseMove += (sender, e) => MoveControl(container, e);
+            control.MouseMove -= MoveControl;
+            control.MouseMove += MoveControl;
         }
 
         internal static void Dispose(Control control)
@@ -59,8 +62,12 @@ namespace ControlManager
         }
         internal static void Dispose(Control control, Control container)
         {
+            control.Cursor = Cursors.Default;
+            control.MouseDown -= StartMovingOrResizing;
             control.MouseDown -= StartMovingOrResizing;
             control.MouseUp -= StopDragOrResizing;
+            control.MouseUp -= StopDragOrResizing;
+            control.MouseMove -= MoveControl;
             control.MouseMove -= MoveControl;
         }
 
@@ -143,7 +150,7 @@ namespace ControlManager
             else if (WorkType!=MoveOrResize.Resize)
             {
                 _moving = true;
-                control.Cursor = Cursors.Hand;
+                control.Cursor = Cursors.SizeAll;
             }
             _cursorStartPoint = new Point(e.X, e.Y);
             control.Capture = true;
@@ -152,6 +159,9 @@ namespace ControlManager
         private static void MoveControl(object control1, MouseEventArgs e)
         {
             Control control = control1 as Control;
+            if (control.Parent.GetType() == typeof(Panel))
+                control = control.Parent;
+
             if (!_resizing && ! _moving)
             {
                 UpdateMouseEdgeProperties(control, new Point(e.X, e.Y));

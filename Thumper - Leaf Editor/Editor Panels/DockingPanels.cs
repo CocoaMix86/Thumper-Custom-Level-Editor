@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ControlManager;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -205,6 +206,8 @@ namespace Thumper_Custom_Level_Editor
             if (dock == splitBottom2.Panel2)
                 Properties.Settings.Default.dock6 = panel.Name;
             Properties.Settings.Default.Save();
+
+            ControlMoverOrResizer.Dispose(panel);
         }
 
         private void UndockPanel(Control panel)
@@ -247,6 +250,8 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.dock6 = "empty";
             }
             Properties.Settings.Default.Save();
+
+            ControlMoverOrResizer.Init(panel);
         }
 
         private void SetDockLocations()
