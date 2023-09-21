@@ -213,6 +213,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
 
             ControlMoverOrResizer.Dispose(panel);
+            ((Panel)panel).BorderStyle = BorderStyle.None;
         }
 
         private void UndockPanel(Control panel)
@@ -256,6 +257,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
 
             ControlMoverOrResizer.Init(panel);
+            ((Panel)panel).BorderStyle = BorderStyle.FixedSingle;
         }
 
         private void SetDockLocations()
