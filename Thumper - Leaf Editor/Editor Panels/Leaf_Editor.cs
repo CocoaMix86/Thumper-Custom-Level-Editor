@@ -27,7 +27,7 @@ namespace Thumper_Custom_Level_Editor
 			{
 				if (loadedleaf != value) {
 					loadedleaf = value;
-					LeafEditorVisible(true);
+					ShowPanel(true, panelLeaf);
 					leafsaveAsToolStripMenuItem.Enabled = true;
 					leafsaveToolStripMenuItem.Enabled = true;
 					trackEditor.RowHeadersVisible = true;
@@ -1059,11 +1059,6 @@ namespace Thumper_Custom_Level_Editor
 				dgvc.Style.ForeColor = Color.White;
 			else
 				dgvc.Style.ForeColor = Color.Black;
-		}
-
-		public void LeafEditorVisible(bool visible)
-		{
-			panelLeaf.Visible = visible;
 		}
 
 		///Update DGV from _tracks

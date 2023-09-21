@@ -25,7 +25,7 @@ namespace Thumper_Custom_Level_Editor
 			set {
 				if (loadedsample != value) {
 					loadedsample = value;
-					SampleEditorVisible(true);
+					ShowPanel(true, panelSample);
 					SamplesaveAsToolStripMenuItem.Enabled = true;
 					SamplesaveToolStripMenuItem.Enabled = true;
 				}
@@ -402,11 +402,6 @@ namespace Thumper_Custom_Level_Editor
             }
 			_save.Add("items", _items);
 			return _save;
-		}
-
-		public void SampleEditorVisible(bool visible)
-		{
-			panelSample.Visible = visible;
 		}
 
 		private void FSBtoSAMP(string filepath)

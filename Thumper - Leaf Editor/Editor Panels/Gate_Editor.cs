@@ -21,7 +21,7 @@ namespace Thumper_Custom_Level_Editor
 			set {
 				if (loadedgate != value) {
 					loadedgate = value;
-					GateEditorVisible(true);
+					ShowPanel(true, panelGate);
 					gatesaveAsToolStripMenuItem.Enabled = true;
 					gatesaveToolStripMenuItem.Enabled = true;
 				}
@@ -392,11 +392,6 @@ namespace Thumper_Custom_Level_Editor
 				btnSaveGate.Enabled = false;
 				lblGateName.BackColor = Color.FromArgb(40, 40, 40);
 			}
-		}
-
-		public void GateEditorVisible(bool visible)
-		{
-			panelGate.Visible = visible;
 		}
 
 		public JObject GateBuildSave(string _gatename)

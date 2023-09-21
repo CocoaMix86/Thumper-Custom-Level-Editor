@@ -698,5 +698,11 @@ namespace Thumper_Custom_Level_Editor
             if (s.SplitterRectangle.Width < s.SplitterRectangle.Height)
                 e.Graphics.FillRectangle(Brushes.Black, s.SplitterRectangle.Location.X, (s.SplitterRectangle.Height / 2) - 20, s.SplitterRectangle.Width, 40);
         }
+
+        private void ShowPanel(bool visible, Control panel)
+        {
+            panel.Visible = visible;
+            panel.BringToFront();
+        }
     }
 }

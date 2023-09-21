@@ -22,7 +22,7 @@ namespace Thumper_Custom_Level_Editor
 			{
 				if (loadedlvl != value) {
 					loadedlvl = value;
-					LvlEditorVisible(true);
+					ShowPanel(true, panelLevel);
 					lvlsaveAsToolStripMenuItem.Enabled = true;
 					lvlsaveToolStripMenuItem2.Enabled = true;
 				}
@@ -610,18 +610,6 @@ namespace Thumper_Custom_Level_Editor
 			
 			///set Saved flag to true, since nothing is loaded
 			SaveLvl(true);
-		}
-
-		public void LvlEditorVisible(bool visible)
-		{
-			panelLevel.Visible = visible;
-			/*
-			if (workingfolder != null) {
-				foreach (Control c in panelLevel.Controls)
-					c.Visible = visible;
-				btnlvlPanelNew.Visible = !visible;
-				btnlvlPanelOpen.Visible = !visible;
-			}*/
 		}
 
 		public void AddLeaftoLvl(string path)

@@ -20,7 +20,7 @@ namespace Thumper_Custom_Level_Editor
 			{
 				if (loadedmaster != value) {
 					loadedmaster = value;
-					MasterEditorVisible(true);
+					ShowPanel(true, panelMaster);
 					mastersaveAsToolStripMenuItem.Enabled = true;
 					mastersaveToolStripMenuItem.Enabled = true;
 				}
@@ -504,11 +504,6 @@ namespace Thumper_Custom_Level_Editor
 				//load the selected lvl
 				LoadLvl(_load);
 			}
-		}
-
-		public void MasterEditorVisible(bool visible)
-		{
-			panelMaster.Visible = visible;
 		}
 
 		public void SaveMaster(bool save)
