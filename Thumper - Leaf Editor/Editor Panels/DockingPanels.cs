@@ -174,6 +174,12 @@ namespace Thumper_Custom_Level_Editor
             splitBottom1.SplitterDistance = (int)(splitBottom1.Width / 5);
             splitBottom2.SplitterDistance = (int)(splitBottom2.Width / 1.3);
         }
+
+        private void editorpanelDoubleClick(object sender, EventArgs e)
+        {
+            if (!this.Controls.Contains((Control)sender))
+                UndockPanel((Control)sender);
+        }
         #endregion
 
 

@@ -1464,6 +1464,7 @@
             this.panelLeaf.Size = new System.Drawing.Size(1032, 511);
             this.panelLeaf.TabIndex = 45;
             this.panelLeaf.Visible = false;
+            this.panelLeaf.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             // 
             // lblPopoutLeaf
             // 
@@ -2173,6 +2174,7 @@
             this.panelLevel.Size = new System.Drawing.Size(890, 351);
             this.panelLevel.TabIndex = 46;
             this.panelLevel.Visible = false;
+            this.panelLevel.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             // 
             // lblPopoutLvl
             // 
@@ -3083,6 +3085,7 @@
             this.panelMaster.Size = new System.Drawing.Size(458, 351);
             this.panelMaster.TabIndex = 47;
             this.panelMaster.Visible = false;
+            this.panelMaster.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             // 
             // lblPopoutMaster
             // 
@@ -3784,6 +3787,7 @@
             this.panelGate.Size = new System.Drawing.Size(386, 351);
             this.panelGate.TabIndex = 116;
             this.panelGate.Visible = false;
+            this.panelGate.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             // 
             // lblPopoutGate
             // 
@@ -4327,6 +4331,7 @@
             this.panelWorkingFolder.Size = new System.Drawing.Size(323, 511);
             this.panelWorkingFolder.TabIndex = 117;
             this.panelWorkingFolder.SizeChanged += new System.EventHandler(this.panelWorkingFolder_SizeChanged);
+            this.panelWorkingFolder.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             // 
             // btnLevelFolder
             // 
@@ -4918,6 +4923,7 @@
             this.panelSample.TabIndex = 134;
             this.panelSample.Visible = false;
             this.panelSample.SizeChanged += new System.EventHandler(this.panelSample_SizeChanged);
+            this.panelSample.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             // 
             // btnSampEditorPlaySamp
             // 
