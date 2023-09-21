@@ -189,8 +189,7 @@ namespace Thumper_Custom_Level_Editor
             dockbtn.Click += lblPopout_Click;
             //change tooltip
             toolTip1.SetToolTip(dockbtn, "Undock panel");
-            panel.BringToFront();
-            panel.Visible = true;
+            ShowPanel(true, panel);
 
             //save settings
             if (dock == splitTop1.Panel1)
@@ -219,7 +218,7 @@ namespace Thumper_Custom_Level_Editor
             panel.Dock = DockStyle.None;
             this.Controls.Add(panel);
             panel.Size = new Size(dock.Width, dock.Height);
-            panel.Location = new Point(MousePosition.X - panel.Width + 35, MousePosition.Y - 25);
+            panel.Location = new Point(this.PointToClient(Cursor.Position).X - panel.Width, this.PointToClient(Cursor.Position).Y);
             //locate the dock button in the panel
             var dockbtn = panel.Controls.OfType<Label>().Where(x => x.Text == "▲").First();
             //then change its click event and tooltip
@@ -227,8 +226,7 @@ namespace Thumper_Custom_Level_Editor
             dockbtn.Click -= lblPopout_Click;
             //change tooltip
             toolTip1.SetToolTip(dockbtn, "Dock panel");
-            panel.BringToFront();
-            panel.Visible = true;
+            ShowPanel(true, panel);
 
             //save settings
             if (dock == splitTop1.Panel1) {
