@@ -35,6 +35,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 		private string loadedleaf;
+		string _loadedleaftemp;
 		public string leafobj;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
@@ -384,7 +385,7 @@ namespace Thumper_Custom_Level_Editor
 					ofd.Title = "Load a Thumper Leaf file";
 					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 					if (ofd.ShowDialog() == DialogResult.OK) {
-						_loadedleaf = ofd.FileName;
+						_loadedleaftemp = ofd.FileName;
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLeaf(_load);
 					}
@@ -401,7 +402,7 @@ namespace Thumper_Custom_Level_Editor
 					//set folder to the templates location
 					ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
 					if (ofd.ShowDialog() == DialogResult.OK) {
-						_loadedleaf = ofd.FileName;
+						_loadedleaftemp = ofd.FileName;
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLeaf(_load);
 						//set this to null, as it's a template. Next time on save, the user can save the file elsewhere
@@ -1072,9 +1073,11 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show("This does not appear to be a leaf file!");
 				return;
 			}
-			//set the panel name to the file name
+			//if the check above succeeds, then set the _loadedleaf to the string temp saved from ofd.filename
 			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
 			leafobj = _load["obj_name"];
+			workingfolder = Path.GetDirectoryName(_loadedleaftemp);
+			_loadedleaf = _loadedleaftemp;
 			//clear existing tracks
 			_tracks.Clear();
 			//set beat_cnt and time_sig

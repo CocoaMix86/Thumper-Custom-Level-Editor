@@ -44,30 +44,40 @@ namespace Thumper_Custom_Level_Editor
 			//process SAMP first, since its JSON structure is different, and detectable
 			if (_load.ContainsKey("items")) {
 				_loadedsampletemp = _selectedfilename;
+				if (_loadedsampletemp == _loadedsample)
+					return;
 				LoadSample(_load);
 				if (panelSample.Visible == false)
 					sampleEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinMaster") {
 				_loadedmastertemp = _selectedfilename;
+				if (_loadedmastertemp == _loadedmaster)
+					return;
 				LoadMaster(_load);
 				if (panelMaster.Visible == false)
 					masterEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinGate") {
 				_loadedgatetemp = _selectedfilename;
+				if (_loadedgatetemp == _loadedgate)
+					return;
 				LoadGate(_load);
 				if (panelGate.Visible == false)
 					gateEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLevel") {
 				_loadedlvltemp = _selectedfilename;
+				if (_loadedlvltemp == _loadedlvl)
+					return;
 				LoadLvl(_load);
 				if (panelLevel.Visible == false)
 					levelEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLeaf") {
-				_loadedleaf = _selectedfilename;
+				_loadedleaftemp = _selectedfilename;
+				if (_loadedleaftemp == _loadedleaf)
+					return;
 				LoadLeaf(_load);
 				if (panelLeaf.Visible == false)
 					leafEditorToolStripMenuItem.PerformClick();
