@@ -490,5 +490,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["splitterVert4"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CornflowerBlue")]
+        public global::System.Drawing.Color custom_activecolor {
+            get {
+                return ((global::System.Drawing.Color)(this["custom_activecolor"]));
+            }
+            set {
+                this["custom_activecolor"] = value;
+            }
+        }
     }
 }

@@ -37,6 +37,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnLvlColor = new System.Windows.Forms.Button();
             this.btnLeafColor = new System.Windows.Forms.Button();
             this.btnSampleColor = new System.Windows.Forms.Button();
+            this.btnActiveColor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBGColor
@@ -50,10 +51,11 @@ namespace Thumper_Custom_Level_Editor
             this.btnBGColor.Name = "btnBGColor";
             this.btnBGColor.Size = new System.Drawing.Size(121, 37);
             this.btnBGColor.TabIndex = 97;
+            this.btnBGColor.Tag = "customcolorbutton";
             this.btnBGColor.Text = "Background Colour";
             this.btnBGColor.UseMnemonic = false;
             this.btnBGColor.UseVisualStyleBackColor = false;
-            this.btnBGColor.Click += new System.EventHandler(this.btnBGColor_Click);
+            this.btnBGColor.Click += new System.EventHandler(this.btnSetColor);
             // 
             // button1
             // 
@@ -79,10 +81,11 @@ namespace Thumper_Custom_Level_Editor
             this.btnMenuColor.Name = "btnMenuColor";
             this.btnMenuColor.Size = new System.Drawing.Size(121, 37);
             this.btnMenuColor.TabIndex = 99;
+            this.btnMenuColor.Tag = "customcolorbutton";
             this.btnMenuColor.Text = "Menu Colour";
             this.btnMenuColor.UseMnemonic = false;
             this.btnMenuColor.UseVisualStyleBackColor = false;
-            this.btnMenuColor.Click += new System.EventHandler(this.btnMenuColor_Click);
+            this.btnMenuColor.Click += new System.EventHandler(this.btnSetColor);
             // 
             // btnMasterColor
             // 
@@ -95,10 +98,11 @@ namespace Thumper_Custom_Level_Editor
             this.btnMasterColor.Name = "btnMasterColor";
             this.btnMasterColor.Size = new System.Drawing.Size(121, 37);
             this.btnMasterColor.TabIndex = 100;
+            this.btnMasterColor.Tag = "customcolorbutton";
             this.btnMasterColor.Text = "Master Editor Color";
             this.btnMasterColor.UseMnemonic = false;
             this.btnMasterColor.UseVisualStyleBackColor = false;
-            this.btnMasterColor.Click += new System.EventHandler(this.btnPanelColor_Click);
+            this.btnMasterColor.Click += new System.EventHandler(this.btnSetColor);
             // 
             // btnGateColor
             // 
@@ -111,10 +115,11 @@ namespace Thumper_Custom_Level_Editor
             this.btnGateColor.Name = "btnGateColor";
             this.btnGateColor.Size = new System.Drawing.Size(121, 37);
             this.btnGateColor.TabIndex = 101;
+            this.btnGateColor.Tag = "customcolorbutton";
             this.btnGateColor.Text = "Gate Editor Color";
             this.btnGateColor.UseMnemonic = false;
             this.btnGateColor.UseVisualStyleBackColor = false;
-            this.btnGateColor.Click += new System.EventHandler(this.btnGateColor_Click);
+            this.btnGateColor.Click += new System.EventHandler(this.btnSetColor);
             // 
             // btnLvlColor
             // 
@@ -127,10 +132,11 @@ namespace Thumper_Custom_Level_Editor
             this.btnLvlColor.Name = "btnLvlColor";
             this.btnLvlColor.Size = new System.Drawing.Size(121, 37);
             this.btnLvlColor.TabIndex = 102;
+            this.btnLvlColor.Tag = "customcolorbutton";
             this.btnLvlColor.Text = "Lvl Editor Color";
             this.btnLvlColor.UseMnemonic = false;
             this.btnLvlColor.UseVisualStyleBackColor = false;
-            this.btnLvlColor.Click += new System.EventHandler(this.btnLvlColor_Click);
+            this.btnLvlColor.Click += new System.EventHandler(this.btnSetColor);
             // 
             // btnLeafColor
             // 
@@ -143,10 +149,11 @@ namespace Thumper_Custom_Level_Editor
             this.btnLeafColor.Name = "btnLeafColor";
             this.btnLeafColor.Size = new System.Drawing.Size(121, 37);
             this.btnLeafColor.TabIndex = 103;
+            this.btnLeafColor.Tag = "customcolorbutton";
             this.btnLeafColor.Text = "Leaf Editor Color";
             this.btnLeafColor.UseMnemonic = false;
             this.btnLeafColor.UseVisualStyleBackColor = false;
-            this.btnLeafColor.Click += new System.EventHandler(this.btnLeafColor_Click);
+            this.btnLeafColor.Click += new System.EventHandler(this.btnSetColor);
             // 
             // btnSampleColor
             // 
@@ -159,10 +166,28 @@ namespace Thumper_Custom_Level_Editor
             this.btnSampleColor.Name = "btnSampleColor";
             this.btnSampleColor.Size = new System.Drawing.Size(121, 37);
             this.btnSampleColor.TabIndex = 104;
+            this.btnSampleColor.Tag = "customcolorbutton";
             this.btnSampleColor.Text = "Sample Editor Color";
             this.btnSampleColor.UseMnemonic = false;
             this.btnSampleColor.UseVisualStyleBackColor = false;
-            this.btnSampleColor.Click += new System.EventHandler(this.btnSampleColor_Click);
+            this.btnSampleColor.Click += new System.EventHandler(this.btnSetColor);
+            // 
+            // btnActiveColor
+            // 
+            this.btnActiveColor.BackColor = System.Drawing.Color.White;
+            this.btnActiveColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnActiveColor.FlatAppearance.BorderSize = 4;
+            this.btnActiveColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActiveColor.ForeColor = System.Drawing.Color.Black;
+            this.btnActiveColor.Location = new System.Drawing.Point(12, 184);
+            this.btnActiveColor.Name = "btnActiveColor";
+            this.btnActiveColor.Size = new System.Drawing.Size(121, 37);
+            this.btnActiveColor.TabIndex = 105;
+            this.btnActiveColor.Tag = "customcolorbutton";
+            this.btnActiveColor.Text = "Active Panel Color";
+            this.btnActiveColor.UseMnemonic = false;
+            this.btnActiveColor.UseVisualStyleBackColor = false;
+            this.btnActiveColor.Click += new System.EventHandler(this.btnSetColor);
             // 
             // CustomizeWorkspace
             // 
@@ -170,6 +195,7 @@ namespace Thumper_Custom_Level_Editor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(274, 299);
+            this.Controls.Add(this.btnActiveColor);
             this.Controls.Add(this.btnSampleColor);
             this.Controls.Add(this.btnLeafColor);
             this.Controls.Add(this.btnLvlColor);
@@ -200,5 +226,6 @@ namespace Thumper_Custom_Level_Editor
         public System.Windows.Forms.Button btnLvlColor;
         public System.Windows.Forms.Button btnLeafColor;
         public System.Windows.Forms.Button btnSampleColor;
+        public System.Windows.Forms.Button btnActiveColor;
     }
 }
