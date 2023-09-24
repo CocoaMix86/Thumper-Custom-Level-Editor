@@ -167,9 +167,8 @@ namespace ControlManager
                 UpdateMouseEdgeProperties(control, new Point(e.X, e.Y));
                 UpdateMouseCursor(control);
             }
-            control.Refresh();
-            if (_resizing)
-            {
+            if (_resizing) {
+                control.Refresh();
                 if (MouseIsInLeftEdge)
                 {
                     if (MouseIsInTopEdge)
