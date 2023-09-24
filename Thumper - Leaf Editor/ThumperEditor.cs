@@ -579,6 +579,7 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.custom_lvlcolor = custom.btnLvlColor.BackColor;
                 Properties.Settings.Default.custom_leafcolor = custom.btnLeafColor.BackColor;
                 Properties.Settings.Default.custom_samplecolor = custom.btnSampleColor.BackColor;
+                Properties.Settings.Default.custom_activecolor = custom.btnActiveColor.BackColor;
                 ColorFormElements();
             }
             custom.Dispose();
@@ -731,7 +732,7 @@ namespace Thumper_Custom_Level_Editor
         private void editorpanel_PaintBorder(object sender, PaintEventArgs e)
         {
             Panel control = (Panel)sender;
-            Color col = Color.CornflowerBlue;
+            Color col = Properties.Settings.Default.custom_activecolor;
             ButtonBorderStyle bbs = ButtonBorderStyle.Inset;
             int thickness = 2;
             ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
