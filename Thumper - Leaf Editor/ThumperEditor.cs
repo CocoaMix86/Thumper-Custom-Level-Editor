@@ -709,11 +709,6 @@ namespace Thumper_Custom_Level_Editor
             panel.BringToFront();
         }
 
-        private void panelMaster_Enter(object sender, EventArgs e)
-        {
-            MessageBox.Show("active");
-        }
-
         private void editorpanelFocus(object sender, EventArgs e)
         {
             Panel control = (Panel)sender;
