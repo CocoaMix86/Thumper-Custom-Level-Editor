@@ -20,7 +20,7 @@ namespace Thumper_Custom_Level_Editor
             btnSampleColor.BackColor = Properties.Settings.Default.custom_samplecolor;
             btnActiveColor.BackColor = Properties.Settings.Default.custom_activecolor;
             //invert text so it's readable
-            foreach (Button btn in this.Controls) {
+            foreach (Button btn in this.Controls.Find("btnCustom", true)) {
                 if (btn.Tag.ToString() == "customcolorbutton") {
                     btn.ForeColor = Color.FromArgb(255 - btn.BackColor.R, 255 - btn.BackColor.G, 255 - btn.BackColor.B);
                 }
