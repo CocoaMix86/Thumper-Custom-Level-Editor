@@ -719,20 +719,25 @@ namespace Thumper_Custom_Level_Editor
             Panel control = (Panel)sender;
             control.Paint += editorpanel_PaintBorder;
             control.BorderStyle = BorderStyle.FixedSingle;
+            control.Refresh();
         }
 
         private void editorpanelUnfocus(object sender, EventArgs e)
         {
             Panel control = (Panel)sender;
             control.Paint -= editorpanel_PaintBorder;
-            control.BorderStyle = BorderStyle.None;
+            if (control.Dock == DockStyle.Fill)
+                control.BorderStyle = BorderStyle.None;
+            else
+                control.BorderStyle = BorderStyle.FixedSingle;
+            control.Refresh();
         }
 
         private void editorpanel_PaintBorder(object sender, PaintEventArgs e)
         {
             Panel control = (Panel)sender;
             Color col = Color.CornflowerBlue;
-            ButtonBorderStyle bbs = ButtonBorderStyle.Solid;
+            ButtonBorderStyle bbs = ButtonBorderStyle.Inset;
             int thickness = 2;
             ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
         }
