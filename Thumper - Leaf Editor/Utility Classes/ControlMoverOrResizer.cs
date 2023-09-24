@@ -168,7 +168,6 @@ namespace ControlManager
                 UpdateMouseCursor(control);
             }
             if (_resizing) {
-                control.Refresh();
                 if (MouseIsInLeftEdge)
                 {
                     if (MouseIsInTopEdge)
@@ -222,6 +221,7 @@ namespace ControlManager
                 {
                      StopDragOrResizing(control, null);
                 }
+                control.Refresh();
             }
             else if (_moving)
             {
