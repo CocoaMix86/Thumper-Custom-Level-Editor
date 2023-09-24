@@ -1080,6 +1080,7 @@ namespace Thumper_Custom_Level_Editor
 			_loadedleaf = _loadedleaftemp;
 			//clear existing tracks
 			_tracks.Clear();
+			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 			//set beat_cnt and time_sig
 			numericUpDown_LeafLength.Value = (int)_load["beat_cnt"];
 			var _time_sig = (string)_load["time_sig"] ?? "4/4";
@@ -1163,6 +1164,8 @@ namespace Thumper_Custom_Level_Editor
 			//re-set the zoom level
 			trackZoom_Scroll(null, null);
 			//set scrollbar positions (if set last time this leaf was open)
+			trackEditor.RowHeadersWidth = trackEditor.RowHeadersWidth;
+			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
 			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
 			if (match != -1) {
 				trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
