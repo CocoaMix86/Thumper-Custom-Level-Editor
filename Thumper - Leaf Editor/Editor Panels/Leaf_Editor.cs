@@ -1074,6 +1074,10 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 			//if the check above succeeds, then set the _loadedleaf to the string temp saved from ofd.filename
+			if (_load["obj_name"] == null) {
+				MessageBox.Show("Leaf missing obj_name parameter. Please set it in the txt file and then reload.", "Leaf not loaded");
+				return;
+			}
 			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
 			leafobj = _load["obj_name"];
 			workingfolder = Path.GetDirectoryName(_loadedleaftemp);
