@@ -55,12 +55,13 @@ namespace ControlManager
             control.MouseMove -= MoveControl;
             control.MouseMove += MoveControl;
         }
-
+        /*
         internal static void Dispose(Control control)
         {
             Dispose(control, control);
         }
-        internal static void Dispose(Control control, Control container)
+        */
+        internal static void Dispose(Control control)
         {
             control.Cursor = Cursors.Default;
             control.MouseDown -= StartMovingOrResizing;
