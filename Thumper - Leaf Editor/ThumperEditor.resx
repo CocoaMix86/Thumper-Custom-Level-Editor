@@ -123,6 +123,14 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>246, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>246, 17</value>
+  </metadata>
+  <data name="label46.ToolTip" xml:space="preserve">
+    <value>Interpolation type between beat values. Higher interpolation = smoother transitions/curves,
+but higher intensity calculation. Can decrease FPS.
+THIS AFFECTS IN-GAME ONLY. NOT THIS EDITOR'S INTERPOLATION CALC.</value>
+  </data>
   <data name="label8.ToolTip" xml:space="preserve">
     <value>Whether the value changes every beat (step = TRUE)(utilizing default on empty beats),
 or interoplates between set data points (step = FALSE)
@@ -152,11 +160,6 @@ Click to playback the entire leaf. Plays these objects in time:
 -Samples
 
 Playback speed is dependant on the Master BPM.</value>
-  </data>
-  <data name="label46.ToolTip" xml:space="preserve">
-    <value>Interpolation type between beat values. Higher interpolation = smoother transitions/curves,
-but higher intensity calculation. Can decrease FPS.
-THIS AFFECTS IN-GAME ONLY. NOT THIS EDITOR'S INTERPOLATION CALC.</value>
   </data>
   <metadata name="LoopSample.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
