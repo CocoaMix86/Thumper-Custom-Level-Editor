@@ -28,36 +28,36 @@
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLeafEditor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,63 +121,11 @@
             this.bTFFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bTFSampleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.richRawTrackData = new System.Windows.Forms.RichTextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.trackEditor = new System.Windows.Forms.DataGridView();
-            this.trackZoom = new System.Windows.Forms.TrackBar();
-            this.label10 = new System.Windows.Forms.Label();
-            this.panelZoom = new System.Windows.Forms.Panel();
-            this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown_LeafLength = new System.Windows.Forms.NumericUpDown();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.dropObjects = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnLeafObjRefresh = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.dropParamPath = new System.Windows.Forms.ComboBox();
-            this.dropTrackLane = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.btnTrackApply = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtTrait = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dropLeafInterp = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtDefault = new System.Windows.Forms.NumericUpDown();
-            this.dropLeafStep = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.btnTrackColorDialog = new System.Windows.Forms.Button();
-            this.btnTrackColorImport = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.btnTrackColorExport = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.NUD_TrackHighlight = new System.Windows.Forms.NumericUpDown();
-            this.NUD_TrackDoubleclick = new System.Windows.Forms.NumericUpDown();
             this.lblTrackFileName = new System.Windows.Forms.Label();
             this.btnSaveLeaf = new System.Windows.Forms.Button();
             this.lblPopoutLeaf = new System.Windows.Forms.Label();
-            this.btnLeafSplit = new System.Windows.Forms.Button();
-            this.btnTrackPaste = new System.Windows.Forms.Button();
-            this.btnLeafColors = new System.Windows.Forms.Button();
-            this.btnLEafInterpLinear = new System.Windows.Forms.Button();
-            this.btnTrackCopy = new System.Windows.Forms.Button();
-            this.btnTrackPlayback = new System.Windows.Forms.Button();
             this.lblLeafClose = new System.Windows.Forms.Label();
-            this.btnTrackClear = new System.Windows.Forms.Button();
-            this.btnTrackAdd = new System.Windows.Forms.Button();
-            this.btnTrackDown = new System.Windows.Forms.Button();
-            this.btnTrackUp = new System.Windows.Forms.Button();
-            this.btnTrackDelete = new System.Windows.Forms.Button();
-            this.dropTimeSig = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnLeafPanelTemplate = new System.Windows.Forms.Button();
             this.btnLeafPanelOpen = new System.Windows.Forms.Button();
             this.btnLeafPanelNew = new System.Windows.Forms.Button();
@@ -374,18 +322,60 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
+            this.trackEditor = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panelZoom = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.trackZoom = new System.Windows.Forms.TrackBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.richRawTrackData = new System.Windows.Forms.RichTextBox();
+            this.btnRawImport = new System.Windows.Forms.Button();
+            this.dropTimeSig = new System.Windows.Forms.ComboBox();
+            this.btnTrackDelete = new System.Windows.Forms.Button();
+            this.btnLeafSplit = new System.Windows.Forms.Button();
+            this.btnTrackUp = new System.Windows.Forms.Button();
+            this.btnTrackPaste = new System.Windows.Forms.Button();
+            this.btnTrackDown = new System.Windows.Forms.Button();
+            this.btnLeafColors = new System.Windows.Forms.Button();
+            this.btnTrackAdd = new System.Windows.Forms.Button();
+            this.btnLEafInterpLinear = new System.Windows.Forms.Button();
+            this.btnTrackClear = new System.Windows.Forms.Button();
+            this.btnTrackCopy = new System.Windows.Forms.Button();
+            this.numericUpDown_LeafLength = new System.Windows.Forms.NumericUpDown();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dropObjects = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnLeafObjRefresh = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dropParamPath = new System.Windows.Forms.ComboBox();
+            this.dropTrackLane = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnTrackApply = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtTrait = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dropLeafInterp = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtDefault = new System.Windows.Forms.NumericUpDown();
+            this.dropLeafStep = new System.Windows.Forms.ComboBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnTrackColorDialog = new System.Windows.Forms.Button();
+            this.btnTrackColorImport = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.btnTrackColorExport = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.NUD_TrackHighlight = new System.Windows.Forms.NumericUpDown();
+            this.NUD_TrackDoubleclick = new System.Windows.Forms.NumericUpDown();
+            this.btnTrackPlayback = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
-            this.panelZoom.SuspendLayout();
             this.panelLeaf.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).BeginInit();
             this.panelLevel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlApproach)).BeginInit();
@@ -428,6 +418,16 @@
             this.splitBottom2.Panel1.SuspendLayout();
             this.splitBottom2.Panel2.SuspendLayout();
             this.splitBottom2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
+            this.panelZoom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).BeginInit();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -1180,176 +1180,38 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(25, 20);
             this.toolStripMenuItem1.Text = "||";
             // 
-            // richRawTrackData
-            // 
-            this.richRawTrackData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richRawTrackData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.richRawTrackData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richRawTrackData.DetectUrls = false;
-            this.richRawTrackData.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richRawTrackData.ForeColor = System.Drawing.Color.White;
-            this.richRawTrackData.Location = new System.Drawing.Point(293, 446);
-            this.richRawTrackData.Name = "richRawTrackData";
-            this.richRawTrackData.Size = new System.Drawing.Size(733, 59);
-            this.richRawTrackData.TabIndex = 26;
-            this.richRawTrackData.Text = "raw track data";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(212, 14);
-            this.label5.MinimumSize = new System.Drawing.Size(100, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 13);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "Tracks Editor";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // trackEditor
-            // 
-            this.trackEditor.AllowUserToAddRows = false;
-            this.trackEditor.AllowUserToDeleteRows = false;
-            this.trackEditor.AllowUserToResizeColumns = false;
-            this.trackEditor.AllowUserToResizeRows = false;
-            this.trackEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackEditor.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.trackEditor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.trackEditor.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.trackEditor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle56.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle56.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle56;
-            this.trackEditor.ColumnHeadersHeight = 20;
-            this.trackEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.trackEditor.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle57.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle57.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle57.NullValue = null;
-            dataGridViewCellStyle57.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle57.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle57.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle57;
-            this.trackEditor.EnableHeadersVisualStyles = false;
-            this.trackEditor.GridColor = System.Drawing.Color.Black;
-            this.trackEditor.Location = new System.Drawing.Point(212, 27);
-            this.trackEditor.Name = "trackEditor";
-            this.trackEditor.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle58.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle58.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle58;
-            this.trackEditor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle59;
-            this.trackEditor.RowTemplate.Height = 20;
-            this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.trackEditor.Size = new System.Drawing.Size(814, 416);
-            this.trackEditor.TabIndex = 40;
-            this.trackEditor.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDoubleClick);
-            this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
-            this.trackEditor.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.trackEditor_EditingControlShowing);
-            this.trackEditor.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_RowEnter);
-            this.trackEditor.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_RowHeaderMouseClick);
-            this.trackEditor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trackEditor_KeyDown);
-            this.trackEditor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.trackEditor_KeyPress);
-            // 
-            // trackZoom
-            // 
-            this.trackZoom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trackZoom.Location = new System.Drawing.Point(31, 3);
-            this.trackZoom.Maximum = 120;
-            this.trackZoom.Minimum = 2;
-            this.trackZoom.Name = "trackZoom";
-            this.trackZoom.Size = new System.Drawing.Size(100, 45);
-            this.trackZoom.TabIndex = 41;
-            this.trackZoom.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackZoom.Value = 60;
-            this.trackZoom.Scroll += new System.EventHandler(this.trackZoom_Scroll);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(3, 6);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(38, 13);
-            this.label10.TabIndex = 42;
-            this.label10.Text = "Zoom";
-            // 
-            // panelZoom
-            // 
-            this.panelZoom.Controls.Add(this.label10);
-            this.panelZoom.Controls.Add(this.trackZoom);
-            this.panelZoom.Location = new System.Drawing.Point(533, 1);
-            this.panelZoom.Name = "panelZoom";
-            this.panelZoom.Size = new System.Drawing.Size(131, 27);
-            this.panelZoom.TabIndex = 43;
-            // 
-            // btnRawImport
-            // 
-            this.btnRawImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRawImport.BackColor = System.Drawing.Color.Gray;
-            this.btnRawImport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRawImport.Location = new System.Drawing.Point(220, 461);
-            this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new System.Drawing.Size(72, 44);
-            this.btnRawImport.TabIndex = 44;
-            this.btnRawImport.Text = "Import Raw to Track";
-            this.btnRawImport.UseVisualStyleBackColor = false;
-            this.btnRawImport.Click += new System.EventHandler(this.btnRawImport_Click);
-            // 
             // panelLeaf
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLeaf.Controls.Add(this.label1);
+            this.panelLeaf.Controls.Add(this.label2);
+            this.panelLeaf.Controls.Add(this.panelZoom);
+            this.panelLeaf.Controls.Add(this.label5);
+            this.panelLeaf.Controls.Add(this.richRawTrackData);
+            this.panelLeaf.Controls.Add(this.btnRawImport);
+            this.panelLeaf.Controls.Add(this.dropTimeSig);
+            this.panelLeaf.Controls.Add(this.btnTrackDelete);
+            this.panelLeaf.Controls.Add(this.btnLeafSplit);
+            this.panelLeaf.Controls.Add(this.btnTrackUp);
+            this.panelLeaf.Controls.Add(this.btnTrackPaste);
+            this.panelLeaf.Controls.Add(this.btnTrackDown);
+            this.panelLeaf.Controls.Add(this.btnLeafColors);
+            this.panelLeaf.Controls.Add(this.btnTrackAdd);
+            this.panelLeaf.Controls.Add(this.btnLEafInterpLinear);
+            this.panelLeaf.Controls.Add(this.btnTrackClear);
+            this.panelLeaf.Controls.Add(this.btnTrackCopy);
             this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
             this.panelLeaf.Controls.Add(this.panel2);
             this.panelLeaf.Controls.Add(this.panel3);
             this.panelLeaf.Controls.Add(this.panel4);
+            this.panelLeaf.Controls.Add(this.btnTrackPlayback);
+            this.panelLeaf.Controls.Add(this.label1);
             this.panelLeaf.Controls.Add(this.lblTrackFileName);
             this.panelLeaf.Controls.Add(this.btnSaveLeaf);
             this.panelLeaf.Controls.Add(this.lblPopoutLeaf);
-            this.panelLeaf.Controls.Add(this.btnLeafSplit);
-            this.panelLeaf.Controls.Add(this.btnTrackPaste);
-            this.panelLeaf.Controls.Add(this.btnLeafColors);
-            this.panelLeaf.Controls.Add(this.btnLEafInterpLinear);
-            this.panelLeaf.Controls.Add(this.btnTrackCopy);
-            this.panelLeaf.Controls.Add(this.btnTrackPlayback);
             this.panelLeaf.Controls.Add(this.lblLeafClose);
-            this.panelLeaf.Controls.Add(this.btnTrackClear);
-            this.panelLeaf.Controls.Add(this.btnTrackAdd);
-            this.panelLeaf.Controls.Add(this.btnTrackDown);
-            this.panelLeaf.Controls.Add(this.btnTrackUp);
-            this.panelLeaf.Controls.Add(this.btnTrackDelete);
-            this.panelLeaf.Controls.Add(this.dropTimeSig);
-            this.panelLeaf.Controls.Add(this.btnRawImport);
-            this.panelLeaf.Controls.Add(this.richRawTrackData);
             this.panelLeaf.Controls.Add(this.trackEditor);
-            this.panelLeaf.Controls.Add(this.label5);
-            this.panelLeaf.Controls.Add(this.panelZoom);
-            this.panelLeaf.Controls.Add(this.label2);
-            this.panelLeaf.Location = new System.Drawing.Point(327, 369);
+            this.panelLeaf.Location = new System.Drawing.Point(327, 377);
             this.panelLeaf.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLeaf.Name = "panelLeaf";
             this.panelLeaf.Size = new System.Drawing.Size(1032, 511);
@@ -1359,462 +1221,6 @@
             this.panelLeaf.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelLeaf.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLeaf.Leave += new System.EventHandler(this.editorpanelUnfocus);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(15, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
-            this.label1.TabIndex = 140;
-            this.label1.Text = "Leaf Length";
-            // 
-            // numericUpDown_LeafLength
-            // 
-            this.numericUpDown_LeafLength.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.numericUpDown_LeafLength.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown_LeafLength.Location = new System.Drawing.Point(93, 27);
-            this.numericUpDown_LeafLength.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_LeafLength.Name = "numericUpDown_LeafLength";
-            this.numericUpDown_LeafLength.Size = new System.Drawing.Size(72, 20);
-            this.numericUpDown_LeafLength.TabIndex = 141;
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.dropObjects);
-            this.panel2.Controls.Add(this.label19);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.btnLeafObjRefresh);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.dropParamPath);
-            this.panel2.Controls.Add(this.dropTrackLane);
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.btnTrackApply);
-            this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel2.Location = new System.Drawing.Point(2, 51);
-            this.panel2.Name = "panel2";
-            this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel2.Size = new System.Drawing.Size(180, 151);
-            this.panel2.TabIndex = 142;
-            // 
-            // dropObjects
-            // 
-            this.dropObjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropObjects.Enabled = false;
-            this.dropObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropObjects.ForeColor = System.Drawing.Color.White;
-            this.dropObjects.FormattingEnabled = true;
-            this.dropObjects.Location = new System.Drawing.Point(5, 33);
-            this.dropObjects.Name = "dropObjects";
-            this.dropObjects.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropObjects.Size = new System.Drawing.Size(163, 21);
-            this.dropObjects.TabIndex = 30;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(1, 1);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(87, 13);
-            this.label19.TabIndex = 61;
-            this.label19.Text = "Track Objects";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(1, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Track Object";
-            // 
-            // btnLeafObjRefresh
-            // 
-            this.btnLeafObjRefresh.BackColor = System.Drawing.Color.Gray;
-            this.btnLeafObjRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLeafObjRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeafObjRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafObjRefresh.ForeColor = System.Drawing.Color.Aqua;
-            this.btnLeafObjRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
-            this.btnLeafObjRefresh.Location = new System.Drawing.Point(146, 10);
-            this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
-            this.btnLeafObjRefresh.Size = new System.Drawing.Size(22, 22);
-            this.btnLeafObjRefresh.TabIndex = 101;
-            this.toolTip1.SetToolTip(this.btnLeafObjRefresh, "Reload list of available objects from track_objects.txt");
-            this.btnLeafObjRefresh.UseCompatibleTextRendering = true;
-            this.btnLeafObjRefresh.UseVisualStyleBackColor = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(1, 57);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 13);
-            this.label6.TabIndex = 32;
-            this.label6.Text = "Type (param_path)";
-            // 
-            // dropParamPath
-            // 
-            this.dropParamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropParamPath.DropDownWidth = 180;
-            this.dropParamPath.Enabled = false;
-            this.dropParamPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropParamPath.ForeColor = System.Drawing.Color.White;
-            this.dropParamPath.FormattingEnabled = true;
-            this.dropParamPath.Location = new System.Drawing.Point(5, 73);
-            this.dropParamPath.Name = "dropParamPath";
-            this.dropParamPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropParamPath.Size = new System.Drawing.Size(163, 21);
-            this.dropParamPath.TabIndex = 33;
-            // 
-            // dropTrackLane
-            // 
-            this.dropTrackLane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropTrackLane.DropDownWidth = 180;
-            this.dropTrackLane.Enabled = false;
-            this.dropTrackLane.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropTrackLane.ForeColor = System.Drawing.Color.White;
-            this.dropTrackLane.FormattingEnabled = true;
-            this.dropTrackLane.Items.AddRange(new object[] {
-            "lane left 2",
-            "lane left 1",
-            "lane center",
-            "lane right 1",
-            "lane right 2"});
-            this.dropTrackLane.Location = new System.Drawing.Point(74, 96);
-            this.dropTrackLane.Name = "dropTrackLane";
-            this.dropTrackLane.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropTrackLane.Size = new System.Drawing.Size(94, 21);
-            this.dropTrackLane.TabIndex = 65;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(26, 99);
-            this.label11.Name = "label11";
-            this.label11.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label11.Size = new System.Drawing.Size(47, 13);
-            this.label11.TabIndex = 66;
-            this.label11.Text = "Samples";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnTrackApply
-            // 
-            this.btnTrackApply.BackColor = System.Drawing.Color.Green;
-            this.btnTrackApply.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackApply.Enabled = false;
-            this.btnTrackApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackApply.Location = new System.Drawing.Point(73, 118);
-            this.btnTrackApply.Name = "btnTrackApply";
-            this.btnTrackApply.Size = new System.Drawing.Size(96, 24);
-            this.btnTrackApply.TabIndex = 52;
-            this.btnTrackApply.Text = "Apply to Track";
-            this.btnTrackApply.UseVisualStyleBackColor = false;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.txtTrait);
-            this.panel3.Controls.Add(this.label7);
-            this.panel3.Controls.Add(this.label46);
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.dropLeafInterp);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.txtDefault);
-            this.panel3.Controls.Add(this.dropLeafStep);
-            this.panel3.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel3.Location = new System.Drawing.Point(2, 201);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(180, 124);
-            this.panel3.TabIndex = 143;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(1, 2);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 13);
-            this.label3.TabIndex = 108;
-            this.label3.Text = "Object Beat Properties";
-            // 
-            // txtTrait
-            // 
-            this.txtTrait.AutoSize = true;
-            this.txtTrait.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.txtTrait.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.txtTrait.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTrait.ForeColor = System.Drawing.Color.White;
-            this.txtTrait.Location = new System.Drawing.Point(74, 23);
-            this.txtTrait.MinimumSize = new System.Drawing.Size(96, 20);
-            this.txtTrait.Name = "txtTrait";
-            this.txtTrait.Size = new System.Drawing.Size(96, 20);
-            this.txtTrait.TabIndex = 107;
-            this.txtTrait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(32, 71);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 13);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Default";
-            this.toolTip1.SetToolTip(this.label7, "If no value is set on a beat, the game will use this default.");
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label46.ForeColor = System.Drawing.Color.White;
-            this.label46.Location = new System.Drawing.Point(8, 93);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(65, 13);
-            this.label46.TabIndex = 106;
-            this.label46.Text = "Interpolation";
-            this.toolTip1.SetToolTip(this.label46, resources.GetString("label46.ToolTip"));
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(44, 48);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 13);
-            this.label8.TabIndex = 36;
-            this.label8.Text = "Step";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
-            // 
-            // dropLeafInterp
-            // 
-            this.dropLeafInterp.BackColor = System.Drawing.Color.Black;
-            this.dropLeafInterp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropLeafInterp.ForeColor = System.Drawing.Color.LawnGreen;
-            this.dropLeafInterp.FormattingEnabled = true;
-            this.dropLeafInterp.Items.AddRange(new object[] {
-            "kTraitInterpLinear",
-            "kTraitInterpQuadratic",
-            "kTraitInterpCubic",
-            "kTraitInterpQuartic",
-            "kTraitInterpQuintic",
-            "kTraitInterpSine",
-            "kTraitInterpNone",
-            "kTraitInterpStep"});
-            this.dropLeafInterp.Location = new System.Drawing.Point(74, 90);
-            this.dropLeafInterp.Name = "dropLeafInterp";
-            this.dropLeafInterp.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropLeafInterp.Size = new System.Drawing.Size(96, 21);
-            this.dropLeafInterp.TabIndex = 105;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(45, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(28, 13);
-            this.label9.TabIndex = 39;
-            this.label9.Text = "Trait";
-            this.toolTip1.SetToolTip(this.label9, "The data type of the object. Recommended to not edit.");
-            // 
-            // txtDefault
-            // 
-            this.txtDefault.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.txtDefault.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDefault.DecimalPlaces = 4;
-            this.txtDefault.ForeColor = System.Drawing.Color.White;
-            this.txtDefault.Location = new System.Drawing.Point(74, 68);
-            this.txtDefault.Maximum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            0});
-            this.txtDefault.Minimum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            -2147483648});
-            this.txtDefault.Name = "txtDefault";
-            this.txtDefault.Size = new System.Drawing.Size(96, 20);
-            this.txtDefault.TabIndex = 64;
-            // 
-            // dropLeafStep
-            // 
-            this.dropLeafStep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropLeafStep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropLeafStep.ForeColor = System.Drawing.Color.White;
-            this.dropLeafStep.FormattingEnabled = true;
-            this.dropLeafStep.Items.AddRange(new object[] {
-            "True",
-            "False"});
-            this.dropLeafStep.Location = new System.Drawing.Point(74, 45);
-            this.dropLeafStep.Name = "dropLeafStep";
-            this.dropLeafStep.Size = new System.Drawing.Size(96, 21);
-            this.dropLeafStep.TabIndex = 94;
-            this.dropLeafStep.Text = "True";
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.label18);
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.btnTrackColorDialog);
-            this.panel4.Controls.Add(this.btnTrackColorImport);
-            this.panel4.Controls.Add(this.label16);
-            this.panel4.Controls.Add(this.btnTrackColorExport);
-            this.panel4.Controls.Add(this.label17);
-            this.panel4.Controls.Add(this.NUD_TrackHighlight);
-            this.panel4.Controls.Add(this.NUD_TrackDoubleclick);
-            this.panel4.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel4.Location = new System.Drawing.Point(2, 324);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(180, 154);
-            this.panel4.TabIndex = 144;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(1, 2);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(113, 13);
-            this.label18.TabIndex = 60;
-            this.label18.Text = "Cell Visual Options";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(36, 30);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(68, 13);
-            this.label15.TabIndex = 54;
-            this.label15.Text = "Cell Highlight";
-            // 
-            // btnTrackColorDialog
-            // 
-            this.btnTrackColorDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnTrackColorDialog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackColorDialog.Enabled = false;
-            this.btnTrackColorDialog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorDialog.Location = new System.Drawing.Point(110, 25);
-            this.btnTrackColorDialog.Name = "btnTrackColorDialog";
-            this.btnTrackColorDialog.Size = new System.Drawing.Size(57, 23);
-            this.btnTrackColorDialog.TabIndex = 55;
-            this.btnTrackColorDialog.Text = "click";
-            this.btnTrackColorDialog.UseVisualStyleBackColor = false;
-            // 
-            // btnTrackColorImport
-            // 
-            this.btnTrackColorImport.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackColorImport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackColorImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorImport.Location = new System.Drawing.Point(55, 119);
-            this.btnTrackColorImport.Name = "btnTrackColorImport";
-            this.btnTrackColorImport.Size = new System.Drawing.Size(112, 23);
-            this.btnTrackColorImport.TabIndex = 100;
-            this.btnTrackColorImport.Text = "Import Color Profile";
-            this.btnTrackColorImport.UseVisualStyleBackColor = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(11, 76);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(93, 13);
-            this.label16.TabIndex = 56;
-            this.label16.Text = "Doubleclick Value";
-            // 
-            // btnTrackColorExport
-            // 
-            this.btnTrackColorExport.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackColorExport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackColorExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorExport.Location = new System.Drawing.Point(55, 98);
-            this.btnTrackColorExport.Name = "btnTrackColorExport";
-            this.btnTrackColorExport.Size = new System.Drawing.Size(112, 23);
-            this.btnTrackColorExport.TabIndex = 99;
-            this.btnTrackColorExport.Text = "Export Color Profile";
-            this.btnTrackColorExport.UseVisualStyleBackColor = false;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(15, 53);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(89, 13);
-            this.label17.TabIndex = 59;
-            this.label17.Text = "Highlight at value";
-            // 
-            // NUD_TrackHighlight
-            // 
-            this.NUD_TrackHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUD_TrackHighlight.DecimalPlaces = 2;
-            this.NUD_TrackHighlight.Enabled = false;
-            this.NUD_TrackHighlight.ForeColor = System.Drawing.Color.White;
-            this.NUD_TrackHighlight.Location = new System.Drawing.Point(110, 51);
-            this.NUD_TrackHighlight.Maximum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            0});
-            this.NUD_TrackHighlight.Name = "NUD_TrackHighlight";
-            this.NUD_TrackHighlight.Size = new System.Drawing.Size(57, 20);
-            this.NUD_TrackHighlight.TabIndex = 62;
-            this.NUD_TrackHighlight.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // NUD_TrackDoubleclick
-            // 
-            this.NUD_TrackDoubleclick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUD_TrackDoubleclick.DecimalPlaces = 2;
-            this.NUD_TrackDoubleclick.Enabled = false;
-            this.NUD_TrackDoubleclick.ForeColor = System.Drawing.Color.White;
-            this.NUD_TrackDoubleclick.Location = new System.Drawing.Point(110, 74);
-            this.NUD_TrackDoubleclick.Maximum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            0});
-            this.NUD_TrackDoubleclick.Name = "NUD_TrackDoubleclick";
-            this.NUD_TrackDoubleclick.Size = new System.Drawing.Size(57, 20);
-            this.NUD_TrackDoubleclick.TabIndex = 63;
-            this.NUD_TrackDoubleclick.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // lblTrackFileName
             // 
@@ -1837,7 +1243,7 @@
             this.btnSaveLeaf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveLeaf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.btnSaveLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
-            this.btnSaveLeaf.Location = new System.Drawing.Point(77, 0);
+            this.btnSaveLeaf.Location = new System.Drawing.Point(77, -5);
             this.btnSaveLeaf.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveLeaf.Name = "btnSaveLeaf";
             this.btnSaveLeaf.Size = new System.Drawing.Size(25, 25);
@@ -1866,110 +1272,6 @@
             this.lblPopoutLeaf.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
             this.lblPopoutLeaf.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
-            // btnLeafSplit
-            // 
-            this.btnLeafSplit.BackColor = System.Drawing.Color.Black;
-            this.btnLeafSplit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLeafSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeafSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafSplit.ForeColor = System.Drawing.Color.Black;
-            this.btnLeafSplit.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_divider;
-            this.btnLeafSplit.Location = new System.Drawing.Point(370, 1);
-            this.btnLeafSplit.Name = "btnLeafSplit";
-            this.btnLeafSplit.Size = new System.Drawing.Size(25, 25);
-            this.btnLeafSplit.TabIndex = 112;
-            this.toolTip1.SetToolTip(this.btnLeafSplit, "Split leaf at selected beat into 2 leafs");
-            this.btnLeafSplit.UseCompatibleTextRendering = true;
-            this.btnLeafSplit.UseVisualStyleBackColor = false;
-            this.btnLeafSplit.Click += new System.EventHandler(this.btnLeafSplit_Click);
-            // 
-            // btnTrackPaste
-            // 
-            this.btnTrackPaste.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackPaste.Enabled = false;
-            this.btnTrackPaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackPaste.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackPaste.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnTrackPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste;
-            this.btnTrackPaste.Location = new System.Drawing.Point(189, 137);
-            this.btnTrackPaste.Name = "btnTrackPaste";
-            this.btnTrackPaste.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackPaste.TabIndex = 111;
-            this.toolTip1.SetToolTip(this.btnTrackPaste, "Paste track from clipboard");
-            this.btnTrackPaste.UseCompatibleTextRendering = true;
-            this.btnTrackPaste.UseVisualStyleBackColor = false;
-            this.btnTrackPaste.Click += new System.EventHandler(this.btnTrackPaste_Click);
-            // 
-            // btnLeafColors
-            // 
-            this.btnLeafColors.BackColor = System.Drawing.Color.Black;
-            this.btnLeafColors.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLeafColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeafColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafColors.ForeColor = System.Drawing.Color.Black;
-            this.btnLeafColors.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_color_wheel;
-            this.btnLeafColors.Location = new System.Drawing.Point(318, 1);
-            this.btnLeafColors.Name = "btnLeafColors";
-            this.btnLeafColors.Size = new System.Drawing.Size(25, 25);
-            this.btnLeafColors.TabIndex = 104;
-            this.toolTip1.SetToolTip(this.btnLeafColors, "Open color dialog to insert color value into cell. Mainly used with kTraitColor.");
-            this.btnLeafColors.UseCompatibleTextRendering = true;
-            this.btnLeafColors.UseVisualStyleBackColor = false;
-            this.btnLeafColors.Click += new System.EventHandler(this.btnLeafColors_Click);
-            // 
-            // btnLEafInterpLinear
-            // 
-            this.btnLEafInterpLinear.BackColor = System.Drawing.Color.Black;
-            this.btnLEafInterpLinear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLEafInterpLinear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLEafInterpLinear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLEafInterpLinear.ForeColor = System.Drawing.Color.Black;
-            this.btnLEafInterpLinear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_graph;
-            this.btnLEafInterpLinear.Location = new System.Drawing.Point(344, 1);
-            this.btnLEafInterpLinear.Name = "btnLEafInterpLinear";
-            this.btnLEafInterpLinear.Size = new System.Drawing.Size(25, 25);
-            this.btnLEafInterpLinear.TabIndex = 103;
-            this.toolTip1.SetToolTip(this.btnLEafInterpLinear, "Linear interpolation between selected start and end beats.\r\nHold CTRL to select m" +
-        "ultiple cells.");
-            this.btnLEafInterpLinear.UseCompatibleTextRendering = true;
-            this.btnLEafInterpLinear.UseVisualStyleBackColor = false;
-            this.btnLEafInterpLinear.Click += new System.EventHandler(this.btnLEafInterpLinear_Click);
-            // 
-            // btnTrackCopy
-            // 
-            this.btnTrackCopy.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackCopy.Enabled = false;
-            this.btnTrackCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackCopy.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackCopy.ForeColor = System.Drawing.Color.PaleGreen;
-            this.btnTrackCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy;
-            this.btnTrackCopy.Location = new System.Drawing.Point(189, 115);
-            this.btnTrackCopy.Name = "btnTrackCopy";
-            this.btnTrackCopy.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackCopy.TabIndex = 102;
-            this.toolTip1.SetToolTip(this.btnTrackCopy, "Copy track to clipboard");
-            this.btnTrackCopy.UseCompatibleTextRendering = true;
-            this.btnTrackCopy.UseVisualStyleBackColor = false;
-            this.btnTrackCopy.Click += new System.EventHandler(this.btnTrackCopy_Click);
-            // 
-            // btnTrackPlayback
-            // 
-            this.btnTrackPlayback.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackPlayback.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnTrackPlayback.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackPlayback.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackPlayback.ForeColor = System.Drawing.Color.Green;
-            this.btnTrackPlayback.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackPlayback.Image")));
-            this.btnTrackPlayback.Location = new System.Drawing.Point(189, 188);
-            this.btnTrackPlayback.Name = "btnTrackPlayback";
-            this.btnTrackPlayback.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnTrackPlayback.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackPlayback.TabIndex = 98;
-            this.toolTip1.SetToolTip(this.btnTrackPlayback, resources.GetString("btnTrackPlayback.ToolTip"));
-            this.btnTrackPlayback.UseCompatibleTextRendering = true;
-            this.btnTrackPlayback.UseVisualStyleBackColor = false;
-            this.btnTrackPlayback.Click += new System.EventHandler(this.btnTrackPlayback_Click);
-            // 
             // lblLeafClose
             // 
             this.lblLeafClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1987,110 +1289,6 @@
             this.lblLeafClose.Click += new System.EventHandler(this.lblLeafClose_Click);
             this.lblLeafClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
             this.lblLeafClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
-            // 
-            // btnTrackClear
-            // 
-            this.btnTrackClear.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackClear.Enabled = false;
-            this.btnTrackClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackClear.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackClear.ForeColor = System.Drawing.Color.Red;
-            this.btnTrackClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_trash;
-            this.btnTrackClear.Location = new System.Drawing.Point(189, 160);
-            this.btnTrackClear.Name = "btnTrackClear";
-            this.btnTrackClear.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackClear.TabIndex = 67;
-            this.toolTip1.SetToolTip(this.btnTrackClear, "Clears the selected track\'s data points. CANNOT BE UNDONE");
-            this.btnTrackClear.UseCompatibleTextRendering = true;
-            this.btnTrackClear.UseVisualStyleBackColor = false;
-            this.btnTrackClear.Click += new System.EventHandler(this.btnTrackClear_Click);
-            // 
-            // btnTrackAdd
-            // 
-            this.btnTrackAdd.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackAdd.ForeColor = System.Drawing.Color.Black;
-            this.btnTrackAdd.Location = new System.Drawing.Point(189, 27);
-            this.btnTrackAdd.Name = "btnTrackAdd";
-            this.btnTrackAdd.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackAdd.TabIndex = 47;
-            this.btnTrackAdd.Text = "+";
-            this.btnTrackAdd.UseCompatibleTextRendering = true;
-            this.btnTrackAdd.UseVisualStyleBackColor = false;
-            this.btnTrackAdd.Click += new System.EventHandler(this.btnTrackAdd_Click);
-            // 
-            // btnTrackDown
-            // 
-            this.btnTrackDown.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackDown.Enabled = false;
-            this.btnTrackDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackDown.ForeColor = System.Drawing.Color.Black;
-            this.btnTrackDown.Location = new System.Drawing.Point(189, 93);
-            this.btnTrackDown.Name = "btnTrackDown";
-            this.btnTrackDown.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackDown.TabIndex = 50;
-            this.btnTrackDown.Text = "↓";
-            this.btnTrackDown.UseCompatibleTextRendering = true;
-            this.btnTrackDown.UseVisualStyleBackColor = false;
-            this.btnTrackDown.Click += new System.EventHandler(this.btnTrackDown_Click);
-            // 
-            // btnTrackUp
-            // 
-            this.btnTrackUp.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackUp.Enabled = false;
-            this.btnTrackUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackUp.ForeColor = System.Drawing.Color.Black;
-            this.btnTrackUp.Location = new System.Drawing.Point(189, 71);
-            this.btnTrackUp.Name = "btnTrackUp";
-            this.btnTrackUp.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackUp.TabIndex = 49;
-            this.btnTrackUp.Text = "↑";
-            this.btnTrackUp.UseCompatibleTextRendering = true;
-            this.btnTrackUp.UseVisualStyleBackColor = false;
-            this.btnTrackUp.Click += new System.EventHandler(this.btnTrackUp_Click);
-            // 
-            // btnTrackDelete
-            // 
-            this.btnTrackDelete.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackDelete.Enabled = false;
-            this.btnTrackDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackDelete.ForeColor = System.Drawing.Color.Black;
-            this.btnTrackDelete.Location = new System.Drawing.Point(189, 49);
-            this.btnTrackDelete.Name = "btnTrackDelete";
-            this.btnTrackDelete.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackDelete.TabIndex = 48;
-            this.btnTrackDelete.Text = "-";
-            this.btnTrackDelete.UseCompatibleTextRendering = true;
-            this.btnTrackDelete.UseVisualStyleBackColor = false;
-            this.btnTrackDelete.Click += new System.EventHandler(this.btnTrackDelete_Click);
-            // 
-            // dropTimeSig
-            // 
-            this.dropTimeSig.BackColor = System.Drawing.Color.Black;
-            this.dropTimeSig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropTimeSig.ForeColor = System.Drawing.Color.White;
-            this.dropTimeSig.FormattingEnabled = true;
-            this.dropTimeSig.Location = new System.Drawing.Point(457, 3);
-            this.dropTimeSig.Name = "dropTimeSig";
-            this.dropTimeSig.Size = new System.Drawing.Size(72, 21);
-            this.dropTimeSig.TabIndex = 45;
-            this.toolTip1.SetToolTip(this.dropTimeSig, "Purely visual for the editor. Does nothing to the actual level in-game");
-            this.dropTimeSig.SelectedIndexChanged += new System.EventHandler(this.dropTimeSig_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(399, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
-            this.label2.TabIndex = 46;
-            this.label2.Text = "Time Sig.";
             // 
             // btnLeafPanelTemplate
             // 
@@ -2564,43 +1762,43 @@
             this.lvlLoopTracks.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlLoopTracks.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlLoopTracks.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle60.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle60.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle60.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle60.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle60.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle60.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLoopTracks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle60;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLoopTracks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.lvlLoopTracks.ColumnHeadersHeight = 20;
             this.lvlLoopTracks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LoopSample,
             this.BeatsPerLoop});
             this.lvlLoopTracks.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle61.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle61.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle61.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle61.Format = "N2";
-            dataGridViewCellStyle61.NullValue = null;
-            dataGridViewCellStyle61.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle61.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle61.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLoopTracks.DefaultCellStyle = dataGridViewCellStyle61;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLoopTracks.DefaultCellStyle = dataGridViewCellStyle6;
             this.lvlLoopTracks.EnableHeadersVisualStyles = false;
             this.lvlLoopTracks.GridColor = System.Drawing.Color.Black;
             this.lvlLoopTracks.Location = new System.Drawing.Point(522, 229);
             this.lvlLoopTracks.MultiSelect = false;
             this.lvlLoopTracks.Name = "lvlLoopTracks";
             this.lvlLoopTracks.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle62.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle62.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle62.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle62.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle62.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLoopTracks.RowHeadersDefaultCellStyle = dataGridViewCellStyle62;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLoopTracks.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.lvlLoopTracks.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.lvlLoopTracks.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.lvlLoopTracks.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
@@ -2655,39 +1853,39 @@
             this.lvlSeqObjs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlSeqObjs.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlSeqObjs.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle63.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle63.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle63.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle63.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle63.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlSeqObjs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle63;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlSeqObjs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.lvlSeqObjs.ColumnHeadersHeight = 20;
             this.lvlSeqObjs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.lvlSeqObjs.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle64.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle64.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle64.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle64.Format = "N4";
-            dataGridViewCellStyle64.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle64.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlSeqObjs.DefaultCellStyle = dataGridViewCellStyle64;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.Format = "N4";
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlSeqObjs.DefaultCellStyle = dataGridViewCellStyle9;
             this.lvlSeqObjs.EnableHeadersVisualStyles = false;
             this.lvlSeqObjs.GridColor = System.Drawing.Color.Black;
             this.lvlSeqObjs.Location = new System.Drawing.Point(273, 30);
             this.lvlSeqObjs.Name = "lvlSeqObjs";
             this.lvlSeqObjs.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle65.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle65.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle65.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle65.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle65.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle65.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlSeqObjs.RowHeadersDefaultCellStyle = dataGridViewCellStyle65;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlSeqObjs.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.lvlSeqObjs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.lvlSeqObjs.RowTemplate.Height = 20;
             this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -2724,41 +1922,41 @@
             this.lvlLeafPaths.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlLeafPaths.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlLeafPaths.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle66.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle66.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle66.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle66.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle66.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle66.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafPaths.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle66;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafPaths.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.lvlLeafPaths.ColumnHeadersHeight = 20;
             this.lvlLeafPaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.lvlLeafPaths.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle67.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle67.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle67.Format = "N2";
-            dataGridViewCellStyle67.NullValue = null;
-            dataGridViewCellStyle67.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle67.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle67.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafPaths.DefaultCellStyle = dataGridViewCellStyle67;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafPaths.DefaultCellStyle = dataGridViewCellStyle12;
             this.lvlLeafPaths.EnableHeadersVisualStyles = false;
             this.lvlLeafPaths.GridColor = System.Drawing.Color.Black;
             this.lvlLeafPaths.Location = new System.Drawing.Point(273, 229);
             this.lvlLeafPaths.MultiSelect = false;
             this.lvlLeafPaths.Name = "lvlLeafPaths";
             this.lvlLeafPaths.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle68.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle68.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle68.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle68.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle68.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle68.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle68;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.lvlLeafPaths.RowHeadersVisible = false;
             this.lvlLeafPaths.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.lvlLeafPaths.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -2969,29 +2167,29 @@
             this.lvlLeafList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlLeafList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlLeafList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle69.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle69.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle69.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle69.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle69.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle69;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.lvlLeafList.ColumnHeadersHeight = 20;
             this.lvlLeafList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.lvlLeafList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Leaf,
             this.Beats});
             this.lvlLeafList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle70.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle70.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle70.NullValue = null;
-            dataGridViewCellStyle70.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle70.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle70.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafList.DefaultCellStyle = dataGridViewCellStyle70;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle15.NullValue = null;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafList.DefaultCellStyle = dataGridViewCellStyle15;
             this.lvlLeafList.EnableHeadersVisualStyles = false;
             this.lvlLeafList.GridColor = System.Drawing.Color.Black;
             this.lvlLeafList.Location = new System.Drawing.Point(3, 30);
@@ -2999,13 +2197,13 @@
             this.lvlLeafList.Name = "lvlLeafList";
             this.lvlLeafList.ReadOnly = true;
             this.lvlLeafList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle71.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle71.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle71.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle71.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle71.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafList.RowHeadersDefaultCellStyle = dataGridViewCellStyle71;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafList.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.lvlLeafList.RowHeadersVisible = false;
             this.lvlLeafList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.lvlLeafList.RowTemplate.Height = 20;
@@ -3620,14 +2818,14 @@
             this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.masterLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle72.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle72.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle72.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle72.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle72.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle72.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle72;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.masterLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -3636,29 +2834,29 @@
             this.masterPlayplus,
             this.masterIsolate});
             this.masterLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle73.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle73.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle73.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle73.NullValue = null;
-            dataGridViewCellStyle73.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle73.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle73.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle18.NullValue = null;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle18;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = System.Drawing.Color.Black;
             this.masterLvlList.Location = new System.Drawing.Point(3, 34);
             this.masterLvlList.MultiSelect = false;
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle74.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle74.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle74.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle74.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle74.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle74;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.masterLvlList.RowHeadersVisible = false;
             this.masterLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.masterLvlList.RowTemplate.Height = 20;
@@ -4216,43 +3414,43 @@
             this.gateLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gateLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.gateLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle75.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle75.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle75.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle75.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle75.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle75.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gateLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle75;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gateLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.gateLvlList.ColumnHeadersHeight = 20;
             this.gateLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gateLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Lvl,
             this.Sentry});
             this.gateLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle76.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle76.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle76.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle76.NullValue = null;
-            dataGridViewCellStyle76.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle76.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle76.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gateLvlList.DefaultCellStyle = dataGridViewCellStyle76;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle21.NullValue = null;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gateLvlList.DefaultCellStyle = dataGridViewCellStyle21;
             this.gateLvlList.EnableHeadersVisualStyles = false;
             this.gateLvlList.GridColor = System.Drawing.Color.Black;
             this.gateLvlList.Location = new System.Drawing.Point(3, 34);
             this.gateLvlList.MultiSelect = false;
             this.gateLvlList.Name = "gateLvlList";
             this.gateLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle77.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle77.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle77.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle77.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle77.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle77.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gateLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle77;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gateLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.gateLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -4611,14 +3809,14 @@
             this.workingfolderFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.workingfolderFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.workingfolderFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle78.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle78.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle78.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle78.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle78.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle78;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.workingfolderFiles.ColumnHeadersHeight = 20;
             this.workingfolderFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.workingfolderFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -4626,16 +3824,16 @@
             this.FileName});
             this.workingfolderFiles.ContextMenuStrip = this.workingfolderRightClick;
             this.workingfolderFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle80.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle80.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle80.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle80.Format = "N2";
-            dataGridViewCellStyle80.NullValue = null;
-            dataGridViewCellStyle80.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle80.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle80.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle80;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle25.Format = "N2";
+            dataGridViewCellStyle25.NullValue = null;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle25;
             this.workingfolderFiles.EnableHeadersVisualStyles = false;
             this.workingfolderFiles.GridColor = System.Drawing.Color.Black;
             this.workingfolderFiles.Location = new System.Drawing.Point(2, 58);
@@ -4643,14 +3841,14 @@
             this.workingfolderFiles.Name = "workingfolderFiles";
             this.workingfolderFiles.ReadOnly = true;
             this.workingfolderFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle81.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle81.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle81.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle81.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle81.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle81.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle81;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.workingfolderFiles.RowHeadersVisible = false;
             this.workingfolderFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.workingfolderFiles.RowTemplate.Height = 20;
@@ -4676,10 +3874,10 @@
             // FileName
             // 
             this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle79.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle79.ForeColor = System.Drawing.Color.White;
-            this.FileName.DefaultCellStyle = dataGridViewCellStyle79;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
+            this.FileName.DefaultCellStyle = dataGridViewCellStyle24;
             this.FileName.HeaderText = "File Name";
             this.FileName.Name = "FileName";
             this.FileName.ReadOnly = true;
@@ -5195,14 +4393,14 @@
             this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sampleList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.sampleList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle52.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle52.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sampleList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.sampleList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.sampleList.ColumnHeadersHeight = 20;
             this.sampleList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.sampleList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -5213,30 +4411,30 @@
             this.Offset,
             this.Channel});
             this.sampleList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle54.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle54.Format = "N2";
-            dataGridViewCellStyle54.NullValue = null;
-            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sampleList.DefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle28.Format = "N2";
+            dataGridViewCellStyle28.NullValue = null;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.sampleList.DefaultCellStyle = dataGridViewCellStyle28;
             this.sampleList.EnableHeadersVisualStyles = false;
             this.sampleList.GridColor = System.Drawing.Color.Black;
             this.sampleList.Location = new System.Drawing.Point(6, 34);
             this.sampleList.MultiSelect = false;
             this.sampleList.Name = "sampleList";
             this.sampleList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle55.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle55.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle55.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
             this.sampleList.RowHeadersVisible = false;
             this.sampleList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.sampleList.RowTemplate.Height = 20;
@@ -5452,6 +4650,787 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
+            // trackEditor
+            // 
+            this.trackEditor.AllowUserToAddRows = false;
+            this.trackEditor.AllowUserToDeleteRows = false;
+            this.trackEditor.AllowUserToResizeColumns = false;
+            this.trackEditor.AllowUserToResizeRows = false;
+            this.trackEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackEditor.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.trackEditor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.trackEditor.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.trackEditor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.trackEditor.ColumnHeadersHeight = 20;
+            this.trackEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.trackEditor.Cursor = System.Windows.Forms.Cursors.Arrow;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
+            this.trackEditor.EnableHeadersVisualStyles = false;
+            this.trackEditor.GridColor = System.Drawing.Color.Black;
+            this.trackEditor.Location = new System.Drawing.Point(214, 28);
+            this.trackEditor.Name = "trackEditor";
+            this.trackEditor.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.trackEditor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.trackEditor.RowTemplate.Height = 20;
+            this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.trackEditor.Size = new System.Drawing.Size(814, 416);
+            this.trackEditor.TabIndex = 152;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(401, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 156;
+            this.label2.Text = "Time Sig.";
+            // 
+            // panelZoom
+            // 
+            this.panelZoom.Controls.Add(this.label10);
+            this.panelZoom.Controls.Add(this.trackZoom);
+            this.panelZoom.Location = new System.Drawing.Point(535, 2);
+            this.panelZoom.Name = "panelZoom";
+            this.panelZoom.Size = new System.Drawing.Size(131, 27);
+            this.panelZoom.TabIndex = 153;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(3, 6);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(38, 13);
+            this.label10.TabIndex = 42;
+            this.label10.Text = "Zoom";
+            // 
+            // trackZoom
+            // 
+            this.trackZoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.trackZoom.Location = new System.Drawing.Point(31, 3);
+            this.trackZoom.Maximum = 120;
+            this.trackZoom.Minimum = 2;
+            this.trackZoom.Name = "trackZoom";
+            this.trackZoom.Size = new System.Drawing.Size(100, 45);
+            this.trackZoom.TabIndex = 41;
+            this.trackZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackZoom.Value = 60;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(214, 15);
+            this.label5.MinimumSize = new System.Drawing.Size(100, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 13);
+            this.label5.TabIndex = 151;
+            this.label5.Text = "Tracks Editor";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // richRawTrackData
+            // 
+            this.richRawTrackData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richRawTrackData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.richRawTrackData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richRawTrackData.DetectUrls = false;
+            this.richRawTrackData.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richRawTrackData.ForeColor = System.Drawing.Color.White;
+            this.richRawTrackData.Location = new System.Drawing.Point(295, 447);
+            this.richRawTrackData.Name = "richRawTrackData";
+            this.richRawTrackData.Size = new System.Drawing.Size(733, 59);
+            this.richRawTrackData.TabIndex = 150;
+            this.richRawTrackData.Text = "raw track data";
+            // 
+            // btnRawImport
+            // 
+            this.btnRawImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRawImport.BackColor = System.Drawing.Color.Gray;
+            this.btnRawImport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRawImport.Location = new System.Drawing.Point(222, 462);
+            this.btnRawImport.Name = "btnRawImport";
+            this.btnRawImport.Size = new System.Drawing.Size(72, 44);
+            this.btnRawImport.TabIndex = 154;
+            this.btnRawImport.Text = "Import Raw to Track";
+            this.btnRawImport.UseVisualStyleBackColor = false;
+            // 
+            // dropTimeSig
+            // 
+            this.dropTimeSig.BackColor = System.Drawing.Color.Black;
+            this.dropTimeSig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropTimeSig.ForeColor = System.Drawing.Color.White;
+            this.dropTimeSig.FormattingEnabled = true;
+            this.dropTimeSig.Location = new System.Drawing.Point(459, 4);
+            this.dropTimeSig.Name = "dropTimeSig";
+            this.dropTimeSig.Size = new System.Drawing.Size(72, 21);
+            this.dropTimeSig.TabIndex = 155;
+            this.toolTip1.SetToolTip(this.dropTimeSig, "Purely visual for the editor. Does nothing to the actual level in-game");
+            // 
+            // btnTrackDelete
+            // 
+            this.btnTrackDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackDelete.Enabled = false;
+            this.btnTrackDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackDelete.ForeColor = System.Drawing.Color.Black;
+            this.btnTrackDelete.Location = new System.Drawing.Point(191, 50);
+            this.btnTrackDelete.Name = "btnTrackDelete";
+            this.btnTrackDelete.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackDelete.TabIndex = 158;
+            this.btnTrackDelete.Text = "-";
+            this.btnTrackDelete.UseCompatibleTextRendering = true;
+            this.btnTrackDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnLeafSplit
+            // 
+            this.btnLeafSplit.BackColor = System.Drawing.Color.Black;
+            this.btnLeafSplit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLeafSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeafSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeafSplit.ForeColor = System.Drawing.Color.Black;
+            this.btnLeafSplit.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_divider;
+            this.btnLeafSplit.Location = new System.Drawing.Point(372, 2);
+            this.btnLeafSplit.Name = "btnLeafSplit";
+            this.btnLeafSplit.Size = new System.Drawing.Size(25, 25);
+            this.btnLeafSplit.TabIndex = 167;
+            this.toolTip1.SetToolTip(this.btnLeafSplit, "Split leaf at selected beat into 2 leafs");
+            this.btnLeafSplit.UseCompatibleTextRendering = true;
+            this.btnLeafSplit.UseVisualStyleBackColor = false;
+            // 
+            // btnTrackUp
+            // 
+            this.btnTrackUp.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackUp.Enabled = false;
+            this.btnTrackUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackUp.ForeColor = System.Drawing.Color.Black;
+            this.btnTrackUp.Location = new System.Drawing.Point(191, 72);
+            this.btnTrackUp.Name = "btnTrackUp";
+            this.btnTrackUp.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackUp.TabIndex = 159;
+            this.btnTrackUp.Text = "↑";
+            this.btnTrackUp.UseCompatibleTextRendering = true;
+            this.btnTrackUp.UseVisualStyleBackColor = false;
+            // 
+            // btnTrackPaste
+            // 
+            this.btnTrackPaste.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackPaste.Enabled = false;
+            this.btnTrackPaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackPaste.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackPaste.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnTrackPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste;
+            this.btnTrackPaste.Location = new System.Drawing.Point(191, 138);
+            this.btnTrackPaste.Name = "btnTrackPaste";
+            this.btnTrackPaste.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackPaste.TabIndex = 166;
+            this.toolTip1.SetToolTip(this.btnTrackPaste, "Paste track from clipboard");
+            this.btnTrackPaste.UseCompatibleTextRendering = true;
+            this.btnTrackPaste.UseVisualStyleBackColor = false;
+            // 
+            // btnTrackDown
+            // 
+            this.btnTrackDown.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackDown.Enabled = false;
+            this.btnTrackDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackDown.ForeColor = System.Drawing.Color.Black;
+            this.btnTrackDown.Location = new System.Drawing.Point(191, 94);
+            this.btnTrackDown.Name = "btnTrackDown";
+            this.btnTrackDown.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackDown.TabIndex = 160;
+            this.btnTrackDown.Text = "↓";
+            this.btnTrackDown.UseCompatibleTextRendering = true;
+            this.btnTrackDown.UseVisualStyleBackColor = false;
+            // 
+            // btnLeafColors
+            // 
+            this.btnLeafColors.BackColor = System.Drawing.Color.Black;
+            this.btnLeafColors.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLeafColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeafColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeafColors.ForeColor = System.Drawing.Color.Black;
+            this.btnLeafColors.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_color_wheel;
+            this.btnLeafColors.Location = new System.Drawing.Point(320, 2);
+            this.btnLeafColors.Name = "btnLeafColors";
+            this.btnLeafColors.Size = new System.Drawing.Size(25, 25);
+            this.btnLeafColors.TabIndex = 165;
+            this.toolTip1.SetToolTip(this.btnLeafColors, "Open color dialog to insert color value into cell. Mainly used with kTraitColor.");
+            this.btnLeafColors.UseCompatibleTextRendering = true;
+            this.btnLeafColors.UseVisualStyleBackColor = false;
+            // 
+            // btnTrackAdd
+            // 
+            this.btnTrackAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackAdd.ForeColor = System.Drawing.Color.Black;
+            this.btnTrackAdd.Location = new System.Drawing.Point(191, 28);
+            this.btnTrackAdd.Name = "btnTrackAdd";
+            this.btnTrackAdd.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackAdd.TabIndex = 157;
+            this.btnTrackAdd.Text = "+";
+            this.btnTrackAdd.UseCompatibleTextRendering = true;
+            this.btnTrackAdd.UseVisualStyleBackColor = false;
+            // 
+            // btnLEafInterpLinear
+            // 
+            this.btnLEafInterpLinear.BackColor = System.Drawing.Color.Black;
+            this.btnLEafInterpLinear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLEafInterpLinear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLEafInterpLinear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLEafInterpLinear.ForeColor = System.Drawing.Color.Black;
+            this.btnLEafInterpLinear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_graph;
+            this.btnLEafInterpLinear.Location = new System.Drawing.Point(346, 2);
+            this.btnLEafInterpLinear.Name = "btnLEafInterpLinear";
+            this.btnLEafInterpLinear.Size = new System.Drawing.Size(25, 25);
+            this.btnLEafInterpLinear.TabIndex = 164;
+            this.toolTip1.SetToolTip(this.btnLEafInterpLinear, "Linear interpolation between selected start and end beats.\r\nHold CTRL to select m" +
+        "ultiple cells.");
+            this.btnLEafInterpLinear.UseCompatibleTextRendering = true;
+            this.btnLEafInterpLinear.UseVisualStyleBackColor = false;
+            // 
+            // btnTrackClear
+            // 
+            this.btnTrackClear.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackClear.Enabled = false;
+            this.btnTrackClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackClear.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackClear.ForeColor = System.Drawing.Color.Red;
+            this.btnTrackClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_trash;
+            this.btnTrackClear.Location = new System.Drawing.Point(191, 161);
+            this.btnTrackClear.Name = "btnTrackClear";
+            this.btnTrackClear.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackClear.TabIndex = 161;
+            this.toolTip1.SetToolTip(this.btnTrackClear, "Clears the selected track\'s data points. CANNOT BE UNDONE");
+            this.btnTrackClear.UseCompatibleTextRendering = true;
+            this.btnTrackClear.UseVisualStyleBackColor = false;
+            // 
+            // btnTrackCopy
+            // 
+            this.btnTrackCopy.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackCopy.Enabled = false;
+            this.btnTrackCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackCopy.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackCopy.ForeColor = System.Drawing.Color.PaleGreen;
+            this.btnTrackCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy;
+            this.btnTrackCopy.Location = new System.Drawing.Point(191, 116);
+            this.btnTrackCopy.Name = "btnTrackCopy";
+            this.btnTrackCopy.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackCopy.TabIndex = 163;
+            this.toolTip1.SetToolTip(this.btnTrackCopy, "Copy track to clipboard");
+            this.btnTrackCopy.UseCompatibleTextRendering = true;
+            this.btnTrackCopy.UseVisualStyleBackColor = false;
+            // 
+            // numericUpDown_LeafLength
+            // 
+            this.numericUpDown_LeafLength.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numericUpDown_LeafLength.ForeColor = System.Drawing.Color.White;
+            this.numericUpDown_LeafLength.Location = new System.Drawing.Point(105, 29);
+            this.numericUpDown_LeafLength.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_LeafLength.Name = "numericUpDown_LeafLength";
+            this.numericUpDown_LeafLength.Size = new System.Drawing.Size(72, 20);
+            this.numericUpDown_LeafLength.TabIndex = 169;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.dropObjects);
+            this.panel2.Controls.Add(this.label19);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.btnLeafObjRefresh);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.dropParamPath);
+            this.panel2.Controls.Add(this.dropTrackLane);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.btnTrackApply);
+            this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.panel2.Location = new System.Drawing.Point(3, 52);
+            this.panel2.Name = "panel2";
+            this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panel2.Size = new System.Drawing.Size(180, 151);
+            this.panel2.TabIndex = 170;
+            // 
+            // dropObjects
+            // 
+            this.dropObjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropObjects.Enabled = false;
+            this.dropObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropObjects.ForeColor = System.Drawing.Color.White;
+            this.dropObjects.FormattingEnabled = true;
+            this.dropObjects.Location = new System.Drawing.Point(5, 33);
+            this.dropObjects.Name = "dropObjects";
+            this.dropObjects.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dropObjects.Size = new System.Drawing.Size(163, 21);
+            this.dropObjects.TabIndex = 30;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.White;
+            this.label19.Location = new System.Drawing.Point(1, 1);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(87, 13);
+            this.label19.TabIndex = 61;
+            this.label19.Text = "Track Objects";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(1, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Track Object";
+            // 
+            // btnLeafObjRefresh
+            // 
+            this.btnLeafObjRefresh.BackColor = System.Drawing.Color.Gray;
+            this.btnLeafObjRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLeafObjRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeafObjRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeafObjRefresh.ForeColor = System.Drawing.Color.Aqua;
+            this.btnLeafObjRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
+            this.btnLeafObjRefresh.Location = new System.Drawing.Point(146, 10);
+            this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
+            this.btnLeafObjRefresh.Size = new System.Drawing.Size(22, 22);
+            this.btnLeafObjRefresh.TabIndex = 101;
+            this.toolTip1.SetToolTip(this.btnLeafObjRefresh, "Reload list of available objects from track_objects.txt");
+            this.btnLeafObjRefresh.UseCompatibleTextRendering = true;
+            this.btnLeafObjRefresh.UseVisualStyleBackColor = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(1, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(96, 13);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "Type (param_path)";
+            // 
+            // dropParamPath
+            // 
+            this.dropParamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropParamPath.DropDownWidth = 180;
+            this.dropParamPath.Enabled = false;
+            this.dropParamPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropParamPath.ForeColor = System.Drawing.Color.White;
+            this.dropParamPath.FormattingEnabled = true;
+            this.dropParamPath.Location = new System.Drawing.Point(5, 73);
+            this.dropParamPath.Name = "dropParamPath";
+            this.dropParamPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dropParamPath.Size = new System.Drawing.Size(163, 21);
+            this.dropParamPath.TabIndex = 33;
+            // 
+            // dropTrackLane
+            // 
+            this.dropTrackLane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropTrackLane.DropDownWidth = 180;
+            this.dropTrackLane.Enabled = false;
+            this.dropTrackLane.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropTrackLane.ForeColor = System.Drawing.Color.White;
+            this.dropTrackLane.FormattingEnabled = true;
+            this.dropTrackLane.Items.AddRange(new object[] {
+            "lane left 2",
+            "lane left 1",
+            "lane center",
+            "lane right 1",
+            "lane right 2"});
+            this.dropTrackLane.Location = new System.Drawing.Point(74, 96);
+            this.dropTrackLane.Name = "dropTrackLane";
+            this.dropTrackLane.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dropTrackLane.Size = new System.Drawing.Size(94, 21);
+            this.dropTrackLane.TabIndex = 65;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(26, 99);
+            this.label11.Name = "label11";
+            this.label11.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label11.Size = new System.Drawing.Size(47, 13);
+            this.label11.TabIndex = 66;
+            this.label11.Text = "Samples";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnTrackApply
+            // 
+            this.btnTrackApply.BackColor = System.Drawing.Color.Green;
+            this.btnTrackApply.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTrackApply.Enabled = false;
+            this.btnTrackApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackApply.Location = new System.Drawing.Point(73, 118);
+            this.btnTrackApply.Name = "btnTrackApply";
+            this.btnTrackApply.Size = new System.Drawing.Size(96, 24);
+            this.btnTrackApply.TabIndex = 52;
+            this.btnTrackApply.Text = "Apply to Track";
+            this.btnTrackApply.UseVisualStyleBackColor = false;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.txtTrait);
+            this.panel3.Controls.Add(this.label7);
+            this.panel3.Controls.Add(this.label46);
+            this.panel3.Controls.Add(this.label8);
+            this.panel3.Controls.Add(this.dropLeafInterp);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.txtDefault);
+            this.panel3.Controls.Add(this.dropLeafStep);
+            this.panel3.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.panel3.Location = new System.Drawing.Point(3, 202);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(180, 124);
+            this.panel3.TabIndex = 171;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(1, 2);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(135, 13);
+            this.label3.TabIndex = 108;
+            this.label3.Text = "Object Beat Properties";
+            // 
+            // txtTrait
+            // 
+            this.txtTrait.AutoSize = true;
+            this.txtTrait.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.txtTrait.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.txtTrait.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTrait.ForeColor = System.Drawing.Color.White;
+            this.txtTrait.Location = new System.Drawing.Point(74, 23);
+            this.txtTrait.MinimumSize = new System.Drawing.Size(96, 20);
+            this.txtTrait.Name = "txtTrait";
+            this.txtTrait.Size = new System.Drawing.Size(96, 20);
+            this.txtTrait.TabIndex = 107;
+            this.txtTrait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(32, 71);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 13);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Default";
+            this.toolTip1.SetToolTip(this.label7, "If no value is set on a beat, the game will use this default.");
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label46.ForeColor = System.Drawing.Color.White;
+            this.label46.Location = new System.Drawing.Point(8, 93);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(65, 13);
+            this.label46.TabIndex = 106;
+            this.label46.Text = "Interpolation";
+            this.toolTip1.SetToolTip(this.label46, resources.GetString("label46.ToolTip"));
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(44, 48);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 13);
+            this.label8.TabIndex = 36;
+            this.label8.Text = "Step";
+            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
+            // 
+            // dropLeafInterp
+            // 
+            this.dropLeafInterp.BackColor = System.Drawing.Color.Black;
+            this.dropLeafInterp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropLeafInterp.ForeColor = System.Drawing.Color.LawnGreen;
+            this.dropLeafInterp.FormattingEnabled = true;
+            this.dropLeafInterp.Items.AddRange(new object[] {
+            "kTraitInterpLinear",
+            "kTraitInterpQuadratic",
+            "kTraitInterpCubic",
+            "kTraitInterpQuartic",
+            "kTraitInterpQuintic",
+            "kTraitInterpSine",
+            "kTraitInterpNone",
+            "kTraitInterpStep"});
+            this.dropLeafInterp.Location = new System.Drawing.Point(74, 90);
+            this.dropLeafInterp.Name = "dropLeafInterp";
+            this.dropLeafInterp.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dropLeafInterp.Size = new System.Drawing.Size(96, 21);
+            this.dropLeafInterp.TabIndex = 105;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(45, 25);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(28, 13);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "Trait";
+            this.toolTip1.SetToolTip(this.label9, "The data type of the object. Recommended to not edit.");
+            // 
+            // txtDefault
+            // 
+            this.txtDefault.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.txtDefault.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDefault.DecimalPlaces = 4;
+            this.txtDefault.ForeColor = System.Drawing.Color.White;
+            this.txtDefault.Location = new System.Drawing.Point(74, 68);
+            this.txtDefault.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.txtDefault.Minimum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            -2147483648});
+            this.txtDefault.Name = "txtDefault";
+            this.txtDefault.Size = new System.Drawing.Size(96, 20);
+            this.txtDefault.TabIndex = 64;
+            // 
+            // dropLeafStep
+            // 
+            this.dropLeafStep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropLeafStep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropLeafStep.ForeColor = System.Drawing.Color.White;
+            this.dropLeafStep.FormattingEnabled = true;
+            this.dropLeafStep.Items.AddRange(new object[] {
+            "True",
+            "False"});
+            this.dropLeafStep.Location = new System.Drawing.Point(74, 45);
+            this.dropLeafStep.Name = "dropLeafStep";
+            this.dropLeafStep.Size = new System.Drawing.Size(96, 21);
+            this.dropLeafStep.TabIndex = 94;
+            this.dropLeafStep.Text = "True";
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.label18);
+            this.panel4.Controls.Add(this.label15);
+            this.panel4.Controls.Add(this.btnTrackColorDialog);
+            this.panel4.Controls.Add(this.btnTrackColorImport);
+            this.panel4.Controls.Add(this.label16);
+            this.panel4.Controls.Add(this.btnTrackColorExport);
+            this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.NUD_TrackHighlight);
+            this.panel4.Controls.Add(this.NUD_TrackDoubleclick);
+            this.panel4.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.panel4.Location = new System.Drawing.Point(3, 325);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(180, 154);
+            this.panel4.TabIndex = 172;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.White;
+            this.label18.Location = new System.Drawing.Point(1, 2);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(113, 13);
+            this.label18.TabIndex = 60;
+            this.label18.Text = "Cell Visual Options";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.White;
+            this.label15.Location = new System.Drawing.Point(36, 30);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(68, 13);
+            this.label15.TabIndex = 54;
+            this.label15.Text = "Cell Highlight";
+            // 
+            // btnTrackColorDialog
+            // 
+            this.btnTrackColorDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnTrackColorDialog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTrackColorDialog.Enabled = false;
+            this.btnTrackColorDialog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackColorDialog.Location = new System.Drawing.Point(110, 25);
+            this.btnTrackColorDialog.Name = "btnTrackColorDialog";
+            this.btnTrackColorDialog.Size = new System.Drawing.Size(57, 23);
+            this.btnTrackColorDialog.TabIndex = 55;
+            this.btnTrackColorDialog.Text = "click";
+            this.btnTrackColorDialog.UseVisualStyleBackColor = false;
+            // 
+            // btnTrackColorImport
+            // 
+            this.btnTrackColorImport.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackColorImport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTrackColorImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackColorImport.Location = new System.Drawing.Point(55, 119);
+            this.btnTrackColorImport.Name = "btnTrackColorImport";
+            this.btnTrackColorImport.Size = new System.Drawing.Size(112, 23);
+            this.btnTrackColorImport.TabIndex = 100;
+            this.btnTrackColorImport.Text = "Import Color Profile";
+            this.btnTrackColorImport.UseVisualStyleBackColor = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(11, 76);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(93, 13);
+            this.label16.TabIndex = 56;
+            this.label16.Text = "Doubleclick Value";
+            // 
+            // btnTrackColorExport
+            // 
+            this.btnTrackColorExport.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackColorExport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTrackColorExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackColorExport.Location = new System.Drawing.Point(55, 98);
+            this.btnTrackColorExport.Name = "btnTrackColorExport";
+            this.btnTrackColorExport.Size = new System.Drawing.Size(112, 23);
+            this.btnTrackColorExport.TabIndex = 99;
+            this.btnTrackColorExport.Text = "Export Color Profile";
+            this.btnTrackColorExport.UseVisualStyleBackColor = false;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(15, 53);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(89, 13);
+            this.label17.TabIndex = 59;
+            this.label17.Text = "Highlight at value";
+            // 
+            // NUD_TrackHighlight
+            // 
+            this.NUD_TrackHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUD_TrackHighlight.DecimalPlaces = 2;
+            this.NUD_TrackHighlight.Enabled = false;
+            this.NUD_TrackHighlight.ForeColor = System.Drawing.Color.White;
+            this.NUD_TrackHighlight.Location = new System.Drawing.Point(110, 51);
+            this.NUD_TrackHighlight.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.NUD_TrackHighlight.Name = "NUD_TrackHighlight";
+            this.NUD_TrackHighlight.Size = new System.Drawing.Size(57, 20);
+            this.NUD_TrackHighlight.TabIndex = 62;
+            this.NUD_TrackHighlight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // NUD_TrackDoubleclick
+            // 
+            this.NUD_TrackDoubleclick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUD_TrackDoubleclick.DecimalPlaces = 2;
+            this.NUD_TrackDoubleclick.Enabled = false;
+            this.NUD_TrackDoubleclick.ForeColor = System.Drawing.Color.White;
+            this.NUD_TrackDoubleclick.Location = new System.Drawing.Point(110, 74);
+            this.NUD_TrackDoubleclick.Maximum = new decimal(new int[] {
+            720,
+            0,
+            0,
+            0});
+            this.NUD_TrackDoubleclick.Name = "NUD_TrackDoubleclick";
+            this.NUD_TrackDoubleclick.Size = new System.Drawing.Size(57, 20);
+            this.NUD_TrackDoubleclick.TabIndex = 63;
+            this.NUD_TrackDoubleclick.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // btnTrackPlayback
+            // 
+            this.btnTrackPlayback.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackPlayback.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnTrackPlayback.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrackPlayback.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackPlayback.ForeColor = System.Drawing.Color.Green;
+            this.btnTrackPlayback.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackPlayback.Image")));
+            this.btnTrackPlayback.Location = new System.Drawing.Point(191, 189);
+            this.btnTrackPlayback.Name = "btnTrackPlayback";
+            this.btnTrackPlayback.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnTrackPlayback.Size = new System.Drawing.Size(22, 22);
+            this.btnTrackPlayback.TabIndex = 162;
+            this.toolTip1.SetToolTip(this.btnTrackPlayback, resources.GetString("btnTrackPlayback.ToolTip"));
+            this.btnTrackPlayback.UseCompatibleTextRendering = true;
+            this.btnTrackPlayback.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(27, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 168;
+            this.label1.Text = "Leaf Length";
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5481,22 +5460,8 @@
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FormLeafEditor_Scroll);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
-            this.panelZoom.ResumeLayout(false);
-            this.panelZoom.PerformLayout();
             this.panelLeaf.ResumeLayout(false);
             this.panelLeaf.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).EndInit();
             this.panelLevel.ResumeLayout(false);
             this.panelLevel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).EndInit();
@@ -5551,6 +5516,20 @@
             this.splitBottom2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitBottom2)).EndInit();
             this.splitBottom2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).EndInit();
+            this.panelZoom.ResumeLayout(false);
+            this.panelZoom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5562,26 +5541,13 @@
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem interpolatorToolStripMenuItem;
-		private System.Windows.Forms.RichTextBox richRawTrackData;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.DataGridView trackEditor;
-		private System.Windows.Forms.TrackBar trackZoom;
-		private System.Windows.Forms.Label label10;
-		private System.Windows.Forms.Panel panelZoom;
-		private System.Windows.Forms.Button btnRawImport;
 		private System.Windows.Forms.Panel panelLeaf;
 		private System.Windows.Forms.Panel panelLevel;
 		private System.Windows.Forms.Panel panelMaster;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.ComboBox dropTimeSig;
 		private System.Windows.Forms.Label lblTrackFileName;
 		private System.Windows.Forms.Label lblLvlName;
 		private System.Windows.Forms.Label lblMasterName;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-		private System.Windows.Forms.Button btnTrackDown;
-		private System.Windows.Forms.Button btnTrackUp;
-		private System.Windows.Forms.Button btnTrackDelete;
-		private System.Windows.Forms.Button btnTrackAdd;
 		private System.Windows.Forms.ColorDialog colorDialog1;
 		private System.Windows.Forms.ToolStripMenuItem leafsaveToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem leafloadToolStripMenuItem;
@@ -5591,7 +5557,6 @@
 		private System.Windows.Forms.ToolStripMenuItem levelEditorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem masterEditorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem leafnewToolStripMenuItem;
-		private System.Windows.Forms.Button btnTrackClear;
 		private System.Windows.Forms.Label lblLvlClose;
 		private System.Windows.Forms.Label lblLeafClose;
 		private System.Windows.Forms.Label lblMasterClose;
@@ -5748,7 +5713,6 @@
 		private System.Windows.Forms.Button btnSaveMaster;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-        private System.Windows.Forms.Button btnTrackPlayback;
         private System.Windows.Forms.Button btnSampleAdd;
         private System.Windows.Forms.Button btnSampleDelete;
         private System.Windows.Forms.TextBox txtSampPath;
@@ -5765,7 +5729,6 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label lblSampleFSBhelp;
         private System.Windows.Forms.Button btnSampEditorPlaySamp;
-        private System.Windows.Forms.Button btnTrackCopy;
         private System.Windows.Forms.Button btnWorkCopy;
         private System.Windows.Forms.Button btnLvlCopyTunnel;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
@@ -5793,14 +5756,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
         private System.Windows.Forms.Button btnLvlLeafCopy;
         private System.Windows.Forms.Button btnMasterLvlCopy;
-        private System.Windows.Forms.Button btnLEafInterpLinear;
-        private System.Windows.Forms.Button btnLeafColors;
         private System.Windows.Forms.ToolStripMenuItem resetMenuPositionToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panelBeeble;
         private System.Windows.Forms.Timer timerBeeble;
         private System.Windows.Forms.ToolStripMenuItem changeGameDirectoryToolStripMenuItem;
-        private System.Windows.Forms.Button btnTrackPaste;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox filterLvl;
         private System.Windows.Forms.CheckBox filterGate;
@@ -5812,7 +5772,6 @@
         private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.Button btnLeafSplit;
         private System.Windows.Forms.CheckBox chkTunnelCopy;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.SplitContainer splitHorizontal;
@@ -5842,7 +5801,24 @@
         private System.Windows.Forms.ToolStripMenuItem pickAPanelToDockItHereToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetDocksStripMenuItem;
         private System.Windows.Forms.Button btnLevelFolder;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panelZoom;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TrackBar trackZoom;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RichTextBox richRawTrackData;
+        private System.Windows.Forms.Button btnRawImport;
+        private System.Windows.Forms.ComboBox dropTimeSig;
+        private System.Windows.Forms.Button btnTrackDelete;
+        private System.Windows.Forms.Button btnLeafSplit;
+        private System.Windows.Forms.Button btnTrackUp;
+        private System.Windows.Forms.Button btnTrackPaste;
+        private System.Windows.Forms.Button btnTrackDown;
+        private System.Windows.Forms.Button btnLeafColors;
+        private System.Windows.Forms.Button btnTrackAdd;
+        private System.Windows.Forms.Button btnLEafInterpLinear;
+        private System.Windows.Forms.Button btnTrackClear;
+        private System.Windows.Forms.Button btnTrackCopy;
         private System.Windows.Forms.NumericUpDown numericUpDown_LeafLength;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ComboBox dropObjects;
@@ -5874,6 +5850,9 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown NUD_TrackHighlight;
         private System.Windows.Forms.NumericUpDown NUD_TrackDoubleclick;
+        private System.Windows.Forms.Button btnTrackPlayback;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView trackEditor;
     }
 }
 
