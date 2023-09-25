@@ -160,7 +160,7 @@ namespace ControlManager
         private static void MoveControl(object control1, MouseEventArgs e)
         {
             Control control = control1 as Control;
-            if (control.Parent.GetType() == typeof(Panel))
+            if (control.Parent.Tag == "editorpanel")
                 control = control.Parent;
 
             if (!_resizing && ! _moving)
