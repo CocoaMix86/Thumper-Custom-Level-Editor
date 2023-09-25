@@ -1082,7 +1082,7 @@ namespace Thumper_Custom_Level_Editor
 			_tracks.Clear();
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 			//set beat_cnt and time_sig
-			numericUpDown_LeafLength.Value = (int)_load["beat_cnt"];
+			numericUpDown_LeafLength.Value = (int?)_load["beat_cnt"] ?? 0;
 			var _time_sig = (string)_load["time_sig"] ?? "4/4";
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
 			//each object in the seq_objs[] list becomes a track
@@ -1097,9 +1097,9 @@ namespace Thumper_Custom_Level_Editor
 				};
 				//if the leaf has definitions for these, add them. If not, set to defaults
 				_s.param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"];
-				_s.highlight_color = seq_obj.ContainsKey("editor_data") ? (string)seq_obj["editor_data"][0] : "-8355585";
-				_s.highlight_value = seq_obj.ContainsKey("editor_data") ? (float)seq_obj["editor_data"][1] : 1;
-				_s.default_interp = seq_obj.ContainsKey("default_interp") ? (string)seq_obj["default_interp"] : "kTraitInterpLinear";
+				_s.highlight_color = (string)seq_obj["editor_data"][0] ?? "-8355585";
+				_s.highlight_value = (int?)seq_obj["editor_data"][1] ?? 1;
+				_s.default_interp = (string)seq_obj["default_interp"] ?? "kTraitInterpLinear";
 				//iterate over every _object to find where a param_path is located
 				//this was the best way to do this I could come up with
 				foreach (Object_Params _obj in _objects) {
@@ -1111,10 +1111,11 @@ namespace Thumper_Custom_Level_Editor
 							//_s.friendly_param = _obj.param_displayname[_obj.param_path.IndexOf(reg_param)];
 							_s.friendly_param = _obj.param_displayname[x];
 							_s.friendly_type = _obj.obj_displayname;
-							break;
+							goto endsearch;
 						}
 					}
 				}
+				endsearch:
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this
 				if (_s.param_path.Contains("."))
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
