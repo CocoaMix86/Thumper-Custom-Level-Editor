@@ -31,13 +31,13 @@ namespace ControlManager
         }
 
         internal static MoveOrResize WorkType { get; set; }
-
+        /*
         internal static void Init(Control control)
         {
-            Init(control, control);
+            Init(control);
         }
-
-        internal static void Init(Control control, Control container)
+        */
+        internal static void Init(Control control)
         {
             _moving = false;
             _resizing = false;

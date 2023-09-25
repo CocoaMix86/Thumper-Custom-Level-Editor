@@ -234,13 +234,18 @@ namespace Thumper_Custom_Level_Editor
             InitializeSampleStuff();
             //set panels to be resizeable
             ControlMoverOrResizer.Init(pictureBox1, panelBeeble);
-            ControlMoverOrResizer.Init(panelBeeble);
             ControlMoverOrResizer.Init(panelLeaf);
+            ControlMoverOrResizer.Init(lblTrackFileName, panelLeaf);
             ControlMoverOrResizer.Init(panelLevel);
+            ControlMoverOrResizer.Init(lblLvlName, panelLevel);
             ControlMoverOrResizer.Init(panelGate);
+            ControlMoverOrResizer.Init(lblGateName, panelGate);
             ControlMoverOrResizer.Init(panelMaster);
+            ControlMoverOrResizer.Init(lblMasterName, panelMaster);
             ControlMoverOrResizer.Init(panelSample);
+            ControlMoverOrResizer.Init(lblSampleEditor, panelSample);
             ControlMoverOrResizer.Init(panelWorkingFolder);
+            ControlMoverOrResizer.Init(lblWorkingFolder, panelWorkingFolder);
             //
             AddScrollListener(trackEditor, trackEditor_Scroll);
 
