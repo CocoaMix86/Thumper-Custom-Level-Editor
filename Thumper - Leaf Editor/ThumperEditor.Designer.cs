@@ -1345,6 +1345,7 @@
             this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle30;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.trackEditor.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle31.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1385,6 +1386,7 @@
             // 
             // trackZoom
             // 
+            this.trackZoom.Cursor = System.Windows.Forms.Cursors.Hand;
             this.trackZoom.Location = new System.Drawing.Point(31, 3);
             this.trackZoom.Maximum = 120;
             this.trackZoom.Minimum = 2;
@@ -1419,6 +1421,7 @@
             // 
             this.btnRawImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRawImport.BackColor = System.Drawing.Color.Gray;
+            this.btnRawImport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRawImport.Location = new System.Drawing.Point(212, 461);
             this.btnRawImport.Name = "btnRawImport";
@@ -1475,6 +1478,7 @@
             this.lblPopoutLeaf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPopoutLeaf.AutoSize = true;
             this.lblPopoutLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPopoutLeaf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPopoutLeaf.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPopoutLeaf.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblPopoutLeaf.Location = new System.Drawing.Point(990, 0);
@@ -1493,6 +1497,7 @@
             // btnLeafSplit
             // 
             this.btnLeafSplit.BackColor = System.Drawing.Color.Black;
+            this.btnLeafSplit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLeafSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeafSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeafSplit.ForeColor = System.Drawing.Color.Black;
@@ -1526,6 +1531,7 @@
             // btnLeafColors
             // 
             this.btnLeafColors.BackColor = System.Drawing.Color.Black;
+            this.btnLeafColors.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLeafColors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeafColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeafColors.ForeColor = System.Drawing.Color.Black;
@@ -1542,6 +1548,7 @@
             // btnLEafInterpLinear
             // 
             this.btnLEafInterpLinear.BackColor = System.Drawing.Color.Black;
+            this.btnLEafInterpLinear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLEafInterpLinear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLEafInterpLinear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLEafInterpLinear.ForeColor = System.Drawing.Color.Black;
@@ -1596,6 +1603,7 @@
             this.lblLeafClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLeafClose.AutoSize = true;
             this.lblLeafClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLeafClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblLeafClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLeafClose.Location = new System.Drawing.Point(1009, 0);
             this.lblLeafClose.MinimumSize = new System.Drawing.Size(20, 20);
@@ -1713,6 +1721,7 @@
             this.panel2.Controls.Add(this.dropTrackLane);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.btnTrackApply);
+            this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel2.Location = new System.Drawing.Point(5, 52);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -1733,6 +1742,7 @@
             // btnLeafObjRefresh
             // 
             this.btnLeafObjRefresh.BackColor = System.Drawing.Color.Gray;
+            this.btnLeafObjRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLeafObjRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeafObjRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeafObjRefresh.ForeColor = System.Drawing.Color.Aqua;
@@ -1783,6 +1793,7 @@
             // btnTrackApply
             // 
             this.btnTrackApply.BackColor = System.Drawing.Color.Green;
+            this.btnTrackApply.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackApply.Enabled = false;
             this.btnTrackApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1806,6 +1817,7 @@
             this.panel3.Controls.Add(this.label9);
             this.panel3.Controls.Add(this.txtDefault);
             this.panel3.Controls.Add(this.dropLeafStep);
+            this.panel3.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel3.Location = new System.Drawing.Point(5, 202);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(180, 124);
@@ -1920,6 +1932,7 @@
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.NUD_TrackHighlight);
             this.panel4.Controls.Add(this.NUD_TrackDoubleclick);
+            this.panel4.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel4.Location = new System.Drawing.Point(5, 325);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(180, 154);
@@ -1950,6 +1963,7 @@
             // btnTrackColorDialog
             // 
             this.btnTrackColorDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnTrackColorDialog.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackColorDialog.Enabled = false;
             this.btnTrackColorDialog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackColorDialog.Location = new System.Drawing.Point(110, 25);
@@ -1963,6 +1977,7 @@
             // btnTrackColorImport
             // 
             this.btnTrackColorImport.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackColorImport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackColorImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackColorImport.Location = new System.Drawing.Point(55, 119);
             this.btnTrackColorImport.Name = "btnTrackColorImport";
@@ -1986,6 +2001,7 @@
             // btnTrackColorExport
             // 
             this.btnTrackColorExport.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackColorExport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackColorExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackColorExport.Location = new System.Drawing.Point(55, 98);
             this.btnTrackColorExport.Name = "btnTrackColorExport";
@@ -2076,6 +2092,7 @@
             // btnSaveLeaf
             // 
             this.btnSaveLeaf.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveLeaf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveLeaf.Enabled = false;
             this.btnSaveLeaf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveLeaf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -2092,6 +2109,7 @@
             // 
             this.btnLeafPanelTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLeafPanelTemplate.BackColor = System.Drawing.Color.PaleGreen;
+            this.btnLeafPanelTemplate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLeafPanelTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeafPanelTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeafPanelTemplate.Location = new System.Drawing.Point(226, 242);
@@ -2106,6 +2124,7 @@
             // 
             this.btnLeafPanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLeafPanelOpen.BackColor = System.Drawing.Color.PaleGreen;
+            this.btnLeafPanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLeafPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeafPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeafPanelOpen.Location = new System.Drawing.Point(226, 219);
@@ -2120,6 +2139,7 @@
             // 
             this.btnLeafPanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLeafPanelNew.BackColor = System.Drawing.Color.PaleGreen;
+            this.btnLeafPanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLeafPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeafPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeafPanelNew.Location = new System.Drawing.Point(226, 196);
@@ -2189,6 +2209,7 @@
             this.lblPopoutLvl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPopoutLvl.AutoSize = true;
             this.lblPopoutLvl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPopoutLvl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPopoutLvl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPopoutLvl.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblPopoutLvl.Location = new System.Drawing.Point(848, 0);
@@ -2317,6 +2338,7 @@
             // btnLvlLoopRefresh
             // 
             this.btnLvlLoopRefresh.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLoopRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLoopRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLoopRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlLoopRefresh.ForeColor = System.Drawing.Color.Aqua;
@@ -2567,6 +2589,7 @@
             this.lvlLoopTracks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LoopSample,
             this.BeatsPerLoop});
+            this.lvlLoopTracks.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle35.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2620,6 +2643,7 @@
             this.lblLvlClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLvlClose.AutoSize = true;
             this.lblLvlClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblLvlClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblLvlClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLvlClose.Location = new System.Drawing.Point(867, 0);
             this.lblLvlClose.MinimumSize = new System.Drawing.Size(20, 20);
@@ -2654,6 +2678,7 @@
             this.lvlSeqObjs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle37;
             this.lvlSeqObjs.ColumnHeadersHeight = 20;
             this.lvlSeqObjs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.lvlSeqObjs.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle38.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2722,6 +2747,7 @@
             this.lvlLeafPaths.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle40;
             this.lvlLeafPaths.ColumnHeadersHeight = 20;
             this.lvlLeafPaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.lvlLeafPaths.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle41.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2920,6 +2946,7 @@
             // 
             // trackLvlVolumeZoom
             // 
+            this.trackLvlVolumeZoom.Cursor = System.Windows.Forms.Cursors.Hand;
             this.trackLvlVolumeZoom.Location = new System.Drawing.Point(31, 3);
             this.trackLvlVolumeZoom.Maximum = 120;
             this.trackLvlVolumeZoom.Minimum = 2;
@@ -2932,6 +2959,7 @@
             // 
             // btnSaveLvl
             // 
+            this.btnSaveLvl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveLvl.Enabled = false;
             this.btnSaveLvl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveLvl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -2967,6 +2995,7 @@
             this.lvlLeafList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Leaf,
             this.Beats});
+            this.lvlLeafList.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle44.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3023,6 +3052,7 @@
             // 
             this.btnlvlPanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnlvlPanelOpen.BackColor = System.Drawing.Color.Green;
+            this.btnlvlPanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnlvlPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnlvlPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnlvlPanelOpen.Location = new System.Drawing.Point(226, 173);
@@ -3037,6 +3067,7 @@
             // 
             this.btnlvlPanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnlvlPanelNew.BackColor = System.Drawing.Color.Green;
+            this.btnlvlPanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnlvlPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnlvlPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnlvlPanelNew.Location = new System.Drawing.Point(226, 150);
@@ -3104,6 +3135,7 @@
             this.lblPopoutMaster.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPopoutMaster.AutoSize = true;
             this.lblPopoutMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPopoutMaster.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPopoutMaster.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPopoutMaster.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblPopoutMaster.Location = new System.Drawing.Point(416, 0);
@@ -3135,6 +3167,7 @@
             // 
             this.btnMasterRefreshLvl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMasterRefreshLvl.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterRefreshLvl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterRefreshLvl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterRefreshLvl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterRefreshLvl.ForeColor = System.Drawing.Color.Aqua;
@@ -3169,6 +3202,7 @@
             // 
             this.btnMasterOpenRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMasterOpenRest.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenRest.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterOpenRest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMasterOpenRest.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
@@ -3187,6 +3221,7 @@
             // 
             this.btnMasterOpenLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMasterOpenLeader.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenLeader.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterOpenLeader.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMasterOpenLeader.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterOpenLeader.ForeColor = System.Drawing.Color.Black;
@@ -3217,6 +3252,7 @@
             // 
             this.btnMasterOpenCheckpoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMasterOpenCheckpoint.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenCheckpoint.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterOpenCheckpoint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMasterOpenCheckpoint.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
@@ -3235,6 +3271,7 @@
             // 
             this.btnMasterOpenIntro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMasterOpenIntro.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenIntro.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterOpenIntro.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMasterOpenIntro.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
@@ -3254,7 +3291,7 @@
             this.lblMasterlvllistHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMasterlvllistHelp.AutoSize = true;
             this.lblMasterlvllistHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblMasterlvllistHelp.Location = new System.Drawing.Point(218, 17);
@@ -3314,6 +3351,7 @@
             // 
             this.btnConfigPathColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigPathColor.BackColor = System.Drawing.Color.White;
+            this.btnConfigPathColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfigPathColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfigPathColor.Location = new System.Drawing.Point(305, 325);
             this.btnConfigPathColor.Name = "btnConfigPathColor";
@@ -3327,6 +3365,7 @@
             // 
             this.btnConfigGlowColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigGlowColor.BackColor = System.Drawing.Color.White;
+            this.btnConfigGlowColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfigGlowColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfigGlowColor.Location = new System.Drawing.Point(305, 302);
             this.btnConfigGlowColor.Name = "btnConfigGlowColor";
@@ -3340,6 +3379,7 @@
             // 
             this.btnConfigRailColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigRailColor.BackColor = System.Drawing.Color.White;
+            this.btnConfigRailColor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfigRailColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfigRailColor.Location = new System.Drawing.Point(305, 279);
             this.btnConfigRailColor.Name = "btnConfigRailColor";
@@ -3608,6 +3648,7 @@
             this.masterCheckpoint,
             this.masterPlayplus,
             this.masterIsolate});
+            this.masterLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle47.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3675,6 +3716,7 @@
             this.lblMasterClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMasterClose.AutoSize = true;
             this.lblMasterClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMasterClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMasterClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterClose.Location = new System.Drawing.Point(435, 0);
             this.lblMasterClose.MinimumSize = new System.Drawing.Size(20, 20);
@@ -3705,7 +3747,7 @@
             this.lblConfigColorHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblConfigColorHelp.AutoSize = true;
             this.lblConfigColorHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblConfigColorHelp.Location = new System.Drawing.Point(418, 282);
@@ -3717,6 +3759,7 @@
             // 
             // btnSaveMaster
             // 
+            this.btnSaveMaster.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveMaster.Enabled = false;
             this.btnSaveMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -3732,6 +3775,7 @@
             // 
             this.btnMasterPanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMasterPanelOpen.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnMasterPanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterPanelOpen.Location = new System.Drawing.Point(226, 81);
@@ -3746,6 +3790,7 @@
             // 
             this.btnMasterPanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMasterPanelNew.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnMasterPanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterPanelNew.Location = new System.Drawing.Point(226, 58);
@@ -3810,6 +3855,7 @@
             this.lblPopoutGate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPopoutGate.AutoSize = true;
             this.lblPopoutGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPopoutGate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPopoutGate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPopoutGate.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblPopoutGate.Location = new System.Drawing.Point(344, 0);
@@ -3841,6 +3887,7 @@
             // 
             this.btnGateRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnGateRefresh.BackColor = System.Drawing.Color.Gray;
+            this.btnGateRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGateRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGateRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGateRefresh.ForeColor = System.Drawing.Color.Aqua;
@@ -3857,6 +3904,7 @@
             // 
             this.btnGateOpenRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnGateOpenRestart.BackColor = System.Drawing.Color.Gray;
+            this.btnGateOpenRestart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGateOpenRestart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGateOpenRestart.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGateOpenRestart.ForeColor = System.Drawing.Color.Black;
@@ -3875,6 +3923,7 @@
             // 
             this.btnGateOpenPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnGateOpenPost.BackColor = System.Drawing.Color.Gray;
+            this.btnGateOpenPost.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGateOpenPost.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGateOpenPost.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGateOpenPost.ForeColor = System.Drawing.Color.Black;
@@ -3893,6 +3942,7 @@
             // 
             this.btnGateOpenPre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnGateOpenPre.BackColor = System.Drawing.Color.Gray;
+            this.btnGateOpenPre.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGateOpenPre.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGateOpenPre.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGateOpenPre.ForeColor = System.Drawing.Color.Black;
@@ -3912,7 +3962,7 @@
             this.lblGateSectionHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblGateSectionHelp.AutoSize = true;
             this.lblGateSectionHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblGateSectionHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblGateSectionHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblGateSectionHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGateSectionHelp.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblGateSectionHelp.Location = new System.Drawing.Point(68, 274);
@@ -3927,7 +3977,7 @@
             this.lblGatePreHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblGatePreHelp.AutoSize = true;
             this.lblGatePreHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblGatePreHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblGatePreHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblGatePreHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGatePreHelp.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblGatePreHelp.Location = new System.Drawing.Point(68, 208);
@@ -4192,6 +4242,7 @@
             this.gateLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Lvl,
             this.Sentry});
+            this.gateLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle50.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4248,6 +4299,7 @@
             this.lblGateClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGateClose.AutoSize = true;
             this.lblGateClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblGateClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblGateClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGateClose.Location = new System.Drawing.Point(363, 0);
             this.lblGateClose.MinimumSize = new System.Drawing.Size(20, 20);
@@ -4274,6 +4326,7 @@
             // 
             // btnSaveGate
             // 
+            this.btnSaveGate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveGate.Enabled = false;
             this.btnSaveGate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveGate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -4289,6 +4342,7 @@
             // 
             this.btnGatePanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGatePanelOpen.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnGatePanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGatePanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGatePanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGatePanelOpen.Location = new System.Drawing.Point(226, 127);
@@ -4303,6 +4357,7 @@
             // 
             this.btnGatePanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGatePanelNew.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnGatePanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGatePanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGatePanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGatePanelNew.Location = new System.Drawing.Point(226, 104);
@@ -4357,6 +4412,7 @@
             // 
             this.btnLevelFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLevelFolder.BackColor = System.Drawing.Color.Blue;
+            this.btnLevelFolder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLevelFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLevelFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLevelFolder.ForeColor = System.Drawing.Color.White;
@@ -4373,6 +4429,7 @@
             this.lblPopoutWork.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPopoutWork.AutoSize = true;
             this.lblPopoutWork.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPopoutWork.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPopoutWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPopoutWork.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblPopoutWork.Location = new System.Drawing.Point(281, 0);
@@ -4393,6 +4450,7 @@
             this.filterLvl.Appearance = System.Windows.Forms.Appearance.Button;
             this.filterLvl.AutoSize = true;
             this.filterLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.filterLvl.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.filterLvl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
             this.filterLvl.Location = new System.Drawing.Point(107, 36);
@@ -4407,6 +4465,7 @@
             this.filterGate.Appearance = System.Windows.Forms.Appearance.Button;
             this.filterGate.AutoSize = true;
             this.filterGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.filterGate.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.filterGate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
             this.filterGate.Location = new System.Drawing.Point(129, 36);
@@ -4421,6 +4480,7 @@
             this.filterMaster.Appearance = System.Windows.Forms.Appearance.Button;
             this.filterMaster.AutoSize = true;
             this.filterMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.filterMaster.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.filterMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.filterMaster.Location = new System.Drawing.Point(151, 36);
@@ -4435,6 +4495,7 @@
             this.filterSamp.Appearance = System.Windows.Forms.Appearance.Button;
             this.filterSamp.AutoSize = true;
             this.filterSamp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.filterSamp.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.filterSamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.filterSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
             this.filterSamp.Location = new System.Drawing.Point(173, 36);
@@ -4449,6 +4510,7 @@
             this.filterLeaf.Appearance = System.Windows.Forms.Appearance.Button;
             this.filterLeaf.AutoSize = true;
             this.filterLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.filterLeaf.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.filterLeaf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.filterLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.filterLeaf.Location = new System.Drawing.Point(85, 36);
@@ -4472,6 +4534,7 @@
             // btnWorkCopy
             // 
             this.btnWorkCopy.BackColor = System.Drawing.Color.Gray;
+            this.btnWorkCopy.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnWorkCopy.Enabled = false;
             this.btnWorkCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWorkCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4488,6 +4551,7 @@
             // btnWorkDelete
             // 
             this.btnWorkDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnWorkDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnWorkDelete.Enabled = false;
             this.btnWorkDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWorkDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4505,6 +4569,7 @@
             // 
             this.btnSampPanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSampPanelOpen.BackColor = System.Drawing.Color.Turquoise;
+            this.btnSampPanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSampPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSampPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSampPanelOpen.Location = new System.Drawing.Point(226, 288);
@@ -4519,6 +4584,7 @@
             // 
             this.btnSampPanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSampPanelNew.BackColor = System.Drawing.Color.Turquoise;
+            this.btnSampPanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSampPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSampPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSampPanelNew.Location = new System.Drawing.Point(226, 265);
@@ -4532,6 +4598,7 @@
             // btnWorkRefresh
             // 
             this.btnWorkRefresh.BackColor = System.Drawing.Color.Gray;
+            this.btnWorkRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnWorkRefresh.Enabled = false;
             this.btnWorkRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWorkRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4571,6 +4638,7 @@
             this.FileType,
             this.FileName});
             this.workingfolderFiles.ContextMenuStrip = this.workingfolderRightClick;
+            this.workingfolderFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle54.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4671,6 +4739,7 @@
             this.lblWorkClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWorkClose.AutoSize = true;
             this.lblWorkClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblWorkClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblWorkClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWorkClose.Location = new System.Drawing.Point(300, 0);
             this.lblWorkClose.MinimumSize = new System.Drawing.Size(20, 20);
@@ -4707,6 +4776,7 @@
             this.lblPopoutSamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPopoutSamp.AutoSize = true;
             this.lblPopoutSamp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPopoutSamp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPopoutSamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPopoutSamp.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblPopoutSamp.Location = new System.Drawing.Point(343, 0);
@@ -4953,6 +5023,7 @@
             // 
             this.btnSampEditorPlaySamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSampEditorPlaySamp.BackColor = System.Drawing.Color.White;
+            this.btnSampEditorPlaySamp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSampEditorPlaySamp.Enabled = false;
             this.btnSampEditorPlaySamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSampEditorPlaySamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4997,6 +5068,7 @@
             // 
             this.FSBtoSamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.FSBtoSamp.BackColor = System.Drawing.Color.Gray;
+            this.FSBtoSamp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FSBtoSamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FSBtoSamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FSBtoSamp.ForeColor = System.Drawing.Color.Black;
@@ -5083,6 +5155,7 @@
             this.lblSampleClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSampleClose.AutoSize = true;
             this.lblSampleClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSampleClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblSampleClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSampleClose.Location = new System.Drawing.Point(362, 0);
             this.lblSampleClose.MinimumSize = new System.Drawing.Size(20, 20);
@@ -5109,6 +5182,7 @@
             // 
             // btnSaveSample
             // 
+            this.btnSaveSample.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveSample.Enabled = false;
             this.btnSaveSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveSample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -5151,6 +5225,7 @@
             this.Pan,
             this.Offset,
             this.Channel});
+            this.sampleList.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
