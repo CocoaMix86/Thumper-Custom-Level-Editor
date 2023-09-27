@@ -5362,8 +5362,8 @@
             // splitHorizontal.Panel2
             // 
             this.splitHorizontal.Panel2.Controls.Add(this.splitBottom1);
-            this.splitHorizontal.Size = new System.Drawing.Size(1748, 866);
-            this.splitHorizontal.SplitterDistance = 351;
+            this.splitHorizontal.Size = new System.Drawing.Size(1748, 861);
+            this.splitHorizontal.SplitterDistance = 348;
             this.splitHorizontal.TabIndex = 136;
             this.splitHorizontal.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
             this.splitHorizontal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -5385,7 +5385,7 @@
             // splitTop1.Panel2
             // 
             this.splitTop1.Panel2.Controls.Add(this.splitTop2);
-            this.splitTop1.Size = new System.Drawing.Size(1748, 351);
+            this.splitTop1.Size = new System.Drawing.Size(1748, 348);
             this.splitTop1.SplitterDistance = 464;
             this.splitTop1.TabIndex = 0;
             this.splitTop1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
@@ -5410,7 +5410,7 @@
             this.splitTop2.Panel2.ContextMenuStrip = this.contextMenuDock;
             this.splitTop2.Panel2.Controls.Add(this.label51);
             this.splitTop2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitTop2.Size = new System.Drawing.Size(1280, 351);
+            this.splitTop2.Size = new System.Drawing.Size(1280, 348);
             this.splitTop2.SplitterDistance = 890;
             this.splitTop2.TabIndex = 47;
             this.splitTop2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
@@ -5433,7 +5433,7 @@
             // splitBottom1.Panel2
             // 
             this.splitBottom1.Panel2.Controls.Add(this.splitBottom2);
-            this.splitBottom1.Size = new System.Drawing.Size(1748, 511);
+            this.splitBottom1.Size = new System.Drawing.Size(1748, 509);
             this.splitBottom1.SplitterDistance = 323;
             this.splitBottom1.TabIndex = 0;
             this.splitBottom1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
@@ -5458,7 +5458,7 @@
             this.splitBottom2.Panel2.ContextMenuStrip = this.contextMenuDock;
             this.splitBottom2.Panel2.Controls.Add(this.label55);
             this.splitBottom2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitBottom2.Size = new System.Drawing.Size(1421, 511);
+            this.splitBottom2.Size = new System.Drawing.Size(1421, 509);
             this.splitBottom2.SplitterDistance = 1032;
             this.splitBottom2.TabIndex = 46;
             this.splitBottom2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
