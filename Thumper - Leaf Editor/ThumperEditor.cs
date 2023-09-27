@@ -319,6 +319,7 @@ namespace Thumper_Custom_Level_Editor
                 //split each section into individual lines
                 var import2 = import[x].Split('\n').ToList();
                 //initialise class so we can add to it
+                /*
                 Object_Params objpar = new Object_Params() {
                     //name of object is the first line of every set
                     obj_displayname = import2[0],
@@ -329,26 +330,29 @@ namespace Thumper_Custom_Level_Editor
                     step = new List<string>(),
                     def = new List<string>(),
                     footer = new List<string>()
-                };
+                };*/
 
                 for (int y = 2; y < import2.Count - 1; y++) {
                     //split each line by ';'. Now each property is separated
                     var import3 = import2[y].Split(';');
                     try {
-                        objpar.obj_name.Add(import3[0]);
-                        objpar.param_displayname.Add(import3[1]);
-                        objpar.param_path.Add(import3[2]);
-                        objpar.trait_type.Add(import3[3]);
-                        objpar.step.Add(import3[4]);
-                        objpar.def.Add(import3[5]);
-                        objpar.footer.Add(import3[6].Replace("[", "").Replace("]", ""));
+                        Object_Params objpar = new Object_Params() {
+                            category = import2[0],
+                            obj_name = import3[0],
+                            param_displayname = import3[1],
+                            param_path = import3[2],
+                            trait_type = import3[3],
+                            step = import3[4],
+                            def = import3[5],
+                            footer = import3[6].Replace("[", "").Replace("]", ""),
+                        };
+                        //finally, add complete object and values to list
+                        _objects.Add(objpar);
                     }
                     catch {
-                        _errorlog += "failed to import all properties of param_path " + import3[0] + " of object " + objpar.obj_name + ".\n";
+                        _errorlog += "failed to import all properties of param_path " + import3[0] + " of object " + import2[0] + ".\n";
                     }
                 }
-                //finally, add complete object and values to list
-                _objects.Add(objpar);
             }
             //show errors to user if any imports failed
             if (_errorlog.Length > 1) {
@@ -357,9 +361,8 @@ namespace Thumper_Custom_Level_Editor
 
             _errorlog = "";
             //customize combobox to display the correct content
-            dropObjects.DisplayMember = "obj_displayname";
-            dropObjects.ValueMember = "obj_displayname";
-            dropObjects.DataSource = _objects;
+            dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
+            dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
             dropParamPath.Enabled = false;
         }
 

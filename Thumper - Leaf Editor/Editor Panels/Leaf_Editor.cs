@@ -256,7 +256,7 @@ namespace Thumper_Custom_Level_Editor
 				label11.Text = "Lane";
 				dropTrackLane.DataSource = new List<string>() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
 				//when an object is chosen, unlock the param_path options and set datasource
-				dropParamPath.DataSource = _objects[dropObjects.SelectedIndex].param_displayname;
+				dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
 				//switch index back and forth to trigger event
 				dropParamPath.SelectedIndex = -1;
 				dropParamPath.SelectedIndex = 0;
@@ -279,7 +279,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
 				//if the param_path is .ent, enable lane choice
-				if (_objects[dropObjects.SelectedIndex].param_path[dropParamPath.SelectedIndex].EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
+				if (_objects.Where(obj => obj.param_displayname == dropParamPath.Text).First().param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
 					dropTrackLane.Enabled = true;
 					btnTrackApply.Enabled = true;
 				}
@@ -662,26 +662,27 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackApply_Click(object sender, EventArgs e)
 		{
+			var objmatch = _objects.Where(obj => obj.category == dropObjects.Text && obj.param_displayname == dropParamPath.Text).First();
 			//fill object properties on the form
-			txtDefault.Text = _objects[dropObjects.SelectedIndex].def[dropParamPath.SelectedIndex];
-			dropLeafStep.Text = _objects[dropObjects.SelectedIndex].step[dropParamPath.SelectedIndex];
-			txtTrait.Text = _objects[dropObjects.SelectedIndex].trait_type[dropParamPath.SelectedIndex];
+			txtDefault.Text = objmatch.def;
+			dropLeafStep.Text = objmatch.step;
+			txtTrait.Text = objmatch.trait_type;
 			//enable track highlighting tools
 			btnTrackColorDialog.Enabled = true;
 			NUD_TrackDoubleclick.Enabled = true;
 			NUD_TrackHighlight.Enabled = true;
 			//add track to list and populate with values
 			_tracks[_selecttrack] = new Sequencer_Object() {
-				obj_name = _objects[dropObjects.SelectedIndex].obj_name[dropParamPath.SelectedIndex],
-				friendly_type = _objects[dropObjects.SelectedIndex].obj_displayname,
-				param_path = _objects[dropObjects.SelectedIndex].param_path[dropParamPath.SelectedIndex],
-				friendly_param = _objects[dropObjects.SelectedIndex].param_displayname[dropParamPath.SelectedIndex],
-				_default = float.Parse(_objects[dropObjects.SelectedIndex].def[dropParamPath.SelectedIndex]),
-				step = _objects[dropObjects.SelectedIndex].step[dropParamPath.SelectedIndex],
-				trait_type = _objects[dropObjects.SelectedIndex].trait_type[dropParamPath.SelectedIndex],
+				obj_name = objmatch.obj_name,
+				friendly_type = objmatch.category,
+				param_path = objmatch.param_path,
+				friendly_param = objmatch.param_displayname,
+				_default = float.Parse(objmatch.def),
+				step = objmatch.step,
+				trait_type = objmatch.trait_type,
 				highlight_color = _tracks[_selecttrack] != null ? _tracks[_selecttrack].highlight_color : "-8355585",
 				highlight_value = 1,
-				footer = _objects[dropObjects.SelectedIndex].footer[dropParamPath.SelectedIndex],
+				footer = objmatch.footer,
 				default_interp = "kTraitInterpLinear"
 			};
 			//alter the data if it's a sample object being added. Save the sample name instead
@@ -1101,11 +1102,16 @@ namespace Thumper_Custom_Level_Editor
 				};
 				//if the leaf has definitions for these, add them. If not, set to defaults
 				_s.param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"];
-				_s.highlight_color = (string)seq_obj["editor_data"][0] ?? "-8355585";
-				_s.highlight_value = (int?)seq_obj["editor_data"][1] ?? 1;
+				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? "-8355585";
+				_s.highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1;
 				_s.default_interp = (string)seq_obj["default_interp"] ?? "kTraitInterpLinear";
 				//iterate over every _object to find where a param_path is located
 				//this was the best way to do this I could come up with
+				var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
+				var objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
+				_s.friendly_param = objmatch.param_displayname;
+				_s.friendly_type = objmatch.category;
+				/*				
 				foreach (Object_Params _obj in _objects) {
 					//replace .z01 .z02 .a01 .a02 with .ent, so that it's found in the param list
 					var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
@@ -1119,7 +1125,7 @@ namespace Thumper_Custom_Level_Editor
 						}
 					}
 				}
-				endsearch:
+				endsearch:*/
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this
 				if (_s.param_path.Contains("."))
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
