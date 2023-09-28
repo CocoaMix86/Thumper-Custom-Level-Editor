@@ -292,6 +292,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnGateRefresh_Click(object sender, EventArgs e)
 		{
+			if (workingfolder == null)
+				return;
 			lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
 			lvlsinworkfolder.Add("");
 			lvlsinworkfolder.Sort();

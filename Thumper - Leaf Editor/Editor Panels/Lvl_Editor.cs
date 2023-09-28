@@ -404,6 +404,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlCopyTunnel_Click(object sender, EventArgs e)
 		{
+			if (_loadedlvl == null)
+				return;
 			//if you're on the first row, do nothing
 			if (lvlLeafList.CurrentRow.Index == 0)
 				return;
@@ -660,6 +662,8 @@ namespace Thumper_Custom_Level_Editor
 
 		public void LvlReloadSamples()
 		{
+			if (workingfolder == null)
+				return;
 			_lvlsamples.Clear();
 			//find all samp_ files in the level folder
 			var _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt");

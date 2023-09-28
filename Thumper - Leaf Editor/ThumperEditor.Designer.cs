@@ -5142,6 +5142,7 @@
             // 
             this.btnSampleAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSampleAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnSampleAdd.Enabled = false;
             this.btnSampleAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSampleAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSampleAdd.ForeColor = System.Drawing.Color.Black;

@@ -121,6 +121,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			sampleList.RowEnter += sampleList_RowEnter;
 			//enable certain buttons if there are enough items for them
+			btnSampleAdd.Enabled = true;
 			btnSampleDelete.Enabled = _samplelist.Count > 0;
 
 			//set lvl save flag to false
@@ -356,6 +357,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
 			_samplelist_CollectionChanged(null, null);
+
 
 			///set save flag (samples just loaded, has no changes)
 			SaveSample(true);
