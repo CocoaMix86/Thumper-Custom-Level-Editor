@@ -178,6 +178,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblTrackFileName = new System.Windows.Forms.Label();
             this.btnSaveLeaf = new System.Windows.Forms.Button();
+            this.panelRawData = new System.Windows.Forms.Panel();
+            this.lblRawData = new System.Windows.Forms.Label();
             this.btnLeafPanelTemplate = new System.Windows.Forms.Button();
             this.btnLeafPanelOpen = new System.Windows.Forms.Button();
             this.btnLeafPanelNew = new System.Windows.Forms.Button();
@@ -386,6 +388,7 @@
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).BeginInit();
+            this.panelRawData.SuspendLayout();
             this.panelLevel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlApproach)).BeginInit();
@@ -1215,9 +1218,9 @@
             this.richRawTrackData.DetectUrls = false;
             this.richRawTrackData.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richRawTrackData.ForeColor = System.Drawing.Color.White;
-            this.richRawTrackData.Location = new System.Drawing.Point(293, 431);
+            this.richRawTrackData.Location = new System.Drawing.Point(76, 0);
             this.richRawTrackData.Name = "richRawTrackData";
-            this.richRawTrackData.Size = new System.Drawing.Size(720, 74);
+            this.richRawTrackData.Size = new System.Drawing.Size(734, 65);
             this.richRawTrackData.TabIndex = 26;
             this.richRawTrackData.Text = "raw track data";
             // 
@@ -1375,7 +1378,7 @@
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.trackEditor.Size = new System.Drawing.Size(814, 398);
+            this.trackEditor.Size = new System.Drawing.Size(814, 409);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDoubleClick);
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
@@ -1424,7 +1427,7 @@
             this.btnRawImport.BackColor = System.Drawing.Color.Gray;
             this.btnRawImport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRawImport.Location = new System.Drawing.Point(212, 461);
+            this.btnRawImport.Location = new System.Drawing.Point(0, 19);
             this.btnRawImport.Name = "btnRawImport";
             this.btnRawImport.Size = new System.Drawing.Size(75, 44);
             this.btnRawImport.TabIndex = 44;
@@ -1450,10 +1453,8 @@
             this.panelLeaf.Controls.Add(this.btnTrackUp);
             this.panelLeaf.Controls.Add(this.btnTrackDelete);
             this.panelLeaf.Controls.Add(this.dropTimeSig);
-            this.panelLeaf.Controls.Add(this.btnRawImport);
             this.panelLeaf.Controls.Add(this.label1);
             this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
-            this.panelLeaf.Controls.Add(this.richRawTrackData);
             this.panelLeaf.Controls.Add(this.trackEditor);
             this.panelLeaf.Controls.Add(this.label5);
             this.panelLeaf.Controls.Add(this.panelZoom);
@@ -1463,6 +1464,7 @@
             this.panelLeaf.Controls.Add(this.label2);
             this.panelLeaf.Controls.Add(this.lblTrackFileName);
             this.panelLeaf.Controls.Add(this.btnSaveLeaf);
+            this.panelLeaf.Controls.Add(this.panelRawData);
             this.panelLeaf.Location = new System.Drawing.Point(327, 385);
             this.panelLeaf.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLeaf.Name = "panelLeaf";
@@ -2105,6 +2107,36 @@
             this.btnSaveLeaf.TabIndex = 97;
             this.btnSaveLeaf.UseVisualStyleBackColor = false;
             this.btnSaveLeaf.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // panelRawData
+            // 
+            this.panelRawData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelRawData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelRawData.Controls.Add(this.lblRawData);
+            this.panelRawData.Controls.Add(this.btnRawImport);
+            this.panelRawData.Controls.Add(this.richRawTrackData);
+            this.panelRawData.Location = new System.Drawing.Point(212, 438);
+            this.panelRawData.Name = "panelRawData";
+            this.panelRawData.Size = new System.Drawing.Size(814, 68);
+            this.panelRawData.TabIndex = 139;
+            // 
+            // lblRawData
+            // 
+            this.lblRawData.AutoSize = true;
+            this.lblRawData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblRawData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblRawData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRawData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblRawData.Location = new System.Drawing.Point(0, -1);
+            this.lblRawData.MinimumSize = new System.Drawing.Size(20, 20);
+            this.lblRawData.Name = "lblRawData";
+            this.lblRawData.Size = new System.Drawing.Size(20, 20);
+            this.lblRawData.TabIndex = 139;
+            this.lblRawData.Text = "▼";
+            this.lblRawData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
+            this.lblRawData.Click += new System.EventHandler(this.lblRawData_Click);
             // 
             // btnLeafPanelTemplate
             // 
@@ -5511,6 +5543,8 @@
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).EndInit();
+            this.panelRawData.ResumeLayout(false);
+            this.panelRawData.PerformLayout();
             this.panelLevel.ResumeLayout(false);
             this.panelLevel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).EndInit();
@@ -5888,6 +5922,8 @@
         private System.Windows.Forms.ToolStripMenuItem pickAPanelToDockItHereToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetDocksStripMenuItem;
         private System.Windows.Forms.Button btnLevelFolder;
+        private System.Windows.Forms.Panel panelRawData;
+        private System.Windows.Forms.Label lblRawData;
     }
 }
 

@@ -458,6 +458,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnRawImport_Click(object sender, EventArgs e)
 		{
+			if (_loadedleaf == null)
+				return;
 			TrackRawImport(trackEditor.CurrentRow, JObject.Parse($"{{{richRawTrackData.Text}}}"));
 		}
 
