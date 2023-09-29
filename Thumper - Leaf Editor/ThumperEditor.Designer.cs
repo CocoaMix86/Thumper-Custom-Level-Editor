@@ -3133,13 +3133,17 @@
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMaster.Controls.Add(this.btnMasterOpenRest);
+            this.panelMaster.Controls.Add(this.btnMasterOpenLeader);
+            this.panelMaster.Controls.Add(this.label37);
+            this.panelMaster.Controls.Add(this.dropMasterLvlRest);
+            this.panelMaster.Controls.Add(this.label35);
+            this.panelMaster.Controls.Add(this.dropMasterLvlLeader);
+            this.panelMaster.Controls.Add(this.label34);
             this.panelMaster.Controls.Add(this.lblPopoutMaster);
             this.panelMaster.Controls.Add(this.label47);
             this.panelMaster.Controls.Add(this.btnMasterRefreshLvl);
             this.panelMaster.Controls.Add(this.btnMasterLvlCopy);
-            this.panelMaster.Controls.Add(this.btnMasterOpenRest);
-            this.panelMaster.Controls.Add(this.btnMasterOpenLeader);
-            this.panelMaster.Controls.Add(this.label37);
             this.panelMaster.Controls.Add(this.btnMasterOpenCheckpoint);
             this.panelMaster.Controls.Add(this.btnMasterOpenIntro);
             this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
@@ -3149,10 +3153,6 @@
             this.panelMaster.Controls.Add(this.btnConfigPathColor);
             this.panelMaster.Controls.Add(this.btnConfigGlowColor);
             this.panelMaster.Controls.Add(this.btnConfigRailColor);
-            this.panelMaster.Controls.Add(this.dropMasterLvlRest);
-            this.panelMaster.Controls.Add(this.label35);
-            this.panelMaster.Controls.Add(this.dropMasterLvlLeader);
-            this.panelMaster.Controls.Add(this.label34);
             this.panelMaster.Controls.Add(this.label33);
             this.panelMaster.Controls.Add(this.dropMasterCheck);
             this.panelMaster.Controls.Add(this.label32);
