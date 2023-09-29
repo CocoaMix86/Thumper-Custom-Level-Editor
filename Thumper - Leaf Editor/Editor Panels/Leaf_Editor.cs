@@ -991,6 +991,7 @@ namespace Thumper_Custom_Level_Editor
 		///Import raw text from rich text box to selected row
 		public void TrackRawImport(DataGridViewRow r, JObject _rawdata)
 		{
+			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			//_rawdata contains a list of all data points. By getting Properties() of it,
 			//each point becomes its own index
 			var data_points = _rawdata.Properties().ToList();
@@ -1007,6 +1008,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 				catch (ArgumentOutOfRangeException) { }
 			}
+			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		///Updates row headers to be the Object and Param_Path
 		public void ChangeTrackName()
@@ -1135,23 +1137,6 @@ namespace Thumper_Custom_Level_Editor
 					_s.friendly_param = objmatch.param_displayname;
 					_s.friendly_type = objmatch.category;
 				}
-				/*				
-				//iterate over every _object to find where a param_path is located
-				//this was the best way to do this I could come up with
-				foreach (Object_Params _obj in _objects) {
-					//replace .z01 .z02 .a01 .a02 with .ent, so that it's found in the param list
-					var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
-					//if found, set the friendly names
-					for (int x = 0; x < _obj.param_path.Count; x++) {
-						if (_obj.param_path[x] == reg_param && _obj.obj_name[x] == _s.obj_name.Replace((string)_load["obj_name"], "leafname")) {
-							//_s.friendly_param = _obj.param_displayname[_obj.param_path.IndexOf(reg_param)];
-							_s.friendly_param = _obj.param_displayname[x];
-							_s.friendly_type = _obj.obj_displayname;
-							goto endsearch;
-						}
-					}
-				}
-				endsearch:*/
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this
 				if (_s.param_path.Contains("."))
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
