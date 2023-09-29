@@ -335,26 +335,11 @@ namespace Thumper_Custom_Level_Editor
 			_masterlvls.Add(_lvl);
 		}
 
-		private void btnConfigRailColor_Click(object sender, EventArgs e)
+		private void btnConfigColor_Click(object sender, EventArgs e)
 		{
+			Button button = (Button)sender;
 			if (colorDialog1.ShowDialog() == DialogResult.OK) {
-				btnConfigRailColor.BackColor = colorDialog1.Color;
-				SaveMaster(false);
-			}
-		}
-
-		private void btnConfigGlowColor_Click(object sender, EventArgs e)
-		{
-			if (colorDialog1.ShowDialog() == DialogResult.OK) {
-				btnConfigGlowColor.BackColor = colorDialog1.Color;
-				SaveMaster(false);
-			}
-		}
-
-		private void btnConfigPathColor_Click(object sender, EventArgs e)
-		{
-			if (colorDialog1.ShowDialog() == DialogResult.OK) {
-				btnConfigPathColor.BackColor = colorDialog1.Color;
+				ColorButton(button, colorDialog1.Color);
 				SaveMaster(false);
 			}
 		}
@@ -402,39 +387,6 @@ namespace Thumper_Custom_Level_Editor
 		public void InitializeMasterStuff()
 		{
 			_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
-
-			///customize Lvl List a bit
-			/*
-			masterLvlList.ColumnCount = 1;
-			masterLvlList.RowHeadersVisible = false;
-			masterLvlList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
-				ForeColor = Color.White,
-				Font = new Font("Arial", 12, GraphicsUnit.Pixel)
-			};
-			masterLvlList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-			masterLvlList.Columns[0].HeaderText = "Lvl";
-			masterLvlList.Columns[0].ReadOnly = true;
-			///
-			///add checkbox column for denoting if a lvl has a checkpoint or not
-			DataGridViewCheckBoxColumn _dgvmastercheckpoint = new DataGridViewCheckBoxColumn() {
-				HeaderText = "Checkpoint",
-				ReadOnly = false
-			};
-			masterLvlList.Columns.Add(_dgvmastercheckpoint);
-			///add checkbox column for denoting if a lvl shows in play+ or not
-			DataGridViewCheckBoxColumn _dgvmasterplayplus = new DataGridViewCheckBoxColumn() {
-				HeaderText = "Play+",
-				ReadOnly = false
-			};
-			masterLvlList.Columns.Add(_dgvmasterplayplus);
-			///add checkbox column for denoting if a lvl shows in play+ or not
-			DataGridViewCheckBoxColumn _dgvmasterisolate = new DataGridViewCheckBoxColumn()
-			{
-				HeaderText = "Isolate",
-				ReadOnly = false
-			};
-			masterLvlList.Columns.Add(_dgvmasterisolate);
-			*/
 		}
 
 		public void LoadMaster(dynamic _load)
@@ -476,9 +428,9 @@ namespace Thumper_Custom_Level_Editor
 			if (_configfile.Count > 0) {
 				dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_configfile[0]), "#.*", ""));
 				NUD_ConfigBPM.Value = (int)_load["bpm"];
-				btnConfigRailColor.BackColor = Color.FromArgb((int)((float)_load["rails_color"][0] * 255), (int)((float)_load["rails_color"][1] * 255), (int)((float)_load["rails_color"][2] * 255));
-				btnConfigGlowColor.BackColor = Color.FromArgb((int)((float)_load["rails_glow_color"][0] * 255), (int)((float)_load["rails_glow_color"][1] * 255), (int)((float)_load["rails_glow_color"][2] * 255));
-				btnConfigPathColor.BackColor = Color.FromArgb((int)((float)_load["path_color"][0] * 255), (int)((float)_load["path_color"][1] * 255), (int)((float)_load["path_color"][2] * 255));
+				ColorButton(btnConfigRailColor, Color.FromArgb((int)((float)_load["rails_color"][0] * 255), (int)((float)_load["rails_color"][1] * 255), (int)((float)_load["rails_color"][2] * 255)));
+				ColorButton(btnConfigGlowColor, Color.FromArgb((int)((float)_load["rails_glow_color"][0] * 255), (int)((float)_load["rails_glow_color"][1] * 255), (int)((float)_load["rails_glow_color"][2] * 255)));
+				ColorButton(btnConfigPathColor, Color.FromArgb((int)((float)_load["path_color"][0] * 255), (int)((float)_load["path_color"][1] * 255), (int)((float)_load["path_color"][2] * 255)));
 			}
 			else {
 				NUD_ConfigBPM.Value = 420;
@@ -486,6 +438,12 @@ namespace Thumper_Custom_Level_Editor
 				btnConfigGlowColor.BackColor = Color.White;
 				btnConfigPathColor.BackColor = Color.White;
 			}
+		}
+
+		public void ColorButton(Control control, Color color)
+        {
+			control.BackColor = color;
+			control.ForeColor = Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B);;
 		}
 
 		public void MasterLoadLvl(string path)

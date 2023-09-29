@@ -3411,7 +3411,7 @@
             this.btnConfigPathColor.TabIndex = 109;
             this.btnConfigPathColor.Text = "Path Colour";
             this.btnConfigPathColor.UseVisualStyleBackColor = false;
-            this.btnConfigPathColor.Click += new System.EventHandler(this.btnConfigPathColor_Click);
+            this.btnConfigPathColor.Click += new System.EventHandler(this.btnConfigColor_Click);
             // 
             // btnConfigGlowColor
             // 
@@ -3425,7 +3425,7 @@
             this.btnConfigGlowColor.TabIndex = 108;
             this.btnConfigGlowColor.Text = "Rail Glow Colour";
             this.btnConfigGlowColor.UseVisualStyleBackColor = false;
-            this.btnConfigGlowColor.Click += new System.EventHandler(this.btnConfigGlowColor_Click);
+            this.btnConfigGlowColor.Click += new System.EventHandler(this.btnConfigColor_Click);
             // 
             // btnConfigRailColor
             // 
@@ -3439,7 +3439,7 @@
             this.btnConfigRailColor.TabIndex = 96;
             this.btnConfigRailColor.Text = "Rail Colour";
             this.btnConfigRailColor.UseVisualStyleBackColor = false;
-            this.btnConfigRailColor.Click += new System.EventHandler(this.btnConfigRailColor_Click);
+            this.btnConfigRailColor.Click += new System.EventHandler(this.btnConfigColor_Click);
             // 
             // dropMasterLvlRest
             // 
