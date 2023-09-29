@@ -741,7 +741,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Panel control = (Panel)sender;
             Color col = Properties.Settings.Default.custom_activecolor;
-            ButtonBorderStyle bbs = ButtonBorderStyle.Inset;
+            ButtonBorderStyle bbs = ButtonBorderStyle.Solid;
             int thickness = 2;
             ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
         }
