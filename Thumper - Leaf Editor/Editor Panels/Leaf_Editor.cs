@@ -147,6 +147,7 @@ namespace Thumper_Custom_Level_Editor
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
 				var _val = trackEditor.CurrentCell.Value;
 				//iterate over each cell in the selection
@@ -158,13 +159,14 @@ namespace Thumper_Custom_Level_Editor
 						_cell.Value = null;
 
 					TrackUpdateHighlightingSingleCell(_cell);
-					//sets flag that leaf has unsaved changes
-					SaveLeaf(false);
 				}
+				//sets flag that leaf has unsaved changes
+				SaveLeaf(false);
 			}
 			catch { }
 
 			ShowRawTrackData();
+			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		//Cell double click
 		private void trackEditor_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -982,7 +984,7 @@ namespace Thumper_Custom_Level_Editor
 				grid.Columns[i].Width = 60;
 				grid.Columns[i].MinimumWidth = 2;
 				grid.Columns[i].ReadOnly = false;
-				//grid.Columns[i].ValueType = typeof(decimal);
+				grid.Columns[i].ValueType = typeof(decimal);
 				grid.Columns[i].DefaultCellStyle.Format = "0.######";
 			}
 		}
@@ -1057,26 +1059,21 @@ namespace Thumper_Custom_Level_Editor
 		}
 		public void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc)
 		{
-			float i;
+			var i = dgvc.Value;
 			dgvc.Style = null;
+			if (i == null)
+				return;
 
 			//if it is kTraitColor, color the background differently
 			if (_tracks[dgvc.RowIndex].trait_type == "kTraitColor") {
-				bool _parsed = int.TryParse($"{dgvc.Value}", out int j);
-				if (_parsed)
-					dgvc.Style.BackColor = Color.FromArgb(j);
+				dgvc.Style.BackColor = Color.FromArgb(int.Parse(i.ToString()));
 				return;
             }
 
-			//parse value. If not parseable, set to 0
-			i = float.TryParse($"{dgvc.Value}", out i) ? i : 0;
 			//if the cell value is greater than the criteria of the row, highlight it with that row's color
-			try {
-				if (Math.Abs(i) >= _tracks[dgvc.RowIndex].highlight_value) {
-					dgvc.Style.BackColor = Color.FromArgb(int.Parse(_tracks[dgvc.RowIndex].highlight_color));
-				}
+			if (Math.Abs((decimal)i) >= (decimal)_tracks[dgvc.RowIndex].highlight_value) {
+				dgvc.Style.BackColor = Color.FromArgb(int.Parse(_tracks[dgvc.RowIndex].highlight_color));
 			}
-			catch { }
 			//change cell font color so text is readable on dark/light backgrounds
 			Color _c = dgvc.Style.BackColor;
 			if (_c.R < 150 && _c.G < 150 && _c.B < 150)
@@ -1179,7 +1176,7 @@ namespace Thumper_Custom_Level_Editor
 						TrackUpdateHighlighting(r);
 					}
 				}
-				catch (Exception) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}"); }
+				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}\n\n{ex}"); }
 			}
 			//enable a bunch of elements now that a leaf is loaded.
 			dropObjects.Enabled = true;
