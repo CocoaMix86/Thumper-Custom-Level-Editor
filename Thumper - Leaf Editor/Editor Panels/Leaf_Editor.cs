@@ -37,6 +37,7 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedleaf;
 		string _loadedleaftemp;
 		public string leafobj;
+		public bool loadingleaf = false;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
@@ -940,6 +941,9 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//make the beeble emote
 			pictureBox1_Click(null, null);
+			//skip method if leaf is loading
+			if (loadingleaf)
+				return;
 
 			_saveleaf = save;
 			if (!save) {
@@ -1073,7 +1077,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
 			//if the cell value is greater than the criteria of the row, highlight it with that row's color
-			if (Math.Abs((decimal)i) >= (decimal)_tracks[dgvc.RowIndex].highlight_value) {
+			if (Math.Abs(decimal.Parse(i.ToString())) >= (decimal)_tracks[dgvc.RowIndex].highlight_value) {
 				dgvc.Style.BackColor = Color.FromArgb(int.Parse(_tracks[dgvc.RowIndex].highlight_color));
 			}
 			//change cell font color so text is readable on dark/light backgrounds
@@ -1087,6 +1091,8 @@ namespace Thumper_Custom_Level_Editor
 		///Update DGV from _tracks
 		public void LoadLeaf(dynamic _load /*List<string> _load*/)
 		{
+			//reset flag in case it got stuck previously
+			loadingleaf = false;
 			//if Leaf Editor is hidden, show it when a leaf is selected
 			if (panelLeaf.Visible == false)
 				leafEditorToolStripMenuItem.PerformClick();
@@ -1102,6 +1108,8 @@ namespace Thumper_Custom_Level_Editor
 			}
 			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
 			leafobj = _load["obj_name"];
+			//set flag that load is in progress. This skips SaveLeaf() method
+			loadingleaf = true;
 			workingfolder = Path.GetDirectoryName(_loadedleaftemp);
 			_loadedleaf = _loadedleaftemp;
 			//clear existing tracks
@@ -1175,6 +1183,7 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackClear.Enabled = _tracks.Count > 0;
 			btnTrackCopy.Enabled = _tracks.Count > 0;
 			//set save flag to true, since it just barely loaded
+			loadingleaf = false;
 			SaveLeaf(true);
 			//re-set the zoom level
 			trackZoom_Scroll(null, null);
