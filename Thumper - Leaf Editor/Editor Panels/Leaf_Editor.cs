@@ -1098,7 +1098,7 @@ namespace Thumper_Custom_Level_Editor
 				leafEditorToolStripMenuItem.PerformClick();
 			//detect if file is actually Leaf or not
 			if ((string)_load["obj_type"] != "SequinLeaf") {
-				MessageBox.Show("This does not appear to be a leaf file!");
+				MessageBox.Show("This does not appear to be a leaf file!", "Leaf not loaded");
 				return;
 			}
 			//if the check above succeeds, then set the _loadedleaf to the string temp saved from ofd.filename
@@ -1134,11 +1134,12 @@ namespace Thumper_Custom_Level_Editor
 				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? "-8355585";
 				_s.highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1;
 				_s.default_interp = (string)seq_obj["default_interp"] ?? "kTraitInterpLinear";
-				//if object is a .samp, fix the friendly_param and friendly_type
+				//if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
 				if (_s.param_path == "play") {
 					_s.friendly_type = "PLAY SAMPLE";
 					_s.friendly_param = _s.param_path;
 				}
+				//otherwise, search _objects for the friendly names for display purposes
 				else {
 					var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
 					var objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
@@ -1190,6 +1191,8 @@ namespace Thumper_Custom_Level_Editor
 			//set scrollbar positions (if set last time this leaf was open)
 			trackEditor.RowHeadersWidth = trackEditor.RowHeadersWidth;
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+			trackEditor.FirstDisplayedScrollingRowIndex = 0;
+			trackEditor.FirstDisplayedScrollingColumnIndex = 0;
 			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
 			if (match != -1) {
 				trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
