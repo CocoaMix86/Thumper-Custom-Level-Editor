@@ -902,12 +902,26 @@ namespace Thumper_Custom_Level_Editor
 			ImportObjects();
 		}
 
-		/// These buttons are the initial visible elements, and disappear once a leaf loads
+		private void lblRawData_Click(object sender, EventArgs e)
+		{
+			if (panelRawData.Height > 20) {
+				panelRawData.Height = 20;
+				panelRawData.Location = new Point(panelRawData.Location.X, panelLeaf.Height - 20);
+				lblRawData.Text = "▲";
+				trackEditor.Height += 48;
+			}
+			else {
+				panelRawData.Height = 68;
+				panelRawData.Location = new Point(panelRawData.Location.X, panelLeaf.Height - 68);
+				lblRawData.Text = "▼";
+				trackEditor.Height -= 48;
+			}
+		}
+
+		/// These buttons exist on the Workingfolder panel
 		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
 		private void btnLeafPanelOpen_Click(object sender, EventArgs e) => leafloadToolStripMenuItem.PerformClick();
 		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => leafTemplateToolStripMenuItem.PerformClick();
-
-		
 		#endregion
 
 		#region Methods

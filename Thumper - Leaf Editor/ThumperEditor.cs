@@ -745,21 +745,5 @@ namespace Thumper_Custom_Level_Editor
             int thickness = 2;
             ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
         }
-
-        private void lblRawData_Click(object sender, EventArgs e)
-        {
-            if (panelRawData.Height > 20) {
-                panelRawData.Height = 20;
-                panelRawData.Location = new Point(panelRawData.Location.X, panelLeaf.Height - 20);
-                lblRawData.Text = "▲";
-                trackEditor.Height += 48;
-            }
-            else {
-                panelRawData.Height = 68;
-                panelRawData.Location = new Point(panelRawData.Location.X, panelLeaf.Height - 68);
-                lblRawData.Text = "▼";
-                trackEditor.Height -= 48;
-            }
-        }
     }
 }
