@@ -122,5 +122,11 @@
     <Setting Name="custom_activecolor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">CornflowerBlue</Value>
     </Setting>
+    <Setting Name="leafzoom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+    <Setting Name="lvlzoom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

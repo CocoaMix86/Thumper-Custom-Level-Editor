@@ -502,5 +502,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["custom_activecolor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public int leafzoom {
+            get {
+                return ((int)(this["leafzoom"]));
+            }
+            set {
+                this["leafzoom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public int lvlzoom {
+            get {
+                return ((int)(this["lvlzoom"]));
+            }
+            set {
+                this["lvlzoom"] = value;
+            }
+        }
     }
 }

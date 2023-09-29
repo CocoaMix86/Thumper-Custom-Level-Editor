@@ -214,6 +214,9 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.splitterVert2 = splitTop2.SplitterDistance;
             Properties.Settings.Default.splitterVert3 = splitBottom1.SplitterDistance;
             Properties.Settings.Default.splitterVert4 = splitBottom2.SplitterDistance;
+            //zoom settings
+            Properties.Settings.Default.leafzoom = trackZoom.Value;
+            Properties.Settings.Default.lvlzoom = trackLvlVolumeZoom.Value;
 
             Properties.Settings.Default.Save();
         }
@@ -302,6 +305,9 @@ namespace Thumper_Custom_Level_Editor
             panelSample.Visible = sampleEditorToolStripMenuItem.Checked = Properties.Settings.Default.sampleeditorvisible;
             panelBeeble.Size = Properties.Settings.Default.beeblesize;
             panelBeeble.Location = Properties.Settings.Default.beebleloc;
+            //zoom settings
+            trackZoom.Value = Properties.Settings.Default.leafzoom;
+            trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
         }
 
         public void ImportObjects()
