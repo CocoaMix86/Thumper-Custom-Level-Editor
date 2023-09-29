@@ -63,7 +63,7 @@ namespace Thumper_Custom_Level_Editor
 					return;
 				}
 
-				_loadedleaf = $@"{workingfolder}\leaf_{_file}.txt";
+				_loadedleaftemp = $@"{workingfolder}\leaf_{_file}.txt";
 				LoadLeaf(_load);
 				LvlUpdatePaths(e.RowIndex);
 			}

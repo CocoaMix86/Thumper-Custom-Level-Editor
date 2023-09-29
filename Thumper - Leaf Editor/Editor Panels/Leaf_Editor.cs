@@ -197,9 +197,10 @@ namespace Thumper_Custom_Level_Editor
 			//Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
-				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells)
+				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
 					dgvc.Value = null;
-				TrackUpdateHighlighting(trackEditor.CurrentRow);
+					TrackUpdateHighlightingSingleCell(dgvc);
+				}
 				SaveLeaf(false);
 			}
 			//copies selected cells
@@ -1107,13 +1108,20 @@ namespace Thumper_Custom_Level_Editor
 				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? "-8355585";
 				_s.highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1;
 				_s.default_interp = (string)seq_obj["default_interp"] ?? "kTraitInterpLinear";
+				//if object is a .samp, fix the friendly_param and friendly_type
+				if (_s.param_path == "play") {
+					_s.friendly_type = "PLAY SAMPLE";
+					_s.friendly_param = _s.param_path;
+				}
+				else {
+					var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
+					var objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
+					_s.friendly_param = objmatch.param_displayname;
+					_s.friendly_type = objmatch.category;
+				}
+				/*				
 				//iterate over every _object to find where a param_path is located
 				//this was the best way to do this I could come up with
-				var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
-				var objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
-				_s.friendly_param = objmatch.param_displayname;
-				_s.friendly_type = objmatch.category;
-				/*				
 				foreach (Object_Params _obj in _objects) {
 					//replace .z01 .z02 .a01 .a02 with .ent, so that it's found in the param list
 					var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
@@ -1132,13 +1140,6 @@ namespace Thumper_Custom_Level_Editor
 				if (_s.param_path.Contains("."))
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
 					_s.friendly_param += $", {dropTrackLane.Items[_tracklane.IndexOf($".{_s.param_path.Split('.')[1]}")]}";
-
-				//if object is a .samp, fix the friendly_param and friendly_type
-				if (_s.param_path == "play") {
-					_s.friendly_type = "PLAY SAMPLE";
-					_s.friendly_param = _s.param_path;
-                }
-
 				//finally, add the completed seq_obj to tracks
 				_tracks.Add(_s);
 			}

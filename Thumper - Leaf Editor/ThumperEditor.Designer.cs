@@ -1517,6 +1517,7 @@
             // btnTrackPaste
             // 
             this.btnTrackPaste.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackPaste.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackPaste.Enabled = false;
             this.btnTrackPaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackPaste.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1569,6 +1570,7 @@
             // btnTrackCopy
             // 
             this.btnTrackCopy.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackCopy.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackCopy.Enabled = false;
             this.btnTrackCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackCopy.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1587,6 +1589,7 @@
             // 
             this.btnTrackPlayback.BackColor = System.Drawing.Color.Gray;
             this.btnTrackPlayback.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnTrackPlayback.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackPlayback.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackPlayback.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTrackPlayback.ForeColor = System.Drawing.Color.Green;
@@ -1622,6 +1625,7 @@
             // btnTrackClear
             // 
             this.btnTrackClear.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackClear.Enabled = false;
             this.btnTrackClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackClear.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1639,6 +1643,7 @@
             // btnTrackAdd
             // 
             this.btnTrackAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTrackAdd.ForeColor = System.Drawing.Color.Black;
@@ -1654,6 +1659,7 @@
             // btnTrackDown
             // 
             this.btnTrackDown.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackDown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackDown.Enabled = false;
             this.btnTrackDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1670,6 +1676,7 @@
             // btnTrackUp
             // 
             this.btnTrackUp.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackUp.Enabled = false;
             this.btnTrackUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1686,6 +1693,7 @@
             // btnTrackDelete
             // 
             this.btnTrackDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnTrackDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackDelete.Enabled = false;
             this.btnTrackDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2279,6 +2287,7 @@
             // 
             this.btnLvlLeafPaste.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLvlLeafPaste.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLeafPaste.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLeafPaste.Enabled = false;
             this.btnLvlLeafPaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLeafPaste.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2297,6 +2306,7 @@
             // 
             this.btnLvlLeafCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLvlLeafCopy.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLeafCopy.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLeafCopy.Enabled = false;
             this.btnLvlLeafCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLeafCopy.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2504,6 +2514,7 @@
             // btnLvlLoopAdd
             // 
             this.btnLvlLoopAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLoopAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLoopAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLoopAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlLoopAdd.ForeColor = System.Drawing.Color.Black;
@@ -2540,6 +2551,7 @@
             // btnLvlLoopDelete
             // 
             this.btnLvlLoopDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLoopDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLoopDelete.Enabled = false;
             this.btnLvlLoopDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLoopDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2556,6 +2568,7 @@
             // btnLvlPathAdd
             // 
             this.btnLvlPathAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlPathAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlPathAdd.Enabled = false;
             this.btnLvlPathAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlPathAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2572,6 +2585,7 @@
             // btnLvlPathDelete
             // 
             this.btnLvlPathDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlPathDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlPathDelete.Enabled = false;
             this.btnLvlPathDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlPathDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2833,6 +2847,7 @@
             // 
             this.btnLvlLeafAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLvlLeafAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLeafAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLeafAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLeafAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlLeafAdd.ForeColor = System.Drawing.Color.Black;
@@ -2849,6 +2864,7 @@
             // 
             this.btnLvlLeafDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLvlLeafDown.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLeafDown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLeafDown.Enabled = false;
             this.btnLvlLeafDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLeafDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2866,6 +2882,7 @@
             // 
             this.btnLvlLeafUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLvlLeafUp.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLeafUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLeafUp.Enabled = false;
             this.btnLvlLeafUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLeafUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2883,6 +2900,7 @@
             // 
             this.btnLvlLeafDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLvlLeafDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnLvlLeafDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLvlLeafDelete.Enabled = false;
             this.btnLvlLeafDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLvlLeafDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3217,6 +3235,7 @@
             // 
             this.btnMasterLvlCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMasterLvlCopy.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterLvlCopy.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterLvlCopy.Enabled = false;
             this.btnMasterLvlCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterLvlCopy.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3591,6 +3610,7 @@
             // 
             this.btnMasterLvlAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMasterLvlAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterLvlAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterLvlAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterLvlAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterLvlAdd.ForeColor = System.Drawing.Color.Black;
@@ -3607,6 +3627,7 @@
             // 
             this.btnMasterLvlDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMasterLvlDown.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterLvlDown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterLvlDown.Enabled = false;
             this.btnMasterLvlDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterLvlDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3624,6 +3645,7 @@
             // 
             this.btnMasterLvlUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMasterLvlUp.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterLvlUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterLvlUp.Enabled = false;
             this.btnMasterLvlUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterLvlUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3641,6 +3663,7 @@
             // 
             this.btnMasterLvlDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnMasterLvlDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterLvlDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterLvlDelete.Enabled = false;
             this.btnMasterLvlDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterLvlDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4173,6 +4196,7 @@
             // 
             this.btnGateLvlAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnGateLvlAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnGateLvlAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGateLvlAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGateLvlAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGateLvlAdd.ForeColor = System.Drawing.Color.Black;
@@ -4189,6 +4213,7 @@
             // 
             this.btnGateLvlDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnGateLvlDown.BackColor = System.Drawing.Color.Gray;
+            this.btnGateLvlDown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGateLvlDown.Enabled = false;
             this.btnGateLvlDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGateLvlDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4206,6 +4231,7 @@
             // 
             this.btnGateLvlUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnGateLvlUp.BackColor = System.Drawing.Color.Gray;
+            this.btnGateLvlUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGateLvlUp.Enabled = false;
             this.btnGateLvlUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGateLvlUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4223,6 +4249,7 @@
             // 
             this.btnGateLvlDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnGateLvlDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnGateLvlDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGateLvlDelete.Enabled = false;
             this.btnGateLvlDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGateLvlDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -5142,6 +5169,7 @@
             // 
             this.btnSampleAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSampleAdd.BackColor = System.Drawing.Color.Gray;
+            this.btnSampleAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSampleAdd.Enabled = false;
             this.btnSampleAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSampleAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -5159,6 +5187,7 @@
             // 
             this.btnSampleDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSampleDelete.BackColor = System.Drawing.Color.Gray;
+            this.btnSampleDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSampleDelete.Enabled = false;
             this.btnSampleDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSampleDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
