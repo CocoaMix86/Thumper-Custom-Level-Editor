@@ -103,9 +103,9 @@ namespace Thumper_Custom_Level_Editor
 		private void masterLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			try {
-				_masterlvls[e.RowIndex].checkpoint = bool.Parse(masterLvlList[1, e.RowIndex].Value.ToString());
-				_masterlvls[e.RowIndex].playplus = bool.Parse(masterLvlList[2, e.RowIndex].Value.ToString());
-				_masterlvls[e.RowIndex].isolate = bool.Parse(masterLvlList[3, e.RowIndex].Value.ToString());
+				_masterlvls[e.RowIndex].checkpoint = bool.Parse(masterLvlList[2, e.RowIndex].Value.ToString());
+				_masterlvls[e.RowIndex].playplus = bool.Parse(masterLvlList[3, e.RowIndex].Value.ToString());
+				_masterlvls[e.RowIndex].isolate = bool.Parse(masterLvlList[4, e.RowIndex].Value.ToString());
 				//set lvl save flag to false
 				SaveMaster(false);
 			} catch { }
@@ -476,13 +476,11 @@ namespace Thumper_Custom_Level_Editor
 			if (!save) {
 				if (!lblMasterName.Text.Contains("(unsaved)"))
 					lblMasterName.Text += " (unsaved)";
-				btnSaveMaster.Location = new Point(lblMasterName.Location.X + lblMasterName.Size.Width, btnSaveMaster.Location.Y);
 				btnSaveMaster.Enabled = true;
 				lblMasterName.BackColor = Color.Maroon;
 			}
 			else {
 				lblMasterName.Text = lblMasterName.Text.Replace(" (unsaved)", "");
-				btnSaveMaster.Location = new Point(lblMasterName.Location.X + lblMasterName.Size.Width, btnSaveMaster.Location.Y);
 				btnSaveMaster.Enabled = false;
 				lblMasterName.BackColor = Color.FromArgb(40, 40, 40);
 			}

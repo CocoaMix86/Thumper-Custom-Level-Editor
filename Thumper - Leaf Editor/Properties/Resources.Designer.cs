@@ -283,6 +283,46 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_add2 {
+            get {
+                object obj = ResourceManager.GetObject("icon_add2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_arrowdown2 {
+            get {
+                object obj = ResourceManager.GetObject("icon_arrowdown2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_arrowup2 {
+            get {
+                object obj = ResourceManager.GetObject("icon_arrowup2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_arrowupdock {
+            get {
+                object obj = ResourceManager.GetObject("icon_arrowupdock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_color_wheel {
             get {
                 object obj = ResourceManager.GetObject("icon_color_wheel", resourceCulture);
@@ -296,6 +336,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static System.Drawing.Bitmap icon_copy {
             get {
                 object obj = ResourceManager.GetObject("icon_copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_copy2 {
+            get {
+                object obj = ResourceManager.GetObject("icon_copy2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -413,9 +463,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_remove2 {
+            get {
+                object obj = ResourceManager.GetObject("icon_remove2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_save {
             get {
                 object obj = ResourceManager.GetObject("icon_save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_save2 {
+            get {
+                object obj = ResourceManager.GetObject("icon_save2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -64,28 +64,26 @@ namespace Thumper_Custom_Level_Editor
         }
         private void lblPopout_MouseEnter(object sender, EventArgs e)
         {
-            (sender as Label).BackColor = Color.Aqua;
-            (sender as Label).BorderStyle = BorderStyle.Fixed3D;
+            (sender as ToolStripButton).BackColor = Color.Aqua;
         }
 
         private void lblPopout_MouseLeave(object sender, EventArgs e)
         {
-            (sender as Label).BackColor = Color.FromArgb(55, 55, 55);
-            (sender as Label).BorderStyle = BorderStyle.FixedSingle;
+            (sender as ToolStripButton).BackColor = Color.FromArgb(40, 40, 40);
         }
 
         private void lblPopout_Click(object sender, EventArgs e)
         {
-            Label lbl = sender as Label;
+            ToolStripButton lbl = (ToolStripButton)sender;
             //get parent panel where lbl was clicked
-            var parent = lbl.Parent;
+            var parent = lbl.Owner.Parent;
             UndockPanel(parent);
         }
         private void lblPopin_Click(object sender, EventArgs e)
         {
-            Label lbl = sender as Label;
+            ToolStripButton lbl = (ToolStripButton)sender;
             //get parent panel where lbl was clicked
-            var parent = lbl.Parent;
+            var parent = lbl.Owner.Parent;
             //re-add panel to a splitter panel so it is now docked.
             //check all 6 and add to the earliest one
             //also set what dock the panel is in, so it is remembered on restart
@@ -114,11 +112,6 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.dock6 = parent.Name;
             }
             Properties.Settings.Default.Save();
-        }
-
-        private void lblPopoutMaster_MouseClick(object sender, MouseEventArgs e)
-        {
-            
         }
 
         private void dockbtn_Click(object sender, EventArgs e)
@@ -189,12 +182,13 @@ namespace Thumper_Custom_Level_Editor
             dock.Controls.Add(panel);
             panel.Dock = DockStyle.Fill;
             //locate the dock button in the panel
-            var dockbtn = panel.Controls.OfType<Label>().Where(x => x.Text == "▲").First();
+            var dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
             //then change its click event and tooltip
             dockbtn.Click -= lblPopin_Click;
             dockbtn.Click += lblPopout_Click;
             //change tooltip
-            toolTip1.SetToolTip(dockbtn, "Undock panel");
+            dockbtn.ToolTipText = "Undock panel";
+            //toolTip1.SetToolTip(dockbtn, "Undock panel");
             ShowPanel(true, panel);
 
             //save settings
@@ -227,12 +221,12 @@ namespace Thumper_Custom_Level_Editor
             panel.Size = new Size(dock.Width, dock.Height);
             panel.Location = new Point(this.PointToClient(Cursor.Position).X - panel.Width, this.PointToClient(Cursor.Position).Y);
             //locate the dock button in the panel
-            var dockbtn = panel.Controls.OfType<Label>().Where(x => x.Text == "▲").First();
+            var dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
             //then change its click event and tooltip
             dockbtn.Click += lblPopin_Click;
             dockbtn.Click -= lblPopout_Click;
             //change tooltip
-            toolTip1.SetToolTip(dockbtn, "Dock panel");
+            dockbtn.ToolTipText = "Dock panel";
             ShowPanel(true, panel);
 
             //save settings

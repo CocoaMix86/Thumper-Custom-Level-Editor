@@ -32,4 +32,11 @@ namespace Thumper_Custom_Level_Editor
         public override Color MenuItemPressedGradientBegin { get { return Color.DarkRed; } }
         public override Color MenuItemPressedGradientEnd { get { return Color.Red; } }
     }
+
+    public class ToolStripOverride : ToolStripProfessionalRenderer
+    {
+        public ToolStripOverride() { }
+
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
+    }
 }
