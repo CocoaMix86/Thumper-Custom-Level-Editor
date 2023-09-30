@@ -43,14 +43,14 @@ namespace Thumper_Custom_Level_Editor
 		private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//if not selecting the file column, return and do nothing
-			if (e.ColumnIndex != 0 || e.RowIndex == -1)
+			if (e.ColumnIndex == -1 || e.ColumnIndex > 1 || e.RowIndex == -1)
 				return;
 
 			string _file;
 			dynamic _load = null;
 
 			//show a different confirmation message if the selected item is gate or lvl
-			if (masterLvlList[0, e.RowIndex].Value.ToString().Contains(".gate")) {
+			if (String.IsNullOrEmpty(_masterlvls[e.RowIndex].lvlname)) {
 				if ((!_savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
 					_file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
 					try {
@@ -113,6 +113,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
+			masterLvlList.RowEnter -= masterLvlList_RowEnter;
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
 				masterLvlList.RowCount = 0;
             }
@@ -122,9 +123,9 @@ namespace Thumper_Custom_Level_Editor
 				int _in = e.NewStartingIndex;
 				//detect if lvl or a gate. If it's a gate, the lvlname won't be set
 				if (!String.IsNullOrEmpty(_masterlvls[_in].lvlname))
-					masterLvlList.Rows.Insert(_in, new object[] { _masterlvls[_in].lvlname, _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+					masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.ResourceManager.GetObject(_masterlvls[_in].lvlname.Split('.')[1]), _masterlvls[_in].lvlname.Split('.')[0], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
 				else
-					masterLvlList.Rows.Insert(_in, new object[] { _masterlvls[_in].gatename, _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+					masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.ResourceManager.GetObject(_masterlvls[_in].gatename.Split('.')[1]), _masterlvls[_in].gatename.Split('.')[0], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
 			}
 			//if action REMOVE, remove row from the master DGV
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
