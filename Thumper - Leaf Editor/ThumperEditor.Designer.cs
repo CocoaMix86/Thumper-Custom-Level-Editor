@@ -298,8 +298,6 @@
             this.btnGateLvlDelete = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.gateLvlList = new System.Windows.Forms.DataGridView();
-            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.lblGateClose = new System.Windows.Forms.Label();
             this.lblGateName = new System.Windows.Forms.Label();
             this.btnSaveGate = new System.Windows.Forms.Button();
@@ -372,6 +370,9 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
+            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
             this.masterLvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.masterCheckpoint = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.masterPlayplus = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -3700,6 +3701,7 @@
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.masterLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.masterfiletype,
             this.masterLvl,
             this.masterCheckpoint,
             this.masterPlayplus,
@@ -4307,24 +4309,6 @@
             this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
             this.gateLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellValueChanged);
             this.gateLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_RowEnter);
-            // 
-            // Lvl
-            // 
-            this.Lvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Lvl.HeaderText = "Lvl";
-            this.Lvl.Name = "Lvl";
-            this.Lvl.ReadOnly = true;
-            this.Lvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Sentry
-            // 
-            this.Sentry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Sentry.HeaderText = "Sentry";
-            this.Sentry.Items.AddRange(new object[] {
-            "SENTRY_NONE",
-            "SENTRY_SINGLE_LANE",
-            "SENTRY_MULTI_LANE"});
-            this.Sentry.Name = "Sentry";
             // 
             // lblGateClose
             // 
@@ -5500,6 +5484,33 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
+            // Lvl
+            // 
+            this.Lvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lvl.HeaderText = "Lvl";
+            this.Lvl.Name = "Lvl";
+            this.Lvl.ReadOnly = true;
+            this.Lvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Sentry
+            // 
+            this.Sentry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Sentry.HeaderText = "Sentry";
+            this.Sentry.Items.AddRange(new object[] {
+            "SENTRY_NONE",
+            "SENTRY_SINGLE_LANE",
+            "SENTRY_MULTI_LANE"});
+            this.Sentry.Name = "Sentry";
+            this.Sentry.Width = 5;
+            // 
+            // masterfiletype
+            // 
+            this.masterfiletype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.masterfiletype.HeaderText = "";
+            this.masterfiletype.Name = "masterfiletype";
+            this.masterfiletype.ReadOnly = true;
+            this.masterfiletype.Width = 5;
+            // 
             // masterLvl
             // 
             this.masterLvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -5881,8 +5892,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Beats;
         private System.Windows.Forms.DataGridViewImageColumn FileType;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
         private System.Windows.Forms.Label lblPyramidWarn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
@@ -5950,6 +5959,9 @@
         private System.Windows.Forms.Button btnLevelFolder;
         private System.Windows.Forms.Panel panelRawData;
         private System.Windows.Forms.Label lblRawData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
+        private System.Windows.Forms.DataGridViewImageColumn masterfiletype;
         private System.Windows.Forms.DataGridViewTextBoxColumn masterLvl;
         private System.Windows.Forms.DataGridViewCheckBoxColumn masterCheckpoint;
         private System.Windows.Forms.DataGridViewCheckBoxColumn masterPlayplus;

@@ -192,6 +192,9 @@ ISOLATE
 When checked, only isolated levels will play in game. Useful for testing specific sublevels 
 without replaying the entire thing.</value>
   </data>
+  <metadata name="masterfiletype.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="masterLvl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
