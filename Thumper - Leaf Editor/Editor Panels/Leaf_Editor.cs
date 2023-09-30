@@ -1191,8 +1191,10 @@ namespace Thumper_Custom_Level_Editor
 			//set scrollbar positions (if set last time this leaf was open)
 			trackEditor.RowHeadersWidth = trackEditor.RowHeadersWidth;
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-			trackEditor.FirstDisplayedScrollingRowIndex = 0;
-			trackEditor.FirstDisplayedScrollingColumnIndex = 0;
+			try {
+				trackEditor.FirstDisplayedScrollingRowIndex = 0;
+				trackEditor.FirstDisplayedScrollingColumnIndex = 0;
+			} catch { }
 			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
 			if (match != -1) {
 				trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
