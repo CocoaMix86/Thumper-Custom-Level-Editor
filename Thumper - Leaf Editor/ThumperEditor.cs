@@ -516,15 +516,6 @@ namespace Thumper_Custom_Level_Editor
         private void lblGateClose_Click(object sender, EventArgs e) => gateEditorToolStripMenuItem.PerformClick();
         private void lblWorkClose_Click(object sender, EventArgs e) => workingFolderToolStripMenuItem.PerformClick();
         private void lblSampleClose_Click(object sender, EventArgs e) => sampleEditorToolStripMenuItem.PerformClick();
-        private void Close_MouseEnter(object sender, EventArgs e)
-        {
-            (sender as ToolStripButton).BackColor = Color.Red;
-        }
-
-        private void Close_MouseLeave(object sender, EventArgs e)
-        {
-            (sender as ToolStripButton).BackColor = Color.FromArgb(40, 40, 40);
-        }
 
         /// 
         /// VARIOUS POPUPS FOR HELP TEXT

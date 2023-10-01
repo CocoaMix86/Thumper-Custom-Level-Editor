@@ -62,15 +62,6 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
-        private void lblPopout_MouseEnter(object sender, EventArgs e)
-        {
-            (sender as ToolStripButton).BackColor = Color.Aqua;
-        }
-
-        private void lblPopout_MouseLeave(object sender, EventArgs e)
-        {
-            (sender as ToolStripButton).BackColor = Color.FromArgb(40, 40, 40);
-        }
 
         private void lblPopout_Click(object sender, EventArgs e)
         {

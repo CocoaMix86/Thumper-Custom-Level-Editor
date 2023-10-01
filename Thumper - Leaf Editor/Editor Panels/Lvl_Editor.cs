@@ -559,7 +559,7 @@ namespace Thumper_Custom_Level_Editor
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			foreach (dynamic samp in _load["loops"]) {
 				var _samplocate = _lvlsamples.First(item => item.obj_name == ((string)samp["samp_name"]).Replace(".samp", ""));
-				lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int)samp["beats_per_loop"]});
+				lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
 			}
 			btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
 			///load leafs associated with this lvl
@@ -788,7 +788,7 @@ namespace Thumper_Custom_Level_Editor
 					continue;
 				JObject s = new JObject {
 					{ "samp_name", ((SampleData)r.Cells[0].Value).obj_name + ".samp"},
-					{ "beats_per_loop", (decimal)r.Cells[1].Value }
+					{ "beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()) }
 				};
 
 				loops.Add(s);
