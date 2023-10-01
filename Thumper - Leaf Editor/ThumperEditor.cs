@@ -743,14 +743,6 @@ namespace Thumper_Custom_Level_Editor
             ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
         }
 
-        private void masterToolStrip_Paint(object sender, PaintEventArgs e)
-        {
-            ToolStrip toolstrip = (ToolStrip)sender;
-            int _b = 1;
-            Color _c = Color.White;
-            //ControlPaint.DrawBorder(e.Graphics, toolstrip.DisplayRectangle, _c, _b, ButtonBorderStyle.Solid, _c, _b, ButtonBorderStyle.Solid, _c, _b, ButtonBorderStyle.Solid, _c, _b, ButtonBorderStyle.Solid);
-        }
-
         private void datagrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             ((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
