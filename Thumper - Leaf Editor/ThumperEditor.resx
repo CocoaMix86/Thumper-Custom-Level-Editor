@@ -123,6 +123,9 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>246, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>246, 17</value>
+  </metadata>
   <data name="label8.ToolTip" xml:space="preserve">
     <value>Whether the value changes every beat (step = TRUE)(utilizing default on empty beats),
 or interoplates between set data points (step = FALSE)
@@ -183,15 +186,15 @@ don't drown out other sounds at specific times.</value>
     <value>766, 17</value>
   </metadata>
   <data name="lblMasterlvllistHelp.ToolTip" xml:space="preserve">
-    <value>CHECKPOINT COLUMN
+    <value>CHKP. (checkpoint)
 If checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a 
 checkpoint and will flow into the next lvl.
 
-PLAY+ COLUMN
+P+ (play+)
 If checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. 
 This is useful for tutorial levels in Play, and then removing them for Play+.
 
-ISOLATE
+ISO. (isolate)
 When checked, only isolated levels will play in game. Useful for testing specific sublevels 
 without replaying the entire thing.</value>
   </data>
