@@ -207,8 +207,6 @@
             this.btnLvlPathDelete = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.lvlLoopTracks = new System.Windows.Forms.DataGridView();
-            this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblLvlClose = new System.Windows.Forms.Label();
             this.lvlSeqObjs = new System.Windows.Forms.DataGridView();
             this.label21 = new System.Windows.Forms.Label();
@@ -227,8 +225,6 @@
             this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
             this.btnSaveLvl = new System.Windows.Forms.Button();
             this.lvlLeafList = new System.Windows.Forms.DataGridView();
-            this.Leaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Beats = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnlvlPanelOpen = new System.Windows.Forms.Button();
             this.btnlvlPanelNew = new System.Windows.Forms.Button();
             this.panelMaster = new System.Windows.Forms.Panel();
@@ -383,6 +379,10 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
+            this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Leaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Beats = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -2682,20 +2682,8 @@
             this.lvlLoopTracks.Size = new System.Drawing.Size(363, 117);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
+            this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             this.lvlLoopTracks.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.lvlLoopTracks_DataError);
-            // 
-            // LoopSample
-            // 
-            this.LoopSample.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.LoopSample.HeaderText = "Loop Sample";
-            this.LoopSample.MaxDropDownItems = 20;
-            this.LoopSample.Name = "LoopSample";
-            this.LoopSample.Width = 84;
-            // 
-            // BeatsPerLoop
-            // 
-            this.BeatsPerLoop.HeaderText = "Beats Per Loop";
-            this.BeatsPerLoop.Name = "BeatsPerLoop";
             // 
             // lblLvlClose
             // 
@@ -2841,6 +2829,7 @@
             this.lvlLeafPaths.Size = new System.Drawing.Size(219, 117);
             this.lvlLeafPaths.TabIndex = 79;
             this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
+            this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             // 
             // label20
             // 
@@ -3092,24 +3081,6 @@
             this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
             this.lvlLeafList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellEnter);
             this.lvlLeafList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_RowEnter);
-            // 
-            // Leaf
-            // 
-            this.Leaf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Leaf.FillWeight = 30F;
-            this.Leaf.HeaderText = "Leaf";
-            this.Leaf.Name = "Leaf";
-            this.Leaf.ReadOnly = true;
-            this.Leaf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Beats
-            // 
-            this.Beats.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Beats.FillWeight = 30F;
-            this.Beats.HeaderText = "Beats";
-            this.Beats.Name = "Beats";
-            this.Beats.ReadOnly = true;
-            this.Beats.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // btnlvlPanelOpen
             // 
@@ -5623,6 +5594,38 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
+            // LoopSample
+            // 
+            this.LoopSample.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.LoopSample.HeaderText = "Loop Sample";
+            this.LoopSample.MaxDropDownItems = 20;
+            this.LoopSample.Name = "LoopSample";
+            // 
+            // BeatsPerLoop
+            // 
+            this.BeatsPerLoop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.BeatsPerLoop.HeaderText = "Beats Per Loop";
+            this.BeatsPerLoop.Name = "BeatsPerLoop";
+            this.BeatsPerLoop.Width = 115;
+            // 
+            // Leaf
+            // 
+            this.Leaf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Leaf.FillWeight = 30F;
+            this.Leaf.HeaderText = "Leaf";
+            this.Leaf.Name = "Leaf";
+            this.Leaf.ReadOnly = true;
+            this.Leaf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Beats
+            // 
+            this.Beats.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Beats.FillWeight = 20F;
+            this.Beats.HeaderText = "Beats";
+            this.Beats.Name = "Beats";
+            this.Beats.ReadOnly = true;
+            this.Beats.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5968,13 +5971,9 @@
         private System.Windows.Forms.Button btnWorkCopy;
         private System.Windows.Forms.Button btnLvlCopyTunnel;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.DataGridViewComboBoxColumn LoopSample;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BeatsPerLoop;
         private System.Windows.Forms.ToolStripMenuItem SaveAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.Button btnLvlRefreshBeats;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Leaf;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Beats;
         private System.Windows.Forms.DataGridViewImageColumn FileType;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
         private System.Windows.Forms.Label lblPyramidWarn;
@@ -6060,6 +6059,10 @@
         private System.Windows.Forms.ToolStripButton lblMasterClose;
         private System.Windows.Forms.ToolStripButton lblPopoutMaster;
         private System.Windows.Forms.ToolStripButton btnSaveMaster;
+        private System.Windows.Forms.DataGridViewComboBoxColumn LoopSample;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BeatsPerLoop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Leaf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Beats;
     }
 }
 

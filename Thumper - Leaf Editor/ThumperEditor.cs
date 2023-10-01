@@ -759,5 +759,10 @@ namespace Thumper_Custom_Level_Editor
             Color _c = Color.White;
             //ControlPaint.DrawBorder(e.Graphics, toolstrip.DisplayRectangle, _c, _b, ButtonBorderStyle.Solid, _c, _b, ButtonBorderStyle.Solid, _c, _b, ButtonBorderStyle.Solid, _c, _b, ButtonBorderStyle.Solid);
         }
+
+        private void datagrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            ((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
     }
 }

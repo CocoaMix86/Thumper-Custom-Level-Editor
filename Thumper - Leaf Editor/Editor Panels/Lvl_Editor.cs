@@ -599,13 +599,16 @@ namespace Thumper_Custom_Level_Editor
 			DataGridViewComboBoxColumn _dgvlvlpaths = new DataGridViewComboBoxColumn() {
 				DataSource = _lvlpaths,
 				HeaderText = "Path Name",
-				AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+				AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+				DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
+				DisplayStyleForCurrentCellOnly = true
 			};
 			lvlLeafPaths.Columns.Add(_dgvlvlpaths);
 			///
 
 			///customize Loop Track list a bit
 			//custom column containing comboboxes per cell
+			lvlLoopTracks.Columns[1].ValueType = typeof(decimal);
 			lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
 			//lvlLoopTracks.Columns[0].ValueType = typeof(SampleData);
 			///
@@ -781,9 +784,11 @@ namespace Thumper_Custom_Level_Editor
 			//this section adds the loop tracks
 			JArray loops = new JArray();
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
+				if (r.Cells[0].Value == null)
+					continue;
 				JObject s = new JObject {
 					{ "samp_name", ((SampleData)r.Cells[0].Value).obj_name + ".samp"},
-					{ "beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()) }
+					{ "beats_per_loop", (decimal)r.Cells[1].Value }
 				};
 
 				loops.Add(s);
