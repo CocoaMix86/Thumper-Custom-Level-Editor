@@ -278,8 +278,8 @@
             this.toolstripTitleMaster = new System.Windows.Forms.ToolStrip();
             this.lblMasterName = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveMaster = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutMaster = new System.Windows.Forms.ToolStripButton();
             this.lblMasterClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutMaster = new System.Windows.Forms.ToolStripButton();
             this.btnMasterPanelOpen = new System.Windows.Forms.Button();
             this.btnMasterPanelNew = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -1247,6 +1247,7 @@
             // dropObjects
             // 
             this.dropObjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropObjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropObjects.Enabled = false;
             this.dropObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropObjects.ForeColor = System.Drawing.Color.White;
@@ -1287,6 +1288,7 @@
             // dropParamPath
             // 
             this.dropParamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropParamPath.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropParamPath.DropDownWidth = 180;
             this.dropParamPath.Enabled = false;
             this.dropParamPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1718,6 +1720,7 @@
             // dropTimeSig
             // 
             this.dropTimeSig.BackColor = System.Drawing.Color.Black;
+            this.dropTimeSig.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropTimeSig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropTimeSig.ForeColor = System.Drawing.Color.White;
             this.dropTimeSig.FormattingEnabled = true;
@@ -1778,6 +1781,7 @@
             // dropTrackLane
             // 
             this.dropTrackLane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropTrackLane.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropTrackLane.DropDownWidth = 180;
             this.dropTrackLane.Enabled = false;
             this.dropTrackLane.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1882,6 +1886,7 @@
             // dropLeafInterp
             // 
             this.dropLeafInterp.BackColor = System.Drawing.Color.Black;
+            this.dropLeafInterp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropLeafInterp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropLeafInterp.ForeColor = System.Drawing.Color.LawnGreen;
             this.dropLeafInterp.FormattingEnabled = true;
@@ -2405,6 +2410,7 @@
             // 
             this.dropLvlTutorial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropLvlTutorial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropLvlTutorial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropLvlTutorial.DropDownWidth = 200;
             this.dropLvlTutorial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropLvlTutorial.ForeColor = System.Drawing.Color.White;
@@ -2421,7 +2427,6 @@
             this.dropLvlTutorial.Name = "dropLvlTutorial";
             this.dropLvlTutorial.Size = new System.Drawing.Size(142, 21);
             this.dropLvlTutorial.TabIndex = 90;
-            this.dropLvlTutorial.Text = "TUTORIAL_NONE";
             this.dropLvlTutorial.SelectedIndexChanged += new System.EventHandler(this.dropLvlTutorial_SelectedIndexChanged);
             // 
             // label26
@@ -2440,6 +2445,7 @@
             // 
             this.dropLvlInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropLvlInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropLvlInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropLvlInput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropLvlInput.ForeColor = System.Drawing.Color.White;
             this.dropLvlInput.FormattingEnabled = true;
@@ -2450,7 +2456,6 @@
             this.dropLvlInput.Name = "dropLvlInput";
             this.dropLvlInput.Size = new System.Drawing.Size(72, 21);
             this.dropLvlInput.TabIndex = 68;
-            this.dropLvlInput.Text = "True";
             this.dropLvlInput.SelectedIndexChanged += new System.EventHandler(this.dropLvlInput_SelectedIndexChanged);
             // 
             // label25
@@ -3216,7 +3221,7 @@
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton1.ForeColor = System.Drawing.Color.White;
-            this.toolStripButton1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_add2;
+            this.toolStripButton1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Margin = new System.Windows.Forms.Padding(0);
             this.toolStripButton1.Name = "toolStripButton1";
@@ -3317,6 +3322,7 @@
             // 
             this.dropMasterLvlRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropMasterLvlRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterLvlRest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropMasterLvlRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterLvlRest.ForeColor = System.Drawing.Color.White;
             this.dropMasterLvlRest.FormattingEnabled = true;
@@ -3346,6 +3352,7 @@
             // 
             this.dropMasterLvlLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropMasterLvlLeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterLvlLeader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropMasterLvlLeader.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterLvlLeader.ForeColor = System.Drawing.Color.White;
             this.dropMasterLvlLeader.FormattingEnabled = true;
@@ -3563,6 +3570,7 @@
             // 
             this.dropMasterCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dropMasterCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterCheck.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropMasterCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterCheck.ForeColor = System.Drawing.Color.White;
             this.dropMasterCheck.FormattingEnabled = true;
@@ -3592,6 +3600,7 @@
             // 
             this.dropMasterIntro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dropMasterIntro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterIntro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropMasterIntro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterIntro.ForeColor = System.Drawing.Color.White;
             this.dropMasterIntro.FormattingEnabled = true;
@@ -3607,6 +3616,7 @@
             // 
             this.dropMasterSkybox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dropMasterSkybox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterSkybox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropMasterSkybox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterSkybox.ForeColor = System.Drawing.Color.White;
             this.dropMasterSkybox.FormattingEnabled = true;
@@ -3843,6 +3853,7 @@
             // toolstripTitleMaster
             // 
             this.toolstripTitleMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleMaster.GripMargin = new System.Windows.Forms.Padding(0);
             this.toolstripTitleMaster.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolstripTitleMaster.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblMasterName,
@@ -3850,10 +3861,12 @@
             this.lblMasterClose,
             this.lblPopoutMaster});
             this.toolstripTitleMaster.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleMaster.MaximumSize = new System.Drawing.Size(0, 22);
             this.toolstripTitleMaster.Name = "toolstripTitleMaster";
+            this.toolstripTitleMaster.Padding = new System.Windows.Forms.Padding(0);
             this.toolstripTitleMaster.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolstripTitleMaster.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleMaster.Size = new System.Drawing.Size(456, 25);
+            this.toolstripTitleMaster.Size = new System.Drawing.Size(456, 22);
             this.toolstripTitleMaster.TabIndex = 139;
             this.toolstripTitleMaster.Text = "titlebar";
             // 
@@ -3862,7 +3875,7 @@
             this.lblMasterName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterName.ForeColor = System.Drawing.Color.SlateBlue;
             this.lblMasterName.Name = "lblMasterName";
-            this.lblMasterName.Size = new System.Drawing.Size(82, 22);
+            this.lblMasterName.Size = new System.Drawing.Size(82, 19);
             this.lblMasterName.Text = "Master Editor";
             // 
             // btnSaveMaster
@@ -3872,24 +3885,9 @@
             this.btnSaveMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
             this.btnSaveMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveMaster.Name = "btnSaveMaster";
-            this.btnSaveMaster.Size = new System.Drawing.Size(23, 22);
+            this.btnSaveMaster.Size = new System.Drawing.Size(23, 19);
             this.btnSaveMaster.ToolTipText = "Save master file";
             this.btnSaveMaster.Click += new System.EventHandler(this.mastersaveToolStripMenuItem_Click);
-            // 
-            // lblPopoutMaster
-            // 
-            this.lblPopoutMaster.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutMaster.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutMaster.Name = "lblPopoutMaster";
-            this.lblPopoutMaster.Size = new System.Drawing.Size(23, 25);
-            this.lblPopoutMaster.Text = "Dock panel";
-            this.lblPopoutMaster.ToolTipText = "Undock panel";
-            this.lblPopoutMaster.Click += new System.EventHandler(this.lblPopin_Click);
-            this.lblPopoutMaster.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
-            this.lblPopoutMaster.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
             // lblMasterClose
             // 
@@ -3899,12 +3897,27 @@
             this.lblMasterClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.lblMasterClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
             this.lblMasterClose.Name = "lblMasterClose";
-            this.lblMasterClose.Size = new System.Drawing.Size(23, 25);
+            this.lblMasterClose.Size = new System.Drawing.Size(23, 22);
             this.lblMasterClose.Text = "toolStripButton6";
             this.lblMasterClose.ToolTipText = "Close panel";
             this.lblMasterClose.Click += new System.EventHandler(this.lblMasterClose_Click);
             this.lblMasterClose.MouseEnter += new System.EventHandler(this.Close_MouseEnter);
             this.lblMasterClose.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
+            // 
+            // lblPopoutMaster
+            // 
+            this.lblPopoutMaster.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutMaster.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutMaster.Name = "lblPopoutMaster";
+            this.lblPopoutMaster.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutMaster.Text = "Dock panel";
+            this.lblPopoutMaster.ToolTipText = "Undock panel";
+            this.lblPopoutMaster.Click += new System.EventHandler(this.lblPopin_Click);
+            this.lblPopoutMaster.MouseEnter += new System.EventHandler(this.lblPopout_MouseEnter);
+            this.lblPopoutMaster.MouseLeave += new System.EventHandler(this.lblPopout_MouseLeave);
             // 
             // btnMasterPanelOpen
             // 
@@ -4125,6 +4138,7 @@
             // 
             this.dropGateSection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropGateSection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropGateSection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropGateSection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateSection.ForeColor = System.Drawing.Color.White;
             this.dropGateSection.FormattingEnabled = true;
@@ -4147,6 +4161,7 @@
             this.dropGateRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropGateRestart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dropGateRestart.DisplayMember = "plos";
+            this.dropGateRestart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropGateRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateRestart.ForeColor = System.Drawing.Color.White;
             this.dropGateRestart.FormattingEnabled = true;
@@ -4161,6 +4176,7 @@
             this.dropGatePost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropGatePost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dropGatePost.DisplayMember = "plos";
+            this.dropGatePost.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropGatePost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGatePost.ForeColor = System.Drawing.Color.White;
             this.dropGatePost.FormattingEnabled = true;
@@ -4175,6 +4191,7 @@
             this.dropGatePre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropGatePre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dropGatePre.DisplayMember = "plos";
+            this.dropGatePre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropGatePre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGatePre.ForeColor = System.Drawing.Color.White;
             this.dropGatePre.FormattingEnabled = true;
@@ -4261,6 +4278,7 @@
             this.dropGateBoss.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dropGateBoss.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dropGateBoss.DisplayMember = "plos";
+            this.dropGateBoss.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropGateBoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateBoss.ForeColor = System.Drawing.Color.White;
             this.dropGateBoss.FormattingEnabled = true;
