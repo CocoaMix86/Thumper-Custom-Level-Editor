@@ -185,12 +185,6 @@ don't drown out other sounds at specific times.</value>
   <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>766, 17</value>
   </metadata>
-  <metadata name="toolstripTitleMaster.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>904, 17</value>
-  </metadata>
-  <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>766, 17</value>
-  </metadata>
   <data name="lblMasterlvllistHelp.ToolTip" xml:space="preserve">
     <value>CHECKPOINT COLUMN
 If checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a 
