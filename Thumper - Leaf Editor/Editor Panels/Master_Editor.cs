@@ -28,6 +28,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private string loadedmaster;
 		string _loadedmastertemp;
+		dynamic masterjson;
 
 		ObservableCollection<MasterLvlData> _masterlvls = new ObservableCollection<MasterLvlData>();
 		#endregion
@@ -370,6 +371,12 @@ namespace Thumper_Custom_Level_Editor
 			dropMasterLvlRest.SelectedItem = _select;
 		}
 
+		private void btnRevertMaster_Click(object sender, EventArgs e)
+		{
+			SaveMaster(true);
+			LoadMaster(masterjson);
+		}
+
 		//buttons that click other buttons
 		private void btnMasterPanelNew_Click(object sender, EventArgs e) => masternewToolStripMenuItem.PerformClick();
 		private void btnMasterPanelOpen_Click(object sender, EventArgs e) => masteropenToolStripMenuItem.PerformClick();
@@ -421,6 +428,8 @@ namespace Thumper_Custom_Level_Editor
 			LoadConfig();
 			///set save flag (master just loaded, has no changes)
 			SaveMaster(true);
+			masterjson = _load;
+			btnRevertMaster.Enabled = true;
 		}
 
 		public void LoadConfig()
@@ -567,7 +576,7 @@ namespace Thumper_Custom_Level_Editor
 			_config.Add("joy_color", joy_color);
 			//
 			///end build
-
+			masterjson = _config;
 			///Delete extra config_ files in the folder, then write Config to file
 			var _files = Directory.GetFiles(workingfolder, "config_*.txt");
 			foreach (string s in _files)
