@@ -428,6 +428,7 @@
     <None Include="image assets\icon-paste2.png" />
     <None Include="image assets\icon-refresh2.png" />
     <None Include="image assets\icon-back.png" />
+    <None Include="image assets\icon-erase.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
