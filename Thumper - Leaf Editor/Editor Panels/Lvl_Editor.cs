@@ -175,7 +175,8 @@ namespace Thumper_Custom_Level_Editor
 			//if action ADD, add new row to the lvl DGV
 			//NewStartingIndex and OldStartingIndex track where the changes were made
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
-				lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] { _lvlleafs[_in].leafname, _lvlleafs[_in].beats });
+				string leafname = _lvlleafs[_in].leafname;
+				lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] { Properties.Resources.ResourceManager.GetObject(leafname.Split('.')[1]), leafname.Replace(".leaf", ""), _lvlleafs[_in].beats });
 			}
 			//if action REMOVE, remove row from the lvl DGV
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
@@ -445,6 +446,7 @@ namespace Thumper_Custom_Level_Editor
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
 				r.HeaderCell.Value = "Volume Track " + r.Index;
 			}
+			SaveLvl(false);
 		}
 
 		private void btnLvlSeqAdd_Click(object sender, EventArgs e)
@@ -453,6 +455,7 @@ namespace Thumper_Custom_Level_Editor
 			lvlSeqObjs.Rows[lvlSeqObjs.Rows.Count - 1].HeaderCell.Value = "Volume Track " + (lvlSeqObjs.Rows.Count - 1);
 			btnLvlSeqDelete.Enabled = true;
 			btnLvlSeqClear.Enabled = true;
+			SaveLvl(false);
 		}
 
 		private void btnLvlSeqDelete_Click(object sender, EventArgs e)
@@ -468,6 +471,7 @@ namespace Thumper_Custom_Level_Editor
 			//prompt user to say YES if row is not empty. Then delete selected track
 			if (_empty || (!_empty && MessageBox.Show("This track has data. Do you still want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)) {
 				lvlSeqObjs.Rows.Remove(lvlSeqObjs.CurrentRow);
+				SaveLvl(false);
 				//after deleting, rename all headers so they're in order again
 				foreach (DataGridViewRow r in lvlSeqObjs.Rows)
 					r.HeaderCell.Value = "Volume Track " + r.Index;
