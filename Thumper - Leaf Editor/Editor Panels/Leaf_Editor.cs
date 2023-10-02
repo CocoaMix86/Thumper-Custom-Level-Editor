@@ -470,17 +470,14 @@ namespace Thumper_Custom_Level_Editor
 		private void btnTrackDelete_Click(object sender, EventArgs e)
 		{
 			bool _empty = true;
+			var selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 			//iterate over current row to see if any cells have data
-			foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
-				if (dgvc.Value != null) {
-					_empty = false;
-					break;
-				}
-			}
+			var filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
+			if (filledcells.Count > 0)
+				_empty = false;
 			//if row is not empty, show confirmation box. Otherwise just delete the row
 			if ((!_empty && MessageBox.Show("Some cells in the selected tracks have data. Are you sure you want to delete?", "Confirm delete", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
 				try {
-					var selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 					foreach (DataGridViewRow dgvr in selectedrows) {
 						_tracks.RemoveAt(dgvr.Index);
 						trackEditor.Rows.Remove(dgvr);
