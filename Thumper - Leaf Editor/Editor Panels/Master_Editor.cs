@@ -29,7 +29,7 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedmaster;
 		string _loadedmastertemp;
 		dynamic masterjson;
-
+		MasterLvlData clipboardmaster = new MasterLvlData();
 		ObservableCollection<MasterLvlData> _masterlvls = new ObservableCollection<MasterLvlData>();
 		#endregion
 
@@ -333,8 +333,15 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnMasterLvlCopy_Click(object sender, EventArgs e)
 		{
-			MasterLvlData _lvl = _masterlvls[masterLvlList.SelectedCells[0].RowIndex];
-			_masterlvls.Add(_lvl);
+			MasterLvlData selectedlvl = _masterlvls[masterLvlList.CurrentRow.Index];
+			clipboardmaster = selectedlvl.Clone();
+			//_masterlvls.Add(_lvl);
+			btnMasterLvlPaste.Enabled = true;
+		}
+
+		private void btnMasterLvlPaste_Click(object sender, EventArgs e)
+		{
+			_masterlvls.Insert(masterLvlList.CurrentRow.Index + 1, clipboardmaster);
 		}
 
 		private void btnConfigColor_Click(object sender, EventArgs e)
