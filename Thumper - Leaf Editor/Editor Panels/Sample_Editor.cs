@@ -122,6 +122,7 @@ namespace Thumper_Custom_Level_Editor
 			//enable certain buttons if there are enough items for them
 			btnSampleAdd.Enabled = true;
 			btnSampleDelete.Enabled = _samplelist.Count > 0;
+			FSBtoSamp.Enabled = _samplelist.Count > 0;
 
 			//set lvl save flag to false
 			SaveSample(false);
@@ -288,18 +289,16 @@ namespace Thumper_Custom_Level_Editor
 
 			//creates new instance of the playback engine, since it gets disposed when stopping
 			if (!_sampleplaying) {
+				btnSampEditorPlaySamp.Image = Properties.Resources.icon_stop;
 				ape = new AudioPlaybackEngine();
 				ape.PlaySound(new CachedSound($@"temp\{_samp.obj_name}.{_filetype}"));
 				_sampleplaying = true;
-				btnSampEditorPlaySamp.Text = "Stop";
-				btnSampEditorPlaySamp.ForeColor = Color.Red;
 			}
 			//stop current playback by disposing the object
 			else {
 				ape.Dispose();
 				_sampleplaying = false;
-				btnSampEditorPlaySamp.Text = "Play Sample";
-				btnSampEditorPlaySamp.ForeColor = Color.Green;
+				btnSampEditorPlaySamp.Image = Properties.Resources.icon_play2;
 			}
 		}
 

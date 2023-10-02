@@ -364,22 +364,17 @@
             this.label53 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
             this.panelSample = new System.Windows.Forms.Panel();
-            this.btnSampEditorPlaySamp = new System.Windows.Forms.Button();
-            this.lblSampleFSBhelp = new System.Windows.Forms.Label();
+            this.sampleToolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnSampleAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnSampleDelete = new System.Windows.Forms.ToolStripButton();
+            this.FSBtoSamp = new System.Windows.Forms.ToolStripButton();
+            this.btnSampEditorPlaySamp = new System.Windows.Forms.ToolStripButton();
+            this.lblSampleFSBhelp = new System.Windows.Forms.ToolStripLabel();
             this.label45 = new System.Windows.Forms.Label();
-            this.FSBtoSamp = new System.Windows.Forms.Button();
             this.txtSampPath = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
-            this.btnSampleAdd = new System.Windows.Forms.Button();
-            this.btnSampleDelete = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
-            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolstripTitleSample = new System.Windows.Forms.ToolStrip();
             this.lblSampleEditor = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveSample = new System.Windows.Forms.ToolStripButton();
@@ -394,6 +389,12 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
+            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -435,6 +436,7 @@
             this.workingfolderRightClick.SuspendLayout();
             this.contextMenuDock.SuspendLayout();
             this.panelSample.SuspendLayout();
+            this.sampleToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
             this.toolstripTitleSample.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -5107,21 +5109,17 @@
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSample.Controls.Add(this.btnSampEditorPlaySamp);
-            this.panelSample.Controls.Add(this.lblSampleFSBhelp);
+            this.panelSample.Controls.Add(this.sampleToolStrip);
             this.panelSample.Controls.Add(this.label45);
-            this.panelSample.Controls.Add(this.FSBtoSamp);
             this.panelSample.Controls.Add(this.txtSampPath);
             this.panelSample.Controls.Add(this.label50);
-            this.panelSample.Controls.Add(this.btnSampleAdd);
-            this.panelSample.Controls.Add(this.btnSampleDelete);
             this.panelSample.Controls.Add(this.label54);
             this.panelSample.Controls.Add(this.sampleList);
             this.panelSample.Controls.Add(this.toolstripTitleSample);
             this.panelSample.Location = new System.Drawing.Point(1361, 385);
             this.panelSample.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelSample.Name = "panelSample";
-            this.panelSample.Size = new System.Drawing.Size(385, 511);
+            this.panelSample.Size = new System.Drawing.Size(385, 327);
             this.panelSample.TabIndex = 134;
             this.panelSample.Tag = "editorpanel";
             this.panelSample.Visible = false;
@@ -5130,36 +5128,85 @@
             this.panelSample.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelSample.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
+            // sampleToolStrip
+            // 
+            this.sampleToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sampleToolStrip.AutoSize = false;
+            this.sampleToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sampleToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.sampleToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.sampleToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.sampleToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.sampleToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSampleAdd,
+            this.btnSampleDelete,
+            this.FSBtoSamp,
+            this.btnSampEditorPlaySamp,
+            this.lblSampleFSBhelp});
+            this.sampleToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.sampleToolStrip.Location = new System.Drawing.Point(6, 267);
+            this.sampleToolStrip.Name = "sampleToolStrip";
+            this.sampleToolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.sampleToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.sampleToolStrip.Size = new System.Drawing.Size(370, 25);
+            this.sampleToolStrip.Stretch = true;
+            this.sampleToolStrip.TabIndex = 143;
+            // 
+            // btnSampleAdd
+            // 
+            this.btnSampleAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSampleAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSampleAdd.ForeColor = System.Drawing.Color.White;
+            this.btnSampleAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
+            this.btnSampleAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSampleAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSampleAdd.Name = "btnSampleAdd";
+            this.btnSampleAdd.Size = new System.Drawing.Size(24, 25);
+            this.btnSampleAdd.ToolTipText = "Add new phase";
+            this.btnSampleAdd.Click += new System.EventHandler(this.btnSampleAdd_Click);
+            // 
+            // btnSampleDelete
+            // 
+            this.btnSampleDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSampleDelete.Enabled = false;
+            this.btnSampleDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnSampleDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSampleDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSampleDelete.Name = "btnSampleDelete";
+            this.btnSampleDelete.Size = new System.Drawing.Size(24, 25);
+            this.btnSampleDelete.ToolTipText = "Delete selected phase";
+            this.btnSampleDelete.Click += new System.EventHandler(this.btnSampleDelete_Click);
+            // 
+            // FSBtoSamp
+            // 
+            this.FSBtoSamp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FSBtoSamp.Enabled = false;
+            this.FSBtoSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_import;
+            this.FSBtoSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FSBtoSamp.Name = "FSBtoSamp";
+            this.FSBtoSamp.Size = new System.Drawing.Size(24, 22);
+            this.FSBtoSamp.ToolTipText = "Import FSB files to Sample format";
+            this.FSBtoSamp.Click += new System.EventHandler(this.FSBtoSamp_Click);
+            // 
             // btnSampEditorPlaySamp
             // 
-            this.btnSampEditorPlaySamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSampEditorPlaySamp.BackColor = System.Drawing.Color.White;
-            this.btnSampEditorPlaySamp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSampEditorPlaySamp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnSampEditorPlaySamp.Enabled = false;
-            this.btnSampEditorPlaySamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSampEditorPlaySamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSampEditorPlaySamp.ForeColor = System.Drawing.Color.Green;
-            this.btnSampEditorPlaySamp.Location = new System.Drawing.Point(290, 444);
+            this.btnSampEditorPlaySamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_play2;
+            this.btnSampEditorPlaySamp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSampEditorPlaySamp.Name = "btnSampEditorPlaySamp";
-            this.btnSampEditorPlaySamp.Size = new System.Drawing.Size(86, 22);
-            this.btnSampEditorPlaySamp.TabIndex = 137;
-            this.btnSampEditorPlaySamp.Text = "Play Sample";
-            this.btnSampEditorPlaySamp.UseCompatibleTextRendering = true;
-            this.btnSampEditorPlaySamp.UseVisualStyleBackColor = false;
+            this.btnSampEditorPlaySamp.Size = new System.Drawing.Size(24, 22);
+            this.btnSampEditorPlaySamp.ToolTipText = "Play selected sample";
             this.btnSampEditorPlaySamp.Click += new System.EventHandler(this.btnSampEditorPlaySamp_Click);
             // 
             // lblSampleFSBhelp
             // 
-            this.lblSampleFSBhelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSampleFSBhelp.AutoSize = true;
-            this.lblSampleFSBhelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblSampleFSBhelp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblSampleFSBhelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSampleFSBhelp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblSampleFSBhelp.Font = new System.Drawing.Font("Segoe UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSampleFSBhelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblSampleFSBhelp.Location = new System.Drawing.Point(191, 449);
             this.lblSampleFSBhelp.Name = "lblSampleFSBhelp";
-            this.lblSampleFSBhelp.Size = new System.Drawing.Size(167, 13);
-            this.lblSampleFSBhelp.TabIndex = 136;
+            this.lblSampleFSBhelp.Size = new System.Drawing.Size(161, 22);
             this.lblSampleFSBhelp.Text = "How to get a .FSB audio file";
             this.lblSampleFSBhelp.Click += new System.EventHandler(this.lblSampleFSBhelp_Click);
             // 
@@ -5175,32 +5222,15 @@
             this.label45.TabIndex = 135;
             this.label45.Text = "all fields in the table are editable";
             // 
-            // FSBtoSamp
-            // 
-            this.FSBtoSamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.FSBtoSamp.BackColor = System.Drawing.Color.Gray;
-            this.FSBtoSamp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FSBtoSamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.FSBtoSamp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FSBtoSamp.ForeColor = System.Drawing.Color.Black;
-            this.FSBtoSamp.Location = new System.Drawing.Point(57, 445);
-            this.FSBtoSamp.Name = "FSBtoSamp";
-            this.FSBtoSamp.Size = new System.Drawing.Size(134, 22);
-            this.FSBtoSamp.TabIndex = 131;
-            this.FSBtoSamp.Text = "Import .FSB to Sample";
-            this.FSBtoSamp.UseCompatibleTextRendering = true;
-            this.FSBtoSamp.UseVisualStyleBackColor = false;
-            this.FSBtoSamp.Click += new System.EventHandler(this.FSBtoSamp_Click);
-            // 
             // txtSampPath
             // 
             this.txtSampPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtSampPath.ForeColor = System.Drawing.Color.White;
-            this.txtSampPath.Location = new System.Drawing.Point(56, 474);
+            this.txtSampPath.Location = new System.Drawing.Point(38, 295);
             this.txtSampPath.Name = "txtSampPath";
-            this.txtSampPath.Size = new System.Drawing.Size(320, 20);
+            this.txtSampPath.Size = new System.Drawing.Size(338, 20);
             this.txtSampPath.TabIndex = 130;
             this.txtSampPath.TextChanged += new System.EventHandler(this.txtSampPath_TextChanged);
             // 
@@ -5208,49 +5238,13 @@
             // 
             this.label50.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label50.AutoSize = true;
-            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.ForeColor = System.Drawing.Color.White;
-            this.label50.Location = new System.Drawing.Point(16, 477);
+            this.label50.Location = new System.Drawing.Point(6, 296);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(33, 13);
+            this.label50.Size = new System.Drawing.Size(32, 15);
             this.label50.TabIndex = 129;
             this.label50.Text = "Path";
-            // 
-            // btnSampleAdd
-            // 
-            this.btnSampleAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSampleAdd.BackColor = System.Drawing.Color.Gray;
-            this.btnSampleAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSampleAdd.Enabled = false;
-            this.btnSampleAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSampleAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSampleAdd.ForeColor = System.Drawing.Color.Black;
-            this.btnSampleAdd.Location = new System.Drawing.Point(6, 445);
-            this.btnSampleAdd.Name = "btnSampleAdd";
-            this.btnSampleAdd.Size = new System.Drawing.Size(22, 22);
-            this.btnSampleAdd.TabIndex = 119;
-            this.btnSampleAdd.Text = "+";
-            this.btnSampleAdd.UseCompatibleTextRendering = true;
-            this.btnSampleAdd.UseVisualStyleBackColor = false;
-            this.btnSampleAdd.Click += new System.EventHandler(this.btnSampleAdd_Click);
-            // 
-            // btnSampleDelete
-            // 
-            this.btnSampleDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSampleDelete.BackColor = System.Drawing.Color.Gray;
-            this.btnSampleDelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSampleDelete.Enabled = false;
-            this.btnSampleDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSampleDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSampleDelete.ForeColor = System.Drawing.Color.Black;
-            this.btnSampleDelete.Location = new System.Drawing.Point(28, 445);
-            this.btnSampleDelete.Name = "btnSampleDelete";
-            this.btnSampleDelete.Size = new System.Drawing.Size(22, 22);
-            this.btnSampleDelete.TabIndex = 120;
-            this.btnSampleDelete.Text = "-";
-            this.btnSampleDelete.UseCompatibleTextRendering = true;
-            this.btnSampleDelete.UseVisualStyleBackColor = false;
-            this.btnSampleDelete.Click += new System.EventHandler(this.btnSampleDelete_Click);
             // 
             // label54
             // 
@@ -5325,7 +5319,7 @@
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.sampleList.Size = new System.Drawing.Size(370, 394);
+            this.sampleList.Size = new System.Drawing.Size(370, 227);
             this.sampleList.TabIndex = 80;
             this.sampleList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEndEdit);
             this.sampleList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEnter);
@@ -5333,56 +5327,6 @@
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             this.sampleList.DragDrop += new System.Windows.Forms.DragEventHandler(this.sampleList_DragDrop);
             this.sampleList.DragEnter += new System.Windows.Forms.DragEventHandler(this.sampleList_DragEnter);
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.SampleName.FillWeight = 5F;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.SampleName.Width = 87;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Volume.FillWeight = 1F;
-            this.Volume.HeaderText = "Volume";
-            this.Volume.Name = "Volume";
-            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Pitch.FillWeight = 1F;
-            this.Pitch.HeaderText = "Pitch";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Pan.FillWeight = 1F;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Offset.FillWeight = 1F;
-            this.Offset.HeaderText = "Offset";
-            this.Offset.Name = "Offset";
-            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Channel
-            // 
-            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Channel.FillWeight = 50F;
-            this.Channel.HeaderText = "Channel";
-            this.Channel.Name = "Channel";
-            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.Width = 76;
             // 
             // toolstripTitleSample
             // 
@@ -5612,6 +5556,59 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SampleName.FillWeight = 5F;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Volume.FillWeight = 1F;
+            this.Volume.HeaderText = "Volume";
+            this.Volume.Name = "Volume";
+            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Volume.Width = 54;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pitch.FillWeight = 1F;
+            this.Pitch.HeaderText = "Pitch";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pitch.Width = 39;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pan.FillWeight = 1F;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pan.Width = 32;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Offset.FillWeight = 1F;
+            this.Offset.HeaderText = "Offset";
+            this.Offset.Name = "Offset";
+            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Offset.Width = 46;
+            // 
+            // Channel
+            // 
+            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Channel.FillWeight = 50F;
+            this.Channel.HeaderText = "Channel";
+            this.Channel.Name = "Channel";
+            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Channel.Width = 76;
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5702,6 +5699,8 @@
             this.contextMenuDock.ResumeLayout(false);
             this.panelSample.ResumeLayout(false);
             this.panelSample.PerformLayout();
+            this.sampleToolStrip.ResumeLayout(false);
+            this.sampleToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
             this.toolstripTitleSample.ResumeLayout(false);
             this.toolstripTitleSample.PerformLayout();
@@ -5921,8 +5920,6 @@
         private System.Windows.Forms.Button btnTrackColorImport;
         private System.Windows.Forms.Button btnTrackColorExport;
         private System.Windows.Forms.Button btnLeafObjRefresh;
-        private System.Windows.Forms.Button btnSampleAdd;
-        private System.Windows.Forms.Button btnSampleDelete;
         private System.Windows.Forms.TextBox txtSampPath;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.ToolStripMenuItem sampleToolStripMenuItem;
@@ -5930,12 +5927,9 @@
         private System.Windows.Forms.ToolStripMenuItem SampleopenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveAsToolStripMenuItem;
-        private System.Windows.Forms.Button FSBtoSamp;
         private System.Windows.Forms.Button btnSampPanelOpen;
         private System.Windows.Forms.Button btnSampPanelNew;
         private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Label lblSampleFSBhelp;
-        private System.Windows.Forms.Button btnSampEditorPlaySamp;
         private System.Windows.Forms.Button btnTrackCopy;
         private System.Windows.Forms.Button btnWorkCopy;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
@@ -5944,12 +5938,6 @@
         private System.Windows.Forms.DataGridViewImageColumn FileType;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
         private System.Windows.Forms.Label lblPyramidWarn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
         private System.Windows.Forms.Button btnLEafInterpLinear;
         private System.Windows.Forms.Button btnLeafColors;
         private System.Windows.Forms.ToolStripMenuItem resetMenuPositionToolStripMenuItem;
@@ -6076,6 +6064,18 @@
         private System.Windows.Forms.ToolStripButton lblSampleClose;
         private System.Windows.Forms.ToolStripButton lblPopoutSamp;
         private System.Windows.Forms.ToolStripButton btnRevertSample;
+        private System.Windows.Forms.ToolStrip sampleToolStrip;
+        private System.Windows.Forms.ToolStripButton btnSampleAdd;
+        private System.Windows.Forms.ToolStripButton btnSampleDelete;
+        private System.Windows.Forms.ToolStripButton FSBtoSamp;
+        private System.Windows.Forms.ToolStripButton btnSampEditorPlaySamp;
+        private System.Windows.Forms.ToolStripLabel lblSampleFSBhelp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
     }
 }
 

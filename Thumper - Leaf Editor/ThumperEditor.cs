@@ -89,6 +89,7 @@ namespace Thumper_Custom_Level_Editor
             toolstripTitleGate.Renderer = new ToolStripOverride();
             gateToolStrip.Renderer = new ToolStripOverride();
             toolstripTitleSample.Renderer = new ToolStripOverride();
+            sampleToolStrip.Renderer = new ToolStripOverride();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
