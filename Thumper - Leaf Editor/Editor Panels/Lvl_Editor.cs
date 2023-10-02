@@ -33,7 +33,7 @@ namespace Thumper_Custom_Level_Editor
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
 		List<SampleData> _lvlsamples = new List<SampleData>();
-
+		dynamic lvljson;
 		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();
 
 		LvlLeafData clipboardleaf = new LvlLeafData(); 
@@ -510,6 +510,12 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
+		private void btnRevertLvl_Click(object sender, EventArgs e)
+		{
+			SaveLvl(true);
+			LoadLvl(lvljson);
+		}
+
 		private void btnlvlPanelOpen_Click(object sender, EventArgs e)
 		{
 			lvlopenToolStripMenuItem.PerformClick();
@@ -584,7 +590,8 @@ namespace Thumper_Custom_Level_Editor
 				r.HeaderCell.Value = "Volume Track " + r.Index;
 			///mark that lvl is saved (just freshly loaded)
 			SaveLvl(true);
-			//
+			lvljson = _load;
+			btnRevertLvl.Enabled = true;
 			trackLvlVolumeZoom_Scroll(null, null);
 		}
 
@@ -699,13 +706,11 @@ namespace Thumper_Custom_Level_Editor
 			if (!save) {
 				if (!lblLvlName.Text.Contains("(unsaved)"))
 					lblLvlName.Text += " (unsaved)";
-				btnSaveLvl.Location = new Point(lblLvlName.Location.X + lblLvlName.Size.Width, btnSaveLvl.Location.Y);
 				btnSaveLvl.Enabled = true;
 				lblLvlName.BackColor = Color.Maroon;
 			}
 			else {
 				lblLvlName.Text = lblLvlName.Text.Replace(" (unsaved)", "");
-				btnSaveLvl.Location = new Point(lblLvlName.Location.X + lblLvlName.Size.Width, btnSaveLvl.Location.Y);
 				btnSaveLvl.Enabled = false;
 				lblLvlName.BackColor = Color.FromArgb(40, 40, 40);
 			}
@@ -800,7 +805,7 @@ namespace Thumper_Custom_Level_Editor
 			_save.Add("tutorial_type", dropLvlTutorial.Text);
 			_save.Add("start_angle_fracs", new JArray() { 1, 1, 1 });
 			///end building JSON output
-
+			lvljson = _save;
 			return _save;
 		}
 		#endregion
