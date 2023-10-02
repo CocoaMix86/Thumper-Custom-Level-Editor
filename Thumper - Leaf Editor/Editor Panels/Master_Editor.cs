@@ -537,10 +537,11 @@ namespace Thumper_Custom_Level_Editor
 			_save.Add("groupings", groupings);
 			_save.Add("isolate_tracks", isolate_tracks.ToString());
 			_save.Add("checkpoint_lvl_name", dropMasterCheck.Text);
-            ///end build
-            ///
-            ///begin building Config JSON object
-            JObject _config = new JObject
+			masterjson = _save;
+			///end build
+			///
+			///begin building Config JSON object
+			JObject _config = new JObject
             {
                 { "obj_type", "LevelLib" },
                 { "bpm", NUD_ConfigBPM.Value }
@@ -583,7 +584,7 @@ namespace Thumper_Custom_Level_Editor
 			_config.Add("joy_color", joy_color);
 			//
 			///end build
-			masterjson = _config;
+			
 			///Delete extra config_ files in the folder, then write Config to file
 			var _files = Directory.GetFiles(workingfolder, "config_*.txt");
 			foreach (string s in _files)
