@@ -84,6 +84,7 @@ namespace Thumper_Custom_Level_Editor
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlVolumeToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
+            lvlLoopToolStrip.Renderer = new ToolStripOverride();
             toolstripTitleLvl.Renderer = new ToolStripOverride();
         }
         ///
