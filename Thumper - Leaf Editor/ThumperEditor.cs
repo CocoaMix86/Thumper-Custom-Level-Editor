@@ -79,13 +79,15 @@ namespace Thumper_Custom_Level_Editor
             contextMenuDock.Renderer = new MyRenderer();
             workingfolderRightClick.Renderer = new MyRenderer();
             //toolstrip overrides
-            masterToolStrip.Renderer = new ToolStripOverride();
             toolstripTitleMaster.Renderer = new ToolStripOverride();
+            masterToolStrip.Renderer = new ToolStripOverride();
+            toolstripTitleLvl.Renderer = new ToolStripOverride();
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlVolumeToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
-            toolstripTitleLvl.Renderer = new ToolStripOverride();
+            toolstripTitleGate.Renderer = new ToolStripOverride();
+            gateToolStrip.Renderer = new ToolStripOverride();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -250,7 +252,7 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(panelLevel);
             ControlMoverOrResizer.Init(toolstripTitleLvl);
             ControlMoverOrResizer.Init(panelGate);
-            ControlMoverOrResizer.Init(lblGateName);
+            ControlMoverOrResizer.Init(toolstripTitleGate);
             ControlMoverOrResizer.Init(panelMaster);
             ControlMoverOrResizer.Init(toolstripTitleMaster);
             ControlMoverOrResizer.Init(panelSample);

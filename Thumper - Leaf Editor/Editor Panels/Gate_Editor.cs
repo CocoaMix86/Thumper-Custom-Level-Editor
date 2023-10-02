@@ -52,6 +52,7 @@ namespace Thumper_Custom_Level_Editor
 			new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"},
 			new BossData() {boss_name = "Level 9 - pyramid",  boss_spn = "pyramid.spn", boss_ent = "crakhed.ent"}
 		};
+		dynamic gatejson;
 		ObservableCollection<GateLvlData> _gatelvls = new ObservableCollection<GateLvlData>();
 		#endregion
 
@@ -311,6 +312,12 @@ namespace Thumper_Custom_Level_Editor
 			dropGateRestart.SelectedItem = _select;
 		}
 
+		private void btnRevertGate_Click(object sender, EventArgs e)
+		{
+			SaveGate(true);
+			LoadGate(gatejson);
+		}
+
 		//buttons that click other buttons
 		private void btnGatePanelNew_Click(object sender, EventArgs e) => gatenewToolStripMenuItem.PerformClick();
 		private void btnGatePanelOpen_Click(object sender, EventArgs e) => gateopenToolStripMenuItem.PerformClick();
@@ -372,6 +379,7 @@ namespace Thumper_Custom_Level_Editor
 			dropGateSection.SelectedItem = (string)_load["section_type"];
 
 			///set save flag (gate just loaded, has no changes)
+			gatejson = _load;
 			SaveGate(true);
 		}
 
@@ -384,15 +392,13 @@ namespace Thumper_Custom_Level_Editor
 			if (!save) {
 				if (!lblGateName.Text.Contains("(unsaved)"))
 					lblGateName.Text += " (unsaved)";
-				btnSaveGate.Location = new Point(lblGateName.Location.X + lblGateName.Size.Width, btnSaveGate.Location.Y);
 				btnSaveGate.Enabled = true;
-				lblGateName.BackColor = Color.Maroon;
+				toolstripTitleGate.BackColor = Color.Maroon;
 			}
 			else {
 				lblGateName.Text = lblGateName.Text.Replace(" (unsaved)", "");
-				btnSaveGate.Location = new Point(lblGateName.Location.X + lblGateName.Size.Width, btnSaveGate.Location.Y);
 				btnSaveGate.Enabled = false;
-				lblGateName.BackColor = Color.FromArgb(40, 40, 40);
+				toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}
 
@@ -435,6 +441,7 @@ namespace Thumper_Custom_Level_Editor
 				boss_patterns.Add(s);
 			}
 			_save.Add("boss_patterns", boss_patterns);
+			gatejson = _save;
 			return _save;
 		}
 		#endregion
