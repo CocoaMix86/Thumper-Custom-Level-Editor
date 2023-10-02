@@ -88,6 +88,7 @@ namespace Thumper_Custom_Level_Editor
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
             toolstripTitleGate.Renderer = new ToolStripOverride();
             gateToolStrip.Renderer = new ToolStripOverride();
+            toolstripTitleSample.Renderer = new ToolStripOverride();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -256,7 +257,7 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(panelMaster);
             ControlMoverOrResizer.Init(toolstripTitleMaster);
             ControlMoverOrResizer.Init(panelSample);
-            ControlMoverOrResizer.Init(lblSampleEditor);
+            ControlMoverOrResizer.Init(toolstripTitleSample);
             ControlMoverOrResizer.Init(panelWorkingFolder);
             ControlMoverOrResizer.Init(lblWorkingFolder);
             //

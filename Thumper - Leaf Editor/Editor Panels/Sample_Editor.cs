@@ -33,6 +33,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private string loadedsample;
 		string _loadedsampletemp;
+		dynamic samplejson;
 		ObservableCollection<SampleData> _samplelist = new ObservableCollection<SampleData>();
 		#endregion
 
@@ -43,8 +44,6 @@ namespace Thumper_Custom_Level_Editor
 
 		private void panelSample_SizeChanged(object sender, EventArgs e)
 		{
-			lblSampleEditor.MaximumSize = new Size(panelSample.Width - 16, 0);
-			btnSaveSample.Location = new Point(lblSampleEditor.Location.X + lblSampleEditor.Size.Width, btnSaveSample.Location.Y);
 		}
 
 		private void sampleList_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -303,6 +302,12 @@ namespace Thumper_Custom_Level_Editor
 				btnSampEditorPlaySamp.ForeColor = Color.Green;
 			}
 		}
+
+		private void btnRevertSample_Click(object sender, EventArgs e)
+		{
+			SaveSample(true);
+			LoadSample(samplejson);
+		}
 		#endregion
 
 		#region Methods
@@ -358,8 +363,8 @@ namespace Thumper_Custom_Level_Editor
 			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
 			_samplelist_CollectionChanged(null, null);
 
-
 			///set save flag (samples just loaded, has no changes)
+			samplejson = _load;
 			SaveSample(true);
 		}
 
@@ -372,15 +377,13 @@ namespace Thumper_Custom_Level_Editor
 			if (!save) {
 				if (!lblSampleEditor.Text.Contains("(unsaved)"))
 					lblSampleEditor.Text += " (unsaved)";
-				btnSaveSample.Location = new Point(lblSampleEditor.Location.X + lblSampleEditor.Size.Width, btnSaveSample.Location.Y);
 				btnSaveSample.Enabled = true;
-				lblSampleEditor.BackColor = Color.Maroon;
+				toolstripTitleGate.BackColor = Color.Maroon;
 			}
 			else {
 				lblSampleEditor.Text = lblSampleEditor.Text.Replace(" (unsaved)", "");
-				btnSaveSample.Location = new Point(lblSampleEditor.Location.X + lblSampleEditor.Size.Width, btnSaveSample.Location.Y);
 				btnSaveSample.Enabled = false;
-				lblSampleEditor.BackColor = Color.FromArgb(40, 40, 40);
+				toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}
 
@@ -403,6 +406,8 @@ namespace Thumper_Custom_Level_Editor
 				_items.Add(_samp);
             }
 			_save.Add("items", _items);
+
+			samplejson = _save;
 			return _save;
 		}
 
