@@ -493,12 +493,12 @@ namespace Thumper_Custom_Level_Editor
 				if (!lblMasterName.Text.Contains("(unsaved)"))
 					lblMasterName.Text += " (unsaved)";
 				btnSaveMaster.Enabled = true;
-				lblMasterName.BackColor = Color.Maroon;
+				toolstripTitleMaster.BackColor = Color.Maroon;
 			}
 			else {
 				lblMasterName.Text = lblMasterName.Text.Replace(" (unsaved)", "");
 				btnSaveMaster.Enabled = false;
-				lblMasterName.BackColor = Color.FromArgb(40, 40, 40);
+				toolstripTitleMaster.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}
 

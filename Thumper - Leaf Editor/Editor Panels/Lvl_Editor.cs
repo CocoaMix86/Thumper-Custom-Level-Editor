@@ -408,6 +408,7 @@ namespace Thumper_Custom_Level_Editor
 			if (_loadedlvl == null)
 				return;
 			clipboardpaths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index].paths);
+			btnLvlPasteTunnel.Enabled = true;
 			//if you're on the first row, do nothing
 			/*
 			if (lvlLeafList.CurrentRow.Index == 0)
@@ -678,6 +679,7 @@ namespace Thumper_Custom_Level_Editor
 					MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");
 			}
 			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
+			btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
 			//monke
 		}
 
@@ -718,12 +720,12 @@ namespace Thumper_Custom_Level_Editor
 				if (!lblLvlName.Text.Contains("(unsaved)"))
 					lblLvlName.Text += " (unsaved)";
 				btnSaveLvl.Enabled = true;
-				lblLvlName.BackColor = Color.Maroon;
+				toolstripTitleLvl.BackColor = Color.Maroon;
 			}
 			else {
 				lblLvlName.Text = lblLvlName.Text.Replace(" (unsaved)", "");
 				btnSaveLvl.Enabled = false;
-				lblLvlName.BackColor = Color.FromArgb(40, 40, 40);
+				toolstripTitleLvl.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}
 
