@@ -36,7 +36,8 @@ namespace Thumper_Custom_Level_Editor
 		dynamic lvljson;
 		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();
 
-		LvlLeafData clipboardleaf = new LvlLeafData(); 
+		LvlLeafData clipboardleaf = new LvlLeafData();
+		List<string> clipboardpaths = new List<string>();
 		#endregion
 
 		#region EventHandlers
@@ -406,11 +407,21 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (_loadedlvl == null)
 				return;
+			clipboardpaths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index].paths);
 			//if you're on the first row, do nothing
+			/*
 			if (lvlLeafList.CurrentRow.Index == 0)
 				return;
 			//copies the tunnels of the .leaf above the current select .leaf, to the selected .leaf
 			_lvlleafs[lvlLeafList.CurrentRow.Index].paths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index - 1].paths);
+			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
+			SaveLvl(false);
+			*/
+		}
+
+		private void btnLvlPasteTunnel_Click(object sender, EventArgs e)
+		{
+			_lvlleafs[lvlLeafList.CurrentRow.Index].paths.AddRange(new List<string>(clipboardpaths));
 			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
 			SaveLvl(false);
 		}
