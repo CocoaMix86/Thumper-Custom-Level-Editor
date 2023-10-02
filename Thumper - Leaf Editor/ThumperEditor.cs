@@ -78,8 +78,11 @@ namespace Thumper_Custom_Level_Editor
             menuStrip.Renderer = new MyRenderer();
             contextMenuDock.Renderer = new MyRenderer();
             workingfolderRightClick.Renderer = new MyRenderer();
+            //toolstrip overrides
             masterToolStrip.Renderer = new ToolStripOverride();
             toolstripTitleMaster.Renderer = new ToolStripOverride();
+            lvlToolStrip.Renderer = new ToolStripOverride();
+            toolstripTitleLvl.Renderer = new ToolStripOverride();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
