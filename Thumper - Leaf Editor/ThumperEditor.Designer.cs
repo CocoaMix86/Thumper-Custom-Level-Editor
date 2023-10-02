@@ -4004,7 +4004,7 @@
             this.gateToolStrip.Name = "gateToolStrip";
             this.gateToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.gateToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.gateToolStrip.Size = new System.Drawing.Size(304, 25);
+            this.gateToolStrip.Size = new System.Drawing.Size(309, 25);
             this.gateToolStrip.Stretch = true;
             this.gateToolStrip.TabIndex = 142;
             // 
@@ -4361,7 +4361,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gateLvlList.Size = new System.Drawing.Size(304, 106);
+            this.gateLvlList.Size = new System.Drawing.Size(309, 106);
             this.gateLvlList.TabIndex = 80;
             this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
             this.gateLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellValueChanged);
