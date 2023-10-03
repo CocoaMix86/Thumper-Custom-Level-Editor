@@ -169,8 +169,8 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 			//make user confirm file duplication
-			if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show("Copy selected file?", "Confirm duplication", MessageBoxButtons.YesNo) != DialogResult.Yes)
-				return;
+			//if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show("Copy selected file?", "Confirm duplication", MessageBoxButtons.YesNo) != DialogResult.Yes)
+				//return;
 
 			string newfilename = "";
 			//create file renaming dialog and show it
