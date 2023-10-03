@@ -86,7 +86,7 @@ namespace Thumper_Custom_Level_Editor
 				dropParamPath.SelectedIndex = dropParamPath.FindStringExact(_params[0]);
 				//needs a different selection method if it's a sample
 				if (_tracks[_selecttrack].param_path == "play")
-					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_tracks[_selecttrack].obj_name);
+					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_tracks[_selecttrack].obj_name.Replace(".samp", ""));
 				else if (_params.Count >= 2)
 					dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[1]);
 				else //track lane only uses param[0]
