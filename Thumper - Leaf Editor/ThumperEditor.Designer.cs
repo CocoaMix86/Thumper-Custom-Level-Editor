@@ -138,19 +138,18 @@
             this.panelZoom = new System.Windows.Forms.Panel();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
-            this.lblPopoutLeaf = new System.Windows.Forms.Label();
+            this.leafToolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnTrackAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackUp = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackDown = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackCopy = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackPaste = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackClear = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackPlayback = new System.Windows.Forms.ToolStripButton();
             this.btnLeafSplit = new System.Windows.Forms.Button();
-            this.btnTrackPaste = new System.Windows.Forms.Button();
             this.btnLeafColors = new System.Windows.Forms.Button();
             this.btnLEafInterpLinear = new System.Windows.Forms.Button();
-            this.btnTrackCopy = new System.Windows.Forms.Button();
-            this.btnTrackPlayback = new System.Windows.Forms.Button();
-            this.lblLeafClose = new System.Windows.Forms.Label();
-            this.btnTrackClear = new System.Windows.Forms.Button();
-            this.btnTrackAdd = new System.Windows.Forms.Button();
-            this.btnTrackDown = new System.Windows.Forms.Button();
-            this.btnTrackUp = new System.Windows.Forms.Button();
-            this.btnTrackDelete = new System.Windows.Forms.Button();
             this.dropTimeSig = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
@@ -176,10 +175,15 @@
             this.NUD_TrackHighlight = new System.Windows.Forms.NumericUpDown();
             this.NUD_TrackDoubleclick = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblTrackFileName = new System.Windows.Forms.Label();
-            this.btnSaveLeaf = new System.Windows.Forms.Button();
             this.panelRawData = new System.Windows.Forms.Panel();
             this.lblRawData = new System.Windows.Forms.Label();
+            this.toolstripTitleLeaf = new System.Windows.Forms.ToolStrip();
+            this.lblTrackFileName = new System.Windows.Forms.ToolStripLabel();
+            this.btnSaveLeaf = new System.Windows.Forms.ToolStripButton();
+            this.lblLeafClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutLeaf = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.btnRevertLeaf = new System.Windows.Forms.ToolStripButton();
             this.panelLevel = new System.Windows.Forms.Panel();
             this.lvlLoopToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlLoopAdd = new System.Windows.Forms.ToolStripButton();
@@ -363,6 +367,7 @@
             this.label52 = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.panelSample = new System.Windows.Forms.Panel();
             this.sampleToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnSampleAdd = new System.Windows.Forms.ToolStripButton();
@@ -375,6 +380,12 @@
             this.label50 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
+            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolstripTitleSample = new System.Windows.Forms.ToolStrip();
             this.lblSampleEditor = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveSample = new System.Windows.Forms.ToolStripButton();
@@ -389,19 +400,13 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
-            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label14 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             this.panelZoom.SuspendLayout();
             this.panelLeaf.SuspendLayout();
+            this.leafToolStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).BeginInit();
@@ -409,6 +414,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).BeginInit();
             this.panelRawData.SuspendLayout();
+            this.toolstripTitleLeaf.SuspendLayout();
             this.panelLevel.SuspendLayout();
             this.lvlLoopToolStrip.SuspendLayout();
             this.lvlPathsToolStrip.SuspendLayout();
@@ -1477,19 +1483,10 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLeaf.Controls.Add(this.lblPopoutLeaf);
+            this.panelLeaf.Controls.Add(this.leafToolStrip);
             this.panelLeaf.Controls.Add(this.btnLeafSplit);
-            this.panelLeaf.Controls.Add(this.btnTrackPaste);
             this.panelLeaf.Controls.Add(this.btnLeafColors);
             this.panelLeaf.Controls.Add(this.btnLEafInterpLinear);
-            this.panelLeaf.Controls.Add(this.btnTrackCopy);
-            this.panelLeaf.Controls.Add(this.btnTrackPlayback);
-            this.panelLeaf.Controls.Add(this.lblLeafClose);
-            this.panelLeaf.Controls.Add(this.btnTrackClear);
-            this.panelLeaf.Controls.Add(this.btnTrackAdd);
-            this.panelLeaf.Controls.Add(this.btnTrackDown);
-            this.panelLeaf.Controls.Add(this.btnTrackUp);
-            this.panelLeaf.Controls.Add(this.btnTrackDelete);
             this.panelLeaf.Controls.Add(this.dropTimeSig);
             this.panelLeaf.Controls.Add(this.label1);
             this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
@@ -1500,9 +1497,8 @@
             this.panelLeaf.Controls.Add(this.panel3);
             this.panelLeaf.Controls.Add(this.panel4);
             this.panelLeaf.Controls.Add(this.label2);
-            this.panelLeaf.Controls.Add(this.lblTrackFileName);
-            this.panelLeaf.Controls.Add(this.btnSaveLeaf);
             this.panelLeaf.Controls.Add(this.panelRawData);
+            this.panelLeaf.Controls.Add(this.toolstripTitleLeaf);
             this.panelLeaf.Location = new System.Drawing.Point(327, 385);
             this.panelLeaf.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLeaf.Name = "panelLeaf";
@@ -1514,23 +1510,125 @@
             this.panelLeaf.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLeaf.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
-            // lblPopoutLeaf
+            // leafToolStrip
             // 
-            this.lblPopoutLeaf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPopoutLeaf.AutoSize = true;
-            this.lblPopoutLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPopoutLeaf.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblPopoutLeaf.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPopoutLeaf.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblPopoutLeaf.Location = new System.Drawing.Point(990, 0);
-            this.lblPopoutLeaf.MinimumSize = new System.Drawing.Size(20, 20);
-            this.lblPopoutLeaf.Name = "lblPopoutLeaf";
-            this.lblPopoutLeaf.Size = new System.Drawing.Size(20, 20);
-            this.lblPopoutLeaf.TabIndex = 138;
-            this.lblPopoutLeaf.Text = "▲";
-            this.lblPopoutLeaf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPopoutLeaf, "Dock panel");
-            this.lblPopoutLeaf.Click += new System.EventHandler(this.lblPopin_Click);
+            this.leafToolStrip.AutoSize = false;
+            this.leafToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.leafToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.leafToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.leafToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.leafToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.leafToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnTrackAdd,
+            this.btnTrackDelete,
+            this.btnTrackUp,
+            this.btnTrackDown,
+            this.btnTrackCopy,
+            this.btnTrackPaste,
+            this.btnTrackClear,
+            this.btnTrackPlayback});
+            this.leafToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.leafToolStrip.Location = new System.Drawing.Point(186, 30);
+            this.leafToolStrip.Name = "leafToolStrip";
+            this.leafToolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.leafToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.leafToolStrip.Size = new System.Drawing.Size(25, 235);
+            this.leafToolStrip.Stretch = true;
+            this.leafToolStrip.TabIndex = 142;
+            // 
+            // btnTrackAdd
+            // 
+            this.btnTrackAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackAdd.ForeColor = System.Drawing.Color.White;
+            this.btnTrackAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
+            this.btnTrackAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackAdd.Name = "btnTrackAdd";
+            this.btnTrackAdd.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackAdd.ToolTipText = "Add track";
+            this.btnTrackAdd.Click += new System.EventHandler(this.btnTrackAdd_Click);
+            // 
+            // btnTrackDelete
+            // 
+            this.btnTrackDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackDelete.Enabled = false;
+            this.btnTrackDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnTrackDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackDelete.Name = "btnTrackDelete";
+            this.btnTrackDelete.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackDelete.ToolTipText = "Delete selected track";
+            this.btnTrackDelete.Click += new System.EventHandler(this.btnTrackDelete_Click);
+            // 
+            // btnTrackUp
+            // 
+            this.btnTrackUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackUp.Enabled = false;
+            this.btnTrackUp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowup2;
+            this.btnTrackUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackUp.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackUp.Name = "btnTrackUp";
+            this.btnTrackUp.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackUp.ToolTipText = "Move selected tracks up";
+            this.btnTrackUp.Click += new System.EventHandler(this.btnTrackUp_Click);
+            // 
+            // btnTrackDown
+            // 
+            this.btnTrackDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackDown.Enabled = false;
+            this.btnTrackDown.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowdown2;
+            this.btnTrackDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackDown.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackDown.Name = "btnTrackDown";
+            this.btnTrackDown.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackDown.ToolTipText = "Move selected tracks down";
+            this.btnTrackDown.Click += new System.EventHandler(this.btnTrackDown_Click);
+            // 
+            // btnTrackCopy
+            // 
+            this.btnTrackCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackCopy.Enabled = false;
+            this.btnTrackCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
+            this.btnTrackCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackCopy.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackCopy.Name = "btnTrackCopy";
+            this.btnTrackCopy.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackCopy.ToolTipText = "Copy selected track";
+            this.btnTrackCopy.Click += new System.EventHandler(this.btnTrackCopy_Click);
+            // 
+            // btnTrackPaste
+            // 
+            this.btnTrackPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackPaste.Enabled = false;
+            this.btnTrackPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
+            this.btnTrackPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackPaste.Name = "btnTrackPaste";
+            this.btnTrackPaste.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackPaste.ToolTipText = "Paste the copied track";
+            this.btnTrackPaste.Click += new System.EventHandler(this.btnTrackPaste_Click);
+            // 
+            // btnTrackClear
+            // 
+            this.btnTrackClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackClear.Enabled = false;
+            this.btnTrackClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_erase;
+            this.btnTrackClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackClear.Name = "btnTrackClear";
+            this.btnTrackClear.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackClear.ToolTipText = "Clear all values on selected track";
+            this.btnTrackClear.Click += new System.EventHandler(this.btnTrackClear_Click);
+            // 
+            // btnTrackPlayback
+            // 
+            this.btnTrackPlayback.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackPlayback.Enabled = false;
+            this.btnTrackPlayback.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_play2;
+            this.btnTrackPlayback.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackPlayback.Name = "btnTrackPlayback";
+            this.btnTrackPlayback.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackPlayback.ToolTipText = resources.GetString("btnTrackPlayback.ToolTipText");
+            this.btnTrackPlayback.Click += new System.EventHandler(this.btnTrackPlayback_Click);
             // 
             // btnLeafSplit
             // 
@@ -1548,24 +1646,6 @@
             this.btnLeafSplit.UseCompatibleTextRendering = true;
             this.btnLeafSplit.UseVisualStyleBackColor = false;
             this.btnLeafSplit.Click += new System.EventHandler(this.btnLeafSplit_Click);
-            // 
-            // btnTrackPaste
-            // 
-            this.btnTrackPaste.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackPaste.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackPaste.Enabled = false;
-            this.btnTrackPaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackPaste.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackPaste.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnTrackPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste;
-            this.btnTrackPaste.Location = new System.Drawing.Point(189, 137);
-            this.btnTrackPaste.Name = "btnTrackPaste";
-            this.btnTrackPaste.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackPaste.TabIndex = 111;
-            this.toolTip1.SetToolTip(this.btnTrackPaste, "Paste track from clipboard");
-            this.btnTrackPaste.UseCompatibleTextRendering = true;
-            this.btnTrackPaste.UseVisualStyleBackColor = false;
-            this.btnTrackPaste.Click += new System.EventHandler(this.btnTrackPaste_Click);
             // 
             // btnLeafColors
             // 
@@ -1601,144 +1681,6 @@
             this.btnLEafInterpLinear.UseCompatibleTextRendering = true;
             this.btnLEafInterpLinear.UseVisualStyleBackColor = false;
             this.btnLEafInterpLinear.Click += new System.EventHandler(this.btnLEafInterpLinear_Click);
-            // 
-            // btnTrackCopy
-            // 
-            this.btnTrackCopy.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackCopy.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackCopy.Enabled = false;
-            this.btnTrackCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackCopy.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackCopy.ForeColor = System.Drawing.Color.PaleGreen;
-            this.btnTrackCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy;
-            this.btnTrackCopy.Location = new System.Drawing.Point(189, 115);
-            this.btnTrackCopy.Name = "btnTrackCopy";
-            this.btnTrackCopy.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackCopy.TabIndex = 102;
-            this.toolTip1.SetToolTip(this.btnTrackCopy, "Copy track to clipboard");
-            this.btnTrackCopy.UseCompatibleTextRendering = true;
-            this.btnTrackCopy.UseVisualStyleBackColor = false;
-            this.btnTrackCopy.Click += new System.EventHandler(this.btnTrackCopy_Click);
-            // 
-            // btnTrackPlayback
-            // 
-            this.btnTrackPlayback.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackPlayback.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnTrackPlayback.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackPlayback.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackPlayback.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackPlayback.ForeColor = System.Drawing.Color.Green;
-            this.btnTrackPlayback.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackPlayback.Image")));
-            this.btnTrackPlayback.Location = new System.Drawing.Point(189, 188);
-            this.btnTrackPlayback.Name = "btnTrackPlayback";
-            this.btnTrackPlayback.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnTrackPlayback.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackPlayback.TabIndex = 98;
-            this.toolTip1.SetToolTip(this.btnTrackPlayback, resources.GetString("btnTrackPlayback.ToolTip"));
-            this.btnTrackPlayback.UseCompatibleTextRendering = true;
-            this.btnTrackPlayback.UseVisualStyleBackColor = false;
-            this.btnTrackPlayback.Click += new System.EventHandler(this.btnTrackPlayback_Click);
-            // 
-            // lblLeafClose
-            // 
-            this.lblLeafClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLeafClose.AutoSize = true;
-            this.lblLeafClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblLeafClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblLeafClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLeafClose.Location = new System.Drawing.Point(1009, 0);
-            this.lblLeafClose.MinimumSize = new System.Drawing.Size(20, 20);
-            this.lblLeafClose.Name = "lblLeafClose";
-            this.lblLeafClose.Size = new System.Drawing.Size(20, 20);
-            this.lblLeafClose.TabIndex = 51;
-            this.lblLeafClose.Text = "x";
-            this.lblLeafClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblLeafClose.Click += new System.EventHandler(this.lblLeafClose_Click);
-            // 
-            // btnTrackClear
-            // 
-            this.btnTrackClear.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackClear.Enabled = false;
-            this.btnTrackClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackClear.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackClear.ForeColor = System.Drawing.Color.Red;
-            this.btnTrackClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_trash;
-            this.btnTrackClear.Location = new System.Drawing.Point(189, 160);
-            this.btnTrackClear.Name = "btnTrackClear";
-            this.btnTrackClear.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackClear.TabIndex = 67;
-            this.toolTip1.SetToolTip(this.btnTrackClear, "Clears the selected track\'s data points. CANNOT BE UNDONE");
-            this.btnTrackClear.UseCompatibleTextRendering = true;
-            this.btnTrackClear.UseVisualStyleBackColor = false;
-            this.btnTrackClear.Click += new System.EventHandler(this.btnTrackClear_Click);
-            // 
-            // btnTrackAdd
-            // 
-            this.btnTrackAdd.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackAdd.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackAdd.ForeColor = System.Drawing.Color.Black;
-            this.btnTrackAdd.Location = new System.Drawing.Point(189, 27);
-            this.btnTrackAdd.Name = "btnTrackAdd";
-            this.btnTrackAdd.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackAdd.TabIndex = 47;
-            this.btnTrackAdd.Text = "+";
-            this.btnTrackAdd.UseCompatibleTextRendering = true;
-            this.btnTrackAdd.UseVisualStyleBackColor = false;
-            this.btnTrackAdd.Click += new System.EventHandler(this.btnTrackAdd_Click);
-            // 
-            // btnTrackDown
-            // 
-            this.btnTrackDown.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackDown.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackDown.Enabled = false;
-            this.btnTrackDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackDown.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackDown.ForeColor = System.Drawing.Color.Black;
-            this.btnTrackDown.Location = new System.Drawing.Point(189, 93);
-            this.btnTrackDown.Name = "btnTrackDown";
-            this.btnTrackDown.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackDown.TabIndex = 50;
-            this.btnTrackDown.Text = "↓";
-            this.btnTrackDown.UseCompatibleTextRendering = true;
-            this.btnTrackDown.UseVisualStyleBackColor = false;
-            this.btnTrackDown.Click += new System.EventHandler(this.btnTrackDown_Click);
-            // 
-            // btnTrackUp
-            // 
-            this.btnTrackUp.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackUp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackUp.Enabled = false;
-            this.btnTrackUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackUp.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackUp.ForeColor = System.Drawing.Color.Black;
-            this.btnTrackUp.Location = new System.Drawing.Point(189, 71);
-            this.btnTrackUp.Name = "btnTrackUp";
-            this.btnTrackUp.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackUp.TabIndex = 49;
-            this.btnTrackUp.Text = "↑";
-            this.btnTrackUp.UseCompatibleTextRendering = true;
-            this.btnTrackUp.UseVisualStyleBackColor = false;
-            this.btnTrackUp.Click += new System.EventHandler(this.btnTrackUp_Click);
-            // 
-            // btnTrackDelete
-            // 
-            this.btnTrackDelete.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackDelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackDelete.Enabled = false;
-            this.btnTrackDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackDelete.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackDelete.ForeColor = System.Drawing.Color.Black;
-            this.btnTrackDelete.Location = new System.Drawing.Point(189, 49);
-            this.btnTrackDelete.Name = "btnTrackDelete";
-            this.btnTrackDelete.Size = new System.Drawing.Size(22, 22);
-            this.btnTrackDelete.TabIndex = 48;
-            this.btnTrackDelete.Text = "-";
-            this.btnTrackDelete.UseCompatibleTextRendering = true;
-            this.btnTrackDelete.UseVisualStyleBackColor = false;
-            this.btnTrackDelete.Click += new System.EventHandler(this.btnTrackDelete_Click);
             // 
             // dropTimeSig
             // 
@@ -2123,35 +2065,6 @@
             this.label2.TabIndex = 46;
             this.label2.Text = "Time Sig.";
             // 
-            // lblTrackFileName
-            // 
-            this.lblTrackFileName.AutoSize = true;
-            this.lblTrackFileName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.lblTrackFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTrackFileName.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblTrackFileName.Location = new System.Drawing.Point(0, 0);
-            this.lblTrackFileName.Margin = new System.Windows.Forms.Padding(0);
-            this.lblTrackFileName.Name = "lblTrackFileName";
-            this.lblTrackFileName.Size = new System.Drawing.Size(82, 16);
-            this.lblTrackFileName.TabIndex = 47;
-            this.lblTrackFileName.Text = "Leaf Editor";
-            // 
-            // btnSaveLeaf
-            // 
-            this.btnSaveLeaf.BackColor = System.Drawing.Color.Transparent;
-            this.btnSaveLeaf.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSaveLeaf.Enabled = false;
-            this.btnSaveLeaf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveLeaf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.btnSaveLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
-            this.btnSaveLeaf.Location = new System.Drawing.Point(78, -5);
-            this.btnSaveLeaf.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSaveLeaf.Name = "btnSaveLeaf";
-            this.btnSaveLeaf.Size = new System.Drawing.Size(25, 25);
-            this.btnSaveLeaf.TabIndex = 97;
-            this.btnSaveLeaf.UseVisualStyleBackColor = false;
-            this.btnSaveLeaf.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
             // panelRawData
             // 
             this.panelRawData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -2182,6 +2095,94 @@
             this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
             this.lblRawData.Click += new System.EventHandler(this.lblRawData_Click);
             // 
+            // toolstripTitleLeaf
+            // 
+            this.toolstripTitleLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleLeaf.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleLeaf.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleLeaf.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblTrackFileName,
+            this.btnSaveLeaf,
+            this.lblLeafClose,
+            this.lblPopoutLeaf,
+            this.toolStripButton5,
+            this.btnRevertLeaf});
+            this.toolstripTitleLeaf.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleLeaf.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleLeaf.Name = "toolstripTitleLeaf";
+            this.toolstripTitleLeaf.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleLeaf.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleLeaf.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleLeaf.Size = new System.Drawing.Size(1030, 22);
+            this.toolstripTitleLeaf.TabIndex = 141;
+            this.toolstripTitleLeaf.Text = "titlebar";
+            // 
+            // lblTrackFileName
+            // 
+            this.lblTrackFileName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTrackFileName.ForeColor = System.Drawing.Color.PaleGreen;
+            this.lblTrackFileName.Name = "lblTrackFileName";
+            this.lblTrackFileName.Size = new System.Drawing.Size(68, 19);
+            this.lblTrackFileName.Text = "Leaf Editor";
+            // 
+            // btnSaveLeaf
+            // 
+            this.btnSaveLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveLeaf.Enabled = false;
+            this.btnSaveLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
+            this.btnSaveLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveLeaf.Name = "btnSaveLeaf";
+            this.btnSaveLeaf.Size = new System.Drawing.Size(23, 19);
+            this.btnSaveLeaf.ToolTipText = "Save leaf file";
+            this.btnSaveLeaf.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // lblLeafClose
+            // 
+            this.lblLeafClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblLeafClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblLeafClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblLeafClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblLeafClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblLeafClose.Name = "lblLeafClose";
+            this.lblLeafClose.Size = new System.Drawing.Size(23, 22);
+            this.lblLeafClose.Text = "toolStripButton6";
+            this.lblLeafClose.ToolTipText = "Close panel";
+            this.lblLeafClose.Click += new System.EventHandler(this.lblLeafClose_Click);
+            // 
+            // lblPopoutLeaf
+            // 
+            this.lblPopoutLeaf.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutLeaf.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutLeaf.Name = "lblPopoutLeaf";
+            this.lblPopoutLeaf.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutLeaf.Text = "Dock panel";
+            this.lblPopoutLeaf.ToolTipText = "Undock panel";
+            this.lblPopoutLeaf.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 19);
+            this.toolStripButton5.ToolTipText = "Reload available loop tracks from workingfolder";
+            // 
+            // btnRevertLeaf
+            // 
+            this.btnRevertLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRevertLeaf.Enabled = false;
+            this.btnRevertLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
+            this.btnRevertLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRevertLeaf.Name = "btnRevertLeaf";
+            this.btnRevertLeaf.Size = new System.Drawing.Size(23, 19);
+            this.btnRevertLeaf.ToolTipText = "Revert changes to last save";
+            this.btnRevertLeaf.Click += new System.EventHandler(this.btnRevertLeaf_Click);
+            // 
             // panelLevel
             // 
             this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -2209,10 +2210,10 @@
             this.panelLevel.Controls.Add(this.panel1);
             this.panelLevel.Controls.Add(this.lvlLeafList);
             this.panelLevel.Controls.Add(this.toolstripTitleLvl);
-            this.panelLevel.Location = new System.Drawing.Point(466, 30);
+            this.panelLevel.Location = new System.Drawing.Point(494, 11);
             this.panelLevel.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLevel.Name = "panelLevel";
-            this.panelLevel.Size = new System.Drawing.Size(890, 351);
+            this.panelLevel.Size = new System.Drawing.Size(890, 367);
             this.panelLevel.TabIndex = 46;
             this.panelLevel.Tag = "editorpanel";
             this.panelLevel.Visible = false;
@@ -2222,6 +2223,7 @@
             // 
             // lvlLoopToolStrip
             // 
+            this.lvlLoopToolStrip.AutoSize = false;
             this.lvlLoopToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lvlLoopToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.lvlLoopToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
@@ -2231,11 +2233,11 @@
             this.btnLvlLoopAdd,
             this.btnLvlLoopDelete});
             this.lvlLoopToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlLoopToolStrip.Location = new System.Drawing.Point(497, 229);
+            this.lvlLoopToolStrip.Location = new System.Drawing.Point(496, 175);
             this.lvlLoopToolStrip.Name = "lvlLoopToolStrip";
             this.lvlLoopToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.lvlLoopToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.lvlLoopToolStrip.Size = new System.Drawing.Size(24, 50);
+            this.lvlLoopToolStrip.Size = new System.Drawing.Size(25, 50);
             this.lvlLoopToolStrip.Stretch = true;
             this.lvlLoopToolStrip.TabIndex = 144;
             // 
@@ -2248,7 +2250,7 @@
             this.btnLvlLoopAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlLoopAdd.Margin = new System.Windows.Forms.Padding(0);
             this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
-            this.btnLvlLoopAdd.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlLoopAdd.Size = new System.Drawing.Size(24, 24);
             this.btnLvlLoopAdd.ToolTipText = "Add new path/tunnel";
             this.btnLvlLoopAdd.Click += new System.EventHandler(this.btnLvlLoopAdd_Click);
             // 
@@ -2260,12 +2262,13 @@
             this.btnLvlLoopDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlLoopDelete.Margin = new System.Windows.Forms.Padding(0);
             this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
-            this.btnLvlLoopDelete.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlLoopDelete.Size = new System.Drawing.Size(24, 24);
             this.btnLvlLoopDelete.ToolTipText = "Delete selected path";
             this.btnLvlLoopDelete.Click += new System.EventHandler(this.btnLvlLoopDelete_Click);
             // 
             // lvlPathsToolStrip
             // 
+            this.lvlPathsToolStrip.AutoSize = false;
             this.lvlPathsToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lvlPathsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.lvlPathsToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
@@ -2278,11 +2281,11 @@
             this.btnLvlPasteTunnel,
             this.chkTunnelCopy});
             this.lvlPathsToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlPathsToolStrip.Location = new System.Drawing.Point(248, 229);
+            this.lvlPathsToolStrip.Location = new System.Drawing.Point(247, 175);
             this.lvlPathsToolStrip.Name = "lvlPathsToolStrip";
             this.lvlPathsToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.lvlPathsToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.lvlPathsToolStrip.Size = new System.Drawing.Size(24, 131);
+            this.lvlPathsToolStrip.Size = new System.Drawing.Size(25, 135);
             this.lvlPathsToolStrip.Stretch = true;
             this.lvlPathsToolStrip.TabIndex = 143;
             // 
@@ -2296,7 +2299,7 @@
             this.btnLvlPathAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlPathAdd.Margin = new System.Windows.Forms.Padding(0);
             this.btnLvlPathAdd.Name = "btnLvlPathAdd";
-            this.btnLvlPathAdd.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlPathAdd.Size = new System.Drawing.Size(24, 24);
             this.btnLvlPathAdd.ToolTipText = "Add new path/tunnel";
             this.btnLvlPathAdd.Click += new System.EventHandler(this.btnLvlPathAdd_Click);
             // 
@@ -2308,7 +2311,7 @@
             this.btnLvlPathDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlPathDelete.Margin = new System.Windows.Forms.Padding(0);
             this.btnLvlPathDelete.Name = "btnLvlPathDelete";
-            this.btnLvlPathDelete.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlPathDelete.Size = new System.Drawing.Size(24, 24);
             this.btnLvlPathDelete.ToolTipText = "Delete selected path";
             this.btnLvlPathDelete.Click += new System.EventHandler(this.btnLvlPathDelete_Click);
             // 
@@ -2319,7 +2322,7 @@
             this.btnLvlCopyTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.btnLvlCopyTunnel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
-            this.btnLvlCopyTunnel.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlCopyTunnel.Size = new System.Drawing.Size(24, 24);
             this.btnLvlCopyTunnel.ToolTipText = "Copy all paths/tunnels";
             this.btnLvlCopyTunnel.Click += new System.EventHandler(this.btnLvlCopyTunnel_Click);
             // 
@@ -2330,7 +2333,7 @@
             this.btnLvlPasteTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
             this.btnLvlPasteTunnel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlPasteTunnel.Name = "btnLvlPasteTunnel";
-            this.btnLvlPasteTunnel.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlPasteTunnel.Size = new System.Drawing.Size(24, 24);
             this.btnLvlPasteTunnel.ToolTipText = "Paste copied paths/tunnels";
             this.btnLvlPasteTunnel.Click += new System.EventHandler(this.btnLvlPasteTunnel_Click);
             // 
@@ -2341,11 +2344,12 @@
             this.chkTunnelCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_sling;
             this.chkTunnelCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.chkTunnelCopy.Name = "chkTunnelCopy";
-            this.chkTunnelCopy.Size = new System.Drawing.Size(23, 24);
+            this.chkTunnelCopy.Size = new System.Drawing.Size(24, 24);
             this.chkTunnelCopy.ToolTipText = "When enabled, new leafs added will copy the paths\r\nof the previous leaf.";
             // 
             // lvlVolumeToolStrip
             // 
+            this.lvlVolumeToolStrip.AutoSize = false;
             this.lvlVolumeToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lvlVolumeToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.lvlVolumeToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
@@ -2356,11 +2360,11 @@
             this.btnLvlSeqDelete,
             this.btnLvlSeqClear});
             this.lvlVolumeToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlVolumeToolStrip.Location = new System.Drawing.Point(248, 49);
+            this.lvlVolumeToolStrip.Location = new System.Drawing.Point(247, 49);
             this.lvlVolumeToolStrip.Name = "lvlVolumeToolStrip";
             this.lvlVolumeToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.lvlVolumeToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.lvlVolumeToolStrip.Size = new System.Drawing.Size(24, 77);
+            this.lvlVolumeToolStrip.Size = new System.Drawing.Size(25, 77);
             this.lvlVolumeToolStrip.Stretch = true;
             this.lvlVolumeToolStrip.TabIndex = 142;
             // 
@@ -2374,7 +2378,7 @@
             this.btnLvlSeqAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlSeqAdd.Margin = new System.Windows.Forms.Padding(0);
             this.btnLvlSeqAdd.Name = "btnLvlSeqAdd";
-            this.btnLvlSeqAdd.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlSeqAdd.Size = new System.Drawing.Size(24, 24);
             this.btnLvlSeqAdd.ToolTipText = "Add new volume track";
             this.btnLvlSeqAdd.Click += new System.EventHandler(this.btnLvlSeqAdd_Click);
             // 
@@ -2386,7 +2390,7 @@
             this.btnLvlSeqDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlSeqDelete.Margin = new System.Windows.Forms.Padding(0);
             this.btnLvlSeqDelete.Name = "btnLvlSeqDelete";
-            this.btnLvlSeqDelete.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlSeqDelete.Size = new System.Drawing.Size(24, 24);
             this.btnLvlSeqDelete.ToolTipText = "Delete selected volume track";
             this.btnLvlSeqDelete.Click += new System.EventHandler(this.btnLvlSeqDelete_Click);
             // 
@@ -2397,7 +2401,7 @@
             this.btnLvlSeqClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_erase;
             this.btnLvlSeqClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLvlSeqClear.Name = "btnLvlSeqClear";
-            this.btnLvlSeqClear.Size = new System.Drawing.Size(23, 24);
+            this.btnLvlSeqClear.Size = new System.Drawing.Size(24, 24);
             this.btnLvlSeqClear.ToolTipText = "Erase all set values";
             this.btnLvlSeqClear.Click += new System.EventHandler(this.btnLvlSeqClear_Click);
             // 
@@ -2419,7 +2423,7 @@
             this.btnLvlLeafPaste,
             this.btnLvlRefreshBeats});
             this.lvlToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlToolStrip.Location = new System.Drawing.Point(3, 190);
+            this.lvlToolStrip.Location = new System.Drawing.Point(3, 206);
             this.lvlToolStrip.Name = "lvlToolStrip";
             this.lvlToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.lvlToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -2516,7 +2520,7 @@
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label39.ForeColor = System.Drawing.Color.Silver;
-            this.label39.Location = new System.Drawing.Point(69, 216);
+            this.label39.Location = new System.Drawing.Point(69, 232);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(91, 15);
             this.label39.TabIndex = 117;
@@ -2552,7 +2556,7 @@
             "TUTORIAL_TURN_LEFT",
             "TUTORIAL_GRIND",
             "TUTORIAL_POWER_GRIND"});
-            this.dropLvlTutorial.Location = new System.Drawing.Point(97, 300);
+            this.dropLvlTutorial.Location = new System.Drawing.Point(97, 316);
             this.dropLvlTutorial.Name = "dropLvlTutorial";
             this.dropLvlTutorial.Size = new System.Drawing.Size(142, 21);
             this.dropLvlTutorial.TabIndex = 90;
@@ -2565,7 +2569,7 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.White;
-            this.label26.Location = new System.Drawing.Point(18, 301);
+            this.label26.Location = new System.Drawing.Point(18, 317);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(77, 15);
             this.label26.TabIndex = 91;
@@ -2583,7 +2587,7 @@
             this.dropLvlInput.Items.AddRange(new object[] {
             "True",
             "False"});
-            this.dropLvlInput.Location = new System.Drawing.Point(97, 277);
+            this.dropLvlInput.Location = new System.Drawing.Point(97, 293);
             this.dropLvlInput.Name = "dropLvlInput";
             this.dropLvlInput.Size = new System.Drawing.Size(72, 21);
             this.dropLvlInput.TabIndex = 68;
@@ -2596,7 +2600,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(29, 279);
+            this.label25.Location = new System.Drawing.Point(29, 295);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(66, 15);
             this.label25.TabIndex = 89;
@@ -2609,7 +2613,7 @@
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Location = new System.Drawing.Point(46, 257);
+            this.label24.Location = new System.Drawing.Point(46, 273);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(49, 15);
             this.label24.TabIndex = 87;
@@ -2626,7 +2630,7 @@
             0,
             0,
             131072});
-            this.NUD_lvlVolume.Location = new System.Drawing.Point(97, 255);
+            this.NUD_lvlVolume.Location = new System.Drawing.Point(97, 271);
             this.NUD_lvlVolume.Maximum = new decimal(new int[] {
             10,
             0,
@@ -2649,7 +2653,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(2, 236);
+            this.label23.Location = new System.Drawing.Point(2, 252);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(93, 15);
             this.label23.TabIndex = 68;
@@ -2661,7 +2665,7 @@
             this.NUD_lvlApproach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NUD_lvlApproach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.NUD_lvlApproach.ForeColor = System.Drawing.Color.White;
-            this.NUD_lvlApproach.Location = new System.Drawing.Point(97, 234);
+            this.NUD_lvlApproach.Location = new System.Drawing.Point(97, 250);
             this.NUD_lvlApproach.Maximum = new decimal(new int[] {
             255,
             0,
@@ -2684,7 +2688,7 @@
             this.label22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(522, 216);
+            this.label22.Location = new System.Drawing.Point(522, 162);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(99, 13);
             this.label22.TabIndex = 82;
@@ -2728,7 +2732,7 @@
             this.lvlLoopTracks.DefaultCellStyle = dataGridViewCellStyle6;
             this.lvlLoopTracks.EnableHeadersVisualStyles = false;
             this.lvlLoopTracks.GridColor = System.Drawing.Color.Black;
-            this.lvlLoopTracks.Location = new System.Drawing.Point(522, 229);
+            this.lvlLoopTracks.Location = new System.Drawing.Point(522, 175);
             this.lvlLoopTracks.MultiSelect = false;
             this.lvlLoopTracks.Name = "lvlLoopTracks";
             this.lvlLoopTracks.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -2746,7 +2750,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new System.Drawing.Size(363, 117);
+            this.lvlLoopTracks.Size = new System.Drawing.Size(363, 185);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
             this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
@@ -2815,7 +2819,7 @@
             this.lvlSeqObjs.RowTemplate.Height = 20;
             this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlSeqObjs.Size = new System.Drawing.Size(612, 153);
+            this.lvlSeqObjs.Size = new System.Drawing.Size(612, 108);
             this.lvlSeqObjs.TabIndex = 68;
             this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
             this.lvlSeqObjs.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.lvlSeqObjs_ColumnAdded);
@@ -2828,7 +2832,7 @@
             this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(273, 216);
+            this.label21.Location = new System.Drawing.Point(273, 162);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(150, 13);
             this.label21.TabIndex = 80;
@@ -2870,7 +2874,7 @@
             this.lvlLeafPaths.DefaultCellStyle = dataGridViewCellStyle12;
             this.lvlLeafPaths.EnableHeadersVisualStyles = false;
             this.lvlLeafPaths.GridColor = System.Drawing.Color.Black;
-            this.lvlLeafPaths.Location = new System.Drawing.Point(273, 229);
+            this.lvlLeafPaths.Location = new System.Drawing.Point(273, 175);
             this.lvlLeafPaths.MultiSelect = false;
             this.lvlLeafPaths.Name = "lvlLeafPaths";
             this.lvlLeafPaths.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -2889,7 +2893,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 117);
+            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 185);
             this.lvlLeafPaths.TabIndex = 79;
             this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
             this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
@@ -2994,7 +2998,7 @@
             this.lvlLeafList.RowTemplate.Height = 20;
             this.lvlLeafList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafList.Size = new System.Drawing.Size(236, 150);
+            this.lvlLeafList.Size = new System.Drawing.Size(236, 166);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
             this.lvlLeafList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellEnter);
@@ -4465,6 +4469,7 @@
             this.toolStripMenuItem8,
             this.toolStripMenuItem9});
             this.contextMenuNewFile.Name = "workingfolderRightClick";
+            this.contextMenuNewFile.OwnerItem = this.btnWorkNewFile;
             this.contextMenuNewFile.Size = new System.Drawing.Size(114, 114);
             // 
             // toolStripMenuItem5
@@ -4566,11 +4571,11 @@
             this.filterMaster,
             this.filterSamp});
             this.workingToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.workingToolStrip.Location = new System.Drawing.Point(6, 52);
+            this.workingToolStrip.Location = new System.Drawing.Point(8, 52);
             this.workingToolStrip.Name = "workingToolStrip";
             this.workingToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.workingToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.workingToolStrip.Size = new System.Drawing.Size(28, 140);
+            this.workingToolStrip.Size = new System.Drawing.Size(25, 140);
             this.workingToolStrip.Stretch = true;
             this.workingToolStrip.TabIndex = 149;
             // 
@@ -4581,7 +4586,7 @@
             this.filterLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.filterLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterLeaf.Name = "filterLeaf";
-            this.filterLeaf.Size = new System.Drawing.Size(27, 24);
+            this.filterLeaf.Size = new System.Drawing.Size(24, 24);
             this.filterLeaf.ToolTipText = "Leaf files";
             this.filterLeaf.CheckedChanged += new System.EventHandler(this.filterLeaf_CheckedChanged);
             // 
@@ -4592,7 +4597,7 @@
             this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
             this.filterLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterLvl.Name = "filterLvl";
-            this.filterLvl.Size = new System.Drawing.Size(27, 24);
+            this.filterLvl.Size = new System.Drawing.Size(24, 24);
             this.filterLvl.ToolTipText = "Lvl files";
             this.filterLvl.CheckedChanged += new System.EventHandler(this.filterLvl_CheckedChanged);
             // 
@@ -4603,7 +4608,7 @@
             this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
             this.filterGate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterGate.Name = "filterGate";
-            this.filterGate.Size = new System.Drawing.Size(27, 24);
+            this.filterGate.Size = new System.Drawing.Size(24, 24);
             this.filterGate.ToolTipText = "Gate files";
             this.filterGate.CheckedChanged += new System.EventHandler(this.filterGate_CheckedChanged);
             // 
@@ -4614,7 +4619,7 @@
             this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.filterMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterMaster.Name = "filterMaster";
-            this.filterMaster.Size = new System.Drawing.Size(27, 24);
+            this.filterMaster.Size = new System.Drawing.Size(24, 24);
             this.filterMaster.ToolTipText = "Master files";
             this.filterMaster.CheckedChanged += new System.EventHandler(this.filterMaster_CheckedChanged);
             // 
@@ -4625,7 +4630,7 @@
             this.filterSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
             this.filterSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterSamp.Name = "filterSamp";
-            this.filterSamp.Size = new System.Drawing.Size(27, 24);
+            this.filterSamp.Size = new System.Drawing.Size(24, 24);
             this.filterSamp.ToolTipText = "Sample files";
             this.filterSamp.CheckedChanged += new System.EventHandler(this.filterSamp_CheckedChanged);
             // 
@@ -5014,6 +5019,21 @@
             this.toolTip1.SetToolTip(this.label55, "Dock panel");
             this.label55.Click += new System.EventHandler(this.dockbtn_Click);
             // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label14.Location = new System.Drawing.Point(361, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(15, 16);
+            this.label14.TabIndex = 144;
+            this.label14.Text = "?";
+            this.toolTip1.SetToolTip(this.label14, "V. (volume)\r\nP. (pitch)\r\nPan\r\nOf. (offset)\r\nCh. (channel)");
+            // 
             // panelSample
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -5238,6 +5258,59 @@
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             this.sampleList.DragDrop += new System.Windows.Forms.DragEventHandler(this.sampleList_DragDrop);
             this.sampleList.DragEnter += new System.Windows.Forms.DragEventHandler(this.sampleList_DragEnter);
+            // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SampleName.FillWeight = 5F;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Volume.FillWeight = 1F;
+            this.Volume.HeaderText = "V.";
+            this.Volume.Name = "Volume";
+            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Volume.Width = 22;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pitch.FillWeight = 1F;
+            this.Pitch.HeaderText = "P.";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pitch.Width = 21;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pan.FillWeight = 1F;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pan.Width = 32;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Offset.FillWeight = 1F;
+            this.Offset.HeaderText = "Of.";
+            this.Offset.Name = "Offset";
+            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Offset.Width = 27;
+            // 
+            // Channel
+            // 
+            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Channel.FillWeight = 50F;
+            this.Channel.HeaderText = "Ch.";
+            this.Channel.Name = "Channel";
+            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Channel.Width = 49;
             // 
             // toolstripTitleSample
             // 
@@ -5467,74 +5540,6 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SampleName.FillWeight = 5F;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Volume.FillWeight = 1F;
-            this.Volume.HeaderText = "V.";
-            this.Volume.Name = "Volume";
-            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Volume.Width = 22;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pitch.FillWeight = 1F;
-            this.Pitch.HeaderText = "P.";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pitch.Width = 21;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pan.FillWeight = 1F;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pan.Width = 32;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Offset.FillWeight = 1F;
-            this.Offset.HeaderText = "Of.";
-            this.Offset.Name = "Offset";
-            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Offset.Width = 27;
-            // 
-            // Channel
-            // 
-            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Channel.FillWeight = 50F;
-            this.Channel.HeaderText = "Ch.";
-            this.Channel.Name = "Channel";
-            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.Width = 49;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label14.Location = new System.Drawing.Point(361, 22);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(15, 16);
-            this.label14.TabIndex = 144;
-            this.label14.Text = "?";
-            this.toolTip1.SetToolTip(this.label14, "V. (volume)\r\nP. (pitch)\r\nPan\r\nOf. (offset)\r\nCh. (channel)");
-            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5571,6 +5576,8 @@
             this.panelZoom.PerformLayout();
             this.panelLeaf.ResumeLayout(false);
             this.panelLeaf.PerformLayout();
+            this.leafToolStrip.ResumeLayout(false);
+            this.leafToolStrip.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -5582,6 +5589,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).EndInit();
             this.panelRawData.ResumeLayout(false);
             this.panelRawData.PerformLayout();
+            this.toolstripTitleLeaf.ResumeLayout(false);
+            this.toolstripTitleLeaf.PerformLayout();
             this.panelLevel.ResumeLayout(false);
             this.panelLevel.PerformLayout();
             this.lvlLoopToolStrip.ResumeLayout(false);
@@ -5697,12 +5706,7 @@
 		private System.Windows.Forms.Panel panelMaster;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox dropTimeSig;
-		private System.Windows.Forms.Label lblTrackFileName;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-		private System.Windows.Forms.Button btnTrackDown;
-		private System.Windows.Forms.Button btnTrackUp;
-		private System.Windows.Forms.Button btnTrackDelete;
-		private System.Windows.Forms.Button btnTrackAdd;
 		private System.Windows.Forms.Button btnTrackApply;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.Button btnTrackColorDialog;
@@ -5724,8 +5728,6 @@
 		private System.Windows.Forms.ToolStripMenuItem leafnewToolStripMenuItem;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.ComboBox dropTrackLane;
-		private System.Windows.Forms.Button btnTrackClear;
-		private System.Windows.Forms.Label lblLeafClose;
 		private System.Windows.Forms.DataGridView lvlSeqObjs;
 		private System.Windows.Forms.DataGridView lvlLeafList;
 		private System.Windows.Forms.Label label20;
@@ -5833,10 +5835,8 @@
 		private System.Windows.Forms.ToolStripMenuItem bTFMasterToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem bTFFolderToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem bTFSampleToolStripMenuItem;
-		private System.Windows.Forms.Button btnSaveLeaf;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-        private System.Windows.Forms.Button btnTrackPlayback;
         private System.Windows.Forms.Button btnTrackColorImport;
         private System.Windows.Forms.Button btnTrackColorExport;
         private System.Windows.Forms.Button btnLeafObjRefresh;
@@ -5848,7 +5848,6 @@
         private System.Windows.Forms.ToolStripMenuItem SamplesaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveAsToolStripMenuItem;
         private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Button btnTrackCopy;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem SaveAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -5869,7 +5868,6 @@
         private System.Windows.Forms.Panel panelBeeble;
         private System.Windows.Forms.Timer timerBeeble;
         private System.Windows.Forms.ToolStripMenuItem changeGameDirectoryToolStripMenuItem;
-        private System.Windows.Forms.Button btnTrackPaste;
         private System.Windows.Forms.ContextMenuStrip workingfolderRightClick;
         private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
@@ -5880,7 +5878,6 @@
         private System.Windows.Forms.SplitContainer splitBottom1;
         private System.Windows.Forms.SplitContainer splitTop2;
         private System.Windows.Forms.SplitContainer splitBottom2;
-        private System.Windows.Forms.Label lblPopoutLeaf;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label label51;
@@ -6010,6 +6007,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
         private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ToolStrip toolstripTitleLeaf;
+        private System.Windows.Forms.ToolStripLabel lblTrackFileName;
+        private System.Windows.Forms.ToolStripButton btnSaveLeaf;
+        private System.Windows.Forms.ToolStripButton lblLeafClose;
+        private System.Windows.Forms.ToolStripButton lblPopoutLeaf;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton btnRevertLeaf;
+        private System.Windows.Forms.ToolStrip leafToolStrip;
+        private System.Windows.Forms.ToolStripButton btnTrackAdd;
+        private System.Windows.Forms.ToolStripButton btnTrackDelete;
+        private System.Windows.Forms.ToolStripButton btnTrackUp;
+        private System.Windows.Forms.ToolStripButton btnTrackDown;
+        private System.Windows.Forms.ToolStripButton btnTrackCopy;
+        private System.Windows.Forms.ToolStripButton btnTrackPaste;
+        private System.Windows.Forms.ToolStripButton btnTrackClear;
+        private System.Windows.Forms.ToolStripButton btnTrackPlayback;
     }
 }
 

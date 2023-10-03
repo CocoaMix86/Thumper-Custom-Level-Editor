@@ -36,6 +36,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private string loadedleaf;
 		string _loadedleaftemp;
+		dynamic leafjson;
 		public string leafobj;
 		public bool loadingleaf = false;
 
@@ -923,6 +924,12 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
+		private void btnRevertLeaf_Click(object sender, EventArgs e)
+		{
+			SaveLeaf(true);
+			LoadLeaf(leafjson);
+		}
+
 		/// These buttons exist on the Workingfolder panel
 		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
 		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => leafTemplateToolStripMenuItem.PerformClick();
@@ -943,14 +950,14 @@ namespace Thumper_Custom_Level_Editor
 
 			_saveleaf = save;
 			if (!save) {
-				btnSaveLeaf.Location = new Point(lblTrackFileName.Location.X + lblTrackFileName.Size.Width, btnSaveLeaf.Location.Y);
 				btnSaveLeaf.Enabled = true;
-				lblTrackFileName.BackColor = Color.Maroon;
+				btnRevertLeaf.Enabled = true;
+				toolstripTitleLeaf.BackColor = Color.Maroon;
 			}
 			else {
-				btnSaveLeaf.Location = new Point(lblTrackFileName.Location.X + lblTrackFileName.Size.Width, btnSaveLeaf.Location.Y);
 				btnSaveLeaf.Enabled = false;
-				lblTrackFileName.BackColor = Color.FromArgb(40, 40, 40);
+				btnRevertLeaf.Enabled = false;
+				toolstripTitleLeaf.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}
 
@@ -1178,6 +1185,7 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackCopy.Enabled = _tracks.Count > 0;
 			//set save flag to true, since it just barely loaded
 			loadingleaf = false;
+			leafjson = _load;
 			SaveLeaf(true);
 			//re-set the zoom level
 			trackZoom_Scroll(null, null);
@@ -1244,7 +1252,7 @@ namespace Thumper_Custom_Level_Editor
 			_save.Add("beat_cnt", (int)numericUpDown_LeafLength.Value);
 			_save.Add("time_sig", dropTimeSig.Text);
 			///end building JSON output
-
+			leafjson = _save;
 			return _save;
 		}
 		#endregion

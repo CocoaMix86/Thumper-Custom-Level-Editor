@@ -95,6 +95,7 @@ namespace Thumper_Custom_Level_Editor
             toolstripTitleWork.Renderer = new ToolStripOverride();
             workingToolStrip.Renderer = new ToolStripOverride();
             workingToolStrip2.Renderer = new ToolStripOverride();
+            toolstripTitleLeaf.Renderer = new ToolStripOverride();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -255,7 +256,7 @@ namespace Thumper_Custom_Level_Editor
             //set panels to be resizeable
             ControlMoverOrResizer.Init(pictureBox1);
             ControlMoverOrResizer.Init(panelLeaf);
-            ControlMoverOrResizer.Init(lblTrackFileName);
+            ControlMoverOrResizer.Init(toolstripTitleLeaf);
             ControlMoverOrResizer.Init(panelLevel);
             ControlMoverOrResizer.Init(toolstripTitleLvl);
             ControlMoverOrResizer.Init(panelGate);
