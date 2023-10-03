@@ -75,9 +75,11 @@ namespace Thumper_Custom_Level_Editor
         {
             InitializeComponent();
             ColorFormElements();
+            //set custom renderer
             menuStrip.Renderer = new MyRenderer();
             contextMenuDock.Renderer = new MyRenderer();
             workingfolderRightClick.Renderer = new MyRenderer();
+            contextMenuNewFile.Renderer = new MyRenderer();
             //toolstrip overrides
             toolstripTitleMaster.Renderer = new ToolStripOverride();
             masterToolStrip.Renderer = new ToolStripOverride();
@@ -92,6 +94,7 @@ namespace Thumper_Custom_Level_Editor
             sampleToolStrip.Renderer = new ToolStripOverride();
             toolstripTitleWork.Renderer = new ToolStripOverride();
             workingToolStrip.Renderer = new ToolStripOverride();
+            workingToolStrip2.Renderer = new ToolStripOverride();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -339,18 +342,6 @@ namespace Thumper_Custom_Level_Editor
                 //split each section into individual lines
                 var import2 = import[x].Split('\n').ToList();
                 //initialise class so we can add to it
-                /*
-                Object_Params objpar = new Object_Params() {
-                    //name of object is the first line of every set
-                    obj_displayname = import2[0],
-                    obj_name = new List<string>(),
-                    param_displayname = new List<string>(),
-                    param_path = new List<string>(),
-                    trait_type = new List<string>(),
-                    step = new List<string>(),
-                    def = new List<string>(),
-                    footer = new List<string>()
-                };*/
 
                 for (int y = 2; y < import2.Count - 1; y++) {
                     //split each line by ';'. Now each property is separated

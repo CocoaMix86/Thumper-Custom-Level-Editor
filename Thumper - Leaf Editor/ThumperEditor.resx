@@ -246,6 +246,21 @@ without replaying the entire thing.</value>
   <metadata name="toolstripTitleGate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 42</value>
   </metadata>
+  <metadata name="workingToolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>982, 42</value>
+  </metadata>
+  <metadata name="contextMenuNewFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1133, 42</value>
+  </metadata>
+  <data name="btnWorkNewFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC1SURBVDhPtZAxCgIxFESDlp7Dbew9hDYewU62Es8geAYP
+        sgZst1FBz7Lggm0kcb4/xeSvjQOPNPMmIU4yv75Cidmxu6BWDhOF6b4bHmGiEAcGR5goyIA5wkQhHyiO
+        MNECmoaVLKBpWMkCmoaVLKBpWCmnau9hcj6Ekd+m0zX1EuonTBKi7E41YwXdHkg3QorJBm7Q7YGx331l
+        CQae0P/8gqp95JLiNwvoPyT+eryxWffpTLJzb6iLAG6uSBLIAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="workingToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>877, 42</value>
   </metadata>

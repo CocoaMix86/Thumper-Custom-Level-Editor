@@ -11,11 +11,6 @@ namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{
-		private void panelWorkingFolder_SizeChanged(object sender, EventArgs e)
-		{
-			//lblWorkingFolder.MaximumSize = new Size(panelWorkingFolder.Width - 16, 0);
-		}
-
 		private void workingfolderFiles_SelectionChanged(object sender, EventArgs e)
 		{
 			//do nothing if selection changes to 0
@@ -143,6 +138,8 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//enable button
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
+			btnWorkCopy.Enabled = workingfolderFiles.RowCount > 0;
+			btnWorkNewFile.Enabled = workingfolderFiles.RowCount > 0;
 			workingfolderFiles.SelectionChanged += workingfolderFiles_SelectionChanged;
 		}
 

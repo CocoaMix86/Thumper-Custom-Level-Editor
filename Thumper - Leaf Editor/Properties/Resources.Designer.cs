@@ -293,6 +293,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_addfile {
+            get {
+                object obj = ResourceManager.GetObject("icon_addfile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_arrowdown2 {
             get {
                 object obj = ResourceManager.GetObject("icon_arrowdown2", resourceCulture);
@@ -376,6 +386,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static System.Drawing.Bitmap icon_erase {
             get {
                 object obj = ResourceManager.GetObject("icon_erase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_folder {
+            get {
+                object obj = ResourceManager.GetObject("icon_folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -596,6 +616,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static System.Drawing.Bitmap icon_template {
             get {
                 object obj = ResourceManager.GetObject("icon_template", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_template1 {
+            get {
+                object obj = ResourceManager.GetObject("icon_template1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

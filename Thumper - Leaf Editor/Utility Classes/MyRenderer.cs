@@ -36,7 +36,15 @@ namespace Thumper_Custom_Level_Editor
     public class ToolStripOverride : ToolStripProfessionalRenderer
     {
         public ToolStripOverride() { }
-
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
+        protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            var btn = e.Item as ToolStripButton;
+            if (btn != null && btn.CheckOnClick && btn.Checked) {
+                Rectangle bounds = new Rectangle(Point.Empty, e.Item.Size);
+                e.Graphics.FillRectangle(Brushes.PaleTurquoise, bounds);
+            }
+            else base.OnRenderButtonBackground(e);
+        }
     }
 }

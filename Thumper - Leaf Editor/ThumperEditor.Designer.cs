@@ -96,6 +96,11 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.interpolatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tentaclesPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeGameDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leafEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.levelEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,11 +112,6 @@
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetMenuPositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetDocksStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tentaclesPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeGameDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.bringToFrontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bTFLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -180,9 +180,6 @@
             this.btnSaveLeaf = new System.Windows.Forms.Button();
             this.panelRawData = new System.Windows.Forms.Panel();
             this.lblRawData = new System.Windows.Forms.Label();
-            this.btnLeafPanelTemplate = new System.Windows.Forms.Button();
-            this.btnLeafPanelOpen = new System.Windows.Forms.Button();
-            this.btnLeafPanelNew = new System.Windows.Forms.Button();
             this.panelLevel = new System.Windows.Forms.Panel();
             this.lvlLoopToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlLoopAdd = new System.Windows.Forms.ToolStripButton();
@@ -237,8 +234,6 @@
             this.lblPopoutLvl = new System.Windows.Forms.ToolStripButton();
             this.btnLvlLoopRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnRevertLvl = new System.Windows.Forms.ToolStripButton();
-            this.btnlvlPanelOpen = new System.Windows.Forms.Button();
-            this.btnlvlPanelNew = new System.Windows.Forms.Button();
             this.panelMaster = new System.Windows.Forms.Panel();
             this.masterToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnMasterLvlAdd = new System.Windows.Forms.ToolStripButton();
@@ -287,8 +282,6 @@
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.btnMasterPanelOpen = new System.Windows.Forms.Button();
-            this.btnMasterPanelNew = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panelGate = new System.Windows.Forms.Panel();
             this.gateToolStrip = new System.Windows.Forms.ToolStrip();
@@ -323,21 +316,25 @@
             this.lblPopoutGate = new System.Windows.Forms.ToolStripButton();
             this.btnGateRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnRevertGate = new System.Windows.Forms.ToolStripButton();
-            this.btnGatePanelOpen = new System.Windows.Forms.Button();
-            this.btnGatePanelNew = new System.Windows.Forms.Button();
             this.panelWorkingFolder = new System.Windows.Forms.Panel();
-            this.workingToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnWorkDelete = new System.Windows.Forms.ToolStripButton();
+            this.workingToolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnLevelFolder = new System.Windows.Forms.ToolStripButton();
+            this.btnWorkNewFile = new System.Windows.Forms.ToolStripDropDownButton();
+            this.contextMenuNewFile = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnLeafPanelTemplate = new System.Windows.Forms.ToolStripButton();
             this.btnWorkCopy = new System.Windows.Forms.ToolStripButton();
-            this.filterSamp = new System.Windows.Forms.ToolStripButton();
-            this.filterMaster = new System.Windows.Forms.ToolStripButton();
-            this.filterGate = new System.Windows.Forms.ToolStripButton();
-            this.filterLvl = new System.Windows.Forms.ToolStripButton();
+            this.btnWorkDelete = new System.Windows.Forms.ToolStripButton();
+            this.workingToolStrip = new System.Windows.Forms.ToolStrip();
             this.filterLeaf = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.btnLevelFolder = new System.Windows.Forms.Button();
-            this.btnSampPanelOpen = new System.Windows.Forms.Button();
-            this.btnSampPanelNew = new System.Windows.Forms.Button();
+            this.filterLvl = new System.Windows.Forms.ToolStripButton();
+            this.filterGate = new System.Windows.Forms.ToolStripButton();
+            this.filterMaster = new System.Windows.Forms.ToolStripButton();
+            this.filterSamp = new System.Windows.Forms.ToolStripButton();
             this.workingfolderFiles = new System.Windows.Forms.DataGridView();
             this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -378,12 +375,6 @@
             this.label50 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
-            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolstripTitleSample = new System.Windows.Forms.ToolStrip();
             this.lblSampleEditor = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveSample = new System.Windows.Forms.ToolStripButton();
@@ -398,6 +389,13 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
+            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label14 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -435,6 +433,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
             this.toolstripTitleGate.SuspendLayout();
             this.panelWorkingFolder.SuspendLayout();
+            this.workingToolStrip2.SuspendLayout();
+            this.contextMenuNewFile.SuspendLayout();
             this.workingToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.workingfolderRightClick.SuspendLayout();
@@ -477,8 +477,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
             this.interpolatorToolStripMenuItem,
-            this.viewToolStripMenuItem,
             this.helpToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.toolStripMenuItem3,
             this.bringToFrontToolStripMenuItem,
             this.bTFLeafToolStripMenuItem,
@@ -525,7 +525,7 @@
             // 
             this.SaveAllToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.SaveAllToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.SaveAllToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
+            this.SaveAllToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
             this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
             this.SaveAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
@@ -886,6 +886,7 @@
             // 
             this.newLevelFolderToolStripMenuItem.BackColor = System.Drawing.Color.ForestGreen;
             this.newLevelFolderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.newLevelFolderToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
             this.newLevelFolderToolStripMenuItem.Name = "newLevelFolderToolStripMenuItem";
             this.newLevelFolderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
             this.newLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
@@ -941,6 +942,55 @@
             this.interpolatorToolStripMenuItem.Size = new System.Drawing.Size(102, 28);
             this.interpolatorToolStripMenuItem.Text = "&Interpolator";
             this.interpolatorToolStripMenuItem.Click += new System.EventHandler(this.interpolatorToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
+            this.helpToolStripMenuItem1,
+            this.tentaclesPathsToolStripMenuItem,
+            this.changeGameDirectoryToolStripMenuItem});
+            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(41, 28);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.aboutToolStripMenuItem.Text = "About...";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem1
+            // 
+            this.helpToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.helpToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(205, 22);
+            this.helpToolStripMenuItem1.Text = "Help...";
+            this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
+            // 
+            // tentaclesPathsToolStripMenuItem
+            // 
+            this.tentaclesPathsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tentaclesPathsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.tentaclesPathsToolStripMenuItem.Name = "tentaclesPathsToolStripMenuItem";
+            this.tentaclesPathsToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.tentaclesPathsToolStripMenuItem.Text = "Tentacles/Paths Visuals";
+            this.tentaclesPathsToolStripMenuItem.Click += new System.EventHandler(this.tentaclesPathsToolStripMenuItem_Click);
+            // 
+            // changeGameDirectoryToolStripMenuItem
+            // 
+            this.changeGameDirectoryToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.changeGameDirectoryToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.changeGameDirectoryToolStripMenuItem.Name = "changeGameDirectoryToolStripMenuItem";
+            this.changeGameDirectoryToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.changeGameDirectoryToolStripMenuItem.Text = "Change Game Directory";
+            this.changeGameDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeGameDirectoryToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -1065,55 +1115,6 @@
             this.resetDocksStripMenuItem.Size = new System.Drawing.Size(196, 26);
             this.resetDocksStripMenuItem.Text = "Reset Docks";
             this.resetDocksStripMenuItem.Click += new System.EventHandler(this.resetDocksStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.helpToolStripMenuItem1,
-            this.tentaclesPathsToolStripMenuItem,
-            this.changeGameDirectoryToolStripMenuItem});
-            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(41, 28);
-            this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.aboutToolStripMenuItem.Text = "About...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem1
-            // 
-            this.helpToolStripMenuItem1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.helpToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(205, 22);
-            this.helpToolStripMenuItem1.Text = "Help...";
-            this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
-            // 
-            // tentaclesPathsToolStripMenuItem
-            // 
-            this.tentaclesPathsToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.tentaclesPathsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.tentaclesPathsToolStripMenuItem.Name = "tentaclesPathsToolStripMenuItem";
-            this.tentaclesPathsToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.tentaclesPathsToolStripMenuItem.Text = "Tentacles/Paths Visuals";
-            this.tentaclesPathsToolStripMenuItem.Click += new System.EventHandler(this.tentaclesPathsToolStripMenuItem_Click);
-            // 
-            // changeGameDirectoryToolStripMenuItem
-            // 
-            this.changeGameDirectoryToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.changeGameDirectoryToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.changeGameDirectoryToolStripMenuItem.Name = "changeGameDirectoryToolStripMenuItem";
-            this.changeGameDirectoryToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.changeGameDirectoryToolStripMenuItem.Text = "Change Game Directory";
-            this.changeGameDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeGameDirectoryToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -2181,51 +2182,6 @@
             this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
             this.lblRawData.Click += new System.EventHandler(this.lblRawData_Click);
             // 
-            // btnLeafPanelTemplate
-            // 
-            this.btnLeafPanelTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLeafPanelTemplate.BackColor = System.Drawing.Color.PaleGreen;
-            this.btnLeafPanelTemplate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLeafPanelTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeafPanelTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafPanelTemplate.Location = new System.Drawing.Point(236, 242);
-            this.btnLeafPanelTemplate.Name = "btnLeafPanelTemplate";
-            this.btnLeafPanelTemplate.Size = new System.Drawing.Size(80, 23);
-            this.btnLeafPanelTemplate.TabIndex = 96;
-            this.btnLeafPanelTemplate.Text = "Open Template";
-            this.btnLeafPanelTemplate.UseVisualStyleBackColor = false;
-            this.btnLeafPanelTemplate.Click += new System.EventHandler(this.btnLeafPanelTemplate_Click);
-            // 
-            // btnLeafPanelOpen
-            // 
-            this.btnLeafPanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLeafPanelOpen.BackColor = System.Drawing.Color.PaleGreen;
-            this.btnLeafPanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLeafPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeafPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafPanelOpen.Location = new System.Drawing.Point(236, 219);
-            this.btnLeafPanelOpen.Name = "btnLeafPanelOpen";
-            this.btnLeafPanelOpen.Size = new System.Drawing.Size(80, 23);
-            this.btnLeafPanelOpen.TabIndex = 95;
-            this.btnLeafPanelOpen.Text = "Open Leaf";
-            this.btnLeafPanelOpen.UseVisualStyleBackColor = false;
-            this.btnLeafPanelOpen.Click += new System.EventHandler(this.btnLeafPanelOpen_Click);
-            // 
-            // btnLeafPanelNew
-            // 
-            this.btnLeafPanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLeafPanelNew.BackColor = System.Drawing.Color.PaleGreen;
-            this.btnLeafPanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLeafPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLeafPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafPanelNew.Location = new System.Drawing.Point(236, 196);
-            this.btnLeafPanelNew.Name = "btnLeafPanelNew";
-            this.btnLeafPanelNew.Size = new System.Drawing.Size(80, 23);
-            this.btnLeafPanelNew.TabIndex = 94;
-            this.btnLeafPanelNew.Text = "New Leaf";
-            this.btnLeafPanelNew.UseVisualStyleBackColor = false;
-            this.btnLeafPanelNew.Click += new System.EventHandler(this.btnLeafPanelNew_Click);
-            // 
             // panelLevel
             // 
             this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -3159,36 +3115,6 @@
             this.btnRevertLvl.ToolTipText = "Revert changes to last save";
             this.btnRevertLvl.Click += new System.EventHandler(this.btnRevertLvl_Click);
             // 
-            // btnlvlPanelOpen
-            // 
-            this.btnlvlPanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnlvlPanelOpen.BackColor = System.Drawing.Color.Green;
-            this.btnlvlPanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnlvlPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnlvlPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnlvlPanelOpen.Location = new System.Drawing.Point(236, 173);
-            this.btnlvlPanelOpen.Name = "btnlvlPanelOpen";
-            this.btnlvlPanelOpen.Size = new System.Drawing.Size(80, 23);
-            this.btnlvlPanelOpen.TabIndex = 1;
-            this.btnlvlPanelOpen.Text = "Open Lvl";
-            this.btnlvlPanelOpen.UseVisualStyleBackColor = false;
-            this.btnlvlPanelOpen.Click += new System.EventHandler(this.btnlvlPanelOpen_Click);
-            // 
-            // btnlvlPanelNew
-            // 
-            this.btnlvlPanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnlvlPanelNew.BackColor = System.Drawing.Color.Green;
-            this.btnlvlPanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnlvlPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnlvlPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnlvlPanelNew.Location = new System.Drawing.Point(236, 150);
-            this.btnlvlPanelNew.Name = "btnlvlPanelNew";
-            this.btnlvlPanelNew.Size = new System.Drawing.Size(80, 23);
-            this.btnlvlPanelNew.TabIndex = 0;
-            this.btnlvlPanelNew.Text = "New Lvl";
-            this.btnlvlPanelNew.UseVisualStyleBackColor = false;
-            this.btnlvlPanelNew.Click += new System.EventHandler(this.btnlvlPanelNew_Click);
-            // 
             // panelMaster
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -3923,36 +3849,6 @@
             this.label31.TabIndex = 97;
             this.label31.Text = "Skybox";
             // 
-            // btnMasterPanelOpen
-            // 
-            this.btnMasterPanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterPanelOpen.BackColor = System.Drawing.Color.SlateBlue;
-            this.btnMasterPanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMasterPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterPanelOpen.Location = new System.Drawing.Point(236, 81);
-            this.btnMasterPanelOpen.Name = "btnMasterPanelOpen";
-            this.btnMasterPanelOpen.Size = new System.Drawing.Size(80, 23);
-            this.btnMasterPanelOpen.TabIndex = 95;
-            this.btnMasterPanelOpen.Text = "Open Master";
-            this.btnMasterPanelOpen.UseVisualStyleBackColor = false;
-            this.btnMasterPanelOpen.Click += new System.EventHandler(this.btnMasterPanelOpen_Click);
-            // 
-            // btnMasterPanelNew
-            // 
-            this.btnMasterPanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterPanelNew.BackColor = System.Drawing.Color.SlateBlue;
-            this.btnMasterPanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMasterPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterPanelNew.Location = new System.Drawing.Point(236, 58);
-            this.btnMasterPanelNew.Name = "btnMasterPanelNew";
-            this.btnMasterPanelNew.Size = new System.Drawing.Size(80, 23);
-            this.btnMasterPanelNew.TabIndex = 94;
-            this.btnMasterPanelNew.Text = "New Master";
-            this.btnMasterPanelNew.UseVisualStyleBackColor = false;
-            this.btnMasterPanelNew.Click += new System.EventHandler(this.btnMasterPanelNew_Click);
-            // 
             // colorDialog1
             // 
             this.colorDialog1.AnyColor = true;
@@ -4010,7 +3906,7 @@
             this.btnGateLvlUp,
             this.btnGateLvlDown});
             this.gateToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.gateToolStrip.Location = new System.Drawing.Point(3, 147);
+            this.gateToolStrip.Location = new System.Drawing.Point(3, 159);
             this.gateToolStrip.Name = "gateToolStrip";
             this.gateToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.gateToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -4077,7 +3973,7 @@
             this.btnGateOpenRestart.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenRestart.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnGateOpenRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 258);
+            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 271);
             this.btnGateOpenRestart.Name = "btnGateOpenRestart";
             this.btnGateOpenRestart.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenRestart.TabIndex = 133;
@@ -4096,7 +3992,7 @@
             this.btnGateOpenPost.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenPost.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnGateOpenPost.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 236);
+            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 249);
             this.btnGateOpenPost.Name = "btnGateOpenPost";
             this.btnGateOpenPost.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPost.TabIndex = 132;
@@ -4115,7 +4011,7 @@
             this.btnGateOpenPre.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenPre.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnGateOpenPre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 214);
+            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 227);
             this.btnGateOpenPre.Name = "btnGateOpenPre";
             this.btnGateOpenPre.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPre.TabIndex = 119;
@@ -4155,7 +4051,7 @@
             "SECTION_BOSS_CRAKHED",
             "SECTION_BOSS_CRAKHED_FINAL",
             "SECTION_BOSS_PYRAMID"});
-            this.dropGateSection.Location = new System.Drawing.Point(85, 281);
+            this.dropGateSection.Location = new System.Drawing.Point(85, 294);
             this.dropGateSection.Name = "dropGateSection";
             this.dropGateSection.Size = new System.Drawing.Size(204, 21);
             this.dropGateSection.TabIndex = 129;
@@ -4171,7 +4067,7 @@
             this.dropGateRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateRestart.ForeColor = System.Drawing.Color.White;
             this.dropGateRestart.FormattingEnabled = true;
-            this.dropGateRestart.Location = new System.Drawing.Point(85, 259);
+            this.dropGateRestart.Location = new System.Drawing.Point(85, 272);
             this.dropGateRestart.Name = "dropGateRestart";
             this.dropGateRestart.Size = new System.Drawing.Size(136, 21);
             this.dropGateRestart.TabIndex = 128;
@@ -4187,7 +4083,7 @@
             this.dropGatePost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGatePost.ForeColor = System.Drawing.Color.White;
             this.dropGatePost.FormattingEnabled = true;
-            this.dropGatePost.Location = new System.Drawing.Point(85, 237);
+            this.dropGatePost.Location = new System.Drawing.Point(85, 250);
             this.dropGatePost.Name = "dropGatePost";
             this.dropGatePost.Size = new System.Drawing.Size(136, 21);
             this.dropGatePost.TabIndex = 127;
@@ -4203,7 +4099,7 @@
             this.dropGatePre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGatePre.ForeColor = System.Drawing.Color.White;
             this.dropGatePre.FormattingEnabled = true;
-            this.dropGatePre.Location = new System.Drawing.Point(85, 215);
+            this.dropGatePre.Location = new System.Drawing.Point(85, 228);
             this.dropGatePre.Name = "dropGatePre";
             this.dropGatePre.Size = new System.Drawing.Size(136, 21);
             this.dropGatePre.TabIndex = 126;
@@ -4216,7 +4112,7 @@
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label44.ForeColor = System.Drawing.Color.White;
-            this.label44.Location = new System.Drawing.Point(7, 283);
+            this.label44.Location = new System.Drawing.Point(7, 296);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(77, 15);
             this.label44.TabIndex = 125;
@@ -4228,7 +4124,7 @@
             this.label43.AutoSize = true;
             this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label43.ForeColor = System.Drawing.Color.White;
-            this.label43.Location = new System.Drawing.Point(20, 261);
+            this.label43.Location = new System.Drawing.Point(20, 274);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(64, 15);
             this.label43.TabIndex = 124;
@@ -4242,7 +4138,7 @@
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label42.ForeColor = System.Drawing.Color.White;
-            this.label42.Location = new System.Drawing.Point(35, 239);
+            this.label42.Location = new System.Drawing.Point(35, 252);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(49, 15);
             this.label42.TabIndex = 123;
@@ -4256,7 +4152,7 @@
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.White;
-            this.label41.Location = new System.Drawing.Point(40, 216);
+            this.label41.Location = new System.Drawing.Point(40, 229);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(44, 15);
             this.label41.TabIndex = 122;
@@ -4270,7 +4166,7 @@
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.Silver;
-            this.label40.Location = new System.Drawing.Point(82, 174);
+            this.label40.Location = new System.Drawing.Point(82, 187);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(102, 15);
             this.label40.TabIndex = 121;
@@ -4282,7 +4178,7 @@
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(50, 194);
+            this.label38.Location = new System.Drawing.Point(50, 207);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(34, 15);
             this.label38.TabIndex = 117;
@@ -4297,7 +4193,7 @@
             this.dropGateBoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateBoss.ForeColor = System.Drawing.Color.White;
             this.dropGateBoss.FormattingEnabled = true;
-            this.dropGateBoss.Location = new System.Drawing.Point(85, 193);
+            this.dropGateBoss.Location = new System.Drawing.Point(85, 206);
             this.dropGateBoss.Name = "dropGateBoss";
             this.dropGateBoss.Size = new System.Drawing.Size(136, 21);
             this.dropGateBoss.TabIndex = 117;
@@ -4371,7 +4267,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gateLvlList.Size = new System.Drawing.Size(309, 106);
+            this.gateLvlList.Size = new System.Drawing.Size(309, 118);
             this.gateLvlList.TabIndex = 80;
             this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
             this.gateLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellValueChanged);
@@ -4402,7 +4298,7 @@
             this.lblPyramidWarn.AutoSize = true;
             this.lblPyramidWarn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPyramidWarn.ForeColor = System.Drawing.Color.Red;
-            this.lblPyramidWarn.Location = new System.Drawing.Point(44, 301);
+            this.lblPyramidWarn.Location = new System.Drawing.Point(44, 314);
             this.lblPyramidWarn.Name = "lblPyramidWarn";
             this.lblPyramidWarn.Size = new System.Drawing.Size(230, 20);
             this.lblPyramidWarn.TabIndex = 134;
@@ -4497,105 +4393,139 @@
             this.btnRevertGate.ToolTipText = "Revert changes to last save";
             this.btnRevertGate.Click += new System.EventHandler(this.btnRevertGate_Click);
             // 
-            // btnGatePanelOpen
-            // 
-            this.btnGatePanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGatePanelOpen.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnGatePanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGatePanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGatePanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGatePanelOpen.Location = new System.Drawing.Point(236, 127);
-            this.btnGatePanelOpen.Name = "btnGatePanelOpen";
-            this.btnGatePanelOpen.Size = new System.Drawing.Size(80, 23);
-            this.btnGatePanelOpen.TabIndex = 119;
-            this.btnGatePanelOpen.Text = "Open Gate";
-            this.btnGatePanelOpen.UseVisualStyleBackColor = false;
-            this.btnGatePanelOpen.Click += new System.EventHandler(this.btnGatePanelOpen_Click);
-            // 
-            // btnGatePanelNew
-            // 
-            this.btnGatePanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGatePanelNew.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnGatePanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGatePanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGatePanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGatePanelNew.Location = new System.Drawing.Point(236, 104);
-            this.btnGatePanelNew.Name = "btnGatePanelNew";
-            this.btnGatePanelNew.Size = new System.Drawing.Size(80, 23);
-            this.btnGatePanelNew.TabIndex = 118;
-            this.btnGatePanelNew.Text = "New Gate";
-            this.btnGatePanelNew.UseVisualStyleBackColor = false;
-            this.btnGatePanelNew.Click += new System.EventHandler(this.btnGatePanelNew_Click);
-            // 
             // panelWorkingFolder
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelWorkingFolder.Controls.Add(this.workingToolStrip2);
             this.panelWorkingFolder.Controls.Add(this.workingToolStrip);
-            this.panelWorkingFolder.Controls.Add(this.btnLevelFolder);
-            this.panelWorkingFolder.Controls.Add(this.btnGatePanelOpen);
-            this.panelWorkingFolder.Controls.Add(this.btnSampPanelOpen);
-            this.panelWorkingFolder.Controls.Add(this.btnSampPanelNew);
-            this.panelWorkingFolder.Controls.Add(this.btnLeafPanelTemplate);
             this.panelWorkingFolder.Controls.Add(this.workingfolderFiles);
-            this.panelWorkingFolder.Controls.Add(this.btnLeafPanelOpen);
-            this.panelWorkingFolder.Controls.Add(this.btnlvlPanelOpen);
-            this.panelWorkingFolder.Controls.Add(this.btnGatePanelNew);
-            this.panelWorkingFolder.Controls.Add(this.btnLeafPanelNew);
-            this.panelWorkingFolder.Controls.Add(this.btnMasterPanelNew);
-            this.panelWorkingFolder.Controls.Add(this.btnlvlPanelNew);
-            this.panelWorkingFolder.Controls.Add(this.btnMasterPanelOpen);
             this.panelWorkingFolder.Controls.Add(this.toolstripTitleWork);
             this.panelWorkingFolder.Location = new System.Drawing.Point(4, 353);
             this.panelWorkingFolder.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelWorkingFolder.Name = "panelWorkingFolder";
-            this.panelWorkingFolder.Size = new System.Drawing.Size(323, 343);
+            this.panelWorkingFolder.Size = new System.Drawing.Size(199, 343);
             this.panelWorkingFolder.TabIndex = 117;
             this.panelWorkingFolder.Tag = "editorpanel";
-            this.panelWorkingFolder.SizeChanged += new System.EventHandler(this.panelWorkingFolder_SizeChanged);
             this.panelWorkingFolder.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelWorkingFolder.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelWorkingFolder.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
-            // workingToolStrip
+            // workingToolStrip2
             // 
-            this.workingToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.workingToolStrip.AutoSize = false;
-            this.workingToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.workingToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.workingToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.workingToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.workingToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.workingToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnWorkDelete,
+            this.workingToolStrip2.AutoSize = false;
+            this.workingToolStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.workingToolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.workingToolStrip2.GripMargin = new System.Windows.Forms.Padding(0);
+            this.workingToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.workingToolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.workingToolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnLevelFolder,
+            this.btnWorkNewFile,
+            this.btnLeafPanelTemplate,
             this.btnWorkCopy,
-            this.filterSamp,
-            this.filterMaster,
-            this.filterGate,
-            this.filterLvl,
-            this.filterLeaf,
-            this.toolStripLabel2});
-            this.workingToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.workingToolStrip.Location = new System.Drawing.Point(4, 26);
-            this.workingToolStrip.Name = "workingToolStrip";
-            this.workingToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.workingToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.workingToolStrip.Size = new System.Drawing.Size(228, 25);
-            this.workingToolStrip.Stretch = true;
-            this.workingToolStrip.TabIndex = 149;
+            this.btnWorkDelete});
+            this.workingToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.workingToolStrip2.Location = new System.Drawing.Point(35, 26);
+            this.workingToolStrip2.Name = "workingToolStrip2";
+            this.workingToolStrip2.Padding = new System.Windows.Forms.Padding(0);
+            this.workingToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.workingToolStrip2.Size = new System.Drawing.Size(123, 25);
+            this.workingToolStrip2.Stretch = true;
+            this.workingToolStrip2.TabIndex = 150;
             // 
-            // btnWorkDelete
+            // btnLevelFolder
             // 
-            this.btnWorkDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnWorkDelete.Enabled = false;
-            this.btnWorkDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnWorkDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnWorkDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.btnWorkDelete.Name = "btnWorkDelete";
-            this.btnWorkDelete.Size = new System.Drawing.Size(24, 25);
-            this.btnWorkDelete.ToolTipText = "Delete selected file";
-            this.btnWorkDelete.Click += new System.EventHandler(this.btnWorkDelete_Click);
+            this.btnLevelFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLevelFolder.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
+            this.btnLevelFolder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLevelFolder.Name = "btnLevelFolder";
+            this.btnLevelFolder.Size = new System.Drawing.Size(24, 22);
+            this.btnLevelFolder.ToolTipText = "Open a level folder";
+            this.btnLevelFolder.Click += new System.EventHandler(this.btnLevelFolder_Click);
+            // 
+            // btnWorkNewFile
+            // 
+            this.btnWorkNewFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnWorkNewFile.DropDown = this.contextMenuNewFile;
+            this.btnWorkNewFile.Enabled = false;
+            this.btnWorkNewFile.Image = ((System.Drawing.Image)(resources.GetObject("btnWorkNewFile.Image")));
+            this.btnWorkNewFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnWorkNewFile.Name = "btnWorkNewFile";
+            this.btnWorkNewFile.ShowDropDownArrow = false;
+            this.btnWorkNewFile.Size = new System.Drawing.Size(24, 22);
+            this.btnWorkNewFile.ToolTipText = "Add a new file to this level";
+            // 
+            // contextMenuNewFile
+            // 
+            this.contextMenuNewFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem5,
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem7,
+            this.toolStripMenuItem8,
+            this.toolStripMenuItem9});
+            this.contextMenuNewFile.Name = "workingfolderRightClick";
+            this.contextMenuNewFile.Size = new System.Drawing.Size(114, 114);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem5.ForeColor = System.Drawing.Color.PaleGreen;
+            this.toolStripMenuItem5.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem5.Text = "Leaf";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem6.ForeColor = System.Drawing.Color.Green;
+            this.toolStripMenuItem6.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem6.Text = "Lvl";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem7.ForeColor = System.Drawing.Color.Orange;
+            this.toolStripMenuItem7.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem7.Text = "Gate";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.gatenewToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            this.toolStripMenuItem8.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem8.Text = "Master";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.masternewToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem9.ForeColor = System.Drawing.Color.Turquoise;
+            this.toolStripMenuItem9.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(113, 22);
+            this.toolStripMenuItem9.Text = "Sample";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.SamplenewToolStripMenuItem_Click);
+            // 
+            // btnLeafPanelTemplate
+            // 
+            this.btnLeafPanelTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLeafPanelTemplate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_template1;
+            this.btnLeafPanelTemplate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafPanelTemplate.Name = "btnLeafPanelTemplate";
+            this.btnLeafPanelTemplate.Size = new System.Drawing.Size(24, 22);
+            this.btnLeafPanelTemplate.ToolTipText = "Open a template file";
+            this.btnLeafPanelTemplate.Click += new System.EventHandler(this.btnLeafPanelTemplate_Click);
             // 
             // btnWorkCopy
             // 
@@ -4609,119 +4539,95 @@
             this.btnWorkCopy.ToolTipText = "Duplicate selected file";
             this.btnWorkCopy.Click += new System.EventHandler(this.btnWorkCopy_Click);
             // 
-            // filterSamp
+            // btnWorkDelete
             // 
-            this.filterSamp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.filterSamp.CheckOnClick = true;
-            this.filterSamp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
-            this.filterSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterSamp.Name = "filterSamp";
-            this.filterSamp.Size = new System.Drawing.Size(24, 22);
-            this.filterSamp.ToolTipText = "Sample files";
-            this.filterSamp.CheckedChanged += new System.EventHandler(this.filterSamp_CheckedChanged);
+            this.btnWorkDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnWorkDelete.Enabled = false;
+            this.btnWorkDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnWorkDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnWorkDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnWorkDelete.Name = "btnWorkDelete";
+            this.btnWorkDelete.Size = new System.Drawing.Size(24, 25);
+            this.btnWorkDelete.ToolTipText = "Delete selected file";
+            this.btnWorkDelete.Click += new System.EventHandler(this.btnWorkDelete_Click);
             // 
-            // filterMaster
+            // workingToolStrip
             // 
-            this.filterMaster.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.filterMaster.CheckOnClick = true;
-            this.filterMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
-            this.filterMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterMaster.Name = "filterMaster";
-            this.filterMaster.Size = new System.Drawing.Size(24, 22);
-            this.filterMaster.ToolTipText = "Master files";
-            this.filterMaster.CheckedChanged += new System.EventHandler(this.filterMaster_CheckedChanged);
-            // 
-            // filterGate
-            // 
-            this.filterGate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.filterGate.CheckOnClick = true;
-            this.filterGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
-            this.filterGate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterGate.Name = "filterGate";
-            this.filterGate.Size = new System.Drawing.Size(24, 22);
-            this.filterGate.ToolTipText = "Gate files";
-            this.filterGate.CheckedChanged += new System.EventHandler(this.filterGate_CheckedChanged);
-            // 
-            // filterLvl
-            // 
-            this.filterLvl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.filterLvl.CheckOnClick = true;
-            this.filterLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
-            this.filterLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterLvl.Name = "filterLvl";
-            this.filterLvl.Size = new System.Drawing.Size(24, 22);
-            this.filterLvl.ToolTipText = "Lvl files";
-            this.filterLvl.CheckedChanged += new System.EventHandler(this.filterLvl_CheckedChanged);
+            this.workingToolStrip.AutoSize = false;
+            this.workingToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.workingToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.workingToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.workingToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.workingToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.workingToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filterLeaf,
+            this.filterLvl,
+            this.filterGate,
+            this.filterMaster,
+            this.filterSamp});
+            this.workingToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.workingToolStrip.Location = new System.Drawing.Point(6, 52);
+            this.workingToolStrip.Name = "workingToolStrip";
+            this.workingToolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.workingToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.workingToolStrip.Size = new System.Drawing.Size(28, 140);
+            this.workingToolStrip.Stretch = true;
+            this.workingToolStrip.TabIndex = 149;
             // 
             // filterLeaf
             // 
-            this.filterLeaf.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.filterLeaf.CheckOnClick = true;
             this.filterLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.filterLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.filterLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterLeaf.Name = "filterLeaf";
-            this.filterLeaf.Size = new System.Drawing.Size(24, 22);
+            this.filterLeaf.Size = new System.Drawing.Size(27, 24);
             this.filterLeaf.ToolTipText = "Leaf files";
             this.filterLeaf.CheckedChanged += new System.EventHandler(this.filterLeaf_CheckedChanged);
             // 
-            // toolStripLabel2
+            // filterLvl
             // 
-            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel2.ForeColor = System.Drawing.Color.White;
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(36, 22);
-            this.toolStripLabel2.Text = "Filter:";
+            this.filterLvl.CheckOnClick = true;
+            this.filterLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
+            this.filterLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterLvl.Name = "filterLvl";
+            this.filterLvl.Size = new System.Drawing.Size(27, 24);
+            this.filterLvl.ToolTipText = "Lvl files";
+            this.filterLvl.CheckedChanged += new System.EventHandler(this.filterLvl_CheckedChanged);
             // 
-            // btnLevelFolder
+            // filterGate
             // 
-            this.btnLevelFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLevelFolder.BackColor = System.Drawing.Color.Blue;
-            this.btnLevelFolder.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLevelFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLevelFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLevelFolder.ForeColor = System.Drawing.Color.White;
-            this.btnLevelFolder.Location = new System.Drawing.Point(236, 35);
-            this.btnLevelFolder.Name = "btnLevelFolder";
-            this.btnLevelFolder.Size = new System.Drawing.Size(80, 23);
-            this.btnLevelFolder.TabIndex = 147;
-            this.btnLevelFolder.Text = "Open Level";
-            this.btnLevelFolder.UseVisualStyleBackColor = false;
-            this.btnLevelFolder.Click += new System.EventHandler(this.btnLevelFolder_Click);
+            this.filterGate.CheckOnClick = true;
+            this.filterGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
+            this.filterGate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterGate.Name = "filterGate";
+            this.filterGate.Size = new System.Drawing.Size(27, 24);
+            this.filterGate.ToolTipText = "Gate files";
+            this.filterGate.CheckedChanged += new System.EventHandler(this.filterGate_CheckedChanged);
             // 
-            // btnSampPanelOpen
+            // filterMaster
             // 
-            this.btnSampPanelOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSampPanelOpen.BackColor = System.Drawing.Color.Turquoise;
-            this.btnSampPanelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSampPanelOpen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSampPanelOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSampPanelOpen.Location = new System.Drawing.Point(236, 288);
-            this.btnSampPanelOpen.Name = "btnSampPanelOpen";
-            this.btnSampPanelOpen.Size = new System.Drawing.Size(80, 23);
-            this.btnSampPanelOpen.TabIndex = 134;
-            this.btnSampPanelOpen.Text = "Open Samples";
-            this.btnSampPanelOpen.UseVisualStyleBackColor = false;
-            this.btnSampPanelOpen.Click += new System.EventHandler(this.btnSampPanelOpen_Click);
+            this.filterMaster.CheckOnClick = true;
+            this.filterMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
+            this.filterMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterMaster.Name = "filterMaster";
+            this.filterMaster.Size = new System.Drawing.Size(27, 24);
+            this.filterMaster.ToolTipText = "Master files";
+            this.filterMaster.CheckedChanged += new System.EventHandler(this.filterMaster_CheckedChanged);
             // 
-            // btnSampPanelNew
+            // filterSamp
             // 
-            this.btnSampPanelNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSampPanelNew.BackColor = System.Drawing.Color.Turquoise;
-            this.btnSampPanelNew.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSampPanelNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSampPanelNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSampPanelNew.Location = new System.Drawing.Point(236, 265);
-            this.btnSampPanelNew.Name = "btnSampPanelNew";
-            this.btnSampPanelNew.Size = new System.Drawing.Size(80, 23);
-            this.btnSampPanelNew.TabIndex = 133;
-            this.btnSampPanelNew.Text = "New Samples";
-            this.btnSampPanelNew.UseVisualStyleBackColor = false;
-            this.btnSampPanelNew.Click += new System.EventHandler(this.btnSampPanelNew_Click);
+            this.filterSamp.CheckOnClick = true;
+            this.filterSamp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
+            this.filterSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterSamp.Name = "filterSamp";
+            this.filterSamp.Size = new System.Drawing.Size(27, 24);
+            this.filterSamp.ToolTipText = "Sample files";
+            this.filterSamp.CheckedChanged += new System.EventHandler(this.filterSamp_CheckedChanged);
             // 
             // workingfolderFiles
             // 
@@ -4763,7 +4669,7 @@
             this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle25;
             this.workingfolderFiles.EnableHeadersVisualStyles = false;
             this.workingfolderFiles.GridColor = System.Drawing.Color.Black;
-            this.workingfolderFiles.Location = new System.Drawing.Point(2, 52);
+            this.workingfolderFiles.Location = new System.Drawing.Point(35, 52);
             this.workingfolderFiles.MultiSelect = false;
             this.workingfolderFiles.Name = "workingfolderFiles";
             this.workingfolderFiles.ReadOnly = true;
@@ -4781,7 +4687,7 @@
             this.workingfolderFiles.RowTemplate.Height = 20;
             this.workingfolderFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.workingfolderFiles.Size = new System.Drawing.Size(230, 280);
+            this.workingfolderFiles.Size = new System.Drawing.Size(159, 286);
             this.workingfolderFiles.TabIndex = 80;
             this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
             this.workingfolderFiles.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseDown);
@@ -4863,7 +4769,7 @@
             this.toolstripTitleWork.Padding = new System.Windows.Forms.Padding(0);
             this.toolstripTitleWork.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolstripTitleWork.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleWork.Size = new System.Drawing.Size(321, 22);
+            this.toolstripTitleWork.Size = new System.Drawing.Size(197, 22);
             this.toolstripTitleWork.TabIndex = 148;
             this.toolstripTitleWork.Text = "titlebar";
             // 
@@ -5112,6 +5018,7 @@
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSample.Controls.Add(this.label14);
             this.panelSample.Controls.Add(this.sampleToolStrip);
             this.panelSample.Controls.Add(this.label45);
             this.panelSample.Controls.Add(this.txtSampPath);
@@ -5331,59 +5238,6 @@
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             this.sampleList.DragDrop += new System.Windows.Forms.DragEventHandler(this.sampleList_DragDrop);
             this.sampleList.DragEnter += new System.Windows.Forms.DragEventHandler(this.sampleList_DragEnter);
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SampleName.FillWeight = 5F;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Volume.FillWeight = 1F;
-            this.Volume.HeaderText = "Volume";
-            this.Volume.Name = "Volume";
-            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Volume.Width = 54;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pitch.FillWeight = 1F;
-            this.Pitch.HeaderText = "Pitch";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pitch.Width = 39;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pan.FillWeight = 1F;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pan.Width = 32;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Offset.FillWeight = 1F;
-            this.Offset.HeaderText = "Offset";
-            this.Offset.Name = "Offset";
-            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Offset.Width = 46;
-            // 
-            // Channel
-            // 
-            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Channel.FillWeight = 50F;
-            this.Channel.HeaderText = "Channel";
-            this.Channel.Name = "Channel";
-            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.Width = 76;
             // 
             // toolstripTitleSample
             // 
@@ -5613,6 +5467,74 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SampleName.FillWeight = 5F;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Volume.FillWeight = 1F;
+            this.Volume.HeaderText = "V.";
+            this.Volume.Name = "Volume";
+            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Volume.Width = 22;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pitch.FillWeight = 1F;
+            this.Pitch.HeaderText = "P.";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pitch.Width = 21;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pan.FillWeight = 1F;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pan.Width = 32;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Offset.FillWeight = 1F;
+            this.Offset.HeaderText = "Of.";
+            this.Offset.Name = "Offset";
+            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Offset.Width = 27;
+            // 
+            // Channel
+            // 
+            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Channel.FillWeight = 50F;
+            this.Channel.HeaderText = "Ch.";
+            this.Channel.Name = "Channel";
+            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Channel.Width = 49;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label14.Location = new System.Drawing.Point(361, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(15, 16);
+            this.label14.TabIndex = 144;
+            this.label14.Text = "?";
+            this.toolTip1.SetToolTip(this.label14, "V. (volume)\r\nP. (pitch)\r\nPan\r\nOf. (offset)\r\nCh. (channel)");
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5698,6 +5620,9 @@
             this.toolstripTitleGate.PerformLayout();
             this.panelWorkingFolder.ResumeLayout(false);
             this.panelWorkingFolder.PerformLayout();
+            this.workingToolStrip2.ResumeLayout(false);
+            this.workingToolStrip2.PerformLayout();
+            this.contextMenuNewFile.ResumeLayout(false);
             this.workingToolStrip.ResumeLayout(false);
             this.workingToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
@@ -5826,8 +5751,6 @@
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Label label28;
 		private System.Windows.Forms.TrackBar trackLvlVolumeZoom;
-		private System.Windows.Forms.Button btnlvlPanelOpen;
-		private System.Windows.Forms.Button btnlvlPanelNew;
 		private System.Windows.Forms.ToolStripMenuItem lvlsaveAsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem leafsaveAsToolStripMenuItem;
 		private System.Windows.Forms.Label label29;
@@ -5849,10 +5772,6 @@
 		private System.Windows.Forms.Label label35;
 		private System.Windows.Forms.ComboBox dropMasterLvlLeader;
 		private System.Windows.Forms.Label label34;
-		private System.Windows.Forms.Button btnMasterPanelOpen;
-		private System.Windows.Forms.Button btnMasterPanelNew;
-		private System.Windows.Forms.Button btnLeafPanelOpen;
-		private System.Windows.Forms.Button btnLeafPanelNew;
 		private System.Windows.Forms.Button btnConfigPathColor;
 		private System.Windows.Forms.Button btnConfigGlowColor;
 		private System.Windows.Forms.Button btnConfigRailColor;
@@ -5862,7 +5781,6 @@
 		private System.Windows.Forms.Label lblConfigColorHelp;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem leafTemplateToolStripMenuItem;
-		private System.Windows.Forms.Button btnLeafPanelTemplate;
 		private System.Windows.Forms.Button btnMasterOpenCheckpoint;
 		private System.Windows.Forms.Button btnMasterOpenIntro;
 		private System.Windows.Forms.Panel panelGate;
@@ -5903,8 +5821,6 @@
 		private System.Windows.Forms.Button btnGateOpenRestart;
 		private System.Windows.Forms.Button btnGateOpenPost;
 		private System.Windows.Forms.Button btnGateOpenPre;
-		private System.Windows.Forms.Button btnGatePanelOpen;
-		private System.Windows.Forms.Button btnGatePanelNew;
 		private System.Windows.Forms.Panel panelSample;
 		private System.Windows.Forms.Label label54;
 		private System.Windows.Forms.DataGridView sampleList;
@@ -5931,8 +5847,6 @@
         private System.Windows.Forms.ToolStripMenuItem SampleopenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveAsToolStripMenuItem;
-        private System.Windows.Forms.Button btnSampPanelOpen;
-        private System.Windows.Forms.Button btnSampPanelNew;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Button btnTrackCopy;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
@@ -5982,7 +5896,6 @@
         private System.Windows.Forms.ToolStripMenuItem contextdockWork;
         private System.Windows.Forms.ToolStripMenuItem pickAPanelToDockItHereToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetDocksStripMenuItem;
-        private System.Windows.Forms.Button btnLevelFolder;
         private System.Windows.Forms.Panel panelRawData;
         private System.Windows.Forms.Label lblRawData;
         private System.Windows.Forms.DataGridViewImageColumn masterfiletype;
@@ -6066,12 +5979,6 @@
         private System.Windows.Forms.ToolStripButton FSBtoSamp;
         private System.Windows.Forms.ToolStripButton btnSampEditorPlaySamp;
         private System.Windows.Forms.ToolStripLabel lblSampleFSBhelp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
         private System.Windows.Forms.ToolStrip toolstripTitleWork;
         private System.Windows.Forms.ToolStripLabel lblWorkingFolder;
         private System.Windows.Forms.ToolStripButton lblWorkClose;
@@ -6079,14 +5986,30 @@
         private System.Windows.Forms.ToolStripButton btnWorkRefresh;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStrip workingToolStrip;
-        private System.Windows.Forms.ToolStripButton btnWorkDelete;
-        private System.Windows.Forms.ToolStripButton btnWorkCopy;
         private System.Windows.Forms.ToolStripButton filterSamp;
         private System.Windows.Forms.ToolStripButton filterMaster;
         private System.Windows.Forms.ToolStripButton filterGate;
         private System.Windows.Forms.ToolStripButton filterLvl;
         private System.Windows.Forms.ToolStripButton filterLeaf;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStrip workingToolStrip2;
+        private System.Windows.Forms.ToolStripButton btnWorkDelete;
+        private System.Windows.Forms.ToolStripButton btnWorkCopy;
+        private System.Windows.Forms.ToolStripButton btnLevelFolder;
+        private System.Windows.Forms.ToolStripDropDownButton btnWorkNewFile;
+        private System.Windows.Forms.ContextMenuStrip contextMenuNewFile;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripButton btnLeafPanelTemplate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
+        private System.Windows.Forms.Label label14;
     }
 }
 

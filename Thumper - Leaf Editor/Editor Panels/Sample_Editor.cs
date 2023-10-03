@@ -253,7 +253,6 @@ namespace Thumper_Custom_Level_Editor
 		}
 		//open or new sample file
 		private void btnSampPanelNew_Click(object sender, EventArgs e) => SamplenewToolStripMenuItem.PerformClick();
-		private void btnSampPanelOpen_Click(object sender, EventArgs e) => SampleopenToolStripMenuItem.PerformClick();
 
 		//Opens an .FSB audio file, hashes the name, and adds it to the loaded SAMP_ file
 		private void FSBtoSamp_Click(object sender, EventArgs e)
@@ -374,14 +373,13 @@ namespace Thumper_Custom_Level_Editor
 
 			_savesample = save;
 			if (!save) {
-				if (!lblSampleEditor.Text.Contains("(unsaved)"))
-					lblSampleEditor.Text += " (unsaved)";
 				btnSaveSample.Enabled = true;
+				btnRevertSample.Enabled = true;
 				toolstripTitleGate.BackColor = Color.Maroon;
 			}
 			else {
-				lblSampleEditor.Text = lblSampleEditor.Text.Replace(" (unsaved)", "");
 				btnSaveSample.Enabled = false;
+				btnRevertSample.Enabled = false;
 				toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}

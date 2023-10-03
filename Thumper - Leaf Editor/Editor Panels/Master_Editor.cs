@@ -386,7 +386,6 @@ namespace Thumper_Custom_Level_Editor
 
 		//buttons that click other buttons
 		private void btnMasterPanelNew_Click(object sender, EventArgs e) => masternewToolStripMenuItem.PerformClick();
-		private void btnMasterPanelOpen_Click(object sender, EventArgs e) => masteropenToolStripMenuItem.PerformClick();
 		//these all load a lvl
 		private void btnMasterOpenIntro_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterIntro.SelectedItem.ToString());
 		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterCheck.SelectedItem.ToString());
@@ -490,14 +489,13 @@ namespace Thumper_Custom_Level_Editor
 
 			_savemaster = save;
 			if (!save) {
-				if (!lblMasterName.Text.Contains("(unsaved)"))
-					lblMasterName.Text += " (unsaved)";
 				btnSaveMaster.Enabled = true;
+				btnRevertMaster.Enabled = true;
 				toolstripTitleMaster.BackColor = Color.Maroon;
 			}
 			else {
-				lblMasterName.Text = lblMasterName.Text.Replace(" (unsaved)", "");
 				btnSaveMaster.Enabled = false;
+				btnRevertMaster.Enabled = false;
 				toolstripTitleMaster.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}

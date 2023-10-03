@@ -320,7 +320,6 @@ namespace Thumper_Custom_Level_Editor
 
 		//buttons that click other buttons
 		private void btnGatePanelNew_Click(object sender, EventArgs e) => gatenewToolStripMenuItem.PerformClick();
-		private void btnGatePanelOpen_Click(object sender, EventArgs e) => gateopenToolStripMenuItem.PerformClick();
 		//I use MasterLoadLvl on these because it's the exact same code to load a lvl
 		private void btnGateOpenPre_Click(object sender, EventArgs e) => MasterLoadLvl(dropGatePre.Text);
 		private void btnGateOpenPost_Click(object sender, EventArgs e) => MasterLoadLvl(dropGatePost.Text);
@@ -390,14 +389,13 @@ namespace Thumper_Custom_Level_Editor
 
 			_savegate = save;
 			if (!save) {
-				if (!lblGateName.Text.Contains("(unsaved)"))
-					lblGateName.Text += " (unsaved)";
 				btnSaveGate.Enabled = true;
+				btnRevertGate.Enabled = true;
 				toolstripTitleGate.BackColor = Color.Maroon;
 			}
 			else {
-				lblGateName.Text = lblGateName.Text.Replace(" (unsaved)", "");
 				btnSaveGate.Enabled = false;
+				btnRevertGate.Enabled = false;
 				toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}

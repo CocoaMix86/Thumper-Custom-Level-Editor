@@ -532,11 +532,6 @@ namespace Thumper_Custom_Level_Editor
 			LoadLvl(lvljson);
 		}
 
-		private void btnlvlPanelOpen_Click(object sender, EventArgs e)
-		{
-			lvlopenToolStripMenuItem.PerformClick();
-		}
-
 		private void btnlvlPanelNew_Click(object sender, EventArgs e)
 		{
 			lvlnewToolStripMenuItem1.PerformClick();
@@ -721,14 +716,13 @@ namespace Thumper_Custom_Level_Editor
 
 			_savelvl = save;
 			if (!save) {
-				if (!lblLvlName.Text.Contains("(unsaved)"))
-					lblLvlName.Text += " (unsaved)";
 				btnSaveLvl.Enabled = true;
+				btnRevertLvl.Enabled = true;
 				toolstripTitleLvl.BackColor = Color.Maroon;
 			}
 			else {
-				lblLvlName.Text = lblLvlName.Text.Replace(" (unsaved)", "");
 				btnSaveLvl.Enabled = false;
+				btnRevertLvl.Enabled = false;
 				toolstripTitleLvl.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}

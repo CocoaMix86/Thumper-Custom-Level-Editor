@@ -925,7 +925,6 @@ namespace Thumper_Custom_Level_Editor
 
 		/// These buttons exist on the Workingfolder panel
 		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
-		private void btnLeafPanelOpen_Click(object sender, EventArgs e) => leafloadToolStripMenuItem.PerformClick();
 		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => leafTemplateToolStripMenuItem.PerformClick();
 		#endregion
 
@@ -944,14 +943,11 @@ namespace Thumper_Custom_Level_Editor
 
 			_saveleaf = save;
 			if (!save) {
-				if (!lblTrackFileName.Text.Contains("(unsaved)"))
-					lblTrackFileName.Text += " (unsaved)";
 				btnSaveLeaf.Location = new Point(lblTrackFileName.Location.X + lblTrackFileName.Size.Width, btnSaveLeaf.Location.Y);
 				btnSaveLeaf.Enabled = true;
 				lblTrackFileName.BackColor = Color.Maroon;
 			}
 			else {
-				lblTrackFileName.Text = lblTrackFileName.Text.Replace(" (unsaved)", "");
 				btnSaveLeaf.Location = new Point(lblTrackFileName.Location.X + lblTrackFileName.Size.Width, btnSaveLeaf.Location.Y);
 				btnSaveLeaf.Enabled = false;
 				lblTrackFileName.BackColor = Color.FromArgb(40, 40, 40);
