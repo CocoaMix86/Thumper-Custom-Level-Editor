@@ -393,6 +393,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_export {
+            get {
+                object obj = ResourceManager.GetObject("icon_export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_folder {
             get {
                 object obj = ResourceManager.GetObject("icon_folder", resourceCulture);
@@ -426,6 +436,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static System.Drawing.Bitmap icon_import {
             get {
                 object obj = ResourceManager.GetObject("icon_import", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_import2 {
+            get {
+                object obj = ResourceManager.GetObject("icon_import2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

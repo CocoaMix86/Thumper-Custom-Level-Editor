@@ -141,9 +141,6 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 42</value>
   </metadata>
-  <metadata name="leafToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 42</value>
-  </metadata>
   <data name="btnTrackPlayback.ToolTipText" xml:space="preserve">
     <value>***CURRENTLY BUGGY. SKIPS BEATS SOMETIMES***
 Click to playback the entire leaf. Plays these objects in time:
@@ -156,17 +153,20 @@ Click to playback the entire leaf. Plays these objects in time:
 
 Playback speed is dependant on the Master BPM.</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnTrackColorImport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB4SURBVDhPtYyxCYAwFEQzjLaWrmYruos4itukEGzVhAt8
+        kjtBog9ed+/cJ/TbcT6JmYZFVsw0LLJipmGRtZ39eKuPWJTslj0cRDEvYWHQxq8P8lipD9bKg2B+EscM
+        FiftCeYlLLQ2kx+qDjDTsMiKmYZFVsz+wLkLZ8eJXUD9F0sAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="label46.ToolTip" xml:space="preserve">
     <value>Interpolation type between beat values. Higher interpolation = smoother transitions/curves,
 but higher intensity calculation. Can decrease FPS.
 THIS AFFECTS IN-GAME ONLY. NOT THIS EDITOR'S INTERPOLATION CALC.</value>
   </data>
-  <metadata name="toolstripTitleLeaf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1300, 42</value>
-  </metadata>
-  <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 42</value>
-  </metadata>
   <metadata name="lvlLoopToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 42</value>
   </metadata>
@@ -297,7 +297,6 @@ without replaying the entire thing.</value>
   <metadata name="contextMenuNewFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1133, 42</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnWorkNewFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

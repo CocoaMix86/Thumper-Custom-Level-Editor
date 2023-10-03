@@ -147,6 +147,8 @@
             this.btnTrackPaste = new System.Windows.Forms.ToolStripButton();
             this.btnTrackClear = new System.Windows.Forms.ToolStripButton();
             this.btnTrackPlayback = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackColorExport = new System.Windows.Forms.ToolStripButton();
+            this.btnTrackColorImport = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.btnLeafObjRefresh = new System.Windows.Forms.Button();
@@ -164,9 +166,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.btnTrackColorDialog = new System.Windows.Forms.Button();
-            this.btnTrackColorImport = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
-            this.btnTrackColorExport = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.NUD_TrackHighlight = new System.Windows.Forms.NumericUpDown();
             this.NUD_TrackDoubleclick = new System.Windows.Forms.NumericUpDown();
@@ -1528,13 +1528,15 @@
             this.btnTrackCopy,
             this.btnTrackPaste,
             this.btnTrackClear,
-            this.btnTrackPlayback});
+            this.btnTrackPlayback,
+            this.btnTrackColorExport,
+            this.btnTrackColorImport});
             this.leafToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.leafToolStrip.Location = new System.Drawing.Point(186, 51);
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.leafToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new System.Drawing.Size(25, 235);
+            this.leafToolStrip.Size = new System.Drawing.Size(25, 323);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -1632,9 +1634,33 @@
             this.btnTrackPlayback.ToolTipText = resources.GetString("btnTrackPlayback.ToolTipText");
             this.btnTrackPlayback.Click += new System.EventHandler(this.btnTrackPlayback_Click);
             // 
+            // btnTrackColorExport
+            // 
+            this.btnTrackColorExport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnTrackColorExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackColorExport.Enabled = false;
+            this.btnTrackColorExport.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_export;
+            this.btnTrackColorExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackColorExport.Name = "btnTrackColorExport";
+            this.btnTrackColorExport.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackColorExport.ToolTipText = "Export a color profile and apply to selected track";
+            this.btnTrackColorExport.Click += new System.EventHandler(this.btnTrackColorExport_Click);
+            // 
+            // btnTrackColorImport
+            // 
+            this.btnTrackColorImport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnTrackColorImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackColorImport.Enabled = false;
+            this.btnTrackColorImport.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackColorImport.Image")));
+            this.btnTrackColorImport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackColorImport.Name = "btnTrackColorImport";
+            this.btnTrackColorImport.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackColorImport.ToolTipText = "Import a color profile and apply to selected track";
+            this.btnTrackColorImport.Click += new System.EventHandler(this.btnTrackColorImport_Click);
+            // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.dropObjects);
             this.panel2.Controls.Add(this.label19);
             this.panel2.Controls.Add(this.label4);
@@ -1645,7 +1671,7 @@
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.btnTrackApply);
             this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel2.Location = new System.Drawing.Point(5, 52);
+            this.panel2.Location = new System.Drawing.Point(3, 52);
             this.panel2.Name = "panel2";
             this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel2.Size = new System.Drawing.Size(180, 151);
@@ -1655,12 +1681,12 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(1, 1);
+            this.label19.ForeColor = System.Drawing.Color.Silver;
+            this.label19.Location = new System.Drawing.Point(29, 1);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(87, 13);
+            this.label19.Size = new System.Drawing.Size(116, 13);
             this.label19.TabIndex = 61;
-            this.label19.Text = "Track Objects";
+            this.label19.Text = "══Track Objects══";
             // 
             // btnLeafObjRefresh
             // 
@@ -1668,8 +1694,8 @@
             this.btnLeafObjRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLeafObjRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeafObjRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeafObjRefresh.ForeColor = System.Drawing.Color.Aqua;
-            this.btnLeafObjRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
+            this.btnLeafObjRefresh.ForeColor = System.Drawing.Color.Black;
+            this.btnLeafObjRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
             this.btnLeafObjRefresh.Location = new System.Drawing.Point(146, 10);
             this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
             this.btnLeafObjRefresh.Size = new System.Drawing.Size(22, 22);
@@ -1731,7 +1757,7 @@
             // 
             // panel3
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.txtTrait);
             this.panel3.Controls.Add(this.label7);
@@ -1742,7 +1768,7 @@
             this.panel3.Controls.Add(this.txtDefault);
             this.panel3.Controls.Add(this.dropLeafStep);
             this.panel3.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel3.Location = new System.Drawing.Point(5, 202);
+            this.panel3.Location = new System.Drawing.Point(3, 202);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(180, 124);
             this.panel3.TabIndex = 109;
@@ -1751,12 +1777,12 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(1, 2);
+            this.label3.ForeColor = System.Drawing.Color.Silver;
+            this.label3.Location = new System.Drawing.Point(23, 2);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 13);
+            this.label3.Size = new System.Drawing.Size(133, 13);
             this.label3.TabIndex = 108;
-            this.label3.Text = "Object Beat Properties";
+            this.label3.Text = "══Object Properties══";
             // 
             // txtTrait
             // 
@@ -1847,51 +1873,48 @@
             // 
             // panel4
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.label15);
             this.panel4.Controls.Add(this.btnTrackColorDialog);
-            this.panel4.Controls.Add(this.btnTrackColorImport);
             this.panel4.Controls.Add(this.label16);
-            this.panel4.Controls.Add(this.btnTrackColorExport);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.NUD_TrackHighlight);
             this.panel4.Controls.Add(this.NUD_TrackDoubleclick);
             this.panel4.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel4.Location = new System.Drawing.Point(5, 325);
+            this.panel4.Location = new System.Drawing.Point(3, 325);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(180, 154);
+            this.panel4.Size = new System.Drawing.Size(180, 98);
             this.panel4.TabIndex = 110;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(1, 2);
+            this.label18.ForeColor = System.Drawing.Color.Silver;
+            this.label18.Location = new System.Drawing.Point(18, 2);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(113, 13);
+            this.label18.Size = new System.Drawing.Size(141, 13);
             this.label18.TabIndex = 60;
-            this.label18.Text = "Cell Visual Options";
+            this.label18.Text = "══Cell Visual Options══";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(36, 30);
+            this.label15.Location = new System.Drawing.Point(20, 23);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(68, 13);
+            this.label15.Size = new System.Drawing.Size(88, 15);
             this.label15.TabIndex = 54;
-            this.label15.Text = "Cell Highlight";
+            this.label15.Text = "Highlight Color";
             // 
             // btnTrackColorDialog
             // 
             this.btnTrackColorDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnTrackColorDialog.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrackColorDialog.Enabled = false;
-            this.btnTrackColorDialog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorDialog.Location = new System.Drawing.Point(110, 25);
+            this.btnTrackColorDialog.Location = new System.Drawing.Point(110, 20);
             this.btnTrackColorDialog.Name = "btnTrackColorDialog";
             this.btnTrackColorDialog.Size = new System.Drawing.Size(57, 23);
             this.btnTrackColorDialog.TabIndex = 55;
@@ -1899,53 +1922,29 @@
             this.btnTrackColorDialog.UseVisualStyleBackColor = false;
             this.btnTrackColorDialog.Click += new System.EventHandler(this.btnTrackColorDialog_Click);
             // 
-            // btnTrackColorImport
-            // 
-            this.btnTrackColorImport.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackColorImport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackColorImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorImport.Location = new System.Drawing.Point(55, 119);
-            this.btnTrackColorImport.Name = "btnTrackColorImport";
-            this.btnTrackColorImport.Size = new System.Drawing.Size(112, 23);
-            this.btnTrackColorImport.TabIndex = 100;
-            this.btnTrackColorImport.Text = "Import Color Profile";
-            this.btnTrackColorImport.UseVisualStyleBackColor = false;
-            this.btnTrackColorImport.Click += new System.EventHandler(this.btnTrackColorImport_Click);
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(11, 76);
+            this.label16.Location = new System.Drawing.Point(3, 69);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(93, 13);
+            this.label16.Size = new System.Drawing.Size(105, 15);
             this.label16.TabIndex = 56;
             this.label16.Text = "Doubleclick Value";
-            // 
-            // btnTrackColorExport
-            // 
-            this.btnTrackColorExport.BackColor = System.Drawing.Color.Gray;
-            this.btnTrackColorExport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackColorExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackColorExport.Location = new System.Drawing.Point(55, 98);
-            this.btnTrackColorExport.Name = "btnTrackColorExport";
-            this.btnTrackColorExport.Size = new System.Drawing.Size(112, 23);
-            this.btnTrackColorExport.TabIndex = 99;
-            this.btnTrackColorExport.Text = "Export Color Profile";
-            this.btnTrackColorExport.UseVisualStyleBackColor = false;
-            this.btnTrackColorExport.Click += new System.EventHandler(this.btnTrackColorExport_Click);
+            this.toolTip1.SetToolTip(this.label16, "The value to auto-insert when doubleclicking a cell");
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(15, 53);
+            this.label17.Location = new System.Drawing.Point(20, 46);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(89, 13);
+            this.label17.Size = new System.Drawing.Size(88, 15);
             this.label17.TabIndex = 59;
-            this.label17.Text = "Highlight at value";
+            this.label17.Text = "Highlight value";
+            this.toolTip1.SetToolTip(this.label17, "Applies the highlight color when cell value\r\nis above this value.");
             // 
             // NUD_TrackHighlight
             // 
@@ -1953,7 +1952,7 @@
             this.NUD_TrackHighlight.DecimalPlaces = 2;
             this.NUD_TrackHighlight.Enabled = false;
             this.NUD_TrackHighlight.ForeColor = System.Drawing.Color.White;
-            this.NUD_TrackHighlight.Location = new System.Drawing.Point(110, 51);
+            this.NUD_TrackHighlight.Location = new System.Drawing.Point(110, 46);
             this.NUD_TrackHighlight.Maximum = new decimal(new int[] {
             720,
             0,
@@ -1975,7 +1974,7 @@
             this.NUD_TrackDoubleclick.DecimalPlaces = 2;
             this.NUD_TrackDoubleclick.Enabled = false;
             this.NUD_TrackDoubleclick.ForeColor = System.Drawing.Color.White;
-            this.NUD_TrackDoubleclick.Location = new System.Drawing.Point(110, 74);
+            this.NUD_TrackDoubleclick.Location = new System.Drawing.Point(110, 69);
             this.NUD_TrackDoubleclick.Maximum = new decimal(new int[] {
             720,
             0,
@@ -5849,8 +5848,6 @@
 		private System.Windows.Forms.ToolStripMenuItem bTFSampleToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-        private System.Windows.Forms.Button btnTrackColorImport;
-        private System.Windows.Forms.Button btnTrackColorExport;
         private System.Windows.Forms.Button btnLeafObjRefresh;
         private System.Windows.Forms.TextBox txtSampPath;
         private System.Windows.Forms.Label label50;
@@ -6038,6 +6035,8 @@
         private System.Windows.Forms.ToolStripButton btnLeafSplit;
         private System.Windows.Forms.ToolStripComboBox dropTimeSig;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripButton btnTrackColorExport;
+        private System.Windows.Forms.ToolStripButton btnTrackColorImport;
     }
 }
 
