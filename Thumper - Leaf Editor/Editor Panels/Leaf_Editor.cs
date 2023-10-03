@@ -661,6 +661,7 @@ namespace Thumper_Custom_Level_Editor
 					dgvc.Value = null;
 					dgvc.Style = null;
 				}
+				SaveLeaf(false);
 			}
 		}
 

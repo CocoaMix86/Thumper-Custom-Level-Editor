@@ -1299,7 +1299,7 @@
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(212, 14);
+            this.label5.Location = new System.Drawing.Point(212, 38);
             this.label5.MinimumSize = new System.Drawing.Size(100, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 13);
@@ -1405,7 +1405,7 @@
             this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = System.Drawing.Color.Black;
-            this.trackEditor.Location = new System.Drawing.Point(212, 27);
+            this.trackEditor.Location = new System.Drawing.Point(212, 51);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -1422,7 +1422,7 @@
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.trackEditor.Size = new System.Drawing.Size(814, 409);
+            this.trackEditor.Size = new System.Drawing.Size(814, 385);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDoubleClick);
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
@@ -1460,7 +1460,7 @@
             // 
             this.panelZoom.Controls.Add(this.label10);
             this.panelZoom.Controls.Add(this.trackZoom);
-            this.panelZoom.Location = new System.Drawing.Point(533, 1);
+            this.panelZoom.Location = new System.Drawing.Point(533, 25);
             this.panelZoom.Name = "panelZoom";
             this.panelZoom.Size = new System.Drawing.Size(131, 27);
             this.panelZoom.TabIndex = 43;
@@ -1528,7 +1528,7 @@
             this.btnTrackClear,
             this.btnTrackPlayback});
             this.leafToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.leafToolStrip.Location = new System.Drawing.Point(186, 30);
+            this.leafToolStrip.Location = new System.Drawing.Point(186, 51);
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.leafToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -1638,7 +1638,7 @@
             this.btnLeafSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeafSplit.ForeColor = System.Drawing.Color.Black;
             this.btnLeafSplit.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_divider;
-            this.btnLeafSplit.Location = new System.Drawing.Point(370, 1);
+            this.btnLeafSplit.Location = new System.Drawing.Point(370, 25);
             this.btnLeafSplit.Name = "btnLeafSplit";
             this.btnLeafSplit.Size = new System.Drawing.Size(25, 25);
             this.btnLeafSplit.TabIndex = 112;
@@ -1655,7 +1655,7 @@
             this.btnLeafColors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeafColors.ForeColor = System.Drawing.Color.Black;
             this.btnLeafColors.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_color_wheel;
-            this.btnLeafColors.Location = new System.Drawing.Point(318, 1);
+            this.btnLeafColors.Location = new System.Drawing.Point(318, 25);
             this.btnLeafColors.Name = "btnLeafColors";
             this.btnLeafColors.Size = new System.Drawing.Size(25, 25);
             this.btnLeafColors.TabIndex = 104;
@@ -1672,7 +1672,7 @@
             this.btnLEafInterpLinear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLEafInterpLinear.ForeColor = System.Drawing.Color.Black;
             this.btnLEafInterpLinear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_graph;
-            this.btnLEafInterpLinear.Location = new System.Drawing.Point(344, 1);
+            this.btnLEafInterpLinear.Location = new System.Drawing.Point(344, 25);
             this.btnLEafInterpLinear.Name = "btnLEafInterpLinear";
             this.btnLEafInterpLinear.Size = new System.Drawing.Size(25, 25);
             this.btnLEafInterpLinear.TabIndex = 103;
@@ -1689,7 +1689,7 @@
             this.dropTimeSig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropTimeSig.ForeColor = System.Drawing.Color.White;
             this.dropTimeSig.FormattingEnabled = true;
-            this.dropTimeSig.Location = new System.Drawing.Point(457, 3);
+            this.dropTimeSig.Location = new System.Drawing.Point(457, 27);
             this.dropTimeSig.Name = "dropTimeSig";
             this.dropTimeSig.Size = new System.Drawing.Size(72, 21);
             this.dropTimeSig.TabIndex = 45;
@@ -2059,7 +2059,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(399, 6);
+            this.label2.Location = new System.Drawing.Point(399, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 46;
