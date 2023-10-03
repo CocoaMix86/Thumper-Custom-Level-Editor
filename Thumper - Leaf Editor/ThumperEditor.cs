@@ -91,6 +91,7 @@ namespace Thumper_Custom_Level_Editor
             toolstripTitleSample.Renderer = new ToolStripOverride();
             sampleToolStrip.Renderer = new ToolStripOverride();
             toolstripTitleWork.Renderer = new ToolStripOverride();
+            workingToolStrip.Renderer = new ToolStripOverride();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
