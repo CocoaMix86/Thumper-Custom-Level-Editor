@@ -1230,11 +1230,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(18, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.Size = new System.Drawing.Size(72, 15);
             this.label1.TabIndex = 22;
             this.label1.Text = "Leaf Length";
             // 
@@ -1242,7 +1242,7 @@
             // 
             this.numericUpDown_LeafLength.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numericUpDown_LeafLength.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown_LeafLength.Location = new System.Drawing.Point(96, 28);
+            this.numericUpDown_LeafLength.Location = new System.Drawing.Point(89, 29);
             this.numericUpDown_LeafLength.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1271,11 +1271,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(1, 19);
+            this.label4.Location = new System.Drawing.Point(1, 18);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.Size = new System.Drawing.Size(75, 15);
             this.label4.TabIndex = 29;
             this.label4.Text = "Track Object";
             // 
@@ -1312,11 +1312,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(1, 57);
+            this.label6.Location = new System.Drawing.Point(1, 56);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 13);
+            this.label6.Size = new System.Drawing.Size(111, 15);
             this.label6.TabIndex = 32;
             this.label6.Text = "Type (param_path)";
             // 
@@ -1489,9 +1489,9 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
             this.panelLeaf.Controls.Add(this.leafToolStrip);
             this.panelLeaf.Controls.Add(this.label1);
-            this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
             this.panelLeaf.Controls.Add(this.trackEditor);
             this.panelLeaf.Controls.Add(this.label5);
             this.panelLeaf.Controls.Add(this.panelZoom);
@@ -1730,12 +1730,12 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(26, 99);
+            this.label11.Location = new System.Drawing.Point(18, 99);
             this.label11.Name = "label11";
             this.label11.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label11.Size = new System.Drawing.Size(47, 13);
+            this.label11.Size = new System.Drawing.Size(56, 15);
             this.label11.TabIndex = 66;
             this.label11.Text = "Samples";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
