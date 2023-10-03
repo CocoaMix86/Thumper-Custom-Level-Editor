@@ -43,7 +43,6 @@ namespace Thumper_Custom_Level_Editor
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
 		public List<Object_Params> _objects = new List<Object_Params>();
-		public List<string> _timesig = new List<string>() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
 		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public List<Tuple<string, int, int>> _scrollpositions = new List<Tuple<string, int, int>>();
 		public Sequencer_Object clipboard_track;
@@ -1045,7 +1044,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			bool _switch = true;
 			//grab the first part of the time sig. This represents how many beats are in a bar
-			int beats = int.Parse(dropTimeSig.SelectedValue.ToString().Split('/')[0]);
+			int beats = int.Parse(dropTimeSig.SelectedText.Split('/')[0]);
 			for (int i = 0; i < _beats; i++) {
 				//whenever `i` is a multiple of the time sig, switch colors
 				if (i % beats == 0)

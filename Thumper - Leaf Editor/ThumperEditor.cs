@@ -296,10 +296,6 @@ namespace Thumper_Custom_Level_Editor
             InitializeSounds();
             //call method that imports objects from track_objects.txt (for Leaf editing)
             ImportObjects();
-
-            //set timesig datasource
-            dropTimeSig.DataSource = _timesig;
-            //
             SaveLeaf(true);
             //set panels to their last saved dock
             SetDockLocations();
