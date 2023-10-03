@@ -13,7 +13,7 @@ namespace Thumper_Custom_Level_Editor
 	{
 		private void panelWorkingFolder_SizeChanged(object sender, EventArgs e)
 		{
-			lblWorkingFolder.MaximumSize = new Size(panelWorkingFolder.Width - 16, 0);
+			//lblWorkingFolder.MaximumSize = new Size(panelWorkingFolder.Width - 16, 0);
 		}
 
 		private void workingfolderFiles_SelectionChanged(object sender, EventArgs e)

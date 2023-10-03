@@ -327,7 +327,6 @@
             this.btnGatePanelNew = new System.Windows.Forms.Button();
             this.panelWorkingFolder = new System.Windows.Forms.Panel();
             this.btnLevelFolder = new System.Windows.Forms.Button();
-            this.lblPopoutWork = new System.Windows.Forms.Label();
             this.filterLvl = new System.Windows.Forms.CheckBox();
             this.filterGate = new System.Windows.Forms.CheckBox();
             this.filterMaster = new System.Windows.Forms.CheckBox();
@@ -338,7 +337,6 @@
             this.btnWorkDelete = new System.Windows.Forms.Button();
             this.btnSampPanelOpen = new System.Windows.Forms.Button();
             this.btnSampPanelNew = new System.Windows.Forms.Button();
-            this.btnWorkRefresh = new System.Windows.Forms.Button();
             this.workingfolderFiles = new System.Windows.Forms.DataGridView();
             this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -346,8 +344,11 @@
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblWorkClose = new System.Windows.Forms.Label();
-            this.lblWorkingFolder = new System.Windows.Forms.Label();
+            this.toolstripTitleWork = new System.Windows.Forms.ToolStrip();
+            this.lblWorkingFolder = new System.Windows.Forms.ToolStripLabel();
+            this.lblWorkClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutWork = new System.Windows.Forms.ToolStripButton();
+            this.btnWorkRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label48 = new System.Windows.Forms.Label();
             this.contextMenuDock = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -434,6 +435,7 @@
             this.panelWorkingFolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.workingfolderRightClick.SuspendLayout();
+            this.toolstripTitleWork.SuspendLayout();
             this.contextMenuDock.SuspendLayout();
             this.panelSample.SuspendLayout();
             this.sampleToolStrip.SuspendLayout();
@@ -4527,7 +4529,6 @@
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelWorkingFolder.Controls.Add(this.btnLevelFolder);
-            this.panelWorkingFolder.Controls.Add(this.lblPopoutWork);
             this.panelWorkingFolder.Controls.Add(this.filterLvl);
             this.panelWorkingFolder.Controls.Add(this.filterGate);
             this.panelWorkingFolder.Controls.Add(this.filterMaster);
@@ -4539,22 +4540,20 @@
             this.panelWorkingFolder.Controls.Add(this.btnGatePanelOpen);
             this.panelWorkingFolder.Controls.Add(this.btnSampPanelOpen);
             this.panelWorkingFolder.Controls.Add(this.btnSampPanelNew);
-            this.panelWorkingFolder.Controls.Add(this.btnWorkRefresh);
             this.panelWorkingFolder.Controls.Add(this.btnLeafPanelTemplate);
             this.panelWorkingFolder.Controls.Add(this.workingfolderFiles);
             this.panelWorkingFolder.Controls.Add(this.btnLeafPanelOpen);
             this.panelWorkingFolder.Controls.Add(this.btnlvlPanelOpen);
             this.panelWorkingFolder.Controls.Add(this.btnGatePanelNew);
             this.panelWorkingFolder.Controls.Add(this.btnLeafPanelNew);
-            this.panelWorkingFolder.Controls.Add(this.lblWorkClose);
-            this.panelWorkingFolder.Controls.Add(this.lblWorkingFolder);
             this.panelWorkingFolder.Controls.Add(this.btnMasterPanelNew);
             this.panelWorkingFolder.Controls.Add(this.btnlvlPanelNew);
             this.panelWorkingFolder.Controls.Add(this.btnMasterPanelOpen);
-            this.panelWorkingFolder.Location = new System.Drawing.Point(-2, 385);
+            this.panelWorkingFolder.Controls.Add(this.toolstripTitleWork);
+            this.panelWorkingFolder.Location = new System.Drawing.Point(4, 353);
             this.panelWorkingFolder.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelWorkingFolder.Name = "panelWorkingFolder";
-            this.panelWorkingFolder.Size = new System.Drawing.Size(323, 511);
+            this.panelWorkingFolder.Size = new System.Drawing.Size(323, 343);
             this.panelWorkingFolder.TabIndex = 117;
             this.panelWorkingFolder.Tag = "editorpanel";
             this.panelWorkingFolder.SizeChanged += new System.EventHandler(this.panelWorkingFolder_SizeChanged);
@@ -4577,24 +4576,6 @@
             this.btnLevelFolder.Text = "Open Level";
             this.btnLevelFolder.UseVisualStyleBackColor = false;
             this.btnLevelFolder.Click += new System.EventHandler(this.btnLevelFolder_Click);
-            // 
-            // lblPopoutWork
-            // 
-            this.lblPopoutWork.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPopoutWork.AutoSize = true;
-            this.lblPopoutWork.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPopoutWork.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblPopoutWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPopoutWork.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblPopoutWork.Location = new System.Drawing.Point(281, 0);
-            this.lblPopoutWork.MinimumSize = new System.Drawing.Size(20, 20);
-            this.lblPopoutWork.Name = "lblPopoutWork";
-            this.lblPopoutWork.Size = new System.Drawing.Size(20, 20);
-            this.lblPopoutWork.TabIndex = 146;
-            this.lblPopoutWork.Text = "▲";
-            this.lblPopoutWork.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblPopoutWork, "Dock panel");
-            this.lblPopoutWork.Click += new System.EventHandler(this.lblPopin_Click);
             // 
             // filterLvl
             // 
@@ -4746,22 +4727,6 @@
             this.btnSampPanelNew.UseVisualStyleBackColor = false;
             this.btnSampPanelNew.Click += new System.EventHandler(this.btnSampPanelNew_Click);
             // 
-            // btnWorkRefresh
-            // 
-            this.btnWorkRefresh.BackColor = System.Drawing.Color.Gray;
-            this.btnWorkRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnWorkRefresh.Enabled = false;
-            this.btnWorkRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWorkRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWorkRefresh.ForeColor = System.Drawing.Color.Aqua;
-            this.btnWorkRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh;
-            this.btnWorkRefresh.Location = new System.Drawing.Point(2, 32);
-            this.btnWorkRefresh.Name = "btnWorkRefresh";
-            this.btnWorkRefresh.Size = new System.Drawing.Size(25, 25);
-            this.btnWorkRefresh.TabIndex = 117;
-            this.btnWorkRefresh.UseVisualStyleBackColor = false;
-            this.btnWorkRefresh.Click += new System.EventHandler(this.btnWorkRefresh_Click);
-            // 
             // workingfolderFiles
             // 
             this.workingfolderFiles.AllowDrop = true;
@@ -4820,7 +4785,7 @@
             this.workingfolderFiles.RowTemplate.Height = 20;
             this.workingfolderFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.workingfolderFiles.Size = new System.Drawing.Size(221, 448);
+            this.workingfolderFiles.Size = new System.Drawing.Size(221, 280);
             this.workingfolderFiles.TabIndex = 80;
             this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
             this.workingfolderFiles.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseDown);
@@ -4885,34 +4850,70 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // lblWorkClose
+            // toolstripTitleWork
             // 
-            this.lblWorkClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblWorkClose.AutoSize = true;
-            this.lblWorkClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblWorkClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblWorkClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWorkClose.Location = new System.Drawing.Point(300, 0);
-            this.lblWorkClose.MinimumSize = new System.Drawing.Size(20, 20);
-            this.lblWorkClose.Name = "lblWorkClose";
-            this.lblWorkClose.Size = new System.Drawing.Size(20, 20);
-            this.lblWorkClose.TabIndex = 51;
-            this.lblWorkClose.Text = "x";
-            this.lblWorkClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
+            this.toolstripTitleWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleWork.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleWork.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleWork.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblWorkingFolder,
+            this.lblWorkClose,
+            this.lblPopoutWork,
+            this.btnWorkRefresh});
+            this.toolstripTitleWork.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleWork.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleWork.Name = "toolstripTitleWork";
+            this.toolstripTitleWork.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleWork.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleWork.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleWork.Size = new System.Drawing.Size(321, 22);
+            this.toolstripTitleWork.TabIndex = 148;
+            this.toolstripTitleWork.Text = "titlebar";
             // 
             // lblWorkingFolder
             // 
-            this.lblWorkingFolder.AutoSize = true;
-            this.lblWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.lblWorkingFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWorkingFolder.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWorkingFolder.ForeColor = System.Drawing.Color.White;
-            this.lblWorkingFolder.Location = new System.Drawing.Point(-3, 0);
-            this.lblWorkingFolder.MaximumSize = new System.Drawing.Size(281, 0);
             this.lblWorkingFolder.Name = "lblWorkingFolder";
-            this.lblWorkingFolder.Size = new System.Drawing.Size(93, 13);
-            this.lblWorkingFolder.TabIndex = 49;
+            this.lblWorkingFolder.Size = new System.Drawing.Size(94, 19);
             this.lblWorkingFolder.Text = "Working Folder";
+            // 
+            // lblWorkClose
+            // 
+            this.lblWorkClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblWorkClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblWorkClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblWorkClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblWorkClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblWorkClose.Name = "lblWorkClose";
+            this.lblWorkClose.Size = new System.Drawing.Size(23, 22);
+            this.lblWorkClose.Text = "toolStripButton6";
+            this.lblWorkClose.ToolTipText = "Close panel";
+            this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
+            // 
+            // lblPopoutWork
+            // 
+            this.lblPopoutWork.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutWork.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutWork.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutWork.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutWork.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutWork.Name = "lblPopoutWork";
+            this.lblPopoutWork.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutWork.Text = "Dock panel";
+            this.lblPopoutWork.ToolTipText = "Undock panel";
+            this.lblPopoutWork.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // btnWorkRefresh
+            // 
+            this.btnWorkRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnWorkRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnWorkRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.btnWorkRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnWorkRefresh.Name = "btnWorkRefresh";
+            this.btnWorkRefresh.Size = new System.Drawing.Size(23, 19);
+            this.btnWorkRefresh.ToolTipText = "Reload files in the working folder";
+            this.btnWorkRefresh.Click += new System.EventHandler(this.btnWorkRefresh_Click);
             // 
             // toolTip1
             // 
@@ -5697,6 +5698,8 @@
             this.panelWorkingFolder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
             this.workingfolderRightClick.ResumeLayout(false);
+            this.toolstripTitleWork.ResumeLayout(false);
+            this.toolstripTitleWork.PerformLayout();
             this.contextMenuDock.ResumeLayout(false);
             this.panelSample.ResumeLayout(false);
             this.panelSample.PerformLayout();
@@ -5875,9 +5878,6 @@
 		private System.Windows.Forms.Label label38;
 		private System.Windows.Forms.ComboBox dropGateBoss;
 		private System.Windows.Forms.Panel panelWorkingFolder;
-		private System.Windows.Forms.Label lblWorkClose;
-		private System.Windows.Forms.Label lblWorkingFolder;
-		private System.Windows.Forms.Button btnWorkRefresh;
 		private System.Windows.Forms.DataGridView workingfolderFiles;
 		private System.Windows.Forms.Button btnWorkDelete;
 		private System.Windows.Forms.ToolStripMenuItem workingFolderToolStripMenuItem;
@@ -5971,7 +5971,6 @@
         private System.Windows.Forms.SplitContainer splitTop2;
         private System.Windows.Forms.SplitContainer splitBottom2;
         private System.Windows.Forms.Label lblPopoutLeaf;
-        private System.Windows.Forms.Label lblPopoutWork;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label label51;
@@ -6077,6 +6076,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
         private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
         private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
+        private System.Windows.Forms.ToolStrip toolstripTitleWork;
+        private System.Windows.Forms.ToolStripLabel lblWorkingFolder;
+        private System.Windows.Forms.ToolStripButton lblWorkClose;
+        private System.Windows.Forms.ToolStripButton lblPopoutWork;
+        private System.Windows.Forms.ToolStripButton btnWorkRefresh;
     }
 }
 

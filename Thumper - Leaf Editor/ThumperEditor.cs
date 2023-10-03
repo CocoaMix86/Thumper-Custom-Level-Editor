@@ -53,7 +53,7 @@ namespace Thumper_Custom_Level_Editor
 
                     //set Working Folder panel data
                     lblWorkingFolder.Text = $"Working Folder - {new DirectoryInfo(value).Name}";
-                    toolTip1.SetToolTip(lblWorkingFolder, $"Working Folder - {value}");
+                    lblWorkingFolder.ToolTipText = $"Working Folder - {value}";
                     btnWorkRefresh.Enabled = true;
                     btnWorkCopy.Enabled = true;
                     editLevelDetailsToolStripMenuItem.Enabled = true;
@@ -90,6 +90,7 @@ namespace Thumper_Custom_Level_Editor
             gateToolStrip.Renderer = new ToolStripOverride();
             toolstripTitleSample.Renderer = new ToolStripOverride();
             sampleToolStrip.Renderer = new ToolStripOverride();
+            toolstripTitleWork.Renderer = new ToolStripOverride();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -260,7 +261,7 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(panelSample);
             ControlMoverOrResizer.Init(toolstripTitleSample);
             ControlMoverOrResizer.Init(panelWorkingFolder);
-            ControlMoverOrResizer.Init(lblWorkingFolder);
+            ControlMoverOrResizer.Init(toolstripTitleWork);
             //
             AddScrollListener(trackEditor, trackEditor_Scroll);
 
