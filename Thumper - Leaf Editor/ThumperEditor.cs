@@ -62,8 +62,9 @@ namespace Thumper_Custom_Level_Editor
                     //set window name to the level name
                     this.Text = "Thumper Custom Level Editor - " + new DirectoryInfo(workingfolder).Name;
                     //add to recent files
-                    if (!Properties.Settings.Default.Recentfiles.Contains(workingfolder)) {
-                        Properties.Settings.Default.Recentfiles.Add(workingfolder);
+                    if (Properties.Settings.Default.Recentfiles.Contains(workingfolder)) {
+                        Properties.Settings.Default.Recentfiles.Remove(workingfolder);
+                        Properties.Settings.Default.Recentfiles.Insert(0, workingfolder);
                     }
                 }
             }
@@ -102,6 +103,10 @@ namespace Thumper_Custom_Level_Editor
             toolstripTitleLeaf.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
+            toolstripRecentFiles.Renderer = new ToolStripOverride();
+            //
+            if (Properties.Settings.Default.Recentfiles == null)
+                Properties.Settings.Default.Recentfiles = new List<string>();
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -522,7 +527,7 @@ namespace Thumper_Custom_Level_Editor
         {
             panelRecentFiles.Visible = true;
             foreach (string level in recentfiles) {
-                dgvRecentFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject("icon_folder"), Path.GetDirectoryName(level), level);
+                dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
             }
         }
 
@@ -793,6 +798,36 @@ namespace Thumper_Custom_Level_Editor
                     // Draw the string
                     e.Graphics.DrawString(cbx.Items[e.Index].ToString(), cbx.Font, brush, e.Bounds, sf);
                 }
+            }
+        }
+
+        private void dgvRecentFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+            //button is in column 0, so that's where to draw the image
+            if (e.ColumnIndex == 0) {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                //get dimensions
+                var w = Properties.Resources.icon_openedfolders.Width;
+                var h = Properties.Resources.icon_openedfolders.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+                //paint the image
+                e.Graphics.DrawImage(Properties.Resources.icon_openedfolders, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+        }
+
+        private void dgvRecentFiles_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+            //handle column 0 clicks only as that's where the button is
+            if (e.ColumnIndex == 0) {
+                //set working folder to the path
+                workingfolder = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
+                panelRecentFiles.Visible = false;
             }
         }
     }

@@ -308,6 +308,7 @@ namespace Thumper_Custom_Level_Editor
 			//show FolderBrowser, and then set "game_dir" to whatever is chosen
 			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
 				workingfolder = cfd_lvl.FileName;
+				panelRecentFiles.Visible = false;
             }
 		}
 	}

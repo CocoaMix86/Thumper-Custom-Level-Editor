@@ -59,6 +59,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
@@ -405,10 +407,10 @@
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
             this.panelRecentFiles = new System.Windows.Forms.Panel();
             this.dgvRecentFiles = new System.Windows.Forms.DataGridView();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolstripRecentFiles = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.btnRecentClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -489,7 +491,7 @@
             this.splitBottom2.SuspendLayout();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).BeginInit();
-            this.toolStrip2.SuspendLayout();
+            this.toolstripRecentFiles.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -5555,11 +5557,11 @@
             this.panelRecentFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
-            this.panelRecentFiles.Controls.Add(this.toolStrip2);
+            this.panelRecentFiles.Controls.Add(this.toolstripRecentFiles);
             this.panelRecentFiles.Location = new System.Drawing.Point(300, 100);
             this.panelRecentFiles.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
-            this.panelRecentFiles.Size = new System.Drawing.Size(548, 247);
+            this.panelRecentFiles.Size = new System.Drawing.Size(476, 247);
             this.panelRecentFiles.TabIndex = 137;
             this.panelRecentFiles.Tag = "editorpanel";
             this.panelRecentFiles.Visible = false;
@@ -5571,7 +5573,7 @@
             this.dgvRecentFiles.AllowUserToResizeRows = false;
             this.dgvRecentFiles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.dgvRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvRecentFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dgvRecentFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvRecentFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -5588,15 +5590,15 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
             this.dgvRecentFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle31.NullValue = null;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle33.NullValue = null;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle33;
             this.dgvRecentFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRecentFiles.EnableHeadersVisualStyles = false;
             this.dgvRecentFiles.GridColor = System.Drawing.Color.Black;
@@ -5605,32 +5607,38 @@
             this.dgvRecentFiles.Name = "dgvRecentFiles";
             this.dgvRecentFiles.ReadOnly = true;
             this.dgvRecentFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.dgvRecentFiles.RowHeadersVisible = false;
             this.dgvRecentFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRecentFiles.RowTemplate.Height = 20;
             this.dgvRecentFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRecentFiles.Size = new System.Drawing.Size(546, 223);
+            this.dgvRecentFiles.Size = new System.Drawing.Size(474, 223);
             this.dgvRecentFiles.TabIndex = 140;
+            this.dgvRecentFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecentFiles_CellClick);
+            this.dgvRecentFiles.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvRecentFiles_CellPainting);
             // 
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.dataGridViewImageColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dataGridViewImageColumn1.HeaderText = "";
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageColumn1.ToolTipText = "Click to load level";
             this.dataGridViewImageColumn1.Width = 5;
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridViewTextBoxColumn1.FillWeight = 30F;
             this.dataGridViewTextBoxColumn1.HeaderText = "Level";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -5641,32 +5649,35 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle32;
             this.dataGridViewTextBoxColumn2.FillWeight = 20F;
             this.dataGridViewTextBoxColumn2.HeaderText = "Path";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // toolStrip2
+            // toolstripRecentFiles
             // 
-            this.toolStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStrip2.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolstripRecentFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripRecentFiles.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripRecentFiles.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripRecentFiles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel3,
             this.btnRecentClose,
             this.toolStripSeparator5,
             this.toolStripSeparator6,
             this.btnLevelFolder2});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStrip2.Size = new System.Drawing.Size(546, 22);
-            this.toolStrip2.TabIndex = 139;
-            this.toolStrip2.Text = "titlebar";
+            this.toolstripRecentFiles.Location = new System.Drawing.Point(0, 0);
+            this.toolstripRecentFiles.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripRecentFiles.Name = "toolstripRecentFiles";
+            this.toolstripRecentFiles.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripRecentFiles.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripRecentFiles.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripRecentFiles.Size = new System.Drawing.Size(474, 22);
+            this.toolstripRecentFiles.TabIndex = 139;
+            this.toolstripRecentFiles.Text = "titlebar";
             // 
             // toolStripLabel3
             // 
@@ -5848,8 +5859,8 @@
             this.panelRecentFiles.ResumeLayout(false);
             this.panelRecentFiles.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).EndInit();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.toolstripRecentFiles.ResumeLayout(false);
+            this.toolstripRecentFiles.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -6200,16 +6211,16 @@
         private System.Windows.Forms.ToolStripButton btnTrackColorExport;
         private System.Windows.Forms.ToolStripButton btnTrackColorImport;
         private System.Windows.Forms.Panel panelRecentFiles;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip toolstripRecentFiles;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.ToolStripButton btnRecentClose;
         private System.Windows.Forms.DataGridView dgvRecentFiles;
-        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton btnLevelFolder2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }
 

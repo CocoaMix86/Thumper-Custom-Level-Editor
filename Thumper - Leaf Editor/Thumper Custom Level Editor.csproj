@@ -439,6 +439,7 @@
     <None Include="image assets\icon-zoom.png" />
     <None Include="image assets\icon-export.png" />
     <None Include="image assets\icon-import2.png" />
+    <None Include="image assets\icon-openedfolders.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
