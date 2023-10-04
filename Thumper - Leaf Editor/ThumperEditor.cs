@@ -62,10 +62,10 @@ namespace Thumper_Custom_Level_Editor
                     //set window name to the level name
                     this.Text = "Thumper Custom Level Editor - " + new DirectoryInfo(workingfolder).Name;
                     //add to recent files
-                    if (Properties.Settings.Default.Recentfiles.Contains(workingfolder)) {
+                    if (Properties.Settings.Default.Recentfiles.Contains(workingfolder))
                         Properties.Settings.Default.Recentfiles.Remove(workingfolder);
-                        Properties.Settings.Default.Recentfiles.Insert(0, workingfolder);
-                    }
+                    Properties.Settings.Default.Recentfiles.Insert(0, workingfolder);
+
                 }
             }
         }
