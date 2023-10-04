@@ -526,5 +526,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["lvlzoom"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<string> Recentfiles {
+            get {
+                return ((global::System.Collections.Generic.List<string>)(this["Recentfiles"]));
+            }
+            set {
+                this["Recentfiles"] = value;
+            }
+        }
     }
 }

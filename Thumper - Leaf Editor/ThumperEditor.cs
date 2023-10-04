@@ -61,6 +61,10 @@ namespace Thumper_Custom_Level_Editor
                     btnWorkRefresh.PerformClick();
                     //set window name to the level name
                     this.Text = "Thumper Custom Level Editor - " + new DirectoryInfo(workingfolder).Name;
+                    //add to recent files
+                    if (!Properties.Settings.Default.Recentfiles.Contains(workingfolder)) {
+                        Properties.Settings.Default.Recentfiles.Add(workingfolder);
+                    }
                 }
             }
         }
@@ -324,6 +328,11 @@ namespace Thumper_Custom_Level_Editor
             //zoom settings
             trackZoom.Value = Properties.Settings.Default.leafzoom;
             trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
+
+            //load recent levels 
+            var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
+            if (levellist.Count > 0)
+                RecentFiles(levellist);
         }
 
         public void ImportObjects()
@@ -506,6 +515,14 @@ namespace Thumper_Custom_Level_Editor
             }
             else if (File.Exists($@"{workingfolder}\samp_misc.txt")) {
                 File.Delete($@"{workingfolder}\samp_misc.txt");
+            }
+        }
+
+        private void RecentFiles(List<string> recentfiles)
+        {
+            panelRecentFiles.Visible = true;
+            foreach (string level in recentfiles) {
+                dgvRecentFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject("icon_folder"), Path.GetDirectoryName(level), level);
             }
         }
 

@@ -58,6 +58,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -288,6 +291,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panelGate = new System.Windows.Forms.Panel();
+            this.lblPyramidWarn = new System.Windows.Forms.Label();
             this.gateToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnGateLvlAdd = new System.Windows.Forms.ToolStripButton();
             this.btnGateLvlDelete = new System.Windows.Forms.ToolStripButton();
@@ -312,7 +316,6 @@
             this.gateLvlList = new System.Windows.Forms.DataGridView();
             this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.lblPyramidWarn = new System.Windows.Forms.Label();
             this.toolstripTitleGate = new System.Windows.Forms.ToolStrip();
             this.lblGateName = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveGate = new System.Windows.Forms.ToolStripButton();
@@ -400,6 +403,17 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
+            this.panelRecentFiles = new System.Windows.Forms.Panel();
+            this.dgvRecentFiles = new System.Windows.Forms.DataGridView();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.btnRecentClose = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnLevelFolder2 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -473,6 +487,9 @@
             this.splitBottom2.Panel1.SuspendLayout();
             this.splitBottom2.Panel2.SuspendLayout();
             this.splitBottom2.SuspendLayout();
+            this.panelRecentFiles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).BeginInit();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -3886,6 +3903,18 @@
             this.panelGate.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelGate.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
+            // lblPyramidWarn
+            // 
+            this.lblPyramidWarn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblPyramidWarn.AutoSize = true;
+            this.lblPyramidWarn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPyramidWarn.ForeColor = System.Drawing.Color.Red;
+            this.lblPyramidWarn.Location = new System.Drawing.Point(34, 184);
+            this.lblPyramidWarn.Name = "lblPyramidWarn";
+            this.lblPyramidWarn.Size = new System.Drawing.Size(230, 20);
+            this.lblPyramidWarn.TabIndex = 134;
+            this.lblPyramidWarn.Text = "Pyramid requires 5 phases!!";
+            // 
             // gateToolStrip
             // 
             this.gateToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -4288,18 +4317,6 @@
             this.Sentry.Name = "Sentry";
             this.Sentry.Width = 48;
             // 
-            // lblPyramidWarn
-            // 
-            this.lblPyramidWarn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblPyramidWarn.AutoSize = true;
-            this.lblPyramidWarn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPyramidWarn.ForeColor = System.Drawing.Color.Red;
-            this.lblPyramidWarn.Location = new System.Drawing.Point(34, 184);
-            this.lblPyramidWarn.Name = "lblPyramidWarn";
-            this.lblPyramidWarn.Size = new System.Drawing.Size(230, 20);
-            this.lblPyramidWarn.TabIndex = 134;
-            this.lblPyramidWarn.Text = "Pyramid requires 5 phases!!";
-            // 
             // toolstripTitleGate
             // 
             this.toolstripTitleGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -4403,6 +4420,7 @@
             this.panelWorkingFolder.Size = new System.Drawing.Size(199, 343);
             this.panelWorkingFolder.TabIndex = 117;
             this.panelWorkingFolder.Tag = "editorpanel";
+            this.panelWorkingFolder.Visible = false;
             this.panelWorkingFolder.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelWorkingFolder.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelWorkingFolder.Leave += new System.EventHandler(this.editorpanelUnfocus);
@@ -5532,6 +5550,164 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
+            // panelRecentFiles
+            // 
+            this.panelRecentFiles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.panelRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
+            this.panelRecentFiles.Controls.Add(this.toolStrip2);
+            this.panelRecentFiles.Location = new System.Drawing.Point(300, 100);
+            this.panelRecentFiles.MinimumSize = new System.Drawing.Size(60, 60);
+            this.panelRecentFiles.Name = "panelRecentFiles";
+            this.panelRecentFiles.Size = new System.Drawing.Size(548, 247);
+            this.panelRecentFiles.TabIndex = 137;
+            this.panelRecentFiles.Tag = "editorpanel";
+            this.panelRecentFiles.Visible = false;
+            // 
+            // dgvRecentFiles
+            // 
+            this.dgvRecentFiles.AllowUserToAddRows = false;
+            this.dgvRecentFiles.AllowUserToDeleteRows = false;
+            this.dgvRecentFiles.AllowUserToResizeRows = false;
+            this.dgvRecentFiles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.dgvRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvRecentFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dgvRecentFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle30;
+            this.dgvRecentFiles.ColumnHeadersHeight = 20;
+            this.dgvRecentFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvRecentFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewImageColumn1,
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.dgvRecentFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle31.NullValue = null;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle31;
+            this.dgvRecentFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvRecentFiles.EnableHeadersVisualStyles = false;
+            this.dgvRecentFiles.GridColor = System.Drawing.Color.Black;
+            this.dgvRecentFiles.Location = new System.Drawing.Point(0, 22);
+            this.dgvRecentFiles.MultiSelect = false;
+            this.dgvRecentFiles.Name = "dgvRecentFiles";
+            this.dgvRecentFiles.ReadOnly = true;
+            this.dgvRecentFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle32;
+            this.dgvRecentFiles.RowHeadersVisible = false;
+            this.dgvRecentFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvRecentFiles.RowTemplate.Height = 20;
+            this.dgvRecentFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRecentFiles.Size = new System.Drawing.Size(546, 223);
+            this.dgvRecentFiles.TabIndex = 140;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 5;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.FillWeight = 30F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Level";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 42;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.FillWeight = 20F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Path";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStrip2.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel3,
+            this.btnRecentClose,
+            this.toolStripSeparator5,
+            this.toolStripSeparator6,
+            this.btnLevelFolder2});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStrip2.Size = new System.Drawing.Size(546, 22);
+            this.toolStrip2.TabIndex = 139;
+            this.toolStrip2.Text = "titlebar";
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel3.ForeColor = System.Drawing.Color.White;
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(113, 19);
+            this.toolStripLabel3.Text = "Recent Levels";
+            // 
+            // btnRecentClose
+            // 
+            this.btnRecentClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnRecentClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRecentClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnRecentClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRecentClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.btnRecentClose.Name = "btnRecentClose";
+            this.btnRecentClose.Size = new System.Drawing.Size(23, 22);
+            this.btnRecentClose.Text = "toolStripButton6";
+            this.btnRecentClose.ToolTipText = "Close panel";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 22);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 22);
+            // 
+            // btnLevelFolder2
+            // 
+            this.btnLevelFolder2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLevelFolder2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
+            this.btnLevelFolder2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLevelFolder2.Name = "btnLevelFolder2";
+            this.btnLevelFolder2.Size = new System.Drawing.Size(23, 19);
+            this.btnLevelFolder2.ToolTipText = "Open a different level folder";
+            this.btnLevelFolder2.Click += new System.EventHandler(this.btnLevelFolder_Click);
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5539,6 +5715,7 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.Controls.Add(this.panelRecentFiles);
             this.Controls.Add(this.panelMaster);
             this.Controls.Add(this.panelBeeble);
             this.Controls.Add(this.panelWorkingFolder);
@@ -5668,6 +5845,11 @@
             this.splitBottom2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitBottom2)).EndInit();
             this.splitBottom2.ResumeLayout(false);
+            this.panelRecentFiles.ResumeLayout(false);
+            this.panelRecentFiles.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).EndInit();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -6017,6 +6199,17 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripButton btnTrackColorExport;
         private System.Windows.Forms.ToolStripButton btnTrackColorImport;
+        private System.Windows.Forms.Panel panelRecentFiles;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripButton btnRecentClose;
+        private System.Windows.Forms.DataGridView dgvRecentFiles;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton btnLevelFolder2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
 
