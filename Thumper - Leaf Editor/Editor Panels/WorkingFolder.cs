@@ -311,5 +311,10 @@ namespace Thumper_Custom_Level_Editor
 				panelRecentFiles.Visible = false;
             }
 		}
+
+		private void btnShowRecentFile_Click(object sender, EventArgs e)
+		{
+			RecentFiles(Properties.Settings.Default.Recentfiles);
+		}
 	}
 }

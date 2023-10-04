@@ -338,6 +338,7 @@
             this.btnLeafPanelTemplate = new System.Windows.Forms.ToolStripButton();
             this.btnWorkCopy = new System.Windows.Forms.ToolStripButton();
             this.btnWorkDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnShowRecentFile = new System.Windows.Forms.ToolStripButton();
             this.workingToolStrip = new System.Windows.Forms.ToolStrip();
             this.filterLeaf = new System.Windows.Forms.ToolStripButton();
             this.filterLvl = new System.Windows.Forms.ToolStripButton();
@@ -4429,6 +4430,8 @@
             // 
             // workingToolStrip2
             // 
+            this.workingToolStrip2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.workingToolStrip2.AutoSize = false;
             this.workingToolStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.workingToolStrip2.Dock = System.Windows.Forms.DockStyle.None;
@@ -4440,13 +4443,14 @@
             this.btnWorkNewFile,
             this.btnLeafPanelTemplate,
             this.btnWorkCopy,
-            this.btnWorkDelete});
+            this.btnWorkDelete,
+            this.btnShowRecentFile});
             this.workingToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.workingToolStrip2.Location = new System.Drawing.Point(31, 26);
             this.workingToolStrip2.Name = "workingToolStrip2";
             this.workingToolStrip2.Padding = new System.Windows.Forms.Padding(0);
             this.workingToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.workingToolStrip2.Size = new System.Drawing.Size(123, 25);
+            this.workingToolStrip2.Size = new System.Drawing.Size(163, 25);
             this.workingToolStrip2.Stretch = true;
             this.workingToolStrip2.TabIndex = 150;
             // 
@@ -4481,6 +4485,7 @@
             this.toolStripMenuItem8,
             this.toolStripMenuItem9});
             this.contextMenuNewFile.Name = "workingfolderRightClick";
+            this.contextMenuNewFile.OwnerItem = this.btnWorkNewFile;
             this.contextMenuNewFile.Size = new System.Drawing.Size(114, 114);
             // 
             // toolStripMenuItem5
@@ -4566,6 +4571,17 @@
             this.btnWorkDelete.Size = new System.Drawing.Size(24, 25);
             this.btnWorkDelete.ToolTipText = "Delete selected file";
             this.btnWorkDelete.Click += new System.EventHandler(this.btnWorkDelete_Click);
+            // 
+            // btnShowRecentFile
+            // 
+            this.btnShowRecentFile.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnShowRecentFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowRecentFile.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
+            this.btnShowRecentFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowRecentFile.Name = "btnShowRecentFile";
+            this.btnShowRecentFile.Size = new System.Drawing.Size(24, 22);
+            this.btnShowRecentFile.Text = "toolStripButton2";
+            this.btnShowRecentFile.Click += new System.EventHandler(this.btnShowRecentFile_Click);
             // 
             // workingToolStrip
             // 
@@ -5557,10 +5573,10 @@
             this.panelRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
             this.panelRecentFiles.Controls.Add(this.toolstripRecentFiles);
-            this.panelRecentFiles.Location = new System.Drawing.Point(300, 100);
+            this.panelRecentFiles.Location = new System.Drawing.Point(66, 100);
             this.panelRecentFiles.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
-            this.panelRecentFiles.Size = new System.Drawing.Size(476, 247);
+            this.panelRecentFiles.Size = new System.Drawing.Size(407, 247);
             this.panelRecentFiles.TabIndex = 137;
             this.panelRecentFiles.Tag = "editorpanel";
             this.panelRecentFiles.Visible = false;
@@ -5617,7 +5633,7 @@
             this.dgvRecentFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRecentFiles.RowTemplate.Height = 20;
             this.dgvRecentFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.Size = new System.Drawing.Size(474, 223);
+            this.dgvRecentFiles.Size = new System.Drawing.Size(405, 223);
             this.dgvRecentFiles.TabIndex = 140;
             this.dgvRecentFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecentFiles_CellClick);
             this.dgvRecentFiles.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvRecentFiles_CellPainting);
@@ -5674,7 +5690,7 @@
             this.toolstripRecentFiles.Padding = new System.Windows.Forms.Padding(0);
             this.toolstripRecentFiles.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolstripRecentFiles.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripRecentFiles.Size = new System.Drawing.Size(474, 22);
+            this.toolstripRecentFiles.Size = new System.Drawing.Size(405, 22);
             this.toolstripRecentFiles.TabIndex = 139;
             this.toolstripRecentFiles.Text = "titlebar";
             // 
@@ -6220,6 +6236,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.ToolStripButton btnShowRecentFile;
     }
 }
 

@@ -525,6 +525,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void RecentFiles(List<string> recentfiles)
         {
+            dgvRecentFiles.Rows.Clear();
             panelRecentFiles.Visible = true;
             foreach (string level in recentfiles) {
                 dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
