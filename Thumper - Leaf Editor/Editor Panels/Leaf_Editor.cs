@@ -158,8 +158,6 @@ namespace Thumper_Custom_Level_Editor
 					//if cell does not have the value, set it
 					if (_cell.Value != _val)
 						_cell.Value = _val;
-					if (_cell.Value.ToString() == "")
-						_cell.Value = null;
 
 					TrackUpdateHighlightingSingleCell(_cell);
 				}
@@ -189,10 +187,12 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Back) {
-				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
+				trackEditor.CurrentCell.Value = null;
+				trackEditor_CellValueChanged(null, null);
+				/*foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
 					dgvc.Value = null;
-					TrackUpdateHighlightingSingleCell(dgvc);
-				}
+					//TrackUpdateHighlightingSingleCell(dgvc);
+				}*/
 				SaveLeaf(false);
 			}
 			e.Handled = true;
@@ -202,10 +202,12 @@ namespace Thumper_Custom_Level_Editor
 			//Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
-				foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
+				trackEditor.CurrentCell.Value = null;
+				trackEditor_CellValueChanged(null, null);
+				/*foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
 					dgvc.Value = null;
-					TrackUpdateHighlightingSingleCell(dgvc);
-				}
+					//TrackUpdateHighlightingSingleCell(dgvc);
+				}*/
 				SaveLeaf(false);
 			}
 			//copies selected cells
