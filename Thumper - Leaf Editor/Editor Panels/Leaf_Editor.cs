@@ -1183,6 +1183,7 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackDown.Enabled = _tracks.Count > 1;
 			btnTrackClear.Enabled = _tracks.Count > 0;
 			btnTrackCopy.Enabled = _tracks.Count > 0;
+			btnTrackColorExport.Enabled = btnTrackColorImport.Enabled = _tracks.Count > 0;
 			//set save flag to true, since it just barely loaded
 			loadingleaf = false;
 			leafjson = _load;
