@@ -312,6 +312,7 @@ namespace Thumper_Custom_Level_Editor
 			_select = dropGateRestart.SelectedItem;
 			dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 			dropGateRestart.SelectedItem = _select;
+			SaveGate(true);
 		}
 
 		private void btnRevertGate_Click(object sender, EventArgs e)

@@ -189,10 +189,6 @@ namespace Thumper_Custom_Level_Editor
 			if (e.KeyChar == (char)Keys.Back) {
 				trackEditor.CurrentCell.Value = null;
 				trackEditor_CellValueChanged(null, null);
-				/*foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
-					dgvc.Value = null;
-					//TrackUpdateHighlightingSingleCell(dgvc);
-				}*/
 				SaveLeaf(false);
 			}
 			e.Handled = true;
@@ -204,10 +200,6 @@ namespace Thumper_Custom_Level_Editor
 			if (e.KeyCode == Keys.Delete) {
 				trackEditor.CurrentCell.Value = null;
 				trackEditor_CellValueChanged(null, null);
-				/*foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
-					dgvc.Value = null;
-					//TrackUpdateHighlightingSingleCell(dgvc);
-				}*/
 				SaveLeaf(false);
 			}
 			//copies selected cells

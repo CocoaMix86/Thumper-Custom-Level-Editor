@@ -377,6 +377,7 @@ namespace Thumper_Custom_Level_Editor
 			_select = dropMasterLvlRest.SelectedItem;
 			dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
 			dropMasterLvlRest.SelectedItem = _select;
+			SaveMaster(true);
 		}
 
 		private void btnRevertMaster_Click(object sender, EventArgs e)

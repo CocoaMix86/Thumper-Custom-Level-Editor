@@ -171,6 +171,7 @@ namespace Thumper_Custom_Level_Editor
         private void DockPanel(Control panel, Control dock)
         {
             dock.Controls.Add(panel);
+            dock.ContextMenuStrip = null;
             panel.Dock = DockStyle.Fill;
             //locate the dock button in the panel
             var dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
@@ -198,6 +199,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
 
             ControlMoverOrResizer.Dispose(panel);
+            ControlMoverOrResizer.Dispose(dockbtn.Owner);
             ((Panel)panel).BorderStyle = BorderStyle.None;
         }
 
@@ -207,6 +209,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
 
             var dock = panel.Parent;
+            dock.ContextMenuStrip = contextMenuDock;
             panel.Dock = DockStyle.None;
             this.Controls.Add(panel);
             panel.Size = new Size(dock.Width, dock.Height);
@@ -242,6 +245,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
 
             ControlMoverOrResizer.Init(panel);
+            ControlMoverOrResizer.Init(dockbtn.Owner);
             ((Panel)panel).BorderStyle = BorderStyle.FixedSingle;
         }
 
