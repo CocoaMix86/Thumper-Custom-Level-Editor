@@ -249,7 +249,8 @@ namespace Thumper_Custom_Level_Editor
 			if (workingfolderFiles.SelectedCells.Count < 1)
 				return;
 			//set textbox with name of selected file
-			string[] file = workingfolderFiles.SelectedCells[1].Value.ToString().Split(new[] { '_' }, 2);
+			string oldfilename = workingfolderFiles.SelectedCells[1].Value.ToString();
+			string[] file = oldfilename.Split(new[] { '_' }, 2);
 			filetype = file[0];
 			//check if file is valid to be renamed
 			if (filetype == "master" || filetype == "LEVEL DETAILS") {
@@ -265,8 +266,8 @@ namespace Thumper_Custom_Level_Editor
 			//if YES, rename file
 			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
 				newfilepath = $@"{workingfolder}\{filetype}_{filenamedialog.txtWorkingRename.Text}.txt";
+				File.Move($@"{workingfolder}\{oldfilename}.txt", newfilepath);
 				workingfolderFiles.SelectedCells[1].Value = $@"{filetype}_{filenamedialog.txtWorkingRename.Text}";
-				File.Move(_loadedleaf, newfilepath);
 			}
 			//if NO, return and skip the rest below
 			else

@@ -512,13 +512,15 @@ namespace Thumper_Custom_Level_Editor
 				string _file = (_leaf.leafname).Replace(".leaf", "");
 				dynamic _load;
 				try {
+					if (!File.Exists($@"{workingfolder}\leaf_{_file}.txt"))
+						continue;
 					//I need to load the entire document to grab one field from it
 					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{_file}.txt"), "#.*", ""));
 					//if beat_cnt is different than what is loaded, replace it and mark the save flag
 					if (_leaf.beats != (int)_load["beat_cnt"]) {
 						_leaf.beats = (int)_load["beat_cnt"];
 						//and update the dgv cell with new beat value
-						lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].Cells[1].Value = _leaf.beats;
+						lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].Cells[2].Value = _leaf.beats;
 						SaveLvl(false);
 					}
 				}

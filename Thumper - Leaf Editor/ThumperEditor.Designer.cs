@@ -252,11 +252,6 @@
             this.btnMasterLvlCopy = new System.Windows.Forms.ToolStripButton();
             this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
             this.masterLvlList = new System.Windows.Forms.DataGridView();
-            this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
-            this.masterLvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.masterCheckpoint = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.masterPlayplus = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.masterIsolate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnMasterOpenRest = new System.Windows.Forms.Button();
             this.btnMasterOpenLeader = new System.Windows.Forms.Button();
             this.label37 = new System.Windows.Forms.Label();
@@ -417,6 +412,11 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLevelFolder2 = new System.Windows.Forms.ToolStripButton();
+            this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
+            this.masterLvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.masterCheckpoint = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.masterPlayplus = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.masterIsolate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -3338,42 +3338,6 @@
             this.masterLvlList.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             this.masterLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_RowEnter);
             // 
-            // masterfiletype
-            // 
-            this.masterfiletype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.masterfiletype.HeaderText = "";
-            this.masterfiletype.Name = "masterfiletype";
-            this.masterfiletype.ReadOnly = true;
-            this.masterfiletype.Width = 5;
-            // 
-            // masterLvl
-            // 
-            this.masterLvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.masterLvl.HeaderText = "Sublevel";
-            this.masterLvl.Name = "masterLvl";
-            this.masterLvl.ReadOnly = true;
-            // 
-            // masterCheckpoint
-            // 
-            this.masterCheckpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.masterCheckpoint.HeaderText = "Chkp.";
-            this.masterCheckpoint.Name = "masterCheckpoint";
-            this.masterCheckpoint.Width = 48;
-            // 
-            // masterPlayplus
-            // 
-            this.masterPlayplus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.masterPlayplus.HeaderText = "P+";
-            this.masterPlayplus.Name = "masterPlayplus";
-            this.masterPlayplus.Width = 29;
-            // 
-            // masterIsolate
-            // 
-            this.masterIsolate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.masterIsolate.HeaderText = "Iso.";
-            this.masterIsolate.Name = "masterIsolate";
-            this.masterIsolate.Width = 34;
-            // 
             // btnMasterOpenRest
             // 
             this.btnMasterOpenRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -5734,6 +5698,43 @@
             this.btnLevelFolder2.ToolTipText = "Open a different level folder";
             this.btnLevelFolder2.Click += new System.EventHandler(this.btnLevelFolder_Click);
             // 
+            // masterfiletype
+            // 
+            this.masterfiletype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.masterfiletype.HeaderText = "";
+            this.masterfiletype.Name = "masterfiletype";
+            this.masterfiletype.ReadOnly = true;
+            this.masterfiletype.Width = 5;
+            // 
+            // masterLvl
+            // 
+            this.masterLvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.masterLvl.HeaderText = "Sublevel";
+            this.masterLvl.Name = "masterLvl";
+            this.masterLvl.ReadOnly = true;
+            this.masterLvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // masterCheckpoint
+            // 
+            this.masterCheckpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.masterCheckpoint.HeaderText = "Chkp.";
+            this.masterCheckpoint.Name = "masterCheckpoint";
+            this.masterCheckpoint.Width = 48;
+            // 
+            // masterPlayplus
+            // 
+            this.masterPlayplus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.masterPlayplus.HeaderText = "P+";
+            this.masterPlayplus.Name = "masterPlayplus";
+            this.masterPlayplus.Width = 29;
+            // 
+            // masterIsolate
+            // 
+            this.masterIsolate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.masterIsolate.HeaderText = "Iso.";
+            this.masterIsolate.Name = "masterIsolate";
+            this.masterIsolate.Width = 34;
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -6089,11 +6090,6 @@
         private System.Windows.Forms.ToolStripMenuItem resetDocksStripMenuItem;
         private System.Windows.Forms.Panel panelRawData;
         private System.Windows.Forms.Label lblRawData;
-        private System.Windows.Forms.DataGridViewImageColumn masterfiletype;
-        private System.Windows.Forms.DataGridViewTextBoxColumn masterLvl;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn masterCheckpoint;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn masterPlayplus;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn masterIsolate;
         private System.Windows.Forms.ToolStrip masterToolStrip;
         private System.Windows.Forms.ToolStripButton btnMasterLvlAdd;
         private System.Windows.Forms.ToolStripButton btnMasterLvlDelete;
@@ -6237,6 +6233,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.ToolStripButton btnShowRecentFile;
+        private System.Windows.Forms.DataGridViewImageColumn masterfiletype;
+        private System.Windows.Forms.DataGridViewTextBoxColumn masterLvl;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn masterCheckpoint;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn masterPlayplus;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn masterIsolate;
     }
 }
 
