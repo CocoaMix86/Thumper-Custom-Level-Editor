@@ -140,6 +140,7 @@ namespace Thumper_Custom_Level_Editor
 				using (var ofd = new OpenFileDialog()) {
 					ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
 					ofd.Title = "Load a Thumper Gate file";
+					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 					if (ofd.ShowDialog() == DialogResult.OK) {
 						//storing the filename in temp so it doesn't overwrite _loadedgate in case it fails the check in LoadGate()
 						_loadedgatetemp = ofd.FileName;
@@ -228,6 +229,7 @@ namespace Thumper_Custom_Level_Editor
 			using (var ofd = new OpenFileDialog()) {
 				ofd.Filter = "Thumper Gate File (*.txt)|lvl_*.txt";
 				ofd.Title = "Load a Thumper Lvl file";
+				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					//parse leaf to JSON
 					dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));

@@ -31,6 +31,8 @@ namespace Thumper_Custom_Level_Editor
 					leafsaveAsToolStripMenuItem.Enabled = true;
 					leafsaveToolStripMenuItem.Enabled = true;
 					trackEditor.RowHeadersVisible = true;
+					//load workingfolder
+					workingfolder = Path.GetDirectoryName(value);
 				}
 			}
 		}

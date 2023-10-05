@@ -260,6 +260,7 @@ namespace Thumper_Custom_Level_Editor
 			using (var ofd = new OpenFileDialog()) {
 				ofd.Filter = "FSB Audio File (*.fsb)|*.fsb";
 				ofd.Title = "Load a FSB Audio file";
+				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				ofd.Multiselect = true;
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					foreach (string _file in ofd.FileNames)

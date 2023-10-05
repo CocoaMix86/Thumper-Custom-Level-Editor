@@ -255,6 +255,7 @@ namespace Thumper_Custom_Level_Editor
 			using (var ofd = new OpenFileDialog()) {
 				ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
 				ofd.Title = "Load a Thumper Lvl/Gate file";
+				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					AddFiletoMaster(ofd.FileName);
 				}

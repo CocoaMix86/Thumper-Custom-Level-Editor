@@ -320,6 +320,7 @@ namespace Thumper_Custom_Level_Editor
 			using (var ofd = new OpenFileDialog()) {
 				ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
 				ofd.Title = "Load a Thumper Leaf file";
+				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					AddLeaftoLvl(ofd.FileName);
 				}
