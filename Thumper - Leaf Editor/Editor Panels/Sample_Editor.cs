@@ -375,12 +375,12 @@ namespace Thumper_Custom_Level_Editor
 			if (!save) {
 				btnSaveSample.Enabled = true;
 				btnRevertSample.Enabled = true;
-				toolstripTitleGate.BackColor = Color.Maroon;
+				toolstripTitleSample.BackColor = Color.Maroon;
 			}
 			else {
 				btnSaveSample.Enabled = false;
 				btnRevertSample.Enabled = false;
-				toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
+				toolstripTitleSample.BackColor = Color.FromArgb(40, 40, 40);
 			}
 		}
 
