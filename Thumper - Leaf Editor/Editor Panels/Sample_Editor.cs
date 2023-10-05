@@ -360,7 +360,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
 			_samplelist_CollectionChanged(null, null);
-
+			FSBtoSamp.Enabled = true;
 			///set save flag (samples just loaded, has no changes)
 			samplejson = _load;
 			SaveSample(true);
