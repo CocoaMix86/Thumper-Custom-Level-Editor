@@ -170,6 +170,8 @@ namespace Thumper_Custom_Level_Editor
 		//Cell click, insert values if track is BOOL
 		private void trackEditor_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
+			if (e.ColumnIndex == -1 || e.RowIndex == -1)
+				return;
 			if (e.Button == MouseButtons.Left) {
 				if (_tracks[e.RowIndex].trait_type == "kTraitBool" || _tracks[e.RowIndex].trait_type == "kTraitAction")
 					(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 1;
