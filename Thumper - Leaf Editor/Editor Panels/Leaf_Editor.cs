@@ -31,8 +31,6 @@ namespace Thumper_Custom_Level_Editor
 					leafsaveAsToolStripMenuItem.Enabled = true;
 					leafsaveToolStripMenuItem.Enabled = true;
 					trackEditor.RowHeadersVisible = true;
-					//load workingfolder
-					workingfolder = Path.GetDirectoryName(value);
 				}
 			}
 		}
@@ -402,7 +400,7 @@ namespace Thumper_Custom_Level_Editor
 					//set folder to the templates location
 					ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
 					if (ofd.ShowDialog() == DialogResult.OK) {
-						_loadedleaftemp = ofd.FileName;
+						_loadedleaftemp = "template";
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLeaf(_load);
 						//set this to null, as it's a template. Next time on save, the user can save the file elsewhere
@@ -1106,8 +1104,14 @@ namespace Thumper_Custom_Level_Editor
 			leafobj = _load["obj_name"];
 			//set flag that load is in progress. This skips SaveLeaf() method
 			loadingleaf = true;
-			workingfolder = Path.GetDirectoryName(_loadedleaftemp);
-			_loadedleaf = _loadedleaftemp;
+			//check for template or regular file
+			if (_loadedleaftemp == "template") {
+				_loadedleaf = null;
+			}
+			else {
+				workingfolder = Path.GetDirectoryName(_loadedleaftemp);
+				_loadedleaf = _loadedleaftemp;
+			}
 			//clear existing tracks
 			_tracks.Clear();
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
