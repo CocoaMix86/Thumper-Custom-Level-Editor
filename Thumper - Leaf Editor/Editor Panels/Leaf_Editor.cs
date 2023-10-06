@@ -167,19 +167,17 @@ namespace Thumper_Custom_Level_Editor
 			ShowRawTrackData();
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
-		//Cell double click
-		private void trackEditor_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+		//Cell click, insert values if track is BOOL
+		private void trackEditor_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			//checks if the cell's value contains a 0. If so, change the value to write to 1. If not, assume the cell value is already 0 and keep the value to write to 0
-			string val;
-			if (trackEditor.CurrentCell.Value == null)
-				val = NUD_TrackDoubleclick.Value.ToString();
-			else {
-				val = null;
-				trackEditor.CurrentCell.Style = null;
+			if (_tracks[e.RowIndex].trait_type == "kTraitBool" || _tracks[e.RowIndex].trait_type == "kTraitAction") {
+				if (e.Button == MouseButtons.Left)
+					(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 1;
+				if (e.Button == MouseButtons.Right) {
+					(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
+					TrackUpdateHighlightingSingleCell((sender as DataGridView)[e.ColumnIndex, e.RowIndex]);
+				}
 			}
-
-			trackEditor.CurrentCell.Value = val;
 		}
 		//Keypress Backspace - clear selected cells
 		private void trackEditor_KeyPress(object sender, KeyPressEventArgs e)
