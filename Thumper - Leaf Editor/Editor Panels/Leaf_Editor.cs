@@ -359,6 +359,7 @@ namespace Thumper_Custom_Level_Editor
 					_loadedleaf = $@"{storePath}\leaf_{tempFileName}";
 					//get contents to save
 					WriteLeaf();
+					btnWorkRefresh.PerformClick();
 				}
 			}
 		}
