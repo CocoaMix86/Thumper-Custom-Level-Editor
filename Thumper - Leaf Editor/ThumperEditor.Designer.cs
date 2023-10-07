@@ -1445,6 +1445,7 @@
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.trackEditor.Size = new System.Drawing.Size(814, 385);
             this.trackEditor.TabIndex = 40;
+            this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseClick);
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
             this.trackEditor.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.trackEditor_EditingControlShowing);
@@ -1527,6 +1528,7 @@
             this.panelLeaf.TabIndex = 45;
             this.panelLeaf.Tag = "editorpanel";
             this.panelLeaf.Visible = false;
+            this.panelLeaf.Click += new System.EventHandler(this.editorpanelClick);
             this.panelLeaf.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelLeaf.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLeaf.Leave += new System.EventHandler(this.editorpanelUnfocus);
@@ -2226,6 +2228,7 @@
             this.panelLevel.TabIndex = 46;
             this.panelLevel.Tag = "editorpanel";
             this.panelLevel.Visible = false;
+            this.panelLevel.Click += new System.EventHandler(this.editorpanelClick);
             this.panelLevel.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelLevel.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLevel.Leave += new System.EventHandler(this.editorpanelUnfocus);
@@ -3012,6 +3015,7 @@
             this.lvlLeafList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.lvlLeafList.Size = new System.Drawing.Size(236, 184);
             this.lvlLeafList.TabIndex = 74;
+            this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
             this.lvlLeafList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellEnter);
             this.lvlLeafList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_RowEnter);
@@ -3172,6 +3176,7 @@
             this.panelMaster.TabIndex = 47;
             this.panelMaster.Tag = "editorpanel";
             this.panelMaster.Visible = false;
+            this.panelMaster.Click += new System.EventHandler(this.editorpanelClick);
             this.panelMaster.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelMaster.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelMaster.Leave += new System.EventHandler(this.editorpanelUnfocus);
@@ -3333,6 +3338,7 @@
             this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.masterLvlList.Size = new System.Drawing.Size(225, 250);
             this.masterLvlList.TabIndex = 79;
+            this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellClick);
             this.masterLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellValueChanged);
             this.masterLvlList.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
@@ -3903,6 +3909,7 @@
             this.panelGate.TabIndex = 116;
             this.panelGate.Tag = "editorpanel";
             this.panelGate.Visible = false;
+            this.panelGate.Click += new System.EventHandler(this.editorpanelClick);
             this.panelGate.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelGate.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelGate.Leave += new System.EventHandler(this.editorpanelUnfocus);
@@ -4298,6 +4305,7 @@
             this.gateLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.gateLvlList.Size = new System.Drawing.Size(309, 118);
             this.gateLvlList.TabIndex = 80;
+            this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
             this.gateLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellValueChanged);
             this.gateLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_RowEnter);
@@ -4425,6 +4433,7 @@
             this.panelWorkingFolder.TabIndex = 117;
             this.panelWorkingFolder.Tag = "editorpanel";
             this.panelWorkingFolder.Visible = false;
+            this.panelWorkingFolder.Click += new System.EventHandler(this.editorpanelClick);
             this.panelWorkingFolder.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelWorkingFolder.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelWorkingFolder.Leave += new System.EventHandler(this.editorpanelUnfocus);
@@ -4721,6 +4730,7 @@
             this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.workingfolderFiles.Size = new System.Drawing.Size(163, 286);
             this.workingfolderFiles.TabIndex = 80;
+            this.workingfolderFiles.Tag = "editorpaneldgv";
             this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
             this.workingfolderFiles.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseDown);
             this.workingfolderFiles.SelectionChanged += new System.EventHandler(this.workingfolderFiles_SelectionChanged);
@@ -5082,6 +5092,7 @@
             this.panelSample.Tag = "editorpanel";
             this.panelSample.Visible = false;
             this.panelSample.SizeChanged += new System.EventHandler(this.panelSample_SizeChanged);
+            this.panelSample.Click += new System.EventHandler(this.editorpanelClick);
             this.panelSample.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelSample.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelSample.Leave += new System.EventHandler(this.editorpanelUnfocus);
@@ -5280,6 +5291,7 @@
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.sampleList.Size = new System.Drawing.Size(370, 227);
             this.sampleList.TabIndex = 80;
+            this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEndEdit);
             this.sampleList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEnter);
             this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);

@@ -830,5 +830,11 @@ namespace Thumper_Custom_Level_Editor
                 panelRecentFiles.Visible = false;
             }
         }
+
+        private void editorpanelClick(object sender, EventArgs e)
+        {
+            Control dgv = (sender as Panel).Controls.Cast<Control>().FirstOrDefault(control => String.Equals(control.Tag, "editorpaneldgv"));
+            dgv.Focus();
+        }
     }
 }
