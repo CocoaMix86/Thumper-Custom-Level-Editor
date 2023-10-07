@@ -334,14 +334,9 @@ namespace Thumper_Custom_Level_Editor
 				leafsaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
-			//write contents direct to file without prompting save dialog
-			var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveLeaf(true);
-			lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
-			//update beat counts in loaded lvl if need be
-			if (_loadedlvl != null)
-				btnLvlRefreshBeats.PerformClick();
+			else
+				//write contents direct to file without prompting save dialog
+				WriteLeaf();
 		}
 		///LEAF - SAVE AS
 		private void leafsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -360,20 +355,23 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");
 						return;
 					}
-					//get contents to save
-					var _save = LeafBuildSave(Path.GetFileName(sfd.FileName));
 					//serialize JSON object to a string, and write it to the file
 					sfd.FileName = $@"{storePath}\leaf_{tempFileName}";
-					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
-					//set a few visual elementsto show what file is being worked on
-					lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
 					_loadedleaf = sfd.FileName;
-					SaveLeaf(true);
-					//update beat counts in loaded lvl if need be
-					if (_loadedlvl != null)
-						btnLvlRefreshBeats.PerformClick();
+					//get contents to save
+					WriteLeaf();
 				}
 			}
+		}
+		private void WriteLeaf()
+        {
+			var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
+			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			SaveLeaf(true);
+			lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
+			//update beat counts in loaded lvl if need be
+			if (_loadedlvl != null)
+				btnLvlRefreshBeats.PerformClick();
 		}
 		///LEAF - LOAD FILE
 		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
