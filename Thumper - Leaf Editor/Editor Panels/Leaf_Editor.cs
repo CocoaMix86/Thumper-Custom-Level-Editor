@@ -356,8 +356,7 @@ namespace Thumper_Custom_Level_Editor
 						return;
 					}
 					//serialize JSON object to a string, and write it to the file
-					sfd.FileName = $@"{storePath}\leaf_{tempFileName}";
-					_loadedleaf = sfd.FileName;
+					_loadedleaf = $@"{storePath}\leaf_{tempFileName}";
 					//get contents to save
 					WriteLeaf();
 				}
