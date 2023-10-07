@@ -2256,6 +2256,7 @@
             // btnLvlLoopAdd
             // 
             this.btnLvlLoopAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlLoopAdd.Enabled = false;
             this.btnLvlLoopAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLvlLoopAdd.ForeColor = System.Drawing.Color.White;
             this.btnLvlLoopAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;

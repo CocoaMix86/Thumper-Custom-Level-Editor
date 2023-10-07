@@ -27,6 +27,7 @@ namespace Thumper_Custom_Level_Editor
 					loadedsample = value;
 					SamplesaveAsToolStripMenuItem.Enabled = false;
 					SamplesaveToolStripMenuItem.Enabled = false;
+					lblSampleEditor.Text = "Sample Editor";
 					SaveSample(true);
 				}
 				if (loadedsample != value) {
@@ -129,6 +130,7 @@ namespace Thumper_Custom_Level_Editor
 			btnSampleAdd.Enabled = true;
 			btnSampleDelete.Enabled = _samplelist.Count > 0;
 			FSBtoSamp.Enabled = _samplelist.Count > 0;
+			btnSampEditorPlaySamp.Enabled = _samplelist.Count > 0;
 
 			//set lvl save flag to false
 			SaveSample(false);

@@ -24,6 +24,10 @@ namespace Thumper_Custom_Level_Editor
 					loadedlvl = value;
 					lvlsaveAsToolStripMenuItem.Enabled = false;
 					lvlsaveToolStripMenuItem2.Enabled = false;
+					lvlSeqObjs.Rows.Clear();
+					lvlLeafPaths.Rows.Clear();
+					lvlLoopTracks.Rows.Clear();
+					lblLvlName.Text = "Lvl Editor";
 					SaveLvl(true);
 				}
 				else if (loadedlvl != value) {
@@ -200,7 +204,9 @@ namespace Thumper_Custom_Level_Editor
 			//enable/disable buttons if leaf exists or not
 			btnLvlPathAdd.Enabled = _lvlleafs.Count > 0;
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
+			if (btnLvlPathAdd.Enabled == false) btnLvlCopyTunnel.Enabled = false;
 			btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
+			btnLvlLoopAdd.Enabled = _lvlleafs.Count > 0;
 			//set volume sequencer column total to length of all leafs + approach
 			lvlSeqObjs.ColumnCount = _lvllength;
 			//some styles
@@ -602,7 +608,6 @@ namespace Thumper_Custom_Level_Editor
 			///mark that lvl is saved (just freshly loaded)
 			SaveLvl(true);
 			lvljson = _load;
-			btnRevertLvl.Enabled = true;
 			trackLvlVolumeZoom_Scroll(null, null);
 		}
 

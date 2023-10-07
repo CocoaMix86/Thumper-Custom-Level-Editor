@@ -30,6 +30,9 @@ namespace Thumper_Custom_Level_Editor
 					leafsaveAsToolStripMenuItem.Enabled = false;
 					leafsaveToolStripMenuItem.Enabled = false;
 					trackEditor.RowHeadersVisible = false;
+					trackEditor.Rows.Clear();
+					EnableLeafButtons(false);
+					lblTrackFileName.Text = "Leaf Editor";
 					SaveLeaf(true);
 				}
 				if (loadedleaf != value) {

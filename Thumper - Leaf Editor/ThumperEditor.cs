@@ -846,12 +846,6 @@ namespace Thumper_Custom_Level_Editor
             _gatelvls.Clear();
             _masterlvls.Clear();
             _samplelist.Clear();
-            //clear DGVs of data
-            trackEditor.Rows.Clear();
-            lvlSeqObjs.Rows.Clear();
-            lvlLeafPaths.Rows.Clear();
-            lvlLoopTracks.Rows.Clear();
-            EnableLeafButtons(false);
             //set paths to nothing
             _loadedleaf = "";
             _loadedlvl = "";

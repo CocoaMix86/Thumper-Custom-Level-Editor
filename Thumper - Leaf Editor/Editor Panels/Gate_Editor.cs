@@ -23,6 +23,7 @@ namespace Thumper_Custom_Level_Editor
 					loadedgate = value;
 					gatesaveAsToolStripMenuItem.Enabled = false;
 					gatesaveToolStripMenuItem.Enabled = false;
+					lblGateName.Text = "Gate Editor";
 					SaveGate(true);
 				}
 				if (loadedgate != value) {
