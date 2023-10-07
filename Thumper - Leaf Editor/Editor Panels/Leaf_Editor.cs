@@ -355,16 +355,16 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");
 						return;
 					}
-					//serialize JSON object to a string, and write it to the file
 					_loadedleaf = $@"{storePath}\leaf_{tempFileName}";
-					//get contents to save
 					WriteLeaf();
+					//after saving new file, refresh the workingfolder
 					btnWorkRefresh.PerformClick();
 				}
 			}
 		}
 		private void WriteLeaf()
-        {
+		{
+			//serialize JSON object to a string, and write it to the file
 			var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
 			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveLeaf(true);
