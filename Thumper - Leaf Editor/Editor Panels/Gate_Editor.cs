@@ -27,8 +27,6 @@ namespace Thumper_Custom_Level_Editor
 				if (loadedgate != value) {
 					loadedgate = value;
 					ShowPanel(true, panelGate);
-					gatesaveAsToolStripMenuItem.Enabled = true;
-					gatesaveToolStripMenuItem.Enabled = true;
 				}
 			}
 		}

@@ -31,8 +31,6 @@ namespace Thumper_Custom_Level_Editor
 				if (loadedsample != value) {
 					loadedsample = value;
 					ShowPanel(true, panelSample);
-					SamplesaveAsToolStripMenuItem.Enabled = true;
-					SamplesaveToolStripMenuItem.Enabled = true;
 				}
 			}
 		}

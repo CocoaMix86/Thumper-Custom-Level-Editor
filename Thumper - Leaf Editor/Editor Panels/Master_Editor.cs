@@ -26,8 +26,6 @@ namespace Thumper_Custom_Level_Editor
 				if (loadedmaster != value) {
 					loadedmaster = value;
 					ShowPanel(true, panelMaster);
-					mastersaveAsToolStripMenuItem.Enabled = true;
-					mastersaveToolStripMenuItem.Enabled = true;
 				}
 			}
 		}

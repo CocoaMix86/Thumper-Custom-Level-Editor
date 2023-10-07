@@ -31,8 +31,6 @@ namespace Thumper_Custom_Level_Editor
 				else if (loadedlvl != value) {
 					loadedlvl = value;
 					ShowPanel(true, panelLevel);
-					lvlsaveAsToolStripMenuItem.Enabled = true;
-					lvlsaveToolStripMenuItem2.Enabled = true;
 				}
 			}
 		}

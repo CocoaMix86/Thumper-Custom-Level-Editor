@@ -35,8 +35,6 @@ namespace Thumper_Custom_Level_Editor
 				if (loadedleaf != value) {
 					loadedleaf = value;
 					ShowPanel(true, panelLeaf);
-					leafsaveAsToolStripMenuItem.Enabled = true;
-					leafsaveToolStripMenuItem.Enabled = true;
 				}
 			}
 		}
