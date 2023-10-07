@@ -18,6 +18,12 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedmaster; }
 			set
 			{
+				if (value == "") {
+					loadedmaster = value;
+					mastersaveAsToolStripMenuItem.Enabled = false;
+					mastersaveToolStripMenuItem.Enabled = false;
+					SaveMaster(true);
+				}
 				if (loadedmaster != value) {
 					loadedmaster = value;
 					ShowPanel(true, panelMaster);

@@ -19,6 +19,12 @@ namespace Thumper_Custom_Level_Editor
 		{
 			get { return loadedgate; }
 			set {
+				if (value == "") {
+					loadedgate = value;
+					gatesaveAsToolStripMenuItem.Enabled = false;
+					gatesaveToolStripMenuItem.Enabled = false;
+					SaveGate(true);
+				}
 				if (loadedgate != value) {
 					loadedgate = value;
 					ShowPanel(true, panelGate);

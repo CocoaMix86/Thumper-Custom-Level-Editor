@@ -25,6 +25,13 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedleaf; }
 			set
 			{
+				if (value == "") {
+					loadedleaf = value;
+					leafsaveAsToolStripMenuItem.Enabled = false;
+					leafsaveToolStripMenuItem.Enabled = false;
+					trackEditor.RowHeadersVisible = false;
+					SaveLeaf(true);
+				}
 				if (loadedleaf != value) {
 					loadedleaf = value;
 					ShowPanel(true, panelLeaf);
@@ -1173,17 +1180,7 @@ namespace Thumper_Custom_Level_Editor
 				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}\n\n{ex}"); }
 			}
 			//enable a bunch of elements now that a leaf is loaded.
-			dropObjects.Enabled = true;
-			dropParamPath.Enabled = true;
-			btnTrackColorDialog.Enabled = true;
-			NUD_TrackDoubleclick.Enabled = true;
-			NUD_TrackHighlight.Enabled = true;
-			btnTrackDelete.Enabled = _tracks.Count > 0;
-			btnTrackUp.Enabled = _tracks.Count > 1;
-			btnTrackDown.Enabled = _tracks.Count > 1;
-			btnTrackClear.Enabled = _tracks.Count > 0;
-			btnTrackCopy.Enabled = _tracks.Count > 0;
-			btnTrackColorExport.Enabled = btnTrackColorImport.Enabled = _tracks.Count > 0;
+			EnableLeafButtons(true);
 			//set save flag to true, since it just barely loaded
 			loadingleaf = false;
 			leafjson = _load;
@@ -1202,6 +1199,21 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
 				trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;
 			}
+		}
+
+		private void EnableLeafButtons(bool enable)
+        {
+			dropObjects.Enabled = enable;
+			dropParamPath.Enabled = enable;
+			btnTrackColorDialog.Enabled = enable;
+			NUD_TrackDoubleclick.Enabled = enable;
+			NUD_TrackHighlight.Enabled = enable;
+			btnTrackDelete.Enabled = _tracks.Count > 0;
+			btnTrackUp.Enabled = _tracks.Count > 1;
+			btnTrackDown.Enabled = _tracks.Count > 1;
+			btnTrackClear.Enabled = _tracks.Count > 0;
+			btnTrackCopy.Enabled = _tracks.Count > 0;
+			btnTrackColorExport.Enabled = btnTrackColorImport.Enabled = _tracks.Count > 0;
 		}
 
 		public JObject LeafBuildSave(string _leafname)

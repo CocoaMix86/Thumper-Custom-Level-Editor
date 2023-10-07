@@ -23,6 +23,12 @@ namespace Thumper_Custom_Level_Editor
 		{
 			get { return loadedsample; }
 			set {
+				if (value == "") {
+					loadedsample = value;
+					SamplesaveAsToolStripMenuItem.Enabled = false;
+					SamplesaveToolStripMenuItem.Enabled = false;
+					SaveSample(true);
+				}
 				if (loadedsample != value) {
 					loadedsample = value;
 					ShowPanel(true, panelSample);

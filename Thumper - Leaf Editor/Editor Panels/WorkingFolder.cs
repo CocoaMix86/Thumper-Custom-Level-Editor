@@ -308,6 +308,7 @@ namespace Thumper_Custom_Level_Editor
 			cfd_lvl.InitialDirectory = System.Reflection.Assembly.GetExecutingAssembly().Location;
 			//show FolderBrowser, and then set "game_dir" to whatever is chosen
 			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
+				ClearPanels();
 				workingfolder = cfd_lvl.FileName;
 				panelRecentFiles.Visible = false;
             }

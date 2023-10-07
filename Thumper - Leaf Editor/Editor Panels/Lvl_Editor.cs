@@ -20,7 +20,13 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedlvl; }
 			set
 			{
-				if (loadedlvl != value) {
+				if (value == "") {
+					loadedlvl = value;
+					lvlsaveAsToolStripMenuItem.Enabled = false;
+					lvlsaveToolStripMenuItem2.Enabled = false;
+					SaveLvl(true);
+				}
+				else if (loadedlvl != value) {
 					loadedlvl = value;
 					ShowPanel(true, panelLevel);
 					lvlsaveAsToolStripMenuItem.Enabled = true;
@@ -411,15 +417,6 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			clipboardpaths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index].paths);
 			btnLvlPasteTunnel.Enabled = true;
-			//if you're on the first row, do nothing
-			/*
-			if (lvlLeafList.CurrentRow.Index == 0)
-				return;
-			//copies the tunnels of the .leaf above the current select .leaf, to the selected .leaf
-			_lvlleafs[lvlLeafList.CurrentRow.Index].paths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index - 1].paths);
-			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
-			SaveLvl(false);
-			*/
 		}
 
 		private void btnLvlPasteTunnel_Click(object sender, EventArgs e)

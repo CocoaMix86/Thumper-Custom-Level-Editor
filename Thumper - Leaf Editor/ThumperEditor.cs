@@ -826,6 +826,7 @@ namespace Thumper_Custom_Level_Editor
             //handle column 0 clicks only as that's where the button is
             if (e.ColumnIndex == 0) {
                 //set working folder to the path
+                ClearPanels();
                 workingfolder = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
                 panelRecentFiles.Visible = false;
             }
@@ -835,6 +836,28 @@ namespace Thumper_Custom_Level_Editor
         {
             Control dgv = (sender as Panel).Controls.Cast<Control>().FirstOrDefault(control => String.Equals(control.Tag, "editorpaneldgv"));
             dgv.Focus();
+        }
+
+        private void ClearPanels()
+        {
+            //clear lists used for storing level data
+            _tracks.Clear();
+            _lvlleafs.Clear();
+            _gatelvls.Clear();
+            _masterlvls.Clear();
+            _samplelist.Clear();
+            //clear DGVs of data
+            trackEditor.Rows.Clear();
+            lvlSeqObjs.Rows.Clear();
+            lvlLeafPaths.Rows.Clear();
+            lvlLoopTracks.Rows.Clear();
+            EnableLeafButtons(false);
+            //set paths to nothing
+            _loadedleaf = "";
+            _loadedlvl = "";
+            _loadedgate = "";
+            _loadedmaster = "";
+            _loadedsample = "";
         }
     }
 }
