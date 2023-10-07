@@ -847,11 +847,11 @@ namespace Thumper_Custom_Level_Editor
             _masterlvls.Clear();
             _samplelist.Clear();
             //set paths to nothing
-            _loadedleaf = "";
-            _loadedlvl = "";
-            _loadedgate = "";
-            _loadedmaster = "";
-            _loadedsample = "";
+            _loadedleaf = null;
+            _loadedlvl = null;
+            _loadedgate = null;
+            _loadedmaster = null;
+            _loadedsample = null;
         }
     }
 }

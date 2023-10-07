@@ -25,11 +25,8 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedleaf; }
 			set
 			{
-				if (value == "") {
+				if (value == null) {
 					loadedleaf = value;
-					leafsaveAsToolStripMenuItem.Enabled = false;
-					leafsaveToolStripMenuItem.Enabled = false;
-					trackEditor.RowHeadersVisible = false;
 					trackEditor.Rows.Clear();
 					EnableLeafButtons(false);
 					lblTrackFileName.Text = "Leaf Editor";
@@ -40,7 +37,6 @@ namespace Thumper_Custom_Level_Editor
 					ShowPanel(true, panelLeaf);
 					leafsaveAsToolStripMenuItem.Enabled = true;
 					leafsaveToolStripMenuItem.Enabled = true;
-					trackEditor.RowHeadersVisible = true;
 				}
 			}
 		}
@@ -994,7 +990,7 @@ namespace Thumper_Custom_Level_Editor
 		///Import raw text from rich text box to selected row
 		public void TrackRawImport(DataGridViewRow r, JObject _rawdata)
 		{
-			if (trackEditor.CurrentRow.Index == -1)
+			if (_tracks.Count == 0)
 				return;
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			//_rawdata contains a list of all data points. By getting Properties() of it,
@@ -1018,11 +1014,13 @@ namespace Thumper_Custom_Level_Editor
 		///Updates row headers to be the Object and Param_Path
 		public void ChangeTrackName()
 		{
+			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
 				//show the sample name instead
 				trackEditor.CurrentRow.HeaderCell.Value = _tracks[_selecttrack].friendly_type + " (" + _tracks[_selecttrack].obj_name + ")";
 			else
 				trackEditor.CurrentRow.HeaderCell.Value = _tracks[_selecttrack].friendly_type + " (" + _tracks[_selecttrack].friendly_param + ")";
+			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		///Takes values in a row and puts in them in the rich text box, condensed
 		public void ShowRawTrackData()

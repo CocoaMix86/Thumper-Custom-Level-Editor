@@ -20,10 +20,8 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedlvl; }
 			set
 			{
-				if (value == "") {
+				if (value == null) {
 					loadedlvl = value;
-					lvlsaveAsToolStripMenuItem.Enabled = false;
-					lvlsaveToolStripMenuItem2.Enabled = false;
 					lvlSeqObjs.Rows.Clear();
 					lvlLeafPaths.Rows.Clear();
 					lvlLoopTracks.Rows.Clear();

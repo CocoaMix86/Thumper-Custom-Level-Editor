@@ -18,10 +18,8 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedmaster; }
 			set
 			{
-				if (value == "") {
+				if (value == null) {
 					loadedmaster = value;
-					mastersaveAsToolStripMenuItem.Enabled = false;
-					mastersaveToolStripMenuItem.Enabled = false;
 					lblMasterName.Text = "Master Editor";
 					SaveMaster(true);
 				}

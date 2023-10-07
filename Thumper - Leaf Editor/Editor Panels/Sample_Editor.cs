@@ -23,10 +23,8 @@ namespace Thumper_Custom_Level_Editor
 		{
 			get { return loadedsample; }
 			set {
-				if (value == "") {
+				if (value == null) {
 					loadedsample = value;
-					SamplesaveAsToolStripMenuItem.Enabled = false;
-					SamplesaveToolStripMenuItem.Enabled = false;
 					lblSampleEditor.Text = "Sample Editor";
 					SaveSample(true);
 				}
