@@ -109,26 +109,21 @@ namespace Thumper_Custom_Level_Editor
 				dropLeafStep.SelectedIndexChanged -= new EventHandler(dropLeafStep_SelectedIndexChanged);
 				dropLeafInterp.SelectedIndexChanged -= new EventHandler(dropLeafInterp_SelectedIndexChanged);
 				//set values from _tracks
-				//NUD_TrackDoubleclick.Value = Decimal.Parse(_tracks[_selecttrack][8]);
 				NUD_TrackHighlight.Value = (decimal)_tracks[_selecttrack].highlight_value;
 				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color));
 				txtDefault.Value = (decimal)_tracks[_selecttrack]._default;
 				dropLeafStep.SelectedItem = _tracks[_selecttrack].step;
 				dropLeafInterp.SelectedItem = _tracks[_selecttrack].default_interp;
+				txtDefault.Enabled = true;
+				dropLeafInterp.Enabled = true;
+				dropLeafStep.Enabled = true;
+				btnTrackApply.Enabled = true;
 				//re-add event handlers
 				NUD_TrackHighlight.ValueChanged += new EventHandler(NUD_TrackHighlight_ValueChanged);
 				txtDefault.ValueChanged += new EventHandler(txtDefault_ValueChanged);
 				dropLeafStep.SelectedIndexChanged += new EventHandler(dropLeafStep_SelectedIndexChanged);
 				dropLeafInterp.SelectedIndexChanged += new EventHandler(dropLeafInterp_SelectedIndexChanged);
 
-				//check if the current track has param_path set. If not, disable some controls
-				/*
-				if (_tracks[_selecttrack].param_path != null)
-					return;
-				btnTrackColorDialog.Enabled = false;
-				NUD_TrackDoubleclick.Enabled = false;
-				NUD_TrackHighlight.Enabled = false;
-				*/
 				if (txtTrait.Text == "kTraitBool")
 					toolTip1.SetToolTip(txtTrait, "BOOL: accepts values 1 (on) or 0 (off).");
 				else if (txtTrait.Text == "kTraitAction")
@@ -999,6 +994,8 @@ namespace Thumper_Custom_Level_Editor
 		///Import raw text from rich text box to selected row
 		public void TrackRawImport(DataGridViewRow r, JObject _rawdata)
 		{
+			if (trackEditor.CurrentRow.Index == -1)
+				return;
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			//_rawdata contains a list of all data points. By getting Properties() of it,
 			//each point becomes its own index
@@ -1217,6 +1214,12 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackClear.Enabled = _tracks.Count > 0;
 			btnTrackCopy.Enabled = _tracks.Count > 0;
 			btnTrackColorExport.Enabled = btnTrackColorImport.Enabled = _tracks.Count > 0;
+			if (!enable) {
+				txtDefault.Enabled = false;
+				dropLeafInterp.Enabled = false;
+				dropLeafStep.Enabled = false;
+				btnTrackApply.Enabled = false;
+			}
 		}
 
 		public JObject LeafBuildSave(string _leafname)

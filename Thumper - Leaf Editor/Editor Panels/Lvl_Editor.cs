@@ -206,7 +206,10 @@ namespace Thumper_Custom_Level_Editor
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
 			if (btnLvlPathAdd.Enabled == false) btnLvlCopyTunnel.Enabled = false;
 			btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
+			if (btnLvlSeqAdd.Enabled == false) btnLvlSeqDelete.Enabled = false;
+			if (btnLvlSeqAdd.Enabled == false) btnLvlSeqClear.Enabled = false;
 			btnLvlLoopAdd.Enabled = _lvlleafs.Count > 0;
+			if (btnLvlLoopAdd.Enabled == false) btnLvlLoopDelete.Enabled = false;
 			//set volume sequencer column total to length of all leafs + approach
 			lvlSeqObjs.ColumnCount = _lvllength;
 			//some styles
