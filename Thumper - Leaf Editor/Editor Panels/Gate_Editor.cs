@@ -156,7 +156,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 		}
-
+		///SAVE
 		private void gatesaveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			//if _loadedgate is somehow not set, force Save As instead
@@ -164,13 +164,10 @@ namespace Thumper_Custom_Level_Editor
 				gatesaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
-			//write contents direct to file without prompting save dialog
-			var _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
-			File.WriteAllText(_loadedgate, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveGate(true);
-			lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
+			else
+				WriteGate();
 		}
-
+		///SAVE AS
 		private void gatesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			using (var sfd = new SaveFileDialog()) {
@@ -187,19 +184,20 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'gate_' in your file name.", "File not saved");
 						return;
 					}
-					//get contents to save
-					var _save = GateBuildSave(Path.GetFileName(sfd.FileName));
-					//serialize JSON object to a string, and write it to the file
-					sfd.FileName = $@"{storePath}\gate_{tempFileName}";
-					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
-					//set a few visual elements to show what file is being worked on
-					lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
-					workingfolder = Path.GetDirectoryName(sfd.FileName);
-					_loadedgate = sfd.FileName;
-					//set save flag
-					SaveGate(true);
+					_loadedgate = $@"{storePath}\gate_{tempFileName}";
+					WriteGate();
+					//after saving new file, refresh the workingfolder
+					btnWorkRefresh.PerformClick();
 				}
 			}
+		}
+		private void WriteGate()
+		{
+			//write contents direct to file without prompting save dialog
+			var _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
+			File.WriteAllText(_loadedgate, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			SaveGate(true);
+			lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
 		}
 
 		/// All dropdowns of Gate Editor call this

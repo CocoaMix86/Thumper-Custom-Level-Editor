@@ -253,13 +253,8 @@ namespace Thumper_Custom_Level_Editor
 				lvlsaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
-			//write contents direct to file without prompting save dialog
-			var _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
-			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveLvl(true);
-			lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
-			//reload samples on save
-			LvlReloadSamples();
+			else
+				WriteLvl();
 		}
 		/// LVL SAVE AS
 		private void lvlsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -278,21 +273,22 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
 						return;
 					}
-					//get contents to save
-					var _save = LvlBuildSave(Path.GetFileName(sfd.FileName));
-					//serialize JSON object to a string, and write it to the file
-					sfd.FileName = $@"{storePath}\lvl_{tempFileName}";
-					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
-					//set a few visual elements to show what file is being worked on
-					lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
-					workingfolder = Path.GetDirectoryName(sfd.FileName);
-					_loadedlvl = sfd.FileName;
-					//set save flag
-					SaveLvl(true);
-					//reload samples on save
-					LvlReloadSamples();
+					_loadedlvl = $@"{storePath}\leaf_{tempFileName}";
+					WriteLvl();
+					//after saving new file, refresh the workingfolder
+					btnWorkRefresh.PerformClick();
 				}
 			}
+		}
+		private void WriteLvl()
+		{
+			//serialize JSON object to a string, and write it to the file
+			var _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
+			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			SaveLvl(true);
+			lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
+			//reload samples on save
+			LvlReloadSamples();
 		}
 		/// LVL LOAD
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)

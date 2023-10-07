@@ -169,7 +169,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 		}
-
+		///SAVE
 		private void SamplesaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			//if _loadedgate is somehow not set, force Save As instead
@@ -177,13 +177,10 @@ namespace Thumper_Custom_Level_Editor
 				SamplesaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
-			//write contents direct to file without prompting save dialog
-			var _save = SampleBuildSave();
-			File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveSample(true);
-			lblSampleEditor.Text = $"Sample Editor - {_loadedsample}";
+			else
+				WriteSample();
 		}
-
+		///SAVE AS
 		private void SamplesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			using (var sfd = new SaveFileDialog()) {
@@ -200,19 +197,20 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'samp_' in your file name.", "File not saved");
 						return;
 					}
-					//get contents to save
-					var _save = SampleBuildSave();
-					//serialize JSON object to a string, and write it to the file
-					sfd.FileName = $@"{storePath}\samp_{tempFileName}";
-					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
-					//set a few visual elements to show what file is being worked on
-					workingfolder = Path.GetDirectoryName(sfd.FileName);
-					_loadedsample = sfd.FileName;
-					lblSampleEditor.Text = $"Sample Editor - {_loadedsample}";
-					//set save flag
-					SaveSample(true);
+					_loadedsample = $@"{storePath}\samp_{tempFileName}";
+					WriteSample();
+					//after saving new file, refresh the workingfolder
+					btnWorkRefresh.PerformClick();
 				}
 			}
+		}
+		private void WriteSample()
+        {
+			//write contents direct to file without prompting save dialog
+			var _save = SampleBuildSave();
+			File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			SaveSample(true);
+			lblSampleEditor.Text = $"Sample Editor - {_loadedsample}";
 		}
 
 		///Detect dragon-and-drop of files and then load them to Sample files

@@ -208,7 +208,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 		}
-
+		///SAVE
 		private void mastersaveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			//if _loadedmaster is somehow not set, force Save As instead
@@ -216,13 +216,10 @@ namespace Thumper_Custom_Level_Editor
 				mastersaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
-			//write contents direct to file without prompting save dialog
-			var _save = MasterBuildSave();
-			File.WriteAllText(_loadedmaster, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveMaster(true);
-			lblMasterName.Text = $"Master Editor - sequin.master";
+			else
+				WriteMaster();
 		}
-
+		///SAVE AS
 		private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			using (var sfd = new SaveFileDialog()) {
@@ -233,19 +230,21 @@ namespace Thumper_Custom_Level_Editor
 				if (sfd.ShowDialog() == DialogResult.OK) {
 					//separate path and filename
 					string storePath = Path.GetDirectoryName(sfd.FileName);
-					sfd.FileName = $@"{storePath}\master_sequin.txt";
-					workingfolder = Path.GetDirectoryName(sfd.FileName);
-					//get contents to save
-					var _save = MasterBuildSave();
-					//serialize JSON object to a string, and write it to the file
-					File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(_save, Formatting.Indented));
-					//set a few visual elements to show what file is being worked on
-					lblMasterName.Text = $"Master Editor - sequin.master";
-					_loadedmaster = sfd.FileName;
-					//set save flag
-					SaveMaster(true);
+					_loadedmaster = $@"{storePath}\master_sequin.txt";
+					WriteMaster();
+					//after saving new file, refresh the workingfolder
+					btnWorkRefresh.PerformClick();
 				}
 			}
+		}
+		private void WriteMaster()
+		{
+			//write contents direct to file without prompting save dialog
+			var _save = MasterBuildSave();
+			File.WriteAllText(_loadedmaster, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			SaveMaster(true);
+			lblMasterName.Text = $"Master Editor - sequin.master";
+
 		}
 		#endregion
 
