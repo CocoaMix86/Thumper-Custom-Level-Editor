@@ -412,8 +412,6 @@ namespace Thumper_Custom_Level_Editor
 						_loadedleaftemp = "template";
 						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
 						LoadLeaf(_load);
-						//set this to null, as it's a template. Next time on save, the user can save the file elsewhere
-						_loadedleaf = null;
 					}
 				}
 			}
