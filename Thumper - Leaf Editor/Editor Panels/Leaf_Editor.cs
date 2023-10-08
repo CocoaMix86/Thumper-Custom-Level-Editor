@@ -171,9 +171,10 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.ColumnIndex == -1 || e.RowIndex == -1)
 				return;
-			if (e.Button == MouseButtons.Left) {
+			if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
 				if (_tracks[e.RowIndex].trait_type == "kTraitBool" || _tracks[e.RowIndex].trait_type == "kTraitAction")
-					(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 1;
+					if ((sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value == null)
+						(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 1;
 			}
 			else if (e.Button == MouseButtons.Right) {
 				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
