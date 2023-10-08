@@ -70,6 +70,12 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Columns[i].Width = trackZoom.Value;
 			}
 		}
+		private void trackZoomVert_Scroll(object sender, EventArgs e)
+		{
+			for (int i = 0; i < trackEditor.Rows.Count; i++) {
+				trackEditor.Rows[i].Height = trackZoomVert.Value;
+			}
+		}
 		///DATAGRIDVIEW - TRACK EDITOR
 		//Row changed
 		private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)

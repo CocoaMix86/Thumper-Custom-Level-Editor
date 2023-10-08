@@ -139,8 +139,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.trackEditor = new System.Windows.Forms.DataGridView();
             this.trackZoom = new System.Windows.Forms.TrackBar();
-            this.label10 = new System.Windows.Forms.Label();
             this.panelZoom = new System.Windows.Forms.Panel();
+            this.trackZoomVert = new System.Windows.Forms.TrackBar();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
             this.toolstripTitleLeaf = new System.Windows.Forms.ToolStrip();
@@ -190,6 +190,7 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.dropTimeSig = new System.Windows.Forms.ToolStripComboBox();
             this.btnLeafAutoPlace = new System.Windows.Forms.ToolStripButton();
+            this.btnLeafZoom = new System.Windows.Forms.ToolStripButton();
             this.panelLevel = new System.Windows.Forms.Panel();
             this.toolstripTitleLvl = new System.Windows.Forms.ToolStrip();
             this.lblLvlName = new System.Windows.Forms.ToolStripLabel();
@@ -423,6 +424,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             this.panelZoom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).BeginInit();
             this.panelLeaf.SuspendLayout();
             this.toolstripTitleLeaf.SuspendLayout();
             this.leafToolStrip.SuspendLayout();
@@ -1430,7 +1432,6 @@
             dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle38;
             this.trackEditor.RowTemplate.Height = 20;
-            this.trackEditor.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.trackEditor.Size = new System.Drawing.Size(814, 385);
             this.trackEditor.TabIndex = 40;
@@ -1440,45 +1441,54 @@
             this.trackEditor.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.trackEditor_EditingControlShowing);
             this.trackEditor.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_RowEnter);
             this.trackEditor.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_RowHeaderMouseClick);
+            this.trackEditor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.trackEditor_Scroll);
             this.trackEditor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trackEditor_KeyDown);
             this.trackEditor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.trackEditor_KeyPress);
             // 
             // trackZoom
             // 
+            this.trackZoom.AutoSize = false;
             this.trackZoom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trackZoom.Location = new System.Drawing.Point(21, 3);
+            this.trackZoom.Location = new System.Drawing.Point(-3, 3);
+            this.trackZoom.Margin = new System.Windows.Forms.Padding(0);
             this.trackZoom.Maximum = 120;
             this.trackZoom.Minimum = 2;
             this.trackZoom.Name = "trackZoom";
-            this.trackZoom.Size = new System.Drawing.Size(100, 45);
+            this.trackZoom.Size = new System.Drawing.Size(100, 19);
             this.trackZoom.TabIndex = 41;
             this.trackZoom.TickStyle = System.Windows.Forms.TickStyle.None;
             this.toolTip1.SetToolTip(this.trackZoom, "Cell zoom/width");
             this.trackZoom.Value = 40;
             this.trackZoom.Scroll += new System.EventHandler(this.trackZoom_Scroll);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
-            this.label10.Location = new System.Drawing.Point(8, 4);
-            this.label10.MinimumSize = new System.Drawing.Size(20, 20);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(20, 20);
-            this.label10.TabIndex = 42;
-            this.toolTip1.SetToolTip(this.label10, "Cell zoom/width");
-            // 
             // panelZoom
             // 
             this.panelZoom.BackColor = System.Drawing.Color.Black;
-            this.panelZoom.Controls.Add(this.label10);
+            this.panelZoom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelZoom.Controls.Add(this.trackZoomVert);
             this.panelZoom.Controls.Add(this.trackZoom);
-            this.panelZoom.Location = new System.Drawing.Point(501, 22);
+            this.panelZoom.Location = new System.Drawing.Point(477, 51);
             this.panelZoom.Name = "panelZoom";
-            this.panelZoom.Size = new System.Drawing.Size(115, 27);
+            this.panelZoom.Size = new System.Drawing.Size(98, 116);
             this.panelZoom.TabIndex = 43;
+            this.panelZoom.Visible = false;
+            // 
+            // trackZoomVert
+            // 
+            this.trackZoomVert.AutoSize = false;
+            this.trackZoomVert.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.trackZoomVert.Location = new System.Drawing.Point(39, 17);
+            this.trackZoomVert.Margin = new System.Windows.Forms.Padding(0);
+            this.trackZoomVert.Maximum = 120;
+            this.trackZoomVert.Minimum = 2;
+            this.trackZoomVert.Name = "trackZoomVert";
+            this.trackZoomVert.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackZoomVert.Size = new System.Drawing.Size(19, 100);
+            this.trackZoomVert.TabIndex = 43;
+            this.trackZoomVert.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.toolTip1.SetToolTip(this.trackZoomVert, "Row zoom/height");
+            this.trackZoomVert.Value = 20;
+            this.trackZoomVert.Scroll += new System.EventHandler(this.trackZoomVert_Scroll);
             // 
             // btnRawImport
             // 
@@ -1498,13 +1508,13 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLeaf.Controls.Add(this.panelZoom);
+            this.panelLeaf.Controls.Add(this.trackEditor);
             this.panelLeaf.Controls.Add(this.toolstripTitleLeaf);
             this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
             this.panelLeaf.Controls.Add(this.leafToolStrip);
             this.panelLeaf.Controls.Add(this.label1);
-            this.panelLeaf.Controls.Add(this.trackEditor);
             this.panelLeaf.Controls.Add(this.label5);
-            this.panelLeaf.Controls.Add(this.panelZoom);
             this.panelLeaf.Controls.Add(this.panel2);
             this.panelLeaf.Controls.Add(this.panel3);
             this.panelLeaf.Controls.Add(this.panel4);
@@ -2117,13 +2127,14 @@
             this.btnLeafSplit,
             this.toolStripLabel2,
             this.dropTimeSig,
-            this.btnLeafAutoPlace});
+            this.btnLeafAutoPlace,
+            this.btnLeafZoom});
             this.leaftoolsToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.leaftoolsToolStrip.Location = new System.Drawing.Point(315, 22);
             this.leaftoolsToolStrip.Name = "leaftoolsToolStrip";
             this.leaftoolsToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.leaftoolsToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.leaftoolsToolStrip.Size = new System.Drawing.Size(333, 30);
+            this.leaftoolsToolStrip.Size = new System.Drawing.Size(275, 30);
             this.leaftoolsToolStrip.Stretch = true;
             this.leaftoolsToolStrip.TabIndex = 143;
             // 
@@ -2203,6 +2214,16 @@
             this.btnLeafAutoPlace.Size = new System.Drawing.Size(29, 27);
             this.btnLeafAutoPlace.ToolTipText = "Enable auto-insert on click\r\n(inserts \"1\" on kTraitBool and kTraitAction objects)" +
     "";
+            // 
+            // btnLeafZoom
+            // 
+            this.btnLeafZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLeafZoom.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
+            this.btnLeafZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafZoom.Name = "btnLeafZoom";
+            this.btnLeafZoom.Size = new System.Drawing.Size(29, 27);
+            this.btnLeafZoom.ToolTipText = "Click to show zoom";
+            this.btnLeafZoom.Click += new System.EventHandler(this.btnLeafZoom_Click);
             // 
             // panelLevel
             // 
@@ -5786,7 +5807,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
             this.panelZoom.ResumeLayout(false);
-            this.panelZoom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).EndInit();
             this.panelLeaf.ResumeLayout(false);
             this.panelLeaf.PerformLayout();
             this.toolstripTitleLeaf.ResumeLayout(false);
@@ -5918,7 +5939,6 @@
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.DataGridView trackEditor;
 		private System.Windows.Forms.TrackBar trackZoom;
-		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Panel panelZoom;
 		private System.Windows.Forms.Button btnRawImport;
 		private System.Windows.Forms.Panel panelLeaf;
@@ -6256,6 +6276,8 @@
         private System.Windows.Forms.DataGridViewImageColumn FileType;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
         private System.Windows.Forms.ToolStripButton btnLeafAutoPlace;
+        private System.Windows.Forms.TrackBar trackZoomVert;
+        private System.Windows.Forms.ToolStripButton btnLeafZoom;
     }
 }
 
