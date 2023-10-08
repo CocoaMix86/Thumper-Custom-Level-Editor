@@ -304,6 +304,17 @@ namespace Thumper_Custom_Level_Editor
 			//sets flag that leaf has unsaved changes
 			SaveLeaf(false);
 		}
+		private void dropTimeSig_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter) {
+				string s = dropTimeSig.Text;
+				// if item exists, select it. if it does not exist, add it.
+				if (!dropTimeSig.Items.Contains(s)) {
+					dropTimeSig.Items.Add(s);
+				}
+				dropTimeSig.SelectedItem = s;
+			}
+		}
 		///NUMERIC_UPDOWN TRACK HIGHLIGHT VALUE
 		private void NUD_TrackHighlight_ValueChanged(object sender, EventArgs e)
 		{
@@ -1120,6 +1131,9 @@ namespace Thumper_Custom_Level_Editor
 			//set beat_cnt and time_sig
 			numericUpDown_LeafLength.Value = (int?)_load["beat_cnt"] ?? 0;
 			var _time_sig = (string)_load["time_sig"] ?? "4/4";
+			if (!dropTimeSig.Items.Contains(_time_sig)) {
+				dropTimeSig.Items.Add(_time_sig);
+			}
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
 			//each object in the seq_objs[] list becomes a track
 			foreach (var seq_obj in _load["seq_objs"]) {
