@@ -1500,6 +1500,7 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLeaf.Controls.Add(this.toolstripTitleLeaf);
             this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
             this.panelLeaf.Controls.Add(this.leafToolStrip);
             this.panelLeaf.Controls.Add(this.label1);
@@ -1510,7 +1511,6 @@
             this.panelLeaf.Controls.Add(this.panel3);
             this.panelLeaf.Controls.Add(this.panel4);
             this.panelLeaf.Controls.Add(this.panelRawData);
-            this.panelLeaf.Controls.Add(this.toolstripTitleLeaf);
             this.panelLeaf.Controls.Add(this.leaftoolsToolStrip);
             this.panelLeaf.Location = new System.Drawing.Point(327, 385);
             this.panelLeaf.MinimumSize = new System.Drawing.Size(60, 60);
@@ -2210,6 +2210,7 @@
             // 
             this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLevel.Controls.Add(this.toolstripTitleLvl);
             this.panelLevel.Controls.Add(this.lvlLoopToolStrip);
             this.panelLevel.Controls.Add(this.lvlPathsToolStrip);
             this.panelLevel.Controls.Add(this.lvlVolumeToolStrip);
@@ -2232,7 +2233,6 @@
             this.panelLevel.Controls.Add(this.label20);
             this.panelLevel.Controls.Add(this.panel1);
             this.panelLevel.Controls.Add(this.lvlLeafList);
-            this.panelLevel.Controls.Add(this.toolstripTitleLvl);
             this.panelLevel.Location = new System.Drawing.Point(494, 11);
             this.panelLevel.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLevel.Name = "panelLevel";
@@ -3152,6 +3152,7 @@
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMaster.Controls.Add(this.toolstripTitleMaster);
             this.panelMaster.Controls.Add(this.masterToolStrip);
             this.panelMaster.Controls.Add(this.masterLvlList);
             this.panelMaster.Controls.Add(this.btnMasterOpenRest);
@@ -3178,7 +3179,6 @@
             this.panelMaster.Controls.Add(this.dropMasterSkybox);
             this.panelMaster.Controls.Add(this.label13);
             this.panelMaster.Controls.Add(this.lblConfigColorHelp);
-            this.panelMaster.Controls.Add(this.toolstripTitleMaster);
             this.panelMaster.Controls.Add(this.label33);
             this.panelMaster.Controls.Add(this.label32);
             this.panelMaster.Controls.Add(this.label31);
@@ -3895,6 +3895,7 @@
             // 
             this.panelGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelGate.Controls.Add(this.toolstripTitleGate);
             this.panelGate.Controls.Add(this.lblPyramidWarn);
             this.panelGate.Controls.Add(this.gateToolStrip);
             this.panelGate.Controls.Add(this.btnGateOpenRestart);
@@ -3914,7 +3915,6 @@
             this.panelGate.Controls.Add(this.dropGateBoss);
             this.panelGate.Controls.Add(this.label36);
             this.panelGate.Controls.Add(this.gateLvlList);
-            this.panelGate.Controls.Add(this.toolstripTitleGate);
             this.panelGate.Location = new System.Drawing.Point(1407, 22);
             this.panelGate.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelGate.Name = "panelGate";
@@ -4435,10 +4435,10 @@
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelWorkingFolder.Controls.Add(this.toolstripTitleWork);
             this.panelWorkingFolder.Controls.Add(this.workingToolStrip2);
             this.panelWorkingFolder.Controls.Add(this.workingToolStrip);
             this.panelWorkingFolder.Controls.Add(this.workingfolderFiles);
-            this.panelWorkingFolder.Controls.Add(this.toolstripTitleWork);
             this.panelWorkingFolder.Location = new System.Drawing.Point(4, 353);
             this.panelWorkingFolder.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelWorkingFolder.Name = "panelWorkingFolder";
@@ -5089,6 +5089,7 @@
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSample.Controls.Add(this.toolstripTitleSample);
             this.panelSample.Controls.Add(this.label14);
             this.panelSample.Controls.Add(this.sampleToolStrip);
             this.panelSample.Controls.Add(this.label45);
@@ -5096,7 +5097,6 @@
             this.panelSample.Controls.Add(this.label50);
             this.panelSample.Controls.Add(this.label54);
             this.panelSample.Controls.Add(this.sampleList);
-            this.panelSample.Controls.Add(this.toolstripTitleSample);
             this.panelSample.Location = new System.Drawing.Point(1361, 385);
             this.panelSample.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelSample.Name = "panelSample";
