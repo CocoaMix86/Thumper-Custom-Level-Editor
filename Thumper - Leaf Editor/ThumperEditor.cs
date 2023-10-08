@@ -105,6 +105,8 @@ namespace Thumper_Custom_Level_Editor
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
+            //event handler needed for dgv
+            trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
         }
         ///EXIT APP
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
@@ -854,5 +856,6 @@ namespace Thumper_Custom_Level_Editor
         {
             panelZoom.Visible = !panelZoom.Visible;
         }
+
     }
 }

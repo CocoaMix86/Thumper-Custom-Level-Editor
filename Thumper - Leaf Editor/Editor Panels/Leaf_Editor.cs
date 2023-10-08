@@ -43,6 +43,8 @@ namespace Thumper_Custom_Level_Editor
 		dynamic leafjson;
 		public string leafobj;
 		public bool loadingleaf = false;
+		public bool controldown = false;
+		public bool altdown = false;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
@@ -74,6 +76,25 @@ namespace Thumper_Custom_Level_Editor
 		{
 			for (int i = 0; i < trackEditor.Rows.Count; i++) {
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
+			}
+		}
+		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
+		{
+			int horiz = trackZoom.Value;
+			int vert = trackZoom.Value;
+			int scrollLines = SystemInformation.MouseWheelScrollLines;
+
+			if (controldown && e.Delta > 0) {
+				trackZoom.Value = Math.Max(1, horiz - scrollLines);
+			}
+			else if (controldown && e.Delta < 0) {
+				trackZoom.Value = Math.Min(100, horiz + scrollLines);
+			}
+			if (altdown && e.Delta > 0) {
+				trackZoomVert.Value = Math.Max(1, vert - scrollLines);
+			}
+			else if (altdown && e.Delta < 0) {
+				trackZoomVert.Value = Math.Min(100, vert + scrollLines);
 			}
 		}
 		///DATAGRIDVIEW - TRACK EDITOR
@@ -199,6 +220,8 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void trackEditor_KeyDown(object sender, KeyEventArgs e)
 		{
+			controldown = e.Control;
+			altdown = e.Alt;
 			//Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
@@ -207,13 +230,13 @@ namespace Thumper_Custom_Level_Editor
 				SaveLeaf(false);
 			}
 			//copies selected cells
-			if (e.Control && e.KeyCode == Keys.C) {
+			if (controldown && e.KeyCode == Keys.C) {
 				DataObject d = trackEditor.GetClipboardContent();
 				Clipboard.SetDataObject(d, true);
 				e.Handled = true;
 			}
 			//pastes cell data from clipboard
-			if (e.Control && e.KeyCode == Keys.V) {
+			if (controldown && e.KeyCode == Keys.V) {
 				string s = Clipboard.GetText().Replace("\r\n", "\n");
 				string[] lines = s.Split('\n');
 				int row = trackEditor.CurrentCell.RowIndex;
@@ -232,6 +255,11 @@ namespace Thumper_Custom_Level_Editor
 					TrackUpdateHighlighting(trackEditor.Rows[row + _line]);
 				}
 			}
+		}
+		private void trackEditor_KeyUp(object sender, KeyEventArgs e)
+		{
+			controldown = e.Control;
+			altdown = e.Alt;
 		}
 		//Clicking row headers to select the row
 		private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
