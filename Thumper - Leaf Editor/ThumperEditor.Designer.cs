@@ -143,6 +143,13 @@
             this.panelZoom = new System.Windows.Forms.Panel();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
+            this.toolstripTitleLeaf = new System.Windows.Forms.ToolStrip();
+            this.lblTrackFileName = new System.Windows.Forms.ToolStripLabel();
+            this.btnSaveLeaf = new System.Windows.Forms.ToolStripButton();
+            this.lblLeafClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutLeaf = new System.Windows.Forms.ToolStripButton();
+            this.btnLeafObjRefresh = new System.Windows.Forms.ToolStripButton();
+            this.btnRevertLeaf = new System.Windows.Forms.ToolStripButton();
             this.leafToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnTrackAdd = new System.Windows.Forms.ToolStripButton();
             this.btnTrackDelete = new System.Windows.Forms.ToolStripButton();
@@ -176,13 +183,6 @@
             this.NUD_TrackDoubleclick = new System.Windows.Forms.NumericUpDown();
             this.panelRawData = new System.Windows.Forms.Panel();
             this.lblRawData = new System.Windows.Forms.Label();
-            this.toolstripTitleLeaf = new System.Windows.Forms.ToolStrip();
-            this.lblTrackFileName = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveLeaf = new System.Windows.Forms.ToolStripButton();
-            this.lblLeafClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutLeaf = new System.Windows.Forms.ToolStripButton();
-            this.btnLeafObjRefresh = new System.Windows.Forms.ToolStripButton();
-            this.btnRevertLeaf = new System.Windows.Forms.ToolStripButton();
             this.leaftoolsToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLeafColors = new System.Windows.Forms.ToolStripButton();
             this.btnLEafInterpLinear = new System.Windows.Forms.ToolStripButton();
@@ -191,6 +191,13 @@
             this.dropTimeSig = new System.Windows.Forms.ToolStripComboBox();
             this.btnLeafAutoPlace = new System.Windows.Forms.ToolStripButton();
             this.panelLevel = new System.Windows.Forms.Panel();
+            this.toolstripTitleLvl = new System.Windows.Forms.ToolStrip();
+            this.lblLvlName = new System.Windows.Forms.ToolStripLabel();
+            this.btnSaveLvl = new System.Windows.Forms.ToolStripButton();
+            this.lblLvlClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutLvl = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlLoopRefresh = new System.Windows.Forms.ToolStripButton();
+            this.btnRevertLvl = new System.Windows.Forms.ToolStripButton();
             this.lvlLoopToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlLoopAdd = new System.Windows.Forms.ToolStripButton();
             this.btnLvlLoopDelete = new System.Windows.Forms.ToolStripButton();
@@ -237,14 +244,14 @@
             this.lvlfiletype = new System.Windows.Forms.DataGridViewImageColumn();
             this.Leaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Beats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolstripTitleLvl = new System.Windows.Forms.ToolStrip();
-            this.lblLvlName = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveLvl = new System.Windows.Forms.ToolStripButton();
-            this.lblLvlClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutLvl = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlLoopRefresh = new System.Windows.Forms.ToolStripButton();
-            this.btnRevertLvl = new System.Windows.Forms.ToolStripButton();
             this.panelMaster = new System.Windows.Forms.Panel();
+            this.toolstripTitleMaster = new System.Windows.Forms.ToolStrip();
+            this.lblMasterName = new System.Windows.Forms.ToolStripLabel();
+            this.btnSaveMaster = new System.Windows.Forms.ToolStripButton();
+            this.lblMasterClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutMaster = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnRevertMaster = new System.Windows.Forms.ToolStripButton();
             this.masterToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnMasterLvlAdd = new System.Windows.Forms.ToolStripButton();
             this.btnMasterLvlDelete = new System.Windows.Forms.ToolStripButton();
@@ -282,18 +289,18 @@
             this.dropMasterSkybox = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.lblConfigColorHelp = new System.Windows.Forms.Label();
-            this.toolstripTitleMaster = new System.Windows.Forms.ToolStrip();
-            this.lblMasterName = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveMaster = new System.Windows.Forms.ToolStripButton();
-            this.lblMasterClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutMaster = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.btnRevertMaster = new System.Windows.Forms.ToolStripButton();
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panelGate = new System.Windows.Forms.Panel();
+            this.toolstripTitleGate = new System.Windows.Forms.ToolStrip();
+            this.lblGateName = new System.Windows.Forms.ToolStripLabel();
+            this.btnSaveGate = new System.Windows.Forms.ToolStripButton();
+            this.lblGateClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutGate = new System.Windows.Forms.ToolStripButton();
+            this.btnGateRefresh = new System.Windows.Forms.ToolStripButton();
+            this.btnRevertGate = new System.Windows.Forms.ToolStripButton();
             this.lblPyramidWarn = new System.Windows.Forms.Label();
             this.gateToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnGateLvlAdd = new System.Windows.Forms.ToolStripButton();
@@ -319,14 +326,13 @@
             this.gateLvlList = new System.Windows.Forms.DataGridView();
             this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.toolstripTitleGate = new System.Windows.Forms.ToolStrip();
-            this.lblGateName = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveGate = new System.Windows.Forms.ToolStripButton();
-            this.lblGateClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutGate = new System.Windows.Forms.ToolStripButton();
-            this.btnGateRefresh = new System.Windows.Forms.ToolStripButton();
-            this.btnRevertGate = new System.Windows.Forms.ToolStripButton();
             this.panelWorkingFolder = new System.Windows.Forms.Panel();
+            this.toolstripTitleWork = new System.Windows.Forms.ToolStrip();
+            this.lblWorkingFolder = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.lblWorkClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutWork = new System.Windows.Forms.ToolStripButton();
+            this.btnWorkRefresh = new System.Windows.Forms.ToolStripButton();
             this.workingToolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnLevelFolder = new System.Windows.Forms.ToolStripButton();
             this.btnWorkNewFile = new System.Windows.Forms.ToolStripDropDownButton();
@@ -353,12 +359,6 @@
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolstripTitleWork = new System.Windows.Forms.ToolStrip();
-            this.lblWorkingFolder = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.lblWorkClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutWork = new System.Windows.Forms.ToolStripButton();
-            this.btnWorkRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label48 = new System.Windows.Forms.Label();
             this.contextMenuDock = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -376,6 +376,12 @@
             this.label55 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.panelSample = new System.Windows.Forms.Panel();
+            this.toolstripTitleSample = new System.Windows.Forms.ToolStrip();
+            this.lblSampleEditor = new System.Windows.Forms.ToolStripLabel();
+            this.btnSaveSample = new System.Windows.Forms.ToolStripButton();
+            this.lblSampleClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutSamp = new System.Windows.Forms.ToolStripButton();
+            this.btnRevertSample = new System.Windows.Forms.ToolStripButton();
             this.sampleToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnSampleAdd = new System.Windows.Forms.ToolStripButton();
             this.btnSampleDelete = new System.Windows.Forms.ToolStripButton();
@@ -393,12 +399,6 @@
             this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolstripTitleSample = new System.Windows.Forms.ToolStrip();
-            this.lblSampleEditor = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveSample = new System.Windows.Forms.ToolStripButton();
-            this.lblSampleClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutSamp = new System.Windows.Forms.ToolStripButton();
-            this.btnRevertSample = new System.Windows.Forms.ToolStripButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelBeeble = new System.Windows.Forms.Panel();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
@@ -424,6 +424,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             this.panelZoom.SuspendLayout();
             this.panelLeaf.SuspendLayout();
+            this.toolstripTitleLeaf.SuspendLayout();
             this.leafToolStrip.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -432,9 +433,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).BeginInit();
             this.panelRawData.SuspendLayout();
-            this.toolstripTitleLeaf.SuspendLayout();
             this.leaftoolsToolStrip.SuspendLayout();
             this.panelLevel.SuspendLayout();
+            this.toolstripTitleLvl.SuspendLayout();
             this.lvlLoopToolStrip.SuspendLayout();
             this.lvlPathsToolStrip.SuspendLayout();
             this.lvlVolumeToolStrip.SuspendLayout();
@@ -447,28 +448,27 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvlLeafList)).BeginInit();
-            this.toolstripTitleLvl.SuspendLayout();
             this.panelMaster.SuspendLayout();
+            this.toolstripTitleMaster.SuspendLayout();
             this.masterToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).BeginInit();
-            this.toolstripTitleMaster.SuspendLayout();
             this.panelGate.SuspendLayout();
+            this.toolstripTitleGate.SuspendLayout();
             this.gateToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
-            this.toolstripTitleGate.SuspendLayout();
             this.panelWorkingFolder.SuspendLayout();
+            this.toolstripTitleWork.SuspendLayout();
             this.workingToolStrip2.SuspendLayout();
             this.contextMenuNewFile.SuspendLayout();
             this.workingToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.workingfolderRightClick.SuspendLayout();
-            this.toolstripTitleWork.SuspendLayout();
             this.contextMenuDock.SuspendLayout();
             this.panelSample.SuspendLayout();
+            this.toolstripTitleSample.SuspendLayout();
             this.sampleToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
-            this.toolstripTitleSample.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelBeeble.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitHorizontal)).BeginInit();
@@ -524,8 +524,6 @@
             this.menuStrip.Size = new System.Drawing.Size(600, 29);
             this.menuStrip.TabIndex = 20;
             this.menuStrip.Text = "mnuLeafEditor";
-            this.menuStrip.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip_MouseDown);
-            this.menuStrip.MouseUp += new System.Windows.Forms.MouseEventHandler(this.menuStrip_MouseUp);
             // 
             // fileToolStripMenuItem1
             // 
@@ -1524,6 +1522,95 @@
             this.panelLeaf.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLeaf.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
+            // toolstripTitleLeaf
+            // 
+            this.toolstripTitleLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleLeaf.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleLeaf.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleLeaf.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblTrackFileName,
+            this.btnSaveLeaf,
+            this.lblLeafClose,
+            this.lblPopoutLeaf,
+            this.btnLeafObjRefresh,
+            this.btnRevertLeaf});
+            this.toolstripTitleLeaf.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleLeaf.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleLeaf.Name = "toolstripTitleLeaf";
+            this.toolstripTitleLeaf.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleLeaf.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleLeaf.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleLeaf.Size = new System.Drawing.Size(1030, 22);
+            this.toolstripTitleLeaf.TabIndex = 141;
+            this.toolstripTitleLeaf.Text = "titlebar";
+            // 
+            // lblTrackFileName
+            // 
+            this.lblTrackFileName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTrackFileName.ForeColor = System.Drawing.Color.PaleGreen;
+            this.lblTrackFileName.Name = "lblTrackFileName";
+            this.lblTrackFileName.Size = new System.Drawing.Size(68, 19);
+            this.lblTrackFileName.Text = "Leaf Editor";
+            // 
+            // btnSaveLeaf
+            // 
+            this.btnSaveLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveLeaf.Enabled = false;
+            this.btnSaveLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
+            this.btnSaveLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveLeaf.Name = "btnSaveLeaf";
+            this.btnSaveLeaf.Size = new System.Drawing.Size(23, 19);
+            this.btnSaveLeaf.ToolTipText = "Save leaf file";
+            this.btnSaveLeaf.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // lblLeafClose
+            // 
+            this.lblLeafClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblLeafClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblLeafClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblLeafClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblLeafClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblLeafClose.Name = "lblLeafClose";
+            this.lblLeafClose.Size = new System.Drawing.Size(23, 22);
+            this.lblLeafClose.Text = "toolStripButton6";
+            this.lblLeafClose.ToolTipText = "Close panel";
+            this.lblLeafClose.Click += new System.EventHandler(this.lblLeafClose_Click);
+            // 
+            // lblPopoutLeaf
+            // 
+            this.lblPopoutLeaf.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutLeaf.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutLeaf.Name = "lblPopoutLeaf";
+            this.lblPopoutLeaf.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutLeaf.Text = "Dock panel";
+            this.lblPopoutLeaf.ToolTipText = "Undock panel";
+            this.lblPopoutLeaf.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // btnLeafObjRefresh
+            // 
+            this.btnLeafObjRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLeafObjRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLeafObjRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.btnLeafObjRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
+            this.btnLeafObjRefresh.Size = new System.Drawing.Size(23, 19);
+            this.btnLeafObjRefresh.ToolTipText = "Reload list of Track Objects from track_objects.txt";
+            this.btnLeafObjRefresh.Click += new System.EventHandler(this.btnLeafObjRefresh_Click);
+            // 
+            // btnRevertLeaf
+            // 
+            this.btnRevertLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRevertLeaf.Enabled = false;
+            this.btnRevertLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
+            this.btnRevertLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRevertLeaf.Name = "btnRevertLeaf";
+            this.btnRevertLeaf.Size = new System.Drawing.Size(23, 19);
+            this.btnRevertLeaf.ToolTipText = "Revert changes to last save";
+            this.btnRevertLeaf.Click += new System.EventHandler(this.btnRevertLeaf_Click);
+            // 
             // leafToolStrip
             // 
             this.leafToolStrip.AutoSize = false;
@@ -2016,95 +2103,6 @@
             this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
             this.lblRawData.Click += new System.EventHandler(this.lblRawData_Click);
             // 
-            // toolstripTitleLeaf
-            // 
-            this.toolstripTitleLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleLeaf.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLeaf.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleLeaf.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblTrackFileName,
-            this.btnSaveLeaf,
-            this.lblLeafClose,
-            this.lblPopoutLeaf,
-            this.btnLeafObjRefresh,
-            this.btnRevertLeaf});
-            this.toolstripTitleLeaf.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleLeaf.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolstripTitleLeaf.Name = "toolstripTitleLeaf";
-            this.toolstripTitleLeaf.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLeaf.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleLeaf.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleLeaf.Size = new System.Drawing.Size(1030, 22);
-            this.toolstripTitleLeaf.TabIndex = 141;
-            this.toolstripTitleLeaf.Text = "titlebar";
-            // 
-            // lblTrackFileName
-            // 
-            this.lblTrackFileName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTrackFileName.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblTrackFileName.Name = "lblTrackFileName";
-            this.lblTrackFileName.Size = new System.Drawing.Size(68, 19);
-            this.lblTrackFileName.Text = "Leaf Editor";
-            // 
-            // btnSaveLeaf
-            // 
-            this.btnSaveLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveLeaf.Enabled = false;
-            this.btnSaveLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveLeaf.Name = "btnSaveLeaf";
-            this.btnSaveLeaf.Size = new System.Drawing.Size(23, 19);
-            this.btnSaveLeaf.ToolTipText = "Save leaf file";
-            this.btnSaveLeaf.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // lblLeafClose
-            // 
-            this.lblLeafClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblLeafClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblLeafClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblLeafClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblLeafClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblLeafClose.Name = "lblLeafClose";
-            this.lblLeafClose.Size = new System.Drawing.Size(23, 22);
-            this.lblLeafClose.Text = "toolStripButton6";
-            this.lblLeafClose.ToolTipText = "Close panel";
-            this.lblLeafClose.Click += new System.EventHandler(this.lblLeafClose_Click);
-            // 
-            // lblPopoutLeaf
-            // 
-            this.lblPopoutLeaf.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutLeaf.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutLeaf.Name = "lblPopoutLeaf";
-            this.lblPopoutLeaf.Size = new System.Drawing.Size(23, 22);
-            this.lblPopoutLeaf.Text = "Dock panel";
-            this.lblPopoutLeaf.ToolTipText = "Undock panel";
-            this.lblPopoutLeaf.Click += new System.EventHandler(this.lblPopin_Click);
-            // 
-            // btnLeafObjRefresh
-            // 
-            this.btnLeafObjRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnLeafObjRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafObjRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnLeafObjRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
-            this.btnLeafObjRefresh.Size = new System.Drawing.Size(23, 19);
-            this.btnLeafObjRefresh.ToolTipText = "Reload list of Track Objects from track_objects.txt";
-            this.btnLeafObjRefresh.Click += new System.EventHandler(this.btnLeafObjRefresh_Click);
-            // 
-            // btnRevertLeaf
-            // 
-            this.btnRevertLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertLeaf.Enabled = false;
-            this.btnRevertLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertLeaf.Name = "btnRevertLeaf";
-            this.btnRevertLeaf.Size = new System.Drawing.Size(23, 19);
-            this.btnRevertLeaf.ToolTipText = "Revert changes to last save";
-            this.btnRevertLeaf.Click += new System.EventHandler(this.btnRevertLeaf_Click);
-            // 
             // leaftoolsToolStrip
             // 
             this.leaftoolsToolStrip.AutoSize = false;
@@ -2244,6 +2242,95 @@
             this.panelLevel.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelLevel.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLevel.Leave += new System.EventHandler(this.editorpanelUnfocus);
+            // 
+            // toolstripTitleLvl
+            // 
+            this.toolstripTitleLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleLvl.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleLvl.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleLvl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblLvlName,
+            this.btnSaveLvl,
+            this.lblLvlClose,
+            this.lblPopoutLvl,
+            this.btnLvlLoopRefresh,
+            this.btnRevertLvl});
+            this.toolstripTitleLvl.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleLvl.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleLvl.Name = "toolstripTitleLvl";
+            this.toolstripTitleLvl.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleLvl.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleLvl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleLvl.Size = new System.Drawing.Size(888, 22);
+            this.toolstripTitleLvl.TabIndex = 140;
+            this.toolstripTitleLvl.Text = "titlebar";
+            // 
+            // lblLvlName
+            // 
+            this.lblLvlName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLvlName.ForeColor = System.Drawing.Color.Green;
+            this.lblLvlName.Name = "lblLvlName";
+            this.lblLvlName.Size = new System.Drawing.Size(60, 19);
+            this.lblLvlName.Text = "Lvl Editor";
+            // 
+            // btnSaveLvl
+            // 
+            this.btnSaveLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveLvl.Enabled = false;
+            this.btnSaveLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
+            this.btnSaveLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveLvl.Name = "btnSaveLvl";
+            this.btnSaveLvl.Size = new System.Drawing.Size(23, 19);
+            this.btnSaveLvl.ToolTipText = "Save lvl file";
+            this.btnSaveLvl.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
+            // 
+            // lblLvlClose
+            // 
+            this.lblLvlClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblLvlClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblLvlClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblLvlClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblLvlClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblLvlClose.Name = "lblLvlClose";
+            this.lblLvlClose.Size = new System.Drawing.Size(23, 22);
+            this.lblLvlClose.Text = "toolStripButton6";
+            this.lblLvlClose.ToolTipText = "Close panel";
+            this.lblLvlClose.Click += new System.EventHandler(this.lblLvlClose_Click);
+            // 
+            // lblPopoutLvl
+            // 
+            this.lblPopoutLvl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutLvl.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutLvl.Name = "lblPopoutLvl";
+            this.lblPopoutLvl.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutLvl.Text = "Dock panel";
+            this.lblPopoutLvl.ToolTipText = "Undock panel";
+            this.lblPopoutLvl.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // btnLvlLoopRefresh
+            // 
+            this.btnLvlLoopRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLvlLoopRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlLoopRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.btnLvlLoopRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlLoopRefresh.Name = "btnLvlLoopRefresh";
+            this.btnLvlLoopRefresh.Size = new System.Drawing.Size(23, 19);
+            this.btnLvlLoopRefresh.ToolTipText = "Reload available loop tracks from workingfolder";
+            this.btnLvlLoopRefresh.Click += new System.EventHandler(this.btnLvlLoopRefresh_Click);
+            // 
+            // btnRevertLvl
+            // 
+            this.btnRevertLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRevertLvl.Enabled = false;
+            this.btnRevertLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
+            this.btnRevertLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRevertLvl.Name = "btnRevertLvl";
+            this.btnRevertLvl.Size = new System.Drawing.Size(23, 19);
+            this.btnRevertLvl.ToolTipText = "Revert changes to last save";
+            this.btnRevertLvl.Click += new System.EventHandler(this.btnRevertLvl_Click);
             // 
             // lvlLoopToolStrip
             // 
@@ -3059,95 +3146,6 @@
             this.Beats.ReadOnly = true;
             this.Beats.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // toolstripTitleLvl
-            // 
-            this.toolstripTitleLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleLvl.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLvl.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleLvl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblLvlName,
-            this.btnSaveLvl,
-            this.lblLvlClose,
-            this.lblPopoutLvl,
-            this.btnLvlLoopRefresh,
-            this.btnRevertLvl});
-            this.toolstripTitleLvl.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleLvl.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolstripTitleLvl.Name = "toolstripTitleLvl";
-            this.toolstripTitleLvl.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLvl.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleLvl.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleLvl.Size = new System.Drawing.Size(888, 22);
-            this.toolstripTitleLvl.TabIndex = 140;
-            this.toolstripTitleLvl.Text = "titlebar";
-            // 
-            // lblLvlName
-            // 
-            this.lblLvlName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLvlName.ForeColor = System.Drawing.Color.Green;
-            this.lblLvlName.Name = "lblLvlName";
-            this.lblLvlName.Size = new System.Drawing.Size(60, 19);
-            this.lblLvlName.Text = "Lvl Editor";
-            // 
-            // btnSaveLvl
-            // 
-            this.btnSaveLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveLvl.Enabled = false;
-            this.btnSaveLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveLvl.Name = "btnSaveLvl";
-            this.btnSaveLvl.Size = new System.Drawing.Size(23, 19);
-            this.btnSaveLvl.ToolTipText = "Save lvl file";
-            this.btnSaveLvl.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
-            // 
-            // lblLvlClose
-            // 
-            this.lblLvlClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblLvlClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblLvlClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblLvlClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblLvlClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblLvlClose.Name = "lblLvlClose";
-            this.lblLvlClose.Size = new System.Drawing.Size(23, 22);
-            this.lblLvlClose.Text = "toolStripButton6";
-            this.lblLvlClose.ToolTipText = "Close panel";
-            this.lblLvlClose.Click += new System.EventHandler(this.lblLvlClose_Click);
-            // 
-            // lblPopoutLvl
-            // 
-            this.lblPopoutLvl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutLvl.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutLvl.Name = "lblPopoutLvl";
-            this.lblPopoutLvl.Size = new System.Drawing.Size(23, 22);
-            this.lblPopoutLvl.Text = "Dock panel";
-            this.lblPopoutLvl.ToolTipText = "Undock panel";
-            this.lblPopoutLvl.Click += new System.EventHandler(this.lblPopin_Click);
-            // 
-            // btnLvlLoopRefresh
-            // 
-            this.btnLvlLoopRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnLvlLoopRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlLoopRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnLvlLoopRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlLoopRefresh.Name = "btnLvlLoopRefresh";
-            this.btnLvlLoopRefresh.Size = new System.Drawing.Size(23, 19);
-            this.btnLvlLoopRefresh.ToolTipText = "Reload available loop tracks from workingfolder";
-            this.btnLvlLoopRefresh.Click += new System.EventHandler(this.btnLvlLoopRefresh_Click);
-            // 
-            // btnRevertLvl
-            // 
-            this.btnRevertLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertLvl.Enabled = false;
-            this.btnRevertLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertLvl.Name = "btnRevertLvl";
-            this.btnRevertLvl.Size = new System.Drawing.Size(23, 19);
-            this.btnRevertLvl.ToolTipText = "Revert changes to last save";
-            this.btnRevertLvl.Click += new System.EventHandler(this.btnRevertLvl_Click);
-            // 
             // panelMaster
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -3193,6 +3191,95 @@
             this.panelMaster.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelMaster.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelMaster.Leave += new System.EventHandler(this.editorpanelUnfocus);
+            // 
+            // toolstripTitleMaster
+            // 
+            this.toolstripTitleMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleMaster.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleMaster.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleMaster.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblMasterName,
+            this.btnSaveMaster,
+            this.lblMasterClose,
+            this.lblPopoutMaster,
+            this.toolStripButton1,
+            this.btnRevertMaster});
+            this.toolstripTitleMaster.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleMaster.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleMaster.Name = "toolstripTitleMaster";
+            this.toolstripTitleMaster.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleMaster.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleMaster.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleMaster.Size = new System.Drawing.Size(405, 22);
+            this.toolstripTitleMaster.TabIndex = 139;
+            this.toolstripTitleMaster.Text = "titlebar";
+            // 
+            // lblMasterName
+            // 
+            this.lblMasterName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMasterName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            this.lblMasterName.Name = "lblMasterName";
+            this.lblMasterName.Size = new System.Drawing.Size(82, 19);
+            this.lblMasterName.Text = "Master Editor";
+            // 
+            // btnSaveMaster
+            // 
+            this.btnSaveMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveMaster.Enabled = false;
+            this.btnSaveMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
+            this.btnSaveMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveMaster.Name = "btnSaveMaster";
+            this.btnSaveMaster.Size = new System.Drawing.Size(23, 19);
+            this.btnSaveMaster.ToolTipText = "Save master file";
+            this.btnSaveMaster.Click += new System.EventHandler(this.mastersaveToolStripMenuItem_Click);
+            // 
+            // lblMasterClose
+            // 
+            this.lblMasterClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblMasterClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblMasterClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblMasterClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblMasterClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblMasterClose.Name = "lblMasterClose";
+            this.lblMasterClose.Size = new System.Drawing.Size(23, 22);
+            this.lblMasterClose.Text = "toolStripButton6";
+            this.lblMasterClose.ToolTipText = "Close panel";
+            this.lblMasterClose.Click += new System.EventHandler(this.lblMasterClose_Click);
+            // 
+            // lblPopoutMaster
+            // 
+            this.lblPopoutMaster.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutMaster.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutMaster.Name = "lblPopoutMaster";
+            this.lblPopoutMaster.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutMaster.Text = "Dock panel";
+            this.lblPopoutMaster.ToolTipText = "Undock panel";
+            this.lblPopoutMaster.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 19);
+            this.toolStripButton1.ToolTipText = "Reload the lvl lists on this panel";
+            this.toolStripButton1.Click += new System.EventHandler(this.btnMasterRefreshLvl_Click);
+            // 
+            // btnRevertMaster
+            // 
+            this.btnRevertMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRevertMaster.Enabled = false;
+            this.btnRevertMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
+            this.btnRevertMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRevertMaster.Name = "btnRevertMaster";
+            this.btnRevertMaster.Size = new System.Drawing.Size(23, 19);
+            this.btnRevertMaster.ToolTipText = "Revert changes to last save";
+            this.btnRevertMaster.Click += new System.EventHandler(this.btnRevertMaster_Click);
             // 
             // masterToolStrip
             // 
@@ -3757,95 +3844,6 @@
             this.lblConfigColorHelp.Text = "?";
             this.lblConfigColorHelp.Click += new System.EventHandler(this.lblConfigColorHelp_Click);
             // 
-            // toolstripTitleMaster
-            // 
-            this.toolstripTitleMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleMaster.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleMaster.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleMaster.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMasterName,
-            this.btnSaveMaster,
-            this.lblMasterClose,
-            this.lblPopoutMaster,
-            this.toolStripButton1,
-            this.btnRevertMaster});
-            this.toolstripTitleMaster.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleMaster.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolstripTitleMaster.Name = "toolstripTitleMaster";
-            this.toolstripTitleMaster.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleMaster.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleMaster.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleMaster.Size = new System.Drawing.Size(405, 22);
-            this.toolstripTitleMaster.TabIndex = 139;
-            this.toolstripTitleMaster.Text = "titlebar";
-            // 
-            // lblMasterName
-            // 
-            this.lblMasterName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMasterName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.lblMasterName.Name = "lblMasterName";
-            this.lblMasterName.Size = new System.Drawing.Size(82, 19);
-            this.lblMasterName.Text = "Master Editor";
-            // 
-            // btnSaveMaster
-            // 
-            this.btnSaveMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveMaster.Enabled = false;
-            this.btnSaveMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveMaster.Name = "btnSaveMaster";
-            this.btnSaveMaster.Size = new System.Drawing.Size(23, 19);
-            this.btnSaveMaster.ToolTipText = "Save master file";
-            this.btnSaveMaster.Click += new System.EventHandler(this.mastersaveToolStripMenuItem_Click);
-            // 
-            // lblMasterClose
-            // 
-            this.lblMasterClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblMasterClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblMasterClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblMasterClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblMasterClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblMasterClose.Name = "lblMasterClose";
-            this.lblMasterClose.Size = new System.Drawing.Size(23, 22);
-            this.lblMasterClose.Text = "toolStripButton6";
-            this.lblMasterClose.ToolTipText = "Close panel";
-            this.lblMasterClose.Click += new System.EventHandler(this.lblMasterClose_Click);
-            // 
-            // lblPopoutMaster
-            // 
-            this.lblPopoutMaster.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutMaster.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutMaster.Name = "lblPopoutMaster";
-            this.lblPopoutMaster.Size = new System.Drawing.Size(23, 22);
-            this.lblPopoutMaster.Text = "Dock panel";
-            this.lblPopoutMaster.ToolTipText = "Undock panel";
-            this.lblPopoutMaster.Click += new System.EventHandler(this.lblPopin_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 19);
-            this.toolStripButton1.ToolTipText = "Reload the lvl lists on this panel";
-            this.toolStripButton1.Click += new System.EventHandler(this.btnMasterRefreshLvl_Click);
-            // 
-            // btnRevertMaster
-            // 
-            this.btnRevertMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertMaster.Enabled = false;
-            this.btnRevertMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertMaster.Name = "btnRevertMaster";
-            this.btnRevertMaster.Size = new System.Drawing.Size(23, 19);
-            this.btnRevertMaster.ToolTipText = "Revert changes to last save";
-            this.btnRevertMaster.Click += new System.EventHandler(this.btnRevertMaster_Click);
-            // 
             // label33
             // 
             this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -3926,6 +3924,95 @@
             this.panelGate.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelGate.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelGate.Leave += new System.EventHandler(this.editorpanelUnfocus);
+            // 
+            // toolstripTitleGate
+            // 
+            this.toolstripTitleGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleGate.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleGate.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleGate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblGateName,
+            this.btnSaveGate,
+            this.lblGateClose,
+            this.lblPopoutGate,
+            this.btnGateRefresh,
+            this.btnRevertGate});
+            this.toolstripTitleGate.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleGate.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleGate.Name = "toolstripTitleGate";
+            this.toolstripTitleGate.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleGate.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleGate.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleGate.Size = new System.Drawing.Size(316, 22);
+            this.toolstripTitleGate.TabIndex = 141;
+            this.toolstripTitleGate.Text = "titlebar";
+            // 
+            // lblGateName
+            // 
+            this.lblGateName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGateName.ForeColor = System.Drawing.Color.Orange;
+            this.lblGateName.Name = "lblGateName";
+            this.lblGateName.Size = new System.Drawing.Size(71, 19);
+            this.lblGateName.Text = "Gate Editor";
+            // 
+            // btnSaveGate
+            // 
+            this.btnSaveGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveGate.Enabled = false;
+            this.btnSaveGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
+            this.btnSaveGate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveGate.Name = "btnSaveGate";
+            this.btnSaveGate.Size = new System.Drawing.Size(23, 19);
+            this.btnSaveGate.ToolTipText = "Save gate file";
+            this.btnSaveGate.Click += new System.EventHandler(this.gatesaveToolStripMenuItem_Click);
+            // 
+            // lblGateClose
+            // 
+            this.lblGateClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblGateClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblGateClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblGateClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblGateClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblGateClose.Name = "lblGateClose";
+            this.lblGateClose.Size = new System.Drawing.Size(23, 22);
+            this.lblGateClose.Text = "toolStripButton6";
+            this.lblGateClose.ToolTipText = "Close panel";
+            this.lblGateClose.Click += new System.EventHandler(this.lblGateClose_Click);
+            // 
+            // lblPopoutGate
+            // 
+            this.lblPopoutGate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutGate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutGate.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutGate.Name = "lblPopoutGate";
+            this.lblPopoutGate.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutGate.Text = "Dock panel";
+            this.lblPopoutGate.ToolTipText = "Undock panel";
+            this.lblPopoutGate.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // btnGateRefresh
+            // 
+            this.btnGateRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnGateRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnGateRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.btnGateRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGateRefresh.Name = "btnGateRefresh";
+            this.btnGateRefresh.Size = new System.Drawing.Size(23, 19);
+            this.btnGateRefresh.ToolTipText = "Reload the lvl lists on this panel";
+            this.btnGateRefresh.Click += new System.EventHandler(this.btnGateRefresh_Click);
+            // 
+            // btnRevertGate
+            // 
+            this.btnRevertGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRevertGate.Enabled = false;
+            this.btnRevertGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
+            this.btnRevertGate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRevertGate.Name = "btnRevertGate";
+            this.btnRevertGate.Size = new System.Drawing.Size(23, 19);
+            this.btnRevertGate.ToolTipText = "Revert changes to last save";
+            this.btnRevertGate.Click += new System.EventHandler(this.btnRevertGate_Click);
             // 
             // lblPyramidWarn
             // 
@@ -4342,95 +4429,6 @@
             this.Sentry.Name = "Sentry";
             this.Sentry.Width = 48;
             // 
-            // toolstripTitleGate
-            // 
-            this.toolstripTitleGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleGate.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleGate.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleGate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblGateName,
-            this.btnSaveGate,
-            this.lblGateClose,
-            this.lblPopoutGate,
-            this.btnGateRefresh,
-            this.btnRevertGate});
-            this.toolstripTitleGate.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleGate.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolstripTitleGate.Name = "toolstripTitleGate";
-            this.toolstripTitleGate.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleGate.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleGate.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleGate.Size = new System.Drawing.Size(316, 22);
-            this.toolstripTitleGate.TabIndex = 141;
-            this.toolstripTitleGate.Text = "titlebar";
-            // 
-            // lblGateName
-            // 
-            this.lblGateName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGateName.ForeColor = System.Drawing.Color.Orange;
-            this.lblGateName.Name = "lblGateName";
-            this.lblGateName.Size = new System.Drawing.Size(71, 19);
-            this.lblGateName.Text = "Gate Editor";
-            // 
-            // btnSaveGate
-            // 
-            this.btnSaveGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveGate.Enabled = false;
-            this.btnSaveGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveGate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveGate.Name = "btnSaveGate";
-            this.btnSaveGate.Size = new System.Drawing.Size(23, 19);
-            this.btnSaveGate.ToolTipText = "Save gate file";
-            this.btnSaveGate.Click += new System.EventHandler(this.gatesaveToolStripMenuItem_Click);
-            // 
-            // lblGateClose
-            // 
-            this.lblGateClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblGateClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblGateClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblGateClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblGateClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblGateClose.Name = "lblGateClose";
-            this.lblGateClose.Size = new System.Drawing.Size(23, 22);
-            this.lblGateClose.Text = "toolStripButton6";
-            this.lblGateClose.ToolTipText = "Close panel";
-            this.lblGateClose.Click += new System.EventHandler(this.lblGateClose_Click);
-            // 
-            // lblPopoutGate
-            // 
-            this.lblPopoutGate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutGate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutGate.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutGate.Name = "lblPopoutGate";
-            this.lblPopoutGate.Size = new System.Drawing.Size(23, 22);
-            this.lblPopoutGate.Text = "Dock panel";
-            this.lblPopoutGate.ToolTipText = "Undock panel";
-            this.lblPopoutGate.Click += new System.EventHandler(this.lblPopin_Click);
-            // 
-            // btnGateRefresh
-            // 
-            this.btnGateRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnGateRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnGateRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnGateRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGateRefresh.Name = "btnGateRefresh";
-            this.btnGateRefresh.Size = new System.Drawing.Size(23, 19);
-            this.btnGateRefresh.ToolTipText = "Reload the lvl lists on this panel";
-            this.btnGateRefresh.Click += new System.EventHandler(this.btnGateRefresh_Click);
-            // 
-            // btnRevertGate
-            // 
-            this.btnRevertGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertGate.Enabled = false;
-            this.btnRevertGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertGate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertGate.Name = "btnRevertGate";
-            this.btnRevertGate.Size = new System.Drawing.Size(23, 19);
-            this.btnRevertGate.ToolTipText = "Revert changes to last save";
-            this.btnRevertGate.Click += new System.EventHandler(this.btnRevertGate_Click);
-            // 
             // panelWorkingFolder
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -4450,6 +4448,77 @@
             this.panelWorkingFolder.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelWorkingFolder.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelWorkingFolder.Leave += new System.EventHandler(this.editorpanelUnfocus);
+            // 
+            // toolstripTitleWork
+            // 
+            this.toolstripTitleWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleWork.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleWork.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleWork.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblWorkingFolder,
+            this.toolStripLabel1,
+            this.lblWorkClose,
+            this.lblPopoutWork,
+            this.btnWorkRefresh});
+            this.toolstripTitleWork.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleWork.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleWork.Name = "toolstripTitleWork";
+            this.toolstripTitleWork.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleWork.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleWork.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleWork.Size = new System.Drawing.Size(197, 22);
+            this.toolstripTitleWork.TabIndex = 148;
+            this.toolstripTitleWork.Text = "titlebar";
+            // 
+            // lblWorkingFolder
+            // 
+            this.lblWorkingFolder.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWorkingFolder.ForeColor = System.Drawing.Color.White;
+            this.lblWorkingFolder.Name = "lblWorkingFolder";
+            this.lblWorkingFolder.Size = new System.Drawing.Size(94, 19);
+            this.lblWorkingFolder.Text = "Working Folder";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(0, 19);
+            // 
+            // lblWorkClose
+            // 
+            this.lblWorkClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblWorkClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblWorkClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblWorkClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblWorkClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblWorkClose.Name = "lblWorkClose";
+            this.lblWorkClose.Size = new System.Drawing.Size(23, 22);
+            this.lblWorkClose.Text = "toolStripButton6";
+            this.lblWorkClose.ToolTipText = "Close panel";
+            this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
+            // 
+            // lblPopoutWork
+            // 
+            this.lblPopoutWork.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutWork.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutWork.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutWork.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutWork.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutWork.Name = "lblPopoutWork";
+            this.lblPopoutWork.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutWork.Text = "Dock panel";
+            this.lblPopoutWork.ToolTipText = "Undock panel";
+            this.lblPopoutWork.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // btnWorkRefresh
+            // 
+            this.btnWorkRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnWorkRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnWorkRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.btnWorkRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnWorkRefresh.Name = "btnWorkRefresh";
+            this.btnWorkRefresh.Size = new System.Drawing.Size(23, 19);
+            this.btnWorkRefresh.ToolTipText = "Reload files in the working folder";
+            this.btnWorkRefresh.Click += new System.EventHandler(this.btnWorkRefresh_Click);
             // 
             // workingToolStrip2
             // 
@@ -4808,77 +4877,6 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // toolstripTitleWork
-            // 
-            this.toolstripTitleWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleWork.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleWork.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleWork.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblWorkingFolder,
-            this.toolStripLabel1,
-            this.lblWorkClose,
-            this.lblPopoutWork,
-            this.btnWorkRefresh});
-            this.toolstripTitleWork.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleWork.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolstripTitleWork.Name = "toolstripTitleWork";
-            this.toolstripTitleWork.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleWork.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleWork.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleWork.Size = new System.Drawing.Size(197, 22);
-            this.toolstripTitleWork.TabIndex = 148;
-            this.toolstripTitleWork.Text = "titlebar";
-            // 
-            // lblWorkingFolder
-            // 
-            this.lblWorkingFolder.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWorkingFolder.ForeColor = System.Drawing.Color.White;
-            this.lblWorkingFolder.Name = "lblWorkingFolder";
-            this.lblWorkingFolder.Size = new System.Drawing.Size(94, 19);
-            this.lblWorkingFolder.Text = "Working Folder";
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(0, 19);
-            // 
-            // lblWorkClose
-            // 
-            this.lblWorkClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblWorkClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblWorkClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblWorkClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblWorkClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblWorkClose.Name = "lblWorkClose";
-            this.lblWorkClose.Size = new System.Drawing.Size(23, 22);
-            this.lblWorkClose.Text = "toolStripButton6";
-            this.lblWorkClose.ToolTipText = "Close panel";
-            this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
-            // 
-            // lblPopoutWork
-            // 
-            this.lblPopoutWork.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutWork.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutWork.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutWork.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutWork.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutWork.Name = "lblPopoutWork";
-            this.lblPopoutWork.Size = new System.Drawing.Size(23, 22);
-            this.lblPopoutWork.Text = "Dock panel";
-            this.lblPopoutWork.ToolTipText = "Undock panel";
-            this.lblPopoutWork.Click += new System.EventHandler(this.lblPopin_Click);
-            // 
-            // btnWorkRefresh
-            // 
-            this.btnWorkRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnWorkRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnWorkRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnWorkRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnWorkRefresh.Name = "btnWorkRefresh";
-            this.btnWorkRefresh.Size = new System.Drawing.Size(23, 19);
-            this.btnWorkRefresh.ToolTipText = "Reload files in the working folder";
-            this.btnWorkRefresh.Click += new System.EventHandler(this.btnWorkRefresh_Click);
-            // 
             // toolTip1
             // 
             this.toolTip1.AutoPopDelay = 5000;
@@ -5109,6 +5107,83 @@
             this.panelSample.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelSample.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelSample.Leave += new System.EventHandler(this.editorpanelUnfocus);
+            // 
+            // toolstripTitleSample
+            // 
+            this.toolstripTitleSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleSample.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleSample.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleSample.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblSampleEditor,
+            this.btnSaveSample,
+            this.lblSampleClose,
+            this.lblPopoutSamp,
+            this.btnRevertSample});
+            this.toolstripTitleSample.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleSample.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleSample.Name = "toolstripTitleSample";
+            this.toolstripTitleSample.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleSample.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleSample.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleSample.Size = new System.Drawing.Size(383, 22);
+            this.toolstripTitleSample.TabIndex = 142;
+            this.toolstripTitleSample.Text = "titlebar";
+            // 
+            // lblSampleEditor
+            // 
+            this.lblSampleEditor.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSampleEditor.ForeColor = System.Drawing.Color.Turquoise;
+            this.lblSampleEditor.Name = "lblSampleEditor";
+            this.lblSampleEditor.Size = new System.Drawing.Size(85, 19);
+            this.lblSampleEditor.Text = "Sample Editor";
+            // 
+            // btnSaveSample
+            // 
+            this.btnSaveSample.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveSample.Enabled = false;
+            this.btnSaveSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
+            this.btnSaveSample.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveSample.Name = "btnSaveSample";
+            this.btnSaveSample.Size = new System.Drawing.Size(23, 19);
+            this.btnSaveSample.ToolTipText = "Save sample file";
+            this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
+            // 
+            // lblSampleClose
+            // 
+            this.lblSampleClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblSampleClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblSampleClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblSampleClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblSampleClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblSampleClose.Name = "lblSampleClose";
+            this.lblSampleClose.Size = new System.Drawing.Size(23, 22);
+            this.lblSampleClose.Text = "toolStripButton6";
+            this.lblSampleClose.ToolTipText = "Close panel";
+            this.lblSampleClose.Click += new System.EventHandler(this.lblSampleClose_Click);
+            // 
+            // lblPopoutSamp
+            // 
+            this.lblPopoutSamp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutSamp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutSamp.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutSamp.Name = "lblPopoutSamp";
+            this.lblPopoutSamp.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutSamp.Text = "Dock panel";
+            this.lblPopoutSamp.ToolTipText = "Undock panel";
+            this.lblPopoutSamp.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // btnRevertSample
+            // 
+            this.btnRevertSample.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRevertSample.Enabled = false;
+            this.btnRevertSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
+            this.btnRevertSample.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRevertSample.Name = "btnRevertSample";
+            this.btnRevertSample.Size = new System.Drawing.Size(23, 19);
+            this.btnRevertSample.ToolTipText = "Revert changes to last save";
+            this.btnRevertSample.Click += new System.EventHandler(this.btnRevertSample_Click);
             // 
             // sampleToolStrip
             // 
@@ -5365,83 +5440,6 @@
             this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Channel.Width = 49;
             // 
-            // toolstripTitleSample
-            // 
-            this.toolstripTitleSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleSample.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleSample.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleSample.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblSampleEditor,
-            this.btnSaveSample,
-            this.lblSampleClose,
-            this.lblPopoutSamp,
-            this.btnRevertSample});
-            this.toolstripTitleSample.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleSample.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolstripTitleSample.Name = "toolstripTitleSample";
-            this.toolstripTitleSample.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleSample.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleSample.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleSample.Size = new System.Drawing.Size(383, 22);
-            this.toolstripTitleSample.TabIndex = 142;
-            this.toolstripTitleSample.Text = "titlebar";
-            // 
-            // lblSampleEditor
-            // 
-            this.lblSampleEditor.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleEditor.ForeColor = System.Drawing.Color.Turquoise;
-            this.lblSampleEditor.Name = "lblSampleEditor";
-            this.lblSampleEditor.Size = new System.Drawing.Size(85, 19);
-            this.lblSampleEditor.Text = "Sample Editor";
-            // 
-            // btnSaveSample
-            // 
-            this.btnSaveSample.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveSample.Enabled = false;
-            this.btnSaveSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveSample.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveSample.Name = "btnSaveSample";
-            this.btnSaveSample.Size = new System.Drawing.Size(23, 19);
-            this.btnSaveSample.ToolTipText = "Save sample file";
-            this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
-            // 
-            // lblSampleClose
-            // 
-            this.lblSampleClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblSampleClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblSampleClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblSampleClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblSampleClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblSampleClose.Name = "lblSampleClose";
-            this.lblSampleClose.Size = new System.Drawing.Size(23, 22);
-            this.lblSampleClose.Text = "toolStripButton6";
-            this.lblSampleClose.ToolTipText = "Close panel";
-            this.lblSampleClose.Click += new System.EventHandler(this.lblSampleClose_Click);
-            // 
-            // lblPopoutSamp
-            // 
-            this.lblPopoutSamp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutSamp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutSamp.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutSamp.Name = "lblPopoutSamp";
-            this.lblPopoutSamp.Size = new System.Drawing.Size(23, 22);
-            this.lblPopoutSamp.Text = "Dock panel";
-            this.lblPopoutSamp.ToolTipText = "Undock panel";
-            this.lblPopoutSamp.Click += new System.EventHandler(this.lblPopin_Click);
-            // 
-            // btnRevertSample
-            // 
-            this.btnRevertSample.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertSample.Enabled = false;
-            this.btnRevertSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertSample.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertSample.Name = "btnRevertSample";
-            this.btnRevertSample.Size = new System.Drawing.Size(23, 19);
-            this.btnRevertSample.ToolTipText = "Revert changes to last save";
-            this.btnRevertSample.Click += new System.EventHandler(this.btnRevertSample_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -5492,7 +5490,6 @@
             this.splitHorizontal.Size = new System.Drawing.Size(1748, 859);
             this.splitHorizontal.SplitterDistance = 347;
             this.splitHorizontal.TabIndex = 136;
-            this.splitHorizontal.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
             this.splitHorizontal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitHorizontal.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitHorizontal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
@@ -5515,7 +5512,6 @@
             this.splitTop1.Size = new System.Drawing.Size(1748, 347);
             this.splitTop1.SplitterDistance = 464;
             this.splitTop1.TabIndex = 0;
-            this.splitTop1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
             this.splitTop1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitTop1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitTop1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
@@ -5540,7 +5536,6 @@
             this.splitTop2.Size = new System.Drawing.Size(1280, 347);
             this.splitTop2.SplitterDistance = 890;
             this.splitTop2.TabIndex = 47;
-            this.splitTop2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
             this.splitTop2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitTop2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitTop2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
@@ -5563,7 +5558,6 @@
             this.splitBottom1.Size = new System.Drawing.Size(1748, 508);
             this.splitBottom1.SplitterDistance = 323;
             this.splitBottom1.TabIndex = 0;
-            this.splitBottom1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
             this.splitBottom1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitBottom1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
@@ -5588,7 +5582,6 @@
             this.splitBottom2.Size = new System.Drawing.Size(1421, 508);
             this.splitBottom2.SplitterDistance = 1032;
             this.splitBottom2.TabIndex = 46;
-            this.splitBottom2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitHorizontal_Paint);
             this.splitBottom2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
@@ -5739,6 +5732,7 @@
             this.btnRecentClose.Size = new System.Drawing.Size(23, 22);
             this.btnRecentClose.Text = "toolStripButton6";
             this.btnRecentClose.ToolTipText = "Close panel";
+            this.btnRecentClose.Click += new System.EventHandler(this.btnRecentClose_Click);
             // 
             // toolStripSeparator5
             // 
@@ -5786,8 +5780,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLeafEditor_FormClosing);
             this.Load += new System.EventHandler(this.FormLeafEditor_Load);
-            this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.FormLeafEditor_Scroll);
-            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FormLeafEditor_Scroll);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).EndInit();
@@ -5797,6 +5789,8 @@
             this.panelZoom.PerformLayout();
             this.panelLeaf.ResumeLayout(false);
             this.panelLeaf.PerformLayout();
+            this.toolstripTitleLeaf.ResumeLayout(false);
+            this.toolstripTitleLeaf.PerformLayout();
             this.leafToolStrip.ResumeLayout(false);
             this.leafToolStrip.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -5810,12 +5804,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).EndInit();
             this.panelRawData.ResumeLayout(false);
             this.panelRawData.PerformLayout();
-            this.toolstripTitleLeaf.ResumeLayout(false);
-            this.toolstripTitleLeaf.PerformLayout();
             this.leaftoolsToolStrip.ResumeLayout(false);
             this.leaftoolsToolStrip.PerformLayout();
             this.panelLevel.ResumeLayout(false);
             this.panelLevel.PerformLayout();
+            this.toolstripTitleLvl.ResumeLayout(false);
+            this.toolstripTitleLvl.PerformLayout();
             this.lvlLoopToolStrip.ResumeLayout(false);
             this.lvlLoopToolStrip.PerformLayout();
             this.lvlPathsToolStrip.ResumeLayout(false);
@@ -5833,25 +5827,25 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvlLeafList)).EndInit();
-            this.toolstripTitleLvl.ResumeLayout(false);
-            this.toolstripTitleLvl.PerformLayout();
             this.panelMaster.ResumeLayout(false);
             this.panelMaster.PerformLayout();
+            this.toolstripTitleMaster.ResumeLayout(false);
+            this.toolstripTitleMaster.PerformLayout();
             this.masterToolStrip.ResumeLayout(false);
             this.masterToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).EndInit();
-            this.toolstripTitleMaster.ResumeLayout(false);
-            this.toolstripTitleMaster.PerformLayout();
             this.panelGate.ResumeLayout(false);
             this.panelGate.PerformLayout();
+            this.toolstripTitleGate.ResumeLayout(false);
+            this.toolstripTitleGate.PerformLayout();
             this.gateToolStrip.ResumeLayout(false);
             this.gateToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).EndInit();
-            this.toolstripTitleGate.ResumeLayout(false);
-            this.toolstripTitleGate.PerformLayout();
             this.panelWorkingFolder.ResumeLayout(false);
             this.panelWorkingFolder.PerformLayout();
+            this.toolstripTitleWork.ResumeLayout(false);
+            this.toolstripTitleWork.PerformLayout();
             this.workingToolStrip2.ResumeLayout(false);
             this.workingToolStrip2.PerformLayout();
             this.contextMenuNewFile.ResumeLayout(false);
@@ -5859,16 +5853,14 @@
             this.workingToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
             this.workingfolderRightClick.ResumeLayout(false);
-            this.toolstripTitleWork.ResumeLayout(false);
-            this.toolstripTitleWork.PerformLayout();
             this.contextMenuDock.ResumeLayout(false);
             this.panelSample.ResumeLayout(false);
             this.panelSample.PerformLayout();
+            this.toolstripTitleSample.ResumeLayout(false);
+            this.toolstripTitleSample.PerformLayout();
             this.sampleToolStrip.ResumeLayout(false);
             this.sampleToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
-            this.toolstripTitleSample.ResumeLayout(false);
-            this.toolstripTitleSample.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelBeeble.ResumeLayout(false);
             this.splitHorizontal.Panel1.ResumeLayout(false);

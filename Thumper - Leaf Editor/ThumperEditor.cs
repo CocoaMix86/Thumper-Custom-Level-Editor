@@ -74,7 +74,6 @@ namespace Thumper_Custom_Level_Editor
         public Point _menuloc;
         #endregion
 
-
         public FormLeafEditor()
         {
             InitializeComponent();
@@ -107,101 +106,6 @@ namespace Thumper_Custom_Level_Editor
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
         }
-        ///
-        ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
-        protected override CreateParams CreateParams
-        {
-            get {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
-        }
-        ///END DOUBLEBUFFERING
-        /// 
-
-        ///Color elements based on set properties
-        private void ColorFormElements()
-        {
-            this.BackColor = Properties.Settings.Default.custom_bgcolor;
-            menuStrip.BackColor = Properties.Settings.Default.custom_menucolor;
-            panelLeaf.BackColor = Properties.Settings.Default.custom_leafcolor;
-            panelLevel.BackColor = Properties.Settings.Default.custom_lvlcolor;
-            panelGate.BackColor = Properties.Settings.Default.custom_gatecolor;
-            panelMaster.BackColor = Properties.Settings.Default.custom_mastercolor;
-            panelSample.BackColor = Properties.Settings.Default.custom_samplecolor;
-        }
-
-        ///Repaints toolstrip separators to have gray backgrounds
-        private void toolStripSeparator_Paint(object sender, PaintEventArgs e)
-        {
-            ToolStripSeparator sep = (ToolStripSeparator)sender;
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, 40, 40)), 0, 0, sep.Width, sep.Height);
-            e.Graphics.DrawLine(new Pen(Color.White), 30, sep.Height / 2, sep.Width - 4, sep.Height / 2);
-        }
-
-        ///Toolstrip - FILE
-        private void SaveAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Call all save methods for files with the save flag False
-            if (!_savemaster) mastersaveToolStripMenuItem_Click(null, null);
-            if (!_savegate) gatesaveToolStripMenuItem_Click(null, null);
-            if (!_savelvl) saveToolStripMenuItem2_Click(null, null);
-            if (!_saveleaf) saveToolStripMenuItem_Click(null, null);
-            if (!_savesample) SamplesaveToolStripMenuItem_Click(null, null);
-        }
-        ///Toolstrip - INTERPOLATOR
-        private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e) => new Interpolator().Show();
-
-        ///Toolstrip - VIEW MENU
-        //Visible - LEaf Editor
-        private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelLeaf); panelLeaf.Visible = leafEditorToolStripMenuItem.Checked; panelLeaf.BringToFront(); }
-        //Visible - Level Editor
-        private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelLevel) ; panelLevel.Visible = levelEditorToolStripMenuItem.Checked; panelLevel.BringToFront(); }
-        //Visble - Gate Editor
-        private void gateEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelGate); panelGate.Visible = gateEditorToolStripMenuItem.Checked; panelGate.BringToFront(); }
-        //Visible - Master Editor
-        private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelMaster); panelMaster.Visible = masterEditorToolStripMenuItem.Checked; panelMaster.BringToFront(); }
-        //Visbile - Working Folder
-        private void workingFolderToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelWorkingFolder); panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked; panelWorkingFolder.BringToFront(); }
-        //Visble - Sample Editor
-        private void sampleEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelSample); panelSample.Visible = sampleEditorToolStripMenuItem.Checked; panelSample.BringToFront(); }
-
-        ///Toolstrip - HELP
-        //About...
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) => new AboutThumperEditor().Show();
-        //Help
-        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-        //Tentacles, Paths...
-        private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0");
-        //Change Game Directory
-        private void changeGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e) => Read_Config();
-        //How to create an FSB
-        private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
-
-        ///Toolstrip - BRING TO FRONT items
-        private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.BringToFront(); panelLeaf.Visible = true; }
-        private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) { panelLevel.BringToFront(); panelLevel.Visible = true; }
-        private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) { panelGate.BringToFront(); panelGate.Visible = true; }
-        private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) { panelMaster.BringToFront(); panelMaster.Visible = true; }
-        private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) { panelWorkingFolder.BringToFront(); panelWorkingFolder.Visible = true; }
-        private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) { panelSample.BringToFront(); panelSample.Visible = true; }
-
-        /// NEW CUSTOM LEVEL FOLDER
-        private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogInput customlevel = new DialogInput();
-            //show the new level folder dialog box
-            if (customlevel.ShowDialog() == DialogResult.OK) {
-                //if all OK, populate new JObject with data from the form
-                CreateCustomLevelFolder(customlevel);
-            }
-            customlevel.Dispose();
-        }
-
         ///EXIT APP
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
         ///FORM CLOSING - check if anything is unsaved
@@ -248,7 +152,7 @@ namespace Thumper_Custom_Level_Editor
 
             Properties.Settings.Default.Save();
         }
-        ///FORM
+        ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
             //setup datagrids with proper formatting
@@ -337,6 +241,92 @@ namespace Thumper_Custom_Level_Editor
             var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
             if (levellist.Count > 0)
                 RecentFiles(levellist);
+        }
+        ///
+        ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
+        protected override CreateParams CreateParams
+        {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+        ///END DOUBLEBUFFERING
+        /// 
+
+        ///Color elements based on set properties
+        private void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.custom_bgcolor;
+            menuStrip.BackColor = Properties.Settings.Default.custom_menucolor;
+            panelLeaf.BackColor = Properties.Settings.Default.custom_leafcolor;
+            panelLevel.BackColor = Properties.Settings.Default.custom_lvlcolor;
+            panelGate.BackColor = Properties.Settings.Default.custom_gatecolor;
+            panelMaster.BackColor = Properties.Settings.Default.custom_mastercolor;
+            panelSample.BackColor = Properties.Settings.Default.custom_samplecolor;
+        }
+
+        ///Toolstrip - FILE
+        private void SaveAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Call all save methods for files with the save flag False
+            if (!_savemaster) mastersaveToolStripMenuItem_Click(null, null);
+            if (!_savegate) gatesaveToolStripMenuItem_Click(null, null);
+            if (!_savelvl) saveToolStripMenuItem2_Click(null, null);
+            if (!_saveleaf) saveToolStripMenuItem_Click(null, null);
+            if (!_savesample) SamplesaveToolStripMenuItem_Click(null, null);
+        }
+        ///Toolstrip - INTERPOLATOR
+        private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e) => new Interpolator().Show();
+
+        ///Toolstrip - VIEW MENU
+        //Visible - LEaf Editor
+        private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelLeaf); panelLeaf.Visible = leafEditorToolStripMenuItem.Checked; panelLeaf.BringToFront(); }
+        //Visible - Level Editor
+        private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelLevel) ; panelLevel.Visible = levelEditorToolStripMenuItem.Checked; panelLevel.BringToFront(); }
+        //Visble - Gate Editor
+        private void gateEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelGate); panelGate.Visible = gateEditorToolStripMenuItem.Checked; panelGate.BringToFront(); }
+        //Visible - Master Editor
+        private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelMaster); panelMaster.Visible = masterEditorToolStripMenuItem.Checked; panelMaster.BringToFront(); }
+        //Visbile - Working Folder
+        private void workingFolderToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelWorkingFolder); panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked; panelWorkingFolder.BringToFront(); }
+        //Visble - Sample Editor
+        private void sampleEditorToolStripMenuItem_Click(object sender, EventArgs e) { UndockPanel(panelSample); panelSample.Visible = sampleEditorToolStripMenuItem.Checked; panelSample.BringToFront(); }
+
+        ///Toolstrip - HELP
+        //About...
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) => new AboutThumperEditor().Show();
+        //Help
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+        //Tentacles, Paths...
+        private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0");
+        //Change Game Directory
+        private void changeGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e) => Read_Config();
+        //How to create an FSB
+        private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
+
+        ///Toolstrip - BRING TO FRONT items
+        private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.BringToFront(); panelLeaf.Visible = true; }
+        private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) { panelLevel.BringToFront(); panelLevel.Visible = true; }
+        private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) { panelGate.BringToFront(); panelGate.Visible = true; }
+        private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) { panelMaster.BringToFront(); panelMaster.Visible = true; }
+        private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) { panelWorkingFolder.BringToFront(); panelWorkingFolder.Visible = true; }
+        private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) { panelSample.BringToFront(); panelSample.Visible = true; }
+
+        /// NEW CUSTOM LEVEL FOLDER
+        private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogInput customlevel = new DialogInput();
+            //show the new level folder dialog box
+            if (customlevel.ShowDialog() == DialogResult.OK) {
+                //if all OK, populate new JObject with data from the form
+                CreateCustomLevelFolder(customlevel);
+            }
+            customlevel.Dispose();
         }
 
         public void ImportObjects()
@@ -522,16 +512,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private void RecentFiles(List<string> recentfiles)
-        {
-            dgvRecentFiles.Rows.Clear();
-            panelRecentFiles.Visible = true;
-            foreach (string level in recentfiles) {
-                dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
-            }
-        }
-
-
         ///FORM RESIZE
         ///PANEL LABELS - change size or close
         private void lblMasterClose_Click(object sender, EventArgs e) => masterEditorToolStripMenuItem.PerformClick();
@@ -647,12 +627,6 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        /// 
-        /// Collection of event handlers for moving the menustrip when the form scrolls
-        private void FormLeafEditor_Scroll(object sender, ScrollEventArgs e) => menuStrip.Location = new Point(_menuloc.X, _menuloc.Y);
-        private void FormLeafEditor_Scroll(object sender, MouseEventArgs e) => menuStrip.Location = _menuloc;
-        private void menuStrip_MouseDown(object sender, MouseEventArgs e) => _menuloc = menuStrip.Location;
-        private void menuStrip_MouseUp(object sender, MouseEventArgs e) => _menuloc = menuStrip.Location;
         private void resetMenuPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UndockPanel(panelLeaf);
@@ -676,41 +650,53 @@ namespace Thumper_Custom_Level_Editor
             panelBeeble.BringToFront();
         }
 
+        ///BEEBLE FUNCTIONS
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             int i = new Random().Next(0, 101);
-
-            if (i >= 0 && i < 10)
-                pictureBox1.Image = Properties.Resources.beeblehappy;
-            else if (i >= 10 && i < 20)
-                pictureBox1.Image = Properties.Resources.beebleconfuse;
-            else if (i >= 20 && i < 30)
-                pictureBox1.Image = Properties.Resources.beeblecool;
-            else if (i >= 30 && i < 40)
-                pictureBox1.Image = Properties.Resources.beeblederp;
-            else if (i >= 40 && i < 50)
-                pictureBox1.Image = Properties.Resources.beeblelaugh;
-            else if (i >= 50 && i < 60)
-                pictureBox1.Image = Properties.Resources.beeblestare;
-            else if (i >= 60 && i < 70)
-                pictureBox1.Image = Properties.Resources.beeblethink;
-            else if (i >= 70 && i < 80)
-                pictureBox1.Image = Properties.Resources.beebletiny;
-            else if (i >= 80 && i < 90) 
-                pictureBox1.Image = Properties.Resources.beeblelove;
-            else if (i >= 90 && i < 100)
-                pictureBox1.Image = Properties.Resources.beeblespin;
-            else if (i == 100)
-                pictureBox1.Image = Properties.Resources.beeblegold;
-
+            switch (i) {
+                case >= 0 and < 10:
+                    pictureBox1.Image = Properties.Resources.beeblehappy;
+                    break;
+                case >= 10 and < 20:
+                    pictureBox1.Image = Properties.Resources.beebleconfuse;
+                    break;
+                case >= 20 and < 30:
+                    pictureBox1.Image = Properties.Resources.beeblecool;
+                    break;
+                case >= 30 and < 40:
+                    pictureBox1.Image = Properties.Resources.beeblederp;
+                    break;
+                case >= 40 and < 50:
+                    pictureBox1.Image = Properties.Resources.beeblelaugh;
+                    break;
+                case >= 50 and < 60:
+                    pictureBox1.Image = Properties.Resources.beeblestare;
+                    break;
+                case >= 60 and < 70:
+                    pictureBox1.Image = Properties.Resources.beeblethink;
+                    break;
+                case >= 70 and < 80:
+                    pictureBox1.Image = Properties.Resources.beebletiny;
+                    break;
+                case >= 80 and < 90:
+                    pictureBox1.Image = Properties.Resources.beeblelove;
+                    break;
+                case >= 90 and < 100:
+                    pictureBox1.Image = Properties.Resources.beeblespin;
+                    break;
+                case 100:
+                    pictureBox1.Image = Properties.Resources.beeblegold;
+                    break;
+            }
             timerBeeble.Start();
         }
-
         private void timerBeeble_Tick(object sender, EventArgs e)
         {
             timerBeeble.Stop();
             pictureBox1.Image = Properties.Resources.beeble;
         }
+        ///
 
         private void splitPanel_Paint(object sender, PaintEventArgs e)
         {
@@ -720,25 +706,14 @@ namespace Thumper_Custom_Level_Editor
             g.FillRectangle(brush, 5, 5, c.Width - 10, c.Height - 10);
         }
 
-        private void splitHorizontal_Paint(object sender, PaintEventArgs e)
-        {/*
-            SplitContainer s = sender as SplitContainer;
-            e.Graphics.FillRectangle(Brushes.Gray, s.SplitterRectangle);
-            if (s.SplitterRectangle.Width > s.SplitterRectangle.Height) {
-                e.Graphics.FillRectangle(Brushes.Black, (float)(s.SplitterRectangle.Width * 0.5) - 20, s.SplitterRectangle.Location.Y, 40, s.SplitterRectangle.Height);
-                e.Graphics.FillRectangle(Brushes.Black, (float)(s.SplitterRectangle.Width * 0.20) - 20, s.SplitterRectangle.Location.Y, 40, s.SplitterRectangle.Height);
-                e.Graphics.FillRectangle(Brushes.Black, (float)(s.SplitterRectangle.Width * 0.80) - 20, s.SplitterRectangle.Location.Y, 40, s.SplitterRectangle.Height);
-            }
-            if (s.SplitterRectangle.Width < s.SplitterRectangle.Height)
-                e.Graphics.FillRectangle(Brushes.Black, s.SplitterRectangle.Location.X, (s.SplitterRectangle.Height / 2) - 20, s.SplitterRectangle.Width, 40);*/
-        }
-
         private void ShowPanel(bool visible, Control panel)
         {
             panel.Visible = visible;
             panel.BringToFront();
         }
 
+        ///FOCUS PANELS AND BORDER PAINTING
+        //focus when element clicked
         private void editorpanelFocus(object sender, EventArgs e)
         {
             Panel control = (Panel)sender;
@@ -746,7 +721,7 @@ namespace Thumper_Custom_Level_Editor
             control.BorderStyle = BorderStyle.FixedSingle;
             control.Refresh();
         }
-
+        //unfocus
         private void editorpanelUnfocus(object sender, EventArgs e)
         {
             Panel control = (Panel)sender;
@@ -757,7 +732,7 @@ namespace Thumper_Custom_Level_Editor
                 control.BorderStyle = BorderStyle.FixedSingle;
             control.Refresh();
         }
-
+        //custom paint function when focus
         private void editorpanel_PaintBorder(object sender, PaintEventArgs e)
         {
             Panel control = (Panel)sender;
@@ -766,6 +741,20 @@ namespace Thumper_Custom_Level_Editor
             int thickness = 2;
             ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
         }
+        //pull focus when the panel itself is clicked
+        private void editorpanelClick(object sender, EventArgs e)
+        {
+            Control dgv = (sender as Panel).Controls.Cast<Control>().FirstOrDefault(control => String.Equals(control.Tag, "editorpaneldgv"));
+            dgv.Focus();
+        }
+        //Repaints toolstrip separators to have gray backgrounds
+        private void toolStripSeparator_Paint(object sender, PaintEventArgs e)
+        {
+            ToolStripSeparator sep = (ToolStripSeparator)sender;
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, 40, 40)), 0, 0, sep.Width, sep.Height);
+            e.Graphics.DrawLine(new Pen(Color.White), 30, sep.Height / 2, sep.Width - 4, sep.Height / 2);
+        }
+        ///
 
         private void datagrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -801,6 +790,15 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        ///RECENT FILES PANEL
+        private void RecentFiles(List<string> recentfiles)
+        {
+            dgvRecentFiles.Rows.Clear();
+            panelRecentFiles.Visible = true;
+            foreach (string level in recentfiles) {
+                dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
+            }
+        }
         private void dgvRecentFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0)
@@ -818,7 +816,6 @@ namespace Thumper_Custom_Level_Editor
                 e.Handled = true;
             }
         }
-
         private void dgvRecentFiles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
@@ -831,12 +828,11 @@ namespace Thumper_Custom_Level_Editor
                 panelRecentFiles.Visible = false;
             }
         }
-
-        private void editorpanelClick(object sender, EventArgs e)
+        private void btnRecentClose_Click(object sender, EventArgs e)
         {
-            Control dgv = (sender as Panel).Controls.Cast<Control>().FirstOrDefault(control => String.Equals(control.Tag, "editorpaneldgv"));
-            dgv.Focus();
+            panelRecentFiles.Visible = false;
         }
+        ///
 
         private void ClearPanels()
         {
