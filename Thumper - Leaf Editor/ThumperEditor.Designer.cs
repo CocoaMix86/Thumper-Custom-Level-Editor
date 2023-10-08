@@ -2223,7 +2223,7 @@
             this.btnLeafZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLeafZoom.Name = "btnLeafZoom";
             this.btnLeafZoom.Size = new System.Drawing.Size(29, 27);
-            this.btnLeafZoom.ToolTipText = "Click to show zoom";
+            this.btnLeafZoom.ToolTipText = "Click to show zoom.\r\nCTRL+scroll = horizontal\r\nALT+scroll = vertical";
             this.btnLeafZoom.Click += new System.EventHandler(this.btnLeafZoom_Click);
             // 
             // panelLevel

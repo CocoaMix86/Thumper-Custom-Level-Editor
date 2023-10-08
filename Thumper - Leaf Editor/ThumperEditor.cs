@@ -856,6 +856,5 @@ namespace Thumper_Custom_Level_Editor
         {
             panelZoom.Visible = !panelZoom.Visible;
         }
-
     }
 }

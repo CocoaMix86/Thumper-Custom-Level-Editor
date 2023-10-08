@@ -44,7 +44,7 @@ namespace Thumper_Custom_Level_Editor
 		public string leafobj;
 		public bool loadingleaf = false;
 		public bool controldown = false;
-		public bool altdown = false;
+		public bool shiftdown = false;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
@@ -80,21 +80,33 @@ namespace Thumper_Custom_Level_Editor
 		}
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
 		{
+			trackEditor.Focus();
+			int scollindex = trackEditor.FirstDisplayedScrollingColumnIndex;
 			int horiz = trackZoom.Value;
-			int vert = trackZoom.Value;
+			int vert = trackZoomVert.Value;
 			int scrollLines = SystemInformation.MouseWheelScrollLines;
 
-			if (controldown && e.Delta > 0) {
-				trackZoom.Value = Math.Max(1, horiz - scrollLines);
+			if (!controldown && !shiftdown) {
+				if (e.Delta > 0) {
+					trackEditor.FirstDisplayedScrollingColumnIndex = Math.Max(0, scollindex - scrollLines);
+				}
+				else if (e.Delta < 0) {
+					trackEditor.FirstDisplayedScrollingColumnIndex = Math.Min(trackEditor.ColumnCount, scollindex + scrollLines);
+				}
 			}
-			else if (controldown && e.Delta < 0) {
-				trackZoom.Value = Math.Min(100, horiz + scrollLines);
-			}
-			if (altdown && e.Delta > 0) {
-				trackZoomVert.Value = Math.Max(1, vert - scrollLines);
-			}
-			else if (altdown && e.Delta < 0) {
-				trackZoomVert.Value = Math.Min(100, vert + scrollLines);
+			else {
+				if (controldown && e.Delta > 0) {
+					trackZoom.Value = Math.Max(1, horiz - scrollLines);
+				}
+				else if (controldown && e.Delta < 0) {
+					trackZoom.Value = Math.Min(100, horiz + scrollLines);
+				}
+				if (shiftdown && e.Delta > 0) {
+					trackZoomVert.Value = Math.Max(1, vert - scrollLines);
+				}
+				else if (shiftdown && e.Delta < 0) {
+					trackZoomVert.Value = Math.Min(100, vert + scrollLines);
+				}
 			}
 		}
 		///DATAGRIDVIEW - TRACK EDITOR
@@ -221,7 +233,7 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_KeyDown(object sender, KeyEventArgs e)
 		{
 			controldown = e.Control;
-			altdown = e.Alt;
+			shiftdown = e.Shift;
 			//Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
@@ -259,7 +271,7 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_KeyUp(object sender, KeyEventArgs e)
 		{
 			controldown = e.Control;
-			altdown = e.Alt;
+			shiftdown = e.Shift;
 		}
 		//Clicking row headers to select the row
 		private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
