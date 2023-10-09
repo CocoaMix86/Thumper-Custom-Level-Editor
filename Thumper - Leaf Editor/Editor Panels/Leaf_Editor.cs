@@ -516,6 +516,7 @@ namespace Thumper_Custom_Level_Editor
 			if (_loadedleaf == null)
 				return;
 			TrackRawImport(trackEditor.CurrentRow, JObject.Parse($"{{{richRawTrackData.Text}}}"));
+			PlaySound("UIkpaste");
 		}
 
 		private void btnTrackDelete_Click(object sender, EventArgs e)
@@ -534,6 +535,7 @@ namespace Thumper_Custom_Level_Editor
 						trackEditor.Rows.Remove(dgvr);
 					}
 					//sets flag that leaf has unsaved changes
+					PlaySound("UIobjectremove");
 					SaveLeaf(false);
 				}
 				catch { }
@@ -573,6 +575,7 @@ namespace Thumper_Custom_Level_Editor
 				btnTrackApply.Enabled = false;
 			else btnTrackApply.Enabled = true;
 			//sets flag that leaf has unsaved changes
+			PlaySound("UIobjectadd");
 			SaveLeaf(false);
 		}
 
@@ -657,6 +660,7 @@ namespace Thumper_Custom_Level_Editor
 				btnTrackPaste.Enabled = true;
 			}
 			catch (Exception ex) { MessageBox.Show("something went wrong with copying. Show this error to the dev.\n\n" + ex); }
+			PlaySound("UIkcopy");
 		}
 
 		private void btnTrackPaste_Click(object sender, EventArgs e)
@@ -692,6 +696,7 @@ namespace Thumper_Custom_Level_Editor
 				dgv.Rows.Insert(_index + 1, _temp);
 			}
 			catch (Exception ex){ MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex); }
+			PlaySound("UIkpaste");
 			SaveLeaf(false);
 		}
 
@@ -750,17 +755,20 @@ namespace Thumper_Custom_Level_Editor
 				_tracks[_selecttrack].friendly_param += ", " + dropTrackLane.Text;
 			}
 			//change row header to reflect what the track is
+			PlaySound("UIobjectadd");
 			ChangeTrackName();
 			SaveLeaf(false);
 		}
 		///Sets highlighting color of current track
 		private void btnTrackColorDialog_Click(object sender, EventArgs e)
 		{
+			PlaySound("UIcoloropen");
 			DialogResult result = colorDialog1.ShowDialog();
 			if (result == DialogResult.OK) {
 				btnTrackColorDialog.BackColor = colorDialog1.Color;
 				_tracks[_selecttrack].highlight_color = colorDialog1.Color.ToArgb().ToString();
 				//sets flag that leaf has unsaved changes
+				PlaySound("UIcolorapply");
 				SaveLeaf(false);
 			}
 			//call method to update coloring of track
@@ -835,6 +843,8 @@ namespace Thumper_Custom_Level_Editor
 			int _beats = _listcell[1].ColumnIndex - _listcell[0].ColumnIndex;
 			decimal _diff = (_end - _start) / _beats;
 
+			PlaySound("UIinterpolate");
+
 			for (int x = 1; x < _beats; x++) {
 				_inc = Decimal.Round(_inc + _diff, 4);
 				//if interpolating for Color, remove the decimals
@@ -855,8 +865,10 @@ namespace Thumper_Custom_Level_Editor
 			//do nothing if no cells selected
 			if (trackEditor.SelectedCells.Count == 0)
 				return;
+			PlaySound("UIcoloropen");
 			DialogResult result = colorDialog1.ShowDialog();
 			if (result == DialogResult.OK) {
+				PlaySound("UIcolorapply");
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					if (_tracks[_cell.RowIndex].trait_type == "kTraitColor") {
 						_cell.Value = colorDialog1.Color.ToArgb();
@@ -941,6 +953,7 @@ namespace Thumper_Custom_Level_Editor
 			//write data back to file
 			File.WriteAllText($@"{workingfolder}\leaf_{newfilename}.txt", JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
 
+			PlaySound("UIleafsplit");
 			//load new leaf that was just split
 			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
 			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
@@ -953,6 +966,7 @@ namespace Thumper_Custom_Level_Editor
 		private void btnLeafObjRefresh_Click(object sender, EventArgs e)
 		{
 			ImportObjects();
+			PlaySound("UIrefresh");
 		}
 
 		private void lblRawData_Click(object sender, EventArgs e)
@@ -979,6 +993,7 @@ namespace Thumper_Custom_Level_Editor
 		private void btnRevertLeaf_Click(object sender, EventArgs e)
 		{
 			SaveLeaf(true);
+			PlaySound("UIrevert");
 			LoadLeaf(leafjson);
 		}
 
@@ -1010,6 +1025,7 @@ namespace Thumper_Custom_Level_Editor
 				btnSaveLeaf.Enabled = false;
 				btnRevertLeaf.Enabled = false;
 				toolstripTitleLeaf.BackColor = Color.FromArgb(40, 40, 40);
+				PlaySound("UIsave");
 			}
 		}
 

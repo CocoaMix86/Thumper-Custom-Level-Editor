@@ -252,6 +252,7 @@ namespace Thumper_Custom_Level_Editor
 			_samplelist.Add(newsample);
 			int _index = _samplelist.IndexOf(newsample);
 			sampleList.Rows[_index].Cells[0].Selected = true;
+			PlaySound("UIobjectadd");
 		}
 		//open or new sample file
 		private void btnSampPanelNew_Click(object sender, EventArgs e) => SamplenewToolStripMenuItem.PerformClick();

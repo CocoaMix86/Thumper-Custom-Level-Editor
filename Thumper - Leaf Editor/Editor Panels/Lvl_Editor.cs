@@ -109,6 +109,8 @@ namespace Thumper_Custom_Level_Editor
 		//Cell value changed
 		private void lvlLoopTracks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.ColumnIndex == -1 || e.RowIndex == -1)
+				return;
 			DataGridViewCell dgvc = sender as DataGridViewCell;
 			try { //try is here because this gets triggered upon app load, when there's no data
 				if (e.ColumnIndex == 0) {
@@ -317,6 +319,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			int _in = lvlLeafList.CurrentRow.Index;
 			_lvlleafs.RemoveAt(_in);
+			PlaySound("UIobjectremove");
 			if (_in > 0) {
 				lvlLeafList.CurrentCell = lvlLeafList.Rows[_in - 1].Cells[0];
 				lvlLeafList.Rows[_in - 1].Cells[0].Selected = true;
@@ -328,7 +331,9 @@ namespace Thumper_Custom_Level_Editor
 				ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
 				ofd.Title = "Load a Thumper Leaf file";
 				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+				PlaySound("UIfolderopen");
 				if (ofd.ShowDialog() == DialogResult.OK) {
+					PlaySound("UIobjectadd");
 					AddLeaftoLvl(ofd.FileName);
 				}
 			}
@@ -382,6 +387,7 @@ namespace Thumper_Custom_Level_Editor
 				paths = temp.paths
 			};
 			btnLvlLeafPaste.Enabled = true;
+			PlaySound("UIkcopy");
 		}
 		private void btnLvlLeafPaste_Click(object sender, EventArgs e)
 		{
@@ -396,12 +402,14 @@ namespace Thumper_Custom_Level_Editor
 			lvlLeafList.CurrentCell = lvlLeafList.Rows[_in + 1].Cells[0];
 			lvlLeafList.Rows[_in + 1].Cells[0].Selected = true;
 			//set save flag
+			PlaySound("UIkpaste");
 			SaveLvl(false);
 		}
 
 		private void btnLvlPathAdd_Click(object sender, EventArgs e)
 		{
 			lvlLeafPaths.RowCount++;
+			PlaySound("UItunneladd");
 			SaveLvl(false);
 		}
 
@@ -409,6 +417,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			_lvlleafs[lvlLeafList.CurrentRow.Index].paths.RemoveAt(lvlLeafPaths.CurrentRow.Index);
 			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
+			PlaySound("UItunnelremove");
 			SaveLvl(false);
 		}
 
@@ -418,12 +427,14 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			clipboardpaths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index].paths);
 			btnLvlPasteTunnel.Enabled = true;
+			PlaySound("UIkcopy");
 		}
 
 		private void btnLvlPasteTunnel_Click(object sender, EventArgs e)
 		{
 			_lvlleafs[lvlLeafList.CurrentRow.Index].paths.AddRange(new List<string>(clipboardpaths));
 			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
+			PlaySound("UIkpaste");
 			SaveLvl(false);
 		}
 
@@ -433,11 +444,13 @@ namespace Thumper_Custom_Level_Editor
 			lvlLoopTracks.Rows[lvlLoopTracks.Rows.Count - 1].HeaderCell.Value = "Volume Track " + (lvlLoopTracks.Rows.Count - 1);
 			lvlLoopTracks.Rows[lvlLoopTracks.Rows.Count - 1].Cells[1].Value = 0;
 			btnLvlLoopDelete.Enabled = true;
+			PlaySound("UIobjectadd");
 		}
 
 		private void btnLvlLoopDelete_Click(object sender, EventArgs e)
 		{
 			lvlLoopTracks.Rows.RemoveAt(lvlLoopTracks.CurrentRow.Index);
+			PlaySound("UIobjectremove");
 			//disable button if no more rows exist
 			if (lvlLoopTracks.Rows.Count < 1)
 				btnLvlLoopDelete.Enabled = false;
@@ -451,6 +464,7 @@ namespace Thumper_Custom_Level_Editor
 		private void btnLvlSeqAdd_Click(object sender, EventArgs e)
 		{
 			lvlSeqObjs.RowCount++;
+			PlaySound("UIobjectadd");
 			lvlSeqObjs.Rows[lvlSeqObjs.Rows.Count - 1].HeaderCell.Value = "Volume Track " + (lvlSeqObjs.Rows.Count - 1);
 			btnLvlSeqDelete.Enabled = true;
 			btnLvlSeqClear.Enabled = true;
@@ -470,6 +484,7 @@ namespace Thumper_Custom_Level_Editor
 			//prompt user to say YES if row is not empty. Then delete selected track
 			if (_empty || (!_empty && MessageBox.Show("This track has data. Do you still want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)) {
 				lvlSeqObjs.Rows.Remove(lvlSeqObjs.CurrentRow);
+				PlaySound("UIobjectremove");
 				SaveLvl(false);
 				//after deleting, rename all headers so they're in order again
 				foreach (DataGridViewRow r in lvlSeqObjs.Rows)
@@ -504,6 +519,7 @@ namespace Thumper_Custom_Level_Editor
 		private void btnLvlLoopRefresh_Click(object sender, EventArgs e)
 		{
 			LvlReloadSamples();
+			PlaySound("UIrefresh");
 			MessageBox.Show($"Found and loaded {_lvlsamples.Count} samples for the current working folder.");
 		}
 
@@ -533,6 +549,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			SaveLvl(true);
 			LoadLvl(lvljson);
+			PlaySound("UIrevertchanges");
 		}
 
 		private void btnlvlPanelNew_Click(object sender, EventArgs e)
@@ -610,8 +627,6 @@ namespace Thumper_Custom_Level_Editor
 
 		public void InitializeLvlStuff()
 		{
-			//add event handler to this collection
-			_lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
 			_lvlpaths.Sort();
 
 			///customize Paths List a bit
@@ -632,9 +647,8 @@ namespace Thumper_Custom_Level_Editor
 			lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
 			//lvlLoopTracks.Columns[0].ValueType = typeof(SampleData);
 			///
-			
-			///set Saved flag to true, since nothing is loaded
-			SaveLvl(true);
+			//add event handler to this collection
+			_lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
 		}
 
 		public void AddLeaftoLvl(string path)
@@ -726,6 +740,7 @@ namespace Thumper_Custom_Level_Editor
 				btnSaveLvl.Enabled = false;
 				btnRevertLvl.Enabled = false;
 				toolstripTitleLvl.BackColor = Color.FromArgb(40, 40, 40);
+				PlaySound("UIsave");
 			}
 		}
 

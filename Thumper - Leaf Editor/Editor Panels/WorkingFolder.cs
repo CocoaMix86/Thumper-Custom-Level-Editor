@@ -156,6 +156,7 @@ namespace Thumper_Custom_Level_Editor
 				if (workingfolderFiles.CurrentRow.Cells[1].Value.ToString().Contains("LEVEL DETAILS") && MessageBox.Show("You are about to delete the LEVEL DETAILS file. This file is required for the mod loader tool to load the level. Are you sure you want to delete it?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.No)
 					return;
 				File.Delete($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt");
+				PlaySound("UIdelete");
 				//call the refresh method so the dgv updates
 				btnWorkRefresh_Click(null, null);
 			}
@@ -312,15 +313,18 @@ namespace Thumper_Custom_Level_Editor
 			//check if the game_dir has been set before. It'll be empty if starting for the first time
 			cfd_lvl.InitialDirectory = System.Reflection.Assembly.GetExecutingAssembly().Location;
 			//show FolderBrowser, and then set "game_dir" to whatever is chosen
+			PlaySound("UIfolderopen");
 			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
 				ClearPanels();
 				workingfolder = cfd_lvl.FileName;
 				panelRecentFiles.Visible = false;
-            }
+				PlaySound("UIfolderclose");
+			}
 		}
 
 		private void btnShowRecentFile_Click(object sender, EventArgs e)
 		{
+			PlaySound("UIfolderopen");
 			RecentFiles(Properties.Settings.Default.Recentfiles);
 		}
 	}

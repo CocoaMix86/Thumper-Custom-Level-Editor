@@ -213,7 +213,6 @@ namespace Thumper_Custom_Level_Editor
             InitializeSounds();
             //call method that imports objects from track_objects.txt (for Leaf editing)
             ImportObjects();
-            SaveLeaf(true);
             //set panels to their last saved dock
             SetDockLocations();
             //load size and location data for panels
@@ -863,6 +862,7 @@ namespace Thumper_Custom_Level_Editor
                 ClearPanels();
                 workingfolder = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
                 panelRecentFiles.Visible = false;
+                PlaySound("UIfolderclose");
             }
         }
         private void btnRecentClose_Click(object sender, EventArgs e)
