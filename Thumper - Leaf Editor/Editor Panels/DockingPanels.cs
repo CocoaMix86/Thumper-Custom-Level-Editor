@@ -68,7 +68,7 @@ namespace Thumper_Custom_Level_Editor
             ToolStripButton lbl = (ToolStripButton)sender;
             //get parent panel where lbl was clicked
             var parent = lbl.Owner.Parent;
-            UndockPanel(parent);
+            UndockPanel(parent, true);
         }
         private void lblPopin_Click(object sender, EventArgs e)
         {
@@ -79,27 +79,27 @@ namespace Thumper_Custom_Level_Editor
             //check all 6 and add to the earliest one
             //also set what dock the panel is in, so it is remembered on restart
             if (splitTop1.Panel1.Controls.Count == 1) {
-                DockPanel(parent, splitTop1.Panel1);
+                DockPanel(parent, splitTop1.Panel1, true);
                 Properties.Settings.Default.dock1 = parent.Name;
             }
             else if (splitTop2.Panel1.Controls.Count == 1) {
-                DockPanel(parent, splitTop2.Panel1);
+                DockPanel(parent, splitTop2.Panel1, true);
                 Properties.Settings.Default.dock2 = parent.Name;
             }
             else if (splitTop2.Panel2.Controls.Count == 1) {
-                DockPanel(parent, splitTop2.Panel2);
+                DockPanel(parent, splitTop2.Panel2, true);
                 Properties.Settings.Default.dock3 = parent.Name;
             }
             else if (splitBottom1.Panel1.Controls.Count == 1) {
-                DockPanel(parent, splitBottom1.Panel1);
+                DockPanel(parent, splitBottom1.Panel1, true);
                 Properties.Settings.Default.dock4 = parent.Name;
             }
             else if (splitBottom2.Panel1.Controls.Count == 1) {
-                DockPanel(parent, splitBottom2.Panel1);
+                DockPanel(parent, splitBottom2.Panel1, true);
                 Properties.Settings.Default.dock5 = parent.Name;
             }
             else if (splitBottom2.Panel2.Controls.Count == 1) {
-                DockPanel(parent, splitBottom2.Panel2);
+                DockPanel(parent, splitBottom2.Panel2, true);
                 Properties.Settings.Default.dock6 = parent.Name;
             }
             Properties.Settings.Default.Save();
@@ -162,13 +162,13 @@ namespace Thumper_Custom_Level_Editor
         private void editorpanelDoubleClick(object sender, EventArgs e)
         {
             if (!this.Controls.Contains((Control)sender))
-                UndockPanel((Control)sender);
+                UndockPanel((Control)sender, true);
         }
         #endregion
 
 
         #region Methods
-        private void DockPanel(Control panel, Control dock)
+        private void DockPanel(Control panel, Control dock, bool playsound = false)
         {
             dock.Controls.Add(panel);
             dock.ContextMenuStrip = null;
@@ -198,12 +198,13 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.dock6 = panel.Name;
             Properties.Settings.Default.Save();
 
+            if (playsound) PlaySound("UIdock");
             ControlMoverOrResizer.Dispose(panel);
             ControlMoverOrResizer.Dispose(dockbtn.Owner);
             ((Panel)panel).BorderStyle = BorderStyle.None;
         }
 
-        private void UndockPanel(Control panel)
+        private void UndockPanel(Control panel, bool playsound = false)
         {
             if (panel.Parent.GetType() != typeof(SplitterPanel))
                 return;
@@ -244,6 +245,7 @@ namespace Thumper_Custom_Level_Editor
             }
             Properties.Settings.Default.Save();
 
+            if (playsound) PlaySound("UIdockun");
             ControlMoverOrResizer.Init(panel);
             ControlMoverOrResizer.Init(dockbtn.Owner);
             ((Panel)panel).BorderStyle = BorderStyle.FixedSingle;
