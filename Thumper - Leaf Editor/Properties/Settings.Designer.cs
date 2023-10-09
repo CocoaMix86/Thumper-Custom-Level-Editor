@@ -537,5 +537,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["Recentfiles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool muteapplication {
+            get {
+                return ((bool)(this["muteapplication"]));
+            }
+            set {
+                this["muteapplication"] = value;
+            }
+        }
     }
 }

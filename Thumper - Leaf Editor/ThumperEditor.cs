@@ -591,6 +591,7 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.custom_leafcolor = custom.btnLeafColor.BackColor;
                 Properties.Settings.Default.custom_samplecolor = custom.btnSampleColor.BackColor;
                 Properties.Settings.Default.custom_activecolor = custom.btnActiveColor.BackColor;
+                Properties.Settings.Default.muteapplication = custom.checkMuteApp.Checked;
                 ColorFormElements();
             }
             custom.Dispose();
@@ -850,6 +851,11 @@ namespace Thumper_Custom_Level_Editor
             _loadedgate = null;
             _loadedmaster = null;
             _loadedsample = null;
+        }
+
+        private void PlaySound(string audiofile)
+        {
+
         }
     }
 }
