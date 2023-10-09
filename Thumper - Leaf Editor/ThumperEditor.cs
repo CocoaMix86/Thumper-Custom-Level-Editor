@@ -693,13 +693,14 @@ namespace Thumper_Custom_Level_Editor
                     break;
                 case 100:
                     pictureBox1.Image = Properties.Resources.beeblegold;
+                    PlaySound("UIbeetleclickGOLD");
                     break;
             }
             timerBeeble.Start();
         }
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            int i = new Random().Next(0, 4);
+            int i = new Random().Next(0, 8);
             switch (i) {
                 case 1:
                     PlaySound("UIbeetleclick");
@@ -712,6 +713,18 @@ namespace Thumper_Custom_Level_Editor
                     break;
                 case 4:
                     PlaySound("UIbeetleclick4");
+                    break;
+                case 5:
+                    PlaySound("UIbeetleclick5");
+                    break;
+                case 6:
+                    PlaySound("UIbeetleclick6");
+                    break;
+                case 7:
+                    PlaySound("UIbeetleclick7");
+                    break;
+                case 8:
+                    PlaySound("UIbeetleclick8");
                     break;
             }
         }

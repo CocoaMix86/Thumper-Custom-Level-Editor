@@ -711,6 +711,7 @@ namespace Thumper_Custom_Level_Editor
 					dgvc.Value = null;
 					dgvc.Style = null;
 				}
+				PlaySound("UIdataerase");
 				SaveLeaf(false);
 			}
 		}
