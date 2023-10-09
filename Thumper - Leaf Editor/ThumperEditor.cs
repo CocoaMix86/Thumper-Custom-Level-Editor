@@ -245,6 +245,7 @@ namespace Thumper_Custom_Level_Editor
             var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
             if (levellist.Count > 0)
                 RecentFiles(levellist);
+            PlaySound("UIboot");
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -696,6 +697,24 @@ namespace Thumper_Custom_Level_Editor
             }
             timerBeeble.Start();
         }
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            int i = new Random().Next(0, 4);
+            switch (i) {
+                case 1:
+                    PlaySound("UIbeetleclick");
+                    break;
+                case 2:
+                    PlaySound("UIbeetleclick2");
+                    break;
+                case 3:
+                    PlaySound("UIbeetleclick3");
+                    break;
+                case 4:
+                    PlaySound("UIbeetleclick4");
+                    break;
+            }
+        }
         private void timerBeeble_Tick(object sender, EventArgs e)
         {
             timerBeeble.Stop();
@@ -863,6 +882,7 @@ namespace Thumper_Custom_Level_Editor
             var vorbisStream = new VorbisWaveReader(stream);
             var waveOut = new WaveOut();
             waveOut.Init(vorbisStream);
+            waveOut.Volume = 1;
             waveOut.Play();
         }
     }
