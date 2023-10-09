@@ -301,13 +301,11 @@ namespace Thumper_Custom_Level_Editor
         ///Toolstrip - HELP
         //About...
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e) => new AboutThumperEditor().Show();
-        //Help
-        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
+        //DOCUMENTATION
         //Tentacles, Paths...
         private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0");
+        //Track Objects
+        private void trackObjectsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1JWk7TDn4ZuitclB-x7gOYxU-PsmGkooZuU9QEd_aw1A");
         //Change Game Directory
         private void changeGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e) => Read_Config();
         //How to create an FSB
@@ -897,11 +895,6 @@ namespace Thumper_Custom_Level_Editor
             waveOut.Init(vorbisStream);
             waveOut.Volume = 1;
             waveOut.Play();
-        }
-
-        private void resetDocksStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
