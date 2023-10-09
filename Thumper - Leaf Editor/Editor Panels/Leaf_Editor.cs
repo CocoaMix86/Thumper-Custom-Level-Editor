@@ -66,6 +66,10 @@ namespace Thumper_Custom_Level_Editor
 			panelLeaf.Size = new Size(this.Size.Width - panelLeaf.Location.X - 15, panelLeaf.Size.Height);
 		}
 		///TRACKBAR ZOOM
+		private void btnLeafZoom_Click(object sender, EventArgs e)
+		{
+			panelZoom.Visible = !panelZoom.Visible;
+		}
 		private void trackZoom_Scroll(object sender, EventArgs e)
 		{
 			for (int i = 0; i < _beats; i++) {

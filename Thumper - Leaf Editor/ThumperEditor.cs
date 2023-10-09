@@ -851,10 +851,5 @@ namespace Thumper_Custom_Level_Editor
             _loadedmaster = null;
             _loadedsample = null;
         }
-
-        private void btnLeafZoom_Click(object sender, EventArgs e)
-        {
-            panelZoom.Visible = !panelZoom.Visible;
-        }
     }
 }
