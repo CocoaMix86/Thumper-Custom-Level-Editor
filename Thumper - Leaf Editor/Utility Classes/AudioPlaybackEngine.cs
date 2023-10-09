@@ -32,17 +32,6 @@ namespace Thumper_Custom_Level_Editor
             AddMixerInput(input);
         }
 
-        private ISampleProvider ConvertToRightChannelCount(ISampleProvider input)
-        {
-            if (input.WaveFormat.Channels == mixer.WaveFormat.Channels) {
-                return input;
-            }
-            if (input.WaveFormat.Channels == 1 && mixer.WaveFormat.Channels == 2) {
-                return new MonoToStereoSampleProvider(input);
-            }
-            throw new NotImplementedException("Not yet implemented this channel count conversion");
-        }
-
         public void PlaySound(CachedSound sound)
         {
             AddMixerInput(new CachedSoundSampleProvider(sound));
