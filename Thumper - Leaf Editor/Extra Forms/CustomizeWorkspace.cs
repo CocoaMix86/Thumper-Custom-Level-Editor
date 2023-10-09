@@ -32,6 +32,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnSetColor(object sender, EventArgs e)
         {
+            FormLeafEditor.PlaySound("UIcoloropen");
             Button btn = (Button)sender;
             if (colorDialog1.ShowDialog() == DialogResult.OK) {
                 Color _c = colorDialog1.Color;

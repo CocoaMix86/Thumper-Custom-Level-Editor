@@ -853,9 +853,15 @@ namespace Thumper_Custom_Level_Editor
             _loadedsample = null;
         }
 
-        public void PlaySound(string audiofile)
+        public static void PlaySound(string audiofile)
         {
-
+            if (Properties.Settings.Default.muteapplication)
+                return;
+            string sss = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+            System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
+            System.IO.Stream s = a.GetManifestResourceStream($"Thumper Custom Level Editor.{audiofile}");
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(s);
+            player.Play();
         }
     }
 }
