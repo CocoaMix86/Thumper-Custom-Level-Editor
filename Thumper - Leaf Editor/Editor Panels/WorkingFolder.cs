@@ -128,6 +128,14 @@ namespace Thumper_Custom_Level_Editor
 			//filter for specific files
 			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS") || x.Contains("samp_")))) {
 				var filetype = Path.GetFileName(file).Split('_')[0];
+				//upon loading a level folder, immediately open the MASTER file
+				if (filetype == "master") {
+					dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(file), "#.*", ""));
+					_loadedmastertemp = file;
+					LoadMaster(_load);
+					if (panelMaster.Visible == false)
+						masterEditorToolStripMenuItem.PerformClick();
+				}
 
 				if (!filterleaf && !filterlvl && !filtergate && !filtermaster && !filtersamp)
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
