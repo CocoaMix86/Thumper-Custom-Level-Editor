@@ -171,9 +171,6 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show("You may not duplicate that file", "You cannot do that");
 				return;
 			}
-			//make user confirm file duplication
-			//if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show("Copy selected file?", "Confirm duplication", MessageBoxButtons.YesNo) != DialogResult.Yes)
-				//return;
 
 			string newfilename = "";
 			//create file renaming dialog and show it
@@ -195,6 +192,7 @@ namespace Thumper_Custom_Level_Editor
 
 
 			File.Copy($@"{workingfolder}\{file[0]}_{file[1]}.txt", $@"{workingfolder}\{file[0]}_{newfilename}.txt");
+			PlaySound("UIkcopy");
 			//add new file to workingfolder DGV
 			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject(file[0]), $@"{file[0]}_{newfilename}"});
 			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
