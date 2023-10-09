@@ -4,6 +4,7 @@ using System.Linq;
 using NAudio.Vorbis;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using System.IO;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -79,7 +80,7 @@ namespace Thumper_Custom_Level_Editor
                     AudioData = wholeFile.ToArray();
                 }
             }
-            
+
             else if (audioFileName.Contains(".wav")) {
                 using (var wavWaveReader = new AudioFileReader(audioFileName)) {
                     //need to resample wav to 44100 sample rate
@@ -98,6 +99,20 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
 
+        }
+        public CachedSound(Stream audioFileName)
+        {
+            using (var vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
+                // TODO: could add resampling in here if required
+                WaveFormat = vorbisWaveReader.WaveFormat;
+                var wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
+                var readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
+                int samplesRead;
+                while ((samplesRead = vorbisWaveReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {
+                    wholeFile.AddRange(readBuffer.Take(samplesRead));
+                }
+                AudioData = wholeFile.ToArray();
+            }
         }
     }
 

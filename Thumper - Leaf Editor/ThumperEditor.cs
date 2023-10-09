@@ -10,6 +10,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using NAudio;
+using NAudio.Wave;
+using NAudio.Vorbis;
+using NVorbis;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -857,11 +861,11 @@ namespace Thumper_Custom_Level_Editor
         {
             if (Properties.Settings.Default.muteapplication)
                 return;
-            string sss = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-            System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
-            System.IO.Stream s = a.GetManifestResourceStream($"Thumper Custom Level Editor.{audiofile}");
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(s);
-            player.Play();
+            Stream stream = new MemoryStream((byte[])Properties.Resources.ResourceManager.GetObject(audiofile));
+            var vorbisStream = new VorbisWaveReader(stream);
+            var waveOut = new WaveOut();
+            waveOut.Init(vorbisStream);
+            waveOut.Play();
         }
     }
 }

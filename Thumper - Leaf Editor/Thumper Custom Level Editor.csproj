@@ -96,45 +96,31 @@
       <HintPath>DLLs\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NAudio, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NAudio">
       <HintPath>DLLs\NAudio.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="NAudio.Asio, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NAudio.Asio">
       <HintPath>DLLs\NAudio.Asio.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="NAudio.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NAudio.Core">
       <HintPath>DLLs\NAudio.Core.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="NAudio.Midi, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NAudio.Midi">
       <HintPath>DLLs\NAudio.Midi.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="NAudio.Vorbis, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NAudio.Vorbis">
       <HintPath>DLLs\NAudio.Vorbis.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="NAudio.Wasapi, Version=22.0.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLLs\NAudio.Wasapi.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NAudio.WinForms, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NAudio.WinForms">
       <HintPath>DLLs\NAudio.WinForms.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="NAudio.WinMM, Version=2.2.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="NAudio.WinMM">
       <HintPath>DLLs\NAudio.WinMM.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -441,31 +427,31 @@
     <None Include="image assets\icon-import2.png" />
     <None Include="image assets\icon-openedfolders.png" />
     <None Include="image assets\icon-onefinger.png" />
-    <None Include="audio assets\UI sounds\UIbeetleclick.ogg" />
-    <None Include="audio assets\UI sounds\UIbeetleclick2.ogg" />
-    <None Include="audio assets\UI sounds\UIbeetleclick3.ogg" />
-    <None Include="audio assets\UI sounds\UIbeetleclick4.ogg" />
-    <None Include="audio assets\UI sounds\UIboot.ogg" />
-    <None Include="audio assets\UI sounds\UIcolorapply.ogg" />
-    <None Include="audio assets\UI sounds\UIcoloropen.ogg" />
-    <None Include="audio assets\UI sounds\UIdataerase.ogg" />
-    <None Include="audio assets\UI sounds\UIdelete.ogg" />
-    <None Include="audio assets\UI sounds\UIfolderclose.ogg" />
-    <None Include="audio assets\UI sounds\UIfolderopen.ogg" />
-    <None Include="audio assets\UI sounds\UIinterpolate.ogg" />
-    <None Include="audio assets\UI sounds\UIkcopy.ogg" />
-    <None Include="audio assets\UI sounds\UIkpaste.ogg" />
-    <None Include="audio assets\UI sounds\UIleafsplit.ogg" />
-    <None Include="audio assets\UI sounds\UIobjectadd.ogg" />
-    <None Include="audio assets\UI sounds\UIobjectremove.ogg" />
-    <None Include="audio assets\UI sounds\UIrefresh.ogg" />
-    <None Include="audio assets\UI sounds\UIrevertchanges.ogg" />
-    <None Include="audio assets\UI sounds\UIsave.ogg" />
-    <None Include="audio assets\UI sounds\UIselect.ogg" />
-    <None Include="audio assets\UI sounds\UItunneladd.ogg" />
-    <None Include="audio assets\UI sounds\UItunnelremove.ogg" />
-    <None Include="audio assets\UI sounds\UIwindowclose.ogg" />
-    <None Include="audio assets\UI sounds\UIwindowopen.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIbeetleclick.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIbeetleclick2.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIbeetleclick3.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIbeetleclick4.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIboot.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIcolorapply.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIcoloropen.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIdataerase.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIdelete.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIfolderclose.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIfolderopen.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIinterpolate.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIkcopy.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIkpaste.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIleafsplit.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIobjectadd.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIobjectremove.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIrefresh.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIrevertchanges.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIsave.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIselect.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UItunneladd.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UItunnelremove.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIwindowclose.ogg" />
+    <EmbeddedResource Include="audio assets\UI sounds\UIwindowopen.ogg" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
