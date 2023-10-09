@@ -898,5 +898,10 @@ namespace Thumper_Custom_Level_Editor
             waveOut.Volume = 1;
             waveOut.Play();
         }
+
+        private void resetDocksStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

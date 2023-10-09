@@ -725,7 +725,7 @@ namespace Thumper_Custom_Level_Editor
 			_lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
 		}
 
-		public void SaveLvl(bool save)
+		public void SaveLvl(bool save, bool playsound = false)
 		{
 			//make the beeble emote
 			pictureBox1_Click(null, null);
@@ -740,7 +740,7 @@ namespace Thumper_Custom_Level_Editor
 				btnSaveLvl.Enabled = false;
 				btnRevertLvl.Enabled = false;
 				toolstripTitleLvl.BackColor = Color.FromArgb(40, 40, 40);
-				PlaySound("UIsave");
+				if (playsound) PlaySound("UIsave");
 			}
 		}
 

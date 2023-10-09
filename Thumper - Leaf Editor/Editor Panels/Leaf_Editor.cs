@@ -427,7 +427,7 @@ namespace Thumper_Custom_Level_Editor
 			//serialize JSON object to a string, and write it to the file
 			var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
 			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveLeaf(true);
+			SaveLeaf(true, true);
 			lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
 			//update beat counts in loaded lvl if need be
 			if (_loadedlvl != null)
@@ -1007,7 +1007,7 @@ namespace Thumper_Custom_Level_Editor
 		/// METHODS ///
 		///         ///
 
-		public void SaveLeaf(bool save)
+		public void SaveLeaf(bool save, bool playsound = false)
 		{
 			//make the beeble emote
 			pictureBox1_Click(null, null);
@@ -1025,7 +1025,7 @@ namespace Thumper_Custom_Level_Editor
 				btnSaveLeaf.Enabled = false;
 				btnRevertLeaf.Enabled = false;
 				toolstripTitleLeaf.BackColor = Color.FromArgb(40, 40, 40);
-				PlaySound("UIsave");
+				if (playsound) PlaySound("UIsave");
 			}
 		}
 
