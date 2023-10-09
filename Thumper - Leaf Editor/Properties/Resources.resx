@@ -412,4 +412,79 @@
   <data name="icon_onefinger" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-onefinger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="UIbeetleclick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick2.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick3.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick4.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIboot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIboot.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIcolorapply" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIcolorapply.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIcoloropen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIcoloropen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdataerase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdataerase.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdelete.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIfolderclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIfolderclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIfolderopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIfolderopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIinterpolate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIinterpolate.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIkcopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIkcopy.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIkpaste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIkpaste.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIleafsplit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIleafsplit.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIobjectadd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIobjectadd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIobjectremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIobjectremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIrefresh.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrevertchanges" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIrevertchanges.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIsave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIsave.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIselect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIselect.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UItunneladd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UItunneladd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UItunnelremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UItunnelremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIwindowclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIwindowclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIwindowopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIwindowopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

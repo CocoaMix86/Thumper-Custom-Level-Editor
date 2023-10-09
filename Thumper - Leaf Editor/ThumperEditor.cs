@@ -853,7 +853,7 @@ namespace Thumper_Custom_Level_Editor
             _loadedsample = null;
         }
 
-        private void PlaySound(string audiofile)
+        public void PlaySound(string audiofile)
         {
 
         }

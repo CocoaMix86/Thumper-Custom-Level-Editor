@@ -1428,6 +1428,256 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIbeetleclick {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclick", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIbeetleclick2 {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclick2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIbeetleclick3 {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclick3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIbeetleclick4 {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclick4", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIboot {
+            get {
+                object obj = ResourceManager.GetObject("UIboot", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIcolorapply {
+            get {
+                object obj = ResourceManager.GetObject("UIcolorapply", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIcoloropen {
+            get {
+                object obj = ResourceManager.GetObject("UIcoloropen", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIdataerase {
+            get {
+                object obj = ResourceManager.GetObject("UIdataerase", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIdelete {
+            get {
+                object obj = ResourceManager.GetObject("UIdelete", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIfolderclose {
+            get {
+                object obj = ResourceManager.GetObject("UIfolderclose", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIfolderopen {
+            get {
+                object obj = ResourceManager.GetObject("UIfolderopen", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIinterpolate {
+            get {
+                object obj = ResourceManager.GetObject("UIinterpolate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIkcopy {
+            get {
+                object obj = ResourceManager.GetObject("UIkcopy", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIkpaste {
+            get {
+                object obj = ResourceManager.GetObject("UIkpaste", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIleafsplit {
+            get {
+                object obj = ResourceManager.GetObject("UIleafsplit", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIobjectadd {
+            get {
+                object obj = ResourceManager.GetObject("UIobjectadd", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIobjectremove {
+            get {
+                object obj = ResourceManager.GetObject("UIobjectremove", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIrefresh {
+            get {
+                object obj = ResourceManager.GetObject("UIrefresh", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIrevertchanges {
+            get {
+                object obj = ResourceManager.GetObject("UIrevertchanges", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIsave {
+            get {
+                object obj = ResourceManager.GetObject("UIsave", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIselect {
+            get {
+                object obj = ResourceManager.GetObject("UIselect", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UItunneladd {
+            get {
+                object obj = ResourceManager.GetObject("UItunneladd", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UItunnelremove {
+            get {
+                object obj = ResourceManager.GetObject("UItunnelremove", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIwindowclose {
+            get {
+                object obj = ResourceManager.GetObject("UIwindowclose", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIwindowopen {
+            get {
+                object obj = ResourceManager.GetObject("UIwindowopen", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///&apos;obj_type&apos;: &apos;Xfmer&apos;,
         ///&apos;xfm_name&apos;: &apos;&apos;,
