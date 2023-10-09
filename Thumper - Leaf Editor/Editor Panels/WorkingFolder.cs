@@ -142,6 +142,7 @@ namespace Thumper_Custom_Level_Editor
 				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp))
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 			}
+			PlaySound("UIrefresh");
 			//enable button
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkCopy.Enabled = workingfolderFiles.RowCount > 0;

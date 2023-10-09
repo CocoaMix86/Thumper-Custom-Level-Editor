@@ -120,6 +120,19 @@
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, -3</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="discordServerToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFqSURBVDhPlVOxSsRAFEzt59x3WCapLJIrxB9Q0MZCW+2U
+        IFcIFhZeo42NWgQUFAWFQzGNcmqp1SZ3ZpM8d16yZONFPQeG25s3b7K7ebG+w/VEx/FFoBjZnkhBrKGh
+        VtkmMTtPM7Yf7zh+TG43aSVqthf34K3aSkBwunHY1tRGFRQ2QlyV2mb8jdht1Sw6rrHtpdURnYaSrm8z
+        6u19Mm/U+kxpi6qmfXxU3AlfTiXOLST0/lHQT0ANnjpEBAiItICn/QV4jIDIwmvSwuAhY9P9Y0YbW2OK
+        k4ISxc3tMWsAPNqP3kaAEOX2+0cp/x++5vTylvP64DDlGjzazwHmEYqiDJCy4GYNrFOlAfBoPx8BF6GF
+        iyvJhqdhTscnku4GGRPrZ6Whdn4pjYAkqEa3fo0r6yPa3a8vShPa8pr5GtWvHm0MhWmehhhpbgZ4lH3x
+        j1EWzVEGICDVxdZamkD+mNRuJ5pNlHcy7edsWV9Ku4Vin9iZyAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>7, 27</value>
   </metadata>
@@ -147,7 +160,6 @@ Click to playback the entire leaf. Plays these objects in time:
 
 Playback speed is dependant on the Master BPM.</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnTrackColorImport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

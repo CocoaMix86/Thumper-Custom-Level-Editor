@@ -1142,7 +1142,7 @@
             this.trackObjectsToolStripMenuItem});
             this.helpToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(208, 26);
             this.helpToolStripMenuItem1.Text = "Documentation...";
             // 
             // tentaclesPathsVisualsToolStripMenuItem
@@ -1191,23 +1191,25 @@
             // 
             this.changeGameDirectoryToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.changeGameDirectoryToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.changeGameDirectoryToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
             this.changeGameDirectoryToolStripMenuItem.Name = "changeGameDirectoryToolStripMenuItem";
-            this.changeGameDirectoryToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.changeGameDirectoryToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.changeGameDirectoryToolStripMenuItem.Text = "Change Game Directory";
             this.changeGameDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeGameDirectoryToolStripMenuItem_Click);
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(201, 6);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(205, 6);
             this.toolStripMenuItem10.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.aboutToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_info;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -1215,8 +1217,9 @@
             // 
             this.discordServerToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.discordServerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.discordServerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("discordServerToolStripMenuItem.Image")));
             this.discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
-            this.discordServerToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.discordServerToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.discordServerToolStripMenuItem.Text = "Discord Server";
             this.discordServerToolStripMenuItem.Click += new System.EventHandler(this.discordServerToolStripMenuItem_Click);
             // 

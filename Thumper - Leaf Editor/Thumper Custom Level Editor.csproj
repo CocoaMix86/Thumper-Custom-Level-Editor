@@ -459,6 +459,8 @@
     <None Include="audio assets\UI sounds\UIbeetleclickGOLD.ogg" />
     <None Include="audio assets\UI sounds\UIdock.ogg" />
     <None Include="audio assets\UI sounds\UIdockun.ogg" />
+    <None Include="image assets\discord.ico" />
+    <None Include="image assets\icon-info.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
