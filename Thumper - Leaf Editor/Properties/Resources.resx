@@ -424,6 +424,21 @@
   <data name="UIbeetleclick4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIbeetleclick4.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="UIbeetleclick5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick5.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick6.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick7.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick8.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclickGOLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclickGOLD.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="UIboot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIboot.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

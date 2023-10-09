@@ -1470,6 +1470,56 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] UIbeetleclick5 {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclick5", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIbeetleclick6 {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclick6", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIbeetleclick7 {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclick7", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIbeetleclick8 {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclick8", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIbeetleclickGOLD {
+            get {
+                object obj = ResourceManager.GetObject("UIbeetleclickGOLD", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] UIboot {
             get {
                 object obj = ResourceManager.GetObject("UIboot", resourceCulture);

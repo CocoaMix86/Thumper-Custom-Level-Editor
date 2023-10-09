@@ -452,6 +452,11 @@
     <EmbeddedResource Include="audio assets\UI sounds\UItunnelremove.ogg" />
     <EmbeddedResource Include="audio assets\UI sounds\UIwindowclose.ogg" />
     <EmbeddedResource Include="audio assets\UI sounds\UIwindowopen.ogg" />
+    <None Include="audio assets\UI sounds\UIbeetleclick5.ogg" />
+    <None Include="audio assets\UI sounds\UIbeetleclick6.ogg" />
+    <None Include="audio assets\UI sounds\UIbeetleclick7.ogg" />
+    <None Include="audio assets\UI sounds\UIbeetleclick8.ogg" />
+    <None Include="audio assets\UI sounds\UIbeetleclickGOLD.ogg" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
