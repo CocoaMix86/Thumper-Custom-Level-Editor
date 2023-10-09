@@ -11,28 +11,28 @@ namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{
-		private void workingfolderFiles_SelectionChanged(object sender, EventArgs e)
+		private void workingfolderFiles_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			//do nothing if selection changes to 0
-			if (workingfolderFiles.SelectedCells.Count == 0)
+			//do nothing if no cell click
+			if (e.RowIndex == -1)
 				return;
 
 			dynamic _load;
-			string _selectedfilename;
+			string _selectedfilename = "";
 			//attempt to load file listed in the dGV
 			try {
 				//first check if it exists
-				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.SelectedCells[0].RowIndex].Value}.txt";
+				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}.txt";
 				if (!File.Exists(_selectedfilename)) {
-					MessageBox.Show($"File {workingfolderFiles[1, workingfolderFiles.SelectedCells[0].RowIndex].Value}.txt could not be found in the folder. Was it moved or deleted?", "File load error");
+					MessageBox.Show($"File {workingfolderFiles[1, e.RowIndex].Value}.txt could not be found in the folder. Was it moved or deleted?", "File load error");
 					return;
 				}
 				//atempt to parse JSON
 				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_selectedfilename), "#.*", ""));
 			}
-			catch {
+			catch (Exception ex) {
 				//return method if parse fails
-				MessageBox.Show("The selected file could not be parsed as JSON.", "File load error");
+				MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.\n\n{ex}", "File load error");
 				return;
 			}
 			///Send file off to different load methods based on the file type
@@ -121,8 +121,6 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnWorkRefresh_Click(object sender, EventArgs e)
 		{
-			workingfolderFiles.SelectionChanged -= workingfolderFiles_SelectionChanged;
-
 			if (workingfolder == null)
 				return;
 			//clear the dgv and reload files in the folder
@@ -140,7 +138,6 @@ namespace Thumper_Custom_Level_Editor
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkCopy.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkNewFile.Enabled = workingfolderFiles.RowCount > 0;
-			workingfolderFiles.SelectionChanged += workingfolderFiles_SelectionChanged;
 		}
 
 		private void btnWorkDelete_Click(object sender, EventArgs e)
