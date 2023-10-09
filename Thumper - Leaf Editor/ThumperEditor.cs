@@ -10,10 +10,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using NAudio;
 using NAudio.Wave;
 using NAudio.Vorbis;
-using NVorbis;
 
 namespace Thumper_Custom_Level_Editor
 {
