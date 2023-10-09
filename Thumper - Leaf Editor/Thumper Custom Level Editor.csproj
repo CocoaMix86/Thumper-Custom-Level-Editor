@@ -457,6 +457,8 @@
     <None Include="audio assets\UI sounds\UIbeetleclick7.ogg" />
     <None Include="audio assets\UI sounds\UIbeetleclick8.ogg" />
     <None Include="audio assets\UI sounds\UIbeetleclickGOLD.ogg" />
+    <None Include="audio assets\UI sounds\UIdock.ogg" />
+    <None Include="audio assets\UI sounds\UIdockun.ogg" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

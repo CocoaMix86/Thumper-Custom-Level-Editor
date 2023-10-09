@@ -1570,6 +1570,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] UIdock {
+            get {
+                object obj = ResourceManager.GetObject("UIdock", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] UIdockun {
+            get {
+                object obj = ResourceManager.GetObject("UIdockun", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] UIfolderclose {
             get {
                 object obj = ResourceManager.GetObject("UIfolderclose", resourceCulture);
