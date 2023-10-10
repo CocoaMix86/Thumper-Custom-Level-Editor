@@ -456,10 +456,10 @@
     <!-- the ILMergePath property points to the location of ILMerge.exe console application -->
     <Exec Command="$(ILMergeConsolePath) /out:'Thumper Custom Level Editor.exe' 'Thumper Custom Level Editor.exe' 'Newtonsoft.Json.dll'" />
   </Target>
-  <Target Name="ILRepack" AfterTargets="Build">
+  <!-- Target Name="ILRepack" AfterTargets="Build">
     <PropertyGroup>
       <WorkingDirectory>$(MSBuildThisFileDirectory)bin\$(Configuration)\$(TargetFramework)</WorkingDirectory>
     </PropertyGroup>
     <ILRepack OutputType="$(OutputType)" MainAssembly="$(AssemblyName).exe" OutputAssembly="$(AssemblyName).exe" InputAssemblies="$(WorkingDirectory)\*.dll" WilcardInputAssemblies="true" WorkingDirectory="$(WorkingDirectory)" />
-  </Target>
+  </Target -->
 </Project>

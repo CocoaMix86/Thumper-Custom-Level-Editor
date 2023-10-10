@@ -446,6 +446,9 @@ namespace Thumper_Custom_Level_Editor
 					rest = _lvl["rest_lvl_name"]
 				});
 			}
+			dropMasterSkybox.SelectedIndex = dropMasterSkybox.Items.IndexOf((string)_load["skybox_name"]);
+			dropMasterIntro.SelectedIndex = dropMasterIntro.Items.IndexOf((string)_load["intro_lvl_name"]);
+			dropMasterCheck.SelectedIndex = dropMasterCheck.Items.IndexOf((string)_load["checkpoint_lvl_name"]);
 			///load Config data (if file exists)
 			LoadConfig();
 			///set save flag (master just loaded, has no changes)
