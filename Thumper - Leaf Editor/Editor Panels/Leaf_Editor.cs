@@ -992,6 +992,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnRevertLeaf_Click(object sender, EventArgs e)
 		{
+			if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
+				return;
 			SaveLeaf(true);
 			LoadLeaf(leafjson);
 			PlaySound("UIrevertchanges");

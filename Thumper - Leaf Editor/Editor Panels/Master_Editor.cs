@@ -393,6 +393,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnRevertMaster_Click(object sender, EventArgs e)
 		{
+			if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
+				return;
 			SaveMaster(true);
 			LoadMaster(masterjson);
 			PlaySound("UIrevertchanges");

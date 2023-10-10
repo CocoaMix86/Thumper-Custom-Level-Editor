@@ -546,6 +546,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnRevertLvl_Click(object sender, EventArgs e)
 		{
+			if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
+				return;
 			SaveLvl(true);
 			LoadLvl(lvljson);
 			PlaySound("UIrevertchanges");
