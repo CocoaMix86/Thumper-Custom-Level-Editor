@@ -333,7 +333,6 @@ namespace Thumper_Custom_Level_Editor
 				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				PlaySound("UIfolderopen");
 				if (ofd.ShowDialog() == DialogResult.OK) {
-					PlaySound("UIobjectadd");
 					AddLeaftoLvl(ofd.FileName);
 				}
 			}
