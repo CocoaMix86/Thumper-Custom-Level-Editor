@@ -993,8 +993,8 @@ namespace Thumper_Custom_Level_Editor
 		private void btnRevertLeaf_Click(object sender, EventArgs e)
 		{
 			SaveLeaf(true);
-			PlaySound("UIrevert");
 			LoadLeaf(leafjson);
+			PlaySound("UIrevertchanges");
 		}
 
 		/// These buttons exist on the Workingfolder panel

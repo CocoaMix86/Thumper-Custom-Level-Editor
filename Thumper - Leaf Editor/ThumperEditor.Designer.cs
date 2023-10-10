@@ -532,7 +532,7 @@
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.menuStrip.ShowItemToolTips = true;
-            this.menuStrip.Size = new System.Drawing.Size(652, 29);
+            this.menuStrip.Size = new System.Drawing.Size(600, 29);
             this.menuStrip.TabIndex = 20;
             this.menuStrip.Text = "mnuLeafEditor";
             // 
@@ -5706,7 +5706,7 @@
             this.panelRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
             this.panelRecentFiles.Controls.Add(this.toolstripRecentFiles);
-            this.panelRecentFiles.Location = new System.Drawing.Point(66, 100);
+            this.panelRecentFiles.Location = new System.Drawing.Point(417, 100);
             this.panelRecentFiles.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
             this.panelRecentFiles.Size = new System.Drawing.Size(407, 247);

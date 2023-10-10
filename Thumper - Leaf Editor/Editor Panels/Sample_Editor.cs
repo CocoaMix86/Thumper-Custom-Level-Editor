@@ -207,7 +207,7 @@ namespace Thumper_Custom_Level_Editor
 			//write contents direct to file without prompting save dialog
 			var _save = SampleBuildSave();
 			File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveSample(true);
+			SaveSample(true, true);
 			lblSampleEditor.Text = $"Sample Editor - {_loadedsample}";
 		}
 
@@ -234,6 +234,7 @@ namespace Thumper_Custom_Level_Editor
 				else
 					MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
 			}
+			PlaySound("UIobjectadd");
 		}
 
 		#endregion
@@ -243,7 +244,11 @@ namespace Thumper_Custom_Level_Editor
 		/// BUTTONS ///
 		///         ///
 		//add and remove sample entries
-		private void btnSampleDelete_Click(object sender, EventArgs e) => _samplelist.RemoveAt(sampleList.CurrentRow.Index);
+		private void btnSampleDelete_Click(object sender, EventArgs e)
+		{
+			_samplelist.RemoveAt(sampleList.CurrentRow.Index);
+			PlaySound("UIobjectremove");
+		}
 		private void btnSampleAdd_Click(object sender, EventArgs e)
 		{
 			SampleData newsample = new SampleData { 
@@ -268,6 +273,7 @@ namespace Thumper_Custom_Level_Editor
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					foreach (string _file in ofd.FileNames)
 						FSBtoSAMP(_file);
+					PlaySound("UIobjectadd");
 				}
 			}
 		}
@@ -309,6 +315,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			SaveSample(true);
 			LoadSample(samplejson);
+			PlaySound("UIrevertchanges");
 		}
 		#endregion
 
@@ -370,7 +377,7 @@ namespace Thumper_Custom_Level_Editor
 			SaveSample(true);
 		}
 
-		public void SaveSample(bool save)
+		public void SaveSample(bool save, bool playsound = false)
 		{
 			//make the beeble emote
 			pictureBox1_Click(null, null);
@@ -385,6 +392,7 @@ namespace Thumper_Custom_Level_Editor
 				btnSaveSample.Enabled = false;
 				btnRevertSample.Enabled = false;
 				toolstripTitleSample.BackColor = Color.FromArgb(40, 40, 40);
+				if (playsound) PlaySound("UIsave");
 			}
 		}
 

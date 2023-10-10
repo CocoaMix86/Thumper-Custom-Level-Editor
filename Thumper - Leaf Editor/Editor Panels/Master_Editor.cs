@@ -240,7 +240,7 @@ namespace Thumper_Custom_Level_Editor
 			//write contents direct to file without prompting save dialog
 			var _save = MasterBuildSave();
 			File.WriteAllText(_loadedmaster, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveMaster(true);
+			SaveMaster(true, true);
 			lblMasterName.Text = $"Master Editor - sequin.master";
 
 		}
@@ -251,7 +251,11 @@ namespace Thumper_Custom_Level_Editor
 		/// BUTTONS ///
 		///         ///
 
-		private void btnMasterLvlDelete_Click(object sender, EventArgs e) => _masterlvls.RemoveAt(masterLvlList.CurrentRow.Index);
+		private void btnMasterLvlDelete_Click(object sender, EventArgs e)
+		{
+			_masterlvls.RemoveAt(masterLvlList.CurrentRow.Index);
+			PlaySound("UIobjectremove");
+		}
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
 			using (var ofd = new OpenFileDialog()) {
@@ -260,6 +264,7 @@ namespace Thumper_Custom_Level_Editor
 				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					AddFiletoMaster(ofd.FileName);
+					PlaySound("UIobjectadd");
 				}
 			}
 		}
@@ -338,20 +343,23 @@ namespace Thumper_Custom_Level_Editor
 		{
 			MasterLvlData selectedlvl = _masterlvls[masterLvlList.CurrentRow.Index];
 			clipboardmaster = selectedlvl.Clone();
-			//_masterlvls.Add(_lvl);
+			PlaySound("UIkcopy");
 			btnMasterLvlPaste.Enabled = true;
 		}
 
 		private void btnMasterLvlPaste_Click(object sender, EventArgs e)
 		{
 			_masterlvls.Insert(masterLvlList.CurrentRow.Index + 1, clipboardmaster);
+			PlaySound("UIkpaste");
 		}
 
 		private void btnConfigColor_Click(object sender, EventArgs e)
 		{
+			PlaySound("UIcoloropen");
 			Button button = (Button)sender;
 			if (colorDialog1.ShowDialog() == DialogResult.OK) {
 				ColorButton(button, colorDialog1.Color);
+				PlaySound("UIcolorapply");
 				SaveMaster(false);
 			}
 		}
@@ -380,12 +388,14 @@ namespace Thumper_Custom_Level_Editor
 			dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
 			dropMasterLvlRest.SelectedItem = _select;
 			SaveMaster(true);
+			PlaySound("UIrefresh");
 		}
 
 		private void btnRevertMaster_Click(object sender, EventArgs e)
 		{
 			SaveMaster(true);
 			LoadMaster(masterjson);
+			PlaySound("UIrevertchanges");
 		}
 
 		//buttons that click other buttons
@@ -486,7 +496,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		public void SaveMaster(bool save)
+		public void SaveMaster(bool save, bool playsound = false)
 		{
 			//make the beeble emote
 			pictureBox1_Click(null, null);
@@ -501,6 +511,7 @@ namespace Thumper_Custom_Level_Editor
 				btnSaveMaster.Enabled = false;
 				btnRevertMaster.Enabled = false;
 				toolstripTitleMaster.BackColor = Color.FromArgb(40, 40, 40);
+				if (playsound) PlaySound("UIsave");
 			}
 		}
 

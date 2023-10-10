@@ -194,7 +194,7 @@ namespace Thumper_Custom_Level_Editor
 			//write contents direct to file without prompting save dialog
 			var _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
 			File.WriteAllText(_loadedgate, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			SaveGate(true);
+			SaveGate(true, true);
 			lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
 		}
 
@@ -214,7 +214,11 @@ namespace Thumper_Custom_Level_Editor
 		/// BUTTONS ///
 		///         ///
 
-		private void btnGateLvlDelete_Click(object sender, EventArgs e) => _gatelvls.RemoveAt(gateLvlList.CurrentRow.Index);
+		private void btnGateLvlDelete_Click(object sender, EventArgs e)
+		{
+			_gatelvls.RemoveAt(gateLvlList.CurrentRow.Index);
+			PlaySound("UIobjectremove");
+		}
 		private void btnGateLvlAdd_Click(object sender, EventArgs e)
 		{
 			//don't load new lvl if gate has 4 phases
@@ -239,19 +243,12 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("This does not appear to be a lvl file!", "Lvl load error");
 						return;
 					}
-					//check if lvl exists in the same folder as the gate. If not, allow user to copy file.
-					//this is why I utilize workingfolder
-					/*if (Path.GetDirectoryName(ofd.FileName) != workingfolder) {
-						if (MessageBox.Show("The lvl you chose does not exist in the same folder as this gate. Do you want to copy it to this folder and load it?", "Lvl load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-							File.Copy(ofd.FileName, $@"{workingfolder}\{Path.GetFileName(ofd.FileName)}");
-						else
-							return;
-					}*/
 					//add leaf data to the list
 					_gatelvls.Add(new GateLvlData() {
 						lvlname = (string)_load["obj_name"],
 						sentrytype = "SENTRY_NONE"
 					});
+					PlaySound("UIobjectadd");
 				}
 			}
 		}
@@ -314,12 +311,14 @@ namespace Thumper_Custom_Level_Editor
 			dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 			dropGateRestart.SelectedItem = _select;
 			SaveGate(true);
+			PlaySound("UIrefresh");
 		}
 
 		private void btnRevertGate_Click(object sender, EventArgs e)
 		{
 			SaveGate(true);
 			LoadGate(gatejson);
+			PlaySound("UIrevertchanges");
 		}
 
 		//buttons that click other buttons
@@ -386,7 +385,7 @@ namespace Thumper_Custom_Level_Editor
 			SaveGate(true);
 		}
 
-		public void SaveGate(bool save)
+		public void SaveGate(bool save, bool playsound = false)
 		{
 			//make the beeble emote
 			pictureBox1_Click(null, null);
@@ -401,6 +400,7 @@ namespace Thumper_Custom_Level_Editor
 				btnSaveGate.Enabled = false;
 				btnRevertGate.Enabled = false;
 				toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
+				if (playsound) PlaySound("UIsave");
 			}
 		}
 
