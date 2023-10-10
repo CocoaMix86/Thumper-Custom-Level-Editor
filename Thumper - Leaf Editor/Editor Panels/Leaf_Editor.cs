@@ -99,16 +99,16 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 			else {
-				if (controldown && e.Delta > 0) {
+				if (controldown && e.Delta < 0) {
 					trackZoom.Value = Math.Max(1, horiz - scrollLines);
 				}
-				else if (controldown && e.Delta < 0) {
+				else if (controldown && e.Delta > 0) {
 					trackZoom.Value = Math.Min(100, horiz + scrollLines);
 				}
-				if (shiftdown && e.Delta > 0) {
+				if (shiftdown && e.Delta < 0) {
 					trackZoomVert.Value = Math.Max(1, vert - scrollLines);
 				}
-				else if (shiftdown && e.Delta < 0) {
+				else if (shiftdown && e.Delta > 0) {
 					trackZoomVert.Value = Math.Min(100, vert + scrollLines);
 				}
 			}
