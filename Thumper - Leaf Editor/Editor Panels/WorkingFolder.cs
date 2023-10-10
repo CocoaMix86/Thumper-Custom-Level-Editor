@@ -130,11 +130,13 @@ namespace Thumper_Custom_Level_Editor
 				var filetype = Path.GetFileName(file).Split('_')[0];
 				//upon loading a level folder, immediately open the MASTER file
 				if (filetype == "master") {
-					dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(file), "#.*", ""));
-					_loadedmastertemp = file;
-					LoadMaster(_load);
-					if (panelMaster.Visible == false)
-						masterEditorToolStripMenuItem.PerformClick();
+					if (_loadedmaster != file) {
+						dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(file), "#.*", ""));
+						_loadedmastertemp = file;
+						LoadMaster(_load);
+						if (panelMaster.Visible == false)
+							masterEditorToolStripMenuItem.PerformClick();
+					}
 				}
 
 				if (!filterleaf && !filterlvl && !filtergate && !filtermaster && !filtersamp)
