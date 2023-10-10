@@ -264,7 +264,6 @@ namespace Thumper_Custom_Level_Editor
 				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
 				if (ofd.ShowDialog() == DialogResult.OK) {
 					AddFiletoMaster(ofd.FileName);
-					PlaySound("UIobjectadd");
 				}
 			}
 		}
@@ -286,6 +285,7 @@ namespace Thumper_Custom_Level_Editor
 				else
 					return;
 			}
+			PlaySound("UIobjectadd");
 			//add lvl/gate data to the list
 			if (_load["obj_type"] == "SequinLevel")
 				_masterlvls.Add(new MasterLvlData() {

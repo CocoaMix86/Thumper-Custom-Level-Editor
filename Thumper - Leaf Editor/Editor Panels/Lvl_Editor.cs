@@ -668,6 +668,7 @@ namespace Thumper_Custom_Level_Editor
 				else
 					return;
 			}
+			PlaySound("UIobjectadd");
 			//Setup list of tunnels if copy check is enabled
 			List<string> copytunnels = new List<string>();
 			if (chkTunnelCopy.Checked) {
