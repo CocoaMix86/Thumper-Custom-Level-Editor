@@ -273,7 +273,7 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
 						return;
 					}
-					_loadedlvl = $@"{storePath}\leaf_{tempFileName}";
+					_loadedlvl = $@"{storePath}\lvl_{tempFileName}";
 					WriteLvl();
 					//after saving new file, refresh the workingfolder
 					btnWorkRefresh.PerformClick();
