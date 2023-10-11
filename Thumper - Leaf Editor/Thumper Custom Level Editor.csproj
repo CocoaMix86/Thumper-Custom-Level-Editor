@@ -170,6 +170,9 @@
     <EmbeddedResource Include="Extra Forms\FileNameDialog.resx">
       <DependentUpon>FileNameDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Extra Forms\ImageMessageBox.resx">
+      <DependentUpon>ImageMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Extra Forms\Interpolator.resx">
       <DependentUpon>Interpolator.cs</DependentUpon>
     </EmbeddedResource>
