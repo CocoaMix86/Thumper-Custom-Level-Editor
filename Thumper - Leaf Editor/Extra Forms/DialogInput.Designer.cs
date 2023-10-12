@@ -105,7 +105,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomCancel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomCancel.ForeColor = System.Drawing.Color.White;
             this.btnCustomCancel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCustomCancel.Location = new System.Drawing.Point(346, 406);
+            this.btnCustomCancel.Location = new System.Drawing.Point(352, 406);
             this.btnCustomCancel.Name = "btnCustomCancel";
             this.btnCustomCancel.Size = new System.Drawing.Size(60, 24);
             this.btnCustomCancel.TabIndex = 116;
@@ -121,7 +121,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomSave.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomSave.ForeColor = System.Drawing.Color.White;
             this.btnCustomSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCustomSave.Location = new System.Drawing.Point(283, 406);
+            this.btnCustomSave.Location = new System.Drawing.Point(289, 406);
             this.btnCustomSave.Name = "btnCustomSave";
             this.btnCustomSave.Size = new System.Drawing.Size(60, 24);
             this.btnCustomSave.TabIndex = 117;
