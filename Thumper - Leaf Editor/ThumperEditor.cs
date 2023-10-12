@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -67,6 +66,7 @@ namespace Thumper_Custom_Level_Editor
                     SaveGate(true);
                     SaveMaster(true);
                     SaveSample(true);
+                    panelRecentFiles.Visible = false;
                 }
             }
         }
@@ -425,24 +425,28 @@ namespace Thumper_Custom_Level_Editor
                 { "description", input.txtDesc.Text },
                 { "author", input.txtCustomAuthor.Text }
             };
+            string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
+            if (!Directory.Exists(levelpath)) {
+                Directory.CreateDirectory(levelpath);
+            }
             //then write the file to the new folder that was created from the form
-            File.WriteAllText($@"{input.txtCustomPath.Text}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+            File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
             //these 4 files below are required defaults of new levels.
             //create them if they don't exist
-            if (!File.Exists($@"{input.txtCustomPath.Text}\leaf_pyramid_outro.txt")) {
-                File.WriteAllText($@"{input.txtCustomPath.Text}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
+            if (!File.Exists($@"{levelpath}\leaf_pyramid_outro.txt")) {
+                File.WriteAllText($@"{levelpath}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
             }
-            if (!File.Exists($@"{input.txtCustomPath.Text}\samp_default.txt")) {
-                File.WriteAllText($@"{input.txtCustomPath.Text}\samp_default.txt", Properties.Resources.samp_default);
+            if (!File.Exists($@"{levelpath}\samp_default.txt")) {
+                File.WriteAllText($@"{levelpath}\samp_default.txt", Properties.Resources.samp_default);
             }
-            if (!File.Exists($@"{input.txtCustomPath.Text}\spn_default.txt")) {
-                File.WriteAllText($@"{input.txtCustomPath.Text}\spn_default.txt", Properties.Resources.spn_default);
+            if (!File.Exists($@"{levelpath}\spn_default.txt")) {
+                File.WriteAllText($@"{levelpath}\spn_default.txt", Properties.Resources.spn_default);
             }
-            if (!File.Exists($@"{input.txtCustomPath.Text}\xfm_default.txt")) {
-                File.WriteAllText($@"{input.txtCustomPath.Text}\xfm_default.txt", Properties.Resources.xfm_default);
+            if (!File.Exists($@"{levelpath}\xfm_default.txt")) {
+                File.WriteAllText($@"{levelpath}\xfm_default.txt", Properties.Resources.xfm_default);
             }
             //finally, set workingfolder
-            workingfolder = input.txtCustomPath.Text;
+            workingfolder = levelpath;
             ///create samp_ files if any boxes are checked
             //level 1
             if (input.chkLevel1.Checked) {
