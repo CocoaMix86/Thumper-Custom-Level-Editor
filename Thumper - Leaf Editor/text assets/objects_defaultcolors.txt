@@ -1,0 +1,414 @@
+pitch;-8355585
+roll;-8355585
+turn;-8355585
+turn_auto;-8355585
+scale_x;-8355585
+scale_y;-8355585
+scale_z;-8355585
+offset_x;-8355585
+offset_y;-8355585
+offset_z;-8355585
+lane left 2;-8355585
+lane left 1;-8355585
+lane center;-8355585
+lane right 1;-8355585
+lane right 2;-8355585
+thump;-8355585
+thump[fast];-8355585
+thump[checkpoint];-8355585
+thump[boss bonus];-8355585
+bar;-8355585
+bar[left];-8355585
+bar[center];-8355585
+bar[right];-8355585
+bar and thump;-8355585
+bar[double];-8355585
+bar[triple];-8355585
+bar[quad];-8355585
+ring;-8355585
+mushroom[1 beat];-8355585
+mushroom[1 beat];-8355585
+mushroon[6 beat];-8355585
+tall spike[2 beat];-8355585
+tall spike[4 beat];-8355585
+tall spike[6 beat];-8355585
+tall spike[8 beat];-8355585
+wide spike[4 beat];-8355585
+spike decorator, 4 beat;-8355585
+demo fingers1;-8355585
+demo fingers1_unison;-8355585
+demo fingers1_wave_in;-8355585
+demo fingers1_gate;-8355585
+demo fingers1_short;-8355585
+demo fingers1_decorative;-8355585
+demo decorative;-8355585
+level 1 fingers1;-8355585
+level 1 fingers1_short;-8355585
+level 1 fingers1_gate;-8355585
+level 2 fingers1;-8355585
+level 2 fingers1_gate;-8355585
+level 2 fingers1_unison;-8355585
+level 2 fingers1_wave_in;-8355585
+level 2 fingers1_long;-8355585
+level 2 fingers1_long_20;-8355585
+level 2 decoration;-8355585
+level 2b fingers1;-8355585
+level 2b fingers1_gate;-8355585
+level 2b fingers1_unison;-8355585
+level 2b fingers1_wave_in;-8355585
+level 2b decoration;-8355585
+level 2c fingers1;-8355585
+level 2c fingers1_gate;-8355585
+level 2c fingers1_gate_8;-8355585
+level 2c fingers1_unison;-8355585
+level 2c fingers1_wave_in;-8355585
+level 2c fingers1_decorative;-8355585
+level 2c decorative;-8355585
+level 2 angled fingers1;-8355585
+level 2 angled fingers1_gate;-8355585
+level 2 angled fingers1_unison;-8355585
+level 2 angled fingers1_wave_in;-8355585
+level 2 angled fingers1_gate;-8355585
+level 2 angled fingers1_long;-8355585
+level 2 angled fingers1_long_20;-8355585
+level 2 angled decoration;-8355585
+level 3 fingers1;-8355585
+level 3 fingers1_unison;-8355585
+level 3 fingers1_wave_in;-8355585
+level 3 fingers1_gate;-8355585
+level 3 fingers1_decorative;-8355585
+level 3 decorative;-8355585
+level 3b fingers1;-8355585
+level 3b fingers1_unison;-8355585
+level 3b fingers1_wave_in;-8355585
+level 3b fingers1_gate;-8355585
+level 3b fingers1_decorative;-8355585
+level 3b decorative;-8355585
+level 3c fingers1;-8355585
+level 3c fingers1_unison;-8355585
+level 3c fingers1_wave_in;-8355585
+level 3c fingers1_gate;-8355585
+level 3c fingers1_decorative;-8355585
+level 3c decorative;-8355585
+level 3d fingers1;-8355585
+level 3d fingers1_unison;-8355585
+level 3d fingers1_wave_in;-8355585
+level 3d fingers1_gate;-8355585
+level 3d fingers1_decorative;-8355585
+level 3d decorative;-8355585
+level 4 fingers1;-8355585
+level 4 fingers1_unison;-8355585
+level 4 fingers1_wave_in;-8355585
+level 4 fingers1_gate;-8355585
+level 4 decoration;-8355585
+level 4b fingers1;-8355585
+level 4b fingers1_unison;-8355585
+level 4b fingers1_wave_in;-8355585
+level 4b fingers1_gate;-8355585
+level 4b fingers1_short;-8355585
+level 4 fingers1_short;-8355585
+level 4b ddecoration;-8355585
+level 4 fingers1_short;-8355585
+level 4c fingers1;-8355585
+level 4c fingers1_unison;-8355585
+level 4c fingers1_wave_in;-8355585
+level 4c fingers1_gate;-8355585
+level 4c fingers1_short;-8355585
+level 4c decoration;-8355585
+level 5b fingers1;-8355585
+level 5b fingers1_unison;-8355585
+level 5b fingers1_wave_in;-8355585
+level 5b fingers1_gate;-8355585
+level 5b fingers1_decorative;-8355585
+level 5b decorative;-8355585
+level 5c fingers1;-8355585
+level 5c fingers1_unison;-8355585
+level 5c fingers1_wave_in;-8355585
+level 5c fingers1_gate;-8355585
+level 5c fingers1_decorative;-8355585
+level 5c decorative;-8355585
+level 5d fingers1;-8355585
+level 5d fingers1_unison;-8355585
+level 5d fingers1_wave_in;-8355585
+level 5d fingers1_gate;-8355585
+level 5d fingers1_decorative;-8355585
+level 5e fingers1;-8355585
+level 5e fingers1_unison;-8355585
+level 5e fingers1_wave_in;-8355585
+level 5e fingers1_gate;-8355585
+level 5e fingers1_decorative;-8355585
+level 5e decorative;-8355585
+level 5f decorative;-8355585
+level 6b fingers1;-8355585
+level 6b fingers1_unison;-8355585
+level 6b fingers1_wave_in;-8355585
+level 6b fingers1_gate;-8355585
+level 6b fingers1_decorative;-8355585
+level 6b decorative;-8355585
+level 6c fingers1;-8355585
+level 6c fingers1_unison;-8355585
+level 6c fingers1_wave_in;-8355585
+level 6c fingers1_gate;-8355585
+level 6c fingers1_decorative;-8355585
+level 6c decorative;-8355585
+level 7 fingers1;-8355585
+level 7 fingers1_unison;-8355585
+level 7 fingers1_wave_in;-8355585
+level 7 fingers1_gate;-8355585
+level 7 fingers1_decorative;-8355585
+level 7 decorative;-8355585
+level 7b fingers1;-8355585
+level 7b fingers1_unison;-8355585
+level 7b fingers1_wave_in;-8355585
+level 7b fingers1_gate;-8355585
+level 7b fingers1_decorative;-8355585
+level 7b decorative;-8355585
+level 7c fingers1;-8355585
+level 7c fingers1_unison;-8355585
+level 7c fingers1_wave_in;-8355585
+level 7c fingers1_gate;-8355585
+level 7c fingers1_short;-8355585
+level 7c fingers1_decorative;-8355585
+level 7c decorative;-8355585
+level 7d decorative;-8355585
+level 8 fingers1;-8355585
+level 8 fingers1_unison;-8355585
+level 8 fingers1_wave_in;-8355585
+level 8 fingers1_gate;-8355585
+level 8 fingers1_decorative;-8355585
+level 8 decorative;-8355585
+level 8b fingers1;-8355585
+level 8b fingers1_unison;-8355585
+level 8b fingers1_wave_in;-8355585
+level 8b fingers1_gate;-8355585
+level 8b fingers1_decorative;-8355585
+level 8b decorative;-8355585
+level 9 fingers1;-8355585
+level 9 fingers1_unison;-8355585
+level 9 fingers1_wave_in;-8355585
+level 9 fingers1_gate;-8355585
+level 9 fingers1_decorative;-8355585
+level 9 decorative;-8355585
+level 9b fingers1;-8355585
+level 9b fingers1_unison;-8355585
+level 9b fingers1_wave_in;-8355585
+level 9b fingers1_gate;-8355585
+level 9b fingers1_decorative;-8355585
+level 9b decorative;-8355585
+level 9d fingers1;-8355585
+level 9d fingers1_unison;-8355585
+level 9d fingers1_wave_in;-8355585
+level 9d fingers1_gate;-8355585
+level 9d fingers1_decorative;-8355585
+level 9d decorative;-8355585
+level 9c fingers1;-8355585
+level 9c fingers1_unison;-8355585
+level 9c fingers1_wave_in;-8355585
+level 9c fingers1_gate;-8355585
+level 9c fingers1_decorative;-8355585
+level 9c decorative;-8355585
+tree1;-8355585
+tree1 set_8;-8355585
+tree1 set_16;-8355585
+tree1 set_8 non phrase;-8355585
+tree1 set_decorative;-8355585
+tree1 decorative;-8355585
+tree1 set angled;-8355585
+tree1 set angled_8;-8355585
+tree1 set angled_16;-8355585
+tree1 set angled_8 non phrase;-8355585
+tree1 set angled_decorative;-8355585
+tree1 set lattice;-8355585
+tree1 set lattice_8;-8355585
+tree1 set lattice_16;-8355585
+tree1 set lattice_8 non phrase;-8355585
+tree1 set lattice_decorative;-8355585
+tree1 lattice_decorative;-8355585
+tree1 set latticeb;-8355585
+tree1 set latticeb_9;-8355585
+tree1 set latticeb_12;-8355585
+tree1 set latticeb_18;-8355585
+tree1 set latticeb_8 non phrase;-8355585
+tree1 set latticeb_decorative;-8355585
+tree1 latticeb_decorative;-8355585
+tree1 set glass;-8355585
+tree1 set glass_8;-8355585
+tree1 set glass_16;-8355585
+tree1 set glass_8 non phrase;-8355585
+tree1 set glass_decorative;-8355585
+tree1 glass_decorative;-8355585
+tree2;-8355585
+tree2 set_12;-8355585
+tree2 set_16;-8355585
+tree2 set_unison;-8355585
+tree2 set_decorative;-8355585
+tree2 decorative;-8355585
+tree3;-8355585
+tree3 set_16;-8355585
+tree3 set_decorative;-8355585
+tree3 decorative;-8355585
+tree3;-8355585
+tree3 set_10;-8355585
+tree3 set_20;-8355585
+tree3 set_decorative;-8355585
+tree3 decorative;-8355585
+tree4;-8355585
+tree4 set_16;-8355585
+tree4 set_decorative;-8355585
+tree4 decorative;-8355585
+tree5;-8355585
+tree5 set_8;-8355585
+tree5 set_16;-8355585
+tree5 set_decorative;-8355585
+tree5 long straight decorative;-8355585
+tree8;-8355585
+tree8 set_8;-8355585
+tree8 set_16;-8355585
+tree8 set_8 non phrase;-8355585
+tree8 set_pound target;-8355585
+tree8 set_decorative;-8355585
+tree8_decorative;-8355585
+spiral fingers1;-8355585
+spiral fingers1_unison;-8355585
+spiral fingers1_wave_in;-8355585
+spiral fingers1_gate;-8355585
+spiral fingers1_decorative;-8355585
+spiral decorative;-8355585
+millipede[2 beat];-8355585
+millipede[2 beat] v2;-8355585
+millipede[4 beat];-8355585
+millipede[4 beat] v2;-8355585
+millipede[4 beat] v3;-8355585
+single lane[55 beats];-8355585
+single lane[79 beats];-8355585
+single lane[114 beats];-8355585
+single lane[129 beats];-8355585
+single lane[150 beats];-8355585
+multi lane[126 beats];-8355585
+multi lane[150 beats];-8355585
+gamma;-8355585
+black;-8355585
+dark blue;-8355585
+dark green;-8355585
+dark red;-8355585
+light blue;-8355585
+light green;-8355585
+light red;-8355585
+crakhed;-8355585
+crakhed_colors color1;-8355585
+crakhed_colors color2;-8355585
+crakhed_colors color3;-8355585
+crakhed_colors color4;-8355585
+pyramid_colors color1;-8355585
+pyramid_colors color2;-8355585
+pyramid_colors color3;-8355585
+pyramid_colors color4;-8355585
+diamond_colors color1;-8355585
+diamond_colors color2;-8355585
+diamond_colors color3;-8355585
+diamond_colors color4;-8355585
+level_colors color1;-8355585
+level_colors color2;-8355585
+level_colors color3;-8355585
+level_colors color4;-8355585
+boss_colors color1;-8355585
+boss_colors color2;-8355585
+boss_colors color3;-8355585
+boss_colors color4;-8355585
+white;-8355585
+slow blue bloom;-8355585
+aurora;-8355585
+boss_7_tunnel_enter;-8355585
+boss_damage_stage1;-8355585
+boss_damage_stage2;-8355585
+boss_damage_stage3;-8355585
+boss_damage_stage4;-8355585
+crakhed_damage;-8355585
+crakhed_destroy;-8355585
+data_streaks_radial;-8355585
+death_shatter;-8355585
+shatter_debris_death;-8355585
+shatter_debris_stage1;-8355585
+shatter_debris_stage2;-8355585
+shatter_debris_stage3;-8355585
+smoke;-8355585
+speed_streak;-8355585
+speed_streaks;-8355585
+speed_streaks_RGB;-8355585
+speed_streaks_short;-8355585
+speed_streak_multi_color;-8355585
+stalactites;-8355585
+vortex_decorator;-8355585
+vortex_decorator1;-8355585
+win_debris;-8355585
+final_twirlies_sparse;-8355585
+crakhed_pyramid_prelude;-8355585
+speed;-8355585
+win;-8355585
+win checkpoint;-8355585
+fade;-8355585
+camera height;-8355585
+camera forward and backward;-8355585
+camera x axis;-8355585
+camera pitch;-8355585
+FOV;-8355585
+camera roll;-8355585
+diss1;-8355585
+diss2;-8355585
+diss3;-8355585
+diss4;-8355585
+diss5;-8355585
+diss6;-8355585
+diss7;-8355585
+diss8;-8355585
+diss9;-8355585
+diss10;-8355585
+diss11;-8355585
+diss12;-8355585
+diss13;-8355585
+diss14;-8355585
+diss15;-8355585
+diss16;-8355585
+diss17;-8355585
+red;-8355585
+blue;-8355585
+green;-8355585
+start;-8355585
+jump;-8355585
+pulse;-8355585
+gong1;-8355585
+gong2;-8355585
+gong3;-8355585
+intro;-8355585
+Rest 8a;-8355585
+Rest 6a;-8355585
+turn_left_isolated;-8355585
+turn_left_start (long turn start);-8355585
+turn_left_middle (long turn mid);-8355585
+turn_left_end (long turn end);-8355585
+turn_right_isolated;-8355585
+turn_right_start (long turn start);-8355585
+turn_right_middle (long turn mid);-8355585
+turn_right_end (long turn end);-8355585
+lane_end_left_turn;-8355585
+lane_end_right_turn;-8355585
+Invert the colours;-8355585
+vignette1;-8355585
+vignette2;-8355585
+contrast;-8355585
+weird invert contrast;-8355585
+invert;-8355585
+cubic_disto1;-8355585
+cubic_disto2;-8355585
+contrast/brightness1;-8355585
+contrast/brightness2 DO NOT USE NEGATIVE NUMBERS;-8355585
+green gamma?;-8355585
+blue gamma?;-8355585
+bloom_sat1;-8355585
+brightness1, funny rainbow colors;-8355585
+glow_color;-8355585
+rail_color;-8355585
+path_color;-8355585
+play;-8355585
+pause;-8355585
+stop;-8355585

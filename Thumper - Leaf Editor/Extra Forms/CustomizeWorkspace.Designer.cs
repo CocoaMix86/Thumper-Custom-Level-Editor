@@ -430,6 +430,7 @@ namespace Thumper_Custom_Level_Editor
             this.dropParamPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropParamPath.Size = new System.Drawing.Size(163, 21);
             this.dropParamPath.TabIndex = 125;
+            this.dropParamPath.SelectedIndexChanged += new System.EventHandler(this.dropParamPath_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -456,6 +457,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnObjectColor.Tag = "customcolorbutton";
             this.btnObjectColor.UseMnemonic = false;
             this.btnObjectColor.UseVisualStyleBackColor = false;
+            this.btnObjectColor.Click += new System.EventHandler(this.btnObjectColor_Click);
             // 
             // label12
             // 

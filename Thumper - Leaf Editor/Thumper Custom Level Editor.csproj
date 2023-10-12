@@ -315,6 +315,8 @@
     <None Include="audio assets\UI sounds\UIdockun.ogg" />
     <None Include="image assets\discord.ico" />
     <None Include="image assets\icon-info.png" />
+    <None Include="bin\Debug\templates\objects_defaultcolors.txt" />
+    <None Include="text assets\objects_defaultcolors.txt" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

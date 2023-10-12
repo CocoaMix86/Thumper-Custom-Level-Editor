@@ -49,6 +49,7 @@ namespace Thumper_Custom_Level_Editor
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
 		private List<Object_Params> _objects = new List<Object_Params>();
+		private List<Tuple<string, string>> objectcolors = new List<Tuple<string, string>>();
 		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public List<Tuple<string, int, int>> _scrollpositions = new List<Tuple<string, int, int>>();
 		public Sequencer_Object clipboard_track;
@@ -326,6 +327,8 @@ namespace Thumper_Custom_Level_Editor
 		private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
+				if (_tracks[trackEditor.CurrentRow.Index].highlight_color == null)
+					btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(objectcolors.Where(x => x.Item1 == dropParamPath.Text).First().Item2));
 				//if the param_path is .ent, enable lane choice
 				if (_objects.Where(obj => obj.param_displayname == dropParamPath.Text).First().param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
 					dropTrackLane.Enabled = true;
@@ -566,7 +569,10 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackDown.Enabled = true;
 			btnTrackClear.Enabled = true;
 
-			_tracks.Add(new Sequencer_Object() { highlight_color = "-8355585", highlight_value = 1 });
+			_tracks.Add(new Sequencer_Object() {
+				highlight_color = null,
+				highlight_value = 1
+			});
 			trackEditor.RowCount++;
 			trackEditor.CurrentCell = trackEditor.Rows[_tracks.Count - 1].Cells[0];
 			//disable Apply button if object is not set
@@ -741,7 +747,7 @@ namespace Thumper_Custom_Level_Editor
 				_default = float.Parse(objmatch.def),
 				step = objmatch.step,
 				trait_type = objmatch.trait_type,
-				highlight_color = _tracks[_selecttrack] != null ? _tracks[_selecttrack].highlight_color : "-8355585",
+				highlight_color = _tracks[_selecttrack].highlight_color ?? $"{btnTrackColorDialog.BackColor.ToArgb()}",
 				highlight_value = 1,
 				footer = objmatch.footer,
 				default_interp = "kTraitInterpLinear"

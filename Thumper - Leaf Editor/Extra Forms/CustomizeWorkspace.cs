@@ -3,16 +3,19 @@ using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
         public List<Object_Params> _objects = new List<Object_Params>();
+        private List<Tuple<string, string>> objectcolors = new List<Tuple<string, string>>();
 
-        public CustomizeWorkspace()
+        public CustomizeWorkspace(List<Object_Params> thelist)
         {
             InitializeComponent();
+            _objects = thelist;
             this.BackColor = Properties.Settings.Default.custom_bgcolor;
             //set button back colors to the set settings
             btnBGColor.BackColor = Properties.Settings.Default.custom_bgcolor;
@@ -26,6 +29,12 @@ namespace Thumper_Custom_Level_Editor
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //
             toolstripCustomize.Renderer = new ToolStripOverride();
+            //
+            string[] import = File.Exists($@"templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"templates\objects_defaultcolors.txt") : null;
+            foreach (string line in import) {
+                var items = line.Split(';');
+                objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
+            }
             //
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
             dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
@@ -44,6 +53,8 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnCustomizeApply_Click(object sender, EventArgs e)
         {
+            string[] export = objectcolors.Select(x => $@"{x.Item1};{x.Item2}").ToArray();
+            File.WriteAllLines($@"templates\objects_defaultcolors.txt", export);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -51,6 +62,25 @@ namespace Thumper_Custom_Level_Editor
         private void dropObjects_SelectedIndexChanged(object sender, EventArgs e)
         {
             dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
+        }
+
+        private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnObjectColor.BackColor = Color.FromArgb(int.Parse(objectcolors.Where(x => x.Item1 == dropParamPath.Text).First().Item2));
+        }
+
+        private void btnObjectColor_Click(object sender, EventArgs e)
+        {
+            FormLeafEditor.PlaySound("UIcoloropen");
+            Button btn = (Button)sender;
+            if (colorDialog1.ShowDialog() == DialogResult.OK) {
+                FormLeafEditor.PlaySound("UIcolorapply");
+                Color _c = colorDialog1.Color;
+                btn.BackColor = colorDialog1.Color;
+
+                int _in = objectcolors.IndexOf(objectcolors.Where(x => x.Item1 == dropParamPath.Text).First());
+                objectcolors[_in] = new Tuple<string, string>(dropParamPath.Text, $"{_c.ToArgb()}");
+            }
         }
     }
 }

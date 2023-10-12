@@ -787,6 +787,40 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pitch;-8355585
+        ///roll;-8355585
+        ///turn;-8355585
+        ///turn_auto;-8355585
+        ///scale_x;-8355585
+        ///scale_y;-8355585
+        ///scale_z;-8355585
+        ///offset_x;-8355585
+        ///offset_y;-8355585
+        ///offset_z;-8355585
+        ///lane left 2;-8355585
+        ///lane left 1;-8355585
+        ///lane center;-8355585
+        ///lane right 1;-8355585
+        ///lane right 2;-8355585
+        ///thump;-8355585
+        ///thump[fast];-8355585
+        ///thump[checkpoint];-8355585
+        ///thump[boss bonus];-8355585
+        ///bar;-8355585
+        ///bar[left];-8355585
+        ///bar[center];-8355585
+        ///bar[right];-8355585
+        ///bar and thump;-8355585
+        ///bar[double];-8355585
+        ///bar[tr [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string objects_defaultcolors {
+            get {
+                return ResourceManager.GetString("objects_defaultcolors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to arms_deca.path
         ///arms_diamond.path
         ///arms_hex.path

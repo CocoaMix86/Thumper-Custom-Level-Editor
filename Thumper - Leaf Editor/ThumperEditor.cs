@@ -375,6 +375,17 @@ namespace Thumper_Custom_Level_Editor
                 File.WriteAllText(@"templates\track_objects.txt", Properties.Resources.track_objects);
             }
 
+            //import default colors per object
+            if (!File.Exists(@"templates\objects_defaultcolors.txt")) {
+                File.WriteAllText(@"templates\objects_defaultcolors.txt", Properties.Resources.objects_defaultcolors);
+            }
+            string[] importcolors = File.Exists($@"templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"templates\objects_defaultcolors.txt") : null;
+            foreach (string line in importcolors) {
+                var items = line.Split(';');
+                objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
+            }
+            //
+
             ///import selectable objects from file and parse them into lists for manipulation
             //splits input at "###". Each section is a collection of param_paths
             var import = (File.ReadAllText(@"templates\track_objects.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
@@ -621,7 +632,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //Show the CustomWorkspace form. If form OK, then save the settings to app properties
             //then call method to recolor the form elements immediately
-            CustomizeWorkspace custom = new CustomizeWorkspace();
+            CustomizeWorkspace custom = new CustomizeWorkspace(_objects);
             custom._objects = _objects;
             if (custom.ShowDialog() == DialogResult.OK) {
                 Properties.Settings.Default.custom_bgcolor = custom.btnBGColor.BackColor;
