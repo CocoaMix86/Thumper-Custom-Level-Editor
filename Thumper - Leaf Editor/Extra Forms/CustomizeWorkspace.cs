@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
+        public List<Object_Params> _objects = new List<Object_Params>();
+
         public CustomizeWorkspace()
         {
             InitializeComponent();
@@ -20,14 +24,11 @@ namespace Thumper_Custom_Level_Editor
             btnSampleColor.BackColor = Properties.Settings.Default.custom_samplecolor;
             btnActiveColor.BackColor = Properties.Settings.Default.custom_activecolor;
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
-            //invert text so it's readable
-            foreach (Button btn in this.Controls.Find("btnCustom", true)) {
-                if (btn.Tag.ToString() == "customcolorbutton") {
-                    btn.ForeColor = Color.FromArgb(255 - btn.BackColor.R, 255 - btn.BackColor.G, 255 - btn.BackColor.B);
-                }
-            }
             //
             toolstripCustomize.Renderer = new ToolStripOverride();
+            //
+            dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
+            dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
         }
 
         private void btnSetColor(object sender, EventArgs e)
@@ -38,7 +39,6 @@ namespace Thumper_Custom_Level_Editor
                 FormLeafEditor.PlaySound("UIcolorapply");
                 Color _c = colorDialog1.Color;
                 btn.BackColor = colorDialog1.Color;
-                btn.ForeColor = Color.FromArgb(255 - _c.R, 255 - _c.G, 255 - _c.B);
             }
         }
 
@@ -46,6 +46,11 @@ namespace Thumper_Custom_Level_Editor
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void dropObjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
         }
     }
 }

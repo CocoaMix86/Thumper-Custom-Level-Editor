@@ -622,6 +622,7 @@ namespace Thumper_Custom_Level_Editor
             //Show the CustomWorkspace form. If form OK, then save the settings to app properties
             //then call method to recolor the form elements immediately
             CustomizeWorkspace custom = new CustomizeWorkspace();
+            custom._objects = _objects;
             if (custom.ShowDialog() == DialogResult.OK) {
                 Properties.Settings.Default.custom_bgcolor = custom.btnBGColor.BackColor;
                 Properties.Settings.Default.custom_menucolor = custom.btnMenuColor.BackColor;

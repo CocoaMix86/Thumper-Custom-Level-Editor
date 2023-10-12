@@ -101,7 +101,6 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -961,7 +960,6 @@
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator7,
             this.toolStripMenuItem16});
             this.toolStripMenuItem4.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
@@ -969,17 +967,12 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(37, 28);
             this.toolStripMenuItem4.Text = "&Edit";
             // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(140, 6);
-            // 
             // toolStripMenuItem16
             // 
             this.toolStripMenuItem16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.toolStripMenuItem16.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem16.Name = "toolStripMenuItem16";
-            this.toolStripMenuItem16.Size = new System.Drawing.Size(143, 22);
+            this.toolStripMenuItem16.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem16.Text = "Preferences";
             this.toolStripMenuItem16.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
             // 
@@ -6370,7 +6363,6 @@
         private System.Windows.Forms.TrackBar trackZoomVert;
         private System.Windows.Forms.ToolStripButton btnLeafZoom;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
         private System.Windows.Forms.ToolStripMenuItem tentaclesPathsVisualsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trackObjectsToolStripMenuItem;

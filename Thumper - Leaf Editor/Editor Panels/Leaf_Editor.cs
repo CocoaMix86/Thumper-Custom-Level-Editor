@@ -48,7 +48,7 @@ namespace Thumper_Custom_Level_Editor
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
-		public List<Object_Params> _objects = new List<Object_Params>();
+		private List<Object_Params> _objects = new List<Object_Params>();
 		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public List<Tuple<string, int, int>> _scrollpositions = new List<Tuple<string, int, int>>();
 		public Sequencer_Object clipboard_track;
