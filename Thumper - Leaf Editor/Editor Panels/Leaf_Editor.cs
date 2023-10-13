@@ -69,6 +69,7 @@ namespace Thumper_Custom_Level_Editor
 		///TRACKBAR ZOOM
 		private void btnLeafZoom_Click(object sender, EventArgs e)
 		{
+			PlaySound("UIselect");
 			panelZoom.Visible = !panelZoom.Visible;
 		}
 		private void trackZoom_Scroll(object sender, EventArgs e)
@@ -1003,6 +1004,11 @@ namespace Thumper_Custom_Level_Editor
 			SaveLeaf(true);
 			LoadLeaf(leafjson);
 			PlaySound("UIrevertchanges");
+		}
+
+		private void btnLeafAutoPlace_Click(object sender, EventArgs e)
+		{
+			PlaySound("UIselect");
 		}
 
 		/// These buttons exist on the Workingfolder panel

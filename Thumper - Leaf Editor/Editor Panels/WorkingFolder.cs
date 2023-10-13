@@ -123,6 +123,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (workingfolder == null)
 				return;
+			PlaySound("UIrefresh");
 			//clear the dgv and reload files in the folder
 			workingfolderFiles.Rows.Clear();
 			//filter for specific files
@@ -144,7 +145,6 @@ namespace Thumper_Custom_Level_Editor
 				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp))
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 			}
-			PlaySound("UIrefresh");
 			//enable button
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkCopy.Enabled = workingfolderFiles.RowCount > 0;
@@ -203,11 +203,11 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;
-		private void filterLeaf_CheckedChanged(object sender, EventArgs e) {filterleaf = filterLeaf.Checked; btnWorkRefresh_Click(null, null); }
-		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; btnWorkRefresh_Click(null, null); }
-		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); }
-		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); }
-		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterLeaf_CheckedChanged(object sender, EventArgs e) {filterleaf = filterLeaf.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
+		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
+		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
+		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
+		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
 
 		///Drag and drop files to copy them to the workingfolder
 		private void workingfolderFiles_DragEnter(object sender, DragEventArgs e)

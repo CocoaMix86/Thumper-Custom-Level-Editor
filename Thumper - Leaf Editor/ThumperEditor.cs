@@ -153,6 +153,7 @@ namespace Thumper_Custom_Level_Editor
             //zoom settings
             Properties.Settings.Default.leafzoom = trackZoom.Value;
             Properties.Settings.Default.lvlzoom = trackLvlVolumeZoom.Value;
+            Properties.Settings.Default.leafautoinsert = btnLeafAutoPlace.Checked;
 
             Properties.Settings.Default.Save();
         }
@@ -239,6 +240,7 @@ namespace Thumper_Custom_Level_Editor
             //zoom settings
             trackZoom.Value = Properties.Settings.Default.leafzoom;
             trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
+            btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
 
             //load recent levels 
             var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
@@ -348,12 +350,12 @@ namespace Thumper_Custom_Level_Editor
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
         ///Toolstrip - BRING TO FRONT items
-        private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.BringToFront(); panelLeaf.Visible = true; }
-        private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) { panelLevel.BringToFront(); panelLevel.Visible = true; }
-        private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) { panelGate.BringToFront(); panelGate.Visible = true; }
-        private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) { panelMaster.BringToFront(); panelMaster.Visible = true; }
-        private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) { panelWorkingFolder.BringToFront(); panelWorkingFolder.Visible = true; }
-        private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) { panelSample.BringToFront(); panelSample.Visible = true; }
+        private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.BringToFront(); panelLeaf.Visible = true; PlaySound("UIwindowopen"); }
+        private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) { panelLevel.BringToFront(); panelLevel.Visible = true; PlaySound("UIwindowopen"); }
+        private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) { panelGate.BringToFront(); panelGate.Visible = true; PlaySound("UIwindowopen"); }
+        private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) { panelMaster.BringToFront(); panelMaster.Visible = true; PlaySound("UIwindowopen"); }
+        private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) { panelWorkingFolder.BringToFront(); panelWorkingFolder.Visible = true; PlaySound("UIwindowopen"); }
+        private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) { panelSample.BringToFront(); panelSample.Visible = true; PlaySound("UIwindowopen"); }
 
         /// NEW CUSTOM LEVEL FOLDER
         private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -917,6 +919,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private void btnRecentClose_Click(object sender, EventArgs e)
         {
+            PlaySound("UIfolderclose");
             panelRecentFiles.Visible = false;
         }
         ///

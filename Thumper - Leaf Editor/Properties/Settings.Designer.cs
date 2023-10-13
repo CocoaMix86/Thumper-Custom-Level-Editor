@@ -549,5 +549,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["muteapplication"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool leafautoinsert {
+            get {
+                return ((bool)(this["leafautoinsert"]));
+            }
+            set {
+                this["leafautoinsert"] = value;
+            }
+        }
     }
 }
