@@ -747,6 +747,7 @@ namespace Thumper_Custom_Level_Editor
                     PlaySound("UIbeetleclickGOLD");
                     break;
             }
+            pictureBox1.Refresh();
             timerBeeble.Start();
         }
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
