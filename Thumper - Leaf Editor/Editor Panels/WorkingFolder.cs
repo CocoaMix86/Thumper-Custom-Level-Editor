@@ -255,6 +255,9 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (workingfolderFiles.SelectedCells.Count < 1)
 				return;
+			//call click method first so the file is loaded before renaming
+			DataGridViewCellMouseEventArgs dgvcme = new DataGridViewCellMouseEventArgs(workingfolderFiles.CurrentCell.ColumnIndex, workingfolderFiles.CurrentCell.RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Right, 0, 0, 0, 0));
+			workingfolderFiles_CellMouseClick(null, dgvcme);
 			//set textbox with name of selected file
 			string oldfilename = workingfolderFiles.SelectedCells[1].Value.ToString();
 			string[] file = oldfilename.Split(new[] { '_' }, 2);
