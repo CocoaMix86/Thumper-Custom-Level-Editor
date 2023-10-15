@@ -358,6 +358,7 @@ namespace Thumper_Custom_Level_Editor
 			lblSampleEditor.Text = $"Sample Editor - {Path.GetFileNameWithoutExtension(loadedsample)}";
 
 			///Clear form elements so new data can load
+			_samplelist.CollectionChanged -= _samplelist_CollectionChanged;
 			_samplelist.Clear();
 			///load lvls associated with this master
 			foreach (dynamic _samp in _load["items"]) {

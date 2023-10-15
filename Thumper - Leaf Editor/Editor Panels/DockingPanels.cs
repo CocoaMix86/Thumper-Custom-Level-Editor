@@ -107,6 +107,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void dockbtn_Click(object sender, EventArgs e)
         {
+            PlaySound("UIselect");
             Control c = (Control)sender;
             c.ContextMenuStrip.Show(c, new Point(5, 5));
         }
