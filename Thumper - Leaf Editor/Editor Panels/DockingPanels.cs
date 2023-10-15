@@ -141,7 +141,7 @@ namespace Thumper_Custom_Level_Editor
             if (text == "Working Folder")
                 text = "panelWorkingFolder";
             //search for panel and add it to the dock
-            DockPanel(this.Controls.Find(text, true).First(), parentdock);
+            DockPanel(this.Controls.Find(text, true).First(), parentdock, true);
         }
 
         private void resetDocksStripMenuItem_Click(object sender, EventArgs e)
