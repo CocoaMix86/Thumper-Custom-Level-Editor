@@ -24,6 +24,7 @@ namespace Thumper_Custom_Level_Editor
                 //if (Directory.EnumerateFileSystemEntries(cfd_lvl.FileName).Any() && MessageBox.Show("The selected path is not empty. Do you still wish to save level data to this location?", "Confirm choice", MessageBoxButtons.YesNo) != DialogResult.Yes)
                     //return;
                 txtCustomPath.Text = cfd_lvl.FileName;
+                btnCustomSave.Enabled = true;
             }
         }
 
@@ -59,6 +60,11 @@ namespace Thumper_Custom_Level_Editor
                     e.Graphics.DrawString(cbx.Items[e.Index].ToString(), cbx.Font, brush, e.Bounds, sf);
                 }
             }
+        }
+
+        private void btnCustomSave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

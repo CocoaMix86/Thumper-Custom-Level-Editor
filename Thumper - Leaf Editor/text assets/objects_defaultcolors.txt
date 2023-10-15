@@ -1,40 +1,40 @@
-pitch;-8355585
-roll;-8355585
-turn;-8355585
-turn_auto;-8355585
-scale_x;-8355585
-scale_y;-8355585
-scale_z;-8355585
-offset_x;-8355585
-offset_y;-8355585
-offset_z;-8355585
-lane left 2;-8355585
-lane left 1;-8355585
-lane center;-8355585
-lane right 1;-8355585
-lane right 2;-8355585
-thump;-8355585
-thump[fast];-8355585
-thump[checkpoint];-8355585
-thump[boss bonus];-8355585
-bar;-8355585
-bar[left];-8355585
-bar[center];-8355585
-bar[right];-8355585
+pitch;-4144960
+roll;-4144960
+turn;-65536
+turn_auto;-1982015
+scale_x;-65536
+scale_y;-16711936
+scale_z;-16776961
+offset_x;-3198928
+offset_y;-13578448
+offset_z;-13618993
+lane left 2;-2829100
+lane left 1;-1447447
+lane center;-1
+lane right 1;-1447447
+lane right 2;-2829100
+thump;-16777216
+thump[fast];-16776934
+thump[checkpoint];-15663078
+thump[boss bonus];-15073280
+bar;-8372160
+bar[left];-8372160
+bar[center];-8372160
+bar[right];-8372160
 bar and thump;-8355585
-bar[double];-8355585
-bar[triple];-8355585
-bar[quad];-8355585
-ring;-8355585
+bar[double];-8388608
+bar[triple];-12582912
+bar[quad];-13828096
+ring;-16711681
+mushroom[1 beat];-32704
 mushroom[1 beat];-8355585
-mushroom[1 beat];-8355585
-mushroon[6 beat];-8355585
-tall spike[2 beat];-8355585
-tall spike[4 beat];-8355585
-tall spike[6 beat];-8355585
-tall spike[8 beat];-8355585
-wide spike[4 beat];-8355585
-spike decorator, 4 beat;-8355585
+mushroon[6 beat];-32704
+tall spike[2 beat];-32640
+tall spike[4 beat];-32640
+tall spike[6 beat];-32640
+tall spike[8 beat];-32640
+wide spike[4 beat];-16777216
+spike decorator, 4 beat;-16777216
 demo fingers1;-8355585
 demo fingers1_unison;-8355585
 demo fingers1_wave_in;-8355585
@@ -274,18 +274,18 @@ spiral fingers1_wave_in;-8355585
 spiral fingers1_gate;-8355585
 spiral fingers1_decorative;-8355585
 spiral decorative;-8355585
-millipede[2 beat];-8355585
-millipede[2 beat] v2;-8355585
-millipede[4 beat];-8355585
-millipede[4 beat] v2;-8355585
-millipede[4 beat] v3;-8355585
-single lane[55 beats];-8355585
-single lane[79 beats];-8355585
-single lane[114 beats];-8355585
-single lane[129 beats];-8355585
-single lane[150 beats];-8355585
-multi lane[126 beats];-8355585
-multi lane[150 beats];-8355585
+millipede[2 beat];-14737633
+millipede[2 beat] v2;-14737633
+millipede[4 beat];-14737633
+millipede[4 beat] v2;-14737633
+millipede[4 beat] v3;-14737633
+single lane[55 beats];-7185805
+single lane[79 beats];-7185805
+single lane[114 beats];-7185805
+single lane[129 beats];-7185805
+single lane[150 beats];-7185805
+multi lane[126 beats];-11653058
+multi lane[150 beats];-11653058
 gamma;-8355585
 black;-8355585
 dark blue;-8355585
@@ -344,9 +344,9 @@ win_debris;-8355585
 final_twirlies_sparse;-8355585
 crakhed_pyramid_prelude;-8355585
 speed;-8355585
-win;-8355585
+win;-3762423
 win checkpoint;-8355585
-fade;-8355585
+fade;-13290115
 camera height;-8355585
 camera forward and backward;-8355585
 camera x axis;-8355585
@@ -370,9 +370,9 @@ diss14;-8355585
 diss15;-8355585
 diss16;-8355585
 diss17;-8355585
-red;-8355585
-blue;-8355585
-green;-8355585
+red;-65536
+blue;-16711681
+green;-16711936
 start;-8355585
 jump;-8355585
 pulse;-8355585

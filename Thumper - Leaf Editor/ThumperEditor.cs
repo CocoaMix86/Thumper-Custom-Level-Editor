@@ -593,6 +593,7 @@ namespace Thumper_Custom_Level_Editor
             DialogInput customlevel = new DialogInput();
             //set the form text fields to whatever is in LEVEL DETAILS
             customlevel.txtCustomPath.Text = workingfolder;
+            customlevel.btnCustomSave.Enabled = true;
             //if the LEVEL DETAILS file is missing, or missing parameters, this fill fill the blanks will empty space
             customlevel.txtCustomName.Text = _load.ContainsKey("level_name") ? (string)_load["level_name"] : "";
             customlevel.txtCustomDiff.Text = _load.ContainsKey("difficulty") ? (string)_load["difficulty"] : "";

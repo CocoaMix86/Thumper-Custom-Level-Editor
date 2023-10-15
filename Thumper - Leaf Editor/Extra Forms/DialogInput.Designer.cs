@@ -28,6 +28,7 @@ namespace Thumper_Custom_Level_Editor
 		/// </summary>
 		private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogInput));
             this.txtCustomPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,6 +59,8 @@ namespace Thumper_Custom_Level_Editor
             this.chkRests = new System.Windows.Forms.CheckBox();
             this.chkGlobal = new System.Windows.Forms.CheckBox();
             this.chkDissonance = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // txtCustomPath
@@ -117,6 +120,7 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.btnCustomSave.BackColor = System.Drawing.Color.Green;
             this.btnCustomSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnCustomSave.Enabled = false;
             this.btnCustomSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCustomSave.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomSave.ForeColor = System.Drawing.Color.White;
@@ -128,6 +132,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomSave.Text = "Save";
             this.btnCustomSave.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCustomSave.UseVisualStyleBackColor = false;
+            this.btnCustomSave.Click += new System.EventHandler(this.btnCustomSave_Click);
             // 
             // label2
             // 
@@ -419,6 +424,28 @@ namespace Thumper_Custom_Level_Editor
             this.chkDissonance.Text = "Dissoance";
             this.chkDissonance.UseVisualStyleBackColor = true;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label8.Location = new System.Drawing.Point(161, 7);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(15, 16);
+            this.label8.TabIndex = 142;
+            this.label8.Text = "?";
+            this.toolTip1.SetToolTip(this.label8, "This is the root folder where the project folder will \r\nbe stored. After clicking" +
+        " Save, a new folder will be \r\ncreated using the Level Name.");
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutomaticDelay = 0;
+            this.toolTip1.AutoPopDelay = 0;
+            this.toolTip1.InitialDelay = 1;
+            this.toolTip1.ReshowDelay = 100;
+            // 
             // DialogInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,6 +453,7 @@ namespace Thumper_Custom_Level_Editor
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(425, 436);
             this.ControlBox = false;
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.chkMisc);
             this.Controls.Add(this.chkRests);
             this.Controls.Add(this.chkGlobal);
@@ -470,7 +498,6 @@ namespace Thumper_Custom_Level_Editor
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button btnCustomFolder;
 		private System.Windows.Forms.Button btnCustomCancel;
-		private System.Windows.Forms.Button btnCustomSave;
 		private System.Windows.Forms.Label label2;
 		public System.Windows.Forms.TextBox txtCustomPath;
 		public System.Windows.Forms.TextBox txtCustomAuthor;
@@ -496,5 +523,8 @@ namespace Thumper_Custom_Level_Editor
 		public System.Windows.Forms.CheckBox chkRests;
 		public System.Windows.Forms.CheckBox chkGlobal;
 		public System.Windows.Forms.CheckBox chkDissonance;
-	}
+        public System.Windows.Forms.Button btnCustomSave;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ToolTip toolTip1;
+    }
 }
