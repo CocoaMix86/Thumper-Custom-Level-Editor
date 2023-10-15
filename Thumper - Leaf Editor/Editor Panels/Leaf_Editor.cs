@@ -519,8 +519,10 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (_loadedleaf == null)
 				return;
+			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			TrackRawImport(trackEditor.CurrentRow, JObject.Parse($"{{{richRawTrackData.Text}}}"));
 			PlaySound("UIkpaste");
+			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
 		private void btnTrackDelete_Click(object sender, EventArgs e)
@@ -1079,7 +1081,6 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (_tracks.Count == 0)
 				return;
-			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			//_rawdata contains a list of all data points. By getting Properties() of it,
 			//each point becomes its own index
 			var data_points = _rawdata.Properties().ToList();
@@ -1096,7 +1097,6 @@ namespace Thumper_Custom_Level_Editor
 				}
 				catch (ArgumentOutOfRangeException) { }
 			}
-			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		///Updates row headers to be the Object and Param_Path
 		public void ChangeTrackName()
@@ -1205,6 +1205,7 @@ namespace Thumper_Custom_Level_Editor
 				_loadedleaf = _loadedleaftemp;
 			}
 			//clear existing tracks
+			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			_tracks.Clear();
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 			//set beat_cnt and time_sig
@@ -1287,6 +1288,7 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
 				trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;
 			}
+			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
 		private void EnableLeafButtons(bool enable)
