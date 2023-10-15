@@ -273,6 +273,7 @@ namespace Thumper_Custom_Level_Editor
 			FileNameDialog filenamedialog = new FileNameDialog();
 			filenamedialog.txtWorkingRename.Text = file[1];
 			filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
+			filenamedialog.Location = PointToClient(Cursor.Position);
 			//if YES, rename file
 			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
 				newfilepath = $@"{workingfolder}\{filetype}_{filenamedialog.txtWorkingRename.Text}.txt";
