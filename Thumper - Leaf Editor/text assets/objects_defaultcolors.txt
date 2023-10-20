@@ -1,40 +1,40 @@
-pitch;-4144960
-roll;-4144960
+pitch;-1710619
+roll;-5460820
 turn;-65536
 turn_auto;-1982015
-scale_x;-65536
-scale_y;-16711936
-scale_z;-16776961
+scale_x;-6071204
+scale_y;-10706065
+scale_z;-11513198
 offset_x;-3198928
 offset_y;-13578448
 offset_z;-13618993
-lane left 2;-2829100
-lane left 1;-1447447
+lane left 2;-6908266
+lane left 1;-3618616
 lane center;-1
-lane right 1;-1447447
-lane right 2;-2829100
-thump;-16777216
-thump[fast];-16776934
-thump[checkpoint];-15663078
-thump[boss bonus];-15073280
+lane right 1;-3618616
+lane right 2;-6908266
+thump;-16776961
+thump[fast];-16755536
+thump[checkpoint];-9830224
+thump[boss bonus];-2555687
 bar;-8372160
 bar[left];-8372160
 bar[center];-8372160
 bar[right];-8372160
-bar and thump;-8355585
+bar and thump;-15528691
 bar[double];-8388608
 bar[triple];-12582912
 bar[quad];-13828096
 ring;-16711681
-mushroom[1 beat];-32704
+mushroom[1 beat];-32768
 mushroom[1 beat];-8355585
 mushroon[6 beat];-32704
 tall spike[2 beat];-32640
 tall spike[4 beat];-32640
 tall spike[6 beat];-32640
 tall spike[8 beat];-32640
-wide spike[4 beat];-16777216
-spike decorator, 4 beat;-16777216
+wide spike[4 beat];-32640
+spike decorator, 4 beat;-589610
 demo fingers1;-8355585
 demo fingers1_unison;-8355585
 demo fingers1_wave_in;-8355585
@@ -287,36 +287,36 @@ single lane[150 beats];-7185805
 multi lane[126 beats];-11653058
 multi lane[150 beats];-11653058
 gamma;-8355585
-black;-8355585
-dark blue;-8355585
-dark green;-8355585
-dark red;-8355585
-light blue;-8355585
-light green;-8355585
-light red;-8355585
+black;-13947118
+dark blue;-10612925
+dark green;-12567785
+dark red;-7596730
+light blue;-10280796
+light green;-6836612
+light red;-3987365
 crakhed;-8355585
-crakhed_colors color1;-8355585
-crakhed_colors color2;-8355585
-crakhed_colors color3;-8355585
-crakhed_colors color4;-8355585
-pyramid_colors color1;-8355585
-pyramid_colors color2;-8355585
-pyramid_colors color3;-8355585
-pyramid_colors color4;-8355585
-diamond_colors color1;-8355585
-diamond_colors color2;-8355585
-diamond_colors color3;-8355585
-diamond_colors color4;-8355585
-level_colors color1;-8355585
-level_colors color2;-8355585
-level_colors color3;-8355585
-level_colors color4;-8355585
-boss_colors color1;-8355585
-boss_colors color2;-8355585
-boss_colors color3;-8355585
-boss_colors color4;-8355585
-white;-8355585
-slow blue bloom;-8355585
+crakhed_colors color1;-13036267
+crakhed_colors color2;-12316388
+crakhed_colors color3;-14218716
+crakhed_colors color4;-12709862
+pyramid_colors color1;-13952750
+pyramid_colors color2;-5162978
+pyramid_colors color3;-10276840
+pyramid_colors color4;-12835304
+diamond_colors color1;-16772052
+diamond_colors color2;-16768727
+diamond_colors color3;-16772802
+diamond_colors color4;-16768665
+level_colors color1;-12579542
+level_colors color2;-12974046
+level_colors color3;-10939797
+level_colors color4;-12578237
+boss_colors color1;-13760387
+boss_colors color2;-11322229
+boss_colors color3;-15452042
+boss_colors color4;-16752992
+white;-5335335
+slow blue bloom;-13622128
 aurora;-8355585
 boss_7_tunnel_enter;-8355585
 boss_damage_stage1;-8355585
@@ -343,16 +343,16 @@ vortex_decorator1;-8355585
 win_debris;-8355585
 final_twirlies_sparse;-8355585
 crakhed_pyramid_prelude;-8355585
-speed;-8355585
+speed;-4750648
 win;-3762423
-win checkpoint;-8355585
-fade;-13290115
-camera height;-8355585
-camera forward and backward;-8355585
-camera x axis;-8355585
-camera pitch;-8355585
-FOV;-8355585
-camera roll;-8355585
+win checkpoint;-1188450
+fade;-15790321
+camera height;-8355712
+camera forward and backward;-8355712
+camera x axis;-8355712
+camera pitch;-8355712
+FOV;-8355712
+camera roll;-8355712
 diss1;-8355585
 diss2;-8355585
 diss3;-8355585
@@ -371,7 +371,7 @@ diss15;-8355585
 diss16;-8355585
 diss17;-8355585
 red;-65536
-blue;-16711681
+blue;-16775489
 green;-16711936
 start;-8355585
 jump;-8355585
@@ -409,6 +409,6 @@ brightness1, funny rainbow colors;-8355585
 glow_color;-8355585
 rail_color;-8355585
 path_color;-8355585
-play;-8355585
-pause;-8355585
-stop;-8355585
+play;-12533952
+pause;-3227290
+stop;-4243392
