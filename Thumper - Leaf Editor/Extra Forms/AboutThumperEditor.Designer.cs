@@ -155,7 +155,7 @@
             this.labelSoundCredit.Name = "labelSoundCredit";
             this.labelSoundCredit.Size = new System.Drawing.Size(301, 17);
             this.labelSoundCredit.TabIndex = 26;
-            this.labelSoundCredit.Text = "Sound effects by JLMusic (Discord member)";
+            this.labelSoundCredit.Text = "Sound effects by CaptainJul (Discord member)";
             this.labelSoundCredit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // AboutThumperEditor

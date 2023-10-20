@@ -328,7 +328,7 @@ namespace Thumper_Custom_Level_Editor
 		private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
-				if (_tracks[trackEditor.CurrentRow.Index].highlight_color == null)
+				if (_tracks[trackEditor.CurrentRow?.Index ?? 0].highlight_color == null)
 					btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(objectcolors.Where(x => x.Item1 == dropParamPath.Text).First().Item2));
 				//if the param_path is .ent, enable lane choice
 				if (_objects.Where(obj => obj.param_displayname == dropParamPath.Text).First().param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
