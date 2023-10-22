@@ -124,7 +124,7 @@
   <data name="discordServerToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAAWpJREFUOE+VU7FKxEAUTO3n3HdYJqkskivEH1DQxkJb7ZQgVwgWFl6jjY1aBBQU
+        vAAADrwBlbxySQAAAWpJREFUOE+VU7FKxEAUTO3n3HdYJqkskivEH1DQxkJb7ZQgVwgWFl6jjY1aBBQU
         BYVDMY1yaqnVJndmkzx3XrJk40U9B4bbmzdvsrt5sb7D9UTH8UWgGNmeSEGsoaFW2SYxO08zth/vOH5M
         bjdpJWq2F/fgrdpKQHC6cdjW1EYVFDZCXJXaZvyN2G3VLDquse2l1RGdhpKubzPq7X0yb9T6TGmLqqZ9
         fFTcCV9OJc4tJPT+UdBPQA2eOkQECIi0gKf9BXiMgMjCa9LC4CFj0/1jRhtbY4qTghLFze0xawA82o/e
@@ -142,15 +142,6 @@ or interoplates between set data points (step = FALSE)
 
 Only useful for Trait types of kTraitFloat and kTraitColor</value>
   </data>
-  <metadata name="toolstripTitleLeaf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>256, 3</value>
-  </metadata>
-  <metadata name="leafToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>255, 49</value>
-  </metadata>
-  <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>259, 24</value>
-  </metadata>
   <metadata name="toolstripTitleLeaf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>256, 3</value>
   </metadata>
@@ -200,21 +191,6 @@ THIS AFFECTS IN-GAME ONLY. NOT THIS EDITOR'S INTERPOLATION CALC.</value>
   <metadata name="lvlToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>393, 26</value>
   </metadata>
-  <metadata name="toolstripTitleLvl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>393, 4</value>
-  </metadata>
-  <metadata name="lvlLoopToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>493, 29</value>
-  </metadata>
-  <metadata name="lvlPathsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>392, 50</value>
-  </metadata>
-  <metadata name="lvlVolumeToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>504, 7</value>
-  </metadata>
-  <metadata name="lvlToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>393, 26</value>
-  </metadata>
   <metadata name="LoopSample.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -238,12 +214,6 @@ don't drown out other sounds at specific times.</value>
   </metadata>
   <metadata name="Beats.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="toolstripTitleMaster.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>765, 4</value>
-  </metadata>
-  <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>771, 24</value>
   </metadata>
   <metadata name="toolstripTitleMaster.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>765, 4</value>
@@ -288,26 +258,11 @@ without replaying the entire thing.</value>
   <metadata name="gateToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>644, 23</value>
   </metadata>
-  <metadata name="toolstripTitleGate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>640, 4</value>
-  </metadata>
-  <metadata name="gateToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>644, 23</value>
-  </metadata>
   <metadata name="Lvl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Sentry.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="toolstripTitleWork.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1048, 1</value>
-  </metadata>
-  <metadata name="workingToolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1047, 43</value>
-  </metadata>
-  <metadata name="workingToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1048, 23</value>
   </metadata>
   <metadata name="toolstripTitleWork.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1048, 1</value>
@@ -339,17 +294,8 @@ without replaying the entire thing.</value>
   <metadata name="workingfolderRightClick.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>98, 15</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>7, 27</value>
-  </metadata>
   <metadata name="contextMenuDock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>112, 53</value>
-  </metadata>
-  <metadata name="toolstripTitleSample.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>904, 1</value>
-  </metadata>
-  <metadata name="sampleToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>910, 21</value>
   </metadata>
   <metadata name="toolstripTitleSample.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>904, 1</value>
@@ -378,9 +324,6 @@ without replaying the entire thing.</value>
   <metadata name="timerBeeble.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>7, 48</value>
   </metadata>
-  <metadata name="toolstripRecentFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1190, 3</value>
-  </metadata>
   <metadata name="dataGridViewImageColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -388,6 +331,9 @@ without replaying the entire thing.</value>
     <value>True</value>
   </metadata>
   <metadata name="dataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="closerecent.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="toolstripRecentFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
