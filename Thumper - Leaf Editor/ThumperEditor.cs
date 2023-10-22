@@ -943,6 +943,7 @@ namespace Thumper_Custom_Level_Editor
             //if remove column button clicked, run this
             if (e.ColumnIndex == 3) {
                 dgvRecentFiles.Rows.RemoveAt(e.RowIndex);
+                PlaySound("UIselect");
                 Properties.Settings.Default.Recentfiles.RemoveAt(e.RowIndex);
                 Properties.Settings.Default.Save();
             }
