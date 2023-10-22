@@ -66,7 +66,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnObjectColor.BackColor = Color.FromArgb(int.Parse(objectcolors.Where(x => x.Item1 == dropParamPath.Text).First().Item2));
+            btnObjectColor.BackColor = Color.FromArgb(int.Parse(objectcolors.FirstOrDefault(x => x.Item1 == dropParamPath.Text)?.Item2 ?? "-8355585"));
         }
 
         private void btnObjectColor_Click(object sender, EventArgs e)
@@ -78,8 +78,13 @@ namespace Thumper_Custom_Level_Editor
                 Color _c = colorDialog1.Color;
                 btn.BackColor = colorDialog1.Color;
 
-                int _in = objectcolors.IndexOf(objectcolors.Where(x => x.Item1 == dropParamPath.Text).First());
-                objectcolors[_in] = new Tuple<string, string>(dropParamPath.Text, $"{_c.ToArgb()}");
+                if (objectcolors.FirstOrDefault(x => x.Item1 == dropParamPath.Text) == null) {
+                    objectcolors.Add(new Tuple<string, string>(dropParamPath.Text, $"{_c.ToArgb()}"));
+                }
+                else {
+                    int _in = objectcolors.IndexOf(objectcolors.Where(x => x.Item1 == dropParamPath.Text).First());
+                    objectcolors[_in] = new Tuple<string, string>(dropParamPath.Text, $"{_c.ToArgb()}");
+                }
             }
         }
     }

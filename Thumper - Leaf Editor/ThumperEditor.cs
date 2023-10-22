@@ -378,14 +378,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
             //import default colors per object
-            if (!File.Exists(@"templates\objects_defaultcolors.txt")) {
-                File.WriteAllText(@"templates\objects_defaultcolors.txt", Properties.Resources.objects_defaultcolors);
-            }
-            string[] importcolors = File.Exists($@"templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"templates\objects_defaultcolors.txt") : null;
-            foreach (string line in importcolors) {
-                var items = line.Split(';');
-                objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
-            }
+            ImportDefaultColors();
             //
 
             ///import selectable objects from file and parse them into lists for manipulation
@@ -428,6 +421,18 @@ namespace Thumper_Custom_Level_Editor
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
             dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
             dropParamPath.Enabled = false;
+        }
+        public void ImportDefaultColors()
+        {
+            objectcolors.Clear();
+            if (!File.Exists(@"templates\objects_defaultcolors.txt")) {
+                File.WriteAllText(@"templates\objects_defaultcolors.txt", Properties.Resources.objects_defaultcolors);
+            }
+            string[] importcolors = File.Exists($@"templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"templates\objects_defaultcolors.txt") : null;
+            foreach (string line in importcolors) {
+                var items = line.Split(';');
+                objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
+            }
         }
 
         public void CreateCustomLevelFolder(DialogInput input)
@@ -648,6 +653,7 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.custom_activecolor = custom.btnActiveColor.BackColor;
                 Properties.Settings.Default.muteapplication = custom.checkMuteApp.Checked;
                 ColorFormElements();
+                ImportDefaultColors();
             }
             custom.Dispose();
         }
