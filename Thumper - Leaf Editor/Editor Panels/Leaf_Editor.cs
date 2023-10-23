@@ -1227,7 +1227,6 @@ namespace Thumper_Custom_Level_Editor
 				};
 				//if the leaf has definitions for these, add them. If not, set to defaults
 				_s.param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"];
-				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? "-8355585";
 				_s.highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1;
 				_s.default_interp = (string)seq_obj["default_interp"] ?? "kTraitInterpLinear";
 				//if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
@@ -1242,6 +1241,7 @@ namespace Thumper_Custom_Level_Editor
 					_s.friendly_param = objmatch.param_displayname;
 					_s.friendly_type = objmatch.category;
 				}
+				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? objectcolors.FirstOrDefault(x => x.Item1 == _s.friendly_param)?.Item2 ?? "-8355585";
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this
 				if (_s.param_path.Contains("."))
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
@@ -1264,6 +1264,7 @@ namespace Thumper_Custom_Level_Editor
 						//pass _griddata per row to be imported to the DGV
 						TrackRawImport(r, _tracks[r.Index].data_points);
 						TrackUpdateHighlighting(r);
+						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), r.HeaderCell.Style.BackColor, 0.3);
 					}
 				}
 				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}\n\n{ex}"); }
