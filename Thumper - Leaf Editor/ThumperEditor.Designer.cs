@@ -1397,6 +1397,7 @@
             this.dropObjects.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropObjects.Size = new System.Drawing.Size(163, 21);
             this.dropObjects.TabIndex = 30;
+            this.dropObjects.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
             this.dropObjects.SelectedValueChanged += new System.EventHandler(this.dropObjects_SelectedValueChanged);
             this.dropObjects.TextChanged += new System.EventHandler(this.dropObjects_SelectedValueChanged);
             // 
@@ -1439,6 +1440,7 @@
             this.dropParamPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropParamPath.Size = new System.Drawing.Size(163, 21);
             this.dropParamPath.TabIndex = 33;
+            this.dropParamPath.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
             this.dropParamPath.SelectedIndexChanged += new System.EventHandler(this.dropParamPath_SelectedIndexChanged);
             // 
             // label7

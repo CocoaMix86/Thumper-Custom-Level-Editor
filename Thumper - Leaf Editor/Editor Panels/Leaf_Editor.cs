@@ -1264,7 +1264,7 @@ namespace Thumper_Custom_Level_Editor
 						//pass _griddata per row to be imported to the DGV
 						TrackRawImport(r, _tracks[r.Index].data_points);
 						TrackUpdateHighlighting(r);
-						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), r.HeaderCell.Style.BackColor, 0.3);
+						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), r.HeaderCell.Style.BackColor, 0.4);
 					}
 				}
 				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}\n\n{ex}"); }
