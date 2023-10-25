@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Diagnostics;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -331,6 +332,15 @@ namespace Thumper_Custom_Level_Editor
 		{
 			PlaySound("UIfolderopen");
 			RecentFiles(Properties.Settings.Default.Recentfiles);
+		}
+
+		private void btnExplorer_Click(object sender, EventArgs e)
+		{
+			ProcessStartInfo startInfo = new ProcessStartInfo {
+				Arguments = workingfolder,
+				FileName = "explorer.exe"
+			};
+			Process.Start(startInfo);
 		}
 	}
 }

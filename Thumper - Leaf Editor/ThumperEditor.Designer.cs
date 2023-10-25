@@ -343,6 +343,7 @@
             this.lblPopoutWork = new System.Windows.Forms.ToolStripButton();
             this.btnWorkRefresh = new System.Windows.Forms.ToolStripButton();
             this.workingToolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.btnExplorer = new System.Windows.Forms.ToolStripButton();
             this.btnLevelFolder = new System.Windows.Forms.ToolStripButton();
             this.btnWorkNewFile = new System.Windows.Forms.ToolStripDropDownButton();
             this.contextMenuNewFile = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -4657,6 +4658,7 @@
             this.workingToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.workingToolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.workingToolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnExplorer,
             this.btnLevelFolder,
             this.btnWorkNewFile,
             this.btnLeafPanelTemplate,
@@ -4664,13 +4666,24 @@
             this.btnWorkDelete,
             this.btnShowRecentFile});
             this.workingToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.workingToolStrip2.Location = new System.Drawing.Point(31, 26);
+            this.workingToolStrip2.Location = new System.Drawing.Point(5, 26);
             this.workingToolStrip2.Name = "workingToolStrip2";
             this.workingToolStrip2.Padding = new System.Windows.Forms.Padding(0);
             this.workingToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.workingToolStrip2.Size = new System.Drawing.Size(163, 25);
+            this.workingToolStrip2.Size = new System.Drawing.Size(189, 25);
             this.workingToolStrip2.Stretch = true;
             this.workingToolStrip2.TabIndex = 150;
+            // 
+            // btnExplorer
+            // 
+            this.btnExplorer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExplorer.Enabled = false;
+            this.btnExplorer.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_explorer;
+            this.btnExplorer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExplorer.Name = "btnExplorer";
+            this.btnExplorer.Size = new System.Drawing.Size(24, 22);
+            this.btnExplorer.ToolTipText = "Open this level folder in Explorer";
+            this.btnExplorer.Click += new System.EventHandler(this.btnExplorer_Click);
             // 
             // btnLevelFolder
             // 
@@ -6407,6 +6420,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewButtonColumn closerecent;
+        private System.Windows.Forms.ToolStripButton btnExplorer;
     }
 }
 

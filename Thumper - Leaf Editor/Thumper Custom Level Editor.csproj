@@ -325,6 +325,7 @@
     <None Include="image assets\D5.png" />
     <None Include="image assets\D6.png" />
     <None Include="image assets\D7.png" />
+    <None Include="image assets\icon-explorer.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

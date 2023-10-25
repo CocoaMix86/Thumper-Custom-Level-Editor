@@ -52,6 +52,7 @@ namespace Thumper_Custom_Level_Editor
                     btnWorkCopy.Enabled = true;
                     editLevelDetailsToolStripMenuItem.Enabled = true;
                     regenerateDefaultFilesToolStripMenuItem.Enabled = true;
+                    btnExplorer.Enabled = true;
                     btnWorkRefresh.PerformClick();
                     //set window name to the level name
                     this.Text = "Thumper Custom Level Editor - " + new DirectoryInfo(workingfolder).Name;
