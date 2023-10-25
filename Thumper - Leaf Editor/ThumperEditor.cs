@@ -1008,5 +1008,10 @@ namespace Thumper_Custom_Level_Editor
             byte b = (byte)(color.B * amount + backColor.B * (1 - amount));
             return Color.FromArgb(r, g, b);
         }
+
+        private void lvlLeafList_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

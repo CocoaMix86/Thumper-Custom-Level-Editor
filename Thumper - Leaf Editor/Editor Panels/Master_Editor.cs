@@ -314,8 +314,6 @@ namespace Thumper_Custom_Level_Editor
 				_masterlvls.Insert(rowIndex - 1, selectedLvl);
 				//move selected cell up a row to follow the moved item
 				masterLvlList.Rows[rowIndex - 1].Cells[0].Selected = true;
-				//sets flag that lvl has unsaved changes
-				SaveMaster(false);
 			}
 			catch { }
 		}
@@ -333,8 +331,6 @@ namespace Thumper_Custom_Level_Editor
 				_masterlvls.Insert(rowIndex + 1, selectedLvl);
 				//move selected cell up a row to follow the moved item
 				masterLvlList.Rows[rowIndex + 1].Cells[0].Selected = true;
-				//sets flag that lvl has unsaved changes
-				SaveMaster(false);
 			}
 			catch { }
 		}

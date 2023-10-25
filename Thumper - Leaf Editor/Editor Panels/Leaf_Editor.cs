@@ -1025,12 +1025,12 @@ namespace Thumper_Custom_Level_Editor
 
 		public void SaveLeaf(bool save, bool playsound = false)
 		{
-			//make the beeble emote
-			pictureBox1_Click(null, null);
 			//skip method if leaf is loading
 			if (loadingleaf)
 				return;
 
+			//make the beeble emote
+			pictureBox1_Click(null, null);
 			_saveleaf = save;
 			if (!save) {
 				btnSaveLeaf.Enabled = true;
@@ -1059,7 +1059,7 @@ namespace Thumper_Custom_Level_Editor
 				GenerateColumnStyle(grid, _beats);
 		}
 
-		public void GenerateColumnStyle(DataGridView grid, int _cells)
+		public void GenerateColumnStyle(DataGridView grid, int _cells, int width = 60)
 		{
 			//stylize track grid/columns
 			for (int i = 0; i < _cells; i++) {
@@ -1069,7 +1069,7 @@ namespace Thumper_Custom_Level_Editor
 				grid.Columns[i].DividerWidth = 1;
 				grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 				grid.Columns[i].Frozen = false;
-				grid.Columns[i].Width = 60;
+				grid.Columns[i].Width = width;
 				grid.Columns[i].MinimumWidth = 2;
 				grid.Columns[i].ReadOnly = false;
 				grid.Columns[i].ValueType = typeof(decimal);
@@ -1271,10 +1271,6 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//enable a bunch of elements now that a leaf is loaded.
 			EnableLeafButtons(true);
-			//set save flag to true, since it just barely loaded
-			loadingleaf = false;
-			leafjson = _load;
-			SaveLeaf(true);
 			//re-set the zoom level
 			trackZoom_Scroll(null, null);
 			//set scrollbar positions (if set last time this leaf was open)
@@ -1290,6 +1286,10 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;
 			}
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+			//set save flag to true, since it just barely loaded
+			//SaveLeaf(true);
+			leafjson = _load;
+			loadingleaf = false;
 		}
 
 		private void EnableLeafButtons(bool enable)

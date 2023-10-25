@@ -36,6 +36,8 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private string loadedlvl;
 		string _loadedlvltemp;
+		public bool loadinglvl = false;
+		public bool calculatelength = true;
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
 		List<SampleData> _lvlsamples = new List<SampleData>();
@@ -82,10 +84,6 @@ namespace Thumper_Custom_Level_Editor
 			if (_dgfocus != "lvlLeafList") {
 				_dgfocus = "lvlLeafList";
 			}
-		}
-		private void lvlLeafList_CellEnter(object sender, DataGridViewCellEventArgs e)
-		{
-			lvlLeafList_CellClick(sender, e);
 		}
 		///DGV LVLLEAFPATHS
 		//Cell value changed
@@ -163,15 +161,21 @@ namespace Thumper_Custom_Level_Editor
 		//Fill weight - allows for more columns
 		private void lvlSeqObjs_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
 		{
-			e.Column.FillWeight = 10;
+			e.Column.FillWeight = trackLvlVolumeZoom.Value;
 		}
 		///_LVLLEAF - Triggers when the collection changes
 		public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			_lvllength = (int)NUD_lvlApproach.Value;
-			foreach (LvlLeafData _leaf in _lvlleafs) {
-				//total length of all leafs. This value is used for the volume sequencer
-				_lvllength += _leaf.beats;
+			if (calculatelength) {
+				_lvllength = (int)NUD_lvlApproach.Value;
+				foreach (LvlLeafData _leaf in _lvlleafs) {
+					//total length of all leafs. This value is used for the volume sequencer
+					_lvllength += _leaf.beats;
+				}
+				//set volume sequencer column total to length of all leafs + approach
+				lvlSeqObjs.ColumnCount = _lvllength;
+				//some styles
+				GenerateColumnStyle(lvlSeqObjs, _lvllength, trackLvlVolumeZoom.Value);
 			}
 
 			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
@@ -208,10 +212,7 @@ namespace Thumper_Custom_Level_Editor
 			if (btnLvlSeqAdd.Enabled == false) btnLvlSeqClear.Enabled = false;
 			btnLvlLoopAdd.Enabled = _lvlleafs.Count > 0;
 			if (btnLvlLoopAdd.Enabled == false) btnLvlLoopDelete.Enabled = false;
-			//set volume sequencer column total to length of all leafs + approach
-			lvlSeqObjs.ColumnCount = _lvllength;
-			//some styles
-			GenerateColumnStyle(lvlSeqObjs, _lvllength);
+			//
 			SaveLvl(false);
 		}
 		/// Set "saved" flag to false for LVL when these events happen
@@ -342,24 +343,27 @@ namespace Thumper_Custom_Level_Editor
 		{
 			try {
 				// get index of the row for the selected cell
+				calculatelength = false;
 				int rowIndex = lvlLeafList.CurrentRow.Index;
 				if (rowIndex == 0)
 					return;
 				//move leaf in list
 				var selectedLeaf = _lvlleafs[rowIndex];
 				_lvlleafs.Remove(selectedLeaf);
-				_lvlleafs.Insert(rowIndex - 1, selectedLeaf);
 				//move selected cell up a row to follow the moved item
+				_lvlleafs.Insert(rowIndex - 1, selectedLeaf);
 				lvlLeafList.Rows[rowIndex - 1].Cells[0].Selected = true;
-				//sets flag that lvl has unsaved changes
-				SaveLvl(false);
+				calculatelength = true;
 			}
-			catch { }
+			catch {
+				calculatelength = true;
+			}
 		}
 
 		private void btnLvlLeafDown_Click(object sender, EventArgs e)
 		{
 			try {
+				calculatelength = false;
 				// get index of the row for the selected cell
 				int rowIndex = lvlLeafList.CurrentRow.Index;
 				if (rowIndex == _lvlleafs.Count - 1)
@@ -367,13 +371,14 @@ namespace Thumper_Custom_Level_Editor
 				//move leaf in list
 				var selectedLeaf = _lvlleafs[rowIndex];
 				_lvlleafs.Remove(selectedLeaf);
-				_lvlleafs.Insert(rowIndex + 1, selectedLeaf);
 				//move selected cell up a row to follow the moved item
+				_lvlleafs.Insert(rowIndex + 1, selectedLeaf);
 				lvlLeafList.Rows[rowIndex + 1].Cells[0].Selected = true;
-				//sets flag that lvl has unsaved changes
-				SaveLvl(false);
+				calculatelength = true;
 			}
-			catch { }
+			catch {
+				calculatelength = true;
+			}
 		}
 
 		///COPY PASTE of leaf
@@ -566,6 +571,8 @@ namespace Thumper_Custom_Level_Editor
 
 		public void LoadLvl(dynamic _load)
 		{
+			//reset flag in case it got stuck previously
+			loadinglvl = false;
 			//if Lvl Editor is hidden, show it when a lvl is selected from anywhere
 			if (panelLevel.Visible == false)
 				levelEditorToolStripMenuItem.PerformClick();
@@ -579,6 +586,8 @@ namespace Thumper_Custom_Level_Editor
 			_loadedlvl = _loadedlvltemp;
 			//set some visual elements
 			lblLvlName.Text = $@"Lvl Editor - {_load["obj_name"]}";
+			//set flag that load is in progress. This skips SaveLvl() method
+			loadinglvl = true;
 
 			///Clear DGVs so new data can load
 			lvlLoopTracks.Rows.Clear();
@@ -620,10 +629,12 @@ namespace Thumper_Custom_Level_Editor
 				r.HeaderCell.Value = "Volume Track " + r.Index;
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows)
 				r.HeaderCell.Value = "Volume Track " + r.Index;
-			///mark that lvl is saved (just freshly loaded)
-			SaveLvl(true);
-			lvljson = _load;
+
 			trackLvlVolumeZoom_Scroll(null, null);
+			//mark that lvl is saved (just freshly loaded)
+			//SaveLvl(true);
+			loadinglvl = false;
+			lvljson = _load;
 		}
 
 		public void InitializeLvlStuff()
@@ -729,6 +740,8 @@ namespace Thumper_Custom_Level_Editor
 
 		public void SaveLvl(bool save, bool playsound = false)
 		{
+			if (loadinglvl)
+				return;
 			//make the beeble emote
 			pictureBox1_Click(null, null);
 
