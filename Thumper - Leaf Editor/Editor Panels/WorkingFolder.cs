@@ -343,10 +343,14 @@ namespace Thumper_Custom_Level_Editor
 			Process.Start(startInfo);
 		}
 
+		//handle ENTER and click cell instead.
+		//Default behaviour is to go to next cell.
 		private void workingfolderFiles_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyData == Keys.Enter) {
 				e.Handled = true;
+				DataGridViewCellMouseEventArgs dgvcme = new DataGridViewCellMouseEventArgs(1, workingfolderFiles.SelectedCells[0].RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Right, 0, 0, 0, 0));
+				workingfolderFiles_CellMouseClick(null, dgvcme);
 			}
 		}
 	}
