@@ -342,5 +342,12 @@ namespace Thumper_Custom_Level_Editor
 			};
 			Process.Start(startInfo);
 		}
+
+		private void workingfolderFiles_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyData == Keys.Enter) {
+				e.Handled = true;
+			}
+		}
 	}
 }

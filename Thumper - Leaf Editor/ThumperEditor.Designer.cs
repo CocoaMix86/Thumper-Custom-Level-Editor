@@ -4957,6 +4957,7 @@
             this.workingfolderFiles.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseDown);
             this.workingfolderFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.workingfolderFiles_DragDrop);
             this.workingfolderFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.workingfolderFiles_DragEnter);
+            this.workingfolderFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.workingfolderFiles_KeyDown);
             // 
             // FileType
             // 
