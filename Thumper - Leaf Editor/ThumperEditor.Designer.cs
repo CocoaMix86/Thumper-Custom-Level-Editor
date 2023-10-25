@@ -3243,6 +3243,7 @@
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
             this.lvlLeafList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_RowEnter);
+            this.lvlLeafList.SelectionChanged += new System.EventHandler(this.lvlLeafList_SelectionChanged);
             // 
             // lvlfiletype
             // 

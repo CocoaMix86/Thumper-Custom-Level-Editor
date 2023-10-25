@@ -594,6 +594,7 @@ namespace Thumper_Custom_Level_Editor
 			_lvlleafs.Clear();
 			lvlLeafList.Rows.Clear();
 			lvlSeqObjs.Rows.Clear();
+			lvlLeafPaths.Rows.Clear();
 
 			///populate the non-DGV elements on the form with info from the JSON
 			NUD_lvlApproach.Value = (decimal)_load["approach_beats"];

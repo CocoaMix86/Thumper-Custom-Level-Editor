@@ -255,6 +255,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//pastes cell data from clipboard
 			if (controldown && e.KeyCode == Keys.V) {
+				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				string s = Clipboard.GetText().Replace("\r\n", "\n");
 				string[] lines = s.Split('\n');
 				int row = trackEditor.CurrentCell.RowIndex;
@@ -272,6 +273,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 					TrackUpdateHighlighting(trackEditor.Rows[row + _line]);
 				}
+				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			}
 		}
 		private void trackEditor_KeyUp(object sender, KeyEventArgs e)

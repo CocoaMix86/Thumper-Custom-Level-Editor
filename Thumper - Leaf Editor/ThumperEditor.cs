@@ -717,39 +717,39 @@ namespace Thumper_Custom_Level_Editor
         ///BEEBLE FUNCTIONS
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            int i = new Random().Next(0, 101);
+            int i = new Random().Next(0, 1001);
             switch (i) {
-                case >= 0 and < 10:
+                case >= 0 and < 100:
                     pictureBox1.Image = Properties.Resources.beeblehappy;
                     break;
-                case >= 10 and < 20:
+                case >= 100 and < 200:
                     pictureBox1.Image = Properties.Resources.beebleconfuse;
                     break;
-                case >= 20 and < 30:
+                case >= 200 and < 300:
                     pictureBox1.Image = Properties.Resources.beeblecool;
                     break;
-                case >= 30 and < 40:
+                case >= 300 and < 400:
                     pictureBox1.Image = Properties.Resources.beeblederp;
                     break;
-                case >= 40 and < 50:
+                case >= 400 and < 500:
                     pictureBox1.Image = Properties.Resources.beeblelaugh;
                     break;
-                case >= 50 and < 60:
+                case >= 500 and < 600:
                     pictureBox1.Image = Properties.Resources.beeblestare;
                     break;
-                case >= 60 and < 70:
+                case >= 600 and < 700:
                     pictureBox1.Image = Properties.Resources.beeblethink;
                     break;
-                case >= 70 and < 80:
+                case >= 700 and < 800:
                     pictureBox1.Image = Properties.Resources.beebletiny;
                     break;
-                case >= 80 and < 90:
+                case >= 800 and < 900:
                     pictureBox1.Image = Properties.Resources.beeblelove;
                     break;
-                case >= 90 and < 100:
+                case >= 900 and < 1000:
                     pictureBox1.Image = Properties.Resources.beeblespin;
                     break;
-                case 100:
+                case 1001:
                     pictureBox1.Image = Properties.Resources.beeblegold;
                     PlaySound("UIbeetleclickGOLD");
                     break;
@@ -1009,9 +1009,9 @@ namespace Thumper_Custom_Level_Editor
             return Color.FromArgb(r, g, b);
         }
 
-        private void lvlLeafList_CellEnter(object sender, DataGridViewCellEventArgs e)
+        private void lvlLeafList_SelectionChanged(object sender, EventArgs e)
         {
-
+            ;
         }
     }
 }
