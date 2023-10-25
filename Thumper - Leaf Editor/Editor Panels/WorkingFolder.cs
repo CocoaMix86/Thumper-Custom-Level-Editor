@@ -349,7 +349,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.KeyData == Keys.Enter) {
 				e.Handled = true;
-				DataGridViewCellMouseEventArgs dgvcme = new DataGridViewCellMouseEventArgs(1, workingfolderFiles.SelectedCells[0].RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Right, 0, 0, 0, 0));
+				DataGridViewCellMouseEventArgs dgvcme = new DataGridViewCellMouseEventArgs(1, workingfolderFiles.SelectedCells[0].RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
 				workingfolderFiles_CellMouseClick(null, dgvcme);
 			}
 		}
