@@ -517,4 +517,28 @@
   <data name="objects_defaultcolors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\objects_defaultcolors.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="D0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -61,6 +61,8 @@ namespace Thumper_Custom_Level_Editor
             this.chkDissonance = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureDifficulty = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).BeginInit();
             this.SuspendLayout();
             // 
             // txtCustomPath
@@ -81,9 +83,9 @@ namespace Thumper_Custom_Level_Editor
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 13);
+            this.label1.Size = new System.Drawing.Size(234, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Where to save your level:";
+            this.label1.Text = "Where to save your project/level folder:";
             // 
             // btnCustomFolder
             // 
@@ -95,7 +97,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomFolder.Location = new System.Drawing.Point(388, 24);
             this.btnCustomFolder.Name = "btnCustomFolder";
             this.btnCustomFolder.Size = new System.Drawing.Size(24, 24);
-            this.btnCustomFolder.TabIndex = 115;
+            this.btnCustomFolder.TabIndex = 0;
             this.btnCustomFolder.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCustomFolder.UseVisualStyleBackColor = false;
             this.btnCustomFolder.Click += new System.EventHandler(this.btnCustomFolder_Click);
@@ -111,7 +113,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomCancel.Location = new System.Drawing.Point(352, 406);
             this.btnCustomCancel.Name = "btnCustomCancel";
             this.btnCustomCancel.Size = new System.Drawing.Size(60, 24);
-            this.btnCustomCancel.TabIndex = 116;
+            this.btnCustomCancel.TabIndex = 19;
             this.btnCustomCancel.Text = "Cancel";
             this.btnCustomCancel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCustomCancel.UseVisualStyleBackColor = false;
@@ -128,7 +130,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomSave.Location = new System.Drawing.Point(289, 406);
             this.btnCustomSave.Name = "btnCustomSave";
             this.btnCustomSave.Size = new System.Drawing.Size(60, 24);
-            this.btnCustomSave.TabIndex = 117;
+            this.btnCustomSave.TabIndex = 18;
             this.btnCustomSave.Text = "Save";
             this.btnCustomSave.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCustomSave.UseVisualStyleBackColor = false;
@@ -152,7 +154,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomAuthor.Location = new System.Drawing.Point(12, 107);
             this.txtCustomAuthor.Name = "txtCustomAuthor";
             this.txtCustomAuthor.Size = new System.Drawing.Size(192, 22);
-            this.txtCustomAuthor.TabIndex = 119;
+            this.txtCustomAuthor.TabIndex = 2;
             this.txtCustomAuthor.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
@@ -185,7 +187,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomName.Location = new System.Drawing.Point(12, 66);
             this.txtCustomName.Name = "txtCustomName";
             this.txtCustomName.Size = new System.Drawing.Size(192, 22);
-            this.txtCustomName.TabIndex = 121;
+            this.txtCustomName.TabIndex = 1;
             this.txtCustomName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
@@ -202,6 +204,8 @@ namespace Thumper_Custom_Level_Editor
             // txtCustomDiff
             // 
             this.txtCustomDiff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.txtCustomDiff.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.txtCustomDiff.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtCustomDiff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtCustomDiff.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCustomDiff.ForeColor = System.Drawing.Color.White;
@@ -217,9 +221,10 @@ namespace Thumper_Custom_Level_Editor
             "D7"});
             this.txtCustomDiff.Location = new System.Drawing.Point(12, 148);
             this.txtCustomDiff.Name = "txtCustomDiff";
-            this.txtCustomDiff.Size = new System.Drawing.Size(116, 24);
-            this.txtCustomDiff.TabIndex = 124;
+            this.txtCustomDiff.Size = new System.Drawing.Size(126, 23);
+            this.txtCustomDiff.TabIndex = 3;
             this.txtCustomDiff.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.txtCustomDiff.TextChanged += new System.EventHandler(this.txtCustomDiff_TextChanged);
             // 
             // lblCustomDiffHelp
             // 
@@ -254,7 +259,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtDesc.Location = new System.Drawing.Point(12, 190);
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(400, 96);
-            this.txtDesc.TabIndex = 127;
+            this.txtDesc.TabIndex = 4;
             this.txtDesc.Text = "";
             // 
             // label7
@@ -276,7 +281,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel2.Location = new System.Drawing.Point(15, 331);
             this.chkLevel2.Name = "chkLevel2";
             this.chkLevel2.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel2.TabIndex = 129;
+            this.chkLevel2.TabIndex = 6;
             this.chkLevel2.Text = "Level 2 (340bpm)";
             this.chkLevel2.UseVisualStyleBackColor = true;
             // 
@@ -288,7 +293,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel3.Location = new System.Drawing.Point(15, 350);
             this.chkLevel3.Name = "chkLevel3";
             this.chkLevel3.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel3.TabIndex = 130;
+            this.chkLevel3.TabIndex = 7;
             this.chkLevel3.Text = "Level 3 (360bpm)";
             this.chkLevel3.UseVisualStyleBackColor = true;
             // 
@@ -300,7 +305,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel4.Location = new System.Drawing.Point(15, 369);
             this.chkLevel4.Name = "chkLevel4";
             this.chkLevel4.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel4.TabIndex = 131;
+            this.chkLevel4.TabIndex = 8;
             this.chkLevel4.Text = "Level 4 (380bpm)";
             this.chkLevel4.UseVisualStyleBackColor = true;
             // 
@@ -312,7 +317,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel5.Location = new System.Drawing.Point(15, 388);
             this.chkLevel5.Name = "chkLevel5";
             this.chkLevel5.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel5.TabIndex = 132;
+            this.chkLevel5.TabIndex = 9;
             this.chkLevel5.Text = "Level 5 (400bpm)";
             this.chkLevel5.UseVisualStyleBackColor = true;
             // 
@@ -324,7 +329,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel9.Location = new System.Drawing.Point(150, 369);
             this.chkLevel9.Name = "chkLevel9";
             this.chkLevel9.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel9.TabIndex = 136;
+            this.chkLevel9.TabIndex = 13;
             this.chkLevel9.Text = "Level 9 (480bpm)";
             this.chkLevel9.UseVisualStyleBackColor = true;
             // 
@@ -336,7 +341,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel8.Location = new System.Drawing.Point(150, 350);
             this.chkLevel8.Name = "chkLevel8";
             this.chkLevel8.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel8.TabIndex = 135;
+            this.chkLevel8.TabIndex = 12;
             this.chkLevel8.Text = "Level 8 (460bpm)";
             this.chkLevel8.UseVisualStyleBackColor = true;
             // 
@@ -348,7 +353,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel7.Location = new System.Drawing.Point(150, 331);
             this.chkLevel7.Name = "chkLevel7";
             this.chkLevel7.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel7.TabIndex = 134;
+            this.chkLevel7.TabIndex = 11;
             this.chkLevel7.Text = "Level 7 (440bpm)";
             this.chkLevel7.UseVisualStyleBackColor = true;
             // 
@@ -360,7 +365,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel6.Location = new System.Drawing.Point(150, 312);
             this.chkLevel6.Name = "chkLevel6";
             this.chkLevel6.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel6.TabIndex = 133;
+            this.chkLevel6.TabIndex = 10;
             this.chkLevel6.Text = "Level 6 (420bpm)";
             this.chkLevel6.UseVisualStyleBackColor = true;
             // 
@@ -372,7 +377,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkLevel1.Location = new System.Drawing.Point(15, 312);
             this.chkLevel1.Name = "chkLevel1";
             this.chkLevel1.Size = new System.Drawing.Size(128, 20);
-            this.chkLevel1.TabIndex = 137;
+            this.chkLevel1.TabIndex = 5;
             this.chkLevel1.Text = "Level 1 (320bpm)";
             this.chkLevel1.UseVisualStyleBackColor = true;
             // 
@@ -384,7 +389,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkMisc.Location = new System.Drawing.Point(286, 369);
             this.chkMisc.Name = "chkMisc";
             this.chkMisc.Size = new System.Drawing.Size(57, 20);
-            this.chkMisc.TabIndex = 141;
+            this.chkMisc.TabIndex = 17;
             this.chkMisc.Text = "Misc.";
             this.chkMisc.UseVisualStyleBackColor = true;
             // 
@@ -396,7 +401,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkRests.Location = new System.Drawing.Point(286, 350);
             this.chkRests.Name = "chkRests";
             this.chkRests.Size = new System.Drawing.Size(61, 20);
-            this.chkRests.TabIndex = 140;
+            this.chkRests.TabIndex = 16;
             this.chkRests.Text = "Rests";
             this.chkRests.UseVisualStyleBackColor = true;
             // 
@@ -408,7 +413,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkGlobal.Location = new System.Drawing.Point(286, 331);
             this.chkGlobal.Name = "chkGlobal";
             this.chkGlobal.Size = new System.Drawing.Size(113, 20);
-            this.chkGlobal.TabIndex = 139;
+            this.chkGlobal.TabIndex = 15;
             this.chkGlobal.Text = "Global Drones";
             this.chkGlobal.UseVisualStyleBackColor = true;
             // 
@@ -420,7 +425,7 @@ namespace Thumper_Custom_Level_Editor
             this.chkDissonance.Location = new System.Drawing.Point(286, 312);
             this.chkDissonance.Name = "chkDissonance";
             this.chkDissonance.Size = new System.Drawing.Size(91, 20);
-            this.chkDissonance.TabIndex = 138;
+            this.chkDissonance.TabIndex = 14;
             this.chkDissonance.Text = "Dissoance";
             this.chkDissonance.UseVisualStyleBackColor = true;
             // 
@@ -431,7 +436,7 @@ namespace Thumper_Custom_Level_Editor
             this.label8.Cursor = System.Windows.Forms.Cursors.Help;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label8.Location = new System.Drawing.Point(161, 7);
+            this.label8.Location = new System.Drawing.Point(247, 7);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(15, 16);
             this.label8.TabIndex = 142;
@@ -446,6 +451,16 @@ namespace Thumper_Custom_Level_Editor
             this.toolTip1.InitialDelay = 1;
             this.toolTip1.ReshowDelay = 100;
             // 
+            // pictureDifficulty
+            // 
+            this.pictureDifficulty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureDifficulty.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.D0;
+            this.pictureDifficulty.Location = new System.Drawing.Point(144, 139);
+            this.pictureDifficulty.Name = "pictureDifficulty";
+            this.pictureDifficulty.Size = new System.Drawing.Size(40, 40);
+            this.pictureDifficulty.TabIndex = 143;
+            this.pictureDifficulty.TabStop = false;
+            // 
             // DialogInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -453,6 +468,7 @@ namespace Thumper_Custom_Level_Editor
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(425, 436);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureDifficulty);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkMisc);
             this.Controls.Add(this.chkRests);
@@ -488,6 +504,7 @@ namespace Thumper_Custom_Level_Editor
             this.Name = "DialogInput";
             this.ShowInTaskbar = false;
             this.Text = "Custom Level Details";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -525,5 +542,6 @@ namespace Thumper_Custom_Level_Editor
         public System.Windows.Forms.Button btnCustomSave;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.PictureBox pictureDifficulty;
     }
 }

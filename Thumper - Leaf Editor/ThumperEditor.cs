@@ -570,6 +570,13 @@ namespace Thumper_Custom_Level_Editor
             else if (File.Exists($@"{workingfolder}\samp_misc.txt")) {
                 File.Delete($@"{workingfolder}\samp_misc.txt");
             }
+            ///
+            ///create a default master file and open it
+            if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
+                _loadedmaster = $@"{levelpath}\master_sequin.txt";
+                WriteMaster();
+                btnWorkRefresh_Click(null, null);
+            }
         }
 
         ///FORM RESIZE

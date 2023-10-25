@@ -14,7 +14,8 @@ namespace Thumper_Custom_Level_Editor
         public DialogInput()
 		{
 			InitializeComponent();
-		}
+            pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
 
         private void btnCustomFolder_Click(object sender, EventArgs e)
         {
@@ -65,6 +66,12 @@ namespace Thumper_Custom_Level_Editor
         private void btnCustomSave_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtCustomDiff_TextChanged(object sender, EventArgs e)
+        {
+            Image diff = (Image)Properties.Resources.ResourceManager.GetObject(txtCustomDiff.Text);
+            pictureDifficulty.Image = diff;
         }
     }
 }

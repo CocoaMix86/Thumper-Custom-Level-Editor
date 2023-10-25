@@ -213,6 +213,86 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap D0 {
+            get {
+                object obj = ResourceManager.GetObject("D0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap D1 {
+            get {
+                object obj = ResourceManager.GetObject("D1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap D2 {
+            get {
+                object obj = ResourceManager.GetObject("D2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap D3 {
+            get {
+                object obj = ResourceManager.GetObject("D3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap D4 {
+            get {
+                object obj = ResourceManager.GetObject("D4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap D5 {
+            get {
+                object obj = ResourceManager.GetObject("D5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap D6 {
+            get {
+                object obj = ResourceManager.GetObject("D6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap D7 {
+            get {
+                object obj = ResourceManager.GetObject("D7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap difficultyhelp {
             get {
                 object obj = ResourceManager.GetObject("difficultyhelp", resourceCulture);
@@ -787,32 +867,32 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pitch;-8355585
-        ///roll;-8355585
-        ///turn;-8355585
-        ///turn_auto;-8355585
-        ///scale_x;-8355585
-        ///scale_y;-8355585
-        ///scale_z;-8355585
-        ///offset_x;-8355585
-        ///offset_y;-8355585
-        ///offset_z;-8355585
-        ///lane left 2;-8355585
-        ///lane left 1;-8355585
-        ///lane center;-8355585
-        ///lane right 1;-8355585
-        ///lane right 2;-8355585
-        ///thump;-8355585
-        ///thump[fast];-8355585
-        ///thump[checkpoint];-8355585
-        ///thump[boss bonus];-8355585
-        ///bar;-8355585
-        ///bar[left];-8355585
-        ///bar[center];-8355585
-        ///bar[right];-8355585
-        ///bar and thump;-8355585
-        ///bar[double];-8355585
-        ///bar[tr [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to pitch;-1710619
+        ///roll;-5460820
+        ///turn;-65536
+        ///turn_auto;-1982015
+        ///scale_x;-6071204
+        ///scale_y;-10706065
+        ///scale_z;-11513198
+        ///offset_x;-3198928
+        ///offset_y;-13578448
+        ///offset_z;-13618993
+        ///lane left 2;-6908266
+        ///lane left 1;-3618616
+        ///lane center;-1
+        ///lane right 1;-3618616
+        ///lane right 2;-6908266
+        ///thump;-16776961
+        ///thump[fast];-16755536
+        ///thump[checkpoint];-9830224
+        ///thump[boss bonus];-2555687
+        ///bar;-8372160
+        ///bar[left];-8372160
+        ///bar[center];-8372160
+        ///bar[right];-8372160
+        ///bar and thump;-15528691
+        ///bar[double];-8388608
+        ///bar[tri [rest of string was truncated]&quot;;.
         /// </summary>
         public static string objects_defaultcolors {
             get {

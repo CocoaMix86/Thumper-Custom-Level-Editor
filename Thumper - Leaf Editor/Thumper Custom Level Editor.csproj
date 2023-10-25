@@ -317,6 +317,14 @@
     <None Include="image assets\icon-info.png" />
     <None Include="bin\Debug\templates\objects_defaultcolors.txt" />
     <None Include="text assets\objects_defaultcolors.txt" />
+    <None Include="image assets\D0.png" />
+    <None Include="image assets\D1.png" />
+    <None Include="image assets\D2.png" />
+    <None Include="image assets\D3.png" />
+    <None Include="image assets\D4.png" />
+    <None Include="image assets\D5.png" />
+    <None Include="image assets\D6.png" />
+    <None Include="image assets\D7.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />
