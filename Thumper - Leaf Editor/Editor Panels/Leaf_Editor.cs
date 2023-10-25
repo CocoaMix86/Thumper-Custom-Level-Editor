@@ -211,6 +211,10 @@ namespace Thumper_Custom_Level_Editor
 			ShowRawTrackData();
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
+
+		private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+		{
+		}
 		//Cell click, insert values if track is BOOL
 		private void trackEditor_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{

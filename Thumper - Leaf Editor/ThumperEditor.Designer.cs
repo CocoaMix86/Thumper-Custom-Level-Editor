@@ -1536,9 +1536,11 @@
             this.trackEditor.Size = new System.Drawing.Size(814, 385);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
+            this.trackEditor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellEndEdit);
             this.trackEditor.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseClick);
             this.trackEditor.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.trackEditor_CellPainting);
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
+            this.trackEditor.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             this.trackEditor.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.trackEditor_EditingControlShowing);
             this.trackEditor.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_RowEnter);
             this.trackEditor.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_RowHeaderMouseClick);
@@ -3243,7 +3245,6 @@
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
             this.lvlLeafList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_RowEnter);
-            this.lvlLeafList.SelectionChanged += new System.EventHandler(this.lvlLeafList_SelectionChanged);
             // 
             // lvlfiletype
             // 
