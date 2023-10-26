@@ -1537,7 +1537,6 @@
             this.trackEditor.Size = new System.Drawing.Size(814, 385);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
-            this.trackEditor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellEndEdit);
             this.trackEditor.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseClick);
             this.trackEditor.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.trackEditor_CellPainting);
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
@@ -2327,7 +2326,7 @@
             this.btnLeafZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLeafZoom.Name = "btnLeafZoom";
             this.btnLeafZoom.Size = new System.Drawing.Size(29, 27);
-            this.btnLeafZoom.ToolTipText = "Click to show zoom.\r\nCTRL+scroll = horizontal\r\nALT+scroll = vertical";
+            this.btnLeafZoom.ToolTipText = "Click to show zoom.\r\nCTRL+scroll = horizontal\r\nSHIFT+scroll = vertical";
             this.btnLeafZoom.Click += new System.EventHandler(this.btnLeafZoom_Click);
             // 
             // panelLevel

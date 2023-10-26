@@ -73,19 +73,25 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Editor Panels\GeneralFunctions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editor Panels\DockingPanels.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Forms\AboutThumperEditor.cs">
+    <Compile Include="Editor Panels\RecentFiles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Forms\AboutThumperEditor.Designer.cs">
+    <Compile Include="Other Forms\AboutThumperEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extra Forms\FileNameDialog.cs">
+    <Compile Include="Other Forms\FileNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Forms\FileNameDialog.Designer.cs">
+    <Compile Include="Other Forms\FileNameDialog.Designer.cs">
       <DependentUpon>FileNameDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -96,16 +102,16 @@
     <Compile Include="Utility Classes\AccurateTimer.cs" />
     <Compile Include="Utility Classes\AudioPlaybackEngine.cs" />
     <Compile Include="Utility Classes\ControlMoverOrResizer.cs" />
-    <Compile Include="Extra Forms\CustomizeWorkspace.cs">
+    <Compile Include="Other Forms\CustomizeWorkspace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Forms\CustomizeWorkspace.Designer.cs">
+    <Compile Include="Other Forms\CustomizeWorkspace.Designer.cs">
       <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extra Forms\DialogInput.cs">
+    <Compile Include="Other Forms\DialogInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Forms\DialogInput.Designer.cs">
+    <Compile Include="Other Forms\DialogInput.Designer.cs">
       <DependentUpon>DialogInput.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor Panels\GateLvlData.cs" />
@@ -113,16 +119,16 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utility Classes\GlobalSuppressions.cs" />
-    <Compile Include="Extra Forms\ImageMessageBox.cs">
+    <Compile Include="Other Forms\ImageMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Forms\ImageMessageBox.Designer.cs">
+    <Compile Include="Other Forms\ImageMessageBox.Designer.cs">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extra Forms\Interpolator.cs">
+    <Compile Include="Other Forms\Interpolator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extra Forms\Interpolator.Designer.cs">
+    <Compile Include="Other Forms\Interpolator.Designer.cs">
       <DependentUpon>Interpolator.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor Panels\Leaf_Editor.cs">
@@ -158,22 +164,22 @@
     </Compile>
     <Compile Include="Utility Classes\MyRenderer.cs" />
     <Compile Include="Utility Classes\Timer.cs" />
-    <EmbeddedResource Include="Extra Forms\AboutThumperEditor.resx">
+    <EmbeddedResource Include="Other Forms\AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extra Forms\CustomizeWorkspace.resx">
+    <EmbeddedResource Include="Other Forms\CustomizeWorkspace.resx">
       <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extra Forms\DialogInput.resx">
+    <EmbeddedResource Include="Other Forms\DialogInput.resx">
       <DependentUpon>DialogInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extra Forms\FileNameDialog.resx">
+    <EmbeddedResource Include="Other Forms\FileNameDialog.resx">
       <DependentUpon>FileNameDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extra Forms\ImageMessageBox.resx">
+    <EmbeddedResource Include="Other Forms\ImageMessageBox.resx">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Extra Forms\Interpolator.resx">
+    <EmbeddedResource Include="Other Forms\Interpolator.resx">
       <DependentUpon>Interpolator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThumperEditor.resx">

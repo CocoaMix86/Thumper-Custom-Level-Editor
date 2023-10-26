@@ -212,8 +212,18 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
-		private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+		private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
+			if (e.ColumnIndex != -1 && e.RowIndex != -1)
+				return;
+			trackEditor.CellPainting -= trackEditor_CellPainting;
+			if (e.ColumnIndex == -1 && e.RowIndex != -1) {
+				try {
+
+				}
+				catch (Exception ex) { }
+			}
+			trackEditor.CellPainting += trackEditor_CellPainting;
 		}
 		//Cell click, insert values if track is BOOL
 		private void trackEditor_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
