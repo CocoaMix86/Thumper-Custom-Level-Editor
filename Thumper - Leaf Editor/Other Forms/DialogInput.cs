@@ -223,8 +223,8 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
                 mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
                 mainform.WriteMaster();
-                mainform.btnWorkRefresh_Click(null, null);
             }
+            mainform.btnWorkRefresh_Click(null, null);
         }
     }
 }
