@@ -120,7 +120,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		private void btnWorkRefresh_Click(object sender, EventArgs e)
+		public void btnWorkRefresh_Click(object sender, EventArgs e)
 		{
 			if (workingfolder == null)
 				return;

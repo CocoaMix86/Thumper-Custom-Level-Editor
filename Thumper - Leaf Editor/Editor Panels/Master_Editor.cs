@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor
 	{
 		#region Variables
 		bool _savemaster = true;
-		string _loadedmaster {
+		public string _loadedmaster {
 			get { return loadedmaster; }
 			set
 			{
@@ -235,7 +235,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 		}
-		private void WriteMaster()
+		public void WriteMaster()
 		{
 			//write contents direct to file without prompting save dialog
 			var _save = MasterBuildSave();

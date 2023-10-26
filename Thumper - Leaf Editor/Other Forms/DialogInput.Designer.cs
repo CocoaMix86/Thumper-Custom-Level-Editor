@@ -105,7 +105,6 @@ namespace Thumper_Custom_Level_Editor
             // btnCustomCancel
             // 
             this.btnCustomCancel.BackColor = System.Drawing.Color.Red;
-            this.btnCustomCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCustomCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCustomCancel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomCancel.ForeColor = System.Drawing.Color.White;
@@ -117,11 +116,11 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomCancel.Text = "Cancel";
             this.btnCustomCancel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCustomCancel.UseVisualStyleBackColor = false;
+            this.btnCustomCancel.Click += new System.EventHandler(this.btnCustomCancel_Click);
             // 
             // btnCustomSave
             // 
             this.btnCustomSave.BackColor = System.Drawing.Color.Green;
-            this.btnCustomSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnCustomSave.Enabled = false;
             this.btnCustomSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCustomSave.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

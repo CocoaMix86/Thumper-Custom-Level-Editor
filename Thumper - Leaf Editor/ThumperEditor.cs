@@ -350,157 +350,13 @@ namespace Thumper_Custom_Level_Editor
         /// NEW CUSTOM LEVEL FOLDER
         private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogInput customlevel = new DialogInput();
+            DialogInput customlevel = new DialogInput(this);
             //show the new level folder dialog box
-            if (customlevel.ShowDialog() == DialogResult.OK) {
-                //if all OK, populate new JObject with data from the form
-                CreateCustomLevelFolder(customlevel);
-            }
-            customlevel.Dispose();
+            customlevel.Show();
         }
 
-        public void CreateCustomLevelFolder(DialogInput input)
+        public static void CustomLevelCallback(string path)
         {
-            JObject level_details = new JObject {
-                { "level_name", input.txtCustomName.Text },
-                { "difficulty", input.txtCustomDiff.Text },
-                { "description", input.txtDesc.Text },
-                { "author", input.txtCustomAuthor.Text }
-            };
-            string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
-            if (!Directory.Exists(levelpath)) {
-                Directory.CreateDirectory(levelpath);
-            }
-            //then write the file to the new folder that was created from the form
-            File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
-            //these 4 files below are required defaults of new levels.
-            //create them if they don't exist
-            if (!File.Exists($@"{levelpath}\leaf_pyramid_outro.txt")) {
-                File.WriteAllText($@"{levelpath}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
-            }
-            if (!File.Exists($@"{levelpath}\samp_default.txt")) {
-                File.WriteAllText($@"{levelpath}\samp_default.txt", Properties.Resources.samp_default);
-            }
-            if (!File.Exists($@"{levelpath}\spn_default.txt")) {
-                File.WriteAllText($@"{levelpath}\spn_default.txt", Properties.Resources.spn_default);
-            }
-            if (!File.Exists($@"{levelpath}\xfm_default.txt")) {
-                File.WriteAllText($@"{levelpath}\xfm_default.txt", Properties.Resources.xfm_default);
-            }
-            //finally, set workingfolder
-            workingfolder = levelpath;
-            ///create samp_ files if any boxes are checked
-            //level 1
-            if (input.chkLevel1.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level1_320bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level1_320bpm.txt", Properties.Resources.samp_level1_320bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level1_320bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level1_320bpm.txt");
-            }
-            //level 2
-            if (input.chkLevel2.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level2_340bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level2_340bpm.txt", Properties.Resources.samp_level2_340bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level2_340bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level2_340bpm.txt");
-            }
-            //level 3
-            if (input.chkLevel3.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level3_360bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level3_360bpm.txt", Properties.Resources.samp_level3_360bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level3_360bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level3_360bpm.txt");
-            }
-            //level 4
-            if (input.chkLevel4.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level4_380bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level4_380bpm.txt", Properties.Resources.samp_level4_380bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level4_380bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level4_380bpm.txt");
-            }
-            //level 5
-            if (input.chkLevel5.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level5_400bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level5_400bpm.txt", Properties.Resources.samp_level5_400bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level5_400bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level5_400bpm.txt");
-            }
-            //level 6
-            if (input.chkLevel6.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level6_420bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level6_420bpm.txt", Properties.Resources.samp_level6_420bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level6_420bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level6_420bpm.txt");
-            }
-            //level 7
-            if (input.chkLevel7.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level7_440bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level7_440bpm.txt", Properties.Resources.samp_level7_440bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level7_440bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level7_440bpm.txt");
-            }
-            //level 8
-            if (input.chkLevel8.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level8_460bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level8_460bpm.txt", Properties.Resources.samp_level8_460bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level8_460bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level8_460bpm.txt");
-            }
-            //level 9
-            if (input.chkLevel9.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level9_480bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level9_480bpm.txt", Properties.Resources.samp_level9_480bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level9_480bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level9_480bpm.txt");
-            }
-            //Dissonance
-            if (input.chkDissonance.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_dissonant.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_dissonant.txt", Properties.Resources.samp_dissonant);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_dissonant.txt")) {
-                File.Delete($@"{workingfolder}\samp_dissonant.txt");
-            }
-            //Global Drones
-            if (input.chkGlobal.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_globaldrones.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_globaldrones.txt", Properties.Resources.samp_globaldrones);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_globaldrones.txt")) {
-                File.Delete($@"{workingfolder}\samp_globaldrones.txt");
-            }
-            //Rests
-            if (input.chkRests.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_rests.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_rests.txt", Properties.Resources.samp_rests);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_rests.txt")) {
-                File.Delete($@"{workingfolder}\samp_rests.txt");
-            }
-            //Misc
-            if (input.chkMisc.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_misc.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_misc.txt", Properties.Resources.samp_misc);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_misc.txt")) {
-                File.Delete($@"{workingfolder}\samp_misc.txt");
-            }
-            ///
-            ///create a default master file and open it
-            if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
-                _loadedmaster = $@"{levelpath}\master_sequin.txt";
-                WriteMaster();
-                btnWorkRefresh_Click(null, null);
-            }
         }
 
         ///FORM RESIZE
@@ -526,9 +382,9 @@ namespace Thumper_Custom_Level_Editor
                 _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt"), "#.*", ""));
             }
             catch { }
-            DialogInput customlevel = new DialogInput();
+            DialogInput customlevel = new DialogInput(this);
             //set the form text fields to whatever is in LEVEL DETAILS
-            customlevel.txtCustomPath.Text = workingfolder;
+            customlevel.txtCustomPath.Text = Path.GetDirectoryName(workingfolder);
             customlevel.btnCustomSave.Enabled = true;
             //if the LEVEL DETAILS file is missing, or missing parameters, this fill fill the blanks will empty space
             customlevel.txtCustomName.Text = _load.ContainsKey("level_name") ? (string)_load["level_name"] : "";
@@ -550,11 +406,7 @@ namespace Thumper_Custom_Level_Editor
             customlevel.chkRests.Checked = File.Exists($@"{workingfolder}\samp_rests.txt");
             customlevel.chkMisc.Checked = File.Exists($@"{workingfolder}\samp_misc.txt");
             //show the new level folder dialog box
-            if (customlevel.ShowDialog() == DialogResult.OK) {
-                //if all OK, populate new JObject with data from the form
-                CreateCustomLevelFolder(customlevel);
-            }
-            customlevel.Dispose();
+            customlevel.Show();
         }
 
         private void regenerateDefaultFilesToolStripMenuItem_Click(object sender, EventArgs e)
