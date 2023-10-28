@@ -218,7 +218,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-		{
+		{/*
 			if (e.ColumnIndex != -1 && e.RowIndex != -1)
 				return;
 			trackEditor.CellPainting -= trackEditor_CellPainting;
@@ -228,7 +228,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 				catch (Exception ex) { }
 			}
-			trackEditor.CellPainting += trackEditor_CellPainting;
+			trackEditor.CellPainting += trackEditor_CellPainting;*/
 		}
 		//Cell click, insert values if track is BOOL
 		private void trackEditor_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -776,6 +776,7 @@ namespace Thumper_Custom_Level_Editor
 				footer = objmatch.footer,
 				default_interp = "kTraitInterpLinear"
 			};
+			trackEditor.Rows[_selecttrack].HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color)), Color.Black, 0.4);
 			//alter the data if it's a sample object being added. Save the sample name instead
 			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
 				_tracks[_selecttrack].obj_name = dropTrackLane.SelectedValue.ToString() + ".samp";
@@ -795,8 +796,10 @@ namespace Thumper_Custom_Level_Editor
 			PlaySound("UIcoloropen");
 			DialogResult result = colorDialog1.ShowDialog();
 			if (result == DialogResult.OK) {
-				btnTrackColorDialog.BackColor = colorDialog1.Color;
-				_tracks[_selecttrack].highlight_color = colorDialog1.Color.ToArgb().ToString();
+				var selectedcolor = colorDialog1.Color;
+				btnTrackColorDialog.BackColor = selectedcolor;
+				trackEditor.CurrentRow.HeaderCell.Style.BackColor = Blend(selectedcolor, Color.Black, 0.4);
+					_tracks[_selecttrack].highlight_color = selectedcolor.ToArgb().ToString();
 				//sets flag that leaf has unsaved changes
 				PlaySound("UIcolorapply");
 				SaveLeaf(false);
@@ -1286,7 +1289,7 @@ namespace Thumper_Custom_Level_Editor
 						//pass _griddata per row to be imported to the DGV
 						TrackRawImport(r, _tracks[r.Index].data_points);
 						TrackUpdateHighlighting(r);
-						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), r.HeaderCell.Style.BackColor, 0.4);
+						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), Color.Black, 0.4);
 					}
 				}
 				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}\n\n{ex}"); }
