@@ -831,6 +831,62 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to {
+        ///  &quot;obj_type&quot;: &quot;SequinLeaf&quot;,
+        ///  &quot;obj_name&quot;: &quot;multitrack_new.leaf&quot;,
+        ///  &quot;seq_objs&quot;: [
+        ///    {
+        ///      &quot;obj_name&quot;: &quot;multitrack_new.leaf&quot;,
+        ///      &quot;param_path&quot;: &quot;pitch&quot;,
+        ///      &quot;trait_type&quot;: &quot;kTraitFloat&quot;,
+        ///      &quot;default_interp&quot;: &quot;kTraitInterpLinear&quot;,
+        ///      &quot;data_points&quot;: {},
+        ///      &quot;step&quot;: &quot;True&quot;,
+        ///      &quot;default&quot;: 1.25,
+        ///      &quot;footer&quot;: &quot;4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0&quot;,
+        ///      &quot;editor_data&quot;: [
+        ///        &quot;-1710619&quot;,
+        ///        1.0
+        ///      ]
+        ///    },
+        ///    {
+        ///      &quot;obj_name&quot;: &quot;m [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string leaf_multitrack_new {
+            get {
+                return ResourceManager.GetString("leaf_multitrack_new", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;obj_type&quot;: &quot;SequinLeaf&quot;,
+        ///  &quot;obj_name&quot;: &quot;multitrack_barring.leaf&quot;,
+        ///  &quot;seq_objs&quot;: [
+        ///    {
+        ///      &quot;obj_name&quot;: &quot;multitrack_barring.leaf&quot;,
+        ///      &quot;param_path&quot;: &quot;pitch&quot;,
+        ///      &quot;trait_type&quot;: &quot;kTraitFloat&quot;,
+        ///      &quot;default_interp&quot;: &quot;kTraitInterpLinear&quot;,
+        ///      &quot;data_points&quot;: {},
+        ///      &quot;step&quot;: &quot;True&quot;,
+        ///      &quot;default&quot;: 1.25,
+        ///      &quot;footer&quot;: &quot;4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0&quot;,
+        ///      &quot;editor_data&quot;: [
+        ///        &quot;-1710619&quot;,
+        ///        1.0
+        ///      ]
+        ///    },
+        ///    {
+        ///      &quot;obj_n [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string leaf_multitrack_ring_bar {
+            get {
+                return ResourceManager.GetString("leaf_multitrack_ring_bar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
         ///&apos;obj_type&apos;: &apos;SequinLeaf&apos;,
         ///&apos;obj_name&apos;: &apos;pyramid_outro.leaf&apos;,
         ///&apos;seq_objs&apos;: [
@@ -853,6 +909,34 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static string leaf_singletrack {
             get {
                 return ResourceManager.GetString("leaf_singletrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;obj_type&quot;: &quot;SequinLeaf&quot;,
+        ///  &quot;obj_name&quot;: &quot;singletrack_new.leaf&quot;,
+        ///  &quot;seq_objs&quot;: [
+        ///    {
+        ///      &quot;obj_name&quot;: &quot;singletrack_new.leaf&quot;,
+        ///      &quot;param_path&quot;: &quot;pitch&quot;,
+        ///      &quot;trait_type&quot;: &quot;kTraitFloat&quot;,
+        ///      &quot;default_interp&quot;: &quot;kTraitInterpLinear&quot;,
+        ///      &quot;data_points&quot;: {},
+        ///      &quot;step&quot;: &quot;True&quot;,
+        ///      &quot;default&quot;: 1.25,
+        ///      &quot;footer&quot;: &quot;4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0&quot;,
+        ///      &quot;editor_data&quot;: [
+        ///        &quot;-1710619&quot;,
+        ///        1.0
+        ///      ]
+        ///    },
+        ///    {
+        ///      &quot;obj_name&quot;:  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string leaf_singletrack_new {
+            get {
+                return ResourceManager.GetString("leaf_singletrack_new", resourceCulture);
             }
         }
         

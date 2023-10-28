@@ -1,0 +1,106 @@
+{
+  "obj_type": "SequinLeaf",
+  "obj_name": "singletrack_new.leaf",
+  "seq_objs": [
+    {
+      "obj_name": "singletrack_new.leaf",
+      "param_path": "pitch",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 1.25,
+      "footer": "4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1710619",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "singletrack_new.leaf",
+      "param_path": "roll",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-5460820",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "singletrack_new.leaf",
+      "param_path": "turn",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-65536",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "singletrack_new.leaf",
+      "param_path": "turn_auto",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1982015",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "thump.spn",
+      "param_path": "thump_rails.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16776961",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable.spn",
+      "param_path": "grindable_still.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8372160",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ducker.spn",
+      "param_path": "ducker_crak.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16711681",
+        1.0
+      ]
+    }
+  ],
+  "beat_cnt": 32,
+  "time_sig": "4/4"
+}

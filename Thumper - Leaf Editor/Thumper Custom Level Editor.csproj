@@ -332,6 +332,9 @@
     <None Include="image assets\D6.png" />
     <None Include="image assets\D7.png" />
     <None Include="image assets\icon-explorer.png" />
+    <None Include="text assets\leaf_multitrack_new.txt" />
+    <None Include="text assets\leaf_multitrack_ring&amp;bar.txt" />
+    <None Include="text assets\leaf_singletrack_new.txt" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

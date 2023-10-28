@@ -9,8 +9,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using NAudio.Wave;
-using NAudio.Vorbis;
+using System.Diagnostics;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -192,9 +191,7 @@ namespace Thumper_Custom_Level_Editor
 
             ///Create directory for leaf templates
             if (!Directory.Exists(@"templates")) {
-                Directory.CreateDirectory(@"templates");
-                File.WriteAllText(@"templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
-                File.WriteAllText(@"templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
+                regenerateTemplateFilesToolStripMenuItem_Click(null, null);
             }
             if (!Directory.Exists(@"temp")) {
                 Directory.CreateDirectory(@"temp");
@@ -262,6 +259,15 @@ namespace Thumper_Custom_Level_Editor
         ///END DOUBLEBUFFERING
         /// 
 
+        private void regenerateTemplateFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(@"templates")) {
+                Directory.CreateDirectory(@"templates");
+            }
+            File.WriteAllText(@"templates\leaf_singletrack_new.txt", Properties.Resources.leaf_singletrack_new);
+            File.WriteAllText(@"templates\leaf_multitrack_new.txt", Properties.Resources.leaf_multitrack_new);
+            File.WriteAllText(@"templates\leaf_multitrack_ring&bar.txt", Properties.Resources.leaf_multitrack_ring_bar);
+        }
 
         ///Toolstrip - FILE
         private void SaveAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -353,10 +359,6 @@ namespace Thumper_Custom_Level_Editor
             DialogInput customlevel = new DialogInput(this);
             //show the new level folder dialog box
             customlevel.Show();
-        }
-
-        public static void CustomLevelCallback(string path)
-        {
         }
 
         ///FORM RESIZE
@@ -628,6 +630,15 @@ namespace Thumper_Custom_Level_Editor
                     e.Graphics.DrawString(cbx.Items[e.Index].ToString(), cbx.Font, brush, e.Bounds, sf);
                 }
             }
+        }
+
+        private void openTemplateFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo {
+                Arguments = workingfolder,
+                FileName = "explorer.exe"
+            };
+            Process.Start(startInfo);
         }
     }
 }
