@@ -208,7 +208,7 @@ namespace Thumper_Custom_Level_Editor
 			var _save = SampleBuildSave();
 			File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveSample(true, true);
-			lblSampleEditor.Text = $"Sample Editor - {_loadedsample}";
+			lblSampleEditor.Text = $"Sample Editor - {Path.GetFileNameWithoutExtension(_loadedsample)}";
 		}
 
 		///Detect dragon-and-drop of files and then load them to Sample files
