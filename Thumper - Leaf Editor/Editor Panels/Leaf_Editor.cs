@@ -83,6 +83,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			for (int i = 0; i < trackEditor.Rows.Count; i++) {
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
+				vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 10;
 			}
 		}
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
