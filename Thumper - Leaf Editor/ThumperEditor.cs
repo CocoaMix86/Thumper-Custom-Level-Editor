@@ -635,7 +635,7 @@ namespace Thumper_Custom_Level_Editor
         private void openTemplateFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo {
-                Arguments = workingfolder,
+                Arguments = $@"{Path.GetDirectoryName(Application.ExecutablePath)}\templates",
                 FileName = "explorer.exe"
             };
             Process.Start(startInfo);
