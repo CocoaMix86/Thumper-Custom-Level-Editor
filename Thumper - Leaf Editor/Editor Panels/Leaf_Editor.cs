@@ -136,7 +136,8 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void vScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
-			trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue) / 10;
+			if (trackEditor.FirstDisplayedScrollingRowIndex != -1)
+				trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue) / 10;
 		}
 		///DATAGRIDVIEW - TRACK EDITOR
 		//Row changed
