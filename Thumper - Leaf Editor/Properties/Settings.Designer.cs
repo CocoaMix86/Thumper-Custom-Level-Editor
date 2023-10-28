@@ -561,5 +561,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["leafautoinsert"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int leafzoomvert {
+            get {
+                return ((int)(this["leafzoomvert"]));
+            }
+            set {
+                this["leafzoomvert"] = value;
+            }
+        }
     }
 }

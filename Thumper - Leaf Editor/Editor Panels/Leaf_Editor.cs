@@ -45,6 +45,7 @@ namespace Thumper_Custom_Level_Editor
 		public bool loadingleaf = false;
 		public bool controldown = false;
 		public bool shiftdown = false;
+		public int leafeditorcell = 0;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
@@ -88,16 +89,30 @@ namespace Thumper_Custom_Level_Editor
 		{
 			trackEditor.Focus();
 			int scollindex = trackEditor.FirstDisplayedScrollingColumnIndex;
+			int scollrowindex = trackEditor.FirstDisplayedScrollingRowIndex;
 			int horiz = trackZoom.Value;
 			int vert = trackZoomVert.Value;
 			int scrollLines = SystemInformation.MouseWheelScrollLines;
 
 			if (!controldown && !shiftdown) {
-				if (e.Delta > 0) {
-					trackEditor.FirstDisplayedScrollingColumnIndex = Math.Max(0, scollindex - scrollLines);
+				if (trackEditor.FirstDisplayedScrollingRowIndex == -1 || trackEditor.FirstDisplayedScrollingColumnIndex == -1)
+					return;
+				if (leafeditorcell != -1) {
+					if (e.Delta > 0) {
+						trackEditor.FirstDisplayedScrollingColumnIndex = Math.Max(0, scollindex - scrollLines);
+					}
+					else if (e.Delta < 0) {
+						trackEditor.FirstDisplayedScrollingColumnIndex = Math.Min(trackEditor.ColumnCount, scollindex + scrollLines);
+					}
 				}
-				else if (e.Delta < 0) {
-					trackEditor.FirstDisplayedScrollingColumnIndex = Math.Min(trackEditor.ColumnCount, scollindex + scrollLines);
+				else {
+					if (e.Delta > 0) {
+						trackEditor.FirstDisplayedScrollingRowIndex = Math.Max(0, scollrowindex - scrollLines);
+					}
+					else if (e.Delta < 0) {
+						trackEditor.FirstDisplayedScrollingRowIndex = Math.Min(trackEditor.RowCount, scollrowindex + scrollLines);
+					}
+					vScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingRowIndex * 10;
 				}
 			}
 			else {
@@ -114,6 +129,14 @@ namespace Thumper_Custom_Level_Editor
 					trackZoomVert.Value = Math.Min(100, vert + scrollLines);
 				}
 			}
+		}
+		private void trackEditor_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+		{
+			leafeditorcell = e.ColumnIndex;
+		}
+		private void vScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
+		{
+			trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue) / 10;
 		}
 		///DATAGRIDVIEW - TRACK EDITOR
 		//Row changed
@@ -217,19 +240,6 @@ namespace Thumper_Custom_Level_Editor
 			e.ThrowException = false;
 		}
 
-		private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-		{/*
-			if (e.ColumnIndex != -1 && e.RowIndex != -1)
-				return;
-			trackEditor.CellPainting -= trackEditor_CellPainting;
-			if (e.ColumnIndex == -1 && e.RowIndex != -1) {
-				try {
-
-				}
-				catch (Exception ex) { }
-			}
-			trackEditor.CellPainting += trackEditor_CellPainting;*/
-		}
 		//Cell click, insert values if track is BOOL
 		private void trackEditor_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
@@ -1298,7 +1308,10 @@ namespace Thumper_Custom_Level_Editor
 			EnableLeafButtons(true);
 			//re-set the zoom level
 			trackZoom_Scroll(null, null);
+			trackZoomVert_Scroll(null, null);
 			//set scrollbar positions (if set last time this leaf was open)
+			vScrollBarTrackEditor.Visible = true;
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 10;
 			trackEditor.RowHeadersWidth = trackEditor.RowHeadersWidth;
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
 			try {

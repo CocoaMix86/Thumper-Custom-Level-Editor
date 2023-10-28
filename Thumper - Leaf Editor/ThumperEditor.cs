@@ -109,6 +109,7 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.Recentfiles = new List<string>();
             //event handler needed for dgv
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
+            //
         }
         ///EXIT APP
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
@@ -152,6 +153,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.splitterVert4 = splitBottom2.SplitterDistance;
             //zoom settings
             Properties.Settings.Default.leafzoom = trackZoom.Value;
+            Properties.Settings.Default.leafzoomvert = trackZoomVert.Value;
             Properties.Settings.Default.lvlzoom = trackLvlVolumeZoom.Value;
             Properties.Settings.Default.leafautoinsert = btnLeafAutoPlace.Checked;
 
@@ -237,6 +239,7 @@ namespace Thumper_Custom_Level_Editor
             panelBeeble.Location = Properties.Settings.Default.beebleloc;
             //zoom settings
             trackZoom.Value = Properties.Settings.Default.leafzoom;
+            trackZoomVert.Value = Properties.Settings.Default.leafzoomvert;
             trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
             btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
 
