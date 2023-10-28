@@ -883,6 +883,7 @@ namespace Thumper_Custom_Level_Editor
 			TrackUpdateHighlighting(trackEditor.Rows[_listcell[0].RowIndex]);
 			//re-enable this
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+			SaveLeaf(false);
 		}
 
 		private void btnLeafColors_Click(object sender, EventArgs e)
