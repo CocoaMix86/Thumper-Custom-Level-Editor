@@ -212,6 +212,11 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
+		private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
+		{
+			e.ThrowException = false;
+		}
+
 		private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
 			if (e.ColumnIndex != -1 && e.RowIndex != -1)
