@@ -1532,11 +1532,11 @@
             this.trackEditor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -1548,7 +1548,7 @@
             dataGridViewCellStyle2.NullValue = null;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = System.Drawing.Color.Black;
@@ -1576,6 +1576,7 @@
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseClick);
             this.trackEditor.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellMouseEnter);
+            this.trackEditor.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.trackEditor_CellPainting);
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
             this.trackEditor.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             this.trackEditor.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.trackEditor_DataError);

@@ -643,5 +643,23 @@ namespace Thumper_Custom_Level_Editor
             };
             Process.Start(startInfo);
         }
+
+        private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
+                var cellText = e.Value.ToString();
+                for (var fontSize = 1; fontSize < 25; fontSize++) {
+                    var font = new Font("Consolas", fontSize);
+                    var textSize = TextRenderer.MeasureText(cellText, font);
+                    if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height - 2 || fontSize == 24) {
+                        font = new Font("Consolas", fontSize - 1);
+                        e.CellStyle.Font = font;
+                        e.Paint(e.CellBounds, e.PaintParts);
+                        e.Handled = true;
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

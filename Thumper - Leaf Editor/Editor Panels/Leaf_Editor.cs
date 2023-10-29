@@ -67,7 +67,25 @@ namespace Thumper_Custom_Level_Editor
 			//stretches panel to fit window
 			panelLeaf.Size = new Size(this.Size.Width - panelLeaf.Location.X - 15, panelLeaf.Size.Height);
 		}
-		///TRACKBAR ZOOM
+
+		///
+		///TRACKBAR ZOOM AND SCROLLING
+		///DETECT SCROLL
+		private void AddScrollListener(DataGridView dgv, ScrollEventHandler scrollEventHandler)
+		{
+			HScrollBar scrollBar = dgv.Controls.OfType<HScrollBar>().First();
+			VScrollBar vscrollBar = dgv.Controls.OfType<VScrollBar>().First();
+			scrollBar.Scroll += scrollEventHandler;
+			vscrollBar.Scroll += scrollEventHandler;
+		}
+		private void trackEditor_Scroll(object sender, ScrollEventArgs e)
+		{
+			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
+			if (match != -1)
+				_scrollpositions[match] = new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex);
+			else
+				_scrollpositions.Add(new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex));
+		}
 		private void btnLeafZoom_Click(object sender, EventArgs e)
 		{
 			PlaySound("UIselect");
@@ -83,6 +101,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			for (int i = 0; i < trackEditor.Rows.Count; i++) {
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
+				vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
 				vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 10;
 			}
 		}
@@ -140,6 +159,9 @@ namespace Thumper_Custom_Level_Editor
 			if (trackEditor.FirstDisplayedScrollingRowIndex != -1)
 				trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue) / 10;
 		}
+		///
+		/// 
+		
 		///DATAGRIDVIEW - TRACK EDITOR
 		//Row changed
 		private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -361,8 +383,8 @@ namespace Thumper_Custom_Level_Editor
 		private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
-				if (_tracks[trackEditor.CurrentRow?.Index ?? 0].highlight_color == null)
-					btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(objectcolors.FirstOrDefault(x => x.Item1 == dropParamPath.Text)?.Item2 ?? "-8355585"));
+				//if (_tracks[trackEditor.CurrentRow?.Index ?? 0].highlight_color == null)
+				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(objectcolors.FirstOrDefault(x => x.Item1 == dropParamPath.Text)?.Item2 ?? "-8355585"));
 				//if the param_path is .ent, enable lane choice
 				if (_objects.Where(obj => obj.param_displayname == dropParamPath.Text).First().param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
 					dropTrackLane.Enabled = true;
@@ -521,26 +543,6 @@ namespace Thumper_Custom_Level_Editor
 		{
 			_tracks[trackEditor.CurrentRow.Index].default_interp = dropLeafInterp.Text;
 			SaveLeaf(false);
-		}
-
-		///DETECT SCROLL
-		private void trackEditor_Scroll(object sender, ScrollEventArgs e)
-		{
-			if (e.Type != ScrollEventType.EndScroll)
-				return;
-
-			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
-			if (match != -1)
-				_scrollpositions[match] = new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex);
-			else
-				_scrollpositions.Add(new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex));
-		}
-		private void AddScrollListener(DataGridView dgv, ScrollEventHandler scrollEventHandler)
-		{
-			HScrollBar scrollBar = dgv.Controls.OfType<HScrollBar>().First();
-			VScrollBar vscrollBar = dgv.Controls.OfType<VScrollBar>().First();
-			scrollBar.Scroll += scrollEventHandler;
-			vscrollBar.Scroll += scrollEventHandler;
 		}
 		#endregion
 		#region Buttons
@@ -783,7 +785,7 @@ namespace Thumper_Custom_Level_Editor
 				_default = float.Parse(objmatch.def),
 				step = objmatch.step,
 				trait_type = objmatch.trait_type,
-				highlight_color = _tracks[_selecttrack].highlight_color ?? $"{btnTrackColorDialog.BackColor.ToArgb()}",
+				highlight_color = $"{btnTrackColorDialog.BackColor.ToArgb()}",
 				highlight_value = 1,
 				footer = objmatch.footer,
 				default_interp = "kTraitInterpLinear"
@@ -800,6 +802,7 @@ namespace Thumper_Custom_Level_Editor
 			//change row header to reflect what the track is
 			PlaySound("UIobjectadd");
 			ChangeTrackName();
+			TrackUpdateHighlighting(trackEditor.Rows[_selecttrack]);
 			SaveLeaf(false);
 		}
 		///Sets highlighting color of current track
@@ -882,8 +885,8 @@ namespace Thumper_Custom_Level_Editor
 				_listcell = new List<DataGridViewCell>() { _cells[1], _cells[0] };
 			}
 			//basic math to figure out the rate of change across the amount of beats between selections
-			decimal _start = decimal.TryParse($"{_listcell[0].Value}", out decimal i) ? i : 0;
-			decimal _end = decimal.TryParse($"{_listcell[1].Value}", out decimal j) ? j : 0;
+			decimal _start = (decimal?)_listcell[0].Value ?? (decimal)_tracks[_listcell[0].RowIndex]._default;
+			decimal _end = (decimal?)_listcell[1].Value ?? (decimal)_tracks[_listcell[0].RowIndex]._default;
 			decimal _inc = _start;
 			int _beats = _listcell[1].ColumnIndex - _listcell[0].ColumnIndex;
 			decimal _diff = (_end - _start) / _beats;
@@ -1312,8 +1315,6 @@ namespace Thumper_Custom_Level_Editor
 			trackZoom_Scroll(null, null);
 			trackZoomVert_Scroll(null, null);
 			//set scrollbar positions (if set last time this leaf was open)
-			vScrollBarTrackEditor.Visible = true;
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 10;
 			trackEditor.RowHeadersWidth = trackEditor.RowHeadersWidth;
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
 			try {
