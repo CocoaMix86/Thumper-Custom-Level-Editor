@@ -661,5 +661,11 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
+
+        private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
+        {
+            hScrollBarTrackEditor.Location = new Point(trackEditor.Location.X + trackEditor.RowHeadersWidth, hScrollBarTrackEditor.Location.Y);
+            hScrollBarTrackEditor.Width = trackEditor.Width - trackEditor.RowHeadersWidth;
+        }
     }
 }
