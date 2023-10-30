@@ -651,10 +651,11 @@ namespace Thumper_Custom_Level_Editor
                 for (var fontSize = 1; fontSize < 25; fontSize++) {
                     var font = new Font("Consolas", fontSize);
                     var textSize = TextRenderer.MeasureText(cellText, font);
-                    if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height - 2 || fontSize == 24) {
-                        font = new Font("Consolas", fontSize - 1);
+                    if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
+                        if (fontSize - 1 != 0)
+                            font = new Font("Consolas", fontSize - 1);
                         e.CellStyle.Font = font;
-                        e.Paint(e.CellBounds, e.PaintParts);
+                        e.Paint(e.ClipBounds, e.PaintParts);
                         e.Handled = true;
                         break;
                     }
