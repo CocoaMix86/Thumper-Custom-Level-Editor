@@ -75,8 +75,8 @@ namespace Thumper_Custom_Level_Editor
 		{
 			HScrollBar scrollBar = dgv.Controls.OfType<HScrollBar>().First();
 			VScrollBar vscrollBar = dgv.Controls.OfType<VScrollBar>().First();
-			scrollBar.Scroll += scrollEventHandler;
-			vscrollBar.Scroll += scrollEventHandler;
+			//scrollBar.Scroll += scrollEventHandler;
+			//vscrollBar.Scroll += scrollEventHandler;
 		}
 		private void trackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
@@ -95,6 +95,8 @@ namespace Thumper_Custom_Level_Editor
 		{
 			for (int i = 0; i < _beats; i++) {
 				trackEditor.Columns[i].Width = trackZoom.Value;
+				hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
+				hScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedColumnCount(false) + 1) * 10;
 			}
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
@@ -159,9 +161,14 @@ namespace Thumper_Custom_Level_Editor
 			if (trackEditor.FirstDisplayedScrollingRowIndex != -1)
 				trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue) / 10;
 		}
+		private void hScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
+		{
+			if (trackEditor.FirstDisplayedScrollingColumnIndex != -1)
+				trackEditor.FirstDisplayedScrollingColumnIndex = (e.NewValue) / 10;
+		}
 		///
 		/// 
-		
+
 		///DATAGRIDVIEW - TRACK EDITOR
 		//Row changed
 		private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
