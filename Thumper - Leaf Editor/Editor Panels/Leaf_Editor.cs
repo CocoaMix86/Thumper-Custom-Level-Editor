@@ -52,6 +52,7 @@ namespace Thumper_Custom_Level_Editor
 		private List<Object_Params> _objects = new List<Object_Params>();
 		private List<Tuple<string, string>> objectcolors = new List<Tuple<string, string>>();
 		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02" };
+		public List<string> _tracklanefriendly = new List<string>() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
 		public List<Tuple<string, int, int>> _scrollpositions = new List<Tuple<string, int, int>>();
 		public Sequencer_Object clipboard_track;
 		public DataGridViewRow clipboard_row;
@@ -367,7 +368,7 @@ namespace Thumper_Custom_Level_Editor
 			//this is only here to stop that
 			try {
 				label11.Text = "Lane";
-				dropTrackLane.DataSource = new List<string>() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
+				dropTrackLane.DataSource = _tracklanefriendly;
 				//when an object is chosen, unlock the param_path options and set datasource
 				dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
 				//switch index back and forth to trigger event
@@ -1264,6 +1265,7 @@ namespace Thumper_Custom_Level_Editor
 				dropTimeSig.Items.Add(_time_sig);
 			}
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
+			dropTrackLane.DataSource = _tracklanefriendly;
 			//each object in the seq_objs[] list becomes a track
 			foreach (var seq_obj in _load["seq_objs"]) {
 				Sequencer_Object _s = new Sequencer_Object() {
