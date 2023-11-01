@@ -1331,12 +1331,13 @@ namespace Thumper_Custom_Level_Editor
 			try {
 				trackEditor.FirstDisplayedScrollingRowIndex = 0;
 				trackEditor.FirstDisplayedScrollingColumnIndex = 0;
-			} catch { }
-			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
-			if (match != -1) {
-				trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
-				trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;
+				var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
+				if (match != -1) {
+					trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
+					trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;
+				}
 			}
+			catch { }
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			//set save flag to true, since it just barely loaded
 			//SaveLeaf(true);
