@@ -220,6 +220,7 @@ namespace Thumper_Custom_Level_Editor
             }
             ///
             ///create a default master file and open it
+            mainform.workingfolder = workingfolder;
             if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
                 mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
                 mainform.WriteMaster();

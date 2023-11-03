@@ -154,8 +154,8 @@
             this.trackZoomVert = new System.Windows.Forms.TrackBar();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
-            this.hScrollBarTrackEditor = new System.Windows.Forms.HScrollBar();
             this.vScrollBarTrackEditor = new System.Windows.Forms.VScrollBar();
+            this.hScrollBarTrackEditor = new System.Windows.Forms.HScrollBar();
             this.toolstripTitleLeaf = new System.Windows.Forms.ToolStrip();
             this.lblTrackFileName = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveLeaf = new System.Windows.Forms.ToolStripButton();
@@ -338,8 +338,6 @@
             this.dropGateBoss = new System.Windows.Forms.ComboBox();
             this.label36 = new System.Windows.Forms.Label();
             this.gateLvlList = new System.Windows.Forms.DataGridView();
-            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.panelWorkingFolder = new System.Windows.Forms.Panel();
             this.toolstripTitleWork = new System.Windows.Forms.ToolStrip();
             this.lblWorkingFolder = new System.Windows.Forms.ToolStripLabel();
@@ -434,6 +432,8 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLevelFolder2 = new System.Windows.Forms.ToolStripButton();
+            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -1654,9 +1654,9 @@
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLeaf.Controls.Add(this.panelZoom);
             this.panelLeaf.Controls.Add(this.vScrollBarTrackEditor);
             this.panelLeaf.Controls.Add(this.hScrollBarTrackEditor);
-            this.panelLeaf.Controls.Add(this.panelZoom);
             this.panelLeaf.Controls.Add(this.trackEditor);
             this.panelLeaf.Controls.Add(this.toolstripTitleLeaf);
             this.panelLeaf.Controls.Add(this.numericUpDown_LeafLength);
@@ -1680,16 +1680,6 @@
             this.panelLeaf.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLeaf.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
-            // hScrollBarTrackEditor
-            // 
-            this.hScrollBarTrackEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.hScrollBarTrackEditor.Location = new System.Drawing.Point(362, 437);
-            this.hScrollBarTrackEditor.Name = "hScrollBarTrackEditor";
-            this.hScrollBarTrackEditor.Size = new System.Drawing.Size(663, 15);
-            this.hScrollBarTrackEditor.TabIndex = 145;
-            this.hScrollBarTrackEditor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBarTrackEditor_Scroll);
-            // 
             // vScrollBarTrackEditor
             // 
             this.vScrollBarTrackEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1700,6 +1690,16 @@
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBarTrackEditor_Scroll);
+            // 
+            // hScrollBarTrackEditor
+            // 
+            this.hScrollBarTrackEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hScrollBarTrackEditor.Location = new System.Drawing.Point(362, 437);
+            this.hScrollBarTrackEditor.Name = "hScrollBarTrackEditor";
+            this.hScrollBarTrackEditor.Size = new System.Drawing.Size(663, 15);
+            this.hScrollBarTrackEditor.TabIndex = 145;
+            this.hScrollBarTrackEditor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBarTrackEditor_Scroll);
             // 
             // toolstripTitleLeaf
             // 
@@ -4209,13 +4209,13 @@
             // 
             this.lblPyramidWarn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPyramidWarn.AutoSize = true;
-            this.lblPyramidWarn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPyramidWarn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPyramidWarn.ForeColor = System.Drawing.Color.Red;
-            this.lblPyramidWarn.Location = new System.Drawing.Point(34, 184);
+            this.lblPyramidWarn.Location = new System.Drawing.Point(88, 23);
             this.lblPyramidWarn.Name = "lblPyramidWarn";
-            this.lblPyramidWarn.Size = new System.Drawing.Size(230, 20);
+            this.lblPyramidWarn.Size = new System.Drawing.Size(196, 16);
             this.lblPyramidWarn.TabIndex = 134;
-            this.lblPyramidWarn.Text = "Pyramid requires 5 phases!!";
+            this.lblPyramidWarn.Text = "Pyramid requires 5 phases!";
             // 
             // gateToolStrip
             // 
@@ -4233,7 +4233,7 @@
             this.btnGateLvlUp,
             this.btnGateLvlDown});
             this.gateToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.gateToolStrip.Location = new System.Drawing.Point(3, 159);
+            this.gateToolStrip.Location = new System.Drawing.Point(3, 175);
             this.gateToolStrip.Name = "gateToolStrip";
             this.gateToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.gateToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -4300,7 +4300,7 @@
             this.btnGateOpenRestart.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenRestart.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnGateOpenRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 271);
+            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 283);
             this.btnGateOpenRestart.Name = "btnGateOpenRestart";
             this.btnGateOpenRestart.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenRestart.TabIndex = 133;
@@ -4319,7 +4319,7 @@
             this.btnGateOpenPost.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenPost.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnGateOpenPost.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 249);
+            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 261);
             this.btnGateOpenPost.Name = "btnGateOpenPost";
             this.btnGateOpenPost.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPost.TabIndex = 132;
@@ -4338,7 +4338,7 @@
             this.btnGateOpenPre.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenPre.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnGateOpenPre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 227);
+            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 239);
             this.btnGateOpenPre.Name = "btnGateOpenPre";
             this.btnGateOpenPre.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPre.TabIndex = 119;
@@ -4355,7 +4355,7 @@
             this.lblGateSectionHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblGateSectionHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGateSectionHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblGateSectionHelp.Location = new System.Drawing.Point(289, 283);
+            this.lblGateSectionHelp.Location = new System.Drawing.Point(289, 307);
             this.lblGateSectionHelp.Name = "lblGateSectionHelp";
             this.lblGateSectionHelp.Size = new System.Drawing.Size(15, 16);
             this.lblGateSectionHelp.TabIndex = 131;
@@ -4378,7 +4378,7 @@
             "SECTION_BOSS_CRAKHED",
             "SECTION_BOSS_CRAKHED_FINAL",
             "SECTION_BOSS_PYRAMID"});
-            this.dropGateSection.Location = new System.Drawing.Point(85, 294);
+            this.dropGateSection.Location = new System.Drawing.Point(85, 306);
             this.dropGateSection.Name = "dropGateSection";
             this.dropGateSection.Size = new System.Drawing.Size(204, 21);
             this.dropGateSection.TabIndex = 129;
@@ -4394,7 +4394,7 @@
             this.dropGateRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateRestart.ForeColor = System.Drawing.Color.White;
             this.dropGateRestart.FormattingEnabled = true;
-            this.dropGateRestart.Location = new System.Drawing.Point(85, 272);
+            this.dropGateRestart.Location = new System.Drawing.Point(85, 284);
             this.dropGateRestart.Name = "dropGateRestart";
             this.dropGateRestart.Size = new System.Drawing.Size(136, 21);
             this.dropGateRestart.TabIndex = 128;
@@ -4410,7 +4410,7 @@
             this.dropGatePost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGatePost.ForeColor = System.Drawing.Color.White;
             this.dropGatePost.FormattingEnabled = true;
-            this.dropGatePost.Location = new System.Drawing.Point(85, 250);
+            this.dropGatePost.Location = new System.Drawing.Point(85, 262);
             this.dropGatePost.Name = "dropGatePost";
             this.dropGatePost.Size = new System.Drawing.Size(136, 21);
             this.dropGatePost.TabIndex = 127;
@@ -4426,7 +4426,7 @@
             this.dropGatePre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGatePre.ForeColor = System.Drawing.Color.White;
             this.dropGatePre.FormattingEnabled = true;
-            this.dropGatePre.Location = new System.Drawing.Point(85, 228);
+            this.dropGatePre.Location = new System.Drawing.Point(85, 240);
             this.dropGatePre.Name = "dropGatePre";
             this.dropGatePre.Size = new System.Drawing.Size(136, 21);
             this.dropGatePre.TabIndex = 126;
@@ -4439,7 +4439,7 @@
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label44.ForeColor = System.Drawing.Color.White;
-            this.label44.Location = new System.Drawing.Point(7, 296);
+            this.label44.Location = new System.Drawing.Point(7, 308);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(77, 15);
             this.label44.TabIndex = 125;
@@ -4451,7 +4451,7 @@
             this.label43.AutoSize = true;
             this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label43.ForeColor = System.Drawing.Color.White;
-            this.label43.Location = new System.Drawing.Point(20, 274);
+            this.label43.Location = new System.Drawing.Point(20, 286);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(64, 15);
             this.label43.TabIndex = 124;
@@ -4465,7 +4465,7 @@
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label42.ForeColor = System.Drawing.Color.White;
-            this.label42.Location = new System.Drawing.Point(35, 252);
+            this.label42.Location = new System.Drawing.Point(35, 264);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(49, 15);
             this.label42.TabIndex = 123;
@@ -4479,7 +4479,7 @@
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.White;
-            this.label41.Location = new System.Drawing.Point(40, 229);
+            this.label41.Location = new System.Drawing.Point(40, 241);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(44, 15);
             this.label41.TabIndex = 122;
@@ -4493,7 +4493,7 @@
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.Silver;
-            this.label40.Location = new System.Drawing.Point(82, 187);
+            this.label40.Location = new System.Drawing.Point(82, 199);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(102, 15);
             this.label40.TabIndex = 121;
@@ -4505,7 +4505,7 @@
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(50, 207);
+            this.label38.Location = new System.Drawing.Point(50, 219);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(34, 15);
             this.label38.TabIndex = 117;
@@ -4520,7 +4520,7 @@
             this.dropGateBoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateBoss.ForeColor = System.Drawing.Color.White;
             this.dropGateBoss.FormattingEnabled = true;
-            this.dropGateBoss.Location = new System.Drawing.Point(85, 206);
+            this.dropGateBoss.Location = new System.Drawing.Point(85, 218);
             this.dropGateBoss.Name = "dropGateBoss";
             this.dropGateBoss.Size = new System.Drawing.Size(136, 21);
             this.dropGateBoss.TabIndex = 117;
@@ -4590,35 +4590,17 @@
             dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gateLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            this.gateLvlList.RowHeadersVisible = false;
             this.gateLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gateLvlList.Size = new System.Drawing.Size(309, 118);
+            this.gateLvlList.Size = new System.Drawing.Size(309, 134);
             this.gateLvlList.TabIndex = 80;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
             this.gateLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellValueChanged);
             this.gateLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_RowEnter);
-            // 
-            // Lvl
-            // 
-            this.Lvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Lvl.HeaderText = "Lvl";
-            this.Lvl.Name = "Lvl";
-            this.Lvl.ReadOnly = true;
-            this.Lvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Sentry
-            // 
-            this.Sentry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Sentry.HeaderText = "Sentry";
-            this.Sentry.Items.AddRange(new object[] {
-            "SENTRY_NONE",
-            "SENTRY_SINGLE_LANE",
-            "SENTRY_MULTI_LANE"});
-            this.Sentry.Name = "Sentry";
-            this.Sentry.Width = 48;
             // 
             // panelWorkingFolder
             // 
@@ -5973,6 +5955,25 @@
             this.btnLevelFolder2.ToolTipText = "Open a different level folder";
             this.btnLevelFolder2.Click += new System.EventHandler(this.btnLevelFolder_Click);
             // 
+            // Lvl
+            // 
+            this.Lvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lvl.HeaderText = "Lvl";
+            this.Lvl.Name = "Lvl";
+            this.Lvl.ReadOnly = true;
+            this.Lvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Sentry
+            // 
+            this.Sentry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Sentry.HeaderText = "Sentry";
+            this.Sentry.Items.AddRange(new object[] {
+            "None",
+            "Single Lane",
+            "Multi Lane"});
+            this.Sentry.Name = "Sentry";
+            this.Sentry.Width = 48;
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -6383,8 +6384,6 @@
         private System.Windows.Forms.ToolStripButton btnGateLvlDelete;
         private System.Windows.Forms.ToolStripButton btnGateLvlUp;
         private System.Windows.Forms.ToolStripButton btnGateLvlDown;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
         private System.Windows.Forms.ToolStrip toolstripTitleSample;
         private System.Windows.Forms.ToolStripLabel lblSampleEditor;
         private System.Windows.Forms.ToolStripButton btnSaveSample;
@@ -6491,6 +6490,8 @@
         private System.Windows.Forms.ToolStripMenuItem regenerateTemplateFilesToolStripMenuItem;
         private System.Windows.Forms.VScrollBar vScrollBarTrackEditor;
         private System.Windows.Forms.HScrollBar hScrollBarTrackEditor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
     }
 }
 

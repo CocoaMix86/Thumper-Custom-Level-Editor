@@ -55,6 +55,10 @@ namespace Thumper_Custom_Level_Editor
 			new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"},
 			new BossData() {boss_name = "Level 9 - pyramid",  boss_spn = "pyramid.spn", boss_ent = "crakhed.ent"}
 		};
+		List<string> _bucket0 = new List<string>() { "90adca33", "a1188d41", "f0f4841e", "cf701b2e" };
+		List<string> _bucket1 = new List<string>() { "da1e5641", "cbeb7e34", "302c19f8", "9edd9d0c" };
+		List<string> _bucket2 = new List<string>() { "067361fe", "1c81e23e", "0863f5d4", "84172f09" };
+		List<string> _bucket3 = new List<string>() { "5acc90e7", "ff104ddf", "f730bce7", "7fe6301f" };
 		dynamic gatejson;
 		ObservableCollection<GateLvlData> _gatelvls = new ObservableCollection<GateLvlData>();
 		#endregion
@@ -246,7 +250,7 @@ namespace Thumper_Custom_Level_Editor
 					//add leaf data to the list
 					_gatelvls.Add(new GateLvlData() {
 						lvlname = (string)_load["obj_name"],
-						sentrytype = "SENTRY_NONE"
+						sentrytype = "None"
 					});
 					PlaySound("UIobjectadd");
 				}
@@ -369,9 +373,10 @@ namespace Thumper_Custom_Level_Editor
 			_gatelvls.Clear();
 			///load lvls associated with this master
 			foreach (dynamic _lvl in _load["boss_patterns"]) {
+				string ss = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase();
 				_gatelvls.Add(new GateLvlData() {
 					lvlname = _lvl["lvl_name"],
-					sentrytype = _lvl["sentry_type"]
+					sentrytype = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase()
 				});
 			}
 
@@ -426,7 +431,7 @@ namespace Thumper_Custom_Level_Editor
 			for (int x = 0; x < _gatelvls.Count; x++) {
 				JObject s = new JObject {
 					{ "lvl_name", _gatelvls[x].lvlname },
-					{ "sentry_type", _gatelvls[x].sentrytype },
+					{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
 					{ "bucket_num", 0 }
 				};
 				//hash of phase 4 needs to be different depending if its crakhed or not
