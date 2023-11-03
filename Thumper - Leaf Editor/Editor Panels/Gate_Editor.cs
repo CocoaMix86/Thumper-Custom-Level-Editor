@@ -373,7 +373,6 @@ namespace Thumper_Custom_Level_Editor
 			_gatelvls.Clear();
 			///load lvls associated with this master
 			foreach (dynamic _lvl in _load["boss_patterns"]) {
-				string ss = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase();
 				_gatelvls.Add(new GateLvlData() {
 					lvlname = _lvl["lvl_name"],
 					sentrytype = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase()
