@@ -101,7 +101,8 @@ namespace Thumper_Custom_Level_Editor
 		private void gateLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			try {
-				_gatelvls[e.RowIndex].sentrytype = gateLvlList[1, e.RowIndex].Value.ToString();
+				_gatelvls[e.RowIndex].sentrytype = (string)gateLvlList[1, e.RowIndex].Value;
+				_gatelvls[e.RowIndex].bucket = int.Parse((string)gateLvlList[2, e.RowIndex].Value);
 				SaveGate(false);
 			} catch { }
 		}
@@ -336,6 +337,7 @@ namespace Thumper_Custom_Level_Editor
 		private void checkGateRandom_CheckedChanged(object sender, EventArgs e)
 		{
 			dgvGateBucket.Visible = checkGateRandom.Checked;
+			SaveGate(false);
 		}
 		#endregion
 
@@ -376,6 +378,7 @@ namespace Thumper_Custom_Level_Editor
 			///Clear form elements so new data can load
 			_gatelvls.Clear();
 			///load lvls associated with this master
+			gateLvlList.CellValueChanged -= gateLvlList_CellValueChanged;
 			foreach (dynamic _lvl in _load["boss_patterns"]) {
 				_gatelvls.Add(new GateLvlData() {
 					lvlname = _lvl["lvl_name"],
@@ -383,6 +386,7 @@ namespace Thumper_Custom_Level_Editor
 					bucket = _lvl["bucket_num"]
 				});
 			}
+			gateLvlList.CellValueChanged += gateLvlList_CellValueChanged;
 
 			//populate dropdowns
 			dropGateBoss.SelectedValue = (string)_load["spn_name"];
@@ -390,6 +394,7 @@ namespace Thumper_Custom_Level_Editor
 			dropGatePost.SelectedItem = (string)_load["post_lvl_name"];
 			dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"];
 			dropGateSection.SelectedItem = (string)_load["section_type"];
+			checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
 
 			///set save flag (gate just loaded, has no changes)
 			gatejson = _load;
@@ -432,7 +437,7 @@ namespace Thumper_Custom_Level_Editor
 				{ "post_lvl_name", dropGatePost.Text },
 				{ "restart_lvl_name", dropGateRestart.Text },
 				{ "section_type", dropGateSection.Text },
-				{ "random_type", "LEVEL_RANDOM_NONE" }
+				{ "random_type", $"LEVEL_RANDOM_{(checkGateRandom.Checked ? "BUCKET" : "NONE")}" }
 			};
 			//setup boss_patterns
 			JArray boss_patterns = new JArray();
@@ -440,23 +445,44 @@ namespace Thumper_Custom_Level_Editor
 				JObject s = new JObject {
 					{ "lvl_name", _gatelvls[x].lvlname },
 					{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
-					{ "bucket_num", 0 }
+					{ "bucket_num", _gatelvls[x].bucket }
 				};
+				//if using RANDOM, the buckets and hashes are all different per entry in each bucket
 				if (checkGateRandom.Checked) {
-					s.Add("bucket_num", _gatelvls[x].bucket);
-                }
-				//hash of phase 4 needs to be different depending if its crakhed or not
-				if (x == 3) {
-					if (_save["spn_name"].ToString().Contains("crakhed") || _save["spn_name"].ToString().Contains("triangle") || _save["spn_name"].ToString().Contains("pyramid"))
-						s.Add("node_name_hash", "6b39151f");
-					else
-						s.Add("node_name_hash", "3428c8e3");
+					switch (_gatelvls[x].bucket) {
+						case 0:
+							s.Add("node_name_hash", _bucket0[bucket0]);
+							bucket0++;
+							break;
+						case 1:
+							s.Add("node_name_hash", _bucket1[bucket1]);
+							bucket1++;
+							break;
+						case 2:
+							s.Add("node_name_hash", _bucket2[bucket2]);
+							bucket2++;
+							break;
+						case 3:
+							s.Add("node_name_hash", _bucket3[bucket3]);
+							bucket3++;
+							break;
+					}
 				}
-				//for pyramid only, requires 5 phases
-				else if (x == 4)
-					s.Add("node_name_hash", "07f819c9");
-				else
-					s.Add("node_name_hash", node_name_hash[x]);
+				//if not using RANDOM, use the regular hashes
+				else {
+					//hash of phase 4 needs to be different depending if its crakhed or not
+					if (x == 3) {
+						if (_save["spn_name"].ToString().Contains("crakhed") || _save["spn_name"].ToString().Contains("triangle") || _save["spn_name"].ToString().Contains("pyramid"))
+							s.Add("node_name_hash", "6b39151f");
+						else
+							s.Add("node_name_hash", "3428c8e3");
+					}
+					//for pyramid only, requires 5 phases
+					else if (x == 4)
+						s.Add("node_name_hash", "07f819c9");
+					else
+						s.Add("node_name_hash", node_name_hash[x]);
+				}
 
 				boss_patterns.Add(s);
 			}
