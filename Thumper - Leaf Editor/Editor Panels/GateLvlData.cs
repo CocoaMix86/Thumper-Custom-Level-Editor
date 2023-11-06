@@ -4,6 +4,7 @@
 	{
 		public string lvlname { get; set; }
 		public string sentrytype { get; set; }
+		public int bucket { get; set; }
 	}
 
 	public class BossData

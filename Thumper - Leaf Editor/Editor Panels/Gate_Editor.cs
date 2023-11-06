@@ -113,8 +113,8 @@ namespace Thumper_Custom_Level_Editor
 			//repopulate dgv from list
 			gateLvlList.RowEnter -= gateLvlList_RowEnter;
 			foreach (GateLvlData _lvl in _gatelvls) {
-				gateLvlList.Rows.Add(new object[] { _lvl.lvlname, _lvl.sentrytype });
-				gateLvlList.Rows[_gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {_gatelvls.IndexOf(_lvl) + 1}";
+				gateLvlList.Rows.Add(new object[] { _lvl.lvlname, _lvl.sentrytype, _lvl.bucket.ToString() });
+				//gateLvlList.Rows[_gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {_gatelvls.IndexOf(_lvl) + 1}";
 			}
 			gateLvlList.RowEnter += gateLvlList_RowEnter;
 			//set selected index. Mainly used when moving items
@@ -205,7 +205,7 @@ namespace Thumper_Custom_Level_Editor
 		/// All dropdowns of Gate Editor call this
 		private void dropGateBoss_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") {
+			if ((sender as ComboBox).Name == "dropGateBoss" && dropGateBoss.Text.Contains("pyramid")) {
 				MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence, otherwise the level will crash.", "Gate Info");
             }
 			SaveGate(false);
@@ -379,7 +379,8 @@ namespace Thumper_Custom_Level_Editor
 			foreach (dynamic _lvl in _load["boss_patterns"]) {
 				_gatelvls.Add(new GateLvlData() {
 					lvlname = _lvl["lvl_name"],
-					sentrytype = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase()
+					sentrytype = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase(),
+					bucket = _lvl["bucket_num"]
 				});
 			}
 
@@ -416,6 +417,10 @@ namespace Thumper_Custom_Level_Editor
 
 		public JObject GateBuildSave(string _gatename)
 		{
+			int bucket0 = 0;
+			int bucket1 = 0;
+			int bucket2 = 0;
+			int bucket3 = 0;
 			_gatename = Regex.Replace(_gatename, "[.].*", ".gate");
 			///being build Master JSON object
 			JObject _save = new JObject {
@@ -437,6 +442,9 @@ namespace Thumper_Custom_Level_Editor
 					{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
 					{ "bucket_num", 0 }
 				};
+				if (checkGateRandom.Checked) {
+					s.Add("bucket_num", _gatelvls[x].bucket);
+                }
 				//hash of phase 4 needs to be different depending if its crakhed or not
 				if (x == 3) {
 					if (_save["spn_name"].ToString().Contains("crakhed") || _save["spn_name"].ToString().Contains("triangle") || _save["spn_name"].ToString().Contains("pyramid"))
