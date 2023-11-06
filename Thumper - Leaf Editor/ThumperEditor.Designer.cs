@@ -338,6 +338,8 @@
             this.dropGateBoss = new System.Windows.Forms.ComboBox();
             this.label36 = new System.Windows.Forms.Label();
             this.gateLvlList = new System.Windows.Forms.DataGridView();
+            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.panelWorkingFolder = new System.Windows.Forms.Panel();
             this.toolstripTitleWork = new System.Windows.Forms.ToolStrip();
             this.lblWorkingFolder = new System.Windows.Forms.ToolStripLabel();
@@ -432,8 +434,6 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLevelFolder2 = new System.Windows.Forms.ToolStripButton();
-            this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -4603,6 +4603,25 @@
             this.gateLvlList.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             this.gateLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_RowEnter);
             // 
+            // Lvl
+            // 
+            this.Lvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lvl.HeaderText = "Lvl";
+            this.Lvl.Name = "Lvl";
+            this.Lvl.ReadOnly = true;
+            this.Lvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Sentry
+            // 
+            this.Sentry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Sentry.HeaderText = "Sentry";
+            this.Sentry.Items.AddRange(new object[] {
+            "None",
+            "Single Lane",
+            "Multi Lane"});
+            this.Sentry.Name = "Sentry";
+            this.Sentry.Width = 48;
+            // 
             // panelWorkingFolder
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -5847,6 +5866,7 @@
             this.dgvRecentFiles.TabIndex = 140;
             this.dgvRecentFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecentFiles_CellClick);
             this.dgvRecentFiles.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvRecentFiles_CellPainting);
+            this.dgvRecentFiles.Click += new System.EventHandler(this.panelRecentClick);
             // 
             // dataGridViewImageColumn1
             // 
@@ -5914,6 +5934,7 @@
             this.toolstripRecentFiles.Size = new System.Drawing.Size(405, 22);
             this.toolstripRecentFiles.TabIndex = 139;
             this.toolstripRecentFiles.Text = "titlebar";
+            this.toolstripRecentFiles.Click += new System.EventHandler(this.panelRecentClick);
             // 
             // toolStripLabel3
             // 
@@ -5955,25 +5976,6 @@
             this.btnLevelFolder2.Size = new System.Drawing.Size(23, 19);
             this.btnLevelFolder2.ToolTipText = "Open a different level folder";
             this.btnLevelFolder2.Click += new System.EventHandler(this.btnLevelFolder_Click);
-            // 
-            // Lvl
-            // 
-            this.Lvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Lvl.HeaderText = "Lvl";
-            this.Lvl.Name = "Lvl";
-            this.Lvl.ReadOnly = true;
-            this.Lvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Sentry
-            // 
-            this.Sentry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Sentry.HeaderText = "Sentry";
-            this.Sentry.Items.AddRange(new object[] {
-            "None",
-            "Single Lane",
-            "Multi Lane"});
-            this.Sentry.Name = "Sentry";
-            this.Sentry.Width = 48;
             // 
             // FormLeafEditor
             // 

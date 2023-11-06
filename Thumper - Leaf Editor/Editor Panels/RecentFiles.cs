@@ -12,6 +12,7 @@ namespace Thumper_Custom_Level_Editor
         {
             dgvRecentFiles.Rows.Clear();
             panelRecentFiles.Visible = true;
+            panelRecentFiles.BringToFront();
             foreach (string level in recentfiles) {
                 dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
             }
@@ -74,6 +75,10 @@ namespace Thumper_Custom_Level_Editor
             PlaySound("UIfolderclose");
             panelRecentFiles.Visible = false;
         }
-        ///
-	}
+
+        private void panelRecentClick(object sender, EventArgs e)
+        {
+            panelRecentFiles.BringToFront();
+        }
+    }
 }
