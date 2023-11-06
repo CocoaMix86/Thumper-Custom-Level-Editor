@@ -205,10 +205,9 @@ namespace Thumper_Custom_Level_Editor
 		/// All dropdowns of Gate Editor call this
 		private void dropGateBoss_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn")
-				lblPyramidWarn.Visible = true;
-			else
-				lblPyramidWarn.Visible = false;
+			if (bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") {
+				MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence, otherwise the level will crash.", "Gate Info");
+            }
 			SaveGate(false);
 		}
 		#endregion
@@ -226,12 +225,12 @@ namespace Thumper_Custom_Level_Editor
 		private void btnGateLvlAdd_Click(object sender, EventArgs e)
 		{
 			//don't load new lvl if gate has 4 phases
-			if (_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn") {
-				MessageBox.Show("You can only add 4 phases to a boss.", "Gate Info");
+			if (_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) {
+				MessageBox.Show("You can only add 4 phases to a boss (each lvl is a phase).", "Gate Info");
 				return;
 			}
 			if (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") {
-				MessageBox.Show("Pyramid requires only 5 phases.", "Gate Info");
+				MessageBox.Show("Pyramid requires only 5 phases (each lvl is a phase).", "Gate Info");
 				return;
 			}
 			//show file dialog
@@ -333,6 +332,11 @@ namespace Thumper_Custom_Level_Editor
 		private void btnGateOpenPre_Click(object sender, EventArgs e) => MasterLoadLvl(dropGatePre.Text);
 		private void btnGateOpenPost_Click(object sender, EventArgs e) => MasterLoadLvl(dropGatePost.Text);
 		private void btnGateOpenRestart_Click(object sender, EventArgs e) => MasterLoadLvl(dropGateRestart.Text);
+
+		private void checkGateRandom_CheckedChanged(object sender, EventArgs e)
+		{
+			dgvGateBucket.Visible = checkGateRandom.Checked;
+		}
 		#endregion
 
 		#region Methods
