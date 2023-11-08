@@ -55,10 +55,10 @@ namespace Thumper_Custom_Level_Editor
 			new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"},
 			new BossData() {boss_name = "Level 9 - pyramid",  boss_spn = "pyramid.spn", boss_ent = "crakhed.ent"}
 		};
-		List<string> _bucket0 = new List<string>() { "90adca33", "a1188d41", "f0f4841e", "cf701b2e" };
-		List<string> _bucket1 = new List<string>() { "da1e5641", "cbeb7e34", "302c19f8", "9edd9d0c" };
-		List<string> _bucket2 = new List<string>() { "067361fe", "1c81e23e", "0863f5d4", "84172f09" };
-		List<string> _bucket3 = new List<string>() { "5acc90e7", "ff104ddf", "f730bce7", "7fe6301f" };
+		List<string> _bucket0 = new List<string>() { "33caad90", "418d18a1", "1e84f4f0", "2e1b70cf" };
+		List<string> _bucket1 = new List<string>() { "41561eda", "347eebcb", "f8192c30", "0c9ddd9e" };
+		List<string> _bucket2 = new List<string>() { "fe617306", "3ee2811c", "d4f56308", "092f1784" };
+		List<string> _bucket3 = new List<string>() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
 		dynamic gatejson;
 		ObservableCollection<GateLvlData> _gatelvls = new ObservableCollection<GateLvlData>();
 		#endregion
