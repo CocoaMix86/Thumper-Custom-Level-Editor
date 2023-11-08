@@ -53,7 +53,7 @@ namespace Thumper_Custom_Level_Editor
 			new BossData() {boss_name = "Level 8 - crakhed", boss_spn = "crakhed8.spn", boss_ent = "crakhed.ent"},
 			new BossData() {boss_name = "Level 9 - fractal", boss_spn = "boss_frac.spn", boss_ent = "boss_gate_pellet.ent"},
 			new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"},
-			new BossData() {boss_name = "Level 9 - pyramid",  boss_spn = "pyramid.spn", boss_ent = "crakhed.ent"}
+			new BossData() {boss_name = "Level 9 - pyramid",  boss_spn = "pyramidboss.spn", boss_ent = "crakhed.ent"}
 		};
 		List<string> _bucket0 = new List<string>() { "33caad90", "418d18a1", "1e84f4f0", "2e1b70cf" };
 		List<string> _bucket1 = new List<string>() { "41561eda", "347eebcb", "f8192c30", "0c9ddd9e" };

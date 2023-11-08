@@ -15,7 +15,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'pyramiddecorator.spn',
+'obj_name': 'pyramid.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -28,7 +28,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'pyramid.spn',
+'obj_name': 'pyramidboss.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
