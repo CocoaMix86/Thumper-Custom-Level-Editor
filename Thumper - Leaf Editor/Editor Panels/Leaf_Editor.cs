@@ -1229,6 +1229,8 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//reset flag in case it got stuck previously
 			loadingleaf = false;
+			bool loadfail = false;
+			string loadfailmessage = "";
 			//if Leaf Editor is hidden, show it when a leaf is selected
 			if (panelLeaf.Visible == false)
 				leafEditorToolStripMenuItem.PerformClick();
@@ -1287,10 +1289,15 @@ namespace Thumper_Custom_Level_Editor
 				}
 				//otherwise, search _objects for the friendly names for display purposes
 				else {
-					var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
-					var objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
-					_s.friendly_param = objmatch.param_displayname;
-					_s.friendly_type = objmatch.category;
+					try {
+						var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
+						var objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
+						_s.friendly_param = objmatch.param_displayname;
+						_s.friendly_type = objmatch.category;
+					} catch (Exception ex) {
+						loadfail = true;
+						loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
+					}
 				}
 				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? objectcolors.FirstOrDefault(x => x.Item1 == _s.friendly_param)?.Item2 ?? "-8355585";
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this
@@ -1307,19 +1314,23 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.RowHeadersVisible = true;
 			foreach (DataGridViewRow r in trackEditor.Rows) {
 				try {
+					//pass _griddata per row to be imported to the DGV
+					TrackRawImport(r, _tracks[r.Index].data_points);
+					TrackUpdateHighlighting(r);
+					r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), Color.Black, 0.4);
+					//set the headercell names
 					if (_tracks[r.Index].friendly_param.Length > 1) {
 						if (_tracks[r.Index].param_path == "play")
 							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].obj_name})";
 						else
 							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].friendly_param})";
-						//pass _griddata per row to be imported to the DGV
-						TrackRawImport(r, _tracks[r.Index].data_points);
-						TrackUpdateHighlighting(r);
-						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), Color.Black, 0.4);
 					}
 				}
-				catch (Exception ex) { MessageBox.Show($"{_load["obj_name"]} contains an object that doesn't exist:\n{_tracks[r.Index].obj_name}\n\n{ex}"); }
+				catch (Exception ex) { }
 			}
+			if (loadfail) {
+				MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
+            }
 			//enable a bunch of elements now that a leaf is loaded.
 			EnableLeafButtons(true);
 			//re-set the zoom level

@@ -168,12 +168,13 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (calculatelength) {
 				_lvllength = (int)NUD_lvlApproach.Value;
+				lvlSeqObjs.ColumnCount = _lvllength;
 				foreach (LvlLeafData _leaf in _lvlleafs) {
 					//total length of all leafs. This value is used for the volume sequencer
 					_lvllength += _leaf.beats;
+					lvlSeqObjs.ColumnCount = _lvllength;
+					lvlSeqObjs.Columns[lvlSeqObjs.ColumnCount - _leaf.beats].DefaultCellStyle.BackColor = Color.Gray;
 				}
-				//set volume sequencer column total to length of all leafs + approach
-				lvlSeqObjs.ColumnCount = _lvllength;
 				//some styles
 				GenerateColumnStyle(lvlSeqObjs, _lvllength, trackLvlVolumeZoom.Value);
 			}
