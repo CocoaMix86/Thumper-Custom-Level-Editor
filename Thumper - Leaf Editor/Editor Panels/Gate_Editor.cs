@@ -337,6 +337,8 @@ namespace Thumper_Custom_Level_Editor
 		private void checkGateRandom_CheckedChanged(object sender, EventArgs e)
 		{
 			dgvGateBucket.Visible = checkGateRandom.Checked;
+			dropGateBoss.Enabled = !checkGateRandom.Checked;
+			dropGateBoss.SelectedItem = bossdata.Where(x => x.boss_name == "Level 6 - spirograph").First();
 			SaveGate(false);
 		}
 		#endregion
@@ -441,7 +443,8 @@ namespace Thumper_Custom_Level_Editor
 			};
 			//setup boss_patterns
 			JArray boss_patterns = new JArray();
-			for (int x = 0; x < _gatelvls.Count; x++) {
+			int lvlcount = checkGateRandom.Checked ? _gatelvls.Count : _save["spn_name"].ToString().Contains("pyramid") ? 5 : 4;
+			for (int x = 0; x < lvlcount; x++) {
 				JObject s = new JObject {
 					{ "lvl_name", _gatelvls[x].lvlname },
 					{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
@@ -469,7 +472,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 				}
 				//if not using RANDOM, use the regular hashes
-				else {
+				else if (x < 5) {
 					//hash of phase 4 needs to be different depending if its crakhed or not
 					if (x == 3) {
 						if (_save["spn_name"].ToString().Contains("crakhed") || _save["spn_name"].ToString().Contains("triangle") || _save["spn_name"].ToString().Contains("pyramid"))
