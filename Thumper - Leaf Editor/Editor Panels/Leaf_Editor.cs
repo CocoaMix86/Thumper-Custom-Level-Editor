@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Columns[i].Width = trackZoom.Value;
 			}
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(false)) * 10;
+			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(false)) * 3;
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
@@ -106,7 +106,14 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
 			}
 			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 10;
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 3;
+		}
+		private void trackEditor_Resize(object sender, EventArgs e)
+		{
+			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
+			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 3;
+			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(false)) * 3;
 		}
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
 		{
@@ -127,16 +134,16 @@ namespace Thumper_Custom_Level_Editor
 					else if (e.Delta < 0) {
 						trackEditor.FirstDisplayedScrollingColumnIndex = Math.Min(trackEditor.ColumnCount, scollindex + scrollLines);
 					}
-					hScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingColumnIndex * 10;
+					hScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingColumnIndex * 3;
 				}
 				else {
 					if (e.Delta > 0) {
 						trackEditor.FirstDisplayedScrollingRowIndex = Math.Max(0, scollrowindex - scrollLines);
 					}
 					else if (e.Delta < 0) {
-						trackEditor.FirstDisplayedScrollingRowIndex = Math.Min(trackEditor.RowCount, scollrowindex + scrollLines);
+						trackEditor.FirstDisplayedScrollingRowIndex = Math.Min(trackEditor.RowCount - 1, scollrowindex + scrollLines);
 					}
-					vScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingRowIndex * 10;
+					vScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingRowIndex * 3;
 				}
 			}
 			else {

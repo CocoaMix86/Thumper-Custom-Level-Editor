@@ -1592,6 +1592,7 @@
             this.trackEditor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.trackEditor_KeyDown);
             this.trackEditor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.trackEditor_KeyPress);
             this.trackEditor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.trackEditor_KeyUp);
+            this.trackEditor.Resize += new System.EventHandler(this.trackEditor_Resize);
             // 
             // trackZoom
             // 
