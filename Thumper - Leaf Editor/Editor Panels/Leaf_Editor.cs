@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Columns[i].Width = trackZoom.Value;
 			}
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true));
+			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 11);
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
@@ -106,14 +106,14 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
 			}
 			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1);
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 11);
 		}
 		private void trackEditor_Resize(object sender, EventArgs e)
 		{
 			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1);
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true));
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 11);
+			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 11);
 		}
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
 		{
