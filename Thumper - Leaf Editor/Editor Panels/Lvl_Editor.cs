@@ -45,6 +45,7 @@ namespace Thumper_Custom_Level_Editor
 
 		LvlLeafData clipboardleaf = new LvlLeafData();
 		List<string> clipboardpaths = new List<string>();
+		List<int> idxtocolor = new List<int>();
 		#endregion
 
 		#region EventHandlers
@@ -160,18 +161,26 @@ namespace Thumper_Custom_Level_Editor
 		//Fill weight - allows for more columns
 		private void lvlSeqObjs_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
 		{
-			//e.Column.FillWeight = trackLvlVolumeZoom.Value;
+			e.Column.Width = trackLvlVolumeZoom.Value;
 		}
 		///_LVLLEAF - Triggers when the collection changes
 		public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 			//calculate total length of all leafs. This value is used for the volume sequencer
+			foreach (int idx in idxtocolor) {
+				lvlSeqObjs.Columns[idx].DefaultCellStyle = null;
+			}
+			idxtocolor.Clear();
 			_lvllength = (int)NUD_lvlApproach.Value;
 			foreach (LvlLeafData _leaf in _lvlleafs) {
+				idxtocolor.Add(_lvllength);
 				_lvllength += _leaf.beats;
 			}
 			lvlSeqObjs.ColumnCount = _lvllength;
-			//GenerateColumnStyle(lvlSeqObjs, _lvllength, trackLvlVolumeZoom.Value);
+			GenerateColumnStyle(lvlSeqObjs, _lvllength);
+			foreach (int idx in idxtocolor) {
+				lvlSeqObjs.Columns[idx].DefaultCellStyle.BackColor = Color.LightGray;
+            }
 
 
 			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
@@ -337,7 +346,6 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlLeafUp_Click(object sender, EventArgs e)
 		{
-			_lvlleafs.CollectionChanged -= lvlleaf_CollectionChanged;
 			try {
 				// get index of the row for the selected cell
 				int rowIndex = lvlLeafList.CurrentRow.Index;
@@ -351,12 +359,10 @@ namespace Thumper_Custom_Level_Editor
 				lvlLeafList.Rows[rowIndex - 1].Cells[0].Selected = true;
 			}
 			catch {	}
-			_lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
 		}
 
 		private void btnLvlLeafDown_Click(object sender, EventArgs e)
 		{
-			_lvlleafs.CollectionChanged -= lvlleaf_CollectionChanged;
 			try {
 				// get index of the row for the selected cell
 				int rowIndex = lvlLeafList.CurrentRow.Index;
@@ -370,7 +376,6 @@ namespace Thumper_Custom_Level_Editor
 				lvlLeafList.Rows[rowIndex + 1].Cells[0].Selected = true;
 			}
 			catch {	}
-			_lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
 		}
 
 		///COPY PASTE of leaf

@@ -1119,7 +1119,7 @@ namespace Thumper_Custom_Level_Editor
 				GenerateColumnStyle(grid, _beats);
 		}
 
-		public void GenerateColumnStyle(DataGridView grid, int _cells, int width = 60)
+		public void GenerateColumnStyle(DataGridView grid, int _cells)
 		{
 			//stylize track grid/columns
 			for (int i = 0; i < _cells; i++) {
@@ -1129,12 +1129,10 @@ namespace Thumper_Custom_Level_Editor
 				grid.Columns[i].DividerWidth = 1;
 				grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 				grid.Columns[i].Frozen = false;
-				grid.Columns[i].Width = width;
 				grid.Columns[i].MinimumWidth = 2;
 				grid.Columns[i].ReadOnly = false;
 				grid.Columns[i].ValueType = typeof(decimal);
 				grid.Columns[i].DefaultCellStyle.Format = "0.###";
-				grid.Columns[i].FillWeight = width;
 			}
 		}
 		///Import raw text from rich text box to selected row
