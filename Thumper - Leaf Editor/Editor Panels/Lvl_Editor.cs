@@ -169,6 +169,7 @@ namespace Thumper_Custom_Level_Editor
 			//calculate total length of all leafs. This value is used for the volume sequencer
 			foreach (int idx in idxtocolor) {
 				lvlSeqObjs.Columns[idx].DefaultCellStyle = null;
+				lvlSeqObjs.Columns[idx].HeaderCell.Style = null;
 			}
 			idxtocolor.Clear();
 			_lvllength = (int)NUD_lvlApproach.Value;
@@ -180,7 +181,9 @@ namespace Thumper_Custom_Level_Editor
 			GenerateColumnStyle(lvlSeqObjs, _lvllength);
 			foreach (int idx in idxtocolor) {
 				lvlSeqObjs.Columns[idx].DefaultCellStyle.BackColor = Color.LightGray;
-            }
+				lvlSeqObjs.Columns[idx].HeaderCell.Style.BackColor = Color.LightGray;
+				lvlSeqObjs.Columns[idx].HeaderCell.Style.ForeColor = Color.Black;
+			}
 
 
 			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
