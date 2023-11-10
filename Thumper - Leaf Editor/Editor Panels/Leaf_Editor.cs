@@ -1128,7 +1128,7 @@ namespace Thumper_Custom_Level_Editor
 				grid.Columns[i].ReadOnly = false;
 				grid.Columns[i].ValueType = typeof(decimal);
 				grid.Columns[i].DefaultCellStyle.Format = "0.###";
-				grid.Columns[i].FillWeight = 0.01F;
+				grid.Columns[i].FillWeight = 0.001F;
 			}
 		}
 		///Import raw text from rich text box to selected row
