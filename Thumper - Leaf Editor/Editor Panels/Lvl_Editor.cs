@@ -413,13 +413,17 @@ namespace Thumper_Custom_Level_Editor
 		private void btnLvlPathAdd_Click(object sender, EventArgs e)
 		{
 			lvlLeafPaths.RowCount++;
+			btnLvlPathDelete.Enabled = true;
 			PlaySound("UItunneladd");
 			SaveLvl(false);
 		}
 
 		private void btnLvlPathDelete_Click(object sender, EventArgs e)
 		{
-			_lvlleafs[lvlLeafList.CurrentRow.Index].paths.RemoveAt(lvlLeafPaths.CurrentRow.Index);
+			if (lvlLeafPaths.CurrentCell.Value == null)
+				lvlLeafPaths.Rows.Remove(lvlLeafPaths.CurrentRow);
+			else
+				_lvlleafs[lvlLeafList.CurrentRow.Index].paths.RemoveAt(lvlLeafPaths.CurrentRow.Index);
 			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
 			PlaySound("UItunnelremove");
 			SaveLvl(false);
