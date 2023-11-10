@@ -5714,7 +5714,7 @@
             this.panelBeeble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelBeeble.Controls.Add(this.pictureBox1);
-            this.panelBeeble.Location = new System.Drawing.Point(1193, 11);
+            this.panelBeeble.Location = new System.Drawing.Point(620, 1);
             this.panelBeeble.MinimumSize = new System.Drawing.Size(40, 40);
             this.panelBeeble.Name = "panelBeeble";
             this.panelBeeble.Size = new System.Drawing.Size(80, 70);

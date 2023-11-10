@@ -354,7 +354,7 @@ namespace Thumper_Custom_Level_Editor
 		//Clicking row headers to select the row
 		private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			trackEditor.CurrentCell = trackEditor.Rows[e.RowIndex].Cells[0];
+			trackEditor.CurrentCell = trackEditor.Rows[e.RowIndex].Cells[trackEditor.FirstDisplayedScrollingColumnIndex];
 		}
 		///LEAF LENGTH
 		private void numericUpDown_LeafLength_ValueChanged(object sender, EventArgs e)

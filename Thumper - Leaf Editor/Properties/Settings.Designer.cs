@@ -349,7 +349,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100, 10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("620, 1")]
         public global::System.Drawing.Point beebleloc {
             get {
                 return ((global::System.Drawing.Point)(this["beebleloc"]));
@@ -529,9 +529,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Generic.List<string> Recentfiles {
+        public global::System.Collections.Specialized.StringCollection Recentfiles {
             get {
-                return ((global::System.Collections.Generic.List<string>)(this["Recentfiles"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["Recentfiles"]));
             }
             set {
                 this["Recentfiles"] = value;

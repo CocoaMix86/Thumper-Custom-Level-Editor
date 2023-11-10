@@ -84,7 +84,7 @@
       <Value Profile="(Default)">76, 66</Value>
     </Setting>
     <Setting Name="beebleloc" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">100, 10</Value>
+      <Value Profile="(Default)">620, 1</Value>
     </Setting>
     <Setting Name="dock1" Type="System.String" Scope="User">
       <Value Profile="(Default)">empty</Value>
