@@ -174,7 +174,7 @@ namespace Thumper_Custom_Level_Editor
         {
             DataGridViewRow newdgvr = (DataGridViewRow)dgvr.Clone();
             newdgvr.Cells.Clear();
-            for (int x = 0; x < cellstocopy; x++) {
+            for (int x = 0; x < cellstocopy && x < dgvr.Cells.Count; x++) {
                 newdgvr.Cells.Add((DataGridViewCell)dgvr.Cells[x].Clone());
                 newdgvr.Cells[x].Value = dgvr.Cells[x].Value;
             }
