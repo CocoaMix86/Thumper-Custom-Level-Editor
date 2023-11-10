@@ -169,6 +169,17 @@ namespace Thumper_Custom_Level_Editor
                 objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
             }
         }
+
+        public DataGridViewRow CloneRow(DataGridViewRow dgvr, int cellstocopy)
+        {
+            DataGridViewRow newdgvr = (DataGridViewRow)dgvr.Clone();
+            newdgvr.Cells.Clear();
+            for (int x = 0; x < cellstocopy; x++) {
+                newdgvr.Cells.Add((DataGridViewCell)dgvr.Cells[x].Clone());
+                newdgvr.Cells[x].Value = dgvr.Cells[x].Value;
+            }
+            return newdgvr;
+        }
     }
 
     public static class ExtensionMethodClass
