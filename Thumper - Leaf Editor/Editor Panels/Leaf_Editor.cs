@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Columns[i].Width = trackZoom.Value;
 			}
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(false)) * 3;
+			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true));
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
@@ -106,14 +106,14 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
 			}
 			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 3;
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1);
 		}
 		private void trackEditor_Resize(object sender, EventArgs e)
 		{
 			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1) * 3;
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(false)) * 3;
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 1);
+			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true));
 		}
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
 		{
@@ -132,9 +132,9 @@ namespace Thumper_Custom_Level_Editor
 						trackEditor.FirstDisplayedScrollingColumnIndex = Math.Max(0, scollindex - scrollLines);
 					}
 					else if (e.Delta < 0) {
-						trackEditor.FirstDisplayedScrollingColumnIndex = Math.Min(trackEditor.ColumnCount, scollindex + scrollLines);
+						trackEditor.FirstDisplayedScrollingColumnIndex = Math.Min(trackEditor.ColumnCount - 1, scollindex + scrollLines);
 					}
-					hScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingColumnIndex * 3;
+					hScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingColumnIndex;
 				}
 				else {
 					if (e.Delta > 0) {
@@ -143,7 +143,7 @@ namespace Thumper_Custom_Level_Editor
 					else if (e.Delta < 0) {
 						trackEditor.FirstDisplayedScrollingRowIndex = Math.Min(trackEditor.RowCount - 1, scollrowindex + scrollLines);
 					}
-					vScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingRowIndex * 3;
+					vScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingRowIndex;
 				}
 			}
 			else {
@@ -168,12 +168,12 @@ namespace Thumper_Custom_Level_Editor
 		private void vScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
 			if (trackEditor.FirstDisplayedScrollingRowIndex != -1)
-				trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue) / 10;
+				trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue);
 		}
 		private void hScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
 			if (trackEditor.FirstDisplayedScrollingColumnIndex != -1)
-				trackEditor.FirstDisplayedScrollingColumnIndex = (e.NewValue) / 10;
+				trackEditor.FirstDisplayedScrollingColumnIndex = (e.NewValue);
 		}
 		///
 		/// 
@@ -1319,8 +1319,11 @@ namespace Thumper_Custom_Level_Editor
 			//clear the DGV and prep for new data points
 			trackEditor.Rows.Clear();
 			trackEditor.RowCount = _tracks.Count;
-			//foreach row, import data points associated with it
+
 			trackEditor.RowHeadersVisible = true;
+			trackEditor.Resize -= trackEditor_Resize;
+			trackEditor.RowHeadersWidthChanged -= trackEditor_RowHeadersWidthChanged;
+			//foreach row, import data points associated with it
 			foreach (DataGridViewRow r in trackEditor.Rows) {
 				try {
 					//pass _griddata per row to be imported to the DGV
@@ -1337,6 +1340,9 @@ namespace Thumper_Custom_Level_Editor
 				}
 				catch (Exception ex) { }
 			}
+			trackEditor.Resize += trackEditor_Resize;
+			trackEditor.RowHeadersWidthChanged += trackEditor_RowHeadersWidthChanged;
+			trackEditor_RowHeadersWidthChanged(null, null);
 			if (loadfail) {
 				MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
             }
