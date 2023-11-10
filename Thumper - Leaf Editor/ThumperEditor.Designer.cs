@@ -29,40 +29,40 @@
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLeafEditor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle101 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle102 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle103 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle104 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle105 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle106 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle107 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle108 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle109 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle110 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle111 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle112 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle113 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle114 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle115 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle116 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle117 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle118 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle119 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle120 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle121 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle122 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle123 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle125 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle124 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle126 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle127 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle128 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle129 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle132 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle133 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle130 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle131 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -205,26 +205,6 @@
             this.btnLeafZoom = new System.Windows.Forms.ToolStripButton();
             this.btnLeafAutoPlace = new System.Windows.Forms.ToolStripButton();
             this.panelLevel = new System.Windows.Forms.Panel();
-            this.toolstripTitleLvl = new System.Windows.Forms.ToolStrip();
-            this.lblLvlName = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveLvl = new System.Windows.Forms.ToolStripButton();
-            this.lblLvlClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutLvl = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlLoopRefresh = new System.Windows.Forms.ToolStripButton();
-            this.btnRevertLvl = new System.Windows.Forms.ToolStripButton();
-            this.lvlLoopToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnLvlLoopAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlLoopDelete = new System.Windows.Forms.ToolStripButton();
-            this.lvlPathsToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnLvlPathAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlPathDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlCopyTunnel = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlPasteTunnel = new System.Windows.Forms.ToolStripButton();
-            this.chkTunnelCopy = new System.Windows.Forms.ToolStripButton();
-            this.lvlVolumeToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnLvlSeqAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlSeqDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlSeqClear = new System.Windows.Forms.ToolStripButton();
             this.lvlToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlLeafAdd = new System.Windows.Forms.ToolStripButton();
             this.btnLvlLeafDelete = new System.Windows.Forms.ToolStripButton();
@@ -243,21 +223,42 @@
             this.NUD_lvlVolume = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
             this.NUD_lvlApproach = new System.Windows.Forms.NumericUpDown();
-            this.label22 = new System.Windows.Forms.Label();
-            this.lvlLoopTracks = new System.Windows.Forms.DataGridView();
-            this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lvlSeqObjs = new System.Windows.Forms.DataGridView();
-            this.label21 = new System.Windows.Forms.Label();
-            this.lvlLeafPaths = new System.Windows.Forms.DataGridView();
-            this.label20 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label28 = new System.Windows.Forms.Label();
-            this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
             this.lvlLeafList = new System.Windows.Forms.DataGridView();
             this.lvlfiletype = new System.Windows.Forms.DataGridViewImageColumn();
             this.Leaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Beats = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lvlSeqObjs = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label28 = new System.Windows.Forms.Label();
+            this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
+            this.lvlVolumeToolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnLvlSeqAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlSeqDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlSeqClear = new System.Windows.Forms.ToolStripButton();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lvlLoopToolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnLvlLoopAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlLoopDelete = new System.Windows.Forms.ToolStripButton();
+            this.lvlLeafPaths = new System.Windows.Forms.DataGridView();
+            this.lvlPathsToolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnLvlPathAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlPathDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlCopyTunnel = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlPasteTunnel = new System.Windows.Forms.ToolStripButton();
+            this.chkTunnelCopy = new System.Windows.Forms.ToolStripButton();
+            this.label21 = new System.Windows.Forms.Label();
+            this.lvlLoopTracks = new System.Windows.Forms.DataGridView();
+            this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label22 = new System.Windows.Forms.Label();
+            this.toolstripTitleLvl = new System.Windows.Forms.ToolStrip();
+            this.lblLvlName = new System.Windows.Forms.ToolStripLabel();
+            this.btnSaveLvl = new System.Windows.Forms.ToolStripButton();
+            this.lblLvlClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutLvl = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlLoopRefresh = new System.Windows.Forms.ToolStripButton();
+            this.btnRevertLvl = new System.Windows.Forms.ToolStripButton();
             this.panelMaster = new System.Windows.Forms.Panel();
             this.toolstripTitleMaster = new System.Windows.Forms.ToolStrip();
             this.lblMasterName = new System.Windows.Forms.ToolStripLabel();
@@ -437,7 +438,6 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLevelFolder2 = new System.Windows.Forms.ToolStripButton();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -456,19 +456,23 @@
             this.panelRawData.SuspendLayout();
             this.leaftoolsToolStrip.SuspendLayout();
             this.panelLevel.SuspendLayout();
-            this.toolstripTitleLvl.SuspendLayout();
-            this.lvlLoopToolStrip.SuspendLayout();
-            this.lvlPathsToolStrip.SuspendLayout();
-            this.lvlVolumeToolStrip.SuspendLayout();
             this.lvlToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlApproach)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lvlLoopTracks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvlLeafList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lvlSeqObjs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lvlLeafPaths)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lvlLeafList)).BeginInit();
+            this.lvlVolumeToolStrip.SuspendLayout();
+            this.lvlLoopToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lvlLeafPaths)).BeginInit();
+            this.lvlPathsToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lvlLoopTracks)).BeginInit();
+            this.toolstripTitleLvl.SuspendLayout();
             this.panelMaster.SuspendLayout();
             this.toolstripTitleMaster.SuspendLayout();
             this.masterToolStrip.SuspendLayout();
@@ -515,10 +519,6 @@
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -547,7 +547,7 @@
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.menuStrip.ShowItemToolTips = true;
-            this.menuStrip.Size = new System.Drawing.Size(652, 29);
+            this.menuStrip.Size = new System.Drawing.Size(600, 29);
             this.menuStrip.TabIndex = 20;
             this.menuStrip.Text = "mnuLeafEditor";
             // 
@@ -1539,42 +1539,42 @@
             this.trackEditor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.trackEditor.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle101.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle101.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle101.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle101.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle101.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle101.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle101.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle101;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.trackEditor.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle102.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle102.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle102.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle102.NullValue = null;
-            dataGridViewCellStyle102.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle102.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle102.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle102;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = System.Drawing.Color.Black;
             this.trackEditor.Location = new System.Drawing.Point(212, 51);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle103.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle103.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle103.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle103.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle103.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle103.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle103;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.trackEditor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle104.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle104;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -2432,280 +2432,6 @@
             this.panelLevel.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLevel.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
-            // toolstripTitleLvl
-            // 
-            this.toolstripTitleLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleLvl.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLvl.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleLvl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblLvlName,
-            this.btnSaveLvl,
-            this.lblLvlClose,
-            this.lblPopoutLvl,
-            this.btnLvlLoopRefresh,
-            this.btnRevertLvl});
-            this.toolstripTitleLvl.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleLvl.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolstripTitleLvl.Name = "toolstripTitleLvl";
-            this.toolstripTitleLvl.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLvl.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleLvl.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleLvl.Size = new System.Drawing.Size(888, 22);
-            this.toolstripTitleLvl.TabIndex = 140;
-            this.toolstripTitleLvl.Text = "titlebar";
-            // 
-            // lblLvlName
-            // 
-            this.lblLvlName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLvlName.ForeColor = System.Drawing.Color.Green;
-            this.lblLvlName.Name = "lblLvlName";
-            this.lblLvlName.Size = new System.Drawing.Size(60, 19);
-            this.lblLvlName.Text = "Lvl Editor";
-            // 
-            // btnSaveLvl
-            // 
-            this.btnSaveLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveLvl.Enabled = false;
-            this.btnSaveLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveLvl.Name = "btnSaveLvl";
-            this.btnSaveLvl.Size = new System.Drawing.Size(23, 19);
-            this.btnSaveLvl.ToolTipText = "Save lvl file";
-            this.btnSaveLvl.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
-            // 
-            // lblLvlClose
-            // 
-            this.lblLvlClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblLvlClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblLvlClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblLvlClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblLvlClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblLvlClose.Name = "lblLvlClose";
-            this.lblLvlClose.Size = new System.Drawing.Size(23, 22);
-            this.lblLvlClose.Text = "toolStripButton6";
-            this.lblLvlClose.ToolTipText = "Close panel";
-            this.lblLvlClose.Click += new System.EventHandler(this.lblLvlClose_Click);
-            // 
-            // lblPopoutLvl
-            // 
-            this.lblPopoutLvl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutLvl.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutLvl.Name = "lblPopoutLvl";
-            this.lblPopoutLvl.Size = new System.Drawing.Size(23, 22);
-            this.lblPopoutLvl.Text = "Dock panel";
-            this.lblPopoutLvl.ToolTipText = "Undock panel";
-            this.lblPopoutLvl.Click += new System.EventHandler(this.lblPopin_Click);
-            // 
-            // btnLvlLoopRefresh
-            // 
-            this.btnLvlLoopRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnLvlLoopRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlLoopRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnLvlLoopRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlLoopRefresh.Name = "btnLvlLoopRefresh";
-            this.btnLvlLoopRefresh.Size = new System.Drawing.Size(23, 19);
-            this.btnLvlLoopRefresh.ToolTipText = "Reload available loop tracks from workingfolder";
-            this.btnLvlLoopRefresh.Click += new System.EventHandler(this.btnLvlLoopRefresh_Click);
-            // 
-            // btnRevertLvl
-            // 
-            this.btnRevertLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertLvl.Enabled = false;
-            this.btnRevertLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertLvl.Name = "btnRevertLvl";
-            this.btnRevertLvl.Size = new System.Drawing.Size(23, 19);
-            this.btnRevertLvl.ToolTipText = "Revert changes to last save";
-            this.btnRevertLvl.Click += new System.EventHandler(this.btnRevertLvl_Click);
-            // 
-            // lvlLoopToolStrip
-            // 
-            this.lvlLoopToolStrip.AutoSize = false;
-            this.lvlLoopToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.lvlLoopToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.lvlLoopToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.lvlLoopToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.lvlLoopToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.lvlLoopToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnLvlLoopAdd,
-            this.btnLvlLoopDelete});
-            this.lvlLoopToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlLoopToolStrip.Location = new System.Drawing.Point(250, 14);
-            this.lvlLoopToolStrip.Name = "lvlLoopToolStrip";
-            this.lvlLoopToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.lvlLoopToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.lvlLoopToolStrip.Size = new System.Drawing.Size(25, 50);
-            this.lvlLoopToolStrip.Stretch = true;
-            this.lvlLoopToolStrip.TabIndex = 144;
-            // 
-            // btnLvlLoopAdd
-            // 
-            this.btnLvlLoopAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlLoopAdd.Enabled = false;
-            this.btnLvlLoopAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLvlLoopAdd.ForeColor = System.Drawing.Color.White;
-            this.btnLvlLoopAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
-            this.btnLvlLoopAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlLoopAdd.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
-            this.btnLvlLoopAdd.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlLoopAdd.ToolTipText = "Add new path/tunnel";
-            this.btnLvlLoopAdd.Click += new System.EventHandler(this.btnLvlLoopAdd_Click);
-            // 
-            // btnLvlLoopDelete
-            // 
-            this.btnLvlLoopDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlLoopDelete.Enabled = false;
-            this.btnLvlLoopDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnLvlLoopDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlLoopDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
-            this.btnLvlLoopDelete.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlLoopDelete.ToolTipText = "Delete selected path";
-            this.btnLvlLoopDelete.Click += new System.EventHandler(this.btnLvlLoopDelete_Click);
-            // 
-            // lvlPathsToolStrip
-            // 
-            this.lvlPathsToolStrip.AutoSize = false;
-            this.lvlPathsToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.lvlPathsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.lvlPathsToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.lvlPathsToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.lvlPathsToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.lvlPathsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnLvlPathAdd,
-            this.btnLvlPathDelete,
-            this.btnLvlCopyTunnel,
-            this.btnLvlPasteTunnel,
-            this.chkTunnelCopy});
-            this.lvlPathsToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlPathsToolStrip.Location = new System.Drawing.Point(1, 14);
-            this.lvlPathsToolStrip.Name = "lvlPathsToolStrip";
-            this.lvlPathsToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.lvlPathsToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.lvlPathsToolStrip.Size = new System.Drawing.Size(25, 135);
-            this.lvlPathsToolStrip.Stretch = true;
-            this.lvlPathsToolStrip.TabIndex = 143;
-            // 
-            // btnLvlPathAdd
-            // 
-            this.btnLvlPathAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlPathAdd.Enabled = false;
-            this.btnLvlPathAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLvlPathAdd.ForeColor = System.Drawing.Color.White;
-            this.btnLvlPathAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
-            this.btnLvlPathAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlPathAdd.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLvlPathAdd.Name = "btnLvlPathAdd";
-            this.btnLvlPathAdd.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlPathAdd.ToolTipText = "Add new path/tunnel";
-            this.btnLvlPathAdd.Click += new System.EventHandler(this.btnLvlPathAdd_Click);
-            // 
-            // btnLvlPathDelete
-            // 
-            this.btnLvlPathDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlPathDelete.Enabled = false;
-            this.btnLvlPathDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnLvlPathDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlPathDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLvlPathDelete.Name = "btnLvlPathDelete";
-            this.btnLvlPathDelete.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlPathDelete.ToolTipText = "Delete selected path";
-            this.btnLvlPathDelete.Click += new System.EventHandler(this.btnLvlPathDelete_Click);
-            // 
-            // btnLvlCopyTunnel
-            // 
-            this.btnLvlCopyTunnel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlCopyTunnel.Enabled = false;
-            this.btnLvlCopyTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
-            this.btnLvlCopyTunnel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
-            this.btnLvlCopyTunnel.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlCopyTunnel.ToolTipText = "Copy all paths/tunnels";
-            this.btnLvlCopyTunnel.Click += new System.EventHandler(this.btnLvlCopyTunnel_Click);
-            // 
-            // btnLvlPasteTunnel
-            // 
-            this.btnLvlPasteTunnel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlPasteTunnel.Enabled = false;
-            this.btnLvlPasteTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
-            this.btnLvlPasteTunnel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlPasteTunnel.Name = "btnLvlPasteTunnel";
-            this.btnLvlPasteTunnel.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlPasteTunnel.ToolTipText = "Paste copied paths/tunnels";
-            this.btnLvlPasteTunnel.Click += new System.EventHandler(this.btnLvlPasteTunnel_Click);
-            // 
-            // chkTunnelCopy
-            // 
-            this.chkTunnelCopy.CheckOnClick = true;
-            this.chkTunnelCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.chkTunnelCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_sling;
-            this.chkTunnelCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.chkTunnelCopy.Name = "chkTunnelCopy";
-            this.chkTunnelCopy.Size = new System.Drawing.Size(24, 24);
-            this.chkTunnelCopy.ToolTipText = "When enabled, new leafs added will copy the paths\r\nof the previous leaf.";
-            // 
-            // lvlVolumeToolStrip
-            // 
-            this.lvlVolumeToolStrip.AutoSize = false;
-            this.lvlVolumeToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.lvlVolumeToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.lvlVolumeToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.lvlVolumeToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.lvlVolumeToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.lvlVolumeToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnLvlSeqAdd,
-            this.btnLvlSeqDelete,
-            this.btnLvlSeqClear});
-            this.lvlVolumeToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlVolumeToolStrip.Location = new System.Drawing.Point(1, 16);
-            this.lvlVolumeToolStrip.Name = "lvlVolumeToolStrip";
-            this.lvlVolumeToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.lvlVolumeToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.lvlVolumeToolStrip.Size = new System.Drawing.Size(25, 77);
-            this.lvlVolumeToolStrip.Stretch = true;
-            this.lvlVolumeToolStrip.TabIndex = 142;
-            // 
-            // btnLvlSeqAdd
-            // 
-            this.btnLvlSeqAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlSeqAdd.Enabled = false;
-            this.btnLvlSeqAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLvlSeqAdd.ForeColor = System.Drawing.Color.White;
-            this.btnLvlSeqAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
-            this.btnLvlSeqAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlSeqAdd.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLvlSeqAdd.Name = "btnLvlSeqAdd";
-            this.btnLvlSeqAdd.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlSeqAdd.ToolTipText = "Add new volume track";
-            this.btnLvlSeqAdd.Click += new System.EventHandler(this.btnLvlSeqAdd_Click);
-            // 
-            // btnLvlSeqDelete
-            // 
-            this.btnLvlSeqDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlSeqDelete.Enabled = false;
-            this.btnLvlSeqDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnLvlSeqDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlSeqDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLvlSeqDelete.Name = "btnLvlSeqDelete";
-            this.btnLvlSeqDelete.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlSeqDelete.ToolTipText = "Delete selected volume track";
-            this.btnLvlSeqDelete.Click += new System.EventHandler(this.btnLvlSeqDelete_Click);
-            // 
-            // btnLvlSeqClear
-            // 
-            this.btnLvlSeqClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlSeqClear.Enabled = false;
-            this.btnLvlSeqClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_erase;
-            this.btnLvlSeqClear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlSeqClear.Name = "btnLvlSeqClear";
-            this.btnLvlSeqClear.Size = new System.Drawing.Size(24, 24);
-            this.btnLvlSeqClear.ToolTipText = "Erase all set values";
-            this.btnLvlSeqClear.Click += new System.EventHandler(this.btnLvlSeqClear_Click);
-            // 
             // lvlToolStrip
             // 
             this.lvlToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -2983,93 +2709,120 @@
             0});
             this.NUD_lvlApproach.ValueChanged += new System.EventHandler(this.NUD_lvlApproach_ValueChanged);
             // 
-            // label22
+            // lvlLeafList
             // 
-            this.label22.AutoSize = true;
-            this.label22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(276, 1);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(99, 13);
-            this.label22.TabIndex = 82;
-            this.label22.Text = "Lvl Loop Tracks";
+            this.lvlLeafList.AllowUserToAddRows = false;
+            this.lvlLeafList.AllowUserToDeleteRows = false;
+            this.lvlLeafList.AllowUserToResizeRows = false;
+            this.lvlLeafList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvlLeafList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.lvlLeafList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvlLeafList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.lvlLeafList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.lvlLeafList.ColumnHeadersHeight = 20;
+            this.lvlLeafList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.lvlLeafList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.lvlfiletype,
+            this.Leaf,
+            this.Beats});
+            this.lvlLeafList.Cursor = System.Windows.Forms.Cursors.Arrow;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafList.DefaultCellStyle = dataGridViewCellStyle6;
+            this.lvlLeafList.EnableHeadersVisualStyles = false;
+            this.lvlLeafList.GridColor = System.Drawing.Color.Black;
+            this.lvlLeafList.Location = new System.Drawing.Point(3, 38);
+            this.lvlLeafList.MultiSelect = false;
+            this.lvlLeafList.Name = "lvlLeafList";
+            this.lvlLeafList.ReadOnly = true;
+            this.lvlLeafList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafList.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.lvlLeafList.RowHeadersVisible = false;
+            this.lvlLeafList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.lvlLeafList.RowTemplate.Height = 20;
+            this.lvlLeafList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.lvlLeafList.Size = new System.Drawing.Size(236, 184);
+            this.lvlLeafList.TabIndex = 74;
+            this.lvlLeafList.Tag = "editorpaneldgv";
+            this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
+            this.lvlLeafList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_RowEnter);
             // 
-            // lvlLoopTracks
+            // lvlfiletype
             // 
-            this.lvlLoopTracks.AllowUserToAddRows = false;
-            this.lvlLoopTracks.AllowUserToDeleteRows = false;
-            this.lvlLoopTracks.AllowUserToResizeColumns = false;
-            this.lvlLoopTracks.AllowUserToResizeRows = false;
-            this.lvlLoopTracks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvlfiletype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.lvlfiletype.HeaderText = "";
+            this.lvlfiletype.Name = "lvlfiletype";
+            this.lvlfiletype.ReadOnly = true;
+            this.lvlfiletype.Width = 5;
+            // 
+            // Leaf
+            // 
+            this.Leaf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Leaf.FillWeight = 30F;
+            this.Leaf.HeaderText = "Leaf";
+            this.Leaf.Name = "Leaf";
+            this.Leaf.ReadOnly = true;
+            this.Leaf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Beats
+            // 
+            this.Beats.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Beats.FillWeight = 20F;
+            this.Beats.HeaderText = "Beats";
+            this.Beats.Name = "Beats";
+            this.Beats.ReadOnly = true;
+            this.Beats.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvlLoopTracks.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.lvlLoopTracks.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvlLoopTracks.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.lvlLoopTracks.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle105.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle105.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle105.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle105.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle105.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle105.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle105.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLoopTracks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle105;
-            this.lvlLoopTracks.ColumnHeadersHeight = 20;
-            this.lvlLoopTracks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.LoopSample,
-            this.BeatsPerLoop});
-            this.lvlLoopTracks.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle106.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle106.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle106.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle106.Format = "N2";
-            dataGridViewCellStyle106.NullValue = null;
-            dataGridViewCellStyle106.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle106.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle106.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLoopTracks.DefaultCellStyle = dataGridViewCellStyle106;
-            this.lvlLoopTracks.EnableHeadersVisualStyles = false;
-            this.lvlLoopTracks.GridColor = System.Drawing.Color.Black;
-            this.lvlLoopTracks.Location = new System.Drawing.Point(276, 14);
-            this.lvlLoopTracks.MultiSelect = false;
-            this.lvlLoopTracks.Name = "lvlLoopTracks";
-            this.lvlLoopTracks.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle107.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle107.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle107.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle107.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle107.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle107.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLoopTracks.RowHeadersDefaultCellStyle = dataGridViewCellStyle107;
-            this.lvlLoopTracks.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.lvlLoopTracks.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.lvlLoopTracks.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
-            this.lvlLoopTracks.RowTemplate.Height = 20;
-            this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new System.Drawing.Size(361, 200);
-            this.lvlLoopTracks.TabIndex = 81;
-            this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
-            this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
-            this.lvlLoopTracks.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.lvlLoopTracks_DataError);
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer1.Location = new System.Drawing.Point(247, 23);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // LoopSample
+            // splitContainer1.Panel1
             // 
-            this.LoopSample.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.LoopSample.HeaderText = "Loop Sample";
-            this.LoopSample.MaxDropDownItems = 20;
-            this.LoopSample.Name = "LoopSample";
+            this.splitContainer1.Panel1.Controls.Add(this.lvlSeqObjs);
+            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            this.splitContainer1.Panel1.Controls.Add(this.lvlVolumeToolStrip);
+            this.splitContainer1.Panel1.Controls.Add(this.label20);
             // 
-            // BeatsPerLoop
+            // splitContainer1.Panel2
             // 
-            this.BeatsPerLoop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.BeatsPerLoop.HeaderText = "Beats Per Loop";
-            this.BeatsPerLoop.Name = "BeatsPerLoop";
-            this.BeatsPerLoop.Width = 115;
+            this.splitContainer1.Panel2.Controls.Add(this.lvlLoopToolStrip);
+            this.splitContainer1.Panel2.Controls.Add(this.lvlLeafPaths);
+            this.splitContainer1.Panel2.Controls.Add(this.lvlPathsToolStrip);
+            this.splitContainer1.Panel2.Controls.Add(this.label21);
+            this.splitContainer1.Panel2.Controls.Add(this.lvlLoopTracks);
+            this.splitContainer1.Panel2.Controls.Add(this.label22);
+            this.splitContainer1.Size = new System.Drawing.Size(641, 343);
+            this.splitContainer1.SplitterDistance = 124;
+            this.splitContainer1.TabIndex = 145;
             // 
             // lvlSeqObjs
             // 
@@ -3084,135 +2837,51 @@
             this.lvlSeqObjs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvlSeqObjs.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlSeqObjs.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle108.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle108.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle108.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle108.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle108.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle108.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle108.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.lvlSeqObjs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle108;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.lvlSeqObjs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.lvlSeqObjs.ColumnHeadersHeight = 20;
             this.lvlSeqObjs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.lvlSeqObjs.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle109.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle109.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle109.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle109.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle109.Format = "N3";
-            dataGridViewCellStyle109.NullValue = null;
-            dataGridViewCellStyle109.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle109.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle109.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlSeqObjs.DefaultCellStyle = dataGridViewCellStyle109;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.Format = "N3";
+            dataGridViewCellStyle9.NullValue = null;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.lvlSeqObjs.DefaultCellStyle = dataGridViewCellStyle9;
             this.lvlSeqObjs.EnableHeadersVisualStyles = false;
             this.lvlSeqObjs.GridColor = System.Drawing.Color.Black;
             this.lvlSeqObjs.Location = new System.Drawing.Point(27, 16);
             this.lvlSeqObjs.Name = "lvlSeqObjs";
             this.lvlSeqObjs.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle110.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle110.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle110.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle110.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle110.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle110.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle110.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlSeqObjs.RowHeadersDefaultCellStyle = dataGridViewCellStyle110;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlSeqObjs.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.lvlSeqObjs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.lvlSeqObjs.RowTemplate.Height = 20;
             this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.lvlSeqObjs.Size = new System.Drawing.Size(610, 105);
             this.lvlSeqObjs.TabIndex = 68;
+            this.lvlSeqObjs.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.trackEditor_CellPainting);
             this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
             this.lvlSeqObjs.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.lvlSeqObjs_ColumnAdded);
             this.lvlSeqObjs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvlSeqObjs_KeyDown);
             this.lvlSeqObjs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lvlSeqObjs_KeyPress);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(27, 1);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(150, 13);
-            this.label21.TabIndex = 80;
-            this.label21.Text = "Decorator Paths/Tunnels";
-            this.toolTip1.SetToolTip(this.label21, "Unique per leaf");
-            // 
-            // lvlLeafPaths
-            // 
-            this.lvlLeafPaths.AllowUserToAddRows = false;
-            this.lvlLeafPaths.AllowUserToDeleteRows = false;
-            this.lvlLeafPaths.AllowUserToResizeColumns = false;
-            this.lvlLeafPaths.AllowUserToResizeRows = false;
-            this.lvlLeafPaths.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lvlLeafPaths.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.lvlLeafPaths.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvlLeafPaths.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.lvlLeafPaths.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle111.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle111.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle111.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle111.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle111.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle111.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle111.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafPaths.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle111;
-            this.lvlLeafPaths.ColumnHeadersHeight = 20;
-            this.lvlLeafPaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.lvlLeafPaths.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle112.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle112.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle112.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle112.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle112.Format = "N2";
-            dataGridViewCellStyle112.NullValue = null;
-            dataGridViewCellStyle112.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle112.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle112.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafPaths.DefaultCellStyle = dataGridViewCellStyle112;
-            this.lvlLeafPaths.EnableHeadersVisualStyles = false;
-            this.lvlLeafPaths.GridColor = System.Drawing.Color.Black;
-            this.lvlLeafPaths.Location = new System.Drawing.Point(27, 14);
-            this.lvlLeafPaths.MultiSelect = false;
-            this.lvlLeafPaths.Name = "lvlLeafPaths";
-            this.lvlLeafPaths.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle113.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle113.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle113.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle113.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle113.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle113.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle113.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle113;
-            this.lvlLeafPaths.RowHeadersVisible = false;
-            this.lvlLeafPaths.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.lvlLeafPaths.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.lvlLeafPaths.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
-            this.lvlLeafPaths.RowTemplate.Height = 20;
-            this.lvlLeafPaths.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafPaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 200);
-            this.lvlLeafPaths.TabIndex = 79;
-            this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
-            this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(27, 3);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(182, 13);
-            this.label20.TabIndex = 68;
-            this.label20.Text = "Loop Track Volume Sequencer";
-            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
             // 
             // panel1
             // 
@@ -3252,91 +2921,452 @@
             this.trackLvlVolumeZoom.Value = 60;
             this.trackLvlVolumeZoom.Scroll += new System.EventHandler(this.trackLvlVolumeZoom_Scroll);
             // 
-            // lvlLeafList
+            // lvlVolumeToolStrip
             // 
-            this.lvlLeafList.AllowUserToAddRows = false;
-            this.lvlLeafList.AllowUserToDeleteRows = false;
-            this.lvlLeafList.AllowUserToResizeRows = false;
-            this.lvlLeafList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvlVolumeToolStrip.AutoSize = false;
+            this.lvlVolumeToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.lvlVolumeToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.lvlVolumeToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.lvlVolumeToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.lvlVolumeToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.lvlVolumeToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnLvlSeqAdd,
+            this.btnLvlSeqDelete,
+            this.btnLvlSeqClear});
+            this.lvlVolumeToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.lvlVolumeToolStrip.Location = new System.Drawing.Point(1, 16);
+            this.lvlVolumeToolStrip.Name = "lvlVolumeToolStrip";
+            this.lvlVolumeToolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.lvlVolumeToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.lvlVolumeToolStrip.Size = new System.Drawing.Size(25, 77);
+            this.lvlVolumeToolStrip.Stretch = true;
+            this.lvlVolumeToolStrip.TabIndex = 142;
+            // 
+            // btnLvlSeqAdd
+            // 
+            this.btnLvlSeqAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlSeqAdd.Enabled = false;
+            this.btnLvlSeqAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLvlSeqAdd.ForeColor = System.Drawing.Color.White;
+            this.btnLvlSeqAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
+            this.btnLvlSeqAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlSeqAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLvlSeqAdd.Name = "btnLvlSeqAdd";
+            this.btnLvlSeqAdd.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlSeqAdd.ToolTipText = "Add new volume track";
+            this.btnLvlSeqAdd.Click += new System.EventHandler(this.btnLvlSeqAdd_Click);
+            // 
+            // btnLvlSeqDelete
+            // 
+            this.btnLvlSeqDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlSeqDelete.Enabled = false;
+            this.btnLvlSeqDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnLvlSeqDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlSeqDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLvlSeqDelete.Name = "btnLvlSeqDelete";
+            this.btnLvlSeqDelete.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlSeqDelete.ToolTipText = "Delete selected volume track";
+            this.btnLvlSeqDelete.Click += new System.EventHandler(this.btnLvlSeqDelete_Click);
+            // 
+            // btnLvlSeqClear
+            // 
+            this.btnLvlSeqClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlSeqClear.Enabled = false;
+            this.btnLvlSeqClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_erase;
+            this.btnLvlSeqClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlSeqClear.Name = "btnLvlSeqClear";
+            this.btnLvlSeqClear.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlSeqClear.ToolTipText = "Erase all set values";
+            this.btnLvlSeqClear.Click += new System.EventHandler(this.btnLvlSeqClear_Click);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.White;
+            this.label20.Location = new System.Drawing.Point(27, 3);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(182, 13);
+            this.label20.TabIndex = 68;
+            this.label20.Text = "Loop Track Volume Sequencer";
+            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
+            // 
+            // lvlLoopToolStrip
+            // 
+            this.lvlLoopToolStrip.AutoSize = false;
+            this.lvlLoopToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.lvlLoopToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.lvlLoopToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.lvlLoopToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.lvlLoopToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.lvlLoopToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnLvlLoopAdd,
+            this.btnLvlLoopDelete});
+            this.lvlLoopToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.lvlLoopToolStrip.Location = new System.Drawing.Point(250, 14);
+            this.lvlLoopToolStrip.Name = "lvlLoopToolStrip";
+            this.lvlLoopToolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.lvlLoopToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.lvlLoopToolStrip.Size = new System.Drawing.Size(25, 50);
+            this.lvlLoopToolStrip.Stretch = true;
+            this.lvlLoopToolStrip.TabIndex = 144;
+            // 
+            // btnLvlLoopAdd
+            // 
+            this.btnLvlLoopAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlLoopAdd.Enabled = false;
+            this.btnLvlLoopAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLvlLoopAdd.ForeColor = System.Drawing.Color.White;
+            this.btnLvlLoopAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
+            this.btnLvlLoopAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlLoopAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
+            this.btnLvlLoopAdd.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlLoopAdd.ToolTipText = "Add new path/tunnel";
+            this.btnLvlLoopAdd.Click += new System.EventHandler(this.btnLvlLoopAdd_Click);
+            // 
+            // btnLvlLoopDelete
+            // 
+            this.btnLvlLoopDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlLoopDelete.Enabled = false;
+            this.btnLvlLoopDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnLvlLoopDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlLoopDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
+            this.btnLvlLoopDelete.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlLoopDelete.ToolTipText = "Delete selected path";
+            this.btnLvlLoopDelete.Click += new System.EventHandler(this.btnLvlLoopDelete_Click);
+            // 
+            // lvlLeafPaths
+            // 
+            this.lvlLeafPaths.AllowUserToAddRows = false;
+            this.lvlLeafPaths.AllowUserToDeleteRows = false;
+            this.lvlLeafPaths.AllowUserToResizeColumns = false;
+            this.lvlLeafPaths.AllowUserToResizeRows = false;
+            this.lvlLeafPaths.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.lvlLeafList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.lvlLeafList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvlLeafList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.lvlLeafList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle114.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle114.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle114.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle114.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle114.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle114.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle114.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle114;
-            this.lvlLeafList.ColumnHeadersHeight = 20;
-            this.lvlLeafList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.lvlLeafList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.lvlfiletype,
-            this.Leaf,
-            this.Beats});
-            this.lvlLeafList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle115.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle115.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle115.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle115.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle115.NullValue = null;
-            dataGridViewCellStyle115.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle115.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle115.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafList.DefaultCellStyle = dataGridViewCellStyle115;
-            this.lvlLeafList.EnableHeadersVisualStyles = false;
-            this.lvlLeafList.GridColor = System.Drawing.Color.Black;
-            this.lvlLeafList.Location = new System.Drawing.Point(3, 38);
-            this.lvlLeafList.MultiSelect = false;
-            this.lvlLeafList.Name = "lvlLeafList";
-            this.lvlLeafList.ReadOnly = true;
-            this.lvlLeafList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle116.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle116.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle116.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle116.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle116.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle116.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafList.RowHeadersDefaultCellStyle = dataGridViewCellStyle116;
-            this.lvlLeafList.RowHeadersVisible = false;
-            this.lvlLeafList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.lvlLeafList.RowTemplate.Height = 20;
-            this.lvlLeafList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.lvlLeafList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLeafList.Size = new System.Drawing.Size(236, 184);
-            this.lvlLeafList.TabIndex = 74;
-            this.lvlLeafList.Tag = "editorpaneldgv";
-            this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
-            this.lvlLeafList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_RowEnter);
+            this.lvlLeafPaths.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.lvlLeafPaths.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvlLeafPaths.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.lvlLeafPaths.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafPaths.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.lvlLeafPaths.ColumnHeadersHeight = 20;
+            this.lvlLeafPaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.lvlLeafPaths.Cursor = System.Windows.Forms.Cursors.Arrow;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafPaths.DefaultCellStyle = dataGridViewCellStyle12;
+            this.lvlLeafPaths.EnableHeadersVisualStyles = false;
+            this.lvlLeafPaths.GridColor = System.Drawing.Color.Black;
+            this.lvlLeafPaths.Location = new System.Drawing.Point(27, 14);
+            this.lvlLeafPaths.MultiSelect = false;
+            this.lvlLeafPaths.Name = "lvlLeafPaths";
+            this.lvlLeafPaths.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.lvlLeafPaths.RowHeadersVisible = false;
+            this.lvlLeafPaths.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.lvlLeafPaths.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.lvlLeafPaths.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.lvlLeafPaths.RowTemplate.Height = 20;
+            this.lvlLeafPaths.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLeafPaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 200);
+            this.lvlLeafPaths.TabIndex = 79;
+            this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
+            this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             // 
-            // lvlfiletype
+            // lvlPathsToolStrip
             // 
-            this.lvlfiletype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.lvlfiletype.HeaderText = "";
-            this.lvlfiletype.Name = "lvlfiletype";
-            this.lvlfiletype.ReadOnly = true;
-            this.lvlfiletype.Width = 5;
+            this.lvlPathsToolStrip.AutoSize = false;
+            this.lvlPathsToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.lvlPathsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.lvlPathsToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.lvlPathsToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.lvlPathsToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.lvlPathsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnLvlPathAdd,
+            this.btnLvlPathDelete,
+            this.btnLvlCopyTunnel,
+            this.btnLvlPasteTunnel,
+            this.chkTunnelCopy});
+            this.lvlPathsToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.lvlPathsToolStrip.Location = new System.Drawing.Point(1, 14);
+            this.lvlPathsToolStrip.Name = "lvlPathsToolStrip";
+            this.lvlPathsToolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.lvlPathsToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.lvlPathsToolStrip.Size = new System.Drawing.Size(25, 135);
+            this.lvlPathsToolStrip.Stretch = true;
+            this.lvlPathsToolStrip.TabIndex = 143;
             // 
-            // Leaf
+            // btnLvlPathAdd
             // 
-            this.Leaf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Leaf.FillWeight = 30F;
-            this.Leaf.HeaderText = "Leaf";
-            this.Leaf.Name = "Leaf";
-            this.Leaf.ReadOnly = true;
-            this.Leaf.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.btnLvlPathAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlPathAdd.Enabled = false;
+            this.btnLvlPathAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLvlPathAdd.ForeColor = System.Drawing.Color.White;
+            this.btnLvlPathAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
+            this.btnLvlPathAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlPathAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLvlPathAdd.Name = "btnLvlPathAdd";
+            this.btnLvlPathAdd.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlPathAdd.ToolTipText = "Add new path/tunnel";
+            this.btnLvlPathAdd.Click += new System.EventHandler(this.btnLvlPathAdd_Click);
             // 
-            // Beats
+            // btnLvlPathDelete
             // 
-            this.Beats.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Beats.FillWeight = 20F;
-            this.Beats.HeaderText = "Beats";
-            this.Beats.Name = "Beats";
-            this.Beats.ReadOnly = true;
-            this.Beats.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.btnLvlPathDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlPathDelete.Enabled = false;
+            this.btnLvlPathDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnLvlPathDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlPathDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLvlPathDelete.Name = "btnLvlPathDelete";
+            this.btnLvlPathDelete.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlPathDelete.ToolTipText = "Delete selected path";
+            this.btnLvlPathDelete.Click += new System.EventHandler(this.btnLvlPathDelete_Click);
+            // 
+            // btnLvlCopyTunnel
+            // 
+            this.btnLvlCopyTunnel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlCopyTunnel.Enabled = false;
+            this.btnLvlCopyTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
+            this.btnLvlCopyTunnel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
+            this.btnLvlCopyTunnel.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlCopyTunnel.ToolTipText = "Copy all paths/tunnels";
+            this.btnLvlCopyTunnel.Click += new System.EventHandler(this.btnLvlCopyTunnel_Click);
+            // 
+            // btnLvlPasteTunnel
+            // 
+            this.btnLvlPasteTunnel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlPasteTunnel.Enabled = false;
+            this.btnLvlPasteTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
+            this.btnLvlPasteTunnel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlPasteTunnel.Name = "btnLvlPasteTunnel";
+            this.btnLvlPasteTunnel.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlPasteTunnel.ToolTipText = "Paste copied paths/tunnels";
+            this.btnLvlPasteTunnel.Click += new System.EventHandler(this.btnLvlPasteTunnel_Click);
+            // 
+            // chkTunnelCopy
+            // 
+            this.chkTunnelCopy.CheckOnClick = true;
+            this.chkTunnelCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.chkTunnelCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_sling;
+            this.chkTunnelCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.chkTunnelCopy.Name = "chkTunnelCopy";
+            this.chkTunnelCopy.Size = new System.Drawing.Size(24, 24);
+            this.chkTunnelCopy.ToolTipText = "When enabled, new leafs added will copy the paths\r\nof the previous leaf.";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.White;
+            this.label21.Location = new System.Drawing.Point(27, 1);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(150, 13);
+            this.label21.TabIndex = 80;
+            this.label21.Text = "Decorator Paths/Tunnels";
+            this.toolTip1.SetToolTip(this.label21, "Unique per leaf");
+            // 
+            // lvlLoopTracks
+            // 
+            this.lvlLoopTracks.AllowUserToAddRows = false;
+            this.lvlLoopTracks.AllowUserToDeleteRows = false;
+            this.lvlLoopTracks.AllowUserToResizeColumns = false;
+            this.lvlLoopTracks.AllowUserToResizeRows = false;
+            this.lvlLoopTracks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvlLoopTracks.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.lvlLoopTracks.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvlLoopTracks.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.lvlLoopTracks.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLoopTracks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.lvlLoopTracks.ColumnHeadersHeight = 20;
+            this.lvlLoopTracks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.LoopSample,
+            this.BeatsPerLoop});
+            this.lvlLoopTracks.Cursor = System.Windows.Forms.Cursors.Arrow;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = null;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLoopTracks.DefaultCellStyle = dataGridViewCellStyle15;
+            this.lvlLoopTracks.EnableHeadersVisualStyles = false;
+            this.lvlLoopTracks.GridColor = System.Drawing.Color.Black;
+            this.lvlLoopTracks.Location = new System.Drawing.Point(276, 14);
+            this.lvlLoopTracks.MultiSelect = false;
+            this.lvlLoopTracks.Name = "lvlLoopTracks";
+            this.lvlLoopTracks.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLoopTracks.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            this.lvlLoopTracks.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.lvlLoopTracks.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.lvlLoopTracks.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.lvlLoopTracks.RowTemplate.Height = 20;
+            this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.lvlLoopTracks.Size = new System.Drawing.Size(361, 200);
+            this.lvlLoopTracks.TabIndex = 81;
+            this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
+            this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
+            this.lvlLoopTracks.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.lvlLoopTracks_DataError);
+            // 
+            // LoopSample
+            // 
+            this.LoopSample.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.LoopSample.HeaderText = "Loop Sample";
+            this.LoopSample.MaxDropDownItems = 20;
+            this.LoopSample.Name = "LoopSample";
+            // 
+            // BeatsPerLoop
+            // 
+            this.BeatsPerLoop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.BeatsPerLoop.HeaderText = "Beats Per Loop";
+            this.BeatsPerLoop.Name = "BeatsPerLoop";
+            this.BeatsPerLoop.Width = 115;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.White;
+            this.label22.Location = new System.Drawing.Point(276, 1);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(99, 13);
+            this.label22.TabIndex = 82;
+            this.label22.Text = "Lvl Loop Tracks";
+            // 
+            // toolstripTitleLvl
+            // 
+            this.toolstripTitleLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleLvl.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleLvl.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleLvl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblLvlName,
+            this.btnSaveLvl,
+            this.lblLvlClose,
+            this.lblPopoutLvl,
+            this.btnLvlLoopRefresh,
+            this.btnRevertLvl});
+            this.toolstripTitleLvl.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleLvl.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleLvl.Name = "toolstripTitleLvl";
+            this.toolstripTitleLvl.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleLvl.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleLvl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleLvl.Size = new System.Drawing.Size(888, 22);
+            this.toolstripTitleLvl.TabIndex = 140;
+            this.toolstripTitleLvl.Text = "titlebar";
+            // 
+            // lblLvlName
+            // 
+            this.lblLvlName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLvlName.ForeColor = System.Drawing.Color.Green;
+            this.lblLvlName.Name = "lblLvlName";
+            this.lblLvlName.Size = new System.Drawing.Size(60, 19);
+            this.lblLvlName.Text = "Lvl Editor";
+            // 
+            // btnSaveLvl
+            // 
+            this.btnSaveLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSaveLvl.Enabled = false;
+            this.btnSaveLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
+            this.btnSaveLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveLvl.Name = "btnSaveLvl";
+            this.btnSaveLvl.Size = new System.Drawing.Size(23, 19);
+            this.btnSaveLvl.ToolTipText = "Save lvl file";
+            this.btnSaveLvl.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
+            // 
+            // lblLvlClose
+            // 
+            this.lblLvlClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblLvlClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblLvlClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblLvlClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblLvlClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblLvlClose.Name = "lblLvlClose";
+            this.lblLvlClose.Size = new System.Drawing.Size(23, 22);
+            this.lblLvlClose.Text = "toolStripButton6";
+            this.lblLvlClose.ToolTipText = "Close panel";
+            this.lblLvlClose.Click += new System.EventHandler(this.lblLvlClose_Click);
+            // 
+            // lblPopoutLvl
+            // 
+            this.lblPopoutLvl.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutLvl.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutLvl.Name = "lblPopoutLvl";
+            this.lblPopoutLvl.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutLvl.Text = "Dock panel";
+            this.lblPopoutLvl.ToolTipText = "Undock panel";
+            this.lblPopoutLvl.Click += new System.EventHandler(this.lblPopin_Click);
+            // 
+            // btnLvlLoopRefresh
+            // 
+            this.btnLvlLoopRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnLvlLoopRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlLoopRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.btnLvlLoopRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlLoopRefresh.Name = "btnLvlLoopRefresh";
+            this.btnLvlLoopRefresh.Size = new System.Drawing.Size(23, 19);
+            this.btnLvlLoopRefresh.ToolTipText = "Reload available loop tracks from workingfolder";
+            this.btnLvlLoopRefresh.Click += new System.EventHandler(this.btnLvlLoopRefresh_Click);
+            // 
+            // btnRevertLvl
+            // 
+            this.btnRevertLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRevertLvl.Enabled = false;
+            this.btnRevertLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
+            this.btnRevertLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRevertLvl.Name = "btnRevertLvl";
+            this.btnRevertLvl.Size = new System.Drawing.Size(23, 19);
+            this.btnRevertLvl.ToolTipText = "Revert changes to last save";
+            this.btnRevertLvl.Click += new System.EventHandler(this.btnRevertLvl_Click);
             // 
             // panelMaster
             // 
@@ -3583,14 +3613,14 @@
             this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.masterLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle117.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle117.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle117.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle117.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle117.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle117.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle117.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle117;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.masterLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -3600,29 +3630,29 @@
             this.masterPlayplus,
             this.masterIsolate});
             this.masterLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle118.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle118.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle118.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle118.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle118.NullValue = null;
-            dataGridViewCellStyle118.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle118.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle118.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle118;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle18.NullValue = null;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle18;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = System.Drawing.Color.Black;
             this.masterLvlList.Location = new System.Drawing.Point(3, 39);
             this.masterLvlList.MultiSelect = false;
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle119.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle119.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle119.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle119.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle119.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle119.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle119.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle119;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.masterLvlList.RowHeadersVisible = false;
             this.masterLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.masterLvlList.RowTemplate.Height = 20;
@@ -4583,14 +4613,14 @@
             this.gateLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gateLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.gateLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle120.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle120.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle120.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle120.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle120.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle120.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle120.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gateLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle120;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gateLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.gateLvlList.ColumnHeadersHeight = 20;
             this.gateLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gateLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -4598,29 +4628,29 @@
             this.Sentry,
             this.dgvGateBucket});
             this.gateLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle121.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle121.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle121.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle121.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle121.NullValue = null;
-            dataGridViewCellStyle121.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle121.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle121.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gateLvlList.DefaultCellStyle = dataGridViewCellStyle121;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle21.NullValue = null;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gateLvlList.DefaultCellStyle = dataGridViewCellStyle21;
             this.gateLvlList.EnableHeadersVisualStyles = false;
             this.gateLvlList.GridColor = System.Drawing.Color.Black;
             this.gateLvlList.Location = new System.Drawing.Point(3, 39);
             this.gateLvlList.MultiSelect = false;
             this.gateLvlList.Name = "gateLvlList";
             this.gateLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle122.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle122.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle122.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle122.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle122.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle122.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle122.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gateLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle122;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gateLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.gateLvlList.RowHeadersVisible = false;
             this.gateLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.gateLvlList.RowTemplate.Height = 20;
@@ -5015,30 +5045,30 @@
             this.workingfolderFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.workingfolderFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.workingfolderFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle123.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle123.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle123.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle123.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle123.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle123.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle123.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle123;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.workingfolderFiles.ColumnHeadersHeight = 20;
             this.workingfolderFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.workingfolderFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FileType,
             this.FileName});
             this.workingfolderFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle91.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle91.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle91.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle91.Format = "N2";
-            dataGridViewCellStyle91.NullValue = null;
-            dataGridViewCellStyle91.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle91.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle91.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle91;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle25.Format = "N2";
+            dataGridViewCellStyle25.NullValue = null;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle25;
             this.workingfolderFiles.EnableHeadersVisualStyles = false;
             this.workingfolderFiles.GridColor = System.Drawing.Color.Black;
             this.workingfolderFiles.Location = new System.Drawing.Point(31, 52);
@@ -5046,14 +5076,14 @@
             this.workingfolderFiles.Name = "workingfolderFiles";
             this.workingfolderFiles.ReadOnly = true;
             this.workingfolderFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle125.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle125.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle125.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle125.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle125.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle125.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle125.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle125;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.workingfolderFiles.RowHeadersVisible = false;
             this.workingfolderFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.workingfolderFiles.RowTemplate.Height = 20;
@@ -5082,10 +5112,10 @@
             // 
             this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.FileName.ContextMenuStrip = this.workingfolderRightClick;
-            dataGridViewCellStyle124.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle124.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle124.ForeColor = System.Drawing.Color.White;
-            this.FileName.DefaultCellStyle = dataGridViewCellStyle124;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
+            this.FileName.DefaultCellStyle = dataGridViewCellStyle24;
             this.FileName.HeaderText = "File Name";
             this.FileName.Name = "FileName";
             this.FileName.ReadOnly = true;
@@ -5580,14 +5610,14 @@
             this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sampleList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.sampleList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle126.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle126.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle126.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle126.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle126.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle126.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle126.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sampleList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle126;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.sampleList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.sampleList.ColumnHeadersHeight = 20;
             this.sampleList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.sampleList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -5598,30 +5628,30 @@
             this.Offset,
             this.Channel});
             this.sampleList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle127.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle127.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle127.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle127.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle127.Format = "N2";
-            dataGridViewCellStyle127.NullValue = null;
-            dataGridViewCellStyle127.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle127.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle127.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sampleList.DefaultCellStyle = dataGridViewCellStyle127;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle28.Format = "N2";
+            dataGridViewCellStyle28.NullValue = null;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.sampleList.DefaultCellStyle = dataGridViewCellStyle28;
             this.sampleList.EnableHeadersVisualStyles = false;
             this.sampleList.GridColor = System.Drawing.Color.Black;
             this.sampleList.Location = new System.Drawing.Point(6, 38);
             this.sampleList.MultiSelect = false;
             this.sampleList.Name = "sampleList";
             this.sampleList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle128.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle128.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle128.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle128.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle128.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle128.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle128.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle128;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
             this.sampleList.RowHeadersVisible = false;
             this.sampleList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.sampleList.RowTemplate.Height = 20;
@@ -5862,14 +5892,14 @@
             this.dgvRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvRecentFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvRecentFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle129.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle129.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle129.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle129.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle129.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle129.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle129.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle129;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle30;
             this.dgvRecentFiles.ColumnHeadersHeight = 20;
             this.dgvRecentFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRecentFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -5878,15 +5908,15 @@
             this.dataGridViewTextBoxColumn2,
             this.closerecent});
             this.dgvRecentFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle132.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle132.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle132.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle132.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle132.NullValue = null;
-            dataGridViewCellStyle132.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle132.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle132.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle132;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle33.NullValue = null;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle33;
             this.dgvRecentFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRecentFiles.EnableHeadersVisualStyles = false;
             this.dgvRecentFiles.GridColor = System.Drawing.Color.Black;
@@ -5895,13 +5925,13 @@
             this.dgvRecentFiles.Name = "dgvRecentFiles";
             this.dgvRecentFiles.ReadOnly = true;
             this.dgvRecentFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle133.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle133.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle133.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle133.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle133.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle133.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle133;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.dgvRecentFiles.RowHeadersVisible = false;
             this.dgvRecentFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRecentFiles.RowTemplate.Height = 20;
@@ -5926,8 +5956,8 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle130.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle130;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridViewTextBoxColumn1.FillWeight = 30F;
             this.dataGridViewTextBoxColumn1.HeaderText = "Level";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -5938,9 +5968,9 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle131.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle131.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle131;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle32;
             this.dataGridViewTextBoxColumn2.FillWeight = 20F;
             this.dataGridViewTextBoxColumn2.HeaderText = "Path";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -6021,35 +6051,6 @@
             this.btnLevelFolder2.ToolTipText = "Open a different level folder";
             this.btnLevelFolder2.Click += new System.EventHandler(this.btnLevelFolder_Click);
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Location = new System.Drawing.Point(247, 23);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.lvlSeqObjs);
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
-            this.splitContainer1.Panel1.Controls.Add(this.lvlVolumeToolStrip);
-            this.splitContainer1.Panel1.Controls.Add(this.label20);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.lvlLoopToolStrip);
-            this.splitContainer1.Panel2.Controls.Add(this.lvlLeafPaths);
-            this.splitContainer1.Panel2.Controls.Add(this.lvlPathsToolStrip);
-            this.splitContainer1.Panel2.Controls.Add(this.label21);
-            this.splitContainer1.Panel2.Controls.Add(this.lvlLoopTracks);
-            this.splitContainer1.Panel2.Controls.Add(this.label22);
-            this.splitContainer1.Size = new System.Drawing.Size(641, 343);
-            this.splitContainer1.SplitterDistance = 124;
-            this.splitContainer1.TabIndex = 145;
-            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -6104,25 +6105,31 @@
             this.leaftoolsToolStrip.PerformLayout();
             this.panelLevel.ResumeLayout(false);
             this.panelLevel.PerformLayout();
-            this.toolstripTitleLvl.ResumeLayout(false);
-            this.toolstripTitleLvl.PerformLayout();
-            this.lvlLoopToolStrip.ResumeLayout(false);
-            this.lvlLoopToolStrip.PerformLayout();
-            this.lvlPathsToolStrip.ResumeLayout(false);
-            this.lvlPathsToolStrip.PerformLayout();
-            this.lvlVolumeToolStrip.ResumeLayout(false);
-            this.lvlVolumeToolStrip.PerformLayout();
             this.lvlToolStrip.ResumeLayout(false);
             this.lvlToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlApproach)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lvlLoopTracks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvlLeafList)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lvlSeqObjs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lvlLeafPaths)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lvlLeafList)).EndInit();
+            this.lvlVolumeToolStrip.ResumeLayout(false);
+            this.lvlVolumeToolStrip.PerformLayout();
+            this.lvlLoopToolStrip.ResumeLayout(false);
+            this.lvlLoopToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lvlLeafPaths)).EndInit();
+            this.lvlPathsToolStrip.ResumeLayout(false);
+            this.lvlPathsToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lvlLoopTracks)).EndInit();
+            this.toolstripTitleLvl.ResumeLayout(false);
+            this.toolstripTitleLvl.PerformLayout();
             this.panelMaster.ResumeLayout(false);
             this.panelMaster.PerformLayout();
             this.toolstripTitleMaster.ResumeLayout(false);
@@ -6190,12 +6197,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).EndInit();
             this.toolstripRecentFiles.ResumeLayout(false);
             this.toolstripRecentFiles.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

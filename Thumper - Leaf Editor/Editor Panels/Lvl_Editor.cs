@@ -131,7 +131,7 @@ namespace Thumper_Custom_Level_Editor
 			try {
 				var _cell = lvlSeqObjs[e.ColumnIndex, e.RowIndex];
 				if (!string.IsNullOrEmpty(_cell?.Value?.ToString()))
-					_cell.Style.BackColor = Color.Blue;
+					_cell.Style.BackColor = Color.Purple;
 				else if (_cell != null)
 					_cell.Style = null;
 
