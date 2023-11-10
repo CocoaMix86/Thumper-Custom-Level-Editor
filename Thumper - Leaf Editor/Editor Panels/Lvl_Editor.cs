@@ -37,7 +37,6 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedlvl;
 		string _loadedlvltemp;
 		public bool loadinglvl = false;
-		public bool calculatelength = true;
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
 		List<SampleData> _lvlsamples = new List<SampleData>();
@@ -161,23 +160,19 @@ namespace Thumper_Custom_Level_Editor
 		//Fill weight - allows for more columns
 		private void lvlSeqObjs_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
 		{
-			e.Column.FillWeight = trackLvlVolumeZoom.Value;
+			//e.Column.FillWeight = trackLvlVolumeZoom.Value;
 		}
 		///_LVLLEAF - Triggers when the collection changes
 		public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			if (calculatelength) {
-				_lvllength = (int)NUD_lvlApproach.Value;
-				lvlSeqObjs.ColumnCount = _lvllength;
-				foreach (LvlLeafData _leaf in _lvlleafs) {
-					//total length of all leafs. This value is used for the volume sequencer
-					_lvllength += _leaf.beats;
-					lvlSeqObjs.ColumnCount = _lvllength;
-					lvlSeqObjs.Columns[lvlSeqObjs.ColumnCount - _leaf.beats].DefaultCellStyle.BackColor = Color.Gray;
-				}
-				//some styles
-				GenerateColumnStyle(lvlSeqObjs, _lvllength, trackLvlVolumeZoom.Value);
+			//calculate total length of all leafs. This value is used for the volume sequencer
+			_lvllength = (int)NUD_lvlApproach.Value;
+			foreach (LvlLeafData _leaf in _lvlleafs) {
+				_lvllength += _leaf.beats;
 			}
+			lvlSeqObjs.ColumnCount = _lvllength;
+			//GenerateColumnStyle(lvlSeqObjs, _lvllength, trackLvlVolumeZoom.Value);
+
 
 			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
 			int _in = e.NewStartingIndex;
@@ -342,9 +337,9 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlLeafUp_Click(object sender, EventArgs e)
 		{
+			_lvlleafs.CollectionChanged -= lvlleaf_CollectionChanged;
 			try {
 				// get index of the row for the selected cell
-				calculatelength = false;
 				int rowIndex = lvlLeafList.CurrentRow.Index;
 				if (rowIndex == 0)
 					return;
@@ -354,17 +349,15 @@ namespace Thumper_Custom_Level_Editor
 				//move selected cell up a row to follow the moved item
 				_lvlleafs.Insert(rowIndex - 1, selectedLeaf);
 				lvlLeafList.Rows[rowIndex - 1].Cells[0].Selected = true;
-				calculatelength = true;
 			}
-			catch {
-				calculatelength = true;
-			}
+			catch {	}
+			_lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
 		}
 
 		private void btnLvlLeafDown_Click(object sender, EventArgs e)
 		{
+			_lvlleafs.CollectionChanged -= lvlleaf_CollectionChanged;
 			try {
-				calculatelength = false;
 				// get index of the row for the selected cell
 				int rowIndex = lvlLeafList.CurrentRow.Index;
 				if (rowIndex == _lvlleafs.Count - 1)
@@ -375,11 +368,9 @@ namespace Thumper_Custom_Level_Editor
 				//move selected cell up a row to follow the moved item
 				_lvlleafs.Insert(rowIndex + 1, selectedLeaf);
 				lvlLeafList.Rows[rowIndex + 1].Cells[0].Selected = true;
-				calculatelength = true;
 			}
-			catch {
-				calculatelength = true;
-			}
+			catch {	}
+			_lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
 		}
 
 		///COPY PASTE of leaf
@@ -695,6 +686,13 @@ namespace Thumper_Custom_Level_Editor
 				paths = new List<string>(copytunnels)
 			});
 		}
+
+		public void PaintLvlSeqDividers(int startidx, int endidx)
+        {
+			for (int idx = startidx; idx < endidx; idx++) {
+				lvlSeqObjs.Columns[idx].DefaultCellStyle.BackColor = Color.FromArgb(0,0,0);
+			}
+        }
 
 		public void LvlUpdatePaths(int index)
 		{

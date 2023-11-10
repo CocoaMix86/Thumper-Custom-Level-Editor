@@ -359,8 +359,12 @@ namespace Thumper_Custom_Level_Editor
 		private void numericUpDown_LeafLength_ValueChanged(object sender, EventArgs e)
 		{
 			_beats = (int)numericUpDown_LeafLength.Value;
-			trackEditor.ColumnCount = _beats;
-			GenerateColumnStyle(trackEditor, _beats);
+			if (_beats > trackEditor.ColumnCount) {
+				trackEditor.ColumnCount = _beats;
+				GenerateColumnStyle(trackEditor, _beats);
+			}
+			else
+				trackEditor.ColumnCount = _beats;
 			//set cell zoom
 			trackZoom_Scroll(null, null);
 			//make sure new cells follow the time sig
@@ -1129,8 +1133,8 @@ namespace Thumper_Custom_Level_Editor
 				grid.Columns[i].MinimumWidth = 2;
 				grid.Columns[i].ReadOnly = false;
 				grid.Columns[i].ValueType = typeof(decimal);
-				grid.Columns[i].DefaultCellStyle.Format = "0.######";
-				grid.Columns[i].FillWeight = 1;
+				grid.Columns[i].DefaultCellStyle.Format = "0.###";
+				grid.Columns[i].FillWeight = width;
 			}
 		}
 		///Import raw text from rich text box to selected row
