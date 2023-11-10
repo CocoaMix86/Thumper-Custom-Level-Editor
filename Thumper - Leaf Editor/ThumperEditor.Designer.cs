@@ -6046,7 +6046,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(1000, 39);
             this.Name = "FormLeafEditor";
-            this.Text = "Thumper Custom Level Editor [v2.0.0]";
+            this.Text = "Thumper Custom Level Editor [v2.1.0]";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLeafEditor_FormClosing);
             this.Load += new System.EventHandler(this.FormLeafEditor_Load);
