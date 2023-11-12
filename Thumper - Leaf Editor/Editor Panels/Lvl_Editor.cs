@@ -174,7 +174,8 @@ namespace Thumper_Custom_Level_Editor
 			idxtocolor.Clear();
 			_lvllength = (int)NUD_lvlApproach.Value;
 			foreach (LvlLeafData _leaf in _lvlleafs) {
-				idxtocolor.Add(_lvllength);
+				if (_leaf.beats > 0)
+					idxtocolor.Add(_lvllength);
 				_lvllength += _leaf.beats;
 			}
 			lvlSeqObjs.ColumnCount = _lvllength;
