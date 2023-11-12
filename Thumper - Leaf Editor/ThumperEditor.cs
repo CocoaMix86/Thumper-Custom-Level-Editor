@@ -74,6 +74,7 @@ namespace Thumper_Custom_Level_Editor
         public List<string> lvlsinworkfolder = new List<string>();
         public string _dgfocus;
         public Point _menuloc;
+        public Random rng = new Random();
         #endregion
 
         public FormLeafEditor()
@@ -673,7 +674,6 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnLeafRandom_Click(object sender, EventArgs e)
         {
-            Random rng = new Random();
             btnTrackAdd_Click(null, null);
             dropObjects.SelectedIndex = rng.Next(0, dropObjects.Items.Count);
             if (dropObjects.Text == "PLAY SAMPLE") {
@@ -684,8 +684,13 @@ namespace Thumper_Custom_Level_Editor
                 dropParamPath.SelectedIndex = rng.Next(0, dropParamPath.Items.Count);
             btnTrackApply_Click(null, null);
 
-            int idx = trackEditor.CurrentRow.Index;
-            foreach (DataGridViewCell dgvc in trackEditor.CurrentRow.Cells) {
+            RandomizeRowValues(trackEditor.CurrentRow);
+        }
+
+        private void RandomizeRowValues(DataGridViewRow dgvr)
+        {
+            int idx = dgvr.Index;
+            foreach (DataGridViewCell dgvc in dgvr.Cells) {
                 trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
                 if (_tracks[idx].trait_type == "kTraitBool" || _tracks[idx].trait_type == "kTraitAction" || _tracks[idx].param_path == "visibla01" || _tracks[idx].param_path == "visibla02" || _tracks[idx].param_path == "visible" || _tracks[idx].param_path == "visiblz01" || _tracks[idx].param_path == "visiblz02") {
                     if (_tracks[idx].obj_name == "sentry.spn")
@@ -702,7 +707,7 @@ namespace Thumper_Custom_Level_Editor
                     else if (_tracks[idx].obj_name == "fade.pp")
                         dgvc.Value = rng.Next(0, 10) >= 9 ? rng.NextDouble() : null;
                     else
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? (Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1): null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? (Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
 
                 trackEditor.CellValueChanged += trackEditor_CellValueChanged;
