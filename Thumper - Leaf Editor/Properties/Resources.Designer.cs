@@ -683,6 +683,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_random {
+            get {
+                object obj = ResourceManager.GetObject("icon_random", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_refresh {
             get {
                 object obj = ResourceManager.GetObject("icon_refresh", resourceCulture);
@@ -1555,13 +1565,14 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;EntitySpawner&apos;,
-        ///&apos;obj_name&apos;: &apos;pyramiddecorator.spn&apos;,
+        ///&apos;obj_name&apos;: &apos;pyramid.spn&apos;,
         ///&apos;xfm_name&apos;: &apos;&apos;,
         ///&apos;constraint&apos;: &apos;kConstraintParent&apos;,
         ///&apos;pos&apos;: [0, 0, 0],
         ///&apos;rot_x&apos;: [1, 0, 0],
         ///&apos;rot_y&apos;: [0, 1, 0],
-        ///&apos;rot_z&apos;: [0, 0, 1] [rest of string was truncated]&quot;;.
+        ///&apos;rot_z&apos;: [0, 0, 1],
+        ///&apos;scale [rest of string was truncated]&quot;;.
         /// </summary>
         public static string spn_default {
             get {

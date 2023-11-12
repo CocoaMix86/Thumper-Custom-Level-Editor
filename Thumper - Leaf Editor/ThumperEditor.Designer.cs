@@ -174,6 +174,7 @@
             this.btnTrackPlayback = new System.Windows.Forms.ToolStripButton();
             this.btnTrackColorExport = new System.Windows.Forms.ToolStripButton();
             this.btnTrackColorImport = new System.Windows.Forms.ToolStripButton();
+            this.btnLeafRandom = new System.Windows.Forms.ToolStripButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.dropTrackLane = new System.Windows.Forms.ComboBox();
@@ -1397,10 +1398,20 @@
             0,
             0,
             0});
+            this.numericUpDown_LeafLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown_LeafLength.Name = "numericUpDown_LeafLength";
             this.numericUpDown_LeafLength.Size = new System.Drawing.Size(72, 20);
             this.numericUpDown_LeafLength.TabIndex = 23;
             this.numericUpDown_LeafLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_LeafLength.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown_LeafLength.ValueChanged += new System.EventHandler(this.numericUpDown_LeafLength_ValueChanged);
             // 
             // richRawTrackData
@@ -1817,7 +1828,8 @@
             this.btnTrackClear,
             this.btnTrackPlayback,
             this.btnTrackColorExport,
-            this.btnTrackColorImport});
+            this.btnTrackColorImport,
+            this.btnLeafRandom});
             this.leafToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.leafToolStrip.Location = new System.Drawing.Point(186, 51);
             this.leafToolStrip.Name = "leafToolStrip";
@@ -1944,6 +1956,16 @@
             this.btnTrackColorImport.Size = new System.Drawing.Size(24, 24);
             this.btnTrackColorImport.ToolTipText = "Import a color profile and apply to selected track";
             this.btnTrackColorImport.Click += new System.EventHandler(this.btnTrackColorImport_Click);
+            // 
+            // btnLeafRandom
+            // 
+            this.btnLeafRandom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLeafRandom.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_random;
+            this.btnLeafRandom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafRandom.Name = "btnLeafRandom";
+            this.btnLeafRandom.Size = new System.Drawing.Size(24, 24);
+            this.btnLeafRandom.ToolTipText = "Click to add a random object + values to the leaf";
+            this.btnLeafRandom.Click += new System.EventHandler(this.btnLeafRandom_Click);
             // 
             // panel2
             // 
@@ -6579,6 +6601,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgvGateBucket;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ToolStripButton btnLeafRandom;
     }
 }
 
