@@ -675,13 +675,18 @@ namespace Thumper_Custom_Level_Editor
         private void btnLeafRandom_Click(object sender, EventArgs e)
         {
             btnTrackAdd_Click(null, null);
-            dropObjects.SelectedIndex = rng.Next(0, dropObjects.Items.Count);
-            if (dropObjects.Text == "PLAY SAMPLE") {
-                dropParamPath.SelectedIndex = 0;
-                dropTrackLane.SelectedIndex = rng.Next(0, dropTrackLane.Items.Count);
+            bool rando = true;
+            while (rando) {
+                dropObjects.SelectedIndex = rng.Next(0, dropObjects.Items.Count);
+                if (dropObjects.Text == "PLAY SAMPLE") {
+                    dropParamPath.SelectedIndex = 0;
+                    dropTrackLane.SelectedIndex = rng.Next(0, dropTrackLane.Items.Count);
+                }
+                else
+                    dropParamPath.SelectedIndex = rng.Next(0, dropParamPath.Items.Count);
+                if (_tracks.Where(x => (x.friendly_param ?? "").Split(',')[0] == dropParamPath.Text).Count() == 0)
+                    rando = false;
             }
-            else
-                dropParamPath.SelectedIndex = rng.Next(0, dropParamPath.Items.Count);
             btnTrackApply_Click(null, null);
 
             RandomizeRowValues(trackEditor.CurrentRow);
