@@ -54,8 +54,6 @@ namespace Thumper_Custom_Level_Editor
 		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public List<string> _tracklanefriendly = new List<string>() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
 		public List<Tuple<string, int, int>> _scrollpositions = new List<Tuple<string, int, int>>();
-		//public Sequencer_Object clipboard_track;
-		//public DataGridViewRow clipboard_row;
 		public List<Tuple<Sequencer_Object, DataGridViewRow>> clipboardtracks = new List<Tuple<Sequencer_Object, DataGridViewRow>>();
 		#endregion
 		#region EventHandlers
@@ -353,6 +351,13 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
 			trackEditor.CurrentCell = trackEditor.Rows[e.RowIndex].Cells[trackEditor.FirstDisplayedScrollingColumnIndex];
+		}
+
+		private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
+		{
+			hScrollBarTrackEditor.Location = new Point(trackEditor.Location.X + trackEditor.RowHeadersWidth, hScrollBarTrackEditor.Location.Y);
+			hScrollBarTrackEditor.Width = trackEditor.Width - trackEditor.RowHeadersWidth;
+			trackEditor_Resize(null, null);
 		}
 		///LEAF LENGTH
 		private void numericUpDown_LeafLength_ValueChanged(object sender, EventArgs e)
