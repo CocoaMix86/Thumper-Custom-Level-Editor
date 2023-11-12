@@ -1072,6 +1072,37 @@ namespace Thumper_Custom_Level_Editor
 			PlaySound("UIselect");
 		}
 
+		private void btnLeafRandom_Click(object sender, EventArgs e)
+		{
+			btnTrackAdd_Click(null, null);
+			bool rando = true;
+			while (rando) {
+				dropObjects.SelectedIndex = rng.Next(0, dropObjects.Items.Count);
+				if (dropObjects.Text == "PLAY SAMPLE") {
+					dropParamPath.SelectedIndex = 0;
+					dropTrackLane.SelectedIndex = rng.Next(0, dropTrackLane.Items.Count);
+				}
+				else
+					dropParamPath.SelectedIndex = rng.Next(0, dropParamPath.Items.Count);
+				if (_tracks.Where(x => (x.friendly_param ?? "").Split(',')[0] == dropParamPath.Text).Count() == 0)
+					rando = false;
+			}
+			btnTrackApply_Click(null, null);
+
+			RandomizeRowValues(trackEditor.CurrentRow);
+		}
+
+		private void btnLeafRandomValues_Click(object sender, EventArgs e)
+		{
+			if (trackEditor.CurrentRow.Index == -1)
+				return;
+
+			if (MessageBox.Show("Assign random values to the current selected track?", "Confirm randomization", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+				RandomizeRowValues(trackEditor.CurrentRow);
+				SaveLeaf(false);
+			}
+		}
+
 		/// These buttons exist on the Workingfolder panel
 		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
 		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => leafTemplateToolStripMenuItem.PerformClick();

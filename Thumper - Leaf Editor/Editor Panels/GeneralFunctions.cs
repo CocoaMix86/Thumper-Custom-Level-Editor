@@ -180,6 +180,37 @@ namespace Thumper_Custom_Level_Editor
             }
             return newdgvr;
         }
+
+
+        private void RandomizeRowValues(DataGridViewRow dgvr)
+        {
+            int idx = dgvr.Index;
+            foreach (DataGridViewCell dgvc in dgvr.Cells) {
+                trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+                dgvc.Value = null;
+                if (_tracks[idx].trait_type == "kTraitBool" || _tracks[idx].trait_type == "kTraitAction" || _tracks[idx].param_path == "visibla01" || _tracks[idx].param_path == "visibla02" || _tracks[idx].param_path == "visible" || _tracks[idx].param_path == "visiblz01" || _tracks[idx].param_path == "visiblz02") {
+                    if (_tracks[idx].obj_name == "sentry.spn")
+                        dgvc.Value = rng.Next(0, 40) == 39 ? 1 : null;
+                    else
+                        dgvc.Value = rng.Next(0, 10) == 9 ? 1 : null;
+                }
+                else if (_tracks[idx].trait_type == "kTraitColor") {
+                    dgvc.Value = rng.Next(0, 10) >= 5 ? Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb() : null;
+                }
+                else {
+                    if (_tracks[idx].param_path == "sequin_speed")
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? (Math.Truncate(rng.NextDouble() * 10000) / 100) % 4 : null;
+                    else if (_tracks[idx].obj_name == "fade.pp")
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? rng.NextDouble() : null;
+                    else
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? (Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
+                }
+
+                trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+            }
+
+            TrackUpdateHighlighting(trackEditor.CurrentRow);
+        }
     }
 
     public static class ExtensionMethodClass
