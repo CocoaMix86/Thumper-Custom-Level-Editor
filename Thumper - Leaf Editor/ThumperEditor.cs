@@ -54,7 +54,7 @@ namespace Thumper_Custom_Level_Editor
                     btnExplorer.Enabled = true;
                     btnWorkRefresh.PerformClick();
                     //set window name to the level name
-                    this.Text = "Thumper Custom Level Editor - " + new DirectoryInfo(workingfolder).Name;
+                    this.Text = "Thumper Custom Level Editor [v2.1.0] - " + new DirectoryInfo(workingfolder).Name;
                     //add to recent files
                     if (Properties.Settings.Default.Recentfiles.Contains(workingfolder))
                         Properties.Settings.Default.Recentfiles.Remove(workingfolder);
