@@ -282,6 +282,10 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
 						return;
 					}
+					if (File.Exists($@"{storePath}\lvl_{tempFileName}")) {
+						MessageBox.Show("That file name exists already.", "File not saved");
+						return;
+					}
 					_loadedlvl = $@"{storePath}\lvl_{tempFileName}";
 					WriteLvl();
 					//after saving new file, refresh the workingfolder

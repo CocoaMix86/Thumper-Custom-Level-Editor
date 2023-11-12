@@ -495,6 +495,10 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");
 						return;
 					}
+					if (File.Exists($@"{storePath}\leaf_{tempFileName}")) {
+						MessageBox.Show("That file name exists already.", "File not saved");
+						return;
+					}
 					_loadedleaf = $@"{storePath}\leaf_{tempFileName}";
 					WriteLeaf();
 					//after saving new file, refresh the workingfolder

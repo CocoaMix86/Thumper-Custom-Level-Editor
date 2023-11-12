@@ -195,6 +195,10 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'samp_' in your file name.", "File not saved");
 						return;
 					}
+					if (File.Exists($@"{storePath}\samp_{tempFileName}")) {
+						MessageBox.Show("That file name exists already.", "File not saved");
+						return;
+					}
 					_loadedsample = $@"{storePath}\samp_{tempFileName}";
 					WriteSample();
 					//after saving new file, refresh the workingfolder

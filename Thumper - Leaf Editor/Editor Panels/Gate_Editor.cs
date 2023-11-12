@@ -187,6 +187,10 @@ namespace Thumper_Custom_Level_Editor
 						MessageBox.Show("File not saved. Do not include 'gate_' in your file name.", "File not saved");
 						return;
 					}
+					if (File.Exists($@"{storePath}\gate_{tempFileName}")) {
+						MessageBox.Show("That file name exists already.", "File not saved");
+						return;
+					}
 					_loadedgate = $@"{storePath}\gate_{tempFileName}";
 					WriteGate();
 					//after saving new file, refresh the workingfolder
