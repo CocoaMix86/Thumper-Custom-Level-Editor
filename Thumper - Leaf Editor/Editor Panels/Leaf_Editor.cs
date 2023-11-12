@@ -1270,7 +1270,8 @@ namespace Thumper_Custom_Level_Editor
 			_tracks.Clear();
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 			//set beat_cnt and time_sig
-			numericUpDown_LeafLength.Value = (int?)_load["beat_cnt"] ?? 1;
+			int _leaflength = (int?)_load["beat_cnt"] ?? 1;
+			numericUpDown_LeafLength.Value = _leaflength > 0 ? _leaflength : 1;
 			var _time_sig = (string)_load["time_sig"] ?? "4/4";
 			if (!dropTimeSig.Items.Contains(_time_sig)) {
 				dropTimeSig.Items.Add(_time_sig);
