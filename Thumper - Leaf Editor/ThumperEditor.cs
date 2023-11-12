@@ -190,8 +190,6 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(panelWorkingFolder);
             ControlMoverOrResizer.Init(toolstripTitleWork);
             ControlMoverOrResizer.Init(toolstripRecentFiles);
-            //
-            AddScrollListener(trackEditor, trackEditor_Scroll);
 
             ///Create directory for leaf templates
             if (!Directory.Exists(@"templates")) {

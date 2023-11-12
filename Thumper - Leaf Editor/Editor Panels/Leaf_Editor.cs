@@ -73,12 +73,10 @@ namespace Thumper_Custom_Level_Editor
 		///
 		///TRACKBAR ZOOM AND SCROLLING
 		///DETECT SCROLL
-		private void AddScrollListener(DataGridView dgv, ScrollEventHandler scrollEventHandler)
+		private void trackEditor_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
 		{
-			HScrollBar scrollBar = dgv.Controls.OfType<HScrollBar>().First();
-			VScrollBar vscrollBar = dgv.Controls.OfType<VScrollBar>().First();
-			//scrollBar.Scroll += scrollEventHandler;
-			//vscrollBar.Scroll += scrollEventHandler;
+			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
 		}
 		private void trackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
@@ -99,7 +97,7 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Columns[i].Width = trackZoom.Value;
 			}
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 11);
+			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
@@ -107,14 +105,14 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
 			}
 			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 11);
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
 		}
 		private void trackEditor_Resize(object sender, EventArgs e)
 		{
 			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 11);
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 11);
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
+			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
 		}
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
 		{
