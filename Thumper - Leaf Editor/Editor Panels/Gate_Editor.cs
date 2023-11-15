@@ -447,8 +447,8 @@ namespace Thumper_Custom_Level_Editor
 			};
 			//setup boss_patterns
 			JArray boss_patterns = new JArray();
-			int lvlcount = checkGateRandom.Checked ? _gatelvls.Count : _save["spn_name"].ToString().Contains("pyramid") ? 5 : 4;
-			for (int x = 0; x < lvlcount; x++) {
+			//int lvlcount = checkGateRandom.Checked ? _gatelvls.Count : _save["spn_name"].ToString().Contains("pyramid") ? 5 : 4;
+			for (int x = 0; x < _gatelvls.Count; x++) {
 				JObject s = new JObject {
 					{ "lvl_name", _gatelvls[x].lvlname },
 					{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
