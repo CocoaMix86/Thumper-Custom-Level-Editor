@@ -242,6 +242,9 @@ namespace Thumper_Custom_Level_Editor
             trackZoomVert.Value = Properties.Settings.Default.leafzoomvert;
             trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
             btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
+            //
+            //forces dgv to create 1 column
+            numericUpDown_LeafLength_ValueChanged(null, null);
 
             //load recent levels 
             var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();

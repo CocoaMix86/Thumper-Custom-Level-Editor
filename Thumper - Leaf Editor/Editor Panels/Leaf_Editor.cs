@@ -639,7 +639,9 @@ namespace Thumper_Custom_Level_Editor
 				highlight_color = null,
 				highlight_value = 1
 			});
-			trackEditor.RowCount++;
+			trackEditor.Rows.Add(new DataGridViewRow() {
+				Height = trackZoomVert.Value
+			});
 			trackEditor.CurrentCell = trackEditor.Rows[_tracks.Count - 1].Cells[0];
 			//disable Apply button if object is not set
 			//dropObjects.SelectedIndex = 0;
