@@ -141,10 +141,12 @@ namespace Thumper_Custom_Level_Editor
 					}
 				}
 
-				if (!filterleaf && !filterlvl && !filtergate && !filtermaster && !filtersamp)
+				if (!filterleaf && !filterlvl && !filtergate && !filtermaster && !filtersamp) {
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
-				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp))
+				}
+				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp)) {
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
+				}
 			}
 			//enable button
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
