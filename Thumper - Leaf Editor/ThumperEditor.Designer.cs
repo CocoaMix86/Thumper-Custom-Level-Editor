@@ -149,6 +149,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.trackEditor = new System.Windows.Forms.DataGridView();
+            this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.trackZoom = new System.Windows.Forms.TrackBar();
             this.panelZoom = new System.Windows.Forms.Panel();
             this.trackZoomVert = new System.Windows.Forms.TrackBar();
@@ -347,12 +348,19 @@
             this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgvGateBucket = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.panelWorkingFolder = new System.Windows.Forms.Panel();
-            this.toolstripTitleWork = new System.Windows.Forms.ToolStrip();
-            this.lblWorkingFolder = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.lblWorkClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutWork = new System.Windows.Forms.ToolStripButton();
-            this.btnWorkRefresh = new System.Windows.Forms.ToolStripButton();
+            this.workingToolStrip = new System.Windows.Forms.ToolStrip();
+            this.filterLeaf = new System.Windows.Forms.ToolStripButton();
+            this.filterLvl = new System.Windows.Forms.ToolStripButton();
+            this.filterGate = new System.Windows.Forms.ToolStripButton();
+            this.filterMaster = new System.Windows.Forms.ToolStripButton();
+            this.filterSamp = new System.Windows.Forms.ToolStripButton();
+            this.workingfolderFiles = new System.Windows.Forms.DataGridView();
+            this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
+            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.workingfolderRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workingToolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnExplorer = new System.Windows.Forms.ToolStripButton();
             this.btnLevelFolder = new System.Windows.Forms.ToolStripButton();
@@ -367,19 +375,12 @@
             this.btnWorkCopy = new System.Windows.Forms.ToolStripButton();
             this.btnWorkDelete = new System.Windows.Forms.ToolStripButton();
             this.btnShowRecentFile = new System.Windows.Forms.ToolStripButton();
-            this.workingToolStrip = new System.Windows.Forms.ToolStrip();
-            this.filterLeaf = new System.Windows.Forms.ToolStripButton();
-            this.filterLvl = new System.Windows.Forms.ToolStripButton();
-            this.filterGate = new System.Windows.Forms.ToolStripButton();
-            this.filterMaster = new System.Windows.Forms.ToolStripButton();
-            this.filterSamp = new System.Windows.Forms.ToolStripButton();
-            this.workingfolderFiles = new System.Windows.Forms.DataGridView();
-            this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.workingfolderRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripTitleWork = new System.Windows.Forms.ToolStrip();
+            this.lblWorkingFolder = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.lblWorkClose = new System.Windows.Forms.ToolStripButton();
+            this.lblPopoutWork = new System.Windows.Forms.ToolStripButton();
+            this.btnWorkRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label48 = new System.Windows.Forms.Label();
             this.contextMenuDock = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -414,12 +415,6 @@
             this.label50 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
-            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelBeeble = new System.Windows.Forms.Panel();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
@@ -440,7 +435,12 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLevelFolder2 = new System.Windows.Forms.ToolStripButton();
-            this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -486,12 +486,12 @@
             this.gateToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
             this.panelWorkingFolder.SuspendLayout();
-            this.toolstripTitleWork.SuspendLayout();
-            this.workingToolStrip2.SuspendLayout();
-            this.contextMenuNewFile.SuspendLayout();
             this.workingToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.workingfolderRightClick.SuspendLayout();
+            this.workingToolStrip2.SuspendLayout();
+            this.contextMenuNewFile.SuspendLayout();
+            this.toolstripTitleWork.SuspendLayout();
             this.contextMenuDock.SuspendLayout();
             this.panelSample.SuspendLayout();
             this.toolstripTitleSample.SuspendLayout();
@@ -1614,6 +1614,11 @@
             this.trackEditor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.trackEditor_KeyPress);
             this.trackEditor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.trackEditor_KeyUp);
             this.trackEditor.Resize += new System.EventHandler(this.trackEditor_Resize);
+            // 
+            // Column0
+            // 
+            this.Column0.HeaderText = "0";
+            this.Column0.Name = "Column0";
             // 
             // trackZoom
             // 
@@ -4739,10 +4744,10 @@
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelWorkingFolder.Controls.Add(this.toolstripTitleWork);
-            this.panelWorkingFolder.Controls.Add(this.workingToolStrip2);
             this.panelWorkingFolder.Controls.Add(this.workingToolStrip);
             this.panelWorkingFolder.Controls.Add(this.workingfolderFiles);
+            this.panelWorkingFolder.Controls.Add(this.workingToolStrip2);
+            this.panelWorkingFolder.Controls.Add(this.toolstripTitleWork);
             this.panelWorkingFolder.Location = new System.Drawing.Point(4, 353);
             this.panelWorkingFolder.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelWorkingFolder.Name = "panelWorkingFolder";
@@ -4755,84 +4760,213 @@
             this.panelWorkingFolder.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelWorkingFolder.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
-            // toolstripTitleWork
+            // workingToolStrip
             // 
-            this.toolstripTitleWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleWork.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleWork.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleWork.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblWorkingFolder,
-            this.toolStripLabel1,
-            this.lblWorkClose,
-            this.lblPopoutWork,
-            this.btnWorkRefresh});
-            this.toolstripTitleWork.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleWork.MaximumSize = new System.Drawing.Size(0, 22);
-            this.toolstripTitleWork.Name = "toolstripTitleWork";
-            this.toolstripTitleWork.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleWork.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleWork.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleWork.Size = new System.Drawing.Size(197, 22);
-            this.toolstripTitleWork.TabIndex = 148;
-            this.toolstripTitleWork.Text = "titlebar";
+            this.workingToolStrip.AutoSize = false;
+            this.workingToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.workingToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.workingToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.workingToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.workingToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.workingToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filterLeaf,
+            this.filterLvl,
+            this.filterGate,
+            this.filterMaster,
+            this.filterSamp});
+            this.workingToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.workingToolStrip.Location = new System.Drawing.Point(3, 49);
+            this.workingToolStrip.Name = "workingToolStrip";
+            this.workingToolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.workingToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.workingToolStrip.Size = new System.Drawing.Size(25, 140);
+            this.workingToolStrip.Stretch = true;
+            this.workingToolStrip.TabIndex = 149;
             // 
-            // lblWorkingFolder
+            // filterLeaf
             // 
-            this.lblWorkingFolder.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWorkingFolder.ForeColor = System.Drawing.Color.White;
-            this.lblWorkingFolder.Name = "lblWorkingFolder";
-            this.lblWorkingFolder.Size = new System.Drawing.Size(94, 19);
-            this.lblWorkingFolder.Text = "Working Folder";
+            this.filterLeaf.CheckOnClick = true;
+            this.filterLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
+            this.filterLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterLeaf.Name = "filterLeaf";
+            this.filterLeaf.Size = new System.Drawing.Size(24, 24);
+            this.filterLeaf.ToolTipText = "Leaf files";
+            this.filterLeaf.CheckedChanged += new System.EventHandler(this.filterLeaf_CheckedChanged);
             // 
-            // toolStripLabel1
+            // filterLvl
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(0, 19);
+            this.filterLvl.CheckOnClick = true;
+            this.filterLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
+            this.filterLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterLvl.Name = "filterLvl";
+            this.filterLvl.Size = new System.Drawing.Size(24, 24);
+            this.filterLvl.ToolTipText = "Lvl files";
+            this.filterLvl.CheckedChanged += new System.EventHandler(this.filterLvl_CheckedChanged);
             // 
-            // lblWorkClose
+            // filterGate
             // 
-            this.lblWorkClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblWorkClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblWorkClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblWorkClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblWorkClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblWorkClose.Name = "lblWorkClose";
-            this.lblWorkClose.Size = new System.Drawing.Size(23, 22);
-            this.lblWorkClose.Text = "toolStripButton6";
-            this.lblWorkClose.ToolTipText = "Close panel";
-            this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
+            this.filterGate.CheckOnClick = true;
+            this.filterGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
+            this.filterGate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterGate.Name = "filterGate";
+            this.filterGate.Size = new System.Drawing.Size(24, 24);
+            this.filterGate.ToolTipText = "Gate files";
+            this.filterGate.CheckedChanged += new System.EventHandler(this.filterGate_CheckedChanged);
             // 
-            // lblPopoutWork
+            // filterMaster
             // 
-            this.lblPopoutWork.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutWork.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutWork.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutWork.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutWork.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutWork.Name = "lblPopoutWork";
-            this.lblPopoutWork.Size = new System.Drawing.Size(23, 22);
-            this.lblPopoutWork.Text = "Dock panel";
-            this.lblPopoutWork.ToolTipText = "Undock panel";
-            this.lblPopoutWork.Click += new System.EventHandler(this.lblPopin_Click);
+            this.filterMaster.CheckOnClick = true;
+            this.filterMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
+            this.filterMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterMaster.Name = "filterMaster";
+            this.filterMaster.Size = new System.Drawing.Size(24, 24);
+            this.filterMaster.ToolTipText = "Master files";
+            this.filterMaster.CheckedChanged += new System.EventHandler(this.filterMaster_CheckedChanged);
             // 
-            // btnWorkRefresh
+            // filterSamp
             // 
-            this.btnWorkRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnWorkRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnWorkRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnWorkRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnWorkRefresh.Name = "btnWorkRefresh";
-            this.btnWorkRefresh.Size = new System.Drawing.Size(23, 19);
-            this.btnWorkRefresh.ToolTipText = "Reload files in the working folder";
-            this.btnWorkRefresh.Click += new System.EventHandler(this.btnWorkRefresh_Click);
+            this.filterSamp.CheckOnClick = true;
+            this.filterSamp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filterSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
+            this.filterSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.filterSamp.Name = "filterSamp";
+            this.filterSamp.Size = new System.Drawing.Size(24, 24);
+            this.filterSamp.ToolTipText = "Sample files";
+            this.filterSamp.CheckedChanged += new System.EventHandler(this.filterSamp_CheckedChanged);
+            // 
+            // workingfolderFiles
+            // 
+            this.workingfolderFiles.AllowDrop = true;
+            this.workingfolderFiles.AllowUserToAddRows = false;
+            this.workingfolderFiles.AllowUserToDeleteRows = false;
+            this.workingfolderFiles.AllowUserToResizeRows = false;
+            this.workingfolderFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.workingfolderFiles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.workingfolderFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.workingfolderFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.workingfolderFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            this.workingfolderFiles.ColumnHeadersHeight = 20;
+            this.workingfolderFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.workingfolderFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FileType,
+            this.FileName});
+            this.workingfolderFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle25.Format = "N2";
+            dataGridViewCellStyle25.NullValue = null;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle25;
+            this.workingfolderFiles.EnableHeadersVisualStyles = false;
+            this.workingfolderFiles.GridColor = System.Drawing.Color.Black;
+            this.workingfolderFiles.Location = new System.Drawing.Point(30, 49);
+            this.workingfolderFiles.MultiSelect = false;
+            this.workingfolderFiles.Name = "workingfolderFiles";
+            this.workingfolderFiles.ReadOnly = true;
+            this.workingfolderFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
+            this.workingfolderFiles.RowHeadersVisible = false;
+            this.workingfolderFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.workingfolderFiles.RowTemplate.Height = 20;
+            this.workingfolderFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.workingfolderFiles.Size = new System.Drawing.Size(167, 286);
+            this.workingfolderFiles.TabIndex = 80;
+            this.workingfolderFiles.Tag = "editorpaneldgv";
+            this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
+            this.workingfolderFiles.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseClick);
+            this.workingfolderFiles.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseDown);
+            this.workingfolderFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.workingfolderFiles_DragDrop);
+            this.workingfolderFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.workingfolderFiles_DragEnter);
+            this.workingfolderFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.workingfolderFiles_KeyDown);
+            // 
+            // FileType
+            // 
+            this.FileType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FileType.HeaderText = "";
+            this.FileType.Name = "FileType";
+            this.FileType.ReadOnly = true;
+            this.FileType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.FileType.Width = 5;
+            // 
+            // FileName
+            // 
+            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FileName.ContextMenuStrip = this.workingfolderRightClick;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
+            this.FileName.DefaultCellStyle = dataGridViewCellStyle24;
+            this.FileName.HeaderText = "File Name";
+            this.FileName.Name = "FileName";
+            this.FileName.ReadOnly = true;
+            this.FileName.Width = 84;
+            // 
+            // workingfolderRightClick
+            // 
+            this.workingfolderRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renameToolStripMenuItem,
+            this.duplicateToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.workingfolderRightClick.Name = "workingfolderRightClick";
+            this.workingfolderRightClick.Size = new System.Drawing.Size(125, 70);
+            // 
+            // renameToolStripMenuItem
+            // 
+            this.renameToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.renameToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.renameToolStripMenuItem.Text = "Rename";
+            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
+            // 
+            // duplicateToolStripMenuItem
+            // 
+            this.duplicateToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.duplicateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.duplicateToolStripMenuItem.Text = "Duplicate";
+            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.BackColor = System.Drawing.Color.Red;
+            this.deleteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // workingToolStrip2
             // 
-            this.workingToolStrip2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.workingToolStrip2.AutoSize = false;
             this.workingToolStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.workingToolStrip2.Dock = System.Windows.Forms.DockStyle.None;
             this.workingToolStrip2.GripMargin = new System.Windows.Forms.Padding(0);
             this.workingToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.workingToolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -4845,11 +4979,11 @@
             this.btnWorkDelete,
             this.btnShowRecentFile});
             this.workingToolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.workingToolStrip2.Location = new System.Drawing.Point(5, 26);
+            this.workingToolStrip2.Location = new System.Drawing.Point(0, 22);
             this.workingToolStrip2.Name = "workingToolStrip2";
             this.workingToolStrip2.Padding = new System.Windows.Forms.Padding(0);
             this.workingToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.workingToolStrip2.Size = new System.Drawing.Size(189, 25);
+            this.workingToolStrip2.Size = new System.Drawing.Size(197, 25);
             this.workingToolStrip2.Stretch = true;
             this.workingToolStrip2.TabIndex = 150;
             // 
@@ -4993,208 +5127,77 @@
             this.btnShowRecentFile.ToolTipText = "Show recent levels opened";
             this.btnShowRecentFile.Click += new System.EventHandler(this.btnShowRecentFile_Click);
             // 
-            // workingToolStrip
+            // toolstripTitleWork
             // 
-            this.workingToolStrip.AutoSize = false;
-            this.workingToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.workingToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.workingToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.workingToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.workingToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.workingToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.filterLeaf,
-            this.filterLvl,
-            this.filterGate,
-            this.filterMaster,
-            this.filterSamp});
-            this.workingToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.workingToolStrip.Location = new System.Drawing.Point(4, 52);
-            this.workingToolStrip.Name = "workingToolStrip";
-            this.workingToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.workingToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.workingToolStrip.Size = new System.Drawing.Size(25, 140);
-            this.workingToolStrip.Stretch = true;
-            this.workingToolStrip.TabIndex = 149;
+            this.toolstripTitleWork.AutoSize = false;
+            this.toolstripTitleWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripTitleWork.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleWork.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripTitleWork.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblWorkingFolder,
+            this.toolStripLabel1,
+            this.lblWorkClose,
+            this.lblPopoutWork,
+            this.btnWorkRefresh});
+            this.toolstripTitleWork.Location = new System.Drawing.Point(0, 0);
+            this.toolstripTitleWork.MaximumSize = new System.Drawing.Size(0, 22);
+            this.toolstripTitleWork.Name = "toolstripTitleWork";
+            this.toolstripTitleWork.Padding = new System.Windows.Forms.Padding(0);
+            this.toolstripTitleWork.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolstripTitleWork.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolstripTitleWork.Size = new System.Drawing.Size(197, 22);
+            this.toolstripTitleWork.TabIndex = 148;
+            this.toolstripTitleWork.Text = "titlebar";
             // 
-            // filterLeaf
+            // lblWorkingFolder
             // 
-            this.filterLeaf.CheckOnClick = true;
-            this.filterLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
-            this.filterLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterLeaf.Name = "filterLeaf";
-            this.filterLeaf.Size = new System.Drawing.Size(24, 24);
-            this.filterLeaf.ToolTipText = "Leaf files";
-            this.filterLeaf.CheckedChanged += new System.EventHandler(this.filterLeaf_CheckedChanged);
+            this.lblWorkingFolder.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWorkingFolder.ForeColor = System.Drawing.Color.White;
+            this.lblWorkingFolder.Name = "lblWorkingFolder";
+            this.lblWorkingFolder.Size = new System.Drawing.Size(94, 19);
+            this.lblWorkingFolder.Text = "Working Folder";
             // 
-            // filterLvl
+            // toolStripLabel1
             // 
-            this.filterLvl.CheckOnClick = true;
-            this.filterLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
-            this.filterLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterLvl.Name = "filterLvl";
-            this.filterLvl.Size = new System.Drawing.Size(24, 24);
-            this.filterLvl.ToolTipText = "Lvl files";
-            this.filterLvl.CheckedChanged += new System.EventHandler(this.filterLvl_CheckedChanged);
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(0, 19);
             // 
-            // filterGate
+            // lblWorkClose
             // 
-            this.filterGate.CheckOnClick = true;
-            this.filterGate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
-            this.filterGate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterGate.Name = "filterGate";
-            this.filterGate.Size = new System.Drawing.Size(24, 24);
-            this.filterGate.ToolTipText = "Gate files";
-            this.filterGate.CheckedChanged += new System.EventHandler(this.filterGate_CheckedChanged);
+            this.lblWorkClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblWorkClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblWorkClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblWorkClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblWorkClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblWorkClose.Name = "lblWorkClose";
+            this.lblWorkClose.Size = new System.Drawing.Size(23, 22);
+            this.lblWorkClose.Text = "toolStripButton6";
+            this.lblWorkClose.ToolTipText = "Close panel";
+            this.lblWorkClose.Click += new System.EventHandler(this.lblWorkClose_Click);
             // 
-            // filterMaster
+            // lblPopoutWork
             // 
-            this.filterMaster.CheckOnClick = true;
-            this.filterMaster.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
-            this.filterMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterMaster.Name = "filterMaster";
-            this.filterMaster.Size = new System.Drawing.Size(24, 24);
-            this.filterMaster.ToolTipText = "Master files";
-            this.filterMaster.CheckedChanged += new System.EventHandler(this.filterMaster_CheckedChanged);
+            this.lblPopoutWork.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblPopoutWork.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblPopoutWork.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
+            this.lblPopoutWork.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblPopoutWork.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblPopoutWork.Name = "lblPopoutWork";
+            this.lblPopoutWork.Size = new System.Drawing.Size(23, 22);
+            this.lblPopoutWork.Text = "Dock panel";
+            this.lblPopoutWork.ToolTipText = "Undock panel";
+            this.lblPopoutWork.Click += new System.EventHandler(this.lblPopin_Click);
             // 
-            // filterSamp
+            // btnWorkRefresh
             // 
-            this.filterSamp.CheckOnClick = true;
-            this.filterSamp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.filterSamp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
-            this.filterSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.filterSamp.Name = "filterSamp";
-            this.filterSamp.Size = new System.Drawing.Size(24, 24);
-            this.filterSamp.ToolTipText = "Sample files";
-            this.filterSamp.CheckedChanged += new System.EventHandler(this.filterSamp_CheckedChanged);
-            // 
-            // workingfolderFiles
-            // 
-            this.workingfolderFiles.AllowDrop = true;
-            this.workingfolderFiles.AllowUserToAddRows = false;
-            this.workingfolderFiles.AllowUserToDeleteRows = false;
-            this.workingfolderFiles.AllowUserToResizeRows = false;
-            this.workingfolderFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.workingfolderFiles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.workingfolderFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.workingfolderFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.workingfolderFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
-            this.workingfolderFiles.ColumnHeadersHeight = 20;
-            this.workingfolderFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.workingfolderFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FileType,
-            this.FileName});
-            this.workingfolderFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle25.Format = "N2";
-            dataGridViewCellStyle25.NullValue = null;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle25;
-            this.workingfolderFiles.EnableHeadersVisualStyles = false;
-            this.workingfolderFiles.GridColor = System.Drawing.Color.Black;
-            this.workingfolderFiles.Location = new System.Drawing.Point(31, 52);
-            this.workingfolderFiles.MultiSelect = false;
-            this.workingfolderFiles.Name = "workingfolderFiles";
-            this.workingfolderFiles.ReadOnly = true;
-            this.workingfolderFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
-            this.workingfolderFiles.RowHeadersVisible = false;
-            this.workingfolderFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.workingfolderFiles.RowTemplate.Height = 20;
-            this.workingfolderFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.workingfolderFiles.Size = new System.Drawing.Size(163, 286);
-            this.workingfolderFiles.TabIndex = 80;
-            this.workingfolderFiles.Tag = "editorpaneldgv";
-            this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
-            this.workingfolderFiles.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseClick);
-            this.workingfolderFiles.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.workingfolderFiles_CellMouseDown);
-            this.workingfolderFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.workingfolderFiles_DragDrop);
-            this.workingfolderFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.workingfolderFiles_DragEnter);
-            this.workingfolderFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.workingfolderFiles_KeyDown);
-            // 
-            // FileType
-            // 
-            this.FileType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FileType.HeaderText = "";
-            this.FileType.Name = "FileType";
-            this.FileType.ReadOnly = true;
-            this.FileType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.FileType.Width = 5;
-            // 
-            // FileName
-            // 
-            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FileName.ContextMenuStrip = this.workingfolderRightClick;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
-            this.FileName.DefaultCellStyle = dataGridViewCellStyle24;
-            this.FileName.HeaderText = "File Name";
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
-            this.FileName.Width = 84;
-            // 
-            // workingfolderRightClick
-            // 
-            this.workingfolderRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.renameToolStripMenuItem,
-            this.duplicateToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.workingfolderRightClick.Name = "workingfolderRightClick";
-            this.workingfolderRightClick.Size = new System.Drawing.Size(125, 70);
-            // 
-            // renameToolStripMenuItem
-            // 
-            this.renameToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.renameToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.renameToolStripMenuItem.Text = "Rename";
-            this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
-            // 
-            // duplicateToolStripMenuItem
-            // 
-            this.duplicateToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.duplicateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.duplicateToolStripMenuItem.Text = "Duplicate";
-            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.BackColor = System.Drawing.Color.Red;
-            this.deleteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.btnWorkRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnWorkRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnWorkRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
+            this.btnWorkRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnWorkRefresh.Name = "btnWorkRefresh";
+            this.btnWorkRefresh.Size = new System.Drawing.Size(23, 19);
+            this.btnWorkRefresh.ToolTipText = "Reload files in the working folder";
+            this.btnWorkRefresh.Click += new System.EventHandler(this.btnWorkRefresh_Click);
             // 
             // toolTip1
             // 
@@ -5644,7 +5647,6 @@
             this.sampleList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.sampleList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.sampleList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sampleList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -5705,59 +5707,6 @@
             this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
             this.sampleList.DragDrop += new System.Windows.Forms.DragEventHandler(this.sampleList_DragDrop);
             this.sampleList.DragEnter += new System.Windows.Forms.DragEventHandler(this.sampleList_DragEnter);
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SampleName.FillWeight = 5F;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Volume.FillWeight = 1F;
-            this.Volume.HeaderText = "V.";
-            this.Volume.Name = "Volume";
-            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Volume.Width = 22;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pitch.FillWeight = 1F;
-            this.Pitch.HeaderText = "P.";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pitch.Width = 21;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pan.FillWeight = 1F;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pan.Width = 32;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Offset.FillWeight = 1F;
-            this.Offset.HeaderText = "Of.";
-            this.Offset.Name = "Offset";
-            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Offset.Width = 27;
-            // 
-            // Channel
-            // 
-            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Channel.FillWeight = 50F;
-            this.Channel.HeaderText = "Ch.";
-            this.Channel.Name = "Channel";
-            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.Width = 49;
             // 
             // pictureBox1
             // 
@@ -6090,10 +6039,58 @@
             this.btnLevelFolder2.ToolTipText = "Open a different level folder";
             this.btnLevelFolder2.Click += new System.EventHandler(this.btnLevelFolder_Click);
             // 
-            // Column0
+            // SampleName
             // 
-            this.Column0.HeaderText = "0";
-            this.Column0.Name = "Column0";
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SampleName.FillWeight = 5F;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Volume.FillWeight = 1F;
+            this.Volume.HeaderText = "V.";
+            this.Volume.Name = "Volume";
+            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Volume.Width = 22;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pitch.FillWeight = 1F;
+            this.Pitch.HeaderText = "P.";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pitch.Width = 21;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pan.FillWeight = 1F;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pan.Width = 32;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Offset.FillWeight = 1F;
+            this.Offset.HeaderText = "Of.";
+            this.Offset.Name = "Offset";
+            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Offset.Width = 27;
+            // 
+            // Channel
+            // 
+            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Channel.FillWeight = 5F;
+            this.Channel.HeaderText = "Ch.";
+            this.Channel.Name = "Channel";
+            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FormLeafEditor
             // 
@@ -6190,16 +6187,15 @@
             this.gateToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).EndInit();
             this.panelWorkingFolder.ResumeLayout(false);
-            this.panelWorkingFolder.PerformLayout();
-            this.toolstripTitleWork.ResumeLayout(false);
-            this.toolstripTitleWork.PerformLayout();
-            this.workingToolStrip2.ResumeLayout(false);
-            this.workingToolStrip2.PerformLayout();
-            this.contextMenuNewFile.ResumeLayout(false);
             this.workingToolStrip.ResumeLayout(false);
             this.workingToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
             this.workingfolderRightClick.ResumeLayout(false);
+            this.workingToolStrip2.ResumeLayout(false);
+            this.workingToolStrip2.PerformLayout();
+            this.contextMenuNewFile.ResumeLayout(false);
+            this.toolstripTitleWork.ResumeLayout(false);
+            this.toolstripTitleWork.PerformLayout();
             this.contextMenuDock.ResumeLayout(false);
             this.panelSample.ResumeLayout(false);
             this.panelSample.PerformLayout();
@@ -6546,12 +6542,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
         private System.Windows.Forms.ToolStripButton btnLeafPanelTemplate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ToolStrip toolstripTitleLeaf;
         private System.Windows.Forms.ToolStripLabel lblTrackFileName;
@@ -6626,6 +6616,12 @@
         private System.Windows.Forms.ToolStripButton btnLeafRandom;
         private System.Windows.Forms.ToolStripButton btnLeafRandomValues;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
     }
 }
 
