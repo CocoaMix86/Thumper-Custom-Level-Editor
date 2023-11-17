@@ -164,8 +164,6 @@ namespace Thumper_Custom_Level_Editor
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
             //setup datagrids with proper formatting
-            //forces dgv to create 1 column
-            numericUpDown_LeafLength_ValueChanged(null, null);
             InitializeTracks(trackEditor, true);
             InitializeTracks(lvlSeqObjs, true);
             InitializeTracks(lvlLeafList, false);

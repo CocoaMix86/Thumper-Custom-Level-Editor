@@ -1150,7 +1150,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 
 			if (columnstyle)
-				GenerateColumnStyle(grid, _beats);
+				GenerateColumnStyle(grid, grid.ColumnCount);
 		}
 
 		public void GenerateColumnStyle(DataGridView grid, int _cells)
