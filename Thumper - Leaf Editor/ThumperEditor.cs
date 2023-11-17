@@ -474,42 +474,45 @@ namespace Thumper_Custom_Level_Editor
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             int i = new Random().Next(0, 1001);
+            Image im = null;
             switch (i) {
                 case >= 0 and < 100:
-                    pictureBox1.Image = Properties.Resources.beeblehappy;
+                    im = Properties.Resources.beeblehappy;
                     break;
                 case >= 100 and < 200:
-                    pictureBox1.Image = Properties.Resources.beebleconfuse;
+                    im = Properties.Resources.beebleconfuse;
                     break;
                 case >= 200 and < 300:
-                    pictureBox1.Image = Properties.Resources.beeblecool;
+                    im = Properties.Resources.beeblecool;
                     break;
                 case >= 300 and < 400:
-                    pictureBox1.Image = Properties.Resources.beeblederp;
+                    im = Properties.Resources.beeblederp;
                     break;
                 case >= 400 and < 500:
-                    pictureBox1.Image = Properties.Resources.beeblelaugh;
+                    im = Properties.Resources.beeblelaugh;
                     break;
                 case >= 500 and < 600:
-                    pictureBox1.Image = Properties.Resources.beeblestare;
+                    im = Properties.Resources.beeblestare;
                     break;
                 case >= 600 and < 700:
-                    pictureBox1.Image = Properties.Resources.beeblethink;
+                    im = Properties.Resources.beeblethink;
                     break;
                 case >= 700 and < 800:
-                    pictureBox1.Image = Properties.Resources.beebletiny;
+                    im = Properties.Resources.beebletiny;
                     break;
                 case >= 800 and < 900:
-                    pictureBox1.Image = Properties.Resources.beeblelove;
+                    im = Properties.Resources.beeblelove;
                     break;
                 case >= 900 and < 1000:
-                    pictureBox1.Image = Properties.Resources.beeblespin;
+                    im = Properties.Resources.beeblespin;
                     break;
                 case 1001:
                     pictureBox1.Image = Properties.Resources.beeblegold;
                     PlaySound("UIbeetleclickGOLD");
                     break;
             }
+            if (im != null)
+                pictureBox1.Image = im;
             pictureBox1.Refresh();
             timerBeeble.Start();
         }
@@ -547,38 +550,6 @@ namespace Thumper_Custom_Level_Editor
         {
             timerBeeble.Stop();
             pictureBox1.Image = Properties.Resources.beeble;
-            pictureBox1.Image = ColorReplace(pictureBox1.Image, 10, Color.White, Color.Red);
-        }
-        public Image ColorReplace(Image inputImage, int tolerance, Color oldColor, Color NewColor)
-        {
-            Bitmap outputImage = new Bitmap(inputImage.Width, inputImage.Height);
-            Graphics G = Graphics.FromImage(outputImage);
-            G.DrawImage(inputImage, 0, 0);
-            for (Int32 y = 0; y < outputImage.Height; y++)
-                for (Int32 x = 0; x < outputImage.Width; x++) {
-                    Color PixelColor = outputImage.GetPixel(x, y);
-                    if (PixelColor.R > oldColor.R - tolerance && PixelColor.R < oldColor.R + tolerance && PixelColor.G > oldColor.G - tolerance && PixelColor.G < oldColor.G + tolerance && PixelColor.B > oldColor.B - tolerance && PixelColor.B < oldColor.B + tolerance) {
-                        int RColorDiff = oldColor.R - PixelColor.R;
-                        int GColorDiff = oldColor.G - PixelColor.G;
-                        int BColorDiff = oldColor.B - PixelColor.B;
-
-                        if (PixelColor.R > oldColor.R) RColorDiff = NewColor.R + RColorDiff;
-                        else RColorDiff = NewColor.R - RColorDiff;
-                        if (RColorDiff > 255) RColorDiff = 255;
-                        if (RColorDiff < 0) RColorDiff = 0;
-                        if (PixelColor.G > oldColor.G) GColorDiff = NewColor.G + GColorDiff;
-                        else GColorDiff = NewColor.G - GColorDiff;
-                        if (GColorDiff > 255) GColorDiff = 255;
-                        if (GColorDiff < 0) GColorDiff = 0;
-                        if (PixelColor.B > oldColor.B) BColorDiff = NewColor.B + BColorDiff;
-                        else BColorDiff = NewColor.B - BColorDiff;
-                        if (BColorDiff > 255) BColorDiff = 255;
-                        if (BColorDiff < 0) BColorDiff = 0;
-
-                        outputImage.SetPixel(x, y, Color.FromArgb(RColorDiff, GColorDiff, BColorDiff));
-                    }
-                }
-            return outputImage;
         }
         ///
 
