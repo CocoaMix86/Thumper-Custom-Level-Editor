@@ -4892,6 +4892,7 @@
             this.toolStripMenuItem8,
             this.toolStripMenuItem9});
             this.contextMenuNewFile.Name = "workingfolderRightClick";
+            this.contextMenuNewFile.OwnerItem = this.btnWorkNewFile;
             this.contextMenuNewFile.Size = new System.Drawing.Size(114, 114);
             // 
             // toolStripMenuItem5

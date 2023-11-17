@@ -16,7 +16,7 @@ namespace Thumper_Custom_Level_Editor
 		#region Variables
 		bool _saveleaf = true;
 
-		int _beats = 0;
+		int _beats { get { return (int)numericUpDown_LeafLength.Value; } }
 		int _selecttrack = 0;
 
 		string _errorlog = "";
@@ -362,7 +362,6 @@ namespace Thumper_Custom_Level_Editor
 		///LEAF LENGTH
 		private void numericUpDown_LeafLength_ValueChanged(object sender, EventArgs e)
 		{
-			_beats = (int)numericUpDown_LeafLength.Value;
 			if (_beats > trackEditor.ColumnCount) {
 				trackEditor.ColumnCount = _beats;
 				GenerateColumnStyle(trackEditor, _beats);

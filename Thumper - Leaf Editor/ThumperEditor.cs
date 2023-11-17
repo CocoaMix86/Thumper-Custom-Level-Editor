@@ -164,6 +164,8 @@ namespace Thumper_Custom_Level_Editor
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
             //setup datagrids with proper formatting
+            //forces dgv to create 1 column
+            numericUpDown_LeafLength_ValueChanged(null, null);
             InitializeTracks(trackEditor, true);
             InitializeTracks(lvlSeqObjs, true);
             InitializeTracks(lvlLeafList, false);
@@ -243,8 +245,6 @@ namespace Thumper_Custom_Level_Editor
             trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
             btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
             //
-            //forces dgv to create 1 column
-            numericUpDown_LeafLength_ValueChanged(null, null);
 
             //load recent levels 
             var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
