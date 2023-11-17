@@ -3755,9 +3755,9 @@
             this.btnMasterOpenRest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMasterOpenRest.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenRest.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
+            this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
             this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenRest.Location = new System.Drawing.Point(383, 290);
+            this.btnMasterOpenRest.Location = new System.Drawing.Point(382, 290);
             this.btnMasterOpenRest.Name = "btnMasterOpenRest";
             this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenRest.TabIndex = 118;
@@ -3792,7 +3792,7 @@
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.Silver;
-            this.label37.Location = new System.Drawing.Point(253, 259);
+            this.label37.Location = new System.Drawing.Point(252, 259);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(123, 15);
             this.label37.TabIndex = 116;
@@ -3808,7 +3808,7 @@
             this.dropMasterLvlRest.FormattingEnabled = true;
             this.dropMasterLvlRest.Items.AddRange(new object[] {
             "skybox_cube"});
-            this.dropMasterLvlRest.Location = new System.Drawing.Point(243, 291);
+            this.dropMasterLvlRest.Location = new System.Drawing.Point(242, 291);
             this.dropMasterLvlRest.Name = "dropMasterLvlRest";
             this.dropMasterLvlRest.Size = new System.Drawing.Size(140, 21);
             this.dropMasterLvlRest.TabIndex = 105;
@@ -3821,7 +3821,7 @@
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.White;
-            this.label35.Location = new System.Drawing.Point(283, 276);
+            this.label35.Location = new System.Drawing.Point(282, 276);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(50, 15);
             this.label35.TabIndex = 104;
@@ -3893,7 +3893,7 @@
             this.label56.AutoSize = true;
             this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label56.ForeColor = System.Drawing.Color.White;
-            this.label56.Location = new System.Drawing.Point(234, 210);
+            this.label56.Location = new System.Drawing.Point(233, 210);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(92, 15);
             this.label56.TabIndex = 142;
@@ -3905,7 +3905,7 @@
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label47.ForeColor = System.Drawing.Color.White;
-            this.label47.Location = new System.Drawing.Point(265, 188);
+            this.label47.Location = new System.Drawing.Point(264, 188);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(61, 15);
             this.label47.TabIndex = 141;
@@ -3917,7 +3917,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(262, 233);
+            this.label12.Location = new System.Drawing.Point(261, 233);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 15);
             this.label12.TabIndex = 140;
@@ -3931,9 +3931,9 @@
             this.btnMasterOpenCheckpoint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMasterOpenCheckpoint.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenCheckpoint.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
+            this.btnMasterOpenCheckpoint.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenCheckpoint.Image")));
             this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(382, 132);
+            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(381, 132);
             this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
             this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenCheckpoint.TabIndex = 115;
@@ -3950,9 +3950,9 @@
             this.btnMasterOpenIntro.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMasterOpenIntro.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenIntro.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
+            this.btnMasterOpenIntro.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenIntro.Image")));
             this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenIntro.Location = new System.Drawing.Point(382, 92);
+            this.btnMasterOpenIntro.Location = new System.Drawing.Point(381, 92);
             this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
             this.btnMasterOpenIntro.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenIntro.TabIndex = 114;
@@ -3967,7 +3967,7 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(250, 162);
+            this.label27.Location = new System.Drawing.Point(249, 162);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(34, 15);
             this.label27.TabIndex = 111;
@@ -3980,7 +3980,7 @@
             this.NUD_ConfigBPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NUD_ConfigBPM.DecimalPlaces = 2;
             this.NUD_ConfigBPM.ForeColor = System.Drawing.Color.White;
-            this.NUD_ConfigBPM.Location = new System.Drawing.Point(286, 160);
+            this.NUD_ConfigBPM.Location = new System.Drawing.Point(285, 160);
             this.NUD_ConfigBPM.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -4002,7 +4002,7 @@
             this.btnConfigPathColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigPathColor.BackColor = System.Drawing.Color.White;
             this.btnConfigPathColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigPathColor.Location = new System.Drawing.Point(327, 230);
+            this.btnConfigPathColor.Location = new System.Drawing.Point(326, 230);
             this.btnConfigPathColor.Name = "btnConfigPathColor";
             this.btnConfigPathColor.Size = new System.Drawing.Size(55, 23);
             this.btnConfigPathColor.TabIndex = 109;
@@ -4014,7 +4014,7 @@
             this.btnConfigGlowColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigGlowColor.BackColor = System.Drawing.Color.White;
             this.btnConfigGlowColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigGlowColor.Location = new System.Drawing.Point(327, 207);
+            this.btnConfigGlowColor.Location = new System.Drawing.Point(326, 207);
             this.btnConfigGlowColor.Name = "btnConfigGlowColor";
             this.btnConfigGlowColor.Size = new System.Drawing.Size(55, 23);
             this.btnConfigGlowColor.TabIndex = 108;
@@ -4026,7 +4026,7 @@
             this.btnConfigRailColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigRailColor.BackColor = System.Drawing.Color.White;
             this.btnConfigRailColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigRailColor.Location = new System.Drawing.Point(327, 184);
+            this.btnConfigRailColor.Location = new System.Drawing.Point(326, 184);
             this.btnConfigRailColor.Name = "btnConfigRailColor";
             this.btnConfigRailColor.Size = new System.Drawing.Size(55, 23);
             this.btnConfigRailColor.TabIndex = 96;
@@ -4042,7 +4042,7 @@
             this.dropMasterCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterCheck.ForeColor = System.Drawing.Color.White;
             this.dropMasterCheck.FormattingEnabled = true;
-            this.dropMasterCheck.Location = new System.Drawing.Point(243, 133);
+            this.dropMasterCheck.Location = new System.Drawing.Point(242, 133);
             this.dropMasterCheck.Name = "dropMasterCheck";
             this.dropMasterCheck.Size = new System.Drawing.Size(140, 21);
             this.dropMasterCheck.TabIndex = 100;
@@ -4058,7 +4058,7 @@
             this.dropMasterIntro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterIntro.ForeColor = System.Drawing.Color.White;
             this.dropMasterIntro.FormattingEnabled = true;
-            this.dropMasterIntro.Location = new System.Drawing.Point(243, 93);
+            this.dropMasterIntro.Location = new System.Drawing.Point(242, 93);
             this.dropMasterIntro.Name = "dropMasterIntro";
             this.dropMasterIntro.Size = new System.Drawing.Size(140, 21);
             this.dropMasterIntro.TabIndex = 98;
@@ -4077,7 +4077,7 @@
             this.dropMasterSkybox.Items.AddRange(new object[] {
             "",
             "skybox_cube"});
-            this.dropMasterSkybox.Location = new System.Drawing.Point(243, 56);
+            this.dropMasterSkybox.Location = new System.Drawing.Point(242, 56);
             this.dropMasterSkybox.Name = "dropMasterSkybox";
             this.dropMasterSkybox.Size = new System.Drawing.Size(140, 21);
             this.dropMasterSkybox.TabIndex = 95;
@@ -4090,7 +4090,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Silver;
-            this.label13.Location = new System.Drawing.Point(255, 24);
+            this.label13.Location = new System.Drawing.Point(254, 24);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(114, 15);
             this.label13.TabIndex = 96;
@@ -4104,7 +4104,7 @@
             this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblConfigColorHelp.Location = new System.Drawing.Point(379, 187);
+            this.lblConfigColorHelp.Location = new System.Drawing.Point(378, 187);
             this.lblConfigColorHelp.Name = "lblConfigColorHelp";
             this.lblConfigColorHelp.Size = new System.Drawing.Size(15, 16);
             this.lblConfigColorHelp.TabIndex = 112;
@@ -4117,7 +4117,7 @@
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(269, 117);
+            this.label33.Location = new System.Drawing.Point(268, 117);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(86, 15);
             this.label33.TabIndex = 101;
@@ -4130,7 +4130,7 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.ForeColor = System.Drawing.Color.White;
-            this.label32.Location = new System.Drawing.Point(286, 78);
+            this.label32.Location = new System.Drawing.Point(285, 78);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(49, 15);
             this.label32.TabIndex = 99;
@@ -4144,7 +4144,7 @@
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.ForeColor = System.Drawing.Color.White;
-            this.label31.Location = new System.Drawing.Point(287, 41);
+            this.label31.Location = new System.Drawing.Point(286, 41);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(46, 15);
             this.label31.TabIndex = 97;
@@ -4403,7 +4403,7 @@
             this.btnGateOpenRestart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGateOpenRestart.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGateOpenRestart.ForeColor = System.Drawing.Color.Black;
-            this.btnGateOpenRestart.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
+            this.btnGateOpenRestart.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenRestart.Image")));
             this.btnGateOpenRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 283);
             this.btnGateOpenRestart.Name = "btnGateOpenRestart";
@@ -4422,7 +4422,7 @@
             this.btnGateOpenPost.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGateOpenPost.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGateOpenPost.ForeColor = System.Drawing.Color.Black;
-            this.btnGateOpenPost.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
+            this.btnGateOpenPost.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPost.Image")));
             this.btnGateOpenPost.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGateOpenPost.Location = new System.Drawing.Point(222, 261);
             this.btnGateOpenPost.Name = "btnGateOpenPost";
@@ -4441,7 +4441,7 @@
             this.btnGateOpenPre.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnGateOpenPre.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGateOpenPre.ForeColor = System.Drawing.Color.Black;
-            this.btnGateOpenPre.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
+            this.btnGateOpenPre.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPre.Image")));
             this.btnGateOpenPre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGateOpenPre.Location = new System.Drawing.Point(222, 239);
             this.btnGateOpenPre.Name = "btnGateOpenPre";

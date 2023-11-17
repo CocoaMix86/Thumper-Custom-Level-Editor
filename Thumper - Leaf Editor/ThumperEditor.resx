@@ -239,12 +239,6 @@ don't drown out other sounds at specific times.</value>
   <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>771, 24</value>
   </metadata>
-  <metadata name="toolstripTitleMaster.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>765, 4</value>
-  </metadata>
-  <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>771, 24</value>
-  </metadata>
   <metadata name="masterfiletype.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -260,6 +254,17 @@ don't drown out other sounds at specific times.</value>
   <metadata name="masterIsolate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="btnMasterOpenRest.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPY6AYfGoS/I8Nf2wU6IAqwQ+waYZhogzBphEZ
+        EzQEmyZiMFQ7lQ34v0yPZEw9A752S2JVgA//Xaq7H27An7lqWBXhxcv1HcAGkG07LBDJth0EKLIdBCiy
+        fRAABgYAqRPR8d1tLRIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>7, 27</value>
+  </metadata>
   <data name="lblMasterlvllistHelp.ToolTip" xml:space="preserve">
     <value>CHKP. (checkpoint)
 If checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a 
@@ -272,6 +277,22 @@ This is useful for tutorial levels in Play, and then removing them for Play+.
 ISO. (isolate)
 When checked, only isolated levels will play in game. Useful for testing specific sublevels 
 without replaying the entire thing.</value>
+  </data>
+  <data name="btnMasterOpenCheckpoint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPY6AYfGoS/I8Nf2wU6IAqwQ+waYZhogzBphEZ
+        EzQEmyZiMFQ7lQ34v0yPZEw9A752S2JVgA//Xaq7H27An7lqWBXhxcv1HcAGkG07LBDJth0EKLIdBCiy
+        fRAABgYAqRPR8d1tLRIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnMasterOpenIntro.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPY6AYfGoS/I8Nf2wU6IAqwQ+waYZhogzBphEZ
+        EzQEmyZiMFQ7lQ34v0yPZEw9A752S2JVgA//Xaq7H27An7lqWBXhxcv1HcAGkG07LBDJth0EKLIdBCiy
+        fRAABgYAqRPR8d1tLRIAAAAASUVORK5CYII=
+</value>
   </data>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>6, 3</value>
@@ -301,6 +322,30 @@ phase defaults to bucket 0.
   <metadata name="gateToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>644, 23</value>
   </metadata>
+  <data name="btnGateOpenRestart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPY6AYfGoS/I8Nf2wU6IAqwQ+waYZhogzBphEZ
+        EzQEmyZiMFQ7lQ34v0yPZEw9A752S2JVgA//Xaq7H27An7lqWBXhxcv1HcAGkG07LBDJth0EKLIdBCiy
+        fRAABgYAqRPR8d1tLRIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnGateOpenPost.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPY6AYfGoS/I8Nf2wU6IAqwQ+waYZhogzBphEZ
+        EzQEmyZiMFQ7lQ34v0yPZEw9A752S2JVgA//Xaq7H27An7lqWBXhxcv1HcAGkG07LBDJth0EKLIdBCiy
+        fRAABgYAqRPR8d1tLRIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnGateOpenPre.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPY6AYfGoS/I8Nf2wU6IAqwQ+waYZhogzBphEZ
+        EzQEmyZiMFQ7lQ34v0yPZEw9A752S2JVgA//Xaq7H27An7lqWBXhxcv1HcAGkG07LBDJth0EKLIdBCiy
+        fRAABgYAqRPR8d1tLRIAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="Lvl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -348,9 +393,6 @@ phase defaults to bucket 0.
   </data>
   <metadata name="toolstripTitleWork.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1048, 1</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>7, 27</value>
   </metadata>
   <metadata name="contextMenuDock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>112, 53</value>
