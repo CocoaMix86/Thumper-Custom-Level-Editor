@@ -415,6 +415,12 @@
             this.label50 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleList = new System.Windows.Forms.DataGridView();
+            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelBeeble = new System.Windows.Forms.Panel();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
@@ -435,12 +441,6 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLevelFolder2 = new System.Windows.Forms.ToolStripButton();
-            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imageListFileIcons = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
@@ -2016,18 +2016,13 @@
             this.dropTrackLane.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropTrackLane.ForeColor = System.Drawing.Color.White;
             this.dropTrackLane.FormattingEnabled = true;
-            this.dropTrackLane.Items.AddRange(new object[] {
-            "lane left 2",
-            "lane left 1",
-            "lane center",
-            "lane right 1",
-            "lane right 2"});
             this.dropTrackLane.Location = new System.Drawing.Point(74, 96);
             this.dropTrackLane.Name = "dropTrackLane";
             this.dropTrackLane.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropTrackLane.Size = new System.Drawing.Size(94, 21);
             this.dropTrackLane.TabIndex = 65;
             this.dropTrackLane.SelectedIndexChanged += new System.EventHandler(this.dropTrackLane_SelectedIndexChanged);
+            this.dropTrackLane.DataSourceChanged += new System.EventHandler(this.dropTrackLane_DataSourceChanged);
             // 
             // label11
             // 
@@ -5709,6 +5704,59 @@
             this.sampleList.DragDrop += new System.Windows.Forms.DragEventHandler(this.sampleList_DragDrop);
             this.sampleList.DragEnter += new System.Windows.Forms.DragEventHandler(this.sampleList_DragEnter);
             // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SampleName.FillWeight = 5F;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Volume.FillWeight = 1F;
+            this.Volume.HeaderText = "V.";
+            this.Volume.Name = "Volume";
+            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Volume.Width = 22;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pitch.FillWeight = 1F;
+            this.Pitch.HeaderText = "P.";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pitch.Width = 21;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Pan.FillWeight = 1F;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pan.Width = 32;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Offset.FillWeight = 1F;
+            this.Offset.HeaderText = "Of.";
+            this.Offset.Name = "Offset";
+            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Offset.Width = 27;
+            // 
+            // Channel
+            // 
+            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Channel.FillWeight = 5F;
+            this.Channel.HeaderText = "Ch.";
+            this.Channel.Name = "Channel";
+            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -6039,59 +6087,6 @@
             this.btnLevelFolder2.Size = new System.Drawing.Size(23, 19);
             this.btnLevelFolder2.ToolTipText = "Open a different level folder";
             this.btnLevelFolder2.Click += new System.EventHandler(this.btnLevelFolder_Click);
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SampleName.FillWeight = 5F;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Volume.FillWeight = 1F;
-            this.Volume.HeaderText = "V.";
-            this.Volume.Name = "Volume";
-            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Volume.Width = 22;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pitch.FillWeight = 1F;
-            this.Pitch.HeaderText = "P.";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pitch.Width = 21;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Pan.FillWeight = 1F;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pan.Width = 32;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Offset.FillWeight = 1F;
-            this.Offset.HeaderText = "Of.";
-            this.Offset.Name = "Offset";
-            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Offset.Width = 27;
-            // 
-            // Channel
-            // 
-            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Channel.FillWeight = 5F;
-            this.Channel.HeaderText = "Ch.";
-            this.Channel.Name = "Channel";
-            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // imageListFileIcons
             // 

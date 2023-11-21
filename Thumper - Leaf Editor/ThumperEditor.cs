@@ -666,5 +666,18 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
+
+        private void dropTrackLane_DataSourceChanged(object sender, EventArgs e)
+        {
+            ComboBox cb = (ComboBox)sender;
+            int maxWidth = 0, temp = 0;
+            foreach (var obj in cb.Items) {
+                temp = TextRenderer.MeasureText(obj.ToString(), cb.Font).Width;
+                if (temp > maxWidth) {
+                    maxWidth = temp;
+                }
+            }
+            cb.DropDownWidth = maxWidth != 0 ? maxWidth : cb.DropDownWidth;
+        }
     }
 }
