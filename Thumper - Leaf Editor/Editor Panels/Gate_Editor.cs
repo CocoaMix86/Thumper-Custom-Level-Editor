@@ -230,11 +230,11 @@ namespace Thumper_Custom_Level_Editor
 		private void btnGateLvlAdd_Click(object sender, EventArgs e)
 		{
 			//don't load new lvl if gate has 4 phases
-			if (_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) {
+			if (_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramidboss.spn" && !checkGateRandom.Checked) {
 				MessageBox.Show("You can only add 4 phases to a boss (each lvl is a phase).", "Gate Info");
 				return;
 			}
-			if (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") {
+			if (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramidboss.spn") {
 				MessageBox.Show("Pyramid requires only 5 phases (each lvl is a phase).", "Gate Info");
 				return;
 			}
