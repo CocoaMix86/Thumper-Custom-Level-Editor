@@ -140,5 +140,8 @@
     <Setting Name="leafzoomvert" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
+    <Setting Name="version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">--</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -213,6 +213,14 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists(@"temp\jumper_approach.ogg")) File.WriteAllBytes(@"temp\jumper_approach.ogg", Properties.Resources.jumper_approach);
             InitializeSounds();
             //call method that imports objects from track_objects.txt (for Leaf editing)
+            ///version check
+            if (Properties.Settings.Default.version != "2.1") {
+                if (MessageBox.Show("Thumper Custom Level Editor - v2.1\nV2.1 adds many new objects to use in your levels! It is highly recommended to update your track_objects.txt and object_defaultcolors.txt files at this time so you can access them.", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                    regenerateTemplateFilesToolStripMenuItem_Click(null, null);
+                    Properties.Settings.Default.version = "2.1";
+                    Properties.Settings.Default.Save();
+                }
+            }
             ImportObjects();
             //set panels to their last saved dock
             SetDockLocations();
@@ -271,6 +279,8 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllText(@"templates\leaf_singletrack_new.txt", Properties.Resources.leaf_singletrack_new);
             File.WriteAllText(@"templates\leaf_multitrack_new.txt", Properties.Resources.leaf_multitrack_new);
             File.WriteAllText(@"templates\leaf_multitrack_ring&bar.txt", Properties.Resources.leaf_multitrack_ring_bar);
+            File.WriteAllText(@"templates\track_objects.txt", Properties.Resources.track_objects);
+            File.WriteAllText(@"templates\objects_defaultcolors.txt", Properties.Resources.objects_defaultcolors);
         }
 
         ///Toolstrip - FILE
