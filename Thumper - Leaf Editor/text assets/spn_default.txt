@@ -15,7 +15,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'pyramid.spn',
+'obj_name': 'pyramiddecorator.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -28,7 +28,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'pyramidboss.spn',
+'obj_name': 'pyramid.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
@@ -115,6 +115,32 @@
 'rot_z': [0, 0, 1],
 'scale': [1, 1, 1],
 'objlib_path': 'decorators/jump_high/jump_high_set.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'jump_high_big_trees.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/jump_high/jump_high_big_trees.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'jump_high_big_trees_set.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/jump_high/jump_high_big_trees_set.objlib',
 'bucket': 'kBucketEffect'
 },
 {
@@ -587,6 +613,19 @@
 },
 {
 'obj_type': 'EntitySpawner',
+'obj_name': 'level2_fingers_set.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [1, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/level_fingers/level2_fingers_set.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
 'obj_name': 'level3b_fingers.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
@@ -691,7 +730,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'level4b_fingers.spn',
+'obj_name': 'level4b_fingers_set.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [1, 0, 0],
@@ -699,7 +738,7 @@
 'rot_y': [0, 1, 0],
 'rot_z': [0, 0, 1],
 'scale': [1, 1, 1],
-'objlib_path': 'decorators/level_fingers/level4b_fingers.objlib',
+'objlib_path': 'decorators/level_fingers/level4b_fingers_set.objlib',
 'bucket': 'kBucketEffect'
 },
 {
@@ -726,6 +765,19 @@
 'rot_z': [0, 0, 1],
 'scale': [1, 1, 1],
 'objlib_path': 'decorators/level_fingers/level4c_fingers.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'level4c_fingers_set.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [1, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/level_fingers/level4c_fingers_set.objlib',
 'bucket': 'kBucketEffect'
 },
 {
@@ -1480,7 +1532,7 @@
 'rot_z': [0, 0, 1],
 'scale': [1, 1, 1],
 'objlib_path': 'decorators/turn.objlib',
-'bucket': 'kBucketTerrain'
+'bucket': 'kBucketEffect'
 },
 {
 'obj_type': 'EntitySpawner',
@@ -1494,6 +1546,136 @@
 'scale': [1, 1, 1],
 'objlib_path': 'decorators/rail_switch.objlib',
 'bucket': 'kBucketTerrain'
-}
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'millipede_half_decorative_b.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/decorative/millipede_half_decorative_b.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'millipede_half_decorative.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/decorative/millipede_half_decorative.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'ring_pulse_checkpoint.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/decorative/ring_pulse_checkpoint.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'ring_pulse.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/decorative/ring_pulse.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'boss_shield.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/boss_shield.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'jump_high_spikes.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/jump_high/jump_high_spikes.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'checkpoint.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/checkpoint.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'blisters.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/jumper/jumper_blisters.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'collision.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/jumper/jumper_collide.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'pulse_crest.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'decorators/decorative/pulse_crest.objlib.objlib',
+'bucket': 'kBucketEffect'
+},
 ]
 }

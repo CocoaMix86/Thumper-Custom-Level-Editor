@@ -21,19 +21,18 @@ bar;-8372160
 bar[left];-8372160
 bar[center];-8372160
 bar[right];-8372160
-bar and thump;-15528691
+thump and bar;-15528691
 bar[double];-8388608
 bar[triple];-12582912
 bar[quad];-13828096
 ring;-16711681
-mushroom[1 beat];-32768
-mushroom[1 beat];-8355585
-mushroon[6 beat];-32704
-tall spike[2 beat];-32640
-tall spike[4 beat];-32640
-tall spike[6 beat];-32640
-tall spike[8 beat];-32640
-wide spike[4 beat];-32640
+mushroom [1 beat];-32768
+mushroom [6 beats];-32704
+tall spike [2 beats];-32640
+tall spike [4 beats];-32640
+tall spike [6 beats];-32640
+tall spike [8 beats];-32640
+wide spike(?) [2 beats];-32640
 spike decorator, 4 beat;-589610
 demo fingers1;-8355585
 demo fingers1_unison;-8355585
@@ -274,11 +273,11 @@ spiral fingers1_wave_in;-8355585
 spiral fingers1_gate;-8355585
 spiral fingers1_decorative;-8355585
 spiral decorative;-8355585
-millipede[2 beat];-14737633
-millipede[2 beat] v2;-14737633
-millipede[4 beat];-14737633
-millipede[4 beat] v2;-14737633
-millipede[4 beat] v3;-14737633
+millipede [2 beats];-14737633
+millipede v2 [2 beats];-14737633
+millipede [4 beats];-14737633
+millipede v2 [4 beats];-14737633
+millipede v3 [4 beats];-14737633
 single lane[55 beats];-7185805
 single lane[79 beats];-7185805
 single lane[114 beats];-7185805
@@ -392,19 +391,16 @@ turn_right_middle (long turn mid);-8355585
 turn_right_end (long turn end);-8355585
 lane_end_left_turn;-8355585
 lane_end_right_turn;-8355585
-Invert the colours;-8355585
-vignette1;-8355585
-vignette2;-8355585
-contrast;-8355585
-weird invert contrast;-8355585
-invert;-8355585
-cubic_disto1;-8355585
-cubic_disto2;-8355585
-contrast/brightness1;-8355585
-contrast/brightness2 DO NOT USE NEGATIVE NUMBERS;-8355585
+vignette1;-2795175
+vignette2;-2795175
+contrast;-1447447
+invert;-1247233
+cubic_disto1;-4144960
+cubic_disto2;-5911087
+contrast/brightness1;-3342
 green gamma?;-8355585
 blue gamma?;-8355585
-bloom_sat1;-8355585
+bloom_sat1;-2316377
 brightness1, funny rainbow colors;-8355585
 glow_color;-8355585
 rail_color;-8355585
@@ -412,3 +408,45 @@ path_color;-8355585
 play;-12533952
 pause;-3227290
 stop;-4243392
+contrast/brightness2 (USE >=0);-1
+green gamma2;-16711936
+blue gamma2;-16776961
+brightness3 - funny rainbow colors;-65408
+boss_7_tunnel_enter [2 beats];-1776412
+boss_damage_stage1 [12 beats];-1776412
+boss_damage_stage2 [12 beats];-1776412
+boss_damage_stage3 [12 beats];-1776412
+boss_damage_stage4 [12 beats];-1776412
+crakhed_damage [16 beats];-1776412
+crakhed_destroy [32 beats];-1776412
+death_shatter [8 beats];-1776412
+smoke [8 beats];-1776412
+win_debris [8 beats];-1776412
+cubic_disto2 (spheric);-6842460
+camera/anchor height;-8355712
+camera/anchor x-axis;-8355712
+manual camera shake;-8355712
+camera left and right rotation;-8355712
+Camera up and down rotation;-8355712
+A - millipede_half;-11053225
+A - millipede_left;-11053225
+A - millipede_right;-11053225
+A - millipede_random;-11053225
+B - millipede_half;-11053225
+B - millipede_left;-11053225
+B - millipede_right;-11053225
+B - millipede_random;-11053225
+decorative spikes [32 beats];-19276
+decorative spikes [12 beats];-19276
+decorative spikes [4 beats];-19276
+random spike [NO DAMAGE];-19276
+spike_left  [NO DAMAGE];-19276
+spike_right_base [NO DAMAGE];-19276
+spike_right [DAMAGE];-32640
+spike_right_ground_collide [DAMAGE];-32640
+checkpoint;-11665289
+fake checkpoint;-13959087
+boss_shield_tutorial;-6381922
+boss_shield;-6381922
+boss_shield_2;-6381922
+boss_shield_3;-6381922
