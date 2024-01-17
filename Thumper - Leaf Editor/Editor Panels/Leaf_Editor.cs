@@ -101,11 +101,13 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
+			int display = trackEditor.FirstDisplayedScrollingRowIndex;
 			for (int i = 0; i < trackEditor.Rows.Count; i++) {
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
 			}
 			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
 			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
+			trackEditor.FirstDisplayedScrollingRowIndex = display;
 		}
 		private void trackEditor_Resize(object sender, EventArgs e)
 		{
