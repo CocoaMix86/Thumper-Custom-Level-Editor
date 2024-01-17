@@ -146,6 +146,7 @@ namespace Thumper_Custom_Level_Editor
 				lblSampleEditor.Text = "Sample Editor";
 				//set saved flag to true, because nothing is loaded
 				SaveSample(true);
+				FSBtoSamp.Enabled = true;
 				if (e != null)
 					SamplesaveAsToolStripMenuItem_Click(null, null);
 			}
