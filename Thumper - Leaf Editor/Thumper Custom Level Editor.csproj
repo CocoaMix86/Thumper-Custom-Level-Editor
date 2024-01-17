@@ -337,6 +337,8 @@
     <None Include="text assets\leaf_singletrack_new.txt" />
     <None Include="image assets\icon-random.png" />
     <None Include="image assets\icon-randomize.png" />
+    <None Include="image assets\icon-check-32.png" />
+    <None Include="image assets\icon-check-16.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

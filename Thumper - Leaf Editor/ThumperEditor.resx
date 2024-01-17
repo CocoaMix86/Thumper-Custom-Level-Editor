@@ -151,6 +151,9 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="leafToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>255, 49</value>
   </metadata>
+  <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>259, 24</value>
+  </metadata>
   <data name="btnTrackPlayback.ToolTipText" xml:space="preserve">
     <value>***CURRENTLY BUGGY. SKIPS BEATS SOMETIMES***
 Click to playback the entire leaf. Plays these objects in time:
@@ -176,8 +179,11 @@ Playback speed is dependant on the Master BPM.</value>
 but higher intensity calculation. Can decrease FPS.
 THIS AFFECTS IN-GAME ONLY. NOT THIS EDITOR'S INTERPOLATION CALC.</value>
   </data>
-  <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>259, 24</value>
+  <metadata name="lvlToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>393, 26</value>
+  </metadata>
+  <metadata name="toolstripTitleLvl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>393, 4</value>
   </metadata>
   <metadata name="lvlToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>393, 26</value>
@@ -218,6 +224,12 @@ don't drown out other sounds at specific times.</value>
   <metadata name="toolstripTitleLvl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>393, 4</value>
   </metadata>
+  <metadata name="toolstripTitleMaster.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>765, 4</value>
+  </metadata>
+  <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>771, 24</value>
+  </metadata>
   <metadata name="masterfiletype.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -242,7 +254,7 @@ don't drown out other sounds at specific times.</value>
   <data name="btnMasterOpenRest.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        vQAADr0BR/uQrQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
         TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
         EgAAAABJRU5ErkJggg==
 </value>
@@ -263,7 +275,7 @@ without replaying the entire thing.</value>
   <data name="btnMasterOpenCheckpoint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        vQAADr0BR/uQrQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
         TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
         EgAAAABJRU5ErkJggg==
 </value>
@@ -271,13 +283,19 @@ without replaying the entire thing.</value>
   <data name="btnMasterOpenIntro.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        vQAADr0BR/uQrQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
         TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
         EgAAAABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>6, 3</value>
+  </metadata>
+  <metadata name="toolstripTitleGate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>640, 4</value>
+  </metadata>
+  <metadata name="gateToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>644, 23</value>
   </metadata>
   <data name="lblGatebuckethelp.ToolTip" xml:space="preserve">
     <value>!! RANDOM ONLY WORKS WITH BOSS SPIROGRAPH !!
@@ -301,7 +319,7 @@ phase defaults to bucket 0.
   <data name="btnGateOpenRestart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        vQAADr0BR/uQrQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
         TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
         EgAAAABJRU5ErkJggg==
 </value>
@@ -309,7 +327,7 @@ phase defaults to bucket 0.
   <data name="btnGateOpenPost.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        vQAADr0BR/uQrQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
         TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
         EgAAAABJRU5ErkJggg==
 </value>
@@ -317,7 +335,7 @@ phase defaults to bucket 0.
   <data name="btnGateOpenPre.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        vQAADr0BR/uQrQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
         TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
         EgAAAABJRU5ErkJggg==
 </value>
@@ -330,6 +348,15 @@ phase defaults to bucket 0.
   </metadata>
   <metadata name="dgvGateBucket.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="workingToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1048, 23</value>
+  </metadata>
+  <metadata name="workingToolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1047, 43</value>
+  </metadata>
+  <metadata name="toolstripTitleWork.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1048, 1</value>
   </metadata>
   <metadata name="workingToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1048, 23</value>
@@ -361,8 +388,17 @@ phase defaults to bucket 0.
   <metadata name="toolstripTitleWork.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1048, 1</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>7, 27</value>
+  </metadata>
   <metadata name="contextMenuDock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>112, 53</value>
+  </metadata>
+  <metadata name="toolstripTitleSample.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>904, 1</value>
+  </metadata>
+  <metadata name="sampleToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>910, 21</value>
   </metadata>
   <metadata name="toolstripTitleSample.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>904, 1</value>
@@ -391,6 +427,9 @@ phase defaults to bucket 0.
   <metadata name="timerBeeble.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>7, 48</value>
   </metadata>
+  <metadata name="toolstripRecentFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1190, 3</value>
+  </metadata>
   <metadata name="dataGridViewImageColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -414,7 +453,7 @@ phase defaults to bucket 0.
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABw
-        DQAAAk1TRnQBSQFMAgEBBgEAASgBAAEoAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DQAAAk1TRnQBSQFMAgEBBgEAATgBAAE4AQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

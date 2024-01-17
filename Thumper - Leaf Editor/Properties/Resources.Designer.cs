@@ -433,6 +433,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_check_16 {
+            get {
+                object obj = ResourceManager.GetObject("icon_check_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_check_32 {
+            get {
+                object obj = ResourceManager.GetObject("icon_check_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_color_wheel {
             get {
                 object obj = ResourceManager.GetObject("icon_color_wheel", resourceCulture);
@@ -1004,7 +1024,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///bar[left];-8372160
         ///bar[center];-8372160
         ///bar[right];-8372160
-        ///bar and thump;-15528691
+        ///thump and bar;-15528691
         ///bar[double];-8388608
         ///bar[tri [rest of string was truncated]&quot;;.
         /// </summary>
@@ -1575,14 +1595,13 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;EntitySpawner&apos;,
-        ///&apos;obj_name&apos;: &apos;pyramid.spn&apos;,
+        ///&apos;obj_name&apos;: &apos;pyramiddecorator.spn&apos;,
         ///&apos;xfm_name&apos;: &apos;&apos;,
         ///&apos;constraint&apos;: &apos;kConstraintParent&apos;,
         ///&apos;pos&apos;: [0, 0, 0],
         ///&apos;rot_x&apos;: [1, 0, 0],
         ///&apos;rot_y&apos;: [0, 1, 0],
-        ///&apos;rot_z&apos;: [0, 0, 1],
-        ///&apos;scale [rest of string was truncated]&quot;;.
+        ///&apos;rot_z&apos;: [0, 0, 1] [rest of string was truncated]&quot;;.
         /// </summary>
         public static string spn_default {
             get {
