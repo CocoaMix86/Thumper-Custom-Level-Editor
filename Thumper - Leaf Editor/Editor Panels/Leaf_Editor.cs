@@ -91,11 +91,13 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void trackZoom_Scroll(object sender, EventArgs e)
 		{
+			int display = trackEditor.FirstDisplayedScrollingColumnIndex;
 			for (int i = 0; i < _beats; i++) {
 				trackEditor.Columns[i].Width = trackZoom.Value;
 			}
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
 			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
+			trackEditor.FirstDisplayedScrollingColumnIndex = display;
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
