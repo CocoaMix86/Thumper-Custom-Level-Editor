@@ -258,7 +258,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
-				var _val = trackEditor.CurrentCell.Value;
+				var _val = trackEditor[e.ColumnIndex, e.RowIndex].Value;
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					//if cell does not have the value, set it
