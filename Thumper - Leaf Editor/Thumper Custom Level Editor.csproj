@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\ILRepack.2.0.27\build\ILRepack.props" Condition="Exists('..\packages\ILRepack.2.0.27\build\ILRepack.props')" />
   <Import Project="..\packages\ILRepack.MSBuild.Task.2.0.13\build\ILRepack.MSBuild.Task.props" Condition="Exists('..\packages\ILRepack.MSBuild.Task.2.0.13\build\ILRepack.MSBuild.Task.props')" />
-  <Import Project="..\packages\ILRepack.2.0.18\build\ILRepack.props" Condition="Exists('..\packages\ILRepack.2.0.18\build\ILRepack.props')" />
   <Import Project="..\packages\ILMerge.3.0.29\build\ILMerge.props" Condition="Exists('..\packages\ILMerge.3.0.29\build\ILMerge.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -367,9 +367,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\ILMerge.3.0.29\build\ILMerge.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILMerge.3.0.29\build\ILMerge.props'))" />
-    <Error Condition="!Exists('..\packages\ILRepack.2.0.18\build\ILRepack.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.2.0.18\build\ILRepack.props'))" />
     <Error Condition="!Exists('..\packages\ILRepack.MSBuild.Task.2.0.13\build\ILRepack.MSBuild.Task.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.MSBuild.Task.2.0.13\build\ILRepack.MSBuild.Task.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Setup.Configuration.Interop.3.8.2112\build\Microsoft.VisualStudio.Setup.Configuration.Interop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Setup.Configuration.Interop.3.8.2112\build\Microsoft.VisualStudio.Setup.Configuration.Interop.targets'))" />
+    <Error Condition="!Exists('..\packages\ILRepack.2.0.27\build\ILRepack.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.2.0.27\build\ILRepack.props'))" />
   </Target>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -491,8 +491,8 @@
     <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.8.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.1\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
