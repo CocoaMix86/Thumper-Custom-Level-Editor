@@ -82,6 +82,7 @@
     <Compile Include="Editor Panels\RecentFiles.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="LevelDataClasses\CellFunction.cs" />
     <Compile Include="Other Forms\AboutThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,7 +115,7 @@
     <Compile Include="Other Forms\DialogInput.Designer.cs">
       <DependentUpon>DialogInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor Panels\GateLvlData.cs" />
+    <Compile Include="LevelDataClasses\GateLvlData.cs" />
     <Compile Include="Editor Panels\Gate_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,20 +135,20 @@
     <Compile Include="Editor Panels\Leaf_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor Panels\LvlLeafData.cs" />
+    <Compile Include="LevelDataClasses\LvlLeafData.cs" />
     <Compile Include="Editor Panels\Lvl_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor Panels\MasterLvlData.cs" />
+    <Compile Include="LevelDataClasses\MasterLvlData.cs" />
     <Compile Include="Editor Panels\Master_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor Panels\Object_Params.cs" />
-    <Compile Include="Editor Panels\SampleData.cs" />
+    <Compile Include="LevelDataClasses\Object_Params.cs" />
+    <Compile Include="LevelDataClasses\SampleData.cs" />
     <Compile Include="Editor Panels\Sample_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor Panels\Sequencer_Object.cs" />
+    <Compile Include="LevelDataClasses\Sequencer_Object.cs" />
     <Compile Include="ThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -389,6 +390,9 @@
     <Reference Include="CustomMarshalers" />
     <Reference Include="Fmod5Sharp, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fmod5Sharp.3.0.1\lib\netstandard2.0\Fmod5Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MathParser.org-mXparser, Version=5.2.1.0, Culture=neutral, PublicKeyToken=0fbab7add73ed6e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathParser.org-mXparser.5.2.1\lib\net461\MathParser.org-mXparser.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
