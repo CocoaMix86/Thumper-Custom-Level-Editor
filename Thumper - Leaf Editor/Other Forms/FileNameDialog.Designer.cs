@@ -33,12 +33,14 @@
             this.btnWorkRenameYes = new System.Windows.Forms.Button();
             this.label47 = new System.Windows.Forms.Label();
             this.txtWorkingRename = new System.Windows.Forms.TextBox();
+            this.lblExists = new System.Windows.Forms.Label();
             this.panelWorkRename.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelWorkRename
             // 
             this.panelWorkRename.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelWorkRename.Controls.Add(this.lblExists);
             this.panelWorkRename.Controls.Add(this.lblRenameFileType);
             this.panelWorkRename.Controls.Add(this.btnWorkRenameNo);
             this.panelWorkRename.Controls.Add(this.btnWorkRenameYes);
@@ -89,6 +91,7 @@
             this.btnWorkRenameYes.TabIndex = 93;
             this.btnWorkRenameYes.Text = "Confirm";
             this.btnWorkRenameYes.UseVisualStyleBackColor = false;
+            this.btnWorkRenameYes.Click += new System.EventHandler(this.btnWorkRenameYes_Click);
             // 
             // label47
             // 
@@ -110,7 +113,20 @@
             this.txtWorkingRename.Name = "txtWorkingRename";
             this.txtWorkingRename.Size = new System.Drawing.Size(149, 22);
             this.txtWorkingRename.TabIndex = 0;
+            this.txtWorkingRename.TextChanged += new System.EventHandler(this.txtWorkingRename_TextChanged);
             this.txtWorkingRename.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileNameDialog_KeyDown);
+            // 
+            // lblExists
+            // 
+            this.lblExists.AutoSize = true;
+            this.lblExists.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExists.ForeColor = System.Drawing.Color.Red;
+            this.lblExists.Location = new System.Drawing.Point(-1, 4);
+            this.lblExists.Name = "lblExists";
+            this.lblExists.Size = new System.Drawing.Size(173, 13);
+            this.lblExists.TabIndex = 96;
+            this.lblExists.Text = "That file name exists already!";
+            this.lblExists.Visible = false;
             // 
             // FileNameDialog
             // 
@@ -144,5 +160,6 @@
         public System.Windows.Forms.Button btnWorkRenameYes;
         public System.Windows.Forms.TextBox txtWorkingRename;
         public System.Windows.Forms.Label lblRenameFileType;
+        private System.Windows.Forms.Label lblExists;
     }
 }

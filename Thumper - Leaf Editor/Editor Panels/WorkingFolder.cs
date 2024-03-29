@@ -263,6 +263,7 @@ namespace Thumper_Custom_Level_Editor
 			workingfolderFiles_CellMouseClick(null, dgvcme);
 			//set textbox with name of selected file
 			string oldfilename = workingfolderFiles.SelectedCells[1].Value.ToString();
+			string newfilename = "";
 			string[] file = oldfilename.Split(new[] { '_' }, 2);
 			filetype = file[0];
 			//check if file is valid to be renamed
@@ -273,13 +274,14 @@ namespace Thumper_Custom_Level_Editor
 
 			string newfilepath = "";
 			//setup file name dialog and then show it
-			FileNameDialog filenamedialog = new FileNameDialog();
+			FileNameDialog filenamedialog = new FileNameDialog(workingfolder, filetype);
 			filenamedialog.txtWorkingRename.Text = file[1];
 			filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
 			filenamedialog.Location = PointToClient(Cursor.Position);
 			//if YES, rename file
 			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
-				newfilepath = $@"{workingfolder}\{filetype}_{filenamedialog.txtWorkingRename.Text}.txt";
+				newfilename = filenamedialog.txtWorkingRename.Text;
+				newfilepath = $@"{workingfolder}\{filetype}_{newfilename}.txt";
 				File.Move($@"{workingfolder}\{oldfilename}.txt", newfilepath);
 				workingfolderFiles.SelectedCells[1].Value = $@"{filetype}_{filenamedialog.txtWorkingRename.Text}";
 			}
@@ -287,6 +289,7 @@ namespace Thumper_Custom_Level_Editor
 			else
 				return;
 
+			FindInstancesAndRename(file[1], newfilename, filetype);
 			SaveFileType(filetype, newfilepath);
 		}
 		//Duplicate file
@@ -353,6 +356,39 @@ namespace Thumper_Custom_Level_Editor
 				e.Handled = true;
 				DataGridViewCellMouseEventArgs dgvcme = new DataGridViewCellMouseEventArgs(1, workingfolderFiles.SelectedCells[0].RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
 				workingfolderFiles_CellMouseClick(null, dgvcme);
+			}
+		}
+
+		private void FindInstancesAndRename(string oldname, string newname, string filetype)
+        {
+			if (filetype == "leaf") {
+				foreach (string file in Directory.GetFiles(workingfolder, "lvl_*.txt")) {
+					string text = File.ReadAllText(file);
+					text = text.Replace($"{oldname}.leaf", $"{newname}.leaf");
+					File.WriteAllText(file, text);
+				}
+				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedlvl), "#.*", ""));
+				LoadLvl(_load);
+			}
+			else if (filetype == "lvl") {
+				foreach (string file in Directory.GetFiles(workingfolder).Where(f => f.Contains("gate_") || f.Contains("master_"))) {
+					string text = File.ReadAllText(file);
+					text = text.Replace($"{oldname}.lvl", $"{newname}.lvl");
+					File.WriteAllText(file, text);
+				}
+				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedgate), "#.*", ""));
+				LoadGate(_load);
+				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
+				LoadMaster(_load);
+			}
+			else if (filetype == "gate") {
+				foreach (string file in Directory.GetFiles(workingfolder, "master_*.txt")) {
+					string text = File.ReadAllText(file);
+					text = text.Replace($"{oldname}.gate", $"{newname}.gate");
+					File.WriteAllText(file, text);
+				}
+				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
+				LoadMaster(_load);
 			}
 		}
 	}

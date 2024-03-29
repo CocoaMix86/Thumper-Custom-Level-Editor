@@ -689,5 +689,6 @@ namespace Thumper_Custom_Level_Editor
             }
             cb.DropDownWidth = maxWidth != 0 ? maxWidth : cb.DropDownWidth;
         }
+
     }
 }

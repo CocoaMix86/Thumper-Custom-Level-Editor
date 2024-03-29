@@ -124,6 +124,16 @@ namespace Thumper_Custom_Level_Editor
 		{
 			e.Cancel = true;
 		}
+
+		private void lvlSeqObjs_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			if (e.ColumnIndex == -1 || e.RowIndex == -1)
+				return;
+			if (e.Button == MouseButtons.Right) {
+				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
+				TrackUpdateHighlightingSingleCell((sender as DataGridView)[e.ColumnIndex, e.RowIndex]);
+			}
+		}
 		/// DGV LVLSEQOBJS
 		//Cell value changed
 		private void lvlSeqObjs_CellValueChanged(object sender, DataGridViewCellEventArgs e)

@@ -45,6 +45,7 @@ namespace Thumper_Custom_Level_Editor
 		public bool loadingleaf = false;
 		public bool controldown = false;
 		public bool shiftdown = false;
+		public bool rightclickdown = false;
 		public int leafeditorcell = 0;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
@@ -167,6 +168,12 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
 		{
 			leafeditorcell = e.ColumnIndex;
+			if (e.ColumnIndex == -1 || e.RowIndex == -1)
+				return;
+			if (Control.MouseButtons == MouseButtons.Right) {
+				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
+				TrackUpdateHighlightingSingleCell((sender as DataGridView)[e.ColumnIndex, e.RowIndex]);
+			}
 		}
 		private void vScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
@@ -307,7 +314,12 @@ namespace Thumper_Custom_Level_Editor
 					if ((sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value == null)
 						(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 1;
 			}
-			else if (e.Button == MouseButtons.Right) {
+		}
+		private void trackEditor_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			if (e.ColumnIndex == -1 || e.RowIndex == -1)
+				return;
+			if (e.Button == MouseButtons.Right) {
 				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
 				TrackUpdateHighlightingSingleCell((sender as DataGridView)[e.ColumnIndex, e.RowIndex]);
 			}
@@ -1396,13 +1408,13 @@ namespace Thumper_Custom_Level_Editor
 				_tracks.Add(_s);
 			}
 
-			foreach (var func in _load["functions"]) {
+			/*foreach (var func in _load["functions"]) {
 				_functions.Add(new CellFunction() {
 					function = func["function"],
 					rowindex = func["rowindex"],
 					columnindex = func["columnindex"]
 				});
-			}
+			}*/
 			txtFunction.Enabled = true;
 			//clear the DGV and prep for new data points
 			trackEditor.Rows.Clear();
