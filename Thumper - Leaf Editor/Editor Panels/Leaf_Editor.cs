@@ -370,6 +370,7 @@ namespace Thumper_Custom_Level_Editor
 							trackEditor[col + i, row + _line].Value = cells[i];
 					}
 					TrackUpdateHighlighting(trackEditor.Rows[row + _line]);
+					SaveLeaf(false);
 				}
 				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			}
@@ -811,10 +812,13 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//if YES, clear cell values in row and clear highlighting
 			if ((!_empty && MessageBox.Show("This track has data. Are you sure you want to clear it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
+				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				foreach (DataGridViewCell dgvc in trackEditor.CurrentRow.Cells) {
 					dgvc.Value = null;
 					dgvc.Style = null;
 				}
+				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+				TrackUpdateHighlighting(trackEditor.CurrentRow);
 				PlaySound("UIdataerase");
 				SaveLeaf(false);
 			}
