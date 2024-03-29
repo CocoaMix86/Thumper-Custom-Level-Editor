@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using org.mariuszgromada.math.mxparser;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -12,9 +13,16 @@ namespace Thumper_Custom_Level_Editor
         public int rowindex { get; set; }
         public int columnindex { get; set; }
 
-        public decimal Evaluate()
+        public double Evaluate()
         {
-            return 0;
+            string func = Substitutions(this.function);
+            Expression exp = new Expression(func);
+            return exp.calculate();
+        }
+
+        private string Substitutions(string func)
+        {
+            return func;
         }
     }
 }

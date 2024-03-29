@@ -831,7 +831,7 @@ namespace Thumper_Custom_Level_Editor
 				highlight_color = $"{btnTrackColorDialog.BackColor.ToArgb()}",
 				highlight_value = 1,
 				footer = objmatch.footer,
-				default_interp = "kTraitInterpLinear"
+				default_interp = "Linear"
 			};
 			trackEditor.Rows[_selecttrack].HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color)), Color.Black, 0.4);
 			//alter the data if it's a sample object being added. Save the sample name instead
@@ -1369,7 +1369,7 @@ namespace Thumper_Custom_Level_Editor
 				//if the leaf has definitions for these, add them. If not, set to defaults
 				_s.param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"];
 				_s.highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1;
-				_s.default_interp = (string)seq_obj["default_interp"] ?? "kTraitInterpLinear";
+				_s.default_interp = ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") ?? "Linear";
 				//if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
 				if (_s.param_path == "play") {
 					_s.friendly_type = "PLAY SAMPLE";
@@ -1506,7 +1506,7 @@ namespace Thumper_Custom_Level_Editor
 				else
 					s.Add("param_path", seq_obj.param_path);
 				s.Add("trait_type", seq_obj.trait_type);
-				s.Add("default_interp", seq_obj.default_interp);
+				s.Add("default_interp", $"kTraitInterp{seq_obj.default_interp}");
 				///start building all data points into an object
 				JObject data_points = new JObject();
 				for (int x = 0; x < trackEditor.ColumnCount; x++) {
