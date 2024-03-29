@@ -255,6 +255,7 @@
             this.btnLvlCopyTunnel = new System.Windows.Forms.ToolStripButton();
             this.btnLvlPasteTunnel = new System.Windows.Forms.ToolStripButton();
             this.chkTunnelCopy = new System.Windows.Forms.ToolStripButton();
+            this.btnLvlRandomTunnel = new System.Windows.Forms.ToolStripButton();
             this.label21 = new System.Windows.Forms.Label();
             this.lvlLoopTracks = new System.Windows.Forms.DataGridView();
             this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -3210,13 +3211,14 @@
             this.btnLvlPathDelete,
             this.btnLvlCopyTunnel,
             this.btnLvlPasteTunnel,
-            this.chkTunnelCopy});
+            this.chkTunnelCopy,
+            this.btnLvlRandomTunnel});
             this.lvlPathsToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.lvlPathsToolStrip.Location = new System.Drawing.Point(1, 14);
             this.lvlPathsToolStrip.Name = "lvlPathsToolStrip";
             this.lvlPathsToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.lvlPathsToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.lvlPathsToolStrip.Size = new System.Drawing.Size(25, 135);
+            this.lvlPathsToolStrip.Size = new System.Drawing.Size(25, 163);
             this.lvlPathsToolStrip.Stretch = true;
             this.lvlPathsToolStrip.TabIndex = 143;
             // 
@@ -3277,6 +3279,16 @@
             this.chkTunnelCopy.Name = "chkTunnelCopy";
             this.chkTunnelCopy.Size = new System.Drawing.Size(24, 24);
             this.chkTunnelCopy.ToolTipText = "When enabled, new leafs added will copy the paths\r\nof the previous leaf.";
+            // 
+            // btnLvlRandomTunnel
+            // 
+            this.btnLvlRandomTunnel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLvlRandomTunnel.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_random;
+            this.btnLvlRandomTunnel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLvlRandomTunnel.Name = "btnLvlRandomTunnel";
+            this.btnLvlRandomTunnel.Size = new System.Drawing.Size(24, 24);
+            this.btnLvlRandomTunnel.ToolTipText = "Click to add a random tunnel";
+            this.btnLvlRandomTunnel.Click += new System.EventHandler(this.btnLvlRandomTunnel_Click);
             // 
             // label21
             // 
@@ -6696,6 +6708,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.TextBox txtFunction;
         private System.Windows.Forms.Button btnFunctionApply;
+        private System.Windows.Forms.ToolStripButton btnLvlRandomTunnel;
     }
 }
 

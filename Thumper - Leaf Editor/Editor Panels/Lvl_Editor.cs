@@ -433,6 +433,15 @@ namespace Thumper_Custom_Level_Editor
 			SaveLvl(false);
 		}
 
+		private void btnLvlRandomTunnel_Click(object sender, EventArgs e)
+		{
+			lvlLeafPaths.RowCount++;
+			lvlLeafPaths.Rows[lvlLeafPaths.Rows.Count - 1].Cells[0].Value = _lvlpaths[rng.Next(0, _lvlpaths.Count)];
+			btnLvlPathDelete.Enabled = true;
+			PlaySound("UItunneladd");
+			SaveLvl(false);
+		}
+
 		private void btnLvlPathDelete_Click(object sender, EventArgs e)
 		{
 			if (lvlLeafPaths.CurrentCell.Value == null)
