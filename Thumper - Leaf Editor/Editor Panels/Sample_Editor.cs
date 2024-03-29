@@ -12,6 +12,7 @@ using Fmod5Sharp;
 using Fmod5Sharp.FmodTypes;
 using NAudio.Vorbis;
 using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -283,13 +284,13 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		public bool _sampleplaying = false;
-		AudioPlaybackEngine ape = new AudioPlaybackEngine();
+		private WaveOutEvent outputDevice;
+		private AudioFileReader audioFile;
 		private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
 		{
 			var _samp = _samplelist[sampleList.CurrentRow.Index];
 			string _filetype = "";
-
+			//check if sample exists in temp folder. If not, create it
 			if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
 				var _result = PCtoOGG(_samp);
 				if (_result == null)
@@ -301,19 +302,44 @@ namespace Thumper_Custom_Level_Editor
 			if (File.Exists($@"temp\{_samp.obj_name}.wav"))
 				_filetype = "wav";
 
-			//creates new instance of the playback engine, since it gets disposed when stopping
-			if (!_sampleplaying) {
-				btnSampEditorPlaySamp.Image = Properties.Resources.icon_stop;
-				ape = new AudioPlaybackEngine();
-				ape.PlaySound(new CachedSound($@"temp\{_samp.obj_name}.{_filetype}"));
-				_sampleplaying = true;
+
+			if (outputDevice == null) {
+				outputDevice = new WaveOutEvent();
+				outputDevice.PlaybackStopped += OnPlaybackStopped;
 			}
-			//stop current playback by disposing the object
-			else {
-				ape.Dispose();
-				_sampleplaying = false;
-				btnSampEditorPlaySamp.Image = Properties.Resources.icon_play2;
+			if (audioFile == null) {
+				if (_filetype == "ogg") {
+					var vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
+					outputDevice.Init(vorbis);
+				}
+				else {
+					audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
+					outputDevice.Init(audioFile);
+				}
 			}
+
+			btnSampEditorPlaySamp.Image = Properties.Resources.icon_stop;
+			btnSampEditorPlaySamp.Click -= btnSampEditorPlaySamp_Click;
+			btnSampEditorPlaySamp.Click += OnButtonStopClick;
+			outputDevice.Play();
+		}
+		private void OnButtonStopClick(object sender, EventArgs args)
+		{
+			outputDevice?.Stop();
+			btnSampEditorPlaySamp.Click += btnSampEditorPlaySamp_Click;
+			btnSampEditorPlaySamp.Click -= OnButtonStopClick;
+			btnSampEditorPlaySamp.Image = Properties.Resources.icon_play2;
+		}
+		private void OnPlaybackStopped(object sender, StoppedEventArgs args)
+		{
+			outputDevice.Dispose();
+			outputDevice = null;
+			if (audioFile != null)
+				audioFile.Dispose();
+			audioFile = null;
+			btnSampEditorPlaySamp.Click += btnSampEditorPlaySamp_Click;
+			btnSampEditorPlaySamp.Click -= OnButtonStopClick;
+			btnSampEditorPlaySamp.Image = Properties.Resources.icon_play2;
 		}
 
 		private void btnRevertSample_Click(object sender, EventArgs e)
