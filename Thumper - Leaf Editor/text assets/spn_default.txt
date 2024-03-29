@@ -1677,5 +1677,44 @@
 'objlib_path': 'decorators/decorative/pulse_crest.objlib.objlib',
 'bucket': 'kBucketEffect'
 },
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'teeth.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [1, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'boss/boss_7/teeth.objlib',
+'bucket': 'kBucketTerrain'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'teeth_entity_set.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [1, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'boss/boss_7/teeth_entity_set.objlib',
+'bucket': 'kBucketTerrain'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'teeth_tunnel.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [1, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'boss/boss_7/teeth_tunnel.objlib',
+'bucket': 'kBucketTerrain'
+}
 ]
 }

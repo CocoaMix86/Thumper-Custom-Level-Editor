@@ -310,9 +310,9 @@ gamma
 gamma_floats.flow;red;0xd61447d3;kTraitFloat;True;1;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 gamma_floats.flow;green;0x8c8b5767;kTraitFloat;True;1;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 gamma_floats.flow;blue;0x8c17f344;kTraitFloat;True;1;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-levels.pp;red gamma2;0xaffd1047;kTraitFloat;False;1;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-levels.pp;green gamma2;0x6d90b646;kTraitFloat;False;1;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-levels.pp;blue gamma2;0x134d04b5;kTraitFloat;False;1;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+levels.pp;red gamma2;0xaffd1047;kTraitFloat;False;53;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+levels.pp;green gamma2;0x6d90b646;kTraitFloat;False;25;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+levels.pp;blue gamma2;0x134d04b5;kTraitFloat;False;39;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 levels.pp;green gamma3;0x4abc7dee;kTraitFloat;False;1;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 levels.pp;blue gamma3;0x1bfc06f8;kTraitFloat;False;1;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
@@ -332,6 +332,9 @@ ring_pulse.spn;ring_pulse_grey;ring_pulse_grey.ent;kTraitBool;True;0;[2,1,2,1,2,
 ring_pulse_checkpoint.spn;ring_pulse_checkpoint;ring_pulse_checkpoint.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ring_pulse.spn;spinning white egg;weapon.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 final_twirlies.spn;final_twirlies_sparse [32 beats];final_twirlies_sparse.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+teeth.spn;teeth [1 beat];teeth.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+teeth_entity_set.spn;teeth_set [32 beats];teeth_set.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+teeth_entity_set.spn;teeth_set_shortened [32 beats];teeth_set_shortened.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 pyramiddecorator.spn;crakhed_pyramid_prelude [80 beats];pyramid.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
 SMOKE FX
