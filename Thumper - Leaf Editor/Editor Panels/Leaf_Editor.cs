@@ -105,6 +105,8 @@ namespace Thumper_Custom_Level_Editor
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
 			int display = trackEditor.FirstDisplayedScrollingRowIndex;
+			if (display == -1)
+				return;
 			for (int i = 0; i < trackEditor.Rows.Count; i++) {
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
 			}
