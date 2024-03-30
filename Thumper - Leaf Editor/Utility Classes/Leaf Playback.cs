@@ -30,6 +30,7 @@ namespace Thumper_Custom_Level_Editor
 		WaveStream turn_approachL;
 		WaveStream turn;
 		WaveStream turn_long;
+		WaveStream silence;
 
 		private void InitializeSounds()
         {
@@ -45,6 +46,7 @@ namespace Thumper_Custom_Level_Editor
 			turn_approachL = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_birth_lft)));
 			turn = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_hit_perfect2)));
 			turn_long = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_long_lft)));
+			silence = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.silence)));
 		}
 		public static byte[] ReadFully(Stream input)
 		{

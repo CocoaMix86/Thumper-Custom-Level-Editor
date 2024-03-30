@@ -568,4 +568,7 @@
   <data name="turn_long_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\turn_long_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="silence" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\silence.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
