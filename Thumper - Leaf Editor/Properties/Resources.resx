@@ -158,7 +158,7 @@
     <value>..\text assets\samp_level9_480bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
   <data name="leaf_singletrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="samp_level3_360bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\samp_level3_360bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
@@ -229,36 +229,6 @@
   <data name="difficultyhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\difficultyhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="coin_collect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\coin_collect.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ducker_ring_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\ducker_ring_approach.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="grindable_birth2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\grindable_birth2.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="hammer_two_handed_hit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\hammer_two_handed_hit.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="high_jump" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\high_jump.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="thump1b" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\thump1b.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="thump_birth1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\thump_birth1.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="turn_birth" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_birth.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="turn_birth_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_birth_lft.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="turn_hit_perfect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_hit_perfect2.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="icon_pause16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-pause16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -270,12 +240,6 @@
   </data>
   <data name="icon_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="jumper_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\jumper_approach.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="turn_long_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_long_lft.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="icon_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -564,5 +528,44 @@
   </data>
   <data name="icon_check_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-check-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="audionames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\audionames.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="coin_collect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\coin_collect.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ducker_ring_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\ducker_ring_approach.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grindable_birth2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\grindable_birth2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hammer_two_handed_hit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\hammer_two_handed_hit.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="high_jump" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\high_jump.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="jumper_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\jumper_approach.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="thump1b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\thump1b.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="thump_birth1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\thump_birth1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="turn_birth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\turn_birth.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="turn_birth_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\turn_birth_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="turn_hit_perfect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\turn_hit_perfect2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="turn_long_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\turn_long_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -1,0 +1,12 @@
+coin_collect
+ducker_ring_approach
+grindable_birth2
+hammer_two_handed_hit
+high_jump
+thump_birth1
+thump1b
+turn_birth
+turn_birth_lft
+turn_hit_perfect2
+turn_long_lft
+jumper_approach

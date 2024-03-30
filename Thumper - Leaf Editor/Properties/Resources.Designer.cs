@@ -61,6 +61,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to coin_collect
+        ///ducker_ring_approach
+        ///grindable_birth2
+        ///hammer_two_handed_hit
+        ///high_jump
+        ///thump_birth1
+        ///thump1b
+        ///turn_birth
+        ///turn_birth_lft
+        ///turn_hit_perfect2
+        ///turn_long_lft
+        ///jumper_approach.
+        /// </summary>
+        public static string audionames {
+            get {
+                return ResourceManager.GetString("audionames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap beeble {
@@ -201,12 +221,11 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] coin_collect {
+        public static System.IO.UnmanagedMemoryStream coin_collect {
             get {
-                object obj = ResourceManager.GetObject("coin_collect", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("coin_collect", resourceCulture);
             }
         }
         
@@ -311,12 +330,11 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] ducker_ring_approach {
+        public static System.IO.UnmanagedMemoryStream ducker_ring_approach {
             get {
-                object obj = ResourceManager.GetObject("ducker_ring_approach", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("ducker_ring_approach", resourceCulture);
             }
         }
         
@@ -341,32 +359,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] grindable_birth2 {
+        public static System.IO.UnmanagedMemoryStream grindable_birth2 {
             get {
-                object obj = ResourceManager.GetObject("grindable_birth2", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("grindable_birth2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] hammer_two_handed_hit {
+        public static System.IO.UnmanagedMemoryStream hammer_two_handed_hit {
             get {
-                object obj = ResourceManager.GetObject("hammer_two_handed_hit", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("hammer_two_handed_hit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] high_jump {
+        public static System.IO.UnmanagedMemoryStream high_jump {
             get {
-                object obj = ResourceManager.GetObject("high_jump", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("high_jump", resourceCulture);
             }
         }
         
@@ -841,12 +856,11 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] jumper_approach {
+        public static System.IO.UnmanagedMemoryStream jumper_approach {
             get {
-                object obj = ResourceManager.GetObject("jumper_approach", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("jumper_approach", resourceCulture);
             }
         }
         
@@ -1610,22 +1624,20 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] thump_birth1 {
+        public static System.IO.UnmanagedMemoryStream thump_birth1 {
             get {
-                object obj = ResourceManager.GetObject("thump_birth1", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("thump_birth1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] thump1b {
+        public static System.IO.UnmanagedMemoryStream thump1b {
             get {
-                object obj = ResourceManager.GetObject("thump1b", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("thump1b", resourceCulture);
             }
         }
         
@@ -1655,42 +1667,38 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] turn_birth {
+        public static System.IO.UnmanagedMemoryStream turn_birth {
             get {
-                object obj = ResourceManager.GetObject("turn_birth", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("turn_birth", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] turn_birth_lft {
+        public static System.IO.UnmanagedMemoryStream turn_birth_lft {
             get {
-                object obj = ResourceManager.GetObject("turn_birth_lft", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("turn_birth_lft", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] turn_hit_perfect2 {
+        public static System.IO.UnmanagedMemoryStream turn_hit_perfect2 {
             get {
-                object obj = ResourceManager.GetObject("turn_hit_perfect2", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("turn_hit_perfect2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static byte[] turn_long_lft {
+        public static System.IO.UnmanagedMemoryStream turn_long_lft {
             get {
-                object obj = ResourceManager.GetObject("turn_long_lft", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("turn_long_lft", resourceCulture);
             }
         }
         

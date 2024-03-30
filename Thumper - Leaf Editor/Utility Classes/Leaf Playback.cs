@@ -6,44 +6,52 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using NAudio.Wave;
 
 namespace Thumper_Custom_Level_Editor
 {
 	public partial class FormLeafEditor
 	{
 		AccurateTimer mTimer1;
-		List<List<CachedSound>> vorbis;
+		List<List<WaveStream>> vorbis;
 		bool _playing = false;
 		int _playbackbeat;
 		int _sequence;
 
-		CachedSound ring;
-		CachedSound ring_approach;
-		CachedSound bar_approach;
-		CachedSound bar;
-		CachedSound spikes;
-		CachedSound mushroom;
-		CachedSound thump_approach;
-		CachedSound thump;
-		CachedSound turn_approachR;
-		CachedSound turn_approachL;
-		CachedSound turn;
-		CachedSound turn_long;
+		WaveStream ring;
+		WaveStream ring_approach;
+		WaveStream bar_approach;
+		WaveStream bar;
+		WaveStream spikes;
+		WaveStream mushroom;
+		WaveStream thump_approach;
+		WaveStream thump;
+		WaveStream turn_approachR;
+		WaveStream turn_approachL;
+		WaveStream turn;
+		WaveStream turn_long;
 
 		private void InitializeSounds()
         {
-			ring = new CachedSound(@"temp\coin_collect.ogg");
-			ring_approach = new CachedSound(@"temp\ducker_ring_approach.ogg");
-			bar_approach = new CachedSound(@"temp\grindable_birth2.ogg");
-			bar = new CachedSound(@"temp\hammer_two_handed_hit.ogg");
-			spikes = new CachedSound(@"temp\high_jump.ogg");
-			mushroom = new CachedSound(@"temp\jumper_approach.ogg");
-			thump_approach = new CachedSound(@"temp\thump_birth1.ogg");
-			thump = new CachedSound(@"temp\thump1b.ogg");
-			turn_approachR = new CachedSound(@"temp\turn_birth.ogg");
-			turn_approachL = new CachedSound(@"temp\turn_birth_lft.ogg");
-			turn = new CachedSound(@"temp\turn_hit_perfect2.ogg");
-			turn_long = new CachedSound(@"temp\turn_long_lft.ogg");
+			ring = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.coin_collect)));
+			ring_approach = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.ducker_ring_approach)));
+			bar_approach = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.grindable_birth2)));
+			bar = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.hammer_two_handed_hit)));
+			spikes = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.high_jump)));
+			mushroom = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.jumper_approach)));
+			thump_approach = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.thump_birth1)));
+			thump = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.thump1b)));
+			turn_approachR = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_birth)));
+			turn_approachL = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_birth_lft)));
+			turn = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_hit_perfect2)));
+			turn_long = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_long_lft)));
+		}
+		public static byte[] ReadFully(Stream input)
+		{
+			using (MemoryStream ms = new MemoryStream()) {
+				input.CopyTo(ms);
+				return ms.ToArray();
+			}
 		}
 
 		private void btnTrackPlayback_Click(object sender, EventArgs e)
@@ -66,9 +74,9 @@ namespace Thumper_Custom_Level_Editor
 			//make sure the sample list is up to date
 			LvlReloadSamples();
 			//for each beat in the leaf, fill the list with new lists to hold playable data
-			vorbis = new List<List<CachedSound>>((int)numericUpDown_LeafLength.Value + 8);
+			vorbis = new List<List<WaveStream>>((int)numericUpDown_LeafLength.Value + 8);
 			for (int x = 0; x < numericUpDown_LeafLength.Value + 8; x++) {
-				vorbis.Add(new List<CachedSound>());
+				vorbis.Add(new List<WaveStream>());
 			}
 
 			//iterate over each row in the lead to find the tracks with the important sound-making objects
@@ -165,9 +173,9 @@ namespace Thumper_Custom_Level_Editor
 							}
 
 							if (File.Exists($@"{_samplename}.ogg"))
-								vorbis[_sequence].Add(new CachedSound($@"{_samplename}.ogg"));
+								vorbis[_sequence].Add(new WaveFileReader($@"{_samplename}.ogg"));
 							if (File.Exists($@"{_samplename}.wav"))
-								vorbis[_sequence].Add(new CachedSound($@"{_samplename}.wav"));
+								vorbis[_sequence].Add(new WaveFileReader($@"{_samplename}.wav"));
 						}
 						_sequence++;
 					}
@@ -189,7 +197,7 @@ namespace Thumper_Custom_Level_Editor
 		private void _playbacktimer_Tick()
 		{
 			foreach (var _sample in vorbis[_playbackbeat]) {
-				AudioPlaybackEngine.Instance.PlaySound(_sample);
+				//AudioPlaybackEngine.Instance.PlaySound(_sample);
 			}
 			try {
 				trackEditor.ClearSelection();

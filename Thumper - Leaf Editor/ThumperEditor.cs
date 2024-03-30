@@ -199,18 +199,44 @@ namespace Thumper_Custom_Level_Editor
                 Directory.CreateDirectory(@"temp");
             }
             //write required audio files for playback
-            if (!File.Exists(@"temp\coin_collect.ogg")) File.WriteAllBytes(@"temp\coin_collect.ogg", Properties.Resources.coin_collect);
-            if (!File.Exists(@"temp\ducker_ring_approach.ogg")) File.WriteAllBytes(@"temp\ducker_ring_approach.ogg", Properties.Resources.ducker_ring_approach);
-            if (!File.Exists(@"temp\grindable_birth2.ogg")) File.WriteAllBytes(@"temp\grindable_birth2.ogg", Properties.Resources.grindable_birth2);
-            if (!File.Exists(@"temp\hammer_two_handed_hit.ogg")) File.WriteAllBytes(@"temp\hammer_two_handed_hit.ogg", Properties.Resources.hammer_two_handed_hit);
-            if (!File.Exists(@"temp\high_jump.ogg")) File.WriteAllBytes(@"temp\high_jump.ogg", Properties.Resources.high_jump);
-            if (!File.Exists(@"temp\thump_birth1.ogg")) File.WriteAllBytes(@"temp\thump_birth1.ogg", Properties.Resources.thump_birth1);
-            if (!File.Exists(@"temp\thump1b.ogg")) File.WriteAllBytes(@"temp\thump1b.ogg", Properties.Resources.thump1b);
-            if (!File.Exists(@"temp\turn_birth.ogg")) File.WriteAllBytes(@"temp\turn_birth.ogg", Properties.Resources.turn_birth);
-            if (!File.Exists(@"temp\turn_birth_lft.ogg")) File.WriteAllBytes(@"temp\turn_birth_lft.ogg", Properties.Resources.turn_birth_lft);
-            if (!File.Exists(@"temp\turn_hit_perfect2.ogg")) File.WriteAllBytes(@"temp\turn_hit_perfect2.ogg", Properties.Resources.turn_hit_perfect2);
-            if (!File.Exists(@"temp\turn_long_lft.ogg")) File.WriteAllBytes(@"temp\turn_long_lft.ogg", Properties.Resources.turn_long_lft);
-            if (!File.Exists(@"temp\jumper_approach.ogg")) File.WriteAllBytes(@"temp\jumper_approach.ogg", Properties.Resources.jumper_approach);
+            /*
+            Properties.Resources.coin_collect.CopyTo(memstrm);
+            if (!File.Exists(@"temp\coin_collect.wav")) File.WriteAllBytes(@"temp\coin_collect.wav", memstrm.ToArray());
+            memstrm = null;
+
+            Properties.Resources.ducker_ring_approach.CopyTo(memstrm);
+            if (!File.Exists(@"temp\ducker_ring_approach.wav")) File.WriteAllBytes(@"temp\ducker_ring_approach.wav", memstrm.ToArray());
+
+            Properties.Resources.grindable_birth2.CopyTo(memstrm);
+            if (!File.Exists(@"temp\grindable_birth2.wav")) File.WriteAllBytes(@"temp\grindable_birth2.wav", memstrm.ToArray());
+
+            Properties.Resources.hammer_two_handed_hit.CopyTo(memstrm);
+            if (!File.Exists(@"temp\hammer_two_handed_hit.wav")) File.WriteAllBytes(@"temp\hammer_two_handed_hit.wav", memstrm.ToArray());
+
+            Properties.Resources.high_jump.CopyTo(memstrm);
+            if (!File.Exists(@"temp\high_jump.wav")) File.WriteAllBytes(@"temp\high_jump.wav", memstrm.ToArray());
+
+            Properties.Resources.thump_birth1.CopyTo(memstrm);
+            if (!File.Exists(@"temp\thump_birth1.wav")) File.WriteAllBytes(@"temp\thump_birth1.wav", memstrm.ToArray());
+
+            Properties.Resources.thump1b.CopyTo(memstrm);
+            if (!File.Exists(@"temp\thump1b.wav")) File.WriteAllBytes(@"temp\thump1b.wav", memstrm.ToArray());
+
+            Properties.Resources.turn_birth.CopyTo(memstrm);
+            if (!File.Exists(@"temp\turn_birth.wav")) File.WriteAllBytes(@"temp\turn_birth.wav", memstrm.ToArray());
+
+            Properties.Resources.turn_birth_lft.CopyTo(memstrm);
+            if (!File.Exists(@"temp\turn_birth_lft.wav")) File.WriteAllBytes(@"temp\turn_birth_lft.wav", memstrm.ToArray());
+
+            Properties.Resources.turn_hit_perfect2.CopyTo(memstrm);
+            if (!File.Exists(@"temp\turn_hit_perfect2.wav")) File.WriteAllBytes(@"temp\turn_hit_perfect2.wav", memstrm.ToArray());
+
+            Properties.Resources.turn_long_lft.CopyTo(memstrm);
+            if (!File.Exists(@"temp\turn_long_lft.wav")) File.WriteAllBytes(@"temp\turn_long_lft.wav", memstrm.ToArray());
+
+            Properties.Resources.jumper_approach.CopyTo(memstrm);
+            if (!File.Exists(@"temp\jumper_approach.wav")) File.WriteAllBytes(@"temp\jumper_approach.wav", memstrm.ToArray());
+            */
             InitializeSounds();
             //call method that imports objects from track_objects.txt (for Leaf editing)
             ///version check
