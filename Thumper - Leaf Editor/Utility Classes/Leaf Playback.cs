@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -32,21 +31,28 @@ namespace Thumper_Custom_Level_Editor
 		WaveStream turn_long;
 		WaveStream silence;
 
+		private WaveOutEvent outputDevice1;
+
 		private void InitializeSounds()
         {
-			ring = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.coin_collect)));
-			ring_approach = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.ducker_ring_approach)));
-			bar_approach = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.grindable_birth2)));
-			bar = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.hammer_two_handed_hit)));
-			spikes = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.high_jump)));
-			mushroom = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.jumper_approach)));
-			thump_approach = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.thump_birth1)));
-			thump = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.thump1b)));
-			turn_approachR = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_birth)));
-			turn_approachL = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_birth_lft)));
-			turn = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_hit_perfect2)));
-			turn_long = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.turn_long_lft)));
-			silence = new WaveFileReader(new MemoryStream(ReadFully(Properties.Resources.silence)));
+			ring = new WaveFileReader(Properties.Resources.coin_collect);
+			ring_approach = new WaveFileReader(Properties.Resources.ducker_ring_approach);
+			bar_approach = new WaveFileReader(Properties.Resources.grindable_birth2);
+			bar = new WaveFileReader(Properties.Resources.hammer_two_handed_hit);
+			spikes = new WaveFileReader(Properties.Resources.high_jump);
+			mushroom = new WaveFileReader(Properties.Resources.jumper_approach);
+			thump_approach = new WaveFileReader(Properties.Resources.thump_birth1);
+			thump = new WaveFileReader(Properties.Resources.thump1b);
+			turn_approachR = new WaveFileReader(Properties.Resources.turn_birth);
+			turn_approachL = new WaveFileReader(Properties.Resources.turn_birth_lft);
+			turn = new WaveFileReader(Properties.Resources.turn_hit_perfect2);
+			turn_long = new WaveFileReader(Properties.Resources.turn_long_lft);
+			silence = new WaveFileReader(Properties.Resources.silence);
+			
+			outputDevice1 = new WaveOutEvent();
+			var playlist = new ConcatenatingSampleProvider(new[] { ring.ToSampleProvider(), ring_approach.ToSampleProvider(), bar_approach.ToSampleProvider() });
+			outputDevice1.Init(playlist);
+			outputDevice1.Play();
 		}
 		public static byte[] ReadFully(Stream input)
 		{
@@ -54,6 +60,12 @@ namespace Thumper_Custom_Level_Editor
 				input.CopyTo(ms);
 				return ms.ToArray();
 			}
+		}
+
+		private void TruncateSamples()
+		{
+			decimal interval = Math.Round(60 / NUD_ConfigBPM.Value, 4, MidpointRounding.AwayFromZero);
+
 		}
 
 		private void btnTrackPlayback_Click(object sender, EventArgs e)
@@ -186,6 +198,8 @@ namespace Thumper_Custom_Level_Editor
 
 			//set this to allow columns to be highlighted as the player moves
 			trackEditor.SelectionMode = DataGridViewSelectionMode.FullColumnSelect;
+
+			/*
 			//enable the timer and start playback
 			_playing = true;
 			btnTrackPlayback.ForeColor = Color.Red;
@@ -194,6 +208,7 @@ namespace Thumper_Custom_Level_Editor
 			//the speed of the timer is reliant on the level's BPM
 			int _period = (int)Math.Round(60000f / (float)NUD_ConfigBPM.Value, MidpointRounding.AwayFromZero);
 			mTimer1 = new AccurateTimer(this, new Action(_playbacktimer_Tick), _period);
+			*/
 		}
 
 		private void _playbacktimer_Tick()
