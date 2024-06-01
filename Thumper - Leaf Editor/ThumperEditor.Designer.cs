@@ -5544,7 +5544,6 @@
             this.panelSample.TabIndex = 134;
             this.panelSample.Tag = "editorpanel";
             this.panelSample.Visible = false;
-            this.panelSample.SizeChanged += new System.EventHandler(this.panelSample_SizeChanged);
             this.panelSample.Click += new System.EventHandler(this.editorpanelClick);
             this.panelSample.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelSample.Enter += new System.EventHandler(this.editorpanelFocus);

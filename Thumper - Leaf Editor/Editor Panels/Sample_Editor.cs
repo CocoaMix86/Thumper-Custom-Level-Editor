@@ -46,10 +46,6 @@ namespace Thumper_Custom_Level_Editor
 		/// EVENTS  ///
 		///         ///
 
-		private void panelSample_SizeChanged(object sender, EventArgs e)
-		{
-		}
-
 		private void sampleList_CellEnter(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.RowIndex < 0)
