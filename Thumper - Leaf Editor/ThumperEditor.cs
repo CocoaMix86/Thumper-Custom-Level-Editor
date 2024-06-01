@@ -683,7 +683,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (_undolistleaf.Count < 1)
                 return;
-            if (e.KeyCode == Keys.Z && controldown) {
+            if (e.KeyCode == Keys.Z && e.Control) {
                 UndoFunction(1);
             }
         }
