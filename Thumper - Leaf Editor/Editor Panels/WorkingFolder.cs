@@ -72,9 +72,14 @@ namespace Thumper_Custom_Level_Editor
 			}
 			else if ((string)_load["obj_type"] == "SequinLeaf") {
 				_loadedleaftemp = _selectedfilename;
+				//don't reload the file if its the same name
 				if (_loadedleaftemp == _loadedleaf)
 					return;
+				//Check if leaf is saved or not
+				if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
+					return;
 				LoadLeaf(_load);
+				//make panel visible if it isn't
 				if (panelLeaf.Visible == false)
 					leafEditorToolStripMenuItem.PerformClick();
 			}

@@ -1126,7 +1126,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void btnUndoLeaf_DropDownOpening(object sender, EventArgs e)
 		{
-			btnUndoLeaf.DropDown = CreateMenu(_undolistleaf);
+			btnUndoLeaf.DropDown = CreateUndoMenu(_undolistleaf);
 		}
 
 		private void btnLeafAutoPlace_Click(object sender, EventArgs e)
@@ -1497,10 +1497,14 @@ namespace Thumper_Custom_Level_Editor
 			}
 			catch { }
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+
+			//clear undo list
+			_undolistleaf.Clear();
 			//set save flag to true, since it just barely loaded
 			//SaveLeaf(true);
 			leafjson = _load;
 			loadingleaf = false;
+			SaveLeaf(true, "", "");
 		}
 
 		private void EnableLeafButtons(bool enable)

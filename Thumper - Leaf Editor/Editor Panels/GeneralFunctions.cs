@@ -215,7 +215,7 @@ namespace Thumper_Custom_Level_Editor
             TrackUpdateHighlighting(trackEditor.CurrentRow);
         }
 
-        private ToolStripDropDown CreateMenu(List<SaveState> undolist)
+        private ToolStripDropDown CreateUndoMenu(List<SaveState> undolist)
         {
             ToolStripDropDown menu = new ToolStripDropDown();
             menu.BackColor = Color.FromArgb(40, 40, 40);
