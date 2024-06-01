@@ -681,9 +681,10 @@ namespace Thumper_Custom_Level_Editor
 
         private void FormLeafEditor_KeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled = true;
+            if (_undolistleaf.Count < 1)
+                return;
             if (e.KeyCode == Keys.Z && controldown) {
-                LoadLeaf(_undolistleaf[0].savestate);
+                UndoFunction(1);
             }
         }
     }

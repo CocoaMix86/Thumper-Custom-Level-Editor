@@ -256,8 +256,14 @@ namespace Thumper_Custom_Level_Editor
         }
         private void UndoFunction(int undoindex)
         {
-            LoadLeaf(_undolistleaf[undoindex].savestate, false);
-            _undolistleaf.RemoveRange(0, undoindex);
+            if (undoindex >= _undolistleaf.Count) {
+                LoadLeaf(leafjson);
+                SaveLeaf(true, "", "");
+            }
+            else {
+                LoadLeaf(_undolistleaf[undoindex].savestate, false);
+                _undolistleaf.RemoveRange(0, undoindex);
+            }
         }
     }
 
