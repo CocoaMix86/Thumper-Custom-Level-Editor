@@ -574,4 +574,30 @@
   <data name="icon_undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="changelog" xml:space="preserve">
+    <value>BUG FIXES
+✅ error when renaming a file to another name that already exists
+✅ object list is collapsed to the left when loading a new leaf
+✅ renaming files now auto-updates all references to that file in the project
+✅ extreme lag when using the "clear" button
+✅ pasting cells doesn't mark leaf as unsaved
+✅ sample play button doesn't revert after playback stops. Stays as "stop" icon
+⭕ single-row multi-select delete doesn't do anything if the last selected cell doesn't contain a value
+⭕ extras folder doesn't delete .pc file when a sample is deleted from the sample editor
+
+SUGGESTED ADDITIONS/CHANGES
+✅ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
+✅ allow right-click delete for loop track volume sequencer cells
+✅ dragging the mouse with right click to remove multiple beats in one swoop
+✅ "track objects" and "spn_default" have been updated with new objects to use!
+✅ added button to add random tunnels
+✅ added "open level folder" button to File menu
+⭕ rightclicking on a taskbar shortcut for the TCLE shows recently opened levels, like how other programs show previously opened files
+⭕ alt + up/down: switch leaf
+⭕ alt + left/right: switch lvl
+✅ auto-dock panels on first launch
+
+NEW
+✅ Undo on Leaf (Ctrl+Z)</value>
+  </data>
 </root>

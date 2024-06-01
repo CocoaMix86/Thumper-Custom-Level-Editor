@@ -221,6 +221,23 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BUG FIXES
+        ///✅ error when renaming a file to another name that already exists
+        ///✅ object list is collapsed to the left when loading a new leaf
+        ///✅ renaming files now auto-updates all references to that file in the project
+        ///✅ extreme lag when using the &quot;clear&quot; button
+        ///✅ pasting cells doesn&apos;t mark leaf as unsaved
+        ///✅ sample play button doesn&apos;t revert after playback stops. Stays as &quot;stop&quot; icon
+        ///⭕ single-row multi-select delete doesn&apos;t do anything if the last selected cell doesn&apos;t contain a value
+        ///⭕ extras folder do [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string changelog {
+            get {
+                return ResourceManager.GetString("changelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         public static System.IO.UnmanagedMemoryStream coin_collect {
