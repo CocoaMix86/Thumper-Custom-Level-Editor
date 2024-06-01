@@ -110,6 +110,7 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.Recentfiles = new List<string>();
             //event handler needed for dgv
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
+            DropDownMenuScrollWheelHandler.Enable(true);
             //
         }
         ///EXIT APP

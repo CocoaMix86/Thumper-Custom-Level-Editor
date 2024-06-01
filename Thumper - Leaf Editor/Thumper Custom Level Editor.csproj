@@ -166,6 +166,7 @@
     <Compile Include="Utility Classes\MyRenderer.cs" />
     <Compile Include="Utility Classes\SaveState.cs" />
     <Compile Include="Utility Classes\Timer.cs" />
+    <Compile Include="Utility Classes\DropDownMenuScrollWheelHandler.cs" />
     <EmbeddedResource Include="Other Forms\AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </EmbeddedResource>

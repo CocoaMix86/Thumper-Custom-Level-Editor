@@ -215,19 +215,25 @@ namespace Thumper_Custom_Level_Editor
             TrackUpdateHighlighting(trackEditor.CurrentRow);
         }
 
+        ToolStripDropDownMenu undomenu = new ToolStripDropDownMenu() {
+            BackColor = Color.FromArgb(40, 40, 40),
+            ShowCheckMargin = false,
+            ShowImageMargin = false,
+            ShowItemToolTips = false
+        };
         private ToolStripDropDown CreateUndoMenu(List<SaveState> undolist)
         {
-            ToolStripDropDown menu = new ToolStripDropDown();
-            menu.BackColor = Color.FromArgb(40, 40, 40);
+            undomenu.Items.Clear();
+
             foreach (SaveState s in undolist) {
                 ToolStripMenuItem tmsi = new ToolStripMenuItem();
                 tmsi.Text = s.reason;
                 tmsi.MouseEnter += undoMenu_MouseEnter;
                 tmsi.BackColor = Color.FromArgb(40, 40, 40);
                 tmsi.ForeColor = Color.White;
-                menu.Items.Add(tmsi);
+                undomenu.Items.Add(tmsi);
             }
-            return menu;
+            return undomenu;
         }
         private void undoMenu_MouseEnter(object sender, EventArgs e)
         {
