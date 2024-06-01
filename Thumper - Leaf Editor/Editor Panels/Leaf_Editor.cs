@@ -1214,7 +1214,7 @@ namespace Thumper_Custom_Level_Editor
 
 				_undolistleaf.Insert(0, new SaveState() {
 					reason = $"{changereason} [{changedetails}]",
-					savestate = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""))
+					savestate = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""), true)
 				});
 
 			}
@@ -1528,7 +1528,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		public JObject LeafBuildSave(string _leafname)
+		public JObject LeafBuildSave(string _leafname, bool skiprevertsave = false)
 		{
 			_leafname = Regex.Replace(_leafname, "[.].*", ".leaf");
             ///start building JSON output
@@ -1577,7 +1577,8 @@ namespace Thumper_Custom_Level_Editor
 			_save.Add("beat_cnt", (int)numericUpDown_LeafLength.Value);
 			_save.Add("time_sig", dropTimeSig.Text);
 			///end building JSON output
-			leafjson = _save;
+			if (!skiprevertsave)
+				leafjson = _save;
 			return _save;
 		}
 		#endregion
