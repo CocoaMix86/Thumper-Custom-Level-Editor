@@ -219,7 +219,8 @@ namespace Thumper_Custom_Level_Editor
             BackColor = Color.FromArgb(40, 40, 40),
             ShowCheckMargin = false,
             ShowImageMargin = false,
-            ShowItemToolTips = false
+            ShowItemToolTips = false,
+            MaximumSize = new Size(2000, 500)
         };
         private ToolStripDropDown CreateUndoMenu(List<SaveState> undolist)
         {
@@ -229,6 +230,7 @@ namespace Thumper_Custom_Level_Editor
                 ToolStripMenuItem tmsi = new ToolStripMenuItem();
                 tmsi.Text = s.reason;
                 tmsi.MouseEnter += undoMenu_MouseEnter;
+                tmsi.Click += undoItem_Click;
                 tmsi.BackColor = Color.FromArgb(40, 40, 40);
                 tmsi.ForeColor = Color.White;
                 undomenu.Items.Add(tmsi);
@@ -244,6 +246,18 @@ namespace Thumper_Custom_Level_Editor
                 if (parent.Items[x] == sender)
                     backcolor = Color.Maroon;
             }
+        }
+        private void undoItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tmsi = (ToolStripMenuItem)sender;
+            int index = (tmsi.Owner).Items.IndexOf(tmsi);
+
+            UndoFunction(index + 1);
+        }
+        private void UndoFunction(int undoindex)
+        {
+            LoadLeaf(_undolistleaf[undoindex].savestate, false);
+            _undolistleaf.RemoveRange(0, undoindex);
         }
     }
 

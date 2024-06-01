@@ -678,5 +678,13 @@ namespace Thumper_Custom_Level_Editor
             }
             cb.DropDownWidth = maxWidth != 0 ? maxWidth : cb.DropDownWidth;
         }
+
+        private void FormLeafEditor_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+            if (e.KeyCode == Keys.Z && controldown) {
+                LoadLeaf(_undolistleaf[0].savestate);
+            }
+        }
     }
 }

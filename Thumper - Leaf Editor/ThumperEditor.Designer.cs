@@ -6254,6 +6254,7 @@
             this.Controls.Add(this.splitHorizontal);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(1000, 39);
             this.Name = "FormLeafEditor";
@@ -6261,6 +6262,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLeafEditor_FormClosing);
             this.Load += new System.EventHandler(this.FormLeafEditor_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormLeafEditor_KeyDown);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).EndInit();

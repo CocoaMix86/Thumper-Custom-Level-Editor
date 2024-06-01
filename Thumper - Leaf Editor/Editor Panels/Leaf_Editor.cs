@@ -1356,7 +1356,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		///Update DGV from _tracks
-		public void LoadLeaf(dynamic _load /*List<string> _load*/)
+		public void LoadLeaf(dynamic _load, bool resetundolist = true)
 		{
 			//reset flag in case it got stuck previously
 			loadingleaf = false;
@@ -1499,7 +1499,7 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 
 			//clear undo list
-			_undolistleaf.Clear();
+			if (resetundolist) _undolistleaf.Clear();
 			//set save flag to true, since it just barely loaded
 			//SaveLeaf(true);
 			leafjson = _load;
