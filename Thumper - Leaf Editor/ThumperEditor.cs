@@ -61,7 +61,7 @@ namespace Thumper_Custom_Level_Editor
                     Properties.Settings.Default.Recentfiles.Insert(0, workingfolder);
 
                     //when workingfolder changes, reset panels
-                    SaveLeaf(true);
+                    SaveLeaf(true, "Load", "");
                     SaveLvl(true);
                     SaveGate(true);
                     SaveMaster(true);
@@ -677,6 +677,5 @@ namespace Thumper_Custom_Level_Editor
             }
             cb.DropDownWidth = maxWidth != 0 ? maxWidth : cb.DropDownWidth;
         }
-        
     }
 }

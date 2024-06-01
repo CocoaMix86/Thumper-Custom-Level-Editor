@@ -164,6 +164,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utility Classes\MyRenderer.cs" />
+    <Compile Include="Utility Classes\SaveState.cs" />
     <Compile Include="Utility Classes\Timer.cs" />
     <EmbeddedResource Include="Other Forms\AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
@@ -343,6 +344,7 @@
     <None Include="text assets\leaf_singletrack1.txt" />
     <None Include="text assets\audionames.txt" />
     <None Include="audio assets\silence.wav" />
+    <None Include="image assets\icon-undo.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

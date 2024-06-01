@@ -16,6 +16,9 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class FormLeafEditor : Form
     {
+
+        Color backcolor = Color.FromArgb(40, 40, 40);
+
         public void ImportObjects()
         {
             _objects.Clear();
@@ -210,6 +213,31 @@ namespace Thumper_Custom_Level_Editor
             }
 
             TrackUpdateHighlighting(trackEditor.CurrentRow);
+        }
+
+        private ToolStripDropDown CreateMenu(List<SaveState> undolist)
+        {
+            ToolStripDropDown menu = new ToolStripDropDown();
+            menu.BackColor = Color.FromArgb(40, 40, 40);
+            foreach (SaveState s in undolist) {
+                ToolStripMenuItem tmsi = new ToolStripMenuItem();
+                tmsi.Text = s.reason;
+                tmsi.MouseEnter += undoMenu_MouseEnter;
+                tmsi.BackColor = Color.FromArgb(40, 40, 40);
+                tmsi.ForeColor = Color.White;
+                menu.Items.Add(tmsi);
+            }
+            return menu;
+        }
+        private void undoMenu_MouseEnter(object sender, EventArgs e)
+        {
+            backcolor = Color.FromArgb(40, 40, 40);
+            var parent = ((ToolStripMenuItem)sender).Owner;
+            for (int x = parent.Items.Count - 1; x >= 0; x--) {
+                parent.Items[x].BackColor = backcolor;
+                if (parent.Items[x] == sender)
+                    backcolor = Color.Maroon;
+            }
         }
     }
 

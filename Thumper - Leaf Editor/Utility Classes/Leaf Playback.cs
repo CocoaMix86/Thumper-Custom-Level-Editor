@@ -49,10 +49,10 @@ namespace Thumper_Custom_Level_Editor
 			turn_long = new WaveFileReader(Properties.Resources.turn_long_lft);
 			silence = new WaveFileReader(Properties.Resources.silence);
 			
-			outputDevice1 = new WaveOutEvent();
+			/*outputDevice1 = new WaveOutEvent();
 			var playlist = new ConcatenatingSampleProvider(new[] { ring.ToSampleProvider(), ring_approach.ToSampleProvider(), bar_approach.ToSampleProvider() });
 			outputDevice1.Init(playlist);
-			outputDevice1.Play();
+			outputDevice1.Play();*/
 		}
 		public static byte[] ReadFully(Stream input)
 		{
