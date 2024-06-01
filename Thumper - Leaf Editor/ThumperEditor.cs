@@ -245,6 +245,7 @@ namespace Thumper_Custom_Level_Editor
             var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
             if (levellist.Count > 0)
                 RecentFiles(levellist);
+            Properties.Settings.Default.firstrun = false;
             PlaySound("UIboot");
         }
         ///

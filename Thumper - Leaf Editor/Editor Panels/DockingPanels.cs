@@ -261,6 +261,10 @@ namespace Thumper_Custom_Level_Editor
         private void SetDockLocations()
         {
             var settings = Properties.Settings.Default;
+            if (settings.firstrun) {
+                resetDocksStripMenuItem_Click(null, null);
+                return;
+            }
             //set dock locations for panels
             if (settings.dock1 != "empty") {
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock1, true).First();

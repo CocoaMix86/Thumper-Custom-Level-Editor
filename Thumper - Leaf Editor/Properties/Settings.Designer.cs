@@ -585,5 +585,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["version"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool firstrun {
+            get {
+                return ((bool)(this["firstrun"]));
+            }
+            set {
+                this["firstrun"] = value;
+            }
+        }
     }
 }

@@ -143,5 +143,8 @@
     <Setting Name="version" Type="System.String" Scope="User">
       <Value Profile="(Default)">--</Value>
     </Setting>
+    <Setting Name="firstrun" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
