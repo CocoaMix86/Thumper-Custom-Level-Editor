@@ -216,6 +216,9 @@ namespace Thumper_Custom_Level_Editor
             ShowRawTrackData();
         }
 
+        /// <summary>
+        /// UNDO FUNCTIONS
+        /// </summary>
         ToolStripDropDownMenu undomenu = new ToolStripDropDownMenu() {
             BackColor = Color.FromArgb(40, 40, 40),
             ShowCheckMargin = false,
@@ -258,14 +261,19 @@ namespace Thumper_Custom_Level_Editor
         private void UndoFunction(int undoindex)
         {
             if (undoindex >= _undolistleaf.Count) {
-                LoadLeaf(leafjson);
-                SaveLeaf(true, "", "");
+                LoadLeaf(_undolistleaf.Last().savestate, false);
+                _undolistleaf.RemoveRange(0, _undolistleaf.Count - 1);
+                SaveLeafColors(false, Color.FromArgb(40, 40, 40));
             }
             else {
                 LoadLeaf(_undolistleaf[undoindex].savestate, false);
                 _undolistleaf.RemoveRange(0, undoindex);
             }
         }
+        ///
+        ///
+        ///
+
     }
 
     public static class ExtensionMethodClass

@@ -1222,10 +1222,7 @@ namespace Thumper_Custom_Level_Editor
 			pictureBox1_Click(null, null);
 			_saveleaf = save;
 			if (!save) {
-				btnSaveLeaf.Enabled = true;
-				btnRevertLeaf.Enabled = true;
-				toolstripTitleLeaf.BackColor = Color.Maroon;
-
+				SaveLeafColors(true, Color.Maroon);
 				_undolistleaf.Insert(0, new SaveState() {
 					reason = $"{changereason} [{changedetails}]",
 					savestate = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""), true)
@@ -1233,11 +1230,15 @@ namespace Thumper_Custom_Level_Editor
 
 			}
 			else {
-				btnSaveLeaf.Enabled = false;
-				btnRevertLeaf.Enabled = false;
-				toolstripTitleLeaf.BackColor = Color.FromArgb(40, 40, 40);
+				SaveLeafColors(false, Color.FromArgb(40, 40, 40));
 				if (playsound) PlaySound("UIsave");
 			}
+		}
+		public void SaveLeafColors(bool enabled, Color color)
+		{
+			btnSaveLeaf.Enabled = enabled;
+			btnRevertLeaf.Enabled = enabled;
+			toolstripTitleLeaf.BackColor = color;
 		}
 
 		public void InitializeTracks(DataGridView grid, bool columnstyle)
@@ -1516,6 +1517,10 @@ namespace Thumper_Custom_Level_Editor
 			if (resetundolist) {
 				_undolistleaf.Clear();
 				leafjson = _load;
+				_undolistleaf.Insert(0, new SaveState() {
+					reason = $"No changes",
+					savestate = leafjson
+				});
 			}
 			//set save flag to true, since it just barely loaded
 			//SaveLeaf(true);
