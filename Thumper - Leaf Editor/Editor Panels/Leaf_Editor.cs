@@ -47,6 +47,7 @@ namespace Thumper_Custom_Level_Editor
 		public bool shiftdown = false;
 		public bool rightclickdown = false;
 		public int leafeditorcell = 0;
+		public bool randomizing = false;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
@@ -295,7 +296,10 @@ namespace Thumper_Custom_Level_Editor
 					TrackUpdateHighlightingSingleCell(_cell);
 				}
 				//sets flag that leaf has unsaved changes
-				SaveLeaf(false, $"Cell {e.ColumnIndex} value set: {(_val == null ? "empty" : _val )}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+				if (trackEditor.SelectedCells.Count > 1)
+					SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {(_val == null ? "empty" : _val)}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+				else
+					SaveLeaf(false, $"Beat {e.ColumnIndex} value set: {(_val == null ? "empty" : _val )}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
 			}
 			catch { }
 
@@ -324,7 +328,9 @@ namespace Thumper_Custom_Level_Editor
 			if (e.ColumnIndex == -1 || e.RowIndex == -1)
 				return;
 			if (e.Button == MouseButtons.Right) {
+				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 0;
 				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
+				_undolistleaf.RemoveAt(1);
 				TrackUpdateHighlightingSingleCell((sender as DataGridView)[e.ColumnIndex, e.RowIndex]);
 			}
 		}
@@ -598,21 +604,24 @@ namespace Thumper_Custom_Level_Editor
 			string data = $"{_tracks[_selecttrack]._default}";
 			_tracks[trackEditor.CurrentRow.Index]._default = (float)txtDefault.Value;
 			//sets flag that leaf has unsaved changes
-			SaveLeaf(false, $"Default value {data} -> {txtDefault.Value}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+			if (!randomizing)
+				SaveLeaf(false, $"Default value {data} -> {txtDefault.Value}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 		}
 		///STEP CHANGED
 		private void dropLeafStep_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string data = $"{_tracks[_selecttrack].step}";
 			_tracks[trackEditor.CurrentRow.Index].step = dropLeafStep.Text;
-			SaveLeaf(false, $"Step value {data} -> {dropLeafStep.Text}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+			if (!randomizing)
+				SaveLeaf(false, $"Step value {data} -> {dropLeafStep.Text}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 		}
 		///INTERP CHANGED
 		private void dropLeafInterp_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string data = $"{_tracks[_selecttrack].default_interp}";
 			_tracks[trackEditor.CurrentRow.Index].default_interp = dropLeafInterp.Text;
-			SaveLeaf(false, $"Interp value {data} -> {dropLeafInterp.Text}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+			if (!randomizing)
+				SaveLeaf(false, $"Interp value {data} -> {dropLeafInterp.Text}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 		}
 		#endregion
 		#region Buttons
@@ -693,7 +702,8 @@ namespace Thumper_Custom_Level_Editor
 			else btnTrackApply.Enabled = true;
 			//sets flag that leaf has unsaved changes
 			PlaySound("UIobjectadd");
-			SaveLeaf(false, "Add new track", "");
+			if (!randomizing)
+				SaveLeaf(false, "Add new track", "");
 		}
 
 		private void btnTrackUp_Click(object sender, EventArgs e)
@@ -875,7 +885,8 @@ namespace Thumper_Custom_Level_Editor
 			PlaySound("UIobjectadd");
 			ChangeTrackName();
 			TrackUpdateHighlighting(trackEditor.Rows[_selecttrack]);
-			SaveLeaf(false, "Applied Object settings", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+			if (!randomizing)
+				SaveLeaf(false, "Applied Object settings", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 		}
 		///Sets highlighting color of current track
 		private void btnTrackColorDialog_Click(object sender, EventArgs e)
@@ -1136,6 +1147,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLeafRandom_Click(object sender, EventArgs e)
 		{
+			randomizing = true;
 			btnTrackAdd_Click(null, null);
 			bool rando = true;
 			while (rando) {
@@ -1152,6 +1164,8 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackApply_Click(null, null);
 
 			RandomizeRowValues(trackEditor.CurrentRow);
+			randomizing = false;
+			SaveLeaf(false, "Added random object", $"{_tracks.Last().friendly_type} {_tracks.Last().friendly_param}");
 		}
 
 		private void btnLeafRandomValues_Click(object sender, EventArgs e)
