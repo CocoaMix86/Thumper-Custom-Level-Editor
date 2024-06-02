@@ -202,17 +202,18 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else {
                     if (_tracks[idx].param_path == "sequin_speed")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? (Math.Truncate(rng.NextDouble() * 10000) / 100) % 4 : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) % 4 : null;
                     else if (_tracks[idx].obj_name == "fade.pp")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? rng.NextDouble() : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) : null;
                     else
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? (Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
 
                 trackEditor.CellValueChanged += trackEditor_CellValueChanged;
             }
 
             TrackUpdateHighlighting(trackEditor.CurrentRow);
+            ShowRawTrackData();
         }
 
         ToolStripDropDownMenu undomenu = new ToolStripDropDownMenu() {
