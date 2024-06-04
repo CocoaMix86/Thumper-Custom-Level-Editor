@@ -1931,6 +1931,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] UIinterpolatewindow {
+            get {
+                object obj = ResourceManager.GetObject("UIinterpolatewindow", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] UIkcopy {
             get {
                 object obj = ResourceManager.GetObject("UIkcopy", resourceCulture);

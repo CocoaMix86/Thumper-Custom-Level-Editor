@@ -283,7 +283,11 @@ namespace Thumper_Custom_Level_Editor
             if (!_savesample) SamplesaveToolStripMenuItem_Click(null, null);
         }
         ///Toolstrip - INTERPOLATOR
-        private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e) => new Interpolator().Show();
+        private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Interpolator().Show();
+            PlaySound("UIinterpolatewindow");
+        }
 
         ///Toolstrip - VIEW MENU
         //Visible - LEaf Editor
