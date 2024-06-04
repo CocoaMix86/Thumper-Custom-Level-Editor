@@ -80,10 +80,13 @@ namespace Thumper_Custom_Level_Editor
 		///
 		private void btnConstant_output_Click(object sender, EventArgs e)
 		{
+			if (txtConstant_bStart.Text == "" || txtConstant_bEnd.Text == "" || txtConstant_angle.Text == "")
+				return;
+
 			bool _skipNo = radioNone.Checked;
 			bool _skipNthBeat = radionth.Checked;
 			bool _skipNRow = radionrow.Checked;
-			int _nbeats = int.Parse(txtNBeats.Text);
+			int _nbeats = (txtNBeats.Text == "") ? 1 : int.Parse(txtNBeats.Text);
 			if (_nbeats == 0) _nbeats = 1;
 
 			int _start = int.Parse(txtConstant_bStart.Text);
@@ -117,6 +120,9 @@ namespace Thumper_Custom_Level_Editor
 		///
 		private void btnSmooth_output_Click(object sender, EventArgs e)
 		{
+			if (txtSmoothTurn_bEnd.Text == "" || txtSmoothTurn_bStart.Text == "" || txtSmooth_angleStart.Text == "" || txtSmooth_angleTarget.Text == "")
+				return;
+
 			int _beatStart = int.Parse(txtSmoothTurn_bStart.Text);
 			int _beatEnd = int.Parse(txtSmoothTurn_bEnd.Text);
 			float _beats = 1 + _beatEnd - _beatStart;
