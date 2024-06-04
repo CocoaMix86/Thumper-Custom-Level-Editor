@@ -1127,7 +1127,7 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			SaveLeaf(true, "Revert to last save", "Revert");
 			LoadLeaf(leafjson);
-			PlaySound("UIrevertchanges");
+			PlaySound("UIrevertnew");
 		}
 
 		private void btnUndoLeaf_Click(object sender, EventArgs e)

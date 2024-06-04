@@ -2001,6 +2001,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] UIrevertnew {
+            get {
+                object obj = ResourceManager.GetObject("UIrevertnew", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] UIsave {
             get {
                 object obj = ResourceManager.GetObject("UIsave", resourceCulture);

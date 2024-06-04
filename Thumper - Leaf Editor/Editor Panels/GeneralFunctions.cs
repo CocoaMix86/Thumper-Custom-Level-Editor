@@ -257,6 +257,7 @@ namespace Thumper_Custom_Level_Editor
             int index = (tmsi.Owner).Items.IndexOf(tmsi);
 
             UndoFunction(index + 1);
+            PlaySound("UIrevertchanges");
         }
         private void UndoFunction(int undoindex)
         {
