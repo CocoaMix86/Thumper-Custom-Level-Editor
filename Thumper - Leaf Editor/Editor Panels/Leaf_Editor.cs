@@ -826,22 +826,21 @@ namespace Thumper_Custom_Level_Editor
 		private void btnTrackClear_Click(object sender, EventArgs e)
 		{
 			bool _empty = true;
+			//finds each distinct row across all selected cells
+			var selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 			//iterate over current row to see if any cells have data
-			foreach (DataGridViewCell dgvc in trackEditor.CurrentRow.Cells) {
-				if (dgvc.Value != null) {
-					_empty = false;
-					break;
-				}
-			}
+			var filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
+			if (filledcells.Count > 0)
+				_empty = false;
 			//if YES, clear cell values in row and clear highlighting
 			if ((!_empty && MessageBox.Show("This track has data. Are you sure you want to clear it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
 				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-				foreach (DataGridViewCell dgvc in trackEditor.CurrentRow.Cells) {
+				foreach (DataGridViewCell dgvc in filledcells) {
 					dgvc.Value = null;
 					dgvc.Style = null;
+					TrackUpdateHighlightingSingleCell(dgvc);
 				}
 				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
-				TrackUpdateHighlighting(trackEditor.CurrentRow);
 				PlaySound("UIdataerase");
 				SaveLeaf(false, "Cleared track", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}

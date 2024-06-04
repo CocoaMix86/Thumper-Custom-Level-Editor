@@ -263,7 +263,6 @@ namespace Thumper_Custom_Level_Editor
             if (undoindex >= _undolistleaf.Count) {
                 LoadLeaf(_undolistleaf.Last().savestate, false);
                 _undolistleaf.RemoveRange(0, _undolistleaf.Count - 1);
-                SaveLeafColors(false, Color.FromArgb(40, 40, 40));
             }
             else {
                 LoadLeaf(_undolistleaf[undoindex].savestate, false);
