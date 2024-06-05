@@ -1154,7 +1154,8 @@ namespace Thumper_Custom_Level_Editor
 				dropObjects.SelectedIndex = rng.Next(0, dropObjects.Items.Count);
 				if (dropObjects.Text == "PLAY SAMPLE") {
 					dropParamPath.SelectedIndex = 0;
-					dropTrackLane.SelectedIndex = rng.Next(0, dropTrackLane.Items.Count);
+					if (dropTrackLane.Items.Count > 0)
+						dropTrackLane.SelectedIndex = rng.Next(0, dropTrackLane.Items.Count);
 				}
 				else
 					dropParamPath.SelectedIndex = rng.Next(0, dropParamPath.Items.Count);
