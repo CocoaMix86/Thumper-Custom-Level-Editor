@@ -93,6 +93,7 @@ namespace Thumper_Custom_Level_Editor
 				LoadGate(_load);
 			dropMasterLvlLeader.SelectedItem = _masterlvls[e.RowIndex].checkpoint_leader;
 			dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
+			btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
 			//re-add event handlers
 			dropMasterLvlLeader.SelectedIndexChanged += new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
 			dropMasterLvlRest.SelectedIndexChanged += new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
@@ -149,13 +150,23 @@ namespace Thumper_Custom_Level_Editor
 			SaveMaster(false);
 		}
 		///Other dropdowns on Master Editor
-		private void dropMasterIntro_SelectedIndexChanged(object sender, EventArgs e) => SaveMaster(false);
+		private void dropMasterIntro_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			btnMasterOpenIntro.Enabled = dropMasterIntro.SelectedIndex > 0;
+			SaveMaster(false);
+		}
+		private void dropMasterCheck_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			btnMasterOpenCheckpoint.Enabled = dropMasterIntro.SelectedIndex > 0;
+			SaveMaster(false);
+		}
 		private void NUD_ConfigBPM_ValueChanged(object sender, EventArgs e) => SaveMaster(false);
 		/// DROP-REST LEVEL Update
 		private void dropMasterLvlRest_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			try {
 				_masterlvls[masterLvlList.CurrentRow.Index].rest = dropMasterLvlRest.Text;
+				btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
 				//set lvl save flag to false
 				SaveMaster(false);
 			} catch { }
