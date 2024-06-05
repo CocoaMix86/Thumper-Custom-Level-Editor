@@ -1170,7 +1170,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLeafRandomValues_Click(object sender, EventArgs e)
 		{
-			if (trackEditor.CurrentRow.Index == -1)
+			if (trackEditor.CurrentRow?.Index is -1 or null)
 				return;
 
 			if (MessageBox.Show("Assign random values to the current selected track?", "Confirm randomization", MessageBoxButtons.YesNo) == DialogResult.Yes) {
