@@ -63,7 +63,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="sampleeditorvisible" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="custom_gatecolor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">55, 55, 55</Value>
