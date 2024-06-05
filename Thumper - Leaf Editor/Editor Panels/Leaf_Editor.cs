@@ -548,6 +548,7 @@ namespace Thumper_Custom_Level_Editor
 						return;
 					}
 					_loadedleaf = $@"{storePath}\leaf_{tempFileName}";
+					_loadedleaftemp = $@"{storePath}\leaf_{tempFileName}";
 					WriteLeaf();
 					//after saving new file, refresh the workingfolder
 					btnWorkRefresh.PerformClick();
@@ -1224,7 +1225,7 @@ namespace Thumper_Custom_Level_Editor
 				SaveLeafColors(true, Color.Maroon);
 				_undolistleaf.Insert(0, new SaveState() {
 					reason = $"{changereason} [{changedetails}]",
-					savestate = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""), true)
+					savestate = LeafBuildSave((_loadedleaf != null) ? Path.GetFileName(_loadedleaf).Replace("leaf_", "") : "", true)
 				});
 
 			}
