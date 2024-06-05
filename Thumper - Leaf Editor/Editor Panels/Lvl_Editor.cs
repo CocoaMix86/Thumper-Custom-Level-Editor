@@ -435,6 +435,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlRandomTunnel_Click(object sender, EventArgs e)
 		{
+			if (_lvlleafs.Count == 0)
+				return;
 			lvlLeafPaths.RowCount++;
 			lvlLeafPaths.Rows[lvlLeafPaths.Rows.Count - 1].Cells[0].Value = _lvlpaths[rng.Next(0, _lvlpaths.Count)];
 			btnLvlPathDelete.Enabled = true;
@@ -744,6 +746,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
 			btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
+			btnLvlRandomTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
 			//monke
 		}
 
