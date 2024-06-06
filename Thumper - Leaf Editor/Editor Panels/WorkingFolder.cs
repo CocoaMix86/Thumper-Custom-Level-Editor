@@ -366,13 +366,14 @@ namespace Thumper_Custom_Level_Editor
 
 		private void FindInstancesAndRename(string oldname, string newname, string filetype)
         {
+			object? _load;
 			if (filetype == "leaf") {
 				foreach (string file in Directory.GetFiles(workingfolder, "lvl_*.txt")) {
 					string text = File.ReadAllText(file);
 					text = text.Replace($"{oldname}.leaf", $"{newname}.leaf");
 					File.WriteAllText(file, text);
 				}
-				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedlvl), "#.*", ""));
+				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedlvl), "#.*", ""));
 				LoadLvl(_load);
 			}
 			else if (filetype == "lvl") {
@@ -382,10 +383,10 @@ namespace Thumper_Custom_Level_Editor
 					File.WriteAllText(file, text);
 				}
 				if (_loadedgate != null) {
-					var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedgate), "#.*", ""));
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedgate), "#.*", ""));
 					LoadGate(_load);
 				}
-				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
+				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
 				LoadMaster(_load);
 			}
 			else if (filetype == "gate") {
@@ -394,7 +395,7 @@ namespace Thumper_Custom_Level_Editor
 					text = text.Replace($"{oldname}.gate", $"{newname}.gate");
 					File.WriteAllText(file, text);
 				}
-				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
+				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
 				LoadMaster(_load);
 			}
 		}
