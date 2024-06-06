@@ -1418,6 +1418,7 @@ namespace Thumper_Custom_Level_Editor
 			if (!dropTimeSig.Items.Contains(_time_sig)) {
 				dropTimeSig.Items.Add(_time_sig);
 			}
+			dropTimeSig.Enabled = true;
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
 			dropTrackLane.DataSource = _tracklanefriendly;
 			//each object in the seq_objs[] list becomes a track
