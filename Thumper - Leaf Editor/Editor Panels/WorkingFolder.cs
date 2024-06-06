@@ -125,6 +125,11 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
+		private void btnWorkEditDetails_Click(object sender, EventArgs e)
+		{
+			editLevelDetailsToolStripMenuItem_Click(null, null);
+		}
+
 		public void btnWorkRefresh_Click(object sender, EventArgs e)
 		{
 			if (workingfolder == null)
@@ -133,7 +138,7 @@ namespace Thumper_Custom_Level_Editor
 			//clear the dgv and reload files in the folder
 			workingfolderFiles.Rows.Clear();
 			//filter for specific files
-			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") || x.Contains("LEVEL DETAILS") || x.Contains("samp_")))) {
+			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") /*|| x.Contains("LEVEL DETAILS")*/ || x.Contains("samp_")))) {
 				var filetype = Path.GetFileName(file).Split('_')[0];
 				//upon loading a level folder, immediately open the MASTER file
 				if (filetype == "master") {
@@ -157,6 +162,7 @@ namespace Thumper_Custom_Level_Editor
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkCopy.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkNewFile.Enabled = workingfolderFiles.RowCount > 0;
+			btnWorkEditDetails.Enabled = workingfolderFiles.RowCount > 0;
 		}
 
 		private void btnWorkDelete_Click(object sender, EventArgs e)

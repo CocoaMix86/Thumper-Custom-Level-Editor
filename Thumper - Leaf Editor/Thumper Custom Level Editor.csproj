@@ -349,6 +349,7 @@
     <None Include="audio assets\UI sounds\UIrevertnew.ogg" />
     <None Include="audio assets\UI sounds\UIinterpolatewindow.ogg" />
     <None Include="audio assets\UI sounds\UIaddrandom.ogg" />
+    <None Include="image assets\icon-editdetails.png" />
     <Content Include="text assets\paths.txt" />
     <None Include="text assets\samples.txt" />
     <None Include="text assets\samp_default.txt" />

@@ -361,6 +361,7 @@
             this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgvGateBucket = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.panelWorkingFolder = new System.Windows.Forms.Panel();
+            this.btnWorkEditDetails = new System.Windows.Forms.Button();
             this.workingToolStrip = new System.Windows.Forms.ToolStrip();
             this.filterLeaf = new System.Windows.Forms.ToolStripButton();
             this.filterLvl = new System.Windows.Forms.ToolStripButton();
@@ -4899,6 +4900,7 @@
             // 
             this.panelWorkingFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelWorkingFolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelWorkingFolder.Controls.Add(this.btnWorkEditDetails);
             this.panelWorkingFolder.Controls.Add(this.workingToolStrip);
             this.panelWorkingFolder.Controls.Add(this.workingfolderFiles);
             this.panelWorkingFolder.Controls.Add(this.workingToolStrip2);
@@ -4914,6 +4916,24 @@
             this.panelWorkingFolder.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelWorkingFolder.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelWorkingFolder.Leave += new System.EventHandler(this.editorpanelUnfocus);
+            // 
+            // btnWorkEditDetails
+            // 
+            this.btnWorkEditDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btnWorkEditDetails.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnWorkEditDetails.Enabled = false;
+            this.btnWorkEditDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWorkEditDetails.ForeColor = System.Drawing.Color.White;
+            this.btnWorkEditDetails.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
+            this.btnWorkEditDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnWorkEditDetails.Location = new System.Drawing.Point(29, 47);
+            this.btnWorkEditDetails.Name = "btnWorkEditDetails";
+            this.btnWorkEditDetails.Size = new System.Drawing.Size(164, 28);
+            this.btnWorkEditDetails.TabIndex = 151;
+            this.btnWorkEditDetails.Text = "Edit Level Info";
+            this.toolTip1.SetToolTip(this.btnWorkEditDetails, "Name, difficulty, save location, and audio sample packs");
+            this.btnWorkEditDetails.UseVisualStyleBackColor = false;
+            this.btnWorkEditDetails.Click += new System.EventHandler(this.btnWorkEditDetails_Click);
             // 
             // workingToolStrip
             // 
@@ -5032,7 +5052,7 @@
             this.workingfolderFiles.DefaultCellStyle = dataGridViewCellStyle24;
             this.workingfolderFiles.EnableHeadersVisualStyles = false;
             this.workingfolderFiles.GridColor = System.Drawing.Color.Black;
-            this.workingfolderFiles.Location = new System.Drawing.Point(30, 49);
+            this.workingfolderFiles.Location = new System.Drawing.Point(30, 76);
             this.workingfolderFiles.MultiSelect = false;
             this.workingfolderFiles.Name = "workingfolderFiles";
             this.workingfolderFiles.ReadOnly = true;
@@ -5050,7 +5070,7 @@
             this.workingfolderFiles.RowTemplate.Height = 20;
             this.workingfolderFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.workingfolderFiles.Size = new System.Drawing.Size(167, 286);
+            this.workingfolderFiles.Size = new System.Drawing.Size(167, 259);
             this.workingfolderFiles.TabIndex = 80;
             this.workingfolderFiles.Tag = "editorpaneldgv";
             this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
@@ -6817,6 +6837,7 @@
         private System.Windows.Forms.ToolStripDropDownButton btnUndoLeaf;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnWorkEditDetails;
     }
 }
 
