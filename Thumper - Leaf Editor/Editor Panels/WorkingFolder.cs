@@ -385,7 +385,7 @@ namespace Thumper_Custom_Level_Editor
 					var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedgate), "#.*", ""));
 					LoadGate(_load);
 				}
-				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
+				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
 				LoadMaster(_load);
 			}
 			else if (filetype == "gate") {
