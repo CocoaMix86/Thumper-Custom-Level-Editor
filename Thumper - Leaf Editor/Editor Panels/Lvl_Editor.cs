@@ -25,6 +25,7 @@ namespace Thumper_Custom_Level_Editor
 					lvlSeqObjs.Rows.Clear();
 					lvlLeafPaths.Rows.Clear();
 					lvlLoopTracks.Rows.Clear();
+					LvlReloadSamples();
 					lblLvlName.Text = "Lvl Editor";
 					SaveLvl(true);
 				}
@@ -255,6 +256,7 @@ namespace Thumper_Custom_Level_Editor
 				_lvlleafs.Clear();
 				lvlSeqObjs.Rows.Clear();
 				lvlLoopTracks.Rows.Clear();
+				LvlReloadSamples();
 				NUD_lvlApproach.Value = 16;
 				NUD_lvlVolume.Value = 0.5M;
 				dropLvlInput.SelectedIndex = 0;
@@ -688,6 +690,7 @@ namespace Thumper_Custom_Level_Editor
 			//custom column containing comboboxes per cell
 			lvlLoopTracks.Columns[1].ValueType = typeof(decimal);
 			lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
+			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			//lvlLoopTracks.Columns[0].ValueType = typeof(SampleData);
 			///
 			//add event handler to this collection
