@@ -381,10 +381,12 @@ namespace Thumper_Custom_Level_Editor
 					text = text.Replace($"{oldname}.lvl", $"{newname}.lvl");
 					File.WriteAllText(file, text);
 				}
-				var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedgate), "#.*", ""));
-				LoadGate(_load);
-				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
-				LoadMaster(_load);
+				if (_loadedgate != null) {
+					var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedgate), "#.*", ""));
+					LoadGate(_load);
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
+					LoadMaster(_load);
+				}
 			}
 			else if (filetype == "gate") {
 				foreach (string file in Directory.GetFiles(workingfolder, "master_*.txt")) {
