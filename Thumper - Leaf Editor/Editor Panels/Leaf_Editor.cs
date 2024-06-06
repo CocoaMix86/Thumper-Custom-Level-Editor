@@ -702,9 +702,10 @@ namespace Thumper_Custom_Level_Editor
 				btnTrackApply.Enabled = false;
 			else btnTrackApply.Enabled = true;
 			//sets flag that leaf has unsaved changes
-			PlaySound("UIobjectadd");
-			if (!randomizing)
+			if (!randomizing) {
+				PlaySound("UIobjectadd");
 				SaveLeaf(false, "Add new track", "");
+			}
 		}
 
 		private void btnTrackUp_Click(object sender, EventArgs e)
@@ -882,11 +883,12 @@ namespace Thumper_Custom_Level_Editor
 				_tracks[_selecttrack].friendly_param += ", " + dropTrackLane.Text;
 			}
 			//change row header to reflect what the track is
-			PlaySound("UIobjectadd");
 			ChangeTrackName();
 			TrackUpdateHighlighting(trackEditor.Rows[_selecttrack]);
-			if (!randomizing)
+			if (!randomizing) {
+				PlaySound("UIobjectadd");
 				SaveLeaf(false, "Applied Object settings", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+			}
 		}
 		///Sets highlighting color of current track
 		private void btnTrackColorDialog_Click(object sender, EventArgs e)
@@ -1164,6 +1166,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			btnTrackApply_Click(null, null);
 
+			PlaySound("UIaddrandom");
 			RandomizeRowValues(trackEditor.CurrentRow);
 			randomizing = false;
 			SaveLeaf(false, "Added random object", $"{_tracks.Last().friendly_type} {_tracks.Last().friendly_param}");
@@ -1175,6 +1178,7 @@ namespace Thumper_Custom_Level_Editor
 				return;
 
 			if (MessageBox.Show("Assign random values to the current selected track?", "Confirm randomization", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+				PlaySound("UIaddrandom");
 				RandomizeRowValues(trackEditor.CurrentRow);
 				SaveLeaf(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
 			}

@@ -1741,6 +1741,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] UIaddrandom {
+            get {
+                object obj = ResourceManager.GetObject("UIaddrandom", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] UIbeetleclick {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick", resourceCulture);
