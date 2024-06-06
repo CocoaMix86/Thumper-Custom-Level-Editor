@@ -509,7 +509,7 @@ namespace Thumper_Custom_Level_Editor
                 case >= 900 and < 1000:
                     im = Properties.Resources.beeblespin;
                     break;
-                case 1001:
+                case 1000:
                     pictureBox1.Image = Properties.Resources.beeblegold;
                     PlaySound("UIbeetleclickGOLD");
                     break;
