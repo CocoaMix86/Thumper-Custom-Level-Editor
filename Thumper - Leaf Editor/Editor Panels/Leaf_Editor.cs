@@ -318,7 +318,7 @@ namespace Thumper_Custom_Level_Editor
 			if (e.ColumnIndex == -1 || e.RowIndex == -1)
 				return;
 			if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
-				if (_tracks[e.RowIndex].trait_type == "kTraitBool" || _tracks[e.RowIndex].trait_type == "kTraitAction")
+				if (_tracks[e.RowIndex].trait_type is "kTraitBool" or "kTraitAction")
 					if ((sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value == null)
 						(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 1;
 			}
