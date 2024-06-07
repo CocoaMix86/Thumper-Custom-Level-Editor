@@ -1091,6 +1091,7 @@ namespace Thumper_Custom_Level_Editor
 			//load new leaf that was just split
 			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
 			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
+			LoadLeaf(JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{newfilename}.txt"), "#.*", "")));
 			
 			//update beat counts in loaded lvl if need be
 			if (_loadedlvl != null)
@@ -1519,6 +1520,7 @@ namespace Thumper_Custom_Level_Editor
 			catch { }
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 
+			loadingleaf = false;
 			//clear undo list and reset the leafjson to the new leaf
 			if (resetundolist) {
 				_undolistleaf.Clear();
@@ -1527,10 +1529,12 @@ namespace Thumper_Custom_Level_Editor
 					reason = $"No changes",
 					savestate = leafjson
 				});
+				SaveLeaf(true, "", "");
 			}
-			//set save flag to true, since it just barely loaded
-			//SaveLeaf(true);
-			loadingleaf = false;
+			else {
+				//set save flag to true, since it just barely loaded
+				SaveLeafColors(true, Color.Maroon);
+			}
 		}
 
 		private void EnableLeafButtons(bool enable)
