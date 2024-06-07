@@ -402,9 +402,6 @@
     <Reference Include="Fmod5Sharp, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fmod5Sharp.3.0.1\lib\netstandard2.0\Fmod5Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="JumpListHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JumpListHelpers.1.0.0\lib\net40\JumpListHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="MathParser.org-mXparser, Version=6.0.0.0, Culture=neutral, PublicKeyToken=0fbab7add73ed6e2, processorArchitecture=MSIL">
       <HintPath>..\packages\MathParser.org-mXparser.6.0.0\lib\net472\MathParser.org-mXparser.dll</HintPath>
     </Reference>

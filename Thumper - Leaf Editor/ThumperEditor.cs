@@ -16,6 +16,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class FormLeafEditor : Form
     {
         #region Variables
+
         public readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
         public string workingfolder
         {
