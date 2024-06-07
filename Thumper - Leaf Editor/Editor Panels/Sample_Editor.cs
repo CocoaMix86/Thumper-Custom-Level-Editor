@@ -366,6 +366,8 @@ namespace Thumper_Custom_Level_Editor
 			sampleList.Columns[3].ValueType = typeof(decimal);
 			sampleList.Columns[4].ValueType = typeof(decimal);
 			sampleList.Columns[5].ValueType = typeof(string);
+
+			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
 		}
 		
 		public void LoadSample(dynamic _load)
