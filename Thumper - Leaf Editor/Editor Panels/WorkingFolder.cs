@@ -222,6 +222,10 @@ namespace Thumper_Custom_Level_Editor
 		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
 		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
 		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
+		private void filterClear_Click(object sender, EventArgs e)
+		{
+			filterLeaf.Checked = filterLvl.Checked = filterGate.Checked = filterMaster.Checked = filterSamp.Checked = false;
+		}
 
 		///Drag and drop files to copy them to the workingfolder
 		private void workingfolderFiles_DragEnter(object sender, DragEventArgs e)
