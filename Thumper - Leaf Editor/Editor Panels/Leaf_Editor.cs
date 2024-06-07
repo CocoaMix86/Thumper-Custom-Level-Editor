@@ -1247,6 +1247,11 @@ namespace Thumper_Custom_Level_Editor
 			toolstripTitleLeaf.BackColor = color;
 		}
 
+		public void InitializeLeafStuff()
+        {
+			dropParamPath.SelectedIndexChanged += dropParamPath_SelectedIndexChanged;
+		}
+
 		public void InitializeTracks(DataGridView grid, bool columnstyle)
 		{
 			//double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx

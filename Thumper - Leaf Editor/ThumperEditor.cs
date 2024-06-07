@@ -172,6 +172,8 @@ namespace Thumper_Custom_Level_Editor
             InitializeTracks(gateLvlList, false);
             InitializeTracks(workingfolderFiles, false);
             InitializeTracks(sampleList, false);
+            ImportObjects();
+            InitializeLeafStuff();
             InitializeLvlStuff();
             InitializeMasterStuff();
             InitializeGateStuff();
@@ -209,7 +211,6 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.version = "2.2";
                 Properties.Settings.Default.Save();
             }
-            ImportObjects();
             //set panels to their last saved dock
             SetDockLocations();
             //load size and location data for panels
