@@ -164,6 +164,7 @@ namespace Thumper_Custom_Level_Editor
         ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
+            
             //setup datagrids with proper formatting
             InitializeTracks(trackEditor, true);
             InitializeTracks(lvlSeqObjs, true);
