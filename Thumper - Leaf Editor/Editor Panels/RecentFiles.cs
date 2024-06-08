@@ -50,24 +50,27 @@ namespace Thumper_Custom_Level_Editor
         {
             if (e.RowIndex < 0)
                 return;
+            string level = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
             //handle column 0 clicks only as that's where the button is
             if (e.ColumnIndex == 0) {
-                if (workingfolder == dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString()) {
+                if (workingfolder == level) {
                     panelRecentFiles.Visible = false;
+                    return;
+                }
+                if (!Directory.Exists(level)) {
+                    if (MessageBox.Show($"Recent Level selected no longer exists at that location\n{level}\n\nDo you want to remove this entry?", "Level load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        RemoveRecentLevel(e.RowIndex);
                     return;
                 }
                 //set working folder to the path
                 ClearPanels();
-                workingfolder = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
+                workingfolder = level;
                 panelRecentFiles.Visible = false;
                 PlaySound("UIfolderclose");
             }
             //if remove column button clicked, run this
             if (e.ColumnIndex == 3) {
-                dgvRecentFiles.Rows.RemoveAt(e.RowIndex);
-                PlaySound("UIselect");
-                Properties.Settings.Default.Recentfiles.RemoveAt(e.RowIndex);
-                Properties.Settings.Default.Save();
+                RemoveRecentLevel(e.RowIndex);
             }
         }
         private void btnRecentClose_Click(object sender, EventArgs e)
@@ -79,6 +82,14 @@ namespace Thumper_Custom_Level_Editor
         private void panelRecentClick(object sender, EventArgs e)
         {
             panelRecentFiles.BringToFront();
+        }
+
+        private void RemoveRecentLevel(int index)
+        {
+            dgvRecentFiles.Rows.RemoveAt(index);
+            PlaySound("UIselect");
+            Properties.Settings.Default.Recentfiles.RemoveAt(index);
+            Properties.Settings.Default.Save();
         }
     }
 }

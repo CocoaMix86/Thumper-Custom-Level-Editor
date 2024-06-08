@@ -267,9 +267,13 @@ namespace Thumper_Custom_Level_Editor
             if (levellist.Count > 0 && LevelToLoad.Length < 2)
                 RecentFiles(levellist);
             else if (LevelToLoad.Length > 2) {
-                ClearPanels();
-                workingfolder = LevelToLoad;
-                panelRecentFiles.Visible = false;
+                if (Directory.Exists(LevelToLoad)) {
+                    ClearPanels();
+                    workingfolder = LevelToLoad;
+                    panelRecentFiles.Visible = false;
+                }
+                else
+                    MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
             Properties.Settings.Default.firstrun = false;
             PlaySound("UIboot");
