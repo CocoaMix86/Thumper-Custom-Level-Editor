@@ -34,7 +34,7 @@ namespace Thumper_Custom_Level_Editor
                     //these are used in the Master Editor panel
                     _workingfolder = value;
                     lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
-                    lvlsinworkfolder.Add("");
+                    lvlsinworkfolder.Add("<none>");
                     lvlsinworkfolder.Sort();
                     //add lvl list as datasources to dropdowns
                     dropMasterCheck.DataSource = lvlsinworkfolder.ToList();

@@ -3956,6 +3956,7 @@
             // 
             this.dropMasterLvlRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dropMasterLvlRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterLvlRest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.dropMasterLvlRest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dropMasterLvlRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterLvlRest.ForeColor = System.Drawing.Color.White;
@@ -4231,7 +4232,7 @@
             this.dropMasterSkybox.ForeColor = System.Drawing.Color.White;
             this.dropMasterSkybox.FormattingEnabled = true;
             this.dropMasterSkybox.Items.AddRange(new object[] {
-            "",
+            "<none>",
             "skybox_cube"});
             this.dropMasterSkybox.Location = new System.Drawing.Point(242, 56);
             this.dropMasterSkybox.Name = "dropMasterSkybox";
