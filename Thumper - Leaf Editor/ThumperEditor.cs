@@ -134,6 +134,7 @@ namespace Thumper_Custom_Level_Editor
                 jml.JumpItems.Add(jmp);
             }
             jml.Apply();
+            Properties.Settings.Default.Save();
         }
         ///EXIT APP
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
