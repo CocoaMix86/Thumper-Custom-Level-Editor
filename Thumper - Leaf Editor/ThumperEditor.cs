@@ -60,6 +60,7 @@ namespace Thumper_Custom_Level_Editor
                     if (Properties.Settings.Default.Recentfiles.Contains(workingfolder))
                         Properties.Settings.Default.Recentfiles.Remove(workingfolder);
                     Properties.Settings.Default.Recentfiles.Insert(0, workingfolder);
+                    JumpListUpdate();
 
                     //when workingfolder changes, reset panels
                     SaveLeaf(true, "Load", "");
