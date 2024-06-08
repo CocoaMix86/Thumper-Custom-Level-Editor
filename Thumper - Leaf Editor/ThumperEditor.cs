@@ -126,7 +126,7 @@ namespace Thumper_Custom_Level_Editor
 
             foreach (string file in Properties.Settings.Default.Recentfiles) {
                 JumpTask jmp = new JumpTask();
-                jmp.Title = file;
+                jmp.Title = Path.GetFileName(file);
                 jmp.Arguments = file;
                 jmp.Description = file;
                 jmp.ApplicationPath = System.Reflection.Assembly.GetEntryAssembly().Location;
