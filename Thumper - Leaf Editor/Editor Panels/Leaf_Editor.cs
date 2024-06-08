@@ -353,7 +353,6 @@ namespace Thumper_Custom_Level_Editor
 			if (e.KeyCode == Keys.Delete) {
 				trackEditor.CurrentCell.Value = 0;
 				trackEditor.CurrentCell.Value = null;
-				trackEditor_CellValueChanged(null, null);
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
 			//copies selected cells
