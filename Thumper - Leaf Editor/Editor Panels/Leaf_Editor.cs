@@ -338,8 +338,8 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Back) {
+				trackEditor.CurrentCell.Value = 0;
 				trackEditor.CurrentCell.Value = null;
-				trackEditor_CellValueChanged(null, null);
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
 			e.Handled = true;
@@ -351,6 +351,7 @@ namespace Thumper_Custom_Level_Editor
 			//Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
+				trackEditor.CurrentCell.Value = 0;
 				trackEditor.CurrentCell.Value = null;
 				trackEditor_CellValueChanged(null, null);
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
