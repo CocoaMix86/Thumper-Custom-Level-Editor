@@ -76,9 +76,11 @@ namespace Thumper_Custom_Level_Editor
         public string _dgfocus;
         public Point _menuloc;
         public Random rng = new Random();
+        public string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
+        public string LevelToLoad;
         #endregion
 
-        public FormLeafEditor()
+        public FormLeafEditor(string LevelFromArg)
         {
             InitializeComponent();
             ColorFormElements();
@@ -114,6 +116,7 @@ namespace Thumper_Custom_Level_Editor
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             DropDownMenuScrollWheelHandler.Enable(true);
             //
+            LevelToLoad = LevelFromArg;
         }
         private void JumpListUpdate()
         {
@@ -124,7 +127,9 @@ namespace Thumper_Custom_Level_Editor
             foreach (string file in Properties.Settings.Default.Recentfiles) {
                 JumpTask jmp = new JumpTask();
                 jmp.Title = file;
-                jmp.CustomCategory = "Levels";
+                jmp.Arguments = file;
+                jmp.Description = file;
+                jmp.ApplicationPath = System.Reflection.Assembly.GetEntryAssembly().Location;
                 jml.JumpItems.Add(jmp);
             }
             jml.Apply();
@@ -139,7 +144,7 @@ namespace Thumper_Custom_Level_Editor
                     e.Cancel = true;
                 }
             }
-            if (Directory.Exists(@"temp")) {
+            if (Directory.Exists($@"{AppLocation}\temp")) {
                 //Directory.Delete(@"temp", true);
             }
             //save panel sizes and locations
@@ -180,7 +185,13 @@ namespace Thumper_Custom_Level_Editor
         ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
-            
+            ///Create directory for leaf templates
+            if (!Directory.Exists($@"{AppLocation}\templates")) {
+                regenerateTemplateFilesToolStripMenuItem_Click(null, null);
+            }
+            if (!Directory.Exists($@"{AppLocation}\temp")) {
+                Directory.CreateDirectory($@"{AppLocation}\temp");
+            }
             //setup datagrids with proper formatting
             InitializeTracks(trackEditor, true);
             InitializeTracks(lvlSeqObjs, true);
@@ -210,14 +221,6 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(panelWorkingFolder);
             ControlMoverOrResizer.Init(toolstripTitleWork);
             ControlMoverOrResizer.Init(toolstripRecentFiles);
-
-            ///Create directory for leaf templates
-            if (!Directory.Exists(@"templates")) {
-                regenerateTemplateFilesToolStripMenuItem_Click(null, null);
-            }
-            if (!Directory.Exists(@"temp")) {
-                Directory.CreateDirectory(@"temp");
-            }
             //write required audio files for playback
             InitializeSounds();
             //call method that imports objects from track_objects.txt (for Leaf editing)
@@ -260,8 +263,13 @@ namespace Thumper_Custom_Level_Editor
 
             //load recent levels 
             var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
-            if (levellist.Count > 0)
+            if (levellist.Count > 0 && LevelToLoad.Length < 2)
                 RecentFiles(levellist);
+            else if (LevelToLoad.Length > 2) {
+                ClearPanels();
+                workingfolder = LevelToLoad;
+                panelRecentFiles.Visible = false;
+            }
             Properties.Settings.Default.firstrun = false;
             PlaySound("UIboot");
         }
@@ -280,14 +288,14 @@ namespace Thumper_Custom_Level_Editor
 
         private void regenerateTemplateFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(@"templates")) {
-                Directory.CreateDirectory(@"templates");
+            if (!Directory.Exists($@"{AppLocation}\templates")) {
+                Directory.CreateDirectory($@"{AppLocation}\templates");
             }
-            File.WriteAllText(@"templates\leaf_singletrack_new.txt", Properties.Resources.leaf_singletrack_new);
-            File.WriteAllText(@"templates\leaf_multitrack_new.txt", Properties.Resources.leaf_multitrack_new);
-            File.WriteAllText(@"templates\leaf_multitrack_ring&bar.txt", Properties.Resources.leaf_multitrack_ring_bar);
-            File.WriteAllText(@"templates\track_objects.txt", Properties.Resources.track_objects);
-            File.WriteAllText(@"templates\objects_defaultcolors.txt", Properties.Resources.objects_defaultcolors);
+            File.WriteAllText($@"{AppLocation}\templates\leaf_singletrack_new.txt", Properties.Resources.leaf_singletrack_new);
+            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_new.txt", Properties.Resources.leaf_multitrack_new);
+            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.txt", Properties.Resources.leaf_multitrack_ring_bar);
+            File.WriteAllText($@"{AppLocation}\templates\track_objects.txt", Properties.Resources.track_objects);
+            File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors.txt", Properties.Resources.objects_defaultcolors);
         }
 
         ///Toolstrip - FILE
