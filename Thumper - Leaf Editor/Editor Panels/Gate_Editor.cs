@@ -215,6 +215,21 @@ namespace Thumper_Custom_Level_Editor
             }
 			SaveGate(false);
 		}
+		private void dropGatePre_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			btnGateOpenPre.Enabled = dropGatePre.SelectedIndex > 0;
+			SaveGate(false);
+		}
+		private void dropGatePost_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			btnGateOpenPost.Enabled = dropGatePost.SelectedIndex > 0;
+			SaveGate(false);
+		}
+		private void dropGateRestart_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			btnGateOpenRestart.Enabled = dropGateRestart.SelectedIndex > 0;
+			SaveGate(false);
+		}
 		#endregion
 
 		#region Buttons
@@ -395,12 +410,12 @@ namespace Thumper_Custom_Level_Editor
 			gateLvlList.CellValueChanged += gateLvlList_CellValueChanged;
 
 			//populate dropdowns
+			checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
 			dropGateBoss.SelectedValue = (string)_load["spn_name"];
 			dropGatePre.SelectedItem = (string)_load["pre_lvl_name"];
 			dropGatePost.SelectedItem = (string)_load["post_lvl_name"];
 			dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"];
 			dropGateSection.SelectedItem = (string)_load["section_type"];
-			checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
 
 			///set save flag (gate just loaded, has no changes)
 			gatejson = _load;
