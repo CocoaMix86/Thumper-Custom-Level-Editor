@@ -10,13 +10,13 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Diagnostics;
+using System.Windows.Shell;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class FormLeafEditor : Form
     {
         #region Variables
-
         public readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
         public string workingfolder
         {
@@ -82,6 +82,7 @@ namespace Thumper_Custom_Level_Editor
         {
             InitializeComponent();
             ColorFormElements();
+            JumpListUpdate();
             //set custom renderer
             menuStrip.Renderer = new MyRenderer();
             contextMenuDock.Renderer = new MyRenderer();
@@ -113,6 +114,20 @@ namespace Thumper_Custom_Level_Editor
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             DropDownMenuScrollWheelHandler.Enable(true);
             //
+        }
+        private void JumpListUpdate()
+        {
+            JumpList jml = new JumpList();
+            jml.ShowRecentCategory = true;
+            jml.ShowFrequentCategory = true;
+
+            foreach (string file in Properties.Settings.Default.Recentfiles) {
+                JumpTask jmp = new JumpTask();
+                jmp.Title = file;
+                jmp.CustomCategory = "Levels";
+                jml.JumpItems.Add(jmp);
+            }
+            jml.Apply();
         }
         ///EXIT APP
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
