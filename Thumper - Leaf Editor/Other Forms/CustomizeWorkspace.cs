@@ -55,6 +55,17 @@ namespace Thumper_Custom_Level_Editor
         {
             string[] export = objectcolors.Select(x => $@"{x.Item1};{x.Item2}").ToArray();
             File.WriteAllLines($@"templates\objects_defaultcolors.txt", export);
+
+            Properties.Settings.Default.custom_bgcolor = btnBGColor.BackColor;
+            Properties.Settings.Default.custom_menucolor = btnMenuColor.BackColor;
+            Properties.Settings.Default.custom_mastercolor = btnMasterColor.BackColor;
+            Properties.Settings.Default.custom_gatecolor = btnGateColor.BackColor;
+            Properties.Settings.Default.custom_lvlcolor = btnLvlColor.BackColor;
+            Properties.Settings.Default.custom_leafcolor = btnLeafColor.BackColor;
+            Properties.Settings.Default.custom_samplecolor = btnSampleColor.BackColor;
+            Properties.Settings.Default.custom_activecolor = btnActiveColor.BackColor;
+            Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
