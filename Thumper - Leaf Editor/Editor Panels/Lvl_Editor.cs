@@ -75,8 +75,8 @@ namespace Thumper_Custom_Level_Editor
 
 				_loadedleaftemp = $@"{workingfolder}\leaf_{_file}.txt";
 				LoadLeaf(_load);
-				LvlUpdatePaths(e.RowIndex);
 			}
+			LvlUpdatePaths(e.RowIndex);
 		}
 		private void lvlLeafList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
@@ -672,6 +672,7 @@ namespace Thumper_Custom_Level_Editor
 			//mark that lvl is saved (just freshly loaded)
 			//SaveLvl(true);
 			loadinglvl = false;
+			SaveLvl(true);
 			lvljson = _load;
 		}
 
