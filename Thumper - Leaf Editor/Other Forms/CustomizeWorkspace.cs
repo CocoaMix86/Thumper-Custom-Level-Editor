@@ -9,6 +9,7 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
+        string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
         public List<Object_Params> _objects = new List<Object_Params>();
         private List<Tuple<string, string>> objectcolors = new List<Tuple<string, string>>();
 
@@ -30,7 +31,7 @@ namespace Thumper_Custom_Level_Editor
             //
             toolstripCustomize.Renderer = new ToolStripOverride();
             //
-            string[] import = File.Exists($@"templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"templates\objects_defaultcolors.txt") : null;
+            string[] import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt") : null;
             foreach (string line in import) {
                 var items = line.Split(';');
                 objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
@@ -54,7 +55,7 @@ namespace Thumper_Custom_Level_Editor
         private void btnCustomizeApply_Click(object sender, EventArgs e)
         {
             string[] export = objectcolors.Select(x => $@"{x.Item1};{x.Item2}").ToArray();
-            File.WriteAllLines($@"templates\objects_defaultcolors.txt", export);
+            File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", export);
 
             Properties.Settings.Default.custom_bgcolor = btnBGColor.BackColor;
             Properties.Settings.Default.custom_menucolor = btnMenuColor.BackColor;
