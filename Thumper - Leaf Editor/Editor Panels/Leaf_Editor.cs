@@ -78,8 +78,7 @@ namespace Thumper_Custom_Level_Editor
 		///DETECT SCROLL
 		private void trackEditor_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
 		{
-			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
+			vscrollbarTrackEditor_Resize();
 		}
 		private void trackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
@@ -112,16 +111,30 @@ namespace Thumper_Custom_Level_Editor
 			for (int i = 0; i < trackEditor.Rows.Count; i++) {
 				trackEditor.Rows[i].Height = trackZoomVert.Value;
 			}
-			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
+			vscrollbarTrackEditor_Resize();
 			trackEditor.FirstDisplayedScrollingRowIndex = display;
 		}
 		private void trackEditor_Resize(object sender, EventArgs e)
 		{
-			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
+			vscrollbarTrackEditor_Resize();
 			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
 			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
+		}
+		private void vscrollbarTrackEditor_Resize()
+        {
+			vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
+			vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
+		}
+		private void vScrollBarTrackEditor_VisibleChanged(object sender, EventArgs e)
+		{
+			if (vScrollBarTrackEditor.Visible) {
+				trackEditor.Location = new Point(trackEditor.Location.X + 15, trackEditor.Location.Y);
+				trackEditor.Width -= 15;
+            }
+			else {
+				trackEditor.Location = new Point(trackEditor.Location.X - 15, trackEditor.Location.Y);
+				trackEditor.Width += 15;
+			}
 		}
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
 		{
