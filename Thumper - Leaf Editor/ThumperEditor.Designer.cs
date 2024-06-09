@@ -3615,6 +3615,7 @@
             // 
             this.masterLvlList.AllowUserToAddRows = false;
             this.masterLvlList.AllowUserToDeleteRows = false;
+            this.masterLvlList.AllowUserToResizeColumns = false;
             this.masterLvlList.AllowUserToResizeRows = false;
             this.masterLvlList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -3911,7 +3912,7 @@
             this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
             this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenRest.Location = new System.Drawing.Point(382, 290);
+            this.btnMasterOpenRest.Location = new System.Drawing.Point(379, 290);
             this.btnMasterOpenRest.Name = "btnMasterOpenRest";
             this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenRest.TabIndex = 118;
@@ -3963,7 +3964,7 @@
             this.dropMasterLvlRest.FormattingEnabled = true;
             this.dropMasterLvlRest.Items.AddRange(new object[] {
             "skybox_cube"});
-            this.dropMasterLvlRest.Location = new System.Drawing.Point(242, 291);
+            this.dropMasterLvlRest.Location = new System.Drawing.Point(239, 291);
             this.dropMasterLvlRest.Name = "dropMasterLvlRest";
             this.dropMasterLvlRest.Size = new System.Drawing.Size(140, 21);
             this.dropMasterLvlRest.TabIndex = 105;
@@ -4089,7 +4090,7 @@
             this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenCheckpoint.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenCheckpoint.Image")));
             this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(381, 132);
+            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(379, 132);
             this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
             this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenCheckpoint.TabIndex = 115;
@@ -4109,7 +4110,7 @@
             this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenIntro.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenIntro.Image")));
             this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenIntro.Location = new System.Drawing.Point(381, 92);
+            this.btnMasterOpenIntro.Location = new System.Drawing.Point(379, 92);
             this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
             this.btnMasterOpenIntro.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenIntro.TabIndex = 114;
@@ -4199,7 +4200,7 @@
             this.dropMasterCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterCheck.ForeColor = System.Drawing.Color.White;
             this.dropMasterCheck.FormattingEnabled = true;
-            this.dropMasterCheck.Location = new System.Drawing.Point(242, 133);
+            this.dropMasterCheck.Location = new System.Drawing.Point(240, 133);
             this.dropMasterCheck.Name = "dropMasterCheck";
             this.dropMasterCheck.Size = new System.Drawing.Size(140, 21);
             this.dropMasterCheck.TabIndex = 100;
@@ -4215,7 +4216,7 @@
             this.dropMasterIntro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterIntro.ForeColor = System.Drawing.Color.White;
             this.dropMasterIntro.FormattingEnabled = true;
-            this.dropMasterIntro.Location = new System.Drawing.Point(242, 93);
+            this.dropMasterIntro.Location = new System.Drawing.Point(240, 93);
             this.dropMasterIntro.Name = "dropMasterIntro";
             this.dropMasterIntro.Size = new System.Drawing.Size(140, 21);
             this.dropMasterIntro.TabIndex = 98;
@@ -4234,7 +4235,7 @@
             this.dropMasterSkybox.Items.AddRange(new object[] {
             "<none>",
             "skybox_cube"});
-            this.dropMasterSkybox.Location = new System.Drawing.Point(242, 56);
+            this.dropMasterSkybox.Location = new System.Drawing.Point(240, 56);
             this.dropMasterSkybox.Name = "dropMasterSkybox";
             this.dropMasterSkybox.Size = new System.Drawing.Size(140, 21);
             this.dropMasterSkybox.TabIndex = 95;
