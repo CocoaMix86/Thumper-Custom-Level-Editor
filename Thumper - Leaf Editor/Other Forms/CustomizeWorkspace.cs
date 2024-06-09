@@ -67,6 +67,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.custom_activecolor = btnActiveColor.BackColor;
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
 
+            File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

@@ -72,13 +72,27 @@ namespace Thumper_Custom_Level_Editor
         ///Color elements based on set properties
         private void ColorFormElements()
         {
-            this.BackColor = Properties.Settings.Default.custom_bgcolor;
-            menuStrip.BackColor = Properties.Settings.Default.custom_menucolor;
-            panelLeaf.BackColor = Properties.Settings.Default.custom_leafcolor;
-            panelLevel.BackColor = Properties.Settings.Default.custom_lvlcolor;
-            panelGate.BackColor = Properties.Settings.Default.custom_gatecolor;
-            panelMaster.BackColor = Properties.Settings.Default.custom_mastercolor;
-            panelSample.BackColor = Properties.Settings.Default.custom_samplecolor;
+            if (File.Exists($@"{AppLocation}\templates\UIcolorprefs.txt")) {
+                string[] colors = File.ReadAllLines($@"{AppLocation}\templates\UIcolorprefs.txt");
+                Properties.Settings.Default.custom_bgcolor = this.BackColor = Color.FromArgb(int.Parse(colors[0]));
+                Properties.Settings.Default.custom_menucolor = menuStrip.BackColor = Color.FromArgb(int.Parse(colors[1]));
+                Properties.Settings.Default.custom_mastercolor = panelMaster.BackColor = Color.FromArgb(int.Parse(colors[2]));
+                Properties.Settings.Default.custom_gatecolor = panelGate.BackColor = Color.FromArgb(int.Parse(colors[3]));
+                Properties.Settings.Default.custom_lvlcolor = panelLevel.BackColor = Color.FromArgb(int.Parse(colors[4]));
+                Properties.Settings.Default.custom_leafcolor = panelLeaf.BackColor = Color.FromArgb(int.Parse(colors[5]));
+                Properties.Settings.Default.custom_samplecolor = panelSample.BackColor = Color.FromArgb(int.Parse(colors[6]));
+                Properties.Settings.Default.custom_activecolor = Color.FromArgb(int.Parse(colors[7]));
+                Properties.Settings.Default.Save();
+            }
+            else {
+                this.BackColor = Properties.Settings.Default.custom_bgcolor;
+                menuStrip.BackColor = Properties.Settings.Default.custom_menucolor;
+                panelLeaf.BackColor = Properties.Settings.Default.custom_leafcolor;
+                panelLevel.BackColor = Properties.Settings.Default.custom_lvlcolor;
+                panelGate.BackColor = Properties.Settings.Default.custom_gatecolor;
+                panelMaster.BackColor = Properties.Settings.Default.custom_mastercolor;
+                panelSample.BackColor = Properties.Settings.Default.custom_samplecolor;
+            }
         }
 
         /// <summary>Blends the specified colors together.</summary>
