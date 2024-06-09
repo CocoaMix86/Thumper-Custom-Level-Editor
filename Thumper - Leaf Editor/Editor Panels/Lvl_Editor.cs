@@ -59,7 +59,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void lvlLeafList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex == -1 || e.ColumnIndex == 0)
+			if (e.RowIndex == -1)
 				return;
 			//lvlLeafList_RowEnter(sender, e);
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
@@ -224,7 +224,11 @@ namespace Thumper_Custom_Level_Editor
 			btnLvlRefreshBeats.Enabled = _lvlleafs.Count > 0;
 			btnLvlLeafCopy.Enabled = _lvlleafs.Count > 0;
 			//enable/disable buttons if leaf exists or not
-			btnLvlPathAdd.Enabled = _lvlleafs.Count > 0;
+			if (_lvlleafs.Count == 0) {
+				btnLvlPathAdd.Enabled = false;
+				lblLvlTunnels.Text = $"Paths/Tunnels - <no leaf>";
+				btnLvlRandomTunnel.Enabled = false;
+			}
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
 			if (btnLvlPathAdd.Enabled == false) btnLvlCopyTunnel.Enabled = false;
 			btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
@@ -346,10 +350,11 @@ namespace Thumper_Custom_Level_Editor
 			int _in = lvlLeafList.CurrentRow.Index;
 			_lvlleafs.RemoveAt(_in);
 			PlaySound("UIobjectremove");
-			if (_in > 0) {
+			lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in));
+			/*if (_in > 0) {
 				lvlLeafList.CurrentCell = lvlLeafList.Rows[_in - 1].Cells[0];
 				lvlLeafList.Rows[_in - 1].Cells[0].Selected = true;
-			}
+			}*/
 		}
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
@@ -738,6 +743,7 @@ namespace Thumper_Custom_Level_Editor
 		public void LvlUpdatePaths(int index)
 		{
 			lvlLeafPaths.Rows.Clear();
+			lblLvlTunnels.Text = $"Paths/Tunnels - {_lvlleafs[index].leafname}";
 			//for each path in the selected leaf, populate the paths DGV
 			foreach (string path in _lvlleafs[index].paths) {
 				if (path == "")
@@ -747,6 +753,7 @@ namespace Thumper_Custom_Level_Editor
 				else
 					MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");
 			}
+			btnLvlPathAdd.Enabled = true;
 			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
 			btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
 			btnLvlRandomTunnel.Enabled = btnLvlPathAdd.Enabled;
