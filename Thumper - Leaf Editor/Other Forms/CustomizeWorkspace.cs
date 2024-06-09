@@ -101,5 +101,19 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Set Border header  
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(55, 55, 55)), e.Bounds);
+            Rectangle paddedBounds = e.Bounds;
+            paddedBounds.Inflate(-2, -2);
+            e.Graphics.DrawString(tabControl1.TabPages[e.Index].Text, this.Font, SystemBrushes.HighlightText, paddedBounds);
+
+            //set  Tabcontrol border  
+            Graphics g = e.Graphics;
+            Pen p = new Pen(Color.FromArgb(55, 55, 55), 10);
+            g.DrawRectangle(p, tabPage1.Bounds);
+        }
     }
 }

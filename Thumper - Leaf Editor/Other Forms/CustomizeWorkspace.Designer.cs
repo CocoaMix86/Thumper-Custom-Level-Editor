@@ -34,6 +34,13 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomizeApply = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnObjectColor = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dropObjects = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dropParamPath = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,13 +59,6 @@ namespace Thumper_Custom_Level_Editor
             this.btnBGColor = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.checkMuteApp = new System.Windows.Forms.CheckBox();
-            this.dropObjects = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dropParamPath = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.btnObjectColor = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -68,10 +68,11 @@ namespace Thumper_Custom_Level_Editor
             // toolstripCustomize
             // 
             this.toolstripCustomize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripCustomize.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolstripCustomize.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolstripCustomize.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnCustomizeApply});
-            this.toolstripCustomize.Location = new System.Drawing.Point(0, 0);
+            this.toolstripCustomize.Location = new System.Drawing.Point(0, 270);
             this.toolstripCustomize.Name = "toolstripCustomize";
             this.toolstripCustomize.Size = new System.Drawing.Size(367, 25);
             this.toolstripCustomize.TabIndex = 106;
@@ -85,6 +86,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomizeApply.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnCustomizeApply.Image = ((System.Drawing.Image)(resources.GetObject("btnCustomizeApply.Image")));
             this.btnCustomizeApply.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCustomizeApply.Margin = new System.Windows.Forms.Padding(140, 1, 0, 2);
             this.btnCustomizeApply.Name = "btnCustomizeApply";
             this.btnCustomizeApply.Size = new System.Drawing.Size(91, 22);
             this.btnCustomizeApply.Text = "Apply Changes";
@@ -92,14 +94,17 @@ namespace Thumper_Custom_Level_Editor
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl1.Location = new System.Drawing.Point(0, 28);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(-5, 0);
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(367, 271);
+            this.tabControl1.Size = new System.Drawing.Size(376, 306);
             this.tabControl1.TabIndex = 107;
+            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
             // tabPage1
             // 
@@ -127,12 +132,104 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage1.Controls.Add(this.btnMasterColor);
             this.tabPage1.Controls.Add(this.btnMenuColor);
             this.tabPage1.Controls.Add(this.btnBGColor);
+            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(359, 245);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Size = new System.Drawing.Size(368, 280);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Colors";
+            // 
+            // btnObjectColor
+            // 
+            this.btnObjectColor.BackColor = System.Drawing.Color.White;
+            this.btnObjectColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnObjectColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnObjectColor.FlatAppearance.BorderSize = 4;
+            this.btnObjectColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnObjectColor.ForeColor = System.Drawing.Color.Black;
+            this.btnObjectColor.Location = new System.Drawing.Point(306, 89);
+            this.btnObjectColor.Name = "btnObjectColor";
+            this.btnObjectColor.Size = new System.Drawing.Size(53, 26);
+            this.btnObjectColor.TabIndex = 127;
+            this.btnObjectColor.Tag = "customcolorbutton";
+            this.btnObjectColor.UseMnemonic = false;
+            this.btnObjectColor.UseVisualStyleBackColor = false;
+            this.btnObjectColor.Click += new System.EventHandler(this.btnObjectColor_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(191, 94);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(116, 15);
+            this.label12.TabIndex = 128;
+            this.label12.Text = "Object Default Color";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label11.Location = new System.Drawing.Point(186, 7);
+            this.label11.MinimumSize = new System.Drawing.Size(0, 230);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(2, 230);
+            this.label11.TabIndex = 126;
+            // 
+            // dropObjects
+            // 
+            this.dropObjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropObjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropObjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dropObjects.ForeColor = System.Drawing.Color.White;
+            this.dropObjects.FormattingEnabled = true;
+            this.dropObjects.Location = new System.Drawing.Point(194, 22);
+            this.dropObjects.Name = "dropObjects";
+            this.dropObjects.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dropObjects.Size = new System.Drawing.Size(163, 21);
+            this.dropObjects.TabIndex = 123;
+            this.dropObjects.SelectedIndexChanged += new System.EventHandler(this.dropObjects_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(190, 7);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(75, 15);
+            this.label9.TabIndex = 122;
+            this.label9.Text = "Track Object";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(190, 45);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(111, 15);
+            this.label10.TabIndex = 124;
+            this.label10.Text = "Type (param_path)";
+            // 
+            // dropParamPath
+            // 
+            this.dropParamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropParamPath.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropParamPath.DropDownWidth = 180;
+            this.dropParamPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropParamPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dropParamPath.ForeColor = System.Drawing.Color.White;
+            this.dropParamPath.FormattingEnabled = true;
+            this.dropParamPath.Location = new System.Drawing.Point(194, 62);
+            this.dropParamPath.Name = "dropParamPath";
+            this.dropParamPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dropParamPath.Size = new System.Drawing.Size(163, 21);
+            this.dropParamPath.TabIndex = 125;
+            this.dropParamPath.SelectedIndexChanged += new System.EventHandler(this.dropParamPath_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -362,10 +459,11 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.tabPage2.Controls.Add(this.checkMuteApp);
+            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(266, 245);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Size = new System.Drawing.Size(367, 280);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Audio";
             // 
@@ -381,103 +479,15 @@ namespace Thumper_Custom_Level_Editor
             this.checkMuteApp.Text = "Mute application audio";
             this.checkMuteApp.UseVisualStyleBackColor = true;
             // 
-            // dropObjects
-            // 
-            this.dropObjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropObjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropObjects.ForeColor = System.Drawing.Color.White;
-            this.dropObjects.FormattingEnabled = true;
-            this.dropObjects.Location = new System.Drawing.Point(194, 22);
-            this.dropObjects.Name = "dropObjects";
-            this.dropObjects.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropObjects.Size = new System.Drawing.Size(163, 21);
-            this.dropObjects.TabIndex = 123;
-            this.dropObjects.SelectedIndexChanged += new System.EventHandler(this.dropObjects_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(190, 7);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 15);
-            this.label9.TabIndex = 122;
-            this.label9.Text = "Track Object";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(190, 45);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(111, 15);
-            this.label10.TabIndex = 124;
-            this.label10.Text = "Type (param_path)";
-            // 
-            // dropParamPath
-            // 
-            this.dropParamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropParamPath.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropParamPath.DropDownWidth = 180;
-            this.dropParamPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropParamPath.ForeColor = System.Drawing.Color.White;
-            this.dropParamPath.FormattingEnabled = true;
-            this.dropParamPath.Location = new System.Drawing.Point(194, 62);
-            this.dropParamPath.Name = "dropParamPath";
-            this.dropParamPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropParamPath.Size = new System.Drawing.Size(163, 21);
-            this.dropParamPath.TabIndex = 125;
-            this.dropParamPath.SelectedIndexChanged += new System.EventHandler(this.dropParamPath_SelectedIndexChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label11.Location = new System.Drawing.Point(186, 7);
-            this.label11.MinimumSize = new System.Drawing.Size(0, 230);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(2, 230);
-            this.label11.TabIndex = 126;
-            // 
-            // btnObjectColor
-            // 
-            this.btnObjectColor.BackColor = System.Drawing.Color.White;
-            this.btnObjectColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnObjectColor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnObjectColor.FlatAppearance.BorderSize = 4;
-            this.btnObjectColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnObjectColor.ForeColor = System.Drawing.Color.Black;
-            this.btnObjectColor.Location = new System.Drawing.Point(306, 89);
-            this.btnObjectColor.Name = "btnObjectColor";
-            this.btnObjectColor.Size = new System.Drawing.Size(53, 26);
-            this.btnObjectColor.TabIndex = 127;
-            this.btnObjectColor.Tag = "customcolorbutton";
-            this.btnObjectColor.UseMnemonic = false;
-            this.btnObjectColor.UseVisualStyleBackColor = false;
-            this.btnObjectColor.Click += new System.EventHandler(this.btnObjectColor_Click);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(191, 94);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(116, 15);
-            this.label12.TabIndex = 128;
-            this.label12.Text = "Object Default Color";
-            // 
             // CustomizeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.ClientSize = new System.Drawing.Size(367, 299);
+            this.ClientSize = new System.Drawing.Size(367, 295);
             this.Controls.Add(this.toolstripCustomize);
             this.Controls.Add(this.tabControl1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CustomizeWorkspace";
