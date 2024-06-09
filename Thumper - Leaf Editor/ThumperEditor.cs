@@ -121,6 +121,9 @@ namespace Thumper_Custom_Level_Editor
         }
         private void JumpListUpdate()
         {
+            if (Properties.Settings.Default.Recentfiles == null)
+                return;
+
             JumpList jml = new JumpList();
             jml.ShowRecentCategory = true;
             jml.ShowFrequentCategory = true;
