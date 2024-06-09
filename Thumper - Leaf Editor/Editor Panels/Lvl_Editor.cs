@@ -749,7 +749,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
 			btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
-			btnLvlRandomTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
+			btnLvlRandomTunnel.Enabled = btnLvlPathAdd.Enabled;
 			//monke
 		}
 
