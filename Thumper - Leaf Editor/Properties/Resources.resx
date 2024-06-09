@@ -575,30 +575,57 @@
     <value>..\image assets\icon-undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="changelog" xml:space="preserve">
-    <value>BUG FIXES
-✅ error when renaming a file to another name that already exists
+    <value>NEW
+🌟Undo on Leaf (Ctrl+Z)
+🌟Several buttons have new sound effects
+🌟Right-click on application in taskbar to access and open Recent Levels
+
+BUG FIXES
 ✅ object list is collapsed to the left when loading a new leaf
 ✅ renaming files now auto-updates all references to that file in the project
 ✅ extreme lag when using the "clear" button
 ✅ pasting cells doesn't mark leaf as unsaved
 ✅ sample play button doesn't revert after playback stops. Stays as "stop" icon
-⭕ single-row multi-select delete doesn't do anything if the last selected cell doesn't contain a value
+✅ multi-select delete doesn't do anything if the last selected cell doesn't contain a value
+✅ Raw data not updating when randomzing row values
+✅ Clear Row can't clear multiple tracks
+✅ Interpolator throws errors if fields are blank
+✅ error when renaming a file to another name that already exist
+✅ error when creating and saving a leaf with no open project
+✅ error when pressing "add random tunnel" when no leaf exists in the lvl
+✅ error when pressing "random values" with no track selected
+✅ error when pressing "load lvl" buttons for Intro, Checkpoint, and Rest in the master with no lvl set
+✅ error when renaming a lvl and no gate has been created
+✅ error when adding random tracks and you somehow have 0 samples loaded
+✅ error when adding a new sample with no open project
+✅ error when interpolating from newly set cells. Self-fixes if you would reload the leaf
+✅ error when selecting a level from the Recent list and it no longer exists
+✅ Sample panel not visible on first launch
+✅ Golden beeble never shows up
+✅ The first lvl created of a new level has no loop tracks available until it is reloaded
+✅ Splitting a leaf doesn't visually update it until its reloaded
+✅ "Apply to Track" button is enabled on app load, when no tracks exist. Causes error when pressed
+✅ Switching between a gate with RANDOM enabled and any other gate does not update the boss field
+✅ Recent levels list doesn't save if the app crashes
+✅ If you delete a leaf from a lvl, its tunnels remain showing and can be accidentally saved into the next leaf in the list
+✅ Making a change in any of the panels and then switching to another file doesn't clear the "unsaved" red color
+✅ unsaved dialog doesnt show for lvl, gate, sample when switching files
 ⭕ extras folder doesn't delete .pc file when a sample is deleted from the sample editor
 
 SUGGESTED ADDITIONS/CHANGES
-✅ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
-✅ allow right-click delete for loop track volume sequencer cells
-✅ dragging the mouse with right click to remove multiple beats in one swoop
-✅ "track objects" and "spn_default" have been updated with new objects to use!
-✅ added button to add random tunnels
-✅ added "open level folder" button to File menu
-⭕ rightclicking on a taskbar shortcut for the TCLE shows recently opened levels, like how other programs show previously opened files
+➕ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
+➕ allow right-click delete for loop track volume sequencer cells
+➕ dragging the mouse with right click to remove multiple beats in one swoop
+➕ "track objects" and "spn_default" have been updated with new objects to use!
+➕ added button to add random tunnels
+➕ added "open level folder" button to File menu
+➕ auto-dock panels on first launch
+➕ Moved LEVEL DETAILS button out of the Working folder file list and to its own dedicated button
+➕ Filter file buttons now has a "clear filters" button
+➕ Paths/Tunnels list now shows which leaf is currently active
+➕ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow
 ⭕ alt + up/down: switch leaf
-⭕ alt + left/right: switch lvl
-✅ auto-dock panels on first launch
-
-NEW
-✅ Undo on Leaf (Ctrl+Z)</value>
+⭕ alt + left/right: switch lvl</value>
   </data>
   <data name="UIrevertnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIrevertnew.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
