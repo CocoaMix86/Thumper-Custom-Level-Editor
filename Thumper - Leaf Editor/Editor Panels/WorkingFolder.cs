@@ -42,6 +42,9 @@ namespace Thumper_Custom_Level_Editor
 				_loadedsampletemp = _selectedfilename;
 				if (_loadedsampletemp == _loadedsample)
 					return;
+				//Check if gate is saved or not
+				if ((!_savesample && MessageBox.Show("Current sample is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
+					return;
 				LoadSample(_load);
 				if (panelSample.Visible == false)
 					sampleEditorToolStripMenuItem.PerformClick();
@@ -58,6 +61,9 @@ namespace Thumper_Custom_Level_Editor
 				_loadedgatetemp = _selectedfilename;
 				if (_loadedgatetemp == _loadedgate)
 					return;
+				//Check if gate is saved or not
+				if ((!_savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
+					return;
 				LoadGate(_load);
 				if (panelGate.Visible == false)
 					gateEditorToolStripMenuItem.PerformClick();
@@ -65,6 +71,9 @@ namespace Thumper_Custom_Level_Editor
 			else if ((string)_load["obj_type"] == "SequinLevel") {
 				_loadedlvltemp = _selectedfilename;
 				if (_loadedlvltemp == _loadedlvl)
+					return;
+				//Check if lvl is saved or not
+				if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
 				LoadLvl(_load);
 				if (panelLevel.Visible == false)
