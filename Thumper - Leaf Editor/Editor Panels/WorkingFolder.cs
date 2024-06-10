@@ -103,9 +103,6 @@ namespace Thumper_Custom_Level_Editor
 				if (panelLeaf.Visible == false)
 					leafEditorToolStripMenuItem.PerformClick();
 			}
-			else if (workingfolderFiles[1, workingfolderFiles.SelectedCells[0].RowIndex].Value.ToString().Contains("LEVEL DETAILS")) {
-				editLevelDetailsToolStripMenuItem_Click(null, null);
-			}
 			else
 				MessageBox.Show("this is not a valid Custom Level file.");
 		}
@@ -171,9 +168,11 @@ namespace Thumper_Custom_Level_Editor
 					}
 				}
 
+				//if no filters enabled, add the file to list
 				if (!filterleaf && !filterlvl && !filtergate && !filtermaster && !filtersamp) {
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 				}
+				//otherwise, compare the filetype to any active filter and then add it
 				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp)) {
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 				}
