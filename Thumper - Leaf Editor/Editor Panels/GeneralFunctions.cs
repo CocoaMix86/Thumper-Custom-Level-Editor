@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Wave;
 using NAudio.Vorbis;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -284,6 +286,20 @@ namespace Thumper_Custom_Level_Editor
         ///
         ///
 
+        public string SearchReferences(dynamic _load)
+        {
+            string referencefiles = "";
+            foreach (string file in Directory.GetFiles(workingfolder)) {
+                string text = File.ReadAllText(file);
+                if (text.Contains($"{_load["obj_name"]}")) {
+                    dynamic _load2 = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(file), "#.*", ""));
+                    if (_load["obj_name"] != _load2["obj_name"])
+                        referencefiles += _load2["obj_name"] + '\n';
+                }
+            }
+
+            return referencefiles;
+        }
     }
 
     public static class ExtensionMethodClass

@@ -36,6 +36,17 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.\n\n{ex}", "File load error");
 				return;
 			}
+
+			///Search for file reference. Return afterwards, do not attempt to load file into editor
+			if (e.ColumnIndex == 2) {
+				//this check skips master and samp, since you can't reference those
+				if (! new[] { "samp", "master" }.Any(c => workingfolderFiles.Rows[e.RowIndex].Cells[1].Value.ToString().Contains(c))) {
+					string _files = SearchReferences(_load);
+					MessageBox.Show($"This file is referenced in these files:\n{_files}");
+				}
+				return;
+            }
+
 			///Send file off to different load methods based on the file type
 			//process SAMP first, since its JSON structure is different, and detectable
 			if (_load.ContainsKey("items")) {
@@ -179,6 +190,8 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			//button is in column 0, so that's where to draw the image
 			if (e.ColumnIndex == 2) {
+				if (new[] {"samp", "master" }.Any(c => workingfolderFiles.Rows[e.RowIndex].Cells[1].Value.ToString().Contains(c)))
+					return;
 				e.Paint(e.CellBounds, DataGridViewPaintParts.All);
 				//get dimensions
 				var w = Properties.Resources.icon_zoom.Width;
