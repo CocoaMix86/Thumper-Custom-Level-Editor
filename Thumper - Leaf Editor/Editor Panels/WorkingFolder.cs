@@ -173,6 +173,23 @@ namespace Thumper_Custom_Level_Editor
 			btnWorkNewFile.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkEditDetails.Enabled = workingfolderFiles.RowCount > 0;
 		}
+		private void workingfolderFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+		{
+			if (e.RowIndex < 0)
+				return;
+			//button is in column 0, so that's where to draw the image
+			if (e.ColumnIndex == 2) {
+				e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+				//get dimensions
+				var w = Properties.Resources.icon_zoom.Width;
+				var h = Properties.Resources.icon_zoom.Height;
+				var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+				var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+				//paint the image
+				e.Graphics.DrawImage(Properties.Resources.icon_zoom, new Rectangle(x, y, w, h));
+				e.Handled = true;
+			}
+		}
 
 		private void btnWorkDelete_Click(object sender, EventArgs e)
 		{
