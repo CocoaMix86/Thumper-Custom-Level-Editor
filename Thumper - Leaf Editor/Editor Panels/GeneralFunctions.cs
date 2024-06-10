@@ -289,9 +289,14 @@ namespace Thumper_Custom_Level_Editor
         public string SearchReferences(dynamic _load)
         {
             string referencefiles = "";
+            //search all files in the project folder
             foreach (string file in Directory.GetFiles(workingfolder)) {
                 string text = File.ReadAllText(file);
+                //_load contains the name of the file we're loading for
+                //only load the searched file if it contains the loaded file name
                 if (text.Contains($"{_load["obj_name"]}")) {
+                    //load file json to extract it's "obj_name". This is cleaner than displaying the file path
+                    //and makes more sense for people in the editor
                     dynamic _load2 = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(file), "#.*", ""));
                     if (_load["obj_name"] != _load2["obj_name"])
                         referencefiles += _load2["obj_name"] + '\n';

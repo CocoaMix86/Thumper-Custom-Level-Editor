@@ -188,8 +188,9 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.RowIndex < 0)
 				return;
-			//button is in column 0, so that's where to draw the image
+			//buttons are in column 2, so that's where to draw the button images
 			if (e.ColumnIndex == 2) {
+				//skip drawing for samp and master
 				if (new[] {"samp", "master" }.Any(c => workingfolderFiles.Rows[e.RowIndex].Cells[1].Value.ToString().Contains(c)))
 					return;
 				e.Paint(e.CellBounds, DataGridViewPaintParts.All);
