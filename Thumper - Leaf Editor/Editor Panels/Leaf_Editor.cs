@@ -296,7 +296,6 @@ namespace Thumper_Custom_Level_Editor
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			string data = "";
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
 				var _val = trackEditor[e.ColumnIndex, e.RowIndex].Value;
@@ -1395,7 +1394,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		public void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc)
 		{
-			var i = dgvc.Value;
+			decimal? i = (decimal?)dgvc.Value;
 			dgvc.Style = null;
 			if (i == null)
 				return;
@@ -1407,7 +1406,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
 			//if the cell value is greater than the criteria of the row, highlight it with that row's color
-			if (Math.Abs(decimal.Parse(i.ToString())) >= (decimal)_tracks[dgvc.RowIndex].highlight_value) {
+			if (Math.Abs((decimal)i) >= (decimal)_tracks[dgvc.RowIndex].highlight_value) {
 				dgvc.Style.BackColor = Color.FromArgb(int.Parse(_tracks[dgvc.RowIndex].highlight_color));
 			}
 			//change cell font color so text is readable on dark/light backgrounds
