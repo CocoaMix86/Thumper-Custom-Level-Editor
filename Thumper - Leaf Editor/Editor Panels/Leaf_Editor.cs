@@ -363,7 +363,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			controldown = e.Control;
 			shiftdown = e.Shift;
-			//Keypress Delete - clear selected cellss
+			///Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
 				_logundo = false;
@@ -372,13 +372,13 @@ namespace Thumper_Custom_Level_Editor
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
-			//copies selected cells
+			///copies selected cells
 			if (controldown && e.KeyCode == Keys.C) {
 				DataObject d = trackEditor.GetClipboardContent();
 				Clipboard.SetDataObject(d, true);
 				e.Handled = true;
 			}
-			//cut and copies selected cells
+			///cut and copies selected cells
 			if (controldown && e.KeyCode == Keys.X) {
 				DataObject d = trackEditor.GetClipboardContent();
 				Clipboard.SetDataObject(d, true);
@@ -389,18 +389,23 @@ namespace Thumper_Custom_Level_Editor
 				_logundo = true;
 				SaveLeaf(false, "Cut cells", $"");
 			}
-			//pastes cell data from clipboard
+			///pastes cell data from clipboard
 			if (controldown && e.KeyCode == Keys.V) {
 				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+				//get content on clipboard to string and then split it to rows
 				string s = Clipboard.GetText().Replace("\r\n", "\n");
 				string[] copiedrows = s.Split('\n');
+				//set ints so we don't have to always call rowindex, columnindex
 				int row = trackEditor.CurrentCell.RowIndex;
 				int col = trackEditor.CurrentCell.ColumnIndex;
 				for (int _line = 0; _line < copiedrows.Length; _line++) {
+					//if paste will go outside grid bounds, skip
 					if (row + _line >= trackEditor.RowCount)
 						break;
+					//split row into individual cells
 					string[] cells = copiedrows[_line].Split('\t');
 					for (int i = 0; i < cells.Length; i++) {
+						//if paste will go outside grid bounds, skip
 						if (col + i >= trackEditor.ColumnCount)
 							break;
 						//don't paste if cell is blank
