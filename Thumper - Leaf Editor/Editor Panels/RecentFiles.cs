@@ -63,7 +63,6 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 }
                 //set working folder to the path
-                ClearPanels();
                 workingfolder = level;
                 panelRecentFiles.Visible = false;
                 PlaySound("UIfolderclose");

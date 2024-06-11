@@ -30,6 +30,7 @@ namespace Thumper_Custom_Level_Editor
                             return;
                         }
                     }
+                    ClearPanels();
                     //if different, set it, then repopulate lvls in workingfolder
                     //these are used in the Master Editor panel
                     _workingfolder = value;
