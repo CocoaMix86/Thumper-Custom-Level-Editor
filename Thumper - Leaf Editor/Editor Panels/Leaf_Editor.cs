@@ -351,8 +351,10 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Back) {
+				_logundo = false;
 				trackEditor.CurrentCell.Value = 0;
 				trackEditor.CurrentCell.Value = null;
+				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
 			e.Handled = true;
@@ -364,8 +366,10 @@ namespace Thumper_Custom_Level_Editor
 			//Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
+				_logundo = false;
 				trackEditor.CurrentCell.Value = 0;
 				trackEditor.CurrentCell.Value = null;
+				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
 			//copies selected cells
@@ -374,27 +378,39 @@ namespace Thumper_Custom_Level_Editor
 				Clipboard.SetDataObject(d, true);
 				e.Handled = true;
 			}
+			//cut and copies selected cells
+			if (controldown && e.KeyCode == Keys.X) {
+				DataObject d = trackEditor.GetClipboardContent();
+				Clipboard.SetDataObject(d, true);
+				_logundo = false;
+				trackEditor.CurrentCell.Value = 0;
+				trackEditor.CurrentCell.Value = null;
+				e.Handled = true;
+				_logundo = true;
+				SaveLeaf(false, "Cut cells", $"");
+			}
 			//pastes cell data from clipboard
 			if (controldown && e.KeyCode == Keys.V) {
 				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				string s = Clipboard.GetText().Replace("\r\n", "\n");
-				string[] lines = s.Split('\n');
+				string[] copiedrows = s.Split('\n');
 				int row = trackEditor.CurrentCell.RowIndex;
 				int col = trackEditor.CurrentCell.ColumnIndex;
-				for (int _line = 0; _line < lines.Length; _line++) {
+				for (int _line = 0; _line < copiedrows.Length; _line++) {
 					if (row + _line >= trackEditor.RowCount)
 						break;
-					string[] cells = lines[_line].Split('\t');
+					string[] cells = copiedrows[_line].Split('\t');
 					for (int i = 0; i < cells.Length; i++) {
 						if (col + i >= trackEditor.ColumnCount)
 							break;
 						//don't paste if cell is blank
-						if (cells[i] != "")
+						if (cells[i] != "") {
 							trackEditor[col + i, row + _line].Value = cells[i];
+							TrackUpdateHighlightingSingleCell(trackEditor[col + i, row + _line]);
+						}
 					}
-					TrackUpdateHighlighting(trackEditor.Rows[row + _line]);
-					SaveLeaf(false, "Pasted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 				}
+				SaveLeaf(false, $"Pasted cells", $"");
 				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			}
 		}
@@ -1231,6 +1247,7 @@ namespace Thumper_Custom_Level_Editor
 		/// METHODS ///
 		///         ///
 
+		public bool _logundo = true;
 		public void SaveLeaf(bool save, string changereason, string changedetails, bool playsound = false)
 		{
 			//skip method if leaf is loading
@@ -1242,10 +1259,12 @@ namespace Thumper_Custom_Level_Editor
 			_saveleaf = save;
 			if (!save) {
 				SaveLeafColors(true, Color.Maroon);
-				_undolistleaf.Insert(0, new SaveState() {
-					reason = $"{changereason} [{changedetails}]",
-					savestate = LeafBuildSave((_loadedleaf != null) ? Path.GetFileName(_loadedleaf).Replace("leaf_", "") : "", true)
-				});
+				if (_logundo) {
+					_undolistleaf.Insert(0, new SaveState() {
+						reason = $"{changereason} [{changedetails}]",
+						savestate = LeafBuildSave((_loadedleaf != null) ? Path.GetFileName(_loadedleaf).Replace("leaf_", "") : "", true)
+					});
+				}
 
 			}
 			else {
