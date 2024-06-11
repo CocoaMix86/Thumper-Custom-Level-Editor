@@ -577,8 +577,10 @@
   <data name="changelog" xml:space="preserve">
     <value>NEW
 🌟Undo on Leaf (Ctrl+Z)
-🌟Several buttons have new sound effects
-🌟Right-click on application in taskbar to access and open Recent Levels
+🌟Several buttons have new sound effects.
+🌟Right-click on application in taskbar to access and open Recent Levels.
+🌟Search button in the Working Folder tells you where a file is referenced.
+🌟Ctrl+X to cut cells in leaf editor. Paste (an existing function) with Ctrl+V.
 
 BUG FIXES
 ✅ object list is collapsed to the left when loading a new leaf
@@ -610,7 +612,7 @@ BUG FIXES
 ✅ If you delete a leaf from a lvl, its tunnels remain showing and can be accidentally saved into the next leaf in the list
 ✅ Making a change in any of the panels and then switching to another file doesn't clear the "unsaved" red color
 ✅ unsaved dialog doesnt show for lvl, gate, sample when switching files
-⭕ extras folder doesn't delete .pc file when a sample is deleted from the sample editor
+✅ Pasting cells can be laggy
 
 SUGGESTED ADDITIONS/CHANGES
 ➕ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
@@ -623,9 +625,7 @@ SUGGESTED ADDITIONS/CHANGES
 ➕ Moved LEVEL DETAILS button out of the Working folder file list and to its own dedicated button
 ➕ Filter file buttons now has a "clear filters" button
 ➕ Paths/Tunnels list now shows which leaf is currently active
-➕ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow
-⭕ alt + up/down: switch leaf
-⭕ alt + left/right: switch lvl</value>
+➕ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow</value>
   </data>
   <data name="UIrevertnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIrevertnew.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

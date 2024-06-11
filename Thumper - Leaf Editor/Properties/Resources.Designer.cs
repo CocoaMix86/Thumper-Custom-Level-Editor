@@ -223,16 +223,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized string similar to NEW
         ///🌟Undo on Leaf (Ctrl+Z)
-        ///🌟Several buttons have new sound effects
-        ///🌟Right-click on application in taskbar to access and open Recent Levels
+        ///🌟Several buttons have new sound effects.
+        ///🌟Right-click on application in taskbar to access and open Recent Levels.
+        ///🌟Search button in the Working Folder tells you where a file is referenced.
+        ///🌟Ctrl+X to cut cells in leaf editor. Paste (an existing function) with Ctrl+V.
         ///
         ///BUG FIXES
         ///✅ object list is collapsed to the left when loading a new leaf
         ///✅ renaming files now auto-updates all references to that file in the project
         ///✅ extreme lag when using the &quot;clear&quot; button
-        ///✅ pasting cells doesn&apos;t mark leaf as unsaved
-        ///✅ sample play button doesn&apos;t revert after playback stops. Stays as &quot;stop&quot; icon
-        ///✅ multi-select delete doesn&apos;t do anythin [rest of string was truncated]&quot;;.
+        ///✅ past [rest of string was truncated]&quot;;.
         /// </summary>
         public static string changelog {
             get {
