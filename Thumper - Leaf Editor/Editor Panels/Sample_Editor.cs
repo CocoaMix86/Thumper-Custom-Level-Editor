@@ -322,9 +322,6 @@ namespace Thumper_Custom_Level_Editor
 		private void OnButtonStopClick(object sender, EventArgs args)
 		{
 			outputDevice?.Stop();
-			btnSampEditorPlaySamp.Click += btnSampEditorPlaySamp_Click;
-			btnSampEditorPlaySamp.Click -= OnButtonStopClick;
-			btnSampEditorPlaySamp.Image = Properties.Resources.icon_play2;
 		}
 		private void OnPlaybackStopped(object sender, StoppedEventArgs args)
 		{
