@@ -41,7 +41,7 @@ namespace Thumper_Custom_Level_Editor
 			if (e.ColumnIndex == 2) {
 				//this check skips master and samp, since you can't reference those
 				if (! new[] { "samp", "master" }.Any(c => workingfolderFiles.Rows[e.RowIndex].Cells[1].Value.ToString().Contains(c))) {
-					string _files = SearchReferences(_load);
+					string _files = SearchReferences(_load, _selectedfilename);
 					MessageBox.Show($"This file is referenced in these files:\n{_files}");
 				}
 				return;
