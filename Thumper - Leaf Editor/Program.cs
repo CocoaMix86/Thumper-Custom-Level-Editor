@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	static class Program
+    static class Program
 	{
 		/// <summary>
 		/// The main entry point for the application.
@@ -32,7 +32,7 @@ namespace Thumper_Custom_Level_Editor
         static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             Assembly thisAssembly = Assembly.GetExecutingAssembly();
-            var name = args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll";
+            var name = args.Name[..args.Name.IndexOf(',')] + ".dll";
             var resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name));
 
             if (resources.Count() > 0) {

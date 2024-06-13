@@ -1,9 +1,8 @@
-﻿using System;
-using System.Data;
+﻿using ControlManager;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ControlManager;
 
 namespace Thumper_Custom_Level_Editor
 {

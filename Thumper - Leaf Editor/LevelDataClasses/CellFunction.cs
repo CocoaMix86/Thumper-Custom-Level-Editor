@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using org.mariuszgromada.math.mxparser;
+﻿using org.mariuszgromada.math.mxparser;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -16,7 +11,7 @@ namespace Thumper_Custom_Level_Editor
         public double Evaluate()
         {
             string func = Substitutions(this.function);
-            Expression exp = new Expression(func);
+            Expression exp = new(func);
             return exp.calculate();
         }
 

@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
-	public class Sequencer_Object
+    public class Sequencer_Object
 	{
 		public string obj_name { get; set; }
 		public string param_path { get; set; }

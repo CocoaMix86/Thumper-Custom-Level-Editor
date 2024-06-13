@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
-using Fmod5Sharp;
+﻿using Fmod5Sharp;
 using Fmod5Sharp.FmodTypes;
 using NAudio.Vorbis;
 using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class FormLeafEditor
+    public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _savesample = true;
@@ -38,7 +37,7 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedsample;
 		string _loadedsampletemp;
 		dynamic samplejson;
-		ObservableCollection<SampleData> _samplelist = new ObservableCollection<SampleData>();
+		ObservableCollection<SampleData> _samplelist = new();
 		#endregion
 
 		#region EventHandlers
@@ -151,18 +150,17 @@ namespace Thumper_Custom_Level_Editor
 		private void SampleopenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savesample && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savesample) {
-				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
-					ofd.Title = "Load a Thumper Sample file";
-					if (ofd.ShowDialog() == DialogResult.OK) {
-						//storing the filename in temp so it doesn't overwrite _loadedsample in case it fails the check in LoadSample()
-						_loadedsampletemp = ofd.FileName;
-						//load json from file into _load. The regex strips any comments from the text.
-						dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-						LoadSample(_load);
-					}
-				}
-			}
+                using var ofd = new OpenFileDialog();
+                ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
+                ofd.Title = "Load a Thumper Sample file";
+                if (ofd.ShowDialog() == DialogResult.OK) {
+                    //storing the filename in temp so it doesn't overwrite _loadedsample in case it fails the check in LoadSample()
+                    _loadedsampletemp = ofd.FileName;
+                    //load json from file into _load. The regex strips any comments from the text.
+                    dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    LoadSample(_load);
+                }
+            }
 		}
 		///SAVE
 		private void SamplesaveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,31 +176,30 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void SamplesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			using (var sfd = new SaveFileDialog()) {
-				//filter .txt only
-				sfd.Filter = "Thumper Sample File (*.txt)|*.txt";
-				sfd.FilterIndex = 1;
-				sfd.InitialDirectory = workingfolder;
-				if (sfd.ShowDialog() == DialogResult.OK) {
-					//separate path and filename
-					string storePath = Path.GetDirectoryName(sfd.FileName);
-					string tempFileName = Path.GetFileName(sfd.FileName);
-					//check if user input "gate_", and deny save if so
-					if (Path.GetFileName(sfd.FileName).Contains("samp_")) {
-						MessageBox.Show("File not saved. Do not include 'samp_' in your file name.", "File not saved");
-						return;
-					}
-					if (File.Exists($@"{storePath}\samp_{tempFileName}")) {
-						MessageBox.Show("That file name exists already.", "File not saved");
-						return;
-					}
-					_loadedsample = $@"{storePath}\samp_{tempFileName}";
-					WriteSample();
-					//after saving new file, refresh the workingfolder
-					btnWorkRefresh.PerformClick();
-				}
-			}
-		}
+            using var sfd = new SaveFileDialog();
+            //filter .txt only
+            sfd.Filter = "Thumper Sample File (*.txt)|*.txt";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = workingfolder;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                //separate path and filename
+                string storePath = Path.GetDirectoryName(sfd.FileName);
+                string tempFileName = Path.GetFileName(sfd.FileName);
+                //check if user input "gate_", and deny save if so
+                if (Path.GetFileName(sfd.FileName).Contains("samp_")) {
+                    MessageBox.Show("File not saved. Do not include 'samp_' in your file name.", "File not saved");
+                    return;
+                }
+                if (File.Exists($@"{storePath}\samp_{tempFileName}")) {
+                    MessageBox.Show("That file name exists already.", "File not saved");
+                    return;
+                }
+                _loadedsample = $@"{storePath}\samp_{tempFileName}";
+                WriteSample();
+                //after saving new file, refresh the workingfolder
+                btnWorkRefresh.PerformClick();
+            }
+        }
 		private void WriteSample()
         {
 			//write contents direct to file without prompting save dialog
@@ -252,7 +249,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void btnSampleAdd_Click(object sender, EventArgs e)
 		{
-			SampleData newsample = new SampleData { 
+			SampleData newsample = new() { 
 				obj_name = "new", volume = 1, pitch = 1, pan = 0, offset = 0, path = "samples/levels/custom/new.wav", channel_group = "sequin.ch"
 			};
 			_samplelist.Add(newsample);
@@ -266,18 +263,17 @@ namespace Thumper_Custom_Level_Editor
 		//Opens an .FSB audio file, hashes the name, and adds it to the loaded SAMP_ file
 		private void FSBtoSamp_Click(object sender, EventArgs e)
 		{
-			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "FSB Audio File (*.fsb)|*.fsb";
-				ofd.Title = "Load a FSB Audio file";
-				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				ofd.Multiselect = true;
-				if (ofd.ShowDialog() == DialogResult.OK) {
-					foreach (string _file in ofd.FileNames)
-						FSBtoSAMP(_file);
-					PlaySound("UIobjectadd");
-				}
-			}
-		}
+            using var ofd = new OpenFileDialog();
+            ofd.Filter = "FSB Audio File (*.fsb)|*.fsb";
+            ofd.Title = "Load a FSB Audio file";
+            ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            ofd.Multiselect = true;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                foreach (string _file in ofd.FileNames)
+                    FSBtoSAMP(_file);
+                PlaySound("UIobjectadd");
+            }
+        }
 
 		private WaveOutEvent outputDevice;
 		private AudioFileReader audioFile;
@@ -318,16 +314,12 @@ namespace Thumper_Custom_Level_Editor
 			btnSampEditorPlaySamp.Click += OnButtonStopClick;
 			outputDevice.Play();
 		}
-		private void OnButtonStopClick(object sender, EventArgs args)
-		{
-			outputDevice?.Stop();
-		}
-		private void OnPlaybackStopped(object sender, StoppedEventArgs args)
+        private void OnButtonStopClick(object sender, EventArgs args) => outputDevice?.Stop();
+        private void OnPlaybackStopped(object sender, StoppedEventArgs args)
 		{
 			outputDevice.Dispose();
 			outputDevice = null;
-			if (audioFile != null)
-				audioFile.Dispose();
+			audioFile?.Dispose();
 			audioFile = null;
 			btnSampEditorPlaySamp.Click += btnSampEditorPlaySamp_Click;
 			btnSampEditorPlaySamp.Click -= OnButtonStopClick;
@@ -426,10 +418,10 @@ namespace Thumper_Custom_Level_Editor
 
 		public JObject SampleBuildSave()
         {
-			JObject _save = new JObject();
-			JArray _items = new JArray();
+			JObject _save = new();
+			JArray _items = new();
 			foreach (SampleData _sample in _samplelist) {
-				JObject _samp = new JObject {
+				JObject _samp = new() {
 					{ "obj_type", "Sample"},
 					{ "obj_name", _sample.obj_name + ".samp" },
 					{ "mode", "kSampleOneOff" },
@@ -477,7 +469,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 
 			//Add new sample entry to the loaded samp_ file
-			SampleData newsample = new SampleData {
+			SampleData newsample = new() {
 				obj_name = $"{_filename}",
 				volume = 1,
 				pitch = 1,

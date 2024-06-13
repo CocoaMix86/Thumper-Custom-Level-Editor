@@ -1,16 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.IO;
-using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class DialogInput : Form
+    public partial class DialogInput : Form
     {
-        public readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
+        public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         private FormLeafEditor mainform { get; set; }
 
         public DialogInput(FormLeafEditor form)
@@ -40,17 +40,17 @@ namespace Thumper_Custom_Level_Editor
         private void combobox_DrawItem(object sender, DrawItemEventArgs e)
         {
             // By using Sender, one method could handle multiple ComboBoxes
-            ComboBox cbx = sender as ComboBox;
-            if (cbx != null) {
+            if (sender is ComboBox cbx) {
                 // Always draw the background
                 e.DrawBackground();
 
                 // Drawing one of the items?
                 if (e.Index >= 0) {
                     // Set the string alignment.  Choices are Center, Near and Far
-                    StringFormat sf = new StringFormat();
-                    sf.LineAlignment = StringAlignment.Center;
-                    sf.Alignment = StringAlignment.Center;
+                    StringFormat sf = new() {
+                        LineAlignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Center
+                    };
 
                     // Set the Brush to ComboBox ForeColor to maintain any ComboBox color settings
                     // Assumes Brush is solid
@@ -85,7 +85,7 @@ namespace Thumper_Custom_Level_Editor
 
         public void CreateCustomLevelFolder(DialogInput input)
         {
-            JObject level_details = new JObject {
+            JObject level_details = new() {
                 { "level_name", input.txtCustomName.Text },
                 { "difficulty", input.txtCustomDiff.Text },
                 { "description", input.txtDesc.Text },
@@ -221,13 +221,13 @@ namespace Thumper_Custom_Level_Editor
             ///
             ///create a default master file and open it
             mainform.workingfolder = workingfolder;
-            if (mainform.workingfolder != workingfolder) {
-                MessageBox.Show("New level folder was created, but not loaded.");
-                return;
-            }
             if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
                 mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
                 mainform.WriteMaster();
+            }
+            if (mainform.workingfolder != workingfolder) {
+                MessageBox.Show("New level folder was created, but not loaded.");
+                return;
             }
             mainform.btnWorkRefresh_Click(null, null);
         }

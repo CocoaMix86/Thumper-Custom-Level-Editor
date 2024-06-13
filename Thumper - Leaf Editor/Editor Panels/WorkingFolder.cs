@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using Newtonsoft.Json;
+using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using Newtonsoft.Json;
 using System.Text.RegularExpressions;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class FormLeafEditor
+    public partial class FormLeafEditor
 	{
 		private void workingfolderFiles_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
@@ -229,10 +229,11 @@ namespace Thumper_Custom_Level_Editor
 			}
 
             //create file renaming dialog and show it
-            FileNameDialog filenamedialog = new FileNameDialog();
-            filenamedialog.StartPosition = FormStartPosition.Manual;
-			filenamedialog.Location = MousePosition;
-			filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
+            FileNameDialog filenamedialog = new() {
+                StartPosition = FormStartPosition.Manual,
+                Location = MousePosition
+            };
+            filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
 
             string newfilename;
             if (filenamedialog.ShowDialog() == DialogResult.Yes) {
@@ -314,7 +315,7 @@ namespace Thumper_Custom_Level_Editor
 			if (workingfolderFiles.SelectedCells.Count < 1)
 				return;
 			//call click method first so the file is loaded before renaming
-			DataGridViewCellMouseEventArgs dgvcme = new DataGridViewCellMouseEventArgs(workingfolderFiles.CurrentCell.ColumnIndex, workingfolderFiles.CurrentCell.RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Right, 0, 0, 0, 0));
+			DataGridViewCellMouseEventArgs dgvcme = new(workingfolderFiles.CurrentCell.ColumnIndex, workingfolderFiles.CurrentCell.RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Right, 0, 0, 0, 0));
 			workingfolderFiles_CellMouseClick(null, dgvcme);
 			//set textbox with name of selected file
 			string oldfilename = workingfolderFiles.SelectedCells[1].Value.ToString();
@@ -327,7 +328,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 
             //setup file name dialog and then show it
-            FileNameDialog filenamedialog = new FileNameDialog(workingfolder, filetype);
+            FileNameDialog filenamedialog = new(workingfolder, filetype);
             filenamedialog.txtWorkingRename.Text = file[1];
 			filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
 			filenamedialog.Location = PointToClient(Cursor.Position);
@@ -397,7 +398,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnExplorer_Click(object sender, EventArgs e)
 		{
-			ProcessStartInfo startInfo = new ProcessStartInfo {
+			ProcessStartInfo startInfo = new() {
 				Arguments = workingfolder,
 				FileName = "explorer.exe"
 			};
@@ -410,14 +411,14 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.KeyData == Keys.Enter) {
 				e.Handled = true;
-				DataGridViewCellMouseEventArgs dgvcme = new DataGridViewCellMouseEventArgs(1, workingfolderFiles.SelectedCells[0].RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
+				DataGridViewCellMouseEventArgs dgvcme = new(1, workingfolderFiles.SelectedCells[0].RowIndex, 0, 0, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
 				workingfolderFiles_CellMouseClick(null, dgvcme);
 			}
 		}
 
 		private void FindInstancesAndRename(string oldname, string newname, string filetype)
         {
-			object? _load;
+			object _load;
 			if (filetype == "leaf") {
 				foreach (string file in Directory.GetFiles(workingfolder, "lvl_*.txt")) {
 					string text = File.ReadAllText(file);

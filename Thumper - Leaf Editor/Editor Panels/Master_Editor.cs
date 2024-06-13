@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class FormLeafEditor
+    public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _savemaster = true;
@@ -32,8 +32,8 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedmaster;
 		string _loadedmastertemp;
 		dynamic masterjson;
-		MasterLvlData clipboardmaster = new MasterLvlData();
-		ObservableCollection<MasterLvlData> _masterlvls = new ObservableCollection<MasterLvlData>();
+		MasterLvlData clipboardmaster = new();
+		ObservableCollection<MasterLvlData> _masterlvls = new();
 		#endregion
 
 		#region EventHandlers
@@ -169,16 +169,11 @@ namespace Thumper_Custom_Level_Editor
 				btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
 				//set lvl save flag to false
 				SaveMaster(false);
-			} catch { }
+			} catch (NullReferenceException) { }
 		}
 		/// DROP-CHECKPOINT LEADER LEVEL Update
 		private void dropMasterLvlLeader_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			try {
-				_masterlvls[masterLvlList.CurrentRow.Index].checkpoint_leader = dropMasterLvlLeader.Text;
-				//set lvl save flag to false
-				SaveMaster(false);
-			} catch { }
 		}
 
 		private void masternewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -196,26 +191,25 @@ namespace Thumper_Custom_Level_Editor
 		private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
-				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
-					ofd.Title = "Load a Thumper Master file";
-					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-					if (ofd.ShowDialog() == DialogResult.OK) {
-						//storing the filename in temp so it doesn't overwrite _loadedmaster in case it fails the check in LoadMaster()
-						_loadedmastertemp = ofd.FileName;
-						//load json from file into _load. The regex strips any comments from the text.
-						dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-						LoadMaster(_load);
-						///load stand-alone master data
-						//I have to do this here instead of in LoadMaster() because the DataSource for the dropdowns doesn't update until that method exits
-						dropMasterSkybox.Text = (string)_load["skybox_name"];
-						dropMasterIntro.Text = (string)_load["intro_lvl_name"];
-						dropMasterCheck.Text = (string)_load["checkpoint_lvl_name"];
-						//set lvl save flag to true.
-						SaveMaster(true);
-					}
-				}
-			}
+                using var ofd = new OpenFileDialog();
+                ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
+                ofd.Title = "Load a Thumper Master file";
+                ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+                if (ofd.ShowDialog() == DialogResult.OK) {
+                    //storing the filename in temp so it doesn't overwrite _loadedmaster in case it fails the check in LoadMaster()
+                    _loadedmastertemp = ofd.FileName;
+                    //load json from file into _load. The regex strips any comments from the text.
+                    dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    LoadMaster(_load);
+                    ///load stand-alone master data
+                    //I have to do this here instead of in LoadMaster() because the DataSource for the dropdowns doesn't update until that method exits
+                    dropMasterSkybox.Text = (string)_load["skybox_name"];
+                    dropMasterIntro.Text = (string)_load["intro_lvl_name"];
+                    dropMasterCheck.Text = (string)_load["checkpoint_lvl_name"];
+                    //set lvl save flag to true.
+                    SaveMaster(true);
+                }
+            }
 		}
 		///SAVE
 		private void mastersaveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -231,21 +225,20 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			using (var sfd = new SaveFileDialog()) {
-				//filter .txt only
-				sfd.Filter = "Thumper Master File (*.txt)|*.txt";
-				sfd.FilterIndex = 1;
-				sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				if (sfd.ShowDialog() == DialogResult.OK) {
-					//separate path and filename
-					string storePath = Path.GetDirectoryName(sfd.FileName);
-					_loadedmaster = $@"{storePath}\master_sequin.txt";
-					WriteMaster();
-					//after saving new file, refresh the workingfolder
-					btnWorkRefresh.PerformClick();
-				}
-			}
-		}
+            using var sfd = new SaveFileDialog();
+            //filter .txt only
+            sfd.Filter = "Thumper Master File (*.txt)|*.txt";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                //separate path and filename
+                string storePath = Path.GetDirectoryName(sfd.FileName);
+                _loadedmaster = $@"{storePath}\master_sequin.txt";
+                WriteMaster();
+                //after saving new file, refresh the workingfolder
+                btnWorkRefresh.PerformClick();
+            }
+        }
 		public void WriteMaster()
 		{
 			//write contents direct to file without prompting save dialog
@@ -269,15 +262,14 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
-			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
-				ofd.Title = "Load a Thumper Lvl/Gate file";
-				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				if (ofd.ShowDialog() == DialogResult.OK) {
-					AddFiletoMaster(ofd.FileName);
-				}
-			}
-		}
+            using var ofd = new OpenFileDialog();
+            ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
+            ofd.Title = "Load a Thumper Lvl/Gate file";
+            ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                AddFiletoMaster(ofd.FileName);
+            }
+        }
 
 		private void AddFiletoMaster(string path)
         {
@@ -532,17 +524,15 @@ namespace Thumper_Custom_Level_Editor
 			int checkpoints = 0;
 			bool isolate_tracks = false;
             ///being build Master JSON object
-            JObject _save = new JObject
-            {
+            JObject _save = new() {
                 { "obj_type", "SequinMaster" },
                 { "obj_name", "sequin.master" },
                 { "skybox_name", dropMasterSkybox.Text },
                 { "intro_lvl_name", dropMasterIntro.Text }
             };
-            JArray groupings = new JArray();
+            JArray groupings = new();
 			foreach (MasterLvlData group in _masterlvls) {
-                JObject s = new JObject
-                {
+                JObject s = new() {
                     { "lvl_name", group.lvlname ?? "" },
                     { "gate_name", group.gatename ?? "" },
                     { "checkpoint", group.checkpoint.ToString() },
@@ -566,19 +556,18 @@ namespace Thumper_Custom_Level_Editor
 			///end build
 			///
 			///begin building Config JSON object
-			JObject _config = new JObject
-            {
+			JObject _config = new() {
                 { "obj_type", "LevelLib" },
                 { "bpm", NUD_ConfigBPM.Value }
             };
             //for each lvl in Master that has checkpoint:True, Config requires a "SECTION_LINEAR"
-            JArray level_sections = new JArray();
+            JArray level_sections = new();
 			for (int x = 0; x < checkpoints; x++)
 				level_sections.Add("SECTION_LINEAR");
 			_config.Add("level_sections", level_sections);
 			//
 			//add rail color
-			JArray rails_color = new JArray {
+			JArray rails_color = new() {
 				Decimal.Round((decimal)btnConfigRailColor.BackColor.R / 255, 3),
 				Decimal.Round((decimal)btnConfigRailColor.BackColor.G / 255, 3),
 				Decimal.Round((decimal)btnConfigRailColor.BackColor.B / 255, 3),
@@ -587,7 +576,7 @@ namespace Thumper_Custom_Level_Editor
 			_config.Add("rails_color", rails_color);
 			//
 			//add rail glow color
-			JArray rails_glow_color = new JArray {
+			JArray rails_glow_color = new() {
 				Decimal.Round((decimal)btnConfigGlowColor.BackColor.R / 255, 3),
 				Decimal.Round((decimal)btnConfigGlowColor.BackColor.G / 255, 3),
 				Decimal.Round((decimal)btnConfigGlowColor.BackColor.B / 255, 3),
@@ -596,7 +585,7 @@ namespace Thumper_Custom_Level_Editor
 			_config.Add("rails_glow_color", rails_glow_color);
 			//
 			//add path color
-			JArray path_color = new JArray {
+			JArray path_color = new() {
 				Decimal.Round((decimal)btnConfigPathColor.BackColor.R / 255, 3),
 				Decimal.Round((decimal)btnConfigPathColor.BackColor.G / 255, 3),
 				Decimal.Round((decimal)btnConfigPathColor.BackColor.B / 255, 3),
@@ -605,7 +594,7 @@ namespace Thumper_Custom_Level_Editor
 			_config.Add("path_color", path_color);
 			//
 			//add joy color
-			JArray joy_color = new JArray(new object[] { 1, 1, 1, 1 });
+			JArray joy_color = new(new object[] { 1, 1, 1, 1 });
 			_config.Add("joy_color", joy_color);
 			//
 			///end build

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class Interpolator : Form
+    public partial class Interpolator : Form
 	{
 		public Interpolator()
 		{

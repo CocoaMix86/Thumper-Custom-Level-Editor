@@ -503,7 +503,6 @@ namespace Thumper_Custom_Level_Editor
             this.Name = "DialogInput";
             this.ShowInTaskbar = false;
             this.Text = "Custom Level Details";
-            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

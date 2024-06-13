@@ -1,15 +1,15 @@
 ﻿using ControlManager;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using System.Diagnostics;
 using System.Windows.Shell;
 
 namespace Thumper_Custom_Level_Editor
@@ -17,7 +17,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class FormLeafEditor : Form
     {
         #region Variables
-        public readonly CommonOpenFileDialog cfd_lvl = new CommonOpenFileDialog() { IsFolderPicker = true, Multiselect = false };
+        public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         public string workingfolder
         {
             get { return _workingfolder; }
@@ -74,10 +74,10 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private string _workingfolder;
-        public List<string> lvlsinworkfolder = new List<string>();
+        public List<string> lvlsinworkfolder = new();
         public string _dgfocus;
         public Point _menuloc;
-        public Random rng = new Random();
+        public Random rng = new();
         public string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
         #endregion
@@ -125,16 +125,18 @@ namespace Thumper_Custom_Level_Editor
             if (Properties.Settings.Default.Recentfiles == null)
                 return;
 
-            JumpList jml = new JumpList();
-            jml.ShowRecentCategory = true;
-            jml.ShowFrequentCategory = true;
+            JumpList jml = new() {
+                ShowRecentCategory = true,
+                ShowFrequentCategory = true
+            };
 
             foreach (string file in Properties.Settings.Default.Recentfiles) {
-                JumpTask jmp = new JumpTask();
-                jmp.Title = Path.GetFileName(file);
-                jmp.Arguments = file;
-                jmp.Description = file;
-                jmp.ApplicationPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+                JumpTask jmp = new() {
+                    Title = Path.GetFileName(file),
+                    Arguments = file,
+                    Description = file,
+                    ApplicationPath = System.Reflection.Assembly.GetEntryAssembly().Location
+                };
                 jml.JumpItems.Add(jmp);
             }
             jml.Apply();
@@ -399,7 +401,7 @@ namespace Thumper_Custom_Level_Editor
         /// NEW CUSTOM LEVEL FOLDER
         private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogInput customlevel = new DialogInput(this);
+            DialogInput customlevel = new(this);
             //show the new level folder dialog box
             customlevel.Show();
         }
@@ -427,7 +429,7 @@ namespace Thumper_Custom_Level_Editor
                 _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt"), "#.*", ""));
             }
             catch { }
-            DialogInput customlevel = new DialogInput(this);
+            DialogInput customlevel = new(this);
             //set the form text fields to whatever is in LEVEL DETAILS
             customlevel.txtCustomPath.Text = Path.GetDirectoryName(workingfolder);
             customlevel.btnCustomSave.Enabled = true;
@@ -468,7 +470,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //Show the CustomWorkspace form. If form OK, then save the settings to app properties
             //then call method to recolor the form elements immediately
-            CustomizeWorkspace custom = new CustomizeWorkspace(_objects);
+            CustomizeWorkspace custom = new(_objects);
             //custom._objects = _objects;
             if (custom.ShowDialog() == DialogResult.OK) {
                 ColorFormElements();
@@ -644,17 +646,17 @@ namespace Thumper_Custom_Level_Editor
         private void combobox_DrawItem(object sender, DrawItemEventArgs e)
         {
             // By using Sender, one method could handle multiple ComboBoxes
-            ComboBox cbx = sender as ComboBox;
-            if (cbx != null) {
+            if (sender is ComboBox cbx) {
                 // Always draw the background
                 e.DrawBackground();
 
                 // Drawing one of the items?
                 if (e.Index >= 0) {
                     // Set the string alignment.  Choices are Center, Near and Far
-                    StringFormat sf = new StringFormat();
-                    sf.LineAlignment = StringAlignment.Center;
-                    sf.Alignment = StringAlignment.Center;
+                    StringFormat sf = new() {
+                        LineAlignment = StringAlignment.Center,
+                        Alignment = StringAlignment.Center
+                    };
 
                     // Set the Brush to ComboBox ForeColor to maintain any ComboBox color settings
                     // Assumes Brush is solid
@@ -672,7 +674,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void openTemplateFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo {
+            ProcessStartInfo startInfo = new() {
                 Arguments = $@"{Path.GetDirectoryName(Application.ExecutablePath)}\templates",
                 FileName = "explorer.exe"
             };

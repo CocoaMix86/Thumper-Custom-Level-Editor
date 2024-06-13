@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using NAudio.Vorbis;
+using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using NAudio.Wave;
-using NAudio.Vorbis;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -39,7 +39,7 @@ namespace Thumper_Custom_Level_Editor
                     //split each line by ';'. Now each property is separated
                     var import3 = import2[y].Split(';');
                     try {
-                        Object_Params objpar = new Object_Params() {
+                        Object_Params objpar = new() {
                             category = import2[0],
                             obj_name = import3[0],
                             param_displayname = import3[1],
@@ -229,7 +229,7 @@ namespace Thumper_Custom_Level_Editor
         /// <summary>
         /// UNDO FUNCTIONS
         /// </summary>
-        ToolStripDropDownMenu undomenu = new ToolStripDropDownMenu() {
+        readonly ToolStripDropDownMenu undomenu = new() {
             BackColor = Color.FromArgb(40, 40, 40),
             ShowCheckMargin = false,
             ShowImageMargin = false,
@@ -241,7 +241,7 @@ namespace Thumper_Custom_Level_Editor
             undomenu.Items.Clear();
 
             foreach (SaveState s in undolist) {
-                ToolStripMenuItem tmsi = new ToolStripMenuItem {
+                ToolStripMenuItem tmsi = new() {
                     Text = s.reason
                 };
                 tmsi.MouseEnter += undoMenu_MouseEnter;

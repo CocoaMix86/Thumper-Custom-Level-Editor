@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class ImageMessageBox : Form
+    public partial class ImageMessageBox : Form
 	{
 		public ImageMessageBox()
 		{

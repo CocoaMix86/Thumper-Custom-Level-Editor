@@ -379,45 +379,25 @@ namespace Multimedia
         // Raises the Disposed event.
         private void OnDisposed(EventArgs e)
         {
-            EventHandler handler = Disposed;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Disposed?.Invoke(this, e);
         }
 
         // Raises the Started event.
         private void OnStarted(EventArgs e)
         {
-            EventHandler handler = Started;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Started?.Invoke(this, e);
         }
 
         // Raises the Stopped event.
         private void OnStopped(EventArgs e)
         {
-            EventHandler handler = Stopped;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Stopped?.Invoke(this, e);
         }
 
         // Raises the Tick event.
         private void OnTick(EventArgs e)
         {
-            EventHandler handler = Tick;
-
-            if(handler != null)
-            {
-                handler(this, e);
-            }
+            Tick?.Invoke(this, e);
         }
 
         #endregion        

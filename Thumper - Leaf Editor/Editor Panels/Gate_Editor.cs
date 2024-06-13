@@ -1,17 +1,17 @@
-﻿using System;
-using System.Drawing;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class FormLeafEditor
+    public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _savegate = true;
@@ -33,7 +33,7 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedgate;
 		string _loadedgatetemp;
 		readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
-		List<BossData> bossdata = new() {
+        readonly List<BossData> bossdata = new() {
 			new BossData() {boss_name = "Level 1 - circle", boss_spn = "boss_gate.spn", boss_ent = "boss_gate_pellet.ent"},
 			new BossData() {boss_name = "Level 1 - crakhed", boss_spn = "crakhed1.spn", boss_ent = "crakhed.ent"},
 			new BossData() {boss_name = "Level 2 - circle", boss_spn = "boss_jump.spn", boss_ent = "boss_gate_pellet.ent"},
@@ -55,12 +55,12 @@ namespace Thumper_Custom_Level_Editor
 			new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"},
 			new BossData() {boss_name = "Level 9 - pyramid",  boss_spn = "pyramidboss.spn", boss_ent = "crakhed.ent"}
 		};
-		List<string> _bucket0 = new List<string>() { "33caad90", "418d18a1", "1e84f4f0", "2e1b70cf" };
-		List<string> _bucket1 = new List<string>() { "41561eda", "347eebcb", "f8192c30", "0c9ddd9e" };
-		List<string> _bucket2 = new List<string>() { "fe617306", "3ee2811c", "d4f56308", "092f1784" };
-		List<string> _bucket3 = new List<string>() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
+		readonly List<string> _bucket0 = new() { "33caad90", "418d18a1", "1e84f4f0", "2e1b70cf" };
+        readonly List<string> _bucket1 = new() { "41561eda", "347eebcb", "f8192c30", "0c9ddd9e" };
+        readonly List<string> _bucket2 = new() { "fe617306", "3ee2811c", "d4f56308", "092f1784" };
+		readonly List<string> _bucket3 = new() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
 		dynamic gatejson;
-		ObservableCollection<GateLvlData> _gatelvls = new ObservableCollection<GateLvlData>();
+        readonly ObservableCollection<GateLvlData> _gatelvls = new();
 		#endregion
 
 		#region EventHandlers
@@ -172,31 +172,30 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void gatesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			using (var sfd = new SaveFileDialog()) {
-				//filter .txt only
-				sfd.Filter = "Thumper Gate File (*.txt)|*.txt";
-				sfd.FilterIndex = 1;
-				sfd.InitialDirectory = workingfolder;
-				if (sfd.ShowDialog() == DialogResult.OK) {
-					//separate path and filename
-					string storePath = Path.GetDirectoryName(sfd.FileName);
-					string tempFileName = Path.GetFileName(sfd.FileName);
-					//check if user input "gate_", and deny save if so
-					if (Path.GetFileName(sfd.FileName).Contains("gate_")) {
-						MessageBox.Show("File not saved. Do not include 'gate_' in your file name.", "File not saved");
-						return;
-					}
-					if (File.Exists($@"{storePath}\gate_{tempFileName}")) {
-						MessageBox.Show("That file name exists already.", "File not saved");
-						return;
-					}
-					_loadedgate = $@"{storePath}\gate_{tempFileName}";
-					WriteGate();
-					//after saving new file, refresh the workingfolder
-					btnWorkRefresh.PerformClick();
-				}
-			}
-		}
+            using var sfd = new SaveFileDialog();
+            //filter .txt only
+            sfd.Filter = "Thumper Gate File (*.txt)|*.txt";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = workingfolder;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                //separate path and filename
+                string storePath = Path.GetDirectoryName(sfd.FileName);
+                string tempFileName = Path.GetFileName(sfd.FileName);
+                //check if user input "gate_", and deny save if so
+                if (Path.GetFileName(sfd.FileName).Contains("gate_")) {
+                    MessageBox.Show("File not saved. Do not include 'gate_' in your file name.", "File not saved");
+                    return;
+                }
+                if (File.Exists($@"{storePath}\gate_{tempFileName}")) {
+                    MessageBox.Show("That file name exists already.", "File not saved");
+                    return;
+                }
+                _loadedgate = $@"{storePath}\gate_{tempFileName}";
+                WriteGate();
+                //after saving new file, refresh the workingfolder
+                btnWorkRefresh.PerformClick();
+            }
+        }
 		private void WriteGate()
 		{
 			//write contents direct to file without prompting save dialog
@@ -252,28 +251,27 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show("Pyramid requires only 5 phases (each lvl is a phase).", "Gate Info");
 				return;
 			}
-			//show file dialog
-			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "Thumper Gate File (*.txt)|lvl_*.txt";
-				ofd.Title = "Load a Thumper Lvl file";
-				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				if (ofd.ShowDialog() == DialogResult.OK) {
-					//parse leaf to JSON
-					dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-					//check if file being loaded is actually a leaf. Can do so by checking the JSON key
-					if ((string)_load["obj_type"] != "SequinLevel") {
-						MessageBox.Show("This does not appear to be a lvl file!", "Lvl load error");
-						return;
-					}
-					//add leaf data to the list
-					_gatelvls.Add(new GateLvlData() {
-						lvlname = (string)_load["obj_name"],
-						sentrytype = "None"
-					});
-					PlaySound("UIobjectadd");
-				}
-			}
-		}
+            //show file dialog
+            using var ofd = new OpenFileDialog();
+            ofd.Filter = "Thumper Gate File (*.txt)|lvl_*.txt";
+            ofd.Title = "Load a Thumper Lvl file";
+            ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                //parse leaf to JSON
+                dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                //check if file being loaded is actually a leaf. Can do so by checking the JSON key
+                if ((string)_load["obj_type"] != "SequinLevel") {
+                    MessageBox.Show("This does not appear to be a lvl file!", "Lvl load error");
+                    return;
+                }
+                //add leaf data to the list
+                _gatelvls.Add(new GateLvlData() {
+                    lvlname = (string)_load["obj_name"],
+                    sentrytype = "None"
+                });
+                PlaySound("UIobjectadd");
+            }
+        }
 
 		private void btnGateLvlUp_Click(object sender, EventArgs e)
 		{
@@ -448,7 +446,7 @@ namespace Thumper_Custom_Level_Editor
 			int bucket3 = 0;
 			_gatename = Regex.Replace(_gatename, "[.].*", ".gate");
 			///being build Master JSON object
-			JObject _save = new JObject {
+			JObject _save = new() {
 				{ "obj_type", "SequinGate" },
 				{ "obj_name", _gatename },
 				{ "spn_name", dropGateBoss.SelectedValue.ToString() },
@@ -460,10 +458,10 @@ namespace Thumper_Custom_Level_Editor
 				{ "random_type", $"LEVEL_RANDOM_{(checkGateRandom.Checked ? "BUCKET" : "NONE")}" }
 			};
 			//setup boss_patterns
-			JArray boss_patterns = new JArray();
+			JArray boss_patterns = new();
 			//int lvlcount = checkGateRandom.Checked ? _gatelvls.Count : _save["spn_name"].ToString().Contains("pyramid") ? 5 : 4;
 			for (int x = 0; x < _gatelvls.Count; x++) {
-				JObject s = new JObject {
+				JObject s = new() {
 					{ "lvl_name", _gatelvls[x].lvlname },
 					{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
 					{ "bucket_num", _gatelvls[x].bucket }

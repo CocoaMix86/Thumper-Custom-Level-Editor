@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Collections.ObjectModel;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class FormLeafEditor
+    public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _savelvl = true;
@@ -40,13 +40,13 @@ namespace Thumper_Custom_Level_Editor
 		public bool loadinglvl = false;
 
 		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
-		List<SampleData> _lvlsamples = new List<SampleData>();
+		List<SampleData> _lvlsamples = new();
 		dynamic lvljson;
 		ObservableCollection<LvlLeafData> _lvlleafs = new();
 
-		LvlLeafData clipboardleaf = new LvlLeafData();
-		List<string> clipboardpaths = new List<string>();
-		List<int> idxtocolor = new List<int>();
+		LvlLeafData clipboardleaf = new();
+		List<string> clipboardpaths = new();
+		List<int> idxtocolor = new();
 		#endregion
 
 		#region EventHandlers
@@ -285,31 +285,30 @@ namespace Thumper_Custom_Level_Editor
 		/// LVL SAVE AS
 		private void lvlsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			using (var sfd = new SaveFileDialog()) {
-				//filter .txt only
-				sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
-				sfd.FilterIndex = 1;
-				sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				if (sfd.ShowDialog() == DialogResult.OK) {
-					//separate path and filename
-					string storePath = Path.GetDirectoryName(sfd.FileName);
-					string tempFileName = Path.GetFileName(sfd.FileName);
-					//check if user input "lvl_", and deny save if so
-					if (Path.GetFileName(sfd.FileName).Contains("lvl_")) {
-						MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
-						return;
-					}
-					if (File.Exists($@"{storePath}\lvl_{tempFileName}")) {
-						MessageBox.Show("That file name exists already.", "File not saved");
-						return;
-					}
-					_loadedlvl = $@"{storePath}\lvl_{tempFileName}";
-					WriteLvl();
-					//after saving new file, refresh the workingfolder
-					btnWorkRefresh.PerformClick();
-				}
-			}
-		}
+            using var sfd = new SaveFileDialog();
+            //filter .txt only
+            sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                //separate path and filename
+                string storePath = Path.GetDirectoryName(sfd.FileName);
+                string tempFileName = Path.GetFileName(sfd.FileName);
+                //check if user input "lvl_", and deny save if so
+                if (Path.GetFileName(sfd.FileName).Contains("lvl_")) {
+                    MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
+                    return;
+                }
+                if (File.Exists($@"{storePath}\lvl_{tempFileName}")) {
+                    MessageBox.Show("That file name exists already.", "File not saved");
+                    return;
+                }
+                _loadedlvl = $@"{storePath}\lvl_{tempFileName}";
+                WriteLvl();
+                //after saving new file, refresh the workingfolder
+                btnWorkRefresh.PerformClick();
+            }
+        }
 		private void WriteLvl()
 		{
 			//serialize JSON object to a string, and write it to the file
@@ -324,19 +323,18 @@ namespace Thumper_Custom_Level_Editor
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
-				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
-					ofd.Title = "Load a Thumper Lvl file";
-					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-					if (ofd.ShowDialog() == DialogResult.OK) {
-						//storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-						_loadedlvltemp = ofd.FileName;
-						//load json from file into _load. The regex strips any comments from the text.
-						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-						LoadLvl(_load);
-					}
-				}
-			}
+                using var ofd = new OpenFileDialog();
+                ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
+                ofd.Title = "Load a Thumper Lvl file";
+                ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+                if (ofd.ShowDialog() == DialogResult.OK) {
+                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
+                    _loadedlvltemp = ofd.FileName;
+                    //load json from file into _load. The regex strips any comments from the text.
+                    var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    LoadLvl(_load);
+                }
+            }
 		}
 		#endregion
 
@@ -358,16 +356,15 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
-			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
-				ofd.Title = "Load a Thumper Leaf file";
-				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				PlaySound("UIfolderopen");
-				if (ofd.ShowDialog() == DialogResult.OK) {
-					AddLeaftoLvl(ofd.FileName);
-				}
-			}
-		}
+            using var ofd = new OpenFileDialog();
+            ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
+            ofd.Title = "Load a Thumper Leaf file";
+            ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            PlaySound("UIfolderopen");
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                AddLeaftoLvl(ofd.FileName);
+            }
+        }
 
 		private void btnLvlLeafUp_Click(object sender, EventArgs e)
 		{
@@ -682,7 +679,7 @@ namespace Thumper_Custom_Level_Editor
 
 			///customize Paths List a bit
 			//custom column containing comboboxes per cell
-			DataGridViewComboBoxColumn _dgvlvlpaths = new DataGridViewComboBoxColumn() {
+			DataGridViewComboBoxColumn _dgvlvlpaths = new() {
 				DataSource = _lvlpaths,
 				HeaderText = "Path Name",
 				AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
@@ -722,7 +719,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			PlaySound("UIobjectadd");
 			//Setup list of tunnels if copy check is enabled
-			List<string> copytunnels = new List<string>();
+			List<string> copytunnels = new();
 			if (chkTunnelCopy.Checked) {
 				copytunnels = new List<string>(_lvlleafs.Last().paths);
 			}
@@ -831,23 +828,21 @@ namespace Thumper_Custom_Level_Editor
 		{
 			_lvlname = Regex.Replace(_lvlname, "[.].*", ".lvl");
             ///start building JSON output
-            JObject _save = new JObject
-            {
+            JObject _save = new() {
                 { "obj_type", "SequinLevel" },
                 { "obj_name", $"{_lvlname}" },
                 { "approach_beats", NUD_lvlApproach.Value }
             };
             //this section adds all colume sequencer controls
-            JArray seq_objs = new JArray();
+            JArray seq_objs = new();
 			foreach (DataGridViewRow seq_obj in lvlSeqObjs.Rows) {
-                JObject s = new JObject
-                {
+                JObject s = new() {
                     { "obj_name", $"{_lvlname}" },
                     { "param_path", $"layer_volume,{seq_obj.Index}" },
                     { "trait_type", "kTraitFloat" }
                 };
 
-                JObject data_points = new JObject();
+                JObject data_points = new();
 				for (int x = 0; x < seq_obj.Cells.Count; x++) {
 					if (!string.IsNullOrEmpty(seq_obj.Cells[x].Value?.ToString()))
 						data_points.Add(x.ToString(), float.Parse(seq_obj.Cells[x].Value.ToString()));
@@ -862,9 +857,9 @@ namespace Thumper_Custom_Level_Editor
 			}
 			_save.Add("seq_objs", seq_objs);
 			//this section adds all leafs
-			JArray leaf_seq = new JArray();
+			JArray leaf_seq = new();
 			foreach (LvlLeafData _leaf in _lvlleafs) {
-				JObject s = new JObject {
+				JObject s = new() {
 					{ "beat_cnt", _leaf.beats },
 					{ "leaf_name", _leaf.leafname },
 					{ "main_path", "default.path" },
@@ -880,11 +875,11 @@ namespace Thumper_Custom_Level_Editor
 			}
 			_save.Add("leaf_seq", leaf_seq);
 			//this section adds the loop tracks
-			JArray loops = new JArray();
+			JArray loops = new();
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
 				if (r.Cells[0].Value == null)
 					continue;
-				JObject s = new JObject {
+				JObject s = new() {
 					{ "samp_name", ((SampleData)r.Cells[0].Value).obj_name + ".samp"},
 					{ "beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()) }
 				};

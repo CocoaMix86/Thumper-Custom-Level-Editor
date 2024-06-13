@@ -160,7 +160,7 @@ namespace ControlManager
         private static void MoveControl(object control1, MouseEventArgs e)
         {
             Control control = control1 as Control;
-            if (control.Parent.Tag == "editorpanel")
+            if ((string)control.Parent.Tag == "editorpanel")
                 control = control.Parent;
 
             if (!_resizing && ! _moving)
@@ -257,9 +257,9 @@ namespace ControlManager
 
         internal static string GetSizeAndPositionOfControlsToString(Control container)
         {
-            List<Control> controls = new List<Control>();
+            List<Control> controls = new();
             GetAllChildControls(container, controls);
-            CultureInfo cultureInfo = new CultureInfo("en");
+            CultureInfo cultureInfo = new("en");
             string info = string.Empty;
             foreach (Control control in controls)
             {
@@ -270,10 +270,10 @@ namespace ControlManager
         }
         internal static void SetSizeAndPositionOfControlsFromString(Control container, string controlsInfoStr)
         {
-            List<Control> controls = new List<Control>();
+            List<Control> controls = new();
             GetAllChildControls(container, controls);
             string[] controlsInfo = controlsInfoStr.Split(new []{"*"},StringSplitOptions.RemoveEmptyEntries );
-            Dictionary<string, string> controlsInfoDictionary = new Dictionary<string, string>();
+            Dictionary<string, string> controlsInfoDictionary = new();
             foreach (string controlInfo in controlsInfo)
             {
                 string[] info = controlInfo.Split(new [] { ":" }, StringSplitOptions.RemoveEmptyEntries);
@@ -281,8 +281,7 @@ namespace ControlManager
             }
             foreach (Control control in controls)
             {
-                string propertiesStr;
-                controlsInfoDictionary.TryGetValue(control.Name, out propertiesStr);
+                controlsInfoDictionary.TryGetValue(control.Name, out string propertiesStr);
                 string[] properties = propertiesStr.Split(new [] { "," }, StringSplitOptions.RemoveEmptyEntries);
                 if (properties.Length == 4)
                 {

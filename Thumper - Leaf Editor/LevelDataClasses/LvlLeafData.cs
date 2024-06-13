@@ -2,7 +2,7 @@
 
 namespace Thumper_Custom_Level_Editor
 {
-	class LvlLeafData
+    class LvlLeafData
 	{
 		public string leafname { get; set; }
 		public int beats { get; set; }

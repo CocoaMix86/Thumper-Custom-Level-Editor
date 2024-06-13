@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Drawing;
-using System.Linq;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
         string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
-        public List<Object_Params> _objects = new List<Object_Params>();
-        private List<Tuple<string, string>> objectcolors = new List<Tuple<string, string>>();
+        public List<Object_Params> _objects = new();
+        private List<Tuple<string, string>> objectcolors = new();
 
         public CustomizeWorkspace(List<Object_Params> thelist)
         {
@@ -47,7 +47,6 @@ namespace Thumper_Custom_Level_Editor
             Button btn = (Button)sender;
             if (colorDialog1.ShowDialog() == DialogResult.OK) {
                 FormLeafEditor.PlaySound("UIcolorapply");
-                Color _c = colorDialog1.Color;
                 btn.BackColor = colorDialog1.Color;
             }
         }
@@ -112,7 +111,7 @@ namespace Thumper_Custom_Level_Editor
 
             //set  Tabcontrol border  
             Graphics g = e.Graphics;
-            Pen p = new Pen(Color.FromArgb(55, 55, 55), 10);
+            Pen p = new(Color.FromArgb(55, 55, 55), 10);
             g.DrawRectangle(p, tabPage1.Bounds);
         }
     }

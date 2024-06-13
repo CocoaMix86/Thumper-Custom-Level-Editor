@@ -1,15 +1,14 @@
-﻿using System;
-using System.IO;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class FormLeafEditor
+    public partial class FormLeafEditor
 	{
 		AccurateTimer mTimer1;
 		List<List<WaveStream>> vorbis;
@@ -56,7 +55,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		public static byte[] ReadFully(Stream input)
 		{
-			using (MemoryStream ms = new MemoryStream()) {
+			using (MemoryStream ms = new()) {
 				input.CopyTo(ms);
 				return ms.ToArray();
 			}

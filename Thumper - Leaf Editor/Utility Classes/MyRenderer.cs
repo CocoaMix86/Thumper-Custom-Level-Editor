@@ -1,5 +1,5 @@
-﻿using System.Windows.Forms;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -40,7 +40,7 @@ namespace Thumper_Custom_Level_Editor
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
             if (e.Item is ToolStripButton btn && btn.CheckOnClick && btn.Checked) {
-                Rectangle bounds = new Rectangle(Point.Empty, e.Item.Size);
+                Rectangle bounds = new(Point.Empty, e.Item.Size);
                 e.Graphics.FillRectangle(Brushes.PaleTurquoise, bounds);
             }
             else base.OnRenderButtonBackground(e);

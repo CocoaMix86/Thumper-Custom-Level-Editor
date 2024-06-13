@@ -1,9 +1,6 @@
-﻿using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
-	class MasterLvlData
+    class MasterLvlData
 	{
 		public string lvlname { get; set; }
 		public string gatename { get; set; }
@@ -31,7 +28,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public MasterLvlData Clone()
 		{
-			MasterLvlData copy = new MasterLvlData(this.lvlname, this.gatename, this.playplus, this.checkpoint, this.isolate, this.checkpoint_leader, this.rest);
+			MasterLvlData copy = new(this.lvlname, this.gatename, this.playplus, this.checkpoint, this.isolate, this.checkpoint_leader, this.rest);
 			return copy;
 		}
 	}

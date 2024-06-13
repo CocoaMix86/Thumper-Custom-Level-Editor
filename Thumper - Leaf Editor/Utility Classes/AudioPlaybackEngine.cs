@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NAudio.Vorbis;
+﻿using NAudio.Vorbis;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -47,7 +47,7 @@ namespace Thumper_Custom_Level_Editor
             outputDevice.Dispose();
         }
 
-        public static readonly AudioPlaybackEngine Instance = new AudioPlaybackEngine(44100, 2);
+        public static readonly AudioPlaybackEngine Instance = new(44100, 2);
     }
 
     public class CachedSound

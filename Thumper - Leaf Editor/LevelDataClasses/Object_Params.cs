@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
-	public class Object_Params
+    public class Object_Params
 	{
 		public string category { get; set; }
 		/*

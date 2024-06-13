@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-	public partial class FormLeafEditor
+    public partial class FormLeafEditor
 	{
 		#region Variables
 		bool _saveleaf = true;
@@ -50,16 +50,16 @@ namespace Thumper_Custom_Level_Editor
 		public bool randomizing = false;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
-		public List<Sequencer_Object> _tracks = new List<Sequencer_Object>();
-		private List<Object_Params> _objects = new List<Object_Params>();
-		private List<Tuple<string, string>> objectcolors = new List<Tuple<string, string>>();
-		public List<string> _tracklane = new List<string>() { ".a01", ".a02", ".ent", ".z01", ".z02" };
-		public List<string> _tracklanefriendly = new List<string>() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
-		public List<Tuple<string, int, int>> _scrollpositions = new List<Tuple<string, int, int>>();
-		public List<Tuple<Sequencer_Object, DataGridViewRow>> clipboardtracks = new List<Tuple<Sequencer_Object, DataGridViewRow>>();
-		public List<CellFunction> _functions = new List<CellFunction>();
+		public List<Sequencer_Object> _tracks = new();
+		private List<Object_Params> _objects = new();
+		private List<Tuple<string, string>> objectcolors = new();
+		public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
+		public List<string> _tracklanefriendly = new() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
+		public List<Tuple<string, int, int>> _scrollpositions = new();
+		public List<Tuple<Sequencer_Object, DataGridViewRow>> clipboardtracks = new();
+		public List<CellFunction> _functions = new();
 		public CellFunction _loadedfunction;
-		public List<SaveState> _undolistleaf = new List<SaveState>();
+		public List<SaveState> _undolistleaf = new();
 		#endregion
 		#region EventHandlers
 		///        ///
@@ -211,7 +211,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			_selecttrack = e.RowIndex;
 			ShowRawTrackData();
-			List<string> _params = new List<string>();
+			List<string> _params = new();
 
 			try {
 				//if track is a multi-lane object, split param_path from lane so both values can be used to update their dropdown boxes
@@ -561,32 +561,31 @@ namespace Thumper_Custom_Level_Editor
 		///LEAF - SAVE AS
 		private void leafsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			using (var sfd = new SaveFileDialog()) {
-				//filter .txt only
-				sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
-				sfd.FilterIndex = 1;
-				sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				if (sfd.ShowDialog() == DialogResult.OK) {
-					//separate path and filename
-					string storePath = Path.GetDirectoryName(sfd.FileName);
-					string tempFileName = Path.GetFileName(sfd.FileName);
-					//check if user input "leaf_", and deny save if so
-					if (Path.GetFileName(sfd.FileName).Contains("leaf_")) {
-						MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");
-						return;
-					}
-					if (File.Exists($@"{storePath}\leaf_{tempFileName}")) {
-						MessageBox.Show("That file name exists already.", "File not saved");
-						return;
-					}
-					_loadedleaf = $@"{storePath}\leaf_{tempFileName}";
-					_loadedleaftemp = $@"{storePath}\leaf_{tempFileName}";
-					WriteLeaf();
-					//after saving new file, refresh the workingfolder
-					btnWorkRefresh.PerformClick();
-				}
-			}
-		}
+            using var sfd = new SaveFileDialog();
+            //filter .txt only
+            sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                //separate path and filename
+                string storePath = Path.GetDirectoryName(sfd.FileName);
+                string tempFileName = Path.GetFileName(sfd.FileName);
+                //check if user input "leaf_", and deny save if so
+                if (Path.GetFileName(sfd.FileName).Contains("leaf_")) {
+                    MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");
+                    return;
+                }
+                if (File.Exists($@"{storePath}\leaf_{tempFileName}")) {
+                    MessageBox.Show("That file name exists already.", "File not saved");
+                    return;
+                }
+                _loadedleaf = $@"{storePath}\leaf_{tempFileName}";
+                _loadedleaftemp = $@"{storePath}\leaf_{tempFileName}";
+                WriteLeaf();
+                //after saving new file, refresh the workingfolder
+                btnWorkRefresh.PerformClick();
+            }
+        }
 		private void WriteLeaf()
 		{
 			//serialize JSON object to a string, and write it to the file
@@ -602,34 +601,32 @@ namespace Thumper_Custom_Level_Editor
 		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
-					ofd.Title = "Load a Thumper Leaf file";
-					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-					if (ofd.ShowDialog() == DialogResult.OK) {
-						_loadedleaftemp = ofd.FileName;
-						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-						LoadLeaf(_load);
-					}
-				}
-			}
+                using var ofd = new OpenFileDialog();
+                ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
+                ofd.Title = "Load a Thumper Leaf file";
+                ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+                if (ofd.ShowDialog() == DialogResult.OK) {
+                    _loadedleaftemp = ofd.FileName;
+                    var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    LoadLeaf(_load);
+                }
+            }
 		}
 		/// LEAF - LOAD TEMPLATE
 		private void leafTemplateToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
-					ofd.Title = "Load a Thumper Leaf file";
-					//set folder to the templates location
-					ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
-					if (ofd.ShowDialog() == DialogResult.OK) {
-						_loadedleaftemp = "template";
-						var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-						LoadLeaf(_load);
-					}
-				}
-			}
+                using var ofd = new OpenFileDialog();
+                ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
+                ofd.Title = "Load a Thumper Leaf file";
+                //set folder to the templates location
+                ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
+                if (ofd.ShowDialog() == DialogResult.OK) {
+                    _loadedleaftemp = "template";
+                    var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    LoadLeaf(_load);
+                }
+            }
 		}
 		///DEFAULT TRACK VALUE CHANGED
 		private void txtDefault_ValueChanged(object sender, EventArgs e)
@@ -742,7 +739,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackUp_Click(object sender, EventArgs e)
 		{
-			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new List<Tuple<Sequencer_Object, DataGridViewRow, int>>();
+			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
 			DataGridView dgv = trackEditor;
 			try {
 				//finds each distinct row across all selected cells
@@ -776,7 +773,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackDown_Click(object sender, EventArgs e)
 		{
-			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new List<Tuple<Sequencer_Object, DataGridViewRow, int>>();
+			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
 			DataGridView dgv = trackEditor;
 			try {
 				//finds each distinct row across all selected cells
@@ -947,36 +944,34 @@ namespace Thumper_Custom_Level_Editor
 			foreach (Sequencer_Object seq in _tracks) {
 				_out += seq.highlight_color.ToString() + '\n';
 			}
-			using (var sfd = new SaveFileDialog()) {
-				sfd.Filter = "Thumper Color Profile (*.color)|*.color";
-				sfd.FilterIndex = 1;
-				sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				if (sfd.ShowDialog() == DialogResult.OK) {
-					//save _out to file with .color extension
-					File.WriteAllText(sfd.FileName, _out);
-				}
-			}
-		}
+            using var sfd = new SaveFileDialog();
+            sfd.Filter = "Thumper Color Profile (*.color)|*.color";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                //save _out to file with .color extension
+                File.WriteAllText(sfd.FileName, _out);
+            }
+        }
 		/// Imports colors from file to the current loaded leaf
 		private void btnTrackColorImport_Click(object sender, EventArgs e)
 		{
-			using (var ofd = new OpenFileDialog()) {
-				ofd.Filter = "Thumper Color Profile (*.color)|*.color";
-				ofd.FilterIndex = 1;
-				ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-				if (ofd.ShowDialog() == DialogResult.OK) {
-					//import all colors in the file to this array
-					var _colors = File.ReadAllLines(ofd.FileName);
-					//then iterate over each track in the editor, applying the colors in the array in order
-					for (int x = 0; x < _tracks.Count; x++) {
-						if (x < _colors.Length)
-							_tracks[x].highlight_color = _colors[x];
-						//call this method to update the colors once the value has been assigned
-						TrackUpdateHighlighting(trackEditor.Rows[x]);
-                    }
+            using var ofd = new OpenFileDialog();
+            ofd.Filter = "Thumper Color Profile (*.color)|*.color";
+            ofd.FilterIndex = 1;
+            ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                //import all colors in the file to this array
+                var _colors = File.ReadAllLines(ofd.FileName);
+                //then iterate over each track in the editor, applying the colors in the array in order
+                for (int x = 0; x < _tracks.Count; x++) {
+                    if (x < _colors.Length)
+                        _tracks[x].highlight_color = _colors[x];
+                    //call this method to update the colors once the value has been assigned
+                    TrackUpdateHighlighting(trackEditor.Rows[x]);
                 }
-			}
-		}
+            }
+        }
 
 		private void btnLEafInterpLinear_Click(object sender, EventArgs e)
 		{
@@ -995,7 +990,7 @@ namespace Thumper_Custom_Level_Editor
 			//temporarily disable this so it doesn't trigger when cells update
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 
-			List<DataGridViewCell> _listcell = new List<DataGridViewCell>() { _cells[0], _cells[1] };
+			List<DataGridViewCell> _listcell = new() { _cells[0], _cells[1] };
 			//if cell with higher column index is in [0], we need to move it to [1].
 			//The order changes depending which cell is selected first
 			if (_cells[0].ColumnIndex > _cells[1].ColumnIndex) {
@@ -1061,7 +1056,7 @@ namespace Thumper_Custom_Level_Editor
 				return;
 
             //create file renaming dialog and show it
-            FileNameDialog filenamedialog = new FileNameDialog {
+            FileNameDialog filenamedialog = new() {
                 StartPosition = FormStartPosition.Manual,
                 Location = MousePosition
             };
@@ -1083,12 +1078,12 @@ namespace Thumper_Custom_Level_Editor
             //build the leaf JSON so we can manipulate it
             var _leafsplitbefore = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
 			//enumerate over each sequencer object and it's values to figure out which ones to keep
-			foreach (JObject seq_obj in _leafsplitbefore["seq_objs"]) {             
+			foreach (JObject seq_obj in _leafsplitbefore["seq_objs"].Cast<JObject>()) {             
 				//data_points contains a list of all data points. By getting Properties() of it,
 				//each point becomes its own index
 				var data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
 				//iterate over each data point. If it's less than the splitindex, add it to a new list
-				JObject newdata = new JObject();
+				JObject newdata = new();
 				foreach (JProperty data_point in data_points) {
 					if (int.Parse(data_point.Name) < splitindex)
 						newdata.Add(data_point.Name, data_point.Value);
@@ -1104,9 +1099,9 @@ namespace Thumper_Custom_Level_Editor
 
 			///repeat all above for after split file
 			var _leafsplitafter = LeafBuildSave(newfilename + ".txt");
-			foreach (JObject seq_obj in _leafsplitafter["seq_objs"]) {
+			foreach (JObject seq_obj in _leafsplitafter["seq_objs"].Cast<JObject>()) {
 				var data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
-				JObject newdata = new JObject();
+				JObject newdata = new();
 				foreach (JProperty data_point in data_points) {
 					if (int.Parse(data_point.Name) >= splitindex)
 						//shift beats back to starting position
@@ -1466,20 +1461,20 @@ namespace Thumper_Custom_Level_Editor
 			dropTrackLane.DataSource = _tracklanefriendly;
 			//each object in the seq_objs[] list becomes a track
 			foreach (var seq_obj in _load["seq_objs"]) {
-				Sequencer_Object _s = new Sequencer_Object() {
-					obj_name = seq_obj["obj_name"],
-					trait_type = seq_obj["trait_type"],
-					data_points = seq_obj["data_points"],
-					step = seq_obj["step"],
-					_default = seq_obj["default"],
-					footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", "")
-				};
-				//if the leaf has definitions for these, add them. If not, set to defaults
-				_s.param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"];
-				_s.highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1;
-				_s.default_interp = ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") ?? "Linear";
-				//if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
-				if (_s.param_path == "play") {
+                Sequencer_Object _s = new() {
+                    obj_name = seq_obj["obj_name"],
+                    trait_type = seq_obj["trait_type"],
+                    data_points = seq_obj["data_points"],
+                    step = seq_obj["step"],
+                    _default = seq_obj["default"],
+                    footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
+                    //if the leaf has definitions for these, add them. If not, set to defaults
+                    param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"],
+                    highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1,
+                    default_interp = ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") ?? "Linear"
+                };
+                //if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
+                if (_s.param_path == "play") {
 					_s.friendly_type = "PLAY SAMPLE";
 					_s.friendly_param = _s.param_path;
 				}
@@ -1604,18 +1599,17 @@ namespace Thumper_Custom_Level_Editor
 		{
 			_leafname = Regex.Replace(_leafname, "[.].*", ".leaf");
             ///start building JSON output
-            JObject _save = new JObject
-            {
+            JObject _save = new() {
                 { "obj_type", "SequinLeaf" },
                 { "obj_name", _leafname }
             };
 			
-            JArray seq_objs = new JArray();
+            JArray seq_objs = new();
 			foreach (Sequencer_Object seq_obj in _tracks) {
 				//skip blank tracks
 				if (seq_obj.friendly_param == null)
 					continue;
-				JObject s = new JObject();
+				JObject s = new();
 				//if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
 				if (seq_obj.obj_name.Contains(".leaf"))
 					seq_obj.obj_name = (string)_save["obj_name"];
@@ -1628,7 +1622,7 @@ namespace Thumper_Custom_Level_Editor
 				s.Add("trait_type", seq_obj.trait_type);
 				s.Add("default_interp", $"kTraitInterp{seq_obj.default_interp}");
 				///start building all data points into an object
-				JObject data_points = new JObject();
+				JObject data_points = new();
 				for (int x = 0; x < trackEditor.ColumnCount; x++) {
 					if (!string.IsNullOrEmpty(trackEditor[x, _tracks.IndexOf(seq_obj)].Value?.ToString()))
 						data_points.Add(x.ToString(), decimal.Parse(trackEditor[x, _tracks.IndexOf(seq_obj)].Value.ToString()));
