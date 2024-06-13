@@ -14,8 +14,8 @@ namespace Thumper_Custom_Level_Editor
         {
             base.OnRenderMenuItemBackground(e);
             if (e.Item.Enabled && e.Item.Selected) {
-                using var pen = new Pen(((MyColors)ColorTable).MenuItemEnabledBorder);
-                var r = new Rectangle(2, 0, e.Item.Width - 4, e.Item.Height - 1);
+                using Pen pen = new Pen(((MyColors)ColorTable).MenuItemEnabledBorder);
+                Rectangle r = new Rectangle(2, 0, e.Item.Width - 4, e.Item.Height - 1);
                 e.Graphics.DrawRectangle(pen, r);
             }
         }

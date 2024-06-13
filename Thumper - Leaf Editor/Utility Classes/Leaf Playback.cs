@@ -180,8 +180,8 @@ namespace Thumper_Custom_Level_Editor
 						if (dgvc.Value != null) {
 							//if the audio file doesn't exist in the temp folder, we need to extract it first
 							if (!File.Exists($@"{_samplename}.ogg") && !File.Exists($@"{_samplename}.wav")) {
-								//using LINQ, I can enumerate over the sample list, locate the obj_name, and then pull out the entire object from that!
-								var _samplocate = _lvlsamples.First(item => item.obj_name == _tracks[dgvr.Index].obj_name.Replace(".samp", ""));
+                                //using LINQ, I can enumerate over the sample list, locate the obj_name, and then pull out the entire object from that!
+                                SampleData _samplocate = _lvlsamples.First(item => item.obj_name == _tracks[dgvr.Index].obj_name.Replace(".samp", ""));
 								PCtoOGG(_samplocate);
 							}
 
@@ -212,7 +212,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void _playbacktimer_Tick()
 		{
-			foreach (var _sample in vorbis[_playbackbeat]) {
+			foreach (WaveStream _sample in vorbis[_playbackbeat]) {
 				//AudioPlaybackEngine.Instance.PlaySound(_sample);
 			}
 			try {

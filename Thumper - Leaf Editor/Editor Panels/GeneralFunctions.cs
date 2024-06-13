@@ -29,15 +29,15 @@ namespace Thumper_Custom_Level_Editor
 
             ///import selectable objects from file and parse them into lists for manipulation
             //splits input at "###". Each section is a collection of param_paths
-            var import = (File.ReadAllText($@"{AppLocation}\templates\track_objects.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
+            List<string> import = (File.ReadAllText($@"{AppLocation}\templates\track_objects.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
             for (int x = 0; x < import.Count; x++) {
                 //split each section into individual lines
-                var import2 = import[x].Split('\n').ToList();
+                List<string> import2 = import[x].Split('\n').ToList();
                 //initialise class so we can add to it
 
                 for (int y = 2; y < import2.Count - 1; y++) {
                     //split each line by ';'. Now each property is separated
-                    var import3 = import2[y].Split(';');
+                    string[] import3 = import2[y].Split(';');
                     try {
                         Object_Params objpar = new() {
                             category = import2[0],
@@ -130,8 +130,8 @@ namespace Thumper_Custom_Level_Editor
             if (Properties.Settings.Default.muteapplication)
                 return;
             Stream stream = new MemoryStream((byte[])Properties.Resources.ResourceManager.GetObject(audiofile));
-            var vorbisStream = new VorbisWaveReader(stream);
-            var waveOut = new WaveOut();
+            VorbisWaveReader vorbisStream = new VorbisWaveReader(stream);
+            WaveOut waveOut = new WaveOut();
             waveOut.Init(vorbisStream);
             waveOut.Volume = 1;
             waveOut.Play();
@@ -178,7 +178,7 @@ namespace Thumper_Custom_Level_Editor
             }
             string[] importcolors = File.Exists($@"{AppLocation}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors.txt") : null;
             foreach (string line in importcolors) {
-                var items = line.Split(';');
+                string[] items = line.Split(';');
                 objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
             }
         }
@@ -255,7 +255,7 @@ namespace Thumper_Custom_Level_Editor
         private void undoMenu_MouseEnter(object sender, EventArgs e)
         {
             backcolor = Color.FromArgb(40, 40, 40);
-            var parent = ((ToolStripMenuItem)sender).Owner;
+            ToolStrip parent = ((ToolStripMenuItem)sender).Owner;
             for (int x = parent.Items.Count - 1; x >= 0; x--) {
                 parent.Items[x].BackColor = backcolor;
                 if (parent.Items[x] == sender)
@@ -319,7 +319,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static string ToTitleCase(this string str)
         {
-            var firstword = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str);
+            string firstword = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str);
             //str = str.Replace(str.Split(' ')[0], firstword);
             return firstword;
         }

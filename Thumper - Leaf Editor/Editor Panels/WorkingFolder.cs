@@ -156,7 +156,7 @@ namespace Thumper_Custom_Level_Editor
 			workingfolderFiles.Rows.Clear();
 			//filter for specific files
 			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") /*|| x.Contains("LEVEL DETAILS")*/ || x.Contains("samp_")))) {
-				var filetype = Path.GetFileName(file).Split('_')[0];
+                string filetype = Path.GetFileName(file).Split('_')[0];
 				//upon loading a level folder, immediately open the MASTER file
 				if (filetype == "master") {
 					if (_loadedmaster != file) {
@@ -193,11 +193,11 @@ namespace Thumper_Custom_Level_Editor
 				if (new[] {"samp", "master" }.Any(c => workingfolderFiles.Rows[e.RowIndex].Cells[1].Value.ToString().Contains(c)))
 					return;
 				e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-				//get dimensions
-				var w = Properties.Resources.icon_zoom.Width;
-				var h = Properties.Resources.icon_zoom.Height;
-				var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-				var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+                //get dimensions
+                int w = Properties.Resources.icon_zoom.Width;
+                int h = Properties.Resources.icon_zoom.Height;
+                int x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                int y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
 				//paint the image
 				e.Graphics.DrawImage(Properties.Resources.icon_zoom, new Rectangle(x, y, w, h));
 				e.Handled = true;

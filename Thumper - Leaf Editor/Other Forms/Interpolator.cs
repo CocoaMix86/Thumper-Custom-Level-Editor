@@ -171,11 +171,11 @@ namespace Thumper_Custom_Level_Editor
 			}
 			string _in = txtOffset_In.Text;
 			string _out = "";
-			var _split = _in.Split(',');
+            string[] _split = _in.Split(',');
 
 			foreach (string _s in _split) {
 				try {
-					var _v = _s.Split(':');
+                    string[] _v = _s.Split(':');
 					_v[0] = (int.Parse(_v[0]) + _offset).ToString();
 					_out += _v[0] + ':' + _v[1] + ',';
 				}

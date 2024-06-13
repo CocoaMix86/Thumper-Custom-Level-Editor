@@ -82,7 +82,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void trackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
-			var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
+            int match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
 			if (match != -1)
 				_scrollpositions[match] = new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex);
 			else
@@ -297,7 +297,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
-				var _val = trackEditor[e.ColumnIndex, e.RowIndex].Value;
+                object _val = trackEditor[e.ColumnIndex, e.RowIndex].Value;
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					//if cell does not have the value, set it
@@ -561,7 +561,7 @@ namespace Thumper_Custom_Level_Editor
 		///LEAF - SAVE AS
 		private void leafsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            using var sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new SaveFileDialog();
             //filter .txt only
             sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -588,8 +588,8 @@ namespace Thumper_Custom_Level_Editor
         }
 		private void WriteLeaf()
 		{
-			//serialize JSON object to a string, and write it to the file
-			var _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
+            //serialize JSON object to a string, and write it to the file
+            JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
 			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveLeaf(true, "Saved", "", true);
 			lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
@@ -601,13 +601,13 @@ namespace Thumper_Custom_Level_Editor
 		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-                using var ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
                 ofd.Title = "Load a Thumper Leaf file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     _loadedleaftemp = ofd.FileName;
-                    var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    object _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
                     LoadLeaf(_load);
                 }
             }
@@ -616,14 +616,14 @@ namespace Thumper_Custom_Level_Editor
 		private void leafTemplateToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-                using var ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
                 ofd.Title = "Load a Thumper Leaf file";
                 //set folder to the templates location
                 ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     _loadedleaftemp = "template";
-                    var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    object _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
                     LoadLeaf(_load);
                 }
             }
@@ -673,9 +673,9 @@ namespace Thumper_Custom_Level_Editor
 		{
 			bool _empty = true;
 			string data = $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}";
-			var selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-			//iterate over current row to see if any cells have data
-			var filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
+            List<DataGridViewRow> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+            //iterate over current row to see if any cells have data
+            List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
 			if (filledcells.Count > 0)
 				_empty = false;
 			//if row is not empty, show confirmation box. Otherwise just delete the row
@@ -742,8 +742,8 @@ namespace Thumper_Custom_Level_Editor
 			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
 			DataGridView dgv = trackEditor;
 			try {
-				//finds each distinct row across all selected cells
-				var selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+                //finds each distinct row across all selected cells
+                List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row.Index.CompareTo(row2.Index));
 				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => new { cell.ColumnIndex, cell.RowIndex }).ToList();
 				foreach (DataGridViewRow dgvr in selectedrows) {
@@ -776,8 +776,8 @@ namespace Thumper_Custom_Level_Editor
 			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
 			DataGridView dgv = trackEditor;
 			try {
-				//finds each distinct row across all selected cells
-				var selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+                //finds each distinct row across all selected cells
+                List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
 				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => new { cell.ColumnIndex, cell.RowIndex }).ToList();
 				foreach (DataGridViewRow dgvr in selectedrows) {
@@ -810,7 +810,7 @@ namespace Thumper_Custom_Level_Editor
 			DataGridView dgv = trackEditor;
 			clipboardtracks.Clear();
 			try {
-				var selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+                List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
 				foreach (DataGridViewRow dgvr in selectedrows) {
 					clipboardtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow>(_tracks[dgvr.Index], CloneRow(dgvr, dgvr.Cells.Count)));
@@ -857,10 +857,10 @@ namespace Thumper_Custom_Level_Editor
 		private void btnTrackClear_Click(object sender, EventArgs e)
 		{
 			bool _empty = true;
-			//finds each distinct row across all selected cells
-			var selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-			//iterate over current row to see if any cells have data
-			var filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
+            //finds each distinct row across all selected cells
+            List<DataGridViewRow> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+            //iterate over current row to see if any cells have data
+            List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
 			if (filledcells.Count > 0)
 				_empty = false;
 			//if YES, clear cell values in row and clear highlighting
@@ -879,7 +879,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackApply_Click(object sender, EventArgs e)
 		{
-			var objmatch = _objects.Where(obj => obj.category == dropObjects.Text && obj.param_displayname == dropParamPath.Text).First();
+            Object_Params objmatch = _objects.Where(obj => obj.category == dropObjects.Text && obj.param_displayname == dropParamPath.Text).First();
 			//fill object properties on the form
 			txtDefault.Text = objmatch.def;
 			dropLeafStep.Text = objmatch.step;
@@ -925,7 +925,7 @@ namespace Thumper_Custom_Level_Editor
 			PlaySound("UIcoloropen");
 			DialogResult result = colorDialog1.ShowDialog();
 			if (result == DialogResult.OK) {
-				var selectedcolor = colorDialog1.Color;
+                Color selectedcolor = colorDialog1.Color;
 				btnTrackColorDialog.BackColor = selectedcolor;
 				trackEditor.CurrentRow.HeaderCell.Style.BackColor = Blend(selectedcolor, Color.Black, 0.4);
 					_tracks[_selecttrack].highlight_color = selectedcolor.ToArgb().ToString();
@@ -944,7 +944,7 @@ namespace Thumper_Custom_Level_Editor
 			foreach (Sequencer_Object seq in _tracks) {
 				_out += seq.highlight_color.ToString() + '\n';
 			}
-            using var sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Thumper Color Profile (*.color)|*.color";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -956,13 +956,13 @@ namespace Thumper_Custom_Level_Editor
 		/// Imports colors from file to the current loaded leaf
 		private void btnTrackColorImport_Click(object sender, EventArgs e)
 		{
-            using var ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Thumper Color Profile (*.color)|*.color";
             ofd.FilterIndex = 1;
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 //import all colors in the file to this array
-                var _colors = File.ReadAllLines(ofd.FileName);
+                string[] _colors = File.ReadAllLines(ofd.FileName);
                 //then iterate over each track in the editor, applying the colors in the array in order
                 for (int x = 0; x < _tracks.Count; x++) {
                     if (x < _colors.Length)
@@ -975,7 +975,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLEafInterpLinear_Click(object sender, EventArgs e)
 		{
-			var _cells = trackEditor.SelectedCells;
+            DataGridViewSelectedCellCollection _cells = trackEditor.SelectedCells;
 			//interpolation requires 2 cells only
 			if (_cells.Count != 2) {
 				MessageBox.Show("Interpolation works with only 2 cells selected", "Interpolation error");
@@ -1076,12 +1076,12 @@ namespace Thumper_Custom_Level_Editor
 
             ///SPLIT THAT LEAF
             //build the leaf JSON so we can manipulate it
-            var _leafsplitbefore = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
+            JObject _leafsplitbefore = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
 			//enumerate over each sequencer object and it's values to figure out which ones to keep
-			foreach (JObject seq_obj in _leafsplitbefore["seq_objs"].Cast<JObject>()) {             
-				//data_points contains a list of all data points. By getting Properties() of it,
-				//each point becomes its own index
-				var data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
+			foreach (JObject seq_obj in _leafsplitbefore["seq_objs"].Cast<JObject>()) {
+                //data_points contains a list of all data points. By getting Properties() of it,
+                //each point becomes its own index
+                List<JProperty> data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
 				//iterate over each data point. If it's less than the splitindex, add it to a new list
 				JObject newdata = new();
 				foreach (JProperty data_point in data_points) {
@@ -1097,10 +1097,10 @@ namespace Thumper_Custom_Level_Editor
 			//write data back to file
 			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_leafsplitbefore, Formatting.Indented));
 
-			///repeat all above for after split file
-			var _leafsplitafter = LeafBuildSave(newfilename + ".txt");
+            ///repeat all above for after split file
+            JObject _leafsplitafter = LeafBuildSave(newfilename + ".txt");
 			foreach (JObject seq_obj in _leafsplitafter["seq_objs"].Cast<JObject>()) {
-				var data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
+                List<JProperty> data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
 				JObject newdata = new();
 				foreach (JProperty data_point in data_points) {
 					if (int.Parse(data_point.Name) >= splitindex)
@@ -1225,7 +1225,7 @@ namespace Thumper_Custom_Level_Editor
 				_loadedfunction.function = txtFunction.Text;
             }
 			else {
-				var newfunc = new CellFunction() {
+                CellFunction newfunc = new CellFunction() {
 					function = txtFunction.Text,
 					rowindex = trackEditor.CurrentCell.RowIndex,
 					columnindex = trackEditor.CurrentCell.ColumnIndex
@@ -1320,9 +1320,9 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (_tracks.Count == 0)
 				return;
-			//_rawdata contains a list of all data points. By getting Properties() of it,
-			//each point becomes its own index
-			var data_points = _rawdata.Properties().ToList();
+            //_rawdata contains a list of all data points. By getting Properties() of it,
+            //each point becomes its own index
+            List<JProperty> data_points = _rawdata.Properties().ToList();
 			//check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
 			//Ask the user if they want to expand the leaf to accomadate the data point
 			if (data_points.Count > 0 && int.Parse(((JProperty)data_points.Last()).Name) >= r.Cells.Count) {
@@ -1452,7 +1452,7 @@ namespace Thumper_Custom_Level_Editor
 			//set beat_cnt and time_sig
 			int _leaflength = (int?)_load["beat_cnt"] ?? 1;
 			numericUpDown_LeafLength.Value = _leaflength > 0 ? _leaflength : 1;
-			var _time_sig = (string)_load["time_sig"] ?? "4/4";
+            string _time_sig = (string)_load["time_sig"] ?? "4/4";
 			if (!dropTimeSig.Items.Contains(_time_sig)) {
 				dropTimeSig.Items.Add(_time_sig);
 			}
@@ -1460,7 +1460,7 @@ namespace Thumper_Custom_Level_Editor
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
 			dropTrackLane.DataSource = _tracklanefriendly;
 			//each object in the seq_objs[] list becomes a track
-			foreach (var seq_obj in _load["seq_objs"]) {
+			foreach (dynamic seq_obj in _load["seq_objs"]) {
                 Sequencer_Object _s = new() {
                     obj_name = seq_obj["obj_name"],
                     trait_type = seq_obj["trait_type"],
@@ -1481,8 +1481,8 @@ namespace Thumper_Custom_Level_Editor
 				//otherwise, search _objects for the friendly names for display purposes
 				else {
 					try {
-						var reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
-						var objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
+                        string reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
+                        Object_Params objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
 						_s.friendly_param = objmatch.param_displayname;
 						_s.friendly_type = objmatch.category;
 					} catch (Exception) {
@@ -1548,7 +1548,7 @@ namespace Thumper_Custom_Level_Editor
 			try {
 				trackEditor.FirstDisplayedScrollingRowIndex = 0;
 				trackEditor.FirstDisplayedScrollingColumnIndex = 0;
-				var match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
+                int match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
 				if (match != -1) {
 					trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
 					trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;

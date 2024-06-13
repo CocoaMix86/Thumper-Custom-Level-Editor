@@ -145,7 +145,7 @@ namespace Thumper_Custom_Level_Editor
 		private void gateopenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savegate && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
-                using var ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
                 ofd.Title = "Load a Thumper Gate file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -172,7 +172,7 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void gatesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            using var sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new SaveFileDialog();
             //filter .txt only
             sfd.Filter = "Thumper Gate File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -198,8 +198,8 @@ namespace Thumper_Custom_Level_Editor
         }
 		private void WriteGate()
 		{
-			//write contents direct to file without prompting save dialog
-			var _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
+            //write contents direct to file without prompting save dialog
+            JObject _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
 			File.WriteAllText(_loadedgate, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveGate(true, true);
 			lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
@@ -252,7 +252,7 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
             //show file dialog
-            using var ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Thumper Gate File (*.txt)|lvl_*.txt";
             ofd.Title = "Load a Thumper Lvl file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -280,8 +280,8 @@ namespace Thumper_Custom_Level_Editor
 				int rowIndex = gateLvlList.CurrentRow.Index;
 				if (rowIndex == 0)
 					return;
-				//move leaf in list
-				var selectedLvl = _gatelvls[rowIndex];
+                //move leaf in list
+                GateLvlData selectedLvl = _gatelvls[rowIndex];
 				_gatelvls.Remove(selectedLvl);
 				_gatelvls.Insert(rowIndex - 1, selectedLvl);
 				//move selected cell up a row to follow the moved item
@@ -299,8 +299,8 @@ namespace Thumper_Custom_Level_Editor
 				int rowIndex = gateLvlList.CurrentRow.Index;
 				if (rowIndex == _gatelvls.Count - 1)
 					return;
-				//move lvl in list
-				var selectedLvl = _gatelvls[rowIndex];
+                //move lvl in list
+                GateLvlData selectedLvl = _gatelvls[rowIndex];
 				_gatelvls.Remove(selectedLvl);
 				_gatelvls.Insert(rowIndex + 1, selectedLvl);
 				//move selected cell up a row to follow the moved item
@@ -318,8 +318,8 @@ namespace Thumper_Custom_Level_Editor
 			lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
 			lvlsinworkfolder.Add("");
 			lvlsinworkfolder.Sort();
-			///add lvl list as datasources to dropdowns
-			var _select = dropGatePre.SelectedItem;
+            ///add lvl list as datasources to dropdowns
+            object _select = dropGatePre.SelectedItem;
 			dropGatePre.DataSource = lvlsinworkfolder.ToList();
 			dropGatePre.SelectedItem = _select;
 

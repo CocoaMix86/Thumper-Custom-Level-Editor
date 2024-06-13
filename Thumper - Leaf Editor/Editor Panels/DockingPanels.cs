@@ -72,14 +72,14 @@ namespace Thumper_Custom_Level_Editor
         {
             ToolStripButton lbl = (ToolStripButton)sender;
             //get parent panel where lbl was clicked
-            var parent = lbl.Owner.Parent;
+            Control parent = lbl.Owner.Parent;
             UndockPanel(parent, true);
         }
         private void lblPopin_Click(object sender, EventArgs e)
         {
             ToolStripButton lbl = (ToolStripButton)sender;
             //get parent panel where lbl was clicked
-            var parent = lbl.Owner.Parent;
+            Control parent = lbl.Owner.Parent;
             //re-add panel to a splitter panel so it is now docked.
             //check all 6 and add to the earliest one
             //also set what dock the panel is in, so it is remembered on restart
@@ -121,7 +121,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Control parentdock = null;
             ToolStripItem item = (sender as ToolStripItem);
-            var text = item.Text;
+            string text = item.Text;
             //this block finds what button called the contextmenu, and gets its parent
             //will use the parent to then dock the selected panel
             if (item != null) {
@@ -179,7 +179,7 @@ namespace Thumper_Custom_Level_Editor
             dock.ContextMenuStrip = null;
             panel.Dock = DockStyle.Fill;
             //locate the dock button in the panel
-            var dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
+            ToolStripButton dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
             //then change its click event and tooltip
             dockbtn.Click -= lblPopin_Click;
             dockbtn.Click += lblPopout_Click;
@@ -214,14 +214,14 @@ namespace Thumper_Custom_Level_Editor
             if (panel.Parent.GetType() != typeof(SplitterPanel))
                 return;
 
-            var dock = panel.Parent;
+            Control dock = panel.Parent;
             dock.ContextMenuStrip = contextMenuDock;
             panel.Dock = DockStyle.None;
             this.Controls.Add(panel);
             panel.Size = new Size(dock.Width, dock.Height);
             panel.Location = new Point(this.PointToClient(Cursor.Position).X - 10, this.PointToClient(Cursor.Position).Y - 10);
             //locate the dock button in the panel
-            var dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
+            ToolStripButton dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
             //then change its click event and tooltip
             dockbtn.Click += lblPopin_Click;
             dockbtn.Click -= lblPopout_Click;
@@ -258,7 +258,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void SetDockLocations()
         {
-            var settings = Properties.Settings.Default;
+            Properties.Settings settings = Properties.Settings.Default;
             if (settings.firstrun) {
                 resetDocksStripMenuItem_Click(null, null);
                 return;

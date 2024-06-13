@@ -113,8 +113,8 @@ namespace Thumper_Custom_Level_Editor
 			DataGridViewCell dgvc = sender as DataGridViewCell;
 			try { //try is here because this gets triggered upon app load, when there's no data
 				if (e.ColumnIndex == 0) {
-					//search _lvlsamples for the value in the cell. Cell value is a string, so we need to apply the SampleData object instead
-					var _samplocate = _lvlsamples.First(item => item.obj_name == ((string)lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value));
+                    //search _lvlsamples for the value in the cell. Cell value is a string, so we need to apply the SampleData object instead
+                    SampleData _samplocate = _lvlsamples.First(item => item.obj_name == ((string)lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value));
 					lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value = _samplocate;
 				}
 			} catch { }
@@ -140,7 +140,7 @@ namespace Thumper_Custom_Level_Editor
 		private void lvlSeqObjs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			try {
-				var _cell = lvlSeqObjs[e.ColumnIndex, e.RowIndex];
+                DataGridViewCell _cell = lvlSeqObjs[e.ColumnIndex, e.RowIndex];
 				if (!string.IsNullOrEmpty(_cell?.Value?.ToString()))
 					_cell.Style.BackColor = Color.Purple;
 				else if (_cell != null)
@@ -285,7 +285,7 @@ namespace Thumper_Custom_Level_Editor
 		/// LVL SAVE AS
 		private void lvlsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            using var sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new SaveFileDialog();
             //filter .txt only
             sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -311,8 +311,8 @@ namespace Thumper_Custom_Level_Editor
         }
 		private void WriteLvl()
 		{
-			//serialize JSON object to a string, and write it to the file
-			var _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
+            //serialize JSON object to a string, and write it to the file
+            JObject _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
 			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveLvl(true, true);
 			lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
@@ -323,7 +323,7 @@ namespace Thumper_Custom_Level_Editor
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
-                using var ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
                 ofd.Title = "Load a Thumper Lvl file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -331,7 +331,7 @@ namespace Thumper_Custom_Level_Editor
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
                     _loadedlvltemp = ofd.FileName;
                     //load json from file into _load. The regex strips any comments from the text.
-                    var _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    object _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
                     LoadLvl(_load);
                 }
             }
@@ -356,7 +356,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
-            using var ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
             ofd.Title = "Load a Thumper Leaf file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -373,8 +373,8 @@ namespace Thumper_Custom_Level_Editor
 				int rowIndex = lvlLeafList.CurrentRow.Index;
 				if (rowIndex == 0)
 					return;
-				//move leaf in list
-				var selectedLeaf = _lvlleafs[rowIndex];
+                //move leaf in list
+                LvlLeafData selectedLeaf = _lvlleafs[rowIndex];
 				_lvlleafs.Remove(selectedLeaf);
 				//move selected cell up a row to follow the moved item
 				_lvlleafs.Insert(rowIndex - 1, selectedLeaf);
@@ -390,8 +390,8 @@ namespace Thumper_Custom_Level_Editor
 				int rowIndex = lvlLeafList.CurrentRow.Index;
 				if (rowIndex == _lvlleafs.Count - 1)
 					return;
-				//move leaf in list
-				var selectedLeaf = _lvlleafs[rowIndex];
+                //move leaf in list
+                LvlLeafData selectedLeaf = _lvlleafs[rowIndex];
 				_lvlleafs.Remove(selectedLeaf);
 				//move selected cell up a row to follow the moved item
 				_lvlleafs.Insert(rowIndex + 1, selectedLeaf);
@@ -640,7 +640,7 @@ namespace Thumper_Custom_Level_Editor
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = null;
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			foreach (dynamic samp in _load["loops"]) {
-				var _samplocate = _lvlsamples.First(item => item.obj_name == ((string)samp["samp_name"]).Replace(".samp", ""));
+                SampleData _samplocate = _lvlsamples.First(item => item.obj_name == ((string)samp["samp_name"]).Replace(".samp", ""));
 				lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
 			}
 			btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
@@ -763,8 +763,8 @@ namespace Thumper_Custom_Level_Editor
 			if (workingfolder == null)
 				return;
 			_lvlsamples.Clear();
-			//find all samp_ files in the level folder
-			var _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt");
+            //find all samp_ files in the level folder
+            string[] _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt");
 			//iterate over each file
 			foreach (string f in _sampfiles) {
 				//parse file to JSON
@@ -809,9 +809,9 @@ namespace Thumper_Custom_Level_Editor
 		///Import raw text from rich text box to selected row
 		public void LvlTrackRawImport(DataGridViewRow r, JObject _rawdata)
 		{
-			//_rawdata contains a list of all data points. By getting Properties() of it,
-			//each point becomes its own index
-			var data_points = _rawdata.Properties().ToList();
+            //_rawdata contains a list of all data points. By getting Properties() of it,
+            //each point becomes its own index
+            List<JProperty> data_points = _rawdata.Properties().ToList();
 			//set highlighting color
 			Color _color = Color.Purple;
 			//iterate over each data point, and fill cells

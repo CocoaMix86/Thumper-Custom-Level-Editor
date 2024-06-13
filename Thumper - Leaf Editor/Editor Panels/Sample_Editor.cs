@@ -150,7 +150,7 @@ namespace Thumper_Custom_Level_Editor
 		private void SampleopenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savesample && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savesample) {
-                using var ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
                 ofd.Title = "Load a Thumper Sample file";
                 if (ofd.ShowDialog() == DialogResult.OK) {
@@ -176,7 +176,7 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void SamplesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using var sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new SaveFileDialog();
             //filter .txt only
             sfd.Filter = "Thumper Sample File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -202,8 +202,8 @@ namespace Thumper_Custom_Level_Editor
         }
 		private void WriteSample()
         {
-			//write contents direct to file without prompting save dialog
-			var _save = SampleBuildSave();
+            //write contents direct to file without prompting save dialog
+            JObject _save = SampleBuildSave();
 			File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveSample(true, true);
 			lblSampleEditor.Text = $"Sample Editor - {Path.GetFileNameWithoutExtension(_loadedsample)}";
@@ -263,7 +263,7 @@ namespace Thumper_Custom_Level_Editor
 		//Opens an .FSB audio file, hashes the name, and adds it to the loaded SAMP_ file
 		private void FSBtoSamp_Click(object sender, EventArgs e)
 		{
-            using var ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "FSB Audio File (*.fsb)|*.fsb";
             ofd.Title = "Load a FSB Audio file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -279,11 +279,11 @@ namespace Thumper_Custom_Level_Editor
 		private AudioFileReader audioFile;
 		private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
 		{
-			var _samp = _samplelist[sampleList.CurrentRow.Index];
+            SampleData _samp = _samplelist[sampleList.CurrentRow.Index];
 			string _filetype = "";
 			//check if sample exists in temp folder. If not, create it
 			if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
-				var _result = PCtoOGG(_samp);
+                string _result = PCtoOGG(_samp);
 				if (_result == null)
 					return;
 			}
@@ -300,7 +300,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			if (audioFile == null) {
 				if (_filetype == "ogg") {
-					var vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
+                    VorbisWaveReader vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
 					outputDevice.Init(vorbis);
 				}
 				else {
@@ -543,7 +543,7 @@ namespace Thumper_Custom_Level_Editor
 			// credit to https://github.com/SamboyCoding/Fmod5Sharp
 			FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
 			List<FmodSample> samples = bank.Samples;
-			samples[0].RebuildAsStandardFileFormat(out var dataBytes, out var fileExtension);
+			samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
 
 			File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
 			return fileExtension;

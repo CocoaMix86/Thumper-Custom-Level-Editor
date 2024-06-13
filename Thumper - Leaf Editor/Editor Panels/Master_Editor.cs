@@ -191,7 +191,7 @@ namespace Thumper_Custom_Level_Editor
 		private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
-                using var ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
                 ofd.Title = "Load a Thumper Master file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -225,7 +225,7 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            using var sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new SaveFileDialog();
             //filter .txt only
             sfd.Filter = "Thumper Master File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -241,8 +241,8 @@ namespace Thumper_Custom_Level_Editor
         }
 		public void WriteMaster()
 		{
-			//write contents direct to file without prompting save dialog
-			var _save = MasterBuildSave();
+            //write contents direct to file without prompting save dialog
+            JObject _save = MasterBuildSave();
 			File.WriteAllText(_loadedmaster, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveMaster(true, true);
 			lblMasterName.Text = $"Master Editor - sequin.master";
@@ -262,7 +262,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
-            using var ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
             ofd.Title = "Load a Thumper Lvl/Gate file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -311,8 +311,8 @@ namespace Thumper_Custom_Level_Editor
 				int rowIndex = masterLvlList.CurrentRow.Index;
 				if (rowIndex == 0)
 					return;
-				//move lvl in list
-				var selectedLvl = _masterlvls[rowIndex];
+                //move lvl in list
+                MasterLvlData selectedLvl = _masterlvls[rowIndex];
 				_masterlvls.Remove(selectedLvl);
 				_masterlvls.Insert(rowIndex - 1, selectedLvl);
 				//move selected cell up a row to follow the moved item
@@ -328,8 +328,8 @@ namespace Thumper_Custom_Level_Editor
 				int rowIndex = masterLvlList.CurrentRow.Index;
 				if (rowIndex == _masterlvls.Count - 1)
 					return;
-				//move lvl in list
-				var selectedLvl = _masterlvls[rowIndex];
+                //move lvl in list
+                MasterLvlData selectedLvl = _masterlvls[rowIndex];
 				_masterlvls.Remove(selectedLvl);
 				_masterlvls.Insert(rowIndex + 1, selectedLvl);
 				//move selected cell up a row to follow the moved item
@@ -370,8 +370,8 @@ namespace Thumper_Custom_Level_Editor
 			lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
 			lvlsinworkfolder.Add("<none>");
 			lvlsinworkfolder.Sort();
-			///add lvl list as datasources to dropdowns
-			var _select = dropMasterCheck.SelectedItem;
+            ///add lvl list as datasources to dropdowns
+            object _select = dropMasterCheck.SelectedItem;
 			dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
 			dropMasterCheck.SelectedItem = _select;
 
@@ -458,7 +458,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public void LoadConfig()
 		{
-			var _configfile = Directory.GetFiles(workingfolder, "config_*.txt").ToList();
+            System.Collections.Generic.List<string> _configfile = Directory.GetFiles(workingfolder, "config_*.txt").ToList();
 			if (_configfile.Count > 0) {
 				dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_configfile[0]), "#.*", ""));
 				NUD_ConfigBPM.Value = (int)_load["bpm"];
@@ -596,11 +596,11 @@ namespace Thumper_Custom_Level_Editor
 			//add joy color
 			JArray joy_color = new(new object[] { 1, 1, 1, 1 });
 			_config.Add("joy_color", joy_color);
-			//
-			///end build
-			
-			///Delete extra config_ files in the folder, then write Config to file
-			var _files = Directory.GetFiles(workingfolder, "config_*.txt");
+            //
+            ///end build
+
+            ///Delete extra config_ files in the folder, then write Config to file
+            string[] _files = Directory.GetFiles(workingfolder, "config_*.txt");
 			foreach (string s in _files)
 				File.Delete(s);
 			File.WriteAllText($@"{workingfolder}\config_{Path.GetFileName(workingfolder)}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));

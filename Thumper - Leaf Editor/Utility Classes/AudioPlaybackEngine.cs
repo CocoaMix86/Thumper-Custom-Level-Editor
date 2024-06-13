@@ -28,7 +28,7 @@ namespace Thumper_Custom_Level_Editor
 
         public void PlaySound(string fileName)
         {
-            var input = new VorbisWaveReader(fileName);
+            VorbisWaveReader input = new VorbisWaveReader(fileName);
             AddMixerInput(input);
         }
 
@@ -57,11 +57,11 @@ namespace Thumper_Custom_Level_Editor
         public CachedSound(string audioFileName)
         {
             if (audioFileName.Contains(".ogg")) {
-                using (var vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
+                using (VorbisWaveReader vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
                     // TODO: could add resampling in here if required
                     WaveFormat = vorbisWaveReader.WaveFormat;
-                    var wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
-                    var readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
+                    List<float> wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
+                    float[] readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
                     int samplesRead;
                     while ((samplesRead = vorbisWaveReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {
                         wholeFile.AddRange(readBuffer.Take(samplesRead));
@@ -71,15 +71,15 @@ namespace Thumper_Custom_Level_Editor
             }
 
             else if (audioFileName.Contains(".wav")) {
-                using (var wavWaveReader = new AudioFileReader(audioFileName)) {
+                using (AudioFileReader wavWaveReader = new AudioFileReader(audioFileName)) {
                     //need to resample wav to 44100 sample rate
                     ///https://markheath.net/post/how-to-resample-audio-with-naudio
                     ///https://markheath.net/post/convert-16-bit-pcm-to-ieee-float
-                    var outFormat = new WaveFormat(44100, wavWaveReader.WaveFormat.Channels);
-                    var resampler = new WdlResamplingSampleProvider(wavWaveReader, 44100);
+                    WaveFormat outFormat = new WaveFormat(44100, wavWaveReader.WaveFormat.Channels);
+                    WdlResamplingSampleProvider resampler = new WdlResamplingSampleProvider(wavWaveReader, 44100);
                     WaveFormat = resampler.WaveFormat;
-                    var wholeFile = new List<float>((int)(wavWaveReader.Length / 4));
-                    var readBuffer = new float[resampler.WaveFormat.SampleRate * resampler.WaveFormat.Channels];
+                    List<float> wholeFile = new List<float>((int)(wavWaveReader.Length / 4));
+                    float[] readBuffer = new float[resampler.WaveFormat.SampleRate * resampler.WaveFormat.Channels];
                     int samplesRead;
                     while ((samplesRead = resampler.Read(readBuffer, 0, readBuffer.Length)) > 0) {
                         wholeFile.AddRange(readBuffer.Take(samplesRead));
@@ -91,11 +91,11 @@ namespace Thumper_Custom_Level_Editor
         }
         public CachedSound(Stream audioFileName)
         {
-            using (var vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
+            using (VorbisWaveReader vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
                 // TODO: could add resampling in here if required
                 WaveFormat = vorbisWaveReader.WaveFormat;
-                var wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
-                var readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
+                List<float> wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
+                float[] readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
                 int samplesRead;
                 while ((samplesRead = vorbisWaveReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {
                     wholeFile.AddRange(readBuffer.Take(samplesRead));
@@ -117,8 +117,8 @@ namespace Thumper_Custom_Level_Editor
 
         public int Read(float[] buffer, int offset, int count)
         {
-            var availableSamples = cachedSound.AudioData.Length - position;
-            var samplesToCopy = Math.Min(availableSamples, count);
+            long availableSamples = cachedSound.AudioData.Length - position;
+            long samplesToCopy = Math.Min(availableSamples, count);
             Array.Copy(cachedSound.AudioData, position, buffer, offset, samplesToCopy);
             position += samplesToCopy;
             return (int)samplesToCopy;

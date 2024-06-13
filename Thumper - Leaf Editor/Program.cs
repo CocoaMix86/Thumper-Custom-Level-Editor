@@ -19,7 +19,7 @@ namespace Thumper_Custom_Level_Editor
             if (args.Length <= 0)
                 args = new string[] { "" };
             // Force culture info, ensures periods . for decimals
-            var ci = new CultureInfo("en-US");
+            CultureInfo ci = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = ci;
             Thread.CurrentThread.CurrentUICulture = ci;
 
@@ -32,16 +32,16 @@ namespace Thumper_Custom_Level_Editor
         static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             Assembly thisAssembly = Assembly.GetExecutingAssembly();
-            var name = args.Name[..args.Name.IndexOf(',')] + ".dll";
-            var resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name));
+            string name = args.Name[..args.Name.IndexOf(',')] + ".dll";
+            System.Collections.Generic.IEnumerable<string> resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name));
 
             if (resources.Count() > 0) {
-                var resourceName = resources.First();
+                string resourceName = resources.First();
 
                 using Stream stream = thisAssembly.GetManifestResourceStream(resourceName);
                 if (stream == null)
                     return null;
-                var block = new byte[stream.Length - 1 + 1];
+                byte[] block = new byte[stream.Length - 1 + 1];
                 stream.Read(block, 0, block.Length);
                 return Assembly.Load(block);
             }

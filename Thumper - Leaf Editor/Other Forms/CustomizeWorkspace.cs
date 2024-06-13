@@ -33,7 +33,7 @@ namespace Thumper_Custom_Level_Editor
             //
             string[] import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt") : null;
             foreach (string line in import) {
-                var items = line.Split(';');
+                string[] items = line.Split(';');
                 objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
             }
             //

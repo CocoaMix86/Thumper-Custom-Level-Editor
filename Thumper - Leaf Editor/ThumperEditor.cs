@@ -270,7 +270,7 @@ namespace Thumper_Custom_Level_Editor
             //
 
             //load recent levels 
-            var levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
+            List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
             if (levellist.Count > 0 && LevelToLoad.Length < 2)
                 RecentFiles(levellist);
             else if (LevelToLoad.Length > 2) {
@@ -684,10 +684,10 @@ namespace Thumper_Custom_Level_Editor
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                var cellText = e.Value.ToString();
-                for (var fontSize = 1; fontSize < 25; fontSize++) {
-                    var font = new Font("Consolas", fontSize);
-                    var textSize = TextRenderer.MeasureText(cellText, font);
+                string cellText = e.Value.ToString();
+                for (int fontSize = 1; fontSize < 25; fontSize++) {
+                    Font font = new Font("Consolas", fontSize);
+                    Size textSize = TextRenderer.MeasureText(cellText, font);
                     if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
                         if (fontSize - 1 != 0)
                             font = new Font("Consolas", fontSize - 1);
@@ -704,7 +704,7 @@ namespace Thumper_Custom_Level_Editor
         {
             ComboBox cb = (ComboBox)sender;
             int maxWidth = 0;
-            foreach (var obj in cb.Items) {
+            foreach (object obj in cb.Items) {
                 int temp = TextRenderer.MeasureText(obj.ToString(), cb.Font).Width;
                 if (temp > maxWidth) {
                     maxWidth = temp;

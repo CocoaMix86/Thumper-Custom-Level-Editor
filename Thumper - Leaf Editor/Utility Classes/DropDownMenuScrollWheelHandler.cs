@@ -50,8 +50,8 @@ namespace Thumper_Custom_Level_Editor
         {
             if (ts.Items.Count == 0)
                 return;
-            var firstItem = ts.Items[0];
-            var lastItem = ts.Items[ts.Items.Count - 1];
+            ToolStripItem firstItem = ts.Items[0];
+            ToolStripItem lastItem = ts.Items[ts.Items.Count - 1];
             if (lastItem.Bounds.Bottom < ts.Height && firstItem.Bounds.Top > 0)
                 return;
             delta /= -4;
