@@ -79,7 +79,6 @@
     <Compile Include="Editor Panels\RecentFiles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LevelDataClasses\CellFunction.cs" />
     <Compile Include="Other Forms\AboutThumperEditor.cs">
       <SubType>Form</SubType>
