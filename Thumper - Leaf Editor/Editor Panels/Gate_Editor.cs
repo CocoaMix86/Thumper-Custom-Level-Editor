@@ -33,7 +33,7 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedgate;
 		string _loadedgatetemp;
 		readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
-		List<BossData> bossdata = new List<BossData> {
+		List<BossData> bossdata = new() {
 			new BossData() {boss_name = "Level 1 - circle", boss_spn = "boss_gate.spn", boss_ent = "boss_gate_pellet.ent"},
 			new BossData() {boss_name = "Level 1 - crakhed", boss_spn = "crakhed1.spn", boss_ent = "crakhed.ent"},
 			new BossData() {boss_name = "Level 2 - circle", boss_spn = "boss_jump.spn", boss_ent = "boss_gate_pellet.ent"},
@@ -145,19 +145,18 @@ namespace Thumper_Custom_Level_Editor
 		private void gateopenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savegate && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
-				using (var ofd = new OpenFileDialog()) {
-					ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
-					ofd.Title = "Load a Thumper Gate file";
-					ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
-					if (ofd.ShowDialog() == DialogResult.OK) {
-						//storing the filename in temp so it doesn't overwrite _loadedgate in case it fails the check in LoadGate()
-						_loadedgatetemp = ofd.FileName;
-						//load json from file into _load. The regex strips any comments from the text.
-						dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-						LoadGate(_load);
-					}
-				}
-			}
+                using var ofd = new OpenFileDialog();
+                ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
+                ofd.Title = "Load a Thumper Gate file";
+                ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
+                if (ofd.ShowDialog() == DialogResult.OK) {
+                    //storing the filename in temp so it doesn't overwrite _loadedgate in case it fails the check in LoadGate()
+                    _loadedgatetemp = ofd.FileName;
+                    //load json from file into _load. The regex strips any comments from the text.
+                    dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    LoadGate(_load);
+                }
+            }
 		}
 		///SAVE
 		private void gatesaveToolStripMenuItem_Click(object sender, EventArgs e)

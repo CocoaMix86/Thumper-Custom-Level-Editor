@@ -126,8 +126,7 @@ namespace Thumper_Custom_Level_Editor
             //this block finds what button called the contextmenu, and gets its parent
             //will use the parent to then dock the selected panel
             if (item != null) {
-                ContextMenuStrip owner = item.Owner as ContextMenuStrip;
-                if (owner != null) {
+                if (item.Owner is ContextMenuStrip owner) {
                     parentdock = owner.SourceControl;
                 }
             }

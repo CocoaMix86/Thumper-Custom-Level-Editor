@@ -54,7 +54,7 @@ namespace Thumper_Custom_Level_Editor
             var lastItem = ts.Items[ts.Items.Count - 1];
             if (lastItem.Bounds.Bottom < ts.Height && firstItem.Bounds.Top > 0)
                 return;
-            delta = delta / -4;
+            delta /= -4;
             if (delta < 0 && firstItem.Bounds.Top - delta > 9) {
                 delta = firstItem.Bounds.Top - 9;
             }

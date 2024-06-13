@@ -34,7 +34,7 @@ namespace Thumper_Custom_Level_Editor
 
         public void Stop()
         {
-            int err = timeKillEvent(mTimerId);
+            _ = timeKillEvent(mTimerId);
             timeEndPeriod(1);
             System.Threading.Thread.Sleep(100);// Ensure callbacks are drained
         }

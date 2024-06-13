@@ -92,11 +92,10 @@ namespace Thumper_Custom_Level_Editor
 			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
 			if (sampleList.CurrentCell.ColumnIndex == 1 || sampleList.CurrentCell.ColumnIndex == 2 || sampleList.CurrentCell.ColumnIndex == 3 || sampleList.CurrentCell.ColumnIndex == 4) //Desired Column
 			{
-				TextBox tb = e.Control as TextBox;
-				if (tb != null) {
-					tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);
-				}
-			}
+                if (e.Control is TextBox tb) {
+                    tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);
+                }
+            }
 		}
 
 		private void sampleList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -466,7 +465,7 @@ namespace Thumper_Custom_Level_Editor
 				_hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
 			//if the hashed name starts with a '0', remove it
 			if (_hashedname[0] == '0')
-				_hashedname = _hashedname.Substring(1);
+				_hashedname = _hashedname[1..];
 
 			///With hashing complete, can now save the file to a .PC
 			//if the `extras` folder doesn't exist, make it
@@ -524,7 +523,7 @@ namespace Thumper_Custom_Level_Editor
 				_hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
 			//if the hashed name starts with a '0', remove it
 			if (_hashedname[0] == '0')
-				_hashedname = _hashedname.Substring(1);
+				_hashedname = _hashedname[1..];
 
 			//check if sample is custom or not. This changes where we load audio from
 			if (_samp.path.Contains("custom")) {

@@ -228,20 +228,21 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 
-			string newfilename = "";
-			//create file renaming dialog and show it
-			FileNameDialog filenamedialog = new FileNameDialog();
-			filenamedialog.StartPosition = FormStartPosition.Manual;
+            //create file renaming dialog and show it
+            FileNameDialog filenamedialog = new FileNameDialog();
+            filenamedialog.StartPosition = FormStartPosition.Manual;
 			filenamedialog.Location = MousePosition;
 			filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
-			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
-				newfilename = filenamedialog.txtWorkingRename.Text;
-			}
-			//if NOT yes, return and skip everything else below
-			else
-				return;
-			//check if the chosen name exists in the level folder
-			if (File.Exists($@"{workingfolder}\{file[0]}_{newfilename}.txt")) {
+
+            string newfilename;
+            if (filenamedialog.ShowDialog() == DialogResult.Yes) {
+                newfilename = filenamedialog.txtWorkingRename.Text;
+            }
+            //if NOT yes, return and skip everything else below
+            else
+                return;
+            //check if the chosen name exists in the level folder
+            if (File.Exists($@"{workingfolder}\{file[0]}_{newfilename}.txt")) {
 				MessageBox.Show("File name already exists in the Working Folder", "File duplicate error");
 				return;
 			}
@@ -317,33 +318,34 @@ namespace Thumper_Custom_Level_Editor
 			workingfolderFiles_CellMouseClick(null, dgvcme);
 			//set textbox with name of selected file
 			string oldfilename = workingfolderFiles.SelectedCells[1].Value.ToString();
-			string newfilename = "";
-			string[] file = oldfilename.Split(new[] { '_' }, 2);
-			filetype = file[0];
+            string[] file = oldfilename.Split(new[] { '_' }, 2);
+            filetype = file[0];
 			//check if file is valid to be renamed
 			if (filetype == "master" || filetype == "LEVEL DETAILS") {
 				MessageBox.Show("You cannot rename this file.", "File error");
 				return;
 			}
 
-			string newfilepath = "";
-			//setup file name dialog and then show it
-			FileNameDialog filenamedialog = new FileNameDialog(workingfolder, filetype);
-			filenamedialog.txtWorkingRename.Text = file[1];
+            //setup file name dialog and then show it
+            FileNameDialog filenamedialog = new FileNameDialog(workingfolder, filetype);
+            filenamedialog.txtWorkingRename.Text = file[1];
 			filenamedialog.lblRenameFileType.Image = (Image)Properties.Resources.ResourceManager.GetObject(file[0]);
 			filenamedialog.Location = PointToClient(Cursor.Position);
-			//if YES, rename file
-			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
-				newfilename = filenamedialog.txtWorkingRename.Text;
-				newfilepath = $@"{workingfolder}\{filetype}_{newfilename}.txt";
-				File.Move($@"{workingfolder}\{oldfilename}.txt", newfilepath);
-				workingfolderFiles.SelectedCells[1].Value = $@"{filetype}_{filenamedialog.txtWorkingRename.Text}";
-			}
-			//if NO, return and skip the rest below
-			else
-				return;
+            string newfilename;
 
-			FindInstancesAndRename(file[1], newfilename, filetype);
+            string newfilepath;
+            //if YES, rename file
+            if (filenamedialog.ShowDialog() == DialogResult.Yes) {
+                newfilename = filenamedialog.txtWorkingRename.Text;
+                newfilepath = $@"{workingfolder}\{filetype}_{newfilename}.txt";
+                File.Move($@"{workingfolder}\{oldfilename}.txt", newfilepath);
+                workingfolderFiles.SelectedCells[1].Value = $@"{filetype}_{filenamedialog.txtWorkingRename.Text}";
+            }
+            //if NO, return and skip the rest below
+            else
+                return;
+
+            FindInstancesAndRename(file[1], newfilename, filetype);
 			SaveFileType(filetype, newfilepath);
 		}
 		//Duplicate file

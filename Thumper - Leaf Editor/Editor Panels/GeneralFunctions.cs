@@ -7,8 +7,6 @@ using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Wave;
 using NAudio.Vorbis;
-using Newtonsoft.Json;
-using System.Text.RegularExpressions;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -243,8 +241,9 @@ namespace Thumper_Custom_Level_Editor
             undomenu.Items.Clear();
 
             foreach (SaveState s in undolist) {
-                ToolStripMenuItem tmsi = new ToolStripMenuItem();
-                tmsi.Text = s.reason;
+                ToolStripMenuItem tmsi = new ToolStripMenuItem {
+                    Text = s.reason
+                };
                 tmsi.MouseEnter += undoMenu_MouseEnter;
                 tmsi.Click += undoItem_Click;
                 tmsi.BackColor = Color.FromArgb(40, 40, 40);
@@ -313,7 +312,7 @@ namespace Thumper_Custom_Level_Editor
                 return null;
 
             if (str.Length > 1)
-                return char.ToUpper(str[0]) + str.Substring(1);
+                return char.ToUpper(str[0]) + str[1..];
 
             return str.ToUpper();
         }

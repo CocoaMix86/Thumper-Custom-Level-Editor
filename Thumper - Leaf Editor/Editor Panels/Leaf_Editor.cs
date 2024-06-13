@@ -287,11 +287,10 @@ namespace Thumper_Custom_Level_Editor
 			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
 			if (trackEditor.CurrentCell.ColumnIndex != -1) //Desired Column
 			{
-				TextBox tb = e.Control as TextBox;
-				if (tb != null) {
-					tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);
-				}
-			}
+                if (e.Control is TextBox tb) {
+                    tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);
+                }
+            }
 		}
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -309,9 +308,9 @@ namespace Thumper_Custom_Level_Editor
 				}
 				//sets flag that leaf has unsaved changes
 				if (trackEditor.SelectedCells.Count > 1)
-					SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {(_val == null ? "empty" : _val)}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+					SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {(_val ?? "empty")}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
 				else
-					SaveLeaf(false, $"Beat {e.ColumnIndex} value set: {(_val == null ? "empty" : _val )}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+					SaveLeaf(false, $"Beat {e.ColumnIndex} value set: {(_val ?? "empty")}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
 			}
 			catch { }
 
@@ -1061,26 +1060,28 @@ namespace Thumper_Custom_Level_Editor
 			if (MessageBox.Show(@$"Split this leaf at beat {splitindex}? THIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
 				return;
 
-			string newfilename = "";
-			//create file renaming dialog and show it
-			FileNameDialog filenamedialog = new FileNameDialog();
-			filenamedialog.StartPosition = FormStartPosition.Manual;
-			filenamedialog.Location = MousePosition;
-			if (filenamedialog.ShowDialog() == DialogResult.Yes) {
-				newfilename = filenamedialog.txtWorkingRename.Text;
-				//check if the chosen name exists in the level folder
-				if (File.Exists($@"{workingfolder}\leaf_{newfilename}.txt")) {
-					MessageBox.Show("File name already exists.", "Leaf split error");
-					return;
-                }
-			}
-			//if NOT yes, return and skip everything else below
-			else
-				return;
+            //create file renaming dialog and show it
+            FileNameDialog filenamedialog = new FileNameDialog {
+                StartPosition = FormStartPosition.Manual,
+                Location = MousePosition
+            };
 
-			///SPLIT THAT LEAF
-			//build the leaf JSON so we can manipulate it
-			var _leafsplitbefore = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
+            string newfilename;
+            if (filenamedialog.ShowDialog() == DialogResult.Yes) {
+                newfilename = filenamedialog.txtWorkingRename.Text;
+                //check if the chosen name exists in the level folder
+                if (File.Exists($@"{workingfolder}\leaf_{newfilename}.txt")) {
+                    MessageBox.Show("File name already exists.", "Leaf split error");
+                    return;
+                }
+            }
+            //if NOT yes, return and skip everything else below
+            else
+                return;
+
+            ///SPLIT THAT LEAF
+            //build the leaf JSON so we can manipulate it
+            var _leafsplitbefore = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
 			//enumerate over each sequencer object and it's values to figure out which ones to keep
 			foreach (JObject seq_obj in _leafsplitbefore["seq_objs"]) {             
 				//data_points contains a list of all data points. By getting Properties() of it,
@@ -1489,7 +1490,7 @@ namespace Thumper_Custom_Level_Editor
 						var objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
 						_s.friendly_param = objmatch.param_displayname;
 						_s.friendly_type = objmatch.category;
-					} catch (Exception ex) {
+					} catch (Exception) {
 						loadfail = true;
 						loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
 					}
@@ -1533,7 +1534,7 @@ namespace Thumper_Custom_Level_Editor
 							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].friendly_param})";
 					}
 				}
-				catch (Exception ex) { }
+				catch (Exception) { }
 			}
 			trackEditor.Resize += trackEditor_Resize;
 			trackEditor.RowHeadersWidthChanged += trackEditor_RowHeadersWidthChanged;

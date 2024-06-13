@@ -42,7 +42,7 @@ namespace Thumper_Custom_Level_Editor
 		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
 		List<SampleData> _lvlsamples = new List<SampleData>();
 		dynamic lvljson;
-		ObservableCollection<LvlLeafData> _lvlleafs = new ObservableCollection<LvlLeafData>();
+		ObservableCollection<LvlLeafData> _lvlleafs = new();
 
 		LvlLeafData clipboardleaf = new LvlLeafData();
 		List<string> clipboardpaths = new List<string>();
@@ -445,7 +445,7 @@ namespace Thumper_Custom_Level_Editor
 			if (_lvlleafs.Count == 0)
 				return;
 			lvlLeafPaths.RowCount++;
-			lvlLeafPaths.Rows[lvlLeafPaths.Rows.Count - 1].Cells[0].Value = _lvlpaths[rng.Next(0, _lvlpaths.Count)];
+			lvlLeafPaths.Rows[^1].Cells[0].Value = _lvlpaths[rng.Next(0, _lvlpaths.Count)];
 			btnLvlPathDelete.Enabled = true;
 			PlaySound("UItunneladd");
 			SaveLvl(false);
@@ -482,8 +482,8 @@ namespace Thumper_Custom_Level_Editor
 		private void btnLvlLoopAdd_Click(object sender, EventArgs e)
 		{
 			lvlLoopTracks.RowCount++;
-			lvlLoopTracks.Rows[lvlLoopTracks.Rows.Count - 1].HeaderCell.Value = "Volume Track " + (lvlLoopTracks.Rows.Count - 1);
-			lvlLoopTracks.Rows[lvlLoopTracks.Rows.Count - 1].Cells[1].Value = 0;
+			lvlLoopTracks.Rows[^1].HeaderCell.Value = "Volume Track " + (lvlLoopTracks.Rows.Count - 1);
+			lvlLoopTracks.Rows[^1].Cells[1].Value = 0;
 			btnLvlLoopDelete.Enabled = true;
 			PlaySound("UIobjectadd");
 		}
@@ -506,7 +506,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			lvlSeqObjs.RowCount++;
 			PlaySound("UIobjectadd");
-			lvlSeqObjs.Rows[lvlSeqObjs.Rows.Count - 1].HeaderCell.Value = "Volume Track " + (lvlSeqObjs.Rows.Count - 1);
+			lvlSeqObjs.Rows[^1].HeaderCell.Value = "Volume Track " + (lvlSeqObjs.Rows.Count - 1);
 			btnLvlSeqDelete.Enabled = true;
 			btnLvlSeqClear.Enabled = true;
 			SaveLvl(false);
