@@ -67,7 +67,7 @@ namespace Thumper_Custom_Level_Editor
             _errorlog = "";
             //customize combobox to display the correct content
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
-            dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
+            //dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
             dropParamPath.Enabled = false;
         }
 
