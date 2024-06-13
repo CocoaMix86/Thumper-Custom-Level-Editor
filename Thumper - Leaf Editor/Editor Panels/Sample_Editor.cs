@@ -89,7 +89,7 @@ namespace Thumper_Custom_Level_Editor
 		{ 
 			//during editing of a cell in sampleList, check and sanitize input so it's numeric only
 			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
-			if (sampleList.CurrentCell.ColumnIndex == 1 || sampleList.CurrentCell.ColumnIndex == 2 || sampleList.CurrentCell.ColumnIndex == 3 || sampleList.CurrentCell.ColumnIndex == 4) //Desired Column
+			if (sampleList.CurrentCell.ColumnIndex is 1 or 2 or 3 or 4) //Desired Column
 			{
                 if (e.Control is TextBox tb) {
                     tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);

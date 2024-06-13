@@ -276,7 +276,7 @@ namespace Thumper_Custom_Level_Editor
 			//parse leaf to JSON
 			dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(path), "#.*", ""));
 			//check if file being loaded is actually a leaf. Can do so by checking the JSON key
-			if ((string)_load["obj_type"] != "SequinLevel" && (string)_load["obj_type"] != "SequinGate") {
+			if ((string)_load["obj_type"] is not "SequinLevel" and not "SequinGate") {
 				MessageBox.Show("This does not appear to be a lvl or a gate file!", "File load error");
 				return;
 			}

@@ -223,7 +223,7 @@ namespace Thumper_Custom_Level_Editor
 			//split file type from file name
 			//check if it is copy-able
 			string[] file = workingfolderFiles.SelectedCells[1].Value.ToString().Split(new[] { '_' }, 2);
-			if (file[0] == "LEVEL DETAILS" || file[0] == "master") {
+			if (file[0] is "LEVEL DETAILS" or "master") {
 				MessageBox.Show("You may not duplicate that file", "You cannot do that");
 				return;
 			}
@@ -322,7 +322,7 @@ namespace Thumper_Custom_Level_Editor
             string[] file = oldfilename.Split(new[] { '_' }, 2);
             filetype = file[0];
 			//check if file is valid to be renamed
-			if (filetype == "master" || filetype == "LEVEL DETAILS") {
+			if (filetype is "master" or "LEVEL DETAILS") {
 				MessageBox.Show("You cannot rename this file.", "File error");
 				return;
 			}

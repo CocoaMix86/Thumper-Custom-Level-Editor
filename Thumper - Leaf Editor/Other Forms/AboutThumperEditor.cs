@@ -44,45 +44,33 @@ namespace Thumper_Custom_Level_Editor
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-				if (attributes.Length == 0) {
-					return "";
-				}
-				return ((AssemblyDescriptionAttribute)attributes[0]).Description;
-			}
-		}
+                return attributes.Length == 0 ? "" : ((AssemblyDescriptionAttribute)attributes[0]).Description;
+            }
+        }
 
 		public string AssemblyProduct
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-				if (attributes.Length == 0) {
-					return "";
-				}
-				return ((AssemblyProductAttribute)attributes[0]).Product;
-			}
-		}
+                return attributes.Length == 0 ? "" : ((AssemblyProductAttribute)attributes[0]).Product;
+            }
+        }
 
 		public string AssemblyCopyright
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-				if (attributes.Length == 0) {
-					return "";
-				}
-				return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-			}
-		}
+                return attributes.Length == 0 ? "" : ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+            }
+        }
 
 		public string AssemblyCompany
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-				if (attributes.Length == 0) {
-					return "";
-				}
-				return ((AssemblyCompanyAttribute)attributes[0]).Company;
-			}
-		}
+                return attributes.Length == 0 ? "" : ((AssemblyCompanyAttribute)attributes[0]).Company;
+            }
+        }
 		#endregion
 
 		private void okButton_Click(object sender, EventArgs e)

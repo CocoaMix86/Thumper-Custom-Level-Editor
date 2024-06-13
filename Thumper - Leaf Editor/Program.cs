@@ -38,13 +38,12 @@ namespace Thumper_Custom_Level_Editor
             if (resources.Count() > 0) {
                 var resourceName = resources.First();
 
-                using (Stream stream = thisAssembly.GetManifestResourceStream(resourceName)) {
-                    if (stream == null)
-                        return null;
-                    var block = new byte[stream.Length - 1 + 1];
-                    stream.Read(block, 0, block.Length);
-                    return Assembly.Load(block);
-                }
+                using Stream stream = thisAssembly.GetManifestResourceStream(resourceName);
+                if (stream == null)
+                    return null;
+                var block = new byte[stream.Length - 1 + 1];
+                stream.Read(block, 0, block.Length);
+                return Assembly.Load(block);
             }
 
             return null;
