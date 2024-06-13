@@ -64,7 +64,6 @@ namespace Thumper_Custom_Level_Editor
 		private void TruncateSamples()
 		{
 			decimal interval = Math.Round(60 / NUD_ConfigBPM.Value, 4, MidpointRounding.AwayFromZero);
-
 		}
 
 		private void btnTrackPlayback_Click(object sender, EventArgs e)
@@ -213,7 +212,7 @@ namespace Thumper_Custom_Level_Editor
 		private void _playbacktimer_Tick()
 		{
 			foreach (WaveStream _sample in vorbis[_playbackbeat]) {
-				//AudioPlaybackEngine.Instance.PlaySound(_sample);
+				AudioPlaybackEngine.Instance.PlaySound(_sample.ToString());
 			}
 			try {
 				trackEditor.ClearSelection();
