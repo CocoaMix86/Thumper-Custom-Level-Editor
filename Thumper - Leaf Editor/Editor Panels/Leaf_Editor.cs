@@ -1374,11 +1374,8 @@ namespace Thumper_Custom_Level_Editor
 				//whenever `i` is a multiple of the time sig, switch colors
 				if (i % beats == 0)
 					_switch = !_switch;
-				if (_switch)
-					trackEditor.Columns[i].DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
-				else
-					trackEditor.Columns[i].DefaultCellStyle.BackColor = Color.FromArgb(30, 30, 30);
-			}
+				trackEditor.Columns[i].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(40, 40, 40) : Color.FromArgb(30, 30, 30);
+            }
 		}
 		///Updates cell highlighting in the DGV
 		public void TrackUpdateHighlighting(DataGridViewRow r)
