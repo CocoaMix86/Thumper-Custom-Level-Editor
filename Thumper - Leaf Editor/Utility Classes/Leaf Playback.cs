@@ -55,15 +55,14 @@ namespace Thumper_Custom_Level_Editor
 		}
 		public static byte[] ReadFully(Stream input)
 		{
-			using (MemoryStream ms = new()) {
-				input.CopyTo(ms);
-				return ms.ToArray();
-			}
-		}
+            using MemoryStream ms = new();
+            input.CopyTo(ms);
+            return ms.ToArray();
+        }
 
 		private void TruncateSamples()
 		{
-			decimal interval = Math.Round(60 / NUD_ConfigBPM.Value, 4, MidpointRounding.AwayFromZero);
+			//decimal interval = Math.Round(60 / NUD_ConfigBPM.Value, 4, MidpointRounding.AwayFromZero);
 		}
 
 		private void btnTrackPlayback_Click(object sender, EventArgs e)
