@@ -561,7 +561,7 @@ namespace Thumper_Custom_Level_Editor
 		///LEAF - SAVE AS
 		private void leafsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            using SaveFileDialog sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new();
             //filter .txt only
             sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -601,7 +601,7 @@ namespace Thumper_Custom_Level_Editor
 		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-                using OpenFileDialog ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
                 ofd.Title = "Load a Thumper Leaf file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -616,7 +616,7 @@ namespace Thumper_Custom_Level_Editor
 		private void leafTemplateToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-                using OpenFileDialog ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
                 ofd.Title = "Load a Thumper Leaf file";
                 //set folder to the templates location
@@ -944,7 +944,7 @@ namespace Thumper_Custom_Level_Editor
 			foreach (Sequencer_Object seq in _tracks) {
 				_out += seq.highlight_color.ToString() + '\n';
 			}
-            using SaveFileDialog sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Color Profile (*.color)|*.color";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -956,7 +956,7 @@ namespace Thumper_Custom_Level_Editor
 		/// Imports colors from file to the current loaded leaf
 		private void btnTrackColorImport_Click(object sender, EventArgs e)
 		{
-            using OpenFileDialog ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Color Profile (*.color)|*.color";
             ofd.FilterIndex = 1;
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -1225,7 +1225,7 @@ namespace Thumper_Custom_Level_Editor
 				_loadedfunction.function = txtFunction.Text;
             }
 			else {
-                CellFunction newfunc = new CellFunction() {
+                CellFunction newfunc = new() {
 					function = txtFunction.Text,
 					rowindex = trackEditor.CurrentCell.RowIndex,
 					columnindex = trackEditor.CurrentCell.ColumnIndex

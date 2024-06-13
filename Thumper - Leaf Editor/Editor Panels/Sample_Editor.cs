@@ -150,7 +150,7 @@ namespace Thumper_Custom_Level_Editor
 		private void SampleopenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savesample && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savesample) {
-                using OpenFileDialog ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
                 ofd.Title = "Load a Thumper Sample file";
                 if (ofd.ShowDialog() == DialogResult.OK) {
@@ -176,7 +176,7 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void SamplesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using SaveFileDialog sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new();
             //filter .txt only
             sfd.Filter = "Thumper Sample File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -263,7 +263,7 @@ namespace Thumper_Custom_Level_Editor
 		//Opens an .FSB audio file, hashes the name, and adds it to the loaded SAMP_ file
 		private void FSBtoSamp_Click(object sender, EventArgs e)
 		{
-            using OpenFileDialog ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new();
             ofd.Filter = "FSB Audio File (*.fsb)|*.fsb";
             ofd.Title = "Load a FSB Audio file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -300,7 +300,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			if (audioFile == null) {
 				if (_filetype == "ogg") {
-                    VorbisWaveReader vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
+                    VorbisWaveReader vorbis = new($@"temp\{_samp.obj_name}.{_filetype}");
 					outputDevice.Init(vorbis);
 				}
 				else {

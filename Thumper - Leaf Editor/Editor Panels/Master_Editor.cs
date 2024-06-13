@@ -191,7 +191,7 @@ namespace Thumper_Custom_Level_Editor
 		private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
-                using OpenFileDialog ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
                 ofd.Title = "Load a Thumper Master file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -225,7 +225,7 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            using SaveFileDialog sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new();
             //filter .txt only
             sfd.Filter = "Thumper Master File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -262,7 +262,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
-            using OpenFileDialog ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
             ofd.Title = "Load a Thumper Lvl/Gate file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;

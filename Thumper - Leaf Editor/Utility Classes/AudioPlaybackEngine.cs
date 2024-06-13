@@ -28,7 +28,7 @@ namespace Thumper_Custom_Level_Editor
 
         public void PlaySound(string fileName)
         {
-            VorbisWaveReader input = new VorbisWaveReader(fileName);
+            VorbisWaveReader input = new(fileName);
             AddMixerInput(input);
         }
 
@@ -57,10 +57,10 @@ namespace Thumper_Custom_Level_Editor
         public CachedSound(string audioFileName)
         {
             if (audioFileName.Contains(".ogg")) {
-                using (VorbisWaveReader vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
+                using (VorbisWaveReader vorbisWaveReader = new(audioFileName)) {
                     // TODO: could add resampling in here if required
                     WaveFormat = vorbisWaveReader.WaveFormat;
-                    List<float> wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
+                    List<float> wholeFile = new((int)(vorbisWaveReader.Length / 4));
                     float[] readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
                     int samplesRead;
                     while ((samplesRead = vorbisWaveReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {
@@ -71,14 +71,14 @@ namespace Thumper_Custom_Level_Editor
             }
 
             else if (audioFileName.Contains(".wav")) {
-                using (AudioFileReader wavWaveReader = new AudioFileReader(audioFileName)) {
+                using (AudioFileReader wavWaveReader = new(audioFileName)) {
                     //need to resample wav to 44100 sample rate
                     ///https://markheath.net/post/how-to-resample-audio-with-naudio
                     ///https://markheath.net/post/convert-16-bit-pcm-to-ieee-float
-                    WaveFormat outFormat = new WaveFormat(44100, wavWaveReader.WaveFormat.Channels);
-                    WdlResamplingSampleProvider resampler = new WdlResamplingSampleProvider(wavWaveReader, 44100);
+                    WaveFormat outFormat = new(44100, wavWaveReader.WaveFormat.Channels);
+                    WdlResamplingSampleProvider resampler = new(wavWaveReader, 44100);
                     WaveFormat = resampler.WaveFormat;
-                    List<float> wholeFile = new List<float>((int)(wavWaveReader.Length / 4));
+                    List<float> wholeFile = new((int)(wavWaveReader.Length / 4));
                     float[] readBuffer = new float[resampler.WaveFormat.SampleRate * resampler.WaveFormat.Channels];
                     int samplesRead;
                     while ((samplesRead = resampler.Read(readBuffer, 0, readBuffer.Length)) > 0) {
@@ -91,10 +91,10 @@ namespace Thumper_Custom_Level_Editor
         }
         public CachedSound(Stream audioFileName)
         {
-            using (VorbisWaveReader vorbisWaveReader = new VorbisWaveReader(audioFileName)) {
+            using (VorbisWaveReader vorbisWaveReader = new(audioFileName)) {
                 // TODO: could add resampling in here if required
                 WaveFormat = vorbisWaveReader.WaveFormat;
-                List<float> wholeFile = new List<float>((int)(vorbisWaveReader.Length / 4));
+                List<float> wholeFile = new((int)(vorbisWaveReader.Length / 4));
                 float[] readBuffer = new float[vorbisWaveReader.WaveFormat.SampleRate * vorbisWaveReader.WaveFormat.Channels];
                 int samplesRead;
                 while ((samplesRead = vorbisWaveReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {

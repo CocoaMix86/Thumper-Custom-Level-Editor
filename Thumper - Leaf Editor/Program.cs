@@ -19,7 +19,7 @@ namespace Thumper_Custom_Level_Editor
             if (args.Length <= 0)
                 args = new string[] { "" };
             // Force culture info, ensures periods . for decimals
-            CultureInfo ci = new CultureInfo("en-US");
+            CultureInfo ci = new("en-US");
             Thread.CurrentThread.CurrentCulture = ci;
             Thread.CurrentThread.CurrentUICulture = ci;
 

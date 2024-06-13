@@ -686,7 +686,7 @@ namespace Thumper_Custom_Level_Editor
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
                 string cellText = e.Value.ToString();
                 for (int fontSize = 1; fontSize < 25; fontSize++) {
-                    Font font = new Font("Consolas", fontSize);
+                    Font font = new("Consolas", fontSize);
                     Size textSize = TextRenderer.MeasureText(cellText, font);
                     if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
                         if (fontSize - 1 != 0)

@@ -285,7 +285,7 @@ namespace Thumper_Custom_Level_Editor
 		/// LVL SAVE AS
 		private void lvlsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-            using SaveFileDialog sfd = new SaveFileDialog();
+            using SaveFileDialog sfd = new();
             //filter .txt only
             sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
@@ -323,7 +323,7 @@ namespace Thumper_Custom_Level_Editor
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
-                using OpenFileDialog ofd = new OpenFileDialog();
+                using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
                 ofd.Title = "Load a Thumper Lvl file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
@@ -356,7 +356,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
-            using OpenFileDialog ofd = new OpenFileDialog();
+            using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
             ofd.Title = "Load a Thumper Leaf file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;

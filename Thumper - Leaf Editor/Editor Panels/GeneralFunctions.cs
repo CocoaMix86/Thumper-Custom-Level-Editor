@@ -130,8 +130,8 @@ namespace Thumper_Custom_Level_Editor
             if (Properties.Settings.Default.muteapplication)
                 return;
             Stream stream = new MemoryStream((byte[])Properties.Resources.ResourceManager.GetObject(audiofile));
-            VorbisWaveReader vorbisStream = new VorbisWaveReader(stream);
-            WaveOut waveOut = new WaveOut();
+            VorbisWaveReader vorbisStream = new(stream);
+            WaveOut waveOut = new();
             waveOut.Init(vorbisStream);
             waveOut.Volume = 1;
             waveOut.Play();
