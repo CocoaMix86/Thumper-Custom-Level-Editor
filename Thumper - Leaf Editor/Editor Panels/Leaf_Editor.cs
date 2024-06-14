@@ -435,7 +435,7 @@ namespace Thumper_Custom_Level_Editor
 					//iterate over each in the selection
 					foreach (DataGridViewCell dgvc in dgvcc) {
 						//check if at left/right edges
-						if ((dgvc.ColumnIndex + indexdirection < trackEditor.ColumnCount) && (dgvc.ColumnIndex + indexdirection >= 0)) {
+						if (dgvc.ColumnIndex + indexdirection is < trackEditor.ColumnCount and > -1) {
 							shifted = true;
 							trackEditor[dgvc.ColumnIndex + indexdirection, dgvc.RowIndex].Value = dgvc.Value;
 							//select the newly moved cell
