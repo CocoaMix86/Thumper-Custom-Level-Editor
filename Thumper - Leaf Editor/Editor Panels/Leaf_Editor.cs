@@ -45,6 +45,7 @@ namespace Thumper_Custom_Level_Editor
 		public bool loadingleaf = false;
 		public bool controldown = false;
 		public bool shiftdown = false;
+		public bool altdown = false;
 		public bool rightclickdown = false;
 		public int leafeditorcell = 0;
 		public bool randomizing = false;
@@ -361,6 +362,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			controldown = e.Control;
 			shiftdown = e.Shift;
+			altdown = e.Alt;
 			///Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
@@ -370,57 +372,88 @@ namespace Thumper_Custom_Level_Editor
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
-			///copies selected cells
-			if (controldown && e.KeyCode == Keys.C) {
-				DataObject d = trackEditor.GetClipboardContent();
-				Clipboard.SetDataObject(d, true);
-				e.Handled = true;
-			}
-			///cut and copies selected cells
-			if (controldown && e.KeyCode == Keys.X) {
-				DataObject d = trackEditor.GetClipboardContent();
-				Clipboard.SetDataObject(d, true);
-				_logundo = false;
-				trackEditor.CurrentCell.Value = 0;
-				trackEditor.CurrentCell.Value = null;
-				e.Handled = true;
-				_logundo = true;
-				SaveLeaf(false, "Cut cells", $"");
-			}
-			///pastes cell data from clipboard
-			if (controldown && e.KeyCode == Keys.V) {
-				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-				//get content on clipboard to string and then split it to rows
-				string s = Clipboard.GetText().Replace("\r\n", "\n");
-				string[] copiedrows = s.Split('\n');
-				//set ints so we don't have to always call rowindex, columnindex
-				int row = trackEditor.CurrentCell.RowIndex;
-				int col = trackEditor.CurrentCell.ColumnIndex;
-				for (int _line = 0; _line < copiedrows.Length; _line++) {
-					//if paste will go outside grid bounds, skip
-					if (row + _line >= trackEditor.RowCount)
-						break;
-					//split row into individual cells
-					string[] cells = copiedrows[_line].Split('\t');
-					for (int i = 0; i < cells.Length; i++) {
+			if (controldown) {
+				///copies selected cells
+				if (e.KeyCode == Keys.C) {
+					DataObject d = trackEditor.GetClipboardContent();
+					Clipboard.SetDataObject(d, true);
+					e.Handled = true;
+				}
+				///cut and copies selected cells
+				if (e.KeyCode == Keys.X) {
+					DataObject d = trackEditor.GetClipboardContent();
+					Clipboard.SetDataObject(d, true);
+					_logundo = false;
+					trackEditor.CurrentCell.Value = 0;
+					trackEditor.CurrentCell.Value = null;
+					e.Handled = true;
+					_logundo = true;
+					SaveLeaf(false, "Cut cells", $"");
+				}
+				///pastes cell data from clipboard
+				if (e.KeyCode == Keys.V) {
+					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+					//get content on clipboard to string and then split it to rows
+					string s = Clipboard.GetText().Replace("\r\n", "\n");
+					string[] copiedrows = s.Split('\n');
+					//set ints so we don't have to always call rowindex, columnindex
+					int row = trackEditor.CurrentCell.RowIndex;
+					int col = trackEditor.CurrentCell.ColumnIndex;
+					for (int _line = 0; _line < copiedrows.Length; _line++) {
 						//if paste will go outside grid bounds, skip
-						if (col + i >= trackEditor.ColumnCount)
+						if (row + _line >= trackEditor.RowCount)
 							break;
-						//don't paste if cell is blank
-						if (cells[i] != "") {
-							trackEditor[col + i, row + _line].Value = cells[i];
-							TrackUpdateHighlightingSingleCell(trackEditor[col + i, row + _line]);
+						//split row into individual cells
+						string[] cells = copiedrows[_line].Split('\t');
+						for (int i = 0; i < cells.Length; i++) {
+							//if paste will go outside grid bounds, skip
+							if (col + i >= trackEditor.ColumnCount)
+								break;
+							//don't paste if cell is blank
+							if (cells[i] != "") {
+								trackEditor[col + i, row + _line].Value = cells[i];
+								TrackUpdateHighlightingSingleCell(trackEditor[col + i, row + _line]);
+							}
 						}
 					}
+					SaveLeaf(false, $"Pasted cells", $"");
+					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
-				SaveLeaf(false, $"Pasted cells", $"");
-				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+			}
+
+			if (altdown) {
+				if (e.KeyCode is Keys.Right or Keys.Left) {
+					e.Handled = true;
+					//this is used for indexing if left or right
+					int indexdirection = (e.KeyCode == Keys.Right ? 1 : -1);
+					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+					//sort cells in selection based on column. depends on direction, reverse collection.
+					//this processing order is important so cells dont overwrite each other when moving
+					var dgvcc = (indexdirection == -1) ? trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c=>c.ColumnIndex) : trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => c.ColumnIndex).Reverse();
+					trackEditor.ClearSelection();
+					//iterate over each in the selection
+					foreach (DataGridViewCell dgvc in dgvcc) {
+						//check if at left/right edges
+						if ((e.KeyCode is Keys.Right && dgvc.ColumnIndex + 1 < trackEditor.ColumnCount) || (e.KeyCode is Keys.Left && dgvc.ColumnIndex - 1 >= 0)) {
+							trackEditor[dgvc.ColumnIndex + indexdirection, dgvc.RowIndex].Value = dgvc.Value;
+							//select the newly moved cell
+							trackEditor[dgvc.ColumnIndex + indexdirection, dgvc.RowIndex].Selected = true;
+							TrackUpdateHighlightingSingleCell(trackEditor[dgvc.ColumnIndex + indexdirection, dgvc.RowIndex]);
+						}
+						//clear the current cell since it moved
+						dgvc.Value = null;
+						TrackUpdateHighlightingSingleCell(dgvc);
+					}
+					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+					SaveLeaf(false, $"Shifted selected cells {(e.KeyCode == Keys.Left ? "left" : "right")}", $"");
+				}
 			}
 		}
 		private void trackEditor_KeyUp(object sender, KeyEventArgs e)
 		{
 			controldown = e.Control;
 			shiftdown = e.Shift;
+			altdown = e.Alt;
 		}
 		//Clicking row headers to select the row
 		private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
