@@ -422,25 +422,26 @@ namespace Thumper_Custom_Level_Editor
 			}
 
 			if (altdown) {
-				if (e.KeyCode is Keys.Right or Keys.Left) {
+				if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
 					e.Handled = true;
-					//this is used for indexing if left or right
-					int indexdirection = (e.KeyCode == Keys.Right ? 1 : -1);
+					//this is used for indexing if shifting left/down or right/up
+					int indexdirection = (e.KeyCode is Keys.Right or Keys.Down ? 1 : -1);
+					bool leftright = (e.KeyCode is Keys.Left or Keys.Right);
 					bool shifted = false;
 					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-					//sort cells in selection based on column. depends on direction, reverse collection.
-					//this processing order is important so cells dont overwrite each other when moving
-					var dgvcc = (indexdirection == -1) ? trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c=>c.ColumnIndex) : trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => c.ColumnIndex);
+                    //sort cells in selection based on column. depends on direction, reverse collection.
+                    //this processing order is important so cells dont overwrite each other when moving
+                    IOrderedEnumerable<DataGridViewCell> dgvcc = (indexdirection == -1) ? trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c=>(leftright ? c.ColumnIndex : c.RowIndex)) : trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => (leftright ? c.ColumnIndex : c.RowIndex));
 					trackEditor.ClearSelection();
 					//iterate over each in the selection
 					foreach (DataGridViewCell dgvc in dgvcc) {
 						//check if at left/right edges
-						if (dgvc.ColumnIndex + indexdirection < trackEditor.ColumnCount && dgvc.ColumnIndex + indexdirection > -1) {
+						if ((leftright && dgvc.ColumnIndex + indexdirection < trackEditor.ColumnCount && dgvc.ColumnIndex + indexdirection > -1) || (!leftright && dgvc.RowIndex + indexdirection < trackEditor.RowCount && dgvc.RowIndex + indexdirection > -1)) {
 							shifted = true;
-							trackEditor[dgvc.ColumnIndex + indexdirection, dgvc.RowIndex].Value = dgvc.Value;
+							trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Value = dgvc.Value;
 							//select the newly moved cell
-							trackEditor[dgvc.ColumnIndex + indexdirection, dgvc.RowIndex].Selected = true;
-							TrackUpdateHighlightingSingleCell(trackEditor[dgvc.ColumnIndex + indexdirection, dgvc.RowIndex]);
+							trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Selected = true;
+							TrackUpdateHighlightingSingleCell(trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)]);
 							//clear the current cell since it moved
 							dgvc.Value = null;
 							TrackUpdateHighlightingSingleCell(dgvc);
@@ -454,39 +455,6 @@ namespace Thumper_Custom_Level_Editor
 					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 					if (shifted)
 						SaveLeaf(false, $"Shifted selected cells {(e.KeyCode == Keys.Left ? "left" : "right")}", $"");
-				}
-				else if (e.KeyCode is Keys.Up or Keys.Down) {
-					e.Handled = true;
-					//this is used for indexing if left or right
-					int indexdirection = (e.KeyCode == Keys.Down ? 1 : -1);
-					bool shifted = false;
-					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-					//sort cells in selection based on column. depends on direction, reverse collection.
-					//this processing order is important so cells dont overwrite each other when moving
-					var dgvcc = (indexdirection == -1) ? trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => c.RowIndex) : trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => c.RowIndex);
-					trackEditor.ClearSelection();
-					//iterate over each in the selection
-					foreach (DataGridViewCell dgvc in dgvcc) {
-						//check if at left/right edges
-						if ((dgvc.RowIndex + indexdirection < trackEditor.RowCount) && (dgvc.RowIndex + indexdirection >= 0)) {
-							shifted = true;
-							trackEditor[dgvc.ColumnIndex, dgvc.RowIndex + indexdirection].Value = dgvc.Value;
-							//select the newly moved cell
-							trackEditor[dgvc.ColumnIndex, dgvc.RowIndex + indexdirection].Selected = true;
-							TrackUpdateHighlightingSingleCell(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex + indexdirection]);
-							//clear the current cell since it moved
-							dgvc.Value = null;
-							TrackUpdateHighlightingSingleCell(dgvc);
-						}
-						else {
-							foreach (DataGridViewCell dgvcell in dgvcc)
-								dgvcell.Selected = true;
-							break;
-						}
-					}
-					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
-					if (shifted)
-						SaveLeaf(false, $"Shifted selected cells {(e.KeyCode == Keys.Up ? "up" : "down")}", $"");
 				}
 			}
 		}
