@@ -411,7 +411,7 @@ namespace Thumper_Custom_Level_Editor
 								break;
 							//don't paste if cell is blank
 							if (cells[i] != "") {
-								trackEditor[col + i, row + _line].Value = cells[i];
+								trackEditor[col + i, row + _line].Value = decimal.Parse(cells[i]);
 								TrackUpdateHighlightingSingleCell(trackEditor[col + i, row + _line]);
 							}
 						}
