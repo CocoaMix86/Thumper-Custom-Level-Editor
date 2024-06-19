@@ -18,6 +18,8 @@ namespace Thumper_Custom_Level_Editor
         {
             if (args.Length <= 0)
                 args = new string[] { "" };
+            else
+                args[0] = string.Join(" ", args);
             // Force culture info, ensures periods . for decimals
             CultureInfo ci = new("en-US");
             Thread.CurrentThread.CurrentCulture = ci;
