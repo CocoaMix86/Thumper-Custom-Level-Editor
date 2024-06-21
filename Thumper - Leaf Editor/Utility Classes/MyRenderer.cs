@@ -12,11 +12,19 @@ namespace Thumper_Custom_Level_Editor
         //credit to https://stackoverflow.com/questions/47241021/prevent-showing-border-of-a-disabled-menu-item-on-mouse-hover
         protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
         {
-            base.OnRenderMenuItemBackground(e);
-            if (e.Item.Enabled && e.Item.Selected) {
+            if (e.Item.Enabled && e.Item.Selected && (e.Item.Name is not "toolstripAppIcon" and not "toolstripLevelName")) {
+                base.OnRenderMenuItemBackground(e);
                 using Pen pen = new(((MyColors)ColorTable).MenuItemEnabledBorder);
-                Rectangle r = new(2, 0, e.Item.Width - 4, e.Item.Height - 1);
+                Rectangle r = new(0, 0, e.Item.Width - 2, e.Item.Height - 1);
                 e.Graphics.DrawRectangle(pen, r);
+            }
+            else if (e.Item.Selected && e.Item.Name is "toolstripAppIcon" or "toolstripLevelName") {
+                using Pen pen = new(Color.Transparent);
+                Rectangle r = new(0, 0, e.Item.Width - 2, e.Item.Height - 1);
+                e.Graphics.DrawRectangle(pen, r);
+            }
+            else if (e.Item.Enabled) {
+                base.OnRenderMenuItemBackground(e);
             }
         }
     }
