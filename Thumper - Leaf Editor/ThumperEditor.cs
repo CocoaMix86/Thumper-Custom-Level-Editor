@@ -428,7 +428,7 @@ namespace Thumper_Custom_Level_Editor
             dynamic _load = new JObject();
             try {
                 //atempt to parse JSON of LEVEL DETAILS. This wil lalso take care of the situation if it doesn't exist
-                _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt"), "#.*", ""));
+                _load = JsonConvert.DeserializeObject(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt").Replace('#', ' '));
             }
             catch { }
             DialogInput customlevel = new(this);
