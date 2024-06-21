@@ -433,7 +433,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
         public int splitterHorz1 {
             get {
                 return ((int)(this["splitterHorz1"]));
@@ -445,7 +445,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
         public int splitterVert1 {
             get {
                 return ((int)(this["splitterVert1"]));
@@ -457,7 +457,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
         public int splitterVert2 {
             get {
                 return ((int)(this["splitterVert2"]));
@@ -535,6 +535,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
             }
             set {
                 this["Recentfiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<System.Windows.Forms.Keys> KeyBinds {
+            get {
+                return ((global::System.Collections.Generic.List<System.Windows.Forms.Keys>)(this["KeyBinds"]));
+            }
+            set {
+                this["KeyBinds"] = value;
             }
         }
         

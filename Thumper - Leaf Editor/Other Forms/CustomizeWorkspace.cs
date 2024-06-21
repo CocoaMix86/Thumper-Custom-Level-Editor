@@ -39,6 +39,8 @@ namespace Thumper_Custom_Level_Editor
             //
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
             dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
+
+            LoadKeyBindInfo();
         }
 
         private void btnSetColor(object sender, EventArgs e)
@@ -67,6 +69,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
 
             File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
+
+            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", keybinds.Select(x => $"{x.Key};{x.Value}"));
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -114,5 +118,55 @@ namespace Thumper_Custom_Level_Editor
             Pen p = new(Color.FromArgb(55, 55, 55), 10);
             g.DrawRectangle(p, tabPage1.Bounds);
         }
+
+        /// 
+        /// This is all for handling keybinds
+        /// 
+        Dictionary<string, Keys> keybinds = new();
+        KeyEventArgs lastpress;
+        Label currentlabel;
+        bool ignorekeys = true;
+        string keybindname;
+        private void LoadKeyBindInfo()
+        {
+            if (!File.Exists($@"{AppLoc}\templates\keybinds.txt")) 
+                File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
+            keybinds = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+
+            foreach (Label _lbl in tabPage3.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
+                _lbl.Text = $"{_lbl.Text.Split(new[] { " -" }, StringSplitOptions.None)[0]} - {keybinds[(string)_lbl.Tag]}";
+            }
+        }
+        private void keybindLabel_Click(object sender, EventArgs e)
+        {
+            currentlabel = sender as Label;
+            keybindname = (string)currentlabel.Tag;
+            string[] lbltxt = currentlabel.Text.Split('-');
+            ignorekeys = false;
+            panelSetKeybind.Visible = true;
+            labelKeybindName.Text = $"Set Keybind - {lbltxt[0]}";
+            labelKeys.Text = lbltxt[1].Replace(",", " +");
+        }
+        private void CustomizeWorkspace_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (ignorekeys)
+                return;
+            if (e != lastpress) {
+                lastpress = e;
+                labelKeys.Text = $"{e.KeyCode} + {e.Modifiers.ToString().Replace(",", " +")}";
+            }
+        }
+        private void btnSetKeybind_Click(object sender, EventArgs e)
+        {
+            keybinds[keybindname] = lastpress.KeyData;
+            currentlabel.Text = $"{currentlabel.Text.Split('-')[0]} - {keybinds[keybindname].ToString().Replace(",", " +")}";
+            panelSetKeybind.Visible = false;
+        }
+        /// 
+        /// This is all for handling keybinds
+        /// 
+
+
+
     }
 }

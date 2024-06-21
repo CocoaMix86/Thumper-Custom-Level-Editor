@@ -752,7 +752,7 @@
             this.lvlnewToolStripMenuItem1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_newfile;
             this.lvlnewToolStripMenuItem1.Name = "lvlnewToolStripMenuItem1";
             this.lvlnewToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.N)));
-            this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(167, 26);
+            this.lvlnewToolStripMenuItem1.Size = new System.Drawing.Size(184, 26);
             this.lvlnewToolStripMenuItem1.Text = "New";
             this.lvlnewToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
             // 
@@ -763,7 +763,7 @@
             this.lvlopenToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.lvlopenToolStripMenuItem.Name = "lvlopenToolStripMenuItem";
             this.lvlopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-            this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.lvlopenToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.lvlopenToolStripMenuItem.Text = "Open";
             this.lvlopenToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -774,7 +774,7 @@
             this.lvlsaveToolStripMenuItem2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
             this.lvlsaveToolStripMenuItem2.Name = "lvlsaveToolStripMenuItem2";
             this.lvlsaveToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(167, 26);
+            this.lvlsaveToolStripMenuItem2.Size = new System.Drawing.Size(184, 26);
             this.lvlsaveToolStripMenuItem2.Text = "Save";
             this.lvlsaveToolStripMenuItem2.Click += new System.EventHandler(this.saveToolStripMenuItem2_Click);
             // 
@@ -785,7 +785,7 @@
             this.lvlsaveAsToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_saveas;
             this.lvlsaveAsToolStripMenuItem.Name = "lvlsaveAsToolStripMenuItem";
             this.lvlsaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
-            this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
+            this.lvlsaveAsToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.lvlsaveAsToolStripMenuItem.Text = "Save As...";
             this.lvlsaveAsToolStripMenuItem.Click += new System.EventHandler(this.lvlsaveAsToolStripMenuItem_Click);
             // 
@@ -6009,6 +6009,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitHorizontal.BackColor = System.Drawing.Color.Transparent;
+            this.splitHorizontal.DataBindings.Add(new System.Windows.Forms.Binding("SplitterDistance", global::Thumper_Custom_Level_Editor.Properties.Settings.Default, "splitterHorz1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.splitHorizontal.Location = new System.Drawing.Point(0, 30);
             this.splitHorizontal.Name = "splitHorizontal";
             this.splitHorizontal.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -6021,7 +6022,7 @@
             // 
             this.splitHorizontal.Panel2.Controls.Add(this.splitBottom1);
             this.splitHorizontal.Size = new System.Drawing.Size(1748, 859);
-            this.splitHorizontal.SplitterDistance = 347;
+            this.splitHorizontal.SplitterDistance = global::Thumper_Custom_Level_Editor.Properties.Settings.Default.splitterHorz1;
             this.splitHorizontal.TabIndex = 136;
             this.splitHorizontal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitHorizontal.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
@@ -6029,6 +6030,7 @@
             // 
             // splitTop1
             // 
+            this.splitTop1.DataBindings.Add(new System.Windows.Forms.Binding("SplitterDistance", global::Thumper_Custom_Level_Editor.Properties.Settings.Default, "splitterVert1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.splitTop1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitTop1.Location = new System.Drawing.Point(0, 0);
             this.splitTop1.Name = "splitTop1";
@@ -6042,8 +6044,8 @@
             // splitTop1.Panel2
             // 
             this.splitTop1.Panel2.Controls.Add(this.splitTop2);
-            this.splitTop1.Size = new System.Drawing.Size(1748, 347);
-            this.splitTop1.SplitterDistance = 464;
+            this.splitTop1.Size = new System.Drawing.Size(1748, 25);
+            this.splitTop1.SplitterDistance = global::Thumper_Custom_Level_Editor.Properties.Settings.Default.splitterVert1;
             this.splitTop1.TabIndex = 0;
             this.splitTop1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitTop1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
@@ -6051,6 +6053,7 @@
             // 
             // splitTop2
             // 
+            this.splitTop2.DataBindings.Add(new System.Windows.Forms.Binding("SplitterDistance", global::Thumper_Custom_Level_Editor.Properties.Settings.Default, "splitterVert2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.splitTop2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitTop2.Location = new System.Drawing.Point(0, 0);
             this.splitTop2.Name = "splitTop2";
@@ -6066,8 +6069,8 @@
             this.splitTop2.Panel2.ContextMenuStrip = this.contextMenuDock;
             this.splitTop2.Panel2.Controls.Add(this.label51);
             this.splitTop2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitTop2.Size = new System.Drawing.Size(1280, 347);
-            this.splitTop2.SplitterDistance = 890;
+            this.splitTop2.Size = new System.Drawing.Size(1719, 25);
+            this.splitTop2.SplitterDistance = global::Thumper_Custom_Level_Editor.Properties.Settings.Default.splitterVert2;
             this.splitTop2.TabIndex = 47;
             this.splitTop2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitTop2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
@@ -6088,7 +6091,7 @@
             // splitBottom1.Panel2
             // 
             this.splitBottom1.Panel2.Controls.Add(this.splitBottom2);
-            this.splitBottom1.Size = new System.Drawing.Size(1748, 508);
+            this.splitBottom1.Size = new System.Drawing.Size(1748, 830);
             this.splitBottom1.SplitterDistance = 323;
             this.splitBottom1.TabIndex = 0;
             this.splitBottom1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -6112,7 +6115,7 @@
             this.splitBottom2.Panel2.ContextMenuStrip = this.contextMenuDock;
             this.splitBottom2.Panel2.Controls.Add(this.label55);
             this.splitBottom2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitBottom2.Size = new System.Drawing.Size(1421, 508);
+            this.splitBottom2.Size = new System.Drawing.Size(1421, 830);
             this.splitBottom2.SplitterDistance = 1032;
             this.splitBottom2.TabIndex = 46;
             this.splitBottom2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);

@@ -642,4 +642,14 @@ SUGGESTED ADDITIONS/CHANGES
   <data name="icon_clear_filters" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-clear-filters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="defaultkeybinds" xml:space="preserve">
+    <value>leafnew;N, Control
+leafopen;O, Control
+leafsave;S, Control
+leafsaveas;A, Control
+lvlnew;N, Alt
+lvlopen;O, Alt
+lvlsave;S, Alt
+lvlsaveas;A, Alt</value>
+  </data>
 </root>
