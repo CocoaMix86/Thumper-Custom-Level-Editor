@@ -87,8 +87,6 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             ColorFormElements();
             JumpListUpdate();
-            this.ControlBox = false;
-            this.Text = String.Empty;
             //set custom renderer
             menuStrip.Renderer = new MyRenderer();
             contextMenuDock.Renderer = new MyRenderer();
