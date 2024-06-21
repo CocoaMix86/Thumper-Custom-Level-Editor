@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Shell;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -241,6 +242,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //set panels to their last saved dock
             SetDockLocations();
+            SetKeyBinds();
             //load size and location data for panels
             panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
             panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
@@ -720,6 +722,16 @@ namespace Thumper_Custom_Level_Editor
             if (e.KeyCode == Keys.Z && e.Control) {
                 UndoFunction(1);
             }
+        }
+
+        private void SetKeyBinds()
+        {
+            string sss = SaveAllToolStripMenuItem.ShortcutKeys.ToString();
+            List<Keys> _keys = Properties.Settings.Default.KeyBinds;
+            if (_keys != null && _keys.Count == 0)
+                return;
+
+
         }
     }
 }

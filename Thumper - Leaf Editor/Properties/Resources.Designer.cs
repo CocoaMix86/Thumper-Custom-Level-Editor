@@ -330,6 +330,18 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to leafnew;N, Control
+        ///leafopen;O, Control
+        ///leafsave;S, Control
+        ///leafsaveas;A, Control.
+        /// </summary>
+        public static string defaultkeybinds {
+            get {
+                return ResourceManager.GetString("defaultkeybinds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap difficultyhelp {

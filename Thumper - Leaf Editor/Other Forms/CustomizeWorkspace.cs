@@ -39,6 +39,8 @@ namespace Thumper_Custom_Level_Editor
             //
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
             dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
+
+            LoadKeyBindInfo();
         }
 
         private void btnSetColor(object sender, EventArgs e)
@@ -114,5 +116,55 @@ namespace Thumper_Custom_Level_Editor
             Pen p = new(Color.FromArgb(55, 55, 55), 10);
             g.DrawRectangle(p, tabPage1.Bounds);
         }
+
+        /// 
+        /// This is all for handling keybinds
+        /// 
+        List<string> _keystrings = new();
+        Dictionary<string, Keys> keybinds = new();
+        bool ignorekeys = true;
+        int tagindex = -1;
+        private void LoadKeyBindInfo()
+        {
+            if (!File.Exists($@"{AppLoc}\templates\keybinds.txt")) 
+                File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
+            _keystrings = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToList();
+            keybinds = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+
+            keybindLeafNew.Text = $"Leaf New - {keybinds["leafnew"]}";
+            keybindLeafOpen.Text = $"Leaf Open - {keybinds["leafopen"]}";
+            keybindLeafSave.Text = $"Leaf Save - {keybinds["leafsave"]}";
+            keybindLeafSaveAs.Text = $"Leaf Save As - {keybinds["leafsaveas"]}";
+        }
+        private void keybindLabel_Click(object sender, EventArgs e)
+        {
+            Label _lbl = sender as Label;
+            string[] lbltxt = _lbl.Text.Split('-');
+            ignorekeys = false;
+            panelSetKeybind.Visible = true;
+            labelKeybindName.Text = $"Set Keybind - {lbltxt[0]}";
+            labelKeys.Text = lbltxt[1].Replace(",", " +");
+            tagindex = int.Parse(_lbl.Tag.ToString());
+        }
+        KeyEventArgs lastpress = null;
+        private void CustomizeWorkspace_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (ignorekeys)
+                return;
+            if (e != lastpress) {
+                lastpress = e;
+                labelKeys.Text = $"{e.KeyCode} + {e.Modifiers.ToString().Replace(",", " +")}";
+            }
+        }
+        private void btnSetKeybind_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// 
+        /// This is all for handling keybinds
+        /// 
+
+
+
     }
 }

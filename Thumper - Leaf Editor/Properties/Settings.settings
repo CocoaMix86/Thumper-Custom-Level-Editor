@@ -128,9 +128,12 @@
     <Setting Name="lvlzoom" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">40</Value>
     </Setting>
-    <Setting Name="Recentfiles" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="Recentfiles" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+	  <Setting Name="KeyBinds" Type="System.Collections.Generic.List&lt;System.Windows.Forms.Keys&gt;" Scope="User">
+		  <Value Profile="(Default)" />
+	  </Setting>
     <Setting Name="muteapplication" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

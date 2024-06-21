@@ -59,10 +59,21 @@ namespace Thumper_Custom_Level_Editor
             this.btnBGColor = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.checkMuteApp = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.keybindLeafNew = new System.Windows.Forms.Label();
+            this.keybindLeafOpen = new System.Windows.Forms.Label();
+            this.keybindLeafSave = new System.Windows.Forms.Label();
+            this.keybindLeafSaveAs = new System.Windows.Forms.Label();
+            this.panelSetKeybind = new System.Windows.Forms.Panel();
+            this.labelKeybindName = new System.Windows.Forms.Label();
+            this.labelKeys = new System.Windows.Forms.Label();
+            this.btnSetKeybind = new System.Windows.Forms.Button();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.panelSetKeybind.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolstripCustomize
@@ -97,6 +108,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(-5, 0);
             this.tabControl1.Multiline = true;
@@ -135,7 +147,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(368, 280);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Colors";
@@ -462,8 +474,8 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(367, 280);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(368, 280);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Audio";
             // 
@@ -479,6 +491,132 @@ namespace Thumper_Custom_Level_Editor
             this.checkMuteApp.Text = "Mute application audio";
             this.checkMuteApp.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.tabPage3.Controls.Add(this.panelSetKeybind);
+            this.tabPage3.Controls.Add(this.keybindLeafSaveAs);
+            this.tabPage3.Controls.Add(this.keybindLeafSave);
+            this.tabPage3.Controls.Add(this.keybindLeafOpen);
+            this.tabPage3.Controls.Add(this.keybindLeafNew);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(368, 280);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Key Binds";
+            // 
+            // keybindLeafNew
+            // 
+            this.keybindLeafNew.AutoSize = true;
+            this.keybindLeafNew.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLeafNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLeafNew.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLeafNew.Location = new System.Drawing.Point(7, 7);
+            this.keybindLeafNew.Name = "keybindLeafNew";
+            this.keybindLeafNew.Size = new System.Drawing.Size(59, 15);
+            this.keybindLeafNew.TabIndex = 115;
+            this.keybindLeafNew.Tag = "1";
+            this.keybindLeafNew.Text = "Leaf New";
+            this.keybindLeafNew.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindLeafOpen
+            // 
+            this.keybindLeafOpen.AutoSize = true;
+            this.keybindLeafOpen.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLeafOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLeafOpen.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLeafOpen.Location = new System.Drawing.Point(7, 22);
+            this.keybindLeafOpen.Name = "keybindLeafOpen";
+            this.keybindLeafOpen.Size = new System.Drawing.Size(64, 15);
+            this.keybindLeafOpen.TabIndex = 116;
+            this.keybindLeafOpen.Tag = "2";
+            this.keybindLeafOpen.Text = "Leaf Open";
+            this.keybindLeafOpen.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindLeafSave
+            // 
+            this.keybindLeafSave.AutoSize = true;
+            this.keybindLeafSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLeafSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLeafSave.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLeafSave.Location = new System.Drawing.Point(7, 37);
+            this.keybindLeafSave.Name = "keybindLeafSave";
+            this.keybindLeafSave.Size = new System.Drawing.Size(61, 15);
+            this.keybindLeafSave.TabIndex = 117;
+            this.keybindLeafSave.Tag = "3";
+            this.keybindLeafSave.Text = "Leaf Save";
+            this.keybindLeafSave.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindLeafSaveAs
+            // 
+            this.keybindLeafSaveAs.AutoSize = true;
+            this.keybindLeafSaveAs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLeafSaveAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLeafSaveAs.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLeafSaveAs.Location = new System.Drawing.Point(7, 52);
+            this.keybindLeafSaveAs.Name = "keybindLeafSaveAs";
+            this.keybindLeafSaveAs.Size = new System.Drawing.Size(77, 15);
+            this.keybindLeafSaveAs.TabIndex = 118;
+            this.keybindLeafSaveAs.Tag = "4";
+            this.keybindLeafSaveAs.Text = "Leaf Save As";
+            this.keybindLeafSaveAs.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // panelSetKeybind
+            // 
+            this.panelSetKeybind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panelSetKeybind.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSetKeybind.Controls.Add(this.btnSetKeybind);
+            this.panelSetKeybind.Controls.Add(this.labelKeys);
+            this.panelSetKeybind.Controls.Add(this.labelKeybindName);
+            this.panelSetKeybind.Location = new System.Drawing.Point(83, 70);
+            this.panelSetKeybind.Name = "panelSetKeybind";
+            this.panelSetKeybind.Size = new System.Drawing.Size(190, 65);
+            this.panelSetKeybind.TabIndex = 119;
+            this.panelSetKeybind.Visible = false;
+            // 
+            // labelKeybindName
+            // 
+            this.labelKeybindName.AutoSize = true;
+            this.labelKeybindName.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelKeybindName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKeybindName.ForeColor = System.Drawing.Color.PaleGreen;
+            this.labelKeybindName.Location = new System.Drawing.Point(3, 0);
+            this.labelKeybindName.Name = "labelKeybindName";
+            this.labelKeybindName.Size = new System.Drawing.Size(96, 15);
+            this.labelKeybindName.TabIndex = 117;
+            this.labelKeybindName.Tag = "1";
+            this.labelKeybindName.Text = "Set Keybind - ";
+            // 
+            // labelKeys
+            // 
+            this.labelKeys.AutoSize = true;
+            this.labelKeys.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.labelKeys.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelKeys.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKeys.ForeColor = System.Drawing.Color.PaleGreen;
+            this.labelKeys.Location = new System.Drawing.Point(24, 17);
+            this.labelKeys.MinimumSize = new System.Drawing.Size(150, 20);
+            this.labelKeys.Name = "labelKeys";
+            this.labelKeys.Size = new System.Drawing.Size(150, 20);
+            this.labelKeys.TabIndex = 118;
+            this.labelKeys.Tag = "1";
+            this.labelKeys.Text = "--";
+            this.labelKeys.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // btnSetKeybind
+            // 
+            this.btnSetKeybind.BackColor = System.Drawing.Color.Green;
+            this.btnSetKeybind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSetKeybind.ForeColor = System.Drawing.Color.White;
+            this.btnSetKeybind.Location = new System.Drawing.Point(60, 40);
+            this.btnSetKeybind.Name = "btnSetKeybind";
+            this.btnSetKeybind.Size = new System.Drawing.Size(75, 23);
+            this.btnSetKeybind.TabIndex = 120;
+            this.btnSetKeybind.Text = "Set";
+            this.btnSetKeybind.UseVisualStyleBackColor = false;
+            this.btnSetKeybind.Click += new System.EventHandler(this.btnSetKeybind_Click);
+            // 
             // CustomizeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -488,6 +626,7 @@ namespace Thumper_Custom_Level_Editor
             this.Controls.Add(this.toolstripCustomize);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CustomizeWorkspace";
@@ -496,6 +635,7 @@ namespace Thumper_Custom_Level_Editor
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Customize Workspace";
             this.TopMost = true;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CustomizeWorkspace_KeyDown);
             this.toolstripCustomize.ResumeLayout(false);
             this.toolstripCustomize.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -503,6 +643,10 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.panelSetKeybind.ResumeLayout(false);
+            this.panelSetKeybind.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -539,5 +683,14 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label label11;
         public System.Windows.Forms.Button btnObjectColor;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label keybindLeafSaveAs;
+        private System.Windows.Forms.Label keybindLeafSave;
+        private System.Windows.Forms.Label keybindLeafOpen;
+        private System.Windows.Forms.Label keybindLeafNew;
+        private System.Windows.Forms.Panel panelSetKeybind;
+        private System.Windows.Forms.Label labelKeybindName;
+        private System.Windows.Forms.Label labelKeys;
+        private System.Windows.Forms.Button btnSetKeybind;
     }
 }

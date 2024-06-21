@@ -540,6 +540,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<System.Windows.Forms.Keys> KeyBinds {
+            get {
+                return ((global::System.Collections.Generic.List<System.Windows.Forms.Keys>)(this["KeyBinds"]));
+            }
+            set {
+                this["KeyBinds"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool muteapplication {
             get {
