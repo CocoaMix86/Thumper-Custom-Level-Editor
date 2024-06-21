@@ -498,11 +498,11 @@ namespace Thumper_Custom_Level_Editor
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.tabPage3.Controls.Add(this.panelSetKeybind);
             this.tabPage3.Controls.Add(this.keybindLvlSaveAs);
             this.tabPage3.Controls.Add(this.keybindLvlSave);
             this.tabPage3.Controls.Add(this.keybindLvlOpen);
             this.tabPage3.Controls.Add(this.keybindLvlNew);
-            this.tabPage3.Controls.Add(this.panelSetKeybind);
             this.tabPage3.Controls.Add(this.keybindLeafSaveAs);
             this.tabPage3.Controls.Add(this.keybindLeafSave);
             this.tabPage3.Controls.Add(this.keybindLeafOpen);
