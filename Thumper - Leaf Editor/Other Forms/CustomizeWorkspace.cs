@@ -70,6 +70,8 @@ namespace Thumper_Custom_Level_Editor
 
             File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
 
+            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", keybinds.Select(x => $"{x.Key};{x.Value}"));
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -120,33 +122,32 @@ namespace Thumper_Custom_Level_Editor
         /// 
         /// This is all for handling keybinds
         /// 
-        List<string> _keystrings = new();
         Dictionary<string, Keys> keybinds = new();
+        KeyEventArgs lastpress;
+        Label currentlabel;
         bool ignorekeys = true;
-        int tagindex = -1;
+        string keybindname;
         private void LoadKeyBindInfo()
         {
             if (!File.Exists($@"{AppLoc}\templates\keybinds.txt")) 
                 File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
-            _keystrings = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToList();
             keybinds = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
 
-            keybindLeafNew.Text = $"Leaf New - {keybinds["leafnew"]}";
-            keybindLeafOpen.Text = $"Leaf Open - {keybinds["leafopen"]}";
-            keybindLeafSave.Text = $"Leaf Save - {keybinds["leafsave"]}";
-            keybindLeafSaveAs.Text = $"Leaf Save As - {keybinds["leafsaveas"]}";
+            keybindLeafNew.Text = $"Leaf New - {keybinds["leafnew"].ToString().Replace(",", " +")}";
+            keybindLeafOpen.Text = $"Leaf Open - {keybinds["leafopen"].ToString().Replace(",", " +")}";
+            keybindLeafSave.Text = $"Leaf Save - {keybinds["leafsave"].ToString().Replace(",", " +")}";
+            keybindLeafSaveAs.Text = $"Leaf Save As - {keybinds["leafsaveas"].ToString().Replace(",", " +")}";
         }
         private void keybindLabel_Click(object sender, EventArgs e)
         {
-            Label _lbl = sender as Label;
-            string[] lbltxt = _lbl.Text.Split('-');
+            currentlabel = sender as Label;
+            keybindname = (string)currentlabel.Tag;
+            string[] lbltxt = currentlabel.Text.Split('-');
             ignorekeys = false;
             panelSetKeybind.Visible = true;
             labelKeybindName.Text = $"Set Keybind - {lbltxt[0]}";
             labelKeys.Text = lbltxt[1].Replace(",", " +");
-            tagindex = int.Parse(_lbl.Tag.ToString());
         }
-        KeyEventArgs lastpress = null;
         private void CustomizeWorkspace_KeyDown(object sender, KeyEventArgs e)
         {
             if (ignorekeys)
@@ -158,7 +159,9 @@ namespace Thumper_Custom_Level_Editor
         }
         private void btnSetKeybind_Click(object sender, EventArgs e)
         {
-
+            keybinds[keybindname] = lastpress.KeyData;
+            currentlabel.Text = $"{currentlabel.Text.Split('-')[0]} - {keybinds[keybindname].ToString().Replace(",", " +")}";
+            panelSetKeybind.Visible = false;
         }
         /// 
         /// This is all for handling keybinds
