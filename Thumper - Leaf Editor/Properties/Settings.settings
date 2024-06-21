@@ -42,7 +42,7 @@
       <Value Profile="(Default)">64, 0, 0</Value>
     </Setting>
     <Setting Name="custom_menucolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Maroon</Value>
+      <Value Profile="(Default)">80, 0, 0</Value>
     </Setting>
     <Setting Name="custom_mastercolor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">55, 55, 55</Value>

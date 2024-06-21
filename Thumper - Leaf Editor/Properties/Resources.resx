@@ -118,461 +118,210 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="samp_level5_400bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level5_400bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="lvl" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\lvl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="samp_level6_420bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level6_420bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="icon_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon_save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="track_objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\track objects.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="samp_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_dissonant.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="leaf_pyramid_outro" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_pyramid_outro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="bosssectionhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\bosssectionhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_saveas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon_saveas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="samp_globaldrones" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_globaldrones.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="master" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\master.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="samp_level9_480bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level9_480bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="leaf_singletrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="samp_level3_360bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level3_360bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\paths.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="samp_level8_460bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level8_460bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="samples" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samples.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="icon_newfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon_newfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_interp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon_interp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="samp_level1_320bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level1_320bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="leaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\leaf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="samp_level4_380bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level4_380bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="icon_openfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon_openfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="samp_level7_440bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level7_440bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="xfm_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\xfm_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="samp_level2_340bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level2_340bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="samp_misc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_misc.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="icon_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon_template.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\gate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="leaf_multitrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="samp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\sample.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="railcolorhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\railcolorhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="difficultyhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\difficultyhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_pause16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-pause16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_trash" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-trash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Thumper_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Thumper_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_color_wheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-color-wheel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_graph" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-graph.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beebleconfuse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beebleconfuse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblecool" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblecool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblederp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblederp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblehappy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblehappy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblelaugh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblelaugh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblestare" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblestare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblethink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblethink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beebledance" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beebledance.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblegold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblegold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblespin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblespin.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beebletiny" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beebletiny.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblelove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeblelove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-pencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-gear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_divider" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-divider.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_add2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-add2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_arrowdown2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-arrowdown2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_arrowup2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-arrowup2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_copy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-copy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_remove2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-remove2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_arrowupdock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-arrowupdock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_save2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-save2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_paste2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-paste2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_refresh2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-refresh2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_erase" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-erase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_import" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_play2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-play2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_sling" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-sling.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_addfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-addfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_template1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-template.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_import2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-import2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-zoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_openedfolders" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-openedfolders.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_onefinger" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-onefinger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UIbeetleclick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="turn_birth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\turn_birth.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="UIbeetleclick2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIbeetleclick2.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UIbeetleclick3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick3.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclick4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick4.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclick5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick5.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclick6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick6.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclick7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick7.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclick8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick8.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclickGOLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclickGOLD.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="UIboot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIboot.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UIcolorapply" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIcolorapply.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIcoloropen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIcoloropen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIdataerase" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIdataerase.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIdelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIdelete.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIfolderclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIfolderclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIfolderopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIfolderopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="icon_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-gear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UIinterpolate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIinterpolate.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UIkcopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIkcopy.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="samp_level5_400bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level5_400bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
-  <data name="UIkpaste" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIkpaste.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="UIaddrandom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIaddrandom.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UIleafsplit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIleafsplit.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="leaf_pyramid_outro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_pyramid_outro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="UIobjectadd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIobjectadd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIobjectremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIobjectremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIrefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIrefresh.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIrevertchanges" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIrevertchanges.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIsave" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIsave.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIselect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIselect.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UItunneladd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UItunneladd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UItunnelremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UItunnelremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Thumper_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\Thumper_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="UIwindowclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIwindowclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UIwindowopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIwindowopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="icon_check_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-check-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UIdock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIdock.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="UIkcopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIkcopy.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UIdockun" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIdockun.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="icon_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="discord" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\discord.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UIleafsplit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIleafsplit.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="icon_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="objects_defaultcolors" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\objects_defaultcolors.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="D0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\D0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="D1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\D1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="D2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\D2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defaultkeybinds" xml:space="preserve">
+    <value>leafnew;N, Control
+leafopen;O, Control
+leafsave;S, Control
+leafsaveas;A, Control
+lvlnew;N, Alt
+lvlopen;O, Alt
+lvlsave;S, Alt
+lvlsaveas;A, Alt</value>
   </data>
   <data name="D3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\D3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="D4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\D4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="D5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\D5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="D6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\D6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="D7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\D7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_explorer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-explorer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="leaf_multitrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="leaf_multitrack_ring_bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack_ring&amp;bar.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="leaf_singletrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\leaf_singletrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="icon_random" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-random.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_randomize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-randomize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_check_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-check-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_check_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-check-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="audionames" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\audionames.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="coin_collect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\coin_collect.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ducker_ring_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\ducker_ring_approach.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="grindable_birth2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\grindable_birth2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="hammer_two_handed_hit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\hammer_two_handed_hit.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="high_jump" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\high_jump.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="jumper_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\jumper_approach.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="bosssectionhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\bosssectionhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="thump1b" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\thump1b.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="thump_birth1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\thump_birth1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="samp_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_dissonant.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
-  <data name="turn_birth" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_birth.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="beeblehappy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblehappy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="turn_birth_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_birth_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="UIbeetleclick8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick8.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_level2_340bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level2_340bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level8_460bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level8_460bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="coin_collect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\coin_collect.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_addfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-addfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_divider" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-divider.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="audionames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\audionames.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="icon_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="high_jump" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\high_jump.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_save2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-save2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIbeetleclick3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick3.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_remove2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-remove2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ducker_ring_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\ducker_ring_approach.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdelete.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_color_wheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-color-wheel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_newfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_newfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="turn_hit_perfect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\turn_hit_perfect2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="turn_long_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_long_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="UIdockun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdockun.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="silence" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\silence.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="samp_level4_380bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level4_380bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
-  <data name="icon_undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_erase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-erase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebleconfuse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beebleconfuse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grindable_birth2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\grindable_birth2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclickGOLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclickGOLD.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_copy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-copy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIrevertchanges" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIrevertchanges.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrevertnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIrevertnew.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\gate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_openedfolders" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-openedfolders.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="samples" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samples.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="xfm_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\xfm_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="icon_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-pencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblethink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblethink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_template.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_sling" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-sling.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_template1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-template.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_paste2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-paste2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="railcolorhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\railcolorhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leaf_singletrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="icon_trash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-trash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="changelog" xml:space="preserve">
     <value>NEW
@@ -627,29 +376,283 @@ SUGGESTED ADDITIONS/CHANGES
 ➕ Paths/Tunnels list now shows which leaf is currently active
 ➕ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow</value>
   </data>
-  <data name="UIrevertnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIrevertnew.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="icon_import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="master" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\master.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_check_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-check-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="track_objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\track objects.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="samp_globaldrones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_globaldrones.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="silence" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\silence.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="beeblelove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblelove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\paths.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="beeblecool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblecool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_arrowupdock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-arrowupdock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leaf_multitrack_ring_bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_multitrack_ring&amp;bar.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="icon_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="samp_level9_480bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level9_480bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="D1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thump_birth1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\thump_birth1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="UIinterpolatewindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIinterpolatewindow.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="icon_editdetails" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icon-editdetails.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="leaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\leaf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UIaddrandom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIaddrandom.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="icon_explorer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-explorer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIselect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIselect.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblespin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblespin.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_arrowup2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-arrowup2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIcoloropen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIcoloropen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_level3_360bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level3_360bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="UIbeetleclick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_saveas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_saveas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="samp_level1_320bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level1_320bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="icon_graph" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-graph.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIdataerase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdataerase.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\sample.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-zoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="samp_level7_440bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level7_440bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="UIbeetleclick5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick5.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="D7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_clear_filters" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-clear-filters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defaultkeybinds" xml:space="preserve">
-    <value>leafnew;N, Control
-leafopen;O, Control
-leafsave;S, Control
-leafsaveas;A, Control
-lvlnew;N, Alt
-lvlopen;O, Alt
-lvlsave;S, Alt
-lvlsaveas;A, Alt</value>
+  <data name="icon_arrowdown2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-arrowdown2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblelaugh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblelaugh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leaf_multitrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_multitrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="icon_add2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-add2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UItunneladd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UItunneladd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_random" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-random.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIobjectadd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIobjectadd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_openfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_openfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="jumper_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\jumper_approach.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_level6_420bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level6_420bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="D0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblederp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblederp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIfolderopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIfolderopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_misc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_misc.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="UIbeetleclick7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick7.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_pause16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-pause16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_play2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-play2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="turn_long_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\turn_long_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_refresh2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-refresh2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="difficultyhelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\difficultyhelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="discord" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\discord.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblestare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblestare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_editdetails" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-editdetails.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leaf_multitrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="beeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblegold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeblegold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_onefinger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-onefinger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIrefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIrefresh.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lvl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\lvl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIobjectremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIobjectremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_import2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-import2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIfolderclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIfolderclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick6.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="D4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\D4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebledance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beebledance.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIcolorapply" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIcolorapply.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_interp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_interp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIwindowopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIwindowopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="UIbeetleclick4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick4.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIsave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIsave.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="beebletiny" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beebletiny.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UIdock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdock.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="objects_defaultcolors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\objects_defaultcolors.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="UIkpaste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIkpaste.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UItunnelremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UItunnelremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_randomize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-randomize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="turn_birth_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\turn_birth_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hammer_two_handed_hit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\hammer_two_handed_hit.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="thumper_level_editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\thumper_level_editor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
