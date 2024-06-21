@@ -646,6 +646,10 @@ SUGGESTED ADDITIONS/CHANGES
     <value>leafnew;N, Control
 leafopen;O, Control
 leafsave;S, Control
-leafsaveas;A, Control</value>
+leafsaveas;A, Control
+lvlnew;N, Alt
+lvlopen;O, Alt
+lvlsave;S, Alt
+lvlsaveas;A, Alt</value>
   </data>
 </root>

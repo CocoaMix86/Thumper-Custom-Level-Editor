@@ -60,6 +60,10 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.checkMuteApp = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.keybindLvlSaveAs = new System.Windows.Forms.Label();
+            this.keybindLvlSave = new System.Windows.Forms.Label();
+            this.keybindLvlOpen = new System.Windows.Forms.Label();
+            this.keybindLvlNew = new System.Windows.Forms.Label();
             this.panelSetKeybind = new System.Windows.Forms.Panel();
             this.btnSetKeybind = new System.Windows.Forms.Button();
             this.labelKeys = new System.Windows.Forms.Label();
@@ -494,6 +498,10 @@ namespace Thumper_Custom_Level_Editor
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.tabPage3.Controls.Add(this.keybindLvlSaveAs);
+            this.tabPage3.Controls.Add(this.keybindLvlSave);
+            this.tabPage3.Controls.Add(this.keybindLvlOpen);
+            this.tabPage3.Controls.Add(this.keybindLvlNew);
             this.tabPage3.Controls.Add(this.panelSetKeybind);
             this.tabPage3.Controls.Add(this.keybindLeafSaveAs);
             this.tabPage3.Controls.Add(this.keybindLeafSave);
@@ -505,6 +513,66 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage3.Size = new System.Drawing.Size(368, 280);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Key Binds";
+            // 
+            // keybindLvlSaveAs
+            // 
+            this.keybindLvlSaveAs.AutoSize = true;
+            this.keybindLvlSaveAs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLvlSaveAs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindLvlSaveAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLvlSaveAs.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLvlSaveAs.Location = new System.Drawing.Point(3, 108);
+            this.keybindLvlSaveAs.Name = "keybindLvlSaveAs";
+            this.keybindLvlSaveAs.Size = new System.Drawing.Size(68, 15);
+            this.keybindLvlSaveAs.TabIndex = 123;
+            this.keybindLvlSaveAs.Tag = "lvlsaveas";
+            this.keybindLvlSaveAs.Text = "Lvl Save As";
+            this.keybindLvlSaveAs.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindLvlSave
+            // 
+            this.keybindLvlSave.AutoSize = true;
+            this.keybindLvlSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLvlSave.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindLvlSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLvlSave.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLvlSave.Location = new System.Drawing.Point(3, 93);
+            this.keybindLvlSave.Name = "keybindLvlSave";
+            this.keybindLvlSave.Size = new System.Drawing.Size(52, 15);
+            this.keybindLvlSave.TabIndex = 122;
+            this.keybindLvlSave.Tag = "lvlsave";
+            this.keybindLvlSave.Text = "Lvl Save";
+            this.keybindLvlSave.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindLvlOpen
+            // 
+            this.keybindLvlOpen.AutoSize = true;
+            this.keybindLvlOpen.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLvlOpen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindLvlOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLvlOpen.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLvlOpen.Location = new System.Drawing.Point(3, 78);
+            this.keybindLvlOpen.Name = "keybindLvlOpen";
+            this.keybindLvlOpen.Size = new System.Drawing.Size(55, 15);
+            this.keybindLvlOpen.TabIndex = 121;
+            this.keybindLvlOpen.Tag = "lvlopen";
+            this.keybindLvlOpen.Text = "Lvl Open";
+            this.keybindLvlOpen.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindLvlNew
+            // 
+            this.keybindLvlNew.AutoSize = true;
+            this.keybindLvlNew.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLvlNew.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindLvlNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLvlNew.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLvlNew.Location = new System.Drawing.Point(3, 63);
+            this.keybindLvlNew.Name = "keybindLvlNew";
+            this.keybindLvlNew.Size = new System.Drawing.Size(50, 15);
+            this.keybindLvlNew.TabIndex = 120;
+            this.keybindLvlNew.Tag = "lvlnew";
+            this.keybindLvlNew.Text = "Lvl New";
+            this.keybindLvlNew.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // panelSetKeybind
             // 
@@ -696,5 +764,9 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label labelKeybindName;
         private System.Windows.Forms.Label labelKeys;
         private System.Windows.Forms.Button btnSetKeybind;
+        private System.Windows.Forms.Label keybindLvlSaveAs;
+        private System.Windows.Forms.Label keybindLvlSave;
+        private System.Windows.Forms.Label keybindLvlOpen;
+        private System.Windows.Forms.Label keybindLvlNew;
     }
 }

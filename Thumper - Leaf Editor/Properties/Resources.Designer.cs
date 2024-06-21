@@ -333,7 +333,11 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///   Looks up a localized string similar to leafnew;N, Control
         ///leafopen;O, Control
         ///leafsave;S, Control
-        ///leafsaveas;A, Control.
+        ///leafsaveas;A, Control
+        ///lvlnew;N, Alt
+        ///lvlopen;O, Alt
+        ///lvlsave;S, Alt
+        ///lvlsaveas;A, Alt.
         /// </summary>
         public static string defaultkeybinds {
             get {

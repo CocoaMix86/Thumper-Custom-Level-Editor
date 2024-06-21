@@ -133,10 +133,13 @@ namespace Thumper_Custom_Level_Editor
                 File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
             keybinds = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
 
-            keybindLeafNew.Text = $"Leaf New - {keybinds["leafnew"].ToString().Replace(",", " +")}";
-            keybindLeafOpen.Text = $"Leaf Open - {keybinds["leafopen"].ToString().Replace(",", " +")}";
-            keybindLeafSave.Text = $"Leaf Save - {keybinds["leafsave"].ToString().Replace(",", " +")}";
-            keybindLeafSaveAs.Text = $"Leaf Save As - {keybinds["leafsaveas"].ToString().Replace(",", " +")}";
+            foreach (Label _lbl in tabPage3.Controls.Find("keybind", true)) {
+                _lbl.Text = $"{_lbl.Text.Split(new[] { " -" }, StringSplitOptions.None)[0]} - {keybinds[(string)_lbl.Tag]}";
+            }
+            //keybindLeafNew.Text = $"Leaf New - {keybinds["leafnew"].ToString().Replace(",", " +")}";
+            //keybindLeafOpen.Text = $"Leaf Open - {keybinds["leafopen"].ToString().Replace(",", " +")}";
+            //keybindLeafSave.Text = $"Leaf Save - {keybinds["leafsave"].ToString().Replace(",", " +")}";
+            //keybindLeafSaveAs.Text = $"Leaf Save As - {keybinds["leafsaveas"].ToString().Replace(",", " +")}";
         }
         private void keybindLabel_Click(object sender, EventArgs e)
         {
