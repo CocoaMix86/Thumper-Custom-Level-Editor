@@ -12,6 +12,7 @@ namespace Thumper_Custom_Level_Editor
         string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
         public List<Object_Params> _objects = new();
         private List<Tuple<string, string>> objectcolors = new();
+        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
 
         public CustomizeWorkspace(List<Object_Params> thelist)
         {
@@ -123,7 +124,7 @@ namespace Thumper_Custom_Level_Editor
         /// This is all for handling keybinds
         /// 
         Dictionary<string, Keys> keybinds = new();
-        KeyEventArgs lastpress;
+        Keys lastpress;
         Label currentlabel;
         bool ignorekeys = true;
         string keybindname;
@@ -159,9 +160,12 @@ namespace Thumper_Custom_Level_Editor
             if (ignorekeys)
                 return;
             //check if keydown is the same as last pressed. Don't process if it is
-            if (e != lastpress) {
+            if (e.KeyData != lastpress) {
                 //store last press for when user accepts changes
-                lastpress = e;
+                lastpress = e.KeyData;
+                labelKeys.ForeColor = keybinds.ContainsValue(lastpress) ? Color.Red : Color.White;
+                btnSetKeybind.Enabled = !keybinds.ContainsValue(lastpress);
+                btnSetKeybind.BackColor = keybinds.ContainsValue(lastpress) ? Color.Gray : Color.Green;
                 labelKeys.Text = $"{e.KeyCode} + {e.Modifiers.ToString().Replace(",", " +")}";
             }
         }
@@ -169,7 +173,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //when user accepts keybind change, store lastpress into the keybind dictionary
             //using the saved "keybindname" stored from the Click function
-            keybinds[keybindname] = lastpress.KeyData;
+            keybinds[keybindname] = lastpress;
             //update the keybind label
             currentlabel.Text = $"{currentlabel.Text.Split(new[] {" -"}, StringSplitOptions.None)[0]} - {keybinds[keybindname].ToString().Replace(",", " +")}";
             panelSetKeybind.Visible = false;
@@ -186,7 +190,6 @@ namespace Thumper_Custom_Level_Editor
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Text.ToLower().Contains(txtKeybindSearch.Text.ToLower())))
                 _lbl.Visible = true;
         }
-
         private void btnKeybindReset_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to reset all keybinds to default?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -194,6 +197,18 @@ namespace Thumper_Custom_Level_Editor
 
             File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
             LoadKeyBindInfo();
+        }
+        private void btnSingleReset_Click(object sender, EventArgs e)
+        {
+            keybinds[keybindname] = defaultkeybinds[keybindname];
+            lastpress = keybinds[keybindname];
+            currentlabel.Text = $"{currentlabel.Text.Split(new[] { " -" }, StringSplitOptions.None)[0]} - {keybinds[keybindname].ToString().Replace(",", " +")}";
+            keybindLabel_Click(currentlabel, null);
+        }
+        private void btnCloseKeybind_Click(object sender, EventArgs e)
+        {
+            ignorekeys = true;
+            panelSetKeybind.Visible = false;
         }
 
         /// 

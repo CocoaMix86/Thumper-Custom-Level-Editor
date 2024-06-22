@@ -60,7 +60,10 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.checkMuteApp = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnKeybindReset = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSetKeybind = new System.Windows.Forms.Panel();
+            this.btnSingleReset = new System.Windows.Forms.Button();
             this.btnSetKeybind = new System.Windows.Forms.Button();
             this.labelKeys = new System.Windows.Forms.Label();
             this.labelKeybindName = new System.Windows.Forms.Label();
@@ -82,16 +85,15 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafOpen = new System.Windows.Forms.Label();
             this.keybindLeafNew = new System.Windows.Forms.Label();
             this.txtKeybindSearch = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnKeybindReset = new System.Windows.Forms.Button();
+            this.btnCloseKeybind = new System.Windows.Forms.Button();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelSetKeybind.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolstripCustomize
@@ -524,10 +526,35 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Key Binds";
             // 
+            // btnKeybindReset
+            // 
+            this.btnKeybindReset.BackColor = System.Drawing.Color.Orange;
+            this.btnKeybindReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKeybindReset.ForeColor = System.Drawing.Color.Black;
+            this.btnKeybindReset.Location = new System.Drawing.Point(255, 2);
+            this.btnKeybindReset.Name = "btnKeybindReset";
+            this.btnKeybindReset.Size = new System.Drawing.Size(111, 23);
+            this.btnKeybindReset.TabIndex = 149;
+            this.btnKeybindReset.Text = "Reset to Defaults";
+            this.btnKeybindReset.UseVisualStyleBackColor = false;
+            this.btnKeybindReset.Click += new System.EventHandler(this.btnKeybindReset_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(17, 17);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 133;
+            this.pictureBox1.TabStop = false;
+            // 
             // panelSetKeybind
             // 
             this.panelSetKeybind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panelSetKeybind.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSetKeybind.Controls.Add(this.btnCloseKeybind);
+            this.panelSetKeybind.Controls.Add(this.btnSingleReset);
             this.panelSetKeybind.Controls.Add(this.btnSetKeybind);
             this.panelSetKeybind.Controls.Add(this.labelKeys);
             this.panelSetKeybind.Controls.Add(this.labelKeybindName);
@@ -537,12 +564,25 @@ namespace Thumper_Custom_Level_Editor
             this.panelSetKeybind.TabIndex = 119;
             this.panelSetKeybind.Visible = false;
             // 
+            // btnSingleReset
+            // 
+            this.btnSingleReset.BackColor = System.Drawing.Color.Orange;
+            this.btnSingleReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSingleReset.ForeColor = System.Drawing.Color.Black;
+            this.btnSingleReset.Location = new System.Drawing.Point(99, 40);
+            this.btnSingleReset.Name = "btnSingleReset";
+            this.btnSingleReset.Size = new System.Drawing.Size(75, 23);
+            this.btnSingleReset.TabIndex = 150;
+            this.btnSingleReset.Text = "Reset";
+            this.btnSingleReset.UseVisualStyleBackColor = false;
+            this.btnSingleReset.Click += new System.EventHandler(this.btnSingleReset_Click);
+            // 
             // btnSetKeybind
             // 
             this.btnSetKeybind.BackColor = System.Drawing.Color.Green;
             this.btnSetKeybind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSetKeybind.ForeColor = System.Drawing.Color.White;
-            this.btnSetKeybind.Location = new System.Drawing.Point(60, 40);
+            this.btnSetKeybind.Location = new System.Drawing.Point(24, 40);
             this.btnSetKeybind.Name = "btnSetKeybind";
             this.btnSetKeybind.Size = new System.Drawing.Size(75, 23);
             this.btnSetKeybind.TabIndex = 120;
@@ -873,28 +913,17 @@ namespace Thumper_Custom_Level_Editor
             this.txtKeybindSearch.TextChanged += new System.EventHandler(this.txtKeybindSearch_TextChanged);
             this.txtKeybindSearch.Enter += new System.EventHandler(this.txtKeybindSearch_Enter);
             // 
-            // pictureBox1
+            // btnCloseKeybind
             // 
-            this.pictureBox1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(4, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(17, 17);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 133;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnKeybindReset
-            // 
-            this.btnKeybindReset.BackColor = System.Drawing.Color.Orange;
-            this.btnKeybindReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnKeybindReset.ForeColor = System.Drawing.Color.Black;
-            this.btnKeybindReset.Location = new System.Drawing.Point(255, 2);
-            this.btnKeybindReset.Name = "btnKeybindReset";
-            this.btnKeybindReset.Size = new System.Drawing.Size(111, 23);
-            this.btnKeybindReset.TabIndex = 149;
-            this.btnKeybindReset.Text = "Reset to Defaults";
-            this.btnKeybindReset.UseVisualStyleBackColor = false;
-            this.btnKeybindReset.Click += new System.EventHandler(this.btnKeybindReset_Click);
+            this.btnCloseKeybind.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCloseKeybind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseKeybind.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnCloseKeybind.Location = new System.Drawing.Point(168, 0);
+            this.btnCloseKeybind.Name = "btnCloseKeybind";
+            this.btnCloseKeybind.Size = new System.Drawing.Size(16, 16);
+            this.btnCloseKeybind.TabIndex = 150;
+            this.btnCloseKeybind.UseVisualStyleBackColor = true;
+            this.btnCloseKeybind.Click += new System.EventHandler(this.btnCloseKeybind_Click);
             // 
             // CustomizeWorkspace
             // 
@@ -924,11 +953,11 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSetKeybind.ResumeLayout(false);
             this.panelSetKeybind.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -990,5 +1019,7 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.TextBox txtKeybindSearch;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnKeybindReset;
+        private System.Windows.Forms.Button btnSingleReset;
+        private System.Windows.Forms.Button btnCloseKeybind;
     }
 }
