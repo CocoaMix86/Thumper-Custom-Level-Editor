@@ -337,7 +337,15 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///lvlnew;N, Alt
         ///lvlopen;O, Alt
         ///lvlsave;S, Alt
-        ///lvlsaveas;A, Alt.
+        ///lvlsaveas;A, Alt
+        ///gatenew;N, Control, Shift
+        ///gateopen;O, Control, Shift
+        ///gatesave;S, Control, Shift
+        ///gatesaveas;A, Control, Shift
+        ///masternew;N, Control, Alt
+        ///masteropen;O, Control, Alt
+        ///mastersave;S, Control, Alt
+        ///mastersaveas;A, Control, Alt.
         /// </summary>
         public static string defaultkeybinds {
             get {

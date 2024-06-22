@@ -129,20 +129,26 @@ namespace Thumper_Custom_Level_Editor
         string keybindname;
         private void LoadKeyBindInfo()
         {
+            //locate keybinds file. If not exist, create it from internal resource
             if (!File.Exists($@"{AppLoc}\templates\keybinds.txt")) 
                 File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
+            //read keybinds to a dictionary for easier lookup
             keybinds = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-
-            foreach (Label _lbl in tabPage3.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
-                _lbl.Text = $"{_lbl.Text.Split(new[] { " -" }, StringSplitOptions.None)[0]} - {keybinds[(string)_lbl.Tag]}";
+            //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
+            foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
+                _lbl.Text = $"{_lbl.Text.Split(new[] { " -" }, StringSplitOptions.None)[0]} - {keybinds[(string)_lbl.Tag].ToString().Replace(",", " +")}";
             }
         }
         private void keybindLabel_Click(object sender, EventArgs e)
         {
+            ///all keybind labels call this function
+            //storw which label was clicked
             currentlabel = sender as Label;
             keybindname = (string)currentlabel.Tag;
             string[] lbltxt = currentlabel.Text.Split('-');
+            //set to false so the KeyDown event can start picking up our key presses
             ignorekeys = false;
+            //make the keybind setting panel show up
             panelSetKeybind.Visible = true;
             labelKeybindName.Text = $"Set Keybind - {lbltxt[0]}";
             labelKeys.Text = lbltxt[1].Replace(",", " +");
@@ -151,16 +157,22 @@ namespace Thumper_Custom_Level_Editor
         {
             if (ignorekeys)
                 return;
+            //check if keydown is the same as last pressed. Don't process if it is
             if (e != lastpress) {
+                //store last press for when user accepts changes
                 lastpress = e;
                 labelKeys.Text = $"{e.KeyCode} + {e.Modifiers.ToString().Replace(",", " +")}";
             }
         }
         private void btnSetKeybind_Click(object sender, EventArgs e)
         {
+            //when user accepts keybind change, store lastpress into the keybind dictionary
+            //using the saved "keybindname" stored from the Click function
             keybinds[keybindname] = lastpress.KeyData;
-            currentlabel.Text = $"{currentlabel.Text.Split('-')[0]} - {keybinds[keybindname].ToString().Replace(",", " +")}";
+            //update the keybind label
+            currentlabel.Text = $"{currentlabel.Text.Split(new[] {" -"}, StringSplitOptions.None)[0]} - {keybinds[keybindname].ToString().Replace(",", " +")}";
             panelSetKeybind.Visible = false;
+            ignorekeys = true;
         }
         /// 
         /// This is all for handling keybinds
