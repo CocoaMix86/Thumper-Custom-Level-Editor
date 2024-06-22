@@ -83,6 +83,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafNew = new System.Windows.Forms.Label();
             this.txtKeybindSearch = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnKeybindReset = new System.Windows.Forms.Button();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -511,6 +512,7 @@ namespace Thumper_Custom_Level_Editor
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.tabPage3.Controls.Add(this.btnKeybindReset);
             this.tabPage3.Controls.Add(this.pictureBox1);
             this.tabPage3.Controls.Add(this.panelSetKeybind);
             this.tabPage3.Controls.Add(this.panel1);
@@ -881,6 +883,19 @@ namespace Thumper_Custom_Level_Editor
             this.pictureBox1.TabIndex = 133;
             this.pictureBox1.TabStop = false;
             // 
+            // btnKeybindReset
+            // 
+            this.btnKeybindReset.BackColor = System.Drawing.Color.Orange;
+            this.btnKeybindReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKeybindReset.ForeColor = System.Drawing.Color.Black;
+            this.btnKeybindReset.Location = new System.Drawing.Point(255, 2);
+            this.btnKeybindReset.Name = "btnKeybindReset";
+            this.btnKeybindReset.Size = new System.Drawing.Size(111, 23);
+            this.btnKeybindReset.TabIndex = 149;
+            this.btnKeybindReset.Text = "Reset to Defaults";
+            this.btnKeybindReset.UseVisualStyleBackColor = false;
+            this.btnKeybindReset.Click += new System.EventHandler(this.btnKeybindReset_Click);
+            // 
             // CustomizeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -974,5 +989,6 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label keybindLeafNew;
         private System.Windows.Forms.TextBox txtKeybindSearch;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnKeybindReset;
     }
 }

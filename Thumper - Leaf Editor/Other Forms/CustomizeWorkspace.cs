@@ -144,6 +144,7 @@ namespace Thumper_Custom_Level_Editor
             ///all keybind labels call this function
             //storw which label was clicked
             currentlabel = sender as Label;
+            currentlabel.Focus();
             keybindname = (string)currentlabel.Tag;
             string[] lbltxt = currentlabel.Text.Split('-');
             //set to false so the KeyDown event can start picking up our key presses
@@ -185,6 +186,16 @@ namespace Thumper_Custom_Level_Editor
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Text.ToLower().Contains(txtKeybindSearch.Text.ToLower())))
                 _lbl.Visible = true;
         }
+
+        private void btnKeybindReset_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to reset all keybinds to default?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
+
+            File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
+            LoadKeyBindInfo();
+        }
+
         /// 
         /// This is all for handling keybinds
         /// 
