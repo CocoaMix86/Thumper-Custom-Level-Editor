@@ -81,6 +81,8 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafSave = new System.Windows.Forms.Label();
             this.keybindLeafOpen = new System.Windows.Forms.Label();
             this.keybindLeafNew = new System.Windows.Forms.Label();
+            this.txtKeybindSearch = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -88,6 +90,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage3.SuspendLayout();
             this.panelSetKeybind.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolstripCustomize
@@ -508,8 +511,10 @@ namespace Thumper_Custom_Level_Editor
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.tabPage3.Controls.Add(this.pictureBox1);
             this.tabPage3.Controls.Add(this.panelSetKeybind);
             this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Controls.Add(this.txtKeybindSearch);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -591,11 +596,11 @@ namespace Thumper_Custom_Level_Editor
             this.panel1.Controls.Add(this.keybindLeafSave);
             this.panel1.Controls.Add(this.keybindLeafOpen);
             this.panel1.Controls.Add(this.keybindLeafNew);
-            this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Location = new System.Drawing.Point(1, 27);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel1.Size = new System.Drawing.Size(300, 245);
+            this.panel1.Size = new System.Drawing.Size(271, 218);
             this.panel1.TabIndex = 132;
             // 
             // keybindMasterSaveAs
@@ -854,6 +859,28 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafNew.Text = "Leaf New";
             this.keybindLeafNew.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
+            // txtKeybindSearch
+            // 
+            this.txtKeybindSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtKeybindSearch.Location = new System.Drawing.Point(22, 2);
+            this.txtKeybindSearch.Name = "txtKeybindSearch";
+            this.txtKeybindSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtKeybindSearch.Size = new System.Drawing.Size(122, 21);
+            this.txtKeybindSearch.TabIndex = 148;
+            this.txtKeybindSearch.Text = "search...";
+            this.txtKeybindSearch.TextChanged += new System.EventHandler(this.txtKeybindSearch_TextChanged);
+            this.txtKeybindSearch.Enter += new System.EventHandler(this.txtKeybindSearch_Enter);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(17, 17);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 133;
+            this.pictureBox1.TabStop = false;
+            // 
             // CustomizeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -881,10 +908,12 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.panelSetKeybind.ResumeLayout(false);
             this.panelSetKeybind.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -943,5 +972,7 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label keybindLeafSave;
         private System.Windows.Forms.Label keybindLeafOpen;
         private System.Windows.Forms.Label keybindLeafNew;
+        private System.Windows.Forms.TextBox txtKeybindSearch;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

@@ -174,6 +174,17 @@ namespace Thumper_Custom_Level_Editor
             panelSetKeybind.Visible = false;
             ignorekeys = true;
         }
+        private void txtKeybindSearch_Enter(object sender, EventArgs e)
+        {
+            txtKeybindSearch.Text = txtKeybindSearch.Text.Replace("search...", "");
+        }
+        private void txtKeybindSearch_TextChanged(object sender, EventArgs e)
+        {
+            foreach (Label _lbl in panel1.Controls.OfType<Label>())
+                _lbl.Visible = false;
+            foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Text.ToLower().Contains(txtKeybindSearch.Text.ToLower())))
+                _lbl.Visible = true;
+        }
         /// 
         /// This is all for handling keybinds
         /// 
