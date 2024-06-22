@@ -733,10 +733,5 @@ namespace Thumper_Custom_Level_Editor
 
 
         }
-
-        private void btnLeafPanelTemplate_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

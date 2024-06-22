@@ -179,6 +179,9 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.btnRevertLeaf = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnLeafPanelTemplate2 = new System.Windows.Forms.ToolStripButton();
             this.leafToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnTrackAdd = new System.Windows.Forms.ToolStripButton();
             this.btnTrackDelete = new System.Windows.Forms.ToolStripButton();
@@ -465,9 +468,6 @@
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.splitBottom2 = new System.Windows.Forms.SplitContainer();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
@@ -626,7 +626,7 @@
             this.SaveAllToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
             this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
             this.SaveAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.SaveAllToolStripMenuItem.Text = "Save All";
             this.SaveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItem_Click);
             // 
@@ -637,7 +637,7 @@
             this.openLevelFolderToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
             this.openLevelFolderToolStripMenuItem.Name = "openLevelFolderToolStripMenuItem";
             this.openLevelFolderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.openLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.openLevelFolderToolStripMenuItem.Text = "Open Level";
             this.openLevelFolderToolStripMenuItem.Click += new System.EventHandler(this.btnLevelFolder_Click);
             // 
@@ -647,7 +647,7 @@
             this.recentLevelsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.recentLevelsToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
             this.recentLevelsToolStripMenuItem.Name = "recentLevelsToolStripMenuItem";
-            this.recentLevelsToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.recentLevelsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.recentLevelsToolStripMenuItem.Text = "Recent Levels...";
             this.recentLevelsToolStripMenuItem.Click += new System.EventHandler(this.btnShowRecentFile_Click);
             // 
@@ -656,7 +656,7 @@
             this.toolStripSeparator4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.toolStripSeparator4.ForeColor = System.Drawing.Color.Black;
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(213, 6);
             this.toolStripSeparator4.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
             // 
             // openLevelInExplorerToolStripMenuItem
@@ -665,7 +665,7 @@
             this.openLevelInExplorerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.openLevelInExplorerToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_explorer;
             this.openLevelInExplorerToolStripMenuItem.Name = "openLevelInExplorerToolStripMenuItem";
-            this.openLevelInExplorerToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.openLevelInExplorerToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.openLevelInExplorerToolStripMenuItem.Text = "Open Level in Explorer";
             this.openLevelInExplorerToolStripMenuItem.Click += new System.EventHandler(this.btnExplorer_Click);
             // 
@@ -682,7 +682,7 @@
             this.saveToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.saveToolStripMenuItem1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(220, 26);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
             this.saveToolStripMenuItem1.Text = "Leaf...";
             // 
             // leafnewToolStripMenuItem
@@ -760,7 +760,7 @@
             this.levelToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.levelToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
-            this.levelToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.levelToolStripMenuItem.Text = "Lvl...";
             // 
             // lvlnewToolStripMenuItem1
@@ -818,7 +818,7 @@
             this.gateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.gateToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
             this.gateToolStripMenuItem.Name = "gateToolStripMenuItem";
-            this.gateToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.gateToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.gateToolStripMenuItem.Text = "Gate...";
             // 
             // gatenewToolStripMenuItem
@@ -829,7 +829,7 @@
             this.gatenewToolStripMenuItem.Name = "gatenewToolStripMenuItem";
             this.gatenewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
-            this.gatenewToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+            this.gatenewToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.gatenewToolStripMenuItem.Text = "New";
             this.gatenewToolStripMenuItem.Click += new System.EventHandler(this.gatenewToolStripMenuItem_Click);
             // 
@@ -841,7 +841,7 @@
             this.gateopenToolStripMenuItem.Name = "gateopenToolStripMenuItem";
             this.gateopenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.O)));
-            this.gateopenToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+            this.gateopenToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.gateopenToolStripMenuItem.Text = "Open";
             this.gateopenToolStripMenuItem.Click += new System.EventHandler(this.gateopenToolStripMenuItem_Click);
             // 
@@ -853,7 +853,7 @@
             this.gatesaveToolStripMenuItem.Name = "gatesaveToolStripMenuItem";
             this.gatesaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.gatesaveToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+            this.gatesaveToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.gatesaveToolStripMenuItem.Text = "Save";
             this.gatesaveToolStripMenuItem.Click += new System.EventHandler(this.gatesaveToolStripMenuItem_Click);
             // 
@@ -865,7 +865,7 @@
             this.gatesaveAsToolStripMenuItem.Name = "gatesaveAsToolStripMenuItem";
             this.gatesaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.A)));
-            this.gatesaveAsToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+            this.gatesaveAsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.gatesaveAsToolStripMenuItem.Text = "Save As...";
             this.gatesaveAsToolStripMenuItem.Click += new System.EventHandler(this.gatesaveAsToolStripMenuItem_Click);
             // 
@@ -880,7 +880,7 @@
             this.masterToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.masterToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
-            this.masterToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.masterToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.masterToolStripMenuItem.Text = "Master...";
             // 
             // masternewToolStripMenuItem
@@ -891,7 +891,7 @@
             this.masternewToolStripMenuItem.Name = "masternewToolStripMenuItem";
             this.masternewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.N)));
-            this.masternewToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.masternewToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.masternewToolStripMenuItem.Text = "New";
             this.masternewToolStripMenuItem.Click += new System.EventHandler(this.masternewToolStripMenuItem_Click);
             // 
@@ -903,7 +903,7 @@
             this.masteropenToolStripMenuItem.Name = "masteropenToolStripMenuItem";
             this.masteropenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.O)));
-            this.masteropenToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.masteropenToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.masteropenToolStripMenuItem.Text = "Open";
             this.masteropenToolStripMenuItem.Click += new System.EventHandler(this.masteropenToolStripMenuItem_Click);
             // 
@@ -915,7 +915,7 @@
             this.mastersaveToolStripMenuItem.Name = "mastersaveToolStripMenuItem";
             this.mastersaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.mastersaveToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.mastersaveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.mastersaveToolStripMenuItem.Text = "Save";
             this.mastersaveToolStripMenuItem.Click += new System.EventHandler(this.mastersaveToolStripMenuItem_Click);
             // 
@@ -927,7 +927,7 @@
             this.mastersaveAsToolStripMenuItem.Name = "mastersaveAsToolStripMenuItem";
             this.mastersaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.A)));
-            this.mastersaveAsToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.mastersaveAsToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.mastersaveAsToolStripMenuItem.Text = "Save As...";
             this.mastersaveAsToolStripMenuItem.Click += new System.EventHandler(this.mastersaveAsToolStripMenuItem_Click);
             // 
@@ -942,7 +942,7 @@
             this.sampleToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.sampleToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
             this.sampleToolStripMenuItem.Name = "sampleToolStripMenuItem";
-            this.sampleToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.sampleToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.sampleToolStripMenuItem.Text = "Sample...";
             // 
             // SamplenewToolStripMenuItem
@@ -998,7 +998,7 @@
             this.toolStripSeparator3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.toolStripSeparator3.ForeColor = System.Drawing.Color.Black;
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(213, 6);
             this.toolStripSeparator3.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
             // 
             // newLevelFolderToolStripMenuItem
@@ -1008,7 +1008,7 @@
             this.newLevelFolderToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
             this.newLevelFolderToolStripMenuItem.Name = "newLevelFolderToolStripMenuItem";
             this.newLevelFolderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.newLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.newLevelFolderToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.newLevelFolderToolStripMenuItem.Text = "New Level Folder";
             this.newLevelFolderToolStripMenuItem.Click += new System.EventHandler(this.newLevelFolderToolStripMenuItem_Click);
             // 
@@ -1018,7 +1018,7 @@
             this.editLevelDetailsToolStripMenuItem.Enabled = false;
             this.editLevelDetailsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.editLevelDetailsToolStripMenuItem.Name = "editLevelDetailsToolStripMenuItem";
-            this.editLevelDetailsToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.editLevelDetailsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.editLevelDetailsToolStripMenuItem.Text = "Edit Level Details";
             this.editLevelDetailsToolStripMenuItem.Click += new System.EventHandler(this.editLevelDetailsToolStripMenuItem_Click);
             // 
@@ -1028,7 +1028,7 @@
             this.regenerateDefaultFilesToolStripMenuItem.Enabled = false;
             this.regenerateDefaultFilesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.regenerateDefaultFilesToolStripMenuItem.Name = "regenerateDefaultFilesToolStripMenuItem";
-            this.regenerateDefaultFilesToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.regenerateDefaultFilesToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.regenerateDefaultFilesToolStripMenuItem.Text = "Regenerate Default Files";
             this.regenerateDefaultFilesToolStripMenuItem.Click += new System.EventHandler(this.regenerateDefaultFilesToolStripMenuItem_Click);
             // 
@@ -1040,7 +1040,7 @@
             this.regenerateTemplateFilesToolStripMenuItem});
             this.templateFilesToolStripMenuItem11.ForeColor = System.Drawing.Color.White;
             this.templateFilesToolStripMenuItem11.Name = "templateFilesToolStripMenuItem11";
-            this.templateFilesToolStripMenuItem11.Size = new System.Drawing.Size(220, 26);
+            this.templateFilesToolStripMenuItem11.Size = new System.Drawing.Size(216, 22);
             this.templateFilesToolStripMenuItem11.Text = "Template Files...";
             // 
             // openTemplateFolderToolStripMenuItem
@@ -1066,7 +1066,7 @@
             this.toolStripSeparator2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.toolStripSeparator2.ForeColor = System.Drawing.Color.Black;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(213, 6);
             this.toolStripSeparator2.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
             // 
             // exitToolStripMenuItem
@@ -1075,7 +1075,7 @@
             this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.exitToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.exit;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1896,7 +1896,7 @@
             this.btnRevertLeaf,
             this.toolStripSeparator11,
             this.toolStripSeparator12,
-            this.toolStripButton2});
+            this.btnLeafPanelTemplate2});
             this.toolstripTitleLeaf.Location = new System.Drawing.Point(0, 0);
             this.toolstripTitleLeaf.MaximumSize = new System.Drawing.Size(0, 22);
             this.toolstripTitleLeaf.Name = "toolstripTitleLeaf";
@@ -1994,6 +1994,26 @@
             this.btnRevertLeaf.Size = new System.Drawing.Size(23, 19);
             this.btnRevertLeaf.ToolTipText = "Revert changes to last save";
             this.btnRevertLeaf.Click += new System.EventHandler(this.btnRevertLeaf_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 22);
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 22);
+            // 
+            // btnLeafPanelTemplate2
+            // 
+            this.btnLeafPanelTemplate2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLeafPanelTemplate2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_template1;
+            this.btnLeafPanelTemplate2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafPanelTemplate2.Name = "btnLeafPanelTemplate2";
+            this.btnLeafPanelTemplate2.Size = new System.Drawing.Size(23, 19);
+            this.btnLeafPanelTemplate2.ToolTipText = "Open a template file";
+            this.btnLeafPanelTemplate2.Click += new System.EventHandler(this.btnLeafPanelTemplate_Click);
             // 
             // leafToolStrip
             // 
@@ -6381,26 +6401,6 @@
             this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_template1;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 19);
-            this.toolStripButton2.ToolTipText = "Open a template file";
-            this.toolStripButton2.Click += new System.EventHandler(this.btnLeafPanelTemplate_Click);
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 22);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 22);
-            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -6958,7 +6958,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolstripLevelName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton btnLeafPanelTemplate2;
     }
 }
 
