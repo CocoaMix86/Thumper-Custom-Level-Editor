@@ -286,11 +286,15 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//during editing of a cell in trackEditor, check and sanitize input so it's numeric only
 			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
+			//e.Control.KeyDown -= new KeyEventHandler(AllowArrowMovement);
+			e.Control.PreviewKeyDown -= new PreviewKeyDownEventHandler(AllowArrowMovement);
 			if (trackEditor.CurrentCell.ColumnIndex != -1) //Desired Column
 			{
                 if (e.Control is TextBox tb) {
                     tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);
-                }
+					//tb.KeyDown += new KeyEventHandler(AllowArrowMovement);
+					tb.PreviewKeyDown += new PreviewKeyDownEventHandler(AllowArrowMovement);
+				}
             }
 		}
 		//Cell value changed
@@ -372,7 +376,7 @@ namespace Thumper_Custom_Level_Editor
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
-			if (controldown) {
+			else if (controldown) {
 				///copies selected cells
 				if (e.KeyCode == Keys.C) {
 					DataObject d = trackEditor.GetClipboardContent();
@@ -421,7 +425,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 
-			if (altdown) {
+			else if (altdown) {
 				if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
 					e.Handled = true;
 					//this is used for indexing if shifting left/down or right/up
@@ -1352,7 +1356,7 @@ namespace Thumper_Custom_Level_Editor
 				grid.Columns[i].Frozen = false;
 				grid.Columns[i].MinimumWidth = 2;
 				grid.Columns[i].ReadOnly = false;
-				grid.Columns[i].ValueType = typeof(decimal);
+				grid.Columns[i].ValueType = typeof(decimal?);
 				grid.Columns[i].DefaultCellStyle.Format = "0.###";
 				grid.Columns[i].FillWeight = 0.001F;
 			}

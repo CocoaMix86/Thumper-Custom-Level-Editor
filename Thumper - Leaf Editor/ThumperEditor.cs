@@ -642,7 +642,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void datagrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            ((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
+            //((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
         private void combobox_DrawItem(object sender, DrawItemEventArgs e)

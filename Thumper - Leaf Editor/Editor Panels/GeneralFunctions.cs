@@ -153,6 +153,29 @@ namespace Thumper_Custom_Level_Editor
                 e.Handled = true;
             }
         }
+        private void AllowArrowMovement(object sender, PreviewKeyDownEventArgs e)
+        {
+           if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
+                if (trackEditor.IsCurrentCellInEditMode) {
+                    if ((string)trackEditor.CurrentCell.EditedFormattedValue == "") {
+                        trackEditor.CurrentCell.Value = null;
+                        trackEditor.CancelEdit();
+                        if (e.KeyCode is Keys.Right or Keys.Left)
+                            trackEditor.EndEdit();
+                    }
+                }
+           }
+        }
+        private void trackEditor_Click(object sender, EventArgs e)
+        {
+            if (trackEditor.IsCurrentCellInEditMode) {
+                if ((string)trackEditor.CurrentCell.EditedFormattedValue == "") {
+                    trackEditor.CurrentCell.Value = null;
+                    trackEditor.CancelEdit();
+                    trackEditor.EndEdit();
+                }
+            }
+        }
 
         private void Read_Config()
         {
