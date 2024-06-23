@@ -137,7 +137,7 @@ namespace Thumper_Custom_Level_Editor
             keybinds = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
             //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
-                _lbl.Text = $"{_lbl.Text.Split(new[] { " -" }, StringSplitOptions.None)[0]} - {keybinds[(string)_lbl.Tag].ToString().Replace(",", " +")}";
+                _lbl.Text = $"{_lbl.Text.Split('.')[0],14}" + $".....{keybinds[(string)_lbl.Tag].ToString().Replace(",", " +")}";
             }
         }
         private void keybindLabel_Click(object sender, EventArgs e)
@@ -147,13 +147,13 @@ namespace Thumper_Custom_Level_Editor
             currentlabel = sender as Label;
             currentlabel.Focus();
             keybindname = (string)currentlabel.Tag;
-            string[] lbltxt = currentlabel.Text.Split('-');
+            string[] lbltxt = currentlabel.Text.Split('.');
             //set to false so the KeyDown event can start picking up our key presses
             ignorekeys = false;
             //make the keybind setting panel show up
             panelSetKeybind.Visible = true;
-            labelKeybindName.Text = $"Set Keybind - {lbltxt[0]}";
-            labelKeys.Text = lbltxt[1].Replace(",", " +");
+            labelKeybindName.Text = $"Set Keybind - {lbltxt[0].Trim()}";
+            labelKeys.Text = lbltxt.Last().Replace(",", " +");
         }
         private void CustomizeWorkspace_KeyDown(object sender, KeyEventArgs e)
         {
@@ -175,7 +175,7 @@ namespace Thumper_Custom_Level_Editor
             //using the saved "keybindname" stored from the Click function
             keybinds[keybindname] = lastpress;
             //update the keybind label
-            currentlabel.Text = $"{currentlabel.Text.Split(new[] {" -"}, StringSplitOptions.None)[0]} - {keybinds[keybindname].ToString().Replace(",", " +")}";
+            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{keybinds[keybindname].ToString().Replace(",", " +")}";
             panelSetKeybind.Visible = false;
             ignorekeys = true;
         }
@@ -202,7 +202,7 @@ namespace Thumper_Custom_Level_Editor
         {
             keybinds[keybindname] = defaultkeybinds[keybindname];
             lastpress = keybinds[keybindname];
-            currentlabel.Text = $"{currentlabel.Text.Split(new[] { " -" }, StringSplitOptions.None)[0]} - {keybinds[keybindname].ToString().Replace(",", " +")}";
+            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{keybinds[keybindname].ToString().Replace(",", " +")}";
             keybindLabel_Click(currentlabel, null);
         }
         private void btnCloseKeybind_Click(object sender, EventArgs e)
