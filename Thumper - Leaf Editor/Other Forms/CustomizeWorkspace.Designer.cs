@@ -579,7 +579,7 @@ namespace Thumper_Custom_Level_Editor
             // 
             // btnSetKeybind
             // 
-            this.btnSetKeybind.BackColor = System.Drawing.Color.Green;
+            this.btnSetKeybind.BackColor = System.Drawing.Color.Gray;
             this.btnSetKeybind.Enabled = false;
             this.btnSetKeybind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSetKeybind.ForeColor = System.Drawing.Color.White;

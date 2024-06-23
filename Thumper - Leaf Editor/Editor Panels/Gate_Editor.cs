@@ -451,9 +451,9 @@ namespace Thumper_Custom_Level_Editor
 				{ "obj_name", _gatename },
 				{ "spn_name", dropGateBoss.SelectedValue.ToString() },
 				{ "param_path", bossdata[dropGateBoss.SelectedIndex].boss_ent },
-				{ "pre_lvl_name", dropGatePre.Text },
-				{ "post_lvl_name", dropGatePost.Text },
-				{ "restart_lvl_name", dropGateRestart.Text },
+				{ "pre_lvl_name", dropGatePre.Text.Replace("<none>", "") },
+				{ "post_lvl_name", dropGatePost.Text.Replace("<none>", "") },
+				{ "restart_lvl_name", dropGateRestart.Text.Replace("<none>", "") },
 				{ "section_type", dropGateSection.Text },
 				{ "random_type", $"LEVEL_RANDOM_{(checkGateRandom.Checked ? "BUCKET" : "NONE")}" }
 			};

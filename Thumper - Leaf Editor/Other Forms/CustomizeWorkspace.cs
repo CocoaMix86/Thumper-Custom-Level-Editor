@@ -217,6 +217,7 @@ namespace Thumper_Custom_Level_Editor
             ignorekeys = true;
             panelSetKeybind.Visible = false;
             btnSetKeybind.Enabled = false;
+            btnSetKeybind.BackColor = Color.Gray;
         }
 
         /// 

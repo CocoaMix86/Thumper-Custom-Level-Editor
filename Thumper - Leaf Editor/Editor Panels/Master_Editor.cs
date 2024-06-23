@@ -528,7 +528,7 @@ namespace Thumper_Custom_Level_Editor
                 { "obj_type", "SequinMaster" },
                 { "obj_name", "sequin.master" },
                 { "skybox_name", dropMasterSkybox.Text },
-                { "intro_lvl_name", dropMasterIntro.Text }
+                { "intro_lvl_name", dropMasterIntro.Text.Replace("<none>", "") }
             };
             JArray groupings = new();
 			foreach (MasterLvlData group in _masterlvls) {
@@ -536,8 +536,8 @@ namespace Thumper_Custom_Level_Editor
                     { "lvl_name", group.lvlname ?? "" },
                     { "gate_name", group.gatename ?? "" },
                     { "checkpoint", group.checkpoint.ToString() },
-                    { "checkpoint_leader_lvl_name", group.checkpoint_leader ?? "" },
-                    { "rest_lvl_name", group.rest ?? "" },
+                    { "checkpoint_leader_lvl_name", group.checkpoint_leader.Replace("<none>", "") ?? "" },
+                    { "rest_lvl_name", group.rest.Replace("<none>", "") ?? "" },
                     { "play_plus", group.playplus.ToString() },
                     { "isolate", group.isolate.ToString() }
                 };
@@ -551,7 +551,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			_save.Add("groupings", groupings);
 			_save.Add("isolate_tracks", isolate_tracks.ToString());
-			_save.Add("checkpoint_lvl_name", dropMasterCheck.Text);
+			_save.Add("checkpoint_lvl_name", dropMasterCheck.Text.Replace("<none>", ""));
 			masterjson = _save;
 			///end build
 			///
