@@ -137,6 +137,7 @@ namespace Thumper_Custom_Level_Editor
             keybinds = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
             //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
+                //the "14" is a leftpad empty space
                 _lbl.Text = $"{_lbl.Text.Split('.')[0],14}" + $".....{keybinds[(string)_lbl.Tag].ToString().Replace(",", " +")}";
             }
         }
@@ -163,6 +164,8 @@ namespace Thumper_Custom_Level_Editor
             if (e.KeyData != lastpress) {
                 //store last press for when user accepts changes
                 lastpress = e.KeyData;
+                //check if the new keypress exists as a keybind
+                //if it is, disable controls so it can't be set
                 labelKeys.ForeColor = keybinds.ContainsValue(lastpress) ? Color.Red : Color.White;
                 btnSetKeybind.Enabled = !keybinds.ContainsValue(lastpress);
                 btnSetKeybind.BackColor = keybinds.ContainsValue(lastpress) ? Color.Gray : Color.Green;
@@ -175,6 +178,7 @@ namespace Thumper_Custom_Level_Editor
             //using the saved "keybindname" stored from the Click function
             keybinds[keybindname] = lastpress;
             //update the keybind label
+            //the "14" is a leftpad empty space
             currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{keybinds[keybindname].ToString().Replace(",", " +")}";
             panelSetKeybind.Visible = false;
             ignorekeys = true;
@@ -187,6 +191,8 @@ namespace Thumper_Custom_Level_Editor
         {
             foreach (Label _lbl in panel1.Controls.OfType<Label>())
                 _lbl.Visible = false;
+            //find all labels with text that matches the search. Since keybind name AND Keys are in the same string,
+            //the search can look up both at the same time
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Text.ToLower().Contains(txtKeybindSearch.Text.ToLower())))
                 _lbl.Visible = true;
         }
@@ -202,6 +208,7 @@ namespace Thumper_Custom_Level_Editor
         {
             keybinds[keybindname] = defaultkeybinds[keybindname];
             lastpress = keybinds[keybindname];
+            //the "14" is a leftpad empty space
             currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{keybinds[keybindname].ToString().Replace(",", " +")}";
             keybindLabel_Click(currentlabel, null);
         }
@@ -209,6 +216,7 @@ namespace Thumper_Custom_Level_Editor
         {
             ignorekeys = true;
             panelSetKeybind.Visible = false;
+            btnSetKeybind.Enabled = false;
         }
 
         /// 
