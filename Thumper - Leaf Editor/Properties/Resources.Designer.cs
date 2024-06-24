@@ -345,7 +345,13 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///masternew;N, Control, Alt
         ///masteropen;O, Control, Alt
         ///mastersave;S, Control, Alt
-        ///mastersaveas;A, Control, Alt.
+        ///mastersaveas;A, Control, Alt
+        ///samplenew;N, Alt, Shift
+        ///sampleopen;O, Alt, Shift
+        ///samplesave;S, Alt, Shift
+        ///samplesaveas;A, Alt, Shift
+        ///saveall;Q, Control
+        ///levelnew;L, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string defaultkeybinds {
             get {

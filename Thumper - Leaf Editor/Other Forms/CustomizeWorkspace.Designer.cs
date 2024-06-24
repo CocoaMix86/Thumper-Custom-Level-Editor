@@ -63,11 +63,21 @@ namespace Thumper_Custom_Level_Editor
             this.btnKeybindReset = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSetKeybind = new System.Windows.Forms.Panel();
+            this.btnCloseKeybind = new System.Windows.Forms.Button();
             this.btnSingleReset = new System.Windows.Forms.Button();
             this.btnSetKeybind = new System.Windows.Forms.Button();
             this.labelKeys = new System.Windows.Forms.Label();
             this.labelKeybindName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.keybindLevelExplorer = new System.Windows.Forms.Label();
+            this.keybindLevelRecent = new System.Windows.Forms.Label();
+            this.keybindLevelOpen = new System.Windows.Forms.Label();
+            this.keybindLevelNew = new System.Windows.Forms.Label();
+            this.keybindSaveAll = new System.Windows.Forms.Label();
+            this.keybindSampleSaveAs = new System.Windows.Forms.Label();
+            this.keybindSampleSave = new System.Windows.Forms.Label();
+            this.keybindSampleOpen = new System.Windows.Forms.Label();
+            this.keybindSampleNew = new System.Windows.Forms.Label();
             this.keybindMasterSaveAs = new System.Windows.Forms.Label();
             this.keybindMasterSave = new System.Windows.Forms.Label();
             this.keybindMasterOpen = new System.Windows.Forms.Label();
@@ -85,7 +95,6 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafOpen = new System.Windows.Forms.Label();
             this.keybindLeafNew = new System.Windows.Forms.Label();
             this.txtKeybindSearch = new System.Windows.Forms.TextBox();
-            this.btnCloseKeybind = new System.Windows.Forms.Button();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -564,6 +573,18 @@ namespace Thumper_Custom_Level_Editor
             this.panelSetKeybind.TabIndex = 119;
             this.panelSetKeybind.Visible = false;
             // 
+            // btnCloseKeybind
+            // 
+            this.btnCloseKeybind.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCloseKeybind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCloseKeybind.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnCloseKeybind.Location = new System.Drawing.Point(168, 0);
+            this.btnCloseKeybind.Name = "btnCloseKeybind";
+            this.btnCloseKeybind.Size = new System.Drawing.Size(16, 16);
+            this.btnCloseKeybind.TabIndex = 150;
+            this.btnCloseKeybind.UseVisualStyleBackColor = true;
+            this.btnCloseKeybind.Click += new System.EventHandler(this.btnCloseKeybind_Click);
+            // 
             // btnSingleReset
             // 
             this.btnSingleReset.BackColor = System.Drawing.Color.Orange;
@@ -623,6 +644,15 @@ namespace Thumper_Custom_Level_Editor
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.keybindLevelExplorer);
+            this.panel1.Controls.Add(this.keybindLevelRecent);
+            this.panel1.Controls.Add(this.keybindLevelOpen);
+            this.panel1.Controls.Add(this.keybindLevelNew);
+            this.panel1.Controls.Add(this.keybindSaveAll);
+            this.panel1.Controls.Add(this.keybindSampleSaveAs);
+            this.panel1.Controls.Add(this.keybindSampleSave);
+            this.panel1.Controls.Add(this.keybindSampleOpen);
+            this.panel1.Controls.Add(this.keybindSampleNew);
             this.panel1.Controls.Add(this.keybindMasterSaveAs);
             this.panel1.Controls.Add(this.keybindMasterSave);
             this.panel1.Controls.Add(this.keybindMasterOpen);
@@ -645,6 +675,150 @@ namespace Thumper_Custom_Level_Editor
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel1.Size = new System.Drawing.Size(364, 218);
             this.panel1.TabIndex = 132;
+            // 
+            // keybindLevelExplorer
+            // 
+            this.keybindLevelExplorer.AutoSize = true;
+            this.keybindLevelExplorer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLevelExplorer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindLevelExplorer.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLevelExplorer.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLevelExplorer.Location = new System.Drawing.Point(5, 408);
+            this.keybindLevelExplorer.Name = "keybindLevelExplorer";
+            this.keybindLevelExplorer.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindLevelExplorer.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindLevelExplorer.Size = new System.Drawing.Size(105, 17);
+            this.keybindLevelExplorer.TabIndex = 156;
+            this.keybindLevelExplorer.Tag = "levelexplorer";
+            this.keybindLevelExplorer.Text = "Level Explorer";
+            // 
+            // keybindLevelRecent
+            // 
+            this.keybindLevelRecent.AutoSize = true;
+            this.keybindLevelRecent.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLevelRecent.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindLevelRecent.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLevelRecent.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLevelRecent.Location = new System.Drawing.Point(5, 391);
+            this.keybindLevelRecent.Name = "keybindLevelRecent";
+            this.keybindLevelRecent.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindLevelRecent.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindLevelRecent.Size = new System.Drawing.Size(91, 17);
+            this.keybindLevelRecent.TabIndex = 155;
+            this.keybindLevelRecent.Tag = "levelrecent";
+            this.keybindLevelRecent.Text = "Level Recent";
+            // 
+            // keybindLevelOpen
+            // 
+            this.keybindLevelOpen.AutoSize = true;
+            this.keybindLevelOpen.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLevelOpen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindLevelOpen.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLevelOpen.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLevelOpen.Location = new System.Drawing.Point(5, 374);
+            this.keybindLevelOpen.Name = "keybindLevelOpen";
+            this.keybindLevelOpen.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindLevelOpen.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindLevelOpen.Size = new System.Drawing.Size(77, 17);
+            this.keybindLevelOpen.TabIndex = 154;
+            this.keybindLevelOpen.Tag = "levelopen";
+            this.keybindLevelOpen.Text = "Level Open";
+            // 
+            // keybindLevelNew
+            // 
+            this.keybindLevelNew.AutoSize = true;
+            this.keybindLevelNew.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindLevelNew.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindLevelNew.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindLevelNew.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindLevelNew.Location = new System.Drawing.Point(5, 357);
+            this.keybindLevelNew.Name = "keybindLevelNew";
+            this.keybindLevelNew.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindLevelNew.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindLevelNew.Size = new System.Drawing.Size(70, 17);
+            this.keybindLevelNew.TabIndex = 153;
+            this.keybindLevelNew.Tag = "levelnew";
+            this.keybindLevelNew.Text = "Level New";
+            // 
+            // keybindSaveAll
+            // 
+            this.keybindSaveAll.AutoSize = true;
+            this.keybindSaveAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindSaveAll.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindSaveAll.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindSaveAll.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindSaveAll.Location = new System.Drawing.Point(5, 340);
+            this.keybindSaveAll.Name = "keybindSaveAll";
+            this.keybindSaveAll.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindSaveAll.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindSaveAll.Size = new System.Drawing.Size(63, 17);
+            this.keybindSaveAll.TabIndex = 152;
+            this.keybindSaveAll.Tag = "saveall";
+            this.keybindSaveAll.Text = "Save All";
+            // 
+            // keybindSampleSaveAs
+            // 
+            this.keybindSampleSaveAs.AutoSize = true;
+            this.keybindSampleSaveAs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindSampleSaveAs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindSampleSaveAs.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindSampleSaveAs.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindSampleSaveAs.Location = new System.Drawing.Point(5, 323);
+            this.keybindSampleSaveAs.Name = "keybindSampleSaveAs";
+            this.keybindSampleSaveAs.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindSampleSaveAs.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindSampleSaveAs.Size = new System.Drawing.Size(105, 17);
+            this.keybindSampleSaveAs.TabIndex = 151;
+            this.keybindSampleSaveAs.Tag = "samplesaveas";
+            this.keybindSampleSaveAs.Text = "Sample Save As";
+            // 
+            // keybindSampleSave
+            // 
+            this.keybindSampleSave.AutoSize = true;
+            this.keybindSampleSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindSampleSave.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindSampleSave.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindSampleSave.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindSampleSave.Location = new System.Drawing.Point(5, 306);
+            this.keybindSampleSave.Name = "keybindSampleSave";
+            this.keybindSampleSave.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindSampleSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindSampleSave.Size = new System.Drawing.Size(84, 17);
+            this.keybindSampleSave.TabIndex = 150;
+            this.keybindSampleSave.Tag = "samplesave";
+            this.keybindSampleSave.Text = "Sample Save";
+            // 
+            // keybindSampleOpen
+            // 
+            this.keybindSampleOpen.AutoSize = true;
+            this.keybindSampleOpen.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindSampleOpen.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindSampleOpen.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindSampleOpen.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindSampleOpen.Location = new System.Drawing.Point(5, 289);
+            this.keybindSampleOpen.Name = "keybindSampleOpen";
+            this.keybindSampleOpen.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindSampleOpen.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindSampleOpen.Size = new System.Drawing.Size(84, 17);
+            this.keybindSampleOpen.TabIndex = 149;
+            this.keybindSampleOpen.Tag = "sampleopen";
+            this.keybindSampleOpen.Text = "Sample Open";
+            // 
+            // keybindSampleNew
+            // 
+            this.keybindSampleNew.AutoSize = true;
+            this.keybindSampleNew.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindSampleNew.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindSampleNew.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindSampleNew.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindSampleNew.Location = new System.Drawing.Point(5, 272);
+            this.keybindSampleNew.Name = "keybindSampleNew";
+            this.keybindSampleNew.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindSampleNew.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindSampleNew.Size = new System.Drawing.Size(77, 17);
+            this.keybindSampleNew.TabIndex = 148;
+            this.keybindSampleNew.Tag = "samplenew";
+            this.keybindSampleNew.Text = "Sample New";
             // 
             // keybindMasterSaveAs
             // 
@@ -930,18 +1104,6 @@ namespace Thumper_Custom_Level_Editor
             this.txtKeybindSearch.TextChanged += new System.EventHandler(this.txtKeybindSearch_TextChanged);
             this.txtKeybindSearch.Enter += new System.EventHandler(this.txtKeybindSearch_Enter);
             // 
-            // btnCloseKeybind
-            // 
-            this.btnCloseKeybind.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCloseKeybind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCloseKeybind.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnCloseKeybind.Location = new System.Drawing.Point(168, 0);
-            this.btnCloseKeybind.Name = "btnCloseKeybind";
-            this.btnCloseKeybind.Size = new System.Drawing.Size(16, 16);
-            this.btnCloseKeybind.TabIndex = 150;
-            this.btnCloseKeybind.UseVisualStyleBackColor = true;
-            this.btnCloseKeybind.Click += new System.EventHandler(this.btnCloseKeybind_Click);
-            // 
             // CustomizeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1038,5 +1200,14 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Button btnKeybindReset;
         private System.Windows.Forms.Button btnSingleReset;
         private System.Windows.Forms.Button btnCloseKeybind;
+        private System.Windows.Forms.Label keybindSampleSaveAs;
+        private System.Windows.Forms.Label keybindSampleSave;
+        private System.Windows.Forms.Label keybindSampleOpen;
+        private System.Windows.Forms.Label keybindSampleNew;
+        private System.Windows.Forms.Label keybindSaveAll;
+        private System.Windows.Forms.Label keybindLevelExplorer;
+        private System.Windows.Forms.Label keybindLevelRecent;
+        private System.Windows.Forms.Label keybindLevelOpen;
+        private System.Windows.Forms.Label keybindLevelNew;
     }
 }
