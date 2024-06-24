@@ -157,7 +157,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void dropMasterCheck_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			btnMasterOpenCheckpoint.Enabled = dropMasterIntro.SelectedIndex > 0;
+			btnMasterOpenCheckpoint.Enabled = dropMasterCheck.SelectedIndex > 0;
 			SaveMaster(false);
 		}
 		private void NUD_ConfigBPM_ValueChanged(object sender, EventArgs e) => SaveMaster(false);
