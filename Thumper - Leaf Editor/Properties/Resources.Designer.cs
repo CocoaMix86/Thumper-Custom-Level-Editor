@@ -370,12 +370,12 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Icon discord {
+        public static System.Drawing.Bitmap discord32x {
             get {
-                object obj = ResourceManager.GetObject("discord", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("discord32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
