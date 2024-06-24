@@ -81,6 +81,7 @@ namespace Thumper_Custom_Level_Editor
         public Random rng = new();
         public string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
+        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         #endregion
 
         public FormLeafEditor(string LevelFromArg)
@@ -331,7 +332,8 @@ namespace Thumper_Custom_Level_Editor
 
         ///Toolstrip - VIEW MENU
         //Visible - LEaf Editor
-        private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             if (leafEditorToolStripMenuItem.Checked) PlaySound("UIwindowopen"); else PlaySound("UIwindowclose");
             UndockPanel(panelLeaf);
             panelLeaf.Visible = leafEditorToolStripMenuItem.Checked;
@@ -477,6 +479,7 @@ namespace Thumper_Custom_Level_Editor
             if (custom.ShowDialog() == DialogResult.OK) {
                 ColorFormElements();
                 ImportDefaultColors();
+                SetKeyBinds();
                 Properties.Settings.Default.Save();
             }
             custom.Dispose();
@@ -726,12 +729,35 @@ namespace Thumper_Custom_Level_Editor
 
         private void SetKeyBinds()
         {
-            string sss = SaveAllToolStripMenuItem.ShortcutKeys.ToString();
-            List<Keys> _keys = Properties.Settings.Default.KeyBinds;
-            if (_keys != null && _keys.Count == 0)
-                return;
+            if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
+                defaultkeybinds = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+            }
 
-
+            leafnewToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafnew"];
+            leafloadToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafopen"];
+            leafsaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafsave"];
+            leafsaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafsaveas"];
+            lvlnewToolStripMenuItem1.ShortcutKeys = defaultkeybinds["lvlnew"];
+            lvlopenToolStripMenuItem.ShortcutKeys = defaultkeybinds["lvlopen"];
+            lvlsaveToolStripMenuItem2.ShortcutKeys = defaultkeybinds["lvlsave"];
+            lvlsaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["lvlsaveas"];
+            gatenewToolStripMenuItem.ShortcutKeys = defaultkeybinds["gatenew"];
+            gateopenToolStripMenuItem.ShortcutKeys = defaultkeybinds["gateopen"];
+            gatesaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["gatesave"];
+            gatesaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["gatesaveas"];
+            masternewToolStripMenuItem.ShortcutKeys = defaultkeybinds["masternew"];
+            masteropenToolStripMenuItem.ShortcutKeys = defaultkeybinds["masteropen"];
+            mastersaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["mastersave"];
+            mastersaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["mastersaveas"];
+            SamplenewToolStripMenuItem.ShortcutKeys = defaultkeybinds["samplenew"];
+            SampleopenToolStripMenuItem.ShortcutKeys = defaultkeybinds["sampleopen"];
+            SamplesaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["samplesave"];
+            SamplesaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["samplesaveas"];
+            SaveAllToolStripMenuItem.ShortcutKeys = defaultkeybinds["saveall"];
+            newLevelFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelnew"];
+            openLevelFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelopen"];
+            recentLevelsToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelrecent"];
+            openLevelInExplorerToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelexplorer"];
         }
     }
 }
