@@ -672,4 +672,7 @@ SUGGESTED ADDITIONS/CHANGES
   <data name="thumper_level_editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\thumper_level_editor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_calculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-calculator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

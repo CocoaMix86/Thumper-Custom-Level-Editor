@@ -294,13 +294,19 @@ namespace Thumper_Custom_Level_Editor
 				_masterlvls.Add(new MasterLvlData() {
 					lvlname = (string)_load["obj_name"],
 					playplus = true,
-					checkpoint = true
+					checkpoint = true,
+					checkpoint_leader = "<none>",
+					gatename = "<none>",
+					rest = "<none>"
 				});
 			else if (_load["obj_type"] == "SequinGate")
 				_masterlvls.Add(new MasterLvlData() {
 					gatename = (string)_load["obj_name"],
 					playplus = true,
-					checkpoint = true
+					checkpoint = true,
+					checkpoint_leader = "<none>",
+					lvlname = "<none>",
+					rest = "<none>"
 				});
 		}
 
@@ -442,7 +448,7 @@ namespace Thumper_Custom_Level_Editor
 					playplus = _lvl["play_plus"],
 					isolate = _lvl["isolate"] ?? false,
 					checkpoint_leader = _lvl["checkpoint_leader_lvl_name"],
-					rest = _lvl["rest_lvl_name"]
+					rest = _lvl["rest_lvl_name"] == "" ? "<none>" : _lvl["rest_lvl_name"]
 				});
 			}
 			dropMasterSkybox.SelectedIndex = dropMasterSkybox.Items.IndexOf((string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"]);

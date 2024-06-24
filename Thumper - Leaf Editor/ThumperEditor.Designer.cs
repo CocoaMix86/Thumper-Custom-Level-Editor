@@ -285,6 +285,10 @@
             this.btnLvlLoopRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnRevertLvl = new System.Windows.Forms.ToolStripButton();
             this.panelMaster = new System.Windows.Forms.Panel();
+            this.lblMasterRuntime = new System.Windows.Forms.Label();
+            this.lblMAsterRuntimeBeats = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.btnMasterRuntime = new System.Windows.Forms.Button();
             this.masterLvlList = new System.Windows.Forms.DataGridView();
             this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
             this.masterLvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1233,7 +1237,7 @@
             // 
             this.interpolatorToolStripMenuItem.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.interpolatorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.interpolatorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_interp;
+            this.interpolatorToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("interpolatorToolStripMenuItem.Image")));
             this.interpolatorToolStripMenuItem.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.interpolatorToolStripMenuItem.Name = "interpolatorToolStripMenuItem";
             this.interpolatorToolStripMenuItem.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -3647,6 +3651,10 @@
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMaster.Controls.Add(this.lblMasterRuntime);
+            this.panelMaster.Controls.Add(this.lblMAsterRuntimeBeats);
+            this.panelMaster.Controls.Add(this.label21);
+            this.panelMaster.Controls.Add(this.btnMasterRuntime);
             this.panelMaster.Controls.Add(this.masterLvlList);
             this.panelMaster.Controls.Add(this.toolstripTitleMaster);
             this.panelMaster.Controls.Add(this.masterToolStrip);
@@ -3680,7 +3688,8 @@
             this.panelMaster.Location = new System.Drawing.Point(3, 39);
             this.panelMaster.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelMaster.Name = "panelMaster";
-            this.panelMaster.Size = new System.Drawing.Size(407, 321);
+            this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.panelMaster.Size = new System.Drawing.Size(407, 414);
             this.panelMaster.TabIndex = 47;
             this.panelMaster.Tag = "editorpanel";
             this.panelMaster.Visible = false;
@@ -3688,6 +3697,60 @@
             this.panelMaster.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelMaster.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelMaster.Leave += new System.EventHandler(this.editorpanelUnfocus);
+            // 
+            // lblMasterRuntime
+            // 
+            this.lblMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMasterRuntime.AutoSize = true;
+            this.lblMasterRuntime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMasterRuntime.ForeColor = System.Drawing.Color.White;
+            this.lblMasterRuntime.Location = new System.Drawing.Point(263, 213);
+            this.lblMasterRuntime.Name = "lblMasterRuntime";
+            this.lblMasterRuntime.Size = new System.Drawing.Size(38, 15);
+            this.lblMasterRuntime.TabIndex = 146;
+            this.lblMasterRuntime.Text = "Time:";
+            this.toolTip1.SetToolTip(this.lblMasterRuntime, "This lvl plays after every checkpoint, before the next lvl.");
+            // 
+            // lblMAsterRuntimeBeats
+            // 
+            this.lblMAsterRuntimeBeats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMAsterRuntimeBeats.AutoSize = true;
+            this.lblMAsterRuntimeBeats.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMAsterRuntimeBeats.ForeColor = System.Drawing.Color.White;
+            this.lblMAsterRuntimeBeats.Location = new System.Drawing.Point(263, 198);
+            this.lblMAsterRuntimeBeats.Name = "lblMAsterRuntimeBeats";
+            this.lblMAsterRuntimeBeats.Size = new System.Drawing.Size(41, 15);
+            this.lblMAsterRuntimeBeats.TabIndex = 145;
+            this.lblMAsterRuntimeBeats.Text = "Beats:";
+            this.toolTip1.SetToolTip(this.lblMAsterRuntimeBeats, "This lvl plays after every checkpoint, before the next lvl.");
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Silver;
+            this.label21.Location = new System.Drawing.Point(271, 183);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(78, 15);
+            this.label21.TabIndex = 144;
+            this.label21.Text = "══Runtime══";
+            // 
+            // btnMasterRuntime
+            // 
+            this.btnMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterRuntime.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterRuntime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMasterRuntime.ForeColor = System.Drawing.Color.Green;
+            this.btnMasterRuntime.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterRuntime.Image")));
+            this.btnMasterRuntime.Location = new System.Drawing.Point(242, 204);
+            this.btnMasterRuntime.Name = "btnMasterRuntime";
+            this.btnMasterRuntime.Size = new System.Drawing.Size(20, 20);
+            this.btnMasterRuntime.TabIndex = 143;
+            this.toolTip1.SetToolTip(this.btnMasterRuntime, "Recalculate the level runtime.\r\n\r\nDOES NOT ACCOUNT FOR SPEED UP/SLOW DOWN\r\nEFFECT" +
+        "S DONE IN LEAFS");
+            this.btnMasterRuntime.UseVisualStyleBackColor = true;
+            this.btnMasterRuntime.Click += new System.EventHandler(this.btnMasterRuntime_Click);
             // 
             // masterLvlList
             // 
@@ -3747,7 +3810,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.masterLvlList.Size = new System.Drawing.Size(225, 250);
+            this.masterLvlList.Size = new System.Drawing.Size(225, 342);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellClick);
@@ -3899,7 +3962,7 @@
             this.btnMasterLvlCopy,
             this.btnMasterLvlPaste});
             this.masterToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.masterToolStrip.Location = new System.Drawing.Point(3, 291);
+            this.masterToolStrip.Location = new System.Drawing.Point(3, 383);
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.masterToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -3990,7 +4053,7 @@
             this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
             this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenRest.Location = new System.Drawing.Point(379, 290);
+            this.btnMasterOpenRest.Location = new System.Drawing.Point(379, 350);
             this.btnMasterOpenRest.Name = "btnMasterOpenRest";
             this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenRest.TabIndex = 118;
@@ -4009,7 +4072,7 @@
             this.btnMasterOpenLeader.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenLeader.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
             this.btnMasterOpenLeader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenLeader.Location = new System.Drawing.Point(120, 290);
+            this.btnMasterOpenLeader.Location = new System.Drawing.Point(120, 382);
             this.btnMasterOpenLeader.Name = "btnMasterOpenLeader";
             this.btnMasterOpenLeader.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenLeader.TabIndex = 117;
@@ -4025,7 +4088,7 @@
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.Silver;
-            this.label37.Location = new System.Drawing.Point(251, 259);
+            this.label37.Location = new System.Drawing.Point(251, 319);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(123, 15);
             this.label37.TabIndex = 116;
@@ -4042,7 +4105,7 @@
             this.dropMasterLvlRest.FormattingEnabled = true;
             this.dropMasterLvlRest.Items.AddRange(new object[] {
             "skybox_cube"});
-            this.dropMasterLvlRest.Location = new System.Drawing.Point(239, 291);
+            this.dropMasterLvlRest.Location = new System.Drawing.Point(239, 351);
             this.dropMasterLvlRest.Name = "dropMasterLvlRest";
             this.dropMasterLvlRest.Size = new System.Drawing.Size(140, 21);
             this.dropMasterLvlRest.TabIndex = 105;
@@ -4055,7 +4118,7 @@
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.White;
-            this.label35.Location = new System.Drawing.Point(287, 276);
+            this.label35.Location = new System.Drawing.Point(287, 336);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(50, 15);
             this.label35.TabIndex = 104;
@@ -4073,7 +4136,7 @@
             this.dropMasterLvlLeader.FormattingEnabled = true;
             this.dropMasterLvlLeader.Items.AddRange(new object[] {
             "skybox_cube"});
-            this.dropMasterLvlLeader.Location = new System.Drawing.Point(3, 291);
+            this.dropMasterLvlLeader.Location = new System.Drawing.Point(3, 383);
             this.dropMasterLvlLeader.Name = "dropMasterLvlLeader";
             this.dropMasterLvlLeader.Size = new System.Drawing.Size(116, 21);
             this.dropMasterLvlLeader.TabIndex = 103;
@@ -4086,7 +4149,7 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(3, 278);
+            this.label34.Location = new System.Drawing.Point(3, 370);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(114, 13);
             this.label34.TabIndex = 102;
@@ -4127,7 +4190,7 @@
             this.label56.AutoSize = true;
             this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label56.ForeColor = System.Drawing.Color.White;
-            this.label56.Location = new System.Drawing.Point(233, 210);
+            this.label56.Location = new System.Drawing.Point(233, 270);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(92, 15);
             this.label56.TabIndex = 142;
@@ -4139,7 +4202,7 @@
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label47.ForeColor = System.Drawing.Color.White;
-            this.label47.Location = new System.Drawing.Point(264, 188);
+            this.label47.Location = new System.Drawing.Point(264, 248);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(61, 15);
             this.label47.TabIndex = 141;
@@ -4151,7 +4214,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(261, 233);
+            this.label12.Location = new System.Drawing.Point(261, 293);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 15);
             this.label12.TabIndex = 140;
@@ -4238,7 +4301,7 @@
             this.btnConfigPathColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigPathColor.BackColor = System.Drawing.Color.White;
             this.btnConfigPathColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigPathColor.Location = new System.Drawing.Point(326, 230);
+            this.btnConfigPathColor.Location = new System.Drawing.Point(326, 290);
             this.btnConfigPathColor.Name = "btnConfigPathColor";
             this.btnConfigPathColor.Size = new System.Drawing.Size(55, 23);
             this.btnConfigPathColor.TabIndex = 109;
@@ -4250,7 +4313,7 @@
             this.btnConfigGlowColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigGlowColor.BackColor = System.Drawing.Color.White;
             this.btnConfigGlowColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigGlowColor.Location = new System.Drawing.Point(326, 207);
+            this.btnConfigGlowColor.Location = new System.Drawing.Point(326, 267);
             this.btnConfigGlowColor.Name = "btnConfigGlowColor";
             this.btnConfigGlowColor.Size = new System.Drawing.Size(55, 23);
             this.btnConfigGlowColor.TabIndex = 108;
@@ -4262,7 +4325,7 @@
             this.btnConfigRailColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigRailColor.BackColor = System.Drawing.Color.White;
             this.btnConfigRailColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigRailColor.Location = new System.Drawing.Point(326, 184);
+            this.btnConfigRailColor.Location = new System.Drawing.Point(326, 244);
             this.btnConfigRailColor.Name = "btnConfigRailColor";
             this.btnConfigRailColor.Size = new System.Drawing.Size(55, 23);
             this.btnConfigRailColor.TabIndex = 96;
@@ -4340,7 +4403,7 @@
             this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblConfigColorHelp.Location = new System.Drawing.Point(378, 187);
+            this.lblConfigColorHelp.Location = new System.Drawing.Point(378, 247);
             this.lblConfigColorHelp.Name = "lblConfigColorHelp";
             this.lblConfigColorHelp.Size = new System.Drawing.Size(15, 16);
             this.lblConfigColorHelp.TabIndex = 112;
@@ -6966,6 +7029,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripButton btnLeafPanelTemplate2;
+        private System.Windows.Forms.Button btnMasterRuntime;
+        private System.Windows.Forms.Label lblMasterRuntime;
+        private System.Windows.Forms.Label lblMAsterRuntimeBeats;
+        private System.Windows.Forms.Label label21;
     }
 }
 
