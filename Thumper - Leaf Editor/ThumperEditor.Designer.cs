@@ -1840,6 +1840,7 @@
             this.btnFunctionApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFunctionApply.BackColor = System.Drawing.Color.Black;
             this.btnFunctionApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFunctionApply.Enabled = false;
             this.btnFunctionApply.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_check_16;
             this.btnFunctionApply.Location = new System.Drawing.Point(991, 25);
             this.btnFunctionApply.Name = "btnFunctionApply";
@@ -2656,6 +2657,7 @@
             // toolStripLabel4
             // 
             this.toolStripLabel4.BackColor = System.Drawing.Color.Black;
+            this.toolStripLabel4.Enabled = false;
             this.toolStripLabel4.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel4.ForeColor = System.Drawing.Color.White;
             this.toolStripLabel4.Name = "toolStripLabel4";
