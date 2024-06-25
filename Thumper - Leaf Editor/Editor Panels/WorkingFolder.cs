@@ -425,8 +425,10 @@ namespace Thumper_Custom_Level_Editor
 					text = text.Replace($"{oldname}.leaf", $"{newname}.leaf");
 					File.WriteAllText(file, text);
 				}
-				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedlvl), "#.*", ""));
-				LoadLvl(_load);
+				if (_loadedlvl != null) {
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedlvl), "#.*", ""));
+					LoadLvl(_load);
+				}
 			}
 			else if (filetype == "lvl") {
 				foreach (string file in Directory.GetFiles(workingfolder).Where(f => f.Contains("gate_") || f.Contains("master_"))) {

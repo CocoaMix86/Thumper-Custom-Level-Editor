@@ -376,7 +376,10 @@ namespace Thumper_Custom_Level_Editor
 			lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
 			lvlsinworkfolder.Add("<none>");
 			lvlsinworkfolder.Sort();
-            ///add lvl list as datasources to dropdowns
+			///add lvl list as datasources to dropdowns
+			dropMasterCheck.SelectedIndexChanged -= dropMasterCheck_SelectedIndexChanged;
+			dropMasterIntro.SelectedIndexChanged -= dropMasterIntro_SelectedIndexChanged;
+			dropMasterLvlRest.SelectedIndexChanged -= dropMasterLvlRest_SelectedIndexChanged;
             object _select = dropMasterCheck.SelectedItem;
 			dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
 			dropMasterCheck.SelectedItem = _select;
@@ -385,14 +388,12 @@ namespace Thumper_Custom_Level_Editor
 			dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
 			dropMasterIntro.SelectedItem = _select;
 
-			_select = dropMasterLvlLeader.SelectedItem;
-			dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
-			dropMasterLvlLeader.SelectedItem = _select;
-
 			_select = dropMasterLvlRest.SelectedItem;
 			dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
 			dropMasterLvlRest.SelectedItem = _select;
-			SaveMaster(true);
+			dropMasterCheck.SelectedIndexChanged += dropMasterCheck_SelectedIndexChanged;
+			dropMasterIntro.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
+			dropMasterLvlRest.SelectedIndexChanged += dropMasterLvlRest_SelectedIndexChanged;
 			PlaySound("UIrefresh");
 		}
 
