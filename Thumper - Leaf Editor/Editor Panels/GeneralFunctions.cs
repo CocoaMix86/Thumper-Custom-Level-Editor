@@ -220,9 +220,9 @@ namespace Thumper_Custom_Level_Editor
 
         private void RandomizeRowValues(DataGridViewRow dgvr)
         {
+            trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
             int idx = dgvr.Index;
             foreach (DataGridViewCell dgvc in dgvr.Cells) {
-                trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
                 dgvc.Value = null;
                 if (_tracks[idx].trait_type == "kTraitBool" || _tracks[idx].trait_type == "kTraitAction" || _tracks[idx].param_path == "visibla01" || _tracks[idx].param_path == "visibla02" || _tracks[idx].param_path == "visible" || _tracks[idx].param_path == "visiblz01" || _tracks[idx].param_path == "visiblz02") {
                     if (_tracks[idx].obj_name == "sentry.spn")
@@ -242,10 +242,11 @@ namespace Thumper_Custom_Level_Editor
                         dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
 
-                trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+                if (dgvc.Value != null)
+                    TrackUpdateHighlightingSingleCell(dgvc);
             }
-
-            TrackUpdateHighlighting(trackEditor.CurrentRow);
+            trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+            //TrackUpdateHighlighting(trackEditor.CurrentRow);
             ShowRawTrackData();
         }
 

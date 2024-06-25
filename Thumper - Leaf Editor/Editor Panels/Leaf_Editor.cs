@@ -959,8 +959,8 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//change row header to reflect what the track is
 			ChangeTrackName();
-			TrackUpdateHighlighting(trackEditor.Rows[_selecttrack]);
 			if (!randomizing) {
+				TrackUpdateHighlighting(trackEditor.Rows[_selecttrack]);
 				PlaySound("UIobjectadd");
 				SaveLeaf(false, "Applied Object settings", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
@@ -1433,19 +1433,18 @@ namespace Thumper_Custom_Level_Editor
 		}
 		public void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc)
 		{
-			decimal? i = (decimal?)dgvc.Value;
 			dgvc.Style = null;
-			if (i == null)
+			if (dgvc.Value == null)
 				return;
 
 			//if it is kTraitColor, color the background differently
 			if (_tracks[dgvc.RowIndex].trait_type == "kTraitColor") {
-				dgvc.Style.BackColor = Color.FromArgb(int.Parse(i.ToString()));
+				dgvc.Style.BackColor = Color.FromArgb(int.Parse(dgvc.Value.ToString()));
 				return;
             }
 
 			//if the cell value is greater than the criteria of the row, highlight it with that row's color
-			if (Math.Abs((decimal)i) >= (decimal)_tracks[dgvc.RowIndex].highlight_value) {
+			if (Math.Abs(Decimal.Parse(dgvc.Value.ToString())) >= (decimal)_tracks[dgvc.RowIndex].highlight_value) {
 				dgvc.Style.BackColor = Color.FromArgb(int.Parse(_tracks[dgvc.RowIndex].highlight_color));
 			}
 			//change cell font color so text is readable on dark/light backgrounds
