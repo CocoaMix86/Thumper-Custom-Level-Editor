@@ -413,6 +413,56 @@ namespace Thumper_Custom_Level_Editor
 		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterCheck.SelectedItem.ToString());
 		private void btnMasterOpenLeader_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlLeader.SelectedItem.ToString());
 		private void btnMasterOpenRest_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlRest.SelectedItem.ToString());
+
+		private void btnMasterRuntime_Click(object sender, EventArgs e)
+		{
+			dynamic _load;
+			int _beatcount = 0;
+			//loop through all entries in the master to get beat counts
+			foreach (MasterLvlData _masterlvl in _masterlvls) {
+				//this section handles lvl
+				if (_masterlvl.lvlname is not null and not "") {
+					//load the lvl and then loop through its leafs to get beat counts
+					_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{_masterlvl.lvlname.Split('.')[0]}.txt");
+				}
+				//this section handles gate
+				else {
+					//load the gate to then loop through all lvls in it
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($"{workingfolder}\\gate_{_masterlvl.gatename.Split('.')[0]}.txt"), "#.*", ""));
+					foreach (dynamic _lvl in _load["boss_patterns"]) {
+						//load the lvl and then loop through its leafs to get beat counts
+						_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{((string)_lvl["lvl_name"]).Split('.')[0]}.txt");
+					}
+				}
+
+				if (_masterlvl.rest is not "" and not "<none>" and not null)
+					_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{_masterlvl.rest.Split('.')[0]}.txt");
+			}
+			if (dropMasterIntro.Text != "<none>")
+				_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{dropMasterIntro.Text.Split('.')[0]}.txt");
+			if (dropMasterCheck.Text != "<none>")
+				_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{dropMasterCheck.Text.Split('.')[0]}.txt");
+
+			lblMAsterRuntimeBeats.Text = $"Beats: {_beatcount}";
+
+			///Calculate min/sec based on beats and BPM
+			lblMasterRuntime.Text = $"Time: {TimeSpan.FromMinutes(_beatcount / (double)NUD_ConfigBPM.Value).ToString()[..12]}";
+
+		}
+		private int LoadLvlGetBeatCounts(string path)
+		{
+			int _beatcount = 0;
+
+			//load the lvl and then loop through its leafs to get beat counts
+			dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(path), "#.*", ""));
+			foreach (dynamic leaf in _load["leaf_seq"]) {
+				_beatcount += (int)leaf["beat_cnt"];
+			}
+			//every lvl has an approach beats to consider too
+			_beatcount += (int)_load["approach_beats"];
+
+			return _beatcount;
+		}
 		#endregion
 
 		#region Methods

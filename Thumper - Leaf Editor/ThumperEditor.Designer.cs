@@ -284,10 +284,6 @@
             this.btnLvlLoopRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnRevertLvl = new System.Windows.Forms.ToolStripButton();
             this.panelMaster = new System.Windows.Forms.Panel();
-            this.lblMasterRuntime = new System.Windows.Forms.Label();
-            this.lblMAsterRuntimeBeats = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.btnMasterRuntime = new System.Windows.Forms.Button();
             this.masterLvlList = new System.Windows.Forms.DataGridView();
             this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
             this.masterLvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -308,33 +304,38 @@
             this.btnMasterLvlDown = new System.Windows.Forms.ToolStripButton();
             this.btnMasterLvlCopy = new System.Windows.Forms.ToolStripButton();
             this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterOpenRest = new System.Windows.Forms.Button();
             this.btnMasterOpenLeader = new System.Windows.Forms.Button();
-            this.label37 = new System.Windows.Forms.Label();
-            this.dropMasterLvlRest = new System.Windows.Forms.ComboBox();
-            this.label35 = new System.Windows.Forms.Label();
             this.dropMasterLvlLeader = new System.Windows.Forms.ComboBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lblMasterRuntime = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblMAsterRuntimeBeats = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.btnMasterRuntime = new System.Windows.Forms.Button();
+            this.label33 = new System.Windows.Forms.Label();
+            this.lblConfigColorHelp = new System.Windows.Forms.Label();
+            this.dropMasterSkybox = new System.Windows.Forms.ComboBox();
+            this.dropMasterIntro = new System.Windows.Forms.ComboBox();
+            this.btnMasterOpenRest = new System.Windows.Forms.Button();
+            this.dropMasterCheck = new System.Windows.Forms.ComboBox();
+            this.btnConfigRailColor = new System.Windows.Forms.Button();
+            this.label37 = new System.Windows.Forms.Label();
+            this.btnConfigGlowColor = new System.Windows.Forms.Button();
+            this.dropMasterLvlRest = new System.Windows.Forms.ComboBox();
+            this.btnConfigPathColor = new System.Windows.Forms.Button();
+            this.label35 = new System.Windows.Forms.Label();
+            this.NUD_ConfigBPM = new System.Windows.Forms.NumericUpDown();
+            this.label27 = new System.Windows.Forms.Label();
+            this.btnMasterOpenIntro = new System.Windows.Forms.Button();
+            this.btnMasterOpenCheckpoint = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btnMasterOpenCheckpoint = new System.Windows.Forms.Button();
-            this.btnMasterOpenIntro = new System.Windows.Forms.Button();
-            this.label27 = new System.Windows.Forms.Label();
-            this.NUD_ConfigBPM = new System.Windows.Forms.NumericUpDown();
-            this.btnConfigPathColor = new System.Windows.Forms.Button();
-            this.btnConfigGlowColor = new System.Windows.Forms.Button();
-            this.btnConfigRailColor = new System.Windows.Forms.Button();
-            this.dropMasterCheck = new System.Windows.Forms.ComboBox();
-            this.dropMasterIntro = new System.Windows.Forms.ComboBox();
-            this.dropMasterSkybox = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lblConfigColorHelp = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panelGate = new System.Windows.Forms.Panel();
             this.lblGatebuckethelp = new System.Windows.Forms.Label();
@@ -510,6 +511,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
             this.toolstripTitleMaster.SuspendLayout();
             this.masterToolStrip.SuspendLayout();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).BeginInit();
             this.panelGate.SuspendLayout();
             this.toolstripTitleGate.SuspendLayout();
@@ -3640,40 +3642,15 @@
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMaster.Controls.Add(this.lblMasterRuntime);
-            this.panelMaster.Controls.Add(this.lblMAsterRuntimeBeats);
-            this.panelMaster.Controls.Add(this.label21);
-            this.panelMaster.Controls.Add(this.btnMasterRuntime);
             this.panelMaster.Controls.Add(this.masterLvlList);
             this.panelMaster.Controls.Add(this.toolstripTitleMaster);
             this.panelMaster.Controls.Add(this.masterToolStrip);
-            this.panelMaster.Controls.Add(this.btnMasterOpenRest);
             this.panelMaster.Controls.Add(this.btnMasterOpenLeader);
-            this.panelMaster.Controls.Add(this.label37);
-            this.panelMaster.Controls.Add(this.dropMasterLvlRest);
-            this.panelMaster.Controls.Add(this.label35);
             this.panelMaster.Controls.Add(this.dropMasterLvlLeader);
             this.panelMaster.Controls.Add(this.label34);
             this.panelMaster.Controls.Add(this.label30);
             this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
-            this.panelMaster.Controls.Add(this.label56);
-            this.panelMaster.Controls.Add(this.label47);
-            this.panelMaster.Controls.Add(this.label12);
-            this.panelMaster.Controls.Add(this.btnMasterOpenCheckpoint);
-            this.panelMaster.Controls.Add(this.btnMasterOpenIntro);
-            this.panelMaster.Controls.Add(this.label27);
-            this.panelMaster.Controls.Add(this.NUD_ConfigBPM);
-            this.panelMaster.Controls.Add(this.btnConfigPathColor);
-            this.panelMaster.Controls.Add(this.btnConfigGlowColor);
-            this.panelMaster.Controls.Add(this.btnConfigRailColor);
-            this.panelMaster.Controls.Add(this.dropMasterCheck);
-            this.panelMaster.Controls.Add(this.dropMasterIntro);
-            this.panelMaster.Controls.Add(this.dropMasterSkybox);
-            this.panelMaster.Controls.Add(this.label13);
-            this.panelMaster.Controls.Add(this.lblConfigColorHelp);
-            this.panelMaster.Controls.Add(this.label33);
-            this.panelMaster.Controls.Add(this.label32);
-            this.panelMaster.Controls.Add(this.label31);
+            this.panelMaster.Controls.Add(this.panel5);
             this.panelMaster.Location = new System.Drawing.Point(3, 39);
             this.panelMaster.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelMaster.Name = "panelMaster";
@@ -3686,59 +3663,6 @@
             this.panelMaster.DoubleClick += new System.EventHandler(this.editorpanelDoubleClick);
             this.panelMaster.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelMaster.Leave += new System.EventHandler(this.editorpanelUnfocus);
-            // 
-            // lblMasterRuntime
-            // 
-            this.lblMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMasterRuntime.AutoSize = true;
-            this.lblMasterRuntime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMasterRuntime.ForeColor = System.Drawing.Color.White;
-            this.lblMasterRuntime.Location = new System.Drawing.Point(261, 284);
-            this.lblMasterRuntime.Name = "lblMasterRuntime";
-            this.lblMasterRuntime.Size = new System.Drawing.Size(38, 15);
-            this.lblMasterRuntime.TabIndex = 146;
-            this.lblMasterRuntime.Text = "Time:";
-            // 
-            // lblMAsterRuntimeBeats
-            // 
-            this.lblMAsterRuntimeBeats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMAsterRuntimeBeats.AutoSize = true;
-            this.lblMAsterRuntimeBeats.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMAsterRuntimeBeats.ForeColor = System.Drawing.Color.White;
-            this.lblMAsterRuntimeBeats.Location = new System.Drawing.Point(261, 269);
-            this.lblMAsterRuntimeBeats.Name = "lblMAsterRuntimeBeats";
-            this.lblMAsterRuntimeBeats.Size = new System.Drawing.Size(41, 15);
-            this.lblMAsterRuntimeBeats.TabIndex = 145;
-            this.lblMAsterRuntimeBeats.Text = "Beats:";
-            // 
-            // label21
-            // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.Silver;
-            this.label21.Location = new System.Drawing.Point(269, 254);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(78, 15);
-            this.label21.TabIndex = 144;
-            this.label21.Text = "══Runtime══";
-            // 
-            // btnMasterRuntime
-            // 
-            this.btnMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterRuntime.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterRuntime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMasterRuntime.ForeColor = System.Drawing.Color.Green;
-            this.btnMasterRuntime.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterRuntime.Image")));
-            this.btnMasterRuntime.Location = new System.Drawing.Point(240, 275);
-            this.btnMasterRuntime.Name = "btnMasterRuntime";
-            this.btnMasterRuntime.Padding = new System.Windows.Forms.Padding(0, 0, 2, 1);
-            this.btnMasterRuntime.Size = new System.Drawing.Size(20, 20);
-            this.btnMasterRuntime.TabIndex = 143;
-            this.toolTip1.SetToolTip(this.btnMasterRuntime, "Recalculate the level runtime.\r\n\r\nDOES NOT ACCOUNT FOR SPEED UP/SLOW DOWN\r\nEFFECT" +
-        "S DONE IN LEAFS");
-            this.btnMasterRuntime.UseVisualStyleBackColor = true;
-            this.btnMasterRuntime.Click += new System.EventHandler(this.btnMasterRuntime_Click);
             // 
             // masterLvlList
             // 
@@ -4030,26 +3954,6 @@
             this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
             this.btnMasterLvlPaste.Click += new System.EventHandler(this.btnMasterLvlPaste_Click);
             // 
-            // btnMasterOpenRest
-            // 
-            this.btnMasterOpenRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterOpenRest.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenRest.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenRest.Enabled = false;
-            this.btnMasterOpenRest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenRest.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
-            this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenRest.Location = new System.Drawing.Point(379, 338);
-            this.btnMasterOpenRest.Name = "btnMasterOpenRest";
-            this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenRest.TabIndex = 118;
-            this.btnMasterOpenRest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnMasterOpenRest, "Load lvl into Lvl Editor");
-            this.btnMasterOpenRest.UseVisualStyleBackColor = false;
-            this.btnMasterOpenRest.Click += new System.EventHandler(this.btnMasterOpenRest_Click);
-            // 
             // btnMasterOpenLeader
             // 
             this.btnMasterOpenLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -4069,50 +3973,6 @@
             this.btnMasterOpenLeader.UseVisualStyleBackColor = false;
             this.btnMasterOpenLeader.Visible = false;
             this.btnMasterOpenLeader.Click += new System.EventHandler(this.btnMasterOpenLeader_Click);
-            // 
-            // label37
-            // 
-            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.Silver;
-            this.label37.Location = new System.Drawing.Point(251, 307);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(123, 15);
-            this.label37.TabIndex = 116;
-            this.label37.Text = "══Sublevel Options══";
-            // 
-            // dropMasterLvlRest
-            // 
-            this.dropMasterLvlRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dropMasterLvlRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropMasterLvlRest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.dropMasterLvlRest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropMasterLvlRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropMasterLvlRest.ForeColor = System.Drawing.Color.White;
-            this.dropMasterLvlRest.FormattingEnabled = true;
-            this.dropMasterLvlRest.Items.AddRange(new object[] {
-            "skybox_cube"});
-            this.dropMasterLvlRest.Location = new System.Drawing.Point(239, 339);
-            this.dropMasterLvlRest.Name = "dropMasterLvlRest";
-            this.dropMasterLvlRest.Size = new System.Drawing.Size(140, 21);
-            this.dropMasterLvlRest.TabIndex = 105;
-            this.dropMasterLvlRest.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropMasterLvlRest.SelectedIndexChanged += new System.EventHandler(this.dropMasterLvlRest_SelectedIndexChanged);
-            // 
-            // label35
-            // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.White;
-            this.label35.Location = new System.Drawing.Point(287, 324);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(50, 15);
-            this.label35.TabIndex = 104;
-            this.label35.Text = "Rest Lvl";
-            this.toolTip1.SetToolTip(this.label35, "If set, this lvl will play before the selected lvl. Usually used as a longer rest" +
-        " segment.");
             // 
             // dropMasterLvlLeader
             // 
@@ -4165,100 +4025,319 @@
             this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(225, 40);
+            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(213, 23);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new System.Drawing.Size(15, 16);
             this.lblMasterlvllistHelp.TabIndex = 95;
             this.lblMasterlvllistHelp.Text = "?";
             this.toolTip1.SetToolTip(this.lblMasterlvllistHelp, resources.GetString("lblMasterlvllistHelp.ToolTip"));
             // 
-            // label56
+            // panel5
             // 
-            this.label56.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label56.AutoSize = true;
-            this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label56.ForeColor = System.Drawing.Color.White;
-            this.label56.Location = new System.Drawing.Point(233, 209);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(92, 15);
-            this.label56.TabIndex = 142;
-            this.label56.Text = "Rail Glow Color";
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.AutoScroll = true;
+            this.panel5.Controls.Add(this.lblMasterRuntime);
+            this.panel5.Controls.Add(this.label13);
+            this.panel5.Controls.Add(this.lblMAsterRuntimeBeats);
+            this.panel5.Controls.Add(this.label31);
+            this.panel5.Controls.Add(this.label21);
+            this.panel5.Controls.Add(this.label32);
+            this.panel5.Controls.Add(this.btnMasterRuntime);
+            this.panel5.Controls.Add(this.label33);
+            this.panel5.Controls.Add(this.lblConfigColorHelp);
+            this.panel5.Controls.Add(this.dropMasterSkybox);
+            this.panel5.Controls.Add(this.dropMasterIntro);
+            this.panel5.Controls.Add(this.btnMasterOpenRest);
+            this.panel5.Controls.Add(this.dropMasterCheck);
+            this.panel5.Controls.Add(this.btnConfigRailColor);
+            this.panel5.Controls.Add(this.label37);
+            this.panel5.Controls.Add(this.btnConfigGlowColor);
+            this.panel5.Controls.Add(this.dropMasterLvlRest);
+            this.panel5.Controls.Add(this.btnConfigPathColor);
+            this.panel5.Controls.Add(this.label35);
+            this.panel5.Controls.Add(this.NUD_ConfigBPM);
+            this.panel5.Controls.Add(this.label27);
+            this.panel5.Controls.Add(this.btnMasterOpenIntro);
+            this.panel5.Controls.Add(this.btnMasterOpenCheckpoint);
+            this.panel5.Controls.Add(this.label12);
+            this.panel5.Controls.Add(this.label56);
+            this.panel5.Controls.Add(this.label47);
+            this.panel5.Location = new System.Drawing.Point(228, 22);
+            this.panel5.Name = "panel5";
+            this.panel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panel5.Size = new System.Drawing.Size(177, 346);
+            this.panel5.TabIndex = 147;
             // 
-            // label47
+            // lblMasterRuntime
             // 
-            this.label47.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label47.AutoSize = true;
-            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.ForeColor = System.Drawing.Color.White;
-            this.label47.Location = new System.Drawing.Point(264, 187);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(61, 15);
-            this.label47.TabIndex = 141;
-            this.label47.Text = "Rail Color";
+            this.lblMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMasterRuntime.AutoSize = true;
+            this.lblMasterRuntime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMasterRuntime.ForeColor = System.Drawing.Color.White;
+            this.lblMasterRuntime.Location = new System.Drawing.Point(42, 263);
+            this.lblMasterRuntime.Name = "lblMasterRuntime";
+            this.lblMasterRuntime.Size = new System.Drawing.Size(38, 15);
+            this.lblMasterRuntime.TabIndex = 146;
+            this.lblMasterRuntime.Text = "Time:";
             // 
-            // label12
+            // label13
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(261, 232);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(64, 15);
-            this.label12.TabIndex = 140;
-            this.label12.Text = "Path Color";
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Silver;
+            this.label13.Location = new System.Drawing.Point(27, 4);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(114, 15);
+            this.label13.TabIndex = 96;
+            this.label13.Text = "══Master Options══";
             // 
-            // btnMasterOpenCheckpoint
+            // lblMAsterRuntimeBeats
             // 
-            this.btnMasterOpenCheckpoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterOpenCheckpoint.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenCheckpoint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenCheckpoint.Enabled = false;
-            this.btnMasterOpenCheckpoint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenCheckpoint.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenCheckpoint.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenCheckpoint.Image")));
-            this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(379, 132);
-            this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
-            this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenCheckpoint.TabIndex = 115;
-            this.btnMasterOpenCheckpoint.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnMasterOpenCheckpoint, "Load lvl into Lvl Editor");
-            this.btnMasterOpenCheckpoint.UseVisualStyleBackColor = false;
-            this.btnMasterOpenCheckpoint.Click += new System.EventHandler(this.btnMasterOpenCheckpoint_Click);
+            this.lblMAsterRuntimeBeats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMAsterRuntimeBeats.AutoSize = true;
+            this.lblMAsterRuntimeBeats.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMAsterRuntimeBeats.ForeColor = System.Drawing.Color.White;
+            this.lblMAsterRuntimeBeats.Location = new System.Drawing.Point(42, 248);
+            this.lblMAsterRuntimeBeats.Name = "lblMAsterRuntimeBeats";
+            this.lblMAsterRuntimeBeats.Size = new System.Drawing.Size(41, 15);
+            this.lblMAsterRuntimeBeats.TabIndex = 145;
+            this.lblMAsterRuntimeBeats.Text = "Beats:";
             // 
-            // btnMasterOpenIntro
+            // label31
             // 
-            this.btnMasterOpenIntro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterOpenIntro.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenIntro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenIntro.Enabled = false;
-            this.btnMasterOpenIntro.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenIntro.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenIntro.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenIntro.Image")));
-            this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenIntro.Location = new System.Drawing.Point(379, 92);
-            this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
-            this.btnMasterOpenIntro.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenIntro.TabIndex = 114;
-            this.btnMasterOpenIntro.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnMasterOpenIntro, "Load lvl into Lvl Editor");
-            this.btnMasterOpenIntro.UseVisualStyleBackColor = false;
-            this.btnMasterOpenIntro.Click += new System.EventHandler(this.btnMasterOpenIntro_Click);
+            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.ForeColor = System.Drawing.Color.White;
+            this.label31.Location = new System.Drawing.Point(61, 20);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(46, 15);
+            this.label31.TabIndex = 97;
+            this.label31.Text = "Skybox";
             // 
-            // label27
+            // label21
             // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(249, 162);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(34, 15);
-            this.label27.TabIndex = 111;
-            this.label27.Text = "BPM";
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Silver;
+            this.label21.Location = new System.Drawing.Point(41, 234);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(78, 15);
+            this.label21.TabIndex = 144;
+            this.label21.Text = "══Runtime══";
+            // 
+            // label32
+            // 
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.ForeColor = System.Drawing.Color.White;
+            this.label32.Location = new System.Drawing.Point(60, 58);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(49, 15);
+            this.label32.TabIndex = 99;
+            this.label32.Text = "Intro Lvl";
+            this.toolTip1.SetToolTip(this.label32, "This lvl plays at the very beginning, when you start\r\nfor the first time or resta" +
+        "rt");
+            // 
+            // btnMasterRuntime
+            // 
+            this.btnMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterRuntime.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterRuntime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMasterRuntime.ForeColor = System.Drawing.Color.Green;
+            this.btnMasterRuntime.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterRuntime.Image")));
+            this.btnMasterRuntime.Location = new System.Drawing.Point(21, 254);
+            this.btnMasterRuntime.Name = "btnMasterRuntime";
+            this.btnMasterRuntime.Padding = new System.Windows.Forms.Padding(0, 0, 2, 1);
+            this.btnMasterRuntime.Size = new System.Drawing.Size(20, 20);
+            this.btnMasterRuntime.TabIndex = 143;
+            this.toolTip1.SetToolTip(this.btnMasterRuntime, "Recalculate the level runtime.\r\n\r\nDOES NOT ACCOUNT FOR SPEED UP/SLOW DOWN\r\nEFFECT" +
+        "S DONE IN LEAFS");
+            this.btnMasterRuntime.UseVisualStyleBackColor = true;
+            this.btnMasterRuntime.Click += new System.EventHandler(this.btnMasterRuntime_Click);
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.ForeColor = System.Drawing.Color.White;
+            this.label33.Location = new System.Drawing.Point(41, 97);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(86, 15);
+            this.label33.TabIndex = 101;
+            this.label33.Text = "Checkpoint Lvl";
+            this.toolTip1.SetToolTip(this.label33, "This lvl plays after every checkpoint, before the next lvl.");
+            // 
+            // lblConfigColorHelp
+            // 
+            this.lblConfigColorHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblConfigColorHelp.AutoSize = true;
+            this.lblConfigColorHelp.BackColor = System.Drawing.Color.Transparent;
+            this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblConfigColorHelp.Location = new System.Drawing.Point(150, 166);
+            this.lblConfigColorHelp.Name = "lblConfigColorHelp";
+            this.lblConfigColorHelp.Size = new System.Drawing.Size(15, 16);
+            this.lblConfigColorHelp.TabIndex = 112;
+            this.lblConfigColorHelp.Text = "?";
+            this.lblConfigColorHelp.Click += new System.EventHandler(this.lblConfigColorHelp_Click);
+            // 
+            // dropMasterSkybox
+            // 
+            this.dropMasterSkybox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dropMasterSkybox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterSkybox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.dropMasterSkybox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropMasterSkybox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropMasterSkybox.ForeColor = System.Drawing.Color.White;
+            this.dropMasterSkybox.FormattingEnabled = true;
+            this.dropMasterSkybox.Items.AddRange(new object[] {
+            "<none>",
+            "skybox_cube"});
+            this.dropMasterSkybox.Location = new System.Drawing.Point(21, 36);
+            this.dropMasterSkybox.Name = "dropMasterSkybox";
+            this.dropMasterSkybox.Size = new System.Drawing.Size(131, 21);
+            this.dropMasterSkybox.TabIndex = 95;
+            this.dropMasterSkybox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropMasterSkybox.SelectedIndexChanged += new System.EventHandler(this.dropMasterIntro_SelectedIndexChanged);
+            // 
+            // dropMasterIntro
+            // 
+            this.dropMasterIntro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dropMasterIntro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterIntro.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.dropMasterIntro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropMasterIntro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropMasterIntro.ForeColor = System.Drawing.Color.White;
+            this.dropMasterIntro.FormattingEnabled = true;
+            this.dropMasterIntro.Location = new System.Drawing.Point(21, 73);
+            this.dropMasterIntro.Name = "dropMasterIntro";
+            this.dropMasterIntro.Size = new System.Drawing.Size(131, 21);
+            this.dropMasterIntro.TabIndex = 98;
+            this.dropMasterIntro.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropMasterIntro.SelectedIndexChanged += new System.EventHandler(this.dropMasterIntro_SelectedIndexChanged);
+            // 
+            // btnMasterOpenRest
+            // 
+            this.btnMasterOpenRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterOpenRest.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenRest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterOpenRest.Enabled = false;
+            this.btnMasterOpenRest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasterOpenRest.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
+            this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
+            this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMasterOpenRest.Location = new System.Drawing.Point(151, 318);
+            this.btnMasterOpenRest.Name = "btnMasterOpenRest";
+            this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
+            this.btnMasterOpenRest.TabIndex = 118;
+            this.btnMasterOpenRest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenRest, "Load lvl into Lvl Editor");
+            this.btnMasterOpenRest.UseVisualStyleBackColor = false;
+            this.btnMasterOpenRest.Click += new System.EventHandler(this.btnMasterOpenRest_Click);
+            // 
+            // dropMasterCheck
+            // 
+            this.dropMasterCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dropMasterCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterCheck.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.dropMasterCheck.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropMasterCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropMasterCheck.ForeColor = System.Drawing.Color.White;
+            this.dropMasterCheck.FormattingEnabled = true;
+            this.dropMasterCheck.Location = new System.Drawing.Point(21, 113);
+            this.dropMasterCheck.Name = "dropMasterCheck";
+            this.dropMasterCheck.Size = new System.Drawing.Size(131, 21);
+            this.dropMasterCheck.TabIndex = 100;
+            this.dropMasterCheck.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropMasterCheck.SelectedIndexChanged += new System.EventHandler(this.dropMasterCheck_SelectedIndexChanged);
+            // 
+            // btnConfigRailColor
+            // 
+            this.btnConfigRailColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfigRailColor.BackColor = System.Drawing.Color.White;
+            this.btnConfigRailColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConfigRailColor.Location = new System.Drawing.Point(98, 163);
+            this.btnConfigRailColor.Name = "btnConfigRailColor";
+            this.btnConfigRailColor.Size = new System.Drawing.Size(55, 23);
+            this.btnConfigRailColor.TabIndex = 96;
+            this.btnConfigRailColor.UseVisualStyleBackColor = false;
+            this.btnConfigRailColor.Click += new System.EventHandler(this.btnConfigColor_Click);
+            // 
+            // label37
+            // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.Silver;
+            this.label37.Location = new System.Drawing.Point(23, 287);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(123, 15);
+            this.label37.TabIndex = 116;
+            this.label37.Text = "══Sublevel Options══";
+            // 
+            // btnConfigGlowColor
+            // 
+            this.btnConfigGlowColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfigGlowColor.BackColor = System.Drawing.Color.White;
+            this.btnConfigGlowColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConfigGlowColor.Location = new System.Drawing.Point(98, 186);
+            this.btnConfigGlowColor.Name = "btnConfigGlowColor";
+            this.btnConfigGlowColor.Size = new System.Drawing.Size(55, 23);
+            this.btnConfigGlowColor.TabIndex = 108;
+            this.btnConfigGlowColor.UseVisualStyleBackColor = false;
+            this.btnConfigGlowColor.Click += new System.EventHandler(this.btnConfigColor_Click);
+            // 
+            // dropMasterLvlRest
+            // 
+            this.dropMasterLvlRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dropMasterLvlRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropMasterLvlRest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.dropMasterLvlRest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropMasterLvlRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropMasterLvlRest.ForeColor = System.Drawing.Color.White;
+            this.dropMasterLvlRest.FormattingEnabled = true;
+            this.dropMasterLvlRest.Items.AddRange(new object[] {
+            "skybox_cube"});
+            this.dropMasterLvlRest.Location = new System.Drawing.Point(21, 318);
+            this.dropMasterLvlRest.Name = "dropMasterLvlRest";
+            this.dropMasterLvlRest.Size = new System.Drawing.Size(131, 21);
+            this.dropMasterLvlRest.TabIndex = 105;
+            this.dropMasterLvlRest.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropMasterLvlRest.SelectedIndexChanged += new System.EventHandler(this.dropMasterLvlRest_SelectedIndexChanged);
+            // 
+            // btnConfigPathColor
+            // 
+            this.btnConfigPathColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfigPathColor.BackColor = System.Drawing.Color.White;
+            this.btnConfigPathColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConfigPathColor.Location = new System.Drawing.Point(98, 209);
+            this.btnConfigPathColor.Name = "btnConfigPathColor";
+            this.btnConfigPathColor.Size = new System.Drawing.Size(55, 23);
+            this.btnConfigPathColor.TabIndex = 109;
+            this.btnConfigPathColor.UseVisualStyleBackColor = false;
+            this.btnConfigPathColor.Click += new System.EventHandler(this.btnConfigColor_Click);
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.White;
+            this.label35.Location = new System.Drawing.Point(59, 304);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(50, 15);
+            this.label35.TabIndex = 104;
+            this.label35.Text = "Rest Lvl";
+            this.toolTip1.SetToolTip(this.label35, "If set, this lvl will play before the selected lvl. Usually used as a longer rest" +
+        " segment.");
             // 
             // NUD_ConfigBPM
             // 
@@ -4267,7 +4346,7 @@
             this.NUD_ConfigBPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NUD_ConfigBPM.DecimalPlaces = 2;
             this.NUD_ConfigBPM.ForeColor = System.Drawing.Color.White;
-            this.NUD_ConfigBPM.Location = new System.Drawing.Point(285, 160);
+            this.NUD_ConfigBPM.Location = new System.Drawing.Point(57, 140);
             this.NUD_ConfigBPM.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -4284,158 +4363,93 @@
             0});
             this.NUD_ConfigBPM.ValueChanged += new System.EventHandler(this.NUD_ConfigBPM_ValueChanged);
             // 
-            // btnConfigPathColor
+            // label27
             // 
-            this.btnConfigPathColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfigPathColor.BackColor = System.Drawing.Color.White;
-            this.btnConfigPathColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigPathColor.Location = new System.Drawing.Point(326, 229);
-            this.btnConfigPathColor.Name = "btnConfigPathColor";
-            this.btnConfigPathColor.Size = new System.Drawing.Size(55, 23);
-            this.btnConfigPathColor.TabIndex = 109;
-            this.btnConfigPathColor.UseVisualStyleBackColor = false;
-            this.btnConfigPathColor.Click += new System.EventHandler(this.btnConfigColor_Click);
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.Color.White;
+            this.label27.Location = new System.Drawing.Point(21, 142);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(34, 15);
+            this.label27.TabIndex = 111;
+            this.label27.Text = "BPM";
             // 
-            // btnConfigGlowColor
+            // btnMasterOpenIntro
             // 
-            this.btnConfigGlowColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfigGlowColor.BackColor = System.Drawing.Color.White;
-            this.btnConfigGlowColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigGlowColor.Location = new System.Drawing.Point(326, 206);
-            this.btnConfigGlowColor.Name = "btnConfigGlowColor";
-            this.btnConfigGlowColor.Size = new System.Drawing.Size(55, 23);
-            this.btnConfigGlowColor.TabIndex = 108;
-            this.btnConfigGlowColor.UseVisualStyleBackColor = false;
-            this.btnConfigGlowColor.Click += new System.EventHandler(this.btnConfigColor_Click);
+            this.btnMasterOpenIntro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterOpenIntro.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenIntro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterOpenIntro.Enabled = false;
+            this.btnMasterOpenIntro.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasterOpenIntro.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
+            this.btnMasterOpenIntro.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenIntro.Image")));
+            this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMasterOpenIntro.Location = new System.Drawing.Point(151, 72);
+            this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
+            this.btnMasterOpenIntro.Size = new System.Drawing.Size(23, 23);
+            this.btnMasterOpenIntro.TabIndex = 114;
+            this.btnMasterOpenIntro.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenIntro, "Load lvl into Lvl Editor");
+            this.btnMasterOpenIntro.UseVisualStyleBackColor = false;
+            this.btnMasterOpenIntro.Click += new System.EventHandler(this.btnMasterOpenIntro_Click);
             // 
-            // btnConfigRailColor
+            // btnMasterOpenCheckpoint
             // 
-            this.btnConfigRailColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfigRailColor.BackColor = System.Drawing.Color.White;
-            this.btnConfigRailColor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnConfigRailColor.Location = new System.Drawing.Point(326, 183);
-            this.btnConfigRailColor.Name = "btnConfigRailColor";
-            this.btnConfigRailColor.Size = new System.Drawing.Size(55, 23);
-            this.btnConfigRailColor.TabIndex = 96;
-            this.btnConfigRailColor.UseVisualStyleBackColor = false;
-            this.btnConfigRailColor.Click += new System.EventHandler(this.btnConfigColor_Click);
+            this.btnMasterOpenCheckpoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterOpenCheckpoint.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenCheckpoint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterOpenCheckpoint.Enabled = false;
+            this.btnMasterOpenCheckpoint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasterOpenCheckpoint.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
+            this.btnMasterOpenCheckpoint.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenCheckpoint.Image")));
+            this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(151, 112);
+            this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
+            this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(23, 23);
+            this.btnMasterOpenCheckpoint.TabIndex = 115;
+            this.btnMasterOpenCheckpoint.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenCheckpoint, "Load lvl into Lvl Editor");
+            this.btnMasterOpenCheckpoint.UseVisualStyleBackColor = false;
+            this.btnMasterOpenCheckpoint.Click += new System.EventHandler(this.btnMasterOpenCheckpoint_Click);
             // 
-            // dropMasterCheck
+            // label12
             // 
-            this.dropMasterCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dropMasterCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropMasterCheck.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.dropMasterCheck.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropMasterCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropMasterCheck.ForeColor = System.Drawing.Color.White;
-            this.dropMasterCheck.FormattingEnabled = true;
-            this.dropMasterCheck.Location = new System.Drawing.Point(240, 133);
-            this.dropMasterCheck.Name = "dropMasterCheck";
-            this.dropMasterCheck.Size = new System.Drawing.Size(140, 21);
-            this.dropMasterCheck.TabIndex = 100;
-            this.dropMasterCheck.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropMasterCheck.SelectedIndexChanged += new System.EventHandler(this.dropMasterCheck_SelectedIndexChanged);
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(33, 212);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 15);
+            this.label12.TabIndex = 140;
+            this.label12.Text = "Path Color";
             // 
-            // dropMasterIntro
+            // label56
             // 
-            this.dropMasterIntro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dropMasterIntro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropMasterIntro.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.dropMasterIntro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropMasterIntro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropMasterIntro.ForeColor = System.Drawing.Color.White;
-            this.dropMasterIntro.FormattingEnabled = true;
-            this.dropMasterIntro.Location = new System.Drawing.Point(240, 93);
-            this.dropMasterIntro.Name = "dropMasterIntro";
-            this.dropMasterIntro.Size = new System.Drawing.Size(140, 21);
-            this.dropMasterIntro.TabIndex = 98;
-            this.dropMasterIntro.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropMasterIntro.SelectedIndexChanged += new System.EventHandler(this.dropMasterIntro_SelectedIndexChanged);
+            this.label56.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label56.AutoSize = true;
+            this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label56.ForeColor = System.Drawing.Color.White;
+            this.label56.Location = new System.Drawing.Point(5, 189);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(92, 15);
+            this.label56.TabIndex = 142;
+            this.label56.Text = "Rail Glow Color";
             // 
-            // dropMasterSkybox
+            // label47
             // 
-            this.dropMasterSkybox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dropMasterSkybox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropMasterSkybox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.dropMasterSkybox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropMasterSkybox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropMasterSkybox.ForeColor = System.Drawing.Color.White;
-            this.dropMasterSkybox.FormattingEnabled = true;
-            this.dropMasterSkybox.Items.AddRange(new object[] {
-            "<none>",
-            "skybox_cube"});
-            this.dropMasterSkybox.Location = new System.Drawing.Point(240, 56);
-            this.dropMasterSkybox.Name = "dropMasterSkybox";
-            this.dropMasterSkybox.Size = new System.Drawing.Size(140, 21);
-            this.dropMasterSkybox.TabIndex = 95;
-            this.dropMasterSkybox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropMasterSkybox.SelectedIndexChanged += new System.EventHandler(this.dropMasterIntro_SelectedIndexChanged);
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Silver;
-            this.label13.Location = new System.Drawing.Point(255, 24);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(114, 15);
-            this.label13.TabIndex = 96;
-            this.label13.Text = "══Master Options══";
-            // 
-            // lblConfigColorHelp
-            // 
-            this.lblConfigColorHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblConfigColorHelp.AutoSize = true;
-            this.lblConfigColorHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblConfigColorHelp.Location = new System.Drawing.Point(378, 186);
-            this.lblConfigColorHelp.Name = "lblConfigColorHelp";
-            this.lblConfigColorHelp.Size = new System.Drawing.Size(15, 16);
-            this.lblConfigColorHelp.TabIndex = 112;
-            this.lblConfigColorHelp.Text = "?";
-            this.lblConfigColorHelp.Click += new System.EventHandler(this.lblConfigColorHelp_Click);
-            // 
-            // label33
-            // 
-            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(269, 117);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(86, 15);
-            this.label33.TabIndex = 101;
-            this.label33.Text = "Checkpoint Lvl";
-            this.toolTip1.SetToolTip(this.label33, "This lvl plays after every checkpoint, before the next lvl.");
-            // 
-            // label32
-            // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.White;
-            this.label32.Location = new System.Drawing.Point(288, 78);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(49, 15);
-            this.label32.TabIndex = 99;
-            this.label32.Text = "Intro Lvl";
-            this.toolTip1.SetToolTip(this.label32, "This lvl plays at the very beginning, when you start\r\nfor the first time or resta" +
-        "rt");
-            // 
-            // label31
-            // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.ForeColor = System.Drawing.Color.White;
-            this.label31.Location = new System.Drawing.Point(289, 40);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(46, 15);
-            this.label31.TabIndex = 97;
-            this.label31.Text = "Skybox";
+            this.label47.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label47.AutoSize = true;
+            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label47.ForeColor = System.Drawing.Color.White;
+            this.label47.Location = new System.Drawing.Point(36, 167);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(61, 15);
+            this.label47.TabIndex = 141;
+            this.label47.Text = "Rail Color";
             // 
             // colorDialog1
             // 
@@ -6549,6 +6563,8 @@
             this.toolstripTitleMaster.PerformLayout();
             this.masterToolStrip.ResumeLayout(false);
             this.masterToolStrip.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).EndInit();
             this.panelGate.ResumeLayout(false);
             this.panelGate.PerformLayout();
@@ -7020,6 +7036,7 @@
         private System.Windows.Forms.Label lblMasterRuntime;
         private System.Windows.Forms.Label lblMAsterRuntimeBeats;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Panel panel5;
     }
 }
 
