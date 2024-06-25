@@ -511,6 +511,7 @@ namespace Thumper_Custom_Level_Editor
 			SaveMaster(true);
 			masterjson = _load;
 			btnRevertMaster.Enabled = true;
+			btnMasterRuntime.Enabled = true;
 		}
 
 		public void LoadConfig()
