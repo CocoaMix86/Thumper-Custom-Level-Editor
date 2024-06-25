@@ -3698,7 +3698,6 @@
             this.lblMasterRuntime.Size = new System.Drawing.Size(38, 15);
             this.lblMasterRuntime.TabIndex = 146;
             this.lblMasterRuntime.Text = "Time:";
-            this.toolTip1.SetToolTip(this.lblMasterRuntime, "This lvl plays after every checkpoint, before the next lvl.");
             // 
             // lblMAsterRuntimeBeats
             // 
@@ -3711,7 +3710,6 @@
             this.lblMAsterRuntimeBeats.Size = new System.Drawing.Size(41, 15);
             this.lblMAsterRuntimeBeats.TabIndex = 145;
             this.lblMAsterRuntimeBeats.Text = "Beats:";
-            this.toolTip1.SetToolTip(this.lblMAsterRuntimeBeats, "This lvl plays after every checkpoint, before the next lvl.");
             // 
             // label21
             // 
