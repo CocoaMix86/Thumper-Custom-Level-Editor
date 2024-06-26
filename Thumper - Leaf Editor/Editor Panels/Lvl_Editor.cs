@@ -172,32 +172,12 @@ namespace Thumper_Custom_Level_Editor
 		//Fill weight - allows for more columns
 		private void lvlSeqObjs_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
 		{
+			e.Column.FillWeight = 0.001F;
 			e.Column.Width = trackLvlVolumeZoom.Value;
 		}
 		///_LVLLEAF - Triggers when the collection changes
 		public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			//calculate total length of all leafs. This value is used for the volume sequencer
-			foreach (int idx in idxtocolor) {
-				lvlSeqObjs.Columns[idx].DefaultCellStyle = null;
-				lvlSeqObjs.Columns[idx].HeaderCell.Style = null;
-			}
-			idxtocolor.Clear();
-			_lvllength = (int)NUD_lvlApproach.Value;
-			foreach (LvlLeafData _leaf in _lvlleafs) {
-				if (_leaf.beats > 0)
-					idxtocolor.Add(_lvllength);
-				_lvllength += _leaf.beats;
-			}
-			lvlSeqObjs.ColumnCount = _lvllength;
-			GenerateColumnStyle(lvlSeqObjs, _lvllength);
-			foreach (int idx in idxtocolor) {
-				lvlSeqObjs.Columns[idx].DefaultCellStyle.BackColor = Color.LightGray;
-				lvlSeqObjs.Columns[idx].HeaderCell.Style.BackColor = Color.LightGray;
-				lvlSeqObjs.Columns[idx].HeaderCell.Style.ForeColor = Color.Black;
-			}
-
-
 			lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
 			int _in = e.NewStartingIndex;
 
@@ -237,10 +217,17 @@ namespace Thumper_Custom_Level_Editor
 			btnLvlLoopAdd.Enabled = _lvlleafs.Count > 0;
 			if (btnLvlLoopAdd.Enabled == false) btnLvlLoopDelete.Enabled = false;
 			//
-			SaveLvl(false);
+			if (!loadinglvl) {
+				ColorLvlVolumeSequencer();
+				SaveLvl(false);
+			}
 		}
 		/// Set "saved" flag to false for LVL when these events happen
-		private void NUD_lvlApproach_ValueChanged(object sender, EventArgs e) => SaveLvl(false);
+		private void NUD_lvlApproach_ValueChanged(object sender, EventArgs e)
+		{
+			ColorLvlVolumeSequencer();
+			SaveLvl(false);
+		}
 		private void NUD_lvlVolume_ValueChanged(object sender, EventArgs e) => SaveLvl(false);
 		private void dropLvlInput_SelectedIndexChanged(object sender, EventArgs e) => SaveLvl(false);
 		private void dropLvlTutorial_SelectedIndexChanged(object sender, EventArgs e) => SaveLvl(false);
@@ -668,6 +655,7 @@ namespace Thumper_Custom_Level_Editor
 			//SaveLvl(true);
 			loadinglvl = false;
 			SaveLvl(true);
+			ColorLvlVolumeSequencer();
 			lvljson = _load;
 		}
 
@@ -819,6 +807,29 @@ namespace Thumper_Custom_Level_Editor
 					r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
 				}
 				catch (ArgumentOutOfRangeException) { }
+			}
+		}
+
+		public void ColorLvlVolumeSequencer()
+        {
+			//calculate total length of all leafs. This value is used for the volume sequencer
+			foreach (int idx in idxtocolor) {
+				lvlSeqObjs.Columns[idx].DefaultCellStyle = null;
+				lvlSeqObjs.Columns[idx].HeaderCell.Style = null;
+			}
+			idxtocolor.Clear();
+			_lvllength = (int)NUD_lvlApproach.Value;
+			foreach (LvlLeafData _leaf in _lvlleafs) {
+				if (_leaf.beats > 0)
+					idxtocolor.Add(_lvllength);
+				_lvllength += _leaf.beats;
+			}
+			lvlSeqObjs.ColumnCount = _lvllength;
+			GenerateColumnStyle(lvlSeqObjs, _lvllength);
+			foreach (int idx in idxtocolor) {
+				lvlSeqObjs.Columns[idx].DefaultCellStyle.BackColor = Color.LightGray;
+				lvlSeqObjs.Columns[idx].HeaderCell.Style.BackColor = Color.LightGray;
+				lvlSeqObjs.Columns[idx].HeaderCell.Style.ForeColor = Color.Black;
 			}
 		}
 
