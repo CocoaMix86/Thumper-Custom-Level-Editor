@@ -616,6 +616,8 @@ namespace Thumper_Custom_Level_Editor
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
+				if (!tempFileName.EndsWith(".txt"))
+					tempFileName += ".txt";
                 //check if user input "leaf_", and deny save if so
                 if (Path.GetFileName(sfd.FileName).Contains("leaf_")) {
                     MessageBox.Show("File not saved. Do not include 'leaf_' in your file name.", "File not saved");

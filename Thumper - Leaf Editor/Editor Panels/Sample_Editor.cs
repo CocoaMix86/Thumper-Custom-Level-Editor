@@ -185,8 +185,10 @@ namespace Thumper_Custom_Level_Editor
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
-                //check if user input "gate_", and deny save if so
-                if (Path.GetFileName(sfd.FileName).Contains("samp_")) {
+				if (!tempFileName.EndsWith(".txt"))
+					tempFileName += ".txt";
+				//check if user input "gate_", and deny save if so
+				if (Path.GetFileName(sfd.FileName).Contains("samp_")) {
                     MessageBox.Show("File not saved. Do not include 'samp_' in your file name.", "File not saved");
                     return;
                 }
@@ -244,7 +246,24 @@ namespace Thumper_Custom_Level_Editor
 		//add and remove sample entries
 		private void btnSampleDelete_Click(object sender, EventArgs e)
 		{
-			_samplelist.RemoveAt(sampleList.CurrentRow.Index);
+			int _in = sampleList.CurrentRow.Index;
+			if (_samplelist[_in].path.Contains("custom")) {
+				if (MessageBox.Show("This deletion cannot be undone. Are you sure?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+					return;
+				string _hashedname = null;
+				byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{_samplelist[_in].path}"));
+				Array.Reverse(hashbytes);
+				foreach (byte b in hashbytes)
+					_hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+				//if the hashed name starts with a '0', remove it
+				if (_hashedname[0] == '0')
+					_hashedname = _hashedname[1..];
+
+				if (File.Exists($@"{workingfolder}\extras\{_hashedname}.pc")) {
+					File.Delete($@"{workingfolder}\extras\{_hashedname}.pc");
+                }
+			}
+			_samplelist.RemoveAt(_in);
 			PlaySound("UIobjectremove");
 		}
 		private void btnSampleAdd_Click(object sender, EventArgs e)

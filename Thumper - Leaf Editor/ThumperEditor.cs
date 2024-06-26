@@ -720,9 +720,12 @@ namespace Thumper_Custom_Level_Editor
 
         private void FormLeafEditor_KeyDown(object sender, KeyEventArgs e)
         {
-            if (_undolistleaf.Count < 1)
-                return;
+            if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down && e.Alt && e.Control) {
+                MessageBox.Show("shift");
+            }
             if (e.KeyCode == Keys.Z && e.Control) {
+                if (_undolistleaf.Count < 1)
+                    return;
                 UndoFunction(1);
             }
         }

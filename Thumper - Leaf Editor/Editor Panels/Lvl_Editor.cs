@@ -294,8 +294,10 @@ namespace Thumper_Custom_Level_Editor
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
-                //check if user input "lvl_", and deny save if so
-                if (Path.GetFileName(sfd.FileName).Contains("lvl_")) {
+				if (!tempFileName.EndsWith(".txt"))
+					tempFileName += ".txt";
+				//check if user input "lvl_", and deny save if so
+				if (Path.GetFileName(sfd.FileName).Contains("lvl_")) {
                     MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
                     return;
                 }
