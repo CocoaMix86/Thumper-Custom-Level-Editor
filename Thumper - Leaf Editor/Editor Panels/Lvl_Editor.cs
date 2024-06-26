@@ -348,11 +348,7 @@ namespace Thumper_Custom_Level_Editor
 			int _in = lvlLeafList.CurrentRow.Index;
 			_lvlleafs.RemoveAt(_in);
 			PlaySound("UIobjectremove");
-			lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in));
-			/*if (_in > 0) {
-				lvlLeafList.CurrentCell = lvlLeafList.Rows[_in - 1].Cells[0];
-				lvlLeafList.Rows[_in - 1].Cells[0].Selected = true;
-			}*/
+			lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= _lvlleafs.Count ? _in - 1 : _in));
 		}
 		private void btnLvlLeafAdd_Click(object sender, EventArgs e)
 		{
