@@ -4047,7 +4047,6 @@
             this.panel5.Controls.Add(this.lblConfigColorHelp);
             this.panel5.Controls.Add(this.dropMasterSkybox);
             this.panel5.Controls.Add(this.dropMasterIntro);
-            this.panel5.Controls.Add(this.btnMasterOpenRest);
             this.panel5.Controls.Add(this.dropMasterCheck);
             this.panel5.Controls.Add(this.btnConfigRailColor);
             this.panel5.Controls.Add(this.label37);
@@ -4062,6 +4061,7 @@
             this.panel5.Controls.Add(this.label12);
             this.panel5.Controls.Add(this.label56);
             this.panel5.Controls.Add(this.label47);
+            this.panel5.Controls.Add(this.btnMasterOpenRest);
             this.panel5.Location = new System.Drawing.Point(222, 22);
             this.panel5.Name = "panel5";
             this.panel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -4202,8 +4202,9 @@
             this.dropMasterSkybox.Items.AddRange(new object[] {
             "<none>",
             "skybox_cube"});
-            this.dropMasterSkybox.Location = new System.Drawing.Point(22, 36);
+            this.dropMasterSkybox.Location = new System.Drawing.Point(20, 36);
             this.dropMasterSkybox.Name = "dropMasterSkybox";
+            this.dropMasterSkybox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropMasterSkybox.Size = new System.Drawing.Size(131, 21);
             this.dropMasterSkybox.TabIndex = 95;
             this.dropMasterSkybox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
@@ -4218,8 +4219,9 @@
             this.dropMasterIntro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterIntro.ForeColor = System.Drawing.Color.White;
             this.dropMasterIntro.FormattingEnabled = true;
-            this.dropMasterIntro.Location = new System.Drawing.Point(22, 73);
+            this.dropMasterIntro.Location = new System.Drawing.Point(20, 73);
             this.dropMasterIntro.Name = "dropMasterIntro";
+            this.dropMasterIntro.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropMasterIntro.Size = new System.Drawing.Size(131, 21);
             this.dropMasterIntro.TabIndex = 98;
             this.dropMasterIntro.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
@@ -4236,7 +4238,7 @@
             this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
             this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenRest.Location = new System.Drawing.Point(148, 318);
+            this.btnMasterOpenRest.Location = new System.Drawing.Point(149, 318);
             this.btnMasterOpenRest.Name = "btnMasterOpenRest";
             this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenRest.TabIndex = 118;
@@ -4254,8 +4256,9 @@
             this.dropMasterCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropMasterCheck.ForeColor = System.Drawing.Color.White;
             this.dropMasterCheck.FormattingEnabled = true;
-            this.dropMasterCheck.Location = new System.Drawing.Point(22, 113);
+            this.dropMasterCheck.Location = new System.Drawing.Point(20, 113);
             this.dropMasterCheck.Name = "dropMasterCheck";
+            this.dropMasterCheck.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropMasterCheck.Size = new System.Drawing.Size(131, 21);
             this.dropMasterCheck.TabIndex = 100;
             this.dropMasterCheck.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
@@ -4308,8 +4311,9 @@
             this.dropMasterLvlRest.FormattingEnabled = true;
             this.dropMasterLvlRest.Items.AddRange(new object[] {
             "skybox_cube"});
-            this.dropMasterLvlRest.Location = new System.Drawing.Point(22, 318);
+            this.dropMasterLvlRest.Location = new System.Drawing.Point(20, 318);
             this.dropMasterLvlRest.Name = "dropMasterLvlRest";
+            this.dropMasterLvlRest.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropMasterLvlRest.Size = new System.Drawing.Size(131, 21);
             this.dropMasterLvlRest.TabIndex = 105;
             this.dropMasterLvlRest.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
@@ -4388,7 +4392,7 @@
             this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenIntro.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenIntro.Image")));
             this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenIntro.Location = new System.Drawing.Point(148, 72);
+            this.btnMasterOpenIntro.Location = new System.Drawing.Point(149, 72);
             this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
             this.btnMasterOpenIntro.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenIntro.TabIndex = 114;
@@ -4408,7 +4412,7 @@
             this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenCheckpoint.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenCheckpoint.Image")));
             this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(148, 112);
+            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(149, 112);
             this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
             this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenCheckpoint.TabIndex = 115;
@@ -6154,7 +6158,7 @@
             this.panelRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
             this.panelRecentFiles.Controls.Add(this.toolstripRecentFiles);
-            this.panelRecentFiles.Location = new System.Drawing.Point(93, 100);
+            this.panelRecentFiles.Location = new System.Drawing.Point(777, 10);
             this.panelRecentFiles.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
             this.panelRecentFiles.Size = new System.Drawing.Size(407, 247);
