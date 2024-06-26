@@ -257,8 +257,10 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnMasterLvlDelete_Click(object sender, EventArgs e)
 		{
-			_masterlvls.RemoveAt(masterLvlList.CurrentRow.Index);
+			int _in = masterLvlList.CurrentRow.Index;
+			_masterlvls.RemoveAt(_in);
 			PlaySound("UIobjectremove");
+			masterLvlList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= _lvlleafs.Count ? _in - 1 : _in));
 		}
 		private void btnMasterLvlAdd_Click(object sender, EventArgs e)
 		{
