@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -172,7 +173,7 @@ namespace Thumper_Custom_Level_Editor
 		//Fill weight - allows for more columns
 		private void lvlSeqObjs_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
 		{
-			e.Column.FillWeight = 0.001F;
+			e.Column.FillWeight = 1;
 			e.Column.Width = trackLvlVolumeZoom.Value;
 		}
 		///_LVLLEAF - Triggers when the collection changes
@@ -812,6 +813,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public void ColorLvlVolumeSequencer()
         {
+			//lvlSeqObjs.Visible = false;
 			//calculate total length of all leafs. This value is used for the volume sequencer
 			foreach (int idx in idxtocolor) {
 				lvlSeqObjs.Columns[idx].DefaultCellStyle = null;
@@ -831,6 +833,7 @@ namespace Thumper_Custom_Level_Editor
 				lvlSeqObjs.Columns[idx].HeaderCell.Style.BackColor = Color.LightGray;
 				lvlSeqObjs.Columns[idx].HeaderCell.Style.ForeColor = Color.Black;
 			}
+			lvlSeqObjs.Visible = true;
 		}
 
 		public JObject LvlBuildSave(string _lvlname)
