@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -813,7 +812,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public void ColorLvlVolumeSequencer()
         {
-			//lvlSeqObjs.Visible = false;
+			lvlSeqObjs.Visible = false;
 			//calculate total length of all leafs. This value is used for the volume sequencer
 			foreach (int idx in idxtocolor) {
 				lvlSeqObjs.Columns[idx].DefaultCellStyle = null;
