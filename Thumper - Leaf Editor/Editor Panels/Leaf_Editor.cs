@@ -460,6 +460,8 @@ namespace Thumper_Custom_Level_Editor
 		//Clicking row headers to select the row
 		private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
+			if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
+				return;
 			trackEditor.CurrentCell = trackEditor.Rows[e.RowIndex].Cells[trackEditor.FirstDisplayedScrollingColumnIndex];
 		}
 
