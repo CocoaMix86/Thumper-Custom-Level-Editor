@@ -764,10 +764,5 @@ namespace Thumper_Custom_Level_Editor
             recentLevelsToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelrecent"];
             openLevelInExplorerToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelexplorer"];
         }
-
-        private void btnLeafColors_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
