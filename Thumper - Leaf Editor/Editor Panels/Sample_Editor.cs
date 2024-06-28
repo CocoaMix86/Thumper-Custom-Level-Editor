@@ -132,6 +132,10 @@ namespace Thumper_Custom_Level_Editor
 			_samplelist[sampleList.CurrentRow.Index].path = txtSampPath.Text;
 		}
 
+		private void lblSampleEditor_TextChanged(object sender, EventArgs e)
+		{
+			toolstripTitleSample.Height = lblSampleEditor.Text.Contains("⮞") ? 40 : 22;
+		}
 
 		private void SamplenewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -208,7 +212,7 @@ namespace Thumper_Custom_Level_Editor
             JObject _save = SampleBuildSave();
 			File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveSample(true, true);
-			lblSampleEditor.Text = $"Sample Editor - {Path.GetFileNameWithoutExtension(_loadedsample)}";
+			lblSampleEditor.Text = $"Sample Editor ⮞\n{Path.GetFileNameWithoutExtension(_loadedsample)}";
 		}
 
 		///Detect dragon-and-drop of files and then load them to Sample files
@@ -391,7 +395,7 @@ namespace Thumper_Custom_Level_Editor
 			workingfolder = Path.GetDirectoryName(_loadedsampletemp);
 			_loadedsample = _loadedsampletemp;
 			//set some visual elements
-			lblSampleEditor.Text = $"Sample Editor - {Path.GetFileNameWithoutExtension(loadedsample)}";
+			lblSampleEditor.Text = $"Sample Editor ⮞\n{Path.GetFileNameWithoutExtension(loadedsample)}";
 
 			///Clear form elements so new data can load
 			_samplelist.CollectionChanged -= _samplelist_CollectionChanged;
