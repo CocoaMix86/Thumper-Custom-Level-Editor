@@ -7,15 +7,22 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class FormLeafEditor
 	{
+		List<WorkingFolderFileItem> workingfiles = new();
+
 		private void workingfolderFiles_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
+			LoadFileOnClick(e.RowIndex, e.ColumnIndex);
+		}
+		private void LoadFileOnClick(int rowindex, int columnindex)
+        {
 			//do nothing if no cell click
-			if (e.RowIndex == -1)
+			if (rowindex == -1)
 				return;
 
 			dynamic _load;
@@ -23,9 +30,9 @@ namespace Thumper_Custom_Level_Editor
 			//attempt to load file listed in the dGV
 			try {
 				//first check if it exists
-				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, e.RowIndex].Value}.txt";
+				_selectedfilename = $@"{workingfolder}\{workingfolderFiles[1, rowindex].Value}.txt";
 				if (!File.Exists(_selectedfilename)) {
-					MessageBox.Show($"File {workingfolderFiles[1, e.RowIndex].Value}.txt could not be found in the folder. Was it moved or deleted?", "File load error");
+					MessageBox.Show($"File {workingfolderFiles[1, rowindex].Value}.txt could not be found in the folder. Was it moved or deleted?", "File load error");
 					return;
 				}
 				//atempt to parse JSON
@@ -38,14 +45,14 @@ namespace Thumper_Custom_Level_Editor
 			}
 
 			///Search for file reference. Return afterwards, do not attempt to load file into editor
-			if (e.ColumnIndex == 2) {
+			if (columnindex == 2) {
 				//this check skips master and samp, since you can't reference those
-				if (! new[] { "samp", "master" }.Any(c => workingfolderFiles.Rows[e.RowIndex].Cells[1].Value.ToString().Contains(c))) {
+				if (!new[] { "samp", "master" }.Any(c => workingfolderFiles.Rows[rowindex].Cells[1].Value.ToString().Contains(c))) {
 					string _files = SearchReferences(_load, _selectedfilename);
 					MessageBox.Show($"This file is referenced in these files:\n{_files}");
 				}
 				return;
-            }
+			}
 
 			///Send file off to different load methods based on the file type
 			//process SAMP first, since its JSON structure is different, and detectable
@@ -154,6 +161,7 @@ namespace Thumper_Custom_Level_Editor
 			PlaySound("UIrefresh");
 			//clear the dgv and reload files in the folder
 			workingfolderFiles.Rows.Clear();
+			workingfiles.Clear();
 			//filter for specific files
 			foreach (string file in Directory.GetFiles(workingfolder).Where(x => !x.Contains("leaf_pyramid_outro.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") /*|| x.Contains("LEVEL DETAILS")*/ || x.Contains("samp_")))) {
                 string filetype = Path.GetFileName(file).Split('_')[0];
@@ -176,6 +184,12 @@ namespace Thumper_Custom_Level_Editor
 				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp)) {
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 				}
+
+				workingfiles.Add(new WorkingFolderFileItem() {
+					type = filetype,
+					filename = Path.GetFileNameWithoutExtension(file),
+					index = workingfolderFiles.RowCount - 1
+				});
 			}
 			//enable button
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;

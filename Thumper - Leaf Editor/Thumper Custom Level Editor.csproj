@@ -80,6 +80,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LevelDataClasses\CellFunction.cs" />
+    <Compile Include="LevelDataClasses\WorkingFolderFileItem.cs" />
     <Compile Include="Other Forms\AboutThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>

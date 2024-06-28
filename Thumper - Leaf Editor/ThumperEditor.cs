@@ -719,9 +719,45 @@ namespace Thumper_Custom_Level_Editor
 
         private void FormLeafEditor_KeyDown(object sender, KeyEventArgs e)
         {
-            //
-            if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down && e.Alt && e.Control) {
-                MessageBox.Show("shift");
+            //Next/Previous lvl keybind
+            if (e.KeyCode == defaultkeybinds["nextlvl"] || e.KeyCode == defaultkeybinds["previouslvl"]) {
+                if (workingfolder == null)
+                    return;
+                //depending on key, go next or previous
+                int offset = e.KeyCode == defaultkeybinds["nextlvl"] ? 1 : -1;
+                //search for the current lvl. This is used to get its index
+                IEnumerable<WorkingFolderFileItem> wffilist = workingfiles.Where(x => x.filename.Contains("lvl_"));
+                WorkingFolderFileItem wffi = _loadedlvl != null ? wffilist.First(x => _loadedlvl.Contains(x.filename)) : wffilist.First();
+                //if its the first or last entry, need to loop around
+                if (offset == 1 && wffi == wffilist.Last())
+                    offset = wffilist.First().index;
+                else if (offset == -1 && wffi == wffilist.First())
+                    offset = wffilist.Last().index;
+                else
+                    offset = wffi.index + offset;
+                //load and visually select the new row
+                LoadFileOnClick(offset, 1);
+                workingfolderFiles.Rows[offset].Selected = true;
+            }
+            //Next/Previous leaf keybind
+            if (e.KeyCode == defaultkeybinds["nextleaf"] || e.KeyCode == defaultkeybinds["previousleaf"]) {
+                if (workingfolder == null)
+                    return;
+                //depending on key, go next or previous
+                int offset = e.KeyCode == defaultkeybinds["nextleaf"] ? 1 : -1;
+                //search for the current lvl. This is used to get its index
+                IEnumerable<WorkingFolderFileItem> wffilist = workingfiles.Where(x => x.filename.Contains("leaf_"));
+                WorkingFolderFileItem wffi = _loadedlvl != null ? wffilist.First(x => _loadedleaf.Contains(x.filename)) : wffilist.First();
+                //if its the first or last entry, need to loop around
+                if (offset == 1 && wffi == wffilist.Last())
+                    offset = wffilist.First().index;
+                else if (offset == -1 && wffi == wffilist.First())
+                    offset = wffilist.Last().index;
+                else
+                    offset = wffi.index + offset;
+                //load and visually select the new row
+                LoadFileOnClick(offset, 1);
+                workingfolderFiles.Rows[offset].Selected = true;
             }
             //Undo keybind
             if (e.KeyCode == Keys.Z && e.Control) {
