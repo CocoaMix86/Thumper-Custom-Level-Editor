@@ -8,10 +8,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Shell;
-using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
