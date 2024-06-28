@@ -97,6 +97,8 @@ namespace Thumper_Custom_Level_Editor
 		private void trackZoom_Scroll(object sender, EventArgs e)
 		{
 			int display = trackEditor.FirstDisplayedScrollingColumnIndex;
+			if (display == -1)
+				return;
 			for (int i = 0; i < _beats; i++) {
 				trackEditor.Columns[i].Width = trackZoom.Value;
 			}
@@ -627,7 +629,7 @@ namespace Thumper_Custom_Level_Editor
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
 			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveLeaf(true, "Saved", "", true);
-			lblTrackFileName.Text = $"Leaf Editor - {_save["obj_name"]}";
+			lblTrackFileName.Text = $"Leaf Editor ⮞ {_save["obj_name"]}";
 			//update beat counts in loaded lvl if need be
 			if (_loadedlvl != null)
 				btnLvlRefreshBeats.PerformClick();
@@ -1444,7 +1446,7 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show("Leaf missing obj_name parameter. Please set it in the txt file and then reload.", "Leaf not loaded");
 				return;
 			}
-			lblTrackFileName.Text = $@"Leaf Editor - {_load["obj_name"]}";
+			lblTrackFileName.Text = $@"Leaf Editor ⮞ {_load["obj_name"]}";
 			leafobj = _load["obj_name"];
 			//set flag that load is in progress. This skips SaveLeaf() method
 			loadingleaf = true;

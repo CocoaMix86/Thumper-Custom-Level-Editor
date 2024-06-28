@@ -48,9 +48,8 @@ namespace Thumper_Custom_Level_Editor
                     dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 
                     //set Working Folder panel data
-                    lblWorkingFolder.Text = $"Working Folder ⮞\n{new DirectoryInfo(value).Name}";
-                    lblWorkingFolder.ToolTipText = $"Working Folder - {value}";
-                    toolstripTitleWork.Height = 40;
+                    lblWorkingFolder.Text = $"Working Folder ⮞ {new DirectoryInfo(value).Name}";
+                    lblWorkingFolder.ToolTipText = $"Working Folder ⮞ {value}";
                     //enable buttons
                     btnWorkRefresh.Enabled = true;
                     btnWorkCopy.Enabled = true;
@@ -763,6 +762,31 @@ namespace Thumper_Custom_Level_Editor
             openLevelFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelopen"];
             recentLevelsToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelrecent"];
             openLevelInExplorerToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelexplorer"];
+        }
+
+        private void EditorPanel_Sizechanged(object sender, EventArgs e)
+        {
+            SetEditorTitleBarLabelSize((Panel)sender, (ToolStripLabel)((Panel)sender).Controls.OfType<ToolStrip>().Where(x => x.Name.Contains("toolstripTitle")).First().Items[0]);
+        }
+
+        private void EditorTitleBar_TextChanged(object sender, EventArgs e)
+        {
+            SetEditorTitleBarLabelSize((Panel)((ToolStripLabel)sender).Owner.Parent, (ToolStripLabel)sender);
+        }
+        private void SetEditorTitleBarLabelSize(Panel p, ToolStripLabel tsl)
+        {
+            ToolStrip ts = tsl.Owner;
+            var bb = ts.OverflowButton;
+            tsl.TextChanged -= EditorTitleBar_TextChanged;
+            if (/*(float)tsl.Width / (float)p.Width > 0.65F*/bb.Visible == true) {
+                ts.Height = 40;
+                tsl.Text = tsl.Text.Replace("⮞ ", "⮞\n");
+            }
+            else if (/*(float)tsl.Width / (float)p.Width < 0.40F*/bb.Visible == false) {
+                ts.Height = 22;
+                tsl.Text = tsl.Text.Replace("⮞\n", "⮞ ");
+            }
+            tsl.TextChanged += EditorTitleBar_TextChanged;
         }
     }
 }

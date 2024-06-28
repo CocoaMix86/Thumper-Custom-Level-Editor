@@ -304,7 +304,7 @@ namespace Thumper_Custom_Level_Editor
             JObject _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
 			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveLvl(true, true);
-			lblLvlName.Text = $"Lvl Editor - {_save["obj_name"]}";
+			lblLvlName.Text = $"Lvl Editor ⮞ {_save["obj_name"]}";
 			//reload samples on save
 			LvlReloadSamples();
 		}
@@ -604,7 +604,7 @@ namespace Thumper_Custom_Level_Editor
 			workingfolder = Path.GetDirectoryName(_loadedlvltemp);
 			_loadedlvl = _loadedlvltemp;
 			//set some visual elements
-			lblLvlName.Text = $@"Lvl Editor - {_load["obj_name"]}";
+			lblLvlName.Text = $@"Lvl Editor ⮞ {_load["obj_name"]}";
 			//set flag that load is in progress. This skips SaveLvl() method
 			loadinglvl = true;
 

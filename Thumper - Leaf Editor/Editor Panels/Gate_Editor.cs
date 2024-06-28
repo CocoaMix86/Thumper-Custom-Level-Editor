@@ -204,7 +204,7 @@ namespace Thumper_Custom_Level_Editor
             JObject _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
 			File.WriteAllText(_loadedgate, JsonConvert.SerializeObject(_save, Formatting.Indented));
 			SaveGate(true, true);
-			lblGateName.Text = $"Gate Editor - {_save["obj_name"]}";
+			lblGateName.Text = $"Gate Editor ⮞ {_save["obj_name"]}";
 		}
 
 		/// All dropdowns of Gate Editor call this
@@ -393,7 +393,7 @@ namespace Thumper_Custom_Level_Editor
 			workingfolder = Path.GetDirectoryName(_loadedgatetemp);
 			_loadedgate = _loadedgatetemp;
 			//set some visual elements
-			lblGateName.Text = $"Gate Editor - {_load["obj_name"]}";
+			lblGateName.Text = $"Gate Editor ⮞ {_load["obj_name"]}";
 
 			///Clear form elements so new data can load
 			_gatelvls.Clear();
