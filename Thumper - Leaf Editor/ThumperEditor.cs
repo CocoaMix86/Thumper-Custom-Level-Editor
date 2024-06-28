@@ -243,7 +243,6 @@ namespace Thumper_Custom_Level_Editor
                 Properties.Settings.Default.Save();
             }
             //set panels to their last saved dock
-            SetOverflowButtons();
             SetDockLocations();
             SetKeyBinds();
             //load size and location data for panels
