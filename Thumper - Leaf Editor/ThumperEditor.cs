@@ -48,8 +48,10 @@ namespace Thumper_Custom_Level_Editor
                     dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 
                     //set Working Folder panel data
-                    lblWorkingFolder.Text = $"Working Folder ⮞{new DirectoryInfo(value).Name}";
+                    lblWorkingFolder.Text = $"Working Folder ⮞\n{new DirectoryInfo(value).Name}";
                     lblWorkingFolder.ToolTipText = $"Working Folder - {value}";
+                    toolstripTitleWork.Height = 40;
+                    //enable buttons
                     btnWorkRefresh.Enabled = true;
                     btnWorkCopy.Enabled = true;
                     editLevelDetailsToolStripMenuItem.Enabled = true;
