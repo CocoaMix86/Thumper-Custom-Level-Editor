@@ -219,7 +219,7 @@ namespace Thumper_Custom_Level_Editor
             panel.Dock = DockStyle.None;
             this.Controls.Add(panel);
             panel.Size = new Size(dock.Width, dock.Height);
-            panel.Location = new Point(this.PointToClient(Cursor.Position).X - 10, this.PointToClient(Cursor.Position).Y - 10);
+            panel.Location = new Point(this.PointToClient(Cursor.Position).X - panel.Width + 150, this.PointToClient(Cursor.Position).Y - 10);
             //locate the dock button in the panel
             ToolStripButton dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
             //then change its click event and tooltip
