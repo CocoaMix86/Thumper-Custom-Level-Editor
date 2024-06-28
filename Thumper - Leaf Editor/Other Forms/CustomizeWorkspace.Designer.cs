@@ -95,6 +95,10 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafOpen = new System.Windows.Forms.Label();
             this.keybindLeafNew = new System.Windows.Forms.Label();
             this.txtKeybindSearch = new System.Windows.Forms.TextBox();
+            this.keybindPreviousLeaf = new System.Windows.Forms.Label();
+            this.keybindNextLeaf = new System.Windows.Forms.Label();
+            this.keybindPreviousLvl = new System.Windows.Forms.Label();
+            this.keybindNextLvl = new System.Windows.Forms.Label();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -644,6 +648,10 @@ namespace Thumper_Custom_Level_Editor
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.keybindPreviousLeaf);
+            this.panel1.Controls.Add(this.keybindNextLeaf);
+            this.panel1.Controls.Add(this.keybindPreviousLvl);
+            this.panel1.Controls.Add(this.keybindNextLvl);
             this.panel1.Controls.Add(this.keybindLevelExplorer);
             this.panel1.Controls.Add(this.keybindLevelRecent);
             this.panel1.Controls.Add(this.keybindLevelOpen);
@@ -691,6 +699,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLevelExplorer.TabIndex = 156;
             this.keybindLevelExplorer.Tag = "levelexplorer";
             this.keybindLevelExplorer.Text = "Level Explorer";
+            this.keybindLevelExplorer.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindLevelRecent
             // 
@@ -707,6 +716,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLevelRecent.TabIndex = 155;
             this.keybindLevelRecent.Tag = "levelrecent";
             this.keybindLevelRecent.Text = "Level Recent";
+            this.keybindLevelRecent.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindLevelOpen
             // 
@@ -723,6 +733,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLevelOpen.TabIndex = 154;
             this.keybindLevelOpen.Tag = "levelopen";
             this.keybindLevelOpen.Text = "Level Open";
+            this.keybindLevelOpen.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindLevelNew
             // 
@@ -739,6 +750,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLevelNew.TabIndex = 153;
             this.keybindLevelNew.Tag = "levelnew";
             this.keybindLevelNew.Text = "Level New";
+            this.keybindLevelNew.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindSaveAll
             // 
@@ -755,6 +767,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindSaveAll.TabIndex = 152;
             this.keybindSaveAll.Tag = "saveall";
             this.keybindSaveAll.Text = "Save All";
+            this.keybindSaveAll.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindSampleSaveAs
             // 
@@ -771,6 +784,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindSampleSaveAs.TabIndex = 151;
             this.keybindSampleSaveAs.Tag = "samplesaveas";
             this.keybindSampleSaveAs.Text = "Sample Save As";
+            this.keybindSampleSaveAs.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindSampleSave
             // 
@@ -787,6 +801,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindSampleSave.TabIndex = 150;
             this.keybindSampleSave.Tag = "samplesave";
             this.keybindSampleSave.Text = "Sample Save";
+            this.keybindSampleSave.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindSampleOpen
             // 
@@ -803,6 +818,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindSampleOpen.TabIndex = 149;
             this.keybindSampleOpen.Tag = "sampleopen";
             this.keybindSampleOpen.Text = "Sample Open";
+            this.keybindSampleOpen.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindSampleNew
             // 
@@ -819,6 +835,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindSampleNew.TabIndex = 148;
             this.keybindSampleNew.Tag = "samplenew";
             this.keybindSampleNew.Text = "Sample New";
+            this.keybindSampleNew.Click += new System.EventHandler(this.keybindLabel_Click);
             // 
             // keybindMasterSaveAs
             // 
@@ -1104,6 +1121,74 @@ namespace Thumper_Custom_Level_Editor
             this.txtKeybindSearch.TextChanged += new System.EventHandler(this.txtKeybindSearch_TextChanged);
             this.txtKeybindSearch.Enter += new System.EventHandler(this.txtKeybindSearch_Enter);
             // 
+            // keybindPreviousLeaf
+            // 
+            this.keybindPreviousLeaf.AutoSize = true;
+            this.keybindPreviousLeaf.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindPreviousLeaf.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindPreviousLeaf.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindPreviousLeaf.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindPreviousLeaf.Location = new System.Drawing.Point(5, 476);
+            this.keybindPreviousLeaf.Name = "keybindPreviousLeaf";
+            this.keybindPreviousLeaf.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindPreviousLeaf.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindPreviousLeaf.Size = new System.Drawing.Size(98, 17);
+            this.keybindPreviousLeaf.TabIndex = 160;
+            this.keybindPreviousLeaf.Tag = "previousleaf";
+            this.keybindPreviousLeaf.Text = "Previous Leaf";
+            this.keybindPreviousLeaf.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindNextLeaf
+            // 
+            this.keybindNextLeaf.AutoSize = true;
+            this.keybindNextLeaf.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindNextLeaf.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindNextLeaf.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindNextLeaf.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindNextLeaf.Location = new System.Drawing.Point(5, 459);
+            this.keybindNextLeaf.Name = "keybindNextLeaf";
+            this.keybindNextLeaf.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindNextLeaf.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindNextLeaf.Size = new System.Drawing.Size(70, 17);
+            this.keybindNextLeaf.TabIndex = 159;
+            this.keybindNextLeaf.Tag = "nextleaf";
+            this.keybindNextLeaf.Text = "Next Leaf";
+            this.keybindNextLeaf.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindPreviousLvl
+            // 
+            this.keybindPreviousLvl.AutoSize = true;
+            this.keybindPreviousLvl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindPreviousLvl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindPreviousLvl.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindPreviousLvl.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindPreviousLvl.Location = new System.Drawing.Point(5, 442);
+            this.keybindPreviousLvl.Name = "keybindPreviousLvl";
+            this.keybindPreviousLvl.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindPreviousLvl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindPreviousLvl.Size = new System.Drawing.Size(91, 17);
+            this.keybindPreviousLvl.TabIndex = 158;
+            this.keybindPreviousLvl.Tag = "previouslvl";
+            this.keybindPreviousLvl.Text = "Previous Lvl";
+            this.keybindPreviousLvl.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
+            // keybindNextLvl
+            // 
+            this.keybindNextLvl.AutoSize = true;
+            this.keybindNextLvl.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindNextLvl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindNextLvl.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindNextLvl.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindNextLvl.Location = new System.Drawing.Point(5, 425);
+            this.keybindNextLvl.Name = "keybindNextLvl";
+            this.keybindNextLvl.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindNextLvl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindNextLvl.Size = new System.Drawing.Size(63, 17);
+            this.keybindNextLvl.TabIndex = 157;
+            this.keybindNextLvl.Tag = "nextlvl";
+            this.keybindNextLvl.Text = "Next Lvl";
+            this.keybindNextLvl.Click += new System.EventHandler(this.keybindLabel_Click);
+            // 
             // CustomizeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1209,5 +1294,9 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label keybindLevelRecent;
         private System.Windows.Forms.Label keybindLevelOpen;
         private System.Windows.Forms.Label keybindLevelNew;
+        private System.Windows.Forms.Label keybindPreviousLeaf;
+        private System.Windows.Forms.Label keybindNextLeaf;
+        private System.Windows.Forms.Label keybindPreviousLvl;
+        private System.Windows.Forms.Label keybindNextLvl;
     }
 }
