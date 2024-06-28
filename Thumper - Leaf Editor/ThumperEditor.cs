@@ -768,7 +768,9 @@ namespace Thumper_Custom_Level_Editor
         private void SetKeyBinds()
         {
             if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
-                defaultkeybinds = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+                Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+                import = import.Concat(defaultkeybinds.Where(x => !import.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
+                defaultkeybinds = import;
             }
 
             leafnewToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafnew"];
