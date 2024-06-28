@@ -223,7 +223,7 @@ namespace Thumper_Custom_Level_Editor
 			//split file type from file name
 			//check if it is copy-able
 			string[] file = workingfolderFiles.SelectedCells[1].Value.ToString().Split(new[] { '_' }, 2);
-			if (file[0] is "LEVEL DETAILS" or "master") {
+			if (file[0] is "master") {
 				MessageBox.Show("You may not duplicate that file", "You cannot do that");
 				return;
 			}
@@ -248,13 +248,13 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 
-
 			File.Copy($@"{workingfolder}\{file[0]}_{file[1]}.txt", $@"{workingfolder}\{file[0]}_{newfilename}.txt");
 			PlaySound("UIkcopy");
+			//after copy, replace instances of old file name with new file name.
+			string filecontents = File.ReadAllText($@"{workingfolder}\{file[0]}_{newfilename}.txt").Replace($"{file[1]}.{file[0]}", $"{newfilename}.{file[0]}");
+			File.WriteAllText($@"{workingfolder}\{file[0]}_{newfilename}.txt", filecontents);
 			//add new file to workingfolder DGV
 			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject(file[0]), $@"{file[0]}_{newfilename}"});
-			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
-			SaveFileType(file[0], $@"{workingfolder}\{file[0]}_{newfilename}.txt");
 		}
 
 		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;
