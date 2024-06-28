@@ -509,6 +509,7 @@ namespace Thumper_Custom_Level_Editor
 			dropMasterCheck.SelectedIndex = dropMasterCheck.Items.IndexOf((string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]);
 			///load Config data (if file exists)
 			LoadConfig();
+			btnMasterRuntime_Click(null, null);
 			///set save flag (master just loaded, has no changes)
 			SaveMaster(true);
 			masterjson = _load;
