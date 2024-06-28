@@ -99,12 +99,6 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
             //these 4 files below are required defaults of new levels.
             //create them if they don't exist
-            if (!File.Exists($@"{levelpath}\leaf_pyramid_outro.txt")) {
-                File.WriteAllText($@"{levelpath}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
-            }
-            if (!File.Exists($@"{levelpath}\samp_default.txt")) {
-                File.WriteAllText($@"{levelpath}\samp_default.txt", Properties.Resources.samp_default);
-            }
             if (!File.Exists($@"{levelpath}\spn_default.txt")) {
                 File.WriteAllText($@"{levelpath}\spn_default.txt", Properties.Resources.spn_default);
             }

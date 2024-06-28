@@ -463,8 +463,6 @@ namespace Thumper_Custom_Level_Editor
         private void regenerateDefaultFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("This will overwrite the \"default\" files in the working folder. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                File.WriteAllText($@"{workingfolder}\leaf_pyramid_outro.txt", Properties.Resources.leaf_pyramid_outro);
-                File.WriteAllText($@"{workingfolder}\samp_default.txt", Properties.Resources.samp_default);
                 File.WriteAllText($@"{workingfolder}\spn_default.txt", Properties.Resources.spn_default);
                 File.WriteAllText($@"{workingfolder}\xfm_default.txt", Properties.Resources.xfm_default);
             }
