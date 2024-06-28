@@ -268,19 +268,6 @@ namespace Thumper_Custom_Level_Editor
 			catch { }
 		}
 
-		private void trackEditor_CellEnter(object sender, DataGridViewCellEventArgs e)
-		{
-			CellFunction cellfunc = _functions.FirstOrDefault(x => x.rowindex == e.RowIndex && x.columnindex == e.ColumnIndex);
-			if (cellfunc != null) {
-				txtFunction.Text = cellfunc.function;
-				_loadedfunction = cellfunc;
-			}
-			else {
-				txtFunction.Text = "";
-				_loadedfunction = null;
-			}
-		}
-
 		//cell input sanitization
 		private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
 		{
@@ -1262,29 +1249,6 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		private void btnFunctionApply_Click(object sender, EventArgs e)
-		{
-			if (trackEditor.SelectedCells.Count != 1) {
-				MessageBox.Show("Functions can be applied to only 1 cell at a time");
-				return;
-			}
-
-			if (_loadedfunction != null) {
-				_loadedfunction.function = txtFunction.Text;
-            }
-			else {
-                CellFunction newfunc = new() {
-					function = txtFunction.Text,
-					rowindex = trackEditor.CurrentCell.RowIndex,
-					columnindex = trackEditor.CurrentCell.ColumnIndex
-                };
-				_functions.Add(newfunc);
-				_loadedfunction = newfunc;
-			}
-
-			trackEditor.CurrentCell.Value = _loadedfunction.Evaluate();
-		}
-
 		/// These buttons exist on the Workingfolder panel
 		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
 		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => leafTemplateToolStripMenuItem.PerformClick();
@@ -1545,15 +1509,6 @@ namespace Thumper_Custom_Level_Editor
 				//finally, add the completed seq_obj to tracks
 				_tracks.Add(_s);
 			}
-
-			/*foreach (var func in _load["functions"]) {
-				_functions.Add(new CellFunction() {
-					function = func["function"],
-					rowindex = func["rowindex"],
-					columnindex = func["columnindex"]
-				});
-			}*/
-			txtFunction.Enabled = true;
 			//clear the DGV and prep for new data points
 			trackEditor.Rows.Clear();
 			trackEditor.RowCount = _tracks.Count;
