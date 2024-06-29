@@ -57,9 +57,11 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnCustomizeApply_Click(object sender, EventArgs e)
         {
+            //colors
             string[] export = objectcolors.Select(x => $@"{x.Item1};{x.Item2}").ToArray();
             File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", export);
-
+            Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
+            //set and save properties
             Properties.Settings.Default.custom_bgcolor = btnBGColor.BackColor;
             Properties.Settings.Default.custom_menucolor = btnMenuColor.BackColor;
             Properties.Settings.Default.custom_mastercolor = btnMasterColor.BackColor;

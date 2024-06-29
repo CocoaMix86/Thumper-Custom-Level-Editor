@@ -112,6 +112,7 @@ namespace Thumper_Custom_Level_Editor
             // colorDialog1
             // 
             this.colorDialog1.AnyColor = true;
+            this.colorDialog1.FullOpen = true;
             this.colorDialog1.SolidColorOnly = true;
             // 
             // toolstripCustomize
