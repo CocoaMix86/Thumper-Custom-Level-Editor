@@ -1617,7 +1617,7 @@ namespace Thumper_Custom_Level_Editor
 					continue;
 				JObject s = new();
 				//if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
-				if (seq_obj.obj_name.Contains(".leaf"))
+				if (seq_obj.obj_name.Contains(".leaf") || seq_obj.obj_name == "")
 					seq_obj.obj_name = (string)_save["obj_name"];
 				s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
 				//write param_path or param_path_hash

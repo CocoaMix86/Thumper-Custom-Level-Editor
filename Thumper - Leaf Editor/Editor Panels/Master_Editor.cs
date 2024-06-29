@@ -663,6 +663,8 @@ namespace Thumper_Custom_Level_Editor
 			int _beatcount = 0;
 
 			//load the lvl and then loop through its leafs to get beat counts
+			if (!File.Exists(path))
+				return 0;
 			dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(path), "#.*", ""));
 			foreach (dynamic leaf in _load["leaf_seq"]) {
 				_beatcount += (int)leaf["beat_cnt"];
