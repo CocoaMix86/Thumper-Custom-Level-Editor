@@ -210,6 +210,8 @@
     <None Include="image assets\icon-saveas.png" />
     <None Include="image assets\discord32x.png" />
     <None Include="image assets\TCLE icon.png" />
+    <None Include="image assets\github32x.png" />
+    <None Include="image assets\github48.png" />
     <Content Include="thumper_level_editor2.ico" />
     <None Include="image assets\railcolorhelp.png" />
     <None Include="text assets\leaf_singletrack.txt" />

@@ -330,6 +330,14 @@ namespace Thumper_Custom_Level_Editor
 
             return referencefiles.Length > 1 ? referencefiles : "<none>";
         }
+
+        public void ShowChangelog()
+        {
+            panelChangelog.Visible = true;
+            panelChangelog.BringToFront();
+            lblChangelog.Text = Properties.Resources.changelog;
+        }
+        private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
     }
 
     public static class ExtensionMethodClass

@@ -112,6 +112,7 @@ namespace Thumper_Custom_Level_Editor
             leafToolStrip.Renderer = new ToolStripOverride();
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             toolstripRecentFiles.Renderer = new ToolStripOverride();
+            toolStripChangelog.Renderer = new ToolStripOverride();
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
@@ -232,13 +233,16 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(panelWorkingFolder);
             ControlMoverOrResizer.Init(toolstripTitleWork);
             ControlMoverOrResizer.Init(toolstripRecentFiles);
+            ControlMoverOrResizer.Init(panelChangelog);
+            ControlMoverOrResizer.Init(toolStripChangelog);
             //write required audio files for playback
             InitializeSounds();
             //call method that imports objects from track_objects.txt (for Leaf editing)
             ///version check
             if (Properties.Settings.Default.version != "2.2beta8") {
-                MessageBox.Show($"Thumper Custom Level Editor v2.2 Changelog\n{Properties.Resources.changelog}", "NEW VERSION NOTICE!");
-                regenerateTemplateFilesToolStripMenuItem_Click(null, null);
+                ShowChangelog();
+                //MessageBox.Show($"Thumper Custom Level Editor v2.2 Changelog\n{Properties.Resources.changelog}", "NEW VERSION NOTICE!");
+                //regenerateTemplateFilesToolStripMenuItem_Click(null, null);
                 Properties.Settings.Default.version = "2.2beta8";
                 Properties.Settings.Default.Save();
             }
@@ -392,6 +396,9 @@ namespace Thumper_Custom_Level_Editor
         //Change Game Directory
         private void changeGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e) => Read_Config();
         private void discordServerToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://discord.com/invite/gTQbquY");
+        private void githubToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://github.com/CocoaMix86/Thumper-Custom-Level-Editor");
+        private void changelogToolStripMenuItem_Click(object sender, EventArgs e) => ShowChangelog();
+        
         //How to create an FSB
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
