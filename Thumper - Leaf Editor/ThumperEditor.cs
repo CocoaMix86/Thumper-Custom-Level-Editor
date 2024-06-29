@@ -479,7 +479,6 @@ namespace Thumper_Custom_Level_Editor
                 ColorFormElements();
                 ImportDefaultColors();
                 SetKeyBinds();
-                colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors.ToArray();
                 Properties.Settings.Default.Save();
             }
             custom.Dispose();
