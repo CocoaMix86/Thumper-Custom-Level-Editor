@@ -1476,7 +1476,7 @@ namespace Thumper_Custom_Level_Editor
 			dropTrackLane.DataSource = _tracklanefriendly;
 			//each object in the seq_objs[] list becomes a track
 			foreach (dynamic seq_obj in _load["seq_objs"]) {
-                Sequencer_Object _s = new() {
+				Sequencer_Object _s = new() {
                     obj_name = seq_obj["obj_name"],
                     trait_type = seq_obj["trait_type"],
                     data_points = seq_obj["data_points"],
@@ -1486,10 +1486,10 @@ namespace Thumper_Custom_Level_Editor
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"],
                     highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1,
-                    default_interp = ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") ?? "Linear"
+                    default_interp = ((string)seq_obj["default_interp"]) != null ? ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") : "Linear"
                 };
-                //if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
-                if (_s.param_path == "play") {
+				//if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
+				if (_s.param_path == "play") {
 					_s.friendly_type = "PLAY SAMPLE";
 					_s.friendly_param = _s.param_path;
 				}
