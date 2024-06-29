@@ -450,3 +450,6 @@ boss_shield_tutorial;-6381922
 boss_shield;-6381922
 boss_shield_2;-6381922
 boss_shield_3;-6381922
+red gamma2;-65536
+green gamma3;-16711936
+blue gamma3;-16776961
