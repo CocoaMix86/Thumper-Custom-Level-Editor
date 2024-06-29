@@ -292,7 +292,7 @@ namespace Thumper_Custom_Level_Editor
             ToolStripMenuItem tmsi = (ToolStripMenuItem)sender;
             int index = (tmsi.Owner).Items.IndexOf(tmsi);
 
-            if ((tmsi.Owner).Items.Count <= 1)
+            if ((tmsi.Owner).Items.Count == 1 && (tmsi.Owner).Items[0].Text.Contains("No changes"))
                 return;
 
             UndoFunction(index + 1);

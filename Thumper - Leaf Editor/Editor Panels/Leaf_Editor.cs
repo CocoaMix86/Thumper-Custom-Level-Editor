@@ -344,8 +344,8 @@ namespace Thumper_Custom_Level_Editor
 				else {
 					dgv[e.ColumnIndex, e.RowIndex].Value = 0;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					_undolistleaf.RemoveAt(1);
 				}
-				_undolistleaf.RemoveAt(1);
 				TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
 			}
 		}
