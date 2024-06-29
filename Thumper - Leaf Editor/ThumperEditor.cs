@@ -236,10 +236,10 @@ namespace Thumper_Custom_Level_Editor
             InitializeSounds();
             //call method that imports objects from track_objects.txt (for Leaf editing)
             ///version check
-            if (Properties.Settings.Default.version != "2.2") {
+            if (Properties.Settings.Default.version != "2.2beta8") {
                 MessageBox.Show($"Thumper Custom Level Editor v2.2 Changelog\n{Properties.Resources.changelog}", "NEW VERSION NOTICE!");
                 regenerateTemplateFilesToolStripMenuItem_Click(null, null);
-                Properties.Settings.Default.version = "2.2";
+                Properties.Settings.Default.version = "2.2beta8";
                 Properties.Settings.Default.Save();
             }
             //set panels to their last saved dock
