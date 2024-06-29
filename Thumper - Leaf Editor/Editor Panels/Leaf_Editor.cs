@@ -332,11 +332,21 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.ColumnIndex == -1 || e.RowIndex == -1)
 				return;
+			DataGridView dgv = sender as DataGridView;
 			if (e.Button == MouseButtons.Right) {
-				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 0;
-				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
+				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
+					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+					dgv[e.ColumnIndex, e.RowIndex].Value = 0;
+					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					SaveLeaf(false, "Deleted single cell", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+				}
+				else {
+					dgv[e.ColumnIndex, e.RowIndex].Value = 0;
+					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+				}
 				_undolistleaf.RemoveAt(1);
-				TrackUpdateHighlightingSingleCell((sender as DataGridView)[e.ColumnIndex, e.RowIndex]);
+				TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
 			}
 		}
 		//Keypress Backspace - clear selected cells
