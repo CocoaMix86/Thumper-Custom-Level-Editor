@@ -58,31 +58,26 @@ namespace Thumper_Custom_Level_Editor
 			txtSampPath.TextChanged += txtSampPath_TextChanged;
 		}
 
-		private void sampleList_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+		private void sampleList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			//When a cell is finished editing, resave the row to _samplelist
-			int _index = e.RowIndex;
-			switch (e.ColumnIndex) {
-				case 0:
-					_samplelist[_index].obj_name = (string)sampleList.Rows[_index].Cells[0].Value;
-					break;
-				case 1:
-					_samplelist[_index].volume = (decimal)sampleList.Rows[_index].Cells[1].Value;
-					break;
-				case 2:
-					_samplelist[_index].pitch = (decimal)sampleList.Rows[_index].Cells[2].Value;
-					break;
-				case 3:
-					_samplelist[_index].pan = (decimal)sampleList.Rows[_index].Cells[3].Value;
-					break;
-				case 4:
-					_samplelist[_index].offset = (decimal)sampleList.Rows[_index].Cells[4].Value;
-					break;
-				case 5:
-					_samplelist[_index].channel_group = sampleList.Rows[_index].Cells[5].Value.ToString();
-					break;
+			sampleList.CellValueChanged -= sampleList_CellValueChanged;
+			try {
+				object _val = sampleList[e.ColumnIndex, e.RowIndex].Value;
+				//iterate over each cell in the selection
+				foreach (DataGridViewCell _cell in sampleList.SelectedCells) {
+					//skip name column
+					if (_val is string && (_cell.ColumnIndex is 1 or 2 or 3 or 4))
+						continue;
+					if (_cell.ColumnIndex == 0)
+						continue;
+					//if cell does not have the value, set it
+					if (_cell.Value != _val)
+						_cell.Value = _val;
+				}
+				SaveSample(false);
 			}
-			SaveSample(false);
+			catch { }
+			sampleList.CellValueChanged += sampleList_CellValueChanged;
 		}
 
 		private void sampleList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -438,6 +433,15 @@ namespace Thumper_Custom_Level_Editor
         {
 			JObject _save = new();
 			JArray _items = new();
+			foreach (DataGridViewRow dgvr in sampleList.Rows) {
+				int _index = dgvr.Index;
+				_samplelist[_index].obj_name = (string)dgvr.Cells[0].Value;
+				_samplelist[_index].volume = (decimal)dgvr.Cells[1].Value;
+				_samplelist[_index].pitch = (decimal)dgvr.Cells[2].Value;
+				_samplelist[_index].pan = (decimal)dgvr.Cells[3].Value;
+				_samplelist[_index].offset = (decimal)dgvr.Cells[4].Value;
+				_samplelist[_index].channel_group = dgvr.Cells[5].Value.ToString();
+			}
 			foreach (SampleData _sample in _samplelist) {
 				JObject _samp = new() {
 					{ "obj_type", "Sample"},
