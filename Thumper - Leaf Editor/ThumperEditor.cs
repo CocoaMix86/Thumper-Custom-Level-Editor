@@ -653,6 +653,10 @@ namespace Thumper_Custom_Level_Editor
         {
             //((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
+        private void mastereditor_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            ((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
 
         private void combobox_DrawItem(object sender, DrawItemEventArgs e)
         {
