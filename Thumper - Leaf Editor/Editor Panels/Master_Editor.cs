@@ -655,7 +655,7 @@ namespace Thumper_Custom_Level_Editor
 			lblMAsterRuntimeBeats.Text = $"Beats: {_beatcount}";
 
 			///Calculate min/sec based on beats and BPM
-			lblMasterRuntime.Text = $"Time: {TimeSpan.FromMinutes(_beatcount / (double)NUD_ConfigBPM.Value).ToString()[..12]}";
+			lblMasterRuntime.Text = $"Time: {TimeSpan.FromMinutes(_beatcount / (double)NUD_ConfigBPM.Value).ToString("hh':'mm':'ss'.'fff")}";
 
 		}
 		private int LoadLvlGetBeatCounts(string path)
