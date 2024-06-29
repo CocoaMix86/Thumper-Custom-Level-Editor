@@ -11,10 +11,6 @@ namespace Thumper_Custom_Level_Editor
         private string Filetype { get; set; }
         private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
 
-        public FileNameDialog()
-        {
-            InitializeComponent();
-        }
         public FileNameDialog(string workingfolder, string filetype)
         {
             InitializeComponent();

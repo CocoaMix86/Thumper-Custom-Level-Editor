@@ -1105,7 +1105,7 @@ namespace Thumper_Custom_Level_Editor
 				return;
 
             //create file renaming dialog and show it
-            FileNameDialog filenamedialog = new() {
+            FileNameDialog filenamedialog = new(workingfolder, "leaf") {
                 StartPosition = FormStartPosition.Manual,
                 Location = MousePosition
             };
