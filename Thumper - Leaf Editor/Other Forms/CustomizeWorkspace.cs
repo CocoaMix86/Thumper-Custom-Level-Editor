@@ -13,6 +13,7 @@ namespace Thumper_Custom_Level_Editor
         public List<Object_Params> _objects = new();
         private List<Tuple<string, string>> objectcolors = new();
         private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+        private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
 
         public CustomizeWorkspace(List<Object_Params> thelist)
         {
@@ -166,12 +167,15 @@ namespace Thumper_Custom_Level_Editor
             //check if keydown is the same as last pressed. Don't process if it is
             if (e.KeyData != lastpress) {
                 //store last press for when user accepts changes
+                bool cantusethiskey = false;
                 lastpress = e.KeyData;
+                if (keybinds.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers)))
+                    cantusethiskey = true;
                 //check if the new keypress exists as a keybind
                 //if it is, disable controls so it can't be set
-                labelKeys.ForeColor = keybinds.ContainsValue(lastpress) ? Color.Red : Color.White;
-                btnSetKeybind.Enabled = !keybinds.ContainsValue(lastpress);
-                btnSetKeybind.BackColor = keybinds.ContainsValue(lastpress) ? Color.Gray : Color.Green;
+                labelKeys.ForeColor = cantusethiskey ? Color.Red : Color.White;
+                btnSetKeybind.Enabled = !cantusethiskey;
+                btnSetKeybind.BackColor = cantusethiskey ? Color.Gray : Color.Green;
                 labelKeys.Text = $"{e.KeyCode} + {e.Modifiers.ToString().Replace(",", " +")}";
             }
         }
