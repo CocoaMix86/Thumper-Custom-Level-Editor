@@ -553,30 +553,30 @@ namespace Thumper_Custom_Level_Editor
         }
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            int i = new Random().Next(0, 8);
-            switch (i) {
-                case 1:
+            int j = new Random().Next(0, 8);
+            switch (j) {
+                case 0:
                     PlaySound("UIbeetleclick");
                     break;
-                case 2:
+                case 1:
                     PlaySound("UIbeetleclick2");
                     break;
-                case 3:
+                case 2:
                     PlaySound("UIbeetleclick3");
                     break;
-                case 4:
+                case 3:
                     PlaySound("UIbeetleclick4");
                     break;
-                case 5:
+                case 4:
                     PlaySound("UIbeetleclick5");
                     break;
-                case 6:
+                case 5:
                     PlaySound("UIbeetleclick6");
                     break;
-                case 7:
+                case 6:
                     PlaySound("UIbeetleclick7");
                     break;
-                case 8:
+                case 7:
                     PlaySound("UIbeetleclick8");
                     break;
             }
