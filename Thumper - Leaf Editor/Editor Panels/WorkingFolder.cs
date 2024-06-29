@@ -393,7 +393,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			cfd_lvl.Title = "Select the level folder";
 			//check if the game_dir has been set before. It'll be empty if starting for the first time
-			cfd_lvl.InitialDirectory = System.Reflection.Assembly.GetExecutingAssembly().Location;
+			cfd_lvl.InitialDirectory = workingfolder == null ? AppLocation : Path.GetDirectoryName(workingfolder);
 			//show FolderBrowser, and then set "game_dir" to whatever is chosen
 			PlaySound("UIfolderopen");
 			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
