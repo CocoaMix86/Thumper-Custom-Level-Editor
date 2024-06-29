@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -8,6 +9,7 @@ namespace Thumper_Custom_Level_Editor
     {
         private string WorkingFolder { get; set; }
         private string Filetype { get; set; }
+        private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
 
         public FileNameDialog()
         {
@@ -35,9 +37,14 @@ namespace Thumper_Custom_Level_Editor
         {
             string newfilepath = $@"{WorkingFolder}\{Filetype}_{txtWorkingRename.Text}.txt";
             bool fileexists = File.Exists(newfilepath);
+            bool illegal = illegalchars.Any(c => txtWorkingRename.Text.Contains(c));
+            btnWorkRenameYes.Enabled = (fileexists || illegal) ? false : true;
+            lblExists.Visible = (fileexists || illegal) ? true : false;
 
-            btnWorkRenameYes.Enabled = !fileexists;
-            lblExists.Visible = fileexists;
+            if (illegal)
+                lblExists.Text = "Illegal character in name!";
+            if (fileexists)
+                lblExists.Text = "That file name exists already!";
         }
     }
 }
