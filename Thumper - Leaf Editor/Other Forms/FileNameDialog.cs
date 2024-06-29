@@ -9,7 +9,7 @@ namespace Thumper_Custom_Level_Editor
     {
         private string WorkingFolder { get; set; }
         private string Filetype { get; set; }
-        private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
+        private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|", "." };
 
         public FileNameDialog(string workingfolder, string filetype)
         {
