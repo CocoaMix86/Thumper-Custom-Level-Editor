@@ -140,7 +140,7 @@ namespace Thumper_Custom_Level_Editor
 
 			for (int x = 0; x < _beats; x++) {
 				_angleStart += _anglechange;
-				_output += (_beatStart + _beatindex) + ":" + _angleStart.ToString("#0.0000") + ",";
+				_output += (_beatStart + _beatindex) + ":" + _angleStart.ToString("#0.000") + ",";
 				_beatindex++;
 			}
 
@@ -148,7 +148,7 @@ namespace Thumper_Custom_Level_Editor
 				_anglechange *= -1;
 				for (int x = 0; x < _beats; x++) {
 					_angleStart += _anglechange;
-					_output += (_beatStart + _beatindex) + ":" + _angleStart.ToString("#0.0000") + ",";
+					_output += (_beatStart + _beatindex) + ":" + _angleStart.ToString("#0.000") + ",";
 					_beatindex++;
 				}
 			}

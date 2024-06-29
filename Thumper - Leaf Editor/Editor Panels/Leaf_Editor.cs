@@ -291,7 +291,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
-                object _val = trackEditor[e.ColumnIndex, e.RowIndex].Value;
+                object _val = ((decimal)trackEditor[e.ColumnIndex, e.RowIndex].Value).ToString("0.###");
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					//if cell does not have the value, set it
@@ -1358,7 +1358,7 @@ namespace Thumper_Custom_Level_Editor
 			//iterate over each data point, and fill cells
 			foreach (JProperty data_point in data_points) {
 				try {
-					r.Cells[int.Parse(data_point.Name)].Value = (decimal)data_point.Value;
+					r.Cells[int.Parse(data_point.Name)].Value = ((decimal)data_point.Value).ToString("0.###");
 				}
 				catch (ArgumentOutOfRangeException) { }
 			}
@@ -1386,7 +1386,7 @@ namespace Thumper_Custom_Level_Editor
 						_out += $"{x}:{trackEditor.Rows[_selecttrack].Cells[x].Value},";
 				}
 				//output final result
-				richRawTrackData.Text = _out.Remove(_out.Length - 1);
+				richRawTrackData.Text = _out[..^1];
 			}
 			catch { richRawTrackData.Text = ""; }
 		}
