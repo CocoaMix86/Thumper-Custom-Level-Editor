@@ -542,7 +542,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(359, 269);
+            this.tabPage3.Size = new System.Drawing.Size(359, 344);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Key Binds";
             // 
@@ -691,7 +691,7 @@ namespace Thumper_Custom_Level_Editor
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel1.Size = new System.Drawing.Size(364, 218);
+            this.panel1.Size = new System.Drawing.Size(364, 293);
             this.panel1.TabIndex = 132;
             // 
             // keybindPreviousLeaf
