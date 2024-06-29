@@ -466,6 +466,7 @@ namespace Thumper_Custom_Level_Editor
 			lvlLoopTracks.RowCount++;
 			lvlLoopTracks.Rows[^1].HeaderCell.Value = "Volume Track " + (lvlLoopTracks.Rows.Count - 1);
 			lvlLoopTracks.Rows[^1].Cells[1].Value = 0;
+			lvlLoopTracks.Rows[^1].Cells[0].Value = "";
 			btnLvlLoopDelete.Enabled = true;
 			PlaySound("UIobjectadd");
 		}
@@ -625,7 +626,7 @@ namespace Thumper_Custom_Level_Editor
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = null;
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			foreach (dynamic samp in _load["loops"]) {
-                SampleData _samplocate = _lvlsamples.First(item => item.obj_name == ((string)samp["samp_name"]).Replace(".samp", ""));
+				SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", "")) ?? _lvlsamples[0];
 				lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
 			}
 			btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
@@ -768,6 +769,15 @@ namespace Thumper_Custom_Level_Editor
 					});
 				}
 			}
+			_lvlsamples.Add(new SampleData {
+				obj_name = "",
+				path = "",
+				volume = 0,
+				pitch = 0,
+				pan = 0,
+				offset = 0,
+				channel_group = ""
+			});
 			_lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
 		}
 
