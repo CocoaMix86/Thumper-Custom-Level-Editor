@@ -3331,7 +3331,7 @@
             this.lvlLeafPaths.Size = new System.Drawing.Size(219, 185);
             this.lvlLeafPaths.TabIndex = 79;
             this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
-            this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
+            this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.mastereditor_CurrentCellDirtyStateChanged);
             // 
             // lvlPathsToolStrip
             // 
@@ -3498,7 +3498,7 @@
             this.lvlLoopTracks.Size = new System.Drawing.Size(478, 185);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
-            this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
+            this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.mastereditor_CurrentCellDirtyStateChanged);
             this.lvlLoopTracks.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.lvlLoopTracks_DataError);
             // 
             // LoopSample
@@ -4997,7 +4997,7 @@
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
             this.gateLvlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellValueChanged);
-            this.gateLvlList.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
+            this.gateLvlList.CurrentCellDirtyStateChanged += new System.EventHandler(this.mastereditor_CurrentCellDirtyStateChanged);
             this.gateLvlList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_RowEnter);
             // 
             // Lvl
