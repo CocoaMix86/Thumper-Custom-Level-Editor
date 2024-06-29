@@ -3000,7 +3000,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Location = new System.Drawing.Point(247, 23);
+            this.splitContainer1.Location = new System.Drawing.Point(247, 26);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -3019,8 +3019,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.lblLvlTunnels);
             this.splitContainer1.Panel2.Controls.Add(this.lvlLoopTracks);
             this.splitContainer1.Panel2.Controls.Add(this.label22);
-            this.splitContainer1.Size = new System.Drawing.Size(758, 358);
-            this.splitContainer1.SplitterDistance = 152;
+            this.splitContainer1.Size = new System.Drawing.Size(758, 353);
+            this.splitContainer1.SplitterDistance = 149;
             this.splitContainer1.TabIndex = 145;
             // 
             // lvlSeqObjs
@@ -3074,7 +3074,7 @@
             this.lvlSeqObjs.RowTemplate.Height = 20;
             this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlSeqObjs.Size = new System.Drawing.Size(727, 133);
+            this.lvlSeqObjs.Size = new System.Drawing.Size(727, 130);
             this.lvlSeqObjs.TabIndex = 68;
             this.lvlSeqObjs.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lvlSeqObjs_CellMouseClick);
             this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
@@ -3291,7 +3291,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 187);
+            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 185);
             this.lvlLeafPaths.TabIndex = 79;
             this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
             this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
@@ -3458,7 +3458,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new System.Drawing.Size(478, 187);
+            this.lvlLoopTracks.Size = new System.Drawing.Size(478, 185);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
             this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
