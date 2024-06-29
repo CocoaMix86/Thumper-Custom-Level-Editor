@@ -166,11 +166,14 @@ namespace Thumper_Custom_Level_Editor
                 return;
             //check if keydown is the same as last pressed. Don't process if it is
             if (e.KeyData != lastpress) {
+                lblInvalid.Visible = false;
                 //store last press for when user accepts changes
                 bool cantusethiskey = false;
                 lastpress = e.KeyData;
-                if (keybinds.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers)))
+                if (keybinds.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers))) {
                     cantusethiskey = true;
+                    lblInvalid.Visible = true;
+                }
                 //check if the new keypress exists as a keybind
                 //if it is, disable controls so it can't be set
                 labelKeys.ForeColor = cantusethiskey ? Color.Red : Color.White;

@@ -99,6 +99,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafOpen = new System.Windows.Forms.Label();
             this.keybindLeafNew = new System.Windows.Forms.Label();
             this.txtKeybindSearch = new System.Windows.Forms.TextBox();
+            this.lblInvalid = new System.Windows.Forms.Label();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -122,7 +123,7 @@ namespace Thumper_Custom_Level_Editor
             this.toolstripCustomize.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolstripCustomize.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnCustomizeApply});
-            this.toolstripCustomize.Location = new System.Drawing.Point(0, 270);
+            this.toolstripCustomize.Location = new System.Drawing.Point(0, 345);
             this.toolstripCustomize.Name = "toolstripCustomize";
             this.toolstripCustomize.Size = new System.Drawing.Size(367, 25);
             this.toolstripCustomize.TabIndex = 106;
@@ -153,7 +154,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(367, 295);
+            this.tabControl1.Size = new System.Drawing.Size(367, 370);
             this.tabControl1.TabIndex = 107;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
@@ -187,7 +188,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(359, 269);
+            this.tabPage1.Size = new System.Drawing.Size(359, 344);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Colors";
             // 
@@ -572,6 +573,7 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.panelSetKeybind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panelSetKeybind.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelSetKeybind.Controls.Add(this.lblInvalid);
             this.panelSetKeybind.Controls.Add(this.btnCloseKeybind);
             this.panelSetKeybind.Controls.Add(this.btnSingleReset);
             this.panelSetKeybind.Controls.Add(this.btnSetKeybind);
@@ -1197,12 +1199,27 @@ namespace Thumper_Custom_Level_Editor
             this.txtKeybindSearch.TextChanged += new System.EventHandler(this.txtKeybindSearch_TextChanged);
             this.txtKeybindSearch.Enter += new System.EventHandler(this.txtKeybindSearch_Enter);
             // 
+            // lblInvalid
+            // 
+            this.lblInvalid.AutoSize = true;
+            this.lblInvalid.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblInvalid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInvalid.ForeColor = System.Drawing.Color.Red;
+            this.lblInvalid.Location = new System.Drawing.Point(6, 36);
+            this.lblInvalid.Name = "lblInvalid";
+            this.lblInvalid.Size = new System.Drawing.Size(173, 26);
+            this.lblInvalid.TabIndex = 151;
+            this.lblInvalid.Tag = "1";
+            this.lblInvalid.Text = "that keybind is in use already\r\nor is invalid\r\n";
+            this.lblInvalid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblInvalid.Visible = false;
+            // 
             // CustomizeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.ClientSize = new System.Drawing.Size(367, 295);
+            this.ClientSize = new System.Drawing.Size(367, 370);
             this.Controls.Add(this.toolstripCustomize);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1306,5 +1323,6 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label keybindNextLeaf;
         private System.Windows.Forms.Label keybindPreviousLvl;
         private System.Windows.Forms.Label keybindNextLvl;
+        private System.Windows.Forms.Label lblInvalid;
     }
 }
