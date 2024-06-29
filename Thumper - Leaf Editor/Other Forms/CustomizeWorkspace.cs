@@ -31,6 +31,7 @@ namespace Thumper_Custom_Level_Editor
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //
             toolstripCustomize.Renderer = new ToolStripOverride();
+            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //
             string[] import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt") : null;
             foreach (string line in import) {

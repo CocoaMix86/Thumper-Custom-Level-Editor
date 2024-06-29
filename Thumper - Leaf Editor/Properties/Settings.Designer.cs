@@ -611,13 +611,24 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string colordialogcustomcolors {
+        public global::System.Collections.Generic.List<int> colordialogcustomcolors {
             get {
-                return ((string)(this["colordialogcustomcolors"]));
+                return ((global::System.Collections.Generic.List<int>)(this["colordialogcustomcolors"]));
             }
             set {
                 this["colordialogcustomcolors"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("e")]
+        public string Setting {
+            get {
+                return ((string)(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
             }
         }
     }

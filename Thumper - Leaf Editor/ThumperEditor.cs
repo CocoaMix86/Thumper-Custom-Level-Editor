@@ -188,6 +188,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.leafzoomvert = trackZoomVert.Value;
             Properties.Settings.Default.lvlzoom = trackLvlVolumeZoom.Value;
             Properties.Settings.Default.leafautoinsert = btnLeafAutoPlace.Checked;
+            //colors
+            Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
 
             Properties.Settings.Default.Save();
         }
@@ -269,8 +271,8 @@ namespace Thumper_Custom_Level_Editor
             trackZoomVert.Value = Properties.Settings.Default.leafzoomvert;
             trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
             btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
-            //
-
+            //colors
+            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //load recent levels 
             List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
             if (levellist.Count > 0 && LevelToLoad.Length < 2)

@@ -149,8 +149,11 @@
     <Setting Name="firstrun" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="colordialogcustomcolors" Type="System.String" Scope="User">
+    <Setting Name="colordialogcustomcolors" Type="System.Collections.Generic.List&lt;int&gt;" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">e</Value>
     </Setting>
   </Settings>
 </SettingsFile>
