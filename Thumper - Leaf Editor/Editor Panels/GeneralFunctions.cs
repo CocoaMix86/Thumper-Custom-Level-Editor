@@ -204,7 +204,7 @@ namespace Thumper_Custom_Level_Editor
                 string[] items = line.Split(';');
                 objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
             }
-            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors.ToArray();
+            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
         }
 
         public DataGridViewRow CloneRow(DataGridViewRow dgvr, int cellstocopy)
