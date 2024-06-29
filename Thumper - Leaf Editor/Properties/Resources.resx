@@ -337,11 +337,13 @@ previousleaf;F4</value>
   </data>
   <data name="changelog" xml:space="preserve">
     <value>NEW
-🌟Undo on Leaf (Ctrl+Z)
-🌟Several buttons have new sound effects.
-🌟Right-click on application in taskbar to access and open Recent Levels.
-🌟Search button in the Working Folder tells you where a file is referenced.
-🌟Ctrl+X to cut cells in leaf editor. Paste (an existing function) with Ctrl+V.
+🌟 Undo on Leaf (Ctrl+Z)
+🌟 Several buttons have new sound effects.
+🌟 Right-click on application in taskbar to access and open Recent Levels.
+🌟 Search button in the Working Folder tells you where a file is referenced.
+🌟 Ctrl+X to cut cells in leaf editor. Paste (an existing function) with Ctrl+V.
+🌟 Custom keybinds (Edit &gt; Preferences menu)
+🌟 View your level's total runtime in the Master panel
 
 BUG FIXES
 ✅ object list is collapsed to the left when loading a new leaf
@@ -363,6 +365,10 @@ BUG FIXES
 ✅ error when adding a new sample with no open project
 ✅ error when interpolating from newly set cells. Self-fixes if you would reload the leaf
 ✅ error when selecting a level from the Recent list and it no longer exists
+✅ error when removing the bottom-most leaf in a lvl
+✅ error when setting time signature to not #/# format or using non-number characters
+✅ error when leaf editor too small to display any cells
+✅ error when trying to load a different level and the current level folder is deleted
 ✅ Sample panel not visible on first launch
 ✅ Golden beeble never shows up
 ✅ The first lvl created of a new level has no loop tracks available until it is reloaded
@@ -374,6 +380,18 @@ BUG FIXES
 ✅ Making a change in any of the panels and then switching to another file doesn't clear the "unsaved" red color
 ✅ unsaved dialog doesnt show for lvl, gate, sample when switching files
 ✅ Pasting cells can be laggy
+✅ creating a new level folder saves any open file into itself, instead of starting blank
+✅ can play only 1 sample and the next crashes
+✅ Including a '#' in the Level's description would cause the Level Info to not load
+✅ unable to move with arrows or click a different cell when active cell is empty
+✅ Using the "refresh" button on the Master panel would disable the save button.
+✅ extras folder doesn't delete .pc file when a sample is deleted from the sample editor
+✅ Increasing approach beats of a lvl doesn't visually update the Volume Sequencer until reloading the lvl
+✅ duplicating files makes a duplicate of what you have open in the editor, not the file you right click on in the Working Folder
+✅ Making changes to a template file before saving it with a name breaks "TRACK EFFECT" objects on it next time it loads
+✅ beeblehappy never plays a noise when it shows up
+✅ Unable to open some older levels as they are missing data that was added in newer versions
+✅ custom colors don't save in color picker
 
 SUGGESTED ADDITIONS/CHANGES
 ➕ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
@@ -386,7 +404,16 @@ SUGGESTED ADDITIONS/CHANGES
 ➕ Moved LEVEL DETAILS button out of the Working folder file list and to its own dedicated button
 ➕ Filter file buttons now has a "clear filters" button
 ➕ Paths/Tunnels list now shows which leaf is currently active
-➕ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow</value>
+➕ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow
+➕ various UI changes to make things more consistent
+➕ F3 and F4: next/previous leaf (you can change these keybinds)
+➕ F1 and F2: next/previous lvl (you can change these keybinds)
+
+MISC
+✅ Decreased size of EXE a bunch
+✅ Improved load speed and performance
+✅ Minor UI changes
+✅ Added "open template" button to Leaf panel</value>
   </data>
   <data name="icon_import" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

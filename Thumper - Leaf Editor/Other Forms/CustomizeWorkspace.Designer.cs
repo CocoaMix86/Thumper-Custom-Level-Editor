@@ -144,16 +144,16 @@ namespace Thumper_Custom_Level_Editor
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(-5, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(376, 306);
+            this.tabControl1.Size = new System.Drawing.Size(367, 295);
             this.tabControl1.TabIndex = 107;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
@@ -187,7 +187,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(368, 280);
+            this.tabPage1.Size = new System.Drawing.Size(359, 269);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Colors";
             // 
@@ -541,7 +541,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(368, 280);
+            this.tabPage3.Size = new System.Drawing.Size(359, 269);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Key Binds";
             // 
@@ -653,6 +653,8 @@ namespace Thumper_Custom_Level_Editor
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.keybindPreviousLeaf);
             this.panel1.Controls.Add(this.keybindNextLeaf);
