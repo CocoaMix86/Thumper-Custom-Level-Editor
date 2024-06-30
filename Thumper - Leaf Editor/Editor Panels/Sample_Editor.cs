@@ -254,6 +254,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			int _in = sampleList.CurrentRow.Index;
 			bool customforcesave = false;
+			outputDevice?.Stop();
 			if (_samplelist[_in].path.Contains("custom")) {
 				customforcesave = true;
 				if (MessageBox.Show("This deletion cannot be undone. Are you sure?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
