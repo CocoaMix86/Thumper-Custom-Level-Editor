@@ -268,6 +268,8 @@ namespace Thumper_Custom_Level_Editor
 				if (File.Exists($@"{workingfolder}\extras\{_hashedname}.pc")) {
 					File.Delete($@"{workingfolder}\extras\{_hashedname}.pc");
                 }
+				//force save as this cannot be undone
+				SamplesaveToolStripMenuItem_Click(null, null);
 			}
 			_samplelist.RemoveAt(_in);
 			PlaySound("UIobjectremove");
