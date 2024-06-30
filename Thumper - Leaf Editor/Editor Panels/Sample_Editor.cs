@@ -271,6 +271,11 @@ namespace Thumper_Custom_Level_Editor
 				//force save as this cannot be undone
 				SamplesaveToolStripMenuItem_Click(null, null);
 			}
+			//delete file from temp folder too. If it isn't removed and then a new sample is added with the same name, the old sample will play
+			if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg")) 
+				File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg");
+			if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav"))
+				File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav");
 			_samplelist.RemoveAt(_in);
 			PlaySound("UIobjectremove");
 		}
