@@ -273,10 +273,14 @@ namespace Thumper_Custom_Level_Editor
                 }
 			}
 			//delete file from temp folder too. If it isn't removed and then a new sample is added with the same name, the old sample will play
-			if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg")) 
-				File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg");
-			if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav"))
-				File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav");
+			try {
+				if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg"))
+					File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg");
+				if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav"))
+					File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav");
+			} catch (Exception ex) {
+				MessageBox.Show($"Unable to delete {AppLocation}\\temp\\\\{_samplelist[_in].obj_name}\n\n{ex}");
+			}
 			_samplelist.RemoveAt(_in);
 			if (customforcesave)
 				//force save as this cannot be undone
