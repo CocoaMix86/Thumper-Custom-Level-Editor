@@ -253,7 +253,9 @@ namespace Thumper_Custom_Level_Editor
 		private void btnSampleDelete_Click(object sender, EventArgs e)
 		{
 			int _in = sampleList.CurrentRow.Index;
+			bool customforcesave = false;
 			if (_samplelist[_in].path.Contains("custom")) {
+				customforcesave = true;
 				if (MessageBox.Show("This deletion cannot be undone. Are you sure?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
 					return;
 				string _hashedname = null;
@@ -268,8 +270,6 @@ namespace Thumper_Custom_Level_Editor
 				if (File.Exists($@"{workingfolder}\extras\{_hashedname}.pc")) {
 					File.Delete($@"{workingfolder}\extras\{_hashedname}.pc");
                 }
-				//force save as this cannot be undone
-				SamplesaveToolStripMenuItem_Click(null, null);
 			}
 			//delete file from temp folder too. If it isn't removed and then a new sample is added with the same name, the old sample will play
 			if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg")) 
@@ -277,6 +277,9 @@ namespace Thumper_Custom_Level_Editor
 			if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav"))
 				File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav");
 			_samplelist.RemoveAt(_in);
+			if (customforcesave)
+				//force save as this cannot be undone
+				SamplesaveToolStripMenuItem_Click(null, null);
 			PlaySound("UIobjectremove");
 		}
 		private void btnSampleAdd_Click(object sender, EventArgs e)
