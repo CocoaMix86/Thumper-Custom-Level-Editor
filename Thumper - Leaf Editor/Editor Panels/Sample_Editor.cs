@@ -62,6 +62,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			sampleList.CellValueChanged -= sampleList_CellValueChanged;
 			try {
+				List<DataGridViewRow> editedrows = new();
 				object _val = sampleList[e.ColumnIndex, e.RowIndex].Value;
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in sampleList.SelectedCells) {
@@ -73,6 +74,17 @@ namespace Thumper_Custom_Level_Editor
 					//if cell does not have the value, set it
 					if (_cell.Value != _val)
 						_cell.Value = _val;
+					if (!editedrows.Contains(_cell.OwningRow))
+						editedrows.Add(_cell.OwningRow);
+				}
+				foreach (DataGridViewRow dgvr in editedrows) {
+					int _index = dgvr.Index;
+					_samplelist[_index].obj_name = (string)dgvr.Cells[0].Value;
+					_samplelist[_index].volume = (decimal)dgvr.Cells[1].Value;
+					_samplelist[_index].pitch = (decimal)dgvr.Cells[2].Value;
+					_samplelist[_index].pan = (decimal)dgvr.Cells[3].Value;
+					_samplelist[_index].offset = (decimal)dgvr.Cells[4].Value;
+					_samplelist[_index].channel_group = dgvr.Cells[5].Value.ToString();
 				}
 				SaveSample(false);
 			}
