@@ -157,8 +157,8 @@ namespace Thumper_Custom_Level_Editor
 			if (e.KeyCode == Keys.Delete) {
 				foreach (DataGridViewCell dgvc in lvlSeqObjs.SelectedCells)
 					dgvc.Value = null;
+				e.Handled = true;
 			}
-			e.Handled = true;
 		}
 		//Press Backspace to clear cells
 		private void lvlSeqObjs_KeyPress(object sender, KeyPressEventArgs e)
@@ -166,8 +166,8 @@ namespace Thumper_Custom_Level_Editor
 			if (e.KeyChar == (char)Keys.Back) {
 				foreach (DataGridViewCell dgvc in lvlSeqObjs.SelectedCells)
 					dgvc.Value = null;
+				e.Handled = true;
 			}
-			e.Handled = true;
 		}
 		//Fill weight - allows for more columns
 		private void lvlSeqObjs_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
