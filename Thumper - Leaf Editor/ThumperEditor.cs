@@ -812,5 +812,37 @@ namespace Thumper_Custom_Level_Editor
             recentLevelsToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelrecent"];
             openLevelInExplorerToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelexplorer"];
         }
+
+        private void dropTrackLane_DropDown(object sender, EventArgs e)
+        {
+            ComboBox senderComboBox = (ComboBox)sender;
+            int width = 0;
+            Graphics g = senderComboBox.CreateGraphics();
+            Font font = senderComboBox.Font;
+            int vertScrollBarWidth =
+                (senderComboBox.Items.Count > senderComboBox.MaxDropDownItems)
+                ? SystemInformation.VerticalScrollBarWidth : 0;
+
+            int newWidth;
+            if (((ComboBox)sender).Items[0].GetType() == typeof(SampleData)) {
+                foreach (SampleData s in ((ComboBox)sender).Items) {
+                    newWidth = (int)g.MeasureString(s.obj_name, font).Width
+                        + vertScrollBarWidth;
+                    if (width < newWidth) {
+                        width = newWidth;
+                    }
+                }
+            }
+            else {
+                foreach (string s in ((ComboBox)sender).Items) {
+                    newWidth = (int)g.MeasureString(s, font).Width
+                        + vertScrollBarWidth;
+                    if (width < newWidth) {
+                        width = newWidth;
+                    }
+                }
+            }
+            senderComboBox.DropDownWidth = width;
+        }
     }
 }
