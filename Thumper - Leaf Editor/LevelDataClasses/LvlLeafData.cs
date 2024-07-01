@@ -7,5 +7,6 @@ namespace Thumper_Custom_Level_Editor
 		public string leafname { get; set; }
 		public int beats { get; set; }
 		public List<string> paths { get; set; }
+		public int id { get; set; }
 	}
 }

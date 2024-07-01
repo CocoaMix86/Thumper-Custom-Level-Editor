@@ -335,8 +335,14 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlLeafDelete_Click(object sender, EventArgs e)
 		{
+			List<LvlLeafData> todelete = new();
+			foreach (DataGridViewRow dgvr in lvlLeafList.SelectedRows) {
+				todelete.Add(_lvlleafs[dgvr.Index]);
+            }
 			int _in = lvlLeafList.CurrentRow.Index;
-			_lvlleafs.RemoveAt(_in);
+			//_lvlleafs.RemoveAt(_in);
+			foreach (LvlLeafData lvd in todelete)
+				_lvlleafs.Remove(lvd);
 			PlaySound("UIobjectremove");
 			lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= _lvlleafs.Count ? _in - 1 : _in));
 		}
@@ -638,7 +644,8 @@ namespace Thumper_Custom_Level_Editor
 				_lvlleafs.Add(new LvlLeafData() {
 					leafname = (string)leaf["leaf_name"],
 					beats = (int)leaf["beat_cnt"],
-					paths = leaf["sub_paths"].ToObject<List<string>>()
+					paths = leaf["sub_paths"].ToObject<List<string>>(),
+					id = rng.Next(0, 1000000)
 				});
 			}
 			///load volume sequencer data
