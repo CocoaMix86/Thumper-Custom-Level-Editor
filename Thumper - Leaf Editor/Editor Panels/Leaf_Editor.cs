@@ -1175,6 +1175,8 @@ namespace Thumper_Custom_Level_Editor
 			//load new leaf that was just split
 			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
 			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
+
+			_loadedleaftemp = $@"{workingfolder}\leaf_{newfilename}.txt";
 			LoadLeaf(JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{newfilename}.txt"), "#.*", "")));
 			
 			//update beat counts in loaded lvl if need be
