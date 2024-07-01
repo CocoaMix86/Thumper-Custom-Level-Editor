@@ -446,7 +446,7 @@ namespace Thumper_Custom_Level_Editor
 			int bucket1 = 0;
 			int bucket2 = 0;
 			int bucket3 = 0;
-			_gatename = Regex.Replace(_gatename, "[.].*", ".gate");
+			_gatename = _gatename.Replace(".txt", ".gate");
 			///being build Master JSON object
 			JObject _save = new() {
 				{ "obj_type", "SequinGate" },

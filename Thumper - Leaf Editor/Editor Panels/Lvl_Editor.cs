@@ -872,7 +872,7 @@ namespace Thumper_Custom_Level_Editor
 
 		public JObject LvlBuildSave(string _lvlname)
 		{
-			_lvlname = Regex.Replace(_lvlname, "[.].*", ".lvl");
+			_lvlname = _lvlname.Replace(".txt", ".lvl");
             ///start building JSON output
             JObject _save = new() {
                 { "obj_type", "SequinLevel" },

@@ -127,10 +127,14 @@ namespace Thumper_Custom_Level_Editor
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
 				int _in = e.NewStartingIndex;
 				//detect if lvl or a gate. If it's a gate, the lvlname won't be set
-				if (!String.IsNullOrEmpty(_masterlvls[_in].lvlname))
-					masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.ResourceManager.GetObject(_masterlvls[_in].lvlname.Split('.')[1]), _masterlvls[_in].lvlname.Split('.')[0], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
-				else
-					masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.ResourceManager.GetObject(_masterlvls[_in].gatename.Split('.')[1]), _masterlvls[_in].gatename.Split('.')[0], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+				if (!String.IsNullOrEmpty(_masterlvls[_in].lvlname)) {
+					int idx = _masterlvls[_in].lvlname.LastIndexOf('.');
+					masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.lvl, _masterlvls[_in].lvlname[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+				}
+				else {
+					int idx = _masterlvls[_in].gatename.LastIndexOf('.');
+					masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.gate, _masterlvls[_in].gatename[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+				}
 			}
 			//if action REMOVE, remove row from the master DGV
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
@@ -632,26 +636,29 @@ namespace Thumper_Custom_Level_Editor
 				//this section handles lvl
 				if (_masterlvl.lvlname is not null and not "") {
 					//load the lvl and then loop through its leafs to get beat counts
-					_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{_masterlvl.lvlname.Split('.')[0]}.txt");
+					int idx = _masterlvl.lvlname.LastIndexOf('.');
+					_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{_masterlvl.lvlname[..idx]}.txt");
 				}
 				//this section handles gate
 				else {
 					//load the gate to then loop through all lvls in it
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($"{workingfolder}\\gate_{_masterlvl.gatename.Split('.')[0]}.txt"), "#.*", ""));
+					int idx = _masterlvl.gatename.LastIndexOf('.');
+					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($"{workingfolder}\\gate_{_masterlvl.gatename[..idx]}.txt"), "#.*", ""));
 					foreach (dynamic _lvl in _load["boss_patterns"]) {
 						//load the lvl and then loop through its leafs to get beat counts
-						_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{((string)_lvl["lvl_name"]).Split('.')[0]}.txt");
+						idx = ((string)_lvl["lvl_name"]).LastIndexOf('.');
+						_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{((string)_lvl["lvl_name"])[..idx]}.txt");
 					}
 				}
 
 				if (_masterlvl.rest is not "" and not "<none>" and not null)
-					_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{_masterlvl.rest.Split('.')[0]}.txt");
+					_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{_masterlvl.rest[.._masterlvl.rest.LastIndexOf('.')]}.txt");
 			}
 			if (dropMasterIntro.Text != "<none>")
-				_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{dropMasterIntro.Text.Split('.')[0]}.txt");
+				_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{dropMasterIntro.Text[..dropMasterIntro.Text.LastIndexOf('.')]}.txt");
 			if (dropMasterCheck.Text != "<none>")
-				_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{dropMasterCheck.Text.Split('.')[0]}.txt");
-
+				_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{dropMasterCheck.Text[..dropMasterCheck.Text.LastIndexOf('.')]}.txt");
+			
 			lblMAsterRuntimeBeats.Text = $"Beats: {_beatcount}";
 
 			///Calculate min/sec based on beats and BPM
