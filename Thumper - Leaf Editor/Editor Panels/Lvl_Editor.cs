@@ -609,6 +609,7 @@ namespace Thumper_Custom_Level_Editor
 			lblLvlName.Text = $@"Lvl Editor ⮞ {_load["obj_name"]}";
 			//set flag that load is in progress. This skips SaveLvl() method
 			loadinglvl = true;
+			lvljson = _load;
 
 			///Clear DGVs so new data can load
 			lvlLoopTracks.Rows.Clear();
@@ -623,13 +624,14 @@ namespace Thumper_Custom_Level_Editor
 			dropLvlInput.Text = (string)_load["input_allowed"];
 			dropLvlTutorial.Text = (string)_load["tutorial_type"];
 			///load loop track names and paths to lvlLoopTracks DGV
-			LvlReloadSamples();
-			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = null;
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
-			foreach (dynamic samp in _load["loops"]) {
+			LvlReloadSamples();
+			/*foreach (dynamic samp in _load["loops"]) {
 				SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", "")) ?? _lvlsamples[0];
 				lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
-			}
+			}*/
+			/*foreach (DataGridViewRow r in lvlLoopTracks.Rows)
+				r.HeaderCell.Value = "Volume Track " + r.Index;*/
 			btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
 			///load leafs associated with this lvl
 			foreach (dynamic leaf in _load["leaf_seq"]) {
@@ -649,8 +651,6 @@ namespace Thumper_Custom_Level_Editor
 			///add headers to rows after importing their data
 			foreach (DataGridViewRow r in lvlSeqObjs.Rows)
 				r.HeaderCell.Value = "Volume Track " + r.Index;
-			foreach (DataGridViewRow r in lvlLoopTracks.Rows)
-				r.HeaderCell.Value = "Volume Track " + r.Index;
 
 			trackLvlVolumeZoom_Scroll(null, null);
 			//mark that lvl is saved (just freshly loaded)
@@ -658,7 +658,6 @@ namespace Thumper_Custom_Level_Editor
 			loadinglvl = false;
 			SaveLvl(true);
 			ColorLvlVolumeSequencer();
-			lvljson = _load;
 		}
 
 		public void InitializeLvlStuff()
@@ -779,7 +778,32 @@ namespace Thumper_Custom_Level_Editor
 				offset = 0,
 				channel_group = ""
 			});
+
 			_lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
+			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
+			//after reloading samples, the dropdowns need to be repopulated
+			if (lvljson != null) {
+				lvlLoopTracks.Rows.Clear();
+				foreach (dynamic samp in lvljson["loops"]) {
+					SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", "")) ?? _lvlsamples[0];
+					lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
+				}
+				foreach (DataGridViewRow r in lvlLoopTracks.Rows)
+					r.HeaderCell.Value = "Volume Track " + r.Index;
+			}
+			SaveLvl(true);
+
+			//this is for adjusting the dropdown width so that the full item can display
+			int width = 0;
+			Graphics g = lvlLoopTracks.CreateGraphics();
+			Font font = lvlLoopTracks.DefaultCellStyle.Font;
+			foreach (SampleData s in _lvlsamples) {
+				int newWidth = (int)g.MeasureString(s.obj_name, font).Width;
+				if (width < newWidth) {
+					width = newWidth;
+				}
+			}
+			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DropDownWidth = width + 20;
 		}
 
 		public void SaveLvl(bool save, bool playsound = false)
