@@ -713,7 +713,12 @@ namespace Thumper_Custom_Level_Editor
 			if (_loadedleaf == null)
 				return;
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-			TrackRawImport(trackEditor.CurrentRow, JObject.Parse($"{{{richRawTrackData.Text}}}"));
+			try {
+				TrackRawImport(trackEditor.CurrentRow, JObject.Parse($"{{{richRawTrackData.Text}}}"));
+			}
+			catch (Exception ex) {
+				MessageBox.Show($"Invalid format or characters in raw data. Please fix.\n\n{ex}", "Import error");
+            }
 			PlaySound("UIkpaste");
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
@@ -1055,7 +1060,7 @@ namespace Thumper_Custom_Level_Editor
 			PlaySound("UIinterpolate");
 
 			for (int x = 1; x < _beats; x++) {
-				_inc = Decimal.Round(_inc + _diff, 4);
+				_inc = Decimal.Round(_inc + _diff, 3);
 				//if interpolating for Color, remove the decimals
 				if (_tracks[_listcell[0].RowIndex].trait_type == "kTraitColor")
 					_inc = Math.Truncate(_inc);
@@ -1065,6 +1070,7 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor[_listcell[0].ColumnIndex, _listcell[0].RowIndex].Value = _start;
 			//recolor cells after populating
 			TrackUpdateHighlighting(trackEditor.Rows[_listcell[0].RowIndex]);
+			ShowRawTrackData();
 			//re-enable this
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			SaveLeaf(false, $"Interpolated cells {_listcell[0].ColumnIndex} -> {_listcell[1].ColumnIndex}", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
@@ -1358,7 +1364,7 @@ namespace Thumper_Custom_Level_Editor
 			//iterate over each data point, and fill cells
 			foreach (JProperty data_point in data_points) {
 				try {
-					r.Cells[int.Parse(data_point.Name)].Value = (decimal)data_point.Value;
+					r.Cells[int.Parse(data_point.Name)].Value = TruncateDecimal((decimal)data_point.Value, 3);
 				}
 				catch (ArgumentOutOfRangeException) { }
 			}
