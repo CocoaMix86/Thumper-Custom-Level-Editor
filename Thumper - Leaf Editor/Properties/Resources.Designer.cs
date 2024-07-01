@@ -917,6 +917,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap kofi_logo {
+            get {
+                object obj = ResourceManager.GetObject("kofi_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap leaf {
             get {
                 object obj = ResourceManager.GetObject("leaf", resourceCulture);

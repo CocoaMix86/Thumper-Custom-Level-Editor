@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -261,8 +262,13 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnMasterLvlDelete_Click(object sender, EventArgs e)
 		{
+			List<MasterLvlData> todelete = new();
+			foreach (DataGridViewRow dgvr in masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList()) {
+				todelete.Add(_masterlvls[dgvr.Index]);
+			}
 			int _in = masterLvlList.CurrentRow.Index;
-			_masterlvls.RemoveAt(_in);
+			foreach (MasterLvlData mld in todelete)
+				_masterlvls.Remove(mld);
 			PlaySound("UIobjectremove");
 			masterLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= _masterlvls.Count ? _in - 1 : _in));
 		}
@@ -458,7 +464,8 @@ namespace Thumper_Custom_Level_Editor
 					playplus = _lvl["play_plus"],
 					isolate = _lvl["isolate"] ?? false,
 					checkpoint_leader = _lvl["checkpoint_leader_lvl_name"],
-					rest = _lvl["rest_lvl_name"] == "" ? "<none>" : _lvl["rest_lvl_name"]
+					rest = _lvl["rest_lvl_name"] == "" ? "<none>" : _lvl["rest_lvl_name"],
+					id = rng.Next(0, 10000000)
 				});
 			}
 			dropMasterSkybox.SelectedIndex = dropMasterSkybox.Items.IndexOf((string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"]);
