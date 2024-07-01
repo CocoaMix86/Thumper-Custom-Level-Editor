@@ -323,10 +323,13 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.ColumnIndex == -1 || e.RowIndex == -1)
 				return;
+			DataGridView dgv = (DataGridView)sender;
 			if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
 				if (_tracks[e.RowIndex].trait_type is "kTraitBool" or "kTraitAction")
-					if ((sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value == null)
-						(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = 1;
+					if (dgv[e.ColumnIndex, e.RowIndex].Value == null) {
+						dgv[e.ColumnIndex, e.RowIndex].Value = 1m;
+						trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
+					}
 			}
 		}
 		private void trackEditor_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
