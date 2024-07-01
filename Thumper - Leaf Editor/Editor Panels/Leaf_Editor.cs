@@ -1646,7 +1646,8 @@ namespace Thumper_Custom_Level_Editor
 
 		public JObject LeafBuildSave(string _leafname, bool skiprevertsave = false)
 		{
-			_leafname = Regex.Replace(_leafname, "[.].*", ".leaf");
+			//_leafname = Regex.Replace(_leafname, "[.].*", ".leaf");
+			_leafname = _leafname.Replace(".txt", ".leaf");
             ///start building JSON output
             JObject _save = new() {
                 { "obj_type", "SequinLeaf" },

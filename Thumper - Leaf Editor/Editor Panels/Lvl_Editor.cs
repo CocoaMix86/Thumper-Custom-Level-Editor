@@ -189,7 +189,7 @@ namespace Thumper_Custom_Level_Editor
 			//NewStartingIndex and OldStartingIndex track where the changes were made
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
 				string leafname = _lvlleafs[_in].leafname;
-				lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] { Properties.Resources.ResourceManager.GetObject(leafname.Split('.')[1]), leafname.Replace(".leaf", ""), _lvlleafs[_in].beats });
+				lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] { Properties.Resources.leaf, leafname.Replace(".leaf", ""), _lvlleafs[_in].beats });
 			}
 			//if action REMOVE, remove row from the lvl DGV
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
