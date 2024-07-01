@@ -880,7 +880,7 @@ namespace Thumper_Custom_Level_Editor
 			int _in = 0;
 			DataGridView dgv = trackEditor;
 			try {
-				int _index = trackEditor.CurrentRow.Index;
+				int _index = trackEditor.CurrentRow?.Index ?? -1;
 				//check if copied row is longer than the leaf beat length
 				if (clipboardtracks[0].Item2.Cells.Count > numericUpDown_LeafLength.Value) {
 					DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
