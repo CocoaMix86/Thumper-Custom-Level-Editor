@@ -824,25 +824,23 @@ namespace Thumper_Custom_Level_Editor
                 ? SystemInformation.VerticalScrollBarWidth : 0;
 
             int newWidth;
-            if (((ComboBox)sender).Items[0].GetType() == typeof(SampleData)) {
-                foreach (SampleData s in ((ComboBox)sender).Items) {
-                    newWidth = (int)g.MeasureString(s.obj_name, font).Width
-                        + vertScrollBarWidth;
+            if (senderComboBox.Items[0].GetType() == typeof(SampleData)) {
+                foreach (SampleData s in senderComboBox.Items) {
+                    newWidth = (int)g.MeasureString(s.obj_name, font).Width;
                     if (width < newWidth) {
                         width = newWidth;
                     }
                 }
             }
             else {
-                foreach (string s in ((ComboBox)sender).Items) {
-                    newWidth = (int)g.MeasureString(s, font).Width
-                        + vertScrollBarWidth;
+                foreach (string s in senderComboBox.Items) {
+                    newWidth = (int)g.MeasureString(s, font).Width;
                     if (width < newWidth) {
                         width = newWidth;
                     }
                 }
             }
-            senderComboBox.DropDownWidth = width;
+            senderComboBox.DropDownWidth = width + vertScrollBarWidth; ;
         }
     }
 }
