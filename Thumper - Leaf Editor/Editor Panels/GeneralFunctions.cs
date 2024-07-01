@@ -206,7 +206,7 @@ namespace Thumper_Custom_Level_Editor
             }
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
         }
-
+        /*
         public DataGridViewRow CloneRow(DataGridViewRow dgvr, int cellstocopy)
         {
             DataGridViewRow newdgvr = (DataGridViewRow)dgvr.Clone();
@@ -216,8 +216,7 @@ namespace Thumper_Custom_Level_Editor
                 newdgvr.Cells[x].Value = dgvr.Cells[x].Value;
             }
             return newdgvr;
-        }
-
+        }*/
 
         private void RandomizeRowValues(DataGridViewRow dgvr)
         {

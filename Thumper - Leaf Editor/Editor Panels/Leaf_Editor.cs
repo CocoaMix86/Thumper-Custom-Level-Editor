@@ -868,10 +868,7 @@ namespace Thumper_Custom_Level_Editor
                 List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
 				foreach (DataGridViewRow dgvr in selectedrows) {
-					//clipboardtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow>(_tracks[dgvr.Index], CloneRow(dgvr, dgvr.Cells.Count)));
-					//clipboardtracks.Add(new Tuple<Sequencer_Object, DataGridViewCellCollection>(_tracks[dgvr.Index], dgvr.Cells));
 					clipboardtracks.Add(_tracks[dgvr.Index]);
-					//DataGridViewCellCollection dgvcc = dgvr.Cells;
 				}
 				btnTrackPaste.Enabled = true;
 			}
