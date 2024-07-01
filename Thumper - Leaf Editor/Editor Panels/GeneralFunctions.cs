@@ -338,6 +338,22 @@ namespace Thumper_Custom_Level_Editor
             lblChangelog.Text = Properties.Resources.changelog;
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
+
+
+        /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947
+        decimal TruncateDecimal(decimal d, byte decimals)
+        {
+            decimal r = Math.Round(d, decimals);
+
+            if (d > 0 && r > d) {
+                return r - new decimal(1, 0, 0, false, decimals);
+            }
+            else if (d < 0 && r < d) {
+                return r + new decimal(1, 0, 0, false, decimals);
+            }
+
+            return r;
+        }
     }
 
     public static class ExtensionMethodClass

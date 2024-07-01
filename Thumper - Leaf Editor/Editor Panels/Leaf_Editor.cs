@@ -291,7 +291,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
-                object _val = ((decimal)trackEditor[e.ColumnIndex, e.RowIndex].Value).ToString("0.###");
+                object _val = trackEditor[e.ColumnIndex, e.RowIndex].Value == null ? null : TruncateDecimal((decimal)trackEditor[e.ColumnIndex, e.RowIndex].Value, 3);
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					//if cell does not have the value, set it
@@ -336,13 +336,13 @@ namespace Thumper_Custom_Level_Editor
 			if (e.Button == MouseButtons.Right) {
 				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
 					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-					dgv[e.ColumnIndex, e.RowIndex].Value = 0;
+					dgv[e.ColumnIndex, e.RowIndex].Value = 0m;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					SaveLeaf(false, "Deleted single cell", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
 				else {
-					dgv[e.ColumnIndex, e.RowIndex].Value = 0;
+					dgv[e.ColumnIndex, e.RowIndex].Value = 0m;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					_undolistleaf.RemoveAt(1);
 				}
@@ -354,7 +354,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.KeyChar == (char)Keys.Back) {
 				_logundo = false;
-				trackEditor.CurrentCell.Value = 0;
+				trackEditor.CurrentCell.Value = 0m;
 				trackEditor.CurrentCell.Value = null;
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
@@ -370,7 +370,7 @@ namespace Thumper_Custom_Level_Editor
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
 				_logundo = false;
-				trackEditor.CurrentCell.Value = 0;
+				trackEditor.CurrentCell.Value = 0m;
 				trackEditor.CurrentCell.Value = null;
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
@@ -387,7 +387,7 @@ namespace Thumper_Custom_Level_Editor
 					DataObject d = trackEditor.GetClipboardContent();
 					Clipboard.SetDataObject(d, true);
 					_logundo = false;
-					trackEditor.CurrentCell.Value = 0;
+					trackEditor.CurrentCell.Value = 0m;
 					trackEditor.CurrentCell.Value = null;
 					e.Handled = true;
 					_logundo = true;
@@ -1358,7 +1358,7 @@ namespace Thumper_Custom_Level_Editor
 			//iterate over each data point, and fill cells
 			foreach (JProperty data_point in data_points) {
 				try {
-					r.Cells[int.Parse(data_point.Name)].Value = ((decimal)data_point.Value).ToString("0.###");
+					r.Cells[int.Parse(data_point.Name)].Value = (decimal)data_point.Value;
 				}
 				catch (ArgumentOutOfRangeException) { }
 			}
