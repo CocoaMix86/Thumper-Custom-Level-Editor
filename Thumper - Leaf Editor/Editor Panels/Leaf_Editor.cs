@@ -884,11 +884,12 @@ namespace Thumper_Custom_Level_Editor
 			try {
 				int _index = trackEditor.CurrentRow?.Index ?? -1;
 				//check if copied row is longer than the leaf beat length
-				if (((JObject)clipboardtracks[0].data_points).Properties().ToList().Count > numericUpDown_LeafLength.Value) {
+				int lastbeat = int.Parse(((JProperty)((JObject)clipboardtracks[0].data_points).Properties().ToList().Last()).Name) + 1;
+				if (lastbeat > numericUpDown_LeafLength.Value) {
 					DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
 					//YES = extend the leaf and then paste
 					if (_paste == DialogResult.Yes) {
-						numericUpDown_LeafLength.Value = ((JObject)clipboardtracks[0].data_points).Properties().ToList().Count;
+						numericUpDown_LeafLength.Value = lastbeat;
 					}
 					//NO = do not extend leaf and then paste
 					else if (_paste == DialogResult.No) {
