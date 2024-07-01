@@ -101,6 +101,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//Delete button enabled/disabled if rows exist
 			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
+			btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
 			//set lvl save flag to false
 			SaveLvl(false);
 		}
