@@ -336,14 +336,14 @@ namespace Thumper_Custom_Level_Editor
 			if (e.Button == MouseButtons.Right) {
 				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
 					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-					dgv[e.ColumnIndex, e.RowIndex].Value = 0m;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
 					SaveLeaf(false, "Deleted single cell", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
 				else {
-					dgv[e.ColumnIndex, e.RowIndex].Value = 0m;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
 					_undolistleaf.RemoveAt(1);
 				}
 				TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
@@ -354,8 +354,8 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.KeyChar == (char)Keys.Back) {
 				_logundo = false;
-				trackEditor.CurrentCell.Value = 0m;
 				trackEditor.CurrentCell.Value = null;
+				trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex));
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
@@ -370,8 +370,8 @@ namespace Thumper_Custom_Level_Editor
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
 				_logundo = false;
-				trackEditor.CurrentCell.Value = 0m;
 				trackEditor.CurrentCell.Value = null;
+				trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex));
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
@@ -387,8 +387,8 @@ namespace Thumper_Custom_Level_Editor
 					DataObject d = trackEditor.GetClipboardContent();
 					Clipboard.SetDataObject(d, true);
 					_logundo = false;
-					trackEditor.CurrentCell.Value = 0m;
 					trackEditor.CurrentCell.Value = null;
+					trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex));
 					e.Handled = true;
 					_logundo = true;
 					SaveLeaf(false, "Cut cells", $"");
