@@ -57,7 +57,8 @@ namespace Thumper_Custom_Level_Editor
 		public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public List<string> _tracklanefriendly = new() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
 		public List<Tuple<string, int, int>> _scrollpositions = new();
-		public List<Tuple<Sequencer_Object, DataGridViewRow>> clipboardtracks = new();
+		//public List<Tuple<Sequencer_Object, DataGridViewCellCollection>> clipboardtracks = new();
+		public List<Sequencer_Object> clipboardtracks = new();
 		public List<CellFunction> _functions = new();
 		public CellFunction _loadedfunction;
 		public List<SaveState> _undolistleaf = new();
@@ -867,7 +868,10 @@ namespace Thumper_Custom_Level_Editor
                 List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
 				foreach (DataGridViewRow dgvr in selectedrows) {
-					clipboardtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow>(_tracks[dgvr.Index], CloneRow(dgvr, dgvr.Cells.Count)));
+					//clipboardtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow>(_tracks[dgvr.Index], CloneRow(dgvr, dgvr.Cells.Count)));
+					//clipboardtracks.Add(new Tuple<Sequencer_Object, DataGridViewCellCollection>(_tracks[dgvr.Index], dgvr.Cells));
+					clipboardtracks.Add(_tracks[dgvr.Index]);
+					//DataGridViewCellCollection dgvcc = dgvr.Cells;
 				}
 				btnTrackPaste.Enabled = true;
 			}
@@ -882,11 +886,11 @@ namespace Thumper_Custom_Level_Editor
 			try {
 				int _index = trackEditor.CurrentRow?.Index ?? -1;
 				//check if copied row is longer than the leaf beat length
-				if (clipboardtracks[0].Item2.Cells.Count > numericUpDown_LeafLength.Value) {
+				if (((JObject)clipboardtracks[0].data_points).Properties().ToList().Count > numericUpDown_LeafLength.Value) {
 					DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
 					//YES = extend the leaf and then paste
 					if (_paste == DialogResult.Yes) {
-						numericUpDown_LeafLength.Value = clipboardtracks[0].Item2.Cells.Count;
+						numericUpDown_LeafLength.Value = ((JObject)clipboardtracks[0].data_points).Properties().ToList().Count;
 					}
 					//NO = do not extend leaf and then paste
 					else if (_paste == DialogResult.No) {
@@ -897,11 +901,27 @@ namespace Thumper_Custom_Level_Editor
 					}
 				}
 				//add copied Sequencer_Object to main _tracks list
-				foreach (Tuple<Sequencer_Object, DataGridViewRow> _newtrack in clipboardtracks) {
-					_tracks.Insert(_index + 1, _newtrack.Item1);
-					dgv.Rows.Insert(_index + 1, CloneRow(_newtrack.Item2, (int)numericUpDown_LeafLength.Value));
+				foreach (Sequencer_Object _newtrack in clipboardtracks) {
+					_tracks.Insert(_index + 1, _newtrack);
+					dgv.Rows.Insert(_index + 1);
+					DataGridViewRow r = dgv.Rows[_index + 1];
+					_index++;
+					try {
+						//pass _griddata per row to be imported to the DGV
+						TrackRawImport(r, _newtrack.data_points);
+						TrackUpdateHighlighting(r);
+						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_newtrack.highlight_color)), Color.Black, 0.4);
+						//set the headercell names
+						if (_newtrack.friendly_param.Length > 1) {
+							if (_newtrack.param_path == "play")
+								r.HeaderCell.Value = $"{_newtrack.friendly_type} ({_newtrack.obj_name})";
+							else
+								r.HeaderCell.Value = $"{_newtrack.friendly_type} ({_newtrack.friendly_param})";
+						}
+					}
+					catch (Exception) { }
 				}
-				_in = _index + 1;
+				_in = _index - 1;
 			}
 			catch (Exception ex){ MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex); }
 			PlaySound("UIkpaste");
