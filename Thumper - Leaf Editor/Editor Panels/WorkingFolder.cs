@@ -272,11 +272,11 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;
-		private void filterLeaf_CheckedChanged(object sender, EventArgs e) {filterleaf = filterLeaf.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
-		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
-		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
-		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
-		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); PlaySound("UIselect"); }
+		private void filterLeaf_CheckedChanged(object sender, EventArgs e) {filterleaf = filterLeaf.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); }
 		private void filterClear_Click(object sender, EventArgs e)
 		{
 			filterLeaf.Checked = filterLvl.Checked = filterGate.Checked = filterMaster.Checked = filterSamp.Checked = false;
