@@ -883,6 +883,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			int _in = 0;
 			DataGridView dgv = trackEditor;
+			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
 				int _index = trackEditor.CurrentRow?.Index ?? -1;
 				//check if copied row is longer than the leaf beat length
@@ -923,7 +924,10 @@ namespace Thumper_Custom_Level_Editor
 				}
 				_in = _index - 1;
 			}
-			catch (Exception ex){ MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex); }
+			catch (Exception ex) { 
+				MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex);
+			}
+			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			PlaySound("UIkpaste");
 			SaveLeaf(false, "Paste track", $"{_tracks[_in].friendly_type} {_tracks[_in].friendly_param}");
 		}
