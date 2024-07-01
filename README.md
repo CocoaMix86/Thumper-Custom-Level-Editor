@@ -1,3 +1,4 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I5ZZBRH)
 ## Thumper Custom Level Editor
 
 [Download the latest release](https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/releases)
