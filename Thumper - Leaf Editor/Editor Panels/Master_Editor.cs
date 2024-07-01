@@ -309,7 +309,8 @@ namespace Thumper_Custom_Level_Editor
 					checkpoint = true,
 					checkpoint_leader = "<none>",
 					gatename = "<none>",
-					rest = "<none>"
+					rest = "<none>",
+					id = rng.Next(0, 1000000)
 				});
 			else if (_load["obj_type"] == "SequinGate")
 				_masterlvls.Add(new MasterLvlData() {
@@ -318,7 +319,8 @@ namespace Thumper_Custom_Level_Editor
 					checkpoint = true,
 					checkpoint_leader = "<none>",
 					lvlname = "<none>",
-					rest = "<none>"
+					rest = "<none>",
+					id = rng.Next(0, 1000000)
 				});
 		}
 

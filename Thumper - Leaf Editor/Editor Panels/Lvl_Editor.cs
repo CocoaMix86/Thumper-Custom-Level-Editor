@@ -721,7 +721,8 @@ namespace Thumper_Custom_Level_Editor
 			_lvlleafs.Add(new LvlLeafData() {
 				leafname = (string)_load["obj_name"],
 				beats = (int)_load["beat_cnt"],
-				paths = new List<string>(copytunnels)
+				paths = new List<string>(copytunnels),
+				id = rng.Next(0, 1000000)
 			});
 		}
 
