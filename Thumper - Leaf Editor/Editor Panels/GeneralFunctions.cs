@@ -247,7 +247,8 @@ namespace Thumper_Custom_Level_Editor
             }
             trackEditor.CellValueChanged += trackEditor_CellValueChanged;
             //TrackUpdateHighlighting(trackEditor.CurrentRow);
-            ShowRawTrackData();
+            GenerateDataPoints(dgvr);
+            ShowRawTrackData(dgvr);
         }
 
         /// <summary>

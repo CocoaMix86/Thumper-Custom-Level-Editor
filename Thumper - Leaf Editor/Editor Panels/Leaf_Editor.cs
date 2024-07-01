@@ -214,7 +214,7 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
 			_selecttrack = e.RowIndex;
-			ShowRawTrackData();
+			ShowRawTrackData(trackEditor.Rows[e.RowIndex]);
 			List<string> _params = new();
 
 			try {
@@ -290,7 +290,11 @@ namespace Thumper_Custom_Level_Editor
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex == -1 || e.ColumnIndex == -1)
+				return;
+
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+			List<DataGridViewRow> edited = new();
 			try {
                 object _val = trackEditor[e.ColumnIndex, e.RowIndex].Value == null ? null : TruncateDecimal((decimal)trackEditor[e.ColumnIndex, e.RowIndex].Value, 3);
 				//iterate over each cell in the selection
@@ -298,6 +302,9 @@ namespace Thumper_Custom_Level_Editor
 					//if cell does not have the value, set it
 					if (_cell.Value != _val)
 						_cell.Value = _val;
+
+					if (!edited.Contains(_cell.OwningRow))
+						edited.Add(_cell.OwningRow);
 
 					TrackUpdateHighlightingSingleCell(_cell);
 				}
@@ -309,7 +316,9 @@ namespace Thumper_Custom_Level_Editor
 			}
 			catch { }
 
-			ShowRawTrackData();
+			foreach (DataGridViewRow r in edited)
+				GenerateDataPoints(r);
+			ShowRawTrackData(trackEditor.Rows[e.RowIndex]);
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
@@ -871,7 +880,7 @@ namespace Thumper_Custom_Level_Editor
                 List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
 				foreach (DataGridViewRow dgvr in selectedrows) {
-					clipboardtracks.Add(_tracks[dgvr.Index]);
+					clipboardtracks.Add(_tracks[dgvr.Index].Clone());
 				}
 				btnTrackPaste.Enabled = true;
 			}
@@ -887,7 +896,12 @@ namespace Thumper_Custom_Level_Editor
 			try {
 				int _index = trackEditor.CurrentRow?.Index ?? -1;
 				//check if copied row is longer than the leaf beat length
-				int lastbeat = int.Parse(((JProperty)((JObject)clipboardtracks[0].data_points).Properties().ToList().Last()).Name) + 1;
+				int lastbeat;
+				var jj = ((JObject)clipboardtracks[0].data_points).Properties().ToList();
+				if (jj.Count <= 1)
+					lastbeat = 1;
+				else
+					lastbeat = int.Parse(((JProperty)jj.Last()).Name) + 1;
 				if (lastbeat > numericUpDown_LeafLength.Value) {
 					DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
 					//YES = extend the leaf and then paste
@@ -904,7 +918,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 				//add copied Sequencer_Object to main _tracks list
 				foreach (Sequencer_Object _newtrack in clipboardtracks) {
-					_tracks.Insert(_index + 1, _newtrack);
+					_tracks.Insert(_index + 1, _newtrack.Clone());
 					dgv.Rows.Insert(_index + 1);
 					DataGridViewRow r = dgv.Rows[_index + 1];
 					_index++;
@@ -1095,7 +1109,8 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor[_listcell[0].ColumnIndex, _listcell[0].RowIndex].Value = _start;
 			//recolor cells after populating
 			TrackUpdateHighlighting(trackEditor.Rows[_listcell[0].RowIndex]);
-			ShowRawTrackData();
+			GenerateDataPoints(trackEditor.Rows[_listcell[0].RowIndex]);
+			ShowRawTrackData(trackEditor.Rows[_listcell[0].RowIndex]);
 			//re-enable this
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			SaveLeaf(false, $"Interpolated cells {_listcell[0].ColumnIndex} -> {_listcell[1].ColumnIndex}", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
@@ -1408,20 +1423,18 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		///Takes values in a row and puts in them in the rich text box, condensed
-		public void ShowRawTrackData()
+		public void GenerateDataPoints(DataGridViewRow dgvr)
 		{
-			string _out = "";
-			try {
-				//iterate over each cell of the selected row
-				for (int x = 0; x < trackEditor.ColumnCount; x++) {
-					//if no value, leave it out
-					if (trackEditor.Rows[_selecttrack].Cells[x].Value != null && trackEditor.Rows[_selecttrack].Cells[x].Value.ToString() != "")
-						_out += $"{x}:{trackEditor.Rows[_selecttrack].Cells[x].Value},";
-				}
-				//output final result
-				richRawTrackData.Text = _out[..^1];
-			}
-			catch { richRawTrackData.Text = ""; }
+			//iterate over each cell of the selected row
+			string allcellvalues = String.Join(",", dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.Value is not null or "").Select(x => $"{x.ColumnIndex}:{x.Value}"));
+			var jobj = JsonConvert.DeserializeObject($"{{{allcellvalues}}}");
+			_tracks[dgvr.Index].data_points = jobj;
+			richRawTrackData.Text = allcellvalues;
+		}
+		public void ShowRawTrackData(DataGridViewRow dgvr)
+        {
+			string allcellvalues = String.Join(",", dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.Value is not null or "").Select(x => $"{x.ColumnIndex}:{x.Value}"));
+			richRawTrackData.Text = allcellvalues;
 		}
 		///Updates column highlighting in the DGV based on time sig
 		public void TrackTimeSigHighlighting()
