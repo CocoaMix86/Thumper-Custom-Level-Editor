@@ -447,13 +447,17 @@ namespace Thumper_Custom_Level_Editor
 			if (lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == 0))
 				return;
 			int idx = lvlLeafList.CurrentRow.Index;
-			List<DataGridViewRow> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().ToList();
-			selectedrows.Sort((row1, row2) => row1.Index.CompareTo(row2.Index));
-			foreach (DataGridViewRow dgvr in selectedrows) {
-				_lvlleafs[idx].paths.Insert(dgvr.Index - 1, _lvlleafs[idx].paths[dgvr.Index]);
-				_lvlleafs[idx].paths.RemoveAt(dgvr.Index + 1);
+			List<int> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
+			selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
+			foreach (int dgvr in selectedrows) {
+				_lvlleafs[idx].paths.Insert(dgvr - 1, _lvlleafs[idx].paths[dgvr]);
+				_lvlleafs[idx].paths.RemoveAt(dgvr + 1);
 			}
 			LvlUpdatePaths(idx);
+			lvlLeafPaths.ClearSelection();
+			foreach (int dgvr in selectedrows) {
+				lvlLeafPaths.Rows[dgvr - 1].Cells[0].Selected = true;
+			}
 			SaveLvl(false);
 		}
 
@@ -462,13 +466,17 @@ namespace Thumper_Custom_Level_Editor
 			if (lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == lvlLeafPaths.Rows.Count - 1))
 				return;
 			int idx = lvlLeafList.CurrentRow.Index;
-			List<DataGridViewRow> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().ToList();
-			selectedrows.Sort((row1, row2) => row2.Index.CompareTo(row1.Index));
-			foreach (DataGridViewRow dgvr in selectedrows) {
-				_lvlleafs[idx].paths.Insert(dgvr.Index + 2, _lvlleafs[idx].paths[dgvr.Index]);
-				_lvlleafs[idx].paths.RemoveAt(dgvr.Index);
+			List<int> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
+			selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
+			foreach (int dgvr in selectedrows) {
+				_lvlleafs[idx].paths.Insert(dgvr + 2, _lvlleafs[idx].paths[dgvr]);
+				_lvlleafs[idx].paths.RemoveAt(dgvr);
 			}
 			LvlUpdatePaths(idx);
+			lvlLeafPaths.ClearSelection();
+			foreach (int dgvr in selectedrows) {
+				lvlLeafPaths.Rows[dgvr + 1].Cells[0].Selected = true;
+			}
 			SaveLvl(false);
 		}
 
