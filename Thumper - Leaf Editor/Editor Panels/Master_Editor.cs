@@ -326,36 +326,36 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnMasterLvlUp_Click(object sender, EventArgs e)
 		{
-			try {
-				// get index of the row for the selected cell
-				int rowIndex = masterLvlList.CurrentRow.Index;
-				if (rowIndex == 0)
-					return;
-                //move lvl in list
-                MasterLvlData selectedLvl = _masterlvls[rowIndex];
-				_masterlvls.Remove(selectedLvl);
-				_masterlvls.Insert(rowIndex - 1, selectedLvl);
-				//move selected cell up a row to follow the moved item
-				masterLvlList.Rows[rowIndex - 1].Cells[0].Selected = true;
+			List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+			if (selectedrows.Any(r => r == 0))
+				return;
+			selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
+			foreach (int dgvr in selectedrows) {
+				_masterlvls.Insert(dgvr - 1, _masterlvls[dgvr]);
+				_masterlvls.RemoveAt(dgvr + 1);
 			}
-			catch { }
+			masterLvlList.ClearSelection();
+			foreach (int dgvr in selectedrows) {
+				masterLvlList.Rows[dgvr - 1].Cells[1].Selected = true;
+			}
+			SaveMaster(false);
 		}
 
 		private void btnMasterLvlDown_Click(object sender, EventArgs e)
 		{
-			try {
-				// get index of the row for the selected cell
-				int rowIndex = masterLvlList.CurrentRow.Index;
-				if (rowIndex == _masterlvls.Count - 1)
-					return;
-                //move lvl in list
-                MasterLvlData selectedLvl = _masterlvls[rowIndex];
-				_masterlvls.Remove(selectedLvl);
-				_masterlvls.Insert(rowIndex + 1, selectedLvl);
-				//move selected cell up a row to follow the moved item
-				masterLvlList.Rows[rowIndex + 1].Cells[0].Selected = true;
+			List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+			if (selectedrows.Any(r => r == masterLvlList.RowCount - 1))
+				return;
+			selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
+			foreach (int dgvr in selectedrows) {
+				_masterlvls.Insert(dgvr + 2, _masterlvls[dgvr]);
+				_masterlvls.RemoveAt(dgvr);
 			}
-			catch { }
+			masterLvlList.ClearSelection();
+			foreach (int dgvr in selectedrows) {
+				masterLvlList.Rows[dgvr + 1].Cells[1].Selected = true;
+			}
+			SaveMaster(false);
 		}
 
 		private void btnMasterLvlCopy_Click(object sender, EventArgs e)
