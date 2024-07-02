@@ -3222,7 +3222,7 @@
             this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.lvlSeqObjs.Size = new System.Drawing.Size(727, 130);
             this.lvlSeqObjs.TabIndex = 68;
-            this.lvlSeqObjs.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lvlSeqObjs_CellMouseClick);
+            this.lvlSeqObjs.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lvlSeqObjs_CellMouseDown);
             this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
             this.lvlSeqObjs.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.lvlSeqObjs_ColumnAdded);
             this.lvlSeqObjs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvlSeqObjs_KeyDown);

@@ -130,37 +130,58 @@ namespace Thumper_Custom_Level_Editor
 			e.Cancel = true;
 		}
 
-		private void lvlSeqObjs_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+		private void lvlSeqObjs_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
 		{
 			if (e.ColumnIndex == -1 || e.RowIndex == -1)
 				return;
+			DataGridView dgv = (DataGridView)sender;
 			if (e.Button == MouseButtons.Right) {
-				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
-				TrackUpdateHighlightingSingleCell((sender as DataGridView)[e.ColumnIndex, e.RowIndex]);
+				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
+					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					dgv[e.ColumnIndex, e.RowIndex].Style = null;
+				}
+				else {
+					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					CellValueChangedLvl(e.ColumnIndex, e.RowIndex);
+				}
 			}
 		}
 		/// DGV LVLSEQOBJS
 		//Cell value changed
 		private void lvlSeqObjs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.RowIndex == -1 || e.ColumnIndex == -1)
+				return;
+			CellValueChangedLvl(e.ColumnIndex, e.RowIndex);
+		}
+		private void CellValueChangedLvl(int ColumnIndex, int RowIndex)
+        {
+			lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
 			try {
-                DataGridViewCell _cell = lvlSeqObjs[e.ColumnIndex, e.RowIndex];
-				if (!string.IsNullOrEmpty(_cell?.Value?.ToString()))
-					_cell.Style.BackColor = Color.Purple;
-				else if (_cell != null)
-					_cell.Style = null;
+				object _val = lvlSeqObjs[ColumnIndex, RowIndex].Value == null ? null : TruncateDecimal((decimal)lvlSeqObjs[ColumnIndex, RowIndex].Value, 3);
+				//iterate over each cell in the selection
+				foreach (DataGridViewCell _cell in lvlSeqObjs.SelectedCells) {
+					//if cell does not have the value, set it
+					if (_cell.Value != _val)
+						_cell.Value = _val;
 
-				//set lvl save flag to false
+					if (_val == null)
+						_cell.Style = null;
+					else
+						_cell.Style.BackColor = Color.Purple;
+				}
+				//sets flag that lvl has unsaved changes
 				SaveLvl(false);
 			}
 			catch { }
+			lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
 		}
 		//Press Delete to clear cells
 		private void lvlSeqObjs_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Delete) {
-				foreach (DataGridViewCell dgvc in lvlSeqObjs.SelectedCells)
-					dgvc.Value = null;
+				lvlSeqObjs.CurrentCell.Value = null;
+				CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex);
 				e.Handled = true;
 			}
 		}
@@ -168,8 +189,8 @@ namespace Thumper_Custom_Level_Editor
 		private void lvlSeqObjs_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Back) {
-				foreach (DataGridViewCell dgvc in lvlSeqObjs.SelectedCells)
-					dgvc.Value = null;
+				lvlSeqObjs.CurrentCell.Value = null;
+				CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex);
 				e.Handled = true;
 			}
 		}

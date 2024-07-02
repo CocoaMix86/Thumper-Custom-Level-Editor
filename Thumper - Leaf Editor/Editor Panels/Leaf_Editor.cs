@@ -363,7 +363,6 @@ namespace Thumper_Custom_Level_Editor
 					CellValueChanged(e.RowIndex, e.ColumnIndex);
 					_undolistleaf.RemoveAt(1);
 				}
-				TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
 			}
 		}
 		//Keypress Backspace - clear selected cells
