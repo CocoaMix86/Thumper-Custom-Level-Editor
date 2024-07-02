@@ -102,6 +102,8 @@ namespace Thumper_Custom_Level_Editor
 			//Delete button enabled/disabled if rows exist
 			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
 			btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
+			btnLvlPathUp.Enabled = lvlLeafPaths.Rows.Count > 1;
+			btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
 			//set lvl save flag to false
 			SaveLvl(false);
 		}
@@ -421,11 +423,52 @@ namespace Thumper_Custom_Level_Editor
 			SaveLvl(false);
 		}
 
+		private void btnLvlPathDelete_Click(object sender, EventArgs e)
+		{
+			if (lvlLeafPaths.CurrentCell.Value == null)
+				lvlLeafPaths.Rows.Remove(lvlLeafPaths.CurrentRow);
+			else
+				_lvlleafs[lvlLeafList.CurrentRow.Index].paths.RemoveAt(lvlLeafPaths.CurrentRow.Index);
+			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
+			PlaySound("UItunnelremove");
+			SaveLvl(false);
+		}
+
 		private void btnLvlPathAdd_Click(object sender, EventArgs e)
 		{
 			lvlLeafPaths.RowCount++;
 			btnLvlPathDelete.Enabled = true;
 			PlaySound("UItunneladd");
+			SaveLvl(false);
+		}
+
+		private void btnLvlPathUp_Click(object sender, EventArgs e)
+		{
+			if (lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == 0))
+				return;
+			int idx = lvlLeafList.CurrentRow.Index;
+			List<DataGridViewRow> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().ToList();
+			selectedrows.Sort((row1, row2) => row1.Index.CompareTo(row2.Index));
+			foreach (DataGridViewRow dgvr in selectedrows) {
+				_lvlleafs[idx].paths.Insert(dgvr.Index - 1, _lvlleafs[idx].paths[dgvr.Index]);
+				_lvlleafs[idx].paths.RemoveAt(dgvr.Index + 1);
+			}
+			LvlUpdatePaths(idx);
+			SaveLvl(false);
+		}
+
+		private void btnLvlPathDown_Click(object sender, EventArgs e)
+		{
+			if (lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == lvlLeafPaths.Rows.Count - 1))
+				return;
+			int idx = lvlLeafList.CurrentRow.Index;
+			List<DataGridViewRow> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().ToList();
+			selectedrows.Sort((row1, row2) => row2.Index.CompareTo(row1.Index));
+			foreach (DataGridViewRow dgvr in selectedrows) {
+				_lvlleafs[idx].paths.Insert(dgvr.Index + 2, _lvlleafs[idx].paths[dgvr.Index]);
+				_lvlleafs[idx].paths.RemoveAt(dgvr.Index);
+			}
+			LvlUpdatePaths(idx);
 			SaveLvl(false);
 		}
 
@@ -437,17 +480,6 @@ namespace Thumper_Custom_Level_Editor
 			lvlLeafPaths.Rows[^1].Cells[0].Value = _lvlpaths[rng.Next(0, _lvlpaths.Count)];
 			btnLvlPathDelete.Enabled = true;
 			PlaySound("UItunneladd");
-			SaveLvl(false);
-		}
-
-		private void btnLvlPathDelete_Click(object sender, EventArgs e)
-		{
-			if (lvlLeafPaths.CurrentCell.Value == null)
-				lvlLeafPaths.Rows.Remove(lvlLeafPaths.CurrentRow);
-			else
-				_lvlleafs[lvlLeafList.CurrentRow.Index].paths.RemoveAt(lvlLeafPaths.CurrentRow.Index);
-			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
-			PlaySound("UItunnelremove");
 			SaveLvl(false);
 		}
 
@@ -750,6 +782,8 @@ namespace Thumper_Custom_Level_Editor
 			btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
 			btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
 			btnLvlRandomTunnel.Enabled = btnLvlPathAdd.Enabled;
+			btnLvlPathUp.Enabled = lvlLeafPaths.Rows.Count > 1;
+			btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
 			//monke
 		}
 
