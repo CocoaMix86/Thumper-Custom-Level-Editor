@@ -1048,9 +1048,8 @@ namespace Thumper_Custom_Level_Editor
                 //import all colors in the file to this array
                 string[] _colors = File.ReadAllLines(ofd.FileName);
                 //then iterate over each track in the editor, applying the colors in the array in order
-                for (int x = 0; x < _tracks.Count; x++) {
-                    if (x < _colors.Length)
-                        _tracks[x].highlight_color = _colors[x];
+                for (int x = 0; x < _tracks.Count && x < _colors.Length; x++) {
+					_tracks[x].highlight_color = _colors[x];
                     //call this method to update the colors once the value has been assigned
                     TrackUpdateHighlighting(trackEditor.Rows[x]);
                 }
