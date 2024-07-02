@@ -933,6 +933,7 @@ namespace Thumper_Custom_Level_Editor
 			catch (Exception ex) { 
 				MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex);
 			}
+
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			PlaySound("UIkpaste");
 			SaveLeaf(false, "Paste track", $"{_tracks[_in].friendly_type} {_tracks[_in].friendly_param}");
@@ -982,6 +983,7 @@ namespace Thumper_Custom_Level_Editor
 				footer = objmatch.footer,
 				default_interp = "Linear"
 			};
+			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			trackEditor.Rows[_selecttrack].HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color)), Color.Black, 0.4);
 			//alter the data if it's a sample object being added. Save the sample name instead
 			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
@@ -999,6 +1001,7 @@ namespace Thumper_Custom_Level_Editor
 				PlaySound("UIobjectadd");
 				SaveLeaf(false, "Applied Object settings", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
+			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		///Sets highlighting color of current track
 		private void btnTrackColorDialog_Click(object sender, EventArgs e)
@@ -1402,13 +1405,11 @@ namespace Thumper_Custom_Level_Editor
 		///Updates row headers to be the Object and Param_Path
 		public void ChangeTrackName(DataGridViewRow r)
 		{
-			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			if (_tracks[r.Index].friendly_type == "PLAY SAMPLE")
 				//show the sample name instead
 				r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].obj_name + ")";
 			else
 				r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].friendly_param + ")";
-			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		///Takes values in a row and puts in them in the rich text box, condensed
 		public void GenerateDataPoints(DataGridViewRow dgvr)
