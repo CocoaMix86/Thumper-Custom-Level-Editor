@@ -293,10 +293,14 @@ namespace Thumper_Custom_Level_Editor
 			if (e.RowIndex == -1 || e.ColumnIndex == -1)
 				return;
 
+			CellValueChanged(e.RowIndex, e.ColumnIndex);
+		}
+		private void CellValueChanged(int rowindex, int columnindex)
+        {
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			List<DataGridViewRow> edited = new();
 			try {
-                object _val = trackEditor[e.ColumnIndex, e.RowIndex].Value == null ? null : TruncateDecimal((decimal)trackEditor[e.ColumnIndex, e.RowIndex].Value, 3);
+				object _val = trackEditor[columnindex, rowindex].Value == null ? null : TruncateDecimal((decimal)trackEditor[columnindex, rowindex].Value, 3);
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					//if cell does not have the value, set it
@@ -310,15 +314,15 @@ namespace Thumper_Custom_Level_Editor
 				}
 				//sets flag that leaf has unsaved changes
 				if (trackEditor.SelectedCells.Count > 1)
-					SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {(_val ?? "empty")}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+					SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {(_val ?? "empty")}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
 				else
-					SaveLeaf(false, $"Beat {e.ColumnIndex} value set: {(_val ?? "empty")}", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+					SaveLeaf(false, $"Beat {columnindex} value set: {(_val ?? "empty")}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
 			}
 			catch { }
 
 			foreach (DataGridViewRow r in edited)
 				GenerateDataPoints(r);
-			ShowRawTrackData(trackEditor.Rows[e.RowIndex]);
+			ShowRawTrackData(trackEditor.Rows[rowindex]);
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
@@ -337,7 +341,7 @@ namespace Thumper_Custom_Level_Editor
 				if (_tracks[e.RowIndex].trait_type is "kTraitBool" or "kTraitAction")
 					if (dgv[e.ColumnIndex, e.RowIndex].Value == null) {
 						dgv[e.ColumnIndex, e.RowIndex].Value = 1m;
-						trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
+						CellValueChanged(e.RowIndex, e.ColumnIndex);
 					}
 			}
 		}
@@ -350,13 +354,13 @@ namespace Thumper_Custom_Level_Editor
 				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
 					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
+					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
 					SaveLeaf(false, "Deleted single cell", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
 				else {
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
+					CellValueChanged(e.RowIndex, e.ColumnIndex);
 					_undolistleaf.RemoveAt(1);
 				}
 				TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
@@ -368,7 +372,7 @@ namespace Thumper_Custom_Level_Editor
 			if (e.KeyChar == (char)Keys.Back) {
 				_logundo = false;
 				trackEditor.CurrentCell.Value = null;
-				trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex));
+				CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
@@ -384,7 +388,7 @@ namespace Thumper_Custom_Level_Editor
 			if (e.KeyCode == Keys.Delete) {
 				_logundo = false;
 				trackEditor.CurrentCell.Value = null;
-				trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex));
+				CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
@@ -401,7 +405,7 @@ namespace Thumper_Custom_Level_Editor
 					Clipboard.SetDataObject(d, true);
 					_logundo = false;
 					trackEditor.CurrentCell.Value = null;
-					trackEditor_CellValueChanged(null, new DataGridViewCellEventArgs(trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex));
+					CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
 					e.Handled = true;
 					_logundo = true;
 					SaveLeaf(false, "Cut cells", $"");
@@ -1111,9 +1115,9 @@ namespace Thumper_Custom_Level_Editor
 			DialogResult result = colorDialog1.ShowDialog();
 			if (result == DialogResult.OK) {
 				PlaySound("UIcolorapply");
+				trackEditor.SelectedCells[0].Value = colorDialog1.Color.ToArgb();
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					if (_tracks[_cell.RowIndex].trait_type == "kTraitColor") {
-						_cell.Value = colorDialog1.Color.ToArgb();
 						_cell.Style.BackColor = colorDialog1.Color;
 						//sets flag that leaf has unsaved changes
 						SaveLeaf(false, "Cell value changed", $"color {colorDialog1.Color.ToArgb()}");
