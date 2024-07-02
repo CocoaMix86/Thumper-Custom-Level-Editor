@@ -12,7 +12,6 @@ namespace Thumper_Custom_Level_Editor
         string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
         public List<Object_Params> _objects = new();
         private List<Tuple<string, string>> objectcolors = new();
-        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
 
         public CustomizeWorkspace(List<Object_Params> thelist)
@@ -75,7 +74,7 @@ namespace Thumper_Custom_Level_Editor
 
             File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
 
-            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", keybinds.Select(x => $"{x.Key};{x.Value}"));
+            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", defaultkeybinds.Select(x => $"{x.Key};{x.Value}"));
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -126,8 +125,8 @@ namespace Thumper_Custom_Level_Editor
 
         /// 
         /// This is all for handling keybinds
-        /// 
-        Dictionary<string, Keys> keybinds = new();
+        ///
+        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         Keys lastpress;
         Label currentlabel;
         bool ignorekeys = true;
@@ -138,11 +137,13 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists($@"{AppLoc}\templates\keybinds.txt")) 
                 File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
             //read keybinds to a dictionary for easier lookup
-            keybinds = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+            Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+            import = import.Concat(defaultkeybinds.Where(x => !import.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
+            defaultkeybinds = import;
             //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
                 //the "14" is a leftpad empty space
-                _lbl.Text = $"{_lbl.Text.Split('.')[0],14}" + $".....{keybinds[(string)_lbl.Tag].ToString().Replace(",", " +")}";
+                _lbl.Text = $"{_lbl.Text.Split('.')[0],14}" + $".....{defaultkeybinds[(string)_lbl.Tag].ToString().Replace(",", " +")}";
             }
         }
         private void keybindLabel_Click(object sender, EventArgs e)
@@ -170,7 +171,7 @@ namespace Thumper_Custom_Level_Editor
                 //store last press for when user accepts changes
                 bool cantusethiskey = false;
                 lastpress = e.KeyData;
-                if (keybinds.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers))) {
+                if (defaultkeybinds.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers))) {
                     cantusethiskey = true;
                     lblInvalid.Visible = true;
                 }
@@ -186,10 +187,10 @@ namespace Thumper_Custom_Level_Editor
         {
             //when user accepts keybind change, store lastpress into the keybind dictionary
             //using the saved "keybindname" stored from the Click function
-            keybinds[keybindname] = lastpress;
+            defaultkeybinds[keybindname] = lastpress;
             //update the keybind label
             //the "14" is a leftpad empty space
-            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{keybinds[keybindname].ToString().Replace(",", " +")}";
+            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{defaultkeybinds[keybindname].ToString().Replace(",", " +")}";
             panelSetKeybind.Visible = false;
             ignorekeys = true;
         }
@@ -216,10 +217,10 @@ namespace Thumper_Custom_Level_Editor
         }
         private void btnSingleReset_Click(object sender, EventArgs e)
         {
-            keybinds[keybindname] = defaultkeybinds[keybindname];
-            lastpress = keybinds[keybindname];
+            defaultkeybinds[keybindname] = defaultkeybinds[keybindname];
+            lastpress = defaultkeybinds[keybindname];
             //the "14" is a leftpad empty space
-            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{keybinds[keybindname].ToString().Replace(",", " +")}";
+            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{defaultkeybinds[keybindname].ToString().Replace(",", " +")}";
             keybindLabel_Click(currentlabel, null);
         }
         private void btnCloseKeybind_Click(object sender, EventArgs e)
