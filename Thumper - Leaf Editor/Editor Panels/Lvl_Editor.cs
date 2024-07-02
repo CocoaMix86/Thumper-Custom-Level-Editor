@@ -104,8 +104,9 @@ namespace Thumper_Custom_Level_Editor
 			btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
 			btnLvlPathUp.Enabled = lvlLeafPaths.Rows.Count > 1;
 			btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
-			//set lvl save flag to false
-			SaveLvl(false);
+            btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
+            //set lvl save flag to false
+            SaveLvl(false);
 		}
 		/// DGV LVLLOOPTRACKS
 		//Cell value changed
@@ -478,9 +479,17 @@ namespace Thumper_Custom_Level_Editor
 				lvlLeafPaths.Rows[dgvr + 1].Cells[0].Selected = true;
 			}
 			SaveLvl(false);
-		}
+        }
 
-		private void btnLvlRandomTunnel_Click(object sender, EventArgs e)
+        private void btnLvlPathClear_Click(object sender, EventArgs e)
+        {
+            int idx = lvlLeafList.CurrentRow.Index;
+			_lvlleafs[idx].paths.Clear();
+			LvlUpdatePaths(idx);
+            SaveLvl(false);
+        }
+
+        private void btnLvlRandomTunnel_Click(object sender, EventArgs e)
 		{
 			if (_lvlleafs.Count == 0)
 				return;
@@ -792,8 +801,9 @@ namespace Thumper_Custom_Level_Editor
 			btnLvlRandomTunnel.Enabled = btnLvlPathAdd.Enabled;
 			btnLvlPathUp.Enabled = lvlLeafPaths.Rows.Count > 1;
 			btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
-			//monke
-		}
+			btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
+            //monke
+        }
 
 		public void LvlReloadSamples()
 		{
