@@ -1278,7 +1278,7 @@
             this.trackObjectsToolStripMenuItem});
             this.helpToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(217, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(213, 22);
             this.helpToolStripMenuItem1.Text = "Documentation...";
             // 
             // tentaclesPathsVisualsToolStripMenuItem
@@ -1329,14 +1329,14 @@
             this.changeGameDirectoryToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.changeGameDirectoryToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
             this.changeGameDirectoryToolStripMenuItem.Name = "changeGameDirectoryToolStripMenuItem";
-            this.changeGameDirectoryToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.changeGameDirectoryToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.changeGameDirectoryToolStripMenuItem.Text = "Change Game Directory";
             this.changeGameDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeGameDirectoryToolStripMenuItem_Click);
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(214, 6);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(210, 6);
             this.toolStripMenuItem10.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
             // 
             // aboutToolStripMenuItem
@@ -1345,7 +1345,7 @@
             this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aboutToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_info;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -1355,7 +1355,7 @@
             this.discordServerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.discordServerToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.discord32x;
             this.discordServerToolStripMenuItem.Name = "discordServerToolStripMenuItem";
-            this.discordServerToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.discordServerToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.discordServerToolStripMenuItem.Text = "Discord Server";
             this.discordServerToolStripMenuItem.Click += new System.EventHandler(this.discordServerToolStripMenuItem_Click);
             // 
@@ -1365,7 +1365,7 @@
             this.githubToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.githubToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.github48;
             this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-            this.githubToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.githubToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.githubToolStripMenuItem.Text = "Github";
             this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
             // 
@@ -1375,7 +1375,7 @@
             this.changelogToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.changelogToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.changelogToolStripMenuItem.Name = "changelogToolStripMenuItem";
-            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.changelogToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.changelogToolStripMenuItem.Text = "Changelog";
             this.changelogToolStripMenuItem.Click += new System.EventHandler(this.changelogToolStripMenuItem_Click);
             // 
@@ -1385,7 +1385,7 @@
             this.donateTipToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.donateTipToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.kofi_logo;
             this.donateTipToolStripMenuItem.Name = "donateTipToolStripMenuItem";
-            this.donateTipToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
+            this.donateTipToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.donateTipToolStripMenuItem.Text = "Donate && Tip (ko-fi)";
             this.donateTipToolStripMenuItem.Click += new System.EventHandler(this.donateTipToolStripMenuItem_Click);
             // 
