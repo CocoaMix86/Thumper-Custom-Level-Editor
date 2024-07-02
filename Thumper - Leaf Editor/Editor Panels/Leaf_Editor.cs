@@ -1074,35 +1074,31 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 
 			List<DataGridViewCell> _listcell = new() { _cells[0], _cells[1] };
-			//if cell with higher column index is in [0], we need to move it to [1].
-			//The order changes depending which cell is selected first
-			if (_cells[0].ColumnIndex > _cells[1].ColumnIndex) {
-				_listcell = new List<DataGridViewCell>() { _cells[1], _cells[0] };
-			}
+			_listcell.Sort((cell1, cell2) => cell1.ColumnIndex.CompareTo(cell2.ColumnIndex));
+
 			//basic math to figure out the rate of change across the amount of beats between selections
-			decimal _start = (decimal?)_listcell[0].Value ?? (decimal)_tracks[_listcell[0].RowIndex]._default;
-			decimal _end = (decimal?)_listcell[1].Value ?? (decimal)_tracks[_listcell[0].RowIndex]._default;
+			decimal _start = (decimal?)_listcell[0].Value ?? 0;
+			decimal _end = (decimal?)_listcell[1].Value ?? 0;
 			decimal _inc = _start;
 			int _beats = _listcell[1].ColumnIndex - _listcell[0].ColumnIndex;
-			decimal _diff = (_end - _start) / _beats;
-
-			PlaySound("UIinterpolate");
+			decimal _diff = Decimal.Round((_end - _start) / _beats, 3);
 
 			for (int x = 1; x < _beats; x++) {
-				_inc = Decimal.Round(_inc + _diff, 3);
+				_inc += _diff;
 				//if interpolating for Color, remove the decimals
 				if (_tracks[_listcell[0].RowIndex].trait_type == "kTraitColor")
 					_inc = Math.Truncate(_inc);
 				trackEditor[_listcell[0].ColumnIndex + x, _listcell[0].RowIndex].Value = _inc;
 			}
-			trackEditor[_listcell[1].ColumnIndex, _listcell[1].RowIndex].Value = _end;
-			trackEditor[_listcell[0].ColumnIndex, _listcell[0].RowIndex].Value = _start;
+			_listcell[0].Value = _start;
+			_listcell[1].Value = _end;
 			//recolor cells after populating
 			TrackUpdateHighlighting(trackEditor.Rows[_listcell[0].RowIndex]);
 			GenerateDataPoints(trackEditor.Rows[_listcell[0].RowIndex]);
 			ShowRawTrackData(trackEditor.Rows[_listcell[0].RowIndex]);
 			//re-enable this
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+			PlaySound("UIinterpolate");
 			SaveLeaf(false, $"Interpolated cells {_listcell[0].ColumnIndex} -> {_listcell[1].ColumnIndex}", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
 		}
 
