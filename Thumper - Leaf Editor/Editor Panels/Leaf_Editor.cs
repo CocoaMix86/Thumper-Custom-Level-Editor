@@ -924,12 +924,7 @@ namespace Thumper_Custom_Level_Editor
 						TrackUpdateHighlighting(r);
 						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_newtrack.highlight_color)), Color.Black, 0.4);
 						//set the headercell names
-						if (_newtrack.friendly_param.Length > 1) {
-							if (_newtrack.param_path == "play")
-								r.HeaderCell.Value = $"{_newtrack.friendly_type} ({_newtrack.obj_name})";
-							else
-								r.HeaderCell.Value = $"{_newtrack.friendly_type} ({_newtrack.friendly_param})";
-						}
+						ChangeTrackName(r);
 					}
 					catch (Exception) { }
 				}
@@ -947,19 +942,19 @@ namespace Thumper_Custom_Level_Editor
 		{
             //finds each distinct row across all selected cells
             List<DataGridViewRow> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-            //iterate over current row to see if any cells have data
-            List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
-			//if YES, clear cell values in row and clear highlighting
-			if ((filledcells.Count > 0 && MessageBox.Show("This track has data. Are you sure you want to clear it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || filledcells.Count <= 0) {
-				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-				foreach (DataGridViewCell dgvc in filledcells) {
-					dgvc.Value = null;
-					TrackUpdateHighlightingSingleCell(dgvc);
-				}
-				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
-				PlaySound("UIdataerase");
-				SaveLeaf(false, "Cleared track", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
-			}
+			if (MessageBox.Show($"{selectedrows.Count} rows selected.\nAre you sure you want to clear them?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+				return;
+			//then get all cells in the rows that have values
+			List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
+			//select all of them
+			foreach (DataGridViewCell dgvc in filledcells) {
+				dgvc.Selected = true;
+            }
+			//then set a single one to null. The "cellvaluechanged" event will handle the rest
+			filledcells[0].Value = null;
+
+			PlaySound("UIdataerase");
+			SaveLeaf(false, $"Cleared {selectedrows.Count} track(s)", $"");
 		}
 
 		private void btnTrackApply_Click(object sender, EventArgs e)
@@ -997,7 +992,8 @@ namespace Thumper_Custom_Level_Editor
 				_tracks[_selecttrack].friendly_param += ", " + dropTrackLane.Text;
 			}
 			//change row header to reflect what the track is
-			ChangeTrackName();
+			GenerateDataPoints(trackEditor.Rows[_selecttrack]);
+			ChangeTrackName(trackEditor.Rows[_selecttrack]);
 			if (!randomizing) {
 				TrackUpdateHighlighting(trackEditor.Rows[_selecttrack]);
 				PlaySound("UIobjectadd");
@@ -1404,14 +1400,14 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 		///Updates row headers to be the Object and Param_Path
-		public void ChangeTrackName()
+		public void ChangeTrackName(DataGridViewRow r)
 		{
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
+			if (_tracks[r.Index].friendly_type == "PLAY SAMPLE")
 				//show the sample name instead
-				trackEditor.CurrentRow.HeaderCell.Value = _tracks[_selecttrack].friendly_type + " (" + _tracks[_selecttrack].obj_name + ")";
+				r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].obj_name + ")";
 			else
-				trackEditor.CurrentRow.HeaderCell.Value = _tracks[_selecttrack].friendly_type + " (" + _tracks[_selecttrack].friendly_param + ")";
+				r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].friendly_param + ")";
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		///Takes values in a row and puts in them in the rich text box, condensed
