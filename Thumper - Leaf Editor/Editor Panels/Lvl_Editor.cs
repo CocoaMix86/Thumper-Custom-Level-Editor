@@ -568,23 +568,21 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlSeqClear_Click(object sender, EventArgs e)
 		{
-			bool _empty = true;
-			//iterate over current row to see if any cells have data
-			foreach (DataGridViewCell dgvc in lvlSeqObjs.CurrentRow.Cells) {
-				if (dgvc.Value != null) {
-					_empty = false;
-					break;
-				}
+			//finds each distinct row across all selected cells
+			List<DataGridViewRow> selectedrows = lvlSeqObjs.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+			if (MessageBox.Show($"{selectedrows.Count} rows selected.\nAre you sure you want to clear them?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+				return;
+			//then get all cells in the rows that have values
+			List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
+			//select all of them
+			foreach (DataGridViewCell dgvc in filledcells) {
+				dgvc.Selected = true;
 			}
-			//if YES, clear cell values in row and clear highlighting
-			if ((!_empty && MessageBox.Show("This track has data. Are you sure you want to clear it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
-				foreach (DataGridViewCell dgvc in lvlSeqObjs.CurrentRow.Cells) {
-					dgvc.Value = null;
-					dgvc.Style = null;
-				}
-				PlaySound("UIdataerase");
-				SaveLvl(false);
-			}
+			//then set a single one to null. The "cellvaluechanged" event will handle the rest
+			filledcells[0].Value = null;
+
+			PlaySound("UIdataerase");
+			SaveLvl(false);
 		}
 
 		private void btnLvlLoopRefresh_Click(object sender, EventArgs e)
