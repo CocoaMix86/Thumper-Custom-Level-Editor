@@ -905,16 +905,12 @@ namespace Thumper_Custom_Level_Editor
 				if (lastbeat > numericUpDown_LeafLength.Value) {
 					DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
 					//YES = extend the leaf and then paste
-					if (_paste == DialogResult.Yes) {
+					if (_paste == DialogResult.Yes)
 						numericUpDown_LeafLength.Value = lastbeat;
-					}
 					//NO = do not extend leaf and then paste
-					else if (_paste == DialogResult.No) {
-					}
 					//CANCEL = do nothing
-					else if (_paste == DialogResult.Cancel) {
+					else if (_paste == DialogResult.Cancel)
 						return;
-					}
 				}
 				//add copied Sequencer_Object to main _tracks list
 				foreach (Sequencer_Object _newtrack in clipboardtracks) {
@@ -949,19 +945,15 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackClear_Click(object sender, EventArgs e)
 		{
-			bool _empty = true;
             //finds each distinct row across all selected cells
             List<DataGridViewRow> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
             //iterate over current row to see if any cells have data
             List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
-			if (filledcells.Count > 0)
-				_empty = false;
 			//if YES, clear cell values in row and clear highlighting
-			if ((!_empty && MessageBox.Show("This track has data. Are you sure you want to clear it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
+			if ((filledcells.Count > 0 && MessageBox.Show("This track has data. Are you sure you want to clear it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || filledcells.Count <= 0) {
 				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				foreach (DataGridViewCell dgvc in filledcells) {
 					dgvc.Value = null;
-					dgvc.Style = null;
 					TrackUpdateHighlightingSingleCell(dgvc);
 				}
 				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
