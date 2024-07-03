@@ -453,6 +453,13 @@ namespace Thumper_Custom_Level_Editor
 			SaveLvl(false);
 		}
 
+		private void btnLvlLeafRandom_Click(object sender, EventArgs e)
+		{
+			List<string> leafs = workingfolderFiles.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[1].Value.ToString().Contains("leaf_")).Select(x => x.Cells[1].Value.ToString()).ToList();
+			string _selectedfilename = $@"{workingfolder}\{leafs[rng.Next(0, leafs.Count)]}.txt";
+			AddLeaftoLvl(_selectedfilename);
+		}
+
 		private void btnLvlPathDelete_Click(object sender, EventArgs e)
 		{
 			if (lvlLeafPaths.CurrentCell.Value == null)
@@ -736,6 +743,7 @@ namespace Thumper_Custom_Level_Editor
 				r.HeaderCell.Value = "Volume Track " + r.Index;
 
 			trackLvlVolumeZoom_Scroll(null, null);
+			btnLvlLeafRandom.Enabled = true;
 			//mark that lvl is saved (just freshly loaded)
 			//SaveLvl(true);
 			loadinglvl = false;
