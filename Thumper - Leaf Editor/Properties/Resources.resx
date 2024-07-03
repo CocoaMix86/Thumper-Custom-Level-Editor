@@ -189,7 +189,11 @@ levelexplorer;E, Control
 nextlvl;F1
 previouslvl;F2
 nextleaf;F3
-previousleaf;F4</value>
+previousleaf;F4
+colordialog;F6
+interpolate;F7
+splitleaf;F8
+randomizerow;F9</value>
   </data>
   <data name="D3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\D3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

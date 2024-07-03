@@ -753,7 +753,7 @@ namespace Thumper_Custom_Level_Editor
                 workingfolderFiles.Rows[offset].Selected = true;
             }
             //Next/Previous leaf keybind
-            if (e.KeyCode == defaultkeybinds["nextleaf"] || e.KeyCode == defaultkeybinds["previousleaf"]) {
+            else if (e.KeyCode == defaultkeybinds["nextleaf"] || e.KeyCode == defaultkeybinds["previousleaf"]) {
                 if (workingfolder == null)
                     return;
                 //depending on key, go next or previous
@@ -773,10 +773,22 @@ namespace Thumper_Custom_Level_Editor
                 workingfolderFiles.Rows[offset].Selected = true;
             }
             //Undo keybind
-            if (e.KeyCode == Keys.Z && e.Control) {
+            else if (e.KeyCode == Keys.Z && e.Control) {
                 if (_undolistleaf.Count <= 1)
                     return;
                 UndoFunction(1);
+            }
+            else if (e.KeyCode == defaultkeybinds["colordialog"]) {
+                btnLeafColors.PerformClick();
+            }
+            else if (e.KeyCode == defaultkeybinds["interpolate"]) {
+                btnLEafInterpLinear.PerformClick();
+            }
+            else if (e.KeyCode == defaultkeybinds["splitleaf"]) {
+                btnLeafSplit.PerformClick();
+            }
+            else if (e.KeyCode == defaultkeybinds["randomizerow"]) {
+                btnLeafRandomValues.PerformClick();
             }
         }
 

@@ -241,12 +241,9 @@ namespace Thumper_Custom_Level_Editor
                     else
                         dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
-
-                if (dgvc.Value != null)
-                    TrackUpdateHighlightingSingleCell(dgvc);
             }
             trackEditor.CellValueChanged += trackEditor_CellValueChanged;
-            //TrackUpdateHighlighting(trackEditor.CurrentRow);
+            TrackUpdateHighlighting(dgvr);
             GenerateDataPoints(dgvr);
             ShowRawTrackData(dgvr);
         }
