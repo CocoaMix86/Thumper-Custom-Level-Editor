@@ -132,11 +132,11 @@ namespace Thumper_Custom_Level_Editor
 		private void vScrollBarTrackEditor_VisibleChanged(object sender, EventArgs e)
 		{
 			if (vScrollBarTrackEditor.Visible) {
-				trackEditor.Location = new Point(trackEditor.Location.X + 15, trackEditor.Location.Y);
+				trackEditor.Location = new Point(vScrollBarTrackEditor.Location.X + 15, trackEditor.Location.Y);
 				trackEditor.Width -= 15;
             }
 			else {
-				trackEditor.Location = new Point(trackEditor.Location.X - 15, trackEditor.Location.Y);
+				trackEditor.Location = new Point(vScrollBarTrackEditor.Location.X, trackEditor.Location.Y);
 				trackEditor.Width += 15;
 			}
 		}
