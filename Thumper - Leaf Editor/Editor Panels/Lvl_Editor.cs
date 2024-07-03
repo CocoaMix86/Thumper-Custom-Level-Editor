@@ -384,36 +384,44 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlLeafUp_Click(object sender, EventArgs e)
 		{
-			try {
-				// get index of the row for the selected cell
-				int rowIndex = lvlLeafList.CurrentRow.Index;
-				if (rowIndex == 0)
-					return;
-                //move leaf in list
-                LvlLeafData selectedLeaf = _lvlleafs[rowIndex];
-				_lvlleafs.Remove(selectedLeaf);
-				//move selected cell up a row to follow the moved item
-				_lvlleafs.Insert(rowIndex - 1, selectedLeaf);
-				lvlLeafList.Rows[rowIndex - 1].Cells[0].Selected = true;
+			List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
+			if (selectedrows.Any(r => r == 0))
+				return;
+			loadinglvl = true;
+			lvlLeafList.ClearSelection();
+			selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
+			foreach (int dgvr in selectedrows) {
+				_lvlleafs.Insert(dgvr - 1, _lvlleafs[dgvr]);
+				_lvlleafs.RemoveAt(dgvr + 1);
 			}
-			catch {	}
+			lvlLeafList.ClearSelection();
+			foreach (int dgvr in selectedrows) {
+				lvlLeafList.Rows[dgvr - 1].Selected = true;
+			}
+			loadinglvl = false;
+			ColorLvlVolumeSequencer();
+			SaveLvl(false);
 		}
 
 		private void btnLvlLeafDown_Click(object sender, EventArgs e)
 		{
-			try {
-				// get index of the row for the selected cell
-				int rowIndex = lvlLeafList.CurrentRow.Index;
-				if (rowIndex == _lvlleafs.Count - 1)
-					return;
-                //move leaf in list
-                LvlLeafData selectedLeaf = _lvlleafs[rowIndex];
-				_lvlleafs.Remove(selectedLeaf);
-				//move selected cell up a row to follow the moved item
-				_lvlleafs.Insert(rowIndex + 1, selectedLeaf);
-				lvlLeafList.Rows[rowIndex + 1].Cells[0].Selected = true;
+			List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
+			if (selectedrows.Any(r => r == lvlLeafList.RowCount - 1))
+				return;
+			loadinglvl = true;
+			lvlLeafList.ClearSelection();
+			selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
+			foreach (int dgvr in selectedrows) {
+				_lvlleafs.Insert(dgvr + 2, _lvlleafs[dgvr]);
+				_lvlleafs.RemoveAt(dgvr);
 			}
-			catch {	}
+			lvlLeafList.ClearSelection();
+			foreach (int dgvr in selectedrows) {
+				lvlLeafList.Rows[dgvr + 1].Selected = true;
+			}
+			loadinglvl = false;
+			ColorLvlVolumeSequencer();
+			SaveLvl(false);
 		}
 
 		///COPY PASTE of leaf
