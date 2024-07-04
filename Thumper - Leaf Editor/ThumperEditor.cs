@@ -790,6 +790,9 @@ namespace Thumper_Custom_Level_Editor
             else if (e.KeyCode == defaultkeybinds["randomizerow"]) {
                 btnLeafRandomValues.PerformClick();
             }
+            else if (e.KeyCode == defaultkeybinds["toggleautoplace"]) {
+                btnLeafAutoPlace.PerformClick();
+            }
         }
 
         private void SetKeyBinds()

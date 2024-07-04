@@ -70,6 +70,11 @@ namespace Thumper_Custom_Level_Editor
             this.labelKeys = new System.Windows.Forms.Label();
             this.labelKeybindName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.keybindToggleAutoPlace = new System.Windows.Forms.Label();
+            this.keybindRandomizeRow = new System.Windows.Forms.Label();
+            this.keybindSplitLeaf = new System.Windows.Forms.Label();
+            this.keybindInterpolate = new System.Windows.Forms.Label();
+            this.keybindColorDialog = new System.Windows.Forms.Label();
             this.keybindPreviousLeaf = new System.Windows.Forms.Label();
             this.keybindNextLeaf = new System.Windows.Forms.Label();
             this.keybindPreviousLvl = new System.Windows.Forms.Label();
@@ -100,10 +105,6 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafOpen = new System.Windows.Forms.Label();
             this.keybindLeafNew = new System.Windows.Forms.Label();
             this.txtKeybindSearch = new System.Windows.Forms.TextBox();
-            this.keybindRandomizeRow = new System.Windows.Forms.Label();
-            this.keybindSplitLeaf = new System.Windows.Forms.Label();
-            this.keybindInterpolate = new System.Windows.Forms.Label();
-            this.keybindColorDialog = new System.Windows.Forms.Label();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -677,6 +678,7 @@ namespace Thumper_Custom_Level_Editor
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.keybindToggleAutoPlace);
             this.panel1.Controls.Add(this.keybindRandomizeRow);
             this.panel1.Controls.Add(this.keybindSplitLeaf);
             this.panel1.Controls.Add(this.keybindInterpolate);
@@ -716,6 +718,86 @@ namespace Thumper_Custom_Level_Editor
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel1.Size = new System.Drawing.Size(364, 293);
             this.panel1.TabIndex = 132;
+            // 
+            // keybindToggleAutoPlace
+            // 
+            this.keybindToggleAutoPlace.AutoSize = true;
+            this.keybindToggleAutoPlace.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindToggleAutoPlace.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindToggleAutoPlace.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindToggleAutoPlace.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindToggleAutoPlace.Location = new System.Drawing.Point(5, 561);
+            this.keybindToggleAutoPlace.Name = "keybindToggleAutoPlace";
+            this.keybindToggleAutoPlace.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindToggleAutoPlace.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindToggleAutoPlace.Size = new System.Drawing.Size(126, 17);
+            this.keybindToggleAutoPlace.TabIndex = 165;
+            this.keybindToggleAutoPlace.Tag = "toggleautoplace";
+            this.keybindToggleAutoPlace.Text = "Toggle Auto Place";
+            // 
+            // keybindRandomizeRow
+            // 
+            this.keybindRandomizeRow.AutoSize = true;
+            this.keybindRandomizeRow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindRandomizeRow.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindRandomizeRow.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindRandomizeRow.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindRandomizeRow.Location = new System.Drawing.Point(5, 544);
+            this.keybindRandomizeRow.Name = "keybindRandomizeRow";
+            this.keybindRandomizeRow.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindRandomizeRow.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindRandomizeRow.Size = new System.Drawing.Size(98, 17);
+            this.keybindRandomizeRow.TabIndex = 164;
+            this.keybindRandomizeRow.Tag = "randomizerow";
+            this.keybindRandomizeRow.Text = "Randomize Row";
+            // 
+            // keybindSplitLeaf
+            // 
+            this.keybindSplitLeaf.AutoSize = true;
+            this.keybindSplitLeaf.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindSplitLeaf.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindSplitLeaf.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindSplitLeaf.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindSplitLeaf.Location = new System.Drawing.Point(5, 527);
+            this.keybindSplitLeaf.Name = "keybindSplitLeaf";
+            this.keybindSplitLeaf.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindSplitLeaf.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindSplitLeaf.Size = new System.Drawing.Size(77, 17);
+            this.keybindSplitLeaf.TabIndex = 163;
+            this.keybindSplitLeaf.Tag = "splitleaf";
+            this.keybindSplitLeaf.Text = "Split Leaf";
+            // 
+            // keybindInterpolate
+            // 
+            this.keybindInterpolate.AutoSize = true;
+            this.keybindInterpolate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindInterpolate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindInterpolate.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindInterpolate.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindInterpolate.Location = new System.Drawing.Point(5, 510);
+            this.keybindInterpolate.Name = "keybindInterpolate";
+            this.keybindInterpolate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindInterpolate.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindInterpolate.Size = new System.Drawing.Size(84, 17);
+            this.keybindInterpolate.TabIndex = 162;
+            this.keybindInterpolate.Tag = "interpolate";
+            this.keybindInterpolate.Text = "Interpolate";
+            // 
+            // keybindColorDialog
+            // 
+            this.keybindColorDialog.AutoSize = true;
+            this.keybindColorDialog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindColorDialog.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindColorDialog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindColorDialog.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindColorDialog.Location = new System.Drawing.Point(5, 493);
+            this.keybindColorDialog.Name = "keybindColorDialog";
+            this.keybindColorDialog.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindColorDialog.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindColorDialog.Size = new System.Drawing.Size(91, 17);
+            this.keybindColorDialog.TabIndex = 161;
+            this.keybindColorDialog.Tag = "colordialog";
+            this.keybindColorDialog.Text = "Color Picker";
             // 
             // keybindPreviousLeaf
             // 
@@ -1222,70 +1304,6 @@ namespace Thumper_Custom_Level_Editor
             this.txtKeybindSearch.TextChanged += new System.EventHandler(this.txtKeybindSearch_TextChanged);
             this.txtKeybindSearch.Enter += new System.EventHandler(this.txtKeybindSearch_Enter);
             // 
-            // keybindRandomizeRow
-            // 
-            this.keybindRandomizeRow.AutoSize = true;
-            this.keybindRandomizeRow.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.keybindRandomizeRow.Dock = System.Windows.Forms.DockStyle.Top;
-            this.keybindRandomizeRow.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.keybindRandomizeRow.ForeColor = System.Drawing.Color.Aqua;
-            this.keybindRandomizeRow.Location = new System.Drawing.Point(5, 544);
-            this.keybindRandomizeRow.Name = "keybindRandomizeRow";
-            this.keybindRandomizeRow.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.keybindRandomizeRow.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.keybindRandomizeRow.Size = new System.Drawing.Size(98, 17);
-            this.keybindRandomizeRow.TabIndex = 164;
-            this.keybindRandomizeRow.Tag = "randomizerow";
-            this.keybindRandomizeRow.Text = "Randomize Row";
-            // 
-            // keybindSplitLeaf
-            // 
-            this.keybindSplitLeaf.AutoSize = true;
-            this.keybindSplitLeaf.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.keybindSplitLeaf.Dock = System.Windows.Forms.DockStyle.Top;
-            this.keybindSplitLeaf.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.keybindSplitLeaf.ForeColor = System.Drawing.Color.Aqua;
-            this.keybindSplitLeaf.Location = new System.Drawing.Point(5, 527);
-            this.keybindSplitLeaf.Name = "keybindSplitLeaf";
-            this.keybindSplitLeaf.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.keybindSplitLeaf.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.keybindSplitLeaf.Size = new System.Drawing.Size(77, 17);
-            this.keybindSplitLeaf.TabIndex = 163;
-            this.keybindSplitLeaf.Tag = "splitleaf";
-            this.keybindSplitLeaf.Text = "Split Leaf";
-            // 
-            // keybindInterpolate
-            // 
-            this.keybindInterpolate.AutoSize = true;
-            this.keybindInterpolate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.keybindInterpolate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.keybindInterpolate.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.keybindInterpolate.ForeColor = System.Drawing.Color.Aqua;
-            this.keybindInterpolate.Location = new System.Drawing.Point(5, 510);
-            this.keybindInterpolate.Name = "keybindInterpolate";
-            this.keybindInterpolate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.keybindInterpolate.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.keybindInterpolate.Size = new System.Drawing.Size(84, 17);
-            this.keybindInterpolate.TabIndex = 162;
-            this.keybindInterpolate.Tag = "interpolate";
-            this.keybindInterpolate.Text = "Interpolate";
-            // 
-            // keybindColorDialog
-            // 
-            this.keybindColorDialog.AutoSize = true;
-            this.keybindColorDialog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.keybindColorDialog.Dock = System.Windows.Forms.DockStyle.Top;
-            this.keybindColorDialog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.keybindColorDialog.ForeColor = System.Drawing.Color.Aqua;
-            this.keybindColorDialog.Location = new System.Drawing.Point(5, 493);
-            this.keybindColorDialog.Name = "keybindColorDialog";
-            this.keybindColorDialog.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.keybindColorDialog.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.keybindColorDialog.Size = new System.Drawing.Size(91, 17);
-            this.keybindColorDialog.TabIndex = 161;
-            this.keybindColorDialog.Tag = "colordialog";
-            this.keybindColorDialog.Text = "Color Picker";
-            // 
             // CustomizeWorkspace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1400,5 +1418,6 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label keybindSplitLeaf;
         private System.Windows.Forms.Label keybindInterpolate;
         private System.Windows.Forms.Label keybindColorDialog;
+        private System.Windows.Forms.Label keybindToggleAutoPlace;
     }
 }
