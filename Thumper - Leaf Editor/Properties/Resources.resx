@@ -341,7 +341,10 @@ toggleautoplace;F10</value>
     <value>..\image assets\icon-trash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="changelog" xml:space="preserve">
-    <value>NEW
+    <value>I have setup a Ko-Fi for myself. Any amount of support is greatly appreciated!
+https://ko-fi.com/cocoamix
+
+NEW
 🌟 Undo on Leaf (Ctrl+Z)
 🌟 Several buttons have new sound effects.
 🌟 Right-click on application in taskbar to access and open Recent Levels.
@@ -360,27 +363,13 @@ BUG FIXES
 ✅ Raw data not updating when randomzing row values
 ✅ Clear Row can't clear multiple tracks
 ✅ Interpolator throws errors if fields are blank
-✅ error when renaming a file to another name that already exist
-✅ error when creating and saving a leaf with no open project
-✅ error when pressing "add random tunnel" when no leaf exists in the lvl
-✅ error when pressing "random values" with no track selected
-✅ error when pressing "load lvl" buttons for Intro, Checkpoint, and Rest in the master with no lvl set
-✅ error when renaming a lvl and no gate has been created
-✅ error when adding random tracks and you somehow have 0 samples loaded
-✅ error when adding a new sample with no open project
-✅ error when interpolating from newly set cells. Self-fixes if you would reload the leaf
-✅ error when selecting a level from the Recent list and it no longer exists
-✅ error when removing the bottom-most leaf in a lvl
-✅ error when setting time signature to not #/# format or using non-number characters
-✅ error when leaf editor too small to display any cells
-✅ error when trying to load a different level and the current level folder is deleted
 ✅ Sample panel not visible on first launch
 ✅ Golden beeble never shows up
 ✅ The first lvl created of a new level has no loop tracks available until it is reloaded
 ✅ Splitting a leaf doesn't visually update it until its reloaded
 ✅ "Apply to Track" button is enabled on app load, when no tracks exist. Causes error when pressed
 ✅ Switching between a gate with RANDOM enabled and any other gate does not update the boss field
-✅ Recent levels list doesn't save if the app crashes
+✅ Recent Levels list doesn't save if the app crashes
 ✅ If you delete a leaf from a lvl, its tunnels remain showing and can be accidentally saved into the next leaf in the list
 ✅ Making a change in any of the panels and then switching to another file doesn't clear the "unsaved" red color
 ✅ unsaved dialog doesnt show for lvl, gate, sample when switching files
@@ -397,28 +386,56 @@ BUG FIXES
 ✅ beeblehappy never plays a noise when it shows up
 ✅ Unable to open some older levels as they are missing data that was added in newer versions
 ✅ custom colors don't save in color picker
+✅ Missing check for illegal characters when renaming/duplicating files
+✅ Duplicate File and Split Leaf do not check for existing file name
+✅ unable to navigate in volume sequencer using arrow keys
+✅ splitting leaf would load the new leaf, but saving it would save to the previous leaf
+✅ "copy all paths" button wouldn't enable when adding a path to a leaf in a lvl
+✅ Loop samples dropdown doesn't update to include newly added samp files
+✅ loading problems if you use "." in file names
+✅ error when renaming a file to another name that already exist
+✅ error when creating and saving a leaf with no open project
+✅ error when pressing "add random tunnel" when no leaf exists in the lvl
+✅ error when pressing "random values" with no track selected
+✅ error when pressing "load lvl" buttons for Intro, Checkpoint, and Rest in the master with no lvl set
+✅ error when renaming a lvl and no gate has been created
+✅ error when adding random tracks and you somehow have 0 samples loaded
+✅ error when adding a new sample with no open project
+✅ error when interpolating from newly set cells. Self-fixes if you would reload the leaf
+✅ error when selecting a level from the Recent list and it no longer exists
+✅ error when removing the bottom-most leaf in a lvl
+✅ error when setting time signature to not #/# format or using non-number characters
+✅ error when leaf editor too small to display any cells
+✅ error when trying to load a different level and the current level folder is deleted
+✅ error when loading lvl with samples that no longer exist
+✅ error when trying to load bad data in Raw import
+✅ error when trying to paste tracks to a blank leaf
 
 SUGGESTED ADDITIONS/CHANGES
-➕ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
-➕ allow right-click delete for loop track volume sequencer cells
-➕ dragging the mouse with right click to remove multiple beats in one swoop
-➕ "track objects" and "spn_default" have been updated with new objects to use!
-➕ added button to add random tunnels
-➕ added "open level folder" button to File menu
-➕ auto-dock panels on first launch
-➕ Moved LEVEL DETAILS button out of the Working folder file list and to its own dedicated button
-➕ Filter file buttons now has a "clear filters" button
-➕ Paths/Tunnels list now shows which leaf is currently active
-➕ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow
-➕ various UI changes to make things more consistent
-➕ F3 and F4: next/previous leaf (you can change these keybinds)
-➕ F1 and F2: next/previous lvl (you can change these keybinds)
+⏺️ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
+⏺️ allow right-click delete for loop track volume sequencer cells
+⏺️ dragging the mouse with right click to remove multiple beats in one swoop
+⏺️ "track objects" and "spn_default" have been updated with new objects to use!
+⏺️ added button to add random tunnels
+⏺️ added "open level folder" button to File menu
+⏺️ auto-dock panels on first launch
+⏺️ Moved LEVEL DETAILS button out of the Working folder file list and to its own dedicated button
+⏺️ Filter file buttons now has a "clear filters" button
+⏺️ Paths/Tunnels list now shows which leaf is currently active
+⏺️ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow
+⏺️ various UI changes to make things more consistent
+⏺️ F3 and F4: next/previous leaf (you can change these keybinds)
+⏺️ F1 and F2: next/previous lvl (you can change these keybinds)
+⏺️ Sample editor cells can be multiselect and mass edited at the same time
+⏺️ Right-click delete should not delete highlighted cells if deleting a non-highlighted cell
+⏺️ "Open level folder" now opens 1 folder level up from where the workingfolder is
 
 MISC
-✅ Decreased size of EXE a bunch
-✅ Improved load speed and performance
-✅ Minor UI changes
-✅ Added "open template" button to Leaf panel</value>
+👍 Decreased size of EXE a bunch
+👍 Improved load speed and performance
+👍 Minor UI changes
+👍 Added "open template" button to Leaf panel
+👍 All values in leaf editor limited to 3 decimal places (for my sanity, and better display for users)</value>
   </data>
   <data name="icon_import" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

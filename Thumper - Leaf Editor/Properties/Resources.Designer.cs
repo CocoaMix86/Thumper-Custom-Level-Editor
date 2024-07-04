@@ -221,18 +221,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NEW
+        ///   Looks up a localized string similar to I have setup a Ko-Fi for myself. Any amount of support is greatly appreciated!
+        ///https://ko-fi.com/cocoamix
+        ///
+        ///NEW
         ///🌟 Undo on Leaf (Ctrl+Z)
         ///🌟 Several buttons have new sound effects.
         ///🌟 Right-click on application in taskbar to access and open Recent Levels.
         ///🌟 Search button in the Working Folder tells you where a file is referenced.
         ///🌟 Ctrl+X to cut cells in leaf editor. Paste (an existing function) with Ctrl+V.
         ///🌟 Custom keybinds (Edit &gt; Preferences menu)
-        ///🌟 View your level&apos;s total runtime in the Master panel
-        ///
-        ///BUG FIXES
-        ///✅ object list is collapsed to the left when loading a new leaf
-        ///✅ renaming files now a [rest of string was truncated]&quot;;.
+        ///🌟 View your level&apos;s total runtime in the Mas [rest of string was truncated]&quot;;.
         /// </summary>
         public static string changelog {
             get {
