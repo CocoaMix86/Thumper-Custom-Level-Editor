@@ -423,9 +423,9 @@ namespace Thumper_Custom_Level_Editor
             this.chkDissonance.ForeColor = System.Drawing.Color.White;
             this.chkDissonance.Location = new System.Drawing.Point(286, 312);
             this.chkDissonance.Name = "chkDissonance";
-            this.chkDissonance.Size = new System.Drawing.Size(91, 20);
+            this.chkDissonance.Size = new System.Drawing.Size(98, 20);
             this.chkDissonance.TabIndex = 14;
-            this.chkDissonance.Text = "Dissoance";
+            this.chkDissonance.Text = "Dissonance";
             this.chkDissonance.UseVisualStyleBackColor = true;
             // 
             // label8
