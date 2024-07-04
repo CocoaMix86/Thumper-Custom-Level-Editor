@@ -817,7 +817,7 @@ namespace Thumper_Custom_Level_Editor
                 //finds each distinct row across all selected cells
                 List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row.Index.CompareTo(row2.Index));
-				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => new { cell.ColumnIndex, cell.RowIndex }).ToList();
+				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().ToList();
 				foreach (DataGridViewRow dgvr in selectedrows) {
 					//check if one of the rows is the top row. If it is, stop
 					if (dgvr.Index == 0)
@@ -833,9 +833,10 @@ namespace Thumper_Custom_Level_Editor
 					dgv.Rows.Insert(_newtrack.Item3 - 1, _newtrack.Item2);
 				}
 				//clear selected cells and shift them up
+				dgv.CurrentCell = selectedrows[0].Cells[0];
 				dgv.ClearSelection();
 				foreach (var cell in selectedcells) {
-					dgv[cell.ColumnIndex, cell.RowIndex - 1].Selected = true;
+					dgv[cell.ColumnIndex, cell.RowIndex].Selected = true;
 				}
 				//sets flag that leaf has unsaved changes
 				SaveLeaf(false, "Move track up", $"{_tracks[_selectedtracks[0].Item3 - 1].friendly_type} {_tracks[_selectedtracks[0].Item3 - 1].friendly_param}");
@@ -867,6 +868,7 @@ namespace Thumper_Custom_Level_Editor
 					dgv.Rows.Insert(_newtrack.Item3 + 1, _newtrack.Item2);
 				}
 				//clear selected cells and shift them up
+				dgv.CurrentCell = selectedrows[0].Cells[0];
 				dgv.ClearSelection();
 				foreach (var cell in selectedcells) {
 					dgv[cell.ColumnIndex, cell.RowIndex + 1].Selected = true;
