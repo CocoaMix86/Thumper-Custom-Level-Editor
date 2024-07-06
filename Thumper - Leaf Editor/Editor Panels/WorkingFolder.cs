@@ -391,6 +391,11 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLevelFolder_Click(object sender, EventArgs e)
 		{
+			if (!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample) {
+				if (MessageBox.Show("Some files are unsaved. Are you sure you want to open a different folder?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No) {
+					return;
+				}
+			}
 			cfd_lvl.Title = "Select the level folder";
 			//check if the game_dir has been set before. It'll be empty if starting for the first time
 			cfd_lvl.InitialDirectory = workingfolder == null ? AppLocation : Path.GetDirectoryName(workingfolder);
