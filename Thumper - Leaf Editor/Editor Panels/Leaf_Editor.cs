@@ -153,7 +153,7 @@ namespace Thumper_Custom_Level_Editor
 				if (trackEditor.FirstDisplayedScrollingRowIndex == -1 || trackEditor.FirstDisplayedScrollingColumnIndex == -1)
 					return;
 				if (leafeditorcell != -1) {
-					trackEditor.HorizontalScrollingOffset = trackEditor.HorizontalScrollingOffset + e.Delta < 0 ? 0 : trackEditor.HorizontalScrollingOffset + e.Delta;
+					trackEditor.HorizontalScrollingOffset = trackEditor.HorizontalScrollingOffset + (e.Delta * -1) < 0 ? 0 : trackEditor.HorizontalScrollingOffset + (e.Delta * -1);
 				}
 				else {
 					if (e.Delta > 0) {
