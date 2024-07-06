@@ -508,6 +508,10 @@ namespace Thumper_Custom_Level_Editor
         private void btnLvlPathClear_Click(object sender, EventArgs e)
         {
             int idx = lvlLeafList.CurrentRow.Index;
+			if (_lvlleafs[idx].paths.Count > 0) {
+				if (MessageBox.Show("Are you sure you want to clear all?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+					return;
+            }
 			_lvlleafs[idx].paths.Clear();
 			LvlUpdatePaths(idx);
             SaveLvl(false);
