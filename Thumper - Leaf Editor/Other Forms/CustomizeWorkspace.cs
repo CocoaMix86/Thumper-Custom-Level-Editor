@@ -143,7 +143,9 @@ namespace Thumper_Custom_Level_Editor
             //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
                 //the "14" is a leftpad empty space
-                _lbl.Text = $"{_lbl.Text.Split('.')[0],14}" + $".....{defaultkeybinds[(string)_lbl.Tag].ToString().Replace(",", " +")}";
+                List<string> mod = defaultkeybinds[(string)_lbl.Tag].ToString().Split(new[] {", "}, StringSplitOptions.None).ToList();
+                mod.Reverse();
+                _lbl.Text = $"{_lbl.Text.Split('.')[0],14}" + $".....{String.Join(" + ", mod)}";
             }
         }
         private void keybindLabel_Click(object sender, EventArgs e)
@@ -159,7 +161,7 @@ namespace Thumper_Custom_Level_Editor
             //make the keybind setting panel show up
             panelSetKeybind.Visible = true;
             labelKeybindName.Text = $"Set Keybind - {lbltxt[0].Trim()}";
-            labelKeys.Text = lbltxt.Last().Replace(",", " +");
+            labelKeys.Text = lbltxt.Last();
         }
         private void CustomizeWorkspace_KeyDown(object sender, KeyEventArgs e)
         {
@@ -180,7 +182,7 @@ namespace Thumper_Custom_Level_Editor
                 labelKeys.ForeColor = cantusethiskey ? Color.Red : Color.White;
                 btnSetKeybind.Enabled = !cantusethiskey;
                 btnSetKeybind.BackColor = cantusethiskey ? Color.Gray : Color.Green;
-                labelKeys.Text = $"{e.KeyCode} + {e.Modifiers.ToString().Replace(",", " +")}";
+                labelKeys.Text = $"{e.Modifiers.ToString().Replace(",", " +")} + {e.KeyCode}";
             }
         }
         private void btnSetKeybind_Click(object sender, EventArgs e)
@@ -190,7 +192,9 @@ namespace Thumper_Custom_Level_Editor
             defaultkeybinds[keybindname] = lastpress;
             //update the keybind label
             //the "14" is a leftpad empty space
-            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{defaultkeybinds[keybindname].ToString().Replace(",", " +")}";
+            List<string> mod = defaultkeybinds[keybindname].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
+            mod.Reverse();
+            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{String.Join(" + ", mod)}";
             panelSetKeybind.Visible = false;
             ignorekeys = true;
         }
