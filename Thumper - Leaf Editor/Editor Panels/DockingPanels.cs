@@ -166,8 +166,9 @@ namespace Thumper_Custom_Level_Editor
 
         private void editorpanelDoubleClick(object sender, EventArgs e)
         {
-            if (!this.Controls.Contains((Control)sender))
-                UndockPanel((Control)sender, true);
+            Control _editorpanel = ((Control)sender).Parent;
+            if (!this.Controls.Contains(_editorpanel))
+                UndockPanel(_editorpanel, true);
         }
         #endregion
 
