@@ -459,3 +459,6 @@ camera zoom out;-8355712
 track smoke;-1776412
 contrast_noise;-1257729
 red_noise;-2083776
+red gamma2;-65536
+green gamma3;-16711872
+blue gamma3;-16776961
