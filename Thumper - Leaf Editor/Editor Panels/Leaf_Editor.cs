@@ -818,11 +818,15 @@ namespace Thumper_Custom_Level_Editor
                 List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row.Index.CompareTo(row2.Index));
 				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().ToList();
+
+				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				foreach (DataGridViewRow dgvr in selectedrows) {
 					//check if one of the rows is the top row. If it is, stop
 					if (dgvr.Index == 0)
 						return;
-
+					//this makes sure the row has at least 1 value in it. Otherwise the rowindex gets lost for somereason
+					if (dgvr.Cells[0].Value == null)
+						dgvr.Cells[0].Value = 1.907m;
 					_selectedtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow, int>(_tracks[dgvr.Index], dgvr, dgvr.Index));
 				}
 				//iterate over rows and shift them up 1 index
@@ -831,7 +835,11 @@ namespace Thumper_Custom_Level_Editor
 					dgv.Rows.Remove(_newtrack.Item2);
 					_tracks.Insert(_newtrack.Item3 - 1, _newtrack.Item1);
 					dgv.Rows.Insert(_newtrack.Item3 - 1, _newtrack.Item2);
+
+					if ((decimal)_newtrack.Item2.Cells[0].Value == 1.907m)
+						_newtrack.Item2.Cells[0].Value = null;
 				}
+				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				//clear selected cells and shift them up
 				dgv.CurrentCell = selectedrows[0].Cells[0];
 				dgv.ClearSelection();
@@ -853,11 +861,14 @@ namespace Thumper_Custom_Level_Editor
                 List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
 				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => new { cell.ColumnIndex, cell.RowIndex }).ToList();
+				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				foreach (DataGridViewRow dgvr in selectedrows) {
 					//check if one of the rows is the top row. If it is, stop
 					if (dgvr.Index >= dgv.RowCount - 1)
 						return;
-
+					//this makes sure the row has at least 1 value in it. Otherwise the rowindex gets lost for somereason
+					if (dgvr.Cells[0].Value == null)
+						dgvr.Cells[0].Value = 1.907m;
 					_selectedtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow, int>(_tracks[dgvr.Index], dgvr, dgvr.Index));
 				}
 				//iterate over rows and shift them up 1 index
@@ -866,7 +877,11 @@ namespace Thumper_Custom_Level_Editor
 					dgv.Rows.Remove(_newtrack.Item2);
 					_tracks.Insert(_newtrack.Item3 + 1, _newtrack.Item1);
 					dgv.Rows.Insert(_newtrack.Item3 + 1, _newtrack.Item2);
+
+					if ((decimal)_newtrack.Item2.Cells[0].Value == 1.907m)
+						_newtrack.Item2.Cells[0].Value = null;
 				}
+				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				//clear selected cells and shift them up
 				dgv.CurrentCell = selectedrows[0].Cells[0];
 				dgv.ClearSelection();
