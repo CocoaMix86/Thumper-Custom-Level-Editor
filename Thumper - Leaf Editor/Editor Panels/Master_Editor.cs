@@ -33,7 +33,7 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedmaster;
 		string _loadedmastertemp;
 		dynamic masterjson;
-		MasterLvlData clipboardmaster = new();
+		List<MasterLvlData> clipboardmaster = new();
 		ObservableCollection<MasterLvlData> _masterlvls = new();
 		#endregion
 
@@ -360,15 +360,16 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnMasterLvlCopy_Click(object sender, EventArgs e)
 		{
-			MasterLvlData selectedlvl = _masterlvls[masterLvlList.CurrentRow.Index];
-			clipboardmaster = selectedlvl.Clone();
+			List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+			clipboardmaster = _masterlvls.Where(x => selectedrows.Contains(_masterlvls.IndexOf(x))).ToList(); 
 			PlaySound("UIkcopy");
 			btnMasterLvlPaste.Enabled = true;
 		}
 
 		private void btnMasterLvlPaste_Click(object sender, EventArgs e)
 		{
-			_masterlvls.Insert(masterLvlList.CurrentRow.Index + 1, clipboardmaster);
+			foreach (MasterLvlData mld in clipboardmaster)
+				_masterlvls.Insert(masterLvlList.CurrentRow.Index + 1, mld.Clone());
 			PlaySound("UIkpaste");
 		}
 
