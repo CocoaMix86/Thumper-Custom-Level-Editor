@@ -206,7 +206,6 @@ namespace Thumper_Custom_Level_Editor
                 else
                     MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
                 Properties.Settings.Default.version = "2.2beta11";
-                Properties.Settings.Default.Save();
             }
             ///Create directory for leaf templates
             if (!Directory.Exists($@"{AppLocation}\templates")) {
