@@ -554,14 +554,14 @@ namespace Thumper_Custom_Level_Editor
             JObject _save = new() {
                 { "obj_type", "SequinMaster" },
                 { "obj_name", "sequin.master" },
-                { "skybox_name", dropMasterSkybox.Text },
+                { "skybox_name", dropMasterSkybox.Text.Replace("<none>", "") },
                 { "intro_lvl_name", dropMasterIntro.Text.Replace("<none>", "") }
             };
             JArray groupings = new();
 			foreach (MasterLvlData group in _masterlvls) {
                 JObject s = new() {
-                    { "lvl_name", group.lvlname ?? "" },
-                    { "gate_name", group.gatename ?? "" },
+                    { "lvl_name", group.lvlname.Replace("<none>", "") ?? "" },
+                    { "gate_name", group.gatename.Replace("<none>", "") ?? "" },
                     { "checkpoint", group.checkpoint.ToString() },
                     { "checkpoint_leader_lvl_name", group.checkpoint_leader.Replace("<none>", "") ?? "" },
                     { "rest_lvl_name", group.rest.Replace("<none>", "") ?? "" },
