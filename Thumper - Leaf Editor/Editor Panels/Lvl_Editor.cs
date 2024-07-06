@@ -846,7 +846,7 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			_lvlsamples.Clear();
             //find all samp_ files in the level folder
-            string[] _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt");
+            List<string> _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
 			//iterate over each file
 			foreach (string f in _sampfiles) {
 				//parse file to JSON
