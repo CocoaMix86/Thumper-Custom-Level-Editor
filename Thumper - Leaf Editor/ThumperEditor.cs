@@ -198,6 +198,16 @@ namespace Thumper_Custom_Level_Editor
         ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
+            ///version check
+            if (Properties.Settings.Default.version != "2.2beta11") {
+                ShowChangelog();
+                if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    regenerateTemplateFilesToolStripMenuItem_Click(null, null);
+                else
+                    MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
+                Properties.Settings.Default.version = "2.2beta11";
+                Properties.Settings.Default.Save();
+            }
             ///Create directory for leaf templates
             if (!Directory.Exists($@"{AppLocation}\templates")) {
                 regenerateTemplateFilesToolStripMenuItem_Click(null, null);
@@ -213,6 +223,7 @@ namespace Thumper_Custom_Level_Editor
             InitializeTracks(gateLvlList, false);
             InitializeTracks(workingfolderFiles, false);
             InitializeTracks(sampleList, false);
+            //call method that imports objects from track_objects.txt (for Leaf editing)
             ImportObjects();
             InitializeLeafStuff();
             InitializeLvlStuff();
@@ -238,15 +249,6 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.Init(toolStripChangelog);
             //write required audio files for playback
             InitializeSounds();
-            //call method that imports objects from track_objects.txt (for Leaf editing)
-            ///version check
-            if (Properties.Settings.Default.version != "2.2beta10") {
-                ShowChangelog();
-                //MessageBox.Show($"Thumper Custom Level Editor v2.2 Changelog\n{Properties.Resources.changelog}", "NEW VERSION NOTICE!");
-                //regenerateTemplateFilesToolStripMenuItem_Click(null, null);
-                Properties.Settings.Default.version = "2.2beta10";
-                Properties.Settings.Default.Save();
-            }
             //set panels to their last saved dock
             SetDockLocations();
             SetKeyBinds();
@@ -278,6 +280,7 @@ namespace Thumper_Custom_Level_Editor
             btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
             //colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+
             //load recent levels 
             List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
             if (levellist.Count > 0 && LevelToLoad.Length < 2)
@@ -291,7 +294,10 @@ namespace Thumper_Custom_Level_Editor
                 else
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
+
+            //finish loading
             Properties.Settings.Default.firstrun = false;
+            Properties.Settings.Default.Save();
             PlaySound("UIboot");
         }
         ///
