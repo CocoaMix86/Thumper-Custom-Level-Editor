@@ -1715,6 +1715,58 @@
 'scale': [1, 1, 1],
 'objlib_path': 'boss/boss_7/teeth_tunnel.objlib',
 'bucket': 'kBucketTerrain'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'dust.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'global/dust.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'ring_pulse.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'levels/decorators/decorative/ring_pulse.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'gate_boss.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'props/gate_boss.objlib',
+'bucket': 'kBucketEffect'
+},
+{
+'obj_type': 'EntitySpawner',
+'obj_name': 'glass_shatter.spn',
+'xfm_name': '',
+'constraint': 'kConstraintParent',
+'pos': [0, 0, 0],
+'rot_x': [1, 0, 0],
+'rot_y': [0, 1, 0],
+'rot_z': [0, 0, 1],
+'scale': [1, 1, 1],
+'objlib_path': 'global/ambient_decorators/glass_shatter.objlib',
+'bucket': 'kBucketEffect'
 }
 ]
 }

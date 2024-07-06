@@ -84,6 +84,12 @@ boss_shield.spn;boss_shield;boss_shield.ent;kTraitBool;True;0;[2,1,1,1,1,'kInten
 boss_shield.spn;boss_shield_2;boss_shield_2.ent;kTraitBool;True;0;[2,1,1,1,1,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 boss_shield.spn;boss_shield_3;boss_shield_3.ent;kTraitBool;True;0;[2,1,1,1,1,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ###
+BOSS EFFECTS
+boss
+starfish_loop_start.flow;start;0x8b94465f;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+boss_frac.flow;jump;0x1fe1cdd8;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+boss_frac_pulse.flow;pulse;0x2c16d809;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+###
 TENTACLES
 tentacle
 demo_fingers_set.spn;demo fingers1[16 beats];fingers1.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
@@ -331,6 +337,7 @@ ring_pulse.spn;ring_pulse_yellow_high;ring_pulse_yellow_high.ent;kTraitBool;True
 ring_pulse.spn;ring_pulse_grey;ring_pulse_grey.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ring_pulse_checkpoint.spn;ring_pulse_checkpoint;ring_pulse_checkpoint.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ring_pulse.spn;spinning white egg;weapon.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+glass_shatter.spn;glass_shatter;glass_shatter.ent;kTraitBool;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 final_twirlies.spn;final_twirlies_sparse [32 beats];final_twirlies_sparse.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 teeth.spn;teeth [1 beat];teeth.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 teeth_entity_set.spn;teeth_set [32 beats];teeth_set.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
@@ -349,6 +356,7 @@ ambient_fx.spn;crakhed_destroy [32 beats];crakhed_destroy.ent;kTraitBool;True;0;
 ambient_fx.spn;death_shatter [8 beats];death_shatter.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ambient_fx.spn;smoke [8 beats];smoke.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 ambient_fx.spn;win_debris [8 beats];win_debris.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+dust.spn;track smoke;smoke.ent;kTraitBool;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
 DECORATIVE MILLIPEDES
 millipede_half_decorative
@@ -372,6 +380,8 @@ bloom_sat.pp;bloom_sat1;0x6efd7dc5;kTraitFloat;False;0;[2,1,2,1,2,'kIntensitySca
 levels.pp;contrast/brightness1;0x75df8462;kTraitFloat;False;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 levels.pp;contrast/brightness2 (USE >=0);0x05099ded;kTraitFloat;False;1;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 brightness.pp;brightness3 - funny rainbow colors;0xf646d5e7;kTraitFloat;False;0.5;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+noise.vig;contrast_noise;0x51b7d0e3;kTraitFloat;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+noise.vig;red_noise;0xc2cf9f73;kTraitFloat;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
 CAMERA
 camera
@@ -383,10 +393,18 @@ cam_shake.xfmer;camera pitch;0x8ab4684d;kTraitFloat;False;0;[1,2,2,1,2,'kIntensi
 cam_shake.flow;camera roll;0xce326723;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 screen_shake.flow;camera yaw (limited: "1" = ~90°);0x6f741307;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 screen_shake.flow;camera pitch2 (limited: "1" = ~90°);0x5472d655;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+camera_floats.flow;camera zoom out;0x1b6b5506;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 screen_shake.flow;manual camera shake;0x3347011c;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 camera_floats.flow;FOV;0xd1b89548;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
-EXPERIMENTATION
+CONTROLLER
+controller
+control.rumble;rumble;0x40a89b31;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+controller.st;beetle_turn;0x54ef8e79;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+controller_tilt.st;beetle_lean;0x54ef8e79;kTraitFloat;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+game.settings;pause_game;0xc8266ef9;kTraitBool;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+###
+EXPERIMENTAL
 experiments
 turn_test.spn;turn_left_isolated;turn_left_isolated.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 turn_test.spn;turn_left_start (long turn start);turn_left_start.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
@@ -410,12 +428,9 @@ avatar.lib;win_checkpoint_silent;win_checkpoint_silent;kTraitAction;False;1;[1,1
 avatar.lib;pounding;pounding;kTraitAction;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 avatar.lib;invulnerable;invulnerable;kTraitAction;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 collision.spn;ForcePlayerDamage;collide.ent;kTraitBool;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
-###
-BOSS_EFFECTS
-boss
-starfish_loop_start.flow;start;0x8b94465f;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-boss_frac.flow;jump;0x1fe1cdd8;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-boss_frac_pulse.flow;pulse;0x2c16d809;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+path_mat.flow;transparent_path;0x7ba5c8e0;kTraitBool;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+ring_pulse.spn;weapon;weapon.ent;kTraitBool;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+gate_boss.spn;boss_gate_pellet;boss_gate_pellet.ent;kTraitBool;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
 DISSONANT_BURSTS
 dissonant_bursts
@@ -436,25 +451,25 @@ dissonant_bursts.flow;diss15;diss15;kTraitAction;False;0;[1,2,2,1,2,'kIntensityS
 dissonant_bursts.flow;diss16;diss16;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 dissonant_bursts.flow;diss17;diss17;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
-GONGS
-gong
-gongs.flow;gong1;gong1;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-gongs.flow;gong2;gong2;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-gongs.flow;gong3;gong3;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
-###
 INTROFLOW
 intro
 intro.flow;intro;0x0810c3b9;kTraitAction;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
-PLAY SAMPLE
-samples
-sample.samp;play;play;kTraitAction;True;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+TRACK FX
+glow 
+glow.mat;rail_glow;0x13bdaa3b;kTraitFloat;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+headlight.lit;headlight_glow;0xd7b602ce;kTraitFloat;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+fx_tile1.mat;path_redglow;0x13bdaa3b;kTraitFloat;False;1;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
 RAIL COLORS
 rails_color.flow
 rails_color.flow;rail_color;0x283c6e78;kTraitColor;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 rails_color.flow;glow_color;0x9b4504d6;kTraitColor;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 rails_color.flow;path_color;0x887ca5dd;kTraitColor;False;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
+###
+PLAY SAMPLE
+samples
+sample.samp;play;play;kTraitAction;True;0;[1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0]
 ###
 WIN & MISC
 avatar.lib

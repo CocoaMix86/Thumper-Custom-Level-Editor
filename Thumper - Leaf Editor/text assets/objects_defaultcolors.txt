@@ -402,9 +402,9 @@ green gamma?;-8355585
 blue gamma?;-8355585
 bloom_sat1;-2316377
 brightness1, funny rainbow colors;-8355585
-glow_color;-8355585
-rail_color;-8355585
-path_color;-8355585
+glow_color;-16777216
+rail_color;-16777216
+path_color;-16777216
 play;-12533952
 pause;-3227290
 stop;-4243392
@@ -450,6 +450,12 @@ boss_shield_tutorial;-6381922
 boss_shield;-6381922
 boss_shield_2;-6381922
 boss_shield_3;-6381922
-red gamma2;-65536
-green gamma3;-16711936
-blue gamma3;-16776961
+camera yaw (limited: "1" = ~90°);-8355712
+camera pitch2 (limited: "1" = ~90°);-8355712
+rail_glow;-65536
+headlight_glow;-65536
+path_redglow;-65536
+camera zoom out;-8355712
+track smoke;-1776412
+contrast_noise;-1257729
+red_noise;-2083776
