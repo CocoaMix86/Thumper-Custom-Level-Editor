@@ -44,7 +44,7 @@ namespace Thumper_Custom_Level_Editor
 		dynamic lvljson;
 		ObservableCollection<LvlLeafData> _lvlleafs = new();
 
-		LvlLeafData clipboardleaf = new();
+		List<LvlLeafData> clipboardleaf = new();
 		List<string> clipboardpaths = new();
 		List<int> idxtocolor = new();
 		#endregion
@@ -427,28 +427,16 @@ namespace Thumper_Custom_Level_Editor
 		///COPY PASTE of leaf
 		private void btnLvlLeafCopy_Click(object sender, EventArgs e)
 		{
-			LvlLeafData temp = _lvlleafs[lvlLeafList.CurrentRow.Index];
-			clipboardleaf = new LvlLeafData() {
-				beats = temp.beats,
-				leafname = temp.leafname,
-				paths = temp.paths
-			};
+			List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
+			selectedrows.Sort((row, row2) => row.CompareTo(row2));
+			clipboardleaf = _lvlleafs.Where(x => selectedrows.Contains(_lvlleafs.IndexOf(x))).ToList();
 			btnLvlLeafPaste.Enabled = true;
 			PlaySound("UIkcopy");
 		}
 		private void btnLvlLeafPaste_Click(object sender, EventArgs e)
 		{
-			//save index of paste position, since it gets reset whenever the leaf collection changes
-			int _in = lvlLeafList.CurrentRow.Index;
-			_lvlleafs.Insert(lvlLeafList.CurrentRow.Index + 1, new LvlLeafData {
-				leafname = clipboardleaf.leafname,
-				beats = clipboardleaf.beats,
-				paths = new List<string>(clipboardleaf.paths)
-			});
-			//after adding the leaf, set selected position to that item
-			lvlLeafList.CurrentCell = lvlLeafList.Rows[_in + 1].Cells[0];
-			lvlLeafList.Rows[_in + 1].Cells[0].Selected = true;
-			//set save flag
+			foreach (LvlLeafData lld in clipboardleaf)
+				_lvlleafs.Insert(lvlLeafList.CurrentRow.Index + 1, lld.Clone());
 			PlaySound("UIkpaste");
 			SaveLvl(false);
 		}

@@ -361,6 +361,7 @@ namespace Thumper_Custom_Level_Editor
 		private void btnMasterLvlCopy_Click(object sender, EventArgs e)
 		{
 			List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+			selectedrows.Sort((row, row2) => row.CompareTo(row2));
 			clipboardmaster = _masterlvls.Where(x => selectedrows.Contains(_masterlvls.IndexOf(x))).ToList(); 
 			PlaySound("UIkcopy");
 			btnMasterLvlPaste.Enabled = true;
