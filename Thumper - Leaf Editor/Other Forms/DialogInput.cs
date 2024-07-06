@@ -94,7 +94,7 @@ namespace Thumper_Custom_Level_Editor
                 { "author", input.txtCustomAuthor.Text }
             };
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
-            if (mainform.workingfolder != null && isthisnew == false) {
+            if (mainform.workingfolder != null && isthisnew == false && mainform.workingfolder != levelpath) {
                 Directory.Move(mainform.workingfolder, levelpath);
             }
             if (!Directory.Exists(levelpath)) {
