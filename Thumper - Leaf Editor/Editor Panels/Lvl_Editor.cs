@@ -39,7 +39,7 @@ namespace Thumper_Custom_Level_Editor
 		string _loadedlvltemp;
 		public bool loadinglvl = false;
 
-		List<string> _lvlpaths = (Properties.Resources.paths).Replace("\r\n", "\n").Split('\n').ToList();
+		List<string> _lvlpaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
 		List<SampleData> _lvlsamples = new();
 		dynamic lvljson;
 		ObservableCollection<LvlLeafData> _lvlleafs = new();
@@ -450,10 +450,12 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlPathDelete_Click(object sender, EventArgs e)
 		{
-			if (lvlLeafPaths.CurrentCell.Value == null)
-				lvlLeafPaths.Rows.Remove(lvlLeafPaths.CurrentRow);
-			else
-				_lvlleafs[lvlLeafList.CurrentRow.Index].paths.RemoveAt(lvlLeafPaths.CurrentRow.Index);
+			List<string> todelete = new();
+			foreach (DataGridViewRow dgvr in lvlLeafPaths.SelectedRows) {
+				todelete.Add(dgvr.Cells[0].Value.ToString());
+            }
+			foreach (string s in todelete)
+				_lvlleafs[lvlLeafList.CurrentRow.Index].paths.Remove(s);
 			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
 			PlaySound("UItunnelremove");
 			SaveLvl(false);
@@ -461,7 +463,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnLvlPathAdd_Click(object sender, EventArgs e)
 		{
-			lvlLeafPaths.RowCount++;
+			_lvlleafs[lvlLeafList.CurrentRow.Index].paths.Add("");
+			LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
 			btnLvlPathDelete.Enabled = true;
 			PlaySound("UItunneladd");
 			SaveLvl(false);
@@ -479,6 +482,7 @@ namespace Thumper_Custom_Level_Editor
 				_lvlleafs[idx].paths.RemoveAt(dgvr + 1);
 			}
 			LvlUpdatePaths(idx);
+			lvlLeafPaths.CurrentCell = lvlLeafPaths[0, selectedrows[0] - 1];
 			lvlLeafPaths.ClearSelection();
 			foreach (int dgvr in selectedrows) {
 				lvlLeafPaths.Rows[dgvr - 1].Cells[0].Selected = true;
@@ -498,6 +502,7 @@ namespace Thumper_Custom_Level_Editor
 				_lvlleafs[idx].paths.RemoveAt(dgvr);
 			}
 			LvlUpdatePaths(idx);
+			lvlLeafPaths.CurrentCell = lvlLeafPaths[0, selectedrows[0] + 1];
 			lvlLeafPaths.ClearSelection();
 			foreach (int dgvr in selectedrows) {
 				lvlLeafPaths.Rows[dgvr + 1].Cells[0].Selected = true;
@@ -514,7 +519,8 @@ namespace Thumper_Custom_Level_Editor
             }
 			_lvlleafs[idx].paths.Clear();
 			LvlUpdatePaths(idx);
-            SaveLvl(false);
+			PlaySound("UIdataerase");
+			SaveLvl(false);
         }
 
         private void btnLvlRandomTunnel_Click(object sender, EventArgs e)
@@ -815,9 +821,7 @@ namespace Thumper_Custom_Level_Editor
 			lblLvlTunnels.Text = $"Paths/Tunnels - {_lvlleafs[index].leafname}";
 			//for each path in the selected leaf, populate the paths DGV
 			foreach (string path in _lvlleafs[index].paths) {
-				if (path == "")
-					continue;
-				else if (_lvlpaths.Contains(path))
+				if (_lvlpaths.Contains(path))
 					lvlLeafPaths.Rows.Add(new object[] { path });
 				else
 					MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");

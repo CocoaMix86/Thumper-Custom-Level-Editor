@@ -412,7 +412,10 @@ namespace Thumper_Custom_Level_Editor
 		private void btnShowRecentFile_Click(object sender, EventArgs e)
 		{
 			PlaySound("UIfolderopen");
-			RecentFiles(Properties.Settings.Default.Recentfiles);
+			if (panelRecentFiles.Visible)
+				panelRecentFiles.Visible = false;
+			else
+				RecentFiles(Properties.Settings.Default.Recentfiles);
 		}
 
 		private void btnExplorer_Click(object sender, EventArgs e)
