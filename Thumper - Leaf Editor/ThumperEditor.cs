@@ -415,7 +415,7 @@ namespace Thumper_Custom_Level_Editor
         /// NEW CUSTOM LEVEL FOLDER
         private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogInput customlevel = new(this);
+            DialogInput customlevel = new(this, true);
             //show the new level folder dialog box
             customlevel.Show();
         }
@@ -443,7 +443,7 @@ namespace Thumper_Custom_Level_Editor
                 _load = JsonConvert.DeserializeObject(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt").Replace('#', ' '));
             }
             catch { }
-            DialogInput customlevel = new(this);
+            DialogInput customlevel = new(this, false);
             //set the form text fields to whatever is in LEVEL DETAILS
             customlevel.txtCustomPath.Text = Path.GetDirectoryName(workingfolder);
             customlevel.btnCustomSave.Enabled = true;

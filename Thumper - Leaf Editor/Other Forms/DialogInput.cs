@@ -12,9 +12,11 @@ namespace Thumper_Custom_Level_Editor
     {
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         private FormLeafEditor mainform { get; set; }
+        private bool isthisnew;
 
-        public DialogInput(FormLeafEditor form)
+        public DialogInput(FormLeafEditor form, bool newlevel)
 		{
+            isthisnew = newlevel;
 			InitializeComponent();
             pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;
             mainform = form;
@@ -92,6 +94,9 @@ namespace Thumper_Custom_Level_Editor
                 { "author", input.txtCustomAuthor.Text }
             };
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
+            if (mainform.workingfolder != null && isthisnew == false) {
+                Directory.Move(mainform.workingfolder, levelpath);
+            }
             if (!Directory.Exists(levelpath)) {
                 Directory.CreateDirectory(levelpath);
             }
