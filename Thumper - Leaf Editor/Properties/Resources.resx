@@ -393,6 +393,9 @@ BUG FIXES
 ✅ "copy all paths" button wouldn't enable when adding a path to a leaf in a lvl
 ✅ Loop samples dropdown doesn't update to include newly added samp files
 ✅ loading problems if you use "." in file names
+✅ Renaming a level just creates an empty new level
+✅ Horizontal scrolling on leaf editor is really bad
+✅ "open level folder" button in the Woking Folder panel does not prompt to save
 ✅ error when renaming a file to another name that already exist
 ✅ error when creating and saving a leaf with no open project
 ✅ error when pressing "add random tunnel" when no leaf exists in the lvl
@@ -410,6 +413,7 @@ BUG FIXES
 ✅ error when loading lvl with samples that no longer exist
 ✅ error when trying to load bad data in Raw import
 ✅ error when trying to paste tracks to a blank leaf
+✅ error when moving or clearing a track with no set cells
 
 SUGGESTED ADDITIONS/CHANGES
 ⏺️ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
@@ -426,9 +430,10 @@ SUGGESTED ADDITIONS/CHANGES
 ⏺️ various UI changes to make things more consistent
 ⏺️ F3 and F4: next/previous leaf (you can change these keybinds)
 ⏺️ F1 and F2: next/previous lvl (you can change these keybinds)
-⏺️ Sample editor cells can be multiselect and mass edited at the same time
+⏺️ All panels now have multi-select editing enabled. Copy/paste/move up/move down
 ⏺️ Right-click delete should not delete highlighted cells if deleting a non-highlighted cell
 ⏺️ "Open level folder" now opens 1 folder level up from where the workingfolder is
+⏺️ Undock a panel by double-clicking its title bar
 
 MISC
 👍 Decreased size of EXE a bunch
