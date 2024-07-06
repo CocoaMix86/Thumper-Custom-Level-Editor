@@ -103,8 +103,8 @@ namespace Thumper_Custom_Level_Editor
 			for (int i = 0; i < _beats; i++) {
 				trackEditor.Columns[i].Width = trackZoom.Value;
 			}
-			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
+			//hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
+			//hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
 			trackEditor.FirstDisplayedScrollingColumnIndex = display;
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
@@ -121,8 +121,8 @@ namespace Thumper_Custom_Level_Editor
 		private void trackEditor_Resize(object sender, EventArgs e)
 		{
 			vscrollbarTrackEditor_Resize();
-			hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-			hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
+			//hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
+			//hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
 		}
 		private void vscrollbarTrackEditor_Resize()
         {
@@ -153,13 +153,7 @@ namespace Thumper_Custom_Level_Editor
 				if (trackEditor.FirstDisplayedScrollingRowIndex == -1 || trackEditor.FirstDisplayedScrollingColumnIndex == -1)
 					return;
 				if (leafeditorcell != -1) {
-					if (e.Delta > 0) {
-						trackEditor.FirstDisplayedScrollingColumnIndex = Math.Max(0, scollindex - scrollLines);
-					}
-					else if (e.Delta < 0) {
-						trackEditor.FirstDisplayedScrollingColumnIndex = Math.Min(trackEditor.ColumnCount - 1, scollindex + scrollLines);
-					}
-					hScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingColumnIndex;
+					trackEditor.HorizontalScrollingOffset = trackEditor.HorizontalScrollingOffset + e.Delta < 0 ? 0 : trackEditor.HorizontalScrollingOffset + e.Delta;
 				}
 				else {
 					if (e.Delta > 0) {
@@ -200,11 +194,6 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (trackEditor.FirstDisplayedScrollingRowIndex != -1)
 				trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue);
-		}
-		private void hScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
-		{
-			if (trackEditor.FirstDisplayedScrollingColumnIndex != -1)
-				trackEditor.FirstDisplayedScrollingColumnIndex = (e.NewValue);
 		}
 		///
 		/// 
@@ -493,8 +482,6 @@ namespace Thumper_Custom_Level_Editor
 
 		private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
 		{
-			hScrollBarTrackEditor.Location = new Point(trackEditor.Location.X + trackEditor.RowHeadersWidth, hScrollBarTrackEditor.Location.Y);
-			hScrollBarTrackEditor.Width = trackEditor.Width - trackEditor.RowHeadersWidth;
 			trackEditor_Resize(null, null);
 		}
 		///LEAF LENGTH

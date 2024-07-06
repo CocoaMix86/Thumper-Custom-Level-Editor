@@ -171,7 +171,6 @@
             this.btnRawImport = new System.Windows.Forms.Button();
             this.panelLeaf = new System.Windows.Forms.Panel();
             this.vScrollBarTrackEditor = new System.Windows.Forms.VScrollBar();
-            this.hScrollBarTrackEditor = new System.Windows.Forms.HScrollBar();
             this.toolstripTitleLeaf = new System.Windows.Forms.ToolStrip();
             this.lblTrackFileName = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveLeaf = new System.Windows.Forms.ToolStripButton();
@@ -1715,7 +1714,7 @@
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.trackEditor.RowTemplate.Height = 20;
-            this.trackEditor.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.trackEditor.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
@@ -1840,7 +1839,6 @@
             this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelLeaf.Controls.Add(this.panelZoom);
             this.panelLeaf.Controls.Add(this.vScrollBarTrackEditor);
-            this.panelLeaf.Controls.Add(this.hScrollBarTrackEditor);
             this.panelLeaf.Controls.Add(this.trackEditor);
             this.panelLeaf.Controls.Add(this.toolstripTitleLeaf);
             this.panelLeaf.Controls.Add(this.leafToolStrip);
@@ -1872,16 +1870,6 @@
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBarTrackEditor_Scroll);
             this.vScrollBarTrackEditor.VisibleChanged += new System.EventHandler(this.vScrollBarTrackEditor_VisibleChanged);
-            // 
-            // hScrollBarTrackEditor
-            // 
-            this.hScrollBarTrackEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.hScrollBarTrackEditor.Location = new System.Drawing.Point(362, 407);
-            this.hScrollBarTrackEditor.Name = "hScrollBarTrackEditor";
-            this.hScrollBarTrackEditor.Size = new System.Drawing.Size(788, 15);
-            this.hScrollBarTrackEditor.TabIndex = 145;
-            this.hScrollBarTrackEditor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBarTrackEditor_Scroll);
             // 
             // toolstripTitleLeaf
             // 
@@ -7177,7 +7165,6 @@
         private System.Windows.Forms.ToolStripMenuItem openTemplateFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem regenerateTemplateFilesToolStripMenuItem;
         private System.Windows.Forms.VScrollBar vScrollBarTrackEditor;
-        private System.Windows.Forms.HScrollBar hScrollBarTrackEditor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkGateRandom;
         private System.Windows.Forms.Label lblGatebuckethelp;
