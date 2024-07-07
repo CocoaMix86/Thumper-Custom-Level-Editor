@@ -59,7 +59,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void lvlLeafList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex == -1 || _lvlleafs.Count == 0)
+			if (e.RowIndex == -1 || _lvlleafs.Count == 0 || e.RowIndex > _lvlleafs.Count - 1)
 				return;
 			//lvlLeafList_RowEnter(sender, e);
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
