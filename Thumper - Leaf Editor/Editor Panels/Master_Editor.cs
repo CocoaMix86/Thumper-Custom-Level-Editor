@@ -48,7 +48,7 @@ namespace Thumper_Custom_Level_Editor
 		private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//if not selecting the file column, return and do nothing
-			if (e.ColumnIndex == -1 || e.ColumnIndex > 1 || e.RowIndex == -1)
+			if (e.ColumnIndex == -1 || e.ColumnIndex > 1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
 				return;
 
 			string _file;
@@ -362,15 +362,17 @@ namespace Thumper_Custom_Level_Editor
 		{
 			List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
 			selectedrows.Sort((row, row2) => row.CompareTo(row2));
-			clipboardmaster = _masterlvls.Where(x => selectedrows.Contains(_masterlvls.IndexOf(x))).ToList(); 
+			clipboardmaster = _masterlvls.Where(x => selectedrows.Contains(_masterlvls.IndexOf(x))).ToList();
+			clipboardmaster.Reverse();
 			PlaySound("UIkcopy");
 			btnMasterLvlPaste.Enabled = true;
 		}
 
 		private void btnMasterLvlPaste_Click(object sender, EventArgs e)
 		{
+			int _in = masterLvlList.CurrentRow?.Index + 1 ?? 0;
 			foreach (MasterLvlData mld in clipboardmaster)
-				_masterlvls.Insert(masterLvlList.CurrentRow.Index + 1, mld.Clone());
+				_masterlvls.Insert(_in, mld.Clone());
 			PlaySound("UIkpaste");
 		}
 
