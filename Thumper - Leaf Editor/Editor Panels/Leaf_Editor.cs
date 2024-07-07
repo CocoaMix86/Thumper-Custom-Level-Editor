@@ -185,9 +185,20 @@ namespace Thumper_Custom_Level_Editor
 			leafeditorcell = e.ColumnIndex;
 			if (e.ColumnIndex == -1 || e.RowIndex == -1)
 				return;
+			DataGridView dgv = sender as DataGridView;
 			if (Control.MouseButtons == MouseButtons.Right) {
-				(sender as DataGridView)[e.ColumnIndex, e.RowIndex].Value = null;
-				TrackUpdateHighlightingSingleCell((sender as DataGridView)[e.ColumnIndex, e.RowIndex]);
+				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
+					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
+					SaveLeaf(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+				}
+				else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
+					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					CellValueChanged(e.RowIndex, e.ColumnIndex);
+					_undolistleaf.RemoveAt(1);
+				}
 			}
 		}
 		private void vScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
@@ -340,14 +351,14 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			DataGridView dgv = sender as DataGridView;
 			if (e.Button == MouseButtons.Right) {
-				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
+				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
 					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
-					SaveLeaf(false, "Deleted single cell", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+					SaveLeaf(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
 					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
-				else {
+				else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					CellValueChanged(e.RowIndex, e.ColumnIndex);
 					_undolistleaf.RemoveAt(1);
