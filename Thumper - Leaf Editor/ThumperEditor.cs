@@ -199,13 +199,13 @@ namespace Thumper_Custom_Level_Editor
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
             ///version check
-            if (Properties.Settings.Default.version != "2.2beta11") {
+            if (Properties.Settings.Default.version != "2.2beta12") {
                 ShowChangelog();
                 if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     regenerateTemplateFilesToolStripMenuItem_Click(null, null);
                 else
                     MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
-                Properties.Settings.Default.version = "2.2beta11";
+                Properties.Settings.Default.version = "2.2beta12";
             }
             ///Create directory for leaf templates
             if (!Directory.Exists($@"{AppLocation}\templates")) {
