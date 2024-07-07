@@ -158,7 +158,8 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (workingfolder == null)
 				return;
-			PlaySound("UIrefresh");
+			if (sender != null)
+				PlaySound("UIrefresh");
 			//clear the dgv and reload files in the folder
 			workingfolderFiles.Rows.Clear();
 			workingfiles.Clear();
@@ -272,11 +273,11 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;
-		private void filterLeaf_CheckedChanged(object sender, EventArgs e) {filterleaf = filterLeaf.Checked; btnWorkRefresh_Click(null, null); }
-		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; btnWorkRefresh_Click(null, null); }
-		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; btnWorkRefresh_Click(null, null); }
-		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; btnWorkRefresh_Click(null, null); }
-		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; btnWorkRefresh_Click(null, null); }
+		private void filterLeaf_CheckedChanged(object sender, EventArgs e) {filterleaf = filterLeaf.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
+		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
+		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
+		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
+		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
 		private void filterClear_Click(object sender, EventArgs e)
 		{
 			filterLeaf.Checked = filterLvl.Checked = filterGate.Checked = filterMaster.Checked = filterSamp.Checked = false;
