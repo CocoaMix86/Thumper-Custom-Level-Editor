@@ -143,18 +143,20 @@ namespace Thumper_Custom_Level_Editor
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
 		{
 			trackEditor.Focus();
-			int scollindex = trackEditor.FirstDisplayedScrollingColumnIndex;
 			int scollrowindex = trackEditor.FirstDisplayedScrollingRowIndex;
 			int horiz = trackZoom.Value;
 			int vert = trackZoomVert.Value;
 			int scrollLines = SystemInformation.MouseWheelScrollLines;
 
+			//handle horizontal and vertical scroll
 			if (!controldown && !shiftdown) {
 				if (trackEditor.FirstDisplayedScrollingRowIndex == -1 || trackEditor.FirstDisplayedScrollingColumnIndex == -1)
 					return;
+				//handle horizontal scroll
 				if (leafeditorcell != -1) {
 					trackEditor.HorizontalScrollingOffset = trackEditor.HorizontalScrollingOffset + (e.Delta * -1) < 0 ? 0 : trackEditor.HorizontalScrollingOffset + (e.Delta * -1);
 				}
+				//handle vertical scroll
 				else {
 					if (e.Delta > 0) {
 						trackEditor.FirstDisplayedScrollingRowIndex = Math.Max(0, scollrowindex - scrollLines);
@@ -165,6 +167,7 @@ namespace Thumper_Custom_Level_Editor
 					vScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingRowIndex;
 				}
 			}
+			//handle zoom scroll
 			else {
 				if (controldown && e.Delta < 0) {
 					trackZoom.Value = Math.Max(1, horiz - scrollLines);
