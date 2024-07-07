@@ -430,13 +430,15 @@ namespace Thumper_Custom_Level_Editor
 			List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
 			selectedrows.Sort((row, row2) => row.CompareTo(row2));
 			clipboardleaf = _lvlleafs.Where(x => selectedrows.Contains(_lvlleafs.IndexOf(x))).ToList();
+			clipboardleaf.Reverse();
 			btnLvlLeafPaste.Enabled = true;
 			PlaySound("UIkcopy");
 		}
 		private void btnLvlLeafPaste_Click(object sender, EventArgs e)
 		{
+			int _in = lvlLeafList.CurrentRow?.Index + 1 ?? 0;
 			foreach (LvlLeafData lld in clipboardleaf)
-				_lvlleafs.Insert(lvlLeafList.CurrentRow.Index + 1, lld.Clone());
+				_lvlleafs.Insert(_in, lld.Clone());
 			PlaySound("UIkpaste");
 			SaveLvl(false);
 		}
