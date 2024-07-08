@@ -269,6 +269,7 @@ namespace Thumper_Custom_Level_Editor
 			//if LVL not saved, have user confirm if they want to continue
 			if ((!_savelvl && MessageBox.Show("Current LVL is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
 				//reset things to default values
+				lvljson = null;
 				_lvlleafs.Clear();
 				lvlSeqObjs.Rows.Clear();
 				lvlLoopTracks.Rows.Clear();
