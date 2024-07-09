@@ -222,7 +222,7 @@ namespace Thumper_Custom_Level_Editor
 		private void btnWorkDelete_Click(object sender, EventArgs e)
 		{
 			//make user confirm file deletion
-			if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show("Are you sure you want to delete this file?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+			if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show($"{workingfolderFiles.CurrentRow.Cells[1].Value.ToString()}\nAre you sure you want to delete this file?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 				//check if file being deleted is LEVEL DETAILS
 				if (workingfolderFiles.CurrentRow.Cells[1].Value.ToString().Contains("LEVEL DETAILS") && MessageBox.Show("You are about to delete the LEVEL DETAILS file. This file is required for the mod loader tool to load the level. Are you sure you want to delete it?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.No)
 					return;
