@@ -214,6 +214,11 @@ namespace Thumper_Custom_Level_Editor
             if (!Directory.Exists($@"{AppLocation}\temp")) {
                 Directory.CreateDirectory($@"{AppLocation}\temp");
             }
+            
+            //
+            dropMasterSkybox.SelectedIndex = 1;
+            dropMasterSkybox.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
+
             //setup datagrids with proper formatting
             InitializeTracks(trackEditor, true);
             InitializeTracks(lvlSeqObjs, true);
