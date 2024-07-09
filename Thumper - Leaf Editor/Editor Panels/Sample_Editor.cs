@@ -151,8 +151,6 @@ namespace Thumper_Custom_Level_Editor
                 ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
                 ofd.Title = "Load a Thumper Sample file";
                 if (ofd.ShowDialog() == DialogResult.OK) {
-					if (sender == null)
-						ResetSample();
                     //storing the filename in temp so it doesn't overwrite _loadedsample in case it fails the check in LoadSample()
                     _loadedsampletemp = ofd.FileName;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -181,8 +179,10 @@ namespace Thumper_Custom_Level_Editor
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = workingfolder;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                //separate path and filename
-                string storePath = Path.GetDirectoryName(sfd.FileName);
+				if (sender == null)
+					ResetSample();
+				//separate path and filename
+				string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
 				if (!tempFileName.EndsWith(".txt"))
 					tempFileName += ".txt";

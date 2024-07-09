@@ -142,8 +142,6 @@ namespace Thumper_Custom_Level_Editor
                 ofd.Title = "Load a Thumper Gate file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
-					if (sender == null)
-						ResetGate();
                     //storing the filename in temp so it doesn't overwrite _loadedgate in case it fails the check in LoadGate()
                     _loadedgatetemp = ofd.FileName;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -172,8 +170,10 @@ namespace Thumper_Custom_Level_Editor
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = workingfolder;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                //separate path and filename
-                string storePath = Path.GetDirectoryName(sfd.FileName);
+				if (sender == null)
+					ResetGate();
+				//separate path and filename
+				string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
 				if (!tempFileName.EndsWith(".txt"))
 					tempFileName += ".txt";
@@ -512,6 +512,11 @@ namespace Thumper_Custom_Level_Editor
 			gatejson = null;
 			loadedgate = null;
 			_gatelvls.Clear();
+			gateLvlList.Rows.Clear();
+			checkGateRandom.Checked = false;
+			dropGatePre.SelectedIndex = 0;
+			dropGatePost.SelectedIndex = 0;
+			dropGateRestart.SelectedIndex = 0;
 			lblGateName.Text = "Gate Editor";
 			//set saved flag to true, because nothing is loaded
 			SaveGate(true);
