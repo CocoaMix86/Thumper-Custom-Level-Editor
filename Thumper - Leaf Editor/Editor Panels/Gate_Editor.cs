@@ -233,9 +233,16 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnGateLvlDelete_Click(object sender, EventArgs e)
 		{
-			_gatelvls.RemoveAt(gateLvlList.CurrentRow.Index);
-			PlaySound("UIobjectremove");
-		}
+            List<GateLvlData> todelete = new();
+            foreach (DataGridViewRow dgvr in gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList()) {
+                todelete.Add(_gatelvls[dgvr.Index]);
+            }
+            int _in = gateLvlList.CurrentRow.Index;
+            foreach (GateLvlData gld in todelete)
+                _gatelvls.Remove(gld);
+            PlaySound("UIobjectremove");
+            gateLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= _masterlvls.Count ? _in - 1 : _in));
+        }
 		private void btnGateLvlAdd_Click(object sender, EventArgs e)
 		{
 			//don't load new lvl if gate has 4 phases
@@ -271,41 +278,37 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnGateLvlUp_Click(object sender, EventArgs e)
 		{
-			try {
-				// get index of the row for the selected cell
-				int rowIndex = gateLvlList.CurrentRow.Index;
-				if (rowIndex == 0)
-					return;
-                //move leaf in list
-                GateLvlData selectedLvl = _gatelvls[rowIndex];
-				_gatelvls.Remove(selectedLvl);
-				_gatelvls.Insert(rowIndex - 1, selectedLvl);
-				//move selected cell up a row to follow the moved item
-				gateLvlList.Rows[rowIndex - 1].Cells[0].Selected = true;
-				//sets flag that lvl has unsaved changes
-				SaveGate(false);
-			}
-			catch { }
-		}
+            List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+            if (selectedrows.Any(r => r == 0))
+                return;
+            selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
+            foreach (int dgvr in selectedrows) {
+                _gatelvls.Insert(dgvr - 1, _gatelvls[dgvr]);
+                _gatelvls.RemoveAt(dgvr + 1);
+            }
+            gateLvlList.ClearSelection();
+            foreach (int dgvr in selectedrows) {
+                gateLvlList.Rows[dgvr - 1].Cells[1].Selected = true;
+            }
+            SaveGate(false);
+        }
 
 		private void btnGateLvlDown_Click(object sender, EventArgs e)
-		{
-			try {
-				// get index of the row for the selected cell
-				int rowIndex = gateLvlList.CurrentRow.Index;
-				if (rowIndex == _gatelvls.Count - 1)
-					return;
-                //move lvl in list
-                GateLvlData selectedLvl = _gatelvls[rowIndex];
-				_gatelvls.Remove(selectedLvl);
-				_gatelvls.Insert(rowIndex + 1, selectedLvl);
-				//move selected cell up a row to follow the moved item
-				gateLvlList.Rows[rowIndex + 1].Cells[0].Selected = true;
-				//sets flag that lvl has unsaved changes
-				SaveGate(false);
-			}
-			catch { }
-		}
+        {
+            List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+            if (selectedrows.Any(r => r == 0))
+                return;
+            selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
+            foreach (int dgvr in selectedrows) {
+                _gatelvls.Insert(dgvr + 2, _gatelvls[dgvr]);
+                _gatelvls.RemoveAt(dgvr);
+            }
+            gateLvlList.ClearSelection();
+            foreach (int dgvr in selectedrows) {
+                gateLvlList.Rows[dgvr + 1].Cells[1].Selected = true;
+            }
+            SaveGate(false);
+        }
 
 		private void btnGateRefresh_Click(object sender, EventArgs e)
 		{
