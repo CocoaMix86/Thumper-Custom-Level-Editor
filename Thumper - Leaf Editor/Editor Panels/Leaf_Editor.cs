@@ -26,11 +26,7 @@ namespace Thumper_Custom_Level_Editor
 			set
 			{
 				if (value == null) {
-					loadedleaf = value;
-					trackEditor.Rows.Clear();
-					EnableLeafButtons(false);
-					lblTrackFileName.Text = "Leaf Editor";
-					SaveLeaf(true, "Loading", "");
+					ResetLeaf();
 				}
 				if (loadedleaf != value) {
 					loadedleaf = value;
@@ -601,12 +597,6 @@ namespace Thumper_Custom_Level_Editor
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-				_tracks.Clear();
-				trackEditor.Rows.Clear();
-				lblTrackFileName.Text = "Leaf Editor";
-				dropObjects.Enabled = dropParamPath.Enabled = btnTrackApply.Enabled = false;
-				//
-				SaveLeaf(true, "New", "");
 				leafsaveAsToolStripMenuItem_Click(null, null);
 			}
 		}
@@ -631,6 +621,8 @@ namespace Thumper_Custom_Level_Editor
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
+				if (sender == null)
+					ResetLeaf();
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
@@ -1718,6 +1710,18 @@ namespace Thumper_Custom_Level_Editor
 			if (!skiprevertsave)
 				leafjson = _save;
 			return _save;
+		}
+
+		private void ResetLeaf()
+		{
+			leafjson = null;
+			loadedleaf = null;
+			_tracks.Clear();
+			trackEditor.Rows.Clear();
+			lblTrackFileName.Text = "Leaf Editor";
+			dropObjects.Enabled = dropParamPath.Enabled = btnTrackApply.Enabled = false;
+			//
+			SaveLeaf(true, "New", "");
 		}
 		#endregion
 	}

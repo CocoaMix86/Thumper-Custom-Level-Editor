@@ -20,9 +20,7 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedgate; }
 			set {
 				if (value == null) {
-					loadedgate = value;
-					lblGateName.Text = "Gate Editor";
-					SaveGate(true);
+					ResetGate();
 				}
 				if (loadedgate != value) {
 					loadedgate = value;
@@ -132,13 +130,7 @@ namespace Thumper_Custom_Level_Editor
 		private void gatenewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savegate && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
-				//reset things to default values
-				_gatelvls.Clear();
-				lblGateName.Text = "Gate Editor";
-				//set saved flag to true, because nothing is loaded
-				SaveGate(true);
-				if (e != null)
-					gatesaveAsToolStripMenuItem_Click(null, null);
+				gatesaveAsToolStripMenuItem_Click(null, null);
 			}
 		}
 
@@ -150,6 +142,8 @@ namespace Thumper_Custom_Level_Editor
                 ofd.Title = "Load a Thumper Gate file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
+					if (sender == null)
+						ResetGate();
                     //storing the filename in temp so it doesn't overwrite _loadedgate in case it fails the check in LoadGate()
                     _loadedgatetemp = ofd.FileName;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -510,6 +504,17 @@ namespace Thumper_Custom_Level_Editor
 			_save.Add("boss_patterns", boss_patterns);
 			gatejson = _save;
 			return _save;
+		}
+
+		private void ResetGate()
+        {
+			//reset things to default values
+			gatejson = null;
+			loadedgate = null;
+			_gatelvls.Clear();
+			lblGateName.Text = "Gate Editor";
+			//set saved flag to true, because nothing is loaded
+			SaveGate(true);
 		}
 		#endregion
 	}

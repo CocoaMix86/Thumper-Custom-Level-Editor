@@ -24,9 +24,7 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedsample; }
 			set {
 				if (value == null) {
-					loadedsample = value;
-					lblSampleEditor.Text = "Sample Editor";
-					SaveSample(true);
+					ResetSample();
 				}
 				if (loadedsample != value) {
 					loadedsample = value;
@@ -142,14 +140,7 @@ namespace Thumper_Custom_Level_Editor
 		private void SamplenewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savesample && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savesample) {
-				//reset things to default values
-				_samplelist.Clear();
-				lblSampleEditor.Text = "Sample Editor";
-				//set saved flag to true, because nothing is loaded
-				SaveSample(true);
-				FSBtoSamp.Enabled = true;
-				if (e != null)
-					SamplesaveAsToolStripMenuItem_Click(null, null);
+				SamplesaveAsToolStripMenuItem_Click(null, null);
 			}
 		}
 
@@ -160,6 +151,8 @@ namespace Thumper_Custom_Level_Editor
                 ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
                 ofd.Title = "Load a Thumper Sample file";
                 if (ofd.ShowDialog() == DialogResult.OK) {
+					if (sender == null)
+						ResetSample();
                     //storing the filename in temp so it doesn't overwrite _loadedsample in case it fails the check in LoadSample()
                     _loadedsampletemp = ofd.FileName;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -596,6 +589,18 @@ namespace Thumper_Custom_Level_Editor
 
 			File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
 			return fileExtension;
+		}
+
+		private void ResetSample()
+        {
+			//reset things to default values
+			samplejson = null;
+			loadedsample = null;
+			_samplelist.Clear();
+			lblSampleEditor.Text = "Sample Editor";
+			//set saved flag to true, because nothing is loaded
+			SaveSample(true);
+			FSBtoSamp.Enabled = true;
 		}
 		#endregion
 	}

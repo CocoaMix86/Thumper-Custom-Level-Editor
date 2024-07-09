@@ -1074,6 +1074,7 @@ namespace Thumper_Custom_Level_Editor
         {
 			//reset things to default values
 			lvljson = null;
+			loadedlvl = null;
 			_lvlleafs.Clear();
 			lvlLeafPaths.Rows.Clear();
 			lvlSeqObjs.Rows.Clear();
