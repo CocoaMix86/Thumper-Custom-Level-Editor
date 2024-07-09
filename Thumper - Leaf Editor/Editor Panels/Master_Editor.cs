@@ -233,11 +233,7 @@ namespace Thumper_Custom_Level_Editor
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
 				if (sender == null) {
-					//reset things to default values
-					_masterlvls.Clear();
-					lblMasterName.Text = "Master Editor";
-					//set saved flag to true, because nothing is loaded
-					SaveMaster(true);
+					ResetMaster();
 				}
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -696,6 +692,19 @@ namespace Thumper_Custom_Level_Editor
 			_beatcount += (int)_load["approach_beats"];
 
 			return _beatcount;
+		}
+
+		private void ResetMaster()
+        {
+			//reset things to default values
+			_masterlvls.Clear();
+			lblMasterName.Text = "Master Editor";
+			btnConfigGlowColor.BackColor = Color.White;
+			btnConfigPathColor.BackColor = Color.White;
+			btnConfigRailColor.BackColor = Color.White;
+			dropMasterSkybox.SelectedIndex = 1;
+			//set saved flag to true, because nothing is loaded
+			SaveMaster(true);
 		}
 		#endregion
 	}
