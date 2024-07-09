@@ -42,7 +42,13 @@ namespace Thumper_Custom_Level_Editor
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
             dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
 
-            LoadKeyBindInfo();
+            //locate keybinds file. If not exist, create it from internal resource
+            if (!File.Exists($@"{AppLoc}\templates\keybinds.txt"))
+                File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
+            //read keybinds to a dictionary for easier lookup
+            keybindfromfile = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+            keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
+            LoadKeyBindInfo(keybindfromfile);
         }
 
         private void btnSetColor(object sender, EventArgs e)
@@ -127,23 +133,17 @@ namespace Thumper_Custom_Level_Editor
         /// This is all for handling keybinds
         ///
         private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+        Dictionary<string, Keys> keybindfromfile = new();
         Keys lastpress;
         Label currentlabel;
         bool ignorekeys = true;
         string keybindname;
-        private void LoadKeyBindInfo()
+        private void LoadKeyBindInfo(Dictionary<string, Keys> loadthesekeys)
         {
-            //locate keybinds file. If not exist, create it from internal resource
-            if (!File.Exists($@"{AppLoc}\templates\keybinds.txt")) 
-                File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
-            //read keybinds to a dictionary for easier lookup
-            Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-            import = import.Concat(defaultkeybinds.Where(x => !import.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
-            defaultkeybinds = import;
             //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
                 //the "14" is a leftpad empty space
-                List<string> mod = defaultkeybinds[(string)_lbl.Tag].ToString().Split(new[] {", "}, StringSplitOptions.None).ToList();
+                List<string> mod = loadthesekeys[(string)_lbl.Tag].ToString().Split(new[] {", "}, StringSplitOptions.None).ToList();
                 mod.Reverse();
                 _lbl.Text = $"{_lbl.Text.Split('.')[0],14}" + $".....{String.Join(" + ", mod)}";
             }
@@ -215,9 +215,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (MessageBox.Show("Are you sure you want to reset all keybinds to default?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-
-            File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
-            LoadKeyBindInfo();
+            LoadKeyBindInfo(defaultkeybinds);
         }
         private void btnSingleReset_Click(object sender, EventArgs e)
         {
