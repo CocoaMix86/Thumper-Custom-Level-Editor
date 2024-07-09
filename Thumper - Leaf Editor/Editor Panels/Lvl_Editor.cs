@@ -21,13 +21,7 @@ namespace Thumper_Custom_Level_Editor
 			set
 			{
 				if (value == null) {
-					loadedlvl = value;
-					lvlSeqObjs.Rows.Clear();
-					lvlLeafPaths.Rows.Clear();
-					lvlLoopTracks.Rows.Clear();
-					LvlReloadSamples();
-					lblLvlName.Text = "Lvl Editor";
-					SaveLvl(true);
+					ResetLvl();
 				}
 				else if (loadedlvl != value) {
 					loadedlvl = value;
@@ -341,20 +335,7 @@ namespace Thumper_Custom_Level_Editor
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
 				if (sender == null) {
-					//reset things to default values
-					lvljson = null;
-					_lvlleafs.Clear();
-					lvlLeafPaths.Rows.Clear();
-					lvlSeqObjs.Rows.Clear();
-					lvlLoopTracks.Rows.Clear();
-					LvlReloadSamples();
-					NUD_lvlApproach.Value = 16;
-					NUD_lvlVolume.Value = 0.5M;
-					dropLvlInput.SelectedIndex = 0;
-					dropLvlTutorial.SelectedIndex = 0;
-					lblLvlName.Text = "Lvl Editor";
-					//set saved flag to true, because nothing is loaded
-					SaveLvl(true);
+					ResetLvl();
 				}
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -1087,6 +1068,24 @@ namespace Thumper_Custom_Level_Editor
 			///end building JSON output
 			lvljson = _save;
 			return _save;
+		}
+
+		private void ResetLvl()
+        {
+			//reset things to default values
+			lvljson = null;
+			_lvlleafs.Clear();
+			lvlLeafPaths.Rows.Clear();
+			lvlSeqObjs.Rows.Clear();
+			lvlLoopTracks.Rows.Clear();
+			LvlReloadSamples();
+			NUD_lvlApproach.Value = 16;
+			NUD_lvlVolume.Value = 0.5M;
+			dropLvlInput.SelectedIndex = 0;
+			dropLvlTutorial.SelectedIndex = 0;
+			lblLvlName.Text = "Lvl Editor";
+			//set saved flag to true, because nothing is loaded
+			SaveLvl(true);
 		}
 		#endregion
 	}
