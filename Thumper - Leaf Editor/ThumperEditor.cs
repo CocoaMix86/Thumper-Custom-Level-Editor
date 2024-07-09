@@ -418,12 +418,12 @@ namespace Thumper_Custom_Level_Editor
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
         ///Toolstrip - BRING TO FRONT items
-        private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.BringToFront(); panelLeaf.Visible = true; PlaySound("UIwindowopen"); }
-        private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) { panelLevel.BringToFront(); panelLevel.Visible = true; PlaySound("UIwindowopen"); }
-        private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) { panelGate.BringToFront(); panelGate.Visible = true; PlaySound("UIwindowopen"); }
-        private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) { panelMaster.BringToFront(); panelMaster.Visible = true; PlaySound("UIwindowopen"); }
-        private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) { panelWorkingFolder.BringToFront(); panelWorkingFolder.Visible = true; PlaySound("UIwindowopen"); }
-        private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) { panelSample.BringToFront(); panelSample.Visible = true; PlaySound("UIwindowopen"); }
+        private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.BringToFront(); panelLeaf.Visible = true; leafEditorToolStripMenuItem.Checked = true; PlaySound("UIwindowopen"); }
+        private void bTFLvlToolStripMenuItem_Click(object sender, EventArgs e) { panelLevel.BringToFront(); panelLevel.Visible = true; levelEditorToolStripMenuItem.Checked = true; PlaySound("UIwindowopen"); }
+        private void bTFGateToolStripMenuItem_Click(object sender, EventArgs e) { panelGate.BringToFront(); panelGate.Visible = true; gateEditorToolStripMenuItem.Checked = true; PlaySound("UIwindowopen"); }
+        private void bTFMasterToolStripMenuItem_Click(object sender, EventArgs e) { panelMaster.BringToFront(); panelMaster.Visible = true; masterEditorToolStripMenuItem.Checked = true; PlaySound("UIwindowopen"); }
+        private void bTFFolderToolStripMenuItem_Click(object sender, EventArgs e) { panelWorkingFolder.BringToFront(); panelWorkingFolder.Visible = true; workingFolderToolStripMenuItem.Checked = true; PlaySound("UIwindowopen"); }
+        private void bTFSampleToolStripMenuItem_Click(object sender, EventArgs e) { panelSample.BringToFront(); panelSample.Visible = true; sampleEditorToolStripMenuItem.Checked = true; PlaySound("UIwindowopen"); }
 
         /// NEW CUSTOM LEVEL FOLDER
         private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
