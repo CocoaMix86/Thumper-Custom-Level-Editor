@@ -126,7 +126,7 @@ namespace Thumper_Custom_Level_Editor
 			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
 				int _in = e.NewStartingIndex;
 				//detect if lvl or a gate. If it's a gate, the lvlname won't be set
-				if (!String.IsNullOrEmpty(_masterlvls[_in].lvlname)) {
+				if (!String.IsNullOrEmpty(_masterlvls[_in].lvlname) && _masterlvls[_in].lvlname != "<none>") {
 					int idx = _masterlvls[_in].lvlname.LastIndexOf('.');
 					masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.lvl, _masterlvls[_in].lvlname[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
 				}
