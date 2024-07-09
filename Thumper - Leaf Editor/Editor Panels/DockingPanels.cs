@@ -162,6 +162,13 @@ namespace Thumper_Custom_Level_Editor
             splitTop2.SplitterDistance = (int)(splitTop2.Width / 1.3);
             splitBottom1.SplitterDistance = (int)(splitBottom1.Width / 8);
             splitBottom2.SplitterDistance = (int)(splitBottom2.Width / 1.3);
+
+            leafEditorToolStripMenuItem.Checked = true;
+            levelEditorToolStripMenuItem.Checked = true;
+            gateEditorToolStripMenuItem.Checked = true;
+            masterEditorToolStripMenuItem.Checked = true;
+            workingFolderToolStripMenuItem.Checked = true;
+            sampleEditorToolStripMenuItem.Checked = true;
         }
 
         private void editorpanelDoubleClick(object sender, EventArgs e)
