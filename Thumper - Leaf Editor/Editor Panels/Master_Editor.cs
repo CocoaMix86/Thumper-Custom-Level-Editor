@@ -20,9 +20,7 @@ namespace Thumper_Custom_Level_Editor
 			set
 			{
 				if (value == null) {
-					loadedmaster = value;
-					lblMasterName.Text = "Master Editor";
-					SaveMaster(true);
+					ResetMaster();
 				}
 				if (loadedmaster != value) {
 					loadedmaster = value;
@@ -697,6 +695,7 @@ namespace Thumper_Custom_Level_Editor
 		private void ResetMaster()
         {
 			//reset things to default values
+			masterjson = null;
 			_masterlvls.Clear();
 			lblMasterName.Text = "Master Editor";
 			btnConfigGlowColor.BackColor = Color.White;
