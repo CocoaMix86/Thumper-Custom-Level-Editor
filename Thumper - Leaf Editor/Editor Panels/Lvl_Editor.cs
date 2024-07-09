@@ -317,20 +317,6 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if LVL not saved, have user confirm if they want to continue
 			if ((!_savelvl && MessageBox.Show("Current LVL is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
-				//reset things to default values
-				lvljson = null;
-				_lvlleafs.Clear();
-				lvlLeafPaths.Rows.Clear();
-				lvlSeqObjs.Rows.Clear();
-				lvlLoopTracks.Rows.Clear();
-				LvlReloadSamples();
-				NUD_lvlApproach.Value = 16;
-				NUD_lvlVolume.Value = 0.5M;
-				dropLvlInput.SelectedIndex = 0;
-				dropLvlTutorial.SelectedIndex = 0;
-				lblLvlName.Text = "Lvl Editor";
-				//set saved flag to true, because nothing is loaded
-				SaveLvl(true);
 				lvlsaveAsToolStripMenuItem_Click(null, null);
 			}
 		}
@@ -354,6 +340,22 @@ namespace Thumper_Custom_Level_Editor
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
+				if (sender == null) {
+					//reset things to default values
+					lvljson = null;
+					_lvlleafs.Clear();
+					lvlLeafPaths.Rows.Clear();
+					lvlSeqObjs.Rows.Clear();
+					lvlLoopTracks.Rows.Clear();
+					LvlReloadSamples();
+					NUD_lvlApproach.Value = 16;
+					NUD_lvlVolume.Value = 0.5M;
+					dropLvlInput.SelectedIndex = 0;
+					dropLvlTutorial.SelectedIndex = 0;
+					lblLvlName.Text = "Lvl Editor";
+					//set saved flag to true, because nothing is loaded
+					SaveLvl(true);
+				}
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
