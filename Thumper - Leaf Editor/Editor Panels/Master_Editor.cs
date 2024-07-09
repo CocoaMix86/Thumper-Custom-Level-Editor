@@ -184,11 +184,7 @@ namespace Thumper_Custom_Level_Editor
 		private void masternewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
-				//reset things to default values
-				_masterlvls.Clear();
-				lblMasterName.Text = "Master Editor";
-				//set saved flag to true, because nothing is loaded
-				SaveMaster(true);
+
 				mastersaveAsToolStripMenuItem_Click(null, null);
 			}
 		}
@@ -236,6 +232,13 @@ namespace Thumper_Custom_Level_Editor
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
+				if (sender == null) {
+					//reset things to default values
+					_masterlvls.Clear();
+					lblMasterName.Text = "Master Editor";
+					//set saved flag to true, because nothing is loaded
+					SaveMaster(true);
+				}
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 _loadedmaster = $@"{storePath}\master_sequin.txt";
