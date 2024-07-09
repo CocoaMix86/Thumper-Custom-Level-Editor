@@ -702,6 +702,7 @@ namespace Thumper_Custom_Level_Editor
 			btnConfigPathColor.BackColor = Color.White;
 			btnConfigRailColor.BackColor = Color.White;
 			dropMasterSkybox.SelectedIndex = 1;
+			NUD_ConfigBPM.Value = 400;
 			//set saved flag to true, because nothing is loaded
 			SaveMaster(true);
 		}
