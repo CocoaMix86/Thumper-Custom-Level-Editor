@@ -179,10 +179,59 @@ namespace Thumper_Custom_Level_Editor
 		//Press Delete to clear cells
 		private void lvlSeqObjs_KeyDown(object sender, KeyEventArgs e)
 		{
+			controldown = e.Control;
+			shiftdown = e.Shift;
+			altdown = e.Alt;
 			if (e.KeyCode == Keys.Delete) {
 				lvlSeqObjs.CurrentCell.Value = null;
 				CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex);
 				e.Handled = true;
+			}
+			else if (controldown) {
+				///copies selected cells
+				if (e.KeyCode == Keys.C) {
+					DataObject d = lvlSeqObjs.GetClipboardContent();
+					Clipboard.SetDataObject(d, true);
+					e.Handled = true;
+				}
+				///cut and copies selected cells
+				if (e.KeyCode == Keys.X) {
+					DataObject d = lvlSeqObjs.GetClipboardContent();
+					Clipboard.SetDataObject(d, true);
+					lvlSeqObjs.CurrentCell.Value = null;
+					CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex);
+					e.Handled = true;
+					SaveLvl(false);
+				}
+				///pastes cell data from clipboard
+				if (e.KeyCode == Keys.V) {
+					lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
+					//get content on clipboard to string and then split it to rows
+					string s = Clipboard.GetText().Replace("\r\n", "\n");
+					string[] copiedrows = s.Split('\n');
+					//set ints so we don't have to always call rowindex, columnindex
+					int row = lvlSeqObjs.CurrentCell.RowIndex;
+					int col = lvlSeqObjs.CurrentCell.ColumnIndex;
+					for (int _line = 0; _line < copiedrows.Length; _line++) {
+						//if paste will go outside grid bounds, skip
+						if (row + _line >= lvlSeqObjs.RowCount)
+							break;
+						//split row into individual cells
+						string[] cells = copiedrows[_line].Split('\t');
+						for (int i = 0; i < cells.Length; i++) {
+							//if paste will go outside grid bounds, skip
+							if (col + i >= lvlSeqObjs.ColumnCount)
+								break;
+							//don't paste if cell is blank
+							if (cells[i] != "") {
+								lvlSeqObjs[col + i, row + _line].Value = decimal.Parse(cells[i]);
+								lvlSeqObjs[col + i, row + _line].Style.BackColor = Color.Purple;
+							}
+						}
+					}
+					SaveLvl(false);
+					lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
+				}
 			}
 		}
 		//Press Backspace to clear cells
