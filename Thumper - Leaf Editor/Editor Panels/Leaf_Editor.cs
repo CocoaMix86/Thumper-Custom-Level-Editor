@@ -287,7 +287,7 @@ namespace Thumper_Custom_Level_Editor
 					tb.PreviewKeyDown += new PreviewKeyDownEventHandler(AllowArrowMovement);
 				}
             }*/
-		}
+        }
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
