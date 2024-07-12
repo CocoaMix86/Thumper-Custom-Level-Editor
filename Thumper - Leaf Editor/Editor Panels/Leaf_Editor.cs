@@ -288,8 +288,6 @@ namespace Thumper_Custom_Level_Editor
 				}
             }*/
 			e.CellStyle.Font = new Font("Consolas", 7);
-			Color _c = e.CellStyle.BackColor;
-            e.CellStyle.ForeColor = _c.R < 150 && _c.G < 150 && _c.B < 150 ? Color.White : Color.Black;
 		}
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
