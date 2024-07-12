@@ -37,7 +37,7 @@ namespace ControlManager
             Init(control);
         }
         */
-        internal static void Init(Control control)
+        internal static void InitMover(Control control)
         {
             _moving = false;
             _resizing = false;
@@ -55,6 +55,24 @@ namespace ControlManager
             control.MouseMove -= MoveControl;
             control.MouseMove += MoveControl;
         }
+        internal static void InitResizer(Control control)
+        {
+            _moving = false;
+            _resizing = false;
+            _moveIsInterNal = false;
+            _cursorStartPoint = Point.Empty;
+            MouseIsInLeftEdge = false;
+            MouseIsInRightEdge = false;
+            MouseIsInTopEdge = false;
+            MouseIsInBottomEdge = false;
+            WorkType = MoveOrResize.MoveAndResize;
+            control.MouseDown -= StartMovingOrResizing;
+            control.MouseDown += StartMovingOrResizing;
+            control.MouseUp -= StopDragOrResizing;
+            control.MouseUp += StopDragOrResizing;
+            control.MouseMove -= ResizeControl;
+            control.MouseMove += ResizeControl;
+        }
         /*
         internal static void Dispose(Control control)
         {
@@ -70,6 +88,8 @@ namespace ControlManager
             control.MouseUp -= StopDragOrResizing;
             control.MouseMove -= MoveControl;
             control.MouseMove -= MoveControl;
+            control.MouseMove -= ResizeControl;
+            control.MouseMove -= ResizeControl;
         }
 
         private static void UpdateMouseEdgeProperties(Control control, Point mouseLocationInControl)
@@ -168,63 +188,7 @@ namespace ControlManager
                 UpdateMouseEdgeProperties(control, new Point(e.X, e.Y));
                 UpdateMouseCursor(control);
             }
-            if (_resizing) {
-                if (MouseIsInLeftEdge)
-                {
-                    if (MouseIsInTopEdge)
-                    {
-                        control.Width -= (e.X - _cursorStartPoint.X);
-                        control.Left += (e.X - _cursorStartPoint.X); 
-                        control.Height -= (e.Y - _cursorStartPoint.Y);
-                        control.Top += (e.Y - _cursorStartPoint.Y);
-                    }
-                    else if (MouseIsInBottomEdge)
-                    {
-                        control.Width -= (e.X - _cursorStartPoint.X);
-                        control.Left += (e.X - _cursorStartPoint.X);
-                        control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;                    
-                    }
-                    else
-                    {
-                        control.Width -= (e.X - _cursorStartPoint.X);
-                        control.Left += (e.X - _cursorStartPoint.X) ;
-                    }
-                }
-                else if (MouseIsInRightEdge)
-                {
-                    if (MouseIsInTopEdge)
-                    {
-                        control.Width = (e.X - _cursorStartPoint.X) + _currentControlStartSize.Width;
-                        control.Height -= (e.Y - _cursorStartPoint.Y);
-                        control.Top += (e.Y - _cursorStartPoint.Y);
-
-                    }
-                    else if (MouseIsInBottomEdge)
-                    {
-                        control.Width = (e.X - _cursorStartPoint.X) + _currentControlStartSize.Width;
-                        control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;                    
-                    }
-                    else
-                    {
-                        control.Width = (e.X - _cursorStartPoint.X)+_currentControlStartSize.Width;
-                    }
-                }
-                else if (MouseIsInTopEdge)
-                {
-                    control.Height -= (e.Y - _cursorStartPoint.Y);
-                    control.Top += (e.Y - _cursorStartPoint.Y);
-                }
-                else if (MouseIsInBottomEdge)
-                {
-                    control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;                    
-                }
-                else
-                {
-                     StopDragOrResizing(control, null);
-                }
-                control.Refresh();
-            }
-            else if (_moving)
+            if (_moving)
             {
                 _moveIsInterNal = !_moveIsInterNal;
                 if (!_moveIsInterNal)
@@ -234,6 +198,62 @@ namespace ControlManager
                     control.Location = new Point(x, y);
                     control.BringToFront();
                 }
+            }
+        }
+        private static void ResizeControl(object control1, MouseEventArgs e)
+        {
+            Control control = control1 as Control;
+            if ((string)control.Parent.Tag == "editorpanel")
+                control = control.Parent;
+
+            if (!_resizing && !_moving) {
+                UpdateMouseEdgeProperties(control, new Point(e.X, e.Y));
+                UpdateMouseCursor(control);
+            }
+            if (_resizing) {
+                if (MouseIsInLeftEdge) {
+                    if (MouseIsInTopEdge) {
+                        control.Width -= (e.X - _cursorStartPoint.X);
+                        control.Left += (e.X - _cursorStartPoint.X);
+                        control.Height -= (e.Y - _cursorStartPoint.Y);
+                        control.Top += (e.Y - _cursorStartPoint.Y);
+                    }
+                    else if (MouseIsInBottomEdge) {
+                        control.Width -= (e.X - _cursorStartPoint.X);
+                        control.Left += (e.X - _cursorStartPoint.X);
+                        control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;
+                    }
+                    else {
+                        control.Width -= (e.X - _cursorStartPoint.X);
+                        control.Left += (e.X - _cursorStartPoint.X);
+                    }
+                }
+                else if (MouseIsInRightEdge) {
+                    if (MouseIsInTopEdge) {
+                        control.Width = (e.X - _cursorStartPoint.X) + _currentControlStartSize.Width;
+                        control.Height -= (e.Y - _cursorStartPoint.Y);
+                        control.Top += (e.Y - _cursorStartPoint.Y);
+
+                    }
+                    else if (MouseIsInBottomEdge) {
+                        control.Width = (e.X - _cursorStartPoint.X) + _currentControlStartSize.Width;
+                        control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;
+                    }
+                    else {
+                        control.Width = (e.X - _cursorStartPoint.X) + _currentControlStartSize.Width;
+                    }
+                }
+                else if (MouseIsInTopEdge) {
+                    control.Height -= (e.Y - _cursorStartPoint.Y);
+                    control.Top += (e.Y - _cursorStartPoint.Y);
+                }
+                else if (MouseIsInBottomEdge) {
+                    control.Height = (e.Y - _cursorStartPoint.Y) + _currentControlStartSize.Height;
+                }
+                else {
+                    StopDragOrResizing(control, null);
+                }
+                control.Refresh();
             }
         }
 

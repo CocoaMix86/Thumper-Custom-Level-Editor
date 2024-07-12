@@ -235,25 +235,27 @@ namespace Thumper_Custom_Level_Editor
             InitializeGateStuff();
             InitializeSampleStuff();
             //set panels to be resizeable
-            ControlMoverOrResizer.Init(pictureBox1);
-            ControlMoverOrResizer.Init(panelLeaf);
-            ControlMoverOrResizer.Init(toolstripTitleLeaf);
-            ControlMoverOrResizer.Init(panelLevel);
-            ControlMoverOrResizer.Init(toolstripTitleLvl);
-            ControlMoverOrResizer.Init(panelGate);
-            ControlMoverOrResizer.Init(toolstripTitleGate);
-            ControlMoverOrResizer.Init(panelMaster);
-            ControlMoverOrResizer.Init(toolstripTitleMaster);
-            ControlMoverOrResizer.Init(panelSample);
-            ControlMoverOrResizer.Init(toolstripTitleSample);
-            ControlMoverOrResizer.Init(panelWorkingFolder);
-            ControlMoverOrResizer.Init(workingfolderFiles);
-            ControlMoverOrResizer.Init(workingToolStrip);
-            ControlMoverOrResizer.Init(workingToolStrip2);
-            ControlMoverOrResizer.Init(toolstripTitleWork);
-            ControlMoverOrResizer.Init(toolstripRecentFiles);
-            ControlMoverOrResizer.Init(panelChangelog);
-            ControlMoverOrResizer.Init(toolStripChangelog);
+            ControlMoverOrResizer.InitResizer(pictureBox1);
+
+            ControlMoverOrResizer.InitResizer(panelLeaf);
+            ControlMoverOrResizer.InitResizer(panelLevel);
+            ControlMoverOrResizer.InitResizer(panelGate);
+            ControlMoverOrResizer.InitResizer(panelMaster);
+            ControlMoverOrResizer.InitResizer(panelSample);
+            ControlMoverOrResizer.InitResizer(panelWorkingFolder);
+            ControlMoverOrResizer.InitResizer(panelChangelog);
+
+            ControlMoverOrResizer.InitMover(toolstripTitleLeaf);
+            ControlMoverOrResizer.InitMover(toolstripTitleLvl);
+            ControlMoverOrResizer.InitMover(toolstripTitleGate);
+            ControlMoverOrResizer.InitMover(toolstripTitleMaster);
+            ControlMoverOrResizer.InitMover(toolstripTitleSample);
+            ControlMoverOrResizer.InitMover(workingfolderFiles);
+            ControlMoverOrResizer.InitMover(workingToolStrip);
+            ControlMoverOrResizer.InitMover(workingToolStrip2);
+            ControlMoverOrResizer.InitMover(toolstripTitleWork);
+            ControlMoverOrResizer.InitMover(toolstripRecentFiles);
+            ControlMoverOrResizer.InitMover(toolStripChangelog);
             //write required audio files for playback
             InitializeSounds();
             //set panels to their last saved dock

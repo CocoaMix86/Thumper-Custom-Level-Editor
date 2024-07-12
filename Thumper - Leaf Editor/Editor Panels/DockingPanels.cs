@@ -259,8 +259,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
 
             if (playsound) PlaySound("UIdockun");
-            ControlMoverOrResizer.Init(panel);
-            ControlMoverOrResizer.Init(dockbtn.Owner);
+            ControlMoverOrResizer.InitResizer(panel);
+            ControlMoverOrResizer.InitMover(dockbtn.Owner);
             ((Panel)panel).BorderStyle = BorderStyle.FixedSingle;
         }
 
