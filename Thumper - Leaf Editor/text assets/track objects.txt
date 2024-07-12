@@ -256,7 +256,7 @@ level_tree2.spn;tree2 decorative[1 beat];tentacle_decorative.ent;kTraitBool;True
 level_tree3_set.spn;tree3[32 beats];trees.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level_tree3_set.spn;tree3 set_16;trees_16.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level_tree3.spn;tree3 decorative[1 beat];tentacle_decorative.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
-level_tree3_transparent_set.spn;tree3 transparent;trees.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
+level_tree3_transparent_set.spn;tree3 transparent[8 beats];trees.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level_tree3_transparent_set.spn;tree3 transparent set_10;trees_10.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level_tree3_transparent_set.spn;tree3 transparent set_20;trees_20.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level_tree3_transparent.spn;tree3 transparent decorative[1 beat];tentacle_decorative.ent;kTraitBool;True;0;[1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
