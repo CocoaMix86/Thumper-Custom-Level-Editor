@@ -292,8 +292,8 @@ namespace Thumper_Custom_Level_Editor
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex == -1 || e.ColumnIndex == -1)
-				return;
+			//if (e.RowIndex == -1 || e.ColumnIndex == -1)
+				//return;
 			//CellValueChanged(e.RowIndex, e.ColumnIndex);
 		}
 		private void CellValueChanged(int rowindex, int columnindex)
