@@ -403,8 +403,8 @@ namespace Thumper_Custom_Level_Editor
 			//show FolderBrowser, and then set "game_dir" to whatever is chosen
 			PlaySound("UIfolderopen");
 			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
-				ClearPanels();
 				workingfolder = cfd_lvl.FileName;
+				ClearPanels();
 				panelRecentFiles.Visible = false;
 				PlaySound("UIfolderclose");
 			}
