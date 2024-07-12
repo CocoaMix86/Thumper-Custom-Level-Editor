@@ -578,12 +578,12 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.panelSetKeybind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panelSetKeybind.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelSetKeybind.Controls.Add(this.lblInvalid);
             this.panelSetKeybind.Controls.Add(this.btnCloseKeybind);
             this.panelSetKeybind.Controls.Add(this.btnSingleReset);
             this.panelSetKeybind.Controls.Add(this.btnSetKeybind);
             this.panelSetKeybind.Controls.Add(this.labelKeys);
             this.panelSetKeybind.Controls.Add(this.labelKeybindName);
+            this.panelSetKeybind.Controls.Add(this.lblInvalid);
             this.panelSetKeybind.Location = new System.Drawing.Point(87, 80);
             this.panelSetKeybind.Name = "panelSetKeybind";
             this.panelSetKeybind.Size = new System.Drawing.Size(190, 65);

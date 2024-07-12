@@ -80,7 +80,7 @@ namespace Thumper_Custom_Level_Editor
 
             File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
 
-            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", defaultkeybinds.Select(x => $"{x.Key};{x.Value}"));
+            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -145,7 +145,7 @@ namespace Thumper_Custom_Level_Editor
                 //the "14" is a leftpad empty space
                 List<string> mod = loadthesekeys[(string)_lbl.Tag].ToString().Split(new[] {", "}, StringSplitOptions.None).ToList();
                 mod.Reverse();
-                _lbl.Text = $"{_lbl.Text.Split('.')[0],14}" + $".....{String.Join(" + ", mod)}";
+                _lbl.Text = $"{_lbl.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
             }
         }
         private void keybindLabel_Click(object sender, EventArgs e)
@@ -173,7 +173,7 @@ namespace Thumper_Custom_Level_Editor
                 //store last press for when user accepts changes
                 bool cantusethiskey = false;
                 lastpress = e.KeyData;
-                if (defaultkeybinds.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers))) {
+                if (keybindfromfile.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers))) {
                     cantusethiskey = true;
                     lblInvalid.Visible = true;
                 }
@@ -189,12 +189,12 @@ namespace Thumper_Custom_Level_Editor
         {
             //when user accepts keybind change, store lastpress into the keybind dictionary
             //using the saved "keybindname" stored from the Click function
-            defaultkeybinds[keybindname] = lastpress;
+            keybindfromfile[keybindname] = lastpress;
             //update the keybind label
             //the "14" is a leftpad empty space
-            List<string> mod = defaultkeybinds[keybindname].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
+            List<string> mod = keybindfromfile[keybindname].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
             mod.Reverse();
-            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{String.Join(" + ", mod)}";
+            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
             panelSetKeybind.Visible = false;
             ignorekeys = true;
         }
@@ -219,11 +219,12 @@ namespace Thumper_Custom_Level_Editor
         }
         private void btnSingleReset_Click(object sender, EventArgs e)
         {
-            defaultkeybinds[keybindname] = defaultkeybinds[keybindname];
-            lastpress = defaultkeybinds[keybindname];
+            List<string> mod = defaultkeybinds[keybindname].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
+            mod.Reverse();
             //the "14" is a leftpad empty space
-            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],14}" + $".....{defaultkeybinds[keybindname].ToString().Replace(",", " +")}";
+            //currentlabel.Text = $"{currentlabel.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
             keybindLabel_Click(currentlabel, null);
+            CustomizeWorkspace_KeyDown(null, new KeyEventArgs(defaultkeybinds[keybindname]));
         }
         private void btnCloseKeybind_Click(object sender, EventArgs e)
         {
