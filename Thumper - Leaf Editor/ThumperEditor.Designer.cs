@@ -1722,6 +1722,7 @@
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += new System.EventHandler(this.trackEditor_RowHeadersWidthChanged);
+            this.trackEditor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellEndEdit);
             this.trackEditor.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseClick);
             this.trackEditor.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDown);
             this.trackEditor.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellMouseEnter);
@@ -5460,7 +5461,7 @@
             this.toolStripMenuItem9});
             this.contextMenuNewFile.Name = "workingfolderRightClick";
             this.contextMenuNewFile.OwnerItem = this.btnWorkNewFile;
-            this.contextMenuNewFile.Size = new System.Drawing.Size(181, 136);
+            this.contextMenuNewFile.Size = new System.Drawing.Size(114, 114);
             // 
             // toolStripMenuItem5
             // 
@@ -5468,7 +5469,7 @@
             this.toolStripMenuItem5.ForeColor = System.Drawing.Color.PaleGreen;
             this.toolStripMenuItem5.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem5.Text = "Leaf";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -5478,7 +5479,7 @@
             this.toolStripMenuItem6.ForeColor = System.Drawing.Color.Green;
             this.toolStripMenuItem6.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem6.Text = "Lvl";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
             // 
@@ -5488,7 +5489,7 @@
             this.toolStripMenuItem7.ForeColor = System.Drawing.Color.Orange;
             this.toolStripMenuItem7.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem7.Text = "Gate";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.gatenewToolStripMenuItem_Click);
             // 
@@ -5498,7 +5499,7 @@
             this.toolStripMenuItem8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
             this.toolStripMenuItem8.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem8.Text = "Master";
             this.toolStripMenuItem8.Click += new System.EventHandler(this.masternewToolStripMenuItem_Click);
             // 
@@ -5508,7 +5509,7 @@
             this.toolStripMenuItem9.ForeColor = System.Drawing.Color.Turquoise;
             this.toolStripMenuItem9.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem9.Text = "Sample";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.SamplenewToolStripMenuItem_Click);
             // 
