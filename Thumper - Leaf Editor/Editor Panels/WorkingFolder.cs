@@ -404,7 +404,6 @@ namespace Thumper_Custom_Level_Editor
 			PlaySound("UIfolderopen");
 			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
 				workingfolder = cfd_lvl.FileName;
-				ClearPanels();
 				panelRecentFiles.Visible = false;
 				PlaySound("UIfolderclose");
 			}
