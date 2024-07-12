@@ -62,6 +62,7 @@ namespace Thumper_Custom_Level_Editor
             this.label8 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pictureDifficulty = new System.Windows.Forms.PictureBox();
+            this.lblNameError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureDifficulty)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,6 +189,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomName.Size = new System.Drawing.Size(192, 22);
             this.txtCustomName.TabIndex = 1;
             this.txtCustomName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtCustomName.TextChanged += new System.EventHandler(this.txtCustomName_TextChanged);
             // 
             // label5
             // 
@@ -460,6 +462,18 @@ namespace Thumper_Custom_Level_Editor
             this.pictureDifficulty.TabIndex = 143;
             this.pictureDifficulty.TabStop = false;
             // 
+            // lblNameError
+            // 
+            this.lblNameError.AutoSize = true;
+            this.lblNameError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameError.ForeColor = System.Drawing.Color.Red;
+            this.lblNameError.Location = new System.Drawing.Point(96, 50);
+            this.lblNameError.Name = "lblNameError";
+            this.lblNameError.Size = new System.Drawing.Size(58, 13);
+            this.lblNameError.TabIndex = 144;
+            this.lblNameError.Text = "error text";
+            this.lblNameError.Visible = false;
+            // 
             // DialogInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,6 +481,7 @@ namespace Thumper_Custom_Level_Editor
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(425, 436);
             this.ControlBox = false;
+            this.Controls.Add(this.lblNameError);
             this.Controls.Add(this.pictureDifficulty);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkMisc);
@@ -543,5 +558,6 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.PictureBox pictureDifficulty;
+        private System.Windows.Forms.Label lblNameError;
     }
 }

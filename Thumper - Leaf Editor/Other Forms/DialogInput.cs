@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -13,6 +14,7 @@ namespace Thumper_Custom_Level_Editor
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         private FormLeafEditor mainform { get; set; }
         private bool isthisnew;
+        private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
 
         public DialogInput(FormLeafEditor form, bool newlevel)
 		{
@@ -96,6 +98,9 @@ namespace Thumper_Custom_Level_Editor
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
             if (mainform.workingfolder != null && isthisnew == false && mainform.workingfolder != levelpath) {
                 Directory.Move(mainform.workingfolder, levelpath);
+                //if level name changes, should update the config file
+                if (File.Exists($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt"))
+                    File.Move($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt", $@"{levelpath}\config_{input.txtCustomName.Text}.txt");
             }
             if (!Directory.Exists(levelpath)) {
                 Directory.CreateDirectory(levelpath);
@@ -235,6 +240,30 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             mainform.btnWorkRefresh_Click(null, null);
+        }
+
+        private void txtCustomName_TextChanged(object sender, EventArgs e)
+        {
+            lblNameError.Visible = false;
+            btnCustomSave.Enabled = false;
+            bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
+            bool exists = Directory.Exists($@"{Path.GetDirectoryName(mainform.workingfolder)}\{txtCustomName.Text}") && txtCustomName.Text != Path.GetFileName(mainform.workingfolder);
+            bool endsindot = txtCustomName.Text.TrimEnd().EndsWith(".");
+
+            if (illegal) {
+                lblNameError.Visible = true;
+                lblNameError.Text = "Illegal characters in name";
+            }
+            else if (exists) {
+                lblNameError.Visible = true;
+                lblNameError.Text = "A folder with this name already exists";
+            }
+            else if (endsindot) {
+                lblNameError.Visible = true;
+                lblNameError.Text = "A level name cannot end with '.'";
+            }
+            else
+                btnCustomSave.Enabled = true;
         }
     }
 }
