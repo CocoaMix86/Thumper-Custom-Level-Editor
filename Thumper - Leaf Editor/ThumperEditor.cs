@@ -234,18 +234,7 @@ namespace Thumper_Custom_Level_Editor
             InitializeMasterStuff();
             InitializeGateStuff();
             InitializeSampleStuff();
-            /*
-            //set panels to be resizeable
-            ControlMoverOrResizer.InitResizer(pictureBox1);
-
-            ControlMoverOrResizer.InitResizer(panelLeaf);
-            ControlMoverOrResizer.InitResizer(panelLevel);
-            ControlMoverOrResizer.InitResizer(panelGate);
-            //ControlMoverOrResizer.InitResizer(panelMaster);
-            ControlMoverOrResizer.InitResizer(panelSample);
-            ControlMoverOrResizer.InitResizer(panelWorkingFolder);
-            ControlMoverOrResizer.InitResizer(panelChangelog);
-            */
+            //set title bars to be able to move the panels
             ControlMoverOrResizer.InitMover(toolstripTitleLeaf);
             ControlMoverOrResizer.InitMover(toolstripTitleLvl);
             ControlMoverOrResizer.InitMover(toolstripTitleGate);
@@ -255,7 +244,6 @@ namespace Thumper_Custom_Level_Editor
             ControlMoverOrResizer.InitMover(workingfolderFiles);
             ControlMoverOrResizer.InitMover(toolstripRecentFiles);
             ControlMoverOrResizer.InitMover(toolStripChangelog);
-            
             //write required audio files for playback
             InitializeSounds();
             //set panels to their last saved dock
