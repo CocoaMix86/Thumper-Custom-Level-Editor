@@ -24,6 +24,8 @@ namespace Thumper_Custom_Level_Editor
         {
             base.WndProc(ref m);
             if (m.Msg == 0x84) {  // Trap WM_NCHITTEST
+                if (this.Parent.GetType() == typeof(SplitterPanel))
+                    return;
                 var pos = this.PointToClient(new Point(m.LParam.ToInt32()));
                 if (pos.X >= this.ClientSize.Width - grab && pos.Y >= this.ClientSize.Height - grab)
                     m.Result = new IntPtr(17);  // HT_BOTTOMRIGHT
