@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor
+    public partial class FormLeafEditor : Form
 	{
 		#region Variables
 		bool _savemaster = true;

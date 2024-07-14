@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor
+    public partial class FormLeafEditor : Form
     {
         #region Event Handlers
         ///https://stackoverflow.com/questions/6521731/refresh-the-panels-of-a-splitcontainer-as-the-splitter-moves
