@@ -64,12 +64,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -161,6 +162,7 @@
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnWorkNewFile = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label48 = new System.Windows.Forms.Label();
             this.contextMenuDock = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -176,6 +178,41 @@
             this.label52 = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
+            this.btnMasterOpenLeader = new System.Windows.Forms.Button();
+            this.label34 = new System.Windows.Forms.Label();
+            this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.btnMasterRuntime = new System.Windows.Forms.Button();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.btnMasterOpenIntro = new System.Windows.Forms.Button();
+            this.btnMasterOpenCheckpoint = new System.Windows.Forms.Button();
+            this.btnMasterOpenRest = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lblLvlTunnels = new System.Windows.Forms.Label();
+            this.lblGatebuckethelp = new System.Windows.Forms.Label();
+            this.btnGateOpenRestart = new System.Windows.Forms.Button();
+            this.btnGateOpenPost = new System.Windows.Forms.Button();
+            this.btnGateOpenPre = new System.Windows.Forms.Button();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.btnWorkEditDetails = new System.Windows.Forms.Button();
+            this.trackZoomVert = new System.Windows.Forms.TrackBar();
+            this.trackZoom = new System.Windows.Forms.TrackBar();
+            this.lblRawData = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelBeeble = new System.Windows.Forms.Panel();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
@@ -195,15 +232,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.splitHorizontal = new System.Windows.Forms.SplitContainer();
             this.splitTop1 = new System.Windows.Forms.SplitContainer();
-            this.splitTop2 = new System.Windows.Forms.SplitContainer();
-            this.splitBottom1 = new System.Windows.Forms.SplitContainer();
-            this.splitBottom2 = new System.Windows.Forms.SplitContainer();
-            this.panelChangelog = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.lblChangelog = new System.Windows.Forms.Label();
-            this.toolStripChangelog = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.lblChangelogClose = new System.Windows.Forms.ToolStripButton();
             this.panelMaster = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.masterLvlList = new System.Windows.Forms.DataGridView();
             this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
@@ -225,20 +253,14 @@
             this.btnMasterLvlDown = new System.Windows.Forms.ToolStripButton();
             this.btnMasterLvlCopy = new System.Windows.Forms.ToolStripButton();
             this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterOpenLeader = new System.Windows.Forms.Button();
             this.dropMasterLvlLeader = new System.Windows.Forms.ComboBox();
-            this.label34 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblMasterRuntime = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lblMAsterRuntimeBeats = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.btnMasterRuntime = new System.Windows.Forms.Button();
-            this.label33 = new System.Windows.Forms.Label();
             this.lblConfigColorHelp = new System.Windows.Forms.Label();
             this.dropMasterSkybox = new System.Windows.Forms.ComboBox();
             this.dropMasterIntro = new System.Windows.Forms.ComboBox();
@@ -248,15 +270,12 @@
             this.btnConfigGlowColor = new System.Windows.Forms.Button();
             this.dropMasterLvlRest = new System.Windows.Forms.ComboBox();
             this.btnConfigPathColor = new System.Windows.Forms.Button();
-            this.label35 = new System.Windows.Forms.Label();
             this.NUD_ConfigBPM = new System.Windows.Forms.NumericUpDown();
             this.label27 = new System.Windows.Forms.Label();
-            this.btnMasterOpenIntro = new System.Windows.Forms.Button();
-            this.btnMasterOpenCheckpoint = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
-            this.btnMasterOpenRest = new System.Windows.Forms.Button();
+            this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.panelLevel = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.lvlToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlLeafAdd = new System.Windows.Forms.ToolStripButton();
@@ -272,10 +291,8 @@
             this.dropLvlTutorial = new System.Windows.Forms.ComboBox();
             this.label26 = new System.Windows.Forms.Label();
             this.dropLvlInput = new System.Windows.Forms.ComboBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.NUD_lvlVolume = new System.Windows.Forms.NumericUpDown();
-            this.label23 = new System.Windows.Forms.Label();
             this.NUD_lvlApproach = new System.Windows.Forms.NumericUpDown();
             this.lvlLeafList = new System.Windows.Forms.DataGridView();
             this.lvlfiletype = new System.Windows.Forms.DataGridViewImageColumn();
@@ -291,13 +308,10 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lvlSeqObjs = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label28 = new System.Windows.Forms.Label();
-            this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
             this.lvlVolumeToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlSeqAdd = new System.Windows.Forms.ToolStripButton();
             this.btnLvlSeqDelete = new System.Windows.Forms.ToolStripButton();
             this.btnLvlSeqClear = new System.Windows.Forms.ToolStripButton();
-            this.label20 = new System.Windows.Forms.Label();
             this.lvlPathsToolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnLvlPathUp = new System.Windows.Forms.ToolStripButton();
             this.btnLvlPathDown = new System.Windows.Forms.ToolStripButton();
@@ -313,13 +327,11 @@
             this.btnLvlPasteTunnel = new System.Windows.Forms.ToolStripButton();
             this.chkTunnelCopy = new System.Windows.Forms.ToolStripButton();
             this.btnLvlRandomTunnel = new System.Windows.Forms.ToolStripButton();
-            this.lblLvlTunnels = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.lvlLoopTracks = new System.Windows.Forms.DataGridView();
             this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelGate = new Thumper_Custom_Level_Editor.ResizeablePanel();
-            this.lblGatebuckethelp = new System.Windows.Forms.Label();
             this.checkGateRandom = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.toolstripTitleGate = new System.Windows.Forms.ToolStrip();
@@ -334,32 +346,25 @@
             this.btnGateLvlDelete = new System.Windows.Forms.ToolStripButton();
             this.btnGateLvlUp = new System.Windows.Forms.ToolStripButton();
             this.btnGateLvlDown = new System.Windows.Forms.ToolStripButton();
-            this.btnGateOpenRestart = new System.Windows.Forms.Button();
-            this.btnGateOpenPost = new System.Windows.Forms.Button();
-            this.btnGateOpenPre = new System.Windows.Forms.Button();
             this.lblGateSectionHelp = new System.Windows.Forms.Label();
             this.dropGateSection = new System.Windows.Forms.ComboBox();
             this.dropGateRestart = new System.Windows.Forms.ComboBox();
             this.dropGatePost = new System.Windows.Forms.ComboBox();
             this.dropGatePre = new System.Windows.Forms.ComboBox();
             this.label44 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.dropGateBoss = new System.Windows.Forms.ComboBox();
-            this.label36 = new System.Windows.Forms.Label();
             this.gateLvlList = new System.Windows.Forms.DataGridView();
             this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgvGateBucket = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.panelWorkingFolder = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.workingfolderFiles = new System.Windows.Forms.DataGridView();
             this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchforfile = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnWorkEditDetails = new System.Windows.Forms.Button();
             this.workingToolStrip = new System.Windows.Forms.ToolStrip();
             this.filterClear = new System.Windows.Forms.ToolStripButton();
             this.filterLeaf = new System.Windows.Forms.ToolStripButton();
@@ -370,7 +375,6 @@
             this.workingToolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnExplorer = new System.Windows.Forms.ToolStripButton();
             this.btnLevelFolder = new System.Windows.Forms.ToolStripButton();
-            this.btnWorkNewFile = new System.Windows.Forms.ToolStripDropDownButton();
             this.btnLeafPanelTemplate = new System.Windows.Forms.ToolStripButton();
             this.btnWorkCopy = new System.Windows.Forms.ToolStripButton();
             this.btnWorkDelete = new System.Windows.Forms.ToolStripButton();
@@ -381,12 +385,11 @@
             this.lblWorkClose = new System.Windows.Forms.ToolStripButton();
             this.lblPopoutWork = new System.Windows.Forms.ToolStripButton();
             this.btnWorkRefresh = new System.Windows.Forms.ToolStripButton();
+            this.splitBottom2 = new System.Windows.Forms.SplitContainer();
             this.panelLeaf = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.panelZoom = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
-            this.trackZoomVert = new System.Windows.Forms.TrackBar();
-            this.trackZoom = new System.Windows.Forms.TrackBar();
             this.vScrollBarTrackEditor = new System.Windows.Forms.VScrollBar();
             this.trackEditor = new System.Windows.Forms.DataGridView();
             this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -417,7 +420,6 @@
             this.btnLeafRandom = new System.Windows.Forms.ToolStripButton();
             this.label5 = new System.Windows.Forms.Label();
             this.panelRawData = new System.Windows.Forms.Panel();
-            this.lblRawData = new System.Windows.Forms.Label();
             this.btnRawImport = new System.Windows.Forms.Button();
             this.richRawTrackData = new System.Windows.Forms.RichTextBox();
             this.leaftoolsToolStrip = new System.Windows.Forms.ToolStrip();
@@ -435,18 +437,12 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.btnTrackColorDialog = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.NUD_TrackHighlight = new System.Windows.Forms.NumericUpDown();
             this.NUD_TrackDoubleclick = new System.Windows.Forms.NumericUpDown();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTrait = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.dropLeafInterp = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.txtDefault = new System.Windows.Forms.NumericUpDown();
             this.dropLeafStep = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -460,15 +456,7 @@
             this.btnTrackApply = new System.Windows.Forms.Button();
             this.numericUpDown_LeafLength = new System.Windows.Forms.NumericUpDown();
             this.panelSample = new Thumper_Custom_Level_Editor.ResizeablePanel();
-            this.panel7 = new System.Windows.Forms.Panel();
             this.sampleList = new System.Windows.Forms.DataGridView();
-            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label14 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnSampleAdd = new System.Windows.Forms.ToolStripButton();
@@ -485,10 +473,25 @@
             this.lblSampleClose = new System.Windows.Forms.ToolStripButton();
             this.lblPopoutSamp = new System.Windows.Forms.ToolStripButton();
             this.btnRevertSample = new System.Windows.Forms.ToolStripButton();
+            this.panelChangelog = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.lblChangelog = new System.Windows.Forms.Label();
+            this.toolStripChangelog = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.lblChangelogClose = new System.Windows.Forms.ToolStripButton();
+            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             this.workingfolderRightClick.SuspendLayout();
             this.contextMenuNewFile.SuspendLayout();
             this.contextMenuDock.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelBeeble.SuspendLayout();
             this.panelRecentFiles.SuspendLayout();
@@ -502,27 +505,16 @@
             this.splitTop1.Panel1.SuspendLayout();
             this.splitTop1.Panel2.SuspendLayout();
             this.splitTop1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitTop2)).BeginInit();
-            this.splitTop2.Panel1.SuspendLayout();
-            this.splitTop2.Panel2.SuspendLayout();
-            this.splitTop2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitBottom1)).BeginInit();
-            this.splitBottom1.Panel1.SuspendLayout();
-            this.splitBottom1.Panel2.SuspendLayout();
-            this.splitBottom1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitBottom2)).BeginInit();
-            this.splitBottom2.Panel1.SuspendLayout();
-            this.splitBottom2.Panel2.SuspendLayout();
-            this.splitBottom2.SuspendLayout();
-            this.panelChangelog.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.toolStripChangelog.SuspendLayout();
             this.panelMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
             this.toolstripTitleMaster.SuspendLayout();
             this.masterToolStrip.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitTop2)).BeginInit();
+            this.splitTop2.Panel1.SuspendLayout();
+            this.splitTop2.Panel2.SuspendLayout();
+            this.splitTop2.SuspendLayout();
             this.panelLevel.SuspendLayout();
             this.lvlToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).BeginInit();
@@ -535,7 +527,6 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lvlSeqObjs)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).BeginInit();
             this.lvlVolumeToolStrip.SuspendLayout();
             this.lvlPathsToolStrip2.SuspendLayout();
             this.lvlLoopToolStrip.SuspendLayout();
@@ -546,15 +537,21 @@
             this.toolstripTitleGate.SuspendLayout();
             this.gateToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBottom1)).BeginInit();
+            this.splitBottom1.Panel1.SuspendLayout();
+            this.splitBottom1.Panel2.SuspendLayout();
+            this.splitBottom1.SuspendLayout();
             this.panelWorkingFolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).BeginInit();
             this.workingToolStrip.SuspendLayout();
             this.workingToolStrip2.SuspendLayout();
             this.toolstripTitleWork.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBottom2)).BeginInit();
+            this.splitBottom2.Panel1.SuspendLayout();
+            this.splitBottom2.Panel2.SuspendLayout();
+            this.splitBottom2.SuspendLayout();
             this.panelLeaf.SuspendLayout();
             this.panelZoom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
             this.toolstripTitleLeaf.SuspendLayout();
             this.leafToolStrip.SuspendLayout();
@@ -569,10 +566,12 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
             this.panelSample.SuspendLayout();
-            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
             this.sampleToolStrip.SuspendLayout();
             this.toolstripTitleSample.SuspendLayout();
+            this.panelChangelog.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.toolStripChangelog.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -1606,6 +1605,18 @@
             this.toolStripMenuItem9.Text = "Sample";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.SamplenewToolStripMenuItem_Click);
             // 
+            // btnWorkNewFile
+            // 
+            this.btnWorkNewFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnWorkNewFile.DropDown = this.contextMenuNewFile;
+            this.btnWorkNewFile.Enabled = false;
+            this.btnWorkNewFile.Image = ((System.Drawing.Image)(resources.GetObject("btnWorkNewFile.Image")));
+            this.btnWorkNewFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnWorkNewFile.Name = "btnWorkNewFile";
+            this.btnWorkNewFile.ShowDropDownArrow = false;
+            this.btnWorkNewFile.Size = new System.Drawing.Size(24, 22);
+            this.btnWorkNewFile.ToolTipText = "Add a new file to this level";
+            // 
             // toolTip1
             // 
             this.toolTip1.AutoPopDelay = 5000;
@@ -1796,6 +1807,539 @@
             this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.label55, "Dock panel");
             this.label55.Click += new System.EventHandler(this.dockbtn_Click);
+            // 
+            // btnMasterOpenLeader
+            // 
+            this.btnMasterOpenLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnMasterOpenLeader.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenLeader.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterOpenLeader.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasterOpenLeader.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterOpenLeader.ForeColor = System.Drawing.Color.Black;
+            this.btnMasterOpenLeader.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
+            this.btnMasterOpenLeader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMasterOpenLeader.Location = new System.Drawing.Point(120, 350);
+            this.btnMasterOpenLeader.Name = "btnMasterOpenLeader";
+            this.btnMasterOpenLeader.Size = new System.Drawing.Size(23, 23);
+            this.btnMasterOpenLeader.TabIndex = 117;
+            this.btnMasterOpenLeader.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenLeader, "Load lvl into Lvl Editor");
+            this.btnMasterOpenLeader.UseVisualStyleBackColor = false;
+            this.btnMasterOpenLeader.Visible = false;
+            this.btnMasterOpenLeader.Click += new System.EventHandler(this.btnMasterOpenLeader_Click);
+            // 
+            // label34
+            // 
+            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.ForeColor = System.Drawing.Color.White;
+            this.label34.Location = new System.Drawing.Point(3, 338);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(114, 13);
+            this.label34.TabIndex = 102;
+            this.label34.Text = "Checkpoint Leader Lvl";
+            this.toolTip1.SetToolTip(this.label34, "Currently unsure what exactly this does.");
+            this.label34.Visible = false;
+            // 
+            // lblMasterlvllistHelp
+            // 
+            this.lblMasterlvllistHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMasterlvllistHelp.AutoSize = true;
+            this.lblMasterlvllistHelp.BackColor = System.Drawing.Color.Transparent;
+            this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(205, 23);
+            this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
+            this.lblMasterlvllistHelp.Size = new System.Drawing.Size(15, 16);
+            this.lblMasterlvllistHelp.TabIndex = 95;
+            this.lblMasterlvllistHelp.Text = "?";
+            this.toolTip1.SetToolTip(this.lblMasterlvllistHelp, resources.GetString("lblMasterlvllistHelp.ToolTip"));
+            // 
+            // label32
+            // 
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.ForeColor = System.Drawing.Color.White;
+            this.label32.Location = new System.Drawing.Point(63, 58);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(49, 15);
+            this.label32.TabIndex = 99;
+            this.label32.Text = "Intro Lvl";
+            this.toolTip1.SetToolTip(this.label32, "This lvl plays at the very beginning, when you start\r\nfor the first time or resta" +
+        "rt");
+            // 
+            // btnMasterRuntime
+            // 
+            this.btnMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterRuntime.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterRuntime.Enabled = false;
+            this.btnMasterRuntime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMasterRuntime.ForeColor = System.Drawing.Color.Green;
+            this.btnMasterRuntime.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterRuntime.Image")));
+            this.btnMasterRuntime.Location = new System.Drawing.Point(18, 254);
+            this.btnMasterRuntime.Name = "btnMasterRuntime";
+            this.btnMasterRuntime.Padding = new System.Windows.Forms.Padding(0, 0, 2, 1);
+            this.btnMasterRuntime.Size = new System.Drawing.Size(20, 20);
+            this.btnMasterRuntime.TabIndex = 143;
+            this.toolTip1.SetToolTip(this.btnMasterRuntime, "Recalculate the level runtime.\r\n\r\nDOES NOT ACCOUNT FOR SPEED UP/SLOW DOWN\r\nEFFECT" +
+        "S DONE IN LEAFS");
+            this.btnMasterRuntime.UseVisualStyleBackColor = true;
+            this.btnMasterRuntime.Click += new System.EventHandler(this.btnMasterRuntime_Click);
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.ForeColor = System.Drawing.Color.White;
+            this.label33.Location = new System.Drawing.Point(44, 97);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(86, 15);
+            this.label33.TabIndex = 101;
+            this.label33.Text = "Checkpoint Lvl";
+            this.toolTip1.SetToolTip(this.label33, "This lvl plays after every checkpoint, before the next lvl.");
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.White;
+            this.label35.Location = new System.Drawing.Point(62, 304);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(50, 15);
+            this.label35.TabIndex = 104;
+            this.label35.Text = "Rest Lvl";
+            this.toolTip1.SetToolTip(this.label35, "If set, this lvl will play before the selected lvl. Usually used as a longer rest" +
+        " segment.");
+            // 
+            // btnMasterOpenIntro
+            // 
+            this.btnMasterOpenIntro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterOpenIntro.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenIntro.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterOpenIntro.Enabled = false;
+            this.btnMasterOpenIntro.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasterOpenIntro.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
+            this.btnMasterOpenIntro.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenIntro.Image")));
+            this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMasterOpenIntro.Location = new System.Drawing.Point(149, 72);
+            this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
+            this.btnMasterOpenIntro.Size = new System.Drawing.Size(23, 23);
+            this.btnMasterOpenIntro.TabIndex = 114;
+            this.btnMasterOpenIntro.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenIntro, "Load lvl into Lvl Editor");
+            this.btnMasterOpenIntro.UseVisualStyleBackColor = false;
+            this.btnMasterOpenIntro.Click += new System.EventHandler(this.btnMasterOpenIntro_Click);
+            // 
+            // btnMasterOpenCheckpoint
+            // 
+            this.btnMasterOpenCheckpoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterOpenCheckpoint.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenCheckpoint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterOpenCheckpoint.Enabled = false;
+            this.btnMasterOpenCheckpoint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasterOpenCheckpoint.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
+            this.btnMasterOpenCheckpoint.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenCheckpoint.Image")));
+            this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(149, 112);
+            this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
+            this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(23, 23);
+            this.btnMasterOpenCheckpoint.TabIndex = 115;
+            this.btnMasterOpenCheckpoint.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenCheckpoint, "Load lvl into Lvl Editor");
+            this.btnMasterOpenCheckpoint.UseVisualStyleBackColor = false;
+            this.btnMasterOpenCheckpoint.Click += new System.EventHandler(this.btnMasterOpenCheckpoint_Click);
+            // 
+            // btnMasterOpenRest
+            // 
+            this.btnMasterOpenRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMasterOpenRest.BackColor = System.Drawing.Color.Gray;
+            this.btnMasterOpenRest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMasterOpenRest.Enabled = false;
+            this.btnMasterOpenRest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMasterOpenRest.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
+            this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
+            this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMasterOpenRest.Location = new System.Drawing.Point(149, 319);
+            this.btnMasterOpenRest.Name = "btnMasterOpenRest";
+            this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
+            this.btnMasterOpenRest.TabIndex = 118;
+            this.btnMasterOpenRest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnMasterOpenRest, "Load lvl into Lvl Editor");
+            this.btnMasterOpenRest.UseVisualStyleBackColor = false;
+            this.btnMasterOpenRest.Click += new System.EventHandler(this.btnMasterOpenRest_Click);
+            // 
+            // label25
+            // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.White;
+            this.label25.Location = new System.Drawing.Point(29, 331);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(66, 15);
+            this.label25.TabIndex = 89;
+            this.label25.Text = "Allow Input";
+            this.toolTip1.SetToolTip(this.label25, "Can the player control the beetle during this lvl?");
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.White;
+            this.label23.Location = new System.Drawing.Point(2, 288);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(93, 15);
+            this.label23.TabIndex = 68;
+            this.label23.Text = "Approach Beats";
+            this.toolTip1.SetToolTip(this.label23, "How many beats before the first leaf starts");
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.ForeColor = System.Drawing.Color.White;
+            this.label28.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
+            this.label28.Location = new System.Drawing.Point(1, 2);
+            this.label28.MinimumSize = new System.Drawing.Size(20, 20);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(20, 20);
+            this.label28.TabIndex = 42;
+            this.toolTip1.SetToolTip(this.label28, "Cell zoom/width");
+            // 
+            // trackLvlVolumeZoom
+            // 
+            this.trackLvlVolumeZoom.AutoSize = false;
+            this.trackLvlVolumeZoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.trackLvlVolumeZoom.Location = new System.Drawing.Point(18, 4);
+            this.trackLvlVolumeZoom.Maximum = 120;
+            this.trackLvlVolumeZoom.Minimum = 2;
+            this.trackLvlVolumeZoom.Name = "trackLvlVolumeZoom";
+            this.trackLvlVolumeZoom.Size = new System.Drawing.Size(100, 19);
+            this.trackLvlVolumeZoom.TabIndex = 41;
+            this.trackLvlVolumeZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.toolTip1.SetToolTip(this.trackLvlVolumeZoom, "Cell zoom/width");
+            this.trackLvlVolumeZoom.Value = 60;
+            this.trackLvlVolumeZoom.Scroll += new System.EventHandler(this.trackLvlVolumeZoom_Scroll);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.White;
+            this.label20.Location = new System.Drawing.Point(27, 3);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(182, 13);
+            this.label20.TabIndex = 68;
+            this.label20.Text = "Loop Track Volume Sequencer";
+            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
+            // 
+            // lblLvlTunnels
+            // 
+            this.lblLvlTunnels.AutoSize = true;
+            this.lblLvlTunnels.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.lblLvlTunnels.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLvlTunnels.ForeColor = System.Drawing.Color.White;
+            this.lblLvlTunnels.Location = new System.Drawing.Point(55, 1);
+            this.lblLvlTunnels.Name = "lblLvlTunnels";
+            this.lblLvlTunnels.Size = new System.Drawing.Size(90, 13);
+            this.lblLvlTunnels.TabIndex = 80;
+            this.lblLvlTunnels.Text = "Paths/Tunnels";
+            this.toolTip1.SetToolTip(this.lblLvlTunnels, "Unique per leaf");
+            // 
+            // lblGatebuckethelp
+            // 
+            this.lblGatebuckethelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblGatebuckethelp.AutoSize = true;
+            this.lblGatebuckethelp.BackColor = System.Drawing.Color.Transparent;
+            this.lblGatebuckethelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblGatebuckethelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGatebuckethelp.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblGatebuckethelp.Location = new System.Drawing.Point(194, 360);
+            this.lblGatebuckethelp.Name = "lblGatebuckethelp";
+            this.lblGatebuckethelp.Size = new System.Drawing.Size(15, 16);
+            this.lblGatebuckethelp.TabIndex = 145;
+            this.lblGatebuckethelp.Text = "?";
+            this.toolTip1.SetToolTip(this.lblGatebuckethelp, resources.GetString("lblGatebuckethelp.ToolTip"));
+            // 
+            // btnGateOpenRestart
+            // 
+            this.btnGateOpenRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGateOpenRestart.BackColor = System.Drawing.Color.Gray;
+            this.btnGateOpenRestart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGateOpenRestart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGateOpenRestart.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGateOpenRestart.ForeColor = System.Drawing.Color.Black;
+            this.btnGateOpenRestart.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenRestart.Image")));
+            this.btnGateOpenRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 314);
+            this.btnGateOpenRestart.Name = "btnGateOpenRestart";
+            this.btnGateOpenRestart.Size = new System.Drawing.Size(23, 23);
+            this.btnGateOpenRestart.TabIndex = 133;
+            this.btnGateOpenRestart.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnGateOpenRestart, "Load lvl into Lvl Editor");
+            this.btnGateOpenRestart.UseVisualStyleBackColor = false;
+            this.btnGateOpenRestart.Click += new System.EventHandler(this.btnGateOpenRestart_Click);
+            // 
+            // btnGateOpenPost
+            // 
+            this.btnGateOpenPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGateOpenPost.BackColor = System.Drawing.Color.Gray;
+            this.btnGateOpenPost.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGateOpenPost.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGateOpenPost.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGateOpenPost.ForeColor = System.Drawing.Color.Black;
+            this.btnGateOpenPost.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPost.Image")));
+            this.btnGateOpenPost.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 292);
+            this.btnGateOpenPost.Name = "btnGateOpenPost";
+            this.btnGateOpenPost.Size = new System.Drawing.Size(23, 23);
+            this.btnGateOpenPost.TabIndex = 132;
+            this.btnGateOpenPost.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnGateOpenPost, "Load lvl into Lvl Editor");
+            this.btnGateOpenPost.UseVisualStyleBackColor = false;
+            this.btnGateOpenPost.Click += new System.EventHandler(this.btnGateOpenPost_Click);
+            // 
+            // btnGateOpenPre
+            // 
+            this.btnGateOpenPre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGateOpenPre.BackColor = System.Drawing.Color.Gray;
+            this.btnGateOpenPre.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGateOpenPre.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGateOpenPre.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGateOpenPre.ForeColor = System.Drawing.Color.Black;
+            this.btnGateOpenPre.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPre.Image")));
+            this.btnGateOpenPre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 270);
+            this.btnGateOpenPre.Name = "btnGateOpenPre";
+            this.btnGateOpenPre.Size = new System.Drawing.Size(23, 23);
+            this.btnGateOpenPre.TabIndex = 119;
+            this.btnGateOpenPre.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnGateOpenPre, "Load lvl into Lvl Editor");
+            this.btnGateOpenPre.UseVisualStyleBackColor = false;
+            this.btnGateOpenPre.Click += new System.EventHandler(this.btnGateOpenPre_Click);
+            // 
+            // label43
+            // 
+            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.ForeColor = System.Drawing.Color.White;
+            this.label43.Location = new System.Drawing.Point(20, 317);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(64, 15);
+            this.label43.TabIndex = 124;
+            this.label43.Text = "Restart Lvl";
+            this.toolTip1.SetToolTip(this.label43, "RESTART LVL\r\nThis lvl plays when restarting the boss, and skips playing the pre a" +
+        "nd post lvls. \r\nCan be blank.");
+            // 
+            // label42
+            // 
+            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.ForeColor = System.Drawing.Color.White;
+            this.label42.Location = new System.Drawing.Point(35, 295);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(49, 15);
+            this.label42.TabIndex = 123;
+            this.label42.Text = "Post Lvl";
+            this.toolTip1.SetToolTip(this.label42, "POST LVL\r\nPlays immediately after the Pre lvl. The boss spawns in at this point. " +
+        "The boss phases \r\nplay immediately after this lvl is finished. Can be blank.");
+            // 
+            // label41
+            // 
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.ForeColor = System.Drawing.Color.White;
+            this.label41.Location = new System.Drawing.Point(40, 272);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(44, 15);
+            this.label41.TabIndex = 122;
+            this.label41.Text = "Pre Lvl";
+            this.toolTip1.SetToolTip(this.label41, "PRE LVL\r\nThis lvl plays at the very start of the gate sublevel. The boss does not" +
+        " spawn in yet. \r\nCan be blank, unless you are using the Triangle boss.");
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.White;
+            this.label36.Location = new System.Drawing.Point(3, 26);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(79, 13);
+            this.label36.TabIndex = 116;
+            this.label36.Text = "Boss Phases";
+            this.toolTip1.SetToolTip(this.label36, "Each boss requires 4 phases. 1 phase is 1 lvl file.\r\nYou may reuse the same lvl f" +
+        "or phases.");
+            // 
+            // btnWorkEditDetails
+            // 
+            this.btnWorkEditDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnWorkEditDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btnWorkEditDetails.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnWorkEditDetails.Enabled = false;
+            this.btnWorkEditDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWorkEditDetails.ForeColor = System.Drawing.Color.White;
+            this.btnWorkEditDetails.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
+            this.btnWorkEditDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnWorkEditDetails.Location = new System.Drawing.Point(25, 47);
+            this.btnWorkEditDetails.Name = "btnWorkEditDetails";
+            this.btnWorkEditDetails.Size = new System.Drawing.Size(220, 28);
+            this.btnWorkEditDetails.TabIndex = 151;
+            this.btnWorkEditDetails.Text = "Edit Level Info";
+            this.toolTip1.SetToolTip(this.btnWorkEditDetails, "Name, difficulty, save location, and audio sample packs");
+            this.btnWorkEditDetails.UseVisualStyleBackColor = false;
+            this.btnWorkEditDetails.Click += new System.EventHandler(this.btnWorkEditDetails_Click);
+            // 
+            // trackZoomVert
+            // 
+            this.trackZoomVert.AutoSize = false;
+            this.trackZoomVert.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.trackZoomVert.Location = new System.Drawing.Point(39, 17);
+            this.trackZoomVert.Margin = new System.Windows.Forms.Padding(0);
+            this.trackZoomVert.Maximum = 100;
+            this.trackZoomVert.Minimum = 1;
+            this.trackZoomVert.Name = "trackZoomVert";
+            this.trackZoomVert.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackZoomVert.Size = new System.Drawing.Size(19, 100);
+            this.trackZoomVert.TabIndex = 43;
+            this.trackZoomVert.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.toolTip1.SetToolTip(this.trackZoomVert, "Row zoom/height");
+            this.trackZoomVert.Value = 20;
+            this.trackZoomVert.ValueChanged += new System.EventHandler(this.trackZoomVert_Scroll);
+            // 
+            // trackZoom
+            // 
+            this.trackZoom.AutoSize = false;
+            this.trackZoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.trackZoom.Location = new System.Drawing.Point(-3, 3);
+            this.trackZoom.Margin = new System.Windows.Forms.Padding(0);
+            this.trackZoom.Maximum = 100;
+            this.trackZoom.Minimum = 1;
+            this.trackZoom.Name = "trackZoom";
+            this.trackZoom.Size = new System.Drawing.Size(100, 19);
+            this.trackZoom.TabIndex = 41;
+            this.trackZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.toolTip1.SetToolTip(this.trackZoom, "Cell zoom/width");
+            this.trackZoom.Value = 40;
+            this.trackZoom.ValueChanged += new System.EventHandler(this.trackZoom_Scroll);
+            // 
+            // lblRawData
+            // 
+            this.lblRawData.AutoSize = true;
+            this.lblRawData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblRawData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblRawData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRawData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblRawData.Location = new System.Drawing.Point(0, -1);
+            this.lblRawData.MinimumSize = new System.Drawing.Size(20, 20);
+            this.lblRawData.Name = "lblRawData";
+            this.lblRawData.Size = new System.Drawing.Size(20, 20);
+            this.lblRawData.TabIndex = 139;
+            this.lblRawData.Text = "▼";
+            this.lblRawData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
+            this.lblRawData.Click += new System.EventHandler(this.lblRawData_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(3, 69);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(105, 15);
+            this.label16.TabIndex = 56;
+            this.label16.Text = "Doubleclick Value";
+            this.toolTip1.SetToolTip(this.label16, "The value to auto-insert when doubleclicking a cell");
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(20, 46);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(88, 15);
+            this.label17.TabIndex = 59;
+            this.label17.Text = "Highlight value";
+            this.toolTip1.SetToolTip(this.label17, "Applies the highlight color when cell value\r\nis above this value.");
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(27, 70);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 15);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Default";
+            this.toolTip1.SetToolTip(this.label7, "If no value is set on a beat, the game will use this default.");
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label46.ForeColor = System.Drawing.Color.White;
+            this.label46.Location = new System.Drawing.Point(8, 93);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(65, 13);
+            this.label46.TabIndex = 106;
+            this.label46.Text = "Interpolation";
+            this.toolTip1.SetToolTip(this.label46, resources.GetString("label46.ToolTip"));
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(41, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(32, 15);
+            this.label8.TabIndex = 36;
+            this.label8.Text = "Step";
+            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(42, 24);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(31, 15);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "Trait";
+            this.toolTip1.SetToolTip(this.label9, "The data type of the object. Recommended to not edit.");
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label14.Location = new System.Drawing.Point(306, 25);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(15, 16);
+            this.label14.TabIndex = 151;
+            this.label14.Text = "?";
+            this.toolTip1.SetToolTip(this.label14, "V. (volume)\r\nP. (pitch)\r\nPan\r\nOf. (offset)\r\nCh. (channel)");
             // 
             // pictureBox1
             // 
@@ -2090,159 +2634,6 @@
             this.splitTop1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitTop1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
             this.splitTop1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
-            // 
-            // splitTop2
-            // 
-            this.splitTop2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitTop2.Location = new System.Drawing.Point(0, 0);
-            this.splitTop2.Name = "splitTop2";
-            // 
-            // splitTop2.Panel1
-            // 
-            this.splitTop2.Panel1.ContextMenuStrip = this.contextMenuDock;
-            this.splitTop2.Panel1.Controls.Add(this.panelLevel);
-            this.splitTop2.Panel1.Controls.Add(this.label49);
-            this.splitTop2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            // 
-            // splitTop2.Panel2
-            // 
-            this.splitTop2.Panel2.ContextMenuStrip = this.contextMenuDock;
-            this.splitTop2.Panel2.Controls.Add(this.panelGate);
-            this.splitTop2.Panel2.Controls.Add(this.label51);
-            this.splitTop2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitTop2.Size = new System.Drawing.Size(1342, 382);
-            this.splitTop2.SplitterDistance = 1007;
-            this.splitTop2.TabIndex = 47;
-            this.splitTop2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
-            this.splitTop2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
-            this.splitTop2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
-            // 
-            // splitBottom1
-            // 
-            this.splitBottom1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitBottom1.Location = new System.Drawing.Point(0, 0);
-            this.splitBottom1.Name = "splitBottom1";
-            // 
-            // splitBottom1.Panel1
-            // 
-            this.splitBottom1.Panel1.ContextMenuStrip = this.contextMenuDock;
-            this.splitBottom1.Panel1.Controls.Add(this.panelWorkingFolder);
-            this.splitBottom1.Panel1.Controls.Add(this.label52);
-            this.splitBottom1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            // 
-            // splitBottom1.Panel2
-            // 
-            this.splitBottom1.Panel2.Controls.Add(this.splitBottom2);
-            this.splitBottom1.Size = new System.Drawing.Size(1745, 481);
-            this.splitBottom1.SplitterDistance = 254;
-            this.splitBottom1.TabIndex = 0;
-            this.splitBottom1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
-            this.splitBottom1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
-            this.splitBottom1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
-            // 
-            // splitBottom2
-            // 
-            this.splitBottom2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitBottom2.Location = new System.Drawing.Point(0, 0);
-            this.splitBottom2.Name = "splitBottom2";
-            // 
-            // splitBottom2.Panel1
-            // 
-            this.splitBottom2.Panel1.ContextMenuStrip = this.contextMenuDock;
-            this.splitBottom2.Panel1.Controls.Add(this.panelLeaf);
-            this.splitBottom2.Panel1.Controls.Add(this.label53);
-            this.splitBottom2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            // 
-            // splitBottom2.Panel2
-            // 
-            this.splitBottom2.Panel2.ContextMenuStrip = this.contextMenuDock;
-            this.splitBottom2.Panel2.Controls.Add(this.panelSample);
-            this.splitBottom2.Panel2.Controls.Add(this.label55);
-            this.splitBottom2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitBottom2.Size = new System.Drawing.Size(1487, 481);
-            this.splitBottom2.SplitterDistance = 1157;
-            this.splitBottom2.TabIndex = 46;
-            this.splitBottom2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
-            this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
-            this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
-            // 
-            // panelChangelog
-            // 
-            this.panelChangelog.AutoScroll = true;
-            this.panelChangelog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.panelChangelog.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelChangelog.Controls.Add(this.panel8);
-            this.panelChangelog.Controls.Add(this.toolStripChangelog);
-            this.panelChangelog.Location = new System.Drawing.Point(679, 0);
-            this.panelChangelog.Name = "panelChangelog";
-            this.panelChangelog.Size = new System.Drawing.Size(555, 535);
-            this.panelChangelog.TabIndex = 139;
-            this.panelChangelog.Tag = "editorpanel";
-            this.panelChangelog.Visible = false;
-            // 
-            // panel8
-            // 
-            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel8.AutoScroll = true;
-            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel8.Controls.Add(this.lblChangelog);
-            this.panel8.Location = new System.Drawing.Point(7, 26);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(535, 495);
-            this.panel8.TabIndex = 142;
-            // 
-            // lblChangelog
-            // 
-            this.lblChangelog.AutoSize = true;
-            this.lblChangelog.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblChangelog.ForeColor = System.Drawing.Color.White;
-            this.lblChangelog.Location = new System.Drawing.Point(0, 0);
-            this.lblChangelog.Name = "lblChangelog";
-            this.lblChangelog.Size = new System.Drawing.Size(68, 13);
-            this.lblChangelog.TabIndex = 141;
-            this.lblChangelog.Text = "lblChangelog";
-            // 
-            // toolStripChangelog
-            // 
-            this.toolStripChangelog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripChangelog.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolStripChangelog.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStripChangelog.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel4,
-            this.lblChangelogClose});
-            this.toolStripChangelog.Location = new System.Drawing.Point(0, 0);
-            this.toolStripChangelog.MaximumSize = new System.Drawing.Size(0, 50);
-            this.toolStripChangelog.Name = "toolStripChangelog";
-            this.toolStripChangelog.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripChangelog.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStripChangelog.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripChangelog.Size = new System.Drawing.Size(551, 25);
-            this.toolStripChangelog.Stretch = true;
-            this.toolStripChangelog.TabIndex = 140;
-            this.toolStripChangelog.Text = "titlebar";
-            // 
-            // toolStripLabel4
-            // 
-            this.toolStripLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripLabel4.ForeColor = System.Drawing.Color.Yellow;
-            this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(67, 22);
-            this.toolStripLabel4.Text = "Changelog";
-            // 
-            // lblChangelogClose
-            // 
-            this.lblChangelogClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblChangelogClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblChangelogClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblChangelogClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblChangelogClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblChangelogClose.Name = "lblChangelogClose";
-            this.lblChangelogClose.Size = new System.Drawing.Size(23, 25);
-            this.lblChangelogClose.Text = "toolStripButton6";
-            this.lblChangelogClose.ToolTipText = "Close panel";
-            this.lblChangelogClose.Click += new System.EventHandler(this.lblChangelogClose_Click);
             // 
             // panelMaster
             // 
@@ -2563,26 +2954,6 @@
             this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
             this.btnMasterLvlPaste.Click += new System.EventHandler(this.btnMasterLvlPaste_Click);
             // 
-            // btnMasterOpenLeader
-            // 
-            this.btnMasterOpenLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnMasterOpenLeader.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenLeader.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenLeader.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenLeader.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenLeader.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenLeader.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
-            this.btnMasterOpenLeader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenLeader.Location = new System.Drawing.Point(120, 350);
-            this.btnMasterOpenLeader.Name = "btnMasterOpenLeader";
-            this.btnMasterOpenLeader.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenLeader.TabIndex = 117;
-            this.btnMasterOpenLeader.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnMasterOpenLeader, "Load lvl into Lvl Editor");
-            this.btnMasterOpenLeader.UseVisualStyleBackColor = false;
-            this.btnMasterOpenLeader.Visible = false;
-            this.btnMasterOpenLeader.Click += new System.EventHandler(this.btnMasterOpenLeader_Click);
-            // 
             // dropMasterLvlLeader
             // 
             this.dropMasterLvlLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -2600,20 +2971,6 @@
             this.dropMasterLvlLeader.Visible = false;
             this.dropMasterLvlLeader.SelectedIndexChanged += new System.EventHandler(this.dropMasterLvlLeader_SelectedIndexChanged);
             // 
-            // label34
-            // 
-            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(3, 338);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(114, 13);
-            this.label34.TabIndex = 102;
-            this.label34.Text = "Checkpoint Leader Lvl";
-            this.toolTip1.SetToolTip(this.label34, "Currently unsure what exactly this does.");
-            this.label34.Visible = false;
-            // 
             // label30
             // 
             this.label30.AutoSize = true;
@@ -2625,21 +2982,6 @@
             this.label30.Size = new System.Drawing.Size(81, 13);
             this.label30.TabIndex = 94;
             this.label30.Text = "Lvl/Gate List";
-            // 
-            // lblMasterlvllistHelp
-            // 
-            this.lblMasterlvllistHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMasterlvllistHelp.AutoSize = true;
-            this.lblMasterlvllistHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(205, 23);
-            this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
-            this.lblMasterlvllistHelp.Size = new System.Drawing.Size(15, 16);
-            this.lblMasterlvllistHelp.TabIndex = 95;
-            this.lblMasterlvllistHelp.Text = "?";
-            this.toolTip1.SetToolTip(this.lblMasterlvllistHelp, resources.GetString("lblMasterlvllistHelp.ToolTip"));
             // 
             // panel5
             // 
@@ -2740,51 +3082,6 @@
             this.label21.Size = new System.Drawing.Size(78, 15);
             this.label21.TabIndex = 144;
             this.label21.Text = "══Runtime══";
-            // 
-            // label32
-            // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.White;
-            this.label32.Location = new System.Drawing.Point(63, 58);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(49, 15);
-            this.label32.TabIndex = 99;
-            this.label32.Text = "Intro Lvl";
-            this.toolTip1.SetToolTip(this.label32, "This lvl plays at the very beginning, when you start\r\nfor the first time or resta" +
-        "rt");
-            // 
-            // btnMasterRuntime
-            // 
-            this.btnMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterRuntime.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterRuntime.Enabled = false;
-            this.btnMasterRuntime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMasterRuntime.ForeColor = System.Drawing.Color.Green;
-            this.btnMasterRuntime.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterRuntime.Image")));
-            this.btnMasterRuntime.Location = new System.Drawing.Point(18, 254);
-            this.btnMasterRuntime.Name = "btnMasterRuntime";
-            this.btnMasterRuntime.Padding = new System.Windows.Forms.Padding(0, 0, 2, 1);
-            this.btnMasterRuntime.Size = new System.Drawing.Size(20, 20);
-            this.btnMasterRuntime.TabIndex = 143;
-            this.toolTip1.SetToolTip(this.btnMasterRuntime, "Recalculate the level runtime.\r\n\r\nDOES NOT ACCOUNT FOR SPEED UP/SLOW DOWN\r\nEFFECT" +
-        "S DONE IN LEAFS");
-            this.btnMasterRuntime.UseVisualStyleBackColor = true;
-            this.btnMasterRuntime.Click += new System.EventHandler(this.btnMasterRuntime_Click);
-            // 
-            // label33
-            // 
-            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(44, 97);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(86, 15);
-            this.label33.TabIndex = 101;
-            this.label33.Text = "Checkpoint Lvl";
-            this.toolTip1.SetToolTip(this.label33, "This lvl plays after every checkpoint, before the next lvl.");
             // 
             // lblConfigColorHelp
             // 
@@ -2925,20 +3222,6 @@
             this.btnConfigPathColor.UseVisualStyleBackColor = false;
             this.btnConfigPathColor.Click += new System.EventHandler(this.btnConfigColor_Click);
             // 
-            // label35
-            // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.White;
-            this.label35.Location = new System.Drawing.Point(62, 304);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(50, 15);
-            this.label35.TabIndex = 104;
-            this.label35.Text = "Rest Lvl";
-            this.toolTip1.SetToolTip(this.label35, "If set, this lvl will play before the selected lvl. Usually used as a longer rest" +
-        " segment.");
-            // 
             // NUD_ConfigBPM
             // 
             this.NUD_ConfigBPM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2974,46 +3257,6 @@
             this.label27.Size = new System.Drawing.Size(34, 15);
             this.label27.TabIndex = 111;
             this.label27.Text = "BPM";
-            // 
-            // btnMasterOpenIntro
-            // 
-            this.btnMasterOpenIntro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterOpenIntro.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenIntro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenIntro.Enabled = false;
-            this.btnMasterOpenIntro.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenIntro.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenIntro.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenIntro.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenIntro.Image")));
-            this.btnMasterOpenIntro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenIntro.Location = new System.Drawing.Point(149, 72);
-            this.btnMasterOpenIntro.Name = "btnMasterOpenIntro";
-            this.btnMasterOpenIntro.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenIntro.TabIndex = 114;
-            this.btnMasterOpenIntro.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnMasterOpenIntro, "Load lvl into Lvl Editor");
-            this.btnMasterOpenIntro.UseVisualStyleBackColor = false;
-            this.btnMasterOpenIntro.Click += new System.EventHandler(this.btnMasterOpenIntro_Click);
-            // 
-            // btnMasterOpenCheckpoint
-            // 
-            this.btnMasterOpenCheckpoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterOpenCheckpoint.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenCheckpoint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenCheckpoint.Enabled = false;
-            this.btnMasterOpenCheckpoint.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenCheckpoint.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenCheckpoint.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenCheckpoint.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenCheckpoint.Image")));
-            this.btnMasterOpenCheckpoint.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenCheckpoint.Location = new System.Drawing.Point(149, 112);
-            this.btnMasterOpenCheckpoint.Name = "btnMasterOpenCheckpoint";
-            this.btnMasterOpenCheckpoint.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenCheckpoint.TabIndex = 115;
-            this.btnMasterOpenCheckpoint.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnMasterOpenCheckpoint, "Load lvl into Lvl Editor");
-            this.btnMasterOpenCheckpoint.UseVisualStyleBackColor = false;
-            this.btnMasterOpenCheckpoint.Click += new System.EventHandler(this.btnMasterOpenCheckpoint_Click);
             // 
             // label12
             // 
@@ -3051,25 +3294,31 @@
             this.label47.TabIndex = 141;
             this.label47.Text = "Rail Color";
             // 
-            // btnMasterOpenRest
+            // splitTop2
             // 
-            this.btnMasterOpenRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasterOpenRest.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenRest.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenRest.Enabled = false;
-            this.btnMasterOpenRest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenRest.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
-            this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenRest.Location = new System.Drawing.Point(149, 319);
-            this.btnMasterOpenRest.Name = "btnMasterOpenRest";
-            this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenRest.TabIndex = 118;
-            this.btnMasterOpenRest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnMasterOpenRest, "Load lvl into Lvl Editor");
-            this.btnMasterOpenRest.UseVisualStyleBackColor = false;
-            this.btnMasterOpenRest.Click += new System.EventHandler(this.btnMasterOpenRest_Click);
+            this.splitTop2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitTop2.Location = new System.Drawing.Point(0, 0);
+            this.splitTop2.Name = "splitTop2";
+            // 
+            // splitTop2.Panel1
+            // 
+            this.splitTop2.Panel1.ContextMenuStrip = this.contextMenuDock;
+            this.splitTop2.Panel1.Controls.Add(this.panelLevel);
+            this.splitTop2.Panel1.Controls.Add(this.label49);
+            this.splitTop2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
+            // 
+            // splitTop2.Panel2
+            // 
+            this.splitTop2.Panel2.ContextMenuStrip = this.contextMenuDock;
+            this.splitTop2.Panel2.Controls.Add(this.panelGate);
+            this.splitTop2.Panel2.Controls.Add(this.label51);
+            this.splitTop2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
+            this.splitTop2.Size = new System.Drawing.Size(1342, 382);
+            this.splitTop2.SplitterDistance = 1007;
+            this.splitTop2.TabIndex = 47;
+            this.splitTop2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
+            this.splitTop2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
+            this.splitTop2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
             // panelLevel
             // 
@@ -3302,19 +3551,6 @@
             this.dropLvlInput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
             this.dropLvlInput.SelectedIndexChanged += new System.EventHandler(this.dropLvlInput_SelectedIndexChanged);
             // 
-            // label25
-            // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(29, 331);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(66, 15);
-            this.label25.TabIndex = 89;
-            this.label25.Text = "Allow Input";
-            this.toolTip1.SetToolTip(this.label25, "Can the player control the beetle during this lvl?");
-            // 
             // label24
             // 
             this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -3354,19 +3590,6 @@
             0,
             131072});
             this.NUD_lvlVolume.ValueChanged += new System.EventHandler(this.NUD_lvlVolume_ValueChanged);
-            // 
-            // label23
-            // 
-            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(2, 288);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(93, 15);
-            this.label23.TabIndex = 68;
-            this.label23.Text = "Approach Beats";
-            this.toolTip1.SetToolTip(this.label23, "How many beats before the first leaf starts");
             // 
             // NUD_lvlApproach
             // 
@@ -3666,34 +3889,6 @@
             this.panel1.Size = new System.Drawing.Size(121, 27);
             this.panel1.TabIndex = 92;
             // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.ForeColor = System.Drawing.Color.White;
-            this.label28.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
-            this.label28.Location = new System.Drawing.Point(1, 2);
-            this.label28.MinimumSize = new System.Drawing.Size(20, 20);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(20, 20);
-            this.label28.TabIndex = 42;
-            this.toolTip1.SetToolTip(this.label28, "Cell zoom/width");
-            // 
-            // trackLvlVolumeZoom
-            // 
-            this.trackLvlVolumeZoom.AutoSize = false;
-            this.trackLvlVolumeZoom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trackLvlVolumeZoom.Location = new System.Drawing.Point(18, 4);
-            this.trackLvlVolumeZoom.Maximum = 120;
-            this.trackLvlVolumeZoom.Minimum = 2;
-            this.trackLvlVolumeZoom.Name = "trackLvlVolumeZoom";
-            this.trackLvlVolumeZoom.Size = new System.Drawing.Size(100, 19);
-            this.trackLvlVolumeZoom.TabIndex = 41;
-            this.trackLvlVolumeZoom.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.toolTip1.SetToolTip(this.trackLvlVolumeZoom, "Cell zoom/width");
-            this.trackLvlVolumeZoom.Value = 60;
-            this.trackLvlVolumeZoom.Scroll += new System.EventHandler(this.trackLvlVolumeZoom_Scroll);
-            // 
             // lvlVolumeToolStrip
             // 
             this.lvlVolumeToolStrip.AutoSize = false;
@@ -3751,19 +3946,6 @@
             this.btnLvlSeqClear.Size = new System.Drawing.Size(24, 24);
             this.btnLvlSeqClear.ToolTipText = "Erase all set values";
             this.btnLvlSeqClear.Click += new System.EventHandler(this.btnLvlSeqClear_Click);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(27, 3);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(182, 13);
-            this.label20.TabIndex = 68;
-            this.label20.Text = "Loop Track Volume Sequencer";
-            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
             // 
             // lvlPathsToolStrip2
             // 
@@ -4021,19 +4203,6 @@
             this.btnLvlRandomTunnel.ToolTipText = "Click to add a random tunnel";
             this.btnLvlRandomTunnel.Click += new System.EventHandler(this.btnLvlRandomTunnel_Click);
             // 
-            // lblLvlTunnels
-            // 
-            this.lblLvlTunnels.AutoSize = true;
-            this.lblLvlTunnels.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.lblLvlTunnels.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLvlTunnels.ForeColor = System.Drawing.Color.White;
-            this.lblLvlTunnels.Location = new System.Drawing.Point(55, 1);
-            this.lblLvlTunnels.Name = "lblLvlTunnels";
-            this.lblLvlTunnels.Size = new System.Drawing.Size(90, 13);
-            this.lblLvlTunnels.TabIndex = 80;
-            this.lblLvlTunnels.Text = "Paths/Tunnels";
-            this.toolTip1.SetToolTip(this.lblLvlTunnels, "Unique per leaf");
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -4159,21 +4328,6 @@
             this.panelGate.Click += new System.EventHandler(this.editorpanelClick);
             this.panelGate.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelGate.Leave += new System.EventHandler(this.editorpanelUnfocus);
-            // 
-            // lblGatebuckethelp
-            // 
-            this.lblGatebuckethelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblGatebuckethelp.AutoSize = true;
-            this.lblGatebuckethelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblGatebuckethelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblGatebuckethelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGatebuckethelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblGatebuckethelp.Location = new System.Drawing.Point(194, 360);
-            this.lblGatebuckethelp.Name = "lblGatebuckethelp";
-            this.lblGatebuckethelp.Size = new System.Drawing.Size(15, 16);
-            this.lblGatebuckethelp.TabIndex = 145;
-            this.lblGatebuckethelp.Text = "?";
-            this.toolTip1.SetToolTip(this.lblGatebuckethelp, resources.GetString("lblGatebuckethelp.ToolTip"));
             // 
             // checkGateRandom
             // 
@@ -4364,63 +4518,6 @@
             this.btnGateLvlDown.ToolTipText = "Move selected phase down";
             this.btnGateLvlDown.Click += new System.EventHandler(this.btnGateLvlDown_Click);
             // 
-            // btnGateOpenRestart
-            // 
-            this.btnGateOpenRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGateOpenRestart.BackColor = System.Drawing.Color.Gray;
-            this.btnGateOpenRestart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGateOpenRestart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnGateOpenRestart.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGateOpenRestart.ForeColor = System.Drawing.Color.Black;
-            this.btnGateOpenRestart.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenRestart.Image")));
-            this.btnGateOpenRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 314);
-            this.btnGateOpenRestart.Name = "btnGateOpenRestart";
-            this.btnGateOpenRestart.Size = new System.Drawing.Size(23, 23);
-            this.btnGateOpenRestart.TabIndex = 133;
-            this.btnGateOpenRestart.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnGateOpenRestart, "Load lvl into Lvl Editor");
-            this.btnGateOpenRestart.UseVisualStyleBackColor = false;
-            this.btnGateOpenRestart.Click += new System.EventHandler(this.btnGateOpenRestart_Click);
-            // 
-            // btnGateOpenPost
-            // 
-            this.btnGateOpenPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGateOpenPost.BackColor = System.Drawing.Color.Gray;
-            this.btnGateOpenPost.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGateOpenPost.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnGateOpenPost.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGateOpenPost.ForeColor = System.Drawing.Color.Black;
-            this.btnGateOpenPost.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPost.Image")));
-            this.btnGateOpenPost.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 292);
-            this.btnGateOpenPost.Name = "btnGateOpenPost";
-            this.btnGateOpenPost.Size = new System.Drawing.Size(23, 23);
-            this.btnGateOpenPost.TabIndex = 132;
-            this.btnGateOpenPost.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnGateOpenPost, "Load lvl into Lvl Editor");
-            this.btnGateOpenPost.UseVisualStyleBackColor = false;
-            this.btnGateOpenPost.Click += new System.EventHandler(this.btnGateOpenPost_Click);
-            // 
-            // btnGateOpenPre
-            // 
-            this.btnGateOpenPre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGateOpenPre.BackColor = System.Drawing.Color.Gray;
-            this.btnGateOpenPre.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGateOpenPre.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnGateOpenPre.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGateOpenPre.ForeColor = System.Drawing.Color.Black;
-            this.btnGateOpenPre.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPre.Image")));
-            this.btnGateOpenPre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 270);
-            this.btnGateOpenPre.Name = "btnGateOpenPre";
-            this.btnGateOpenPre.Size = new System.Drawing.Size(23, 23);
-            this.btnGateOpenPre.TabIndex = 119;
-            this.btnGateOpenPre.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnGateOpenPre, "Load lvl into Lvl Editor");
-            this.btnGateOpenPre.UseVisualStyleBackColor = false;
-            this.btnGateOpenPre.Click += new System.EventHandler(this.btnGateOpenPre_Click);
-            // 
             // lblGateSectionHelp
             // 
             this.lblGateSectionHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -4525,48 +4622,6 @@
             this.label44.TabIndex = 125;
             this.label44.Text = "Section Type";
             // 
-            // label43
-            // 
-            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.ForeColor = System.Drawing.Color.White;
-            this.label43.Location = new System.Drawing.Point(20, 317);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(64, 15);
-            this.label43.TabIndex = 124;
-            this.label43.Text = "Restart Lvl";
-            this.toolTip1.SetToolTip(this.label43, "RESTART LVL\r\nThis lvl plays when restarting the boss, and skips playing the pre a" +
-        "nd post lvls. \r\nCan be blank.");
-            // 
-            // label42
-            // 
-            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.ForeColor = System.Drawing.Color.White;
-            this.label42.Location = new System.Drawing.Point(35, 295);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(49, 15);
-            this.label42.TabIndex = 123;
-            this.label42.Text = "Post Lvl";
-            this.toolTip1.SetToolTip(this.label42, "POST LVL\r\nPlays immediately after the Pre lvl. The boss spawns in at this point. " +
-        "The boss phases \r\nplay immediately after this lvl is finished. Can be blank.");
-            // 
-            // label41
-            // 
-            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.White;
-            this.label41.Location = new System.Drawing.Point(40, 272);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(44, 15);
-            this.label41.TabIndex = 122;
-            this.label41.Text = "Pre Lvl";
-            this.toolTip1.SetToolTip(this.label41, "PRE LVL\r\nThis lvl plays at the very start of the gate sublevel. The boss does not" +
-        " spawn in yet. \r\nCan be blank, unless you are using the Triangle boss.");
-            // 
             // label40
             // 
             this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -4606,20 +4661,6 @@
             this.dropGateBoss.TabIndex = 117;
             this.dropGateBoss.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
             this.dropGateBoss.TextChanged += new System.EventHandler(this.dropGateBoss_SelectedIndexChanged);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.ForeColor = System.Drawing.Color.White;
-            this.label36.Location = new System.Drawing.Point(3, 26);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(79, 13);
-            this.label36.TabIndex = 116;
-            this.label36.Text = "Boss Phases";
-            this.toolTip1.SetToolTip(this.label36, "Each boss requires 4 phases. 1 phase is 1 lvl file.\r\nYou may reuse the same lvl f" +
-        "or phases.");
             // 
             // gateLvlList
             // 
@@ -4714,6 +4755,29 @@
             this.dgvGateBucket.Name = "dgvGateBucket";
             this.dgvGateBucket.Visible = false;
             this.dgvGateBucket.Width = 51;
+            // 
+            // splitBottom1
+            // 
+            this.splitBottom1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitBottom1.Location = new System.Drawing.Point(0, 0);
+            this.splitBottom1.Name = "splitBottom1";
+            // 
+            // splitBottom1.Panel1
+            // 
+            this.splitBottom1.Panel1.ContextMenuStrip = this.contextMenuDock;
+            this.splitBottom1.Panel1.Controls.Add(this.panelWorkingFolder);
+            this.splitBottom1.Panel1.Controls.Add(this.label52);
+            this.splitBottom1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
+            // 
+            // splitBottom1.Panel2
+            // 
+            this.splitBottom1.Panel2.Controls.Add(this.splitBottom2);
+            this.splitBottom1.Size = new System.Drawing.Size(1745, 481);
+            this.splitBottom1.SplitterDistance = 254;
+            this.splitBottom1.TabIndex = 0;
+            this.splitBottom1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
+            this.splitBottom1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
+            this.splitBottom1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
             // panelWorkingFolder
             // 
@@ -4842,26 +4906,6 @@
             this.searchforfile.ReadOnly = true;
             this.searchforfile.ToolTipText = "Search for references in project";
             this.searchforfile.Width = 5;
-            // 
-            // btnWorkEditDetails
-            // 
-            this.btnWorkEditDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWorkEditDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.btnWorkEditDetails.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnWorkEditDetails.Enabled = false;
-            this.btnWorkEditDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWorkEditDetails.ForeColor = System.Drawing.Color.White;
-            this.btnWorkEditDetails.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
-            this.btnWorkEditDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnWorkEditDetails.Location = new System.Drawing.Point(25, 47);
-            this.btnWorkEditDetails.Name = "btnWorkEditDetails";
-            this.btnWorkEditDetails.Size = new System.Drawing.Size(220, 28);
-            this.btnWorkEditDetails.TabIndex = 151;
-            this.btnWorkEditDetails.Text = "Edit Level Info";
-            this.toolTip1.SetToolTip(this.btnWorkEditDetails, "Name, difficulty, save location, and audio sample packs");
-            this.btnWorkEditDetails.UseVisualStyleBackColor = false;
-            this.btnWorkEditDetails.Click += new System.EventHandler(this.btnWorkEditDetails_Click);
             // 
             // workingToolStrip
             // 
@@ -4999,18 +5043,6 @@
             this.btnLevelFolder.ToolTipText = "Open a level folder";
             this.btnLevelFolder.Click += new System.EventHandler(this.btnLevelFolder_Click);
             // 
-            // btnWorkNewFile
-            // 
-            this.btnWorkNewFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnWorkNewFile.DropDown = this.contextMenuNewFile;
-            this.btnWorkNewFile.Enabled = false;
-            this.btnWorkNewFile.Image = ((System.Drawing.Image)(resources.GetObject("btnWorkNewFile.Image")));
-            this.btnWorkNewFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnWorkNewFile.Name = "btnWorkNewFile";
-            this.btnWorkNewFile.ShowDropDownArrow = false;
-            this.btnWorkNewFile.Size = new System.Drawing.Size(24, 22);
-            this.btnWorkNewFile.ToolTipText = "Add a new file to this level";
-            // 
             // btnLeafPanelTemplate
             // 
             this.btnLeafPanelTemplate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -5132,6 +5164,32 @@
             this.btnWorkRefresh.ToolTipText = "Reload files in the working folder";
             this.btnWorkRefresh.Click += new System.EventHandler(this.btnWorkRefresh_Click);
             // 
+            // splitBottom2
+            // 
+            this.splitBottom2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitBottom2.Location = new System.Drawing.Point(0, 0);
+            this.splitBottom2.Name = "splitBottom2";
+            // 
+            // splitBottom2.Panel1
+            // 
+            this.splitBottom2.Panel1.ContextMenuStrip = this.contextMenuDock;
+            this.splitBottom2.Panel1.Controls.Add(this.panelLeaf);
+            this.splitBottom2.Panel1.Controls.Add(this.label53);
+            this.splitBottom2.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
+            // 
+            // splitBottom2.Panel2
+            // 
+            this.splitBottom2.Panel2.ContextMenuStrip = this.contextMenuDock;
+            this.splitBottom2.Panel2.Controls.Add(this.panelSample);
+            this.splitBottom2.Panel2.Controls.Add(this.label55);
+            this.splitBottom2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
+            this.splitBottom2.Size = new System.Drawing.Size(1487, 481);
+            this.splitBottom2.SplitterDistance = 1157;
+            this.splitBottom2.TabIndex = 46;
+            this.splitBottom2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
+            this.splitBottom2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
+            this.splitBottom2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
+            // 
             // panelLeaf
             // 
             this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -5196,39 +5254,6 @@
             this.label57.TabIndex = 68;
             this.label57.Text = "↑\r\n↓\r\nShift+\r\nscroll";
             this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // trackZoomVert
-            // 
-            this.trackZoomVert.AutoSize = false;
-            this.trackZoomVert.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trackZoomVert.Location = new System.Drawing.Point(39, 17);
-            this.trackZoomVert.Margin = new System.Windows.Forms.Padding(0);
-            this.trackZoomVert.Maximum = 100;
-            this.trackZoomVert.Minimum = 1;
-            this.trackZoomVert.Name = "trackZoomVert";
-            this.trackZoomVert.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackZoomVert.Size = new System.Drawing.Size(19, 100);
-            this.trackZoomVert.TabIndex = 43;
-            this.trackZoomVert.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.toolTip1.SetToolTip(this.trackZoomVert, "Row zoom/height");
-            this.trackZoomVert.Value = 20;
-            this.trackZoomVert.ValueChanged += new System.EventHandler(this.trackZoomVert_Scroll);
-            // 
-            // trackZoom
-            // 
-            this.trackZoom.AutoSize = false;
-            this.trackZoom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trackZoom.Location = new System.Drawing.Point(-3, 3);
-            this.trackZoom.Margin = new System.Windows.Forms.Padding(0);
-            this.trackZoom.Maximum = 100;
-            this.trackZoom.Minimum = 1;
-            this.trackZoom.Name = "trackZoom";
-            this.trackZoom.Size = new System.Drawing.Size(100, 19);
-            this.trackZoom.TabIndex = 41;
-            this.trackZoom.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.toolTip1.SetToolTip(this.trackZoom, "Cell zoom/width");
-            this.trackZoom.Value = 40;
-            this.trackZoom.ValueChanged += new System.EventHandler(this.trackZoom_Scroll);
             // 
             // vScrollBarTrackEditor
             // 
@@ -5650,23 +5675,6 @@
             this.panelRawData.Size = new System.Drawing.Size(939, 47);
             this.panelRawData.TabIndex = 139;
             // 
-            // lblRawData
-            // 
-            this.lblRawData.AutoSize = true;
-            this.lblRawData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblRawData.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblRawData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRawData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblRawData.Location = new System.Drawing.Point(0, -1);
-            this.lblRawData.MinimumSize = new System.Drawing.Size(20, 20);
-            this.lblRawData.Name = "lblRawData";
-            this.lblRawData.Size = new System.Drawing.Size(20, 20);
-            this.lblRawData.TabIndex = 139;
-            this.lblRawData.Text = "▼";
-            this.lblRawData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
-            this.lblRawData.Click += new System.EventHandler(this.lblRawData_Click);
-            // 
             // btnRawImport
             // 
             this.btnRawImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -5897,30 +5905,6 @@
             this.btnTrackColorDialog.UseVisualStyleBackColor = false;
             this.btnTrackColorDialog.Click += new System.EventHandler(this.btnTrackColorDialog_Click);
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(3, 69);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(105, 15);
-            this.label16.TabIndex = 56;
-            this.label16.Text = "Doubleclick Value";
-            this.toolTip1.SetToolTip(this.label16, "The value to auto-insert when doubleclicking a cell");
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(20, 46);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(88, 15);
-            this.label17.TabIndex = 59;
-            this.label17.Text = "Highlight value";
-            this.toolTip1.SetToolTip(this.label17, "Applies the highlight color when cell value\r\nis above this value.");
-            // 
             // NUD_TrackHighlight
             // 
             this.NUD_TrackHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -6007,42 +5991,6 @@
             this.txtTrait.TabIndex = 107;
             this.txtTrait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(27, 70);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 15);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Default";
-            this.toolTip1.SetToolTip(this.label7, "If no value is set on a beat, the game will use this default.");
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label46.ForeColor = System.Drawing.Color.White;
-            this.label46.Location = new System.Drawing.Point(8, 93);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(65, 13);
-            this.label46.TabIndex = 106;
-            this.label46.Text = "Interpolation";
-            this.toolTip1.SetToolTip(this.label46, resources.GetString("label46.ToolTip"));
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(41, 47);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(32, 15);
-            this.label8.TabIndex = 36;
-            this.label8.Text = "Step";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
-            // 
             // dropLeafInterp
             // 
             this.dropLeafInterp.BackColor = System.Drawing.Color.Black;
@@ -6066,18 +6014,6 @@
             this.dropLeafInterp.Size = new System.Drawing.Size(96, 21);
             this.dropLeafInterp.TabIndex = 105;
             this.dropLeafInterp.SelectedIndexChanged += new System.EventHandler(this.dropLeafInterp_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(42, 24);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 15);
-            this.label9.TabIndex = 39;
-            this.label9.Text = "Trait";
-            this.toolTip1.SetToolTip(this.label9, "The data type of the object. Recommended to not edit.");
             // 
             // txtDefault
             // 
@@ -6281,7 +6217,13 @@
             // 
             this.panelSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelSample.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSample.Controls.Add(this.panel7);
+            this.panelSample.Controls.Add(this.sampleList);
+            this.panelSample.Controls.Add(this.label14);
+            this.panelSample.Controls.Add(this.label54);
+            this.panelSample.Controls.Add(this.sampleToolStrip);
+            this.panelSample.Controls.Add(this.label50);
+            this.panelSample.Controls.Add(this.label45);
+            this.panelSample.Controls.Add(this.txtSampPath);
             this.panelSample.Controls.Add(this.toolstripTitleSample);
             this.panelSample.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSample.Location = new System.Drawing.Point(0, 0);
@@ -6294,21 +6236,6 @@
             this.panelSample.Click += new System.EventHandler(this.editorpanelClick);
             this.panelSample.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelSample.Leave += new System.EventHandler(this.editorpanelUnfocus);
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.sampleList);
-            this.panel7.Controls.Add(this.label14);
-            this.panel7.Controls.Add(this.label54);
-            this.panel7.Controls.Add(this.sampleToolStrip);
-            this.panel7.Controls.Add(this.label50);
-            this.panel7.Controls.Add(this.label45);
-            this.panel7.Controls.Add(this.txtSampPath);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(0, 25);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(324, 454);
-            this.panel7.TabIndex = 145;
             // 
             // sampleList
             // 
@@ -6341,123 +6268,37 @@
             this.Offset,
             this.Channel});
             this.sampleList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle40.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle40.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle40.Format = "N2";
-            dataGridViewCellStyle40.NullValue = null;
-            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sampleList.DefaultCellStyle = dataGridViewCellStyle40;
-            this.sampleList.EnableHeadersVisualStyles = false;
-            this.sampleList.GridColor = System.Drawing.Color.Black;
-            this.sampleList.Location = new System.Drawing.Point(3, 16);
-            this.sampleList.Name = "sampleList";
-            this.sampleList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle41.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle41.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle41.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle41.Format = "N2";
+            dataGridViewCellStyle41.NullValue = null;
             dataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle41;
+            this.sampleList.DefaultCellStyle = dataGridViewCellStyle41;
+            this.sampleList.EnableHeadersVisualStyles = false;
+            this.sampleList.GridColor = System.Drawing.Color.Black;
+            this.sampleList.Location = new System.Drawing.Point(3, 40);
+            this.sampleList.Name = "sampleList";
+            this.sampleList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle42.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle42;
             this.sampleList.RowHeadersVisible = false;
             this.sampleList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.sampleList.Size = new System.Drawing.Size(317, 378);
-            this.sampleList.TabIndex = 80;
+            this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
-            this.sampleList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEnter);
-            this.sampleList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellValueChanged);
-            this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);
-            this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
-            this.sampleList.DragDrop += new System.Windows.Forms.DragEventHandler(this.sampleList_DragDrop);
-            this.sampleList.DragEnter += new System.Windows.Forms.DragEventHandler(this.sampleList_DragEnter);
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SampleName.FillWeight = 8.913044F;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle36.Format = "0.00";
-            dataGridViewCellStyle36.NullValue = null;
-            this.Volume.DefaultCellStyle = dataGridViewCellStyle36;
-            this.Volume.FillWeight = 1F;
-            this.Volume.HeaderText = "V.";
-            this.Volume.Name = "Volume";
-            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Volume.Width = 22;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle37.Format = "0.00";
-            dataGridViewCellStyle37.NullValue = null;
-            this.Pitch.DefaultCellStyle = dataGridViewCellStyle37;
-            this.Pitch.FillWeight = 1F;
-            this.Pitch.HeaderText = "P.";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pitch.Width = 21;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle38.Format = "0.00";
-            dataGridViewCellStyle38.NullValue = null;
-            this.Pan.DefaultCellStyle = dataGridViewCellStyle38;
-            this.Pan.FillWeight = 1F;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pan.Width = 32;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle39.Format = "0.00";
-            dataGridViewCellStyle39.NullValue = null;
-            this.Offset.DefaultCellStyle = dataGridViewCellStyle39;
-            this.Offset.FillWeight = 1F;
-            this.Offset.HeaderText = "Of.";
-            this.Offset.Name = "Offset";
-            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Offset.Width = 27;
-            // 
-            // Channel
-            // 
-            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Channel.FillWeight = 1.086957F;
-            this.Channel.HeaderText = "Ch.";
-            this.Channel.Name = "Channel";
-            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label14.Location = new System.Drawing.Point(306, 1);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(15, 16);
-            this.label14.TabIndex = 144;
-            this.label14.Text = "?";
-            this.toolTip1.SetToolTip(this.label14, "V. (volume)\r\nP. (pitch)\r\nPan\r\nOf. (offset)\r\nCh. (channel)");
             // 
             // label54
             // 
@@ -6465,10 +6306,10 @@
             this.label54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label54.ForeColor = System.Drawing.Color.White;
-            this.label54.Location = new System.Drawing.Point(3, 3);
+            this.label54.Location = new System.Drawing.Point(3, 27);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(54, 13);
-            this.label54.TabIndex = 116;
+            this.label54.TabIndex = 146;
             this.label54.Text = "Samples";
             // 
             // sampleToolStrip
@@ -6488,13 +6329,13 @@
             this.btnSampEditorPlaySamp,
             this.lblSampleFSBhelp});
             this.sampleToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.sampleToolStrip.Location = new System.Drawing.Point(3, 397);
+            this.sampleToolStrip.Location = new System.Drawing.Point(3, 421);
             this.sampleToolStrip.Name = "sampleToolStrip";
             this.sampleToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.sampleToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.sampleToolStrip.Size = new System.Drawing.Size(317, 25);
             this.sampleToolStrip.Stretch = true;
-            this.sampleToolStrip.TabIndex = 143;
+            this.sampleToolStrip.TabIndex = 150;
             // 
             // btnSampleAdd
             // 
@@ -6507,7 +6348,6 @@
             this.btnSampleAdd.Name = "btnSampleAdd";
             this.btnSampleAdd.Size = new System.Drawing.Size(24, 25);
             this.btnSampleAdd.ToolTipText = "Add new sample";
-            this.btnSampleAdd.Click += new System.EventHandler(this.btnSampleAdd_Click);
             // 
             // btnSampleDelete
             // 
@@ -6519,7 +6359,6 @@
             this.btnSampleDelete.Name = "btnSampleDelete";
             this.btnSampleDelete.Size = new System.Drawing.Size(24, 25);
             this.btnSampleDelete.ToolTipText = "Delete selected phase";
-            this.btnSampleDelete.Click += new System.EventHandler(this.btnSampleDelete_Click);
             // 
             // FSBtoSamp
             // 
@@ -6530,7 +6369,6 @@
             this.FSBtoSamp.Name = "FSBtoSamp";
             this.FSBtoSamp.Size = new System.Drawing.Size(24, 22);
             this.FSBtoSamp.ToolTipText = "Import FSB files to Sample format";
-            this.FSBtoSamp.Click += new System.EventHandler(this.FSBtoSamp_Click);
             // 
             // btnSampEditorPlaySamp
             // 
@@ -6541,7 +6379,6 @@
             this.btnSampEditorPlaySamp.Name = "btnSampEditorPlaySamp";
             this.btnSampEditorPlaySamp.Size = new System.Drawing.Size(24, 22);
             this.btnSampEditorPlaySamp.ToolTipText = "Play selected sample";
-            this.btnSampEditorPlaySamp.Click += new System.EventHandler(this.btnSampEditorPlaySamp_Click);
             // 
             // lblSampleFSBhelp
             // 
@@ -6551,7 +6388,6 @@
             this.lblSampleFSBhelp.Name = "lblSampleFSBhelp";
             this.lblSampleFSBhelp.Size = new System.Drawing.Size(161, 22);
             this.lblSampleFSBhelp.Text = "How to get a .FSB audio file";
-            this.lblSampleFSBhelp.Click += new System.EventHandler(this.lblSampleFSBhelp_Click);
             // 
             // label50
             // 
@@ -6559,10 +6395,10 @@
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.ForeColor = System.Drawing.Color.White;
-            this.label50.Location = new System.Drawing.Point(5, 433);
+            this.label50.Location = new System.Drawing.Point(5, 457);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(32, 15);
-            this.label50.TabIndex = 129;
+            this.label50.TabIndex = 147;
             this.label50.Text = "Path";
             // 
             // label45
@@ -6571,10 +6407,10 @@
             this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label45.ForeColor = System.Drawing.Color.White;
-            this.label45.Location = new System.Drawing.Point(142, 3);
+            this.label45.Location = new System.Drawing.Point(142, 27);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(157, 13);
-            this.label45.TabIndex = 135;
+            this.label45.TabIndex = 149;
             this.label45.Text = "all fields in the table are editable";
             // 
             // txtSampPath
@@ -6584,11 +6420,10 @@
             this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtSampPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSampPath.ForeColor = System.Drawing.Color.White;
-            this.txtSampPath.Location = new System.Drawing.Point(38, 430);
+            this.txtSampPath.Location = new System.Drawing.Point(38, 454);
             this.txtSampPath.Name = "txtSampPath";
             this.txtSampPath.Size = new System.Drawing.Size(261, 22);
-            this.txtSampPath.TabIndex = 130;
-            this.txtSampPath.TextChanged += new System.EventHandler(this.txtSampPath_TextChanged);
+            this.txtSampPath.TabIndex = 148;
             // 
             // toolstripTitleSample
             // 
@@ -6670,6 +6505,151 @@
             this.btnRevertSample.ToolTipText = "Revert changes to last save";
             this.btnRevertSample.Click += new System.EventHandler(this.btnRevertSample_Click);
             // 
+            // panelChangelog
+            // 
+            this.panelChangelog.AutoScroll = true;
+            this.panelChangelog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.panelChangelog.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelChangelog.Controls.Add(this.panel8);
+            this.panelChangelog.Controls.Add(this.toolStripChangelog);
+            this.panelChangelog.Location = new System.Drawing.Point(679, 0);
+            this.panelChangelog.Name = "panelChangelog";
+            this.panelChangelog.Size = new System.Drawing.Size(555, 535);
+            this.panelChangelog.TabIndex = 139;
+            this.panelChangelog.Tag = "editorpanel";
+            this.panelChangelog.Visible = false;
+            // 
+            // panel8
+            // 
+            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel8.AutoScroll = true;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel8.Controls.Add(this.lblChangelog);
+            this.panel8.Location = new System.Drawing.Point(7, 26);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(535, 495);
+            this.panel8.TabIndex = 142;
+            // 
+            // lblChangelog
+            // 
+            this.lblChangelog.AutoSize = true;
+            this.lblChangelog.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblChangelog.ForeColor = System.Drawing.Color.White;
+            this.lblChangelog.Location = new System.Drawing.Point(0, 0);
+            this.lblChangelog.Name = "lblChangelog";
+            this.lblChangelog.Size = new System.Drawing.Size(68, 13);
+            this.lblChangelog.TabIndex = 141;
+            this.lblChangelog.Text = "lblChangelog";
+            // 
+            // toolStripChangelog
+            // 
+            this.toolStripChangelog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripChangelog.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolStripChangelog.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripChangelog.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel4,
+            this.lblChangelogClose});
+            this.toolStripChangelog.Location = new System.Drawing.Point(0, 0);
+            this.toolStripChangelog.MaximumSize = new System.Drawing.Size(0, 50);
+            this.toolStripChangelog.Name = "toolStripChangelog";
+            this.toolStripChangelog.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStripChangelog.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStripChangelog.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStripChangelog.Size = new System.Drawing.Size(551, 25);
+            this.toolStripChangelog.Stretch = true;
+            this.toolStripChangelog.TabIndex = 140;
+            this.toolStripChangelog.Text = "titlebar";
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel4.ForeColor = System.Drawing.Color.Yellow;
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(67, 22);
+            this.toolStripLabel4.Text = "Changelog";
+            // 
+            // lblChangelogClose
+            // 
+            this.lblChangelogClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.lblChangelogClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.lblChangelogClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.lblChangelogClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.lblChangelogClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
+            this.lblChangelogClose.Name = "lblChangelogClose";
+            this.lblChangelogClose.Size = new System.Drawing.Size(23, 25);
+            this.lblChangelogClose.Text = "toolStripButton6";
+            this.lblChangelogClose.ToolTipText = "Close panel";
+            this.lblChangelogClose.Click += new System.EventHandler(this.lblChangelogClose_Click);
+            // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.SampleName.DefaultCellStyle = dataGridViewCellStyle36;
+            this.SampleName.FillWeight = 8.913044F;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle37.Format = "0.00";
+            dataGridViewCellStyle37.NullValue = null;
+            this.Volume.DefaultCellStyle = dataGridViewCellStyle37;
+            this.Volume.FillWeight = 1F;
+            this.Volume.HeaderText = "V.";
+            this.Volume.Name = "Volume";
+            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Volume.Width = 22;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle38.Format = "0.00";
+            dataGridViewCellStyle38.NullValue = null;
+            this.Pitch.DefaultCellStyle = dataGridViewCellStyle38;
+            this.Pitch.FillWeight = 1F;
+            this.Pitch.HeaderText = "P.";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pitch.Width = 21;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle39.Format = "0.00";
+            dataGridViewCellStyle39.NullValue = null;
+            this.Pan.DefaultCellStyle = dataGridViewCellStyle39;
+            this.Pan.FillWeight = 1F;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pan.Width = 32;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle40.Format = "0.00";
+            dataGridViewCellStyle40.NullValue = null;
+            this.Offset.DefaultCellStyle = dataGridViewCellStyle40;
+            this.Offset.FillWeight = 1F;
+            this.Offset.HeaderText = "Of.";
+            this.Offset.Name = "Offset";
+            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Offset.Width = 27;
+            // 
+            // Channel
+            // 
+            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Channel.FillWeight = 1.086957F;
+            this.Channel.HeaderText = "Ch.";
+            this.Channel.Name = "Channel";
+            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -6699,6 +6679,9 @@
             this.workingfolderRightClick.ResumeLayout(false);
             this.contextMenuNewFile.ResumeLayout(false);
             this.contextMenuDock.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelBeeble.ResumeLayout(false);
             this.panelRecentFiles.ResumeLayout(false);
@@ -6715,29 +6698,6 @@
             this.splitTop1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitTop1)).EndInit();
             this.splitTop1.ResumeLayout(false);
-            this.splitTop2.Panel1.ResumeLayout(false);
-            this.splitTop2.Panel1.PerformLayout();
-            this.splitTop2.Panel2.ResumeLayout(false);
-            this.splitTop2.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitTop2)).EndInit();
-            this.splitTop2.ResumeLayout(false);
-            this.splitBottom1.Panel1.ResumeLayout(false);
-            this.splitBottom1.Panel1.PerformLayout();
-            this.splitBottom1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitBottom1)).EndInit();
-            this.splitBottom1.ResumeLayout(false);
-            this.splitBottom2.Panel1.ResumeLayout(false);
-            this.splitBottom2.Panel1.PerformLayout();
-            this.splitBottom2.Panel2.ResumeLayout(false);
-            this.splitBottom2.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitBottom2)).EndInit();
-            this.splitBottom2.ResumeLayout(false);
-            this.panelChangelog.ResumeLayout(false);
-            this.panelChangelog.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            this.toolStripChangelog.ResumeLayout(false);
-            this.toolStripChangelog.PerformLayout();
             this.panelMaster.ResumeLayout(false);
             this.panelMaster.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
@@ -6748,6 +6708,12 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).EndInit();
+            this.splitTop2.Panel1.ResumeLayout(false);
+            this.splitTop2.Panel1.PerformLayout();
+            this.splitTop2.Panel2.ResumeLayout(false);
+            this.splitTop2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitTop2)).EndInit();
+            this.splitTop2.ResumeLayout(false);
             this.panelLevel.ResumeLayout(false);
             this.panelLevel.PerformLayout();
             this.lvlToolStrip.ResumeLayout(false);
@@ -6766,7 +6732,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lvlSeqObjs)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).EndInit();
             this.lvlVolumeToolStrip.ResumeLayout(false);
             this.lvlVolumeToolStrip.PerformLayout();
             this.lvlPathsToolStrip2.ResumeLayout(false);
@@ -6784,6 +6749,11 @@
             this.gateToolStrip.ResumeLayout(false);
             this.gateToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).EndInit();
+            this.splitBottom1.Panel1.ResumeLayout(false);
+            this.splitBottom1.Panel1.PerformLayout();
+            this.splitBottom1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitBottom1)).EndInit();
+            this.splitBottom1.ResumeLayout(false);
             this.panelWorkingFolder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.workingfolderFiles)).EndInit();
             this.workingToolStrip.ResumeLayout(false);
@@ -6792,12 +6762,16 @@
             this.workingToolStrip2.PerformLayout();
             this.toolstripTitleWork.ResumeLayout(false);
             this.toolstripTitleWork.PerformLayout();
+            this.splitBottom2.Panel1.ResumeLayout(false);
+            this.splitBottom2.Panel1.PerformLayout();
+            this.splitBottom2.Panel2.ResumeLayout(false);
+            this.splitBottom2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBottom2)).EndInit();
+            this.splitBottom2.ResumeLayout(false);
             this.panelLeaf.ResumeLayout(false);
             this.panelLeaf.PerformLayout();
             this.panelZoom.ResumeLayout(false);
             this.panelZoom.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).EndInit();
             this.toolstripTitleLeaf.ResumeLayout(false);
             this.toolstripTitleLeaf.PerformLayout();
@@ -6821,13 +6795,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).EndInit();
             this.panelSample.ResumeLayout(false);
             this.panelSample.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
             this.sampleToolStrip.ResumeLayout(false);
             this.sampleToolStrip.PerformLayout();
             this.toolstripTitleSample.ResumeLayout(false);
             this.toolstripTitleSample.PerformLayout();
+            this.panelChangelog.ResumeLayout(false);
+            this.panelChangelog.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.toolStripChangelog.ResumeLayout(false);
+            this.toolStripChangelog.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -6973,8 +6951,6 @@
 		private System.Windows.Forms.Button btnGateOpenPost;
 		private System.Windows.Forms.Button btnGateOpenPre;
 		private ResizeablePanel panelSample;
-		private System.Windows.Forms.Label label54;
-		private System.Windows.Forms.DataGridView sampleList;
 		private System.Windows.Forms.ToolStripMenuItem sampleEditorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem bTFLeafToolStripMenuItem;
@@ -6984,14 +6960,11 @@
 		private System.Windows.Forms.ToolStripMenuItem bTFFolderToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem bTFSampleToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.TextBox txtSampPath;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.ToolStripMenuItem sampleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplenewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SampleopenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SamplesaveAsToolStripMenuItem;
-        private System.Windows.Forms.Label label45;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem SaveAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -7101,12 +7074,6 @@
         private System.Windows.Forms.ToolStripButton lblSampleClose;
         private System.Windows.Forms.ToolStripButton lblPopoutSamp;
         private System.Windows.Forms.ToolStripButton btnRevertSample;
-        private System.Windows.Forms.ToolStrip sampleToolStrip;
-        private System.Windows.Forms.ToolStripButton btnSampleAdd;
-        private System.Windows.Forms.ToolStripButton btnSampleDelete;
-        private System.Windows.Forms.ToolStripButton FSBtoSamp;
-        private System.Windows.Forms.ToolStripButton btnSampEditorPlaySamp;
-        private System.Windows.Forms.ToolStripLabel lblSampleFSBhelp;
         private System.Windows.Forms.ToolStrip toolstripTitleWork;
         private System.Windows.Forms.ToolStripLabel lblWorkingFolder;
         private System.Windows.Forms.ToolStripButton lblWorkClose;
@@ -7131,7 +7098,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
         private System.Windows.Forms.ToolStripButton btnLeafPanelTemplate;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ToolStrip toolstripTitleLeaf;
         private System.Windows.Forms.ToolStripLabel lblTrackFileName;
         private System.Windows.Forms.ToolStripButton btnSaveLeaf;
@@ -7228,7 +7194,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ToolStripButton btnLeafColors;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changelogToolStripMenuItem;
         private System.Windows.Forms.Panel panelChangelog;
@@ -7237,18 +7202,30 @@
         private System.Windows.Forms.ToolStripButton lblChangelogClose;
         private System.Windows.Forms.Label lblChangelog;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
         private System.Windows.Forms.ToolStripMenuItem donateTipToolStripMenuItem;
         private System.Windows.Forms.ToolStrip lvlPathsToolStrip2;
         private System.Windows.Forms.ToolStripButton btnLvlPathUp;
         private System.Windows.Forms.ToolStripButton btnLvlPathDown;
         private System.Windows.Forms.ToolStripButton btnLvlPathClear;
         private System.Windows.Forms.ToolStripButton btnLvlLeafRandom;
+        private System.Windows.Forms.DataGridView sampleList;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.ToolStrip sampleToolStrip;
+        private System.Windows.Forms.ToolStripButton btnSampleAdd;
+        private System.Windows.Forms.ToolStripButton btnSampleDelete;
+        private System.Windows.Forms.ToolStripButton FSBtoSamp;
+        private System.Windows.Forms.ToolStripButton btnSampEditorPlaySamp;
+        private System.Windows.Forms.ToolStripLabel lblSampleFSBhelp;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox txtSampPath;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SampleName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volume;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pitch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
     }
 }
 
