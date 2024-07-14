@@ -99,7 +99,6 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void trackZoom_Scroll(object sender, EventArgs e)
 		{
-			trackEditor.Scroll -= trackEditor_Scroll;
 			int display = trackEditor.FirstDisplayedScrollingColumnIndex;
 			if (display == -1)
 				return;
@@ -108,8 +107,12 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
 			//hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
-			trackEditor.FirstDisplayedScrollingColumnIndex = display;
-			trackEditor.Scroll += trackEditor_Scroll;
+			if (trackEditor.ColumnCount > 1) {
+				trackEditor.Scroll -= trackEditor_Scroll;
+				trackEditor.FirstDisplayedScrollingColumnIndex = display + 1;
+				trackEditor.FirstDisplayedScrollingColumnIndex = display;
+				trackEditor.Scroll += trackEditor_Scroll;
+			}
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
