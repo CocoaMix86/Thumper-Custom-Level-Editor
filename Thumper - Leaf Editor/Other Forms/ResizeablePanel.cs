@@ -12,77 +12,23 @@ namespace Thumper_Custom_Level_Editor
     {
         public ResizeablePanel()
         {
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            DoubleBuffered = true;
-            ResizeRedraw = true;
-            BackColor = Color.Gray;
+            this.ResizeRedraw = true;
         }
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            using (var p = new Pen(Color.SkyBlue, 4)) {
-                //e.Graphics.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
-            }
+            var rc = new Rectangle(this.ClientSize.Width - grab, this.ClientSize.Height - grab, grab, grab);
+            ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
         }
-        const int WM_NCHITTEST = 0x84;
-        const int WM_SETCURSOR = 0x20;
-        const int WM_NCLBUTTONDBLCLK = 0xA3;
         protected override void WndProc(ref Message m)
         {
-            int borderWidth = 15;
             base.WndProc(ref m);
-            if (m.Msg == WM_NCHITTEST) {
-                if (this.Parent.GetType() == typeof(SplitterPanel))
-                    return;
-                else {
-                    Point pos = PointToClient(new Point(m.LParam.ToInt32() & 0xffff,
-                        m.LParam.ToInt32() >> 16));
-
-                    if (pos.X <= ClientRectangle.Left + borderWidth &&
-                        pos.Y <= ClientRectangle.Top + borderWidth) {
-                        m.Result = new IntPtr(13); //TOPLEFT
-                        return;
-                    }
-
-                    else if (pos.X >= ClientRectangle.Right - borderWidth &&
-                        pos.Y <= ClientRectangle.Top + borderWidth) {
-                        m.Result = new IntPtr(14); //TOPRIGHT
-                        return;
-                    }
-
-                    else if (pos.X <= ClientRectangle.Left + borderWidth &&
-                        pos.Y >= ClientRectangle.Bottom - borderWidth) { 
-                        m.Result = new IntPtr(16); //BOTTOMLEFT
-                        return;
-                    }
-
-                    else if (pos.X >= ClientRectangle.Right - borderWidth &&
-                        pos.Y >= ClientRectangle.Bottom - borderWidth) { 
-                        m.Result = new IntPtr(17); //BOTTOMRIGHT
-                        return;
-                    }
-
-                    else if (pos.X <= ClientRectangle.Left + borderWidth) { 
-                        m.Result = new IntPtr(10); //LEFT
-                        return;
-                    }
-
-                    else if (pos.Y <= ClientRectangle.Top + borderWidth) { 
-                        m.Result = new IntPtr(12); //TOP
-                        return;
-                    }
-
-                    else if (pos.X >= ClientRectangle.Right - borderWidth) { 
-                        m.Result = new IntPtr(11); //RIGHT
-                        return;
-                    }
-
-                    else if (pos.Y >= ClientRectangle.Bottom - borderWidth) { 
-                        m.Result = new IntPtr(15); //Bottom
-                        return;
-                    }
-                }
+            if (m.Msg == 0x84) {  // Trap WM_NCHITTEST
+                var pos = this.PointToClient(new Point(m.LParam.ToInt32()));
+                if (pos.X >= this.ClientSize.Width - grab && pos.Y >= this.ClientSize.Height - grab)
+                    m.Result = new IntPtr(17);  // HT_BOTTOMRIGHT
             }
         }
+        private const int grab = 16;
     }
 }

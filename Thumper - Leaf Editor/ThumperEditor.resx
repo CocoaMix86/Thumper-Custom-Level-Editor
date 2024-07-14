@@ -153,108 +153,6 @@
   <metadata name="contextMenuDock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>112, 53</value>
   </metadata>
-  <data name="lblMasterlvllistHelp.ToolTip" xml:space="preserve">
-    <value>CHKP. (checkpoint)
-If checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a 
-checkpoint and will flow into the next lvl.
-
-P+ (play+)
-If checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. 
-This is useful for tutorial levels in Play, and then removing them for Play+.
-
-ISO. (isolate)
-When checked, only isolated levels will play in game. Useful for testing specific sublevels 
-without replaying the entire thing.</value>
-  </data>
-  <data name="btnMasterRuntime.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAGFJREFUOE/VjjEKwDAMA/2ZvrQ/6du6d+meLBLy4BgXZ+nBQYIsY9vGcT7ji6iJ
-        aCgTNcHgut/UHyyoipqIhjJREwz8qf5NOIeaYNBesJLwj5pg0L6gvaAqaiIaykSti9kEEv3j9DQOWCsA
-        AAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnMasterOpenIntro.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
-        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
-        EgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnMasterOpenCheckpoint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
-        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
-        EgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnMasterOpenRest.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
-        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
-        EgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="label20.ToolTip" xml:space="preserve">
-    <value>Editing works the same way as the leaf editor.
-You can use float (decimals) between 0 and 1 to change
-a sample/loop track volume throughout the lvl.
-0 = off
-
-This is useful to make certain loop tracks quieter so they
-don't drown out other sounds at specific times.</value>
-  </data>
-  <data name="lblGatebuckethelp.ToolTip" xml:space="preserve">
-    <value>!! RANDOM ONLY WORKS WITH BOSS SPIROGRAPH !!
-
-When enabled, each boss phase will select a random lvl
-from its respective "bucket". Phase 1 (0) will only take
-from bucket 0, phase 2 (1) only from bucket 1, and so on.
-
-Buckets need a minimum 1 lvl and maximum 4 lvls.
-
-There are 4 buckets. If a bucket has no lvl assigned, the
-phase defaults to bucket 0.
-</value>
-  </data>
-  <data name="btnGateOpenRestart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
-        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
-        EgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnGateOpenPost.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
-        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
-        EgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnGateOpenPre.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
-        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
-        EgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="label46.ToolTip" xml:space="preserve">
-    <value>Interpolation type between beat values. Higher interpolation = smoother transitions/curves,
-but higher intensity calculation. Can decrease FPS.
-THIS AFFECTS IN-GAME ONLY. NOT THIS EDITOR'S INTERPOLATION CALC.</value>
-  </data>
-  <data name="label8.ToolTip" xml:space="preserve">
-    <value>Whether the value changes every beat (step = TRUE)(utilizing default on empty beats),
-or interoplates between set data points (step = FALSE)
-
-Only useful for Trait types of kTraitFloat and kTraitColor</value>
-  </data>
   <metadata name="timerBeeble.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>7, 48</value>
   </metadata>
@@ -281,7 +179,7 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABw
-        DQAAAk1TRnQBSQFMAgEBBgEAAeABBAHgAQQBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        DQAAAk1TRnQBSQFMAgEBBgEAAYgBBQGIAQUBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -365,6 +263,51 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>771, 24</value>
   </metadata>
+  <data name="lblMasterlvllistHelp.ToolTip" xml:space="preserve">
+    <value>CHKP. (checkpoint)
+If checked, the lvl will end with a checkpoint. If unchecked, the lvl will not end with a 
+checkpoint and will flow into the next lvl.
+
+P+ (play+)
+If checked, the lvl will appear when playing in Play+. If unchecked, it will be left out. 
+This is useful for tutorial levels in Play, and then removing them for Play+.
+
+ISO. (isolate)
+When checked, only isolated levels will play in game. Useful for testing specific sublevels 
+without replaying the entire thing.</value>
+  </data>
+  <data name="btnMasterRuntime.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAGFJREFUOE/VjjEKwDAMA/2ZvrQ/6du6d+meLBLy4BgXZ+nBQYIsY9vGcT7ji6iJ
+        aCgTNcHgut/UHyyoipqIhjJREwz8qf5NOIeaYNBesJLwj5pg0L6gvaAqaiIaykSti9kEEv3j9DQOWCsA
+        AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnMasterOpenIntro.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
+        EgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnMasterOpenCheckpoint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
+        EgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnMasterOpenRest.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
+        EgAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="lvlToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>393, 26</value>
   </metadata>
@@ -383,6 +326,15 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="lvlVolumeToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>504, 7</value>
   </metadata>
+  <data name="label20.ToolTip" xml:space="preserve">
+    <value>Editing works the same way as the leaf editor.
+You can use float (decimals) between 0 and 1 to change
+a sample/loop track volume throughout the lvl.
+0 = off
+
+This is useful to make certain loop tracks quieter so they
+don't drown out other sounds at specific times.</value>
+  </data>
   <metadata name="lvlPathsToolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 53</value>
   </metadata>
@@ -398,12 +350,49 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="BeatsPerLoop.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="lblGatebuckethelp.ToolTip" xml:space="preserve">
+    <value>!! RANDOM ONLY WORKS WITH BOSS SPIROGRAPH !!
+
+When enabled, each boss phase will select a random lvl
+from its respective "bucket". Phase 1 (0) will only take
+from bucket 0, phase 2 (1) only from bucket 1, and so on.
+
+Buckets need a minimum 1 lvl and maximum 4 lvls.
+
+There are 4 buckets. If a bucket has no lvl assigned, the
+phase defaults to bucket 0.
+</value>
+  </data>
   <metadata name="toolstripTitleGate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>640, 4</value>
   </metadata>
   <metadata name="gateToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>644, 23</value>
   </metadata>
+  <data name="btnGateOpenRestart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
+        EgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnGateOpenPost.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
+        EgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnGateOpenPre.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
+        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
+        EgAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="Lvl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -463,6 +452,17 @@ Playback speed is dependant on the Master BPM.</value>
   <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>259, 24</value>
   </metadata>
+  <data name="label46.ToolTip" xml:space="preserve">
+    <value>Interpolation type between beat values. Higher interpolation = smoother transitions/curves,
+but higher intensity calculation. Can decrease FPS.
+THIS AFFECTS IN-GAME ONLY. NOT THIS EDITOR'S INTERPOLATION CALC.</value>
+  </data>
+  <data name="label8.ToolTip" xml:space="preserve">
+    <value>Whether the value changes every beat (step = TRUE)(utilizing default on empty beats),
+or interoplates between set data points (step = FALSE)
+
+Only useful for Trait types of kTraitFloat and kTraitColor</value>
+  </data>
   <metadata name="SampleName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

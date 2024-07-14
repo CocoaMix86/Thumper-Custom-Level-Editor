@@ -876,5 +876,6 @@ namespace Thumper_Custom_Level_Editor
             }
             senderComboBox.DropDownWidth = width + vertScrollBarWidth; ;
         }
+
     }
 }

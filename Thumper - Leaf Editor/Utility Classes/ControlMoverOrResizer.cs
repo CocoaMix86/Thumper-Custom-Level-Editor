@@ -97,7 +97,7 @@ namespace ControlManager
             if (WorkType == MoveOrResize.Move)
             {
                 return;
-            }
+            }/*
             MouseIsInLeftEdge = Math.Abs(mouseLocationInControl.X) <= 5;
             MouseIsInRightEdge = Math.Abs(mouseLocationInControl.X - control.Width) <= 10;
             MouseIsInTopEdge = Math.Abs(mouseLocationInControl.Y ) <= 5;
@@ -118,7 +118,7 @@ namespace ControlManager
             if (Math.Abs(mouseLocationInControl.X - control.Width) <= 15 && Math.Abs(mouseLocationInControl.Y - control.Height) <= 15) {
                 MouseIsInRightEdge = true;
                 MouseIsInBottomEdge = true;
-            }
+            }*/
         }
 
         private static void UpdateMouseCursor(Control control)
@@ -126,7 +126,7 @@ namespace ControlManager
             //if only moving, don't update cursor visual
             if (WorkType == MoveOrResize.Move)
                 return;
-
+            /*
             if (MouseIsInLeftEdge)
             {
                 if (MouseIsInTopEdge)
@@ -152,7 +152,7 @@ namespace ControlManager
             else
             {
                 control.Cursor = Cursors.Default;
-            }
+            }*/
         }
 
         private static void StartMovingOrResizing(object control1, MouseEventArgs e)
