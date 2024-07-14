@@ -199,11 +199,8 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors.txt")) {
                 File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors.txt", Properties.Resources.objects_defaultcolors);
             }
-            string[] importcolors = File.Exists($@"{AppLocation}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors.txt") : null;
-            foreach (string line in importcolors) {
-                string[] items = line.Split(';');
-                objectcolors.Add(items[0], items[1]);
-            }
+            objectcolors = File.Exists($@"{AppLocation}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]) : null;
+
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
         }
         /*
