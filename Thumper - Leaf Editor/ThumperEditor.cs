@@ -10,12 +10,14 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Shell;
+using System.Threading;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class FormLeafEditor : Form
     {
         #region Variables
+        public SplashScreen SplashScreen = new();
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         public string workingfolder
         {
@@ -86,6 +88,7 @@ namespace Thumper_Custom_Level_Editor
         public FormLeafEditor(string LevelFromArg)
         {
             InitializeComponent();
+            SplashScreen.Show();
             ColorFormElements();
             JumpListUpdate();
             //set custom renderer
@@ -122,6 +125,95 @@ namespace Thumper_Custom_Level_Editor
             DropDownMenuScrollWheelHandler.Enable(true);
             //
             LevelToLoad = LevelFromArg;
+            //
+            //
+            //
+            ///Create directory for leaf templates and other default files
+            if (!Directory.Exists($@"{AppLocation}\templates")) {
+                regenerateTemplateFilesToolStripMenuItem_Click(null, null);
+            }
+            if (!Directory.Exists($@"{AppLocation}\temp")) {
+                Directory.CreateDirectory($@"{AppLocation}\temp");
+            }
+            //
+            dropMasterSkybox.SelectedIndex = 1;
+            dropMasterSkybox.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
+
+            //setup datagrids with proper formatting
+            InitializeTracks(trackEditor, true);
+            InitializeTracks(lvlSeqObjs, true);
+            InitializeTracks(lvlLeafList, false);
+            InitializeTracks(masterLvlList, false);
+            InitializeTracks(gateLvlList, false);
+            InitializeTracks(workingfolderFiles, false);
+            InitializeTracks(sampleList, false);
+            //call method that imports objects from track_objects.txt (for Leaf editing)
+            ImportObjects();
+            InitializeLeafStuff();
+            InitializeLvlStuff();
+            InitializeMasterStuff();
+            InitializeGateStuff();
+            InitializeSampleStuff();
+            //set title bars to be able to move the panels
+            ControlMoverOrResizer.InitMover(toolstripTitleLeaf);
+            ControlMoverOrResizer.InitMover(toolstripTitleLvl);
+            ControlMoverOrResizer.InitMover(toolstripTitleGate);
+            ControlMoverOrResizer.InitMover(toolstripTitleMaster);
+            ControlMoverOrResizer.InitMover(toolstripTitleSample);
+            ControlMoverOrResizer.InitMover(toolstripTitleWork);
+            ControlMoverOrResizer.InitMover(workingfolderFiles);
+            ControlMoverOrResizer.InitMover(toolstripRecentFiles);
+            ControlMoverOrResizer.InitMover(toolStripChangelog);
+            //write required audio files for playback
+            InitializeSounds();
+            //keybinds
+            SetKeyBinds();
+            //load size and location data for panels
+            panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
+            panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
+            panelLeaf.Visible = leafEditorToolStripMenuItem.Checked = Properties.Settings.Default.leafeditorvisible;
+            panelLevel.Location = Properties.Settings.Default.lvleditorloc;
+            panelLevel.Size = Properties.Settings.Default.lvleditorsize;
+            panelLevel.Visible = levelEditorToolStripMenuItem.Checked = Properties.Settings.Default.lvleditorvisible;
+            panelGate.Location = Properties.Settings.Default.gateeditorloc;
+            panelGate.Size = Properties.Settings.Default.gateeditorsize;
+            panelGate.Visible = gateEditorToolStripMenuItem.Checked = Properties.Settings.Default.gateeditorvisible;
+            panelMaster.Location = Properties.Settings.Default.mastereditorloc;
+            panelMaster.Size = Properties.Settings.Default.mastereditorsize;
+            panelMaster.Visible = masterEditorToolStripMenuItem.Checked = Properties.Settings.Default.mastereditorvisible;
+            panelWorkingFolder.Location = Properties.Settings.Default.folderloc;
+            panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
+            panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked = Properties.Settings.Default.workingfoldervisible;
+            panelSample.Size = Properties.Settings.Default.sampleeditorsize;
+            panelSample.Location = Properties.Settings.Default.sampleeditorloc;
+            panelSample.Visible = sampleEditorToolStripMenuItem.Checked = Properties.Settings.Default.sampleeditorvisible;
+            panelBeeble.Size = Properties.Settings.Default.beeblesize;
+            panelBeeble.Location = Properties.Settings.Default.beebleloc;
+            //zoom settings
+            trackZoom.Value = Properties.Settings.Default.leafzoom;
+            trackZoomVert.Value = Properties.Settings.Default.leafzoomvert;
+            trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
+            btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
+            //colors
+            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+
+            //load recent levels 
+            List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
+            if (levellist.Count > 0 && LevelToLoad.Length < 2)
+                RecentFiles(levellist);
+            else if (LevelToLoad.Length > 2) {
+                if (Directory.Exists(LevelToLoad)) {
+                    ClearPanels();
+                    workingfolder = LevelToLoad;
+                    panelRecentFiles.Visible = false;
+                }
+                else
+                    MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
+            }
+
+            //finish loading
+            Properties.Settings.Default.firstrun = false;
+            Properties.Settings.Default.Save();
         }
         private void JumpListUpdate()
         {
@@ -198,6 +290,10 @@ namespace Thumper_Custom_Level_Editor
         ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
+            //set panels to their last saved dock
+            SetDockLocations();
+            PlaySound("UIboot");
+            SplashScreen.Close();
             ///version check
             if (Properties.Settings.Default.version != "2.2beta13") {
                 ShowChangelog();
@@ -207,95 +303,6 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
                 Properties.Settings.Default.version = "2.2beta13";
             }
-            ///Create directory for leaf templates
-            if (!Directory.Exists($@"{AppLocation}\templates")) {
-                regenerateTemplateFilesToolStripMenuItem_Click(null, null);
-            }
-            if (!Directory.Exists($@"{AppLocation}\temp")) {
-                Directory.CreateDirectory($@"{AppLocation}\temp");
-            }
-            
-            //
-            dropMasterSkybox.SelectedIndex = 1;
-            dropMasterSkybox.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
-
-            //setup datagrids with proper formatting
-            InitializeTracks(trackEditor, true);
-            InitializeTracks(lvlSeqObjs, true);
-            InitializeTracks(lvlLeafList, false);
-            InitializeTracks(masterLvlList, false);
-            InitializeTracks(gateLvlList, false);
-            InitializeTracks(workingfolderFiles, false);
-            InitializeTracks(sampleList, false);
-            //call method that imports objects from track_objects.txt (for Leaf editing)
-            ImportObjects();
-            InitializeLeafStuff();
-            InitializeLvlStuff();
-            InitializeMasterStuff();
-            InitializeGateStuff();
-            InitializeSampleStuff();
-            //set title bars to be able to move the panels
-            ControlMoverOrResizer.InitMover(toolstripTitleLeaf);
-            ControlMoverOrResizer.InitMover(toolstripTitleLvl);
-            ControlMoverOrResizer.InitMover(toolstripTitleGate);
-            ControlMoverOrResizer.InitMover(toolstripTitleMaster);
-            ControlMoverOrResizer.InitMover(toolstripTitleSample);
-            ControlMoverOrResizer.InitMover(toolstripTitleWork);
-            ControlMoverOrResizer.InitMover(workingfolderFiles);
-            ControlMoverOrResizer.InitMover(toolstripRecentFiles);
-            ControlMoverOrResizer.InitMover(toolStripChangelog);
-            //write required audio files for playback
-            InitializeSounds();
-            //set panels to their last saved dock
-            SetDockLocations();
-            SetKeyBinds();
-            //load size and location data for panels
-            panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
-            panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
-            panelLeaf.Visible = leafEditorToolStripMenuItem.Checked = Properties.Settings.Default.leafeditorvisible;
-            panelLevel.Location = Properties.Settings.Default.lvleditorloc;
-            panelLevel.Size = Properties.Settings.Default.lvleditorsize;
-            panelLevel.Visible = levelEditorToolStripMenuItem.Checked = Properties.Settings.Default.lvleditorvisible;
-            panelGate.Location = Properties.Settings.Default.gateeditorloc;
-            panelGate.Size = Properties.Settings.Default.gateeditorsize;
-            panelGate.Visible = gateEditorToolStripMenuItem.Checked = Properties.Settings.Default.gateeditorvisible;
-            panelMaster.Location = Properties.Settings.Default.mastereditorloc;
-            panelMaster.Size = Properties.Settings.Default.mastereditorsize;
-            panelMaster.Visible = masterEditorToolStripMenuItem.Checked = Properties.Settings.Default.mastereditorvisible;
-            panelWorkingFolder.Location = Properties.Settings.Default.folderloc;
-            panelWorkingFolder.Size = Properties.Settings.Default.foldersize;
-            panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked = Properties.Settings.Default.workingfoldervisible;
-            panelSample.Size = Properties.Settings.Default.sampleeditorsize;
-            panelSample.Location = Properties.Settings.Default.sampleeditorloc;
-            panelSample.Visible = sampleEditorToolStripMenuItem.Checked = Properties.Settings.Default.sampleeditorvisible;
-            panelBeeble.Size = Properties.Settings.Default.beeblesize;
-            panelBeeble.Location = Properties.Settings.Default.beebleloc;
-            //zoom settings
-            trackZoom.Value = Properties.Settings.Default.leafzoom;
-            trackZoomVert.Value = Properties.Settings.Default.leafzoomvert;
-            trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
-            btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
-            //colors
-            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-
-            //load recent levels 
-            List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
-            if (levellist.Count > 0 && LevelToLoad.Length < 2)
-                RecentFiles(levellist);
-            else if (LevelToLoad.Length > 2) {
-                if (Directory.Exists(LevelToLoad)) {
-                    ClearPanels();
-                    workingfolder = LevelToLoad;
-                    panelRecentFiles.Visible = false;
-                }
-                else
-                    MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
-            }
-
-            //finish loading
-            Properties.Settings.Default.firstrun = false;
-            Properties.Settings.Default.Save();
-            PlaySound("UIboot");
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -309,7 +316,7 @@ namespace Thumper_Custom_Level_Editor
         }
         ///END DOUBLEBUFFERING
         /// 
-
+        
         private void regenerateTemplateFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists($@"{AppLocation}\templates")) {

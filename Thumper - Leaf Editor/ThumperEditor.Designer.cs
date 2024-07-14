@@ -5328,7 +5328,6 @@
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += new System.EventHandler(this.trackEditor_RowHeadersWidthChanged);
-            this.trackEditor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellEndEdit);
             this.trackEditor.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseClick);
             this.trackEditor.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDown);
             this.trackEditor.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellMouseEnter);

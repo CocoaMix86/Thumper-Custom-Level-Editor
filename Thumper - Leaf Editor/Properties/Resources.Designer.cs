@@ -1721,13 +1721,22 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Thumper_Splash {
+            get {
+                object obj = ResourceManager.GetObject("Thumper_Splash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TRACK EFFECTS
-        ///leafname
         ///leafname;pitch;pitch;kTraitFloat;True;1.25;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
         ///leafname;roll;roll;kTraitFloat;True;0;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
         ///leafname;turn;turn;kTraitFloat;True;0;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
         ///leafname;turn_auto;turn_auto;kTraitFloat;True;0;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
-        ///leafname;scale_x;scale_x;kTraitFloat [rest of string was truncated]&quot;;.
+        ///leafname;scale_x;scale_x;kTraitFloat;True;1;[4 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string track_objects {
             get {

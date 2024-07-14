@@ -300,14 +300,14 @@ namespace Thumper_Custom_Level_Editor
 					tb.PreviewKeyDown += new PreviewKeyDownEventHandler(AllowArrowMovement);
 				}
             }*/
-			e.CellStyle.Font = new Font("Consolas", 7);
+			//e.CellStyle.Font = new Font("Consolas", 7);
 		}
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			//if (e.RowIndex == -1 || e.ColumnIndex == -1)
-				//return;
-			//CellValueChanged(e.RowIndex, e.ColumnIndex);
+			if (e.RowIndex == -1 || e.ColumnIndex == -1)
+				return;
+			CellValueChanged(e.RowIndex, e.ColumnIndex);
 		}
 		private void CellValueChanged(int rowindex, int columnindex)
         {
@@ -338,14 +338,14 @@ namespace Thumper_Custom_Level_Editor
 				GenerateDataPoints(r);
 			ShowRawTrackData(trackEditor.Rows[rowindex]);
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
-        }
+		}
 
-        private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+		private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-			CellValueChanged(e.RowIndex, e.ColumnIndex);
-        }
+			
+		}
 
-        private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
+		private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
 		{
 			e.ThrowException = false;
 		}
