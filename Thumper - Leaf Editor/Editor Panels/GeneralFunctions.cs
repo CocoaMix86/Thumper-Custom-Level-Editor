@@ -19,8 +19,8 @@ namespace Thumper_Custom_Level_Editor
         {
             _objects.Clear();
             //check if the track_objects exists or not, but do not overwrite it
-            if (!File.Exists($@"{AppLocation}\templates\track_objects.txt")) {
-                File.WriteAllText($@"{AppLocation}\templates\track_objects.txt", Properties.Resources.track_objects);
+            if (!File.Exists($@"{AppLocation}\templates\track_objects2.2.txt")) {
+                File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
             }
 
             //import default colors per object
@@ -29,13 +29,13 @@ namespace Thumper_Custom_Level_Editor
 
             ///import selectable objects from file and parse them into lists for manipulation
             //splits input at "###". Each section is a collection of param_paths
-            List<string> import = (File.ReadAllText($@"{AppLocation}\templates\track_objects.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
+            List<string> import = (File.ReadAllText($@"{AppLocation}\templates\track_objects2.2.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
             for (int x = 0; x < import.Count; x++) {
                 //split each section into individual lines
                 List<string> import2 = import[x].Split('\n').ToList();
                 //initialise class so we can add to it
 
-                for (int y = 2; y < import2.Count - 1; y++) {
+                for (int y = 1; y < import2.Count - 1; y++) {
                     //split each line by ';'. Now each property is separated
                     string[] import3 = import2[y].Split(';');
                     try {
