@@ -225,7 +225,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomDiff.Size = new System.Drawing.Size(126, 23);
             this.txtCustomDiff.TabIndex = 3;
             this.txtCustomDiff.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.txtCustomDiff.TextChanged += new System.EventHandler(this.txtCustomDiff_TextChanged);
+            this.txtCustomDiff.SelectedIndexChanged += new System.EventHandler(this.txtCustomDiff_SelectedIndexChanged);
             // 
             // lblCustomDiffHelp
             // 

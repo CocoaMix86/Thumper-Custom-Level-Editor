@@ -70,7 +70,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private void txtCustomDiff_TextChanged(object sender, EventArgs e)
+        private void txtCustomDiff_SelectedIndexChanged(object sender, EventArgs e)
         {
             Image diff = (Image)Properties.Resources.ResourceManager.GetObject(txtCustomDiff.Text);
             pictureDifficulty.Image = diff;
