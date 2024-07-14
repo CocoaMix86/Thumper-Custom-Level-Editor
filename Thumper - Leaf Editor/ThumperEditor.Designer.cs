@@ -2381,10 +2381,10 @@
             this.panelRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
             this.panelRecentFiles.Controls.Add(this.toolstripRecentFiles);
-            this.panelRecentFiles.Location = new System.Drawing.Point(1273, 6);
+            this.panelRecentFiles.Location = new System.Drawing.Point(476, 214);
             this.panelRecentFiles.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
-            this.panelRecentFiles.Size = new System.Drawing.Size(407, 247);
+            this.panelRecentFiles.Size = new System.Drawing.Size(448, 247);
             this.panelRecentFiles.TabIndex = 137;
             this.panelRecentFiles.Tag = "editorpanel";
             this.panelRecentFiles.Visible = false;
@@ -2442,7 +2442,7 @@
             this.dgvRecentFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRecentFiles.RowTemplate.Height = 20;
             this.dgvRecentFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.Size = new System.Drawing.Size(405, 223);
+            this.dgvRecentFiles.Size = new System.Drawing.Size(446, 223);
             this.dgvRecentFiles.TabIndex = 140;
             this.dgvRecentFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecentFiles_CellClick);
             this.dgvRecentFiles.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvRecentFiles_CellPainting);
@@ -2523,7 +2523,7 @@
             this.toolstripRecentFiles.Padding = new System.Windows.Forms.Padding(0);
             this.toolstripRecentFiles.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolstripRecentFiles.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripRecentFiles.Size = new System.Drawing.Size(405, 22);
+            this.toolstripRecentFiles.Size = new System.Drawing.Size(446, 22);
             this.toolstripRecentFiles.TabIndex = 139;
             this.toolstripRecentFiles.Text = "titlebar";
             this.toolstripRecentFiles.Click += new System.EventHandler(this.panelRecentClick);
