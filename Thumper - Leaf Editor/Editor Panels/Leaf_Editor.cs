@@ -45,6 +45,7 @@ namespace Thumper_Custom_Level_Editor
 		public bool rightclickdown = false;
 		public int leafeditorcell = 0;
 		public bool randomizing = false;
+		public int hscrollposition = 0;
 
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new();
@@ -80,7 +81,12 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void trackEditor_Scroll(object sender, ScrollEventArgs e)
 		{
-            int match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
+			if (controldown) {
+				trackEditor.Scroll -= trackEditor_Scroll;
+				trackEditor.HorizontalScrollingOffset = e.OldValue;
+				trackEditor.Scroll += trackEditor_Scroll;
+			}
+			int match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
 			if (match != -1)
 				_scrollpositions[match] = new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex);
 			else
@@ -93,6 +99,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void trackZoom_Scroll(object sender, EventArgs e)
 		{
+			trackEditor.Scroll -= trackEditor_Scroll;
 			int display = trackEditor.FirstDisplayedScrollingColumnIndex;
 			if (display == -1)
 				return;
@@ -102,9 +109,11 @@ namespace Thumper_Custom_Level_Editor
 			//hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
 			//hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
 			trackEditor.FirstDisplayedScrollingColumnIndex = display;
+			trackEditor.Scroll += trackEditor_Scroll;
 		}
 		private void trackZoomVert_Scroll(object sender, EventArgs e)
 		{
+			trackEditor.Scroll -= trackEditor_Scroll;
 			int display = trackEditor.FirstDisplayedScrollingRowIndex;
 			if (display == -1)
 				return;
@@ -113,6 +122,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			vscrollbarTrackEditor_Resize();
 			trackEditor.FirstDisplayedScrollingRowIndex = display;
+			trackEditor.Scroll += trackEditor_Scroll;
 		}
 		private void trackEditor_Resize(object sender, EventArgs e)
 		{
@@ -388,6 +398,7 @@ namespace Thumper_Custom_Level_Editor
 			controldown = e.Control;
 			shiftdown = e.Shift;
 			altdown = e.Alt;
+			hscrollposition = trackEditor.HorizontalScrollingOffset;
 			///Keypress Delete - clear selected cellss
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {

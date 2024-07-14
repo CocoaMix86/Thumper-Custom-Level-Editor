@@ -457,6 +457,12 @@
             this.numericUpDown_LeafLength = new System.Windows.Forms.NumericUpDown();
             this.panelSample = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.sampleList = new System.Windows.Forms.DataGridView();
+            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label54 = new System.Windows.Forms.Label();
             this.sampleToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnSampleAdd = new System.Windows.Forms.ToolStripButton();
@@ -479,12 +485,6 @@
             this.toolStripChangelog = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.lblChangelogClose = new System.Windows.Forms.ToolStripButton();
-            this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Volume = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Offset = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Channel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             this.workingfolderRightClick.SuspendLayout();
             this.contextMenuNewFile.SuspendLayout();
@@ -6300,6 +6300,73 @@
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.SampleName.DefaultCellStyle = dataGridViewCellStyle36;
+            this.SampleName.FillWeight = 8.913044F;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Volume
+            // 
+            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle37.Format = "0.00";
+            dataGridViewCellStyle37.NullValue = null;
+            this.Volume.DefaultCellStyle = dataGridViewCellStyle37;
+            this.Volume.FillWeight = 1F;
+            this.Volume.HeaderText = "V.";
+            this.Volume.Name = "Volume";
+            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Volume.Width = 22;
+            // 
+            // Pitch
+            // 
+            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle38.Format = "0.00";
+            dataGridViewCellStyle38.NullValue = null;
+            this.Pitch.DefaultCellStyle = dataGridViewCellStyle38;
+            this.Pitch.FillWeight = 1F;
+            this.Pitch.HeaderText = "P.";
+            this.Pitch.Name = "Pitch";
+            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pitch.Width = 21;
+            // 
+            // Pan
+            // 
+            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle39.Format = "0.00";
+            dataGridViewCellStyle39.NullValue = null;
+            this.Pan.DefaultCellStyle = dataGridViewCellStyle39;
+            this.Pan.FillWeight = 1F;
+            this.Pan.HeaderText = "Pan";
+            this.Pan.Name = "Pan";
+            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Pan.Width = 32;
+            // 
+            // Offset
+            // 
+            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle40.Format = "0.00";
+            dataGridViewCellStyle40.NullValue = null;
+            this.Offset.DefaultCellStyle = dataGridViewCellStyle40;
+            this.Offset.FillWeight = 1F;
+            this.Offset.HeaderText = "Of.";
+            this.Offset.Name = "Offset";
+            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Offset.Width = 27;
+            // 
+            // Channel
+            // 
+            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Channel.FillWeight = 1.086957F;
+            this.Channel.HeaderText = "Ch.";
+            this.Channel.Name = "Channel";
+            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // label54
             // 
             this.label54.AutoSize = true;
@@ -6582,73 +6649,6 @@
             this.lblChangelogClose.Text = "toolStripButton6";
             this.lblChangelogClose.ToolTipText = "Close panel";
             this.lblChangelogClose.Click += new System.EventHandler(this.lblChangelogClose_Click);
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.SampleName.DefaultCellStyle = dataGridViewCellStyle36;
-            this.SampleName.FillWeight = 8.913044F;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Volume
-            // 
-            this.Volume.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle37.Format = "0.00";
-            dataGridViewCellStyle37.NullValue = null;
-            this.Volume.DefaultCellStyle = dataGridViewCellStyle37;
-            this.Volume.FillWeight = 1F;
-            this.Volume.HeaderText = "V.";
-            this.Volume.Name = "Volume";
-            this.Volume.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Volume.Width = 22;
-            // 
-            // Pitch
-            // 
-            this.Pitch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle38.Format = "0.00";
-            dataGridViewCellStyle38.NullValue = null;
-            this.Pitch.DefaultCellStyle = dataGridViewCellStyle38;
-            this.Pitch.FillWeight = 1F;
-            this.Pitch.HeaderText = "P.";
-            this.Pitch.Name = "Pitch";
-            this.Pitch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pitch.Width = 21;
-            // 
-            // Pan
-            // 
-            this.Pan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle39.Format = "0.00";
-            dataGridViewCellStyle39.NullValue = null;
-            this.Pan.DefaultCellStyle = dataGridViewCellStyle39;
-            this.Pan.FillWeight = 1F;
-            this.Pan.HeaderText = "Pan";
-            this.Pan.Name = "Pan";
-            this.Pan.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Pan.Width = 32;
-            // 
-            // Offset
-            // 
-            this.Offset.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle40.Format = "0.00";
-            dataGridViewCellStyle40.NullValue = null;
-            this.Offset.DefaultCellStyle = dataGridViewCellStyle40;
-            this.Offset.FillWeight = 1F;
-            this.Offset.HeaderText = "Of.";
-            this.Offset.Name = "Offset";
-            this.Offset.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Offset.Width = 27;
-            // 
-            // Channel
-            // 
-            this.Channel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Channel.FillWeight = 1.086957F;
-            this.Channel.HeaderText = "Ch.";
-            this.Channel.Name = "Channel";
-            this.Channel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Channel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // FormLeafEditor
             // 
