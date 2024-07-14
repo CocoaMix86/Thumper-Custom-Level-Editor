@@ -212,8 +212,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
 
             if (playsound) PlaySound("UIdock");
-            ControlMoverOrResizer.Dispose(panel);
-            ControlMoverOrResizer.Dispose(dockbtn.Owner);
+            //ControlMoverOrResizer.Dispose(panel);
+            //ControlMoverOrResizer.Dispose(dockbtn.Owner);
             ((Panel)panel).BorderStyle = BorderStyle.None;
         }
 
@@ -259,8 +259,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
 
             if (playsound) PlaySound("UIdockun");
-            ControlMoverOrResizer.InitResizer(panel);
-            ControlMoverOrResizer.InitMover(dockbtn.Owner);
+            //ControlMoverOrResizer.InitResizer(panel);
+            //ControlMoverOrResizer.InitMover(dockbtn.Owner);
             ((Panel)panel).BorderStyle = BorderStyle.FixedSingle;
         }
 

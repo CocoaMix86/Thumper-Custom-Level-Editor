@@ -234,28 +234,28 @@ namespace Thumper_Custom_Level_Editor
             InitializeMasterStuff();
             InitializeGateStuff();
             InitializeSampleStuff();
+            /*
             //set panels to be resizeable
             ControlMoverOrResizer.InitResizer(pictureBox1);
 
             ControlMoverOrResizer.InitResizer(panelLeaf);
             ControlMoverOrResizer.InitResizer(panelLevel);
             ControlMoverOrResizer.InitResizer(panelGate);
-            ControlMoverOrResizer.InitResizer(panelMaster);
+            //ControlMoverOrResizer.InitResizer(panelMaster);
             ControlMoverOrResizer.InitResizer(panelSample);
             ControlMoverOrResizer.InitResizer(panelWorkingFolder);
             ControlMoverOrResizer.InitResizer(panelChangelog);
-
+            */
             ControlMoverOrResizer.InitMover(toolstripTitleLeaf);
             ControlMoverOrResizer.InitMover(toolstripTitleLvl);
             ControlMoverOrResizer.InitMover(toolstripTitleGate);
             ControlMoverOrResizer.InitMover(toolstripTitleMaster);
             ControlMoverOrResizer.InitMover(toolstripTitleSample);
-            ControlMoverOrResizer.InitMover(workingfolderFiles);
-            ControlMoverOrResizer.InitMover(workingToolStrip);
-            ControlMoverOrResizer.InitMover(workingToolStrip2);
             ControlMoverOrResizer.InitMover(toolstripTitleWork);
+            ControlMoverOrResizer.InitMover(workingfolderFiles);
             ControlMoverOrResizer.InitMover(toolstripRecentFiles);
             ControlMoverOrResizer.InitMover(toolStripChangelog);
+            
             //write required audio files for playback
             InitializeSounds();
             //set panels to their last saved dock
@@ -876,5 +876,6 @@ namespace Thumper_Custom_Level_Editor
             }
             senderComboBox.DropDownWidth = width + vertScrollBarWidth; ;
         }
+
     }
 }

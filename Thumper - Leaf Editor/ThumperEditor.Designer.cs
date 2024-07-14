@@ -169,7 +169,7 @@
             this.label57 = new System.Windows.Forms.Label();
             this.trackZoomVert = new System.Windows.Forms.TrackBar();
             this.btnRawImport = new System.Windows.Forms.Button();
-            this.panelLeaf = new System.Windows.Forms.Panel();
+            this.panelLeaf = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.vScrollBarTrackEditor = new System.Windows.Forms.VScrollBar();
             this.toolstripTitleLeaf = new System.Windows.Forms.ToolStrip();
             this.lblTrackFileName = new System.Windows.Forms.ToolStripLabel();
@@ -228,7 +228,7 @@
             this.dropTrackLane = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnTrackApply = new System.Windows.Forms.Button();
-            this.panelLevel = new System.Windows.Forms.Panel();
+            this.panelLevel = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.lvlToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlLeafAdd = new System.Windows.Forms.ToolStripButton();
             this.btnLvlLeafDelete = new System.Windows.Forms.ToolStripButton();
@@ -289,7 +289,7 @@
             this.lvlLoopTracks = new System.Windows.Forms.DataGridView();
             this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelMaster = new System.Windows.Forms.Panel();
+            this.panelMaster = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.masterLvlList = new System.Windows.Forms.DataGridView();
             this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
             this.masterLvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -343,7 +343,7 @@
             this.label47 = new System.Windows.Forms.Label();
             this.btnMasterOpenRest = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.panelGate = new System.Windows.Forms.Panel();
+            this.panelGate = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.lblGatebuckethelp = new System.Windows.Forms.Label();
             this.checkGateRandom = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -379,7 +379,7 @@
             this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgvGateBucket = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.panelWorkingFolder = new System.Windows.Forms.Panel();
+            this.panelWorkingFolder = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.workingfolderFiles = new System.Windows.Forms.DataGridView();
             this.FileType = new System.Windows.Forms.DataGridViewImageColumn();
             this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -432,7 +432,7 @@
             this.label52 = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
-            this.panelSample = new System.Windows.Forms.Panel();
+            this.panelSample = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.sampleList = new System.Windows.Forms.DataGridView();
             this.SampleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -6846,9 +6846,9 @@
 		private System.Windows.Forms.TrackBar trackZoom;
 		private System.Windows.Forms.Panel panelZoom;
 		private System.Windows.Forms.Button btnRawImport;
-		private System.Windows.Forms.Panel panelLeaf;
-		private System.Windows.Forms.Panel panelLevel;
-		private System.Windows.Forms.Panel panelMaster;
+		private ResizeablePanel panelLeaf;
+		private ResizeablePanel panelLevel;
+		private ResizeablePanel panelMaster;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.Button btnTrackApply;
 		private System.Windows.Forms.Label label15;
@@ -6927,7 +6927,7 @@
 		private System.Windows.Forms.ToolStripMenuItem leafTemplateToolStripMenuItem;
 		private System.Windows.Forms.Button btnMasterOpenCheckpoint;
 		private System.Windows.Forms.Button btnMasterOpenIntro;
-		private System.Windows.Forms.Panel panelGate;
+		private ResizeablePanel panelGate;
 		private System.Windows.Forms.ToolStripMenuItem gateToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem gatenewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem gateopenToolStripMenuItem;
@@ -6943,7 +6943,7 @@
 		private System.Windows.Forms.Label label37;
 		private System.Windows.Forms.Label label38;
 		private System.Windows.Forms.ComboBox dropGateBoss;
-		private System.Windows.Forms.Panel panelWorkingFolder;
+		private ResizeablePanel panelWorkingFolder;
 		private System.Windows.Forms.DataGridView workingfolderFiles;
 		private System.Windows.Forms.ToolStripMenuItem workingFolderToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem editLevelDetailsToolStripMenuItem;
@@ -6965,7 +6965,7 @@
 		private System.Windows.Forms.Button btnGateOpenRestart;
 		private System.Windows.Forms.Button btnGateOpenPost;
 		private System.Windows.Forms.Button btnGateOpenPre;
-		private System.Windows.Forms.Panel panelSample;
+		private ResizeablePanel panelSample;
 		private System.Windows.Forms.Label label54;
 		private System.Windows.Forms.DataGridView sampleList;
 		private System.Windows.Forms.ToolStripMenuItem sampleEditorToolStripMenuItem;

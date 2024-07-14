@@ -93,6 +93,9 @@
     <Compile Include="Other Forms\FileNameDialog.Designer.cs">
       <DependentUpon>FileNameDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Other Forms\ResizeablePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
