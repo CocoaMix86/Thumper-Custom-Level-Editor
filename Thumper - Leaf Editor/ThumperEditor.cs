@@ -17,7 +17,6 @@ namespace Thumper_Custom_Level_Editor
     public partial class FormLeafEditor : Form
     {
         #region Variables
-        public SplashScreen SplashScreen = new();
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         public string workingfolder
         {
@@ -88,7 +87,6 @@ namespace Thumper_Custom_Level_Editor
         public FormLeafEditor(string LevelFromArg)
         {
             InitializeComponent();
-            SplashScreen.Show();
             ColorFormElements();
             JumpListUpdate();
             //set custom renderer
@@ -290,10 +288,10 @@ namespace Thumper_Custom_Level_Editor
         ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
+            //finalize boot
+            PlaySound("UIboot");
             //set panels to their last saved dock
             SetDockLocations();
-            PlaySound("UIboot");
-            SplashScreen.Close();
             ///version check
             if (Properties.Settings.Default.version != "2.2beta13") {
                 ShowChangelog();
@@ -569,7 +567,7 @@ namespace Thumper_Custom_Level_Editor
             }
             if (im != null)
                 pictureBox1.Image = im;
-            pictureBox1.Refresh();
+            //pictureBox1.Refresh();
             timerBeeble.Start();
         }
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)

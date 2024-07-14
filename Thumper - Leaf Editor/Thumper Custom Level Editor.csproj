@@ -97,12 +97,6 @@
     <Compile Include="Other Forms\ResizeablePanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Other Forms\SplashScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\SplashScreen.Designer.cs">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -192,9 +186,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Other Forms\Interpolator.resx">
       <DependentUpon>Interpolator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\SplashScreen.resx">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThumperEditor.resx">
       <DependentUpon>ThumperEditor.cs</DependentUpon>
