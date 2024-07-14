@@ -202,7 +202,7 @@ namespace Thumper_Custom_Level_Editor
             string[] importcolors = File.Exists($@"{AppLocation}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors.txt") : null;
             foreach (string line in importcolors) {
                 string[] items = line.Split(';');
-                objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
+                objectcolors.Add(items[0], items[1]);
             }
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
         }

@@ -11,7 +11,7 @@ namespace Thumper_Custom_Level_Editor
     {
         string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
         public List<Object_Params> _objects = new();
-        private List<Tuple<string, string>> objectcolors = new();
+        private Dictionary<string, string> objectcolors = new();
         private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
 
         public CustomizeWorkspace(List<Object_Params> thelist)
@@ -33,10 +33,9 @@ namespace Thumper_Custom_Level_Editor
             toolstripCustomize.Renderer = new ToolStripOverride();
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //
-            string[] import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt") : null;
-            foreach (string line in import) {
-                string[] items = line.Split(';');
-                objectcolors.Add(new Tuple<string, string>(items[0], items[1]));
+            Dictionary<string, string> import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]): null;
+            foreach (Object_Params _obj in _objects) {
+                objectcolors.Add(_obj.param_displayname, import.TryGetValue(_obj.param_displayname, out string value) ? value : "-8355585");
             }
             //
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
@@ -64,8 +63,7 @@ namespace Thumper_Custom_Level_Editor
         private void btnCustomizeApply_Click(object sender, EventArgs e)
         {
             //colors
-            string[] export = objectcolors.Select(x => $@"{x.Item1};{x.Item2}").ToArray();
-            File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", export);
+            File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", objectcolors.Select(x => $"{x.Key};{x.Value}"));
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //set and save properties
             Properties.Settings.Default.custom_bgcolor = btnBGColor.BackColor;
@@ -93,7 +91,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnObjectColor.BackColor = Color.FromArgb(int.Parse(objectcolors.FirstOrDefault(x => x.Item1 == dropParamPath.Text)?.Item2 ?? "-8355585"));
+            btnObjectColor.BackColor = Color.FromArgb(int.Parse(objectcolors.TryGetValue(dropParamPath.Text, out string value) ? value : "-8355585"));
         }
 
         private void btnObjectColor_Click(object sender, EventArgs e)
@@ -105,12 +103,11 @@ namespace Thumper_Custom_Level_Editor
                 Color _c = colorDialog1.Color;
                 btn.BackColor = colorDialog1.Color;
 
-                if (objectcolors.FirstOrDefault(x => x.Item1 == dropParamPath.Text) == null) {
-                    objectcolors.Add(new Tuple<string, string>(dropParamPath.Text, $"{_c.ToArgb()}"));
+                if (!objectcolors.ContainsKey(dropParamPath.Text)) {
+                    objectcolors.Add(dropParamPath.Text, $"{_c.ToArgb()}");
                 }
                 else {
-                    int _in = objectcolors.IndexOf(objectcolors.Where(x => x.Item1 == dropParamPath.Text).First());
-                    objectcolors[_in] = new Tuple<string, string>(dropParamPath.Text, $"{_c.ToArgb()}");
+                    objectcolors[dropParamPath.Text] = $"{_c.ToArgb()}";
                 }
             }
         }

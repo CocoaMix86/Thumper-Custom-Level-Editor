@@ -50,7 +50,7 @@ namespace Thumper_Custom_Level_Editor
 		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new();
 		private List<Object_Params> _objects = new();
-		private List<Tuple<string, string>> objectcolors = new();
+		private Dictionary<string, string> objectcolors = new();
 		public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public List<string> _tracklanefriendly = new() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
 		public List<Tuple<string, int, int>> _scrollpositions = new();
@@ -565,7 +565,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
 				//if (_tracks[trackEditor.CurrentRow?.Index ?? 0].highlight_color == null)
-				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(objectcolors.FirstOrDefault(x => x.Item1 == dropParamPath.Text)?.Item2 ?? "-8355585"));
+				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(objectcolors.TryGetValue(dropParamPath.Text, out string value) ? value : "-8355585"));
 				//if the param_path is .ent, enable lane choice
 				if (_objects.Where(obj => obj.param_displayname == dropParamPath.Text).First().param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
 					dropTrackLane.Enabled = true;
@@ -1583,7 +1583,7 @@ namespace Thumper_Custom_Level_Editor
 						loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
 					}
 				}
-				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? objectcolors.FirstOrDefault(x => x.Item1 == _s.friendly_param)?.Item2 ?? "-8355585";
+				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? (objectcolors.TryGetValue(_s.friendly_param, out string value) ? value : "-8355585");
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this
 				if (_s.param_path.Contains("."))
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param

@@ -103,7 +103,6 @@ level2_angled_fingers_set.spn;level 2 angled fingers1 [16 beats];fingers1.ent;kT
 level2_angled_fingers_set.spn;level 2 angled fingers1_gate[16 beats];fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level2_angled_fingers_set.spn;level 2 angled fingers1_unison[16 beats];fingers1_unison.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level2_angled_fingers_set.spn;level 2 angled fingers1_wave_in[16 beats];fingers1_wave_in.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
-level2_angled_fingers_set.spn;level 2 angled fingers1_gate[16 beats];fingers1_gate.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level2_angled_fingers_set.spn;level 2 angled fingers1_long[32 beats];fingers1_long.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level2_angled_fingers_set.spn;level 2 angled fingers1_long_20;fingers1_long_20.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 level2_angled_fingers.spn;level 2 angled fingers1_decorative[1 beat];tentacle_decorative.ent;kTraitAction;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
