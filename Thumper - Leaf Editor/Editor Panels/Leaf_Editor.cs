@@ -286,20 +286,6 @@ namespace Thumper_Custom_Level_Editor
 		//cell input sanitization
 		private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
 		{
-			/// The columns are type decimal now, so this is no longer needed
-			/*
-			//during editing of a cell in trackEditor, check and sanitize input so it's numeric only
-			e.Control.KeyPress -= new KeyPressEventHandler(NumericInputSanitize);
-			//e.Control.KeyDown -= new KeyEventHandler(AllowArrowMovement);
-			e.Control.PreviewKeyDown -= new PreviewKeyDownEventHandler(AllowArrowMovement);
-			if (trackEditor.CurrentCell.ColumnIndex != -1) //Desired Column
-			{
-                if (e.Control is TextBox tb) {
-                    tb.KeyPress += new KeyPressEventHandler(NumericInputSanitize);
-					//tb.KeyDown += new KeyEventHandler(AllowArrowMovement);
-					tb.PreviewKeyDown += new PreviewKeyDownEventHandler(AllowArrowMovement);
-				}
-            }*/
 			//e.CellStyle.Font = new Font("Consolas", 7);
 		}
 		//Cell value changed

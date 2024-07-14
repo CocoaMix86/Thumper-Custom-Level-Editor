@@ -17,6 +17,8 @@ namespace Thumper_Custom_Level_Editor
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            if (this.Parent.GetType() == typeof(SplitterPanel))
+                return;
             var rc = new Rectangle(this.ClientSize.Width - grab, this.ClientSize.Height - grab, grab, grab);
             ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
         }
