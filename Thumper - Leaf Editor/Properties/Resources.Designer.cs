@@ -1108,7 +1108,8 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to arms_deca.path
+        ///   Looks up a localized string similar to 
+        ///arms_deca.path
         ///arms_diamond.path
         ///arms_hex.path
         ///arms_oct.path
@@ -1131,7 +1132,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///cave_hexagon_bright.path
         ///cave_hexagon_chrome.path
         ///cave_octo_bright.path
-        ///cave_octo_chr [rest of string was truncated]&quot;;.
+        ///cave_octo_c [rest of string was truncated]&quot;;.
         /// </summary>
         public static string paths {
             get {

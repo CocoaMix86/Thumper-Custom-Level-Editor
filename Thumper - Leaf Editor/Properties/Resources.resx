@@ -352,6 +352,7 @@ NEW
 🌟 Ctrl+X to cut cells in leaf editor. Paste (an existing function) with Ctrl+V.
 🌟 Custom keybinds (Edit &gt; Preferences menu)
 🌟 View your level's total runtime in the Master panel
+🌟 Multiple new objects to use in leafs!
 
 BUG FIXES
 ✅ object list is collapsed to the left when loading a new leaf
@@ -394,8 +395,13 @@ BUG FIXES
 ✅ Loop samples dropdown doesn't update to include newly added samp files
 ✅ loading problems if you use "." in file names
 ✅ Renaming a level just creates an empty new level
+✅ Renaming a level to an existing folder
+✅ Illegal characters in level name
 ✅ Horizontal scrolling on leaf editor is really bad
 ✅ "open level folder" button in the Woking Folder panel does not prompt to save
+✅ master unloads and can't be reopened if you make a new master but then cancel it
+✅ cell values don't change if the value you enter is the same as the last cell selected
+✅ Resizing cursor shows up in weird/wrong spots
 ✅ error when renaming a file to another name that already exist
 ✅ error when creating and saving a leaf with no open project
 ✅ error when pressing "add random tunnel" when no leaf exists in the lvl
@@ -430,6 +436,7 @@ SUGGESTED ADDITIONS/CHANGES
 ⏺️ various UI changes to make things more consistent
 ⏺️ F3 and F4: next/previous leaf (you can change these keybinds)
 ⏺️ F1 and F2: next/previous lvl (you can change these keybinds)
+⏺️ F6, 7, 8, 9, 10 all tied to leaf editor functions (you can change these keybinds)
 ⏺️ All panels now have multi-select editing enabled. Copy/paste/move up/move down
 ⏺️ Right-click delete should not delete highlighted cells if deleting a non-highlighted cell
 ⏺️ "Open level folder" now opens 1 folder level up from where the workingfolder is
