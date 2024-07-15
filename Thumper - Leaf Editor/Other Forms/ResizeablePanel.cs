@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor
     {
         public ResizeablePanel()
         {
-            this.ResizeRedraw = true;
+            //this.ResizeRedraw = true;
         }
         protected override void OnPaint(PaintEventArgs e)
         {

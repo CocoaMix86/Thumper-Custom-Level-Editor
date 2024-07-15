@@ -708,8 +708,6 @@ namespace Thumper_Custom_Level_Editor
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (trackEditor.IsCurrentCellInEditMode)
-                return;
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
                 string cellText = e.Value.ToString();
                 for (int fontSize = 1; fontSize < 25; fontSize++) {
