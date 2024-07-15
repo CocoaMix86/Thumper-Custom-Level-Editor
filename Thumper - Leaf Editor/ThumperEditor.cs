@@ -660,7 +660,10 @@ namespace Thumper_Custom_Level_Editor
 
         private void datagrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            //((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
+            DataGridView dgv = (DataGridView)sender;
+            dgv.CurrentCell.Value = dgv.CurrentCell.EditedFormattedValue;
+            dgv.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            CellValueChanged(dgv.CurrentCell.RowIndex, dgv.CurrentCell.ColumnIndex);
         }
         private void mastereditor_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {

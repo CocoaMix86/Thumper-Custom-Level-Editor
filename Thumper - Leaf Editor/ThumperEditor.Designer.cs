@@ -5335,6 +5335,7 @@
             this.trackEditor.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDown);
             this.trackEditor.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellMouseEnter);
             this.trackEditor.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.trackEditor_CellPainting);
+            this.trackEditor.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValidated);
             this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
             this.trackEditor.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             this.trackEditor.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.trackEditor_DataError);

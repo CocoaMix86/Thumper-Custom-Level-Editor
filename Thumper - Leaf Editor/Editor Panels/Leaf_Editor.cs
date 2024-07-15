@@ -288,6 +288,10 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//e.CellStyle.Font = new Font("Consolas", 7);
 		}
+		private void trackEditor_CellValidated(object sender, DataGridViewCellEventArgs e)
+		{ 
+			//CellValueChanged(e.RowIndex, e.ColumnIndex);
+		}
 		//Cell value changed
 		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
