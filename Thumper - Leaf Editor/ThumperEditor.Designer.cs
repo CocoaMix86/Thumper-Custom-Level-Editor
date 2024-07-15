@@ -275,7 +275,6 @@
             this.label47 = new System.Windows.Forms.Label();
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.panelLevel = new Thumper_Custom_Level_Editor.ResizeablePanel();
-            this.pictureBeeble = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.lvlToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlLeafAdd = new System.Windows.Forms.ToolStripButton();
             this.btnLvlLeafDelete = new System.Windows.Forms.ToolStripButton();
@@ -478,6 +477,7 @@
             this.lblSampleClose = new System.Windows.Forms.ToolStripButton();
             this.lblPopoutSamp = new System.Windows.Forms.ToolStripButton();
             this.btnRevertSample = new System.Windows.Forms.ToolStripButton();
+            this.pictureBeeble = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.panelChangelog = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.lblChangelog = new System.Windows.Forms.Label();
@@ -3320,17 +3320,6 @@
             this.panelLevel.Click += new System.EventHandler(this.editorpanelClick);
             this.panelLevel.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLevel.Leave += new System.EventHandler(this.editorpanelUnfocus);
-            // 
-            // pictureBeeble
-            // 
-            this.pictureBeeble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.pictureBeeble.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
-            this.pictureBeeble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBeeble.Location = new System.Drawing.Point(107, 135);
-            this.pictureBeeble.Name = "pictureBeeble";
-            this.pictureBeeble.Size = new System.Drawing.Size(110, 95);
-            this.pictureBeeble.TabIndex = 146;
             // 
             // lvlToolStrip
             // 
@@ -6554,6 +6543,17 @@
             this.btnRevertSample.Size = new System.Drawing.Size(23, 22);
             this.btnRevertSample.ToolTipText = "Revert changes to last save";
             this.btnRevertSample.Click += new System.EventHandler(this.btnRevertSample_Click);
+            // 
+            // pictureBeeble
+            // 
+            this.pictureBeeble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.pictureBeeble.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
+            this.pictureBeeble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBeeble.Location = new System.Drawing.Point(107, 135);
+            this.pictureBeeble.Name = "pictureBeeble";
+            this.pictureBeeble.Size = new System.Drawing.Size(110, 95);
+            this.pictureBeeble.TabIndex = 146;
             // 
             // panelChangelog
             // 
