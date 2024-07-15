@@ -213,8 +213,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panelBeeble = new System.Windows.Forms.Panel();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
             this.panelRecentFiles = new System.Windows.Forms.Panel();
             this.dgvRecentFiles = new System.Windows.Forms.DataGridView();
@@ -277,6 +275,7 @@
             this.label47 = new System.Windows.Forms.Label();
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.panelLevel = new Thumper_Custom_Level_Editor.ResizeablePanel();
+            this.pictureBeeble = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.lvlToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnLvlLeafAdd = new System.Windows.Forms.ToolStripButton();
             this.btnLvlLeafDelete = new System.Windows.Forms.ToolStripButton();
@@ -492,8 +491,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panelBeeble.SuspendLayout();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -1818,7 +1815,7 @@
             this.btnMasterOpenLeader.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenLeader.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
             this.btnMasterOpenLeader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenLeader.Location = new System.Drawing.Point(120, 350);
+            this.btnMasterOpenLeader.Location = new System.Drawing.Point(120, 349);
             this.btnMasterOpenLeader.Name = "btnMasterOpenLeader";
             this.btnMasterOpenLeader.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenLeader.TabIndex = 117;
@@ -1834,7 +1831,7 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(3, 338);
+            this.label34.Location = new System.Drawing.Point(3, 337);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(114, 13);
             this.label34.TabIndex = 102;
@@ -1982,7 +1979,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(29, 331);
+            this.label25.Location = new System.Drawing.Point(29, 330);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(66, 15);
             this.label25.TabIndex = 89;
@@ -1995,7 +1992,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(2, 288);
+            this.label23.Location = new System.Drawing.Point(2, 287);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(93, 15);
             this.label23.TabIndex = 68;
@@ -2064,7 +2061,7 @@
             this.lblGatebuckethelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblGatebuckethelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGatebuckethelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblGatebuckethelp.Location = new System.Drawing.Point(194, 360);
+            this.lblGatebuckethelp.Location = new System.Drawing.Point(194, 359);
             this.lblGatebuckethelp.Name = "lblGatebuckethelp";
             this.lblGatebuckethelp.Size = new System.Drawing.Size(15, 16);
             this.lblGatebuckethelp.TabIndex = 145;
@@ -2081,7 +2078,7 @@
             this.btnGateOpenRestart.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenRestart.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenRestart.Image")));
             this.btnGateOpenRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 314);
+            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 313);
             this.btnGateOpenRestart.Name = "btnGateOpenRestart";
             this.btnGateOpenRestart.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenRestart.TabIndex = 133;
@@ -2100,7 +2097,7 @@
             this.btnGateOpenPost.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenPost.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPost.Image")));
             this.btnGateOpenPost.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 292);
+            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 291);
             this.btnGateOpenPost.Name = "btnGateOpenPost";
             this.btnGateOpenPost.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPost.TabIndex = 132;
@@ -2119,7 +2116,7 @@
             this.btnGateOpenPre.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenPre.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPre.Image")));
             this.btnGateOpenPre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 270);
+            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 269);
             this.btnGateOpenPre.Name = "btnGateOpenPre";
             this.btnGateOpenPre.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPre.TabIndex = 119;
@@ -2134,7 +2131,7 @@
             this.label43.AutoSize = true;
             this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label43.ForeColor = System.Drawing.Color.White;
-            this.label43.Location = new System.Drawing.Point(20, 317);
+            this.label43.Location = new System.Drawing.Point(20, 316);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(64, 15);
             this.label43.TabIndex = 124;
@@ -2148,7 +2145,7 @@
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label42.ForeColor = System.Drawing.Color.White;
-            this.label42.Location = new System.Drawing.Point(35, 295);
+            this.label42.Location = new System.Drawing.Point(35, 294);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(49, 15);
             this.label42.TabIndex = 123;
@@ -2162,7 +2159,7 @@
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.White;
-            this.label41.Location = new System.Drawing.Point(40, 272);
+            this.label41.Location = new System.Drawing.Point(40, 271);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(44, 15);
             this.label41.TabIndex = 122;
@@ -2340,34 +2337,6 @@
             this.label14.TabIndex = 151;
             this.label14.Text = "?";
             this.toolTip1.SetToolTip(this.label14, "V. (volume)\r\nP. (pitch)\r\nPan\r\nOf. (offset)\r\nCh. (channel)");
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.MinimumSize = new System.Drawing.Size(30, 30);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(76, 66);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 135;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
-            this.pictureBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_Click);
-            // 
-            // panelBeeble
-            // 
-            this.panelBeeble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.panelBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelBeeble.Controls.Add(this.pictureBox1);
-            this.panelBeeble.Location = new System.Drawing.Point(1386, 102);
-            this.panelBeeble.MinimumSize = new System.Drawing.Size(40, 40);
-            this.panelBeeble.Name = "panelBeeble";
-            this.panelBeeble.Size = new System.Drawing.Size(80, 70);
-            this.panelBeeble.TabIndex = 135;
-            this.panelBeeble.Tag = "editorpanel";
             // 
             // timerBeeble
             // 
@@ -2606,7 +2575,7 @@
             // 
             this.splitHorizontal.Panel2.Controls.Add(this.splitBottom1);
             this.splitHorizontal.Size = new System.Drawing.Size(1745, 867);
-            this.splitHorizontal.SplitterDistance = 382;
+            this.splitHorizontal.SplitterDistance = 381;
             this.splitHorizontal.TabIndex = 136;
             this.splitHorizontal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitHorizontal.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
@@ -2629,7 +2598,7 @@
             // splitTop1.Panel2
             // 
             this.splitTop1.Panel2.Controls.Add(this.splitTop2);
-            this.splitTop1.Size = new System.Drawing.Size(1745, 382);
+            this.splitTop1.Size = new System.Drawing.Size(1745, 381);
             this.splitTop1.SplitterDistance = 399;
             this.splitTop1.TabIndex = 0;
             this.splitTop1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -2654,7 +2623,7 @@
             this.panelMaster.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelMaster.Name = "panelMaster";
             this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.panelMaster.Size = new System.Drawing.Size(399, 382);
+            this.panelMaster.Size = new System.Drawing.Size(399, 381);
             this.panelMaster.TabIndex = 47;
             this.panelMaster.Tag = "editorpanel";
             this.panelMaster.Visible = false;
@@ -2719,7 +2688,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.masterLvlList.Size = new System.Drawing.Size(217, 310);
+            this.masterLvlList.Size = new System.Drawing.Size(217, 309);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellClick);
@@ -2875,7 +2844,7 @@
             this.btnMasterLvlCopy,
             this.btnMasterLvlPaste});
             this.masterToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.masterToolStrip.Location = new System.Drawing.Point(3, 351);
+            this.masterToolStrip.Location = new System.Drawing.Point(3, 350);
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.masterToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -2965,7 +2934,7 @@
             this.dropMasterLvlLeader.FormattingEnabled = true;
             this.dropMasterLvlLeader.Items.AddRange(new object[] {
             "skybox_cube"});
-            this.dropMasterLvlLeader.Location = new System.Drawing.Point(3, 351);
+            this.dropMasterLvlLeader.Location = new System.Drawing.Point(3, 350);
             this.dropMasterLvlLeader.Name = "dropMasterLvlLeader";
             this.dropMasterLvlLeader.Size = new System.Drawing.Size(116, 21);
             this.dropMasterLvlLeader.TabIndex = 103;
@@ -3019,7 +2988,7 @@
             this.panel5.Location = new System.Drawing.Point(222, 22);
             this.panel5.Name = "panel5";
             this.panel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel5.Size = new System.Drawing.Size(174, 346);
+            this.panel5.Size = new System.Drawing.Size(174, 345);
             this.panel5.TabIndex = 147;
             // 
             // lblMasterRuntime
@@ -3315,7 +3284,7 @@
             this.splitTop2.Panel2.Controls.Add(this.panelGate);
             this.splitTop2.Panel2.Controls.Add(this.label51);
             this.splitTop2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitTop2.Size = new System.Drawing.Size(1342, 382);
+            this.splitTop2.Size = new System.Drawing.Size(1342, 381);
             this.splitTop2.SplitterDistance = 1007;
             this.splitTop2.TabIndex = 47;
             this.splitTop2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -3326,6 +3295,7 @@
             // 
             this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLevel.Controls.Add(this.pictureBeeble);
             this.panelLevel.Controls.Add(this.lvlToolStrip);
             this.panelLevel.Controls.Add(this.label39);
             this.panelLevel.Controls.Add(this.label29);
@@ -3344,13 +3314,23 @@
             this.panelLevel.Location = new System.Drawing.Point(0, 0);
             this.panelLevel.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLevel.Name = "panelLevel";
-            this.panelLevel.Size = new System.Drawing.Size(1007, 382);
+            this.panelLevel.Size = new System.Drawing.Size(1007, 381);
             this.panelLevel.TabIndex = 46;
             this.panelLevel.Tag = "editorpanel";
             this.panelLevel.Visible = false;
             this.panelLevel.Click += new System.EventHandler(this.editorpanelClick);
             this.panelLevel.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelLevel.Leave += new System.EventHandler(this.editorpanelUnfocus);
+            // 
+            // pictureBeeble
+            // 
+            this.pictureBeeble.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
+            this.pictureBeeble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBeeble.Location = new System.Drawing.Point(218, 4);
+            this.pictureBeeble.Name = "pictureBeeble";
+            this.pictureBeeble.Size = new System.Drawing.Size(110, 95);
+            this.pictureBeeble.TabIndex = 146;
             // 
             // lvlToolStrip
             // 
@@ -3371,7 +3351,7 @@
             this.btnLvlRefreshBeats,
             this.btnLvlLeafRandom});
             this.lvlToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlToolStrip.Location = new System.Drawing.Point(3, 239);
+            this.lvlToolStrip.Location = new System.Drawing.Point(3, 238);
             this.lvlToolStrip.Name = "lvlToolStrip";
             this.lvlToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.lvlToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -3479,7 +3459,7 @@
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label39.ForeColor = System.Drawing.Color.Silver;
-            this.label39.Location = new System.Drawing.Point(69, 268);
+            this.label39.Location = new System.Drawing.Point(69, 267);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(91, 15);
             this.label39.TabIndex = 117;
@@ -3515,7 +3495,7 @@
             "TUTORIAL_TURN_LEFT",
             "TUTORIAL_GRIND",
             "TUTORIAL_POWER_GRIND"});
-            this.dropLvlTutorial.Location = new System.Drawing.Point(97, 352);
+            this.dropLvlTutorial.Location = new System.Drawing.Point(97, 351);
             this.dropLvlTutorial.Name = "dropLvlTutorial";
             this.dropLvlTutorial.Size = new System.Drawing.Size(142, 21);
             this.dropLvlTutorial.TabIndex = 90;
@@ -3528,7 +3508,7 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.White;
-            this.label26.Location = new System.Drawing.Point(18, 353);
+            this.label26.Location = new System.Drawing.Point(18, 352);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(77, 15);
             this.label26.TabIndex = 91;
@@ -3546,7 +3526,7 @@
             this.dropLvlInput.Items.AddRange(new object[] {
             "True",
             "False"});
-            this.dropLvlInput.Location = new System.Drawing.Point(97, 329);
+            this.dropLvlInput.Location = new System.Drawing.Point(97, 328);
             this.dropLvlInput.Name = "dropLvlInput";
             this.dropLvlInput.Size = new System.Drawing.Size(72, 21);
             this.dropLvlInput.TabIndex = 68;
@@ -3559,7 +3539,7 @@
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Location = new System.Drawing.Point(46, 309);
+            this.label24.Location = new System.Drawing.Point(46, 308);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(49, 15);
             this.label24.TabIndex = 87;
@@ -3576,7 +3556,7 @@
             0,
             0,
             131072});
-            this.NUD_lvlVolume.Location = new System.Drawing.Point(97, 307);
+            this.NUD_lvlVolume.Location = new System.Drawing.Point(97, 306);
             this.NUD_lvlVolume.Maximum = new decimal(new int[] {
             10,
             0,
@@ -3598,7 +3578,7 @@
             this.NUD_lvlApproach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NUD_lvlApproach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.NUD_lvlApproach.ForeColor = System.Drawing.Color.White;
-            this.NUD_lvlApproach.Location = new System.Drawing.Point(97, 286);
+            this.NUD_lvlApproach.Location = new System.Drawing.Point(97, 285);
             this.NUD_lvlApproach.Maximum = new decimal(new int[] {
             255,
             0,
@@ -3668,7 +3648,7 @@
             this.lvlLeafList.RowTemplate.Height = 20;
             this.lvlLeafList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafList.Size = new System.Drawing.Size(236, 199);
+            this.lvlLeafList.Size = new System.Drawing.Size(236, 198);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
@@ -3818,8 +3798,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.lblLvlTunnels);
             this.splitContainer1.Panel2.Controls.Add(this.label22);
             this.splitContainer1.Panel2.Controls.Add(this.lvlLoopTracks);
-            this.splitContainer1.Size = new System.Drawing.Size(752, 350);
-            this.splitContainer1.SplitterDistance = 147;
+            this.splitContainer1.Size = new System.Drawing.Size(752, 349);
+            this.splitContainer1.SplitterDistance = 145;
             this.splitContainer1.TabIndex = 145;
             // 
             // lvlSeqObjs
@@ -3873,7 +3853,7 @@
             this.lvlSeqObjs.RowTemplate.Height = 20;
             this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlSeqObjs.Size = new System.Drawing.Size(721, 128);
+            this.lvlSeqObjs.Size = new System.Drawing.Size(721, 126);
             this.lvlSeqObjs.TabIndex = 68;
             this.lvlSeqObjs.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lvlSeqObjs_CellMouseDown);
             this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
@@ -4107,7 +4087,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 184);
+            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 185);
             this.lvlLeafPaths.TabIndex = 79;
             this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
             this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.mastereditor_CurrentCellDirtyStateChanged);
@@ -4273,7 +4253,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new System.Drawing.Size(445, 184);
+            this.lvlLoopTracks.Size = new System.Drawing.Size(445, 185);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
             this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.mastereditor_CurrentCellDirtyStateChanged);
@@ -4323,7 +4303,7 @@
             this.panelGate.Location = new System.Drawing.Point(0, 0);
             this.panelGate.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelGate.Name = "panelGate";
-            this.panelGate.Size = new System.Drawing.Size(331, 382);
+            this.panelGate.Size = new System.Drawing.Size(331, 381);
             this.panelGate.TabIndex = 116;
             this.panelGate.Tag = "editorpanel";
             this.panelGate.Visible = false;
@@ -4336,7 +4316,7 @@
             this.checkGateRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkGateRandom.AutoSize = true;
             this.checkGateRandom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkGateRandom.Location = new System.Drawing.Point(181, 363);
+            this.checkGateRandom.Location = new System.Drawing.Point(181, 362);
             this.checkGateRandom.Name = "checkGateRandom";
             this.checkGateRandom.Size = new System.Drawing.Size(15, 14);
             this.checkGateRandom.TabIndex = 144;
@@ -4349,7 +4329,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(82, 361);
+            this.label2.Location = new System.Drawing.Point(82, 360);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 15);
             this.label2.TabIndex = 143;
@@ -4463,7 +4443,7 @@
             this.btnGateLvlUp,
             this.btnGateLvlDown});
             this.gateToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.gateToolStrip.Location = new System.Drawing.Point(3, 206);
+            this.gateToolStrip.Location = new System.Drawing.Point(3, 205);
             this.gateToolStrip.Name = "gateToolStrip";
             this.gateToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.gateToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -4528,7 +4508,7 @@
             this.lblGateSectionHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblGateSectionHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGateSectionHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblGateSectionHelp.Location = new System.Drawing.Point(289, 338);
+            this.lblGateSectionHelp.Location = new System.Drawing.Point(289, 337);
             this.lblGateSectionHelp.Name = "lblGateSectionHelp";
             this.lblGateSectionHelp.Size = new System.Drawing.Size(15, 16);
             this.lblGateSectionHelp.TabIndex = 131;
@@ -4551,7 +4531,7 @@
             "SECTION_BOSS_CRAKHED",
             "SECTION_BOSS_CRAKHED_FINAL",
             "SECTION_BOSS_PYRAMID"});
-            this.dropGateSection.Location = new System.Drawing.Point(85, 337);
+            this.dropGateSection.Location = new System.Drawing.Point(85, 336);
             this.dropGateSection.Name = "dropGateSection";
             this.dropGateSection.Size = new System.Drawing.Size(204, 21);
             this.dropGateSection.TabIndex = 129;
@@ -4569,7 +4549,7 @@
             this.dropGateRestart.FormattingEnabled = true;
             this.dropGateRestart.Items.AddRange(new object[] {
             "<none>"});
-            this.dropGateRestart.Location = new System.Drawing.Point(85, 315);
+            this.dropGateRestart.Location = new System.Drawing.Point(85, 314);
             this.dropGateRestart.Name = "dropGateRestart";
             this.dropGateRestart.Size = new System.Drawing.Size(136, 21);
             this.dropGateRestart.TabIndex = 128;
@@ -4587,7 +4567,7 @@
             this.dropGatePost.FormattingEnabled = true;
             this.dropGatePost.Items.AddRange(new object[] {
             "<none>"});
-            this.dropGatePost.Location = new System.Drawing.Point(85, 293);
+            this.dropGatePost.Location = new System.Drawing.Point(85, 292);
             this.dropGatePost.Name = "dropGatePost";
             this.dropGatePost.Size = new System.Drawing.Size(136, 21);
             this.dropGatePost.TabIndex = 127;
@@ -4605,7 +4585,7 @@
             this.dropGatePre.FormattingEnabled = true;
             this.dropGatePre.Items.AddRange(new object[] {
             "<none>"});
-            this.dropGatePre.Location = new System.Drawing.Point(85, 271);
+            this.dropGatePre.Location = new System.Drawing.Point(85, 270);
             this.dropGatePre.Name = "dropGatePre";
             this.dropGatePre.Size = new System.Drawing.Size(136, 21);
             this.dropGatePre.TabIndex = 126;
@@ -4618,7 +4598,7 @@
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label44.ForeColor = System.Drawing.Color.White;
-            this.label44.Location = new System.Drawing.Point(7, 339);
+            this.label44.Location = new System.Drawing.Point(7, 338);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(77, 15);
             this.label44.TabIndex = 125;
@@ -4630,7 +4610,7 @@
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.Silver;
-            this.label40.Location = new System.Drawing.Point(82, 230);
+            this.label40.Location = new System.Drawing.Point(82, 229);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(102, 15);
             this.label40.TabIndex = 121;
@@ -4642,7 +4622,7 @@
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(50, 250);
+            this.label38.Location = new System.Drawing.Point(50, 249);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(34, 15);
             this.label38.TabIndex = 117;
@@ -4657,7 +4637,7 @@
             this.dropGateBoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateBoss.ForeColor = System.Drawing.Color.White;
             this.dropGateBoss.FormattingEnabled = true;
-            this.dropGateBoss.Location = new System.Drawing.Point(85, 249);
+            this.dropGateBoss.Location = new System.Drawing.Point(85, 248);
             this.dropGateBoss.Name = "dropGateBoss";
             this.dropGateBoss.Size = new System.Drawing.Size(136, 21);
             this.dropGateBoss.TabIndex = 117;
@@ -4718,7 +4698,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gateLvlList.Size = new System.Drawing.Size(322, 165);
+            this.gateLvlList.Size = new System.Drawing.Size(322, 164);
             this.gateLvlList.TabIndex = 80;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
@@ -4774,7 +4754,7 @@
             // splitBottom1.Panel2
             // 
             this.splitBottom1.Panel2.Controls.Add(this.splitBottom2);
-            this.splitBottom1.Size = new System.Drawing.Size(1745, 481);
+            this.splitBottom1.Size = new System.Drawing.Size(1745, 482);
             this.splitBottom1.SplitterDistance = 254;
             this.splitBottom1.TabIndex = 0;
             this.splitBottom1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -4794,7 +4774,7 @@
             this.panelWorkingFolder.Location = new System.Drawing.Point(0, 0);
             this.panelWorkingFolder.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelWorkingFolder.Name = "panelWorkingFolder";
-            this.panelWorkingFolder.Size = new System.Drawing.Size(254, 481);
+            this.panelWorkingFolder.Size = new System.Drawing.Size(254, 482);
             this.panelWorkingFolder.TabIndex = 117;
             this.panelWorkingFolder.Tag = "editorpanel";
             this.panelWorkingFolder.Visible = false;
@@ -4860,7 +4840,7 @@
             this.workingfolderFiles.RowTemplate.Height = 20;
             this.workingfolderFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.workingfolderFiles.Size = new System.Drawing.Size(220, 398);
+            this.workingfolderFiles.Size = new System.Drawing.Size(220, 399);
             this.workingfolderFiles.TabIndex = 80;
             this.workingfolderFiles.Tag = "editorpaneldgv";
             this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
@@ -4931,7 +4911,7 @@
             this.workingToolStrip.Name = "workingToolStrip";
             this.workingToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.workingToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.workingToolStrip.Size = new System.Drawing.Size(25, 426);
+            this.workingToolStrip.Size = new System.Drawing.Size(25, 427);
             this.workingToolStrip.Stretch = true;
             this.workingToolStrip.TabIndex = 149;
             // 
@@ -5186,7 +5166,7 @@
             this.splitBottom2.Panel2.Controls.Add(this.panelSample);
             this.splitBottom2.Panel2.Controls.Add(this.label55);
             this.splitBottom2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitBottom2.Size = new System.Drawing.Size(1487, 481);
+            this.splitBottom2.Size = new System.Drawing.Size(1487, 482);
             this.splitBottom2.SplitterDistance = 1157;
             this.splitBottom2.TabIndex = 46;
             this.splitBottom2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -5210,7 +5190,7 @@
             this.panelLeaf.Location = new System.Drawing.Point(0, 0);
             this.panelLeaf.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLeaf.Name = "panelLeaf";
-            this.panelLeaf.Size = new System.Drawing.Size(1157, 481);
+            this.panelLeaf.Size = new System.Drawing.Size(1157, 482);
             this.panelLeaf.TabIndex = 45;
             this.panelLeaf.Tag = "editorpanel";
             this.panelLeaf.Visible = false;
@@ -5264,7 +5244,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.vScrollBarTrackEditor.Location = new System.Drawing.Point(231, 52);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new System.Drawing.Size(15, 354);
+            this.vScrollBarTrackEditor.Size = new System.Drawing.Size(15, 355);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBarTrackEditor_Scroll);
@@ -5327,7 +5307,7 @@
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new System.Drawing.Size(921, 355);
+            this.trackEditor.Size = new System.Drawing.Size(921, 356);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += new System.EventHandler(this.trackEditor_RowHeadersWidthChanged);
@@ -5673,7 +5653,7 @@
             this.panelRawData.Controls.Add(this.lblRawData);
             this.panelRawData.Controls.Add(this.btnRawImport);
             this.panelRawData.Controls.Add(this.richRawTrackData);
-            this.panelRawData.Location = new System.Drawing.Point(212, 425);
+            this.panelRawData.Location = new System.Drawing.Point(212, 426);
             this.panelRawData.Name = "panelRawData";
             this.panelRawData.Size = new System.Drawing.Size(939, 47);
             this.panelRawData.TabIndex = 139;
@@ -5844,7 +5824,7 @@
             this.panel6.Controls.Add(this.numericUpDown_LeafLength);
             this.panel6.Location = new System.Drawing.Point(1, 23);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 448);
+            this.panel6.Size = new System.Drawing.Size(200, 449);
             this.panel6.TabIndex = 148;
             // 
             // label1
@@ -6232,7 +6212,7 @@
             this.panelSample.Location = new System.Drawing.Point(0, 0);
             this.panelSample.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelSample.Name = "panelSample";
-            this.panelSample.Size = new System.Drawing.Size(326, 481);
+            this.panelSample.Size = new System.Drawing.Size(326, 482);
             this.panelSample.TabIndex = 134;
             this.panelSample.Tag = "editorpanel";
             this.panelSample.Visible = false;
@@ -6299,7 +6279,7 @@
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.sampleList.Size = new System.Drawing.Size(317, 378);
+            this.sampleList.Size = new System.Drawing.Size(317, 379);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             // 
@@ -6399,7 +6379,7 @@
             this.btnSampEditorPlaySamp,
             this.lblSampleFSBhelp});
             this.sampleToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.sampleToolStrip.Location = new System.Drawing.Point(3, 421);
+            this.sampleToolStrip.Location = new System.Drawing.Point(3, 422);
             this.sampleToolStrip.Name = "sampleToolStrip";
             this.sampleToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.sampleToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -6465,7 +6445,7 @@
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.ForeColor = System.Drawing.Color.White;
-            this.label50.Location = new System.Drawing.Point(5, 457);
+            this.label50.Location = new System.Drawing.Point(5, 458);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(32, 15);
             this.label50.TabIndex = 147;
@@ -6490,7 +6470,7 @@
             this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtSampPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSampPath.ForeColor = System.Drawing.Color.White;
-            this.txtSampPath.Location = new System.Drawing.Point(38, 454);
+            this.txtSampPath.Location = new System.Drawing.Point(38, 455);
             this.txtSampPath.Name = "txtSampPath";
             this.txtSampPath.Size = new System.Drawing.Size(261, 22);
             this.txtSampPath.TabIndex = 148;
@@ -6658,10 +6638,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1745, 892);
-            this.Controls.Add(this.panelBeeble);
             this.Controls.Add(this.panelRecentFiles);
-            this.Controls.Add(this.splitHorizontal);
             this.Controls.Add(this.panelChangelog);
+            this.Controls.Add(this.splitHorizontal);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
@@ -6683,8 +6662,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackLvlVolumeZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panelBeeble.ResumeLayout(false);
             this.panelRecentFiles.ResumeLayout(false);
             this.panelRecentFiles.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).EndInit();
@@ -6977,8 +6954,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panelBeeble;
         private System.Windows.Forms.Timer timerBeeble;
         private System.Windows.Forms.ToolStripMenuItem changeGameDirectoryToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip workingfolderRightClick;
@@ -7227,6 +7202,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Pan;
         private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
         private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
+        private ResizeablePanel pictureBeeble;
     }
 }
 

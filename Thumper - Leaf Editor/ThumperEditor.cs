@@ -1,5 +1,4 @@
-﻿using ControlManager;
-using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,6 +15,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class FormLeafEditor : Form
     {
         #region Variables
+        Properties.Settings settings = Properties.Settings.Default;
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         public string workingfolder
         {
@@ -152,15 +152,15 @@ namespace Thumper_Custom_Level_Editor
             InitializeGateStuff();
             InitializeSampleStuff();
             //set title bars to be able to move the panels
-            ControlMoverOrResizer.InitMover(toolstripTitleLeaf);
-            ControlMoverOrResizer.InitMover(toolstripTitleLvl);
-            ControlMoverOrResizer.InitMover(toolstripTitleGate);
-            ControlMoverOrResizer.InitMover(toolstripTitleMaster);
-            ControlMoverOrResizer.InitMover(toolstripTitleSample);
-            ControlMoverOrResizer.InitMover(toolstripTitleWork);
-            ControlMoverOrResizer.InitMover(workingfolderFiles);
-            ControlMoverOrResizer.InitMover(toolstripRecentFiles);
-            ControlMoverOrResizer.InitMover(toolStripChangelog);
+            ControlMover.Init(toolstripTitleLeaf, panelLeaf, ControlMover.direction.Any);
+            ControlMover.Init(toolstripTitleLvl, panelLevel, ControlMover.direction.Any);
+            ControlMover.Init(toolstripTitleGate, panelGate, ControlMover.direction.Any);
+            ControlMover.Init(toolstripTitleMaster, panelMaster, ControlMover.direction.Any);
+            ControlMover.Init(toolstripTitleSample, panelSample, ControlMover.direction.Any);
+            ControlMover.Init(toolstripTitleWork, panelWorkingFolder, ControlMover.direction.Any);
+            ControlMover.Init(toolstripRecentFiles, panelRecentFiles, ControlMover.direction.Any);
+            ControlMover.Init(toolStripChangelog, panelChangelog, ControlMover.direction.Any);
+            ControlMover.Init(pictureBeeble, ControlMover.direction.Any);
             //write required audio files for playback
             InitializeSounds();
             //keybinds
@@ -184,8 +184,8 @@ namespace Thumper_Custom_Level_Editor
             panelSample.Size = Properties.Settings.Default.sampleeditorsize;
             panelSample.Location = Properties.Settings.Default.sampleeditorloc;
             panelSample.Visible = sampleEditorToolStripMenuItem.Checked = Properties.Settings.Default.sampleeditorvisible;
-            panelBeeble.Size = Properties.Settings.Default.beeblesize;
-            panelBeeble.Location = Properties.Settings.Default.beebleloc;
+            pictureBeeble.Size = Properties.Settings.Default.beeblesize;
+            pictureBeeble.Location = Properties.Settings.Default.beebleloc;
             //zoom settings
             trackZoom.Value = Properties.Settings.Default.leafzoom;
             trackZoomVert.Value = Properties.Settings.Default.leafzoomvert;
@@ -207,10 +207,32 @@ namespace Thumper_Custom_Level_Editor
                 else
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
+            //set panels to their last saved dock
+            SetDockLocations();
 
             //finish loading
             Properties.Settings.Default.firstrun = false;
             Properties.Settings.Default.Save();
+        }
+        ///FORM LOADING
+        private void FormLeafEditor_Load(object sender, EventArgs e)
+        {
+            splitHorizontal.SplitterDistance = (settings.splitterHorz1 == 0) ? splitHorizontal.Height / 2 : settings.splitterHorz1;
+            splitTop1.SplitterDistance = (settings.splitterVert1 == 0) ? splitTop1.Width / 3 : settings.splitterVert1;
+            splitTop2.SplitterDistance = (settings.splitterVert2 == 0) ? splitTop2.Width / 2 : settings.splitterVert2;
+            splitBottom1.SplitterDistance = (settings.splitterVert3 == 0) ? splitBottom1.Width / 3 : settings.splitterVert3;
+            splitBottom2.SplitterDistance = (settings.splitterVert4 == 0) ? splitBottom2.Width / 2 : settings.splitterVert4;
+            //finalize boot
+            PlaySound("UIboot");
+            ///version check
+            if (Properties.Settings.Default.version != "2.2beta13") {
+                ShowChangelog();
+                if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    regenerateTemplateFilesToolStripMenuItem_Click(null, null);
+                else
+                    MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
+                Properties.Settings.Default.version = "2.2beta13";
+            }
         }
         private void JumpListUpdate()
         {
@@ -266,8 +288,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.mastereditorvisible = panelMaster.Visible;
             Properties.Settings.Default.sampleeditorvisible = panelSample.Visible;
             Properties.Settings.Default.workingfoldervisible = panelWorkingFolder.Visible;
-            Properties.Settings.Default.beeblesize = panelBeeble.Size;
-            Properties.Settings.Default.beebleloc = panelBeeble.Location;
+            Properties.Settings.Default.beeblesize = pictureBeeble.Size;
+            Properties.Settings.Default.beebleloc = pictureBeeble.Location;
             //splitter distances
             Properties.Settings.Default.splitterHorz1 = splitHorizontal.SplitterDistance;
             Properties.Settings.Default.splitterVert1 = splitTop1.SplitterDistance;
@@ -283,23 +305,6 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
 
             Properties.Settings.Default.Save();
-        }
-        ///FORM LOADING
-        private void FormLeafEditor_Load(object sender, EventArgs e)
-        {
-            //finalize boot
-            PlaySound("UIboot");
-            //set panels to their last saved dock
-            SetDockLocations();
-            ///version check
-            if (Properties.Settings.Default.version != "2.2beta13") {
-                ShowChangelog();
-                if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    regenerateTemplateFilesToolStripMenuItem_Click(null, null);
-                else
-                    MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
-                Properties.Settings.Default.version = "2.2beta13";
-            }
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
@@ -518,9 +523,9 @@ namespace Thumper_Custom_Level_Editor
 
             panelLeaf.Visible = panelLevel.Visible = panelGate.Visible = panelMaster.Visible = panelWorkingFolder.Visible = panelSample.Visible = true;
 
-            panelBeeble.Location = new Point(25, 25);
-            panelBeeble.Size = new Size(40, 40);
-            panelBeeble.BringToFront();
+            pictureBeeble.Location = new Point(25, 25);
+            pictureBeeble.Size = new Size(40, 40);
+            pictureBeeble.BringToFront();
         }
 
         ///BEEBLE FUNCTIONS
@@ -560,12 +565,12 @@ namespace Thumper_Custom_Level_Editor
                     im = Properties.Resources.beeblespin;
                     break;
                 case 1000:
-                    pictureBox1.Image = Properties.Resources.beeblegold;
+                    pictureBeeble.BackgroundImage = Properties.Resources.beeblegold;
                     PlaySound("UIbeetleclickGOLD");
                     break;
             }
             if (im != null)
-                pictureBox1.Image = im;
+                pictureBeeble.BackgroundImage = im;
             //pictureBox1.Refresh();
             timerBeeble.Start();
         }
@@ -602,7 +607,7 @@ namespace Thumper_Custom_Level_Editor
         private void timerBeeble_Tick(object sender, EventArgs e)
         {
             timerBeeble.Stop();
-            pictureBox1.Image = Properties.Resources.beeble;
+            pictureBeeble.BackgroundImage = Properties.Resources.beeble;
         }
         ///
 
@@ -869,6 +874,5 @@ namespace Thumper_Custom_Level_Editor
             }
             senderComboBox.DropDownWidth = width + vertScrollBarWidth; ;
         }
-
     }
 }
