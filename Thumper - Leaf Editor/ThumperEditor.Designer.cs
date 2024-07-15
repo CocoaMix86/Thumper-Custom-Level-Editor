@@ -3295,7 +3295,6 @@
             // 
             this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLevel.Controls.Add(this.pictureBeeble);
             this.panelLevel.Controls.Add(this.lvlToolStrip);
             this.panelLevel.Controls.Add(this.label39);
             this.panelLevel.Controls.Add(this.label29);
@@ -3324,10 +3323,11 @@
             // 
             // pictureBeeble
             // 
+            this.pictureBeeble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.pictureBeeble.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
             this.pictureBeeble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBeeble.Location = new System.Drawing.Point(218, 4);
+            this.pictureBeeble.Location = new System.Drawing.Point(107, 135);
             this.pictureBeeble.Name = "pictureBeeble";
             this.pictureBeeble.Size = new System.Drawing.Size(110, 95);
             this.pictureBeeble.TabIndex = 146;
@@ -6638,6 +6638,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.Controls.Add(this.pictureBeeble);
             this.Controls.Add(this.panelRecentFiles);
             this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.splitHorizontal);
