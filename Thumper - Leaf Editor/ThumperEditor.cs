@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Shell;
-using System.Threading;
 
 namespace Thumper_Custom_Level_Editor
 {
