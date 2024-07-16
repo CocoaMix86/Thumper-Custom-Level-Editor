@@ -245,37 +245,48 @@ namespace Thumper_Custom_Level_Editor
 		//add and remove sample entries
 		private void btnSampleDelete_Click(object sender, EventArgs e)
 		{
+			List<SampleData> todelete = new();
+			foreach (DataGridViewRow dgvr in sampleList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList()) {
+				todelete.Add(_samplelist[dgvr.Index]);
+			}
 			int _in = sampleList.CurrentRow.Index;
 			bool customforcesave = false;
 			outputDevice?.Stop();
-			if (_samplelist[_in].path.Contains("custom")) {
-				customforcesave = true;
-				string _hashedname = null;
-				byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{_samplelist[_in].path}"));
-				Array.Reverse(hashbytes);
-				foreach (byte b in hashbytes)
-					_hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
-				//if the hashed name starts with a '0', remove it
-				if (_hashedname[0] == '0')
-					_hashedname = _hashedname[1..];
 
-				if (File.Exists($@"{workingfolder}\extras\{_hashedname}.pc")) {
-					if (MessageBox.Show("This deletion cannot be undone. Are you sure?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
-						return;
-					else
+			if (todelete.Any(x => x.path.Contains("custom"))) {
+				if (MessageBox.Show("At least 1 sample selected is a custom sample and it will be removed from the \"extras\" folder. This deletion cannot be undone.\nContinue?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+					return;
+            }
+
+			foreach (SampleData sd in todelete) {
+				if (sd.path.Contains("custom")) {
+					customforcesave = true;
+					string _hashedname = null;
+					byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{sd.path}"));
+					Array.Reverse(hashbytes);
+					foreach (byte b in hashbytes)
+						_hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+					//if the hashed name starts with a '0', remove it
+					if (_hashedname[0] == '0')
+						_hashedname = _hashedname[1..];
+
+					if (File.Exists($@"{workingfolder}\extras\{_hashedname}.pc")) {
 						File.Delete($@"{workingfolder}\extras\{_hashedname}.pc");
-                }
+					}
+				}
+				//delete file from temp folder too. If it isn't removed and then a new sample is added with the same name, the old sample will play
+				try {
+					if (File.Exists($@"{AppLocation}\temp\{sd.obj_name}.ogg"))
+						File.Delete($@"{AppLocation}\temp\{sd.obj_name}.ogg");
+					if (File.Exists($@"{AppLocation}\temp\{sd.obj_name}.wav"))
+						File.Delete($@"{AppLocation}\temp\{sd.obj_name}.wav");
+				}
+				catch (Exception ex) {
+					MessageBox.Show($"Unable to delete {AppLocation}\\temp\\\\{_samplelist[_in].obj_name}\n\n{ex}");
+				}
+				_samplelist.Remove(sd);
 			}
-			//delete file from temp folder too. If it isn't removed and then a new sample is added with the same name, the old sample will play
-			try {
-				if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg"))
-					File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.ogg");
-				if (File.Exists($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav"))
-					File.Delete($@"{AppLocation}\temp\{_samplelist[_in].obj_name}.wav");
-			} catch (Exception ex) {
-				MessageBox.Show($"Unable to delete {AppLocation}\\temp\\\\{_samplelist[_in].obj_name}\n\n{ex}");
-			}
-			_samplelist.RemoveAt(_in);
+
 			if (customforcesave)
 				//force save as this cannot be undone
 				SamplesaveToolStripMenuItem_Click(null, null);

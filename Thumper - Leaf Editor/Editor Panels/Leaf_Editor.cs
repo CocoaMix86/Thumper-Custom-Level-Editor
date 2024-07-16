@@ -1140,7 +1140,7 @@ namespace Thumper_Custom_Level_Editor
 			DialogResult result = colorDialog1.ShowDialog();
 			if (result == DialogResult.OK) {
 				PlaySound("UIcolorapply");
-				trackEditor.SelectedCells[0].Value = colorDialog1.Color.ToArgb();
+				trackEditor.SelectedCells[0].Value = (decimal)colorDialog1.Color.ToArgb();
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					if (_tracks[_cell.RowIndex].trait_type == "kTraitColor") {
 						_cell.Style.BackColor = colorDialog1.Color;
