@@ -456,9 +456,9 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.pictureDifficulty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureDifficulty.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.D0;
-            this.pictureDifficulty.Location = new System.Drawing.Point(144, 139);
+            this.pictureDifficulty.Location = new System.Drawing.Point(137, 126);
             this.pictureDifficulty.Name = "pictureDifficulty";
-            this.pictureDifficulty.Size = new System.Drawing.Size(40, 40);
+            this.pictureDifficulty.Size = new System.Drawing.Size(64, 64);
             this.pictureDifficulty.TabIndex = 143;
             this.pictureDifficulty.TabStop = false;
             // 
@@ -482,7 +482,6 @@ namespace Thumper_Custom_Level_Editor
             this.ClientSize = new System.Drawing.Size(425, 436);
             this.ControlBox = false;
             this.Controls.Add(this.lblNameError);
-            this.Controls.Add(this.pictureDifficulty);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkMisc);
             this.Controls.Add(this.chkRests);
@@ -513,6 +512,7 @@ namespace Thumper_Custom_Level_Editor
             this.Controls.Add(this.txtCustomPath);
             this.Controls.Add(this.txtCustomName);
             this.Controls.Add(this.txtCustomAuthor);
+            this.Controls.Add(this.pictureDifficulty);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DialogInput";
