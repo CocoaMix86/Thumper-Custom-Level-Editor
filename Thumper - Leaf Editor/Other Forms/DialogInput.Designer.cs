@@ -456,7 +456,7 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.pictureDifficulty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureDifficulty.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.D0;
-            this.pictureDifficulty.Location = new System.Drawing.Point(137, 126);
+            this.pictureDifficulty.Location = new System.Drawing.Point(141, 126);
             this.pictureDifficulty.Name = "pictureDifficulty";
             this.pictureDifficulty.Size = new System.Drawing.Size(64, 64);
             this.pictureDifficulty.TabIndex = 143;
