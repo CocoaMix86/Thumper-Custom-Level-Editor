@@ -1256,12 +1256,12 @@ namespace Thumper_Custom_Level_Editor
 				lblRawData.Visible = true;
 			}
 			else {
-				panelRawData.Height = 68;
+				foreach (Control c in panelRawData.Controls)
+					c.Visible = true;
+				panelRawData.Height = 48;
 				panelRawData.Location = new Point(panelRawData.Location.X, panelLeaf.Height - 68);
 				lblRawData.Text = "▼";
 				trackEditor.Height -= 48;
-				foreach (Control c in panelRawData.Controls)
-					c.Visible = true;
 			}
 		}
 
