@@ -1081,6 +1081,7 @@ namespace Thumper_Custom_Level_Editor
                     //call this method to update the colors once the value has been assigned
                     TrackUpdateHighlighting(trackEditor.Rows[x]);
                 }
+				SaveLeaf(false, "Imported colors", "");
             }
         }
 
@@ -1469,6 +1470,7 @@ namespace Thumper_Custom_Level_Editor
 		public void TrackUpdateHighlighting(DataGridViewRow r)
 		{
 			//iterate over all cells in the row
+			r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), Color.Black, 0.4);
 			foreach (DataGridViewCell dgvc in r.Cells) {
 				TrackUpdateHighlightingSingleCell(dgvc);
 			}
