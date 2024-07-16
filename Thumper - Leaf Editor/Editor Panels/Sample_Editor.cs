@@ -250,8 +250,6 @@ namespace Thumper_Custom_Level_Editor
 			outputDevice?.Stop();
 			if (_samplelist[_in].path.Contains("custom")) {
 				customforcesave = true;
-				if (MessageBox.Show("This deletion cannot be undone. Are you sure?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
-					return;
 				string _hashedname = null;
 				byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{_samplelist[_in].path}"));
 				Array.Reverse(hashbytes);
@@ -262,7 +260,10 @@ namespace Thumper_Custom_Level_Editor
 					_hashedname = _hashedname[1..];
 
 				if (File.Exists($@"{workingfolder}\extras\{_hashedname}.pc")) {
-					File.Delete($@"{workingfolder}\extras\{_hashedname}.pc");
+					if (MessageBox.Show("This deletion cannot be undone. Are you sure?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+						return;
+					else
+						File.Delete($@"{workingfolder}\extras\{_hashedname}.pc");
                 }
 			}
 			//delete file from temp folder too. If it isn't removed and then a new sample is added with the same name, the old sample will play
