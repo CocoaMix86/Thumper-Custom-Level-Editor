@@ -605,6 +605,8 @@ namespace Thumper_Custom_Level_Editor
                     PlaySound("UIbeetleclick8");
                     break;
             }
+
+            pictureBeeble.BackColor = Color.FromArgb(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
         }
         private void timerBeeble_Tick(object sender, EventArgs e)
         {
