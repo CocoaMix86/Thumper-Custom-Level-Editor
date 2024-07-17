@@ -1140,7 +1140,7 @@
             this.showHideToolStripMenuItem.Font = new System.Drawing.Font("Arial", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showHideToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.showHideToolStripMenuItem.Name = "showHideToolStripMenuItem";
-            this.showHideToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.showHideToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.showHideToolStripMenuItem.Text = "Show/Hide";
             // 
             // leafEditorToolStripMenuItem
@@ -1151,7 +1151,7 @@
             this.leafEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.leafEditorToolStripMenuItem.Name = "leafEditorToolStripMenuItem";
             this.leafEditorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D1)));
-            this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.leafEditorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.leafEditorToolStripMenuItem.Text = "Leaf Editor";
             this.leafEditorToolStripMenuItem.Click += new System.EventHandler(this.leafEditorToolStripMenuItem_Click);
             // 
@@ -1163,7 +1163,7 @@
             this.levelEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
             this.levelEditorToolStripMenuItem.Name = "levelEditorToolStripMenuItem";
             this.levelEditorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D2)));
-            this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.levelEditorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.levelEditorToolStripMenuItem.Text = "Lvl Editor";
             this.levelEditorToolStripMenuItem.Click += new System.EventHandler(this.levelEditorToolStripMenuItem_Click);
             // 
@@ -1175,7 +1175,7 @@
             this.gateEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
             this.gateEditorToolStripMenuItem.Name = "gateEditorToolStripMenuItem";
             this.gateEditorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D3)));
-            this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.gateEditorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.gateEditorToolStripMenuItem.Text = "Gate Editor";
             this.gateEditorToolStripMenuItem.Click += new System.EventHandler(this.gateEditorToolStripMenuItem_Click);
             // 
@@ -1187,7 +1187,7 @@
             this.masterEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.masterEditorToolStripMenuItem.Name = "masterEditorToolStripMenuItem";
             this.masterEditorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D4)));
-            this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.masterEditorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.masterEditorToolStripMenuItem.Text = "Master Editor";
             this.masterEditorToolStripMenuItem.Click += new System.EventHandler(this.masterEditorToolStripMenuItem_Click);
             // 
@@ -1199,7 +1199,7 @@
             this.workingFolderToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
             this.workingFolderToolStripMenuItem.Name = "workingFolderToolStripMenuItem";
             this.workingFolderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D5)));
-            this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.workingFolderToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.workingFolderToolStripMenuItem.Text = "Working Folder";
             this.workingFolderToolStripMenuItem.Click += new System.EventHandler(this.workingFolderToolStripMenuItem_Click);
             // 
@@ -1211,14 +1211,14 @@
             this.sampleEditorToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
             this.sampleEditorToolStripMenuItem.Name = "sampleEditorToolStripMenuItem";
             this.sampleEditorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D6)));
-            this.sampleEditorToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.sampleEditorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.sampleEditorToolStripMenuItem.Text = "Sample Editor";
             this.sampleEditorToolStripMenuItem.Click += new System.EventHandler(this.sampleEditorToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(203, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(199, 6);
             this.toolStripMenuItem2.Paint += new System.Windows.Forms.PaintEventHandler(this.toolStripSeparator_Paint);
             // 
             // resetMenuPositionToolStripMenuItem
@@ -1226,7 +1226,7 @@
             this.resetMenuPositionToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.resetMenuPositionToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.resetMenuPositionToolStripMenuItem.Name = "resetMenuPositionToolStripMenuItem";
-            this.resetMenuPositionToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.resetMenuPositionToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.resetMenuPositionToolStripMenuItem.Text = "Undock All";
             this.resetMenuPositionToolStripMenuItem.Click += new System.EventHandler(this.resetMenuPositionToolStripMenuItem_Click);
             // 
@@ -1235,7 +1235,7 @@
             this.resetDocksStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.resetDocksStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.resetDocksStripMenuItem.Name = "resetDocksStripMenuItem";
-            this.resetDocksStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.resetDocksStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.resetDocksStripMenuItem.Text = "Reset Docks";
             this.resetDocksStripMenuItem.Click += new System.EventHandler(this.resetDocksStripMenuItem_Click);
             // 
@@ -2627,7 +2627,6 @@
             this.panelMaster.TabIndex = 47;
             this.panelMaster.Tag = "editorpanel";
             this.panelMaster.Visible = false;
-            this.panelMaster.VisibleChanged += new System.EventHandler(this.panelMaster_VisibleChanged);
             this.panelMaster.Click += new System.EventHandler(this.editorpanelClick);
             this.panelMaster.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelMaster.Leave += new System.EventHandler(this.editorpanelUnfocus);
@@ -6272,6 +6271,12 @@
             this.sampleList.Size = new System.Drawing.Size(317, 379);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
+            this.sampleList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEnter);
+            this.sampleList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellValueChanged);
+            this.sampleList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.sampleList_EditingControlShowing);
+            this.sampleList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_RowEnter);
+            this.sampleList.DragDrop += new System.Windows.Forms.DragEventHandler(this.sampleList_DragDrop);
+            this.sampleList.DragEnter += new System.Windows.Forms.DragEventHandler(this.sampleList_DragEnter);
             // 
             // SampleName
             // 
@@ -6388,6 +6393,7 @@
             this.btnSampleAdd.Name = "btnSampleAdd";
             this.btnSampleAdd.Size = new System.Drawing.Size(24, 25);
             this.btnSampleAdd.ToolTipText = "Add new sample";
+            this.btnSampleAdd.Click += new System.EventHandler(this.btnSampleAdd_Click);
             // 
             // btnSampleDelete
             // 
@@ -6410,6 +6416,7 @@
             this.FSBtoSamp.Name = "FSBtoSamp";
             this.FSBtoSamp.Size = new System.Drawing.Size(24, 22);
             this.FSBtoSamp.ToolTipText = "Import FSB files to Sample format";
+            this.FSBtoSamp.Click += new System.EventHandler(this.FSBtoSamp_Click);
             // 
             // btnSampEditorPlaySamp
             // 
@@ -6420,6 +6427,7 @@
             this.btnSampEditorPlaySamp.Name = "btnSampEditorPlaySamp";
             this.btnSampEditorPlaySamp.Size = new System.Drawing.Size(24, 22);
             this.btnSampEditorPlaySamp.ToolTipText = "Play selected sample";
+            this.btnSampEditorPlaySamp.Click += new System.EventHandler(this.btnSampEditorPlaySamp_Click);
             // 
             // lblSampleFSBhelp
             // 
@@ -6465,6 +6473,7 @@
             this.txtSampPath.Name = "txtSampPath";
             this.txtSampPath.Size = new System.Drawing.Size(261, 22);
             this.txtSampPath.TabIndex = 148;
+            this.txtSampPath.TextChanged += new System.EventHandler(this.txtSampPath_TextChanged);
             // 
             // toolstripTitleSample
             // 

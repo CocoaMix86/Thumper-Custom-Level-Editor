@@ -872,11 +872,5 @@ namespace Thumper_Custom_Level_Editor
             }
             senderComboBox.DropDownWidth = width + vertScrollBarWidth; ;
         }
-
-        private void panelMaster_VisibleChanged(object sender, EventArgs e)
-        {
-            int ii = 26;
-        }
-
     }
 }
