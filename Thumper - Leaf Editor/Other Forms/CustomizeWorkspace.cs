@@ -142,6 +142,14 @@ namespace Thumper_Custom_Level_Editor
                 //the "14" is a leftpad empty space
                 List<string> mod = loadthesekeys[(string)_lbl.Tag].ToString().Split(new[] {", "}, StringSplitOptions.None).ToList();
                 mod.Reverse();
+                if (mod.Contains("Alt")) {
+                    mod.Remove("Alt");
+                    mod.Insert(0, "Alt");
+                }
+                if (mod.Contains("Control")) {
+                    mod.Remove("Control");
+                    mod.Insert(0, "Control");
+                }
                 _lbl.Text = $"{_lbl.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
             }
         }
@@ -179,7 +187,16 @@ namespace Thumper_Custom_Level_Editor
                 labelKeys.ForeColor = cantusethiskey ? Color.Red : Color.White;
                 btnSetKeybind.Enabled = !cantusethiskey;
                 btnSetKeybind.BackColor = cantusethiskey ? Color.Gray : Color.Green;
-                labelKeys.Text = $"{e.Modifiers.ToString().Replace(",", " +")} + {e.KeyCode}";
+                List<string> mod = e.Modifiers.ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
+                if (mod.Contains("Alt")) {
+                    mod.Remove("Alt");
+                    mod.Insert(0, "Alt");
+                }
+                if (mod.Last() == "Control" && mod.Count > 1) {
+                    mod.Remove("Control");
+                    mod.Insert(0, "Control");
+                }
+                labelKeys.Text = $"{string.Join(" + ", mod)} + {e.KeyCode}";
             }
         }
         private void btnSetKeybind_Click(object sender, EventArgs e)
@@ -216,8 +233,6 @@ namespace Thumper_Custom_Level_Editor
         }
         private void btnSingleReset_Click(object sender, EventArgs e)
         {
-            List<string> mod = defaultkeybinds[keybindname].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
-            mod.Reverse();
             //the "14" is a leftpad empty space
             //currentlabel.Text = $"{currentlabel.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
             keybindLabel_Click(currentlabel, null);
