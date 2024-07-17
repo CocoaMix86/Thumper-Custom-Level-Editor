@@ -6633,6 +6633,8 @@
             this.pictureBeeble.Name = "pictureBeeble";
             this.pictureBeeble.Size = new System.Drawing.Size(110, 95);
             this.pictureBeeble.TabIndex = 146;
+            this.pictureBeeble.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBeeble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // FormLeafEditor
             // 
