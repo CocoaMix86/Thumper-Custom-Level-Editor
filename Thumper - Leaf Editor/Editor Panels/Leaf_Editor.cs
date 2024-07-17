@@ -140,11 +140,13 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (vScrollBarTrackEditor.Visible) {
 				trackEditor.Location = new Point(vScrollBarTrackEditor.Location.X + 15, trackEditor.Location.Y);
-				trackEditor.Width -= 15;
+				//trackEditor.Width -= 15;
+				trackEditor.Width = panelLeaf.Width - trackEditor.Location.X - 5;
             }
 			else {
 				trackEditor.Location = new Point(vScrollBarTrackEditor.Location.X, trackEditor.Location.Y);
-				trackEditor.Width += 15;
+				//trackEditor.Width += 15;
+				trackEditor.Width = panelLeaf.Width - trackEditor.Location.X - 5;
 			}
 		}
 		void trackEditor_MouseWheel(object sender, MouseEventArgs e)
