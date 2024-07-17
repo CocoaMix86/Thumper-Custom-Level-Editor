@@ -195,7 +195,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedsample = $@"{storePath}\samp_{tempFileName}";
+                _loadedsample = _loadedsampletemp = $@"{storePath}\samp_{tempFileName}";
                 WriteSample();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();
@@ -450,7 +450,8 @@ namespace Thumper_Custom_Level_Editor
 			_savesample = save;
 			if (!save) {
 				btnSaveSample.Enabled = true;
-				btnRevertSample.Enabled = true;
+				btnRevertSample.Enabled = samplejson != null;
+				btnRevertSample.ToolTipText = samplejson != null ? "" : "You cannot revert with no file saved";
 				toolstripTitleSample.BackColor = Color.Maroon;
 			}
 			else {

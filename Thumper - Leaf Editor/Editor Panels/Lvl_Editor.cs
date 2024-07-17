@@ -318,7 +318,7 @@ namespace Thumper_Custom_Level_Editor
 		private void saveToolStripMenuItem2_Click(object sender, EventArgs e)
 		{
 			//if _loadedlvl is somehow not set, force Save As instead
-			if (_loadedlvl.Length < 1) {
+			if (_loadedlvl == null) {
 				lvlsaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
@@ -351,7 +351,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedlvl = $@"{storePath}\lvl_{tempFileName}";
+                _loadedlvl = _loadedlvltemp = $@"{storePath}\lvl_{tempFileName}";
                 WriteLvl();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();

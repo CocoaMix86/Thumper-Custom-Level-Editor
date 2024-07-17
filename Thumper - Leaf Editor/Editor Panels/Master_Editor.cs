@@ -235,7 +235,7 @@ namespace Thumper_Custom_Level_Editor
 				}
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
-                _loadedmaster = $@"{storePath}\master_sequin.txt";
+                _loadedmaster = _loadedmastertemp = $@"{storePath}\master_sequin.txt";
                 WriteMaster();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();

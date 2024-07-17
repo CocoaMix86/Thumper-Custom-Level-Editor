@@ -654,8 +654,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedleaf = $@"{storePath}\leaf_{tempFileName}";
-                _loadedleaftemp = $@"{storePath}\leaf_{tempFileName}";
+                _loadedleaf = _loadedleaftemp = $@"{storePath}\leaf_{tempFileName}";
                 WriteLeaf();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();

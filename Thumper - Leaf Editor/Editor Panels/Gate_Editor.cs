@@ -186,7 +186,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedgate = $@"{storePath}\gate_{tempFileName}";
+                _loadedgate = _loadedgatetemp = $@"{storePath}\gate_{tempFileName}";
                 WriteGate();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();
