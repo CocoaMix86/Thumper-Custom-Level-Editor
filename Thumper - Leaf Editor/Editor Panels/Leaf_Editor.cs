@@ -47,14 +47,12 @@ namespace Thumper_Custom_Level_Editor
 		public bool randomizing = false;
 		public int hscrollposition = 0;
 
-		//public List<List<string>> _tracks = new List<List<string>>();
 		public List<Sequencer_Object> _tracks = new();
 		private List<Object_Params> _objects = new();
 		private Dictionary<string, string> objectcolors = new();
 		public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public List<string> _tracklanefriendly = new() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
 		public List<Tuple<string, int, int>> _scrollpositions = new();
-		//public List<Tuple<Sequencer_Object, DataGridViewCellCollection>> clipboardtracks = new();
 		public List<Sequencer_Object> clipboardtracks = new();
 		public List<CellFunction> _functions = new();
 		public CellFunction _loadedfunction;
@@ -189,27 +187,6 @@ namespace Thumper_Custom_Level_Editor
 				}
 				else if (shiftdown && e.Delta > 0) {
 					trackZoomVert.Value = Math.Min(100, vert + scrollLines);
-				}
-			}
-		}
-		private void trackEditor_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-		{
-			leafeditorcell = e.ColumnIndex;
-			if (e.ColumnIndex == -1 || e.RowIndex == -1)
-				return;
-			DataGridView dgv = sender as DataGridView;
-			if (Control.MouseButtons == MouseButtons.Right) {
-				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
-					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
-					SaveLeaf(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
-					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
-				}
-				else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
-					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					CellValueChanged(e.RowIndex, e.ColumnIndex);
-					_undolistleaf.RemoveAt(1);
 				}
 			}
 		}
@@ -364,6 +341,29 @@ namespace Thumper_Custom_Level_Editor
 					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
+					GenerateDataPoints(dgv.Rows[e.RowIndex]);
+					SaveLeaf(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
+				}
+				else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
+					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					CellValueChanged(e.RowIndex, e.ColumnIndex);
+					_undolistleaf.RemoveAt(1);
+				}
+			}
+		}
+		private void trackEditor_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+		{
+			leafeditorcell = e.ColumnIndex;
+			if (e.ColumnIndex == -1 || e.RowIndex == -1)
+				return;
+			DataGridView dgv = sender as DataGridView;
+			if (Control.MouseButtons == MouseButtons.Right) {
+				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
+					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+					dgv[e.ColumnIndex, e.RowIndex].Value = null;
+					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
+					GenerateDataPoints(dgv.Rows[e.RowIndex]);
 					SaveLeaf(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
 					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
