@@ -281,7 +281,12 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			List<DataGridViewRow> edited = new();
 			try {
-				object _val = trackEditor[columnindex, rowindex].Value == null ? null : TruncateDecimal((decimal)trackEditor[columnindex, rowindex].Value, 3);
+				decimal? _valtoset;
+				if (trackEditor[columnindex, rowindex].Value.GetType() == typeof(string))
+					_valtoset = decimal.Parse(trackEditor[columnindex, rowindex].Value.ToString());
+				else
+					_valtoset = (decimal?)trackEditor[columnindex, rowindex].Value;
+				object _val = _valtoset == null ? null : TruncateDecimal((decimal)_valtoset, 3);
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					//if cell does not have the value, set it
