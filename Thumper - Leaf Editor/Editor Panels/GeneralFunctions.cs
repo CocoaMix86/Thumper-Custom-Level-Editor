@@ -196,24 +196,13 @@ namespace Thumper_Custom_Level_Editor
         public void ImportDefaultColors()
         {
             objectcolors.Clear();
-            if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors.txt")) {
-                File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors.txt", Properties.Resources.objects_defaultcolors);
+            if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors2.2.txt")) {
+                File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
             }
-            objectcolors = File.Exists($@"{AppLocation}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]) : null;
+            objectcolors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]);
 
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
         }
-        /*
-        public DataGridViewRow CloneRow(DataGridViewRow dgvr, int cellstocopy)
-        {
-            DataGridViewRow newdgvr = (DataGridViewRow)dgvr.Clone();
-            newdgvr.Cells.Clear();
-            for (int x = 0; x < cellstocopy && x < dgvr.Cells.Count; x++) {
-                newdgvr.Cells.Add((DataGridViewCell)dgvr.Cells[x].Clone());
-                newdgvr.Cells[x].Value = dgvr.Cells[x].Value;
-            }
-            return newdgvr;
-        }*/
 
         private void RandomizeRowValues(DataGridViewRow dgvr)
         {
