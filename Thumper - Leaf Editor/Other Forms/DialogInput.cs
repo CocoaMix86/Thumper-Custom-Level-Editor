@@ -95,6 +95,7 @@ namespace Thumper_Custom_Level_Editor
                 { "description", input.txtDesc.Text },
                 { "author", input.txtCustomAuthor.Text }
             };
+            mainform.toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject(txtCustomDiff.Text);
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
             if (mainform.workingfolder != null && isthisnew == false && mainform.workingfolder != levelpath) {
                 Directory.Move(mainform.workingfolder, levelpath);

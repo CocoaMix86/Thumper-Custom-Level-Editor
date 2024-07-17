@@ -17,6 +17,7 @@ namespace Thumper_Custom_Level_Editor
         #region Variables
         Properties.Settings settings = Properties.Settings.Default;
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
+        public dynamic projectjson; 
         public string workingfolder
         {
             get { return _workingfolder; }
@@ -70,6 +71,9 @@ namespace Thumper_Custom_Level_Editor
                     SaveMaster(true);
                     SaveSample(true);
                     panelRecentFiles.Visible = false;
+
+                    projectjson = JsonConvert.DeserializeObject(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt").Replace('#', ' '));
+                    toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
                 }
             }
         }

@@ -1483,10 +1483,11 @@
             this.toolstripLevelName.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolstripLevelName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(110)))), ((int)(((byte)(110)))));
             this.toolstripLevelName.ForeColor = System.Drawing.Color.White;
-            this.toolstripLevelName.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.toolstripLevelName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.D0;
             this.toolstripLevelName.Name = "toolstripLevelName";
-            this.toolstripLevelName.Size = new System.Drawing.Size(114, 18);
+            this.toolstripLevelName.Size = new System.Drawing.Size(134, 24);
             this.toolstripLevelName.Text = "<no level loaded>";
+            this.toolstripLevelName.Click += new System.EventHandler(this.btnWorkEditDetails_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -7174,7 +7175,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewButtonColumn closerecent;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
-        private System.Windows.Forms.ToolStripMenuItem toolstripLevelName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripButton btnLeafPanelTemplate2;
@@ -7218,6 +7218,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Offset;
         private System.Windows.Forms.DataGridViewTextBoxColumn Channel;
         private ResizeablePanel pictureBeeble;
+        public System.Windows.Forms.ToolStripMenuItem toolstripLevelName;
     }
 }
 
