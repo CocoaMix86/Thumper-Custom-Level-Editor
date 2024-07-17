@@ -172,7 +172,7 @@ namespace Thumper_Custom_Level_Editor
 						dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(file), "#.*", ""));
 						_loadedmastertemp = file;
 						LoadMaster(_load);
-						if (panelMaster.Visible == false)
+						if (!panelMaster.Visible && !masterEditorToolStripMenuItem.Checked)
 							masterEditorToolStripMenuItem.PerformClick();
 					}
 				}

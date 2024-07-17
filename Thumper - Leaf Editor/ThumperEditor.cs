@@ -193,22 +193,20 @@ namespace Thumper_Custom_Level_Editor
             btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
             //colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-
+            //set panels to their last saved dock
+            SetDockLocations();
             //load recent levels 
             List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
             if (levellist.Count > 0 && LevelToLoad.Length < 2)
                 RecentFiles(levellist);
             else if (LevelToLoad.Length > 2) {
                 if (Directory.Exists(LevelToLoad)) {
-                    ClearPanels();
                     workingfolder = LevelToLoad;
                     panelRecentFiles.Visible = false;
                 }
                 else
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
-            //set panels to their last saved dock
-            SetDockLocations();
 
             //finish loading
             Properties.Settings.Default.firstrun = false;
@@ -874,5 +872,11 @@ namespace Thumper_Custom_Level_Editor
             }
             senderComboBox.DropDownWidth = width + vertScrollBarWidth; ;
         }
+
+        private void panelMaster_VisibleChanged(object sender, EventArgs e)
+        {
+            int ii = 26;
+        }
+
     }
 }
