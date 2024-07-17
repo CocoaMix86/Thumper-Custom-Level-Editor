@@ -6630,6 +6630,7 @@
             this.pictureBeeble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBeeble.Location = new System.Drawing.Point(107, 135);
+            this.pictureBeeble.MinimumSize = new System.Drawing.Size(10, 10);
             this.pictureBeeble.Name = "pictureBeeble";
             this.pictureBeeble.Size = new System.Drawing.Size(110, 95);
             this.pictureBeeble.TabIndex = 146;
