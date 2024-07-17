@@ -170,7 +170,7 @@ namespace Thumper_Custom_Level_Editor
                 //store last press for when user accepts changes
                 bool cantusethiskey = false;
                 lastpress = e.KeyData;
-                if (keybindfromfile.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers))) {
+                if (keybindfromfile.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers)) || (e.KeyCode is Keys.ControlKey or Keys.ShiftKey or Keys.Menu)) {
                     cantusethiskey = true;
                     lblInvalid.Visible = true;
                 }

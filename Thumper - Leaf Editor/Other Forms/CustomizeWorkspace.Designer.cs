@@ -28,6 +28,7 @@ namespace Thumper_Custom_Level_Editor
 		/// </summary>
 		private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomizeWorkspace));
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.toolstripCustomize = new System.Windows.Forms.ToolStrip();
@@ -63,12 +64,12 @@ namespace Thumper_Custom_Level_Editor
             this.btnKeybindReset = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSetKeybind = new System.Windows.Forms.Panel();
-            this.lblInvalid = new System.Windows.Forms.Label();
             this.btnCloseKeybind = new System.Windows.Forms.Button();
             this.btnSingleReset = new System.Windows.Forms.Button();
             this.btnSetKeybind = new System.Windows.Forms.Button();
             this.labelKeys = new System.Windows.Forms.Label();
             this.labelKeybindName = new System.Windows.Forms.Label();
+            this.lblInvalid = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.keybindToggleAutoPlace = new System.Windows.Forms.Label();
             this.keybindRandomizeRow = new System.Windows.Forms.Label();
@@ -105,6 +106,7 @@ namespace Thumper_Custom_Level_Editor
             this.keybindLeafOpen = new System.Windows.Forms.Label();
             this.keybindLeafNew = new System.Windows.Forms.Label();
             this.txtKeybindSearch = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -586,24 +588,9 @@ namespace Thumper_Custom_Level_Editor
             this.panelSetKeybind.Controls.Add(this.lblInvalid);
             this.panelSetKeybind.Location = new System.Drawing.Point(87, 80);
             this.panelSetKeybind.Name = "panelSetKeybind";
-            this.panelSetKeybind.Size = new System.Drawing.Size(190, 65);
+            this.panelSetKeybind.Size = new System.Drawing.Size(190, 97);
             this.panelSetKeybind.TabIndex = 119;
             this.panelSetKeybind.Visible = false;
-            // 
-            // lblInvalid
-            // 
-            this.lblInvalid.AutoSize = true;
-            this.lblInvalid.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblInvalid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInvalid.ForeColor = System.Drawing.Color.Red;
-            this.lblInvalid.Location = new System.Drawing.Point(6, 36);
-            this.lblInvalid.Name = "lblInvalid";
-            this.lblInvalid.Size = new System.Drawing.Size(173, 26);
-            this.lblInvalid.TabIndex = 151;
-            this.lblInvalid.Tag = "1";
-            this.lblInvalid.Text = "that keybind is in use already\r\nor is invalid\r\n";
-            this.lblInvalid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblInvalid.Visible = false;
             // 
             // btnCloseKeybind
             // 
@@ -622,7 +609,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnSingleReset.BackColor = System.Drawing.Color.Orange;
             this.btnSingleReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSingleReset.ForeColor = System.Drawing.Color.Black;
-            this.btnSingleReset.Location = new System.Drawing.Point(99, 40);
+            this.btnSingleReset.Location = new System.Drawing.Point(99, 65);
             this.btnSingleReset.Name = "btnSingleReset";
             this.btnSingleReset.Size = new System.Drawing.Size(75, 23);
             this.btnSingleReset.TabIndex = 150;
@@ -636,7 +623,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnSetKeybind.Enabled = false;
             this.btnSetKeybind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSetKeybind.ForeColor = System.Drawing.Color.White;
-            this.btnSetKeybind.Location = new System.Drawing.Point(24, 40);
+            this.btnSetKeybind.Location = new System.Drawing.Point(24, 65);
             this.btnSetKeybind.Name = "btnSetKeybind";
             this.btnSetKeybind.Size = new System.Drawing.Size(75, 23);
             this.btnSetKeybind.TabIndex = 120;
@@ -672,6 +659,23 @@ namespace Thumper_Custom_Level_Editor
             this.labelKeybindName.TabIndex = 117;
             this.labelKeybindName.Tag = "1";
             this.labelKeybindName.Text = "Set Keybind - ";
+            // 
+            // lblInvalid
+            // 
+            this.lblInvalid.AutoSize = true;
+            this.lblInvalid.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblInvalid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInvalid.ForeColor = System.Drawing.Color.Red;
+            this.lblInvalid.Location = new System.Drawing.Point(6, 36);
+            this.lblInvalid.Name = "lblInvalid";
+            this.lblInvalid.Size = new System.Drawing.Size(173, 26);
+            this.lblInvalid.TabIndex = 151;
+            this.lblInvalid.Tag = "1";
+            this.lblInvalid.Text = "that keybind is in use already\r\nor is invalid\r\n";
+            this.lblInvalid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.lblInvalid, "Due to Windows limitations, all keybinds MUST\r\nhave at least 1 modifier (CTRL, AL" +
+        "T, Shift).");
+            this.lblInvalid.Visible = false;
             // 
             // panel1
             // 
@@ -1419,5 +1423,6 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label keybindInterpolate;
         private System.Windows.Forms.Label keybindColorDialog;
         private System.Windows.Forms.Label keybindToggleAutoPlace;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
