@@ -507,29 +507,6 @@ namespace Thumper_Custom_Level_Editor
             custom.Dispose();
         }
 
-        private void resetMenuPositionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UndockPanel(panelLeaf);
-            UndockPanel(panelLevel);
-            UndockPanel(panelGate);
-            UndockPanel(panelMaster);
-            UndockPanel(panelWorkingFolder);
-            UndockPanel(panelSample);
-
-            panelMaster.Location = new Point(0, 30);
-            panelLevel.Location = new Point(this.Width / 3, 30);
-            panelGate.Location = new Point((int)(this.Width * 0.66), 30);
-            panelWorkingFolder.Location = new Point(0, this.Height / 2);
-            panelLeaf.Location = new Point(this.Width / 3, this.Height / 2);
-            panelSample.Location = new Point((int)(this.Width * 0.66), this.Height / 2);
-
-            panelLeaf.Visible = panelLevel.Visible = panelGate.Visible = panelMaster.Visible = panelWorkingFolder.Visible = panelSample.Visible = true;
-
-            pictureBeeble.Location = new Point(25, 25);
-            pictureBeeble.Size = new Size(40, 40);
-            pictureBeeble.BringToFront();
-        }
-
         ///BEEBLE FUNCTIONS
         private void pictureBox1_Click(object sender, EventArgs e)
         {
