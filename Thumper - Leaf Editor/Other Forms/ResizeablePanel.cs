@@ -15,7 +15,7 @@ namespace Thumper_Custom_Level_Editor
             base.OnPaint(e);
             if (this.Parent.GetType() == typeof(SplitterPanel))
                 return;
-            var rc = new Rectangle(this.ClientSize.Width - grab, this.ClientSize.Height - grab, grab, grab);
+            Rectangle rc = new Rectangle(this.ClientSize.Width - grab, this.ClientSize.Height - grab, grab, grab);
             ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
         }
         protected override void WndProc(ref Message m)
@@ -24,7 +24,7 @@ namespace Thumper_Custom_Level_Editor
             if (m.Msg == 0x84) {  // Trap WM_NCHITTEST
                 if (this.Parent.GetType() == typeof(SplitterPanel))
                     return;
-                var pos = this.PointToClient(new Point(m.LParam.ToInt32()));
+                Point pos = this.PointToClient(new Point(m.LParam.ToInt32()));
                 if (pos.X >= this.ClientSize.Width - grab && pos.Y >= this.ClientSize.Height - grab)
                     m.Result = new IntPtr(17);  // HT_BOTTOMRIGHT
             }

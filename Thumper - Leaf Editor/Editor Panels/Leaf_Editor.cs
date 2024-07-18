@@ -828,7 +828,7 @@ namespace Thumper_Custom_Level_Editor
                 //finds each distinct row across all selected cells
                 List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row.Index.CompareTo(row2.Index));
-				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().ToList();
+                List<DataGridViewCell> selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().ToList();
 
 				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				foreach (DataGridViewRow dgvr in selectedrows) {
@@ -854,7 +854,7 @@ namespace Thumper_Custom_Level_Editor
 				//clear selected cells and shift them up
 				dgv.CurrentCell = selectedrows[0].Cells[0];
 				dgv.ClearSelection();
-				foreach (var cell in selectedcells) {
+				foreach (DataGridViewCell cell in selectedcells) {
 					dgv[cell.ColumnIndex, cell.RowIndex].Selected = true;
 				}
 				//sets flag that leaf has unsaved changes
@@ -930,7 +930,7 @@ namespace Thumper_Custom_Level_Editor
 				int _index = trackEditor.CurrentRow?.Index ?? -1;
 				//check if copied row is longer than the leaf beat length
 				int lastbeat;
-				var jj = ((JObject)clipboardtracks[0].data_points).Properties().ToList();
+                List<JProperty> jj = ((JObject)clipboardtracks[0].data_points).Properties().ToList();
 				if (jj.Count <= 1)
 					lastbeat = 1;
 				else
@@ -1449,7 +1449,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//iterate over each cell of the selected row
 			string allcellvalues = String.Join(",", dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.Value is not null or "").Select(x => $"{x.ColumnIndex}:{x.Value}"));
-			var jobj = JsonConvert.DeserializeObject($"{{{allcellvalues}}}");
+            object jobj = JsonConvert.DeserializeObject($"{{{allcellvalues}}}");
 			_tracks[dgvr.Index].data_points = jobj;
 			richRawTrackData.Text = allcellvalues;
 		}
