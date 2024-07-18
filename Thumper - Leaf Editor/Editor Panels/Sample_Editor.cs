@@ -125,7 +125,6 @@ namespace Thumper_Custom_Level_Editor
 			//enable certain buttons if there are enough items for them
 			btnSampleAdd.Enabled = true;
 			btnSampleDelete.Enabled = _samplelist.Count > 0;
-			FSBtoSamp.Enabled = _samplelist.Count > 0;
 			btnSampEditorPlaySamp.Enabled = _samplelist.Count > 0;
 
 			//set lvl save flag to false
