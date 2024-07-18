@@ -116,6 +116,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void workingfolderFiles_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
+			if (e.ColumnIndex == -1 || e.RowIndex == -1)
+				return;
 			dynamic _load;
 			string _selectedfilename;
 			//attempt to load file listed in the dGV
