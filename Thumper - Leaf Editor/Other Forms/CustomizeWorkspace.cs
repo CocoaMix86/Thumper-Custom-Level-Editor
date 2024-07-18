@@ -33,7 +33,7 @@ namespace Thumper_Custom_Level_Editor
             toolstripCustomize.Renderer = new ToolStripOverride();
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //
-            Dictionary<string, string> import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]): null;
+            Dictionary<string, string> import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors2.2.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]): null;
             foreach (Object_Params _obj in _objects) {
                 objectcolors.Add(_obj.param_displayname, import.TryGetValue(_obj.param_displayname, out string value) ? value : "-8355585");
             }

@@ -168,6 +168,14 @@ namespace Thumper_Custom_Level_Editor
             masterEditorToolStripMenuItem.Checked = true;
             workingFolderToolStripMenuItem.Checked = true;
             sampleEditorToolStripMenuItem.Checked = true;
+
+            ResetBeeble(null, null);
+        }
+
+        private void ResetBeeble(object sender, EventArgs e)
+        {
+            pictureBeeble.Location = new Point(50, 50);
+            pictureBeeble.Size = new Size(96, 76);
         }
 
         private void editorpanelDoubleClick(object sender, EventArgs e)
