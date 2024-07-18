@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -57,6 +58,8 @@ namespace Thumper_Custom_Level_Editor
 		public List<CellFunction> _functions = new();
 		public CellFunction _loadedfunction;
 		public List<SaveState> _undolistleaf = new();
+
+		FileStream filelockleaf;
 		#endregion
 		#region EventHandlers
 		///        ///
@@ -666,7 +669,9 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			using (StreamWriter sr = new StreamWriter(new NonClosingStreamWrapper(filelockleaf))) {
+				File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			}
 			SaveLeaf(true, "Saved", "", true);
 			lblTrackFileName.Text = $"Leaf Editor ⮞ {_save["obj_name"]}";
 			//update beat counts in loaded lvl if need be
@@ -1657,7 +1662,9 @@ namespace Thumper_Custom_Level_Editor
 				//set save flag to true, since it just barely loaded
 				SaveLeafColors(true, Color.Maroon);
 			}
-		}
+
+			filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+        }
 
 		private void EnableLeafButtons(bool enable)
         {
