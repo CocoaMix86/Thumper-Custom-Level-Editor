@@ -275,6 +275,9 @@ namespace Thumper_Custom_Level_Editor
         private void trackEditor_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
         }
+        private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+        }
         private void trackEditor_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
@@ -282,13 +285,7 @@ namespace Thumper_Custom_Level_Editor
             if (trackEditor.IsCurrentCellInEditMode)
                 CellValueChanged(e.RowIndex, e.ColumnIndex);
         }
-        private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-		{
-			if (e.RowIndex == -1 || e.ColumnIndex == -1)
-				return;
-			//CellValueChanged(e.RowIndex, e.ColumnIndex);
-		}
-		private void CellValueChanged(int rowindex, int columnindex)
+        private void CellValueChanged(int rowindex, int columnindex)
         {
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			List<DataGridViewRow> edited = new();
