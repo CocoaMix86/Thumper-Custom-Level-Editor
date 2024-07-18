@@ -1359,7 +1359,6 @@ namespace Thumper_Custom_Level_Editor
 						savestate = LeafBuildSave((_loadedleaf != null) ? Path.GetFileName(_loadedleaf).Replace("leaf_", "") : "", true)
 					});
 				}
-
 			}
 			else {
 				SaveLeafColors(false, Color.FromArgb(40, 40, 40));
@@ -1369,7 +1368,8 @@ namespace Thumper_Custom_Level_Editor
 		public void SaveLeafColors(bool enabled, Color color)
 		{
 			btnSaveLeaf.Enabled = enabled;
-			btnRevertLeaf.Enabled = enabled;
+			btnRevertLeaf.Enabled = leafjson != null;
+			btnRevertLeaf.ToolTipText = leafjson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
 			toolstripTitleLeaf.BackColor = color;
 		}
 

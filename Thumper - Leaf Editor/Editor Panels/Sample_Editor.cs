@@ -451,7 +451,7 @@ namespace Thumper_Custom_Level_Editor
 			if (!save) {
 				btnSaveSample.Enabled = true;
 				btnRevertSample.Enabled = samplejson != null;
-				btnRevertSample.ToolTipText = samplejson != null ? "" : "You cannot revert with no file saved";
+				btnRevertSample.ToolTipText = samplejson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
 				toolstripTitleSample.BackColor = Color.Maroon;
 			}
 			else {

@@ -943,7 +943,8 @@ namespace Thumper_Custom_Level_Editor
 			_savelvl = save;
 			if (!save) {
 				btnSaveLvl.Enabled = true;
-				btnRevertLvl.Enabled = true;
+				btnRevertLvl.Enabled = lvljson != null;
+				btnRevertLvl.ToolTipText = lvljson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
 				toolstripTitleLvl.BackColor = Color.Maroon;
 			}
 			else {

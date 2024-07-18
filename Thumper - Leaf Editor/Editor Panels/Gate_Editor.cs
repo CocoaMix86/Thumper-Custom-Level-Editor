@@ -426,7 +426,8 @@ namespace Thumper_Custom_Level_Editor
 			_savegate = save;
 			if (!save) {
 				btnSaveGate.Enabled = true;
-				btnRevertGate.Enabled = true;
+				btnRevertGate.Enabled = gatejson != null;
+				btnRevertGate.ToolTipText = gatejson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
 				toolstripTitleGate.BackColor = Color.Maroon;
 			}
 			else {
