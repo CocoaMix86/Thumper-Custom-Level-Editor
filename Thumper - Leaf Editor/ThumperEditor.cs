@@ -669,10 +669,9 @@ namespace Thumper_Custom_Level_Editor
 
         private void datagrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            DataGridView dgv = (DataGridView)sender;
-            dgv.CurrentCell.Value = dgv.CurrentCell.EditedFormattedValue;
-            dgv.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            CellValueChanged(dgv.CurrentCell.RowIndex, dgv.CurrentCell.ColumnIndex);
+            //DataGridView dgv = (DataGridView)sender;
+            //if (!dgv.IsCurrentCellInEditMode)
+                //CellValueChanged(dgv.CurrentCell.RowIndex, dgv.CurrentCell.ColumnIndex);
         }
         private void mastereditor_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -878,6 +877,5 @@ namespace Thumper_Custom_Level_Editor
             }
             senderComboBox.DropDownWidth = width + vertScrollBarWidth; ;
         }
-
     }
 }

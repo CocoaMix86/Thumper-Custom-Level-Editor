@@ -267,16 +267,26 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//e.CellStyle.Font = new Font("Consolas", 7);
 		}
-		private void trackEditor_CellValidated(object sender, DataGridViewCellEventArgs e)
-		{ 
-			//CellValueChanged(e.RowIndex, e.ColumnIndex);
-		}
-		//Cell value changed
-		private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+
+        //Cell value changed
+        private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+        private void trackEditor_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+        private void trackEditor_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                return;
+            if (trackEditor.IsCurrentCellInEditMode)
+                CellValueChanged(e.RowIndex, e.ColumnIndex);
+        }
+        private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.RowIndex == -1 || e.ColumnIndex == -1)
 				return;
-			CellValueChanged(e.RowIndex, e.ColumnIndex);
+			//CellValueChanged(e.RowIndex, e.ColumnIndex);
 		}
 		private void CellValueChanged(int rowindex, int columnindex)
         {
@@ -284,7 +294,7 @@ namespace Thumper_Custom_Level_Editor
 			List<DataGridViewRow> edited = new();
 			try {
 				object _val;
-				if (Decimal.TryParse(trackEditor[columnindex, rowindex].Value?.ToString(), out decimal _valtoset))
+				if (Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
 					_val = TruncateDecimal(_valtoset, 3);
 				else
 					_val = null;
@@ -313,12 +323,7 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
-		private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-			
-		}
-
-		private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
 		{
 			e.ThrowException = false;
 		}
