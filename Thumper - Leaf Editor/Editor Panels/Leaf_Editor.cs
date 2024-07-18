@@ -1362,6 +1362,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			else {
 				SaveLeafColors(false, Color.FromArgb(40, 40, 40));
+				btnRevertLeaf.Enabled = false;
 				if (playsound) PlaySound("UIsave");
 			}
 		}
