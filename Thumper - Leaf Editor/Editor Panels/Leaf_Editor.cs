@@ -35,8 +35,10 @@ namespace Thumper_Custom_Level_Editor
 					ShowPanel(true, panelLeaf);
 
 					if (filelockleaf != null) filelockleaf.Close();
-					filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
-					lockedfiles.Add(_loadedleaf, filelockleaf);
+					if (value != null) {
+						filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+						lockedfiles.Add(_loadedleaf, filelockleaf);
+					}
 				}
 			}
 		}

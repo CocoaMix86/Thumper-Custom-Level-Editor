@@ -32,6 +32,7 @@ namespace Thumper_Custom_Level_Editor
                     }
                     //if different, set it, then repopulate lvls in workingfolder
                     //these are used in the Master Editor panel
+                    if (_workingfolder != null && lockedfiles.ContainsKey($@"{_workingfolder}\LEVEL DETAILS.txt")) lockedfiles.Remove($@"{_workingfolder}\LEVEL DETAILS.txt");
                     _workingfolder = value;
                     ClearPanels();
                     lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
@@ -76,7 +77,8 @@ namespace Thumper_Custom_Level_Editor
                     toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
 
                     if (filelocklevel != null) filelocklevel.Close();
-                    filelocklevel = new FileStream($@"{workingfolder}\LEVEL DETAILS.txt", FileMode.Open, FileAccess.ReadWrite);
+                    filelocklevel = new FileStream($@"{workingfolder}\LEVEL DETAILS.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+                    lockedfiles.Add($@"{workingfolder}\LEVEL DETAILS.txt", filelocklevel);
                 }
             }
         }
@@ -88,8 +90,8 @@ namespace Thumper_Custom_Level_Editor
         public string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
         private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-        FileStream filelocklevel;
-        Dictionary<string, FileStream> lockedfiles = new();
+        public FileStream filelocklevel;
+        public Dictionary<string, FileStream> lockedfiles = new();
         #endregion
 
         public FormLeafEditor(string LevelFromArg)

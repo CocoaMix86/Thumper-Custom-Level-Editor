@@ -28,8 +28,10 @@ namespace Thumper_Custom_Level_Editor
 					ShowPanel(true, panelMaster);
 
 					if (filelockmaster != null) filelockmaster.Close();
-					filelockmaster = new FileStream(_loadedmaster, FileMode.Open, FileAccess.ReadWrite);
-					lockedfiles.Add(_loadedmaster, filelockmaster);
+					if (value != null) {
+						filelockmaster = new FileStream(_loadedmaster, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+						lockedfiles.Add(_loadedmaster, filelockmaster);
+					}
 				}
 			}
 		}

@@ -227,10 +227,14 @@ namespace Thumper_Custom_Level_Editor
 		private void btnWorkDelete_Click(object sender, EventArgs e)
 		{
 			//make user confirm file deletion
-			if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show($"{workingfolderFiles.CurrentRow.Cells[1].Value.ToString()}\nAre you sure you want to delete this file?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+			if (workingfolderFiles.CurrentRow.Index != -1 && MessageBox.Show($"{workingfolderFiles.CurrentRow.Cells[1].Value}\nAre you sure you want to delete this file?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 				//check if file being deleted is LEVEL DETAILS
 				if (workingfolderFiles.CurrentRow.Cells[1].Value.ToString().Contains("LEVEL DETAILS") && MessageBox.Show("You are about to delete the LEVEL DETAILS file. This file is required for the mod loader tool to load the level. Are you sure you want to delete it?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.No)
 					return;
+				if (lockedfiles.ContainsKey($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt")) {
+					lockedfiles[$@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt"].Close();
+					lockedfiles.Remove($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt");
+				}
 				File.Delete($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt");
 				PlaySound("UIdelete");
 				//call the refresh method so the dgv updates
@@ -359,7 +363,10 @@ namespace Thumper_Custom_Level_Editor
             if (filenamedialog.ShowDialog() == DialogResult.Yes) {
                 newfilename = filenamedialog.txtWorkingRename.Text;
                 newfilepath = $@"{workingfolder}\{filetype}_{newfilename}.txt";
-				lockedfiles[$@"{workingfolder}\{oldfilename}.txt"].Close();
+				if (lockedfiles.ContainsKey($@"{workingfolder}\{oldfilename}.txt")) {
+					lockedfiles[$@"{workingfolder}\{oldfilename}.txt"].Close();
+					lockedfiles.Remove($@"{workingfolder}\{oldfilename}.txt");
+				}
                 File.Move($@"{workingfolder}\{oldfilename}.txt", newfilepath);
             }
             //if NO, return and skip the rest below

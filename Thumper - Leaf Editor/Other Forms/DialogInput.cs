@@ -98,6 +98,10 @@ namespace Thumper_Custom_Level_Editor
             mainform.toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject(txtCustomDiff.Text);
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
             if (mainform.workingfolder != null && isthisnew == false && mainform.workingfolder != levelpath) {
+                foreach (var fs in mainform.lockedfiles) {
+                    fs.Value.Close();
+                }
+                mainform.lockedfiles.Clear();
                 Directory.Move(mainform.workingfolder, levelpath);
                 //if level name changes, should update the config file
                 if (File.Exists($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt"))
@@ -107,7 +111,8 @@ namespace Thumper_Custom_Level_Editor
                 Directory.CreateDirectory(levelpath);
             }
             //then write the file to the new folder that was created from the form
-            File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+            //File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+
             //these 4 files below are required defaults of new levels.
             //create them if they don't exist
             if (!File.Exists($@"{levelpath}\samp_default.txt")) {
@@ -232,6 +237,7 @@ namespace Thumper_Custom_Level_Editor
             ///
             ///create a default master file and open it
             mainform.workingfolder = workingfolder;
+            mainform.WriteFileLock(mainform.filelocklevel, level_details);
             if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
                 mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
                 mainform.WriteMaster();

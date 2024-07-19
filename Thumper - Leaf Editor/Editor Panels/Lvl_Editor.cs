@@ -29,8 +29,10 @@ namespace Thumper_Custom_Level_Editor
 					ShowPanel(true, panelLevel);
 
 					if (filelocklvl != null) filelocklvl.Close();
-					filelocklvl = new FileStream(_loadedlvl, FileMode.Open, FileAccess.ReadWrite);
-					lockedfiles.Add(_loadedlvl, filelocklvl);
+					if (value != null) {
+						filelocklvl = new FileStream(_loadedlvl, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+						lockedfiles.Add(_loadedlvl, filelocklvl);
+					}
 				}
 			}
 		}

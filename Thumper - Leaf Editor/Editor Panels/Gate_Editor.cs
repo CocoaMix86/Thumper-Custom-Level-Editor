@@ -28,8 +28,10 @@ namespace Thumper_Custom_Level_Editor
 					ShowPanel(true, panelGate);
 
 					if (filelockgate != null) filelockgate.Close();
-					filelockgate = new FileStream(_loadedgate, FileMode.Open, FileAccess.ReadWrite);
-					lockedfiles.Add(_loadedgate, filelockgate);
+					if (value != null) {
+						filelockgate = new FileStream(_loadedgate, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+						lockedfiles.Add(_loadedgate, filelockgate);
+					}
 				}
 			}
 		}
