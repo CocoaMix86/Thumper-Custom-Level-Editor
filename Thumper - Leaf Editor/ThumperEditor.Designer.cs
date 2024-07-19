@@ -5655,14 +5655,13 @@
             this.panelRawData.Controls.Add(this.lblRawData);
             this.panelRawData.Controls.Add(this.btnRawImport);
             this.panelRawData.Controls.Add(this.richRawTrackData);
-            this.panelRawData.Location = new System.Drawing.Point(212, 426);
+            this.panelRawData.Location = new System.Drawing.Point(230, 410);
             this.panelRawData.Name = "panelRawData";
-            this.panelRawData.Size = new System.Drawing.Size(929, 47);
+            this.panelRawData.Size = new System.Drawing.Size(900, 62);
             this.panelRawData.TabIndex = 139;
             // 
             // btnRawImport
             // 
-            this.btnRawImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRawImport.BackColor = System.Drawing.Color.Gray;
             this.btnRawImport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -5677,7 +5676,8 @@
             // 
             // richRawTrackData
             // 
-            this.richRawTrackData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.richRawTrackData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richRawTrackData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.richRawTrackData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -5686,7 +5686,7 @@
             this.richRawTrackData.ForeColor = System.Drawing.Color.White;
             this.richRawTrackData.Location = new System.Drawing.Point(101, 0);
             this.richRawTrackData.Name = "richRawTrackData";
-            this.richRawTrackData.Size = new System.Drawing.Size(826, 44);
+            this.richRawTrackData.Size = new System.Drawing.Size(797, 59);
             this.richRawTrackData.TabIndex = 26;
             this.richRawTrackData.Text = "raw track data";
             // 
