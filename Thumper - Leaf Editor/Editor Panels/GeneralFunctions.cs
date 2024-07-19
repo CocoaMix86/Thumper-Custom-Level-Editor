@@ -303,7 +303,7 @@ namespace Thumper_Custom_Level_Editor
         {
             string referencefiles = "";
             //search all files in the project folder
-            foreach (string file in Directory.GetFiles(workingfolder)) {
+            foreach (string file in Directory.GetFiles(workingfolder).Where(x => x.StartsWith("leaf_") || x.StartsWith("lvl_") || x.StartsWith("gate_") || x.StartsWith("master_"))) {
                 //skip self to not include self
                 if (file == filepath)
                     continue;
