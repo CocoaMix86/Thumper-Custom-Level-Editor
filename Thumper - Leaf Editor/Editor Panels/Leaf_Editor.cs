@@ -669,9 +669,9 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-			using (StreamWriter sr = new StreamWriter(new NonClosingStreamWrapper(filelockleaf))) {
+			//using (StreamWriter sr = new StreamWriter(new NonClosingStreamWrapper(filelockleaf))) {
 				File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			}
+			//}
 			SaveLeaf(true, "Saved", "", true);
 			lblTrackFileName.Text = $"Leaf Editor ⮞ {_save["obj_name"]}";
 			//update beat counts in loaded lvl if need be

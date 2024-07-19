@@ -407,6 +407,10 @@ namespace Thumper_Custom_Level_Editor
 			//show FolderBrowser, and then set "game_dir" to whatever is chosen
 			PlaySound("UIfolderopen");
 			if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
+				if (!File.Exists($@"{cfd_lvl.FileName}\LEVEL DETAILS.txt")) {
+					MessageBox.Show("This folder did not contain a LEVEL DETAILS.txt", "Level load fail");
+					return;
+                }
 				workingfolder = cfd_lvl.FileName;
 				panelRecentFiles.Visible = false;
 				PlaySound("UIfolderclose");
