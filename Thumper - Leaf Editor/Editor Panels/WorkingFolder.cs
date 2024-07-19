@@ -153,6 +153,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnWorkEditDetails_Click(object sender, EventArgs e)
 		{
+			if (workingfolder == null)
+				return;
 			editLevelDetailsToolStripMenuItem_Click(null, null);
 		}
 
