@@ -459,12 +459,9 @@ namespace Thumper_Custom_Level_Editor
         private void editLevelDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dynamic _load = new JObject();
-            try {
-                //atempt to parse JSON of LEVEL DETAILS. This wil lalso take care of the situation if it doesn't exist
-                _load = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
-            }
-            catch { }
             DialogInput customlevel = new(this, false);
+            //atempt to parse JSON of LEVEL DETAILS. This wil lalso take care of the situation if it doesn't exist
+            _load = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
             //if the LEVEL DETAILS file is missing, or missing parameters, this fill fill the blanks will empty space
             customlevel.txtCustomName.Text = _load.ContainsKey("level_name") ? (string)_load["level_name"] : "";
             customlevel.txtCustomDiff.Text = _load.ContainsKey("difficulty") ? (string)_load["difficulty"] : "";
