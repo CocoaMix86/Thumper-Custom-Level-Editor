@@ -41,6 +41,8 @@ namespace Thumper_Custom_Level_Editor
 		List<LvlLeafData> clipboardleaf = new();
 		List<string> clipboardpaths = new();
 		List<int> idxtocolor = new();
+
+		FileStream filelocklvl;
 		#endregion
 
 		#region EventHandlers
@@ -361,7 +363,8 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
-			File.WriteAllText(_loadedlvl, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
+			WriteFileLock(filelocklvl, tosave);
 			SaveLvl(true, true);
 			lblLvlName.Text = $"Lvl Editor ⮞ {_save["obj_name"]}";
 			//reload samples on save
@@ -783,6 +786,9 @@ namespace Thumper_Custom_Level_Editor
 			loadinglvl = false;
 			SaveLvl(true);
 			ColorLvlVolumeSequencer();
+
+			if (filelocklvl != null) filelocklvl.Close();
+			filelocklvl = new FileStream(_loadedlvl, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public void InitializeLvlStuff()

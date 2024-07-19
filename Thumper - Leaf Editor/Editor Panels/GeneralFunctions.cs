@@ -337,6 +337,15 @@ namespace Thumper_Custom_Level_Editor
 
             return r;
         }
+
+        public void WriteFileLock(FileStream fs, string texttowrite)
+        {
+            using (StreamWriter sr = new StreamWriter(fs, System.Text.Encoding.UTF8, texttowrite.Length, true)) {
+                //File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
+                fs.SetLength(0);
+                sr.Write(texttowrite);
+            }
+        }
     }
 
     public static class ExtensionMethodClass

@@ -669,9 +669,8 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-			//using (StreamWriter sr = new StreamWriter(new NonClosingStreamWrapper(filelockleaf))) {
-				File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
-			//}
+			string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
+			WriteFileLock(filelockleaf, tosave);
 			SaveLeaf(true, "Saved", "", true);
 			lblTrackFileName.Text = $"Leaf Editor ⮞ {_save["obj_name"]}";
 			//update beat counts in loaded lvl if need be
@@ -1663,7 +1662,8 @@ namespace Thumper_Custom_Level_Editor
 				SaveLeafColors(true, Color.Maroon);
 			}
 
-			filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+			if (filelockleaf != null) filelockleaf.Close();
+			filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite);
         }
 
 		private void EnableLeafButtons(bool enable)
