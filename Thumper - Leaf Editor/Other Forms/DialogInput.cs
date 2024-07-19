@@ -102,7 +102,8 @@ namespace Thumper_Custom_Level_Editor
                     fs.Value.Close();
                 }
                 mainform.lockedfiles.Clear();
-                Directory.Move(mainform.workingfolder, levelpath);
+                Directory.Move(mainform.workingfolder, $"{levelpath}_");
+                Directory.Move($"{levelpath}_", $"{levelpath}");
                 //if level name changes, should update the config file
                 if (File.Exists($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt"))
                     File.Move($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt", $@"{levelpath}\config_{input.txtCustomName.Text}.txt");
@@ -255,11 +256,15 @@ namespace Thumper_Custom_Level_Editor
             btnCustomSave.Enabled = false;
             bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
             bool exists = Directory.Exists($@"{Path.GetDirectoryName(mainform.workingfolder)}\{txtCustomName.Text}") && txtCustomName.Text != Path.GetFileName(mainform.workingfolder);
+            bool samefolder = $@"{txtCustomPath.Text.ToLower()}\{txtCustomName.Text.ToLower()}" == mainform.workingfolder.ToLower();
             bool endsindot = txtCustomName.Text.TrimEnd().EndsWith(".");
 
             if (illegal) {
                 lblNameError.Visible = true;
                 lblNameError.Text = "Illegal characters in name";
+            }
+            else if (samefolder) {
+                btnCustomSave.Enabled = true;
             }
             else if (exists) {
                 lblNameError.Visible = true;
