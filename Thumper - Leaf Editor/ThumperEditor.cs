@@ -89,6 +89,7 @@ namespace Thumper_Custom_Level_Editor
         public string LevelToLoad;
         private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         FileStream filelocklevel;
+        Dictionary<string, FileStream> lockedfiles = new();
         #endregion
 
         public FormLeafEditor(string LevelFromArg)

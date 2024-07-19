@@ -27,8 +27,13 @@ namespace Thumper_Custom_Level_Editor
 					ResetSample();
 				}
 				if (loadedsample != value) {
+					if (loadedsample != null && lockedfiles.ContainsKey(loadedsample)) lockedfiles.Remove(loadedsample);
 					loadedsample = value;
 					ShowPanel(true, panelSample);
+
+					if (filelocksample != null) filelocksample.Close();
+					filelocksample = new FileStream(_loadedsample, FileMode.Open, FileAccess.ReadWrite);
+					lockedfiles.Add(_loadedsample, filelocksample);
 				}
 			}
 		}
@@ -441,9 +446,6 @@ namespace Thumper_Custom_Level_Editor
 			///set save flag (samples just loaded, has no changes)
 			samplejson = _load;
 			SaveSample(true);
-
-			if (filelocksample != null) filelocksample.Close();
-			filelocksample = new FileStream(_loadedsample, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public void SaveSample(bool save, bool playsound = false)

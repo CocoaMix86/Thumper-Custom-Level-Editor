@@ -23,8 +23,13 @@ namespace Thumper_Custom_Level_Editor
 					ResetGate();
 				}
 				if (loadedgate != value) {
+					if (loadedgate != null && lockedfiles.ContainsKey(loadedgate)) lockedfiles.Remove(loadedgate);
 					loadedgate = value;
 					ShowPanel(true, panelGate);
+
+					if (filelockgate != null) filelockgate.Close();
+					filelockgate = new FileStream(_loadedgate, FileMode.Open, FileAccess.ReadWrite);
+					lockedfiles.Add(_loadedgate, filelockgate);
 				}
 			}
 		}
@@ -418,9 +423,6 @@ namespace Thumper_Custom_Level_Editor
 			///set save flag (gate just loaded, has no changes)
 			gatejson = _load;
 			SaveGate(true);
-
-			if (filelockgate != null) filelockgate.Close();
-			filelockgate = new FileStream(_loadedgate, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public void SaveGate(bool save, bool playsound = false)

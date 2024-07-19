@@ -23,8 +23,13 @@ namespace Thumper_Custom_Level_Editor
 					ResetMaster();
 				}
 				if (loadedmaster != value) {
+					if (loadedmaster != null && lockedfiles.ContainsKey(loadedmaster)) lockedfiles.Remove(loadedmaster);
 					loadedmaster = value;
 					ShowPanel(true, panelMaster);
+
+					if (filelockmaster != null) filelockmaster.Close();
+					filelockmaster = new FileStream(_loadedmaster, FileMode.Open, FileAccess.ReadWrite);
+					lockedfiles.Add(_loadedmaster, filelockmaster);
 				}
 			}
 		}
@@ -55,7 +60,7 @@ namespace Thumper_Custom_Level_Editor
 			dynamic _load = null;
 
 			//show a different confirmation message if the selected item is gate or lvl
-			if (_masterlvls[e.RowIndex].lvlname == "<none>") {
+			if (_masterlvls[e.RowIndex].lvlname is "<none>" or "") {
 				if ((!_savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
 					_file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
 					if (File.Exists($@"{workingfolder}\gate_{_file}.txt")) {
@@ -484,9 +489,6 @@ namespace Thumper_Custom_Level_Editor
 			masterjson = _load;
 			btnRevertMaster.Enabled = true;
 			btnMasterRuntime.Enabled = true;
-
-			if (filelockmaster != null) filelockmaster.Close();
-			filelockmaster = new FileStream(_loadedmaster, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public void LoadConfig()

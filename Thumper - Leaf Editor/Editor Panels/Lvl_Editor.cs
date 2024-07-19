@@ -24,8 +24,13 @@ namespace Thumper_Custom_Level_Editor
 					ResetLvl();
 				}
 				else if (loadedlvl != value) {
+					if (loadedlvl != null && lockedfiles.ContainsKey(loadedlvl)) lockedfiles.Remove(loadedlvl);
 					loadedlvl = value;
 					ShowPanel(true, panelLevel);
+
+					if (filelocklvl != null) filelocklvl.Close();
+					filelocklvl = new FileStream(_loadedlvl, FileMode.Open, FileAccess.ReadWrite);
+					lockedfiles.Add(_loadedlvl, filelocklvl);
 				}
 			}
 		}
@@ -785,9 +790,6 @@ namespace Thumper_Custom_Level_Editor
 			loadinglvl = false;
 			SaveLvl(true);
 			ColorLvlVolumeSequencer();
-
-			if (filelocklvl != null) filelocklvl.Close();
-			filelocklvl = new FileStream(_loadedlvl, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public void InitializeLvlStuff()

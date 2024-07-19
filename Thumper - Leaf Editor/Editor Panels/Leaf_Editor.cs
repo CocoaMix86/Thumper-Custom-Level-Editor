@@ -30,8 +30,13 @@ namespace Thumper_Custom_Level_Editor
 					ResetLeaf();
 				}
 				if (loadedleaf != value) {
+					if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) lockedfiles.Remove(loadedleaf);
 					loadedleaf = value;
 					ShowPanel(true, panelLeaf);
+
+					if (filelockleaf != null) filelockleaf.Close();
+					filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+					lockedfiles.Add(_loadedleaf, filelockleaf);
 				}
 			}
 		}
@@ -1660,9 +1665,6 @@ namespace Thumper_Custom_Level_Editor
 				//set save flag to true, since it just barely loaded
 				SaveLeafColors(true, Color.Maroon);
 			}
-
-			if (filelockleaf != null) filelockleaf.Close();
-			filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
         }
 
 		private void EnableLeafButtons(bool enable)

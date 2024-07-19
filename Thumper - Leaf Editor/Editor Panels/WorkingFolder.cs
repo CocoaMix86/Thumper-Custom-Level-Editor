@@ -359,8 +359,8 @@ namespace Thumper_Custom_Level_Editor
             if (filenamedialog.ShowDialog() == DialogResult.Yes) {
                 newfilename = filenamedialog.txtWorkingRename.Text;
                 newfilepath = $@"{workingfolder}\{filetype}_{newfilename}.txt";
+				lockedfiles[$@"{workingfolder}\{oldfilename}.txt"].Close();
                 File.Move($@"{workingfolder}\{oldfilename}.txt", newfilepath);
-                workingfolderFiles.SelectedCells[1].Value = $@"{filetype}_{filenamedialog.txtWorkingRename.Text}";
             }
             //if NO, return and skip the rest below
             else
@@ -368,6 +368,7 @@ namespace Thumper_Custom_Level_Editor
 
             FindInstancesAndRename(file[1], newfilename, filetype);
 			SaveFileType(filetype, newfilepath);
+			btnWorkRefresh_Click(null, null);
 		}
 		//Duplicate file
 		private void duplicateToolStripMenuItem_Click(object sender, EventArgs e) => btnWorkCopy_Click(null, null);
