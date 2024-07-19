@@ -59,6 +59,8 @@ namespace Thumper_Custom_Level_Editor
 		readonly List<string> _bucket3 = new() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
 		dynamic gatejson;
         readonly ObservableCollection<GateLvlData> _gatelvls = new();
+
+		FileStream filelockgate;
 		#endregion
 
 		#region EventHandlers
@@ -71,18 +73,18 @@ namespace Thumper_Custom_Level_Editor
 			//Do nothing if not selecting the lvl name
 			if (e.ColumnIndex != 0 || e.RowIndex == -1)
 				return;
+			dynamic _load;
 			//gateLvlList_RowEnter(sender, e);
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
 				string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");
-				dynamic _load;
-				try {
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
+				if (File.Exists($@"{workingfolder}\lvl_{_file}.txt")) {
+					_load = LoadFileLock($@"{workingfolder}\lvl_{_file}.txt");
+					_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 				}
-				catch {
-					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
+				else {
+					MessageBox.Show("This lvl does not exist in the Level folder.");
 					return;
 				}
-				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 				//load the selected lvl
 				LoadLvl(_load);
 			}
@@ -145,7 +147,7 @@ namespace Thumper_Custom_Level_Editor
                     //storing the filename in temp so it doesn't overwrite _loadedgate in case it fails the check in LoadGate()
                     _loadedgatetemp = ofd.FileName;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    dynamic _load = LoadFileLock(ofd.FileName);
                     LoadGate(_load);
                 }
             }
@@ -196,7 +198,7 @@ namespace Thumper_Custom_Level_Editor
 		{
             //write contents direct to file without prompting save dialog
             JObject _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
-			File.WriteAllText(_loadedgate, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			WriteFileLock(filelockgate, _save);
 			SaveGate(true, true);
 			lblGateName.Text = $"Gate Editor ⮞ {_save["obj_name"]}";
 		}
@@ -261,7 +263,7 @@ namespace Thumper_Custom_Level_Editor
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 //parse leaf to JSON
-                dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                dynamic _load = LoadFileLock(ofd.FileName);
                 //check if file being loaded is actually a leaf. Can do so by checking the JSON key
                 if ((string)_load["obj_type"] != "SequinLevel") {
                     MessageBox.Show("This does not appear to be a lvl file!", "Lvl load error");
@@ -416,6 +418,9 @@ namespace Thumper_Custom_Level_Editor
 			///set save flag (gate just loaded, has no changes)
 			gatejson = _load;
 			SaveGate(true);
+
+			if (filelockgate != null) filelockgate.Close();
+			filelockgate = new FileStream(_loadedgate, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public void SaveGate(bool save, bool playsound = false)

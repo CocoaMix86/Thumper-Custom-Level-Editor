@@ -74,6 +74,9 @@ namespace Thumper_Custom_Level_Editor
 
                     projectjson = JsonConvert.DeserializeObject(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt").Replace('#', ' '));
                     toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
+
+                    if (filelocklevel != null) filelocklevel.Close();
+                    filelocklevel = new FileStream($@"{workingfolder}\LEVEL DETAILS.txt", FileMode.Open, FileAccess.ReadWrite);
                 }
             }
         }
@@ -85,6 +88,7 @@ namespace Thumper_Custom_Level_Editor
         public string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
         private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+        FileStream filelocklevel;
         #endregion
 
         public FormLeafEditor(string LevelFromArg)
@@ -454,7 +458,7 @@ namespace Thumper_Custom_Level_Editor
             dynamic _load = new JObject();
             try {
                 //atempt to parse JSON of LEVEL DETAILS. This wil lalso take care of the situation if it doesn't exist
-                _load = JsonConvert.DeserializeObject(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt").Replace('#', ' '));
+                _load = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
             }
             catch { }
             DialogInput customlevel = new(this, false);

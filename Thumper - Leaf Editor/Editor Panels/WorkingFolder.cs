@@ -1,5 +1,4 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -8,6 +7,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -36,7 +37,7 @@ namespace Thumper_Custom_Level_Editor
 					return;
 				}
 				//atempt to parse JSON
-				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_selectedfilename), "#.*", ""));
+				_load = LoadFileLock(_selectedfilename);
 			}
 			catch (Exception ex) {
 				//return method if parse fails
@@ -129,7 +130,7 @@ namespace Thumper_Custom_Level_Editor
 					return;
 				}
 				//atempt to parse JSON
-				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_selectedfilename), "#.*", ""));
+				_load = LoadFileLock(_selectedfilename);
 			}
 			catch {
 				//return method if parse fails
@@ -173,7 +174,7 @@ namespace Thumper_Custom_Level_Editor
 				//upon loading a level folder, immediately open the MASTER file
 				if (filetype == "master") {
 					if (_loadedmaster != file) {
-						dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(file), "#.*", ""));
+						dynamic _load = LoadFileLock(file);
 						_loadedmastertemp = file;
 						LoadMaster(_load);
 						if (!panelMaster.Visible && !masterEditorToolStripMenuItem.Checked)
@@ -273,7 +274,7 @@ namespace Thumper_Custom_Level_Editor
 			string filecontents = File.ReadAllText($@"{workingfolder}\{file[0]}_{newfilename}.txt").Replace($"{file[1]}.{file[0]}", $"{newfilename}.{file[0]}");
 			File.WriteAllText($@"{workingfolder}\{file[0]}_{newfilename}.txt", filecontents);
 			//add new file to workingfolder DGV
-			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject(file[0]), $@"{file[0]}_{newfilename}"});
+			btnWorkRefresh_Click(null, null);
 		}
 
 		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;
@@ -455,36 +456,51 @@ namespace Thumper_Custom_Level_Editor
 			object _load;
 			if (filetype == "leaf") {
 				foreach (string file in Directory.GetFiles(workingfolder, "lvl_*.txt")) {
-					string text = File.ReadAllText(file);
-					text = text.Replace($"{oldname}.leaf", $"{newname}.leaf");
-					File.WriteAllText(file, text);
+					string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None)  .Replace($"{oldname}.leaf", $"{newname}.leaf");
+					dynamic updated = JsonConvert.DeserializeObject(text);
+					if (file == _loadedlvl)
+						WriteFileLock(filelocklvl, updated);
+					else
+						File.WriteAllText(file, text);
 				}
 				if (_loadedlvl != null) {
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedlvl), "#.*", ""));
+					_load = LoadFileLock(_loadedlvl);
 					LoadLvl(_load);
 				}
 			}
 			else if (filetype == "lvl") {
 				foreach (string file in Directory.GetFiles(workingfolder).Where(f => f.Contains("gate_") || f.Contains("master_"))) {
-					string text = File.ReadAllText(file);
-					text = text.Replace($"{oldname}.lvl", $"{newname}.lvl");
-					File.WriteAllText(file, text);
+					string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None)  .Replace($"{oldname}.lvl", $"{newname}.lvl");
+					dynamic updated = JsonConvert.DeserializeObject(text);
+					if (file == _loadedmaster)
+						WriteFileLock(filelockmaster, updated);
+					else if (file == _loadedgate)
+						WriteFileLock(filelockgate, updated);
+					else
+						File.WriteAllText(file, text);
 				}
 				if (_loadedgate != null) {
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedgate), "#.*", ""));
+					_load = LoadFileLock(_loadedgate);
 					LoadGate(_load);
 				}
-				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
-				LoadMaster(_load);
+				if (_loadedmaster != null) {
+					_load = LoadFileLock(_loadedmaster);
+					LoadMaster(_load);
+				}
 			}
 			else if (filetype == "gate") {
 				foreach (string file in Directory.GetFiles(workingfolder, "master_*.txt")) {
-					string text = File.ReadAllText(file);
-					text = text.Replace($"{oldname}.gate", $"{newname}.gate");
-					File.WriteAllText(file, text);
+					string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None)  .Replace($"{oldname}.gate", $"{newname}.gate");
+					dynamic updated = JsonConvert.DeserializeObject(text);
+					if (file == _loadedmaster)
+						WriteFileLock(filelockmaster, updated);
+					else
+						File.WriteAllText(file, text);
 				}
-				_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_loadedmaster), "#.*", ""));
-				LoadMaster(_load);
+				if (_loadedmaster != null) {
+					_load = LoadFileLock(_loadedmaster);
+					LoadMaster(_load);
+				}
 			}
 		}
 	}

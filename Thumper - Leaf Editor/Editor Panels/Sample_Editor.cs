@@ -36,6 +36,8 @@ namespace Thumper_Custom_Level_Editor
 		string _loadedsampletemp;
 		dynamic samplejson;
 		ObservableCollection<SampleData> _samplelist = new();
+
+		FileStream filelocksample;
 		#endregion
 
 		#region EventHandlers
@@ -153,7 +155,7 @@ namespace Thumper_Custom_Level_Editor
                     //storing the filename in temp so it doesn't overwrite _loadedsample in case it fails the check in LoadSample()
                     _loadedsampletemp = ofd.FileName;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    dynamic _load = LoadFileLock(ofd.FileName);
                     LoadSample(_load);
                 }
             }
@@ -204,7 +206,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //write contents direct to file without prompting save dialog
             JObject _save = SampleBuildSave();
-			File.WriteAllText(_loadedsample, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			WriteFileLock(filelocksample, _save);
 			SaveSample(true, true);
 			lblSampleEditor.Text = $"Sample Editor ⮞ {Path.GetFileNameWithoutExtension(_loadedsample)}";
 		}
@@ -439,6 +441,9 @@ namespace Thumper_Custom_Level_Editor
 			///set save flag (samples just loaded, has no changes)
 			samplejson = _load;
 			SaveSample(true);
+
+			if (filelocksample != null) filelocksample.Close();
+			filelocksample = new FileStream(_loadedsample, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public void SaveSample(bool save, bool playsound = false)

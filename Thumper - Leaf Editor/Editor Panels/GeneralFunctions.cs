@@ -7,6 +7,9 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -304,7 +307,7 @@ namespace Thumper_Custom_Level_Editor
                 //skip self to not include self
                 if (file == filepath)
                     continue;
-                string text = File.ReadAllText(file);
+                string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None);
                 //check if the file we're searching contains the obj_name
                 if (text.Contains($"{_load["obj_name"]}")) {
                     referencefiles += Path.GetFileNameWithoutExtension(file) + '\n';
@@ -338,13 +341,26 @@ namespace Thumper_Custom_Level_Editor
             return r;
         }
 
-        public void WriteFileLock(FileStream fs, string texttowrite)
+        public void WriteFileLock(FileStream fs, JObject _save)
         {
-            using (StreamWriter sr = new StreamWriter(fs, System.Text.Encoding.UTF8, texttowrite.Length, true)) {
-                //File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_save, Formatting.Indented));
+            string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
+            using (StreamWriter sr = new StreamWriter(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
                 fs.SetLength(0);
-                sr.Write(texttowrite);
+                sr.Write(tosave);
             }
+        }
+
+        public dynamic LoadFileLock(string _selectedfilename)
+        {
+            dynamic _load;
+            ///reference:
+            ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
+            using (var fileStream = new FileStream(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var textReader = new StreamReader(fileStream)) {
+                _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
+            }
+
+            return _load;
         }
     }
 

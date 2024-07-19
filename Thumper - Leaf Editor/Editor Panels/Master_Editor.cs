@@ -33,6 +33,8 @@ namespace Thumper_Custom_Level_Editor
 		dynamic masterjson;
 		List<MasterLvlData> clipboardmaster = new();
 		ObservableCollection<MasterLvlData> _masterlvls = new();
+
+		FileStream filelockmaster;
 		#endregion
 
 		#region EventHandlers
@@ -53,31 +55,31 @@ namespace Thumper_Custom_Level_Editor
 			dynamic _load = null;
 
 			//show a different confirmation message if the selected item is gate or lvl
-			if (String.IsNullOrEmpty(_masterlvls[e.RowIndex].lvlname)) {
+			if (_masterlvls[e.RowIndex].lvlname == "<none>") {
 				if ((!_savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
 					_file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
-					try {
-						_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\gate_{_file}.txt"), "#.*", ""));
+					if (File.Exists($@"{workingfolder}\gate_{_file}.txt")) {
+						_load = LoadFileLock($@"{workingfolder}\gate_{_file}.txt");
+						_loadedgatetemp = $@"{workingfolder}\gate_{_file}.txt";
 					}
-					catch {
-						MessageBox.Show($@"Could not locate ""gate_{_file}.txt"" in the same folder as this master. Did you add this gate from a different folder?");
+					else {
+						MessageBox.Show("This gate does not exist in the Level folder.");
 						return;
 					}
-					_loadedgatetemp = $@"{workingfolder}\gate_{_file}.txt";
 				}
 				else
 					return;
 			}
 			else if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
 				_file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
-				try {
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
+				if (File.Exists($@"{workingfolder}\lvl_{_file}.txt")) {
+					_load = LoadFileLock($@"{workingfolder}\lvl_{_file}.txt");
+					_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 				}
-				catch {
-					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this lvl from a different folder?");
+				else {
+					MessageBox.Show("This lvl does not exist in the Level folder.");
 					return;
 				}
-				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 			}
 			else
 				return;
@@ -197,8 +199,8 @@ namespace Thumper_Custom_Level_Editor
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedmaster in case it fails the check in LoadMaster()
                     _loadedmastertemp = ofd.FileName;
-                    //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+					//load json from file into _load. The regex strips any comments from the text.
+					dynamic _load = LoadFileLock(ofd.FileName);
                     LoadMaster(_load);
                     ///load stand-alone master data
                     //I have to do this here instead of in LoadMaster() because the DataSource for the dropdowns doesn't update until that method exits
@@ -245,7 +247,7 @@ namespace Thumper_Custom_Level_Editor
 		{
             //write contents direct to file without prompting save dialog
             JObject _save = MasterBuildSave();
-			File.WriteAllText(_loadedmaster, JsonConvert.SerializeObject(_save, Formatting.Indented));
+			WriteFileLock(filelockmaster, _save);
 			SaveMaster(true, true);
 			lblMasterName.Text = $"Master Editor - sequin.master";
 
@@ -283,7 +285,7 @@ namespace Thumper_Custom_Level_Editor
 		private void AddFiletoMaster(string path)
         {
 			//parse leaf to JSON
-			dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(path), "#.*", ""));
+			dynamic _load = LoadFileLock(path);
 			//check if file being loaded is actually a leaf. Can do so by checking the JSON key
 			if ((string)_load["obj_type"] is not "SequinLevel" and not "SequinGate") {
 				MessageBox.Show("This does not appear to be a lvl or a gate file!", "File load error");
@@ -482,6 +484,9 @@ namespace Thumper_Custom_Level_Editor
 			masterjson = _load;
 			btnRevertMaster.Enabled = true;
 			btnMasterRuntime.Enabled = true;
+
+			if (filelockmaster != null) filelockmaster.Close();
+			filelockmaster = new FileStream(_loadedmaster, FileMode.Open, FileAccess.ReadWrite);
 		}
 
 		public void LoadConfig()
@@ -516,7 +521,7 @@ namespace Thumper_Custom_Level_Editor
 				string _file = path.Replace(".lvl", "");
 				dynamic _load;
 				try {
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\lvl_{_file}.txt"), "#.*", ""));
+					_load = LoadFileLock($@"{workingfolder}\lvl_{_file}.txt");
 				}
 				catch {
 					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
@@ -654,7 +659,7 @@ namespace Thumper_Custom_Level_Editor
 				else {
 					//load the gate to then loop through all lvls in it
 					int idx = _masterlvl.gatename.LastIndexOf('.');
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($"{workingfolder}\\gate_{_masterlvl.gatename[..idx]}.txt"), "#.*", ""));
+					_load = LoadFileLock($"{workingfolder}\\gate_{_masterlvl.gatename[..idx]}.txt");
 					foreach (dynamic _lvl in _load["boss_patterns"]) {
 						//load the lvl and then loop through its leafs to get beat counts
 						idx = ((string)_lvl["lvl_name"]).LastIndexOf('.');
@@ -683,7 +688,7 @@ namespace Thumper_Custom_Level_Editor
 			//load the lvl and then loop through its leafs to get beat counts
 			if (!File.Exists(path))
 				return 0;
-			dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(path), "#.*", ""));
+			dynamic _load = LoadFileLock(path);
 			foreach (dynamic leaf in _load["leaf_seq"]) {
 				_beatcount += (int)leaf["beat_cnt"];
 			}

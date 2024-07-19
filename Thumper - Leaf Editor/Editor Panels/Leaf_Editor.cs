@@ -669,13 +669,12 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-			string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
-			WriteFileLock(filelockleaf, tosave);
+			WriteFileLock(filelockleaf, _save);
 			SaveLeaf(true, "Saved", "", true);
 			lblTrackFileName.Text = $"Leaf Editor ⮞ {_save["obj_name"]}";
 			//update beat counts in loaded lvl if need be
 			if (_loadedlvl != null)
-				btnLvlRefreshBeats.PerformClick();
+				btnLvlRefreshBeats_Click(null, null);
 		}
 		///LEAF - LOAD FILE
 		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -687,8 +686,8 @@ namespace Thumper_Custom_Level_Editor
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     _loadedleaftemp = ofd.FileName;
-                    object _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
-                    LoadLeaf(_load);
+                    object _load = LoadFileLock(ofd.FileName);
+					LoadLeaf(_load);
                 }
             }
 		}
@@ -703,7 +702,7 @@ namespace Thumper_Custom_Level_Editor
                 ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     _loadedleaftemp = "template";
-                    object _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    object _load = LoadFileLock(ofd.FileName);
                     LoadLeaf(_load);
                 }
             }
@@ -1216,7 +1215,7 @@ namespace Thumper_Custom_Level_Editor
 			_leafsplitbefore.Remove("beat_cnt");
 			_leafsplitbefore.Add("beat_cnt", splitindex);
 			//write data back to file
-			File.WriteAllText(_loadedleaf, JsonConvert.SerializeObject(_leafsplitbefore, Formatting.Indented));
+			WriteFileLock(filelockleaf, _leafsplitbefore);
 
             ///repeat all above for after split file
             JObject _leafsplitafter = LeafBuildSave(newfilename + ".txt");
@@ -1243,7 +1242,7 @@ namespace Thumper_Custom_Level_Editor
 			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
 
 			_loadedleaftemp = $@"{workingfolder}\leaf_{newfilename}.txt";
-			LoadLeaf(JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{newfilename}.txt"), "#.*", "")));
+			LoadLeaf(LoadFileLock($@"{workingfolder}\leaf_{newfilename}.txt"));
 			
 			//update beat counts in loaded lvl if need be
 			if (_loadedlvl != null)
@@ -1663,7 +1662,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 
 			if (filelockleaf != null) filelockleaf.Close();
-			filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite);
+			filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
         }
 
 		private void EnableLeafButtons(bool enable)

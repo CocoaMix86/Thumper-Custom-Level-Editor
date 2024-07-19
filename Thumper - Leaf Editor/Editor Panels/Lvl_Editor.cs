@@ -61,15 +61,15 @@ namespace Thumper_Custom_Level_Editor
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
 				string _file = (_lvlleafs[e.RowIndex].leafname).Replace(".leaf", "");
 				dynamic _load;
-				try {
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{_file}.txt"), "#.*", ""));
+				if (File.Exists($@"{workingfolder}\leaf_{_file}.txt")) {
+					_load = LoadFileLock($@"{workingfolder}\leaf_{_file}.txt");
+					_loadedleaftemp = $@"{workingfolder}\leaf_{_file}.txt";
 				}
-				catch {
-					MessageBox.Show($@"Could not locate ""leaf_{_file}.txt"" in the same folder as this lvl. Did you add this leaf from a different folder?");
+				else {
+					MessageBox.Show("This leaf does not exist in the Level folder.");
 					return;
-				}
+                }
 
-				_loadedleaftemp = $@"{workingfolder}\leaf_{_file}.txt";
 				LoadLeaf(_load);
 			}
 			LvlUpdatePaths(e.RowIndex);
@@ -363,8 +363,7 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
-			string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
-			WriteFileLock(filelocklvl, tosave);
+			WriteFileLock(filelocklvl, _save);
 			SaveLvl(true, true);
 			lblLvlName.Text = $"Lvl Editor ⮞ {_save["obj_name"]}";
 			//reload samples on save
@@ -382,7 +381,7 @@ namespace Thumper_Custom_Level_Editor
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
                     _loadedlvltemp = ofd.FileName;
                     //load json from file into _load. The regex strips any comments from the text.
-                    object _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(ofd.FileName), "#.*", ""));
+                    object _load = LoadFileLock(ofd.FileName);
                     LoadLvl(_load);
                 }
             }
@@ -683,7 +682,7 @@ namespace Thumper_Custom_Level_Editor
 					if (!File.Exists($@"{workingfolder}\leaf_{_file}.txt"))
 						continue;
 					//I need to load the entire document to grab one field from it
-					_load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText($@"{workingfolder}\leaf_{_file}.txt"), "#.*", ""));
+					_load = LoadFileLock($@"{workingfolder}\leaf_{_file}.txt");
 					//if beat_cnt is different than what is loaded, replace it and mark the save flag
 					if (_leaf.beats != (int)_load["beat_cnt"]) {
 						_leaf.beats = (int)_load["beat_cnt"];
@@ -821,7 +820,7 @@ namespace Thumper_Custom_Level_Editor
 		public void AddLeaftoLvl(string path)
         {
 			//parse leaf to JSON
-			dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(path), "#.*", ""));
+			dynamic _load = LoadFileLock(path);
 			//check if file being loaded is actually a leaf. Can do so by checking the JSON key
 			if ((string)_load["obj_type"] != "SequinLeaf") {
 				MessageBox.Show("This does not appear to be a leaf file!", "Leaf load error");
@@ -888,7 +887,7 @@ namespace Thumper_Custom_Level_Editor
 			//iterate over each file
 			foreach (string f in _sampfiles) {
 				//parse file to JSON
-				dynamic _in = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(f), "#.*", ""));
+				dynamic _in = LoadFileLock(f);
 				//iterate over items:[] list to get each sample and add names to list
 				foreach (dynamic _samp in _in["items"]) {
 					_lvlsamples.Add(new SampleData {
