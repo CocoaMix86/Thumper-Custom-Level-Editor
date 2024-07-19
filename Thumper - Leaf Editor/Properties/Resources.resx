@@ -353,6 +353,8 @@ NEW
 🌟 Custom keybinds (Edit &gt; Preferences menu)
 🌟 View your level's total runtime in the Master panel
 🌟 Multiple new objects to use in leafs!
+🌟 New style Difficulty Badges, created by CaptainJul
+🌟 Added "file locks". You won't be able to edit/delete files open in the editor from file explorer.
 
 BUG FIXES
 ✅ object list is collapsed to the left when loading a new leaf
@@ -402,6 +404,8 @@ BUG FIXES
 ✅ master unloads and can't be reopened if you make a new master but then cancel it
 ✅ cell values don't change if the value you enter is the same as the last cell selected
 ✅ Resizing cursor shows up in weird/wrong spots
+✅ Unable to change casing on level name when renaming it
+✅ double-clicking "file name" header in Working Folder panel tries to load non-existent file
 ✅ error when renaming a file to another name that already exist
 ✅ error when creating and saving a leaf with no open project
 ✅ error when pressing "add random tunnel" when no leaf exists in the lvl
@@ -420,12 +424,12 @@ BUG FIXES
 ✅ error when trying to load bad data in Raw import
 ✅ error when trying to paste tracks to a blank leaf
 ✅ error when moving or clearing a track with no set cells
+✅ error when opening a folder that is not a level folder
 
 SUGGESTED ADDITIONS/CHANGES
 ⏺️ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
 ⏺️ allow right-click delete for loop track volume sequencer cells
 ⏺️ dragging the mouse with right click to remove multiple beats in one swoop
-⏺️ "track objects" and "spn_default" have been updated with new objects to use!
 ⏺️ added button to add random tunnels
 ⏺️ added "open level folder" button to File menu
 ⏺️ auto-dock panels on first launch
