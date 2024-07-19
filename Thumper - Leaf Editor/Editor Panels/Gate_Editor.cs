@@ -64,6 +64,7 @@ namespace Thumper_Custom_Level_Editor
         readonly List<string> _bucket1 = new() { "41561eda", "347eebcb", "f8192c30", "0c9ddd9e" };
         readonly List<string> _bucket2 = new() { "fe617306", "3ee2811c", "d4f56308", "092f1784" };
 		readonly List<string> _bucket3 = new() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
+		readonly Dictionary<string, string> gatesentrynames = new() { { "SENTRY_NONE", "None" }, { "SENTRY_SINGLE_LANE", "Single Lane" }, { "SENTRY_MULTI_LANE", "Multi Lane" } };
 		dynamic gatejson;
         readonly ObservableCollection<GateLvlData> _gatelvls = new();
 
@@ -408,7 +409,8 @@ namespace Thumper_Custom_Level_Editor
 			foreach (dynamic _lvl in _load["boss_patterns"]) {
 				_gatelvls.Add(new GateLvlData() {
 					lvlname = _lvl["lvl_name"],
-					sentrytype = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase(),
+					//sentrytype = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase(),
+					sentrytype = gatesentrynames[(string)_lvl["sentry_type"]],
 					bucket = _lvl["bucket_num"]
 				});
 			}
@@ -472,7 +474,8 @@ namespace Thumper_Custom_Level_Editor
 			for (int x = 0; x < _gatelvls.Count; x++) {
 				JObject s = new() {
 					{ "lvl_name", _gatelvls[x].lvlname },
-					{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
+					//{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
+					{ "sentry_type", $"{gatesentrynames.First(e => e.Value == _gatelvls[x].sentrytype).Key}"},
 					{ "bucket_num", _gatelvls[x].bucket }
 				};
 				//if using RANDOM, the buckets and hashes are all different per entry in each bucket

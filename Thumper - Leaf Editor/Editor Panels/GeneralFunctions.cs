@@ -363,7 +363,7 @@ namespace Thumper_Custom_Level_Editor
             return _load;
         }
     }
-
+    /*
     public static class ExtensionMethodClass
     {
         public static string FirstLetterToUpper(this string str)
@@ -383,5 +383,5 @@ namespace Thumper_Custom_Level_Editor
             //str = str.Replace(str.Split(' ')[0], firstword);
             return firstword;
         }
-    }
+    }*/
 }
