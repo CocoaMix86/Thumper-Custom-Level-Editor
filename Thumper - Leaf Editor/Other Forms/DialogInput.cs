@@ -22,6 +22,23 @@ namespace Thumper_Custom_Level_Editor
 			InitializeComponent();
             pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;
             mainform = form;
+            //set the form text fields
+            txtCustomPath.Text = Path.GetDirectoryName(mainform.workingfolder);
+            btnCustomSave.Enabled = true;
+            //set samp pack checkboxes
+            chkLevel1.Checked = File.Exists($@"{mainform.workingfolder}\samp_level1_320bpm.txt");
+            chkLevel2.Checked = File.Exists($@"{mainform.workingfolder}\samp_level2_340bpm.txt");
+            chkLevel3.Checked = File.Exists($@"{mainform.workingfolder}\samp_level3_360bpm.txt");
+            chkLevel4.Checked = File.Exists($@"{mainform.workingfolder}\samp_level4_380bpm.txt");
+            chkLevel5.Checked = File.Exists($@"{mainform.workingfolder}\samp_level5_400bpm.txt");
+            chkLevel6.Checked = File.Exists($@"{mainform.workingfolder}\samp_level6_420bpm.txt");
+            chkLevel7.Checked = File.Exists($@"{mainform.workingfolder}\samp_level7_440bpm.txt");
+            chkLevel8.Checked = File.Exists($@"{mainform.workingfolder}\samp_level8_460bpm.txt");
+            chkLevel9.Checked = File.Exists($@"{mainform.workingfolder}\samp_level9_480bpm.txt");
+            chkDissonance.Checked = File.Exists($@"{mainform.workingfolder}\samp_dissonant.txt");
+            chkGlobal.Checked = File.Exists($@"{mainform.workingfolder}\samp_globaldrones.txt");
+            chkRests.Checked = File.Exists($@"{mainform.workingfolder}\samp_rests.txt");
+            chkMisc.Checked = File.Exists($@"{mainform.workingfolder}\samp_misc.txt");
         }
 
         private void btnCustomFolder_Click(object sender, EventArgs e)

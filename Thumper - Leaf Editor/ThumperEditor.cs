@@ -465,28 +465,11 @@ namespace Thumper_Custom_Level_Editor
             }
             catch { }
             DialogInput customlevel = new(this, false);
-            //set the form text fields to whatever is in LEVEL DETAILS
-            customlevel.txtCustomPath.Text = Path.GetDirectoryName(workingfolder);
-            customlevel.btnCustomSave.Enabled = true;
             //if the LEVEL DETAILS file is missing, or missing parameters, this fill fill the blanks will empty space
             customlevel.txtCustomName.Text = _load.ContainsKey("level_name") ? (string)_load["level_name"] : "";
             customlevel.txtCustomDiff.Text = _load.ContainsKey("difficulty") ? (string)_load["difficulty"] : "";
             customlevel.txtDesc.Text = _load.ContainsKey("description") ? (string)_load["description"] : "";
             customlevel.txtCustomAuthor.Text = _load.ContainsKey("author") ? (string)_load["author"] : "";
-            //set samp pack checkboxes
-            customlevel.chkLevel1.Checked = File.Exists($@"{workingfolder}\samp_level1_320bpm.txt");
-            customlevel.chkLevel2.Checked = File.Exists($@"{workingfolder}\samp_level2_340bpm.txt");
-            customlevel.chkLevel3.Checked = File.Exists($@"{workingfolder}\samp_level3_360bpm.txt");
-            customlevel.chkLevel4.Checked = File.Exists($@"{workingfolder}\samp_level4_380bpm.txt");
-            customlevel.chkLevel5.Checked = File.Exists($@"{workingfolder}\samp_level5_400bpm.txt");
-            customlevel.chkLevel6.Checked = File.Exists($@"{workingfolder}\samp_level6_420bpm.txt");
-            customlevel.chkLevel7.Checked = File.Exists($@"{workingfolder}\samp_level7_440bpm.txt");
-            customlevel.chkLevel8.Checked = File.Exists($@"{workingfolder}\samp_level8_460bpm.txt");
-            customlevel.chkLevel9.Checked = File.Exists($@"{workingfolder}\samp_level9_480bpm.txt");
-            customlevel.chkDissonance.Checked = File.Exists($@"{workingfolder}\samp_dissonant.txt");
-            customlevel.chkGlobal.Checked = File.Exists($@"{workingfolder}\samp_globaldrones.txt");
-            customlevel.chkRests.Checked = File.Exists($@"{workingfolder}\samp_rests.txt");
-            customlevel.chkMisc.Checked = File.Exists($@"{workingfolder}\samp_misc.txt");
             //show the new level folder dialog box
             customlevel.Show();
         }
