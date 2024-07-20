@@ -363,7 +363,9 @@ namespace Thumper_Custom_Level_Editor
 					SaveLeaf(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
 					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
-				else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
+				else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
+					if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
+						return;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					CellValueChanged(e.RowIndex, e.ColumnIndex);
 					_undolistleaf.RemoveAt(1);
