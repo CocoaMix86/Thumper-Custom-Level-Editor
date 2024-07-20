@@ -1643,6 +1643,7 @@ namespace Thumper_Custom_Level_Editor
 			trackEditor.RowHeadersWidth = trackEditor.RowHeadersWidth;
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
 			try {
+				trackEditor.Scroll -= trackEditor_Scroll;
 				trackEditor.FirstDisplayedScrollingRowIndex = 0;
 				trackEditor.FirstDisplayedScrollingColumnIndex = 0;
                 int match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
@@ -1650,8 +1651,11 @@ namespace Thumper_Custom_Level_Editor
 					trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
 					trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;
 				}
+				trackEditor.Scroll += trackEditor_Scroll;
 			}
-			catch { }
+			catch {
+				trackEditor.Scroll += trackEditor_Scroll;
+			}
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 
 			loadingleaf = false;
