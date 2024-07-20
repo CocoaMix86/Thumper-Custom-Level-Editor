@@ -573,7 +573,7 @@ namespace Thumper_Custom_Level_Editor
 			if (_lvlleafs.Count == 0)
 				return;
 			lvlLeafPaths.RowCount++;
-			lvlLeafPaths.Rows[^1].Cells[0].Value = _lvlpaths[rng.Next(0, _lvlpaths.Count)];
+			lvlLeafPaths.Rows[^1].Cells[0].Value = _lvlpaths[rng.Next(1, _lvlpaths.Count)];
 			btnLvlPathDelete.Enabled = true;
 			PlaySound("UItunneladd");
 			SaveLvl(false);
