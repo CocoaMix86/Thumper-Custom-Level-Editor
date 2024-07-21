@@ -32,7 +32,10 @@ namespace Thumper_Custom_Level_Editor
                     }
                     //if different, set it, then repopulate lvls in workingfolder
                     //these are used in the Master Editor panel
-                    if (_workingfolder != null && lockedfiles.ContainsKey($@"{_workingfolder}\LEVEL DETAILS.txt")) lockedfiles.Remove($@"{_workingfolder}\LEVEL DETAILS.txt");
+                    foreach (var i in lockedfiles) {
+                        i.Value.Close();
+                    }
+                    lockedfiles.Clear();
                     _workingfolder = value;
                     ClearPanels();
                     lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
