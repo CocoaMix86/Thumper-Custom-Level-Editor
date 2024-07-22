@@ -233,6 +233,11 @@ namespace Thumper_Custom_Level_Editor
 		///SAVE AS
 		private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			//check if master exists already.
+			if (File.Exists($@"{workingfolder}\master_sequin.txt")) {
+				if (MessageBox.Show("You have a master file already for this Level. Proceeding will overwrite it.\nDo you want to continue?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+					return;
+            }
             using SaveFileDialog sfd = new();
             //filter .txt only
             sfd.Filter = "Thumper Master File (*.txt)|*.txt";
