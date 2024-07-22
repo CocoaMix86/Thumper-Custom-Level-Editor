@@ -1000,6 +1000,7 @@ namespace Thumper_Custom_Level_Editor
             }
 			//then set a single one to null. The "cellvaluechanged" event will handle the rest
 			filledcells[0].Value = null;
+			CellValueChanged(filledcells[0].RowIndex, filledcells[0].ColumnIndex);
 
 			PlaySound("UIdataerase");
 			SaveLeaf(false, $"Cleared {selectedrows.Count} track(s)", $"");
