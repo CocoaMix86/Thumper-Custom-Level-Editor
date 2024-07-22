@@ -45,8 +45,6 @@ namespace Thumper_Custom_Level_Editor
 		string _loadedsampletemp;
 		dynamic samplejson;
 		ObservableCollection<SampleData> _samplelist = new();
-
-		FileStream filelocksample;
 		#endregion
 
 		#region EventHandlers
@@ -215,7 +213,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //write contents direct to file without prompting save dialog
             JObject _save = SampleBuildSave();
-			WriteFileLock(filelocksample, _save);
+			WriteFileLock(lockedfiles[loadedsample], _save);
 			SaveSample(true, true);
 			lblSampleEditor.Text = $"Sample Editor ⮞ {Path.GetFileNameWithoutExtension(_loadedsample)}";
 		}

@@ -370,7 +370,7 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
-			WriteFileLock(filelocklvl, _save);
+			WriteFileLock(lockedfiles[loadedlvl], _save);
 			SaveLvl(true, true);
 			lblLvlName.Text = $"Lvl Editor ⮞ {_save["obj_name"]}";
 			//reload samples on save

@@ -472,7 +472,7 @@ namespace Thumper_Custom_Level_Editor
 					string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None)  .Replace($"{oldname}.leaf", $"{newname}.leaf");
 					dynamic updated = JsonConvert.DeserializeObject(text);
 					if (file == _loadedlvl)
-						WriteFileLock(filelocklvl, updated);
+						WriteFileLock(lockedfiles[loadedlvl], updated);
 					else
 						File.WriteAllText(file, text);
 				}
@@ -486,9 +486,9 @@ namespace Thumper_Custom_Level_Editor
 					string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None)  .Replace($"{oldname}.lvl", $"{newname}.lvl");
 					dynamic updated = JsonConvert.DeserializeObject(text);
 					if (file == _loadedmaster)
-						WriteFileLock(filelockmaster, updated);
+						WriteFileLock(lockedfiles[loadedmaster], updated);
 					else if (file == _loadedgate)
-						WriteFileLock(filelockgate, updated);
+						WriteFileLock(lockedfiles[loadedgate], updated);
 					else
 						File.WriteAllText(file, text);
 				}
@@ -506,7 +506,7 @@ namespace Thumper_Custom_Level_Editor
 					string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None)  .Replace($"{oldname}.gate", $"{newname}.gate");
 					dynamic updated = JsonConvert.DeserializeObject(text);
 					if (file == _loadedmaster)
-						WriteFileLock(filelockmaster, updated);
+						WriteFileLock(lockedfiles[loadedmaster], updated);
 					else
 						File.WriteAllText(file, text);
 				}

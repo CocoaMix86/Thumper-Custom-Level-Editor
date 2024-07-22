@@ -69,8 +69,6 @@ namespace Thumper_Custom_Level_Editor
 		readonly Dictionary<string, string> gatesentrynames = new() { { "SENTRY_NONE", "None" }, { "SENTRY_SINGLE_LANE", "Single Lane" }, { "SENTRY_MULTI_LANE", "Multi Lane" } };
 		dynamic gatejson;
         readonly ObservableCollection<GateLvlData> _gatelvls = new();
-
-		FileStream filelockgate;
 		#endregion
 
 		#region EventHandlers
@@ -208,7 +206,7 @@ namespace Thumper_Custom_Level_Editor
 		{
             //write contents direct to file without prompting save dialog
             JObject _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
-			WriteFileLock(filelockgate, _save);
+			WriteFileLock(lockedfiles[loadedgate], _save);
 			SaveGate(true, true);
 			lblGateName.Text = $"Gate Editor ⮞ {_save["obj_name"]}";
 		}

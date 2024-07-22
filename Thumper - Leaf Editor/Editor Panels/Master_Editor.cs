@@ -42,8 +42,6 @@ namespace Thumper_Custom_Level_Editor
 		dynamic masterjson;
 		List<MasterLvlData> clipboardmaster = new();
 		ObservableCollection<MasterLvlData> _masterlvls = new();
-
-		FileStream filelockmaster;
 		#endregion
 
 		#region EventHandlers
@@ -256,7 +254,7 @@ namespace Thumper_Custom_Level_Editor
 		{
             //write contents direct to file without prompting save dialog
             JObject _save = MasterBuildSave();
-			WriteFileLock(filelockmaster, _save);
+			WriteFileLock(lockedfiles[loadedmaster], _save);
 			SaveMaster(true, true);
 			lblMasterName.Text = $"Master Editor - sequin.master";
 
