@@ -22,7 +22,7 @@ namespace Thumper_Custom_Level_Editor
 				if (value == null) {
 					ResetMaster();
 				}
-				if (loadedmaster != value) {
+				else if (loadedmaster != value) {
 					if (loadedmaster != null && lockedfiles.ContainsKey(loadedmaster)) {
 						lockedfiles[loadedmaster].Close();
 						lockedfiles.Remove(loadedmaster);
