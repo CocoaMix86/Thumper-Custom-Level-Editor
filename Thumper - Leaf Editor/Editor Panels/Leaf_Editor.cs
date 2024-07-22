@@ -30,15 +30,17 @@ namespace Thumper_Custom_Level_Editor
 					ResetLeaf();
 				}
 				if (loadedleaf != value) {
-					if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) lockedfiles.Remove(loadedleaf);
+					if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) {
+						lockedfiles[loadedleaf].Close();
+						lockedfiles.Remove(loadedleaf);
+					}
 					loadedleaf = value;
 					ShowPanel(true, panelLeaf);
-
-					if (filelockleaf != null) filelockleaf.Close();
-					if (value != null) {
-						filelockleaf = new FileStream(_loadedleaf, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
-						lockedfiles.Add(_loadedleaf, filelockleaf);
-					}
+					
+					if (!File.Exists(loadedleaf)) {
+						File.WriteAllText(loadedleaf, "");
+                    }
+					lockedfiles.Add(_loadedleaf, new FileStream(_loadedleaf, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
 				}
 			}
 		}
@@ -65,8 +67,6 @@ namespace Thumper_Custom_Level_Editor
 		public List<CellFunction> _functions = new();
 		public CellFunction _loadedfunction;
 		public List<SaveState> _undolistleaf = new();
-
-		FileStream filelockleaf;
 		#endregion
 		#region EventHandlers
 		///        ///
@@ -678,7 +678,7 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-			WriteFileLock(filelockleaf, _save);
+			WriteFileLock(lockedfiles[_loadedleaf], _save);
 			SaveLeaf(true, "Saved", "", true);
 			lblTrackFileName.Text = $"Leaf Editor ⮞ {_save["obj_name"]}";
 			//update beat counts in loaded lvl if need be
@@ -1224,7 +1224,7 @@ namespace Thumper_Custom_Level_Editor
 			_leafsplitbefore.Remove("beat_cnt");
 			_leafsplitbefore.Add("beat_cnt", splitindex);
 			//write data back to file
-			WriteFileLock(filelockleaf, _leafsplitbefore);
+			WriteFileLock(lockedfiles[_loadedleaf], _leafsplitbefore);
 
             ///repeat all above for after split file
             JObject _leafsplitafter = LeafBuildSave(newfilename + ".txt");

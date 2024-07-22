@@ -55,6 +55,11 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 
+			if (_load == null) {
+				MessageBox.Show("No data parsed in selected file. Try again or replace the file.", "File load error");
+				return;
+            }
+
 			///Send file off to different load methods based on the file type
 			//process SAMP first, since its JSON structure is different, and detectable
 			if (_load.ContainsKey("items")) {

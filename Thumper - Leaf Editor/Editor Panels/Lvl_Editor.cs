@@ -24,15 +24,17 @@ namespace Thumper_Custom_Level_Editor
 					ResetLvl();
 				}
 				else if (loadedlvl != value) {
-					if (loadedlvl != null && lockedfiles.ContainsKey(loadedlvl)) lockedfiles.Remove(loadedlvl);
+					if (loadedlvl != null && lockedfiles.ContainsKey(loadedlvl)) {
+						lockedfiles[loadedlvl].Close();
+						lockedfiles.Remove(loadedlvl);
+					}
 					loadedlvl = value;
 					ShowPanel(true, panelLevel);
 
-					if (filelocklvl != null) filelocklvl.Close();
-					if (value != null) {
-						filelocklvl = new FileStream(_loadedlvl, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
-						lockedfiles.Add(_loadedlvl, filelocklvl);
+					if (!File.Exists(loadedlvl)) {
+						File.WriteAllText(loadedlvl, "");
 					}
+					lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
 				}
 			}
 		}
@@ -48,8 +50,6 @@ namespace Thumper_Custom_Level_Editor
 		List<LvlLeafData> clipboardleaf = new();
 		List<string> clipboardpaths = new();
 		List<int> idxtocolor = new();
-
-		FileStream filelocklvl;
 		#endregion
 
 		#region EventHandlers

@@ -23,15 +23,17 @@ namespace Thumper_Custom_Level_Editor
 					ResetGate();
 				}
 				if (loadedgate != value) {
-					if (loadedgate != null && lockedfiles.ContainsKey(loadedgate)) lockedfiles.Remove(loadedgate);
+					if (loadedgate != null && lockedfiles.ContainsKey(loadedgate)) {
+						lockedfiles[loadedgate].Close();
+						lockedfiles.Remove(loadedgate);
+					}
 					loadedgate = value;
 					ShowPanel(true, panelGate);
 
-					if (filelockgate != null) filelockgate.Close();
-					if (value != null) {
-						filelockgate = new FileStream(_loadedgate, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
-						lockedfiles.Add(_loadedgate, filelockgate);
+					if (!File.Exists(loadedgate)) {
+						File.WriteAllText(loadedgate, "");
 					}
+					lockedfiles.Add(loadedgate, new FileStream(loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
 				}
 			}
 		}
