@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CocoaMix Inc.")]
 [assembly: AssemblyProduct("Thumper Custom Level Editor")]
-[assembly: AssemblyCopyright("Copyright © 2023")]
+[assembly: AssemblyCopyright("Copyright © 2081")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
