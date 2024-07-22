@@ -30,14 +30,31 @@ namespace Thumper_Custom_Level_Editor
                             return;
                         }
                     }
-                    //if different, set it, then repopulate lvls in workingfolder
-                    //these are used in the Master Editor panel
+                    //Try locking LEVEL DETAILS first. If it fails, the level is already open
+                    //in that case, return before doing anything
+                    try {
+                        lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.Read));
+                    }
+                    catch (Exception) {
+                        MessageBox.Show("That level is open already in another instance of the Level Editor.", "Level cannot be opened");
+                        return;
+                    }
+                    //clear previously locked files
                     foreach (var i in lockedfiles) {
                         i.Value.Close();
                     }
                     lockedfiles.Clear();
+                    //update working folder
+                    lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.Read));
                     _workingfolder = value;
+                    //load Level Details into an object so it can be accessed later
+                    projectjson = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
+                    toolstripLevelName.Text = projectjson["level_name"];
+                    toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
+
                     ClearPanels();
+                    //populate lvlsinworkfolder with all .lvl files in the project
+                    //this is needed for some specific dropdowns.
                     lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
                     lvlsinworkfolder.Add("<none>");
                     lvlsinworkfolder.Sort();
@@ -51,17 +68,14 @@ namespace Thumper_Custom_Level_Editor
                     dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 
                     //set Working Folder panel data
-                    lblWorkingFolder.Text = $"Working Folder ⮞ {new DirectoryInfo(value).Name}";
-                    lblWorkingFolder.ToolTipText = $"Working Folder ⮞ {value}";
+                    lblWorkingFolder.Text = $"Working Folder ⮞ {projectjson["level_name"]}";
+                    lblWorkingFolder.ToolTipText = $"Working Folder ⮞ {workingfolder}";
                     //enable buttons
                     btnWorkRefresh.Enabled = true;
                     btnWorkCopy.Enabled = true;
                     editLevelDetailsToolStripMenuItem.Enabled = true;
                     regenerateDefaultFilesToolStripMenuItem.Enabled = true;
                     btnExplorer.Enabled = true;
-                    btnWorkRefresh.PerformClick();
-                    //set window name to the level name
-                    toolstripLevelName.Text = new DirectoryInfo(workingfolder).Name;
                     //add to recent files
                     if (Properties.Settings.Default.Recentfiles.Contains(workingfolder))
                         Properties.Settings.Default.Recentfiles.Remove(workingfolder);
@@ -76,12 +90,8 @@ namespace Thumper_Custom_Level_Editor
                     SaveSample(true);
                     panelRecentFiles.Visible = false;
 
-                    projectjson = JsonConvert.DeserializeObject(File.ReadAllText($@"{workingfolder}\LEVEL DETAILS.txt").Replace('#', ' '));
-                    toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
-
-                    if (filelocklevel != null) filelocklevel.Close();
-                    filelocklevel = new FileStream($@"{workingfolder}\LEVEL DETAILS.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
-                    lockedfiles.Add($@"{workingfolder}\LEVEL DETAILS.txt", filelocklevel);
+                    //once all that is done, refresh the Working Folder list. This automatically opens the Master
+                    btnWorkRefresh.PerformClick();
                 }
             }
         }
