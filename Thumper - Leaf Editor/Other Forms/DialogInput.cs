@@ -95,12 +95,14 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnCustomCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.No;
             this.Close();
         }
 
         private void btnCustomSave_Click(object sender, EventArgs e)
         {
             CreateCustomLevelFolder(this);
+            this.DialogResult = DialogResult.Yes;
             this.Close();
         }
 
@@ -112,24 +114,27 @@ namespace Thumper_Custom_Level_Editor
                 { "description", input.txtDesc.Text },
                 { "author", input.txtCustomAuthor.Text }
             };
+
+            mainform.toolstripLevelName.Text = input.txtCustomName.Text;
             mainform.toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject(txtCustomDiff.Text);
+
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
             if (mainform.workingfolder != null && isthisnew == false && mainform.workingfolder != levelpath) {
                 foreach (var fs in mainform.lockedfiles) {
                     fs.Value.Close();
                 }
                 mainform.lockedfiles.Clear();
-                Directory.Move(mainform.workingfolder, $"{levelpath}_");
-                Directory.Move($"{levelpath}_", $"{levelpath}");
+                //using a random suffix on the end to avoid any folders with same name
+                Directory.Move(mainform.workingfolder, $"{levelpath}_-_-_-_-_wraikoljgsdg");
+                Directory.Move($"{levelpath}_-_-_-_-_wraikoljgsdg", $"{levelpath}");
                 //if level name changes, should update the config file
                 if (File.Exists($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt"))
                     File.Move($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt", $@"{levelpath}\config_{input.txtCustomName.Text}.txt");
             }
+
             if (!Directory.Exists(levelpath)) {
                 Directory.CreateDirectory(levelpath);
             }
-            //then write the file to the new folder that was created from the form
-            //File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
 
             //these 4 files below are required defaults of new levels.
             //create them if they don't exist
@@ -145,123 +150,102 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists($@"{levelpath}\xfm_default.txt")) {
                 File.WriteAllText($@"{levelpath}\xfm_default.txt", Properties.Resources.xfm_default);
             }
-            //finally, set workingfolder
-            string workingfolder = levelpath;
             ///create samp_ files if any boxes are checked
             //level 1
-            if (input.chkLevel1.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level1_320bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level1_320bpm.txt", Properties.Resources.samp_level1_320bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level1_320bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level1_320bpm.txt");
-            }
+            if (input.chkLevel1.Checked)
+                File.WriteAllText($@"{levelpath}\samp_level1_320bpm.txt", Properties.Resources.samp_level1_320bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level1_320bpm.txt");
+            
             //level 2
-            if (input.chkLevel2.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level2_340bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level2_340bpm.txt", Properties.Resources.samp_level2_340bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level2_340bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level2_340bpm.txt");
-            }
+            if (input.chkLevel2.Checked) 
+                    File.WriteAllText($@"{levelpath}\samp_level2_340bpm.txt", Properties.Resources.samp_level2_340bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level2_340bpm.txt");
+            
             //level 3
-            if (input.chkLevel3.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level3_360bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level3_360bpm.txt", Properties.Resources.samp_level3_360bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level3_360bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level3_360bpm.txt");
-            }
+            if (input.chkLevel3.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_level3_360bpm.txt", Properties.Resources.samp_level3_360bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level3_360bpm.txt");
+            
             //level 4
-            if (input.chkLevel4.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level4_380bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level4_380bpm.txt", Properties.Resources.samp_level4_380bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level4_380bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level4_380bpm.txt");
-            }
+            if (input.chkLevel4.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_level4_380bpm.txt", Properties.Resources.samp_level4_380bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level4_380bpm.txt");
+            
             //level 5
-            if (input.chkLevel5.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level5_400bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level5_400bpm.txt", Properties.Resources.samp_level5_400bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level5_400bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level5_400bpm.txt");
-            }
+            if (input.chkLevel5.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_level5_400bpm.txt", Properties.Resources.samp_level5_400bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level5_400bpm.txt");
+            
             //level 6
-            if (input.chkLevel6.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level6_420bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level6_420bpm.txt", Properties.Resources.samp_level6_420bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level6_420bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level6_420bpm.txt");
-            }
+            if (input.chkLevel6.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_level6_420bpm.txt", Properties.Resources.samp_level6_420bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level6_420bpm.txt");
+            
             //level 7
-            if (input.chkLevel7.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level7_440bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level7_440bpm.txt", Properties.Resources.samp_level7_440bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level7_440bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level7_440bpm.txt");
-            }
+            if (input.chkLevel7.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_level7_440bpm.txt", Properties.Resources.samp_level7_440bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level7_440bpm.txt");
+            
             //level 8
-            if (input.chkLevel8.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level8_460bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level8_460bpm.txt", Properties.Resources.samp_level8_460bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level8_460bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level8_460bpm.txt");
-            }
+            if (input.chkLevel8.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_level8_460bpm.txt", Properties.Resources.samp_level8_460bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level8_460bpm.txt");
+            
             //level 9
-            if (input.chkLevel9.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_level9_480bpm.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_level9_480bpm.txt", Properties.Resources.samp_level9_480bpm);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_level9_480bpm.txt")) {
-                File.Delete($@"{workingfolder}\samp_level9_480bpm.txt");
-            }
+            if (input.chkLevel9.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_level9_480bpm.txt", Properties.Resources.samp_level9_480bpm);
+            else 
+                File.Delete($@"{levelpath}\samp_level9_480bpm.txt");
+            
             //Dissonance
-            if (input.chkDissonance.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_dissonant.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_dissonant.txt", Properties.Resources.samp_dissonant);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_dissonant.txt")) {
-                File.Delete($@"{workingfolder}\samp_dissonant.txt");
-            }
+            if (input.chkDissonance.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_dissonant.txt", Properties.Resources.samp_dissonant);
+            else 
+                File.Delete($@"{levelpath}\samp_dissonant.txt");
+            
             //Global Drones
-            if (input.chkGlobal.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_globaldrones.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_globaldrones.txt", Properties.Resources.samp_globaldrones);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_globaldrones.txt")) {
-                File.Delete($@"{workingfolder}\samp_globaldrones.txt");
-            }
+            if (input.chkGlobal.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_globaldrones.txt", Properties.Resources.samp_globaldrones);
+            else 
+                File.Delete($@"{levelpath}\samp_globaldrones.txt");
+            
             //Rests
-            if (input.chkRests.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_rests.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_rests.txt", Properties.Resources.samp_rests);
-            }
-            else if (File.Exists($@"{workingfolder}\samp_rests.txt")) {
-                File.Delete($@"{workingfolder}\samp_rests.txt");
-            }
+            if (input.chkRests.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_rests.txt", Properties.Resources.samp_rests);
+            else 
+                File.Delete($@"{levelpath}\samp_rests.txt");
+            
             //Misc
-            if (input.chkMisc.Checked) {
-                if (!File.Exists($@"{workingfolder}\samp_misc.txt"))
-                    File.WriteAllText($@"{workingfolder}\samp_misc.txt", Properties.Resources.samp_misc);
+            if (input.chkMisc.Checked) 
+                File.WriteAllText($@"{levelpath}\samp_misc.txt", Properties.Resources.samp_misc);
+            else 
+                File.Delete($@"{levelpath}\samp_misc.txt");
+
+
+            if (isthisnew || (isthisnew == false && mainform.workingfolder != levelpath)) {
+                File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
             }
-            else if (File.Exists($@"{workingfolder}\samp_misc.txt")) {
-                File.Delete($@"{workingfolder}\samp_misc.txt");
+            else {
+                mainform.WriteFileLock(mainform.lockedfiles[$@"{levelpath}\LEVEL DETAILS.txt"], level_details);
             }
+            mainform.workingfolder = levelpath;
+
             ///
             ///create a default master file and open it
-            mainform.workingfolder = workingfolder;
-            mainform.WriteFileLock(mainform.lockedfiles[$@"{workingfolder}\LEVEL DETAILS.txt"], level_details);
             if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
                 mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
                 mainform.WriteMaster();
             }
-            if (mainform.workingfolder != workingfolder) {
-                MessageBox.Show("New level folder was created, but not loaded.");
+            if (mainform.workingfolder != levelpath) {
+                MessageBox.Show("New level folder was created, but not loaded.", "Something went wrong...");
                 return;
             }
             mainform.btnWorkRefresh_Click(null, null);
@@ -273,7 +257,7 @@ namespace Thumper_Custom_Level_Editor
             btnCustomSave.Enabled = false;
             bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
             bool exists = Directory.Exists($@"{Path.GetDirectoryName(mainform.workingfolder)}\{txtCustomName.Text}") && txtCustomName.Text != Path.GetFileName(mainform.workingfolder);
-            bool samefolder = $@"{txtCustomPath.Text.ToLower()}\{txtCustomName.Text.ToLower()}" == mainform.workingfolder.ToLower();
+            bool samefolder = $@"{txtCustomPath.Text.ToLower()}\{txtCustomName.Text.ToLower()}" == mainform.workingfolder?.ToLower();
             bool endsindot = txtCustomName.Text.TrimEnd().EndsWith(".");
 
             if (illegal) {

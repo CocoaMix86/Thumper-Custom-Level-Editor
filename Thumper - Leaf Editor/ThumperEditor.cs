@@ -33,10 +33,10 @@ namespace Thumper_Custom_Level_Editor
                     //Try locking LEVEL DETAILS first. If it fails, the level is already open
                     //in that case, return before doing anything
                     try {
-                        lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.Read));
+                        lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                     }
-                    catch (Exception) {
-                        MessageBox.Show("That level is open already in another instance of the Level Editor.", "Level cannot be opened");
+                    catch (Exception ex) {
+                        MessageBox.Show($"That level is open already in another instance of the Level Editor.{ex}", "Level cannot be opened");
                         return;
                     }
                     //clear previously locked files
@@ -45,7 +45,7 @@ namespace Thumper_Custom_Level_Editor
                     }
                     lockedfiles.Clear();
                     //update working folder
-                    lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.Open, FileAccess.ReadWrite, FileShare.Read));
+                    lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                     _workingfolder = value;
                     //load Level Details into an object so it can be accessed later
                     projectjson = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
@@ -451,7 +451,9 @@ namespace Thumper_Custom_Level_Editor
         {
             DialogInput customlevel = new(this, true);
             //show the new level folder dialog box
-            customlevel.Show();
+            if (customlevel.ShowDialog() == DialogResult.Yes) {
+                customlevel.Dispose();
+            }
         }
 
         ///FORM RESIZE
