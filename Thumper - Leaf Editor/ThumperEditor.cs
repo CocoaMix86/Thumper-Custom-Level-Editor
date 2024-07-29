@@ -217,8 +217,6 @@ namespace Thumper_Custom_Level_Editor
             btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
             //colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-            //set panels to their last saved dock
-            SetDockLocations();
             //load recent levels 
             List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
             if (levellist.Count > 0 && LevelToLoad.Length < 2)
@@ -231,14 +229,12 @@ namespace Thumper_Custom_Level_Editor
                 else
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
-
-            //finish loading
-            Properties.Settings.Default.firstrun = false;
-            Properties.Settings.Default.Save();
         }
         ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
+            //set panels to their last saved dock
+            SetDockLocations();
             splitHorizontal.SplitterDistance = (settings.splitterHorz1 == 0) ? splitHorizontal.Height / 2 : settings.splitterHorz1;
             splitTop1.SplitterDistance = (settings.splitterVert1 == 0) ? splitTop1.Width / 3 : settings.splitterVert1;
             splitTop2.SplitterDistance = (settings.splitterVert2 == 0) ? splitTop2.Width / 2 : settings.splitterVert2;
@@ -255,6 +251,10 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
                 Properties.Settings.Default.version = "2.2beta18";
             }
+
+            //finish loading
+            Properties.Settings.Default.firstrun = false;
+            Properties.Settings.Default.Save();
         }
         private void JumpListUpdate()
         {

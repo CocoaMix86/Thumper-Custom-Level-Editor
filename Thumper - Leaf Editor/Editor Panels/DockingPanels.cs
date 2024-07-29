@@ -180,7 +180,7 @@ namespace Thumper_Custom_Level_Editor
             splitHorizontal.SplitterDistance = (int)(splitHorizontal.Height / 2.5);
             splitTop1.SplitterDistance = (int)(splitTop1.Width / 4);
             splitTop2.SplitterDistance = (int)(splitTop2.Width / 1.3);
-            splitBottom1.SplitterDistance = (int)(splitBottom1.Width / 8);
+            splitBottom1.SplitterDistance = (int)(splitBottom1.Width / 6);
             splitBottom2.SplitterDistance = (int)(splitBottom2.Width / 1.3);
 
             leafEditorToolStripMenuItem.Checked = true;
