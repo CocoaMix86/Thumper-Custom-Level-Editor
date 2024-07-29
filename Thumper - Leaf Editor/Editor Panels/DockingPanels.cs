@@ -189,6 +189,14 @@ namespace Thumper_Custom_Level_Editor
             masterEditorToolStripMenuItem.Checked = true;
             workingFolderToolStripMenuItem.Checked = true;
             sampleEditorToolStripMenuItem.Checked = true;
+            //splitter distances
+            Properties.Settings.Default.splitterHorz1 = splitHorizontal.SplitterDistance;
+            Properties.Settings.Default.splitterVert1 = splitTop1.SplitterDistance;
+            Properties.Settings.Default.splitterVert2 = splitTop2.SplitterDistance;
+            Properties.Settings.Default.splitterVert3 = splitBottom1.SplitterDistance;
+            Properties.Settings.Default.splitterVert4 = splitBottom2.SplitterDistance;
+            Properties.Settings.Default.Save();
+            settings = Properties.Settings.Default;
 
             ResetBeeble(null, null);
         }
