@@ -259,6 +259,9 @@ namespace Thumper_Custom_Level_Editor
 		{
             //write contents direct to file without prompting save dialog
             JObject _save = MasterBuildSave();
+			if (!lockedfiles.ContainsKey(loadedmaster)) {
+				lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+			}
 			WriteFileLock(lockedfiles[loadedmaster], _save);
 			SaveMaster(true, true);
 			lblMasterName.Text = $"Master Editor - sequin.master";

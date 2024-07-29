@@ -213,6 +213,9 @@ namespace Thumper_Custom_Level_Editor
         {
             //write contents direct to file without prompting save dialog
             JObject _save = SampleBuildSave();
+			if (!lockedfiles.ContainsKey(loadedsample)) {
+				lockedfiles.Add(loadedsample, new FileStream(loadedsample, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+			}
 			WriteFileLock(lockedfiles[loadedsample], _save);
 			SaveSample(true, true);
 			lblSampleEditor.Text = $"Sample Editor ⮞ {Path.GetFileNameWithoutExtension(_loadedsample)}";

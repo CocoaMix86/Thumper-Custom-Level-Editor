@@ -206,6 +206,9 @@ namespace Thumper_Custom_Level_Editor
 		{
             //write contents direct to file without prompting save dialog
             JObject _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
+			if (!lockedfiles.ContainsKey(_loadedgate)) {
+				lockedfiles.Add(_loadedgate, new FileStream(_loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+			}
 			WriteFileLock(lockedfiles[loadedgate], _save);
 			SaveGate(true, true);
 			lblGateName.Text = $"Gate Editor ⮞ {_save["obj_name"]}";

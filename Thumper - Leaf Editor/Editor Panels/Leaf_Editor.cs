@@ -678,6 +678,9 @@ namespace Thumper_Custom_Level_Editor
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
+			if (!lockedfiles.ContainsKey(_loadedleaf)) {
+				lockedfiles.Add(_loadedleaf, new FileStream(_loadedleaf, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+			}
 			WriteFileLock(lockedfiles[_loadedleaf], _save);
 			SaveLeaf(true, "Saved", "", true);
 			lblTrackFileName.Text = $"Leaf Editor ⮞ {_save["obj_name"]}";
