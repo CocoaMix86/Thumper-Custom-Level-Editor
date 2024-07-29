@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.VisualBasic.FileIO;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -245,7 +246,7 @@ namespace Thumper_Custom_Level_Editor
 					ClearPanels(filetype);
 				}
 				if (File.Exists(filepath))
-					File.Delete(filepath);
+					FileSystem.DeleteFile(filepath, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
 				PlaySound("UIdelete");
 				//call the refresh method so the dgv updates
 				btnWorkRefresh_Click(null, null);
