@@ -211,6 +211,15 @@ namespace Thumper_Custom_Level_Editor
 		/// 
 
 		///DATAGRIDVIEW - TRACK EDITOR
+		private void trackEditor_SelectionChanged(object sender, EventArgs e)
+		{
+			bool enable = trackEditor.SelectedCells.Count > 0;
+			btnTrackUp.Enabled = enable;
+			btnTrackDown.Enabled = enable;
+			btnTrackCopy.Enabled = enable;
+			btnTrackDelete.Enabled = enable;
+			btnTrackClear.Enabled = enable;
+		}
 		//Row changed
 		private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
