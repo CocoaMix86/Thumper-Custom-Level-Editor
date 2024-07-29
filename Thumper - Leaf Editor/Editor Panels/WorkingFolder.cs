@@ -237,11 +237,15 @@ namespace Thumper_Custom_Level_Editor
 				//check if file being deleted is LEVEL DETAILS
 				if (workingfolderFiles.CurrentRow.Cells[1].Value.ToString().Contains("LEVEL DETAILS") && MessageBox.Show("You are about to delete the LEVEL DETAILS file. This file is required for the mod loader tool to load the level. Are you sure you want to delete it?", "Confirm deletion", MessageBoxButtons.YesNo) == DialogResult.No)
 					return;
-				if (lockedfiles.ContainsKey($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt")) {
-					lockedfiles[$@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt"].Close();
-					lockedfiles.Remove($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt");
+				string filepath = $@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt";
+				string filetype = Path.GetFileNameWithoutExtension(filepath).Split('_')[0];
+				if (lockedfiles.ContainsKey(filepath)) {
+					lockedfiles[filepath].Close();
+					lockedfiles.Remove(filepath);
+					ClearPanels(filetype);
 				}
-				File.Delete($@"{workingfolder}\{workingfolderFiles[1, workingfolderFiles.CurrentRow.Index].Value}.txt");
+				if (File.Exists(filepath))
+					File.Delete(filepath);
 				PlaySound("UIdelete");
 				//call the refresh method so the dgv updates
 				btnWorkRefresh_Click(null, null);

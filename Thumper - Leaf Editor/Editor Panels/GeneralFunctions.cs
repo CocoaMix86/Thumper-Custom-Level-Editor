@@ -112,20 +112,29 @@ namespace Thumper_Custom_Level_Editor
             return Color.FromArgb(r, g, b);
         }
 
-        private void ClearPanels()
+        private void ClearPanels(string panel = "all")
         {
             //clear lists used for storing level data
-            _tracks.Clear();
-            _lvlleafs.Clear();
-            _gatelvls.Clear();
-            _masterlvls.Clear();
-            _samplelist.Clear();
-            //set paths to nothing
-            _loadedleaf = null;
-            _loadedlvl = null;
-            _loadedgate = null;
-            _loadedmaster = null;
-            _loadedsample = null;
+            if (panel is "all" or "leaf") {
+                _tracks.Clear();
+                _loadedleaf = null;
+            }
+            if (panel is "all" or "lvl") {
+                _lvlleafs.Clear();
+                _loadedlvl = null;
+            }
+            if (panel is "all" or "gate") {
+                _gatelvls.Clear();
+                _loadedgate = null;
+            }
+            if (panel is "all" or "master") {
+                _masterlvls.Clear();
+                _loadedmaster = null;
+            }
+            if (panel is "all" or "sample") {
+                _samplelist.Clear();
+                _loadedsample = null;
+            }
         }
 
         public static void PlaySound(string audiofile)
