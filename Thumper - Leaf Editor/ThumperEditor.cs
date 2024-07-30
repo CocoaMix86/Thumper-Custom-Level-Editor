@@ -733,6 +733,8 @@ namespace Thumper_Custom_Level_Editor
             if (e.KeyCode == defaultkeybinds["nextlvl"] || e.KeyCode == defaultkeybinds["previouslvl"]) {
                 if (workingfolder == null)
                     return;
+                if (lvlSeqObjs.IsCurrentCellInEditMode)
+                    return;
                 //depending on key, go next or previous
                 int offset = e.KeyCode == defaultkeybinds["nextlvl"] ? 1 : -1;
                 //search for the current lvl. This is used to get its index
@@ -752,6 +754,8 @@ namespace Thumper_Custom_Level_Editor
             //Next/Previous leaf keybind
             else if (e.KeyCode == defaultkeybinds["nextleaf"] || e.KeyCode == defaultkeybinds["previousleaf"]) {
                 if (workingfolder == null)
+                    return;
+                if (trackEditor.IsCurrentCellInEditMode)
                     return;
                 //depending on key, go next or previous
                 int offset = e.KeyCode == defaultkeybinds["nextleaf"] ? 1 : -1;
