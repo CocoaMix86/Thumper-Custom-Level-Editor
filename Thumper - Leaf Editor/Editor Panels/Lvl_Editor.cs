@@ -130,7 +130,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
 		{
-			e.Cancel = true;
+			e.ThrowException = false;
 		}
 
 		private void lvlSeqObjs_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
