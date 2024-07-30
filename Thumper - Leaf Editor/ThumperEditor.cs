@@ -243,13 +243,13 @@ namespace Thumper_Custom_Level_Editor
             //finalize boot
             PlaySound("UIboot");
             ///version check
-            if (Properties.Settings.Default.version != "2.2beta18") {
+            if (Properties.Settings.Default.version != "2.2beta21") {
                 ShowChangelog();
                 if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     regenerateTemplateFilesToolStripMenuItem_Click(null, null);
                 else
                     MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
-                Properties.Settings.Default.version = "2.2beta18";
+                Properties.Settings.Default.version = "2.2beta21";
             }
 
             //finish loading

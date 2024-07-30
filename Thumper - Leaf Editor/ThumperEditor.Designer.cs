@@ -2016,7 +2016,7 @@
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.White;
             this.label28.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
-            this.label28.Location = new System.Drawing.Point(1, 2);
+            this.label28.Location = new System.Drawing.Point(1, 4);
             this.label28.MinimumSize = new System.Drawing.Size(20, 20);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(20, 20);
@@ -3862,6 +3862,7 @@
             this.lvlSeqObjs.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lvlSeqObjs_CellMouseDown);
             this.lvlSeqObjs.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellValueChanged);
             this.lvlSeqObjs.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.lvlSeqObjs_ColumnAdded);
+            this.lvlSeqObjs.SelectionChanged += new System.EventHandler(this.lvlSeqObjs_SelectionChanged);
             this.lvlSeqObjs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvlSeqObjs_KeyDown);
             this.lvlSeqObjs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lvlSeqObjs_KeyPress);
             // 
@@ -6674,9 +6675,9 @@
             this.ClientSize = new System.Drawing.Size(1745, 892);
             this.Controls.Add(this.pictureBeeble);
             this.Controls.Add(this.panelRecentFiles);
-            this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.splitHorizontal);
             this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

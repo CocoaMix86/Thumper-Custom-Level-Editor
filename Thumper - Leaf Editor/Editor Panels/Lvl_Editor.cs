@@ -139,17 +139,28 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			DataGridView dgv = (DataGridView)sender;
 			if (e.Button == MouseButtons.Right) {
-				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
+				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
+					lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					dgv[e.ColumnIndex, e.RowIndex].Style = null;
+					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
+					SaveLvl(false);
+					lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
 				}
-				else {
+				else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
+					if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
+						return;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					CellValueChangedLvl(e.ColumnIndex, e.RowIndex);
+					CellValueChangedLvl(e.RowIndex, e.ColumnIndex);
 				}
 			}
 		}
 		/// DGV LVLSEQOBJS
+		private void lvlSeqObjs_SelectionChanged(object sender, EventArgs e)
+		{
+			bool enable = lvlSeqObjs.SelectedCells.Count > 0;
+			btnLvlSeqDelete.Enabled = enable;
+			btnLvlSeqClear.Enabled = enable;
+		}
 		//Cell value changed
 		private void lvlSeqObjs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
