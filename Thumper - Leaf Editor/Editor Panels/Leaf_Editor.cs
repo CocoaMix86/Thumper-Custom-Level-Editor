@@ -36,6 +36,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 					loadedleaf = value;
 					ShowPanel(true, panelLeaf);
+					panelLeaf.Enabled = true;
 					
 					if (!File.Exists(loadedleaf)) {
 						File.WriteAllText(loadedleaf, "");

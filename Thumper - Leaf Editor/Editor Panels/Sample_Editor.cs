@@ -33,6 +33,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 					loadedsample = value;
 					ShowPanel(true, panelSample);
+					panelSample.Enabled = true;
 
 					if (!File.Exists(loadedsample)) {
 						File.WriteAllText(loadedsample, "");

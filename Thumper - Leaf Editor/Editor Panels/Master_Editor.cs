@@ -29,6 +29,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 					loadedmaster = value;
 					ShowPanel(true, panelMaster);
+					panelMaster.Enabled = true;
 
 					if (!File.Exists(loadedmaster)) {
 						File.WriteAllText(loadedmaster, "");

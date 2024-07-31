@@ -30,6 +30,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 					loadedlvl = value;
 					ShowPanel(true, panelLevel);
+					panelLevel.Enabled = true;
 
 					if (!File.Exists(loadedlvl)) {
 						File.WriteAllText(loadedlvl, "");

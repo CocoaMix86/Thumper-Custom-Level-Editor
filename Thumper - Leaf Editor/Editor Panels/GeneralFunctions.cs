@@ -118,22 +118,27 @@ namespace Thumper_Custom_Level_Editor
             if (panel is "all" or "leaf") {
                 _tracks.Clear();
                 _loadedleaf = null;
+                panelLeaf.Enabled = false;
             }
             if (panel is "all" or "lvl") {
                 _lvlleafs.Clear();
                 _loadedlvl = null;
+                panelLevel.Enabled = false;
             }
             if (panel is "all" or "gate") {
                 _gatelvls.Clear();
                 _loadedgate = null;
+                panelGate.Enabled = false;
             }
             if (panel is "all" or "master") {
                 _masterlvls.Clear();
                 _loadedmaster = null;
+                panelMaster.Enabled = false;
             }
             if (panel is "all" or "sample") {
                 _samplelist.Clear();
                 _loadedsample = null;
+                panelSample.Enabled = false;
             }
         }
 

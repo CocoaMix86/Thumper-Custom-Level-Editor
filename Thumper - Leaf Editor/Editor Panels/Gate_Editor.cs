@@ -29,6 +29,7 @@ namespace Thumper_Custom_Level_Editor
 					}
 					loadedgate = value;
 					ShowPanel(true, panelGate);
+					panelGate.Enabled = true;
 
 					if (!File.Exists(loadedgate)) {
 						File.WriteAllText(loadedgate, "");
