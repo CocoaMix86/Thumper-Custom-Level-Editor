@@ -316,6 +316,8 @@ namespace Thumper_Custom_Level_Editor
 					_val = null;
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
+					if (_cell.ReadOnly)
+						continue;
 					//if cell does not have the value, set it
 					if (_cell.Value != _val)
 						_cell.Value = _val;
@@ -829,7 +831,10 @@ namespace Thumper_Custom_Level_Editor
 				highlight_value = 1
 			});
 			trackEditor.Rows.Add(new DataGridViewRow() {
-				Height = trackZoomVert.Value
+				Height = trackZoomVert.Value,
+				ReadOnly = true,
+				HeaderCell = new DataGridViewRowHeaderCell() { Value = "(apply a track object)" },
+				DefaultCellStyle = new DataGridViewCellStyle() { SelectionBackColor = Color.FromArgb(40, 40, 40), SelectionForeColor = Color.Black }
 			});
 			trackEditor.CurrentCell = trackEditor.Rows[_tracks.Count - 1].Cells[0];
 			//disable Apply button if object is not set
@@ -1044,7 +1049,10 @@ namespace Thumper_Custom_Level_Editor
 				default_interp = "Linear"
 			};
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-			trackEditor.Rows[_selecttrack].HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color)), Color.Black, 0.4);
+			DataGridViewRow trackrowapplied = trackEditor.Rows[_selecttrack];
+			trackrowapplied.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color)), Color.Black, 0.4);
+			trackrowapplied.ReadOnly = false;
+			trackrowapplied.DefaultCellStyle = null;
 			//alter the data if it's a sample object being added. Save the sample name instead
 			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE")
 				_tracks[_selecttrack].obj_name = dropTrackLane.SelectedValue?.ToString() + ".samp";
@@ -1054,10 +1062,10 @@ namespace Thumper_Custom_Level_Editor
 				_tracks[_selecttrack].friendly_param += ", " + dropTrackLane.Text;
 			}
 			//change row header to reflect what the track is
-			GenerateDataPoints(trackEditor.Rows[_selecttrack]);
-			ChangeTrackName(trackEditor.Rows[_selecttrack]);
+			GenerateDataPoints(trackrowapplied);
+			ChangeTrackName(trackrowapplied);
 			if (!randomizing) {
-				TrackUpdateHighlighting(trackEditor.Rows[_selecttrack]);
+				TrackUpdateHighlighting(trackrowapplied);
 				PlaySound("UIobjectadd");
 				SaveLeaf(false, "Applied Object settings", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
