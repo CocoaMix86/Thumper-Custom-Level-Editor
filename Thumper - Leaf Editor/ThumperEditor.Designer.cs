@@ -4647,7 +4647,7 @@
             this.dropGateBoss.Size = new System.Drawing.Size(136, 21);
             this.dropGateBoss.TabIndex = 117;
             this.dropGateBoss.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropGateBoss.TextChanged += new System.EventHandler(this.dropGateBoss_SelectedIndexChanged);
+            this.dropGateBoss.SelectedIndexChanged += new System.EventHandler(this.dropGateBoss_SelectedIndexChanged);
             // 
             // gateLvlList
             // 
