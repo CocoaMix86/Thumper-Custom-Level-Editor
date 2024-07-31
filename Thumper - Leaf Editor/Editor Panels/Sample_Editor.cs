@@ -415,7 +415,9 @@ namespace Thumper_Custom_Level_Editor
 		}
 		
 		public void LoadSample(dynamic _load)
-        {
+		{
+			if (_load == null)
+				return;
 			//if Sample Editor is hidden, show it when selecting a gate
 			if (panelSample.Visible == false)
 				sampleEditorToolStripMenuItem.PerformClick();

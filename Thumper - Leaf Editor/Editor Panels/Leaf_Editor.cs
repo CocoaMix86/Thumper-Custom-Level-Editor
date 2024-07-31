@@ -1535,6 +1535,8 @@ namespace Thumper_Custom_Level_Editor
 		///Update DGV from _tracks
 		public void LoadLeaf(dynamic _load, bool resetundolist = true)
 		{
+			if (_load == null)
+				return;
 			//reset flag in case it got stuck previously
 			loadingleaf = false;
 			bool loadfail = false;

@@ -738,6 +738,8 @@ namespace Thumper_Custom_Level_Editor
 
 		public void LoadLvl(dynamic _load)
 		{
+			if (_load == null)
+				return;
 			//reset flag in case it got stuck previously
 			loadinglvl = false;
 			//if Lvl Editor is hidden, show it when a lvl is selected from anywhere

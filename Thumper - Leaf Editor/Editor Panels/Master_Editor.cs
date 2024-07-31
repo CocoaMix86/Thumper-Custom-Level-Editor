@@ -462,6 +462,8 @@ namespace Thumper_Custom_Level_Editor
 
 		public void LoadMaster(dynamic _load)
 		{
+			if (_load == null)
+				return;
 			if ((string)_load["obj_type"] != "SequinMaster") {
 				MessageBox.Show("This does not appear to be a master file!");
 				return;

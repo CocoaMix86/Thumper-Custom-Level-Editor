@@ -391,6 +391,8 @@ namespace Thumper_Custom_Level_Editor
 
 		public void LoadGate(dynamic _load)
 		{
+			if (_load == null)
+				return;
 			//if Gate Editor is hidden, show it when selecting a gate
 			if (panelGate.Visible == false)
 				gateEditorToolStripMenuItem.PerformClick();

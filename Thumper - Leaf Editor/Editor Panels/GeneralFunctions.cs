@@ -366,7 +366,12 @@ namespace Thumper_Custom_Level_Editor
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
             using (var fileStream = new FileStream(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var textReader = new StreamReader(fileStream)) {
-                _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
+                try {
+                    _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
+                } catch (Exception ex) {
+                    MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.\n\n{ex}", "File load error");
+                    _load = null;
+                }
             }
 
             return _load;
