@@ -310,7 +310,7 @@ namespace Thumper_Custom_Level_Editor
 			//this is why I utilize workingfolder
 			if (Path.GetDirectoryName(path) != workingfolder) {
 				if (MessageBox.Show("The item you chose does not exist in the same folder as this master. Do you want to copy it to this folder and load it?", "File load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-					File.Copy(path, $@"{workingfolder}\{Path.GetFileName(path)}");
+					if (!File.Exists($@"{workingfolder}\{Path.GetFileName(path)}")) File.Copy(path, $@"{workingfolder}\{Path.GetFileName(path)}");
 				else
 					return;
 			}
