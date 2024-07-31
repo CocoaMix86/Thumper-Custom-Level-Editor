@@ -1573,12 +1573,14 @@ namespace Thumper_Custom_Level_Editor
 			//set beat_cnt and time_sig
 			int _leaflength = (int?)_load["beat_cnt"] ?? 1;
 			numericUpDown_LeafLength.Value = _leaflength > 0 ? (_leaflength > 255 ? 255 : _leaflength) : 1;
+			//set timesig for highlighting
             string _time_sig = (string)_load["time_sig"] ?? "4/4";
 			if (!dropTimeSig.Items.Contains(_time_sig)) {
 				dropTimeSig.Items.Add(_time_sig);
 			}
 			dropTimeSig.Enabled = true;
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
+			//
 			dropTrackLane.DataSource = _tracklanefriendly;
 			//each object in the seq_objs[] list becomes a track
 			foreach (dynamic seq_obj in _load["seq_objs"]) {
