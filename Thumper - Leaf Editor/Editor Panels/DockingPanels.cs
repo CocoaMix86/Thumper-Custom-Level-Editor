@@ -199,6 +199,7 @@ namespace Thumper_Custom_Level_Editor
             settings = Properties.Settings.Default;
 
             ResetBeeble(null, null);
+            panelRecentFiles.Location = new Point(100, 100);
         }
 
         private void ResetBeeble(object sender, EventArgs e)

@@ -646,10 +646,10 @@ namespace Thumper_Custom_Level_Editor
             ///end build
 
             ///Delete extra config_ files in the folder, then write Config to file
-            string[] _files = Directory.GetFiles(workingfolder, "config_*.txt");
+            string[] _files = Directory.GetFiles(Path.GetDirectoryName(loadedmaster), "config_*.txt");
 			foreach (string s in _files)
 				File.Delete(s);
-			File.WriteAllText($@"{workingfolder}\config_{Path.GetFileName(workingfolder)}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
+			File.WriteAllText($@"{Path.GetDirectoryName(loadedmaster)}\config_{Path.GetFileName(loadedmaster)}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
 
 			///only need to return _save, since _config is written already
 			return _save;
