@@ -2360,7 +2360,7 @@
             this.panelRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
             this.panelRecentFiles.Controls.Add(this.toolstripRecentFiles);
-            this.panelRecentFiles.Location = new System.Drawing.Point(476, 214);
+            this.panelRecentFiles.Location = new System.Drawing.Point(463, 189);
             this.panelRecentFiles.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
             this.panelRecentFiles.Size = new System.Drawing.Size(448, 247);
@@ -5772,7 +5772,7 @@
             // 
             // toolStripLabel2
             // 
-            this.toolStripLabel2.ForeColor = System.Drawing.Color.White;
+            this.toolStripLabel2.ForeColor = System.Drawing.Color.Gray;
             this.toolStripLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Size = new System.Drawing.Size(55, 28);
