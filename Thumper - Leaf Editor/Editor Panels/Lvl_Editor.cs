@@ -196,12 +196,15 @@ namespace Thumper_Custom_Level_Editor
         {
 			lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
 			try {
+				bool changes = false;
 				object _val = lvlSeqObjs[ColumnIndex, RowIndex].Value == null ? null : TruncateDecimal((decimal)lvlSeqObjs[ColumnIndex, RowIndex].Value, 3);
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in lvlSeqObjs.SelectedCells) {
 					//if cell does not have the value, set it
-					if (_cell.Value != _val)
+					if (_cell.Value != _val) {
 						_cell.Value = _val;
+						changes = true;
+					}
 
 					if (_val == null)
 						_cell.Style = null;
@@ -209,7 +212,8 @@ namespace Thumper_Custom_Level_Editor
 						_cell.Style.BackColor = Color.Purple;
 				}
 				//sets flag that lvl has unsaved changes
-				SaveLvl(false);
+				if (changes)
+					SaveLvl(false);
 			}
 			catch { }
 			lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;

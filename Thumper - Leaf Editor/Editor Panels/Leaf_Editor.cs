@@ -311,6 +311,7 @@ namespace Thumper_Custom_Level_Editor
 			List<DataGridViewRow> edited = new();
 			try {
 				object _val;
+				bool changes = false;
 				if (Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
 					_val = TruncateDecimal(_valtoset, 3);
 				else
@@ -320,8 +321,10 @@ namespace Thumper_Custom_Level_Editor
 					if (_cell.ReadOnly)
 						continue;
 					//if cell does not have the value, set it
-					if (_cell.Value != _val)
+					if (_cell.Value != _val) {
 						_cell.Value = _val;
+						changes = true;
+					}
 
 					if (!edited.Contains(_cell.OwningRow))
 						edited.Add(_cell.OwningRow);
@@ -329,10 +332,12 @@ namespace Thumper_Custom_Level_Editor
 					TrackUpdateHighlightingSingleCell(_cell);
 				}
 				//sets flag that leaf has unsaved changes
-				if (trackEditor.SelectedCells.Count > 1)
-					SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {(_val ?? "empty")}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
-				else
-					SaveLeaf(false, $"Beat {columnindex} value set: {(_val ?? "empty")}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
+				if (changes) {
+					if (trackEditor.SelectedCells.Count > 1)
+						SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {(_val ?? "empty")}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
+					else
+						SaveLeaf(false, $"Beat {columnindex} value set: {(_val ?? "empty")}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
+				}
 			}
 			catch { }
 
@@ -402,7 +407,7 @@ namespace Thumper_Custom_Level_Editor
 				else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					CellValueChanged(e.RowIndex, e.ColumnIndex);
-					_undolistleaf.RemoveAt(1);
+					//_undolistleaf.RemoveAt(1);
 				}
 			}
 		}
