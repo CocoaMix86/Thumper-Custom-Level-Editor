@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cyotek.Windows.Forms;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -9,6 +10,7 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
+        ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
         string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
         public List<Object_Params> _objects = new();
         private Dictionary<string, string> objectcolors = new();
@@ -54,9 +56,10 @@ namespace Thumper_Custom_Level_Editor
         {
             FormLeafEditor.PlaySound("UIcoloropen");
             Button btn = (Button)sender;
-            if (colorDialog1.ShowDialog() == DialogResult.OK) {
+            colorDialogNew.Color = btn.BackColor;
+            if (colorDialogNew.ShowDialog() == DialogResult.OK) {
                 FormLeafEditor.PlaySound("UIcolorapply");
-                btn.BackColor = colorDialog1.Color;
+                btn.BackColor = colorDialogNew.Color;
             }
         }
 
@@ -98,10 +101,11 @@ namespace Thumper_Custom_Level_Editor
         {
             FormLeafEditor.PlaySound("UIcoloropen");
             Button btn = (Button)sender;
-            if (colorDialog1.ShowDialog() == DialogResult.OK) {
+            colorDialogNew.Color = btn.BackColor;
+            if (colorDialogNew.ShowDialog() == DialogResult.OK) {
                 FormLeafEditor.PlaySound("UIcolorapply");
-                Color _c = colorDialog1.Color;
-                btn.BackColor = colorDialog1.Color;
+                Color _c = colorDialogNew.Color;
+                btn.BackColor = colorDialogNew.Color;
 
                 if (!objectcolors.ContainsKey(dropParamPath.Text)) {
                     objectcolors.Add(dropParamPath.Text, $"{_c.ToArgb()}");

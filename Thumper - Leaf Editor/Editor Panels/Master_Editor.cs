@@ -395,8 +395,9 @@ namespace Thumper_Custom_Level_Editor
 		{
 			PlaySound("UIcoloropen");
 			Button button = (Button)sender;
-			if (colorDialog1.ShowDialog() == DialogResult.OK) {
-				ColorButton(button, colorDialog1.Color);
+			colorDialogNew.Color = button.BackColor;
+            if (colorDialogNew.ShowDialog() == DialogResult.OK) {
+				ColorButton(button, colorDialogNew.Color);
 				PlaySound("UIcolorapply");
 				SaveMaster(false);
 			}

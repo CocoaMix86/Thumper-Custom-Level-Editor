@@ -1081,9 +1081,9 @@ namespace Thumper_Custom_Level_Editor
 		private void btnTrackColorDialog_Click(object sender, EventArgs e)
 		{
 			PlaySound("UIcoloropen");
-			DialogResult result = colorDialog1.ShowDialog();
-			if (result == DialogResult.OK) {
-                Color selectedcolor = colorDialog1.Color;
+			colorDialogNew.Color = btnTrackColorDialog.BackColor;
+            if (colorDialogNew.ShowDialog() == DialogResult.OK) {
+                Color selectedcolor = colorDialogNew.Color;
 				btnTrackColorDialog.BackColor = selectedcolor;
 				trackEditor.CurrentRow.HeaderCell.Style.BackColor = Blend(selectedcolor, Color.Black, 0.4);
 					_tracks[_selecttrack].highlight_color = selectedcolor.ToArgb().ToString();
@@ -1183,15 +1183,14 @@ namespace Thumper_Custom_Level_Editor
 			if (trackEditor.SelectedCells.Count == 0)
 				return;
 			PlaySound("UIcoloropen");
-			DialogResult result = colorDialog1.ShowDialog();
-			if (result == DialogResult.OK) {
+			if (colorDialogNew.ShowDialog() == DialogResult.OK) {
 				PlaySound("UIcolorapply");
-				trackEditor.SelectedCells[0].Value = (decimal)colorDialog1.Color.ToArgb();
+				trackEditor.SelectedCells[0].Value = (decimal)colorDialogNew.Color.ToArgb();
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					if (_tracks[_cell.RowIndex].trait_type == "kTraitColor") {
-						_cell.Style.BackColor = colorDialog1.Color;
+						_cell.Style.BackColor = colorDialogNew.Color;
 						//sets flag that leaf has unsaved changes
-						SaveLeaf(false, "Cell value changed", $"color {colorDialog1.Color.ToArgb()}");
+						SaveLeaf(false, "Cell value changed", $"color {colorDialogNew.Color.ToArgb()}");
 					}
 				}
 			}
