@@ -230,6 +230,7 @@ namespace Thumper_Custom_Level_Editor
             if (MessageBox.Show("Are you sure you want to reset all keybinds to default?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             LoadKeyBindInfo(defaultkeybinds);
+            keybindfromfile = defaultkeybinds;
         }
         private void btnSingleReset_Click(object sender, EventArgs e)
         {
