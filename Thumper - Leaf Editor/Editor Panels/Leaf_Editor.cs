@@ -1186,13 +1186,7 @@ namespace Thumper_Custom_Level_Editor
 			if (colorDialogNew.ShowDialog() == DialogResult.OK) {
 				PlaySound("UIcolorapply");
 				trackEditor.SelectedCells[0].Value = (decimal)colorDialogNew.Color.ToArgb();
-				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
-					if (_tracks[_cell.RowIndex].trait_type == "kTraitColor") {
-						_cell.Style.BackColor = colorDialogNew.Color;
-						//sets flag that leaf has unsaved changes
-						SaveLeaf(false, "Cell value changed", $"color {colorDialogNew.Color.ToArgb()}");
-					}
-				}
+				CellValueChanged(trackEditor.SelectedCells[0].RowIndex, trackEditor.SelectedCells[0].ColumnIndex);
 			}
 		}
 
