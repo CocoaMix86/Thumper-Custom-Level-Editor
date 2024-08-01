@@ -789,7 +789,7 @@ namespace Thumper_Custom_Level_Editor
 			if (filledcells.Count > 0)
 				_empty = false;
 			//if row is not empty, show confirmation box. Otherwise just delete the row
-			if ((!_empty && MessageBox.Show("Some cells in the selected tracks have data. Are you sure you want to delete?", "Confirm delete", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
+			if ((!_empty && MessageBox.Show("Some cells in the selected tracks have data. Are you sure you want to delete?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
 				try {
 					foreach (DataGridViewRow dgvr in selectedrows) {
 						_tracks.RemoveAt(dgvr.Index);

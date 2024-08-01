@@ -7,7 +7,9 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
+using System.Windows.Markup;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -678,8 +680,9 @@ namespace Thumper_Custom_Level_Editor
             if (filledcells.Count > 0)
                 _empty = false;
             //prompt user to say YES if row is not empty. Then delete selected track
-            if (!_empty && MessageBox.Show("This track has data. Do you still want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
-				return;
+            if (!_empty && MessageBox.Show("Some cells in the selected tracks have data. Are you sure you want to delete?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No) {
+
+                return;
             }
 
             foreach (DataGridViewRow dgvr in selectedrows) {
