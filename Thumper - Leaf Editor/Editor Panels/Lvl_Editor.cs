@@ -154,9 +154,30 @@ namespace Thumper_Custom_Level_Editor
 					CellValueChangedLvl(e.RowIndex, e.ColumnIndex);
 				}
 			}
-		}
-		/// DGV LVLSEQOBJS
-		private void lvlSeqObjs_SelectionChanged(object sender, EventArgs e)
+        }
+
+        private void lvlSeqObjs_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == -1 || e.RowIndex == -1)
+                return;
+            DataGridView dgv = sender as DataGridView;
+            if (Control.MouseButtons == MouseButtons.Right) {
+                if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
+                    lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
+                    dgv[e.ColumnIndex, e.RowIndex].Value = null;
+                    TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
+                    //GenerateDataPoints(dgv.Rows[e.RowIndex]);
+                    SaveLvl(false);
+                    lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
+                }
+                else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
+                    dgv[e.ColumnIndex, e.RowIndex].Value = null;
+                    CellValueChangedLvl(e.RowIndex, e.ColumnIndex);
+                }
+            }
+        }
+        /// DGV LVLSEQOBJS
+        private void lvlSeqObjs_SelectionChanged(object sender, EventArgs e)
 		{
 			bool enable = lvlSeqObjs.SelectedCells.Count > 0;
 			btnLvlSeqDelete.Enabled = enable;
@@ -300,7 +321,10 @@ namespace Thumper_Custom_Level_Editor
 			}
 			if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
 			if (btnLvlPathAdd.Enabled == false) btnLvlCopyTunnel.Enabled = false;
-			btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
+            btnLvlPathUp.Enabled = lvlLeafPaths.Rows.Count > 1;
+            btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
+            btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
+            btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
 			if (btnLvlSeqAdd.Enabled == false) btnLvlSeqDelete.Enabled = false;
 			if (btnLvlSeqAdd.Enabled == false) btnLvlSeqClear.Enabled = false;
 			btnLvlLoopAdd.Enabled = _lvlleafs.Count > 0;
@@ -648,25 +672,27 @@ namespace Thumper_Custom_Level_Editor
 		private void btnLvlSeqDelete_Click(object sender, EventArgs e)
 		{
 			bool _empty = true;
-			//iterate over cells in current row. If there is a value, set bool to false and break loop
-			foreach (DataGridViewCell dgvc in lvlSeqObjs.CurrentRow.Cells) {
-				if (!string.IsNullOrEmpty(dgvc?.Value?.ToString())) {
-					_empty = false;
-					break;
-				}
-			}
-			//prompt user to say YES if row is not empty. Then delete selected track
-			if (_empty || (!_empty && MessageBox.Show("This track has data. Do you still want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)) {
-				lvlSeqObjs.Rows.Remove(lvlSeqObjs.CurrentRow);
-				PlaySound("UIobjectremove");
-				SaveLvl(false);
-				//after deleting, rename all headers so they're in order again
-				foreach (DataGridViewRow r in lvlSeqObjs.Rows)
-					r.HeaderCell.Value = "Volume Track " + r.Index;
-			}
-			//disable buttons if there are no more rows
-			btnLvlSeqDelete.Enabled = lvlSeqObjs.Rows.Count != 0;
-			btnLvlSeqClear.Enabled = lvlSeqObjs.Rows.Count != 0;
+            List<DataGridViewRow> selectedrows = lvlSeqObjs.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+            //iterate over current row to see if any cells have data
+            List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
+            if (filledcells.Count > 0)
+                _empty = false;
+            //prompt user to say YES if row is not empty. Then delete selected track
+            if (!_empty && MessageBox.Show("This track has data. Do you still want to delete it?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
+				return;
+            }
+
+            foreach (DataGridViewRow dgvr in selectedrows) {
+                lvlSeqObjs.Rows.Remove(dgvr);
+            }
+            PlaySound("UIobjectremove");
+            SaveLvl(false);
+            //after deleting, rename all headers so they're in order again
+            foreach (DataGridViewRow r in lvlSeqObjs.Rows)
+                r.HeaderCell.Value = "Volume Track " + r.Index;
+            //disable buttons if there are no more rows
+            btnLvlSeqDelete.Enabled = lvlSeqObjs.Rows.Count > 0;
+			btnLvlSeqClear.Enabled = lvlSeqObjs.Rows.Count > 0;
 		}
 
 		private void btnLvlSeqClear_Click(object sender, EventArgs e)
@@ -762,10 +788,10 @@ namespace Thumper_Custom_Level_Editor
 
 			///Clear DGVs so new data can load
 			lvlLoopTracks.Rows.Clear();
-			_lvlleafs.Clear();
-			lvlLeafList.Rows.Clear();
-			lvlSeqObjs.Rows.Clear();
-			lvlLeafPaths.Rows.Clear();
+            lvlLeafList.Rows.Clear();
+            lvlSeqObjs.Rows.Clear();
+            lvlLeafPaths.Rows.Clear();
+            _lvlleafs.Clear();
 
 			///populate the non-DGV elements on the form with info from the JSON
 			NUD_lvlApproach.Value = (decimal)_load["approach_beats"];

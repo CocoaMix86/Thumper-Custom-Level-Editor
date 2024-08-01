@@ -209,6 +209,7 @@ namespace Thumper_Custom_Level_Editor
 			btnWorkCopy.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkNewFile.Enabled = filesinfolder.Count > 0;
 			btnWorkEditDetails.Enabled = filesinfolder.Count > 0;
+			btnLeafPanelTemplate.Enabled = true;
 		}
 		private void workingfolderFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
