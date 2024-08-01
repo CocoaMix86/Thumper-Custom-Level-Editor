@@ -653,7 +653,7 @@ namespace Thumper_Custom_Level_Editor
             string[] _files = Directory.GetFiles(Path.GetDirectoryName(loadedmaster), "config_*.txt");
 			foreach (string s in _files)
 				File.Delete(s);
-			File.WriteAllText($@"{Path.GetDirectoryName(loadedmaster)}\config_{Path.GetFileNameWithoutExtension(loadedmaster)}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
+			File.WriteAllText($@"{Path.GetDirectoryName(loadedmaster)}\config_{projectjson["level_name"]}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
 
 			///only need to return _save, since _config is written already
 			return _save;

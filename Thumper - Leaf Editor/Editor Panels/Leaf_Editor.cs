@@ -307,7 +307,6 @@ namespace Thumper_Custom_Level_Editor
         }
         private void CellValueChanged(int rowindex, int columnindex)
         {
-			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			List<DataGridViewRow> edited = new();
 			try {
 				object _val;
@@ -344,7 +343,6 @@ namespace Thumper_Custom_Level_Editor
 			foreach (DataGridViewRow r in edited)
 				GenerateDataPoints(r);
 			ShowRawTrackData(trackEditor.Rows[rowindex]);
-			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
         private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)

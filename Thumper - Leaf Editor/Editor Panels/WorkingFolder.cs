@@ -175,8 +175,11 @@ namespace Thumper_Custom_Level_Editor
 			workingfolderFiles.Rows.Clear();
 			workingfiles.Clear();
 			//filter for specific files
-			List<string> filesinfolder = Directory.GetFiles(workingfolder).ToList();
-			foreach (string file in filesinfolder.Where(x => !x.Contains("leaf_pyramid_outro.txt") && !x.Contains("samp_default.txt") && (x.Contains("leaf_") || x.Contains("lvl_") || x.Contains("gate_") || x.Contains("master_") /*|| x.Contains("LEVEL DETAILS")*/ || x.Contains("samp_")))) {
+			List<string> filesinfolder = Directory.GetFiles(workingfolder).Where(x => { 
+				string file = Path.GetFileName(x);
+				return file != "leaf_pyramid_outro.txt" && file != "samp_default.txt" && !file.StartsWith("config_") && (file.StartsWith("leaf_") || file.StartsWith("lvl_") || file.StartsWith("gate_") || file.StartsWith("master_") || file.StartsWith("samp_"));
+			}).ToList();
+			foreach (string file in filesinfolder) {
                 string filetype = Path.GetFileName(file).Split('_')[0];
 				//upon loading a level folder, immediately open the MASTER file
 				if (filetype == "master") {

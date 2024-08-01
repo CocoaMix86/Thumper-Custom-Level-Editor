@@ -5328,14 +5328,11 @@
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += new System.EventHandler(this.trackEditor_RowHeadersWidthChanged);
-            this.trackEditor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellEndEdit);
-            this.trackEditor.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellLeave);
             this.trackEditor.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseClick);
             this.trackEditor.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.trackEditor_CellMouseDown);
             this.trackEditor.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellMouseEnter);
             this.trackEditor.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.trackEditor_CellPainting);
             this.trackEditor.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.trackEditor_CellParsing);
-            this.trackEditor.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.trackEditor_CellValueChanged);
             this.trackEditor.CurrentCellDirtyStateChanged += new System.EventHandler(this.datagrid_CurrentCellDirtyStateChanged);
             this.trackEditor.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.trackEditor_DataError);
             this.trackEditor.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.trackEditor_EditingControlShowing);
