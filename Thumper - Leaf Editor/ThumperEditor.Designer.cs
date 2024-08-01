@@ -1522,14 +1522,14 @@
             this.duplicateToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.workingfolderRightClick.Name = "workingfolderRightClick";
-            this.workingfolderRightClick.Size = new System.Drawing.Size(125, 70);
+            this.workingfolderRightClick.Size = new System.Drawing.Size(181, 92);
             // 
             // renameToolStripMenuItem
             // 
             this.renameToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.renameToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            this.renameToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.renameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.renameToolStripMenuItem.Text = "Rename";
             this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
             // 
@@ -1538,7 +1538,7 @@
             this.duplicateToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.duplicateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.duplicateToolStripMenuItem.Text = "Duplicate";
             this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
@@ -1547,7 +1547,7 @@
             this.deleteToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.deleteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -1675,7 +1675,8 @@
             // contextdockLeaf
             // 
             this.contextdockLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockLeaf.ForeColor = System.Drawing.Color.White;
+            this.contextdockLeaf.ForeColor = System.Drawing.Color.PaleGreen;
+            this.contextdockLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.contextdockLeaf.Name = "contextdockLeaf";
             this.contextdockLeaf.Size = new System.Drawing.Size(227, 22);
             this.contextdockLeaf.Text = "Leaf Editor";
@@ -1684,7 +1685,8 @@
             // contextdockLvl
             // 
             this.contextdockLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockLvl.ForeColor = System.Drawing.Color.White;
+            this.contextdockLvl.ForeColor = System.Drawing.Color.Green;
+            this.contextdockLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
             this.contextdockLvl.Name = "contextdockLvl";
             this.contextdockLvl.Size = new System.Drawing.Size(227, 22);
             this.contextdockLvl.Text = "Lvl Editor";
@@ -1693,7 +1695,8 @@
             // contextdockGate
             // 
             this.contextdockGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockGate.ForeColor = System.Drawing.Color.White;
+            this.contextdockGate.ForeColor = System.Drawing.Color.Orange;
+            this.contextdockGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
             this.contextdockGate.Name = "contextdockGate";
             this.contextdockGate.Size = new System.Drawing.Size(227, 22);
             this.contextdockGate.Text = "Gate Editor";
@@ -1702,7 +1705,8 @@
             // contextdockMaster
             // 
             this.contextdockMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockMaster.ForeColor = System.Drawing.Color.White;
+            this.contextdockMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            this.contextdockMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.contextdockMaster.Name = "contextdockMaster";
             this.contextdockMaster.Size = new System.Drawing.Size(227, 22);
             this.contextdockMaster.Text = "Master Editor";
@@ -1711,7 +1715,8 @@
             // contextdockSample
             // 
             this.contextdockSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.contextdockSample.ForeColor = System.Drawing.Color.White;
+            this.contextdockSample.ForeColor = System.Drawing.Color.Aquamarine;
+            this.contextdockSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
             this.contextdockSample.Name = "contextdockSample";
             this.contextdockSample.Size = new System.Drawing.Size(227, 22);
             this.contextdockSample.Text = "Sample Editor";
@@ -1721,6 +1726,7 @@
             // 
             this.contextdockWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.contextdockWork.ForeColor = System.Drawing.Color.White;
+            this.contextdockWork.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
             this.contextdockWork.Name = "contextdockWork";
             this.contextdockWork.Size = new System.Drawing.Size(227, 22);
             this.contextdockWork.Text = "Working Folder";
