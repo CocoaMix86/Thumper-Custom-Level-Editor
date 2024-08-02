@@ -274,6 +274,8 @@ namespace Thumper_Custom_Level_Editor
             ofd.Title = "Load a Thumper Lvl file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
+				if ((_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramidboss.spn" && !checkGateRandom.Checked) || (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramidboss.spn"))
+					return;
                 //parse leaf to JSON
                 dynamic _load = LoadFileLock(ofd.FileName);
                 //check if file being loaded is actually a leaf. Can do so by checking the JSON key
