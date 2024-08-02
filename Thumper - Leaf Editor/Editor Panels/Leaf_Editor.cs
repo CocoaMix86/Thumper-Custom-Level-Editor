@@ -380,7 +380,7 @@ namespace Thumper_Custom_Level_Editor
 					if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
 						return;
 					CellValueChanged(e.RowIndex, e.ColumnIndex, true);
-					_undolistleaf.RemoveAt(1);
+					//_undolistleaf.RemoveAt(1);
 				}
 			}
 		}
