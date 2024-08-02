@@ -381,6 +381,16 @@ namespace Thumper_Custom_Level_Editor
 
             return _load;
         }
+
+        public void DeleteFileLock(string _selectedfilename, string filetype)
+        {
+            if (lockedfiles.ContainsKey(_selectedfilename)) {
+                lockedfiles[_selectedfilename].Close();
+                lockedfiles.Remove(_selectedfilename);
+            }
+            File.Delete(_selectedfilename);
+            ClearPanels(filetype);
+        }
     }
     /*
     public static class ExtensionMethodClass

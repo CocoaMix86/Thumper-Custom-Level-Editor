@@ -157,79 +157,79 @@ namespace Thumper_Custom_Level_Editor
             if (input.chkLevel1.Checked && !File.Exists($@"{levelpath}\samp_level1_320bpm.txt"))
                 File.WriteAllText($@"{levelpath}\samp_level1_320bpm.txt", Properties.Resources.samp_level1_320bpm);
             else if (input.chkLevel1.Checked == false)
-                File.Delete($@"{levelpath}\samp_level1_320bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level1_320bpm.txt", "samp");
             
             //level 2
             if (input.chkLevel2.Checked && !File.Exists($@"{levelpath}\samp_level2_340bpm.txt")) 
                     File.WriteAllText($@"{levelpath}\samp_level2_340bpm.txt", Properties.Resources.samp_level2_340bpm);
             else if (input.chkLevel2.Checked == false)
-                File.Delete($@"{levelpath}\samp_level2_340bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level2_340bpm.txt", "samp");
             
             //level 3
             if (input.chkLevel3.Checked && !File.Exists($@"{levelpath}\samp_level3_360bpm.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_level3_360bpm.txt", Properties.Resources.samp_level3_360bpm);
             else if (input.chkLevel3.Checked == false)
-                File.Delete($@"{levelpath}\samp_level3_360bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level3_360bpm.txt", "samp");
             
             //level 4
             if (input.chkLevel4.Checked && !File.Exists($@"{levelpath}\samp_level4_380bpm.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_level4_380bpm.txt", Properties.Resources.samp_level4_380bpm);
             else if (input.chkLevel4.Checked == false)
-                File.Delete($@"{levelpath}\samp_level4_380bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level4_380bpm.txt", "samp");
             
             //level 5
             if (input.chkLevel5.Checked && !File.Exists($@"{levelpath}\samp_level5_400bpm.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_level5_400bpm.txt", Properties.Resources.samp_level5_400bpm);
             else if (input.chkLevel5.Checked == false)
-                File.Delete($@"{levelpath}\samp_level5_400bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level5_400bpm.txt", "samp");
             
             //level 6
             if (input.chkLevel6.Checked && !File.Exists($@"{levelpath}\samp_level6_420bpm.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_level6_420bpm.txt", Properties.Resources.samp_level6_420bpm);
             else if (input.chkLevel6.Checked == false)
-                File.Delete($@"{levelpath}\samp_level6_420bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level6_420bpm.txt", "samp");
             
             //level 7
             if (input.chkLevel7.Checked && !File.Exists($@"{levelpath}\samp_level7_440bpm.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_level7_440bpm.txt", Properties.Resources.samp_level7_440bpm);
             else if (input.chkLevel7.Checked == false)
-                File.Delete($@"{levelpath}\samp_level7_440bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level7_440bpm.txt", "samp");
             
             //level 8
             if (input.chkLevel8.Checked && !File.Exists($@"{levelpath}\samp_level8_460bpm.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_level8_460bpm.txt", Properties.Resources.samp_level8_460bpm);
             else if (input.chkLevel8.Checked == false)
-                File.Delete($@"{levelpath}\samp_level8_460bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level8_460bpm.txt", "samp");
             
             //level 9
             if (input.chkLevel9.Checked && !File.Exists($@"{levelpath}\samp_level9_480bpm.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_level9_480bpm.txt", Properties.Resources.samp_level9_480bpm);
             else if (input.chkLevel9.Checked == false)
-                File.Delete($@"{levelpath}\samp_level9_480bpm.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_level9_480bpm.txt", "samp");
             
             //Dissonance
             if (input.chkDissonance.Checked && !File.Exists($@"{levelpath}\samp_dissonant.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_dissonant.txt", Properties.Resources.samp_dissonant);
             else if (input.chkDissonance.Checked == false)
-                File.Delete($@"{levelpath}\samp_dissonant.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_dissonant.txt", "samp");
             
             //Global Drones
             if (input.chkGlobal.Checked && !File.Exists($@"{levelpath}\samp_globaldrones.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_globaldrones.txt", Properties.Resources.samp_globaldrones);
             else if (input.chkGlobal.Checked == false)
-                File.Delete($@"{levelpath}\samp_globaldrones.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_globaldrones.txt", "samp");
             
             //Rests
             if (input.chkRests.Checked && !File.Exists($@"{levelpath}\samp_rests.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_rests.txt", Properties.Resources.samp_rests);
             else if (input.chkRests.Checked == false)
-                File.Delete($@"{levelpath}\samp_rests.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_rests.txt", "samp");
             
             //Misc
             if (input.chkMisc.Checked && !File.Exists($@"{levelpath}\samp_misc.txt")) 
                 File.WriteAllText($@"{levelpath}\samp_misc.txt", Properties.Resources.samp_misc);
             else if (input.chkMisc.Checked == false)
-                File.Delete($@"{levelpath}\samp_misc.txt");
+                mainform.DeleteFileLock($@"{levelpath}\samp_misc.txt", "samp");
 
 
             if (isthisnew || (isthisnew == false && mainform.workingfolder != levelpath)) {
