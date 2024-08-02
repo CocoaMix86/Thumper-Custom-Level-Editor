@@ -504,6 +504,7 @@
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.lblChangelogClose = new System.Windows.Forms.ToolStripButton();
             this.pictureBeeble = new Thumper_Custom_Level_Editor.ResizeablePanel();
+            this.panel9 = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             this.workingfolderRightClick.SuspendLayout();
             this.contextMenuNewFile.SuspendLayout();
@@ -598,6 +599,7 @@
             this.panelChangelog.SuspendLayout();
             this.panel8.SuspendLayout();
             this.toolStripChangelog.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -2105,7 +2107,7 @@
             this.lblGatebuckethelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblGatebuckethelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGatebuckethelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblGatebuckethelp.Location = new System.Drawing.Point(194, 359);
+            this.lblGatebuckethelp.Location = new System.Drawing.Point(212, 125);
             this.lblGatebuckethelp.Name = "lblGatebuckethelp";
             this.lblGatebuckethelp.Size = new System.Drawing.Size(15, 16);
             this.lblGatebuckethelp.TabIndex = 145;
@@ -2122,7 +2124,7 @@
             this.btnGateOpenRestart.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenRestart.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenRestart.Image")));
             this.btnGateOpenRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenRestart.Location = new System.Drawing.Point(222, 313);
+            this.btnGateOpenRestart.Location = new System.Drawing.Point(240, 79);
             this.btnGateOpenRestart.Name = "btnGateOpenRestart";
             this.btnGateOpenRestart.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenRestart.TabIndex = 133;
@@ -2141,7 +2143,7 @@
             this.btnGateOpenPost.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenPost.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPost.Image")));
             this.btnGateOpenPost.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPost.Location = new System.Drawing.Point(222, 291);
+            this.btnGateOpenPost.Location = new System.Drawing.Point(240, 57);
             this.btnGateOpenPost.Name = "btnGateOpenPost";
             this.btnGateOpenPost.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPost.TabIndex = 132;
@@ -2160,7 +2162,7 @@
             this.btnGateOpenPre.ForeColor = System.Drawing.Color.Black;
             this.btnGateOpenPre.Image = ((System.Drawing.Image)(resources.GetObject("btnGateOpenPre.Image")));
             this.btnGateOpenPre.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGateOpenPre.Location = new System.Drawing.Point(222, 269);
+            this.btnGateOpenPre.Location = new System.Drawing.Point(240, 35);
             this.btnGateOpenPre.Name = "btnGateOpenPre";
             this.btnGateOpenPre.Size = new System.Drawing.Size(23, 23);
             this.btnGateOpenPre.TabIndex = 119;
@@ -2175,7 +2177,7 @@
             this.label43.AutoSize = true;
             this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label43.ForeColor = System.Drawing.Color.White;
-            this.label43.Location = new System.Drawing.Point(20, 316);
+            this.label43.Location = new System.Drawing.Point(38, 82);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(64, 15);
             this.label43.TabIndex = 124;
@@ -2189,7 +2191,7 @@
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label42.ForeColor = System.Drawing.Color.White;
-            this.label42.Location = new System.Drawing.Point(35, 294);
+            this.label42.Location = new System.Drawing.Point(53, 60);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(49, 15);
             this.label42.TabIndex = 123;
@@ -2203,7 +2205,7 @@
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label41.ForeColor = System.Drawing.Color.White;
-            this.label41.Location = new System.Drawing.Point(40, 271);
+            this.label41.Location = new System.Drawing.Point(58, 37);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(44, 15);
             this.label41.TabIndex = 122;
@@ -4320,28 +4322,12 @@
             // 
             this.panelGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelGate.Controls.Add(this.lblGatebuckethelp);
-            this.panelGate.Controls.Add(this.checkGateRandom);
-            this.panelGate.Controls.Add(this.label2);
             this.panelGate.Controls.Add(this.toolstripTitleGate);
             this.panelGate.Controls.Add(this.gateToolStrip);
-            this.panelGate.Controls.Add(this.btnGateOpenRestart);
-            this.panelGate.Controls.Add(this.btnGateOpenPost);
-            this.panelGate.Controls.Add(this.btnGateOpenPre);
-            this.panelGate.Controls.Add(this.lblGateSectionHelp);
-            this.panelGate.Controls.Add(this.dropGateSection);
-            this.panelGate.Controls.Add(this.dropGateRestart);
-            this.panelGate.Controls.Add(this.dropGatePost);
-            this.panelGate.Controls.Add(this.dropGatePre);
-            this.panelGate.Controls.Add(this.label44);
-            this.panelGate.Controls.Add(this.label43);
-            this.panelGate.Controls.Add(this.label42);
-            this.panelGate.Controls.Add(this.label41);
             this.panelGate.Controls.Add(this.label40);
-            this.panelGate.Controls.Add(this.label38);
-            this.panelGate.Controls.Add(this.dropGateBoss);
             this.panelGate.Controls.Add(this.label36);
             this.panelGate.Controls.Add(this.gateLvlList);
+            this.panelGate.Controls.Add(this.panel9);
             this.panelGate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGate.Location = new System.Drawing.Point(0, 0);
             this.panelGate.MinimumSize = new System.Drawing.Size(60, 60);
@@ -4359,7 +4345,7 @@
             this.checkGateRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkGateRandom.AutoSize = true;
             this.checkGateRandom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkGateRandom.Location = new System.Drawing.Point(181, 362);
+            this.checkGateRandom.Location = new System.Drawing.Point(199, 128);
             this.checkGateRandom.Name = "checkGateRandom";
             this.checkGateRandom.Size = new System.Drawing.Size(15, 14);
             this.checkGateRandom.TabIndex = 144;
@@ -4372,7 +4358,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(82, 360);
+            this.label2.Location = new System.Drawing.Point(100, 126);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 15);
             this.label2.TabIndex = 143;
@@ -4551,7 +4537,7 @@
             this.lblGateSectionHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblGateSectionHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGateSectionHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblGateSectionHelp.Location = new System.Drawing.Point(289, 337);
+            this.lblGateSectionHelp.Location = new System.Drawing.Point(307, 103);
             this.lblGateSectionHelp.Name = "lblGateSectionHelp";
             this.lblGateSectionHelp.Size = new System.Drawing.Size(15, 16);
             this.lblGateSectionHelp.TabIndex = 131;
@@ -4574,7 +4560,7 @@
             "SECTION_BOSS_CRAKHED",
             "SECTION_BOSS_CRAKHED_FINAL",
             "SECTION_BOSS_PYRAMID"});
-            this.dropGateSection.Location = new System.Drawing.Point(85, 336);
+            this.dropGateSection.Location = new System.Drawing.Point(103, 102);
             this.dropGateSection.Name = "dropGateSection";
             this.dropGateSection.Size = new System.Drawing.Size(204, 21);
             this.dropGateSection.TabIndex = 129;
@@ -4592,7 +4578,7 @@
             this.dropGateRestart.FormattingEnabled = true;
             this.dropGateRestart.Items.AddRange(new object[] {
             "<none>"});
-            this.dropGateRestart.Location = new System.Drawing.Point(85, 314);
+            this.dropGateRestart.Location = new System.Drawing.Point(103, 80);
             this.dropGateRestart.Name = "dropGateRestart";
             this.dropGateRestart.Size = new System.Drawing.Size(136, 21);
             this.dropGateRestart.TabIndex = 128;
@@ -4610,7 +4596,7 @@
             this.dropGatePost.FormattingEnabled = true;
             this.dropGatePost.Items.AddRange(new object[] {
             "<none>"});
-            this.dropGatePost.Location = new System.Drawing.Point(85, 292);
+            this.dropGatePost.Location = new System.Drawing.Point(103, 58);
             this.dropGatePost.Name = "dropGatePost";
             this.dropGatePost.Size = new System.Drawing.Size(136, 21);
             this.dropGatePost.TabIndex = 127;
@@ -4628,7 +4614,7 @@
             this.dropGatePre.FormattingEnabled = true;
             this.dropGatePre.Items.AddRange(new object[] {
             "<none>"});
-            this.dropGatePre.Location = new System.Drawing.Point(85, 270);
+            this.dropGatePre.Location = new System.Drawing.Point(103, 36);
             this.dropGatePre.Name = "dropGatePre";
             this.dropGatePre.Size = new System.Drawing.Size(136, 21);
             this.dropGatePre.TabIndex = 126;
@@ -4641,7 +4627,7 @@
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label44.ForeColor = System.Drawing.Color.White;
-            this.label44.Location = new System.Drawing.Point(7, 338);
+            this.label44.Location = new System.Drawing.Point(25, 104);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(77, 15);
             this.label44.TabIndex = 125;
@@ -4665,7 +4651,7 @@
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(50, 249);
+            this.label38.Location = new System.Drawing.Point(68, 15);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(34, 15);
             this.label38.TabIndex = 117;
@@ -4680,7 +4666,7 @@
             this.dropGateBoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dropGateBoss.ForeColor = System.Drawing.Color.White;
             this.dropGateBoss.FormattingEnabled = true;
-            this.dropGateBoss.Location = new System.Drawing.Point(85, 248);
+            this.dropGateBoss.Location = new System.Drawing.Point(103, 14);
             this.dropGateBoss.Name = "dropGateBoss";
             this.dropGateBoss.Size = new System.Drawing.Size(136, 21);
             this.dropGateBoss.TabIndex = 117;
@@ -7013,6 +6999,32 @@
             this.pictureBeeble.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBeeble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
+            // panel9
+            // 
+            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel9.Controls.Add(this.lblGatebuckethelp);
+            this.panel9.Controls.Add(this.label38);
+            this.panel9.Controls.Add(this.checkGateRandom);
+            this.panel9.Controls.Add(this.dropGateBoss);
+            this.panel9.Controls.Add(this.label2);
+            this.panel9.Controls.Add(this.label41);
+            this.panel9.Controls.Add(this.label42);
+            this.panel9.Controls.Add(this.label43);
+            this.panel9.Controls.Add(this.btnGateOpenRestart);
+            this.panel9.Controls.Add(this.label44);
+            this.panel9.Controls.Add(this.btnGateOpenPost);
+            this.panel9.Controls.Add(this.dropGatePre);
+            this.panel9.Controls.Add(this.btnGateOpenPre);
+            this.panel9.Controls.Add(this.dropGatePost);
+            this.panel9.Controls.Add(this.lblGateSectionHelp);
+            this.panel9.Controls.Add(this.dropGateRestart);
+            this.panel9.Controls.Add(this.dropGateSection);
+            this.panel9.Location = new System.Drawing.Point(-1, 238);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(330, 142);
+            this.panel9.TabIndex = 146;
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -7177,6 +7189,8 @@
             this.panel8.PerformLayout();
             this.toolStripChangelog.ResumeLayout(false);
             this.toolStripChangelog.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -7616,6 +7630,7 @@
         private System.Windows.Forms.NumericUpDown NUDquick2;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.NumericUpDown NUDquick1;
+        private System.Windows.Forms.Panel panel9;
     }
 }
 
