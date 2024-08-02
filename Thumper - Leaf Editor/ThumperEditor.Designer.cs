@@ -331,8 +331,6 @@
             this.LoopSample = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.BeatsPerLoop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelGate = new Thumper_Custom_Level_Editor.ResizeablePanel();
-            this.checkGateRandom = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.toolstripTitleGate = new System.Windows.Forms.ToolStrip();
             this.lblGateName = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveGate = new System.Windows.Forms.ToolStripButton();
@@ -345,19 +343,22 @@
             this.btnGateLvlDelete = new System.Windows.Forms.ToolStripButton();
             this.btnGateLvlUp = new System.Windows.Forms.ToolStripButton();
             this.btnGateLvlDown = new System.Windows.Forms.ToolStripButton();
-            this.lblGateSectionHelp = new System.Windows.Forms.Label();
-            this.dropGateSection = new System.Windows.Forms.ComboBox();
-            this.dropGateRestart = new System.Windows.Forms.ComboBox();
-            this.dropGatePost = new System.Windows.Forms.ComboBox();
-            this.dropGatePre = new System.Windows.Forms.ComboBox();
-            this.label44 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.dropGateBoss = new System.Windows.Forms.ComboBox();
             this.gateLvlList = new System.Windows.Forms.DataGridView();
             this.Lvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sentry = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgvGateBucket = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label38 = new System.Windows.Forms.Label();
+            this.checkGateRandom = new System.Windows.Forms.CheckBox();
+            this.dropGateBoss = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.dropGatePre = new System.Windows.Forms.ComboBox();
+            this.dropGatePost = new System.Windows.Forms.ComboBox();
+            this.lblGateSectionHelp = new System.Windows.Forms.Label();
+            this.dropGateRestart = new System.Windows.Forms.ComboBox();
+            this.dropGateSection = new System.Windows.Forms.ComboBox();
             this.splitBottom1 = new System.Windows.Forms.SplitContainer();
             this.panelWorkingFolder = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.workingfolderFiles = new System.Windows.Forms.DataGridView();
@@ -504,7 +505,6 @@
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.lblChangelogClose = new System.Windows.Forms.ToolStripButton();
             this.pictureBeeble = new Thumper_Custom_Level_Editor.ResizeablePanel();
-            this.panel9 = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             this.workingfolderRightClick.SuspendLayout();
             this.contextMenuNewFile.SuspendLayout();
@@ -555,6 +555,7 @@
             this.toolstripTitleGate.SuspendLayout();
             this.gateToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).BeginInit();
+            this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitBottom1)).BeginInit();
             this.splitBottom1.Panel1.SuspendLayout();
             this.splitBottom1.Panel2.SuspendLayout();
@@ -599,7 +600,6 @@
             this.panelChangelog.SuspendLayout();
             this.panel8.SuspendLayout();
             this.toolStripChangelog.SuspendLayout();
-            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -4340,30 +4340,6 @@
             this.panelGate.Enter += new System.EventHandler(this.editorpanelFocus);
             this.panelGate.Leave += new System.EventHandler(this.editorpanelUnfocus);
             // 
-            // checkGateRandom
-            // 
-            this.checkGateRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkGateRandom.AutoSize = true;
-            this.checkGateRandom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkGateRandom.Location = new System.Drawing.Point(199, 128);
-            this.checkGateRandom.Name = "checkGateRandom";
-            this.checkGateRandom.Size = new System.Drawing.Size(15, 14);
-            this.checkGateRandom.TabIndex = 144;
-            this.checkGateRandom.UseVisualStyleBackColor = true;
-            this.checkGateRandom.CheckedChanged += new System.EventHandler(this.checkGateRandom_CheckedChanged);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(100, 126);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 15);
-            this.label2.TabIndex = 143;
-            this.label2.Text = "Enable Random";
-            // 
             // toolstripTitleGate
             // 
             this.toolstripTitleGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -4529,110 +4505,6 @@
             this.btnGateLvlDown.ToolTipText = "Move selected phase down";
             this.btnGateLvlDown.Click += new System.EventHandler(this.btnGateLvlDown_Click);
             // 
-            // lblGateSectionHelp
-            // 
-            this.lblGateSectionHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblGateSectionHelp.AutoSize = true;
-            this.lblGateSectionHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblGateSectionHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblGateSectionHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGateSectionHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblGateSectionHelp.Location = new System.Drawing.Point(307, 103);
-            this.lblGateSectionHelp.Name = "lblGateSectionHelp";
-            this.lblGateSectionHelp.Size = new System.Drawing.Size(15, 16);
-            this.lblGateSectionHelp.TabIndex = 131;
-            this.lblGateSectionHelp.Text = "?";
-            this.lblGateSectionHelp.Click += new System.EventHandler(this.lblGateSectionHelp_Click);
-            // 
-            // dropGateSection
-            // 
-            this.dropGateSection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dropGateSection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropGateSection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropGateSection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropGateSection.ForeColor = System.Drawing.Color.White;
-            this.dropGateSection.FormattingEnabled = true;
-            this.dropGateSection.Items.AddRange(new object[] {
-            "SECTION_LINEAR",
-            "SECTION_BOSS_TRIANGLE",
-            "SECTION_BOSS_CIRCLE",
-            "SECTION_BOSS_MINI",
-            "SECTION_BOSS_CRAKHED",
-            "SECTION_BOSS_CRAKHED_FINAL",
-            "SECTION_BOSS_PYRAMID"});
-            this.dropGateSection.Location = new System.Drawing.Point(103, 102);
-            this.dropGateSection.Name = "dropGateSection";
-            this.dropGateSection.Size = new System.Drawing.Size(204, 21);
-            this.dropGateSection.TabIndex = 129;
-            this.dropGateSection.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropGateSection.SelectedIndexChanged += new System.EventHandler(this.dropGateBoss_SelectedIndexChanged);
-            // 
-            // dropGateRestart
-            // 
-            this.dropGateRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dropGateRestart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropGateRestart.DisplayMember = "plos";
-            this.dropGateRestart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropGateRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropGateRestart.ForeColor = System.Drawing.Color.White;
-            this.dropGateRestart.FormattingEnabled = true;
-            this.dropGateRestart.Items.AddRange(new object[] {
-            "<none>"});
-            this.dropGateRestart.Location = new System.Drawing.Point(103, 80);
-            this.dropGateRestart.Name = "dropGateRestart";
-            this.dropGateRestart.Size = new System.Drawing.Size(136, 21);
-            this.dropGateRestart.TabIndex = 128;
-            this.dropGateRestart.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropGateRestart.SelectedIndexChanged += new System.EventHandler(this.dropGateRestart_SelectedIndexChanged);
-            // 
-            // dropGatePost
-            // 
-            this.dropGatePost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dropGatePost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropGatePost.DisplayMember = "plos";
-            this.dropGatePost.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropGatePost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropGatePost.ForeColor = System.Drawing.Color.White;
-            this.dropGatePost.FormattingEnabled = true;
-            this.dropGatePost.Items.AddRange(new object[] {
-            "<none>"});
-            this.dropGatePost.Location = new System.Drawing.Point(103, 58);
-            this.dropGatePost.Name = "dropGatePost";
-            this.dropGatePost.Size = new System.Drawing.Size(136, 21);
-            this.dropGatePost.TabIndex = 127;
-            this.dropGatePost.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropGatePost.SelectedIndexChanged += new System.EventHandler(this.dropGatePost_SelectedIndexChanged);
-            // 
-            // dropGatePre
-            // 
-            this.dropGatePre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dropGatePre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropGatePre.DisplayMember = "plos";
-            this.dropGatePre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropGatePre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropGatePre.ForeColor = System.Drawing.Color.White;
-            this.dropGatePre.FormattingEnabled = true;
-            this.dropGatePre.Items.AddRange(new object[] {
-            "<none>"});
-            this.dropGatePre.Location = new System.Drawing.Point(103, 36);
-            this.dropGatePre.Name = "dropGatePre";
-            this.dropGatePre.Size = new System.Drawing.Size(136, 21);
-            this.dropGatePre.TabIndex = 126;
-            this.dropGatePre.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropGatePre.SelectedIndexChanged += new System.EventHandler(this.dropGatePre_SelectedIndexChanged);
-            // 
-            // label44
-            // 
-            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.Color.White;
-            this.label44.Location = new System.Drawing.Point(25, 104);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(77, 15);
-            this.label44.TabIndex = 125;
-            this.label44.Text = "Section Type";
-            // 
             // label40
             // 
             this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -4644,34 +4516,6 @@
             this.label40.Size = new System.Drawing.Size(102, 15);
             this.label40.TabIndex = 121;
             this.label40.Text = "══Gate Options══";
-            // 
-            // label38
-            // 
-            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(68, 15);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(34, 15);
-            this.label38.TabIndex = 117;
-            this.label38.Text = "Boss";
-            // 
-            // dropGateBoss
-            // 
-            this.dropGateBoss.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dropGateBoss.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropGateBoss.DisplayMember = "plos";
-            this.dropGateBoss.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropGateBoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropGateBoss.ForeColor = System.Drawing.Color.White;
-            this.dropGateBoss.FormattingEnabled = true;
-            this.dropGateBoss.Location = new System.Drawing.Point(103, 14);
-            this.dropGateBoss.Name = "dropGateBoss";
-            this.dropGateBoss.Size = new System.Drawing.Size(136, 21);
-            this.dropGateBoss.TabIndex = 117;
-            this.dropGateBoss.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
-            this.dropGateBoss.SelectedIndexChanged += new System.EventHandler(this.dropGateBoss_SelectedIndexChanged);
             // 
             // gateLvlList
             // 
@@ -4766,6 +4610,188 @@
             this.dgvGateBucket.Name = "dgvGateBucket";
             this.dgvGateBucket.Visible = false;
             this.dgvGateBucket.Width = 51;
+            // 
+            // panel9
+            // 
+            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel9.Controls.Add(this.lblGatebuckethelp);
+            this.panel9.Controls.Add(this.label38);
+            this.panel9.Controls.Add(this.checkGateRandom);
+            this.panel9.Controls.Add(this.dropGateBoss);
+            this.panel9.Controls.Add(this.label2);
+            this.panel9.Controls.Add(this.label41);
+            this.panel9.Controls.Add(this.label42);
+            this.panel9.Controls.Add(this.label43);
+            this.panel9.Controls.Add(this.btnGateOpenRestart);
+            this.panel9.Controls.Add(this.label44);
+            this.panel9.Controls.Add(this.btnGateOpenPost);
+            this.panel9.Controls.Add(this.dropGatePre);
+            this.panel9.Controls.Add(this.btnGateOpenPre);
+            this.panel9.Controls.Add(this.dropGatePost);
+            this.panel9.Controls.Add(this.lblGateSectionHelp);
+            this.panel9.Controls.Add(this.dropGateRestart);
+            this.panel9.Controls.Add(this.dropGateSection);
+            this.panel9.Location = new System.Drawing.Point(-1, 238);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(330, 142);
+            this.panel9.TabIndex = 146;
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.Color.White;
+            this.label38.Location = new System.Drawing.Point(68, 15);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(34, 15);
+            this.label38.TabIndex = 117;
+            this.label38.Text = "Boss";
+            // 
+            // checkGateRandom
+            // 
+            this.checkGateRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkGateRandom.AutoSize = true;
+            this.checkGateRandom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkGateRandom.Location = new System.Drawing.Point(199, 128);
+            this.checkGateRandom.Name = "checkGateRandom";
+            this.checkGateRandom.Size = new System.Drawing.Size(15, 14);
+            this.checkGateRandom.TabIndex = 144;
+            this.checkGateRandom.UseVisualStyleBackColor = true;
+            this.checkGateRandom.CheckedChanged += new System.EventHandler(this.checkGateRandom_CheckedChanged);
+            // 
+            // dropGateBoss
+            // 
+            this.dropGateBoss.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dropGateBoss.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropGateBoss.DisplayMember = "plos";
+            this.dropGateBoss.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropGateBoss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropGateBoss.ForeColor = System.Drawing.Color.White;
+            this.dropGateBoss.FormattingEnabled = true;
+            this.dropGateBoss.Location = new System.Drawing.Point(103, 14);
+            this.dropGateBoss.Name = "dropGateBoss";
+            this.dropGateBoss.Size = new System.Drawing.Size(136, 21);
+            this.dropGateBoss.TabIndex = 117;
+            this.dropGateBoss.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropGateBoss.SelectedIndexChanged += new System.EventHandler(this.dropGateBoss_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(100, 126);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 15);
+            this.label2.TabIndex = 143;
+            this.label2.Text = "Enable Random";
+            // 
+            // label44
+            // 
+            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.ForeColor = System.Drawing.Color.White;
+            this.label44.Location = new System.Drawing.Point(25, 104);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(77, 15);
+            this.label44.TabIndex = 125;
+            this.label44.Text = "Section Type";
+            // 
+            // dropGatePre
+            // 
+            this.dropGatePre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dropGatePre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropGatePre.DisplayMember = "plos";
+            this.dropGatePre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropGatePre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropGatePre.ForeColor = System.Drawing.Color.White;
+            this.dropGatePre.FormattingEnabled = true;
+            this.dropGatePre.Items.AddRange(new object[] {
+            "<none>"});
+            this.dropGatePre.Location = new System.Drawing.Point(103, 36);
+            this.dropGatePre.Name = "dropGatePre";
+            this.dropGatePre.Size = new System.Drawing.Size(136, 21);
+            this.dropGatePre.TabIndex = 126;
+            this.dropGatePre.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropGatePre.SelectedIndexChanged += new System.EventHandler(this.dropGatePre_SelectedIndexChanged);
+            // 
+            // dropGatePost
+            // 
+            this.dropGatePost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dropGatePost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropGatePost.DisplayMember = "plos";
+            this.dropGatePost.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropGatePost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropGatePost.ForeColor = System.Drawing.Color.White;
+            this.dropGatePost.FormattingEnabled = true;
+            this.dropGatePost.Items.AddRange(new object[] {
+            "<none>"});
+            this.dropGatePost.Location = new System.Drawing.Point(103, 58);
+            this.dropGatePost.Name = "dropGatePost";
+            this.dropGatePost.Size = new System.Drawing.Size(136, 21);
+            this.dropGatePost.TabIndex = 127;
+            this.dropGatePost.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropGatePost.SelectedIndexChanged += new System.EventHandler(this.dropGatePost_SelectedIndexChanged);
+            // 
+            // lblGateSectionHelp
+            // 
+            this.lblGateSectionHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblGateSectionHelp.AutoSize = true;
+            this.lblGateSectionHelp.BackColor = System.Drawing.Color.Transparent;
+            this.lblGateSectionHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.lblGateSectionHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGateSectionHelp.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblGateSectionHelp.Location = new System.Drawing.Point(307, 103);
+            this.lblGateSectionHelp.Name = "lblGateSectionHelp";
+            this.lblGateSectionHelp.Size = new System.Drawing.Size(15, 16);
+            this.lblGateSectionHelp.TabIndex = 131;
+            this.lblGateSectionHelp.Text = "?";
+            this.lblGateSectionHelp.Click += new System.EventHandler(this.lblGateSectionHelp_Click);
+            // 
+            // dropGateRestart
+            // 
+            this.dropGateRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dropGateRestart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropGateRestart.DisplayMember = "plos";
+            this.dropGateRestart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropGateRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropGateRestart.ForeColor = System.Drawing.Color.White;
+            this.dropGateRestart.FormattingEnabled = true;
+            this.dropGateRestart.Items.AddRange(new object[] {
+            "<none>"});
+            this.dropGateRestart.Location = new System.Drawing.Point(103, 80);
+            this.dropGateRestart.Name = "dropGateRestart";
+            this.dropGateRestart.Size = new System.Drawing.Size(136, 21);
+            this.dropGateRestart.TabIndex = 128;
+            this.dropGateRestart.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropGateRestart.SelectedIndexChanged += new System.EventHandler(this.dropGateRestart_SelectedIndexChanged);
+            // 
+            // dropGateSection
+            // 
+            this.dropGateSection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dropGateSection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.dropGateSection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.dropGateSection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dropGateSection.ForeColor = System.Drawing.Color.White;
+            this.dropGateSection.FormattingEnabled = true;
+            this.dropGateSection.Items.AddRange(new object[] {
+            "SECTION_LINEAR",
+            "SECTION_BOSS_TRIANGLE",
+            "SECTION_BOSS_CIRCLE",
+            "SECTION_BOSS_MINI",
+            "SECTION_BOSS_CRAKHED",
+            "SECTION_BOSS_CRAKHED_FINAL",
+            "SECTION_BOSS_PYRAMID"});
+            this.dropGateSection.Location = new System.Drawing.Point(103, 102);
+            this.dropGateSection.Name = "dropGateSection";
+            this.dropGateSection.Size = new System.Drawing.Size(204, 21);
+            this.dropGateSection.TabIndex = 129;
+            this.dropGateSection.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.combobox_DrawItem);
+            this.dropGateSection.SelectedIndexChanged += new System.EventHandler(this.dropGateBoss_SelectedIndexChanged);
             // 
             // splitBottom1
             // 
@@ -6999,32 +7025,6 @@
             this.pictureBeeble.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBeeble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
-            // panel9
-            // 
-            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel9.Controls.Add(this.lblGatebuckethelp);
-            this.panel9.Controls.Add(this.label38);
-            this.panel9.Controls.Add(this.checkGateRandom);
-            this.panel9.Controls.Add(this.dropGateBoss);
-            this.panel9.Controls.Add(this.label2);
-            this.panel9.Controls.Add(this.label41);
-            this.panel9.Controls.Add(this.label42);
-            this.panel9.Controls.Add(this.label43);
-            this.panel9.Controls.Add(this.btnGateOpenRestart);
-            this.panel9.Controls.Add(this.label44);
-            this.panel9.Controls.Add(this.btnGateOpenPost);
-            this.panel9.Controls.Add(this.dropGatePre);
-            this.panel9.Controls.Add(this.btnGateOpenPre);
-            this.panel9.Controls.Add(this.dropGatePost);
-            this.panel9.Controls.Add(this.lblGateSectionHelp);
-            this.panel9.Controls.Add(this.dropGateRestart);
-            this.panel9.Controls.Add(this.dropGateSection);
-            this.panel9.Location = new System.Drawing.Point(-1, 238);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(330, 142);
-            this.panel9.TabIndex = 146;
-            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -7122,6 +7122,8 @@
             this.gateToolStrip.ResumeLayout(false);
             this.gateToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gateLvlList)).EndInit();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.splitBottom1.Panel1.ResumeLayout(false);
             this.splitBottom1.Panel1.PerformLayout();
             this.splitBottom1.Panel2.ResumeLayout(false);
@@ -7189,8 +7191,6 @@
             this.panel8.PerformLayout();
             this.toolStripChangelog.ResumeLayout(false);
             this.toolStripChangelog.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
             this.ResumeLayout(false);
 
 		}
