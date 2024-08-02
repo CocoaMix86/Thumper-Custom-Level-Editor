@@ -71,6 +71,15 @@ namespace Thumper_Custom_Level_Editor
             this.labelKeybindName = new System.Windows.Forms.Label();
             this.lblInvalid = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.keybindQuick9 = new System.Windows.Forms.Label();
+            this.keybindQuick8 = new System.Windows.Forms.Label();
+            this.keybindQuick7 = new System.Windows.Forms.Label();
+            this.keybindQuick6 = new System.Windows.Forms.Label();
+            this.keybindQuick5 = new System.Windows.Forms.Label();
+            this.keybindQuick4 = new System.Windows.Forms.Label();
+            this.keybindQuick3 = new System.Windows.Forms.Label();
+            this.keybindQuick2 = new System.Windows.Forms.Label();
+            this.keybindQuick1 = new System.Windows.Forms.Label();
             this.keybindToggleAutoPlace = new System.Windows.Forms.Label();
             this.keybindRandomizeRow = new System.Windows.Forms.Label();
             this.keybindSplitLeaf = new System.Windows.Forms.Label();
@@ -682,6 +691,15 @@ namespace Thumper_Custom_Level_Editor
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.keybindQuick9);
+            this.panel1.Controls.Add(this.keybindQuick8);
+            this.panel1.Controls.Add(this.keybindQuick7);
+            this.panel1.Controls.Add(this.keybindQuick6);
+            this.panel1.Controls.Add(this.keybindQuick5);
+            this.panel1.Controls.Add(this.keybindQuick4);
+            this.panel1.Controls.Add(this.keybindQuick3);
+            this.panel1.Controls.Add(this.keybindQuick2);
+            this.panel1.Controls.Add(this.keybindQuick1);
             this.panel1.Controls.Add(this.keybindToggleAutoPlace);
             this.panel1.Controls.Add(this.keybindRandomizeRow);
             this.panel1.Controls.Add(this.keybindSplitLeaf);
@@ -722,6 +740,150 @@ namespace Thumper_Custom_Level_Editor
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel1.Size = new System.Drawing.Size(364, 293);
             this.panel1.TabIndex = 132;
+            // 
+            // keybindQuick9
+            // 
+            this.keybindQuick9.AutoSize = true;
+            this.keybindQuick9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick9.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick9.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick9.Location = new System.Drawing.Point(5, 714);
+            this.keybindQuick9.Name = "keybindQuick9";
+            this.keybindQuick9.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick9.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick9.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick9.TabIndex = 174;
+            this.keybindQuick9.Tag = "quick9";
+            this.keybindQuick9.Text = "Quick Insert 9";
+            // 
+            // keybindQuick8
+            // 
+            this.keybindQuick8.AutoSize = true;
+            this.keybindQuick8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick8.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick8.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick8.Location = new System.Drawing.Point(5, 697);
+            this.keybindQuick8.Name = "keybindQuick8";
+            this.keybindQuick8.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick8.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick8.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick8.TabIndex = 173;
+            this.keybindQuick8.Tag = "quick8";
+            this.keybindQuick8.Text = "Quick Insert 8";
+            // 
+            // keybindQuick7
+            // 
+            this.keybindQuick7.AutoSize = true;
+            this.keybindQuick7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick7.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick7.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick7.Location = new System.Drawing.Point(5, 680);
+            this.keybindQuick7.Name = "keybindQuick7";
+            this.keybindQuick7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick7.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick7.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick7.TabIndex = 172;
+            this.keybindQuick7.Tag = "quick7";
+            this.keybindQuick7.Text = "Quick Insert 7";
+            // 
+            // keybindQuick6
+            // 
+            this.keybindQuick6.AutoSize = true;
+            this.keybindQuick6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick6.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick6.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick6.Location = new System.Drawing.Point(5, 663);
+            this.keybindQuick6.Name = "keybindQuick6";
+            this.keybindQuick6.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick6.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick6.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick6.TabIndex = 171;
+            this.keybindQuick6.Tag = "quick6";
+            this.keybindQuick6.Text = "Quick Insert 6";
+            // 
+            // keybindQuick5
+            // 
+            this.keybindQuick5.AutoSize = true;
+            this.keybindQuick5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick5.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick5.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick5.Location = new System.Drawing.Point(5, 646);
+            this.keybindQuick5.Name = "keybindQuick5";
+            this.keybindQuick5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick5.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick5.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick5.TabIndex = 170;
+            this.keybindQuick5.Tag = "quick5";
+            this.keybindQuick5.Text = "Quick Insert 5";
+            // 
+            // keybindQuick4
+            // 
+            this.keybindQuick4.AutoSize = true;
+            this.keybindQuick4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick4.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick4.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick4.Location = new System.Drawing.Point(5, 629);
+            this.keybindQuick4.Name = "keybindQuick4";
+            this.keybindQuick4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick4.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick4.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick4.TabIndex = 169;
+            this.keybindQuick4.Tag = "quick4";
+            this.keybindQuick4.Text = "Quick Insert 4";
+            // 
+            // keybindQuick3
+            // 
+            this.keybindQuick3.AutoSize = true;
+            this.keybindQuick3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick3.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick3.Location = new System.Drawing.Point(5, 612);
+            this.keybindQuick3.Name = "keybindQuick3";
+            this.keybindQuick3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick3.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick3.TabIndex = 168;
+            this.keybindQuick3.Tag = "quick3";
+            this.keybindQuick3.Text = "Quick Insert 3";
+            // 
+            // keybindQuick2
+            // 
+            this.keybindQuick2.AutoSize = true;
+            this.keybindQuick2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick2.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick2.Location = new System.Drawing.Point(5, 595);
+            this.keybindQuick2.Name = "keybindQuick2";
+            this.keybindQuick2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick2.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick2.TabIndex = 167;
+            this.keybindQuick2.Tag = "quick2";
+            this.keybindQuick2.Text = "Quick Insert 2";
+            // 
+            // keybindQuick1
+            // 
+            this.keybindQuick1.AutoSize = true;
+            this.keybindQuick1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keybindQuick1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.keybindQuick1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keybindQuick1.ForeColor = System.Drawing.Color.Aqua;
+            this.keybindQuick1.Location = new System.Drawing.Point(5, 578);
+            this.keybindQuick1.Name = "keybindQuick1";
+            this.keybindQuick1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.keybindQuick1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.keybindQuick1.Size = new System.Drawing.Size(105, 17);
+            this.keybindQuick1.TabIndex = 166;
+            this.keybindQuick1.Tag = "quick1";
+            this.keybindQuick1.Text = "Quick Insert 1";
             // 
             // keybindToggleAutoPlace
             // 
@@ -1424,5 +1586,14 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label keybindColorDialog;
         private System.Windows.Forms.Label keybindToggleAutoPlace;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label keybindQuick1;
+        private System.Windows.Forms.Label keybindQuick9;
+        private System.Windows.Forms.Label keybindQuick8;
+        private System.Windows.Forms.Label keybindQuick7;
+        private System.Windows.Forms.Label keybindQuick6;
+        private System.Windows.Forms.Label keybindQuick5;
+        private System.Windows.Forms.Label keybindQuick4;
+        private System.Windows.Forms.Label keybindQuick3;
+        private System.Windows.Forms.Label keybindQuick2;
     }
 }

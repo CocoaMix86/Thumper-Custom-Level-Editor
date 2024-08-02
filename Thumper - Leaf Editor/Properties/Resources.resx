@@ -194,7 +194,16 @@ colordialog;F6
 interpolate;F7
 splitleaf;F8
 randomizerow;F9
-toggleautoplace;F10</value>
+toggleautoplace;F10
+quick1;D1, Control
+quick2;D2, Control
+quick3;D3, Control
+quick4;D4, Control
+quick5;D5, Control
+quick6;D6, Control
+quick7;D7, Control
+quick8;D8, Control
+quick9;D9, Control</value>
   </data>
   <data name="D3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\D3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -734,5 +743,8 @@ MISC
   </data>
   <data name="Thumper_Splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\Thumper_Splash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>

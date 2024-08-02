@@ -197,6 +197,7 @@ namespace Thumper_Custom_Level_Editor
             InitializeSounds();
             //keybinds
             SetKeyBinds();
+            LoadQuickValues();
             //load size and location data for panels
             panelLeaf.Size = Properties.Settings.Default.leafeditorsize;
             panelLeaf.Location = Properties.Settings.Default.leafeditorloc;
@@ -738,13 +739,13 @@ namespace Thumper_Custom_Level_Editor
         private void FormLeafEditor_KeyDown(object sender, KeyEventArgs e)
         {
             //Next/Previous lvl keybind
-            if (e.KeyCode == defaultkeybinds["nextlvl"] || e.KeyCode == defaultkeybinds["previouslvl"]) {
+            if (e.KeyData == defaultkeybinds["nextlvl"] || e.KeyData == defaultkeybinds["previouslvl"]) {
                 if (workingfolder == null)
                     return;
                 if (lvlSeqObjs.IsCurrentCellInEditMode)
                     return;
                 //depending on key, go next or previous
-                int offset = e.KeyCode == defaultkeybinds["nextlvl"] ? 1 : -1;
+                int offset = e.KeyData == defaultkeybinds["nextlvl"] ? 1 : -1;
                 //search for the current lvl. This is used to get its index
                 IEnumerable<WorkingFolderFileItem> wffilist = workingfiles.Where(x => x.filename.Contains("lvl_"));
                 WorkingFolderFileItem wffi = _loadedlvl != null ? wffilist.First(x => _loadedlvl.Contains(x.filename)) : wffilist.First();
@@ -760,13 +761,13 @@ namespace Thumper_Custom_Level_Editor
                 workingfolderFiles.Rows[offset].Selected = true;
             }
             //Next/Previous leaf keybind
-            else if (e.KeyCode == defaultkeybinds["nextleaf"] || e.KeyCode == defaultkeybinds["previousleaf"]) {
+            else if (e.KeyData == defaultkeybinds["nextleaf"] || e.KeyData == defaultkeybinds["previousleaf"]) {
                 if (workingfolder == null)
                     return;
                 if (trackEditor.IsCurrentCellInEditMode)
                     return;
                 //depending on key, go next or previous
-                int offset = e.KeyCode == defaultkeybinds["nextleaf"] ? 1 : -1;
+                int offset = e.KeyData == defaultkeybinds["nextleaf"] ? 1 : -1;
                 //search for the current lvl. This is used to get its index
                 IEnumerable<WorkingFolderFileItem> wffilist = workingfiles.Where(x => x.filename.Contains("leaf_"));
                 WorkingFolderFileItem wffi = _loadedleaf != null ? wffilist.First(x => _loadedleaf.Contains(x.filename)) : wffilist.First();
@@ -787,20 +788,56 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 UndoFunction(1);
             }
-            else if (e.KeyCode == defaultkeybinds["colordialog"]) {
+            else if (e.KeyData == defaultkeybinds["colordialog"]) {
                 btnLeafColors.PerformClick();
             }
-            else if (e.KeyCode == defaultkeybinds["interpolate"]) {
+            else if (e.KeyData == defaultkeybinds["interpolate"]) {
                 btnLEafInterpLinear.PerformClick();
             }
-            else if (e.KeyCode == defaultkeybinds["splitleaf"]) {
+            else if (e.KeyData == defaultkeybinds["splitleaf"]) {
                 btnLeafSplit.PerformClick();
             }
-            else if (e.KeyCode == defaultkeybinds["randomizerow"]) {
+            else if (e.KeyData == defaultkeybinds["randomizerow"]) {
                 btnLeafRandomValues.PerformClick();
             }
-            else if (e.KeyCode == defaultkeybinds["toggleautoplace"]) {
+            else if (e.KeyData == defaultkeybinds["toggleautoplace"]) {
                 btnLeafAutoPlace.PerformClick();
+            }
+            else if (e.KeyData == defaultkeybinds["quick1"]) {
+                trackEditor.CurrentCell.Value = NUDquick1.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+            }
+            else if (e.KeyData == defaultkeybinds["quick2"]) {
+                trackEditor.CurrentCell.Value = NUDquick2.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+            }
+            else if (e.KeyData == defaultkeybinds["quick3"]) {
+                trackEditor.CurrentCell.Value = NUDquick3.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+            }
+            else if (e.KeyData == defaultkeybinds["quick4"]) {
+                trackEditor.CurrentCell.Value = NUDquick4.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+            }
+            else if (e.KeyData == defaultkeybinds["quick5"]) {
+                trackEditor.CurrentCell.Value = NUDquick5.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+            }
+            else if (e.KeyData == defaultkeybinds["quick6"]) {
+                trackEditor.CurrentCell.Value = NUDquick6.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+            }
+            else if (e.KeyData == defaultkeybinds["quick7"]) {
+                trackEditor.CurrentCell.Value = NUDquick7.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+            }
+            else if (e.KeyData == defaultkeybinds["quick8"]) {
+                trackEditor.CurrentCell.Value = NUDquick8.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+            }
+            else if (e.KeyData == defaultkeybinds["quick9"]) {
+                trackEditor.CurrentCell.Value = NUDquick9.Value;
+                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
         }
 
@@ -867,6 +904,27 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             senderComboBox.DropDownWidth = width + vertScrollBarWidth;
+        }
+
+        private void QuickValueChanged(object sender, EventArgs e)
+        {
+            File.WriteAllText($@"{AppLocation}\templates\quickvalues.txt", $"{NUDquick1.Value}\n{NUDquick2.Value}\n{NUDquick3.Value}\n{NUDquick4.Value}\n{NUDquick5.Value}\n{NUDquick6.Value}\n{NUDquick7.Value}\n{NUDquick8.Value}\n{NUDquick9.Value}");
+        }
+        private void LoadQuickValues()
+        {
+            if (!File.Exists($@"{AppLocation}\templates\quickvalues.txt"))
+                return;
+            string[] _load = File.ReadAllLines($@"{AppLocation}\templates\quickvalues.txt");
+
+            NUDquick1.Value = decimal.TryParse(_load[0], out decimal result) ? result : 1;
+            NUDquick2.Value = decimal.TryParse(_load[1], out result) ? result : 1;
+            NUDquick3.Value = decimal.TryParse(_load[2], out result) ? result : 1;
+            NUDquick4.Value = decimal.TryParse(_load[3], out result) ? result : 1;
+            NUDquick5.Value = decimal.TryParse(_load[4], out result) ? result : 1;
+            NUDquick6.Value = decimal.TryParse(_load[5], out result) ? result : 1;
+            NUDquick7.Value = decimal.TryParse(_load[6], out result) ? result : 1;
+            NUDquick8.Value = decimal.TryParse(_load[7], out result) ? result : 1;
+            NUDquick9.Value = decimal.TryParse(_load[8], out result) ? result : 1;
         }
 
     }

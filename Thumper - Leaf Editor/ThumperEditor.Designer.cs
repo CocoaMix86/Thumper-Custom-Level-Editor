@@ -207,13 +207,13 @@
             this.trackZoomVert = new System.Windows.Forms.TrackBar();
             this.trackZoom = new System.Windows.Forms.TrackBar();
             this.lblRawData = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
             this.panelRecentFiles = new System.Windows.Forms.Panel();
             this.dgvRecentFiles = new System.Windows.Forms.DataGridView();
@@ -431,13 +431,32 @@
             this.btnLeafZoom = new System.Windows.Forms.ToolStripButton();
             this.btnLeafAutoPlace = new System.Windows.Forms.ToolStripButton();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.NUDquick9 = new System.Windows.Forms.NumericUpDown();
+            this.label69 = new System.Windows.Forms.Label();
+            this.NUDquick8 = new System.Windows.Forms.NumericUpDown();
+            this.label64 = new System.Windows.Forms.Label();
+            this.NUDquick7 = new System.Windows.Forms.NumericUpDown();
+            this.label65 = new System.Windows.Forms.Label();
+            this.NUDquick6 = new System.Windows.Forms.NumericUpDown();
+            this.label66 = new System.Windows.Forms.Label();
+            this.NUDquick5 = new System.Windows.Forms.NumericUpDown();
+            this.label67 = new System.Windows.Forms.Label();
+            this.NUDquick4 = new System.Windows.Forms.NumericUpDown();
+            this.label62 = new System.Windows.Forms.Label();
+            this.NUDquick3 = new System.Windows.Forms.NumericUpDown();
+            this.label63 = new System.Windows.Forms.Label();
+            this.NUDquick2 = new System.Windows.Forms.NumericUpDown();
+            this.label61 = new System.Windows.Forms.Label();
+            this.NUDquick1 = new System.Windows.Forms.NumericUpDown();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.btnTrackColorDialog = new System.Windows.Forms.Button();
             this.NUD_TrackHighlight = new System.Windows.Forms.NumericUpDown();
-            this.NUD_TrackDoubleclick = new System.Windows.Forms.NumericUpDown();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTrait = new System.Windows.Forms.Label();
@@ -556,9 +575,18 @@
             this.panelRawData.SuspendLayout();
             this.leaftoolsToolStrip.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).BeginInit();
             this.panel2.SuspendLayout();
@@ -2267,18 +2295,6 @@
             this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
             this.lblRawData.Click += new System.EventHandler(this.lblRawData_Click);
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(3, 69);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(105, 15);
-            this.label16.TabIndex = 56;
-            this.label16.Text = "Doubleclick Value";
-            this.toolTip1.SetToolTip(this.label16, "The value to auto-insert when doubleclicking a cell");
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -2353,6 +2369,21 @@
             this.label14.TabIndex = 151;
             this.label14.Text = "?";
             this.toolTip1.SetToolTip(this.label14, "V. (volume)\r\nP. (pitch)\r\nPan\r\nOf. (offset)\r\nCh. (channel)");
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.BackColor = System.Drawing.Color.Transparent;
+            this.label60.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label60.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label60.Location = new System.Drawing.Point(131, 2);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(15, 16);
+            this.label60.TabIndex = 96;
+            this.label60.Text = "?";
+            this.toolTip1.SetToolTip(this.label60, "These values are accessible through keybinds.\r\nChange the keybinds in EDIT > Pref" +
+        "erences.");
             // 
             // timerBeeble
             // 
@@ -5829,6 +5860,7 @@
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel6.AutoScroll = true;
+            this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.label1);
             this.panel6.Controls.Add(this.panel4);
             this.panel6.Controls.Add(this.panel3);
@@ -5838,6 +5870,338 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(200, 449);
             this.panel6.TabIndex = 148;
+            // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel7.AutoScroll = true;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.NUDquick9);
+            this.panel7.Controls.Add(this.label69);
+            this.panel7.Controls.Add(this.NUDquick8);
+            this.panel7.Controls.Add(this.label64);
+            this.panel7.Controls.Add(this.NUDquick7);
+            this.panel7.Controls.Add(this.label65);
+            this.panel7.Controls.Add(this.NUDquick6);
+            this.panel7.Controls.Add(this.label66);
+            this.panel7.Controls.Add(this.NUDquick5);
+            this.panel7.Controls.Add(this.label67);
+            this.panel7.Controls.Add(this.NUDquick4);
+            this.panel7.Controls.Add(this.label62);
+            this.panel7.Controls.Add(this.NUDquick3);
+            this.panel7.Controls.Add(this.label63);
+            this.panel7.Controls.Add(this.NUDquick2);
+            this.panel7.Controls.Add(this.label61);
+            this.panel7.Controls.Add(this.NUDquick1);
+            this.panel7.Controls.Add(this.label60);
+            this.panel7.Controls.Add(this.label59);
+            this.panel7.Controls.Add(this.label58);
+            this.panel7.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.panel7.Location = new System.Drawing.Point(1, 371);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(180, 78);
+            this.panel7.TabIndex = 111;
+            // 
+            // NUDquick9
+            // 
+            this.NUDquick9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick9.DecimalPlaces = 3;
+            this.NUDquick9.ForeColor = System.Drawing.Color.White;
+            this.NUDquick9.Location = new System.Drawing.Point(55, 179);
+            this.NUDquick9.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick9.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick9.Name = "NUDquick9";
+            this.NUDquick9.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick9.TabIndex = 113;
+            this.NUDquick9.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.ForeColor = System.Drawing.Color.White;
+            this.label69.Location = new System.Drawing.Point(6, 179);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(48, 15);
+            this.label69.TabIndex = 112;
+            this.label69.Text = "Value 9";
+            // 
+            // NUDquick8
+            // 
+            this.NUDquick8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick8.DecimalPlaces = 3;
+            this.NUDquick8.ForeColor = System.Drawing.Color.White;
+            this.NUDquick8.Location = new System.Drawing.Point(55, 159);
+            this.NUDquick8.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick8.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick8.Name = "NUDquick8";
+            this.NUDquick8.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick8.TabIndex = 111;
+            this.NUDquick8.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label64.ForeColor = System.Drawing.Color.White;
+            this.label64.Location = new System.Drawing.Point(6, 159);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(48, 15);
+            this.label64.TabIndex = 110;
+            this.label64.Text = "Value 8";
+            // 
+            // NUDquick7
+            // 
+            this.NUDquick7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick7.DecimalPlaces = 3;
+            this.NUDquick7.ForeColor = System.Drawing.Color.White;
+            this.NUDquick7.Location = new System.Drawing.Point(55, 139);
+            this.NUDquick7.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick7.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick7.Name = "NUDquick7";
+            this.NUDquick7.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick7.TabIndex = 109;
+            this.NUDquick7.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label65.ForeColor = System.Drawing.Color.White;
+            this.label65.Location = new System.Drawing.Point(6, 139);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(48, 15);
+            this.label65.TabIndex = 108;
+            this.label65.Text = "Value 7";
+            // 
+            // NUDquick6
+            // 
+            this.NUDquick6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick6.DecimalPlaces = 3;
+            this.NUDquick6.ForeColor = System.Drawing.Color.White;
+            this.NUDquick6.Location = new System.Drawing.Point(55, 119);
+            this.NUDquick6.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick6.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick6.Name = "NUDquick6";
+            this.NUDquick6.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick6.TabIndex = 107;
+            this.NUDquick6.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label66.ForeColor = System.Drawing.Color.White;
+            this.label66.Location = new System.Drawing.Point(6, 119);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(48, 15);
+            this.label66.TabIndex = 106;
+            this.label66.Text = "Value 6";
+            // 
+            // NUDquick5
+            // 
+            this.NUDquick5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick5.DecimalPlaces = 3;
+            this.NUDquick5.ForeColor = System.Drawing.Color.White;
+            this.NUDquick5.Location = new System.Drawing.Point(55, 99);
+            this.NUDquick5.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick5.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick5.Name = "NUDquick5";
+            this.NUDquick5.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick5.TabIndex = 105;
+            this.NUDquick5.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label67.ForeColor = System.Drawing.Color.White;
+            this.label67.Location = new System.Drawing.Point(6, 99);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(48, 15);
+            this.label67.TabIndex = 104;
+            this.label67.Text = "Value 5";
+            // 
+            // NUDquick4
+            // 
+            this.NUDquick4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick4.DecimalPlaces = 3;
+            this.NUDquick4.ForeColor = System.Drawing.Color.White;
+            this.NUDquick4.Location = new System.Drawing.Point(55, 79);
+            this.NUDquick4.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick4.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick4.Name = "NUDquick4";
+            this.NUDquick4.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick4.TabIndex = 103;
+            this.NUDquick4.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label62.ForeColor = System.Drawing.Color.White;
+            this.label62.Location = new System.Drawing.Point(6, 79);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(48, 15);
+            this.label62.TabIndex = 102;
+            this.label62.Text = "Value 4";
+            // 
+            // NUDquick3
+            // 
+            this.NUDquick3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick3.DecimalPlaces = 3;
+            this.NUDquick3.ForeColor = System.Drawing.Color.White;
+            this.NUDquick3.Location = new System.Drawing.Point(55, 59);
+            this.NUDquick3.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick3.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick3.Name = "NUDquick3";
+            this.NUDquick3.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick3.TabIndex = 101;
+            this.NUDquick3.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.ForeColor = System.Drawing.Color.White;
+            this.label63.Location = new System.Drawing.Point(6, 59);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(48, 15);
+            this.label63.TabIndex = 100;
+            this.label63.Text = "Value 3";
+            // 
+            // NUDquick2
+            // 
+            this.NUDquick2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick2.DecimalPlaces = 3;
+            this.NUDquick2.ForeColor = System.Drawing.Color.White;
+            this.NUDquick2.Location = new System.Drawing.Point(55, 39);
+            this.NUDquick2.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick2.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick2.Name = "NUDquick2";
+            this.NUDquick2.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick2.TabIndex = 99;
+            this.NUDquick2.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label61.ForeColor = System.Drawing.Color.White;
+            this.label61.Location = new System.Drawing.Point(6, 39);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(48, 15);
+            this.label61.TabIndex = 98;
+            this.label61.Text = "Value 2";
+            // 
+            // NUDquick1
+            // 
+            this.NUDquick1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.NUDquick1.DecimalPlaces = 3;
+            this.NUDquick1.ForeColor = System.Drawing.Color.White;
+            this.NUDquick1.Location = new System.Drawing.Point(55, 19);
+            this.NUDquick1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.NUDquick1.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.NUDquick1.Name = "NUDquick1";
+            this.NUDquick1.Size = new System.Drawing.Size(86, 20);
+            this.NUDquick1.TabIndex = 97;
+            this.NUDquick1.ValueChanged += new System.EventHandler(this.QuickValueChanged);
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label59.ForeColor = System.Drawing.Color.White;
+            this.label59.Location = new System.Drawing.Point(6, 19);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(48, 15);
+            this.label59.TabIndex = 62;
+            this.label59.Text = "Value 1";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.ForeColor = System.Drawing.Color.Silver;
+            this.label58.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.label58.Location = new System.Drawing.Point(31, 3);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(104, 13);
+            this.label58.TabIndex = 61;
+            this.label58.Text = "══Quick Insert══";
             // 
             // label1
             // 
@@ -5856,14 +6220,12 @@
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.label15);
             this.panel4.Controls.Add(this.btnTrackColorDialog);
-            this.panel4.Controls.Add(this.label16);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.NUD_TrackHighlight);
-            this.panel4.Controls.Add(this.NUD_TrackDoubleclick);
             this.panel4.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel4.Location = new System.Drawing.Point(1, 298);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(180, 98);
+            this.panel4.Size = new System.Drawing.Size(180, 75);
             this.panel4.TabIndex = 110;
             // 
             // label18
@@ -5921,27 +6283,6 @@
             0,
             0});
             this.NUD_TrackHighlight.ValueChanged += new System.EventHandler(this.NUD_TrackHighlight_ValueChanged);
-            // 
-            // NUD_TrackDoubleclick
-            // 
-            this.NUD_TrackDoubleclick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUD_TrackDoubleclick.DecimalPlaces = 2;
-            this.NUD_TrackDoubleclick.Enabled = false;
-            this.NUD_TrackDoubleclick.ForeColor = System.Drawing.Color.White;
-            this.NUD_TrackDoubleclick.Location = new System.Drawing.Point(110, 69);
-            this.NUD_TrackDoubleclick.Maximum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            0});
-            this.NUD_TrackDoubleclick.Name = "NUD_TrackDoubleclick";
-            this.NUD_TrackDoubleclick.Size = new System.Drawing.Size(57, 20);
-            this.NUD_TrackDoubleclick.TabIndex = 63;
-            this.NUD_TrackDoubleclick.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // panel3
             // 
@@ -6174,6 +6515,7 @@
             this.btnTrackApply.Enabled = false;
             this.btnTrackApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrackApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackApply.ForeColor = System.Drawing.Color.White;
             this.btnTrackApply.Location = new System.Drawing.Point(73, 118);
             this.btnTrackApply.Name = "btnTrackApply";
             this.btnTrackApply.Size = new System.Drawing.Size(96, 24);
@@ -6802,10 +7144,20 @@
             this.leaftoolsToolStrip.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUDquick1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackDoubleclick)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).EndInit();
@@ -6859,10 +7211,8 @@
 		private System.Windows.Forms.Button btnTrackColorDialog;
 		private System.Windows.Forms.ColorDialog colorDialog1;
 		private System.Windows.Forms.Label label17;
-		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.Label label18;
 		private System.Windows.Forms.Label label19;
-		private System.Windows.Forms.NumericUpDown NUD_TrackDoubleclick;
 		private System.Windows.Forms.NumericUpDown NUD_TrackHighlight;
 		private System.Windows.Forms.ToolStripMenuItem leafsaveToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem leafloadToolStripMenuItem;
@@ -7245,6 +7595,27 @@
         private ResizeablePanel pictureBeeble;
         public System.Windows.Forms.ToolStripMenuItem toolstripLevelName;
         private System.Windows.Forms.ToolStripMenuItem bToolStripMenuItem;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.NumericUpDown NUDquick9;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.NumericUpDown NUDquick8;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.NumericUpDown NUDquick7;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.NumericUpDown NUDquick6;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.NumericUpDown NUDquick5;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.NumericUpDown NUDquick4;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.NumericUpDown NUDquick3;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.NumericUpDown NUDquick2;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.NumericUpDown NUDquick1;
     }
 }
 

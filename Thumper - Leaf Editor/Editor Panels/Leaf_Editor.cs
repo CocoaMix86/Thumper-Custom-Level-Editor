@@ -806,7 +806,6 @@ namespace Thumper_Custom_Level_Editor
 				dropParamPath.Enabled = false;
 				btnTrackApply.Enabled = false;
 				btnTrackColorDialog.Enabled = false;
-				NUD_TrackDoubleclick.Enabled = false;
 				NUD_TrackHighlight.Enabled = false;
 
 				btnTrackDelete.Enabled = false;
@@ -1031,7 +1030,6 @@ namespace Thumper_Custom_Level_Editor
 			txtTrait.Text = objmatch.trait_type;
 			//enable track highlighting tools
 			btnTrackColorDialog.Enabled = true;
-			NUD_TrackDoubleclick.Enabled = true;
 			NUD_TrackHighlight.Enabled = true;
 			//add track to list and populate with values
 			_tracks[_selecttrack] = new Sequencer_Object() {
@@ -1697,7 +1695,6 @@ namespace Thumper_Custom_Level_Editor
 			dropObjects.Enabled = enable;
 			dropParamPath.Enabled = enable;
 			btnTrackColorDialog.Enabled = enable;
-			NUD_TrackDoubleclick.Enabled = enable;
 			NUD_TrackHighlight.Enabled = enable;
 			btnTrackDelete.Enabled = _tracks.Count > 0;
 			btnTrackUp.Enabled = _tracks.Count > 1;
