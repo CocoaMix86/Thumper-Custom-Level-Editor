@@ -427,9 +427,9 @@ namespace Thumper_Custom_Level_Editor
 			//populate dropdowns
 			checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
 			dropGateBoss.SelectedValue = (string)_load["spn_name"];
-			dropGatePre.SelectedItem = (string)_load["pre_lvl_name"];
-			dropGatePost.SelectedItem = (string)_load["post_lvl_name"];
-			dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"];
+			dropGatePre.SelectedItem = (string)_load["pre_lvl_name"] == "" ? "<none>" : (string)_load["pre_lvl_name"];
+			dropGatePost.SelectedItem = (string)_load["post_lvl_name"] == "" ? "<none>" : (string)_load["post_lvl_name"];
+			dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"] == "" ? "<none>" : (string)_load["restart_lvl_name"];
 			dropGateSection.SelectedItem = (string)_load["section_type"];
 
 			///set save flag (gate just loaded, has no changes)
