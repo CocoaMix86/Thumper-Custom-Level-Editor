@@ -720,6 +720,10 @@ namespace Thumper_Custom_Level_Editor
                 //set folder to the templates location
                 ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
                 if (ofd.ShowDialog() == DialogResult.OK) {
+                    if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) {
+                        lockedfiles[loadedleaf].Close();
+                        lockedfiles.Remove(loadedleaf);
+                    }
                     _loadedleaftemp = "template";
                     object _load = LoadFileLock(ofd.FileName);
                     LoadLeaf(_load);
