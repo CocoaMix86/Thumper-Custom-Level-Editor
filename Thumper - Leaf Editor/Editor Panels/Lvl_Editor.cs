@@ -709,8 +709,10 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			//then get all cells in the rows that have values
 			List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
-			//select all of them
-			foreach (DataGridViewCell dgvc in filledcells) {
+            if (filledcells.Count == 0)
+                return;
+            //select all of them
+            foreach (DataGridViewCell dgvc in filledcells) {
 				dgvc.Selected = true;
 			}
 			//then set a single one to null. The "cellvaluechanged" event will handle the rest
