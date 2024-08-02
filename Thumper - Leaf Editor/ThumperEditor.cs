@@ -38,7 +38,7 @@ namespace Thumper_Custom_Level_Editor
                         lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                     }
                     catch (Exception ex) {
-                        MessageBox.Show($"That level is open already in another instance of the Level Editor.\n\n{ex}", "Level cannot be opened");
+                        MessageBox.Show($"That level is open already in another instance of the Level Editor.", "Level cannot be opened");
                         return;
                     }
                     //clear previously locked files

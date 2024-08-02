@@ -42,7 +42,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 			catch (Exception ex) {
 				//return method if parse fails
-				MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.\n\n{ex}", "File load error");
+				MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
 				return;
 			}
 

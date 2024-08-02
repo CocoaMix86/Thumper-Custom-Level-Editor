@@ -374,7 +374,7 @@ namespace Thumper_Custom_Level_Editor
                 try {
                     _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
                 } catch (Exception ex) {
-                    MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.\n\n{ex}", "File load error");
+                    MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
                     _load = null;
                 }
             }

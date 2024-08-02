@@ -776,7 +776,7 @@ namespace Thumper_Custom_Level_Editor
 				GenerateDataPoints(trackEditor.CurrentRow);
 			}
 			catch (Exception ex) {
-				MessageBox.Show($"Invalid format or characters in raw data. Please fix.\n\n{ex}", "Import error");
+				MessageBox.Show($"Invalid format or characters in raw data. Please fix.", "Import error");
             }
 			PlaySound("UIkpaste");
 			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
