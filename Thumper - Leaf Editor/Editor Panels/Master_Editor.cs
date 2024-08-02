@@ -718,6 +718,7 @@ namespace Thumper_Custom_Level_Editor
         {
 			//reset things to default values
 			masterjson = null;
+			loadedmaster = null;
 			_masterlvls.Clear();
 			lblMasterName.Text = "Master Editor";
 			btnConfigGlowColor.BackColor = Color.White;
