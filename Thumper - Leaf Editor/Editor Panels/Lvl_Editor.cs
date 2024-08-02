@@ -152,8 +152,7 @@ namespace Thumper_Custom_Level_Editor
 				else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
 					if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
 						return;
-					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					CellValueChangedLvl(e.RowIndex, e.ColumnIndex);
+					CellValueChangedLvl(e.RowIndex, e.ColumnIndex, true);
 				}
 			}
         }
@@ -173,8 +172,7 @@ namespace Thumper_Custom_Level_Editor
                     lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
-                    dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    CellValueChangedLvl(e.RowIndex, e.ColumnIndex);
+                    CellValueChangedLvl(e.RowIndex, e.ColumnIndex, true);
                 }
             }
         }
@@ -192,14 +190,18 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			CellValueChangedLvl(e.ColumnIndex, e.RowIndex);
 		}
-		private void CellValueChangedLvl(int ColumnIndex, int RowIndex)
+		private void CellValueChangedLvl(int ColumnIndex, int RowIndex, bool setnull = false)
         {
 			lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
 			try {
 				bool changes = false;
-				object _val = lvlSeqObjs[ColumnIndex, RowIndex].Value == null ? null : TruncateDecimal((decimal)lvlSeqObjs[ColumnIndex, RowIndex].Value, 3);
-				//iterate over each cell in the selection
-				foreach (DataGridViewCell _cell in lvlSeqObjs.SelectedCells) {
+                object _val = null;
+                if (setnull)
+                    _val = null;
+                else if (Decimal.TryParse(lvlSeqObjs[ColumnIndex, RowIndex].EditedFormattedValue?.ToString(), out decimal _valtoset))
+                    _val = TruncateDecimal(_valtoset, 3);
+                //iterate over each cell in the selection
+                foreach (DataGridViewCell _cell in lvlSeqObjs.SelectedCells) {
 					//if cell does not have the value, set it
 					if (_cell.Value != _val) {
 						_cell.Value = _val;
@@ -225,8 +227,7 @@ namespace Thumper_Custom_Level_Editor
 			shiftdown = e.Shift;
 			altdown = e.Alt;
 			if (e.KeyCode == Keys.Delete) {
-				lvlSeqObjs.CurrentCell.Value = null;
-				CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex);
+				CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex, true);
 				e.Handled = true;
 			}
 			else if (controldown) {
@@ -240,8 +241,7 @@ namespace Thumper_Custom_Level_Editor
 				if (e.KeyCode == Keys.X) {
 					DataObject d = lvlSeqObjs.GetClipboardContent();
 					Clipboard.SetDataObject(d, true);
-					lvlSeqObjs.CurrentCell.Value = null;
-					CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex);
+					CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex, true);
 					e.Handled = true;
 					SaveLvl(false);
 				}
@@ -280,8 +280,7 @@ namespace Thumper_Custom_Level_Editor
 		private void lvlSeqObjs_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Back) {
-				lvlSeqObjs.CurrentCell.Value = null;
-				CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex);
+				CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex, true);
 				e.Handled = true;
 			}
 		}

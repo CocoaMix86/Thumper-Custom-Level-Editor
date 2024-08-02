@@ -305,16 +305,16 @@ namespace Thumper_Custom_Level_Editor
             if (trackEditor.IsCurrentCellInEditMode)
                 CellValueChanged(e.RowIndex, e.ColumnIndex);
         }
-        private void CellValueChanged(int rowindex, int columnindex)
+        private void CellValueChanged(int rowindex, int columnindex, bool setnull = false)
         {
 			List<DataGridViewRow> edited = new();
 			try {
-				object _val;
 				bool changes = false;
-				if (Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
-					_val = TruncateDecimal(_valtoset, 3);
-				else
+				object _val = null;
+				if (setnull)
 					_val = null;
+				else if (Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
+					_val = TruncateDecimal(_valtoset, 3);
 				//iterate over each cell in the selection
 				foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
 					if (_cell.ReadOnly)
@@ -371,18 +371,15 @@ namespace Thumper_Custom_Level_Editor
 			DataGridView dgv = sender as DataGridView;
 			if (e.Button == MouseButtons.Right) {
 				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
-					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
 					GenerateDataPoints(dgv.Rows[e.RowIndex]);
 					SaveLeaf(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
-					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
 				else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
 					if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
 						return;
-					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					CellValueChanged(e.RowIndex, e.ColumnIndex);
+					CellValueChanged(e.RowIndex, e.ColumnIndex, true);
 					_undolistleaf.RemoveAt(1);
 				}
 			}
@@ -395,16 +392,14 @@ namespace Thumper_Custom_Level_Editor
 			DataGridView dgv = sender as DataGridView;
 			if (Control.MouseButtons == MouseButtons.Right) {
 				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
-					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
 					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
 					GenerateDataPoints(dgv.Rows[e.RowIndex]);
 					SaveLeaf(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
-					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
 				else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					CellValueChanged(e.RowIndex, e.ColumnIndex);
+					CellValueChanged(e.RowIndex, e.ColumnIndex, true);
 					//_undolistleaf.RemoveAt(1);
 				}
 			}
@@ -414,8 +409,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (e.KeyChar == (char)Keys.Back) {
 				_logundo = false;
-				trackEditor.CurrentCell.Value = null;
-				CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+				CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
@@ -431,8 +425,7 @@ namespace Thumper_Custom_Level_Editor
 			//delete cell value if Delete key is pressed
 			if (e.KeyCode == Keys.Delete) {
 				_logundo = false;
-				trackEditor.CurrentCell.Value = null;
-				CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+				CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
 				_logundo = true;
 				SaveLeaf(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
@@ -448,8 +441,7 @@ namespace Thumper_Custom_Level_Editor
 					DataObject d = trackEditor.GetClipboardContent();
 					Clipboard.SetDataObject(d, true);
 					_logundo = false;
-					trackEditor.CurrentCell.Value = null;
-					CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+					CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
 					e.Handled = true;
 					_logundo = true;
 					SaveLeaf(false, "Cut cells", $"");
@@ -1020,8 +1012,7 @@ namespace Thumper_Custom_Level_Editor
 				dgvc.Selected = true;
             }
 			//then set a single one to null. The "cellvaluechanged" event will handle the rest
-			filledcells[0].Value = null;
-			CellValueChanged(filledcells[0].RowIndex, filledcells[0].ColumnIndex);
+			CellValueChanged(filledcells[0].RowIndex, filledcells[0].ColumnIndex, true);
 
 			PlaySound("UIdataerase");
 			SaveLeaf(false, $"Cleared {selectedrows.Count} track(s)", $"");
