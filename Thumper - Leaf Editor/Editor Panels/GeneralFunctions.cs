@@ -135,7 +135,7 @@ namespace Thumper_Custom_Level_Editor
                 _loadedmaster = null;
                 panelMaster.Enabled = false;
             }
-            if (panel is "all" or "sample") {
+            if (panel is "all" or "samp") {
                 _samplelist.Clear();
                 _loadedsample = null;
                 panelSample.Enabled = false;
