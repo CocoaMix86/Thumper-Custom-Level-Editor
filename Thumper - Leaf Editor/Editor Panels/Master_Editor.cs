@@ -29,9 +29,9 @@ namespace Thumper_Custom_Level_Editor
 					}
 					loadedmaster = value;
 					ShowPanel(true, panelMaster);
-					panelMaster.Enabled = true;
+                    PanelEnableState(panelMaster, true);
 
-					if (!File.Exists(loadedmaster)) {
+                    if (!File.Exists(loadedmaster)) {
 						File.WriteAllText(loadedmaster, "");
 					}
 					lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));

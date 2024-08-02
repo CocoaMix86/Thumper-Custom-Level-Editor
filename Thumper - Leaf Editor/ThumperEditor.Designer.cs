@@ -2635,7 +2635,6 @@
             this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
             this.panelMaster.Controls.Add(this.panel5);
             this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMaster.Enabled = false;
             this.panelMaster.Location = new System.Drawing.Point(0, 0);
             this.panelMaster.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelMaster.Name = "panelMaster";
@@ -3328,7 +3327,6 @@
             this.panelLevel.Controls.Add(this.toolstripTitleLvl);
             this.panelLevel.Controls.Add(this.splitContainer1);
             this.panelLevel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLevel.Enabled = false;
             this.panelLevel.Location = new System.Drawing.Point(0, 0);
             this.panelLevel.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLevel.Name = "panelLevel";
@@ -4314,7 +4312,6 @@
             this.panelGate.Controls.Add(this.label36);
             this.panelGate.Controls.Add(this.gateLvlList);
             this.panelGate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGate.Enabled = false;
             this.panelGate.Location = new System.Drawing.Point(0, 0);
             this.panelGate.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelGate.Name = "panelGate";
@@ -5203,7 +5200,6 @@
             this.panelLeaf.Controls.Add(this.leaftoolsToolStrip);
             this.panelLeaf.Controls.Add(this.panel6);
             this.panelLeaf.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLeaf.Enabled = false;
             this.panelLeaf.Location = new System.Drawing.Point(0, 0);
             this.panelLeaf.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLeaf.Name = "panelLeaf";
@@ -6225,7 +6221,6 @@
             this.panelSample.Controls.Add(this.txtSampPath);
             this.panelSample.Controls.Add(this.toolstripTitleSample);
             this.panelSample.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSample.Enabled = false;
             this.panelSample.Location = new System.Drawing.Point(0, 0);
             this.panelSample.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelSample.Name = "panelSample";

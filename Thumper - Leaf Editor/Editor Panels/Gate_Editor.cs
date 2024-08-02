@@ -29,9 +29,9 @@ namespace Thumper_Custom_Level_Editor
 					}
 					loadedgate = value;
 					ShowPanel(true, panelGate);
-					panelGate.Enabled = true;
+                    PanelEnableState(panelGate, true);
 
-					if (!File.Exists(loadedgate)) {
+                    if (!File.Exists(loadedgate)) {
 						File.WriteAllText(loadedgate, "");
 					}
 					lockedfiles.Add(loadedgate, new FileStream(loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));

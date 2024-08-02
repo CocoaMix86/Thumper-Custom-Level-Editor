@@ -32,9 +32,9 @@ namespace Thumper_Custom_Level_Editor
 					}
 					loadedlvl = value;
 					ShowPanel(true, panelLevel);
-					panelLevel.Enabled = true;
+                    PanelEnableState(panelLevel, true);
 
-					if (!File.Exists(loadedlvl)) {
+                    if (!File.Exists(loadedlvl)) {
 						File.WriteAllText(loadedlvl, "");
 					}
 					lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));

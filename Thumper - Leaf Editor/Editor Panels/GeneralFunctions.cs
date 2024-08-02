@@ -118,27 +118,27 @@ namespace Thumper_Custom_Level_Editor
             if (panel is "all" or "leaf") {
                 _tracks.Clear();
                 _loadedleaf = null;
-                panelLeaf.Enabled = false;
+                PanelEnableState(panelLeaf, false);
             }
             if (panel is "all" or "lvl") {
                 _lvlleafs.Clear();
                 _loadedlvl = null;
-                panelLevel.Enabled = false;
+                PanelEnableState(panelLevel, false);
             }
             if (panel is "all" or "gate") {
                 _gatelvls.Clear();
                 _loadedgate = null;
-                panelGate.Enabled = false;
+                PanelEnableState(panelGate, false);
             }
             if (panel is "all" or "master") {
                 _masterlvls.Clear();
                 _loadedmaster = null;
-                panelMaster.Enabled = false;
+                PanelEnableState(panelMaster, false);
             }
             if (panel is "all" or "samp") {
                 _samplelist.Clear();
                 _loadedsample = null;
-                panelSample.Enabled = false;
+                PanelEnableState(panelSample, false);
             }
         }
 
@@ -338,6 +338,14 @@ namespace Thumper_Custom_Level_Editor
             lblChangelog.Text = Properties.Resources.changelog;
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
+
+        public void PanelEnableState(Panel panel, bool enablestate)
+        {
+            foreach (Control _c in panel.Controls.Cast<Control>().Where(x => x.GetType() != typeof(Label))) {
+                if (_c.Text != "titlebar")
+                    _c.Enabled = enablestate;
+            }
+        }
 
 
         /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947

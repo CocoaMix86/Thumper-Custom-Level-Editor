@@ -114,6 +114,12 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             ColorFormElements();
             JumpListUpdate();
+
+            PanelEnableState(panelLeaf, false);
+            PanelEnableState(panelLevel, false);
+            PanelEnableState(panelGate, false);
+            PanelEnableState(panelMaster, false);
+            PanelEnableState(panelSample, false);
             //set custom renderer
             menuStrip.Renderer = new MyRenderer();
             contextMenuDock.Renderer = new MyRenderer();
