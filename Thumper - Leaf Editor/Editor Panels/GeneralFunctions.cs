@@ -415,6 +415,15 @@ namespace Thumper_Custom_Level_Editor
             ClearPanels(filetype);
         }
 
+        public void ClearFileLock()
+        {
+            //clear previously locked files
+            foreach (var i in lockedfiles) {
+                i.Value.Close();
+            }
+            lockedfiles.Clear();
+        }
+
         public string CopyToWorkingFolderCheck(string filepath)
         {
             if (workingfolder == null)

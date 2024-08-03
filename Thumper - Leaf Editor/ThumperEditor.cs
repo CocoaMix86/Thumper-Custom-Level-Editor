@@ -41,21 +41,30 @@ namespace Thumper_Custom_Level_Editor
                     //in that case, return before doing anything
                     try {
                         lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                        ClearFileLock();
                     }
                     catch (Exception ex) {
                         MessageBox.Show($"That level is open already in another instance of the Level Editor.", "Level cannot be opened");
                         return;
                     }
-                    //clear previously locked files
-                    foreach (var i in lockedfiles) {
-                        i.Value.Close();
+                    //load Level Details into an object so it can be accessed later
+                    projectjson = LoadFileLock($@"{value}\LEVEL DETAILS.txt");
+                    if (projectjson == null || !projectjson.ContainsKey("level_name") || !projectjson.ContainsKey("difficulty") || !projectjson.ContainsKey("description") || !projectjson.ContainsKey("author")) {
+                        DialogResult result = MessageBox.Show("The LEVEL DETAILS.txt is missing information or is corrupt.\nCreate new LEVEL DETAILS?", "Failed to load", MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes) {
+                            JObject level_details = new() { { "level_name", $"{Path.GetFileName(value)}" }, { "difficulty", "D0" }, { "description", "replace this text" }, { "author", "some guy" } };
+                            File.WriteAllText($@"{value}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+                            projectjson = LoadFileLock($@"{value}\LEVEL DETAILS.txt");
+                        }
+                        else if (result == DialogResult.No) {
+                            MessageBox.Show("Level Folder not loaded");
+                            return;
+                        }
                     }
-                    lockedfiles.Clear();
+                    ClearFileLock();
                     //update working folder
                     lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                     _workingfolder = value;
-                    //load Level Details into an object so it can be accessed later
-                    projectjson = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
                     toolstripLevelName.Text = projectjson["level_name"];
                     toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
                     //since a new level folder is loading, all panels need to clear their data so we;re not showing data from other levels
