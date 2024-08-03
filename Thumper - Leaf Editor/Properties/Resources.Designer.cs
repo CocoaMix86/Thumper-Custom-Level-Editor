@@ -333,6 +333,8 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///leafopen;O, Control
         ///leafsave;S, Control
         ///leafsaveas;A, Control
+        ///leafundo;Z, Control
+        ///templateopen;T, Control
         ///lvlnew;N, Alt
         ///lvlopen;O, Alt
         ///lvlsave;S, Alt
@@ -348,9 +350,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///samplenew;N, Alt, Shift
         ///sampleopen;O, Alt, Shift
         ///samplesave;S, Alt, Shift
-        ///samplesaveas;A, Alt, Shift
-        ///saveall;Q, Control
-        ///levelnew;L, [rest of string was truncated]&quot;;.
+        ///samplesaveas; [rest of string was truncated]&quot;;.
         /// </summary>
         public static string defaultkeybinds {
             get {

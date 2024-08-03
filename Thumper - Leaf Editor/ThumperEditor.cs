@@ -787,7 +787,7 @@ namespace Thumper_Custom_Level_Editor
                 workingfolderFiles.Rows[offset].Selected = true;
             }
             //Undo keybind
-            else if (e.KeyCode == Keys.Z && e.Control) {
+            else if (e.KeyData == defaultkeybinds["leafundo"]) {
                 if (_undolistleaf.Count <= 1)
                     return;
                 UndoFunction(1);
@@ -878,6 +878,13 @@ namespace Thumper_Custom_Level_Editor
             openLevelFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelopen"];
             recentLevelsToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelrecent"];
             openLevelInExplorerToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelexplorer"];
+            leafTemplateToolStripMenuItem.ShortcutKeys = defaultkeybinds["templateopen"];
+            leafEditorToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhideleaf"];
+            levelEditorToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhidelvl"];
+            gateEditorToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhidegate"];
+            masterEditorToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhidemaster"];
+            workingFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhidefolder"];
+            sampleEditorToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhidesample"];
         }
 
         private void dropTrackLane_DropDown(object sender, EventArgs e)

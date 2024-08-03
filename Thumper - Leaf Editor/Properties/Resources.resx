@@ -165,6 +165,8 @@
 leafopen;O, Control
 leafsave;S, Control
 leafsaveas;A, Control
+leafundo;Z, Control
+templateopen;T, Control
 lvlnew;N, Alt
 lvlopen;O, Alt
 lvlsave;S, Alt
@@ -203,7 +205,13 @@ quick5;D5, Control
 quick6;D6, Control
 quick7;D7, Control
 quick8;D8, Control
-quick9;D9, Control</value>
+quick9;D9, Control
+showhideleaf;D1, Alt
+showhidelvl;D2, Alt
+showhidegate;D3, Alt
+showhidemaster;D4, Alt
+showhidefolder;D5, Alt
+showhidesample;D6, Alt</value>
   </data>
   <data name="D3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\D3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
