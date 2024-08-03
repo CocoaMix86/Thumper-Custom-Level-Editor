@@ -160,11 +160,13 @@ namespace Thumper_Custom_Level_Editor
                 ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
                 ofd.Title = "Load a Thumper Sample file";
                 if (ofd.ShowDialog() == DialogResult.OK) {
-                    //storing the filename in temp so it doesn't overwrite _loadedsample in case it fails the check in LoadSample()
-                    _loadedsampletemp = ofd.FileName;
+                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
+                    string filepath = CopyToWorkingFolderCheck(ofd.FileName);
+                    if (filepath == null)
+                        return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = LoadFileLock(ofd.FileName);
-                    LoadSample(_load);
+                    dynamic _load = LoadFileLock(filepath);
+                    LoadSample(_load, filepath);
                 }
             }
 		}
@@ -204,7 +206,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedsample = _loadedsampletemp = $@"{storePath}\samp_{tempFileName}";
+                _loadedsample = $@"{storePath}\samp_{tempFileName}";
                 WriteSample();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();
@@ -388,7 +390,7 @@ namespace Thumper_Custom_Level_Editor
 			if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
 				return;
 			SaveSample(true);
-			LoadSample(samplejson);
+			LoadSample(samplejson, loadedsample);
 			PlaySound("UIrevertchanges");
 		}
 		#endregion
@@ -415,7 +417,7 @@ namespace Thumper_Custom_Level_Editor
 			_samplelist.CollectionChanged += _samplelist_CollectionChanged;
 		}
 		
-		public void LoadSample(dynamic _load)
+		public void LoadSample(dynamic _load, string filepath)
 		{
 			if (_load == null)
 				return;
@@ -428,8 +430,8 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-			workingfolder = Path.GetDirectoryName(_loadedsampletemp);
-			_loadedsample = _loadedsampletemp;
+			workingfolder = Path.GetDirectoryName(filepath);
+			_loadedsample = filepath;
 			//set some visual elements
 			lblSampleEditor.Text = $"Sample Editor ⮞ {Path.GetFileNameWithoutExtension(loadedsample)}";
 

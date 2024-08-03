@@ -57,17 +57,7 @@ namespace Thumper_Custom_Level_Editor
                     ClearPanels();
                     //populate lvlsinworkfolder with all .lvl files in the project
                     //this is needed for some specific dropdowns.
-                    lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
-                    lvlsinworkfolder.Add("<none>");
-                    lvlsinworkfolder.Sort();
-                    //add lvl list as datasources to dropdowns
-                    dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
-                    dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
-                    dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
-                    dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
-                    dropGatePre.DataSource = lvlsinworkfolder.ToList();
-                    dropGatePost.DataSource = lvlsinworkfolder.ToList();
-                    dropGateRestart.DataSource = lvlsinworkfolder.ToList();
+                    UpdateLevelLists();
 
                     //set Working Folder panel data
                     lblWorkingFolder.Text = $"Working Folder ⮞ {projectjson["level_name"]}";

@@ -39,7 +39,6 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 		private string loadedgate;
-		string _loadedgatetemp;
 		readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
         readonly List<BossData> bossdata = new() {
 			new BossData() {boss_name = "Level 1 - circle", boss_spn = "boss_gate.spn", boss_ent = "boss_gate_pellet.ent"},
@@ -88,14 +87,13 @@ namespace Thumper_Custom_Level_Editor
 				string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");
 				if (File.Exists($@"{workingfolder}\lvl_{_file}.txt")) {
 					_load = LoadFileLock($@"{workingfolder}\lvl_{_file}.txt");
-					_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 				}
 				else {
 					MessageBox.Show("This lvl does not exist in the Level folder.");
 					return;
 				}
 				//load the selected lvl
-				LoadLvl(_load);
+				LoadLvl(_load, $@"{workingfolder}\lvl_{_file}.txt");
 			}
 		}
 		private void gateLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -153,11 +151,13 @@ namespace Thumper_Custom_Level_Editor
                 ofd.Title = "Load a Thumper Gate file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
-                    //storing the filename in temp so it doesn't overwrite _loadedgate in case it fails the check in LoadGate()
-                    _loadedgatetemp = ofd.FileName;
+                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
+                    string filepath = CopyToWorkingFolderCheck(ofd.FileName);
+                    if (filepath == null)
+                        return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = LoadFileLock(ofd.FileName);
-                    LoadGate(_load);
+                    dynamic _load = LoadFileLock(filepath);
+                    LoadGate(_load, filepath);
                 }
             }
 		}
@@ -197,7 +197,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedgate = _loadedgatetemp = $@"{storePath}\gate_{tempFileName}";
+                _loadedgate = $@"{storePath}\gate_{tempFileName}";
                 WriteGate();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();
@@ -354,7 +354,7 @@ namespace Thumper_Custom_Level_Editor
 			if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
 				return;
 			SaveGate(true);
-			LoadGate(gatejson);
+			LoadGate(gatejson, loadedgate);
 			PlaySound("UIrevertchanges");
 		}
 
@@ -392,7 +392,7 @@ namespace Thumper_Custom_Level_Editor
 			SaveGate(true);
 		}
 
-		public void LoadGate(dynamic _load)
+		public void LoadGate(dynamic _load, string filepath)
 		{
 			if (_load == null)
 				return;
@@ -405,8 +405,8 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-			workingfolder = Path.GetDirectoryName(_loadedgatetemp);
-			_loadedgate = _loadedgatetemp;
+			workingfolder = Path.GetDirectoryName(filepath);
+			_loadedgate = filepath;
 			//set some visual elements
 			lblGateName.Text = $"Gate Editor ⮞ {_load["obj_name"]}";
 

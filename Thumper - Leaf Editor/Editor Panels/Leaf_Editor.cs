@@ -46,7 +46,6 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 		private string loadedleaf;
-		string _loadedleaftemp;
 		dynamic leafjson;
 		public string leafobj;
 		public bool loadingleaf = false;
@@ -675,7 +674,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedleaf = _loadedleaftemp = $@"{storePath}\leaf_{tempFileName}";
+                _loadedleaf = $@"{storePath}\leaf_{tempFileName}";
                 WriteLeaf();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();
@@ -704,9 +703,13 @@ namespace Thumper_Custom_Level_Editor
                 ofd.Title = "Load a Thumper Leaf file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
-                    _loadedleaftemp = ofd.FileName;
-                    object _load = LoadFileLock(ofd.FileName);
-					LoadLeaf(_load);
+                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
+                    string filepath = CopyToWorkingFolderCheck(ofd.FileName);
+                    if (filepath == null)
+                        return;
+                    //load json from file into _load. The regex strips any comments from the text.
+                    dynamic _load = LoadFileLock(filepath);
+                    LoadLeaf(_load, filepath);
                 }
             }
 		}
@@ -724,9 +727,8 @@ namespace Thumper_Custom_Level_Editor
                         lockedfiles[loadedleaf].Close();
                         lockedfiles.Remove(loadedleaf);
                     }
-                    _loadedleaftemp = "template";
                     object _load = LoadFileLock(ofd.FileName);
-                    LoadLeaf(_load);
+                    LoadLeaf(_load, "template");
                 }
             }
 		}
@@ -1261,8 +1263,7 @@ namespace Thumper_Custom_Level_Editor
 			workingfolderFiles.Rows.Insert(workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
 			workingfolderFiles.Rows[workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
 
-			_loadedleaftemp = $@"{workingfolder}\leaf_{newfilename}.txt";
-			LoadLeaf(LoadFileLock($@"{workingfolder}\leaf_{newfilename}.txt"));
+			LoadLeaf(LoadFileLock($@"{workingfolder}\leaf_{newfilename}.txt"), $@"{workingfolder}\leaf_{newfilename}.txt");
 			
 			//update beat counts in loaded lvl if need be
 			if (_loadedlvl != null)
@@ -1301,7 +1302,7 @@ namespace Thumper_Custom_Level_Editor
 			if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
 				return;
 			SaveLeaf(true, "Revert to last save", "Revert");
-			LoadLeaf(leafjson);
+			LoadLeaf(leafjson, loadedleaf);
 			PlaySound("UIrevertnew");
 		}
 
@@ -1531,7 +1532,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		///Update DGV from _tracks
-		public void LoadLeaf(dynamic _load, bool resetundolist = true)
+		public void LoadLeaf(dynamic _load, string filepath, bool resetundolist = true)
 		{
 			if (_load == null)
 				return;
@@ -1557,12 +1558,12 @@ namespace Thumper_Custom_Level_Editor
 			//set flag that load is in progress. This skips SaveLeaf() method
 			loadingleaf = true;
 			//check for template or regular file
-			if (_loadedleaftemp == "template") {
+			if (filepath == "template") {
 				_loadedleaf = null;
 			}
 			else {
-				workingfolder = Path.GetDirectoryName(_loadedleaftemp);
-				_loadedleaf = _loadedleaftemp;
+				workingfolder = Path.GetDirectoryName(filepath);
+				_loadedleaf = filepath;
 			}
 			//clear existing tracks
 			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;

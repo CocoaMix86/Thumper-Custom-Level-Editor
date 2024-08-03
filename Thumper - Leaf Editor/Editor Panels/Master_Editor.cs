@@ -39,7 +39,6 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 		private string loadedmaster;
-		string _loadedmastertemp;
 		dynamic masterjson;
 		List<MasterLvlData> clipboardmaster = new();
 		ObservableCollection<MasterLvlData> _masterlvls = new();
@@ -68,7 +67,6 @@ namespace Thumper_Custom_Level_Editor
 					_file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
 					if (File.Exists($@"{workingfolder}\gate_{_file}.txt")) {
 						_load = LoadFileLock($@"{workingfolder}\gate_{_file}.txt");
-						_loadedgatetemp = $@"{workingfolder}\gate_{_file}.txt";
 					}
 					else {
 						MessageBox.Show("This gate does not exist in the Level folder.");
@@ -82,7 +80,6 @@ namespace Thumper_Custom_Level_Editor
 				_file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
 				if (File.Exists($@"{workingfolder}\lvl_{_file}.txt")) {
 					_load = LoadFileLock($@"{workingfolder}\lvl_{_file}.txt");
-					_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 				}
 				else {
 					MessageBox.Show("This lvl does not exist in the Level folder.");
@@ -97,9 +94,9 @@ namespace Thumper_Custom_Level_Editor
 			dropMasterLvlRest.SelectedIndexChanged -= new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
 			//load the selected item
 			if ((string)_load["obj_type"] == "SequinLevel") 
-				LoadLvl(_load);
+				LoadLvl(_load, $@"{workingfolder}\lvl_{_file}.txt");
 			else if ((string)_load["obj_type"] == "SequinGate") 
-				LoadGate(_load);
+				LoadGate(_load, $@"{workingfolder}\gate_{_file}.txt");
 			dropMasterLvlLeader.SelectedItem = _masterlvls[e.RowIndex].checkpoint_leader;
 			dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
 			btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
@@ -205,16 +202,13 @@ namespace Thumper_Custom_Level_Editor
                 ofd.Title = "Load a Thumper Master file";
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
-                    //storing the filename in temp so it doesn't overwrite _loadedmaster in case it fails the check in LoadMaster()
-                    _loadedmastertemp = ofd.FileName;
-					//load json from file into _load. The regex strips any comments from the text.
-					dynamic _load = LoadFileLock(ofd.FileName);
-                    LoadMaster(_load);
-                    ///load stand-alone master data
-                    //I have to do this here instead of in LoadMaster() because the DataSource for the dropdowns doesn't update until that method exits
-                    dropMasterSkybox.Text = (string)_load["skybox_name"];
-                    dropMasterIntro.Text = (string)_load["intro_lvl_name"];
-                    dropMasterCheck.Text = (string)_load["checkpoint_lvl_name"];
+                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
+                    string filepath = CopyToWorkingFolderCheck(ofd.FileName);
+                    if (filepath == null)
+                        return;
+                    //load json from file into _load. The regex strips any comments from the text.
+                    dynamic _load = LoadFileLock(filepath);
+                    LoadMaster(_load, filepath);
                     //set lvl save flag to true.
                     SaveMaster(true);
                 }
@@ -250,7 +244,7 @@ namespace Thumper_Custom_Level_Editor
 				}
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
-                _loadedmaster = _loadedmastertemp = $@"{storePath}\master_sequin.txt";
+                _loadedmaster = $@"{storePath}\master_sequin.txt";
                 WriteMaster();
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();
@@ -436,7 +430,7 @@ namespace Thumper_Custom_Level_Editor
 			if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
 				return;
 			SaveMaster(true);
-			LoadMaster(masterjson);
+			LoadMaster(masterjson, loadedmaster);
 			PlaySound("UIrevertchanges");
 		}
 
@@ -462,7 +456,7 @@ namespace Thumper_Custom_Level_Editor
 			_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
 		}
 
-		public void LoadMaster(dynamic _load)
+		public void LoadMaster(dynamic _load, string filepath)
 		{
 			if (_load == null)
 				return;
@@ -471,8 +465,8 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-			workingfolder = Path.GetDirectoryName(_loadedmastertemp);
-			_loadedmaster = _loadedmastertemp;
+			workingfolder = Path.GetDirectoryName(filepath);
+			_loadedmaster = filepath;
 			//set some visual elements
 			lblMasterName.Text = $"Master Editor - sequin.master";
 
@@ -491,12 +485,12 @@ namespace Thumper_Custom_Level_Editor
 					rest = _lvl["rest_lvl_name"] == "" ? "<none>" : _lvl["rest_lvl_name"],
 					id = rng.Next(0, 10000000)
 				});
-			}
-			dropMasterSkybox.SelectedIndex = dropMasterSkybox.Items.IndexOf((string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"]);
+            }
+            dropMasterSkybox.SelectedIndex = dropMasterSkybox.Items.IndexOf((string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"]);
 			dropMasterIntro.SelectedIndex = dropMasterIntro.Items.IndexOf((string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"]);
 			dropMasterCheck.SelectedIndex = dropMasterCheck.Items.IndexOf((string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]);
-			///load Config data (if file exists)
-			LoadConfig();
+            ///load Config data (if file exists)
+            LoadConfig();
 			CalculateMasterRuntime();
 			///set save flag (master just loaded, has no changes)
 			SaveMaster(true);
@@ -543,9 +537,8 @@ namespace Thumper_Custom_Level_Editor
 					MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
 					return;
 				}
-				_loadedlvltemp = $@"{workingfolder}\lvl_{_file}.txt";
 				//load the selected lvl
-				LoadLvl(_load);
+				LoadLvl(_load, $@"{workingfolder}\lvl_{_file}.txt");
 			}
 		}
 

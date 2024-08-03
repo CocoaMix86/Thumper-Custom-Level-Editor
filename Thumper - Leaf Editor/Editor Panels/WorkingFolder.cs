@@ -64,55 +64,50 @@ namespace Thumper_Custom_Level_Editor
 			///Send file off to different load methods based on the file type
 			//process SAMP first, since its JSON structure is different, and detectable
 			if (_load.ContainsKey("items")) {
-				_loadedsampletemp = _selectedfilename;
-				if (_loadedsampletemp == _loadedsample)
+				if (_selectedfilename == _loadedsample)
 					return;
 				//Check if gate is saved or not
 				if ((!_savesample && MessageBox.Show("Current sample is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
-				LoadSample(_load);
+				LoadSample(_load, _selectedfilename);
 				if (panelSample.Visible == false)
 					sampleEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinMaster") {
-				_loadedmastertemp = _selectedfilename;
-				if (_loadedmastertemp == _loadedmaster)
+				if (_selectedfilename == _loadedmaster)
 					return;
-				LoadMaster(_load);
+				LoadMaster(_load, _selectedfilename);
 				if (panelMaster.Visible == false)
 					masterEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinGate") {
-				_loadedgatetemp = _selectedfilename;
-				if (_loadedgatetemp == _loadedgate)
+				if (_selectedfilename == _loadedgate)
 					return;
 				//Check if gate is saved or not
 				if ((!_savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
-				LoadGate(_load);
+				LoadGate(_load, _selectedfilename);
 				if (panelGate.Visible == false)
 					gateEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLevel") {
-				_loadedlvltemp = _selectedfilename;
-				if (_loadedlvltemp == _loadedlvl)
+				if (_selectedfilename == _loadedlvl)
 					return;
 				//Check if lvl is saved or not
 				if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
-				LoadLvl(_load);
+				LoadLvl(_load, _selectedfilename);
 				if (panelLevel.Visible == false)
 					levelEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLeaf") {
-				_loadedleaftemp = _selectedfilename;
 				//don't reload the file if its the same name
-				if (_loadedleaftemp == _loadedleaf)
+				if (_selectedfilename == _loadedleaf)
 					return;
 				//Check if leaf is saved or not
 				if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
-				LoadLeaf(_load);
+				LoadLeaf(_load, _selectedfilename);
 				//make panel visible if it isn't
 				if (panelLeaf.Visible == false)
 					leafEditorToolStripMenuItem.PerformClick();
@@ -185,8 +180,7 @@ namespace Thumper_Custom_Level_Editor
 				if (filetype == "master") {
 					if (_loadedmaster != file) {
 						dynamic _load = LoadFileLock(file);
-						_loadedmastertemp = file;
-						LoadMaster(_load);
+						LoadMaster(_load, file);
 						if (!panelMaster.Visible && !masterEditorToolStripMenuItem.Checked)
 							masterEditorToolStripMenuItem.PerformClick();
 					}
@@ -488,7 +482,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 				if (_loadedlvl != null) {
 					_load = LoadFileLock(_loadedlvl);
-					LoadLvl(_load);
+					LoadLvl(_load, loadedlvl);
 				}
 			}
 			else if (filetype == "lvl") {
@@ -504,11 +498,11 @@ namespace Thumper_Custom_Level_Editor
 				}
 				if (_loadedgate != null) {
 					_load = LoadFileLock(_loadedgate);
-					LoadGate(_load);
+					LoadGate(_load, _loadedgate);
 				}
 				if (_loadedmaster != null) {
 					_load = LoadFileLock(_loadedmaster);
-					LoadMaster(_load);
+					LoadMaster(_load, _loadedmaster);
 				}
 			}
 			else if (filetype == "gate") {
@@ -522,7 +516,7 @@ namespace Thumper_Custom_Level_Editor
 				}
 				if (_loadedmaster != null) {
 					_load = LoadFileLock(_loadedmaster);
-					LoadMaster(_load);
+					LoadMaster(_load, _loadedmaster);
 				}
 			}
 		}

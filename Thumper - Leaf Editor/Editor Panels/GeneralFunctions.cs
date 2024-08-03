@@ -301,13 +301,28 @@ namespace Thumper_Custom_Level_Editor
         private void UndoFunction(int undoindex)
         {
             if (undoindex >= _undolistleaf.Count) {
-                LoadLeaf(_undolistleaf.Last().savestate, false);
+                LoadLeaf(_undolistleaf.Last().savestate, loadedleaf, false);
                 _undolistleaf.RemoveRange(0, _undolistleaf.Count - 1);
             }
             else {
-                LoadLeaf(_undolistleaf[undoindex].savestate, false);
+                LoadLeaf(_undolistleaf[undoindex].savestate, loadedleaf, false);
                 _undolistleaf.RemoveRange(0, undoindex);
             }
+        }
+
+        private void UpdateLevelLists()
+        {
+            lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
+            lvlsinworkfolder.Add("<none>");
+            lvlsinworkfolder.Sort();
+            //add lvl list as datasources to dropdowns
+            dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
+            dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
+            dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
+            dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
+            dropGatePre.DataSource = lvlsinworkfolder.ToList();
+            dropGatePost.DataSource = lvlsinworkfolder.ToList();
+            dropGateRestart.DataSource = lvlsinworkfolder.ToList();
         }
         ///
         ///
@@ -398,6 +413,29 @@ namespace Thumper_Custom_Level_Editor
             }
             File.Delete(_selectedfilename);
             ClearPanels(filetype);
+        }
+
+        public string CopyToWorkingFolderCheck(string filepath)
+        {
+            if (workingfolder == null)
+                return filepath;
+
+            string dir = Path.GetDirectoryName(filepath);
+            string file = Path.GetFileName(filepath);
+            if (dir != workingfolder) {
+                DialogResult result = MessageBox.Show("That file is not in the current Working Folder. Do you want to copy it here?\nOr not, and open that level folder?\n\nYES = copy\nNO = open that level folder\nCANCEL = do nothing", "Confirm?", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes) {
+                    File.Copy(filepath, $@"{workingfolder}\{file}");
+                    filepath = $@"{workingfolder}\{file}";
+                }
+                else if (result == DialogResult.No) {
+
+                }
+                else
+                    filepath = null;
+            }
+
+            return filepath;
         }
     }
     /*
