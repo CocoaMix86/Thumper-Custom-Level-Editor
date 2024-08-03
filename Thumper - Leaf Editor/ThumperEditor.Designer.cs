@@ -32,10 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -71,6 +67,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -217,10 +217,6 @@
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
             this.panelRecentFiles = new System.Windows.Forms.Panel();
             this.dgvRecentFiles = new System.Windows.Forms.DataGridView();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.closerecent = new System.Windows.Forms.DataGridViewButtonColumn();
             this.toolstripRecentFiles = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.btnRecentClose = new System.Windows.Forms.ToolStripButton();
@@ -505,6 +501,10 @@
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.lblChangelogClose = new System.Windows.Forms.ToolStripButton();
             this.pictureBeeble = new Thumper_Custom_Level_Editor.ResizeablePanel();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.closerecent = new System.Windows.Forms.DataGridViewButtonColumn();
             this.menuStrip.SuspendLayout();
             this.workingfolderRightClick.SuspendLayout();
             this.contextMenuNewFile.SuspendLayout();
@@ -2401,7 +2401,7 @@
             this.panelRecentFiles.Location = new System.Drawing.Point(463, 189);
             this.panelRecentFiles.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
-            this.panelRecentFiles.Size = new System.Drawing.Size(448, 247);
+            this.panelRecentFiles.Size = new System.Drawing.Size(569, 247);
             this.panelRecentFiles.TabIndex = 137;
             this.panelRecentFiles.Tag = "editorpanel";
             this.panelRecentFiles.Visible = false;
@@ -2459,69 +2459,11 @@
             this.dgvRecentFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRecentFiles.RowTemplate.Height = 20;
             this.dgvRecentFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.Size = new System.Drawing.Size(446, 223);
+            this.dgvRecentFiles.Size = new System.Drawing.Size(567, 223);
             this.dgvRecentFiles.TabIndex = 140;
             this.dgvRecentFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecentFiles_CellClick);
             this.dgvRecentFiles.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvRecentFiles_CellPainting);
             this.dgvRecentFiles.Click += new System.EventHandler(this.panelRecentClick);
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewImageColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageColumn1.ToolTipText = "Click to load level";
-            this.dataGridViewImageColumn1.Width = 5;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewTextBoxColumn1.FillWeight = 30F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Level";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Width = 42;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewTextBoxColumn2.FillWeight = 20F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Path";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // closerecent
-            // 
-            this.closerecent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.closerecent.DefaultCellStyle = dataGridViewCellStyle5;
-            this.closerecent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closerecent.HeaderText = "";
-            this.closerecent.Name = "closerecent";
-            this.closerecent.ReadOnly = true;
-            this.closerecent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.closerecent.ToolTipText = "Click to remove entry";
-            this.closerecent.Width = 5;
             // 
             // toolstripRecentFiles
             // 
@@ -2540,7 +2482,7 @@
             this.toolstripRecentFiles.Padding = new System.Windows.Forms.Padding(0);
             this.toolstripRecentFiles.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolstripRecentFiles.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripRecentFiles.Size = new System.Drawing.Size(446, 22);
+            this.toolstripRecentFiles.Size = new System.Drawing.Size(567, 22);
             this.toolstripRecentFiles.TabIndex = 139;
             this.toolstripRecentFiles.Text = "titlebar";
             this.toolstripRecentFiles.Click += new System.EventHandler(this.panelRecentClick);
@@ -4585,6 +4527,7 @@
             this.Lvl.HeaderText = "Lvl";
             this.Lvl.Name = "Lvl";
             this.Lvl.ReadOnly = true;
+            this.Lvl.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Lvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Sentry
@@ -4596,6 +4539,7 @@
             "Single Lane",
             "Multi Lane"});
             this.Sentry.Name = "Sentry";
+            this.Sentry.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Sentry.Width = 48;
             // 
             // dgvGateBucket
@@ -4608,6 +4552,7 @@
             "2",
             "3"});
             this.dgvGateBucket.Name = "dgvGateBucket";
+            this.dgvGateBucket.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvGateBucket.Visible = false;
             this.dgvGateBucket.Width = 51;
             // 
@@ -7025,6 +6970,64 @@
             this.pictureBeeble.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBeeble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewImageColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageColumn1.ToolTipText = "Click to load level";
+            this.dataGridViewImageColumn1.Width = 5;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewTextBoxColumn1.FillWeight = 30F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Level";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 42;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn2.FillWeight = 20F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Path";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // closerecent
+            // 
+            this.closerecent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.closerecent.DefaultCellStyle = dataGridViewCellStyle5;
+            this.closerecent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closerecent.HeaderText = "";
+            this.closerecent.Name = "closerecent";
+            this.closerecent.ReadOnly = true;
+            this.closerecent.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.closerecent.ToolTipText = "Click to remove entry";
+            this.closerecent.Width = 5;
+            // 
             // FormLeafEditor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -7537,9 +7540,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkGateRandom;
         private System.Windows.Forms.Label lblGatebuckethelp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgvGateBucket;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStripButton btnLeafRandom;
         private System.Windows.Forms.ToolStripButton btnLeafRandomValues;
@@ -7559,10 +7559,6 @@
         private System.Windows.Forms.DataGridViewImageColumn FileType;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
         private System.Windows.Forms.DataGridViewButtonColumn searchforfile;
-        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewImageColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewButtonColumn closerecent;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
@@ -7631,6 +7627,13 @@
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.NumericUpDown NUDquick1;
         private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgvGateBucket;
+        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewButtonColumn closerecent;
     }
 }
 
