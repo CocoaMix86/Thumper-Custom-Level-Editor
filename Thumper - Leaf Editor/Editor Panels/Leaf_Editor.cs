@@ -1553,20 +1553,23 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show("Leaf missing obj_name parameter. Please set it in the txt file and then reload.", "Leaf not loaded");
 				return;
 			}
-			lblTrackFileName.Text = $@"Leaf Editor ⮞ {_load["obj_name"]}";
-			leafobj = _load["obj_name"];
-			//set flag that load is in progress. This skips SaveLeaf() method
-			loadingleaf = true;
 			//check for template or regular file
 			if (filepath == "template") {
 				_loadedleaf = null;
 			}
 			else {
 				workingfolder = Path.GetDirectoryName(filepath);
-				_loadedleaf = filepath;
-			}
-			//clear existing tracks
-			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
+                //check if the assign actually worked. If not, stop loading.
+                if (workingfolder != Path.GetDirectoryName(filepath))
+                    return;
+                _loadedleaf = filepath;
+            }
+            lblTrackFileName.Text = $@"Leaf Editor ⮞ {_load["obj_name"]}";
+            leafobj = _load["obj_name"];
+            //set flag that load is in progress. This skips SaveLeaf() method
+            loadingleaf = true;
+            //clear existing tracks
+            trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			_tracks.Clear();
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 			//set beat_cnt and time_sig

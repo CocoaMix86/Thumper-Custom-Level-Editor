@@ -466,7 +466,10 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
 			workingfolder = Path.GetDirectoryName(filepath);
-			_loadedmaster = filepath;
+            //check if the assign actually worked. If not, stop loading.
+            if (workingfolder != Path.GetDirectoryName(filepath))
+                return;
+            _loadedmaster = filepath;
 			//set some visual elements
 			lblMasterName.Text = $"Master Editor - sequin.master";
 

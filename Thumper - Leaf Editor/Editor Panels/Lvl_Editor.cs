@@ -787,6 +787,9 @@ namespace Thumper_Custom_Level_Editor
 			}
 			//if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
 			workingfolder = Path.GetDirectoryName(filepath);
+			//check if the assign actually worked. If not, stop loading.
+			if (workingfolder != Path.GetDirectoryName(filepath))
+				return;
 			_loadedlvl = filepath;
 			//set some visual elements
 			lblLvlName.Text = $@"Lvl Editor ⮞ {_load["obj_name"]}";
