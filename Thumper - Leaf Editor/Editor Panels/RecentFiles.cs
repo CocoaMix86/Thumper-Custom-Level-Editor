@@ -16,6 +16,8 @@ namespace Thumper_Custom_Level_Editor
             foreach (string level in recentfiles) {
                 dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
             }
+            dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
         private void dgvRecentFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
