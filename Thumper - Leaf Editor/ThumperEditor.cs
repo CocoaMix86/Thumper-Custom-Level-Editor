@@ -32,6 +32,11 @@ namespace Thumper_Custom_Level_Editor
                             return;
                         }
                     }
+                    //check if LEVEL DETAILS exists. If not, this is not a level folder
+                    if (!File.Exists($@"{value}\LEVEL DETAILS.txt")) {
+                        MessageBox.Show("This folder does not appear to be a Custom Level folder. The LEVEL DETAILS file is missing.\nFile not loaded.", "File not loaded");
+                        return;
+                    }
                     //Try locking LEVEL DETAILS first. If it fails, the level is already open
                     //in that case, return before doing anything
                     try {
@@ -53,7 +58,7 @@ namespace Thumper_Custom_Level_Editor
                     projectjson = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
                     toolstripLevelName.Text = projectjson["level_name"];
                     toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
-
+                    //since a new level folder is loading, all panels need to clear their data so we;re not showing data from other levels
                     ClearPanels();
                     //populate lvlsinworkfolder with all .lvl files in the project
                     //this is needed for some specific dropdowns.

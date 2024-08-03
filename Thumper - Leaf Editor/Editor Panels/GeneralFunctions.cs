@@ -425,7 +425,7 @@ namespace Thumper_Custom_Level_Editor
             if (dir != workingfolder) {
                 DialogResult result = MessageBox.Show("That file is not in the current Working Folder. Do you want to copy it here?\nOr not, and open that level folder?\n\nYES = copy\nNO = open that level folder\nCANCEL = do nothing", "Confirm?", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes) {
-                    File.Copy(filepath, $@"{workingfolder}\{file}");
+                    if (!File.Exists($@"{workingfolder}\{file}")) File.Copy(filepath, $@"{workingfolder}\{file}");
                     filepath = $@"{workingfolder}\{file}";
                 }
                 else if (result == DialogResult.No) {
