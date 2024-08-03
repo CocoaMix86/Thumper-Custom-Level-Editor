@@ -807,42 +807,6 @@ namespace Thumper_Custom_Level_Editor
             else if (e.KeyData == defaultkeybinds["toggleautoplace"]) {
                 btnLeafAutoPlace.PerformClick();
             }
-            else if (e.KeyData == defaultkeybinds["quick1"]) {
-                trackEditor.CurrentCell.Value = NUDquick1.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
-            else if (e.KeyData == defaultkeybinds["quick2"]) {
-                trackEditor.CurrentCell.Value = NUDquick2.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
-            else if (e.KeyData == defaultkeybinds["quick3"]) {
-                trackEditor.CurrentCell.Value = NUDquick3.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
-            else if (e.KeyData == defaultkeybinds["quick4"]) {
-                trackEditor.CurrentCell.Value = NUDquick4.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
-            else if (e.KeyData == defaultkeybinds["quick5"]) {
-                trackEditor.CurrentCell.Value = NUDquick5.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
-            else if (e.KeyData == defaultkeybinds["quick6"]) {
-                trackEditor.CurrentCell.Value = NUDquick6.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
-            else if (e.KeyData == defaultkeybinds["quick7"]) {
-                trackEditor.CurrentCell.Value = NUDquick7.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
-            else if (e.KeyData == defaultkeybinds["quick8"]) {
-                trackEditor.CurrentCell.Value = NUDquick8.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
-            else if (e.KeyData == defaultkeybinds["quick9"]) {
-                trackEditor.CurrentCell.Value = NUDquick9.Value;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
-            }
         }
 
         private void SetKeyBinds()

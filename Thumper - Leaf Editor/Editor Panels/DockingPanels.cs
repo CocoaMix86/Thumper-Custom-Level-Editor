@@ -206,6 +206,7 @@ namespace Thumper_Custom_Level_Editor
         {
             pictureBeeble.Location = new Point(50, 50);
             pictureBeeble.Size = new Size(96, 76);
+            PlaySound("UIwindowopen");
         }
 
         private void editorpanelDoubleClick(object sender, EventArgs e)
