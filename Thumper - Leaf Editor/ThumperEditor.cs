@@ -849,6 +849,7 @@ namespace Thumper_Custom_Level_Editor
             masterEditorToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhidemaster"];
             workingFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhidefolder"];
             sampleEditorToolStripMenuItem.ShortcutKeys = defaultkeybinds["showhidesample"];
+            btnUndoLeaf.ToolTipText = $"Undo ({String.Join("+", defaultkeybinds["leafundo"].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList().Reverse<string>())})";
         }
 
         private void dropTrackLane_DropDown(object sender, EventArgs e)
