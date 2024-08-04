@@ -238,6 +238,7 @@ namespace Thumper_Custom_Level_Editor
             else {
                 mainform.WriteFileLock(mainform.lockedfiles[$@"{levelpath}\LEVEL DETAILS.txt"], level_details);
             }
+            mainform.projectjson = level_details;
             mainform.workingfolder = levelpath;
 
             ///

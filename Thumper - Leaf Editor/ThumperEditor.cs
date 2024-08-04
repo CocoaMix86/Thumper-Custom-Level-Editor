@@ -488,6 +488,15 @@ namespace Thumper_Custom_Level_Editor
         {
             dynamic _load = new JObject();
             DialogInput customlevel = new(this, false);
+            //set textboxes
+            customlevel.txtCustomName.Text = projectjson["level_name"] ?? "LEVEL NAME";
+            customlevel.txtCustomDiff.Text = projectjson["difficulty"] ?? "d0";
+            customlevel.txtDesc.Text = projectjson["description"] ?? "ADD A DESCRIPTION";
+            customlevel.txtCustomAuthor.Text = projectjson["author"] ?? "SOME PERSON";
+            //show the new level folder dialog box
+            customlevel.ShowDialog();
+
+            /*
             //atempt to parse JSON of LEVEL DETAILS. This wil lalso take care of the situation if it doesn't exist
             _load = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
             //if the LEVEL DETAILS file is missing, or missing parameters, this fill fill the blanks will empty space
@@ -495,8 +504,7 @@ namespace Thumper_Custom_Level_Editor
             customlevel.txtCustomDiff.Text = _load.ContainsKey("difficulty") ? (string)_load["difficulty"] : "";
             customlevel.txtDesc.Text = _load.ContainsKey("description") ? (string)_load["description"] : "";
             customlevel.txtCustomAuthor.Text = _load.ContainsKey("author") ? (string)_load["author"] : "";
-            //show the new level folder dialog box
-            customlevel.Show();
+            */
         }
 
         private void regenerateDefaultFilesToolStripMenuItem_Click(object sender, EventArgs e)
