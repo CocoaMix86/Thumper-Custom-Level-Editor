@@ -60,8 +60,8 @@ namespace Thumper_Custom_Level_Editor
 		public List<Sequencer_Object> _tracks = new();
 		private List<Object_Params> _objects = new();
 		private Dictionary<string, string> objectcolors = new();
-		public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
-		public List<string> _tracklanefriendly = new() { "lane left 2", "lane left 1", "lane center", "lane right 1", "lane right 2" };
+		//public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
+		public Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
 		public List<Tuple<string, int, int>> _scrollpositions = new();
 		public List<Sequencer_Object> clipboardtracks = new();
 		public List<CellFunction> _functions = new();
@@ -582,7 +582,9 @@ namespace Thumper_Custom_Level_Editor
 			//this is only here to stop that
 			try {
 				label11.Text = "Lane";
-				dropTrackLane.DataSource = _tracklanefriendly;
+				dropTrackLane.DataSource = new BindingSource(_tracklanefriendly, null);
+				dropTrackLane.ValueMember = "Key";
+				dropTrackLane.DisplayMember = "Value";
 				//when an object is chosen, unlock the param_path options and set datasource
 				dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
 				//switch index back and forth to trigger event
@@ -1074,7 +1076,7 @@ namespace Thumper_Custom_Level_Editor
 				_tracks[_selecttrack].obj_name = dropTrackLane.SelectedValue?.ToString() + ".samp";
 			//if lane is not middle, edit the param_path and friendly_param to match
 			if (_tracks[_selecttrack].param_path.Contains(".ent")) {
-				_tracks[_selecttrack].param_path = _tracks[_selecttrack].param_path.Replace(".ent", _tracklane[dropTrackLane.SelectedIndex]);
+				_tracks[_selecttrack].param_path = _tracks[_selecttrack].param_path.Replace(".ent", $".{dropTrackLane.SelectedValue}");
 				_tracks[_selecttrack].friendly_param += ", " + dropTrackLane.Text;
 			}
 			//change row header to reflect what the track is
@@ -1551,9 +1553,6 @@ namespace Thumper_Custom_Level_Editor
 			loadingleaf = false;
 			bool loadfail = false;
 			string loadfailmessage = "";
-			//if Leaf Editor is hidden, show it when a leaf is selected
-			if (panelLeaf.Visible == false)
-				leafEditorToolStripMenuItem.PerformClick();
 			//detect if file is actually Leaf or not
 			if ((string)_load["obj_type"] != "SequinLeaf") {
 				MessageBox.Show("This does not appear to be a leaf file!", "Leaf not loaded");
@@ -1575,6 +1574,9 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 _loadedleaf = filepath;
             }
+            //if Leaf Editor is hidden, show it when a leaf is selected
+            if (panelLeaf.Visible == false)
+                leafEditorToolStripMenuItem.PerformClick();
             lblTrackFileName.Text = $@"Leaf Editor ⮞ {_load["obj_name"]}";
             leafobj = _load["obj_name"];
             //set flag that load is in progress. This skips SaveLeaf() method
@@ -1592,8 +1594,6 @@ namespace Thumper_Custom_Level_Editor
 			}
 			dropTimeSig.Enabled = true;
 			dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(_time_sig);
-			//
-			dropTrackLane.DataSource = _tracklanefriendly;
 			//each object in the seq_objs[] list becomes a track
 			foreach (dynamic seq_obj in _load["seq_objs"]) {
 				Sequencer_Object _s = new() {
@@ -1629,7 +1629,7 @@ namespace Thumper_Custom_Level_Editor
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this
 				if (_s.param_path.Contains("."))
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
-					_s.friendly_param += $", {dropTrackLane.Items[_tracklane.IndexOf($".{_s.param_path.Split('.')[1]}")]}";
+					_s.friendly_param += $", {_tracklanefriendly[_s.param_path.Split('.')[1]]}";
 				//finally, add the completed seq_obj to tracks
 				_tracks.Add(_s);
 			}
