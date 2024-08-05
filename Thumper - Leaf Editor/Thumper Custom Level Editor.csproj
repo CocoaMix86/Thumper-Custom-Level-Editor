@@ -80,8 +80,6 @@
     <Compile Include="Editor Panels\RecentFiles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LevelDataClasses\CellFunction.cs" />
-    <Compile Include="LevelDataClasses\WorkingFolderFileItem.cs" />
     <Compile Include="Other Forms\AboutThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,7 +115,6 @@
     <Compile Include="Other Forms\DialogInput.Designer.cs">
       <DependentUpon>DialogInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="LevelDataClasses\GateLvlData.cs" />
     <Compile Include="Editor Panels\Gate_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,20 +134,16 @@
     <Compile Include="Editor Panels\Leaf_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LevelDataClasses\LvlLeafData.cs" />
+    <Compile Include="LevelDataClasses\DataClasses.cs" />
     <Compile Include="Editor Panels\Lvl_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LevelDataClasses\MasterLvlData.cs" />
     <Compile Include="Editor Panels\Master_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LevelDataClasses\Object_Params.cs" />
-    <Compile Include="LevelDataClasses\SampleData.cs" />
     <Compile Include="Editor Panels\Sample_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LevelDataClasses\Sequencer_Object.cs" />
     <Compile Include="ThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -609,7 +609,7 @@ namespace Thumper_Custom_Level_Editor
 					label11.Text = "Samples";
 					LvlReloadSamples();
 					dropTrackLane.DataSource = null;
-					dropTrackLane.DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
+					dropTrackLane.DataSource = _lvlsamples.Select(x => x.obj_name).ToArray();
 					dropTrackLane.SelectedIndex = -1;
 				}
 			}
