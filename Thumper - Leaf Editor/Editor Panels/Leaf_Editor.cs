@@ -995,11 +995,10 @@ namespace Thumper_Custom_Level_Editor
 					dgv.Rows.Insert(_index);
 					DataGridViewRow r = dgv.Rows[_index];
 					try {
-						//pass _griddata per row to be imported to the DGV
-						TrackRawImport(r, _newtrack.data_points);
-						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_newtrack.highlight_color)), Color.Black, 0.4);
-						//set the headercell names
-						ChangeTrackName(r);
+                        //set the headercell names
+                        ChangeTrackName(r);
+                        //pass _griddata per row to be imported to the DGV
+                        TrackRawImport(r, _newtrack.data_points);
 					}
 					catch (Exception) { }
 				}
@@ -1466,8 +1465,9 @@ namespace Thumper_Custom_Level_Editor
 		}
 		///Updates row headers to be the Object and Param_Path
 		public void ChangeTrackName(DataGridViewRow r)
-		{
-			if (_tracks[r.Index].friendly_type == "PLAY SAMPLE")
+        {
+            r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), Color.Black, 0.4);
+            if (_tracks[r.Index].friendly_type == "PLAY SAMPLE")
 				//show the sample name instead
 				r.HeaderCell.Value = _tracks[r.Index].friendly_type + " (" + _tracks[r.Index].obj_name + ")";
 			else
@@ -1635,11 +1635,10 @@ namespace Thumper_Custom_Level_Editor
 			//foreach row, import data points associated with it
 			foreach (DataGridViewRow r in trackEditor.Rows) {
 				try {
-					//pass _griddata per row to be imported to the DGV
-					TrackRawImport(r, _tracks[r.Index].data_points);
-					r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), Color.Black, 0.4);
-					//set the headercell names
-					ChangeTrackName(r);
+                    //set the headercell names
+                    ChangeTrackName(r);
+                    //pass _griddata per row to be imported to the DGV
+                    TrackRawImport(r, _tracks[r.Index].data_points);
 				}
 				catch (Exception) { }
 			}
