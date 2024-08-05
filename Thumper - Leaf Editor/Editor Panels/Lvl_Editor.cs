@@ -966,25 +966,7 @@ namespace Thumper_Custom_Level_Editor
 				}
             }
             _lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
-
             ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
-            //get all selected loop tracks in the dgv and save them in this list
-            //we do this because some samples could be set while a lvl is not saved
-            /*
-            List<dynamic> _samplesindgv = new List<dynamic>();
-			foreach (DataGridViewRow dgvr in lvlLoopTracks.Rows) {
-				string _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == dgvr.Cells[0].Value.ToString()).obj_name ?? _lvlsamples[0].obj_name;
-				int _beats = dgvr.Cells[1].Value == null ? 0 : int.Parse(dgvr.Cells[1].Value.ToString());
-                _samplesindgv.Add(new { Sample = _samplocate, Beats = _beats, RowIndex = dgvr.Index });
-			}
-			//after reloading samples, the dropdowns need to be repopulated
-			if (lvljson != null) {
-				foreach (dynamic _o in _samplesindgv) {
-					lvlLoopTracks[0, _o.RowIndex].Value = _o.Sample;
-                    lvlLoopTracks[1, _o.RowIndex].Value = _o.Beats;
-                }
-			}
-			*/
             //this is for adjusting the dropdown width so that the full item can display
             int width = 0;
 			Graphics g = lvlLoopTracks.CreateGraphics();
