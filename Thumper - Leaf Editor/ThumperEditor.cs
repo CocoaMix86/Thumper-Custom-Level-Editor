@@ -762,7 +762,7 @@ namespace Thumper_Custom_Level_Editor
                 IEnumerable<WorkingFolderFileItem> wffilist = workingfiles.Where(x => x.filename.Contains("lvl_"));
                 WorkingFolderFileItem wffi = _loadedlvl != null ? wffilist.First(x => _loadedlvl.Contains(x.filename)) : wffilist.First();
                 //if its the first or last entry, need to loop around
-                if (offset == 1 && wffi == wffilist.Last())
+                if (_loadedlvl == null || (offset == 1 && wffi == wffilist.Last()))
                     offset = wffilist.First().index;
                 else if (offset == -1 && wffi == wffilist.First())
                     offset = wffilist.Last().index;
