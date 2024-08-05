@@ -977,7 +977,7 @@ namespace Thumper_Custom_Level_Editor
 				if (jj.Count <= 1)
 					lastbeat = 1;
 				else
-					lastbeat = int.Parse(((JProperty)jj.Last()).Name) + 1;
+					lastbeat = int.Parse(jj.Last().Name) + 1;
 				if (lastbeat > numericUpDown_LeafLength.Value) {
 					DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
 					//YES = extend the leaf and then paste
@@ -990,10 +990,10 @@ namespace Thumper_Custom_Level_Editor
 				}
 				//add copied Sequencer_Object to main _tracks list
 				foreach (Sequencer_Object _newtrack in clipboardtracks) {
-					_tracks.Insert(_index + 1, _newtrack.Clone());
-					dgv.Rows.Insert(_index + 1);
-					DataGridViewRow r = dgv.Rows[_index + 1];
-					_index++;
+                    _index++;
+                    _tracks.Insert(_index, _newtrack.Clone());
+					dgv.Rows.Insert(_index);
+					DataGridViewRow r = dgv.Rows[_index];
 					try {
 						//pass _griddata per row to be imported to the DGV
 						TrackRawImport(r, _newtrack.data_points);
@@ -1011,7 +1011,7 @@ namespace Thumper_Custom_Level_Editor
 			}
 
 			PlaySound("UIkpaste");
-			SaveLeaf(false, "Paste track", $"{_tracks[_in].friendly_type} {_tracks[_in].friendly_param}");
+			SaveLeaf(false, "Pasted tracks", "");
 		}
 
 		private void btnTrackClear_Click(object sender, EventArgs e)
