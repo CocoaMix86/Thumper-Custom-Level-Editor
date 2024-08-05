@@ -70,11 +70,11 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.txtCustomPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtCustomPath.Enabled = false;
-            this.txtCustomPath.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCustomPath.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCustomPath.ForeColor = System.Drawing.Color.White;
             this.txtCustomPath.Location = new System.Drawing.Point(12, 25);
             this.txtCustomPath.Name = "txtCustomPath";
-            this.txtCustomPath.Size = new System.Drawing.Size(376, 22);
+            this.txtCustomPath.Size = new System.Drawing.Size(376, 21);
             this.txtCustomPath.TabIndex = 0;
             // 
             // label1
@@ -95,9 +95,9 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomFolder.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomFolder.ForeColor = System.Drawing.Color.Black;
             this.btnCustomFolder.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
-            this.btnCustomFolder.Location = new System.Drawing.Point(388, 24);
+            this.btnCustomFolder.Location = new System.Drawing.Point(388, 25);
             this.btnCustomFolder.Name = "btnCustomFolder";
-            this.btnCustomFolder.Size = new System.Drawing.Size(24, 24);
+            this.btnCustomFolder.Size = new System.Drawing.Size(21, 21);
             this.btnCustomFolder.TabIndex = 0;
             this.btnCustomFolder.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCustomFolder.UseVisualStyleBackColor = false;
