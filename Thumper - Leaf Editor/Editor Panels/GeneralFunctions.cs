@@ -25,10 +25,8 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists($@"{AppLocation}\templates\track_objects2.2.txt")) {
                 File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
             }
-
             //import default colors per object
             ImportDefaultColors();
-            //
 
             ///import selectable objects from file and parse them into lists for manipulation
             //splits input at "###". Each section is a collection of param_paths
@@ -36,7 +34,6 @@ namespace Thumper_Custom_Level_Editor
             for (int x = 0; x < import.Count; x++) {
                 //split each section into individual lines
                 List<string> import2 = import[x].Split('\n').ToList();
-                //initialise class so we can add to it
 
                 for (int y = 1; y < import2.Count - 1; y++) {
                     //split each line by ';'. Now each property is separated
@@ -63,9 +60,8 @@ namespace Thumper_Custom_Level_Editor
             //show errors to user if any imports failed
             if (_errorlog.Length > 1) {
                 MessageBox.Show(_errorlog);
+                _errorlog = "";
             }
-
-            _errorlog = "";
             //customize combobox to display the correct content
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
             //dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
@@ -223,7 +219,6 @@ namespace Thumper_Custom_Level_Editor
 
         private void RandomizeRowValues(DataGridViewRow dgvr)
         {
-            trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
             int idx = dgvr.Index;
             foreach (DataGridViewCell dgvc in dgvr.Cells) {
                 dgvc.Value = null;
@@ -245,7 +240,6 @@ namespace Thumper_Custom_Level_Editor
                         dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
             }
-            trackEditor.CellValueChanged += trackEditor_CellValueChanged;
             TrackUpdateHighlighting(dgvr);
             GenerateDataPoints(dgvr);
             ShowRawTrackData(dgvr);

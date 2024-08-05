@@ -288,15 +288,6 @@ namespace Thumper_Custom_Level_Editor
 		}
 
         //Cell value changed
-        private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-        private void trackEditor_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-        private void trackEditor_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-		{
-        }
         private void trackEditor_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
@@ -447,7 +438,6 @@ namespace Thumper_Custom_Level_Editor
 				}
 				///pastes cell data from clipboard
 				if (e.KeyCode == Keys.V) {
-					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 					//get content on clipboard to string and then split it to rows
 					string s = Clipboard.GetText().Replace("\r\n", "\n");
 					string[] copiedrows = s.Split('\n');
@@ -472,7 +462,6 @@ namespace Thumper_Custom_Level_Editor
 						}
 					}
 					SaveLeaf(false, $"Pasted cells", $"");
-					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				}
 			}
 
@@ -483,7 +472,6 @@ namespace Thumper_Custom_Level_Editor
 					int indexdirection = (e.KeyCode is Keys.Right or Keys.Down ? 1 : -1);
 					bool leftright = (e.KeyCode is Keys.Left or Keys.Right);
 					bool shifted = false;
-					trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
                     //sort cells in selection based on column. depends on direction, reverse collection.
                     //this processing order is important so cells dont overwrite each other when moving
                     IOrderedEnumerable<DataGridViewCell> dgvcc = (indexdirection == -1) ? trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c=>(leftright ? c.ColumnIndex : c.RowIndex)) : trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => (leftright ? c.ColumnIndex : c.RowIndex));
@@ -507,7 +495,6 @@ namespace Thumper_Custom_Level_Editor
 							break;
 						}
 					}
-					trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 					if (shifted)
 						SaveLeaf(false, $"Shifted selected cells {(e.KeyCode == Keys.Left ? "left" : "right")}", $"");
 				}
@@ -806,7 +793,6 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (_loadedleaf == null)
 				return;
-			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
 				TrackRawImport(trackEditor.CurrentRow, JObject.Parse($"{{{richRawTrackData.Text}}}"));
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
@@ -816,7 +802,6 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show($"Invalid format or characters in raw data. Please fix.", "Import error");
             }
 			PlaySound("UIkpaste");
-			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 
 		private void btnTrackDelete_Click(object sender, EventArgs e)
@@ -899,7 +884,6 @@ namespace Thumper_Custom_Level_Editor
 				selectedrows.Sort((row, row2) => row.Index.CompareTo(row2.Index));
                 List<DataGridViewCell> selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().ToList();
 
-				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				foreach (DataGridViewRow dgvr in selectedrows) {
 					//check if one of the rows is the top row. If it is, stop
 					if (dgvr.Index == 0)
@@ -919,7 +903,6 @@ namespace Thumper_Custom_Level_Editor
 					if ((decimal)_newtrack.Item2.Cells[0].Value == 1.907m)
 						_newtrack.Item2.Cells[0].Value = null;
 				}
-				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				//clear selected cells and shift them up
 				dgv.CurrentCell = selectedrows[0].Cells[0];
 				dgv.ClearSelection();
@@ -941,7 +924,6 @@ namespace Thumper_Custom_Level_Editor
                 List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
 				selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
 				var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => new { cell.ColumnIndex, cell.RowIndex }).ToList();
-				trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 				foreach (DataGridViewRow dgvr in selectedrows) {
 					//check if one of the rows is the top row. If it is, stop
 					if (dgvr.Index >= dgv.RowCount - 1)
@@ -961,7 +943,6 @@ namespace Thumper_Custom_Level_Editor
 					if ((decimal)_newtrack.Item2.Cells[0].Value == 1.907m)
 						_newtrack.Item2.Cells[0].Value = null;
 				}
-				trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 				//clear selected cells and shift them up
 				dgv.CurrentCell = selectedrows[0].Cells[0];
 				dgv.ClearSelection();
@@ -994,7 +975,6 @@ namespace Thumper_Custom_Level_Editor
 		{
 			int _in = 0;
 			DataGridView dgv = trackEditor;
-			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			try {
 				int _index = trackEditor.CurrentRow?.Index ?? -1;
 				//check if copied row is longer than the leaf beat length
@@ -1036,7 +1016,6 @@ namespace Thumper_Custom_Level_Editor
 				MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex);
 			}
 
-			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			PlaySound("UIkpaste");
 			SaveLeaf(false, "Paste track", $"{_tracks[_in].friendly_type} {_tracks[_in].friendly_param}");
 		}
@@ -1086,7 +1065,6 @@ namespace Thumper_Custom_Level_Editor
 				footer = objmatch.footer,
 				default_interp = "Linear"
 			};
-			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			DataGridViewRow trackrowapplied = trackEditor.Rows[_selecttrack];
 			trackrowapplied.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color)), Color.Black, 0.4);
 			trackrowapplied.ReadOnly = false;
@@ -1107,7 +1085,6 @@ namespace Thumper_Custom_Level_Editor
 				PlaySound("UIobjectadd");
 				SaveLeaf(false, "Applied Object settings", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
 			}
-			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 		}
 		///Sets highlighting color of current track
 		private void btnTrackColorDialog_Click(object sender, EventArgs e)
@@ -1177,9 +1154,6 @@ namespace Thumper_Custom_Level_Editor
 				return;
 			}
 
-			//temporarily disable this so it doesn't trigger when cells update
-			trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
-
 			List<DataGridViewCell> _listcell = new() { _cells[0], _cells[1] };
 			_listcell.Sort((cell1, cell2) => cell1.ColumnIndex.CompareTo(cell2.ColumnIndex));
 
@@ -1203,8 +1177,6 @@ namespace Thumper_Custom_Level_Editor
 			TrackUpdateHighlighting(trackEditor.Rows[_listcell[0].RowIndex]);
 			GenerateDataPoints(trackEditor.Rows[_listcell[0].RowIndex]);
 			ShowRawTrackData(trackEditor.Rows[_listcell[0].RowIndex]);
-			//re-enable this
-			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 			PlaySound("UIinterpolate");
 			SaveLeaf(false, $"Interpolated cells {_listcell[0].ColumnIndex} -> {_listcell[1].ColumnIndex}", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
 		}
@@ -1608,7 +1580,6 @@ namespace Thumper_Custom_Level_Editor
             //set flag that load is in progress. This skips SaveLeaf() method
             loadingleaf = true;
             //clear existing tracks
-            trackEditor.CellValueChanged -= trackEditor_CellValueChanged;
 			_tracks.Clear();
 			trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 			//set beat_cnt and time_sig
@@ -1714,7 +1685,6 @@ namespace Thumper_Custom_Level_Editor
 			catch {
 				trackEditor.Scroll += trackEditor_Scroll;
 			}
-			trackEditor.CellValueChanged += trackEditor_CellValueChanged;
 
 			loadingleaf = false;
 			//clear undo list and reset the leafjson to the new leaf
