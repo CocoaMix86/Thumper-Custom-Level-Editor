@@ -997,7 +997,6 @@ namespace Thumper_Custom_Level_Editor
 					try {
 						//pass _griddata per row to be imported to the DGV
 						TrackRawImport(r, _newtrack.data_points);
-						TrackUpdateHighlighting(r);
 						r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_newtrack.highlight_color)), Color.Black, 0.4);
 						//set the headercell names
 						ChangeTrackName(r);
@@ -1462,6 +1461,8 @@ namespace Thumper_Custom_Level_Editor
 				}
 				catch (ArgumentOutOfRangeException) { }
 			}
+
+			TrackUpdateHighlighting(r);
 		}
 		///Updates row headers to be the Object and Param_Path
 		public void ChangeTrackName(DataGridViewRow r)
@@ -1636,15 +1637,9 @@ namespace Thumper_Custom_Level_Editor
 				try {
 					//pass _griddata per row to be imported to the DGV
 					TrackRawImport(r, _tracks[r.Index].data_points);
-					TrackUpdateHighlighting(r);
 					r.HeaderCell.Style.BackColor = Blend(Color.FromArgb(int.Parse(_tracks[r.Index].highlight_color)), Color.Black, 0.4);
 					//set the headercell names
-					if (_tracks[r.Index].friendly_param.Length > 1) {
-						if (_tracks[r.Index].param_path == "play")
-							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].obj_name})";
-						else
-							r.HeaderCell.Value = $"{_tracks[r.Index].friendly_type} ({_tracks[r.Index].friendly_param})";
-					}
+					ChangeTrackName(r);
 				}
 				catch (Exception) { }
 			}
