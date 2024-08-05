@@ -278,6 +278,10 @@ namespace Thumper_Custom_Level_Editor
                 lblNameError.Visible = true;
                 lblNameError.Text = "A level name cannot end with '.'";
             }
+            else if (txtCustomName.Text.Length + txtCustomPath.Text.Length > 256) {
+                lblNameError.Visible = true;
+                lblNameError.Text = "The level path + name is longer than 256 characters\n                                               (Windows limit).";
+            }
             else
                 btnCustomSave.Enabled = true;
         }

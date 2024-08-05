@@ -481,6 +481,7 @@ namespace Thumper_Custom_Level_Editor
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(425, 436);
             this.ControlBox = false;
+            this.Controls.Add(this.txtCustomName);
             this.Controls.Add(this.lblNameError);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkMisc);
@@ -510,7 +511,6 @@ namespace Thumper_Custom_Level_Editor
             this.Controls.Add(this.btnCustomFolder);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCustomPath);
-            this.Controls.Add(this.txtCustomName);
             this.Controls.Add(this.txtCustomAuthor);
             this.Controls.Add(this.pictureDifficulty);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
