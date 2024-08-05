@@ -62,7 +62,9 @@ namespace Thumper_Custom_Level_Editor
 		private Dictionary<string, string> objectcolors = new();
 		//public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
-		public List<Tuple<string, int, int>> _scrollpositions = new();
+		public List<string> lanenames = new() { "left", "center", "right" };
+        public Dictionary<string, string> kTraitTooltips = new() { { "kTraitBool", "BOOL: accepts values 1 (on) or 0 (off)." }, { "kTraitAction", "ACTION: accepts values 1 (activate)." }, { "kTraitFloat", "FLOAT: accepts decimal values from -32000.0000 to 32000.0000." }, { "kTraitInt", "INT: accepts integer (no decimal) values from -32000 to 32000." }, { "kTraitColor", "COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors." } };
+        public List<Tuple<string, int, int>> _scrollpositions = new();
 		public List<Sequencer_Object> clipboardtracks = new();
 		public List<CellFunction> _functions = new();
 		public CellFunction _loadedfunction;
@@ -229,7 +231,7 @@ namespace Thumper_Custom_Level_Editor
 
 			try {
 				//if track is a multi-lane object, split param_path from lane so both values can be used to update their dropdown boxes
-				if (_tracks[_selecttrack].friendly_param.Contains("right") || _tracks[_selecttrack].friendly_param.Contains("left") || _tracks[_selecttrack].friendly_param.Contains("center")) {
+				if (lanenames.Any(x => _tracks[_selecttrack].friendly_param.Contains(x))) {
 					_params = _tracks[_selecttrack].friendly_param.Split(new string[] { ", " }, StringSplitOptions.None).ToList();
 				}
 				else
@@ -247,10 +249,10 @@ namespace Thumper_Custom_Level_Editor
 				txtTrait.Text = _tracks[_selecttrack].trait_type;
 				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color));
 				//remove event handlers from a few controls so they don't trigger when their values change
-				NUD_TrackHighlight.ValueChanged -= new EventHandler(NUD_TrackHighlight_ValueChanged);
-				txtDefault.ValueChanged -= new EventHandler(txtDefault_ValueChanged);
-				dropLeafStep.SelectedIndexChanged -= new EventHandler(dropLeafStep_SelectedIndexChanged);
-				dropLeafInterp.SelectedIndexChanged -= new EventHandler(dropLeafInterp_SelectedIndexChanged);
+				NUD_TrackHighlight.ValueChanged -= NUD_TrackHighlight_ValueChanged;
+				txtDefault.ValueChanged -= txtDefault_ValueChanged;
+				dropLeafStep.SelectedIndexChanged -= dropLeafStep_SelectedIndexChanged;
+				dropLeafInterp.SelectedIndexChanged -= dropLeafInterp_SelectedIndexChanged;
 				//set values from _tracks
 				NUD_TrackHighlight.Value = (decimal)_tracks[_selecttrack].highlight_value;
 				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(_tracks[_selecttrack].highlight_color));
@@ -262,21 +264,12 @@ namespace Thumper_Custom_Level_Editor
 				dropLeafStep.Enabled = true;
 				btnTrackApply.Enabled = true;
 				//re-add event handlers
-				NUD_TrackHighlight.ValueChanged += new EventHandler(NUD_TrackHighlight_ValueChanged);
-				txtDefault.ValueChanged += new EventHandler(txtDefault_ValueChanged);
-				dropLeafStep.SelectedIndexChanged += new EventHandler(dropLeafStep_SelectedIndexChanged);
-				dropLeafInterp.SelectedIndexChanged += new EventHandler(dropLeafInterp_SelectedIndexChanged);
+				NUD_TrackHighlight.ValueChanged += NUD_TrackHighlight_ValueChanged;
+				txtDefault.ValueChanged += txtDefault_ValueChanged;
+				dropLeafStep.SelectedIndexChanged += dropLeafStep_SelectedIndexChanged;
+				dropLeafInterp.SelectedIndexChanged += dropLeafInterp_SelectedIndexChanged;
 
-				if (txtTrait.Text == "kTraitBool")
-					toolTip1.SetToolTip(txtTrait, "BOOL: accepts values 1 (on) or 0 (off).");
-				else if (txtTrait.Text == "kTraitAction")
-					toolTip1.SetToolTip(txtTrait, "ACTION: accepts values 1 (activate).");
-				else if (txtTrait.Text == "kTraitFloat")
-					toolTip1.SetToolTip(txtTrait, "FLOAT: accepts decimal values from -32000.0000 to 32000.0000.");
-				else if (txtTrait.Text == "kTraitInt")
-					toolTip1.SetToolTip(txtTrait, "INT: accepts integer (no decimal) values from -32000 to 32000.");
-				else if (txtTrait.Text == "kTraitColor")
-					toolTip1.SetToolTip(txtTrait, "COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors.");
+				toolTip1.SetToolTip(txtTrait, kTraitTooltips[txtTrait.Text]);
 			}
 			catch { }
 		}
@@ -578,31 +571,30 @@ namespace Thumper_Custom_Level_Editor
 		///DROPDOWN OBJECTS
 		private void dropObjects_SelectedValueChanged(object sender, EventArgs e)
 		{
-			//this gets triggered when the program starts, when no rows exist, and then it throws an error
-			//this is only here to stop that
-			try {
+			if (loadedleaf == null)
+				return;
+			//when an object is chosen, unlock the param_path options and set datasource
+			dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
+			//switch index back and forth to trigger event
+			dropParamPath.SelectedIndex = -1;
+			dropParamPath.SelectedIndex = 0;
+			dropParamPath.Enabled = true;
+
+			if ((string)dropObjects.SelectedValue == "PLAY SAMPLE") {
+				label11.Text = "Samples";
+				LvlReloadSamples();
+				dropTrackLane.DataSource = null;
+				dropTrackLane.DataSource = _lvlsamples.Select(x => x.obj_name).ToArray();
+				dropTrackLane.SelectedIndex = -1;
+			}
+			else {
 				label11.Text = "Lane";
 				dropTrackLane.DataSource = new BindingSource(_tracklanefriendly, null);
 				dropTrackLane.ValueMember = "Key";
 				dropTrackLane.DisplayMember = "Value";
-				//when an object is chosen, unlock the param_path options and set datasource
-				dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
-				//switch index back and forth to trigger event
-				dropParamPath.SelectedIndex = -1;
-				dropParamPath.SelectedIndex = 0;
-				dropParamPath.Enabled = true;
-				//set default lane to 'middle'
-				dropTrackLane.SelectedIndex = 2;
-
-				if ((string)dropObjects.SelectedValue == "PLAY SAMPLE") {
-					label11.Text = "Samples";
-					LvlReloadSamples();
-					dropTrackLane.DataSource = null;
-					dropTrackLane.DataSource = _lvlsamples.Select(x => x.obj_name).ToArray();
-					dropTrackLane.SelectedIndex = -1;
-				}
-			}
-			catch { };
+                //set default lane to 'middle'
+                dropTrackLane.SelectedIndex = 2;
+            }
 		}
 		///DROPDOWN PARAM_PATHS
 		private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
@@ -1047,11 +1039,10 @@ namespace Thumper_Custom_Level_Editor
 		{
             Object_Params objmatch = _objects.Where(obj => obj.category == dropObjects.Text && obj.param_displayname == dropParamPath.Text).First();
 			//fill object properties on the form
-			txtDefault.Text = objmatch.def;
-			dropLeafStep.Text = objmatch.step;
 			txtTrait.Text = objmatch.trait_type;
-			//enable track highlighting tools
-			btnTrackColorDialog.Enabled = true;
+            toolTip1.SetToolTip(txtTrait, kTraitTooltips[txtTrait.Text]);
+            //enable track highlighting tools
+            btnTrackColorDialog.Enabled = true;
 			NUD_TrackHighlight.Enabled = true;
 			//add track to list and populate with values
 			_tracks[_selecttrack] = new Sequencer_Object() {
