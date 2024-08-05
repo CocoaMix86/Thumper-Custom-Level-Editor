@@ -812,12 +812,12 @@ namespace Thumper_Custom_Level_Editor
 			///load loop track names and paths to lvlLoopTracks DGV
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			LvlReloadSamples();
-			/*foreach (dynamic samp in _load["loops"]) {
+			foreach (dynamic samp in _load["loops"]) {
 				SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", "")) ?? _lvlsamples[0];
 				lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
-			}*/
-			/*foreach (DataGridViewRow r in lvlLoopTracks.Rows)
-				r.HeaderCell.Value = "Volume Track " + r.Index;*/
+			}
+			foreach (DataGridViewRow r in lvlLoopTracks.Rows)
+				r.HeaderCell.Value = "Volume Track " + r.Index;
 			btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
 			///load leafs associated with this lvl
 			foreach (dynamic leaf in _load["leaf_seq"]) {
@@ -939,11 +939,14 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (workingfolder == null)
 				return;
+			loadinglvl = true;
 			_lvlsamples.Clear();
             //find all samp_ files in the level folder
             List<string> _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
-			//iterate over each file
-			foreach (string f in _sampfiles) {
+			//add default empty sample
+            _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
+            //iterate over each file
+            foreach (string f in _sampfiles) {
 				//parse file to JSON
 				dynamic _in = LoadFileLock(f);
 				//iterate over items:[] list to get each sample and add names to list
@@ -958,30 +961,25 @@ namespace Thumper_Custom_Level_Editor
 						channel_group = _samp["channel_group"]
 					});
 				}
-			}
-			_lvlsamples.Add(new SampleData {
-				obj_name = "",
-				path = "",
-				volume = 0,
-				pitch = 0,
-				pan = 0,
-				offset = 0,
-				channel_group = ""
-			});
+            }
+            _lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
 
-			_lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
+			//get all selected loop tracks in the dgv and save them in this list
+			//we do this because some samples could be set while a lvl is not saved
+            List<dynamic> _samplesindgv = new List<dynamic>();
+			foreach (DataGridViewRow dgvr in lvlLoopTracks.Rows) {
+				SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == dgvr.Cells[0].Value.ToString()) ?? _lvlsamples[0];
+				int _beats = dgvr.Cells[1].Value == null ? 0 : int.Parse(dgvr.Cells[1].Value.ToString());
+                _samplesindgv.Add(new { Sample = _samplocate, Beats = _beats, RowIndex = dgvr.Index });
+			}
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			//after reloading samples, the dropdowns need to be repopulated
 			if (lvljson != null) {
-				lvlLoopTracks.Rows.Clear();
-				foreach (dynamic samp in lvljson["loops"]) {
-					SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", "")) ?? _lvlsamples[0];
-					lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
-				}
-				foreach (DataGridViewRow r in lvlLoopTracks.Rows)
-					r.HeaderCell.Value = "Volume Track " + r.Index;
+				foreach (dynamic _o in _samplesindgv) {
+					lvlLoopTracks[0, _o.RowIndex].Value = _o.Sample;
+                    lvlLoopTracks[1, _o.RowIndex].Value = _o.Beats;
+                }
 			}
-			SaveLvl(true);
 
 			//this is for adjusting the dropdown width so that the full item can display
 			int width = 0;
@@ -994,7 +992,8 @@ namespace Thumper_Custom_Level_Editor
 				}
 			}
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DropDownWidth = width + 20;
-		}
+            loadinglvl = false;
+        }
 
 		public void SaveLvl(bool save, bool playsound = false)
 		{
