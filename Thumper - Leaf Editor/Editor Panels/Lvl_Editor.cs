@@ -812,10 +812,8 @@ namespace Thumper_Custom_Level_Editor
 			dropLvlInput.Text = (string)_load["input_allowed"];
 			dropLvlTutorial.Text = (string)_load["tutorial_type"];
 			///load loop track names and paths to lvlLoopTracks DGV
-			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			LvlReloadSamples();
 			foreach (dynamic samp in _load["loops"]) {
-				//SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", "")) ?? _lvlsamples[0];
                 string _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", ""))?.obj_name ?? _lvlsamples[0].obj_name;
                 lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
 			}
@@ -871,7 +869,7 @@ namespace Thumper_Custom_Level_Editor
 			//custom column containing comboboxes per cell
 			lvlLoopTracks.Columns[1].ValueType = typeof(decimal);
 			lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
-			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
+			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
 			//lvlLoopTracks.Columns[0].ValueType = typeof(SampleData);
 			///
 			//add event handler to this collection
