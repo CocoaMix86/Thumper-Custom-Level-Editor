@@ -116,8 +116,7 @@ namespace Thumper_Custom_Level_Editor
 		//Cell value changed
 		private void lvlLoopTracks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.ColumnIndex == -1 || e.RowIndex == -1)
-				return;
+            /*
 			DataGridViewCell dgvc = sender as DataGridViewCell;
 			try { //try is here because this gets triggered upon app load, when there's no data
 				if (e.ColumnIndex == 0) {
@@ -127,8 +126,11 @@ namespace Thumper_Custom_Level_Editor
 				}
 			} catch { }
 			//set lvl save flag to false
-			SaveLvl(false);
-		}
+			*/
+            if (e.ColumnIndex == -1 || e.RowIndex == -1)
+                return;
+            SaveLvl(false);
+        }
 		private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
 		{
 			e.ThrowException = false;
@@ -813,8 +815,9 @@ namespace Thumper_Custom_Level_Editor
 			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			LvlReloadSamples();
 			foreach (dynamic samp in _load["loops"]) {
-				SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", "")) ?? _lvlsamples[0];
-				lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
+				//SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", "")) ?? _lvlsamples[0];
+                string _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", ""))?.obj_name ?? _lvlsamples[0].obj_name;
+                lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
 			}
 			foreach (DataGridViewRow r in lvlLoopTracks.Rows)
 				r.HeaderCell.Value = "Volume Track " + r.Index;
@@ -964,15 +967,16 @@ namespace Thumper_Custom_Level_Editor
             }
             _lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
 
-			//get all selected loop tracks in the dgv and save them in this list
-			//we do this because some samples could be set while a lvl is not saved
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
+            //get all selected loop tracks in the dgv and save them in this list
+            //we do this because some samples could be set while a lvl is not saved
+            /*
             List<dynamic> _samplesindgv = new List<dynamic>();
 			foreach (DataGridViewRow dgvr in lvlLoopTracks.Rows) {
-				SampleData _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == dgvr.Cells[0].Value.ToString()) ?? _lvlsamples[0];
+				string _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == dgvr.Cells[0].Value.ToString()).obj_name ?? _lvlsamples[0].obj_name;
 				int _beats = dgvr.Cells[1].Value == null ? 0 : int.Parse(dgvr.Cells[1].Value.ToString());
                 _samplesindgv.Add(new { Sample = _samplocate, Beats = _beats, RowIndex = dgvr.Index });
 			}
-			((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples;
 			//after reloading samples, the dropdowns need to be repopulated
 			if (lvljson != null) {
 				foreach (dynamic _o in _samplesindgv) {
@@ -980,9 +984,9 @@ namespace Thumper_Custom_Level_Editor
                     lvlLoopTracks[1, _o.RowIndex].Value = _o.Beats;
                 }
 			}
-
-			//this is for adjusting the dropdown width so that the full item can display
-			int width = 0;
+			*/
+            //this is for adjusting the dropdown width so that the full item can display
+            int width = 0;
 			Graphics g = lvlLoopTracks.CreateGraphics();
 			Font font = lvlLoopTracks.DefaultCellStyle.Font;
 			foreach (SampleData s in _lvlsamples) {
@@ -1116,7 +1120,7 @@ namespace Thumper_Custom_Level_Editor
 				if (r.Cells[0].Value == null)
 					continue;
 				JObject s = new() {
-					{ "samp_name", ((SampleData)r.Cells[0].Value).obj_name + ".samp"},
+					{ "samp_name", $"{r.Cells[0].Value}.samp"},
 					{ "beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()) }
 				};
 
