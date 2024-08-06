@@ -229,13 +229,17 @@ namespace Thumper_Custom_Level_Editor
                         dgvc.Value = rng.Next(0, 10) == 9 ? 1 : null;
                 }
                 else if (_tracks[idx].trait_type == "kTraitColor") {
-                    dgvc.Value = rng.Next(0, 10) >= 5 ? Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb() : null;
+                    dgvc.Value = rng.Next(0, 10) >= 8 ? Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb() : null;
                 }
                 else {
                     if (_tracks[idx].param_path == "sequin_speed")
                         dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 4 : null;
                     else if (_tracks[idx].obj_name == "fade.pp")
                         dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) : null;
+                    else if (_tracks[idx].friendly_type == "CAMERA")
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
+                    else if (_tracks[idx].friendly_type == "GAMMA")
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 10), 3) % 1 : null;
                     else
                         dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
