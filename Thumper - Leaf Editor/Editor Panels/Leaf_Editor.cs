@@ -792,7 +792,7 @@ namespace Thumper_Custom_Level_Editor
 				TrackUpdateHighlighting(trackEditor.CurrentRow);
 				GenerateDataPoints(trackEditor.CurrentRow);
 			}
-			catch (Exception ex) {
+			catch (Exception) {
 				MessageBox.Show($"Invalid format or characters in raw data. Please fix.", "Import error");
             }
 			PlaySound("UIkpaste");

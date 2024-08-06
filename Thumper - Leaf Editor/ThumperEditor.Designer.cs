@@ -179,8 +179,6 @@
             this.label52 = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
-            this.btnMasterOpenLeader = new System.Windows.Forms.Button();
-            this.label34 = new System.Windows.Forms.Label();
             this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.btnMasterRuntime = new System.Windows.Forms.Button();
@@ -195,25 +193,25 @@
             this.trackLvlVolumeZoom = new System.Windows.Forms.TrackBar();
             this.label20 = new System.Windows.Forms.Label();
             this.lblLvlTunnels = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             this.lblGatebuckethelp = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
             this.btnGateOpenRestart = new System.Windows.Forms.Button();
             this.btnGateOpenPost = new System.Windows.Forms.Button();
             this.btnGateOpenPre = new System.Windows.Forms.Button();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
             this.btnWorkEditDetails = new System.Windows.Forms.Button();
             this.trackZoomVert = new System.Windows.Forms.TrackBar();
             this.trackZoom = new System.Windows.Forms.TrackBar();
             this.lblRawData = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
             this.panelRecentFiles = new System.Windows.Forms.Panel();
             this.dgvRecentFiles = new System.Windows.Forms.DataGridView();
@@ -245,14 +243,6 @@
             this.lblPopoutMaster = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.btnRevertMaster = new System.Windows.Forms.ToolStripButton();
-            this.masterToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnMasterLvlAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlUp = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlDown = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlCopy = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
-            this.dropMasterLvlLeader = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblMasterRuntime = new System.Windows.Forms.Label();
@@ -274,6 +264,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
+            this.masterToolStrip = new System.Windows.Forms.ToolStrip();
+            this.btnMasterLvlAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnMasterLvlDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnMasterLvlUp = new System.Windows.Forms.ToolStripButton();
+            this.btnMasterLvlDown = new System.Windows.Forms.ToolStripButton();
+            this.btnMasterLvlCopy = new System.Windows.Forms.ToolStripButton();
+            this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
             this.splitTop2 = new System.Windows.Forms.SplitContainer();
             this.panelLevel = new Thumper_Custom_Level_Editor.ResizeablePanel();
             this.lvlToolStrip = new System.Windows.Forms.ToolStrip();
@@ -526,9 +523,9 @@
             this.panelMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
             this.toolstripTitleMaster.SuspendLayout();
-            this.masterToolStrip.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).BeginInit();
+            this.masterToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitTop2)).BeginInit();
             this.splitTop2.Panel1.SuspendLayout();
             this.splitTop2.Panel2.SuspendLayout();
@@ -1850,40 +1847,6 @@
             this.toolTip1.SetToolTip(this.label55, "Dock panel");
             this.label55.Click += new System.EventHandler(this.dockbtn_Click);
             // 
-            // btnMasterOpenLeader
-            // 
-            this.btnMasterOpenLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnMasterOpenLeader.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenLeader.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenLeader.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenLeader.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenLeader.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenLeader.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
-            this.btnMasterOpenLeader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenLeader.Location = new System.Drawing.Point(120, 349);
-            this.btnMasterOpenLeader.Name = "btnMasterOpenLeader";
-            this.btnMasterOpenLeader.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenLeader.TabIndex = 117;
-            this.btnMasterOpenLeader.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTip1.SetToolTip(this.btnMasterOpenLeader, "Load lvl into Lvl Editor");
-            this.btnMasterOpenLeader.UseVisualStyleBackColor = false;
-            this.btnMasterOpenLeader.Visible = false;
-            this.btnMasterOpenLeader.Click += new System.EventHandler(this.btnMasterOpenLeader_Click);
-            // 
-            // label34
-            // 
-            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(3, 337);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(114, 13);
-            this.label34.TabIndex = 102;
-            this.label34.Text = "Checkpoint Leader Lvl";
-            this.toolTip1.SetToolTip(this.label34, "Currently unsure what exactly this does.");
-            this.label34.Visible = false;
-            // 
             // lblMasterlvllistHelp
             // 
             this.lblMasterlvllistHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2097,6 +2060,20 @@
             this.lblLvlTunnels.Text = "Paths/Tunnels";
             this.toolTip1.SetToolTip(this.lblLvlTunnels, "Unique per leaf");
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.White;
+            this.label36.Location = new System.Drawing.Point(3, 26);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(79, 13);
+            this.label36.TabIndex = 116;
+            this.label36.Text = "Boss Phases";
+            this.toolTip1.SetToolTip(this.label36, "Each boss requires 4 phases. 1 phase is 1 lvl file.\r\nYou may reuse the same lvl f" +
+        "or phases.");
+            // 
             // lblGatebuckethelp
             // 
             this.lblGatebuckethelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -2111,6 +2088,48 @@
             this.lblGatebuckethelp.TabIndex = 145;
             this.lblGatebuckethelp.Text = "?";
             this.toolTip1.SetToolTip(this.lblGatebuckethelp, resources.GetString("lblGatebuckethelp.ToolTip"));
+            // 
+            // label41
+            // 
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.ForeColor = System.Drawing.Color.White;
+            this.label41.Location = new System.Drawing.Point(58, 37);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(44, 15);
+            this.label41.TabIndex = 122;
+            this.label41.Text = "Pre Lvl";
+            this.toolTip1.SetToolTip(this.label41, "PRE LVL\r\nThis lvl plays at the very start of the gate sublevel. The boss does not" +
+        " spawn in yet. \r\nCan be blank, unless you are using the Triangle boss.");
+            // 
+            // label42
+            // 
+            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.ForeColor = System.Drawing.Color.White;
+            this.label42.Location = new System.Drawing.Point(53, 60);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(49, 15);
+            this.label42.TabIndex = 123;
+            this.label42.Text = "Post Lvl";
+            this.toolTip1.SetToolTip(this.label42, "POST LVL\r\nPlays immediately after the Pre lvl. The boss spawns in at this point. " +
+        "The boss phases \r\nplay immediately after this lvl is finished. Can be blank.");
+            // 
+            // label43
+            // 
+            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.ForeColor = System.Drawing.Color.White;
+            this.label43.Location = new System.Drawing.Point(38, 82);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(64, 15);
+            this.label43.TabIndex = 124;
+            this.label43.Text = "Restart Lvl";
+            this.toolTip1.SetToolTip(this.label43, "RESTART LVL\r\nThis lvl plays when restarting the boss, and skips playing the pre a" +
+        "nd post lvls. \r\nCan be blank.");
             // 
             // btnGateOpenRestart
             // 
@@ -2168,62 +2187,6 @@
             this.toolTip1.SetToolTip(this.btnGateOpenPre, "Load lvl into Lvl Editor");
             this.btnGateOpenPre.UseVisualStyleBackColor = false;
             this.btnGateOpenPre.Click += new System.EventHandler(this.btnGateOpenPre_Click);
-            // 
-            // label43
-            // 
-            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.ForeColor = System.Drawing.Color.White;
-            this.label43.Location = new System.Drawing.Point(38, 82);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(64, 15);
-            this.label43.TabIndex = 124;
-            this.label43.Text = "Restart Lvl";
-            this.toolTip1.SetToolTip(this.label43, "RESTART LVL\r\nThis lvl plays when restarting the boss, and skips playing the pre a" +
-        "nd post lvls. \r\nCan be blank.");
-            // 
-            // label42
-            // 
-            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.ForeColor = System.Drawing.Color.White;
-            this.label42.Location = new System.Drawing.Point(53, 60);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(49, 15);
-            this.label42.TabIndex = 123;
-            this.label42.Text = "Post Lvl";
-            this.toolTip1.SetToolTip(this.label42, "POST LVL\r\nPlays immediately after the Pre lvl. The boss spawns in at this point. " +
-        "The boss phases \r\nplay immediately after this lvl is finished. Can be blank.");
-            // 
-            // label41
-            // 
-            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.White;
-            this.label41.Location = new System.Drawing.Point(58, 37);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(44, 15);
-            this.label41.TabIndex = 122;
-            this.label41.Text = "Pre Lvl";
-            this.toolTip1.SetToolTip(this.label41, "PRE LVL\r\nThis lvl plays at the very start of the gate sublevel. The boss does not" +
-        " spawn in yet. \r\nCan be blank, unless you are using the Triangle boss.");
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.ForeColor = System.Drawing.Color.White;
-            this.label36.Location = new System.Drawing.Point(3, 26);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(79, 13);
-            this.label36.TabIndex = 116;
-            this.label36.Text = "Boss Phases";
-            this.toolTip1.SetToolTip(this.label36, "Each boss requires 4 phases. 1 phase is 1 lvl file.\r\nYou may reuse the same lvl f" +
-        "or phases.");
             // 
             // btnWorkEditDetails
             // 
@@ -2294,6 +2257,21 @@
             this.lblRawData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
             this.lblRawData.Click += new System.EventHandler(this.lblRawData_Click);
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.BackColor = System.Drawing.Color.Transparent;
+            this.label60.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label60.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label60.Location = new System.Drawing.Point(131, 2);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(15, 16);
+            this.label60.TabIndex = 96;
+            this.label60.Text = "?";
+            this.toolTip1.SetToolTip(this.label60, "These values are accessible through keybinds.\r\nChange the keybinds in EDIT > Pref" +
+        "erences.");
             // 
             // label17
             // 
@@ -2369,21 +2347,6 @@
             this.label14.TabIndex = 151;
             this.label14.Text = "?";
             this.toolTip1.SetToolTip(this.label14, "V. (volume)\r\nP. (pitch)\r\nPan\r\nOf. (offset)\r\nCh. (channel)");
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.BackColor = System.Drawing.Color.Transparent;
-            this.label60.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label60.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label60.Location = new System.Drawing.Point(131, 2);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(15, 16);
-            this.label60.TabIndex = 96;
-            this.label60.Text = "?";
-            this.toolTip1.SetToolTip(this.label60, "These values are accessible through keybinds.\r\nChange the keybinds in EDIT > Pref" +
-        "erences.");
             // 
             // timerBeeble
             // 
@@ -2658,13 +2621,10 @@
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMaster.Controls.Add(this.masterLvlList);
             this.panelMaster.Controls.Add(this.toolstripTitleMaster);
-            this.panelMaster.Controls.Add(this.masterToolStrip);
-            this.panelMaster.Controls.Add(this.btnMasterOpenLeader);
-            this.panelMaster.Controls.Add(this.dropMasterLvlLeader);
-            this.panelMaster.Controls.Add(this.label34);
             this.panelMaster.Controls.Add(this.label30);
             this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
             this.panelMaster.Controls.Add(this.panel5);
+            this.panelMaster.Controls.Add(this.masterToolStrip);
             this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMaster.Location = new System.Drawing.Point(0, 0);
             this.panelMaster.MinimumSize = new System.Drawing.Size(60, 60);
@@ -2872,121 +2832,6 @@
             this.btnRevertMaster.Size = new System.Drawing.Size(23, 22);
             this.btnRevertMaster.ToolTipText = "Revert changes to last save";
             this.btnRevertMaster.Click += new System.EventHandler(this.btnRevertMaster_Click);
-            // 
-            // masterToolStrip
-            // 
-            this.masterToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.masterToolStrip.AutoSize = false;
-            this.masterToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.masterToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.masterToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.masterToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.masterToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.masterToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnMasterLvlAdd,
-            this.btnMasterLvlDelete,
-            this.btnMasterLvlUp,
-            this.btnMasterLvlDown,
-            this.btnMasterLvlCopy,
-            this.btnMasterLvlPaste});
-            this.masterToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.masterToolStrip.Location = new System.Drawing.Point(3, 350);
-            this.masterToolStrip.Name = "masterToolStrip";
-            this.masterToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.masterToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new System.Drawing.Size(217, 25);
-            this.masterToolStrip.Stretch = true;
-            this.masterToolStrip.TabIndex = 138;
-            // 
-            // btnMasterLvlAdd
-            // 
-            this.btnMasterLvlAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMasterLvlAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterLvlAdd.ForeColor = System.Drawing.Color.White;
-            this.btnMasterLvlAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
-            this.btnMasterLvlAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlAdd.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMasterLvlAdd.Name = "btnMasterLvlAdd";
-            this.btnMasterLvlAdd.Size = new System.Drawing.Size(24, 24);
-            this.btnMasterLvlAdd.ToolTipText = "Add new sublevel to the list";
-            this.btnMasterLvlAdd.Click += new System.EventHandler(this.btnMasterLvlAdd_Click);
-            // 
-            // btnMasterLvlDelete
-            // 
-            this.btnMasterLvlDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMasterLvlDelete.Enabled = false;
-            this.btnMasterLvlDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnMasterLvlDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMasterLvlDelete.Name = "btnMasterLvlDelete";
-            this.btnMasterLvlDelete.Size = new System.Drawing.Size(24, 24);
-            this.btnMasterLvlDelete.ToolTipText = "Delete selected sublevel from this list";
-            this.btnMasterLvlDelete.Click += new System.EventHandler(this.btnMasterLvlDelete_Click);
-            // 
-            // btnMasterLvlUp
-            // 
-            this.btnMasterLvlUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMasterLvlUp.Enabled = false;
-            this.btnMasterLvlUp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowup2;
-            this.btnMasterLvlUp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlUp.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMasterLvlUp.Name = "btnMasterLvlUp";
-            this.btnMasterLvlUp.Size = new System.Drawing.Size(24, 24);
-            this.btnMasterLvlUp.ToolTipText = "Move selected sublevel up";
-            this.btnMasterLvlUp.Click += new System.EventHandler(this.btnMasterLvlUp_Click);
-            // 
-            // btnMasterLvlDown
-            // 
-            this.btnMasterLvlDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMasterLvlDown.Enabled = false;
-            this.btnMasterLvlDown.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowdown2;
-            this.btnMasterLvlDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlDown.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMasterLvlDown.Name = "btnMasterLvlDown";
-            this.btnMasterLvlDown.Size = new System.Drawing.Size(24, 24);
-            this.btnMasterLvlDown.ToolTipText = "Move selected sublevel down";
-            this.btnMasterLvlDown.Click += new System.EventHandler(this.btnMasterLvlDown_Click);
-            // 
-            // btnMasterLvlCopy
-            // 
-            this.btnMasterLvlCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMasterLvlCopy.Enabled = false;
-            this.btnMasterLvlCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
-            this.btnMasterLvlCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlCopy.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMasterLvlCopy.Name = "btnMasterLvlCopy";
-            this.btnMasterLvlCopy.Size = new System.Drawing.Size(24, 24);
-            this.btnMasterLvlCopy.ToolTipText = "Copy selected sublevel";
-            this.btnMasterLvlCopy.Click += new System.EventHandler(this.btnMasterLvlCopy_Click);
-            // 
-            // btnMasterLvlPaste
-            // 
-            this.btnMasterLvlPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMasterLvlPaste.Enabled = false;
-            this.btnMasterLvlPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
-            this.btnMasterLvlPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlPaste.Name = "btnMasterLvlPaste";
-            this.btnMasterLvlPaste.Size = new System.Drawing.Size(24, 24);
-            this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
-            this.btnMasterLvlPaste.Click += new System.EventHandler(this.btnMasterLvlPaste_Click);
-            // 
-            // dropMasterLvlLeader
-            // 
-            this.dropMasterLvlLeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dropMasterLvlLeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropMasterLvlLeader.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropMasterLvlLeader.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropMasterLvlLeader.ForeColor = System.Drawing.Color.White;
-            this.dropMasterLvlLeader.FormattingEnabled = true;
-            this.dropMasterLvlLeader.Items.AddRange(new object[] {
-            "skybox_cube"});
-            this.dropMasterLvlLeader.Location = new System.Drawing.Point(3, 350);
-            this.dropMasterLvlLeader.Name = "dropMasterLvlLeader";
-            this.dropMasterLvlLeader.Size = new System.Drawing.Size(116, 21);
-            this.dropMasterLvlLeader.TabIndex = 103;
-            this.dropMasterLvlLeader.Visible = false;
-            this.dropMasterLvlLeader.SelectedIndexChanged += new System.EventHandler(this.dropMasterLvlLeader_SelectedIndexChanged);
             // 
             // label30
             // 
@@ -3311,6 +3156,104 @@
             this.label47.Size = new System.Drawing.Size(61, 15);
             this.label47.TabIndex = 141;
             this.label47.Text = "Rail Color";
+            // 
+            // masterToolStrip
+            // 
+            this.masterToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.masterToolStrip.AutoSize = false;
+            this.masterToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.masterToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.masterToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.masterToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.masterToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.masterToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnMasterLvlAdd,
+            this.btnMasterLvlDelete,
+            this.btnMasterLvlUp,
+            this.btnMasterLvlDown,
+            this.btnMasterLvlCopy,
+            this.btnMasterLvlPaste});
+            this.masterToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.masterToolStrip.Location = new System.Drawing.Point(3, 350);
+            this.masterToolStrip.Name = "masterToolStrip";
+            this.masterToolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.masterToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.masterToolStrip.Size = new System.Drawing.Size(217, 25);
+            this.masterToolStrip.Stretch = true;
+            this.masterToolStrip.TabIndex = 138;
+            // 
+            // btnMasterLvlAdd
+            // 
+            this.btnMasterLvlAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMasterLvlAdd.ForeColor = System.Drawing.Color.White;
+            this.btnMasterLvlAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
+            this.btnMasterLvlAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMasterLvlAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlAdd.Name = "btnMasterLvlAdd";
+            this.btnMasterLvlAdd.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlAdd.ToolTipText = "Add new sublevel to the list";
+            this.btnMasterLvlAdd.Click += new System.EventHandler(this.btnMasterLvlAdd_Click);
+            // 
+            // btnMasterLvlDelete
+            // 
+            this.btnMasterLvlDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlDelete.Enabled = false;
+            this.btnMasterLvlDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.btnMasterLvlDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMasterLvlDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlDelete.Name = "btnMasterLvlDelete";
+            this.btnMasterLvlDelete.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlDelete.ToolTipText = "Delete selected sublevel from this list";
+            this.btnMasterLvlDelete.Click += new System.EventHandler(this.btnMasterLvlDelete_Click);
+            // 
+            // btnMasterLvlUp
+            // 
+            this.btnMasterLvlUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlUp.Enabled = false;
+            this.btnMasterLvlUp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowup2;
+            this.btnMasterLvlUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMasterLvlUp.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlUp.Name = "btnMasterLvlUp";
+            this.btnMasterLvlUp.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlUp.ToolTipText = "Move selected sublevel up";
+            this.btnMasterLvlUp.Click += new System.EventHandler(this.btnMasterLvlUp_Click);
+            // 
+            // btnMasterLvlDown
+            // 
+            this.btnMasterLvlDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlDown.Enabled = false;
+            this.btnMasterLvlDown.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowdown2;
+            this.btnMasterLvlDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMasterLvlDown.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlDown.Name = "btnMasterLvlDown";
+            this.btnMasterLvlDown.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlDown.ToolTipText = "Move selected sublevel down";
+            this.btnMasterLvlDown.Click += new System.EventHandler(this.btnMasterLvlDown_Click);
+            // 
+            // btnMasterLvlCopy
+            // 
+            this.btnMasterLvlCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlCopy.Enabled = false;
+            this.btnMasterLvlCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
+            this.btnMasterLvlCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMasterLvlCopy.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlCopy.Name = "btnMasterLvlCopy";
+            this.btnMasterLvlCopy.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlCopy.ToolTipText = "Copy selected sublevel";
+            this.btnMasterLvlCopy.Click += new System.EventHandler(this.btnMasterLvlCopy_Click);
+            // 
+            // btnMasterLvlPaste
+            // 
+            this.btnMasterLvlPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlPaste.Enabled = false;
+            this.btnMasterLvlPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
+            this.btnMasterLvlPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMasterLvlPaste.Name = "btnMasterLvlPaste";
+            this.btnMasterLvlPaste.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
+            this.btnMasterLvlPaste.Click += new System.EventHandler(this.btnMasterLvlPaste_Click);
             // 
             // splitTop2
             // 
@@ -7077,11 +7020,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
             this.toolstripTitleMaster.ResumeLayout(false);
             this.toolstripTitleMaster.PerformLayout();
-            this.masterToolStrip.ResumeLayout(false);
-            this.masterToolStrip.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).EndInit();
+            this.masterToolStrip.ResumeLayout(false);
+            this.masterToolStrip.PerformLayout();
             this.splitTop2.Panel1.ResumeLayout(false);
             this.splitTop2.Panel1.PerformLayout();
             this.splitTop2.Panel2.ResumeLayout(false);
@@ -7283,8 +7226,6 @@
 		private System.Windows.Forms.ComboBox dropMasterIntro;
 		private System.Windows.Forms.ComboBox dropMasterLvlRest;
 		private System.Windows.Forms.Label label35;
-		private System.Windows.Forms.ComboBox dropMasterLvlLeader;
-		private System.Windows.Forms.Label label34;
 		private System.Windows.Forms.Button btnConfigPathColor;
 		private System.Windows.Forms.Button btnConfigGlowColor;
 		private System.Windows.Forms.Button btnConfigRailColor;
@@ -7320,7 +7261,6 @@
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.Label label39;
 		private System.Windows.Forms.Button btnMasterOpenRest;
-		private System.Windows.Forms.Button btnMasterOpenLeader;
 		private System.Windows.Forms.ComboBox dropGateSection;
 		private System.Windows.Forms.ComboBox dropGateRestart;
 		private System.Windows.Forms.ComboBox dropGatePost;

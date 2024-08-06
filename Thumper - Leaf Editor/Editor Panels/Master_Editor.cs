@@ -90,18 +90,15 @@ namespace Thumper_Custom_Level_Editor
 				return;
 
 			//remove event handlers from a few controls so they don't trigger when their values change
-			dropMasterLvlLeader.SelectedIndexChanged -= new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
 			dropMasterLvlRest.SelectedIndexChanged -= new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
 			//load the selected item
 			if ((string)_load["obj_type"] == "SequinLevel") 
 				LoadLvl(_load, $@"{workingfolder}\lvl_{_file}.txt");
 			else if ((string)_load["obj_type"] == "SequinGate") 
 				LoadGate(_load, $@"{workingfolder}\gate_{_file}.txt");
-			dropMasterLvlLeader.SelectedItem = _masterlvls[e.RowIndex].checkpoint_leader;
 			dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
 			btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
 			//re-add event handlers
-			dropMasterLvlLeader.SelectedIndexChanged += new EventHandler(dropMasterLvlLeader_SelectedIndexChanged);
 			dropMasterLvlRest.SelectedIndexChanged += new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
 		}
 		private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -439,7 +436,6 @@ namespace Thumper_Custom_Level_Editor
 		//these all load a lvl
 		private void btnMasterOpenIntro_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterIntro.SelectedItem.ToString());
 		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterCheck.SelectedItem.ToString());
-		private void btnMasterOpenLeader_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlLeader.SelectedItem.ToString());
 		private void btnMasterOpenRest_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlRest.SelectedItem.ToString());
 
 		private void btnMasterRuntime_Click(object sender, EventArgs e) => CalculateMasterRuntime();

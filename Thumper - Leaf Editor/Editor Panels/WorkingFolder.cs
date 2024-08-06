@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -13,7 +12,7 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor : Form
+    public partial class FormLeafEditor
 	{
 		List<WorkingFolderFileItem> workingfiles = new();
 
@@ -40,7 +39,7 @@ namespace Thumper_Custom_Level_Editor
 				//atempt to parse JSON
 				_load = LoadFileLock(_selectedfilename);
 			}
-			catch (Exception ex) {
+			catch (Exception) {
 				//return method if parse fails
 				MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
 				return;

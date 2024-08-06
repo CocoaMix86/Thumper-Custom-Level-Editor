@@ -319,7 +319,6 @@ namespace Thumper_Custom_Level_Editor
             //add lvl list as datasources to dropdowns
             dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
             dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
-            dropMasterLvlLeader.DataSource = lvlsinworkfolder.ToList();
             dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
             dropGatePre.DataSource = lvlsinworkfolder.ToList();
             dropGatePost.DataSource = lvlsinworkfolder.ToList();
@@ -393,11 +392,11 @@ namespace Thumper_Custom_Level_Editor
             dynamic _load;
             ///reference:
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
-            using (var fileStream = new FileStream(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            using (var textReader = new StreamReader(fileStream)) {
+            using (FileStream fileStream = new FileStream(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (StreamReader textReader = new StreamReader(fileStream)) {
                 try {
                     _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
-                } catch (Exception ex) {
+                } catch (Exception) {
                     MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
                     _load = null;
                 }
@@ -419,7 +418,7 @@ namespace Thumper_Custom_Level_Editor
         public void ClearFileLock()
         {
             //clear previously locked files
-            foreach (var i in lockedfiles) {
+            foreach (KeyValuePair<string, FileStream> i in lockedfiles) {
                 i.Value.Close();
             }
             lockedfiles.Clear();

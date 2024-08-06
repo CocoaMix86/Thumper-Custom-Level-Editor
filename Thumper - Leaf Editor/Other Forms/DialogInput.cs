@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -122,7 +123,7 @@ namespace Thumper_Custom_Level_Editor
 
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
             if (mainform.workingfolder != null && isthisnew == false && mainform.workingfolder != levelpath) {
-                foreach (var fs in mainform.lockedfiles) {
+                foreach (KeyValuePair<string, FileStream> fs in mainform.lockedfiles) {
                     fs.Value.Close();
                 }
                 mainform.lockedfiles.Clear();

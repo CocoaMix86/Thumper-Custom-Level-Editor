@@ -43,7 +43,7 @@ namespace Thumper_Custom_Level_Editor
                         lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                         ClearFileLock();
                     }
-                    catch (Exception ex) {
+                    catch (Exception) {
                         MessageBox.Show($"That level is open already in another instance of the Level Editor.", "Level cannot be opened");
                         return;
                     }
@@ -486,7 +486,6 @@ namespace Thumper_Custom_Level_Editor
 
         private void editLevelDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dynamic _load = new JObject();
             DialogInput customlevel = new(this, false);
             //set textboxes
             customlevel.txtCustomName.Text = projectjson["level_name"] ?? "LEVEL NAME";
@@ -495,16 +494,6 @@ namespace Thumper_Custom_Level_Editor
             customlevel.txtCustomAuthor.Text = projectjson["author"] ?? "SOME PERSON";
             //show the new level folder dialog box
             customlevel.ShowDialog();
-
-            /*
-            //atempt to parse JSON of LEVEL DETAILS. This wil lalso take care of the situation if it doesn't exist
-            _load = LoadFileLock($@"{workingfolder}\LEVEL DETAILS.txt");
-            //if the LEVEL DETAILS file is missing, or missing parameters, this fill fill the blanks will empty space
-            customlevel.txtCustomName.Text = _load.ContainsKey("level_name") ? (string)_load["level_name"] : "";
-            customlevel.txtCustomDiff.Text = _load.ContainsKey("difficulty") ? (string)_load["difficulty"] : "";
-            customlevel.txtDesc.Text = _load.ContainsKey("description") ? (string)_load["description"] : "";
-            customlevel.txtCustomAuthor.Text = _load.ContainsKey("author") ? (string)_load["author"] : "";
-            */
         }
 
         private void regenerateDefaultFilesToolStripMenuItem_Click(object sender, EventArgs e)
