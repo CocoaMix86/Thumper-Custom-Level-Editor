@@ -241,7 +241,7 @@ namespace Thumper_Custom_Level_Editor
                     else if (_tracks[idx].friendly_type == "GAMMA")
                         dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) : null;
                     else
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? (TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
             }
             TrackUpdateHighlighting(dgvr);
