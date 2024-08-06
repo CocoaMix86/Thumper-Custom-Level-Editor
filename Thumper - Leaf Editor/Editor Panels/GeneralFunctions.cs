@@ -68,6 +68,16 @@ namespace Thumper_Custom_Level_Editor
             //dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
             dropParamPath.Enabled = false;
         }
+        public void ImportDefaultColors()
+        {
+            objectcolors.Clear();
+            if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors2.2.txt")) {
+                File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
+            }
+            objectcolors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]);
+
+            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+        }
 
         ///Color elements based on set properties
         private void ColorFormElements()
@@ -207,23 +217,12 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        public void ImportDefaultColors()
-        {
-            objectcolors.Clear();
-            if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors2.2.txt")) {
-                File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
-            }
-            objectcolors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]);
-
-            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-        }
-
         private void RandomizeRowValues(DataGridViewRow dgvr)
         {
             int idx = dgvr.Index;
             foreach (DataGridViewCell dgvc in dgvr.Cells) {
                 dgvc.Value = null;
-                if (_tracks[idx].trait_type == "kTraitBool" || _tracks[idx].trait_type == "kTraitAction" || _tracks[idx].param_path == "visibla01" || _tracks[idx].param_path == "visibla02" || _tracks[idx].param_path == "visible" || _tracks[idx].param_path == "visiblz01" || _tracks[idx].param_path == "visiblz02") {
+                if ((_tracks[idx].trait_type is "kTraitBool" or "kTraitAction") || (_tracks[idx].param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
                     if (_tracks[idx].obj_name == "sentry.spn")
                         dgvc.Value = rng.Next(0, 40) == 39 ? 1 : null;
                     else
@@ -234,11 +233,11 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else {
                     if (_tracks[idx].param_path == "sequin_speed")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) % 4 : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 4 : null;
                     else if (_tracks[idx].obj_name == "fade.pp")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) : null;
                     else
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? ((decimal)Math.Truncate(rng.NextDouble() * 10000) / 100) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
             }
             TrackUpdateHighlighting(dgvr);
@@ -304,6 +303,9 @@ namespace Thumper_Custom_Level_Editor
                 _undolistleaf.RemoveRange(0, undoindex);
             }
         }
+        ///
+        ///
+        ///
 
         private void UpdateLevelLists()
         {
@@ -319,9 +321,6 @@ namespace Thumper_Custom_Level_Editor
             dropGatePost.DataSource = lvlsinworkfolder.ToList();
             dropGateRestart.DataSource = lvlsinworkfolder.ToList();
         }
-        ///
-        ///
-        ///
 
         public string SearchReferences(dynamic _load, string filepath)
         {
@@ -373,6 +372,9 @@ namespace Thumper_Custom_Level_Editor
             return r;
         }
 
+        ///
+        /// File Lock read/write methods
+        /// 
         public void WriteFileLock(FileStream fs, JObject _save)
         {
             string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
@@ -418,6 +420,10 @@ namespace Thumper_Custom_Level_Editor
             }
             lockedfiles.Clear();
         }
+        /// 
+        /// 
+        /// 
+
 
         public string CopyToWorkingFolderCheck(string filepath)
         {
