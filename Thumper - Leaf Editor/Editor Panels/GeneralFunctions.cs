@@ -224,7 +224,7 @@ namespace Thumper_Custom_Level_Editor
                 dgvc.Value = null;
                 if ((_tracks[idx].trait_type is "kTraitBool" or "kTraitAction") || (_tracks[idx].param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
                     if (_tracks[idx].obj_name == "sentry.spn")
-                        dgvc.Value = rng.Next(0, 40) == 39 ? 1 : null;
+                        dgvc.Value = rng.Next(0, 55) == 39 ? 1 : null;
                     else
                         dgvc.Value = rng.Next(0, 10) == 9 ? 1 : null;
                 }
@@ -233,15 +233,15 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else {
                     if (_tracks[idx].param_path == "sequin_speed")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 4 : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4 : null;
                     else if (_tracks[idx].obj_name == "fade.pp")
                         dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) : null;
                     else if (_tracks[idx].friendly_type == "CAMERA")
                         dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                     else if (_tracks[idx].friendly_type == "GAMMA")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 10), 3) % 1 : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) : null;
                     else
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
+                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
                 }
             }
             TrackUpdateHighlighting(dgvr);
