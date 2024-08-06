@@ -1802,9 +1802,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick {
+        public static byte[] UIbeetleclick1 {
             get {
-                object obj = ResourceManager.GetObject("UIbeetleclick", resourceCulture);
+                object obj = ResourceManager.GetObject("UIbeetleclick1", resourceCulture);
                 return ((byte[])(obj));
             }
         }

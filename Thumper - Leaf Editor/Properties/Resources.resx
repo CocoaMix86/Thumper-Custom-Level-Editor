@@ -542,9 +542,6 @@ MISC
   <data name="samp_level3_360bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\samp_level3_360bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
-  <data name="UIbeetleclick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -754,5 +751,8 @@ MISC
   </data>
   <data name="String1" xml:space="preserve">
     <value />
+  </data>
+  <data name="UIbeetleclick1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick1.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

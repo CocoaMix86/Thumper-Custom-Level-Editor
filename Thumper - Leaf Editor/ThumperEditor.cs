@@ -520,81 +520,22 @@ namespace Thumper_Custom_Level_Editor
         }
 
         ///BEEBLE FUNCTIONS
+        List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             int i = new Random().Next(0, 1001);
-            Image im = null;
-            switch (i) {
-                case >= 0 and < 100:
-                    im = Properties.Resources.beeblehappy;
-                    break;
-                case >= 100 and < 200:
-                    im = Properties.Resources.beebleconfuse;
-                    break;
-                case >= 200 and < 300:
-                    im = Properties.Resources.beeblecool;
-                    break;
-                case >= 300 and < 400:
-                    im = Properties.Resources.beeblederp;
-                    break;
-                case >= 400 and < 500:
-                    im = Properties.Resources.beeblelaugh;
-                    break;
-                case >= 500 and < 600:
-                    im = Properties.Resources.beeblestare;
-                    break;
-                case >= 600 and < 700:
-                    im = Properties.Resources.beeblethink;
-                    break;
-                case >= 700 and < 800:
-                    im = Properties.Resources.beebletiny;
-                    break;
-                case >= 800 and < 900:
-                    im = Properties.Resources.beeblelove;
-                    break;
-                case >= 900 and < 1000:
-                    im = Properties.Resources.beeblespin;
-                    break;
-                case 1000:
-                    pictureBeeble.BackgroundImage = Properties.Resources.beeblegold;
-                    PlaySound("UIbeetleclickGOLD");
-                    break;
+            if (i == 1000) {
+                pictureBeeble.BackgroundImage = Properties.Resources.beeblegold;
+                PlaySound("UIbeetleclickGOLD");
             }
-            if (im != null)
-                pictureBeeble.BackgroundImage = im;
-            //pictureBox1.Refresh();
+            else {
+                pictureBeeble.BackgroundImage = beebleimages[i % 10];
+            }
             timerBeeble.Start();
         }
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            int j = new Random().Next(0, 8);
-            switch (j) {
-                case 0:
-                    PlaySound("UIbeetleclick");
-                    break;
-                case 1:
-                    PlaySound("UIbeetleclick2");
-                    break;
-                case 2:
-                    PlaySound("UIbeetleclick3");
-                    break;
-                case 3:
-                    PlaySound("UIbeetleclick4");
-                    break;
-                case 4:
-                    PlaySound("UIbeetleclick5");
-                    break;
-                case 5:
-                    PlaySound("UIbeetleclick6");
-                    break;
-                case 6:
-                    PlaySound("UIbeetleclick7");
-                    break;
-                case 7:
-                    PlaySound("UIbeetleclick8");
-                    break;
-            }
-
+            PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
             pictureBeeble.BackColor = Color.FromArgb(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
         }
         private void timerBeeble_Tick(object sender, EventArgs e)
