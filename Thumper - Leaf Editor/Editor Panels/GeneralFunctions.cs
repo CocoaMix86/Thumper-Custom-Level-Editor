@@ -15,9 +15,6 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class FormLeafEditor : Form
     {
-
-        Color backcolor = Color.FromArgb(40, 40, 40);
-
         public void ImportObjects()
         {
             _objects.Clear();
@@ -162,7 +159,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         /// Used to allow only numbers and a single decimal during input
-        private void NumericInputSanitize(object sender, KeyPressEventArgs e)
+        private static void NumericInputSanitize(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-') {
                 e.Handled = true;
@@ -307,9 +304,9 @@ namespace Thumper_Custom_Level_Editor
             }
             return undomenu;
         }
-        private void undoMenu_MouseEnter(object sender, EventArgs e)
+        private static void undoMenu_MouseEnter(object sender, EventArgs e)
         {
-            backcolor = Color.FromArgb(40, 40, 40);
+            Color backcolor = Color.FromArgb(40, 40, 40);
             ToolStrip parent = ((ToolStripMenuItem)sender).Owner;
             for (int x = parent.Items.Count - 1; x >= 0; x--) {
                 parent.Items[x].BackColor = backcolor;
@@ -357,11 +354,11 @@ namespace Thumper_Custom_Level_Editor
             dropGateRestart.DataSource = lvlsinworkfolder.ToList();
         }
 
-        public string SearchReferences(dynamic _load, string filepath)
+        public static string SearchReferences(dynamic _load, string filepath)
         {
             string referencefiles = "";
             //search all files in the project folder
-            foreach (string file in Directory.GetFiles(workingfolder).Where(x => Path.GetFileName(x).StartsWith("leaf_") || Path.GetFileName(x).StartsWith("lvl_") || Path.GetFileName(x).StartsWith("gate_") || Path.GetFileName(x).StartsWith("master_"))) {
+            foreach (string file in Directory.GetFiles(Path.GetDirectoryName(filepath)).Where(x => Path.GetFileName(x).StartsWith("leaf_") || Path.GetFileName(x).StartsWith("lvl_") || Path.GetFileName(x).StartsWith("gate_") || Path.GetFileName(x).StartsWith("master_"))) {
                 //skip self to not include self
                 if (file == filepath)
                     continue;
@@ -383,7 +380,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
 
-        public void PanelEnableState(Panel panel, bool enablestate)
+        public static void PanelEnableState(Panel panel, bool enablestate)
         {
             foreach (Control _c in panel.Controls.Cast<Control>().Where(x => x.GetType() != typeof(Label))) {
                 if (_c.Text != "titlebar")
@@ -410,7 +407,7 @@ namespace Thumper_Custom_Level_Editor
         ///
         /// File Lock read/write methods
         /// 
-        public void WriteFileLock(FileStream fs, JObject _save)
+        public static void WriteFileLock(FileStream fs, JObject _save)
         {
             string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
             using (StreamWriter sr = new StreamWriter(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
@@ -419,7 +416,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public dynamic LoadFileLock(string _selectedfilename)
+        public static dynamic LoadFileLock(string _selectedfilename)
         {
             dynamic _load;
             ///reference:
@@ -483,25 +480,4 @@ namespace Thumper_Custom_Level_Editor
             return filepath;
         }
     }
-    /*
-    public static class ExtensionMethodClass
-    {
-        public static string FirstLetterToUpper(this string str)
-        {
-            if (str == null)
-                return null;
-
-            if (str.Length > 1)
-                return char.ToUpper(str[0]) + str[1..];
-
-            return str.ToUpper();
-        }
-
-        public static string ToTitleCase(this string str)
-        {
-            string firstword = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str);
-            //str = str.Replace(str.Split(' ')[0], firstword);
-            return firstword;
-        }
-    }*/
 }
