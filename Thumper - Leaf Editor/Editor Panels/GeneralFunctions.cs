@@ -407,7 +407,7 @@ namespace Thumper_Custom_Level_Editor
         ///
         /// File Lock read/write methods
         /// 
-        public static void WriteFileLock(FileStream fs, JObject _save)
+        public void WriteFileLock(FileStream fs, JObject _save)
         {
             string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
             using (StreamWriter sr = new StreamWriter(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
@@ -416,7 +416,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static dynamic LoadFileLock(string _selectedfilename)
+        public dynamic LoadFileLock(string _selectedfilename)
         {
             dynamic _load;
             ///reference:
