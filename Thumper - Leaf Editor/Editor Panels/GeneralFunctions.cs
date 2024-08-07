@@ -346,12 +346,12 @@ namespace Thumper_Custom_Level_Editor
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
             //add lvl list as datasources to dropdowns
-            dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
-            dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
-            dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
-            dropGatePre.DataSource = lvlsinworkfolder.ToList();
-            dropGatePost.DataSource = lvlsinworkfolder.ToList();
-            dropGateRestart.DataSource = lvlsinworkfolder.ToList();
+            dropMasterCheck.DataSource = lvlsinworkfolder;
+            dropMasterIntro.DataSource = lvlsinworkfolder;
+            dropMasterLvlRest.DataSource = lvlsinworkfolder;
+            dropGatePre.DataSource = lvlsinworkfolder;
+            dropGatePost.DataSource = lvlsinworkfolder;
+            dropGateRestart.DataSource = lvlsinworkfolder;
         }
 
         public string SearchReferences(dynamic _load, string filepath)
