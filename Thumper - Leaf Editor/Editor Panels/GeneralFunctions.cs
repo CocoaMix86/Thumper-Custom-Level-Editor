@@ -354,11 +354,11 @@ namespace Thumper_Custom_Level_Editor
             dropGateRestart.DataSource = lvlsinworkfolder.ToList();
         }
 
-        public static string SearchReferences(dynamic _load, string filepath)
+        public string SearchReferences(dynamic _load, string filepath)
         {
             string referencefiles = "";
             //search all files in the project folder
-            foreach (string file in Directory.GetFiles(Path.GetDirectoryName(filepath)).Where(x => Path.GetFileName(x).StartsWith("leaf_") || Path.GetFileName(x).StartsWith("lvl_") || Path.GetFileName(x).StartsWith("gate_") || Path.GetFileName(x).StartsWith("master_"))) {
+            foreach (string file in Directory.GetFiles(workingfolder).Where(x => Path.GetFileName(x).StartsWith("leaf_") || Path.GetFileName(x).StartsWith("lvl_") || Path.GetFileName(x).StartsWith("gate_") || Path.GetFileName(x).StartsWith("master_"))) {
                 //skip self to not include self
                 if (file == filepath)
                     continue;
