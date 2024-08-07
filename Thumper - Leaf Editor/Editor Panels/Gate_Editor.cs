@@ -30,6 +30,7 @@ namespace Thumper_Custom_Level_Editor
 					loadedgate = value;
 					ShowPanel(true, panelGate);
                     PanelEnableState(panelGate, true);
+					dropGateSection.SelectedIndex = 0;
 
                     if (!File.Exists(loadedgate)) {
 						File.WriteAllText(loadedgate, "");
