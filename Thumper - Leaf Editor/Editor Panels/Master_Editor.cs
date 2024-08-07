@@ -701,7 +701,7 @@ namespace Thumper_Custom_Level_Editor
 				_beatcount += (int)leaf["beat_cnt"];
 			}
 			//every lvl has an approach beats to consider too
-			_beatcount += (int)_load["approach_beats"];
+			//_beatcount += (int)_load["approach_beats"];
 
 			return _beatcount;
 		}
