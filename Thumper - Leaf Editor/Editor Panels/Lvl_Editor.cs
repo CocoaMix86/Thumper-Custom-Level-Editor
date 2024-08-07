@@ -145,7 +145,7 @@ namespace Thumper_Custom_Level_Editor
 				if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
 					lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
 					dgv[e.ColumnIndex, e.RowIndex].Value = null;
-					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
+					TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _tracks[e.RowIndex]);
 					SaveLvl(false);
 					lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
 				}
@@ -166,7 +166,7 @@ namespace Thumper_Custom_Level_Editor
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex]);
+                    TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _tracks[e.RowIndex]);
                     //GenerateDataPoints(dgv.Rows[e.RowIndex]);
                     SaveLvl(false);
                     lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;

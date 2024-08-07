@@ -111,7 +111,7 @@ namespace Thumper_Custom_Level_Editor
         /// <param name="amount">How much of <paramref name="color"/> to keep,
         /// “on top of” <paramref name="backColor"/>.</param>
         /// <returns>The blended colors.</returns>
-        public Color Blend(Color color, Color backColor, double amount)
+        public static Color Blend(Color color, Color backColor, double amount)
         {
             byte r = (byte)(color.R * amount + backColor.R * (1 - amount));
             byte g = (byte)(color.G * amount + backColor.G * (1 - amount));
@@ -217,36 +217,68 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        private void RandomizeRowValues(DataGridViewRow dgvr)
+        private static void RandomizeRowValues(DataGridViewRow dgvr, Sequencer_Object _seqobj)
         {
-            int idx = dgvr.Index;
-            foreach (DataGridViewCell dgvc in dgvr.Cells) {
-                dgvc.Value = null;
-                if ((_tracks[idx].trait_type is "kTraitBool" or "kTraitAction") || (_tracks[idx].param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
-                    if (_tracks[idx].obj_name == "sentry.spn")
-                        dgvc.Value = rng.Next(0, 55) == 39 ? 1 : null;
-                    else
-                        dgvc.Value = rng.Next(0, 10) == 9 ? 1 : null;
-                }
-                else if (_tracks[idx].trait_type == "kTraitColor") {
-                    dgvc.Value = rng.Next(0, 10) >= 8 ? Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb() : null;
-                }
-                else {
-                    if (_tracks[idx].param_path == "sequin_speed")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4 : null;
-                    else if (_tracks[idx].obj_name == "fade.pp")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) : null;
-                    else if (_tracks[idx].friendly_type == "CAMERA")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
-                    else if (_tracks[idx].friendly_type == "GAMMA")
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) : null;
-                    else
-                        dgvc.Value = rng.Next(0, 10) >= 9 ? (TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200) * (rng.Next(0, 1) == 0 ? 1 : -1) : null;
+            Random rng = new Random();
+            int rngchance;
+            int rnglimit;
+            int randomtype = 0;
+            decimal valueiftrue = 0;
+            
+            if ((_seqobj.trait_type is "kTraitBool" or "kTraitAction") || (_seqobj.param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
+                valueiftrue = 1;
+                rngchance = 10;
+                rnglimit = 9;
+                if (_seqobj.obj_name == "sentry.spn") {
+                    rngchance = 55;
+                    rnglimit = 54;
                 }
             }
-            TrackUpdateHighlighting(dgvr);
-            GenerateDataPoints(dgvr);
-            ShowRawTrackData(dgvr);
+            else if (_seqobj.trait_type == "kTraitColor") {
+                randomtype = 7;
+                rngchance = 10;
+                rnglimit = 8;
+            }
+            else {
+                rngchance = 10;
+                rnglimit = 9;
+                if (_seqobj.param_path == "sequin_speed")
+                    randomtype = 2;
+                else if (_seqobj.obj_name == "fade.pp")
+                    randomtype = 3;
+                else if (_seqobj.friendly_type == "CAMERA")
+                    randomtype = 4;
+                else if (_seqobj.friendly_type == "GAMMA")
+                    randomtype = 5;
+                else
+                    randomtype = 6;
+            }
+            foreach (DataGridViewCell dgvc in dgvr.Cells) {
+                switch (randomtype) {
+                    case 2:
+                        valueiftrue = TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
+                        break;
+                    case 3:
+                        valueiftrue = TruncateDecimal((decimal)rng.NextDouble(), 3);
+                        break;
+                    case 4:
+                        valueiftrue = TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        break;
+                    case 5:
+                        valueiftrue = TruncateDecimal((decimal)(rng.NextDouble() * 100), 3);
+                        break;
+                    case 6:
+                        valueiftrue = (TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200) * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        break;
+                    case 7:
+                        valueiftrue = Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb();
+                        break;
+                }
+
+                dgvc.Value = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
+            }
+            TrackUpdateHighlighting(dgvr, _seqobj);
+            GenerateDataPoints(dgvr, _seqobj);
         }
 
         /// <summary>
@@ -361,7 +393,7 @@ namespace Thumper_Custom_Level_Editor
 
 
         /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947
-        decimal TruncateDecimal(decimal d, byte decimals)
+        public static decimal TruncateDecimal(decimal d, byte decimals)
         {
             decimal r = Math.Round(d, decimals);
 
