@@ -387,6 +387,7 @@ namespace Thumper_Custom_Level_Editor
 			dropGateBoss.DisplayMember = "boss_name";
 			dropGateBoss.ValueMember = "boss_spn";
 			dropGateBoss.DataSource = bossdata;
+			dropGateSection.SelectedIndex = 0;
 			//
 			dropGateSection.SelectedIndex = -1;
 			SaveGate(true);
