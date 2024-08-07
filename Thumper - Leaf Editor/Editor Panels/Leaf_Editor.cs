@@ -1406,7 +1406,7 @@ namespace Thumper_Custom_Level_Editor
 			dropParamPath.SelectedIndexChanged += dropParamPath_SelectedIndexChanged;
 		}
 
-		public void InitializeTracks(DataGridView grid, bool columnstyle)
+		public static void InitializeTracks(DataGridView grid, bool columnstyle)
 		{
 			//double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
 			//used to significantly improve rendering performance
@@ -1420,7 +1420,7 @@ namespace Thumper_Custom_Level_Editor
 				GenerateColumnStyle(grid, grid.ColumnCount);
 		}
 
-		public void GenerateColumnStyle(DataGridView grid, int _cells)
+		public static void GenerateColumnStyle(DataGridView grid, int _cells)
 		{
 			//stylize track grid/columns
 			for (int i = 0; i < _cells; i++) {
@@ -1733,13 +1733,7 @@ namespace Thumper_Custom_Level_Editor
 					s.Add("param_path", seq_obj.param_path);
 				s.Add("trait_type", seq_obj.trait_type);
 				s.Add("default_interp", $"kTraitInterp{seq_obj.default_interp}");
-				///start building all data points into an object
-				JObject data_points = new();
-				for (int x = 0; x < trackEditor.ColumnCount; x++) {
-					if (!string.IsNullOrEmpty(trackEditor[x, _tracks.IndexOf(seq_obj)].Value?.ToString()))
-						data_points.Add(x.ToString(), decimal.Parse(trackEditor[x, _tracks.IndexOf(seq_obj)].Value.ToString()));
-				}
-				s.Add("data_points", data_points);
+				s.Add("data_points", seq_obj.data_points);
 				///end
 				//add the rest of the keys to this seq_obj
 				s.Add("step", seq_obj.step);
