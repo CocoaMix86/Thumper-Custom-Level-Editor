@@ -298,11 +298,14 @@ namespace Thumper_Custom_Level_Editor
         private void filter_Click(object sender, EventArgs e)
         {
             ToolStripButton tsb = sender as ToolStripButton;
+			//file filters are handled in a flag system //leaf 1, lvl 2, gate 4, master 8, sample 16
+			//the filter buttons have these numbers in their Tags
             filefilter ^= byte.Parse(tsb.Tag.ToString());
             btnWorkRefresh_Click(null, null);
         }
 		private void filterClear_Click(object sender, EventArgs e)
 		{
+			//clear all checks and reset flags to 0
 			filterLeaf.Checked = filterLvl.Checked = filterGate.Checked = filterMaster.Checked = filterSamp.Checked = false;
             PlaySound("UIselect");
             filefilter = 0x0;
