@@ -300,7 +300,7 @@ namespace Thumper_Custom_Level_Editor
             ToolStripButton tsb = sender as ToolStripButton;
 			//file filters are handled in a flag system //leaf 1, lvl 2, gate 4, master 8, sample 16
 			//the filter buttons have these numbers in their Tags
-            filefilter ^= byte.Parse(tsb.Tag.ToString());
+            filefilter ^= byte.Parse((string)tsb.Tag);
             btnWorkRefresh_Click(null, null);
         }
 		private void filterClear_Click(object sender, EventArgs e)
