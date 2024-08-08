@@ -4588,9 +4588,9 @@
             this.panel9.Controls.Add(this.lblGateSectionHelp);
             this.panel9.Controls.Add(this.dropGateRestart);
             this.panel9.Controls.Add(this.dropGateSection);
-            this.panel9.Location = new System.Drawing.Point(-1, 238);
+            this.panel9.Location = new System.Drawing.Point(-16, 238);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(330, 142);
+            this.panel9.Size = new System.Drawing.Size(320, 142);
             this.panel9.TabIndex = 146;
             // 
             // label38
