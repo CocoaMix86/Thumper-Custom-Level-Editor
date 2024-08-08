@@ -110,11 +110,13 @@ namespace Thumper_Custom_Level_Editor
 
 		private void gateLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			try {
-				_gatelvls[e.RowIndex].sentrytype = (string)gateLvlList[1, e.RowIndex].Value;
-				_gatelvls[e.RowIndex].bucket = int.Parse((string)gateLvlList[2, e.RowIndex].Value);
-				SaveGate(false);
-			} catch { }
+			if (e.RowIndex == -1 || e.ColumnIndex == -1)
+				return;
+			if (e.ColumnIndex == 2)
+				_gatelvls[e.RowIndex].sentrytype = gateLvlList[2, e.RowIndex].Value.ToString();
+			if (e.ColumnIndex == 3)
+				_gatelvls[e.RowIndex].bucket = int.Parse((string)gateLvlList[3, e.RowIndex].Value);
+			SaveGate(false);
 		}
 
 		public void gatelvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -259,8 +261,9 @@ namespace Thumper_Custom_Level_Editor
             foreach (GateLvlData gld in todelete)
                 _gatelvls.Remove(gld);
             PlaySound("UIobjectremove");
-            gateLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= _masterlvls.Count ? _in - 1 : _in));
+            gateLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= _gatelvls.Count ? _in - 1 : _in));
         }
+
 		private void btnGateLvlAdd_Click(object sender, EventArgs e)
 		{
 			//don't load new lvl if gate has 4 phases
@@ -298,7 +301,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnGateLvlUp_Click(object sender, EventArgs e)
         {
-            if (gateLvlList.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == 0))
+            if (gateLvlList.SelectedCells.Cast<DataGridViewCell>().Any(r => r.RowIndex == 0))
                 return;
             List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == 0))
@@ -317,7 +320,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnGateLvlDown_Click(object sender, EventArgs e)
         {
-            if (gateLvlList.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == gateLvlList.Rows.Count - 1))
+            if (gateLvlList.SelectedCells.Cast<DataGridViewCell>().Any(r => r.RowIndex == gateLvlList.Rows.Count - 1))
                 return;
             List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == 0))
@@ -338,9 +341,13 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (workingfolder == null)
 				return;
-			lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList();
-			lvlsinworkfolder.Add("");
+			lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
+            lvlsinworkfolder.Add("<none>");
 			lvlsinworkfolder.Sort();
+
+            dropGatePre.SelectedIndexChanged -= dropGatePre_SelectedIndexChanged;
+            dropGatePost.SelectedIndexChanged -= dropGatePost_SelectedIndexChanged;
+            dropGateRestart.SelectedIndexChanged -= dropGateRestart_SelectedIndexChanged;
             ///add lvl list as datasources to dropdowns
             object _select = dropGatePre.SelectedItem;
 			dropGatePre.DataSource = lvlsinworkfolder.ToList();
@@ -353,9 +360,14 @@ namespace Thumper_Custom_Level_Editor
 			_select = dropGateRestart.SelectedItem;
 			dropGateRestart.DataSource = lvlsinworkfolder.ToList();
 			dropGateRestart.SelectedItem = _select;
-			SaveGate(true);
-			PlaySound("UIrefresh");
-		}
+			//
+            dropGatePre.SelectedIndexChanged += dropGatePre_SelectedIndexChanged;
+            dropGatePost.SelectedIndexChanged += dropGatePost_SelectedIndexChanged;
+            dropGateRestart.SelectedIndexChanged += dropGateRestart_SelectedIndexChanged;
+
+            PlaySound("UIrefresh");
+
+        }
 
 		private void btnRevertGate_Click(object sender, EventArgs e)
 		{

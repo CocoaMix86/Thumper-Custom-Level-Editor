@@ -345,6 +345,13 @@ namespace Thumper_Custom_Level_Editor
             lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
+
+            dropMasterCheck.SelectedIndexChanged -= dropMasterCheck_SelectedIndexChanged;
+            dropMasterIntro.SelectedIndexChanged -= dropMasterIntro_SelectedIndexChanged;
+            dropMasterLvlRest.SelectedIndexChanged -= dropMasterLvlRest_SelectedIndexChanged;
+            dropGatePre.SelectedIndexChanged -= dropGatePre_SelectedIndexChanged;
+            dropGatePost.SelectedIndexChanged -= dropGatePost_SelectedIndexChanged;
+            dropGateRestart.SelectedIndexChanged -= dropGateRestart_SelectedIndexChanged;
             //add lvl list as datasources to dropdowns
             dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
             dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
@@ -352,6 +359,13 @@ namespace Thumper_Custom_Level_Editor
             dropGatePre.DataSource = lvlsinworkfolder.ToList();
             dropGatePost.DataSource = lvlsinworkfolder.ToList();
             dropGateRestart.DataSource = lvlsinworkfolder.ToList();
+            //
+            dropMasterCheck.SelectedIndexChanged += dropMasterCheck_SelectedIndexChanged;
+            dropMasterIntro.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
+            dropMasterLvlRest.SelectedIndexChanged += dropMasterLvlRest_SelectedIndexChanged;
+            dropGatePre.SelectedIndexChanged += dropGatePre_SelectedIndexChanged;
+            dropGatePost.SelectedIndexChanged += dropGatePost_SelectedIndexChanged;
+            dropGateRestart.SelectedIndexChanged += dropGateRestart_SelectedIndexChanged;
         }
 
         public string SearchReferences(dynamic _load, string filepath)
