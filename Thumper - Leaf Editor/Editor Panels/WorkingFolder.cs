@@ -210,7 +210,7 @@ namespace Thumper_Custom_Level_Editor
 
             HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\leaf_{x.Cells[1].Value}.txt").ToList());
             HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\lvl_{x.Cells[1].Value}.txt").ToList());
-            HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\{(x.Cells[0].Value == Properties.Resources.leaf ? "leaf" : "lvl")}_{x.Cells[1].Value}.txt").ToList());
+            HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\{(_masterlvls[x.Index].lvlname != "" ? "lvl" : "gate")}_{x.Cells[1].Value}.txt").ToList());
         }
 		private void workingfolderFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
