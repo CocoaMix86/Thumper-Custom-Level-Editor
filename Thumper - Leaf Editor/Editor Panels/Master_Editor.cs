@@ -20,8 +20,13 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedmaster; }
 			set
 			{
-				if (value == null) {
-					ResetMaster();
+				if (value == null && loadedmaster != value) {
+                    if (loadedmaster != null && lockedfiles.ContainsKey(loadedmaster)) {
+                        lockedfiles[loadedmaster].Close();
+                        lockedfiles.Remove(loadedmaster);
+                    }
+                    loadedmaster = value;
+                    ResetMaster();
 				}
 				else if (loadedmaster != value) {
 					if (loadedmaster != null && lockedfiles.ContainsKey(loadedmaster)) {
@@ -241,7 +246,7 @@ namespace Thumper_Custom_Level_Editor
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
 				if (sender == null) {
-					ResetMaster();
+					_loadedmaster = null;
 				}
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -718,7 +723,6 @@ namespace Thumper_Custom_Level_Editor
         {
 			//reset things to default values
 			masterjson = null;
-			loadedmaster = null;
 			_masterlvls.Clear();
 			lblMasterName.Text = "Master Editor";
 			btnConfigGlowColor.BackColor = Color.White;

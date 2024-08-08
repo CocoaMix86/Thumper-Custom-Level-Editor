@@ -19,11 +19,12 @@ namespace Thumper_Custom_Level_Editor
 		{
 			get { return loadedgate; }
 			set {
-				if (value == null) {
+				if (value == null && loadedgate != value) {
                     if (loadedgate != null && lockedfiles.ContainsKey(loadedgate)) {
                         lockedfiles[loadedgate].Close();
                         lockedfiles.Remove(loadedgate);
                     }
+                    loadedgate = value;
                     ResetGate();
 				}
 				if (loadedgate != value) {
@@ -192,7 +193,7 @@ namespace Thumper_Custom_Level_Editor
             sfd.InitialDirectory = workingfolder;
             if (sfd.ShowDialog() == DialogResult.OK) {
 				if (sender == null)
-					ResetGate();
+					_loadedgate = null;
 				//separate path and filename
 				string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
@@ -562,7 +563,6 @@ namespace Thumper_Custom_Level_Editor
         {
 			//reset things to default values
 			gatejson = null;
-			loadedgate = null;
 			_gatelvls.Clear();
 			gateLvlList.Rows.Clear();
 			checkGateRandom.Checked = false;

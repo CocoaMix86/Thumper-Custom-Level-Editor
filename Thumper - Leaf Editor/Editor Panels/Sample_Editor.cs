@@ -10,7 +10,6 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
@@ -23,8 +22,13 @@ namespace Thumper_Custom_Level_Editor
 		{
 			get { return loadedsample; }
 			set {
-				if (value == null) {
-					ResetSample();
+				if (value == null && loadedsample != value) {
+                    if (loadedsample != null && lockedfiles.ContainsKey(loadedsample)) {
+                        lockedfiles[loadedsample].Close();
+                        lockedfiles.Remove(loadedsample);
+                    }
+                    loadedsample = value;
+                    ResetSample();
 				}
 				if (loadedsample != value) {
 					if (loadedsample != null && lockedfiles.ContainsKey(loadedsample)) {
@@ -191,7 +195,7 @@ namespace Thumper_Custom_Level_Editor
             sfd.InitialDirectory = workingfolder;
             if (sfd.ShowDialog() == DialogResult.OK) {
 				if (sender == null)
-					ResetSample();
+					_loadedsample = null;
 				//separate path and filename
 				string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
@@ -627,7 +631,6 @@ namespace Thumper_Custom_Level_Editor
         {
 			//reset things to default values
 			samplejson = null;
-			loadedsample = null;
 			_samplelist.Clear();
 			lblSampleEditor.Text = "Sample Editor";
 			//set saved flag to true, because nothing is loaded

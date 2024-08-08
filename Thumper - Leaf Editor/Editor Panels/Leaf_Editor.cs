@@ -26,8 +26,13 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedleaf; }
 			set
 			{
-				if (value == null) {
-					ResetLeaf();
+				if (value == null && loadedleaf != value) {
+                    if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) {
+                        lockedfiles[loadedleaf].Close();
+                        lockedfiles.Remove(loadedleaf);
+                    }
+                    loadedleaf = value;
+                    ResetLeaf();
 				}
 				if (loadedleaf != value) {
 					if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) {
@@ -677,7 +682,7 @@ namespace Thumper_Custom_Level_Editor
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
 				if (sender == null)
-					ResetLeaf();
+					_loadedleaf = null;
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
@@ -1757,7 +1762,6 @@ namespace Thumper_Custom_Level_Editor
 		private void ResetLeaf()
 		{
 			leafjson = null;
-			loadedleaf = null;
 			_tracks.Clear();
 			trackEditor.Rows.Clear();
 			lblTrackFileName.Text = "Leaf Editor";
