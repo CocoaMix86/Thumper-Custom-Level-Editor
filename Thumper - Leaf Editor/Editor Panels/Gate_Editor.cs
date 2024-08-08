@@ -297,7 +297,9 @@ namespace Thumper_Custom_Level_Editor
         }
 
 		private void btnGateLvlUp_Click(object sender, EventArgs e)
-		{
+        {
+            if (gateLvlList.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == 0))
+                return;
             List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == 0))
                 return;
@@ -315,6 +317,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnGateLvlDown_Click(object sender, EventArgs e)
         {
+            if (gateLvlList.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == gateLvlList.Rows.Count - 1))
+                return;
             List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == 0))
                 return;
