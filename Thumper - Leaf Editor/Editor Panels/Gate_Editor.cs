@@ -6,8 +6,8 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -82,7 +82,9 @@ namespace Thumper_Custom_Level_Editor
 			//Do nothing if not selecting the lvl name
 			if (e.ColumnIndex != 1 || e.RowIndex == -1)
 				return;
-			dynamic _load;
+            if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                return;
+            dynamic _load;
 			//gateLvlList_RowEnter(sender, e);
 			if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
 				string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");

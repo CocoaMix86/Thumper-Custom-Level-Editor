@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -57,8 +58,10 @@ namespace Thumper_Custom_Level_Editor
 			//if not selecting the file column, return and do nothing
 			if (e.ColumnIndex == -1 || e.ColumnIndex > 1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
 				return;
+            if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                return;
 
-			string _file;
+            string _file;
 			dynamic _load = null;
 
 			//show a different confirmation message if the selected item is gate or lvl

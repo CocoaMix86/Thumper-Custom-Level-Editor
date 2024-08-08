@@ -6,10 +6,8 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
-using System.Windows.Markup;
+using System.Windows.Input;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -65,6 +63,8 @@ namespace Thumper_Custom_Level_Editor
 		private void lvlLeafList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.RowIndex == -1 || _lvlleafs.Count == 0 || e.RowIndex > _lvlleafs.Count - 1)
+				return;
+			if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
 				return;
 			//lvlLeafList_RowEnter(sender, e);
 			if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
@@ -221,7 +221,7 @@ namespace Thumper_Custom_Level_Editor
 			lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
 		}
 		//Press Delete to clear cells
-		private void lvlSeqObjs_KeyDown(object sender, KeyEventArgs e)
+		private void lvlSeqObjs_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
 			controldown = e.Control;
 			shiftdown = e.Shift;
