@@ -29,6 +29,14 @@ namespace Thumper_Custom_Level_Editor
                     m.Result = new IntPtr(17);  // HT_BOTTOMRIGHT
             }
         }
+        protected override CreateParams CreateParams
+        {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
         private const int grab = 16;
     }
 }

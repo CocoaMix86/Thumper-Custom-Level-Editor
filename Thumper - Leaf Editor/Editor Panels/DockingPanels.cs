@@ -222,6 +222,7 @@ namespace Thumper_Custom_Level_Editor
         private void DockPanel(Control panel, Control dock, bool playsound = false)
         {
             dock.Controls.Add(panel);
+            dock.Paint -= splitPanel_Paint;
             dock.ContextMenuStrip = null;
             panel.Dock = DockStyle.Fill;
             //locate the dock button in the panel
@@ -261,6 +262,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
 
             Control dock = panel.Parent;
+            dock.Paint += splitPanel_Paint;
             dock.ContextMenuStrip = contextMenuDock;
             panel.Dock = DockStyle.None;
             this.Controls.Add(panel);

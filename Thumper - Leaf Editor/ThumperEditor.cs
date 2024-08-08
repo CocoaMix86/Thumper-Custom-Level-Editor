@@ -353,7 +353,7 @@ namespace Thumper_Custom_Level_Editor
         }
         ///END DOUBLEBUFFERING
         /// 
-        
+
         private void regenerateTemplateFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists($@"{AppLocation}\templates")) {

@@ -58,7 +58,7 @@ namespace Thumper_Custom_Level_Editor
 		public int hscrollposition = 0;
 
 		public List<Sequencer_Object> _tracks = new();
-		private List<Object_Params> _objects = new();
+		private HashSet<Object_Params> _objects = new();
 		private Dictionary<string, string> objectcolors = new();
 		//public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
