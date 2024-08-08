@@ -145,10 +145,11 @@ namespace Thumper_Custom_Level_Editor
 			}
 
 			masterLvlList.RowEnter += masterLvlList_RowEnter;
-			//set selected index. Mainly used when moving items
-			///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
-			//enable certain buttons if there are enough items for them
-			btnMasterLvlDelete.Enabled = _masterlvls.Count > 0;
+            HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\{(x.Cells[0].Value == Properties.Resources.leaf ? "leaf" : "lvl")}_{x.Cells[1].Value}.txt").ToList());
+            //set selected index. Mainly used when moving items
+            ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
+            //enable certain buttons if there are enough items for them
+            btnMasterLvlDelete.Enabled = _masterlvls.Count > 0;
 			btnMasterLvlUp.Enabled = _masterlvls.Count > 1;
 			btnMasterLvlDown.Enabled = _masterlvls.Count > 1;
 			btnMasterLvlCopy.Enabled = _masterlvls.Count > 0;

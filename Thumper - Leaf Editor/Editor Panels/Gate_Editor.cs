@@ -80,7 +80,7 @@ namespace Thumper_Custom_Level_Editor
 		private void gateLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//Do nothing if not selecting the lvl name
-			if (e.ColumnIndex != 0 || e.RowIndex == -1)
+			if (e.ColumnIndex != 1 || e.RowIndex == -1)
 				return;
 			dynamic _load;
 			//gateLvlList_RowEnter(sender, e);
@@ -122,14 +122,15 @@ namespace Thumper_Custom_Level_Editor
 			//repopulate dgv from list
 			gateLvlList.RowEnter -= gateLvlList_RowEnter;
 			foreach (GateLvlData _lvl in _gatelvls) {
-				gateLvlList.Rows.Add(new object[] { _lvl.lvlname, _lvl.sentrytype, _lvl.bucket.ToString() });
+				gateLvlList.Rows.Add(new object[] { Properties.Resources.lvl, _lvl.lvlname.Replace(".lvl", ""), _lvl.sentrytype, _lvl.bucket.ToString() });
 				//gateLvlList.Rows[_gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {_gatelvls.IndexOf(_lvl) + 1}";
 			}
 			gateLvlList.RowEnter += gateLvlList_RowEnter;
-			//set selected index. Mainly used when moving items
-			///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
-			//enable certain buttons if there are enough items for them
-			btnGateLvlDelete.Enabled = _gatelvls.Count > 0;
+            HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\lvl_{x.Cells[1].Value}.txt").ToList());
+            //set selected index. Mainly used when moving items
+            ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
+            //enable certain buttons if there are enough items for them
+            btnGateLvlDelete.Enabled = _gatelvls.Count > 0;
 			btnGateLvlUp.Enabled = _gatelvls.Count > 1;
 			btnGateLvlDown.Enabled = _gatelvls.Count > 1;
 

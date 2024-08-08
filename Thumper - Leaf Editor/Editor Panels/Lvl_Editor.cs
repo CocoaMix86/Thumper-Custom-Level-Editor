@@ -310,6 +310,7 @@ namespace Thumper_Custom_Level_Editor
 				lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
 			}
 			lvlLeafList.RowEnter += lvlLeafList_RowEnter;
+			HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\leaf_{x.Cells[1].Value}.txt").ToList());
 
 
 			//enable certain buttons if there are enough items for them
