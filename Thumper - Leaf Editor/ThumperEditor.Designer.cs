@@ -4944,8 +4944,9 @@
             this.filterLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterLeaf.Name = "filterLeaf";
             this.filterLeaf.Size = new System.Drawing.Size(24, 24);
+            this.filterLeaf.Tag = "1";
             this.filterLeaf.ToolTipText = "Leaf files";
-            this.filterLeaf.CheckedChanged += new System.EventHandler(this.filterLeaf_CheckedChanged);
+            this.filterLeaf.Click += new System.EventHandler(this.filter_Click);
             // 
             // filterLvl
             // 
@@ -4955,8 +4956,9 @@
             this.filterLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterLvl.Name = "filterLvl";
             this.filterLvl.Size = new System.Drawing.Size(24, 24);
+            this.filterLvl.Tag = "2";
             this.filterLvl.ToolTipText = "Lvl files";
-            this.filterLvl.CheckedChanged += new System.EventHandler(this.filterLvl_CheckedChanged);
+            this.filterLvl.Click += new System.EventHandler(this.filter_Click);
             // 
             // filterGate
             // 
@@ -4966,8 +4968,9 @@
             this.filterGate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterGate.Name = "filterGate";
             this.filterGate.Size = new System.Drawing.Size(24, 24);
+            this.filterGate.Tag = "4";
             this.filterGate.ToolTipText = "Gate files";
-            this.filterGate.CheckedChanged += new System.EventHandler(this.filterGate_CheckedChanged);
+            this.filterGate.Click += new System.EventHandler(this.filter_Click);
             // 
             // filterMaster
             // 
@@ -4977,8 +4980,9 @@
             this.filterMaster.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterMaster.Name = "filterMaster";
             this.filterMaster.Size = new System.Drawing.Size(24, 24);
+            this.filterMaster.Tag = "8";
             this.filterMaster.ToolTipText = "Master files";
-            this.filterMaster.CheckedChanged += new System.EventHandler(this.filterMaster_CheckedChanged);
+            this.filterMaster.Click += new System.EventHandler(this.filter_Click);
             // 
             // filterSamp
             // 
@@ -4988,8 +4992,9 @@
             this.filterSamp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.filterSamp.Name = "filterSamp";
             this.filterSamp.Size = new System.Drawing.Size(24, 24);
+            this.filterSamp.Tag = "16";
             this.filterSamp.ToolTipText = "Sample files";
-            this.filterSamp.CheckedChanged += new System.EventHandler(this.filterSamp_CheckedChanged);
+            this.filterSamp.Click += new System.EventHandler(this.filter_Click);
             // 
             // workingToolStrip2
             // 

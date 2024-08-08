@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.VisualBasic.FileIO;
+using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -186,11 +187,11 @@ namespace Thumper_Custom_Level_Editor
 				}
 
 				//if no filters enabled, add the file to list
-				if (!filterleaf && !filterlvl && !filtergate && !filtermaster && !filtersamp) {
+				if (filefilter == 0x0) {
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 				}
 				//otherwise, compare the filetype to any active filter and then add it
-				else if ((filetype == "leaf" && filterleaf) || (filetype == "lvl" && filterlvl) || (filetype == "gate" && filtergate) || (filetype == "master" && filtermaster) || (filetype == "samp" && filtersamp)) {
+				else if ((filetype == "leaf" && (filefilter & 1) == 1) || (filetype == "lvl" && (filefilter & 2) == 2) || (filetype == "gate" && (filefilter & 4) == 4) || (filetype == "master" && (filefilter & 8) == 8) || (filetype == "samp" && (filefilter & 16) == 16)) {
 					workingfolderFiles.Rows.Add(Properties.Resources.ResourceManager.GetObject(filetype), Path.GetFileNameWithoutExtension(file));
 				}
 
@@ -293,16 +294,20 @@ namespace Thumper_Custom_Level_Editor
 			btnWorkRefresh_Click(null, null);
 		}
 
-		bool filterleaf, filterlvl, filtergate, filtermaster, filtersamp = false;
-		private void filterLeaf_CheckedChanged(object sender, EventArgs e) {filterleaf = filterLeaf.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
-		private void filterLvl_CheckedChanged(object sender, EventArgs e) { filterlvl = filterLvl.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
-		private void filterGate_CheckedChanged(object sender, EventArgs e) { filtergate = filterGate.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
-		private void filterMaster_CheckedChanged(object sender, EventArgs e) { filtermaster = filterMaster.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
-		private void filterSamp_CheckedChanged(object sender, EventArgs e) { filtersamp = filterSamp.Checked; PlaySound("UIselect"); btnWorkRefresh_Click(null, null); }
+		public byte filefilter = 0x0;
+        private void filter_Click(object sender, EventArgs e)
+        {
+            ToolStripButton tsb = sender as ToolStripButton;
+            filefilter ^= byte.Parse(tsb.Tag.ToString());
+            btnWorkRefresh_Click(null, null);
+        }
 		private void filterClear_Click(object sender, EventArgs e)
 		{
 			filterLeaf.Checked = filterLvl.Checked = filterGate.Checked = filterMaster.Checked = filterSamp.Checked = false;
-		}
+            PlaySound("UIselect");
+            filefilter = 0x0;
+            btnWorkRefresh_Click(null, null);
+        }
 
 		///Drag and drop files to copy them to the workingfolder
 		private void workingfolderFiles_DragEnter(object sender, DragEventArgs e)
