@@ -20,7 +20,11 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedgate; }
 			set {
 				if (value == null) {
-					ResetGate();
+                    if (loadedgate != null && lockedfiles.ContainsKey(loadedgate)) {
+                        lockedfiles[loadedgate].Close();
+                        lockedfiles.Remove(loadedgate);
+                    }
+                    ResetGate();
 				}
 				if (loadedgate != value) {
 					if (loadedgate != null && lockedfiles.ContainsKey(loadedgate)) {
@@ -80,7 +84,7 @@ namespace Thumper_Custom_Level_Editor
 		private void gateLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//Do nothing if not selecting the lvl name
-			if (e.ColumnIndex != 1 || e.RowIndex == -1)
+			if (e.ColumnIndex != 1 || e.RowIndex != 1)
 				return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
@@ -110,7 +114,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void gateLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex == -1 || e.ColumnIndex == -1)
+			if (e.RowIndex == -1 || e.ColumnIndex <= 0)
 				return;
 			if (e.ColumnIndex == 2)
 				_gatelvls[e.RowIndex].sentrytype = gateLvlList[2, e.RowIndex].Value.ToString();

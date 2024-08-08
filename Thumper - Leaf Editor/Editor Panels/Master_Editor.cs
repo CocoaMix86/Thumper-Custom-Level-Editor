@@ -665,19 +665,21 @@ namespace Thumper_Custom_Level_Editor
 			foreach (MasterLvlData _masterlvl in _masterlvls) {
 				//this section handles lvl
 				if (_masterlvl.lvlname is not null and not "") {
+                    int idx = _masterlvl.lvlname.LastIndexOf('.');
 					//load the lvl and then loop through its leafs to get beat counts
-					int idx = _masterlvl.lvlname.LastIndexOf('.');
 					_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{_masterlvl.lvlname[..idx]}.txt");
 				}
 				//this section handles gate
 				else {
 					//load the gate to then loop through all lvls in it
 					int idx = _masterlvl.gatename.LastIndexOf('.');
-					_load = LoadFileLock($"{workingfolder}\\gate_{_masterlvl.gatename[..idx]}.txt");
+                    _load = LoadFileLock($"{workingfolder}\\gate_{_masterlvl.gatename[..idx]}.txt");
+					if (_load == null)
+						continue;
 					foreach (dynamic _lvl in _load["boss_patterns"]) {
 						//load the lvl and then loop through its leafs to get beat counts
 						idx = ((string)_lvl["lvl_name"]).LastIndexOf('.');
-						_beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{((string)_lvl["lvl_name"])[..idx]}.txt");
+                        _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{((string)_lvl["lvl_name"])[..idx]}.txt");
 					}
 				}
 
@@ -700,10 +702,10 @@ namespace Thumper_Custom_Level_Editor
 			int _beatcount = 0;
 
 			//load the lvl and then loop through its leafs to get beat counts
-			if (!File.Exists(path))
-				return 0;
 			dynamic _load = LoadFileLock(path);
-			foreach (dynamic leaf in _load["leaf_seq"]) {
+            if (_load == null)
+                return 0;
+            foreach (dynamic leaf in _load["leaf_seq"]) {
 				_beatcount += (int)leaf["beat_cnt"];
 			}
 			//every lvl has an approach beats to consider too

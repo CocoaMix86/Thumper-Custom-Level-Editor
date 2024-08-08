@@ -433,6 +433,8 @@ namespace Thumper_Custom_Level_Editor
         public dynamic LoadFileLock(string _selectedfilename)
         {
             dynamic _load;
+            if (!File.Exists(_selectedfilename))
+                return null;
             ///reference:
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
             using (FileStream fileStream = new FileStream(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
