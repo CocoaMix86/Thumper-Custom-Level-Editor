@@ -120,27 +120,22 @@ namespace Thumper_Custom_Level_Editor
         {
             //clear lists used for storing level data
             if (panel is "all" or "leaf") {
-                _tracks.Clear();
                 _loadedleaf = null;
                 PanelEnableState(panelLeaf, false);
             }
             if (panel is "all" or "lvl") {
-                _lvlleafs.Clear();
                 _loadedlvl = null;
                 PanelEnableState(panelLevel, false);
             }
             if (panel is "all" or "gate") {
-                _gatelvls.Clear();
                 _loadedgate = null;
                 PanelEnableState(panelGate, false);
             }
             if (panel is "all" or "master") {
-                _masterlvls.Clear();
                 _loadedmaster = null;
                 PanelEnableState(panelMaster, false);
             }
             if (panel is "all" or "samp") {
-                _samplelist.Clear();
                 _loadedsample = null;
                 PanelEnableState(panelSample, false);
             }
