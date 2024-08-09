@@ -74,7 +74,7 @@ namespace Thumper_Custom_Level_Editor
 		readonly List<string> _bucket3 = new() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
 		readonly Dictionary<string, string> gatesentrynames = new() { { "SENTRY_NONE", "None" }, { "SENTRY_SINGLE_LANE", "Single Lane" }, { "SENTRY_MULTI_LANE", "Multi Lane" } };
 		dynamic gatejson;
-        readonly ObservableCollection<GateLvlData> _gatelvls = new();
+        public ObservableCollection<GateLvlData> _gatelvls = new();
 		#endregion
 
 		#region EventHandlers
@@ -142,6 +142,12 @@ namespace Thumper_Custom_Level_Editor
             btnGateLvlDelete.Enabled = _gatelvls.Count > 0;
 			btnGateLvlUp.Enabled = _gatelvls.Count > 1;
 			btnGateLvlDown.Enabled = _gatelvls.Count > 1;
+
+			//limit how many phases can be added
+			if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramidboss.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramidboss.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
+				btnGateLvlAdd.Enabled = false;
+			else
+				btnGateLvlAdd.Enabled = true;
 
 			//set lvl save flag to false
 			SaveGate(false);
@@ -229,10 +235,19 @@ namespace Thumper_Custom_Level_Editor
 		/// All dropdowns of Gate Editor call this
 		private void dropGateBoss_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if ((sender as ComboBox).Name == "dropGateBoss" && dropGateBoss.Text.Contains("pyramid")) {
+            if ((sender as ComboBox).Name == "dropGateBoss" && dropGateBoss.Text.Contains("pyramid")) {
 				MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence, otherwise the level will crash.", "Gate Info");
+				if (_gatelvls.Count < 5)
+					btnGateLvlAdd.Enabled = true;
             }
-			SaveGate(false);
+			else if (_gatelvls.Count > 4) {
+				_gatelvls = new ObservableCollection<GateLvlData>(_gatelvls.Take(4));
+            }
+			else if (_gatelvls.Count == 4)
+                btnGateLvlAdd.Enabled = false;
+            else if (_gatelvls.Count < 4)
+                btnGateLvlAdd.Enabled = true;
+            SaveGate(false);
 		}
 		private void dropGatePre_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -286,7 +301,8 @@ namespace Thumper_Custom_Level_Editor
             ofd.Title = "Load a Thumper Lvl file";
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
-				if ((_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramidboss.spn" && !checkGateRandom.Checked) || (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramidboss.spn"))
+                //limit how many phases can be added
+                if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramidboss.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramidboss.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
 					return;
                 //parse leaf to JSON
                 dynamic _load = LoadFileLock(ofd.FileName);
