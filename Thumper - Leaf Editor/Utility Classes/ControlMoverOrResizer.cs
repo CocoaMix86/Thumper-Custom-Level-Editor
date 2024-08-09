@@ -40,10 +40,13 @@ namespace Thumper_Custom_Level_Editor
 
             control.MouseMove += delegate (object sender, MouseEventArgs e) {
                 if (Dragging) {
+                    container.Location = new Point(Math.Max(0, e.X + container.Left - DragStart.X), Math.Max(0, e.Y + container.Top - DragStart.Y));
+                    /*
                     if (direction != direction.Vertical)
                         container.Left = Math.Max(0, e.X + container.Left - DragStart.X);
                     if (direction != direction.Horizontal)
                         container.Top = Math.Max(0, e.Y + container.Top - DragStart.Y);
+                    */
                 }
             };
         }
