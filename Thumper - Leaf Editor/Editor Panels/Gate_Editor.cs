@@ -85,7 +85,7 @@ namespace Thumper_Custom_Level_Editor
 		private void gateLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//Do nothing if not selecting the lvl name
-			if (e.ColumnIndex != 1 || e.RowIndex == -1)
+			if (e.ColumnIndex != 1 || e.RowIndex == -1 || e.RowIndex > _gatelvls.Count - 1)
 				return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
