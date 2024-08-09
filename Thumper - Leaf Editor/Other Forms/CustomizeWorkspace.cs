@@ -238,9 +238,6 @@ namespace Thumper_Custom_Level_Editor
         }
         private void btnSingleReset_Click(object sender, EventArgs e)
         {
-            //the "14" is a leftpad empty space
-            //currentlabel.Text = $"{currentlabel.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
-            keybindLabel_Click(currentlabel, null);
             CustomizeWorkspace_KeyDown(null, new KeyEventArgs(defaultkeybinds[keybindname]));
         }
         private void btnCloseKeybind_Click(object sender, EventArgs e)
@@ -249,6 +246,7 @@ namespace Thumper_Custom_Level_Editor
             panelSetKeybind.Visible = false;
             btnSetKeybind.Enabled = false;
             btnSetKeybind.BackColor = Color.Gray;
+            lastpress = Keys.None;
         }
 
         /// 
