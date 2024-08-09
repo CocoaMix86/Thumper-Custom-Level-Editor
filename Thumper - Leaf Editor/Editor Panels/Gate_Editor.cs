@@ -144,7 +144,7 @@ namespace Thumper_Custom_Level_Editor
 			btnGateLvlDown.Enabled = _gatelvls.Count > 1;
 
 			//limit how many phases can be added
-			if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramidboss.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramidboss.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
+			if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
 				btnGateLvlAdd.Enabled = false;
 			else
 				btnGateLvlAdd.Enabled = true;
@@ -235,13 +235,16 @@ namespace Thumper_Custom_Level_Editor
 		/// All dropdowns of Gate Editor call this
 		private void dropGateBoss_SelectedIndexChanged(object sender, EventArgs e)
 		{
-            if ((sender as ComboBox).Name == "dropGateBoss" && dropGateBoss.Text.Contains("pyramid")) {
-				MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence, otherwise the level will crash.", "Gate Info");
+            if (dropGateBoss.Text.Contains("pyramid")) {
+				if (_gatelvls.Count != 5)
+					MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence, otherwise the level will crash.", "Gate Info");
 				if (_gatelvls.Count < 5)
 					btnGateLvlAdd.Enabled = true;
             }
-			else if (_gatelvls.Count > 4) {
-				_gatelvls = new ObservableCollection<GateLvlData>(_gatelvls.Take(4));
+			else if (_gatelvls.Count > 4 && !checkGateRandom.Checked) {
+                for (int x = _gatelvls.Count; x >= 4; x--) {
+                    _gatelvls.RemoveAt(x);
+                }
             }
 			else if (_gatelvls.Count == 4)
                 btnGateLvlAdd.Enabled = false;
@@ -263,15 +266,20 @@ namespace Thumper_Custom_Level_Editor
 		{
 			btnGateOpenRestart.Enabled = dropGateRestart.SelectedIndex > 0;
 			SaveGate(false);
-		}
-		#endregion
+        }
 
-		#region Buttons
-		///         ///
-		/// BUTTONS ///
-		///         ///
+        private void dropGateSection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveGate(false);
+        }
+        #endregion
 
-		private void btnGateLvlDelete_Click(object sender, EventArgs e)
+        #region Buttons
+        ///         ///
+        /// BUTTONS ///
+        ///         ///
+
+        private void btnGateLvlDelete_Click(object sender, EventArgs e)
 		{
             List<GateLvlData> todelete = new();
             foreach (DataGridViewRow dgvr in gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList()) {
@@ -287,11 +295,11 @@ namespace Thumper_Custom_Level_Editor
 		private void btnGateLvlAdd_Click(object sender, EventArgs e)
 		{
 			//don't load new lvl if gate has 4 phases
-			if (_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramidboss.spn" && !checkGateRandom.Checked) {
+			if (_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) {
 				MessageBox.Show("You can only add 4 phases to a boss (each lvl is a phase).", "Gate Info");
 				return;
 			}
-			if (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramidboss.spn") {
+			if (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") {
 				MessageBox.Show("Pyramid requires only 5 phases (each lvl is a phase).", "Gate Info");
 				return;
 			}
@@ -302,7 +310,7 @@ namespace Thumper_Custom_Level_Editor
             ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 //limit how many phases can be added
-                if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramidboss.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramidboss.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
+                if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
 					return;
                 //parse leaf to JSON
                 dynamic _load = LoadFileLock(ofd.FileName);
@@ -403,8 +411,19 @@ namespace Thumper_Custom_Level_Editor
 		private void btnGateOpenRestart_Click(object sender, EventArgs e) => MasterLoadLvl(dropGateRestart.Text);
 
 		private void checkGateRandom_CheckedChanged(object sender, EventArgs e)
-		{
-			dgvGateBucket.Visible = checkGateRandom.Checked;
+        {
+            if (checkGateRandom.Checked && _gatelvls.Count < 16)
+                btnGateLvlAdd.Enabled = true;
+            else if (!checkGateRandom.Checked) {
+				if (_gatelvls.Count > 4 && MessageBox.Show("Disabling random will remove all phases after the 4th. Continue?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+					for (int x = _gatelvls.Count - 1; x >= 4; x--) {
+						_gatelvls.RemoveAt(x);
+					}
+				}
+				else
+					return;
+            }
+            dgvGateBucket.Visible = checkGateRandom.Checked;
 			dropGateBoss.Enabled = !checkGateRandom.Checked;
 			dropGateBoss.SelectedItem = bossdata.Where(x => x.boss_name == "Level 6 - spirograph").First();
 			SaveGate(false);
@@ -462,19 +481,40 @@ namespace Thumper_Custom_Level_Editor
 					sentrytype = gatesentrynames[(string)_lvl["sentry_type"]],
 					bucket = _lvl["bucket_num"]
 				});
-			}
+				if ((string)_load["spn_name"] == "pyramid.spn" && _gatelvls.Count == 5)
+					break;
+				else if ((string)_load["random_type"] == "LEVEL_RANDOM_BUCKET") {
+					if (_gatelvls.Count == 16)
+						break;
+				}
+				else if ((string)_load["spn_name"] != "pyramid.spn" && _gatelvls.Count == 4)
+					break;
+            }
 			gateLvlList.CellValueChanged += gateLvlList_CellValueChanged;
 
-			//populate dropdowns
-			checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
-			dropGateBoss.SelectedValue = (string)_load["spn_name"];
+			checkGateRandom.CheckedChanged -= checkGateRandom_CheckedChanged;
+			dropGateBoss.SelectedIndexChanged -= dropGateBoss_SelectedIndexChanged;
+            //populate dropdowns
+            checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
+            dropGateBoss.SelectedValue = (string)_load["spn_name"];
 			dropGatePre.SelectedItem = (string)_load["pre_lvl_name"] == "" ? "<none>" : (string)_load["pre_lvl_name"];
 			dropGatePost.SelectedItem = (string)_load["post_lvl_name"] == "" ? "<none>" : (string)_load["post_lvl_name"];
 			dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"] == "" ? "<none>" : (string)_load["restart_lvl_name"];
 			dropGateSection.SelectedIndex = dropGateSection.FindStringExact((string)_load["section_type"]);
+			//
+            checkGateRandom.CheckedChanged += checkGateRandom_CheckedChanged;
+            dropGateBoss.SelectedIndexChanged += dropGateBoss_SelectedIndexChanged;
 
-			///set save flag (gate just loaded, has no changes)
-			gatejson = _load;
+            dgvGateBucket.Visible = checkGateRandom.Checked;
+            dropGateBoss.Enabled = !checkGateRandom.Checked;
+            //limit how many phases can be added
+            if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
+                btnGateLvlAdd.Enabled = false;
+            else
+                btnGateLvlAdd.Enabled = true;
+
+            ///set save flag (gate just loaded, has no changes)
+            gatejson = _load;
 			SaveGate(true);
 		}
 
@@ -532,19 +572,19 @@ namespace Thumper_Custom_Level_Editor
 					switch (_gatelvls[x].bucket) {
 						case 0:
 							s.Add("node_name_hash", _bucket0[bucket0]);
-							bucket0++;
+							bucket0 = (bucket0 + 1) % 4;
 							break;
 						case 1:
 							s.Add("node_name_hash", _bucket1[bucket1]);
-							bucket1++;
+                            bucket1 = (bucket1 + 1) % 4;
 							break;
 						case 2:
 							s.Add("node_name_hash", _bucket2[bucket2]);
-							bucket2++;
+                            bucket2 = (bucket2 + 1) % 4;
 							break;
 						case 3:
 							s.Add("node_name_hash", _bucket3[bucket3]);
-							bucket3++;
+                            bucket3 = (bucket3 + 1) % 4;
 							break;
 					}
 				}
