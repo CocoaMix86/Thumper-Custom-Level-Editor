@@ -455,9 +455,9 @@ namespace Thumper_Custom_Level_Editor
             if (lockedfiles.ContainsKey(_selectedfilename)) {
                 lockedfiles[_selectedfilename].Close();
                 lockedfiles.Remove(_selectedfilename);
+                ClearPanels(filetype);
             }
             File.Delete(_selectedfilename);
-            ClearPanels(filetype);
         }
 
         public void ClearFileLock()
