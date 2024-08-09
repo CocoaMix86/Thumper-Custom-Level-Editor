@@ -350,7 +350,7 @@ namespace Thumper_Custom_Level_Editor
             List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == gateLvlList.Rows.Count - 1))
                 return;
-            selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
+            selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
                 _gatelvls.Insert(dgvr + 2, _gatelvls[dgvr]);
                 _gatelvls.RemoveAt(dgvr);
