@@ -1353,9 +1353,10 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackApply_Click(null, null);
 
 			PlaySound("UIaddrandom");
-			while (trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Where(x => x.Value != null).ToList().Count == 0) {
+			do {
 				RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
 			}
+			while (trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Where(x => x.Value != null).ToList().Count == 0);
             ShowRawTrackData(trackEditor.CurrentRow);
             randomizing = false;
 			SaveLeaf(false, "Added random object", $"{_tracks.Last().friendly_type} {_tracks.Last().friendly_param}");
