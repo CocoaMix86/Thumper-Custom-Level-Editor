@@ -1353,7 +1353,9 @@ namespace Thumper_Custom_Level_Editor
 			btnTrackApply_Click(null, null);
 
 			PlaySound("UIaddrandom");
-			RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
+			while (trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Where(x => x.Value != null).ToList().Count == 0) {
+				RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
+			}
             ShowRawTrackData(trackEditor.CurrentRow);
             randomizing = false;
 			SaveLeaf(false, "Added random object", $"{_tracks.Last().friendly_type} {_tracks.Last().friendly_param}");
@@ -1366,7 +1368,9 @@ namespace Thumper_Custom_Level_Editor
 
 			if (MessageBox.Show("Assign random values to the current selected track?", "Confirm randomization", MessageBoxButtons.YesNo) == DialogResult.Yes) {
 				PlaySound("UIaddrandom");
-				RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
+				do {
+					RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
+				} while (trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Where(x => x.Value != null).ToList().Count == 0);
                 ShowRawTrackData(trackEditor.CurrentRow);
                 SaveLeaf(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
 			}
