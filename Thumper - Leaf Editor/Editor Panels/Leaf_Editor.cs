@@ -26,8 +26,13 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedleaf; }
 			set
 			{
-				if (value == null) {
-					ResetLeaf();
+				if (value == null && loadedleaf != value) {
+                    if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) {
+                        lockedfiles[loadedleaf].Close();
+                        lockedfiles.Remove(loadedleaf);
+                    }
+                    loadedleaf = value;
+                    ResetLeaf();
 				}
 				if (loadedleaf != value) {
 					if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) {
@@ -58,7 +63,7 @@ namespace Thumper_Custom_Level_Editor
 		public int hscrollposition = 0;
 
 		public List<Sequencer_Object> _tracks = new();
-		private List<Object_Params> _objects = new();
+		private HashSet<Object_Params> _objects = new();
 		private Dictionary<string, string> objectcolors = new();
 		//public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
 		public Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
@@ -677,7 +682,7 @@ namespace Thumper_Custom_Level_Editor
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
 				if (sender == null)
-					ResetLeaf();
+					_loadedleaf = null;
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
@@ -1757,7 +1762,6 @@ namespace Thumper_Custom_Level_Editor
 		private void ResetLeaf()
 		{
 			leafjson = null;
-			loadedleaf = null;
 			_tracks.Clear();
 			trackEditor.Rows.Clear();
 			lblTrackFileName.Text = "Leaf Editor";

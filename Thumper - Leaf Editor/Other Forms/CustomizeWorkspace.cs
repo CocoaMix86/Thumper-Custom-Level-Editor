@@ -12,11 +12,11 @@ namespace Thumper_Custom_Level_Editor
     {
         ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
         string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
-        public List<Object_Params> _objects = new();
+        public HashSet<Object_Params> _objects = new();
         private Dictionary<string, string> objectcolors = new();
         private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
 
-        public CustomizeWorkspace(List<Object_Params> thelist)
+        public CustomizeWorkspace(HashSet<Object_Params> thelist)
         {
             InitializeComponent();
             _objects = thelist;

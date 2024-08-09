@@ -20,8 +20,13 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedlvl; }
 			set
 			{
-				if (value == null) {
-					ResetLvl();
+				if (value == null && loadedlvl != value) {
+                    if (loadedlvl != null && lockedfiles.ContainsKey(loadedlvl)) {
+                        lockedfiles[loadedlvl].Close();
+                        lockedfiles.Remove(loadedlvl);
+                    }
+                    loadedlvl = value;
+                    ResetLvl();
 				}
 				else if (loadedlvl != value) {
 					if (loadedlvl != null && lockedfiles.ContainsKey(loadedlvl)) {
@@ -386,7 +391,7 @@ namespace Thumper_Custom_Level_Editor
             sfd.InitialDirectory = workingfolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
 				if (sender == null) {
-					ResetLvl();
+					_loadedlvl = null;
 				}
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -1122,7 +1127,6 @@ namespace Thumper_Custom_Level_Editor
         {
 			//reset things to default values
 			lvljson = null;
-			loadedlvl = null;
 			_lvlleafs.Clear();
 			lvlLeafPaths.Rows.Clear();
 			lvlSeqObjs.Rows.Clear();
