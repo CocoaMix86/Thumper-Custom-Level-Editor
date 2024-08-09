@@ -84,7 +84,7 @@ namespace Thumper_Custom_Level_Editor
 		private void gateLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			//Do nothing if not selecting the lvl name
-			if (e.ColumnIndex != 1 || e.RowIndex != 1)
+			if (e.ColumnIndex != 1 || e.RowIndex == -1)
 				return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
@@ -305,8 +305,6 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnGateLvlUp_Click(object sender, EventArgs e)
         {
-            if (gateLvlList.SelectedCells.Cast<DataGridViewCell>().Any(r => r.RowIndex == 0))
-                return;
             List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == 0))
                 return;
@@ -324,10 +322,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnGateLvlDown_Click(object sender, EventArgs e)
         {
-            if (gateLvlList.SelectedCells.Cast<DataGridViewCell>().Any(r => r.RowIndex == gateLvlList.Rows.Count - 1))
-                return;
             List<int> selectedrows = gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
-            if (selectedrows.Any(r => r == 0))
+            if (selectedrows.Any(r => r == gateLvlList.Rows.Count - 1))
                 return;
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
