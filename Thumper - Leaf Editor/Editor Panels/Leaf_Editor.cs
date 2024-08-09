@@ -578,6 +578,10 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (loadedleaf == null)
 				return;
+			if (dropObjects.SelectedIndex == -1) {
+                dropParamPath.SelectedIndex = -1;
+                return;
+			}
 			//when an object is chosen, unlock the param_path options and set datasource
 			dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
 			//switch index back and forth to trigger event
@@ -604,7 +608,13 @@ namespace Thumper_Custom_Level_Editor
 		///DROPDOWN PARAM_PATHS
 		private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
+            if (dropParamPath.SelectedIndex == -1) {
+                dropTrackLane.Enabled = false;
+                btnTrackApply.Enabled = false;
+                return;
+			}
+
+            if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
 				//if (_tracks[trackEditor.CurrentRow?.Index ?? 0].highlight_color == null)
 				btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(objectcolors.TryGetValue(dropParamPath.Text, out string value) ? value : "-8355585"));
 				//if the param_path is .ent, enable lane choice
