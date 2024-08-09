@@ -16,13 +16,13 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class FormLeafEditor
 	{
-		#region Variables
-		bool _savesample = true;
+        #region Variables
+        public bool _savesample = true;
 		string _loadedsample
 		{
 			get { return loadedsample; }
 			set {
-				if (value == null && loadedsample != value) {
+				if (value == null) {
                     if (loadedsample != null && lockedfiles.ContainsKey(loadedsample)) {
                         lockedfiles[loadedsample].Close();
                         lockedfiles.Remove(loadedsample);

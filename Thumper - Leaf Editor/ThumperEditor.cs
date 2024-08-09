@@ -49,9 +49,11 @@ namespace Thumper_Custom_Level_Editor
                     }
                     //load Level Details into an object so it can be accessed later
                     projectjson = LoadFileLock($@"{value}\LEVEL DETAILS.txt");
-                    if (projectjson == null || !projectjson.ContainsKey("level_name") || !projectjson.ContainsKey("difficulty") || !projectjson.ContainsKey("description") || !projectjson.ContainsKey("author")) {
+                    if (projectjson == null || !projectjson.ContainsKey("level_name") || !projectjson.ContainsKey("difficulty") || !projectjson.ContainsKey("description") || !projectjson.ContainsKey("author"))
+                    {
                         DialogResult result = MessageBox.Show("The LEVEL DETAILS.txt is missing information or is corrupt.\nCreate new LEVEL DETAILS?", "Failed to load", MessageBoxButtons.YesNo);
-                        if (result == DialogResult.Yes) {
+                        if (result == DialogResult.Yes)
+                        {
                             JObject level_details = new() { { "level_name", $"{Path.GetFileName(value)}" }, { "difficulty", "D0" }, { "description", "replace this text" }, { "author", "some guy" } };
                             File.WriteAllText($@"{value}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
                             projectjson = LoadFileLock($@"{value}\LEVEL DETAILS.txt");
@@ -72,7 +74,6 @@ namespace Thumper_Custom_Level_Editor
                     //populate lvlsinworkfolder with all .lvl files in the project
                     //this is needed for some specific dropdowns.
                     UpdateLevelLists();
-
                     //set Working Folder panel data
                     lblWorkingFolder.Text = $"Working Folder ⮞ {projectjson["level_name"]}";
                     lblWorkingFolder.ToolTipText = $"Working Folder ⮞ {workingfolder}";
@@ -87,13 +88,6 @@ namespace Thumper_Custom_Level_Editor
                         Properties.Settings.Default.Recentfiles.Remove(workingfolder);
                     Properties.Settings.Default.Recentfiles.Insert(0, workingfolder);
                     JumpListUpdate();
-
-                    //when workingfolder changes, reset panels
-                    SaveLeaf(true, "Load", "");
-                    SaveLvl(true);
-                    SaveGate(true);
-                    SaveMaster(true);
-                    SaveSample(true);
                     panelRecentFiles.Visible = false;
 
                     //once all that is done, refresh the Working Folder list. This automatically opens the Master

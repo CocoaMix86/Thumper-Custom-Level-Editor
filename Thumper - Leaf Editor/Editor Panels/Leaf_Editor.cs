@@ -15,7 +15,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class FormLeafEditor : Form
 	{
 		#region Variables
-		bool _saveleaf = true;
+		public bool _saveleaf = true;
 
 		int _beats { get { return (int)numericUpDown_LeafLength.Value; } }
 		int _selecttrack = 0;
@@ -26,7 +26,7 @@ namespace Thumper_Custom_Level_Editor
 			get { return loadedleaf; }
 			set
 			{
-				if (value == null && loadedleaf != value) {
+				if (value == null) {
                     if (loadedleaf != null && lockedfiles.ContainsKey(loadedleaf)) {
                         lockedfiles[loadedleaf].Close();
                         lockedfiles.Remove(loadedleaf);

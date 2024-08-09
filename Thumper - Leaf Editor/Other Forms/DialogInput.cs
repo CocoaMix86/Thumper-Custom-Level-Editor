@@ -104,13 +104,26 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnCustomSave_Click(object sender, EventArgs e)
         {
-            CreateCustomLevelFolder(this);
-            this.DialogResult = DialogResult.Yes;
-            this.Close();
+            bool success = CreateCustomLevelFolder(this);
+            if (success) {
+                this.DialogResult = DialogResult.Yes;
+                this.Close();
+            }
         }
 
-        public void CreateCustomLevelFolder(DialogInput input)
+        public bool CreateCustomLevelFolder(DialogInput input)
         {
+            string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
+            //check if any files are unsaved before moving folders
+            if (mainform.workingfolder != levelpath) {
+                if (!mainform._saveleaf || !mainform._savelvl || !mainform._savemaster || !mainform._savegate || !mainform._savesample) {
+                    if (MessageBox.Show("Some files are unsaved. Changing the level folder will close them and unsaved changes will be lost?\nDo you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
+                        return false;
+                    }
+                }
+                mainform._saveleaf = mainform._savelvl = mainform._savemaster = mainform._savegate = mainform._savesample = true;
+            }
+
             JObject level_details = new() {
                 { "level_name", input.txtCustomName.Text },
                 { "difficulty", input.txtCustomDiff.Text },
@@ -121,15 +134,14 @@ namespace Thumper_Custom_Level_Editor
             mainform.toolstripLevelName.Text = input.txtCustomName.Text;
             mainform.toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject(txtCustomDiff.Text);
 
-            string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
             if (mainform.workingfolder != null && isthisnew == false && mainform.workingfolder != levelpath) {
                 foreach (KeyValuePair<string, FileStream> fs in mainform.lockedfiles) {
                     fs.Value.Close();
                 }
                 mainform.lockedfiles.Clear();
                 //using a random suffix on the end to avoid any folders with same name
-                Directory.Move(mainform.workingfolder, $"{levelpath}_-_-_-_-_wraikoljgsdg");
-                Directory.Move($"{levelpath}_-_-_-_-_wraikoljgsdg", $"{levelpath}");
+                Directory.Move(mainform.workingfolder, $"{levelpath}1029");
+                Directory.Move($"{levelpath}1029", $"{levelpath}");
                 //if level name changes, should update the config file
                 if (File.Exists($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt"))
                     File.Move($@"{levelpath}\config_{Path.GetFileName(mainform.workingfolder)}.txt", $@"{levelpath}\config_{input.txtCustomName.Text}.txt");
@@ -250,9 +262,10 @@ namespace Thumper_Custom_Level_Editor
             }
             if (mainform.workingfolder != levelpath) {
                 MessageBox.Show("New level folder was created, but not loaded.", "Something went wrong...");
-                return;
+                return false;
             }
             mainform.btnWorkRefresh_Click(null, null);
+            return true;
         }
 
         private void txtCustomName_TextChanged(object sender, EventArgs e)
