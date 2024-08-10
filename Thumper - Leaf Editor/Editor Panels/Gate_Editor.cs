@@ -242,7 +242,7 @@ namespace Thumper_Custom_Level_Editor
 					btnGateLvlAdd.Enabled = true;
             }
 			else if (_gatelvls.Count > 4 && !checkGateRandom.Checked) {
-                for (int x = _gatelvls.Count; x >= 4; x--) {
+                for (int x = _gatelvls.Count - 1; x >= 4; x--) {
                     _gatelvls.RemoveAt(x);
                 }
             }
