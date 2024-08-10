@@ -495,8 +495,11 @@ namespace Thumper_Custom_Level_Editor
 			checkGateRandom.CheckedChanged -= checkGateRandom_CheckedChanged;
 			dropGateBoss.SelectedIndexChanged -= dropGateBoss_SelectedIndexChanged;
             //populate dropdowns
+			string boss = (string)_load["spn_name"];
+			if (boss == "pyramidboss.spn") boss = "pyramid.spn";
+			if (boss == "boss_frac.spn") boss = "boss_fractal.spn";
             checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
-            dropGateBoss.SelectedValue = (string)_load["spn_name"];
+			dropGateBoss.SelectedValue = boss;
 			dropGatePre.SelectedItem = (string)_load["pre_lvl_name"] == "" ? "<none>" : (string)_load["pre_lvl_name"];
 			dropGatePost.SelectedItem = (string)_load["post_lvl_name"] == "" ? "<none>" : (string)_load["post_lvl_name"];
 			dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"] == "" ? "<none>" : (string)_load["restart_lvl_name"];
