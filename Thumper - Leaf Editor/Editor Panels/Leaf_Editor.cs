@@ -707,12 +707,12 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 }
                 _loadedleaf = $@"{storePath}\leaf_{tempFileName}";
-                WriteLeaf();
+                WriteLeaf(true);
                 //after saving new file, refresh the workingfolder
                 btnWorkRefresh.PerformClick();
             }
         }
-		private void WriteLeaf()
+		private void WriteLeaf(bool clearundo = false)
 		{
             //serialize JSON object to a string, and write it to the file
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
@@ -725,7 +725,9 @@ namespace Thumper_Custom_Level_Editor
 			//update beat counts in loaded lvl if need be
 			if (_loadedlvl != null)
 				btnLvlRefreshBeats_Click(null, null);
-		}
+			if (clearundo)
+				ClearReloadUndo(_save);
+        }
 		///LEAF - LOAD FILE
 		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -1692,13 +1694,8 @@ namespace Thumper_Custom_Level_Editor
 			loadingleaf = false;
 			//clear undo list and reset the leafjson to the new leaf
 			if (resetundolist) {
-				_undolistleaf.Clear();
-				leafjson = _load;
-				_undolistleaf.Insert(0, new SaveState() {
-					reason = $"No changes",
-					savestate = leafjson
-				});
-				SaveLeaf(true, "", "");
+				ClearReloadUndo(_load);
+                SaveLeaf(true, "", "");
 			}
 			else {
 				//set save flag to true, since it just barely loaded

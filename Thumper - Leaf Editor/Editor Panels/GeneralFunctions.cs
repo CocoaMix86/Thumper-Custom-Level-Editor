@@ -331,6 +331,15 @@ namespace Thumper_Custom_Level_Editor
                 _undolistleaf.RemoveRange(0, undoindex);
             }
         }
+        private void ClearReloadUndo(dynamic _load)
+        {
+            _undolistleaf.Clear();
+            leafjson = _load;
+            _undolistleaf.Insert(0, new SaveState() {
+                reason = $"No changes",
+                savestate = leafjson
+            });
+        }
         ///
         ///
         ///
