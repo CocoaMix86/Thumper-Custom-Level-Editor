@@ -575,7 +575,7 @@ namespace Thumper_Custom_Level_Editor
 		///DROPDOWN OBJECTS
 		private void dropObjects_SelectedValueChanged(object sender, EventArgs e)
 		{
-			if (loadedleaf == null)
+			if (!panelLeaf.Enabled)
 				return;
 			if (dropObjects.SelectedIndex == -1) {
                 dropParamPath.SelectedIndex = -1;
@@ -1574,7 +1574,9 @@ namespace Thumper_Custom_Level_Editor
 			//check for template or regular file
 			if (filepath == "template") {
 				_loadedleaf = null;
-			}
+				ShowPanel(true, panelLeaf);
+                PanelEnableState(panelLeaf, true);
+            }
 			else {
 				workingfolder = Path.GetDirectoryName(filepath);
                 //check if the assign actually worked. If not, stop loading.
