@@ -59,6 +59,7 @@ namespace Thumper_Custom_Level_Editor
 		public bool rightclickdown = false;
 		public int leafeditorcell = 0;
 		public bool randomizing = false;
+		public bool ismoving = false;
 		public int hscrollposition = 0;
 
 		public List<Sequencer_Object> _tracks = new();
@@ -229,6 +230,8 @@ namespace Thumper_Custom_Level_Editor
 		//Row changed
 		private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
+			if (ismoving)
+				return;
 			_selecttrack = e.RowIndex;
 			ShowRawTrackData(trackEditor.Rows[e.RowIndex]);
 			List<string> _params = new();
@@ -884,6 +887,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackUp_Click(object sender, EventArgs e)
 		{
+			ismoving = true;
 			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
 			DataGridView dgv = trackEditor;
 			try {
@@ -921,10 +925,12 @@ namespace Thumper_Custom_Level_Editor
 				SaveLeaf(false, "Move track up", $"{_tracks[_selectedtracks[0].Item3 - 1].friendly_type} {_tracks[_selectedtracks[0].Item3 - 1].friendly_param}");
 			}
 			catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
-		}
+            ismoving = false;
+        }
 
 		private void btnTrackDown_Click(object sender, EventArgs e)
 		{
+			ismoving = true;
 			List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
 			DataGridView dgv = trackEditor;
 			try {
@@ -961,7 +967,8 @@ namespace Thumper_Custom_Level_Editor
 				SaveLeaf(false, "Move track down", $"{_tracks[_selectedtracks[0].Item3 + 1].friendly_type} {_tracks[_selectedtracks[0].Item3 + 1].friendly_param}");
 			}
 			catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
-		}
+            ismoving = false;
+        }
 
 		private void btnTrackCopy_Click(object sender, EventArgs e)
 		{
