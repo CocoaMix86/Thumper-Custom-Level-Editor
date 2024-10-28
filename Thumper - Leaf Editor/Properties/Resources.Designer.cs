@@ -221,7 +221,14 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I have setup a Ko-Fi for myself. Any amount of support is greatly appreciated!
+        ///   Looks up a localized string similar to ==========2.2.1==========
+        ///BUG FIXES
+        ///✅ pasting in leaf editor doesn&apos;t save
+        ///✅ crash when pasting decimal in ktraitColor
+        ///
+        ///
+        ///==========2.2==========
+        ///I have setup a Ko-Fi for myself. Any amount of support is greatly appreciated!
         ///https://ko-fi.com/cocoamix
         ///
         ///NEW
@@ -229,9 +236,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///🌟 Several buttons have new sound effects.
         ///🌟 Right-click on application in taskbar to access and open Recent Levels.
         ///🌟 Search button in the Working Folder tells you where a file is referenced.
-        ///🌟 Ctrl+X to cut cells in leaf editor. Paste (an existing function) with Ctrl+V.
-        ///🌟 Custom keybinds (Edit &gt; Preferences menu)
-        ///🌟 View your level&apos;s total runtime in the Mas [rest of string was truncated]&quot;;.
+        ///🌟 Ctrl+X to cut cells [rest of string was truncated]&quot;;.
         /// </summary>
         public static string changelog {
             get {

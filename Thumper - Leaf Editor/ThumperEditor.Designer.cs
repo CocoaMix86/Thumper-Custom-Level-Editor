@@ -151,6 +151,7 @@
             this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripLevelName = new System.Windows.Forms.ToolStripMenuItem();
+            this.nEWPANELToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.workingfolderRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -621,7 +622,8 @@
             this.bTFSampleToolStripMenuItem,
             this.bToolStripMenuItem,
             this.toolStripMenuItem11,
-            this.toolstripLevelName});
+            this.toolstripLevelName,
+            this.nEWPANELToolStripMenuItem});
             this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MinimumSize = new System.Drawing.Size(600, 0);
@@ -1524,6 +1526,13 @@
             this.toolstripLevelName.Size = new System.Drawing.Size(134, 24);
             this.toolstripLevelName.Text = "<no level loaded>";
             this.toolstripLevelName.Click += new System.EventHandler(this.btnWorkEditDetails_Click);
+            // 
+            // nEWPANELToolStripMenuItem
+            // 
+            this.nEWPANELToolStripMenuItem.Name = "nEWPANELToolStripMenuItem";
+            this.nEWPANELToolStripMenuItem.Size = new System.Drawing.Size(79, 18);
+            this.nEWPANELToolStripMenuItem.Text = "NEW PANEL";
+            this.nEWPANELToolStripMenuItem.Click += new System.EventHandler(this.nEWPANELToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -2574,7 +2583,7 @@
             // 
             // splitHorizontal
             // 
-            this.splitHorizontal.BackColor = System.Drawing.Color.Transparent;
+            this.splitHorizontal.BackColor = System.Drawing.Color.Black;
             this.splitHorizontal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitHorizontal.Location = new System.Drawing.Point(0, 25);
             this.splitHorizontal.Name = "splitHorizontal";
@@ -2591,7 +2600,7 @@
             this.splitHorizontal.SplitterDistance = 381;
             this.splitHorizontal.TabIndex = 136;
             this.splitHorizontal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
-            this.splitHorizontal.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMove);
+            this.splitHorizontal.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMoveHorz);
             this.splitHorizontal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseUp);
             // 
             // splitTop1
@@ -7006,7 +7015,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.MinimumSize = new System.Drawing.Size(1000, 39);
             this.Name = "FormLeafEditor";
-            this.Text = "Thumper Custom Level Editor 2.2";
+            this.Text = "Thumper Custom Level Editor 2.2.1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLeafEditor_FormClosing);
             this.Load += new System.EventHandler(this.FormLeafEditor_Load);
@@ -7325,10 +7334,6 @@
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitHorizontal;
-        private System.Windows.Forms.SplitContainer splitTop1;
-        private System.Windows.Forms.SplitContainer splitBottom1;
-        private System.Windows.Forms.SplitContainer splitTop2;
-        private System.Windows.Forms.SplitContainer splitBottom2;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label label51;
@@ -7591,6 +7596,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Lvl;
         private System.Windows.Forms.DataGridViewComboBoxColumn Sentry;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgvGateBucket;
+        private System.Windows.Forms.ToolStripMenuItem nEWPANELToolStripMenuItem;
+        public System.Windows.Forms.SplitContainer splitBottom1;
+        public System.Windows.Forms.SplitContainer splitTop1;
+        public System.Windows.Forms.SplitContainer splitTop2;
+        public System.Windows.Forms.SplitContainer splitBottom2;
     }
 }
 

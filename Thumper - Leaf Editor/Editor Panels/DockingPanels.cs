@@ -24,9 +24,6 @@ namespace Thumper_Custom_Level_Editor
         //assign this to the SplitContainer's MouseMove event
         private void splitCont_MouseMove(object sender, MouseEventArgs e)
         {
-            // Check to make sure the splitter won't be updated by the
-            // normal move behavior also
-            if (((SplitContainer)sender).IsSplitterFixed) {
                 // Make sure that the button used to move the splitter
                 // is the left mouse button
                 if (e.Button.Equals(MouseButtons.Left)) {
@@ -52,11 +49,21 @@ namespace Thumper_Custom_Level_Editor
                         }
                     }
                 }
-                // If a button other than left is pressed or no button
-                // at all
-                else {
-                    // This allows the splitter to be moved normally again
-                    ((SplitContainer)sender).IsSplitterFixed = false;
+        }
+        //assign this to the SplitContainer's MouseMove event
+        private void splitCont_MouseMoveHorz(object sender, MouseEventArgs e)
+        {
+            // Make sure that the button used to move the splitter
+            // is the left mouse button
+            if (e.Button.Equals(MouseButtons.Left)) {
+                // Only move the splitter if the mouse is within
+                // the appropriate bounds
+                if (e.Y > 0 && e.Y < splitHorizontal.Height) {
+                    // Move the splitter & force a visual refresh
+                    splitHorizontal.SplitterDistance = e.Y;
+                    splitHorizontal.SuspendLayout();
+                    splitHorizontal.Refresh();
+                    splitHorizontal.ResumeLayout();
                 }
             }
         }
@@ -219,19 +226,19 @@ namespace Thumper_Custom_Level_Editor
 
 
         #region Methods
-        private void DockPanel(Control panel, Control dock, bool playsound = false)
+        public void DockPanel(Control panel, Control dock, bool playsound = false)
         {
             dock.Controls.Add(panel);
             dock.Paint -= splitPanel_Paint;
             dock.ContextMenuStrip = null;
             panel.Dock = DockStyle.Fill;
             //locate the dock button in the panel
-            ToolStripButton dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
+            //ToolStripButton dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
             //then change its click event and tooltip
-            dockbtn.Click -= lblPopin_Click;
-            dockbtn.Click += lblPopout_Click;
+            //dockbtn.Click -= lblPopin_Click;
+            //dockbtn.Click += lblPopout_Click;
             //change tooltip
-            dockbtn.ToolTipText = "Undock panel";
+            //dockbtn.ToolTipText = "Undock panel";
             //toolTip1.SetToolTip(dockbtn, "Undock panel");
             ShowPanel(true, panel);
 
@@ -253,10 +260,10 @@ namespace Thumper_Custom_Level_Editor
             if (playsound) PlaySound("UIdock");
             //ControlMoverOrResizer.Dispose(panel);
             //ControlMoverOrResizer.Dispose(dockbtn.Owner);
-            ((Panel)panel).BorderStyle = BorderStyle.None;
+            //((Panel)panel).BorderStyle = BorderStyle.None;
         }
 
-        private void UndockPanel(Control panel, bool playsound = false)
+        public void UndockPanel(Control panel, bool playsound = false)
         {
             if (panel.Parent.GetType() != typeof(SplitterPanel))
                 return;
@@ -269,12 +276,12 @@ namespace Thumper_Custom_Level_Editor
             panel.Size = new Size(dock.Width, dock.Height);
             panel.Location = new Point(this.PointToClient(Cursor.Position).X - panel.Width + 150, this.PointToClient(Cursor.Position).Y - 10);
             //locate the dock button in the panel
-            ToolStripButton dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
+            //ToolStripButton dockbtn = panel.Controls.OfType<ToolStrip>().Where(x => x.Text == "titlebar").First().Items[3] as ToolStripButton;
             //then change its click event and tooltip
-            dockbtn.Click += lblPopin_Click;
-            dockbtn.Click -= lblPopout_Click;
+            //dockbtn.Click += lblPopin_Click;
+            //dockbtn.Click -= lblPopout_Click;
             //change tooltip
-            dockbtn.ToolTipText = "Dock panel";
+            //dockbtn.ToolTipText = "Dock panel";
             ShowPanel(true, panel);
 
             //save settings
@@ -301,7 +308,7 @@ namespace Thumper_Custom_Level_Editor
             if (playsound) PlaySound("UIdockun");
             //ControlMoverOrResizer.InitResizer(panel);
             //ControlMoverOrResizer.InitMover(dockbtn.Owner);
-            ((Panel)panel).BorderStyle = BorderStyle.FixedSingle;
+            //((Panel)panel).BorderStyle = BorderStyle.FixedSingle;
         }
 
         private void SetDockLocations()
@@ -311,6 +318,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             //set dock locations for panels
+            /*
             if (settings.dock1 != "empty") {
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock1, true).First();
                 DockPanel(_c, splitTop1.Panel1);
@@ -335,6 +343,7 @@ namespace Thumper_Custom_Level_Editor
                 Control _c = this.Controls.Find(Properties.Settings.Default.dock6, true).First();
                 DockPanel(_c, splitBottom2.Panel2);
             }
+            */
         }
         #endregion
     }

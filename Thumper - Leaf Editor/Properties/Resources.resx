@@ -358,7 +358,14 @@ showhidesample;D6, Alt</value>
     <value>..\image assets\icon-trash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="changelog" xml:space="preserve">
-    <value>I have setup a Ko-Fi for myself. Any amount of support is greatly appreciated!
+    <value>==========2.2.1==========
+BUG FIXES
+✅ pasting in leaf editor doesn't save
+✅ crash when pasting decimal in ktraitColor
+
+
+==========2.2==========
+I have setup a Ko-Fi for myself. Any amount of support is greatly appreciated!
 https://ko-fi.com/cocoamix
 
 NEW

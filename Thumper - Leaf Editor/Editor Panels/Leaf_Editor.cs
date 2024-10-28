@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -444,13 +445,14 @@ namespace Thumper_Custom_Level_Editor
 					//set ints so we don't have to always call rowindex, columnindex
 					int row = trackEditor.CurrentCell.RowIndex;
 					int col = trackEditor.CurrentCell.ColumnIndex;
-					for (int _line = 0; _line < copiedrows.Length; _line++) {
+                    List<DataGridViewRow> edited = new();
+                    for (int _line = 0; _line < copiedrows.Length; _line++) {
 						//if paste will go outside grid bounds, skip
 						if (row + _line >= trackEditor.RowCount)
 							break;
 						//split row into individual cells
 						string[] cells = copiedrows[_line].Split('\t');
-						for (int i = 0; i < cells.Length; i++) {
+                        for (int i = 0; i < cells.Length; i++) {
 							//if paste will go outside grid bounds, skip
 							if (col + i >= trackEditor.ColumnCount)
 								break;
@@ -459,9 +461,13 @@ namespace Thumper_Custom_Level_Editor
 								trackEditor[col + i, row + _line].Value = decimal.Parse(cells[i]);
 								TrackUpdateHighlightingSingleCell(trackEditor[col + i, row + _line], _tracks[row + _line]);
 							}
-						}
+                            if (!edited.Contains(trackEditor[col + i, row + _line].OwningRow))
+                                edited.Add(trackEditor[col + i, row + _line].OwningRow);
+                        }
 					}
-					SaveLeaf(false, $"Pasted cells", $"");
+                    foreach (DataGridViewRow r in edited)
+                        GenerateDataPoints(r, _tracks[r.Index]);
+                    SaveLeaf(false, $"Pasted cells", $"");
 				}
 			}
 
@@ -1545,7 +1551,7 @@ namespace Thumper_Custom_Level_Editor
 
 			//if it is kTraitColor, color the background differently
 			if (_seqobj.trait_type == "kTraitColor") {
-				dgvc.Style.BackColor = Color.FromArgb(int.Parse(dgvc.Value.ToString()));
+				dgvc.Style.BackColor = Color.FromArgb((int)Math.Truncate(double.Parse(dgvc.Value.ToString())));
 				return;
             }
 
@@ -1637,14 +1643,14 @@ namespace Thumper_Custom_Level_Editor
 					try {
                         string reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
                         Object_Params objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
-						_s.friendly_param = objmatch.param_displayname;
-						_s.friendly_type = objmatch.category;
+						_s.friendly_param = objmatch.param_displayname ?? "";
+						_s.friendly_type = objmatch.category ?? "";
 					} catch (Exception) {
 						loadfail = true;
 						loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
 					}
 				}
-				_s.highlight_color = (string)seq_obj["editor_data"]?[0] ?? (objectcolors.TryGetValue(_s.friendly_param, out string value) ? value : "-8355585");
+				_s.highlight_color = /*(string)seq_obj["editor_data"]?[0] ??*/ (objectcolors.TryGetValue(_s.friendly_param, out string value) ? value : "-8355585");
 				//if an object can be multi-lane, it will be an .ent. Check for "." to detect this
 				if (_s.param_path.Contains("."))
 					//get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
@@ -1653,6 +1659,7 @@ namespace Thumper_Custom_Level_Editor
 				_tracks.Add(_s);
 			}
 			//clear the DGV and prep for new data points
+			trackEditor.SuspendLayout();
 			trackEditor.Rows.Clear();
 			trackEditor.RowCount = _tracks.Count;
 
@@ -1675,8 +1682,9 @@ namespace Thumper_Custom_Level_Editor
 			if (loadfail) {
 				MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
             }
-			//enable a bunch of elements now that a leaf is loaded.
-			EnableLeafButtons(true);
+            trackEditor.ResumeLayout();
+            //enable a bunch of elements now that a leaf is loaded.
+            EnableLeafButtons(true);
 			//re-set the zoom level
 			trackZoom_Scroll(null, null);
 			trackZoomVert_Scroll(null, null);

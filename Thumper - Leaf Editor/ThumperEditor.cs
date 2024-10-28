@@ -10,6 +10,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Shell;
 using Cyotek.Windows.Forms;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -835,5 +836,13 @@ namespace Thumper_Custom_Level_Editor
             NUDquick9.Value = decimal.TryParse(_load[8], out result) ? result : 1;
         }
 
+        private void nEWPANELToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_LeafEditor newpan = new(this);
+            newpan.TopLevel = false;
+            this.Controls.Add(newpan);
+            newpan.Show();
+            newpan.BringToFront();
+        }
     }
 }

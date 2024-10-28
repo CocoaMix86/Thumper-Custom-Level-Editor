@@ -71,6 +71,12 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Editor Panels\Form_LeafEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor Panels\Form_LeafEditor.Designer.cs">
+      <DependentUpon>Form_LeafEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor Panels\GeneralFunctions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     <Compile Include="Utility Classes\SaveState.cs" />
     <Compile Include="Utility Classes\Timer.cs" />
     <Compile Include="Utility Classes\DropDownMenuScrollWheelHandler.cs" />
+    <EmbeddedResource Include="Editor Panels\Form_LeafEditor.resx">
+      <DependentUpon>Form_LeafEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Other Forms\AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </EmbeddedResource>
