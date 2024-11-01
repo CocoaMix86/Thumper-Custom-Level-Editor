@@ -106,11 +106,6 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void gateLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex == -1)
-				return;
-			if (_dgfocus != "gateLvlList") {
-				_dgfocus = "gateLvlList";
-			}
 		}
 
 		private void gateLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)

@@ -118,9 +118,6 @@ namespace Thumper_Custom_Level_Editor
 
 		private void sampleList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
-			if (_dgfocus != "sampleList") {
-				_dgfocus = "sampleList";
-			}
 		}
 
 		public void _samplelist_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

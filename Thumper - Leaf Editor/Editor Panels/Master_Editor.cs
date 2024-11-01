@@ -111,9 +111,6 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
-			if (_dgfocus != "masterLvlList") {
-				_dgfocus = "masterLvlList";
-			}
 		}
 		//Cell value changed (for checkboxes)
 		private void masterLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)

@@ -99,7 +99,6 @@ namespace Thumper_Custom_Level_Editor
         }
         private string _workingfolder;
         public List<string> lvlsinworkfolder = new();
-        public string _dgfocus;
         public Point _menuloc;
         public Random rng = new();
         public string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);

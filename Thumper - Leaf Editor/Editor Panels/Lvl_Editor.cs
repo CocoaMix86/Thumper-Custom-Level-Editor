@@ -89,11 +89,6 @@ namespace Thumper_Custom_Level_Editor
 		}
 		private void lvlLeafList_RowEnter(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex == -1)
-				return;
-			if (_dgfocus != "lvlLeafList") {
-				_dgfocus = "lvlLeafList";
-			}
 		}
 		///DGV LVLLEAFPATHS
 		//Cell value changed
