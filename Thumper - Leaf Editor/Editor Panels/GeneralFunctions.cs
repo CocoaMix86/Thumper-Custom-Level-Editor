@@ -141,7 +141,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static void PlaySound(string audiofile)
+        public void PlaySound(string audiofile)
         {
             if (Properties.Settings.Default.muteapplication)
                 return;
@@ -398,7 +398,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
 
-        public static void PanelEnableState(Panel panel, bool enablestate)
+        public void PanelEnableState(Control panel, bool enablestate)
         {
             foreach (Control _c in panel.Controls.Cast<Control>().Where(x => x.GetType() != typeof(Label))) {
                 if (_c.Text != "titlebar")
@@ -500,7 +500,7 @@ namespace Thumper_Custom_Level_Editor
             return filepath;
         }
 
-        public static void HighlightMissingFile(DataGridView dgv, List<string> filelist)
+        public void HighlightMissingFile(DataGridView dgv, List<string> filelist)
         {
             foreach (DataGridViewRow dgvr in dgv.Rows) {
                 if (!File.Exists(filelist[dgvr.Index])) {

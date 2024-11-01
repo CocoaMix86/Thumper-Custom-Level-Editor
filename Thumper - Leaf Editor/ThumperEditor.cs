@@ -17,7 +17,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class FormLeafEditor : Form
     {
         #region Variables
-        ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
+        public ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         public dynamic projectjson; 
@@ -106,6 +106,7 @@ namespace Thumper_Custom_Level_Editor
         private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public FileStream filelocklevel;
         public Dictionary<string, FileStream> lockedfiles = new();
+        public Dictionary<string, Form> openfiles = new();
         #endregion
 
         public FormLeafEditor(string LevelFromArg)
@@ -516,7 +517,7 @@ namespace Thumper_Custom_Level_Editor
 
         ///BEEBLE FUNCTIONS
         List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
-        private void pictureBox1_Click(object sender, EventArgs e)
+        public void pictureBox1_Click(object sender, EventArgs e)
         {
             int i = new Random().Next(0, 1001);
             if (i == 1000) {
@@ -838,11 +839,15 @@ namespace Thumper_Custom_Level_Editor
 
         private void nEWPANELToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_LeafEditor newpan = new(this);
-            newpan.TopLevel = false;
-            this.Controls.Add(newpan);
-            newpan.Show();
-            newpan.BringToFront();
+            Form_MasterEditor master_editor = new(this);
+            master_editor.Name = "master.sequin";
+            if (openfiles.ContainsKey("master.sequin"))
+                return;
+            openfiles.Add("master.sequin", master_editor);
+            master_editor.TopLevel = false;
+            this.Controls.Add(master_editor);
+            master_editor.Show();
+            master_editor.BringToFront();
         }
     }
 }

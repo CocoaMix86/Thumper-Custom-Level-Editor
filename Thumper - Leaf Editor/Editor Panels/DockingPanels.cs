@@ -68,7 +68,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private void ShowPanel(bool visible, Control panel)
+        public void ShowPanel(bool visible, Control panel)
         {
             panel.Visible = visible;
             panel.BringToFront();
