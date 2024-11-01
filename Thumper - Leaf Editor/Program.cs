@@ -28,7 +28,7 @@ namespace Thumper_Custom_Level_Editor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-            Application.Run(new FormLeafEditor(args[0]));
+            Application.Run(new TCLE(args[0]));
         }
 
         static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

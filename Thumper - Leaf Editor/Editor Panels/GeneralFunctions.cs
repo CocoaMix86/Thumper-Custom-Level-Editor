@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor : Form
+    public partial class TCLE : Form
     {
         public void ImportObjects()
         {

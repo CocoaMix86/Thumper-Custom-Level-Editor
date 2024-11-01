@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor
+    public partial class TCLE
     { 
         private void RecentFiles(List<string> recentfiles)
         {

@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor
+    public partial class TCLE
 	{
 		List<WorkingFolderFileItem> workingfiles = new();
 

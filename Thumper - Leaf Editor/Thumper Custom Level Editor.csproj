@@ -77,6 +77,12 @@
     <Compile Include="Editor Panels\Form_GateEditor.Designer.cs">
       <DependentUpon>Form_GateEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor Panels\Form_LvlEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor Panels\Form_LvlEditor.Designer.cs">
+      <DependentUpon>Form_LvlEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor Panels\Form_MasterEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +182,9 @@
     <Compile Include="Utility Classes\DropDownMenuScrollWheelHandler.cs" />
     <EmbeddedResource Include="Editor Panels\Form_GateEditor.resx">
       <DependentUpon>Form_GateEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor Panels\Form_LvlEditor.resx">
+      <DependentUpon>Form_LvlEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor Panels\Form_MasterEditor.resx">
       <DependentUpon>Form_MasterEditor.cs</DependentUpon>

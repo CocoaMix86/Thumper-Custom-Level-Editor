@@ -15,7 +15,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor : Form
+    public partial class TCLE : Form
     {
         #region Variables
         public ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
@@ -108,7 +108,7 @@ namespace Thumper_Custom_Level_Editor
         public Dictionary<string, Form> openfiles = new();
         #endregion
 
-        public FormLeafEditor(string LevelFromArg)
+        public TCLE(string LevelFromArg)
         {
             InitializeComponent();
             dockMain.Theme = new VS2015DarkTheme();
@@ -843,8 +843,10 @@ namespace Thumper_Custom_Level_Editor
         {
             var dockMaster = new Form_MasterEditor(this);
             var dockGate = new Form_GateEditor(this);
+            var dockLvl = new Form_LvlEditor(this);
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);
+            dockLvl.Show(dockMain, DockState.Document);
         }
 
     }

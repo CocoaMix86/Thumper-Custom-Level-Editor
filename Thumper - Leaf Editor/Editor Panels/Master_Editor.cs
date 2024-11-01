@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor : Form
+    public partial class TCLE : Form
 	{
         #region Variables
         public bool _savemaster = true;

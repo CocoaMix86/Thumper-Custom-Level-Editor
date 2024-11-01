@@ -12,7 +12,7 @@ using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class FormLeafEditor : Form
+    public partial class TCLE : Form
 	{
 		#region Variables
 		public bool _saveleaf = true;

@@ -15,9 +15,9 @@ namespace Thumper_Custom_Level_Editor
         public HashSet<Object_Params> _objects = new();
         private Dictionary<string, string> objectcolors = new();
         private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
-        private FormLeafEditor _mainform { get; set; }
+        private TCLE _mainform { get; set; }
 
-        public CustomizeWorkspace(HashSet<Object_Params> thelist, FormLeafEditor form)
+        public CustomizeWorkspace(HashSet<Object_Params> thelist, TCLE form)
         {
             InitializeComponent();
             _mainform = form;

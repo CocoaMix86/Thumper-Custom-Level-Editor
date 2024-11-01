@@ -13,11 +13,11 @@ namespace Thumper_Custom_Level_Editor
     public partial class DialogInput : Form
     {
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
-        private FormLeafEditor mainform { get; set; }
+        private TCLE mainform { get; set; }
         private bool isthisnew;
         private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
 
-        public DialogInput(FormLeafEditor form, bool newlevel)
+        public DialogInput(TCLE form, bool newlevel)
 		{
             isthisnew = newlevel;
 			InitializeComponent();
