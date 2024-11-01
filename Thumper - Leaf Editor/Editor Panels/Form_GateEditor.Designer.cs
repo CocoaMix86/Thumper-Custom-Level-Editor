@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_GateEditor));
-            this.panelGate = new Thumper_Custom_Level_Editor.ResizeablePanel();
+            this.panelGate = new System.Windows.Forms.Panel();
             this.toolstripTitleGate = new System.Windows.Forms.ToolStrip();
             this.lblGateName = new System.Windows.Forms.ToolStripLabel();
             this.btnSaveGate = new System.Windows.Forms.ToolStripButton();
@@ -91,7 +91,6 @@
             this.panelGate.Size = new System.Drawing.Size(800, 450);
             this.panelGate.TabIndex = 117;
             this.panelGate.Tag = "editorpanel";
-            this.panelGate.Visible = false;
             // 
             // toolstripTitleGate
             // 
@@ -644,7 +643,7 @@
 
         #endregion
 
-        private ResizeablePanel panelGate;
+        private System.Windows.Forms.Panel panelGate;
         private System.Windows.Forms.ToolStrip toolstripTitleGate;
         private System.Windows.Forms.ToolStripLabel lblGateName;
         private System.Windows.Forms.ToolStripButton btnSaveGate;
