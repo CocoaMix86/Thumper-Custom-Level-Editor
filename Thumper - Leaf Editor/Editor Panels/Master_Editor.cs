@@ -661,8 +661,6 @@ namespace Thumper_Custom_Level_Editor
 
 		private void CalculateMasterRuntime()
 		{
-			return;
-
 			dynamic _load;
 			int _beatcount = 0;
 			//loop through all entries in the master to get beat counts
