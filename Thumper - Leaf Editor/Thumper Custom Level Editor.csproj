@@ -222,6 +222,11 @@
     <None Include="image assets\github48.png" />
     <None Include="image assets\kofi-logo.png" />
     <None Include="image assets\Thumper_Splash.png" />
+    <None Include="image assets\leaf.ico" />
+    <None Include="image assets\lvl.ico" />
+    <None Include="image assets\master.ico" />
+    <None Include="image assets\sample.ico" />
+    <None Include="image assets\gate.ico" />
     <Content Include="thumper_level_editor2.ico" />
     <None Include="image assets\railcolorhelp.png" />
     <None Include="text assets\leaf_singletrack.txt" />
@@ -433,6 +438,9 @@
       <Version>1.7.2</Version>
     </PackageReference>
     <PackageReference Include="DockPanelSuite">
+      <Version>3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="DockPanelSuite.ThemeVS2015">
       <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Fmod5Sharp">

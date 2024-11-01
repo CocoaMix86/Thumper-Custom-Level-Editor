@@ -28,9 +28,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MasterEditor));
             this.panelMaster = new System.Windows.Forms.Panel();
             this.masterLvlList = new System.Windows.Forms.DataGridView();
@@ -42,8 +42,6 @@
             this.toolstripTitleMaster = new System.Windows.Forms.ToolStrip();
             this.lblMasterName = new System.Windows.Forms.ToolStripLabel();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnClose = new System.Windows.Forms.ToolStripButton();
-            this.btnDock = new System.Windows.Forms.ToolStripButton();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnRevert = new System.Windows.Forms.ToolStripButton();
             this.label30 = new System.Windows.Forms.Label();
@@ -82,15 +80,6 @@
             this.btnMasterLvlDown = new System.Windows.Forms.ToolStripButton();
             this.btnMasterLvlCopy = new System.Windows.Forms.ToolStripButton();
             this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
-            this.panelMover = new System.Windows.Forms.Panel();
-            this.panelDockOptions = new System.Windows.Forms.Panel();
-            this.btnDock1 = new System.Windows.Forms.Button();
-            this.btnDock2 = new System.Windows.Forms.Button();
-            this.btnDock3 = new System.Windows.Forms.Button();
-            this.btnDock4 = new System.Windows.Forms.Button();
-            this.btnDock5 = new System.Windows.Forms.Button();
-            this.btnDock7 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
@@ -98,15 +87,12 @@
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).BeginInit();
             this.masterToolStrip.SuspendLayout();
-            this.panelDockOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMaster
             // 
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMaster.Controls.Add(this.panelDockOptions);
-            this.panelMaster.Controls.Add(this.panelMover);
             this.panelMaster.Controls.Add(this.masterLvlList);
             this.panelMaster.Controls.Add(this.toolstripTitleMaster);
             this.panelMaster.Controls.Add(this.label30);
@@ -135,14 +121,14 @@
             this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.masterLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.masterLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -152,28 +138,28 @@
             this.masterPlayplus,
             this.masterIsolate});
             this.masterLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.NullValue = null;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle5;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = System.Drawing.Color.Black;
             this.masterLvlList.Location = new System.Drawing.Point(3, 39);
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.masterLvlList.RowHeadersVisible = false;
             this.masterLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.masterLvlList.RowTemplate.Height = 20;
@@ -228,10 +214,8 @@
             this.toolstripTitleMaster.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblMasterName,
             this.btnSave,
-            this.btnClose,
-            this.btnDock,
-            this.btnRefresh,
-            this.btnRevert});
+            this.btnRevert,
+            this.btnRefresh});
             this.toolstripTitleMaster.Location = new System.Drawing.Point(0, 0);
             this.toolstripTitleMaster.MaximumSize = new System.Drawing.Size(0, 50);
             this.toolstripTitleMaster.Name = "toolstripTitleMaster";
@@ -263,35 +247,8 @@
             this.btnSave.Size = new System.Drawing.Size(23, 22);
             this.btnSave.ToolTipText = "Save master file";
             // 
-            // btnClose
-            // 
-            this.btnClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(23, 25);
-            this.btnClose.Text = "toolStripButton6";
-            this.btnClose.ToolTipText = "Close panel";
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnDock
-            // 
-            this.btnDock.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnDock.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDock.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.btnDock.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDock.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.btnDock.Name = "btnDock";
-            this.btnDock.Size = new System.Drawing.Size(23, 25);
-            this.btnDock.Text = "Dock panel";
-            this.btnDock.ToolTipText = "Dock panel";
-            this.btnDock.Click += new System.EventHandler(this.lblPopoutMaster_Click);
-            // 
             // btnRefresh
             // 
-            this.btnRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -831,154 +788,19 @@
             this.btnMasterLvlPaste.Size = new System.Drawing.Size(24, 24);
             this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
             // 
-            // panelMover
-            // 
-            this.panelMover.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelMover.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.panelMover.Location = new System.Drawing.Point(142, 0);
-            this.panelMover.Name = "panelMover";
-            this.panelMover.Size = new System.Drawing.Size(590, 23);
-            this.panelMover.TabIndex = 147;
-            // 
-            // panelDockOptions
-            // 
-            this.panelDockOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelDockOptions.BackColor = System.Drawing.Color.Black;
-            this.panelDockOptions.Controls.Add(this.button1);
-            this.panelDockOptions.Controls.Add(this.btnDock7);
-            this.panelDockOptions.Controls.Add(this.btnDock5);
-            this.panelDockOptions.Controls.Add(this.btnDock4);
-            this.panelDockOptions.Controls.Add(this.btnDock3);
-            this.panelDockOptions.Controls.Add(this.btnDock2);
-            this.panelDockOptions.Controls.Add(this.btnDock1);
-            this.panelDockOptions.Location = new System.Drawing.Point(697, 25);
-            this.panelDockOptions.Name = "panelDockOptions";
-            this.panelDockOptions.Size = new System.Drawing.Size(102, 54);
-            this.panelDockOptions.TabIndex = 148;
-            this.panelDockOptions.Visible = false;
-            // 
-            // btnDock1
-            // 
-            this.btnDock1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDock1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDock1.ForeColor = System.Drawing.Color.White;
-            this.btnDock1.Location = new System.Drawing.Point(4, 3);
-            this.btnDock1.Name = "btnDock1";
-            this.btnDock1.Size = new System.Drawing.Size(24, 24);
-            this.btnDock1.TabIndex = 0;
-            this.btnDock1.Text = "1";
-            this.btnDock1.UseVisualStyleBackColor = true;
-            this.btnDock1.Click += new System.EventHandler(this.btnDock_Click);
-            this.btnDock1.MouseEnter += new System.EventHandler(this.btnDock1_MouseEnter);
-            this.btnDock1.MouseLeave += new System.EventHandler(this.btnDock1_MouseLeave);
-            // 
-            // btnDock2
-            // 
-            this.btnDock2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDock2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDock2.ForeColor = System.Drawing.Color.White;
-            this.btnDock2.Location = new System.Drawing.Point(27, 3);
-            this.btnDock2.Name = "btnDock2";
-            this.btnDock2.Size = new System.Drawing.Size(24, 24);
-            this.btnDock2.TabIndex = 1;
-            this.btnDock2.Text = "2";
-            this.btnDock2.UseVisualStyleBackColor = true;
-            this.btnDock2.Click += new System.EventHandler(this.btnDock_Click);
-            this.btnDock2.MouseEnter += new System.EventHandler(this.btnDock1_MouseEnter);
-            this.btnDock2.MouseLeave += new System.EventHandler(this.btnDock1_MouseLeave);
-            // 
-            // btnDock3
-            // 
-            this.btnDock3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDock3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDock3.ForeColor = System.Drawing.Color.White;
-            this.btnDock3.Location = new System.Drawing.Point(50, 3);
-            this.btnDock3.Name = "btnDock3";
-            this.btnDock3.Size = new System.Drawing.Size(24, 24);
-            this.btnDock3.TabIndex = 2;
-            this.btnDock3.Text = "3";
-            this.btnDock3.UseVisualStyleBackColor = true;
-            this.btnDock3.Click += new System.EventHandler(this.btnDock_Click);
-            this.btnDock3.MouseEnter += new System.EventHandler(this.btnDock1_MouseEnter);
-            this.btnDock3.MouseLeave += new System.EventHandler(this.btnDock1_MouseLeave);
-            // 
-            // btnDock4
-            // 
-            this.btnDock4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDock4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDock4.ForeColor = System.Drawing.Color.White;
-            this.btnDock4.Location = new System.Drawing.Point(4, 26);
-            this.btnDock4.Name = "btnDock4";
-            this.btnDock4.Size = new System.Drawing.Size(24, 24);
-            this.btnDock4.TabIndex = 3;
-            this.btnDock4.Text = "4";
-            this.btnDock4.UseVisualStyleBackColor = true;
-            this.btnDock4.Click += new System.EventHandler(this.btnDock_Click);
-            this.btnDock4.MouseEnter += new System.EventHandler(this.btnDock1_MouseEnter);
-            this.btnDock4.MouseLeave += new System.EventHandler(this.btnDock1_MouseLeave);
-            // 
-            // btnDock5
-            // 
-            this.btnDock5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDock5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDock5.ForeColor = System.Drawing.Color.White;
-            this.btnDock5.Location = new System.Drawing.Point(27, 26);
-            this.btnDock5.Name = "btnDock5";
-            this.btnDock5.Size = new System.Drawing.Size(24, 24);
-            this.btnDock5.TabIndex = 4;
-            this.btnDock5.Text = "5";
-            this.btnDock5.UseVisualStyleBackColor = true;
-            this.btnDock5.Click += new System.EventHandler(this.btnDock_Click);
-            this.btnDock5.MouseEnter += new System.EventHandler(this.btnDock1_MouseEnter);
-            this.btnDock5.MouseLeave += new System.EventHandler(this.btnDock1_MouseLeave);
-            // 
-            // btnDock7
-            // 
-            this.btnDock7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDock7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDock7.ForeColor = System.Drawing.Color.White;
-            this.btnDock7.Location = new System.Drawing.Point(50, 26);
-            this.btnDock7.Name = "btnDock7";
-            this.btnDock7.Size = new System.Drawing.Size(24, 24);
-            this.btnDock7.TabIndex = 5;
-            this.btnDock7.Text = "6";
-            this.btnDock7.UseVisualStyleBackColor = true;
-            this.btnDock7.Click += new System.EventHandler(this.btnDock_Click);
-            this.btnDock7.MouseEnter += new System.EventHandler(this.btnDock1_MouseEnter);
-            this.btnDock7.MouseLeave += new System.EventHandler(this.btnDock1_MouseLeave);
-            // 
-            // button1
-            // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(75, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 24);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "0";
-            this.toolTip1.SetToolTip(this.button1, "Undock");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnDock_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.btnDock1_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.btnDock1_MouseLeave);
-            // 
-            // Form_LeafEditor
+            // Form_MasterEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.ControlBox = false;
             this.Controls.Add(this.panelMaster);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "Form_LeafEditor";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "Form_MasterEditor";
+            this.Text = "Master Editor";
             this.panelMaster.ResumeLayout(false);
             this.panelMaster.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
@@ -989,7 +811,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).EndInit();
             this.masterToolStrip.ResumeLayout(false);
             this.masterToolStrip.PerformLayout();
-            this.panelDockOptions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1006,8 +827,6 @@
         private System.Windows.Forms.ToolStrip toolstripTitleMaster;
         private System.Windows.Forms.ToolStripLabel lblMasterName;
         private System.Windows.Forms.ToolStripButton btnSave;
-        private System.Windows.Forms.ToolStripButton btnClose;
-        private System.Windows.Forms.ToolStripButton btnDock;
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.ToolStripButton btnRevert;
         private System.Windows.Forms.Label label30;
@@ -1046,15 +865,6 @@
         private System.Windows.Forms.ToolStripButton btnMasterLvlDown;
         private System.Windows.Forms.ToolStripButton btnMasterLvlCopy;
         private System.Windows.Forms.ToolStripButton btnMasterLvlPaste;
-        private System.Windows.Forms.Panel panelMover;
-        private System.Windows.Forms.Panel panelDockOptions;
-        private System.Windows.Forms.Button btnDock7;
-        private System.Windows.Forms.Button btnDock5;
-        private System.Windows.Forms.Button btnDock4;
-        private System.Windows.Forms.Button btnDock3;
-        private System.Windows.Forms.Button btnDock2;
-        private System.Windows.Forms.Button btnDock1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }

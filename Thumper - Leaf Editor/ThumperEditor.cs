@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Shell;
 using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -112,6 +113,9 @@ namespace Thumper_Custom_Level_Editor
         public FormLeafEditor(string LevelFromArg)
         {
             InitializeComponent();
+            dockMain.Theme = new VS2015DarkTheme();
+            pictureBeeble.BringToFront();
+
             ColorFormElements();
             JumpListUpdate();
 
@@ -504,7 +508,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //Show the CustomWorkspace form. If form OK, then save the settings to app properties
             //then call method to recolor the form elements immediately
-            CustomizeWorkspace custom = new(_objects);
+            CustomizeWorkspace custom = new(_objects, this);
             //custom._objects = _objects;
             if (custom.ShowDialog() == DialogResult.OK) {
                 ColorFormElements();
@@ -839,15 +843,8 @@ namespace Thumper_Custom_Level_Editor
 
         private void nEWPANELToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_MasterEditor master_editor = new(this);
-            master_editor.Name = "master.sequin";
-            if (openfiles.ContainsKey("master.sequin"))
-                return;
-            openfiles.Add("master.sequin", master_editor);
-            master_editor.TopLevel = false;
-            this.Controls.Add(master_editor);
-            master_editor.Show();
-            master_editor.BringToFront();
+            var dockContent = new Form_MasterEditor(this);
+            dockContent.Show(dockMain, WeifenLuo.WinFormsUI.Docking.DockState.Document);
         }
     }
 }

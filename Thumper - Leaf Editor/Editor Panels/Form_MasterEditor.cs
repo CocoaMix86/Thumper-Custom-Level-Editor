@@ -13,10 +13,11 @@ using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_MasterEditor : Form, IMessageFilter
+    public partial class Form_MasterEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         private FormLeafEditor _mainform { get; set; }
         #region Form Construction
+        /*
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
         public const int WM_LBUTTONDOWN = 0x0201;
@@ -27,21 +28,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static extern bool ReleaseCapture();
 
         private HashSet<Control> controlsToMove = new HashSet<Control>();
-
+        */
         public Form_MasterEditor(FormLeafEditor form)
         {
-            Application.AddMessageFilter(this);
+            //Application.AddMessageFilter(this);
             _mainform = form;
 
             InitializeComponent();
             toolstripTitleMaster.Renderer = new ToolStripOverride();
             masterToolStrip.Renderer = new ToolStripOverride();
+            /*
             controlsToMove.Add(this);
-            controlsToMove.Add(panelMover);
+            controlsToMove.Add(panelMover);*/
 
             this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
+        /*
         public bool PreFilterMessage(ref Message m)
         {
             if (m.Msg == WM_LBUTTONDOWN &&
@@ -87,7 +90,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             base.OnPaint(e);
             ControlPaint.DrawSizeGrip(e.Graphics, Color.Transparent, sizeGripRectangle);
-        }
+        }*/
         #endregion
 
         #region Variables
@@ -739,8 +742,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void CalculateMasterRuntime()
         {
-            return;
-
             dynamic _load;
             int _beatcount = 0;
             //loop through all entries in the master to get beat counts
@@ -811,67 +812,5 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveMaster(true);
         }
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private void lblPopoutMaster_Click(object sender, EventArgs e)
-        {
-            panelDockOptions.Visible = !panelDockOptions.Visible;
-        }
-
-        private void btnDock_Click(object sender, EventArgs e)
-        {
-            var parentform = this.Parent;
-            panelDockOptions.Visible = false;
-            string _docklocation = (sender as Button).Text;
-
-            if (_docklocation == "1") {
-                _mainform.DockPanel(this, _mainform.splitTop1.Panel1);
-            }
-            if (_docklocation == "2") {
-                _mainform.DockPanel(this, _mainform.splitTop2.Panel1);
-            }
-            if (_docklocation == "3") {
-                _mainform.DockPanel(this, _mainform.splitTop2.Panel2);
-            }
-            if (_docklocation == "4") {
-                _mainform.DockPanel(this, _mainform.splitBottom1.Panel1);
-            }
-            if (_docklocation == "5") {
-                _mainform.DockPanel(this, _mainform.splitBottom2.Panel1);
-            }
-            if (_docklocation == "6") {
-                _mainform.DockPanel(this, _mainform.splitBottom2.Panel2);
-            }
-            if (_docklocation == "0") {
-                _mainform.UndockPanel(this);
-            }
-        }
-
-        private void btnDock1_MouseEnter(object sender, EventArgs e)
-        {
-            (sender as Button).BackColor = Color.LightBlue;
-        }
-
-        private void btnDock1_MouseLeave(object sender, EventArgs e)
-        {
-            (sender as Button).BackColor = Color.Black;
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            _mainform.openfiles.Remove("master.sequin");
-            this.Close();
-        }
     }
 }
