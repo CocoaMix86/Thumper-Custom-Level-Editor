@@ -1997,7 +1997,7 @@
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(29, 330);
+            this.label25.Location = new System.Drawing.Point(29, 339);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(66, 15);
             this.label25.TabIndex = 89;
@@ -2010,7 +2010,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(2, 287);
+            this.label23.Location = new System.Drawing.Point(2, 296);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(93, 15);
             this.label23.TabIndex = 68;
@@ -2586,7 +2586,7 @@
             // 
             this.splitHorizontal.BackColor = System.Drawing.Color.Black;
             this.splitHorizontal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitHorizontal.Location = new System.Drawing.Point(0, 25);
+            this.splitHorizontal.Location = new System.Drawing.Point(0, 0);
             this.splitHorizontal.Name = "splitHorizontal";
             this.splitHorizontal.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -2597,8 +2597,8 @@
             // splitHorizontal.Panel2
             // 
             this.splitHorizontal.Panel2.Controls.Add(this.splitBottom1);
-            this.splitHorizontal.Size = new System.Drawing.Size(1745, 867);
-            this.splitHorizontal.SplitterDistance = 381;
+            this.splitHorizontal.Size = new System.Drawing.Size(1745, 892);
+            this.splitHorizontal.SplitterDistance = 390;
             this.splitHorizontal.TabIndex = 136;
             this.splitHorizontal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
             this.splitHorizontal.MouseMove += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseMoveHorz);
@@ -2621,7 +2621,7 @@
             // splitTop1.Panel2
             // 
             this.splitTop1.Panel2.Controls.Add(this.splitTop2);
-            this.splitTop1.Size = new System.Drawing.Size(1745, 381);
+            this.splitTop1.Size = new System.Drawing.Size(1745, 390);
             this.splitTop1.SplitterDistance = 399;
             this.splitTop1.TabIndex = 0;
             this.splitTop1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -2643,7 +2643,7 @@
             this.panelMaster.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelMaster.Name = "panelMaster";
             this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.panelMaster.Size = new System.Drawing.Size(399, 381);
+            this.panelMaster.Size = new System.Drawing.Size(399, 390);
             this.panelMaster.TabIndex = 47;
             this.panelMaster.Tag = "editorpanel";
             this.panelMaster.Visible = false;
@@ -2708,7 +2708,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.masterLvlList.Size = new System.Drawing.Size(217, 309);
+            this.masterLvlList.Size = new System.Drawing.Size(217, 318);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.masterLvlList_CellClick);
@@ -2893,7 +2893,7 @@
             this.panel5.Location = new System.Drawing.Point(222, 22);
             this.panel5.Name = "panel5";
             this.panel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel5.Size = new System.Drawing.Size(174, 345);
+            this.panel5.Size = new System.Drawing.Size(174, 354);
             this.panel5.TabIndex = 147;
             // 
             // lblMasterRuntime
@@ -3188,7 +3188,7 @@
             this.btnMasterLvlCopy,
             this.btnMasterLvlPaste});
             this.masterToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.masterToolStrip.Location = new System.Drawing.Point(3, 350);
+            this.masterToolStrip.Location = new System.Drawing.Point(3, 359);
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.masterToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -3288,7 +3288,7 @@
             this.splitTop2.Panel2.Controls.Add(this.panelGate);
             this.splitTop2.Panel2.Controls.Add(this.label51);
             this.splitTop2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitTop2.Size = new System.Drawing.Size(1342, 381);
+            this.splitTop2.Size = new System.Drawing.Size(1342, 390);
             this.splitTop2.SplitterDistance = 1007;
             this.splitTop2.TabIndex = 47;
             this.splitTop2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -3317,7 +3317,7 @@
             this.panelLevel.Location = new System.Drawing.Point(0, 0);
             this.panelLevel.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLevel.Name = "panelLevel";
-            this.panelLevel.Size = new System.Drawing.Size(1007, 381);
+            this.panelLevel.Size = new System.Drawing.Size(1007, 390);
             this.panelLevel.TabIndex = 46;
             this.panelLevel.Tag = "editorpanel";
             this.panelLevel.Visible = false;
@@ -3344,7 +3344,7 @@
             this.btnLvlRefreshBeats,
             this.btnLvlLeafRandom});
             this.lvlToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlToolStrip.Location = new System.Drawing.Point(3, 238);
+            this.lvlToolStrip.Location = new System.Drawing.Point(3, 247);
             this.lvlToolStrip.Name = "lvlToolStrip";
             this.lvlToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.lvlToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -3452,7 +3452,7 @@
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label39.ForeColor = System.Drawing.Color.Silver;
-            this.label39.Location = new System.Drawing.Point(69, 267);
+            this.label39.Location = new System.Drawing.Point(69, 276);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(91, 15);
             this.label39.TabIndex = 117;
@@ -3492,7 +3492,7 @@
             "TUTORIAL_POUND_REMINDER",
             "TUTORIAL_LANES",
             "TUTORIAL_JUMP"});
-            this.dropLvlTutorial.Location = new System.Drawing.Point(97, 351);
+            this.dropLvlTutorial.Location = new System.Drawing.Point(97, 360);
             this.dropLvlTutorial.Name = "dropLvlTutorial";
             this.dropLvlTutorial.Size = new System.Drawing.Size(142, 21);
             this.dropLvlTutorial.TabIndex = 90;
@@ -3505,7 +3505,7 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.White;
-            this.label26.Location = new System.Drawing.Point(18, 352);
+            this.label26.Location = new System.Drawing.Point(18, 361);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(77, 15);
             this.label26.TabIndex = 91;
@@ -3523,7 +3523,7 @@
             this.dropLvlInput.Items.AddRange(new object[] {
             "True",
             "False"});
-            this.dropLvlInput.Location = new System.Drawing.Point(97, 328);
+            this.dropLvlInput.Location = new System.Drawing.Point(97, 337);
             this.dropLvlInput.Name = "dropLvlInput";
             this.dropLvlInput.Size = new System.Drawing.Size(72, 21);
             this.dropLvlInput.TabIndex = 68;
@@ -3536,7 +3536,7 @@
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Location = new System.Drawing.Point(46, 308);
+            this.label24.Location = new System.Drawing.Point(46, 317);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(49, 15);
             this.label24.TabIndex = 87;
@@ -3553,7 +3553,7 @@
             0,
             0,
             131072});
-            this.NUD_lvlVolume.Location = new System.Drawing.Point(97, 306);
+            this.NUD_lvlVolume.Location = new System.Drawing.Point(97, 315);
             this.NUD_lvlVolume.Maximum = new decimal(new int[] {
             10,
             0,
@@ -3575,7 +3575,7 @@
             this.NUD_lvlApproach.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NUD_lvlApproach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.NUD_lvlApproach.ForeColor = System.Drawing.Color.White;
-            this.NUD_lvlApproach.Location = new System.Drawing.Point(97, 285);
+            this.NUD_lvlApproach.Location = new System.Drawing.Point(97, 294);
             this.NUD_lvlApproach.Maximum = new decimal(new int[] {
             255,
             0,
@@ -3645,7 +3645,7 @@
             this.lvlLeafList.RowTemplate.Height = 20;
             this.lvlLeafList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafList.Size = new System.Drawing.Size(236, 198);
+            this.lvlLeafList.Size = new System.Drawing.Size(236, 207);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafList_CellClick);
@@ -3795,8 +3795,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.lblLvlTunnels);
             this.splitContainer1.Panel2.Controls.Add(this.label22);
             this.splitContainer1.Panel2.Controls.Add(this.lvlLoopTracks);
-            this.splitContainer1.Size = new System.Drawing.Size(752, 349);
-            this.splitContainer1.SplitterDistance = 145;
+            this.splitContainer1.Size = new System.Drawing.Size(752, 358);
+            this.splitContainer1.SplitterDistance = 148;
             this.splitContainer1.TabIndex = 145;
             // 
             // lvlSeqObjs
@@ -3850,7 +3850,7 @@
             this.lvlSeqObjs.RowTemplate.Height = 20;
             this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlSeqObjs.Size = new System.Drawing.Size(721, 126);
+            this.lvlSeqObjs.Size = new System.Drawing.Size(721, 129);
             this.lvlSeqObjs.TabIndex = 68;
             this.lvlSeqObjs.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.lvlSeqObjs_CellMouseDown);
             this.lvlSeqObjs.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlSeqObjs_CellMouseEnter);
@@ -4086,7 +4086,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 185);
+            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 191);
             this.lvlLeafPaths.TabIndex = 79;
             this.lvlLeafPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLeafPaths_CellValueChanged);
             this.lvlLeafPaths.CurrentCellDirtyStateChanged += new System.EventHandler(this.mastereditor_CurrentCellDirtyStateChanged);
@@ -4252,7 +4252,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new System.Drawing.Size(445, 185);
+            this.lvlLoopTracks.Size = new System.Drawing.Size(445, 191);
             this.lvlLoopTracks.TabIndex = 81;
             this.lvlLoopTracks.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvlLoopTracks_CellValueChanged);
             this.lvlLoopTracks.CurrentCellDirtyStateChanged += new System.EventHandler(this.mastereditor_CurrentCellDirtyStateChanged);
@@ -4286,7 +4286,7 @@
             this.panelGate.Location = new System.Drawing.Point(0, 0);
             this.panelGate.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelGate.Name = "panelGate";
-            this.panelGate.Size = new System.Drawing.Size(331, 381);
+            this.panelGate.Size = new System.Drawing.Size(331, 390);
             this.panelGate.TabIndex = 116;
             this.panelGate.Tag = "editorpanel";
             this.panelGate.Visible = false;
@@ -4402,7 +4402,7 @@
             this.btnGateLvlUp,
             this.btnGateLvlDown});
             this.gateToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.gateToolStrip.Location = new System.Drawing.Point(3, 205);
+            this.gateToolStrip.Location = new System.Drawing.Point(3, 214);
             this.gateToolStrip.Name = "gateToolStrip";
             this.gateToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.gateToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -4465,7 +4465,7 @@
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.ForeColor = System.Drawing.Color.Silver;
-            this.label40.Location = new System.Drawing.Point(82, 229);
+            this.label40.Location = new System.Drawing.Point(82, 238);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(102, 15);
             this.label40.TabIndex = 121;
@@ -4526,7 +4526,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gateLvlList.Size = new System.Drawing.Size(322, 164);
+            this.gateLvlList.Size = new System.Drawing.Size(322, 173);
             this.gateLvlList.TabIndex = 80;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gateLvlList_CellClick);
@@ -4599,7 +4599,7 @@
             this.panel9.Controls.Add(this.lblGateSectionHelp);
             this.panel9.Controls.Add(this.dropGateRestart);
             this.panel9.Controls.Add(this.dropGateSection);
-            this.panel9.Location = new System.Drawing.Point(-16, 238);
+            this.panel9.Location = new System.Drawing.Point(-16, 247);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(320, 142);
             this.panel9.TabIndex = 146;
@@ -4776,7 +4776,7 @@
             // splitBottom1.Panel2
             // 
             this.splitBottom1.Panel2.Controls.Add(this.splitBottom2);
-            this.splitBottom1.Size = new System.Drawing.Size(1745, 482);
+            this.splitBottom1.Size = new System.Drawing.Size(1745, 498);
             this.splitBottom1.SplitterDistance = 254;
             this.splitBottom1.TabIndex = 0;
             this.splitBottom1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -4796,7 +4796,7 @@
             this.panelWorkingFolder.Location = new System.Drawing.Point(0, 0);
             this.panelWorkingFolder.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelWorkingFolder.Name = "panelWorkingFolder";
-            this.panelWorkingFolder.Size = new System.Drawing.Size(254, 482);
+            this.panelWorkingFolder.Size = new System.Drawing.Size(254, 498);
             this.panelWorkingFolder.TabIndex = 117;
             this.panelWorkingFolder.Tag = "editorpanel";
             this.panelWorkingFolder.Visible = false;
@@ -4862,7 +4862,7 @@
             this.workingfolderFiles.RowTemplate.Height = 20;
             this.workingfolderFiles.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.workingfolderFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.workingfolderFiles.Size = new System.Drawing.Size(220, 399);
+            this.workingfolderFiles.Size = new System.Drawing.Size(220, 415);
             this.workingfolderFiles.TabIndex = 80;
             this.workingfolderFiles.Tag = "editorpaneldgv";
             this.workingfolderFiles.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingfolderFiles_CellDoubleClick);
@@ -4933,7 +4933,7 @@
             this.workingToolStrip.Name = "workingToolStrip";
             this.workingToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.workingToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.workingToolStrip.Size = new System.Drawing.Size(25, 427);
+            this.workingToolStrip.Size = new System.Drawing.Size(25, 443);
             this.workingToolStrip.Stretch = true;
             this.workingToolStrip.TabIndex = 149;
             // 
@@ -5194,7 +5194,7 @@
             this.splitBottom2.Panel2.Controls.Add(this.panelSample);
             this.splitBottom2.Panel2.Controls.Add(this.label55);
             this.splitBottom2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitPanel_Paint);
-            this.splitBottom2.Size = new System.Drawing.Size(1487, 482);
+            this.splitBottom2.Size = new System.Drawing.Size(1487, 498);
             this.splitBottom2.SplitterDistance = 1157;
             this.splitBottom2.TabIndex = 46;
             this.splitBottom2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.splitCont_MouseDown);
@@ -5218,7 +5218,7 @@
             this.panelLeaf.Location = new System.Drawing.Point(0, 0);
             this.panelLeaf.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelLeaf.Name = "panelLeaf";
-            this.panelLeaf.Size = new System.Drawing.Size(1157, 482);
+            this.panelLeaf.Size = new System.Drawing.Size(1157, 498);
             this.panelLeaf.TabIndex = 45;
             this.panelLeaf.Tag = "editorpanel";
             this.panelLeaf.Visible = false;
@@ -5272,7 +5272,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.vScrollBarTrackEditor.Location = new System.Drawing.Point(231, 52);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new System.Drawing.Size(15, 355);
+            this.vScrollBarTrackEditor.Size = new System.Drawing.Size(15, 371);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBarTrackEditor_Scroll);
@@ -5335,7 +5335,7 @@
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new System.Drawing.Size(921, 356);
+            this.trackEditor.Size = new System.Drawing.Size(921, 372);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += new System.EventHandler(this.trackEditor_RowHeadersWidthChanged);
@@ -5681,7 +5681,7 @@
             this.panelRawData.Controls.Add(this.lblRawData);
             this.panelRawData.Controls.Add(this.btnRawImport);
             this.panelRawData.Controls.Add(this.richRawTrackData);
-            this.panelRawData.Location = new System.Drawing.Point(230, 410);
+            this.panelRawData.Location = new System.Drawing.Point(230, 426);
             this.panelRawData.Name = "panelRawData";
             this.panelRawData.Size = new System.Drawing.Size(900, 62);
             this.panelRawData.TabIndex = 139;
@@ -5852,7 +5852,7 @@
             this.panel6.Controls.Add(this.numericUpDown_LeafLength);
             this.panel6.Location = new System.Drawing.Point(1, 23);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 449);
+            this.panel6.Size = new System.Drawing.Size(200, 465);
             this.panel6.TabIndex = 148;
             // 
             // panel7
@@ -5884,7 +5884,7 @@
             this.panel7.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel7.Location = new System.Drawing.Point(1, 371);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(180, 78);
+            this.panel7.Size = new System.Drawing.Size(180, 94);
             this.panel7.TabIndex = 111;
             // 
             // NUDquick9
@@ -6550,7 +6550,7 @@
             this.panelSample.Location = new System.Drawing.Point(0, 0);
             this.panelSample.MinimumSize = new System.Drawing.Size(60, 60);
             this.panelSample.Name = "panelSample";
-            this.panelSample.Size = new System.Drawing.Size(326, 482);
+            this.panelSample.Size = new System.Drawing.Size(326, 498);
             this.panelSample.TabIndex = 134;
             this.panelSample.Tag = "editorpanel";
             this.panelSample.Visible = false;
@@ -6617,7 +6617,7 @@
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.sampleList.Size = new System.Drawing.Size(317, 379);
+            this.sampleList.Size = new System.Drawing.Size(317, 395);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEnter);
@@ -6723,7 +6723,7 @@
             this.btnSampEditorPlaySamp,
             this.lblSampleFSBhelp});
             this.sampleToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.sampleToolStrip.Location = new System.Drawing.Point(3, 422);
+            this.sampleToolStrip.Location = new System.Drawing.Point(3, 438);
             this.sampleToolStrip.Name = "sampleToolStrip";
             this.sampleToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.sampleToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -6793,7 +6793,7 @@
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label50.ForeColor = System.Drawing.Color.White;
-            this.label50.Location = new System.Drawing.Point(5, 458);
+            this.label50.Location = new System.Drawing.Point(5, 474);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(32, 15);
             this.label50.TabIndex = 147;
@@ -6818,7 +6818,7 @@
             this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtSampPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSampPath.ForeColor = System.Drawing.Color.White;
-            this.txtSampPath.Location = new System.Drawing.Point(38, 455);
+            this.txtSampPath.Location = new System.Drawing.Point(38, 471);
             this.txtSampPath.Name = "txtSampPath";
             this.txtSampPath.Size = new System.Drawing.Size(261, 22);
             this.txtSampPath.TabIndex = 148;
@@ -7000,10 +7000,10 @@
             // dockMain
             // 
             this.dockMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dockMain.Location = new System.Drawing.Point(0, 25);
+            this.dockMain.Location = new System.Drawing.Point(0, 0);
             this.dockMain.Name = "dockMain";
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new System.Drawing.Size(1745, 867);
+            this.dockMain.Size = new System.Drawing.Size(1745, 892);
             this.dockMain.TabIndex = 147;
             // 
             // FormLeafEditor
@@ -7013,12 +7013,12 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
-            this.Controls.Add(this.dockMain);
             this.Controls.Add(this.pictureBeeble);
             this.Controls.Add(this.panelRecentFiles);
-            this.Controls.Add(this.splitHorizontal);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelChangelog);
+            this.Controls.Add(this.dockMain);
+            this.Controls.Add(this.splitHorizontal);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -841,8 +841,11 @@ namespace Thumper_Custom_Level_Editor
 
         private void nEWPANELToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dockContent = new Form_MasterEditor(this);
-            dockContent.Show(dockMain, WeifenLuo.WinFormsUI.Docking.DockState.Document);
+            var dockMaster = new Form_MasterEditor(this);
+            //var dockGate = new Form_GateEditor(this);
+            dockMaster.Show(dockMain, DockState.Document);
+            //dockGate.Show(dockMain, DockState.Document);
         }
+
     }
 }
