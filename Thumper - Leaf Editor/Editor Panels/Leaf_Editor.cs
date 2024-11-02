@@ -734,8 +734,8 @@ namespace Thumper_Custom_Level_Editor
 			//update beat counts in loaded lvl if need be
 			if (_loadedlvl != null)
 				btnLvlRefreshBeats_Click(null, null);
-			if (clearundo)
-				ClearReloadUndo(_save);
+			//if (clearundo)
+				//ClearReloadUndo(_save);
         }
 		///LEAF - LOAD FILE
 		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -747,7 +747,7 @@ namespace Thumper_Custom_Level_Editor
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = CopyToWorkingFolderCheck(ofd.FileName);
+                    string filepath = CopyToWorkingFolderCheck(ofd.FileName, workingfolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -994,7 +994,6 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnTrackPaste_Click(object sender, EventArgs e)
 		{
-			int _in = 0;
 			DataGridView dgv = trackEditor;
 			try {
 				int _index = trackEditor.CurrentRow?.Index ?? -1;
@@ -1029,7 +1028,6 @@ namespace Thumper_Custom_Level_Editor
 					}
 					catch (Exception) { }
 				}
-				_in = _index - 1;
 			}
 			catch (Exception ex) { 
 				MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex);
@@ -1336,11 +1334,11 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnUndoLeaf_Click(object sender, EventArgs e)
 		{
-			UndoFunction(1);
+			//UndoFunction(1);
 		}
 		private void btnUndoLeaf_DropDownOpening(object sender, EventArgs e)
 		{
-			btnUndoLeaf.DropDown = CreateUndoMenu(_undolistleaf);
+			//btnUndoLeaf.DropDown = CreateUndoMenu(_undolistleaf);
 		}
 
 		private void btnLeafAutoPlace_Click(object sender, EventArgs e)
@@ -1709,7 +1707,7 @@ namespace Thumper_Custom_Level_Editor
 			loadingleaf = false;
 			//clear undo list and reset the leafjson to the new leaf
 			if (resetundolist) {
-				ClearReloadUndo(_load);
+				//ClearReloadUndo(_load);
                 SaveLeaf(true, "", "");
 			}
 			else {

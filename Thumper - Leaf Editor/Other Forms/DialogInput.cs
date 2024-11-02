@@ -249,7 +249,7 @@ namespace Thumper_Custom_Level_Editor
                 File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
             }
             else {
-                mainform.WriteFileLock(mainform.lockedfiles[$@"{levelpath}\LEVEL DETAILS.txt"], level_details);
+                TCLE.WriteFileLock(mainform.lockedfiles[$@"{levelpath}\LEVEL DETAILS.txt"], level_details);
             }
             mainform.projectjson = level_details;
             mainform.workingfolder = levelpath;

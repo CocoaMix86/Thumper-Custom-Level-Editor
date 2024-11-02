@@ -92,7 +92,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string _file = (_lvlleafs[e.RowIndex].leafname).Replace(".leaf", "");
                 dynamic _load;
                 if (File.Exists($@"{_mainform.workingfolder}\leaf_{_file}.txt")) {
-                    _load = _mainform.LoadFileLock($@"{_mainform.workingfolder}\leaf_{_file}.txt");
+                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\leaf_{_file}.txt");
                 }
                 else {
                     MessageBox.Show("This leaf does not exist in the Level folder.");
@@ -430,7 +430,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!_mainform.lockedfiles.ContainsKey(_loadedlvl)) {
                 _mainform.lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            _mainform.WriteFileLock(_mainform.lockedfiles[loadedlvl], _save);
+            TCLE.WriteFileLock(_mainform.lockedfiles[loadedlvl], _save);
             SaveLvl(true, true);
             lblLvlName.Text = $"Lvl Editor ⮞ {_save["obj_name"]}";
             //reload samples on save
@@ -446,11 +446,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = _mainform.CopyToWorkingFolderCheck(ofd.FileName);
+                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, _mainform.workingfolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = _mainform.LoadFileLock(filepath);
+                    dynamic _load = TCLE.LoadFileLock(filepath);
                     LoadLvl(_load, filepath);
                 }
             }
@@ -472,7 +472,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //_lvlleafs.RemoveAt(_in);
             foreach (LvlLeafData lvd in todelete)
                 _lvlleafs.Remove(lvd);
-            _mainform.PlaySound("UIobjectremove");
+            TCLE.PlaySound("UIobjectremove");
             lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= _lvlleafs.Count ? _in - 1 : _in));
         }
         private void btnLvlLeafAdd_Click(object sender, EventArgs e)
@@ -481,7 +481,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
             ofd.Title = "Load a Thumper Leaf file";
             ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
-            _mainform.PlaySound("UIfolderopen");
+            TCLE.PlaySound("UIfolderopen");
             if (ofd.ShowDialog() == DialogResult.OK) {
                 AddLeaftoLvl(ofd.FileName);
             }
@@ -537,14 +537,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             clipboardleaf = _lvlleafs.Where(x => selectedrows.Contains(_lvlleafs.IndexOf(x))).ToList();
             clipboardleaf.Reverse();
             btnLvlLeafPaste.Enabled = true;
-            _mainform.PlaySound("UIkcopy");
+            TCLE.PlaySound("UIkcopy");
         }
         private void btnLvlLeafPaste_Click(object sender, EventArgs e)
         {
             int _in = lvlLeafList.CurrentRow?.Index + 1 ?? 0;
             foreach (LvlLeafData lld in clipboardleaf)
                 _lvlleafs.Insert(_in, lld.Clone());
-            _mainform.PlaySound("UIkpaste");
+            TCLE.PlaySound("UIkpaste");
             SaveLvl(false);
         }
 
@@ -564,7 +564,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (string s in todelete)
                 _lvlleafs[lvlLeafList.CurrentRow.Index].paths.Remove(s);
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
-            _mainform.PlaySound("UItunnelremove");
+            TCLE.PlaySound("UItunnelremove");
             SaveLvl(false);
         }
 
@@ -573,7 +573,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _lvlleafs[lvlLeafList.CurrentRow.Index].paths.Add("");
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
             btnLvlPathDelete.Enabled = true;
-            _mainform.PlaySound("UItunneladd");
+            TCLE.PlaySound("UItunneladd");
             SaveLvl(false);
         }
 
@@ -626,7 +626,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             _lvlleafs[idx].paths.Clear();
             LvlUpdatePaths(idx);
-            _mainform.PlaySound("UIdataerase");
+            TCLE.PlaySound("UIdataerase");
             SaveLvl(false);
         }
 
@@ -637,7 +637,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLeafPaths.RowCount++;
             lvlLeafPaths.Rows[^1].Cells[0].Value = _lvlpaths[_mainform.rng.Next(1, _lvlpaths.Count)];
             btnLvlPathDelete.Enabled = true;
-            _mainform.PlaySound("UItunneladd");
+            TCLE.PlaySound("UItunneladd");
             SaveLvl(false);
         }
 
@@ -647,14 +647,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             clipboardpaths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index].paths);
             btnLvlPasteTunnel.Enabled = true;
-            _mainform.PlaySound("UIkcopy");
+            TCLE.PlaySound("UIkcopy");
         }
 
         private void btnLvlPasteTunnel_Click(object sender, EventArgs e)
         {
             _lvlleafs[lvlLeafList.CurrentRow.Index].paths.AddRange(new List<string>(clipboardpaths));
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
-            _mainform.PlaySound("UIkpaste");
+            TCLE.PlaySound("UIkpaste");
             SaveLvl(false);
         }
 
@@ -665,13 +665,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLoopTracks.Rows[^1].Cells[1].Value = 0;
             lvlLoopTracks.Rows[^1].Cells[0].Value = "";
             btnLvlLoopDelete.Enabled = true;
-            _mainform.PlaySound("UIobjectadd");
+            TCLE.PlaySound("UIobjectadd");
         }
 
         private void btnLvlLoopDelete_Click(object sender, EventArgs e)
         {
             lvlLoopTracks.Rows.RemoveAt(lvlLoopTracks.CurrentRow.Index);
-            _mainform.PlaySound("UIobjectremove");
+            TCLE.PlaySound("UIobjectremove");
             //disable button if no more rows exist
             if (lvlLoopTracks.Rows.Count < 1)
                 btnLvlLoopDelete.Enabled = false;
@@ -685,7 +685,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlSeqAdd_Click(object sender, EventArgs e)
         {
             lvlSeqObjs.RowCount++;
-            _mainform.PlaySound("UIobjectadd");
+            TCLE.PlaySound("UIobjectadd");
             lvlSeqObjs.Rows[^1].HeaderCell.Value = "Volume Track " + (lvlSeqObjs.Rows.Count - 1);
             btnLvlSeqDelete.Enabled = true;
             btnLvlSeqClear.Enabled = true;
@@ -709,7 +709,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (DataGridViewRow dgvr in selectedrows) {
                 lvlSeqObjs.Rows.Remove(dgvr);
             }
-            _mainform.PlaySound("UIobjectremove");
+            TCLE.PlaySound("UIobjectremove");
             SaveLvl(false);
             //after deleting, rename all headers so they're in order again
             foreach (DataGridViewRow r in lvlSeqObjs.Rows)
@@ -736,14 +736,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //then set a single one to null. The "cellvaluechanged" event will handle the rest
             filledcells[0].Value = null;
 
-            _mainform.PlaySound("UIdataerase");
+            TCLE.PlaySound("UIdataerase");
             SaveLvl(false);
         }
 
         private void btnLvlLoopRefresh_Click(object sender, EventArgs e)
         {
             LvlReloadSamples();
-            _mainform.PlaySound("UIrefresh");
+            TCLE.PlaySound("UIrefresh");
             MessageBox.Show($"Found and loaded {_lvlsamples.Count} samples for the current working folder.");
         }
 
@@ -756,7 +756,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (!File.Exists($@"{_mainform.workingfolder}\leaf_{_file}.txt"))
                         continue;
                     //I need to load the entire document to grab one field from it
-                    _load = _mainform.LoadFileLock($@"{_mainform.workingfolder}\leaf_{_file}.txt");
+                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\leaf_{_file}.txt");
                     //if beat_cnt is different than what is loaded, replace it and mark the save flag
                     if (_leaf.beats != (int)_load["beat_cnt"]) {
                         _leaf.beats = (int)_load["beat_cnt"];
@@ -774,7 +774,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             SaveLvl(true);
             LoadLvl(lvljson, loadedlvl);
-            _mainform.PlaySound("UIrevertchanges");
+            TCLE.PlaySound("UIrevertchanges");
         }
 
         private void btnlvlPanelNew_Click(object sender, EventArgs e)
@@ -894,7 +894,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void AddLeaftoLvl(string path)
         {
             //parse leaf to JSON
-            dynamic _load = _mainform.LoadFileLock(path);
+            dynamic _load = TCLE.LoadFileLock(path);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] != "SequinLeaf") {
                 MessageBox.Show("This does not appear to be a leaf file!", "Leaf load error");
@@ -908,7 +908,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     return;
             }
-            _mainform.PlaySound("UIobjectadd");
+            TCLE.PlaySound("UIobjectadd");
             //Setup list of tunnels if copy check is enabled
             List<string> copytunnels = new();
             if (chkTunnelCopy.Checked) {
@@ -964,7 +964,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //iterate over each file
             foreach (string f in _sampfiles) {
                 //parse file to JSON
-                dynamic _in = _mainform.LoadFileLock(f);
+                dynamic _in = TCLE.LoadFileLock(f);
                 //iterate over items:[] list to get each sample and add names to list
                 foreach (dynamic _samp in _in["items"]) {
                     _lvlsamples.Add(new SampleData {
@@ -1012,7 +1012,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnSaveLvl.Enabled = false;
                 btnRevertLvl.Enabled = false;
                 toolstripTitleLvl.BackColor = Color.FromArgb(40, 40, 40);
-                if (playsound) _mainform.PlaySound("UIsave");
+                if (playsound) TCLE.PlaySound("UIsave");
             }
         }
 

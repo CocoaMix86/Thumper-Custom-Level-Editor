@@ -47,8 +47,8 @@ namespace Thumper_Custom_Level_Editor
 		private string loadedlvl;
 		public bool loadinglvl = false;
 
-		List<string> _lvlpaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
-		List<SampleData> _lvlsamples = new();
+		public List<string> _lvlpaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
+		public List<SampleData> _lvlsamples = new();
 		dynamic lvljson;
 		ObservableCollection<LvlLeafData> _lvlleafs = new();
 
@@ -431,7 +431,7 @@ namespace Thumper_Custom_Level_Editor
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = CopyToWorkingFolderCheck(ofd.FileName);
+                    string filepath = CopyToWorkingFolderCheck(ofd.FileName, workingfolder);
 					if (filepath == null)
 						return;
                     //load json from file into _load. The regex strips any comments from the text.

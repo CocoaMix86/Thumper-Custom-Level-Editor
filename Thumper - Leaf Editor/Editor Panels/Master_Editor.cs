@@ -206,7 +206,7 @@ namespace Thumper_Custom_Level_Editor
                 ofd.InitialDirectory = workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = CopyToWorkingFolderCheck(ofd.FileName);
+                    string filepath = CopyToWorkingFolderCheck(ofd.FileName, workingfolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -661,6 +661,8 @@ namespace Thumper_Custom_Level_Editor
 
 		private void CalculateMasterRuntime()
 		{
+			return;
+
 			dynamic _load;
 			int _beatcount = 0;
 			//loop through all entries in the master to get beat counts

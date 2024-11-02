@@ -100,9 +100,9 @@ namespace Thumper_Custom_Level_Editor
         private string _workingfolder;
         public List<string> lvlsinworkfolder = new();
         public Random rng = new();
-        public string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
+        public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
-        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+        public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public FileStream filelocklevel;
         public Dictionary<string, FileStream> lockedfiles = new();
         public Dictionary<string, Form> openfiles = new();
@@ -446,8 +446,6 @@ namespace Thumper_Custom_Level_Editor
         private void changelogToolStripMenuItem_Click(object sender, EventArgs e) => ShowChangelog();
         private void donateTipToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://ko-fi.com/I2I5ZZBRH");
 
-        //How to create an FSB
-        private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
         ///Toolstrip - BRING TO FRONT items
         private void bTFLeafToolStripMenuItem_Click(object sender, EventArgs e) { panelLeaf.BringToFront(); panelLeaf.Visible = true; leafEditorToolStripMenuItem.Checked = true; PlaySound("UIwindowopen"); }
@@ -518,8 +516,12 @@ namespace Thumper_Custom_Level_Editor
         }
 
         ///BEEBLE FUNCTIONS
-        List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
+        static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
         public void pictureBox1_Click(object sender, EventArgs e)
+        {
+            BeebleClick();
+        }
+        public void BeebleClick()
         {
             int i = new Random().Next(0, 1001);
             if (i == 1000) {
@@ -726,7 +728,7 @@ namespace Thumper_Custom_Level_Editor
             else if (e.KeyData == defaultkeybinds["leafundo"]) {
                 if (_undolistleaf.Count <= 1)
                     return;
-                UndoFunction(1);
+                //UndoFunction(1);
             }
             else if (e.KeyData == defaultkeybinds["colordialog"]) {
                 btnLeafColors.PerformClick();
@@ -844,9 +846,15 @@ namespace Thumper_Custom_Level_Editor
             var dockMaster = new Form_MasterEditor(this);
             var dockGate = new Form_GateEditor(this);
             var dockLvl = new Form_LvlEditor(this);
+            var dockSample = new Form_SampleEditor(this, @"X:\Thumper\levels\Basics3\samp_level8_460bpm.txt");
+            var dockLeaf = new Form_LeafEditor(this);
+            var dockProject = new Form_ProjectExplorer(this);
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);
             dockLvl.Show(dockMain, DockState.Document);
+            dockSample.Show(dockMain, DockState.Document);
+            dockLeaf.Show(dockMain, DockState.Document);
+            dockProject.Show(dockMain, DockState.Document);
         }
 
     }

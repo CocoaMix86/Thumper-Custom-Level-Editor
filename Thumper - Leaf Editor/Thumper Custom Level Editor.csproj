@@ -83,6 +83,24 @@
     <Compile Include="Editor Panels\Form_LvlEditor.Designer.cs">
       <DependentUpon>Form_LvlEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Editor Panels\Form_LeafEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor Panels\Form_LeafEditor.Designer.cs">
+      <DependentUpon>Form_LeafEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor Panels\Form_ProjectExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor Panels\Form_ProjectExplorer.Designer.cs">
+      <DependentUpon>Form_ProjectExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor Panels\Form_SampleEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor Panels\Form_SampleEditor.Designer.cs">
+      <DependentUpon>Form_SampleEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor Panels\Form_MasterEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +203,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor Panels\Form_LvlEditor.resx">
       <DependentUpon>Form_LvlEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor Panels\Form_LeafEditor.resx">
+      <DependentUpon>Form_LeafEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor Panels\Form_ProjectExplorer.resx">
+      <DependentUpon>Form_ProjectExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor Panels\Form_SampleEditor.resx">
+      <DependentUpon>Form_SampleEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor Panels\Form_MasterEditor.resx">
       <DependentUpon>Form_MasterEditor.cs</DependentUpon>

@@ -85,7 +85,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if ((!_mainform._savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _mainform._savegate) {
                     _file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
                     if (File.Exists($@"{_mainform.workingfolder}\gate_{_file}.txt")) {
-                        _load = _mainform.LoadFileLock($@"{_mainform.workingfolder}\gate_{_file}.txt");
+                        _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\gate_{_file}.txt");
                     }
                     else {
                         MessageBox.Show("This gate does not exist in the Level folder.");
@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if ((!_mainform._savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _mainform._savelvl) {
                 _file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
                 if (File.Exists($@"{_mainform.workingfolder}\lvl_{_file}.txt")) {
-                    _load = _mainform.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
                 }
                 else {
                     MessageBox.Show("This lvl does not exist in the Level folder.");
@@ -219,11 +219,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = _mainform.CopyToWorkingFolderCheck(ofd.FileName);
+                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, _mainform.workingfolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = _mainform.LoadFileLock(filepath);
+                    dynamic _load = TCLE.LoadFileLock(filepath);
                     LoadMaster(_load, filepath);
                     //set lvl save flag to true.
                     SaveMaster(true);
@@ -273,7 +273,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!_mainform.lockedfiles.ContainsKey(loadedmaster)) {
                 _mainform.lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            _mainform.WriteFileLock(_mainform.lockedfiles[loadedmaster], _save);
+            TCLE.WriteFileLock(_mainform.lockedfiles[loadedmaster], _save);
             SaveMaster(true, true);
             lblMasterName.Text = $"Master Editor - sequin.master";
 
@@ -294,7 +294,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int _in = masterLvlList.CurrentRow.Index;
             foreach (MasterLvlData mld in todelete)
                 _masterlvls.Remove(mld);
-            _mainform.PlaySound("UIobjectremove");
+            TCLE.PlaySound("UIobjectremove");
             masterLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= _masterlvls.Count ? _in - 1 : _in));
         }
         private void btnMasterLvlAdd_Click(object sender, EventArgs e)
@@ -311,7 +311,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void AddFiletoMaster(string path)
         {
             //parse leaf to JSON
-            dynamic _load = _mainform.LoadFileLock(path);
+            dynamic _load = TCLE.LoadFileLock(path);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] is not "SequinLevel" and not "SequinGate") {
                 MessageBox.Show("This does not appear to be a lvl or a gate file!", "File load error");
@@ -325,7 +325,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else
                         return;
             }
-            _mainform.PlaySound("UIobjectadd");
+            TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
             if (_load["obj_type"] == "SequinLevel")
                 _masterlvls.Add(new MasterLvlData() {
@@ -389,7 +389,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             selectedrows.Sort((row, row2) => row.CompareTo(row2));
             clipboardmaster = _masterlvls.Where(x => selectedrows.Contains(_masterlvls.IndexOf(x))).ToList();
             clipboardmaster.Reverse();
-            _mainform.PlaySound("UIkcopy");
+            TCLE.PlaySound("UIkcopy");
             btnMasterLvlPaste.Enabled = true;
         }
 
@@ -398,17 +398,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int _in = masterLvlList.CurrentRow?.Index + 1 ?? 0;
             foreach (MasterLvlData mld in clipboardmaster)
                 _masterlvls.Insert(_in, mld.Clone());
-            _mainform.PlaySound("UIkpaste");
+            TCLE.PlaySound("UIkpaste");
         }
 
         private void btnConfigColor_Click(object sender, EventArgs e)
         {
-            _mainform.PlaySound("UIcoloropen");
+            TCLE.PlaySound("UIcoloropen");
             Button button = (Button)sender;
             _mainform.colorDialogNew.Color = button.BackColor;
             if (_mainform.colorDialogNew.ShowDialog() == DialogResult.OK) {
                 ColorButton(button, _mainform.colorDialogNew.Color);
-                _mainform.PlaySound("UIcolorapply");
+                TCLE.PlaySound("UIcolorapply");
                 SaveMaster(false);
             }
         }
@@ -440,7 +440,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropMasterCheck.SelectedIndexChanged += dropMasterCheck_SelectedIndexChanged;
             dropMasterIntro.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
             dropMasterLvlRest.SelectedIndexChanged += dropMasterLvlRest_SelectedIndexChanged;
-            _mainform.PlaySound("UIrefresh");
+            TCLE.PlaySound("UIrefresh");
         }
 
         private void btnRevertMaster_Click(object sender, EventArgs e)
@@ -449,7 +449,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             SaveMaster(true);
             LoadMaster(masterjson, loadedmaster);
-            _mainform.PlaySound("UIrevertchanges");
+            TCLE.PlaySound("UIrevertchanges");
         }
 
         //buttons that click other buttons
@@ -551,7 +551,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string _file = path.Replace(".lvl", "");
                 dynamic _load;
                 try {
-                    _load = _mainform.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
                 }
                 catch {
                     MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
@@ -578,7 +578,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnSave.Enabled = false;
                 btnRevert.Enabled = false;
                 toolstripTitleMaster.BackColor = Color.FromArgb(40, 40, 40);
-                if (playsound) _mainform.PlaySound("UIsave");
+                if (playsound) TCLE.PlaySound("UIsave");
             }
         }
 
@@ -688,7 +688,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     //load the gate to then loop through all lvls in it
                     int idx = _masterlvl.gatename.LastIndexOf('.');
-                    _load = _mainform.LoadFileLock($"{_mainform.workingfolder}\\gate_{_masterlvl.gatename[..idx]}.txt");
+                    _load = TCLE.LoadFileLock($"{_mainform.workingfolder}\\gate_{_masterlvl.gatename[..idx]}.txt");
                     if (_load == null)
                         continue;
                     foreach (dynamic _lvl in _load["boss_patterns"]) {
@@ -717,7 +717,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int _beatcount = 0;
 
             //load the lvl and then loop through its leafs to get beat counts
-            dynamic _load = _mainform.LoadFileLock(path);
+            dynamic _load = TCLE.LoadFileLock(path);
             if (_load == null)
                 return 0;
             foreach (dynamic leaf in _load["leaf_seq"]) {

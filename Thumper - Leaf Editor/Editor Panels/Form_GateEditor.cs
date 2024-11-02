@@ -103,7 +103,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if ((!_mainform._savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _mainform._savelvl) {
                 string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");
                 if (File.Exists($@"{_mainform.workingfolder}\lvl_{_file}.txt")) {
-                    _load = _mainform.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
                 }
                 else {
                     MessageBox.Show("This lvl does not exist in the Level folder.");
@@ -173,11 +173,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = _mainform.CopyToWorkingFolderCheck(ofd.FileName);
+                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, _mainform.workingfolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = _mainform.LoadFileLock(filepath);
+                    dynamic _load = TCLE.LoadFileLock(filepath);
                     LoadGate(_load, filepath);
                 }
             }
@@ -231,7 +231,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!_mainform.lockedfiles.ContainsKey(_loadedgate)) {
                 _mainform.lockedfiles.Add(_loadedgate, new FileStream(_loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            _mainform.WriteFileLock(_mainform.lockedfiles[loadedgate], _save);
+            TCLE.WriteFileLock(_mainform.lockedfiles[loadedgate], _save);
             SaveGate(true, true);
             lblGateName.Text = $"Gate Editor ⮞ {_save["obj_name"]}";
         }
@@ -292,7 +292,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int _in = gateLvlList.CurrentRow.Index;
             foreach (GateLvlData gld in todelete)
                 _gatelvls.Remove(gld);
-            _mainform.PlaySound("UIobjectremove");
+            TCLE.PlaySound("UIobjectremove");
             gateLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= _gatelvls.Count ? _in - 1 : _in));
         }
 
@@ -317,7 +317,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
                     return;
                 //parse leaf to JSON
-                dynamic _load = _mainform.LoadFileLock(ofd.FileName);
+                dynamic _load = TCLE.LoadFileLock(ofd.FileName);
                 //check if file being loaded is actually a leaf. Can do so by checking the JSON key
                 if ((string)_load["obj_type"] != "SequinLevel") {
                     MessageBox.Show("This does not appear to be a lvl file!", "Lvl load error");
@@ -328,7 +328,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     lvlname = (string)_load["obj_name"],
                     sentrytype = "None"
                 });
-                _mainform.PlaySound("UIobjectadd");
+                TCLE.PlaySound("UIobjectadd");
             }
         }
 
@@ -394,7 +394,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropGatePost.SelectedIndexChanged += dropGatePost_SelectedIndexChanged;
             dropGateRestart.SelectedIndexChanged += dropGateRestart_SelectedIndexChanged;
 
-            _mainform.PlaySound("UIrefresh");
+            TCLE.PlaySound("UIrefresh");
 
         }
 
@@ -404,7 +404,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             SaveGate(true);
             LoadGate(gatejson, loadedgate);
-            _mainform.PlaySound("UIrevertchanges");
+            TCLE.PlaySound("UIrevertchanges");
         }
 
         //buttons that click other buttons
@@ -541,7 +541,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnSaveGate.Enabled = false;
                 btnRevertGate.Enabled = false;
                 toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
-                if (playsound) _mainform.PlaySound("UIsave");
+                if (playsound) TCLE.PlaySound("UIsave");
             }
         }
 

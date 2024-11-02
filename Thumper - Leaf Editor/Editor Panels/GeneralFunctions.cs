@@ -141,7 +141,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public void PlaySound(string audiofile)
+        public static void PlaySound(string audiofile)
         {
             if (Properties.Settings.Default.muteapplication)
                 return;
@@ -154,7 +154,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         /// Used to allow only numbers and a single decimal during input
-        private static void NumericInputSanitize(object sender, KeyPressEventArgs e)
+        public static void NumericInputSanitize(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-') {
                 e.Handled = true;
@@ -193,8 +193,9 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private void Read_Config()
+        public static void Read_Config()
         {
+            CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
             cfd_lvl.Title = "Select the folder where Thumper is installed (NOT the cache folder)";
             //check if the game_dir has been set before. It'll be empty if starting for the first time
             if (Properties.Settings.Default.game_dir == "none")
@@ -209,7 +210,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        private static void RandomizeRowValues(DataGridViewRow dgvr, Sequencer_Object _seqobj)
+        public static void RandomizeRowValues(DataGridViewRow dgvr, Sequencer_Object _seqobj)
         {
             Random rng = new Random();
             int rngchance;
@@ -272,77 +273,6 @@ namespace Thumper_Custom_Level_Editor
             TrackUpdateHighlighting(dgvr, _seqobj);
             GenerateDataPoints(dgvr, _seqobj);
         }
-
-        /// <summary>
-        /// UNDO FUNCTIONS
-        /// </summary>
-        readonly ToolStripDropDownMenu undomenu = new() {
-            BackColor = Color.FromArgb(40, 40, 40),
-            ShowCheckMargin = false,
-            ShowImageMargin = false,
-            ShowItemToolTips = false,
-            MaximumSize = new Size(2000, 500)
-        };
-        private ToolStripDropDown CreateUndoMenu(List<SaveState> undolist)
-        {
-            undomenu.Items.Clear();
-
-            foreach (SaveState s in undolist) {
-                ToolStripMenuItem tmsi = new() {
-                    Text = s.reason
-                };
-                tmsi.MouseEnter += undoMenu_MouseEnter;
-                tmsi.Click += undoItem_Click;
-                tmsi.BackColor = Color.FromArgb(40, 40, 40);
-                tmsi.ForeColor = Color.White;
-                undomenu.Items.Add(tmsi);
-            }
-            return undomenu;
-        }
-        private static void undoMenu_MouseEnter(object sender, EventArgs e)
-        {
-            Color backcolor = Color.FromArgb(40, 40, 40);
-            ToolStrip parent = ((ToolStripMenuItem)sender).Owner;
-            for (int x = parent.Items.Count - 1; x >= 0; x--) {
-                parent.Items[x].BackColor = backcolor;
-                if (parent.Items[x] == sender)
-                    backcolor = Color.Maroon;
-            }
-        }
-        private void undoItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem tmsi = (ToolStripMenuItem)sender;
-            int index = (tmsi.Owner).Items.IndexOf(tmsi);
-
-            if ((tmsi.Owner).Items.Count == 1 && (tmsi.Owner).Items[0].Text.Contains("No changes"))
-                return;
-
-            UndoFunction(index + 1);
-            PlaySound("UIrevertchanges");
-        }
-        private void UndoFunction(int undoindex)
-        {
-            if (undoindex >= _undolistleaf.Count) {
-                LoadLeaf(_undolistleaf.Last().savestate, loadedleaf, false);
-                _undolistleaf.RemoveRange(0, _undolistleaf.Count - 1);
-            }
-            else {
-                LoadLeaf(_undolistleaf[undoindex].savestate, loadedleaf, false);
-                _undolistleaf.RemoveRange(0, undoindex);
-            }
-        }
-        private void ClearReloadUndo(dynamic _load)
-        {
-            _undolistleaf.Clear();
-            leafjson = _load;
-            _undolistleaf.Insert(0, new SaveState() {
-                reason = $"No changes",
-                savestate = leafjson
-            });
-        }
-        ///
-        ///
-        ///
 
         private void UpdateLevelLists()
         {
@@ -425,7 +355,7 @@ namespace Thumper_Custom_Level_Editor
         ///
         /// File Lock read/write methods
         /// 
-        public void WriteFileLock(FileStream fs, JObject _save)
+        public static void WriteFileLock(FileStream fs, JObject _save)
         {
             string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
             using (StreamWriter sr = new StreamWriter(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
@@ -434,7 +364,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public dynamic LoadFileLock(string _selectedfilename)
+        public static dynamic LoadFileLock(string _selectedfilename)
         {
             dynamic _load;
             if (!File.Exists(_selectedfilename))
@@ -477,7 +407,7 @@ namespace Thumper_Custom_Level_Editor
         /// 
 
 
-        public string CopyToWorkingFolderCheck(string filepath)
+        public static string CopyToWorkingFolderCheck(string filepath, string workingfolder)
         {
             if (workingfolder == null)
                 return filepath;

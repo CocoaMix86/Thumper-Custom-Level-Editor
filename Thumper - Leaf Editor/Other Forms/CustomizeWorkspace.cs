@@ -56,11 +56,11 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnSetColor(object sender, EventArgs e)
         {
-            _mainform.PlaySound("UIcoloropen");
+            TCLE.PlaySound("UIcoloropen");
             Button btn = (Button)sender;
             colorDialogNew.Color = btn.BackColor;
             if (colorDialogNew.ShowDialog() == DialogResult.OK) {
-                _mainform.PlaySound("UIcolorapply");
+                TCLE.PlaySound("UIcolorapply");
                 btn.BackColor = colorDialogNew.Color;
             }
         }
@@ -101,11 +101,11 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnObjectColor_Click(object sender, EventArgs e)
         {
-            _mainform.PlaySound("UIcoloropen");
+            TCLE.PlaySound("UIcoloropen");
             Button btn = (Button)sender;
             colorDialogNew.Color = btn.BackColor;
             if (colorDialogNew.ShowDialog() == DialogResult.OK) {
-                _mainform.PlaySound("UIcolorapply");
+                TCLE.PlaySound("UIcolorapply");
                 Color _c = colorDialogNew.Color;
                 btn.BackColor = colorDialogNew.Color;
 
