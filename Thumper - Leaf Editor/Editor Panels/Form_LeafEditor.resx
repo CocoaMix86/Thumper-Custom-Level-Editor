@@ -140,9 +140,6 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="leafToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>516, 49</value>
   </metadata>
-  <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>635, 49</value>
-  </metadata>
   <data name="btnTrackPlayback.ToolTipText" xml:space="preserve">
     <value>***CURRENTLY BUGGY. SKIPS BEATS SOMETIMES***
 Click to playback the entire leaf. Plays these objects in time:
@@ -164,6 +161,9 @@ Playback speed is dependant on the Master BPM.</value>
         FiftCeYlLLQ2kx+qDjDTsMiKmYZFVsz+wLkLZ8eJXUD9F0sAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>635, 49</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAkAEBAAAAEAIABoBAAAlgAAABgYAAABACAAiAkAAP4EAAAgIAAAAQAgAKgQAACGDgAAMDAAAAEA

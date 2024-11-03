@@ -7,10 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using Fmod5Sharp.FmodTypes;
-using Fmod5Sharp;
-using NAudio.Vorbis;
-using NAudio.Wave;
 using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -33,15 +29,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripExplorer.Renderer = new ToolStripOverride();
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;
-            SetTreeViewTheme(treeView1.Handle);
-
-            DirectoryInfo directoryInfo = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
-            if (directoryInfo.Exists) {
-                BuildTree(directoryInfo, treeView1.Nodes);
-            }
+            //SetTreeViewTheme(treeView1.Handle);
+            CreateTreeView();
         }
         #endregion
 
+        bool filterenabled = false;
+        private void CreateTreeView()
+        {
+            treeView1.Nodes.Clear();
+            DirectoryInfo directoryInfo = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
+            if (directoryInfo.Exists) {
+                BuildTree(directoryInfo, treeView1.Nodes);
+                treeView1.Nodes[0].ImageKey = "project";
+                treeView1.Nodes[0].SelectedImageKey = "project";
+            }
+            if (filterenabled)
+                treeView1.ExpandAll();
+            else
+                treeView1.Nodes[0].Expand();
+        }
         private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
         {
             TreeNode curNode = addInMe.Add(directoryInfo.Name, directoryInfo.Name, "folder", "folder");
@@ -49,11 +56,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (FileInfo file in directoryInfo.GetFiles()) {
                 if (file.Name.Contains("xfm_") || file.Name.Contains("spn_") || file.Name.Contains("config_") || file.Name.Contains(".color"))
                     continue;
-                curNode.Nodes.Add(file.FullName, file.Name, file.Name.Split('_')[0], file.Name.Split('_')[0]);
+                if (!filterenabled)
+                    curNode.Nodes.Add(file.FullName, file.Name, file.Name.Split('_')[0], file.Name.Split('_')[0]);
+                else if ((filterLeaf.Checked && file.Name.Contains("leaf_")) || (filterLvl.Checked && file.Name.Contains("lvl_")) || (filterGate.Checked && file.Name.Contains("gate_")) || (filterMaster.Checked && file.Name.Contains("master_")) || (filterSample.Checked && file.Name.Contains("samp_")))
+                    curNode.Nodes.Add(file.FullName, file.Name, file.Name.Split('_')[0], file.Name.Split('_')[0]);
             }
             foreach (DirectoryInfo subdir in directoryInfo.GetDirectories()) {
                 BuildTree(subdir, curNode.Nodes);
             }
+        }
+
+        private void filter_CheckChanged(object sender, EventArgs e) => CreateTreeView();
+
+        private void btnFilter_ButtonClick(object sender, EventArgs e)
+        {
+            filterenabled = !filterenabled;
+            if (filterenabled)
+                btnFilter.BackColor = Color.LightBlue;
+            else
+                btnFilter.BackColor = Color.FromArgb(35, 35, 35);
+            CreateTreeView();
+        }
+
+        private void contextMenuFilters_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked)
+                e.Cancel = true;
         }
 
         private void txtSearch_GotFocus(object sender, EventArgs e)
@@ -66,5 +94,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (txtSearch.Text == "")
                 txtSearch.Text = "Search Project Explorer (Ctrl+;)";
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCollapse_Click(object sender, EventArgs e) => treeView1.CollapseAll();
+        private void btnExpand_Click(object sender, EventArgs e) => treeView1.ExpandAll();
+        private void btnRefresh_Click(object sender, EventArgs e) => CreateTreeView();
     }
 }

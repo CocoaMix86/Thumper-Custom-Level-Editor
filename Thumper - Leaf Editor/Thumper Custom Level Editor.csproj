@@ -272,6 +272,13 @@
     <None Include="image assets\master.ico" />
     <None Include="image assets\sample.ico" />
     <None Include="image assets\gate.ico" />
+    <None Include="image assets\icon-folder.ico" />
+    <None Include="image assets\icon-filter.png" />
+    <None Include="image assets\icon-file.png" />
+    <None Include="Resources\pixel.bmp" />
+    <None Include="image assets\thumper_ico_24px.png" />
+    <None Include="image assets\icon-collapse.png" />
+    <None Include="image assets\icon-expand.png" />
     <Content Include="thumper_level_editor2.ico" />
     <None Include="image assets\railcolorhelp.png" />
     <None Include="text assets\leaf_singletrack.txt" />
@@ -446,9 +453,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="CustomMarshalers" />
     <Reference Include="Microsoft.CSharp" />

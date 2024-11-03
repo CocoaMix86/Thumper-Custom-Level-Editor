@@ -52,5 +52,10 @@ namespace Thumper_Custom_Level_Editor
             }
             else base.OnRenderButtonBackground(e);
         }
+        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+        {
+            e.ArrowColor = Color.White;
+            base.OnRenderArrow(e);
+        }
     }
 }

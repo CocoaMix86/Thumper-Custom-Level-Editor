@@ -76,7 +76,7 @@
             // 
             // panelGate
             // 
-            this.panelGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.panelGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.panelGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelGate.Controls.Add(this.toolstripTitleGate);
             this.panelGate.Controls.Add(this.gateToolStrip);

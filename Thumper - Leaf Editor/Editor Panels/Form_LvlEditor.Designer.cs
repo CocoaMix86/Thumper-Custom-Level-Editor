@@ -204,7 +204,7 @@
             // 
             // panelLevel
             // 
-            this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.panelLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.panelLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelLevel.Controls.Add(this.lvlToolStrip);
             this.panelLevel.Controls.Add(this.label39);
