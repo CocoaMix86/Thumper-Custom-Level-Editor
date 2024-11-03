@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using Microsoft.VisualBasic;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -39,6 +40,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         bool filtersearch = false;
         string selectednodefilepath { get { return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{treeView1.SelectedNode.FullPath}"; } }
         DirectoryInfo projectfolder = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
+        string filetocopy;
+        bool copiedpathisfile;
+        bool cutfile;
 
         private void CreateTreeView()
         {
@@ -73,6 +77,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             addInMe.Add(folder);
 
+            //Build subtree for each folder inside this folder
+            foreach (DirectoryInfo subdir in directoryInfo.GetDirectories()) {
+                BuildTree(subdir, folder.Nodes);
+            }
+
             //add each file inside the folder to the tree
             foreach (FileInfo file in directoryInfo.GetFiles()) {
                 TreeNode _tn = new TreeNode() {
@@ -93,10 +102,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     folder.Nodes.Add(_tn);
                 else if ((filterLeaf.Checked && file.Name.Contains("leaf_")) || (filterLvl.Checked && file.Name.Contains("lvl_")) || (filterGate.Checked && file.Name.Contains("gate_")) || (filterMaster.Checked && file.Name.Contains("master_")) || (filterSample.Checked && file.Name.Contains("samp_")))
                     folder.Nodes.Add(_tn);
-            }
-            //Build subtree for each folder inside this folder
-            foreach (DirectoryInfo subdir in directoryInfo.GetDirectories()) {
-                BuildTree(subdir, folder.Nodes);
             }
         }
 
@@ -149,6 +154,93 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 CreateTreeView();
             }
         }
-        private void openWithToolStripMenuItem_Click(object sender, EventArgs e) => Process.Start(selectednodefilepath);
+        private void toolstripFileExternal_Click(object sender, EventArgs e) => Process.Start(selectednodefilepath);
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show($"'{treeView1.SelectedNode.Text}' will be deleted permanently", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+                File.Delete(selectednodefilepath);
+            }
+            treeView1.Nodes.Remove(treeView1.SelectedNode);
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show($"'{treeView1.SelectedNode.Text}' and all its contents will be deleted permanently", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+                Directory.Delete(selectednodefilepath, true);
+            }
+            treeView1.Nodes.Remove(treeView1.SelectedNode);
+        }
+
+        private void treeView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete) {
+                if (treeView1.SelectedNode.GetNodeCount(true) == 0) deleteToolStripMenuItem_Click(null, null);
+                else toolStripMenuItem3_Click(null, null);
+            }
+        }
+
+        private void toolstripFileCopy_Click(object sender, EventArgs e)
+        {
+            filetocopy = selectednodefilepath;
+            toolstripFolderPaste.Enabled = true;
+            copiedpathisfile = true;
+        }
+        private void toolstripFolderCopy_Click(object sender, EventArgs e)
+        {
+            filetocopy = selectednodefilepath;
+            toolstripFolderPaste.Enabled = true;
+            copiedpathisfile = false;
+        }
+        private void toolstripFileCut_Click(object sender, EventArgs e)
+        {
+            filetocopy = selectednodefilepath;
+            toolstripFolderPaste.Enabled = true;
+            cutfile = true;
+            copiedpathisfile = true;
+        }
+        private void toolstripFolderCut_Click(object sender, EventArgs e)
+        {
+            filetocopy = selectednodefilepath;
+            toolstripFolderPaste.Enabled = true;
+            cutfile = true;
+            copiedpathisfile = false;
+        }
+        private void toolstripFolderPaste_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(filetocopy) && !Directory.Exists(filetocopy)) {
+                MessageBox.Show($"'{filetocopy}' does not exist.", "Thumper Custom Level Editor");
+                return;
+            }
+
+            if (cutfile) {
+                if (copiedpathisfile)
+                    File.Move(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}");
+                else
+                    Directory.Move(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}");
+                cutfile = false;
+                filetocopy = "";
+                toolstripFolderPaste.Enabled = false;
+            }
+            else {
+                if (copiedpathisfile) {
+                    if (File.Exists($@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}")) {
+                        MessageBox.Show($"'{Path.GetFileName(filetocopy)}' exists in that location already.", "Thumper Custom Level Editor");
+                        return;
+                    }
+                    File.Copy(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}");
+                }
+                else {
+                    if (Directory.Exists($@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}")) {
+                        MessageBox.Show($"'{Path.GetFileName(filetocopy)}' exists in that location already.", "Thumper Custom Level Editor");
+                        return;
+                    }
+                    TCLE.CopyDirectory(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}", true);
+                }
+            }
+
+            CreateTreeView();
+        }
+
     }
 }
