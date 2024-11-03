@@ -58,10 +58,8 @@
             this.btnLeafObjRefresh = new System.Windows.Forms.ToolStripButton();
             this.btnUndoLeaf = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.btnRevertLeaf = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLeafPanelTemplate2 = new System.Windows.Forms.ToolStripButton();
             this.leafToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnTrackAdd = new System.Windows.Forms.ToolStripButton();
@@ -431,10 +429,8 @@
             this.btnLeafObjRefresh,
             this.btnUndoLeaf,
             this.toolStripSeparator9,
-            this.toolStripSeparator10,
             this.btnRevertLeaf,
             this.toolStripSeparator11,
-            this.toolStripSeparator12,
             this.btnLeafPanelTemplate2});
             this.toolstripTitleLeaf.Location = new System.Drawing.Point(0, 0);
             this.toolstripTitleLeaf.MaximumSize = new System.Drawing.Size(0, 50);
@@ -515,11 +511,6 @@
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
-            // 
             // btnRevertLeaf
             // 
             this.btnRevertLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -534,11 +525,6 @@
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
             this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator12
-            // 
-            this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
             // btnLeafPanelTemplate2
             // 
@@ -1611,10 +1597,8 @@
         private System.Windows.Forms.ToolStripButton btnLeafObjRefresh;
         private System.Windows.Forms.ToolStripDropDownButton btnUndoLeaf;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton btnRevertLeaf;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripButton btnLeafPanelTemplate2;
         private System.Windows.Forms.ToolStrip leafToolStrip;
         private System.Windows.Forms.ToolStripButton btnTrackAdd;
