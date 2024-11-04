@@ -43,6 +43,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         string filetocopy;
         bool copiedpathisfile;
         bool cutfile;
+        List<TreeNode> affectednodes = new();
 
         private void CreateTreeView()
         {
@@ -185,12 +186,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             filetocopy = selectednodefilepath;
             toolstripFolderPaste.Enabled = true;
             copiedpathisfile = true;
+            affectednodes.Clear();
+            affectednodes.Add(treeView1.SelectedNode);
         }
         private void toolstripFolderCopy_Click(object sender, EventArgs e)
         {
             filetocopy = selectednodefilepath;
             toolstripFolderPaste.Enabled = true;
             copiedpathisfile = false;
+            affectednodes.Clear();
+            affectednodes.Add(treeView1.SelectedNode);
         }
         private void toolstripFileCut_Click(object sender, EventArgs e)
         {
@@ -198,6 +203,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripFolderPaste.Enabled = true;
             cutfile = true;
             copiedpathisfile = true;
+            affectednodes.Clear();
+            affectednodes.Add(treeView1.SelectedNode);
         }
         private void toolstripFolderCut_Click(object sender, EventArgs e)
         {
@@ -205,6 +212,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripFolderPaste.Enabled = true;
             cutfile = true;
             copiedpathisfile = false;
+            affectednodes.Clear();
+            affectednodes.Add(treeView1.SelectedNode);
         }
         private void toolstripFolderPaste_Click(object sender, EventArgs e)
         {
@@ -212,6 +221,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show($"'{filetocopy}' does not exist.", "Thumper Custom Level Editor");
                 return;
             }
+            //this is the node being pasted to
+            affectednodes.Add(treeView1.SelectedNode);
 
             if (cutfile) {
                 if (copiedpathisfile)
