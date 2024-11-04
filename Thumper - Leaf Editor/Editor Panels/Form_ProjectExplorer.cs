@@ -174,7 +174,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-
+            foreach (TreeNode tn in selectedNodes) {
+                string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
+                if (tn.ImageKey == "folder" && Directory.Exists(source)) {
+                    Directory.Delete(source, true);
+                }
+                else if (File.Exists(source))
+                    File.Delete(source);
+                tn.Remove();
+            }
         }
         private void treeView1_KeyDown(object sender, KeyEventArgs e)
         {
