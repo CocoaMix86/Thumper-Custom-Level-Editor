@@ -42,10 +42,13 @@ namespace Thumper_Custom_Level_Editor
 
     class ProjectExplorerRightClick : ProfessionalColorTable
     {
-        public override Color MenuBorder { get { return Color.FromArgb(80, 80, 80); } }
-        public override Color ImageMarginGradientBegin { get { return Color.FromArgb(60, 60, 60); } }
-        public override Color ImageMarginGradientEnd { get { return Color.FromArgb(60, 60, 60); } }
-        public override Color ImageMarginGradientMiddle { get { return Color.FromArgb(60, 60, 60); } }
+        public override Color MenuBorder { get { return Color.FromArgb(66, 66, 66); } }
+        public override Color ImageMarginGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
+        public override Color ImageMarginGradientEnd { get { return Color.FromArgb(46, 46, 46); } }
+        public override Color ImageMarginGradientMiddle { get { return Color.FromArgb(46, 46, 46); } }
+        public override Color MenuItemSelected { get { return Color.FromArgb(61, 61, 61); } }
+        public Color MenuItemEnabledBorder { get { return Color.FromArgb(112, 112, 112); } }
+        public override Color MenuItemBorder { get { return Color.FromArgb(112, 112, 112); } }
     }
 
     public class ToolStripOverride : ToolStripProfessionalRenderer

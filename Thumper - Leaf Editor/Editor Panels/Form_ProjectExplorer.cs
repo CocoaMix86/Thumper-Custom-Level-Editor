@@ -7,9 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
-using Microsoft.VisualBasic;
+using System.Windows.Documents;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -27,6 +26,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             contextMenuFilters.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
             contextMenuFileClick.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
             contextMenuFolderClick.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
+            contextMenuMulti.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
             //add events to some controls
             treeView1.NodeMouseClick += (sender, args) => treeView1.SelectedNode = args.Node;
             txtSearch.GotFocus += txtSearch_GotFocus;
@@ -38,12 +38,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         bool filterenabled = false;
         bool filtersearch = false;
-        string selectednodefilepath { get { return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{treeView1.SelectedNode.FullPath}"; } }
+        //string selectednodefilepath { get { return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{treeView1.SelectedNode.FullPath}"; } }
         DirectoryInfo projectfolder = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
-        string filetocopy;
-        bool copiedpathisfile;
+        List<TreeNode> filestocopy;
         bool cutfile;
-        List<TreeNode> affectednodes = new();
 
         private void CreateTreeView()
         {
@@ -106,8 +104,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        ///
+        ///Filters and Search handling
         private void filter_CheckChanged(object sender, EventArgs e) => CreateTreeView();
-
         private void btnFilter_ButtonClick(object sender, EventArgs e)
         {
             filterenabled = !filterenabled;
@@ -116,14 +115,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //recreate the tree when filter state changes
             CreateTreeView();
         }
-
         private void contextMenuFilters_Closing(object sender, ToolStripDropDownClosingEventArgs e)
         {
             //this prevents the filter menu from closing when an option is chosen, allowing to select multiple before exiting the menu
             if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked)
                 e.Cancel = true;
         }
-
         private void txtSearch_GotFocus(object sender, EventArgs e)
         {
             if (txtSearch.Text == "Search Project Explorer (Ctrl+;)")
@@ -134,45 +131,57 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (txtSearch.Text == "")
                 txtSearch.Text = "Search Project Explorer (Ctrl+;)";
         }
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             filtersearch = txtSearch.Text is not "" and not "Search Project Explorer (Ctrl+;)";
             CreateTreeView();
         }
+        ///
+        ///
 
         private void btnCollapse_Click(object sender, EventArgs e) => treeView1.CollapseAll();
         private void btnExpand_Click(object sender, EventArgs e) => treeView1.ExpandAll();
         private void btnRefresh_Click(object sender, EventArgs e) => CreateTreeView();
-        private void copyFilePathToolStripMenuItem1_Click(object sender, EventArgs e) => Clipboard.SetText(selectednodefilepath);
-        private void openInExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void copyFilePathToolStripMenuItem1_Click(object sender, EventArgs e) => Clipboard.SetText(GetNodeFilePath(selectedNodes[0]));
+        private void toolstripFolderExplorer_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(selectednodefilepath))
-                Process.Start(selectednodefilepath);
-            else {
-                MessageBox.Show("That folder does not exist");
-                //force refresh of treeview if the folder doesn't exist
-                CreateTreeView();
+            foreach (TreeNode tn in selectedNodes) {
+                if (Directory.Exists(GetNodeFilePath(tn)))
+                    Process.Start(GetNodeFilePath(tn));
             }
         }
-        private void toolstripFileExternal_Click(object sender, EventArgs e) => Process.Start(selectednodefilepath);
+        private void toolstripFileExternal_Click(object sender, EventArgs e)
+        {
+            foreach (TreeNode tn in selectedNodes) {
+                if (File.Exists(GetNodeFilePath(tn)))
+                    Process.Start(GetNodeFilePath(tn));
+            }
+        }
 
+        ///
+        ///File Delete handling
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"'{treeView1.SelectedNode.Text}' will be deleted permanently", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
-                File.Delete(selectednodefilepath);
+            if (selectedNodes.Count == 1) {
+                if (MessageBox.Show($"'{selectedNodes[0].Name}' will be deleted permanently", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+                    File.Delete("selectednodefilepath");
+                    treeView1.Nodes.Remove(treeView1.SelectedNode);
+                }
             }
-            treeView1.Nodes.Remove(treeView1.SelectedNode);
+            if (selectedNodes.Count > 1) {
+                if (MessageBox.Show($"The selected items will be deleted permanently.", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+                    File.Delete("selectednodefilepath");
+                    treeView1.Nodes.Remove(treeView1.SelectedNode);
+                }
+            }
         }
-
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show($"'{treeView1.SelectedNode.Text}' and all its contents will be deleted permanently", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
-                Directory.Delete(selectednodefilepath, true);
+                Directory.Delete("selectednodefilepath", true);
+                treeView1.Nodes.Remove(treeView1.SelectedNode);
             }
-            treeView1.Nodes.Remove(treeView1.SelectedNode);
         }
-
         private void treeView1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete) {
@@ -180,43 +189,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else toolStripMenuItem3_Click(null, null);
             }
         }
+        ///
+        ///
 
+        ///
+        ///Copy and Cut Handling
         private void toolstripFileCopy_Click(object sender, EventArgs e)
         {
-            filetocopy = selectednodefilepath;
+            filestocopy = selectedNodes;
             toolstripFolderPaste.Enabled = true;
-            copiedpathisfile = true;
-            affectednodes.Clear();
-            affectednodes.Add(treeView1.SelectedNode);
+            if ((sender as ToolStripItem).Text == "Cut")
+                cutfile = true;
         }
-        private void toolstripFolderCopy_Click(object sender, EventArgs e)
-        {
-            filetocopy = selectednodefilepath;
-            toolstripFolderPaste.Enabled = true;
-            copiedpathisfile = false;
-            affectednodes.Clear();
-            affectednodes.Add(treeView1.SelectedNode);
-        }
-        private void toolstripFileCut_Click(object sender, EventArgs e)
-        {
-            filetocopy = selectednodefilepath;
-            toolstripFolderPaste.Enabled = true;
-            cutfile = true;
-            copiedpathisfile = true;
-            affectednodes.Clear();
-            affectednodes.Add(treeView1.SelectedNode);
-        }
-        private void toolstripFolderCut_Click(object sender, EventArgs e)
-        {
-            filetocopy = selectednodefilepath;
-            toolstripFolderPaste.Enabled = true;
-            cutfile = true;
-            copiedpathisfile = false;
-            affectednodes.Clear();
-            affectednodes.Add(treeView1.SelectedNode);
-        }
+        ///
+        ///
+
+        ///
+        ///Paste handling
         private void toolstripFolderPaste_Click(object sender, EventArgs e)
         {
+            /*
             if (!File.Exists(filetocopy) && !Directory.Exists(filetocopy)) {
                 MessageBox.Show($"'{filetocopy}' does not exist.", "Thumper Custom Level Editor");
                 return;
@@ -249,9 +241,143 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TCLE.CopyDirectory(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}", true);
                 }
             }
-
+            */
+            foreach (TreeNode tn in filestocopy) {
+                if (cutfile) {
+                    if (tn.ImageKey == "folder") {
+                        //Directory.Move();
+                    }
+                }
+            }
             CreateTreeView();
         }
+        ///
+        ///
 
+        private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            // cancel selection, the selection will be handled in MouseDown
+            e.Cancel = true;
+        }
+
+        List<TreeNode> selectedNodes = new();
+        TreeNode previousNode;
+        private void treeView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            TreeNode currentNode = treeView1.GetNodeAt(e.Location);
+            if (currentNode == null) return;
+            currentNode.BackColor = treeView1.BackColor;
+            currentNode.ForeColor = treeView1.ForeColor;
+
+            bool control = (ModifierKeys == Keys.Control);
+            bool shift = (ModifierKeys == Keys.Shift);
+
+            if (control && e.Button != MouseButtons.Right) {
+                // the node clicked with control button pressed:
+                // invert selection of the current node
+                List<TreeNode> addedNodes = new();
+                List<TreeNode> removedNodes = new();
+                if (!selectedNodes.Contains(currentNode)) {
+                    addedNodes.Add(currentNode);
+                    previousNode = currentNode;
+                }
+                else {
+                    removedNodes.Add(currentNode);
+                }
+                changeSelection(addedNodes, removedNodes);
+            }
+            else if (shift && previousNode != null && e.Button != MouseButtons.Right) {
+                if (currentNode.Parent == previousNode.Parent) {
+                    // the node clicked with shift button pressed:
+                    // if current node and previously selected node
+                    // belongs to the same parent,
+                    // select range of nodes between these two
+                    List<TreeNode> addedNodes = new();
+                    List<TreeNode> removedNodes = new();
+                    bool selection = false;
+                    bool selectionEnd = false;
+
+                    TreeNodeCollection nodes = null;
+                    if (previousNode.Parent == null)
+                        nodes = treeView1.Nodes;
+                    else
+                        nodes = previousNode.Parent.Nodes;
+
+                    foreach (TreeNode n in nodes) {
+                        if (n == currentNode || n == previousNode) {
+                            if (selection)
+                                selectionEnd = true;
+                            if (!selection)
+                                selection = true;
+                        }
+                        if (selection && !selectedNodes.Contains(n)) {
+                            addedNodes.Add(n);
+                        }
+                        if (selectionEnd) {
+                            break;
+                        }
+                    }
+
+                    if (addedNodes.Count > 0) {
+                        changeSelection(addedNodes, removedNodes);
+                    }
+                }
+            }
+            else {
+                if (e.Button == MouseButtons.Right && selectedNodes.Contains(currentNode))
+                    return;
+                List<TreeNode> addedNodes = new();
+                List<TreeNode> removedNodes = new();
+                removedNodes.AddRange(selectedNodes);
+                if (removedNodes.Contains(currentNode)) {
+                    removedNodes.Remove(currentNode);
+                }
+                else {
+                    addedNodes.Add(currentNode);
+                }
+                changeSelection(addedNodes, removedNodes);
+                previousNode = currentNode;
+            }
+
+            if (selectedNodes.Where(x => x.ImageKey == "folder").Count() > 0 && selectedNodes.Where(x => x.ImageKey != "folder").Count() > 0) {
+                foreach (TreeNode tn in selectedNodes) {
+                    tn.ContextMenuStrip = contextMenuMulti;
+                }
+            }
+            else {
+                foreach (TreeNode tn in selectedNodes) {
+                    if (tn.ImageKey == "folder")
+                        tn.ContextMenuStrip = contextMenuFolderClick;
+                    else
+                        tn.ContextMenuStrip = contextMenuFileClick;
+                }
+            }
+        }
+
+        protected void changeSelection(List<TreeNode> addedNodes, List<TreeNode> removedNodes)
+        {
+            foreach (TreeNode n in addedNodes) {
+                n.BackColor = Color.FromArgb(56, 56, 56);
+                n.ForeColor = Color.White;
+                selectedNodes.Add(n);
+            }
+            foreach (TreeNode n in removedNodes) {
+                n.BackColor = treeView1.BackColor;
+                n.ForeColor = treeView1.ForeColor;
+                selectedNodes.Remove(n);
+            }
+        }
+
+        private void contextMenuFileClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            toolstripFileRename.Enabled = selectedNodes.Count == 1;
+            toolstripFileCopyPath.Visible = selectedNodes.Count == 1;
+        }
+        private void contextMenuFolderClick_Opening(object sender, System.ComponentModel.CancelEventArgs e) => toolstripFolderRename.Enabled = selectedNodes.Count == 1;
+
+        private string GetNodeFilePath(TreeNode _node)
+        {
+            return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{_node.FullPath}";
+        }
     }
 }
