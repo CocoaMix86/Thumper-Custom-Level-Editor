@@ -160,34 +160,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         ///
         ///File Delete handling
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolstripFileDelete_Click(object sender, EventArgs e)
         {
             if (selectedNodes.Count == 1) {
-                if (MessageBox.Show($"'{selectedNodes[0].Name}' will be deleted permanently", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
-                    File.Delete("selectednodefilepath");
-                    treeView1.Nodes.Remove(treeView1.SelectedNode);
+                if (MessageBox.Show($"'{selectedNodes[0].Name}' will be deleted permanently", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
+                    return;
                 }
             }
             if (selectedNodes.Count > 1) {
-                if (MessageBox.Show($"The selected items will be deleted permanently.", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
-                    File.Delete("selectednodefilepath");
-                    treeView1.Nodes.Remove(treeView1.SelectedNode);
+                if (MessageBox.Show($"The selected items will be deleted permanently.", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
+                    return;
                 }
             }
-        }
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show($"'{treeView1.SelectedNode.Text}' and all its contents will be deleted permanently", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.OK) {
-                Directory.Delete("selectednodefilepath", true);
-                treeView1.Nodes.Remove(treeView1.SelectedNode);
-            }
+
+
         }
         private void treeView1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete) {
-                if (treeView1.SelectedNode.GetNodeCount(true) == 0) deleteToolStripMenuItem_Click(null, null);
-                else toolStripMenuItem3_Click(null, null);
-            }
+            if (e.KeyCode == Keys.Delete) toolstripFileDelete_Click(null, null);
         }
         ///
         ///
@@ -266,8 +256,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             TreeNode currentNode = treeView1.GetNodeAt(e.Location);
             if (currentNode == null) return;
-            currentNode.BackColor = treeView1.BackColor;
-            currentNode.ForeColor = treeView1.ForeColor;
+            if (e.Button != MouseButtons.Right) {
+                currentNode.BackColor = treeView1.BackColor;
+                currentNode.ForeColor = treeView1.ForeColor;
+            }
 
             bool control = (ModifierKeys == Keys.Control);
             bool shift = (ModifierKeys == Keys.Shift);
@@ -373,7 +365,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripFileRename.Enabled = selectedNodes.Count == 1;
             toolstripFileCopyPath.Visible = selectedNodes.Count == 1;
         }
-        private void contextMenuFolderClick_Opening(object sender, System.ComponentModel.CancelEventArgs e) => toolstripFolderRename.Enabled = selectedNodes.Count == 1;
+        private void contextMenuFolderClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            toolstripFolderRename.Enabled = selectedNodes.Count == 1;
+            toolstripFolderNew.Enabled = selectedNodes.Count == 1;
+            toolstripFolderCopyPath.Visible = selectedNodes.Count == 1;
+        }
 
         private string GetNodeFilePath(TreeNode _node)
         {
