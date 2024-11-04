@@ -1,0 +1,16 @@
+{
+  "obj_type": "SequinLevel",
+  "obj_name": "l2.lvl",
+  "approach_beats": 16.0,
+  "seq_objs": [],
+  "leaf_seq": [],
+  "loops": [],
+  "volume": 0.50,
+  "input_allowed": "True",
+  "tutorial_type": "TUTORIAL_NONE",
+  "start_angle_fracs": [
+    1,
+    1,
+    1
+  ]
+}

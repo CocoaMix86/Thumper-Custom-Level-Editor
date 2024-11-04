@@ -69,6 +69,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //the very first node every time this function is called is a folder.
             TreeNode folder = new TreeNode() {
                 Text = directoryInfo.Name,
+                Name = directoryInfo.Name,
                 ImageKey = "folder",
                 SelectedImageKey = "folder",
                 ContextMenuStrip = contextMenuFolderClick
@@ -84,6 +85,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (FileInfo file in directoryInfo.GetFiles()) {
                 TreeNode _tn = new TreeNode() {
                     Text = file.Name,
+                    Name = file.Name,
                     ImageKey = file.Name.Split('_')[0],
                     SelectedImageKey = file.Name.Split('_')[0],
                     ContextMenuStrip = contextMenuFileClick
@@ -349,17 +351,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void treeView1_MouseUp(object sender, MouseEventArgs e)
         {
-            /*
             TreeNode currentNode = treeView1.GetNodeAt(e.Location);
-            if (currentNode == null) return;
-            if (selectedNodes.Contains(currentNode)) return;
-            if (e.Button != MouseButtons.Right) {
-                //currentNode.BackColor = treeView1.BackColor;
-                //currentNode.ForeColor = treeView1.ForeColor;
-            }
-
             bool control = (ModifierKeys == Keys.Control);
-            bool shift = (ModifierKeys == Keys.Shift);*/
+            bool shift = (ModifierKeys == Keys.Shift);
+
+            if (control || shift)
+                return;
+
+            List<TreeNode> addedNodes = new();
+            List<TreeNode> removedNodes = new();
+            removedNodes.AddRange(selectedNodes);
+            if (removedNodes.Contains(currentNode)) {
+                removedNodes.Remove(currentNode);
+            }
+            else {
+                addedNodes.Add(currentNode);
+            }
+            changeSelection(addedNodes, removedNodes);
+            previousNode = currentNode;
         }
 
         protected void changeSelection(List<TreeNode> addedNodes, List<TreeNode> removedNodes)
@@ -415,6 +424,46 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Point targetPoint = treeView1.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             TreeNode targetNode = treeView1.GetNodeAt(targetPoint);
+            // Don't allow drag to non-folders
+            if (targetNode.ImageKey is not "folder" and not "project") { 
+                if (selectedNodes.Contains(targetNode))
+                    previousDragOver.BackColor = Color.FromArgb(56, 56, 56);
+                else
+                    previousDragOver.BackColor = treeView1.BackColor;
+                return;
+            }
+            if (selectedNodes.Contains(targetNode)) {
+                MessageBox.Show("Cannot move the selected items. The destination is included in the selection.", "Thumper Custom Level Editor");
+                targetNode.BackColor = Color.FromArgb(56, 56, 56);
+                return;
+            }
+
+            foreach (TreeNode tn in selectedNodes) {
+                string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
+                if (File.Exists(dest) || Directory.Exists(dest)) {
+                    MessageBox.Show($"Cannot move the item '{tn.Name}'. An item with that name already exists in the destination folder.", "Thumper Custom Level Editor");
+                    targetNode.BackColor = Color.FromArgb(56, 56, 56);
+                    return;
+                }
+            }
+            foreach (TreeNode tn in selectedNodes) {
+                string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
+                string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
+                if (tn.ImageKey == "folder") {
+                    Directory.Move(source, dest);
+                }
+                else {
+                    File.Move(source, dest);
+                }
+
+                tn.Remove();
+                targetNode.Nodes.Add(tn);
+                targetNode.Expand();
+            }
+
+
+
+            /*
             // Retrieve the node that was dragged.
             TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
             // Confirm that the node at the drop location is not 
@@ -428,7 +477,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // Expand the node at the location 
                 // to show the dropped node.
                 targetNode.Expand();
-            }
+            }*/
             targetNode.BackColor = treeView1.BackColor;
         }
 

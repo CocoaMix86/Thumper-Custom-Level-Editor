@@ -1,0 +1,35 @@
+{
+  "obj_type": "LevelLib",
+  "bpm": 400.0,
+  "level_sections": [
+    "SECTION_LINEAR",
+    "SECTION_LINEAR",
+    "SECTION_LINEAR",
+    "SECTION_LINEAR",
+    "SECTION_LINEAR"
+  ],
+  "rails_color": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "rails_glow_color": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "path_color": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "joy_color": [
+    1,
+    1,
+    1,
+    1
+  ]
+}

@@ -1,0 +1,114 @@
+{
+'items': [
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-dissonant_additive_pad.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/dissonant_additive_pad.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-dissonant_affecting_preciousness.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/dissonant_affecting_preciousness.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-dissonant_chainsaw_massacre.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/dissonant_chainsaw_massacre.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-dissonant_delerius_violin.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/dissonant_delerius_violin.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-dissonant_once_apon_a_time.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/dissonant_once_apon_a_time.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-dissonant_sensuality.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/dissonant_sensuality.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-diss_violins_pattern2.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/diss_violins_pattern2.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-diss_violins_pattern3.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/diss_violins_pattern3.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-diss_violins_pattern4.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/diss_violins_pattern4.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'dissonant-diss_violins_pattern5.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/dissonant/diss_violins_pattern5.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+}
+]
+}

@@ -1,0 +1,323 @@
+{
+'items': [
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-beneath_ice_pattern1.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/beneath_ice_pattern1.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-beneath_ice_pattern2.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/beneath_ice_pattern2.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-beneath_ice_pattern3.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/beneath_ice_pattern3.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-beneath_ice_pattern4.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/beneath_ice_pattern4.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-beneath_ice_pattern5.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/beneath_ice_pattern5.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-beneath_ice_pattern6.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/beneath_ice_pattern6.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-beneath_ice_pattern7.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/beneath_ice_pattern7.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-dirty_cello_drones-dirty_cello_pattern07.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/dirty_cello_drones/dirty_cello_pattern07.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-dirty_cello_drones-dirty_cello_pattern08.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/dirty_cello_drones/dirty_cello_pattern08.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-dirty_cello_drones-dirty_cello_pattern09.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/dirty_cello_drones/dirty_cello_pattern09.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-dirty_cello_drones-dirty_cello_pattern10.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/dirty_cello_drones/dirty_cello_pattern10.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-dirty_cello_drones-dirty_cello_pattern11.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/dirty_cello_drones/dirty_cello_pattern11.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-dirty_cello_drones-dirty_cello_pattern12.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/dirty_cello_drones/dirty_cello_pattern12.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-dirty_cello_drones-dirty_cello_pattern13.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/dirty_cello_drones/dirty_cello_pattern13.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-orchestral_dissonance_pattern4.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/orchestral_dissonance_pattern4.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-orchestral_dissonance_pattern5.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/orchestral_dissonance_pattern5.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-orchestral_dissonance_pattern5.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/orchestral_dissonance_pattern5.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-orchestral_dissonance_pattern6.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/orchestral_dissonance_pattern6.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-orchestral_dissonance_pattern7.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/orchestral_dissonance_pattern7.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-orchestra_clusters_pattern1.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/orchestra_clusters_pattern1.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-rises-ending_rise.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/rises/ending_rise.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-string_bass_pattern1.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/levels/global_drones/string_bass_pattern1.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-violins_pattern1.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/violins_pattern1.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-violins_pattern2.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/violins_pattern2.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-violins_pattern3.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/violins_pattern3.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-violins_pattern4.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/violins_pattern4.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-violins_pattern5.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/violins_pattern5.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-violins_pattern6.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/violins_pattern6.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'global_drones-violins_pattern7.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/global_drones/violins_pattern7.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+}
+]
+}

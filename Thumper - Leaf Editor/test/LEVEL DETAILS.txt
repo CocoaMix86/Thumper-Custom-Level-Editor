@@ -1,0 +1,6 @@
+{
+  "level_name": "test",
+  "difficulty": "D5",
+  "description": "t",
+  "author": "test"
+}

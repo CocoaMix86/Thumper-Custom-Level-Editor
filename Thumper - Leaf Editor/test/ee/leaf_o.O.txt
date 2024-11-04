@@ -1,0 +1,7 @@
+﻿{
+  "obj_type": "SequinLeaf",
+  "obj_name": "o.O.leaf",
+  "seq_objs": [],
+  "beat_cnt": 22,
+  "time_sig": "4/4"
+}

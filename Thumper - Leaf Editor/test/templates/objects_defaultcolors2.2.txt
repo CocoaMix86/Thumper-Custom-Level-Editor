@@ -1,0 +1,402 @@
+pitch;-1710619
+roll;-5460820
+turn;-65536
+turn_auto;-1982015
+scale_x;-6071204
+scale_y;-10706065
+scale_z;-11513198
+offset_x;-3198928
+offset_y;-13578448
+offset_z;-13618993
+lane left 2;-6908266
+lane left 1;-3618616
+lane center;-1
+lane right 1;-3618616
+lane right 2;-6908266
+thump;-16776961
+thump[fast];-16755536
+thump[checkpoint];-9830224
+thump[boss bonus];-2555687
+bar;-8372160
+bar[left];-8372160
+bar[center];-8372160
+bar[right];-8372160
+thump and bar;-15528691
+bar[double];-8388608
+bar[triple];-12582912
+bar[quad];-13828096
+ring;-16711681
+mushroom [1 beat];-32768
+mushroom [6 beats];-32704
+tall spike [2 beats];-32640
+tall spike [4 beats];-32640
+tall spike [6 beats];-32640
+tall spike [8 beats];-32640
+wide spike(?) [2 beats];-32640
+decorative spikes [32 beats];-19276
+decorative spikes [12 beats];-19276
+decorative spikes [4 beats];-19276
+random spike [NO DAMAGE];-19276
+spike_left  [NO DAMAGE];-19276
+spike_right_base [NO DAMAGE];-19276
+spike_right [DAMAGE];-32640
+spike_right_ground_collide [DAMAGE];-32640
+millipede [2 beats];-14737633
+millipede v2 [2 beats];-14737633
+millipede [4 beats];-14737633
+millipede v2 [4 beats];-14737633
+millipede v3 [4 beats];-14737633
+single lane [55 beats];-8355585
+single lane [79 beats];-8355585
+single lane [114 beats];-8355585
+single lane [129 beats];-8355585
+single lane [150 beats];-8355585
+multi lane [126 beats];-8355585
+multi lane [150 beats];-8355585
+boss_shield_tutorial;-6381922
+boss_shield;-6381922
+boss_shield_2;-6381922
+boss_shield_3;-6381922
+start;-8355585
+jump;-8355585
+pulse;-8355585
+demo fingers1[16 beats];-8355585
+demo fingers1_unison[16 beats];-65408
+demo fingers1_wave_in[16 beats];-8355585
+demo fingers1_gate[16 beats];-8355585
+demo fingers1_short[8 beats];-8355585
+demo fingers1_decorative[1 beat];-8355585
+level 2 fingers1_decorative[1 beat];-8355585
+level 2b fingers1[12 beats];-8355585
+level 2b fingers1_gate[12 beats];-8355585
+level 2b fingers1_unison[12 beats];-8355585
+level 2b fingers1_wave_in[12 beats];-8355585
+level 2b decoration[1 beat];-8355585
+level 2c fingers1[16 beats];-8355585
+level 2c fingers1_gate[16 beats];-8355585
+level 2c fingers1_gate_8[16 beats];-8355585
+level 2c fingers1_unison[16 beats];-8355585
+level 2c fingers1_wave_in[16 beats];-8355585
+level 2c fingers1_decorative[1 beat];-8355585
+level 2 angled fingers1 [16 beats];-8355585
+level 2 angled fingers1_gate[16 beats];-8355585
+level 2 angled fingers1_unison[16 beats];-8355585
+level 2 angled fingers1_wave_in[16 beats];-8355585
+level 2 angled fingers1_long[32 beats];-8355585
+level 2 angled fingers1_long_20;-8355585
+level 2 angled fingers1_decorative[1 beat];-8355585
+level 3 fingers1[24 beats];-8355585
+level 3 fingers1_unison[24 beats];-8355585
+level 3 fingers1_wave_in[24 beats];-8355585
+level 3 fingers1_gate[24 beats];-8355585
+level 3 fingers1_decorative[1 beat];-8355585
+level 3b fingers1[12 beats];-8355585
+level 3b fingers1_unison[12 beats];-8355585
+level 3b fingers1_wave_in[12 beats];-8355585
+level 3b fingers1_gate[12 beats];-8355585
+level 3b fingers1_decorative[1 beat];-8355585
+level 3c fingers1[12 beats];-8355585
+level 3c fingers1_unison[12 beats];-8355585
+level 3c fingers1_wave_in[12 beats];-8355585
+level 3c fingers1_gate[12 beats];-8355585
+level 3c fingers1_decorative[1 beat];-8355585
+level 3d fingers1[12 beats];-8355585
+level 3d fingers1_unison[12 beats];-8355585
+level 3d fingers1_wave_in[12 beats];-8355585
+level 3d fingers1_gate[12 beats];-8355585
+level 3d fingers1_decorative[1 beat];-8355585
+level 4 fingers1[16 beats];-8355585
+level 4 fingers1_unison[16 beats];-8355585
+level 4 fingers1_wave_in[16 beats];-8355585
+level 4 fingers1_gate[16 beats];-8355585
+level 4 fingers1_short[8 beats];-8355585
+level 4 fingers1_decorative[1 beat];-8355585
+level 4b fingers1_decorative[1 beat];-8355585
+level 4c fingers_1_decorative[1 beat];-8355585
+level 5b fingers1[8 beats];-8355585
+level 5b fingers1_unison[8 beats];-8355585
+level 5b fingers1_wave_in[8 beats];-8355585
+level 5b fingers1_gate[8 beats];-8355585
+level 5b fingers1_decorative[1 beat];-8355585
+level 5c fingers1[8 beats];-8355585
+level 5c fingers1_unison[8 beats];-8355585
+level 5c fingers1_wave_in[8 beats];-8355585
+level 5c fingers1_gate[8 beats];-8355585
+level 5c fingers1_decorative[1 beat];-8355585
+level 5d fingers1[8 beats];-8355585
+level 5d fingers1_unison[8 beats];-8355585
+level 5d fingers1_wave_in[8 beats];-8355585
+level 5d fingers1_gate[8 beats];-8355585
+level 5e fingers1[12 beats];-8355585
+level 5e fingers1_unison[12 beats];-8355585
+level 5e fingers1_wave_in[12 beats];-8355585
+level 5e fingers1_gate[12 beats];-8355585
+level 5e fingers1_decorative[1 beat];-8355585
+level 5f decorative[1 beat];-8355585
+level 6b fingers1[8 beats];-8355585
+level 6b fingers1_unison[8 beats];-8355585
+level 6b fingers1_wave_in[8 beats];-8355585
+level 6b fingers1_gate[8 beats];-8355585
+level 6b fingers1_decorative[1 beat];-8355585
+level 6c fingers1[24 beats];-8355585
+level 6c fingers1_unison[24 beats];-8355585
+level 6c fingers1_wave_in[24 beats];-8355585
+level 6c fingers1_gate[24 beats];-8355585
+level 6c fingers1_decorative[1 beat];-8355585
+level 7 fingers1[16 beats];-8355585
+level 7 fingers1_unison[16 beats];-8355585
+level 7 fingers1_wave_in[16 beats];-8355585
+level 7 fingers1_gate[16 beats];-8355585
+level 7 fingers1_decorative[1 beat];-8355585
+level 7b fingers1[16 beats];-8355585
+level 7b fingers1_unison[16 beats];-8355585
+level 7b fingers1_wave_in[16 beats];-8355585
+level 7b fingers1_gate[16 beats];-8355585
+level 7b fingers1_decorative[1 beat];-8355585
+level 7c fingers1[16 beats];-8355585
+level 7c fingers1_unison[16 beats];-8355585
+level 7c fingers1_wave_in[16 beats];-8355585
+level 7c fingers1_gate[16 beats];-8355585
+level 7c fingers1_short[8 beats];-8355585
+level 7c fingers1_decorative[1 beat];-8355585
+level 7d decorative[1 beat];-8355585
+level 8 fingers1[16 beats];-8355585
+level 8 fingers1_unison[16 beats];-8355585
+level 8 fingers1_wave_in[16 beats];-8355585
+level 8 fingers1_gate[16 beats];-8355585
+level 8 decorative[1 beat];-8355585
+level 8b fingers1[16 beats];-8355585
+level 8b fingers1_unison[16 beats];-8355585
+level 8b fingers1_wave_in[16 beats];-8355585
+level 8b fingers1_gate[16 beats];-8355585
+level 8b fingers1_decorative[1 beat];-8355585
+level 9 fingers1[18 beats];-8355585
+level 9 fingers1_unison[18 beats];-8355585
+level 9 fingers1_wave_in[18 beats];-8355585
+level 9 fingers1_gate[18 beats];-8355585
+level 9 fingers1_decorative[1 beat];-8355585
+level 9b fingers1[18 beats];-8355585
+level 9b fingers1_unison[18 beats];-8355585
+level 9b fingers1_wave_in[18 beats];-8355585
+level 9b fingers1_gate[18 beats];-8355585
+level 9b fingers1_decorative[1 beat];-8355585
+level 9c fingers1[18 beats];-8355585
+level 9c fingers1_unison[18 beats];-8355585
+level 9c fingers1_wave_in[18 beats];-8355585
+level 9c fingers1_gate[18 beats];-8355585
+level 9c fingers1_decorative[1 beat];-8355585
+level 9d fingers1[18 beats];-8355585
+level 9d fingers1_unison[18 beats];-8355585
+level 9d fingers1_wave_in[18 beats];-8355585
+level 9d fingers1_gate[18 beats];-8355585
+level 9d fingers1_decorative[1 beat];-8355585
+tree1[24 beats];-8355585
+tree1 set_8;-8355585
+tree1 set_16;-8355585
+tree1 set_8 non phrase;-8355585
+tree1 set_decorative[1 beat];-8355585
+tree1 set angled[24 beats];-8355585
+tree1 set angled_8;-8355585
+tree1 set angled_16;-8355585
+tree1 set angled_8 non phrase;-8355585
+tree1 set lattice[24 beats];-8355585
+tree1 set lattice_8;-8355585
+tree1 set lattice_16;-8355585
+tree1 set lattice_8 non phrase;-8355585
+tree1 set lattice_decorative[1 beat];-8355585
+tree1 set latticeb[24 beats];-8355585
+tree1 set latticeb_9;-8355585
+tree1 set latticeb_12;-8355585
+tree1 set latticeb_18;-8355585
+tree1 set latticeb_8 non phrase;-8355585
+tree1 set latticeb_decorative[1 beat];-8355585
+tree1 set glass[24 beats];-8355585
+tree1 set glass_8;-8355585
+tree1 set glass_16;-8355585
+tree1 set glass_8 non phrase;-8355585
+tree1 set glass_decorative[1 beat];-8355585
+tree2[24 beats];-8355585
+tree2 set_12;-8355585
+tree2 set_16;-8355585
+tree2 set_unison[24 beats];-8355585
+tree2 decorative[1 beat];-8355585
+tree3[32 beats];-8355585
+tree3 set_16;-8355585
+tree3 decorative[1 beat];-8355585
+tree3 transparent[8 beats];-8355585
+tree3 transparent set_10;-8355585
+tree3 transparent set_20;-8355585
+tree3 transparent decorative[1 beat];-8355585
+tree4[32 beats];-8355585
+tree4 set_16;-8355585
+tree4 decorative[1 beat];-8355585
+tree5[32 beats];-8355585
+tree5 set_8;-8355585
+tree5 set_16;-8355585
+tree5 decorative[1 beat];-8355585
+tree8[24 beats];-8355585
+tree8 set_8;-8355585
+tree8 set_16;-8355585
+tree8 set_8 non phrase;-8355585
+tree8 set_pound target[4 beats];-65408
+tree8_decorative[1 beat];-8355585
+spiral fingers1[24 beats];-8355585
+spiral fingers1_unison[24 beats];-8355585
+spiral fingers1_wave_in[24 beats];-8355585
+spiral fingers1_gate[24 beats];-8355585
+spiral fingers1_decorative[1 beat];-8355585
+crakhed_colors color1;-13036267
+crakhed_colors color2;-12316388
+crakhed_colors color3;-14218716
+crakhed_colors color4;-12709862
+pyramid_colors color1;-13952750
+pyramid_colors color2;-5162978
+pyramid_colors color3;-10276840
+pyramid_colors color4;-12835304
+diamond_colors color1;-16772052
+diamond_colors color2;-16768727
+diamond_colors color3;-16772802
+diamond_colors color4;-16768665
+level_colors color1;-12579542
+level_colors color2;-12974046
+level_colors color3;-10939797
+level_colors color4;-12578237
+boss_colors color1;-13760387
+boss_colors color2;-11322229
+boss_colors color3;-15452042
+boss_colors color4;-16752992
+white;-5335335
+black;-13947118
+dark blue;-10612925
+dark green;-12567785
+dark red;-7596730
+light blue;-10280796
+light green;-6836612
+light red;-3987365
+slow blue bloom;-13622128
+red;-65536
+green;-16711936
+blue;-16775489
+red gamma2;-65536
+green gamma2;-16711936
+blue gamma2;-16776961
+green gamma3;-16711872
+blue gamma3;-16776961
+aurora [4 beats];-8355585
+data_streaks_radial [8 beats];-8355585
+speed_streaks [16 beats];-8355585
+speed_streaks_RGB [16 beats];-8355585
+speed_streaks_short [4 beats];-8355585
+stalactites [1 beat];-8355585
+vortex_decorator [8 beats];-8355585
+ring_pulse;-8355585
+ring_pulse_yellow;-8355585
+ring_pulse_yellow_high;-8355585
+ring_pulse_grey;-8355585
+ring_pulse_checkpoint;-8355585
+spinning white egg;-8355585
+glass_shatter;-8355585
+final_twirlies_sparse [32 beats];-8355585
+teeth [1 beat];-8355585
+teeth_set [32 beats];-8355585
+teeth_set_shortened [32 beats];-8355585
+crakhed_pyramid_prelude [80 beats];-8355585
+boss_7_tunnel_enter [2 beats];-1776412
+boss_damage_stage1 [12 beats];-1776412
+boss_damage_stage2 [12 beats];-1776412
+boss_damage_stage3 [12 beats];-1776412
+boss_damage_stage4 [12 beats];-1776412
+crakhed_damage [16 beats];-1776412
+crakhed_destroy [32 beats];-1776412
+death_shatter [8 beats];-1776412
+smoke [8 beats];-1776412
+win_debris [8 beats];-1776412
+track smoke;-1776412
+A - millipede_half;-11053225
+A - millipede_left;-11053225
+A - millipede_right;-11053225
+A - millipede_random;-11053225
+B - millipede_half;-11053225
+B - millipede_left;-11053225
+B - millipede_right;-11053225
+B - millipede_random;-11053225
+vignette1;-2795175
+contrast;-1447447
+invert;-1247233
+cubic_disto1;-4144960
+cubic_disto2 (spheric);-6842460
+bloom_sat1;-2316377
+contrast/brightness1;-3342
+contrast/brightness2 (USE >=0);-1
+brightness3 - funny rainbow colors;-65408
+contrast_noise;-1257729
+red_noise;-2083776
+camera forward and backward;-8355712
+camera/anchor height;-8355712
+camera/anchor x-axis;-8355712
+camera height;-8355712
+camera pitch;-8355712
+camera roll;-8355712
+camera yaw (limited: "1" = ~90°);-8355712
+camera pitch2 (limited: "1" = ~90°);-8355712
+camera zoom out;-8355712
+manual camera shake;-8355712
+FOV;-8355712
+rumble;-8355585
+beetle_turn;-8355585
+beetle_lean;-8355585
+pause_game;-8355585
+turn_left_isolated;-8355585
+turn_left_start (long turn start);-8355585
+turn_left_middle (long turn mid);-8355585
+turn_left_end (long turn end);-8355585
+turn_right_isolated;-8355585
+turn_right_start (long turn start);-8355585
+turn_right_middle (long turn mid);-8355585
+turn_right_end (long turn end);-8355585
+lane_end_left_turn;-8355585
+lane_end_right_turn;-8355585
+start_power;-8355585
+invulnerability_beats;-8355585
+base_bpm;-8355585
+grind_remain_beats;-8355585
+respawn;-8355585
+debug_speed;-8355585
+Gameplay;-8355585
+grinding;-8355585
+win_checkpoint_silent;-8355585
+pounding;-8355585
+invulnerable;-8355585
+ForcePlayerDamage;-8355585
+transparent_path;-8355585
+weapon;-8355585
+boss_gate_pellet;-8355585
+diss1;-8355585
+diss2;-8355585
+diss3;-8355585
+diss4;-8355585
+diss6;-8355585
+diss7;-8355585
+diss8;-8355585
+diss9;-8355585
+diss10;-8355585
+diss11;-8355585
+diss12;-8355585
+diss13;-8355585
+diss14;-8355585
+diss15;-8355585
+diss16;-8355585
+diss17;-8355585
+intro;-8355585
+rail_glow;-65536
+headlight_glow;-65536
+path_redglow;-65536
+rail_color;-16777216
+glow_color;-16777216
+path_color;-16777216
+play;-12533952
+speed;-4750648
+fake checkpoint;-13959087
+win checkpoint;-1188450
+fade;-15790321
+win;-3762423

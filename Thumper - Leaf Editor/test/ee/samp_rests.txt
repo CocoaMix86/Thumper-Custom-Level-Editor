@@ -1,0 +1,180 @@
+{
+'items': [
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rests_level8a.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rests_level8a.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rests_level8b.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rests_level8b.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rests_level9a.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rests_level9a.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rests_level9b.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rests_level9b.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level2a.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level2a.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level2b.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level2b.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level3a.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level3a.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level3b.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level3b.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level4a.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level4a.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level4b.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level4b.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level5a.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level5a.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level5b.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level5b.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level6a.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level6a.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level6b.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level6b.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level7a.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level7a.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+},
+{
+'obj_type': 'Sample',
+'obj_name': 'rests-rest_level7b.wav',
+'mode': 'kSampleOneOff',
+'path': 'samples/Levels/rests/rest_level7b.wav',
+'volume': 1.0,
+'pitch': 1.0,
+'pan': 0.0,
+'offset': 0.0,
+'channel_group': ''
+}
+]
+}

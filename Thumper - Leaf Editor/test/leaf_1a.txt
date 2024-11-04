@@ -1,0 +1,22 @@
+{
+  "obj_type": "SequinLeaf",
+  "obj_name": "1a.leaf",
+  "seq_objs": [
+    {
+      "obj_name": "1a.leaf",
+      "param_path": "pitch",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 1.25,
+      "footer": "4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    }
+  ],
+  "beat_cnt": 40,
+  "time_sig": "4/4"
+}

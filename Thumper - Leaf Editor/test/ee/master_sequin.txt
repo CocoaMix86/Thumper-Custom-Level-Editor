@@ -1,0 +1,55 @@
+﻿{
+  "obj_type": "SequinMaster",
+  "obj_name": "sequin.master",
+  "skybox_name": "skybox_cube",
+  "intro_lvl_name": "34433.lvl",
+  "groupings": [
+    {
+      "lvl_name": "34433.lvl",
+      "gate_name": "",
+      "checkpoint": "True",
+      "checkpoint_leader_lvl_name": "",
+      "rest_lvl_name": "",
+      "play_plus": "True",
+      "isolate": "False"
+    },
+    {
+      "lvl_name": "",
+      "gate_name": "gg.gate",
+      "checkpoint": "True",
+      "checkpoint_leader_lvl_name": "",
+      "rest_lvl_name": "",
+      "play_plus": "True",
+      "isolate": "False"
+    },
+    {
+      "lvl_name": "34433.lvl",
+      "gate_name": "",
+      "checkpoint": "True",
+      "checkpoint_leader_lvl_name": "",
+      "rest_lvl_name": "",
+      "play_plus": "True",
+      "isolate": "False"
+    },
+    {
+      "lvl_name": "",
+      "gate_name": "gg.gate",
+      "checkpoint": "True",
+      "checkpoint_leader_lvl_name": "",
+      "rest_lvl_name": "",
+      "play_plus": "True",
+      "isolate": "False"
+    },
+    {
+      "lvl_name": "",
+      "gate_name": "g3.gate",
+      "checkpoint": "True",
+      "checkpoint_leader_lvl_name": "",
+      "rest_lvl_name": "",
+      "play_plus": "True",
+      "isolate": "False"
+    }
+  ],
+  "isolate_tracks": "False",
+  "checkpoint_lvl_name": "34433.lvl"
+}

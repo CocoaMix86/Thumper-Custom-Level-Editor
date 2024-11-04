@@ -1,0 +1,1959 @@
+﻿{
+  "obj_type": "SequinLeaf",
+  "obj_name": "asdsa.leaf",
+  "seq_objs": [
+    {
+      "obj_name": "gamma_floats.flow",
+      "param_path_hash": "d61447d3",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "8": 0.394
+      },
+      "step": "True",
+      "default": 1.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-65536",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "camera_floats.flow",
+      "param_path_hash": "9f75fd34",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "8": 12.67,
+        "11": 83.34,
+        "17": 72.365
+      },
+      "step": "False",
+      "default": 6.3,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355712",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ducker.spn",
+      "param_path": "ducker_crak.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 1.0,
+        "5": 1.0,
+        "14": 1.0
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16711681",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "control.rumble",
+      "param_path_hash": "40a89b31",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 402.692,
+        "9": 215.61,
+        "17": 617.298,
+        "21": 862.297
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "levels.pp",
+      "param_path_hash": "05099ded",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "4": 112.889,
+        "8": 122.305
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "skybox_colors.flow",
+      "param_path": "dark_blue",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-10612925",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "global_drones-orchestral_dissonance_pattern7.wav.samp",
+      "param_path": "play",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "3": 1,
+        "14": 1,
+        "19": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-12533952",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "checkpoint.spn",
+      "param_path": "checkpoint.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "12": 1,
+        "19": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-13959087",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "turn_test.spn",
+      "param_path": "turn_right_middle.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "5": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "thump.spn",
+      "param_path": "thump_checkpoint.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-9830224",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "cam_shake.flow",
+      "param_path_hash": "ce326723",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "7": 91.113,
+        "13": 52.629,
+        "16": 22.018
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355712",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "game.settings",
+      "param_path_hash": "c8266ef9",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "4": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "19": 1,
+        "20": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable_multi.spn",
+      "param_path": "grindable_with_thump.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "14": 1,
+        "21": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-15528691",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "avatar.lib",
+      "param_path": "start_power",
+      "trait_type": "kTraitInt",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 0.74,
+        "15": 162.83,
+        "19": 141.31
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss12",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "13": 1,
+        "17": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "boss_frac_pulse.flow",
+      "param_path_hash": "2c16d809",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "3": 1,
+        "10": 1,
+        "11": 1,
+        "19": 1,
+        "21": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "sentry.spn",
+      "param_path": "level_8_multi.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "cubic_distortion.pp",
+      "param_path_hash": "33593638",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "7": 58.711,
+        "13": 133.167
+      },
+      "step": "False",
+      "default": -1.3333,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-4144960",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ring_pulse.spn",
+      "param_path": "ring_pulse_yellow.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "8": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss8",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ambient_fx.spn",
+      "param_path": "speed_streaks.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "4": 1,
+        "7": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level9_fingers_set.spn",
+      "param_path": "fingers1_wave_in.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "5": 1,
+        "10": 1,
+        "17": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "screen_shake.flow",
+      "param_path_hash": "3347011c",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "10": 89.452
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355712",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "rails_color.flow",
+      "param_path_hash": "283c6e78",
+      "trait_type": "kTraitColor",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": -14304436,
+        "9": -4927447,
+        "13": -3806557,
+        "15": -10969635
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16777216",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level9c_fingers_set.spn",
+      "param_path": "fingers1.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ring_pulse.spn",
+      "param_path": "weapon.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 1,
+        "8": 1,
+        "15": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level3c_fingers_set.spn",
+      "param_path": "fingers1_unison.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "5": 1,
+        "9": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "avatar.lib",
+      "param_path": "grind_remain_beats",
+      "trait_type": "kTraitInt",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "3": 198.583,
+        "12": 178.139
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "avatar.lib",
+      "param_path": "sequin_speed",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "9": 0.219,
+        "13": 1.327
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-4750648",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss3",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "cam_shake.xfmer",
+      "param_path_hash": "8ab4684d",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "9": 56.051,
+        "15": 44.294
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355712",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "avatar.lib",
+      "param_path": "Gameplay",
+      "trait_type": "kTraitInt",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 133.137,
+        "13": 191.633,
+        "19": 183.435
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss6",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "13": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "screen_shake.flow",
+      "param_path_hash": "5472d655",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "19": 25.459
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355712",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "avatar.lib",
+      "param_path": "win_checkpoint",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "13": 1,
+        "17": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1188450",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level_colors.flow",
+      "param_path": "color4",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 1,
+        "3": 1,
+        "14": 1,
+        "15": 1,
+        "17": 1,
+        "19": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-12578237",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level_tree1_set_glass.spn",
+      "param_path": "trees_8_non_phrase.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "8": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_half.spn",
+      "param_path": "swerve_off.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 1,
+        "7": 1,
+        "12": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-14737633",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss1",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "15": 1,
+        "18": 1,
+        "19": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "boss_shield.spn",
+      "param_path": "boss_shield_3.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,1,1,1,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-6381922",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "cam_shake.flow",
+      "param_path_hash": "4bf4650d",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 79.479,
+        "14": 50.791
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355712",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "diamond_colors.flow",
+      "param_path": "color2",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "19": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16768727",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "intro.flow",
+      "param_path_hash": "0810c3b9",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_half.spn",
+      "param_path": "millipede_half.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "5": 1,
+        "17": 1,
+        "21": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-14737633",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "pyramid_colors.flow",
+      "param_path": "color4",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-12835304",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "avatar.lib",
+      "param_path": "win",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "15": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-3762423",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "turn_test.spn",
+      "param_path": "turn_right_start.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 1,
+        "10": 1,
+        "13": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "cam_shake.flow",
+      "param_path_hash": "2ab1a6a9",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 85.521,
+        "5": 59.182,
+        "6": 21.984
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355712",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss13",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "3": 1,
+        "7": 1,
+        "13": 1,
+        "14": 1,
+        "17": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ambient_fx.spn",
+      "param_path": "boss_damage_stage4.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "9": 1,
+        "16": 1,
+        "18": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1776412",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "avatar.lib",
+      "param_path": "grinding",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 1,
+        "15": 1,
+        "20": 1
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_half_decorative.spn",
+      "param_path": "millipede_left.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 1,
+        "4": 1,
+        "10": 1,
+        "12": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-11053225",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_half_decorative_b.spn",
+      "param_path": "millipede_half.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-11053225",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable_multi.spn",
+      "param_path": "grindable_thirds.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 1,
+        "17": 1,
+        "19": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-12582912",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_quarter.spn",
+      "param_path": "millipede_quarter.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "17": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-14737633",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ambient_fx.spn",
+      "param_path": "crakhed_damage.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 1,
+        "5": 1,
+        "6": 1,
+        "8": 1,
+        "10": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1776412",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable.spn",
+      "param_path": "left_multi.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 1,
+        "10": 1,
+        "11": 1,
+        "21": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8372160",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ring_pulse.spn",
+      "param_path": "ring_pulse_grey.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 1,
+        "14": 1,
+        "17": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss15",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "10": 1,
+        "17": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "sentry.spn",
+      "param_path": "level_9_multi.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "sentry.spn",
+      "param_path": "level_9.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "thump.spn",
+      "param_path": "thump_rails.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 1,
+        "13": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16776961",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "gamma_floats.flow",
+      "param_path_hash": "8c17f344",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "14": 79.862
+      },
+      "step": "True",
+      "default": 1.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16775489",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_half_decorative.spn",
+      "param_path": "millipede_right.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 1,
+        "12": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-11053225",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ambient_fx.spn",
+      "param_path": "boss_damage_stage3.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "17": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1776412",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level_colors.flow",
+      "param_path": "color3",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "5": 1,
+        "17": 1,
+        "21": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-10939797",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "headlight.lit",
+      "param_path_hash": "d7b602ce",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "13": 73.418
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-65536",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "levels.pp",
+      "param_path_hash": "6d90b646",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 37.197,
+        "3": 86.152,
+        "6": 18.172,
+        "19": 7.221
+      },
+      "step": "False",
+      "default": 25.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16711936",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "rails_color.flow",
+      "param_path_hash": "887ca5dd",
+      "trait_type": "kTraitColor",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": -13826052,
+        "20": -4838391
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16777216",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "turn_test.spn",
+      "param_path": "turn_left_start.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 1,
+        "15": 1,
+        "16": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable.spn",
+      "param_path": "grindable_still.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "3": 1,
+        "17": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8372160",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "starfish_loop_start.flow",
+      "param_path": "starfish_loop_start",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "pyramid_colors.flow",
+      "param_path": "color3",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 1,
+        "12": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-10276840",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "fade.pp",
+      "param_path": "fade",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-15790321",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "controller.st",
+      "param_path_hash": "54ef8e79",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "10": 55.099
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "sentry.spn",
+      "param_path": "level_6.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "skybox_colors.flow",
+      "param_path": "black",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "14": 1,
+        "20": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-13947118",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable.spn",
+      "param_path": "center_multi.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 1,
+        "20": 1,
+        "21": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8372160",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "jump_high_big_trees_set.spn",
+      "param_path": "trees_16.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 1,
+        "10": 1,
+        "16": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-19276",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "glow.mat",
+      "param_path_hash": "13bdaa3b",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "5": 31.176,
+        "17": 186.91
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-65536",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ring_pulse.spn",
+      "param_path": "weapon.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "levels.pp",
+      "param_path_hash": "134d04b5",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "11": 95.529,
+        "15": 57.72
+      },
+      "step": "False",
+      "default": 39.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16776961",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "rails_color.flow",
+      "param_path_hash": "9b4504d6",
+      "trait_type": "kTraitColor",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": -6945559,
+        "2": -1607068,
+        "6": -3067382,
+        "7": -11138854,
+        "15": -392035,
+        "18": -15757576,
+        "19": -15959934,
+        "21": -5449861
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16777216",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ambient_fx.spn",
+      "param_path": "boss_damage_stage1.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1776412",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level2c_fingers.spn",
+      "param_path": "tentacle_decorative.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 1,
+        "9": 1,
+        "14": 1,
+        "21": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "asdsa.leaf",
+      "param_path": "visibla01",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "12": 1,
+        "17": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-6908266",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "noise.vig",
+      "param_path_hash": "51b7d0e3",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 101.09,
+        "5": 135.079,
+        "12": 40.291
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1257729",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "boss_shield.spn",
+      "param_path": "boss_shield_2.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 1,
+        "7": 1,
+        "13": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,1,1,1,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-6381922",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "thump.spn",
+      "param_path": "thump_rails_fast_activat.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "11": 1,
+        "16": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16755536",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_quarter.spn",
+      "param_path": "millipede_quarter_phrase.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "3": 1,
+        "9": 1,
+        "10": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-14737633",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_half_decorative_b.spn",
+      "param_path": "millipede_random.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 1,
+        "3": 1,
+        "13": 1,
+        "18": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-11053225",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable_multi.spn",
+      "param_path": "grindable_quarters.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-13828096",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "asdsa.leaf",
+      "param_path": "roll",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "11": 42.283,
+        "21": 98.056
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "4,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-5460820",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "gamma_floats.flow",
+      "param_path_hash": "8c8b5767",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "16": 88.566
+      },
+      "step": "True",
+      "default": 1.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16711936",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable_multi.spn",
+      "param_path": "grindable_double.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 1,
+        "17": 1,
+        "20": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8388608",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "teeth_entity_set.spn",
+      "param_path": "teeth_set_shortened.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 1,
+        "7": 1,
+        "20": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "grindable.spn",
+      "param_path": "right_multi.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "4": 1,
+        "18": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8372160",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ambient_fx.spn",
+      "param_path": "boss_damage_stage2.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "3": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1776412",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level5d_fingers_set.spn",
+      "param_path": "fingers1_wave_in.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "5": 1,
+        "14": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss9",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "12": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "boss_shield.spn",
+      "param_path": "boss_shield.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "3": 1,
+        "11": 1,
+        "21": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,1,1,1,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-6381922",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "millipede_half.spn",
+      "param_path": "millipede_half_phrase.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "13": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-14737633",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "jump_high.spn",
+      "param_path": "jump_high.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 1,
+        "17": 1,
+        "18": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-32640",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "dissonant_bursts.flow",
+      "param_path": "diss7",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "2": 1,
+        "8": 1,
+        "15": 1
+      },
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "jump_high_spikes.spn",
+      "param_path": "spike_right_base.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-19276",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "invert.pp",
+      "param_path_hash": "edc78320",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "False",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-1247233",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "brightness.pp",
+      "param_path_hash": "f646d5e7",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 137.154
+      },
+      "step": "False",
+      "default": 0.5,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-65408",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level7b_fingers_set.spn",
+      "param_path": "fingers1_unison.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {},
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ending_sequence_colors.flow",
+      "param_path_hash": "1814bfd4",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "1": 1,
+        "4": 1,
+        "14": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-13622128",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "skybox_colors.flow",
+      "param_path": "light_green",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "20": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,2,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-6836612",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "avatar.lib",
+      "param_path": "invulnerability_beats",
+      "trait_type": "kTraitInt",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "6": 176.98
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "levels.pp",
+      "param_path": "b_gamma",
+      "trait_type": "kTraitFloat",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "7": 79.21,
+        "10": 94.802,
+        "20": 66.684
+      },
+      "step": "False",
+      "default": 1.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-16776961",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level_tree1_angled_set.spn",
+      "param_path": "trees_8.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "12": 1,
+        "15": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "ring_pulse.spn",
+      "param_path": "ring_pulse_yellow_high.ent",
+      "trait_type": "kTraitBool",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "9": 1,
+        "11": 1,
+        "20": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    },
+    {
+      "obj_name": "level2b_fingers_set.spn",
+      "param_path": "fingers1_gate.ent",
+      "trait_type": "kTraitAction",
+      "default_interp": "kTraitInterpLinear",
+      "data_points": {
+        "0": 1,
+        "13": 1,
+        "21": 1
+      },
+      "step": "True",
+      "default": 0.0,
+      "footer": "2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0",
+      "editor_data": [
+        "-8355585",
+        1.0
+      ]
+    }
+  ],
+  "beat_cnt": 22,
+  "time_sig": "4/4"
+}
