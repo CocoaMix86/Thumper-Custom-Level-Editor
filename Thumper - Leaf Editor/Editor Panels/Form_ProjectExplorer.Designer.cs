@@ -62,7 +62,9 @@
             this.contextMenuFolderClick = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolstripFolderNew = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuAddFile = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.existingItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,8 +83,6 @@
             this.toolStripMultiCut = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMultiCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMultiDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.existingItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripExplorer.SuspendLayout();
             this.contextMenuFilters.SuspendLayout();
             this.contextMenuFileClick.SuspendLayout();
@@ -93,6 +93,7 @@
             // 
             // treeView1
             // 
+            this.treeView1.AllowDrop = true;
             this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -111,7 +112,11 @@
             this.treeView1.ShowLines = false;
             this.treeView1.Size = new System.Drawing.Size(357, 405);
             this.treeView1.TabIndex = 0;
+            this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
             this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
+            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
+            this.treeView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
+            this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
             this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
             this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
             // 
@@ -192,6 +197,7 @@
             this.filterMaster,
             this.filterSample});
             this.contextMenuFilters.Name = "workingfolderRightClick";
+            this.contextMenuFilters.OwnerItem = this.btnFilter;
             this.contextMenuFilters.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuFilters.Size = new System.Drawing.Size(114, 114);
             this.contextMenuFilters.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextMenuFilters_Closing);
@@ -395,7 +401,7 @@
             this.toolstripFileDelete.ForeColor = System.Drawing.Color.White;
             this.toolstripFileDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
             this.toolstripFileDelete.Name = "toolstripFileDelete";
-            this.toolstripFileDelete.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFileDelete.Size = new System.Drawing.Size(166, 22);
             this.toolstripFileDelete.Text = "Delete";
             this.toolstripFileDelete.Click += new System.EventHandler(this.toolstripFileDelete_Click);
             // 
@@ -466,8 +472,16 @@
             this.toolStripMenuItem8,
             this.toolStripMenuItem9});
             this.contextMenuAddFile.Name = "workingfolderRightClick";
+            this.contextMenuAddFile.OwnerItem = this.toolstripFolderNew;
             this.contextMenuAddFile.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new System.Drawing.Size(152, 164);
+            // 
+            // existingItemToolStripMenuItem
+            // 
+            this.existingItemToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.existingItemToolStripMenuItem.Name = "existingItemToolStripMenuItem";
+            this.existingItemToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.existingItemToolStripMenuItem.Text = "Existing Item...";
             // 
             // folderToolStripMenuItem
             // 
@@ -475,8 +489,13 @@
             this.folderToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.folderToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
             this.folderToolStripMenuItem.Name = "folderToolStripMenuItem";
-            this.folderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.folderToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.folderToolStripMenuItem.Text = "New Folder";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(148, 6);
             // 
             // toolStripMenuItem5
             // 
@@ -484,7 +503,7 @@
             this.toolStripMenuItem5.ForeColor = System.Drawing.Color.PaleGreen;
             this.toolStripMenuItem5.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem5.Text = "Leaf";
             // 
             // toolStripMenuItem6
@@ -493,7 +512,7 @@
             this.toolStripMenuItem6.ForeColor = System.Drawing.Color.Green;
             this.toolStripMenuItem6.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem6.Text = "Lvl";
             // 
             // toolStripMenuItem7
@@ -502,7 +521,7 @@
             this.toolStripMenuItem7.ForeColor = System.Drawing.Color.Orange;
             this.toolStripMenuItem7.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem7.Text = "Gate";
             // 
             // toolStripMenuItem8
@@ -511,7 +530,7 @@
             this.toolStripMenuItem8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
             this.toolStripMenuItem8.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem8.Text = "Master";
             // 
             // toolStripMenuItem9
@@ -520,14 +539,14 @@
             this.toolStripMenuItem9.ForeColor = System.Drawing.Color.Turquoise;
             this.toolStripMenuItem9.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem9.Text = "Sample";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(159, 6);
             // 
             // toolstripFolderCut
             // 
@@ -535,7 +554,7 @@
             this.toolstripFolderCut.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderCut.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
             this.toolstripFolderCut.Name = "toolstripFolderCut";
-            this.toolstripFolderCut.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderCut.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderCut.Text = "Cut";
             this.toolstripFolderCut.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -545,7 +564,7 @@
             this.toolstripFolderCopy.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolstripFolderCopy.Name = "toolstripFolderCopy";
-            this.toolstripFolderCopy.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderCopy.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderCopy.Text = "Copy";
             this.toolstripFolderCopy.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -556,7 +575,7 @@
             this.toolstripFolderPaste.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
             this.toolstripFolderPaste.Name = "toolstripFolderPaste";
-            this.toolstripFolderPaste.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderPaste.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderPaste.Text = "Paste";
             this.toolstripFolderPaste.Click += new System.EventHandler(this.toolstripFolderPaste_Click);
             // 
@@ -576,14 +595,14 @@
             this.toolstripFolderRename.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderRename.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
             this.toolstripFolderRename.Name = "toolstripFolderRename";
-            this.toolstripFolderRename.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderRename.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderRename.Text = "Rename";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(159, 6);
             // 
             // toolstripFolderCopyPath
             // 
@@ -591,7 +610,7 @@
             this.toolstripFolderCopyPath.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderCopyPath.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolstripFolderCopyPath.Name = "toolstripFolderCopyPath";
-            this.toolstripFolderCopyPath.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderCopyPath.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderCopyPath.Text = "Copy File Path";
             this.toolstripFolderCopyPath.Click += new System.EventHandler(this.copyFilePathToolStripMenuItem1_Click);
             // 
@@ -601,7 +620,7 @@
             this.toolstripFolderExplorer.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderExplorer.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_explorer;
             this.toolstripFolderExplorer.Name = "toolstripFolderExplorer";
-            this.toolstripFolderExplorer.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderExplorer.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderExplorer.Text = "Open In Explorer";
             this.toolstripFolderExplorer.Click += new System.EventHandler(this.toolstripFolderExplorer_Click);
             // 
@@ -614,7 +633,7 @@
             this.toolStripMultiDelete});
             this.contextMenuMulti.Name = "contextMenuFolderClick";
             this.contextMenuMulti.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuMulti.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuMulti.Size = new System.Drawing.Size(108, 70);
             // 
             // toolStripMultiCut
             // 
@@ -622,7 +641,7 @@
             this.toolStripMultiCut.ForeColor = System.Drawing.Color.White;
             this.toolStripMultiCut.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
             this.toolStripMultiCut.Name = "toolStripMultiCut";
-            this.toolStripMultiCut.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMultiCut.Size = new System.Drawing.Size(107, 22);
             this.toolStripMultiCut.Text = "Cut";
             this.toolStripMultiCut.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -632,7 +651,7 @@
             this.toolStripMultiCopy.ForeColor = System.Drawing.Color.White;
             this.toolStripMultiCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolStripMultiCopy.Name = "toolStripMultiCopy";
-            this.toolStripMultiCopy.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMultiCopy.Size = new System.Drawing.Size(107, 22);
             this.toolStripMultiCopy.Text = "Copy";
             this.toolStripMultiCopy.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -642,21 +661,9 @@
             this.toolStripMultiDelete.ForeColor = System.Drawing.Color.White;
             this.toolStripMultiDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
             this.toolStripMultiDelete.Name = "toolStripMultiDelete";
-            this.toolStripMultiDelete.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMultiDelete.Size = new System.Drawing.Size(107, 22);
             this.toolStripMultiDelete.Text = "Delete";
             this.toolStripMultiDelete.Click += new System.EventHandler(this.toolstripFileDelete_Click);
-            // 
-            // existingItemToolStripMenuItem
-            // 
-            this.existingItemToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.existingItemToolStripMenuItem.Name = "existingItemToolStripMenuItem";
-            this.existingItemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.existingItemToolStripMenuItem.Text = "Existing Item...";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
             // 
             // Form_ProjectExplorer
             // 

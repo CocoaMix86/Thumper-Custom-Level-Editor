@@ -38,8 +38,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         bool filterenabled = false;
         bool filtersearch = false;
-        //string selectednodefilepath { get { return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{treeView1.SelectedNode.FullPath}"; } }
-        DirectoryInfo projectfolder = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
+        DirectoryInfo projectfolder = new DirectoryInfo(@"C:\Users\austin.peters\source\repos\Thumper-Custom-Level-Editor\Thumper - Leaf Editor\bin\Debug\test");
         List<TreeNode> filestocopy;
         bool cutfile;
 
@@ -370,6 +369,49 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripFolderRename.Enabled = selectedNodes.Count == 1;
             toolstripFolderNew.Enabled = selectedNodes.Count == 1;
             toolstripFolderCopyPath.Visible = selectedNodes.Count == 1;
+        }
+
+
+        private void treeView1_ItemDrag(object sender, ItemDragEventArgs e) => DoDragDrop(e.Item, DragDropEffects.Move);
+        private void treeView1_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+        TreeNode previousDragOver = null;
+        private void treeView1_DragOver(object sender, DragEventArgs e)
+        {
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = treeView1.PointToClient(new Point(e.X, e.Y));
+            // Retrieve the node at the drop location.
+            TreeNode targetNode = treeView1.GetNodeAt(targetPoint);
+            if (previousDragOver != targetNode && previousDragOver != null) {
+                if (selectedNodes.Contains(previousDragOver))
+                    previousDragOver.BackColor = Color.FromArgb(56, 56, 56);
+                else
+                    previousDragOver.BackColor = treeView1.BackColor;
+            }
+            if (targetNode != null && targetNode != previousDragOver) {
+                targetNode.BackColor = Color.FromArgb(64, 53, 130);
+                previousDragOver = targetNode;
+            }
+        }
+        private void treeView1_DragDrop(object sender, DragEventArgs e)
+        {
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = treeView1.PointToClient(new Point(e.X, e.Y));
+            // Retrieve the node at the drop location.
+            TreeNode targetNode = treeView1.GetNodeAt(targetPoint);
+            // Retrieve the node that was dragged.
+            TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+            // Confirm that the node at the drop location is not 
+            // the dragged node and that target node isn't null
+            // (for example if you drag outside the control)
+            if (!draggedNode.Equals(targetNode) && targetNode != null) {
+                // Remove the node from its current 
+                // location and add it to the node at the drop location.
+                draggedNode.Remove();
+                targetNode.Nodes.Add(draggedNode);
+                // Expand the node at the location 
+                // to show the dropped node.
+                targetNode.Expand();
+            }
         }
 
         private string GetNodeFilePath(TreeNode _node)
