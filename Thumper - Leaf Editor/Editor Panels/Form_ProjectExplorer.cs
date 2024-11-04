@@ -314,9 +314,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                 }
             }
+            //if single click and holding on an already selected node, do nothing else
+            else if (selectedNodes.Contains(currentNode)) return;
+            //if right-clicking on a selected node, do nothing else
+            else if (e.Button == MouseButtons.Right && selectedNodes.Contains(currentNode)) return;
             else {
-                if (e.Button == MouseButtons.Right && selectedNodes.Contains(currentNode))
-                    return;
                 List<TreeNode> addedNodes = new();
                 List<TreeNode> removedNodes = new();
                 removedNodes.AddRange(selectedNodes);
@@ -329,7 +331,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 changeSelection(addedNodes, removedNodes);
                 previousNode = currentNode;
             }
-
+            //change contextmenus of nodes based on how many are selected
+            //and what types are selected
             if (selectedNodes.Where(x => x.ImageKey == "folder").Count() > 0 && selectedNodes.Where(x => x.ImageKey != "folder").Count() > 0) {
                 foreach (TreeNode tn in selectedNodes) {
                     tn.ContextMenuStrip = contextMenuMulti;
@@ -343,6 +346,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         tn.ContextMenuStrip = contextMenuFileClick;
                 }
             }
+        }
+        private void treeView1_MouseUp(object sender, MouseEventArgs e)
+        {
+            /*
+            TreeNode currentNode = treeView1.GetNodeAt(e.Location);
+            if (currentNode == null) return;
+            if (selectedNodes.Contains(currentNode)) return;
+            if (e.Button != MouseButtons.Right) {
+                //currentNode.BackColor = treeView1.BackColor;
+                //currentNode.ForeColor = treeView1.ForeColor;
+            }
+
+            bool control = (ModifierKeys == Keys.Control);
+            bool shift = (ModifierKeys == Keys.Shift);*/
         }
 
         protected void changeSelection(List<TreeNode> addedNodes, List<TreeNode> removedNodes)
