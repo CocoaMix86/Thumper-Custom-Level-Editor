@@ -256,8 +256,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TreeNode currentNode = treeView1.GetNodeAt(e.Location);
             if (currentNode == null) return;
             if (e.Button != MouseButtons.Right) {
-                currentNode.BackColor = treeView1.BackColor;
-                currentNode.ForeColor = treeView1.ForeColor;
+                //currentNode.BackColor = treeView1.BackColor;
+                //currentNode.ForeColor = treeView1.ForeColor;
             }
 
             bool control = (ModifierKeys == Keys.Control);
@@ -412,6 +412,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // to show the dropped node.
                 targetNode.Expand();
             }
+            targetNode.BackColor = treeView1.BackColor;
         }
 
         private string GetNodeFilePath(TreeNode _node)
