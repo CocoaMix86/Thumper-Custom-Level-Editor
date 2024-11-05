@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Documents;
+using System.IO.Packaging;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -38,7 +39,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         bool filterenabled = false;
         bool filtersearch = false;
-        DirectoryInfo projectfolder = new DirectoryInfo(@"C:\Users\austin.peters\source\repos\Thumper-Custom-Level-Editor\Thumper - Leaf Editor\bin\Debug\test");
+        DirectoryInfo projectfolder = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
         List<TreeNode> filestocopy;
         bool cutfile;
 
@@ -363,7 +364,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool control = (ModifierKeys == Keys.Control);
             bool shift = (ModifierKeys == Keys.Shift);
 
-            if (control || shift)
+            if (control || shift || e.Button == MouseButtons.Right)
                 return;
 
             List<TreeNode> addedNodes = new();
@@ -481,6 +482,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private string GetNodeFilePath(TreeNode _node)
         {
             return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{_node.FullPath}";
+        }
+
+        string renamefile;
+        private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            renamefile = e.Node.FullPath;
+        }
+        private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
+            string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{e.Node.FullPath}";
+            if (e.Node.ImageKey == "folder") {
+                Directory.Move(source, dest);
+            }
+            else {
+                File.Move(source, dest);
+            }
         }
     }
 }
