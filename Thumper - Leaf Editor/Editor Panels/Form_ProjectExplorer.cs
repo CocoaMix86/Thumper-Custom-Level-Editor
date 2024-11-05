@@ -395,11 +395,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void contextMenuFileClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //depending on number of items selected, alter the contextmenu
             toolstripFileRename.Enabled = selectedNodes.Count == 1;
             toolstripFileCopyPath.Visible = selectedNodes.Count == 1;
         }
         private void contextMenuFolderClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //depending on number of items selected, alter the contextmenu
             toolstripFolderRename.Enabled = selectedNodes.Count == 1;
             toolstripFolderNew.Enabled = selectedNodes.Count == 1;
             toolstripFolderCopyPath.Visible = selectedNodes.Count == 1;
@@ -415,6 +417,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Point targetPoint = treeView1.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             TreeNode targetNode = treeView1.GetNodeAt(targetPoint);
+            //changing the hovered node backcolor to make it obvious where the destination will be
             if (previousDragOver != targetNode && previousDragOver != null) {
                 if (selectedNodes.Contains(previousDragOver))
                     previousDragOver.BackColor = Color.FromArgb(56, 56, 56);
@@ -440,12 +443,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     previousDragOver.BackColor = treeView1.BackColor;
                 return;
             }
+            // Can't move a source to itself
             if (selectedNodes.Contains(targetNode)) {
                 MessageBox.Show("Cannot move the selected items. The destination is included in the selection.", "Thumper Custom Level Editor");
                 targetNode.BackColor = Color.FromArgb(56, 56, 56);
                 return;
             }
-
+            //check if destination contains any of the moved items
+            //if so, cancel the whole operation
             foreach (TreeNode tn in selectedNodes) {
                 string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
                 if (File.Exists(dest) || Directory.Exists(dest)) {
@@ -454,6 +459,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
             }
+            //Finally, move each selected item to the destination
             foreach (TreeNode tn in selectedNodes) {
                 string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
                 string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
@@ -468,24 +474,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 targetNode.Nodes.Add(tn);
                 targetNode.Expand();
             }
-
-
-
-            /*
-            // Retrieve the node that was dragged.
-            TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
-            // Confirm that the node at the drop location is not 
-            // the dragged node and that target node isn't null
-            // (for example if you drag outside the control)
-            if (!draggedNode.Equals(targetNode) && targetNode != null) {
-                // Remove the node from its current 
-                // location and add it to the node at the drop location.
-                draggedNode.Remove();
-                targetNode.Nodes.Add(draggedNode);
-                // Expand the node at the location 
-                // to show the dropped node.
-                targetNode.Expand();
-            }*/
+            // set destination folder backcolor back to normal to get rid of highlight
             targetNode.BackColor = treeView1.BackColor;
         }
 
