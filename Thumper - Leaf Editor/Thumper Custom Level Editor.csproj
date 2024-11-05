@@ -110,9 +110,6 @@
     <Compile Include="Editor Panels\GeneralFunctions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor Panels\DockingPanels.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Editor Panels\RecentFiles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,9 +124,6 @@
     </Compile>
     <Compile Include="Other Forms\FileNameDialog.Designer.cs">
       <DependentUpon>FileNameDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Other Forms\ResizeablePanel.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -160,12 +154,6 @@
     </Compile>
     <Compile Include="Other Forms\ImageMessageBox.Designer.cs">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Other Forms\Interpolator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\Interpolator.Designer.cs">
-      <DependentUpon>Interpolator.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor Panels\Leaf_Editor.cs">
       <SubType>Form</SubType>
@@ -234,9 +222,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Other Forms\ImageMessageBox.resx">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\Interpolator.resx">
-      <DependentUpon>Interpolator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThumperEditor.resx">
       <DependentUpon>ThumperEditor.cs</DependentUpon>
@@ -460,11 +445,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="audio assets\ee\" />
-    <Folder Include="audio assets\heck\" />
-    <Folder Include="LevelDataClasses\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="CustomMarshalers" />
     <Reference Include="Microsoft.CSharp" />

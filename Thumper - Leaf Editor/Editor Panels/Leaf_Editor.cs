@@ -40,7 +40,6 @@ namespace Thumper_Custom_Level_Editor
 						lockedfiles.Remove(loadedleaf);
 					}
 					loadedleaf = value;
-					ShowPanel(true, panelLeaf);
 					PanelEnableState(panelLeaf, true);
 
                     if (!File.Exists(loadedleaf)) {
@@ -1587,7 +1586,6 @@ namespace Thumper_Custom_Level_Editor
 			//check for template or regular file
 			if (filepath == "template") {
 				_loadedleaf = null;
-				ShowPanel(true, panelLeaf);
                 PanelEnableState(panelLeaf, true);
             }
 			else {

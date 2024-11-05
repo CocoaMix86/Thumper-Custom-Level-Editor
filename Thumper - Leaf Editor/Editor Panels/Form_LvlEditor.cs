@@ -50,7 +50,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         _mainform.lockedfiles.Remove(loadedlvl);
                     }
                     loadedlvl = value;
-                    _mainform.ShowPanel(true, panelLevel);
                     _mainform.PanelEnableState(panelLevel, true);
 
                     if (!File.Exists(loadedlvl)) {

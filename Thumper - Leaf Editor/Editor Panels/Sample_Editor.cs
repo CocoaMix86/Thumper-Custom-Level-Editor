@@ -36,7 +36,6 @@ namespace Thumper_Custom_Level_Editor
 						lockedfiles.Remove(loadedsample);
 					}
 					loadedsample = value;
-					ShowPanel(true, panelSample);
                     PanelEnableState(panelSample, true);
 
                     if (!File.Exists(loadedsample)) {

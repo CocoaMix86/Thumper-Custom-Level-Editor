@@ -124,7 +124,6 @@ namespace Thumper_Custom_Level_Editor
             PanelEnableState(panelSample, false);
             //set custom renderer
             menuStrip.Renderer = new MyRenderer();
-            contextMenuDock.Renderer = new MyRenderer();
             workingfolderRightClick.Renderer = new MyRenderer();
             contextMenuNewFile.Renderer = new MyRenderer();
             //toolstrip overrides
@@ -245,12 +244,14 @@ namespace Thumper_Custom_Level_Editor
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
             //set panels to their last saved dock
+            /*
             SetDockLocations();
             splitHorizontal.SplitterDistance = (settings.splitterHorz1 == 0) ? splitHorizontal.Height / 2 : settings.splitterHorz1;
             splitTop1.SplitterDistance = (settings.splitterVert1 == 0) ? splitTop1.Width / 3 : settings.splitterVert1;
             splitTop2.SplitterDistance = (settings.splitterVert2 == 0) ? splitTop2.Width / 2 : settings.splitterVert2;
             splitBottom1.SplitterDistance = (settings.splitterVert3 == 0) ? splitBottom1.Width / 3 : settings.splitterVert3;
             splitBottom2.SplitterDistance = (settings.splitterVert4 == 0) ? splitBottom2.Width / 2 : settings.splitterVert4;
+            */
             //finalize boot
             PlaySound("UIboot");
             ///version check
@@ -324,11 +325,13 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.beeblesize = pictureBeeble.Size;
             Properties.Settings.Default.beebleloc = pictureBeeble.Location;
             //splitter distances
+            /*
             Properties.Settings.Default.splitterHorz1 = splitHorizontal.SplitterDistance;
             Properties.Settings.Default.splitterVert1 = splitTop1.SplitterDistance;
             Properties.Settings.Default.splitterVert2 = splitTop2.SplitterDistance;
             Properties.Settings.Default.splitterVert3 = splitBottom1.SplitterDistance;
             Properties.Settings.Default.splitterVert4 = splitBottom2.SplitterDistance;
+            */
             //zoom settings
             Properties.Settings.Default.leafzoom = trackZoom.Value;
             Properties.Settings.Default.leafzoomvert = trackZoomVert.Value;
@@ -377,7 +380,7 @@ namespace Thumper_Custom_Level_Editor
         ///Toolstrip - INTERPOLATOR
         private void interpolatorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Interpolator().Show();
+            //new Interpolator().Show();
             PlaySound("UIinterpolatewindow");
         }
 
@@ -386,7 +389,6 @@ namespace Thumper_Custom_Level_Editor
         private void leafEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (leafEditorToolStripMenuItem.Checked) PlaySound("UIwindowopen"); else PlaySound("UIwindowclose");
-            UndockPanel(panelLeaf);
             panelLeaf.Visible = leafEditorToolStripMenuItem.Checked;
             panelLeaf.BringToFront();
         }
@@ -394,7 +396,6 @@ namespace Thumper_Custom_Level_Editor
         private void levelEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (levelEditorToolStripMenuItem.Checked) PlaySound("UIwindowopen"); else PlaySound("UIwindowclose");
-            UndockPanel(panelLevel);
             panelLevel.Visible = levelEditorToolStripMenuItem.Checked;
             panelLevel.BringToFront();
         }
@@ -402,7 +403,6 @@ namespace Thumper_Custom_Level_Editor
         private void gateEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (gateEditorToolStripMenuItem.Checked) PlaySound("UIwindowopen"); else PlaySound("UIwindowclose");
-            UndockPanel(panelGate);
             panelGate.Visible = gateEditorToolStripMenuItem.Checked;
             panelGate.BringToFront();
         }
@@ -410,7 +410,6 @@ namespace Thumper_Custom_Level_Editor
         private void masterEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (masterEditorToolStripMenuItem.Checked) PlaySound("UIwindowopen"); else PlaySound("UIwindowclose");
-            UndockPanel(panelMaster);
             panelMaster.Visible = masterEditorToolStripMenuItem.Checked;
             panelMaster.BringToFront();
         }
@@ -418,7 +417,6 @@ namespace Thumper_Custom_Level_Editor
         private void workingFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (workingFolderToolStripMenuItem.Checked) PlaySound("UIwindowopen"); else PlaySound("UIwindowclose");
-            UndockPanel(panelWorkingFolder);
             panelWorkingFolder.Visible = workingFolderToolStripMenuItem.Checked;
             panelWorkingFolder.BringToFront();
         }
@@ -426,10 +424,11 @@ namespace Thumper_Custom_Level_Editor
         private void sampleEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (sampleEditorToolStripMenuItem.Checked) PlaySound("UIwindowopen"); else PlaySound("UIwindowclose");
-            UndockPanel(panelSample);
             panelSample.Visible = sampleEditorToolStripMenuItem.Checked;
             panelSample.BringToFront();
         }
+        private void ResetBeeble(object sender, EventArgs e)
+        { }
 
         ///Toolstrip - HELP
         //About...
@@ -891,6 +890,11 @@ namespace Thumper_Custom_Level_Editor
                     CopyDirectory(subDir.FullName, newDestinationDir, true);
                 }
             }
+        }
+
+        private void editorpanelDoubleClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

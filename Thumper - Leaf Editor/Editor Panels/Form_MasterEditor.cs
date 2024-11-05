@@ -45,8 +45,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         _mainform.lockedfiles.Remove(loadedmaster);
                     }
                     loadedmaster = value;
-                    _mainform.ShowPanel(true, panelMaster);
-                    _mainform.PanelEnableState(panelMaster, true);
 
                     if (!File.Exists(loadedmaster)) {
                         File.WriteAllText(loadedmaster, "");

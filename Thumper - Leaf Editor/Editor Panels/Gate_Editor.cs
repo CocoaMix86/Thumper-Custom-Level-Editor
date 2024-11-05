@@ -33,7 +33,6 @@ namespace Thumper_Custom_Level_Editor
 						lockedfiles.Remove(loadedgate);
 					}
 					loadedgate = value;
-					ShowPanel(true, panelGate);
                     PanelEnableState(panelGate, true);
 					dropGateSection.SelectedIndex = 0;
 

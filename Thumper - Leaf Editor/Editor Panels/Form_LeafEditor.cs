@@ -31,7 +31,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         int _beats { get { return (int)numericUpDown_LeafLength.Value; } }
         int _selecttrack = 0;
 
-        string _errorlog = "";
         public string _loadedleaf
         {
             get { return loadedleaf; }
@@ -50,7 +49,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         _mainform.lockedfiles.Remove(loadedleaf);
                     }
                     loadedleaf = value;
-                    _mainform.ShowPanel(true, panelLeaf);
                     _mainform.PanelEnableState(panelLeaf, true);
 
                     if (!File.Exists(loadedleaf)) {
@@ -1597,7 +1595,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check for template or regular file
             if (filepath == "template") {
                 _loadedleaf = null;
-                _mainform.ShowPanel(true, panelLeaf);
                 _mainform.PanelEnableState(panelLeaf, true);
             }
             else {

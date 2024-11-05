@@ -39,7 +39,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         bool filterenabled = false;
         bool filtersearch = false;
-        DirectoryInfo projectfolder = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
+        DirectoryInfo projectfolder = new DirectoryInfo(@"C:\Users\austin.peters\source\repos\Thumper-Custom-Level-Editor\Thumper - Leaf Editor\bin\Debug\test");
         List<TreeNode> filestocopy;
         bool cutfile;
         string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
@@ -267,15 +267,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         List<TreeNode> selectedNodes = new();
         TreeNode previousNode;
-        TreeNode previousNodeMouseUp;
         private void treeView1_MouseDown(object sender, MouseEventArgs e)
         {
             TreeNode currentNode = treeView1.GetNodeAt(e.Location);
             if (currentNode == null) return;
-            if (e.Button != MouseButtons.Right) {
-                //currentNode.BackColor = treeView1.BackColor;
-                //currentNode.ForeColor = treeView1.ForeColor;
-            }
 
             bool control = (ModifierKeys == Keys.Control);
             bool shift = (ModifierKeys == Keys.Shift);
@@ -470,6 +465,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if destination contains any of the moved items
             //if so, cancel the whole operation
             foreach (TreeNode tn in selectedNodes) {
+                string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
                 string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
                 if (File.Exists(dest) || Directory.Exists(dest)) {
                     MessageBox.Show($"Cannot move the item '{tn.Name}'. An item with that name already exists in the destination folder.", "Thumper Custom Level Editor");

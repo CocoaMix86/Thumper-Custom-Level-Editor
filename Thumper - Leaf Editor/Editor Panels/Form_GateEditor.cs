@@ -42,7 +42,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         _mainform.lockedfiles.Remove(loadedgate);
                     }
                     loadedgate = value;
-                    _mainform.ShowPanel(true, panelGate);
                     _mainform.PanelEnableState(panelGate, true);
                     dropGateSection.SelectedIndex = 0;
 
