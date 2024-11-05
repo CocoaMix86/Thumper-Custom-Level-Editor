@@ -107,6 +107,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        private void treeView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete) toolstripFileDelete_Click(null, null);
+            if (e.KeyCode == Keys.F2 && selectedNodes.Count == 1) selectedNodes[0].BeginEdit();
+        }
+
         ///
         ///Filters and Search handling
         private void filter_CheckChanged(object sender, EventArgs e) => CreateTreeView();
@@ -185,10 +191,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     File.Delete(source);
                 tn.Remove();
             }
-        }
-        private void treeView1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete) toolstripFileDelete_Click(null, null);
         }
         ///
         ///
@@ -370,11 +372,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (control || shift || currentNode == null)
                 return;
-            if (currentNode == previousNodeMouseUp) {
+            /*
+            if (currentNode == previousNodeMouseUp && e.Button != MouseButtons.Right) {
                 currentNode.BeginEdit();
                 return;
             }
-            previousNodeMouseUp = currentNode;
+            previousNodeMouseUp = currentNode;*/
             if (e.Button == MouseButtons.Right)
                 return;
 
@@ -517,13 +520,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //check for not allowed characters in file path
             if (notallowedchars.Any(c => node.Text.Contains(c)) || node.Text is "." or "..") {
-                MessageBox.Show($"File and Folder names cannot:\n- contain any of the following characters: / ? : & \\ * \" < > | # %\n- be '.' or '..'\n\nPlease enter a valid name.");
+                MessageBox.Show($"File and Folder names cannot:\n- contain any of the following characters: / ? : & \\ * \" < > | # %\n- be '.' or '..'\n\nPlease enter a valid name.", "Thumper Custom Level Editor");
                 node.Text = renamenode;
                 return;
             }
-
             string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
             string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{node.FullPath}";
+            //check for changing file extension
+            if (node.ImageKey != "folder" && Path.GetExtension(source) != Path.GetExtension(dest)) {
+                if (MessageBox.Show("If you chaneg a file name extension, the file may become\nunusable. Are you sure you want to change it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    node.Text = renamenode;
+                    return;
+                }
+            }
+            //move the folder or file
             if (node.ImageKey == "folder") {
                 Directory.Move(source, dest);
             }

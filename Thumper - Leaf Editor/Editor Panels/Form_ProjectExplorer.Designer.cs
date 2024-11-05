@@ -384,7 +384,8 @@
             this.toolstripFileCut.ForeColor = System.Drawing.Color.White;
             this.toolstripFileCut.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
             this.toolstripFileCut.Name = "toolstripFileCut";
-            this.toolstripFileCut.Size = new System.Drawing.Size(166, 22);
+            this.toolstripFileCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.toolstripFileCut.Size = new System.Drawing.Size(180, 22);
             this.toolstripFileCut.Text = "Cut";
             this.toolstripFileCut.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -394,7 +395,8 @@
             this.toolstripFileCopy.ForeColor = System.Drawing.Color.White;
             this.toolstripFileCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolstripFileCopy.Name = "toolstripFileCopy";
-            this.toolstripFileCopy.Size = new System.Drawing.Size(166, 22);
+            this.toolstripFileCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.toolstripFileCopy.Size = new System.Drawing.Size(180, 22);
             this.toolstripFileCopy.Text = "Copy";
             this.toolstripFileCopy.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -404,7 +406,8 @@
             this.toolstripFileDelete.ForeColor = System.Drawing.Color.White;
             this.toolstripFileDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
             this.toolstripFileDelete.Name = "toolstripFileDelete";
-            this.toolstripFileDelete.Size = new System.Drawing.Size(166, 22);
+            this.toolstripFileDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.toolstripFileDelete.Size = new System.Drawing.Size(180, 22);
             this.toolstripFileDelete.Text = "Delete";
             this.toolstripFileDelete.Click += new System.EventHandler(this.toolstripFileDelete_Click);
             // 
@@ -414,6 +417,7 @@
             this.toolstripFileRename.ForeColor = System.Drawing.Color.White;
             this.toolstripFileRename.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
             this.toolstripFileRename.Name = "toolstripFileRename";
+            this.toolstripFileRename.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.toolstripFileRename.Size = new System.Drawing.Size(180, 22);
             this.toolstripFileRename.Text = "Rename";
             this.toolstripFileRename.Click += new System.EventHandler(this.toolstripFileRename_Click);
@@ -451,7 +455,7 @@
             this.toolstripFolderExplorer});
             this.contextMenuFolderClick.Name = "contextMenuFolderClick";
             this.contextMenuFolderClick.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuFolderClick.Size = new System.Drawing.Size(181, 214);
+            this.contextMenuFolderClick.Size = new System.Drawing.Size(163, 192);
             this.contextMenuFolderClick.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuFolderClick_Opening);
             // 
             // toolstripFolderNew
@@ -460,7 +464,7 @@
             this.toolstripFolderNew.DropDown = this.contextMenuAddFile;
             this.toolstripFolderNew.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderNew.Name = "toolstripFolderNew";
-            this.toolstripFolderNew.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderNew.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderNew.Text = "Add";
             // 
             // contextMenuAddFile
@@ -476,7 +480,6 @@
             this.toolStripMenuItem8,
             this.toolStripMenuItem9});
             this.contextMenuAddFile.Name = "workingfolderRightClick";
-            this.contextMenuAddFile.OwnerItem = this.toolstripFolderNew;
             this.contextMenuAddFile.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new System.Drawing.Size(152, 164);
             // 
@@ -558,7 +561,8 @@
             this.toolstripFolderCut.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderCut.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
             this.toolstripFolderCut.Name = "toolstripFolderCut";
-            this.toolstripFolderCut.Size = new System.Drawing.Size(162, 22);
+            this.toolstripFolderCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.toolstripFolderCut.Size = new System.Drawing.Size(180, 22);
             this.toolstripFolderCut.Text = "Cut";
             this.toolstripFolderCut.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -568,7 +572,8 @@
             this.toolstripFolderCopy.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolstripFolderCopy.Name = "toolstripFolderCopy";
-            this.toolstripFolderCopy.Size = new System.Drawing.Size(162, 22);
+            this.toolstripFolderCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.toolstripFolderCopy.Size = new System.Drawing.Size(180, 22);
             this.toolstripFolderCopy.Text = "Copy";
             this.toolstripFolderCopy.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -579,7 +584,8 @@
             this.toolstripFolderPaste.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
             this.toolstripFolderPaste.Name = "toolstripFolderPaste";
-            this.toolstripFolderPaste.Size = new System.Drawing.Size(162, 22);
+            this.toolstripFolderPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.toolstripFolderPaste.Size = new System.Drawing.Size(180, 22);
             this.toolstripFolderPaste.Text = "Paste";
             this.toolstripFolderPaste.Click += new System.EventHandler(this.toolstripFolderPaste_Click);
             // 
@@ -589,7 +595,8 @@
             this.toolstripFolderDelete.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
             this.toolstripFolderDelete.Name = "toolstripFolderDelete";
-            this.toolstripFolderDelete.Size = new System.Drawing.Size(162, 22);
+            this.toolstripFolderDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.toolstripFolderDelete.Size = new System.Drawing.Size(180, 22);
             this.toolstripFolderDelete.Text = "Delete";
             this.toolstripFolderDelete.Click += new System.EventHandler(this.toolstripFileDelete_Click);
             // 
@@ -599,6 +606,7 @@
             this.toolstripFolderRename.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderRename.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
             this.toolstripFolderRename.Name = "toolstripFolderRename";
+            this.toolstripFolderRename.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.toolstripFolderRename.Size = new System.Drawing.Size(180, 22);
             this.toolstripFolderRename.Text = "Rename";
             this.toolstripFolderRename.Click += new System.EventHandler(this.toolstripFileRename_Click);
@@ -638,7 +646,7 @@
             this.toolStripMultiDelete});
             this.contextMenuMulti.Name = "contextMenuFolderClick";
             this.contextMenuMulti.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuMulti.Size = new System.Drawing.Size(108, 70);
+            this.contextMenuMulti.Size = new System.Drawing.Size(181, 92);
             // 
             // toolStripMultiCut
             // 
@@ -646,7 +654,8 @@
             this.toolStripMultiCut.ForeColor = System.Drawing.Color.White;
             this.toolStripMultiCut.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
             this.toolStripMultiCut.Name = "toolStripMultiCut";
-            this.toolStripMultiCut.Size = new System.Drawing.Size(107, 22);
+            this.toolStripMultiCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.toolStripMultiCut.Size = new System.Drawing.Size(180, 22);
             this.toolStripMultiCut.Text = "Cut";
             this.toolStripMultiCut.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -656,7 +665,8 @@
             this.toolStripMultiCopy.ForeColor = System.Drawing.Color.White;
             this.toolStripMultiCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolStripMultiCopy.Name = "toolStripMultiCopy";
-            this.toolStripMultiCopy.Size = new System.Drawing.Size(107, 22);
+            this.toolStripMultiCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.toolStripMultiCopy.Size = new System.Drawing.Size(180, 22);
             this.toolStripMultiCopy.Text = "Copy";
             this.toolStripMultiCopy.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -666,7 +676,8 @@
             this.toolStripMultiDelete.ForeColor = System.Drawing.Color.White;
             this.toolStripMultiDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
             this.toolStripMultiDelete.Name = "toolStripMultiDelete";
-            this.toolStripMultiDelete.Size = new System.Drawing.Size(107, 22);
+            this.toolStripMultiDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.toolStripMultiDelete.Size = new System.Drawing.Size(180, 22);
             this.toolStripMultiDelete.Text = "Delete";
             this.toolStripMultiDelete.Click += new System.EventHandler(this.toolstripFileDelete_Click);
             // 
