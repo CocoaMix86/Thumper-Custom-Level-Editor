@@ -42,6 +42,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         DirectoryInfo projectfolder = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
         List<TreeNode> filestocopy;
         bool cutfile;
+        string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
 
         private void CreateTreeView()
         {
@@ -254,6 +255,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///
         ///
 
+        ///
+        /// Multi-select Handling
         private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
             // cancel selection, the selection will be handled in MouseDown
@@ -262,6 +265,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         List<TreeNode> selectedNodes = new();
         TreeNode previousNode;
+        TreeNode previousNodeMouseUp;
         private void treeView1_MouseDown(object sender, MouseEventArgs e)
         {
             TreeNode currentNode = treeView1.GetNodeAt(e.Location);
@@ -364,7 +368,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool control = (ModifierKeys == Keys.Control);
             bool shift = (ModifierKeys == Keys.Shift);
 
-            if (control || shift || e.Button == MouseButtons.Right)
+            if (control || shift || currentNode == null)
+                return;
+            if (currentNode == previousNodeMouseUp) {
+                currentNode.BeginEdit();
+                return;
+            }
+            previousNodeMouseUp = currentNode;
+            if (e.Button == MouseButtons.Right)
                 return;
 
             List<TreeNode> addedNodes = new();
@@ -393,6 +404,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 selectedNodes.Remove(n);
             }
         }
+        ///
+        ///
 
         private void contextMenuFileClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -408,7 +421,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripFolderCopyPath.Visible = selectedNodes.Count == 1;
         }
 
-
+        ///
+        /// Drag Drop file moving
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e) => DoDragDrop(e.Item, DragDropEffects.Move);
         private void treeView1_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         TreeNode previousDragOver = null;
@@ -478,27 +492,56 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // set destination folder backcolor back to normal to get rid of highlight
             targetNode.BackColor = treeView1.BackColor;
         }
-
-        private string GetNodeFilePath(TreeNode _node)
+        ///
+        ///
+        
+        ///
+        /// Rename handling
+        private void toolstripFileRename_Click(object sender, EventArgs e)
         {
-            return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{_node.FullPath}";
+            TreeNode tn = selectedNodes[0];
+            tn.BeginEdit();
         }
-
         string renamefile;
+        string renamenode;
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             renamefile = e.Node.FullPath;
+            renamenode = e.Node.Name;
         }
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
+            this.BeginInvoke(new Action(() => afterAfterEdit(e.Node)));
+        }
+        private void afterAfterEdit(TreeNode node)
+        {
+            //check for not allowed characters in file path
+            if (notallowedchars.Any(c => node.Text.Contains(c)) || node.Text is "." or "..") {
+                MessageBox.Show($"File and Folder names cannot:\n- contain any of the following characters: / ? : & \\ * \" < > | # %\n- be '.' or '..'\n\nPlease enter a valid name.");
+                node.Text = renamenode;
+                return;
+            }
+
             string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
-            string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{e.Node.FullPath}";
-            if (e.Node.ImageKey == "folder") {
+            string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{node.FullPath}";
+            if (node.ImageKey == "folder") {
                 Directory.Move(source, dest);
             }
             else {
                 File.Move(source, dest);
             }
         }
+        ///
+        ///
+
+
+        #region Functions
+
+        private string GetNodeFilePath(TreeNode _node)
+        {
+            return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{_node.FullPath}";
+        }
+
+        #endregion
     }
 }

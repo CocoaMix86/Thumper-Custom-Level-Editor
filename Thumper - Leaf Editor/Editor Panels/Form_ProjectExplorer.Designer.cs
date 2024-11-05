@@ -414,8 +414,9 @@
             this.toolstripFileRename.ForeColor = System.Drawing.Color.White;
             this.toolstripFileRename.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
             this.toolstripFileRename.Name = "toolstripFileRename";
-            this.toolstripFileRename.Size = new System.Drawing.Size(166, 22);
+            this.toolstripFileRename.Size = new System.Drawing.Size(180, 22);
             this.toolstripFileRename.Text = "Rename";
+            this.toolstripFileRename.Click += new System.EventHandler(this.toolstripFileRename_Click);
             // 
             // toolStripSeparator4
             // 
@@ -450,7 +451,7 @@
             this.toolstripFolderExplorer});
             this.contextMenuFolderClick.Name = "contextMenuFolderClick";
             this.contextMenuFolderClick.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuFolderClick.Size = new System.Drawing.Size(163, 192);
+            this.contextMenuFolderClick.Size = new System.Drawing.Size(181, 214);
             this.contextMenuFolderClick.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuFolderClick_Opening);
             // 
             // toolstripFolderNew
@@ -459,7 +460,7 @@
             this.toolstripFolderNew.DropDown = this.contextMenuAddFile;
             this.toolstripFolderNew.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderNew.Name = "toolstripFolderNew";
-            this.toolstripFolderNew.Size = new System.Drawing.Size(162, 22);
+            this.toolstripFolderNew.Size = new System.Drawing.Size(180, 22);
             this.toolstripFolderNew.Text = "Add";
             // 
             // contextMenuAddFile
@@ -598,8 +599,9 @@
             this.toolstripFolderRename.ForeColor = System.Drawing.Color.White;
             this.toolstripFolderRename.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
             this.toolstripFolderRename.Name = "toolstripFolderRename";
-            this.toolstripFolderRename.Size = new System.Drawing.Size(162, 22);
+            this.toolstripFolderRename.Size = new System.Drawing.Size(180, 22);
             this.toolstripFolderRename.Text = "Rename";
+            this.toolstripFolderRename.Click += new System.EventHandler(this.toolstripFileRename_Click);
             // 
             // toolStripSeparator6
             // 

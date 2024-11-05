@@ -463,7 +463,6 @@
   <ItemGroup>
     <Folder Include="audio assets\ee\" />
     <Folder Include="audio assets\heck\" />
-    <Folder Include="LevelDataClasses\heck\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CustomMarshalers" />
