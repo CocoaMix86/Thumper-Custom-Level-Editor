@@ -220,8 +220,8 @@ namespace Thumper_Custom_Level_Editor
             panelSample.Size = Properties.Settings.Default.sampleeditorsize;
             panelSample.Location = Properties.Settings.Default.sampleeditorloc;
             panelSample.Visible = sampleEditorToolStripMenuItem.Checked = Properties.Settings.Default.sampleeditorvisible;
-            pictureBeeble.Size = Properties.Settings.Default.beeblesize;
-            pictureBeeble.Location = Properties.Settings.Default.beebleloc;
+            //pictureBeeble.Size = Properties.Settings.Default.beeblesize;
+            //pictureBeeble.Location = Properties.Settings.Default.beebleloc;
             //zoom settings
             trackZoom.Value = Properties.Settings.Default.leafzoom;
             trackZoomVert.Value = Properties.Settings.Default.leafzoomvert;
@@ -855,9 +855,9 @@ namespace Thumper_Custom_Level_Editor
             var dockMaster = new Form_MasterEditor(this);
             var dockGate = new Form_GateEditor(this);
             var dockLvl = new Form_LvlEditor(this);
-            var dockSample = new Form_SampleEditor(this, txtFilePath.Text);
+            var dockSample = new Form_SampleEditor(this, workingfolder);
             var dockLeaf = new Form_LeafEditor(this);
-            var dockProject = new Form_ProjectExplorer(this, workingfolder);
+            var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text);
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);
             dockLvl.Show(dockMain, DockState.Document);

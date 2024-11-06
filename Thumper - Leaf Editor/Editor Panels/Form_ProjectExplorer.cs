@@ -376,7 +376,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 foreach (TreeNode tn in selectedNodes) {
-                    if (tn.ImageKey == "folder")
+                    if (tn.ImageKey is "folder" or "project")
                         tn.ContextMenuStrip = contextMenuFolderClick;
                     else
                         tn.ContextMenuStrip = contextMenuFileClick;
@@ -524,6 +524,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             TreeNode tn = selectedNodes[0];
             tn.BeginEdit();
+            for (int i = 0; i < tn.Text.Length - tn.Text.LastIndexOf('.'); i++)
+                SendKeys.Send("+{LEFT}");
         }
         string renamefile;
         string renamenode;
@@ -546,6 +548,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
             string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{node.FullPath}";
+            //check if same name
+            if (renamefile == node.FullPath) {
+                return;
+            }
             //check if name exists already
             if (File.Exists(dest) || Directory.Exists(dest)) {
                 MessageBox.Show($"A file or folder with the name '{node.Text}' already exists on\ndisk at this location. Please choose another name.", "Thumper Custom Level Editor");
