@@ -56,6 +56,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ProjectRoot.ImageKey = "project";
                 ProjectRoot.SelectedImageKey = "project";
                 ProjectRoot.NodeFont = new Font("Microsoft Sans Serif", 8, System.Drawing.FontStyle.Bold);
+                ProjectRoot.ContextMenuStrip = contextMenuFolderClick;
                 //ProjectRoot.Text = $"Project '{ProjectRoot.Text}'";
             }
             //if using filters or search, expand all folders to show all results
@@ -212,7 +213,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFolderPaste_Click(object sender, EventArgs e)
         {
             TreeNode targetnode = selectedNodes[0];
-
             List<TreeNode> parentnodestocopy = new();
             foreach (TreeNode tn in filestocopy) {
                 bool found = IsAChildOfOtherNodes(tn, filestocopy);
@@ -224,7 +224,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
                 string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetnode.FullPath}\{tn.Name}";
                 //check if the destination is within the copied node. If it is, skip this node.
-                if (IsAChildOfOtherNodes(targetnode, tn.Nodes.OfType<TreeNode>().ToList())) {
+                if (IsAChildOfOtherNodes(targetnode, tn)) {
                     MessageBox.Show($"Item '{tn.Name}' not pasted as it contains the destination.", "Thumper Custom Level Editor");
                     continue;
                 }
@@ -257,17 +257,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             targetnode.Expand();
         }
-        private bool IsAChildOfOtherNodes(TreeNode nodetofind, List<TreeNode> searchlist)
+        private bool IsAChildOfOtherNodes(TreeNode nodetofind, TreeNode nodetosearch)
         {
-            bool wasfound = false;
-            foreach (TreeNode tn in searchlist) {
-                if (tn.Nodes.Count > 0) {
-                    if (tn.Nodes.Contains(nodetofind))
-                        return true;
-                    wasfound = IsAChildOfOtherNodes(nodetofind, tn.Nodes.OfType<TreeNode>().ToList());
-                }
+            if (nodetosearch.Nodes.Contains(nodetofind))
+                return true;
+            foreach (TreeNode tn in nodetosearch.Nodes) {
+                if (IsAChildOfOtherNodes(nodetofind, tn))
+                    return true;
             }
-            return wasfound;
+            return false;
+        }
+        private bool IsAChildOfOtherNodes(TreeNode nodetofind, List<TreeNode> nodetosearch)
+        {
+            foreach (TreeNode tn in nodetosearch) {
+                if (tn.Nodes.Contains(nodetofind))
+                    return true;
+                if (IsAChildOfOtherNodes(nodetofind, tn))
+                    return true;
+            }
+            return false;
         }
         ///
         ///
@@ -537,6 +545,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
             string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{node.FullPath}";
+            //check if name exists already
+            if (File.Exists(dest) || Directory.Exists(dest)) {
+                MessageBox.Show($"A file or folder with the name '{node.Text}' already exists on\ndisk at this location. Please choose another name.", "Thumper Custom Level Editor");
+                node.Text = renamenode;
+                return;
+            }
             //check for changing file extension
             if (node.ImageKey != "folder" && Path.GetExtension(source) != Path.GetExtension(dest)) {
                 if (MessageBox.Show("If you chaneg a file name extension, the file may become\nunusable. Are you sure you want to change it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
