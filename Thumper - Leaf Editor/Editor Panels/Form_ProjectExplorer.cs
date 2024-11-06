@@ -486,7 +486,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if destination contains any of the moved items
             //if so, cancel the whole operation
             foreach (TreeNode tn in selectedNodes) {
-                string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
                 string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
                 if (File.Exists(dest) || Directory.Exists(dest)) {
                     MessageBox.Show($"Cannot move the item '{tn.Name}'. An item with that name already exists in the destination folder.", "Thumper Custom Level Editor");
