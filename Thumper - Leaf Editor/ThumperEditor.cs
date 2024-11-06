@@ -185,6 +185,7 @@ namespace Thumper_Custom_Level_Editor
             InitializeGateStuff();
             InitializeSampleStuff();
             //set title bars to be able to move the panels
+            /*
             ControlMover.Init(toolstripTitleLeaf, panelLeaf, ControlMover.direction.Any);
             ControlMover.Init(toolstripTitleLvl, panelLevel, ControlMover.direction.Any);
             ControlMover.Init(toolstripTitleGate, panelGate, ControlMover.direction.Any);
@@ -194,6 +195,7 @@ namespace Thumper_Custom_Level_Editor
             ControlMover.Init(toolstripRecentFiles, panelRecentFiles, ControlMover.direction.Any);
             ControlMover.Init(toolStripChangelog, panelChangelog, ControlMover.direction.Any);
             ControlMover.Init(pictureBeeble, ControlMover.direction.Any);
+            */
             //write required audio files for playback
             InitializeSounds();
             //keybinds

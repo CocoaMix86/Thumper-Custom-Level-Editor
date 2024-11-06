@@ -39,7 +39,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         bool filterenabled = false;
         bool filtersearch = false;
-        DirectoryInfo projectfolder = new DirectoryInfo(@"C:\Users\austin.peters\source\repos\Thumper-Custom-Level-Editor\Thumper - Leaf Editor\bin\Debug\test");
+        DirectoryInfo projectfolder = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
         List<TreeNode> filestocopy;
         bool cutfile;
         string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
@@ -199,7 +199,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Copy and Cut Handling
         private void toolstripFileCopy_Click(object sender, EventArgs e)
         {
-            filestocopy = selectedNodes;
+            filestocopy = selectedNodes.Cast<TreeNode>().ToList();
             toolstripFolderPaste.Enabled = true;
             if ((sender as ToolStripItem).Text == "Cut")
                 cutfile = true;
@@ -211,48 +211,63 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Paste handling
         private void toolstripFolderPaste_Click(object sender, EventArgs e)
         {
-            /*
-            if (!File.Exists(filetocopy) && !Directory.Exists(filetocopy)) {
-                MessageBox.Show($"'{filetocopy}' does not exist.", "Thumper Custom Level Editor");
-                return;
-            }
-            //this is the node being pasted to
-            affectednodes.Add(treeView1.SelectedNode);
+            TreeNode targetnode = selectedNodes[0];
 
-            if (cutfile) {
-                if (copiedpathisfile)
-                    File.Move(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}");
-                else
-                    Directory.Move(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}");
-                cutfile = false;
-                filetocopy = "";
-                toolstripFolderPaste.Enabled = false;
+            List<TreeNode> parentnodestocopy = new();
+            foreach (TreeNode tn in filestocopy) {
+                bool found = IsAChildOfOtherNodes(tn, filestocopy);
+                if (!found)
+                    parentnodestocopy.Add(tn);
             }
-            else {
-                if (copiedpathisfile) {
-                    if (File.Exists($@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}")) {
-                        MessageBox.Show($"'{Path.GetFileName(filetocopy)}' exists in that location already.", "Thumper Custom Level Editor");
-                        return;
+
+            foreach (TreeNode tn in parentnodestocopy) {
+                string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
+                string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetnode.FullPath}\{tn.Name}";
+                //check if the destination is within the copied node. If it is, skip this node.
+                if (IsAChildOfOtherNodes(targetnode, tn.Nodes.OfType<TreeNode>().ToList())) {
+                    MessageBox.Show($"Item '{tn.Name}' not pasted as it contains the destination.", "Thumper Custom Level Editor");
+                    continue;
+                }
+                //check if each node exists at the destination and ask to overwrite it. If' No', skip this node.
+                if (targetnode.Nodes.Contains(tn)) {
+                    if (MessageBox.Show($"Item '{tn.Name}' already exists at the destination. Overwrite it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No)
+                        continue;
+                }
+
+                if (cutfile) {
+                    if (tn.ImageKey == "folder" && Directory.Exists(source)) {
+                        Directory.Move(source, dest);
+                        tn.Remove();
                     }
-                    File.Copy(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}");
+                    else if (File.Exists(source)) {
+                        File.Move(source, dest);
+                        tn.Remove();
+                    }
+                    cutfile = false;
+                    toolstripFolderPaste.Enabled = false;
                 }
                 else {
-                    if (Directory.Exists($@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}")) {
-                        MessageBox.Show($"'{Path.GetFileName(filetocopy)}' exists in that location already.", "Thumper Custom Level Editor");
-                        return;
+                    if (tn.ImageKey == "folder" && Directory.Exists(source)) {
+                        TCLE.CopyDirectory(source, dest, true);
                     }
-                    TCLE.CopyDirectory(filetocopy, $@"{selectednodefilepath}\{Path.GetFileName(filetocopy)}", true);
-                }
-            }
-            */
-            foreach (TreeNode tn in filestocopy) {
-                if (cutfile) {
-                    if (tn.ImageKey == "folder") {
-                        //Directory.Move();
+                    else if (File.Exists(source)) {
+                        File.Copy(source, dest);
                     }
                 }
             }
-            CreateTreeView();
+            targetnode.Expand();
+        }
+        private bool IsAChildOfOtherNodes(TreeNode nodetofind, List<TreeNode> searchlist)
+        {
+            bool wasfound = false;
+            foreach (TreeNode tn in searchlist) {
+                if (tn.Nodes.Count > 0) {
+                    if (tn.Nodes.Contains(nodetofind))
+                        return true;
+                    wasfound = IsAChildOfOtherNodes(nodetofind, tn.Nodes.OfType<TreeNode>().ToList());
+                }
+            }
+            return wasfound;
         }
         ///
         ///

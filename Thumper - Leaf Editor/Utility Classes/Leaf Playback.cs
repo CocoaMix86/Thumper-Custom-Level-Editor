@@ -10,7 +10,7 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
 	{
-		AccurateTimer mTimer1;
+		//AccurateTimer mTimer1;
 		List<List<WaveStream>> vorbis;
 		bool _playing = false;
 		int _playbackbeat;
@@ -69,7 +69,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if the playback is active, stop it. Otherwise, continue below
 			if (_playing) {
-				mTimer1.Stop();
+				//mTimer1.Stop();
 				_playing = false;
 				btnTrackPlayback.ForeColor = Color.Green;
 				btnTrackPlayback.Image = Properties.Resources.icon_play;
@@ -221,7 +221,7 @@ namespace Thumper_Custom_Level_Editor
 
 			_playbackbeat++;
 			if (_playbackbeat >= vorbis.Count) {
-				mTimer1.Stop();
+				//mTimer1.Stop();
 				_playing = false;
 				btnTrackPlayback.ForeColor = Color.Green;
 				btnTrackPlayback.Image = Properties.Resources.icon_play;

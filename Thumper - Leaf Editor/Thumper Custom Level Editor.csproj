@@ -130,9 +130,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utility Classes\AccurateTimer.cs" />
     <Compile Include="Utility Classes\AudioPlaybackEngine.cs" />
-    <Compile Include="Utility Classes\ControlMoverOrResizer.cs" />
     <Compile Include="Other Forms\CustomizeWorkspace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,12 +180,8 @@
     <Compile Include="Utility Classes\Leaf Playback.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utility Classes\MultiSelectTreeview.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Utility Classes\MyRenderer.cs" />
     <Compile Include="Utility Classes\SaveState.cs" />
-    <Compile Include="Utility Classes\Timer.cs" />
     <Compile Include="Utility Classes\DropDownMenuScrollWheelHandler.cs" />
     <EmbeddedResource Include="Editor Panels\Form_GateEditor.resx">
       <DependentUpon>Form_GateEditor.cs</DependentUpon>
