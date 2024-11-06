@@ -17,9 +17,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     {
         #region Form Construction
         private TCLE _mainform { get; set; }
-        public Form_ProjectExplorer(TCLE form, string projectfolder)
+        public Form_ProjectExplorer(TCLE form, string _projectfolder)
         {
             _mainform = form;
+            projectfolder = new DirectoryInfo(_projectfolder);
             InitializeComponent();
             //set custom renderer for some controls
             toolstripExplorer.Renderer = new ToolStripOverride();
@@ -39,7 +40,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         bool filterenabled = false;
         bool filtersearch = false;
-        DirectoryInfo projectfolder = new DirectoryInfo(@"X:\Thumper\levels\Basics3");
+        DirectoryInfo projectfolder;
         List<TreeNode> filestocopy;
         bool cutfile;
         string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };

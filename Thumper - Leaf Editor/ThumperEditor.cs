@@ -848,10 +848,14 @@ namespace Thumper_Custom_Level_Editor
 
         private void nEWPANELToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!Directory.Exists(txtFilePath.Text)) {
+                MessageBox.Show("that folder path doesn't exist");
+                return;
+            }
             var dockMaster = new Form_MasterEditor(this);
             var dockGate = new Form_GateEditor(this);
             var dockLvl = new Form_LvlEditor(this);
-            var dockSample = new Form_SampleEditor(this, @"X:\Thumper\levels\Basics3\samp_level8_460bpm.txt");
+            var dockSample = new Form_SampleEditor(this, txtFilePath.Text);
             var dockLeaf = new Form_LeafEditor(this);
             var dockProject = new Form_ProjectExplorer(this, workingfolder);
             dockMaster.Show(dockMain, DockState.Document);

@@ -27,6 +27,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TCLE));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -151,18 +152,18 @@
             this.nEWPANELToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.workingfolderRightClick = new System.Windows.Forms.ContextMenuStrip();
+            this.workingfolderRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuNewFile = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuNewFile = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnWorkNewFile = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.btnMasterRuntime = new System.Windows.Forms.Button();
@@ -196,7 +197,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.timerBeeble = new System.Windows.Forms.Timer();
+            this.timerBeeble = new System.Windows.Forms.Timer(this.components);
             this.panelRecentFiles = new System.Windows.Forms.Panel();
             this.dgvRecentFiles = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -209,7 +210,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLevelFolder2 = new System.Windows.Forms.ToolStripButton();
-            this.imageListFileIcons = new System.Windows.Forms.ImageList();
+            this.imageListFileIcons = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panelMaster = new System.Windows.Forms.Panel();
             this.masterLvlList = new System.Windows.Forms.DataGridView();
@@ -471,6 +472,7 @@
             this.lblChangelogClose = new System.Windows.Forms.ToolStripButton();
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.pictureBeeble = new System.Windows.Forms.Panel();
+            this.txtFilePath = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.workingfolderRightClick.SuspendLayout();
             this.contextMenuNewFile.SuspendLayout();
@@ -1455,9 +1457,10 @@
             // 
             // nEWPANELToolStripMenuItem
             // 
+            this.nEWPANELToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.nEWPANELToolStripMenuItem.Name = "nEWPANELToolStripMenuItem";
-            this.nEWPANELToolStripMenuItem.Size = new System.Drawing.Size(79, 18);
-            this.nEWPANELToolStripMenuItem.Text = "NEW PANEL";
+            this.nEWPANELToolStripMenuItem.Size = new System.Drawing.Size(91, 18);
+            this.nEWPANELToolStripMenuItem.Text = "OPEN PANELS";
             this.nEWPANELToolStripMenuItem.Click += new System.EventHandler(this.nEWPANELToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
@@ -5345,7 +5348,7 @@
             this.panel7.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel7.Location = new System.Drawing.Point(1, 371);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(180, 412);
+            this.panel7.Size = new System.Drawing.Size(180, 617);
             this.panel7.TabIndex = 111;
             // 
             // NUDquick9
@@ -6442,6 +6445,13 @@
             this.pictureBeeble.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBeeble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
+            // txtFilePath
+            // 
+            this.txtFilePath.Location = new System.Drawing.Point(747, 0);
+            this.txtFilePath.Name = "txtFilePath";
+            this.txtFilePath.Size = new System.Drawing.Size(403, 20);
+            this.txtFilePath.TabIndex = 148;
+            // 
             // TCLE
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -6449,8 +6459,8 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.dockMain);
-            this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panelWorkingFolder);
             this.Controls.Add(this.panelLeaf);
             this.Controls.Add(this.panelSample);
@@ -6458,8 +6468,9 @@
             this.Controls.Add(this.panelRecentFiles);
             this.Controls.Add(this.panelMaster);
             this.Controls.Add(this.panelLevel);
-            this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.panelGate);
+            this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -6588,6 +6599,7 @@
             this.toolStripChangelog.ResumeLayout(false);
             this.toolStripChangelog.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
@@ -6994,6 +7006,7 @@
         public System.Windows.Forms.ToolStripMenuItem openTemplateFolderToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem regenerateTemplateFilesToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem openLevelFolderToolStripMenuItem;
+        private System.Windows.Forms.TextBox txtFilePath;
     }
 }
 
