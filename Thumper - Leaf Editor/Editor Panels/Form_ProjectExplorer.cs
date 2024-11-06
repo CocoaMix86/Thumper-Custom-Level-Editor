@@ -10,13 +10,50 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Documents;
 using System.IO.Packaging;
+using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public partial class Form_ProjectExplorer : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+
+            if (m.Msg == WM_REFLECT_NOTIFY) {
+                var st = Marshal.PtrToStructure<NMHDR>(m.LParam);
+
+                if (st.code == TVN_BEGINLABELEDITW) {
+                    IntPtr editPtr = SendMessage(Handle, TVM_GETEDITCONTROL, IntPtr.Zero, IntPtr.Zero);
+
+                    if (editPtr != IntPtr.Zero) {
+                        int selStart = 0;
+                        int selEnd = selectedNodes[0].Text.LastIndexOf('.');
+                        SendMessage(editPtr, EM_SETSEL, (IntPtr)selStart, (IntPtr)selEnd);
+                    }
+                }
+            }
+        }
+
+        const int WM_REFLECT_NOTIFY = 0x204E;
+        const int TVM_GETEDITCONTROL = 0x0000110F;
+        const int TVN_BEGINLABELEDITW = 0 - 400 - 59;
+        const int EM_SETSEL = 0xB1;
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct NMHDR
+        {
+            public IntPtr hwndFrom;
+            public IntPtr idFrom;
+            public int code;
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
         private TCLE _mainform { get; set; }
+
+
         public Form_ProjectExplorer(TCLE form, string _projectfolder)
         {
             _mainform = form;
@@ -473,7 +510,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // Retrieve the node at the drop location.
             TreeNode targetNode = treeView1.GetNodeAt(targetPoint);
             // Don't allow drag to non-folders
-            if (targetNode.ImageKey is not "folder" and not "project") { 
+            if (targetNode.ImageKey is not "folder" and not "project") {
                 if (selectedNodes.Contains(targetNode))
                     previousDragOver.BackColor = Color.FromArgb(56, 56, 56);
                 else
@@ -517,15 +554,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         ///
         ///
-        
+
         ///
         /// Rename handling
         private void toolstripFileRename_Click(object sender, EventArgs e)
         {
             TreeNode tn = selectedNodes[0];
             tn.BeginEdit();
-            for (int i = 0; i < tn.Text.Length - tn.Text.LastIndexOf('.'); i++)
-                SendKeys.Send("+{LEFT}");
+            /*
+            if (tn.ImageKey != "folder") {
+                for (int i = 0; i < tn.Text.Length - tn.Text.LastIndexOf('.'); i++)
+                    SendKeys.Send("+{LEFT}");
+            }*/
         }
         string renamefile;
         string renamenode;
