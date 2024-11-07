@@ -183,6 +183,7 @@
     <Compile Include="Utility Classes\MyRenderer.cs" />
     <Compile Include="Utility Classes\SaveState.cs" />
     <Compile Include="Utility Classes\DropDownMenuScrollWheelHandler.cs" />
+    <Compile Include="Utility Classes\TreeViewEx.cs" />
     <EmbeddedResource Include="Editor Panels\Form_GateEditor.resx">
       <DependentUpon>Form_GateEditor.cs</DependentUpon>
     </EmbeddedResource>

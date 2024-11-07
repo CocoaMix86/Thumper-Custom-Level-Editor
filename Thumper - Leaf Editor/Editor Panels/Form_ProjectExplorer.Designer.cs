@@ -30,7 +30,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ProjectExplorer));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeView1 = new Thumper_Custom_Level_Editor.TreeViewEx();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.toolstripExplorer = new System.Windows.Forms.ToolStrip();
@@ -710,7 +710,7 @@
 
         #endregion
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TreeView treeView1;
+        private Thumper_Custom_Level_Editor.TreeViewEx treeView1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ToolStrip toolstripExplorer;

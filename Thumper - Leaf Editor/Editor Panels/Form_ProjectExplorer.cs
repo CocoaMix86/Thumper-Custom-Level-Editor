@@ -1,59 +1,17 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Documents;
-using System.IO.Packaging;
-using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public partial class Form_ProjectExplorer : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        protected override void WndProc(ref Message m)
-        {
-            base.WndProc(ref m);
-
-            if (m.Msg == WM_REFLECT_NOTIFY) {
-                var st = Marshal.PtrToStructure<NMHDR>(m.LParam);
-
-                if (st.code == TVN_BEGINLABELEDITW) {
-                    IntPtr editPtr = SendMessage(Handle, TVM_GETEDITCONTROL, IntPtr.Zero, IntPtr.Zero);
-
-                    if (editPtr != IntPtr.Zero) {
-                        int selStart = 0;
-                        int selEnd = selectedNodes[0].Text.LastIndexOf('.');
-                        SendMessage(editPtr, EM_SETSEL, (IntPtr)selStart, (IntPtr)selEnd);
-                    }
-                }
-            }
-        }
-
-        const int WM_REFLECT_NOTIFY = 0x204E;
-        const int TVM_GETEDITCONTROL = 0x0000110F;
-        const int TVN_BEGINLABELEDITW = 0 - 400 - 59;
-        const int EM_SETSEL = 0xB1;
-
-        [StructLayout(LayoutKind.Sequential)]
-        struct NMHDR
-        {
-            public IntPtr hwndFrom;
-            public IntPtr idFrom;
-            public int code;
-        }
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
         private TCLE _mainform { get; set; }
-
-
         public Form_ProjectExplorer(TCLE form, string _projectfolder)
         {
             _mainform = form;
@@ -81,6 +39,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         List<TreeNode> filestocopy;
         bool cutfile;
         string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
+        public List<TreeNode> selectedNodes = new();
+        TreeNode previousNode;
+        bool dontcancelifrename = false;
 
         private void CreateTreeView()
         {
@@ -323,11 +284,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
             // cancel selection, the selection will be handled in MouseDown
-            e.Cancel = true;
+            if (dontcancelifrename == false)
+                e.Cancel = true;
         }
 
-        List<TreeNode> selectedNodes = new();
-        TreeNode previousNode;
         private void treeView1_MouseDown(object sender, MouseEventArgs e)
         {
             TreeNode currentNode = treeView1.GetNodeAt(e.Location);
@@ -526,7 +486,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if destination contains any of the moved items
             //if so, cancel the whole operation
             foreach (TreeNode tn in selectedNodes) {
-                string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
                 string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
                 if (File.Exists(dest) || Directory.Exists(dest)) {
                     MessageBox.Show($"Cannot move the item '{tn.Name}'. An item with that name already exists in the destination folder.", "Thumper Custom Level Editor");
@@ -560,12 +519,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFileRename_Click(object sender, EventArgs e)
         {
             TreeNode tn = selectedNodes[0];
+            dontcancelifrename = true;
+            treeView1.SelectedNode = treeView1.Nodes.Find(tn.Text, true)[0];
             tn.BeginEdit();
-            /*
-            if (tn.ImageKey != "folder") {
-                for (int i = 0; i < tn.Text.Length - tn.Text.LastIndexOf('.'); i++)
-                    SendKeys.Send("+{LEFT}");
-            }*/
+            treeView1.SelectedNode = null;
+            dontcancelifrename = false;
         }
         string renamefile;
         string renamenode;
