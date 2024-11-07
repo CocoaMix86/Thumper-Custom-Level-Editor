@@ -5098,7 +5098,7 @@
             this.panel7.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel7.Location = new System.Drawing.Point(1, 371);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(180, 2257);
+            this.panel7.Size = new System.Drawing.Size(180, 2462);
             this.panel7.TabIndex = 111;
             // 
             // NUDquick9
