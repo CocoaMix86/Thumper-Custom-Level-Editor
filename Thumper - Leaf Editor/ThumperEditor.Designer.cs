@@ -550,7 +550,7 @@
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.menuStrip.ShowItemToolTips = true;
-            this.menuStrip.Size = new System.Drawing.Size(1745, 25);
+            this.menuStrip.Size = new System.Drawing.Size(984, 25);
             this.menuStrip.TabIndex = 20;
             this.menuStrip.Text = "mnuLeafEditor";
             // 
@@ -5097,7 +5097,7 @@
             this.panel7.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel7.Location = new System.Drawing.Point(1, 371);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(180, 2667);
+            this.panel7.Size = new System.Drawing.Size(180, 3282);
             this.panel7.TabIndex = 111;
             // 
             // NUDquick9
@@ -6160,12 +6160,13 @@
             this.dockMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dockMain.DockBottomPortion = 0.33D;
             this.dockMain.DockLeftPortion = 0.33D;
-            this.dockMain.DockRightPortion = 0.33D;
+            this.dockMain.DockRightPortion = 0.15D;
             this.dockMain.DockTopPortion = 0.33D;
             this.dockMain.Location = new System.Drawing.Point(0, 25);
             this.dockMain.Name = "dockMain";
+            this.dockMain.ShowAutoHideContentOnHover = false;
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new System.Drawing.Size(1745, 867);
+            this.dockMain.Size = new System.Drawing.Size(984, 436);
             this.dockMain.TabIndex = 147;
             // 
             // pictureBeeble
@@ -6174,7 +6175,7 @@
             this.pictureBeeble.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
             this.pictureBeeble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBeeble.Location = new System.Drawing.Point(1295, 2);
+            this.pictureBeeble.Location = new System.Drawing.Point(811, 2);
             this.pictureBeeble.MinimumSize = new System.Drawing.Size(10, 10);
             this.pictureBeeble.Name = "pictureBeeble";
             this.pictureBeeble.Size = new System.Drawing.Size(110, 95);
@@ -6195,7 +6196,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1745, 892);
+            this.ClientSize = new System.Drawing.Size(984, 461);
             this.Controls.Add(this.pictureBeeble);
             this.Controls.Add(this.dockMain);
             this.Controls.Add(this.txtFilePath);
@@ -6213,7 +6214,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
-            this.MinimumSize = new System.Drawing.Size(1000, 39);
+            this.MinimumSize = new System.Drawing.Size(100, 100);
             this.Name = "TCLE";
             this.Text = "Thumper Custom Level Editor 3.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

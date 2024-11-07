@@ -616,18 +616,21 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show("that folder path doesn't exist");
                 return;
             }
+
+            var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text);
+            dockProject.Show(dockMain, DockState.DockRight);
+            dockMain.Panes[0].BackColor = Color.Red;
+
             var dockMaster = new Form_MasterEditor(this);
             var dockGate = new Form_GateEditor(this);
             var dockLvl = new Form_LvlEditor(this);
             var dockSample = new Form_SampleEditor(this, workingfolder);
             var dockLeaf = new Form_LeafEditor(this);
-            var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text);
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);
             dockLvl.Show(dockMain, DockState.Document);
             dockSample.Show(dockMain, DockState.Document);
             dockLeaf.Show(dockMain, DockState.Document);
-            dockProject.Show(dockMain, DockState.Document);
         }
 
         ///
