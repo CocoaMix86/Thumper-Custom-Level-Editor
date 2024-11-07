@@ -10,11 +10,45 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE : Form
     {
+        public static void InitializeTracks(DataGridView grid, bool columnstyle)
+        {
+            //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
+            //used to significantly improve rendering performance
+            if (!SystemInformation.TerminalServerSession) {
+                Type dgvType = grid.GetType();
+                PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+                pi.SetValue(grid, true, null);
+            }
+
+            if (columnstyle)
+                GenerateColumnStyle(grid, grid.ColumnCount);
+        }
+
+        public static void GenerateColumnStyle(DataGridView grid, int _cells)
+        {
+            //stylize track grid/columns
+            for (int i = 0; i < _cells; i++) {
+                grid.Columns[i].Name = i.ToString();
+                grid.Columns[i].Resizable = DataGridViewTriState.False;
+                grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                grid.Columns[i].DividerWidth = 1;
+                grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                grid.Columns[i].Frozen = false;
+                grid.Columns[i].MinimumWidth = 2;
+                grid.Columns[i].ReadOnly = false;
+                grid.Columns[i].ValueType = typeof(decimal?);
+                grid.Columns[i].DefaultCellStyle.Format = "0.###";
+                grid.Columns[i].FillWeight = 0.001F;
+                grid.Columns[i].DefaultCellStyle.Font = new Font("Consolas", 8);
+            }
+        }
+
         public void ImportObjects()
         {
             _objects.Clear();

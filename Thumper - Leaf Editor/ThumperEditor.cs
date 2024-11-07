@@ -15,7 +15,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class TCLE : Form
+    public partial class TCLE
     {
         #region Variables
         public ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
@@ -390,21 +390,6 @@ namespace Thumper_Custom_Level_Editor
         ///
         ///
 
-        //custom paint function when focus
-        private void editorpanel_PaintBorder(object sender, PaintEventArgs e)
-        {
-            Panel control = (Panel)sender;
-            Color col = Properties.Settings.Default.custom_activecolor;
-            ButtonBorderStyle bbs = ButtonBorderStyle.Solid;
-            int thickness = 2;
-            ControlPaint.DrawBorder(e.Graphics, control.ClientRectangle, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs, col, thickness, bbs);
-        }
-        //pull focus when the panel itself is clicked
-        private void editorpanelClick(object sender, EventArgs e)
-        {
-            Control dgv = (sender as Panel).Controls.Cast<Control>().FirstOrDefault(control => String.Equals(control.Tag, "editorpaneldgv"));
-            dgv.Focus();
-        }
         //Repaints toolstrip separators to have gray backgrounds
         private void toolStripSeparator_Paint(object sender, PaintEventArgs e)
         {
@@ -414,12 +399,6 @@ namespace Thumper_Custom_Level_Editor
         }
         ///
 
-        private void datagrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            //DataGridView dgv = (DataGridView)sender;
-            //if (!dgv.IsCurrentCellInEditMode)
-                //CellValueChanged(dgv.CurrentCell.RowIndex, dgv.CurrentCell.ColumnIndex);
-        }
         private void mastereditor_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             ((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);

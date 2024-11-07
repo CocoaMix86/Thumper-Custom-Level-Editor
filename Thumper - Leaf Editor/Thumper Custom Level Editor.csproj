@@ -107,7 +107,7 @@
     <Compile Include="Editor Panels\Form_MasterEditor.Designer.cs">
       <DependentUpon>Form_MasterEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor Panels\GeneralFunctions.cs">
+    <Compile Include="GeneralFunctions.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor Panels\RecentFiles.cs">
