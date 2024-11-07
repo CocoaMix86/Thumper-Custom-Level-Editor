@@ -25,10 +25,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             contextMenuFolderClick.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
             contextMenuMulti.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
             //add events to some controls
-            treeView1.NodeMouseClick += (sender, args) => treeView1.SelectedNode = args.Node;
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;
             //populate treeview on first load
+            CreateTreeView();
+        }
+        public Form_ProjectExplorer(string _projectfolder)
+        {
+            projectfolder = new DirectoryInfo(_projectfolder);
             CreateTreeView();
         }
         #endregion
