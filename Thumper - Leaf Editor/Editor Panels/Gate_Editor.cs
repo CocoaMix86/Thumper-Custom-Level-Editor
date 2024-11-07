@@ -447,9 +447,6 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (_load == null)
 				return;
-			//if Gate Editor is hidden, show it when selecting a gate
-			if (panelGate.Visible == false)
-				gateEditorToolStripMenuItem.PerformClick();
 			//detect if file is actually Gate or not
 			if ((string)_load["obj_type"] != "SequinGate") {
 				MessageBox.Show("This does not appear to be a gate file!");

@@ -19,6 +19,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             _mainform = form;
             InitializeComponent();
+            LoadQuickValues();
             toolstripTitleLeaf.Renderer = new ToolStripOverride();
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
@@ -1604,9 +1605,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 _loadedleaf = filepath;
             }
-            //if Leaf Editor is hidden, show it when a leaf is selected
-            if (panelLeaf.Visible == false)
-                _mainform.leafEditorToolStripMenuItem.PerformClick();
+
             lblTrackFileName.Text = $@"Leaf Editor ⮞ {_load["obj_name"]}";
             leafobj = _load["obj_name"];
             //set flag that load is in progress. This skips SaveLeaf() method
@@ -1801,6 +1800,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropObjects.Enabled = dropParamPath.Enabled = btnTrackApply.Enabled = false;
             //
             SaveLeaf(true, "New", "");
+        }
+
+        private void QuickValueChanged(object sender, EventArgs e)
+        {
+            File.WriteAllText($@"{TCLE.AppLocation}\templates\quickvalues.txt", $"{NUDquick1.Value}\n{NUDquick2.Value}\n{NUDquick3.Value}\n{NUDquick4.Value}\n{NUDquick5.Value}\n{NUDquick6.Value}\n{NUDquick7.Value}\n{NUDquick8.Value}\n{NUDquick9.Value}");
+        }
+        private void LoadQuickValues()
+        {
+            if (!File.Exists($@"{TCLE.AppLocation}\templates\quickvalues.txt"))
+                return;
+            string[] _load = File.ReadAllLines($@"{TCLE.AppLocation}\templates\quickvalues.txt");
+
+            NUDquick1.Value = decimal.TryParse(_load[0], out decimal result) ? result : 1;
+            NUDquick2.Value = decimal.TryParse(_load[1], out result) ? result : 1;
+            NUDquick3.Value = decimal.TryParse(_load[2], out result) ? result : 1;
+            NUDquick4.Value = decimal.TryParse(_load[3], out result) ? result : 1;
+            NUDquick5.Value = decimal.TryParse(_load[4], out result) ? result : 1;
+            NUDquick6.Value = decimal.TryParse(_load[5], out result) ? result : 1;
+            NUDquick7.Value = decimal.TryParse(_load[6], out result) ? result : 1;
+            NUDquick8.Value = decimal.TryParse(_load[7], out result) ? result : 1;
+            NUDquick9.Value = decimal.TryParse(_load[8], out result) ? result : 1;
         }
 
         /// <summary>

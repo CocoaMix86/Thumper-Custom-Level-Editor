@@ -70,15 +70,11 @@ namespace Thumper_Custom_Level_Editor
 				if ((!_savesample && MessageBox.Show("Current sample is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
 				LoadSample(_load, _selectedfilename);
-				if (panelSample.Visible == false)
-					sampleEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinMaster") {
 				if (_selectedfilename == _loadedmaster)
 					return;
 				LoadMaster(_load, _selectedfilename);
-				if (panelMaster.Visible == false)
-					masterEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinGate") {
 				if (_selectedfilename == _loadedgate)
@@ -87,8 +83,6 @@ namespace Thumper_Custom_Level_Editor
 				if ((!_savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
 				LoadGate(_load, _selectedfilename);
-				if (panelGate.Visible == false)
-					gateEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLevel") {
 				if (_selectedfilename == _loadedlvl)
@@ -97,8 +91,6 @@ namespace Thumper_Custom_Level_Editor
 				if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
 				LoadLvl(_load, _selectedfilename);
-				if (panelLevel.Visible == false)
-					levelEditorToolStripMenuItem.PerformClick();
 			}
 			else if ((string)_load["obj_type"] == "SequinLeaf") {
 				//don't reload the file if its the same name
@@ -108,9 +100,6 @@ namespace Thumper_Custom_Level_Editor
 				if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No))
 					return;
 				LoadLeaf(_load, _selectedfilename);
-				//make panel visible if it isn't
-				if (panelLeaf.Visible == false)
-					leafEditorToolStripMenuItem.PerformClick();
 			}
 			else
 				MessageBox.Show("this is not a valid Custom Level file.");
@@ -181,8 +170,6 @@ namespace Thumper_Custom_Level_Editor
 					if (_loadedmaster != file) {
 						dynamic _load = LoadFileLock(file);
 						LoadMaster(_load, file);
-						if (!panelMaster.Visible && !masterEditorToolStripMenuItem.Checked)
-							masterEditorToolStripMenuItem.PerformClick();
 					}
 				}
 

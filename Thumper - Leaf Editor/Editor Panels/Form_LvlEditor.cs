@@ -793,9 +793,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             //reset flag in case it got stuck previously
             loadinglvl = false;
-            //if Lvl Editor is hidden, show it when a lvl is selected from anywhere
-            if (panelLevel.Visible == false)
-                _mainform.levelEditorToolStripMenuItem.PerformClick();
             //detect if file is actually Lvl or not
             if ((string)_load["obj_type"] != "SequinLevel") {
                 MessageBox.Show("This does not appear to be a lvl file!");

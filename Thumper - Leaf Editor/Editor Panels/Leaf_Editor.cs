@@ -1595,9 +1595,6 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 _loadedleaf = filepath;
             }
-            //if Leaf Editor is hidden, show it when a leaf is selected
-            if (panelLeaf.Visible == false)
-                leafEditorToolStripMenuItem.PerformClick();
             lblTrackFileName.Text = $@"Leaf Editor ⮞ {_load["obj_name"]}";
             leafobj = _load["obj_name"];
             //set flag that load is in progress. This skips SaveLeaf() method

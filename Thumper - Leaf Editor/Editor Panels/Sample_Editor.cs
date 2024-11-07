@@ -421,9 +421,6 @@ namespace Thumper_Custom_Level_Editor
 		{
 			if (_load == null)
 				return;
-			//if Sample Editor is hidden, show it when selecting a gate
-			if (panelSample.Visible == false)
-				sampleEditorToolStripMenuItem.PerformClick();
 			//detect if file is actually Gate or not
 			if (!_load.ContainsKey("items")) {
 				MessageBox.Show("This does not appear to be a sample file!");
