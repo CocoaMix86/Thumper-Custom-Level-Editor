@@ -114,7 +114,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void treeView1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete) toolstripFileDelete_Click(null, null);
-            if (e.KeyCode == Keys.F2 && selectedNodes.Count == 1) selectedNodes[0].BeginEdit();
+            if (e.KeyCode == Keys.F2 && selectedNodes.Count == 1) {
+                dontcancelifrename = true;
+                treeView1.SelectedNode = selectedNodes[0];
+                selectedNodes[0].BeginEdit();
+                treeView1.SelectedNode = null;
+                dontcancelifrename = false;
+            }
         }
         #endregion
         #region Physical Controls
@@ -205,10 +211,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Rename Handling
         private void toolstripFileRename_Click(object sender, EventArgs e)
         {
-            TreeNode tn = selectedNodes[0];
             dontcancelifrename = true;
-            treeView1.SelectedNode = treeView1.Nodes.Find(tn.Text, true)[0];
-            tn.BeginEdit();
+            treeView1.SelectedNode = selectedNodes[0];
+            selectedNodes[0].BeginEdit();
             treeView1.SelectedNode = null;
             dontcancelifrename = false;
         }
