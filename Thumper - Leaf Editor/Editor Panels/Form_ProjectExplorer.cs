@@ -19,11 +19,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             //set custom renderer for some controls
             toolstripExplorer.Renderer = new ToolStripOverride();
-            contextMenuAddFile.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
-            contextMenuFilters.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
-            contextMenuFileClick.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
-            contextMenuFolderClick.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
-            contextMenuMulti.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
+            contextMenuAddFile.Renderer = new ContextMenuColors();
+            contextMenuFilters.Renderer = new ContextMenuColors();
+            contextMenuFileClick.Renderer = new ContextMenuColors();
+            contextMenuFolderClick.Renderer = new ContextMenuColors();
+            contextMenuMulti.Renderer = new ContextMenuColors();
             //add events to some controls
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;

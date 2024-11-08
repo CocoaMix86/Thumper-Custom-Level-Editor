@@ -120,9 +120,9 @@ namespace Thumper_Custom_Level_Editor
             JumpListUpdate();
 
             //set custom renderer
-            menuStrip.Renderer = new ToolStripOverride();
-            contextmenuFile.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
-            contextMenuAddFile.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
+            menuStrip.Renderer = new ToolStripMainForm();
+            contextmenuFile.Renderer = new ContextMenuColors();
+            contextMenuAddFile.Renderer = new ContextMenuColors();
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
@@ -673,6 +673,11 @@ namespace Thumper_Custom_Level_Editor
         private void toolStripSeparator8_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

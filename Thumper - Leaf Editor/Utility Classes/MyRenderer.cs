@@ -40,7 +40,7 @@ namespace Thumper_Custom_Level_Editor
         public override Color MenuItemPressedGradientEnd { get { return Color.Red; } }
     }
 
-    class ProjectExplorerRightClick : ProfessionalColorTable
+    class ContextMenuColorTable : ProfessionalColorTable
     {
         public override Color MenuBorder { get { return Color.FromArgb(66, 66, 66); } }
         public override Color ImageMarginGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
@@ -49,6 +49,11 @@ namespace Thumper_Custom_Level_Editor
         public override Color MenuItemSelected { get { return Color.FromArgb(61, 61, 61); } }
         public Color MenuItemEnabledBorder { get { return Color.FromArgb(112, 112, 112); } }
         public override Color MenuItemBorder { get { return Color.FromArgb(112, 112, 112); } }
+
+        public override Color MenuItemSelectedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
+        public override Color MenuItemSelectedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
+        public override Color MenuItemPressedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
+        public override Color MenuItemPressedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
     }
 
     public class ToolStripOverride : ToolStripProfessionalRenderer
@@ -63,6 +68,27 @@ namespace Thumper_Custom_Level_Editor
             }
             else base.OnRenderButtonBackground(e);
         }
+        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+        {
+            e.ArrowColor = Color.White;
+            base.OnRenderArrow(e);
+        }
+    }
+
+    public class ToolStripMainForm : ToolStripProfessionalRenderer
+    {
+        public ToolStripMainForm() : base(new ContextMenuColorTable()) { }
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
+        protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+        {
+            e.ArrowColor = Color.White;
+            base.OnRenderArrow(e);
+        }
+    }
+
+    public class ContextMenuColors : ToolStripProfessionalRenderer
+    {
+        public ContextMenuColors() : base(new ContextMenuColorTable()) { }
         protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
         {
             e.ArrowColor = Color.White;
