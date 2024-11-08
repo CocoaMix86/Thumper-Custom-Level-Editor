@@ -120,7 +120,7 @@ namespace Thumper_Custom_Level_Editor
             JumpListUpdate();
 
             //set custom renderer
-            menuStrip.Renderer = new MyRenderer();
+            menuStrip.Renderer = new ToolStripOverride();
             contextmenuFile.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
             contextMenuAddFile.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
             //
