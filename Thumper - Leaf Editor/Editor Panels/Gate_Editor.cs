@@ -177,7 +177,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if _loadedgate is somehow not set, force Save As instead
 			if (_loadedgate == null) {
-				gatesaveAsToolStripMenuItem.PerformClick();
+				///gatesaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
 			else
@@ -211,7 +211,7 @@ namespace Thumper_Custom_Level_Editor
                 _loadedgate = $@"{storePath}\gate_{tempFileName}";
                 WriteGate();
                 //after saving new file, refresh the workingfolder
-                btnWorkRefresh.PerformClick();
+                ///btnWorkRefresh.PerformClick();
             }
         }
 		private void WriteGate()
@@ -398,7 +398,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		//buttons that click other buttons
-		private void btnGatePanelNew_Click(object sender, EventArgs e) => gatenewToolStripMenuItem.PerformClick();
+		private void btnGatePanelNew_Click(object sender, EventArgs e) {}
 		//I use MasterLoadLvl on these because it's the exact same code to load a lvl
 		private void btnGateOpenPre_Click(object sender, EventArgs e) => MasterLoadLvl(dropGatePre.Text);
 		private void btnGateOpenPost_Click(object sender, EventArgs e) => MasterLoadLvl(dropGatePost.Text);

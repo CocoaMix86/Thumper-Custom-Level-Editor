@@ -369,7 +369,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if _loadedlvl is somehow not set, force Save As instead
 			if (_loadedlvl == null) {
-				lvlsaveAsToolStripMenuItem.PerformClick();
+				///lvlsaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
 			else
@@ -404,7 +404,7 @@ namespace Thumper_Custom_Level_Editor
                 _loadedlvl = $@"{storePath}\lvl_{tempFileName}";
                 WriteLvl();
                 //after saving new file, refresh the workingfolder
-                btnWorkRefresh.PerformClick();
+                ///btnWorkRefresh.PerformClick();
             }
         }
 		private void WriteLvl()
@@ -764,7 +764,7 @@ namespace Thumper_Custom_Level_Editor
 
 		private void btnlvlPanelNew_Click(object sender, EventArgs e)
 		{
-			lvlnewToolStripMenuItem1.PerformClick();
+			///lvlnewToolStripMenuItem1.PerformClick();
 		}
 		#endregion
 

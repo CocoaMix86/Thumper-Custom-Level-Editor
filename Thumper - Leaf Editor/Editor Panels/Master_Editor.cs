@@ -221,7 +221,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if _loadedmaster is somehow not set, force Save As instead
 			if (_loadedmaster == null) {
-				mastersaveAsToolStripMenuItem.PerformClick();
+				///mastersaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
 			else
@@ -249,7 +249,7 @@ namespace Thumper_Custom_Level_Editor
                 _loadedmaster = $@"{storePath}\master_sequin.txt";
                 WriteMaster();
                 //after saving new file, refresh the workingfolder
-                btnWorkRefresh.PerformClick();
+                ///btnWorkRefresh.PerformClick();
             }
         }
 		public void WriteMaster()
@@ -439,7 +439,7 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		//buttons that click other buttons
-		private void btnMasterPanelNew_Click(object sender, EventArgs e) => masternewToolStripMenuItem.PerformClick();
+		private void btnMasterPanelNew_Click(object sender, EventArgs e) { }
 		//these all load a lvl
 		private void btnMasterOpenIntro_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterIntro.SelectedItem.ToString());
 		private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterCheck.SelectedItem.ToString());

@@ -175,7 +175,7 @@ namespace Thumper_Custom_Level_Editor
         {
 			//if _loadedgate is somehow not set, force Save As instead
 			if (_loadedsample == null) {
-				SamplesaveAsToolStripMenuItem.PerformClick();
+				///SamplesaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
 			else
@@ -209,7 +209,7 @@ namespace Thumper_Custom_Level_Editor
                 _loadedsample = $@"{storePath}\samp_{tempFileName}";
                 WriteSample();
                 //after saving new file, refresh the workingfolder
-                btnWorkRefresh.PerformClick();
+                ///btnWorkRefresh.PerformClick();
             }
         }
 		private void WriteSample()
@@ -317,8 +317,7 @@ namespace Thumper_Custom_Level_Editor
 			PlaySound("UIobjectadd");
 		}
 		//open or new sample file
-		private void btnSampPanelNew_Click(object sender, EventArgs e) => SamplenewToolStripMenuItem.PerformClick();
-
+		private void btnSampPanelNew_Click(object sender, EventArgs e) { }
 		//Opens an .FSB audio file, hashes the name, and adds it to the loaded SAMP_ file
 		private void FSBtoSamp_Click(object sender, EventArgs e)
 		{

@@ -179,7 +179,7 @@
             // 
             this.btnFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.btnFilter.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.pixel;
-            this.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnFilter.DropDown = this.contextMenuFilters;
             this.btnFilter.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_filter;
@@ -200,7 +200,6 @@
             this.filterMaster,
             this.filterSample});
             this.contextMenuFilters.Name = "workingfolderRightClick";
-            this.contextMenuFilters.OwnerItem = this.btnFilter;
             this.contextMenuFilters.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuFilters.Size = new System.Drawing.Size(114, 114);
             this.contextMenuFilters.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextMenuFilters_Closing);
@@ -385,7 +384,7 @@
             this.toolstripFileCut.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
             this.toolstripFileCut.Name = "toolstripFileCut";
             this.toolstripFileCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.toolstripFileCut.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFileCut.Size = new System.Drawing.Size(166, 22);
             this.toolstripFileCut.Text = "Cut";
             this.toolstripFileCut.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -396,7 +395,7 @@
             this.toolstripFileCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolstripFileCopy.Name = "toolstripFileCopy";
             this.toolstripFileCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.toolstripFileCopy.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFileCopy.Size = new System.Drawing.Size(166, 22);
             this.toolstripFileCopy.Text = "Copy";
             this.toolstripFileCopy.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -407,7 +406,7 @@
             this.toolstripFileDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
             this.toolstripFileDelete.Name = "toolstripFileDelete";
             this.toolstripFileDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.toolstripFileDelete.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFileDelete.Size = new System.Drawing.Size(166, 22);
             this.toolstripFileDelete.Text = "Delete";
             this.toolstripFileDelete.Click += new System.EventHandler(this.toolstripFileDelete_Click);
             // 
@@ -418,7 +417,7 @@
             this.toolstripFileRename.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
             this.toolstripFileRename.Name = "toolstripFileRename";
             this.toolstripFileRename.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.toolstripFileRename.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFileRename.Size = new System.Drawing.Size(166, 22);
             this.toolstripFileRename.Text = "Rename";
             this.toolstripFileRename.Click += new System.EventHandler(this.toolstripFileRename_Click);
             // 
@@ -480,6 +479,7 @@
             this.toolStripMenuItem8,
             this.toolStripMenuItem9});
             this.contextMenuAddFile.Name = "workingfolderRightClick";
+            this.contextMenuAddFile.OwnerItem = this.toolstripFolderNew;
             this.contextMenuAddFile.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new System.Drawing.Size(152, 164);
             // 
@@ -562,7 +562,7 @@
             this.toolstripFolderCut.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
             this.toolstripFolderCut.Name = "toolstripFolderCut";
             this.toolstripFolderCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.toolstripFolderCut.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderCut.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderCut.Text = "Cut";
             this.toolstripFolderCut.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -573,7 +573,7 @@
             this.toolstripFolderCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolstripFolderCopy.Name = "toolstripFolderCopy";
             this.toolstripFolderCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.toolstripFolderCopy.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderCopy.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderCopy.Text = "Copy";
             this.toolstripFolderCopy.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -585,7 +585,7 @@
             this.toolstripFolderPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
             this.toolstripFolderPaste.Name = "toolstripFolderPaste";
             this.toolstripFolderPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.toolstripFolderPaste.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderPaste.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderPaste.Text = "Paste";
             this.toolstripFolderPaste.Click += new System.EventHandler(this.toolstripFolderPaste_Click);
             // 
@@ -596,7 +596,7 @@
             this.toolstripFolderDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
             this.toolstripFolderDelete.Name = "toolstripFolderDelete";
             this.toolstripFolderDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.toolstripFolderDelete.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderDelete.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderDelete.Text = "Delete";
             this.toolstripFolderDelete.Click += new System.EventHandler(this.toolstripFileDelete_Click);
             // 
@@ -607,7 +607,7 @@
             this.toolstripFolderRename.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_editdetails;
             this.toolstripFolderRename.Name = "toolstripFolderRename";
             this.toolstripFolderRename.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.toolstripFolderRename.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFolderRename.Size = new System.Drawing.Size(162, 22);
             this.toolstripFolderRename.Text = "Rename";
             this.toolstripFolderRename.Click += new System.EventHandler(this.toolstripFileRename_Click);
             // 
@@ -646,7 +646,7 @@
             this.toolStripMultiDelete});
             this.contextMenuMulti.Name = "contextMenuFolderClick";
             this.contextMenuMulti.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuMulti.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuMulti.Size = new System.Drawing.Size(145, 70);
             // 
             // toolStripMultiCut
             // 
@@ -655,7 +655,7 @@
             this.toolStripMultiCut.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
             this.toolStripMultiCut.Name = "toolStripMultiCut";
             this.toolStripMultiCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.toolStripMultiCut.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMultiCut.Size = new System.Drawing.Size(144, 22);
             this.toolStripMultiCut.Text = "Cut";
             this.toolStripMultiCut.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -666,7 +666,7 @@
             this.toolStripMultiCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
             this.toolStripMultiCopy.Name = "toolStripMultiCopy";
             this.toolStripMultiCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.toolStripMultiCopy.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMultiCopy.Size = new System.Drawing.Size(144, 22);
             this.toolStripMultiCopy.Text = "Copy";
             this.toolStripMultiCopy.Click += new System.EventHandler(this.toolstripFileCopy_Click);
             // 
@@ -677,7 +677,7 @@
             this.toolStripMultiDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
             this.toolStripMultiDelete.Name = "toolStripMultiDelete";
             this.toolStripMultiDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.toolStripMultiDelete.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMultiDelete.Size = new System.Drawing.Size(144, 22);
             this.toolStripMultiDelete.Text = "Delete";
             this.toolStripMultiDelete.Click += new System.EventHandler(this.toolstripFileDelete_Click);
             // 

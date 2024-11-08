@@ -76,14 +76,15 @@ namespace Thumper_Custom_Level_Editor
                     //populate lvlsinworkfolder with all .lvl files in the project
                     //this is needed for some specific dropdowns.
                     UpdateLevelLists();
+                    /*
                     //set Working Folder panel data
                     lblWorkingFolder.Text = $"Working Folder ⮞ {projectjson["level_name"]}";
                     lblWorkingFolder.ToolTipText = $"Working Folder ⮞ {workingfolder}";
                     //enable buttons
                     btnWorkRefresh.Enabled = true;
                     btnWorkCopy.Enabled = true;
-                    editLevelDetailsToolStripMenuItem.Enabled = true;
-                    regenerateDefaultFilesToolStripMenuItem.Enabled = true;
+                    ///editLevelDetailsToolStripMenuItem.Enabled = true;
+                    ///regenerateDefaultFilesToolStripMenuItem.Enabled = true;
                     btnExplorer.Enabled = true;
                     //add to recent files
                     if (Properties.Settings.Default.Recentfiles.Contains(workingfolder))
@@ -94,6 +95,7 @@ namespace Thumper_Custom_Level_Editor
 
                     //once all that is done, refresh the Working Folder list. This automatically opens the Master
                     btnWorkRefresh.PerformClick();
+                    */
                 }
             }
         }
@@ -119,6 +121,8 @@ namespace Thumper_Custom_Level_Editor
 
             //set custom renderer
             menuStrip.Renderer = new MyRenderer();
+            contextmenuFile.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
+            contextMenuAddFile.Renderer = new ToolStripProfessionalRenderer(new ProjectExplorerRightClick());
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
@@ -550,7 +554,7 @@ namespace Thumper_Custom_Level_Editor
                 import = import.Concat(defaultkeybinds.Where(x => !import.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
                 defaultkeybinds = import;
             }
-
+            /*
             leafnewToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafnew"];
             leafloadToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafopen"];
             leafsaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafsave"];
@@ -577,6 +581,7 @@ namespace Thumper_Custom_Level_Editor
             recentLevelsToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelrecent"];
             openLevelInExplorerToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelexplorer"];
             leafTemplateToolStripMenuItem.ShortcutKeys = defaultkeybinds["templateopen"];
+            */
             btnUndoLeaf.ToolTipText = $"Undo ({String.Join("+", defaultkeybinds["leafundo"].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList().Reverse<string>())})";
         }
 
@@ -610,7 +615,8 @@ namespace Thumper_Custom_Level_Editor
             senderComboBox.DropDownWidth = width + vertScrollBarWidth;
         }
 
-        private void nEWPANELToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void toolstripOpenPanels_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(txtFilePath.Text)) {
                 MessageBox.Show("that folder path doesn't exist");
@@ -619,7 +625,6 @@ namespace Thumper_Custom_Level_Editor
 
             var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text);
             dockProject.Show(dockMain, DockState.DockRight);
-            dockMain.Panes[0].BackColor = Color.Red;
 
             var dockMaster = new Form_MasterEditor(this);
             var dockGate = new Form_GateEditor(this);
@@ -663,6 +668,11 @@ namespace Thumper_Custom_Level_Editor
                     CopyDirectory(subDir.FullName, newDestinationDir, true);
                 }
             }
+        }
+
+        private void toolStripSeparator8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -384,7 +384,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //if _loadedlvl is somehow not set, force Save As instead
             if (_loadedlvl == null) {
-                _mainform.lvlsaveAsToolStripMenuItem.PerformClick();
+                _mainform.toolstripLvlSaveAs.PerformClick();
                 return;
             }
             else
@@ -419,7 +419,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _loadedlvl = $@"{storePath}\lvl_{tempFileName}";
                 WriteLvl();
                 //after saving new file, refresh the workingfolder
-                _mainform.btnWorkRefresh.PerformClick();
+                ///_mainform.btnWorkRefresh.PerformClick();
             }
         }
         private void WriteLvl()
@@ -778,7 +778,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnlvlPanelNew_Click(object sender, EventArgs e)
         {
-            _mainform.lvlnewToolStripMenuItem1.PerformClick();
+            _mainform.toolstripLvlNew.PerformClick();
         }
         #endregion
 

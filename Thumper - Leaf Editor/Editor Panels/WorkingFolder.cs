@@ -189,12 +189,13 @@ namespace Thumper_Custom_Level_Editor
 				});
 			}
 			//enable button
+			/*
 			btnWorkDelete.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkCopy.Enabled = workingfolderFiles.RowCount > 0;
 			btnWorkNewFile.Enabled = filesinfolder.Count > 0;
 			btnWorkEditDetails.Enabled = filesinfolder.Count > 0;
 			btnLeafPanelTemplate.Enabled = true;
-
+			*/
             HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\leaf_{x.Cells[1].Value}.txt").ToList());
             HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\lvl_{x.Cells[1].Value}.txt").ToList());
             HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{workingfolder}\{(_masterlvls[x.Index].lvlname != "" ? "lvl" : "gate")}_{x.Cells[1].Value}.txt").ToList());
@@ -294,7 +295,7 @@ namespace Thumper_Custom_Level_Editor
 		private void filterClear_Click(object sender, EventArgs e)
 		{
 			//clear all checks and reset flags to 0
-			filterLeaf.Checked = filterLvl.Checked = filterGate.Checked = filterMaster.Checked = filterSamp.Checked = false;
+			///filterLeaf.Checked = filterLvl.Checked = filterGate.Checked = filterMaster.Checked = filterSamp.Checked = false;
             PlaySound("UIselect");
             filefilter = 0x0;
             btnWorkRefresh_Click(null, null);

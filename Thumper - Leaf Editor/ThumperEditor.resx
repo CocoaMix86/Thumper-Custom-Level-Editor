@@ -117,28 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>111, -3</value>
-  </metadata>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>6, 3</value>
   </metadata>
-  <metadata name="workingfolderRightClick.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>98, 15</value>
-  </metadata>
-  <metadata name="contextMenuNewFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>98, 35</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnWorkNewFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC1SURBVDhPtZAxCgIxFESDlp7Dbew9hDbewFK2Es8geAYP
-        sgZst1FBz7Lggm0kcb4/xeSvjQOPNPMmIU4yv75Cidmxu6BWDhOF6b4bHmGiEAcGR5goyIA5wkQhHyiO
-        MNECmoaVLKBpWMkCmoaVLKBpWCmnau9hcj6Ekd+m0zX1EuonTBKi7E41YwXdHkg3QorJBm7Q7YGx331l
-        CQae0P/8gqp95JLiNwvoPyT+eryxWffpTLJzb6h9AG2Kb6R8AAAAAElFTkSuQmCC
-</value>
-  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>7, 27</value>
   </metadata>
@@ -155,6 +136,7 @@ ISO. (isolate)
 When checked, only isolated levels will play in game. Useful for testing specific sublevels 
 without replaying the entire thing.</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnMasterRuntime.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -245,7 +227,10 @@ or interoplates between set data points (step = FALSE)
 Only useful for Trait types of kTraitFloat and kTraitColor</value>
   </data>
   <metadata name="timerBeeble.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>7, 48</value>
+    <value>1062, 24</value>
+  </metadata>
+  <metadata name="toolstripRecentFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1190, 3</value>
   </metadata>
   <metadata name="dataGridViewImageColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -262,76 +247,11 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="toolstripRecentFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1190, 3</value>
   </metadata>
-  <metadata name="imageListFileIcons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1198, 43</value>
+  <metadata name="toolstripTitleMaster.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>765, 4</value>
   </metadata>
-  <data name="imageListFileIcons.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABw
-        DQAAAk1TRnQBSQFMAgEBBgEAAUgBDQFIAQ0BEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
-        AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
-        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
-        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
-        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
-        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
-        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
-        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
-        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
-        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
-        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
-        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
-        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
-        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
-        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
-        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
-        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
-        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
-        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
-        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
-        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
-        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
-        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
-        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
-        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
-        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
-        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
-        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
-        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/wUAAfQBCQHwAf87AAH/
-        AbUC3AEJAgAB/wHwAgkB/zQAAfED3AG7AgAB8QG7AtwBCQEAEFMjAAH0AbUC3AG1AgABCQPcAQkBABBT
-        JAAB8gIJAbQCAAHzAbUB3AHWAQkBABBTJgAB9AG0AwAB8wEJAbsBCQEAEFMhAAHyApMB8gEAAfQBtAUA
-        AfABCQEAEFMgAAH/AZMClAGTAf8B9AG0AfEB9AH/AgAB8AEJAQAQUyAAAf8BFgKUARYC9AG0AdwCtQG7
-        AQkBtQEJAQAQUyAAAf8BkwKUARYC9AG0BtwBCQEAEFMhAAH/AfIB8wFvAfQB/wG8AgkBuwG1AdYB3AEJ
-        AQAQUyQAAW8B9AH/AfQDAAH/AfMC8AEAEFMkAAFvA5MIAAgyARorAAEWAZQBFgEaCAAHMgEaLAABbwGT
-        AfMJAAYyARotAAHzOwABmAGRAe8B8QH/CwABBwFKDEQBSgG8BAAB/wZLAf8JAAHzAW4CRAFuAfMFAAL/
-        AfMBBwGRAfQB/wEIApEB9AUAEEsEAAH0AXQEmgF0AfQLAAJECwAB8wGRAQcBkQEIAZgBkQUAAQcOSwEH
-        BAAB8QF0BJoBdAHxCwACRAoAAf8BCAGRAXIBmAIIAZgB8QH0BAAB8wFuAUQISwFKAW4B8wUAAQcBdASa
-        AXQBBwsAAUQBSgGYAXIBmAH/BgABBwGYAQgBmAFyAwgCmAHvAf8EAAHzAW4BSwFzAUoCcwFLARwB/wcA
-        ARwFmgKTBAAB/wG8ApECvAGRAnIBmAEIAZgBkQFyAe8B/wMAApgCCAGYAZ0ECAGdAfQHAAH/AXIBCAEA
-        Af8BmAGRAQcB/wQACksDAAG8AZ0CCAKYAggBmAMIAZgBCAKYAwAB8AGRAwgBkQGYAwgBkQH0BwAB8wFy
-        AZgBBwHvAZgBCAKYAf8DAAFLCJoBSwMAAZEOCAFyAwAB/wHvAZ0CCAGYAZEDCAGRAfQCAAH/AQgCkQH0
-        AQgBkQH0Ae8BcgGdAZgBCAGRAfIDAApLAwABkQ0IApgEAAG8AZ0DCAGRAZgCCAGYAZEB8AEAAQgBmAEI
-        AZgB7wGRAZgB9AGRApgBnQEIApgGAAH/AXIB8gcAAQgBmAwIAZgBCAQAAQcBmAQIAXIDCAGYAZEB9AGR
-        AggBnQFyAfABvAHxApgCCAGYAZ0BmAIAAfQBmAFyAe8B9AGYAZEB/wH0ApEBBwH/AQACmA0IAZEEAAHz
-        AZEBmAMIApgCCAGYAZEB7wGYAQgDmAGRAfMB7wH0AZgBcgGRAe8B8gH/AQAB8wGRAZgBCAGRAe8B8AG8
-        Ae0CmAEIAZgB7wEAAXIOCAGRBQAB9AKYAwgBcgIIAZEB9AGYAZEBmAIIApgB/wGRAf8B9AH/BAAB/wGR
-        AZgCCAKRAf8BAAEIAXIBnQGYAQgBkQH0ApgMCAGdAbwGAAHwAZgFCAGYAQcBAAH/AfMBmAGRAXIBmAH0
-        AQABvAGYAXIBmAH/AwAB8QGYAQgBmAGdApEBBwEAAZECmAGRAQgBmAEHAf8BmAFyCggBcgG8Af8GAAHz
-        AZEBCAKYAggCmAgAAf8BmAFyAQgBkQHzAwACmAEIAZ0BmAIIAXIBAAKYAwgBmAGRAgABkQcIAZgBCAKY
-        CAAB/wHwAZEDmAEIAZgB7wgAAf8BcgGYAQgBmAEIAwABvAFyAZgDCAKYAQAB/wHvAZEBcgGRAQgB/wIA
-        AbwBnQIIApgBCAGYAZEBcgGYAf8MAAH/AQcBcgGYAf8JAAH0AZgBkQFyAe8EAAH0AQgBkQFyAZEBCAH/
-        CgAB/wG8ApEBCAGYAXIBmAH/BQABQgFNAT4HAAE+AwABKAMAAUADAAEgAwABAQEAAQEGAAEBFgAD/wEA
-        AfAD/wQAAeABwQL/BAAB4AHBBgAB4AHBBgAB8AHBBgAB/AHhBgABhAH5BwABGQcAAQEHAAEBBgABgAEB
-        BgAB8AHhBgAB8AH/AQABfwQAAfAB/wEAAf8EAAHxAf8BAQH/BAAB9wP/BAABBwH/AgAB8AEPAfgBHwEA
-        AR8CAAHwAQ8B/gF/AfABHwIAAfABDwH+AX8B4AEHAYABAQHwAQ8B/gEHAeABAQHgAQcB8AEPAgAB4AEB
-        AfwBQQHgAQcCAAHgAQEB/AEAAeABBwIAAeABAQGAAQAB4AEHAgAB8AEAAYABAAH8AX8CAAHwAwABwAEB
-        AgAB8AMAAYABAQIAAfgCAAEPAQABgAIAAfwCAQEHAQABgAIAAfwBAQH+AQcBAAGAAcABAwH8AQEB/gEH
-        AQABgAHAAQMB/wHBAf8BBwGAAf8BwAEfCw==
-</value>
-  </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 82</value>
+  <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>771, 24</value>
   </metadata>
   <metadata name="masterfiletype.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -357,6 +277,12 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="lvlToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>393, 26</value>
   </metadata>
+  <metadata name="toolstripTitleLvl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>393, 4</value>
+  </metadata>
+  <metadata name="lvlToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>393, 26</value>
+  </metadata>
   <metadata name="lvlfiletype.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -373,19 +299,25 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
     <value>504, 7</value>
   </metadata>
   <metadata name="lvlPathsToolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 53</value>
+    <value>1336, 24</value>
   </metadata>
   <metadata name="lvlLoopToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>493, 29</value>
   </metadata>
   <metadata name="lvlPathsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>392, 50</value>
+    <value>136, 61</value>
   </metadata>
   <metadata name="LoopSample.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="BeatsPerLoop.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="toolstripTitleGate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>640, 4</value>
+  </metadata>
+  <metadata name="gateToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>644, 23</value>
   </metadata>
   <metadata name="toolstripTitleGate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>640, 4</value>
@@ -414,14 +346,14 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="searchforfile.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="workingToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1048, 23</value>
+  <metadata name="toolstripTitleLeaf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>262, -1</value>
   </metadata>
-  <metadata name="workingToolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1047, 43</value>
+  <metadata name="leafToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 61</value>
   </metadata>
-  <metadata name="toolstripTitleWork.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1048, 1</value>
+  <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>259, 24</value>
   </metadata>
   <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -430,7 +362,7 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
     <value>262, -1</value>
   </metadata>
   <metadata name="leafToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>255, 49</value>
+    <value>17, 61</value>
   </metadata>
   <data name="btnTrackPlayback.ToolTipText" xml:space="preserve">
     <value>***CURRENTLY BUGGY. SKIPS BEATS SOMETIMES***
@@ -455,6 +387,12 @@ Playback speed is dependant on the Master BPM.</value>
   <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>259, 24</value>
   </metadata>
+  <metadata name="sampleToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>277, 61</value>
+  </metadata>
+  <metadata name="toolstripTitleSample.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>904, 1</value>
+  </metadata>
   <metadata name="SampleName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -474,13 +412,25 @@ Playback speed is dependant on the Master BPM.</value>
     <value>True</value>
   </metadata>
   <metadata name="sampleToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 82</value>
+    <value>277, 61</value>
   </metadata>
   <metadata name="toolstripTitleSample.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>904, 1</value>
   </metadata>
   <metadata name="toolStripChangelog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 53</value>
+    <value>1179, 24</value>
+  </metadata>
+  <metadata name="toolStripChangelog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1179, 24</value>
+  </metadata>
+  <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>111, 1</value>
+  </metadata>
+  <metadata name="contextmenuFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>94, 22</value>
+  </metadata>
+  <metadata name="contextMenuAddFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>415, 61</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>75</value>

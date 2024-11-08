@@ -682,7 +682,7 @@ namespace Thumper_Custom_Level_Editor
 		{
 			//if _loadedlvl is somehow not set, force Save As instead
 			if (_loadedleaf == null) {
-				leafsaveAsToolStripMenuItem.PerformClick();
+				///leafsaveAsToolStripMenuItem.PerformClick();
 				return;
 			}
 			else
@@ -717,7 +717,7 @@ namespace Thumper_Custom_Level_Editor
                 _loadedleaf = $@"{storePath}\leaf_{tempFileName}";
                 WriteLeaf(true);
                 //after saving new file, refresh the workingfolder
-                btnWorkRefresh.PerformClick();
+                ///btnWorkRefresh.PerformClick();
             }
         }
 		private void WriteLeaf(bool clearundo = false)
@@ -1389,8 +1389,8 @@ namespace Thumper_Custom_Level_Editor
 		}
 
 		/// These buttons exist on the Workingfolder panel
-		private void btnLeafPanelNew_Click(object sender, EventArgs e) => leafnewToolStripMenuItem.PerformClick();
-		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => leafTemplateToolStripMenuItem.PerformClick();
+		private void btnLeafPanelNew_Click(object sender, EventArgs e) { }
+		private void btnLeafPanelTemplate_Click(object sender, EventArgs e) { }
 		#endregion
 
 		#region Methods
