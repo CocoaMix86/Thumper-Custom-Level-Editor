@@ -50,7 +50,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public HashSet<Object_Params> _objects = new();
-        string _errorlog;
+        string _errorlog = "";
         public void ImportObjects()
         {
             _objects.Clear();
