@@ -670,11 +670,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private void toolStripSeparator8_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             this.Close();
