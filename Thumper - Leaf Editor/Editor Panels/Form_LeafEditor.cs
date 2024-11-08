@@ -23,6 +23,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripTitleLeaf.Renderer = new ToolStripOverride();
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
+            trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
+            DropDownMenuScrollWheelHandler.Enable(true);
+            TCLE.InitializeTracks(trackEditor, true);
         }
         #endregion
 
@@ -560,6 +563,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             shiftdown = e.Shift;
             altdown = e.Alt;
         }
+        private void AllowArrowMovement(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
+                if (trackEditor.IsCurrentCellInEditMode) {
+                    if ((string)trackEditor.CurrentCell.EditedFormattedValue == "") {
+                        trackEditor.CurrentCell.Value = null;
+                        trackEditor.CancelEdit();
+                        if (e.KeyCode is Keys.Right or Keys.Left)
+                            trackEditor.EndEdit();
+                    }
+                }
+            }
+        }
+        private void trackEditor_Click(object sender, EventArgs e)
+        {
+            if (trackEditor.IsCurrentCellInEditMode) {
+                if ((string)trackEditor.CurrentCell.EditedFormattedValue == "") {
+                    trackEditor.CurrentCell.Value = null;
+                    trackEditor.CancelEdit();
+                    trackEditor.EndEdit();
+                }
+            }
+        }
         //Clicking row headers to select the row
         private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -579,7 +605,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (_beats > trackEditor.ColumnCount) {
                 trackEditor.ColumnCount = _beats;
-                GenerateColumnStyle(trackEditor, _beats);
+                TCLE.GenerateColumnStyle(trackEditor, _beats);
             }
             else
                 trackEditor.ColumnCount = _beats;
@@ -1295,8 +1321,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             TCLE.PlaySound("UIleafsplit");
             //load new leaf that was just split
-            _mainform.workingfolderFiles.Rows.Insert(_mainform.workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
-            _mainform.workingfolderFiles.Rows[_mainform.workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
+            ///_mainform.workingfolderFiles.Rows.Insert(_mainform.workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
+            ///_mainform.workingfolderFiles.Rows[_mainform.workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
 
             LoadLeaf(TCLE.LoadFileLock($@"{_mainform.workingfolder}\leaf_{newfilename}.txt"), $@"{_mainform.workingfolder}\leaf_{newfilename}.txt");
 
@@ -1376,7 +1402,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             TCLE.PlaySound("UIaddrandom");
             do {
-                TCLE.RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
+                RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
             } while (trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Where(x => x.Value != null).ToList().Count == 0);
             ShowRawTrackData(trackEditor.CurrentRow);
             randomizing = false;
@@ -1391,7 +1417,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (MessageBox.Show("Assign random values to the current selected track?", "Confirm randomization", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 TCLE.PlaySound("UIaddrandom");
                 do {
-                    TCLE.RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
+                    RandomizeRowValues(trackEditor.CurrentRow, _tracks[_selecttrack]);
                 } while (trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Where(x => x.Value != null).ToList().Count == 0);
                 ShowRawTrackData(trackEditor.CurrentRow);
                 SaveLeaf(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
@@ -1446,38 +1472,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropParamPath.SelectedIndexChanged += dropParamPath_SelectedIndexChanged;
         }
 
-        public static void InitializeTracks(DataGridView grid, bool columnstyle)
-        {
-            //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
-            //used to significantly improve rendering performance
-            if (!SystemInformation.TerminalServerSession) {
-                Type dgvType = grid.GetType();
-                PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-                pi.SetValue(grid, true, null);
-            }
-
-            if (columnstyle)
-                GenerateColumnStyle(grid, grid.ColumnCount);
-        }
-
-        public static void GenerateColumnStyle(DataGridView grid, int _cells)
-        {
-            //stylize track grid/columns
-            for (int i = 0; i < _cells; i++) {
-                grid.Columns[i].Name = i.ToString();
-                grid.Columns[i].Resizable = DataGridViewTriState.False;
-                grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                grid.Columns[i].DividerWidth = 1;
-                grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                grid.Columns[i].Frozen = false;
-                grid.Columns[i].MinimumWidth = 2;
-                grid.Columns[i].ReadOnly = false;
-                grid.Columns[i].ValueType = typeof(decimal?);
-                grid.Columns[i].DefaultCellStyle.Format = "0.###";
-                grid.Columns[i].FillWeight = 0.001F;
-                grid.Columns[i].DefaultCellStyle.Font = new Font("Consolas", 8);
-            }
-        }
         ///Import raw text from rich text box to selected row
         public void TrackRawImport(DataGridViewRow r, JObject _rawdata)
         {
@@ -1893,6 +1887,71 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///
         ///
         ///
+
+
+        public static void RandomizeRowValues(DataGridViewRow dgvr, Sequencer_Object _seqobj)
+        {
+            Random rng = new Random();
+            int rngchance;
+            int rnglimit;
+            int randomtype = 0;
+            decimal valueiftrue = 0;
+
+            if ((_seqobj.trait_type is "kTraitBool" or "kTraitAction") || (_seqobj.param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
+                valueiftrue = 1;
+                rngchance = 10;
+                rnglimit = 9;
+                if (_seqobj.obj_name == "sentry.spn") {
+                    rngchance = 55;
+                    rnglimit = 54;
+                }
+            }
+            else if (_seqobj.trait_type == "kTraitColor") {
+                randomtype = 7;
+                rngchance = 10;
+                rnglimit = 8;
+            }
+            else {
+                rngchance = 10;
+                rnglimit = 9;
+                if (_seqobj.param_path == "sequin_speed")
+                    randomtype = 2;
+                else if (_seqobj.obj_name == "fade.pp")
+                    randomtype = 3;
+                else if (_seqobj.friendly_type == "CAMERA")
+                    randomtype = 4;
+                else if (_seqobj.friendly_type == "GAMMA")
+                    randomtype = 5;
+                else
+                    randomtype = 6;
+            }
+            foreach (DataGridViewCell dgvc in dgvr.Cells) {
+                switch (randomtype) {
+                    case 2:
+                        valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
+                        break;
+                    case 3:
+                        valueiftrue = TCLE.TruncateDecimal((decimal)rng.NextDouble(), 3);
+                        break;
+                    case 4:
+                        valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        break;
+                    case 5:
+                        valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3);
+                        break;
+                    case 6:
+                        valueiftrue = (TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200) * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        break;
+                    case 7:
+                        valueiftrue = Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb();
+                        break;
+                }
+
+                dgvc.Value = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
+            }
+            TrackUpdateHighlighting(dgvr, _seqobj);
+            GenerateDataPoints(dgvr, _seqobj);
+        }
         #endregion
     }
 }

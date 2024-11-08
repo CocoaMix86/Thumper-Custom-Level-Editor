@@ -143,9 +143,6 @@
     <Compile Include="Other Forms\DialogInput.Designer.cs">
       <DependentUpon>DialogInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor Panels\Gate_Editor.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Utility Classes\GlobalSuppressions.cs" />
     <Compile Include="Other Forms\ImageMessageBox.cs">
       <SubType>Form</SubType>
@@ -153,19 +150,7 @@
     <Compile Include="Other Forms\ImageMessageBox.Designer.cs">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor Panels\Leaf_Editor.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="LevelDataClasses\DataClasses.cs" />
-    <Compile Include="Editor Panels\Lvl_Editor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\Master_Editor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\Sample_Editor.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="ThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,9 +159,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Editor Panels\WorkingFolder.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Utility Classes\Leaf Playback.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,6 +249,9 @@
     <None Include="image assets\icon-openfile.png" />
     <None Include="image assets\icon-rawtext.png" />
     <None Include="Resources\icon-rawtext.png" />
+    <None Include="image assets\icons-openfile.png" />
+    <None Include="image assets\icon-save.png" />
+    <None Include="image assets\icon-save-all.png" />
     <Content Include="thumper_level_editor2.ico" />
     <None Include="image assets\railcolorhelp.png" />
     <None Include="text assets\leaf_singletrack.txt" />

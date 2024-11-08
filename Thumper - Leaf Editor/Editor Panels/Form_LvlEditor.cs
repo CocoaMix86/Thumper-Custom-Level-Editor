@@ -26,10 +26,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip2.Renderer = new ToolStripOverride();
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
+            TCLE.InitializeTracks(lvlSeqObjs, true);
+            TCLE.InitializeTracks(lvlLeafList, false);
         }
         #endregion
 
         #region Variables
+        bool controldown;
+        bool altdown;
+        bool shiftdown;
+        bool _saveleaf;
         public bool _savelvl = true;
         int _lvllength;
         public string _loadedlvl
@@ -87,7 +93,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
             //lvlLeafList_RowEnter(sender, e);
-            if ((!_mainform._saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _mainform._saveleaf) {
+            if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
                 string _file = (_lvlleafs[e.RowIndex].leafname).Replace(".leaf", "");
                 dynamic _load;
                 if (File.Exists($@"{_mainform.workingfolder}\leaf_{_file}.txt")) {
@@ -98,7 +104,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
 
-                _mainform.LoadLeaf(_load, $@"{_mainform.workingfolder}\leaf_{_file}.txt");
+                ///LoadLeaf(_load, $@"{_mainform.workingfolder}\leaf_{_file}.txt");
             }
             LvlUpdatePaths(e.RowIndex);
         }
@@ -160,7 +166,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    TCLE.TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _mainform._tracks[e.RowIndex]);
+                    ///TCLE.TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _mainform._tracks[e.RowIndex]);
                     SaveLvl(false);
                     lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
                 }
@@ -181,7 +187,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    TCLE.TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _mainform._tracks[e.RowIndex]);
+                    ///TCLE.TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _mainform._tracks[e.RowIndex]);
                     //GenerateDataPoints(dgv.Rows[e.RowIndex]);
                     SaveLvl(false);
                     lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
@@ -237,14 +243,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //Press Delete to clear cells
         private void lvlSeqObjs_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            _mainform.controldown = e.Control;
-            _mainform.shiftdown = e.Shift;
-            _mainform.altdown = e.Alt;
+            controldown = e.Control;
+            shiftdown = e.Shift;
+            altdown = e.Alt;
             if (e.KeyCode == Keys.Delete) {
                 CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex, true);
                 e.Handled = true;
             }
-            else if (_mainform.controldown) {
+            else if (controldown) {
                 ///copies selected cells
                 if (e.KeyCode == Keys.C) {
                     DataObject d = lvlSeqObjs.GetClipboardContent();
@@ -549,9 +555,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
+            /*
             List<string> leafs = _mainform.workingfolderFiles.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[1].Value.ToString().Contains("leaf_")).Select(x => x.Cells[1].Value.ToString()).ToList();
             string _selectedfilename = $@"{_mainform.workingfolder}\{leafs[_mainform.rng.Next(0, leafs.Count)]}.txt";
             AddLeaftoLvl(_selectedfilename);
+            */
         }
 
         private void btnLvlPathDelete_Click(object sender, EventArgs e)

@@ -19,6 +19,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             toolstripTitleGate.Renderer = new ToolStripOverride();
             gateToolStrip.Renderer = new ToolStripOverride();
+            TCLE.InitializeTracks(gateLvlList, false);
         }
         #endregion
 
@@ -99,7 +100,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             dynamic _load;
             //gateLvlList_RowEnter(sender, e);
-            if ((!_mainform._savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _mainform._savelvl) {
+            if ((/*!_mainform._savelvl &&*/ MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) /*|| _mainform._savelvl*/) {
                 string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");
                 if (File.Exists($@"{_mainform.workingfolder}\lvl_{_file}.txt")) {
                     _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
@@ -109,7 +110,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
                 //load the selected lvl
-                _mainform.LoadLvl(_load, $@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                ///_mainform.LoadLvl(_load, $@"{_mainform.workingfolder}\lvl_{_file}.txt");
             }
         }
         private void gateLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -409,9 +410,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //buttons that click other buttons
         private void btnGatePanelNew_Click(object sender, EventArgs e) => _mainform.toolstripGateNew.PerformClick();
         //I use MasterLoadLvl on these because it's the exact same code to load a lvl
-        private void btnGateOpenPre_Click(object sender, EventArgs e) => _mainform.MasterLoadLvl(dropGatePre.Text);
-        private void btnGateOpenPost_Click(object sender, EventArgs e) => _mainform.MasterLoadLvl(dropGatePost.Text);
-        private void btnGateOpenRestart_Click(object sender, EventArgs e) => _mainform.MasterLoadLvl(dropGateRestart.Text);
+        private void btnGateOpenPre_Click(object sender, EventArgs e) { /*_mainform.MasterLoadLvl(dropGatePre.Text);*/ }
+        private void btnGateOpenPost_Click(object sender, EventArgs e) { /*_mainform.MasterLoadLvl(dropGatePost.Text);*/ }
+        private void btnGateOpenRestart_Click(object sender, EventArgs e) { /*_mainform.MasterLoadLvl(dropGateRestart.Text);*/ }
 
         private void checkGateRandom_CheckedChanged(object sender, EventArgs e)
         {

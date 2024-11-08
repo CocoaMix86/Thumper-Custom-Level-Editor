@@ -29,7 +29,7 @@ namespace Thumper_Custom_Level_Editor
                 //check if `set` value is different than current stored value
                 if (_workingfolder != value) {
                     //also only change workingfolders if user says yes to data loss
-                    if (!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample) {
+                    if (/*!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample*/false) {
                         if (MessageBox.Show("Some files are unsaved. Are you sure you want to change working folders?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                             return;
                         }
@@ -120,15 +120,14 @@ namespace Thumper_Custom_Level_Editor
             JumpListUpdate();
 
             //set custom renderer
-            menuStrip.Renderer = new ToolStripMainForm();
+            toolStripTitle.Renderer = new ToolStripMainForm();
+            toolStripMain.Renderer = new ToolStripMainForm();
             contextmenuFile.Renderer = new ContextMenuColors();
             contextMenuAddFile.Renderer = new ContextMenuColors();
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
             //event handler needed for dgv
-            trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
-            DropDownMenuScrollWheelHandler.Enable(true);
             //
             LevelToLoad = LevelFromArg;
             //
@@ -141,36 +140,13 @@ namespace Thumper_Custom_Level_Editor
             if (!Directory.Exists($@"{AppLocation}\temp")) {
                 Directory.CreateDirectory($@"{AppLocation}\temp");
             }
-            //
-            dropMasterSkybox.SelectedIndex = 1;
-            dropMasterSkybox.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
-
             //setup datagrids with proper formatting
-            InitializeTracks(trackEditor, true);
-            InitializeTracks(lvlSeqObjs, true);
-            InitializeTracks(lvlLeafList, false);
-            InitializeTracks(masterLvlList, false);
-            InitializeTracks(gateLvlList, false);
-            InitializeTracks(workingfolderFiles, false);
-            InitializeTracks(sampleList, false);
             //call method that imports objects from track_objects.txt (for Leaf editing)
             ImportObjects();
-            InitializeLeafStuff();
-            InitializeLvlStuff();
-            InitializeMasterStuff();
-            InitializeGateStuff();
-            InitializeSampleStuff();
             //write required audio files for playback
-            InitializeSounds();
+            ///InitializeSounds();
             //keybinds
             SetKeyBinds();
-            //pictureBeeble.Size = Properties.Settings.Default.beeblesize;
-            //pictureBeeble.Location = Properties.Settings.Default.beebleloc;
-            //zoom settings
-            trackZoom.Value = Properties.Settings.Default.leafzoom;
-            trackZoomVert.Value = Properties.Settings.Default.leafzoomvert;
-            trackLvlVolumeZoom.Value = Properties.Settings.Default.lvlzoom;
-            btnLeafAutoPlace.Checked = Properties.Settings.Default.leafautoinsert;
             //colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //load recent levels 
@@ -232,7 +208,7 @@ namespace Thumper_Custom_Level_Editor
         ///FORM CLOSING - check if anything is unsaved
         private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample) {
+            if (/*!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample*/true) {
                 if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
@@ -244,10 +220,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.beeblesize = pictureBeeble.Size;
             Properties.Settings.Default.beebleloc = pictureBeeble.Location;
             //zoom settings
-            Properties.Settings.Default.leafzoom = trackZoom.Value;
-            Properties.Settings.Default.leafzoomvert = trackZoomVert.Value;
-            Properties.Settings.Default.lvlzoom = trackLvlVolumeZoom.Value;
-            Properties.Settings.Default.leafautoinsert = btnLeafAutoPlace.Checked;
+
             //colors
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //
@@ -281,12 +254,7 @@ namespace Thumper_Custom_Level_Editor
         ///Toolstrip - FILE
         private void SaveAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Call all save methods for files with the save flag False
-            if (!_savemaster) mastersaveToolStripMenuItem_Click(null, null);
-            if (!_savegate) gatesaveToolStripMenuItem_Click(null, null);
-            if (!_savelvl) saveToolStripMenuItem2_Click(null, null);
-            if (!_saveleaf) saveToolStripMenuItem_Click(null, null);
-            if (!_savesample) SamplesaveToolStripMenuItem_Click(null, null);
+
         }
 
         private void ResetBeeble(object sender, EventArgs e)
@@ -480,6 +448,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void FormLeafEditor_KeyDown(object sender, KeyEventArgs e)
         {
+            /*
             //Next/Previous lvl keybind
             if (e.KeyData == defaultkeybinds["nextlvl"] || e.KeyData == defaultkeybinds["previouslvl"]) {
                 if (workingfolder == null)
@@ -545,6 +514,7 @@ namespace Thumper_Custom_Level_Editor
             else if (e.KeyData == defaultkeybinds["toggleautoplace"]) {
                 btnLeafAutoPlace.PerformClick();
             }
+            */
         }
 
         private void SetKeyBinds()
@@ -582,7 +552,7 @@ namespace Thumper_Custom_Level_Editor
             openLevelInExplorerToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelexplorer"];
             leafTemplateToolStripMenuItem.ShortcutKeys = defaultkeybinds["templateopen"];
             */
-            btnUndoLeaf.ToolTipText = $"Undo ({String.Join("+", defaultkeybinds["leafundo"].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList().Reverse<string>())})";
+            ///btnUndoLeaf.ToolTipText = $"Undo ({String.Join("+", defaultkeybinds["leafundo"].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList().Reverse<string>())})";
         }
 
         private void dropTrackLane_DropDown(object sender, EventArgs e)
@@ -636,38 +606,6 @@ namespace Thumper_Custom_Level_Editor
             dockLvl.Show(dockMain, DockState.Document);
             dockSample.Show(dockMain, DockState.Document);
             dockLeaf.Show(dockMain, DockState.Document);
-        }
-
-        ///
-        ///https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
-        public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
-        {
-            // Get information about the source directory
-            var dir = new DirectoryInfo(sourceDir);
-
-            // Check if the source directory exists
-            if (!dir.Exists)
-                throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
-
-            // Cache directories before we start copying
-            DirectoryInfo[] dirs = dir.GetDirectories();
-
-            // Create the destination directory
-            Directory.CreateDirectory(destinationDir);
-
-            // Get the files in the source directory and copy to the destination directory
-            foreach (FileInfo file in dir.GetFiles()) {
-                string targetFilePath = Path.Combine(destinationDir, file.Name);
-                file.CopyTo(targetFilePath);
-            }
-
-            // If recursive and copying subdirectories, recursively call this method
-            if (recursive) {
-                foreach (DirectoryInfo subDir in dirs) {
-                    string newDestinationDir = Path.Combine(destinationDir, subDir.Name);
-                    CopyDirectory(subDir.FullName, newDestinationDir, true);
-                }
-            }
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)

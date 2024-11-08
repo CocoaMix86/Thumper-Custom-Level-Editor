@@ -49,6 +49,8 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        public HashSet<Object_Params> _objects = new();
+        string _errorlog;
         public void ImportObjects()
         {
             _objects.Clear();
@@ -93,12 +95,16 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show(_errorlog);
                 _errorlog = "";
             }
+            /*
             //customize combobox to display the correct content
             dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
             dropObjects.SelectedIndex = -1;
             //dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
             dropParamPath.Enabled = false;
+            */
         }
+
+        private Dictionary<string, string> objectcolors = new();
         public void ImportDefaultColors()
         {
             objectcolors.Clear();
@@ -113,10 +119,11 @@ namespace Thumper_Custom_Level_Editor
         ///Color elements based on set properties
         private void ColorFormElements()
         {
+            /*
             if (File.Exists($@"{AppLocation}\templates\UIcolorprefs.txt")) {
                 string[] colors = File.ReadAllLines($@"{AppLocation}\templates\UIcolorprefs.txt");
                 Properties.Settings.Default.custom_bgcolor = this.BackColor = Color.FromArgb(int.Parse(colors[0]));
-                Properties.Settings.Default.custom_menucolor = menuStrip.BackColor = Color.FromArgb(int.Parse(colors[1]));
+                Properties.Settings.Default.custom_menucolor = toolStripTitle.BackColor = Color.FromArgb(int.Parse(colors[1]));
                 Properties.Settings.Default.custom_mastercolor = panelMaster.BackColor = Color.FromArgb(int.Parse(colors[2]));
                 Properties.Settings.Default.custom_gatecolor = panelGate.BackColor = Color.FromArgb(int.Parse(colors[3]));
                 Properties.Settings.Default.custom_lvlcolor = panelLevel.BackColor = Color.FromArgb(int.Parse(colors[4]));
@@ -127,13 +134,14 @@ namespace Thumper_Custom_Level_Editor
             }
             else {
                 this.BackColor = Properties.Settings.Default.custom_bgcolor;
-                menuStrip.BackColor = Properties.Settings.Default.custom_menucolor;
+                toolStripTitle.BackColor = Properties.Settings.Default.custom_menucolor;
                 panelLeaf.BackColor = Properties.Settings.Default.custom_leafcolor;
                 panelLevel.BackColor = Properties.Settings.Default.custom_lvlcolor;
                 panelGate.BackColor = Properties.Settings.Default.custom_gatecolor;
                 panelMaster.BackColor = Properties.Settings.Default.custom_mastercolor;
                 panelSample.BackColor = Properties.Settings.Default.custom_samplecolor;
             }
+            */
         }
 
         /// <summary>Blends the specified colors together.</summary>
@@ -152,6 +160,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void ClearPanels(string panel = "all")
         {
+            /*
             //clear lists used for storing level data
             if (panel is "all" or "leaf") {
                 _loadedleaf = null;
@@ -173,6 +182,7 @@ namespace Thumper_Custom_Level_Editor
                 _loadedsample = null;
                 PanelEnableState(panelSample, false);
             }
+            */
         }
 
         public static void PlaySound(string audiofile)
@@ -203,29 +213,6 @@ namespace Thumper_Custom_Level_Editor
                 e.Handled = true;
             }
         }
-        private void AllowArrowMovement(object sender, PreviewKeyDownEventArgs e)
-        {
-           if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
-                if (trackEditor.IsCurrentCellInEditMode) {
-                    if ((string)trackEditor.CurrentCell.EditedFormattedValue == "") {
-                        trackEditor.CurrentCell.Value = null;
-                        trackEditor.CancelEdit();
-                        if (e.KeyCode is Keys.Right or Keys.Left)
-                            trackEditor.EndEdit();
-                    }
-                }
-           }
-        }
-        private void trackEditor_Click(object sender, EventArgs e)
-        {
-            if (trackEditor.IsCurrentCellInEditMode) {
-                if ((string)trackEditor.CurrentCell.EditedFormattedValue == "") {
-                    trackEditor.CurrentCell.Value = null;
-                    trackEditor.CancelEdit();
-                    trackEditor.EndEdit();
-                }
-            }
-        }
 
         public static void Read_Config()
         {
@@ -244,76 +231,12 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        public static void RandomizeRowValues(DataGridViewRow dgvr, Sequencer_Object _seqobj)
-        {
-            Random rng = new Random();
-            int rngchance;
-            int rnglimit;
-            int randomtype = 0;
-            decimal valueiftrue = 0;
-            
-            if ((_seqobj.trait_type is "kTraitBool" or "kTraitAction") || (_seqobj.param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
-                valueiftrue = 1;
-                rngchance = 10;
-                rnglimit = 9;
-                if (_seqobj.obj_name == "sentry.spn") {
-                    rngchance = 55;
-                    rnglimit = 54;
-                }
-            }
-            else if (_seqobj.trait_type == "kTraitColor") {
-                randomtype = 7;
-                rngchance = 10;
-                rnglimit = 8;
-            }
-            else {
-                rngchance = 10;
-                rnglimit = 9;
-                if (_seqobj.param_path == "sequin_speed")
-                    randomtype = 2;
-                else if (_seqobj.obj_name == "fade.pp")
-                    randomtype = 3;
-                else if (_seqobj.friendly_type == "CAMERA")
-                    randomtype = 4;
-                else if (_seqobj.friendly_type == "GAMMA")
-                    randomtype = 5;
-                else
-                    randomtype = 6;
-            }
-            foreach (DataGridViewCell dgvc in dgvr.Cells) {
-                switch (randomtype) {
-                    case 2:
-                        valueiftrue = TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
-                        break;
-                    case 3:
-                        valueiftrue = TruncateDecimal((decimal)rng.NextDouble(), 3);
-                        break;
-                    case 4:
-                        valueiftrue = TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1);
-                        break;
-                    case 5:
-                        valueiftrue = TruncateDecimal((decimal)(rng.NextDouble() * 100), 3);
-                        break;
-                    case 6:
-                        valueiftrue = (TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200) * (rng.Next(0, 1) == 0 ? 1 : -1);
-                        break;
-                    case 7:
-                        valueiftrue = Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb();
-                        break;
-                }
-
-                dgvc.Value = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
-            }
-            TrackUpdateHighlighting(dgvr, _seqobj);
-            GenerateDataPoints(dgvr, _seqobj);
-        }
-
         private void UpdateLevelLists()
         {
             lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
-
+            /*
             dropMasterCheck.SelectedIndexChanged -= dropMasterCheck_SelectedIndexChanged;
             dropMasterIntro.SelectedIndexChanged -= dropMasterIntro_SelectedIndexChanged;
             dropMasterLvlRest.SelectedIndexChanged -= dropMasterLvlRest_SelectedIndexChanged;
@@ -334,6 +257,7 @@ namespace Thumper_Custom_Level_Editor
             dropGatePre.SelectedIndexChanged += dropGatePre_SelectedIndexChanged;
             dropGatePost.SelectedIndexChanged += dropGatePost_SelectedIndexChanged;
             dropGateRestart.SelectedIndexChanged += dropGateRestart_SelectedIndexChanged;
+            */
         }
 
         public string SearchReferences(dynamic _load, string filepath)
@@ -476,6 +400,82 @@ namespace Thumper_Custom_Level_Editor
                     dgvr.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
                 }
             }
+        }
+
+        ///
+        ///https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
+        public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
+        {
+            // Get information about the source directory
+            var dir = new DirectoryInfo(sourceDir);
+
+            // Check if the source directory exists
+            if (!dir.Exists)
+                throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
+
+            // Cache directories before we start copying
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            // Create the destination directory
+            Directory.CreateDirectory(destinationDir);
+
+            // Get the files in the source directory and copy to the destination directory
+            foreach (FileInfo file in dir.GetFiles()) {
+                string targetFilePath = Path.Combine(destinationDir, file.Name);
+                file.CopyTo(targetFilePath);
+            }
+
+            // If recursive and copying subdirectories, recursively call this method
+            if (recursive) {
+                foreach (DirectoryInfo subDir in dirs) {
+                    string newDestinationDir = Path.Combine(destinationDir, subDir.Name);
+                    CopyDirectory(subDir.FullName, newDestinationDir, true);
+                }
+            }
+        }
+
+        public List<SampleData> _lvlsamples = new();
+        public void LvlReloadSamples()
+        {
+            if (workingfolder == null)
+                return;
+            _lvlsamples.Clear();
+            //find all samp_ files in the level folder
+            List<string> _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
+            //add default empty sample
+            _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
+            //iterate over each file
+            foreach (string f in _sampfiles) {
+                //parse file to JSON
+                dynamic _in = TCLE.LoadFileLock(f);
+                //iterate over items:[] list to get each sample and add names to list
+                foreach (dynamic _samp in _in["items"]) {
+                    _lvlsamples.Add(new SampleData {
+                        obj_name = ((string)_samp["obj_name"]).Replace(".samp", ""),
+                        path = _samp["path"],
+                        volume = _samp["volume"],
+                        pitch = _samp["pitch"],
+                        pan = _samp["pan"],
+                        offset = _samp["offset"],
+                        channel_group = _samp["channel_group"]
+                    });
+                }
+            }
+            _lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
+            /*
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
+            //this is for adjusting the dropdown width so that the full item can display
+            int width = 0;
+            Graphics g = lvlLoopTracks.CreateGraphics();
+            Font font = lvlLoopTracks.DefaultCellStyle.Font;
+            foreach (SampleData s in _lvlsamples) {
+                int newWidth = (int)g.MeasureString(s.obj_name, font).Width;
+                if (width < newWidth) {
+                    width = newWidth;
+                }
+            }
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DropDownWidth = width + 20;
+            */
         }
     }
 }

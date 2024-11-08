@@ -10,6 +10,7 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
 	{
+		/*
 		//AccurateTimer mTimer1;
 		List<List<WaveStream>> vorbis;
 		bool _playing = false;
@@ -51,7 +52,7 @@ namespace Thumper_Custom_Level_Editor
 			/*outputDevice1 = new WaveOutEvent();
 			var playlist = new ConcatenatingSampleProvider(new[] { ring.ToSampleProvider(), ring_approach.ToSampleProvider(), bar_approach.ToSampleProvider() });
 			outputDevice1.Init(playlist);
-			outputDevice1.Play();*/
+			outputDevice1.Play();
 		}
 		public static byte[] ReadFully(Stream input)
 		{
@@ -205,7 +206,7 @@ namespace Thumper_Custom_Level_Editor
 			//the speed of the timer is reliant on the level's BPM
 			int _period = (int)Math.Round(60000f / (float)NUD_ConfigBPM.Value, MidpointRounding.AwayFromZero);
 			mTimer1 = new AccurateTimer(this, new Action(_playbacktimer_Tick), _period);
-			*/
+			
 		}
 
 		private void _playbacktimer_Tick()
@@ -228,5 +229,6 @@ namespace Thumper_Custom_Level_Editor
 				trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
 			}
 		}
+		*/
 	}
 }

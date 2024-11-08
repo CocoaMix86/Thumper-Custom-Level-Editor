@@ -25,6 +25,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripTitleSample.Renderer = new ToolStripOverride();
             sampleToolStrip.Renderer = new ToolStripOverride();
             InitializeSampleStuff();
+            TCLE.InitializeTracks(sampleList, false);
 
             ///load sample here
             dynamic _load = TCLE.LoadFileLock(filetoload);
@@ -218,7 +219,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _loadedsample = $@"{storePath}\samp_{tempFileName}";
                 WriteSample();
                 //after saving new file, refresh the workingfolder
-                _mainform.btnWorkRefresh_Click(null, null);
+                ///_mainform.btnWorkRefresh_Click(null, null);
             }
         }
         private void WriteSample()

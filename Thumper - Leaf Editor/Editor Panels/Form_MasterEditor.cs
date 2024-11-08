@@ -22,6 +22,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             toolstripTitleMaster.Renderer = new ToolStripOverride();
             masterToolStrip.Renderer = new ToolStripOverride();
+            TCLE.InitializeTracks(masterLvlList, false);
         }
         #endregion
 
@@ -80,7 +81,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //show a different confirmation message if the selected item is gate or lvl
             if (_masterlvls[e.RowIndex].lvlname is "<none>" or "") {
-                if ((!_mainform._savegate && MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _mainform._savegate) {
+                if ((/*!_mainform._savegate && */MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savegate*/) {
                     _file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
                     if (File.Exists($@"{_mainform.workingfolder}\gate_{_file}.txt")) {
                         _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\gate_{_file}.txt");
@@ -93,7 +94,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     return;
             }
-            else if ((!_mainform._savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _mainform._savelvl) {
+            else if ((/*!_mainform._savelvl && */MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savelvl*/) {
                 _file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
                 if (File.Exists($@"{_mainform.workingfolder}\lvl_{_file}.txt")) {
                     _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
@@ -109,6 +110,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //remove event handlers from a few controls so they don't trigger when their values change
             dropMasterLvlRest.SelectedIndexChanged -= new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
             //load the selected item
+            /*
             if ((string)_load["obj_type"] == "SequinLevel")
                 _mainform.LoadLvl(_load, $@"{_mainform.workingfolder}\lvl_{_file}.txt");
             else if ((string)_load["obj_type"] == "SequinGate")
@@ -117,6 +119,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
             //re-add event handlers
             dropMasterLvlRest.SelectedIndexChanged += new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
+            */
         }
         private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -543,7 +546,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void MasterLoadLvl(string path)
         {
-            if ((!_mainform._savelvl && MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _mainform._savelvl) {
+            if ((/*!_mainform._savelvl && */MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savelvl*/) {
                 if (!path.Contains(".lvl"))
                     return;
                 string _file = path.Replace(".lvl", "");
@@ -556,7 +559,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
                 //load the selected lvl
-                _mainform.LoadLvl(_load, $@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                ///_mainform.LoadLvl(_load, $@"{_mainform.workingfolder}\lvl_{_file}.txt");
             }
         }
 

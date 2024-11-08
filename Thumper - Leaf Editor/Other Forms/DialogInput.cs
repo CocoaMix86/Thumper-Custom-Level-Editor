@@ -116,12 +116,12 @@ namespace Thumper_Custom_Level_Editor
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
             //check if any files are unsaved before moving folders
             if (mainform.workingfolder != levelpath) {
-                if (!mainform._saveleaf || !mainform._savelvl || !mainform._savemaster || !mainform._savegate || !mainform._savesample) {
+                if (/*!mainform._saveleaf || !mainform._savelvl || !mainform._savemaster || !mainform._savegate || !mainform._savesample*/ true) {
                     if (MessageBox.Show("Some files are unsaved. Changing the level folder will close them and unsaved changes will be lost?\nDo you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                         return false;
                     }
                 }
-                mainform._saveleaf = mainform._savelvl = mainform._savemaster = mainform._savegate = mainform._savesample = true;
+                ///mainform._saveleaf = mainform._savelvl = mainform._savemaster = mainform._savegate = mainform._savesample = true;
             }
 
             JObject level_details = new() {
@@ -257,14 +257,14 @@ namespace Thumper_Custom_Level_Editor
             ///
             ///create a default master file and open it
             if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
-                mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
-                mainform.WriteMaster();
+                ///mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
+                ///mainform.WriteMaster();
             }
             if (mainform.workingfolder != levelpath) {
                 MessageBox.Show("New level folder was created, but not loaded.", "Something went wrong...");
                 return false;
             }
-            mainform.btnWorkRefresh_Click(null, null);
+            ///mainform.btnWorkRefresh_Click(null, null);
             return true;
         }
 
