@@ -592,6 +592,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_closeblack {
+            get {
+                object obj = ResourceManager.GetObject("icon_closeblack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_collapse {
             get {
                 object obj = ResourceManager.GetObject("icon_collapse", resourceCulture);
@@ -792,9 +802,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_maximizeblack {
+            get {
+                object obj = ResourceManager.GetObject("icon_maximizeblack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_minimize {
             get {
                 object obj = ResourceManager.GetObject("icon_minimize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_minimizeblack {
+            get {
+                object obj = ResourceManager.GetObject("icon_minimizeblack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -955,6 +985,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static System.Drawing.Bitmap icon_restore {
             get {
                 object obj = ResourceManager.GetObject("icon_restore", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icon_restoreblack {
+            get {
+                object obj = ResourceManager.GetObject("icon_restoreblack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

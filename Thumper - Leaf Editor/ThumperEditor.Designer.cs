@@ -62,6 +62,12 @@
             this.pictureBeeble = new System.Windows.Forms.Panel();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.toolStripTitle = new System.Windows.Forms.ToolStrip();
+            this.contextMenuFormRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextFormRestore = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextFormMin = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextFormMax = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.contextFormClose = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripFormIcon = new System.Windows.Forms.ToolStripLabel();
             this.toolstripFile = new System.Windows.Forms.ToolStripMenuItem();
             this.contextmenuFile = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -155,6 +161,7 @@
             this.panel8.SuspendLayout();
             this.toolStripChangelog.SuspendLayout();
             this.toolStripTitle.SuspendLayout();
+            this.contextMenuFormRightClick.SuspendLayout();
             this.contextmenuFile.SuspendLayout();
             this.contextMenuAddFile.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -500,10 +507,14 @@
             // toolStripTitle
             // 
             this.toolStripTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.toolStripTitle.ContextMenuStrip = this.contextMenuFormRightClick;
             this.toolStripTitle.GripMargin = new System.Windows.Forms.Padding(0);
             this.toolStripTitle.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripTitle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolstripFormIcon,
+            this.toolstripFormClose,
+            this.toolstripFormRestore,
+            this.toolstripFormMinimize,
             this.toolstripFile,
             this.toolstripEdit,
             this.toolStripMenuItem12,
@@ -511,11 +522,7 @@
             this.toolstripHelp,
             this.toolStripMenuItem3,
             this.toolstripLevelName,
-            this.toolstripOpenPanels,
-            this.toolstripFormClose,
-            this.toolstripFormRestore,
-            this.toolstripFormMinimize});
-            this.toolStripTitle.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolstripOpenPanels});
             this.toolStripTitle.Location = new System.Drawing.Point(0, 0);
             this.toolStripTitle.MaximumSize = new System.Drawing.Size(0, 31);
             this.toolStripTitle.MinimumSize = new System.Drawing.Size(0, 31);
@@ -527,12 +534,68 @@
             this.toolStripTitle.Text = "toolStripTitle";
             this.toolStripTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolStripTitle_MouseDown);
             // 
+            // contextMenuFormRightClick
+            // 
+            this.contextMenuFormRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextFormRestore,
+            this.contextFormMin,
+            this.contextFormMax,
+            this.toolStripSeparator9,
+            this.contextFormClose});
+            this.contextMenuFormRightClick.Name = "contextMenuFormRightClick";
+            this.contextMenuFormRightClick.Size = new System.Drawing.Size(148, 98);
+            // 
+            // contextFormRestore
+            // 
+            this.contextFormRestore.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_restoreblack;
+            this.contextFormRestore.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.contextFormRestore.Name = "contextFormRestore";
+            this.contextFormRestore.Size = new System.Drawing.Size(147, 22);
+            this.contextFormRestore.Text = "Restore";
+            this.contextFormRestore.Click += new System.EventHandler(this.toolstripFormRestore_Click);
+            // 
+            // contextFormMin
+            // 
+            this.contextFormMin.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_minimizeblack;
+            this.contextFormMin.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.contextFormMin.Name = "contextFormMin";
+            this.contextFormMin.Size = new System.Drawing.Size(147, 22);
+            this.contextFormMin.Text = "Minimize";
+            this.contextFormMin.Click += new System.EventHandler(this.toolstripFormMinimize_Click);
+            // 
+            // contextFormMax
+            // 
+            this.contextFormMax.Enabled = false;
+            this.contextFormMax.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_maximizeblack;
+            this.contextFormMax.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.contextFormMax.Name = "contextFormMax";
+            this.contextFormMax.Size = new System.Drawing.Size(147, 22);
+            this.contextFormMax.Text = "Maximize";
+            this.contextFormMax.Click += new System.EventHandler(this.toolstripFormRestore_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(144, 6);
+            // 
+            // contextFormClose
+            // 
+            this.contextFormClose.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contextFormClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_closeblack;
+            this.contextFormClose.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.contextFormClose.Name = "contextFormClose";
+            this.contextFormClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.contextFormClose.Size = new System.Drawing.Size(147, 22);
+            this.contextFormClose.Text = "Close";
+            this.contextFormClose.Click += new System.EventHandler(this.toolstripFormClose_Click);
+            // 
             // toolstripFormIcon
             // 
             this.toolstripFormIcon.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.thumper_ico_24px;
             this.toolstripFormIcon.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolstripFormIcon.Margin = new System.Windows.Forms.Padding(0);
             this.toolstripFormIcon.Name = "toolstripFormIcon";
+            this.toolstripFormIcon.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolstripFormIcon.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.toolstripFormIcon.Size = new System.Drawing.Size(36, 31);
             // 
@@ -1466,6 +1529,7 @@
             this.toolStripChangelog.PerformLayout();
             this.toolStripTitle.ResumeLayout(false);
             this.toolStripTitle.PerformLayout();
+            this.contextMenuFormRightClick.ResumeLayout(false);
             this.contextmenuFile.ResumeLayout(false);
             this.contextMenuAddFile.ResumeLayout(false);
             this.toolStripMain.ResumeLayout(false);
@@ -1590,6 +1654,12 @@
         private System.Windows.Forms.Panel panelToolStrips;
         private System.Windows.Forms.ToolStripButton toolstripFormRestore;
         private System.Windows.Forms.ToolStripButton toolstripFormMinimize;
+        private System.Windows.Forms.ContextMenuStrip contextMenuFormRightClick;
+        private System.Windows.Forms.ToolStripMenuItem contextFormRestore;
+        private System.Windows.Forms.ToolStripMenuItem contextFormMin;
+        private System.Windows.Forms.ToolStripMenuItem contextFormMax;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem contextFormClose;
     }
 }
 

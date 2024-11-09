@@ -15,7 +15,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class TCLE
+    public partial class TCLE : Form
     {
         #region Variables
         public ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
@@ -109,10 +109,11 @@ namespace Thumper_Custom_Level_Editor
         public Dictionary<string, FileStream> lockedfiles = new();
         public Dictionary<string, Form> openfiles = new();
         #endregion
-
+        #region Form Construction
         public TCLE(string LevelFromArg)
         {
             InitializeComponent();
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
             dockMain.Theme = new VS2015DarkTheme();
             pictureBeeble.BringToFront();
 
@@ -162,6 +163,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
         }
+        #endregion
         ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
@@ -614,11 +616,15 @@ namespace Thumper_Custom_Level_Editor
                 this.WindowState = FormWindowState.Maximized;
                 this.Refresh();
                 toolstripFormRestore.Image = Properties.Resources.icon_restore;
-
+                contextFormMax.Enabled = false;
+                contextFormRestore.Enabled = true;
             }
             else {
                 this.WindowState = FormWindowState.Normal;
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
+                this.Refresh();
+                contextFormMax.Enabled = true;
+                contextFormRestore.Enabled = false;
             }
         }
         private void toolstripFormMinimize_Click(object sender, EventArgs e) => this.WindowState = FormWindowState.Minimized;
