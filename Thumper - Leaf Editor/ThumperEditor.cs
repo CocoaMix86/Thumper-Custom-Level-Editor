@@ -585,7 +585,6 @@ namespace Thumper_Custom_Level_Editor
             senderComboBox.DropDownWidth = width + vertScrollBarWidth;
         }
 
-
         private void toolstripOpenPanels_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(txtFilePath.Text)) {
@@ -608,6 +607,7 @@ namespace Thumper_Custom_Level_Editor
             dockLeaf.Show(dockMain, DockState.Document);
         }
 
+        #region Form Moving and Control buttons
         private void toolstripFormRestore_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Normal) {
@@ -624,31 +624,25 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripFormMinimize_Click(object sender, EventArgs e) => this.WindowState = FormWindowState.Minimized;
         private void toolstripFormClose_Click(object sender, EventArgs e) => this.Close();
 
-        private bool drag = false;
-        private Point startPoint = new Point(0, 0);
-        private void toolStripTitle_MouseUp(object sender, MouseEventArgs e)
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void toolStripTitle_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            this.drag = false;
-        }
-
-        private void toolStripTitle_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Maximized)
-                return;
-            this.startPoint = e.Location;
-            this.drag = true;
-        }
-
-        private void toolStripTitle_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (this.drag) {
-                // if we should be dragging it, we need to figure out some movement
-                Point p1 = new Point(e.X, e.Y);
-                Point p2 = this.PointToScreen(p1);
-                Point p3 = new Point(p2.X - this.startPoint.X,
-                                     p2.Y - this.startPoint.Y);
-                this.Location = p3;
+            if (e.Button == MouseButtons.Left) {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
+        }
+        #endregion
+
+        private void TCLE_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+                toolstripFormRestore.Image = Properties.Resources.icon_maximize;
         }
     }
 }

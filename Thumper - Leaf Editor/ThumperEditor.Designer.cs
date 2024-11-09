@@ -526,8 +526,6 @@
             this.toolStripTitle.TabIndex = 150;
             this.toolStripTitle.Text = "toolStripTitle";
             this.toolStripTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolStripTitle_MouseDown);
-            this.toolStripTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolStripTitle_MouseMove);
-            this.toolStripTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.toolStripTitle_MouseUp);
             // 
             // toolstripFormIcon
             // 
@@ -571,6 +569,7 @@
             this.toolStripSeparator4,
             this.toolStripMenuItem66});
             this.contextmenuFile.Name = "contextmenuFile";
+            this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextmenuFile.Size = new System.Drawing.Size(233, 330);
             // 
@@ -1453,6 +1452,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormLeafEditor_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormLeafEditor_KeyDown);
+            this.Resize += new System.EventHandler(this.TCLE_Resize);
             this.panelRecentFiles.ResumeLayout(false);
             this.panelRecentFiles.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).EndInit();
