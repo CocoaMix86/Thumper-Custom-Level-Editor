@@ -533,8 +533,10 @@
             // 
             this.toolstripFormIcon.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.thumper_ico_24px;
             this.toolstripFormIcon.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolstripFormIcon.Margin = new System.Windows.Forms.Padding(0);
             this.toolstripFormIcon.Name = "toolstripFormIcon";
-            this.toolstripFormIcon.Size = new System.Drawing.Size(24, 28);
+            this.toolstripFormIcon.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.toolstripFormIcon.Size = new System.Drawing.Size(36, 31);
             // 
             // toolstripFile
             // 
@@ -569,7 +571,6 @@
             this.toolStripSeparator4,
             this.toolStripMenuItem66});
             this.contextmenuFile.Name = "contextmenuFile";
-            this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextmenuFile.Size = new System.Drawing.Size(233, 330);
             // 
@@ -1300,6 +1301,7 @@
             this.toolstripFormClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripFormClose.Margin = new System.Windows.Forms.Padding(0);
             this.toolstripFormClose.Name = "toolstripFormClose";
+            this.toolstripFormClose.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolstripFormClose.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.toolstripFormClose.Size = new System.Drawing.Size(38, 31);
             this.toolstripFormClose.ToolTipText = "Close";
@@ -1314,6 +1316,7 @@
             this.toolstripFormRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripFormRestore.Margin = new System.Windows.Forms.Padding(0);
             this.toolstripFormRestore.Name = "toolstripFormRestore";
+            this.toolstripFormRestore.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolstripFormRestore.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.toolstripFormRestore.Size = new System.Drawing.Size(38, 31);
             this.toolstripFormRestore.Text = "🗖";
@@ -1329,6 +1332,7 @@
             this.toolstripFormMinimize.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolstripFormMinimize.Margin = new System.Windows.Forms.Padding(0);
             this.toolstripFormMinimize.Name = "toolstripFormMinimize";
+            this.toolstripFormMinimize.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolstripFormMinimize.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.toolstripFormMinimize.Size = new System.Drawing.Size(38, 31);
             this.toolstripFormMinimize.Text = "🗕";
