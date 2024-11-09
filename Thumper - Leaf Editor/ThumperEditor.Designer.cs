@@ -525,6 +525,9 @@
             this.toolStripTitle.Size = new System.Drawing.Size(984, 31);
             this.toolStripTitle.TabIndex = 150;
             this.toolStripTitle.Text = "toolStripTitle";
+            this.toolStripTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolStripTitle_MouseDown);
+            this.toolStripTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolStripTitle_MouseMove);
+            this.toolStripTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.toolStripTitle_MouseUp);
             // 
             // toolstripFormIcon
             // 
@@ -1427,6 +1430,7 @@
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(984, 500);
+            this.ControlBox = false;
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.dockMain);
             this.Controls.Add(this.panelToolStrips);
@@ -1435,14 +1439,14 @@
             this.Controls.Add(this.panelRecentFiles);
             this.Controls.Add(this.panelChangelog);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(100, 100);
             this.Name = "TCLE";
-            this.Text = "Thumper Custom Level Editor 3.0";
+            this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLeafEditor_FormClosing);
             this.Load += new System.EventHandler(this.FormLeafEditor_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormLeafEditor_KeyDown);
             this.panelRecentFiles.ResumeLayout(false);

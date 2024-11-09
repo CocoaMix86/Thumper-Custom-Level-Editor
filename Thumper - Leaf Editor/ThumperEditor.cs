@@ -612,6 +612,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (this.WindowState == FormWindowState.Normal) {
                 this.WindowState = FormWindowState.Maximized;
+                this.Refresh();
                 toolstripFormRestore.Image = Properties.Resources.icon_restore;
 
             }
@@ -622,5 +623,32 @@ namespace Thumper_Custom_Level_Editor
         }
         private void toolstripFormMinimize_Click(object sender, EventArgs e) => this.WindowState = FormWindowState.Minimized;
         private void toolstripFormClose_Click(object sender, EventArgs e) => this.Close();
+
+        private bool drag = false;
+        private Point startPoint = new Point(0, 0);
+        private void toolStripTitle_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.drag = false;
+        }
+
+        private void toolStripTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+                return;
+            this.startPoint = e.Location;
+            this.drag = true;
+        }
+
+        private void toolStripTitle_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.drag) {
+                // if we should be dragging it, we need to figure out some movement
+                Point p1 = new Point(e.X, e.Y);
+                Point p2 = this.PointToScreen(p1);
+                Point p3 = new Point(p2.X - this.startPoint.X,
+                                     p2.Y - this.startPoint.Y);
+                this.Location = p3;
+            }
+        }
     }
 }
