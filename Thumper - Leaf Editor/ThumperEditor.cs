@@ -115,7 +115,7 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             dockMain.Theme = new VS2015DarkTheme();
-            pictureBeeble.BringToFront();
+            ///pictureBeeble.BringToFront();
 
             ColorFormElements();
             JumpListUpdate();
@@ -124,7 +124,10 @@ namespace Thumper_Custom_Level_Editor
             toolStripTitle.Renderer = new ToolStripMainForm();
             toolStripMain.Renderer = new ToolStripMainForm();
             contextmenuFile.Renderer = new ContextMenuColors();
-            contextMenuAddFile.Renderer = new ContextMenuColors();
+            contextmenuEdit.Renderer = new ContextMenuColors();
+            contextMenuProject.Renderer = new ContextMenuColors();
+            contextmenuWindow.Renderer = new ContextMenuColors();
+            contextmenuHelp.Renderer = new ContextMenuColors();
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
@@ -597,11 +600,11 @@ namespace Thumper_Custom_Level_Editor
             var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text);
             dockProject.Show(dockMain, DockState.DockRight);
 
-            var dockMaster = new Form_MasterEditor(this);
-            var dockGate = new Form_GateEditor(this);
-            var dockLvl = new Form_LvlEditor(this);
-            var dockSample = new Form_SampleEditor(this, workingfolder);
-            var dockLeaf = new Form_LeafEditor(this);
+            var dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockGate = new Form_GateEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockLeaf = new Form_LeafEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);
             dockLvl.Show(dockMain, DockState.Document);
@@ -649,5 +652,15 @@ namespace Thumper_Custom_Level_Editor
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
         }
         #endregion
+
+        private void toolstripWindowFloat_Click(object sender, EventArgs e)
+        {
+            dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
+        }
+
+        private void toolstripWindowFloatAll_Click(object sender, EventArgs e)
+        {
+            dockMain.ActivePane.DockState = DockState.Float;
+        }
     }
 }

@@ -5,18 +5,20 @@ namespace Thumper_Custom_Level_Editor
 {
     class ContextMenuColorTable : ProfessionalColorTable
     {
-        public override Color MenuBorder { get { return Color.FromArgb(66, 66, 66); } }
+        public override Color MenuBorder { get { return Color.FromArgb(112, 112, 112); } }
+        public override Color MenuItemBorder { get { return Color.Red; } }
+        public Color MenuItemEnabledBorder { get { return Color.FromArgb(112, 112, 112); } }
+        public override Color ToolStripDropDownBackground { get { return Color.FromArgb(46, 46, 46); } }
+
         public override Color ImageMarginGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
         public override Color ImageMarginGradientEnd { get { return Color.FromArgb(46, 46, 46); } }
         public override Color ImageMarginGradientMiddle { get { return Color.FromArgb(46, 46, 46); } }
         public override Color MenuItemSelected { get { return Color.FromArgb(61, 61, 61); } }
-        public Color MenuItemEnabledBorder { get { return Color.FromArgb(112, 112, 112); } }
-        public override Color MenuItemBorder { get { return Color.FromArgb(112, 112, 112); } }
 
         public override Color MenuItemSelectedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
         public override Color MenuItemSelectedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color MenuItemPressedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color MenuItemPressedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
+        public override Color MenuItemPressedGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
+        public override Color MenuItemPressedGradientEnd { get { return Color.FromArgb(46, 46, 46); } }
 
         public override Color ButtonSelectedGradientBegin { get { return Color.FromArgb(112, 112, 112); } }
         public override Color ButtonSelectedGradientEnd { get { return Color.FromArgb(112, 112, 112); } }
@@ -60,6 +62,13 @@ namespace Thumper_Custom_Level_Editor
         {
             e.ArrowColor = Color.White;
             base.OnRenderArrow(e);
+        }
+        protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+        {
+            if (!e.Item.Enabled && e.Item.Selected) {
+                return;
+            }
+            base.OnRenderMenuItemBackground(e);
         }
     }
 }

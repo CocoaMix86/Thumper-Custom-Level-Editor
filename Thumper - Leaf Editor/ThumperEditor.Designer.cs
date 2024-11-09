@@ -69,6 +69,9 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.contextFormClose = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripFormIcon = new System.Windows.Forms.ToolStripLabel();
+            this.toolstripFormClose = new System.Windows.Forms.ToolStripButton();
+            this.toolstripFormRestore = new System.Windows.Forms.ToolStripButton();
+            this.toolstripFormMinimize = new System.Windows.Forms.ToolStripButton();
             this.toolstripFile = new System.Windows.Forms.ToolStripMenuItem();
             this.contextmenuFile = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,10 +116,16 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem66 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem49 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextmenuEdit = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripView = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuAddFile = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuProject = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,24 +136,17 @@
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.customLevelPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem52 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem53 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem54 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem55 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem56 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem57 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem58 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem59 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem60 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem61 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem62 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextmenuWindow = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolstripWindowFloat = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripWindowFloatAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripWindowDock = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolstripWindowCloseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripWindowCloseEditors = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.toolstripLevelName = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripOpenPanels = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolstripFormClose = new System.Windows.Forms.ToolStripButton();
-            this.toolstripFormRestore = new System.Windows.Forms.ToolStripButton();
-            this.toolstripFormMinimize = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
@@ -154,6 +156,19 @@
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.panelToolStrips = new System.Windows.Forms.Panel();
+            this.contextmenuHelp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem18 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem20 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem21 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem22 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem23 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentFiles)).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -163,9 +178,12 @@
             this.toolStripTitle.SuspendLayout();
             this.contextMenuFormRightClick.SuspendLayout();
             this.contextmenuFile.SuspendLayout();
-            this.contextMenuAddFile.SuspendLayout();
+            this.contextmenuEdit.SuspendLayout();
+            this.contextMenuProject.SuspendLayout();
+            this.contextmenuWindow.SuspendLayout();
             this.toolStripMain.SuspendLayout();
             this.panelToolStrips.SuspendLayout();
+            this.contextmenuHelp.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenuItem1
@@ -519,8 +537,8 @@
             this.toolstripEdit,
             this.toolStripMenuItem12,
             this.toolstripView,
-            this.toolstripHelp,
             this.toolStripMenuItem3,
+            this.toolstripHelp,
             this.toolstripLevelName,
             this.toolstripOpenPanels});
             this.toolStripTitle.Location = new System.Drawing.Point(0, 0);
@@ -598,6 +616,53 @@
             this.toolstripFormIcon.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolstripFormIcon.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.toolstripFormIcon.Size = new System.Drawing.Size(36, 31);
+            // 
+            // toolstripFormClose
+            // 
+            this.toolstripFormClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolstripFormClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripFormClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_close;
+            this.toolstripFormClose.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolstripFormClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripFormClose.Margin = new System.Windows.Forms.Padding(0);
+            this.toolstripFormClose.Name = "toolstripFormClose";
+            this.toolstripFormClose.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.toolstripFormClose.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
+            this.toolstripFormClose.Size = new System.Drawing.Size(38, 31);
+            this.toolstripFormClose.ToolTipText = "Close";
+            this.toolstripFormClose.Click += new System.EventHandler(this.toolstripFormClose_Click);
+            // 
+            // toolstripFormRestore
+            // 
+            this.toolstripFormRestore.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolstripFormRestore.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripFormRestore.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_restore;
+            this.toolstripFormRestore.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolstripFormRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripFormRestore.Margin = new System.Windows.Forms.Padding(0);
+            this.toolstripFormRestore.Name = "toolstripFormRestore";
+            this.toolstripFormRestore.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.toolstripFormRestore.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
+            this.toolstripFormRestore.Size = new System.Drawing.Size(38, 31);
+            this.toolstripFormRestore.Text = "🗖";
+            this.toolstripFormRestore.ToolTipText = "Restore Down";
+            this.toolstripFormRestore.Click += new System.EventHandler(this.toolstripFormRestore_Click);
+            // 
+            // toolstripFormMinimize
+            // 
+            this.toolstripFormMinimize.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolstripFormMinimize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripFormMinimize.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_minimize;
+            this.toolstripFormMinimize.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolstripFormMinimize.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripFormMinimize.Margin = new System.Windows.Forms.Padding(0);
+            this.toolstripFormMinimize.Name = "toolstripFormMinimize";
+            this.toolstripFormMinimize.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.toolstripFormMinimize.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
+            this.toolstripFormMinimize.Size = new System.Drawing.Size(38, 31);
+            this.toolstripFormMinimize.Text = "🗕";
+            this.toolstripFormMinimize.ToolTipText = "Minimize";
+            this.toolstripFormMinimize.Click += new System.EventHandler(this.toolstripFormMinimize_Click);
             // 
             // toolstripFile
             // 
@@ -701,7 +766,7 @@
             // 
             // toolstripLeafNew
             // 
-            this.toolstripLeafNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripLeafNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripLeafNew.ForeColor = System.Drawing.Color.White;
             this.toolstripLeafNew.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_addfile;
             this.toolstripLeafNew.ImageTransparentColor = System.Drawing.Color.Transparent;
@@ -712,7 +777,7 @@
             // 
             // toolstripLeafOpen
             // 
-            this.toolstripLeafOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripLeafOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripLeafOpen.ForeColor = System.Drawing.Color.White;
             this.toolstripLeafOpen.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openedfolders;
             this.toolstripLeafOpen.Name = "toolstripLeafOpen";
@@ -722,7 +787,7 @@
             // 
             // toolstripLeafSave
             // 
-            this.toolstripLeafSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripLeafSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripLeafSave.ForeColor = System.Drawing.Color.White;
             this.toolstripLeafSave.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
             this.toolstripLeafSave.Name = "toolstripLeafSave";
@@ -732,7 +797,7 @@
             // 
             // toolstripLeafSaveAs
             // 
-            this.toolstripLeafSaveAs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripLeafSaveAs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripLeafSaveAs.ForeColor = System.Drawing.Color.White;
             this.toolstripLeafSaveAs.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_saveas1;
             this.toolstripLeafSaveAs.Name = "toolstripLeafSaveAs";
@@ -742,14 +807,14 @@
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripSeparator2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripSeparator2.ForeColor = System.Drawing.Color.Black;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(188, 6);
             // 
             // toolstripLeafTemplate
             // 
-            this.toolstripLeafTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolstripLeafTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripLeafTemplate.ForeColor = System.Drawing.Color.White;
             this.toolstripLeafTemplate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_template1;
             this.toolstripLeafTemplate.Name = "toolstripLeafTemplate";
@@ -1066,8 +1131,7 @@
             // 
             // toolstripEdit
             // 
-            this.toolstripEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem49});
+            this.toolstripEdit.DropDown = this.contextmenuEdit;
             this.toolstripEdit.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolstripEdit.ForeColor = System.Drawing.Color.White;
             this.toolstripEdit.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -1076,13 +1140,79 @@
             this.toolstripEdit.Size = new System.Drawing.Size(39, 21);
             this.toolstripEdit.Text = "&Edit";
             // 
-            // toolStripMenuItem49
+            // contextmenuEdit
             // 
-            this.toolStripMenuItem49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem49.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem49.Name = "toolStripMenuItem49";
-            this.toolStripMenuItem49.Size = new System.Drawing.Size(142, 22);
-            this.toolStripMenuItem49.Text = "Preferences";
+            this.contextmenuEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.contextmenuEdit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoToolStripMenuItem,
+            this.toolStripSeparator10,
+            this.cutToolStripMenuItem,
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.contextmenuEdit.Name = "contextmenuEdit";
+            this.contextmenuEdit.OwnerItem = this.toolstripEdit;
+            this.contextmenuEdit.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextmenuEdit.Size = new System.Drawing.Size(145, 120);
+            // 
+            // undoToolStripMenuItem
+            // 
+            this.undoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.undoToolStripMenuItem.Enabled = false;
+            this.undoToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.undoToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_undo;
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.undoToolStripMenuItem.Text = "Undo";
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolStripSeparator10.ForeColor = System.Drawing.Color.White;
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(141, 6);
+            // 
+            // cutToolStripMenuItem
+            // 
+            this.cutToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.cutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.cutToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_cut;
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.copyToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.copyToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.pasteToolStripMenuItem.Enabled = false;
+            this.pasteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.pasteToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.deleteToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.deleteToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // toolStripMenuItem12
             // 
@@ -1096,7 +1226,7 @@
             // 
             // toolstripView
             // 
-            this.toolstripView.DropDown = this.contextMenuAddFile;
+            this.toolstripView.DropDown = this.contextMenuProject;
             this.toolstripView.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolstripView.ForeColor = System.Drawing.Color.White;
             this.toolstripView.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -1105,10 +1235,10 @@
             this.toolstripView.Size = new System.Drawing.Size(57, 21);
             this.toolstripView.Text = "&Project";
             // 
-            // contextMenuAddFile
+            // contextMenuProject
             // 
-            this.contextMenuAddFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.contextMenuAddFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.contextMenuProject.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem7,
             this.toolStripMenuItem8,
             this.toolStripMenuItem9,
@@ -1118,10 +1248,10 @@
             this.existingItemToolStripMenuItem,
             this.toolStripSeparator8,
             this.customLevelPropertiesToolStripMenuItem});
-            this.contextMenuAddFile.Name = "workingfolderRightClick";
-            this.contextMenuAddFile.OwnerItem = this.toolstripView;
-            this.contextMenuAddFile.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuAddFile.Size = new System.Drawing.Size(203, 170);
+            this.contextMenuProject.Name = "workingfolderRightClick";
+            this.contextMenuProject.OwnerItem = this.toolstripView;
+            this.contextMenuProject.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextMenuProject.Size = new System.Drawing.Size(203, 170);
             // 
             // toolStripMenuItem7
             // 
@@ -1196,15 +1326,7 @@
             // 
             // toolstripHelp
             // 
-            this.toolstripHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem52,
-            this.toolStripMenuItem57,
-            this.toolStripSeparator15,
-            this.toolStripMenuItem58,
-            this.toolStripMenuItem59,
-            this.toolStripMenuItem60,
-            this.toolStripMenuItem61,
-            this.toolStripMenuItem62});
+            this.toolstripHelp.DropDown = this.contextmenuHelp;
             this.toolstripHelp.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolstripHelp.ForeColor = System.Drawing.Color.White;
             this.toolstripHelp.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -1213,118 +1335,9 @@
             this.toolstripHelp.Size = new System.Drawing.Size(44, 21);
             this.toolstripHelp.Text = "&Help";
             // 
-            // toolStripMenuItem52
-            // 
-            this.toolStripMenuItem52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem52.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem53,
-            this.toolStripMenuItem55});
-            this.toolStripMenuItem52.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem52.Name = "toolStripMenuItem52";
-            this.toolStripMenuItem52.Size = new System.Drawing.Size(213, 22);
-            this.toolStripMenuItem52.Text = "Documentation...";
-            // 
-            // toolStripMenuItem53
-            // 
-            this.toolStripMenuItem53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem53.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem54});
-            this.toolStripMenuItem53.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem53.Name = "toolStripMenuItem53";
-            this.toolStripMenuItem53.Size = new System.Drawing.Size(208, 22);
-            this.toolStripMenuItem53.Text = "Tentacles/Paths Visuals";
-            // 
-            // toolStripMenuItem54
-            // 
-            this.toolStripMenuItem54.BackColor = System.Drawing.Color.Black;
-            this.toolStripMenuItem54.Enabled = false;
-            this.toolStripMenuItem54.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem54.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem54.Name = "toolStripMenuItem54";
-            this.toolStripMenuItem54.Size = new System.Drawing.Size(308, 22);
-            this.toolStripMenuItem54.Text = "credit to \"JLMusic\", \"CaptainJul\", \"nwolc\" on the Discord";
-            // 
-            // toolStripMenuItem55
-            // 
-            this.toolStripMenuItem55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem55.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem56});
-            this.toolStripMenuItem55.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem55.Name = "toolStripMenuItem55";
-            this.toolStripMenuItem55.Size = new System.Drawing.Size(208, 22);
-            this.toolStripMenuItem55.Text = "Track Objects";
-            // 
-            // toolStripMenuItem56
-            // 
-            this.toolStripMenuItem56.BackColor = System.Drawing.Color.Black;
-            this.toolStripMenuItem56.Enabled = false;
-            this.toolStripMenuItem56.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem56.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem56.Name = "toolStripMenuItem56";
-            this.toolStripMenuItem56.Size = new System.Drawing.Size(233, 22);
-            this.toolStripMenuItem56.Text = "credit to \"NotAFascist\" on the Discord";
-            // 
-            // toolStripMenuItem57
-            // 
-            this.toolStripMenuItem57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem57.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem57.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
-            this.toolStripMenuItem57.Name = "toolStripMenuItem57";
-            this.toolStripMenuItem57.Size = new System.Drawing.Size(213, 22);
-            this.toolStripMenuItem57.Text = "Change Game Directory";
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(210, 6);
-            // 
-            // toolStripMenuItem58
-            // 
-            this.toolStripMenuItem58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem58.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem58.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_info;
-            this.toolStripMenuItem58.Name = "toolStripMenuItem58";
-            this.toolStripMenuItem58.Size = new System.Drawing.Size(213, 22);
-            this.toolStripMenuItem58.Text = "About...";
-            // 
-            // toolStripMenuItem59
-            // 
-            this.toolStripMenuItem59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem59.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem59.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.discord32x;
-            this.toolStripMenuItem59.Name = "toolStripMenuItem59";
-            this.toolStripMenuItem59.Size = new System.Drawing.Size(213, 22);
-            this.toolStripMenuItem59.Text = "Discord Server";
-            // 
-            // toolStripMenuItem60
-            // 
-            this.toolStripMenuItem60.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem60.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem60.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.github48;
-            this.toolStripMenuItem60.Name = "toolStripMenuItem60";
-            this.toolStripMenuItem60.Size = new System.Drawing.Size(213, 22);
-            this.toolStripMenuItem60.Text = "Github";
-            // 
-            // toolStripMenuItem61
-            // 
-            this.toolStripMenuItem61.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem61.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem61.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
-            this.toolStripMenuItem61.Name = "toolStripMenuItem61";
-            this.toolStripMenuItem61.Size = new System.Drawing.Size(213, 22);
-            this.toolStripMenuItem61.Text = "Changelog";
-            // 
-            // toolStripMenuItem62
-            // 
-            this.toolStripMenuItem62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolStripMenuItem62.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem62.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.kofi_logo;
-            this.toolStripMenuItem62.Name = "toolStripMenuItem62";
-            this.toolStripMenuItem62.Size = new System.Drawing.Size(213, 22);
-            this.toolStripMenuItem62.Text = "Donate && Tip (ko-fi)";
-            // 
             // toolStripMenuItem3
             // 
+            this.toolStripMenuItem3.DropDown = this.contextmenuWindow;
             this.toolStripMenuItem3.Font = new System.Drawing.Font("Gadugi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem3.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem3.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -1332,6 +1345,69 @@
             this.toolStripMenuItem3.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.toolStripMenuItem3.Size = new System.Drawing.Size(64, 21);
             this.toolStripMenuItem3.Text = "&Window";
+            // 
+            // contextmenuWindow
+            // 
+            this.contextmenuWindow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.contextmenuWindow.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolstripWindowFloat,
+            this.toolstripWindowFloatAll,
+            this.toolstripWindowDock,
+            this.toolStripSeparator11,
+            this.toolstripWindowCloseAll,
+            this.toolstripWindowCloseEditors,
+            this.toolStripSeparator12});
+            this.contextmenuWindow.Name = "contextmenuEdit";
+            this.contextmenuWindow.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextmenuWindow.Size = new System.Drawing.Size(164, 126);
+            // 
+            // toolstripWindowFloat
+            // 
+            this.toolstripWindowFloat.ForeColor = System.Drawing.Color.White;
+            this.toolstripWindowFloat.Name = "toolstripWindowFloat";
+            this.toolstripWindowFloat.Size = new System.Drawing.Size(163, 22);
+            this.toolstripWindowFloat.Text = "Float";
+            this.toolstripWindowFloat.Click += new System.EventHandler(this.toolstripWindowFloat_Click);
+            // 
+            // toolstripWindowFloatAll
+            // 
+            this.toolstripWindowFloatAll.ForeColor = System.Drawing.Color.White;
+            this.toolstripWindowFloatAll.Name = "toolstripWindowFloatAll";
+            this.toolstripWindowFloatAll.Size = new System.Drawing.Size(163, 22);
+            this.toolstripWindowFloatAll.Text = "Float All";
+            this.toolstripWindowFloatAll.Click += new System.EventHandler(this.toolstripWindowFloatAll_Click);
+            // 
+            // toolstripWindowDock
+            // 
+            this.toolstripWindowDock.ForeColor = System.Drawing.Color.White;
+            this.toolstripWindowDock.Name = "toolstripWindowDock";
+            this.toolstripWindowDock.Size = new System.Drawing.Size(163, 22);
+            this.toolstripWindowDock.Text = "Dock";
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.ForeColor = System.Drawing.Color.White;
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(160, 6);
+            // 
+            // toolstripWindowCloseAll
+            // 
+            this.toolstripWindowCloseAll.ForeColor = System.Drawing.Color.White;
+            this.toolstripWindowCloseAll.Name = "toolstripWindowCloseAll";
+            this.toolstripWindowCloseAll.Size = new System.Drawing.Size(163, 22);
+            this.toolstripWindowCloseAll.Text = "Close All Tabs";
+            // 
+            // toolstripWindowCloseEditors
+            // 
+            this.toolstripWindowCloseEditors.ForeColor = System.Drawing.Color.White;
+            this.toolstripWindowCloseEditors.Name = "toolstripWindowCloseEditors";
+            this.toolstripWindowCloseEditors.Size = new System.Drawing.Size(163, 22);
+            this.toolstripWindowCloseEditors.Text = "Close Editor Tabs";
+            // 
+            // toolStripSeparator12
+            // 
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(160, 6);
             // 
             // toolstripLevelName
             // 
@@ -1353,53 +1429,6 @@
             this.toolstripOpenPanels.Size = new System.Drawing.Size(94, 31);
             this.toolstripOpenPanels.Text = "OPEN PANELS";
             this.toolstripOpenPanels.Click += new System.EventHandler(this.toolstripOpenPanels_Click);
-            // 
-            // toolstripFormClose
-            // 
-            this.toolstripFormClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolstripFormClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolstripFormClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_close;
-            this.toolstripFormClose.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolstripFormClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolstripFormClose.Margin = new System.Windows.Forms.Padding(0);
-            this.toolstripFormClose.Name = "toolstripFormClose";
-            this.toolstripFormClose.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolstripFormClose.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
-            this.toolstripFormClose.Size = new System.Drawing.Size(38, 31);
-            this.toolstripFormClose.ToolTipText = "Close";
-            this.toolstripFormClose.Click += new System.EventHandler(this.toolstripFormClose_Click);
-            // 
-            // toolstripFormRestore
-            // 
-            this.toolstripFormRestore.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolstripFormRestore.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolstripFormRestore.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_restore;
-            this.toolstripFormRestore.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolstripFormRestore.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolstripFormRestore.Margin = new System.Windows.Forms.Padding(0);
-            this.toolstripFormRestore.Name = "toolstripFormRestore";
-            this.toolstripFormRestore.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolstripFormRestore.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
-            this.toolstripFormRestore.Size = new System.Drawing.Size(38, 31);
-            this.toolstripFormRestore.Text = "🗖";
-            this.toolstripFormRestore.ToolTipText = "Restore Down";
-            this.toolstripFormRestore.Click += new System.EventHandler(this.toolstripFormRestore_Click);
-            // 
-            // toolstripFormMinimize
-            // 
-            this.toolstripFormMinimize.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolstripFormMinimize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolstripFormMinimize.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_minimize;
-            this.toolstripFormMinimize.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolstripFormMinimize.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolstripFormMinimize.Margin = new System.Windows.Forms.Padding(0);
-            this.toolstripFormMinimize.Name = "toolstripFormMinimize";
-            this.toolstripFormMinimize.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolstripFormMinimize.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
-            this.toolstripFormMinimize.Size = new System.Drawing.Size(38, 31);
-            this.toolstripFormMinimize.Text = "🗕";
-            this.toolstripFormMinimize.ToolTipText = "Minimize";
-            this.toolstripFormMinimize.Click += new System.EventHandler(this.toolstripFormMinimize_Click);
             // 
             // toolStripMain
             // 
@@ -1489,6 +1518,133 @@
             this.panelToolStrips.Size = new System.Drawing.Size(984, 25);
             this.panelToolStrips.TabIndex = 152;
             // 
+            // contextmenuHelp
+            // 
+            this.contextmenuHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.contextmenuHelp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem13,
+            this.toolStripMenuItem18,
+            this.toolStripSeparator16,
+            this.toolStripMenuItem19,
+            this.toolStripMenuItem20,
+            this.toolStripMenuItem21,
+            this.toolStripMenuItem22,
+            this.toolStripMenuItem23});
+            this.contextmenuHelp.Name = "contextmenuHelp";
+            this.contextmenuHelp.OwnerItem = this.toolstripHelp;
+            this.contextmenuHelp.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.contextmenuHelp.Size = new System.Drawing.Size(201, 186);
+            // 
+            // toolStripMenuItem13
+            // 
+            this.toolStripMenuItem13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem13.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem14,
+            this.toolStripMenuItem16});
+            this.toolStripMenuItem13.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem13.Text = "Documentation...";
+            // 
+            // toolStripMenuItem14
+            // 
+            this.toolStripMenuItem14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem14.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem15});
+            this.toolStripMenuItem14.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem14.Name = "toolStripMenuItem14";
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(195, 22);
+            this.toolStripMenuItem14.Text = "Tentacles/Paths Visuals";
+            // 
+            // toolStripMenuItem15
+            // 
+            this.toolStripMenuItem15.BackColor = System.Drawing.Color.Black;
+            this.toolStripMenuItem15.Enabled = false;
+            this.toolStripMenuItem15.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem15.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem15.Name = "toolStripMenuItem15";
+            this.toolStripMenuItem15.Size = new System.Drawing.Size(308, 22);
+            this.toolStripMenuItem15.Text = "credit to \"JLMusic\", \"CaptainJul\", \"nwolc\" on the Discord";
+            // 
+            // toolStripMenuItem16
+            // 
+            this.toolStripMenuItem16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem16.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem17});
+            this.toolStripMenuItem16.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem16.Name = "toolStripMenuItem16";
+            this.toolStripMenuItem16.Size = new System.Drawing.Size(195, 22);
+            this.toolStripMenuItem16.Text = "Track Objects";
+            // 
+            // toolStripMenuItem17
+            // 
+            this.toolStripMenuItem17.BackColor = System.Drawing.Color.Black;
+            this.toolStripMenuItem17.Enabled = false;
+            this.toolStripMenuItem17.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem17.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
+            this.toolStripMenuItem17.Size = new System.Drawing.Size(233, 22);
+            this.toolStripMenuItem17.Text = "credit to \"NotAFascist\" on the Discord";
+            // 
+            // toolStripMenuItem18
+            // 
+            this.toolStripMenuItem18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem18.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem18.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_folder;
+            this.toolStripMenuItem18.Name = "toolStripMenuItem18";
+            this.toolStripMenuItem18.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem18.Text = "Change Game Directory";
+            // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            this.toolStripSeparator16.Size = new System.Drawing.Size(197, 6);
+            // 
+            // toolStripMenuItem19
+            // 
+            this.toolStripMenuItem19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem19.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem19.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_info;
+            this.toolStripMenuItem19.Name = "toolStripMenuItem19";
+            this.toolStripMenuItem19.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem19.Text = "About...";
+            // 
+            // toolStripMenuItem20
+            // 
+            this.toolStripMenuItem20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem20.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem20.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.discord32x;
+            this.toolStripMenuItem20.Name = "toolStripMenuItem20";
+            this.toolStripMenuItem20.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem20.Text = "Discord Server";
+            // 
+            // toolStripMenuItem21
+            // 
+            this.toolStripMenuItem21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem21.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem21.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.github48;
+            this.toolStripMenuItem21.Name = "toolStripMenuItem21";
+            this.toolStripMenuItem21.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem21.Text = "Github";
+            // 
+            // toolStripMenuItem22
+            // 
+            this.toolStripMenuItem22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem22.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem22.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
+            this.toolStripMenuItem22.Name = "toolStripMenuItem22";
+            this.toolStripMenuItem22.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem22.Text = "Changelog";
+            // 
+            // toolStripMenuItem23
+            // 
+            this.toolStripMenuItem23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolStripMenuItem23.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem23.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.kofi_logo;
+            this.toolStripMenuItem23.Name = "toolStripMenuItem23";
+            this.toolStripMenuItem23.Size = new System.Drawing.Size(200, 22);
+            this.toolStripMenuItem23.Text = "Donate && Tip (ko-fi)";
+            // 
             // TCLE
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1531,11 +1687,14 @@
             this.toolStripTitle.PerformLayout();
             this.contextMenuFormRightClick.ResumeLayout(false);
             this.contextmenuFile.ResumeLayout(false);
-            this.contextMenuAddFile.ResumeLayout(false);
+            this.contextmenuEdit.ResumeLayout(false);
+            this.contextMenuProject.ResumeLayout(false);
+            this.contextmenuWindow.ResumeLayout(false);
             this.toolStripMain.ResumeLayout(false);
             this.toolStripMain.PerformLayout();
             this.panelToolStrips.ResumeLayout(false);
             this.panelToolStrips.PerformLayout();
+            this.contextmenuHelp.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1570,21 +1729,8 @@
         private System.Windows.Forms.ToolStrip toolStripTitle;
         private System.Windows.Forms.ToolStripMenuItem toolstripFile;
         private System.Windows.Forms.ToolStripMenuItem toolstripEdit;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem49;
         private System.Windows.Forms.ToolStripMenuItem toolstripView;
         private System.Windows.Forms.ToolStripMenuItem toolstripHelp;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem52;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem53;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem54;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem55;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem56;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem57;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem58;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem59;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem60;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem61;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem62;
         public System.Windows.Forms.ToolStripMenuItem toolstripLevelName;
         private System.Windows.Forms.ToolStripMenuItem toolstripOpenPanels;
         private System.Windows.Forms.ToolStripLabel toolstripFormIcon;
@@ -1631,7 +1777,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem66;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ContextMenuStrip contextMenuAddFile;
+        private System.Windows.Forms.ContextMenuStrip contextMenuProject;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
@@ -1660,6 +1806,34 @@
         private System.Windows.Forms.ToolStripMenuItem contextFormMax;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem contextFormClose;
+        private System.Windows.Forms.ContextMenuStrip contextmenuEdit;
+        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextmenuWindow;
+        private System.Windows.Forms.ToolStripMenuItem toolstripWindowFloat;
+        private System.Windows.Forms.ToolStripMenuItem toolstripWindowFloatAll;
+        private System.Windows.Forms.ToolStripMenuItem toolstripWindowDock;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem toolstripWindowCloseAll;
+        private System.Windows.Forms.ToolStripMenuItem toolstripWindowCloseEditors;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ContextMenuStrip contextmenuHelp;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem13;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem14;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem17;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem18;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem19;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem20;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem21;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem22;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem23;
     }
 }
 
