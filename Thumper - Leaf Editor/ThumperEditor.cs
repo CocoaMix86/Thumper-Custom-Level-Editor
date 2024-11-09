@@ -637,12 +637,11 @@ namespace Thumper_Custom_Level_Editor
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
-        #endregion
-
         private void TCLE_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Normal)
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
         }
+        #endregion
     }
 }
