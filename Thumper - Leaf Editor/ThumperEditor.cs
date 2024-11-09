@@ -608,9 +608,19 @@ namespace Thumper_Custom_Level_Editor
             dockLeaf.Show(dockMain, DockState.Document);
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toolstripFormRestore_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (this.WindowState == FormWindowState.Normal) {
+                this.WindowState = FormWindowState.Maximized;
+                toolstripFormRestore.Image = Properties.Resources.icon_restore;
+
+            }
+            else {
+                this.WindowState = FormWindowState.Normal;
+                toolstripFormRestore.Image = Properties.Resources.icon_maximize;
+            }
         }
+        private void toolstripFormMinimize_Click(object sender, EventArgs e) => this.WindowState = FormWindowState.Minimized;
+        private void toolstripFormClose_Click(object sender, EventArgs e) => this.Close();
     }
 }

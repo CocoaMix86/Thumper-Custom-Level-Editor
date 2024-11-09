@@ -816,4 +816,16 @@ MISC
   <data name="icon_save_all" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icon-save-all.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon-close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_maximize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_maximize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_restore" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icon_restore.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

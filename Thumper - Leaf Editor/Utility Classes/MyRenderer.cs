@@ -17,6 +17,10 @@ namespace Thumper_Custom_Level_Editor
         public override Color MenuItemSelectedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
         public override Color MenuItemPressedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
         public override Color MenuItemPressedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
+
+        public override Color ButtonSelectedGradientBegin { get { return Color.FromArgb(112, 112, 112); } }
+        public override Color ButtonSelectedGradientEnd { get { return Color.FromArgb(112, 112, 112); } }
+        public override Color ButtonSelectedBorder { get { return Color.FromArgb(112, 112, 112); } }
     }
 
     public class ToolStripOverride : ToolStripProfessionalRenderer

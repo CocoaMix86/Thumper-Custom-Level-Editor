@@ -252,6 +252,10 @@
     <None Include="image assets\icons-openfile.png" />
     <None Include="image assets\icon-save.png" />
     <None Include="image assets\icon-save-all.png" />
+    <None Include="image assets\icon_maximize.png" />
+    <None Include="image assets\icon-close.png" />
+    <None Include="image assets\icon_restore.png" />
+    <None Include="image assets\icon_minimize.png" />
     <Content Include="thumper_level_editor2.ico" />
     <None Include="image assets\railcolorhelp.png" />
     <None Include="text assets\leaf_singletrack.txt" />
