@@ -241,28 +241,6 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
 
-        /// NEW CUSTOM LEVEL FOLDER
-        private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogInput customlevel = new(this, true);
-            //show the new level folder dialog box
-            if (customlevel.ShowDialog() == DialogResult.Yes) {
-                customlevel.Dispose();
-            }
-        }
-
-        private void editLevelDetailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogInput customlevel = new(this, false);
-            //set textboxes
-            customlevel.txtCustomName.Text = projectjson["level_name"] ?? "LEVEL NAME";
-            customlevel.txtCustomDiff.Text = projectjson["difficulty"] ?? "d0";
-            customlevel.txtDesc.Text = projectjson["description"] ?? "ADD A DESCRIPTION";
-            customlevel.txtCustomAuthor.Text = projectjson["author"] ?? "SOME PERSON";
-            //show the new level folder dialog box
-            customlevel.ShowDialog();
-        }
-
         private void regenerateDefaultFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("This will overwrite the \"default\" files in the working folder. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) {
@@ -349,15 +327,6 @@ namespace Thumper_Custom_Level_Editor
                     e.Graphics.DrawString(cbx.Items[e.Index].ToString(), cbx.Font, brush, e.Bounds, sf);
                 }
             }
-        }
-
-        private void openTemplateFolderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ProcessStartInfo startInfo = new() {
-                Arguments = $@"{Path.GetDirectoryName(Application.ExecutablePath)}\templates",
-                FileName = "explorer.exe"
-            };
-            Process.Start(startInfo);
         }
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -510,7 +479,11 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip File
         private void toolstripFileNewProject_Click(object sender, EventArgs e)
         {
-
+            DialogInput customlevel = new(this, true);
+            //show the new level folder dialog box
+            if (customlevel.ShowDialog() == DialogResult.Yes) {
+                customlevel.Dispose();
+            }
         }
 
         private void toolstripFileNewFile_Click(object sender, EventArgs e)
@@ -545,7 +518,11 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileTemplateFolder_Click(object sender, EventArgs e)
         {
-
+            ProcessStartInfo startInfo = new() {
+                Arguments = $@"{Path.GetDirectoryName(Application.ExecutablePath)}\templates",
+                FileName = "explorer.exe"
+            };
+            Process.Start(startInfo);
         }
 
         private void toolstripFileTemplateRegen_Click(object sender, EventArgs e)
@@ -600,6 +577,48 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripHelpChangelog_Click(object sender, EventArgs e) => ShowChangelog();
         private void toolstripHelpKofi_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://ko-fi.com/I2I5ZZBRH");
         #endregion
+        #region Toolstrip Project
+        private void toolstripProjectLeaf_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void toolstripProjectLvl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripProjectGate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripProjectMaster_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripProjectSample_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripProjectExisting_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripProjectProperties_Click(object sender, EventArgs e)
+        {
+            DialogInput customlevel = new(this, false);
+            //set textboxes
+            customlevel.txtCustomName.Text = projectjson["level_name"] ?? "LEVEL NAME";
+            customlevel.txtCustomDiff.Text = projectjson["difficulty"] ?? "d0";
+            customlevel.txtDesc.Text = projectjson["description"] ?? "ADD A DESCRIPTION";
+            customlevel.txtCustomAuthor.Text = projectjson["author"] ?? "SOME PERSON";
+            //show the new level folder dialog box
+            customlevel.ShowDialog();
+        }
+        #endregion
     }
 }
