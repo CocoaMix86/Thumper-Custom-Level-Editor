@@ -113,6 +113,11 @@
     <Compile Include="Other Forms\FileNameDialog.Designer.cs">
       <DependentUpon>FileNameDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Shared Classes and Methods\SharedEventHandlers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,11 +132,6 @@
     </Compile>
     <Compile Include="Other Forms\AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utility Classes\AudioPlaybackEngine.cs" />
     <Compile Include="Other Forms\CustomizeWorkspace.cs">
@@ -242,7 +242,6 @@
     <None Include="image assets\icon-folder.ico" />
     <None Include="image assets\icon-filter.png" />
     <None Include="image assets\icon-file.png" />
-    <None Include="Resources\pixel.bmp" />
     <None Include="image assets\thumper_ico_24px.png" />
     <None Include="image assets\icon-collapse.png" />
     <None Include="image assets\icon-expand.png" />
@@ -250,7 +249,6 @@
     <None Include="image assets\icon-cut.png" />
     <None Include="image assets\icon-openfile.png" />
     <None Include="image assets\icon-rawtext.png" />
-    <None Include="Resources\icon-rawtext.png" />
     <None Include="image assets\icons-openfile.png" />
     <None Include="image assets\icon-save.png" />
     <None Include="image assets\icon-save-all.png" />
@@ -262,6 +260,7 @@
     <None Include="image assets\icon_restoreblack.png" />
     <None Include="image assets\icon-closeblack.png" />
     <None Include="image assets\icon_minimizeblack.png" />
+    <None Include="image assets\pixel.bmp" />
     <Content Include="thumper_level_editor2.ico" />
     <None Include="image assets\railcolorhelp.png" />
     <None Include="text assets\leaf_singletrack.txt" />
