@@ -390,7 +390,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //if _loadedlvl is somehow not set, force Save As instead
             if (_loadedlvl == null) {
-                _mainform.toolstripLvlSaveAs.PerformClick();
+                ///_mainform.toolstripLvlSaveAs.PerformClick();
                 return;
             }
             else
@@ -786,7 +786,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnlvlPanelNew_Click(object sender, EventArgs e)
         {
-            _mainform.toolstripLvlNew.PerformClick();
+            ///_mainform.toolstripLvlNew.PerformClick();
         }
         #endregion
 

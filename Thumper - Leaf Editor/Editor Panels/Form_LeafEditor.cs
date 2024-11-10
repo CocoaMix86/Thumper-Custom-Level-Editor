@@ -716,7 +716,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //if _loadedlvl is somehow not set, force Save As instead
             if (_loadedleaf == null) {
-                _mainform.toolstripLeafSaveAs.PerformClick();
+                ///_mainform.toolstripLeafSaveAs.PerformClick();
                 return;
             }
             else
@@ -1423,8 +1423,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         /// These buttons exist on the Workingfolder panel
-        private void btnLeafPanelNew_Click(object sender, EventArgs e) => _mainform.toolstripLeafNew.PerformClick();
-        private void btnLeafPanelTemplate_Click(object sender, EventArgs e) => _mainform.toolstripLeafTemplate.PerformClick();
+        private void btnLeafPanelNew_Click(object sender, EventArgs e)
+        {
+            ///_mainform.toolstripLeafNew.PerformClick();
+        }
+        private void btnLeafPanelTemplate_Click(object sender, EventArgs e)
+        {
+            ///_mainform.toolstripLeafTemplate.PerformClick();
+        }
         #endregion
 
         #region Methods
