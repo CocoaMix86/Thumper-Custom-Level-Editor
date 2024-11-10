@@ -107,7 +107,10 @@
     <Compile Include="Editor Panels\Form_MasterEditor.Designer.cs">
       <DependentUpon>Form_MasterEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="GeneralFunctions.cs">
+    <Compile Include="Shared Classes and Methods\SharedEventHandlers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shared Classes and Methods\GeneralFunctions.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editor Panels\RecentFiles.cs">
@@ -150,7 +153,7 @@
     <Compile Include="Other Forms\ImageMessageBox.Designer.cs">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="LevelDataClasses\DataClasses.cs" />
+    <Compile Include="Shared Classes and Methods\DataClasses.cs" />
     <Compile Include="ThumperEditor.cs">
       <SubType>Form</SubType>
     </Compile>

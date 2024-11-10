@@ -109,6 +109,7 @@ namespace Thumper_Custom_Level_Editor
         public Dictionary<string, FileStream> lockedfiles = new();
         public Dictionary<string, Form> openfiles = new();
         #endregion
+
         #region Form Construction
         public TCLE(string LevelFromArg)
         {
@@ -139,7 +140,7 @@ namespace Thumper_Custom_Level_Editor
             //
             ///Create directory for leaf templates and other default files
             if (!Directory.Exists($@"{AppLocation}\templates")) {
-                regenerateTemplateFilesToolStripMenuItem_Click(null, null);
+                toolstripFileTemplateRegen_Click(null, null);
             }
             if (!Directory.Exists($@"{AppLocation}\temp")) {
                 Directory.CreateDirectory($@"{AppLocation}\temp");
@@ -189,7 +190,7 @@ namespace Thumper_Custom_Level_Editor
             if (Properties.Settings.Default.version != "2.2release1") {
                 ShowChangelog();
                 if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    regenerateTemplateFilesToolStripMenuItem_Click(null, null);
+                    toolstripFileTemplateRegen_Click(null, null);
                 else
                     MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
                 Properties.Settings.Default.version = "2.2release1";
@@ -239,128 +240,6 @@ namespace Thumper_Custom_Level_Editor
             //
             Properties.Settings.Default.Save();
         }
-        #endregion
-
-        private void regenerateDefaultFilesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("This will overwrite the \"default\" files in the working folder. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                File.WriteAllText($@"{workingfolder}\spn_default.txt", Properties.Resources.spn_default);
-                File.WriteAllText($@"{workingfolder}\xfm_default.txt", Properties.Resources.xfm_default);
-            }
-        }
-
-        private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Show the CustomWorkspace form. If form OK, then save the settings to app properties
-            //then call method to recolor the form elements immediately
-            CustomizeWorkspace custom = new(_objects, this);
-            //custom._objects = _objects;
-            if (custom.ShowDialog() == DialogResult.OK) {
-                ColorFormElements();
-                ImportDefaultColors();
-                SetKeyBinds();
-                Properties.Settings.Default.Save();
-            }
-            custom.Dispose();
-        }
-
-        #region Beeble Functions
-        private void ResetBeeble(object sender, EventArgs e)
-        {
-
-        }
-        static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
-        public void pictureBox1_Click(object sender, EventArgs e) => BeebleClick();
-        public void BeebleClick()
-        {
-            int i = new Random().Next(0, 1001);
-            if (i == 1000) {
-                pictureBeeble.BackgroundImage = Properties.Resources.beeblegold;
-                PlaySound("UIbeetleclickGOLD");
-            }
-            else {
-                pictureBeeble.BackgroundImage = beebleimages[i % 10];
-            }
-            timerBeeble.Start();
-        }
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
-            pictureBeeble.BackColor = Color.FromArgb(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
-        }
-        private void timerBeeble_Tick(object sender, EventArgs e)
-        {
-            timerBeeble.Stop();
-            pictureBeeble.BackgroundImage = Properties.Resources.beeble;
-        }
-        #endregion
-
-        private void mastereditor_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            ((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
-        }
-
-        private void combobox_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            // By using Sender, one method could handle multiple ComboBoxes
-            if (sender is ComboBox cbx) {
-                // Always draw the background
-                e.DrawBackground();
-
-                // Drawing one of the items?
-                if (e.Index >= 0) {
-                    // Set the string alignment.  Choices are Center, Near and Far
-                    StringFormat sf = new() {
-                        LineAlignment = StringAlignment.Center,
-                        Alignment = StringAlignment.Center
-                    };
-
-                    // Set the Brush to ComboBox ForeColor to maintain any ComboBox color settings
-                    // Assumes Brush is solid
-                    Brush brush = new SolidBrush(cbx.ForeColor);
-
-                    // If drawing highlighted selection, change brush
-                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
-                        brush = SystemBrushes.HighlightText;
-
-                    // Draw the string
-                    e.Graphics.DrawString(cbx.Items[e.Index].ToString(), cbx.Font, brush, e.Bounds, sf);
-                }
-            }
-        }
-
-        private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                string cellText = e.Value.ToString();
-                for (int fontSize = 1; fontSize < 25; fontSize++) {
-                    Font font = new("Consolas", fontSize);
-                    Size textSize = TextRenderer.MeasureText(cellText, font);
-                    if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
-                        if (fontSize - 1 != 0)
-                            font = new Font("Consolas", fontSize - 1);
-                        e.CellStyle.Font = font;
-                        e.Paint(e.ClipBounds, e.PaintParts);
-                        e.Handled = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        private void dropTrackLane_DataSourceChanged(object sender, EventArgs e)
-        {
-            ComboBox cb = (ComboBox)sender;
-            int maxWidth = 0;
-            foreach (object obj in cb.Items) {
-                int temp = TextRenderer.MeasureText(obj.ToString(), cb.Font).Width;
-                if (temp > maxWidth) {
-                    maxWidth = temp;
-                }
-            }
-            cb.DropDownWidth = maxWidth != 0 ? maxWidth : cb.DropDownWidth;
-        }
-
         private void SetKeyBinds()
         {
             if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
@@ -378,64 +257,7 @@ namespace Thumper_Custom_Level_Editor
             */
             ///btnUndoLeaf.ToolTipText = $"Undo ({String.Join("+", defaultkeybinds["leafundo"].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList().Reverse<string>())})";
         }
-
-        private void dropTrackLane_DropDown(object sender, EventArgs e)
-        {
-            ComboBox senderComboBox = (ComboBox)sender;
-            int width = 0;
-            Graphics g = senderComboBox.CreateGraphics();
-            Font font = senderComboBox.Font;
-            int vertScrollBarWidth =
-                (senderComboBox.Items.Count > senderComboBox.MaxDropDownItems)
-                ? SystemInformation.VerticalScrollBarWidth : 0;
-
-            int newWidth;
-            if (senderComboBox.Items[0].GetType() == typeof(SampleData)) {
-                foreach (SampleData s in senderComboBox.Items) {
-                    newWidth = (int)g.MeasureString(s.obj_name, font).Width;
-                    if (width < newWidth) {
-                        width = newWidth;
-                    }
-                }
-            }
-            else {
-                foreach (var s in senderComboBox.Items) {
-                    newWidth = (int)g.MeasureString(s.ToString(), font).Width;
-                    if (width < newWidth) {
-                        width = newWidth;
-                    }
-                }
-            }
-            senderComboBox.DropDownWidth = width + vertScrollBarWidth;
-        }
-
-        private void toolstripOpenPanels_Click(object sender, EventArgs e)
-        {
-            if (!Directory.Exists(txtFilePath.Text)) {
-                MessageBox.Show("that folder path doesn't exist");
-                return;
-            }
-
-            var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft};
-            dockProject.Show(dockMain, DockState.DockRight);
-
-            var dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            var dockGate = new Form_GateEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            var dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            var dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
-            var dockLeaf = new Form_LeafEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-
-            dockMaster.Show(dockMain, DockState.Document);
-            dockGate.Show(dockMain, DockState.Document);
-            dockLvl.Show(dockMain, DockState.Document);
-            dockSample.Show(dockMain, DockState.Document);
-            dockLeaf.Show(dockMain, DockState.Document);
-
-            dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
-            dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
-        }
-        private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
-
+        #endregion
         #region Form Moving and Control buttons
         private void toolstripFormRestore_Click(object sender, EventArgs e)
         {
@@ -476,6 +298,38 @@ namespace Thumper_Custom_Level_Editor
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
         }
         #endregion
+
+        #region Beeble Functions
+        private void ResetBeeble(object sender, EventArgs e)
+        {
+
+        }
+        static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
+        public void pictureBox1_Click(object sender, EventArgs e) => BeebleClick();
+        public void BeebleClick()
+        {
+            int i = new Random().Next(0, 1001);
+            if (i == 1000) {
+                pictureBeeble.BackgroundImage = Properties.Resources.beeblegold;
+                PlaySound("UIbeetleclickGOLD");
+            }
+            else {
+                pictureBeeble.BackgroundImage = beebleimages[i % 10];
+            }
+            timerBeeble.Start();
+        }
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
+            pictureBeeble.BackColor = Color.FromArgb(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
+        }
+        private void timerBeeble_Tick(object sender, EventArgs e)
+        {
+            timerBeeble.Stop();
+            pictureBeeble.BackgroundImage = Properties.Resources.beeble;
+        }
+        #endregion
+
         #region Toolstrip File
         private void toolstripFileNewProject_Click(object sender, EventArgs e)
         {
@@ -540,6 +394,47 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripFileExit_Click(object sender, EventArgs e)
         {
 
+        }
+        #endregion
+        #region Toolstrip Edit
+        private void toolstripEditUndo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripEditCut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripEditCopy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripEditPaste_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripEditDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripEditPreferences_Click(object sender, EventArgs e)
+        {
+            //Show the CustomWorkspace form. If form OK, then save the settings to app properties
+            //then call method to recolor the form elements immediately
+            CustomizeWorkspace custom = new(_objects, this);
+            //custom._objects = _objects;
+            if (custom.ShowDialog() == DialogResult.OK) {
+                ColorFormElements();
+                ImportDefaultColors();
+                SetKeyBinds();
+                Properties.Settings.Default.Save();
+            }
+            custom.Dispose();
         }
         #endregion
         #region Toolstrip Window
@@ -608,6 +503,14 @@ namespace Thumper_Custom_Level_Editor
 
         }
 
+        private void toolstripProjectRegen_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This will overwrite the \"default\" files in the working folder. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                File.WriteAllText($@"{workingfolder}\spn_default.txt", Properties.Resources.spn_default);
+                File.WriteAllText($@"{workingfolder}\xfm_default.txt", Properties.Resources.xfm_default);
+            }
+        }
+
         private void toolstripProjectProperties_Click(object sender, EventArgs e)
         {
             DialogInput customlevel = new(this, false);
@@ -620,5 +523,32 @@ namespace Thumper_Custom_Level_Editor
             customlevel.ShowDialog();
         }
         #endregion
+
+        private void toolstripOpenPanels_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(txtFilePath.Text)) {
+                MessageBox.Show("that folder path doesn't exist");
+                return;
+            }
+
+            var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            dockProject.Show(dockMain, DockState.DockRight);
+
+            var dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockGate = new Form_GateEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockLeaf = new Form_LeafEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+
+            dockMaster.Show(dockMain, DockState.Document);
+            dockGate.Show(dockMain, DockState.Document);
+            dockLvl.Show(dockMain, DockState.Document);
+            dockSample.Show(dockMain, DockState.Document);
+            dockLeaf.Show(dockMain, DockState.Document);
+
+            dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
+            dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
+        }
+        private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
     }
 }
