@@ -241,24 +241,6 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
 
-        private void regenerateTemplateFilesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!Directory.Exists($@"{AppLocation}\templates")) {
-                Directory.CreateDirectory($@"{AppLocation}\templates");
-            }
-            File.WriteAllText($@"{AppLocation}\templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
-            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
-            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.txt", Properties.Resources.leaf_multitrack_ring_bar);
-            File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
-            File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
-        }
-
-        ///Toolstrip - FILE
-        private void SaveAllToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         /// NEW CUSTOM LEVEL FOLDER
         private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -410,77 +392,6 @@ namespace Thumper_Custom_Level_Editor
             cb.DropDownWidth = maxWidth != 0 ? maxWidth : cb.DropDownWidth;
         }
 
-        private void FormLeafEditor_KeyDown(object sender, KeyEventArgs e)
-        {
-            /*
-            //Next/Previous lvl keybind
-            if (e.KeyData == defaultkeybinds["nextlvl"] || e.KeyData == defaultkeybinds["previouslvl"]) {
-                if (workingfolder == null)
-                    return;
-                if (lvlSeqObjs.IsCurrentCellInEditMode)
-                    return;
-                //depending on key, go next or previous
-                int offset = e.KeyData == defaultkeybinds["nextlvl"] ? 1 : -1;
-                //search for the current lvl. This is used to get its index
-                IEnumerable<WorkingFolderFileItem> wffilist = workingfiles.Where(x => x.filename.Contains("lvl_"));
-                WorkingFolderFileItem wffi = _loadedlvl != null ? wffilist.First(x => _loadedlvl.Contains(x.filename)) : wffilist.First();
-                //if its the first or last entry, need to loop around
-                if (_loadedlvl == null || (offset == 1 && wffi == wffilist.Last()))
-                    offset = wffilist.First().index;
-                else if (offset == -1 && wffi == wffilist.First())
-                    offset = wffilist.Last().index;
-                else
-                    offset = wffi.index + offset;
-                //load and visually select the new row
-                LoadFileOnClick(offset, 1);
-                workingfolderFiles.Rows[offset].Selected = true;
-            }
-            //Next/Previous leaf keybind
-            else if (e.KeyData == defaultkeybinds["nextleaf"] || e.KeyData == defaultkeybinds["previousleaf"]) {
-                if (workingfolder == null)
-                    return;
-                if (trackEditor.IsCurrentCellInEditMode)
-                    return;
-                //depending on key, go next or previous
-                int offset = e.KeyData == defaultkeybinds["nextleaf"] ? 1 : -1;
-                //search for the current lvl. This is used to get its index
-                IEnumerable<WorkingFolderFileItem> wffilist = workingfiles.Where(x => x.filename.Contains("leaf_"));
-                WorkingFolderFileItem wffi = _loadedleaf != null ? wffilist.First(x => _loadedleaf.Contains(x.filename)) : wffilist.First();
-                //if its the first or last entry, need to loop around
-                if (offset == 1 && wffi == wffilist.Last())
-                    offset = wffilist.First().index;
-                else if (offset == -1 && wffi == wffilist.First())
-                    offset = wffilist.Last().index;
-                else
-                    offset = wffi.index + offset;
-                //load and visually select the new row
-                LoadFileOnClick(offset, 1);
-                workingfolderFiles.Rows[offset].Selected = true;
-            }
-            //Undo keybind
-            else if (e.KeyData == defaultkeybinds["leafundo"]) {
-                if (_undolistleaf.Count <= 1)
-                    return;
-                //UndoFunction(1);
-            }
-            else if (e.KeyData == defaultkeybinds["colordialog"]) {
-                btnLeafColors.PerformClick();
-            }
-            else if (e.KeyData == defaultkeybinds["interpolate"]) {
-                btnLEafInterpLinear.PerformClick();
-            }
-            else if (e.KeyData == defaultkeybinds["splitleaf"]) {
-                btnLeafSplit.PerformClick();
-            }
-            else if (e.KeyData == defaultkeybinds["randomizerow"]) {
-                btnLeafRandomValues.PerformClick();
-            }
-            else if (e.KeyData == defaultkeybinds["toggleautoplace"]) {
-                btnLeafAutoPlace.PerformClick();
-            }
-            */
-        }
-
         private void SetKeyBinds()
         {
             if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
@@ -489,26 +400,6 @@ namespace Thumper_Custom_Level_Editor
                 defaultkeybinds = import;
             }
             /*
-            leafnewToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafnew"];
-            leafloadToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafopen"];
-            leafsaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafsave"];
-            leafsaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["leafsaveas"];
-            lvlnewToolStripMenuItem1.ShortcutKeys = defaultkeybinds["lvlnew"];
-            lvlopenToolStripMenuItem.ShortcutKeys = defaultkeybinds["lvlopen"];
-            lvlsaveToolStripMenuItem2.ShortcutKeys = defaultkeybinds["lvlsave"];
-            lvlsaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["lvlsaveas"];
-            gatenewToolStripMenuItem.ShortcutKeys = defaultkeybinds["gatenew"];
-            gateopenToolStripMenuItem.ShortcutKeys = defaultkeybinds["gateopen"];
-            gatesaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["gatesave"];
-            gatesaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["gatesaveas"];
-            masternewToolStripMenuItem.ShortcutKeys = defaultkeybinds["masternew"];
-            masteropenToolStripMenuItem.ShortcutKeys = defaultkeybinds["masteropen"];
-            mastersaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["mastersave"];
-            mastersaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["mastersaveas"];
-            SamplenewToolStripMenuItem.ShortcutKeys = defaultkeybinds["samplenew"];
-            SampleopenToolStripMenuItem.ShortcutKeys = defaultkeybinds["sampleopen"];
-            SamplesaveToolStripMenuItem.ShortcutKeys = defaultkeybinds["samplesave"];
-            SamplesaveAsToolStripMenuItem.ShortcutKeys = defaultkeybinds["samplesaveas"];
             SaveAllToolStripMenuItem.ShortcutKeys = defaultkeybinds["saveall"];
             newLevelFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelnew"];
             openLevelFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelopen"];
@@ -564,20 +455,17 @@ namespace Thumper_Custom_Level_Editor
             var dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
             var dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
             var dockLeaf = new Form_LeafEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);
             dockLvl.Show(dockMain, DockState.Document);
             dockSample.Show(dockMain, DockState.Document);
             dockLeaf.Show(dockMain, DockState.Document);
 
-            dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += dockMain_Resize;
+            dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
         }
-
-        private void dockMain_Resize(object sender, EventArgs e)
-        {
-            dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
-        }
+        private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
 
         #region Form Moving and Control buttons
         private void toolstripFormRestore_Click(object sender, EventArgs e)
@@ -619,6 +507,64 @@ namespace Thumper_Custom_Level_Editor
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
         }
         #endregion
+        #region Toolstrip File
+        private void toolstripFileNewProject_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripFileNewFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripFileOpenProject_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripFileOpenFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripFileSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripFileSaveAs_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripFileSaveAll_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripFileTemplateFolder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolstripFileTemplateRegen_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists($@"{AppLocation}\templates")) {
+                Directory.CreateDirectory($@"{AppLocation}\templates");
+            }
+            File.WriteAllText($@"{AppLocation}\templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
+            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
+            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.txt", Properties.Resources.leaf_multitrack_ring_bar);
+            File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
+            File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
+        }
+
+        private void toolstripFileExit_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
         #region Toolstrip Window
         private void toolstripWindowFloat_Click(object sender, EventArgs e) => dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
         private void toolstripWindowFloatAll_Click(object sender, EventArgs e) => dockMain.ActivePane.DockState = DockState.Float;
@@ -654,5 +600,6 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripHelpChangelog_Click(object sender, EventArgs e) => ShowChangelog();
         private void toolstripHelpKofi_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://ko-fi.com/I2I5ZZBRH");
         #endregion
+
     }
 }

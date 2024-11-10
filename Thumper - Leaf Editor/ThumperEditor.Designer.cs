@@ -28,13 +28,13 @@
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TCLE));
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -69,18 +69,22 @@
             this.contextFormClose = new System.Windows.Forms.ToolStripMenuItem();
             this.contextmenuFile = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileNewProject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileNewFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileOpenProject = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileOpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileSaveAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem63 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem64 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem65 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileTemplateFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileTemplateRegen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem66 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripFile = new System.Windows.Forms.ToolStripMenuItem();
             this.contextmenuEdit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -211,14 +215,14 @@
             this.dgvRecentFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvRecentFiles.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvRecentFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvRecentFiles.ColumnHeadersHeight = 20;
             this.dgvRecentFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRecentFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -227,15 +231,15 @@
             this.dataGridViewTextBoxColumn2,
             this.closerecent});
             this.dgvRecentFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.NullValue = null;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.NullValue = null;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvRecentFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvRecentFiles.EnableHeadersVisualStyles = false;
             this.dgvRecentFiles.GridColor = System.Drawing.Color.Black;
@@ -244,13 +248,13 @@
             this.dgvRecentFiles.Name = "dgvRecentFiles";
             this.dgvRecentFiles.ReadOnly = true;
             this.dgvRecentFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvRecentFiles.RowHeadersVisible = false;
             this.dgvRecentFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRecentFiles.RowTemplate.Height = 20;
@@ -264,12 +268,12 @@
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewImageColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dataGridViewImageColumn1.HeaderText = "";
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
@@ -281,8 +285,8 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn1.FillWeight = 30F;
             this.dataGridViewTextBoxColumn1.HeaderText = "Level";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -293,9 +297,9 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn2.FillWeight = 20F;
             this.dataGridViewTextBoxColumn2.HeaderText = "Path";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -305,12 +309,12 @@
             // closerecent
             // 
             this.closerecent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.closerecent.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.closerecent.DefaultCellStyle = dataGridViewCellStyle12;
             this.closerecent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closerecent.HeaderText = "";
             this.closerecent.Name = "closerecent";
@@ -560,65 +564,114 @@
             this.newToolStripMenuItem,
             this.toolStripMenuItem4,
             this.toolStripSeparator2,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.toolStripMenuItem2,
+            this.toolstripFileSave,
+            this.toolstripFileSaveAs,
+            this.toolstripFileSaveAll,
             this.toolStripSeparator1,
             this.toolStripMenuItem5,
             this.toolStripMenuItem63,
             this.toolStripSeparator4,
-            this.toolStripMenuItem66});
+            this.toolstripFileExit});
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new System.Drawing.Size(252, 198);
+            this.contextmenuFile.Size = new System.Drawing.Size(252, 220);
             // 
             // newToolStripMenuItem
             // 
+            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolstripFileNewProject,
+            this.toolstripFileNewFile});
             this.newToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.newToolStripMenuItem.Text = "New                                                   ";
             // 
+            // toolstripFileNewProject
+            // 
+            this.toolstripFileNewProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolstripFileNewProject.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileNewProject.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.thumper_ico_24px;
+            this.toolstripFileNewProject.Name = "toolstripFileNewProject";
+            this.toolstripFileNewProject.Size = new System.Drawing.Size(111, 22);
+            this.toolstripFileNewProject.Text = "Project";
+            this.toolstripFileNewProject.Click += new System.EventHandler(this.toolstripFileNewProject_Click);
+            // 
+            // toolstripFileNewFile
+            // 
+            this.toolstripFileNewFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolstripFileNewFile.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileNewFile.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_file;
+            this.toolstripFileNewFile.Name = "toolstripFileNewFile";
+            this.toolstripFileNewFile.Size = new System.Drawing.Size(111, 22);
+            this.toolstripFileNewFile.Text = "File";
+            this.toolstripFileNewFile.Click += new System.EventHandler(this.toolstripFileNewFile_Click);
+            // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolstripFileOpenProject,
+            this.toolstripFileOpenFile});
             this.toolStripMenuItem4.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(251, 22);
             this.toolStripMenuItem4.Text = "Open";
+            // 
+            // toolstripFileOpenProject
+            // 
+            this.toolstripFileOpenProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolstripFileOpenProject.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileOpenProject.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.thumper_ico_24px;
+            this.toolstripFileOpenProject.Name = "toolstripFileOpenProject";
+            this.toolstripFileOpenProject.Size = new System.Drawing.Size(111, 22);
+            this.toolstripFileOpenProject.Text = "Project";
+            this.toolstripFileOpenProject.Click += new System.EventHandler(this.toolstripFileOpenProject_Click);
+            // 
+            // toolstripFileOpenFile
+            // 
+            this.toolstripFileOpenFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolstripFileOpenFile.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileOpenFile.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_file;
+            this.toolstripFileOpenFile.Name = "toolstripFileOpenFile";
+            this.toolstripFileOpenFile.Size = new System.Drawing.Size(111, 22);
+            this.toolstripFileOpenFile.Text = "File";
+            this.toolstripFileOpenFile.Click += new System.EventHandler(this.toolstripFileOpenFile_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(248, 6);
             // 
-            // saveToolStripMenuItem
+            // toolstripFileSave
             // 
-            this.saveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.saveToolStripMenuItem.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save_all;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.toolstripFileSave.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileSave.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save_all;
+            this.toolstripFileSave.Name = "toolstripFileSave";
+            this.toolstripFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.toolstripFileSave.Size = new System.Drawing.Size(251, 22);
+            this.toolstripFileSave.Text = "Save";
+            this.toolstripFileSave.Click += new System.EventHandler(this.toolstripFileSave_Click);
             // 
-            // saveAsToolStripMenuItem
+            // toolstripFileSaveAs
             // 
-            this.saveAsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
-            this.saveAsToolStripMenuItem.Text = "Save [] As...";
+            this.toolstripFileSaveAs.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileSaveAs.Name = "toolstripFileSaveAs";
+            this.toolstripFileSaveAs.Size = new System.Drawing.Size(251, 22);
+            this.toolstripFileSaveAs.Text = "Save [] As...";
+            this.toolstripFileSaveAs.Click += new System.EventHandler(this.toolstripFileSaveAs_Click);
             // 
-            // toolStripMenuItem2
+            // toolstripFileSaveAll
             // 
-            this.toolStripMenuItem2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.toolStripMenuItem2.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save_all;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.toolstripFileSaveAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolstripFileSaveAll.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileSaveAll.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save_all;
+            this.toolstripFileSaveAll.Name = "toolstripFileSaveAll";
+            this.toolstripFileSaveAll.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(251, 22);
-            this.toolStripMenuItem2.Text = "Save All";
+            this.toolstripFileSaveAll.Size = new System.Drawing.Size(251, 22);
+            this.toolstripFileSaveAll.Text = "Save All";
+            this.toolstripFileSaveAll.Click += new System.EventHandler(this.toolstripFileSaveAll_Click);
             // 
             // toolStripSeparator1
             // 
@@ -639,28 +692,30 @@
             // 
             this.toolStripMenuItem63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripMenuItem63.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem64,
-            this.toolStripMenuItem65});
+            this.toolstripFileTemplateFolder,
+            this.toolstripFileTemplateRegen});
             this.toolStripMenuItem63.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem63.Name = "toolStripMenuItem63";
             this.toolStripMenuItem63.Size = new System.Drawing.Size(251, 22);
             this.toolStripMenuItem63.Text = "Template Files...";
             // 
-            // toolStripMenuItem64
+            // toolstripFileTemplateFolder
             // 
-            this.toolStripMenuItem64.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.toolStripMenuItem64.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem64.Name = "toolStripMenuItem64";
-            this.toolStripMenuItem64.Size = new System.Drawing.Size(157, 22);
-            this.toolStripMenuItem64.Text = "Open folder";
+            this.toolstripFileTemplateFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolstripFileTemplateFolder.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileTemplateFolder.Name = "toolstripFileTemplateFolder";
+            this.toolstripFileTemplateFolder.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFileTemplateFolder.Text = "Open folder";
+            this.toolstripFileTemplateFolder.Click += new System.EventHandler(this.toolstripFileTemplateFolder_Click);
             // 
-            // toolStripMenuItem65
+            // toolstripFileTemplateRegen
             // 
-            this.toolStripMenuItem65.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.toolStripMenuItem65.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem65.Name = "toolStripMenuItem65";
-            this.toolStripMenuItem65.Size = new System.Drawing.Size(157, 22);
-            this.toolStripMenuItem65.Text = "Regenerate files";
+            this.toolstripFileTemplateRegen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolstripFileTemplateRegen.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileTemplateRegen.Name = "toolstripFileTemplateRegen";
+            this.toolstripFileTemplateRegen.Size = new System.Drawing.Size(180, 22);
+            this.toolstripFileTemplateRegen.Text = "Regenerate files";
+            this.toolstripFileTemplateRegen.Click += new System.EventHandler(this.toolstripFileTemplateRegen_Click);
             // 
             // toolStripSeparator4
             // 
@@ -669,15 +724,16 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(248, 6);
             // 
-            // toolStripMenuItem66
+            // toolstripFileExit
             // 
-            this.toolStripMenuItem66.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.toolStripMenuItem66.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem66.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.exit;
-            this.toolStripMenuItem66.Name = "toolStripMenuItem66";
-            this.toolStripMenuItem66.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.toolStripMenuItem66.Size = new System.Drawing.Size(251, 22);
-            this.toolStripMenuItem66.Text = "Exit";
+            this.toolstripFileExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.toolstripFileExit.ForeColor = System.Drawing.Color.White;
+            this.toolstripFileExit.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.exit;
+            this.toolstripFileExit.Name = "toolstripFileExit";
+            this.toolstripFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.toolstripFileExit.Size = new System.Drawing.Size(251, 22);
+            this.toolstripFileExit.Text = "Exit";
+            this.toolstripFileExit.Click += new System.EventHandler(this.toolstripFileExit_Click);
             // 
             // toolstripFile
             // 
@@ -1358,7 +1414,6 @@
             this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormLeafEditor_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormLeafEditor_KeyDown);
             this.Resize += new System.EventHandler(this.TCLE_Resize);
             this.panelRecentFiles.ResumeLayout(false);
             this.panelRecentFiles.PerformLayout();
@@ -1423,15 +1478,15 @@
         private System.Windows.Forms.ToolStripMenuItem toolstripOpenPanels;
         private System.Windows.Forms.ToolStripLabel toolstripFormIcon;
         private System.Windows.Forms.ContextMenuStrip contextmenuFile;
-        public System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        public System.Windows.Forms.ToolStripMenuItem toolstripFileSaveAll;
         public System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         public System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem63;
-        public System.Windows.Forms.ToolStripMenuItem toolStripMenuItem64;
-        public System.Windows.Forms.ToolStripMenuItem toolStripMenuItem65;
+        public System.Windows.Forms.ToolStripMenuItem toolstripFileTemplateFolder;
+        public System.Windows.Forms.ToolStripMenuItem toolstripFileTemplateRegen;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem66;
+        private System.Windows.Forms.ToolStripMenuItem toolstripFileExit;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ContextMenuStrip contextMenuProject;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
@@ -1491,12 +1546,16 @@
         private System.Windows.Forms.ToolStripMenuItem toolstripHelpKofi;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripMenuItem appPreferencesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolstripFileSave;
+        private System.Windows.Forms.ToolStripMenuItem toolstripFileSaveAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolstripHelpAudio;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem toolstripFileNewProject;
+        private System.Windows.Forms.ToolStripMenuItem toolstripFileNewFile;
+        private System.Windows.Forms.ToolStripMenuItem toolstripFileOpenProject;
+        private System.Windows.Forms.ToolStripMenuItem toolstripFileOpenFile;
     }
 }
 
