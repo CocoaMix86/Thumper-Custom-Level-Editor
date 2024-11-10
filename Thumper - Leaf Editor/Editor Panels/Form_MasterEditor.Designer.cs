@@ -443,6 +443,7 @@
             this.lblConfigColorHelp.Size = new System.Drawing.Size(15, 16);
             this.lblConfigColorHelp.TabIndex = 112;
             this.lblConfigColorHelp.Text = "?";
+            this.lblConfigColorHelp.Click += new System.EventHandler(this.lblConfigColorHelp_Click);
             // 
             // dropMasterSkybox
             // 

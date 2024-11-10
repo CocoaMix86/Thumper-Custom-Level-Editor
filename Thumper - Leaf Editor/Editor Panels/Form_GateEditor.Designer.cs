@@ -580,6 +580,7 @@
             this.lblGateSectionHelp.Size = new System.Drawing.Size(15, 16);
             this.lblGateSectionHelp.TabIndex = 131;
             this.lblGateSectionHelp.Text = "?";
+            this.lblGateSectionHelp.Click += new System.EventHandler(this.lblGateSectionHelp_Click);
             // 
             // dropGateRestart
             // 

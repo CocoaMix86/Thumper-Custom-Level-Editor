@@ -748,5 +748,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveMaster(true);
         }
         #endregion
+
+        private void lblConfigColorHelp_Click(object sender, EventArgs e)
+        {
+            new ImageMessageBox("railcolorhelp").Show();
+        }
     }
 }

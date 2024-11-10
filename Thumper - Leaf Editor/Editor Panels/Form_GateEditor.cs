@@ -633,5 +633,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveGate(true);
         }
         #endregion
+
+        private void lblGateSectionHelp_Click(object sender, EventArgs e)
+        {
+            new ImageMessageBox("bosssectionhelp").Show();
+        }
     }
 }

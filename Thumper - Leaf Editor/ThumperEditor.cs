@@ -166,7 +166,20 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
         }
+        ///
+        ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
+        protected override CreateParams CreateParams
+        {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+        ///END DOUBLEBUFFERING
+        /// 
         #endregion
+        #region Form Loading Closing
         ///FORM LOADING
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
@@ -213,36 +226,20 @@ namespace Thumper_Custom_Level_Editor
         ///FORM CLOSING - check if anything is unsaved
         private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (/*!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample*/true) {
+            if (/*!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample*/false) {
                 if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
             }
-            if (Directory.Exists($@"{AppLocation}\temp")) {
-                //Directory.Delete(@"temp", true);
-            }
             //save panel sizes and locations
             Properties.Settings.Default.beeblesize = pictureBeeble.Size;
             Properties.Settings.Default.beebleloc = pictureBeeble.Location;
-            //zoom settings
-
             //colors
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //
             Properties.Settings.Default.Save();
         }
-        ///
-        ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
-        protected override CreateParams CreateParams
-        {
-            get {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
-        }
-        ///END DOUBLEBUFFERING
-        /// 
+        #endregion
 
         private void regenerateTemplateFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -262,28 +259,6 @@ namespace Thumper_Custom_Level_Editor
 
         }
 
-        private void ResetBeeble(object sender, EventArgs e)
-        { }
-
-        ///
-        ///Toolstrip - HELP
-        //About...
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) => new AboutThumperEditor().Show();
-        //DOCUMENTATION
-        //Tentacles, Paths...
-        private void tentaclesPathsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0");
-        //Track Objects
-        private void trackObjectsToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1JWk7TDn4ZuitclB-x7gOYxU-PsmGkooZuU9QEd_aw1A");
-        //Change Game Directory
-        private void changeGameDirectoryToolStripMenuItem_Click(object sender, EventArgs e) => Read_Config();
-        private void discordServerToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://discord.com/invite/gTQbquY");
-        private void githubToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://github.com/CocoaMix86/Thumper-Custom-Level-Editor");
-        private void changelogToolStripMenuItem_Click(object sender, EventArgs e) => ShowChangelog();
-        private void donateTipToolStripMenuItem_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://ko-fi.com/I2I5ZZBRH");
-        ///
-        /// 
-        
-
         /// NEW CUSTOM LEVEL FOLDER
         private void newLevelFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -293,12 +268,6 @@ namespace Thumper_Custom_Level_Editor
                 customlevel.Dispose();
             }
         }
-
-        /// 
-        /// VARIOUS POPUPS FOR HELP TEXT
-        /// 
-        private void lblConfigColorHelp_Click(object sender, EventArgs e) => new ImageMessageBox("railcolorhelp").Show();
-        private void lblGateSectionHelp_Click(object sender, EventArgs e) => new ImageMessageBox("bosssectionhelp").Show();
 
         private void editLevelDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -335,13 +304,13 @@ namespace Thumper_Custom_Level_Editor
             custom.Dispose();
         }
 
-        ///
-        ///BEEBLE FUNCTIONS
-        static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
-        public void pictureBox1_Click(object sender, EventArgs e)
+        #region Beeble Functions
+        private void ResetBeeble(object sender, EventArgs e)
         {
-            BeebleClick();
+
         }
+        static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
+        public void pictureBox1_Click(object sender, EventArgs e) => BeebleClick();
         public void BeebleClick()
         {
             int i = new Random().Next(0, 1001);
@@ -364,17 +333,7 @@ namespace Thumper_Custom_Level_Editor
             timerBeeble.Stop();
             pictureBeeble.BackgroundImage = Properties.Resources.beeble;
         }
-        ///
-        ///
-
-        //Repaints toolstrip separators to have gray backgrounds
-        private void toolStripSeparator_Paint(object sender, PaintEventArgs e)
-        {
-            ToolStripSeparator sep = (ToolStripSeparator)sender;
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(40, 40, 40)), 0, 0, sep.Width, sep.Height);
-            e.Graphics.DrawLine(new Pen(Color.White), 30, sep.Height / 2, sep.Width - 4, sep.Height / 2);
-        }
-        ///
+        #endregion
 
         private void mastereditor_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -684,6 +643,16 @@ namespace Thumper_Custom_Level_Editor
                 dockMain.FloatWindows[0].Close();
             }
         }
+        #endregion
+        #region Toolstrip Help
+        private void toolstripHelpTentacles_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0");
+        private void toolstripHelpObjects_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1JWk7TDn4ZuitclB-x7gOYxU-PsmGkooZuU9QEd_aw1A");
+        private void toolstripHelpAudio_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
+        private void toolstripHelpAbout_Click(object sender, EventArgs e) => new AboutThumperEditor().Show();
+        private void toolstripHelpDiscord_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://discord.com/invite/gTQbquY");
+        private void toolstripHelpGithub_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://github.com/CocoaMix86/Thumper-Custom-Level-Editor");
+        private void toolstripHelpChangelog_Click(object sender, EventArgs e) => ShowChangelog();
+        private void toolstripHelpKofi_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://ko-fi.com/I2I5ZZBRH");
         #endregion
     }
 }
