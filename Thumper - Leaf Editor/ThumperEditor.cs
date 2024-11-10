@@ -610,6 +610,14 @@ namespace Thumper_Custom_Level_Editor
             dockLvl.Show(dockMain, DockState.Document);
             dockSample.Show(dockMain, DockState.Document);
             dockLeaf.Show(dockMain, DockState.Document);
+
+            dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += dockMain_Resize;
+            dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
+        }
+
+        private void dockMain_Resize(object sender, EventArgs e)
+        {
+            dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
         }
 
         #region Form Moving and Control buttons
@@ -677,6 +685,5 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         #endregion
-
     }
 }

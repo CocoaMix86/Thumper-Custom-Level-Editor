@@ -522,6 +522,7 @@
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.Size = new System.Drawing.Size(403, 20);
             this.txtFilePath.TabIndex = 148;
+            this.txtFilePath.Text = "X:\\Thumper\\levels\\Basics3";
             // 
             // toolStripTitle
             // 
@@ -1353,6 +1354,7 @@
             this.toolstripWindowCloseEditors,
             this.toolStripSeparator12});
             this.contextmenuWindow.Name = "contextmenuEdit";
+            this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuWindow.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextmenuWindow.Size = new System.Drawing.Size(164, 126);
             // 
