@@ -1261,6 +1261,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 StartPosition = FormStartPosition.Manual,
                 Location = MousePosition
             };
+            
 
             string newfilename;
             if (filenamedialog.ShowDialog() == DialogResult.Yes) {

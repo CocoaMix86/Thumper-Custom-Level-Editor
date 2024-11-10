@@ -107,6 +107,12 @@
     <Compile Include="Editor Panels\Form_MasterEditor.Designer.cs">
       <DependentUpon>Form_MasterEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Other Forms\FileNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other Forms\FileNameDialog.Designer.cs">
+      <DependentUpon>FileNameDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Shared Classes and Methods\SharedEventHandlers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,12 +128,6 @@
     <Compile Include="Other Forms\AboutThumperEditor.Designer.cs">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Other Forms\FileNameDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\FileNameDialog.Designer.cs">
-      <DependentUpon>FileNameDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -140,13 +140,12 @@
     <Compile Include="Other Forms\CustomizeWorkspace.Designer.cs">
       <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
     </Compile>
-    <Compile Include="Other Forms\DialogInput.cs">
+    <Compile Include="Other Forms\ProjectProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Other Forms\DialogInput.Designer.cs">
-      <DependentUpon>DialogInput.cs</DependentUpon>
+    <Compile Include="Other Forms\ProjectProperties.Designer.cs">
+      <DependentUpon>ProjectProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utility Classes\GlobalSuppressions.cs" />
     <Compile Include="Other Forms\ImageMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,7 +164,7 @@
     <Compile Include="Utility Classes\Leaf Playback.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utility Classes\MyRenderer.cs" />
+    <Compile Include="Utility Classes\CustomRenderer.cs" />
     <Compile Include="Utility Classes\SaveState.cs" />
     <Compile Include="Utility Classes\DropDownMenuScrollWheelHandler.cs" />
     <Compile Include="Utility Classes\ToolStripEx.cs">
@@ -197,11 +196,8 @@
       <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\DialogInput.resx">
-      <DependentUpon>DialogInput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\FileNameDialog.resx">
-      <DependentUpon>FileNameDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Other Forms\ProjectProperties.resx">
+      <DependentUpon>ProjectProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Other Forms\ImageMessageBox.resx">
       <DependentUpon>ImageMessageBox.cs</DependentUpon>
