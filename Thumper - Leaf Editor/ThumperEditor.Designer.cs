@@ -592,7 +592,7 @@
             // 
             this.toolstripFileNewProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripFileNewProject.ForeColor = System.Drawing.Color.White;
-            this.toolstripFileNewProject.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.thumper_ico_24px;
+            this.toolstripFileNewProject.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_tcle;
             this.toolstripFileNewProject.Name = "toolstripFileNewProject";
             this.toolstripFileNewProject.Size = new System.Drawing.Size(111, 22);
             this.toolstripFileNewProject.Text = "Project";
@@ -623,7 +623,7 @@
             // 
             this.toolstripFileOpenProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripFileOpenProject.ForeColor = System.Drawing.Color.White;
-            this.toolstripFileOpenProject.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.thumper_ico_24px;
+            this.toolstripFileOpenProject.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_tcle;
             this.toolstripFileOpenProject.Name = "toolstripFileOpenProject";
             this.toolstripFileOpenProject.Size = new System.Drawing.Size(111, 22);
             this.toolstripFileOpenProject.Text = "Project";
@@ -729,7 +729,7 @@
             // 
             this.toolstripFileExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripFileExit.ForeColor = System.Drawing.Color.White;
-            this.toolstripFileExit.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.exit;
+            this.toolstripFileExit.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_exit;
             this.toolstripFileExit.Name = "toolstripFileExit";
             this.toolstripFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.toolstripFileExit.Size = new System.Drawing.Size(251, 22);
@@ -877,7 +877,7 @@
             // 
             this.toolstripProjectLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripProjectLeaf.ForeColor = System.Drawing.Color.PaleGreen;
-            this.toolstripProjectLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
+            this.toolstripProjectLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_leaf;
             this.toolstripProjectLeaf.Name = "toolstripProjectLeaf";
             this.toolstripProjectLeaf.Size = new System.Drawing.Size(202, 22);
             this.toolstripProjectLeaf.Text = "Add Leaf...";
@@ -887,7 +887,7 @@
             // 
             this.toolstripProjectLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripProjectLvl.ForeColor = System.Drawing.Color.Green;
-            this.toolstripProjectLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
+            this.toolstripProjectLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_lvl;
             this.toolstripProjectLvl.Name = "toolstripProjectLvl";
             this.toolstripProjectLvl.Size = new System.Drawing.Size(202, 22);
             this.toolstripProjectLvl.Text = "Add Lvl...";
@@ -897,7 +897,7 @@
             // 
             this.toolstripProjectGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripProjectGate.ForeColor = System.Drawing.Color.Orange;
-            this.toolstripProjectGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
+            this.toolstripProjectGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_gate;
             this.toolstripProjectGate.Name = "toolstripProjectGate";
             this.toolstripProjectGate.Size = new System.Drawing.Size(202, 22);
             this.toolstripProjectGate.Text = "Add Gate...";
@@ -907,7 +907,7 @@
             // 
             this.toolstripProjectMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripProjectMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.toolstripProjectMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
+            this.toolstripProjectMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_master;
             this.toolstripProjectMaster.Name = "toolstripProjectMaster";
             this.toolstripProjectMaster.Size = new System.Drawing.Size(202, 22);
             this.toolstripProjectMaster.Text = "Add Master...";
@@ -917,7 +917,7 @@
             // 
             this.toolstripProjectSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripProjectSample.ForeColor = System.Drawing.Color.Turquoise;
-            this.toolstripProjectSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
+            this.toolstripProjectSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_sample;
             this.toolstripProjectSample.Name = "toolstripProjectSample";
             this.toolstripProjectSample.Size = new System.Drawing.Size(202, 22);
             this.toolstripProjectSample.Text = "Add Sample...";
@@ -1170,7 +1170,7 @@
             // 
             this.toolstripHelpDiscord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripHelpDiscord.ForeColor = System.Drawing.Color.White;
-            this.toolstripHelpDiscord.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.discord32x;
+            this.toolstripHelpDiscord.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.external_discord;
             this.toolstripHelpDiscord.Name = "toolstripHelpDiscord";
             this.toolstripHelpDiscord.Size = new System.Drawing.Size(200, 22);
             this.toolstripHelpDiscord.Text = "Discord Server";
@@ -1180,7 +1180,7 @@
             // 
             this.toolstripHelpGithub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripHelpGithub.ForeColor = System.Drawing.Color.White;
-            this.toolstripHelpGithub.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.github48;
+            this.toolstripHelpGithub.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.external_github;
             this.toolstripHelpGithub.Name = "toolstripHelpGithub";
             this.toolstripHelpGithub.Size = new System.Drawing.Size(200, 22);
             this.toolstripHelpGithub.Text = "Github";
@@ -1200,7 +1200,7 @@
             // 
             this.toolstripHelpKofi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolstripHelpKofi.ForeColor = System.Drawing.Color.White;
-            this.toolstripHelpKofi.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.kofi_logo;
+            this.toolstripHelpKofi.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.external_kofi;
             this.toolstripHelpKofi.Name = "toolstripHelpKofi";
             this.toolstripHelpKofi.Size = new System.Drawing.Size(200, 22);
             this.toolstripHelpKofi.Text = "Donate && Tip (ko-fi)";
@@ -1241,7 +1241,7 @@
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.thumper_ico_24px;
+            this.toolStripButton3.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_tcle;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
@@ -1336,7 +1336,7 @@
             // 
             // toolstripFormIcon
             // 
-            this.toolstripFormIcon.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.thumper_ico_24px;
+            this.toolstripFormIcon.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_tcle;
             this.toolstripFormIcon.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolstripFormIcon.Margin = new System.Windows.Forms.Padding(0);
             this.toolstripFormIcon.Name = "toolstripFormIcon";
@@ -1398,7 +1398,7 @@
             this.toolstripLevelName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolstripLevelName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolstripLevelName.ForeColor = System.Drawing.Color.White;
-            this.toolstripLevelName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.D0;
+            this.toolstripLevelName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.difficulty_D0;
             this.toolstripLevelName.Margin = new System.Windows.Forms.Padding(20, 5, 0, 5);
             this.toolstripLevelName.Name = "toolstripLevelName";
             this.toolstripLevelName.Size = new System.Drawing.Size(144, 21);
@@ -1492,7 +1492,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn closerecent;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockMain;
         private System.Windows.Forms.TextBox txtFilePath;
-        private ToolStripEx toolStripTitle;
+        private Thumper_Custom_Level_Editor.ToolStripEx toolStripTitle;
         private System.Windows.Forms.ToolStripMenuItem toolstripFile;
         private System.Windows.Forms.ToolStripMenuItem toolstripEdit;
         private System.Windows.Forms.ToolStripMenuItem toolstripView;

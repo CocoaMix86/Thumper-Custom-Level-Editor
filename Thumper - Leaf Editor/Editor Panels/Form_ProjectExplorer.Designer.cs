@@ -210,7 +210,7 @@
             this.filterLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.filterLeaf.CheckOnClick = true;
             this.filterLeaf.ForeColor = System.Drawing.Color.PaleGreen;
-            this.filterLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
+            this.filterLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_leaf;
             this.filterLeaf.Name = "filterLeaf";
             this.filterLeaf.Size = new System.Drawing.Size(180, 22);
             this.filterLeaf.Text = "Leaf";
@@ -221,7 +221,7 @@
             this.filterLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.filterLvl.CheckOnClick = true;
             this.filterLvl.ForeColor = System.Drawing.Color.Green;
-            this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
+            this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_lvl;
             this.filterLvl.Name = "filterLvl";
             this.filterLvl.Size = new System.Drawing.Size(180, 22);
             this.filterLvl.Text = "Lvl";
@@ -232,7 +232,7 @@
             this.filterGate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.filterGate.CheckOnClick = true;
             this.filterGate.ForeColor = System.Drawing.Color.Orange;
-            this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
+            this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_gate;
             this.filterGate.Name = "filterGate";
             this.filterGate.Size = new System.Drawing.Size(180, 22);
             this.filterGate.Text = "Gate";
@@ -243,7 +243,7 @@
             this.filterMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.filterMaster.CheckOnClick = true;
             this.filterMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
+            this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_master;
             this.filterMaster.Name = "filterMaster";
             this.filterMaster.Size = new System.Drawing.Size(180, 22);
             this.filterMaster.Text = "Master";
@@ -254,7 +254,7 @@
             this.filterSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.filterSample.CheckOnClick = true;
             this.filterSample.ForeColor = System.Drawing.Color.Turquoise;
-            this.filterSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
+            this.filterSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_sample;
             this.filterSample.Name = "filterSample";
             this.filterSample.Size = new System.Drawing.Size(180, 22);
             this.filterSample.Text = "Sample";
@@ -509,7 +509,7 @@
             // 
             this.toolStripMenuItem5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripMenuItem5.ForeColor = System.Drawing.Color.PaleGreen;
-            this.toolStripMenuItem5.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
+            this.toolStripMenuItem5.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_leaf;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem5.Text = "Leaf";
@@ -518,7 +518,7 @@
             // 
             this.toolStripMenuItem6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripMenuItem6.ForeColor = System.Drawing.Color.Green;
-            this.toolStripMenuItem6.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
+            this.toolStripMenuItem6.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_lvl;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem6.Text = "Lvl";
@@ -527,7 +527,7 @@
             // 
             this.toolStripMenuItem7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripMenuItem7.ForeColor = System.Drawing.Color.Orange;
-            this.toolStripMenuItem7.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
+            this.toolStripMenuItem7.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_gate;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             this.toolStripMenuItem7.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem7.Text = "Gate";
@@ -536,7 +536,7 @@
             // 
             this.toolStripMenuItem8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripMenuItem8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.toolStripMenuItem8.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
+            this.toolStripMenuItem8.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_master;
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
             this.toolStripMenuItem8.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem8.Text = "Master";
@@ -545,7 +545,7 @@
             // 
             this.toolStripMenuItem9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.toolStripMenuItem9.ForeColor = System.Drawing.Color.Turquoise;
-            this.toolStripMenuItem9.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
+            this.toolStripMenuItem9.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_sample;
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
             this.toolStripMenuItem9.Size = new System.Drawing.Size(151, 22);
             this.toolStripMenuItem9.Text = "Sample";

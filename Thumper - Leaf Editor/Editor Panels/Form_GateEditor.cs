@@ -135,7 +135,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //repopulate dgv from list
             gateLvlList.RowEnter -= gateLvlList_RowEnter;
             foreach (GateLvlData _lvl in _gatelvls) {
-                gateLvlList.Rows.Add(new object[] { Properties.Resources.lvl, _lvl.lvlname.Replace(".lvl", ""), _lvl.sentrytype, _lvl.bucket.ToString() });
+                gateLvlList.Rows.Add(new object[] { Properties.Resources.editor_lvl, _lvl.lvlname.Replace(".lvl", ""), _lvl.sentrytype, _lvl.bucket.ToString() });
                 //gateLvlList.Rows[_gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {_gatelvls.IndexOf(_lvl) + 1}";
             }
             gateLvlList.RowEnter += gateLvlList_RowEnter;

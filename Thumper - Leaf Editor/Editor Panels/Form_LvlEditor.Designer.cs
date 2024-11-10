@@ -589,7 +589,7 @@
             // 
             this.lblLvlName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLvlName.ForeColor = System.Drawing.Color.Green;
-            this.lblLvlName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.lvl;
+            this.lblLvlName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_lvl;
             this.lblLvlName.Name = "lblLvlName";
             this.lblLvlName.Size = new System.Drawing.Size(76, 22);
             this.lblLvlName.Text = "Lvl Editor";

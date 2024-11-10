@@ -69,7 +69,7 @@
             this.lblRenameFileType.AutoSize = true;
             this.lblRenameFileType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRenameFileType.ForeColor = System.Drawing.Color.White;
-            this.lblRenameFileType.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
+            this.lblRenameFileType.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_leaf;
             this.lblRenameFileType.Location = new System.Drawing.Point(3, 24);
             this.lblRenameFileType.MinimumSize = new System.Drawing.Size(16, 16);
             this.lblRenameFileType.Name = "lblRenameFileType";

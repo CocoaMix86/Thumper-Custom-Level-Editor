@@ -447,7 +447,7 @@
             // 
             this.lblTrackFileName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTrackFileName.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblTrackFileName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.leaf;
+            this.lblTrackFileName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_leaf;
             this.lblTrackFileName.Name = "lblTrackFileName";
             this.lblTrackFileName.Size = new System.Drawing.Size(84, 22);
             this.lblTrackFileName.Text = "Leaf Editor";
@@ -529,7 +529,7 @@
             // btnLeafPanelTemplate2
             // 
             this.btnLeafPanelTemplate2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafPanelTemplate2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_template1;
+            this.btnLeafPanelTemplate2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_leaftemplate;
             this.btnLeafPanelTemplate2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLeafPanelTemplate2.Name = "btnLeafPanelTemplate2";
             this.btnLeafPanelTemplate2.Size = new System.Drawing.Size(23, 22);

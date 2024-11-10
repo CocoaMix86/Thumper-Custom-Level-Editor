@@ -392,7 +392,7 @@
             // 
             this.lblSampleEditor.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSampleEditor.ForeColor = System.Drawing.Color.Turquoise;
-            this.lblSampleEditor.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.samp;
+            this.lblSampleEditor.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_sample;
             this.lblSampleEditor.Name = "lblSampleEditor";
             this.lblSampleEditor.Size = new System.Drawing.Size(101, 22);
             this.lblSampleEditor.Text = "Sample Editor";

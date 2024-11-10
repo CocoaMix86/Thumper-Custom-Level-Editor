@@ -232,7 +232,7 @@
             this.lblMasterName.DoubleClickEnabled = true;
             this.lblMasterName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.lblMasterName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.master;
+            this.lblMasterName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_master;
             this.lblMasterName.Name = "lblMasterName";
             this.lblMasterName.Size = new System.Drawing.Size(98, 22);
             this.lblMasterName.Text = "Master Editor";

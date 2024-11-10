@@ -150,11 +150,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //detect if lvl or a gate. If it's a gate, the lvlname won't be set
                 if (!String.IsNullOrEmpty(_masterlvls[_in].lvlname) && _masterlvls[_in].lvlname != "<none>") {
                     int idx = _masterlvls[_in].lvlname.LastIndexOf('.');
-                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.lvl, _masterlvls[_in].lvlname[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.editor_lvl, _masterlvls[_in].lvlname[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
                 }
                 else {
                     int idx = _masterlvls[_in].gatename.LastIndexOf('.');
-                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.gate, _masterlvls[_in].gatename[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.editor_gate, _masterlvls[_in].gatename[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
                 }
             }
             //if action REMOVE, remove row from the master DGV

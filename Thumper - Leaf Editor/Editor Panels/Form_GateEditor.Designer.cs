@@ -117,7 +117,7 @@
             // 
             this.lblGateName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGateName.ForeColor = System.Drawing.Color.Orange;
-            this.lblGateName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.gate;
+            this.lblGateName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_gate;
             this.lblGateName.Name = "lblGateName";
             this.lblGateName.Size = new System.Drawing.Size(87, 22);
             this.lblGateName.Text = "Gate Editor";
