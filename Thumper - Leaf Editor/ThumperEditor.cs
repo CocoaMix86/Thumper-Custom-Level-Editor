@@ -600,7 +600,7 @@ namespace Thumper_Custom_Level_Editor
             var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text);
             dockProject.Show(dockMain, DockState.DockRight);
 
-            var dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            var dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float, TopMost = false };
             var dockGate = new Form_GateEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
             var dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
             var dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
@@ -639,7 +639,7 @@ namespace Thumper_Custom_Level_Editor
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
-        private void toolStripTitle_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void toolStripTitle_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) {
                 ReleaseCapture();
@@ -661,6 +661,27 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripWindowFloatAll_Click(object sender, EventArgs e)
         {
             dockMain.ActivePane.DockState = DockState.Float;
+        }
+
+        private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void toolstripWindowDock_Click(object sender, EventArgs e)
+        {
+            dockMain.ActiveDocument.DockHandler.DockState = DockState.Document;
+        }
+
+        private void dockMain_ActivePaneChanged(object sender, EventArgs e)
+        {
+            if (dockMain.ActivePane?.DockState == DockState.Float) {
+                toolstripWindowFloat.Enabled = false;
+                toolstripWindowDock.Enabled = true;
+            }
+            else {
+                toolstripWindowFloat.Enabled = true;
+                toolstripWindowDock.Enabled = false;
+            }
         }
     }
 }
