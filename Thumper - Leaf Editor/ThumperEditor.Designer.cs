@@ -501,8 +501,6 @@
             this.dockMain.ShowDocumentIcon = true;
             this.dockMain.Size = new System.Drawing.Size(984, 444);
             this.dockMain.TabIndex = 147;
-            this.dockMain.ActiveDocumentChanged += new System.EventHandler(this.dockMain_ActiveDocumentChanged);
-            this.dockMain.ActivePaneChanged += new System.EventHandler(this.dockMain_ActivePaneChanged);
             // 
             // pictureBeeble
             // 
@@ -1355,7 +1353,6 @@
             this.toolstripWindowCloseEditors,
             this.toolStripSeparator12});
             this.contextmenuWindow.Name = "contextmenuEdit";
-            this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuWindow.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextmenuWindow.Size = new System.Drawing.Size(164, 126);
             // 
@@ -1377,7 +1374,6 @@
             // 
             // toolstripWindowDock
             // 
-            this.toolstripWindowDock.Enabled = false;
             this.toolstripWindowDock.ForeColor = System.Drawing.Color.White;
             this.toolstripWindowDock.Name = "toolstripWindowDock";
             this.toolstripWindowDock.Size = new System.Drawing.Size(163, 22);
@@ -1396,6 +1392,7 @@
             this.toolstripWindowCloseAll.Name = "toolstripWindowCloseAll";
             this.toolstripWindowCloseAll.Size = new System.Drawing.Size(163, 22);
             this.toolstripWindowCloseAll.Text = "Close All Tabs";
+            this.toolstripWindowCloseAll.Click += new System.EventHandler(this.toolstripWindowCloseAll_Click);
             // 
             // toolstripWindowCloseEditors
             // 
@@ -1403,6 +1400,7 @@
             this.toolstripWindowCloseEditors.Name = "toolstripWindowCloseEditors";
             this.toolstripWindowCloseEditors.Size = new System.Drawing.Size(163, 22);
             this.toolstripWindowCloseEditors.Text = "Close Editor Tabs";
+            this.toolstripWindowCloseEditors.Click += new System.EventHandler(this.toolstripWindowCloseEditors_Click);
             // 
             // toolStripSeparator12
             // 

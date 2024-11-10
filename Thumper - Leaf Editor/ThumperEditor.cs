@@ -597,10 +597,10 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
 
-            var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text);
+            var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft};
             dockProject.Show(dockMain, DockState.DockRight);
 
-            var dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float, TopMost = false };
+            var dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
             var dockGate = new Form_GateEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
             var dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
             var dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
@@ -652,36 +652,31 @@ namespace Thumper_Custom_Level_Editor
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
         }
         #endregion
+        #region Toolstrip Window
+        private void toolstripWindowFloat_Click(object sender, EventArgs e) => dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
+        private void toolstripWindowFloatAll_Click(object sender, EventArgs e) => dockMain.ActivePane.DockState = DockState.Float;
+        private void toolstripWindowDock_Click(object sender, EventArgs e) => dockMain.ActiveDocument.DockHandler.DockState = DockState.Document;
 
-        private void toolstripWindowFloat_Click(object sender, EventArgs e)
+        private void toolstripWindowCloseAll_Click(object sender, EventArgs e)
         {
-            dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
-        }
-
-        private void toolstripWindowFloatAll_Click(object sender, EventArgs e)
-        {
-            dockMain.ActivePane.DockState = DockState.Float;
-        }
-
-        private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void toolstripWindowDock_Click(object sender, EventArgs e)
-        {
-            dockMain.ActiveDocument.DockHandler.DockState = DockState.Document;
-        }
-
-        private void dockMain_ActivePaneChanged(object sender, EventArgs e)
-        {
-            if (dockMain.ActivePane?.DockState == DockState.Float) {
-                toolstripWindowFloat.Enabled = false;
-                toolstripWindowDock.Enabled = true;
-            }
-            else {
-                toolstripWindowFloat.Enabled = true;
-                toolstripWindowDock.Enabled = false;
+            int contents = dockMain.Contents.Count;
+            for (int x = 0; x < contents; x++) {
+                dockMain.Contents[0].DockHandler.DockPanel = null;
             }
         }
+
+        private void toolstripWindowCloseEditors_Click(object sender, EventArgs e)
+        {
+            int docs = dockMain.DocumentsCount;
+            int floats = dockMain.FloatWindows.Count;
+            for (int x = 0; x < docs; x++) {
+                dockMain.Documents.ToList()[0].DockHandler.DockPanel = null;
+            }
+            for (int x = 0; x < floats; x++) {
+                dockMain.FloatWindows[0].Close();
+            }
+        }
+        #endregion
+
     }
 }
