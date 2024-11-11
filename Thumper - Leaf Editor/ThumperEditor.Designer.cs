@@ -553,7 +553,6 @@
             this.toolStripSeparator4,
             this.toolstripFileExit});
             this.contextmenuFile.Name = "contextmenuFile";
-            this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextmenuFile.Size = new System.Drawing.Size(252, 198);
             // 
@@ -573,7 +572,7 @@
             this.toolstripFileNewProject.ForeColor = System.Drawing.Color.White;
             this.toolstripFileNewProject.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_tcle;
             this.toolstripFileNewProject.Name = "toolstripFileNewProject";
-            this.toolstripFileNewProject.Size = new System.Drawing.Size(111, 22);
+            this.toolstripFileNewProject.Size = new System.Drawing.Size(180, 22);
             this.toolstripFileNewProject.Text = "Project";
             this.toolstripFileNewProject.Click += new System.EventHandler(this.toolstripFileNewProject_Click);
             // 
@@ -583,7 +582,7 @@
             this.toolstripFileNewFile.ForeColor = System.Drawing.Color.White;
             this.toolstripFileNewFile.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_file;
             this.toolstripFileNewFile.Name = "toolstripFileNewFile";
-            this.toolstripFileNewFile.Size = new System.Drawing.Size(111, 22);
+            this.toolstripFileNewFile.Size = new System.Drawing.Size(180, 22);
             this.toolstripFileNewFile.Text = "File";
             this.toolstripFileNewFile.Click += new System.EventHandler(this.toolstripFileNewFile_Click);
             // 
