@@ -327,7 +327,10 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileSave_Click(object sender, EventArgs e)
         {
-
+            var _activedoc = dockMain.ActiveDocument;
+            if (_activedoc.GetType() == typeof(Form_GateEditor)) {
+                ((Form_GateEditor)_activedoc).Save();
+            }
         }
 
         private void toolstripFileSaveAs_Click(object sender, EventArgs e)

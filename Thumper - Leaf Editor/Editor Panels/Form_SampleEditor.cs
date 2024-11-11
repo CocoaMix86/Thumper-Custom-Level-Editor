@@ -22,7 +22,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             _mainform = form;
             InitializeComponent();
-            toolstripTitleSample.Renderer = new ToolStripOverride();
             sampleToolStrip.Renderer = new ToolStripOverride();
             InitializeSampleStuff();
             TCLE.InitializeTracks(sampleList, false);
@@ -231,7 +230,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.WriteFileLock(_mainform.lockedfiles[loadedsample], _save);
             SaveSample(true, true);
-            lblSampleEditor.Text = $"Sample Editor ⮞ {Path.GetFileNameWithoutExtension(_loadedsample)}";
+            this.Text = $"{Path.GetFileNameWithoutExtension(_loadedsample)}";
         }
 
         ///Detect dragon-and-drop of files and then load them to Sample files
@@ -449,7 +448,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             _loadedsample = filepath;
             //set some visual elements
-            lblSampleEditor.Text = $"Sample Editor ⮞ {Path.GetFileNameWithoutExtension(loadedsample)}";
+            this.Text = $"{Path.GetFileNameWithoutExtension(loadedsample)}";
 
             ///Clear form elements so new data can load
             _samplelist.CollectionChanged -= _samplelist_CollectionChanged;
@@ -481,15 +480,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             _savesample = save;
             if (!save) {
+                /*
                 btnSaveSample.Enabled = true;
                 btnRevertSample.Enabled = samplejson != null;
                 btnRevertSample.ToolTipText = samplejson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
                 toolstripTitleSample.BackColor = Color.Maroon;
+                */
             }
             else {
+                /*
                 btnSaveSample.Enabled = false;
                 btnRevertSample.Enabled = false;
                 toolstripTitleSample.BackColor = Color.FromArgb(40, 40, 40);
+                */
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
@@ -643,7 +646,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //reset things to default values
             samplejson = null;
             _samplelist.Clear();
-            lblSampleEditor.Text = "Sample Editor";
+            this.Text = "Sample Editor";
             //set saved flag to true, because nothing is loaded
             SaveSample(true);
             FSBtoSamp.Enabled = true;

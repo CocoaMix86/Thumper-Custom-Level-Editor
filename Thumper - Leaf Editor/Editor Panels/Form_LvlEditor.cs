@@ -20,7 +20,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             _mainform = form;
             InitializeComponent();
-            toolstripTitleLvl.Renderer = new ToolStripOverride();
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlVolumeToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
@@ -437,7 +436,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.WriteFileLock(_mainform.lockedfiles[loadedlvl], _save);
             SaveLvl(true, true);
-            lblLvlName.Text = $"Lvl Editor ⮞ {_save["obj_name"]}";
+            this.Text = $"{_save["obj_name"]}";
             //reload samples on save
             LvlReloadSamples();
         }
@@ -813,7 +812,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             _loadedlvl = filepath;
             //set some visual elements
-            lblLvlName.Text = $@"Lvl Editor ⮞ {_load["obj_name"]}";
+            this.Text = $"{_load["obj_name"]}";
             //set flag that load is in progress. This skips SaveLvl() method
             loadinglvl = true;
             lvljson = _load;
@@ -1007,15 +1006,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             _savelvl = save;
             if (!save) {
+                /*
                 btnSaveLvl.Enabled = true;
                 btnRevertLvl.Enabled = lvljson != null;
                 btnRevertLvl.ToolTipText = lvljson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
                 toolstripTitleLvl.BackColor = Color.Maroon;
+                */
             }
             else {
+                /*
                 btnSaveLvl.Enabled = false;
                 btnRevertLvl.Enabled = false;
                 toolstripTitleLvl.BackColor = Color.FromArgb(40, 40, 40);
+                */
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
@@ -1148,7 +1151,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             NUD_lvlVolume.Value = 0.5M;
             dropLvlInput.SelectedIndex = 0;
             dropLvlTutorial.SelectedIndex = 0;
-            lblLvlName.Text = "Lvl Editor";
+            this.Text = "Lvl Editor";
             //set saved flag to true, because nothing is loaded
             SaveLvl(true);
         }

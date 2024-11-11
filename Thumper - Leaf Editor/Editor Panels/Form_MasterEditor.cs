@@ -20,7 +20,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             _mainform = form;
             InitializeComponent();
-            toolstripTitleMaster.Renderer = new ToolStripOverride();
             masterToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(masterLvlList, false);
         }
@@ -276,7 +275,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.WriteFileLock(_mainform.lockedfiles[loadedmaster], _save);
             SaveMaster(true, true);
-            lblMasterName.Text = $"Master Editor - sequin.master";
+            this.Text = $"sequin.master";
 
         }
         #endregion
@@ -492,7 +491,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             _loadedmaster = filepath;
             //set some visual elements
-            lblMasterName.Text = $"Master Editor - sequin.master";
+            this.Text = $"sequin.master";
 
             ///Clear form elements so new data can load
             _masterlvls.Clear();
@@ -519,7 +518,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///set save flag (master just loaded, has no changes)
             SaveMaster(true);
             masterjson = _load;
-            btnRevert.Enabled = true;
+            ///btnRevert.Enabled = true;
             btnMasterRuntime.Enabled = true;
         }
 
@@ -573,15 +572,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             _savemaster = save;
             if (!save) {
+                /*
                 btnSave.Enabled = true;
                 btnRevert.Enabled = masterjson != null;
                 btnRevert.ToolTipText = masterjson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
                 toolstripTitleMaster.BackColor = Color.Maroon;
+                */
             }
             else {
+                /*
                 btnSave.Enabled = false;
                 btnRevert.Enabled = false;
                 toolstripTitleMaster.BackColor = Color.FromArgb(40, 40, 40);
+                */
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
@@ -738,7 +741,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //reset things to default values
             masterjson = null;
             _masterlvls.Clear();
-            lblMasterName.Text = "Master Editor";
+            this.Text = "Master Editor";
             btnConfigGlowColor.BackColor = Color.White;
             btnConfigPathColor.BackColor = Color.White;
             btnConfigRailColor.BackColor = Color.White;

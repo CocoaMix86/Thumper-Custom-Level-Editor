@@ -20,7 +20,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _mainform = form;
             InitializeComponent();
             LoadQuickValues();
-            toolstripTitleLeaf.Renderer = new ToolStripOverride();
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
@@ -763,7 +762,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.WriteFileLock(_mainform.lockedfiles[_loadedleaf], _save);
             SaveLeaf(true, "Saved", "", true);
-            lblTrackFileName.Text = $"Leaf Editor ⮞ {_save["obj_name"]}";
+            this.Text = $"{_save["obj_name"]}";
             //update beat counts in loaded lvl if need be
             ///if (_mainform._loadedlvl != null)
                 ///_mainform.btnLvlRefreshBeats_Click(null, null);
@@ -1372,7 +1371,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void btnUndoLeaf_DropDownOpening(object sender, EventArgs e)
         {
-            btnUndoLeaf.DropDown = CreateUndoMenu(_undolistleaf);
+            ///btnUndoLeaf.DropDown = CreateUndoMenu(_undolistleaf);
         }
 
         private void btnLeafAutoPlace_Click(object sender, EventArgs e)
@@ -1460,16 +1459,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 SaveLeafColors(false, Color.FromArgb(40, 40, 40));
-                btnRevertLeaf.Enabled = false;
+                ///btnRevertLeaf.Enabled = false;
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
         public void SaveLeafColors(bool enabled, Color color)
         {
+            /*
             btnSaveLeaf.Enabled = enabled;
             btnRevertLeaf.Enabled = leafjson != null;
             btnRevertLeaf.ToolTipText = leafjson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
             toolstripTitleLeaf.BackColor = color;
+            */
         }
 
         public void InitializeLeafStuff()
@@ -1605,7 +1606,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _loadedleaf = filepath;
             }
 
-            lblTrackFileName.Text = $@"Leaf Editor ⮞ {_load["obj_name"]}";
+            this.Text = $"{_load["obj_name"]}";
             leafobj = _load["obj_name"];
             //set flag that load is in progress. This skips SaveLeaf() method
             loadingleaf = true;
@@ -1795,7 +1796,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leafjson = null;
             _tracks.Clear();
             trackEditor.Rows.Clear();
-            lblTrackFileName.Text = "Leaf Editor";
+            this.Text = "Leaf Editor";
             dropObjects.Enabled = dropParamPath.Enabled = btnTrackApply.Enabled = false;
             //
             SaveLeaf(true, "New", "");

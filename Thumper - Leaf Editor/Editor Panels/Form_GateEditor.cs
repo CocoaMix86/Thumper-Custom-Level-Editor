@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,7 +16,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             _mainform = form;
             InitializeComponent();
-            toolstripTitleGate.Renderer = new ToolStripOverride();
             gateToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(gateLvlList, false);
         }
@@ -183,7 +181,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         ///SAVE
-        private void gatesaveToolStripMenuItem_Click(object sender, EventArgs e)
+        public void Save()
         {
             //if _loadedgate is somehow not set, force Save As instead
             if (_loadedgate == null) {
@@ -233,7 +231,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.WriteFileLock(_mainform.lockedfiles[loadedgate], _save);
             SaveGate(true, true);
-            lblGateName.Text = $"Gate Editor ⮞ {_save["obj_name"]}";
+            this.Text = $"{_save["obj_name"]}";
         }
 
         /// All dropdowns of Gate Editor call this
@@ -472,7 +470,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             _loadedgate = filepath;
             //set some visual elements
-            lblGateName.Text = $"Gate Editor ⮞ {_load["obj_name"]}";
+            this.Text = $"{_load["obj_name"]}";
 
             ///Clear form elements so new data can load
             _gatelvls.Clear();
@@ -532,15 +530,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             _savegate = save;
             if (!save) {
+                /*
                 btnSaveGate.Enabled = true;
                 btnRevertGate.Enabled = gatejson != null;
                 btnRevertGate.ToolTipText = gatejson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
                 toolstripTitleGate.BackColor = Color.Maroon;
+                */
             }
             else {
+                /*
                 btnSaveGate.Enabled = false;
                 btnRevertGate.Enabled = false;
                 toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
+                */
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
@@ -628,7 +630,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropGatePre.SelectedIndex = 0;
             dropGatePost.SelectedIndex = 0;
             dropGateRestart.SelectedIndex = 0;
-            lblGateName.Text = "Gate Editor";
+            this.Text = "Gate Editor";
             //set saved flag to true, because nothing is loaded
             SaveGate(true);
         }

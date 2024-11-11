@@ -39,11 +39,6 @@
             this.masterCheckpoint = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.masterPlayplus = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.masterIsolate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.toolstripTitleMaster = new System.Windows.Forms.ToolStrip();
-            this.lblMasterName = new System.Windows.Forms.ToolStripLabel();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnRevert = new System.Windows.Forms.ToolStripButton();
-            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.label30 = new System.Windows.Forms.Label();
             this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -83,7 +78,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
-            this.toolstripTitleMaster.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).BeginInit();
             this.masterToolStrip.SuspendLayout();
@@ -94,11 +88,10 @@
             this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMaster.Controls.Add(this.masterLvlList);
-            this.panelMaster.Controls.Add(this.toolstripTitleMaster);
+            this.panelMaster.Controls.Add(this.masterToolStrip);
             this.panelMaster.Controls.Add(this.label30);
             this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
             this.panelMaster.Controls.Add(this.panel5);
-            this.panelMaster.Controls.Add(this.masterToolStrip);
             this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMaster.Location = new System.Drawing.Point(0, 0);
             this.panelMaster.MinimumSize = new System.Drawing.Size(60, 60);
@@ -114,9 +107,6 @@
             this.masterLvlList.AllowUserToDeleteRows = false;
             this.masterLvlList.AllowUserToResizeColumns = false;
             this.masterLvlList.AllowUserToResizeRows = false;
-            this.masterLvlList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.masterLvlList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -147,9 +137,10 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle2;
+            this.masterLvlList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = System.Drawing.Color.Black;
-            this.masterLvlList.Location = new System.Drawing.Point(3, 39);
+            this.masterLvlList.Location = new System.Drawing.Point(0, 13);
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -165,7 +156,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.masterLvlList.Size = new System.Drawing.Size(618, 378);
+            this.masterLvlList.Size = new System.Drawing.Size(624, 409);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             // 
@@ -206,73 +197,14 @@
             this.masterIsolate.Name = "masterIsolate";
             this.masterIsolate.Width = 32;
             // 
-            // toolstripTitleMaster
-            // 
-            this.toolstripTitleMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleMaster.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleMaster.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleMaster.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblMasterName,
-            this.btnSave,
-            this.btnRevert,
-            this.btnRefresh});
-            this.toolstripTitleMaster.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleMaster.MaximumSize = new System.Drawing.Size(0, 50);
-            this.toolstripTitleMaster.Name = "toolstripTitleMaster";
-            this.toolstripTitleMaster.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleMaster.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleMaster.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleMaster.Size = new System.Drawing.Size(798, 25);
-            this.toolstripTitleMaster.Stretch = true;
-            this.toolstripTitleMaster.TabIndex = 139;
-            this.toolstripTitleMaster.Text = "titlebar";
-            // 
-            // lblMasterName
-            // 
-            this.lblMasterName.DoubleClickEnabled = true;
-            this.lblMasterName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMasterName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.lblMasterName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_master;
-            this.lblMasterName.Name = "lblMasterName";
-            this.lblMasterName.Size = new System.Drawing.Size(98, 22);
-            this.lblMasterName.Text = "Master Editor";
-            // 
-            // btnSave
-            // 
-            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSave.Enabled = false;
-            this.btnSave.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(23, 22);
-            this.btnSave.ToolTipText = "Save master file";
-            // 
-            // btnRevert
-            // 
-            this.btnRevert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevert.Enabled = false;
-            this.btnRevert.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevert.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevert.Name = "btnRevert";
-            this.btnRevert.Size = new System.Drawing.Size(23, 22);
-            this.btnRevert.ToolTipText = "Revert changes to last save";
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(23, 22);
-            this.btnRefresh.ToolTipText = "Reload the lvl lists on this panel";
-            // 
             // label30
             // 
             this.label30.AutoSize = true;
             this.label30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.label30.Dock = System.Windows.Forms.DockStyle.Top;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(3, 26);
+            this.label30.Location = new System.Drawing.Point(0, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(81, 13);
             this.label30.TabIndex = 94;
@@ -286,7 +218,7 @@
             this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(606, 23);
+            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(606, -1);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new System.Drawing.Size(15, 16);
             this.lblMasterlvllistHelp.TabIndex = 95;
@@ -294,8 +226,6 @@
             // 
             // panel5
             // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.AutoScroll = true;
             this.panel5.BackColor = System.Drawing.Color.Transparent;
             this.panel5.Controls.Add(this.lblMasterRuntime);
@@ -324,10 +254,11 @@
             this.panel5.Controls.Add(this.label56);
             this.panel5.Controls.Add(this.label47);
             this.panel5.Controls.Add(this.btnMasterOpenRest);
-            this.panel5.Location = new System.Drawing.Point(623, 22);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel5.Location = new System.Drawing.Point(624, 0);
             this.panel5.Name = "panel5";
             this.panel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel5.Size = new System.Drawing.Size(174, 414);
+            this.panel5.Size = new System.Drawing.Size(174, 447);
             this.panel5.TabIndex = 147;
             // 
             // lblMasterRuntime
@@ -699,11 +630,9 @@
             // 
             // masterToolStrip
             // 
-            this.masterToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.masterToolStrip.AutoSize = false;
             this.masterToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.masterToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.masterToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.masterToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
             this.masterToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.masterToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -715,11 +644,11 @@
             this.btnMasterLvlCopy,
             this.btnMasterLvlPaste});
             this.masterToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.masterToolStrip.Location = new System.Drawing.Point(3, 419);
+            this.masterToolStrip.Location = new System.Drawing.Point(0, 422);
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.masterToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new System.Drawing.Size(618, 25);
+            this.masterToolStrip.Size = new System.Drawing.Size(624, 25);
             this.masterToolStrip.Stretch = true;
             this.masterToolStrip.TabIndex = 138;
             // 
@@ -805,8 +734,6 @@
             this.panelMaster.ResumeLayout(false);
             this.panelMaster.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
-            this.toolstripTitleMaster.ResumeLayout(false);
-            this.toolstripTitleMaster.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_ConfigBPM)).EndInit();
@@ -825,11 +752,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn masterCheckpoint;
         private System.Windows.Forms.DataGridViewCheckBoxColumn masterPlayplus;
         private System.Windows.Forms.DataGridViewCheckBoxColumn masterIsolate;
-        private System.Windows.Forms.ToolStrip toolstripTitleMaster;
-        private System.Windows.Forms.ToolStripLabel lblMasterName;
-        private System.Windows.Forms.ToolStripButton btnSave;
-        private System.Windows.Forms.ToolStripButton btnRefresh;
-        private System.Windows.Forms.ToolStripButton btnRevert;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label lblMasterlvllistHelp;
         private System.Windows.Forms.Panel panel5;

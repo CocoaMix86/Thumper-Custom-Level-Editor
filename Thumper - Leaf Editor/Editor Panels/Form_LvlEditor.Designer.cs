@@ -70,11 +70,6 @@
             this.lvlfiletype = new System.Windows.Forms.DataGridViewImageColumn();
             this.Leaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Beats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolstripTitleLvl = new System.Windows.Forms.ToolStrip();
-            this.lblLvlName = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveLvl = new System.Windows.Forms.ToolStripButton();
-            this.btnRevertLvl = new System.Windows.Forms.ToolStripButton();
-            this.btnLvlLoopRefresh = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lvlSeqObjs = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -107,7 +102,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlApproach)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvlLeafList)).BeginInit();
-            this.toolstripTitleLvl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -218,7 +212,6 @@
             this.panelLevel.Controls.Add(this.label23);
             this.panelLevel.Controls.Add(this.NUD_lvlApproach);
             this.panelLevel.Controls.Add(this.lvlLeafList);
-            this.panelLevel.Controls.Add(this.toolstripTitleLvl);
             this.panelLevel.Controls.Add(this.splitContainer1);
             this.panelLevel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLevel.Location = new System.Drawing.Point(0, 0);
@@ -357,9 +350,10 @@
             // 
             this.label29.AutoSize = true;
             this.label29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.label29.Dock = System.Windows.Forms.DockStyle.Top;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.ForeColor = System.Drawing.Color.White;
-            this.label29.Location = new System.Drawing.Point(3, 25);
+            this.label29.Location = new System.Drawing.Point(0, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(56, 13);
             this.label29.TabIndex = 93;
@@ -518,7 +512,7 @@
             this.lvlLeafList.DefaultCellStyle = dataGridViewCellStyle2;
             this.lvlLeafList.EnableHeadersVisualStyles = false;
             this.lvlLeafList.GridColor = System.Drawing.Color.Black;
-            this.lvlLeafList.Location = new System.Drawing.Point(3, 38);
+            this.lvlLeafList.Location = new System.Drawing.Point(3, 11);
             this.lvlLeafList.Name = "lvlLeafList";
             this.lvlLeafList.ReadOnly = true;
             this.lvlLeafList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -534,7 +528,7 @@
             this.lvlLeafList.RowTemplate.Height = 20;
             this.lvlLeafList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafList.Size = new System.Drawing.Size(236, 267);
+            this.lvlLeafList.Size = new System.Drawing.Size(236, 294);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.Tag = "editorpaneldgv";
             // 
@@ -564,72 +558,13 @@
             this.Beats.ReadOnly = true;
             this.Beats.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // toolstripTitleLvl
-            // 
-            this.toolstripTitleLvl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleLvl.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLvl.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleLvl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblLvlName,
-            this.btnSaveLvl,
-            this.btnRevertLvl,
-            this.btnLvlLoopRefresh});
-            this.toolstripTitleLvl.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleLvl.MaximumSize = new System.Drawing.Size(0, 50);
-            this.toolstripTitleLvl.Name = "toolstripTitleLvl";
-            this.toolstripTitleLvl.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLvl.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleLvl.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleLvl.Size = new System.Drawing.Size(798, 25);
-            this.toolstripTitleLvl.Stretch = true;
-            this.toolstripTitleLvl.TabIndex = 140;
-            this.toolstripTitleLvl.Text = "titlebar";
-            // 
-            // lblLvlName
-            // 
-            this.lblLvlName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLvlName.ForeColor = System.Drawing.Color.Green;
-            this.lblLvlName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_lvl;
-            this.lblLvlName.Name = "lblLvlName";
-            this.lblLvlName.Size = new System.Drawing.Size(76, 22);
-            this.lblLvlName.Text = "Lvl Editor";
-            // 
-            // btnSaveLvl
-            // 
-            this.btnSaveLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveLvl.Enabled = false;
-            this.btnSaveLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveLvl.Name = "btnSaveLvl";
-            this.btnSaveLvl.Size = new System.Drawing.Size(23, 22);
-            this.btnSaveLvl.ToolTipText = "Save lvl file";
-            // 
-            // btnRevertLvl
-            // 
-            this.btnRevertLvl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertLvl.Enabled = false;
-            this.btnRevertLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertLvl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertLvl.Name = "btnRevertLvl";
-            this.btnRevertLvl.Size = new System.Drawing.Size(23, 22);
-            this.btnRevertLvl.ToolTipText = "Revert changes to last save";
-            // 
-            // btnLvlLoopRefresh
-            // 
-            this.btnLvlLoopRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLvlLoopRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnLvlLoopRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLvlLoopRefresh.Name = "btnLvlLoopRefresh";
-            this.btnLvlLoopRefresh.Size = new System.Drawing.Size(23, 22);
-            this.btnLvlLoopRefresh.ToolTipText = "Reload available loop tracks from workingfolder";
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Location = new System.Drawing.Point(247, 26);
+            this.splitContainer1.Location = new System.Drawing.Point(247, -1);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -649,8 +584,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.lblLvlTunnels);
             this.splitContainer1.Panel2.Controls.Add(this.label22);
             this.splitContainer1.Panel2.Controls.Add(this.lvlLoopTracks);
-            this.splitContainer1.Size = new System.Drawing.Size(545, 418);
-            this.splitContainer1.SplitterDistance = 172;
+            this.splitContainer1.Size = new System.Drawing.Size(552, 450);
+            this.splitContainer1.SplitterDistance = 185;
             this.splitContainer1.TabIndex = 145;
             // 
             // lvlSeqObjs
@@ -704,7 +639,7 @@
             this.lvlSeqObjs.RowTemplate.Height = 20;
             this.lvlSeqObjs.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlSeqObjs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlSeqObjs.Size = new System.Drawing.Size(514, 153);
+            this.lvlSeqObjs.Size = new System.Drawing.Size(521, 166);
             this.lvlSeqObjs.TabIndex = 68;
             // 
             // panel1
@@ -925,7 +860,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 227);
+            this.lvlLeafPaths.Size = new System.Drawing.Size(219, 246);
             this.lvlLeafPaths.TabIndex = 79;
             // 
             // lvlPathsToolStrip
@@ -1084,7 +1019,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new System.Drawing.Size(238, 227);
+            this.lvlLoopTracks.Size = new System.Drawing.Size(245, 246);
             this.lvlLoopTracks.TabIndex = 81;
             // 
             // LoopSample
@@ -1122,8 +1057,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_lvlApproach)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvlLeafList)).EndInit();
-            this.toolstripTitleLvl.ResumeLayout(false);
-            this.toolstripTitleLvl.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -1173,11 +1106,6 @@
         private System.Windows.Forms.DataGridViewImageColumn lvlfiletype;
         private System.Windows.Forms.DataGridViewTextBoxColumn Leaf;
         private System.Windows.Forms.DataGridViewTextBoxColumn Beats;
-        private System.Windows.Forms.ToolStrip toolstripTitleLvl;
-        private System.Windows.Forms.ToolStripLabel lblLvlName;
-        private System.Windows.Forms.ToolStripButton btnSaveLvl;
-        private System.Windows.Forms.ToolStripButton btnRevertLvl;
-        private System.Windows.Forms.ToolStripButton btnLvlLoopRefresh;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView lvlSeqObjs;
         private System.Windows.Forms.Panel panel1;

@@ -54,28 +54,24 @@
             this.FSBtoSamp = new System.Windows.Forms.ToolStripButton();
             this.btnSampEditorPlaySamp = new System.Windows.Forms.ToolStripButton();
             this.lblSampleFSBhelp = new System.Windows.Forms.ToolStripLabel();
-            this.label50 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.txtSampPath = new System.Windows.Forms.TextBox();
-            this.toolstripTitleSample = new System.Windows.Forms.ToolStrip();
-            this.lblSampleEditor = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveSample = new System.Windows.Forms.ToolStripButton();
-            this.btnRevertSample = new System.Windows.Forms.ToolStripButton();
+            this.label50 = new System.Windows.Forms.Label();
             this.panelSample.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).BeginInit();
             this.sampleToolStrip.SuspendLayout();
-            this.toolstripTitleSample.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label14
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Cursor = System.Windows.Forms.Cursors.Help;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label14.Location = new System.Drawing.Point(780, 25);
+            this.label14.Location = new System.Drawing.Point(780, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(15, 16);
             this.label14.TabIndex = 151;
@@ -90,10 +86,8 @@
             this.panelSample.Controls.Add(this.label14);
             this.panelSample.Controls.Add(this.label54);
             this.panelSample.Controls.Add(this.sampleToolStrip);
-            this.panelSample.Controls.Add(this.label50);
             this.panelSample.Controls.Add(this.label45);
-            this.panelSample.Controls.Add(this.txtSampPath);
-            this.panelSample.Controls.Add(this.toolstripTitleSample);
+            this.panelSample.Controls.Add(this.panel1);
             this.panelSample.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSample.Location = new System.Drawing.Point(0, 0);
             this.panelSample.MinimumSize = new System.Drawing.Size(60, 60);
@@ -108,9 +102,6 @@
             this.sampleList.AllowUserToAddRows = false;
             this.sampleList.AllowUserToDeleteRows = false;
             this.sampleList.AllowUserToResizeRows = false;
-            this.sampleList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.sampleList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.sampleList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.sampleList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -143,9 +134,10 @@
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.DefaultCellStyle = dataGridViewCellStyle7;
+            this.sampleList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sampleList.EnableHeadersVisualStyles = false;
             this.sampleList.GridColor = System.Drawing.Color.Black;
-            this.sampleList.Location = new System.Drawing.Point(3, 40);
+            this.sampleList.Location = new System.Drawing.Point(0, 13);
             this.sampleList.Name = "sampleList";
             this.sampleList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -161,7 +153,7 @@
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.sampleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.sampleList.Size = new System.Drawing.Size(791, 347);
+            this.sampleList.Size = new System.Drawing.Size(798, 369);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.sampleList_CellEnter);
@@ -241,9 +233,10 @@
             // 
             this.label54.AutoSize = true;
             this.label54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.label54.Dock = System.Windows.Forms.DockStyle.Top;
             this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label54.ForeColor = System.Drawing.Color.White;
-            this.label54.Location = new System.Drawing.Point(3, 27);
+            this.label54.Location = new System.Drawing.Point(0, 0);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(54, 13);
             this.label54.TabIndex = 146;
@@ -251,11 +244,9 @@
             // 
             // sampleToolStrip
             // 
-            this.sampleToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.sampleToolStrip.AutoSize = false;
             this.sampleToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.sampleToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.sampleToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.sampleToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
             this.sampleToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.sampleToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -266,11 +257,11 @@
             this.btnSampEditorPlaySamp,
             this.lblSampleFSBhelp});
             this.sampleToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.sampleToolStrip.Location = new System.Drawing.Point(3, 390);
+            this.sampleToolStrip.Location = new System.Drawing.Point(0, 382);
             this.sampleToolStrip.Name = "sampleToolStrip";
             this.sampleToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.sampleToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.sampleToolStrip.Size = new System.Drawing.Size(791, 25);
+            this.sampleToolStrip.Size = new System.Drawing.Size(798, 25);
             this.sampleToolStrip.Stretch = true;
             this.sampleToolStrip.TabIndex = 150;
             // 
@@ -331,93 +322,51 @@
             this.lblSampleFSBhelp.Text = "How to get a .FSB audio file";
             this.lblSampleFSBhelp.Click += new System.EventHandler(this.lblSampleFSBhelp_Click);
             // 
-            // label50
-            // 
-            this.label50.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label50.AutoSize = true;
-            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label50.ForeColor = System.Drawing.Color.White;
-            this.label50.Location = new System.Drawing.Point(5, 426);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(32, 15);
-            this.label50.TabIndex = 147;
-            this.label50.Text = "Path";
-            // 
             // label45
             // 
             this.label45.AutoSize = true;
             this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label45.ForeColor = System.Drawing.Color.White;
-            this.label45.Location = new System.Drawing.Point(142, 27);
+            this.label45.Location = new System.Drawing.Point(142, 0);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(157, 13);
             this.label45.TabIndex = 149;
             this.label45.Text = "all fields in the table are editable";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label50);
+            this.panel1.Controls.Add(this.txtSampPath);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 407);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(798, 41);
+            this.panel1.TabIndex = 152;
+            // 
             // txtSampPath
             // 
-            this.txtSampPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSampPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSampPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtSampPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSampPath.ForeColor = System.Drawing.Color.White;
-            this.txtSampPath.Location = new System.Drawing.Point(38, 423);
+            this.txtSampPath.Location = new System.Drawing.Point(36, 8);
             this.txtSampPath.Name = "txtSampPath";
-            this.txtSampPath.Size = new System.Drawing.Size(735, 22);
+            this.txtSampPath.Size = new System.Drawing.Size(759, 22);
             this.txtSampPath.TabIndex = 148;
             this.txtSampPath.TextChanged += new System.EventHandler(this.txtSampPath_TextChanged);
             // 
-            // toolstripTitleSample
+            // label50
             // 
-            this.toolstripTitleSample.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleSample.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleSample.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleSample.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblSampleEditor,
-            this.btnSaveSample,
-            this.btnRevertSample});
-            this.toolstripTitleSample.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleSample.MaximumSize = new System.Drawing.Size(0, 50);
-            this.toolstripTitleSample.Name = "toolstripTitleSample";
-            this.toolstripTitleSample.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleSample.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleSample.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleSample.Size = new System.Drawing.Size(798, 25);
-            this.toolstripTitleSample.Stretch = true;
-            this.toolstripTitleSample.TabIndex = 142;
-            this.toolstripTitleSample.Text = "titlebar";
-            // 
-            // lblSampleEditor
-            // 
-            this.lblSampleEditor.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSampleEditor.ForeColor = System.Drawing.Color.Turquoise;
-            this.lblSampleEditor.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_sample;
-            this.lblSampleEditor.Name = "lblSampleEditor";
-            this.lblSampleEditor.Size = new System.Drawing.Size(101, 22);
-            this.lblSampleEditor.Text = "Sample Editor";
-            // 
-            // btnSaveSample
-            // 
-            this.btnSaveSample.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveSample.Enabled = false;
-            this.btnSaveSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveSample.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveSample.Name = "btnSaveSample";
-            this.btnSaveSample.Size = new System.Drawing.Size(23, 22);
-            this.btnSaveSample.ToolTipText = "Save sample file";
-            this.btnSaveSample.Click += new System.EventHandler(this.SamplesaveToolStripMenuItem_Click);
-            // 
-            // btnRevertSample
-            // 
-            this.btnRevertSample.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertSample.Enabled = false;
-            this.btnRevertSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertSample.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertSample.Name = "btnRevertSample";
-            this.btnRevertSample.Size = new System.Drawing.Size(23, 22);
-            this.btnRevertSample.ToolTipText = "Revert changes to last save";
-            this.btnRevertSample.Click += new System.EventHandler(this.btnRevertSample_Click);
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.ForeColor = System.Drawing.Color.White;
+            this.label50.Location = new System.Drawing.Point(3, 11);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(32, 15);
+            this.label50.TabIndex = 147;
+            this.label50.Text = "Path";
             // 
             // Form_SampleEditor
             // 
@@ -437,8 +386,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.sampleList)).EndInit();
             this.sampleToolStrip.ResumeLayout(false);
             this.sampleToolStrip.PerformLayout();
-            this.toolstripTitleSample.ResumeLayout(false);
-            this.toolstripTitleSample.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -461,12 +410,9 @@
         private System.Windows.Forms.ToolStripButton FSBtoSamp;
         private System.Windows.Forms.ToolStripButton btnSampEditorPlaySamp;
         private System.Windows.Forms.ToolStripLabel lblSampleFSBhelp;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.TextBox txtSampPath;
-        private System.Windows.Forms.ToolStrip toolstripTitleSample;
-        private System.Windows.Forms.ToolStripLabel lblSampleEditor;
-        private System.Windows.Forms.ToolStripButton btnSaveSample;
-        private System.Windows.Forms.ToolStripButton btnRevertSample;
     }
 }

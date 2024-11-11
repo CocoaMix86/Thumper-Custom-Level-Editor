@@ -29,10 +29,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.trackZoomVert = new System.Windows.Forms.TrackBar();
             this.trackZoom = new System.Windows.Forms.TrackBar();
@@ -50,17 +50,6 @@
             this.vScrollBarTrackEditor = new System.Windows.Forms.VScrollBar();
             this.trackEditor = new System.Windows.Forms.DataGridView();
             this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolstripTitleLeaf = new System.Windows.Forms.ToolStrip();
-            this.lblTrackFileName = new System.Windows.Forms.ToolStripLabel();
-            this.btnSaveLeaf = new System.Windows.Forms.ToolStripButton();
-            this.lblLeafClose = new System.Windows.Forms.ToolStripButton();
-            this.lblPopoutLeaf = new System.Windows.Forms.ToolStripButton();
-            this.btnLeafObjRefresh = new System.Windows.Forms.ToolStripButton();
-            this.btnUndoLeaf = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnRevertLeaf = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnLeafPanelTemplate2 = new System.Windows.Forms.ToolStripButton();
             this.leafToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnTrackAdd = new System.Windows.Forms.ToolStripButton();
             this.btnTrackDelete = new System.Windows.Forms.ToolStripButton();
@@ -134,7 +123,6 @@
             this.panelLeaf.SuspendLayout();
             this.panelZoom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
-            this.toolstripTitleLeaf.SuspendLayout();
             this.leafToolStrip.SuspendLayout();
             this.panelRawData.SuspendLayout();
             this.leaftoolsToolStrip.SuspendLayout();
@@ -286,7 +274,6 @@
             this.panelLeaf.Controls.Add(this.panelZoom);
             this.panelLeaf.Controls.Add(this.vScrollBarTrackEditor);
             this.panelLeaf.Controls.Add(this.trackEditor);
-            this.panelLeaf.Controls.Add(this.toolstripTitleLeaf);
             this.panelLeaf.Controls.Add(this.leafToolStrip);
             this.panelLeaf.Controls.Add(this.label5);
             this.panelLeaf.Controls.Add(this.panelRawData);
@@ -308,7 +295,7 @@
             this.panelZoom.Controls.Add(this.label57);
             this.panelZoom.Controls.Add(this.trackZoomVert);
             this.panelZoom.Controls.Add(this.trackZoom);
-            this.panelZoom.Location = new System.Drawing.Point(477, 51);
+            this.panelZoom.Location = new System.Drawing.Point(477, 29);
             this.panelZoom.Name = "panelZoom";
             this.panelZoom.Size = new System.Drawing.Size(98, 116);
             this.panelZoom.TabIndex = 43;
@@ -363,51 +350,51 @@
             this.trackEditor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.trackEditor.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.trackEditor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column0});
             this.trackEditor.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Format = "0.###";
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Format = "0.###";
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle6;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = System.Drawing.Color.Black;
-            this.trackEditor.Location = new System.Drawing.Point(230, 51);
+            this.trackEditor.Location = new System.Drawing.Point(230, 29);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.trackEditor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new System.Drawing.Size(564, 324);
+            this.trackEditor.Size = new System.Drawing.Size(564, 346);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             // 
@@ -415,125 +402,6 @@
             // 
             this.Column0.HeaderText = "0";
             this.Column0.Name = "Column0";
-            // 
-            // toolstripTitleLeaf
-            // 
-            this.toolstripTitleLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.toolstripTitleLeaf.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLeaf.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripTitleLeaf.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblTrackFileName,
-            this.btnSaveLeaf,
-            this.lblLeafClose,
-            this.lblPopoutLeaf,
-            this.btnLeafObjRefresh,
-            this.btnUndoLeaf,
-            this.toolStripSeparator9,
-            this.btnRevertLeaf,
-            this.toolStripSeparator11,
-            this.btnLeafPanelTemplate2});
-            this.toolstripTitleLeaf.Location = new System.Drawing.Point(0, 0);
-            this.toolstripTitleLeaf.MaximumSize = new System.Drawing.Size(0, 50);
-            this.toolstripTitleLeaf.Name = "toolstripTitleLeaf";
-            this.toolstripTitleLeaf.Padding = new System.Windows.Forms.Padding(0);
-            this.toolstripTitleLeaf.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolstripTitleLeaf.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolstripTitleLeaf.Size = new System.Drawing.Size(798, 25);
-            this.toolstripTitleLeaf.Stretch = true;
-            this.toolstripTitleLeaf.TabIndex = 141;
-            this.toolstripTitleLeaf.Text = "titlebar";
-            // 
-            // lblTrackFileName
-            // 
-            this.lblTrackFileName.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTrackFileName.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblTrackFileName.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_leaf;
-            this.lblTrackFileName.Name = "lblTrackFileName";
-            this.lblTrackFileName.Size = new System.Drawing.Size(84, 22);
-            this.lblTrackFileName.Text = "Leaf Editor";
-            // 
-            // btnSaveLeaf
-            // 
-            this.btnSaveLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveLeaf.Enabled = false;
-            this.btnSaveLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save2;
-            this.btnSaveLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveLeaf.Name = "btnSaveLeaf";
-            this.btnSaveLeaf.Size = new System.Drawing.Size(23, 22);
-            this.btnSaveLeaf.ToolTipText = "Save leaf file";
-            // 
-            // lblLeafClose
-            // 
-            this.lblLeafClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblLeafClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblLeafClose.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.lblLeafClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblLeafClose.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblLeafClose.Name = "lblLeafClose";
-            this.lblLeafClose.Size = new System.Drawing.Size(23, 25);
-            this.lblLeafClose.Text = "toolStripButton6";
-            this.lblLeafClose.ToolTipText = "Close panel";
-            // 
-            // lblPopoutLeaf
-            // 
-            this.lblPopoutLeaf.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.lblPopoutLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.lblPopoutLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowupdock;
-            this.lblPopoutLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.lblPopoutLeaf.Margin = new System.Windows.Forms.Padding(-2, 0, 0, 0);
-            this.lblPopoutLeaf.Name = "lblPopoutLeaf";
-            this.lblPopoutLeaf.Size = new System.Drawing.Size(23, 25);
-            this.lblPopoutLeaf.Text = "Dock panel";
-            this.lblPopoutLeaf.ToolTipText = "Undock panel";
-            // 
-            // btnLeafObjRefresh
-            // 
-            this.btnLeafObjRefresh.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnLeafObjRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafObjRefresh.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_refresh2;
-            this.btnLeafObjRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLeafObjRefresh.Name = "btnLeafObjRefresh";
-            this.btnLeafObjRefresh.Size = new System.Drawing.Size(23, 22);
-            this.btnLeafObjRefresh.ToolTipText = "Reload list of Track Objects from track_objects.txt";
-            // 
-            // btnUndoLeaf
-            // 
-            this.btnUndoLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnUndoLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_undo;
-            this.btnUndoLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnUndoLeaf.Name = "btnUndoLeaf";
-            this.btnUndoLeaf.Size = new System.Drawing.Size(29, 22);
-            this.btnUndoLeaf.Text = "Undo (Ctrl+Z)";
-            this.btnUndoLeaf.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnRevertLeaf
-            // 
-            this.btnRevertLeaf.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnRevertLeaf.Enabled = false;
-            this.btnRevertLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_back;
-            this.btnRevertLeaf.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRevertLeaf.Name = "btnRevertLeaf";
-            this.btnRevertLeaf.Size = new System.Drawing.Size(23, 22);
-            this.btnRevertLeaf.ToolTipText = "Revert changes to last save";
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnLeafPanelTemplate2
-            // 
-            this.btnLeafPanelTemplate2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafPanelTemplate2.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_leaftemplate;
-            this.btnLeafPanelTemplate2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLeafPanelTemplate2.Name = "btnLeafPanelTemplate2";
-            this.btnLeafPanelTemplate2.Size = new System.Drawing.Size(23, 22);
-            this.btnLeafPanelTemplate2.ToolTipText = "Open a template file";
             // 
             // leafToolStrip
             // 
@@ -556,7 +424,7 @@
             this.btnTrackColorImport,
             this.btnLeafRandom});
             this.leafToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.leafToolStrip.Location = new System.Drawing.Point(204, 51);
+            this.leafToolStrip.Location = new System.Drawing.Point(204, 29);
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.leafToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -687,7 +555,7 @@
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(231, 38);
+            this.label5.Location = new System.Drawing.Point(231, 16);
             this.label5.MinimumSize = new System.Drawing.Size(100, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 13);
@@ -705,7 +573,7 @@
             this.panelRawData.Controls.Add(this.richRawTrackData);
             this.panelRawData.Location = new System.Drawing.Point(230, 378);
             this.panelRawData.Name = "panelRawData";
-            this.panelRawData.Size = new System.Drawing.Size(543, 62);
+            this.panelRawData.Size = new System.Drawing.Size(564, 62);
             this.panelRawData.TabIndex = 139;
             // 
             // btnRawImport
@@ -733,7 +601,7 @@
             this.richRawTrackData.ForeColor = System.Drawing.Color.White;
             this.richRawTrackData.Location = new System.Drawing.Point(101, 0);
             this.richRawTrackData.Name = "richRawTrackData";
-            this.richRawTrackData.Size = new System.Drawing.Size(440, 59);
+            this.richRawTrackData.Size = new System.Drawing.Size(461, 59);
             this.richRawTrackData.TabIndex = 26;
             this.richRawTrackData.Text = "raw track data";
             // 
@@ -757,7 +625,7 @@
             this.btnLeafZoom,
             this.btnLeafAutoPlace});
             this.leaftoolsToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.leaftoolsToolStrip.Location = new System.Drawing.Point(335, 22);
+            this.leaftoolsToolStrip.Location = new System.Drawing.Point(335, 0);
             this.leaftoolsToolStrip.Name = "leaftoolsToolStrip";
             this.leaftoolsToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.leaftoolsToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -863,9 +731,9 @@
             this.panel6.Controls.Add(this.panel3);
             this.panel6.Controls.Add(this.panel2);
             this.panel6.Controls.Add(this.numericUpDown_LeafLength);
-            this.panel6.Location = new System.Drawing.Point(1, 23);
+            this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 417);
+            this.panel6.Size = new System.Drawing.Size(200, 445);
             this.panel6.TabIndex = 148;
             // 
             // panel7
@@ -897,7 +765,7 @@
             this.panel7.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.panel7.Location = new System.Drawing.Point(1, 371);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(180, 46);
+            this.panel7.Size = new System.Drawing.Size(180, 74);
             this.panel7.TabIndex = 111;
             // 
             // NUDquick9
@@ -1544,8 +1412,6 @@
             this.panelZoom.ResumeLayout(false);
             this.panelZoom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).EndInit();
-            this.toolstripTitleLeaf.ResumeLayout(false);
-            this.toolstripTitleLeaf.PerformLayout();
             this.leafToolStrip.ResumeLayout(false);
             this.leafToolStrip.PerformLayout();
             this.panelRawData.ResumeLayout(false);
@@ -1589,17 +1455,6 @@
         private System.Windows.Forms.VScrollBar vScrollBarTrackEditor;
         private System.Windows.Forms.DataGridView trackEditor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
-        private System.Windows.Forms.ToolStrip toolstripTitleLeaf;
-        private System.Windows.Forms.ToolStripLabel lblTrackFileName;
-        private System.Windows.Forms.ToolStripButton btnSaveLeaf;
-        private System.Windows.Forms.ToolStripButton lblLeafClose;
-        private System.Windows.Forms.ToolStripButton lblPopoutLeaf;
-        private System.Windows.Forms.ToolStripButton btnLeafObjRefresh;
-        private System.Windows.Forms.ToolStripDropDownButton btnUndoLeaf;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripButton btnRevertLeaf;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripButton btnLeafPanelTemplate2;
         private System.Windows.Forms.ToolStrip leafToolStrip;
         private System.Windows.Forms.ToolStripButton btnTrackAdd;
         private System.Windows.Forms.ToolStripButton btnTrackDelete;
