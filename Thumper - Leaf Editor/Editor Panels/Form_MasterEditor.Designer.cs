@@ -28,9 +28,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MasterEditor));
             this.masterLvlList = new System.Windows.Forms.DataGridView();
             this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
@@ -47,10 +47,6 @@
             this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
             this.label30 = new System.Windows.Forms.Label();
             this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
-            this.lblMasterRuntime = new System.Windows.Forms.Label();
-            this.lblMAsterRuntimeBeats = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.btnMasterRuntime = new System.Windows.Forms.Button();
             this.label37 = new System.Windows.Forms.Label();
             this.dropMasterLvlRest = new System.Windows.Forms.ComboBox();
             this.label35 = new System.Windows.Forms.Label();
@@ -77,14 +73,14 @@
             this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.masterLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.masterLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -94,29 +90,29 @@
             this.masterPlayplus,
             this.masterIsolate});
             this.masterLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.NullValue = null;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle2;
             this.masterLvlList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = System.Drawing.Color.Black;
             this.masterLvlList.Location = new System.Drawing.Point(0, 13);
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.masterLvlList.RowHeadersVisible = false;
             this.masterLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.masterLvlList.RowTemplate.Height = 20;
@@ -280,54 +276,6 @@
             this.lblMasterlvllistHelp.TabIndex = 95;
             this.lblMasterlvllistHelp.Text = "?";
             // 
-            // lblMasterRuntime
-            // 
-            this.lblMasterRuntime.AutoSize = true;
-            this.lblMasterRuntime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMasterRuntime.ForeColor = System.Drawing.Color.White;
-            this.lblMasterRuntime.Location = new System.Drawing.Point(39, 245);
-            this.lblMasterRuntime.Name = "lblMasterRuntime";
-            this.lblMasterRuntime.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblMasterRuntime.Size = new System.Drawing.Size(38, 15);
-            this.lblMasterRuntime.TabIndex = 146;
-            this.lblMasterRuntime.Text = "Time:";
-            // 
-            // lblMAsterRuntimeBeats
-            // 
-            this.lblMAsterRuntimeBeats.AutoSize = true;
-            this.lblMAsterRuntimeBeats.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMAsterRuntimeBeats.ForeColor = System.Drawing.Color.White;
-            this.lblMAsterRuntimeBeats.Location = new System.Drawing.Point(39, 230);
-            this.lblMAsterRuntimeBeats.Name = "lblMAsterRuntimeBeats";
-            this.lblMAsterRuntimeBeats.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblMAsterRuntimeBeats.Size = new System.Drawing.Size(41, 15);
-            this.lblMAsterRuntimeBeats.TabIndex = 145;
-            this.lblMAsterRuntimeBeats.Text = "Beats:";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.ForeColor = System.Drawing.Color.Silver;
-            this.label21.Location = new System.Drawing.Point(48, 216);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(78, 15);
-            this.label21.TabIndex = 144;
-            this.label21.Text = "══Runtime══";
-            // 
-            // btnMasterRuntime
-            // 
-            this.btnMasterRuntime.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterRuntime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMasterRuntime.ForeColor = System.Drawing.Color.Green;
-            this.btnMasterRuntime.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterRuntime.Image")));
-            this.btnMasterRuntime.Location = new System.Drawing.Point(18, 236);
-            this.btnMasterRuntime.Name = "btnMasterRuntime";
-            this.btnMasterRuntime.Padding = new System.Windows.Forms.Padding(0, 0, 2, 1);
-            this.btnMasterRuntime.Size = new System.Drawing.Size(20, 20);
-            this.btnMasterRuntime.TabIndex = 143;
-            this.btnMasterRuntime.UseVisualStyleBackColor = true;
-            // 
             // label37
             // 
             this.label37.AutoSize = true;
@@ -401,7 +349,7 @@
             this.propertyGrid1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.propertyGrid1.SelectedItemWithFocusBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(96)))), ((int)(((byte)(232)))));
             this.propertyGrid1.SelectedItemWithFocusForeColor = System.Drawing.Color.White;
-            this.propertyGrid1.Size = new System.Drawing.Size(256, 213);
+            this.propertyGrid1.Size = new System.Drawing.Size(256, 266);
             this.propertyGrid1.TabIndex = 147;
             this.propertyGrid1.ToolbarVisible = false;
             this.propertyGrid1.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
@@ -415,7 +363,7 @@
             this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblConfigColorHelp.Location = new System.Drawing.Point(149, 216);
+            this.lblConfigColorHelp.Location = new System.Drawing.Point(157, -2);
             this.lblConfigColorHelp.Name = "lblConfigColorHelp";
             this.lblConfigColorHelp.Size = new System.Drawing.Size(15, 16);
             this.lblConfigColorHelp.TabIndex = 112;
@@ -432,18 +380,14 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
             this.splitContainer1.Panel1.Controls.Add(this.masterToolStrip);
+            this.splitContainer1.Panel1.Controls.Add(this.lblConfigColorHelp);
             this.splitContainer1.Panel1.Controls.Add(this.masterLvlList);
             this.splitContainer1.Panel1.Controls.Add(this.label30);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.lblMasterRuntime);
             this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
-            this.splitContainer1.Panel2.Controls.Add(this.lblMAsterRuntimeBeats);
-            this.splitContainer1.Panel2.Controls.Add(this.label21);
-            this.splitContainer1.Panel2.Controls.Add(this.btnMasterRuntime);
             this.splitContainer1.Panel2.Controls.Add(this.btnMasterOpenRest);
-            this.splitContainer1.Panel2.Controls.Add(this.lblConfigColorHelp);
             this.splitContainer1.Panel2.Controls.Add(this.label35);
             this.splitContainer1.Panel2.Controls.Add(this.label37);
             this.splitContainer1.Panel2.Controls.Add(this.dropMasterLvlRest);
@@ -486,10 +430,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn masterIsolate;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label lblMasterlvllistHelp;
-        private System.Windows.Forms.Label lblMasterRuntime;
-        private System.Windows.Forms.Label lblMAsterRuntimeBeats;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Button btnMasterRuntime;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.ComboBox dropMasterLvlRest;
         private System.Windows.Forms.Label label35;

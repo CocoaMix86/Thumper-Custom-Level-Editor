@@ -23,7 +23,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             masterToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(masterLvlList, false);
 
-            _properties = new() {
+            _properties = new(this) {
                 skybox = "wow",
                 introlvl = "e",
                 checkpointlvl = "12345",
@@ -66,9 +66,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private string loadedmaster;
         dynamic masterjson;
-        List<MasterLvlData> clipboardmaster = new();
-        ObservableCollection<MasterLvlData> _masterlvls = new();
-        Thumper_Custom_Level_Editor.MasterProperties _properties;
+        public List<MasterLvlData> clipboardmaster = new();
+        public ObservableCollection<MasterLvlData> _masterlvls = new();
+        public MasterProperties _properties;
         #endregion
 
         #region EventHandlers
@@ -337,21 +337,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //add lvl/gate data to the list
             if (_load["obj_type"] == "SequinLevel")
                 _masterlvls.Add(new MasterLvlData() {
-                    lvlname = (string)_load["obj_name"],
+                    type = "lvl",
+                    name = (string)_load["obj_name"],
                     playplus = true,
                     checkpoint = true,
                     checkpoint_leader = "<none>",
-                    gatename = "",
                     rest = "<none>",
                     id = _mainform.rng.Next(0, 1000000)
                 });
             else if (_load["obj_type"] == "SequinGate")
                 _masterlvls.Add(new MasterLvlData() {
-                    gatename = (string)_load["obj_name"],
+                    type = "gate",
+                    name = (string)_load["obj_name"],
                     playplus = true,
                     checkpoint = true,
                     checkpoint_leader = "<none>",
-                    lvlname = "",
                     rest = "<none>",
                     id = _mainform.rng.Next(0, 1000000)
                 });
@@ -463,7 +463,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //these all load a lvl
         private void btnMasterOpenRest_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlRest.SelectedItem.ToString());
 
-        private void btnMasterRuntime_Click(object sender, EventArgs e) => CalculateMasterRuntime();
+        private void btnMasterRuntime_Click(object sender, EventArgs e) => TCLE.CalculateMasterRuntime(TCLE.WorkingFolder, this);
 
         #endregion
 
@@ -500,8 +500,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
                 _masterlvls.Add(new MasterLvlData() {
-                    lvlname = _lvl["lvl_name"],
-                    gatename = _lvl["gate_name"],
+                    type = ((string)_lvl["lvl_name"]) != String.Empty ? "lvl" : "gate",
+                    name = ((string)_lvl["lvl_name"]) != String.Empty ? _lvl["lvl_name"] : _lvl["gate_name"],
                     checkpoint = _lvl["checkpoint"],
                     playplus = _lvl["play_plus"],
                     isolate = _lvl["isolate"] ?? false,
@@ -515,12 +515,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _properties.checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"];
             ///load Config data (if file exists)
             LoadConfig();
-            CalculateMasterRuntime();
             ///set save flag (master just loaded, has no changes)
             SaveMaster(true);
             masterjson = _load;
             ///btnRevert.Enabled = true;
-            btnMasterRuntime.Enabled = true;
+            ///btnMasterRuntime.Enabled = true;
         }
 
         public void LoadConfig()
@@ -675,63 +674,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///only need to return _save, since _config is written already
             return _save;
-        }
-
-        private void CalculateMasterRuntime()
-        {
-            dynamic _load;
-            int _beatcount = 0;
-            //loop through all entries in the master to get beat counts
-            foreach (MasterLvlData _masterlvl in _masterlvls) {
-                //this section handles lvl
-                if (_masterlvl.lvlname is not null and not "") {
-                    int idx = _masterlvl.lvlname.LastIndexOf('.');
-                    //load the lvl and then loop through its leafs to get beat counts
-                    _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{_masterlvl.lvlname[..idx]}.txt");
-                }
-                //this section handles gate
-                else {
-                    //load the gate to then loop through all lvls in it
-                    int idx = _masterlvl.gatename.LastIndexOf('.');
-                    _load = TCLE.LoadFileLock($"{_mainform.workingfolder}\\gate_{_masterlvl.gatename[..idx]}.txt");
-                    if (_load == null)
-                        continue;
-                    foreach (dynamic _lvl in _load["boss_patterns"]) {
-                        //load the lvl and then loop through its leafs to get beat counts
-                        idx = ((string)_lvl["lvl_name"]).LastIndexOf('.');
-                        _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{((string)_lvl["lvl_name"])[..idx]}.txt");
-                    }
-                }
-
-                if (_masterlvl.rest is not "" and not "<none>" and not null)
-                    _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{_masterlvl.rest[.._masterlvl.rest.LastIndexOf('.')]}.txt");
-            }
-            if (_properties.introlvl != "<none>")
-                _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{_properties.introlvl[.._properties.introlvl.LastIndexOf('.')]}.txt");
-            if (_properties.checkpointlvl != "<none>")
-                _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{_properties.checkpointlvl[.._properties.checkpointlvl.LastIndexOf('.')]}.txt");
-
-            lblMAsterRuntimeBeats.Text = $"Beats: {_beatcount}";
-
-            ///Calculate min/sec based on beats and BPM
-            lblMasterRuntime.Text = $"Time: {TimeSpan.FromMinutes(_beatcount / (double)_properties.bpm).ToString("hh':'mm':'ss'.'fff")}";
-
-        }
-        private int LoadLvlGetBeatCounts(string path)
-        {
-            int _beatcount = 0;
-
-            //load the lvl and then loop through its leafs to get beat counts
-            dynamic _load = TCLE.LoadFileLock(path);
-            if (_load == null)
-                return 0;
-            foreach (dynamic leaf in _load["leaf_seq"]) {
-                _beatcount += (int)leaf["beat_cnt"];
-            }
-            //every lvl has an approach beats to consider too
-            //_beatcount += (int)_load["approach_beats"];
-
-            return _beatcount;
         }
 
         private void ResetMaster()

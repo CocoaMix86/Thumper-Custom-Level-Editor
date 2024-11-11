@@ -8,11 +8,18 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Windows.Forms.Design;
 using System.Windows.Forms;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
     public class MasterProperties
     {
+        public Form_MasterEditor parent;
+        public MasterProperties(Form_MasterEditor Parent)
+        {
+            parent = Parent;
+        }
+
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]
         [Description("")]
@@ -49,6 +56,16 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Path Color")]
         [Description("Affects the rail color on the title screen.")]
         public Color path { get; set; }
+
+        [CategoryAttribute("Runtime")]
+        [DisplayName("Beats")]
+        [Description("Total number of beats across all lvls and gates included in the master.")]
+        public int beats { get { return TCLE.CalculateMasterRuntime("", parent); } }
+
+        [CategoryAttribute("Runtime")]
+        [DisplayName("Runtime")]
+        [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
+        public TimeSpan runtime { get { return  TimeSpan.FromMinutes(beats / (double)bpm); } }
     }
 
     class LvlPicker : UITypeEditor

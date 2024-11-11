@@ -44,7 +44,7 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    class LvlLeafData
+    public class LvlLeafData
 	{
 		public string leafname { get; set; }
 		public int beats { get; set; }
@@ -78,10 +78,19 @@ namespace Thumper_Custom_Level_Editor
         public string boss_ent { get; set; }
     }
 
-    class MasterLvlData
+    public class MasterLvlData
     {
-        public string lvlname { get; set; }
-        public string gatename { get; set; }
+        public string type { get; set; }
+        private string Name;
+        public string name { 
+            get { return Name; } 
+            set {
+                int idx = value.LastIndexOf('.');
+                Name = value[..idx]; 
+            }
+        }
+        public string lvlname { get { return $"{name}.lvl"; } }
+        public string gatename { get { return $"{name}.gate"; } }
         public bool playplus { get; set; }
         public bool checkpoint { get; set; }
         public bool isolate { get; set; }
@@ -116,7 +125,7 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    class WorkingFolderFileItem
+    public class WorkingFolderFileItem
     {
         public string type { get; set; }
         public string filename { get; set; }

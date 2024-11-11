@@ -21,13 +21,13 @@ namespace Thumper_Custom_Level_Editor
         public ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
-        public dynamic projectjson; 
+        public dynamic projectjson;
         public string workingfolder
         {
-            get { return _workingfolder; }
+            get { return WorkingFolder; }
             set {
                 //check if `set` value is different than current stored value
-                if (_workingfolder != value) {
+                if (WorkingFolder != value) {
                     //also only change workingfolders if user says yes to data loss
                     if (/*!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample*/false) {
                         if (MessageBox.Show("Some files are unsaved. Are you sure you want to change working folders?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
@@ -68,7 +68,7 @@ namespace Thumper_Custom_Level_Editor
                     ClearFileLock();
                     //update working folder
                     lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-                    _workingfolder = value;
+                    WorkingFolder = value;
                     toolstripLevelName.Text = projectjson["level_name"];
                     toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
                     //since a new level folder is loading, all panels need to clear their data so we;re not showing data from other levels
@@ -99,7 +99,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
-        private string _workingfolder;
+        public static string WorkingFolder;
         public static List<string> lvlsinworkfolder = new();
         public Random rng = new();
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
