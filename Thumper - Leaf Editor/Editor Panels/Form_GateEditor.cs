@@ -368,10 +368,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (_mainform.workingfolder == null)
                 return;
-            _mainform.lvlsinworkfolder = Directory.GetFiles(_mainform.workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
-            _mainform.lvlsinworkfolder.Add("<none>");
-            _mainform.lvlsinworkfolder.Sort();
-
+            TCLE.lvlsinworkfolder = Directory.GetFiles(_mainform.workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
+            TCLE.lvlsinworkfolder.Add("<none>");
+            TCLE.lvlsinworkfolder.Sort();
+            /*
             dropGatePre.SelectedIndexChanged -= dropGatePre_SelectedIndexChanged;
             dropGatePost.SelectedIndexChanged -= dropGatePost_SelectedIndexChanged;
             dropGateRestart.SelectedIndexChanged -= dropGateRestart_SelectedIndexChanged;
@@ -391,7 +391,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropGatePre.SelectedIndexChanged += dropGatePre_SelectedIndexChanged;
             dropGatePost.SelectedIndexChanged += dropGatePost_SelectedIndexChanged;
             dropGateRestart.SelectedIndexChanged += dropGateRestart_SelectedIndexChanged;
-
+            */
             TCLE.PlaySound("UIrefresh");
 
         }

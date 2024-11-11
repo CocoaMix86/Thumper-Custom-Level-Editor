@@ -100,7 +100,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private string _workingfolder;
-        public List<string> lvlsinworkfolder = new();
+        public static List<string> lvlsinworkfolder = new();
         public Random rng = new();
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
@@ -108,7 +108,7 @@ namespace Thumper_Custom_Level_Editor
         public FileStream filelocklevel;
         public Dictionary<string, FileStream> lockedfiles = new();
         public Dictionary<string, Form> openfiles = new();
-        public static Beeble beeble = new Beeble();
+        public static Thumper_Custom_Level_Editor.Beeble beeble = new Beeble();
         #endregion
 
         #region Form Construction

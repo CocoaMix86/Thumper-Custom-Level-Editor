@@ -68,7 +68,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         dynamic masterjson;
         List<MasterLvlData> clipboardmaster = new();
         ObservableCollection<MasterLvlData> _masterlvls = new();
-        MasterProperties _properties;
+        Thumper_Custom_Level_Editor.MasterProperties _properties;
         #endregion
 
         #region EventHandlers
@@ -425,9 +425,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (_mainform.workingfolder == null)
                 return;
-            _mainform.lvlsinworkfolder = Directory.GetFiles(_mainform.workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
-            _mainform.lvlsinworkfolder.Add("<none>");
-            _mainform.lvlsinworkfolder.Sort();
+            TCLE.lvlsinworkfolder = Directory.GetFiles(_mainform.workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
+            TCLE.lvlsinworkfolder.Add("<none>");
+            TCLE.lvlsinworkfolder.Sort();
 
             ///add lvl list as datasources to dropdowns
             /*
