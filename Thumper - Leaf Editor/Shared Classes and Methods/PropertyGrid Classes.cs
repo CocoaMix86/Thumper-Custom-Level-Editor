@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
-    class MasterProperties
+    public class MasterProperties
     {
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]
@@ -22,14 +22,12 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Intro Lvl")]
         [Description("This lvl will play at the beginning of your level, and whenever you restart.")]
         [Editor(typeof(LvlPicker), typeof(UITypeEditor))]
-        [TypeConverter(typeof(ExpandableObjectConverter))]
         public string introlvl { get; set; }
 
         [CategoryAttribute("Options")]
         [DisplayName("Checkpoint Lvl")]
         [Description("This lvl will play immediately after each checkpoint.")]
         [Editor(typeof(LvlPicker), typeof(UITypeEditor))]
-        [TypeConverter(typeof(ExpandableObjectConverter))]
         public string checkpointlvl { get; set; }
 
         [CategoryAttribute("Options")]

@@ -28,11 +28,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MasterEditor));
-            this.panelMaster = new System.Windows.Forms.Panel();
             this.masterLvlList = new System.Windows.Forms.DataGridView();
             this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
             this.masterLvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +47,6 @@
             this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
             this.label30 = new System.Windows.Forms.Label();
             this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.lblMasterRuntime = new System.Windows.Forms.Label();
             this.lblMAsterRuntimeBeats = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -60,29 +58,14 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.lblConfigColorHelp = new System.Windows.Forms.Label();
-            this.panelMaster.SuspendLayout();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
             this.masterToolStrip.SuspendLayout();
-            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelMaster
-            // 
-            this.panelMaster.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.panelMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMaster.Controls.Add(this.masterLvlList);
-            this.panelMaster.Controls.Add(this.masterToolStrip);
-            this.panelMaster.Controls.Add(this.label30);
-            this.panelMaster.Controls.Add(this.lblMasterlvllistHelp);
-            this.panelMaster.Controls.Add(this.panel5);
-            this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMaster.Location = new System.Drawing.Point(0, 0);
-            this.panelMaster.MinimumSize = new System.Drawing.Size(60, 60);
-            this.panelMaster.Name = "panelMaster";
-            this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
-            this.panelMaster.Size = new System.Drawing.Size(800, 450);
-            this.panelMaster.TabIndex = 48;
-            this.panelMaster.Tag = "editorpanel";
             // 
             // masterLvlList
             // 
@@ -94,14 +77,14 @@
             this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.masterLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.masterLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -111,35 +94,35 @@
             this.masterPlayplus,
             this.masterIsolate});
             this.masterLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle17.NullValue = null;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle5;
             this.masterLvlList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = System.Drawing.Color.Black;
             this.masterLvlList.Location = new System.Drawing.Point(0, 13);
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.masterLvlList.RowHeadersVisible = false;
             this.masterLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.masterLvlList.Size = new System.Drawing.Size(507, 409);
+            this.masterLvlList.Size = new System.Drawing.Size(300, 437);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             // 
@@ -196,11 +179,11 @@
             this.btnMasterLvlCopy,
             this.btnMasterLvlPaste});
             this.masterToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.masterToolStrip.Location = new System.Drawing.Point(0, 422);
+            this.masterToolStrip.Location = new System.Drawing.Point(0, 425);
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.masterToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new System.Drawing.Size(507, 25);
+            this.masterToolStrip.Size = new System.Drawing.Size(300, 25);
             this.masterToolStrip.Stretch = true;
             this.masterToolStrip.TabIndex = 138;
             // 
@@ -291,40 +274,18 @@
             this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(492, 0);
+            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(276, -3);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new System.Drawing.Size(15, 16);
             this.lblMasterlvllistHelp.TabIndex = 95;
             this.lblMasterlvllistHelp.Text = "?";
             // 
-            // panel5
-            // 
-            this.panel5.AutoScroll = true;
-            this.panel5.BackColor = System.Drawing.Color.Transparent;
-            this.panel5.Controls.Add(this.propertyGrid1);
-            this.panel5.Controls.Add(this.lblMasterRuntime);
-            this.panel5.Controls.Add(this.lblMAsterRuntimeBeats);
-            this.panel5.Controls.Add(this.label21);
-            this.panel5.Controls.Add(this.btnMasterRuntime);
-            this.panel5.Controls.Add(this.lblConfigColorHelp);
-            this.panel5.Controls.Add(this.label37);
-            this.panel5.Controls.Add(this.dropMasterLvlRest);
-            this.panel5.Controls.Add(this.label35);
-            this.panel5.Controls.Add(this.btnMasterOpenRest);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(507, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel5.Size = new System.Drawing.Size(291, 447);
-            this.panel5.TabIndex = 147;
-            // 
             // lblMasterRuntime
             // 
-            this.lblMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMasterRuntime.AutoSize = true;
             this.lblMasterRuntime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMasterRuntime.ForeColor = System.Drawing.Color.White;
-            this.lblMasterRuntime.Location = new System.Drawing.Point(150, 360);
+            this.lblMasterRuntime.Location = new System.Drawing.Point(39, 245);
             this.lblMasterRuntime.Name = "lblMasterRuntime";
             this.lblMasterRuntime.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblMasterRuntime.Size = new System.Drawing.Size(38, 15);
@@ -333,11 +294,10 @@
             // 
             // lblMAsterRuntimeBeats
             // 
-            this.lblMAsterRuntimeBeats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMAsterRuntimeBeats.AutoSize = true;
             this.lblMAsterRuntimeBeats.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMAsterRuntimeBeats.ForeColor = System.Drawing.Color.White;
-            this.lblMAsterRuntimeBeats.Location = new System.Drawing.Point(150, 345);
+            this.lblMAsterRuntimeBeats.Location = new System.Drawing.Point(39, 230);
             this.lblMAsterRuntimeBeats.Name = "lblMAsterRuntimeBeats";
             this.lblMAsterRuntimeBeats.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblMAsterRuntimeBeats.Size = new System.Drawing.Size(41, 15);
@@ -346,11 +306,10 @@
             // 
             // label21
             // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.Silver;
-            this.label21.Location = new System.Drawing.Point(159, 331);
+            this.label21.Location = new System.Drawing.Point(48, 216);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(78, 15);
             this.label21.TabIndex = 144;
@@ -358,12 +317,11 @@
             // 
             // btnMasterRuntime
             // 
-            this.btnMasterRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMasterRuntime.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterRuntime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMasterRuntime.ForeColor = System.Drawing.Color.Green;
             this.btnMasterRuntime.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterRuntime.Image")));
-            this.btnMasterRuntime.Location = new System.Drawing.Point(129, 351);
+            this.btnMasterRuntime.Location = new System.Drawing.Point(18, 236);
             this.btnMasterRuntime.Name = "btnMasterRuntime";
             this.btnMasterRuntime.Padding = new System.Windows.Forms.Padding(0, 0, 2, 1);
             this.btnMasterRuntime.Size = new System.Drawing.Size(20, 20);
@@ -372,11 +330,10 @@
             // 
             // label37
             // 
-            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.Silver;
-            this.label37.Location = new System.Drawing.Point(137, 384);
+            this.label37.Location = new System.Drawing.Point(26, 269);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(123, 15);
             this.label37.TabIndex = 116;
@@ -384,7 +341,6 @@
             // 
             // dropMasterLvlRest
             // 
-            this.dropMasterLvlRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dropMasterLvlRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dropMasterLvlRest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.dropMasterLvlRest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -393,7 +349,7 @@
             this.dropMasterLvlRest.FormattingEnabled = true;
             this.dropMasterLvlRest.Items.AddRange(new object[] {
             "<none>"});
-            this.dropMasterLvlRest.Location = new System.Drawing.Point(131, 417);
+            this.dropMasterLvlRest.Location = new System.Drawing.Point(20, 302);
             this.dropMasterLvlRest.Name = "dropMasterLvlRest";
             this.dropMasterLvlRest.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dropMasterLvlRest.Size = new System.Drawing.Size(131, 21);
@@ -401,11 +357,10 @@
             // 
             // label35
             // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.White;
-            this.label35.Location = new System.Drawing.Point(173, 401);
+            this.label35.Location = new System.Drawing.Point(62, 286);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(50, 15);
             this.label35.TabIndex = 104;
@@ -413,7 +368,6 @@
             // 
             // btnMasterOpenRest
             // 
-            this.btnMasterOpenRest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMasterOpenRest.BackColor = System.Drawing.Color.Gray;
             this.btnMasterOpenRest.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasterOpenRest.Enabled = false;
@@ -422,7 +376,7 @@
             this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
             this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
             this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenRest.Location = new System.Drawing.Point(260, 416);
+            this.btnMasterOpenRest.Location = new System.Drawing.Point(149, 301);
             this.btnMasterOpenRest.Name = "btnMasterOpenRest";
             this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
             this.btnMasterOpenRest.TabIndex = 118;
@@ -447,7 +401,7 @@
             this.propertyGrid1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.propertyGrid1.SelectedItemWithFocusBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(96)))), ((int)(((byte)(232)))));
             this.propertyGrid1.SelectedItemWithFocusForeColor = System.Drawing.Color.White;
-            this.propertyGrid1.Size = new System.Drawing.Size(291, 328);
+            this.propertyGrid1.Size = new System.Drawing.Size(256, 213);
             this.propertyGrid1.TabIndex = 147;
             this.propertyGrid1.ToolbarVisible = false;
             this.propertyGrid1.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
@@ -456,46 +410,74 @@
             // 
             // lblConfigColorHelp
             // 
-            this.lblConfigColorHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblConfigColorHelp.AutoSize = true;
             this.lblConfigColorHelp.BackColor = System.Drawing.Color.Transparent;
             this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblConfigColorHelp.Location = new System.Drawing.Point(260, 331);
+            this.lblConfigColorHelp.Location = new System.Drawing.Point(149, 216);
             this.lblConfigColorHelp.Name = "lblConfigColorHelp";
             this.lblConfigColorHelp.Size = new System.Drawing.Size(15, 16);
             this.lblConfigColorHelp.TabIndex = 112;
             this.lblConfigColorHelp.Text = "?";
             this.lblConfigColorHelp.Click += new System.EventHandler(this.lblConfigColorHelp_Click);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
+            this.splitContainer1.Panel1.Controls.Add(this.masterToolStrip);
+            this.splitContainer1.Panel1.Controls.Add(this.masterLvlList);
+            this.splitContainer1.Panel1.Controls.Add(this.label30);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblMasterRuntime);
+            this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
+            this.splitContainer1.Panel2.Controls.Add(this.lblMAsterRuntimeBeats);
+            this.splitContainer1.Panel2.Controls.Add(this.label21);
+            this.splitContainer1.Panel2.Controls.Add(this.btnMasterRuntime);
+            this.splitContainer1.Panel2.Controls.Add(this.btnMasterOpenRest);
+            this.splitContainer1.Panel2.Controls.Add(this.lblConfigColorHelp);
+            this.splitContainer1.Panel2.Controls.Add(this.label35);
+            this.splitContainer1.Panel2.Controls.Add(this.label37);
+            this.splitContainer1.Panel2.Controls.Add(this.dropMasterLvlRest);
+            this.splitContainer1.Size = new System.Drawing.Size(560, 450);
+            this.splitContainer1.SplitterDistance = 300;
+            this.splitContainer1.TabIndex = 49;
+            // 
             // Form_MasterEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panelMaster);
+            this.ClientSize = new System.Drawing.Size(560, 450);
+            this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_MasterEditor";
             this.Text = "Master Editor";
-            this.panelMaster.ResumeLayout(false);
-            this.panelMaster.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
             this.masterToolStrip.ResumeLayout(false);
             this.masterToolStrip.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panelMaster;
         private System.Windows.Forms.DataGridView masterLvlList;
         private System.Windows.Forms.DataGridViewImageColumn masterfiletype;
         private System.Windows.Forms.DataGridViewTextBoxColumn masterLvl;
@@ -504,7 +486,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn masterIsolate;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label lblMasterlvllistHelp;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblMasterRuntime;
         private System.Windows.Forms.Label lblMAsterRuntimeBeats;
         private System.Windows.Forms.Label label21;
@@ -523,5 +504,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.Label lblConfigColorHelp;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
