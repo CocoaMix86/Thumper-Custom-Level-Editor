@@ -233,7 +233,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void UpdateLevelLists()
         {
-            lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
+            lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt", SearchOption.AllDirectories).Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
             /*

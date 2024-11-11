@@ -15,7 +15,7 @@ namespace Thumper_Custom_Level_Editor
         public FileListBox(List<string> files)
         {
             InitializeComponent();
-            files = new() { "a", "b", "c", "d", "e", "f" };
+            //files = new() { "a", "b", "c", "d", "e", "f" };
             foreach (string file in files) {
                 TreeNode tn = new() {
                     Name = file,

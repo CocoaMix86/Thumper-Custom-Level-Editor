@@ -505,6 +505,7 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show("that folder path doesn't exist");
                 return;
             }
+            workingfolder = txtFilePath.Text;
 
             var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProject.Show(dockMain, DockState.DockRight);
