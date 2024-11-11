@@ -1003,7 +1003,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (loadinglvl)
                 return;
             //make the beeble emote
-            _mainform.pictureBox1_Click(null, null);
+            TCLE.beeble.MakeFace();
 
             _savelvl = save;
             if (!save) {

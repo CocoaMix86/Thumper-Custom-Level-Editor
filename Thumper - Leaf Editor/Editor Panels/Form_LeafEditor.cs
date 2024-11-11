@@ -1447,7 +1447,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
 
             //make the beeble emote
-            _mainform.pictureBox1_Click(null, null);
+            TCLE.beeble.MakeFace();
             _saveleaf = save;
             if (!save) {
                 SaveLeafColors(true, Color.Maroon);

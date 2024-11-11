@@ -133,6 +133,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap beebleflesh {
+            get {
+                object obj = ResourceManager.GetObject("beebleflesh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap beeblegold {
             get {
                 object obj = ResourceManager.GetObject("beeblegold", resourceCulture);
@@ -206,6 +216,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static System.Drawing.Bitmap beebletiny {
             get {
                 object obj = ResourceManager.GetObject("beebletiny", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap beebleuwu {
+            get {
+                object obj = ResourceManager.GetObject("beebleuwu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

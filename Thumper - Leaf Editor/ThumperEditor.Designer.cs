@@ -39,7 +39,6 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.timerBeeble = new System.Windows.Forms.Timer(this.components);
             this.panelRecentFiles = new System.Windows.Forms.Panel();
             this.dgvRecentFiles = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -59,7 +58,6 @@
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.lblChangelogClose = new System.Windows.Forms.ToolStripButton();
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.pictureBeeble = new System.Windows.Forms.Panel();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.contextMenuFormRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextFormRestore = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,11 +185,6 @@
             this.toolTip1.AutoPopDelay = 5000;
             this.toolTip1.InitialDelay = 100;
             this.toolTip1.ReshowDelay = 100;
-            // 
-            // timerBeeble
-            // 
-            this.timerBeeble.Interval = 300;
-            this.timerBeeble.Tick += new System.EventHandler(this.timerBeeble_Tick);
             // 
             // panelRecentFiles
             // 
@@ -480,20 +473,6 @@
             this.dockMain.ShowDocumentIcon = true;
             this.dockMain.Size = new System.Drawing.Size(984, 444);
             this.dockMain.TabIndex = 147;
-            // 
-            // pictureBeeble
-            // 
-            this.pictureBeeble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.pictureBeeble.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
-            this.pictureBeeble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBeeble.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBeeble.Location = new System.Drawing.Point(325, 25);
-            this.pictureBeeble.MinimumSize = new System.Drawing.Size(10, 10);
-            this.pictureBeeble.Name = "pictureBeeble";
-            this.pictureBeeble.Size = new System.Drawing.Size(110, 95);
-            this.pictureBeeble.TabIndex = 146;
-            this.pictureBeeble.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBeeble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // txtFilePath
             // 
@@ -1424,7 +1403,6 @@
             this.Controls.Add(this.dockMain);
             this.Controls.Add(this.panelToolStrips);
             this.Controls.Add(this.toolStripTitle);
-            this.Controls.Add(this.pictureBeeble);
             this.Controls.Add(this.panelRecentFiles);
             this.Controls.Add(this.panelChangelog);
             this.DoubleBuffered = true;
@@ -1470,7 +1448,6 @@
 		private System.Windows.Forms.ColorDialog colorDialog1;
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.Timer timerBeeble;
         private System.Windows.Forms.Panel panelRecentFiles;
         private System.Windows.Forms.ToolStrip toolstripRecentFiles;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
@@ -1485,7 +1462,6 @@
         private System.Windows.Forms.ToolStripButton lblChangelogClose;
         private System.Windows.Forms.Label lblChangelog;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel pictureBeeble;
         private System.Windows.Forms.DataGridViewButtonColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;

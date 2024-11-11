@@ -108,6 +108,7 @@ namespace Thumper_Custom_Level_Editor
         public FileStream filelocklevel;
         public Dictionary<string, FileStream> lockedfiles = new();
         public Dictionary<string, Form> openfiles = new();
+        public static Beeble beeble = new Beeble();
         #endregion
 
         #region Form Construction
@@ -116,7 +117,7 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             dockMain.Theme = new VS2015DarkTheme();
-            ///pictureBeeble.BringToFront();
+            beeble.Show();
 
             ColorFormElements();
             JumpListUpdate();
@@ -233,8 +234,8 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save panel sizes and locations
-            Properties.Settings.Default.beeblesize = pictureBeeble.Size;
-            Properties.Settings.Default.beebleloc = pictureBeeble.Location;
+            ///Properties.Settings.Default.beeblesize = pictureBeeble.Size;
+            ///Properties.Settings.Default.beebleloc = pictureBeeble.Location;
             //colors
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //
@@ -296,37 +297,6 @@ namespace Thumper_Custom_Level_Editor
         {
             if (this.WindowState == FormWindowState.Normal)
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
-        }
-        #endregion
-
-        #region Beeble Functions
-        private void ResetBeeble(object sender, EventArgs e)
-        {
-
-        }
-        static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin };
-        public void pictureBox1_Click(object sender, EventArgs e) => BeebleClick();
-        public void BeebleClick()
-        {
-            int i = new Random().Next(0, 1001);
-            if (i == 1000) {
-                pictureBeeble.BackgroundImage = Properties.Resources.beeblegold;
-                PlaySound("UIbeetleclickGOLD");
-            }
-            else {
-                pictureBeeble.BackgroundImage = beebleimages[i % 10];
-            }
-            timerBeeble.Start();
-        }
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
-            pictureBeeble.BackColor = Color.FromArgb(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
-        }
-        private void timerBeeble_Tick(object sender, EventArgs e)
-        {
-            timerBeeble.Stop();
-            pictureBeeble.BackgroundImage = Properties.Resources.beeble;
         }
         #endregion
 

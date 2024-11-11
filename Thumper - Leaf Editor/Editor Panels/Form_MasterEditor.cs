@@ -569,7 +569,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void SaveMaster(bool save, bool playsound = false)
         {
             //make the beeble emote
-            _mainform.pictureBox1_Click(null, null);
+            TCLE.beeble.MakeFace();
 
             _savemaster = save;
             if (!save) {
