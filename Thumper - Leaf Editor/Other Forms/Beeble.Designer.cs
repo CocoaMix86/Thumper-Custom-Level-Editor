@@ -43,11 +43,12 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(164, 135);
+            this.ClientSize = new System.Drawing.Size(113, 94);
             this.ControlBox = false;
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(50, 50);
             this.Name = "Beeble";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
