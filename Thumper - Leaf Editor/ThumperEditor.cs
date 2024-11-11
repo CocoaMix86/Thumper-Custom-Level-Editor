@@ -170,6 +170,7 @@ namespace Thumper_Custom_Level_Editor
         }
         ///
         ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
+        /*
         protected override CreateParams CreateParams
         {
             get {
@@ -178,6 +179,7 @@ namespace Thumper_Custom_Level_Editor
                 return cp;
             }
         }
+        */
         ///END DOUBLEBUFFERING
         /// 
         #endregion

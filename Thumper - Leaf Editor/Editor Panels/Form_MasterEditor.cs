@@ -22,6 +22,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             masterToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(masterLvlList, false);
+
+            _properties = new() {
+                skybox = "wow",
+                introlvl = "e",
+                checkpointlvl = "12345",
+                bpm = 199.04m,
+                rail = Color.Red,
+                railglow = Color.Lavender,
+                path = Color.FromArgb(40, 40, 200)
+            };
+            propertyGrid1.SelectedObject = _properties;
         }
         #endregion
 
@@ -57,6 +68,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         dynamic masterjson;
         List<MasterLvlData> clipboardmaster = new();
         ObservableCollection<MasterLvlData> _masterlvls = new();
+        MasterProperties _properties;
         #endregion
 
         #region EventHandlers
@@ -177,13 +189,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Other dropdowns on Master Editor
         private void dropMasterIntro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnMasterOpenIntro.Enabled = dropMasterIntro.SelectedIndex > 0;
-            SaveMaster(false);
         }
         private void dropMasterCheck_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnMasterOpenCheckpoint.Enabled = dropMasterCheck.SelectedIndex > 0;
-            SaveMaster(false);
         }
         private void NUD_ConfigBPM_ValueChanged(object sender, EventArgs e) => SaveMaster(false);
         /// DROP-REST LEVEL Update
@@ -421,10 +429,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _mainform.lvlsinworkfolder.Add("<none>");
             _mainform.lvlsinworkfolder.Sort();
 
-            dropMasterCheck.SelectedIndexChanged -= dropMasterCheck_SelectedIndexChanged;
-            dropMasterIntro.SelectedIndexChanged -= dropMasterIntro_SelectedIndexChanged;
-            dropMasterLvlRest.SelectedIndexChanged -= dropMasterLvlRest_SelectedIndexChanged;
             ///add lvl list as datasources to dropdowns
+            /*
             object _select = dropMasterCheck.SelectedItem;
             dropMasterCheck.DataSource = _mainform.lvlsinworkfolder.ToList();
             dropMasterCheck.SelectedItem = _select;
@@ -436,10 +442,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _select = dropMasterLvlRest.SelectedItem;
             dropMasterLvlRest.DataSource = _mainform.lvlsinworkfolder.ToList();
             dropMasterLvlRest.SelectedItem = _select;
-            //
-            dropMasterCheck.SelectedIndexChanged += dropMasterCheck_SelectedIndexChanged;
-            dropMasterIntro.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
-            dropMasterLvlRest.SelectedIndexChanged += dropMasterLvlRest_SelectedIndexChanged;
+            */
             TCLE.PlaySound("UIrefresh");
         }
 
@@ -458,8 +461,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///_mainform.toolstripMasterNew.PerformClick();
         }
         //these all load a lvl
-        private void btnMasterOpenIntro_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterIntro.SelectedItem.ToString());
-        private void btnMasterOpenCheckpoint_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterCheck.SelectedItem.ToString());
         private void btnMasterOpenRest_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlRest.SelectedItem.ToString());
 
         private void btnMasterRuntime_Click(object sender, EventArgs e) => CalculateMasterRuntime();
@@ -509,9 +510,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = _mainform.rng.Next(0, 10000000)
                 });
             }
-            dropMasterSkybox.SelectedIndex = dropMasterSkybox.Items.IndexOf((string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"]);
-            dropMasterIntro.SelectedIndex = dropMasterIntro.Items.IndexOf((string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"]);
-            dropMasterCheck.SelectedIndex = dropMasterCheck.Items.IndexOf((string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]);
+            _properties.skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"];
+            _properties.introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"];
+            _properties.checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"];
             ///load Config data (if file exists)
             LoadConfig();
             CalculateMasterRuntime();
@@ -527,16 +528,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             System.Collections.Generic.List<string> _configfile = Directory.GetFiles(_mainform.workingfolder, "config_*.txt").ToList();
             if (_configfile.Count > 0) {
                 dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_configfile[0]), "#.*", ""));
-                NUD_ConfigBPM.Value = (int)_load["bpm"];
-                ColorButton(btnConfigRailColor, Color.FromArgb((int)((float)_load["rails_color"][0] * 255), (int)((float)_load["rails_color"][1] * 255), (int)((float)_load["rails_color"][2] * 255)));
-                ColorButton(btnConfigGlowColor, Color.FromArgb((int)((float)_load["rails_glow_color"][0] * 255), (int)((float)_load["rails_glow_color"][1] * 255), (int)((float)_load["rails_glow_color"][2] * 255)));
-                ColorButton(btnConfigPathColor, Color.FromArgb((int)((float)_load["path_color"][0] * 255), (int)((float)_load["path_color"][1] * 255), (int)((float)_load["path_color"][2] * 255)));
+                _properties.bpm = (decimal)_load["bpm"];
             }
             else {
-                NUD_ConfigBPM.Value = 420;
-                btnConfigRailColor.BackColor = Color.White;
-                btnConfigGlowColor.BackColor = Color.White;
-                btnConfigPathColor.BackColor = Color.White;
+                _properties.bpm = 420;
+                _properties.rail = Color.White;
+                _properties.railglow = Color.White;
+                _properties.path = Color.White;
             }
         }
 
@@ -597,8 +595,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JObject _save = new() {
                 { "obj_type", "SequinMaster" },
                 { "obj_name", "sequin.master" },
-                { "skybox_name", dropMasterSkybox.Text.Replace("<none>", "") },
-                { "intro_lvl_name", dropMasterIntro.Text.Replace("<none>", "") }
+                { "skybox_name", _properties.skybox.Replace("<none>", "") },
+                { "intro_lvl_name", _properties.introlvl.Replace("<none>", "") }
             };
             JArray groupings = new();
             foreach (MasterLvlData group in _masterlvls) {
@@ -621,14 +619,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             _save.Add("groupings", groupings);
             _save.Add("isolate_tracks", isolate_tracks.ToString());
-            _save.Add("checkpoint_lvl_name", dropMasterCheck.Text.Replace("<none>", ""));
+            _save.Add("checkpoint_lvl_name", _properties.checkpointlvl.Replace("<none>", ""));
             masterjson = _save;
             ///end build
             ///
             ///begin building Config JSON object
             JObject _config = new() {
                 { "obj_type", "LevelLib" },
-                { "bpm", NUD_ConfigBPM.Value }
+                { "bpm", _properties.bpm }
             };
             //for each lvl in Master that has checkpoint:True, Config requires a "SECTION_LINEAR"
             JArray level_sections = new();
@@ -638,28 +636,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             //add rail color
             JArray rails_color = new() {
-                Decimal.Round((decimal)btnConfigRailColor.BackColor.R / 255, 3),
-                Decimal.Round((decimal)btnConfigRailColor.BackColor.G / 255, 3),
-                Decimal.Round((decimal)btnConfigRailColor.BackColor.B / 255, 3),
-                Decimal.Round((decimal)btnConfigRailColor.BackColor.A / 255, 3)
+                Decimal.Round((decimal)_properties.rail.R / 255, 3),
+                Decimal.Round((decimal)_properties.rail.G / 255, 3),
+                Decimal.Round((decimal)_properties.rail.B / 255, 3),
+                Decimal.Round((decimal)_properties.rail.A / 255, 3)
             };
             _config.Add("rails_color", rails_color);
             //
             //add rail glow color
             JArray rails_glow_color = new() {
-                Decimal.Round((decimal)btnConfigGlowColor.BackColor.R / 255, 3),
-                Decimal.Round((decimal)btnConfigGlowColor.BackColor.G / 255, 3),
-                Decimal.Round((decimal)btnConfigGlowColor.BackColor.B / 255, 3),
-                Decimal.Round((decimal)btnConfigGlowColor.BackColor.A / 255, 3)
+                Decimal.Round((decimal)_properties.railglow.R / 255, 3),
+                Decimal.Round((decimal)_properties.railglow.G / 255, 3),
+                Decimal.Round((decimal)_properties.railglow.B / 255, 3),
+                Decimal.Round((decimal)_properties.railglow.A / 255, 3)
             };
             _config.Add("rails_glow_color", rails_glow_color);
             //
             //add path color
             JArray path_color = new() {
-                Decimal.Round((decimal)btnConfigPathColor.BackColor.R / 255, 3),
-                Decimal.Round((decimal)btnConfigPathColor.BackColor.G / 255, 3),
-                Decimal.Round((decimal)btnConfigPathColor.BackColor.B / 255, 3),
-                Decimal.Round((decimal)btnConfigPathColor.BackColor.A / 255, 3)
+                Decimal.Round((decimal)_properties.path.R / 255, 3),
+                Decimal.Round((decimal)_properties.path.G / 255, 3),
+                Decimal.Round((decimal)_properties.path.B / 255, 3),
+                Decimal.Round((decimal)_properties.path.A / 255, 3)
             };
             _config.Add("path_color", path_color);
             //
@@ -708,15 +706,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_masterlvl.rest is not "" and not "<none>" and not null)
                     _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{_masterlvl.rest[.._masterlvl.rest.LastIndexOf('.')]}.txt");
             }
-            if (dropMasterIntro.Text != "<none>")
-                _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{dropMasterIntro.Text[..dropMasterIntro.Text.LastIndexOf('.')]}.txt");
-            if (dropMasterCheck.Text != "<none>")
-                _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{dropMasterCheck.Text[..dropMasterCheck.Text.LastIndexOf('.')]}.txt");
+            if (_properties.introlvl != "<none>")
+                _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{_properties.introlvl[.._properties.introlvl.LastIndexOf('.')]}.txt");
+            if (_properties.checkpointlvl != "<none>")
+                _beatcount += LoadLvlGetBeatCounts($"{_mainform.workingfolder}\\lvl_{_properties.checkpointlvl[.._properties.checkpointlvl.LastIndexOf('.')]}.txt");
 
             lblMAsterRuntimeBeats.Text = $"Beats: {_beatcount}";
 
             ///Calculate min/sec based on beats and BPM
-            lblMasterRuntime.Text = $"Time: {TimeSpan.FromMinutes(_beatcount / (double)NUD_ConfigBPM.Value).ToString("hh':'mm':'ss'.'fff")}";
+            lblMasterRuntime.Text = $"Time: {TimeSpan.FromMinutes(_beatcount / (double)_properties.bpm).ToString("hh':'mm':'ss'.'fff")}";
 
         }
         private int LoadLvlGetBeatCounts(string path)
@@ -742,11 +740,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             masterjson = null;
             _masterlvls.Clear();
             this.Text = "Master Editor";
-            btnConfigGlowColor.BackColor = Color.White;
-            btnConfigPathColor.BackColor = Color.White;
-            btnConfigRailColor.BackColor = Color.White;
-            dropMasterSkybox.SelectedIndex = 1;
-            NUD_ConfigBPM.Value = 400;
+            _properties.rail = Color.White;
+            _properties.railglow = Color.White;
+            _properties.path = Color.White;
+            _properties.skybox = "1";
+            _properties.bpm = 400;
             //set saved flag to true, because nothing is loaded
             SaveMaster(true);
         }

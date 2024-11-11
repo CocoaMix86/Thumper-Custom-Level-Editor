@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -119,5 +121,43 @@ namespace Thumper_Custom_Level_Editor
         public string type { get; set; }
         public string filename { get; set; }
         public int index { get; set; }
+    }
+
+    class MasterProperties
+    {
+        [CategoryAttribute("Options")]
+        [DisplayName("Skybox")]
+        [Description("")]
+        public string skybox { get; set; }
+
+        [CategoryAttribute("Options")]
+        [DisplayName("Intro Lvl")]
+        [Description("This lvl will play at the beginning of your level, and whenever you restart.")]
+        public string introlvl { get; set; }
+
+        [CategoryAttribute("Options")]
+        [DisplayName("Checkpoint Lvl")]
+        [Description("This lvl will play immediately after each checkpoint.")]
+        public string checkpointlvl { get; set; }
+
+        [CategoryAttribute("Options")]
+        [DisplayName("BPM")]
+        [Description("Beats Per Minute. If your song is at 100bpm, you'll likely want to map at either 200 or 400, so you can place objects on half note and quarter note intervals.")]
+        public decimal bpm { get; set; }
+
+        [CategoryAttribute("Options")]
+        [DisplayName("Rail Color")]
+        [Description("Affects the rail color on the title screen.")]
+        public Color rail { get; set; }
+
+        [CategoryAttribute("Options")]
+        [DisplayName("Rail Glow Color")]
+        [Description("Affects the rail color on the title screen.")]
+        public Color railglow { get; set; }
+
+        [CategoryAttribute("Options")]
+        [DisplayName("Path Color")]
+        [Description("Affects the rail color on the title screen.")]
+        public Color path { get; set; }
     }
 }

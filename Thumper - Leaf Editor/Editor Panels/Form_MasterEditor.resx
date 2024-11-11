@@ -144,22 +144,6 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btnMasterOpenIntro.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
-        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
-        EgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnMasterOpenCheckpoint.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAGNJREFUOE9joBh8ahL8jw1/bBTogCrBD7BphmGiDMGmERkTNASbJmIwVDuVDfi/
-        TI9kTD0DvnZLYlWAD/9dqrsfbsCfuWpYFeHFy/UdwAaQbTssEMm2HQQosh0EKLJ9EAAGBgCpE9Hx3W0t
-        EgAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="btnMasterOpenRest.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
