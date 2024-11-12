@@ -579,5 +579,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return false;
         }
         #endregion
+
+        private void treeView1_DoubleClick(object sender, EventArgs e)
+        {
+            TCLE.OpenFile($@"{TCLE.WorkingFolder}\{selectedNodes[0].FullPath}");
+        }
     }
 }

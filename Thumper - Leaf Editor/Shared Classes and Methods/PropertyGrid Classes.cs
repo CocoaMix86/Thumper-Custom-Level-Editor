@@ -15,10 +15,17 @@ namespace Thumper_Custom_Level_Editor
     public class MasterProperties
     {
         public Form_MasterEditor parent;
-        public MasterProperties(Form_MasterEditor Parent)
+        public MasterProperties(Form_MasterEditor Parent, string path)
         {
             parent = Parent;
+            FilePath = path;
         }
+
+        [CategoryAttribute("General")]
+        [DisplayName("File Path")]
+        [Description("The full path to this file.")]
+        public string filepath { get {return FilePath; } }
+        private string FilePath;
 
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]

@@ -15,23 +15,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_MasterEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        private TCLE _mainform { get; set; }
-        public Form_MasterEditor(TCLE form)
+        public Form_MasterEditor(TCLE form, dynamic load = null, string filepath = null)
         {
-            _mainform = form;
             InitializeComponent();
             masterToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(masterLvlList, false);
 
-            _properties = new(this) {
-                skybox = "wow",
-                introlvl = "e",
-                checkpointlvl = "12345",
-                bpm = 199.04m,
-                rail = Color.Red,
-                railglow = Color.Lavender,
-                path = Color.FromArgb(40, 40, 200)
-            };
+            if (load != null)
+                LoadMaster(load, "");
             propertyGrid1.SelectedObject = _properties;
         }
         #endregion
@@ -43,24 +34,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return loadedmaster; }
             set {
                 if (value == null) {
-                    if (loadedmaster != null && _mainform.lockedfiles.ContainsKey(loadedmaster)) {
-                        _mainform.lockedfiles[loadedmaster].Close();
-                        _mainform.lockedfiles.Remove(loadedmaster);
+                    if (loadedmaster != null && TCLE.lockedfiles.ContainsKey(loadedmaster)) {
+                        TCLE.lockedfiles[loadedmaster].Close();
+                        TCLE.lockedfiles.Remove(loadedmaster);
                     }
                     loadedmaster = value;
                     ResetMaster();
                 }
                 else if (loadedmaster != value) {
-                    if (loadedmaster != null && _mainform.lockedfiles.ContainsKey(loadedmaster)) {
-                        _mainform.lockedfiles[loadedmaster].Close();
-                        _mainform.lockedfiles.Remove(loadedmaster);
+                    if (loadedmaster != null && TCLE.lockedfiles.ContainsKey(loadedmaster)) {
+                        TCLE.lockedfiles[loadedmaster].Close();
+                        TCLE.lockedfiles.Remove(loadedmaster);
                     }
                     loadedmaster = value;
 
                     if (!File.Exists(loadedmaster)) {
                         File.WriteAllText(loadedmaster, "");
                     }
-                    _mainform.lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
@@ -94,8 +85,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (_masterlvls[e.RowIndex].lvlname is "<none>" or "") {
                 if ((/*!_mainform._savegate && */MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savegate*/) {
                     _file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
-                    if (File.Exists($@"{_mainform.workingfolder}\gate_{_file}.txt")) {
-                        _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\gate_{_file}.txt");
+                    if (File.Exists($@"{TCLE.WorkingFolder}\gate_{_file}.txt")) {
+                        _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\gate_{_file}.txt");
                     }
                     else {
                         MessageBox.Show("This gate does not exist in the Level folder.");
@@ -107,8 +98,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if ((/*!_mainform._savelvl && */MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savelvl*/) {
                 _file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
-                if (File.Exists($@"{_mainform.workingfolder}\lvl_{_file}.txt")) {
-                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                if (File.Exists($@"{TCLE.WorkingFolder}\lvl_{_file}.txt")) {
+                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
                 }
                 else {
                     MessageBox.Show("This lvl does not exist in the Level folder.");
@@ -174,7 +165,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             masterLvlList.RowEnter += masterLvlList_RowEnter;
-            _mainform.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{_mainform.workingfolder}\{(_masterlvls[x.Index].lvlname != "" ? "lvl" : "gate")}_{x.Cells[1].Value}.txt").ToList());
+            TCLE.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\{(_masterlvls[x.Index].lvlname != "" ? "lvl" : "gate")}_{x.Cells[1].Value}.txt").ToList());
             //set selected index. Mainly used when moving items
             ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
             //enable certain buttons if there are enough items for them
@@ -224,10 +215,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
                 ofd.Title = "Load a Thumper Master file";
-                ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+                ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, _mainform.workingfolder);
+                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -253,7 +244,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //check if master exists already.
-            if (File.Exists($@"{_mainform.workingfolder}\master_sequin.txt")) {
+            if (File.Exists($@"{TCLE.WorkingFolder}\master_sequin.txt")) {
                 if (MessageBox.Show("You have a master file already for this Level. Proceeding will overwrite it.\nDo you want to continue?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                     return;
             }
@@ -261,7 +252,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Master File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null) {
                     _loadedmaster = null;
@@ -278,10 +269,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //write contents direct to file without prompting save dialog
             JObject _save = MasterBuildSave();
-            if (!_mainform.lockedfiles.ContainsKey(loadedmaster)) {
-                _mainform.lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            if (!TCLE.lockedfiles.ContainsKey(loadedmaster)) {
+                TCLE.lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            TCLE.WriteFileLock(_mainform.lockedfiles[loadedmaster], _save);
+            TCLE.WriteFileLock(TCLE.lockedfiles[loadedmaster], _save);
             SaveMaster(true, true);
             this.Text = $"sequin.master";
 
@@ -310,7 +301,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
             ofd.Title = "Load a Thumper Lvl/Gate file";
-            ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 AddFiletoMaster(ofd.FileName);
             }
@@ -327,9 +318,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
             //this is why I utilize workingfolder
-            if (Path.GetDirectoryName(path) != _mainform.workingfolder) {
+            if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
                 if (MessageBox.Show("The item you chose does not exist in the same folder as this master. Do you want to copy it to this folder and load it?", "File load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    if (!File.Exists($@"{_mainform.workingfolder}\{Path.GetFileName(path)}")) File.Copy(path, $@"{_mainform.workingfolder}\{Path.GetFileName(path)}");
+                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
                     else
                         return;
             }
@@ -343,7 +334,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     checkpoint = true,
                     checkpoint_leader = "<none>",
                     rest = "<none>",
-                    id = _mainform.rng.Next(0, 1000000)
+                    id = TCLE.rng.Next(0, 1000000)
                 });
             else if (_load["obj_type"] == "SequinGate")
                 _masterlvls.Add(new MasterLvlData() {
@@ -353,7 +344,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     checkpoint = true,
                     checkpoint_leader = "<none>",
                     rest = "<none>",
-                    id = _mainform.rng.Next(0, 1000000)
+                    id = TCLE.rng.Next(0, 1000000)
                 });
         }
 
@@ -413,9 +404,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             TCLE.PlaySound("UIcoloropen");
             Button button = (Button)sender;
-            _mainform.colorDialogNew.Color = button.BackColor;
-            if (_mainform.colorDialogNew.ShowDialog() == DialogResult.OK) {
-                ColorButton(button, _mainform.colorDialogNew.Color);
+            TCLE.colorDialogNew.Color = button.BackColor;
+            if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
+                ColorButton(button, TCLE.colorDialogNew.Color);
                 TCLE.PlaySound("UIcolorapply");
                 SaveMaster(false);
             }
@@ -423,9 +414,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnMasterRefreshLvl_Click(object sender, EventArgs e)
         {
-            if (_mainform.workingfolder == null)
+            if (TCLE.WorkingFolder == null)
                 return;
-            TCLE.lvlsinworkfolder = Directory.GetFiles(_mainform.workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
+            TCLE.lvlsinworkfolder = Directory.GetFiles(TCLE.WorkingFolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
             TCLE.lvlsinworkfolder.Add("<none>");
             TCLE.lvlsinworkfolder.Sort();
 
@@ -485,11 +476,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a master file!");
                 return;
             }
-            //if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-            _mainform.workingfolder = Path.GetDirectoryName(filepath);
-            //check if the assign actually worked. If not, stop loading.
-            if (_mainform.workingfolder != Path.GetDirectoryName(filepath))
-                return;
             _loadedmaster = filepath;
             //set some visual elements
             this.Text = $"sequin.master";
@@ -507,12 +493,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     isolate = _lvl["isolate"] ?? false,
                     checkpoint_leader = _lvl["checkpoint_leader_lvl_name"],
                     rest = _lvl["rest_lvl_name"] == "" ? "<none>" : _lvl["rest_lvl_name"],
-                    id = _mainform.rng.Next(0, 10000000)
+                    id = TCLE.rng.Next(0, 10000000)
                 });
             }
-            _properties.skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"];
-            _properties.introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"];
-            _properties.checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"];
+            _properties = new(this, filepath) {
+                skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
+                introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
+                checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
+            };
             ///load Config data (if file exists)
             LoadConfig();
             ///set save flag (master just loaded, has no changes)
@@ -524,10 +512,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void LoadConfig()
         {
-            System.Collections.Generic.List<string> _configfile = Directory.GetFiles(_mainform.workingfolder, "config_*.txt").ToList();
+            List<string> _configfile = Directory.GetFiles(TCLE.WorkingFolder, "config_*.txt", SearchOption.AllDirectories).ToList();
             if (_configfile.Count > 0) {
                 dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_configfile[0]), "#.*", ""));
                 _properties.bpm = (decimal)_load["bpm"];
+                dynamic railcolor = (decimal)_load["rails_color"];
+                _properties.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
+                dynamic railglowcolor = (decimal)_load["rails_glow_color"];
+                _properties.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
+                dynamic pathcolor = (decimal)_load["path_color"];
+                _properties.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
             }
             else {
                 _properties.bpm = 420;
@@ -551,7 +545,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string _file = path.Replace(".lvl", "");
                 dynamic _load;
                 try {
-                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
                 }
                 catch {
                     MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");

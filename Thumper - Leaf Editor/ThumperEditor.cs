@@ -18,10 +18,10 @@ namespace Thumper_Custom_Level_Editor
     public partial class TCLE : Form
     {
         #region Variables
-        public ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
+        public static ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
-        public dynamic projectjson;
+        public static dynamic projectjson;
         public string workingfolder
         {
             get { return WorkingFolder; }
@@ -101,14 +101,14 @@ namespace Thumper_Custom_Level_Editor
         }
         public static string WorkingFolder;
         public static List<string> lvlsinworkfolder = new();
-        public Random rng = new();
+        public static Random rng = new();
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public FileStream filelocklevel;
-        public Dictionary<string, FileStream> lockedfiles = new();
+        public static Dictionary<string, FileStream> lockedfiles = new();
         public Dictionary<string, Form> openfiles = new();
-        public static Thumper_Custom_Level_Editor.Beeble beeble = new Beeble();
+        public static Beeble beeble = new Beeble();
         #endregion
 
         #region Form Construction

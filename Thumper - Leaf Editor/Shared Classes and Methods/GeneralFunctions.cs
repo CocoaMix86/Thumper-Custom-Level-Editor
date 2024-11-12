@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using System.Runtime.CompilerServices;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -389,7 +390,7 @@ namespace Thumper_Custom_Level_Editor
             return filepath;
         }
 
-        public void HighlightMissingFile(DataGridView dgv, List<string> filelist)
+        public static void HighlightMissingFile(DataGridView dgv, List<string> filelist)
         {
             foreach (DataGridViewRow dgvr in dgv.Rows) {
                 if (!File.Exists(filelist[dgvr.Index])) {
@@ -534,6 +535,15 @@ namespace Thumper_Custom_Level_Editor
             //_beatcount += (int)_load["approach_beats"];
 
             return _beatcount;
+        }
+
+        public static void OpenFile(string filepath)
+        {
+            dynamic _load = LoadFileLock(filepath);
+            string _type = _load["obj_type"];
+            if (_type == "SequinMaster") {
+                Form_MasterEditor master = new();
+            }
         }
     }
 }

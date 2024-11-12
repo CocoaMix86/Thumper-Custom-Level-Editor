@@ -119,6 +119,7 @@
             this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
             this.treeView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
             this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
+            this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
             this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
             this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
             this.treeView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseUp);
@@ -202,7 +203,7 @@
             this.contextMenuFilters.Name = "workingfolderRightClick";
             this.contextMenuFilters.OwnerItem = this.btnFilter;
             this.contextMenuFilters.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuFilters.Size = new System.Drawing.Size(181, 136);
+            this.contextMenuFilters.Size = new System.Drawing.Size(114, 114);
             this.contextMenuFilters.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextMenuFilters_Closing);
             // 
             // filterLeaf
@@ -212,7 +213,7 @@
             this.filterLeaf.ForeColor = System.Drawing.Color.PaleGreen;
             this.filterLeaf.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_leaf;
             this.filterLeaf.Name = "filterLeaf";
-            this.filterLeaf.Size = new System.Drawing.Size(180, 22);
+            this.filterLeaf.Size = new System.Drawing.Size(113, 22);
             this.filterLeaf.Text = "Leaf";
             this.filterLeaf.CheckedChanged += new System.EventHandler(this.filter_CheckChanged);
             // 
@@ -223,7 +224,7 @@
             this.filterLvl.ForeColor = System.Drawing.Color.Green;
             this.filterLvl.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_lvl;
             this.filterLvl.Name = "filterLvl";
-            this.filterLvl.Size = new System.Drawing.Size(180, 22);
+            this.filterLvl.Size = new System.Drawing.Size(113, 22);
             this.filterLvl.Text = "Lvl";
             this.filterLvl.CheckedChanged += new System.EventHandler(this.filter_CheckChanged);
             // 
@@ -234,7 +235,7 @@
             this.filterGate.ForeColor = System.Drawing.Color.Orange;
             this.filterGate.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_gate;
             this.filterGate.Name = "filterGate";
-            this.filterGate.Size = new System.Drawing.Size(180, 22);
+            this.filterGate.Size = new System.Drawing.Size(113, 22);
             this.filterGate.Text = "Gate";
             this.filterGate.CheckedChanged += new System.EventHandler(this.filter_CheckChanged);
             // 
@@ -245,7 +246,7 @@
             this.filterMaster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
             this.filterMaster.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_master;
             this.filterMaster.Name = "filterMaster";
-            this.filterMaster.Size = new System.Drawing.Size(180, 22);
+            this.filterMaster.Size = new System.Drawing.Size(113, 22);
             this.filterMaster.Text = "Master";
             this.filterMaster.CheckedChanged += new System.EventHandler(this.filter_CheckChanged);
             // 
@@ -256,7 +257,7 @@
             this.filterSample.ForeColor = System.Drawing.Color.Turquoise;
             this.filterSample.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.editor_sample;
             this.filterSample.Name = "filterSample";
-            this.filterSample.Size = new System.Drawing.Size(180, 22);
+            this.filterSample.Size = new System.Drawing.Size(113, 22);
             this.filterSample.Text = "Sample";
             this.filterSample.CheckedChanged += new System.EventHandler(this.filter_CheckChanged);
             // 

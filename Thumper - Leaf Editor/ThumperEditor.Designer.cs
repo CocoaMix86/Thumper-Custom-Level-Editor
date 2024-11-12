@@ -132,12 +132,12 @@
             this.toolstripHelpKofi = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolstripMainOpenProject = new System.Windows.Forms.ToolStripButton();
+            this.toolstripMainOpenFile = new System.Windows.Forms.ToolStripButton();
+            this.toolstripMainSave = new System.Windows.Forms.ToolStripButton();
+            this.toolstripMainSaveAll = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolstripMainUndo = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.panelToolStrips = new System.Windows.Forms.Panel();
             this.toolStripTitle = new Thumper_Custom_Level_Editor.ToolStripEx();
@@ -848,7 +848,6 @@
             this.toolStripSeparator8,
             this.toolstripProjectProperties});
             this.contextMenuProject.Name = "workingfolderRightClick";
-            this.contextMenuProject.OwnerItem = this.toolstripView;
             this.contextMenuProject.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.contextMenuProject.Size = new System.Drawing.Size(203, 192);
             // 
@@ -1202,71 +1201,71 @@
             this.toolStripMain.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolStripMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripButton5,
-            this.toolStripButton6,
+            this.toolstripMainOpenProject,
+            this.toolstripMainOpenFile,
+            this.toolstripMainSave,
+            this.toolstripMainSaveAll,
             this.toolStripSeparator13,
-            this.toolStripSplitButton1,
+            this.toolstripMainUndo,
             this.toolStripSeparator14});
             this.toolStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripMain.Location = new System.Drawing.Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStripMain.Size = new System.Drawing.Size(139, 25);
+            this.toolStripMain.Size = new System.Drawing.Size(170, 25);
             this.toolStripMain.TabIndex = 151;
             this.toolStripMain.Text = "toolStripMain";
             // 
-            // toolStripButton3
+            // toolstripMainOpenProject
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_tcle;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "toolStripButton3";
+            this.toolstripMainOpenProject.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripMainOpenProject.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_tcle;
+            this.toolstripMainOpenProject.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripMainOpenProject.Name = "toolstripMainOpenProject";
+            this.toolstripMainOpenProject.Size = new System.Drawing.Size(23, 22);
+            this.toolstripMainOpenProject.Text = "toolStripButton3";
             // 
-            // toolStripButton4
+            // toolstripMainOpenFile
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton4";
+            this.toolstripMainOpenFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripMainOpenFile.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_openfile;
+            this.toolstripMainOpenFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripMainOpenFile.Name = "toolstripMainOpenFile";
+            this.toolstripMainOpenFile.Size = new System.Drawing.Size(23, 22);
+            this.toolstripMainOpenFile.Text = "toolStripButton4";
             // 
-            // toolStripButton5
+            // toolstripMainSave
             // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
-            this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "toolStripButton5";
+            this.toolstripMainSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripMainSave.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save;
+            this.toolstripMainSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolstripMainSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripMainSave.Name = "toolstripMainSave";
+            this.toolstripMainSave.Size = new System.Drawing.Size(23, 22);
+            this.toolstripMainSave.Text = "toolStripButton5";
             // 
-            // toolStripButton6
+            // toolstripMainSaveAll
             // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save_all;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "toolStripButton6";
+            this.toolstripMainSaveAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripMainSaveAll.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_save_all;
+            this.toolstripMainSaveAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripMainSaveAll.Name = "toolstripMainSaveAll";
+            this.toolstripMainSaveAll.Size = new System.Drawing.Size(23, 22);
+            this.toolstripMainSaveAll.Text = "toolStripButton6";
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             this.toolStripSeparator13.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripSplitButton1
+            // toolstripMainUndo
             // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton1.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_undo;
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 22);
-            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            this.toolstripMainUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolstripMainUndo.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_undo;
+            this.toolstripMainUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolstripMainUndo.Name = "toolstripMainUndo";
+            this.toolstripMainUndo.Size = new System.Drawing.Size(32, 22);
+            this.toolstripMainUndo.Text = "toolStripSplitButton1";
             // 
             // toolStripSeparator14
             // 
@@ -1499,12 +1498,12 @@
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectProperties;
         private System.Windows.Forms.ToolStripButton toolstripFormClose;
         private System.Windows.Forms.ToolStrip toolStripMain;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton toolstripMainOpenProject;
+        private System.Windows.Forms.ToolStripButton toolstripMainOpenFile;
+        private System.Windows.Forms.ToolStripButton toolstripMainSave;
+        private System.Windows.Forms.ToolStripButton toolstripMainSaveAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripSplitButton toolstripMainUndo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.Panel panelToolStrips;
         private System.Windows.Forms.ToolStripButton toolstripFormRestore;
