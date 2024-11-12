@@ -15,7 +15,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_MasterEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_MasterEditor(TCLE form, dynamic load = null, string filepath = null)
+        public Form_MasterEditor(dynamic load = null, string filepath = null)
         {
             InitializeComponent();
             masterToolStrip.Renderer = new ToolStripOverride();
@@ -114,9 +114,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //load the selected item
             /*
             if ((string)_load["obj_type"] == "SequinLevel")
-                _mainform.LoadLvl(_load, $@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                _mainform.LoadLvl(_load, $@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
             else if ((string)_load["obj_type"] == "SequinGate")
-                _mainform.LoadGate(_load, $@"{_mainform.workingfolder}\gate_{_file}.txt");
+                _mainform.LoadGate(_load, $@"{TCLE.WorkingFolder}\gate_{_file}.txt");
             dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
             btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
             //re-add event handlers
@@ -552,7 +552,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
                 //load the selected lvl
-                ///_mainform.LoadLvl(_load, $@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                ///_mainform.LoadLvl(_load, $@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
             }
         }
 

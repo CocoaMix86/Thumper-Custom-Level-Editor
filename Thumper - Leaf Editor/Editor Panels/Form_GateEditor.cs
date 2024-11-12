@@ -100,15 +100,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //gateLvlList_RowEnter(sender, e);
             if ((/*!_mainform._savelvl &&*/ MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) /*|| _mainform._savelvl*/) {
                 string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");
-                if (File.Exists($@"{_mainform.workingfolder}\lvl_{_file}.txt")) {
-                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                if (File.Exists($@"{TCLE.WorkingFolder}\lvl_{_file}.txt")) {
+                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
                 }
                 else {
                     MessageBox.Show("This lvl does not exist in the Level folder.");
                     return;
                 }
                 //load the selected lvl
-                ///_mainform.LoadLvl(_load, $@"{_mainform.workingfolder}\lvl_{_file}.txt");
+                ///_mainform.LoadLvl(_load, $@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
             }
         }
         private void gateLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -137,7 +137,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //gateLvlList.Rows[_gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {_gatelvls.IndexOf(_lvl) + 1}";
             }
             gateLvlList.RowEnter += gateLvlList_RowEnter;
-            _mainform.HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{_mainform.workingfolder}\lvl_{x.Cells[1].Value}.txt").ToList());
+            _mainform.HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\lvl_{x.Cells[1].Value}.txt").ToList());
             //set selected index. Mainly used when moving items
             ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
             //enable certain buttons if there are enough items for them
@@ -168,10 +168,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
                 ofd.Title = "Load a Thumper Gate file";
-                ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+                ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, _mainform.workingfolder);
+                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -198,7 +198,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Gate File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = _mainform.workingfolder;
+            sfd.InitialDirectory = TCLE.WorkingFolder;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null)
                     _loadedgate = null;
@@ -309,7 +309,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Gate File (*.txt)|lvl_*.txt";
             ofd.Title = "Load a Thumper Lvl file";
-            ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 //limit how many phases can be added
                 if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
@@ -366,9 +366,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnGateRefresh_Click(object sender, EventArgs e)
         {
-            if (_mainform.workingfolder == null)
+            if (TCLE.WorkingFolder == null)
                 return;
-            TCLE.lvlsinworkfolder = Directory.GetFiles(_mainform.workingfolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
+            TCLE.lvlsinworkfolder = Directory.GetFiles(TCLE.WorkingFolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
             TCLE.lvlsinworkfolder.Add("<none>");
             TCLE.lvlsinworkfolder.Sort();
             /*
@@ -464,9 +464,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-            _mainform.workingfolder = Path.GetDirectoryName(filepath);
+            TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
             //check if the assign actually worked. If not, stop loading.
-            if (_mainform.workingfolder != Path.GetDirectoryName(filepath))
+            if (TCLE.WorkingFolder != Path.GetDirectoryName(filepath))
                 return;
             _loadedgate = filepath;
             //set some visual elements

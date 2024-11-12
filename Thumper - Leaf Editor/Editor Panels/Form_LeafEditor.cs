@@ -729,7 +729,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null)
                     _loadedleaf = null;
@@ -776,10 +776,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
                 ofd.Title = "Load a Thumper Leaf file";
-                ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+                ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, _mainform.workingfolder);
+                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -1163,7 +1163,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Color Profile (*.color)|*.color";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 //save _out to file with .color extension
                 File.WriteAllText(sfd.FileName, _out);
@@ -1175,7 +1175,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Color Profile (*.color)|*.color";
             ofd.FilterIndex = 1;
-            ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 //import all colors in the file to this array
                 string[] _colors = File.ReadAllLines(ofd.FileName);
@@ -1256,7 +1256,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
 
             //create file renaming dialog and show it
-            FileNameDialog filenamedialog = new(_mainform.workingfolder, "leaf") {
+            FileNameDialog filenamedialog = new(TCLE.WorkingFolder, "leaf") {
                 StartPosition = FormStartPosition.Manual,
                 Location = MousePosition
             };
@@ -1266,7 +1266,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (filenamedialog.ShowDialog() == DialogResult.Yes) {
                 newfilename = filenamedialog.txtWorkingRename.Text;
                 //check if the chosen name exists in the level folder
-                if (File.Exists($@"{_mainform.workingfolder}\leaf_{newfilename}.txt")) {
+                if (File.Exists($@"{TCLE.WorkingFolder}\leaf_{newfilename}.txt")) {
                     MessageBox.Show("File name already exists.", "Leaf split error");
                     return;
                 }
@@ -1315,14 +1315,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _leafsplitafter.Remove("beat_cnt");
             _leafsplitafter.Add("beat_cnt", numericUpDown_LeafLength.Value - splitindex);
             //write data back to file
-            File.WriteAllText($@"{_mainform.workingfolder}\leaf_{newfilename}.txt", JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
+            File.WriteAllText($@"{TCLE.WorkingFolder}\leaf_{newfilename}.txt", JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
 
             TCLE.PlaySound("UIleafsplit");
             //load new leaf that was just split
-            ///_mainform.workingfolderFiles.Rows.Insert(_mainform.workingfolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
-            ///_mainform.workingfolderFiles.Rows[_mainform.workingfolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
+            ///TCLE.WorkingFolderFiles.Rows.Insert(TCLE.WorkingFolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
+            ///TCLE.WorkingFolderFiles.Rows[TCLE.WorkingFolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
 
-            LoadLeaf(TCLE.LoadFileLock($@"{_mainform.workingfolder}\leaf_{newfilename}.txt"), $@"{_mainform.workingfolder}\leaf_{newfilename}.txt");
+            LoadLeaf(TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\leaf_{newfilename}.txt"), $@"{TCLE.WorkingFolder}\leaf_{newfilename}.txt");
 
             //update beat counts in loaded lvl if need be
             ///if (_mainform._loadedlvl != null)
@@ -1385,14 +1385,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackAdd_Click(null, null);
             bool rando = true;
             while (rando) {
-                dropObjects.SelectedIndex = _mainform.rng.Next(0, dropObjects.Items.Count);
+                dropObjects.SelectedIndex = TCLE.rng.Next(0, dropObjects.Items.Count);
                 if (dropObjects.Text == "PLAY SAMPLE") {
                     dropParamPath.SelectedIndex = 0;
                     if (dropTrackLane.Items.Count > 0)
-                        dropTrackLane.SelectedIndex = _mainform.rng.Next(0, dropTrackLane.Items.Count);
+                        dropTrackLane.SelectedIndex = TCLE.rng.Next(0, dropTrackLane.Items.Count);
                 }
                 else
-                    dropParamPath.SelectedIndex = _mainform.rng.Next(0, dropParamPath.Items.Count);
+                    dropParamPath.SelectedIndex = TCLE.rng.Next(0, dropParamPath.Items.Count);
                 if (_tracks.Where(x => (x.friendly_param ?? "").Split(',')[0] == dropParamPath.Text).Count() == 0)
                     rando = false;
             }
@@ -1599,9 +1599,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _mainform.PanelEnableState(panelLeaf, true);
             }
             else {
-                _mainform.workingfolder = Path.GetDirectoryName(filepath);
+                TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
                 //check if the assign actually worked. If not, stop loading.
-                if (_mainform.workingfolder != Path.GetDirectoryName(filepath))
+                if (TCLE.WorkingFolder != Path.GetDirectoryName(filepath))
                     return;
                 _loadedleaf = filepath;
             }

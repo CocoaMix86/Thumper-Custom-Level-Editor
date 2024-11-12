@@ -15,10 +15,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_LvlEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        private TCLE _mainform { get; set; }
-        public Form_LvlEditor(TCLE form)
+        public Form_LvlEditor(dynamic load = null, string path = null)
         {
-            _mainform = form;
             InitializeComponent();
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlVolumeToolStrip.Renderer = new ToolStripOverride();
@@ -42,25 +40,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return loadedlvl; }
             set {
                 if (value == null) {
-                    if (loadedlvl != null && _mainform.lockedfiles.ContainsKey(loadedlvl)) {
-                        _mainform.lockedfiles[loadedlvl].Close();
-                        _mainform.lockedfiles.Remove(loadedlvl);
+                    if (loadedlvl != null && TCLE.lockedfiles.ContainsKey(loadedlvl)) {
+                        TCLE.lockedfiles[loadedlvl].Close();
+                        TCLE.lockedfiles.Remove(loadedlvl);
                     }
                     loadedlvl = value;
                     ResetLvl();
                 }
                 else if (loadedlvl != value) {
-                    if (loadedlvl != null && _mainform.lockedfiles.ContainsKey(loadedlvl)) {
-                        _mainform.lockedfiles[loadedlvl].Close();
-                        _mainform.lockedfiles.Remove(loadedlvl);
+                    if (loadedlvl != null && TCLE.lockedfiles.ContainsKey(loadedlvl)) {
+                        TCLE.lockedfiles[loadedlvl].Close();
+                        TCLE.lockedfiles.Remove(loadedlvl);
                     }
                     loadedlvl = value;
-                    _mainform.PanelEnableState(panelLevel, true);
 
                     if (!File.Exists(loadedlvl)) {
                         File.WriteAllText(loadedlvl, "");
                     }
-                    _mainform.lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
@@ -95,15 +92,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
                 string _file = (_lvlleafs[e.RowIndex].leafname).Replace(".leaf", "");
                 dynamic _load;
-                if (File.Exists($@"{_mainform.workingfolder}\leaf_{_file}.txt")) {
-                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\leaf_{_file}.txt");
+                if (File.Exists($@"{TCLE.WorkingFolder}\leaf_{_file}.txt")) {
+                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\leaf_{_file}.txt");
                 }
                 else {
                     MessageBox.Show("This leaf does not exist in the Level folder.");
                     return;
                 }
 
-                ///LoadLeaf(_load, $@"{_mainform.workingfolder}\leaf_{_file}.txt");
+                ///LoadLeaf(_load, $@"{TCLE.WorkingFolder}\leaf_{_file}.txt");
             }
             LvlUpdatePaths(e.RowIndex);
         }
@@ -329,7 +326,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
             }
             lvlLeafList.RowEnter += lvlLeafList_RowEnter;
-            _mainform.HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{_mainform.workingfolder}\leaf_{x.Cells[1].Value}.txt").ToList());
+            TCLE.HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\leaf_{x.Cells[1].Value}.txt").ToList());
 
 
             //enable certain buttons if there are enough items for them
@@ -402,7 +399,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null) {
                     _loadedlvl = null;
@@ -431,10 +428,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //serialize JSON object to a string, and write it to the file
             JObject _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
-            if (!_mainform.lockedfiles.ContainsKey(_loadedlvl)) {
-                _mainform.lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            if (!TCLE.lockedfiles.ContainsKey(_loadedlvl)) {
+                TCLE.lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            TCLE.WriteFileLock(_mainform.lockedfiles[loadedlvl], _save);
+            TCLE.WriteFileLock(TCLE.lockedfiles[loadedlvl], _save);
             SaveLvl(true, true);
             this.Text = $"{_save["obj_name"]}";
             //reload samples on save
@@ -447,10 +444,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
                 ofd.Title = "Load a Thumper Lvl file";
-                ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+                ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, _mainform.workingfolder);
+                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -484,7 +481,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
             ofd.Title = "Load a Thumper Leaf file";
-            ofd.InitialDirectory = _mainform.workingfolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             TCLE.PlaySound("UIfolderopen");
             if (ofd.ShowDialog() == DialogResult.OK) {
                 AddLeaftoLvl(ofd.FileName);
@@ -555,8 +552,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
             /*
-            List<string> leafs = _mainform.workingfolderFiles.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[1].Value.ToString().Contains("leaf_")).Select(x => x.Cells[1].Value.ToString()).ToList();
-            string _selectedfilename = $@"{_mainform.workingfolder}\{leafs[_mainform.rng.Next(0, leafs.Count)]}.txt";
+            List<string> leafs = TCLE.WorkingFolderFiles.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[1].Value.ToString().Contains("leaf_")).Select(x => x.Cells[1].Value.ToString()).ToList();
+            string _selectedfilename = $@"{TCLE.WorkingFolder}\{leafs[_mainform.rng.Next(0, leafs.Count)]}.txt";
             AddLeaftoLvl(_selectedfilename);
             */
         }
@@ -641,7 +638,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (_lvlleafs.Count == 0)
                 return;
             lvlLeafPaths.RowCount++;
-            lvlLeafPaths.Rows[^1].Cells[0].Value = _lvlpaths[_mainform.rng.Next(1, _lvlpaths.Count)];
+            lvlLeafPaths.Rows[^1].Cells[0].Value = _lvlpaths[TCLE.rng.Next(1, _lvlpaths.Count)];
             btnLvlPathDelete.Enabled = true;
             TCLE.PlaySound("UItunneladd");
             SaveLvl(false);
@@ -759,10 +756,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string _file = (_leaf.leafname).Replace(".leaf", "");
                 dynamic _load;
                 try {
-                    if (!File.Exists($@"{_mainform.workingfolder}\leaf_{_file}.txt"))
+                    if (!File.Exists($@"{TCLE.WorkingFolder}\leaf_{_file}.txt"))
                         continue;
                     //I need to load the entire document to grab one field from it
-                    _load = TCLE.LoadFileLock($@"{_mainform.workingfolder}\leaf_{_file}.txt");
+                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\leaf_{_file}.txt");
                     //if beat_cnt is different than what is loaded, replace it and mark the save flag
                     if (_leaf.beats != (int)_load["beat_cnt"]) {
                         _leaf.beats = (int)_load["beat_cnt"];
@@ -806,9 +803,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-            _mainform.workingfolder = Path.GetDirectoryName(filepath);
+            TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
             //check if the assign actually worked. If not, stop loading.
-            if (_mainform.workingfolder != Path.GetDirectoryName(filepath))
+            if (TCLE.WorkingFolder != Path.GetDirectoryName(filepath))
                 return;
             _loadedlvl = filepath;
             //set some visual elements
@@ -844,7 +841,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     leafname = (string)leaf["leaf_name"],
                     beats = (int)leaf["beat_cnt"],
                     paths = leaf["sub_paths"].ToObject<List<string>>(),
-                    id = _mainform.rng.Next(0, 1000000)
+                    id = TCLE.rng.Next(0, 1000000)
                 });
             }
             ///load volume sequencer data
@@ -905,9 +902,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //check if leaf exists in the same folder as the lvl. If not, allow user to copy file.
             //this is why I utilize workingfolder
-            if (Path.GetDirectoryName(path) != _mainform.workingfolder) {
+            if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
                 if (MessageBox.Show("The leaf you chose does not exist in the same folder as this lvl. Do you want to copy it to this folder and load it?", "Leaf load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    File.Copy(path, $@"{_mainform.workingfolder}\{Path.GetFileName(path)}");
+                    File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
                 else
                     return;
             }
@@ -922,7 +919,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 leafname = (string)_load["obj_name"],
                 beats = (int)_load["beat_cnt"],
                 paths = new List<string>(copytunnels),
-                id = _mainform.rng.Next(0, 1000000)
+                id = TCLE.rng.Next(0, 1000000)
             });
         }
 
@@ -956,12 +953,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void LvlReloadSamples()
         {
-            if (_mainform.workingfolder == null)
+            if (TCLE.WorkingFolder == null)
                 return;
             loadinglvl = true;
             _lvlsamples.Clear();
             //find all samp_ files in the level folder
-            List<string> _sampfiles = Directory.GetFiles(_mainform.workingfolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
+            List<string> _sampfiles = Directory.GetFiles(TCLE.WorkingFolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
             //add default empty sample
             _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
             //iterate over each file
