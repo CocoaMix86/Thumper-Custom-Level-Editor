@@ -664,7 +664,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string[] _files = Directory.GetFiles(Path.GetDirectoryName(loadedmaster), "config_*.txt");
             foreach (string s in _files)
                 File.Delete(s);
-            File.WriteAllText($@"{Path.GetDirectoryName(loadedmaster)}\config_{_mainform.projectjson["level_name"]}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
+            File.WriteAllText($@"{TCLE.WorkingFolder}\config_{TCLE.projectjson["level_name"]}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
 
             ///only need to return _save, since _config is written already
             return _save;
