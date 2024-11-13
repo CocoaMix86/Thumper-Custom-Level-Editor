@@ -1,6 +1,0 @@
-{
-  "level_name": "ee",
-  "difficulty": "D7",
-  "description": "fe",
-  "author": "ef"
-}
