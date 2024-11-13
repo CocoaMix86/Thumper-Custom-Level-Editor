@@ -39,17 +39,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return loadedleaf; }
             set {
                 if (value == null) {
-                    if (loadedleaf != null && _mainform.lockedfiles.ContainsKey(loadedleaf)) {
-                        _mainform.lockedfiles[loadedleaf].Close();
-                        _mainform.lockedfiles.Remove(loadedleaf);
+                    if (loadedleaf != null && TCLE.lockedfiles.ContainsKey(loadedleaf)) {
+                        TCLE.lockedfiles[loadedleaf].Close();
+                        TCLE.lockedfiles.Remove(loadedleaf);
                     }
                     loadedleaf = value;
                     ResetLeaf();
                 }
                 if (loadedleaf != value) {
-                    if (loadedleaf != null && _mainform.lockedfiles.ContainsKey(loadedleaf)) {
-                        _mainform.lockedfiles[loadedleaf].Close();
-                        _mainform.lockedfiles.Remove(loadedleaf);
+                    if (loadedleaf != null && TCLE.lockedfiles.ContainsKey(loadedleaf)) {
+                        TCLE.lockedfiles[loadedleaf].Close();
+                        TCLE.lockedfiles.Remove(loadedleaf);
                     }
                     loadedleaf = value;
                     _mainform.PanelEnableState(panelLeaf, true);
@@ -57,7 +57,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (!File.Exists(loadedleaf)) {
                         File.WriteAllText(loadedleaf, "");
                     }
-                    _mainform.lockedfiles.Add(_loadedleaf, new FileStream(_loadedleaf, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(_loadedleaf, new FileStream(_loadedleaf, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
@@ -757,10 +757,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //serialize JSON object to a string, and write it to the file
             JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-            if (!_mainform.lockedfiles.ContainsKey(_loadedleaf)) {
-                _mainform.lockedfiles.Add(_loadedleaf, new FileStream(_loadedleaf, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            if (!TCLE.lockedfiles.ContainsKey(_loadedleaf)) {
+                TCLE.lockedfiles.Add(_loadedleaf, new FileStream(_loadedleaf, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            TCLE.WriteFileLock(_mainform.lockedfiles[_loadedleaf], _save);
+            TCLE.WriteFileLock(TCLE.lockedfiles[_loadedleaf], _save);
             SaveLeaf(true, "Saved", "", true);
             this.Text = $"{_save["obj_name"]}";
             //update beat counts in loaded lvl if need be
@@ -798,9 +798,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //set folder to the templates location
                 ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
                 if (ofd.ShowDialog() == DialogResult.OK) {
-                    if (loadedleaf != null && _mainform.lockedfiles.ContainsKey(loadedleaf)) {
-                        _mainform.lockedfiles[loadedleaf].Close();
-                        _mainform.lockedfiles.Remove(loadedleaf);
+                    if (loadedleaf != null && TCLE.lockedfiles.ContainsKey(loadedleaf)) {
+                        TCLE.lockedfiles[loadedleaf].Close();
+                        TCLE.lockedfiles.Remove(loadedleaf);
                     }
                     object _load = TCLE.LoadFileLock(ofd.FileName);
                     LoadLeaf(_load, "template");
@@ -1139,9 +1139,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnTrackColorDialog_Click(object sender, EventArgs e)
         {
             TCLE.PlaySound("UIcoloropen");
-            _mainform.colorDialogNew.Color = btnTrackColorDialog.BackColor;
-            if (_mainform.colorDialogNew.ShowDialog() == DialogResult.OK) {
-                Color selectedcolor = _mainform.colorDialogNew.Color;
+            TCLE.colorDialogNew.Color = btnTrackColorDialog.BackColor;
+            if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
+                Color selectedcolor = TCLE.colorDialogNew.Color;
                 btnTrackColorDialog.BackColor = selectedcolor;
                 trackEditor.CurrentRow.HeaderCell.Style.BackColor = TCLE.Blend(selectedcolor, Color.Black, 0.4);
                 _tracks[_selecttrack].highlight_color = selectedcolor.ToArgb().ToString();
@@ -1234,9 +1234,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (trackEditor.SelectedCells.Count == 0)
                 return;
             TCLE.PlaySound("UIcoloropen");
-            if (_mainform.colorDialogNew.ShowDialog() == DialogResult.OK) {
+            if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
                 TCLE.PlaySound("UIcolorapply");
-                trackEditor.SelectedCells[0].Value = (decimal)_mainform.colorDialogNew.Color.ToArgb();
+                trackEditor.SelectedCells[0].Value = (decimal)TCLE.colorDialogNew.Color.ToArgb();
                 CellValueChanged(trackEditor.SelectedCells[0].RowIndex, trackEditor.SelectedCells[0].ColumnIndex);
             }
         }
@@ -1296,7 +1296,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _leafsplitbefore.Remove("beat_cnt");
             _leafsplitbefore.Add("beat_cnt", splitindex);
             //write data back to file
-            TCLE.WriteFileLock(_mainform.lockedfiles[_loadedleaf], _leafsplitbefore);
+            TCLE.WriteFileLock(TCLE.lockedfiles[_loadedleaf], _leafsplitbefore);
 
             ///repeat all above for after split file
             JObject _leafsplitafter = LeafBuildSave(newfilename + ".txt");

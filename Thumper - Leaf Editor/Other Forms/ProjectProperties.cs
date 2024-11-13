@@ -135,10 +135,10 @@ namespace Thumper_Custom_Level_Editor
             mainform.toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject(txtCustomDiff.Text);
 
             if (mainform.workingfolder != null && isthisnew == false && mainform.workingfolder != levelpath) {
-                foreach (KeyValuePair<string, FileStream> fs in mainform.lockedfiles) {
+                foreach (KeyValuePair<string, FileStream> fs in TCLE.lockedfiles) {
                     fs.Value.Close();
                 }
-                mainform.lockedfiles.Clear();
+                TCLE.lockedfiles.Clear();
                 //using a random suffix on the end to avoid any folders with same name
                 Directory.Move(mainform.workingfolder, $"{levelpath}1029");
                 Directory.Move($"{levelpath}1029", $"{levelpath}");
@@ -249,9 +249,9 @@ namespace Thumper_Custom_Level_Editor
                 File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
             }
             else {
-                TCLE.WriteFileLock(mainform.lockedfiles[$@"{levelpath}\LEVEL DETAILS.txt"], level_details);
+                TCLE.WriteFileLock(TCLE.lockedfiles[$@"{levelpath}\LEVEL DETAILS.txt"], level_details);
             }
-            mainform.projectjson = level_details;
+            TCLE.projectjson = level_details;
             mainform.workingfolder = levelpath;
 
             ///

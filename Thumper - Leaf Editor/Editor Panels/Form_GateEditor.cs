@@ -28,17 +28,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return loadedgate; }
             set {
                 if (value == null) {
-                    if (loadedgate != null && _mainform.lockedfiles.ContainsKey(loadedgate)) {
-                        _mainform.lockedfiles[loadedgate].Close();
-                        _mainform.lockedfiles.Remove(loadedgate);
+                    if (loadedgate != null && TCLE.lockedfiles.ContainsKey(loadedgate)) {
+                        TCLE.lockedfiles[loadedgate].Close();
+                        TCLE.lockedfiles.Remove(loadedgate);
                     }
                     loadedgate = value;
                     ResetGate();
                 }
                 if (loadedgate != value) {
-                    if (loadedgate != null && _mainform.lockedfiles.ContainsKey(loadedgate)) {
-                        _mainform.lockedfiles[loadedgate].Close();
-                        _mainform.lockedfiles.Remove(loadedgate);
+                    if (loadedgate != null && TCLE.lockedfiles.ContainsKey(loadedgate)) {
+                        TCLE.lockedfiles[loadedgate].Close();
+                        TCLE.lockedfiles.Remove(loadedgate);
                     }
                     loadedgate = value;
                     _mainform.PanelEnableState(panelGate, true);
@@ -47,7 +47,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (!File.Exists(loadedgate)) {
                         File.WriteAllText(loadedgate, "");
                     }
-                    _mainform.lockedfiles.Add(loadedgate, new FileStream(loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(loadedgate, new FileStream(loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
@@ -137,7 +137,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //gateLvlList.Rows[_gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {_gatelvls.IndexOf(_lvl) + 1}";
             }
             gateLvlList.RowEnter += gateLvlList_RowEnter;
-            _mainform.HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\lvl_{x.Cells[1].Value}.txt").ToList());
+            TCLE.HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\lvl_{x.Cells[1].Value}.txt").ToList());
             //set selected index. Mainly used when moving items
             ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
             //enable certain buttons if there are enough items for them
@@ -226,10 +226,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //write contents direct to file without prompting save dialog
             JObject _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
-            if (!_mainform.lockedfiles.ContainsKey(_loadedgate)) {
-                _mainform.lockedfiles.Add(_loadedgate, new FileStream(_loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            if (!TCLE.lockedfiles.ContainsKey(_loadedgate)) {
+                TCLE.lockedfiles.Add(_loadedgate, new FileStream(_loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            TCLE.WriteFileLock(_mainform.lockedfiles[loadedgate], _save);
+            TCLE.WriteFileLock(TCLE.lockedfiles[loadedgate], _save);
             SaveGate(true, true);
             this.Text = $"{_save["obj_name"]}";
         }

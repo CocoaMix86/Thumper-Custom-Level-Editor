@@ -107,11 +107,15 @@
     <Compile Include="Editor Panels\Form_MasterEditor.Designer.cs">
       <DependentUpon>Form_MasterEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Other Forms\Beeble.cs" />
+    <Compile Include="Other Forms\Beeble.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Other Forms\Beeble.Designer.cs">
       <DependentUpon>Beeble.cs</DependentUpon>
     </Compile>
-    <Compile Include="Other Forms\FileListBox.cs" />
+    <Compile Include="Other Forms\FileListBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Other Forms\FileListBox.Designer.cs">
       <DependentUpon>FileListBox.cs</DependentUpon>
     </Compile>

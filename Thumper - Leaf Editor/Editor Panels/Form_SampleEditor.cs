@@ -39,24 +39,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return loadedsample; }
             set {
                 if (value == null) {
-                    if (loadedsample != null && _mainform.lockedfiles.ContainsKey(loadedsample)) {
-                        _mainform.lockedfiles[loadedsample].Close();
-                        _mainform.lockedfiles.Remove(loadedsample);
+                    if (loadedsample != null && TCLE.lockedfiles.ContainsKey(loadedsample)) {
+                        TCLE.lockedfiles[loadedsample].Close();
+                        TCLE.lockedfiles.Remove(loadedsample);
                     }
                     loadedsample = value;
                     ResetSample();
                 }
                 if (loadedsample != value) {
-                    if (loadedsample != null && _mainform.lockedfiles.ContainsKey(loadedsample)) {
-                        _mainform.lockedfiles[loadedsample].Close();
-                        _mainform.lockedfiles.Remove(loadedsample);
+                    if (loadedsample != null && TCLE.lockedfiles.ContainsKey(loadedsample)) {
+                        TCLE.lockedfiles[loadedsample].Close();
+                        TCLE.lockedfiles.Remove(loadedsample);
                     }
                     loadedsample = value;
 
                     if (!File.Exists(loadedsample)) {
                         File.WriteAllText(loadedsample, "");
                     }
-                    _mainform.lockedfiles.Add(loadedsample, new FileStream(loadedsample, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(loadedsample, new FileStream(loadedsample, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
@@ -225,10 +225,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //write contents direct to file without prompting save dialog
             JObject _save = SampleBuildSave();
-            if (!_mainform.lockedfiles.ContainsKey(loadedsample)) {
-                _mainform.lockedfiles.Add(loadedsample, new FileStream(loadedsample, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            if (!TCLE.lockedfiles.ContainsKey(loadedsample)) {
+                TCLE.lockedfiles.Add(loadedsample, new FileStream(loadedsample, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            TCLE.WriteFileLock(_mainform.lockedfiles[loadedsample], _save);
+            TCLE.WriteFileLock(TCLE.lockedfiles[loadedsample], _save);
             SaveSample(true, true);
             this.Text = $"{Path.GetFileNameWithoutExtension(_loadedsample)}";
         }
