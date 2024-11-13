@@ -211,10 +211,12 @@
       <Version>5.7.0</Version>
       <IncludeAssets>runtime; compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+      <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
     <PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="1.7.2" />
     <PackageReference Include="DockPanelSuite">
       <Version>3.1.1</Version>
+      <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
     <PackageReference Include="DockPanelSuite.ThemeVS2015">
       <Version>3.1.1</Version>
@@ -224,51 +226,23 @@
     </PackageReference>
     <PackageReference Include="IndexRange">
       <Version>1.0.3</Version>
+      <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
     <PackageReference Include="Microsoft-Windows10-APICodePack-Core">
       <Version>1.1.8</Version>
+      <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
     <PackageReference Include="Microsoft-Windows10-APICodePack-Shell">
       <Version>1.1.8</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
-      <Version>9.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Build.Framework">
-      <Version>17.12.6</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Build.Utilities.Core">
-      <Version>17.12.6</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.NET.StringTools">
-      <Version>17.12.6</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop">
-      <Version>3.12.2149</Version>
-    </PackageReference>
     <PackageReference Include="NAudio">
-      <Version>2.2.1</Version>
-    </PackageReference>
-    <PackageReference Include="NAudio.Asio">
-      <Version>2.2.1</Version>
-    </PackageReference>
-    <PackageReference Include="NAudio.Core">
-      <Version>2.2.1</Version>
-    </PackageReference>
-    <PackageReference Include="NAudio.Midi">
       <Version>2.2.1</Version>
     </PackageReference>
     <PackageReference Include="NAudio.Vorbis">
       <Version>1.5.0</Version>
     </PackageReference>
-    <PackageReference Include="NAudio.Wasapi">
-      <Version>2.2.1</Version>
-    </PackageReference>
     <PackageReference Include="NAudio.WinForms">
-      <Version>2.2.1</Version>
-    </PackageReference>
-    <PackageReference Include="NAudio.WinMM">
       <Version>2.2.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
@@ -286,17 +260,10 @@
     <PackageReference Include="System.Configuration.ConfigurationManager">
       <Version>9.0.0</Version>
     </PackageReference>
-    <PackageReference Include="System.DirectoryServices" Version="9.0.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
       <Version>6.1.0</Version>
     </PackageReference>
-    <PackageReference Include="System.Security.AccessControl">
-      <Version>6.0.1</Version>
-    </PackageReference>
     <PackageReference Include="System.Security.Permissions">
-      <Version>9.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Text.Encodings.Web">
       <Version>9.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
