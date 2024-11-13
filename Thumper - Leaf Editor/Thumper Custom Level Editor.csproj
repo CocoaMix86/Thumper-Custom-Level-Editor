@@ -40,6 +40,12 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+    <Page Remove="bin\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="image assets\thumper_level_editor.png" />
     <None Include="image assets\icon-calculator.png" />
     <None Include="image assets\icon-saveas.png" />
@@ -167,7 +173,6 @@
     <EmbeddedResource Include="audio assets\UI sounds\UIwindowclose.ogg" />
     <EmbeddedResource Include="audio assets\UI sounds\UIwindowopen.ogg" />
     <None Include="image assets\icon-info.png" />
-    <None Include="bin\Debug\templates\objects_defaultcolors.txt" />
     <None Include="image assets\D0.png" />
     <None Include="image assets\D1.png" />
     <None Include="image assets\D2.png" />
