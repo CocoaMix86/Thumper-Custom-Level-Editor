@@ -22,7 +22,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.InitializeTracks(masterLvlList, false);
 
             if (load != null)
-                LoadMaster(load, "");
+                LoadMaster(load, filepath);
             propertyGrid1.SelectedObject = _properties;
         }
         #endregion
@@ -516,11 +516,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (_configfile.Count > 0) {
                 dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_configfile[0]), "#.*", ""));
                 _properties.bpm = (decimal)_load["bpm"];
-                dynamic railcolor = (decimal)_load["rails_color"];
+                dynamic railcolor = _load["rails_color"];
                 _properties.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
-                dynamic railglowcolor = (decimal)_load["rails_glow_color"];
+                dynamic railglowcolor = _load["rails_glow_color"];
                 _properties.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
-                dynamic pathcolor = (decimal)_load["path_color"];
+                dynamic pathcolor = _load["path_color"];
                 _properties.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
             }
             else {

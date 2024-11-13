@@ -67,7 +67,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats { get { return TCLE.CalculateMasterRuntime("", parent); } }
+        public int beats { get { return TCLE.CalculateMasterRuntime(TCLE.WorkingFolder, parent); } }
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
