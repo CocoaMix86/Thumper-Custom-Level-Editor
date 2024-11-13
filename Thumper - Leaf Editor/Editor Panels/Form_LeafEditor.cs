@@ -14,10 +14,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_LeafEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        private TCLE _mainform { get; set; }
-        public Form_LeafEditor(TCLE form)
+        public Form_LeafEditor(dynamic load = null, string filepath = null)
         {
-            _mainform = form;
             InitializeComponent();
             LoadQuickValues();
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
@@ -631,9 +629,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if ((string)dropObjects.SelectedValue == "PLAY SAMPLE") {
                 label11.Text = "Samples";
-                _mainform.LvlReloadSamples();
+                TCLE.LvlReloadSamples();
                 dropTrackLane.DataSource = null;
-                dropTrackLane.DataSource = _mainform._lvlsamples.Select(x => x.obj_name).ToArray();
+                dropTrackLane.DataSource = TCLE._lvlsamples.Select(x => x.obj_name).ToArray();
                 dropTrackLane.SelectedIndex = -1;
             }
             else {
@@ -1331,7 +1329,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLeafObjRefresh_Click(object sender, EventArgs e)
         {
-            _mainform.ImportObjects();
+            ///TCLE.ImportObjects();
             TCLE.PlaySound("UIrefresh");
         }
 

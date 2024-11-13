@@ -17,18 +17,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_SampleEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        private TCLE _mainform { get; set; }
-        public Form_SampleEditor(TCLE form, string filetoload)
+        public Form_SampleEditor(dynamic load = null, string filepath = null)
         {
-            _mainform = form;
             InitializeComponent();
             sampleToolStrip.Renderer = new ToolStripOverride();
             InitializeSampleStuff();
             TCLE.InitializeTracks(sampleList, false);
-
-            ///load sample here
-            dynamic _load = TCLE.LoadFileLock(filetoload);
-            LoadSample(_load, filetoload);
         }
         #endregion
 

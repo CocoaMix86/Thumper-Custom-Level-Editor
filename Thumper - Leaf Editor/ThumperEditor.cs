@@ -508,11 +508,11 @@ namespace Thumper_Custom_Level_Editor
             Form_ProjectExplorer dockProject = new(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProject.Show(dockMain, DockState.DockRight);
 
-            Form_MasterEditor dockMaster = new(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_GateEditor dockGate = new(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_LvlEditor dockLvl = new(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_SampleEditor dockSample = new(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_LeafEditor dockLeaf = new(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_MasterEditor dockMaster = new() { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_GateEditor dockGate = new() { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_LvlEditor dockLvl = new() { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_SampleEditor dockSample = new() { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_LeafEditor dockLeaf = new() { DockAreas = DockAreas.Document | DockAreas.Float };
 
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);

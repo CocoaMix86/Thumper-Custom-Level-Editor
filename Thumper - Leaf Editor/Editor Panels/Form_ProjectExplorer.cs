@@ -582,7 +582,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            TCLE.OpenFile($@"{TCLE.WorkingFolder}\{selectedNodes[0].FullPath}");
+            TCLE.OpenFile($@"{Path.GetDirectoryName(TCLE.WorkingFolder)}\{selectedNodes[0].FullPath}");
         }
     }
 }

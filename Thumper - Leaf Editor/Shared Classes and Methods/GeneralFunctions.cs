@@ -408,14 +408,14 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public List<SampleData> _lvlsamples = new();
-        public void LvlReloadSamples()
+        public static List<SampleData> _lvlsamples = new();
+        public static void LvlReloadSamples()
         {
-            if (workingfolder == null)
+            if (WorkingFolder == null)
                 return;
             _lvlsamples.Clear();
             //find all samp_ files in the level folder
-            List<string> _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
+            List<string> _sampfiles = Directory.GetFiles(WorkingFolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
             //add default empty sample
             _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
             //iterate over each file
@@ -514,7 +514,7 @@ namespace Thumper_Custom_Level_Editor
             dynamic _load = LoadFileLock(filepath);
             string _type = _load["obj_type"];
             if (_type == "SequinMaster") {
-                Form_MasterEditor master = new();
+                Form_MasterEditor master = new(_load, filepath);
             }
         }
     }
