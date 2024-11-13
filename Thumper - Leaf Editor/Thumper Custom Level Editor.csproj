@@ -107,6 +107,14 @@
     <Compile Include="Editor Panels\Form_MasterEditor.Designer.cs">
       <DependentUpon>Form_MasterEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Other Forms\Beeble.cs" />
+    <Compile Include="Other Forms\Beeble.Designer.cs">
+      <DependentUpon>Beeble.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Other Forms\FileListBox.cs" />
+    <Compile Include="Other Forms\FileListBox.Designer.cs">
+      <DependentUpon>FileListBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Other Forms\FileNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +126,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Shared Classes and Methods\PropertyGrid Classes.cs" />
     <Compile Include="Shared Classes and Methods\SharedEventHandlers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,9 +176,7 @@
     <Compile Include="Utility Classes\CustomRenderer.cs" />
     <Compile Include="Utility Classes\SaveState.cs" />
     <Compile Include="Utility Classes\DropDownMenuScrollWheelHandler.cs" />
-    <Compile Include="Utility Classes\ToolStripEx.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Utility Classes\ToolStripEx.cs" />
     <Compile Include="Utility Classes\TreeViewEx.cs" />
     <EmbeddedResource Include="Editor Panels\Form_GateEditor.resx">
       <DependentUpon>Form_GateEditor.cs</DependentUpon>
@@ -192,9 +199,15 @@
     <EmbeddedResource Include="Other Forms\AboutThumperEditor.resx">
       <DependentUpon>AboutThumperEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\Beeble.resx">
+      <DependentUpon>Beeble.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Other Forms\CustomizeWorkspace.resx">
       <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other Forms\FileListBox.resx">
+      <DependentUpon>FileListBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Other Forms\ProjectProperties.resx">
       <DependentUpon>ProjectProperties.cs</DependentUpon>
