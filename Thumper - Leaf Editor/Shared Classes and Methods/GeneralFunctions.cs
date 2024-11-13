@@ -119,7 +119,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         ///Color elements based on set properties
-        private void ColorFormElements()
+        private static void ColorFormElements()
         {
             /*
             if (File.Exists($@"{AppLocation}\templates\UIcolorprefs.txt")) {
@@ -158,33 +158,6 @@ namespace Thumper_Custom_Level_Editor
             byte g = (byte)(color.G * amount + backColor.G * (1 - amount));
             byte b = (byte)(color.B * amount + backColor.B * (1 - amount));
             return Color.FromArgb(r, g, b);
-        }
-
-        private void ClearPanels(string panel = "all")
-        {
-            /*
-            //clear lists used for storing level data
-            if (panel is "all" or "leaf") {
-                _loadedleaf = null;
-                PanelEnableState(panelLeaf, false);
-            }
-            if (panel is "all" or "lvl") {
-                _loadedlvl = null;
-                PanelEnableState(panelLevel, false);
-            }
-            if (panel is "all" or "gate") {
-                _loadedgate = null;
-                PanelEnableState(panelGate, false);
-            }
-            if (panel is "all" or "master") {
-                _loadedmaster = null;
-                PanelEnableState(panelMaster, false);
-            }
-            if (panel is "all" or "samp") {
-                _loadedsample = null;
-                PanelEnableState(panelSample, false);
-            }
-            */
         }
 
         public static void PlaySound(string audiofile)
@@ -288,7 +261,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
 
-        public void PanelEnableState(Control panel, bool enablestate)
+        public static void PanelEnableState(Control panel, bool enablestate)
         {
             foreach (Control _c in panel.Controls.Cast<Control>().Where(x => x.GetType() != typeof(Label))) {
                 if (_c.Text != "titlebar")
@@ -318,7 +291,7 @@ namespace Thumper_Custom_Level_Editor
         public static void WriteFileLock(FileStream fs, JObject _save)
         {
             string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
-            using (StreamWriter sr = new StreamWriter(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
+            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
                 fs.SetLength(0);
                 sr.Write(tosave);
             }
@@ -331,8 +304,8 @@ namespace Thumper_Custom_Level_Editor
                 return null;
             ///reference:
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
-            using (FileStream fileStream = new FileStream(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            using (StreamReader textReader = new StreamReader(fileStream)) {
+            using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (StreamReader textReader = new(fileStream)) {
                 try {
                     _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
                 } catch (Exception) {
@@ -344,17 +317,16 @@ namespace Thumper_Custom_Level_Editor
             return _load;
         }
 
-        public void DeleteFileLock(string _selectedfilename, string filetype)
+        public static void DeleteFileLock(string _selectedfilename, string filetype)
         {
             if (lockedfiles.ContainsKey(_selectedfilename)) {
                 lockedfiles[_selectedfilename].Close();
                 lockedfiles.Remove(_selectedfilename);
-                ClearPanels(filetype);
             }
             File.Delete(_selectedfilename);
         }
 
-        public void ClearFileLock()
+        public static void ClearFileLock()
         {
             //clear previously locked files
             foreach (KeyValuePair<string, FileStream> i in lockedfiles) {
@@ -409,7 +381,7 @@ namespace Thumper_Custom_Level_Editor
         public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
         {
             // Get information about the source directory
-            DirectoryInfo dir = new DirectoryInfo(sourceDir);
+            DirectoryInfo dir = new(sourceDir);
 
             // Check if the source directory exists
             if (!dir.Exists)

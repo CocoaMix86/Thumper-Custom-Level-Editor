@@ -8,7 +8,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class Beeble : Form
     {
         static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin, Properties.Resources.beebleflesh, Properties.Resources.beebleuwu };
-        Random rng = new Random();
+        Random rng = new();
 
         public Beeble()
         {

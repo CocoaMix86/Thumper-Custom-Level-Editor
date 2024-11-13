@@ -531,13 +531,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void ColorButton(Control control, Color color)
+        public static void ColorButton(Control control, Color color)
         {
             control.BackColor = color;
             control.ForeColor = Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B); ;
         }
 
-        public void MasterLoadLvl(string path)
+        public static void MasterLoadLvl(string path)
         {
             if ((/*!_mainform._savelvl && */MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savelvl*/) {
                 if (!path.Contains(".lvl"))

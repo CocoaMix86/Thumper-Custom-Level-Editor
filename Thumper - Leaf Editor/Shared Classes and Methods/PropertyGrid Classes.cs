@@ -86,7 +86,7 @@ namespace Thumper_Custom_Level_Editor
             IWindowsFormsEditorService svc = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
             string foo = value as string;
             if (svc != null && foo != null) {
-                using (FileListBox form = new FileListBox(TCLE.lvlsinworkfolder)) {
+                using (FileListBox form = new(TCLE.lvlsinworkfolder)) {
                     form.StartPosition = FormStartPosition.Manual;
                     form.Location = new Point(Cursor.Position.X - 100, Cursor.Position.Y - 50);
                     if (svc.ShowDialog(form) == DialogResult.OK) {

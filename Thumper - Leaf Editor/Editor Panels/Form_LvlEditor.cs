@@ -1021,7 +1021,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Import raw text from rich text box to selected row
-        public void LvlTrackRawImport(DataGridViewRow r, JObject _rawdata)
+        public static void LvlTrackRawImport(DataGridViewRow r, JObject _rawdata)
         {
             //_rawdata contains a list of all data points. By getting Properties() of it,
             //each point becomes its own index

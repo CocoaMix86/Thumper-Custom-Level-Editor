@@ -19,7 +19,7 @@ namespace Thumper_Custom_Level_Editor
 
 		#region Assembly Attribute Accessors
 
-		public string AssemblyTitle
+		public static string AssemblyTitle
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
@@ -33,14 +33,14 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		public string AssemblyVersion
+		public static string AssemblyVersion
 		{
 			get {
 				return Assembly.GetExecutingAssembly().GetName().Version.ToString();
 			}
 		}
 
-		public string AssemblyDescription
+		public static string AssemblyDescription
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
@@ -48,7 +48,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-		public string AssemblyProduct
+		public static string AssemblyProduct
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
@@ -56,7 +56,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-		public string AssemblyCopyright
+		public static string AssemblyCopyright
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
@@ -64,7 +64,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-		public string AssemblyCompany
+		public static string AssemblyCompany
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);

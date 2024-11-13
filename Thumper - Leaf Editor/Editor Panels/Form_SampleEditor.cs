@@ -573,7 +573,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sampleList.Rows[_index].Cells[0].Selected = true;
         }
 
-        public uint Hash32(string s)
+        public static uint Hash32(string s)
         {
             //this hashes stuff. Don't know why it does it this why.
             //this is ripped directly from the game's code

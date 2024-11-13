@@ -46,7 +46,7 @@ namespace Thumper_Custom_Level_Editor
                     System.Reflection.BindingFlags.NonPublic
                     | System.Reflection.BindingFlags.Instance));
 
-        private void handleDelta(ToolStripDropDown ts, int delta)
+        private static void handleDelta(ToolStripDropDown ts, int delta)
         {
             if (ts.Items.Count == 0)
                 return;

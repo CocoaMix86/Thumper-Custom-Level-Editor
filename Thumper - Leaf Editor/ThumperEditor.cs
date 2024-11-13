@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Shell;
-///using Cyotek.Windows.Forms;
+using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -18,7 +18,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class TCLE : Form
     {
         #region Variables
-        public static ColorDialog colorDialogNew = new ColorDialog(); //{ BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
+        public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         public static dynamic projectjson;
@@ -71,8 +71,6 @@ namespace Thumper_Custom_Level_Editor
                     WorkingFolder = value;
                     toolstripLevelName.Text = projectjson["level_name"];
                     toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
-                    //since a new level folder is loading, all panels need to clear their data so we;re not showing data from other levels
-                    ClearPanels();
                     //populate lvlsinworkfolder with all .lvl files in the project
                     //this is needed for some specific dropdowns.
                     UpdateLevelLists();
@@ -108,7 +106,7 @@ namespace Thumper_Custom_Level_Editor
         public FileStream filelocklevel;
         public static Dictionary<string, FileStream> lockedfiles = new();
         public Dictionary<string, Form> openfiles = new();
-        public static Beeble beeble = new Beeble();
+        public static Beeble beeble = new();
         #endregion
 
         #region Form Construction
@@ -203,7 +201,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.firstrun = false;
             Properties.Settings.Default.Save();
         }
-        private void JumpListUpdate()
+        private static void JumpListUpdate()
         {
             if (Properties.Settings.Default.Recentfiles == null)
                 return;
@@ -243,7 +241,7 @@ namespace Thumper_Custom_Level_Editor
             //
             Properties.Settings.Default.Save();
         }
-        private void SetKeyBinds()
+        private static void SetKeyBinds()
         {
             if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
                 Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
@@ -507,14 +505,14 @@ namespace Thumper_Custom_Level_Editor
             }
             workingfolder = txtFilePath.Text;
 
-            Form_ProjectExplorer dockProject = new Form_ProjectExplorer(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            Form_ProjectExplorer dockProject = new(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProject.Show(dockMain, DockState.DockRight);
 
-            Form_MasterEditor dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_GateEditor dockGate = new Form_GateEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_LvlEditor dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_SampleEditor dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_LeafEditor dockLeaf = new Form_LeafEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_MasterEditor dockMaster = new(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_GateEditor dockGate = new(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_LvlEditor dockLvl = new(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_SampleEditor dockSample = new(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_LeafEditor dockLeaf = new(this) { DockAreas = DockAreas.Document | DockAreas.Float };
 
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);

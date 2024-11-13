@@ -76,7 +76,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             ///BuildTree is a recursive function.
             //the very first node every time this function is called is a folder.
-            TreeNode folder = new TreeNode() {
+            TreeNode folder = new() {
                 Text = directoryInfo.Name,
                 Name = directoryInfo.Name,
                 ImageKey = "folder",
@@ -92,7 +92,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //add each file inside the folder to the tree
             foreach (FileInfo file in directoryInfo.GetFiles()) {
-                TreeNode _tn = new TreeNode() {
+                TreeNode _tn = new() {
                     Text = file.Name,
                     Name = file.Name,
                     ImageKey = file.Name.Split('_')[0],
@@ -557,7 +557,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{_node.FullPath}";
         }
 
-        private bool IsAChildOfOtherNodes(TreeNode nodetofind, TreeNode nodetosearch)
+        private static bool IsAChildOfOtherNodes(TreeNode nodetofind, TreeNode nodetosearch)
         {
             if (nodetosearch.Nodes.Contains(nodetofind))
                 return true;

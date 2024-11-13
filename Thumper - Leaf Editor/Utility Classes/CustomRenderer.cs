@@ -7,7 +7,7 @@ namespace Thumper_Custom_Level_Editor
     {
         public override Color MenuBorder { get { return Color.FromArgb(112, 112, 112); } }
         public override Color MenuItemBorder { get { return Color.Red; } }
-        public Color MenuItemEnabledBorder { get { return Color.FromArgb(112, 112, 112); } }
+        public static Color MenuItemEnabledBorder { get { return Color.FromArgb(112, 112, 112); } }
         public override Color ToolStripDropDownBackground { get { return Color.FromArgb(46, 46, 46); } }
 
         public override Color ImageMarginGradientBegin { get { return Color.FromArgb(46, 46, 46); } }

@@ -52,7 +52,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         TCLE.lockedfiles.Remove(loadedleaf);
                     }
                     loadedleaf = value;
-                    _mainform.PanelEnableState(panelLeaf, true);
+                    TCLE.PanelEnableState(panelLeaf, true);
 
                     if (!File.Exists(loadedleaf)) {
                         File.WriteAllText(loadedleaf, "");
@@ -1463,7 +1463,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
-        public void SaveLeafColors(bool enabled, Color color)
+        public static void SaveLeafColors(bool enabled, Color color)
         {
             /*
             btnSaveLeaf.Enabled = enabled;
@@ -1596,7 +1596,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check for template or regular file
             if (filepath == "template") {
                 _loadedleaf = null;
-                _mainform.PanelEnableState(panelLeaf, true);
+                TCLE.PanelEnableState(panelLeaf, true);
             }
             else {
                 TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
@@ -1897,7 +1897,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public static void RandomizeRowValues(DataGridViewRow dgvr, Sequencer_Object _seqobj)
         {
-            Random rng = new Random();
+            Random rng = new();
             int rngchance;
             int rnglimit;
             int randomtype = 0;
