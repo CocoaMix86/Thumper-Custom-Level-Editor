@@ -77,11 +77,11 @@ namespace Thumper_Custom_Level_Editor
 
     class LvlPicker : UITypeEditor
     {
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext? context)
         {
             return UITypeEditorEditStyle.Modal;
         }
-        public override object EditValue(ITypeDescriptorContext context, System.IServiceProvider provider, object value)
+        public override object EditValue(ITypeDescriptorContext? context, System.IServiceProvider? provider, object? value)
         {
             IWindowsFormsEditorService svc = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
             string foo = value as string;
