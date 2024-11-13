@@ -1,4 +1,4 @@
-﻿using Cyotek.Windows.Forms;
+﻿///using Cyotek.Windows.Forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,7 +10,7 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
-        ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
+        ColorDialog colorDialogNew = new ColorDialog(); //{ BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
         string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
         public HashSet<Object_Params> _objects = new();
         private Dictionary<string, string> objectcolors = new();

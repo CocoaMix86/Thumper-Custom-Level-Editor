@@ -102,7 +102,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             else {
-                foreach (var s in senderComboBox.Items) {
+                foreach (object? s in senderComboBox.Items) {
                     newWidth = (int)g.MeasureString(s.ToString(), font).Width;
                     if (width < newWidth) {
                         width = newWidth;

@@ -409,7 +409,7 @@ namespace Thumper_Custom_Level_Editor
         public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
         {
             // Get information about the source directory
-            var dir = new DirectoryInfo(sourceDir);
+            DirectoryInfo dir = new DirectoryInfo(sourceDir);
 
             // Check if the source directory exists
             if (!dir.Exists)

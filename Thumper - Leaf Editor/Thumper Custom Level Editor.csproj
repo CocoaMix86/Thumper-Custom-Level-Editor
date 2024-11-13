@@ -1,23 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\ILMerge.3.0.29\build\ILMerge.props" Condition="Exists('..\packages\ILMerge.3.0.29\build\ILMerge.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7FE43615-A5C0-4400-B62C-AFBBD231B911}</ProjectGuid>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Thumper_Custom_Level_Editor</RootNamespace>
-    <AssemblyName>Thumper Custom Level Editor</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>10.0</LangVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -33,29 +21,13 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>thumper_level_editor2.ico</ApplicationIcon>
@@ -64,183 +36,9 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Editor Panels\Form_GateEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\Form_GateEditor.Designer.cs">
-      <DependentUpon>Form_GateEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editor Panels\Form_LvlEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\Form_LvlEditor.Designer.cs">
-      <DependentUpon>Form_LvlEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editor Panels\Form_LeafEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\Form_LeafEditor.Designer.cs">
-      <DependentUpon>Form_LeafEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editor Panels\Form_ProjectExplorer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\Form_ProjectExplorer.Designer.cs">
-      <DependentUpon>Form_ProjectExplorer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editor Panels\Form_SampleEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\Form_SampleEditor.Designer.cs">
-      <DependentUpon>Form_SampleEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editor Panels\Form_MasterEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\Form_MasterEditor.Designer.cs">
-      <DependentUpon>Form_MasterEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Other Forms\Beeble.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\Beeble.Designer.cs">
-      <DependentUpon>Beeble.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Other Forms\FileListBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\FileListBox.Designer.cs">
-      <DependentUpon>FileListBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Other Forms\FileNameDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\FileNameDialog.Designer.cs">
-      <DependentUpon>FileNameDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Shared Classes and Methods\PropertyGrid Classes.cs" />
-    <Compile Include="Shared Classes and Methods\SharedEventHandlers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Shared Classes and Methods\GeneralFunctions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor Panels\RecentFiles.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\AboutThumperEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\AboutThumperEditor.Designer.cs">
-      <DependentUpon>AboutThumperEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utility Classes\AudioPlaybackEngine.cs" />
-    <Compile Include="Other Forms\CustomizeWorkspace.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\CustomizeWorkspace.Designer.cs">
-      <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Other Forms\ProjectProperties.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\ProjectProperties.Designer.cs">
-      <DependentUpon>ProjectProperties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Other Forms\ImageMessageBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Other Forms\ImageMessageBox.Designer.cs">
-      <DependentUpon>ImageMessageBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Shared Classes and Methods\DataClasses.cs" />
-    <Compile Include="ThumperEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ThumperEditor.Designer.cs">
-      <DependentUpon>ThumperEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility Classes\Leaf Playback.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Utility Classes\CustomRenderer.cs" />
-    <Compile Include="Utility Classes\SaveState.cs" />
-    <Compile Include="Utility Classes\DropDownMenuScrollWheelHandler.cs" />
-    <Compile Include="Utility Classes\ToolStripEx.cs" />
-    <Compile Include="Utility Classes\TreeViewEx.cs" />
-    <EmbeddedResource Include="Editor Panels\Form_GateEditor.resx">
-      <DependentUpon>Form_GateEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor Panels\Form_LvlEditor.resx">
-      <DependentUpon>Form_LvlEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor Panels\Form_LeafEditor.resx">
-      <DependentUpon>Form_LeafEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor Panels\Form_ProjectExplorer.resx">
-      <DependentUpon>Form_ProjectExplorer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor Panels\Form_SampleEditor.resx">
-      <DependentUpon>Form_SampleEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor Panels\Form_MasterEditor.resx">
-      <DependentUpon>Form_MasterEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\AboutThumperEditor.resx">
-      <DependentUpon>AboutThumperEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\Beeble.resx">
-      <DependentUpon>Beeble.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\CustomizeWorkspace.resx">
-      <DependentUpon>CustomizeWorkspace.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\FileListBox.resx">
-      <DependentUpon>FileListBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\ProjectProperties.resx">
-      <DependentUpon>ProjectProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Other Forms\ImageMessageBox.resx">
-      <DependentUpon>ImageMessageBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThumperEditor.resx">
-      <DependentUpon>ThumperEditor.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include=".editorconfig" />
-    <None Include="app.config" />
-    <None Include="audio assets\UI sounds\UIbeetleclick1.ogg" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
   <ItemGroup>
     <None Include="image assets\thumper_level_editor.png" />
     <None Include="image assets\icon-calculator.png" />
@@ -281,10 +79,7 @@
     <Content Include="temp.txt" />
     <Content Include="thumper_level_editor2.ico" />
     <None Include="image assets\railcolorhelp.png" />
-    <None Include="text assets\leaf_singletrack.txt" />
-    <None Include="text assets\leaf_multitrack.txt" />
     <None Include="image assets\difficultyhelp.png" />
-    <None Include="text assets\leaf_pyramid_outro.txt" />
     <None Include="image assets\exit.png" />
     <None Include="image assets\gate.png" />
     <None Include="image assets\icon_interp.png" />
@@ -371,16 +166,8 @@
     <EmbeddedResource Include="audio assets\UI sounds\UItunnelremove.ogg" />
     <EmbeddedResource Include="audio assets\UI sounds\UIwindowclose.ogg" />
     <EmbeddedResource Include="audio assets\UI sounds\UIwindowopen.ogg" />
-    <None Include="audio assets\UI sounds\UIbeetleclick5.ogg" />
-    <None Include="audio assets\UI sounds\UIbeetleclick6.ogg" />
-    <None Include="audio assets\UI sounds\UIbeetleclick7.ogg" />
-    <None Include="audio assets\UI sounds\UIbeetleclick8.ogg" />
-    <None Include="audio assets\UI sounds\UIbeetleclickGOLD.ogg" />
-    <None Include="audio assets\UI sounds\UIdock.ogg" />
-    <None Include="audio assets\UI sounds\UIdockun.ogg" />
     <None Include="image assets\icon-info.png" />
     <None Include="bin\Debug\templates\objects_defaultcolors.txt" />
-    <None Include="text assets\objects_defaultcolors.txt" />
     <None Include="image assets\D0.png" />
     <None Include="image assets\D1.png" />
     <None Include="image assets\D2.png" />
@@ -390,56 +177,18 @@
     <None Include="image assets\D6.png" />
     <None Include="image assets\D7.png" />
     <None Include="image assets\icon-explorer.png" />
-    <None Include="text assets\leaf_multitrack_new.txt" />
-    <None Include="text assets\leaf_multitrack_ring&amp;bar.txt" />
-    <None Include="text assets\leaf_singletrack_new.txt" />
     <None Include="image assets\icon-random.png" />
     <None Include="image assets\icon-randomize.png" />
     <None Include="image assets\icon-check-32.png" />
     <None Include="image assets\icon-check-16.png" />
-    <None Include="audio assets\coin_collect.wav" />
-    <None Include="audio assets\ducker_ring_approach.wav" />
-    <None Include="audio assets\grindable_birth2.wav" />
-    <None Include="audio assets\hammer_two_handed_hit.wav" />
-    <None Include="audio assets\high_jump.wav" />
-    <None Include="audio assets\jumper_approach.wav" />
-    <None Include="audio assets\thump_birth1.wav" />
-    <None Include="audio assets\thump1b.wav" />
-    <None Include="audio assets\turn_birth.wav" />
-    <None Include="audio assets\turn_birth_lft.wav" />
-    <None Include="audio assets\turn_hit_perfect2.wav" />
-    <None Include="audio assets\turn_long_lft.wav" />
     <None Include="text assets\leaf_singletrack1.txt" />
-    <None Include="text assets\audionames.txt" />
-    <None Include="audio assets\silence.wav" />
     <None Include="image assets\icon-undo.png" />
-    <None Include="audio assets\UI sounds\UIrevertnew.ogg" />
-    <None Include="audio assets\UI sounds\UIinterpolatewindow.ogg" />
-    <None Include="audio assets\UI sounds\UIaddrandom.ogg" />
     <None Include="image assets\icon-editdetails.png" />
     <None Include="image assets\icon-clear-filters.png" />
     <Content Include="text assets\paths.txt" />
-    <None Include="text assets\samples.txt" />
-    <None Include="text assets\samp_default.txt" />
-    <None Include="text assets\spn_default.txt" />
-    <None Include="text assets\samp_level2_340bpm.txt" />
-    <None Include="text assets\samp_level3_360bpm.txt" />
-    <None Include="text assets\samp_level4_380bpm.txt" />
-    <None Include="text assets\samp_level5_400bpm.txt" />
-    <None Include="text assets\samp_level6_420bpm.txt" />
-    <None Include="text assets\samp_level7_440bpm.txt" />
-    <None Include="text assets\samp_level8_460bpm.txt" />
-    <None Include="text assets\samp_level9_480bpm.txt" />
-    <None Include="text assets\samp_dissonant.txt" />
-    <None Include="text assets\samp_globaldrones.txt" />
-    <None Include="text assets\samp_level1_320bpm.txt" />
-    <None Include="text assets\samp_misc.txt" />
-    <None Include="text assets\samp_rests.txt" />
     <Content Include="text assets\track objects.txt" />
-    <None Include="text assets\xfm_default.txt" />
     <Content Include="image assets\ThumperIconEditor.ico" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
@@ -452,39 +201,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Reference Include="CustomMarshalers" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.DirectoryServices" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Web.RegularExpressions" />
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="WindowsFormsIntegration" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Costura.Fody">
       <Version>5.7.0</Version>
       <IncludeAssets>runtime; compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Cyotek.Windows.Forms.ColorPicker">
-      <Version>1.7.2</Version>
     </PackageReference>
     <PackageReference Include="DockPanelSuite">
       <Version>3.1.1</Version>
@@ -513,20 +234,12 @@
     <PackageReference Include="Microsoft.Build.Utilities.Core">
       <Version>17.12.6</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.IO.Redist">
-      <Version>6.1.0</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.NET.StringTools">
       <Version>17.12.6</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualBasic">
-      <Version>10.3.0</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Setup.Configuration.Interop">
       <Version>3.12.2149</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Win32.Registry">
-      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="NAudio">
       <Version>2.2.1</Version>
@@ -561,29 +274,15 @@
     <PackageReference Include="OggVorbisEncoder">
       <Version>1.2.2</Version>
     </PackageReference>
-    <PackageReference Include="System.Buffers">
-      <Version>4.6.0</Version>
-    </PackageReference>
     <PackageReference Include="System.Collections.Immutable">
       <Version>9.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager">
       <Version>9.0.0</Version>
     </PackageReference>
-    <PackageReference Include="System.Diagnostics.Debug">
-      <Version>4.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.6.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Numerics.Vectors">
-      <Version>4.6.0</Version>
-    </PackageReference>
+    <PackageReference Include="System.DirectoryServices" Version="9.0.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
       <Version>6.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation">
-      <Version>4.3.0</Version>
     </PackageReference>
     <PackageReference Include="System.Security.AccessControl">
       <Version>6.0.1</Version>
@@ -591,20 +290,11 @@
     <PackageReference Include="System.Security.Permissions">
       <Version>9.0.0</Version>
     </PackageReference>
-    <PackageReference Include="System.Security.Principal.Windows">
-      <Version>5.0.0</Version>
-    </PackageReference>
     <PackageReference Include="System.Text.Encodings.Web">
       <Version>9.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>9.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Threading.Tasks.Extensions">
-      <Version>4.6.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.ValueTuple">
-      <Version>4.5.0</Version>
     </PackageReference>
     <PackageReference Include="Windows7APICodePack-Core">
       <Version>1.1.0</Version>
@@ -613,14 +303,10 @@
       <Version>1.1.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Utility Classes\PictureBoxEx.cs" />
+  </ItemGroup>
   <Target Name="ILMerge">
-    <!-- the ILMergePath property points to the location of ILMerge.exe console application -->
     <Exec Command="$(ILMergeConsolePath) /out:'Thumper Custom Level Editor.exe' 'Thumper Custom Level Editor.exe' 'Newtonsoft.Json.dll'" />
   </Target>
-  <!-- Target Name="ILRepack" AfterTargets="Build">
-    <PropertyGroup>
-      <WorkingDirectory>$(MSBuildThisFileDirectory)bin\$(Configuration)\$(TargetFramework)</WorkingDirectory>
-    </PropertyGroup>
-    <ILRepack OutputType="$(OutputType)" MainAssembly="$(AssemblyName).exe" OutputAssembly="$(AssemblyName).exe" InputAssemblies="$(WorkingDirectory)\*.dll" WilcardInputAssemblies="true" WorkingDirectory="$(WorkingDirectory)" />
-  </Target -->
 </Project>

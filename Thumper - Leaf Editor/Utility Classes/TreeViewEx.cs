@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor
             base.WndProc(ref m);
 
             if (m.Msg == WM_REFLECT_NOTIFY) {
-                var st = Marshal.PtrToStructure<NMHDR>(m.LParam);
+                NMHDR st = Marshal.PtrToStructure<NMHDR>(m.LParam);
 
                 if (st.code == TVN_BEGINLABELEDITW) {
                     IntPtr editPtr = SendMessage(Handle, TVM_GETEDITCONTROL, IntPtr.Zero, IntPtr.Zero);

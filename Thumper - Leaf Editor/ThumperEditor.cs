@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Shell;
-using Cyotek.Windows.Forms;
+///using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -18,7 +18,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class TCLE : Form
     {
         #region Variables
-        public static ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
+        public static ColorDialog colorDialogNew = new ColorDialog(); //{ BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         public static dynamic projectjson;
@@ -329,7 +329,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileSave_Click(object sender, EventArgs e)
         {
-            var _activedoc = dockMain.ActiveDocument;
+            IDockContent _activedoc = dockMain.ActiveDocument;
             if (_activedoc.GetType() == typeof(Form_GateEditor)) {
                 ((Form_GateEditor)_activedoc).Save();
             }
@@ -507,14 +507,14 @@ namespace Thumper_Custom_Level_Editor
             }
             workingfolder = txtFilePath.Text;
 
-            var dockProject = new Form_ProjectExplorer(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            Form_ProjectExplorer dockProject = new Form_ProjectExplorer(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProject.Show(dockMain, DockState.DockRight);
 
-            var dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            var dockGate = new Form_GateEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            var dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
-            var dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
-            var dockLeaf = new Form_LeafEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_MasterEditor dockMaster = new Form_MasterEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_GateEditor dockGate = new Form_GateEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_LvlEditor dockLvl = new Form_LvlEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_SampleEditor dockSample = new Form_SampleEditor(this, workingfolder) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_LeafEditor dockLeaf = new Form_LeafEditor(this) { DockAreas = DockAreas.Document | DockAreas.Float };
 
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);

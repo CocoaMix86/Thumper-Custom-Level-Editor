@@ -66,6 +66,12 @@ csharp_style_var_for_built_in_types = false:suggestion
 csharp_style_var_when_type_is_apparent = false:suggestion
 csharp_style_var_elsewhere = false:suggestion
 
+# CA1416: Validate platform compatibility
+dotnet_diagnostic.CA1416.severity = none
+
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 
