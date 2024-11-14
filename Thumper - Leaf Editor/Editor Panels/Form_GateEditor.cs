@@ -135,7 +135,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //gateLvlList.Rows[_gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {_gatelvls.IndexOf(_lvl) + 1}";
             }
             gateLvlList.RowEnter += gateLvlList_RowEnter;
-            TCLE.HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\lvl_{x.Cells[1].Value}.txt").ToList());
+            ///TCLE.HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\lvl_{x.Cells[1].Value}.txt").ToList());
             //set selected index. Mainly used when moving items
             ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
             //enable certain buttons if there are enough items for them

@@ -326,7 +326,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
             }
             lvlLeafList.RowEnter += lvlLeafList_RowEnter;
-            TCLE.HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\leaf_{x.Cells[1].Value}.txt").ToList());
+            ///TCLE.HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\leaf_{x.Cells[1].Value}.txt").ToList());
 
 
             //enable certain buttons if there are enough items for them

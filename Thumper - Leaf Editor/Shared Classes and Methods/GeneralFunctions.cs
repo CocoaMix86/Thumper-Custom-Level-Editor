@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Reflection;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using System.Runtime.CompilerServices;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -361,21 +362,23 @@ namespace Thumper_Custom_Level_Editor
 
             return filepath;
         }
-
+        /*
         public static void HighlightMissingFile(DataGridView dgv, List<string> filelist)
         {
+            List<dynamic> files = Directory.GetFiles(TCLE.WorkingFolder, "*.*", SearchOption.AllDirectories);
             foreach (DataGridViewRow dgvr in dgv.Rows) {
-                if (!File.Exists(filelist[dgvr.Index])) {
-                    dgvr.DefaultCellStyle.BackColor = Color.Maroon;
-                    dgvr.DefaultCellStyle.SelectionBackColor = Color.Gray;
-                }
-                else {
+                string filename = $"{dgvr.Cells[1].Value.ToString()}.txt";
+                if (Directory.GetFiles(TCLE.WorkingFolder, $"{dgvr.Cells[1].Value.ToString()}.txt", SearchOption.AllDirectories).Any()) { 
                     dgvr.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
                     dgvr.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
                 }
+                else {
+                    dgvr.DefaultCellStyle.BackColor = Color.Maroon;
+                    dgvr.DefaultCellStyle.SelectionBackColor = Color.Gray;
+                }
             }
         }
-
+        */
         ///
         ///https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
         public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
@@ -460,9 +463,10 @@ namespace Thumper_Custom_Level_Editor
             foreach (MasterLvlData _masterlvl in master._masterlvls) {
                 //this section handles lvl
                 if (_masterlvl.type == "lvl") {
-                    string file = Directory.GetFiles(workingfolder, $"lvl_{_masterlvl.name}.txt", SearchOption.AllDirectories).First();
+                    string file = Directory.GetFiles(workingfolder, $"lvl_{_masterlvl.name}.txt", SearchOption.AllDirectories).FirstOrDefault();
                     //load the lvl and then loop through its leafs to get beat counts
-                    _beatcount += LoadLvlGetBeatCounts(file);
+                    if (file != null)
+                        _beatcount += LoadLvlGetBeatCounts(file);
                 }
                 //this section handles gate
                 else {
@@ -509,12 +513,13 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
         }
 
-        public static void OpenFile(string filepath)
+        public static void OpenFile(TCLE form, string filepath)
         {
             dynamic _load = LoadFileLock(filepath);
             string _type = _load["obj_type"];
             if (_type == "SequinMaster") {
                 Form_MasterEditor master = new(_load, filepath);
+                master.Show(form.dockMain, DockState.Document);
             }
         }
     }

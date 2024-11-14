@@ -18,6 +18,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_MasterEditor(dynamic load = null, string filepath = null)
         {
             InitializeComponent();
+            InitializeMasterStuff();
             masterToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(masterLvlList, false);
 
@@ -150,13 +151,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 int _in = e.NewStartingIndex;
                 //detect if lvl or a gate. If it's a gate, the lvlname won't be set
-                if (!String.IsNullOrEmpty(_masterlvls[_in].lvlname) && _masterlvls[_in].lvlname != "<none>") {
-                    int idx = _masterlvls[_in].lvlname.LastIndexOf('.');
-                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.editor_lvl, _masterlvls[_in].lvlname[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+                if (_masterlvls[_in].type == "lvl") {
+                    //int idx = _masterlvls[_in].lvlname.LastIndexOf('.');
+                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.editor_lvl, _masterlvls[_in].lvlname, _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
                 }
                 else {
-                    int idx = _masterlvls[_in].gatename.LastIndexOf('.');
-                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.editor_gate, _masterlvls[_in].gatename[..idx], _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
+                    //int idx = _masterlvls[_in].gatename.LastIndexOf('.');
+                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.editor_gate, _masterlvls[_in].gatename, _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
                 }
             }
             //if action REMOVE, remove row from the master DGV
@@ -165,7 +166,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             masterLvlList.RowEnter += masterLvlList_RowEnter;
-            TCLE.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\{(_masterlvls[x.Index].lvlname != "" ? "lvl" : "gate")}_{x.Cells[1].Value}.txt").ToList());
+            //TCLE.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\{(_masterlvls[x.Index].lvlname != "" ? "lvl" : "gate")}_{x.Cells[1].Value}.txt").ToList());
+            ///TCLE.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => (_masterlvls[x.Index].name)).ToList());
             //set selected index. Mainly used when moving items
             ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
             //enable certain buttons if there are enough items for them
