@@ -68,9 +68,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// EVENTS ///
         ///         ///
 
-        /// DGV MASTERLVLLIST
-        //Row Enter (load the selected lvl)
-
+        /// DGV MASTERLVLLIS
         private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //if not selecting the file column, return and do nothing
@@ -82,9 +80,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridMaster.ExpandAllGridItems();
             propertyGridMaster.Refresh();
         }
-        private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-        }
+
         //Cell value changed (for checkboxes)
         private void masterLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -100,7 +96,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            masterLvlList.RowEnter -= masterLvlList_RowEnter;
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 masterLvlList.RowCount = 0;
             }
@@ -122,8 +117,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 masterLvlList.Rows.RemoveAt(e.OldStartingIndex);
             }
-
-            masterLvlList.RowEnter += masterLvlList_RowEnter;
             //TCLE.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\{(_masterlvls[x.Index].lvlname != "" ? "lvl" : "gate")}_{x.Cells[1].Value}.txt").ToList());
             ///TCLE.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => (_masterlvls[x.Index].name)).ToList());
             //set selected index. Mainly used when moving items
