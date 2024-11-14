@@ -32,6 +32,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 CreateTreeView();
             }
         }
+        public void LoadProject(string _projectfolder)
+        {
+            projectfolder = new DirectoryInfo(_projectfolder);
+            CreateTreeView();
+        }
         #endregion
         #region Variables
         bool cutfile;

@@ -110,6 +110,7 @@ namespace Thumper_Custom_Level_Editor
         #endregion
 
         #region Form Construction
+        Form_ProjectExplorer dockProject;
         public TCLE(string LevelFromArg)
         {
             InitializeComponent();
@@ -166,7 +167,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
 
-            Form_ProjectExplorer dockProject = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            dockProject = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProject.Show(dockMain, DockState.DockRight);
         }
         #endregion
@@ -493,6 +494,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             workingfolder = txtFilePath.Text;
+            dockProject.LoadProject(WorkingFolder);
 
             Form_MasterEditor dockMaster = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_GateEditor dockGate = new() { DockAreas = DockAreas.Document | DockAreas.Float };
