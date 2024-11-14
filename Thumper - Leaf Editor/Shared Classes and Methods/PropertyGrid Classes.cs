@@ -73,6 +73,12 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
         public TimeSpan runtime { get { return  TimeSpan.FromMinutes(beats / (double)bpm); } }
+
+        [CategoryAttribute("Sublevel Options")]
+        [DisplayName("Sublevel")]
+        [Description("")]
+        [TypeConverterAttribute(typeof(ExpandableObjectConverter))]
+        public MasterLvlData sublevel { get; set; }
     }
 
     class LvlPicker : UITypeEditor

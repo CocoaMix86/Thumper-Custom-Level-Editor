@@ -78,8 +78,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
-
-            propertyGridSublevel.SelectedObject = _masterlvls[e.RowIndex];
+            _properties.sublevel = _masterlvls[e.RowIndex];
+            propertyGridMaster.ExpandAllGridItems();
+            propertyGridMaster.Refresh();
         }
         private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -135,29 +136,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //set lvl save flag to false
             SaveMaster(false);
-        }
-        ///Other dropdowns on Master Editor
-        private void dropMasterIntro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-        private void dropMasterCheck_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-        private void NUD_ConfigBPM_ValueChanged(object sender, EventArgs e) => SaveMaster(false);
-        /// DROP-REST LEVEL Update
-        private void dropMasterLvlRest_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try {
-                _masterlvls[masterLvlList.CurrentRow.Index].rest = dropMasterLvlRest.Text;
-                btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
-                //set lvl save flag to false
-                SaveMaster(false);
-            }
-            catch (NullReferenceException) { }
-        }
-        /// DROP-CHECKPOINT LEADER LEVEL Update
-        private void dropMasterLvlLeader_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
 
         private void masternewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -410,10 +388,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             ///_mainform.toolstripMasterNew.PerformClick();
         }
-        //these all load a lvl
-        private void btnMasterOpenRest_Click(object sender, EventArgs e) => MasterLoadLvl(dropMasterLvlRest.SelectedItem.ToString());
-
-        private void btnMasterRuntime_Click(object sender, EventArgs e) => TCLE.CalculateMasterRuntime(TCLE.WorkingFolder, this);
 
         #endregion
 

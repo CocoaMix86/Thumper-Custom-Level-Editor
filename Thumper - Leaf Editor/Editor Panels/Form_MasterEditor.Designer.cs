@@ -48,7 +48,6 @@
             this.propertyGridMaster = new PropertyGrid();
             this.lblConfigColorHelp = new Label();
             this.splitContainer1 = new SplitContainer();
-            this.propertyGridSublevel = new PropertyGrid();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -247,7 +246,7 @@
             this.propertyGridMaster.CategoryForeColor = Color.White;
             this.propertyGridMaster.CategorySplitterColor = Color.FromArgb(46, 46, 46);
             this.propertyGridMaster.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
-            this.propertyGridMaster.Dock = DockStyle.Top;
+            this.propertyGridMaster.Dock = DockStyle.Fill;
             this.propertyGridMaster.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.propertyGridMaster.HelpBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridMaster.HelpBorderColor = Color.FromArgb(61, 61, 61);
@@ -260,7 +259,7 @@
             this.propertyGridMaster.RightToLeft = RightToLeft.No;
             this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridMaster.Size = new Size(348, 283);
+            this.propertyGridMaster.Size = new Size(348, 519);
             this.propertyGridMaster.TabIndex = 147;
             this.propertyGridMaster.ToolbarVisible = false;
             this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -299,38 +298,11 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.propertyGridSublevel);
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
             this.splitContainer1.Size = new Size(653, 519);
             this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
-            // 
-            // propertyGridSublevel
-            // 
-            this.propertyGridSublevel.BackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridSublevel.CategoryForeColor = Color.White;
-            this.propertyGridSublevel.CategorySplitterColor = Color.FromArgb(46, 46, 46);
-            this.propertyGridSublevel.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
-            this.propertyGridSublevel.Dock = DockStyle.Top;
-            this.propertyGridSublevel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.propertyGridSublevel.HelpBackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridSublevel.HelpBorderColor = Color.FromArgb(61, 61, 61);
-            this.propertyGridSublevel.HelpForeColor = Color.White;
-            this.propertyGridSublevel.LineColor = Color.FromArgb(46, 46, 46);
-            this.propertyGridSublevel.Location = new Point(0, 283);
-            this.propertyGridSublevel.Margin = new Padding(4, 3, 4, 3);
-            this.propertyGridSublevel.Name = "propertyGridSublevel";
-            this.propertyGridSublevel.PropertySort = PropertySort.Categorized;
-            this.propertyGridSublevel.RightToLeft = RightToLeft.No;
-            this.propertyGridSublevel.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
-            this.propertyGridSublevel.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSublevel.Size = new Size(348, 224);
-            this.propertyGridSublevel.TabIndex = 148;
-            this.propertyGridSublevel.ToolbarVisible = false;
-            this.propertyGridSublevel.ViewBackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridSublevel.ViewBorderColor = Color.FromArgb(61, 61, 61);
-            this.propertyGridSublevel.ViewForeColor = Color.White;
             // 
             // Form_MasterEditor
             // 
@@ -372,7 +344,6 @@
         private System.Windows.Forms.PropertyGrid propertyGridMaster;
         private System.Windows.Forms.Label lblConfigColorHelp;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private PropertyGrid propertyGridSublevel;
         private DataGridViewImageColumn masterfiletype;
         private DataGridViewTextBoxColumn masterLvl;
     }
