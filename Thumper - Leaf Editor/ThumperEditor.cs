@@ -165,21 +165,10 @@ namespace Thumper_Custom_Level_Editor
                 else
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
+
+            Form_ProjectExplorer dockProject = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            dockProject.Show(dockMain, DockState.DockRight);
         }
-        ///
-        ///THIS BLOCK DOUBLEBUFFERS ALL CONTROLS ON THE FORM, SO RESIZING IS SMOOTH
-        /*
-        protected override CreateParams CreateParams
-        {
-            get {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;  // Turn on WS_EX_COMPOSITED
-                return cp;
-            }
-        }
-        */
-        ///END DOUBLEBUFFERING
-        /// 
         #endregion
         #region Form Loading Closing
         ///FORM LOADING
@@ -504,9 +493,6 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             workingfolder = txtFilePath.Text;
-
-            Form_ProjectExplorer dockProject = new(this, txtFilePath.Text) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
-            dockProject.Show(dockMain, DockState.DockRight);
 
             Form_MasterEditor dockMaster = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_GateEditor dockGate = new() { DockAreas = DockAreas.Document | DockAreas.Float };

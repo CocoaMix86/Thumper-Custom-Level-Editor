@@ -12,10 +12,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     {
         #region Form Construction
         private TCLE _mainform { get; set; }
-        public Form_ProjectExplorer(TCLE form, string _projectfolder)
+        public Form_ProjectExplorer(TCLE form, string _projectfolder = null)
         {
             _mainform = form;
-            projectfolder = new DirectoryInfo(_projectfolder);
             InitializeComponent();
             //set custom renderer for some controls
             toolstripExplorer.Renderer = new ToolStripOverride();
@@ -28,12 +27,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;
             //populate treeview on first load
-            CreateTreeView();
-        }
-        public Form_ProjectExplorer(string _projectfolder)
-        {
-            projectfolder = new DirectoryInfo(_projectfolder);
-            CreateTreeView();
+            if (projectfolder != null) {
+                projectfolder = new DirectoryInfo(_projectfolder);
+                CreateTreeView();
+            }
         }
         #endregion
         #region Variables
