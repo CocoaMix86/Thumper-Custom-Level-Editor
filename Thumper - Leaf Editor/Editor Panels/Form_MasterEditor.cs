@@ -24,7 +24,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null)
                 LoadMaster(load, filepath);
-            propertyGrid1.SelectedObject = _properties;
+            propertyGridMaster.SelectedObject = _properties;
         }
         #endregion
 
@@ -79,50 +79,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
 
-            string _file;
-            dynamic _load = null;
-
-            //show a different confirmation message if the selected item is gate or lvl
-            if (_masterlvls[e.RowIndex].lvlname is "<none>" or "") {
-                if ((/*!_mainform._savegate && */MessageBox.Show("Current gate is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savegate*/) {
-                    _file = (_masterlvls[e.RowIndex].gatename).Replace(".gate", "");
-                    if (File.Exists($@"{TCLE.WorkingFolder}\gate_{_file}.txt")) {
-                        _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\gate_{_file}.txt");
-                    }
-                    else {
-                        MessageBox.Show("This gate does not exist in the Level folder.");
-                        return;
-                    }
-                }
-                else
-                    return;
-            }
-            else if ((/*!_mainform._savelvl && */MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savelvl*/) {
-                _file = (_masterlvls[e.RowIndex].lvlname).Replace(".lvl", "");
-                if (File.Exists($@"{TCLE.WorkingFolder}\lvl_{_file}.txt")) {
-                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
-                }
-                else {
-                    MessageBox.Show("This lvl does not exist in the Level folder.");
-                    return;
-                }
-            }
-            else
-                return;
-
-            //remove event handlers from a few controls so they don't trigger when their values change
-            dropMasterLvlRest.SelectedIndexChanged -= new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
-            //load the selected item
-            /*
-            if ((string)_load["obj_type"] == "SequinLevel")
-                _mainform.LoadLvl(_load, $@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
-            else if ((string)_load["obj_type"] == "SequinGate")
-                _mainform.LoadGate(_load, $@"{TCLE.WorkingFolder}\gate_{_file}.txt");
-            dropMasterLvlRest.SelectedItem = _masterlvls[e.RowIndex].rest;
-            btnMasterOpenRest.Enabled = dropMasterLvlRest.SelectedIndex > 0;
-            //re-add event handlers
-            dropMasterLvlRest.SelectedIndexChanged += new EventHandler(dropMasterLvlRest_SelectedIndexChanged);
-            */
+            propertyGridSublevel.SelectedObject = _masterlvls[e.RowIndex];
         }
         private void masterLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
         {

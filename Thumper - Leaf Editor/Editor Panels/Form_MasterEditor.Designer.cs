@@ -28,36 +28,30 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MasterEditor));
-            this.masterLvlList = new System.Windows.Forms.DataGridView();
-            this.masterfiletype = new System.Windows.Forms.DataGridViewImageColumn();
-            this.masterLvl = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.masterCheckpoint = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.masterPlayplus = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.masterIsolate = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.masterToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnMasterLvlAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlUp = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlDown = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlCopy = new System.Windows.Forms.ToolStripButton();
-            this.btnMasterLvlPaste = new System.Windows.Forms.ToolStripButton();
-            this.label30 = new System.Windows.Forms.Label();
-            this.lblMasterlvllistHelp = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.dropMasterLvlRest = new System.Windows.Forms.ComboBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.btnMasterOpenRest = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.lblConfigColorHelp = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).BeginInit();
+            this.masterLvlList = new DataGridView();
+            this.masterfiletype = new DataGridViewImageColumn();
+            this.masterLvl = new DataGridViewTextBoxColumn();
+            this.masterToolStrip = new ToolStrip();
+            this.btnMasterLvlAdd = new ToolStripButton();
+            this.btnMasterLvlDelete = new ToolStripButton();
+            this.btnMasterLvlUp = new ToolStripButton();
+            this.btnMasterLvlDown = new ToolStripButton();
+            this.btnMasterLvlCopy = new ToolStripButton();
+            this.btnMasterLvlPaste = new ToolStripButton();
+            this.label30 = new Label();
+            this.lblMasterlvllistHelp = new Label();
+            this.toolTip1 = new ToolTip(this.components);
+            this.propertyGridMaster = new PropertyGrid();
+            this.lblConfigColorHelp = new Label();
+            this.splitContainer1 = new SplitContainer();
+            this.propertyGridSublevel = new PropertyGrid();
+            ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -69,62 +63,58 @@
             this.masterLvlList.AllowUserToDeleteRows = false;
             this.masterLvlList.AllowUserToResizeColumns = false;
             this.masterLvlList.AllowUserToResizeRows = false;
-            this.masterLvlList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.masterLvlList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.masterLvlList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.masterLvlList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.BackgroundColor = Color.FromArgb(10, 10, 10);
+            this.masterLvlList.BorderStyle = BorderStyle.None;
+            this.masterLvlList.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.masterLvlList.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.masterLvlList.ColumnHeadersHeight = 20;
-            this.masterLvlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.masterLvlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.masterfiletype,
-            this.masterLvl,
-            this.masterCheckpoint,
-            this.masterPlayplus,
-            this.masterIsolate});
-            this.masterLvlList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            this.masterLvlList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.masterLvlList.Columns.AddRange(new DataGridViewColumn[] { this.masterfiletype, this.masterLvl });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle2.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(150, 150, 255);
             dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle2;
-            this.masterLvlList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.masterLvlList.Dock = DockStyle.Fill;
             this.masterLvlList.EnableHeadersVisualStyles = false;
-            this.masterLvlList.GridColor = System.Drawing.Color.Black;
-            this.masterLvlList.Location = new System.Drawing.Point(0, 13);
+            this.masterLvlList.GridColor = Color.Black;
+            this.masterLvlList.Location = new Point(0, 13);
+            this.masterLvlList.Margin = new Padding(4, 3, 4, 3);
             this.masterLvlList.Name = "masterLvlList";
-            this.masterLvlList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.masterLvlList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.masterLvlList.RowHeadersVisible = false;
-            this.masterLvlList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.masterLvlList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.masterLvlList.RowTemplate.Height = 20;
-            this.masterLvlList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.masterLvlList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.masterLvlList.Size = new System.Drawing.Size(300, 437);
+            this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
+            this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.masterLvlList.Size = new Size(300, 506);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
+            this.masterLvlList.CellClick += this.masterLvlList_CellClick;
             // 
             // masterfiletype
             // 
-            this.masterfiletype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.masterfiletype.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             this.masterfiletype.HeaderText = "";
             this.masterfiletype.Name = "masterfiletype";
             this.masterfiletype.ReadOnly = true;
@@ -132,248 +122,171 @@
             // 
             // masterLvl
             // 
-            this.masterLvl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.masterLvl.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             this.masterLvl.HeaderText = "Sublevel";
             this.masterLvl.Name = "masterLvl";
             this.masterLvl.ReadOnly = true;
-            this.masterLvl.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // masterCheckpoint
-            // 
-            this.masterCheckpoint.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.masterCheckpoint.HeaderText = "Chkp.";
-            this.masterCheckpoint.Name = "masterCheckpoint";
-            this.masterCheckpoint.Width = 44;
-            // 
-            // masterPlayplus
-            // 
-            this.masterPlayplus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.masterPlayplus.HeaderText = "P+";
-            this.masterPlayplus.Name = "masterPlayplus";
-            this.masterPlayplus.Width = 25;
-            // 
-            // masterIsolate
-            // 
-            this.masterIsolate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.masterIsolate.HeaderText = "Iso.";
-            this.masterIsolate.Name = "masterIsolate";
-            this.masterIsolate.Width = 32;
+            this.masterLvl.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // masterToolStrip
             // 
             this.masterToolStrip.AutoSize = false;
-            this.masterToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.masterToolStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.masterToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.masterToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.masterToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.masterToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnMasterLvlAdd,
-            this.btnMasterLvlDelete,
-            this.btnMasterLvlUp,
-            this.btnMasterLvlDown,
-            this.btnMasterLvlCopy,
-            this.btnMasterLvlPaste});
-            this.masterToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.masterToolStrip.Location = new System.Drawing.Point(0, 425);
+            this.masterToolStrip.BackColor = Color.FromArgb(10, 10, 10);
+            this.masterToolStrip.Dock = DockStyle.Bottom;
+            this.masterToolStrip.GripMargin = new Padding(0);
+            this.masterToolStrip.GripStyle = ToolStripGripStyle.Hidden;
+            this.masterToolStrip.ImageScalingSize = new Size(20, 20);
+            this.masterToolStrip.Items.AddRange(new ToolStripItem[] { this.btnMasterLvlAdd, this.btnMasterLvlDelete, this.btnMasterLvlUp, this.btnMasterLvlDown, this.btnMasterLvlCopy, this.btnMasterLvlPaste });
+            this.masterToolStrip.LayoutStyle = ToolStripLayoutStyle.Flow;
+            this.masterToolStrip.Location = new Point(0, 490);
             this.masterToolStrip.Name = "masterToolStrip";
-            this.masterToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.masterToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new System.Drawing.Size(300, 25);
+            this.masterToolStrip.Padding = new Padding(0);
+            this.masterToolStrip.RenderMode = ToolStripRenderMode.System;
+            this.masterToolStrip.Size = new Size(300, 29);
             this.masterToolStrip.Stretch = true;
             this.masterToolStrip.TabIndex = 138;
             // 
             // btnMasterLvlAdd
             // 
-            this.btnMasterLvlAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnMasterLvlAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterLvlAdd.ForeColor = System.Drawing.Color.White;
-            this.btnMasterLvlAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
-            this.btnMasterLvlAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlAdd.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.btnMasterLvlAdd.ForeColor = Color.White;
+            this.btnMasterLvlAdd.Image = Properties.Resources.icon_plus;
+            this.btnMasterLvlAdd.ImageTransparentColor = Color.Magenta;
+            this.btnMasterLvlAdd.Margin = new Padding(0);
             this.btnMasterLvlAdd.Name = "btnMasterLvlAdd";
-            this.btnMasterLvlAdd.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlAdd.Size = new Size(24, 24);
             this.btnMasterLvlAdd.ToolTipText = "Add new sublevel to the list";
             // 
             // btnMasterLvlDelete
             // 
-            this.btnMasterLvlDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlDelete.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnMasterLvlDelete.Enabled = false;
-            this.btnMasterLvlDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnMasterLvlDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlDelete.Image = Properties.Resources.icon_remove2;
+            this.btnMasterLvlDelete.ImageTransparentColor = Color.Magenta;
+            this.btnMasterLvlDelete.Margin = new Padding(0);
             this.btnMasterLvlDelete.Name = "btnMasterLvlDelete";
-            this.btnMasterLvlDelete.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlDelete.Size = new Size(24, 24);
             this.btnMasterLvlDelete.ToolTipText = "Delete selected sublevel from this list";
             // 
             // btnMasterLvlUp
             // 
-            this.btnMasterLvlUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlUp.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnMasterLvlUp.Enabled = false;
-            this.btnMasterLvlUp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowup2;
-            this.btnMasterLvlUp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlUp.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlUp.Image = Properties.Resources.icon_arrowup2;
+            this.btnMasterLvlUp.ImageTransparentColor = Color.Magenta;
+            this.btnMasterLvlUp.Margin = new Padding(0);
             this.btnMasterLvlUp.Name = "btnMasterLvlUp";
-            this.btnMasterLvlUp.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlUp.Size = new Size(24, 24);
             this.btnMasterLvlUp.ToolTipText = "Move selected sublevel up";
             // 
             // btnMasterLvlDown
             // 
-            this.btnMasterLvlDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlDown.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnMasterLvlDown.Enabled = false;
-            this.btnMasterLvlDown.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowdown2;
-            this.btnMasterLvlDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlDown.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlDown.Image = Properties.Resources.icon_arrowdown2;
+            this.btnMasterLvlDown.ImageTransparentColor = Color.Magenta;
+            this.btnMasterLvlDown.Margin = new Padding(0);
             this.btnMasterLvlDown.Name = "btnMasterLvlDown";
-            this.btnMasterLvlDown.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlDown.Size = new Size(24, 24);
             this.btnMasterLvlDown.ToolTipText = "Move selected sublevel down";
             // 
             // btnMasterLvlCopy
             // 
-            this.btnMasterLvlCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlCopy.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnMasterLvlCopy.Enabled = false;
-            this.btnMasterLvlCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
-            this.btnMasterLvlCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMasterLvlCopy.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMasterLvlCopy.Image = Properties.Resources.icon_copy2;
+            this.btnMasterLvlCopy.ImageTransparentColor = Color.Magenta;
+            this.btnMasterLvlCopy.Margin = new Padding(0);
             this.btnMasterLvlCopy.Name = "btnMasterLvlCopy";
-            this.btnMasterLvlCopy.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlCopy.Size = new Size(24, 24);
             this.btnMasterLvlCopy.ToolTipText = "Copy selected sublevel";
             // 
             // btnMasterLvlPaste
             // 
-            this.btnMasterLvlPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMasterLvlPaste.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnMasterLvlPaste.Enabled = false;
-            this.btnMasterLvlPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
-            this.btnMasterLvlPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMasterLvlPaste.Image = Properties.Resources.icon_paste2;
+            this.btnMasterLvlPaste.ImageTransparentColor = Color.Magenta;
             this.btnMasterLvlPaste.Name = "btnMasterLvlPaste";
-            this.btnMasterLvlPaste.Size = new System.Drawing.Size(24, 24);
+            this.btnMasterLvlPaste.Size = new Size(24, 24);
             this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.label30.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(0, 0);
+            this.label30.BackColor = Color.FromArgb(10, 10, 10);
+            this.label30.Dock = DockStyle.Top;
+            this.label30.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.label30.ForeColor = Color.White;
+            this.label30.Location = new Point(0, 0);
+            this.label30.Margin = new Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(81, 13);
+            this.label30.Size = new Size(81, 13);
             this.label30.TabIndex = 94;
             this.label30.Text = "Lvl/Gate List";
             // 
             // lblMasterlvllistHelp
             // 
-            this.lblMasterlvllistHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMasterlvllistHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             this.lblMasterlvllistHelp.AutoSize = true;
-            this.lblMasterlvllistHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblMasterlvllistHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblMasterlvllistHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMasterlvllistHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new System.Drawing.Point(276, -3);
+            this.lblMasterlvllistHelp.BackColor = Color.Transparent;
+            this.lblMasterlvllistHelp.Cursor = Cursors.Help;
+            this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
+            this.lblMasterlvllistHelp.Location = new Point(272, -3);
+            this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
-            this.lblMasterlvllistHelp.Size = new System.Drawing.Size(15, 16);
+            this.lblMasterlvllistHelp.Size = new Size(15, 16);
             this.lblMasterlvllistHelp.TabIndex = 95;
             this.lblMasterlvllistHelp.Text = "?";
             // 
-            // label37
+            // propertyGridMaster
             // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.Silver;
-            this.label37.Location = new System.Drawing.Point(26, 269);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(123, 15);
-            this.label37.TabIndex = 116;
-            this.label37.Text = "══Sublevel Options══";
-            // 
-            // dropMasterLvlRest
-            // 
-            this.dropMasterLvlRest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropMasterLvlRest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.dropMasterLvlRest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropMasterLvlRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropMasterLvlRest.ForeColor = System.Drawing.Color.White;
-            this.dropMasterLvlRest.FormattingEnabled = true;
-            this.dropMasterLvlRest.Items.AddRange(new object[] {
-            "<none>"});
-            this.dropMasterLvlRest.Location = new System.Drawing.Point(20, 302);
-            this.dropMasterLvlRest.Name = "dropMasterLvlRest";
-            this.dropMasterLvlRest.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropMasterLvlRest.Size = new System.Drawing.Size(131, 21);
-            this.dropMasterLvlRest.TabIndex = 105;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.White;
-            this.label35.Location = new System.Drawing.Point(62, 286);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(50, 15);
-            this.label35.TabIndex = 104;
-            this.label35.Text = "Rest Lvl";
-            // 
-            // btnMasterOpenRest
-            // 
-            this.btnMasterOpenRest.BackColor = System.Drawing.Color.Gray;
-            this.btnMasterOpenRest.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMasterOpenRest.Enabled = false;
-            this.btnMasterOpenRest.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMasterOpenRest.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMasterOpenRest.ForeColor = System.Drawing.Color.Black;
-            this.btnMasterOpenRest.Image = ((System.Drawing.Image)(resources.GetObject("btnMasterOpenRest.Image")));
-            this.btnMasterOpenRest.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMasterOpenRest.Location = new System.Drawing.Point(149, 301);
-            this.btnMasterOpenRest.Name = "btnMasterOpenRest";
-            this.btnMasterOpenRest.Size = new System.Drawing.Size(23, 23);
-            this.btnMasterOpenRest.TabIndex = 118;
-            this.btnMasterOpenRest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnMasterOpenRest.UseVisualStyleBackColor = false;
-            // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-            this.propertyGrid1.CategoryForeColor = System.Drawing.Color.White;
-            this.propertyGrid1.CategorySplitterColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.propertyGrid1.DisabledItemForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.propertyGrid1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.propertyGrid1.HelpBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-            this.propertyGrid1.HelpBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
-            this.propertyGrid1.HelpForeColor = System.Drawing.Color.White;
-            this.propertyGrid1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.propertyGrid1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.propertyGrid1.SelectedItemWithFocusBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(96)))), ((int)(((byte)(232)))));
-            this.propertyGrid1.SelectedItemWithFocusForeColor = System.Drawing.Color.White;
-            this.propertyGrid1.Size = new System.Drawing.Size(256, 266);
-            this.propertyGrid1.TabIndex = 147;
-            this.propertyGrid1.ToolbarVisible = false;
-            this.propertyGrid1.ViewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-            this.propertyGrid1.ViewBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
-            this.propertyGrid1.ViewForeColor = System.Drawing.Color.White;
+            this.propertyGridMaster.BackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridMaster.CategoryForeColor = Color.White;
+            this.propertyGridMaster.CategorySplitterColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridMaster.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
+            this.propertyGridMaster.Dock = DockStyle.Top;
+            this.propertyGridMaster.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.propertyGridMaster.HelpBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridMaster.HelpBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridMaster.HelpForeColor = Color.White;
+            this.propertyGridMaster.LineColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridMaster.Location = new Point(0, 0);
+            this.propertyGridMaster.Margin = new Padding(4, 3, 4, 3);
+            this.propertyGridMaster.Name = "propertyGridMaster";
+            this.propertyGridMaster.PropertySort = PropertySort.Categorized;
+            this.propertyGridMaster.RightToLeft = RightToLeft.No;
+            this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
+            this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
+            this.propertyGridMaster.Size = new Size(348, 283);
+            this.propertyGridMaster.TabIndex = 147;
+            this.propertyGridMaster.ToolbarVisible = false;
+            this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridMaster.ViewBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridMaster.ViewForeColor = Color.White;
             // 
             // lblConfigColorHelp
             // 
             this.lblConfigColorHelp.AutoSize = true;
-            this.lblConfigColorHelp.BackColor = System.Drawing.Color.Transparent;
-            this.lblConfigColorHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.lblConfigColorHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfigColorHelp.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblConfigColorHelp.Location = new System.Drawing.Point(157, -2);
+            this.lblConfigColorHelp.BackColor = Color.Transparent;
+            this.lblConfigColorHelp.Cursor = Cursors.Help;
+            this.lblConfigColorHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            this.lblConfigColorHelp.ForeColor = Color.DodgerBlue;
+            this.lblConfigColorHelp.Location = new Point(183, -2);
+            this.lblConfigColorHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblConfigColorHelp.Name = "lblConfigColorHelp";
-            this.lblConfigColorHelp.Size = new System.Drawing.Size(15, 16);
+            this.lblConfigColorHelp.Size = new Size(15, 16);
             this.lblConfigColorHelp.TabIndex = 112;
             this.lblConfigColorHelp.Text = "?";
-            this.lblConfigColorHelp.Click += new System.EventHandler(this.lblConfigColorHelp_Click);
+            this.lblConfigColorHelp.Click += this.lblConfigColorHelp_Click;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Dock = DockStyle.Fill;
+            this.splitContainer1.Location = new Point(0, 0);
+            this.splitContainer1.Margin = new Padding(4, 3, 4, 3);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -386,54 +299,68 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.propertyGrid1);
-            this.splitContainer1.Panel2.Controls.Add(this.btnMasterOpenRest);
-            this.splitContainer1.Panel2.Controls.Add(this.label35);
-            this.splitContainer1.Panel2.Controls.Add(this.label37);
-            this.splitContainer1.Panel2.Controls.Add(this.dropMasterLvlRest);
-            this.splitContainer1.Size = new System.Drawing.Size(560, 450);
+            this.splitContainer1.Panel2.Controls.Add(this.propertyGridSublevel);
+            this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
+            this.splitContainer1.Size = new Size(653, 519);
             this.splitContainer1.SplitterDistance = 300;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
+            // 
+            // propertyGridSublevel
+            // 
+            this.propertyGridSublevel.BackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridSublevel.CategoryForeColor = Color.White;
+            this.propertyGridSublevel.CategorySplitterColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridSublevel.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
+            this.propertyGridSublevel.Dock = DockStyle.Top;
+            this.propertyGridSublevel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.propertyGridSublevel.HelpBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridSublevel.HelpBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridSublevel.HelpForeColor = Color.White;
+            this.propertyGridSublevel.LineColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridSublevel.Location = new Point(0, 283);
+            this.propertyGridSublevel.Margin = new Padding(4, 3, 4, 3);
+            this.propertyGridSublevel.Name = "propertyGridSublevel";
+            this.propertyGridSublevel.PropertySort = PropertySort.Categorized;
+            this.propertyGridSublevel.RightToLeft = RightToLeft.No;
+            this.propertyGridSublevel.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
+            this.propertyGridSublevel.SelectedItemWithFocusForeColor = Color.White;
+            this.propertyGridSublevel.Size = new Size(348, 224);
+            this.propertyGridSublevel.TabIndex = 148;
+            this.propertyGridSublevel.ToolbarVisible = false;
+            this.propertyGridSublevel.ViewBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridSublevel.ViewBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridSublevel.ViewForeColor = Color.White;
             // 
             // Form_MasterEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.ClientSize = new System.Drawing.Size(560, 450);
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.BackColor = Color.FromArgb(55, 55, 55);
+            this.ClientSize = new Size(653, 519);
             this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ForeColor = Color.FromArgb(150, 150, 255);
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            this.Icon = (Icon)resources.GetObject("$this.Icon");
+            this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_MasterEditor";
             this.Text = "Master Editor";
-            ((System.ComponentModel.ISupportInitialize)(this.masterLvlList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.masterLvlList).EndInit();
             this.masterToolStrip.ResumeLayout(false);
             this.masterToolStrip.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.splitContainer1).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion
         private System.Windows.Forms.DataGridView masterLvlList;
-        private System.Windows.Forms.DataGridViewImageColumn masterfiletype;
-        private System.Windows.Forms.DataGridViewTextBoxColumn masterLvl;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn masterCheckpoint;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn masterPlayplus;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn masterIsolate;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label lblMasterlvllistHelp;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.ComboBox dropMasterLvlRest;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Button btnMasterOpenRest;
         private System.Windows.Forms.ToolStrip masterToolStrip;
         private System.Windows.Forms.ToolStripButton btnMasterLvlAdd;
         private System.Windows.Forms.ToolStripButton btnMasterLvlDelete;
@@ -442,8 +369,11 @@
         private System.Windows.Forms.ToolStripButton btnMasterLvlCopy;
         private System.Windows.Forms.ToolStripButton btnMasterLvlPaste;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
+        private System.Windows.Forms.PropertyGrid propertyGridMaster;
         private System.Windows.Forms.Label lblConfigColorHelp;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private PropertyGrid propertyGridSublevel;
+        private DataGridViewImageColumn masterfiletype;
+        private DataGridViewTextBoxColumn masterLvl;
     }
 }
