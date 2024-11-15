@@ -160,24 +160,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         ///SAVE
-        private void mastersaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Save()
         {
             //if _loadedmaster is somehow not set, force Save As instead
             if (_loadedmaster == null) {
-                ///_mainform.toolstripMasterSaveAs.PerformClick();
+                SaveAs();
                 return;
             }
             else
                 WriteMaster();
         }
         ///SAVE AS
-        private void mastersaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAs()
         {
-            //check if master exists already.
-            if (File.Exists($@"{TCLE.WorkingFolder}\master_sequin.txt")) {
-                if (MessageBox.Show("You have a master file already for this Level. Proceeding will overwrite it.\nDo you want to continue?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
-                    return;
-            }
             using SaveFileDialog sfd = new();
             //filter .txt only
             sfd.Filter = "Thumper Master File (*.txt)|*.txt";
