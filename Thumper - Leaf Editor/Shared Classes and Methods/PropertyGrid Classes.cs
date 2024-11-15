@@ -19,6 +19,7 @@ namespace Thumper_Custom_Level_Editor
         {
             parent = Parent;
             FilePath = path;
+            sublevel = new MasterLvlData();
         }
 
         [CategoryAttribute("General")]
@@ -72,13 +73,31 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public TimeSpan runtime { get { return  TimeSpan.FromMinutes(beats / (double)bpm); } }
+        public TimeSpan runtime { get { return TimeSpan.FromSeconds((int)TimeSpan.FromMinutes(beats / (double)bpm).TotalSeconds); } }
+
+        [Browsable(false)]
+        public MasterLvlData sublevel { get; set; }
 
         [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Sublevel")]
-        [Description("")]
-        [TypeConverterAttribute(typeof(ExpandableObjectConverter))]
-        public MasterLvlData sublevel { get; set; }
+        [DisplayName("Play Plus")]
+        [Description("When True, the sublevel shows up in Play+. Useful to have a tutorial sublevel in Play and then have it not show up in Play+.")]
+        public bool playplus { get {return sublevel.playplus; } set { sublevel.playplus = value; } }
+
+        [CategoryAttribute("Sublevel Options")]
+        [DisplayName("Checkpoint")]
+        [Description("Enables the checkpoint that follows this sublevel.")]
+        public bool checkpoint { get { return sublevel.checkpoint; } set { sublevel.checkpoint = value; } }
+
+        [CategoryAttribute("Sublevel Options")]
+        [DisplayName("Isolate")]
+        [Description("If True, only isolated sublevels will play in game. Mainly used for testing your level.")]
+        public bool isolate { get { return sublevel.isolate; } set { sublevel.isolate = value; } }
+
+        [CategoryAttribute("Sublevel Options")]
+        [DisplayName("Rest Lvl")]
+        [Description("The rest lvl will play before the sublevel.")]
+        [Editor(typeof(LvlPicker), typeof(UITypeEditor))]
+        public string rest { get { return sublevel.rest; } set { sublevel.rest = value; } }
     }
 
     class LvlPicker : UITypeEditor
