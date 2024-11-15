@@ -130,7 +130,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set lvl save flag to false
             SaveMaster(false);
         }
-
+        /*
         private void masternewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
@@ -138,7 +138,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 mastersaveAsToolStripMenuItem_Click(null, null);
             }
         }
-
+        */
         private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
@@ -160,7 +160,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         ///SAVE
-        private void Save()
+        public void Save()
         {
             //if _loadedmaster is somehow not set, force Save As instead
             if (_loadedmaster == null) {
@@ -171,7 +171,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 WriteMaster();
         }
         ///SAVE AS
-        private void SaveAs()
+        public void SaveAs()
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -179,9 +179,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                if (sender == null) {
-                    _loadedmaster = null;
-                }
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 _loadedmaster = $@"{storePath}\master_sequin.txt";
@@ -200,7 +197,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.WriteFileLock(TCLE.lockedfiles[loadedmaster], _save);
             SaveMaster(true, true);
             this.Text = $"sequin.master";
-
         }
         #endregion
 
