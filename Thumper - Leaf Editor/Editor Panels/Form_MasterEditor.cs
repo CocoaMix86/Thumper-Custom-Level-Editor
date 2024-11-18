@@ -58,8 +58,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static string LoadedMaster;
         private List<MasterLvlData> clipboardmaster = new();
-        public ObservableCollection<MasterLvlData> _masterlvls { get { return MasterLvls; } set { MasterLvls = value; } }
-        public static ObservableCollection<MasterLvlData> MasterLvls = new();
+        public ObservableCollection<MasterLvlData> _masterlvls { get { return _properties.masterlvls; } set { _properties.masterlvls = value; } }
         public MasterProperties _properties;
         #endregion
 
@@ -285,31 +284,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIkpaste");
         }
 
-        private void btnMasterRefreshLvl_Click(object sender, EventArgs e)
-        {
-            if (TCLE.WorkingFolder == null)
-                return;
-            TCLE.lvlsinworkfolder = Directory.GetFiles(TCLE.WorkingFolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
-            TCLE.lvlsinworkfolder.Add("<none>");
-            TCLE.lvlsinworkfolder.Sort();
-
-            ///add lvl list as datasources to dropdowns
-            /*
-            object _select = dropMasterCheck.SelectedItem;
-            dropMasterCheck.DataSource = _mainform.lvlsinworkfolder.ToList();
-            dropMasterCheck.SelectedItem = _select;
-
-            _select = dropMasterIntro.SelectedItem;
-            dropMasterIntro.DataSource = _mainform.lvlsinworkfolder.ToList();
-            dropMasterIntro.SelectedItem = _select;
-
-            _select = dropMasterLvlRest.SelectedItem;
-            dropMasterLvlRest.DataSource = _mainform.lvlsinworkfolder.ToList();
-            dropMasterLvlRest.SelectedItem = _select;
-            */
-            TCLE.PlaySound("UIrefresh");
-        }
-
         private void btnRevertMaster_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -333,7 +307,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeMasterStuff()
         {
-            _masterlvls.CollectionChanged += masterlvls_CollectionChanged;
+            //_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
         }
 
         public void LoadMaster(dynamic _load, string filepath)
@@ -348,9 +322,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set some visual elements
             this.Text = $"sequin.master";
 
+            //setup new master properties
+            _properties = new(this, filepath) {
+                skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
+                introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
+                checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
+            };
+
             ///Clear form elements so new data can load
             _masterlvls.Clear();
-
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
                 _masterlvls.Add(new MasterLvlData() {
@@ -364,11 +344,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next(0, 10000000)
                 });
             }
-            _properties = new(this, filepath) {
-                skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
-                introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
-                checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
-            };
             ///load Config data (if file exists)
             LoadConfig();
             ///set save flag (master just loaded, has no changes)
@@ -454,7 +429,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 { "intro_lvl_name", _properties.introlvl.Replace("<none>", "") }
             };
             JArray groupings = new();
-            foreach (MasterLvlData group in MasterLvls) {
+            foreach (MasterLvlData group in _properties.masterlvls) {
                 JObject s = new() {
                     { "lvl_name", group.lvlname.Replace("<none>", "") ?? "" },
                     { "gate_name", group.gatename.Replace("<none>", "") ?? "" },

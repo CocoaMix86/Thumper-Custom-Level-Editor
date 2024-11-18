@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
+using Windows.Foundation.Collections;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -75,19 +77,26 @@ namespace Thumper_Custom_Level_Editor
 
     public class MasterProperties
     {
+        [Browsable(false)]
         public Form_MasterEditor parent;
-        public MasterProperties(Form_MasterEditor Parent, string path)
-        {
-            parent = Parent;
-            FilePath = path;
-            sublevel = new MasterLvlData();
-            undoItems = new List<JObject>();
-        }
-
         [Browsable(false)]
         public JObject revertPoint { get; set; }
         [Browsable(false)]
         public List<JObject> undoItems { get; set; }
+        [Browsable(false)]
+        public ObservableCollection<MasterLvlData> masterlvls;
+        [Browsable(false)]
+        public MasterLvlData sublevel { get; set; }
+
+        public MasterProperties(Form_MasterEditor Parent, string path)
+        {
+            parent = Parent;
+            FilePath = path;
+            sublevel = new();
+            undoItems = new();
+            masterlvls = new();
+            masterlvls.CollectionChanged += parent.masterlvls_CollectionChanged;
+        }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
@@ -142,9 +151,6 @@ namespace Thumper_Custom_Level_Editor
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
         public TimeSpan runtime { get { return TimeSpan.FromSeconds((int)TimeSpan.FromMinutes(beats / (double)bpm).TotalSeconds); } }
 
-        [Browsable(false)]
-        public MasterLvlData sublevel { get; set; }
-
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Sublevel Name")]
         public string sublevelname { get { return sublevel.name; } }
@@ -182,6 +188,7 @@ namespace Thumper_Custom_Level_Editor
             IWindowsFormsEditorService svc = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
             string foo = value as string;
             if (svc != null && foo != null) {
+                TCLE.ReloadLvlsInProject();
                 using (FileListBox form = new(TCLE.lvlsinworkfolder)) {
                     form.StartPosition = FormStartPosition.Manual;
                     form.Location = new Point(Cursor.Position.X - 100, Cursor.Position.Y - 50);

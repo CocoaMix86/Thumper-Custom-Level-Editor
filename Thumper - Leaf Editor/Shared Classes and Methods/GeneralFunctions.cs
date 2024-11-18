@@ -457,32 +457,10 @@ namespace Thumper_Custom_Level_Editor
 
         public static int CalculateMasterRuntime(string workingfolder, Form_MasterEditor master)
         {
-            dynamic _load;
             int _beatcount = 0;
             //loop through all entries in the master to get beat counts
             foreach (MasterLvlData _masterlvl in master._masterlvls) {
-                //this section handles lvl
-                if (_masterlvl.type == "lvl") {
-                    string file = Directory.GetFiles(workingfolder, $"lvl_{_masterlvl.name}.txt", SearchOption.AllDirectories).FirstOrDefault();
-                    //load the lvl and then loop through its leafs to get beat counts
-                    if (file != null)
-                        _beatcount += LoadLvlGetBeatCounts(file);
-                }
-                //this section handles gate
-                else {
-                    //load the gate to then loop through all lvls in it
-                    _load = TCLE.LoadFileLock($"{workingfolder}\\gate_{_masterlvl.name}.txt");
-                    if (_load == null)
-                        continue;
-                    foreach (dynamic _lvl in _load["boss_patterns"]) {
-                        //load the lvl and then loop through its leafs to get beat counts
-                        int idx = ((string)_lvl["lvl_name"]).LastIndexOf('.');
-                        _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{((string)_lvl["lvl_name"])[..idx]}.txt");
-                    }
-                }
-
-                if (_masterlvl.rest is not "" and not "<none>" and not null)
-                    _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(_masterlvl.rest)}.txt");
+                _beatcount += CalculateSingleLvlRuntime(workingfolder, _masterlvl);
             }
             if (master._properties.introlvl != "<none>")
                 _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(master._properties.introlvl)}.txt");
@@ -495,6 +473,34 @@ namespace Thumper_Custom_Level_Editor
             ///lblMasterRuntime.Text = $"Time: {TimeSpan.FromMinutes(_beatcount / (double)_properties.bpm).ToString("hh':'mm':'ss'.'fff")}";
             return _beatcount;
 
+        }
+        public static int CalculateSingleLvlRuntime(string workingfolder, MasterLvlData _masterlvl)
+        {
+            dynamic _load;
+            int _beatcount = 0;
+            if (_masterlvl.type == "lvl") {
+                string file = Directory.GetFiles(workingfolder, $"lvl_{_masterlvl.name}.txt", SearchOption.AllDirectories).FirstOrDefault();
+                //load the lvl and then loop through its leafs to get beat counts
+                if (file != null)
+                    _beatcount += LoadLvlGetBeatCounts(file);
+            }
+            //this section handles gate
+            else {
+                //load the gate to then loop through all lvls in it
+                _load = TCLE.LoadFileLock($"{workingfolder}\\gate_{_masterlvl.name}.txt");
+                if (_load == null)
+                    return 0;
+                foreach (dynamic _lvl in _load["boss_patterns"]) {
+                    //load the lvl and then loop through its leafs to get beat counts
+                    int idx = ((string)_lvl["lvl_name"]).LastIndexOf('.');
+                    _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{((string)_lvl["lvl_name"])[..idx]}.txt");
+                }
+            }
+
+            if (_masterlvl.rest is not "" and not "<none>" and not null)
+                _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(_masterlvl.rest)}.txt");
+
+            return _beatcount;
         }
         private static int LoadLvlGetBeatCounts(string path)
         {
@@ -521,6 +527,23 @@ namespace Thumper_Custom_Level_Editor
                 Form_MasterEditor master = new(_load, filepath);
                 master.Show(form.dockMain, DockState.Document);
             }
+        }
+
+        public static void ReloadLvlsInProject()
+        {
+            if (WorkingFolder == null)
+                return;
+            lvlsinworkfolder.Clear();
+            foreach (string file in Directory.GetFiles(WorkingFolder, "*", SearchOption.AllDirectories)) {
+                dynamic loadfile = LoadFileLock(file);
+                if ((string)loadfile["obj_type"] == "SequinLevel") {
+                    lvlsinworkfolder.Add((string)loadfile["obj_name"]);
+                }
+            }
+            lvlsinworkfolder.Add("<none>");
+            lvlsinworkfolder.Sort();
+
+            PlaySound("UIrefresh");
         }
     }
 }
