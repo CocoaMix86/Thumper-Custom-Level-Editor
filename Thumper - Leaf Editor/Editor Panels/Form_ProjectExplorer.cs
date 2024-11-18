@@ -495,6 +495,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // Retrieve the node at the drop location.
             TreeNode targetNode = treeView1.GetNodeAt(targetPoint);
             // Don't allow drag to non-folders
+            if (targetNode == null)
+                return;
             if (targetNode.ImageKey is not "folder" and not "project") {
                 if (selectedNodes.Contains(targetNode))
                     previousDragOver.BackColor = Color.FromArgb(56, 56, 56);

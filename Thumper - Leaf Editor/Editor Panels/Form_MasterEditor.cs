@@ -80,6 +80,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridMaster.Refresh();
         }
 
+
+        private void masterLvlList_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+        private void masterLvlList_DragDrop(object sender, DragEventArgs e)
+        {
+            ;
+        }
+
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
@@ -178,7 +188,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnMasterLvlAdd_Click(object sender, EventArgs e)
         {
             using OpenFileDialog ofd = new();
-            ofd.Filter = "Thumper Lvl/Gate File (*.txt)|lvl_*.txt;gate_*.txt";
+            ofd.Filter = "Thumper Lvl/Gate File (*.txt)|*.txt";
             ofd.Title = "Load a Thumper Lvl/Gate file";
             ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
@@ -197,9 +207,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
             //this is why I utilize workingfolder
-            if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
-                if (MessageBox.Show("The item you chose does not exist in the same folder as this master. Do you want to copy it to this folder and load it?", "File load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
+            //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
+            if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder)) {
+                if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}"))
+                        File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
                     else
                         return;
             }

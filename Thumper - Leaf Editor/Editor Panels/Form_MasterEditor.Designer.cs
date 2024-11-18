@@ -59,6 +59,7 @@
             // 
             // masterLvlList
             // 
+            this.masterLvlList.AllowDrop = true;
             this.masterLvlList.AllowUserToAddRows = false;
             this.masterLvlList.AllowUserToDeleteRows = false;
             this.masterLvlList.AllowUserToResizeColumns = false;
@@ -111,6 +112,8 @@
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
+            this.masterLvlList.DragDrop += this.masterLvlList_DragDrop;
+            this.masterLvlList.DragEnter += this.masterLvlList_DragEnter;
             // 
             // masterfiletype
             // 
