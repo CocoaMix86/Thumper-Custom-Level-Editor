@@ -124,7 +124,9 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("BPM")]
         [Description("Beats Per Minute. If your song is at 100bpm, you'll likely want to map at either 200 or 400, so you can place objects on half note and quarter note intervals.")]
-        public decimal bpm { get; set; }
+        [RefreshProperties(RefreshProperties.All)]
+        public decimal bpm { get { return Bpm; } set { Bpm = value; parent.RecalcLvlRuntime(); } }
+        private decimal Bpm;
 
         [CategoryAttribute("Options")]
         [DisplayName("Rail Color")]
@@ -158,7 +160,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Play Plus")]
         [Description("When True, the sublevel shows up in Play+. Useful to have a tutorial sublevel in Play and then have it not show up in Play+.")]
-        public bool playplus { get {return sublevel.playplus; } set { sublevel.playplus = value; } }
+        public bool playplus { get { return sublevel.playplus; } set { sublevel.playplus = value; } }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Checkpoint")]

@@ -35,6 +35,7 @@
             this.masterLvlList = new DataGridView();
             this.masterfiletype = new DataGridViewImageColumn();
             this.masterLvl = new DataGridViewTextBoxColumn();
+            this.Runtime = new DataGridViewTextBoxColumn();
             this.masterToolStrip = new ToolStrip();
             this.btnMasterLvlAdd = new ToolStripButton();
             this.btnMasterLvlDelete = new ToolStripButton();
@@ -76,7 +77,7 @@
             this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.masterLvlList.Columns.AddRange(new DataGridViewColumn[] { this.masterfiletype, this.masterLvl });
+            this.masterLvlList.Columns.AddRange(new DataGridViewColumn[] { this.masterfiletype, this.masterLvl, this.Runtime });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle2.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -126,6 +127,15 @@
             this.masterLvl.Name = "masterLvl";
             this.masterLvl.ReadOnly = true;
             this.masterLvl.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Runtime
+            // 
+            this.Runtime.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.Runtime.HeaderText = "Runtime";
+            this.Runtime.Name = "Runtime";
+            this.Runtime.ReadOnly = true;
+            this.Runtime.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.Runtime.Width = 58;
             // 
             // masterToolStrip
             // 
@@ -350,5 +360,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private DataGridViewImageColumn masterfiletype;
         private DataGridViewTextBoxColumn masterLvl;
+        private DataGridViewTextBoxColumn Runtime;
     }
 }

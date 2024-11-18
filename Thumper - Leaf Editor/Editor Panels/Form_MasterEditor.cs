@@ -89,15 +89,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //NewStartingIndex and OldStartingIndex track where the changes were made
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 int _in = e.NewStartingIndex;
-                //detect if lvl or a gate. If it's a gate, the lvlname won't be set
-                if (_masterlvls[_in].type == "lvl") {
-                    //int idx = _masterlvls[_in].lvlname.LastIndexOf('.');
-                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.editor_lvl, _masterlvls[_in].lvlname, _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
-                }
-                else {
-                    //int idx = _masterlvls[_in].gatename.LastIndexOf('.');
-                    masterLvlList.Rows.Insert(_in, new object[] { Properties.Resources.editor_gate, _masterlvls[_in].gatename, _masterlvls[_in].checkpoint, _masterlvls[_in].playplus, _masterlvls[_in].isolate });
-                }
+                //get the runtime of the object
+                int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _masterlvls[_in]);
+                TimeSpan time = TimeSpan.FromSeconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalSeconds);
+                masterLvlList.Rows.Insert(_in, new object[] { (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate), _masterlvls[_in].lvlname, $"{beats} beats -- {time}" });
             }
             //if action REMOVE, remove row from the master DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
@@ -328,6 +323,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
                 checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
+            ///load Config data (if file exists)
+            LoadConfig();
 
             ///Clear form elements so new data can load
             _masterlvls.Clear();
@@ -344,8 +341,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next(0, 10000000)
                 });
             }
-            ///load Config data (if file exists)
-            LoadConfig();
             ///set save flag (master just loaded, has no changes)
             SaveCheckAndWrite(true);
         }
@@ -414,6 +409,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
 
                 if (playsound) TCLE.PlaySound("UIsave");
+            }
+        }
+
+        public void RecalcLvlRuntime()
+        {
+            foreach (MasterLvlData _lvl in _masterlvls) {
+                int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _lvl);
+                TimeSpan time = TimeSpan.FromSeconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalSeconds);
+                masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[2].Value = $"{beats} beats -- {time}";
             }
         }
 
