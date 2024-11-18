@@ -117,15 +117,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set lvl save flag to false
             ///Save(false);
         }
-        /*
-        private void masternewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
 
-                mastersaveAsToolStripMenuItem_Click(null, null);
-            }
-        }
-        */
         private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((!EditorIsSaved && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {

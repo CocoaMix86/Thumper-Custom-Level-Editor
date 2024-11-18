@@ -156,6 +156,7 @@
             this.btnMasterLvlAdd.Name = "btnMasterLvlAdd";
             this.btnMasterLvlAdd.Size = new Size(24, 24);
             this.btnMasterLvlAdd.ToolTipText = "Add new sublevel to the list";
+            this.btnMasterLvlAdd.Click += this.btnMasterLvlAdd_Click;
             // 
             // btnMasterLvlDelete
             // 
@@ -167,6 +168,7 @@
             this.btnMasterLvlDelete.Name = "btnMasterLvlDelete";
             this.btnMasterLvlDelete.Size = new Size(24, 24);
             this.btnMasterLvlDelete.ToolTipText = "Delete selected sublevel from this list";
+            this.btnMasterLvlDelete.Click += this.btnMasterLvlDelete_Click;
             // 
             // btnMasterLvlUp
             // 
