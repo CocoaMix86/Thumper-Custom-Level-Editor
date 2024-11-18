@@ -29,37 +29,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool _savemaster = true;
+        public bool EditorIsSaved = true;
         public string _loadedmaster
         {
-            get { return loadedmaster; }
+            get { return LoadedMaster; }
             set {
                 if (value == null) {
-                    if (loadedmaster != null && TCLE.lockedfiles.ContainsKey(loadedmaster)) {
-                        TCLE.lockedfiles[loadedmaster].Close();
-                        TCLE.lockedfiles.Remove(loadedmaster);
+                    if (LoadedMaster != null && TCLE.lockedfiles.ContainsKey(LoadedMaster)) {
+                        TCLE.lockedfiles[LoadedMaster].Close();
+                        TCLE.lockedfiles.Remove(LoadedMaster);
                     }
-                    loadedmaster = value;
+                    LoadedMaster = value;
                     ResetMaster();
                 }
-                else if (loadedmaster != value) {
-                    if (loadedmaster != null && TCLE.lockedfiles.ContainsKey(loadedmaster)) {
-                        TCLE.lockedfiles[loadedmaster].Close();
-                        TCLE.lockedfiles.Remove(loadedmaster);
+                else if (LoadedMaster != value) {
+                    if (LoadedMaster != null && TCLE.lockedfiles.ContainsKey(LoadedMaster)) {
+                        TCLE.lockedfiles[LoadedMaster].Close();
+                        TCLE.lockedfiles.Remove(LoadedMaster);
                     }
-                    loadedmaster = value;
+                    LoadedMaster = value;
 
-                    if (!File.Exists(loadedmaster)) {
-                        File.WriteAllText(loadedmaster, "");
+                    if (!File.Exists(LoadedMaster)) {
+                        File.WriteAllText(LoadedMaster, "");
                     }
-                    TCLE.lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
-        private string loadedmaster;
-        dynamic masterjson;
-        public List<MasterLvlData> clipboardmaster = new();
-        public ObservableCollection<MasterLvlData> _masterlvls = new();
+        private static string LoadedMaster;
+        private List<MasterLvlData> clipboardmaster = new();
+        public ObservableCollection<MasterLvlData> _masterlvls { get { return MasterLvls; } set { MasterLvls = value; } }
+        public static ObservableCollection<MasterLvlData> MasterLvls = new();
         public MasterProperties _properties;
         #endregion
 
@@ -79,19 +79,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _properties.sublevel = _masterlvls[e.RowIndex];
             propertyGridMaster.ExpandAllGridItems();
             propertyGridMaster.Refresh();
-        }
-
-        //Cell value changed (for checkboxes)
-        private void masterLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            try {
-                _masterlvls[e.RowIndex].checkpoint = bool.Parse(masterLvlList[2, e.RowIndex].Value.ToString());
-                _masterlvls[e.RowIndex].playplus = bool.Parse(masterLvlList[3, e.RowIndex].Value.ToString());
-                _masterlvls[e.RowIndex].isolate = bool.Parse(masterLvlList[4, e.RowIndex].Value.ToString());
-                //set lvl save flag to false
-                SaveMaster(false);
-            }
-            catch { }
         }
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -128,7 +115,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnMasterLvlCopy.Enabled = _masterlvls.Count > 0;
 
             //set lvl save flag to false
-            SaveMaster(false);
+            ///Save(false);
         }
         /*
         private void masternewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -141,7 +128,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         */
         private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_savemaster && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savemaster) {
+            if ((!EditorIsSaved && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
                 ofd.Title = "Load a Thumper Master file";
@@ -154,8 +141,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //load json from file into _load. The regex strips any comments from the text.
                     dynamic _load = TCLE.LoadFileLock(filepath);
                     LoadMaster(_load, filepath);
-                    //set lvl save flag to true.
-                    SaveMaster(true);
                 }
             }
         }
@@ -163,12 +148,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Save()
         {
             //if _loadedmaster is somehow not set, force Save As instead
-            if (_loadedmaster == null) {
+            if (LoadedMaster == null)
                 SaveAs();
-                return;
-            }
             else
-                WriteMaster();
+                SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
         public void SaveAs()
@@ -182,21 +165,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 _loadedmaster = $@"{storePath}\master_sequin.txt";
-                WriteMaster();
+                BuildSave(_properties);
                 //after saving new file, refresh the workingfolder
                 ///_mainform.btnWorkRefresh.PerformClick();
             }
-        }
-        public void WriteMaster()
-        {
-            //write contents direct to file without prompting save dialog
-            JObject _save = MasterBuildSave();
-            if (!TCLE.lockedfiles.ContainsKey(loadedmaster)) {
-                TCLE.lockedfiles.Add(loadedmaster, new FileStream(loadedmaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-            }
-            TCLE.WriteFileLock(TCLE.lockedfiles[loadedmaster], _save);
-            SaveMaster(true, true);
-            this.Text = $"sequin.master";
         }
         #endregion
 
@@ -283,7 +255,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 masterLvlList.Rows[dgvr - 1].Cells[1].Selected = true;
             }
-            SaveMaster(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnMasterLvlDown_Click(object sender, EventArgs e)
@@ -300,7 +272,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 masterLvlList.Rows[dgvr + 1].Cells[1].Selected = true;
             }
-            SaveMaster(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnMasterLvlCopy_Click(object sender, EventArgs e)
@@ -319,18 +291,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (MasterLvlData mld in clipboardmaster)
                 _masterlvls.Insert(_in, mld.Clone());
             TCLE.PlaySound("UIkpaste");
-        }
-
-        private void btnConfigColor_Click(object sender, EventArgs e)
-        {
-            TCLE.PlaySound("UIcoloropen");
-            Button button = (Button)sender;
-            TCLE.colorDialogNew.Color = button.BackColor;
-            if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
-                ColorButton(button, TCLE.colorDialogNew.Color);
-                TCLE.PlaySound("UIcolorapply");
-                SaveMaster(false);
-            }
         }
 
         private void btnMasterRefreshLvl_Click(object sender, EventArgs e)
@@ -362,8 +322,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            SaveMaster(true);
-            LoadMaster(masterjson, loadedmaster);
+            LoadMaster(_properties.revertPoint, LoadedMaster);
             TCLE.PlaySound("UIrevertchanges");
         }
 
@@ -421,10 +380,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load Config data (if file exists)
             LoadConfig();
             ///set save flag (master just loaded, has no changes)
-            SaveMaster(true);
-            masterjson = _load;
-            ///btnRevert.Enabled = true;
-            ///btnMasterRuntime.Enabled = true;
+            SaveCheckAndWrite(true);
         }
 
         public void LoadConfig()
@@ -448,12 +404,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public static void ColorButton(Control control, Color color)
-        {
-            control.BackColor = color;
-            control.ForeColor = Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B); ;
-        }
-
         public static void MasterLoadLvl(string path)
         {
             if ((/*!_mainform._savelvl && */MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savelvl*/) {
@@ -473,31 +423,34 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void SaveMaster(bool save, bool playsound = false)
+        public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
             //make the beeble emote
             TCLE.beeble.MakeFace();
 
-            _savemaster = save;
-            if (!save) {
-                /*
-                btnSave.Enabled = true;
-                btnRevert.Enabled = masterjson != null;
-                btnRevert.ToolTipText = masterjson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
-                toolstripTitleMaster.BackColor = Color.Maroon;
-                */
+            EditorIsSaved = IsSaved;
+            if (!IsSaved) {
+                //denote editor tab is not saved
+                if (!this.Text.EndsWith("*")) this.Text += "*";
+                //add current JSON to the undo list
+                _properties.undoItems.Add(BuildSave(_properties));
             }
             else {
-                /*
-                btnSave.Enabled = false;
-                btnRevert.Enabled = false;
-                toolstripTitleMaster.BackColor = Color.FromArgb(40, 40, 40);
-                */
+                //build the JSON to write to file
+                JObject _saveJSON = BuildSave(_properties);
+                _properties.revertPoint = _saveJSON;
+                //if file is not locked, lock it
+                if (!TCLE.lockedfiles.ContainsKey(LoadedMaster)) {
+                    TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                }
+                //write JSON to file
+                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
+
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
 
-        public JObject MasterBuildSave()
+        public static JObject BuildSave(MasterProperties _properties)
         {
             int checkpoints = 0;
             bool isolate_tracks = false;
@@ -509,7 +462,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 { "intro_lvl_name", _properties.introlvl.Replace("<none>", "") }
             };
             JArray groupings = new();
-            foreach (MasterLvlData group in _masterlvls) {
+            foreach (MasterLvlData group in MasterLvls) {
                 JObject s = new() {
                     { "lvl_name", group.lvlname.Replace("<none>", "") ?? "" },
                     { "gate_name", group.gatename.Replace("<none>", "") ?? "" },
@@ -530,7 +483,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _save.Add("groupings", groupings);
             _save.Add("isolate_tracks", isolate_tracks.ToString());
             _save.Add("checkpoint_lvl_name", _properties.checkpointlvl.Replace("<none>", ""));
-            masterjson = _save;
             ///end build
             ///
             ///begin building Config JSON object
@@ -578,7 +530,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///end build
 
             ///Delete extra config_ files in the folder, then write Config to file
-            string[] _files = Directory.GetFiles(Path.GetDirectoryName(loadedmaster), "config_*.txt");
+            string[] _files = Directory.GetFiles(Path.GetDirectoryName(LoadedMaster), "config_*.txt");
             foreach (string s in _files)
                 File.Delete(s);
             File.WriteAllText($@"{TCLE.WorkingFolder}\config_{TCLE.projectjson["level_name"]}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
@@ -590,16 +542,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void ResetMaster()
         {
             //reset things to default values
-            masterjson = null;
             _masterlvls.Clear();
             this.Text = "Master Editor";
             _properties.rail = Color.White;
             _properties.railglow = Color.White;
             _properties.path = Color.White;
-            _properties.skybox = "1";
+            _properties.skybox = "";
             _properties.bpm = 400;
             //set saved flag to true, because nothing is loaded
-            SaveMaster(true);
+            SaveCheckAndWrite(true);
         }
         #endregion
 

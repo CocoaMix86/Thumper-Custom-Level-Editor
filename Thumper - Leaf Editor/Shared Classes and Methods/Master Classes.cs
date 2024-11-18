@@ -9,6 +9,8 @@ using System.Drawing.Design;
 using System.Windows.Forms.Design;
 using System.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -79,12 +81,13 @@ namespace Thumper_Custom_Level_Editor
             parent = Parent;
             FilePath = path;
             sublevel = new MasterLvlData();
+            undoItems = new List<JObject>();
         }
 
-        public dynamic RevertPoint { get; set; }
-        public dynamic Save { get; set; }
-        public string Skybox { get { return Save["skybox_name"]; } }
-        public string Introlvl { get { return Save["intro_lvl_name"]; } }
+        [Browsable(false)]
+        public JObject revertPoint { get; set; }
+        [Browsable(false)]
+        public List<JObject> undoItems { get; set; }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
@@ -141,6 +144,10 @@ namespace Thumper_Custom_Level_Editor
 
         [Browsable(false)]
         public MasterLvlData sublevel { get; set; }
+
+        [CategoryAttribute("Sublevel Options")]
+        [DisplayName("Sublevel Name")]
+        public string sublevelname { get { return sublevel.name; } }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Play Plus")]

@@ -178,6 +178,7 @@
             this.btnMasterLvlUp.Name = "btnMasterLvlUp";
             this.btnMasterLvlUp.Size = new Size(24, 24);
             this.btnMasterLvlUp.ToolTipText = "Move selected sublevel up";
+            this.btnMasterLvlUp.Click += this.btnMasterLvlUp_Click;
             // 
             // btnMasterLvlDown
             // 
@@ -189,6 +190,7 @@
             this.btnMasterLvlDown.Name = "btnMasterLvlDown";
             this.btnMasterLvlDown.Size = new Size(24, 24);
             this.btnMasterLvlDown.ToolTipText = "Move selected sublevel down";
+            this.btnMasterLvlDown.Click += this.btnMasterLvlDown_Click;
             // 
             // btnMasterLvlCopy
             // 
