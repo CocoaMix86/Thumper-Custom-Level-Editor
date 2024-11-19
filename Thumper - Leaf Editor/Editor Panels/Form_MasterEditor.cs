@@ -71,7 +71,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //if not selecting the file column, return and do nothing
-            if (e.ColumnIndex == -1 || e.ColumnIndex > 1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
+            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
@@ -99,7 +99,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //get the runtime of the object
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _masterlvls[_in]);
                 string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                masterLvlList.Rows.Insert(_in, new object[] { (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate), _masterlvls[_in].lvlname, $"{beats} beats -- {time}" });
+                masterLvlList.Rows.Insert(_in, new object[] { 0, (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate), _masterlvls[_in].lvlname, $"{beats} beats -- {time}" });
             }
             //if action REMOVE, remove row from the master DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
@@ -114,6 +114,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnMasterLvlUp.Enabled = _masterlvls.Count > 1;
             btnMasterLvlDown.Enabled = _masterlvls.Count > 1;
             btnMasterLvlCopy.Enabled = _masterlvls.Count > 0;
+
+            foreach (DataGridViewRow dgvr in masterLvlList.Rows) {
+                string levelnum = "";
+                if (_masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL")
+                    levelnum = "Ω";
+                else if (_masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_PYRAMID")
+                    levelnum = "∞";
+                else
+                    levelnum = (dgvr.Index + 1).ToString();
+                dgvr.Cells[0].Value = levelnum;
+            }
 
             //set lvl save flag to false
             ///Save(false);
@@ -222,6 +233,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     checkpoint = true,
                     checkpoint_leader = "<none>",
                     rest = "<none>",
+                    gatesectiontype = "",
                     id = TCLE.rng.Next(0, 1000000)
                 });
             else if (_load["obj_type"] == "SequinGate")
@@ -232,13 +244,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     checkpoint = true,
                     checkpoint_leader = "<none>",
                     rest = "<none>",
+                    gatesectiontype = (string)_load["section_type"],
                     id = TCLE.rng.Next(0, 1000000)
                 });
         }
 
         private void btnMasterLvlUp_Click(object sender, EventArgs e)
         {
-            List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+            List<int> selectedrows = masterLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == 0))
                 return;
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
@@ -248,14 +261,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             masterLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
-                masterLvlList.Rows[dgvr - 1].Cells[1].Selected = true;
+                masterLvlList.Rows[dgvr - 1].Selected = true;
             }
             SaveCheckAndWrite(false);
         }
 
         private void btnMasterLvlDown_Click(object sender, EventArgs e)
         {
-            List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+            List<int> selectedrows = masterLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == masterLvlList.RowCount - 1))
                 return;
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
@@ -265,7 +278,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             masterLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
-                masterLvlList.Rows[dgvr + 1].Cells[1].Selected = true;
+                masterLvlList.Rows[dgvr + 1].Selected = true;
             }
             SaveCheckAndWrite(false);
         }

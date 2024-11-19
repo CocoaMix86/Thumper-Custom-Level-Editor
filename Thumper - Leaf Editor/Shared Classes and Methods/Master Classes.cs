@@ -65,6 +65,9 @@ namespace Thumper_Custom_Level_Editor
         public string rest { get; set; }
 
         [Browsable(false)]
+        public string gatesectiontype { get; set; }
+
+        [Browsable(false)]
         public string checkpoint_leader { get; set; }
         [Browsable(false)]
         public int id { get; set; }

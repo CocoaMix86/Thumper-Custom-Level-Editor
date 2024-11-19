@@ -34,6 +34,10 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MasterEditor));
             this.masterLvlList = new DataGridView();
+            this.SublevelNum = new DataGridViewTextBoxColumn();
+            this.masterfiletype = new DataGridViewImageColumn();
+            this.masterLvl = new DataGridViewTextBoxColumn();
+            this.Runtime = new DataGridViewTextBoxColumn();
             this.masterToolStrip = new ToolStrip();
             this.btnMasterLvlAdd = new ToolStripButton();
             this.btnMasterLvlDelete = new ToolStripButton();
@@ -47,9 +51,6 @@
             this.propertyGridMaster = new PropertyGrid();
             this.lblConfigColorHelp = new Label();
             this.splitContainer1 = new SplitContainer();
-            this.masterfiletype = new DataGridViewImageColumn();
-            this.masterLvl = new DataGridViewTextBoxColumn();
-            this.Runtime = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -78,7 +79,7 @@
             this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.masterLvlList.Columns.AddRange(new DataGridViewColumn[] { this.masterfiletype, this.masterLvl, this.Runtime });
+            this.masterLvlList.Columns.AddRange(new DataGridViewColumn[] { this.SublevelNum, this.masterfiletype, this.masterLvl, this.Runtime });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -114,6 +115,44 @@
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
             this.masterLvlList.DragDrop += this.masterLvlList_DragDrop;
             this.masterLvlList.DragEnter += this.masterLvlList_DragEnter;
+            // 
+            // SublevelNum
+            // 
+            this.SublevelNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SublevelNum.HeaderText = "";
+            this.SublevelNum.Name = "SublevelNum";
+            this.SublevelNum.ReadOnly = true;
+            this.SublevelNum.Resizable = DataGridViewTriState.False;
+            this.SublevelNum.Width = 18;
+            // 
+            // masterfiletype
+            // 
+            this.masterfiletype.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.masterfiletype.HeaderText = "";
+            this.masterfiletype.Name = "masterfiletype";
+            this.masterfiletype.ReadOnly = true;
+            this.masterfiletype.Width = 5;
+            // 
+            // masterLvl
+            // 
+            this.masterLvl.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            this.masterLvl.FillWeight = 70F;
+            this.masterLvl.HeaderText = "Sublevel";
+            this.masterLvl.Name = "masterLvl";
+            this.masterLvl.ReadOnly = true;
+            this.masterLvl.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Runtime
+            // 
+            this.Runtime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.Runtime.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Runtime.FillWeight = 30F;
+            this.Runtime.HeaderText = "Runtime";
+            this.Runtime.Name = "Runtime";
+            this.Runtime.ReadOnly = true;
+            this.Runtime.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // masterToolStrip
             // 
@@ -213,9 +252,9 @@
             this.label30.Location = new Point(0, 0);
             this.label30.Margin = new Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new Size(81, 13);
+            this.label30.Size = new Size(91, 13);
             this.label30.TabIndex = 94;
-            this.label30.Text = "Lvl/Gate List";
+            this.label30.Text = "Sublevel Order";
             // 
             // lblMasterlvllistHelp
             // 
@@ -296,35 +335,6 @@
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
             // 
-            // masterfiletype
-            // 
-            this.masterfiletype.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.masterfiletype.HeaderText = "";
-            this.masterfiletype.Name = "masterfiletype";
-            this.masterfiletype.ReadOnly = true;
-            this.masterfiletype.Width = 5;
-            // 
-            // masterLvl
-            // 
-            this.masterLvl.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            this.masterLvl.FillWeight = 70F;
-            this.masterLvl.HeaderText = "Sublevel";
-            this.masterLvl.Name = "masterLvl";
-            this.masterLvl.ReadOnly = true;
-            this.masterLvl.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Runtime
-            // 
-            this.Runtime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.Runtime.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Runtime.FillWeight = 30F;
-            this.Runtime.HeaderText = "Runtime";
-            this.Runtime.Name = "Runtime";
-            this.Runtime.ReadOnly = true;
-            this.Runtime.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
             // Form_MasterEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -365,6 +375,7 @@
         private System.Windows.Forms.PropertyGrid propertyGridMaster;
         private System.Windows.Forms.Label lblConfigColorHelp;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private DataGridViewTextBoxColumn SublevelNum;
         private DataGridViewImageColumn masterfiletype;
         private DataGridViewTextBoxColumn masterLvl;
         private DataGridViewTextBoxColumn Runtime;
