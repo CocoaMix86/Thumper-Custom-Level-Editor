@@ -199,7 +199,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dynamic _load = TCLE.LoadFileLock(path);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] is not "SequinLevel" and not "SequinGate") {
-                MessageBox.Show("This does not appear to be a lvl or a gate file!", "File load error");
+                MessageBox.Show("That does not appear to be a lvl or a gate file.\nItem not added to master.", "Bumper Custom Level Editor");
                 return;
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
