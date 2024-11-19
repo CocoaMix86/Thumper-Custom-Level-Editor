@@ -522,6 +522,11 @@ namespace Thumper_Custom_Level_Editor
         public static void OpenFile(TCLE form, string filepath)
         {
             dynamic _load = LoadFileLock(filepath);
+            string name = _load["obj_name"];
+            if (form.dockMain.Documents.Where(x => x.DockHandler.TabText == name).Any()) {
+                form.dockMain.Documents.Where(x => x.DockHandler.TabText == name).First().DockHandler.Activate();
+                return;
+            }
             string _type = _load["obj_type"];
             if (_type == "SequinMaster") {
                 Form_MasterEditor master = new(_load, filepath);
