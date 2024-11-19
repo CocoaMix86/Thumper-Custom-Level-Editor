@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -94,11 +95,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //add each file inside the folder to the tree
             foreach (FileInfo file in directoryInfo.GetFiles()) {
+                dynamic _load = TCLE.LoadFileLock(file.FullName);
                 TreeNode _tn = new() {
                     Text = file.Name,
                     Name = file.Name,
-                    ImageKey = file.Name.Split('_')[0],
-                    SelectedImageKey = file.Name.Split('_')[0],
+                    ImageKey = (string)_load["obj_type"] ?? (((JArray)_load["items"])?.Count() > 0 ? (string)_load["items"][0]["obj_type"] : ""),
+                    SelectedImageKey = (string)_load["obj_type"] ?? (((JArray)_load["items"])?.Count() > 0 ? (string)_load["items"][0]["obj_type"] : ""),
+                    //ImageKey = file.Name.Split('_')[0],
+                    //SelectedImageKey = file.Name.Split('_')[0],
                     ContextMenuStrip = contextMenuFileClick
                 };
                 /*
