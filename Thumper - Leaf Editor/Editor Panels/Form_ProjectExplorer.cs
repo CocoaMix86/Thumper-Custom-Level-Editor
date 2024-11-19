@@ -65,7 +65,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ProjectRoot.ImageKey = "project";
                 ProjectRoot.SelectedImageKey = "project";
                 ProjectRoot.NodeFont = new Font("Microsoft Sans Serif", 8, System.Drawing.FontStyle.Bold);
-                ProjectRoot.ContextMenuStrip = contextMenuFolderClick;
+                ProjectRoot.ContextMenuStrip = contextMenuProject;
                 //ProjectRoot.Text = $"Project '{ProjectRoot.Text}'";
             }
             //if using filters or search, expand all folders to show all results
@@ -215,6 +215,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             filestocopy = selectedNodes.Cast<TreeNode>().ToList();
             toolstripFolderPaste.Enabled = true;
+            toolstripProjectPaste.Enabled = true;
             if ((sender as ToolStripItem).Text == "Cut")
                 cutfile = true;
         }
@@ -324,6 +325,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     cutfile = false;
                     toolstripFolderPaste.Enabled = false;
+                    toolstripProjectPaste.Enabled = false;
                 }
                 else {
                     if (tn.ImageKey == "folder" && Directory.Exists(source)) {
