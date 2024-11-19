@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int _in = e.NewStartingIndex;
                 //get the runtime of the object
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _masterlvls[_in]);
-                TimeSpan time = TimeSpan.FromSeconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalSeconds);
+                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows.Insert(_in, new object[] { (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate), _masterlvls[_in].lvlname, $"{beats} beats -- {time}" });
             }
             //if action REMOVE, remove row from the master DGV
@@ -425,7 +425,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             foreach (MasterLvlData _lvl in _masterlvls) {
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _lvl);
-                TimeSpan time = TimeSpan.FromSeconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalSeconds);
+                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[2].Value = $"{beats} beats -- {time}";
             }
         }

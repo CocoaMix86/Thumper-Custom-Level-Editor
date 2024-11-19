@@ -125,7 +125,15 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("BPM")]
         [Description("Beats Per Minute. If your song is at 100bpm, you'll likely want to map at either 200 or 400, so you can place objects on half note and quarter note intervals.")]
         [RefreshProperties(RefreshProperties.All)]
-        public decimal bpm { get { return Bpm; } set { Bpm = value; parent.RecalcLvlRuntime(); } }
+        public decimal bpm { 
+            get { return Bpm; } 
+            set {
+                if (value < 0)
+                    value = 1;
+                if (value > 20000)
+                    value = 20000;
+                Bpm = value;
+                parent.RecalcLvlRuntime(); } }
         private decimal Bpm;
 
         [CategoryAttribute("Options")]
@@ -151,7 +159,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public TimeSpan runtime { get { return TimeSpan.FromSeconds((int)TimeSpan.FromMinutes(beats / (double)bpm).TotalSeconds); } }
+        public string runtime { get { return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)bpm).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"); } }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Sublevel Name")]
