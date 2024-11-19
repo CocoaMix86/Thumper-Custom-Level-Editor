@@ -80,14 +80,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridMaster.Refresh();
         }
 
-
-        private void masterLvlList_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Move;
-        }
+        private void masterLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         private void masterLvlList_DragDrop(object sender, DragEventArgs e)
         {
-            ;
+            TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+            AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder)}\{dragdropnode.FullPath}");
         }
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
