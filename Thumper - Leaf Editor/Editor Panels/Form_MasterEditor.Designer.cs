@@ -34,9 +34,6 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MasterEditor));
             this.masterLvlList = new DataGridView();
-            this.masterfiletype = new DataGridViewImageColumn();
-            this.masterLvl = new DataGridViewTextBoxColumn();
-            this.Runtime = new DataGridViewTextBoxColumn();
             this.masterToolStrip = new ToolStrip();
             this.btnMasterLvlAdd = new ToolStripButton();
             this.btnMasterLvlDelete = new ToolStripButton();
@@ -50,6 +47,9 @@
             this.propertyGridMaster = new PropertyGrid();
             this.lblConfigColorHelp = new Label();
             this.splitContainer1 = new SplitContainer();
+            this.masterfiletype = new DataGridViewImageColumn();
+            this.masterLvl = new DataGridViewTextBoxColumn();
+            this.Runtime = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -63,7 +63,6 @@
             this.masterLvlList.AllowDrop = true;
             this.masterLvlList.AllowUserToAddRows = false;
             this.masterLvlList.AllowUserToDeleteRows = false;
-            this.masterLvlList.AllowUserToResizeColumns = false;
             this.masterLvlList.AllowUserToResizeRows = false;
             this.masterLvlList.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.masterLvlList.BorderStyle = BorderStyle.None;
@@ -109,40 +108,12 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(300, 506);
+            this.masterLvlList.Size = new Size(300, 477);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
             this.masterLvlList.DragDrop += this.masterLvlList_DragDrop;
             this.masterLvlList.DragEnter += this.masterLvlList_DragEnter;
-            // 
-            // masterfiletype
-            // 
-            this.masterfiletype.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.masterfiletype.HeaderText = "";
-            this.masterfiletype.Name = "masterfiletype";
-            this.masterfiletype.ReadOnly = true;
-            this.masterfiletype.Width = 5;
-            // 
-            // masterLvl
-            // 
-            this.masterLvl.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            this.masterLvl.HeaderText = "Sublevel";
-            this.masterLvl.Name = "masterLvl";
-            this.masterLvl.ReadOnly = true;
-            this.masterLvl.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Runtime
-            // 
-            this.Runtime.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.Runtime.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Runtime.HeaderText = "Runtime";
-            this.Runtime.Name = "Runtime";
-            this.Runtime.ReadOnly = true;
-            this.Runtime.SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.Runtime.Width = 58;
             // 
             // masterToolStrip
             // 
@@ -311,10 +282,10 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
-            this.splitContainer1.Panel1.Controls.Add(this.masterToolStrip);
-            this.splitContainer1.Panel1.Controls.Add(this.lblConfigColorHelp);
             this.splitContainer1.Panel1.Controls.Add(this.masterLvlList);
+            this.splitContainer1.Panel1.Controls.Add(this.masterToolStrip);
+            this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
+            this.splitContainer1.Panel1.Controls.Add(this.lblConfigColorHelp);
             this.splitContainer1.Panel1.Controls.Add(this.label30);
             // 
             // splitContainer1.Panel2
@@ -324,6 +295,35 @@
             this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
+            // 
+            // masterfiletype
+            // 
+            this.masterfiletype.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.masterfiletype.HeaderText = "";
+            this.masterfiletype.Name = "masterfiletype";
+            this.masterfiletype.ReadOnly = true;
+            this.masterfiletype.Width = 5;
+            // 
+            // masterLvl
+            // 
+            this.masterLvl.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            this.masterLvl.FillWeight = 70F;
+            this.masterLvl.HeaderText = "Sublevel";
+            this.masterLvl.Name = "masterLvl";
+            this.masterLvl.ReadOnly = true;
+            this.masterLvl.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Runtime
+            // 
+            this.Runtime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.Runtime.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Runtime.FillWeight = 30F;
+            this.Runtime.HeaderText = "Runtime";
+            this.Runtime.Name = "Runtime";
+            this.Runtime.ReadOnly = true;
+            this.Runtime.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // Form_MasterEditor
             // 
