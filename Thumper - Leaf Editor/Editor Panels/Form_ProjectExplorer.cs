@@ -97,8 +97,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (FileInfo file in directoryInfo.GetFiles()) {
                 dynamic _load = TCLE.LoadFileLock(file.FullName);
                 TreeNode _tn = new() {
-                    Text = file.Name,
-                    Name = file.Name,
+                    Text = (string)_load["obj_name"] ?? file.Name,
+                    Name = (string)_load["obj_name"] ?? file.Name,
                     ImageKey = (string)_load["obj_type"] ?? (((JArray)_load["items"])?.Count() > 0 ? (string)_load["items"][0]["obj_type"] : ""),
                     SelectedImageKey = (string)_load["obj_type"] ?? (((JArray)_load["items"])?.Count() > 0 ? (string)_load["items"][0]["obj_type"] : ""),
                     //ImageKey = file.Name.Split('_')[0],
