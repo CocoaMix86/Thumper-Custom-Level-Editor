@@ -44,6 +44,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         bool dontcancelifrename = false;
         bool filterenabled = false;
         bool filtersearch = false;
+        string renametype;
         string renamefile;
         string renamenode;
         string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
@@ -51,12 +52,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         TreeNode previousNode;
         List<TreeNode> filestocopy;
         List<TreeNode> selectedNodes = new();
+        //string is obj_name, FileInfo is file itself
+        public Dictionary<string, FileInfo> projectfiles = new();
+        public Dictionary<string, DirectoryInfo> projectfolders = new();
         #endregion
         #region Create Tree
         private void CreateTreeView()
         {
             //clear existing treeview
             treeView1.Nodes.Clear();
+            projectfiles.Clear();
             if (projectfolder.Exists) {
                 //Build the tree
                 BuildTree(projectfolder, treeView1.Nodes);
@@ -87,6 +92,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ContextMenuStrip = contextMenuFolderClick
             };
             addInMe.Add(folder);
+            projectfolders.Add(directoryInfo.Name, directoryInfo);
 
             //Build subtree for each folder inside this folder
             foreach (DirectoryInfo subdir in directoryInfo.GetDirectories()) {
@@ -101,10 +107,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Name = (string)_load["obj_name"] ?? file.Name,
                     ImageKey = (string)_load["obj_type"] ?? (((JArray)_load["items"])?.Count() > 0 ? (string)_load["items"][0]["obj_type"] : ""),
                     SelectedImageKey = (string)_load["obj_type"] ?? (((JArray)_load["items"])?.Count() > 0 ? (string)_load["items"][0]["obj_type"] : ""),
-                    //ImageKey = file.Name.Split('_')[0],
-                    //SelectedImageKey = file.Name.Split('_')[0],
                     ContextMenuStrip = contextMenuFileClick
                 };
+                projectfiles.Add((string)_load["obj_name"] ?? file.Name, file);
                 /*
                 if (file.Name.Contains("xfm_") || file.Name.Contains("spn_") || file.Name.Contains("config_") || file.Name.Contains(".color"))
                     continue;*/
@@ -232,6 +237,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             renamefile = e.Node.FullPath;
             renamenode = e.Node.Name;
+            renametype = e.Node.ImageKey == "folder" ? "folder" : "file";
         }
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
@@ -245,7 +251,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 node.Text = renamenode;
                 return;
             }
-            string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
+            string source = renametype == "folder" ? projectfolders[renamenode].FullName : projectfiles[renamenode].FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
             string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{node.FullPath}";
             //check if same name
             if (renamefile == node.FullPath) {
@@ -259,7 +265,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //check for changing file extension
             if (node.ImageKey != "folder" && Path.GetExtension(source) != Path.GetExtension(dest)) {
-                if (MessageBox.Show("If you chaneg a file name extension, the file may become\nunusable. Are you sure you want to change it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                if (MessageBox.Show("If you change a file name extension, the file may become\nunusable. Are you sure you want to change it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     node.Text = renamenode;
                     return;
                 }
@@ -267,9 +273,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //move the folder or file
             if (node.ImageKey == "folder") {
                 Directory.Move(source, dest);
+                projectfolders.Remove(renamenode);
+                projectfolders.Add(node.Name, new DirectoryInfo(dest));
             }
             else {
                 File.Move(source, dest);
+                projectfiles.Remove(renamenode);
+                projectfiles.Add(node.Name, new FileInfo(dest));
             }
         }
         #endregion
@@ -519,7 +529,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if destination contains any of the moved items
             //if so, cancel the whole operation
             foreach (TreeNode tn in selectedNodes) {
-                string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
+                string dest = $@"{projectfolders[targetNode.Name].FullName}\{projectfiles[tn.Name].Name}";
                 if (File.Exists(dest) || Directory.Exists(dest)) {
                     MessageBox.Show($"Cannot move the item '{tn.Name}'. An item with that name already exists in the destination folder.", "Thumper Custom Level Editor");
                     targetNode.BackColor = Color.FromArgb(56, 56, 56);
@@ -528,8 +538,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //Finally, move each selected item to the destination
             foreach (TreeNode tn in selectedNodes) {
-                string source = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{tn.FullPath}";
-                string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{targetNode.FullPath}\{tn.Name}";
+                string source = $"{projectfiles[tn.Name].FullName}";
+                string dest = $@"{projectfolders[targetNode.Name].FullName}\{projectfiles[tn.Name].Name}";
                 if (tn.ImageKey == "folder") {
                     Directory.Move(source, dest);
                 }
