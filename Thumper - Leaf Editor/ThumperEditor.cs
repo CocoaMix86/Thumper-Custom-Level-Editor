@@ -67,13 +67,9 @@ namespace Thumper_Custom_Level_Editor
                     }
                     ClearFileLock();
                     //update working folder
-                    lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                     WorkingFolder = value;
                     toolstripLevelName.Text = projectjson["level_name"];
                     toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
-                    //populate lvlsinworkfolder with all .lvl files in the project
-                    //this is needed for some specific dropdowns.
-                    UpdateLevelLists();
                     //add to recent files
                     if (Properties.Settings.Default.Recentfiles.Contains(workingfolder))
                         Properties.Settings.Default.Recentfiles.Remove(workingfolder);
@@ -109,7 +105,7 @@ namespace Thumper_Custom_Level_Editor
 
             //set custom renderer
             toolStripTitle.Renderer = new ToolStripMainForm();
-            toolStripMain.Renderer = new ToolStripMainForm();
+            toolStripMain.Renderer = new ToolStripOverride();
             contextmenuFile.Renderer = new ContextMenuColors();
             contextmenuEdit.Renderer = new ContextMenuColors();
             contextMenuProject.Renderer = new ContextMenuColors();

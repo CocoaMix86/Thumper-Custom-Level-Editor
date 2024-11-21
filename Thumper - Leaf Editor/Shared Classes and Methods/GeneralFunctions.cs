@@ -207,13 +207,6 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        private void UpdateLevelLists()
-        {
-            lvlsinworkfolder = Directory.GetFiles(workingfolder, "*.lvl", SearchOption.AllDirectories).ToList() ?? new List<string>();
-            lvlsinworkfolder.Add("<none>");
-            lvlsinworkfolder.Sort();
-        }
-
         public string SearchReferences(dynamic _load, string filepath)
         {
             string referencefiles = "";
@@ -517,16 +510,15 @@ namespace Thumper_Custom_Level_Editor
             if (WorkingFolder == null)
                 return;
             lvlsinworkfolder.Clear();
-            foreach (string file in Directory.GetFiles(WorkingFolder, "*", SearchOption.AllDirectories)) {
+            foreach (string file in Directory.GetFiles(WorkingFolder, "*.lvl", SearchOption.AllDirectories)) {
                 dynamic loadfile = LoadFileLock(file);
+                if (loadfile == null) continue;
                 if ((string)loadfile["obj_type"] == "SequinLevel") {
                     lvlsinworkfolder.Add((string)loadfile["obj_name"]);
                 }
             }
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
-
-            PlaySound("UIrefresh");
         }
     }
 }

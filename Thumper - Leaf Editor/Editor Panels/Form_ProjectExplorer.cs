@@ -28,7 +28,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;
             //populate treeview on first load
-            if (projectfolder != null) {
+            if (_projectfolder != null) {
                 projectfolder = new DirectoryInfo(_projectfolder);
                 CreateTreeView();
             }
@@ -59,9 +59,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Create Tree
         private void CreateTreeView()
         {
+            if (projectfolder == null) return;
             //clear existing treeview
             treeView1.Nodes.Clear();
             projectfiles.Clear();
+            projectfolders.Clear();
             if (projectfolder.Exists) {
                 //Build the tree
                 BuildTree(projectfolder, treeView1.Nodes);
@@ -71,7 +73,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ProjectRoot.SelectedImageKey = "project";
                 ProjectRoot.NodeFont = new Font("Microsoft Sans Serif", 8, System.Drawing.FontStyle.Bold);
                 ProjectRoot.ContextMenuStrip = contextMenuProject;
-                //ProjectRoot.Text = $"Project '{ProjectRoot.Text}'";
+
+                TCLE.ReloadLvlsInProject();
             }
             //if using filters or search, expand all folders to show all results
             if (filterenabled || filtersearch)
@@ -102,7 +105,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //add each file inside the folder to the tree
             foreach (FileInfo file in directoryInfo.GetFiles()) {
                 dynamic _load = TCLE.LoadFileLock(file.FullName);
-                if (_load == null) continue;
+                if (_load == null || file.Extension is ".TCL") continue;
                 TreeNode _tn = new() {
                     Text = (string)_load["obj_name"] ?? file.Name,
                     Name = (string)_load["obj_name"] ?? file.Name,
@@ -121,7 +124,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else if (!filterenabled)
                     folder.Nodes.Add(_tn);
-                else if ((filterLeaf.Checked && file.Extension is "leaf") || (filterLvl.Checked && file.Extension is "lvl") || (filterGate.Checked && file.Extension is "gate") || (filterMaster.Checked && file.Extension is "master") || (filterSample.Checked && file.Extension is "samp"))
+                else if ((filterLeaf.Checked && file.Extension is ".leaf") || (filterLvl.Checked && file.Extension is ".lvl") || (filterGate.Checked && file.Extension is ".gate") || (filterMaster.Checked && file.Extension is ".master") || (filterSample.Checked && file.Extension is ".samp"))
                     folder.Nodes.Add(_tn);
             }
         }
@@ -145,7 +148,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             filterenabled = !filterenabled;
             //this style button doesn't have a Checked state, so we change its backcolor to show its enabled or not
-            btnFilter.BackColor = filterenabled ? Color.LightBlue : Color.FromArgb(35, 35, 35);
+            btnFilter.BackColor = filterenabled ? Color.FromArgb(46, 46, 46) : Color.FromArgb(35, 35, 35);
             //recreate the tree when filter state changes
             CreateTreeView();
         }

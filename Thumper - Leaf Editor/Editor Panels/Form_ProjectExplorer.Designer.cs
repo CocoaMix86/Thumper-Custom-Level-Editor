@@ -183,7 +183,6 @@
             // btnFilter
             // 
             this.btnFilter.BackColor = Color.FromArgb(35, 35, 35);
-            this.btnFilter.BackgroundImage = Properties.Resources.pixel;
             this.btnFilter.BackgroundImageLayout = ImageLayout.Center;
             this.btnFilter.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnFilter.DropDown = this.contextMenuFilters;
@@ -200,7 +199,6 @@
             this.contextMenuFilters.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuFilters.Items.AddRange(new ToolStripItem[] { this.filterLeaf, this.filterLvl, this.filterGate, this.filterMaster, this.filterSample });
             this.contextMenuFilters.Name = "workingfolderRightClick";
-            this.contextMenuFilters.OwnerItem = this.btnFilter;
             this.contextMenuFilters.RenderMode = ToolStripRenderMode.System;
             this.contextMenuFilters.Size = new Size(114, 114);
             this.contextMenuFilters.Closing += this.contextMenuFilters_Closing;
