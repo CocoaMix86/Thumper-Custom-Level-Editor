@@ -115,13 +115,13 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("Intro Lvl")]
         [Description("This lvl will play at the beginning of your level, and whenever you restart.")]
-        [Editor(typeof(LvlPicker), typeof(UITypeEditor))]
+        [TypeConverter(typeof(LvlList))]
         public string introlvl { get; set; }
 
         [CategoryAttribute("Options")]
         [DisplayName("Checkpoint Lvl")]
         [Description("This lvl will play immediately after each checkpoint.")]
-        [Editor(typeof(LvlPicker), typeof(UITypeEditor))]
+        [TypeConverter(typeof(LvlList))]
         public string checkpointlvl { get; set; }
 
         [CategoryAttribute("Runtime")]
@@ -156,31 +156,18 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Rest Lvl")]
         [Description("The rest lvl will play before the sublevel.")]
-        [Editor(typeof(LvlPicker), typeof(UITypeEditor))]
+        [TypeConverter(typeof(LvlList))]
         public string rest { get { return sublevel.rest; } set { sublevel.rest = value; } }
     }
 
-    class LvlPicker : UITypeEditor
+    public class LvlList : StringConverter
     {
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext? context)
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            return UITypeEditorEditStyle.Modal;
-        }
-        public override object EditValue(ITypeDescriptorContext? context, System.IServiceProvider? provider, object? value)
-        {
-            IWindowsFormsEditorService svc = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
-            string foo = value as string;
-            if (svc != null && foo != null) {
-                TCLE.ReloadLvlsInProject();
-                using (FileListBox form = new(TCLE.lvlsinworkfolder)) {
-                    form.StartPosition = FormStartPosition.Manual;
-                    form.Location = new Point(Cursor.Position.X - 100, Cursor.Position.Y - 50);
-                    if (svc.ShowDialog(form) == DialogResult.OK) {
-                        return form.Value; // update object
-                    }
-                }
-            }
-            return value; // can also replace the wrapper object here
+            TCLE.ReloadLvlsInProject();
+            return new StandardValuesCollection(TCLE.lvlsinworkfolder);
         }
     }
 }
