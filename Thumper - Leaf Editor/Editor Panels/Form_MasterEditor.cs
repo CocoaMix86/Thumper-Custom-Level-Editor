@@ -60,6 +60,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<MasterLvlData> clipboardmaster = new();
         public ObservableCollection<MasterLvlData> _masterlvls { get { return _properties.masterlvls; } set { _properties.masterlvls = value; } }
         public MasterProperties _properties;
+        public static decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
         #region EventHandlers
@@ -98,7 +99,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int _in = e.NewStartingIndex;
                 //get the runtime of the object
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _masterlvls[_in]);
-                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows.Insert(_in, new object[] { 0, (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate), _masterlvls[_in].lvlname, $"{beats} beats -- {time}" });
             }
             //if action REMOVE, remove row from the master DGV
@@ -345,8 +346,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
                 checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
-            ///load Config data (if file exists)
-            LoadConfig();
 
             ///Clear form elements so new data can load
             _masterlvls.Clear();
@@ -365,27 +364,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             ///set save flag (master just loaded, has no changes)
             SaveCheckAndWrite(true);
-        }
-
-        public void LoadConfig()
-        {
-            List<string> _configfile = Directory.GetFiles(TCLE.WorkingFolder, "config_*.txt", SearchOption.AllDirectories).ToList();
-            if (_configfile.Count > 0) {
-                dynamic _load = JsonConvert.DeserializeObject(Regex.Replace(File.ReadAllText(_configfile[0]), "#.*", ""));
-                _properties.bpm = (decimal)_load["bpm"];
-                dynamic railcolor = _load["rails_color"];
-                _properties.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
-                dynamic railglowcolor = _load["rails_glow_color"];
-                _properties.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
-                dynamic pathcolor = _load["path_color"];
-                _properties.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
-            }
-            else {
-                _properties.bpm = 420;
-                _properties.rail = Color.White;
-                _properties.railglow = Color.White;
-                _properties.path = Color.White;
-            }
         }
 
         public static void MasterLoadLvl(string path)
@@ -438,7 +416,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             foreach (MasterLvlData _lvl in _masterlvls) {
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _lvl);
-                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)_properties.bpm).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[2].Value = $"{beats} beats -- {time}";
             }
         }
@@ -478,10 +456,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _save.Add("checkpoint_lvl_name", _properties.checkpointlvl.Replace("<none>", ""));
             ///end build
             ///
+            /*
             ///begin building Config JSON object
             JObject _config = new() {
                 { "obj_type", "LevelLib" },
-                { "bpm", _properties.bpm }
+                { "bpm", BPM }
             };
             //for each lvl in Master that has checkpoint:True, Config requires a "SECTION_LINEAR"
             JArray level_sections = new();
@@ -527,7 +506,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (string s in _files)
                 File.Delete(s);
             File.WriteAllText($@"{TCLE.WorkingFolder}\config_{TCLE.projectjson["level_name"]}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
-
+            */
             ///only need to return _save, since _config is written already
             return _save;
         }
@@ -537,11 +516,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //reset things to default values
             _masterlvls.Clear();
             this.Text = "Master Editor";
-            _properties.rail = Color.White;
-            _properties.railglow = Color.White;
-            _properties.path = Color.White;
             _properties.skybox = "";
-            _properties.bpm = 400;
             //set saved flag to true, because nothing is loaded
             SaveCheckAndWrite(true);
         }
