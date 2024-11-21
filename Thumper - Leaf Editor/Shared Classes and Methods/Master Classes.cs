@@ -20,11 +20,8 @@ namespace Thumper_Custom_Level_Editor
     {
         public MasterLvlData() { }
 
-        [Browsable(false)]
         public string type { get; set; }
-
         private string Name;
-        [Browsable(false)]
         public string name
         {
             get { return Name; }
@@ -33,43 +30,15 @@ namespace Thumper_Custom_Level_Editor
                 Name = value[..idx];
             }
         }
-        [CategoryAttribute("General")]
-        [DisplayName("Sublevel Name")]
-        [Description("")]
         public string noneditname { get { return Name; } }
-
-        [Browsable(false)]
         public string lvlname { get { return $"{name}.lvl"; } }
-        [Browsable(false)]
         public string gatename { get { return $"{name}.gate"; } }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Play Plus")]
-        [Description("When True, the sublevel shows up in Play+. Useful to have a tutorial sublevel in Play and then have it not show up in Play+.")]
         public bool playplus { get; set; }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Checkpoint")]
-        [Description("Enables the checkpoint that follows this sublevel.")]
         public bool checkpoint { get; set; }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Isolate")]
-        [Description("If True, only isolated sublevels will play in game. Mainly used for testing your level.")]
         public bool isolate { get; set; }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Rest Lvl")]
-        [Description("The rest lvl will play before the sublevel.")]
-        [Editor(typeof(LvlPicker), typeof(UITypeEditor))]
         public string rest { get; set; }
-
-        [Browsable(false)]
         public string gatesectiontype { get; set; }
-
-        [Browsable(false)]
         public string checkpoint_leader { get; set; }
-        [Browsable(false)]
         public int id { get; set; }
 
         public MasterLvlData Clone()
