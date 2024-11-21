@@ -10,14 +10,14 @@ using System.Collections.Generic;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class ProjectProperties : Form
+    public partial class ProjectPropertiesForm : Form
     {
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         private TCLE mainform { get; set; }
         private bool isthisnew;
         private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
 
-        public ProjectProperties(TCLE form, bool newlevel)
+        public ProjectPropertiesForm(TCLE form, bool newlevel)
 		{
             isthisnew = newlevel;
 			InitializeComponent();
@@ -111,7 +111,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public bool CreateCustomLevelFolder(ProjectProperties input)
+        public bool CreateCustomLevelFolder(ProjectPropertiesForm input)
         {
             string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
             //check if any files are unsaved before moving folders

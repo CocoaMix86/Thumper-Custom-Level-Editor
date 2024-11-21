@@ -79,12 +79,12 @@
             this.toolStripSeparator6 = new ToolStripSeparator();
             this.toolstripFolderCopyPath = new ToolStripMenuItem();
             this.toolstripFolderExplorer = new ToolStripMenuItem();
+            this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.contextMenuMulti = new ContextMenuStrip(this.components);
             this.toolStripMultiCut = new ToolStripMenuItem();
             this.toolStripMultiCopy = new ToolStripMenuItem();
             this.toolStripMultiDelete = new ToolStripMenuItem();
             this.contextMenuProject = new ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.toolStripSeparator8 = new ToolStripSeparator();
             this.toolstripProjectPaste = new ToolStripMenuItem();
             this.toolStripMenuItem11 = new ToolStripMenuItem();
@@ -110,7 +110,7 @@
             this.treeView1.ForeColor = Color.White;
             this.treeView1.FullRowSelect = true;
             this.treeView1.HideSelection = false;
-            this.treeView1.ImageKey = "xfm";
+            this.treeView1.ImageKey = "other";
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.ItemHeight = 20;
             this.treeView1.LabelEdit = true;
@@ -118,7 +118,7 @@
             this.treeView1.Location = new Point(0, 48);
             this.treeView1.Margin = new Padding(4, 3, 4, 3);
             this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageKey = "xfm";
+            this.treeView1.SelectedImageKey = "other";
             this.treeView1.ShowLines = false;
             this.treeView1.Size = new Size(416, 471);
             this.treeView1.TabIndex = 0;
@@ -140,14 +140,14 @@
             this.imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
             this.imageList1.TransparentColor = Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "folder");
-            this.imageList1.Images.SetKeyName(1, "LEVEL DETAILS.txt");
-            this.imageList1.Images.SetKeyName(2, "SequinLeaf");
-            this.imageList1.Images.SetKeyName(3, "SequinLevel");
-            this.imageList1.Images.SetKeyName(4, "SequinGate");
-            this.imageList1.Images.SetKeyName(5, "SequinMaster");
-            this.imageList1.Images.SetKeyName(6, "Sample");
-            this.imageList1.Images.SetKeyName(7, "xfm");
-            this.imageList1.Images.SetKeyName(8, "project");
+            this.imageList1.Images.SetKeyName(1, ".TCL");
+            this.imageList1.Images.SetKeyName(2, ".leaf");
+            this.imageList1.Images.SetKeyName(3, ".lvl");
+            this.imageList1.Images.SetKeyName(4, ".gate");
+            this.imageList1.Images.SetKeyName(5, ".master");
+            this.imageList1.Images.SetKeyName(6, ".samp");
+            this.imageList1.Images.SetKeyName(7, "project");
+            this.imageList1.Images.SetKeyName(8, "other");
             // 
             // txtSearch
             // 
@@ -452,6 +452,7 @@
             this.contextMenuAddFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuAddFile.Items.AddRange(new ToolStripItem[] { this.existingItemToolStripMenuItem, this.folderToolStripMenuItem, this.toolStripSeparator7, this.toolStripMenuItem5, this.toolStripMenuItem6, this.toolStripMenuItem7, this.toolStripMenuItem8, this.toolStripMenuItem9 });
             this.contextMenuAddFile.Name = "workingfolderRightClick";
+            this.contextMenuAddFile.OwnerItem = this.toolStripMenuItem1;
             this.contextMenuAddFile.RenderMode = ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new Size(152, 164);
             // 
@@ -609,6 +610,15 @@
             this.toolstripFolderExplorer.Text = "Open In Explorer";
             this.toolstripFolderExplorer.Click += this.toolstripFolderExplorer_Click;
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
+            this.toolStripMenuItem1.ForeColor = Color.White;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new Size(162, 22);
+            this.toolStripMenuItem1.Text = "Add";
+            // 
             // contextMenuMulti
             // 
             this.contextMenuMulti.BackColor = Color.FromArgb(46, 46, 46);
@@ -656,22 +666,13 @@
             this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem1, this.toolStripSeparator8, this.toolstripProjectPaste, this.toolStripMenuItem11, this.toolStripSeparator9, this.toolStripMenuItem12, this.toolStripMenuItem13 });
             this.contextMenuProject.Name = "contextMenuFolderClick";
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(181, 148);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
-            this.toolStripMenuItem1.ForeColor = Color.White;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new Size(180, 22);
-            this.toolStripMenuItem1.Text = "Add";
+            this.contextMenuProject.Size = new Size(163, 126);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.BackColor = Color.FromArgb(46, 46, 46);
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new Size(177, 6);
+            this.toolStripSeparator8.Size = new Size(159, 6);
             // 
             // toolstripProjectPaste
             // 
@@ -681,7 +682,7 @@
             this.toolstripProjectPaste.Image = Properties.Resources.icon_paste2;
             this.toolstripProjectPaste.Name = "toolstripProjectPaste";
             this.toolstripProjectPaste.ShortcutKeys = Keys.Control | Keys.V;
-            this.toolstripProjectPaste.Size = new Size(180, 22);
+            this.toolstripProjectPaste.Size = new Size(162, 22);
             this.toolstripProjectPaste.Text = "Paste";
             this.toolstripProjectPaste.Click += this.toolstripFolderPaste_Click;
             // 
@@ -692,14 +693,14 @@
             this.toolStripMenuItem11.Image = Properties.Resources.icon_editdetails;
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
             this.toolStripMenuItem11.ShortcutKeys = Keys.F2;
-            this.toolStripMenuItem11.Size = new Size(180, 22);
+            this.toolStripMenuItem11.Size = new Size(162, 22);
             this.toolStripMenuItem11.Text = "Rename";
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.BackColor = Color.FromArgb(46, 46, 46);
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new Size(177, 6);
+            this.toolStripSeparator9.Size = new Size(159, 6);
             // 
             // toolStripMenuItem12
             // 
@@ -707,7 +708,7 @@
             this.toolStripMenuItem12.ForeColor = Color.White;
             this.toolStripMenuItem12.Image = Properties.Resources.icon_copy2;
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new Size(180, 22);
+            this.toolStripMenuItem12.Size = new Size(162, 22);
             this.toolStripMenuItem12.Text = "Copy File Path";
             this.toolStripMenuItem12.Click += this.copyFilePathToolStripMenuItem1_Click;
             // 
@@ -717,7 +718,7 @@
             this.toolStripMenuItem13.ForeColor = Color.White;
             this.toolStripMenuItem13.Image = Properties.Resources.icon_explorer;
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new Size(180, 22);
+            this.toolStripMenuItem13.Size = new Size(162, 22);
             this.toolStripMenuItem13.Text = "Open In Explorer";
             this.toolStripMenuItem13.Click += this.toolstripFolderExplorer_Click;
             // 

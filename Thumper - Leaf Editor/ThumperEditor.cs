@@ -20,7 +20,6 @@ namespace Thumper_Custom_Level_Editor
         #region Variables
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
-        public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         public static dynamic projectjson;
         public string workingfolder
         {
@@ -35,22 +34,23 @@ namespace Thumper_Custom_Level_Editor
                         }
                     }
                     //check if LEVEL DETAILS exists. If not, this is not a level folder
-                    if (!File.Exists($@"{value}\LEVEL DETAILS.txt")) {
-                        MessageBox.Show("This folder does not appear to be a Custom Level folder. The LEVEL DETAILS file is missing.\nFile not loaded.", "File not loaded");
+                    if (!Directory.GetFiles(value, "*.TCL").Any()) {
+                        MessageBox.Show("This folder does not appear to be a Custom Level project. The .TCL file is missing.\nProject not loaded.", "Thumper Custom Level Editor");
                         return;
                     }
-                    //Try locking LEVEL DETAILS first. If it fails, the level is already open
+                    string projectpath = Directory.GetFiles(value, "*.TCL").First();
+                    //Try locking the .TCL first. If it fails, the level is already open
                     //in that case, return before doing anything
                     try {
-                        lockedfiles.Add($@"{value}\LEVEL DETAILS.txt", new FileStream($@"{value}\LEVEL DETAILS.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                        lockedfiles.Add(projectpath, new FileStream(projectpath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                         ClearFileLock();
                     }
                     catch (Exception) {
-                        MessageBox.Show($"That level is open already in another instance of the Level Editor.", "Level cannot be opened");
+                        MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Level cannot be opened");
                         return;
                     }
                     //load Level Details into an object so it can be accessed later
-                    projectjson = LoadFileLock($@"{value}\LEVEL DETAILS.txt");
+                    projectjson = LoadFileLock(projectpath);
                     if (projectjson == null || !projectjson.ContainsKey("level_name") || !projectjson.ContainsKey("difficulty") || !projectjson.ContainsKey("description") || !projectjson.ContainsKey("author"))
                     {
                         DialogResult result = MessageBox.Show("The LEVEL DETAILS.txt is missing information or is corrupt.\nCreate new LEVEL DETAILS?", "Failed to load", MessageBoxButtons.YesNo);
@@ -74,26 +74,12 @@ namespace Thumper_Custom_Level_Editor
                     //populate lvlsinworkfolder with all .lvl files in the project
                     //this is needed for some specific dropdowns.
                     UpdateLevelLists();
-                    /*
-                    //set Working Folder panel data
-                    lblWorkingFolder.Text = $"Working Folder ⮞ {projectjson["level_name"]}";
-                    lblWorkingFolder.ToolTipText = $"Working Folder ⮞ {workingfolder}";
-                    //enable buttons
-                    btnWorkRefresh.Enabled = true;
-                    btnWorkCopy.Enabled = true;
-                    ///editLevelDetailsToolStripMenuItem.Enabled = true;
-                    ///regenerateDefaultFilesToolStripMenuItem.Enabled = true;
-                    btnExplorer.Enabled = true;
                     //add to recent files
                     if (Properties.Settings.Default.Recentfiles.Contains(workingfolder))
                         Properties.Settings.Default.Recentfiles.Remove(workingfolder);
                     Properties.Settings.Default.Recentfiles.Insert(0, workingfolder);
                     JumpListUpdate();
                     panelRecentFiles.Visible = false;
-
-                    //once all that is done, refresh the Working Folder list. This automatically opens the Master
-                    btnWorkRefresh.PerformClick();
-                    */
                 }
             }
         }
@@ -103,14 +89,14 @@ namespace Thumper_Custom_Level_Editor
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-        public FileStream filelocklevel;
         public static Dictionary<string, FileStream> lockedfiles = new();
         public Dictionary<string, Form> openfiles = new();
         public static Beeble beeble = new();
         #endregion
 
         #region Form Construction
-        Form_ProjectExplorer dockProject;
+        Form_ProjectExplorer dockProjectExplorer;
+        Form_ProjectProperties dockProjectProperties;
         public TCLE(string LevelFromArg)
         {
             InitializeComponent();
@@ -167,8 +153,10 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
 
-            dockProject = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
-            dockProject.Show(dockMain, DockState.DockRight);
+            dockProjectExplorer = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            dockProjectExplorer.Show(dockMain, DockState.DockRight);
+            dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            dockProjectProperties.Show(dockProjectExplorer.Pane, DockAlignment.Bottom, 0.5);
         }
         #endregion
         #region Form Loading Closing
@@ -293,7 +281,7 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip File
         private void toolstripFileNewProject_Click(object sender, EventArgs e)
         {
-            ProjectProperties customlevel = new(this, true);
+            ProjectPropertiesForm customlevel = new(this, true);
             //show the new level folder dialog box
             if (customlevel.ShowDialog() == DialogResult.Yes) {
                 customlevel.Dispose();
@@ -476,7 +464,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripProjectProperties_Click(object sender, EventArgs e)
         {
-            ProjectProperties customlevel = new(this, false);
+            ProjectPropertiesForm customlevel = new(this, false);
             //set textboxes
             customlevel.txtCustomName.Text = projectjson["level_name"] ?? "LEVEL NAME";
             customlevel.txtCustomDiff.Text = projectjson["difficulty"] ?? "d0";
@@ -494,7 +482,8 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             workingfolder = txtFilePath.Text;
-            dockProject.LoadProject(WorkingFolder);
+            dockProjectExplorer.LoadProject(WorkingFolder);
+            dockProjectProperties.LoadProjectProperties(projectjson);
 
             Form_MasterEditor dockMaster = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_GateEditor dockGate = new() { DockAreas = DockAreas.Document | DockAreas.Float };

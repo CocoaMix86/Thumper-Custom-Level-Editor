@@ -102,11 +102,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //add each file inside the folder to the tree
             foreach (FileInfo file in directoryInfo.GetFiles()) {
                 dynamic _load = TCLE.LoadFileLock(file.FullName);
+                if (_load == null) continue;
                 TreeNode _tn = new() {
                     Text = (string)_load["obj_name"] ?? file.Name,
                     Name = (string)_load["obj_name"] ?? file.Name,
-                    ImageKey = (string)_load["obj_type"] ?? (((JArray)_load["items"])?.Count() > 0 ? (string)_load["items"][0]["obj_type"] : ""),
-                    SelectedImageKey = (string)_load["obj_type"] ?? (((JArray)_load["items"])?.Count() > 0 ? (string)_load["items"][0]["obj_type"] : ""),
+                    ImageKey = file.Extension,
+                    SelectedImageKey = file.Extension,
                     ContextMenuStrip = contextMenuFileClick
                 };
                 projectfiles.Add((string)_load["obj_name"] ?? file.Name, file);
@@ -120,7 +121,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else if (!filterenabled)
                     folder.Nodes.Add(_tn);
-                else if ((filterLeaf.Checked && file.Name.Contains("leaf_")) || (filterLvl.Checked && file.Name.Contains("lvl_")) || (filterGate.Checked && file.Name.Contains("gate_")) || (filterMaster.Checked && file.Name.Contains("master_")) || (filterSample.Checked && file.Name.Contains("samp_")))
+                else if ((filterLeaf.Checked && file.Extension is "leaf") || (filterLvl.Checked && file.Extension is "lvl") || (filterGate.Checked && file.Extension is "gate") || (filterMaster.Checked && file.Extension is "master") || (filterSample.Checked && file.Extension is "samp"))
                     folder.Nodes.Add(_tn);
             }
         }

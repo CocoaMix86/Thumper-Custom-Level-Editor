@@ -277,6 +277,11 @@
   <ItemGroup>
     <Compile Remove="Utility Classes\PictureBoxEx.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Editor Panels\Form_ProjectProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
   <Target Name="ILMerge">
     <Exec Command="$(ILMergeConsolePath) /out:'Thumper Custom Level Editor.exe' 'Thumper Custom Level Editor.exe' 'Newtonsoft.Json.dll'" />
   </Target>
