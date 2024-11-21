@@ -434,9 +434,9 @@ namespace Thumper_Custom_Level_Editor
                 _beatcount += CalculateSingleLvlRuntime(workingfolder, _masterlvl);
             }
             if (master._properties.introlvl != "<none>")
-                _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(master._properties.introlvl)}.txt");
+                _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\{master._properties.introlvl}");
             if (master._properties.checkpointlvl != "<none>")
-                _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(master._properties.checkpointlvl)}.txt");
+                _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(master._properties.checkpointlvl)}.tx);
 
             ///lblMAsterRuntimeBeats.Text = $"Beats: {_beatcount}";
 
