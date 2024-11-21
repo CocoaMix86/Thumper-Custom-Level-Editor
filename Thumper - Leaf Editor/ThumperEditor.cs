@@ -95,8 +95,8 @@ namespace Thumper_Custom_Level_Editor
         #endregion
 
         #region Form Construction
-        Form_ProjectExplorer dockProjectExplorer;
-        Form_ProjectProperties dockProjectProperties;
+        public static Form_ProjectExplorer dockProjectExplorer;
+        public static Form_ProjectProperties dockProjectProperties;
         public TCLE(string LevelFromArg)
         {
             InitializeComponent();
