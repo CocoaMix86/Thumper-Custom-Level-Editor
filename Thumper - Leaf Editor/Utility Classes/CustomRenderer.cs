@@ -50,9 +50,8 @@ namespace Thumper_Custom_Level_Editor
         public override Color ButtonCheckedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
         public override Color ButtonCheckedHighlightBorder { get { return Color.Purple; } }
 
-        public override Color ButtonPressedGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color ButtonPressedGradientEnd { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color ButtonPressedBorder { get { return Color.Purple; } }
+        public override Color ButtonPressedGradientBegin { get { return Color.FromArgb(26, 26, 26); } }
+        public override Color ButtonPressedGradientEnd { get { return Color.FromArgb(26, 26, 26); } }
     }
 
     public class ToolStripOverride : ToolStripProfessionalRenderer
@@ -77,6 +76,19 @@ namespace Thumper_Custom_Level_Editor
                     e.Graphics, e.Item, sb.DropDownButtonBounds, e.Item.ForeColor,
                     ArrowDirection.Down));
             }
+        }
+        protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
+        {
+            ToolStripButton btn = e.Item as ToolStripButton;
+            if (btn != null && btn.CheckOnClick && btn.Checked) {
+                Rectangle bounds = new Rectangle(Point.Empty, e.Item.Size);
+                bounds.Width--;
+                bounds.Height--;
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(46, 46, 46)), bounds);
+                e.Graphics.DrawRectangle(new Pen(Color.FromArgb(113, 96, 232)), bounds);
+            }
+            else
+                base.OnRenderButtonBackground(e);
         }
         protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
         {
