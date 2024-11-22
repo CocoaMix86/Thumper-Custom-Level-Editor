@@ -107,13 +107,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dynamic _load = TCLE.LoadFileLock(file.FullName);
                 if (_load == null || file.Extension is ".TCL") continue;
                 TreeNode _tn = new() {
-                    Text = (string)_load["obj_name"] ?? file.Name,
-                    Name = (string)_load["obj_name"] ?? file.Name,
+                    Text = file.Name,
+                    Name = file.Name,
                     ImageKey = file.Extension,
                     SelectedImageKey = file.Extension,
                     ContextMenuStrip = contextMenuFileClick
                 };
-                projectfiles.Add((string)_load["obj_name"] ?? file.Name, file);
+                projectfiles.Add(file.Name, file);
                 /*
                 if (file.Name.Contains("xfm_") || file.Name.Contains("spn_") || file.Name.Contains("config_") || file.Name.Contains(".color"))
                     continue;*/
