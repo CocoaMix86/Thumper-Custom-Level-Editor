@@ -1319,7 +1319,6 @@
             this.MinimumSize = new Size(100, 100);
             this.Name = "TCLE";
             this.ShowIcon = false;
-            this.WindowState = FormWindowState.Maximized;
             this.Load += this.FormLeafEditor_Load;
             this.Resize += this.TCLE_Resize;
             this.panelRecentFiles.ResumeLayout(false);
