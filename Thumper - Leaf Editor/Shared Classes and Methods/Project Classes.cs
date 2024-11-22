@@ -13,6 +13,8 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Windows.Foundation.Collections;
 using System.ComponentModel.Design;
+using WeifenLuo.WinFormsUI.Docking;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -67,6 +69,11 @@ namespace Thumper_Custom_Level_Editor
                 if (value > 20000)
                     value = 20000;
                 Bpm = value;
+                foreach (var dc in TCLE.openfiles) {
+                    if (dc.Key.EndsWith(".master")) {
+                        (dc.Value as Form_MasterEditor).propertyGridMaster.Refresh();
+                    }
+                }
             }
         }
         private decimal Bpm;

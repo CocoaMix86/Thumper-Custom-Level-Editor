@@ -502,6 +502,7 @@ namespace Thumper_Custom_Level_Editor
             if (_type == "SequinMaster") {
                 Form_MasterEditor master = new(_load, filepath);
                 master.Show(form.dockMain, DockState.Document);
+                openfiles.Add((string)_load["obj_name"], master);
             }
         }
 

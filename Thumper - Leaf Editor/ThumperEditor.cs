@@ -86,7 +86,7 @@ namespace Thumper_Custom_Level_Editor
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<string, FileStream> lockedfiles = new();
-        public Dictionary<string, Form> openfiles = new();
+        public static Dictionary<string, DockContent> openfiles = new();
         public static Beeble beeble = new();
         #endregion
 

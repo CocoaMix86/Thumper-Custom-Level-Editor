@@ -372,12 +372,12 @@
         private System.Windows.Forms.ToolStripButton btnMasterLvlCopy;
         private System.Windows.Forms.ToolStripButton btnMasterLvlPaste;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.PropertyGrid propertyGridMaster;
         private System.Windows.Forms.Label lblConfigColorHelp;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private DataGridViewTextBoxColumn SublevelNum;
         private DataGridViewImageColumn masterfiletype;
         private DataGridViewTextBoxColumn masterLvl;
         private DataGridViewTextBoxColumn Runtime;
+        public PropertyGrid propertyGridMaster;
     }
 }

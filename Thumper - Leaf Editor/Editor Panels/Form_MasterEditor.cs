@@ -135,7 +135,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if ((!EditorIsSaved && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Master File (*.txt)|master_*.txt";
+                ofd.Filter = "Thumper Master File (*.master)|*.master";
                 ofd.Title = "Load a Thumper Master file";
                 ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
@@ -163,7 +163,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
-            sfd.Filter = "Thumper Master File (*.txt)|*.txt";
+            sfd.Filter = "Thumper Master File (*.master)|*.master";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
@@ -417,7 +417,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (MasterLvlData _lvl in _masterlvls) {
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _lvl);
                 string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[2].Value = $"{beats} beats -- {time}";
+                masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
             }
         }
 

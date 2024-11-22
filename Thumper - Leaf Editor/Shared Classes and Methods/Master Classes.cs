@@ -101,7 +101,12 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public string runtime { get { return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.dockProjectProperties.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"); } }
+        public string runtime { 
+            get {
+                parent.RecalcLvlRuntime();
+                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.dockProjectProperties.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+            }
+        }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Sublevel Name")]
