@@ -508,6 +508,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 previousDragOver = targetNode;
             }
         }
+        private void treeView1_DragLeave(object sender, EventArgs e)
+        {
+            previousDragOver.BackColor = treeView1.BackColor;
+        }
         private void treeView1_DragDrop(object sender, DragEventArgs e)
         {
             // Retrieve the client coordinates of the drop location.
