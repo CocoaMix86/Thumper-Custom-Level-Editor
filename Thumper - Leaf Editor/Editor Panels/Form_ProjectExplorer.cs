@@ -612,5 +612,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].Name].FullName);
         }
+
+        private void treeView1_Click(object sender, EventArgs e)
+        {
+            if (btnOpenOnClick.Checked)
+                TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].Name].FullName);
+        }
     }
 }

@@ -46,7 +46,6 @@
             this.btnCollapse = new ToolStripButton();
             this.btnExpand = new ToolStripButton();
             this.toolStripSeparator1 = new ToolStripSeparator();
-            this.btnEditProjectProperties = new ToolStripButton();
             this.btnOpenOnClick = new ToolStripButton();
             this.contextMenuFileClick = new ContextMenuStrip(this.components);
             this.toolstripFileOpen = new ToolStripMenuItem();
@@ -70,7 +69,6 @@
             this.toolStripMenuItem7 = new ToolStripMenuItem();
             this.toolStripMenuItem8 = new ToolStripMenuItem();
             this.toolStripMenuItem9 = new ToolStripMenuItem();
-            this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.toolStripSeparator5 = new ToolStripSeparator();
             this.toolstripFolderCut = new ToolStripMenuItem();
             this.toolstripFolderCopy = new ToolStripMenuItem();
@@ -80,6 +78,7 @@
             this.toolStripSeparator6 = new ToolStripSeparator();
             this.toolstripFolderCopyPath = new ToolStripMenuItem();
             this.toolstripFolderExplorer = new ToolStripMenuItem();
+            this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.contextMenuMulti = new ContextMenuStrip(this.components);
             this.toolStripMultiCut = new ToolStripMenuItem();
             this.toolStripMultiCopy = new ToolStripMenuItem();
@@ -126,6 +125,7 @@
             this.treeView1.AfterLabelEdit += this.treeView1_AfterLabelEdit;
             this.treeView1.ItemDrag += this.treeView1_ItemDrag;
             this.treeView1.BeforeSelect += this.treeView1_BeforeSelect;
+            this.treeView1.Click += this.treeView1_Click;
             this.treeView1.DragDrop += this.treeView1_DragDrop;
             this.treeView1.DragEnter += this.treeView1_DragEnter;
             this.treeView1.DragOver += this.treeView1_DragOver;
@@ -169,7 +169,7 @@
             this.toolstripExplorer.BackColor = Color.FromArgb(31, 31, 31);
             this.toolstripExplorer.GripMargin = new Padding(0);
             this.toolstripExplorer.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolstripExplorer.Items.AddRange(new ToolStripItem[] { this.btnFilter, this.toolStripSeparator2, this.btnRefresh, this.btnCollapse, this.btnExpand, this.toolStripSeparator1, this.btnEditProjectProperties, this.btnOpenOnClick });
+            this.toolstripExplorer.Items.AddRange(new ToolStripItem[] { this.btnFilter, this.toolStripSeparator2, this.btnRefresh, this.btnCollapse, this.btnExpand, this.toolStripSeparator1, this.btnOpenOnClick });
             this.toolstripExplorer.Location = new Point(0, 0);
             this.toolstripExplorer.MaximumSize = new Size(0, 58);
             this.toolstripExplorer.Name = "toolstripExplorer";
@@ -302,16 +302,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new Size(6, 25);
-            // 
-            // btnEditProjectProperties
-            // 
-            this.btnEditProjectProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnEditProjectProperties.Image = Properties.Resources.icon_editdetails;
-            this.btnEditProjectProperties.ImageTransparentColor = Color.Magenta;
-            this.btnEditProjectProperties.Name = "btnEditProjectProperties";
-            this.btnEditProjectProperties.Size = new Size(23, 22);
-            this.btnEditProjectProperties.Text = "toolStripButton4";
-            this.btnEditProjectProperties.ToolTipText = "Edit Level Properties";
             // 
             // btnOpenOnClick
             // 
@@ -452,7 +442,7 @@
             this.contextMenuAddFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuAddFile.Items.AddRange(new ToolStripItem[] { this.existingItemToolStripMenuItem, this.folderToolStripMenuItem, this.toolStripSeparator7, this.toolStripMenuItem5, this.toolStripMenuItem6, this.toolStripMenuItem7, this.toolStripMenuItem8, this.toolStripMenuItem9 });
             this.contextMenuAddFile.Name = "workingfolderRightClick";
-            this.contextMenuAddFile.OwnerItem = this.toolstripFolderNew;
+            this.contextMenuAddFile.OwnerItem = this.toolStripMenuItem1;
             this.contextMenuAddFile.RenderMode = ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new Size(152, 164);
             // 
@@ -521,15 +511,6 @@
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
             this.toolStripMenuItem9.Size = new Size(151, 22);
             this.toolStripMenuItem9.Text = "Sample";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
-            this.toolStripMenuItem1.ForeColor = Color.White;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new Size(162, 22);
-            this.toolStripMenuItem1.Text = "Add";
             // 
             // toolStripSeparator5
             // 
@@ -618,6 +599,15 @@
             this.toolstripFolderExplorer.Size = new Size(162, 22);
             this.toolstripFolderExplorer.Text = "Open In Explorer";
             this.toolstripFolderExplorer.Click += this.toolstripFolderExplorer_Click;
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
+            this.toolStripMenuItem1.ForeColor = Color.White;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new Size(162, 22);
+            this.toolStripMenuItem1.Text = "Add";
             // 
             // contextMenuMulti
             // 
@@ -766,7 +756,6 @@
         private System.Windows.Forms.ToolStripButton btnCollapse;
         private System.Windows.Forms.ToolStripButton btnExpand;
         private System.Windows.Forms.ToolStripButton btnRefresh;
-        private System.Windows.Forms.ToolStripButton btnEditProjectProperties;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnOpenOnClick;
