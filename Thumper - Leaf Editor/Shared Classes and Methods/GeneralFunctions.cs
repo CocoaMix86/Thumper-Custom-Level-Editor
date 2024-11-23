@@ -14,6 +14,7 @@ using System.Reflection;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using System.Runtime.CompilerServices;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Diagnostics.Metrics;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -434,12 +435,12 @@ namespace Thumper_Custom_Level_Editor
                 _beatcount += CalculateSingleLvlRuntime(workingfolder, _masterlvl);
             }
             if (master._properties.introlvl != "<none>") {
-                if (TCLE.dockProjectExplorer.projectfiles.TryGetValue(master._properties.introlvl, out FileInfo file))
-                    _beatcount += LoadLvlGetBeatCounts(file.FullName);
+                var introlvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(master._properties.introlvl));
+                if (introlvl.Key != null) _beatcount += LoadLvlGetBeatCounts(introlvl.Value.FullName);
             }
             if (master._properties.checkpointlvl != "<none>") {
-                if (TCLE.dockProjectExplorer.projectfiles.TryGetValue(master._properties.checkpointlvl, out FileInfo file))
-                    _beatcount += LoadLvlGetBeatCounts(file.FullName);
+                var checkpointlvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(master._properties.checkpointlvl));
+                if (checkpointlvl.Key != null) _beatcount += LoadLvlGetBeatCounts(checkpointlvl.Value.FullName);
             }
 
             return _beatcount;
@@ -450,26 +451,26 @@ namespace Thumper_Custom_Level_Editor
             dynamic _load;
             int _beatcount = 0;
             if (_masterlvl.type == "lvl") {
-                //string file = Directory.GetFiles(workingfolder, $"lvl_{_masterlvl.name}.txt", SearchOption.AllDirectories).FirstOrDefault();
-                if (TCLE.dockProjectExplorer.projectfiles.TryGetValue(_masterlvl.lvlname, out FileInfo file))
-                    _beatcount += LoadLvlGetBeatCounts(file.FullName);
+                var lvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_masterlvl.lvlname));
+                if (lvl.Key != null) _beatcount += LoadLvlGetBeatCounts(lvl.Value.FullName);
             }
             //this section handles gate
             else {
                 //load the gate to then loop through all lvls in it
-                if (TCLE.dockProjectExplorer.projectfiles.TryGetValue(_masterlvl.gatename, out FileInfo file)) {
-                    _load = TCLE.LoadFileLock(file.FullName);
+                var gate = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_masterlvl.gatename));
+                if (gate.Key != null) {
+                    _load = TCLE.LoadFileLock(gate.Value.FullName);
                     if (_load == null)
                         return 0;
                     foreach (dynamic _lvl in _load["boss_patterns"]) {
-                        if (TCLE.dockProjectExplorer.projectfiles.TryGetValue((string)_lvl["lvl_name"], out FileInfo file2))
-                        _beatcount += LoadLvlGetBeatCounts(file2.FullName);
+                        var lvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith((string)_lvl["lvl_name"]));
+                        if (lvl.Key != null) _beatcount += LoadLvlGetBeatCounts(lvl.Value.FullName);
                     }
+
                 }
             }
-
-            if (_masterlvl.rest is not "" and not "<none>" and not null)
-                _beatcount += LoadLvlGetBeatCounts(TCLE.dockProjectExplorer.projectfiles[_masterlvl.rest].FullName);
+            var lvlrest = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_masterlvl.rest));
+            if (lvlrest.Key != null) _beatcount += LoadLvlGetBeatCounts(lvlrest.Value.FullName);
 
             return _beatcount;
         }
