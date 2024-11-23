@@ -1391,7 +1391,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else
                     dropParamPath.SelectedIndex = TCLE.rng.Next(0, dropParamPath.Items.Count);
-                if (_tracks.Where(x => (x.friendly_param ?? "").Split(',')[0] == dropParamPath.Text).Count() == 0)
+                if (_tracks.Where(x => (x.friendly_param ?? "").Split(',')[0] == dropParamPath.Text).Any())
                     rando = false;
             }
             btnTrackApply_Click(null, null);
@@ -1655,7 +1655,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 _s.highlight_color = /*(string)seq_obj["editor_data"]?[0] ??*/ (objectcolors.TryGetValue(_s.friendly_param, out string value) ? value : "-8355585");
                 //if an object can be multi-lane, it will be an .ent. Check for "." to detect this
-                if (_s.param_path.Contains("."))
+                if (_s.param_path.Contains('.'))
                     //get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
                     _s.friendly_param += $", {_tracklanefriendly[_s.param_path.Split('.')[1]]}";
                 //finally, add the completed seq_obj to tracks

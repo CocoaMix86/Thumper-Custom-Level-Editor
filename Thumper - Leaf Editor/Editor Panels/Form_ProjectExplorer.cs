@@ -425,10 +425,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 List<TreeNode> addedNodes = new();
                 List<TreeNode> removedNodes = new();
                 removedNodes.AddRange(selectedNodes);
-                if (removedNodes.Contains(currentNode)) {
-                    removedNodes.Remove(currentNode);
-                }
-                else {
+                if (!removedNodes.Remove(currentNode)) {
                     addedNodes.Add(currentNode);
                 }
                 changeSelection(addedNodes, removedNodes);
@@ -436,7 +433,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //change contextmenus of nodes based on how many are selected
             //and what types are selected
-            if (selectedNodes.Where(x => x.ImageKey == "folder").Count() > 0 && selectedNodes.Where(x => x.ImageKey != "folder").Count() > 0) {
+            if (selectedNodes.Where(x => x.ImageKey == "folder").Any() && selectedNodes.Where(x => x.ImageKey != "folder").Any()) {
                 foreach (TreeNode tn in selectedNodes) {
                     tn.ContextMenuStrip = contextMenuMulti;
                 }
@@ -470,10 +467,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<TreeNode> addedNodes = new();
             List<TreeNode> removedNodes = new();
             removedNodes.AddRange(selectedNodes);
-            if (removedNodes.Contains(currentNode)) {
-                removedNodes.Remove(currentNode);
-            }
-            else {
+            if (!removedNodes.Remove(currentNode)) {
                 addedNodes.Add(currentNode);
             }
             changeSelection(addedNodes, removedNodes);
@@ -590,7 +584,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return false;
         }
 
-        private bool IsAChildOfOtherNodes(TreeNode nodetofind, List<TreeNode> nodetosearch)
+        private static bool IsAChildOfOtherNodes(TreeNode nodetofind, List<TreeNode> nodetosearch)
         {
             foreach (TreeNode tn in nodetosearch) {
                 if (tn.Nodes.Contains(nodetofind))

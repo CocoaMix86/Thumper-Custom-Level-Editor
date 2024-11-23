@@ -37,7 +37,7 @@ namespace Thumper_Custom_Level_Editor
         [Category("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath { get { return TCLE.WorkingFolder; } }
+        public static string filepath { get { return TCLE.WorkingFolder; } }
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]

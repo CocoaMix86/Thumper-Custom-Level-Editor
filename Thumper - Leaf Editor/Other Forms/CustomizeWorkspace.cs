@@ -146,16 +146,12 @@ namespace Thumper_Custom_Level_Editor
             //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
             foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
                 //the "14" is a leftpad empty space
-                List<string> mod = loadthesekeys[(string)_lbl.Tag].ToString().Split(new[] {", "}, StringSplitOptions.None).ToList();
+                List<string> mod = loadthesekeys[(string)_lbl.Tag].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
                 mod.Reverse();
-                if (mod.Contains("Alt")) {
-                    mod.Remove("Alt");
+                if (mod.Remove("Alt"))
                     mod.Insert(0, "Alt");
-                }
-                if (mod.Contains("Control")) {
-                    mod.Remove("Control");
-                    mod.Insert(0, "Control");
-                }
+                if (mod.Remove("Control")) ;
+                mod.Insert(0, "Control");
                 _lbl.Text = $"{_lbl.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
             }
         }
@@ -194,10 +190,9 @@ namespace Thumper_Custom_Level_Editor
                 btnSetKeybind.Enabled = !cantusethiskey;
                 btnSetKeybind.BackColor = cantusethiskey ? Color.Gray : Color.Green;
                 List<string> mod = e.Modifiers.ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
-                if (mod.Contains("Alt")) {
-                    mod.Remove("Alt");
+
+                if (mod.Remove("Alt"))
                     mod.Insert(0, "Alt");
-                }
                 if (mod.Last() == "Control" && mod.Count > 1) {
                     mod.Remove("Control");
                     mod.Insert(0, "Control");

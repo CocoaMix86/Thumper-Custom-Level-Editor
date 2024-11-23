@@ -60,7 +60,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<MasterLvlData> clipboardmaster = new();
         public ObservableCollection<MasterLvlData> _masterlvls { get { return _properties.masterlvls; } set { _properties.masterlvls = value; } }
         public MasterProperties _properties;
-        public static decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
+        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
         #region EventHandlers
@@ -393,7 +393,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsSaved = IsSaved;
             if (!IsSaved) {
                 //denote editor tab is not saved
-                if (!this.Text.EndsWith("*")) this.Text += "*";
+                if (!this.Text.EndsWith('*')) this.Text += "*";
                 //add current JSON to the undo list
                 _properties.undoItems.Add(BuildSave(_properties));
             }

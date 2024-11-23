@@ -275,7 +275,7 @@ namespace Thumper_Custom_Level_Editor
             bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
             bool exists = Directory.Exists($@"{Path.GetDirectoryName(mainform.workingfolder)}\{txtCustomName.Text}") && txtCustomName.Text != Path.GetFileName(mainform.workingfolder);
             bool samefolder = $@"{txtCustomPath.Text.ToLower()}\{txtCustomName.Text.ToLower()}" == mainform.workingfolder?.ToLower();
-            bool endsindot = txtCustomName.Text.TrimEnd().EndsWith(".");
+            bool endsindot = txtCustomName.Text.TrimEnd().EndsWith('.');
 
             if (illegal) {
                 lblNameError.Visible = true;

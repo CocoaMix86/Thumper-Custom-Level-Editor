@@ -37,7 +37,7 @@ namespace Thumper_Custom_Level_Editor
             string name = args.Name[..args.Name.IndexOf(',')] + ".dll";
             System.Collections.Generic.IEnumerable<string> resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name));
 
-            if (resources.Count() > 0) {
+            if (resources.Any()) {
                 string resourceName = resources.First();
 
                 using Stream stream = thisAssembly.GetManifestResourceStream(resourceName);
