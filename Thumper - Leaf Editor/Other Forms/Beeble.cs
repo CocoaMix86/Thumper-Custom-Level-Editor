@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
@@ -19,24 +20,25 @@ namespace Thumper_Custom_Level_Editor
         {
 
         }
-
+        
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
+        
         private void Beeble_MouseDown(object sender, MouseEventArgs e)
         {
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
             this.BackColor = Color.FromArgb(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
             MakeFace();
+            
             if (e.Button == MouseButtons.Left) {
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
-
         public void MakeFace()
         {
             int i = new Random().Next(0, 1001);

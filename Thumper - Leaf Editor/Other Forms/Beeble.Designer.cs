@@ -34,29 +34,29 @@
             // timerBeeble
             // 
             this.timerBeeble.Interval = 300;
-            this.timerBeeble.Tick += new System.EventHandler(this.timerBeeble_Tick);
+            this.timerBeeble.Tick += this.timerBeeble_Tick;
             // 
             // Beeble
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(113, 94);
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.BackColor = Color.White;
+            this.BackgroundImage = Properties.Resources.beeble;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+            this.ClientSize = new Size(132, 100);
             this.ControlBox = false;
             this.DoubleBuffered = true;
+            this.Margin = new Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(50, 50);
+            this.MinimumSize = new Size(56, 55);
             this.Name = "Beeble";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.Beeble_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Beeble_MouseDown);
+            this.Load += this.Beeble_Load;
+            this.MouseDown += this.Beeble_MouseDown;
             this.ResumeLayout(false);
-
         }
 
         #endregion

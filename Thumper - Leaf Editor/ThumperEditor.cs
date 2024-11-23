@@ -264,7 +264,10 @@ namespace Thumper_Custom_Level_Editor
             contextFormMax.Enabled = false;
             contextFormRestore.Enabled = true;
         }
-        private void toolstripFormMinimize_Click(object sender, EventArgs e) => this.WindowState = FormWindowState.Minimized;
+        private void toolstripFormMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
         private void toolstripFormClose_Click(object sender, EventArgs e) => this.Close();
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -282,6 +285,10 @@ namespace Thumper_Custom_Level_Editor
         }
         private void TCLE_Resize(object sender, EventArgs e)
         {
+            if (this.WindowState == FormWindowState.Minimized)
+                beeble.Visible = false;
+            else
+                beeble.Visible = true;
             if (this.WindowState == FormWindowState.Normal)
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
         }
