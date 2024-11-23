@@ -509,9 +509,11 @@ namespace Thumper_Custom_Level_Editor
 
             dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);
-            dockLvl.Show(dockMain, DockState.Document);
+            dockLeaf.Show(dockMaster.Pane, DockAlignment.Bottom, 0.6);
+            dockLvl.Show(dockMaster.Pane, DockAlignment.Right, 0.6);
             dockSample.Show(dockMain, DockState.Document);
-            dockLeaf.Show(dockMain, DockState.Document);
+
+            dockMaster.Activate();
 
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;

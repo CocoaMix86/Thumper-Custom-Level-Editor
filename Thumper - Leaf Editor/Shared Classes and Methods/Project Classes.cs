@@ -34,6 +34,10 @@ namespace Thumper_Custom_Level_Editor
             dynamic pathcolor = _load["path_color"];
             path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
         }
+        [Category("General")]
+        [DisplayName("File Path")]
+        [Description("The full path to this file.")]
+        public string filepath { get { return TCLE.WorkingFolder; } }
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]

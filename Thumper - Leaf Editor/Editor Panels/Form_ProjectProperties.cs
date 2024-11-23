@@ -25,7 +25,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
         #region Variables
-        public ProjectProperties projectproperties { get {return ProjectProperties; } set { ProjectProperties = value; } }
+        public ProjectProperties projectproperties { 
+            get { return ProjectProperties; } 
+            set { ProjectProperties = value; } }
         private static ProjectProperties ProjectProperties;
         public decimal BPM { get { return ProjectProperties.bpm; } }
         #endregion

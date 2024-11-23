@@ -109,7 +109,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(300, 477);
+            this.masterLvlList.Size = new Size(400, 477);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
@@ -136,7 +136,7 @@
             // masterLvl
             // 
             this.masterLvl.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            this.masterLvl.FillWeight = 70F;
+            this.masterLvl.FillWeight = 50F;
             this.masterLvl.HeaderText = "Sublevel";
             this.masterLvl.Name = "masterLvl";
             this.masterLvl.ReadOnly = true;
@@ -148,7 +148,7 @@
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.Runtime.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Runtime.FillWeight = 30F;
+            this.Runtime.FillWeight = 50F;
             this.Runtime.HeaderText = "Runtime";
             this.Runtime.Name = "Runtime";
             this.Runtime.ReadOnly = true;
@@ -168,7 +168,7 @@
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new Padding(0);
             this.masterToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new Size(300, 29);
+            this.masterToolStrip.Size = new Size(400, 29);
             this.masterToolStrip.Stretch = true;
             this.masterToolStrip.TabIndex = 138;
             // 
@@ -264,7 +264,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(272, -3);
+            this.lblMasterlvllistHelp.Location = new Point(372, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -290,7 +290,7 @@
             this.propertyGridMaster.RightToLeft = RightToLeft.No;
             this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridMaster.Size = new Size(348, 519);
+            this.propertyGridMaster.Size = new Size(248, 519);
             this.propertyGridMaster.TabIndex = 147;
             this.propertyGridMaster.ToolbarVisible = false;
             this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -331,7 +331,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
             this.splitContainer1.Size = new Size(653, 519);
-            this.splitContainer1.SplitterDistance = 300;
+            this.splitContainer1.SplitterDistance = 400;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
             // 
@@ -374,10 +374,10 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lblConfigColorHelp;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        public PropertyGrid propertyGridMaster;
         private DataGridViewTextBoxColumn SublevelNum;
         private DataGridViewImageColumn masterfiletype;
         private DataGridViewTextBoxColumn masterLvl;
         private DataGridViewTextBoxColumn Runtime;
-        public PropertyGrid propertyGridMaster;
     }
 }
