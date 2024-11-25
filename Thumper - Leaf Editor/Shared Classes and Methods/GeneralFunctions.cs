@@ -208,18 +208,19 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        public string SearchReferences(dynamic _load, string filepath)
+        private static List<string> extensions = new() { ".leaf", ".lvl", ".gate", ".master"};
+        public static string SearchReferences(string searchreference)
         {
             string referencefiles = "";
             //search all files in the project folder
-            foreach (string file in Directory.GetFiles(workingfolder).Where(x => Path.GetFileName(x).StartsWith("leaf_") || Path.GetFileName(x).StartsWith("lvl_") || Path.GetFileName(x).StartsWith("gate_") || Path.GetFileName(x).StartsWith("master_"))) {
+            foreach (string file in Directory.GetFiles(TCLE.WorkingFolder, "*", SearchOption.AllDirectories).Where(x => extensions.Contains(Path.GetExtension(x)))) {
                 //skip self to not include self
-                if (file == filepath)
+                if (Path.GetFileName(file) == searchreference)
                     continue;
                 string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None);
                 //check if the file we're searching contains the obj_name
-                if (text.Contains($"{_load["obj_name"]}")) {
-                    referencefiles += Path.GetFileNameWithoutExtension(file) + '\n';
+                if (text.Contains(searchreference)) {
+                    referencefiles += Path.GetFileName(file) + '\n';
                 }
             }
 
@@ -233,15 +234,6 @@ namespace Thumper_Custom_Level_Editor
             lblChangelog.Text = Properties.Resources.changelog;
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
-
-        public static void PanelEnableState(Control panel, bool enablestate)
-        {
-            foreach (Control _c in panel.Controls.Cast<Control>().Where(x => x.GetType() != typeof(Label))) {
-                if (_c.Text != "titlebar")
-                    _c.Enabled = enablestate;
-            }
-        }
-
 
         /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947
         public static decimal TruncateDecimal(decimal d, byte decimals)

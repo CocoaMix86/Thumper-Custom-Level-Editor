@@ -194,11 +194,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripFileCopyPath.Visible = selectedNodes.Count == 1;
         }
         private void copyFilePathToolStripMenuItem1_Click(object sender, EventArgs e) => Clipboard.SetText(projectfiles[selectedNodes[0].FullPath].FullName);
+
+        private void toolstripFileSearch_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(TCLE.SearchReferences(selectedNodes[0].Name), "Thumper Custom Level Editor");
+        }
         private void toolstripFileExternal_Click(object sender, EventArgs e)
         {
             foreach (TreeNode tn in selectedNodes) {
                 if (File.Exists(projectfiles[tn.FullPath].FullName))
-                    Process.Start(projectfiles[tn.FullPath].FullName);
+                    Process.Start(new ProcessStartInfo(projectfiles[tn.FullPath].FullName) { UseShellExecute = true});
             }
         }
         private void toolstripFileDelete_Click(object sender, EventArgs e)

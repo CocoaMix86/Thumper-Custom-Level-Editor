@@ -39,7 +39,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         TCLE.lockedfiles.Remove(loadedgate);
                     }
                     loadedgate = value;
-                    TCLE.PanelEnableState(panelGate, true);
                     dropGateSection.SelectedIndex = 0;
 
                     if (!File.Exists(loadedgate)) {

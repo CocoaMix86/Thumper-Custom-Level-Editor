@@ -50,7 +50,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         TCLE.lockedfiles.Remove(loadedleaf);
                     }
                     loadedleaf = value;
-                    TCLE.PanelEnableState(panelLeaf, true);
 
                     if (!File.Exists(loadedleaf)) {
                         File.WriteAllText(loadedleaf, "");
@@ -1594,7 +1593,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check for template or regular file
             if (filepath == "template") {
                 _loadedleaf = null;
-                TCLE.PanelEnableState(panelLeaf, true);
             }
             else {
                 TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
