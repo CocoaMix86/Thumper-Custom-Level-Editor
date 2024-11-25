@@ -485,7 +485,7 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
         }
 
-        public static void OpenFile(TCLE form, string filepath)
+        public static void OpenFile(TCLE form, string filepath, bool openraw = false)
         {
             dynamic _load = LoadFileLock(filepath);
             string name = _load["obj_name"];
@@ -493,11 +493,18 @@ namespace Thumper_Custom_Level_Editor
                 form.dockMain.Documents.Where(x => x.DockHandler.TabText == name).First().DockHandler.Activate();
                 return;
             }
-            string _type = _load["obj_type"];
-            if (_type == "SequinMaster") {
-                Form_MasterEditor master = new(_load, filepath);
-                master.Show(form.dockMain, DockState.Document);
-                openfiles.Add((string)_load["obj_name"], master);
+
+            if (openraw) {
+                Form_RawText rawtext = new(_load);
+                rawtext.Show(form.dockMain, DockState.Document);
+            }
+            else {
+                string _type = _load["obj_type"];
+                if (_type == "SequinMaster") {
+                    Form_MasterEditor master = new(_load, filepath);
+                    master.Show(form.dockMain, DockState.Document);
+                    openfiles.Add((string)_load["obj_name"], master);
+                }
             }
         }
 

@@ -195,6 +195,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void copyFilePathToolStripMenuItem1_Click(object sender, EventArgs e) => Clipboard.SetText(projectfiles[selectedNodes[0].FullPath].FullName);
 
+        private void toolstripFileRaw_Click(object sender, EventArgs e)
+        {
+            TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].FullPath].FullName, true);
+        }
+
         private void toolstripFileSearch_Click(object sender, EventArgs e)
         {
             MessageBox.Show(TCLE.SearchReferences(selectedNodes[0].Name), "Thumper Custom Level Editor");
@@ -203,7 +208,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             foreach (TreeNode tn in selectedNodes) {
                 if (File.Exists(projectfiles[tn.FullPath].FullName))
-                    Process.Start(new ProcessStartInfo(projectfiles[tn.FullPath].FullName) { UseShellExecute = true});
+                    Process.Start(new ProcessStartInfo(projectfiles[tn.FullPath].FullName) { UseShellExecute = true });
             }
         }
         private void toolstripFileDelete_Click(object sender, EventArgs e)
@@ -306,7 +311,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             foreach (TreeNode tn in selectedNodes) {
                 if (Directory.Exists(projectfolders[tn.FullPath].FullName))
-                    Process.Start(new ProcessStartInfo(projectfolders[tn.FullPath].FullName) { UseShellExecute = true});
+                    Process.Start(new ProcessStartInfo(projectfolders[tn.FullPath].FullName) { UseShellExecute = true });
             }
         }
 

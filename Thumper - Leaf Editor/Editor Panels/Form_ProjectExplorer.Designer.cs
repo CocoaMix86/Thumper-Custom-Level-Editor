@@ -52,6 +52,8 @@
             this.toolstripFileRaw = new ToolStripMenuItem();
             this.toolstripFileExternal = new ToolStripMenuItem();
             this.toolStripSeparator3 = new ToolStripSeparator();
+            this.toolstripFileSearch = new ToolStripMenuItem();
+            this.toolStripSeparator10 = new ToolStripSeparator();
             this.toolstripFileCut = new ToolStripMenuItem();
             this.toolstripFileCopy = new ToolStripMenuItem();
             this.toolstripFileDelete = new ToolStripMenuItem();
@@ -69,7 +71,6 @@
             this.toolStripMenuItem7 = new ToolStripMenuItem();
             this.toolStripMenuItem8 = new ToolStripMenuItem();
             this.toolStripMenuItem9 = new ToolStripMenuItem();
-            this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.toolStripSeparator5 = new ToolStripSeparator();
             this.toolstripFolderCut = new ToolStripMenuItem();
             this.toolstripFolderCopy = new ToolStripMenuItem();
@@ -79,6 +80,7 @@
             this.toolStripSeparator6 = new ToolStripSeparator();
             this.toolstripFolderCopyPath = new ToolStripMenuItem();
             this.toolstripFolderExplorer = new ToolStripMenuItem();
+            this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.contextMenuMulti = new ContextMenuStrip(this.components);
             this.toolStripMultiCut = new ToolStripMenuItem();
             this.toolStripMultiCopy = new ToolStripMenuItem();
@@ -90,8 +92,6 @@
             this.toolStripSeparator9 = new ToolStripSeparator();
             this.toolStripMenuItem12 = new ToolStripMenuItem();
             this.toolStripMenuItem13 = new ToolStripMenuItem();
-            this.toolstripFileSearch = new ToolStripMenuItem();
-            this.toolStripSeparator10 = new ToolStripSeparator();
             this.toolstripExplorer.SuspendLayout();
             this.contextMenuFilters.SuspendLayout();
             this.contextMenuFileClick.SuspendLayout();
@@ -343,6 +343,7 @@
             this.toolstripFileRaw.Name = "toolstripFileRaw";
             this.toolstripFileRaw.Size = new Size(180, 22);
             this.toolstripFileRaw.Text = "Open Raw Text";
+            this.toolstripFileRaw.Click += this.toolstripFileRaw_Click;
             // 
             // toolstripFileExternal
             // 
@@ -359,6 +360,20 @@
             this.toolStripSeparator3.ForeColor = Color.White;
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new Size(177, 6);
+            // 
+            // toolstripFileSearch
+            // 
+            this.toolstripFileSearch.ForeColor = Color.White;
+            this.toolstripFileSearch.Image = Properties.Resources.icon_zoom;
+            this.toolstripFileSearch.Name = "toolstripFileSearch";
+            this.toolstripFileSearch.Size = new Size(180, 22);
+            this.toolstripFileSearch.Text = "Find References";
+            this.toolstripFileSearch.Click += this.toolstripFileSearch_Click;
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new Size(177, 6);
             // 
             // toolstripFileCut
             // 
@@ -444,7 +459,7 @@
             this.contextMenuAddFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuAddFile.Items.AddRange(new ToolStripItem[] { this.existingItemToolStripMenuItem, this.folderToolStripMenuItem, this.toolStripSeparator7, this.toolStripMenuItem5, this.toolStripMenuItem6, this.toolStripMenuItem7, this.toolStripMenuItem8, this.toolStripMenuItem9 });
             this.contextMenuAddFile.Name = "workingfolderRightClick";
-            this.contextMenuAddFile.OwnerItem = this.toolstripFolderNew;
+            this.contextMenuAddFile.OwnerItem = this.toolStripMenuItem1;
             this.contextMenuAddFile.RenderMode = ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new Size(152, 164);
             // 
@@ -513,15 +528,6 @@
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
             this.toolStripMenuItem9.Size = new Size(151, 22);
             this.toolStripMenuItem9.Text = "Sample";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
-            this.toolStripMenuItem1.ForeColor = Color.White;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new Size(162, 22);
-            this.toolStripMenuItem1.Text = "Add";
             // 
             // toolStripSeparator5
             // 
@@ -610,6 +616,15 @@
             this.toolstripFolderExplorer.Size = new Size(162, 22);
             this.toolstripFolderExplorer.Text = "Open In Explorer";
             this.toolstripFolderExplorer.Click += this.toolstripFolderExplorer_Click;
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
+            this.toolStripMenuItem1.ForeColor = Color.White;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new Size(162, 22);
+            this.toolStripMenuItem1.Text = "Add";
             // 
             // contextMenuMulti
             // 
@@ -713,20 +728,6 @@
             this.toolStripMenuItem13.Size = new Size(162, 22);
             this.toolStripMenuItem13.Text = "Open In Explorer";
             this.toolStripMenuItem13.Click += this.toolstripFolderExplorer_Click;
-            // 
-            // toolstripFileSearch
-            // 
-            this.toolstripFileSearch.ForeColor = Color.White;
-            this.toolstripFileSearch.Image = Properties.Resources.icon_zoom;
-            this.toolstripFileSearch.Name = "toolstripFileSearch";
-            this.toolstripFileSearch.Size = new Size(180, 22);
-            this.toolstripFileSearch.Text = "Find References";
-            this.toolstripFileSearch.Click += this.toolstripFileSearch_Click;
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new Size(177, 6);
             // 
             // Form_ProjectExplorer
             // 

@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Syncfusion.Windows.Forms.Tools.Controls.MultiColumnTreeView.Designers;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.Drawing.Design;
-using System.Windows.Forms.Design;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Collections.ObjectModel;
-using Windows.Foundation.Collections;
 using System.ComponentModel.Design;
-using WeifenLuo.WinFormsUI.Docking;
+using System.Drawing.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor

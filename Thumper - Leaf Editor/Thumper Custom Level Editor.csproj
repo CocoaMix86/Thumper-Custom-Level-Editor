@@ -84,8 +84,6 @@
     <None Include="image assets\icon-closeblack.png" />
     <None Include="image assets\icon_minimizeblack.png" />
     <None Include="image assets\pixel.bmp" />
-    <Content Include="temp.txt" />
-    <Content Include="thumper_level_editor2.ico" />
     <None Include="image assets\railcolorhelp.png" />
     <None Include="image assets\difficultyhelp.png" />
     <None Include="image assets\exit.png" />
@@ -256,6 +254,7 @@
     <PackageReference Include="OggVorbisEncoder">
       <Version>1.2.2</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Edit.Windows" Version="27.2.3" />
     <PackageReference Include="System.Collections.Immutable">
       <Version>9.0.0</Version>
     </PackageReference>
@@ -278,6 +277,9 @@
     <Compile Remove="Utility Classes\PictureBoxEx.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Editor Panels\Form_RawText.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Editor Panels\Form_ProjectProperties.cs">
       <SubType>Form</SubType>
     </Compile>
