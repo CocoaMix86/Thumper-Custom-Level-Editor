@@ -432,7 +432,8 @@ namespace Thumper_Custom_Level_Editor
             int _beatcount = 0;
             //loop through all entries in the master to get beat counts
             foreach (MasterLvlData _masterlvl in master._masterlvls) {
-                _beatcount += CalculateSingleLvlRuntime(workingfolder, _masterlvl);
+                int _beats = CalculateSingleLvlRuntime(workingfolder, _masterlvl);
+                if (_beats != -1) _beatcount += _beats;
             }
             if (master._properties.introlvl != "<none>") {
                 var introlvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(master._properties.introlvl));
@@ -453,6 +454,7 @@ namespace Thumper_Custom_Level_Editor
             if (_masterlvl.type == "lvl") {
                 var lvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_masterlvl.lvlname));
                 if (lvl.Key != null) _beatcount += LoadLvlGetBeatCounts(lvl.Value.FullName);
+                else return -1;
             }
             //this section handles gate
             else {
@@ -461,7 +463,7 @@ namespace Thumper_Custom_Level_Editor
                 if (gate.Key != null) {
                     _load = TCLE.LoadFileLock(gate.Value.FullName);
                     if (_load == null)
-                        return 0;
+                        return -1;
                     foreach (dynamic _lvl in _load["boss_patterns"]) {
                         var lvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith((string)_lvl["lvl_name"]));
                         if (lvl.Key != null) _beatcount += LoadLvlGetBeatCounts(lvl.Value.FullName);

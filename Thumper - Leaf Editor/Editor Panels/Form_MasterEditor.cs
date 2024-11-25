@@ -86,6 +86,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
             AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder)}\{dragdropnode.FullPath}");
+            propertyGridMaster.Refresh();
         }
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -100,7 +101,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //get the runtime of the object
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _masterlvls[_in]);
                 string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                masterLvlList.Rows.Insert(_in, new object[] { 0, (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate), _masterlvls[_in].lvlname, $"{beats} beats -- {time}" });
+                masterLvlList.Rows.Insert(_in, new object[] { 
+                    0, 
+                    (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate), 
+                    _masterlvls[_in].lvlname, 
+                    beats != -1 ? $"{beats} beats -- {time}"  : "file not found"
+                });
             }
             //if action REMOVE, remove row from the master DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
@@ -416,8 +422,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             foreach (MasterLvlData _lvl in _masterlvls) {
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _lvl);
-                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
+                if (beats == -1) {
+                    masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
+                }
+                else {
+                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
+                }
             }
         }
 

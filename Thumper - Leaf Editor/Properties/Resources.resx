@@ -843,4 +843,7 @@ MISC
   <data name="beebleuwu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\beeble\beebleuwu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="editor-leaf64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\editors\editor-leaf64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
