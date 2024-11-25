@@ -62,7 +62,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (projectfolder == null) return;
             expandednodes.Clear();
-            expandednodes = GetNodes(treeView1.Nodes);
+            expandednodes = GetExpandedNodes(treeView1.Nodes);
             //clear existing treeview
             treeView1.Nodes.Clear();
             projectfiles.Clear();
@@ -85,7 +85,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //otherwise expand root only
             else {
                 treeView1.Nodes[0].Expand();
-                RecurseNodes(treeView1.Nodes);
+                RecurseNodesFindExpanded(treeView1.Nodes);
             }
         }
         private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
@@ -617,11 +617,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return projectfiles.TryGetValue(name, out FileInfo file) ? projectfiles[name] : new FileInfo(projectfolders[name].FullName);
         }
 
-        private List<string> GetNodes(TreeNodeCollection treeNodeCollection)
+        private List<string> GetExpandedNodes(TreeNodeCollection treeNodeCollection)
         {
             List<string> expandednodes = new();
             foreach (TreeNode tn in treeNodeCollection) {
-                expandednodes.AddRange(GetNodes(tn.Nodes));
+                expandednodes.AddRange(GetExpandedNodes(tn.Nodes));
                 if (tn.IsExpanded)
                     expandednodes.Add(tn.FullPath);
             }
@@ -629,12 +629,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return expandednodes;
         }
 
-        private void RecurseNodes(TreeNodeCollection treeNodeCollection)
+        private void RecurseNodesFindExpanded(TreeNodeCollection treeNodeCollection)
         {
             foreach (TreeNode tn in treeNodeCollection) {
                 if (expandednodes.Contains(tn.FullPath))
                     tn.Expand();
-                RecurseNodes(tn.Nodes);
+                RecurseNodesFindExpanded(tn.Nodes);
             }
         }
     }
