@@ -52,14 +52,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         TreeNode previousNode;
         List<TreeNode> filestocopy;
         List<TreeNode> selectedNodes = new();
+        List<string> expandednodes = new();
         //string is obj_name, FileInfo is file itself
         public Dictionary<string, FileInfo> projectfiles = new();
         public Dictionary<string, DirectoryInfo> projectfolders = new();
         #endregion
         #region Create Tree
-        private void CreateTreeView()
+        public void CreateTreeView()
         {
             if (projectfolder == null) return;
+            expandednodes.Clear();
+            expandednodes = GetNodes(treeView1.Nodes);
             //clear existing treeview
             treeView1.Nodes.Clear();
             projectfiles.Clear();
@@ -80,8 +83,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (filterenabled || filtersearch)
                 treeView1.ExpandAll();
             //otherwise expand root only
-            else
+            else {
                 treeView1.Nodes[0].Expand();
+                RecurseNodes(treeView1.Nodes);
+            }
         }
         private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
         {
@@ -610,6 +615,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private FileInfo GetFileOrFolderPath(string name)
         {
             return projectfiles.TryGetValue(name, out FileInfo file) ? projectfiles[name] : new FileInfo(projectfolders[name].FullName);
+        }
+
+        private List<string> GetNodes(TreeNodeCollection treeNodeCollection)
+        {
+            List<string> expandednodes = new();
+            foreach (TreeNode tn in treeNodeCollection) {
+                expandednodes.AddRange(GetNodes(tn.Nodes));
+                if (tn.IsExpanded)
+                    expandednodes.Add(tn.FullPath);
+            }
+
+            return expandednodes;
+        }
+
+        private void RecurseNodes(TreeNodeCollection treeNodeCollection)
+        {
+            foreach (TreeNode tn in treeNodeCollection) {
+                if (expandednodes.Contains(tn.FullPath))
+                    tn.Expand();
+                RecurseNodes(tn.Nodes);
+            }
         }
     }
 }

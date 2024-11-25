@@ -86,7 +86,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
             AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder)}\{dragdropnode.FullPath}");
-            propertyGridMaster.Refresh();
         }
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -225,8 +224,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
             if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder)) {
                 if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}"))
+                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
                         File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
+                        TCLE.dockProjectExplorer.CreateTreeView();
+                    }
                     else
                         return;
             }
@@ -254,6 +255,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     gatesectiontype = (string)_load["section_type"],
                     id = TCLE.rng.Next(0, 1000000)
                 });
+            propertyGridMaster.Refresh();
         }
 
         private void btnMasterLvlUp_Click(object sender, EventArgs e)
