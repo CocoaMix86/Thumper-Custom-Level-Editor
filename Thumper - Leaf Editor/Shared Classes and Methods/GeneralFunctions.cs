@@ -390,7 +390,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             _lvlsamples.Clear();
             //find all samp_ files in the level folder
-            List<string> _sampfiles = Directory.GetFiles(WorkingFolder, "*.samp", SearchOption.AllDirectories).Where(x => !x.Contains("samp_default")).ToList();
+            List<string> _sampfiles = Directory.GetFiles(WorkingFolder, "*.samp", SearchOption.AllDirectories).Where(x => !x.EndsWith("default.samp")).ToList();
             //add default empty sample
             _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
             //iterate over each file
