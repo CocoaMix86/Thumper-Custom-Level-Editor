@@ -305,8 +305,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFolderExplorer_Click(object sender, EventArgs e)
         {
             foreach (TreeNode tn in selectedNodes) {
-                if (Directory.Exists(projectfolders[tn.Name].FullName))
-                    Process.Start(projectfolders[tn.Name].FullName);
+                if (Directory.Exists(projectfolders[tn.FullPath].FullName))
+                    Process.Start(projectfolders[tn.FullPath].FullName);
             }
         }
 
@@ -324,7 +324,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             foreach (TreeNode tn in parentnodestocopy) {
                 string source = GetFileOrFolderPath(tn.FullPath).FullName;
-                string dest = $@"{projectfolders[targetnode.Name].FullName}\{tn.Name}";
+                string dest = $@"{projectfolders[targetnode.FullPath].FullName}\{tn.Name}";
                 //check if the destination is within the copied node. If it is, skip this node.
                 if (IsAChildOfOtherNodes(targetnode, tn)) {
                     MessageBox.Show($"Item '{tn.Name}' not pasted as it contains the destination.", "Thumper Custom Level Editor");
