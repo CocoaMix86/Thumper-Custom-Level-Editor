@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -111,10 +112,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 masterLvlList.Rows.RemoveAt(e.OldStartingIndex);
             }
-            //TCLE.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\{(_masterlvls[x.Index].lvlname != "" ? "lvl" : "gate")}_{x.Cells[1].Value}.txt").ToList());
-            ///TCLE.HighlightMissingFile(masterLvlList, masterLvlList.Rows.OfType<DataGridViewRow>().Select(x => (_masterlvls[x.Index].name)).ToList());
-            //set selected index. Mainly used when moving items
-            ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
             //enable certain buttons if there are enough items for them
             btnMasterLvlDelete.Enabled = _masterlvls.Count > 0;
             btnMasterLvlUp.Enabled = _masterlvls.Count > 1;
@@ -426,9 +423,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _lvl);
                 if (beats == -1) {
                     masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
+                    masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"file not found";
                 }
                 else {
                     string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].DefaultCellStyle = null;
                     masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
                 }
             }
