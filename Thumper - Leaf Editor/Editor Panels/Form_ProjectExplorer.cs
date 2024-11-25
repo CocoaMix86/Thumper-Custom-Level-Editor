@@ -306,7 +306,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             foreach (TreeNode tn in selectedNodes) {
                 if (Directory.Exists(projectfolders[tn.FullPath].FullName))
-                    Process.Start(projectfolders[tn.FullPath].FullName);
+                    Process.Start(new ProcessStartInfo(projectfolders[tn.FullPath].FullName) { UseShellExecute = true});
             }
         }
 
