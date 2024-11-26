@@ -221,6 +221,7 @@
     <PackageReference Include="DockPanelSuite.ThemeVS2015">
       <Version>3.1.1</Version>
     </PackageReference>
+    <PackageReference Include="FCTB" Version="2.16.24" />
     <PackageReference Include="Fmod5Sharp">
       <Version>3.0.1</Version>
     </PackageReference>
