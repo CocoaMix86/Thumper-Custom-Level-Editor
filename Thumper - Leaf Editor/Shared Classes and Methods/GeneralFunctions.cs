@@ -497,7 +497,7 @@ namespace Thumper_Custom_Level_Editor
             //open document in raw viewer if that option was selected
             openraw:
             if (openraw) {
-                Form_RawText rawtext = new(_load) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                Form_RawText rawtext = new(_load, filepath.FullName) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
                 rawtext.Show(lastclickedpane, null);
                 return;
             }

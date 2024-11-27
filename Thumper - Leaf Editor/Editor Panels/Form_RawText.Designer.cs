@@ -63,7 +63,6 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -74,13 +73,13 @@
             this.textEditor.Paddings = new Padding(0);
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
-            this.textEditor.SelectionLength = 4;
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
             this.textEditor.Size = new Size(284, 261);
             this.textEditor.TabIndex = 0;
             this.textEditor.Text = "text";
             this.textEditor.ToolTipDelay = 100;
             this.textEditor.Zoom = 100;
+            this.textEditor.UndoRedoStateChanged += this.textEditor_UndoRedoStateChanged;
             // 
             // Form_RawText
             // 
