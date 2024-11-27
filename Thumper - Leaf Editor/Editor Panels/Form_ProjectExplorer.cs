@@ -197,7 +197,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void toolstripFileRaw_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].FullPath].FullName, true);
+            TCLE.OpenFile(_mainform, new FileInfo(projectfiles[selectedNodes[0].FullPath].FullName), true);
         }
 
         private void toolstripFileSearch_Click(object sender, EventArgs e)
@@ -613,13 +613,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].FullPath].FullName);
+            TCLE.OpenFile(_mainform, new FileInfo(projectfiles[selectedNodes[0].FullPath].FullName));
         }
 
         private void treeView1_Click(object sender, EventArgs e)
         {
             if (btnOpenOnClick.Checked)
-                TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].FullPath].FullName);
+                TCLE.OpenFile(_mainform, new FileInfo(projectfiles[selectedNodes[0].FullPath].FullName));
         }
 
         private FileInfo GetFileOrFolderPath(string name)

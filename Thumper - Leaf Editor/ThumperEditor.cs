@@ -51,11 +51,9 @@ namespace Thumper_Custom_Level_Editor
                     }
                     //load Level Details into an object so it can be accessed later
                     projectjson = LoadFileLock(projectpath);
-                    if (projectjson == null || !projectjson.ContainsKey("level_name") || !projectjson.ContainsKey("difficulty") || !projectjson.ContainsKey("description") || !projectjson.ContainsKey("author"))
-                    {
+                    if (projectjson == null || !projectjson.ContainsKey("level_name") || !projectjson.ContainsKey("difficulty") || !projectjson.ContainsKey("description") || !projectjson.ContainsKey("author")) {
                         DialogResult result = MessageBox.Show("The LEVEL DETAILS.txt is missing information or is corrupt.\nCreate new LEVEL DETAILS?", "Failed to load", MessageBoxButtons.YesNo);
-                        if (result == DialogResult.Yes)
-                        {
+                        if (result == DialogResult.Yes) {
                             JObject level_details = new() { { "level_name", $"{Path.GetFileName(value)}" }, { "difficulty", "D0" }, { "description", "replace this text" }, { "author", "some guy" } };
                             File.WriteAllText($@"{value}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
                             projectjson = LoadFileLock($@"{value}\LEVEL DETAILS.txt");
@@ -519,5 +517,17 @@ namespace Thumper_Custom_Level_Editor
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
         }
         private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
+
+        public static DockPane lastclickedpane;
+        private void dockMain_ActivePaneChanged(object sender, EventArgs e)
+        {
+            if (dockMain.ActivePane?.ActiveContent.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
+                lastclickedpane = dockMain.ActivePane;
+        }
+
+        private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

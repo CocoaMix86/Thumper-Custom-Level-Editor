@@ -485,26 +485,33 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
         }
 
-        public static void OpenFile(TCLE form, string filepath, bool openraw = false)
+        public static void OpenFile(TCLE form, FileInfo filepath, bool openraw = false)
         {
-            dynamic _load = LoadFileLock(filepath);
-            string name = _load["obj_name"];
-            if (form.dockMain.Documents.Where(x => x.DockHandler.TabText == name).Any()) {
-                form.dockMain.Documents.Where(x => x.DockHandler.TabText == name).First().DockHandler.Activate();
+            dynamic _load = LoadFileLock(filepath.FullName);
+            //find if the document is loaded already in a tab
+            //if so, make it activate
+            if (form.dockMain.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()) {
+                form.dockMain.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).First().DockHandler.Activate();
                 return;
             }
-
+            //open document in raw viewer if that option was selected
+            openraw:
             if (openraw) {
-                Form_RawText rawtext = new(_load);
-                rawtext.Show(form.dockMain, DockState.Document);
+                Form_RawText rawtext = new(_load) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                rawtext.Show(lastclickedpane, null);
+                return;
             }
+            //otherwise, open a standard editor for the document type
+            string _type = filepath.Extension;
+            if (_type == ".master") {
+                Form_MasterEditor master = new(_load, filepath.FullName) { DockAreas = DockAreas.Document | DockAreas.Float };
+                master.Show(lastclickedpane, null);
+                openfiles.Add((string)_load["obj_name"], master);
+            }
+            //if file type not supported, open raw
             else {
-                string _type = _load["obj_type"];
-                if (_type == "SequinMaster") {
-                    Form_MasterEditor master = new(_load, filepath);
-                    master.Show(form.dockMain, DockState.Document);
-                    openfiles.Add((string)_load["obj_name"], master);
-                }
+                openraw = true;
+                goto openraw;
             }
         }
 

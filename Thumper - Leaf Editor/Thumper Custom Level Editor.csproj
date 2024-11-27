@@ -221,10 +221,11 @@
     <PackageReference Include="DockPanelSuite.ThemeVS2015">
       <Version>3.1.1</Version>
     </PackageReference>
-    <PackageReference Include="FCTB" Version="2.16.24" />
+    <PackageReference Include="FCTB-wired" Version="2.17.0" />
     <PackageReference Include="Fmod5Sharp">
       <Version>3.0.1</Version>
     </PackageReference>
+    <PackageReference Include="ICSharpCode.TextEditor" Version="3.2.1.6466" />
     <PackageReference Include="IndexRange">
       <Version>1.0.3</Version>
       <TreatAsUsed>true</TreatAsUsed>
@@ -255,7 +256,6 @@
     <PackageReference Include="OggVorbisEncoder">
       <Version>1.2.2</Version>
     </PackageReference>
-    <PackageReference Include="Syncfusion.Edit.Windows" Version="27.2.3" />
     <PackageReference Include="System.Collections.Immutable">
       <Version>9.0.0</Version>
     </PackageReference>
