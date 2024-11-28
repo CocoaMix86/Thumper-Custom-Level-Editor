@@ -12,12 +12,14 @@ using System.Windows.Shell;
 using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Runtime.CompilerServices;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE : Form
     {
         #region Variables
+        public static TCLE Instance;
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
         public static dynamic projectjson;
@@ -97,6 +99,7 @@ namespace Thumper_Custom_Level_Editor
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             dockMain.Theme = new VS2015DarkTheme();
             beeble.Show();
+            Instance = this;
 
             MaximizeScreenBounds();
             ColorFormElements();

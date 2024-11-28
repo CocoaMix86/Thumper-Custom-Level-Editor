@@ -32,33 +32,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         int _beats { get { return (int)numericUpDown_LeafLength.Value; } }
         int _selecttrack = 0;
 
-        public string _loadedleaf
+        public FileInfo loadedleaf
         {
-            get { return loadedleaf; }
+            get { return LoadedLeaf; }
             set {
-                if (value == null) {
-                    if (loadedleaf != null && TCLE.lockedfiles.ContainsKey(loadedleaf)) {
-                        TCLE.lockedfiles[loadedleaf].Close();
-                        TCLE.lockedfiles.Remove(loadedleaf);
+                if (LoadedLeaf != value) {
+                    LoadedLeaf = value;
+                    if (!LoadedLeaf.Exists) {
+                        LoadedLeaf.CreateText();
                     }
-                    loadedleaf = value;
-                    ResetLeaf();
-                }
-                if (loadedleaf != value) {
-                    if (loadedleaf != null && TCLE.lockedfiles.ContainsKey(loadedleaf)) {
-                        TCLE.lockedfiles[loadedleaf].Close();
-                        TCLE.lockedfiles.Remove(loadedleaf);
-                    }
-                    loadedleaf = value;
-
-                    if (!File.Exists(loadedleaf)) {
-                        File.WriteAllText(loadedleaf, "");
-                    }
-                    TCLE.lockedfiles.Add(_loadedleaf, new FileStream(_loadedleaf, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(loadedleaf, new FileStream(LoadedLeaf.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
-        private string loadedleaf;
+        private static FileInfo LoadedLeaf;
         dynamic leafjson;
         public string leafobj;
         public bool loadingleaf = false;
@@ -711,7 +698,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //if _loadedlvl is somehow not set, force Save As instead
-            if (_loadedleaf == null) {
+            if (loadedleaf == null) {
                 ///_mainform.toolstripLeafSaveAs.PerformClick();
                 return;
             }
@@ -729,7 +716,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null)
-                    _loadedleaf = null;
+                    loadedleaf = null;
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
@@ -744,7 +731,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedleaf = $@"{storePath}\leaf_{tempFileName}";
+                loadedleaf = new FileInfo($@"{storePath}\{tempFileName}.leaf");
                 WriteLeaf(true);
                 //after saving new file, refresh the workingfolder
                 ///_mainform.btnWorkRefresh.PerformClick();
@@ -753,11 +740,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void WriteLeaf(bool clearundo = false)
         {
             //serialize JSON object to a string, and write it to the file
-            JObject _save = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
-            if (!TCLE.lockedfiles.ContainsKey(_loadedleaf)) {
-                TCLE.lockedfiles.Add(_loadedleaf, new FileStream(_loadedleaf, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            JObject _save = LeafBuildSave(LoadedLeaf.Name);
+            if (!TCLE.lockedfiles.ContainsKey(loadedleaf)) {
+                TCLE.lockedfiles.Add(loadedleaf, new FileStream(LoadedLeaf.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            TCLE.WriteFileLock(TCLE.lockedfiles[_loadedleaf], _save);
+            TCLE.WriteFileLock(TCLE.lockedfiles[loadedleaf], _save);
             SaveLeaf(true, "Saved", "", true);
             this.Text = $"{_save["obj_name"]}";
             //update beat counts in loaded lvl if need be
@@ -776,11 +763,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath);
+                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
                     LoadLeaf(_load, filepath);
                 }
             }
@@ -790,15 +777,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
                 using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
+                ofd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
                 ofd.Title = "Load a Thumper Leaf file";
                 //set folder to the templates location
                 ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
                 if (ofd.ShowDialog() == DialogResult.OK) {
-                    if (loadedleaf != null && TCLE.lockedfiles.ContainsKey(loadedleaf)) {
-                        TCLE.lockedfiles[loadedleaf].Close();
-                        TCLE.lockedfiles.Remove(loadedleaf);
-                    }
                     object _load = TCLE.LoadFileLock(ofd.FileName);
                     LoadLeaf(_load, "template");
                 }
@@ -837,7 +820,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnRawImport_Click(object sender, EventArgs e)
         {
-            if (_loadedleaf == null)
+            if (loadedleaf == null)
                 return;
             try {
                 TrackRawImport(trackEditor.CurrentRow, JObject.Parse($"{{{richRawTrackData.Text}}}"));
@@ -1258,23 +1241,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Location = MousePosition
             };
             
-
-            string newfilename;
-            if (filenamedialog.ShowDialog() == DialogResult.Yes) {
-                newfilename = filenamedialog.txtWorkingRename.Text;
-                //check if the chosen name exists in the level folder
-                if (File.Exists($@"{TCLE.WorkingFolder}\leaf_{newfilename}.txt")) {
-                    MessageBox.Show("File name already exists.", "Leaf split error");
-                    return;
-                }
-            }
+            string newfilename
+            if (filenamedialog.ShowDialog() == DialogResult.Yes) 
+                newfilename = filenamedialog.txtWorkingRename.Text;            
             //if NOT yes, return and skip everything else below
             else
                 return;
 
             ///SPLIT THAT LEAF
             //build the leaf JSON so we can manipulate it
-            JObject _leafsplitbefore = LeafBuildSave(Path.GetFileName(_loadedleaf).Replace("leaf_", ""));
+            JObject _leafsplitbefore = LeafBuildSave(LoadedLeaf.Name);
             //enumerate over each sequencer object and it's values to figure out which ones to keep
             foreach (JObject seq_obj in _leafsplitbefore["seq_objs"].Cast<JObject>()) {
                 //data_points contains a list of all data points. By getting Properties() of it,
@@ -1293,7 +1269,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _leafsplitbefore.Remove("beat_cnt");
             _leafsplitbefore.Add("beat_cnt", splitindex);
             //write data back to file
-            TCLE.WriteFileLock(TCLE.lockedfiles[_loadedleaf], _leafsplitbefore);
+            TCLE.WriteFileLock(TCLE.lockedfiles[loadedleaf], _leafsplitbefore);
 
             ///repeat all above for after split file
             JObject _leafsplitafter = LeafBuildSave(newfilename + ".txt");
@@ -1312,14 +1288,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _leafsplitafter.Remove("beat_cnt");
             _leafsplitafter.Add("beat_cnt", numericUpDown_LeafLength.Value - splitindex);
             //write data back to file
-            File.WriteAllText($@"{TCLE.WorkingFolder}\leaf_{newfilename}.txt", JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
+            File.WriteAllText($@"{TCLE.WorkingFolder}\{newfilename}.leaf", JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
 
             TCLE.PlaySound("UIleafsplit");
             //load new leaf that was just split
-            ///TCLE.WorkingFolderFiles.Rows.Insert(TCLE.WorkingFolderFiles.CurrentRow.Index + 1, new[] { Properties.Resources.ResourceManager.GetObject("leaf"), "leaf_" + newfilename });
-            ///TCLE.WorkingFolderFiles.Rows[TCLE.WorkingFolderFiles.CurrentRow.Index + 1].Cells[1].Selected = true;
-
-            LoadLeaf(TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\leaf_{newfilename}.txt"), $@"{TCLE.WorkingFolder}\leaf_{newfilename}.txt");
+            TCLE.OpenFile(TCLE.Instance, new FileInfo($@"{TCLE.WorkingFolder}\{newfilename}.leaf"));
 
             //update beat counts in loaded lvl if need be
             ///if (_mainform._loadedlvl != null)
@@ -1358,7 +1331,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             SaveLeaf(true, "Revert to last save", "Revert");
-            LoadLeaf(leafjson, loadedleaf);
+            LoadLeaf(leafjson, LoadedLeaf);
             TCLE.PlaySound("UIrevertnew");
         }
 
@@ -1450,7 +1423,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_logundo) {
                     _undolistleaf.Insert(0, new SaveState() {
                         reason = $"{changereason} [{changedetails}]",
-                        savestate = LeafBuildSave((_loadedleaf != null) ? Path.GetFileName(_loadedleaf).Replace("leaf_", "") : "", true)
+                        savestate = LeafBuildSave((loadedleaf != null) ? LoadedLeaf.Name : "", true)
                     });
                 }
             }
@@ -1572,7 +1545,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Update DGV from _tracks
-        public void LoadLeaf(dynamic _load, string filepath, bool resetundolist = true)
+        public void LoadLeaf(dynamic _load, FileInfo filepath, bool resetundolist = true)
         {
             if (_load == null)
                 return;
@@ -1592,14 +1565,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //check for template or regular file
             if (filepath == "template") {
-                _loadedleaf = null;
+                loadedleaf = null;
             }
             else {
-                TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
-                //check if the assign actually worked. If not, stop loading.
-                if (TCLE.WorkingFolder != Path.GetDirectoryName(filepath))
-                    return;
-                _loadedleaf = filepath;
+                loadedleaf = filepath;
             }
 
             this.Text = $"{_load["obj_name"]}";
@@ -1741,8 +1710,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public JObject LeafBuildSave(string _leafname, bool skiprevertsave = false)
         {
-            //_leafname = Regex.Replace(_leafname, "[.].*", ".leaf");
-            _leafname = _leafname.Replace(".txt", ".leaf");
             ///start building JSON output
             JObject _save = new() {
                 { "obj_type", "SequinLeaf" },
@@ -1869,11 +1836,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void UndoFunction(int undoindex)
         {
             if (undoindex >= _undolistleaf.Count) {
-                LoadLeaf(_undolistleaf.Last().savestate, loadedleaf, false);
+                LoadLeaf(_undolistleaf.Last().savestate, LoadedLeaf, false);
                 _undolistleaf.RemoveRange(0, _undolistleaf.Count - 1);
             }
             else {
-                LoadLeaf(_undolistleaf[undoindex].savestate, loadedleaf, false);
+                LoadLeaf(_undolistleaf[undoindex].savestate, LoadedLeaf, false);
                 _undolistleaf.RemoveRange(0, undoindex);
             }
         }

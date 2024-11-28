@@ -21,34 +21,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool _savegate = true;
-        string _loadedgate
+        public FileInfo loadedgate
         {
-            get { return loadedgate; }
+            get { return LoadedGate; }
             set {
-                if (value == null) {
-                    if (loadedgate != null && TCLE.lockedfiles.ContainsKey(loadedgate)) {
-                        TCLE.lockedfiles[loadedgate].Close();
-                        TCLE.lockedfiles.Remove(loadedgate);
-                    }
-                    loadedgate = value;
-                    ResetGate();
-                }
-                if (loadedgate != value) {
-                    if (loadedgate != null && TCLE.lockedfiles.ContainsKey(loadedgate)) {
-                        TCLE.lockedfiles[loadedgate].Close();
-                        TCLE.lockedfiles.Remove(loadedgate);
-                    }
-                    loadedgate = value;
+                    LoadedGate = value;
                     dropGateSection.SelectedIndex = 0;
-
-                    if (!File.Exists(loadedgate)) {
-                        File.WriteAllText(loadedgate, "");
+                    if (!LoadedGate.Exists) {
+                        LoadedGate.CreateText();
                     }
-                    TCLE.lockedfiles.Add(loadedgate, new FileStream(loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-                }
+                    TCLE.lockedfiles.Add(LoadedGate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
         }
-        private string loadedgate;
+        private static FileInfo LoadedGate;
         readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
         readonly List<BossData> bossdata = new() {
             new BossData() {boss_name = "Level 1 - circle", boss_spn = "boss_gate.spn", boss_ent = "boss_gate_pellet.ent"},
@@ -168,11 +153,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath);
+                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
                     LoadGate(_load, filepath);
                 }
             }
@@ -181,7 +166,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Save()
         {
             //if _loadedgate is somehow not set, force Save As instead
-            if (_loadedgate == null) {
+            if (loadedgate == null) {
                 ///_mainform.toolstripGateSaveAs.PerformClick();
                 return;
             }
@@ -198,7 +183,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null)
-                    _loadedgate = null;
+                    loadedgate = null;
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
@@ -213,7 +198,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedgate = $@"{storePath}\gate_{tempFileName}";
+                loadedgate = new FileInfo($@"{storePath}\{tempFileName}.gate");
                 WriteGate();
                 //after saving new file, refresh the workingfolder
                 ///_mainform.btnWorkRefresh.PerformClick();
@@ -222,13 +207,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void WriteGate()
         {
             //write contents direct to file without prompting save dialog
-            JObject _save = GateBuildSave(Path.GetFileName(_loadedgate).Replace("gate_", ""));
-            if (!TCLE.lockedfiles.ContainsKey(_loadedgate)) {
-                TCLE.lockedfiles.Add(_loadedgate, new FileStream(_loadedgate, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            JObject _save = GateBuildSave(LoadedGate.Name);
+            if (!TCLE.lockedfiles.ContainsKey(loadedgate)) {
+                TCLE.lockedfiles.Add(loadedgate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            TCLE.WriteFileLock(TCLE.lockedfiles[loadedgate], _save);
+            TCLE.WriteFileLock(TCLE.lockedfiles[LoadedGate], _save);
             SaveGate(true, true);
-            this.Text = $"{_save["obj_name"]}";
+            this.Text = LoadedGate.Name;
         }
 
         /// All dropdowns of Gate Editor call this
@@ -398,7 +383,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             SaveGate(true);
-            LoadGate(gatejson, loadedgate);
+            LoadGate(gatejson, LoadedGate);
             TCLE.PlaySound("UIrevertchanges");
         }
 
@@ -451,7 +436,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveGate(true);
         }
 
-        public void LoadGate(dynamic _load, string filepath)
+        public void LoadGate(dynamic _load, FileInfo filepath)
         {
             if (_load == null)
                 return;
@@ -460,14 +445,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a gate file!");
                 return;
             }
-            //if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-            TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
-            //check if the assign actually worked. If not, stop loading.
-            if (TCLE.WorkingFolder != Path.GetDirectoryName(filepath))
-                return;
-            _loadedgate = filepath;
+            loadedgate = filepath;
             //set some visual elements
-            this.Text = $"{_load["obj_name"]}";
+            this.Text = LoadedGate.Name;
 
             ///Clear form elements so new data can load
             _gatelvls.Clear();
@@ -550,7 +530,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int bucket1 = 0;
             int bucket2 = 0;
             int bucket3 = 0;
-            _gatename = _gatename.Replace(".txt", ".gate");
             ///being build Master JSON object
             JObject _save = new() {
                 { "obj_type", "SequinGate" },

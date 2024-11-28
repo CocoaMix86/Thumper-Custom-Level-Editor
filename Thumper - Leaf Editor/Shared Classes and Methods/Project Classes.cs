@@ -57,11 +57,11 @@ namespace Thumper_Custom_Level_Editor
             set {
                 if (value < 0)
                     value = 1;
-                if (value > 20000)
-                    value = 20000;
+                if (value > 99999.99m)
+                    value = 99999.99m;
                 Bpm = value;
                 foreach (var dc in TCLE.openfiles) {
-                    if (dc.Key.EndsWith(".master")) {
+                    if (dc.Key.Extension == ".master") {
                         (dc.Value as Form_MasterEditor).propertyGridMaster.Refresh();
                     }
                 }
