@@ -295,7 +295,7 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip File
         private void toolstripFileNewProject_Click(object sender, EventArgs e)
         {
-            ProjectPropertiesForm customlevel = new(this, true);
+            ProjectPropertiesForm customlevel = new(true);
             //show the new level folder dialog box
             if (customlevel.ShowDialog() == DialogResult.Yes) {
                 customlevel.Dispose();
@@ -478,7 +478,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripProjectProperties_Click(object sender, EventArgs e)
         {
-            ProjectPropertiesForm customlevel = new(this, false);
+            ProjectPropertiesForm customlevel = new(false);
             //set textboxes
             customlevel.txtCustomName.Text = projectjson["level_name"] ?? "LEVEL NAME";
             customlevel.txtCustomDiff.Text = projectjson["difficulty"] ?? "d0";

@@ -18,8 +18,9 @@ namespace Thumper_Custom_Level_Editor
 
         public ProjectPropertiesForm(bool newlevel)
 		{
-            isthisnew = newlevel;
 			InitializeComponent();
+
+            isthisnew = newlevel;
             pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;
             //set the form text fields
             txtCustomPath.Text = Path.GetDirectoryName(TCLE.WorkingFolder);
@@ -102,22 +103,22 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnCustomSave_Click(object sender, EventArgs e)
         {
-            bool success = CreateCustomLevelFolder(this);
+            bool success = CreateCustomLevelFolder();
             if (success) {
                 this.DialogResult = DialogResult.Yes;
                 this.Close();
             }
         }
 
-        public bool CreateCustomLevelFolder(ProjectPropertiesForm input)
+        public bool CreateCustomLevelFolder()
         {
-            string levelpath = $@"{input.txtCustomPath.Text}\{input.txtCustomName.Text}";
+            string levelpath = $@"{txtCustomPath.Text}\{txtCustomName.Text}";
 
             JObject level_details = new() {
-                { "level_name", input.txtCustomName.Text },
-                { "difficulty", input.txtCustomDiff.Text },
-                { "description", input.txtDesc.Text },
-                { "author", input.txtCustomAuthor.Text }
+                { "level_name", txtCustomName.Text },
+                { "difficulty", txtCustomDiff.Text },
+                { "description", txtDesc.Text },
+                { "author", txtCustomAuthor.Text }
             };
 
             if (isthisnew) {
@@ -141,7 +142,7 @@ namespace Thumper_Custom_Level_Editor
                 Directory.Move($"{levelpath}1029", $"{levelpath}");
                 //if level name changes, should update the config file
                 if (File.Exists($@"{levelpath}\config_{Path.GetFileName(TCLE.WorkingFolder)}.txt"))
-                    File.Move($@"{levelpath}\config_{Path.GetFileName(TCLE.WorkingFolder)}.txt", $@"{levelpath}\config_{input.txtCustomName.Text}.txt");
+                    File.Move($@"{levelpath}\config_{Path.GetFileName(TCLE.WorkingFolder)}.txt", $@"{levelpath}\config_{txtCustomName.Text}.txt");
             }
 
             if (!Directory.Exists(levelpath)) {
@@ -156,51 +157,51 @@ namespace Thumper_Custom_Level_Editor
                 {"pyramidoutro", new FileInfo($@"{levelpath}\pyramid_outro.leaf")}
             };
             List<Tuple<FileInfo, bool, string>> samplePacks = new() {                 
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level1_320bpm.samp"), input.chkLevel1.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level2_340bpm.samp"), input.chkLevel2.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level3_360bpm.samp"), input.chkLevel3.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level4_380bpm.samp"), input.chkLevel4.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level5_400bpm.samp"), input.chkLevel5.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level6_420bpm.samp"), input.chkLevel6.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level7_440bpm.samp"), input.chkLevel7.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level8_460bpm.samp"), input.chkLevel8.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level9_480bpm.samp"), input.chkLevel9.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\dissonant.samp"), input.chkDissonance.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\globaldrones.samp"), input.chkGlobal.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\rests.samp"), input.chkRests.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\misc.samp"), input.chkMisc.Checked, Properties.Resources.samp_level1_320bpm)};
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level1_320bpm.samp"), chkLevel1.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level2_340bpm.samp"), chkLevel2.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level3_360bpm.samp"), chkLevel3.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level4_380bpm.samp"), chkLevel4.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level5_400bpm.samp"), chkLevel5.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level6_420bpm.samp"), chkLevel6.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level7_440bpm.samp"), chkLevel7.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level8_460bpm.samp"), chkLevel8.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level9_480bpm.samp"), chkLevel9.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\dissonant.samp"), chkDissonance.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\globaldrones.samp"), chkGlobal.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\rests.samp"), chkRests.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\misc.samp"), chkMisc.Checked, Properties.Resources.samp_level1_320bpm)};
 
             ///these 4 files below are required defaults of new levels.
             ///create them if they don't exist
-            if (!defaultFiles["defaultsamp"].Exists) {
+            if (!Directory.GetFiles(levelpath, defaultFiles["defaultsamp"].Name, SearchOption.AllDirectories).Any()) {
                 defaultFiles["defaultsamp"].CreateText().Write(Properties.Resources.samp_default);
             }
-            if (!defaultFiles["defaultspn"].Exists) {
+            if (!Directory.GetFiles(levelpath, defaultFiles["defaultspn"].Name, SearchOption.AllDirectories).Any()) {
                 defaultFiles["defaultspn"].CreateText().Write(Properties.Resources.spn_default);
             }
-            if (!defaultFiles["defaultxfm"].Exists) {
+            if (!Directory.GetFiles(levelpath, defaultFiles["defaultxfm"].Name, SearchOption.AllDirectories).Any()) {
                 defaultFiles["defaultxfm"].CreateText().Write(Properties.Resources.xfm_default);
             }
-            if (!defaultFiles["pyramidoutro"].Exists) {
+            if (!Directory.GetFiles(levelpath, defaultFiles["pyramidoutro"].Name, SearchOption.AllDirectories).Any()) {
                 defaultFiles["pyramidoutro"].CreateText().Write(Properties.Resources.leaf_pyramid_outro);
             }
             ///create samp_ files if any boxes are checked
             foreach (Tuple<FileInfo, bool, string> pack in samplePacks) {
                 if (pack.Item2) {
-                    if (!pack.Item1.Exists)
+                    if (!Directory.GetFiles(levelpath, pack.Item1.Name, SearchOption.AllDirectories).Any())
                         pack.Item1.CreateText().Write(pack.Item3);
                 }
                 else
-                    TCLE.DeleteFileLock(pack.Item1);
+                    TCLE.DeleteFileLock(new FileInfo(Directory.GetFiles(levelpath, pack.Item1.Name, SearchOption.AllDirectories).First()));
             }
 
             
-            if (isthisnew || (isthisnew == false && TCLE.WorkingFolder != levelpath)) {
-                File.WriteAllText($@"{levelpath}\{txtCustomName.Text}.TCL", JsonConvert.SerializeObject(level_details, Formatting.Indented));
-            }
-            else {
-                TCLE.WriteFileLock(TCLE.lockedfiles[$@"{levelpath}\{txtCustomName.Text}.TCL"], level_details);
-            }
+            //if (isthisnew || (isthisnew == false && TCLE.WorkingFolder != levelpath)) {
+            //    File.WriteAllText($@"{levelpath}\{txtCustomName.Text}.TCL", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+            //}
+            //else {
+                TCLE.WriteFileLock(TCLE.lockedfiles[new FileInfo($@"{levelpath}\{txtCustomName.Text}.TCL")], level_details);
+            //}
             TCLE.projectjson = level_details;
             TCLE.WorkingFolder = levelpath;
 
