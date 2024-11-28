@@ -16,7 +16,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_MasterEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_MasterEditor(dynamic load = null, string filepath = null)
+        public Form_MasterEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
             InitializeMasterStuff();
@@ -31,7 +31,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        public string _loadedmaster
+        public FileInfo loadedmaster
         {
             get { return LoadedMaster; }
             set {
@@ -50,14 +50,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     LoadedMaster = value;
 
-                    if (!File.Exists(LoadedMaster)) {
-                        File.WriteAllText(LoadedMaster, "");
+                    if (!LoadedMaster.Exists) {
+                        LoadedMaster.CreateText();
                     }
-                    TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
-        private static string LoadedMaster;
+        private static FileInfo LoadedMaster;
         private List<MasterLvlData> clipboardmaster = new();
         public ObservableCollection<MasterLvlData> _masterlvls { get { return _properties.masterlvls; } set { _properties.masterlvls = value; } }
         public MasterProperties _properties;
@@ -142,11 +142,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath);
+                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
                     LoadMaster(_load, filepath);
                 }
             }
@@ -171,7 +171,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (sfd.ShowDialog() == DialogResult.OK) {
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
-                _loadedmaster = $@"{storePath}\master_sequin.txt";
+                loadedmaster = new FileInfo($@"{storePath}\sequin.master");
                 BuildSave(_properties);
                 //after saving new file, refresh the workingfolder
                 ///_mainform.btnWorkRefresh.PerformClick();
@@ -333,7 +333,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
         }
 
-        public void LoadMaster(dynamic _load, string filepath)
+        public void LoadMaster(dynamic _load, FileInfo filepath)
         {
             if (_load == null)
                 return;
@@ -341,7 +341,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a master file!");
                 return;
             }
-            _loadedmaster = filepath;
+            loadedmaster = filepath;
             //set some visual elements
             this.Text = $"sequin.master";
 
@@ -408,7 +408,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _properties.revertPoint = _saveJSON;
                 //if file is not locked, lock it
                 if (!TCLE.lockedfiles.ContainsKey(LoadedMaster)) {
-                    TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);

@@ -15,7 +15,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_RawText : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_RawText(dynamic _load, string filepath)
+        public Form_RawText(dynamic _load, FileInfo filepath)
         {
             loadedfile = filepath;
             InitializeComponent();
@@ -28,8 +28,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
         #region Variables
         public bool EditorIsSaved = true;
-        private string loadedfile { get { return LoadedFile; } set { LoadedFile = value; } }
-        public static string LoadedFile;
+        private FileInfo loadedfile { get { return LoadedFile; } set { LoadedFile = value; } }
+        public static FileInfo LoadedFile;
         #endregion
         #region Event Handlers
         private void textEditor_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
@@ -60,7 +60,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //if file is not locked, lock it
                 if (!TCLE.lockedfiles.ContainsKey(LoadedFile)) {
-                    TCLE.lockedfiles.Add(LoadedFile, new FileStream(LoadedFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(LoadedFile, new FileStream(LoadedFile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedFile], _saveJSON);

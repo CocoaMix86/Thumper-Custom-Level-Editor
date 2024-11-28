@@ -282,19 +282,19 @@ namespace Thumper_Custom_Level_Editor
             return _load;
         }
 
-        public static void DeleteFileLock(string _selectedfilename, string filetype)
+        public static void DeleteFileLock(FileInfo filetodelete, string filetype)
         {
-            if (lockedfiles.ContainsKey(_selectedfilename)) {
-                lockedfiles[_selectedfilename].Close();
-                lockedfiles.Remove(_selectedfilename);
+            if (lockedfiles.ContainsKey(filetodelete)) {
+                lockedfiles[filetodelete].Close();
+                lockedfiles.Remove(filetodelete);
             }
-            File.Delete(_selectedfilename);
+            filetodelete.Delete();
         }
 
         public static void ClearFileLock()
         {
             //clear previously locked files
-            foreach (KeyValuePair<string, FileStream> i in lockedfiles) {
+            foreach (KeyValuePair<FileInfo, FileStream> i in lockedfiles) {
                 i.Value.Close();
             }
             lockedfiles.Clear();
@@ -497,16 +497,15 @@ namespace Thumper_Custom_Level_Editor
             //open document in raw viewer if that option was selected
             openraw:
             if (openraw) {
-                Form_RawText rawtext = new(_load, filepath.FullName) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
                 rawtext.Show(lastclickedpane, null);
                 return;
             }
             //otherwise, open a standard editor for the document type
             string _type = filepath.Extension;
             if (_type == ".master") {
-                Form_MasterEditor master = new(_load, filepath.FullName) { DockAreas = DockAreas.Document | DockAreas.Float };
+                Form_MasterEditor master = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
                 master.Show(lastclickedpane, null);
-                openfiles.Add((string)_load["obj_name"], master);
             }
             //if file type not supported, open raw
             else {

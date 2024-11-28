@@ -38,11 +38,11 @@ namespace Thumper_Custom_Level_Editor
                         MessageBox.Show("This folder does not appear to be a Custom Level project. The .TCL file is missing.\nProject not loaded.", "Thumper Custom Level Editor");
                         return;
                     }
-                    string projectpath = Directory.GetFiles(value, "*.TCL").First();
+                    FileInfo ProjectFile = new FileInfo(Directory.GetFiles(value, "*.TCL").First());
                     //Try locking the .TCL first. If it fails, the level is already open
                     //in that case, return before doing anything
                     try {
-                        lockedfiles.Add(projectpath, new FileStream(projectpath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                        lockedfiles.Add(ProjectFile, new FileStream(ProjectFile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                         ClearFileLock();
                     }
                     catch (Exception) {
@@ -50,7 +50,7 @@ namespace Thumper_Custom_Level_Editor
                         return;
                     }
                     //load Level Details into an object so it can be accessed later
-                    projectjson = LoadFileLock(projectpath);
+                    projectjson = LoadFileLock(ProjectFile.FullName);
                     if (projectjson == null || !projectjson.ContainsKey("level_name") || !projectjson.ContainsKey("difficulty") || !projectjson.ContainsKey("description") || !projectjson.ContainsKey("author")) {
                         DialogResult result = MessageBox.Show("The LEVEL DETAILS.txt is missing information or is corrupt.\nCreate new LEVEL DETAILS?", "Failed to load", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes) {
@@ -83,8 +83,8 @@ namespace Thumper_Custom_Level_Editor
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-        public static Dictionary<string, FileStream> lockedfiles = new();
-        public static Dictionary<string, DockContent> openfiles = new();
+        public static Dictionary<FileInfo, FileStream> lockedfiles = new();
+        public static Dictionary<FileInfo, DockContent> openfiles = new();
         public static Beeble beeble = new();
         #endregion
 

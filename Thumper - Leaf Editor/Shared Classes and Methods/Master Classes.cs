@@ -60,7 +60,7 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public MasterLvlData sublevel { get; set; }
 
-        public MasterProperties(Form_MasterEditor Parent, string path)
+        public MasterProperties(Form_MasterEditor Parent, FileInfo path)
         {
             parent = Parent;
             FilePath = path;
@@ -73,8 +73,8 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath { get {return FilePath; } }
-        private string FilePath;
+        public string filepath { get {return FilePath.FullName; } }
+        private FileInfo FilePath;
 
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]
