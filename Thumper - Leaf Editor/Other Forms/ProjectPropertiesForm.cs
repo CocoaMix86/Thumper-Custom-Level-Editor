@@ -182,86 +182,70 @@ namespace Thumper_Custom_Level_Editor
             }
             ///create samp_ files if any boxes are checked
             //level 1
-            if (input.chkLevel1.Checked) {
+            if (input.chkLevel1.Checked)
                 if (!defaultFiles["level1"].Exists)
                     defaultFiles["level1"].CreateText().Write(Properties.Resources.samp_level1_320bpm);
-            }
-            else
-                TCLE.DeleteFileLock(defaultFiles["level1"]);
-            
+            else TCLE.DeleteFileLock(defaultFiles["level1"]);
             //level 2
-            if (input.chkLevel2.Checked) {
+            if (input.chkLevel2.Checked)
                 if (!defaultFiles["level2"].Exists)
                     defaultFiles["level2"].CreateText().Write(Properties.Resources.samp_level2_340bpm);
-            }
-            else
-                TCLE.DeleteFileLock(defaultFiles["level2"]);
-
+            else TCLE.DeleteFileLock(defaultFiles["level2"]);
             //level 3
-            if (input.chkLevel3.Checked && !File.Exists($@"{levelpath}\samp_level3_360bpm.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_level3_360bpm.txt", Properties.Resources.samp_level3_360bpm);
-            else if (input.chkLevel3.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_level3_360bpm.txt");
-            
+            if (input.chkLevel3.Checked)
+                if (!defaultFiles["level3"].Exists)
+                    defaultFiles["level3"].CreateText().Write(Properties.Resources.samp_level3_360bpm);
+                else TCLE.DeleteFileLock(defaultFiles["level3"]);
             //level 4
-            if (input.chkLevel4.Checked && !File.Exists($@"{levelpath}\samp_level4_380bpm.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_level4_380bpm.txt", Properties.Resources.samp_level4_380bpm);
-            else if (input.chkLevel4.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_level4_380bpm.txt");
-            
+            if (input.chkLevel4.Checked)
+                if (!defaultFiles["level4"].Exists)
+                    defaultFiles["level4"].CreateText().Write(Properties.Resources.samp_level4_380bpm);
+                else TCLE.DeleteFileLock(defaultFiles["level4"]);
             //level 5
-            if (input.chkLevel5.Checked && !File.Exists($@"{levelpath}\samp_level5_400bpm.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_level5_400bpm.txt", Properties.Resources.samp_level5_400bpm);
-            else if (input.chkLevel5.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_level5_400bpm.txt");
-            
+            if (input.chkLevel5.Checked)
+                if (!defaultFiles["level5"].Exists)
+                    defaultFiles["level5"].CreateText().Write(Properties.Resources.samp_level5_400bpm);
+                else TCLE.DeleteFileLock(defaultFiles["level5"]);
             //level 6
-            if (input.chkLevel6.Checked && !File.Exists($@"{levelpath}\samp_level6_420bpm.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_level6_420bpm.txt", Properties.Resources.samp_level6_420bpm);
-            else if (input.chkLevel6.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_level6_420bpm.txt");
-            
+            if (input.chkLevel6.Checked)
+                if (!defaultFiles["level6"].Exists)
+                    defaultFiles["level6"].CreateText().Write(Properties.Resources.samp_level6_420bpm);
+                else TCLE.DeleteFileLock(defaultFiles["level6"]);
             //level 7
-            if (input.chkLevel7.Checked && !File.Exists($@"{levelpath}\samp_level7_440bpm.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_level7_440bpm.txt", Properties.Resources.samp_level7_440bpm);
-            else if (input.chkLevel7.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_level7_440bpm.txt");
-            
+            if (input.chkLevel7.Checked)
+                if (!defaultFiles["level7"].Exists)
+                    defaultFiles["level7"].CreateText().Write(Properties.Resources.samp_level7_440bpm);
+                else TCLE.DeleteFileLock(defaultFiles["level7"]);
             //level 8
-            if (input.chkLevel8.Checked && !File.Exists($@"{levelpath}\samp_level8_460bpm.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_level8_460bpm.txt", Properties.Resources.samp_level8_460bpm);
-            else if (input.chkLevel8.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_level8_460bpm.txt");
-            
+            if (input.chkLevel8.Checked)
+                if (!defaultFiles["level8"].Exists)
+                    defaultFiles["level8"].CreateText().Write(Properties.Resources.samp_level8_460bpm);
+                else TCLE.DeleteFileLock(defaultFiles["level8"]);
             //level 9
-            if (input.chkLevel9.Checked && !File.Exists($@"{levelpath}\samp_level9_480bpm.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_level9_480bpm.txt", Properties.Resources.samp_level9_480bpm);
-            else if (input.chkLevel9.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_level9_480bpm.txt");
-            
-            //Dissonance
-            if (input.chkDissonance.Checked && !File.Exists($@"{levelpath}\samp_dissonant.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_dissonant.txt", Properties.Resources.samp_dissonant);
-            else if (input.chkDissonance.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_dissonant.txt");
-            
+            if (input.chkLevel9.Checked)
+                if (!defaultFiles["level9"].Exists)
+                    defaultFiles["level9"].CreateText().Write(Properties.Resources.samp_level9_480bpm);
+                else TCLE.DeleteFileLock(defaultFiles["level9"]);
+            //Dissonant
+            if (input.chkDissonance.Checked)
+                if (!defaultFiles["dissonant"].Exists)
+                    defaultFiles["dissonant"].CreateText().Write(Properties.Resources.samp_dissonant);
+                else TCLE.DeleteFileLock(defaultFiles["dissonant"]);
             //Global Drones
-            if (input.chkGlobal.Checked && !File.Exists($@"{levelpath}\samp_globaldrones.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_globaldrones.txt", Properties.Resources.samp_globaldrones);
-            else if (input.chkGlobal.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_globaldrones.txt");
-            
+            if (input.chkGlobal.Checked)
+                if (!defaultFiles["drones"].Exists)
+                    defaultFiles["drones"].CreateText().Write(Properties.Resources.samp_globaldrones);
+                else TCLE.DeleteFileLock(defaultFiles["drones"]);
             //Rests
-            if (input.chkRests.Checked && !File.Exists($@"{levelpath}\samp_rests.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_rests.txt", Properties.Resources.samp_rests);
-            else if (input.chkRests.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_rests.txt");
-            
+            if (input.chkRests.Checked)
+                if (!defaultFiles["rests"].Exists)
+                    defaultFiles["rests"].CreateText().Write(Properties.Resources.samp_rests);
+                else TCLE.DeleteFileLock(defaultFiles["rests"]);
             //Misc
-            if (input.chkMisc.Checked && !File.Exists($@"{levelpath}\samp_misc.txt")) 
-                File.WriteAllText($@"{levelpath}\samp_misc.txt", Properties.Resources.samp_misc);
-            else if (input.chkMisc.Checked == false)
-                TCLE.DeleteFileLock($@"{levelpath}\samp_misc.txt");
+            if (input.chkMisc.Checked)
+                if (!defaultFiles["rests"].Exists)
+                    defaultFiles["rests"].CreateText().Write(Properties.Resources.samp_rests);
+                else TCLE.DeleteFileLock(defaultFiles["rests"]);
 
 
             if (isthisnew || (isthisnew == false && TCLE.WorkingFolder != levelpath)) {
