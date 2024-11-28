@@ -711,10 +711,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
-            sfd.Filter = "Thumper Leaf File (*.txt)|*.txt";
+            sfd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
+                /*
                 if (sender == null)
                     loadedleaf = null;
                 //separate path and filename
@@ -731,7 +732,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                loadedleaf = new FileInfo($@"{storePath}\{tempFileName}.leaf");
+                */
+                loadedleaf = new FileInfo(sfd.FileName);
                 WriteLeaf(true);
                 //after saving new file, refresh the workingfolder
                 ///_mainform.btnWorkRefresh.PerformClick();
@@ -746,7 +748,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.WriteFileLock(TCLE.lockedfiles[loadedleaf], _save);
             SaveLeaf(true, "Saved", "", true);
-            this.Text = $"{_save["obj_name"]}";
+            this.Text = LoadedLeaf.Name;
             //update beat counts in loaded lvl if need be
             ///if (_mainform._loadedlvl != null)
                 ///_mainform.btnLvlRefreshBeats_Click(null, null);
@@ -758,7 +760,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
                 using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
+                ofd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
                 ofd.Title = "Load a Thumper Leaf file";
                 ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
