@@ -17,7 +17,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_SampleEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_SampleEditor(dynamic load = null, string filepath = null)
+        public Form_SampleEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
             sampleToolStrip.Renderer = new ToolStripOverride();
@@ -28,7 +28,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool _savesample = true;
-        string _loadedsample
+        FileInfo loadedsample
         {
             get { return loadedsample; }
             set {
@@ -47,14 +47,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     loadedsample = value;
 
-                    if (!File.Exists(loadedsample)) {
-                        File.WriteAllText(loadedsample, "");
+                    if (!LoadedSample.Exists) {
+                        LoadedSample.CreateText();
                     }
-                    TCLE.lockedfiles.Add(loadedsample, new FileStream(loadedsample, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(loadedsample, new FileStream(LoadedSample.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
-        private string loadedsample;
+        private FileInfo LoadedSample;
         string _loadedsampletemp;
         dynamic samplejson;
         ObservableCollection<SampleData> _samplelist = new();
@@ -164,11 +164,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.Title = "Load a Thumper Sample file";
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath);
+                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
                     LoadSample(_load, filepath);
                 }
             }
@@ -177,7 +177,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void SamplesaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //if _loadedgate is somehow not set, force Save As instead
-            if (_loadedsample == null) {
+            if (loadedsample == null) {
                 SamplesaveAsToolStripMenuItem_Click(1, null);
                 return;
             }
@@ -194,7 +194,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null)
-                    _loadedsample = null;
+                    loadedsample = null;
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 string tempFileName = Path.GetFileName(sfd.FileName);
@@ -205,11 +205,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show("File not saved. Do not include 'samp_' in your file name.", "File not saved");
                     return;
                 }
-                if (File.Exists($@"{storePath}\samp_{tempFileName}")) {
+                if (File.Exists($@"{storePath}\{tempFileName}.samp")) {
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedsample = $@"{storePath}\samp_{tempFileName}";
+                loadedsample = new FileInfo($@"{storePath}\{tempFileName}.samp");
                 WriteSample();
                 //after saving new file, refresh the workingfolder
                 ///_mainform.btnWorkRefresh_Click(null, null);
@@ -220,11 +220,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //write contents direct to file without prompting save dialog
             JObject _save = SampleBuildSave();
             if (!TCLE.lockedfiles.ContainsKey(loadedsample)) {
-                TCLE.lockedfiles.Add(loadedsample, new FileStream(loadedsample, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                TCLE.lockedfiles.Add(loadedsample, new FileStream(LoadedSample.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
             TCLE.WriteFileLock(TCLE.lockedfiles[loadedsample], _save);
             SaveSample(true, true);
-            this.Text = $"{Path.GetFileNameWithoutExtension(_loadedsample)}";
+            this.Text = LoadedSample.Name;
         }
 
         ///Detect dragon-and-drop of files and then load them to Sample files
@@ -426,7 +426,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _samplelist.CollectionChanged += _samplelist_CollectionChanged;
         }
 
-        public void LoadSample(dynamic _load, string filepath)
+        public void LoadSample(dynamic _load, FileInfo filepath)
         {
             if (_load == null)
                 return;
@@ -435,14 +435,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a sample file!");
                 return;
             }
-            //if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-            TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
-            //check if the assign actually worked. If not, stop loading.
-            if (TCLE.WorkingFolder != Path.GetDirectoryName(filepath))
-                return;
-            _loadedsample = filepath;
+            loadedsample = filepath;
             //set some visual elements
-            this.Text = $"{Path.GetFileNameWithoutExtension(loadedsample)}";
+            this.Text = LoadedSample.Name;
 
             ///Clear form elements so new data can load
             _samplelist.CollectionChanged -= _samplelist_CollectionChanged;

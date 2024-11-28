@@ -459,7 +459,6 @@
             this.dockMain.ShowDocumentIcon = true;
             this.dockMain.Size = new Size(984, 444);
             this.dockMain.TabIndex = 147;
-            this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
             this.dockMain.ActivePaneChanged += this.dockMain_ActivePaneChanged;
             // 
             // txtFilePath
@@ -1132,7 +1131,7 @@
             this.toolStripMain.Location = new Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = ToolStripRenderMode.System;
-            this.toolStripMain.Size = new Size(139, 25);
+            this.toolStripMain.Size = new Size(170, 25);
             this.toolStripMain.TabIndex = 151;
             this.toolStripMain.Text = "toolStripMain";
             // 
@@ -1163,6 +1162,7 @@
             this.toolstripMainSave.Name = "toolstripMainSave";
             this.toolstripMainSave.Size = new Size(23, 22);
             this.toolstripMainSave.Text = "toolStripButton5";
+            this.toolstripMainSave.Click += this.toolstripMainSave_Click;
             // 
             // toolstripMainSaveAll
             // 

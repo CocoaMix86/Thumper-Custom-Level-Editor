@@ -489,6 +489,9 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
 
+        #region Toolstrip Toolbar
+        #endregion
+
         private void toolstripOpenPanels_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(txtFilePath.Text)) {
@@ -525,9 +528,12 @@ namespace Thumper_Custom_Level_Editor
                 lastclickedpane = dockMain.ActivePane;
         }
 
-        private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
+        private void toolstripMainSave_Click(object sender, EventArgs e)
         {
-
+            var activedocument = dockMain.ActiveDocument;
+            if (activedocument.GetType() == typeof(Form_MasterEditor)) {
+                (activedocument as Form_MasterEditor).Save();
+            }
         }
     }
 }

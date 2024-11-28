@@ -282,7 +282,7 @@ namespace Thumper_Custom_Level_Editor
             return _load;
         }
 
-        public static void DeleteFileLock(FileInfo filetodelete, string filetype)
+        public static void DeleteFileLock(FileInfo filetodelete)
         {
             if (lockedfiles.ContainsKey(filetodelete)) {
                 lockedfiles[filetodelete].Close();

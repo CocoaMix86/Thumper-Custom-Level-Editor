@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Windows.Storage;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -35,33 +36,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         bool _saveleaf;
         public bool _savelvl = true;
         int _lvllength;
-        public string _loadedlvl
+        public FileInfo loadedlvl
         {
-            get { return loadedlvl; }
+            get { return LoadedLvl; }
             set {
                 if (value == null) {
-                    if (loadedlvl != null && TCLE.lockedfiles.ContainsKey(loadedlvl)) {
-                        TCLE.lockedfiles[loadedlvl].Close();
-                        TCLE.lockedfiles.Remove(loadedlvl);
+                    if (LoadedLvl != null && TCLE.lockedfiles.ContainsKey(LoadedLvl)) {
+                        TCLE.lockedfiles[LoadedLvl].Close();
+                        TCLE.lockedfiles.Remove(LoadedLvl);
                     }
-                    loadedlvl = value;
+                    LoadedLvl = value;
                     ResetLvl();
                 }
-                else if (loadedlvl != value) {
-                    if (loadedlvl != null && TCLE.lockedfiles.ContainsKey(loadedlvl)) {
-                        TCLE.lockedfiles[loadedlvl].Close();
-                        TCLE.lockedfiles.Remove(loadedlvl);
+                else if (LoadedLvl != value) {
+                    if (LoadedLvl != null && TCLE.lockedfiles.ContainsKey(LoadedLvl)) {
+                        TCLE.lockedfiles[LoadedLvl].Close();
+                        TCLE.lockedfiles.Remove(LoadedLvl);
                     }
-                    loadedlvl = value;
+                    LoadedLvl = value;
 
-                    if (!File.Exists(loadedlvl)) {
-                        File.WriteAllText(loadedlvl, "");
+                    if (!LoadedLvl.Exists) {
+                        LoadedLvl.CreateText();
                     }
-                    TCLE.lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(loadedlvl, new FileStream(LoadedLvl.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
-        private string loadedlvl;
+        private static FileInfo LoadedLvl;
         public bool loadinglvl = false;
 
         List<string> _lvlpaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
@@ -385,7 +386,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void saveToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             //if _loadedlvl is somehow not set, force Save As instead
-            if (_loadedlvl == null) {
+            if (loadedlvl == null) {
                 ///_mainform.toolstripLvlSaveAs.PerformClick();
                 return;
             }
@@ -402,7 +403,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null) {
-                    _loadedlvl = null;
+                    loadedlvl = null;
                 }
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -414,11 +415,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
                     return;
                 }
-                if (File.Exists($@"{storePath}\lvl_{tempFileName}")) {
+                if (File.Exists($@"{storePath}\{tempFileName}.lvl")) {
                     MessageBox.Show("That file name exists already.", "File not saved");
                     return;
                 }
-                _loadedlvl = $@"{storePath}\lvl_{tempFileName}";
+                loadedlvl = new FileInfo($@"{storePath}\{tempFileName}.lvl");
                 WriteLvl();
                 //after saving new file, refresh the workingfolder
                 ///_mainform.btnWorkRefresh.PerformClick();
@@ -427,13 +428,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void WriteLvl()
         {
             //serialize JSON object to a string, and write it to the file
-            JObject _save = LvlBuildSave(Path.GetFileName(_loadedlvl).Replace("lvl_", ""));
-            if (!TCLE.lockedfiles.ContainsKey(_loadedlvl)) {
-                TCLE.lockedfiles.Add(_loadedlvl, new FileStream(_loadedlvl, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            JObject _save = LvlBuildSave(LoadedLvl.Name);
+            if (!TCLE.lockedfiles.ContainsKey(loadedlvl)) {
+                TCLE.lockedfiles.Add(loadedlvl, new FileStream(LoadedLvl.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
-            TCLE.WriteFileLock(TCLE.lockedfiles[loadedlvl], _save);
+            TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLvl], _save);
             SaveLvl(true, true);
-            this.Text = $"{_save["obj_name"]}";
+            this.Text = LoadedLvl.Name;
             //reload samples on save
             LvlReloadSamples();
         }
@@ -447,11 +448,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    string filepath = TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder);
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath);
+                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
                     LoadLvl(_load, filepath);
                 }
             }
@@ -646,7 +647,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlCopyTunnel_Click(object sender, EventArgs e)
         {
-            if (_loadedlvl == null)
+            if (loadedlvl == null)
                 return;
             clipboardpaths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index].paths);
             btnLvlPasteTunnel.Enabled = true;
@@ -776,7 +777,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             SaveLvl(true);
-            LoadLvl(lvljson, loadedlvl);
+            LoadLvl(lvljson, LoadedLvl);
             TCLE.PlaySound("UIrevertchanges");
         }
 
@@ -791,7 +792,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// METHODS ///
         ///         ///
 
-        public void LoadLvl(dynamic _load, string filepath)
+        public void LoadLvl(dynamic _load, FileInfo filepath)
         {
             if (_load == null)
                 return;
@@ -802,14 +803,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a lvl file!");
                 return;
             }
-            //if the check above succeeds, then set the _loadedlvl to the string temp saved from ofd.filename
-            TCLE.WorkingFolder = Path.GetDirectoryName(filepath);
-            //check if the assign actually worked. If not, stop loading.
-            if (TCLE.WorkingFolder != Path.GetDirectoryName(filepath))
-                return;
-            _loadedlvl = filepath;
+            loadedlvl = filepath;
             //set some visual elements
-            this.Text = $"{_load["obj_name"]}";
+            this.Text = LoadedLvl.Name;
             //set flag that load is in progress. This skips SaveLvl() method
             loadinglvl = true;
             lvljson = _load;
@@ -1064,7 +1060,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public JObject LvlBuildSave(string _lvlname)
         {
-            _lvlname = _lvlname.Replace(".txt", ".lvl");
             ///start building JSON output
             JObject _save = new() {
                 { "obj_type", "SequinLevel" },
