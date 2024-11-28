@@ -147,27 +147,31 @@ namespace Thumper_Custom_Level_Editor
             if (!Directory.Exists(levelpath)) {
                 Directory.CreateDirectory(levelpath);
             }
-            Dictionary<string, FileInfo> defaultFiles = new() { 
+
+            ///Initialize lists based on checkboxes and the new levelpath
+            Dictionary<string, FileInfo> defaultFiles = new() {
                 {"defaultsamp", new FileInfo($@"{levelpath}\default.samp")},
                 {"defaultspn", new FileInfo($@"{levelpath}\default.spn")},
                 {"defaultxfm", new FileInfo($@"{levelpath}\default.xfm")},
-                {"pyramidoutro", new FileInfo($@"{levelpath}\pyramid_outro.leaf")},
-                {"level1", new FileInfo($@"{levelpath}\level1_320bpm.samp")},
-                {"level2", new FileInfo($@"{levelpath}\level2_340bpm.samp")},
-                {"level3", new FileInfo($@"{levelpath}\level3_360bpm.samp")},
-                {"level4", new FileInfo($@"{levelpath}\level4_380bpm.samp")},
-                {"level5", new FileInfo($@"{levelpath}\level5_400bpm.samp")},
-                {"level6", new FileInfo($@"{levelpath}\level6_420bpm.samp")},
-                {"level7", new FileInfo($@"{levelpath}\level7_440bpm.samp")},
-                {"level8", new FileInfo($@"{levelpath}\level8_460bpm.samp")},
-                {"level9", new FileInfo($@"{levelpath}\level9_480bpm.samp")},
-                {"dissonant", new FileInfo($@"{levelpath}\dissonant.samp")},
-                {"drones", new FileInfo($@"{levelpath}\globaldrones.samp")},
-                {"rests", new FileInfo($@"{levelpath}\rests.samp")},
-                {"misc", new FileInfo($@"{levelpath}\misc.samp")}};
+                {"pyramidoutro", new FileInfo($@"{levelpath}\pyramid_outro.leaf")}
+            };
+            List<Tuple<FileInfo, bool, string>> samplePacks = new() {                 
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level1_320bpm.samp"), input.chkLevel1.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level2_340bpm.samp"), input.chkLevel2.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level3_360bpm.samp"), input.chkLevel3.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level4_380bpm.samp"), input.chkLevel4.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level5_400bpm.samp"), input.chkLevel5.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level6_420bpm.samp"), input.chkLevel6.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level7_440bpm.samp"), input.chkLevel7.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level8_460bpm.samp"), input.chkLevel8.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\level9_480bpm.samp"), input.chkLevel9.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\dissonant.samp"), input.chkDissonance.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\globaldrones.samp"), input.chkGlobal.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\rests.samp"), input.chkRests.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{levelpath}\misc.samp"), input.chkMisc.Checked, Properties.Resources.samp_level1_320bpm)};
 
-            //these 4 files below are required defaults of new levels.
-            //create them if they don't exist
+            ///these 4 files below are required defaults of new levels.
+            ///create them if they don't exist
             if (!defaultFiles["defaultsamp"].Exists) {
                 defaultFiles["defaultsamp"].CreateText().Write(Properties.Resources.samp_default);
             }
@@ -181,85 +185,28 @@ namespace Thumper_Custom_Level_Editor
                 defaultFiles["pyramidoutro"].CreateText().Write(Properties.Resources.leaf_pyramid_outro);
             }
             ///create samp_ files if any boxes are checked
-            //level 1
-            if (input.chkLevel1.Checked)
-                if (!defaultFiles["level1"].Exists)
-                    defaultFiles["level1"].CreateText().Write(Properties.Resources.samp_level1_320bpm);
-            else TCLE.DeleteFileLock(defaultFiles["level1"]);
-            //level 2
-            if (input.chkLevel2.Checked)
-                if (!defaultFiles["level2"].Exists)
-                    defaultFiles["level2"].CreateText().Write(Properties.Resources.samp_level2_340bpm);
-            else TCLE.DeleteFileLock(defaultFiles["level2"]);
-            //level 3
-            if (input.chkLevel3.Checked)
-                if (!defaultFiles["level3"].Exists)
-                    defaultFiles["level3"].CreateText().Write(Properties.Resources.samp_level3_360bpm);
-                else TCLE.DeleteFileLock(defaultFiles["level3"]);
-            //level 4
-            if (input.chkLevel4.Checked)
-                if (!defaultFiles["level4"].Exists)
-                    defaultFiles["level4"].CreateText().Write(Properties.Resources.samp_level4_380bpm);
-                else TCLE.DeleteFileLock(defaultFiles["level4"]);
-            //level 5
-            if (input.chkLevel5.Checked)
-                if (!defaultFiles["level5"].Exists)
-                    defaultFiles["level5"].CreateText().Write(Properties.Resources.samp_level5_400bpm);
-                else TCLE.DeleteFileLock(defaultFiles["level5"]);
-            //level 6
-            if (input.chkLevel6.Checked)
-                if (!defaultFiles["level6"].Exists)
-                    defaultFiles["level6"].CreateText().Write(Properties.Resources.samp_level6_420bpm);
-                else TCLE.DeleteFileLock(defaultFiles["level6"]);
-            //level 7
-            if (input.chkLevel7.Checked)
-                if (!defaultFiles["level7"].Exists)
-                    defaultFiles["level7"].CreateText().Write(Properties.Resources.samp_level7_440bpm);
-                else TCLE.DeleteFileLock(defaultFiles["level7"]);
-            //level 8
-            if (input.chkLevel8.Checked)
-                if (!defaultFiles["level8"].Exists)
-                    defaultFiles["level8"].CreateText().Write(Properties.Resources.samp_level8_460bpm);
-                else TCLE.DeleteFileLock(defaultFiles["level8"]);
-            //level 9
-            if (input.chkLevel9.Checked)
-                if (!defaultFiles["level9"].Exists)
-                    defaultFiles["level9"].CreateText().Write(Properties.Resources.samp_level9_480bpm);
-                else TCLE.DeleteFileLock(defaultFiles["level9"]);
-            //Dissonant
-            if (input.chkDissonance.Checked)
-                if (!defaultFiles["dissonant"].Exists)
-                    defaultFiles["dissonant"].CreateText().Write(Properties.Resources.samp_dissonant);
-                else TCLE.DeleteFileLock(defaultFiles["dissonant"]);
-            //Global Drones
-            if (input.chkGlobal.Checked)
-                if (!defaultFiles["drones"].Exists)
-                    defaultFiles["drones"].CreateText().Write(Properties.Resources.samp_globaldrones);
-                else TCLE.DeleteFileLock(defaultFiles["drones"]);
-            //Rests
-            if (input.chkRests.Checked)
-                if (!defaultFiles["rests"].Exists)
-                    defaultFiles["rests"].CreateText().Write(Properties.Resources.samp_rests);
-                else TCLE.DeleteFileLock(defaultFiles["rests"]);
-            //Misc
-            if (input.chkMisc.Checked)
-                if (!defaultFiles["rests"].Exists)
-                    defaultFiles["rests"].CreateText().Write(Properties.Resources.samp_rests);
-                else TCLE.DeleteFileLock(defaultFiles["rests"]);
+            foreach (Tuple<FileInfo, bool, string> pack in samplePacks) {
+                if (pack.Item2) {
+                    if (!pack.Item1.Exists)
+                        pack.Item1.CreateText().Write(pack.Item3);
+                }
+                else
+                    TCLE.DeleteFileLock(pack.Item1);
+            }
 
-
+            
             if (isthisnew || (isthisnew == false && TCLE.WorkingFolder != levelpath)) {
-                File.WriteAllText($@"{levelpath}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+                File.WriteAllText($@"{levelpath}\{txtCustomName.Text}.TCL", JsonConvert.SerializeObject(level_details, Formatting.Indented));
             }
             else {
-                TCLE.WriteFileLock(TCLE.lockedfiles[$@"{levelpath}\LEVEL DETAILS.txt"], level_details);
+                TCLE.WriteFileLock(TCLE.lockedfiles[$@"{levelpath}\{txtCustomName.Text}.TCL"], level_details);
             }
             TCLE.projectjson = level_details;
             TCLE.WorkingFolder = levelpath;
 
             ///
             ///create a default master file and open it
-            if (!File.Exists($@"{levelpath}\master_sequin.txt")) {
+            if (!File.Exists($@"{levelpath}\sequin.master")) {
                 ///mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
                 ///mainform.WriteMaster();
             }
@@ -297,7 +244,7 @@ namespace Thumper_Custom_Level_Editor
             }
             else if (txtCustomName.Text.Length + txtCustomPath.Text.Length > 240) {
                 lblNameError.Visible = true;
-                lblNameError.Text = "The folder path + level name is longer than 256 characters\n                                               (Windows limit).";
+                lblNameError.Text = "The folder path + level name is longer than 256 characters (Windows limit).";
             }
             else
                 btnCustomSave.Enabled = true;
