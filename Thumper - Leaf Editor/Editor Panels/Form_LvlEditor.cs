@@ -16,7 +16,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_LvlEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_LvlEditor(dynamic load = null, string path = null)
+        public Form_LvlEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
             lvlToolStrip.Renderer = new ToolStripOverride();
@@ -26,6 +26,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(lvlSeqObjs, true);
             TCLE.InitializeTracks(lvlLeafList, false);
+
+            if (load != null)
+                LoadLvl(load, filepath);
         }
         #endregion
 

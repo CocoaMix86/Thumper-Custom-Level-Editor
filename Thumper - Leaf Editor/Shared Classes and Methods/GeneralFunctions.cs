@@ -488,6 +488,9 @@ namespace Thumper_Custom_Level_Editor
 
         public static void OpenFile(TCLE form, FileInfo filepath, bool openraw = false)
         {
+            if (filepath == null)
+                return;
+
             dynamic _load = LoadFileLock(filepath.FullName);
         //find if the document is loaded already in a tab
         //if so, make it activate
@@ -496,11 +499,11 @@ namespace Thumper_Custom_Level_Editor
                 form.dockMain.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).First().DockHandler.Activate();
                 return;
             }
-        form.dockMain.doc
+            /*
             if (form.dockMain.FloatWindows.Where(x => x.DockPanel.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()).Any()) {
                 form.dockMain.FloatWindows.Where(x => x.DockPanel.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()).First().Activate();
                 return;
-            }
+            }*/
             //open document in raw viewer if that option was selected
             if (openraw) {
                 Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
@@ -508,10 +511,14 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             //otherwise, open a standard editor for the document type
-            string _type = filepath.Extension;
-            if (_type == ".master") {
+            string filetype = filepath.Extension;
+            if (filetype == ".master") {
                 Form_MasterEditor master = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
                 master.Show(lastclickedpane, null);
+            }
+            else if (filetype == ".lvl") {
+                Form_LvlEditor lvl = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                lvl.Show(lastclickedpane, null);
             }
             //if file type not supported, open raw
             else {
