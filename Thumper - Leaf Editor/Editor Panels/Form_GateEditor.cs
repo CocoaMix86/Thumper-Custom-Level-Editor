@@ -20,7 +20,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool _savegate = true;
+        public bool EditorIsSaved = true;
         public FileInfo loadedgate
         {
             get { return LoadedGate; }
@@ -139,14 +139,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void gatenewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_savegate && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
+            if ((!EditorIsSaved && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 gatesaveAsToolStripMenuItem_Click(null, null);
             }
         }
 
         private void gateopenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_savegate && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savegate) {
+            if ((!EditorIsSaved && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
                 ofd.Title = "Load a Thumper Gate file";
@@ -505,7 +505,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make the beeble emote
             TCLE.beeble.MakeFace();
 
-            _savegate = save;
+            EditorIsSaved = save;
             if (!save) {
                 /*
                 btnSaveGate.Enabled = true;

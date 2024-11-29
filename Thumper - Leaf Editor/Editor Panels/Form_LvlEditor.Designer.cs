@@ -500,6 +500,7 @@
             this.lvlLeafList.Size = new Size(275, 339);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.Tag = "editorpaneldgv";
+            this.lvlLeafList.CellDoubleClick += this.lvlLeafList_CellDoubleClick;
             // 
             // lvlfiletype
             // 
@@ -819,7 +820,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafPaths.Size = new Size(255, 283);
+            this.lvlLeafPaths.Size = new Size(255, 281);
             this.lvlLeafPaths.TabIndex = 79;
             // 
             // lvlPathsToolStrip
@@ -969,7 +970,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new Size(286, 283);
+            this.lvlLoopTracks.Size = new Size(286, 281);
             this.lvlLoopTracks.TabIndex = 81;
             // 
             // LoopSample

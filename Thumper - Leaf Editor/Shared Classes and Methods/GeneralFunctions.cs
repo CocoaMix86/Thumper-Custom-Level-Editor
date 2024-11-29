@@ -53,11 +53,11 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public HashSet<Object_Params> _objects = new();
+        public static HashSet<Object_Params> LeafObjects = new();
         string _errorlog = "";
         public void ImportObjects()
         {
-            _objects.Clear();
+            LeafObjects.Clear();
             //check if the track_objects exists or not, but do not overwrite it
             if (!File.Exists($@"{AppLocation}\templates\track_objects2.2.txt")) {
                 File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
@@ -87,7 +87,7 @@ namespace Thumper_Custom_Level_Editor
                             footer = import3[6].Replace("[", "").Replace("]", ""),
                         };
                         //finally, add complete object and values to list
-                        _objects.Add(objpar);
+                        LeafObjects.Add(objpar);
                     }
                     catch {
                         _errorlog += "failed to import all properties of param_path " + import3[0] + " of object " + import2[0] + ".\n";
@@ -99,23 +99,24 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show(_errorlog);
                 _errorlog = "";
             }
-            /*
-            //customize combobox to display the correct content
-            dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
-            dropObjects.SelectedIndex = -1;
-            //dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
-            dropParamPath.Enabled = false;
-            */
+
+            //iterate over each open tab to find leafs. Update their object lists.
+            foreach (var dc in dockMain.Documents.Where(x => x.DockHandler.TabText.EndsWith(".leaf"))) {
+                Form_LeafEditor fle = dc as Form_LeafEditor;
+                fle.dropObjects.DataSource = LeafObjects.Select(x => x.category).Distinct().ToList();
+                fle.dropObjects.SelectedIndex = -1;
+                fle.dropParamPath.Enabled = false;
+            }
         }
 
-        private Dictionary<string, string> objectcolors = new();
+        public static Dictionary<string, string> ObjectColors = new();
         public void ImportDefaultColors()
         {
-            objectcolors.Clear();
+            ObjectColors.Clear();
             if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors2.2.txt")) {
                 File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
             }
-            objectcolors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]);
+            ObjectColors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]);
 
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
         }
@@ -488,14 +489,19 @@ namespace Thumper_Custom_Level_Editor
         public static void OpenFile(TCLE form, FileInfo filepath, bool openraw = false)
         {
             dynamic _load = LoadFileLock(filepath.FullName);
-            //find if the document is loaded already in a tab
-            //if so, make it activate
+        //find if the document is loaded already in a tab
+        //if so, make it activate
+        openraw:
             if (form.dockMain.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()) {
                 form.dockMain.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).First().DockHandler.Activate();
                 return;
             }
+        form.dockMain.doc
+            if (form.dockMain.FloatWindows.Where(x => x.DockPanel.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()).Any()) {
+                form.dockMain.FloatWindows.Where(x => x.DockPanel.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()).First().Activate();
+                return;
+            }
             //open document in raw viewer if that option was selected
-            openraw:
             if (openraw) {
                 Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
                 rawtext.Show(lastclickedpane, null);

@@ -81,6 +81,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridMaster.ExpandAllGridItems();
             propertyGridMaster.Refresh();
         }
+        private void masterLvlList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if not selecting the file column, return and do nothing
+            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
+                return;
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{masterLvlList.Rows[e.RowIndex].Cells[2].Value}")).First().Value);
+        }
 
         private void masterLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         private void masterLvlList_DragDrop(object sender, DragEventArgs e)
@@ -101,10 +108,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //get the runtime of the object
                 int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _masterlvls[_in]);
                 string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                masterLvlList.Rows.Insert(_in, new object[] { 
-                    0, 
-                    (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate), 
-                    _masterlvls[_in].lvlname, 
+                masterLvlList.Rows.Insert(_in, new object[] {
+                    0,
+                    (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
+                    _masterlvls[_in].lvlname,
                     beats != -1 ? $"{beats} beats -- {time}"  : "file not found"
                 });
             }

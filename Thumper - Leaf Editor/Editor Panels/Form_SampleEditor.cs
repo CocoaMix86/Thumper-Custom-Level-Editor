@@ -27,35 +27,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool _savesample = true;
+        public bool EditorIsSaved = true;
         FileInfo loadedsample
         {
             get { return loadedsample; }
             set {
-                if (value == null) {
-                    if (loadedsample != null && TCLE.lockedfiles.ContainsKey(loadedsample)) {
-                        TCLE.lockedfiles[loadedsample].Close();
-                        TCLE.lockedfiles.Remove(loadedsample);
-                    }
-                    loadedsample = value;
-                    ResetSample();
-                }
                 if (loadedsample != value) {
-                    if (loadedsample != null && TCLE.lockedfiles.ContainsKey(loadedsample)) {
-                        TCLE.lockedfiles[loadedsample].Close();
-                        TCLE.lockedfiles.Remove(loadedsample);
-                    }
                     loadedsample = value;
-
                     if (!LoadedSample.Exists) {
                         LoadedSample.CreateText();
                     }
-                    TCLE.lockedfiles.Add(loadedsample, new FileStream(LoadedSample.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(LoadedSample, new FileStream(LoadedSample.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
         private FileInfo LoadedSample;
-        string _loadedsampletemp;
         dynamic samplejson;
         ObservableCollection<SampleData> _samplelist = new();
         #endregion
@@ -151,14 +137,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void SamplenewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_savesample && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savesample) {
+            if ((!EditorIsSaved && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 SamplesaveAsToolStripMenuItem_Click(null, null);
             }
         }
 
         private void SampleopenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_savesample && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savesample) {
+            if ((!EditorIsSaved && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
                 ofd.Title = "Load a Thumper Sample file";
@@ -467,7 +453,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make the beeble emote
             TCLE.beeble.MakeFace();
 
-            _savesample = save;
+            EditorIsSaved = save;
             if (!save) {
                 /*
                 btnSaveSample.Enabled = true;

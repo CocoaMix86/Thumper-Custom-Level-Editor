@@ -113,6 +113,7 @@
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
+            this.masterLvlList.CellDoubleClick += this.masterLvlList_CellDoubleClick;
             this.masterLvlList.DragDrop += this.masterLvlList_DragDrop;
             this.masterLvlList.DragEnter += this.masterLvlList_DragEnter;
             // 

@@ -27,11 +27,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool _saveleaf = true;
-
+        public bool EditorIsSaved = true;
         int _beats { get { return (int)numericUpDown_LeafLength.Value; } }
         int _selecttrack = 0;
-
         public FileInfo loadedleaf
         {
             get { return LoadedLeaf; }
@@ -47,7 +45,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static FileInfo LoadedLeaf;
         dynamic leafjson;
-        public string leafobj;
         public bool loadingleaf = false;
         public bool controldown = false;
         public bool shiftdown = false;
@@ -59,13 +56,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public int hscrollposition = 0;
 
         public List<Sequencer_Object> _tracks = new();
-        private HashSet<Object_Params> _objects = new();
-        private Dictionary<string, string> objectcolors = new();
+        private HashSet<Object_Params> _objects { get { return TCLE.LeafObjects; } }
+        private Dictionary<string, string> objectcolors { get { return TCLE.ObjectColors; } }
         //public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
         public Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
         public List<string> lanenames = new() { "left", "center", "right" };
         public Dictionary<string, string> kTraitTooltips = new() { { "kTraitBool", "BOOL: accepts values 1 (on) or 0 (off)." }, { "kTraitAction", "ACTION: accepts values 1 (activate)." }, { "kTraitFloat", "FLOAT: accepts decimal values from -32000.0000 to 32000.0000." }, { "kTraitInt", "INT: accepts integer (no decimal) values from -32000 to 32000." }, { "kTraitColor", "COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors." } };
-        public List<Tuple<string, int, int>> _scrollpositions = new();
         public List<Sequencer_Object> clipboardtracks = new();
         public List<SaveState> _undolistleaf = new();
         #endregion
@@ -95,11 +91,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.HorizontalScrollingOffset = e.OldValue;
                 trackEditor.Scroll += trackEditor_Scroll;
             }
-            int match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
-            if (match != -1)
-                _scrollpositions[match] = new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex);
-            else
-                _scrollpositions.Add(new Tuple<string, int, int>(leafobj, trackEditor.FirstDisplayedScrollingRowIndex, trackEditor.FirstDisplayedScrollingColumnIndex));
         }
         private void btnLeafZoom_Click(object sender, EventArgs e)
         {
@@ -690,7 +681,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///LEAF - NEW
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
+            if ((!EditorIsSaved && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 leafsaveAsToolStripMenuItem_Click(null, null);
             }
         }
@@ -758,7 +749,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///LEAF - LOAD FILE
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
+            if ((!EditorIsSaved && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
                 ofd.Title = "Load a Thumper Leaf file";
@@ -777,7 +768,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// LEAF - LOAD TEMPLATE
         private void leafTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
+            if ((!EditorIsSaved && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
                 ofd.Title = "Load a Thumper Leaf file";
@@ -785,7 +776,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     object _load = TCLE.LoadFileLock(ofd.FileName);
-                    LoadLeaf(_load, "template");
+                    LoadLeaf(_load, new FileInfo("template"));
                 }
             }
         }
@@ -1234,19 +1225,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //split leaf into 2 leafs
             int splitindex = trackEditor.CurrentCell.ColumnIndex;
-            if (MessageBox.Show(@$"Split this leaf at beat {splitindex}? THIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (MessageBox.Show($"Split this leaf at beat {splitindex}?\nTHIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
             //create file renaming dialog and show it
-            FileNameDialog filenamedialog = new(TCLE.WorkingFolder, "leaf") {
-                StartPosition = FormStartPosition.Manual,
-                Location = MousePosition
-            };
-            
-            string newfilename
-            if (filenamedialog.ShowDialog() == DialogResult.Yes) 
-                newfilename = filenamedialog.txtWorkingRename.Text;            
-            //if NOT yes, return and skip everything else below
+            FileInfo newfilename;
+            using SaveFileDialog sfd = new();
+            sfd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                newfilename = new FileInfo(sfd.FileName);
+                newfilename.CreateText();
+            }
             else
                 return;
 
@@ -1271,10 +1262,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _leafsplitbefore.Remove("beat_cnt");
             _leafsplitbefore.Add("beat_cnt", splitindex);
             //write data back to file
-            TCLE.WriteFileLock(TCLE.lockedfiles[loadedleaf], _leafsplitbefore);
+            TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLeaf], _leafsplitbefore);
 
             ///repeat all above for after split file
-            JObject _leafsplitafter = LeafBuildSave(newfilename + ".txt");
+            JObject _leafsplitafter = LeafBuildSave(newfilename.Name);
             foreach (JObject seq_obj in _leafsplitafter["seq_objs"].Cast<JObject>()) {
                 List<JProperty> data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
                 JObject newdata = new();
@@ -1290,11 +1281,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _leafsplitafter.Remove("beat_cnt");
             _leafsplitafter.Add("beat_cnt", numericUpDown_LeafLength.Value - splitindex);
             //write data back to file
-            File.WriteAllText($@"{TCLE.WorkingFolder}\{newfilename}.leaf", JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
+            newfilename.CreateText().Write(JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
 
             TCLE.PlaySound("UIleafsplit");
             //load new leaf that was just split
-            TCLE.OpenFile(TCLE.Instance, new FileInfo($@"{TCLE.WorkingFolder}\{newfilename}.leaf"));
+            TCLE.OpenFile(TCLE.Instance, newfilename);
 
             //update beat counts in loaded lvl if need be
             ///if (_mainform._loadedlvl != null)
@@ -1419,7 +1410,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //make the beeble emote
             TCLE.beeble.MakeFace();
-            _saveleaf = save;
+            EditorIsSaved = save;
             if (!save) {
                 SaveLeafColors(true, Color.Maroon);
                 if (_logundo) {
@@ -1557,24 +1548,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string loadfailmessage = "";
             //detect if file is actually Leaf or not
             if ((string)_load["obj_type"] != "SequinLeaf") {
-                MessageBox.Show("This does not appear to be a leaf file!", "Leaf not loaded");
+                MessageBox.Show($"{filepath.Name} does not appear to be a leaf file.\n'obj_type' was not SequinLeaf.", "Thumper Custom Level Editor");
                 return;
             }
-            //if the check above succeeds, then set the _loadedleaf to the string temp saved from ofd.filename
+            //check if it has a name
+            //important for some leaf objects
             if (_load["obj_name"] == null) {
-                MessageBox.Show("Leaf missing obj_name parameter. Please set it in the txt file and then reload.", "Leaf not loaded");
+                MessageBox.Show("Leaf missing obj_name parameter. Please set it in the txt file and then reload.", "Thumper Custom Level Editor");
                 return;
             }
             //check for template or regular file
-            if (filepath == "template") {
+            if (filepath.Name == "template") {
                 loadedleaf = null;
             }
             else {
                 loadedleaf = filepath;
             }
 
-            this.Text = $"{_load["obj_name"]}";
-            leafobj = _load["obj_name"];
+            this.Text = filepath.Name;
             //set flag that load is in progress. This skips SaveLeaf() method
             loadingleaf = true;
             //clear existing tracks
@@ -1667,11 +1658,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Scroll -= trackEditor_Scroll;
                 trackEditor.FirstDisplayedScrollingRowIndex = 0;
                 trackEditor.FirstDisplayedScrollingColumnIndex = 0;
-                int match = _scrollpositions.FindIndex(x => x.Item1 == leafobj);
-                if (match != -1) {
-                    trackEditor.FirstDisplayedScrollingRowIndex = _scrollpositions[match].Item2;
-                    trackEditor.FirstDisplayedScrollingColumnIndex = _scrollpositions[match].Item3;
-                }
                 trackEditor.Scroll += trackEditor_Scroll;
             }
             catch {

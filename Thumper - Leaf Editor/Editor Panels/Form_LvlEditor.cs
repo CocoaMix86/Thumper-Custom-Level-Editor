@@ -33,32 +33,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         bool controldown;
         bool altdown;
         bool shiftdown;
-        bool _saveleaf;
-        public bool _savelvl = true;
+        public bool EditorIsSaved = true;
         int _lvllength;
         public FileInfo loadedlvl
         {
             get { return LoadedLvl; }
             set {
-                if (value == null) {
-                    if (LoadedLvl != null && TCLE.lockedfiles.ContainsKey(LoadedLvl)) {
-                        TCLE.lockedfiles[LoadedLvl].Close();
-                        TCLE.lockedfiles.Remove(LoadedLvl);
-                    }
+                if (LoadedLvl != value) {
                     LoadedLvl = value;
-                    ResetLvl();
-                }
-                else if (LoadedLvl != value) {
-                    if (LoadedLvl != null && TCLE.lockedfiles.ContainsKey(LoadedLvl)) {
-                        TCLE.lockedfiles[LoadedLvl].Close();
-                        TCLE.lockedfiles.Remove(LoadedLvl);
-                    }
-                    LoadedLvl = value;
-
                     if (!LoadedLvl.Exists) {
                         LoadedLvl.CreateText();
                     }
-                    TCLE.lockedfiles.Add(loadedlvl, new FileStream(LoadedLvl.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.lockedfiles.Add(LoadedLvl, new FileStream(LoadedLvl.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
             }
         }
@@ -89,24 +75,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
-            //lvlLeafList_RowEnter(sender, e);
-            if ((!_saveleaf && MessageBox.Show("Current leaf is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _saveleaf) {
-                string _file = (_lvlleafs[e.RowIndex].leafname).Replace(".leaf", "");
-                dynamic _load;
-                if (File.Exists($@"{TCLE.WorkingFolder}\leaf_{_file}.txt")) {
-                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\leaf_{_file}.txt");
-                }
-                else {
-                    MessageBox.Show("This leaf does not exist in the Level folder.");
-                    return;
-                }
-
-                ///LoadLeaf(_load, $@"{TCLE.WorkingFolder}\leaf_{_file}.txt");
-            }
             LvlUpdatePaths(e.RowIndex);
         }
-        private void lvlLeafList_RowEnter(object sender, DataGridViewCellEventArgs e)
+        private void lvlLeafList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1 || _lvlleafs.Count == 0 || e.RowIndex > _lvlleafs.Count - 1)
+                return;
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{lvlLeafList.Rows[e.RowIndex].Cells[1].Value}")).First().Value);
+            
         }
         ///DGV LVLLEAFPATHS
         //Cell value changed
@@ -234,7 +210,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //sets flag that lvl has unsaved changes
                 if (changes)
                     SaveLvl(false);
-            } catch { }
+            }
+            catch { }
             lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
         }
         //Press Delete to clear cells
@@ -310,7 +287,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///_LVLLEAF - Triggers when the collection changes
         public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            lvlLeafList.RowEnter -= lvlLeafList_RowEnter;
             int _in = e.NewStartingIndex;
 
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
@@ -326,7 +302,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
             }
-            lvlLeafList.RowEnter += lvlLeafList_RowEnter;
             ///TCLE.HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\leaf_{x.Cells[1].Value}.txt").ToList());
 
 
@@ -378,7 +353,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void newToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //if LVL not saved, have user confirm if they want to continue
-            if ((!_savelvl && MessageBox.Show("Current LVL is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+            if ((!EditorIsSaved && MessageBox.Show("Current LVL is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 lvlsaveAsToolStripMenuItem_Click(null, null);
             }
         }
@@ -441,7 +416,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// LVL LOAD
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!_savelvl && MessageBox.Show("Current lvl is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || _savelvl) {
+            if ((!EditorIsSaved && MessageBox.Show("Current lvl is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
                 ofd.Title = "Load a Thumper Lvl file";
@@ -768,7 +743,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].Cells[2].Value = _leaf.beats;
                         SaveLvl(false);
                     }
-                } catch (Exception ex) { MessageBox.Show("Problem occured when refreshing lvl beats. Show this error to the dev.\n" + ex, "Lvl beat refresh error"); }
+                }
+                catch (Exception ex) { MessageBox.Show("Problem occured when refreshing lvl beats. Show this error to the dev.\n" + ex, "Lvl beat refresh error"); }
             }
         }
 
@@ -997,7 +973,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make the beeble emote
             TCLE.beeble.MakeFace();
 
-            _savelvl = save;
+            EditorIsSaved = save;
             if (!save) {
                 /*
                 btnSaveLvl.Enabled = true;
@@ -1029,7 +1005,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
                     r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
-                } catch (ArgumentOutOfRangeException) { }
+                }
+                catch (ArgumentOutOfRangeException) { }
             }
         }
 
