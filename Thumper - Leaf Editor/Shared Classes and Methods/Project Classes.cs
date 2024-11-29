@@ -60,10 +60,8 @@ namespace Thumper_Custom_Level_Editor
                 if (value > 99999.99m)
                     value = 99999.99m;
                 Bpm = value;
-                foreach (var dc in TCLE.openfiles) {
-                    if (dc.Key.Extension == ".master") {
-                        (dc.Value as Form_MasterEditor).propertyGridMaster.Refresh();
-                    }
+                foreach (var dc in TCLE.Instance.dockMain.Documents.Where(x => x.DockHandler.TabText.EndsWith(".master"))) {
+                    (dc as Form_MasterEditor).propertyGridMaster.Refresh();
                 }
             }
         }
