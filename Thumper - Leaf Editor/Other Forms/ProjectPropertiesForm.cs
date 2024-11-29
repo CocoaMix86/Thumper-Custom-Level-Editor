@@ -202,7 +202,7 @@ namespace Thumper_Custom_Level_Editor
             //else {
                 TCLE.WriteFileLock(TCLE.lockedfiles[new FileInfo($@"{levelpath}\{txtCustomName.Text}.TCL")], level_details);
             //}
-            TCLE.projectjson = level_details;
+            TCLE.ProjectJson = level_details;
             TCLE.WorkingFolder = levelpath;
 
             ///

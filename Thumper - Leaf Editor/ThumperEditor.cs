@@ -22,8 +22,8 @@ namespace Thumper_Custom_Level_Editor
         public static TCLE Instance;
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
-        public static dynamic projectjson;
-        public string workingfolder
+        public static dynamic ProjectJson;
+        private DirectoryInfo workingfolder
         {
             get { return WorkingFolder; }
             set {
@@ -35,12 +35,12 @@ namespace Thumper_Custom_Level_Editor
                             return;
                         }
                     }
-                    //check if LEVEL DETAILS exists. If not, this is not a level folder
-                    if (!Directory.GetFiles(value, "*.TCL").Any()) {
+                    //check if the .TCL exists. If not, this is not a level folder
+                    FileInfo ProjectFile = value.GetFiles("*.TCL", SearchOption.AllDirectories).FirstOrDefault();
+                    if (ProjectFile == null) {
                         MessageBox.Show("This folder does not appear to be a Custom Level project. The .TCL file is missing.\nProject not loaded.", "Thumper Custom Level Editor");
                         return;
                     }
-                    FileInfo ProjectFile = new FileInfo(Directory.GetFiles(value, "*.TCL").First());
                     //Try locking the .TCL first. If it fails, the level is already open
                     //in that case, return before doing anything
                     try {
@@ -52,13 +52,13 @@ namespace Thumper_Custom_Level_Editor
                         return;
                     }
                     //load Level Details into an object so it can be accessed later
-                    projectjson = LoadFileLock(ProjectFile.FullName);
-                    if (projectjson == null || !projectjson.ContainsKey("level_name") || !projectjson.ContainsKey("difficulty") || !projectjson.ContainsKey("description") || !projectjson.ContainsKey("author")) {
-                        DialogResult result = MessageBox.Show("The LEVEL DETAILS.txt is missing information or is corrupt.\nCreate new LEVEL DETAILS?", "Failed to load", MessageBoxButtons.YesNo);
+                    ProjectJson = LoadFileLock(ProjectFile.FullName);
+                    if (ProjectJson == null || !ProjectJson.ContainsKey("level_name") || !ProjectJson.ContainsKey("difficulty") || !ProjectJson.ContainsKey("description") || !ProjectJson.ContainsKey("author")) {
+                        DialogResult result = MessageBox.Show("The Project .TCL file is missing information or is corrupt.\nCreate new Project .TCL?", "Failed to load", MessageBoxButtons.YesNo);
                         if (result == DialogResult.Yes) {
-                            JObject level_details = new() { { "level_name", $"{Path.GetFileName(value)}" }, { "difficulty", "D0" }, { "description", "replace this text" }, { "author", "some guy" } };
-                            File.WriteAllText($@"{value}\LEVEL DETAILS.txt", JsonConvert.SerializeObject(level_details, Formatting.Indented));
-                            projectjson = LoadFileLock($@"{value}\LEVEL DETAILS.txt");
+                            JObject level_details = new() { { "level_name", $"{value.Name}" }, { "difficulty", "D0" }, { "description", "replace this text" }, { "author", "some guy" } };
+                            File.WriteAllText($@"{value.FullName}\{value.Name}.TCL", JsonConvert.SerializeObject(level_details, Formatting.Indented));
+                            ProjectJson = LoadFileLock($@"{value.FullName}\{value.Name}.TCL");
                         }
                         else if (result == DialogResult.No) {
                             MessageBox.Show("Level Folder not loaded");
@@ -68,25 +68,24 @@ namespace Thumper_Custom_Level_Editor
                     ClearFileLock();
                     //update working folder
                     WorkingFolder = value;
-                    toolstripLevelName.Text = projectjson["level_name"];
-                    toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{projectjson["difficulty"]}");
+                    toolstripLevelName.Text = ProjectJson["level_name"];
+                    toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{ProjectJson["difficulty"]}");
                     //add to recent files
-                    if (Properties.Settings.Default.Recentfiles.Contains(workingfolder))
-                        Properties.Settings.Default.Recentfiles.Remove(workingfolder);
-                    Properties.Settings.Default.Recentfiles.Insert(0, workingfolder);
+                    if (Properties.Settings.Default.Recentfiles.Contains(WorkingFolder.FullName))
+                        Properties.Settings.Default.Recentfiles.Remove(WorkingFolder.FullName);
+                    Properties.Settings.Default.Recentfiles.Insert(0, WorkingFolder.FullName);
                     JumpListUpdate();
                     panelRecentFiles.Visible = false;
                 }
             }
         }
-        public static string WorkingFolder;
+        public static DirectoryInfo WorkingFolder;
         public static List<string> lvlsinworkfolder = new();
         public static Random rng = new();
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
-        public static Dictionary<FileInfo, DockContent> openfiles = new();
         public static Beeble beeble = new();
         #endregion
 
@@ -483,10 +482,10 @@ namespace Thumper_Custom_Level_Editor
         {
             ProjectPropertiesForm customlevel = new(false);
             //set textboxes
-            customlevel.txtCustomName.Text = projectjson["level_name"] ?? "LEVEL NAME";
-            customlevel.txtCustomDiff.Text = projectjson["difficulty"] ?? "d0";
-            customlevel.txtDesc.Text = projectjson["description"] ?? "ADD A DESCRIPTION";
-            customlevel.txtCustomAuthor.Text = projectjson["author"] ?? "SOME PERSON";
+            customlevel.txtCustomName.Text = ProjectJson["level_name"] ?? "LEVEL NAME";
+            customlevel.txtCustomDiff.Text = ProjectJson["difficulty"] ?? "d0";
+            customlevel.txtDesc.Text = ProjectJson["description"] ?? "ADD A DESCRIPTION";
+            customlevel.txtCustomAuthor.Text = ProjectJson["author"] ?? "SOME PERSON";
             //show the new level folder dialog box
             customlevel.ShowDialog();
         }
@@ -503,7 +502,7 @@ namespace Thumper_Custom_Level_Editor
             }
             workingfolder = txtFilePath.Text;
             dockProjectExplorer.LoadProject(WorkingFolder);
-            dockProjectProperties.LoadProjectProperties(projectjson);
+            dockProjectProperties.LoadProjectProperties(ProjectJson);
 
             Form_MasterEditor dockMaster = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_GateEditor dockGate = new() { DockAreas = DockAreas.Document | DockAreas.Float };

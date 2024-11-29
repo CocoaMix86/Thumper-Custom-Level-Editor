@@ -35,19 +35,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             get { return LoadedMaster; }
             set {
-                if (value == null) {
-                    if (LoadedMaster != null && TCLE.lockedfiles.ContainsKey(LoadedMaster)) {
-                        TCLE.lockedfiles[LoadedMaster].Close();
-                        TCLE.lockedfiles.Remove(LoadedMaster);
-                    }
-                    LoadedMaster = value;
-                    ResetMaster();
-                }
-                else if (LoadedMaster != value) {
-                    if (LoadedMaster != null && TCLE.lockedfiles.ContainsKey(LoadedMaster)) {
-                        TCLE.lockedfiles[LoadedMaster].Close();
-                        TCLE.lockedfiles.Remove(LoadedMaster);
-                    }
+                if (LoadedMaster != value) {
                     LoadedMaster = value;
 
                     if (!LoadedMaster.Exists) {
