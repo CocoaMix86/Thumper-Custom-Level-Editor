@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_LeafEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_LeafEditor(dynamic load = null, string filepath = null)
+        public Form_LeafEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
             LoadQuickValues();
@@ -23,6 +23,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             DropDownMenuScrollWheelHandler.Enable(true);
             TCLE.InitializeTracks(trackEditor, true);
+
+            if (load != null)
+                LoadLeaf(load, filepath);
         }
         #endregion
 

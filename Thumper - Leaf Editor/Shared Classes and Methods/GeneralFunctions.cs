@@ -520,6 +520,18 @@ namespace Thumper_Custom_Level_Editor
                 Form_LvlEditor lvl = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
                 lvl.Show(lastclickedpane, null);
             }
+            else if (filetype == ".gate") {
+                Form_GateEditor gate = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                gate.Show(lastclickedpane, null);
+            }
+            else if (filetype == ".leaf") {
+                Form_LeafEditor leaf = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                leaf.Show(lastclickedpane, null);
+            }
+            else if (filetype == ".samp") {
+                Form_SampleEditor sample = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                sample.Show(lastclickedpane, null);
+            }
             //if file type not supported, open raw
             else {
                 openraw = true;

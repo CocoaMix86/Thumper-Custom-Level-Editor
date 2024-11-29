@@ -11,11 +11,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_GateEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_GateEditor(dynamic load = null, string filepath = null)
+        public Form_GateEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
             gateToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(gateLvlList, false);
+
+            if (load != null)
+                LoadGate(load, filepath);
         }
         #endregion
 
