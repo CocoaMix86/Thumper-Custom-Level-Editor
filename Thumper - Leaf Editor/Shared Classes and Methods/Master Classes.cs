@@ -16,7 +16,7 @@ namespace Thumper_Custom_Level_Editor
             get { return Name; }
             set {
                 int idx = value.LastIndexOf('.');
-                Name = value[..idx];
+                Name = idx != -1 ? value[..idx] : value;
             }
         }
         public string lvlname { get { return $"{name}.lvl"; } }

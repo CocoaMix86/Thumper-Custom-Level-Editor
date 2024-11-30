@@ -486,6 +486,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
 
                 if (playsound) TCLE.PlaySound("UIsave");
+
+                foreach (var dock in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(LoadedMaster.Name))) {
+                    if (dock.GetType() == typeof(Form_RawText))
+                        (dock as Form_RawText).Reload();
+                }
             }
         }
 

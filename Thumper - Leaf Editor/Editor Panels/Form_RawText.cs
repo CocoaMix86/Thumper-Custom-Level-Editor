@@ -44,6 +44,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
         }
 
+        public void Reload()
+        {
+            dynamic _load = TCLE.LoadFileLock(LoadedFile.FullName);
+            textEditor.TextChanged -= textEditor_TextChanged;
+            textEditor.Text = JsonConvert.SerializeObject(_load, Formatting.Indented);
+            textEditor.ClearUndo();
+            textEditor.SetSelectedLine(-1);
+            textEditor.TextChanged += textEditor_TextChanged;
+        }
+
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
             //make the beeble emote
@@ -77,37 +87,5 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         #endregion
-
-        private void textEditor_UndoRedoStateChanged(object sender, EventArgs e)
-        {
-
-        }
     }
-}
-
-static class extentions
-{
-    public static List<Variance> DetailedCompare<T>(this T val1, T val2)
-    {
-        List<Variance> variances = new List<Variance>();
-        FieldInfo[] fi = val1.GetType().GetFields();
-        foreach (FieldInfo f in fi) {
-            Variance v = new Variance();
-            v.Prop = f.Name;
-            v.valA = f.GetValue(val1);
-            v.valB = f.GetValue(val2);
-            if (!Equals(v.valA, v.valB))
-                variances.Add(v);
-
-        }
-        return variances;
-    }
-
-
-}
-class Variance
-{
-    public string Prop { get; set; }
-    public object valA { get; set; }
-    public object valB { get; set; }
 }

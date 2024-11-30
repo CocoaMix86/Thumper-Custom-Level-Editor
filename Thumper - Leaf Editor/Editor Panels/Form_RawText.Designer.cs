@@ -79,7 +79,6 @@
             this.textEditor.Text = "text";
             this.textEditor.ToolTipDelay = 100;
             this.textEditor.Zoom = 100;
-            this.textEditor.UndoRedoStateChanged += this.textEditor_UndoRedoStateChanged;
             // 
             // Form_RawText
             // 
