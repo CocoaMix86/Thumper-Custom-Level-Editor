@@ -300,6 +300,7 @@
             this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridMaster.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridMaster.ViewForeColor = Color.White;
+            this.propertyGridMaster.PropertyValueChanged += this.propertyGridMaster_PropertyValueChanged;
             // 
             // lblConfigColorHelp
             // 

@@ -131,7 +131,7 @@
             this.toolstripHelpChangelog = new ToolStripMenuItem();
             this.toolstripHelpKofi = new ToolStripMenuItem();
             this.toolstripHelp = new ToolStripMenuItem();
-            this.toolStripMain = new ToolStrip();
+            this.toolStripMain = new ToolStripEx();
             this.toolstripMainOpenProject = new ToolStripButton();
             this.toolstripMainOpenFile = new ToolStripButton();
             this.toolstripMainSave = new ToolStripButton();
@@ -598,7 +598,7 @@
             this.toolstripFileSave.ShortcutKeys = Keys.Control | Keys.S;
             this.toolstripFileSave.Size = new Size(251, 22);
             this.toolstripFileSave.Text = "Save";
-            this.toolstripFileSave.Click += this.toolstripFileSave_Click;
+            this.toolstripFileSave.Click += this.toolstripMainSave_Click;
             // 
             // toolstripFileSaveAs
             // 
@@ -1403,7 +1403,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectProperties;
         private System.Windows.Forms.ToolStripButton toolstripFormClose;
-        private System.Windows.Forms.ToolStrip toolStripMain;
+        private ToolStripEx toolStripMain;
         private System.Windows.Forms.ToolStripButton toolstripMainOpenProject;
         private System.Windows.Forms.ToolStripButton toolstripMainOpenFile;
         private System.Windows.Forms.ToolStripButton toolstripMainSave;

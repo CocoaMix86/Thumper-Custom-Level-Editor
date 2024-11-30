@@ -428,12 +428,12 @@ namespace Thumper_Custom_Level_Editor
                 int _beats = CalculateSingleLvlRuntime(_masterlvl);
                 if (_beats != -1) _beatcount += _beats;
             }
-            if (master._properties.introlvl != "<none>") {
-                var introlvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{master._properties.introlvl}"));
+            if (master.masterproperties.introlvl != "<none>") {
+                var introlvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{master.masterproperties.introlvl}"));
                 if (introlvl.Key != null) _beatcount += LoadLvlGetBeatCounts(introlvl.Value.FullName);
             }
-            if (master._properties.checkpointlvl != "<none>") {
-                var checkpointlvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{master._properties.checkpointlvl}"));
+            if (master.masterproperties.checkpointlvl != "<none>") {
+                var checkpointlvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{master.masterproperties.checkpointlvl}"));
                 if (checkpointlvl.Key != null) _beatcount += LoadLvlGetBeatCounts(checkpointlvl.Value.FullName);
             }
 

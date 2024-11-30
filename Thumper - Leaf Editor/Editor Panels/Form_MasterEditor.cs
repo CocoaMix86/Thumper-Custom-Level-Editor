@@ -25,12 +25,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null)
                 LoadMaster(load, filepath);
-            propertyGridMaster.SelectedObject = _properties;
+            propertyGridMaster.SelectedObject = masterproperties;
         }
         #endregion
 
         #region Variables
         public bool EditorIsSaved = true;
+        public bool EditorLoading = false;
         public FileInfo loadedmaster
         {
             get { return LoadedMaster; }
@@ -47,8 +48,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static FileInfo LoadedMaster;
         private List<MasterLvlData> clipboardmaster = new();
-        public ObservableCollection<MasterLvlData> _masterlvls { get { return _properties.masterlvls; } set { _properties.masterlvls = value; } }
-        public MasterProperties _properties;
+        public ObservableCollection<MasterLvlData> _masterlvls { get { return masterproperties.masterlvls; } set { masterproperties.masterlvls = value; } }
+        public MasterProperties masterproperties
+        {
+            get { return MasterProperties; }
+            set {
+                SaveCheckAndWrite(false);
+                MasterProperties = value;
+            }
+        }
+        public static MasterProperties MasterProperties;
         public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
@@ -65,7 +74,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
-            _properties.sublevel = _masterlvls[e.RowIndex];
+            masterproperties.sublevel = _masterlvls[e.RowIndex];
             propertyGridMaster.ExpandAllGridItems();
             propertyGridMaster.Refresh();
         }
@@ -203,6 +212,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false);
         }
 
+        private void propertyGridMaster_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            SaveCheckAndWrite(false);
+        }
+
         private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((!EditorIsSaved && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
@@ -242,7 +256,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 loadedmaster = new FileInfo($@"{storePath}\sequin.master");
-                BuildSave(_properties);
+                BuildSave(masterproperties);
                 //after saving new file, refresh the workingfolder
                 ///_mainform.btnWorkRefresh.PerformClick();
             }
@@ -381,7 +395,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            LoadMaster(_properties.revertPoint, LoadedMaster);
+            LoadMaster(masterproperties.revertPoint, LoadedMaster);
             TCLE.PlaySound("UIrevertchanges");
         }
 
@@ -414,9 +428,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             loadedmaster = filepath;
             //set some visual elements
             this.Text = $"sequin.master";
+            EditorLoading = true;
 
             //setup new master properties
-            _properties = new(this, filepath) {
+            masterproperties = new(this, filepath) {
                 skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
                 introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
                 checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
@@ -438,6 +453,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             ///set save flag (master just loaded, has no changes)
+            EditorLoading = false;
             SaveCheckAndWrite(true);
         }
 
@@ -462,6 +478,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
+            if (EditorLoading)
+                return;
             //make the beeble emote
             TCLE.beeble.MakeFace();
 
@@ -470,13 +488,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //denote editor tab is not saved
                 this.Text = LoadedMaster.Name + "*";
                 //add current JSON to the undo list
-                _properties.undoItems.Add(BuildSave(_properties));
+                masterproperties.undoItems.Add(BuildSave(masterproperties));
             }
             else {
                 this.Text = LoadedMaster.Name;
                 //build the JSON to write to file
-                JObject _saveJSON = BuildSave(_properties);
-                _properties.revertPoint = _saveJSON;
+                JObject _saveJSON = BuildSave(masterproperties);
+                masterproperties.revertPoint = _saveJSON;
                 //if file is not locked, lock it
                 if (!TCLE.lockedfiles.ContainsKey(LoadedMaster)) {
                     TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
@@ -600,7 +618,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //reset things to default values
             _masterlvls.Clear();
             this.Text = "Master Editor";
-            _properties.skybox = "";
+            masterproperties.skybox = "";
             //set saved flag to true, because nothing is loaded
             SaveCheckAndWrite(true);
         }
