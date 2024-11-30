@@ -88,7 +88,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 RecurseNodesFindExpanded(treeView1.Nodes);
             }
             //force each master to recalc runtime in case tree has new files
-            foreach (var dock in TCLE.Instance.dockMain.Documents.Where(x => x.DockHandler.TabText.EndsWith(".master"))) {
+            foreach (var dock in TCLE.Instance.dockMain.Documents.Where(x => x.DockHandler.TabText.Contains(".master"))) {
                 (dock as Form_MasterEditor).RecalcLvlRuntime();
             }
         }

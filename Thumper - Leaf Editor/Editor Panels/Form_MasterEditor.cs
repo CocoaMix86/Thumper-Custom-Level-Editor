@@ -127,7 +127,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     masterLvlList.Rows[previousDragOver].DefaultCellStyle = null;
             }
             if (targetRow != -1 && targetRow != previousDragOver) {
-                masterLvlList.Rows[targetRow].DefaultCellStyle.BackColor = Color.Gray;
+                masterLvlList.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
                 previousDragOver = targetRow;
             }
         }
