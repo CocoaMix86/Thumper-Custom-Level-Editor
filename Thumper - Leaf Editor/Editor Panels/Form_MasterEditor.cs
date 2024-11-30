@@ -182,8 +182,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 masterLvlList.Rows.Insert(_in, new object[] {
                     0,
                     (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
-                    _masterlvls[_in].lvlname, 0
-                    /*beats != -1 ? $"{beats} beats -- {time}"  : "file not found"*/
+                    _masterlvls[_in].type == "lvl" ? _masterlvls[_in].lvlname : _masterlvls[_in].gatename,
+                    0
                 });
             }
             //if action REMOVE, remove row from the master DGV
@@ -457,23 +457,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
         }
 
-        public static void MasterLoadLvl(string path)
+        public void ReloadMaster()
         {
-            if ((/*!_mainform._savelvl && */MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)/* || _mainform._savelvl*/) {
-                if (!path.Contains(".lvl"))
-                    return;
-                string _file = path.Replace(".lvl", "");
-                dynamic _load;
-                try {
-                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
-                }
-                catch {
-                    MessageBox.Show($@"Could not locate ""lvl_{_file}.txt"" in the same folder as this master. Did you add this leaf from a different folder?");
-                    return;
-                }
-                //load the selected lvl
-                ///_mainform.LoadLvl(_load, $@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
-            }
+            dynamic _load = TCLE.LoadFileLock(LoadedMaster.FullName);
+            LoadMaster(_load, LoadedMaster);
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
@@ -495,10 +482,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //build the JSON to write to file
                 JObject _saveJSON = BuildSave(masterproperties);
                 masterproperties.revertPoint = _saveJSON;
-                //if file is not locked, lock it
-                if (!TCLE.lockedfiles.ContainsKey(LoadedMaster)) {
-                    TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-                }
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
 
@@ -537,8 +520,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JArray groupings = new();
             foreach (MasterLvlData group in _properties.masterlvls) {
                 JObject s = new() {
-                    { "lvl_name", group.lvlname.Replace("<none>", "") ?? "" },
-                    { "gate_name", group.gatename.Replace("<none>", "") ?? "" },
+                    { "lvl_name", (group.type == "lvl" ? group.lvlname : "") },
+                    { "gate_name", (group.type == "gate" ? group.gatename : "") },
                     { "checkpoint", group.checkpoint.ToString() },
                     { "checkpoint_leader_lvl_name", group.checkpoint_leader.Replace("<none>", "") ?? "" },
                     { "rest_lvl_name", group.rest.Replace("<none>", "") ?? "" },

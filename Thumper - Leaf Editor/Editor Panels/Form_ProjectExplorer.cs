@@ -620,13 +620,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            TCLE.OpenFile(_mainform, new FileInfo(projectfiles[selectedNodes[0].FullPath].FullName));
+            TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].FullPath]);
         }
 
         private void treeView1_Click(object sender, EventArgs e)
         {
             if (btnOpenOnClick.Checked)
-                TCLE.OpenFile(_mainform, new FileInfo(projectfiles[selectedNodes[0].FullPath].FullName));
+                TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].FullPath]);
         }
 
         private FileInfo GetFileOrFolderPath(string name)

@@ -463,6 +463,8 @@ namespace Thumper_Custom_Level_Editor
                     }
 
                 }
+                else
+                    return -1;
             }
             var lvlrest = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{_masterlvl.rest}"));
             if (lvlrest.Key != null) _beatcount += LoadLvlGetBeatCounts(lvlrest.Value.FullName);

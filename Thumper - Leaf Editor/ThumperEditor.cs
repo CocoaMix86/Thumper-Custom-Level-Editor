@@ -20,6 +20,8 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variables
         public static TCLE Instance;
+        public static DockPanel DockMain { get { return Instance.dockMain; } }
+        public static IEnumerable<IDockContent> Documents { get { return Instance.dockMain.Documents; } }
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         Properties.Settings settings = Properties.Settings.Default;
         public static dynamic ProjectJson;
@@ -535,6 +537,9 @@ namespace Thumper_Custom_Level_Editor
             var activedocument = dockMain.ActiveDocument;
             if (activedocument.GetType() == typeof(Form_MasterEditor)) {
                 (activedocument as Form_MasterEditor).Save();
+            }
+            if (activedocument.GetType() == typeof(Form_RawText)) {
+                (activedocument as Form_RawText).Save();
             }
         }
     }

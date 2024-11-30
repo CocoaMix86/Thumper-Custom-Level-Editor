@@ -30,7 +30,6 @@ namespace Thumper_Custom_Level_Editor
                 Name = value[..idx];
             }
         }
-        public string noneditname { get { return Name; } }
         public string lvlname { get { return $"{name}.lvl"; } }
         public string gatename { get { return $"{name}.gate"; } }
         public bool playplus { get; set; }

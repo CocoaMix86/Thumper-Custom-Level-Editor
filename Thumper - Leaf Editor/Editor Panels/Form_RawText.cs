@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -38,6 +39,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
         #region Methods
+        public void Save()
+        {
+            SaveCheckAndWrite(true);
+        }
+
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
             //make the beeble emote
@@ -58,14 +64,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show("JSON failed to parse in file. Changes not saved.", "Thumper Custom Level Editor");
                     return;
                 }
-                //if file is not locked, lock it
-                if (!TCLE.lockedfiles.ContainsKey(LoadedFile)) {
-                    TCLE.lockedfiles.Add(LoadedFile, new FileStream(LoadedFile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-                }
                 //write JSON to file
-                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedFile], _saveJSON);
+                //TCLE.WriteFileLock(TCLE.lockedfiles[LoadedFile], _saveJSON);
+                TCLE.WriteFileLock(TCLE.lockedfiles.First(x => x.Key.FullName == LoadedFile.FullName).Value, _saveJSON);
 
                 if (playsound) TCLE.PlaySound("UIsave");
+
+                foreach (var dock in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(LoadedFile.Name))) {
+                    if (dock.GetType() == typeof(Form_MasterEditor))
+                        (dock as Form_MasterEditor).ReloadMaster();
+                }
             }
         }
         #endregion
@@ -75,4 +83,31 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         }
     }
+}
+
+static class extentions
+{
+    public static List<Variance> DetailedCompare<T>(this T val1, T val2)
+    {
+        List<Variance> variances = new List<Variance>();
+        FieldInfo[] fi = val1.GetType().GetFields();
+        foreach (FieldInfo f in fi) {
+            Variance v = new Variance();
+            v.Prop = f.Name;
+            v.valA = f.GetValue(val1);
+            v.valB = f.GetValue(val2);
+            if (!Equals(v.valA, v.valB))
+                variances.Add(v);
+
+        }
+        return variances;
+    }
+
+
+}
+class Variance
+{
+    public string Prop { get; set; }
+    public object valA { get; set; }
+    public object valB { get; set; }
 }
