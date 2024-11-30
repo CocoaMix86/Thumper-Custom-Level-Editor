@@ -23,7 +23,7 @@ namespace Thumper_Custom_Level_Editor
             isthisnew = newlevel;
             pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;
             //set the form text fields
-            txtCustomPath.Text = Path.GetDirectoryName(TCLE.WorkingFolder);
+            txtCustomPath.Text = Path.GetDirectoryName(TCLE.WorkingFolder.FullName);
             btnCustomSave.Enabled = true;
             //set samp pack checkboxes
             if (!newlevel) {
@@ -132,17 +132,19 @@ namespace Thumper_Custom_Level_Editor
             ///mainform.toolstripLevelName.Text = input.txtCustomName.Text;
             ///mainform.toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject(txtCustomDiff.Text);
 
-            if (TCLE.WorkingFolder != null && TCLE.WorkingFolder != levelpath) {
+            if (TCLE.WorkingFolder != null && TCLE.WorkingFolder.FullName != levelpath) {
                 foreach (KeyValuePair<FileInfo, FileStream> fs in TCLE.lockedfiles) {
                     fs.Value.Close();
                 }
                 TCLE.lockedfiles.Clear();
                 //using a random suffix on the end to avoid any folders with same name
-                Directory.Move(TCLE.WorkingFolder, $"{levelpath}1029");
-                Directory.Move($"{levelpath}1029", $"{levelpath}");
+                TCLE.WorkingFolder.MoveTo($"{levelpath}1029");
+                TCLE.WorkingFolder.MoveTo($"{levelpath}");
+                ///Directory.Move(TCLE.WorkingFolder, $"{levelpath}1029");
+                ///Directory.Move($"{levelpath}1029", $"{levelpath}");
                 //if level name changes, should update the config file
-                if (File.Exists($@"{levelpath}\config_{Path.GetFileName(TCLE.WorkingFolder)}.txt"))
-                    File.Move($@"{levelpath}\config_{Path.GetFileName(TCLE.WorkingFolder)}.txt", $@"{levelpath}\config_{txtCustomName.Text}.txt");
+                if (File.Exists($@"{levelpath}\{TCLE.WorkingFolder.Name}.TCL"))
+                    File.Move($@"{levelpath}\{TCLE.WorkingFolder.Name}.TCL", $@"{levelpath}\{txtCustomName.Text}.TCL");
             }
 
             if (!Directory.Exists(levelpath)) {
@@ -203,7 +205,7 @@ namespace Thumper_Custom_Level_Editor
                 TCLE.WriteFileLock(TCLE.lockedfiles[new FileInfo($@"{levelpath}\{txtCustomName.Text}.TCL")], level_details);
             //}
             TCLE.ProjectJson = level_details;
-            TCLE.WorkingFolder = levelpath;
+            TCLE.WorkingFolder = new DirectoryInfo(levelpath);
 
             ///
             ///create a default master file and open it
@@ -211,7 +213,7 @@ namespace Thumper_Custom_Level_Editor
                 ///mainform._loadedmaster = $@"{levelpath}\master_sequin.txt";
                 ///mainform.WriteMaster();
             }
-            if (TCLE.WorkingFolder != levelpath) {
+            if (TCLE.WorkingFolder.FullName != levelpath) {
                 MessageBox.Show("New level folder was created, but not loaded.", "Something went wrong...");
                 return false;
             }
@@ -224,8 +226,8 @@ namespace Thumper_Custom_Level_Editor
             lblNameError.Visible = false;
             btnCustomSave.Enabled = false;
             bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
-            bool exists = Directory.Exists($@"{Path.GetDirectoryName(TCLE.WorkingFolder)}\{txtCustomName.Text}") && txtCustomName.Text != Path.GetFileName(TCLE.WorkingFolder);
-            bool samefolder = $@"{txtCustomPath.Text.ToLower()}\{txtCustomName.Text.ToLower()}" == TCLE.WorkingFolder?.ToLower();
+            bool exists = Directory.Exists($@"{TCLE.WorkingFolder.Parent}\{txtCustomName.Text}") && txtCustomName.Text != TCLE.WorkingFolder.Name;
+            bool samefolder = $@"{txtCustomPath.Text.ToLower()}\{txtCustomName.Text.ToLower()}" == TCLE.WorkingFolder.FullName.ToLower();
             bool endsindot = txtCustomName.Text.TrimEnd().EndsWith('.');
 
             if (illegal) {

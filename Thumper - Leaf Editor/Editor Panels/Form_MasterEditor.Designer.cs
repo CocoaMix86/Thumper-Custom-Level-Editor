@@ -116,6 +116,9 @@
             this.masterLvlList.CellDoubleClick += this.masterLvlList_CellDoubleClick;
             this.masterLvlList.DragDrop += this.masterLvlList_DragDrop;
             this.masterLvlList.DragEnter += this.masterLvlList_DragEnter;
+            this.masterLvlList.DragOver += this.masterLvlList_DragOver;
+            this.masterLvlList.MouseDown += this.masterLvlList_MouseDown;
+            this.masterLvlList.MouseMove += this.masterLvlList_MouseMove;
             // 
             // SublevelNum
             // 

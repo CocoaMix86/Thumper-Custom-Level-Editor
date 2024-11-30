@@ -707,7 +707,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 /*
                 if (sender == null)
@@ -756,10 +756,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
                 ofd.Title = "Load a Thumper Leaf file";
-                ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+                ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -1139,7 +1139,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Color Profile (*.color)|*.color";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 //save _out to file with .color extension
                 File.WriteAllText(sfd.FileName, _out);
@@ -1151,7 +1151,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Color Profile (*.color)|*.color";
             ofd.FilterIndex = 1;
-            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 //import all colors in the file to this array
                 string[] _colors = File.ReadAllLines(ofd.FileName);
@@ -1236,7 +1236,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 newfilename = new FileInfo(sfd.FileName);
                 newfilename.CreateText();

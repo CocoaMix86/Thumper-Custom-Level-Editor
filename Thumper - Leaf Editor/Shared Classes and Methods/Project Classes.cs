@@ -24,7 +24,7 @@ namespace Thumper_Custom_Level_Editor
         [Category("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public static string filepath { get { return TCLE.WorkingFolder; } }
+        public static string filepath { get { return TCLE.WorkingFolder.FullName; } }
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]
@@ -85,9 +85,9 @@ namespace Thumper_Custom_Level_Editor
 
     public class DifficultyOptions : StringConverter
     {
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
-        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
         {
             List<string> list = new List<string>() { "D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7" };
             return new StandardValuesCollection(list);

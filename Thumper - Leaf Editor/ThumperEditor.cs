@@ -143,7 +143,7 @@ namespace Thumper_Custom_Level_Editor
                 RecentFiles(levellist);
             else if (LevelToLoad.Length > 2) {
                 if (Directory.Exists(LevelToLoad)) {
-                    workingfolder = LevelToLoad;
+                    workingfolder = new DirectoryInfo(LevelToLoad);
                     panelRecentFiles.Visible = false;
                 }
                 else
@@ -500,8 +500,8 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show("that folder path doesn't exist");
                 return;
             }
-            workingfolder = txtFilePath.Text;
-            dockProjectExplorer.LoadProject(WorkingFolder);
+            workingfolder = new DirectoryInfo(txtFilePath.Text);
+            dockProjectExplorer.LoadProject(WorkingFolder.FullName);
             dockProjectProperties.LoadProjectProperties(ProjectJson);
 
             Form_MasterEditor dockMaster = new() { DockAreas = DockAreas.Document | DockAreas.Float };

@@ -77,11 +77,69 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{masterLvlList.Rows[e.RowIndex].Cells[2].Value}")).FirstOrDefault().Value);
         }
 
+        private Rectangle dragBoxFromMouseDown;
+        private int rowIndexFromMouseDown;
+        private int rowIndexOfItemUnderMouseToDrop;
+        private void masterLvlList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                // If the mouse moves outside the rectangle, start the drag.
+                if (dragBoxFromMouseDown != Rectangle.Empty &&
+                    !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+
+                    // Proceed with the drag and drop, passing in the list item.                    
+                    DragDropEffects dropEffect = masterLvlList.DoDragDrop(masterLvlList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void masterLvlList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {// Get the index of the item the mouse is below.
+            rowIndexFromMouseDown = masterLvlList.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndexFromMouseDown != -1) {
+                // Remember the point where the mouse down occurred. 
+                // The DragSize indicates the size that the mouse can move 
+                // before a drag event should be started.                
+                Size dragSize = SystemInformation.DragSize;
+
+                // Create a rectangle using the DragSize, with the mouse position being
+                // at the center of the rectangle.
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+            }
+            else
+                // Reset the rectangle if the mouse is not over an item in the ListBox.
+                dragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+        private void masterLvlList_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
         private void masterLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         private void masterLvlList_DragDrop(object sender, DragEventArgs e)
         {
+            // The mouse locations are relative to the screen, so they must be 
+            // converted to client coordinates.
+            Point clientPoint = masterLvlList.PointToClient(new Point(e.X, e.Y));
+
+            // Get the row index of the item the mouse is below. 
+            rowIndexOfItemUnderMouseToDrop = masterLvlList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+
+            // If the drag operation was a move then remove and insert the row.
+            if (e.Effect == DragDropEffects.Move) {
+                DataGridViewRow rowToMove = e.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
+                if (rowToMove != null) {
+                    MasterLvlData tomove = _masterlvls[rowToMove.Index];
+                    _masterlvls.RemoveAt(rowIndexFromMouseDown);
+                    _masterlvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                    //masterLvlList.Rows.RemoveAt(rowIndexFromMouseDown);
+                    //masterLvlList.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+                }
+            }
+
             TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
-            AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder)}\{dragdropnode.FullPath}");
+            if (dragdropnode != null)
+                AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
         }
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -94,19 +152,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 int _in = e.NewStartingIndex;
                 //get the runtime of the object
-                int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _masterlvls[_in]);
-                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                ///int beats = TCLE.CalculateSingleLvlRuntime(_masterlvls[_in]);
+                ///string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows.Insert(_in, new object[] {
                     0,
                     (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
-                    _masterlvls[_in].lvlname,
-                    beats != -1 ? $"{beats} beats -- {time}"  : "file not found"
+                    _masterlvls[_in].lvlname, 0
+                    /*beats != -1 ? $"{beats} beats -- {time}"  : "file not found"*/
                 });
             }
             //if action REMOVE, remove row from the master DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 masterLvlList.Rows.RemoveAt(e.OldStartingIndex);
             }
+            RecalcLvlRuntime();
             //enable certain buttons if there are enough items for them
             btnMasterLvlDelete.Enabled = _masterlvls.Count > 0;
             btnMasterLvlUp.Enabled = _masterlvls.Count > 1;
@@ -124,8 +183,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvr.Cells[0].Value = levelnum;
             }
 
-            //set lvl save flag to false
-            ///Save(false);
+            //set save flag to false
+            SaveCheckAndWrite(false);
         }
 
         private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,10 +193,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Master File (*.master)|*.master";
                 ofd.Title = "Load a Thumper Master file";
-                ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+                ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -162,7 +221,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Master File (*.master)|*.master";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
@@ -196,7 +255,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Lvl/Gate File (*.txt)|*.txt";
             ofd.Title = "Load a Thumper Lvl/Gate file";
-            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 AddFiletoMaster(ofd.FileName);
             }
@@ -214,7 +273,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
             //this is why I utilize workingfolder
             //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
-            if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder)) {
+            if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder.FullName)) {
                 if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
                         File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
@@ -415,7 +474,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void RecalcLvlRuntime()
         {
             foreach (MasterLvlData _lvl in _masterlvls) {
-                int beats = TCLE.CalculateSingleLvlRuntime(TCLE.WorkingFolder, _lvl);
+                int beats = TCLE.CalculateSingleLvlRuntime(_lvl);
                 if (beats == -1) {
                     masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
                     masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"file not found";

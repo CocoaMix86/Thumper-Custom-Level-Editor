@@ -153,10 +153,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
                 ofd.Title = "Load a Thumper Gate file";
-                ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+                ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -183,7 +183,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Gate File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null)
                     loadedgate = null;
@@ -294,7 +294,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Gate File (*.txt)|lvl_*.txt";
             ofd.Title = "Load a Thumper Lvl file";
-            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 //limit how many phases can be added
                 if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
@@ -347,38 +347,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 gateLvlList.Rows[dgvr + 1].Cells[1].Selected = true;
             }
             SaveGate(false);
-        }
-
-        private void btnGateRefresh_Click(object sender, EventArgs e)
-        {
-            if (TCLE.WorkingFolder == null)
-                return;
-            TCLE.lvlsinworkfolder = Directory.GetFiles(TCLE.WorkingFolder, "lvl_*.txt").Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
-            TCLE.lvlsinworkfolder.Add("<none>");
-            TCLE.lvlsinworkfolder.Sort();
-            /*
-            dropGatePre.SelectedIndexChanged -= dropGatePre_SelectedIndexChanged;
-            dropGatePost.SelectedIndexChanged -= dropGatePost_SelectedIndexChanged;
-            dropGateRestart.SelectedIndexChanged -= dropGateRestart_SelectedIndexChanged;
-            ///add lvl list as datasources to dropdowns
-            object _select = dropGatePre.SelectedItem;
-            dropGatePre.DataSource = _mainform.lvlsinworkfolder.ToList();
-            dropGatePre.SelectedItem = _select;
-
-            _select = dropGatePost.SelectedItem;
-            dropGatePost.DataSource = _mainform.lvlsinworkfolder.ToList();
-            dropGatePost.SelectedItem = _select;
-
-            _select = dropGateRestart.SelectedItem;
-            dropGateRestart.DataSource = _mainform.lvlsinworkfolder.ToList();
-            dropGateRestart.SelectedItem = _select;
-            //
-            dropGatePre.SelectedIndexChanged += dropGatePre_SelectedIndexChanged;
-            dropGatePost.SelectedIndexChanged += dropGatePost_SelectedIndexChanged;
-            dropGateRestart.SelectedIndexChanged += dropGateRestart_SelectedIndexChanged;
-            */
-            TCLE.PlaySound("UIrefresh");
-
         }
 
         private void btnRevertGate_Click(object sender, EventArgs e)

@@ -378,7 +378,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null) {
                     loadedlvl = null;
@@ -423,10 +423,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 using OpenFileDialog ofd = new();
                 ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
                 ofd.Title = "Load a Thumper Lvl file";
-                ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+                ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -460,7 +460,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Leaf File (*.txt)|leaf_*.txt";
             ofd.Title = "Load a Thumper Leaf file";
-            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             TCLE.PlaySound("UIfolderopen");
             if (ofd.ShowDialog() == DialogResult.OK) {
                 AddLeaftoLvl(ofd.FileName);
@@ -877,7 +877,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //check if leaf exists in the same folder as the lvl. If not, allow user to copy file.
             //this is why I utilize workingfolder
-            if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
+            if (Path.GetDirectoryName(path) != TCLE.WorkingFolder.FullName) {
                 if (MessageBox.Show("The leaf you chose does not exist in the same folder as this lvl. Do you want to copy it to this folder and load it?", "Leaf load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
                 else
@@ -933,13 +933,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             loadinglvl = true;
             _lvlsamples.Clear();
             //find all samp_ files in the level folder
-            List<string> _sampfiles = Directory.GetFiles(TCLE.WorkingFolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
+            List<FileInfo> _sampfiles = TCLE.WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "\\default.samp").ToList();
             //add default empty sample
             _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
             //iterate over each file
-            foreach (string f in _sampfiles) {
+            foreach (FileInfo sampfile in _sampfiles) {
                 //parse file to JSON
-                dynamic _in = TCLE.LoadFileLock(f);
+                dynamic _in = TCLE.LoadFileLock(sampfile.FullName);
                 //iterate over items:[] list to get each sample and add names to list
                 foreach (dynamic _samp in _in["items"]) {
                     _lvlsamples.Add(new SampleData {

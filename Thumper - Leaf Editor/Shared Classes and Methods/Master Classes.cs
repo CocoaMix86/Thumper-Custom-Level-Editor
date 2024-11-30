@@ -96,7 +96,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats { get { return TCLE.CalculateMasterRuntime(TCLE.WorkingFolder, parent); } }
+        public int beats { get { return TCLE.CalculateMasterRuntime(parent); } }
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
@@ -136,9 +136,9 @@ namespace Thumper_Custom_Level_Editor
 
     public class LvlList : StringConverter
     {
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) { return true; }
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) { return true; }
-        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
         {
             TCLE.ReloadLvlsInProject();
             return new StandardValuesCollection(TCLE.lvlsinworkfolder);

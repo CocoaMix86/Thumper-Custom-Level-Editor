@@ -214,14 +214,14 @@ namespace Thumper_Custom_Level_Editor
         {
             string referencefiles = "";
             //search all files in the project folder
-            foreach (string file in Directory.GetFiles(TCLE.WorkingFolder, "*", SearchOption.AllDirectories).Where(x => extensions.Contains(Path.GetExtension(x)))) {
+            foreach (FileInfo file in WorkingFolder.GetFiles("*", SearchOption.AllDirectories).Where(x => extensions.Contains(x.Extension))) {
                 //skip self to not include self
-                if (Path.GetFileName(file) == searchreference)
+                if (file.Name == searchreference)
                     continue;
-                string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None);
+                string text = ((JObject)LoadFileLock(file.FullName)).ToString(Formatting.None);
                 //check if the file we're searching contains the obj_name
                 if (text.Contains(searchreference)) {
-                    referencefiles += Path.GetFileName(file) + '\n';
+                    referencefiles += file.Name + '\n';
                 }
             }
 
@@ -383,13 +383,13 @@ namespace Thumper_Custom_Level_Editor
                 return;
             _lvlsamples.Clear();
             //find all samp_ files in the level folder
-            List<string> _sampfiles = Directory.GetFiles(WorkingFolder, "*.samp", SearchOption.AllDirectories).Where(x => !x.EndsWith("default.samp")).ToList();
+            List<FileInfo> _sampfiles = WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp").ToList();
             //add default empty sample
             _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
             //iterate over each file
-            foreach (string f in _sampfiles) {
+            foreach (FileInfo sampfile in _sampfiles) {
                 //parse file to JSON
-                dynamic _in = TCLE.LoadFileLock(f);
+                dynamic _in = TCLE.LoadFileLock(sampfile.FullName);
                 //iterate over items:[] list to get each sample and add names to list
                 foreach (dynamic _samp in _in["items"]) {
                     _lvlsamples.Add(new SampleData {
@@ -420,12 +420,12 @@ namespace Thumper_Custom_Level_Editor
             */
         }
 
-        public static int CalculateMasterRuntime(string workingfolder, Form_MasterEditor master)
+        public static int CalculateMasterRuntime(Form_MasterEditor master)
         {
             int _beatcount = 0;
             //loop through all entries in the master to get beat counts
             foreach (MasterLvlData _masterlvl in master._masterlvls) {
-                int _beats = CalculateSingleLvlRuntime(workingfolder, _masterlvl);
+                int _beats = CalculateSingleLvlRuntime(_masterlvl);
                 if (_beats != -1) _beatcount += _beats;
             }
             if (master._properties.introlvl != "<none>") {
@@ -440,7 +440,7 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
 
         }
-        public static int CalculateSingleLvlRuntime(string workingfolder, MasterLvlData _masterlvl)
+        public static int CalculateSingleLvlRuntime(MasterLvlData _masterlvl)
         {
             dynamic _load;
             int _beatcount = 0;
@@ -544,8 +544,8 @@ namespace Thumper_Custom_Level_Editor
             if (WorkingFolder == null)
                 return;
             lvlsinworkfolder.Clear();
-            foreach (string file in Directory.GetFiles(WorkingFolder, "*.lvl", SearchOption.AllDirectories)) {
-                dynamic loadfile = LoadFileLock(file);
+            foreach (FileInfo file in WorkingFolder.GetFiles("*.lvl", SearchOption.AllDirectories)) {
+                dynamic loadfile = LoadFileLock(file.FullName);
                 if (loadfile == null) continue;
                 if ((string)loadfile["obj_type"] == "SequinLevel") {
                     lvlsinworkfolder.Add((string)loadfile["obj_name"]);

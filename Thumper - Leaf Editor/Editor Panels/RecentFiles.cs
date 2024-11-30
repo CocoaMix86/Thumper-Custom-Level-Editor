@@ -55,7 +55,7 @@ namespace Thumper_Custom_Level_Editor
             string level = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
             //handle column 0 clicks only as that's where the button is
             if (e.ColumnIndex == 0) {
-                if (workingfolder == level) {
+                if (workingfolder.FullName == level) {
                     panelRecentFiles.Visible = false;
                     return;
                 }
@@ -65,7 +65,7 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 }
                 //set working folder to the path
-                workingfolder = level;
+                workingfolder = new DirectoryInfo(level);
                 panelRecentFiles.Visible = false;
                 PlaySound("UIfolderclose");
             }

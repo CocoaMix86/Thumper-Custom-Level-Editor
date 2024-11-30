@@ -150,7 +150,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.Title = "Load a Thumper Sample file";
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder));
+                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -177,7 +177,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //filter .txt only
             sfd.Filter = "Thumper Sample File (*.txt)|*.txt";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 if (sender == null)
                     loadedsample = null;
@@ -273,8 +273,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (_hashedname[0] == '0')
                         _hashedname = _hashedname[1..];
 
-                    if (File.Exists($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc")) {
-                        File.Delete($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc");
+                    if (File.Exists($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc")) {
+                        File.Delete($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
                     }
                 }
                 //delete file from temp folder too. If it isn't removed and then a new sample is added with the same name, the old sample will play
@@ -318,7 +318,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using OpenFileDialog ofd = new();
             ofd.Filter = "FSB Audio File (*.fsb)|*.fsb";
             ofd.Title = "Load a FSB Audio file";
-            ofd.InitialDirectory = TCLE.WorkingFolder ?? Application.StartupPath;
+            ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             ofd.Multiselect = true;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 foreach (string _file in ofd.FileNames)
@@ -526,9 +526,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///With hashing complete, can now save the file to a .PC
             //if the `extras` folder doesn't exist, make it
-            Directory.CreateDirectory($@"{TCLE.WorkingFolder}\extras");
+            Directory.CreateDirectory($@"{TCLE.WorkingFolder.FullName}\extras");
             //write header and bytes of fsb to new file
-            using (FileStream f = File.Open($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
+            using (FileStream f = File.Open($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
                 f.Write(_header, 0, _header.Length);
                 f.Write(_bytes, 0, _bytes.Length);
             }
@@ -587,10 +587,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //attempt to locate file. But error and return safely if nothing found
                 try {
                     //read the .pc file as bytes, and skip the first 4 header bytes
-                    _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc");
+                    _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
                 }
                 catch {
-                    MessageBox.Show($@"Unable to locate file {TCLE.WorkingFolder}\extras\{_hashedname}.pc to play sample. Is the custom audio file in the extras folder?");
+                    MessageBox.Show($@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. Is the custom audio file in the extras folder?");
                     return null;
                 }
             }
