@@ -128,13 +128,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
                 DataGridViewRow rowToMove = e.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
-                if (rowToMove != null) {
-                    MasterLvlData tomove = _masterlvls[rowToMove.Index];
-                    _masterlvls.RemoveAt(rowIndexFromMouseDown);
-                    _masterlvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
-                    //masterLvlList.Rows.RemoveAt(rowIndexFromMouseDown);
-                    //masterLvlList.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
-                }
+                if (rowToMove == null || rowIndexOfItemUnderMouseToDrop == -1)
+                    return;
+                MasterLvlData tomove = _masterlvls[rowToMove.Index];
+                _masterlvls.RemoveAt(rowIndexFromMouseDown);
+                _masterlvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                //masterLvlList.Rows.RemoveAt(rowIndexFromMouseDown);
+                //masterLvlList.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
             }
 
             TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
@@ -452,11 +452,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsSaved = IsSaved;
             if (!IsSaved) {
                 //denote editor tab is not saved
-                if (!this.Text.EndsWith('*')) this.Text += "*";
+                this.Text = LoadedMaster.Name + "*";
                 //add current JSON to the undo list
                 _properties.undoItems.Add(BuildSave(_properties));
             }
             else {
+                this.Text = LoadedMaster.Name;
                 //build the JSON to write to file
                 JObject _saveJSON = BuildSave(_properties);
                 _properties.revertPoint = _saveJSON;
@@ -485,6 +486,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
                 }
             }
+            masterLvlList.Refresh();
         }
 
         public static JObject BuildSave(MasterProperties _properties)

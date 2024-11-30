@@ -87,6 +87,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 treeView1.Nodes[0].Expand();
                 RecurseNodesFindExpanded(treeView1.Nodes);
             }
+            //force each master to recalc runtime in case tree has new files
+            foreach (var dock in TCLE.Instance.dockMain.Documents.Where(x => x.DockHandler.TabText.EndsWith(".master"))) {
+                (dock as Form_MasterEditor).RecalcLvlRuntime();
+            }
         }
         private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
         {
@@ -519,6 +523,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void treeView1_DragDrop(object sender, DragEventArgs e)
         {
+            TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+            if (dragdropnode == null)
+                return;
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = treeView1.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
