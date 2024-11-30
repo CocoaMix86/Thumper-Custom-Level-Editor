@@ -111,9 +111,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dragBoxFromMouseDown = Rectangle.Empty;
         }
 
+        private int previousDragOver = -1;
         private void masterLvlList_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = masterLvlList.PointToClient(new Point(e.X, e.Y));
+            // Retrieve the node at the drop location.
+            int targetRow = masterLvlList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
+            //changing the hovered node backcolor to make it obvious where the destination will be
+            if (previousDragOver != targetRow && previousDragOver != -1) {
+                if (masterLvlList.Rows[previousDragOver].Cells[3].Value.ToString() == "file not found")
+                    masterLvlList.Rows[previousDragOver].DefaultCellStyle.BackColor = Color.Maroon;
+                else
+                    masterLvlList.Rows[previousDragOver].DefaultCellStyle = null;
+            }
+            if (targetRow != -1 && targetRow != previousDragOver) {
+                masterLvlList.Rows[targetRow].DefaultCellStyle.BackColor = Color.Gray;
+                previousDragOver = targetRow;
+            }
         }
         private void masterLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         private void masterLvlList_DragDrop(object sender, DragEventArgs e)
