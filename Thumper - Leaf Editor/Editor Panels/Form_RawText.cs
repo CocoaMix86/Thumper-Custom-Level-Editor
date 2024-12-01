@@ -41,7 +41,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Methods
         public void Save()
         {
-            SaveCheckAndWrite(true);
+            SaveCheckAndWrite(true, true);
         }
 
         public void Reload()
@@ -52,6 +52,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             textEditor.ClearUndo();
             textEditor.SetSelectedLine(-1);
             textEditor.TextChanged += textEditor_TextChanged;
+
+            EditorIsSaved = true;
+            this.Text = LoadedFile.Name + " [Raw]";
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
@@ -62,7 +65,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsSaved = IsSaved;
             if (!IsSaved) {
                 //denote editor tab is not saved
-                if (!this.Text.EndsWith('*')) this.Text += "*";
+                this.Text = LoadedFile.Name + " [Raw]*";
             }
             else {
                 //build the JSON to write to file
@@ -74,15 +77,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show("JSON failed to parse in file. Changes not saved.", "Thumper Custom Level Editor");
                     return;
                 }
+                //denote editor tab is not saved
+                this.Text = LoadedFile.Name + " [Raw]";
                 //write JSON to file
                 //TCLE.WriteFileLock(TCLE.lockedfiles[LoadedFile], _saveJSON);
                 TCLE.WriteFileLock(TCLE.lockedfiles.First(x => x.Key.FullName == LoadedFile.FullName).Value, _saveJSON);
 
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                foreach (var dock in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(LoadedFile.Name))) {
+                foreach (var dock in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(LoadedFile.Name))) {
                     if (dock.GetType() == typeof(Form_MasterEditor))
-                        (dock as Form_MasterEditor).ReloadMaster();
+                        (dock as Form_MasterEditor).Reload();
                 }
             }
         }

@@ -457,7 +457,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
         }
 
-        public void ReloadMaster()
+        public void Reload()
         {
             dynamic _load = TCLE.LoadFileLock(LoadedMaster.FullName);
             LoadMaster(_load, LoadedMaster);
