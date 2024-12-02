@@ -376,23 +376,23 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static List<SampleData> _lvlsamples = new();
+        public static List<SampleData> LvlSamples = new();
         public static void LvlReloadSamples()
         {
             if (WorkingFolder == null)
                 return;
-            _lvlsamples.Clear();
+            LvlSamples.Clear();
             //find all samp_ files in the level folder
             List<FileInfo> _sampfiles = WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp").ToList();
             //add default empty sample
-            _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
+            LvlSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
             //iterate over each file
             foreach (FileInfo sampfile in _sampfiles) {
                 //parse file to JSON
                 dynamic _in = TCLE.LoadFileLock(sampfile.FullName);
                 //iterate over items:[] list to get each sample and add names to list
                 foreach (dynamic _samp in _in["items"]) {
-                    _lvlsamples.Add(new SampleData {
+                    LvlSamples.Add(new SampleData {
                         obj_name = ((string)_samp["obj_name"]).Replace(".samp", ""),
                         path = _samp["path"],
                         volume = _samp["volume"],
@@ -403,7 +403,7 @@ namespace Thumper_Custom_Level_Editor
                     });
                 }
             }
-            _lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
+            LvlSamples = LvlSamples.OrderBy(w => w.obj_name).ToList();
             /*
             ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
             //this is for adjusting the dropdown width so that the full item can display

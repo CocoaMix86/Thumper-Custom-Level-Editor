@@ -88,8 +88,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 RecurseNodesFindExpanded(treeView1.Nodes);
             }
             //force each master to recalc runtime in case tree has new files
-            foreach (var dock in TCLE.Instance.dockMain.Documents.Where(x => x.DockHandler.TabText.Contains(".master"))) {
-                (dock as Form_MasterEditor).RecalcLvlRuntime();
+            foreach (var dock in TCLE.Instance.dockMain.Documents) {
+                if (dock.GetType() == typeof(Form_MasterEditor)) (dock as Form_MasterEditor).RecalculateRuntime();
+                if (dock.GetType() == typeof(Form_LvlEditor)) (dock as Form_LvlEditor).RecalculateRuntime();
             }
         }
         private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)

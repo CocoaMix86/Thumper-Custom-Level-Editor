@@ -91,7 +91,7 @@ namespace Thumper_Custom_Level_Editor
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
         public string runtime { 
             get {
-                parent.RecalcLvlRuntime();
+                parent.RecalculateRuntime();
                 return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.dockProjectProperties.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
             }
         }

@@ -19,6 +19,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LvlEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
+            InitializeLvlStuff();
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlVolumeToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
@@ -53,12 +54,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static FileInfo LoadedLvl;
         public bool loadinglvl = false;
-
         List<string> _lvlpaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
-        List<SampleData> _lvlsamples = new();
         dynamic lvljson;
         ObservableCollection<LvlLeafData> _lvlleafs = new();
-
+        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         List<LvlLeafData> clipboardleaf = new();
         List<string> clipboardpaths = new();
         List<int> idxtocolor = new();
@@ -298,15 +297,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if action ADD, add new row to the lvl DGV
             //NewStartingIndex and OldStartingIndex track where the changes were made
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
-                string leafname = _lvlleafs[_in].leafname;
-                lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] { Properties.Resources.editor_leaf, leafname.Replace(".leaf", ""), _lvlleafs[_in].beats });
+                lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] { 
+                    Properties.Resources.editor_leaf,
+                    _lvlleafs[_in].leafname,
+                    0 });
             }
             //if action REMOVE, remove row from the lvl DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
             }
             ///TCLE.HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\leaf_{x.Cells[1].Value}.txt").ToList());
-
+            RecalculateRuntime();
 
             //enable certain buttons if there are enough items for them
             btnLvlLeafDelete.Enabled = _lvlleafs.Count > 0;
@@ -414,7 +415,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveLvl(true, true);
             this.Text = LoadedLvl.Name;
             //reload samples on save
-            LvlReloadSamples();
+            TCLE.LvlReloadSamples();
         }
         /// LVL LOAD
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -724,9 +725,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlLoopRefresh_Click(object sender, EventArgs e)
         {
-            LvlReloadSamples();
+            TCLE.LvlReloadSamples();
             TCLE.PlaySound("UIrefresh");
-            MessageBox.Show($"Found and loaded {_lvlsamples.Count} samples for the current working folder.");
+            MessageBox.Show($"Found and loaded {TCLE.LvlSamples.Count} samples for the current project.");
         }
 
         private void btnLvlRefreshBeats_Click(object sender, EventArgs e)
@@ -802,9 +803,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropLvlInput.Text = (string)_load["input_allowed"];
             dropLvlTutorial.Text = (string)_load["tutorial_type"];
             ///load loop track names and paths to lvlLoopTracks DGV
-            LvlReloadSamples();
+            TCLE.LvlReloadSamples();
             foreach (dynamic samp in _load["loops"]) {
-                string _samplocate = _lvlsamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", ""))?.obj_name ?? _lvlsamples[0].obj_name;
+                string _samplocate = TCLE.LvlSamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", ""))?.obj_name ?? TCLE.LvlSamples[0].obj_name;
                 lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
             }
             foreach (DataGridViewRow r in lvlLoopTracks.Rows)
@@ -859,7 +860,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //custom column containing comboboxes per cell
             lvlLoopTracks.Columns[1].ValueType = typeof(decimal);
             lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToList();
             //lvlLoopTracks.Columns[0].ValueType = typeof(SampleData);
             ///
             //add event handler to this collection
@@ -924,49 +925,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
             btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
             //monke
-        }
-
-        public void LvlReloadSamples()
-        {
-            if (TCLE.WorkingFolder == null)
-                return;
-            loadinglvl = true;
-            _lvlsamples.Clear();
-            //find all samp_ files in the level folder
-            List<FileInfo> _sampfiles = TCLE.WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "\\default.samp").ToList();
-            //add default empty sample
-            _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
-            //iterate over each file
-            foreach (FileInfo sampfile in _sampfiles) {
-                //parse file to JSON
-                dynamic _in = TCLE.LoadFileLock(sampfile.FullName);
-                //iterate over items:[] list to get each sample and add names to list
-                foreach (dynamic _samp in _in["items"]) {
-                    _lvlsamples.Add(new SampleData {
-                        obj_name = ((string)_samp["obj_name"]).Replace(".samp", ""),
-                        path = _samp["path"],
-                        volume = _samp["volume"],
-                        pitch = _samp["pitch"],
-                        pan = _samp["pan"],
-                        offset = _samp["offset"],
-                        channel_group = _samp["channel_group"]
-                    });
-                }
-            }
-            _lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
-            //this is for adjusting the dropdown width so that the full item can display
-            int width = 0;
-            Graphics g = lvlLoopTracks.CreateGraphics();
-            Font font = lvlLoopTracks.DefaultCellStyle.Font;
-            foreach (SampleData s in _lvlsamples) {
-                int newWidth = (int)g.MeasureString(s.obj_name, font).Width;
-                if (width < newWidth) {
-                    width = newWidth;
-                }
-            }
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DropDownWidth = width + 20;
-            loadinglvl = false;
         }
 
         public void SaveLvl(bool save, bool playsound = false)
@@ -1036,6 +994,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 lvlSeqObjs.Columns[idx].HeaderCell.Style.ForeColor = Color.Black;
             }
             lvlSeqObjs.Visible = true;
+        }
+
+        public void RecalculateRuntime()
+        {
+            foreach (LvlLeafData _leaf in _lvlleafs) {
+                FileInfo leaffile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Value.Name == _leaf.leafname).Value;
+                leaffile?.Refresh();
+                int beats = (leaffile != null && leaffile.Exists) ? _leaf.beats : -1;
+                if (beats == -1) {
+                    lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].DefaultCellStyle.BackColor = Color.Maroon;
+                    lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].Cells[2].Value = $"file not found";
+                }
+                else {
+                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].DefaultCellStyle = null;
+                    lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].Cells[2].Value = $"{beats} beats -- {time}";
+                }
+            }
+            lvlLeafList.Refresh();
         }
 
         public JObject LvlBuildSave(string _lvlname)
@@ -1118,7 +1095,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLeafPaths.Rows.Clear();
             lvlSeqObjs.Rows.Clear();
             lvlLoopTracks.Rows.Clear();
-            LvlReloadSamples();
+            TCLE.LvlReloadSamples();
             NUD_lvlApproach.Value = 16;
             NUD_lvlVolume.Value = 0.5M;
             dropLvlInput.SelectedIndex = 0;

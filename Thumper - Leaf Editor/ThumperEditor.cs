@@ -506,19 +506,15 @@ namespace Thumper_Custom_Level_Editor
             dockProjectExplorer.LoadProject(WorkingFolder.FullName);
             dockProjectProperties.LoadProjectProperties(ProjectJson);
 
-            Form_MasterEditor dockMaster = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_GateEditor dockGate = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_LvlEditor dockLvl = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_SampleEditor dockSample = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_LeafEditor dockLeaf = new() { DockAreas = DockAreas.Document | DockAreas.Float };
 
-            dockMaster.Show(dockMain, DockState.Document);
             dockGate.Show(dockMain, DockState.Document);
-            dockLeaf.Show(dockMaster.Pane, DockAlignment.Bottom, 0.6);
-            dockLvl.Show(dockMaster.Pane, DockAlignment.Right, 0.6);
+            dockLeaf.Show(dockGate.Pane, DockAlignment.Bottom, 0.6);
+            dockLvl.Show(dockGate.Pane, DockAlignment.Right, 0.6);
             dockSample.Show(dockMain, DockState.Document);
-
-            dockMaster.Activate();
 
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;

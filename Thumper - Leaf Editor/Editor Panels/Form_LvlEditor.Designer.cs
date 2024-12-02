@@ -820,7 +820,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafPaths.Size = new Size(255, 280);
+            this.lvlLeafPaths.Size = new Size(255, 279);
             this.lvlLeafPaths.TabIndex = 79;
             // 
             // lvlPathsToolStrip
@@ -970,7 +970,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new Size(286, 280);
+            this.lvlLoopTracks.Size = new Size(286, 279);
             this.lvlLoopTracks.TabIndex = 81;
             // 
             // LoopSample

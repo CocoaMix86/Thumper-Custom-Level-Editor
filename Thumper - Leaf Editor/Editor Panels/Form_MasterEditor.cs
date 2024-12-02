@@ -190,7 +190,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 masterLvlList.Rows.RemoveAt(e.OldStartingIndex);
             }
-            RecalcLvlRuntime();
+            RecalculateRuntime();
             //enable certain buttons if there are enough items for them
             btnMasterLvlDelete.Enabled = _masterlvls.Count > 0;
             btnMasterLvlUp.Enabled = _masterlvls.Count > 1;
@@ -494,7 +494,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void RecalcLvlRuntime()
+        public void RecalculateRuntime()
         {
             foreach (MasterLvlData _lvl in _masterlvls) {
                 int beats = TCLE.CalculateSingleLvlRuntime(_lvl);

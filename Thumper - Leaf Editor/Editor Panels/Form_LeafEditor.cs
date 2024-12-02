@@ -611,7 +611,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 label11.Text = "Samples";
                 TCLE.LvlReloadSamples();
                 dropTrackLane.DataSource = null;
-                dropTrackLane.DataSource = TCLE._lvlsamples.Select(x => x.obj_name).ToArray();
+                dropTrackLane.DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToArray();
                 dropTrackLane.SelectedIndex = -1;
             }
             else {
