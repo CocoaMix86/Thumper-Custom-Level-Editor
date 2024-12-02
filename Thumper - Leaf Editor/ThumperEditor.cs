@@ -430,6 +430,12 @@ namespace Thumper_Custom_Level_Editor
                 dockMain.FloatWindows[0].Close();
             }
         }
+
+        private void addNewWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_WorkSpace workspace1 = new();
+            workspace1.Show(dockMain, DockState.Document);
+        }
         #endregion
         #region Toolstrip Help
         private void toolstripHelpTentacles_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0");
@@ -506,15 +512,18 @@ namespace Thumper_Custom_Level_Editor
             dockProjectExplorer.LoadProject(WorkingFolder.FullName);
             dockProjectProperties.LoadProjectProperties(ProjectJson);
 
+            Form_WorkSpace workspace1 = new();
+            workspace1.Show(dockMain, DockState.Document);
+
             Form_GateEditor dockGate = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_LvlEditor dockLvl = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_SampleEditor dockSample = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             Form_LeafEditor dockLeaf = new() { DockAreas = DockAreas.Document | DockAreas.Float };
 
-            dockGate.Show(dockMain, DockState.Document);
+            dockGate.Show(workspace1.dockMain, DockState.Document);
             dockLeaf.Show(dockGate.Pane, DockAlignment.Bottom, 0.6);
             dockLvl.Show(dockGate.Pane, DockAlignment.Right, 0.6);
-            dockSample.Show(dockMain, DockState.Document);
+            dockSample.Show(workspace1.dockMain, DockState.Document);
 
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
