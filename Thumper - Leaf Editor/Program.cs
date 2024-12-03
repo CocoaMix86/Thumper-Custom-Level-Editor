@@ -1,10 +1,5 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.Globalization;
 using System.Reflection;
-using System.Threading;
-using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {

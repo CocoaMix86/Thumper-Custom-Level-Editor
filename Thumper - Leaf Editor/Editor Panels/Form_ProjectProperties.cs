@@ -1,14 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Newtonsoft.Json.Linq;
-using Windows.Networking.NetworkOperators;
-
-namespace Thumper_Custom_Level_Editor.Editor_Panels
+﻿namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public partial class Form_ProjectProperties : WeifenLuo.WinFormsUI.Docking.DockContent
     {

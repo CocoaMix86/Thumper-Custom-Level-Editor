@@ -1,12 +1,5 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Thumper_Custom_Level_Editor
 {

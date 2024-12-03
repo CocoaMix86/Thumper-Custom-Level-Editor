@@ -1,13 +1,11 @@
-﻿using System.Windows.Forms;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
     public partial class ImageMessageBox : Form
 	{
 		private System.Drawing.Size _size;
 
 		public ImageMessageBox()
-		{
+        {
 			InitializeComponent();
 		}
 

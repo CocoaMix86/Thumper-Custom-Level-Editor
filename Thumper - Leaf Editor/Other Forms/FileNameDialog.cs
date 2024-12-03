@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using System.Linq;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
     public partial class FileNameDialog : Form
     {

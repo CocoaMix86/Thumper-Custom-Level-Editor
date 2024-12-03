@@ -1,15 +1,6 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Collections.Generic;
 using System.Windows.Input;
-using Windows.Storage;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {

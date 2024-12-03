@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Windows.Forms;
+﻿using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor
 {

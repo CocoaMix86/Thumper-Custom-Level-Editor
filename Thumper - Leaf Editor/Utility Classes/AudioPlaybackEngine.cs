@@ -1,10 +1,6 @@
 ﻿using NAudio.Vorbis;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {

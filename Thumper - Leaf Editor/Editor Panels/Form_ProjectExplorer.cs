@@ -1,11 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Newtonsoft.Json.Linq;
+﻿using System.Diagnostics;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -29,30 +22,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             txtSearch.LostFocus += txtSearch_LostFocus;
             //populate treeview on first load
             if (_projectfolder != null) {
-                projectfolder = new DirectoryInfo(_projectfolder);
+                ProjectDirectory = new DirectoryInfo(_projectfolder);
                 CreateTreeView();
             }
         }
-        public void LoadProject(string _projectfolder)
+        public void LoadProject(string folderpath)
         {
-            projectfolder = new DirectoryInfo(_projectfolder);
+            ProjectDirectory = new DirectoryInfo(folderpath);
             CreateTreeView();
         }
         #endregion
         #region Variables
-        bool cutfile;
-        bool dontcancelifrename = false;
-        bool filterenabled = false;
-        bool filtersearch = false;
-        string renametype;
-        string renamefile;
-        string renamenode;
-        string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
-        DirectoryInfo projectfolder;
-        TreeNode previousNode;
-        List<TreeNode> filestocopy;
-        List<TreeNode> selectedNodes = new();
-        List<string> expandednodes = new();
+        private bool cutfile;
+        private bool dontcancelifrename = false;
+        private bool filterenabled = false;
+        private bool filtersearch = false;
+        private string renametype;
+        private string renamefile;
+        private string renamenode;
+        private string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
+        private DirectoryInfo ProjectDirectory;
+        private TreeNode previousNode;
+        private List<TreeNode> filestocopy;
+        private List<TreeNode> selectedNodes = new();
+        private List<string> expandednodes = new();
         //string is obj_name, FileInfo is file itself
         public Dictionary<string, FileInfo> projectfiles = new();
         public Dictionary<string, DirectoryInfo> projectfolders = new();
@@ -60,16 +53,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Create Tree
         public void CreateTreeView()
         {
-            if (projectfolder == null) return;
+            if (ProjectDirectory == null) return;
             expandednodes.Clear();
             expandednodes = GetExpandedNodes(treeView1.Nodes);
             //clear existing treeview
             treeView1.Nodes.Clear();
             projectfiles.Clear();
             projectfolders.Clear();
-            if (projectfolder.Exists) {
+            if (ProjectDirectory.Exists) {
                 //Build the tree
-                BuildTree(projectfolder, treeView1.Nodes);
+                BuildTree(ProjectDirectory, treeView1.Nodes);
                 //the root of the tree needs different properties
                 TreeNode ProjectRoot = treeView1.Nodes[0];
                 ProjectRoot.ImageKey = "project";
@@ -275,7 +268,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             string source = renametype == "folder" ? projectfolders[renamefile].FullName : projectfiles[renamefile].FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
-            string dest = $@"{Path.GetDirectoryName(projectfolder.FullName)}\{node.FullPath}";
+            string dest = $@"{Path.GetDirectoryName(ProjectDirectory.FullName)}\{node.FullPath}";
             //check if same name
             if (renamefile == node.FullPath) {
                 return;
@@ -593,7 +586,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private string GetNodeFilePath(TreeNode _node)
         {
-            return $@"{Path.GetDirectoryName(projectfolder.FullName)}\{_node.FullPath}";
+            return $@"{Path.GetDirectoryName(ProjectDirectory.FullName)}\{_node.FullPath}";
         }
 
         private static bool IsAChildOfOtherNodes(TreeNode nodetofind, TreeNode nodetosearch)

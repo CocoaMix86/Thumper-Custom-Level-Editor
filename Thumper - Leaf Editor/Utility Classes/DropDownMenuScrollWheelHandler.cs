@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
     public class DropDownMenuScrollWheelHandler : System.Windows.Forms.IMessageFilter
     {

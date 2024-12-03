@@ -1,21 +1,12 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Vorbis;
 using NAudio.Wave;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using System.Runtime.CompilerServices;
 using WeifenLuo.WinFormsUI.Docking;
-using System.Diagnostics.Metrics;
-using Windows.System.Threading;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -286,8 +277,8 @@ namespace Thumper_Custom_Level_Editor
 
         public static void DeleteFileLock(FileInfo filetodelete)
         {
-            if (lockedfiles.ContainsKey(filetodelete)) {
-                lockedfiles[filetodelete].Close();
+            if (lockedfiles.TryGetValue(filetodelete, out FileStream? value)) {
+                value.Close();
                 lockedfiles.Remove(filetodelete);
             }
             filetodelete.Delete();
@@ -295,8 +286,8 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CloseFileLock(FileInfo filetoclose)
         {
-            if (lockedfiles.ContainsKey(filetoclose)) {
-                lockedfiles[filetoclose].Close();
+            if (lockedfiles.TryGetValue(filetoclose, out FileStream? value)) {
+                value.Close();
                 lockedfiles.Remove(filetoclose);
             }
         }
@@ -506,16 +497,16 @@ namespace Thumper_Custom_Level_Editor
         //find if the document is loaded already in a tab
         //if so, make it activate
         openraw:
-            IDockContent workspacehastab = form.dockMain.Documents.Where(x => (x as Form_WorkSpace).dockMain.Documents.Where(y => y.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()).FirstOrDefault();
+            IDockContent workspacehastab = form.dockMain.Documents.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")));
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();
-                (workspacehastab as Form_WorkSpace).dockMain.Documents.Where(y => y.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).First().DockHandler.Activate();
+                (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).DockHandler.Activate();
                 return;
             }
             //open document in raw viewer if that option was selected
             if (openraw) {
                 Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
-                rawtext.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
+                rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
                 return;
             }
             //otherwise, open a standard editor for the document type

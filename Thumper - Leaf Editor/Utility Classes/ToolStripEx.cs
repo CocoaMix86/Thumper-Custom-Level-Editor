@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Windows.Forms;
-using System;
 
 namespace Thumper_Custom_Level_Editor
 {

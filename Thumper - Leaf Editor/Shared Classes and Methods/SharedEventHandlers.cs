@@ -1,18 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using NAudio.Vorbis;
-using NAudio.Wave;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
-using System.Reflection;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
     {

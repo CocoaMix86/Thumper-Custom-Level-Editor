@@ -1,7 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using System;
-using System.Windows.Forms;
-using System.IO;
 using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor

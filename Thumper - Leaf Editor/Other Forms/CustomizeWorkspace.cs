@@ -1,11 +1,4 @@
 ﻿///using Cyotek.Windows.Forms;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-
 namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form

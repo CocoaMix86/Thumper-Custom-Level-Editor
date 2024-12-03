@@ -1,13 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -47,26 +40,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private static FileInfo LoadedLeaf;
-        dynamic leafjson;
-        public bool loadingleaf = false;
-        public bool controldown = false;
-        public bool shiftdown = false;
-        public bool altdown = false;
-        public bool rightclickdown = false;
-        public int leafeditorcell = 0;
-        public bool randomizing = false;
-        public bool ismoving = false;
-        public int hscrollposition = 0;
+        private dynamic leafjson;
+        private bool loadingleaf = false;
+        private bool controldown = false;
+        private bool shiftdown = false;
+        private bool altdown = false;
+        private bool rightclickdown = false;
+        private int leafeditorcell = 0;
+        private bool randomizing = false;
+        private bool ismoving = false;
+        private int hscrollposition = 0;
 
-        public List<Sequencer_Object> _tracks = new();
-        private HashSet<Object_Params> _objects { get { return TCLE.LeafObjects; } }
-        private Dictionary<string, string> objectcolors { get { return TCLE.ObjectColors; } }
+        private List<Sequencer_Object> _tracks = new();
+        private static HashSet<Object_Params> _objects => TCLE.LeafObjects;
+        private static Dictionary<string, string> objectcolors => TCLE.ObjectColors;
         //public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
-        public Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
-        public List<string> lanenames = new() { "left", "center", "right" };
-        public Dictionary<string, string> kTraitTooltips = new() { { "kTraitBool", "BOOL: accepts values 1 (on) or 0 (off)." }, { "kTraitAction", "ACTION: accepts values 1 (activate)." }, { "kTraitFloat", "FLOAT: accepts decimal values from -32000.0000 to 32000.0000." }, { "kTraitInt", "INT: accepts integer (no decimal) values from -32000 to 32000." }, { "kTraitColor", "COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors." } };
-        public List<Sequencer_Object> clipboardtracks = new();
-        public List<SaveState> _undolistleaf = new();
+        private Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
+        private List<string> lanenames = new() { "left", "center", "right" };
+        private Dictionary<string, string> kTraitTooltips = new() { { "kTraitBool", "BOOL: accepts values 1 (on) or 0 (off)." }, { "kTraitAction", "ACTION: accepts values 1 (activate)." }, { "kTraitFloat", "FLOAT: accepts decimal values from -32000.0000 to 32000.0000." }, { "kTraitInt", "INT: accepts integer (no decimal) values from -32000 to 32000." }, { "kTraitColor", "COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors." } };
+        private List<Sequencer_Object> clipboardtracks = new();
+        private List<SaveState> _undolistleaf = new();
         #endregion
         #region EventHandlers
         ///        ///
@@ -1607,11 +1600,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     try {
                         string reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
-                        Object_Params objmatch = _objects.Where(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname")).First();
+                        Object_Params objmatch = _objects.First(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname"));
                         _s.friendly_param = objmatch.param_displayname ?? "";
                         _s.friendly_type = objmatch.category ?? "";
-                    }
-                    catch (Exception) {
+                    } catch (Exception) {
                         loadfail = true;
                         loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
                     }
