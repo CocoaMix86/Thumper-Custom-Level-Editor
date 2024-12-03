@@ -13,6 +13,7 @@ using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Runtime.CompilerServices;
+using WeifenLuo.WinFormsUI.ThemeVS2013;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -23,6 +24,7 @@ namespace Thumper_Custom_Level_Editor
         public static DockPanel DockMain { get { return Instance.dockMain; } }
         public static IEnumerable<IDockContent> Documents { get { return Instance.dockMain.Documents; } }
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
+        public static ContextMenuStrip TabRightClickMenu;
         Properties.Settings settings = Properties.Settings.Default;
         public static dynamic ProjectJson;
         private DirectoryInfo workingfolder
@@ -101,6 +103,7 @@ namespace Thumper_Custom_Level_Editor
             dockMain.Theme = new VS2015DarkTheme();
             beeble.Show();
             Instance = this;
+            TabRightClickMenu = contextmenuTabClick;
 
             MaximizeScreenBounds();
             ColorFormElements();
@@ -114,6 +117,7 @@ namespace Thumper_Custom_Level_Editor
             contextMenuProject.Renderer = new ContextMenuColors();
             contextmenuWindow.Renderer = new ContextMenuColors();
             contextmenuHelp.Renderer = new ContextMenuColors();
+            contextmenuTabClick.Renderer = new ContextMenuColors();
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
@@ -407,8 +411,13 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Toolstrip Window
-        private void toolstripWindowFloat_Click(object sender, EventArgs e) => dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
-        private void toolstripWindowFloatAll_Click(object sender, EventArgs e) => dockMain.ActivePane.DockState = DockState.Float;
+        private void toolstripWindowFloat_Click(object sender, EventArgs e) => (ActiveWorkspace as Form_WorkSpace).dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
+        private void toolstripWindowFloatAll_Click(object sender, EventArgs e)
+        {
+            foreach (DockContent dc in (ActiveWorkspace as Form_WorkSpace).dockMain.Documents) {
+                dc.DockHandler.DockState = DockState.Float;
+            }
+        }
         private void toolstripWindowDock_Click(object sender, EventArgs e) => dockMain.ActiveDocument.DockHandler.DockState = DockState.Document;
 
         private void toolstripWindowCloseAll_Click(object sender, EventArgs e)
@@ -502,6 +511,7 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip Toolbar
         #endregion
 
+        #region DockPanel
         private void toolstripOpenPanels_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists(txtFilePath.Text)) {
@@ -515,16 +525,6 @@ namespace Thumper_Custom_Level_Editor
             Form_WorkSpace workspace1 = new();
             workspace1.Show(dockMain, DockState.Document);
 
-            Form_GateEditor dockGate = new() { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_LvlEditor dockLvl = new() { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_SampleEditor dockSample = new() { DockAreas = DockAreas.Document | DockAreas.Float };
-            Form_LeafEditor dockLeaf = new() { DockAreas = DockAreas.Document | DockAreas.Float };
-
-            dockGate.Show(workspace1.dockMain, DockState.Document);
-            dockLeaf.Show(dockGate.Pane, DockAlignment.Bottom, 0.6);
-            dockLvl.Show(dockGate.Pane, DockAlignment.Right, 0.6);
-            dockSample.Show(workspace1.dockMain, DockState.Document);
-
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
         }
@@ -534,7 +534,7 @@ namespace Thumper_Custom_Level_Editor
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
         {
             //if (dockMain.ActivePane?.ActiveContent.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
-                //ActiveWorkspace = dockMain.ActiveDocument;
+            //ActiveWorkspace = dockMain.ActiveDocument;
         }
 
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
@@ -552,6 +552,15 @@ namespace Thumper_Custom_Level_Editor
             if (activedocument.GetType() == typeof(Form_RawText)) {
                 (activedocument as Form_RawText).Save();
             }
+        }
+        #endregion
+        #region Dock Tab Rightclick
+        #endregion
+
+        public static IDockContent GlobalActiveDocument;
+        private void contextmenuTabClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            toolstripTabSave.Text = "Save " + GlobalActiveDocument.DockHandler.TabText;
         }
     }
 }

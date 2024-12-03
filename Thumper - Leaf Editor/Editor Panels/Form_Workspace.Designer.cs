@@ -46,6 +46,10 @@
             this.dockMain.ShowDocumentIcon = true;
             this.dockMain.Size = new Size(478, 432);
             this.dockMain.TabIndex = 148;
+            this.dockMain.ContentAdded += this.dockMain_ContentAdded;
+            this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
+            this.dockMain.ActiveContentChanged += this.dockMain_ActiveContentChanged;
+            this.dockMain.Enter += this.dockMain_Enter;
             // 
             // Form_WorkSpace
             // 

@@ -149,6 +149,17 @@
             this.toolstripLevelName = new ToolStripMenuItem();
             this.toolstripOpenPanels = new ToolStripMenuItem();
             this.panelFill = new Panel();
+            this.contextmenuTabClick = new ContextMenuStrip(this.components);
+            this.toolstripTabSave = new ToolStripMenuItem();
+            this.toolstripTabClose = new ToolStripMenuItem();
+            this.toolstripTabCloseall = new ToolStripMenuItem();
+            this.toolstripTabCloseOther = new ToolStripMenuItem();
+            this.toolStripSeparator3 = new ToolStripSeparator();
+            this.toolstripTabCopyPath = new ToolStripMenuItem();
+            this.toolstripTabOpenFolder = new ToolStripMenuItem();
+            this.toolStripSeparator17 = new ToolStripSeparator();
+            this.toolstripTabFloat = new ToolStripMenuItem();
+            this.toolstripTabFloatAll = new ToolStripMenuItem();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -165,6 +176,7 @@
             this.panelToolStrips.SuspendLayout();
             this.toolStripTitle.SuspendLayout();
             this.panelFill.SuspendLayout();
+            this.contextmenuTabClick.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenuItem1
@@ -598,7 +610,7 @@
             // toolstripFileSave
             // 
             this.toolstripFileSave.ForeColor = Color.White;
-            this.toolstripFileSave.Image = Properties.Resources.icon_save_all;
+            this.toolstripFileSave.Image = Properties.Resources.icon_save;
             this.toolstripFileSave.Name = "toolstripFileSave";
             this.toolstripFileSave.ShortcutKeys = Keys.Control | Keys.S;
             this.toolstripFileSave.Size = new Size(251, 22);
@@ -907,13 +919,13 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(185, 148);
+            this.contextmenuWindow.Size = new Size(195, 148);
             // 
             // toolstripWindowFloat
             // 
             this.toolstripWindowFloat.ForeColor = Color.White;
             this.toolstripWindowFloat.Name = "toolstripWindowFloat";
-            this.toolstripWindowFloat.Size = new Size(184, 22);
+            this.toolstripWindowFloat.Size = new Size(194, 22);
             this.toolstripWindowFloat.Text = "Float Tab";
             this.toolstripWindowFloat.Click += this.toolstripWindowFloat_Click;
             // 
@@ -921,7 +933,7 @@
             // 
             this.toolstripWindowFloatAll.ForeColor = Color.White;
             this.toolstripWindowFloatAll.Name = "toolstripWindowFloatAll";
-            this.toolstripWindowFloatAll.Size = new Size(184, 22);
+            this.toolstripWindowFloatAll.Size = new Size(194, 22);
             this.toolstripWindowFloatAll.Text = "Float All Tabs";
             this.toolstripWindowFloatAll.Click += this.toolstripWindowFloatAll_Click;
             // 
@@ -929,7 +941,7 @@
             // 
             this.toolstripWindowDock.ForeColor = Color.White;
             this.toolstripWindowDock.Name = "toolstripWindowDock";
-            this.toolstripWindowDock.Size = new Size(184, 22);
+            this.toolstripWindowDock.Size = new Size(194, 22);
             this.toolstripWindowDock.Text = "Dock Tab";
             this.toolstripWindowDock.Click += this.toolstripWindowDock_Click;
             // 
@@ -937,34 +949,34 @@
             // 
             this.toolStripSeparator11.ForeColor = Color.White;
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new Size(181, 6);
+            this.toolStripSeparator11.Size = new Size(191, 6);
             // 
             // toolstripWindowCloseAll
             // 
             this.toolstripWindowCloseAll.ForeColor = Color.White;
             this.toolstripWindowCloseAll.Name = "toolstripWindowCloseAll";
-            this.toolstripWindowCloseAll.Size = new Size(184, 22);
-            this.toolstripWindowCloseAll.Text = "Close All Tabs";
+            this.toolstripWindowCloseAll.Size = new Size(194, 22);
+            this.toolstripWindowCloseAll.Text = "Close All Workspaces";
             this.toolstripWindowCloseAll.Click += this.toolstripWindowCloseAll_Click;
             // 
             // toolstripWindowCloseEditors
             // 
             this.toolstripWindowCloseEditors.ForeColor = Color.White;
             this.toolstripWindowCloseEditors.Name = "toolstripWindowCloseEditors";
-            this.toolstripWindowCloseEditors.Size = new Size(184, 22);
-            this.toolstripWindowCloseEditors.Text = "Close Editor Tabs";
+            this.toolstripWindowCloseEditors.Size = new Size(194, 22);
+            this.toolstripWindowCloseEditors.Text = "Close All In Workspace";
             this.toolstripWindowCloseEditors.Click += this.toolstripWindowCloseEditors_Click;
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new Size(181, 6);
+            this.toolStripSeparator12.Size = new Size(191, 6);
             // 
             // addNewWorkspaceToolStripMenuItem
             // 
             this.addNewWorkspaceToolStripMenuItem.ForeColor = Color.White;
             this.addNewWorkspaceToolStripMenuItem.Name = "addNewWorkspaceToolStripMenuItem";
-            this.addNewWorkspaceToolStripMenuItem.Size = new Size(184, 22);
+            this.addNewWorkspaceToolStripMenuItem.Size = new Size(194, 22);
             this.addNewWorkspaceToolStripMenuItem.Text = "Add New Workspace";
             this.addNewWorkspaceToolStripMenuItem.Click += this.addNewWorkspaceToolStripMenuItem_Click;
             // 
@@ -1324,6 +1336,97 @@
             this.panelFill.Size = new Size(984, 444);
             this.panelFill.TabIndex = 153;
             // 
+            // contextmenuTabClick
+            // 
+            this.contextmenuTabClick.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextmenuTabClick.Items.AddRange(new ToolStripItem[] { this.toolstripTabSave, this.toolstripTabClose, this.toolstripTabCloseall, this.toolstripTabCloseOther, this.toolStripSeparator3, this.toolstripTabCopyPath, this.toolstripTabOpenFolder, this.toolStripSeparator17, this.toolstripTabFloat, this.toolstripTabFloatAll });
+            this.contextmenuTabClick.Name = "contextmenuHelp";
+            this.contextmenuTabClick.RenderMode = ToolStripRenderMode.System;
+            this.contextmenuTabClick.Size = new Size(298, 192);
+            this.contextmenuTabClick.Opening += this.contextmenuTabClick_Opening;
+            // 
+            // toolstripTabSave
+            // 
+            this.toolstripTabSave.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripTabSave.ForeColor = Color.White;
+            this.toolstripTabSave.Image = Properties.Resources.icon_save;
+            this.toolstripTabSave.Name = "toolstripTabSave";
+            this.toolstripTabSave.ShortcutKeys = Keys.Control | Keys.S;
+            this.toolstripTabSave.Size = new Size(297, 22);
+            this.toolstripTabSave.Text = "Save []";
+            // 
+            // toolstripTabClose
+            // 
+            this.toolstripTabClose.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripTabClose.ForeColor = Color.White;
+            this.toolstripTabClose.Name = "toolstripTabClose";
+            this.toolstripTabClose.ShortcutKeys = Keys.Control | Keys.F4;
+            this.toolstripTabClose.Size = new Size(297, 22);
+            this.toolstripTabClose.Text = "Close";
+            // 
+            // toolstripTabCloseall
+            // 
+            this.toolstripTabCloseall.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripTabCloseall.ForeColor = Color.White;
+            this.toolstripTabCloseall.Image = Properties.Resources.icon_remove2;
+            this.toolstripTabCloseall.Name = "toolstripTabCloseall";
+            this.toolstripTabCloseall.Size = new Size(297, 22);
+            this.toolstripTabCloseall.Text = "Close All Tabs in Workspace";
+            // 
+            // toolstripTabCloseOther
+            // 
+            this.toolstripTabCloseOther.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripTabCloseOther.ForeColor = Color.White;
+            this.toolstripTabCloseOther.Name = "toolstripTabCloseOther";
+            this.toolstripTabCloseOther.Size = new Size(297, 22);
+            this.toolstripTabCloseOther.Text = "Close Other Tabs in Workspace";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new Size(294, 6);
+            // 
+            // toolstripTabCopyPath
+            // 
+            this.toolstripTabCopyPath.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripTabCopyPath.ForeColor = Color.White;
+            this.toolstripTabCopyPath.Image = Properties.Resources.icon_copy2;
+            this.toolstripTabCopyPath.Name = "toolstripTabCopyPath";
+            this.toolstripTabCopyPath.Size = new Size(297, 22);
+            this.toolstripTabCopyPath.Text = "Copy Full Path";
+            // 
+            // toolstripTabOpenFolder
+            // 
+            this.toolstripTabOpenFolder.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripTabOpenFolder.ForeColor = Color.White;
+            this.toolstripTabOpenFolder.Image = Properties.Resources.icon_folder;
+            this.toolstripTabOpenFolder.Name = "toolstripTabOpenFolder";
+            this.toolstripTabOpenFolder.Size = new Size(297, 22);
+            this.toolstripTabOpenFolder.Text = "Open Containing Folder";
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new Size(294, 6);
+            // 
+            // toolstripTabFloat
+            // 
+            this.toolstripTabFloat.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripTabFloat.ForeColor = Color.White;
+            this.toolstripTabFloat.Name = "toolstripTabFloat";
+            this.toolstripTabFloat.Size = new Size(297, 22);
+            this.toolstripTabFloat.Text = "Float";
+            this.toolstripTabFloat.Click += this.toolstripWindowFloat_Click;
+            // 
+            // toolstripTabFloatAll
+            // 
+            this.toolstripTabFloatAll.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripTabFloatAll.ForeColor = Color.White;
+            this.toolstripTabFloatAll.Name = "toolstripTabFloatAll";
+            this.toolstripTabFloatAll.Size = new Size(297, 22);
+            this.toolstripTabFloatAll.Text = "Float All                                                            ";
+            this.toolstripTabFloatAll.Click += this.toolstripWindowFloatAll_Click;
+            // 
             // TCLE
             // 
             this.AutoScaleMode = AutoScaleMode.None;
@@ -1371,6 +1474,7 @@
             this.toolStripTitle.ResumeLayout(false);
             this.toolStripTitle.PerformLayout();
             this.panelFill.ResumeLayout(false);
+            this.contextmenuTabClick.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -1489,6 +1593,17 @@
         public WeifenLuo.WinFormsUI.Docking.DockPanel dockMain;
         private ToolStripMenuItem addNewWorkspaceToolStripMenuItem;
         private Panel panelFill;
+        private ContextMenuStrip contextmenuTabClick;
+        private ToolStripMenuItem toolstripTabSave;
+        private ToolStripMenuItem toolstripTabClose;
+        private ToolStripMenuItem toolstripTabCloseall;
+        private ToolStripMenuItem toolstripTabOpenFolder;
+        private ToolStripMenuItem toolstripTabCloseOther;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem toolstripTabCopyPath;
+        private ToolStripSeparator toolStripSeparator17;
+        private ToolStripMenuItem toolstripTabFloat;
+        private ToolStripMenuItem toolstripTabFloatAll;
     }
 }
 

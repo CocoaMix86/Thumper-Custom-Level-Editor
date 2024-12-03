@@ -23,5 +23,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockMain.Theme = new VS2015DarkTheme();
         }
         #endregion
+
+        private void dockMain_ContentAdded(object sender, DockContentEventArgs e) => e.Content.DockHandler.TabPageContextMenuStrip = TCLE.TabRightClickMenu;
+        private void dockMain_Enter(object sender, EventArgs e) => TCLE.GlobalActiveDocument = dockMain.ActiveContent;
+        private void dockMain_ActiveDocumentChanged(object sender, EventArgs e) => TCLE.GlobalActiveDocument = dockMain.ActiveContent;
+        private void dockMain_ActiveContentChanged(object sender, EventArgs e) => TCLE.GlobalActiveDocument = dockMain.ActiveContent;
     }
 }
