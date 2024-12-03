@@ -293,6 +293,14 @@ namespace Thumper_Custom_Level_Editor
             filetodelete.Delete();
         }
 
+        public static void CloseFileLock(FileInfo filetoclose)
+        {
+            if (lockedfiles.ContainsKey(filetoclose)) {
+                lockedfiles[filetoclose].Close();
+                lockedfiles.Remove(filetoclose);
+            }
+        }
+
         public static void ClearFileLock()
         {
             //clear previously locked files
@@ -514,23 +522,23 @@ namespace Thumper_Custom_Level_Editor
             string filetype = filepath.Extension;
             if (filetype == ".master") {
                 Form_MasterEditor master = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                master.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
+                master.Show(ActiveWorkspace.dockMain, DockState.Document);
             }
             else if (filetype == ".lvl") {
                 Form_LvlEditor lvl = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                lvl.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
+                lvl.Show(ActiveWorkspace.dockMain, DockState.Document);
             }
             else if (filetype == ".gate") {
                 Form_GateEditor gate = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                gate.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
+                gate.Show(ActiveWorkspace.dockMain, DockState.Document);
             }
             else if (filetype == ".leaf") {
                 Form_LeafEditor leaf = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                leaf.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
+                leaf.Show(ActiveWorkspace.dockMain, DockState.Document);
             }
             else if (filetype == ".samp") {
                 Form_SampleEditor sample = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                sample.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
+                sample.Show(ActiveWorkspace.dockMain, DockState.Document);
             }
             //if file type not supported, open raw
             else {

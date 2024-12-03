@@ -437,14 +437,14 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripWindowCloseAll_Click(object sender, EventArgs e)
         {
             while (dockMain.Documents.Count() > 0)
-                dockMain.Documents.First().DockHandler.DockPanel = null;
+                dockMain.Documents.First().DockHandler.Dispose();
         }
 
         private void toolstripWindowCloseEditors_Click(object sender, EventArgs e)
         {
             Form_WorkSpace fws = dockMain.ActiveDocument as Form_WorkSpace;
             while (fws.dockMain.Documents.Count() > 0)
-                fws.dockMain.Documents.First().DockHandler.DockPanel = null;
+                fws.dockMain.Documents.First().DockHandler.Dispose();
         }
 
         private void addNewWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -560,13 +560,13 @@ namespace Thumper_Custom_Level_Editor
         }
         private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
 
-        public static IDockContent ActiveWorkspace;
+        public static Form_WorkSpace ActiveWorkspace;
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
             if (dockMain.ActiveDocument == null)
                 return;
             if (dockMain.ActiveDocument.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
-                ActiveWorkspace = dockMain.ActiveDocument;
+                ActiveWorkspace = dockMain.ActiveDocument as Form_WorkSpace;
         }
         #endregion
         #region Dock Tab Rightclick
@@ -574,6 +574,20 @@ namespace Thumper_Custom_Level_Editor
         private void contextmenuTabClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             toolstripTabSave.Text = "Save " + GlobalActiveDocument.DockHandler.TabText;
+        }
+
+        private void toolstripTabClose_Click(object sender, EventArgs e)
+        {
+            GlobalActiveDocument.DockHandler.Dispose();
+        }
+
+        private void toolstripTabCloseOther_Click(object sender, EventArgs e)
+        {
+            Form_WorkSpace fws = dockMain.ActiveDocument as Form_WorkSpace;
+            foreach (IDockContent document in fws.dockMain.Documents.ToList()) {
+                if (document != GlobalActiveDocument)
+                    document.DockHandler.Dispose();
+            }
         }
         #endregion
     }

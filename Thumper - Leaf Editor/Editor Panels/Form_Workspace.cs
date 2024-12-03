@@ -28,5 +28,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void dockMain_Enter(object sender, EventArgs e) => TCLE.GlobalActiveDocument = dockMain.ActiveContent;
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e) => TCLE.GlobalActiveDocument = dockMain.ActiveContent;
         private void dockMain_ActiveContentChanged(object sender, EventArgs e) => TCLE.GlobalActiveDocument = dockMain.ActiveContent;
+
+        private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
+        {
+            TCLE.CloseFileLock(TCLE.dockProjectExplorer.projectfiles.Where(x => x.Value.Name == e.Content.DockHandler.TabText).First().Value);
+        }
     }
 }
