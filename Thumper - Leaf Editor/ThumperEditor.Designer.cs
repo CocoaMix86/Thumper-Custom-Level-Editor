@@ -476,7 +476,6 @@
             this.dockMain.Size = new Size(984, 452);
             this.dockMain.TabIndex = 147;
             this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
-            this.dockMain.ActivePaneChanged += this.dockMain_ActivePaneChanged;
             // 
             // txtFilePath
             // 
@@ -541,9 +540,9 @@
             this.contextmenuFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.newToolStripMenuItem, this.toolStripMenuItem4, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolStripMenuItem5, this.toolStripMenuItem63, this.toolStripSeparator4, this.toolstripFileExit });
             this.contextmenuFile.Name = "contextmenuFile";
-            this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
             this.contextmenuFile.Size = new Size(252, 198);
+            this.contextmenuFile.Opening += this.contextmenuFile_Opening;
             // 
             // newToolStripMenuItem
             // 
@@ -1156,7 +1155,7 @@
             this.toolStripMain.Location = new Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = ToolStripRenderMode.System;
-            this.toolStripMain.Size = new Size(139, 25);
+            this.toolStripMain.Size = new Size(170, 25);
             this.toolStripMain.TabIndex = 151;
             this.toolStripMain.Text = "toolStripMain";
             // 
@@ -1197,6 +1196,7 @@
             this.toolstripMainSaveAll.Name = "toolstripMainSaveAll";
             this.toolstripMainSaveAll.Size = new Size(23, 22);
             this.toolstripMainSaveAll.Text = "toolStripButton6";
+            this.toolstripMainSaveAll.Click += this.toolstripMainSaveAll_Click;
             // 
             // toolStripSeparator13
             // 
@@ -1354,6 +1354,7 @@
             this.toolstripTabSave.ShortcutKeys = Keys.Control | Keys.S;
             this.toolstripTabSave.Size = new Size(297, 22);
             this.toolstripTabSave.Text = "Save []";
+            this.toolstripTabSave.Click += this.toolstripMainSave_Click;
             // 
             // toolstripTabClose
             // 

@@ -301,6 +301,20 @@ namespace Thumper_Custom_Level_Editor
         #endregion
 
         #region Toolstrip File
+        private void contextmenuFile_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (GlobalActiveDocument == null) {
+                toolstripFileSave.Text = "Save";
+                toolstripFileSaveAs.Text = "Save As...";
+                toolstripFileSave.Enabled = toolstripFileSaveAs.Enabled = false;
+            }
+            else {
+                toolstripFileSave.Text = "Save " + GlobalActiveDocument.DockHandler.TabText;
+                toolstripFileSaveAs.Text = "Save " + GlobalActiveDocument.DockHandler.TabText + " As...";
+                toolstripFileSave.Enabled = toolstripFileSaveAs.Enabled = true;
+            }
+        }
+
         private void toolstripFileNewProject_Click(object sender, EventArgs e)
         {
             ProjectPropertiesForm customlevel = new(true);
@@ -357,16 +371,16 @@ namespace Thumper_Custom_Level_Editor
             if (!Directory.Exists($@"{AppLocation}\templates")) {
                 Directory.CreateDirectory($@"{AppLocation}\templates");
             }
-            File.WriteAllText($@"{AppLocation}\templates\leaf_singletrack.txt", Properties.Resources.leaf_singletrack);
-            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack.txt", Properties.Resources.leaf_multitrack);
-            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.txt", Properties.Resources.leaf_multitrack_ring_bar);
+            File.WriteAllText($@"{AppLocation}\templates\singletrack.leaf", Properties.Resources.leaf_singletrack);
+            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack.leaf", Properties.Resources.leaf_multitrack);
+            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
             File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
             File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
         }
 
         private void toolstripFileExit_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
         #endregion
         #region Toolstrip Edit
@@ -422,22 +436,15 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripWindowCloseAll_Click(object sender, EventArgs e)
         {
-            int contents = dockMain.Contents.Count;
-            for (int x = 0; x < contents; x++) {
-                dockMain.Contents[0].DockHandler.DockPanel = null;
-            }
+            while (dockMain.Documents.Count() > 0)
+                dockMain.Documents.First().DockHandler.DockPanel = null;
         }
 
         private void toolstripWindowCloseEditors_Click(object sender, EventArgs e)
         {
-            int docs = dockMain.DocumentsCount;
-            int floats = dockMain.FloatWindows.Count;
-            for (int x = 0; x < docs; x++) {
-                dockMain.Documents.ToList()[0].DockHandler.DockPanel = null;
-            }
-            for (int x = 0; x < floats; x++) {
-                dockMain.FloatWindows[0].Close();
-            }
+            Form_WorkSpace fws = dockMain.ActiveDocument as Form_WorkSpace;
+            while (fws.dockMain.Documents.Count() > 0)
+                fws.dockMain.Documents.First().DockHandler.DockPanel = null;
         }
 
         private void addNewWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -509,6 +516,29 @@ namespace Thumper_Custom_Level_Editor
         #endregion
 
         #region Toolstrip Toolbar
+        private void toolstripMainSave_Click(object sender, EventArgs e)
+        {
+            if (GlobalActiveDocument.GetType() == typeof(Form_MasterEditor)) {
+                (GlobalActiveDocument as Form_MasterEditor).Save();
+            }
+            if (GlobalActiveDocument.GetType() == typeof(Form_RawText)) {
+                (GlobalActiveDocument as Form_RawText).Save();
+            }
+        }
+
+        private void toolstripMainSaveAll_Click(object sender, EventArgs e)
+        {
+            foreach (Form_WorkSpace workspace in DockMain.Documents) {
+                foreach (IDockContent document in workspace.dockMain.Documents) {
+                    if (document.GetType() == typeof(Form_MasterEditor)) {
+                        (document as Form_MasterEditor).Save();
+                    }
+                    if (document.GetType() == typeof(Form_RawText)) {
+                        (document as Form_RawText).Save();
+                    }
+                }
+            }
+        }
         #endregion
 
         #region DockPanel
@@ -531,36 +561,20 @@ namespace Thumper_Custom_Level_Editor
         private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
 
         public static IDockContent ActiveWorkspace;
-        private void dockMain_ActivePaneChanged(object sender, EventArgs e)
-        {
-            //if (dockMain.ActivePane?.ActiveContent.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
-            //ActiveWorkspace = dockMain.ActiveDocument;
-        }
-
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
+            if (dockMain.ActiveDocument == null)
+                return;
             if (dockMain.ActiveDocument.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
                 ActiveWorkspace = dockMain.ActiveDocument;
         }
-
-        private void toolstripMainSave_Click(object sender, EventArgs e)
-        {
-            var activedocument = dockMain.ActiveDocument;
-            if (activedocument.GetType() == typeof(Form_MasterEditor)) {
-                (activedocument as Form_MasterEditor).Save();
-            }
-            if (activedocument.GetType() == typeof(Form_RawText)) {
-                (activedocument as Form_RawText).Save();
-            }
-        }
         #endregion
         #region Dock Tab Rightclick
-        #endregion
-
         public static IDockContent GlobalActiveDocument;
         private void contextmenuTabClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             toolstripTabSave.Text = "Save " + GlobalActiveDocument.DockHandler.TabText;
         }
+        #endregion
     }
 }
