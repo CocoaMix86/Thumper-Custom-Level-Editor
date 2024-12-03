@@ -123,6 +123,9 @@ dotnet_diagnostic.CA1711.severity = none
 # CA1707: Identifiers should not contain underscores
 dotnet_diagnostic.CA1707.severity = none
 
+# CA1515: Consider making public types internal
+dotnet_diagnostic.CA1515.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 
@@ -181,7 +184,7 @@ dotnet_style_prefer_auto_properties = true:silent
 dotnet_style_object_initializer = true:suggestion
 dotnet_style_collection_initializer = true:suggestion
 dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
-dotnet_style_prefer_conditional_expression_over_assignment = true:silent
+dotnet_style_prefer_conditional_expression_over_assignment = true:none
 dotnet_style_prefer_conditional_expression_over_return = true:silent
 dotnet_style_explicit_tuple_names = true:suggestion
 dotnet_style_prefer_inferred_tuple_names = true:suggestion
@@ -204,3 +207,6 @@ dotnet_style_qualification_for_field = true:silent
 dotnet_style_qualification_for_property = true:silent
 dotnet_style_qualification_for_method = true:silent
 dotnet_style_qualification_for_event = true:silent
+
+# IDE0045: Convert to conditional expression
+dotnet_diagnostic.IDE0045.severity = none

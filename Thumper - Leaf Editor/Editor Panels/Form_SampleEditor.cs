@@ -24,10 +24,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private FileInfo loadedsample
         {
-            get => loadedsample;
+            get => LoadedSample;
             set {
                 if (loadedsample != value) {
-                    loadedsample = value;
+                    LoadedSample = value;
                     if (!LoadedSample.Exists) {
                         LoadedSample.CreateText();
                     }

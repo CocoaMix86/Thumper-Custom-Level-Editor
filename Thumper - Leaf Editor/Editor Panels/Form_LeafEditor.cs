@@ -1492,9 +1492,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             bool _switch = true;
             //grab the first part of the time sig. This represents how many beats are in a bar
-            //tryparse to see if it fails. If it does, timesigbeats is 0, so then do nothing
-            int.TryParse(dropTimeSig.Text.Split('/')[0], out int timesigbeats);
-            if (timesigbeats == 0)
+            //tryparse to see if it fails.
+            if (!int.TryParse(dropTimeSig.Text.Split('/')[0], out int timesigbeats))
                 return;
             for (int i = 0; i < _beats; i++) {
                 //whenever `i` is a multiple of the time sig, switch colors
