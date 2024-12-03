@@ -5,16 +5,12 @@ namespace Thumper_Custom_Level_Editor
     {
         private ColorDialog colorDialogNew = new(); //{ BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
         private string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
-        public HashSet<Object_Params> _objects = new();
         private Dictionary<string, string> objectcolors = new();
         private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
-        private TCLE _mainform { get; set; }
 
-        public CustomizeWorkspace(HashSet<Object_Params> thelist, TCLE form)
+        public CustomizeWorkspace()
         {
             InitializeComponent();
-            _mainform = form;
-            _objects = thelist;
             this.BackColor = Properties.Settings.Default.custom_bgcolor;
             //set button back colors to the set settings
             btnBGColor.BackColor = Properties.Settings.Default.custom_bgcolor;
@@ -31,12 +27,12 @@ namespace Thumper_Custom_Level_Editor
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //
             Dictionary<string, string> import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors2.2.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]): null;
-            foreach (Object_Params _obj in _objects) {
+            foreach (Object_Params _obj in TCLE.LeafObjects) {
                 objectcolors.Add(_obj.param_displayname, import.TryGetValue(_obj.param_displayname, out string value) ? value : "-8355585");
             }
             //
-            dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
-            dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
+            dropObjects.DataSource = TCLE.LeafObjects.Select(x => x.category).Distinct().ToList();
+            dropParamPath.DataSource = TCLE.LeafObjects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
 
             //locate keybinds file. If not exist, create it from internal resource
             if (!File.Exists($@"{AppLoc}\templates\keybinds.txt"))
@@ -84,7 +80,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void dropObjects_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
+            dropParamPath.DataSource = TCLE.LeafObjects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
         }
 
         private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,7 +124,7 @@ namespace Thumper_Custom_Level_Editor
         /// 
         /// This is all for handling keybinds
         ///
-        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
         private Dictionary<string, Keys> keybindfromfile = new();
         private Keys lastpress;
         private Label currentlabel;
@@ -143,8 +139,8 @@ namespace Thumper_Custom_Level_Editor
                 mod.Reverse();
                 if (mod.Remove("Alt"))
                     mod.Insert(0, "Alt");
-                if (mod.Remove("Control")) ;
-                mod.Insert(0, "Control");
+                if (mod.Remove("Control"))
+                    mod.Insert(0, "Control");
                 _lbl.Text = $"{_lbl.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
             }
         }

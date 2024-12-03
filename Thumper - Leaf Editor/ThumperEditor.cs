@@ -216,7 +216,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
                 Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-                import = import.Concat(defaultkeybinds.Where(x => !import.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
+                import = import.Concat(defaultkeybinds.Where(x => !import.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
                 defaultkeybinds = import;
             }
             /*

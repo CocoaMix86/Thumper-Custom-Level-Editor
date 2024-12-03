@@ -420,9 +420,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //setup new master properties
             masterproperties = new(this, filepath) {
-                skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
-                introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
-                checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
+                skybox = string.IsNullOrEmpty((string)_load["skybox_name"]) ? "<none>" : (string)_load["skybox_name"],
+                introlvl = string.IsNullOrEmpty((string)_load["intro_lvl_name"]) ? "<none>" : (string)_load["intro_lvl_name"],
+                checkpointlvl = string.IsNullOrEmpty((string)_load["checkpoint_lvl_name"]) ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
 
             ///Clear form elements so new data can load
@@ -430,8 +430,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
                 _masterlvls.Add(new MasterLvlData() {
-                    type = ((string)_lvl["lvl_name"]) != String.Empty ? "lvl" : "gate",
-                    name = ((string)_lvl["lvl_name"]) != String.Empty ? _lvl["lvl_name"] : _lvl["gate_name"],
+                    type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
+                    name = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
                     checkpoint = _lvl["checkpoint"],
                     playplus = _lvl["play_plus"],
                     isolate = _lvl["isolate"] ?? false,

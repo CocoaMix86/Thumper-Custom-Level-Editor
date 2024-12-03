@@ -440,7 +440,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             if (col + i >= trackEditor.ColumnCount)
                                 break;
                             //don't paste if cell is blank
-                            if (cells[i] != "") {
+                            if (!string.IsNullOrEmpty(cells[i])) {
                                 trackEditor[col + i, row + _line].Value = decimal.Parse(cells[i]);
                                 TrackUpdateHighlightingSingleCell(trackEditor[col + i, row + _line], _tracks[row + _line]);
                             }
@@ -538,7 +538,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
                 if (trackEditor.IsCurrentCellInEditMode) {
-                    if ((string)trackEditor.CurrentCell.EditedFormattedValue == "") {
+                    if (string.IsNullOrEmpty((string)trackEditor.CurrentCell.EditedFormattedValue)) {
                         trackEditor.CurrentCell.Value = null;
                         trackEditor.CancelEdit();
                         if (e.KeyCode is Keys.Right or Keys.Left)
@@ -550,7 +550,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_Click(object sender, EventArgs e)
         {
             if (trackEditor.IsCurrentCellInEditMode) {
-                if ((string)trackEditor.CurrentCell.EditedFormattedValue == "") {
+                if (string.IsNullOrEmpty((string)trackEditor.CurrentCell.EditedFormattedValue)) {
                     trackEditor.CurrentCell.Value = null;
                     trackEditor.CancelEdit();
                     trackEditor.EndEdit();
@@ -1708,7 +1708,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     continue;
                 JObject s = new();
                 //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
-                if (seq_obj.obj_name.Contains(".leaf") || seq_obj.obj_name == "")
+                if (seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
                     seq_obj.obj_name = (string)_save["obj_name"];
                 s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
                 //write param_path or param_path_hash

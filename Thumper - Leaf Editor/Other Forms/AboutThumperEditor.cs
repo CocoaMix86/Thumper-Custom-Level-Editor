@@ -23,7 +23,7 @@ namespace Thumper_Custom_Level_Editor
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
 				if (attributes.Length > 0) {
 					AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-					if (titleAttribute.Title != "") {
+					if (!string.IsNullOrEmpty(titleAttribute.Title)) {
 						return titleAttribute.Title;
 					}
 				}

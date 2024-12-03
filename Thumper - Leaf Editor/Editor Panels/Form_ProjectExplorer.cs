@@ -170,7 +170,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void txtSearch_LostFocus(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "")
+            if (string.IsNullOrEmpty(txtSearch.Text))
                 txtSearch.Text = "Search Project Explorer (Ctrl+;)";
         }
 

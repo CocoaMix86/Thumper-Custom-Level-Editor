@@ -445,9 +445,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (boss == "boss_frac.spn") boss = "boss_fractal.spn";
             checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
             dropGateBoss.SelectedValue = boss;
-            dropGatePre.SelectedItem = (string)_load["pre_lvl_name"] == "" ? "<none>" : (string)_load["pre_lvl_name"];
-            dropGatePost.SelectedItem = (string)_load["post_lvl_name"] == "" ? "<none>" : (string)_load["post_lvl_name"];
-            dropGateRestart.SelectedItem = (string)_load["restart_lvl_name"] == "" ? "<none>" : (string)_load["restart_lvl_name"];
+            dropGatePre.SelectedItem = string.IsNullOrEmpty((string)_load["pre_lvl_name"]) ? "<none>" : (string)_load["pre_lvl_name"];
+            dropGatePost.SelectedItem = string.IsNullOrEmpty((string)_load["post_lvl_name"]) ? "<none>" : (string)_load["post_lvl_name"];
+            dropGateRestart.SelectedItem = string.IsNullOrEmpty((string)_load["restart_lvl_name"]) ? "<none>" : (string)_load["restart_lvl_name"];
             dropGateSection.SelectedIndex = dropGateSection.FindStringExact((string)_load["section_type"]);
             //
             checkGateRandom.CheckedChanged += checkGateRandom_CheckedChanged;

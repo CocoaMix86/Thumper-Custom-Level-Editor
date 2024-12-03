@@ -252,7 +252,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             if (col + i >= lvlSeqObjs.ColumnCount)
                                 break;
                             //don't paste if cell is blank
-                            if (cells[i] != "") {
+                            if (!string.IsNullOrEmpty(cells[i])) {
                                 lvlSeqObjs[col + i, row + _line].Value = decimal.Parse(cells[i]);
                                 lvlSeqObjs[col + i, row + _line].Style.BackColor = Color.Purple;
                             }
