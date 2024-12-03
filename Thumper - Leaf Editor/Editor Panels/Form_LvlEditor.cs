@@ -25,14 +25,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        bool controldown;
-        bool altdown;
-        bool shiftdown;
+        private bool controldown;
+        private bool altdown;
+        private bool shiftdown;
         public bool EditorIsSaved = true;
-        int _lvllength;
+        private int _lvllength;
         public FileInfo loadedlvl
         {
-            get { return LoadedLvl; }
+            get => LoadedLvl;
             set {
                 if (LoadedLvl != value) {
                     LoadedLvl = value;
@@ -44,14 +44,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private static FileInfo LoadedLvl;
-        public bool loadinglvl = false;
-        List<string> _lvlpaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
-        dynamic lvljson;
-        ObservableCollection<LvlLeafData> _lvlleafs = new();
-        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
-        List<LvlLeafData> clipboardleaf = new();
-        List<string> clipboardpaths = new();
-        List<int> idxtocolor = new();
+        private bool loadinglvl = false;
+        private List<string> _lvlpaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
+        private dynamic lvljson;
+        private ObservableCollection<LvlLeafData> _lvlleafs = new();
+        private static decimal BPM => TCLE.dockProjectProperties.BPM;
+        private List<LvlLeafData> clipboardleaf = new();
+        private List<string> clipboardpaths = new();
+        private List<int> idxtocolor = new();
         #endregion
 
         #region EventHandlers
@@ -74,7 +74,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || _lvlleafs.Count == 0 || e.RowIndex > _lvlleafs.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{lvlLeafList.Rows[e.RowIndex].Cells[1].Value}")).First().Value);
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{lvlLeafList.Rows[e.RowIndex].Cells[1].Value}")).Value);
             
         }
         ///DGV LVLLEAFPATHS

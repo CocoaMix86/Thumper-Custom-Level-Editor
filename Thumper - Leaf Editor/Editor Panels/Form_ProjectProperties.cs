@@ -15,11 +15,11 @@
         }
         #endregion
         #region Variables
-        public ProjectProperties projectproperties { 
-            get { return ProjectProperties; } 
-            set { ProjectProperties = value; } }
+        public ProjectProperties projectproperties {
+            get => ProjectProperties;
+            set => ProjectProperties = value; }
         private static ProjectProperties ProjectProperties;
-        public decimal BPM { get { return ProjectProperties.bpm; } }
+        public decimal BPM => ProjectProperties.bpm;
         #endregion
         #region Methods
         #endregion

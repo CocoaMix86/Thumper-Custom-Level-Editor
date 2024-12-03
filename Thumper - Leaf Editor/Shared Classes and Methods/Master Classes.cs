@@ -13,14 +13,14 @@ namespace Thumper_Custom_Level_Editor
         private string Name;
         public string name
         {
-            get { return Name; }
+            get => Name;
             set {
                 int idx = value.LastIndexOf('.');
                 Name = idx != -1 ? value[..idx] : value;
             }
         }
-        public string lvlname { get { return $"{name}.lvl"; } }
-        public string gatename { get { return $"{name}.gate"; } }
+        public string lvlname => $"{name}.lvl";
+        public string gatename => $"{name}.gate";
         public bool playplus { get; set; }
         public bool checkpoint { get; set; }
         public bool isolate { get; set; }
@@ -61,7 +61,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath { get {return FilePath.FullName; } }
+        public string filepath => FilePath.FullName;
         private FileInfo FilePath;
 
         [CategoryAttribute("Options")]
@@ -84,7 +84,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats { get { return TCLE.CalculateMasterRuntime(parent); } }
+        public int beats => TCLE.CalculateMasterRuntime(parent);
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
@@ -98,28 +98,28 @@ namespace Thumper_Custom_Level_Editor
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Sublevel Name")]
-        public string sublevelname { get { return sublevel.name; } }
+        public string sublevelname => sublevel.name;
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Play Plus")]
         [Description("When True, the sublevel shows up in Play+. Useful to have a tutorial sublevel in Play and then have it not show up in Play+.")]
-        public bool playplus { get { return sublevel.playplus; } set { sublevel.playplus = value; } }
+        public bool playplus { get => sublevel.playplus; set => sublevel.playplus = value; }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Checkpoint")]
         [Description("Enables the checkpoint that follows this sublevel.")]
-        public bool checkpoint { get { return sublevel.checkpoint; } set { sublevel.checkpoint = value; } }
+        public bool checkpoint { get => sublevel.checkpoint; set => sublevel.checkpoint = value; }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Isolate")]
         [Description("If True, only isolated sublevels will play in game. Mainly used for testing your level.")]
-        public bool isolate { get { return sublevel.isolate; } set { sublevel.isolate = value; } }
+        public bool isolate { get => sublevel.isolate; set => sublevel.isolate = value; }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Rest Lvl")]
         [Description("The rest lvl will play before the sublevel.")]
         [TypeConverter(typeof(LvlList))]
-        public string rest { get { return sublevel.rest; } set { sublevel.rest = value; } }
+        public string rest { get => sublevel.rest; set => sublevel.rest = value; }
     }
 
     public class LvlList : StringConverter

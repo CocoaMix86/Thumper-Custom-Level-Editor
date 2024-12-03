@@ -25,7 +25,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorLoading = false;
         public FileInfo loadedmaster
         {
-            get { return LoadedMaster; }
+            get => LoadedMaster;
             set {
                 if (LoadedMaster != value) {
                     LoadedMaster = value;
@@ -39,17 +39,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static FileInfo LoadedMaster;
         private List<MasterLvlData> clipboardmaster = new();
-        public ObservableCollection<MasterLvlData> _masterlvls { get { return masterproperties.masterlvls; } set { masterproperties.masterlvls = value; } }
+        public ObservableCollection<MasterLvlData> _masterlvls { get => masterproperties.masterlvls; set => masterproperties.masterlvls = value; }
         public MasterProperties masterproperties
         {
-            get { return MasterProperties; }
+            get => MasterProperties;
             set {
                 SaveCheckAndWrite(false);
                 MasterProperties = value;
             }
         }
         public static MasterProperties MasterProperties;
-        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
+        public decimal BPM => TCLE.dockProjectProperties.BPM;
         #endregion
 
         #region EventHandlers
@@ -74,7 +74,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{masterLvlList.Rows[e.RowIndex].Cells[2].Value}")).FirstOrDefault().Value);
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{masterLvlList.Rows[e.RowIndex].Cells[2].Value}")).Value);
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -143,8 +143,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
-                DataGridViewRow rowToMove = e.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
-                if (rowToMove == null || rowIndexOfItemUnderMouseToDrop == -1)
+                if (e.Data.GetData(typeof(DataGridViewRow)) is not DataGridViewRow rowToMove || rowIndexOfItemUnderMouseToDrop == -1)
                     return;
                 MasterLvlData tomove = _masterlvls[rowToMove.Index];
                 _masterlvls.RemoveAt(rowIndexFromMouseDown);
@@ -478,7 +477,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                foreach (var dock in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(LoadedMaster.Name))) {
+                foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dock in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(LoadedMaster.Name))) {
                     if (dock.GetType() == typeof(Form_RawText))
                         (dock as Form_RawText).Reload();
                 }

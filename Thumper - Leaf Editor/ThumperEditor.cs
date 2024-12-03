@@ -12,15 +12,15 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variables
         public static TCLE Instance;
-        public static DockPanel DockMain { get { return Instance.dockMain; } }
-        public static IEnumerable<IDockContent> Documents { get { return Instance.dockMain.Documents; } }
+        public static DockPanel DockMain => Instance.dockMain;
+        public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents;
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
         Properties.Settings settings = Properties.Settings.Default;
         public static dynamic ProjectJson;
         private DirectoryInfo workingfolder
         {
-            get { return WorkingFolder; }
+            get => WorkingFolder;
             set {
                 //check if `set` value is different than current stored value
                 if (WorkingFolder != value) {
@@ -41,8 +41,7 @@ namespace Thumper_Custom_Level_Editor
                     try {
                         lockedfiles.Add(ProjectFile, new FileStream(ProjectFile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                         ClearFileLock();
-                    }
-                    catch (Exception) {
+                    } catch (Exception) {
                         MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Level cannot be opened");
                         return;
                     }
@@ -247,7 +246,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private void MaximizeScreenBounds()
         {
-            var bounds = Screen.FromHandle(this.Handle).WorkingArea;
+            Rectangle bounds = Screen.FromHandle(this.Handle).WorkingArea;
             //Screen WorkingArea is shrunk a small bit compared to the actual display area
             //so the following 4 lines increases the bounds to cover whole screen
             bounds.X = -8;
@@ -427,14 +426,14 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripWindowCloseAll_Click(object sender, EventArgs e)
         {
-            while (dockMain.Documents.Count() > 0)
+            while (dockMain.Documents.Any())
                 dockMain.Documents.First().DockHandler.Dispose();
         }
 
         private void toolstripWindowCloseEditors_Click(object sender, EventArgs e)
         {
             Form_WorkSpace fws = dockMain.ActiveDocument as Form_WorkSpace;
-            while (fws.dockMain.Documents.Count() > 0)
+            while (fws.dockMain.Documents.Any())
                 fws.dockMain.Documents.First().DockHandler.Dispose();
         }
 

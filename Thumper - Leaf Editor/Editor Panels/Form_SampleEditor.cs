@@ -23,7 +23,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorIsSaved = true;
         FileInfo loadedsample
         {
-            get { return loadedsample; }
+            get => loadedsample;
             set {
                 if (loadedsample != value) {
                     loadedsample = value;

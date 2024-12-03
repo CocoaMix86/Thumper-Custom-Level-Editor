@@ -16,10 +16,7 @@
                 treeView1.Nodes.Add(tn);
             }
         }
-        public string Value
-        {
-            get { return treeView1.SelectedNode.Text; }
-        }
+        public string Value => treeView1.SelectedNode.Text;
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {

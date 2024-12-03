@@ -118,7 +118,7 @@ namespace Thumper_Custom_Level_Editor
             return (int)samplesToCopy;
         }
 
-        public WaveFormat WaveFormat { get { return cachedSound.WaveFormat; } }
+        public WaveFormat WaveFormat => cachedSound.WaveFormat;
     }
 
     class AutoDisposeFileReader : ISampleProvider

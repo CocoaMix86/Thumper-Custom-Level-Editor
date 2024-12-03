@@ -2,53 +2,53 @@
 {
     class ContextMenuColorTable : ProfessionalColorTable
     {
-        public override Color MenuBorder { get { return Color.FromArgb(112, 112, 112); } }
-        public override Color MenuItemBorder { get { return Color.Red; } }
-        public static Color MenuItemEnabledBorder { get { return Color.FromArgb(112, 112, 112); } }
-        public override Color ToolStripDropDownBackground { get { return Color.FromArgb(46, 46, 46); } }
+        public override Color MenuBorder => Color.FromArgb(112, 112, 112);
+        public override Color MenuItemBorder => Color.Red;
+        public static Color MenuItemEnabledBorder => Color.FromArgb(112, 112, 112);
+        public override Color ToolStripDropDownBackground => Color.FromArgb(46, 46, 46);
 
-        public override Color ImageMarginGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color ImageMarginGradientEnd { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color ImageMarginGradientMiddle { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color MenuItemSelected { get { return Color.FromArgb(61, 61, 61); } }
+        public override Color ImageMarginGradientBegin => Color.FromArgb(46, 46, 46);
+        public override Color ImageMarginGradientEnd => Color.FromArgb(46, 46, 46);
+        public override Color ImageMarginGradientMiddle => Color.FromArgb(46, 46, 46);
+        public override Color MenuItemSelected => Color.FromArgb(61, 61, 61);
 
-        public override Color MenuItemSelectedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color MenuItemSelectedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color MenuItemPressedGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color MenuItemPressedGradientEnd { get { return Color.FromArgb(46, 46, 46); } }
+        public override Color MenuItemSelectedGradientBegin => Color.FromArgb(61, 61, 61);
+        public override Color MenuItemSelectedGradientEnd => Color.FromArgb(61, 61, 61);
+        public override Color MenuItemPressedGradientBegin => Color.FromArgb(46, 46, 46);
+        public override Color MenuItemPressedGradientEnd => Color.FromArgb(46, 46, 46);
 
-        public override Color ButtonSelectedGradientBegin { get { return Color.FromArgb(112, 112, 112); } }
-        public override Color ButtonSelectedGradientEnd { get { return Color.FromArgb(112, 112, 112); } }
-        public override Color ButtonSelectedBorder { get { return Color.FromArgb(112, 112, 112); } }
+        public override Color ButtonSelectedGradientBegin => Color.FromArgb(112, 112, 112);
+        public override Color ButtonSelectedGradientEnd => Color.FromArgb(112, 112, 112);
+        public override Color ButtonSelectedBorder => Color.FromArgb(112, 112, 112);
     }
 
     class EditorToolstripColorTable : ProfessionalColorTable
     {
-        public override Color MenuBorder { get { return Color.FromArgb(112, 112, 112); } }
-        public override Color MenuItemBorder { get { return Color.Red; } }
-        public static Color MenuItemEnabledBorder { get { return Color.FromArgb(112, 112, 112); } }
-        public override Color ToolStripDropDownBackground { get { return Color.FromArgb(46, 46, 46); } }
+        public override Color MenuBorder => Color.FromArgb(112, 112, 112);
+        public override Color MenuItemBorder => Color.Red;
+        public static Color MenuItemEnabledBorder => Color.FromArgb(112, 112, 112);
+        public override Color ToolStripDropDownBackground => Color.FromArgb(46, 46, 46);
 
-        public override Color ImageMarginGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color ImageMarginGradientEnd { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color ImageMarginGradientMiddle { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color MenuItemSelected { get { return Color.FromArgb(61, 61, 61); } }
+        public override Color ImageMarginGradientBegin => Color.FromArgb(46, 46, 46);
+        public override Color ImageMarginGradientEnd => Color.FromArgb(46, 46, 46);
+        public override Color ImageMarginGradientMiddle => Color.FromArgb(46, 46, 46);
+        public override Color MenuItemSelected => Color.FromArgb(61, 61, 61);
 
-        public override Color MenuItemSelectedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color MenuItemSelectedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color MenuItemPressedGradientBegin { get { return Color.FromArgb(46, 46, 46); } }
-        public override Color MenuItemPressedGradientEnd { get { return Color.FromArgb(46, 46, 46); } }
+        public override Color MenuItemSelectedGradientBegin => Color.FromArgb(61, 61, 61);
+        public override Color MenuItemSelectedGradientEnd => Color.FromArgb(61, 61, 61);
+        public override Color MenuItemPressedGradientBegin => Color.FromArgb(46, 46, 46);
+        public override Color MenuItemPressedGradientEnd => Color.FromArgb(46, 46, 46);
 
-        public override Color ButtonSelectedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color ButtonSelectedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color ButtonSelectedBorder { get { return Color.FromArgb(112, 112, 112); } }
+        public override Color ButtonSelectedGradientBegin => Color.FromArgb(61, 61, 61);
+        public override Color ButtonSelectedGradientEnd => Color.FromArgb(61, 61, 61);
+        public override Color ButtonSelectedBorder => Color.FromArgb(112, 112, 112);
 
-        public override Color ButtonCheckedGradientBegin { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color ButtonCheckedGradientEnd { get { return Color.FromArgb(61, 61, 61); } }
-        public override Color ButtonCheckedHighlightBorder { get { return Color.Purple; } }
+        public override Color ButtonCheckedGradientBegin => Color.FromArgb(61, 61, 61);
+        public override Color ButtonCheckedGradientEnd => Color.FromArgb(61, 61, 61);
+        public override Color ButtonCheckedHighlightBorder => Color.Purple;
 
-        public override Color ButtonPressedGradientBegin { get { return Color.FromArgb(26, 26, 26); } }
-        public override Color ButtonPressedGradientEnd { get { return Color.FromArgb(26, 26, 26); } }
+        public override Color ButtonPressedGradientBegin => Color.FromArgb(26, 26, 26);
+        public override Color ButtonPressedGradientEnd => Color.FromArgb(26, 26, 26);
     }
 
     public class ToolStripOverride : ToolStripProfessionalRenderer
@@ -60,8 +60,8 @@
             if (e.Item.BackColor != Color.FromArgb(46, 46, 46))
                 base.OnRenderSplitButtonBackground(e);
             else {
-                var sb = e.Item as ToolStripSplitButton;
-                var button = sb.ButtonBounds;
+                ToolStripSplitButton? sb = e.Item as ToolStripSplitButton;
+                Rectangle button = sb.ButtonBounds;
 
                 button.Width--;
                 button.Height--;
@@ -76,8 +76,7 @@
         }
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
-            ToolStripButton btn = e.Item as ToolStripButton;
-            if (btn != null && btn.CheckOnClick && btn.Checked) {
+            if (e.Item is ToolStripButton btn && btn.CheckOnClick && btn.Checked) {
                 Rectangle bounds = new Rectangle(Point.Empty, e.Item.Size);
                 bounds.Width--;
                 bounds.Height--;

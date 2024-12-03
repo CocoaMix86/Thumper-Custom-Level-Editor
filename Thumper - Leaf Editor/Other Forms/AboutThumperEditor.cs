@@ -31,14 +31,9 @@ namespace Thumper_Custom_Level_Editor
 			}
 		}
 
-		public static string AssemblyVersion
-		{
-			get {
-				return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			}
-		}
+        public static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-		public static string AssemblyDescription
+        public static string AssemblyDescription
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);

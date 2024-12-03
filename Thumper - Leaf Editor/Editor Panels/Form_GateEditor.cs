@@ -21,14 +21,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorIsSaved = true;
         public FileInfo loadedgate
         {
-            get { return LoadedGate; }
+            get => LoadedGate;
             set {
-                    LoadedGate = value;
-                    dropGateSection.SelectedIndex = 0;
-                    if (!LoadedGate.Exists) {
-                        LoadedGate.CreateText();
-                    }
-                    TCLE.lockedfiles.Add(LoadedGate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                LoadedGate = value;
+                dropGateSection.SelectedIndex = 0;
+                if (!LoadedGate.Exists) {
+                    LoadedGate.CreateText();
+                }
+                TCLE.lockedfiles.Add(LoadedGate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
         }
         private static FileInfo LoadedGate;
@@ -378,7 +378,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             dgvGateBucket.Visible = checkGateRandom.Checked;
             dropGateBoss.Enabled = !checkGateRandom.Checked;
-            dropGateBoss.SelectedItem = bossdata.Where(x => x.boss_name == "Level 6 - spirograph").First();
+            dropGateBoss.SelectedItem = bossdata.First(x => x.boss_name == "Level 6 - spirograph");
             SaveGate(false);
         }
         #endregion
@@ -536,6 +536,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         case 3:
                             s.Add("node_name_hash", _bucket3[bucket3]);
                             bucket3 = (bucket3 + 1) % 4;
+                            break;
+                        default:
                             break;
                     }
                 }

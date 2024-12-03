@@ -81,7 +81,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 RecurseNodesFindExpanded(treeView1.Nodes);
             }
             //force each master to recalc runtime in case tree has new files
-            foreach (var dock in TCLE.Instance.dockMain.Documents) {
+            foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dock in TCLE.Instance.dockMain.Documents) {
                 if (dock.GetType() == typeof(Form_MasterEditor)) (dock as Form_MasterEditor).RecalculateRuntime();
                 if (dock.GetType() == typeof(Form_LvlEditor)) (dock as Form_LvlEditor).RecalculateRuntime();
             }
@@ -446,7 +446,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //change contextmenus of nodes based on how many are selected
             //and what types are selected
-            if (selectedNodes.Where(x => x.ImageKey == "folder").Any() && selectedNodes.Where(x => x.ImageKey != "folder").Any()) {
+            if (selectedNodes.Any(x => x.ImageKey == "folder") && selectedNodes.Any(x => x.ImageKey != "folder")) {
                 foreach (TreeNode tn in selectedNodes) {
                     tn.ContextMenuStrip = contextMenuMulti;
                 }

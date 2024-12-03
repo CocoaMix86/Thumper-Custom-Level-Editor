@@ -19,7 +19,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
         #region Variables
         public bool EditorIsSaved = true;
-        private FileInfo loadedfile { get { return LoadedFile; } set { LoadedFile = value; } }
+        private FileInfo loadedfile { get => LoadedFile; set => LoadedFile = value; }
         public static FileInfo LoadedFile;
         #endregion
         #region Event Handlers
@@ -75,7 +75,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                foreach (var dock in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(LoadedFile.Name))) {
+                foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dock in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(LoadedFile.Name))) {
                     if (dock.GetType() == typeof(Form_MasterEditor))
                         (dock as Form_MasterEditor).Reload();
                 }

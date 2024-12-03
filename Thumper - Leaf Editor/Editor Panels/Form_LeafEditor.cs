@@ -24,11 +24,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        int _beats { get { return (int)numericUpDown_LeafLength.Value; } }
+        int _beats => (int)numericUpDown_LeafLength.Value;
         int _selecttrack = 0;
         public FileInfo loadedleaf
         {
-            get { return LoadedLeaf; }
+            get => LoadedLeaf;
             set {
                 if (LoadedLeaf != value) {
                     LoadedLeaf = value;
@@ -629,7 +629,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //if (_tracks[trackEditor.CurrentRow?.Index ?? 0].highlight_color == null)
                 btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(objectcolors.TryGetValue(dropParamPath.Text, out string value) ? value : "-8355585"));
                 //if the param_path is .ent, enable lane choice
-                if (_objects.Where(obj => obj.param_displayname == dropParamPath.Text).First().param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
+                if (_objects.First(obj => obj.param_displayname == dropParamPath.Text).param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
                     dropTrackLane.Enabled = true;
                 }
                 //else set lane to middle and enable 'Apply' button
@@ -1061,7 +1061,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnTrackApply_Click(object sender, EventArgs e)
         {
-            Object_Params objmatch = _objects.Where(obj => obj.category == dropObjects.Text && obj.param_displayname == dropParamPath.Text).First();
+            Object_Params objmatch = _objects.First(obj => obj.category == dropObjects.Text && obj.param_displayname == dropParamPath.Text);
             //fill object properties on the form
             txtTrait.Text = objmatch.trait_type;
             toolTip1.SetToolTip(txtTrait, kTraitTooltips[txtTrait.Text]);
@@ -1352,7 +1352,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else
                     dropParamPath.SelectedIndex = TCLE.rng.Next(0, dropParamPath.Items.Count);
-                if (_tracks.Where(x => (x.friendly_param ?? "").Split(',')[0] == dropParamPath.Text).Any())
+                if (_tracks.Any(x => (x.friendly_param ?? "").Split(',')[0] == dropParamPath.Text))
                     rando = false;
             }
             btnTrackApply_Click(null, null);

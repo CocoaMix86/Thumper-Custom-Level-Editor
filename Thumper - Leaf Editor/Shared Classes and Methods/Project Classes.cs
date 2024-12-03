@@ -24,7 +24,7 @@ namespace Thumper_Custom_Level_Editor
         [Category("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public static string filepath { get { return TCLE.WorkingFolder.FullName; } }
+        public static string filepath => TCLE.WorkingFolder.FullName;
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]
@@ -39,7 +39,7 @@ namespace Thumper_Custom_Level_Editor
         [Description("")]
         [DefaultValue("D0")]
         [TypeConverter(typeof(DifficultyOptions))]
-        public string difficulty { get { return _difficulty; } set { _difficulty = value; } }
+        public string difficulty { get => _difficulty; set => _difficulty = value; }
         private string _difficulty = null;
 
         [Category("General Project Info")]
@@ -53,14 +53,14 @@ namespace Thumper_Custom_Level_Editor
         [RefreshProperties(RefreshProperties.All)]
         public decimal bpm
         {
-            get { return Bpm; }
+            get => Bpm;
             set {
                 if (value < 0)
                     value = 1;
                 if (value > 99999.99m)
                     value = 99999.99m;
                 Bpm = value;
-                foreach (var dc in TCLE.Instance.dockMain.Documents) {
+                foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dc in TCLE.Instance.dockMain.Documents) {
                     if (dc.DockHandler.TabText.Contains(".master")) (dc as Form_MasterEditor).propertyGridMaster.Refresh();
                     if (dc.DockHandler.TabText.Contains(".lvl")) (dc as Form_LvlEditor).RecalculateRuntime();
                 }
@@ -90,7 +90,7 @@ namespace Thumper_Custom_Level_Editor
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
         {
-            List<string> list = new List<string>() { "D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7" };
+            List<string> list = new() { "D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7" };
             return new StandardValuesCollection(list);
         }
     }
