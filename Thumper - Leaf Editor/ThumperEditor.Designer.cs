@@ -460,6 +460,7 @@
             this.dockMain.ShowDocumentIcon = true;
             this.dockMain.Size = new Size(984, 444);
             this.dockMain.TabIndex = 147;
+            this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
             this.dockMain.ActivePaneChanged += this.dockMain_ActivePaneChanged;
             // 
             // txtFilePath
@@ -903,7 +904,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(185, 170);
+            this.contextmenuWindow.Size = new Size(185, 148);
             // 
             // toolstripWindowFloat
             // 

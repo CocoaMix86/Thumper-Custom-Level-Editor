@@ -53,7 +53,6 @@
             this.Controls.Add(this.dockMain);
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.Name = "Form_WorkSpace";
-            this.ShowIcon = false;
             this.Text = "Workspace";
             this.ResumeLayout(false);
         }

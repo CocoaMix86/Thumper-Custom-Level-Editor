@@ -530,11 +530,17 @@ namespace Thumper_Custom_Level_Editor
         }
         private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
 
-        public static DockPane lastclickedpane;
+        public static IDockContent ActiveWorkspace;
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
         {
-            if (dockMain.ActivePane?.ActiveContent.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
-                lastclickedpane = dockMain.ActivePane;
+            //if (dockMain.ActivePane?.ActiveContent.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
+                //ActiveWorkspace = dockMain.ActiveDocument;
+        }
+
+        private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
+        {
+            if (dockMain.ActiveDocument.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
+                ActiveWorkspace = dockMain.ActiveDocument;
         }
 
         private void toolstripMainSave_Click(object sender, EventArgs e)

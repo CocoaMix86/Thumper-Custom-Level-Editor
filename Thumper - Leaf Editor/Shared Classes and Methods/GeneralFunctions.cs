@@ -509,30 +509,30 @@ namespace Thumper_Custom_Level_Editor
             //open document in raw viewer if that option was selected
             if (openraw) {
                 Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
-                rawtext.Show(lastclickedpane, null);
+                rawtext.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
                 return;
             }
             //otherwise, open a standard editor for the document type
             string filetype = filepath.Extension;
             if (filetype == ".master") {
                 Form_MasterEditor master = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                master.Show(lastclickedpane, null);
+                master.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
             }
             else if (filetype == ".lvl") {
                 Form_LvlEditor lvl = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                lvl.Show(lastclickedpane, null);
+                lvl.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
             }
             else if (filetype == ".gate") {
                 Form_GateEditor gate = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                gate.Show(lastclickedpane, null);
+                gate.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
             }
             else if (filetype == ".leaf") {
                 Form_LeafEditor leaf = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                leaf.Show(lastclickedpane, null);
+                leaf.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
             }
             else if (filetype == ".samp") {
                 Form_SampleEditor sample = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                sample.Show(lastclickedpane, null);
+                sample.Show((ActiveWorkspace as Form_WorkSpace).dockMain, DockState.Document);
             }
             //if file type not supported, open raw
             else {
