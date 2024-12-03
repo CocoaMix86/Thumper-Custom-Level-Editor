@@ -126,6 +126,9 @@ dotnet_diagnostic.CA1707.severity = none
 # CA1515: Consider making public types internal
 dotnet_diagnostic.CA1515.severity = none
 
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 
