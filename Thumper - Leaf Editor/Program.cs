@@ -3,13 +3,13 @@ using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor
 {
-    static class Program
+    internal static class Program
 	{
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
-		static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length <= 0)
                 args = new string[] { "" };
@@ -26,7 +26,7 @@ namespace Thumper_Custom_Level_Editor
             Application.Run(new TCLE(args[0]));
         }
 
-        static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             Assembly thisAssembly = Assembly.GetExecutingAssembly();
             string name = args.Name[..args.Name.IndexOf(',')] + ".dll";

@@ -16,7 +16,7 @@ namespace Thumper_Custom_Level_Editor
         public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents;
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
-        Properties.Settings settings = Properties.Settings.Default;
+        private Properties.Settings settings = Properties.Settings.Default;
         public static dynamic ProjectJson;
         private DirectoryInfo workingfolder
         {
@@ -418,7 +418,7 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripWindowFloat_Click(object sender, EventArgs e) => ActiveWorkspace.dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
         private void toolstripWindowFloatAll_Click(object sender, EventArgs e)
         {
-            foreach (DockContent dc in ActiveWorkspace.dockMain.Documents) {
+            foreach (IDockContent dc in ActiveWorkspace.dockMain.Documents) {
                 dc.DockHandler.DockState = DockState.Float;
             }
         }
@@ -518,7 +518,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripMainSaveAll_Click(object sender, EventArgs e)
         {
-            foreach (Form_WorkSpace workspace in DockMain.Documents) {
+            foreach (Form_WorkSpace workspace in DockMain.Documents.Cast<Form_WorkSpace>()) {
                 foreach (IDockContent document in workspace.dockMain.Documents) {
                     if (document.GetType() == typeof(Form_MasterEditor)) {
                         (document as Form_MasterEditor).Save();

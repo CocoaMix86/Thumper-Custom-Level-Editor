@@ -21,7 +21,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        FileInfo loadedsample
+
+        private FileInfo loadedsample
         {
             get => loadedsample;
             set {
@@ -35,8 +36,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private FileInfo LoadedSample;
-        dynamic samplejson;
-        ObservableCollection<SampleData> _samplelist = new();
+        private dynamic samplejson;
+        private ObservableCollection<SampleData> _samplelist = new();
         #endregion
 
         #region EventHandlers

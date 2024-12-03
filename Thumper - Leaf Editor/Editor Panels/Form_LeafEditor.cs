@@ -24,8 +24,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        int _beats => (int)numericUpDown_LeafLength.Value;
-        int _selecttrack = 0;
+
+        private int _beats => (int)numericUpDown_LeafLength.Value;
+
+        private int _selecttrack = 0;
         public FileInfo loadedleaf
         {
             get => LoadedLeaf;
@@ -147,7 +149,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Width = panelLeaf.Width - trackEditor.Location.X - 5;
             }
         }
-        void trackEditor_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+
+        private void trackEditor_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             trackEditor.Focus();
             int scollrowindex = trackEditor.FirstDisplayedScrollingRowIndex;
@@ -1772,7 +1775,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// <summary>
         /// UNDO FUNCTIONS
         /// </summary>
-        readonly ToolStripDropDownMenu undomenu = new() {
+        private readonly ToolStripDropDownMenu undomenu = new() {
             BackColor = Color.FromArgb(40, 40, 40),
             ShowCheckMargin = false,
             ShowImageMargin = false,

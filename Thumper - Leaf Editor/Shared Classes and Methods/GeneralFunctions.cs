@@ -46,7 +46,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static HashSet<Object_Params> LeafObjects = new();
-        string _errorlog = "";
+        private string _errorlog = "";
         public void ImportObjects()
         {
             LeafObjects.Clear();

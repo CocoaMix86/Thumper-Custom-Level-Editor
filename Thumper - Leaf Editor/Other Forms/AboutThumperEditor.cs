@@ -2,7 +2,7 @@
 
 namespace Thumper_Custom_Level_Editor
 {
-    partial class AboutThumperEditor : Form
+    internal partial class AboutThumperEditor : Form
 	{
 		public AboutThumperEditor()
 		{

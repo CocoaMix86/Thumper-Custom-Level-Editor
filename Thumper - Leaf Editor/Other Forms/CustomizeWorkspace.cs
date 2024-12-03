@@ -3,8 +3,8 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
-        ColorDialog colorDialogNew = new(); //{ BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
-        string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
+        private ColorDialog colorDialogNew = new(); //{ BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
+        private string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
         public HashSet<Object_Params> _objects = new();
         private Dictionary<string, string> objectcolors = new();
         private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
@@ -129,11 +129,11 @@ namespace Thumper_Custom_Level_Editor
         /// This is all for handling keybinds
         ///
         private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-        Dictionary<string, Keys> keybindfromfile = new();
-        Keys lastpress;
-        Label currentlabel;
-        bool ignorekeys = true;
-        string keybindname;
+        private Dictionary<string, Keys> keybindfromfile = new();
+        private Keys lastpress;
+        private Label currentlabel;
+        private bool ignorekeys = true;
+        private string keybindname;
         private void LoadKeyBindInfo(Dictionary<string, Keys> loadthesekeys)
         {
             //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary

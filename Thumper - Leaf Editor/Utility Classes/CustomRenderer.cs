@@ -1,6 +1,6 @@
 ﻿namespace Thumper_Custom_Level_Editor
 {
-    class ContextMenuColorTable : ProfessionalColorTable
+    internal class ContextMenuColorTable : ProfessionalColorTable
     {
         public override Color MenuBorder => Color.FromArgb(112, 112, 112);
         public override Color MenuItemBorder => Color.Red;
@@ -22,7 +22,7 @@
         public override Color ButtonSelectedBorder => Color.FromArgb(112, 112, 112);
     }
 
-    class EditorToolstripColorTable : ProfessionalColorTable
+    internal class EditorToolstripColorTable : ProfessionalColorTable
     {
         public override Color MenuBorder => Color.FromArgb(112, 112, 112);
         public override Color MenuItemBorder => Color.Red;

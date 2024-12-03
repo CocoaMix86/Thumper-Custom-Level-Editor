@@ -492,7 +492,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// Drag Drop file moving
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e) => DoDragDrop(e.Item, DragDropEffects.Move);
         private void treeView1_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
-        TreeNode previousDragOver = null;
+
+        private TreeNode previousDragOver = null;
         private void treeView1_DragOver(object sender, DragEventArgs e)
         {
             // Retrieve the client coordinates of the drop location.
