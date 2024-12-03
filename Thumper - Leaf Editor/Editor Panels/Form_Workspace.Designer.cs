@@ -33,22 +33,23 @@
             // 
             // dockMain
             // 
+            this.dockMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             this.dockMain.BackColor = Color.FromArgb(31, 31, 31);
             this.dockMain.BackgroundImageLayout = ImageLayout.None;
-            this.dockMain.Dock = DockStyle.Fill;
             this.dockMain.DockBottomPortion = 0.33D;
             this.dockMain.DockLeftPortion = 0.33D;
             this.dockMain.DockRightPortion = 0.15D;
             this.dockMain.DockTopPortion = 0.33D;
-            this.dockMain.Location = new Point(0, 0);
+            this.dockMain.Location = new Point(0, -3);
             this.dockMain.Name = "dockMain";
             this.dockMain.ShowAutoHideContentOnHover = false;
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new Size(476, 423);
+            this.dockMain.Size = new Size(478, 432);
             this.dockMain.TabIndex = 148;
             // 
             // Form_WorkSpace
             // 
+            this.BackColor = Color.FromArgb(45, 45, 48);
             this.ClientSize = new Size(476, 423);
             this.Controls.Add(this.dockMain);
             this.Icon = (Icon)resources.GetObject("$this.Icon");

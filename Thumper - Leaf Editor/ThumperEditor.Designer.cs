@@ -148,6 +148,7 @@
             this.toolstripFormMinimize = new ToolStripButton();
             this.toolstripLevelName = new ToolStripMenuItem();
             this.toolstripOpenPanels = new ToolStripMenuItem();
+            this.panelFill = new Panel();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -163,6 +164,7 @@
             this.toolStripMain.SuspendLayout();
             this.panelToolStrips.SuspendLayout();
             this.toolStripTitle.SuspendLayout();
+            this.panelFill.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenuItem1
@@ -447,18 +449,19 @@
             // 
             // dockMain
             // 
+            this.dockMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             this.dockMain.BackColor = Color.FromArgb(31, 31, 31);
             this.dockMain.BackgroundImageLayout = ImageLayout.None;
-            this.dockMain.Dock = DockStyle.Fill;
             this.dockMain.DockBottomPortion = 0.33D;
             this.dockMain.DockLeftPortion = 0.33D;
             this.dockMain.DockRightPortion = 0.15D;
             this.dockMain.DockTopPortion = 0.33D;
-            this.dockMain.Location = new Point(0, 56);
+            this.dockMain.Location = new Point(0, -4);
+            this.dockMain.Margin = new Padding(0);
             this.dockMain.Name = "dockMain";
             this.dockMain.ShowAutoHideContentOnHover = false;
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new Size(984, 444);
+            this.dockMain.Size = new Size(984, 452);
             this.dockMain.TabIndex = 147;
             this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
             this.dockMain.ActivePaneChanged += this.dockMain_ActivePaneChanged;
@@ -1208,6 +1211,7 @@
             this.panelToolStrips.Controls.Add(this.toolStripMain);
             this.panelToolStrips.Dock = DockStyle.Top;
             this.panelToolStrips.Location = new Point(0, 31);
+            this.panelToolStrips.Margin = new Padding(0);
             this.panelToolStrips.MaximumSize = new Size(0, 25);
             this.panelToolStrips.Name = "panelToolStrips";
             this.panelToolStrips.Size = new Size(984, 25);
@@ -1309,16 +1313,26 @@
             this.toolstripOpenPanels.Text = "OPEN PANELS";
             this.toolstripOpenPanels.Click += this.toolstripOpenPanels_Click;
             // 
+            // panelFill
+            // 
+            this.panelFill.AutoScroll = true;
+            this.panelFill.BackColor = Color.FromArgb(45, 45, 48);
+            this.panelFill.Controls.Add(this.dockMain);
+            this.panelFill.Dock = DockStyle.Fill;
+            this.panelFill.Location = new Point(0, 56);
+            this.panelFill.Name = "panelFill";
+            this.panelFill.Size = new Size(984, 444);
+            this.panelFill.TabIndex = 153;
+            // 
             // TCLE
             // 
             this.AutoScaleMode = AutoScaleMode.None;
             this.BackColor = Color.FromArgb(64, 0, 0);
-            this.BackgroundImage = Properties.Resources.Thumper_logo;
             this.BackgroundImageLayout = ImageLayout.Center;
             this.ClientSize = new Size(984, 500);
             this.ControlBox = false;
+            this.Controls.Add(this.panelFill);
             this.Controls.Add(this.txtFilePath);
-            this.Controls.Add(this.dockMain);
             this.Controls.Add(this.panelToolStrips);
             this.Controls.Add(this.toolStripTitle);
             this.Controls.Add(this.panelRecentFiles);
@@ -1356,6 +1370,7 @@
             this.panelToolStrips.PerformLayout();
             this.toolStripTitle.ResumeLayout(false);
             this.toolStripTitle.PerformLayout();
+            this.panelFill.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -1473,6 +1488,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectRegen;
         public WeifenLuo.WinFormsUI.Docking.DockPanel dockMain;
         private ToolStripMenuItem addNewWorkspaceToolStripMenuItem;
+        private Panel panelFill;
     }
 }
 
