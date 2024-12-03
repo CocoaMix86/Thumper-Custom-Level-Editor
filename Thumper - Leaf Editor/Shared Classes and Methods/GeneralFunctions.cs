@@ -15,6 +15,7 @@ using Thumper_Custom_Level_Editor.Editor_Panels;
 using System.Runtime.CompilerServices;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Diagnostics.Metrics;
+using Windows.System.Threading;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -497,15 +498,12 @@ namespace Thumper_Custom_Level_Editor
         //find if the document is loaded already in a tab
         //if so, make it activate
         openraw:
-            if (form.dockMain.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()) {
-                form.dockMain.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).First().DockHandler.Activate();
+            IDockContent workspacehastab = form.dockMain.Documents.Where(x => (x as Form_WorkSpace).dockMain.Documents.Where(y => y.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()).FirstOrDefault();
+            if (workspacehastab != null) {
+                workspacehastab.DockHandler.Activate();
+                (workspacehastab as Form_WorkSpace).dockMain.Documents.Where(y => y.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).First().DockHandler.Activate();
                 return;
             }
-            /*
-            if (form.dockMain.FloatWindows.Where(x => x.DockPanel.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()).Any()) {
-                form.dockMain.FloatWindows.Where(x => x.DockPanel.Documents.Where(x => x.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).Any()).First().Activate();
-                return;
-            }*/
             //open document in raw viewer if that option was selected
             if (openraw) {
                 Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
