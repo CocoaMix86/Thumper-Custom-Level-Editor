@@ -215,7 +215,7 @@ namespace Thumper_Custom_Level_Editor
         private static void SetKeyBinds()
         {
             if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
-                Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+                Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
                 import = import.Concat(defaultkeybinds.Where(x => !import.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
                 defaultkeybinds = import;
             }
@@ -415,10 +415,10 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Toolstrip Window
-        private void toolstripWindowFloat_Click(object sender, EventArgs e) => (ActiveWorkspace as Form_WorkSpace).dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
+        private void toolstripWindowFloat_Click(object sender, EventArgs e) => ActiveWorkspace.dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
         private void toolstripWindowFloatAll_Click(object sender, EventArgs e)
         {
-            foreach (DockContent dc in (ActiveWorkspace as Form_WorkSpace).dockMain.Documents) {
+            foreach (DockContent dc in ActiveWorkspace.dockMain.Documents) {
                 dc.DockHandler.DockState = DockState.Float;
             }
         }

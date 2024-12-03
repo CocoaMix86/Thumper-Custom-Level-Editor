@@ -59,7 +59,7 @@ namespace Thumper_Custom_Level_Editor
 
             ///import selectable objects from file and parse them into lists for manipulation
             //splits input at "###". Each section is a collection of param_paths
-            List<string> import = (File.ReadAllText($@"{AppLocation}\templates\track_objects2.2.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
+            List<string> import = File.ReadAllText($@"{AppLocation}\templates\track_objects2.2.txt").Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
             for (int x = 0; x < import.Count; x++) {
                 //split each section into individual lines
                 List<string> import2 = import[x].Split('\n').ToList();
@@ -149,9 +149,9 @@ namespace Thumper_Custom_Level_Editor
         /// <returns>The blended colors.</returns>
         public static Color Blend(Color color, Color backColor, double amount)
         {
-            byte r = (byte)(color.R * amount + backColor.R * (1 - amount));
-            byte g = (byte)(color.G * amount + backColor.G * (1 - amount));
-            byte b = (byte)(color.B * amount + backColor.B * (1 - amount));
+            byte r = (byte)((color.R * amount) + (backColor.R * (1 - amount)));
+            byte g = (byte)((color.G * amount) + (backColor.G * (1 - amount)));
+            byte b = (byte)((color.B * amount) + (backColor.B * (1 - amount)));
             return Color.FromArgb(r, g, b);
         }
 
@@ -313,16 +313,14 @@ namespace Thumper_Custom_Level_Editor
             string dir = Path.GetDirectoryName(filepath);
             string file = Path.GetFileName(filepath);
             if (dir != workingfolder) {
-                DialogResult result = MessageBox.Show("That file is not in the current Working Folder. Do you want to copy it here?\nOr not, and open that level folder?\n\nYES = copy\nNO = open that level folder\nCANCEL = do nothing", "Confirm?", MessageBoxButtons.YesNoCancel);
+                DialogResult result = MessageBox.Show("That file is not in the current Working Folder. Do you want to copy it here?", "Bumper Custom Level Editor", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
-                    if (!File.Exists($@"{workingfolder}\{file}")) File.Copy(filepath, $@"{workingfolder}\{file}");
-                    filepath = $@"{workingfolder}\{file}";
-                }
-                else if (result == DialogResult.No) {
-
+                    if (!File.Exists($@"{WorkingFolder}\{file}")) 
+                        File.Copy(filepath, $@"{WorkingFolder}\{file}");
+                    filepath = $@"{WorkingFolder}\{file}";
                 }
                 else
-                    filepath = null;
+                    filepath = "-1";
             }
 
             return filepath;

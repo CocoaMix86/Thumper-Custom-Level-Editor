@@ -23,8 +23,8 @@
                 //get dimensions
                 int w = Properties.Resources.icon_openedfolders.Width;
                 int h = Properties.Resources.icon_openedfolders.Height;
-                int x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                int y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+                int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+                int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
                 //paint the image
                 e.Graphics.DrawImage(Properties.Resources.icon_openedfolders, new Rectangle(x, y, w, h));
                 e.Handled = true;
@@ -35,8 +35,8 @@
                 //get dimensions
                 int w = Properties.Resources.icon_remove2.Width;
                 int h = Properties.Resources.icon_remove2.Height;
-                int x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                int y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+                int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+                int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
                 //paint the image
                 e.Graphics.DrawImage(Properties.Resources.icon_remove2, new Rectangle(x, y, w, h));
                 e.Handled = true;

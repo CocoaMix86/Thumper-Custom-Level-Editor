@@ -724,7 +724,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlRefreshBeats_Click(object sender, EventArgs e)
         {
             foreach (LvlLeafData _leaf in _lvlleafs) {
-                string _file = (_leaf.leafname).Replace(".leaf", "");
+                string _file = _leaf.leafname.Replace(".leaf", "");
                 dynamic _load;
                 try {
                     if (!File.Exists($@"{TCLE.WorkingFolder}\leaf_{_file}.txt"))

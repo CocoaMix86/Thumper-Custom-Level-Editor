@@ -42,8 +42,8 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists($@"{AppLoc}\templates\keybinds.txt"))
                 File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
             //read keybinds to a dictionary for easier lookup
-            keybindfromfile = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-            keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
+            keybindfromfile = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
             LoadKeyBindInfo(keybindfromfile);
         }
 

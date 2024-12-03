@@ -19,7 +19,7 @@ namespace Thumper_Custom_Level_Editor
                     if (editPtr != IntPtr.Zero && SelectedNode != null) {
                         int selStart = 0;
                         int selEnd = Path.GetFileNameWithoutExtension(SelectedNode.Text).Length;
-                        SendMessage(editPtr, EM_SETSEL, (IntPtr)selStart, (IntPtr)selEnd);
+                        SendMessage(editPtr, EM_SETSEL, selStart, selEnd);
                     }
                 }
             }

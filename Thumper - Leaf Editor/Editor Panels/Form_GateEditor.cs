@@ -78,8 +78,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             dynamic _load;
             //gateLvlList_RowEnter(sender, e);
-            if ((/*!_mainform._savelvl &&*/ MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) /*|| _mainform._savelvl*/) {
-                string _file = (_gatelvls[e.RowIndex].lvlname).Replace(".lvl", "");
+            if (/*!_mainform._savelvl &&*/ MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes /*|| _mainform._savelvl*/) {
+                string _file = _gatelvls[e.RowIndex].lvlname.Replace(".lvl", "");
                 if (File.Exists($@"{TCLE.WorkingFolder}\lvl_{_file}.txt")) {
                     _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
                 }
@@ -146,12 +146,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if ((!EditorIsSaved && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
                 using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Gate File (*.txt)|gate_*.txt";
+                ofd.Filter = "Thumper Gate File (*.gate)|*.gate";
                 ofd.Title = "Load a Thumper Gate file";
                 ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
+                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -176,7 +176,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
-            sfd.Filter = "Thumper Gate File (*.txt)|*.txt";
+            sfd.Filter = "Thumper Gate File (*.gate)|*.gate";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
             if (sfd.ShowDialog() == DialogResult.OK) {

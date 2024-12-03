@@ -171,7 +171,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ///string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows.Insert(_in, new object[] {
                     0,
-                    (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
+                    _masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate,
                     _masterlvls[_in].type == "lvl" ? _masterlvls[_in].lvlname : _masterlvls[_in].gatename,
                     0
                 });
@@ -188,13 +188,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnMasterLvlCopy.Enabled = _masterlvls.Count > 0;
 
             foreach (DataGridViewRow dgvr in masterLvlList.Rows) {
-                string levelnum = "";
-                if (_masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL")
-                    levelnum = "Ω";
-                else if (_masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_PYRAMID")
-                    levelnum = "∞";
-                else
-                    levelnum = (dgvr.Index + 1).ToString();
+                string levelnum = _masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL"
+                    ? "Ω"
+                    : _masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_PYRAMID" 
+                        ? "∞"
+                        : (dgvr.Index + 1).ToString();
                 dgvr.Cells[0].Value = levelnum;
             }
 
@@ -515,8 +513,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JArray groupings = new();
             foreach (MasterLvlData group in _properties.masterlvls) {
                 JObject s = new() {
-                    { "lvl_name", (group.type == "lvl" ? group.lvlname : "") },
-                    { "gate_name", (group.type == "gate" ? group.gatename : "") },
+                    { "lvl_name", group.type == "lvl" ? group.lvlname : "" },
+                    { "gate_name", group.type == "gate" ? group.gatename : "" },
                     { "checkpoint", group.checkpoint.ToString() },
                     { "checkpoint_leader_lvl_name", group.checkpoint_leader.Replace("<none>", "") ?? "" },
                     { "rest_lvl_name", group.rest.Replace("<none>", "") ?? "" },

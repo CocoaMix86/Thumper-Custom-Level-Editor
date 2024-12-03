@@ -376,8 +376,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TreeNode currentNode = treeView1.GetNodeAt(e.Location);
             if (currentNode == null) return;
 
-            bool control = (ModifierKeys == Keys.Control);
-            bool shift = (ModifierKeys == Keys.Shift);
+            bool control = ModifierKeys == Keys.Control;
+            bool shift = ModifierKeys == Keys.Shift;
 
             if (control && e.Button != MouseButtons.Right) {
                 // the node clicked with control button pressed:
@@ -463,8 +463,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void treeView1_MouseUp(object sender, MouseEventArgs e)
         {
             TreeNode currentNode = treeView1.GetNodeAt(e.Location);
-            bool control = (ModifierKeys == Keys.Control);
-            bool shift = (ModifierKeys == Keys.Shift);
+            bool control = ModifierKeys == Keys.Control;
+            bool shift = ModifierKeys == Keys.Shift;
 
             if (control || shift || currentNode == null)
                 return;

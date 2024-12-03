@@ -132,7 +132,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void vscrollbarTrackEditor_Resize()
         {
             vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
-            vScrollBarTrackEditor.Maximum = (trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10);
+            vScrollBarTrackEditor.Maximum = trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10;
         }
         private void vScrollBarTrackEditor_VisibleChanged(object sender, EventArgs e)
         {
@@ -193,7 +193,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void vScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
         {
             if (trackEditor.FirstDisplayedScrollingRowIndex != -1)
-                trackEditor.FirstDisplayedScrollingRowIndex = (e.NewValue);
+                trackEditor.FirstDisplayedScrollingRowIndex = e.NewValue;
         }
         ///
         /// 
@@ -304,9 +304,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //sets flag that leaf has unsaved changes
                 if (changes) {
                     if (trackEditor.SelectedCells.Count > 1)
-                        SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {(_val ?? "empty")}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
+                        SaveLeaf(false, $"{trackEditor.SelectedCells.Count} beats value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
                     else
-                        SaveLeaf(false, $"Beat {columnindex} value set: {(_val ?? "empty")}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
+                        SaveLeaf(false, $"Beat {columnindex} value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
                 }
             }
             catch { }
@@ -455,12 +455,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
                     e.Handled = true;
                     //this is used for indexing if shifting left/down or right/up
-                    int indexdirection = (e.KeyCode is Keys.Right or Keys.Down ? 1 : -1);
-                    bool leftright = (e.KeyCode is Keys.Left or Keys.Right);
+                    int indexdirection = e.KeyCode is Keys.Right or Keys.Down ? 1 : -1;
+                    bool leftright = e.KeyCode is Keys.Left or Keys.Right;
                     bool shifted = false;
                     //sort cells in selection based on column. depends on direction, reverse collection.
                     //this processing order is important so cells dont overwrite each other when moving
-                    IOrderedEnumerable<DataGridViewCell> dgvcc = (indexdirection == -1) ? trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => (leftright ? c.ColumnIndex : c.RowIndex)) : trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => (leftright ? c.ColumnIndex : c.RowIndex));
+                    IOrderedEnumerable<DataGridViewCell> dgvcc = (indexdirection == -1) ? trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex) : trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);
                     trackEditor.ClearSelection();
                     //iterate over each in the selection
                     foreach (DataGridViewCell dgvc in dgvcc) {
@@ -1447,9 +1447,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<JProperty> data_points = _rawdata.Properties().ToList();
             //check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
             //Ask the user if they want to expand the leaf to accomadate the data point
-            if (data_points.Count > 0 && int.Parse(((JProperty)data_points.Last()).Name) >= r.Cells.Count) {
+            if (data_points.Count > 0 && int.Parse((data_points.Last()).Name) >= r.Cells.Count) {
                 if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {r.HeaderCell.Value}\nData point: {data_points.Last()}", "Leaf too short", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    numericUpDown_LeafLength.Value = int.Parse(((JProperty)data_points.Last()).Name) + 1;
+                    numericUpDown_LeafLength.Value = int.Parse((data_points.Last()).Name) + 1;
             }
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
@@ -1608,7 +1608,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
                     }
                 }
-                _s.highlight_color = /*(string)seq_obj["editor_data"]?[0] ??*/ (objectcolors.TryGetValue(_s.friendly_param, out string value) ? value : "-8355585");
+                _s.highlight_color = /*(string)seq_obj["editor_data"]?[0] ??*/ objectcolors.TryGetValue(_s.friendly_param, out string value) ? value : "-8355585";
                 //if an object can be multi-lane, it will be an .ent. Check for "." to detect this
                 if (_s.param_path.Contains('.'))
                     //get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
@@ -1808,9 +1808,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void undoItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tmsi = (ToolStripMenuItem)sender;
-            int index = (tmsi.Owner).Items.IndexOf(tmsi);
+            int index = tmsi.Owner.Items.IndexOf(tmsi);
 
-            if ((tmsi.Owner).Items.Count == 1 && (tmsi.Owner).Items[0].Text.Contains("No changes"))
+            if (tmsi.Owner.Items.Count == 1 && tmsi.Owner.Items[0].Text.Contains("No changes"))
                 return;
 
             UndoFunction(index + 1);
@@ -1892,10 +1892,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3);
                         break;
                     case 6:
-                        valueiftrue = (TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200) * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200 * (rng.Next(0, 1) == 0 ? 1 : -1);
                         break;
                     case 7:
                         valueiftrue = Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb();
+                        break;
+                    default:
                         break;
                 }
 
