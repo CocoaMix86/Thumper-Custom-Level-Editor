@@ -2,6 +2,7 @@
 using System.ComponentModel.Design;
 using System.Drawing.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -24,7 +25,7 @@ namespace Thumper_Custom_Level_Editor
         [Category("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public static string filepath => TCLE.WorkingFolder.FullName;
+        public static string filepath { get { return TCLE.WorkingFolder.FullName; } }
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]
@@ -39,7 +40,8 @@ namespace Thumper_Custom_Level_Editor
         [Description("")]
         [DefaultValue("D0")]
         [TypeConverter(typeof(DifficultyOptions))]
-        public string difficulty { get; set; }
+        public string difficulty { get { return _difficulty; } set { _difficulty = value; } }
+        private string _difficulty = null;
 
         [Category("General Project Info")]
         [DisplayName("Description")]
@@ -52,14 +54,14 @@ namespace Thumper_Custom_Level_Editor
         [RefreshProperties(RefreshProperties.All)]
         public decimal bpm
         {
-            get => Bpm;
+            get { return Bpm; }
             set {
                 if (value < 0)
                     value = 1;
                 if (value > 99999.99m)
                     value = 99999.99m;
                 Bpm = value;
-                foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dc in TCLE.Instance.dockMain.Documents) {
+                foreach (IDockContent dc in TCLE.Instance.dockMain.Documents) {
                     if (dc.DockHandler.TabText.Contains(".master")) (dc as Form_MasterEditor).propertyGridMaster.Refresh();
                     if (dc.DockHandler.TabText.Contains(".lvl")) (dc as Form_LvlEditor).RecalculateRuntime();
                 }

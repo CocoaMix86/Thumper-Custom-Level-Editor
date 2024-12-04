@@ -585,11 +585,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private string GetNodeFilePath(TreeNode _node)
-        {
-            return $@"{Path.GetDirectoryName(ProjectDirectory.FullName)}\{_node.FullPath}";
-        }
-
         private static bool IsAChildOfOtherNodes(TreeNode nodetofind, TreeNode nodetosearch)
         {
             if (nodetosearch.Nodes.Contains(nodetofind))

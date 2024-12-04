@@ -77,7 +77,7 @@
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
             if (e.Item is ToolStripButton btn && btn.CheckOnClick && btn.Checked) {
-                Rectangle bounds = new Rectangle(Point.Empty, e.Item.Size);
+                Rectangle bounds = new(Point.Empty, e.Item.Size);
                 bounds.Width--;
                 bounds.Height--;
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(46, 46, 46)), bounds);

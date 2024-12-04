@@ -56,7 +56,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<Sequencer_Object> _tracks = new();
         private static HashSet<Object_Params> _objects => TCLE.LeafObjects;
         private static Dictionary<string, string> objectcolors => TCLE.ObjectColors;
-        //public List<string> _tracklane = new() { ".a01", ".a02", ".ent", ".z01", ".z02" };
         private Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
         private List<string> lanenames = new() { "left", "center", "right" };
         private Dictionary<string, string> kTraitTooltips = new() { { "kTraitBool", "BOOL: accepts values 1 (on) or 0 (off)." }, { "kTraitAction", "ACTION: accepts values 1 (activate)." }, { "kTraitFloat", "FLOAT: accepts decimal values from -32000.0000 to 32000.0000." }, { "kTraitInt", "INT: accepts integer (no decimal) values from -32000 to 32000." }, { "kTraitColor", "COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors." } };
@@ -755,7 +754,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
+                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.

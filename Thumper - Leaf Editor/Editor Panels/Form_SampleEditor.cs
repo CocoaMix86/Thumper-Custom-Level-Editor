@@ -1,5 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using System.Collections.Generic;
 using Fmod5Sharp.FmodTypes;
 using Fmod5Sharp;
 using NAudio.Vorbis;
@@ -21,13 +28,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-
-        private FileInfo loadedsample
+        FileInfo loadedsample
         {
-            get => LoadedSample;
+            get { return loadedsample; }
             set {
                 if (loadedsample != value) {
-                    LoadedSample = value;
+                    loadedsample = value;
                     if (!LoadedSample.Exists) {
                         LoadedSample.CreateText();
                     }
@@ -36,8 +42,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private FileInfo LoadedSample;
-        private dynamic samplejson;
-        private ObservableCollection<SampleData> _samplelist = new();
+        dynamic samplejson;
+        ObservableCollection<SampleData> _samplelist = new();
         #endregion
 
         #region EventHandlers
@@ -144,7 +150,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.Title = "Load a Thumper Sample file";
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
+                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.

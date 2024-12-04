@@ -186,8 +186,11 @@ namespace Thumper_Custom_Level_Editor
 
         public static void Read_Config()
         {
-            CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
-            cfd_lvl.Title = "Select the folder where Thumper is installed (NOT the cache folder)";
+            CommonOpenFileDialog cfd_lvl = new() {
+                IsFolderPicker = true,
+                Multiselect = false,
+                Title = "Select the folder where Thumper is installed (NOT the cache folder)"
+            };
             //check if the game_dir has been set before. It'll be empty if starting for the first time
             if (Properties.Settings.Default.game_dir == "none")
                 cfd_lvl.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
@@ -305,14 +308,14 @@ namespace Thumper_Custom_Level_Editor
         /// 
 
 
-        public static string CopyToWorkingFolderCheck(string filepath, string workingfolder)
+        public static string CopyToWorkingFolderCheck(string filepath)
         {
-            if (workingfolder == null)
+            if (WorkingFolder == null)
                 return filepath;
 
             string dir = Path.GetDirectoryName(filepath);
             string file = Path.GetFileName(filepath);
-            if (dir != workingfolder) {
+            if (dir != WorkingFolder.FullName) {
                 DialogResult result = MessageBox.Show("That file is not in the current Working Folder. Do you want to copy it here?", "Bumper Custom Level Editor", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
                     if (!File.Exists($@"{WorkingFolder}\{file}")) 
@@ -320,28 +323,12 @@ namespace Thumper_Custom_Level_Editor
                     filepath = $@"{WorkingFolder}\{file}";
                 }
                 else
-                    filepath = "-1";
+                    filepath = null;
             }
 
             return filepath;
         }
-        /*
-        public static void HighlightMissingFile(DataGridView dgv, List<string> filelist)
-        {
-            List<dynamic> files = Directory.GetFiles(TCLE.WorkingFolder, "*.*", SearchOption.AllDirectories);
-            foreach (DataGridViewRow dgvr in dgv.Rows) {
-                string filename = $"{dgvr.Cells[1].Value.ToString()}.txt";
-                if (Directory.GetFiles(TCLE.WorkingFolder, $"{dgvr.Cells[1].Value.ToString()}.txt", SearchOption.AllDirectories).Any()) { 
-                    dgvr.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
-                    dgvr.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
-                }
-                else {
-                    dgvr.DefaultCellStyle.BackColor = Color.Maroon;
-                    dgvr.DefaultCellStyle.SelectionBackColor = Color.Gray;
-                }
-            }
-        }
-        */
+
         ///
         ///https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
         public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)

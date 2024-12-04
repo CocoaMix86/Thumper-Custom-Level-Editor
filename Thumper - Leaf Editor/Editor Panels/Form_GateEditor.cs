@@ -151,7 +151,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
+                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.

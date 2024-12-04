@@ -1,6 +1,16 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using System.Collections.Generic;
 using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -25,7 +35,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorLoading = false;
         public FileInfo loadedmaster
         {
-            get => LoadedMaster;
+            get { return LoadedMaster; }
             set {
                 if (LoadedMaster != value) {
                     LoadedMaster = value;
@@ -39,17 +49,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static FileInfo LoadedMaster;
         private List<MasterLvlData> clipboardmaster = new();
-        public ObservableCollection<MasterLvlData> _masterlvls { get => masterproperties.masterlvls; set => masterproperties.masterlvls = value; }
+        public ObservableCollection<MasterLvlData> _masterlvls { get { return masterproperties.masterlvls; } set { masterproperties.masterlvls = value; } }
         public MasterProperties masterproperties
         {
-            get => MasterProperties;
+            get { return MasterProperties; }
             set {
                 SaveCheckAndWrite(false);
                 MasterProperties = value;
             }
         }
         public static MasterProperties MasterProperties;
-        public decimal BPM => TCLE.dockProjectProperties.BPM;
+        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
         #region EventHandlers
@@ -74,7 +84,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{masterLvlList.Rows[e.RowIndex].Cells[2].Value}")).Value);
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{masterLvlList.Rows[e.RowIndex].Cells[2].Value}")).FirstOrDefault().Value);
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -171,7 +181,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ///string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows.Insert(_in, new object[] {
                     0,
-                    _masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate,
+                    (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
                     _masterlvls[_in].type == "lvl" ? _masterlvls[_in].lvlname : _masterlvls[_in].gatename,
                     0
                 });
@@ -188,11 +198,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnMasterLvlCopy.Enabled = _masterlvls.Count > 0;
 
             foreach (DataGridViewRow dgvr in masterLvlList.Rows) {
-                string levelnum = _masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL"
-                    ? "Ω"
-                    : _masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_PYRAMID" 
-                        ? "∞"
-                        : (dgvr.Index + 1).ToString();
+                string levelnum = "";
+                if (_masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL")
+                    levelnum = "Ω";
+                else if (_masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_PYRAMID")
+                    levelnum = "∞";
+                else
+                    levelnum = (dgvr.Index + 1).ToString();
                 dgvr.Cells[0].Value = levelnum;
             }
 
@@ -214,7 +226,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new FileInfo(TCLE.CopyToWorkingFolderCheck(ofd.FileName, TCLE.WorkingFolder.FullName));
+                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName));
                     if (filepath == null)
                         return;
                     //load json from file into _load. The regex strips any comments from the text.
@@ -420,9 +432,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //setup new master properties
             masterproperties = new(this, filepath) {
-                skybox = string.IsNullOrEmpty((string)_load["skybox_name"]) ? "<none>" : (string)_load["skybox_name"],
-                introlvl = string.IsNullOrEmpty((string)_load["intro_lvl_name"]) ? "<none>" : (string)_load["intro_lvl_name"],
-                checkpointlvl = string.IsNullOrEmpty((string)_load["checkpoint_lvl_name"]) ? "<none>" : (string)_load["checkpoint_lvl_name"]
+                skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
+                introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
+                checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
 
             ///Clear form elements so new data can load
@@ -430,8 +442,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
                 _masterlvls.Add(new MasterLvlData() {
-                    type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
-                    name = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
+                    type = ((string)_lvl["lvl_name"]) != String.Empty ? "lvl" : "gate",
+                    name = ((string)_lvl["lvl_name"]) != String.Empty ? _lvl["lvl_name"] : _lvl["gate_name"],
                     checkpoint = _lvl["checkpoint"],
                     playplus = _lvl["play_plus"],
                     isolate = _lvl["isolate"] ?? false,
@@ -475,7 +487,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dock in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(LoadedMaster.Name))) {
+                foreach (IDockContent dock in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(LoadedMaster.Name))) {
                     if (dock.GetType() == typeof(Form_RawText))
                         (dock as Form_RawText).Reload();
                 }
@@ -513,8 +525,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JArray groupings = new();
             foreach (MasterLvlData group in _properties.masterlvls) {
                 JObject s = new() {
-                    { "lvl_name", group.type == "lvl" ? group.lvlname : "" },
-                    { "gate_name", group.type == "gate" ? group.gatename : "" },
+                    { "lvl_name", (group.type == "lvl" ? group.lvlname : "") },
+                    { "gate_name", (group.type == "gate" ? group.gatename : "") },
                     { "checkpoint", group.checkpoint.ToString() },
                     { "checkpoint_leader_lvl_name", group.checkpoint_leader.Replace("<none>", "") ?? "" },
                     { "rest_lvl_name", group.rest.Replace("<none>", "") ?? "" },
