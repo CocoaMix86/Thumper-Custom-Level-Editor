@@ -49,7 +49,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static FileInfo LoadedMaster;
         private List<MasterLvlData> clipboardmaster = new();
-        public ObservableCollection<MasterLvlData> _masterlvls { get { return masterproperties.masterlvls; } set { masterproperties.masterlvls = value; } }
+        public ObservableCollection<MasterLvlData> MasterLvls { get { return masterproperties.masterlvls; } set { masterproperties.masterlvls = value; } }
         public MasterProperties masterproperties
         {
             get { return MasterProperties; }
@@ -71,18 +71,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //if not selecting the file column, return and do nothing
-            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
+            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
-            masterproperties.sublevel = _masterlvls[e.RowIndex];
+            masterproperties.sublevel = MasterLvls[e.RowIndex];
             propertyGridMaster.ExpandAllGridItems();
             propertyGridMaster.Refresh();
         }
         private void masterLvlList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //if not selecting the file column, return and do nothing
-            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > _masterlvls.Count - 1)
+            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
             TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{masterLvlList.Rows[e.RowIndex].Cells[2].Value}")).FirstOrDefault().Value);
         }
@@ -153,18 +153,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
-                if (e.Data.GetData(typeof(DataGridViewRow)) is not DataGridViewRow rowToMove || rowIndexOfItemUnderMouseToDrop == -1)
-                    return;
-                MasterLvlData tomove = _masterlvls[rowToMove.Index];
-                _masterlvls.RemoveAt(rowIndexFromMouseDown);
-                _masterlvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
-                //masterLvlList.Rows.RemoveAt(rowIndexFromMouseDown);
-                //masterLvlList.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+                if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                    MasterLvlData tomove = MasterLvls[rowToMove.Index];
+                    MasterLvls.RemoveAt(rowIndexFromMouseDown);
+                    MasterLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                }
+                if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
+                    AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
+                }
             }
-
-            TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
-            if (dragdropnode != null)
-                AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
         }
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -181,8 +178,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ///string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows.Insert(_in, new object[] {
                     0,
-                    (_masterlvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
-                    _masterlvls[_in].type == "lvl" ? _masterlvls[_in].lvlname : _masterlvls[_in].gatename,
+                    (MasterLvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
+                    MasterLvls[_in].type == "lvl" ? MasterLvls[_in].lvlname : MasterLvls[_in].gatename,
                     0
                 });
             }
@@ -192,16 +189,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             RecalculateRuntime();
             //enable certain buttons if there are enough items for them
-            btnMasterLvlDelete.Enabled = _masterlvls.Count > 0;
-            btnMasterLvlUp.Enabled = _masterlvls.Count > 1;
-            btnMasterLvlDown.Enabled = _masterlvls.Count > 1;
-            btnMasterLvlCopy.Enabled = _masterlvls.Count > 0;
+            btnMasterLvlDelete.Enabled = MasterLvls.Count > 0;
+            btnMasterLvlUp.Enabled = MasterLvls.Count > 1;
+            btnMasterLvlDown.Enabled = MasterLvls.Count > 1;
+            btnMasterLvlCopy.Enabled = MasterLvls.Count > 0;
 
             foreach (DataGridViewRow dgvr in masterLvlList.Rows) {
                 string levelnum = "";
-                if (_masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL")
+                if (MasterLvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL")
                     levelnum = "Ω";
-                else if (_masterlvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_PYRAMID")
+                else if (MasterLvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_PYRAMID")
                     levelnum = "∞";
                 else
                     levelnum = (dgvr.Index + 1).ToString();
@@ -272,13 +269,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<MasterLvlData> todelete = new();
             foreach (DataGridViewRow dgvr in masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList()) {
-                todelete.Add(_masterlvls[dgvr.Index]);
+                todelete.Add(MasterLvls[dgvr.Index]);
             }
             int _in = masterLvlList.CurrentRow.Index;
             foreach (MasterLvlData mld in todelete)
-                _masterlvls.Remove(mld);
+                MasterLvls.Remove(mld);
             TCLE.PlaySound("UIobjectremove");
-            masterLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= _masterlvls.Count ? _in - 1 : _in));
+            masterLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= MasterLvls.Count ? _in - 1 : _in));
         }
         private void btnMasterLvlAdd_Click(object sender, EventArgs e)
         {
@@ -314,7 +311,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
-            _masterlvls.Add(new MasterLvlData() {
+            MasterLvls.Add(new MasterLvlData() {
                 type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
                 name = (string)_load["obj_name"],
                 playplus = true,
@@ -334,8 +331,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
-                _masterlvls.Insert(dgvr - 1, _masterlvls[dgvr]);
-                _masterlvls.RemoveAt(dgvr + 1);
+                MasterLvls.Insert(dgvr - 1, MasterLvls[dgvr]);
+                MasterLvls.RemoveAt(dgvr + 1);
             }
             masterLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -351,8 +348,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
-                _masterlvls.Insert(dgvr + 2, _masterlvls[dgvr]);
-                _masterlvls.RemoveAt(dgvr);
+                MasterLvls.Insert(dgvr + 2, MasterLvls[dgvr]);
+                MasterLvls.RemoveAt(dgvr);
             }
             masterLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -365,7 +362,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
             selectedrows.Sort((row, row2) => row.CompareTo(row2));
-            clipboardmaster = _masterlvls.Where(x => selectedrows.Contains(_masterlvls.IndexOf(x))).ToList();
+            clipboardmaster = MasterLvls.Where(x => selectedrows.Contains(MasterLvls.IndexOf(x))).ToList();
             clipboardmaster.Reverse();
             TCLE.PlaySound("UIkcopy");
             btnMasterLvlPaste.Enabled = true;
@@ -375,7 +372,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             int _in = masterLvlList.CurrentRow?.Index + 1 ?? 0;
             foreach (MasterLvlData mld in clipboardmaster)
-                _masterlvls.Insert(_in, mld.Clone());
+                MasterLvls.Insert(_in, mld.Clone());
             TCLE.PlaySound("UIkpaste");
         }
 
@@ -426,10 +423,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
 
             ///Clear form elements so new data can load
-            _masterlvls.Clear();
+            MasterLvls.Clear();
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
-                _masterlvls.Add(new MasterLvlData() {
+                MasterLvls.Add(new MasterLvlData() {
                     type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
                     name = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
                     checkpoint = _lvl["checkpoint"],
@@ -484,16 +481,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void RecalculateRuntime()
         {
-            foreach (MasterLvlData _lvl in _masterlvls) {
+            foreach (MasterLvlData _lvl in MasterLvls) {
                 int beats = TCLE.CalculateSublevelRuntime(_lvl);
                 if (beats == -1) {
-                    masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
-                    masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"file not found";
+                    masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
+                    masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"file not found";
                 }
                 else {
                     string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                    masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].DefaultCellStyle = null;
-                    masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
+                    masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].DefaultCellStyle = null;
+                    masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
                 }
             }
             masterLvlList.Refresh();
@@ -592,7 +589,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void ResetMaster()
         {
             //reset things to default values
-            _masterlvls.Clear();
+            MasterLvls.Clear();
             this.Text = "Master Editor";
             masterproperties.skybox = "";
             //set saved flag to true, because nothing is loaded

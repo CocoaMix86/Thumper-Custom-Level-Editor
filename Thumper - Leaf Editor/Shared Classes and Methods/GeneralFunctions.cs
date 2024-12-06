@@ -409,7 +409,7 @@ namespace Thumper_Custom_Level_Editor
         {
             int _beatcount = 0;
             //loop through all entries in the master to get beat counts
-            foreach (MasterLvlData _masterlvl in master._masterlvls) {
+            foreach (MasterLvlData _masterlvl in master.MasterLvls) {
                 int _beats = CalculateSublevelRuntime(_masterlvl);
                 if (_beats != -1) _beatcount += _beats;
             }
