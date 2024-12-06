@@ -177,16 +177,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
-                if (e.Data.GetData(typeof(DataGridViewRow)) is not DataGridViewRow rowToMove || rowIndexOfItemUnderMouseToDrop == -1)
-                    return;
-                GateLvlData tomove = GateLvls[rowToMove.Index];
-                GateLvls.RemoveAt(rowIndexFromMouseDown);
-                GateLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                    GateLvlData tomove = GateLvls[rowToMove.Index];
+                    GateLvls.RemoveAt(rowIndexFromMouseDown);
+                    GateLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                }
+                if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
+                    AddFileToGate($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
+                }
             }
-
-            TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
-            if (dragdropnode != null)
-                AddFileToGate($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
         }
 
         private void gateLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -206,9 +205,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             gateLvlList.RowCount = 0;
             //repopulate dgv from list
             foreach (GateLvlData _lvl in GateProperties.gatelvls) {
-                gateLvlList.Rows.Add(new object[] { Properties.Resources.editor_lvl, _lvl.lvlname.Replace(".lvl", ""), _lvl.sentrytype, _lvl.bucket.ToString() });
-                //gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {GateProperties.gatelvls.IndexOf(_lvl) + 1}";
+                gateLvlList.Rows.Add(new object[] {
+                    Properties.Resources.editor_lvl,
+                    _lvl.lvlname,
+                    0
+                });
             }
+            RecalculateRuntime();
             //set selected index. Mainly used when moving items
             //enable certain buttons if there are enough items for them
             btnGateLvlDelete.Enabled = GateProperties.gatelvls.Count > 0;
@@ -501,9 +504,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
             GateLvls.Add(new GateLvlData() {
-                lvlname = (string)_load["lvl_name"],
-                sentrytype = gatesentrynames.First(x => x.Value == (string)_load["sentry_type"]).Key,
-                bucket = _load["bucket_num"]
+                lvlname = (string)_load["obj_name"],
+                sentrytype = "None",
+                bucket = 0
             });
             propertyGridGate.Refresh();
         }

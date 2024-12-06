@@ -145,6 +145,7 @@
             // 
             // gateLvlList
             // 
+            this.gateLvlList.AllowDrop = true;
             this.gateLvlList.AllowUserToAddRows = false;
             this.gateLvlList.AllowUserToDeleteRows = false;
             this.gateLvlList.AllowUserToResizeRows = false;
