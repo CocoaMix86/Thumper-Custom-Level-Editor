@@ -1,16 +1,23 @@
 ﻿using System.Globalization;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor
 {
     internal static class Program
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
+        // Native startup function, should be called asap, once at startup
+        [DllImport("tcle_native")] static extern void tcle_native_init();
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
         private static void Main(string[] args)
         {
+            // Invoke native startup code asap
+            tcle_native_init();
+
             if (args.Length <= 0)
                 args = new string[] { "" };
             else
