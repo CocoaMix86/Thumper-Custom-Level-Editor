@@ -1,17 +1,21 @@
-﻿namespace Thumper_Custom_Level_Editor
+﻿using WinRT.Thumper_Custom_Level_EditorVtableClasses;
+
+namespace Thumper_Custom_Level_Editor
 {
     public partial class ImageMessageBox : Form
     {
         private System.Drawing.Size _size;
+        private TCLE tcle;
 
         public ImageMessageBox()
         {
             InitializeComponent();
         }
 
-        public ImageMessageBox(string path)
+        public ImageMessageBox(string path, TCLE _tcle = null)
         {
             InitializeComponent();
+            tcle = _tcle;
 
             if (path == "railcolorhelp") {
                 this.BackgroundImage = Properties.Resources.help_railcolor;
@@ -31,7 +35,7 @@
                 this.Text = "Boss Section Explanation";
                 _size = this.BackgroundImage.Size;
             }
-            if (path == "spashscreen") {
+            if (path == "splashscreen") {
                 this.BackgroundImage = Properties.Resources.Thumper_Splash;
                 this.BackgroundImageLayout = ImageLayout.Center;
                 this.Text = "";
@@ -45,6 +49,8 @@
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            tcle.WindowState = FormWindowState.Maximized;
+            tcle.beeb.Visible = true;
             this.Close();
         }
     }

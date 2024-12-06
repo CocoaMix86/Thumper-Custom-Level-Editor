@@ -45,6 +45,7 @@ namespace Thumper_Custom_Level_Editor
             this.BackColor = Color.FromArgb(64, 0, 0);
             this.BackgroundImageLayout = ImageLayout.Center;
             this.ClientSize = new Size(506, 309);
+            this.FormBorderStyle = FormBorderStyle.None;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.Margin = new Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
@@ -52,7 +53,7 @@ namespace Thumper_Custom_Level_Editor
             this.Name = "ImageMessageBox";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "ImageMessageBox";
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.TopMost = true;
             this.ResumeLayout(false);
         }
