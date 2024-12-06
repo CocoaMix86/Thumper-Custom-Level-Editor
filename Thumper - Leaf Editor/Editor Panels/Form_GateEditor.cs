@@ -10,6 +10,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_GateEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
+            InitializeGateStuff();
             gateToolStrip.Renderer = new ToolStripOverride();
             TCLE.InitializeTracks(gateLvlList, false);
 
@@ -178,6 +179,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
                 if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                    if (rowIndexOfItemUnderMouseToDrop == -1)
+                        return;
                     GateLvlData tomove = GateLvls[rowToMove.Index];
                     GateLvls.RemoveAt(rowIndexFromMouseDown);
                     GateLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
@@ -186,17 +189,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     AddFileToGate($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
                 }
             }
-        }
-
-        private void gateLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1 || e.ColumnIndex <= 0)
-                return;
-            if (e.ColumnIndex == 2)
-                GateProperties.gatelvls[e.RowIndex].sentrytype = gateLvlList[2, e.RowIndex].Value.ToString();
-            if (e.ColumnIndex == 3)
-                GateProperties.gatelvls[e.RowIndex].bucket = int.Parse((string)gateLvlList[3, e.RowIndex].Value);
-            SaveCheckAndWrite(false);
         }
 
         public void gatelvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -211,7 +203,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     0
                 });
             }
-            RecalculateRuntime();
+            ///RecalculateRuntime();
             //set selected index. Mainly used when moving items
             //enable certain buttons if there are enough items for them
             btnGateLvlDelete.Enabled = GateProperties.gatelvls.Count > 0;
@@ -225,6 +217,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnGateLvlAdd.Enabled = true;
 
             //set lvl save flag to false
+            SaveCheckAndWrite(false);
+        }
+
+        private void propertyGridGate_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
             SaveCheckAndWrite(false);
         }
 
@@ -406,7 +403,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeGateStuff()
         {
-            GateProperties.gatelvls.CollectionChanged += gatelvls_CollectionChanged;
+            //GateProperties.gatelvls.CollectionChanged += gatelvls_CollectionChanged;
         }
 
         public void LoadGate(dynamic _load, FileInfo filepath)
@@ -511,8 +508,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridGate.Refresh();
         }
 
-        public void RecalculateRuntime()
+        public int RecalculateRuntime()
         {
+            int beattotal = 0;
             foreach (GateLvlData _lvl in GateProperties.gatelvls) {
                 KeyValuePair<string, FileInfo> lvlfile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_lvl.lvlname));
                 int beats = lvlfile.Key == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.Value.FullName);
@@ -521,12 +519,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].Cells[2].Value = $"file not found";
                 }
                 else {
+                    beattotal += beats;
                     string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                     gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].DefaultCellStyle = null;
                     gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].Cells[2].Value = $"{beats} beats -- {time}";
                 }
             }
             gateLvlList.Refresh();
+            return beattotal;
         }
 
         public JObject GateBuildSave(string _gatename)

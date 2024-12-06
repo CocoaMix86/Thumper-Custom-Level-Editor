@@ -288,6 +288,7 @@
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridGate.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridGate.ViewForeColor = Color.White;
+            this.propertyGridGate.PropertyValueChanged += this.propertyGridGate_PropertyValueChanged;
             // 
             // Form_GateEditor
             // 

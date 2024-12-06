@@ -435,7 +435,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //this section handles gate
             else {
-                int gatebeats = CalculateGateRuntime(_masterlvl.gatename);
+                int gatebeats = CalculateGateRuntimeFromFile(_masterlvl.gatename);
                 if (gatebeats == -1)
                     return -1;
                 else
@@ -446,7 +446,7 @@ namespace Thumper_Custom_Level_Editor
 
             return _beatcount;
         }
-        public static int CalculateGateRuntime(string gatename)
+        public static int CalculateGateRuntimeFromFile(string gatename)
         {
             dynamic _load;
             int _beatcount = 0;

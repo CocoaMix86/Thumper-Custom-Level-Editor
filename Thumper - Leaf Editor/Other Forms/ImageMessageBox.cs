@@ -28,8 +28,15 @@
 				this.BackgroundImageLayout = ImageLayout.Center;
 				this.Text = "Boss Section Explanation";
 				_size = this.BackgroundImage.Size;
-			}
-			this.Size = _size;
+            }
+            if (path == "spashscreen") {
+                this.BackgroundImage = Properties.Resources.Thumper_Splash;
+                this.BackgroundImageLayout = ImageLayout.Center;
+                this.Text = "";
+				this.ControlBox = false;
+                _size = this.BackgroundImage.Size;
+            }
+            this.Size = _size;
 			this.Height += 40;
 		}
 	}

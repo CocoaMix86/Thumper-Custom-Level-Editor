@@ -154,6 +154,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
                 if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                    if (rowIndexOfItemUnderMouseToDrop == -1)
+                        return;
                     MasterLvlData tomove = MasterLvls[rowToMove.Index];
                     MasterLvls.RemoveAt(rowIndexFromMouseDown);
                     MasterLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
@@ -174,8 +176,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 int _in = e.NewStartingIndex;
                 //get the runtime of the object
-                ///int beats = TCLE.CalculateSingleLvlRuntime(_masterlvls[_in]);
-                ///string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 masterLvlList.Rows.Insert(_in, new object[] {
                     0,
                     (MasterLvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
