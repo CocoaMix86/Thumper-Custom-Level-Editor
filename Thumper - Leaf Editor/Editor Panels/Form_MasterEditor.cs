@@ -442,8 +442,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
                 _masterlvls.Add(new MasterLvlData() {
-                    type = ((string)_lvl["lvl_name"]) != String.Empty ? "lvl" : "gate",
-                    name = ((string)_lvl["lvl_name"]) != String.Empty ? _lvl["lvl_name"] : _lvl["gate_name"],
+                    type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
+                    name = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
                     checkpoint = _lvl["checkpoint"],
                     playplus = _lvl["play_plus"],
                     isolate = _lvl["isolate"] ?? false,
@@ -497,7 +497,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void RecalculateRuntime()
         {
             foreach (MasterLvlData _lvl in _masterlvls) {
-                int beats = TCLE.CalculateSingleLvlRuntime(_lvl);
+                int beats = TCLE.CalculateSublevelRuntime(_lvl);
                 if (beats == -1) {
                     masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
                     masterLvlList.Rows[_masterlvls.IndexOf(_lvl)].Cells[3].Value = $"file not found";

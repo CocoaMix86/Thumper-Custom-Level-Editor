@@ -14,17 +14,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null)
                 LoadGate(load, filepath);
+            propertyGridGate.SelectedObject = GateProperties;
         }
         #endregion
 
         #region Variables
         public bool EditorIsSaved = true;
+        public bool EditorLoading = false;
         public FileInfo loadedgate
         {
             get => LoadedGate;
             set {
                 LoadedGate = value;
-                dropGateSection.SelectedIndex = 0;
                 if (!LoadedGate.Exists) {
                     LoadedGate.CreateText();
                 }
@@ -33,7 +34,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static FileInfo LoadedGate;
         private readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
-        private readonly List<BossData> bossdata = new() {
+        public readonly List<BossData> bossdata = new() {
             new BossData() {boss_name = "Level 1 - circle", boss_spn = "boss_gate.spn", boss_ent = "boss_gate_pellet.ent"},
             new BossData() {boss_name = "Level 1 - crakhed", boss_spn = "crakhed1.spn", boss_ent = "crakhed.ent"},
             new BossData() {boss_name = "Level 2 - circle", boss_spn = "boss_jump.spn", boss_ent = "boss_gate_pellet.ent"},
@@ -59,9 +60,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private readonly List<string> _bucket1 = new() { "41561eda", "347eebcb", "f8192c30", "0c9ddd9e" };
         private readonly List<string> _bucket2 = new() { "fe617306", "3ee2811c", "d4f56308", "092f1784" };
         private readonly List<string> _bucket3 = new() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
-        private readonly Dictionary<string, string> gatesentrynames = new() { { "SENTRY_NONE", "None" }, { "SENTRY_SINGLE_LANE", "Single Lane" }, { "SENTRY_MULTI_LANE", "Multi Lane" } };
+        private readonly Dictionary<string, string> gatesentrynames = new() { { "None", "SENTRY_NONE" }, { "Single Lane", "SENTRY_SINGLE_LANE" }, { "Multi Lane", "SENTRY_MULTI_LANE" } };
+        private readonly Dictionary<string, string> gatesectiontypes = new() { { "Normal", "SECTION_LINEAR"}, { "Boss", "SECTION_BOSS_TRIANGLE"}, { "Final Boss", "SECTION_BOSS_CRAKHED" }, { "Infinity", "SECTION_BOSS_PYRAMID" } };
         private dynamic gatejson;
-        public ObservableCollection<GateLvlData> _gatelvls = new();
+        public GateProperties gateproperties
+        {
+            get { return GateProperties; }
+            set {
+                SaveCheckAndWrite(false);
+                GateProperties = value;
+            }
+        }
+        private static GateProperties GateProperties;
+        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
         #region EventHandlers
@@ -72,14 +83,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void gateLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Do nothing if not selecting the lvl name
-            if (e.ColumnIndex != 1 || e.RowIndex == -1 || e.RowIndex > _gatelvls.Count - 1)
+            if (e.ColumnIndex != 1 || e.RowIndex == -1 || e.RowIndex > GateProperties.gatelvls.Count - 1)
                 return;
             if (System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
             dynamic _load;
             //gateLvlList_RowEnter(sender, e);
             if (/*!_mainform._savelvl &&*/ MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes /*|| _mainform._savelvl*/) {
-                string _file = _gatelvls[e.RowIndex].lvlname.Replace(".lvl", "");
+                string _file = GateProperties.gatelvls[e.RowIndex].lvlname.Replace(".lvl", "");
                 if (File.Exists($@"{TCLE.WorkingFolder}\lvl_{_file}.txt")) {
                     _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
                 }
@@ -100,10 +111,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex == -1 || e.ColumnIndex <= 0)
                 return;
             if (e.ColumnIndex == 2)
-                _gatelvls[e.RowIndex].sentrytype = gateLvlList[2, e.RowIndex].Value.ToString();
+                GateProperties.gatelvls[e.RowIndex].sentrytype = gateLvlList[2, e.RowIndex].Value.ToString();
             if (e.ColumnIndex == 3)
-                _gatelvls[e.RowIndex].bucket = int.Parse((string)gateLvlList[3, e.RowIndex].Value);
-            SaveGate(false);
+                GateProperties.gatelvls[e.RowIndex].bucket = int.Parse((string)gateLvlList[3, e.RowIndex].Value);
+            SaveCheckAndWrite(false);
         }
 
         public void gatelvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -112,27 +123,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             gateLvlList.RowCount = 0;
             //repopulate dgv from list
             gateLvlList.RowEnter -= gateLvlList_RowEnter;
-            foreach (GateLvlData _lvl in _gatelvls) {
+            foreach (GateLvlData _lvl in GateProperties.gatelvls) {
                 gateLvlList.Rows.Add(new object[] { Properties.Resources.editor_lvl, _lvl.lvlname.Replace(".lvl", ""), _lvl.sentrytype, _lvl.bucket.ToString() });
-                //gateLvlList.Rows[_gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {_gatelvls.IndexOf(_lvl) + 1}";
+                //gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {GateProperties.gatelvls.IndexOf(_lvl) + 1}";
             }
             gateLvlList.RowEnter += gateLvlList_RowEnter;
             ///TCLE.HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\lvl_{x.Cells[1].Value}.txt").ToList());
             //set selected index. Mainly used when moving items
             ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
             //enable certain buttons if there are enough items for them
-            btnGateLvlDelete.Enabled = _gatelvls.Count > 0;
-            btnGateLvlUp.Enabled = _gatelvls.Count > 1;
-            btnGateLvlDown.Enabled = _gatelvls.Count > 1;
+            btnGateLvlDelete.Enabled = GateProperties.gatelvls.Count > 0;
+            btnGateLvlUp.Enabled = GateProperties.gatelvls.Count > 1;
+            btnGateLvlDown.Enabled = GateProperties.gatelvls.Count > 1;
 
             //limit how many phases can be added
-            if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
+            if ((GateProperties.gatelvls.Count >= 4 && GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.boss != "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.random))
                 btnGateLvlAdd.Enabled = false;
             else
                 btnGateLvlAdd.Enabled = true;
 
             //set lvl save flag to false
-            SaveGate(false);
+            SaveCheckAndWrite(false);
         }
 
         private void gatenewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -210,49 +221,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.lockedfiles.Add(loadedgate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
             TCLE.WriteFileLock(TCLE.lockedfiles[LoadedGate], _save);
-            SaveGate(true, true);
+            SaveCheckAndWrite(true, true);
             this.Text = LoadedGate.Name;
-        }
-
-        /// All dropdowns of Gate Editor call this
-        private void dropGateBoss_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (dropGateBoss.Text.Contains("pyramid")) {
-                if (_gatelvls.Count != 5)
-                    MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence, otherwise the level will crash.", "Gate Info");
-                if (_gatelvls.Count < 5)
-                    btnGateLvlAdd.Enabled = true;
-            }
-            else if (_gatelvls.Count > 4 && !checkGateRandom.Checked) {
-                for (int x = _gatelvls.Count - 1; x >= 4; x--) {
-                    _gatelvls.RemoveAt(x);
-                }
-            }
-            else if (_gatelvls.Count == 4)
-                btnGateLvlAdd.Enabled = false;
-            else if (_gatelvls.Count < 4)
-                btnGateLvlAdd.Enabled = true;
-            SaveGate(false);
-        }
-        private void dropGatePre_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btnGateOpenPre.Enabled = dropGatePre.SelectedIndex > 0;
-            SaveGate(false);
-        }
-        private void dropGatePost_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btnGateOpenPost.Enabled = dropGatePost.SelectedIndex > 0;
-            SaveGate(false);
-        }
-        private void dropGateRestart_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btnGateOpenRestart.Enabled = dropGateRestart.SelectedIndex > 0;
-            SaveGate(false);
-        }
-
-        private void dropGateSection_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SaveGate(false);
         }
         #endregion
 
@@ -265,35 +235,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<GateLvlData> todelete = new();
             foreach (DataGridViewRow dgvr in gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList()) {
-                todelete.Add(_gatelvls[dgvr.Index]);
+                todelete.Add(GateProperties.gatelvls[dgvr.Index]);
             }
             int _in = gateLvlList.CurrentRow.Index;
             foreach (GateLvlData gld in todelete)
-                _gatelvls.Remove(gld);
+                GateProperties.gatelvls.Remove(gld);
             TCLE.PlaySound("UIobjectremove");
-            gateLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= _gatelvls.Count ? _in - 1 : _in));
+            gateLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= GateProperties.gatelvls.Count ? _in - 1 : _in));
         }
 
         private void btnGateLvlAdd_Click(object sender, EventArgs e)
         {
-            //don't load new lvl if gate has 4 phases
-            if (_gatelvls.Count == 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) {
-                MessageBox.Show("You can only add 4 phases to a boss (each lvl is a phase).", "Gate Info");
-                return;
-            }
-            if (_gatelvls.Count == 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") {
-                MessageBox.Show("Pyramid requires only 5 phases (each lvl is a phase).", "Gate Info");
-                return;
-            }
             //show file dialog
             using OpenFileDialog ofd = new();
-            ofd.Filter = "Thumper Gate File (*.txt)|lvl_*.txt";
+            ofd.Filter = "Thumper Gate File (*.lvl)|*.lvl";
             ofd.Title = "Load a Thumper Lvl file";
             ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
-                //limit how many phases can be added
-                if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
-                    return;
                 //parse leaf to JSON
                 dynamic _load = TCLE.LoadFileLock(ofd.FileName);
                 //check if file being loaded is actually a leaf. Can do so by checking the JSON key
@@ -302,9 +260,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
                 //add leaf data to the list
-                _gatelvls.Add(new GateLvlData() {
+                GateProperties.gatelvls.Add(new GateLvlData() {
                     lvlname = (string)_load["obj_name"],
-                    sentrytype = "None"
+                    sentrytype = "None",
+                    bucket = 0
                 });
                 TCLE.PlaySound("UIobjectadd");
             }
@@ -317,14 +276,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
-                _gatelvls.Insert(dgvr - 1, _gatelvls[dgvr]);
-                _gatelvls.RemoveAt(dgvr + 1);
+                GateProperties.gatelvls.Insert(dgvr - 1, GateProperties.gatelvls[dgvr]);
+                GateProperties.gatelvls.RemoveAt(dgvr + 1);
             }
             gateLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
                 gateLvlList.Rows[dgvr - 1].Cells[1].Selected = true;
             }
-            SaveGate(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnGateLvlDown_Click(object sender, EventArgs e)
@@ -334,21 +293,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
-                _gatelvls.Insert(dgvr + 2, _gatelvls[dgvr]);
-                _gatelvls.RemoveAt(dgvr);
+                GateProperties.gatelvls.Insert(dgvr + 2, GateProperties.gatelvls[dgvr]);
+                GateProperties.gatelvls.RemoveAt(dgvr);
             }
             gateLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
                 gateLvlList.Rows[dgvr + 1].Cells[1].Selected = true;
             }
-            SaveGate(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnRevertGate_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            SaveGate(true);
+            SaveCheckAndWrite(true);
             LoadGate(gatejson, LoadedGate);
             TCLE.PlaySound("UIrevertchanges");
         }
@@ -357,29 +316,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnGatePanelNew_Click(object sender, EventArgs e)
         {
             ///_mainform.toolstripGateNew.PerformClick();
-        }
-        //I use MasterLoadLvl on these because it's the exact same code to load a lvl
-        private void btnGateOpenPre_Click(object sender, EventArgs e) { /*_mainform.MasterLoadLvl(dropGatePre.Text);*/ }
-        private void btnGateOpenPost_Click(object sender, EventArgs e) { /*_mainform.MasterLoadLvl(dropGatePost.Text);*/ }
-        private void btnGateOpenRestart_Click(object sender, EventArgs e) { /*_mainform.MasterLoadLvl(dropGateRestart.Text);*/ }
-
-        private void checkGateRandom_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkGateRandom.Checked && _gatelvls.Count < 16)
-                btnGateLvlAdd.Enabled = true;
-            else if (!checkGateRandom.Checked) {
-                if (_gatelvls.Count > 4 && MessageBox.Show("Disabling random will remove all phases after the 4th. Continue?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                    for (int x = _gatelvls.Count - 1; x >= 4; x--) {
-                        _gatelvls.RemoveAt(x);
-                    }
-                }
-                else
-                    return;
-            }
-            dgvGateBucket.Visible = checkGateRandom.Checked;
-            dropGateBoss.Enabled = !checkGateRandom.Checked;
-            dropGateBoss.SelectedItem = bossdata.First(x => x.boss_name == "Level 6 - spirograph");
-            SaveGate(false);
         }
         #endregion
 
@@ -390,16 +326,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeGateStuff()
         {
-            _gatelvls.CollectionChanged += gatelvls_CollectionChanged;
-
-            ///add boss data to dropdown
-            dropGateBoss.DisplayMember = "boss_name";
-            dropGateBoss.ValueMember = "boss_spn";
-            dropGateBoss.DataSource = bossdata;
-            dropGateSection.SelectedIndex = 0;
-            //
-            dropGateSection.SelectedIndex = -1;
-            SaveGate(true);
+            GateProperties.gatelvls.CollectionChanged += gatelvls_CollectionChanged;
         }
 
         public void LoadGate(dynamic _load, FileInfo filepath)
@@ -414,59 +341,42 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             loadedgate = filepath;
             //set some visual elements
             this.Text = LoadedGate.Name;
+            EditorLoading = true;
+
+            gateproperties = new(this, filepath) {
+                boss = bossdata.First(x => x.boss_spn == (string)_load["spn_name"]).boss_name,
+                prelvl = string.IsNullOrEmpty((string)_load["pre_lvl_name"]) ? "<none>" : (string)_load["pre_lvl_name"],
+                postlvl = string.IsNullOrEmpty((string)_load["post_lvl_name"]) ? "<none>" : (string)_load["post_lvl_name"],
+                restartlvl = string.IsNullOrEmpty((string)_load["restart_lvl_name"]) ? "<none>" : (string)_load["restart_lvl_name"],
+                sectiontype = gatesectiontypes.First(x => x.Value == (string)_load["section_type"]).Key,
+                random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
+            };
 
             ///Clear form elements so new data can load
-            _gatelvls.Clear();
+            GateProperties.gatelvls.Clear();
             ///load lvls associated with this master
-            gateLvlList.CellValueChanged -= gateLvlList_CellValueChanged;
             foreach (dynamic _lvl in _load["boss_patterns"]) {
-                _gatelvls.Add(new GateLvlData() {
+                GateProperties.gatelvls.Add(new GateLvlData() {
                     lvlname = _lvl["lvl_name"],
-                    //sentrytype = ((string)_lvl["sentry_type"]).Replace("SENTRY_", "").Replace("_", " ").ToLower().ToTitleCase(),
-                    sentrytype = gatesentrynames[(string)_lvl["sentry_type"]],
+                    sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
                     bucket = _lvl["bucket_num"]
                 });
-                if ((string)_load["spn_name"] == "pyramid.spn" && _gatelvls.Count == 5)
+                if ((string)_load["spn_name"] == "pyramid.spn" && GateProperties.gatelvls.Count == 5)
                     break;
-                else if ((string)_load["random_type"] == "LEVEL_RANDOM_BUCKET") {
-                    if (_gatelvls.Count == 16)
+                else if (gateproperties.random) {
+                    if (gateproperties.gatelvls.Count == 16)
                         break;
                 }
-                else if ((string)_load["spn_name"] != "pyramid.spn" && _gatelvls.Count == 4)
+                else if (gateproperties.boss == "Level 9 - pyramid" && GateProperties.gatelvls.Count == 4)
                     break;
             }
-            gateLvlList.CellValueChanged += gateLvlList_CellValueChanged;
-
-            checkGateRandom.CheckedChanged -= checkGateRandom_CheckedChanged;
-            dropGateBoss.SelectedIndexChanged -= dropGateBoss_SelectedIndexChanged;
-            //populate dropdowns
-            string boss = (string)_load["spn_name"];
-            if (boss == "pyramidboss.spn") boss = "pyramid.spn";
-            if (boss == "boss_frac.spn") boss = "boss_fractal.spn";
-            checkGateRandom.Checked = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
-            dropGateBoss.SelectedValue = boss;
-            dropGatePre.SelectedItem = string.IsNullOrEmpty((string)_load["pre_lvl_name"]) ? "<none>" : (string)_load["pre_lvl_name"];
-            dropGatePost.SelectedItem = string.IsNullOrEmpty((string)_load["post_lvl_name"]) ? "<none>" : (string)_load["post_lvl_name"];
-            dropGateRestart.SelectedItem = string.IsNullOrEmpty((string)_load["restart_lvl_name"]) ? "<none>" : (string)_load["restart_lvl_name"];
-            dropGateSection.SelectedIndex = dropGateSection.FindStringExact((string)_load["section_type"]);
-            //
-            checkGateRandom.CheckedChanged += checkGateRandom_CheckedChanged;
-            dropGateBoss.SelectedIndexChanged += dropGateBoss_SelectedIndexChanged;
-
-            dgvGateBucket.Visible = checkGateRandom.Checked;
-            dropGateBoss.Enabled = !checkGateRandom.Checked;
-            //limit how many phases can be added
-            if ((_gatelvls.Count >= 4 && bossdata[dropGateBoss.SelectedIndex].boss_spn != "pyramid.spn" && !checkGateRandom.Checked) || (_gatelvls.Count >= 5 && bossdata[dropGateBoss.SelectedIndex].boss_spn == "pyramid.spn") || (_gatelvls.Count >= 16 && checkGateRandom.Checked))
-                btnGateLvlAdd.Enabled = false;
-            else
-                btnGateLvlAdd.Enabled = true;
 
             ///set save flag (gate just loaded, has no changes)
             gatejson = _load;
-            SaveGate(true);
+            SaveCheckAndWrite(true);
         }
 
-        public void SaveGate(bool save, bool playsound = false)
+        public void SaveCheckAndWrite(bool save, bool playsound = false)
         {
             //make the beeble emote
             TCLE.beeble.MakeFace();
@@ -490,6 +400,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        public void RecalculateRuntime()
+        {
+            foreach (GateLvlData _lvl in GateProperties.gatelvls) {
+                KeyValuePair<string, FileInfo> lvlfile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_lvl.lvlname));
+                int beats = lvlfile.Key == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.Value.FullName);
+                if (beats == -1) {
+                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
+                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].Cells[2].Value = $"file not found";
+                }
+                else {
+                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].DefaultCellStyle = null;
+                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].Cells[2].Value = $"{beats} beats -- {time}";
+                }
+            }
+            gateLvlList.Refresh();
+        }
+
         public JObject GateBuildSave(string _gatename)
         {
             int bucket0 = 0;
@@ -500,27 +428,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JObject _save = new() {
                 { "obj_type", "SequinGate" },
                 { "obj_name", _gatename },
-                { "spn_name", dropGateBoss.SelectedValue.ToString() },
-                { "param_path", bossdata[dropGateBoss.SelectedIndex].boss_ent },
-                { "pre_lvl_name", dropGatePre.Text.Replace("<none>", "") },
-                { "post_lvl_name", dropGatePost.Text.Replace("<none>", "") },
-                { "restart_lvl_name", dropGateRestart.Text.Replace("<none>", "") },
-                { "section_type", dropGateSection.Text },
-                { "random_type", $"LEVEL_RANDOM_{(checkGateRandom.Checked ? "BUCKET" : "NONE")}" }
+                { "spn_name", bossdata.First(x => x.boss_name == GateProperties.boss).boss_spn },
+                { "param_path", bossdata.First(x => x.boss_name == GateProperties.boss).boss_ent },
+                { "pre_lvl_name", GateProperties.prelvl.Replace("<none>", "") },
+                { "post_lvl_name", GateProperties.postlvl.Replace("<none>", "") },
+                { "restart_lvl_name", GateProperties.restartlvl.Replace("<none>", "") },
+                { "section_type", gatesectiontypes[GateProperties.sectiontype]},
+                { "random_type", $"LEVEL_RANDOM_{(GateProperties.random ? "BUCKET" : "NONE")}" }
             };
             //setup boss_patterns
             JArray boss_patterns = new();
-            //int lvlcount = checkGateRandom.Checked ? _gatelvls.Count : _save["spn_name"].ToString().Contains("pyramid") ? 5 : 4;
-            for (int x = 0; x < _gatelvls.Count; x++) {
+            //int lvlcount = checkGateRandom.Checked ? GateProperties.gatelvls.Count : _save["spn_name"].ToString().Contains("pyramid") ? 5 : 4;
+            for (int x = 0; x < GateProperties.gatelvls.Count; x++) {
                 JObject s = new() {
-                    { "lvl_name", _gatelvls[x].lvlname },
-					//{ "sentry_type", $"SENTRY_{_gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
-					{ "sentry_type", $"{gatesentrynames.First(e => e.Value == _gatelvls[x].sentrytype).Key}"},
-                    { "bucket_num", _gatelvls[x].bucket }
+                    { "lvl_name", GateProperties.gatelvls[x].lvlname },
+					//{ "sentry_type", $"SENTRY_{GateProperties.gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
+					{ "sentry_type", $"{gatesentrynames.First(e => e.Value == GateProperties.gatelvls[x].sentrytype).Key}"},
+                    { "bucket_num", GateProperties.gatelvls[x].bucket }
                 };
                 //if using RANDOM, the buckets and hashes are all different per entry in each bucket
-                if (checkGateRandom.Checked) {
-                    switch (_gatelvls[x].bucket) {
+                if (GateProperties.random) {
+                    switch (GateProperties.gatelvls[x].bucket) {
                         case 0:
                             s.Add("node_name_hash", _bucket0[bucket0]);
                             bucket0 = (bucket0 + 1) % 4;
@@ -568,15 +496,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //reset things to default values
             gatejson = null;
-            _gatelvls.Clear();
+            GateProperties.gatelvls.Clear();
             gateLvlList.Rows.Clear();
-            checkGateRandom.Checked = false;
-            dropGatePre.SelectedIndex = 0;
-            dropGatePost.SelectedIndex = 0;
-            dropGateRestart.SelectedIndex = 0;
             this.Text = "Gate Editor";
             //set saved flag to true, because nothing is loaded
-            SaveGate(true);
+            SaveCheckAndWrite(true);
         }
         #endregion
 
