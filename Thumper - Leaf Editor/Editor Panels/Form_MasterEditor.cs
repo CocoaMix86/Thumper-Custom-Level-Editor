@@ -314,28 +314,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
-            if (_load["obj_type"] == "SequinLevel")
-                _masterlvls.Add(new MasterLvlData() {
-                    type = "lvl",
-                    name = (string)_load["obj_name"],
-                    playplus = true,
-                    checkpoint = true,
-                    checkpoint_leader = "<none>",
-                    rest = "<none>",
-                    gatesectiontype = "",
-                    id = TCLE.rng.Next(0, 1000000)
-                });
-            else if (_load["obj_type"] == "SequinGate")
-                _masterlvls.Add(new MasterLvlData() {
-                    type = "gate",
-                    name = (string)_load["obj_name"],
-                    playplus = true,
-                    checkpoint = true,
-                    checkpoint_leader = "<none>",
-                    rest = "<none>",
-                    gatesectiontype = (string)_load["section_type"],
-                    id = TCLE.rng.Next(0, 1000000)
-                });
+            _masterlvls.Add(new MasterLvlData() {
+                type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
+                name = (string)_load["obj_name"],
+                playplus = true,
+                checkpoint = true,
+                checkpoint_leader = "<none>",
+                rest = "<none>",
+                gatesectiontype = "",
+                id = TCLE.rng.Next(0, 1000000)
+            });
             propertyGridMaster.Refresh();
         }
 

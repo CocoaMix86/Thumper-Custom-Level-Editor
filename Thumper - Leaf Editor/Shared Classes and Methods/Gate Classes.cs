@@ -192,7 +192,7 @@ namespace Thumper_Custom_Level_Editor
 
     public class GateSectionType : StringConverter
     {
-        private List<string> sectiontypes = new() { "Normal", "Boss", "Final Boss", "Infinity" };
+        private List<string> sectiontypes = new() { "None", "Boss", "Final Boss", "Infinity" };
         public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
@@ -203,7 +203,7 @@ namespace Thumper_Custom_Level_Editor
 
     public class GateBucket : StringConverter
     {
-        private List<string> sectiontypes = new() { "Normal", "Boss", "Final Boss", "Infinity" };
+        private List<int> sectiontypes = new() { 0, 1, 2, 3 };
         public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)

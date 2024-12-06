@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -61,7 +62,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private readonly List<string> _bucket2 = new() { "fe617306", "3ee2811c", "d4f56308", "092f1784" };
         private readonly List<string> _bucket3 = new() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
         private readonly Dictionary<string, string> gatesentrynames = new() { { "None", "SENTRY_NONE" }, { "Single Lane", "SENTRY_SINGLE_LANE" }, { "Multi Lane", "SENTRY_MULTI_LANE" } };
-        private readonly Dictionary<string, string> gatesectiontypes = new() { { "Normal", "SECTION_LINEAR"}, { "Boss", "SECTION_BOSS_TRIANGLE"}, { "Final Boss", "SECTION_BOSS_CRAKHED" }, { "Infinity", "SECTION_BOSS_PYRAMID" } };
+        private readonly Dictionary<string, string> gatesectiontypes = new() {
+            { "SECTION_LINEAR", "None" },
+            { "SECTION_BOSS_TRIANGLE", "Boss" },
+            { "SECTION_BOSS_CIRCLE", "Boss" },
+            { "SECTION_BOSS_MINI", "Boss" },
+            { "SECTION_BOSS_CRAKHED", "Final Boss" },
+            { "SECTION_BOSS_CRAKHED_FINAL", "Final Boss" },
+            { "SECTION_BOSS_PYRAMID", "Infinity" }
+        };
         private dynamic gatejson;
         public GateProperties gateproperties
         {
@@ -72,6 +81,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private static GateProperties GateProperties;
+        public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
         public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
@@ -79,31 +89,104 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///        ///
         /// EVENTS ///
         ///        ///
-
-        private void gateLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void gateLvlList_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            //Do nothing if not selecting the lvl name
-            if (e.ColumnIndex != 1 || e.RowIndex == -1 || e.RowIndex > GateProperties.gatelvls.Count - 1)
+            //if not selecting the file column, return and do nothing
+            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
                 return;
-            if (System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
-            dynamic _load;
-            //gateLvlList_RowEnter(sender, e);
-            if (/*!_mainform._savelvl &&*/ MessageBox.Show("Current lvl is not saved. Do you want load this one?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes /*|| _mainform._savelvl*/) {
-                string _file = GateProperties.gatelvls[e.RowIndex].lvlname.Replace(".lvl", "");
-                if (File.Exists($@"{TCLE.WorkingFolder}\lvl_{_file}.txt")) {
-                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
+            gateproperties.sublevel = GateLvls[e.RowIndex];
+            propertyGridGate.ExpandAllGridItems();
+            propertyGridGate.Refresh();
+        }
+
+        private void gateLvlList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if not selecting the file column, return and do nothing
+            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
+                return;
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{gateLvlList.Rows[e.RowIndex].Cells[1].Value}")).FirstOrDefault().Value);
+        }
+
+        private Rectangle dragBoxFromMouseDown;
+        private int rowIndexFromMouseDown;
+        private int rowIndexOfItemUnderMouseToDrop;
+        private void gateLvlList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                // If the mouse moves outside the rectangle, start the drag.
+                if (dragBoxFromMouseDown != Rectangle.Empty &&
+                    !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+
+                    // Proceed with the drag and drop, passing in the list item.                    
+                    DragDropEffects dropEffect = gateLvlList.DoDragDrop(gateLvlList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
                 }
-                else {
-                    MessageBox.Show("This lvl does not exist in the Level folder.");
-                    return;
-                }
-                //load the selected lvl
-                ///_mainform.LoadLvl(_load, $@"{TCLE.WorkingFolder}\lvl_{_file}.txt");
             }
         }
-        private void gateLvlList_RowEnter(object sender, DataGridViewCellEventArgs e)
+
+        private void gateLvlList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            // Get the index of the item the mouse is below.
+            rowIndexFromMouseDown = gateLvlList.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndexFromMouseDown != -1) {
+                // Remember the point where the mouse down occurred. 
+                // The DragSize indicates the size that the mouse can move 
+                // before a drag event should be started.                
+                Size dragSize = SystemInformation.DragSize;
+
+                // Create a rectangle using the DragSize, with the mouse position being
+                // at the center of the rectangle.
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+            }
+            else
+                // Reset the rectangle if the mouse is not over an item in the ListBox.
+                dragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+        private int previousDragOver = -1;
+        private void gateLvlList_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = gateLvlList.PointToClient(new Point(e.X, e.Y));
+            // Retrieve the node at the drop location.
+            int targetRow = gateLvlList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
+            //changing the hovered node backcolor to make it obvious where the destination will be
+            if (previousDragOver != targetRow && previousDragOver != -1) {
+                if (gateLvlList.Rows[previousDragOver].Cells[2].Value.ToString() == "file not found")
+                    gateLvlList.Rows[previousDragOver].DefaultCellStyle.BackColor = Color.Maroon;
+                else
+                    gateLvlList.Rows[previousDragOver].DefaultCellStyle = null;
+            }
+            if (targetRow != -1 && targetRow != previousDragOver) {
+                gateLvlList.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
+                previousDragOver = targetRow;
+            }
+        }
+
+        private void gateLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+        private void gateLvlList_DragDrop(object sender, DragEventArgs e)
+        {
+            // The mouse locations are relative to the screen, so they must be 
+            // converted to client coordinates.
+            Point clientPoint = gateLvlList.PointToClient(new Point(e.X, e.Y));
+
+            // Get the row index of the item the mouse is below. 
+            rowIndexOfItemUnderMouseToDrop = gateLvlList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+
+            // If the drag operation was a move then remove and insert the row.
+            if (e.Effect == DragDropEffects.Move) {
+                if (e.Data.GetData(typeof(DataGridViewRow)) is not DataGridViewRow rowToMove || rowIndexOfItemUnderMouseToDrop == -1)
+                    return;
+                GateLvlData tomove = GateLvls[rowToMove.Index];
+                GateLvls.RemoveAt(rowIndexFromMouseDown);
+                GateLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+            }
+
+            TreeNode dragdropnode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+            if (dragdropnode != null)
+                AddFileToGate($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
         }
 
         private void gateLvlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -122,15 +205,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //clear dgv
             gateLvlList.RowCount = 0;
             //repopulate dgv from list
-            gateLvlList.RowEnter -= gateLvlList_RowEnter;
             foreach (GateLvlData _lvl in GateProperties.gatelvls) {
                 gateLvlList.Rows.Add(new object[] { Properties.Resources.editor_lvl, _lvl.lvlname.Replace(".lvl", ""), _lvl.sentrytype, _lvl.bucket.ToString() });
                 //gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].HeaderCell.Value = $"Phase {GateProperties.gatelvls.IndexOf(_lvl) + 1}";
             }
-            gateLvlList.RowEnter += gateLvlList_RowEnter;
-            ///TCLE.HighlightMissingFile(gateLvlList, gateLvlList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\lvl_{x.Cells[1].Value}.txt").ToList());
             //set selected index. Mainly used when moving items
-            ///lvlLeafList.CurrentCell = _lvlleafs.Count > 0 ? lvlLeafList.Rows[selectedIndex].Cells[0] : null;
             //enable certain buttons if there are enough items for them
             btnGateLvlDelete.Enabled = GateProperties.gatelvls.Count > 0;
             btnGateLvlUp.Enabled = GateProperties.gatelvls.Count > 1;
@@ -230,7 +309,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///         ///
         /// BUTTONS ///
         ///         ///
-
         private void btnGateLvlDelete_Click(object sender, EventArgs e)
         {
             List<GateLvlData> todelete = new();
@@ -241,7 +319,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (GateLvlData gld in todelete)
                 GateProperties.gatelvls.Remove(gld);
             TCLE.PlaySound("UIobjectremove");
-            gateLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= GateProperties.gatelvls.Count ? _in - 1 : _in));
         }
 
         private void btnGateLvlAdd_Click(object sender, EventArgs e)
@@ -348,7 +425,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 prelvl = string.IsNullOrEmpty((string)_load["pre_lvl_name"]) ? "<none>" : (string)_load["pre_lvl_name"],
                 postlvl = string.IsNullOrEmpty((string)_load["post_lvl_name"]) ? "<none>" : (string)_load["post_lvl_name"],
                 restartlvl = string.IsNullOrEmpty((string)_load["restart_lvl_name"]) ? "<none>" : (string)_load["restart_lvl_name"],
-                sectiontype = gatesectiontypes.First(x => x.Value == (string)_load["section_type"]).Key,
+                sectiontype = gatesectiontypes.First(x => x.Key == (string)_load["section_type"]).Value,
                 random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
             };
 
@@ -398,6 +475,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 */
                 if (playsound) TCLE.PlaySound("UIsave");
             }
+        }
+
+        private void AddFileToGate(string path)
+        {
+            //parse leaf to JSON
+            dynamic _load = TCLE.LoadFileLock(path);
+            //check if file being loaded is actually a leaf. Can do so by checking the JSON key
+            if ((string)_load["obj_type"] is not "SequinLevel") {
+                MessageBox.Show("That does not appear to be a lvl.\nItem not added to gate.", "Bumper Custom Level Editor");
+                return;
+            }
+            //check if lvl exists in the same folder as the master. If not, allow user to copy file.
+            //this is why I utilize workingfolder
+            //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
+            if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder.FullName)) {
+                if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
+                        File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
+                        TCLE.dockProjectExplorer.CreateTreeView();
+                    }
+                    else
+                        return;
+            }
+            TCLE.PlaySound("UIobjectadd");
+            //add lvl/gate data to the list
+            GateLvls.Add(new GateLvlData() {
+                lvlname = (string)_load["lvl_name"],
+                sentrytype = gatesentrynames.First(x => x.Value == (string)_load["sentry_type"]).Key,
+                bucket = _load["bucket_num"]
+            });
+            propertyGridGate.Refresh();
         }
 
         public void RecalculateRuntime()
