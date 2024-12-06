@@ -122,7 +122,7 @@
             // 
             // SublevelNum
             // 
-            this.SublevelNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SublevelNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             this.SublevelNum.HeaderText = "";
             this.SublevelNum.Name = "SublevelNum";
             this.SublevelNum.ReadOnly = true;
