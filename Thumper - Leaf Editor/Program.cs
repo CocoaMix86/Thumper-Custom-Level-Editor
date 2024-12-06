@@ -24,10 +24,10 @@ namespace Thumper_Custom_Level_Editor
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 
-            ImageMessageBox splash = new("spashscreen") { TopMost = true, WindowState = FormWindowState.Maximized };
+            ImageMessageBox splash = new("spashscreen") { TopMost = true, TopLevel = true, WindowState = FormWindowState.Maximized };
             splash.Show();
 
-            Application.Run(new TCLE(args[0]));
+            Application.Run(new TCLE(args[0]) { Visible = false });
         }
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
