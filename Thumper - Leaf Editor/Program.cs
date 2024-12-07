@@ -16,7 +16,6 @@ namespace Thumper_Custom_Level_Editor
             {
                 if (Native.tcle_native_init() != Native.TCLE_OK) throw new Exception("Native code initialization failed");
 
-<<<<<<< HEAD
                 if (args.Length <= 0)
                     args = new string[] { "" };
                 else
