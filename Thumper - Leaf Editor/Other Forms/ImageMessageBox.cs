@@ -47,10 +47,9 @@
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            tcle.WindowState = FormWindowState.Maximized;
+            tcle.MaximizeScreenBounds();
             tcle.beeble = new();
             tcle.beeble.Show();
-            tcle.MaximizeScreenBounds();
             this.Close();
         }
     }
