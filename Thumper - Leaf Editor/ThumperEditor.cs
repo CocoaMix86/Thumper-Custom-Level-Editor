@@ -13,7 +13,8 @@ namespace Thumper_Custom_Level_Editor
         #region Variables
         public static TCLE Instance;
         public static DockPanel DockMain => Instance.dockMain;
-        public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents;
+        public static IEnumerable<IDockContent> Workspaces => Instance.dockMain.Documents;
+        public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents);
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
         private Properties.Settings settings = Properties.Settings.Default;
@@ -336,7 +337,10 @@ namespace Thumper_Custom_Level_Editor
         {
             IDockContent _activedoc = dockMain.ActiveDocument;
             if (_activedoc.GetType() == typeof(Form_MasterEditor)) {
-                ((Form_MasterEditor)_activedoc).SaveAs();
+                ((Form_MasterEditor)_activedoc).Save();
+            }
+            else if (_activedoc.GetType() == typeof(Form_GateEditor)) {
+                ((Form_GateEditor)_activedoc).Save();
             }
         }
 
@@ -514,7 +518,10 @@ namespace Thumper_Custom_Level_Editor
             if (GlobalActiveDocument.GetType() == typeof(Form_MasterEditor)) {
                 (GlobalActiveDocument as Form_MasterEditor).Save();
             }
-            if (GlobalActiveDocument.GetType() == typeof(Form_RawText)) {
+            else if (GlobalActiveDocument.GetType() == typeof(Form_GateEditor)) {
+                (GlobalActiveDocument as Form_GateEditor).Save();
+            }
+            else if (GlobalActiveDocument.GetType() == typeof(Form_RawText)) {
                 (GlobalActiveDocument as Form_RawText).Save();
             }
         }
@@ -526,7 +533,10 @@ namespace Thumper_Custom_Level_Editor
                     if (document.GetType() == typeof(Form_MasterEditor)) {
                         (document as Form_MasterEditor).Save();
                     }
-                    if (document.GetType() == typeof(Form_RawText)) {
+                    else if (document.GetType() == typeof(Form_GateEditor)) {
+                        (document as Form_GateEditor).Save();
+                    }
+                    else if (document.GetType() == typeof(Form_RawText)) {
                         (document as Form_RawText).Save();
                     }
                 }

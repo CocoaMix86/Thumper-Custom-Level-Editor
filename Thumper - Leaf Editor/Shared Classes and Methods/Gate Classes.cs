@@ -51,7 +51,8 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
         public string filepath => FilePath.FullName;
-        private FileInfo FilePath;
+        [Browsable(false)]
+        public FileInfo FilePath;
 
         [CategoryAttribute("Options")]
         [DisplayName("Boss")]
@@ -135,7 +136,7 @@ namespace Thumper_Custom_Level_Editor
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Bucket")]
-        [TypeConverter(typeof(GateSentryList))]
+        [TypeConverter(typeof(GateBucket))]
         [Description("Which phase's bucket should this go in. If random FALSE, always use 0.")]
         public int bucket { get => sublevel.bucket; set => sublevel.bucket = value; }
     }
@@ -194,7 +195,7 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    public class GateBucket : StringConverter
+    public class GateBucket : Int32Converter
     {
         private List<int> sectiontypes = new() { 0, 1, 2, 3 };
         public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }

@@ -235,7 +235,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///SAVE
         public void Save()
         {
-            //if _loadedmaster is somehow not set, force Save As instead
+            //if LoadedMaster is somehow not set, force Save As instead
             if (LoadedMaster == null)
                 SaveAs();
             else
@@ -253,9 +253,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //separate path and filename
                 string storePath = Path.GetDirectoryName(sfd.FileName);
                 loadedmaster = new FileInfo($@"{storePath}\sequin.master");
-                BuildSave(masterproperties);
-                //after saving new file, refresh the workingfolder
-                ///_mainform.btnWorkRefresh.PerformClick();
+                SaveCheckAndWrite(true, true);
+                //after saving new file, refresh the project explorer
+                TCLE.dockProjectExplorer.CreateTreeView();
             }
         }
         #endregion
@@ -439,7 +439,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             ///set save flag (master just loaded, has no changes)
             EditorLoading = false;
-            SaveCheckAndWrite(true);
+            EditorIsSaved = true;
         }
 
         public void Reload()
@@ -471,11 +471,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
 
                 if (playsound) TCLE.PlaySound("UIsave");
-
-                foreach (IDockContent dock in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(LoadedMaster.Name))) {
-                    if (dock.GetType() == typeof(Form_RawText))
-                        (dock as Form_RawText).Reload();
-                }
+                //find if any raw text docs are open of this gate and update them
+                TCLE.FindReloadRaw(LoadedMaster.Name);
             }
         }
 

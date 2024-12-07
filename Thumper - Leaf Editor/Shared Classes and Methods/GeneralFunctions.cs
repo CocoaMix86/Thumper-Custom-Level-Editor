@@ -549,5 +549,15 @@ namespace Thumper_Custom_Level_Editor
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
         }
+
+        public static void FindReloadRaw(string documentname)
+        {
+            //find if any raw text docs are open of this gate and update them
+            foreach (IDockContent document in TCLE.Documents) {
+                if (document.GetType() == typeof(Form_RawText)) {
+                    (document as Form_RawText).Reload();
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.DirectoryServices.ActiveDirectory;
 using System.Windows.Input;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -27,16 +29,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             get => LoadedGate;
             set {
-                LoadedGate = value;
-                if (!LoadedGate.Exists) {
-                    LoadedGate.CreateText();
+                if (LoadedGate != value) {
+                    LoadedGate = value;
+                    if (!LoadedGate.Exists) {
+                        LoadedGate.CreateText();
+                    }
+                    TCLE.lockedfiles.Add(LoadedGate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
-                TCLE.lockedfiles.Add(LoadedGate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
         }
         private static FileInfo LoadedGate;
-        private readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
-        public readonly List<BossData> bossdata = new() {
+        private static readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
+        public static readonly List<BossData> bossdata = new() {
             new BossData() {boss_name = "Level 1 - circle", boss_spn = "boss_gate.spn", boss_ent = "boss_gate_pellet.ent"},
             new BossData() {boss_name = "Level 1 - crakhed", boss_spn = "crakhed1.spn", boss_ent = "crakhed.ent"},
             new BossData() {boss_name = "Level 2 - circle", boss_spn = "boss_jump.spn", boss_ent = "boss_gate_pellet.ent"},
@@ -58,12 +62,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             new BossData() {boss_name = "Level 9 - crakhed",  boss_spn = "crakhed9.spn", boss_ent = "crakhed.ent"},
             new BossData() {boss_name = "Level 9 - pyramid",  boss_spn = "pyramid.spn", boss_ent = "crakhed.ent"}
         };
-        private readonly List<string> _bucket0 = new() { "33caad90", "418d18a1", "1e84f4f0", "2e1b70cf" };
-        private readonly List<string> _bucket1 = new() { "41561eda", "347eebcb", "f8192c30", "0c9ddd9e" };
-        private readonly List<string> _bucket2 = new() { "fe617306", "3ee2811c", "d4f56308", "092f1784" };
-        private readonly List<string> _bucket3 = new() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
-        private readonly Dictionary<string, string> gatesentrynames = new() { { "None", "SENTRY_NONE" }, { "Single Lane", "SENTRY_SINGLE_LANE" }, { "Multi Lane", "SENTRY_MULTI_LANE" } };
-        private readonly Dictionary<string, string> gatesectiontypes = new() {
+        private static readonly List<string> _bucket0 = new() { "33caad90", "418d18a1", "1e84f4f0", "2e1b70cf" };
+        private static readonly List<string> _bucket1 = new() { "41561eda", "347eebcb", "f8192c30", "0c9ddd9e" };
+        private static readonly List<string> _bucket2 = new() { "fe617306", "3ee2811c", "d4f56308", "092f1784" };
+        private static readonly List<string> _bucket3 = new() { "e790cc5a", "df4d10ff", "e7bc30f7", "1f30e67f" };
+        private static readonly Dictionary<string, string> gatesentrynames = new() { { "None", "SENTRY_NONE" }, { "Single Lane", "SENTRY_SINGLE_LANE" }, { "Multi Lane", "SENTRY_MULTI_LANE" } };
+        private static readonly Dictionary<string, string> gatesectiontypes = new() {
             { "SECTION_LINEAR", "None" },
             { "SECTION_BOSS_TRIANGLE", "Boss" },
             { "SECTION_BOSS_CIRCLE", "Boss" },
@@ -229,7 +233,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void gatenewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((!EditorIsSaved && MessageBox.Show("Current Gate is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                gatesaveAsToolStripMenuItem_Click(null, null);
+                //gatesaveAsToolStripMenuItem_Click(null, null);
             }
         }
 
@@ -254,49 +258,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///SAVE
         public void Save()
         {
-            //if _loadedgate is somehow not set, force Save As instead
-            if (loadedgate == null) {
-                ///_mainform.toolstripGateSaveAs.PerformClick();
-                return;
-            }
+            //if LoadedGate is somehow not set, force Save As instead
+            if (LoadedGate == null)
+                SaveAs();
             else
-                WriteGate();
+                SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        private void gatesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAs()
         {
             using SaveFileDialog sfd = new();
-            //filter .txt only
             sfd.Filter = "Thumper Gate File (*.gate)|*.gate";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                if (sender == null)
-                    loadedgate = null;
-                //separate path and filename
-                string storePath = Path.GetDirectoryName(sfd.FileName);
-                string tempFileName = Path.GetFileName(sfd.FileName);
-                if (!tempFileName.EndsWith(".txt"))
-                    tempFileName += ".txt";
-                //check if user input "gate_", and deny save if so
-                if (Path.GetFileName(sfd.FileName).Contains("gate_")) {
-                    MessageBox.Show("File not saved. Do not include 'gate_' in your file name.", "File not saved");
-                    return;
-                }
-                if (File.Exists($@"{storePath}\gate_{tempFileName}")) {
-                    MessageBox.Show("That file name exists already.", "File not saved");
-                    return;
-                }
-                loadedgate = new FileInfo($@"{storePath}\{tempFileName}.gate");
-                WriteGate();
-                //after saving new file, refresh the workingfolder
-                ///_mainform.btnWorkRefresh.PerformClick();
+                loadedgate = new FileInfo($"{sfd.FileName}");
+                SaveCheckAndWrite(true, true);
+                //after saving new file, refresh the project explorer
+                TCLE.dockProjectExplorer.CreateTreeView();
             }
         }
         private void WriteGate()
         {
             //write contents direct to file without prompting save dialog
-            JObject _save = GateBuildSave(LoadedGate.Name);
+            JObject _save = BuildSave(GateProperties);
             if (!TCLE.lockedfiles.ContainsKey(loadedgate)) {
                 TCLE.lockedfiles.Add(loadedgate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
@@ -448,32 +433,41 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     break;
             }
 
-            ///set save flag (gate just loaded, has no changes)
-            gatejson = _load;
-            SaveCheckAndWrite(true);
+            EditorLoading = false;
+            EditorIsSaved = true;
         }
 
-        public void SaveCheckAndWrite(bool save, bool playsound = false)
+        public void Reload()
         {
+            dynamic _load = TCLE.LoadFileLock(LoadedGate.FullName);
+            LoadGate(_load, LoadedGate);
+        }
+
+        public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
+        {
+            if (EditorLoading)
+                return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
-            EditorIsSaved = save;
-            if (!save) {
-                /*
-                btnSaveGate.Enabled = true;
-                btnRevertGate.Enabled = gatejson != null;
-                btnRevertGate.ToolTipText = gatejson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
-                toolstripTitleGate.BackColor = Color.Maroon;
-                */
+            EditorIsSaved = IsSaved;
+            if (!IsSaved) {
+                //denote editor tab is not saved
+                this.Text = LoadedGate.Name + "*";
+                //add current JSON to the undo list
+                gateproperties.undoItems.Add(BuildSave(gateproperties));
             }
             else {
-                /*
-                btnSaveGate.Enabled = false;
-                btnRevertGate.Enabled = false;
-                toolstripTitleGate.BackColor = Color.FromArgb(40, 40, 40);
-                */
+                this.Text = LoadedGate.Name;
+                //build the JSON to write to file
+                JObject _saveJSON = BuildSave(gateproperties);
+                gateproperties.revertPoint = _saveJSON;
+                //write JSON to file
+                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedGate], _saveJSON);
+
                 if (playsound) TCLE.PlaySound("UIsave");
+                //find if any raw text docs are open of this gate and update them
+                TCLE.FindReloadRaw(LoadedGate.Name);
             }
         }
 
@@ -529,7 +523,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return beattotal;
         }
 
-        public JObject GateBuildSave(string _gatename)
+        public static JObject BuildSave(GateProperties _properties)
         {
             int bucket0 = 0;
             int bucket1 = 0;
@@ -538,28 +532,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///being build Master JSON object
             JObject _save = new() {
                 { "obj_type", "SequinGate" },
-                { "obj_name", _gatename },
-                { "spn_name", bossdata.First(x => x.boss_name == GateProperties.boss).boss_spn },
-                { "param_path", bossdata.First(x => x.boss_name == GateProperties.boss).boss_ent },
-                { "pre_lvl_name", GateProperties.prelvl.Replace("<none>", "") },
-                { "post_lvl_name", GateProperties.postlvl.Replace("<none>", "") },
-                { "restart_lvl_name", GateProperties.restartlvl.Replace("<none>", "") },
-                { "section_type", gatesectiontypes[GateProperties.sectiontype]},
-                { "random_type", $"LEVEL_RANDOM_{(GateProperties.random ? "BUCKET" : "NONE")}" }
+                { "obj_name", _properties.FilePath.Name },
+                { "spn_name", bossdata.First(x => x.boss_name == _properties.boss).boss_spn },
+                { "param_path", bossdata.First(x => x.boss_name == _properties.boss).boss_ent },
+                { "pre_lvl_name", _properties.prelvl.Replace("<none>", "") },
+                { "post_lvl_name", _properties.postlvl.Replace("<none>", "") },
+                { "restart_lvl_name", _properties.restartlvl.Replace("<none>", "") },
+                { "section_type", gatesectiontypes.First(x => x.Value == _properties.sectiontype).Key},
+                { "random_type", $"LEVEL_RANDOM_{(_properties.random ? "BUCKET" : "NONE")}" }
             };
             //setup boss_patterns
             JArray boss_patterns = new();
-            //int lvlcount = checkGateRandom.Checked ? GateProperties.gatelvls.Count : _save["spn_name"].ToString().Contains("pyramid") ? 5 : 4;
-            for (int x = 0; x < GateProperties.gatelvls.Count; x++) {
+            for (int x = 0; x < _properties.gatelvls.Count; x++) {
                 JObject s = new() {
-                    { "lvl_name", GateProperties.gatelvls[x].lvlname },
-					//{ "sentry_type", $"SENTRY_{GateProperties.gatelvls[x].sentrytype.ToUpper().Replace(' ', '_')}" },
-					{ "sentry_type", $"{gatesentrynames.First(e => e.Value == GateProperties.gatelvls[x].sentrytype).Key}"},
-                    { "bucket_num", GateProperties.gatelvls[x].bucket }
+                    { "lvl_name", _properties.gatelvls[x].lvlname },
+					{ "sentry_type", $"{gatesentrynames[_properties.gatelvls[x].sentrytype]}"},
+                    { "bucket_num", _properties.gatelvls[x].bucket }
                 };
                 //if using RANDOM, the buckets and hashes are all different per entry in each bucket
-                if (GateProperties.random) {
-                    switch (GateProperties.gatelvls[x].bucket) {
+                if (_properties.random) {
+                    switch (_properties.gatelvls[x].bucket) {
                         case 0:
                             s.Add("node_name_hash", _bucket0[bucket0]);
                             bucket0 = (bucket0 + 1) % 4;
@@ -599,7 +591,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 boss_patterns.Add(s);
             }
             _save.Add("boss_patterns", boss_patterns);
-            gatejson = _save;
             return _save;
         }
 

@@ -1,5 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.DirectoryServices.ActiveDirectory;
+using System.Windows.Documents;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -19,8 +22,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
         #region Variables
         public bool EditorIsSaved = true;
-        private FileInfo loadedfile { get => LoadedFile; set => LoadedFile = value; }
-        public static FileInfo LoadedFile;
+        public FileInfo loadedfile { get => LoadedFile; set => LoadedFile = value; }
+        private static FileInfo LoadedFile;
         #endregion
         #region Event Handlers
         private void textEditor_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
@@ -75,10 +78,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dock in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(LoadedFile.Name))) {
-                    if (dock.GetType() == typeof(Form_MasterEditor))
-                        (dock as Form_MasterEditor).Reload();
+                foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(LoadedFile.Name))) {
+                    if (document.GetType() == typeof(Form_MasterEditor))
+                        (document as Form_MasterEditor).Reload();
+                    else if (document.GetType() == typeof(Form_GateEditor))
+                        (document as Form_GateEditor).Reload();
                 }
+
             }
         }
         #endregion
