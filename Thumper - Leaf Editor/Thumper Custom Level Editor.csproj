@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Thumper_Custom_Level_Editor</RootNamespace>
     <Nullable>enable</Nullable>

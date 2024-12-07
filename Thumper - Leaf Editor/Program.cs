@@ -1,36 +1,46 @@
 ﻿using System.Globalization;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor
 {
     internal static class Program
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
         private static void Main(string[] args)
         {
-            if (args.Length <= 0)
-                args = new string[] { "" };
-            else
-                args[0] = string.Join(" ", args);
-            // Force culture info, ensures periods . for decimals
-            CultureInfo ci = new("en-US");
-            Thread.CurrentThread.CurrentCulture = ci;
-            Thread.CurrentThread.CurrentUICulture = ci;
+            try
+            {
+                if (Native.tcle_native_init() != Native.TCLE_OK) throw new Exception("Native code initialization failed");
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+                if (args.Length <= 0)
+                    args = new string[] { "" };
+                else
+                    args[0] = string.Join(" ", args);
+                // Force culture info, ensures periods . for decimals
+                CultureInfo ci = new("en-US");
+                Thread.CurrentThread.CurrentCulture = ci;
+                Thread.CurrentThread.CurrentUICulture = ci;
 
-            TCLE tcle = new TCLE(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
-            ImageMessageBox splash = new("splashscreen", tcle) { TopMost = true, TopLevel = true };
-            splash.Show();
-            tcle.Location = new Point(splash.Location.X, splash.Location.Y);
-            tcle.Size = splash.Size;
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 
-            Application.Run(tcle);
+                TCLE tcle = new TCLE(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
+                ImageMessageBox splash = new("splashscreen", tcle) { TopMost = true, TopLevel = true };
+                splash.Show();
+                tcle.Location = new Point(splash.Location.X, splash.Location.Y);
+                tcle.Size = splash.Size;
+
+                Application.Run(tcle);
+            }
+            finally
+            {
+                Native.tcle_native_uninit();
+            }
         }
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
