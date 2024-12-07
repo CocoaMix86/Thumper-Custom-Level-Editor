@@ -29,25 +29,19 @@ namespace Thumper_Custom_Level_Editor
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-                Application.Run(new TCLE(args[0]));
+
+                TCLE tcle = new TCLE(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
+                ImageMessageBox splash = new("splashscreen", tcle) { TopMost = true, TopLevel = true };
+                splash.Show();
+                tcle.Location = new Point(splash.Location.X, splash.Location.Y);
+                tcle.Size = splash.Size;
+
+                Application.Run(tcle);
             }
             finally
             {
                 Native.tcle_native_uninit();
             }
-=======
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-
-            TCLE tcle = new TCLE(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
-            ImageMessageBox splash = new("splashscreen", tcle) { TopMost = true, TopLevel = true };
-            splash.Show();
-            tcle.Location = new Point(splash.Location.X, splash.Location.Y);
-            tcle.Size = splash.Size;
-
-            Application.Run(tcle);
->>>>>>> dotnet9
         }
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
