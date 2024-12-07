@@ -27,7 +27,8 @@ namespace Thumper_Custom_Level_Editor
             TCLE tcle = new TCLE(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
             ImageMessageBox splash = new("splashscreen", tcle) { TopMost = true, TopLevel = true };
             splash.Show();
-            tcle.Location = new Point(splash.Location.X + 200, splash.Location.Y + 200);
+            tcle.Location = new Point(splash.Location.X, splash.Location.Y);
+            tcle.Size = splash.Size;
 
             Application.Run(tcle);
         }

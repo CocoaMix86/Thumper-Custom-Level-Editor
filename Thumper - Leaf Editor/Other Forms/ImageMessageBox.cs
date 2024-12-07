@@ -1,6 +1,4 @@
-﻿using WinRT.Thumper_Custom_Level_EditorVtableClasses;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
     public partial class ImageMessageBox : Form
     {
@@ -50,7 +48,9 @@ namespace Thumper_Custom_Level_Editor
         private void timer1_Tick(object sender, EventArgs e)
         {
             tcle.WindowState = FormWindowState.Maximized;
-            tcle.beeb.Visible = true;
+            tcle.beeble = new();
+            tcle.beeble.Show();
+            tcle.MaximizeScreenBounds();
             this.Close();
         }
     }

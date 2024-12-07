@@ -80,8 +80,8 @@ namespace Thumper_Custom_Level_Editor
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
-        public Beeble beeb => beeble;
-        public static Beeble beeble = new() { Visible = false };
+        public Beeble beeble { get => MainBeeble; set => MainBeeble = value; }
+        public static Beeble MainBeeble;
         #endregion
 
         #region Form Construction
@@ -92,11 +92,10 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             dockMain.Theme = new VS2015DarkTheme();
-            beeble.Show();
             Instance = this;
             TabRightClickMenu = contextmenuTabClick;
 
-            MaximizeScreenBounds();
+            //MaximizeScreenBounds();
             ColorFormElements();
             JumpListUpdate();
 
@@ -245,7 +244,7 @@ namespace Thumper_Custom_Level_Editor
                 contextFormRestore.Enabled = false;
             }
         }
-        private void MaximizeScreenBounds()
+        public void MaximizeScreenBounds()
         {
             Rectangle bounds = Screen.FromHandle(this.Handle).WorkingArea;
             //Screen WorkingArea is shrunk a small bit compared to the actual display area
@@ -282,10 +281,13 @@ namespace Thumper_Custom_Level_Editor
         }
         private void TCLE_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
-                beeble.Visible = false;
-            else
-                beeble.Visible = true;
+            if (this.WindowState == FormWindowState.Minimized) {
+                if (MainBeeble != null) MainBeeble.Visible = false;
+            }
+            else {
+                if (MainBeeble != null) MainBeeble.Visible = true;
+            }
+
             if (this.WindowState == FormWindowState.Normal)
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
         }
