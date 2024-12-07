@@ -95,7 +95,6 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("Random")]
         [Description("When TRUE, only Spirograph boss can be used. Each phase can hold up to 4 lvls in its 'bucket'. Then in game, every time a phase is repeated, it will use one of the lvls in its bucket randomly.")]
-        [TypeConverter(typeof(LvlList))]
         public bool random
         {
             get => Random;

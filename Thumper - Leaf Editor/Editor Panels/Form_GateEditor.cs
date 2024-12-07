@@ -203,7 +203,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     0
                 });
             }
-            ///RecalculateRuntime();
+            //RecalculateRuntime();
+            propertyGridGate.Refresh();
             //set selected index. Mainly used when moving items
             //enable certain buttons if there are enough items for them
             btnGateLvlDelete.Enabled = GateProperties.gatelvls.Count > 0;
@@ -312,10 +313,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnGateLvlDelete_Click(object sender, EventArgs e)
         {
             List<GateLvlData> todelete = new();
-            foreach (DataGridViewRow dgvr in gateLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList()) {
+            foreach (DataGridViewRow dgvr in gateLvlList.SelectedRows) {
                 todelete.Add(GateProperties.gatelvls[dgvr.Index]);
             }
-            int _in = gateLvlList.CurrentRow.Index;
             foreach (GateLvlData gld in todelete)
                 GateProperties.gatelvls.Remove(gld);
             TCLE.PlaySound("UIobjectremove");
