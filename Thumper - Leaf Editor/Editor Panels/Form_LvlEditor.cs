@@ -923,7 +923,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (loadinglvl)
                 return;
             //make the beeble emote
-            TCLE.beeble.MakeFace();
+            TCLE.MainBeeble.MakeFace();
 
             EditorIsSaved = save;
             if (!save) {

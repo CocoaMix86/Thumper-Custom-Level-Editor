@@ -50,7 +50,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
             //make the beeble emote
-            TCLE.beeble.MakeFace();
+            TCLE.MainBeeble.MakeFace();
 
             EditorIsSaved = IsSaved;
             if (!IsSaved) {
