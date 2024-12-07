@@ -6,31 +6,34 @@ namespace Thumper_Custom_Level_Editor
 {
     internal static class Program
 	{
-        // Native startup function, should be called asap, once at startup
-        [DllImport("tcle_native")] static extern void tcle_native_init();
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         private static void Main(string[] args)
         {
-            // Invoke native startup code asap
-            tcle_native_init();
+            try
+            {
+                if (Native.tcle_native_init() != Native.TCLE_OK) throw new Exception("Native code initialization failed");
 
-            if (args.Length <= 0)
-                args = new string[] { "" };
-            else
-                args[0] = string.Join(" ", args);
-            // Force culture info, ensures periods . for decimals
-            CultureInfo ci = new("en-US");
-            Thread.CurrentThread.CurrentCulture = ci;
-            Thread.CurrentThread.CurrentUICulture = ci;
+                if (args.Length <= 0)
+                    args = new string[] { "" };
+                else
+                    args[0] = string.Join(" ", args);
+                // Force culture info, ensures periods . for decimals
+                CultureInfo ci = new("en-US");
+                Thread.CurrentThread.CurrentCulture = ci;
+                Thread.CurrentThread.CurrentUICulture = ci;
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-            Application.Run(new TCLE(args[0]));
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+                Application.Run(new TCLE(args[0]));
+            }
+            finally
+            {
+                Native.tcle_native_uninit();
+            }
         }
 
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
