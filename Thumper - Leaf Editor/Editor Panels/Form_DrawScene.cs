@@ -11,5 +11,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
         }
         #endregion
+
+        private void btnDoTheThing_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
