@@ -1,6 +1,13 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
+
 #include <cstdlib>
+#include <vector>
+#include <string>
+#include <filesystem>
+#include <fstream>
+
+#include <Windows.h>
 
 #define TCLE_ERR_GEN 0
 #define TCLE_OK 1
@@ -13,6 +20,17 @@ struct TCLEGlobalData final {
 
 namespace {
     TCLEGlobalData gData;
+
+    std::string read_file(std::filesystem::path const& path) {
+        std::ifstream stream(path, std::ios::in | std::ios::binary);
+        if (!stream) return "";
+        std::string string;
+        stream.seekg(0, std::ios::end);
+        string.resize(stream.tellg());
+        stream.seekg(0, std::ios::beg);
+        stream.read(string.data(), string.size());
+        return string;
+    }
 }
 
 extern "C" __declspec(dllexport) void* __cdecl tcle_native_draw(int width, int height) {
@@ -42,45 +60,45 @@ extern "C" __declspec(dllexport) void* __cdecl tcle_native_draw(int width, int h
 
     GLuint vbo;
     glGenBuffers(1, &vbo);
-    float data[] = {-0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f};
+
+    float data[] = { -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, -1.0f };
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(data), data, GL_STATIC_DRAW);
-    
+
     glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 24, 0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, (void*)12);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 8, 0);
 
-    char const* vertSource = R"(
-#version 330 core
+    std::string vertSourceF = read_file("shaders/example.vert.glsl");
+    char const* vertSource = vertSourceF.c_str();
+    std::string fragSourceF = read_file("shaders/example.frag.glsl");
+    char const* fragSource = fragSourceF.c_str();
 
-layout(location = 0) in vec3 iPosition;
-layout(location = 1) in vec3 iColor;
-
-out vec3 vColor;
-
-void main(void) {
-    gl_Position = vec4(iPosition, 1.0);
-    vColor = iColor;
-}
-)";
-
-    char const* fragSource = R"(
-#version 330 core
-
-in vec3 vColor;
-
-layout(location = 0) out vec4 oColor;
-
-void main(void) {
-    oColor = vec4(vColor, 1.0);
-}
-)";
     GLuint vertShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertShader, 1, &vertSource, nullptr);
+    glCompileShader(vertShader);
+
+    GLint infoLogLength;
+    glGetShaderiv(vertShader, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+    if (infoLogLength > 0) {
+        std::vector<char> str;
+        str.resize(infoLogLength);
+        glGetShaderInfoLog(vertShader, infoLogLength, nullptr, str.data());
+        MessageBoxA(NULL, "Shader Compilation Error", str.data(), 0);
+    }
 
     GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragShader, 1, &fragSource, nullptr);
+    glCompileShader(fragShader);
+
+    glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+    if (infoLogLength > 0) {
+        std::vector<char> str;
+        str.resize(infoLogLength);
+        glGetShaderInfoLog(fragShader, infoLogLength, nullptr, str.data());
+        MessageBoxA(NULL, "Shader Compilation Error", str.data(), 0);
+    }
 
     GLuint program = glCreateProgram();
     glAttachShader(program, vertShader);
@@ -89,13 +107,27 @@ void main(void) {
     glDeleteShader(vertShader);
     glDeleteShader(fragShader);
 
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+    if (infoLogLength > 0) {
+        std::vector<char> str;
+        str.resize(infoLogLength);
+        glGetProgramInfoLog(fragShader, infoLogLength, nullptr, str.data());
+        MessageBoxA(NULL, "Shader Link Error", str.data(), 0);
+    }
+
+
+
     glUseProgram(program);
+    glUniform1f(glGetUniformLocation(program, "iTime"), static_cast<float>(glfwGetTime()));
+    glUniform2f(glGetUniformLocation(program, "iResolution"), width, height);
+
 
     glViewport(0, 0, width, height);
     glClearColor(0.7f, 0.8f, 0.9f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     if (gData.pixelBuffer) free(gData.pixelBuffer);
     gData.pixelBuffer = malloc(width * height * 4);
@@ -107,7 +139,7 @@ void main(void) {
     glDeleteFramebuffers(1, &fbo);
     glDeleteTextures(1, &colorAttachment);
     glDeleteProgram(program);
-   
+
 
     // Get pixels from renderer framebuffer color attachment
 
