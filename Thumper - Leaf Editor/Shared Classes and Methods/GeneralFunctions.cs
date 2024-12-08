@@ -3,8 +3,8 @@ using NAudio.Vorbis;
 using NAudio.Wave;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -553,23 +553,15 @@ namespace Thumper_Custom_Level_Editor
         public static void FindReloadRaw(string documentname)
         {
             //find if any raw text docs are open of this gate and update them
-            foreach (IDockContent document in TCLE.Documents) {
-                if (document.GetType() == typeof(Form_RawText)) {
-                    (document as Form_RawText).Reload();
-                }
+            foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(documentname) && x.GetType() == typeof(Form_RawText))) {
+                (document as Form_RawText).Reload();
             }
         }
 
-        public static void FindReloadEditor(Type editor)
+        public static void FindEditorRunMethod(Type editor, string method)
         {
-            //find if any raw text docs are open of this gate and update them
-            foreach (IDockContent document in TCLE.Documents) {
-                if (document.GetType() == editor && editor == typeof(Form_MasterEditor)) {
-                    (document as Form_MasterEditor).RecalculateRuntime();
-                }
-                if (document.GetType() == editor && editor == typeof(Form_GateEditor)) {
-                    (document as Form_GateEditor).RecalculateRuntime();
-                }
+            foreach (IDockContent document in TCLE.Documents.Where(x => x.GetType() == editor)) {
+                document.GetType().GetMethod(method).Invoke(document, null);
             }
         }
     }

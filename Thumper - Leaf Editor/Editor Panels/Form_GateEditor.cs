@@ -468,7 +468,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (playsound) TCLE.PlaySound("UIsave");
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(LoadedGate.Name);
-                TCLE.FindReloadEditor(typeof(Form_MasterEditor));
+                TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
             }
         }
 
