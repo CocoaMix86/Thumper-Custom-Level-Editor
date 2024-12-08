@@ -552,7 +552,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void FindReloadRaw(string documentname)
         {
-            //find if any raw text docs are open of this gate and update them
+            //find if any raw text docs matching documentname are open and update them
             foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(documentname) && x.GetType() == typeof(Form_RawText))) {
                 (document as Form_RawText).Reload();
             }
