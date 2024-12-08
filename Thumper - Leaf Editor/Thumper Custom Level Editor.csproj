@@ -281,6 +281,9 @@
     <Compile Remove="Utility Classes\PictureBoxEx.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Editor Panels\Form_DrawScene.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Editor Panels\Form_Workspace.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -42,7 +42,8 @@ namespace Thumper_Custom_Level_Editor
                     try {
                         lockedfiles.Add(ProjectFile, new FileStream(ProjectFile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                         ClearFileLock();
-                    } catch (Exception) {
+                    }
+                    catch (Exception) {
                         MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Level cannot be opened");
                         return;
                     }
@@ -558,6 +559,8 @@ namespace Thumper_Custom_Level_Editor
             Form_WorkSpace workspace1 = new();
             workspace1.Show(dockMain, DockState.Document);
 
+            toolstripAddScene.Enabled = true;
+
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
         }
@@ -593,5 +596,11 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         #endregion
+
+        private void toolstripAddScene_Click(object sender, EventArgs e)
+        {
+            Form_DrawScene draw = new Form_DrawScene();
+            draw.Show((dockMain.ActiveDocument as Form_WorkSpace).dockMain, DockState.Document);
+        }
     }
 }

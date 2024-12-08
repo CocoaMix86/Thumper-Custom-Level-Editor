@@ -148,6 +148,7 @@
             this.toolstripFormMinimize = new ToolStripButton();
             this.toolstripLevelName = new ToolStripMenuItem();
             this.toolstripOpenPanels = new ToolStripMenuItem();
+            this.toolstripAddScene = new ToolStripButton();
             this.panelFill = new Panel();
             this.contextmenuTabClick = new ContextMenuStrip(this.components);
             this.toolstripTabSave = new ToolStripMenuItem();
@@ -1236,7 +1237,7 @@
             this.toolStripTitle.ContextMenuStrip = this.contextMenuFormRightClick;
             this.toolStripTitle.GripMargin = new Padding(0);
             this.toolStripTitle.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolstripView, this.toolStripMenuItem3, this.toolstripHelp, this.toolstripLevelName, this.toolstripOpenPanels });
+            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolstripView, this.toolStripMenuItem3, this.toolstripHelp, this.toolstripLevelName, this.toolstripOpenPanels, this.toolstripAddScene });
             this.toolStripTitle.Location = new Point(0, 0);
             this.toolStripTitle.MaximumSize = new Size(0, 31);
             this.toolStripTitle.MinimumSize = new Size(0, 31);
@@ -1325,6 +1326,18 @@
             this.toolstripOpenPanels.Size = new Size(94, 31);
             this.toolstripOpenPanels.Text = "OPEN PANELS";
             this.toolstripOpenPanels.Click += this.toolstripOpenPanels_Click;
+            // 
+            // toolstripAddScene
+            // 
+            this.toolstripAddScene.BackColor = Color.White;
+            this.toolstripAddScene.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            this.toolstripAddScene.Enabled = false;
+            this.toolstripAddScene.Image = (Image)resources.GetObject("toolstripAddScene.Image");
+            this.toolstripAddScene.ImageTransparentColor = Color.Magenta;
+            this.toolstripAddScene.Name = "toolstripAddScene";
+            this.toolstripAddScene.Size = new Size(105, 28);
+            this.toolstripAddScene.Text = "Add Scene Viewer";
+            this.toolstripAddScene.Click += this.toolstripAddScene_Click;
             // 
             // panelFill
             // 
@@ -1610,6 +1623,7 @@
         private ToolStripSeparator toolStripSeparator17;
         private ToolStripMenuItem toolstripTabFloat;
         private ToolStripMenuItem toolstripTabFloatAll;
+        private ToolStripButton toolstripAddScene;
     }
 }
 
