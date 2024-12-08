@@ -600,7 +600,7 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripAddScene_Click(object sender, EventArgs e)
         {
             Form_DrawScene draw = new Form_DrawScene();
-            draw.Show((dockMain.ActiveDocument as Form_WorkSpace).dockMain, DockState.Document);
+            draw.Show(dockMain, DockState.Document);
         }
     }
 }
