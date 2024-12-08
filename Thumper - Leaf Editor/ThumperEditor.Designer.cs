@@ -1331,7 +1331,6 @@
             // 
             this.toolstripAddScene.BackColor = Color.White;
             this.toolstripAddScene.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            this.toolstripAddScene.Enabled = false;
             this.toolstripAddScene.Image = (Image)resources.GetObject("toolstripAddScene.Image");
             this.toolstripAddScene.ImageTransparentColor = Color.Magenta;
             this.toolstripAddScene.Name = "toolstripAddScene";

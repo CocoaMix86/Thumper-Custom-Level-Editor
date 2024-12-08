@@ -30,6 +30,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_DrawScene));
             this.toolStripTitle = new ToolStripEx();
             this.btnDoTheThing = new ToolStripMenuItem();
+            this.panel1 = new Panel();
             this.toolStripTitle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,13 +61,23 @@
             this.btnDoTheThing.Text = "Button That Does Cool Shit";
             this.btnDoTheThing.Click += this.btnDoTheThing_Click;
             // 
+            // panel1
+            // 
+            this.panel1.Dock = DockStyle.Fill;
+            this.panel1.Location = new Point(0, 31);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new Size(647, 368);
+            this.panel1.TabIndex = 152;
+            // 
             // Form_DrawScene
             // 
             this.ClientSize = new Size(647, 399);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStripTitle);
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.Name = "Form_DrawScene";
             this.Text = "Scene Viewer";
+            this.SizeChanged += this.Form_DrawScene_SizeChanged;
             this.toolStripTitle.ResumeLayout(false);
             this.toolStripTitle.PerformLayout();
             this.ResumeLayout(false);
@@ -77,5 +88,6 @@
 
         private ToolStripEx toolStripTitle;
         private ToolStripMenuItem btnDoTheThing;
+        private Panel panel1;
     }
 }
