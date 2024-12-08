@@ -27,10 +27,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_DrawScene));
             this.toolStripTitle = new ToolStripEx();
             this.btnDoTheThing = new ToolStripMenuItem();
             this.panel1 = new Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStripTitle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +71,11 @@
             this.panel1.Size = new Size(647, 368);
             this.panel1.TabIndex = 152;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 16;
+            this.timer1.Tick += this.timer1_Tick;
+            // 
             // Form_DrawScene
             // 
             this.ClientSize = new Size(647, 399);
@@ -89,5 +96,6 @@
         private ToolStripEx toolStripTitle;
         private ToolStripMenuItem btnDoTheThing;
         private Panel panel1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

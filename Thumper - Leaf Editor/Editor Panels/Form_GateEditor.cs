@@ -25,6 +25,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         public bool EditorLoading = false;
+        public bool IsAllowedToAddLvl => !((GateProperties.gatelvls.Count >= 4 && GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.boss == "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.random));
         public FileInfo loadedgate
         {
             get => LoadedGate;
@@ -190,7 +191,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     GateLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
                 }
                 if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
-                    AddFileToGate($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
+                    if (IsAllowedToAddLvl)
+                        AddFileToGate($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
+                    else
+                        MessageBox.Show("Current gate configuration does not allow for more phases to be added.", "Thumper Custom Level Editor");
                 }
             }
         }
@@ -216,10 +220,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnGateLvlDown.Enabled = GateProperties.gatelvls.Count > 1;
 
             //limit how many phases can be added
-            if ((GateProperties.gatelvls.Count >= 4 && GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.boss != "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.random))
-                btnGateLvlAdd.Enabled = false;
-            else
-                btnGateLvlAdd.Enabled = true;
+            btnGateLvlAdd.Enabled = IsAllowedToAddLvl;
 
             //set lvl save flag to false
             SaveCheckAndWrite(false);
@@ -548,11 +549,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 JObject s = new() {
                     { "lvl_name", _properties.gatelvls[x].lvlname },
 					{ "sentry_type", $"{gatesentrynames[_properties.gatelvls[x].sentrytype]}"},
-                    { "bucket_num", _properties.gatelvls[x].bucket }
+                    { "bucket_num", _properties.gatelvls[x].bucket - 1 }
                 };
                 //if using RANDOM, the buckets and hashes are all different per entry in each bucket
                 if (_properties.random) {
-                    switch (_properties.gatelvls[x].bucket) {
+                    switch (_properties.gatelvls[x].bucket - 1) {
                         case 0:
                             s.Add("node_name_hash", _bucket0[bucket0]);
                             bucket0 = (bucket0 + 1) % 4;

@@ -29,5 +29,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             IntPtr pixelBuffer = Native.tcle_native_draw(targetWidth, targetHeight);
             this.panel1.BackgroundImage = new Bitmap(targetWidth, targetHeight, targetWidth * 4, System.Drawing.Imaging.PixelFormat.Format32bppRgb, pixelBuffer);
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            DoDraw();
+        }
     }
 }

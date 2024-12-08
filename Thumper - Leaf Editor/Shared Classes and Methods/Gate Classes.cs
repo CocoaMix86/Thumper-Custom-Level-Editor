@@ -137,7 +137,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Bucket")]
         [TypeConverter(typeof(GateBucket))]
-        [Description("Which phase's bucket should this go in. If random FALSE, always use 0.")]
+        [Description("Which phase's bucket should this go in. If random FALSE, always use 1.")]
         public int bucket { get => sublevel.bucket; set => sublevel.bucket = value; }
     }
 
@@ -197,7 +197,7 @@ namespace Thumper_Custom_Level_Editor
 
     public class GateBucket : Int32Converter
     {
-        private List<int> sectiontypes = new() { 0, 1, 2, 3 };
+        private List<int> sectiontypes = new() { 1, 2, 3, 4 };
         public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
