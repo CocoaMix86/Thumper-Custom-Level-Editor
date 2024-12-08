@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d75a8e1d-9332-4098-ada1-a4002c183ade}</ProjectGuid>
-    <RootNamespace>tclenative</RootNamespace>
+    <ProjectGuid>{95985342-c5c8-4d38-b652-a46e4182b1b5}</ProjectGuid>
+    <RootNamespace>glfwbuild</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -70,31 +70,32 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)Thumper - Leaf Editor\bin\$(Configuration)\</OutDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)Thumper - Leaf Editor\bin\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin_obj\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)Thumper - Leaf Editor\bin\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin_obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin_obj\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)Thumper - Leaf Editor\bin\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin_obj\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)glfw/include;$(SolutionDir)glad/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw_build.lib;glad.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -103,32 +104,26 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)glfw/include;$(SolutionDir)glad/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw_build.lib;glad.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)glfw/include;$(SolutionDir)glad/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw_build.lib;glad.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,21 +132,73 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_GLFW_WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)glfw/include;$(SolutionDir)glad/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw_build.lib;glad.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="tcle_api.cpp" />
+    <ClInclude Include="..\glfw\src\cocoa_joystick.h" />
+    <ClInclude Include="..\glfw\src\cocoa_platform.h" />
+    <ClInclude Include="..\glfw\src\cocoa_time.h" />
+    <ClInclude Include="..\glfw\src\internal.h" />
+    <ClInclude Include="..\glfw\src\linux_joystick.h" />
+    <ClInclude Include="..\glfw\src\mappings.h" />
+    <ClInclude Include="..\glfw\src\null_joystick.h" />
+    <ClInclude Include="..\glfw\src\null_platform.h" />
+    <ClInclude Include="..\glfw\src\platform.h" />
+    <ClInclude Include="..\glfw\src\posix_poll.h" />
+    <ClInclude Include="..\glfw\src\posix_thread.h" />
+    <ClInclude Include="..\glfw\src\posix_time.h" />
+    <ClInclude Include="..\glfw\src\win32_joystick.h" />
+    <ClInclude Include="..\glfw\src\win32_platform.h" />
+    <ClInclude Include="..\glfw\src\win32_thread.h" />
+    <ClInclude Include="..\glfw\src\win32_time.h" />
+    <ClInclude Include="..\glfw\src\wl_platform.h" />
+    <ClInclude Include="..\glfw\src\x11_platform.h" />
+    <ClInclude Include="..\glfw\src\xkb_unicode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\glfw\src\cocoa_time.c" />
+    <ClCompile Include="..\glfw\src\context.c" />
+    <ClCompile Include="..\glfw\src\egl_context.c" />
+    <ClCompile Include="..\glfw\src\glx_context.c" />
+    <ClCompile Include="..\glfw\src\init.c" />
+    <ClCompile Include="..\glfw\src\input.c" />
+    <ClCompile Include="..\glfw\src\linux_joystick.c" />
+    <ClCompile Include="..\glfw\src\monitor.c" />
+    <ClCompile Include="..\glfw\src\null_init.c" />
+    <ClCompile Include="..\glfw\src\null_joystick.c" />
+    <ClCompile Include="..\glfw\src\null_monitor.c" />
+    <ClCompile Include="..\glfw\src\null_window.c" />
+    <ClCompile Include="..\glfw\src\osmesa_context.c" />
+    <ClCompile Include="..\glfw\src\platform.c" />
+    <ClCompile Include="..\glfw\src\posix_module.c" />
+    <ClCompile Include="..\glfw\src\posix_poll.c" />
+    <ClCompile Include="..\glfw\src\posix_thread.c" />
+    <ClCompile Include="..\glfw\src\posix_time.c" />
+    <ClCompile Include="..\glfw\src\vulkan.c" />
+    <ClCompile Include="..\glfw\src\wgl_context.c" />
+    <ClCompile Include="..\glfw\src\win32_init.c" />
+    <ClCompile Include="..\glfw\src\win32_joystick.c" />
+    <ClCompile Include="..\glfw\src\win32_module.c" />
+    <ClCompile Include="..\glfw\src\win32_monitor.c" />
+    <ClCompile Include="..\glfw\src\win32_thread.c" />
+    <ClCompile Include="..\glfw\src\win32_time.c" />
+    <ClCompile Include="..\glfw\src\win32_window.c" />
+    <ClCompile Include="..\glfw\src\window.c" />
+    <ClCompile Include="..\glfw\src\wl_init.c" />
+    <ClCompile Include="..\glfw\src\wl_monitor.c" />
+    <ClCompile Include="..\glfw\src\wl_window.c" />
+    <ClCompile Include="..\glfw\src\x11_init.c" />
+    <ClCompile Include="..\glfw\src\x11_monitor.c" />
+    <ClCompile Include="..\glfw\src\x11_window.c" />
+    <ClCompile Include="..\glfw\src\xkb_unicode.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
