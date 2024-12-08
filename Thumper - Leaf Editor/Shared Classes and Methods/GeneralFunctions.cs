@@ -559,5 +559,18 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
+
+        public static void FindReloadEditor(Type editor)
+        {
+            //find if any raw text docs are open of this gate and update them
+            foreach (IDockContent document in TCLE.Documents) {
+                if (document.GetType() == editor && editor == typeof(Form_MasterEditor)) {
+                    (document as Form_MasterEditor).RecalculateRuntime();
+                }
+                if (document.GetType() == editor && editor == typeof(Form_GateEditor)) {
+                    (document as Form_GateEditor).RecalculateRuntime();
+                }
+            }
+        }
     }
 }

@@ -476,8 +476,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void RecalculateRuntime()
+        public int RecalculateRuntime()
         {
+            int beattotal = 0;
             foreach (MasterLvlData _lvl in MasterLvls) {
                 int beats = TCLE.CalculateSublevelRuntime(_lvl);
                 if (beats == -1) {
@@ -485,12 +486,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"file not found";
                 }
                 else {
+                    beattotal += beats;
                     string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                     masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].DefaultCellStyle = null;
                     masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
                 }
             }
             masterLvlList.Refresh();
+            return beattotal;
         }
 
         public static JObject BuildSave(MasterProperties _properties)
