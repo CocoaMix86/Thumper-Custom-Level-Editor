@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
+using System.Drawing.Imaging;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -16,6 +12,12 @@ namespace Thumper_Custom_Level_Editor
         [DllImport("tcle_native")] public static extern int tcle_native_init();
         [DllImport("tcle_native")] public static extern void tcle_native_reload();
         [DllImport("tcle_native")] public static extern IntPtr tcle_native_draw(int width, int height);
+        public static Bitmap tcle_native_bitmap(int width, int height)
+        {
+            IntPtr pixelBuffer = Native.tcle_native_draw(width, height);
+            return new Bitmap(width, height, width * 4, PixelFormat.Format32bppRgb, pixelBuffer);
+        }
+            
         [DllImport("tcle_native")] public static extern void tcle_native_uninit();
     }
 }

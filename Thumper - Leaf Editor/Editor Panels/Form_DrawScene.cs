@@ -26,8 +26,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (targetWidth < 32) targetWidth = 32;
             if (targetHeight < 32) targetHeight = 32;
 
-            IntPtr pixelBuffer = Native.tcle_native_draw(targetWidth, targetHeight);
-            this.panel1.BackgroundImage = new Bitmap(targetWidth, targetHeight, targetWidth * 4, System.Drawing.Imaging.PixelFormat.Format32bppRgb, pixelBuffer);
+            this.panel1.BackgroundImage?.Dispose();
+            this.panel1.BackgroundImage = Native.tcle_native_bitmap(targetWidth, targetHeight);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
