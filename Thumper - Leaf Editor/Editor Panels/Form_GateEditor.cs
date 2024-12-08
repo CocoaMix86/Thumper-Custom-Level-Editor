@@ -422,20 +422,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GateProperties.gatelvls.Add(new GateLvlData() {
                     lvlname = _lvl["lvl_name"],
                     sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
-                    bucket = _lvl["bucket_num"]
+                    bucket = (int)_lvl["bucket_num"] < 0 || (int)_lvl["bucket_num"] > 3 ? 0 : (int)_lvl["bucket_num"]
                 });
-                if ((string)_load["spn_name"] == "pyramid.spn" && GateProperties.gatelvls.Count == 5)
-                    break;
-                else if (gateproperties.random) {
-                    if (gateproperties.gatelvls.Count == 16)
-                        break;
-                }
-                else if (gateproperties.boss == "Level 9 - pyramid" && GateProperties.gatelvls.Count == 4)
-                    break;
             }
 
+            propertyGridGate.SelectedObject = gateproperties;
             EditorLoading = false;
             EditorIsSaved = true;
+            RecalculateRuntime();
         }
 
         public void Reload()
@@ -506,6 +500,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntime()
         {
+            if (EditorLoading)
+                return 0;
+
             int beattotal = 0;
             foreach (GateLvlData _lvl in GateProperties.gatelvls) {
                 KeyValuePair<string, FileInfo> lvlfile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_lvl.lvlname));
@@ -522,7 +519,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             gateLvlList.Refresh();
+            HighlightTooManyPhases();
             return beattotal;
+        }
+
+        public void HighlightTooManyPhases()
+        {
+            if (EditorLoading)
+                return;
+
+            int rows = 0;
+            if (GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random)
+                rows = 4;            
+            else if (GateProperties.boss == "Level 9 - pyramid") 
+                rows = 5;            
+            else if (GateProperties.random) 
+                rows = 16;            
+
+            for (int r = 0; r < gateLvlList.RowCount; r++) {
+                if (gateLvlList.Rows[r].Index >= rows) { 
+                    gateLvlList.Rows[r].DefaultCellStyle.BackColor = Color.DarkOrange;
+                    gateLvlList.Rows[r].Cells[2].Value = $"too many phases for config";
+                }
+            }
         }
 
         public static JObject BuildSave(GateProperties _properties)
@@ -549,11 +568,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 JObject s = new() {
                     { "lvl_name", _properties.gatelvls[x].lvlname },
 					{ "sentry_type", $"{gatesentrynames[_properties.gatelvls[x].sentrytype]}"},
-                    { "bucket_num", _properties.gatelvls[x].bucket - 1 }
+                    { "bucket_num", _properties.gatelvls[x].bucket }
                 };
                 //if using RANDOM, the buckets and hashes are all different per entry in each bucket
                 if (_properties.random) {
-                    switch (_properties.gatelvls[x].bucket - 1) {
+                    switch (_properties.gatelvls[x].bucket) {
                         case 0:
                             s.Add("node_name_hash", _bucket0[bucket0]);
                             bucket0 = (bucket0 + 1) % 4;
