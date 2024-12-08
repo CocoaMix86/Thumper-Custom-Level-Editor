@@ -60,7 +60,7 @@
             this.btnDoTheThing.Name = "btnDoTheThing";
             this.btnDoTheThing.Padding = new Padding(3, 0, 3, 0);
             this.btnDoTheThing.Size = new Size(173, 21);
-            this.btnDoTheThing.Text = "Button That Does Cool Shit";
+            this.btnDoTheThing.Text = "Reload";
             this.btnDoTheThing.Click += this.btnDoTheThing_Click;
             // 
             // panel1

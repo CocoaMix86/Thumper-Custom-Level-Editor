@@ -14,6 +14,7 @@ namespace Thumper_Custom_Level_Editor
         public const int TCLE_ERR_WIN = 2;
 
         [DllImport("tcle_native")] public static extern int tcle_native_init();
+        [DllImport("tcle_native")] public static extern void tcle_native_reload();
         [DllImport("tcle_native")] public static extern IntPtr tcle_native_draw(int width, int height);
         [DllImport("tcle_native")] public static extern void tcle_native_uninit();
     }

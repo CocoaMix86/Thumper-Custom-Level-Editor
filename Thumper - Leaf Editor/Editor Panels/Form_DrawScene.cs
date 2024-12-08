@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
 
-        private void btnDoTheThing_Click(object sender, EventArgs e) => DoDraw();
+        private void btnDoTheThing_Click(object sender, EventArgs e) => Native.tcle_native_reload();
         private void Form_DrawScene_SizeChanged(object sender, EventArgs e) => DoDraw();
 
         // Creating multiple instances of this panel causes a double free situation
