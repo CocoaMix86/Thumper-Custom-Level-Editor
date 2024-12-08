@@ -297,4 +297,7 @@
   <Target Name="ILMerge">
     <Exec Command="$(ILMergeConsolePath) /out:'Thumper Custom Level Editor.exe' 'Thumper Custom Level Editor.exe' 'Newtonsoft.Json.dll'" />
   </Target>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy ..\working bin\$(Configuration) /E /H" />
+  </Target>
 </Project>
