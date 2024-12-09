@@ -610,6 +610,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
+            if (selectedNodes[0].FullPath == ProjectDirectory.Name)
+                return;
             TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].FullPath]);
         }
 

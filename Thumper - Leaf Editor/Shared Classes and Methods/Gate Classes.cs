@@ -64,6 +64,7 @@ namespace Thumper_Custom_Level_Editor
                 if (random)
                     return;
                 Boss = value;
+                parent.RecalculateRuntime();
                 if (Boss == "Level 9 - pyramid" && !parent.EditorLoading)
                     MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence. Otherwise the level will crash.", "Thumper Custom Level Editor");
             } }
@@ -100,16 +101,11 @@ namespace Thumper_Custom_Level_Editor
         {
             get => Random;
             set {
-                if (value == false && gatelvls.Count > 4) {
-                    if (MessageBox.Show("Setting Random to FALSE will remove all lvls beyond the 4th. Do you wish to proceed?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No)
-                        return;
-                    while (gatelvls.Count > 4)
-                        gatelvls.RemoveAt(gatelvls.Count - 1);
-                }
                 if (value == true) {
                     boss = "Level 6 - spirograph";
                 }
                 Random = value;
+                parent.RecalculateRuntime();
             }
         }
         private bool Random;
@@ -138,7 +134,7 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Bucket")]
         [TypeConverter(typeof(GateBucket))]
         [Description("Which phase's bucket should this go in. If random FALSE, always use 1.")]
-        public int bucket { get => sublevel.bucket; set => sublevel.bucket = value; }
+        public int bucket { get => sublevel.bucket + 1; set => sublevel.bucket = value - 1; }
     }
 
     public class GateBossList : StringConverter

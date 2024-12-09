@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
 using System.Windows.Input;
 using WeifenLuo.WinFormsUI.Docking;
@@ -422,20 +423,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GateProperties.gatelvls.Add(new GateLvlData() {
                     lvlname = _lvl["lvl_name"],
                     sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
-                    bucket = _lvl["bucket_num"]
+                    bucket = (int)_lvl["bucket_num"] < 0 || (int)_lvl["bucket_num"] > 3 ? 0 : (int)_lvl["bucket_num"]
                 });
-                if ((string)_load["spn_name"] == "pyramid.spn" && GateProperties.gatelvls.Count == 5)
-                    break;
-                else if (gateproperties.random) {
-                    if (gateproperties.gatelvls.Count == 16)
-                        break;
-                }
-                else if (gateproperties.boss == "Level 9 - pyramid" && GateProperties.gatelvls.Count == 4)
-                    break;
             }
 
+            propertyGridGate.SelectedObject = gateproperties;
             EditorLoading = false;
             EditorIsSaved = true;
+            RecalculateRuntime();
         }
 
         public void Reload()
@@ -506,21 +501,40 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntime()
         {
+            if (EditorLoading)
+                return 0;
+            
+            int rows = 0;
+            if (GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random)
+                rows = 4;
+            else if (GateProperties.boss == "Level 9 - pyramid")
+                rows = 5;
+            else if (GateProperties.random)
+                rows = 16;
+
             int beattotal = 0;
             foreach (GateLvlData _lvl in GateProperties.gatelvls) {
-                KeyValuePair<string, FileInfo> lvlfile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_lvl.lvlname));
-                int beats = lvlfile.Key == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.Value.FullName);
-                if (beats == -1) {
-                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
-                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].Cells[2].Value = $"file not found";
+                int _in = GateLvls.IndexOf(_lvl);
+                if (_in >= rows) {
+                    gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
+                    gateLvlList.Rows[_in].Cells[2].Value = $"too many phases for config";
                 }
                 else {
-                    beattotal += beats;
-                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].DefaultCellStyle = null;
-                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].Cells[2].Value = $"{beats} beats -- {time}";
+                    KeyValuePair<string, FileInfo> lvlfile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_lvl.lvlname));
+                    int beats = lvlfile.Key == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.Value.FullName);
+                    if (beats == -1) {
+                        gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.Maroon;
+                        gateLvlList.Rows[_in].Cells[2].Value = $"file not found";
+                    }
+                    else {
+                        beattotal += beats;
+                        string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                        gateLvlList.Rows[_in].DefaultCellStyle = null;
+                        gateLvlList.Rows[_in].Cells[2].Value = $"{beats} beats -- {time}";
+                    }
                 }
             }
+
             gateLvlList.Refresh();
             return beattotal;
         }
@@ -549,11 +563,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 JObject s = new() {
                     { "lvl_name", _properties.gatelvls[x].lvlname },
 					{ "sentry_type", $"{gatesentrynames[_properties.gatelvls[x].sentrytype]}"},
-                    { "bucket_num", _properties.gatelvls[x].bucket - 1 }
+                    { "bucket_num", _properties.gatelvls[x].bucket }
                 };
                 //if using RANDOM, the buckets and hashes are all different per entry in each bucket
                 if (_properties.random) {
-                    switch (_properties.gatelvls[x].bucket - 1) {
+                    switch (_properties.gatelvls[x].bucket) {
                         case 0:
                             s.Add("node_name_hash", _bucket0[bucket0]);
                             bucket0 = (bucket0 + 1) % 4;
