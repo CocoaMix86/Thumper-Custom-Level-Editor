@@ -30,6 +30,12 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
+    public class LvlLoop
+    {
+        public string sample { get; set; }
+        public decimal beats { get; set; }
+    }
+
     public class LvlProperties
     {
         [Browsable(false)]
@@ -52,6 +58,9 @@ namespace Thumper_Custom_Level_Editor
             lvlleafs = new();
             lvlleafs.CollectionChanged += parent.lvlleaf_CollectionChanged;
         }
+
+        [Browsable(false)]
+        public List<LvlLoop> lvlloops { get; set; }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
@@ -80,6 +89,17 @@ namespace Thumper_Custom_Level_Editor
         [Description("Shows on-screen input hints for different objects as they approach.")]
         [TypeConverter(typeof(LvlTutorialType))]
         public string tutorialtype { get; set; }
+
+        [CategoryAttribute("Runtime")]
+        [DisplayName("Beats")]
+        [Description("Total number of beats across all lvls and gates included in the master.")]
+        public int beats => parent.RecalculateRuntime();
+
+        [CategoryAttribute("Runtime")]
+        [DisplayName("Runtime")]
+        [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
+        public string runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.dockProjectProperties.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+
     }
 
     public class LvlTutorialType : StringConverter

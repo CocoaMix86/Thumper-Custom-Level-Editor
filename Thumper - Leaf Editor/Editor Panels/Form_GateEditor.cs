@@ -281,17 +281,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.dockProjectExplorer.CreateTreeView();
             }
         }
-        private void WriteGate()
-        {
-            //write contents direct to file without prompting save dialog
-            JObject _save = BuildSave(GateProperties);
-            if (!TCLE.lockedfiles.ContainsKey(loadedgate)) {
-                TCLE.lockedfiles.Add(loadedgate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-            }
-            TCLE.WriteFileLock(TCLE.lockedfiles[LoadedGate], _save);
-            SaveCheckAndWrite(true, true);
-            this.Text = LoadedGate.Name;
-        }
         #endregion
 
         #region Buttons

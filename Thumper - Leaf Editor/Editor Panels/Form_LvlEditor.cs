@@ -12,11 +12,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             InitializeLvlStuff();
             lvlToolStrip.Renderer = new ToolStripOverride();
-            lvlVolumeToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
-            lvlPathsToolStrip2.Renderer = new ToolStripOverride();
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
-            TCLE.InitializeTracks(lvlSeqObjs, true);
             TCLE.InitializeTracks(lvlLeafList, false);
 
             if (load != null)
@@ -66,11 +63,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///         ///
 
         ///DGV LVLLEAFLIST
-        //Selected row changed
-
         private void lvlLeafList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 || _lvlleafs.Count == 0 || e.RowIndex > _lvlleafs.Count - 1)
+            if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
@@ -78,10 +73,90 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void lvlLeafList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 || _lvlleafs.Count == 0 || e.RowIndex > _lvlleafs.Count - 1)
+            if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{lvlLeafList.Rows[e.RowIndex].Cells[1].Value}")).Value);
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{LvlLeafs[e.RowIndex].leafname}")).Value);
             
+        }
+        private Rectangle dragBoxFromMouseDown;
+        private int rowIndexFromMouseDown;
+        private int rowIndexOfItemUnderMouseToDrop;
+        private void gateLvlList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                // If the mouse moves outside the rectangle, start the drag.
+                if (dragBoxFromMouseDown != Rectangle.Empty &&
+                    !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+
+                    // Proceed with the drag and drop, passing in the list item.                    
+                    DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void gateLvlList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            // Get the index of the item the mouse is below.
+            rowIndexFromMouseDown = lvlLeafList.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndexFromMouseDown != -1) {
+                // Remember the point where the mouse down occurred. 
+                // The DragSize indicates the size that the mouse can move 
+                // before a drag event should be started.                
+                Size dragSize = SystemInformation.DragSize;
+
+                // Create a rectangle using the DragSize, with the mouse position being
+                // at the center of the rectangle.
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+            }
+            else
+                // Reset the rectangle if the mouse is not over an item in the ListBox.
+                dragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+        private int previousDragOver = -1;
+        private void gateLvlList_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = lvlLeafList.PointToClient(new Point(e.X, e.Y));
+            // Retrieve the node at the drop location.
+            int targetRow = lvlLeafList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
+            //changing the hovered node backcolor to make it obvious where the destination will be
+            if (previousDragOver != targetRow && previousDragOver != -1) {
+                if (lvlLeafList.Rows[previousDragOver].Cells[2].Value.ToString() == "file not found")
+                    lvlLeafList.Rows[previousDragOver].DefaultCellStyle.BackColor = Color.Maroon;
+                else
+                    lvlLeafList.Rows[previousDragOver].DefaultCellStyle = null;
+            }
+            if (targetRow != -1 && targetRow != previousDragOver) {
+                lvlLeafList.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
+                previousDragOver = targetRow;
+            }
+        }
+
+        private void gateLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+        private void gateLvlList_DragDrop(object sender, DragEventArgs e)
+        {
+            // The mouse locations are relative to the screen, so they must be 
+            // converted to client coordinates.
+            Point clientPoint = lvlLeafList.PointToClient(new Point(e.X, e.Y));
+
+            // Get the row index of the item the mouse is below. 
+            rowIndexOfItemUnderMouseToDrop = lvlLeafList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+
+            // If the drag operation was a move then remove and insert the row.
+            if (e.Effect == DragDropEffects.Move) {
+                if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                    if (rowIndexOfItemUnderMouseToDrop == -1)
+                        return;
+                    LvlLeafData tomove = LvlLeafs[rowToMove.Index];
+                    LvlLeafs.RemoveAt(rowIndexFromMouseDown);
+                    LvlLeafs.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                }
+                if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
+                    AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
+                }
+            }
         }
         ///DGV LVLLEAFPATHS
         //Cell value changed
@@ -91,10 +166,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (lvlLeafPaths.CurrentCell.Value.ToString() == " ")
                 lvlLeafPaths.Rows.Remove(lvlLeafPaths.CurrentRow);
             //clear List storing the paths and repopulate it
-            _lvlleafs[lvlLeafList.CurrentRow.Index].paths.Clear();
+            LvlLeafs[lvlLeafList.CurrentRow.Index].paths.Clear();
             for (int x = 0; x < lvlLeafPaths.Rows.Count; x++) {
                 if (lvlLeafPaths.Rows[x].Cells[0].Value != null)
-                    _lvlleafs[lvlLeafList.CurrentRow.Index].paths.Add(lvlLeafPaths.Rows[x].Cells[0].Value.ToString());
+                    LvlLeafs[lvlLeafList.CurrentRow.Index].paths.Add(lvlLeafPaths.Rows[x].Cells[0].Value.ToString());
             }
             //Delete button enabled/disabled if rows exist
             btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
@@ -103,185 +178,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
             btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
             //set lvl save flag to false
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
         /// DGV LVLLOOPTRACKS
         //Cell value changed
         private void lvlLoopTracks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            /*
-			DataGridViewCell dgvc = sender as DataGridViewCell;
-			try { //try is here because this gets triggered upon app load, when there's no data
-				if (e.ColumnIndex == 0) {
-                    //search _lvlsamples for the value in the cell. Cell value is a string, so we need to apply the SampleData object instead
-                    SampleData _samplocate = _lvlsamples.First(item => item.obj_name == ((string)lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value));
-					lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value = _samplocate;
-				}
-			} catch { }
-			//set lvl save flag to false
-			*/
             if (e.ColumnIndex == -1 || e.RowIndex == -1)
                 return;
-            SaveLvl(false);
+            LvlProperties.lvlloops[e.RowIndex] = new LvlLoop() { 
+                sample = $"{lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value}.samp",
+                beats = decimal.Parse(lvlLoopTracks.Rows[e.RowIndex].Cells[1].Value.ToString())
+            };
+            SaveCheckAndWrite(false);
         }
         private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.ThrowException = false;
-        }
-
-        private void lvlSeqObjs_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.ColumnIndex == -1 || e.RowIndex == -1)
-                return;
-            DataGridView dgv = (DataGridView)sender;
-            if (e.Button == MouseButtons.Right) {
-                if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
-                    lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
-                    dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    ///TCLE.TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _mainform._tracks[e.RowIndex]);
-                    SaveLvl(false);
-                    lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
-                }
-                else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
-                    if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
-                        return;
-                    CellValueChangedLvl(e.RowIndex, e.ColumnIndex, true);
-                }
-            }
-        }
-
-        private void lvlSeqObjs_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == -1 || e.RowIndex == -1)
-                return;
-            DataGridView dgv = sender as DataGridView;
-            if (Control.MouseButtons == MouseButtons.Right) {
-                if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
-                    lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
-                    dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    ///TCLE.TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _mainform._tracks[e.RowIndex]);
-                    //GenerateDataPoints(dgv.Rows[e.RowIndex]);
-                    SaveLvl(false);
-                    lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
-                }
-                else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
-                    CellValueChangedLvl(e.RowIndex, e.ColumnIndex, true);
-                }
-            }
-        }
-        /// DGV LVLSEQOBJS
-        private void lvlSeqObjs_SelectionChanged(object sender, EventArgs e)
-        {
-            bool enable = lvlSeqObjs.SelectedCells.Count > 0;
-            btnLvlSeqDelete.Enabled = enable;
-            btnLvlSeqClear.Enabled = enable;
-        }
-        //Cell value changed
-        private void lvlSeqObjs_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1 || e.ColumnIndex == -1)
-                return;
-            CellValueChangedLvl(e.ColumnIndex, e.RowIndex);
-        }
-        private void CellValueChangedLvl(int ColumnIndex, int RowIndex, bool setnull = false)
-        {
-            lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
-            try {
-                bool changes = false;
-                object _val = null;
-                if (setnull)
-                    _val = null;
-                else if (Decimal.TryParse(lvlSeqObjs[ColumnIndex, RowIndex].EditedFormattedValue?.ToString(), out decimal _valtoset))
-                    _val = TCLE.TruncateDecimal(_valtoset, 3);
-                //iterate over each cell in the selection
-                foreach (DataGridViewCell _cell in lvlSeqObjs.SelectedCells) {
-                    //if cell does not have the value, set it
-                    if (_cell.Value != _val) {
-                        _cell.Value = _val;
-                        changes = true;
-                    }
-
-                    if (_val == null)
-                        _cell.Style = null;
-                    else
-                        _cell.Style.BackColor = Color.Purple;
-                }
-                //sets flag that lvl has unsaved changes
-                if (changes)
-                    SaveLvl(false);
-            }
-            catch { }
-            lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
-        }
-        //Press Delete to clear cells
-        private void lvlSeqObjs_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            controldown = e.Control;
-            shiftdown = e.Shift;
-            altdown = e.Alt;
-            if (e.KeyCode == Keys.Delete) {
-                CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex, true);
-                e.Handled = true;
-            }
-            else if (controldown) {
-                ///copies selected cells
-                if (e.KeyCode == Keys.C) {
-                    DataObject d = lvlSeqObjs.GetClipboardContent();
-                    Clipboard.SetDataObject(d, true);
-                    e.Handled = true;
-                }
-                ///cut and copies selected cells
-                if (e.KeyCode == Keys.X) {
-                    DataObject d = lvlSeqObjs.GetClipboardContent();
-                    Clipboard.SetDataObject(d, true);
-                    CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex, true);
-                    e.Handled = true;
-                    SaveLvl(false);
-                }
-                ///pastes cell data from clipboard
-                if (e.KeyCode == Keys.V) {
-                    lvlSeqObjs.CellValueChanged -= lvlSeqObjs_CellValueChanged;
-                    //get content on clipboard to string and then split it to rows
-                    string s = Clipboard.GetText().Replace("\r\n", "\n");
-                    string[] copiedrows = s.Split('\n');
-                    //set ints so we don't have to always call rowindex, columnindex
-                    int row = lvlSeqObjs.CurrentCell.RowIndex;
-                    int col = lvlSeqObjs.CurrentCell.ColumnIndex;
-                    for (int _line = 0; _line < copiedrows.Length; _line++) {
-                        //if paste will go outside grid bounds, skip
-                        if (row + _line >= lvlSeqObjs.RowCount)
-                            break;
-                        //split row into individual cells
-                        string[] cells = copiedrows[_line].Split('\t');
-                        for (int i = 0; i < cells.Length; i++) {
-                            //if paste will go outside grid bounds, skip
-                            if (col + i >= lvlSeqObjs.ColumnCount)
-                                break;
-                            //don't paste if cell is blank
-                            if (!string.IsNullOrEmpty(cells[i])) {
-                                lvlSeqObjs[col + i, row + _line].Value = decimal.Parse(cells[i]);
-                                lvlSeqObjs[col + i, row + _line].Style.BackColor = Color.Purple;
-                            }
-                        }
-                    }
-                    SaveLvl(false);
-                    lvlSeqObjs.CellValueChanged += lvlSeqObjs_CellValueChanged;
-                }
-            }
-        }
-        //Press Backspace to clear cells
-        private void lvlSeqObjs_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Back) {
-                CellValueChangedLvl(lvlSeqObjs.CurrentCell.ColumnIndex, lvlSeqObjs.CurrentCell.RowIndex, true);
-                e.Handled = true;
-            }
-        }
-        //Fill weight - allows for more columns
-        private void lvlSeqObjs_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            e.Column.FillWeight = 1;
-            e.Column.Width = trackLvlVolumeZoom.Value;
         }
         ///_LVLLEAF - Triggers when the collection changes
         public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -296,24 +209,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] { 
                     Properties.Resources.editor_leaf,
-                    _lvlleafs[_in].leafname,
+                    LvlLeafs[_in].leafname,
                     0 });
             }
             //if action REMOVE, remove row from the lvl DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
             }
-            ///TCLE.HighlightMissingFile(lvlLeafList, lvlLeafList.Rows.OfType<DataGridViewRow>().Select(x => $@"{TCLE.WorkingFolder}\leaf_{x.Cells[1].Value}.txt").ToList());
+
             RecalculateRuntime();
 
             //enable certain buttons if there are enough items for them
-            btnLvlLeafDelete.Enabled = _lvlleafs.Count > 0;
-            btnLvlLeafUp.Enabled = _lvlleafs.Count > 1;
-            btnLvlLeafDown.Enabled = _lvlleafs.Count > 1;
-            btnLvlRefreshBeats.Enabled = _lvlleafs.Count > 0;
-            btnLvlLeafCopy.Enabled = _lvlleafs.Count > 0;
+            btnLvlLeafDelete.Enabled = LvlLeafs.Count > 0;
+            btnLvlLeafUp.Enabled = LvlLeafs.Count > 1;
+            btnLvlLeafDown.Enabled = LvlLeafs.Count > 1;
+            btnLvlLeafCopy.Enabled = LvlLeafs.Count > 0;
             //enable/disable buttons if leaf exists or not
-            if (_lvlleafs.Count == 0) {
+            if (LvlLeafs.Count == 0) {
                 btnLvlPathAdd.Enabled = false;
                 lblLvlTunnels.Text = $"Paths/Tunnels - <no leaf>";
                 btnLvlRandomTunnel.Enabled = false;
@@ -323,31 +235,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathUp.Enabled = lvlLeafPaths.Rows.Count > 1;
             btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
             btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
-            btnLvlSeqAdd.Enabled = _lvlleafs.Count > 0;
-            if (btnLvlSeqAdd.Enabled == false) btnLvlSeqDelete.Enabled = false;
-            if (btnLvlSeqAdd.Enabled == false) btnLvlSeqClear.Enabled = false;
-            btnLvlLoopAdd.Enabled = _lvlleafs.Count > 0;
+            btnLvlLoopAdd.Enabled = LvlLeafs.Count > 0;
             if (btnLvlLoopAdd.Enabled == false) btnLvlLoopDelete.Enabled = false;
             //
             if (!EditorIsLoading) {
-                ColorLvlVolumeSequencer();
-                SaveLvl(false);
-            }
-        }
-        /// Set "saved" flag to false for LVL when these events happen
-        private void NUD_lvlApproach_ValueChanged(object sender, EventArgs e)
-        {
-            ColorLvlVolumeSequencer();
-            SaveLvl(false);
-        }
-        private void NUD_lvlVolume_ValueChanged(object sender, EventArgs e) => SaveLvl(false);
-        private void dropLvlInput_SelectedIndexChanged(object sender, EventArgs e) => SaveLvl(false);
-        private void dropLvlTutorial_SelectedIndexChanged(object sender, EventArgs e) => SaveLvl(false);
-        ///VOLUME SEQUENCER CELL ZOOM
-        private void trackLvlVolumeZoom_Scroll(object sender, EventArgs e)
-        {
-            for (int i = 0; i < lvlSeqObjs.ColumnCount; i++) {
-                lvlSeqObjs.Columns[i].Width = trackLvlVolumeZoom.Value;
+                SaveCheckAndWrite(false);
             }
         }
         /// LVL NEW
@@ -355,64 +247,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //if LVL not saved, have user confirm if they want to continue
             if ((!EditorIsSaved && MessageBox.Show("Current LVL is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                lvlsaveAsToolStripMenuItem_Click(null, null);
+                SaveAs();
             }
         }
-        /// LVL SAVE
-        private void saveToolStripMenuItem2_Click(object sender, EventArgs e)
+        ///SAVE
+        public void Save()
         {
             //if _loadedlvl is somehow not set, force Save As instead
-            if (loadedlvl == null) {
-                ///_mainform.toolstripLvlSaveAs.PerformClick();
-                return;
+            if (LoadedLvl == null) {
+                SaveAs();
             }
             else
-                WriteLvl();
+                SaveCheckAndWrite(true, true);
         }
-        /// LVL SAVE AS
-        private void lvlsaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        ///SAVE AS
+        public void SaveAs()
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
-            sfd.Filter = "Thumper Editor Lvl File (*.txt)|*.txt";
+            sfd.Filter = "Thumper Editor Lvl File (*.lvl)|*.lvl";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                if (sender == null) {
-                    loadedlvl = null;
-                }
-                //separate path and filename
-                string storePath = Path.GetDirectoryName(sfd.FileName);
-                string tempFileName = Path.GetFileName(sfd.FileName);
-                if (!tempFileName.EndsWith(".txt"))
-                    tempFileName += ".txt";
-                //check if user input "lvl_", and deny save if so
-                if (Path.GetFileName(sfd.FileName).Contains("lvl_")) {
-                    MessageBox.Show("File not saved. Do not include 'lvl_' in your file name.", "File not saved");
-                    return;
-                }
-                if (File.Exists($@"{storePath}\{tempFileName}.lvl")) {
-                    MessageBox.Show("That file name exists already.", "File not saved");
-                    return;
-                }
-                loadedlvl = new FileInfo($@"{storePath}\{tempFileName}.lvl");
-                WriteLvl();
-                //after saving new file, refresh the workingfolder
-                ///_mainform.btnWorkRefresh.PerformClick();
+                loadedlvl = new FileInfo(sfd.FileName);
+                SaveCheckAndWrite(true, true);
+                //after saving new file, refresh the project explorer
+                TCLE.dockProjectExplorer.CreateTreeView();
             }
-        }
-        private void WriteLvl()
-        {
-            //serialize JSON object to a string, and write it to the file
-            JObject _save = LvlBuildSave(LoadedLvl.Name);
-            if (!TCLE.lockedfiles.ContainsKey(loadedlvl)) {
-                TCLE.lockedfiles.Add(loadedlvl, new FileStream(LoadedLvl.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-            }
-            TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLvl], _save);
-            SaveLvl(true, true);
-            this.Text = LoadedLvl.Name;
-            //reload samples on save
-            TCLE.LvlReloadSamples();
         }
         /// LVL LOAD
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -444,14 +305,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<LvlLeafData> todelete = new();
             foreach (DataGridViewRow dgvr in lvlLeafList.SelectedRows) {
-                todelete.Add(_lvlleafs[dgvr.Index]);
+                todelete.Add(LvlLeafs[dgvr.Index]);
             }
             int _in = lvlLeafList.CurrentRow.Index;
-            //_lvlleafs.RemoveAt(_in);
+            //LvlLeafs.RemoveAt(_in);
             foreach (LvlLeafData lvd in todelete)
-                _lvlleafs.Remove(lvd);
+                LvlLeafs.Remove(lvd);
             TCLE.PlaySound("UIobjectremove");
-            lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= _lvlleafs.Count ? _in - 1 : _in));
+            lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= LvlLeafs.Count ? _in - 1 : _in));
         }
         private void btnLvlLeafAdd_Click(object sender, EventArgs e)
         {
@@ -461,7 +322,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             TCLE.PlaySound("UIfolderopen");
             if (ofd.ShowDialog() == DialogResult.OK) {
-                AddLeaftoLvl(ofd.FileName);
+                AddFiletoLvl(ofd.FileName);
             }
         }
 
@@ -474,16 +335,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLeafList.ClearSelection();
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
-                _lvlleafs.Insert(dgvr - 1, _lvlleafs[dgvr]);
-                _lvlleafs.RemoveAt(dgvr + 1);
+                LvlLeafs.Insert(dgvr - 1, LvlLeafs[dgvr]);
+                LvlLeafs.RemoveAt(dgvr + 1);
             }
             lvlLeafList.ClearSelection();
             foreach (int dgvr in selectedrows) {
                 lvlLeafList.Rows[dgvr - 1].Selected = true;
             }
             EditorIsLoading = false;
-            ColorLvlVolumeSequencer();
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlLeafDown_Click(object sender, EventArgs e)
@@ -495,16 +355,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLeafList.ClearSelection();
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
-                _lvlleafs.Insert(dgvr + 2, _lvlleafs[dgvr]);
-                _lvlleafs.RemoveAt(dgvr);
+                LvlLeafs.Insert(dgvr + 2, LvlLeafs[dgvr]);
+                LvlLeafs.RemoveAt(dgvr);
             }
             lvlLeafList.ClearSelection();
             foreach (int dgvr in selectedrows) {
                 lvlLeafList.Rows[dgvr + 1].Selected = true;
             }
             EditorIsLoading = false;
-            ColorLvlVolumeSequencer();
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         ///COPY PASTE of leaf
@@ -512,7 +371,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row, row2) => row.CompareTo(row2));
-            clipboardleaf = _lvlleafs.Where(x => selectedrows.Contains(_lvlleafs.IndexOf(x))).ToList();
+            clipboardleaf = LvlLeafs.Where(x => selectedrows.Contains(LvlLeafs.IndexOf(x))).ToList();
             clipboardleaf.Reverse();
             btnLvlLeafPaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
@@ -521,9 +380,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             int _in = lvlLeafList.CurrentRow?.Index + 1 ?? 0;
             foreach (LvlLeafData lld in clipboardleaf)
-                _lvlleafs.Insert(_in, lld.Clone());
+                LvlLeafs.Insert(_in, lld.Clone());
             TCLE.PlaySound("UIkpaste");
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
@@ -542,19 +401,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 todelete.Add(dgvr.Cells[0].Value.ToString());
             }
             foreach (string s in todelete)
-                _lvlleafs[lvlLeafList.CurrentRow.Index].paths.Remove(s);
+                LvlLeafs[lvlLeafList.CurrentRow.Index].paths.Remove(s);
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
             TCLE.PlaySound("UItunnelremove");
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlPathAdd_Click(object sender, EventArgs e)
         {
-            _lvlleafs[lvlLeafList.CurrentRow.Index].paths.Add("");
+            LvlLeafs[lvlLeafList.CurrentRow.Index].paths.Add("");
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
             btnLvlPathDelete.Enabled = true;
             TCLE.PlaySound("UItunneladd");
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlPathUp_Click(object sender, EventArgs e)
@@ -565,8 +424,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<int> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
-                _lvlleafs[idx].paths.Insert(dgvr - 1, _lvlleafs[idx].paths[dgvr]);
-                _lvlleafs[idx].paths.RemoveAt(dgvr + 1);
+                LvlLeafs[idx].paths.Insert(dgvr - 1, LvlLeafs[idx].paths[dgvr]);
+                LvlLeafs[idx].paths.RemoveAt(dgvr + 1);
             }
             LvlUpdatePaths(idx);
             lvlLeafPaths.CurrentCell = lvlLeafPaths[0, selectedrows[0] - 1];
@@ -574,7 +433,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 lvlLeafPaths.Rows[dgvr - 1].Cells[0].Selected = true;
             }
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlPathDown_Click(object sender, EventArgs e)
@@ -585,8 +444,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<int> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
-                _lvlleafs[idx].paths.Insert(dgvr + 2, _lvlleafs[idx].paths[dgvr]);
-                _lvlleafs[idx].paths.RemoveAt(dgvr);
+                LvlLeafs[idx].paths.Insert(dgvr + 2, LvlLeafs[idx].paths[dgvr]);
+                LvlLeafs[idx].paths.RemoveAt(dgvr);
             }
             LvlUpdatePaths(idx);
             lvlLeafPaths.CurrentCell = lvlLeafPaths[0, selectedrows[0] + 1];
@@ -594,48 +453,48 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 lvlLeafPaths.Rows[dgvr + 1].Cells[0].Selected = true;
             }
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlPathClear_Click(object sender, EventArgs e)
         {
             int idx = lvlLeafList.CurrentRow.Index;
-            if (_lvlleafs[idx].paths.Count > 0) {
+            if (LvlLeafs[idx].paths.Count > 0) {
                 if (MessageBox.Show("Are you sure you want to clear all?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                     return;
             }
-            _lvlleafs[idx].paths.Clear();
+            LvlLeafs[idx].paths.Clear();
             LvlUpdatePaths(idx);
             TCLE.PlaySound("UIdataerase");
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlRandomTunnel_Click(object sender, EventArgs e)
         {
-            if (_lvlleafs.Count == 0)
+            if (LvlLeafs.Count == 0)
                 return;
             lvlLeafPaths.RowCount++;
-            lvlLeafPaths.Rows[^1].Cells[0].Value = _lvlpaths[TCLE.rng.Next(1, _lvlpaths.Count)];
+            lvlLeafPaths.Rows[^1].Cells[0].Value = LvlPaths[TCLE.rng.Next(1, LvlPaths.Count)];
             btnLvlPathDelete.Enabled = true;
             TCLE.PlaySound("UItunneladd");
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlCopyTunnel_Click(object sender, EventArgs e)
         {
             if (loadedlvl == null)
                 return;
-            clipboardpaths = new List<string>(_lvlleafs[lvlLeafList.CurrentRow.Index].paths);
+            clipboardpaths = new List<string>(LvlLeafs[lvlLeafList.CurrentRow.Index].paths);
             btnLvlPasteTunnel.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
 
         private void btnLvlPasteTunnel_Click(object sender, EventArgs e)
         {
-            _lvlleafs[lvlLeafList.CurrentRow.Index].paths.AddRange(new List<string>(clipboardpaths));
+            LvlLeafs[lvlLeafList.CurrentRow.Index].paths.AddRange(new List<string>(clipboardpaths));
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
             TCLE.PlaySound("UIkpaste");
-            SaveLvl(false);
+            SaveCheckAndWrite(false);
         }
 
         private void btnLvlLoopAdd_Click(object sender, EventArgs e)
@@ -645,12 +504,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLoopTracks.Rows[^1].Cells[1].Value = 0;
             lvlLoopTracks.Rows[^1].Cells[0].Value = "";
             btnLvlLoopDelete.Enabled = true;
+            LvlProperties.lvlloops.Add(new LvlLoop());
             TCLE.PlaySound("UIobjectadd");
         }
 
         private void btnLvlLoopDelete_Click(object sender, EventArgs e)
         {
             lvlLoopTracks.Rows.RemoveAt(lvlLoopTracks.CurrentRow.Index);
+            LvlProperties.lvlloops.RemoveAt(lvlLoopTracks.CurrentRow.Index);
             TCLE.PlaySound("UIobjectremove");
             //disable button if no more rows exist
             if (lvlLoopTracks.Rows.Count < 1)
@@ -659,102 +520,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
                 r.HeaderCell.Value = "Volume Track " + r.Index;
             }
-            SaveLvl(false);
-        }
-
-        private void btnLvlSeqAdd_Click(object sender, EventArgs e)
-        {
-            lvlSeqObjs.RowCount++;
-            TCLE.PlaySound("UIobjectadd");
-            lvlSeqObjs.Rows[^1].HeaderCell.Value = "Volume Track " + (lvlSeqObjs.Rows.Count - 1);
-            btnLvlSeqDelete.Enabled = true;
-            btnLvlSeqClear.Enabled = true;
-            SaveLvl(false);
-        }
-
-        private void btnLvlSeqDelete_Click(object sender, EventArgs e)
-        {
-            bool _empty = true;
-            List<DataGridViewRow> selectedrows = lvlSeqObjs.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-            //iterate over current row to see if any cells have data
-            List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
-            if (filledcells.Count > 0)
-                _empty = false;
-            //prompt user to say YES if row is not empty. Then delete selected track
-            if (!_empty && MessageBox.Show("Some cells in the selected tracks have data. Are you sure you want to delete?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No) {
-
-                return;
-            }
-
-            foreach (DataGridViewRow dgvr in selectedrows) {
-                lvlSeqObjs.Rows.Remove(dgvr);
-            }
-            TCLE.PlaySound("UIobjectremove");
-            SaveLvl(false);
-            //after deleting, rename all headers so they're in order again
-            foreach (DataGridViewRow r in lvlSeqObjs.Rows)
-                r.HeaderCell.Value = "Volume Track " + r.Index;
-            //disable buttons if there are no more rows
-            btnLvlSeqDelete.Enabled = lvlSeqObjs.Rows.Count > 0;
-            btnLvlSeqClear.Enabled = lvlSeqObjs.Rows.Count > 0;
-        }
-
-        private void btnLvlSeqClear_Click(object sender, EventArgs e)
-        {
-            //finds each distinct row across all selected cells
-            List<DataGridViewRow> selectedrows = lvlSeqObjs.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-            if (MessageBox.Show($"{selectedrows.Count} rows selected.\nAre you sure you want to clear them?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
-            //then get all cells in the rows that have values
-            List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
-            if (filledcells.Count == 0)
-                return;
-            //select all of them
-            foreach (DataGridViewCell dgvc in filledcells) {
-                dgvc.Selected = true;
-            }
-            //then set a single one to null. The "cellvaluechanged" event will handle the rest
-            filledcells[0].Value = null;
-
-            TCLE.PlaySound("UIdataerase");
-            SaveLvl(false);
-        }
-
-        private void btnLvlLoopRefresh_Click(object sender, EventArgs e)
-        {
-            TCLE.LvlReloadSamples();
-            TCLE.PlaySound("UIrefresh");
-            MessageBox.Show($"Found and loaded {TCLE.LvlSamples.Count} samples for the current project.");
-        }
-
-        private void btnLvlRefreshBeats_Click(object sender, EventArgs e)
-        {
-            foreach (LvlLeafData _leaf in _lvlleafs) {
-                string _file = _leaf.leafname.Replace(".leaf", "");
-                dynamic _load;
-                try {
-                    if (!File.Exists($@"{TCLE.WorkingFolder}\leaf_{_file}.txt"))
-                        continue;
-                    //I need to load the entire document to grab one field from it
-                    _load = TCLE.LoadFileLock($@"{TCLE.WorkingFolder}\leaf_{_file}.txt");
-                    //if beat_cnt is different than what is loaded, replace it and mark the save flag
-                    if (_leaf.beats != (int)_load["beat_cnt"]) {
-                        _leaf.beats = (int)_load["beat_cnt"];
-                        //and update the dgv cell with new beat value
-                        lvlLeafList.Rows[_lvlleafs.IndexOf(_leaf)].Cells[2].Value = _leaf.beats;
-                        SaveLvl(false);
-                    }
-                }
-                catch (Exception ex) { MessageBox.Show("Problem occured when refreshing lvl beats. Show this error to the dev.\n" + ex, "Lvl beat refresh error"); }
-            }
+            SaveCheckAndWrite(false);
         }
 
         private void btnRevertLvl_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            SaveLvl(true);
-            LoadLvl(lvljson, LoadedLvl);
+            SaveCheckAndWrite(true);
+            LoadLvl(lvlProperties.revertPoint, LoadedLvl);
             TCLE.PlaySound("UIrevertchanges");
         }
 
@@ -831,7 +605,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///customize Paths List a bit
             //custom column containing comboboxes per cell
             DataGridViewComboBoxColumn _dgvlvlpaths = new() {
-                DataSource = _lvlpaths,
+                DataSource = LvlPaths,
                 HeaderText = "Path Name",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
@@ -849,7 +623,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///
         }
 
-        public void AddLeaftoLvl(string path)
+        public void AddFiletoLvl(string path)
         {
             //parse leaf to JSON
             dynamic _load = TCLE.LoadFileLock(path);
@@ -858,40 +632,47 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a leaf file!", "Leaf load error");
                 return;
             }
-            //check if leaf exists in the same folder as the lvl. If not, allow user to copy file.
+            //check if lvl exists in the same folder as the master. If not, allow user to copy file.
             //this is why I utilize workingfolder
-            if (Path.GetDirectoryName(path) != TCLE.WorkingFolder.FullName) {
-                if (MessageBox.Show("The leaf you chose does not exist in the same folder as this lvl. Do you want to copy it to this folder and load it?", "Leaf load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
-                else
-                    return;
+            //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
+            if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder.FullName)) {
+                if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
+                        File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
+                        TCLE.dockProjectExplorer.CreateTreeView();
+                    }
+                    else
+                        return;
             }
             TCLE.PlaySound("UIobjectadd");
             //Setup list of tunnels if copy check is enabled
             List<string> copytunnels = new();
             if (chkTunnelCopy.Checked) {
-                copytunnels = new List<string>(_lvlleafs.Last().paths);
+                copytunnels = new List<string>(LvlLeafs.Last().paths);
             }
             //add leaf data to the list
-            _lvlleafs.Add(new LvlLeafData() {
+            LvlLeafs.Add(new LvlLeafData() {
                 leafname = (string)_load["obj_name"],
                 beats = (int)_load["beat_cnt"],
                 paths = new List<string>(copytunnels),
                 id = TCLE.rng.Next(0, 1000000)
             });
+            propertyGridLvl.Refresh();
         }
 
         public void LvlUpdatePaths(int index)
         {
             lvlLeafPaths.Rows.Clear();
-            lblLvlTunnels.Text = $"Paths/Tunnels - {_lvlleafs[index].leafname}";
+            lblLvlTunnels.Text = $"Paths/Tunnels - {LvlLeafs[index].leafname}";
             //for each path in the selected leaf, populate the paths DGV
-            foreach (string path in _lvlleafs[index].paths) {
-                if (_lvlpaths.Contains(path))
+            foreach (string path in LvlLeafs[index].paths) {
+                //path may have been manually added and could not exist
+                if (LvlPaths.Contains(path))
                     lvlLeafPaths.Rows.Add(new object[] { path });
                 else
                     MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");
             }
+            //enable a bunch of buttons based on if paths exist or not
             btnLvlPathAdd.Enabled = true;
             btnLvlPathDelete.Enabled = lvlLeafPaths.Rows.Count > 0;
             btnLvlCopyTunnel.Enabled = lvlLeafPaths.Rows.Count > 0;
@@ -902,29 +683,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //monke
         }
 
-        public void SaveCheckAndWrite(bool save, bool playsound = false)
+        public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
             if (EditorIsLoading)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
-            EditorIsSaved = save;
-            if (!save) {
-                /*
-                btnSaveLvl.Enabled = true;
-                btnRevertLvl.Enabled = lvljson != null;
-                btnRevertLvl.ToolTipText = lvljson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
-                toolstripTitleLvl.BackColor = Color.Maroon;
-                */
+            EditorIsSaved = IsSaved;
+            if (!IsSaved) {
+                //denote editor tab is not saved
+                this.Text = LoadedLvl.Name + "*";
+                //add current JSON to the undo list
+                lvlProperties.undoItems.Add(BuildSave(lvlProperties));
             }
             else {
-                /*
-                btnSaveLvl.Enabled = false;
-                btnRevertLvl.Enabled = false;
-                toolstripTitleLvl.BackColor = Color.FromArgb(40, 40, 40);
-                */
+                this.Text = LoadedLvl.Name;
+                //build the JSON to write to file
+                JObject _saveJSON = BuildSave(lvlProperties);
+                lvlProperties.revertPoint = _saveJSON;
+                //write JSON to file
+                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLvl], _saveJSON);
+
                 if (playsound) TCLE.PlaySound("UIsave");
+                //find if any raw text docs are open of this gate and update them
+                TCLE.FindReloadRaw(LoadedLvl.Name);
+                TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
+                TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
             }
         }
 
@@ -946,8 +731,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void RecalculateRuntime()
+        public int RecalculateRuntime()
         {
+            int beattotal = 0;
             foreach (LvlLeafData _leaf in LvlLeafs) {
                 FileInfo leaffile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Value.Name == _leaf.leafname).Value;
                 leaffile?.Refresh();
@@ -957,15 +743,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"file not found";
                 }
                 else {
+                    beats = (int)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"];
+                    beattotal += beats;
                     string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle = null;
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"{beats} beats -- {time}";
                 }
             }
             lvlLeafList.Refresh();
+            return beattotal;
         }
 
-        public static JObject LvlBuildSave(LvlProperties _properties)
+        public static JObject BuildSave(LvlProperties _properties)
         {
             ///start building JSON output
             JObject _save = new() {
@@ -1018,12 +807,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _save.Add("leaf_seq", leaf_seq);
             //this section adds the loop tracks
             JArray loops = new();
-            foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
-                if (r.Cells[0].Value == null)
+            foreach (LvlLoop _loop in _properties.lvlloops) {
+                if (_loop.sample == null)
                     continue;
                 JObject s = new() {
-                    { "samp_name", $"{r.Cells[0].Value}.samp"},
-                    { "beats_per_loop", decimal.Parse(r.Cells[1].Value.ToString()) }
+                    { "samp_name", $"{_loop.sample}.samp"},
+                    { "beats_per_loop", _loop.beats }
                 };
 
                 loops.Add(s);
