@@ -593,9 +593,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             btnLvlLeafRandom.Enabled = true;
+            propertyGridLvl.SelectedObject = lvlProperties;
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
-            SaveCheckAndWrite(true);
+            EditorIsSaved = true;
+            RecalculateRuntime();
         }
 
         public void InitializeLvlStuff()

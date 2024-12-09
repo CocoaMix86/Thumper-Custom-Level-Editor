@@ -55,7 +55,6 @@
             this.Leaf = new DataGridViewTextBoxColumn();
             this.Beats = new DataGridViewTextBoxColumn();
             this.splitContainer1 = new SplitContainer();
-            this.lblMasterlvllistHelp = new Label();
             this.splitContainer2 = new SplitContainer();
             this.propertyGridLvl = new PropertyGrid();
             this.splitContainer3 = new SplitContainer();
@@ -315,7 +314,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
             // 
             // splitContainer1.Panel2
@@ -325,21 +323,6 @@
             this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 119;
-            // 
-            // lblMasterlvllistHelp
-            // 
-            this.lblMasterlvllistHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.lblMasterlvllistHelp.AutoSize = true;
-            this.lblMasterlvllistHelp.BackColor = Color.Transparent;
-            this.lblMasterlvllistHelp.Cursor = Cursors.Help;
-            this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(1004, -3);
-            this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
-            this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
-            this.lblMasterlvllistHelp.Size = new Size(15, 16);
-            this.lblMasterlvllistHelp.TabIndex = 95;
-            this.lblMasterlvllistHelp.Text = "?";
             // 
             // splitContainer2
             // 
@@ -731,7 +714,6 @@
             this.lvlToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -771,7 +753,6 @@
         private DataGridViewTextBoxColumn Leaf;
         private DataGridViewTextBoxColumn Beats;
         private SplitContainer splitContainer1;
-        private Label lblMasterlvllistHelp;
         public PropertyGrid propertyGridLvl;
         private SplitContainer splitContainer2;
         private DataGridView lvlLoopTracks;
