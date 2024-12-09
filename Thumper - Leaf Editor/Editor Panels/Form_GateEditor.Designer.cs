@@ -39,6 +39,7 @@
             this.btnGateLvlUp = new ToolStripButton();
             this.btnGateLvlDown = new ToolStripButton();
             this.gateLvlList = new DataGridView();
+            this.gatePhaseNum = new DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             this.GateLvlRuntime = new DataGridViewTextBoxColumn();
@@ -157,13 +158,13 @@
             dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             this.gateLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gateLvlList.ColumnHeadersHeight = 20;
             this.gateLvlList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gateLvlList.Columns.AddRange(new DataGridViewColumn[] { this.dataGridViewImageColumn1, this.dataGridViewTextBoxColumn1, this.GateLvlRuntime });
+            this.gateLvlList.Columns.AddRange(new DataGridViewColumn[] { this.gatePhaseNum, this.dataGridViewImageColumn1, this.dataGridViewTextBoxColumn1, this.GateLvlRuntime });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -203,6 +204,15 @@
             this.gateLvlList.DragOver += this.gateLvlList_DragOver;
             this.gateLvlList.MouseDown += this.gateLvlList_MouseDown;
             this.gateLvlList.MouseMove += this.gateLvlList_MouseMove;
+            // 
+            // gatePhaseNum
+            // 
+            this.gatePhaseNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.gatePhaseNum.HeaderText = "";
+            this.gatePhaseNum.Name = "gatePhaseNum";
+            this.gatePhaseNum.ReadOnly = true;
+            this.gatePhaseNum.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.gatePhaseNum.Width = 5;
             // 
             // dataGridViewImageColumn1
             // 
@@ -323,6 +333,7 @@
         private ToolStripButton btnGateLvlDown;
         private DataGridView gateLvlList;
         private Label label1;
+        private DataGridViewTextBoxColumn gatePhaseNum;
         private DataGridViewImageColumn dataGridViewImageColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn GateLvlRuntime;

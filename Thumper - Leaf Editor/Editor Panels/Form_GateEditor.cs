@@ -205,8 +205,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //clear dgv
             gateLvlList.RowCount = 0;
             //repopulate dgv from list
-            foreach (GateLvlData _lvl in GateProperties.gatelvls) {
+            foreach (GateLvlData _lvl in GateLvls) {
                 gateLvlList.Rows.Add(new object[] {
+                    GateProperties.random ? _lvl.bucket : GateLvls.IndexOf(_lvl),
                     Properties.Resources.editor_lvl,
                     _lvl.lvlname,
                     0
@@ -503,7 +504,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (EditorLoading)
                 return 0;
-            
+            //depending on the gate configuration, it can have a different amount of lvls in it
             int rows = 0;
             if (GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random)
                 rows = 4;
@@ -513,24 +514,42 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 rows = 16;
 
             int beattotal = 0;
-            foreach (GateLvlData _lvl in GateProperties.gatelvls) {
+            List<int> bucketscounted = new();
+            //loop over each lvl and update the grid with runtime or a warning
+            foreach (GateLvlData _lvl in GateLvls) {
                 int _in = GateLvls.IndexOf(_lvl);
+                //if random, the phase counter will instead show bucket numbers
+                gateLvlList.Rows[_in].Cells[0].Value = GateProperties.random ? _lvl.bucket + 1 : GateLvls.IndexOf(_lvl) + 1;
                 if (_in >= rows) {
                     gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
-                    gateLvlList.Rows[_in].Cells[2].Value = $"too many phases for config";
+                    gateLvlList.Rows[_in].Cells[3].Value = $"too many lvls in list (max. {rows})";
+                }
+                //each bucket can have 4 lvls only. Show warning if more than 4.
+                else if (GateProperties.random && GateLvls.Where(x => x.bucket == _lvl.bucket).Count() > 4) {
+                    gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
+                    gateLvlList.Rows[_in].Cells[3].Value = $"too many lvls in bucket {_lvl.bucket + 1} (max. 4)";
                 }
                 else {
+                    //load lvl and calc runtime
+                    //show warning if file not found
                     KeyValuePair<string, FileInfo> lvlfile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_lvl.lvlname));
                     int beats = lvlfile.Key == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.Value.FullName);
                     if (beats == -1) {
                         gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.Maroon;
-                        gateLvlList.Rows[_in].Cells[2].Value = $"file not found";
+                        gateLvlList.Rows[_in].Cells[3].Value = $"file not found";
                     }
                     else {
-                        beattotal += beats;
+                        if (GateProperties.random) {
+                            if (!bucketscounted.Contains(_lvl.bucket)) {
+                                beattotal += beats;
+                                bucketscounted.Add(_lvl.bucket);
+                            }
+                        }
+                        else
+                            beattotal += beats;
                         string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                         gateLvlList.Rows[_in].DefaultCellStyle = null;
-                        gateLvlList.Rows[_in].Cells[2].Value = $"{beats} beats -- {time}";
+                        gateLvlList.Rows[_in].Cells[3].Value = $"{beats} beats -- {time}";
                     }
                 }
             }
