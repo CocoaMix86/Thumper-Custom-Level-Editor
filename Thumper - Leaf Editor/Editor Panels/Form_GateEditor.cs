@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
 using System.Windows.Input;
 using WeifenLuo.WinFormsUI.Docking;
@@ -502,46 +503,40 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (EditorLoading)
                 return 0;
+            
+            int rows = 0;
+            if (GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random)
+                rows = 4;
+            else if (GateProperties.boss == "Level 9 - pyramid")
+                rows = 5;
+            else if (GateProperties.random)
+                rows = 16;
 
             int beattotal = 0;
             foreach (GateLvlData _lvl in GateProperties.gatelvls) {
-                KeyValuePair<string, FileInfo> lvlfile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_lvl.lvlname));
-                int beats = lvlfile.Key == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.Value.FullName);
-                if (beats == -1) {
-                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
-                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].Cells[2].Value = $"file not found";
+                int _in = GateLvls.IndexOf(_lvl);
+                if (_in >= rows) {
+                    gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
+                    gateLvlList.Rows[_in].Cells[2].Value = $"too many phases for config";
                 }
                 else {
-                    beattotal += beats;
-                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].DefaultCellStyle = null;
-                    gateLvlList.Rows[GateProperties.gatelvls.IndexOf(_lvl)].Cells[2].Value = $"{beats} beats -- {time}";
+                    KeyValuePair<string, FileInfo> lvlfile = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith(_lvl.lvlname));
+                    int beats = lvlfile.Key == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.Value.FullName);
+                    if (beats == -1) {
+                        gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.Maroon;
+                        gateLvlList.Rows[_in].Cells[2].Value = $"file not found";
+                    }
+                    else {
+                        beattotal += beats;
+                        string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                        gateLvlList.Rows[_in].DefaultCellStyle = null;
+                        gateLvlList.Rows[_in].Cells[2].Value = $"{beats} beats -- {time}";
+                    }
                 }
             }
+
             gateLvlList.Refresh();
-            HighlightTooManyPhases();
             return beattotal;
-        }
-
-        public void HighlightTooManyPhases()
-        {
-            if (EditorLoading)
-                return;
-
-            int rows = 0;
-            if (GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random)
-                rows = 4;            
-            else if (GateProperties.boss == "Level 9 - pyramid") 
-                rows = 5;            
-            else if (GateProperties.random) 
-                rows = 16;            
-
-            for (int r = 0; r < gateLvlList.RowCount; r++) {
-                if (gateLvlList.Rows[r].Index >= rows) { 
-                    gateLvlList.Rows[r].DefaultCellStyle.BackColor = Color.DarkOrange;
-                    gateLvlList.Rows[r].Cells[2].Value = $"too many phases for config";
-                }
-            }
         }
 
         public static JObject BuildSave(GateProperties _properties)
