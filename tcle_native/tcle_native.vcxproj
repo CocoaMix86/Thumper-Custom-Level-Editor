@@ -156,6 +156,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="tcle_api.cpp" />
+    <ClCompile Include="tcle_window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tcle_window.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
