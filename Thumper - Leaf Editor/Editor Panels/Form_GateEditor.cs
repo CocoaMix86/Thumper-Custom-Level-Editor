@@ -406,6 +406,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             loadedgate = filepath;
             //set some visual elements
             this.Text = LoadedGate.Name;
+            //set flag that load is in progress. This skips Save method
             EditorLoading = true;
 
             gateproperties = new(this, filepath) {
@@ -418,7 +419,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
 
             ///Clear form elements so new data can load
-            GateProperties.gatelvls.Clear();
+            GateLvls.Clear();
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["boss_patterns"]) {
                 GateProperties.gatelvls.Add(new GateLvlData() {
@@ -627,17 +628,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             _save.Add("boss_patterns", boss_patterns);
             return _save;
-        }
-
-        private void ResetGate()
-        {
-            //reset things to default values
-            gatejson = null;
-            GateProperties.gatelvls.Clear();
-            gateLvlList.Rows.Clear();
-            this.Text = "Gate Editor";
-            //set saved flag to true, because nothing is loaded
-            SaveCheckAndWrite(true);
         }
         #endregion
 

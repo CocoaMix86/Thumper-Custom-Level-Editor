@@ -42,26 +42,6 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    public class LvlLeafData
-	{
-		public string leafname { get; set; }
-        public int beats { get; set; }
-		public List<string> paths { get; set; }
-		public int id { get; set; }
-
-		public LvlLeafData()
-        {
-
-		}
-
-        public LvlLeafData Clone()
-        {
-            LvlLeafData leaf = (LvlLeafData)MemberwiseClone();
-            leaf.paths = new List<string>(paths);
-            return leaf;
-        }
-    }
-
     public class SampleData
     {
         public string obj_name { get; set; }
@@ -77,12 +57,4 @@ namespace Thumper_Custom_Level_Editor
             return obj_name;
         }
     }
-
-    public class WorkingFolderFileItem
-    {
-        public string type { get; set; }
-        public string filename { get; set; }
-        public int index { get; set; }
-    }
-
 }

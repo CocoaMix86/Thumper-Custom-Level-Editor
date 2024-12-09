@@ -28,28 +28,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LvlEditor));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LvlEditor));
             this.toolTip1 = new ToolTip(this.components);
-            this.label25 = new Label();
-            this.label23 = new Label();
-            this.label28 = new Label();
-            this.trackLvlVolumeZoom = new TrackBar();
-            this.label20 = new Label();
-            this.lblLvlTunnels = new Label();
-            this.panelLevel = new Panel();
             this.lvlToolStrip = new ToolStrip();
             this.btnLvlLeafAdd = new ToolStripButton();
             this.btnLvlLeafDelete = new ToolStripButton();
@@ -57,193 +47,71 @@
             this.btnLvlLeafDown = new ToolStripButton();
             this.btnLvlLeafCopy = new ToolStripButton();
             this.btnLvlLeafPaste = new ToolStripButton();
-            this.btnLvlRefreshBeats = new ToolStripButton();
             this.btnLvlLeafRandom = new ToolStripButton();
-            this.label39 = new Label();
             this.label29 = new Label();
-            this.dropLvlTutorial = new ComboBox();
-            this.label26 = new Label();
-            this.dropLvlInput = new ComboBox();
-            this.label24 = new Label();
-            this.NUD_lvlVolume = new NumericUpDown();
-            this.NUD_lvlApproach = new NumericUpDown();
             this.lvlLeafList = new DataGridView();
             this.lvlfiletype = new DataGridViewImageColumn();
             this.Leaf = new DataGridViewTextBoxColumn();
             this.Beats = new DataGridViewTextBoxColumn();
             this.splitContainer1 = new SplitContainer();
-            this.lvlSeqObjs = new DataGridView();
-            this.panel1 = new Panel();
-            this.lvlVolumeToolStrip = new ToolStrip();
-            this.btnLvlSeqAdd = new ToolStripButton();
-            this.btnLvlSeqDelete = new ToolStripButton();
-            this.btnLvlSeqClear = new ToolStripButton();
-            this.lvlPathsToolStrip2 = new ToolStrip();
-            this.btnLvlPathUp = new ToolStripButton();
-            this.btnLvlPathDown = new ToolStripButton();
-            this.btnLvlPathClear = new ToolStripButton();
+            this.lblMasterlvllistHelp = new Label();
+            this.propertyGridLvl = new PropertyGrid();
+            this.splitContainer2 = new SplitContainer();
+            this.label22 = new Label();
+            this.lvlLoopTracks = new DataGridView();
             this.lvlLoopToolStrip = new ToolStrip();
             this.btnLvlLoopAdd = new ToolStripButton();
             this.btnLvlLoopDelete = new ToolStripButton();
-            this.lvlLeafPaths = new DataGridView();
             this.lvlPathsToolStrip = new ToolStrip();
             this.btnLvlPathAdd = new ToolStripButton();
             this.btnLvlPathDelete = new ToolStripButton();
+            this.btnLvlPathUp = new ToolStripButton();
+            this.btnLvlPathDown = new ToolStripButton();
             this.btnLvlCopyTunnel = new ToolStripButton();
             this.btnLvlPasteTunnel = new ToolStripButton();
+            this.btnLvlPathClear = new ToolStripButton();
             this.chkTunnelCopy = new ToolStripButton();
             this.btnLvlRandomTunnel = new ToolStripButton();
-            this.label22 = new Label();
-            this.lvlLoopTracks = new DataGridView();
+            this.lvlLeafPaths = new DataGridView();
+            this.lblLvlTunnels = new Label();
             this.LoopSample = new DataGridViewComboBoxColumn();
             this.BeatsPerLoop = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)this.trackLvlVolumeZoom).BeginInit();
-            this.panelLevel.SuspendLayout();
+            this.splitContainer3 = new SplitContainer();
             this.lvlToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.NUD_lvlVolume).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.NUD_lvlApproach).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.lvlSeqObjs).BeginInit();
-            this.panel1.SuspendLayout();
-            this.lvlVolumeToolStrip.SuspendLayout();
-            this.lvlPathsToolStrip2.SuspendLayout();
-            this.lvlLoopToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).BeginInit();
-            this.lvlPathsToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.splitContainer2).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).BeginInit();
+            this.lvlLoopToolStrip.SuspendLayout();
+            this.lvlPathsToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.splitContainer3).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label25
-            // 
-            this.label25.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.label25.AutoSize = true;
-            this.label25.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label25.ForeColor = Color.White;
-            this.label25.Location = new Point(34, 460);
-            this.label25.Margin = new Padding(4, 0, 4, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new Size(66, 15);
-            this.label25.TabIndex = 89;
-            this.label25.Text = "Allow Input";
-            this.toolTip1.SetToolTip(this.label25, "Can the player control the beetle during this lvl?");
-            // 
-            // label23
-            // 
-            this.label23.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.label23.AutoSize = true;
-            this.label23.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label23.ForeColor = Color.White;
-            this.label23.Location = new Point(2, 411);
-            this.label23.Margin = new Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new Size(93, 15);
-            this.label23.TabIndex = 68;
-            this.label23.Text = "Approach Beats";
-            this.toolTip1.SetToolTip(this.label23, "How many beats before the first leaf does the\r\nloop tracks and volume sequencing start.\r\n");
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label28.ForeColor = Color.White;
-            this.label28.Image = Properties.Resources.icon_zoom;
-            this.label28.Location = new Point(1, 5);
-            this.label28.Margin = new Padding(4, 0, 4, 0);
-            this.label28.MinimumSize = new Size(23, 23);
-            this.label28.Name = "label28";
-            this.label28.Size = new Size(23, 23);
-            this.label28.TabIndex = 42;
-            this.toolTip1.SetToolTip(this.label28, "Cell zoom/width");
-            // 
-            // trackLvlVolumeZoom
-            // 
-            this.trackLvlVolumeZoom.AutoSize = false;
-            this.trackLvlVolumeZoom.Cursor = Cursors.Hand;
-            this.trackLvlVolumeZoom.Location = new Point(21, 5);
-            this.trackLvlVolumeZoom.Margin = new Padding(4, 3, 4, 3);
-            this.trackLvlVolumeZoom.Maximum = 120;
-            this.trackLvlVolumeZoom.Minimum = 2;
-            this.trackLvlVolumeZoom.Name = "trackLvlVolumeZoom";
-            this.trackLvlVolumeZoom.Size = new Size(117, 22);
-            this.trackLvlVolumeZoom.TabIndex = 41;
-            this.trackLvlVolumeZoom.TickStyle = TickStyle.None;
-            this.toolTip1.SetToolTip(this.trackLvlVolumeZoom, "Cell zoom/width");
-            this.trackLvlVolumeZoom.Value = 60;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.BackColor = Color.FromArgb(10, 10, 10);
-            this.label20.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label20.ForeColor = Color.White;
-            this.label20.Location = new Point(31, 3);
-            this.label20.Margin = new Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new Size(182, 13);
-            this.label20.TabIndex = 68;
-            this.label20.Text = "Loop Track Volume Sequencer";
-            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
-            // 
-            // lblLvlTunnels
-            // 
-            this.lblLvlTunnels.AutoSize = true;
-            this.lblLvlTunnels.BackColor = Color.FromArgb(10, 10, 10);
-            this.lblLvlTunnels.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.lblLvlTunnels.ForeColor = Color.White;
-            this.lblLvlTunnels.Location = new Point(64, 1);
-            this.lblLvlTunnels.Margin = new Padding(4, 0, 4, 0);
-            this.lblLvlTunnels.Name = "lblLvlTunnels";
-            this.lblLvlTunnels.Size = new Size(90, 13);
-            this.lblLvlTunnels.TabIndex = 80;
-            this.lblLvlTunnels.Text = "Paths/Tunnels";
-            this.toolTip1.SetToolTip(this.lblLvlTunnels, "Unique per leaf");
-            // 
-            // panelLevel
-            // 
-            this.panelLevel.BackColor = Color.FromArgb(35, 35, 35);
-            this.panelLevel.BorderStyle = BorderStyle.FixedSingle;
-            this.panelLevel.Controls.Add(this.lvlToolStrip);
-            this.panelLevel.Controls.Add(this.label39);
-            this.panelLevel.Controls.Add(this.label29);
-            this.panelLevel.Controls.Add(this.dropLvlTutorial);
-            this.panelLevel.Controls.Add(this.label26);
-            this.panelLevel.Controls.Add(this.dropLvlInput);
-            this.panelLevel.Controls.Add(this.label25);
-            this.panelLevel.Controls.Add(this.label24);
-            this.panelLevel.Controls.Add(this.NUD_lvlVolume);
-            this.panelLevel.Controls.Add(this.label23);
-            this.panelLevel.Controls.Add(this.NUD_lvlApproach);
-            this.panelLevel.Controls.Add(this.lvlLeafList);
-            this.panelLevel.Controls.Add(this.splitContainer1);
-            this.panelLevel.Dock = DockStyle.Fill;
-            this.panelLevel.Location = new Point(0, 0);
-            this.panelLevel.Margin = new Padding(4, 3, 4, 3);
-            this.panelLevel.MinimumSize = new Size(70, 69);
-            this.panelLevel.Name = "panelLevel";
-            this.panelLevel.Size = new Size(933, 519);
-            this.panelLevel.TabIndex = 47;
-            this.panelLevel.Tag = "editorpanel";
             // 
             // lvlToolStrip
             // 
-            this.lvlToolStrip.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             this.lvlToolStrip.AutoSize = false;
             this.lvlToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlToolStrip.Dock = DockStyle.None;
+            this.lvlToolStrip.Dock = DockStyle.Bottom;
             this.lvlToolStrip.GripMargin = new Padding(0);
             this.lvlToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.lvlToolStrip.ImageScalingSize = new Size(20, 20);
-            this.lvlToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLeafAdd, this.btnLvlLeafDelete, this.btnLvlLeafUp, this.btnLvlLeafDown, this.btnLvlLeafCopy, this.btnLvlLeafPaste, this.btnLvlRefreshBeats, this.btnLvlLeafRandom });
+            this.lvlToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLeafAdd, this.btnLvlLeafDelete, this.btnLvlLeafUp, this.btnLvlLeafDown, this.btnLvlLeafCopy, this.btnLvlLeafPaste, this.btnLvlLeafRandom });
             this.lvlToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlToolStrip.Location = new Point(4, 354);
+            this.lvlToolStrip.Location = new Point(0, 271);
             this.lvlToolStrip.Name = "lvlToolStrip";
             this.lvlToolStrip.Padding = new Padding(0);
             this.lvlToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlToolStrip.Size = new Size(372, 29);
+            this.lvlToolStrip.Size = new Size(350, 29);
             this.lvlToolStrip.Stretch = true;
             this.lvlToolStrip.TabIndex = 141;
             // 
@@ -313,16 +181,6 @@
             this.btnLvlLeafPaste.Size = new Size(24, 26);
             this.btnLvlLeafPaste.ToolTipText = "Paste the copied sublevel";
             // 
-            // btnLvlRefreshBeats
-            // 
-            this.btnLvlRefreshBeats.Alignment = ToolStripItemAlignment.Right;
-            this.btnLvlRefreshBeats.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlRefreshBeats.Image = Properties.Resources.icon_refresh2;
-            this.btnLvlRefreshBeats.ImageTransparentColor = Color.Magenta;
-            this.btnLvlRefreshBeats.Name = "btnLvlRefreshBeats";
-            this.btnLvlRefreshBeats.Size = new Size(24, 26);
-            this.btnLvlRefreshBeats.ToolTipText = "Recount beats of all leafs in this lvl";
-            // 
             // btnLvlLeafRandom
             // 
             this.btnLvlLeafRandom.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -332,19 +190,6 @@
             this.btnLvlLeafRandom.Name = "btnLvlLeafRandom";
             this.btnLvlLeafRandom.Size = new Size(24, 26);
             this.btnLvlLeafRandom.ToolTipText = "Add a random leaf";
-            // 
-            // label39
-            // 
-            this.label39.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.label39.AutoSize = true;
-            this.label39.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label39.ForeColor = Color.Silver;
-            this.label39.Location = new Point(80, 388);
-            this.label39.Margin = new Padding(4, 0, 4, 0);
-            this.label39.Name = "label39";
-            this.label39.Size = new Size(91, 15);
-            this.label39.TabIndex = 117;
-            this.label39.Text = "══Lvl Options══";
             // 
             // label29
             // 
@@ -360,145 +205,56 @@
             this.label29.TabIndex = 93;
             this.label29.Text = "Leaf List";
             // 
-            // dropLvlTutorial
-            // 
-            this.dropLvlTutorial.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.dropLvlTutorial.BackColor = Color.FromArgb(40, 40, 40);
-            this.dropLvlTutorial.DrawMode = DrawMode.OwnerDrawFixed;
-            this.dropLvlTutorial.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.dropLvlTutorial.DropDownWidth = 200;
-            this.dropLvlTutorial.FlatStyle = FlatStyle.Flat;
-            this.dropLvlTutorial.ForeColor = Color.White;
-            this.dropLvlTutorial.FormattingEnabled = true;
-            this.dropLvlTutorial.Items.AddRange(new object[] { "TUTORIAL_NONE", "TUTORIAL_THUMP", "TUTORIAL_THUMP_REMINDER", "TUTORIAL_TURN_RIGHT", "TUTORIAL_TURN_LEFT", "TUTORIAL_GRIND", "TUTORIAL_POWER_GRIND", "TUTORIAL_POUND", "TUTORIAL_POUND_REMINDER", "TUTORIAL_LANES", "TUTORIAL_JUMP" });
-            this.dropLvlTutorial.Location = new Point(113, 485);
-            this.dropLvlTutorial.Margin = new Padding(4, 3, 4, 3);
-            this.dropLvlTutorial.Name = "dropLvlTutorial";
-            this.dropLvlTutorial.Size = new Size(165, 24);
-            this.dropLvlTutorial.TabIndex = 90;
-            // 
-            // label26
-            // 
-            this.label26.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.label26.AutoSize = true;
-            this.label26.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label26.ForeColor = Color.White;
-            this.label26.Location = new Point(21, 486);
-            this.label26.Margin = new Padding(4, 0, 4, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new Size(77, 15);
-            this.label26.TabIndex = 91;
-            this.label26.Text = "Tutorial Type";
-            // 
-            // dropLvlInput
-            // 
-            this.dropLvlInput.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.dropLvlInput.BackColor = Color.FromArgb(40, 40, 40);
-            this.dropLvlInput.DrawMode = DrawMode.OwnerDrawFixed;
-            this.dropLvlInput.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.dropLvlInput.FlatStyle = FlatStyle.Flat;
-            this.dropLvlInput.ForeColor = Color.White;
-            this.dropLvlInput.FormattingEnabled = true;
-            this.dropLvlInput.Items.AddRange(new object[] { "True", "False" });
-            this.dropLvlInput.Location = new Point(113, 458);
-            this.dropLvlInput.Margin = new Padding(4, 3, 4, 3);
-            this.dropLvlInput.Name = "dropLvlInput";
-            this.dropLvlInput.Size = new Size(83, 24);
-            this.dropLvlInput.TabIndex = 68;
-            // 
-            // label24
-            // 
-            this.label24.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.label24.AutoSize = true;
-            this.label24.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label24.ForeColor = Color.White;
-            this.label24.Location = new Point(54, 435);
-            this.label24.Margin = new Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new Size(49, 15);
-            this.label24.TabIndex = 87;
-            this.label24.Text = "Volume";
-            // 
-            // NUD_lvlVolume
-            // 
-            this.NUD_lvlVolume.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.NUD_lvlVolume.BackColor = Color.FromArgb(40, 40, 40);
-            this.NUD_lvlVolume.DecimalPlaces = 2;
-            this.NUD_lvlVolume.ForeColor = Color.White;
-            this.NUD_lvlVolume.Increment = new decimal(new int[] { 5, 0, 0, 131072 });
-            this.NUD_lvlVolume.Location = new Point(113, 433);
-            this.NUD_lvlVolume.Margin = new Padding(4, 3, 4, 3);
-            this.NUD_lvlVolume.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
-            this.NUD_lvlVolume.Name = "NUD_lvlVolume";
-            this.NUD_lvlVolume.Size = new Size(84, 23);
-            this.NUD_lvlVolume.TabIndex = 88;
-            this.NUD_lvlVolume.TextAlign = HorizontalAlignment.Center;
-            this.NUD_lvlVolume.Value = new decimal(new int[] { 50, 0, 0, 131072 });
-            // 
-            // NUD_lvlApproach
-            // 
-            this.NUD_lvlApproach.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.NUD_lvlApproach.BackColor = Color.FromArgb(40, 40, 40);
-            this.NUD_lvlApproach.ForeColor = Color.White;
-            this.NUD_lvlApproach.Location = new Point(113, 408);
-            this.NUD_lvlApproach.Margin = new Padding(4, 3, 4, 3);
-            this.NUD_lvlApproach.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
-            this.NUD_lvlApproach.Name = "NUD_lvlApproach";
-            this.NUD_lvlApproach.Size = new Size(84, 23);
-            this.NUD_lvlApproach.TabIndex = 69;
-            this.NUD_lvlApproach.TextAlign = HorizontalAlignment.Center;
-            this.NUD_lvlApproach.Value = new decimal(new int[] { 16, 0, 0, 0 });
-            // 
             // lvlLeafList
             // 
             this.lvlLeafList.AllowUserToAddRows = false;
             this.lvlLeafList.AllowUserToDeleteRows = false;
             this.lvlLeafList.AllowUserToResizeRows = false;
-            this.lvlLeafList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             this.lvlLeafList.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.lvlLeafList.BorderStyle = BorderStyle.None;
             this.lvlLeafList.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.lvlLeafList.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            this.lvlLeafList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle11.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle11.SelectionForeColor = Color.White;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
+            this.lvlLeafList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.lvlLeafList.ColumnHeadersHeight = 20;
             this.lvlLeafList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.lvlLeafList.Columns.AddRange(new DataGridViewColumn[] { this.lvlfiletype, this.Leaf, this.Beats });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(150, 150, 255);
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            this.lvlLeafList.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle13.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle13.ForeColor = Color.FromArgb(150, 150, 255);
+            dataGridViewCellStyle13.NullValue = null;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            this.lvlLeafList.DefaultCellStyle = dataGridViewCellStyle13;
+            this.lvlLeafList.Dock = DockStyle.Fill;
             this.lvlLeafList.EnableHeadersVisualStyles = false;
             this.lvlLeafList.GridColor = Color.Black;
-            this.lvlLeafList.Location = new Point(4, 13);
+            this.lvlLeafList.Location = new Point(0, 13);
             this.lvlLeafList.Margin = new Padding(4, 3, 4, 3);
             this.lvlLeafList.Name = "lvlLeafList";
             this.lvlLeafList.ReadOnly = true;
             this.lvlLeafList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            this.lvlLeafList.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle14.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
+            this.lvlLeafList.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.lvlLeafList.RowHeadersVisible = false;
             this.lvlLeafList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.lvlLeafList.RowTemplate.Height = 20;
             this.lvlLeafList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafList.Size = new Size(372, 339);
+            this.lvlLeafList.Size = new Size(350, 258);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellDoubleClick += this.lvlLeafList_CellDoubleClick;
@@ -523,9 +279,9 @@
             // Beats
             // 
             this.Beats.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.Beats.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.Beats.DefaultCellStyle = dataGridViewCellStyle12;
             this.Beats.FillWeight = 50F;
             this.Beats.HeaderText = "Runtime";
             this.Beats.Name = "Beats";
@@ -534,219 +290,176 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.splitContainer1.BorderStyle = BorderStyle.FixedSingle;
-            this.splitContainer1.Location = new Point(384, -1);
+            this.splitContainer1.BackColor = Color.FromArgb(55, 55, 55);
+            this.splitContainer1.Dock = DockStyle.Fill;
+            this.splitContainer1.Location = new Point(0, 0);
             this.splitContainer1.Margin = new Padding(4, 3, 4, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.lvlSeqObjs);
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
-            this.splitContainer1.Panel1.Controls.Add(this.lvlVolumeToolStrip);
-            this.splitContainer1.Panel1.Controls.Add(this.label20);
+            this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.lvlPathsToolStrip2);
-            this.splitContainer1.Panel2.Controls.Add(this.lvlLoopToolStrip);
-            this.splitContainer1.Panel2.Controls.Add(this.lvlLeafPaths);
-            this.splitContainer1.Panel2.Controls.Add(this.lvlPathsToolStrip);
-            this.splitContainer1.Panel2.Controls.Add(this.lblLvlTunnels);
-            this.splitContainer1.Panel2.Controls.Add(this.label22);
-            this.splitContainer1.Panel2.Controls.Add(this.lvlLoopTracks);
-            this.splitContainer1.Size = new Size(548, 519);
-            this.splitContainer1.SplitterDistance = 213;
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
+            this.splitContainer1.Size = new Size(707, 506);
+            this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 145;
+            this.splitContainer1.TabIndex = 119;
             // 
-            // lvlSeqObjs
+            // lblMasterlvllistHelp
             // 
-            this.lvlSeqObjs.AllowUserToAddRows = false;
-            this.lvlSeqObjs.AllowUserToDeleteRows = false;
-            this.lvlSeqObjs.AllowUserToResizeColumns = false;
-            this.lvlSeqObjs.AllowUserToResizeRows = false;
-            this.lvlSeqObjs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.lvlSeqObjs.BackgroundColor = Color.FromArgb(10, 10, 10);
-            this.lvlSeqObjs.BorderStyle = BorderStyle.None;
-            this.lvlSeqObjs.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.lvlSeqObjs.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle5.Font = new Font("Consolas", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = Color.Silver;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            this.lvlSeqObjs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.lvlSeqObjs.ColumnHeadersHeight = 20;
-            this.lvlSeqObjs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle6.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(150, 150, 255);
-            dataGridViewCellStyle6.Format = "N3";
-            dataGridViewCellStyle6.NullValue = null;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            this.lvlSeqObjs.DefaultCellStyle = dataGridViewCellStyle6;
-            this.lvlSeqObjs.EnableHeadersVisualStyles = false;
-            this.lvlSeqObjs.GridColor = Color.Black;
-            this.lvlSeqObjs.Location = new Point(31, 18);
-            this.lvlSeqObjs.Margin = new Padding(4, 3, 4, 3);
-            this.lvlSeqObjs.Name = "lvlSeqObjs";
-            this.lvlSeqObjs.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle7.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
-            this.lvlSeqObjs.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.lvlSeqObjs.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.lvlSeqObjs.RowTemplate.Height = 20;
-            this.lvlSeqObjs.RowTemplate.Resizable = DataGridViewTriState.False;
-            this.lvlSeqObjs.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.lvlSeqObjs.Size = new Size(512, 192);
-            this.lvlSeqObjs.TabIndex = 68;
+            this.lblMasterlvllistHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.lblMasterlvllistHelp.AutoSize = true;
+            this.lblMasterlvllistHelp.BackColor = Color.Transparent;
+            this.lblMasterlvllistHelp.Cursor = Cursors.Help;
+            this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
+            this.lblMasterlvllistHelp.Location = new Point(1004, -3);
+            this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
+            this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
+            this.lblMasterlvllistHelp.Size = new Size(15, 16);
+            this.lblMasterlvllistHelp.TabIndex = 95;
+            this.lblMasterlvllistHelp.Text = "?";
             // 
-            // panel1
+            // propertyGridLvl
             // 
-            this.panel1.BackColor = Color.Black;
-            this.panel1.Controls.Add(this.label28);
-            this.panel1.Controls.Add(this.trackLvlVolumeZoom);
-            this.panel1.Location = new Point(250, -7);
-            this.panel1.Margin = new Padding(4, 3, 4, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new Size(141, 31);
-            this.panel1.TabIndex = 92;
+            this.propertyGridLvl.BackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLvl.CategoryForeColor = Color.White;
+            this.propertyGridLvl.CategorySplitterColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridLvl.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
+            this.propertyGridLvl.Dock = DockStyle.Fill;
+            this.propertyGridLvl.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.propertyGridLvl.HelpBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLvl.HelpBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridLvl.HelpForeColor = Color.White;
+            this.propertyGridLvl.LineColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridLvl.Location = new Point(0, 0);
+            this.propertyGridLvl.Margin = new Padding(4, 3, 4, 3);
+            this.propertyGridLvl.Name = "propertyGridLvl";
+            this.propertyGridLvl.PropertySort = PropertySort.Categorized;
+            this.propertyGridLvl.RightToLeft = RightToLeft.No;
+            this.propertyGridLvl.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
+            this.propertyGridLvl.SelectedItemWithFocusForeColor = Color.White;
+            this.propertyGridLvl.Size = new Size(352, 300);
+            this.propertyGridLvl.TabIndex = 149;
+            this.propertyGridLvl.ToolbarVisible = false;
+            this.propertyGridLvl.ViewBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLvl.ViewBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridLvl.ViewForeColor = Color.White;
             // 
-            // lvlVolumeToolStrip
+            // splitContainer2
             // 
-            this.lvlVolumeToolStrip.AutoSize = false;
-            this.lvlVolumeToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlVolumeToolStrip.Dock = DockStyle.None;
-            this.lvlVolumeToolStrip.GripMargin = new Padding(0);
-            this.lvlVolumeToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            this.lvlVolumeToolStrip.ImageScalingSize = new Size(20, 20);
-            this.lvlVolumeToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlSeqAdd, this.btnLvlSeqDelete, this.btnLvlSeqClear });
-            this.lvlVolumeToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlVolumeToolStrip.Location = new Point(1, 18);
-            this.lvlVolumeToolStrip.Name = "lvlVolumeToolStrip";
-            this.lvlVolumeToolStrip.Padding = new Padding(0);
-            this.lvlVolumeToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlVolumeToolStrip.Size = new Size(29, 89);
-            this.lvlVolumeToolStrip.Stretch = true;
-            this.lvlVolumeToolStrip.TabIndex = 142;
+            this.splitContainer2.BackColor = Color.FromArgb(55, 55, 55);
+            this.splitContainer2.Dock = DockStyle.Fill;
+            this.splitContainer2.Location = new Point(0, 0);
+            this.splitContainer2.Margin = new Padding(4, 3, 4, 3);
+            this.splitContainer2.Name = "splitContainer2";
             // 
-            // btnLvlSeqAdd
+            // splitContainer2.Panel1
             // 
-            this.btnLvlSeqAdd.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlSeqAdd.Enabled = false;
-            this.btnLvlSeqAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.btnLvlSeqAdd.ForeColor = Color.White;
-            this.btnLvlSeqAdd.Image = Properties.Resources.icon_plus;
-            this.btnLvlSeqAdd.ImageTransparentColor = Color.Magenta;
-            this.btnLvlSeqAdd.Margin = new Padding(0);
-            this.btnLvlSeqAdd.Name = "btnLvlSeqAdd";
-            this.btnLvlSeqAdd.Size = new Size(28, 24);
-            this.btnLvlSeqAdd.ToolTipText = "Add new volume track";
+            this.splitContainer2.Panel1.Controls.Add(this.lvlLeafList);
+            this.splitContainer2.Panel1.Controls.Add(this.lvlToolStrip);
+            this.splitContainer2.Panel1.Controls.Add(this.label29);
             // 
-            // btnLvlSeqDelete
+            // splitContainer2.Panel2
             // 
-            this.btnLvlSeqDelete.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlSeqDelete.Enabled = false;
-            this.btnLvlSeqDelete.Image = Properties.Resources.icon_remove2;
-            this.btnLvlSeqDelete.ImageTransparentColor = Color.Magenta;
-            this.btnLvlSeqDelete.Margin = new Padding(0);
-            this.btnLvlSeqDelete.Name = "btnLvlSeqDelete";
-            this.btnLvlSeqDelete.Size = new Size(28, 24);
-            this.btnLvlSeqDelete.ToolTipText = "Delete selected volume track";
+            this.splitContainer2.Panel2.AutoScroll = true;
+            this.splitContainer2.Panel2.Controls.Add(this.propertyGridLvl);
+            this.splitContainer2.Size = new Size(707, 300);
+            this.splitContainer2.SplitterDistance = 350;
+            this.splitContainer2.SplitterWidth = 5;
+            this.splitContainer2.TabIndex = 161;
             // 
-            // btnLvlSeqClear
+            // label22
             // 
-            this.btnLvlSeqClear.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlSeqClear.Enabled = false;
-            this.btnLvlSeqClear.Image = Properties.Resources.icon_erase;
-            this.btnLvlSeqClear.ImageTransparentColor = Color.Magenta;
-            this.btnLvlSeqClear.Name = "btnLvlSeqClear";
-            this.btnLvlSeqClear.Size = new Size(28, 24);
-            this.btnLvlSeqClear.ToolTipText = "Erase all set values";
+            this.label22.AutoSize = true;
+            this.label22.BackColor = Color.FromArgb(10, 10, 10);
+            this.label22.Dock = DockStyle.Top;
+            this.label22.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.label22.ForeColor = Color.White;
+            this.label22.Location = new Point(0, 0);
+            this.label22.Margin = new Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new Size(99, 13);
+            this.label22.TabIndex = 162;
+            this.label22.Text = "Lvl Loop Tracks";
             // 
-            // lvlPathsToolStrip2
+            // lvlLoopTracks
             // 
-            this.lvlPathsToolStrip2.AutoSize = false;
-            this.lvlPathsToolStrip2.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlPathsToolStrip2.Dock = DockStyle.None;
-            this.lvlPathsToolStrip2.GripMargin = new Padding(0);
-            this.lvlPathsToolStrip2.GripStyle = ToolStripGripStyle.Hidden;
-            this.lvlPathsToolStrip2.ImageScalingSize = new Size(20, 20);
-            this.lvlPathsToolStrip2.Items.AddRange(new ToolStripItem[] { this.btnLvlPathUp, this.btnLvlPathDown, this.btnLvlPathClear });
-            this.lvlPathsToolStrip2.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlPathsToolStrip2.Location = new Point(34, 16);
-            this.lvlPathsToolStrip2.Name = "lvlPathsToolStrip2";
-            this.lvlPathsToolStrip2.Padding = new Padding(0);
-            this.lvlPathsToolStrip2.RenderMode = ToolStripRenderMode.System;
-            this.lvlPathsToolStrip2.Size = new Size(28, 188);
-            this.lvlPathsToolStrip2.Stretch = true;
-            this.lvlPathsToolStrip2.TabIndex = 145;
-            // 
-            // btnLvlPathUp
-            // 
-            this.btnLvlPathUp.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlPathUp.Enabled = false;
-            this.btnLvlPathUp.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.btnLvlPathUp.ForeColor = Color.White;
-            this.btnLvlPathUp.Image = Properties.Resources.icon_arrowup2;
-            this.btnLvlPathUp.ImageTransparentColor = Color.Magenta;
-            this.btnLvlPathUp.Margin = new Padding(0);
-            this.btnLvlPathUp.Name = "btnLvlPathUp";
-            this.btnLvlPathUp.Size = new Size(27, 24);
-            this.btnLvlPathUp.ToolTipText = "Move selected tunnel up";
-            // 
-            // btnLvlPathDown
-            // 
-            this.btnLvlPathDown.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlPathDown.Enabled = false;
-            this.btnLvlPathDown.Image = Properties.Resources.icon_arrowdown2;
-            this.btnLvlPathDown.ImageTransparentColor = Color.Magenta;
-            this.btnLvlPathDown.Margin = new Padding(0);
-            this.btnLvlPathDown.Name = "btnLvlPathDown";
-            this.btnLvlPathDown.Size = new Size(27, 24);
-            this.btnLvlPathDown.ToolTipText = "Move selected tunnel down";
-            // 
-            // btnLvlPathClear
-            // 
-            this.btnLvlPathClear.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlPathClear.Enabled = false;
-            this.btnLvlPathClear.Image = Properties.Resources.icon_erase;
-            this.btnLvlPathClear.ImageTransparentColor = Color.Magenta;
-            this.btnLvlPathClear.Name = "btnLvlPathClear";
-            this.btnLvlPathClear.Size = new Size(27, 24);
-            this.btnLvlPathClear.Text = "toolStripButton2";
-            this.btnLvlPathClear.ToolTipText = "Clear all tunnels";
+            this.lvlLoopTracks.AllowUserToAddRows = false;
+            this.lvlLoopTracks.AllowUserToDeleteRows = false;
+            this.lvlLoopTracks.AllowUserToResizeColumns = false;
+            this.lvlLoopTracks.AllowUserToResizeRows = false;
+            this.lvlLoopTracks.BackgroundColor = Color.FromArgb(10, 10, 10);
+            this.lvlLoopTracks.BorderStyle = BorderStyle.None;
+            this.lvlLoopTracks.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.lvlLoopTracks.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle18.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle18.ForeColor = Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
+            this.lvlLoopTracks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            this.lvlLoopTracks.ColumnHeadersHeight = 20;
+            this.lvlLoopTracks.Columns.AddRange(new DataGridViewColumn[] { this.LoopSample, this.BeatsPerLoop });
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle19.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle19.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle19.ForeColor = Color.FromArgb(150, 150, 255);
+            dataGridViewCellStyle19.Format = "N2";
+            dataGridViewCellStyle19.NullValue = null;
+            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.False;
+            this.lvlLoopTracks.DefaultCellStyle = dataGridViewCellStyle19;
+            this.lvlLoopTracks.Dock = DockStyle.Fill;
+            this.lvlLoopTracks.EnableHeadersVisualStyles = false;
+            this.lvlLoopTracks.GridColor = Color.Black;
+            this.lvlLoopTracks.Location = new Point(0, 13);
+            this.lvlLoopTracks.Margin = new Padding(4, 3, 4, 3);
+            this.lvlLoopTracks.MultiSelect = false;
+            this.lvlLoopTracks.Name = "lvlLoopTracks";
+            this.lvlLoopTracks.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle20.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle20.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle20.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.False;
+            this.lvlLoopTracks.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            this.lvlLoopTracks.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.lvlLoopTracks.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+            this.lvlLoopTracks.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
+            this.lvlLoopTracks.RowTemplate.Height = 20;
+            this.lvlLoopTracks.RowTemplate.Resizable = DataGridViewTriState.False;
+            this.lvlLoopTracks.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.lvlLoopTracks.Size = new Size(452, 159);
+            this.lvlLoopTracks.TabIndex = 161;
             // 
             // lvlLoopToolStrip
             // 
             this.lvlLoopToolStrip.AutoSize = false;
             this.lvlLoopToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlLoopToolStrip.Dock = DockStyle.None;
+            this.lvlLoopToolStrip.Dock = DockStyle.Bottom;
             this.lvlLoopToolStrip.GripMargin = new Padding(0);
             this.lvlLoopToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.lvlLoopToolStrip.ImageScalingSize = new Size(20, 20);
             this.lvlLoopToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLoopAdd, this.btnLvlLoopDelete });
-            this.lvlLoopToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlLoopToolStrip.Location = new Point(326, 17);
+            this.lvlLoopToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.lvlLoopToolStrip.Location = new Point(0, 172);
             this.lvlLoopToolStrip.Name = "lvlLoopToolStrip";
             this.lvlLoopToolStrip.Padding = new Padding(0);
             this.lvlLoopToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlLoopToolStrip.Size = new Size(29, 58);
+            this.lvlLoopToolStrip.Size = new Size(452, 29);
             this.lvlLoopToolStrip.Stretch = true;
-            this.lvlLoopToolStrip.TabIndex = 144;
+            this.lvlLoopToolStrip.TabIndex = 163;
             // 
             // btnLvlLoopAdd
             // 
@@ -758,7 +471,7 @@
             this.btnLvlLoopAdd.ImageTransparentColor = Color.Magenta;
             this.btnLvlLoopAdd.Margin = new Padding(0);
             this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
-            this.btnLvlLoopAdd.Size = new Size(28, 24);
+            this.btnLvlLoopAdd.Size = new Size(24, 29);
             this.btnLvlLoopAdd.ToolTipText = "Add new loop track";
             // 
             // btnLvlLoopDelete
@@ -769,81 +482,26 @@
             this.btnLvlLoopDelete.ImageTransparentColor = Color.Magenta;
             this.btnLvlLoopDelete.Margin = new Padding(0);
             this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
-            this.btnLvlLoopDelete.Size = new Size(28, 24);
+            this.btnLvlLoopDelete.Size = new Size(24, 29);
             this.btnLvlLoopDelete.ToolTipText = "Delete selected loop track";
-            // 
-            // lvlLeafPaths
-            // 
-            this.lvlLeafPaths.AllowUserToAddRows = false;
-            this.lvlLeafPaths.AllowUserToDeleteRows = false;
-            this.lvlLeafPaths.AllowUserToResizeColumns = false;
-            this.lvlLeafPaths.AllowUserToResizeRows = false;
-            this.lvlLeafPaths.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            this.lvlLeafPaths.BackgroundColor = Color.FromArgb(10, 10, 10);
-            this.lvlLeafPaths.BorderStyle = BorderStyle.None;
-            this.lvlLeafPaths.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.lvlLeafPaths.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle8.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle8.SelectionForeColor = Color.White;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            this.lvlLeafPaths.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.lvlLeafPaths.ColumnHeadersHeight = 20;
-            this.lvlLeafPaths.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle9.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(150, 150, 255);
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            this.lvlLeafPaths.DefaultCellStyle = dataGridViewCellStyle9;
-            this.lvlLeafPaths.EnableHeadersVisualStyles = false;
-            this.lvlLeafPaths.GridColor = Color.Black;
-            this.lvlLeafPaths.Location = new Point(64, 16);
-            this.lvlLeafPaths.Margin = new Padding(4, 3, 4, 3);
-            this.lvlLeafPaths.Name = "lvlLeafPaths";
-            this.lvlLeafPaths.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle10.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
-            this.lvlLeafPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.lvlLeafPaths.RowHeadersVisible = false;
-            this.lvlLeafPaths.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.lvlLeafPaths.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
-            this.lvlLeafPaths.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
-            this.lvlLeafPaths.RowTemplate.Height = 20;
-            this.lvlLeafPaths.RowTemplate.Resizable = DataGridViewTriState.False;
-            this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafPaths.Size = new Size(255, 275);
-            this.lvlLeafPaths.TabIndex = 79;
             // 
             // lvlPathsToolStrip
             // 
             this.lvlPathsToolStrip.AutoSize = false;
             this.lvlPathsToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlPathsToolStrip.Dock = DockStyle.None;
+            this.lvlPathsToolStrip.Dock = DockStyle.Bottom;
             this.lvlPathsToolStrip.GripMargin = new Padding(0);
             this.lvlPathsToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.lvlPathsToolStrip.ImageScalingSize = new Size(20, 20);
-            this.lvlPathsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlPathAdd, this.btnLvlPathDelete, this.btnLvlCopyTunnel, this.btnLvlPasteTunnel, this.chkTunnelCopy, this.btnLvlRandomTunnel });
-            this.lvlPathsToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlPathsToolStrip.Location = new Point(5, 16);
+            this.lvlPathsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlPathAdd, this.btnLvlPathDelete, this.btnLvlPathUp, this.btnLvlPathDown, this.btnLvlCopyTunnel, this.btnLvlPasteTunnel, this.btnLvlPathClear, this.chkTunnelCopy, this.btnLvlRandomTunnel });
+            this.lvlPathsToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.lvlPathsToolStrip.Location = new Point(0, 172);
             this.lvlPathsToolStrip.Name = "lvlPathsToolStrip";
             this.lvlPathsToolStrip.Padding = new Padding(0);
             this.lvlPathsToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlPathsToolStrip.Size = new Size(29, 188);
+            this.lvlPathsToolStrip.Size = new Size(250, 29);
             this.lvlPathsToolStrip.Stretch = true;
-            this.lvlPathsToolStrip.TabIndex = 143;
+            this.lvlPathsToolStrip.TabIndex = 162;
             // 
             // btnLvlPathAdd
             // 
@@ -855,7 +513,7 @@
             this.btnLvlPathAdd.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathAdd.Margin = new Padding(0);
             this.btnLvlPathAdd.Name = "btnLvlPathAdd";
-            this.btnLvlPathAdd.Size = new Size(28, 24);
+            this.btnLvlPathAdd.Size = new Size(24, 29);
             this.btnLvlPathAdd.ToolTipText = "Add new path/tunnel";
             // 
             // btnLvlPathDelete
@@ -866,8 +524,32 @@
             this.btnLvlPathDelete.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathDelete.Margin = new Padding(0);
             this.btnLvlPathDelete.Name = "btnLvlPathDelete";
-            this.btnLvlPathDelete.Size = new Size(28, 24);
+            this.btnLvlPathDelete.Size = new Size(24, 29);
             this.btnLvlPathDelete.ToolTipText = "Delete selected path";
+            // 
+            // btnLvlPathUp
+            // 
+            this.btnLvlPathUp.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLvlPathUp.Enabled = false;
+            this.btnLvlPathUp.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.btnLvlPathUp.ForeColor = Color.White;
+            this.btnLvlPathUp.Image = Properties.Resources.icon_arrowup2;
+            this.btnLvlPathUp.ImageTransparentColor = Color.Magenta;
+            this.btnLvlPathUp.Margin = new Padding(0);
+            this.btnLvlPathUp.Name = "btnLvlPathUp";
+            this.btnLvlPathUp.Size = new Size(24, 29);
+            this.btnLvlPathUp.ToolTipText = "Move selected tunnel up";
+            // 
+            // btnLvlPathDown
+            // 
+            this.btnLvlPathDown.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLvlPathDown.Enabled = false;
+            this.btnLvlPathDown.Image = Properties.Resources.icon_arrowdown2;
+            this.btnLvlPathDown.ImageTransparentColor = Color.Magenta;
+            this.btnLvlPathDown.Margin = new Padding(0);
+            this.btnLvlPathDown.Name = "btnLvlPathDown";
+            this.btnLvlPathDown.Size = new Size(24, 29);
+            this.btnLvlPathDown.ToolTipText = "Move selected tunnel down";
             // 
             // btnLvlCopyTunnel
             // 
@@ -876,7 +558,7 @@
             this.btnLvlCopyTunnel.Image = Properties.Resources.icon_copy2;
             this.btnLvlCopyTunnel.ImageTransparentColor = Color.Magenta;
             this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
-            this.btnLvlCopyTunnel.Size = new Size(28, 24);
+            this.btnLvlCopyTunnel.Size = new Size(24, 26);
             this.btnLvlCopyTunnel.ToolTipText = "Copy all paths/tunnels";
             // 
             // btnLvlPasteTunnel
@@ -886,8 +568,19 @@
             this.btnLvlPasteTunnel.Image = Properties.Resources.icon_paste2;
             this.btnLvlPasteTunnel.ImageTransparentColor = Color.Magenta;
             this.btnLvlPasteTunnel.Name = "btnLvlPasteTunnel";
-            this.btnLvlPasteTunnel.Size = new Size(28, 24);
+            this.btnLvlPasteTunnel.Size = new Size(24, 26);
             this.btnLvlPasteTunnel.ToolTipText = "Paste copied paths/tunnels";
+            // 
+            // btnLvlPathClear
+            // 
+            this.btnLvlPathClear.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLvlPathClear.Enabled = false;
+            this.btnLvlPathClear.Image = Properties.Resources.icon_erase;
+            this.btnLvlPathClear.ImageTransparentColor = Color.Magenta;
+            this.btnLvlPathClear.Name = "btnLvlPathClear";
+            this.btnLvlPathClear.Size = new Size(24, 26);
+            this.btnLvlPathClear.Text = "toolStripButton2";
+            this.btnLvlPathClear.ToolTipText = "Clear all tunnels";
             // 
             // chkTunnelCopy
             // 
@@ -896,7 +589,7 @@
             this.chkTunnelCopy.Image = Properties.Resources.icon_sling;
             this.chkTunnelCopy.ImageTransparentColor = Color.Magenta;
             this.chkTunnelCopy.Name = "chkTunnelCopy";
-            this.chkTunnelCopy.Size = new Size(28, 24);
+            this.chkTunnelCopy.Size = new Size(24, 26);
             this.chkTunnelCopy.ToolTipText = "When enabled, new leafs added will copy the paths\r\nof the previous leaf.";
             // 
             // btnLvlRandomTunnel
@@ -906,98 +599,125 @@
             this.btnLvlRandomTunnel.Image = Properties.Resources.icon_random;
             this.btnLvlRandomTunnel.ImageTransparentColor = Color.Magenta;
             this.btnLvlRandomTunnel.Name = "btnLvlRandomTunnel";
-            this.btnLvlRandomTunnel.Size = new Size(28, 24);
+            this.btnLvlRandomTunnel.Size = new Size(24, 26);
             this.btnLvlRandomTunnel.ToolTipText = "Click to add a random tunnel";
             // 
-            // label22
+            // lvlLeafPaths
             // 
-            this.label22.AutoSize = true;
-            this.label22.BackColor = Color.FromArgb(10, 10, 10);
-            this.label22.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label22.ForeColor = Color.White;
-            this.label22.Location = new Point(357, 1);
-            this.label22.Margin = new Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new Size(99, 13);
-            this.label22.TabIndex = 82;
-            this.label22.Text = "Lvl Loop Tracks";
+            this.lvlLeafPaths.AllowUserToAddRows = false;
+            this.lvlLeafPaths.AllowUserToDeleteRows = false;
+            this.lvlLeafPaths.AllowUserToResizeColumns = false;
+            this.lvlLeafPaths.AllowUserToResizeRows = false;
+            this.lvlLeafPaths.BackgroundColor = Color.FromArgb(10, 10, 10);
+            this.lvlLeafPaths.BorderStyle = BorderStyle.None;
+            this.lvlLeafPaths.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.lvlLeafPaths.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle15.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle15.ForeColor = Color.White;
+            dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle15.SelectionForeColor = Color.White;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
+            this.lvlLeafPaths.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            this.lvlLeafPaths.ColumnHeadersHeight = 20;
+            this.lvlLeafPaths.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle16.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle16.ForeColor = Color.FromArgb(150, 150, 255);
+            dataGridViewCellStyle16.Format = "N2";
+            dataGridViewCellStyle16.NullValue = null;
+            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
+            this.lvlLeafPaths.DefaultCellStyle = dataGridViewCellStyle16;
+            this.lvlLeafPaths.Dock = DockStyle.Fill;
+            this.lvlLeafPaths.EnableHeadersVisualStyles = false;
+            this.lvlLeafPaths.GridColor = Color.Black;
+            this.lvlLeafPaths.Location = new Point(0, 13);
+            this.lvlLeafPaths.Margin = new Padding(4, 3, 4, 3);
+            this.lvlLeafPaths.Name = "lvlLeafPaths";
+            this.lvlLeafPaths.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle17.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.False;
+            this.lvlLeafPaths.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            this.lvlLeafPaths.RowHeadersVisible = false;
+            this.lvlLeafPaths.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.lvlLeafPaths.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+            this.lvlLeafPaths.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
+            this.lvlLeafPaths.RowTemplate.Height = 20;
+            this.lvlLeafPaths.RowTemplate.Resizable = DataGridViewTriState.False;
+            this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.lvlLeafPaths.Size = new Size(250, 159);
+            this.lvlLeafPaths.TabIndex = 160;
             // 
-            // lvlLoopTracks
+            // lblLvlTunnels
             // 
-            this.lvlLoopTracks.AllowUserToAddRows = false;
-            this.lvlLoopTracks.AllowUserToDeleteRows = false;
-            this.lvlLoopTracks.AllowUserToResizeColumns = false;
-            this.lvlLoopTracks.AllowUserToResizeRows = false;
-            this.lvlLoopTracks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.lvlLoopTracks.BackgroundColor = Color.FromArgb(10, 10, 10);
-            this.lvlLoopTracks.BorderStyle = BorderStyle.None;
-            this.lvlLoopTracks.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.lvlLoopTracks.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle11.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
-            this.lvlLoopTracks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            this.lvlLoopTracks.ColumnHeadersHeight = 20;
-            this.lvlLoopTracks.Columns.AddRange(new DataGridViewColumn[] { this.LoopSample, this.BeatsPerLoop });
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle12.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(150, 150, 255);
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            this.lvlLoopTracks.DefaultCellStyle = dataGridViewCellStyle12;
-            this.lvlLoopTracks.EnableHeadersVisualStyles = false;
-            this.lvlLoopTracks.GridColor = Color.Black;
-            this.lvlLoopTracks.Location = new Point(357, 16);
-            this.lvlLoopTracks.Margin = new Padding(4, 3, 4, 3);
-            this.lvlLoopTracks.MultiSelect = false;
-            this.lvlLoopTracks.Name = "lvlLoopTracks";
-            this.lvlLoopTracks.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle13.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
-            this.lvlLoopTracks.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.lvlLoopTracks.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.lvlLoopTracks.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
-            this.lvlLoopTracks.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
-            this.lvlLoopTracks.RowTemplate.Height = 20;
-            this.lvlLoopTracks.RowTemplate.Resizable = DataGridViewTriState.False;
-            this.lvlLoopTracks.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new Size(190, 275);
-            this.lvlLoopTracks.TabIndex = 81;
+            this.lblLvlTunnels.AutoSize = true;
+            this.lblLvlTunnels.BackColor = Color.FromArgb(10, 10, 10);
+            this.lblLvlTunnels.Dock = DockStyle.Top;
+            this.lblLvlTunnels.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.lblLvlTunnels.ForeColor = Color.White;
+            this.lblLvlTunnels.Location = new Point(0, 0);
+            this.lblLvlTunnels.Margin = new Padding(4, 0, 4, 0);
+            this.lblLvlTunnels.Name = "lblLvlTunnels";
+            this.lblLvlTunnels.Size = new Size(90, 13);
+            this.lblLvlTunnels.TabIndex = 161;
+            this.lblLvlTunnels.Text = "Paths/Tunnels";
+            this.toolTip1.SetToolTip(this.lblLvlTunnels, "Unique per leaf");
             // 
             // LoopSample
             // 
             this.LoopSample.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            this.LoopSample.HeaderText = "Loop Sample";
+            this.LoopSample.HeaderText = "Sample Name";
             this.LoopSample.MaxDropDownItems = 20;
             this.LoopSample.Name = "LoopSample";
             // 
             // BeatsPerLoop
             // 
             this.BeatsPerLoop.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.BeatsPerLoop.HeaderText = "Beats Per Loop";
+            this.BeatsPerLoop.HeaderText = "Beats";
             this.BeatsPerLoop.Name = "BeatsPerLoop";
-            this.BeatsPerLoop.Width = 115;
+            this.BeatsPerLoop.Width = 62;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.BackColor = Color.FromArgb(55, 55, 55);
+            this.splitContainer3.Dock = DockStyle.Fill;
+            this.splitContainer3.Location = new Point(0, 0);
+            this.splitContainer3.Margin = new Padding(4, 3, 4, 3);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.lvlLeafPaths);
+            this.splitContainer3.Panel1.Controls.Add(this.lvlPathsToolStrip);
+            this.splitContainer3.Panel1.Controls.Add(this.lblLvlTunnels);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.AutoScroll = true;
+            this.splitContainer3.Panel2.Controls.Add(this.lvlLoopTracks);
+            this.splitContainer3.Panel2.Controls.Add(this.label22);
+            this.splitContainer3.Panel2.Controls.Add(this.lvlLoopToolStrip);
+            this.splitContainer3.Size = new Size(707, 201);
+            this.splitContainer3.SplitterDistance = 250;
+            this.splitContainer3.SplitterWidth = 5;
+            this.splitContainer3.TabIndex = 163;
             // 
             // Form_LvlEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(55, 55, 55);
-            this.ClientSize = new Size(933, 519);
-            this.Controls.Add(this.panelLevel);
+            this.ClientSize = new Size(707, 506);
+            this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
             this.ForeColor = Color.FromArgb(150, 150, 255);
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -1005,39 +725,36 @@
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_LvlEditor";
             this.Text = "Lvl Editor";
-            ((System.ComponentModel.ISupportInitialize)this.trackLvlVolumeZoom).EndInit();
-            this.panelLevel.ResumeLayout(false);
-            this.panelLevel.PerformLayout();
             this.lvlToolStrip.ResumeLayout(false);
             this.lvlToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.NUD_lvlVolume).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.NUD_lvlApproach).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)this.lvlSeqObjs).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.lvlVolumeToolStrip.ResumeLayout(false);
-            this.lvlVolumeToolStrip.PerformLayout();
-            this.lvlPathsToolStrip2.ResumeLayout(false);
-            this.lvlPathsToolStrip2.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.splitContainer2).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).EndInit();
             this.lvlLoopToolStrip.ResumeLayout(false);
             this.lvlLoopToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).EndInit();
             this.lvlPathsToolStrip.ResumeLayout(false);
             this.lvlPathsToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).EndInit();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)this.splitContainer3).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
         #endregion
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Panel panelLevel;
         private System.Windows.Forms.ToolStrip lvlToolStrip;
         private System.Windows.Forms.ToolStripButton btnLvlLeafAdd;
         private System.Windows.Forms.ToolStripButton btnLvlLeafDelete;
@@ -1045,51 +762,35 @@
         private System.Windows.Forms.ToolStripButton btnLvlLeafDown;
         private System.Windows.Forms.ToolStripButton btnLvlLeafCopy;
         private System.Windows.Forms.ToolStripButton btnLvlLeafPaste;
-        private System.Windows.Forms.ToolStripButton btnLvlRefreshBeats;
         private System.Windows.Forms.ToolStripButton btnLvlLeafRandom;
-        private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.ComboBox dropLvlTutorial;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.ComboBox dropLvlInput;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.NumericUpDown NUD_lvlVolume;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.NumericUpDown NUD_lvlApproach;
         private System.Windows.Forms.DataGridView lvlLeafList;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView lvlSeqObjs;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TrackBar trackLvlVolumeZoom;
-        private System.Windows.Forms.ToolStrip lvlVolumeToolStrip;
-        private System.Windows.Forms.ToolStripButton btnLvlSeqAdd;
-        private System.Windows.Forms.ToolStripButton btnLvlSeqDelete;
-        private System.Windows.Forms.ToolStripButton btnLvlSeqClear;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.ToolStrip lvlPathsToolStrip2;
-        private System.Windows.Forms.ToolStripButton btnLvlPathUp;
-        private System.Windows.Forms.ToolStripButton btnLvlPathDown;
-        private System.Windows.Forms.ToolStripButton btnLvlPathClear;
-        private System.Windows.Forms.ToolStrip lvlLoopToolStrip;
-        private System.Windows.Forms.ToolStripButton btnLvlLoopAdd;
-        private System.Windows.Forms.ToolStripButton btnLvlLoopDelete;
-        private System.Windows.Forms.DataGridView lvlLeafPaths;
-        private System.Windows.Forms.ToolStrip lvlPathsToolStrip;
-        private System.Windows.Forms.ToolStripButton btnLvlPathAdd;
-        private System.Windows.Forms.ToolStripButton btnLvlPathDelete;
-        private System.Windows.Forms.ToolStripButton btnLvlCopyTunnel;
-        private System.Windows.Forms.ToolStripButton btnLvlPasteTunnel;
-        private System.Windows.Forms.ToolStripButton chkTunnelCopy;
-        private System.Windows.Forms.ToolStripButton btnLvlRandomTunnel;
-        private System.Windows.Forms.Label lblLvlTunnels;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.DataGridView lvlLoopTracks;
-        private System.Windows.Forms.DataGridViewComboBoxColumn LoopSample;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BeatsPerLoop;
         private DataGridViewImageColumn lvlfiletype;
         private DataGridViewTextBoxColumn Leaf;
         private DataGridViewTextBoxColumn Beats;
+        private SplitContainer splitContainer1;
+        private Label lblMasterlvllistHelp;
+        public PropertyGrid propertyGridLvl;
+        private SplitContainer splitContainer2;
+        private DataGridView lvlLoopTracks;
+        private Label label22;
+        private ToolStrip lvlLoopToolStrip;
+        private ToolStripButton btnLvlLoopAdd;
+        private ToolStripButton btnLvlLoopDelete;
+        private DataGridView lvlLeafPaths;
+        private ToolStrip lvlPathsToolStrip;
+        private ToolStripButton btnLvlPathAdd;
+        private ToolStripButton btnLvlPathDelete;
+        private ToolStripButton btnLvlPathUp;
+        private ToolStripButton btnLvlPathDown;
+        private ToolStripButton btnLvlCopyTunnel;
+        private ToolStripButton btnLvlPasteTunnel;
+        private ToolStripButton btnLvlPathClear;
+        private ToolStripButton chkTunnelCopy;
+        private ToolStripButton btnLvlRandomTunnel;
+        private Label lblLvlTunnels;
+        private DataGridViewComboBoxColumn LoopSample;
+        private DataGridViewTextBoxColumn BeatsPerLoop;
+        private SplitContainer splitContainer3;
     }
 }
