@@ -113,7 +113,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{gateLvlList.Rows[e.RowIndex].Cells[1].Value}")).FirstOrDefault().Value);
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{GateLvls[e.RowIndex].lvlname}")).Value);
         }
 
         private Rectangle dragBoxFromMouseDown;

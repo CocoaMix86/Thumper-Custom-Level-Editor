@@ -13,7 +13,7 @@ namespace Thumper_Custom_Level_Editor
         private string Name;
         public string name
         {
-            get => Name;
+            get => $"{Name}.{type}";
             set {
                 int idx = value.LastIndexOf('.');
                 Name = idx != -1 ? value[..idx] : value;

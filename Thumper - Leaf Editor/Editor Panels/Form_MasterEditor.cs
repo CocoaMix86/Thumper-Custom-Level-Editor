@@ -84,7 +84,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.Where(x => x.Key.EndsWith($@"\{masterLvlList.Rows[e.RowIndex].Cells[2].Value}")).FirstOrDefault().Value);
+            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{MasterLvls[e.RowIndex].name}")).Value); 
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -179,7 +179,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 masterLvlList.Rows.Insert(_in, new object[] {
                     0,
                     (MasterLvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
-                    MasterLvls[_in].type == "lvl" ? MasterLvls[_in].lvlname : MasterLvls[_in].gatename,
+                    MasterLvls[_in].name,
                     0
                 });
             }
