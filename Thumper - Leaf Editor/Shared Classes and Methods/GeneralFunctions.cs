@@ -367,18 +367,16 @@ namespace Thumper_Custom_Level_Editor
             if (WorkingFolder == null)
                 return;
             LvlSamples.Clear();
-            //find all samp_ files in the level folder
-            List<FileInfo> _sampfiles = WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp").ToList();
             //add default empty sample
             LvlSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
             //iterate over each file
-            foreach (FileInfo sampfile in _sampfiles) {
+            foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp")) {
                 //parse file to JSON
                 dynamic _in = TCLE.LoadFileLock(sampfile.FullName);
                 //iterate over items:[] list to get each sample and add names to list
                 foreach (dynamic _samp in _in["items"]) {
                     LvlSamples.Add(new SampleData {
-                        obj_name = ((string)_samp["obj_name"]).Replace(".samp", ""),
+                        obj_name = ((string)_samp["obj_name"]),
                         path = _samp["path"],
                         volume = _samp["volume"],
                         pitch = _samp["pitch"],

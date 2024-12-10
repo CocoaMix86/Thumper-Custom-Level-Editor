@@ -516,30 +516,14 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip Toolbar
         private void toolstripMainSave_Click(object sender, EventArgs e)
         {
-            if (GlobalActiveDocument.GetType() == typeof(Form_MasterEditor)) {
-                (GlobalActiveDocument as Form_MasterEditor).Save();
-            }
-            else if (GlobalActiveDocument.GetType() == typeof(Form_GateEditor)) {
-                (GlobalActiveDocument as Form_GateEditor).Save();
-            }
-            else if (GlobalActiveDocument.GetType() == typeof(Form_RawText)) {
-                (GlobalActiveDocument as Form_RawText).Save();
-            }
+            FindEditorRunMethod(GlobalActiveDocument.GetType(), "Save");
         }
 
         private void toolstripMainSaveAll_Click(object sender, EventArgs e)
         {
             foreach (Form_WorkSpace workspace in DockMain.Documents.Cast<Form_WorkSpace>()) {
                 foreach (IDockContent document in workspace.dockMain.Documents) {
-                    if (document.GetType() == typeof(Form_MasterEditor)) {
-                        (document as Form_MasterEditor).Save();
-                    }
-                    else if (document.GetType() == typeof(Form_GateEditor)) {
-                        (document as Form_GateEditor).Save();
-                    }
-                    else if (document.GetType() == typeof(Form_RawText)) {
-                        (document as Form_RawText).Save();
-                    }
+                    FindEditorRunMethod(document.GetType(), "Save");
                 }
             }
         }

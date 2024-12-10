@@ -187,9 +187,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex == -1 || e.RowIndex == -1)
                 return;
             LvlProperties.lvlloops[e.RowIndex] = new LvlLoop() { 
-                sample = $"{lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value}.samp",
+                sample = $"{lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value}",
                 beats = decimal.Parse(lvlLoopTracks.Rows[e.RowIndex].Cells[1].Value.ToString())
             };
+            lvlloop_CollectionChanged(null, null);
             SaveCheckAndWrite(false);
         }
         private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -241,6 +242,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!EditorIsLoading) {
                 SaveCheckAndWrite(false);
             }
+        }
+        public void lvlloop_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            lvlLoopTracks.RowCount = 0;
+            foreach (LvlLoop loop in LvlProperties.lvlloops) {
+                lvlLoopTracks.Rows.Add(new object[] {
+                    loop.sample,
+                    loop.beats
+                });
+            }
+            foreach (DataGridViewRow r in lvlLoopTracks.Rows)
+                r.HeaderCell.Value = "Volume Track " + r.Index;
+            btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
+            SaveCheckAndWrite(false);
         }
         /// LVL NEW
         private void newToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -575,13 +590,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///load loop track names and paths to lvlLoopTracks DGV
             TCLE.LvlReloadSamples();
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToList();
             foreach (dynamic samp in _load["loops"]) {
-                string _samplocate = TCLE.LvlSamples.FirstOrDefault(item => item.obj_name == ((string)samp["samp_name"])?.Replace(".samp", ""))?.obj_name ?? TCLE.LvlSamples[0].obj_name;
-                lvlLoopTracks.Rows.Add(new object[] { _samplocate, (int?)samp["beats_per_loop"] == null ? 0 : (int)samp["beats_per_loop"] });
+                lvlProperties.lvlloops.Add(new LvlLoop() {
+                    sample = (string)samp["samp_name"],
+                    beats = (decimal?)samp["beats_per_loop"] == null ? 0 : (decimal)samp["beats_per_loop"]
+                });
             }
-            foreach (DataGridViewRow r in lvlLoopTracks.Rows)
-                r.HeaderCell.Value = "Volume Track " + r.Index;
-            btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
             ///load leafs associated with this lvl
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData() {
@@ -619,9 +634,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///customize Loop Track list a bit
             //custom column containing comboboxes per cell
             lvlLoopTracks.Columns[1].ValueType = typeof(decimal);
-            lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.#";
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToList();
-            //lvlLoopTracks.Columns[0].ValueType = typeof(SampleData);
+            lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.##";
             ///
         }
 

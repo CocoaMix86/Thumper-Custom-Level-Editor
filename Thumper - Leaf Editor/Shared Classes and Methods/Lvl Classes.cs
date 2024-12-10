@@ -47,6 +47,8 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public ObservableCollection<LvlLeafData> lvlleafs;
         [Browsable(false)]
+        public ObservableCollection<LvlLoop> lvlloops { get; set; }
+        [Browsable(false)]
         public LvlLeafData sublevel { get; set; }
 
         public LvlProperties(Form_LvlEditor Parent, FileInfo path)
@@ -57,10 +59,9 @@ namespace Thumper_Custom_Level_Editor
             undoItems = new();
             lvlleafs = new();
             lvlleafs.CollectionChanged += parent.lvlleaf_CollectionChanged;
+            lvlloops = new();
+            lvlloops.CollectionChanged += parent.lvlloop_CollectionChanged;
         }
-
-        [Browsable(false)]
-        public List<LvlLoop> lvlloops { get; set; }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
