@@ -57,6 +57,7 @@
             this.splitContainer1 = new SplitContainer();
             this.splitContainer2 = new SplitContainer();
             this.propertyGridLvl = new PropertyGrid();
+            this.btnLvlSequencer = new Button();
             this.splitContainer3 = new SplitContainer();
             this.lvlLeafPaths = new DataGridView();
             this.lvlPathsToolStrip = new ToolStrip();
@@ -274,6 +275,11 @@
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellDoubleClick += this.lvlLeafList_CellDoubleClick;
             this.lvlLeafList.DataError += this.lvlLoopTracks_DataError;
+            this.lvlLeafList.DragDrop += this.lvlLeafList_DragDrop;
+            this.lvlLeafList.DragEnter += this.lvlLeafList_DragEnter;
+            this.lvlLeafList.DragOver += this.lvlLeafList_DragOver;
+            this.lvlLeafList.MouseDown += this.lvlLeafList_MouseDown;
+            this.lvlLeafList.MouseMove += this.lvlLeafList_MouseMove;
             // 
             // lvlfiletype
             // 
@@ -343,6 +349,7 @@
             // 
             this.splitContainer2.Panel2.AutoScroll = true;
             this.splitContainer2.Panel2.Controls.Add(this.propertyGridLvl);
+            this.splitContainer2.Panel2.Controls.Add(this.btnLvlSequencer);
             this.splitContainer2.Size = new Size(707, 300);
             this.splitContainer2.SplitterDistance = 350;
             this.splitContainer2.SplitterWidth = 5;
@@ -367,12 +374,33 @@
             this.propertyGridLvl.RightToLeft = RightToLeft.No;
             this.propertyGridLvl.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridLvl.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridLvl.Size = new Size(352, 300);
+            this.propertyGridLvl.Size = new Size(352, 272);
             this.propertyGridLvl.TabIndex = 149;
             this.propertyGridLvl.ToolbarVisible = false;
             this.propertyGridLvl.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridLvl.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridLvl.ViewForeColor = Color.White;
+            // 
+            // btnLvlSequencer
+            // 
+            this.btnLvlSequencer.BackColor = Color.DarkGreen;
+            this.btnLvlSequencer.CausesValidation = false;
+            this.btnLvlSequencer.Dock = DockStyle.Bottom;
+            this.btnLvlSequencer.Enabled = false;
+            this.btnLvlSequencer.FlatStyle = FlatStyle.Popup;
+            this.btnLvlSequencer.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.btnLvlSequencer.ForeColor = Color.White;
+            this.btnLvlSequencer.Image = Properties.Resources.icon_template;
+            this.btnLvlSequencer.ImageAlign = ContentAlignment.MiddleLeft;
+            this.btnLvlSequencer.Location = new Point(0, 272);
+            this.btnLvlSequencer.Margin = new Padding(4, 3, 4, 3);
+            this.btnLvlSequencer.MaximumSize = new Size(200, 28);
+            this.btnLvlSequencer.MinimumSize = new Size(200, 28);
+            this.btnLvlSequencer.Name = "btnLvlSequencer";
+            this.btnLvlSequencer.Size = new Size(200, 28);
+            this.btnLvlSequencer.TabIndex = 150;
+            this.btnLvlSequencer.Text = "Open Sequencer";
+            this.btnLvlSequencer.UseVisualStyleBackColor = false;
             // 
             // splitContainer3
             // 
@@ -778,5 +806,6 @@
         private DataGridViewComboBoxColumn LoopSample;
         private DataGridViewTextBoxColumn BeatsPerLoop;
         private SplitContainer splitContainer3;
+        public Button btnLvlSequencer;
     }
 }

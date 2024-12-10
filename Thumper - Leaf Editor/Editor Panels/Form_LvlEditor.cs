@@ -81,7 +81,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private Rectangle dragBoxFromMouseDown;
         private int rowIndexFromMouseDown;
         private int rowIndexOfItemUnderMouseToDrop;
-        private void gateLvlList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void lvlLeafList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
@@ -94,7 +94,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private void gateLvlList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void lvlLeafList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             // Get the index of the item the mouse is below.
             rowIndexFromMouseDown = lvlLeafList.HitTest(e.X, e.Y).RowIndex;
@@ -114,7 +114,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private int previousDragOver = -1;
-        private void gateLvlList_DragOver(object sender, DragEventArgs e)
+        private void lvlLeafList_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
             // Retrieve the client coordinates of the drop location.
@@ -134,8 +134,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private void gateLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
-        private void gateLvlList_DragDrop(object sender, DragEventArgs e)
+        private void lvlLeafList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+        private void lvlLeafList_DragDrop(object sender, DragEventArgs e)
         {
             // The mouse locations are relative to the screen, so they must be 
             // converted to client coordinates.
@@ -826,7 +826,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_loop.sample == null)
                     continue;
                 JObject s = new() {
-                    { "samp_name", $"{_loop.sample}.samp"},
+                    { "samp_name", $"{_loop.sample}"},
                     { "beats_per_loop", _loop.beats }
                 };
 
