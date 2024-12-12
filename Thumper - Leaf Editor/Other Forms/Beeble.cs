@@ -48,7 +48,7 @@
 
         private void timerBeeble_Tick(object sender, EventArgs e)
         {
-            timerBeeble.Stop();
+            timerBeeble.Stop();            
             this.BackgroundImage = Properties.Resources.beeble;
         }
     }

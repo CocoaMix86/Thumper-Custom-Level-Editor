@@ -48,8 +48,9 @@
         private void timer1_Tick(object sender, EventArgs e)
         {
             tcle.MaximizeScreenBounds();
-            tcle.beeble = new();
-            tcle.beeble.Show();
+            TCLE.MainBeeble.Visible = true;
+            TCLE.MainBeeble.Location = new Point(200, 200);
+            TCLE.MainBeeble.Size = new Size(150, 120);
             this.Close();
         }
     }

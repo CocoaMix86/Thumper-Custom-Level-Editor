@@ -82,13 +82,12 @@ namespace Thumper_Custom_Level_Editor
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
-        public Beeble beeble { get => MainBeeble; set => MainBeeble = value; }
-        public static Beeble MainBeeble;
+        public static readonly Beeble MainBeeble = new() { Visible = false, Size = new Size(1, 1), Location = new Point(0, 0)};
         #endregion
 
         #region Form Construction
-        public static Form_ProjectExplorer dockProjectExplorer;
-        public static Form_ProjectProperties dockProjectProperties;
+        public readonly static Form_ProjectExplorer dockProjectExplorer = new(Instance) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+        public readonly static Form_ProjectProperties dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
         public TCLE(string LevelFromArg)
         {
             InitializeComponent();
@@ -148,9 +147,9 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
 
-            dockProjectExplorer = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            //dockProjectExplorer = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProjectExplorer.Show(dockMain, DockState.DockRight);
-            dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            //dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProjectProperties.Show(dockProjectExplorer.Pane, DockAlignment.Bottom, 0.5);
         }
         #endregion
@@ -284,10 +283,10 @@ namespace Thumper_Custom_Level_Editor
         private void TCLE_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized) {
-                if (MainBeeble != null) MainBeeble.Visible = false;
+                //if (MainBeeble != null) MainBeeble.Visible = false;
             }
             else {
-                if (MainBeeble != null) MainBeeble.Visible = true;
+                //if (MainBeeble != null) MainBeeble.Visible = true;
             }
 
             if (this.WindowState == FormWindowState.Normal)

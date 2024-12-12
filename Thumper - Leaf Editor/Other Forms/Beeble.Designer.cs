@@ -43,13 +43,13 @@
             this.BackColor = Color.White;
             this.BackgroundImage = Properties.Resources.beeble;
             this.BackgroundImageLayout = ImageLayout.Stretch;
-            this.ClientSize = new Size(132, 100);
+            this.ClientSize = new Size(134, 104);
             this.ControlBox = false;
             this.DoubleBuffered = true;
             this.Margin = new Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new Size(56, 55);
+            this.MinimumSize = new Size(1, 1);
             this.Name = "Beeble";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
