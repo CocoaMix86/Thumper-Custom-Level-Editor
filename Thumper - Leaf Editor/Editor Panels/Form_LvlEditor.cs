@@ -748,8 +748,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
                     r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
-                }
-                catch (ArgumentOutOfRangeException) { }
+                } catch (ArgumentOutOfRangeException) { }
             }
         }
 
@@ -853,12 +852,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafPaths_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
+            /*
             Control combo = (Control)e.Control;
             ComboBoxEx c2 = (ComboBoxEx)combo;
             if (c2 != null) {
                 c2.ListItemSelectionChanged -= PathsComboBox_ListItemSelectionChanged;
                 c2.ListItemSelectionChanged += PathsComboBox_ListItemSelectionChanged;
-            }
+            }*/
+        }
+
+        private void lvlLeafPaths_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            TCLE.Instance.pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
         }
     }
 }

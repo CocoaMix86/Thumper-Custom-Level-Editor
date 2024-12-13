@@ -482,6 +482,7 @@
             this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.lvlLeafPaths.Size = new Size(250, 159);
             this.lvlLeafPaths.TabIndex = 160;
+            this.lvlLeafPaths.CellMouseEnter += this.lvlLeafPaths_CellMouseEnter;
             this.lvlLeafPaths.CellValueChanged += this.lvlLeafPaths_CellValueChanged;
             this.lvlLeafPaths.DataError += this.lvlLoopTracks_DataError;
             this.lvlLeafPaths.EditingControlShowing += this.lvlLeafPaths_EditingControlShowing;
