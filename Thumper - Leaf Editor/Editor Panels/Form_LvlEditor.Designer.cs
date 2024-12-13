@@ -484,6 +484,7 @@
             this.lvlLeafPaths.TabIndex = 160;
             this.lvlLeafPaths.CellValueChanged += this.lvlLeafPaths_CellValueChanged;
             this.lvlLeafPaths.DataError += this.lvlLoopTracks_DataError;
+            this.lvlLeafPaths.EditingControlShowing += this.lvlLeafPaths_EditingControlShowing;
             // 
             // lvlPathsToolStrip
             // 

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using static Thumper_Custom_Level_Editor.ComboBoxEx;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -180,6 +181,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
             //set lvl save flag to false
             SaveCheckAndWrite(false);
+        }
+
+        private void PathsComboBox_ListItemSelectionChanged(object sender, ListItemSelectionChangedEventArgs e)
+        {
+            TCLE.Instance.pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{e.ItemText.Replace(".path", "")}");
         }
         /// DGV LVLLOOPTRACKS
         //Cell value changed
@@ -559,6 +565,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// METHODS ///
         ///         ///
 
+        public void InitializeLvlStuff()
+        {
+            LvlPaths.Sort();
+
+            ///customize Paths List a bit
+            //custom column containing comboboxes per cell
+            DataGridViewComboBoxColumn _dgvlvlpaths = new() {
+                DataSource = LvlPaths,
+                HeaderText = "Path Name",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
+                DisplayStyleForCurrentCellOnly = true
+            };
+            lvlLeafPaths.Columns.Add(_dgvlvlpaths);
+            ///
+
+            ///customize Loop Track list a bit
+            //custom column containing comboboxes per cell
+            lvlLoopTracks.Columns[1].ValueType = typeof(decimal);
+            lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.##";
+            ///
+        }
+
         public void LoadLvl(dynamic _load, FileInfo filepath)
         {
             if (_load == null)
@@ -614,29 +643,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsLoading = false;
             EditorIsSaved = true;
             RecalculateRuntime();
-        }
-
-        public void InitializeLvlStuff()
-        {
-            LvlPaths.Sort();
-
-            ///customize Paths List a bit
-            //custom column containing comboboxes per cell
-            DataGridViewComboBoxColumn _dgvlvlpaths = new() {
-                DataSource = LvlPaths,
-                HeaderText = "Path Name",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
-                DisplayStyleForCurrentCellOnly = true
-            };
-            lvlLeafPaths.Columns.Add(_dgvlvlpaths);
-            ///
-
-            ///customize Loop Track list a bit
-            //custom column containing comboboxes per cell
-            lvlLoopTracks.Columns[1].ValueType = typeof(decimal);
-            lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.##";
-            ///
         }
 
         public void AddFiletoLvl(string path)
@@ -843,6 +849,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _save;
         }
 
-#endregion
+        #endregion
+
+        private void lvlLeafPaths_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            Control combo = (Control)e.Control;
+            ComboBoxEx c2 = (ComboBoxEx)combo;
+            if (c2 != null) {
+                c2.ListItemSelectionChanged -= PathsComboBox_ListItemSelectionChanged;
+                c2.ListItemSelectionChanged += PathsComboBox_ListItemSelectionChanged;
+            }
+        }
     }
 }
