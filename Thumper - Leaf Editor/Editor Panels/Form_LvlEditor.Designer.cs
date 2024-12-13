@@ -273,6 +273,7 @@
             this.lvlLeafList.Size = new Size(350, 258);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.Tag = "editorpaneldgv";
+            this.lvlLeafList.CellClick += this.lvlLeafList_CellClick;
             this.lvlLeafList.CellDoubleClick += this.lvlLeafList_CellDoubleClick;
             this.lvlLeafList.DataError += this.lvlLoopTracks_DataError;
             this.lvlLeafList.DragDrop += this.lvlLeafList_DragDrop;
@@ -481,6 +482,7 @@
             this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.lvlLeafPaths.Size = new Size(250, 159);
             this.lvlLeafPaths.TabIndex = 160;
+            this.lvlLeafPaths.CellValueChanged += this.lvlLeafPaths_CellValueChanged;
             this.lvlLeafPaths.DataError += this.lvlLoopTracks_DataError;
             // 
             // lvlPathsToolStrip
@@ -513,6 +515,7 @@
             this.btnLvlPathAdd.Name = "btnLvlPathAdd";
             this.btnLvlPathAdd.Size = new Size(24, 29);
             this.btnLvlPathAdd.ToolTipText = "Add new path/tunnel";
+            this.btnLvlPathAdd.Click += this.btnLvlPathAdd_Click;
             // 
             // btnLvlPathDelete
             // 
@@ -524,6 +527,7 @@
             this.btnLvlPathDelete.Name = "btnLvlPathDelete";
             this.btnLvlPathDelete.Size = new Size(24, 29);
             this.btnLvlPathDelete.ToolTipText = "Delete selected path";
+            this.btnLvlPathDelete.Click += this.btnLvlPathDelete_Click;
             // 
             // btnLvlPathUp
             // 
@@ -537,6 +541,7 @@
             this.btnLvlPathUp.Name = "btnLvlPathUp";
             this.btnLvlPathUp.Size = new Size(24, 29);
             this.btnLvlPathUp.ToolTipText = "Move selected tunnel up";
+            this.btnLvlPathUp.Click += this.btnLvlPathUp_Click;
             // 
             // btnLvlPathDown
             // 
@@ -548,6 +553,7 @@
             this.btnLvlPathDown.Name = "btnLvlPathDown";
             this.btnLvlPathDown.Size = new Size(24, 29);
             this.btnLvlPathDown.ToolTipText = "Move selected tunnel down";
+            this.btnLvlPathDown.Click += this.btnLvlPathDown_Click;
             // 
             // btnLvlCopyTunnel
             // 
@@ -558,6 +564,7 @@
             this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
             this.btnLvlCopyTunnel.Size = new Size(24, 26);
             this.btnLvlCopyTunnel.ToolTipText = "Copy all paths/tunnels";
+            this.btnLvlCopyTunnel.Click += this.btnLvlCopyTunnel_Click;
             // 
             // btnLvlPasteTunnel
             // 
@@ -568,6 +575,7 @@
             this.btnLvlPasteTunnel.Name = "btnLvlPasteTunnel";
             this.btnLvlPasteTunnel.Size = new Size(24, 26);
             this.btnLvlPasteTunnel.ToolTipText = "Paste copied paths/tunnels";
+            this.btnLvlPasteTunnel.Click += this.btnLvlPasteTunnel_Click;
             // 
             // btnLvlPathClear
             // 
@@ -579,6 +587,7 @@
             this.btnLvlPathClear.Size = new Size(24, 26);
             this.btnLvlPathClear.Text = "toolStripButton2";
             this.btnLvlPathClear.ToolTipText = "Clear all tunnels";
+            this.btnLvlPathClear.Click += this.btnLvlPathClear_Click;
             // 
             // chkTunnelCopy
             // 
@@ -599,6 +608,7 @@
             this.btnLvlRandomTunnel.Name = "btnLvlRandomTunnel";
             this.btnLvlRandomTunnel.Size = new Size(24, 26);
             this.btnLvlRandomTunnel.ToolTipText = "Click to add a random tunnel";
+            this.btnLvlRandomTunnel.Click += this.btnLvlRandomTunnel_Click;
             // 
             // lvlLoopTracks
             // 

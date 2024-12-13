@@ -855,4 +855,508 @@ MISC
   <data name="ico_workspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\ico\ico_workspace.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="path_arms_deca" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_arms_deca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_diamond" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_arms_diamond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_hex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_arms_hex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_oct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_arms_oct.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_pentagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_arms_pentagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_sept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_arms_sept.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_square" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_arms_square.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_triangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_arms_triangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_black_tunnel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_black_tunnel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_boss_bright_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_boss_bright_A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_boss_bright_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_boss_bright_B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_Boss_tube_path" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_Boss_tube_path.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_boss_tube_path_no_end" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_boss_tube_path_no_end.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_boss_tunnel_effect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_boss_tunnel_effect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_dec_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_dec_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_dec_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_dec_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_diamond_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_diamond_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_diamond_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_diamond_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_diamond_chrome_ring" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_diamond_chrome_ring.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_diamond_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_diamond_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_hexagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_hexagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_hexagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_hexagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_octo_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_octo_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_octo_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_octo_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_octo_chrome_ring" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_octo_chrome_ring.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_octo_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_octo_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_pentagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_pentagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_pentagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_pentagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_pyramid_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_pyramid_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_pyramid_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_pyramid_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_sept_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_sept_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_sept_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_sept_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_square_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_square_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_square_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_cave_square_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_checkpoint_exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_checkpoint_exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_dec_tunnel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_dec_tunnel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_deca" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_glass_deca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_diamond" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_glass_diamond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_hex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_glass_hex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_oct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_glass_oct.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_pentagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_glass_pentagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_sept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_glass_sept.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_square" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_glass_square.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_triangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_glass_triangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_Landscape01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_Landscape01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice1_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice1_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice1_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice1_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice1_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice1_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice2_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_blue2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice2_blue2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice2_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice2_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_green2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice2_green2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice2_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice2_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice3_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice3_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice3_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice3_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice3_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice3_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice4_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice4_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice4_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice4_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice4_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice4_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice5_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice5_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice5_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice5_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice5_chrome_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice5_chrome_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice5_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice5_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice6_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice6_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice6_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice6_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice6_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice6_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice7_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice7_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice7_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice7_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice8_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice8_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice8_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice8_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice8_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice8_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice_7_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_lattice_7_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_level_arms_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_level_arms_A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_ring_circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_diamond" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_ring_diamond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_diamond2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_ring_diamond2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_hex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_ring_hex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_octagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_ring_octagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_pentagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_ring_pentagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_pentagon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_ring_pentagon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_pentagon_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_ring_pentagon_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube01_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube01_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube01_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube01_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube01_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube01_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube02_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube02_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube02_chrome_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube02_chrome_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube02_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube02_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube02_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube02_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube03_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube03_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube03_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube03_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube03_psych_BW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube03_psych_BW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube03_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube03_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube04_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube04_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube04_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube04_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube04_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube04_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube05_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube05_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube05_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube05_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube05_purple_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube05_purple_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube06_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube06_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube06_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube06_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube06_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube06_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube07_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube07_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube07_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube07_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube07_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube07_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube_diamondoid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube_diamondoid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_occlusion_tube_horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_hex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_hex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_hex_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_hex_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_hex_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_hex_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_hex_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_hex_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_pent_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_pent_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_pent_glass_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_pent_glass_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_pent_points" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_pent_points.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_triangle_lines" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_triangle_lines.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_triangle_lines_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_triangle_lines_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_triangle_points" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_scaffold_triangle_points.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_spaceship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_spaceship2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_spaceship3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_spaceship3_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_spaceship3_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_spaceship3_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_no_end_cap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_spaceship3_no_end_cap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_no_start_cap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_spaceship3_no_start_cap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_triangle_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_triangle_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_triangle_glass_scaffold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_triangle_glass_scaffold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_triangle_tunnel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_triangle_tunnel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_dec_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_dec_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_dec_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_dec_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_diamond_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_bright_larg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_diamond_bright_larg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_diamond_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_chrome_arms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_diamond_chrome_arms.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_chrome_glass_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_diamond_chrome_glass_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_chrome_larg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_diamond_chrome_larg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_diamond_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_hexagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_hexagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_hexagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_hexagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_octagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_octagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_octagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_octagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_pentagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_bright_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_pentagon_bright_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_pentagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_chrome_arm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_pentagon_chrome_arm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_chrome_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_pentagon_chrome_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_pentagon_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_sept_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_sept_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_sept_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_sept_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_sept_chrome_arms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_sept_chrome_arms.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_sept_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_sept_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_square_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_square_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_square_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_square_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_triangle_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_black_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_triangle_black_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_triangle_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_triangle_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_chrome2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_triangle_chrome2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_chrome2_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_triangle_chrome2_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_flipped_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_triangle_flipped_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_flipped_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tube_triangle_flipped_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tunnel_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tunnel_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tunnel_chrome_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_tunnel_chrome_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_web" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_web.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_web_points" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\tunnels\path_web_points.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
