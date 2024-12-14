@@ -1,17 +1,9 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using System.Collections.Generic;
 using Fmod5Sharp.FmodTypes;
 using Fmod5Sharp;
 using NAudio.Vorbis;
 using NAudio.Wave;
-using Thumper_Custom_Level_Editor.Shared_Classes_and_Methods;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -67,57 +59,48 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// EVENTS  ///
         ///         ///
 
+        private void sampleList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                return;
+            sampleproperties.sample = SampleList[e.RowIndex];
+            propertyGridSample.ExpandAllGridItems();
+            propertyGridSample.Refresh();
+
+            if (e.ColumnIndex == 0) {
+                AudioPlayback(sampleList[e.ColumnIndex, e.RowIndex]);
+            }
+        }
+
         private void sampleList_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;
-            btnSampEditorPlaySamp.Enabled = true;
         }
 
-        private void sampleList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void sampleList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            sampleList.CellValueChanged -= sampleList_CellValueChanged;
-            try {
-                List<DataGridViewRow> editedrows = new();
-                object _val = sampleList[e.ColumnIndex, e.RowIndex].Value;
-                //iterate over each cell in the selection
-                foreach (DataGridViewCell _cell in sampleList.SelectedCells) {
-                    //skip name column
-                    if (_val is string && (_cell.ColumnIndex is 1 or 2 or 3 or 4))
-                        continue;
-                    if (_cell.ColumnIndex == 0)
-                        continue;
-                    //if cell does not have the value, set it
-                    if (_cell.Value != _val)
-                        _cell.Value = _val;
-                    if (!editedrows.Contains(_cell.OwningRow))
-                        editedrows.Add(_cell.OwningRow);
-                }
-                foreach (DataGridViewRow dgvr in editedrows) {
-                    int _index = dgvr.Index;
-                    SampleList[_index].obj_name = (string)dgvr.Cells[0].Value;
-                    SampleList[_index].volume = (decimal)dgvr.Cells[1].Value;
-                    SampleList[_index].pitch = (decimal)dgvr.Cells[2].Value;
-                    SampleList[_index].pan = (decimal)dgvr.Cells[3].Value;
-                    SampleList[_index].offset = (decimal)dgvr.Cells[4].Value;
-                    SampleList[_index].channel_group = dgvr.Cells[5].Value.ToString();
-                }
-                SaveCheckAndWrite(false);
+            if (e.RowIndex == -1)
+                return;
+            //button is in column 0, so that's where to draw the image
+            if (e.ColumnIndex == 0) {
+                CellPaint(e, SampleIsPlaying);
             }
-            catch { }
-            sampleList.CellValueChanged += sampleList_CellValueChanged;
         }
-
-        private void sampleList_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void CellPaint(DataGridViewCellPaintingEventArgs e, bool isplaying)
         {
-            //during editing of a cell in sampleList, check and sanitize input so it's numeric only
-            e.Control.KeyPress -= new KeyPressEventHandler(TCLE.NumericInputSanitize);
-            if (sampleList.CurrentCell.ColumnIndex is 1 or 2 or 3 or 4) //Desired Column
-            {
-                if (e.Control is TextBox tb) {
-                    tb.KeyPress += new KeyPressEventHandler(TCLE.NumericInputSanitize);
-                }
-            }
+            e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            //get dimensions
+            int w = Properties.Resources.icon_play.Width;
+            int h = Properties.Resources.icon_play.Height;
+            int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+            int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
+            //paint the image
+            if (isplaying && playingcells.Contains(sampleList[e.ColumnIndex, e.RowIndex]))
+                e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
+            else
+                e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
+            e.Handled = true;
         }
 
         public void _samplelist_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -134,7 +117,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //enable certain buttons if there are enough items for them
             btnSampleAdd.Enabled = true;
             btnSampleDelete.Enabled = SampleList.Count > 0;
-            btnSampEditorPlaySamp.Enabled = SampleList.Count > 0;
 
             //set lvl save flag to false
             SaveCheckAndWrite(false);
@@ -182,7 +164,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.Filter = "Thumper Sample File (*.samp)|*.samp";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
-            if (sfd.ShowDialog() == DialogResult.OK) {                
+            if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedsample = new FileInfo(sfd.FileName);
                 SaveCheckAndWrite(true, true);
                 //after saving new file, refresh the project explorer
@@ -308,53 +290,59 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private WaveOutEvent outputDevice;
         private AudioFileReader audioFile;
-        private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
-        {
-            SampleData _samp = SampleList[sampleList.CurrentRow.Index];
-            string _filetype = "";
-            //check if sample exists in temp folder. If not, create it
-            if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
-                string _result = PCtoOGG(_samp);
-                if (_result == null)
-                    return;
-            }
-            //check extension of the sample to play
-            if (File.Exists($@"temp\{_samp.obj_name}.ogg"))
-                _filetype = "ogg";
-            if (File.Exists($@"temp\{_samp.obj_name}.wav"))
-                _filetype = "wav";
-
-
-            if (outputDevice == null) {
-                outputDevice = new WaveOutEvent();
-                outputDevice.PlaybackStopped += OnPlaybackStopped;
-            }
-            if (audioFile == null) {
-                if (_filetype == "ogg") {
-                    VorbisWaveReader vorbis = new($@"temp\{_samp.obj_name}.{_filetype}");
-                    outputDevice.Init(vorbis);
-                }
-                else {
-                    audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
-                    outputDevice.Init(audioFile);
-                }
-            }
-
-            btnSampEditorPlaySamp.Image = Properties.Resources.icon_stop;
-            btnSampEditorPlaySamp.Click -= btnSampEditorPlaySamp_Click;
-            btnSampEditorPlaySamp.Click += OnButtonStopClick;
-            outputDevice.Play();
-        }
-        private void OnButtonStopClick(object sender, EventArgs args) => outputDevice?.Stop();
+        private bool SampleIsPlaying = false;
+        private Stack<DataGridViewCell> playingcells = new();
         private void OnPlaybackStopped(object sender, StoppedEventArgs args)
         {
             outputDevice.Dispose();
             outputDevice = null;
             audioFile?.Dispose();
             audioFile = null;
-            btnSampEditorPlaySamp.Click += btnSampEditorPlaySamp_Click;
-            btnSampEditorPlaySamp.Click -= OnButtonStopClick;
-            btnSampEditorPlaySamp.Image = Properties.Resources.icon_play2;
+
+            SampleIsPlaying = false;
+            sampleList.InvalidateCell(playingcells.Pop());
+        }
+        private void AudioPlayback(DataGridViewCell cell)
+        {
+            if (!SampleIsPlaying) {
+                SampleData _samp = sampleproperties.sample;
+                string _filetype = "";
+                //check if sample exists in temp folder. If not, create it
+                if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
+                    string _result = PCtoOGG(_samp);
+                    if (_result == null)
+                        return;
+                }
+                //check extension of the sample to play
+                if (File.Exists($@"temp\{_samp.obj_name}.ogg"))
+                    _filetype = "ogg";
+                if (File.Exists($@"temp\{_samp.obj_name}.wav"))
+                    _filetype = "wav";
+
+
+                if (outputDevice == null) {
+                    outputDevice = new WaveOutEvent();
+                    outputDevice.PlaybackStopped += OnPlaybackStopped;
+                }
+                if (audioFile == null) {
+                    if (_filetype == "ogg") {
+                        VorbisWaveReader vorbis = new($@"temp\{_samp.obj_name}.{_filetype}");
+                        outputDevice.Init(vorbis);
+                    }
+                    else {
+                        audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
+                        outputDevice.Init(audioFile);
+                    }
+                }
+
+                SampleIsPlaying = true;
+                sampleList.InvalidateCell(cell);
+                playingcells.Push(cell);
+                outputDevice.Play();
+            }
+            else {
+                outputDevice?.Stop();
+            }
         }
 
         private void btnRevertSample_Click(object sender, EventArgs e)
@@ -374,14 +362,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeSampleStuff()
         {
-            ///Customize Lvl list a bit
-            sampleList.RowsDefaultCellStyle = new DataGridViewCellStyle() {
-                ForeColor = Color.White,
-                Font = new Font("Arial", 12, GraphicsUnit.Pixel)
-            };
             sampleList.Columns[0].ValueType = typeof(string);
-
-            SampleList.CollectionChanged += _samplelist_CollectionChanged;
         }
 
         public void LoadSample(dynamic _load, FileInfo filepath)
@@ -396,6 +377,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             loadedsample = filepath;
             //set some visual elements
             this.Text = LoadedSample.Name;
+            //set flag that load is in progress. This skips Save method
+            EditorLoading = true;
 
             sampleproperties = new(this, filepath);
 
@@ -411,15 +394,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     pitch = _samp["pitch"],
                     pan = _samp["pan"],
                     offset = _samp["offset"],
-                    channel_group = _samp["channel_group"]
+                    channel_group = _samp["channel_group"] == "" ? "sequin.ch" : _samp["channel_group"]
                 });
             }
             SampleList.CollectionChanged += _samplelist_CollectionChanged;
             _samplelist_CollectionChanged(null, null);
             FSBtoSamp.Enabled = true;
+
             ///set save flag (samples just loaded, has no changes)
-            samplejson = _load;
             SaveCheckAndWrite(true);
+            EditorLoading = false;
+            EditorIsSaved = true;
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
@@ -591,23 +576,5 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             FSBtoSamp.Enabled = true;
         }
         #endregion
-
-        private void sampleList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.RowIndex == -1)
-                return;
-            //button is in column 0, so that's where to draw the image
-            if (e.ColumnIndex == 0) {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-                //get dimensions
-                int w = Properties.Resources.icon_openedfolders.Width;
-                int h = Properties.Resources.icon_openedfolders.Height;
-                int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
-                int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
-                //paint the image
-                e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
-                e.Handled = true;
-            }
-        }
     }
 }

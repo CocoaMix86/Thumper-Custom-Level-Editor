@@ -41,6 +41,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     filetoclose = (TCLE.GlobalActiveDocument as Form_GateEditor).loadedgate.Name;
                 else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_LvlEditor))
                     filetoclose = (TCLE.GlobalActiveDocument as Form_LvlEditor).loadedlvl.Name;
+                else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_SampleEditor))
+                    filetoclose = (TCLE.GlobalActiveDocument as Form_SampleEditor).loadedsample.Name;
                 else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_RawText))
                     filetoclose = (TCLE.GlobalActiveDocument as Form_RawText).loadedfile.Name;
 

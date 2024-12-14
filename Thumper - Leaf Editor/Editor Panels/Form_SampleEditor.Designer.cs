@@ -42,7 +42,6 @@
             this.btnSampleAdd = new ToolStripButton();
             this.btnSampleDelete = new ToolStripButton();
             this.FSBtoSamp = new ToolStripButton();
-            this.btnSampEditorPlaySamp = new ToolStripButton();
             this.lblSampleFSBhelp = new ToolStripLabel();
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
@@ -105,14 +104,12 @@
             this.sampleList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
-            this.sampleList.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.sampleList.Size = new Size(300, 477);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
-            this.sampleList.CellEnter += this.sampleList_CellEnter;
+            this.sampleList.CellClick += this.sampleList_CellClick;
             this.sampleList.CellPainting += this.sampleList_CellPainting;
-            this.sampleList.CellValueChanged += this.sampleList_CellValueChanged;
-            this.sampleList.EditingControlShowing += this.sampleList_EditingControlShowing;
             this.sampleList.DragDrop += this.sampleList_DragDrop;
             this.sampleList.DragEnter += this.sampleList_DragEnter;
             // 
@@ -157,7 +154,7 @@
             this.sampleToolStrip.GripMargin = new Padding(0);
             this.sampleToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.sampleToolStrip.ImageScalingSize = new Size(20, 20);
-            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp, this.btnSampEditorPlaySamp, this.lblSampleFSBhelp });
+            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp, this.lblSampleFSBhelp });
             this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.sampleToolStrip.Location = new Point(0, 490);
             this.sampleToolStrip.Name = "sampleToolStrip";
@@ -202,17 +199,6 @@
             this.FSBtoSamp.Size = new Size(24, 26);
             this.FSBtoSamp.ToolTipText = "Import FSB files to Sample format";
             this.FSBtoSamp.Click += this.FSBtoSamp_Click;
-            // 
-            // btnSampEditorPlaySamp
-            // 
-            this.btnSampEditorPlaySamp.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnSampEditorPlaySamp.Enabled = false;
-            this.btnSampEditorPlaySamp.Image = Properties.Resources.icon_play2;
-            this.btnSampEditorPlaySamp.ImageTransparentColor = Color.Magenta;
-            this.btnSampEditorPlaySamp.Name = "btnSampEditorPlaySamp";
-            this.btnSampEditorPlaySamp.Size = new Size(24, 26);
-            this.btnSampEditorPlaySamp.ToolTipText = "Play selected sample";
-            this.btnSampEditorPlaySamp.Click += this.btnSampEditorPlaySamp_Click;
             // 
             // lblSampleFSBhelp
             // 
@@ -321,7 +307,6 @@
         private System.Windows.Forms.ToolStripButton btnSampleAdd;
         private System.Windows.Forms.ToolStripButton btnSampleDelete;
         private System.Windows.Forms.ToolStripButton FSBtoSamp;
-        private System.Windows.Forms.ToolStripButton btnSampEditorPlaySamp;
         private System.Windows.Forms.ToolStripLabel lblSampleFSBhelp;
         public PropertyGrid propertyGridSample;
         private Label lblMasterlvllistHelp;
