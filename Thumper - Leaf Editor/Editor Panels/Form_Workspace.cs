@@ -39,6 +39,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     filetoclose = (TCLE.GlobalActiveDocument as Form_MasterEditor).loadedmaster.Name;
                 else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_GateEditor))
                     filetoclose = (TCLE.GlobalActiveDocument as Form_GateEditor).loadedgate.Name;
+                else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_LvlEditor))
+                    filetoclose = (TCLE.GlobalActiveDocument as Form_LvlEditor).loadedlvl.Name;
                 else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_RawText))
                     filetoclose = (TCLE.GlobalActiveDocument as Form_RawText).loadedfile.Name;
 
@@ -48,7 +50,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
 
-                TCLE.CloseFileLock(TCLE.dockProjectExplorer.projectfiles[filetoclose]);
+                TCLE.CloseFileLock(TCLE.dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{filetoclose}")).Value);
             }
         }
     }

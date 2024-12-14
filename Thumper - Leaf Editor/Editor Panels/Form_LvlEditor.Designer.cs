@@ -624,7 +624,7 @@
             this.btnLvlPathView.Image = Properties.Resources.icon_view;
             this.btnLvlPathView.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathView.Name = "btnLvlPathView";
-            this.btnLvlPathView.Size = new Size(24, 24);
+            this.btnLvlPathView.Size = new Size(24, 26);
             this.btnLvlPathView.Text = "toolStripButton1";
             this.btnLvlPathView.ToolTipText = "Show/Hide tunnel preview";
             // 
@@ -757,7 +757,7 @@
             // 
             // pictureTunnelViewer
             // 
-            this.pictureTunnelViewer.BackColor = Color.Maroon;
+            this.pictureTunnelViewer.BackColor = Color.FromArgb(64, 0, 0);
             this.pictureTunnelViewer.BorderStyle = BorderStyle.Fixed3D;
             this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.pictureTunnelViewer.ForeColor = Color.White;
