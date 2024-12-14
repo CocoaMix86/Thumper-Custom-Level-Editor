@@ -170,13 +170,13 @@
             this.toolstripTabFloat = new ToolStripMenuItem();
             this.toolstripTabFloatAll = new ToolStripMenuItem();
             this.toolstripSampLevel6 = new ToolStripMenuItem();
-            this.level7440bpmToolStripMenuItem = new ToolStripMenuItem();
-            this.level8ToolStripMenuItem = new ToolStripMenuItem();
-            this.level9480bpmToolStripMenuItem = new ToolStripMenuItem();
-            this.dissonanceToolStripMenuItem = new ToolStripMenuItem();
-            this.dronesToolStripMenuItem = new ToolStripMenuItem();
-            this.restsToolStripMenuItem = new ToolStripMenuItem();
-            this.miscToolStripMenuItem = new ToolStripMenuItem();
+            this.toolstripSampLevel7 = new ToolStripMenuItem();
+            this.toolstripSampLevel8 = new ToolStripMenuItem();
+            this.toolstripSampLevel9 = new ToolStripMenuItem();
+            this.toolstripSampLevelDiss = new ToolStripMenuItem();
+            this.toolstripSampLevelDrones = new ToolStripMenuItem();
+            this.toolstripSampLevelRests = new ToolStripMenuItem();
+            this.toolstripSampLevelMisc = new ToolStripMenuItem();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -929,7 +929,7 @@
             // contextmenuSampPacks
             // 
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.level7440bpmToolStripMenuItem, this.level8ToolStripMenuItem, this.level9480bpmToolStripMenuItem, this.dissonanceToolStripMenuItem, this.dronesToolStripMenuItem, this.restsToolStripMenuItem, this.miscToolStripMenuItem });
+            this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
             this.contextmenuSampPacks.Size = new Size(181, 312);
@@ -1537,47 +1537,47 @@
             this.toolstripSampLevel6.Size = new Size(180, 22);
             this.toolstripSampLevel6.Text = "Level 6 (420bpm)";
             // 
-            // level7440bpmToolStripMenuItem
+            // toolstripSampLevel7
             // 
-            this.level7440bpmToolStripMenuItem.Name = "level7440bpmToolStripMenuItem";
-            this.level7440bpmToolStripMenuItem.Size = new Size(180, 22);
-            this.level7440bpmToolStripMenuItem.Text = "Level 7 (440bpm)";
+            this.toolstripSampLevel7.Name = "toolstripSampLevel7";
+            this.toolstripSampLevel7.Size = new Size(180, 22);
+            this.toolstripSampLevel7.Text = "Level 7 (440bpm)";
             // 
-            // level8ToolStripMenuItem
+            // toolstripSampLevel8
             // 
-            this.level8ToolStripMenuItem.Name = "level8ToolStripMenuItem";
-            this.level8ToolStripMenuItem.Size = new Size(180, 22);
-            this.level8ToolStripMenuItem.Text = "Level 8 (460bpm)";
+            this.toolstripSampLevel8.Name = "toolstripSampLevel8";
+            this.toolstripSampLevel8.Size = new Size(180, 22);
+            this.toolstripSampLevel8.Text = "Level 8 (460bpm)";
             // 
-            // level9480bpmToolStripMenuItem
+            // toolstripSampLevel9
             // 
-            this.level9480bpmToolStripMenuItem.Name = "level9480bpmToolStripMenuItem";
-            this.level9480bpmToolStripMenuItem.Size = new Size(180, 22);
-            this.level9480bpmToolStripMenuItem.Text = "Level 9 (480bpm)";
+            this.toolstripSampLevel9.Name = "toolstripSampLevel9";
+            this.toolstripSampLevel9.Size = new Size(180, 22);
+            this.toolstripSampLevel9.Text = "Level 9 (480bpm)";
             // 
-            // dissonanceToolStripMenuItem
+            // toolstripSampLevelDiss
             // 
-            this.dissonanceToolStripMenuItem.Name = "dissonanceToolStripMenuItem";
-            this.dissonanceToolStripMenuItem.Size = new Size(180, 22);
-            this.dissonanceToolStripMenuItem.Text = "Dissonance";
+            this.toolstripSampLevelDiss.Name = "toolstripSampLevelDiss";
+            this.toolstripSampLevelDiss.Size = new Size(180, 22);
+            this.toolstripSampLevelDiss.Text = "Dissonance";
             // 
-            // dronesToolStripMenuItem
+            // toolstripSampLevelDrones
             // 
-            this.dronesToolStripMenuItem.Name = "dronesToolStripMenuItem";
-            this.dronesToolStripMenuItem.Size = new Size(180, 22);
-            this.dronesToolStripMenuItem.Text = "Drones";
+            this.toolstripSampLevelDrones.Name = "toolstripSampLevelDrones";
+            this.toolstripSampLevelDrones.Size = new Size(180, 22);
+            this.toolstripSampLevelDrones.Text = "Drones";
             // 
-            // restsToolStripMenuItem
+            // toolstripSampLevelRests
             // 
-            this.restsToolStripMenuItem.Name = "restsToolStripMenuItem";
-            this.restsToolStripMenuItem.Size = new Size(180, 22);
-            this.restsToolStripMenuItem.Text = "Rests";
+            this.toolstripSampLevelRests.Name = "toolstripSampLevelRests";
+            this.toolstripSampLevelRests.Size = new Size(180, 22);
+            this.toolstripSampLevelRests.Text = "Rests";
             // 
-            // miscToolStripMenuItem
+            // toolstripSampLevelMisc
             // 
-            this.miscToolStripMenuItem.Name = "miscToolStripMenuItem";
-            this.miscToolStripMenuItem.Size = new Size(180, 22);
-            this.miscToolStripMenuItem.Text = "Misc.";
+            this.toolstripSampLevelMisc.Name = "toolstripSampLevelMisc";
+            this.toolstripSampLevelMisc.Size = new Size(180, 22);
+            this.toolstripSampLevelMisc.Text = "Misc.";
             // 
             // TCLE
             // 
@@ -1768,13 +1768,13 @@
         private ToolStripMenuItem addSamplePackToolStripMenuItem;
         private ToolStripMenuItem addSamplePackToolStripMenuItem1;
         private ToolStripMenuItem toolstripSampLevel6;
-        private ToolStripMenuItem level7440bpmToolStripMenuItem;
-        private ToolStripMenuItem level8ToolStripMenuItem;
-        private ToolStripMenuItem level9480bpmToolStripMenuItem;
-        private ToolStripMenuItem dissonanceToolStripMenuItem;
-        private ToolStripMenuItem dronesToolStripMenuItem;
-        private ToolStripMenuItem restsToolStripMenuItem;
-        private ToolStripMenuItem miscToolStripMenuItem;
+        private ToolStripMenuItem toolstripSampLevel7;
+        private ToolStripMenuItem toolstripSampLevel8;
+        private ToolStripMenuItem toolstripSampLevel9;
+        private ToolStripMenuItem toolstripSampLevelDiss;
+        private ToolStripMenuItem toolstripSampLevelDrones;
+        private ToolStripMenuItem toolstripSampLevelRests;
+        private ToolStripMenuItem toolstripSampLevelMisc;
     }
 }
 
