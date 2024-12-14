@@ -627,6 +627,24 @@ namespace Thumper_Custom_Level_Editor
             }
 
             dockProjectExplorer.CreateTreeView();
+            TCLE.LvlReloadSamples();
+        }
+
+        private void contextmenuSampPacks_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            toolstripSampLevel1.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level1_320bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevel2.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level2_340bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevel3.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level3_360bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevel4.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level4_380bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevel5.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level5_400bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevel6.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level6_420bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevel7.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level7_440bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevel8.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level8_460bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevel9.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level9_480bpm.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevelDiss.Checked = Directory.GetFiles(WorkingFolder.FullName, $"dissonant.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevelDrones.Checked = Directory.GetFiles(WorkingFolder.FullName, $"globaldrones.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevelRests.Checked = Directory.GetFiles(WorkingFolder.FullName, $"rests.samp", SearchOption.AllDirectories).Any();
+            toolstripSampLevelMisc.Checked = Directory.GetFiles(WorkingFolder.FullName, $"misc.samp", SearchOption.AllDirectories).Any();
         }
     }
 }
