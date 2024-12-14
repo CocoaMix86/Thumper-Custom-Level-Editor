@@ -275,7 +275,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                loadedgate = new FileInfo($"{sfd.FileName}");
+                loadedgate = new FileInfo(sfd.FileName);
                 SaveCheckAndWrite(true, true);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();

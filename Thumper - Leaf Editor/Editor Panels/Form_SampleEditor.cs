@@ -11,6 +11,7 @@ using Fmod5Sharp.FmodTypes;
 using Fmod5Sharp;
 using NAudio.Vorbis;
 using NAudio.Wave;
+using Thumper_Custom_Level_Editor.Shared_Classes_and_Methods;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -28,12 +29,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        FileInfo loadedsample
+        public bool EditorLoading = false;
+        public FileInfo loadedsample
         {
-            get { return loadedsample; }
+            get { return LoadedSample; }
             set {
-                if (loadedsample != value) {
-                    loadedsample = value;
+                if (LoadedSample != value) {
+                    LoadedSample = value;
                     if (!LoadedSample.Exists) {
                         LoadedSample.CreateText();
                     }
@@ -43,7 +45,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private FileInfo LoadedSample;
         dynamic samplejson;
-        ObservableCollection<SampleData> _samplelist = new();
+        public SampleProperties sampleproperties
+        {
+            get => SampleProperties;
+            set {
+                SaveCheckAndWrite(false);
+                SampleProperties = value;
+            }
+        }
+        private SampleProperties SampleProperties;
+        public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
+        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
         #region EventHandlers
@@ -55,13 +67,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex < 0)
                 return;
-            //remove event handlers so they don't trigger when the values change
-            txtSampPath.TextChanged -= txtSampPath_TextChanged;
-            //update values with selected data
-            txtSampPath.Text = _samplelist[e.RowIndex].path;
             btnSampEditorPlaySamp.Enabled = true;
-            //re-add the event handlers
-            txtSampPath.TextChanged += txtSampPath_TextChanged;
         }
 
         private void sampleList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -85,14 +91,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 foreach (DataGridViewRow dgvr in editedrows) {
                     int _index = dgvr.Index;
-                    _samplelist[_index].obj_name = (string)dgvr.Cells[0].Value;
-                    _samplelist[_index].volume = (decimal)dgvr.Cells[1].Value;
-                    _samplelist[_index].pitch = (decimal)dgvr.Cells[2].Value;
-                    _samplelist[_index].pan = (decimal)dgvr.Cells[3].Value;
-                    _samplelist[_index].offset = (decimal)dgvr.Cells[4].Value;
-                    _samplelist[_index].channel_group = dgvr.Cells[5].Value.ToString();
+                    SampleList[_index].obj_name = (string)dgvr.Cells[0].Value;
+                    SampleList[_index].volume = (decimal)dgvr.Cells[1].Value;
+                    SampleList[_index].pitch = (decimal)dgvr.Cells[2].Value;
+                    SampleList[_index].pan = (decimal)dgvr.Cells[3].Value;
+                    SampleList[_index].offset = (decimal)dgvr.Cells[4].Value;
+                    SampleList[_index].channel_group = dgvr.Cells[5].Value.ToString();
                 }
-                SaveSample(false);
+                SaveCheckAndWrite(false);
             }
             catch { }
             sampleList.CellValueChanged += sampleList_CellValueChanged;
@@ -113,32 +119,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void _samplelist_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //sort the list alphabetically
-            _samplelist = new ObservableCollection<SampleData>(_samplelist.OrderBy(x => x.obj_name).ToList());
-            _samplelist.CollectionChanged += _samplelist_CollectionChanged;
+            SampleList = new ObservableCollection<SampleData>(SampleList.OrderBy(x => x.obj_name).ToList());
+            SampleList.CollectionChanged += _samplelist_CollectionChanged;
             //clear dgv
             sampleList.RowCount = 0;
             //repopulate dgv from list
-            foreach (SampleData _samp in _samplelist) {
-                sampleList.Rows.Add(new object[] { _samp.obj_name, _samp.volume, _samp.pitch, _samp.pan, _samp.offset, _samp.channel_group });
+            foreach (SampleData _samp in SampleList) {
+                sampleList.Rows.Add(new object[] { null, _samp.obj_name });
             }
             //enable certain buttons if there are enough items for them
             btnSampleAdd.Enabled = true;
-            btnSampleDelete.Enabled = _samplelist.Count > 0;
-            btnSampEditorPlaySamp.Enabled = _samplelist.Count > 0;
+            btnSampleDelete.Enabled = SampleList.Count > 0;
+            btnSampEditorPlaySamp.Enabled = SampleList.Count > 0;
 
             //set lvl save flag to false
-            SaveSample(false);
-        }
-
-        private void txtSampPath_TextChanged(object sender, EventArgs e)
-        {
-            _samplelist[sampleList.CurrentRow.Index].path = txtSampPath.Text;
+            SaveCheckAndWrite(false);
         }
 
         private void SamplenewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if ((!EditorIsSaved && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                SamplesaveAsToolStripMenuItem_Click(null, null);
+                //SamplesaveAsToolStripMenuItem_Click(null, null);
             }
         }
 
@@ -160,57 +161,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         ///SAVE
-        private void SamplesaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Save()
         {
             //if _loadedgate is somehow not set, force Save As instead
             if (loadedsample == null) {
-                SamplesaveAsToolStripMenuItem_Click(1, null);
-                return;
+                SaveAs();
             }
             else
-                WriteSample();
+                SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        private void SamplesaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAs()
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
-            sfd.Filter = "Thumper Sample File (*.txt)|*.txt";
+            sfd.Filter = "Thumper Sample File (*.samp)|*.samp";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
-            if (sfd.ShowDialog() == DialogResult.OK) {
-                if (sender == null)
-                    loadedsample = null;
-                //separate path and filename
-                string storePath = Path.GetDirectoryName(sfd.FileName);
-                string tempFileName = Path.GetFileName(sfd.FileName);
-                if (!tempFileName.EndsWith(".txt"))
-                    tempFileName += ".txt";
-                //check if user input "gate_", and deny save if so
-                if (Path.GetFileName(sfd.FileName).Contains("samp_")) {
-                    MessageBox.Show("File not saved. Do not include 'samp_' in your file name.", "File not saved");
-                    return;
-                }
-                if (File.Exists($@"{storePath}\{tempFileName}.samp")) {
-                    MessageBox.Show("That file name exists already.", "File not saved");
-                    return;
-                }
-                loadedsample = new FileInfo($@"{storePath}\{tempFileName}.samp");
-                WriteSample();
-                //after saving new file, refresh the workingfolder
-                ///_mainform.btnWorkRefresh_Click(null, null);
+            if (sfd.ShowDialog() == DialogResult.OK) {                
+                loadedsample = new FileInfo(sfd.FileName);
+                SaveCheckAndWrite(true, true);
+                //after saving new file, refresh the project explorer
+                TCLE.dockProjectExplorer.CreateTreeView();
             }
-        }
-        private void WriteSample()
-        {
-            //write contents direct to file without prompting save dialog
-            JObject _save = SampleBuildSave();
-            if (!TCLE.lockedfiles.ContainsKey(loadedsample)) {
-                TCLE.lockedfiles.Add(loadedsample, new FileStream(LoadedSample.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-            }
-            TCLE.WriteFileLock(TCLE.lockedfiles[loadedsample], _save);
-            SaveSample(true, true);
-            this.Text = LoadedSample.Name;
         }
 
         ///Detect dragon-and-drop of files and then load them to Sample files
@@ -250,7 +223,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<SampleData> todelete = new();
             foreach (DataGridViewRow dgvr in sampleList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList()) {
-                todelete.Add(_samplelist[dgvr.Index]);
+                todelete.Add(SampleList[dgvr.Index]);
             }
             int _in = sampleList.CurrentRow.Index;
             bool customforcesave = false;
@@ -285,14 +258,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         File.Delete($@"{TCLE.AppLocation}\temp\{sd.obj_name}.wav");
                 }
                 catch (Exception ex) {
-                    MessageBox.Show($"Unable to delete {TCLE.AppLocation}\\temp\\\\{_samplelist[_in].obj_name}\n\n{ex}");
+                    MessageBox.Show($"Unable to delete {TCLE.AppLocation}\\temp\\\\{SampleList[_in].obj_name}\n\n{ex}");
                 }
-                _samplelist.Remove(sd);
+                SampleList.Remove(sd);
             }
 
             if (customforcesave)
                 //force save as this cannot be undone
-                SamplesaveToolStripMenuItem_Click(null, null);
+                SaveCheckAndWrite(true);
             TCLE.PlaySound("UIobjectremove");
         }
         private void btnSampleAdd_Click(object sender, EventArgs e)
@@ -306,8 +279,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 path = "samples/levels/custom/new.wav",
                 channel_group = "sequin.ch"
             };
-            _samplelist.Add(newsample);
-            int _index = _samplelist.IndexOf(newsample);
+            SampleList.Add(newsample);
+            int _index = SampleList.IndexOf(newsample);
             sampleList.Rows[_index].Cells[0].Selected = true;
             TCLE.PlaySound("UIobjectadd");
         }
@@ -333,7 +306,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private AudioFileReader audioFile;
         private void btnSampEditorPlaySamp_Click(object sender, EventArgs e)
         {
-            SampleData _samp = _samplelist[sampleList.CurrentRow.Index];
+            SampleData _samp = SampleList[sampleList.CurrentRow.Index];
             string _filetype = "";
             //check if sample exists in temp folder. If not, create it
             if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
@@ -384,7 +357,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            SaveSample(true);
+            SaveCheckAndWrite(true);
             LoadSample(samplejson, loadedsample);
             TCLE.PlaySound("UIrevertchanges");
         }
@@ -403,13 +376,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Font = new Font("Arial", 12, GraphicsUnit.Pixel)
             };
             sampleList.Columns[0].ValueType = typeof(string);
-            sampleList.Columns[1].ValueType = typeof(decimal);
-            sampleList.Columns[2].ValueType = typeof(decimal);
-            sampleList.Columns[3].ValueType = typeof(decimal);
-            sampleList.Columns[4].ValueType = typeof(decimal);
-            sampleList.Columns[5].ValueType = typeof(string);
 
-            _samplelist.CollectionChanged += _samplelist_CollectionChanged;
+            SampleList.CollectionChanged += _samplelist_CollectionChanged;
         }
 
         public void LoadSample(dynamic _load, FileInfo filepath)
@@ -426,12 +394,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Text = LoadedSample.Name;
 
             ///Clear form elements so new data can load
-            _samplelist.CollectionChanged -= _samplelist_CollectionChanged;
-            _samplelist.Clear();
+            SampleList.CollectionChanged -= _samplelist_CollectionChanged;
+            SampleList.Clear();
             ///load lvls associated with this master
             foreach (dynamic _samp in _load["items"]) {
-                _samplelist.Add(new SampleData() {
-                    obj_name = ((string)_samp["obj_name"]).Replace(".samp", ""),
+                SampleList.Add(new SampleData() {
+                    obj_name = (string)_samp["obj_name"],
                     path = _samp["path"],
                     volume = _samp["volume"],
                     pitch = _samp["pitch"],
@@ -440,31 +408,31 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     channel_group = _samp["channel_group"]
                 });
             }
-            _samplelist.CollectionChanged += _samplelist_CollectionChanged;
+            SampleList.CollectionChanged += _samplelist_CollectionChanged;
             _samplelist_CollectionChanged(null, null);
             FSBtoSamp.Enabled = true;
             ///set save flag (samples just loaded, has no changes)
             samplejson = _load;
-            SaveSample(true);
+            SaveCheckAndWrite(true);
         }
 
-        public void SaveSample(bool save, bool playsound = false)
+        public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
+            if (EditorLoading)
+                return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
-            EditorIsSaved = save;
-            if (!save) {
-                /*
-                btnSaveSample.Enabled = true;
-                btnRevertSample.Enabled = samplejson != null;
-                btnRevertSample.ToolTipText = samplejson != null ? "Revert changes to last save" : "You cannot revert with no file saved";
-                toolstripTitleSample.BackColor = Color.Maroon;
-                */
+            EditorIsSaved = IsSaved;
+            if (!IsSaved) {
+                //denote editor tab is not saved
+                this.Text = LoadedSample.Name + "*";
+                //add current JSON to the undo list
+                sampleproperties.undoItems.Add(BuildSave(sampleproperties));
             }
             else {
                 /*
-                btnSaveSample.Enabled = false;
+                btnSaveCheckAndWrite.Enabled = false;
                 btnRevertSample.Enabled = false;
                 toolstripTitleSample.BackColor = Color.FromArgb(40, 40, 40);
                 */
@@ -472,23 +440,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public JObject SampleBuildSave()
+        public static JObject BuildSave(SampleProperties _properties)
         {
             JObject _save = new();
             JArray _items = new();
-            foreach (DataGridViewRow dgvr in sampleList.Rows) {
-                int _index = dgvr.Index;
-                _samplelist[_index].obj_name = (string)dgvr.Cells[0].Value;
-                _samplelist[_index].volume = (decimal)dgvr.Cells[1].Value;
-                _samplelist[_index].pitch = (decimal)dgvr.Cells[2].Value;
-                _samplelist[_index].pan = (decimal)dgvr.Cells[3].Value;
-                _samplelist[_index].offset = (decimal)dgvr.Cells[4].Value;
-                _samplelist[_index].channel_group = dgvr.Cells[5].Value.ToString();
-            }
-            foreach (SampleData _sample in _samplelist) {
+            foreach (SampleData _sample in _properties.samplelist) {
                 JObject _samp = new() {
                     { "obj_type", "Sample"},
-                    { "obj_name", _sample.obj_name + ".samp" },
+                    { "obj_name", _sample.obj_name },
                     { "mode", "kSampleOneOff" },
                     { "path", _sample.path },
                     { "volume", _sample.volume },
@@ -501,7 +460,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             _save.Add("items", _items);
 
-            samplejson = _save;
             return _save;
         }
 
@@ -543,8 +501,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 path = $"samples/levels/custom/{_filename}.wav",
                 channel_group = "sequin.ch"
             };
-            _samplelist.Add(newsample);
-            int _index = _samplelist.IndexOf(newsample);
+            SampleList.Add(newsample);
+            int _index = SampleList.IndexOf(newsample);
             sampleList.Rows[_index].Cells[0].Selected = true;
         }
 
@@ -620,12 +578,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //reset things to default values
             samplejson = null;
-            _samplelist.Clear();
+            SampleList.Clear();
             this.Text = "Sample Editor";
             //set saved flag to true, because nothing is loaded
-            SaveSample(true);
+            SaveCheckAndWrite(true);
             FSBtoSamp.Enabled = true;
         }
         #endregion
+
+        private void sampleList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            //button is in column 0, so that's where to draw the image
+            if (e.ColumnIndex == 0) {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                //get dimensions
+                int w = Properties.Resources.icon_openedfolders.Width;
+                int h = Properties.Resources.icon_openedfolders.Height;
+                int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+                int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
+                //paint the image
+                e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+        }
     }
 }
