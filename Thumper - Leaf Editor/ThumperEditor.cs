@@ -558,10 +558,8 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
 
-            if (filesupdates) {
-                dockProjectExplorer.CreateTreeView();
-                TCLE.LvlReloadSamples();
-            }
+            if (filesupdates) 
+                dockProjectExplorer.CreateTreeView();            
         }
 
         private void contextmenuSampPacks_Opening(object sender, System.ComponentModel.CancelEventArgs e)
