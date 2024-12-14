@@ -82,7 +82,7 @@ namespace Thumper_Custom_Level_Editor
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
-        public static readonly Beeble MainBeeble = new() { Visible = false, Size = new Size(1, 1), Location = new Point(0, 0)};
+        public static readonly Beeble MainBeeble = new() { Visible = false, Size = new Size(1, 1), Location = new Point(0, 0) };
         #endregion
 
         #region Form Construction
@@ -109,6 +109,7 @@ namespace Thumper_Custom_Level_Editor
             contextmenuWindow.Renderer = new ContextMenuColors();
             contextmenuHelp.Renderer = new ContextMenuColors();
             contextmenuTabClick.Renderer = new ContextMenuColors();
+            contextmenuSampPacks.Renderer = new ContextMenuColors();
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
@@ -543,6 +544,7 @@ namespace Thumper_Custom_Level_Editor
             workspace1.Show(dockMain, DockState.Document);
 
             toolstripAddScene.Enabled = true;
+            toolstripProject.Enabled = true;
 
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
@@ -584,6 +586,42 @@ namespace Thumper_Custom_Level_Editor
         {
             Form_DrawScene draw = new Form_DrawScene();
             draw.Show(dockMain, DockState.Document);
+        }
+
+        private void contextmenuSampPacks_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            //this prevents the menu from closing when an option is chosen, allowing to select multiple before exiting the menu
+            if (e.CloseReason == ToolStripDropDownCloseReason.ItemClicked) {
+                e.Cancel = true;
+                return;
+            }
+
+            List<Tuple<FileInfo, bool, string>> samplePacks = new() {
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level1_320bpm.samp"), chkLevel1.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level2_340bpm.samp"), chkLevel2.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level3_360bpm.samp"), chkLevel3.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level4_380bpm.samp"), chkLevel4.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level5_400bpm.samp"), chkLevel5.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level6_420bpm.samp"), chkLevel6.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level7_440bpm.samp"), chkLevel7.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level8_460bpm.samp"), chkLevel8.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level9_480bpm.samp"), chkLevel9.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\dissonant.samp"), chkDissonance.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\globaldrones.samp"), chkGlobal.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\rests.samp"), chkRests.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\misc.samp"), chkMisc.Checked, Properties.Resources.samp_level1_320bpm)};
+
+            ///create samp_ files if any boxes are checked
+            foreach (Tuple<FileInfo, bool, string> pack in samplePacks) {
+                if (pack.Item2) {
+                    if (!Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Any())
+                        pack.Item1.CreateText().Write(pack.Item3);
+                }
+                else
+                    TCLE.DeleteFileLock(new FileInfo(Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).First()));
+            }
+
+            dockProjectExplorer.CreateTreeView();
         }
     }
 }
