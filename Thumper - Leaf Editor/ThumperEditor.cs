@@ -597,28 +597,33 @@ namespace Thumper_Custom_Level_Editor
             }
 
             List<Tuple<FileInfo, bool, string>> samplePacks = new() {
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level1_320bpm.samp"), chkLevel1.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level2_340bpm.samp"), chkLevel2.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level3_360bpm.samp"), chkLevel3.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level4_380bpm.samp"), chkLevel4.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level5_400bpm.samp"), chkLevel5.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level6_420bpm.samp"), chkLevel6.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level7_440bpm.samp"), chkLevel7.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level8_460bpm.samp"), chkLevel8.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level9_480bpm.samp"), chkLevel9.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\dissonant.samp"), chkDissonance.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\globaldrones.samp"), chkGlobal.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\rests.samp"), chkRests.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\misc.samp"), chkMisc.Checked, Properties.Resources.samp_level1_320bpm)};
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level1_320bpm.samp"), toolstripSampLevel1.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level2_340bpm.samp"), toolstripSampLevel2.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level3_360bpm.samp"), toolstripSampLevel3.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level4_380bpm.samp"), toolstripSampLevel4.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level5_400bpm.samp"), toolstripSampLevel5.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level6_420bpm.samp"), toolstripSampLevel6.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level7_440bpm.samp"), toolstripSampLevel7.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level8_460bpm.samp"), toolstripSampLevel8.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level9_480bpm.samp"), toolstripSampLevel9.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\dissonant.samp"), toolstripSampLevelDiss.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\globaldrones.samp"), toolstripSampLevelDrones.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\rests.samp"), toolstripSampLevelRests.Checked, Properties.Resources.samp_level1_320bpm),
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\misc.samp"), toolstripSampLevelMisc.Checked, Properties.Resources.samp_level1_320bpm)};
 
             ///create samp_ files if any boxes are checked
             foreach (Tuple<FileInfo, bool, string> pack in samplePacks) {
                 if (pack.Item2) {
-                    if (!Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Any())
-                        pack.Item1.CreateText().Write(pack.Item3);
+                    if (!Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Any()) {
+                        using (StreamWriter sw = pack.Item1.CreateText()) {
+                            sw.Write(pack.Item3);
+                        }
+                    }
                 }
-                else
-                    TCLE.DeleteFileLock(new FileInfo(Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).First()));
+                else {
+                    if (Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Any())
+                        TCLE.DeleteFileLock(new FileInfo(Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).First()));
+                }
             }
 
             dockProjectExplorer.CreateTreeView();
