@@ -24,6 +24,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sampleToolStrip.Renderer = new ToolStripOverride();
             InitializeSampleStuff();
             TCLE.InitializeTracks(sampleList, false);
+
+            if (load != null)
+                LoadSample(load, filepath);
+            propertyGridSample.SelectedObject = SampleProperties;
         }
         #endregion
 
@@ -392,6 +396,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             loadedsample = filepath;
             //set some visual elements
             this.Text = LoadedSample.Name;
+
+            sampleproperties = new(this, filepath);
 
             ///Clear form elements so new data can load
             SampleList.CollectionChanged -= _samplelist_CollectionChanged;

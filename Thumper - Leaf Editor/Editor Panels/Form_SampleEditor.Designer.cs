@@ -35,6 +35,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SampleEditor));
             this.toolTip1 = new ToolTip(this.components);
             this.sampleList = new DataGridView();
+            this.Columnplaybuttons = new DataGridViewButtonColumn();
+            this.SampleName = new DataGridViewTextBoxColumn();
             this.label54 = new Label();
             this.sampleToolStrip = new ToolStrip();
             this.btnSampleAdd = new ToolStripButton();
@@ -45,8 +47,6 @@
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
             this.splitContainer1 = new SplitContainer();
-            this.Columnplaybuttons = new DataGridViewButtonColumn();
-            this.SampleName = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)this.sampleList).BeginInit();
             this.sampleToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -115,6 +115,25 @@
             this.sampleList.EditingControlShowing += this.sampleList_EditingControlShowing;
             this.sampleList.DragDrop += this.sampleList_DragDrop;
             this.sampleList.DragEnter += this.sampleList_DragEnter;
+            // 
+            // Columnplaybuttons
+            // 
+            this.Columnplaybuttons.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.Columnplaybuttons.FlatStyle = FlatStyle.Flat;
+            this.Columnplaybuttons.HeaderText = "";
+            this.Columnplaybuttons.Name = "Columnplaybuttons";
+            this.Columnplaybuttons.ReadOnly = true;
+            this.Columnplaybuttons.Width = 5;
+            // 
+            // SampleName
+            // 
+            this.SampleName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            this.SampleName.DefaultCellStyle = dataGridViewCellStyle2;
+            this.SampleName.FillWeight = 8.913044F;
+            this.SampleName.HeaderText = "Sample Name";
+            this.SampleName.Name = "SampleName";
+            this.SampleName.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // label54
             // 
@@ -268,25 +287,6 @@
             this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
-            // 
-            // Columnplaybuttons
-            // 
-            this.Columnplaybuttons.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.Columnplaybuttons.FlatStyle = FlatStyle.Flat;
-            this.Columnplaybuttons.HeaderText = "";
-            this.Columnplaybuttons.Name = "Columnplaybuttons";
-            this.Columnplaybuttons.ReadOnly = true;
-            this.Columnplaybuttons.Width = 5;
-            // 
-            // SampleName
-            // 
-            this.SampleName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            this.SampleName.DefaultCellStyle = dataGridViewCellStyle2;
-            this.SampleName.FillWeight = 8.913044F;
-            this.SampleName.HeaderText = "Sample Name";
-            this.SampleName.Name = "SampleName";
-            this.SampleName.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // Form_SampleEditor
             // 
