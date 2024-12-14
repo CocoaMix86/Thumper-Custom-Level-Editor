@@ -70,6 +70,7 @@
             this.btnLvlPathClear = new ToolStripButton();
             this.chkTunnelCopy = new ToolStripButton();
             this.btnLvlRandomTunnel = new ToolStripButton();
+            this.btnLvlPathView = new ToolStripButton();
             this.lvlLoopTracks = new DataGridView();
             this.LoopSample = new DataGridViewComboBoxColumn();
             this.BeatsPerLoop = new DataGridViewTextBoxColumn();
@@ -77,6 +78,7 @@
             this.lvlLoopToolStrip = new ToolStrip();
             this.btnLvlLoopAdd = new ToolStripButton();
             this.btnLvlLoopDelete = new ToolStripButton();
+            this.pictureTunnelViewer = new Label();
             this.lvlToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -483,9 +485,10 @@
             this.lvlLeafPaths.Size = new Size(250, 159);
             this.lvlLeafPaths.TabIndex = 160;
             this.lvlLeafPaths.CellMouseEnter += this.lvlLeafPaths_CellMouseEnter;
+            this.lvlLeafPaths.CellMouseLeave += this.lvlLeafPaths_CellMouseLeave;
             this.lvlLeafPaths.CellValueChanged += this.lvlLeafPaths_CellValueChanged;
             this.lvlLeafPaths.DataError += this.lvlLoopTracks_DataError;
-            this.lvlLeafPaths.EditingControlShowing += this.lvlLeafPaths_EditingControlShowing;
+            this.lvlLeafPaths.MouseLeave += this.lvlLeafPaths_MouseLeave;
             // 
             // lvlPathsToolStrip
             // 
@@ -495,7 +498,7 @@
             this.lvlPathsToolStrip.GripMargin = new Padding(0);
             this.lvlPathsToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.lvlPathsToolStrip.ImageScalingSize = new Size(20, 20);
-            this.lvlPathsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlPathAdd, this.btnLvlPathDelete, this.btnLvlPathUp, this.btnLvlPathDown, this.btnLvlCopyTunnel, this.btnLvlPasteTunnel, this.btnLvlPathClear, this.chkTunnelCopy, this.btnLvlRandomTunnel });
+            this.lvlPathsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlPathAdd, this.btnLvlPathDelete, this.btnLvlPathUp, this.btnLvlPathDown, this.btnLvlCopyTunnel, this.btnLvlPasteTunnel, this.btnLvlPathClear, this.chkTunnelCopy, this.btnLvlRandomTunnel, this.btnLvlPathView });
             this.lvlPathsToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.lvlPathsToolStrip.Location = new Point(0, 172);
             this.lvlPathsToolStrip.Name = "lvlPathsToolStrip";
@@ -611,6 +614,19 @@
             this.btnLvlRandomTunnel.Size = new Size(24, 26);
             this.btnLvlRandomTunnel.ToolTipText = "Click to add a random tunnel";
             this.btnLvlRandomTunnel.Click += this.btnLvlRandomTunnel_Click;
+            // 
+            // btnLvlPathView
+            // 
+            this.btnLvlPathView.Checked = true;
+            this.btnLvlPathView.CheckOnClick = true;
+            this.btnLvlPathView.CheckState = CheckState.Checked;
+            this.btnLvlPathView.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLvlPathView.Image = Properties.Resources.icon_view;
+            this.btnLvlPathView.ImageTransparentColor = Color.Magenta;
+            this.btnLvlPathView.Name = "btnLvlPathView";
+            this.btnLvlPathView.Size = new Size(24, 24);
+            this.btnLvlPathView.Text = "toolStripButton1";
+            this.btnLvlPathView.ToolTipText = "Show/Hide tunnel preview";
             // 
             // lvlLoopTracks
             // 
@@ -739,12 +755,29 @@
             this.btnLvlLoopDelete.Size = new Size(24, 29);
             this.btnLvlLoopDelete.ToolTipText = "Delete selected loop track";
             // 
+            // pictureTunnelViewer
+            // 
+            this.pictureTunnelViewer.BackColor = Color.Maroon;
+            this.pictureTunnelViewer.BorderStyle = BorderStyle.Fixed3D;
+            this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.pictureTunnelViewer.ForeColor = Color.White;
+            this.pictureTunnelViewer.Location = new Point(203, 103);
+            this.pictureTunnelViewer.Margin = new Padding(4, 0, 4, 0);
+            this.pictureTunnelViewer.MaximumSize = new Size(300, 300);
+            this.pictureTunnelViewer.MinimumSize = new Size(300, 300);
+            this.pictureTunnelViewer.Name = "pictureTunnelViewer";
+            this.pictureTunnelViewer.Size = new Size(300, 300);
+            this.pictureTunnelViewer.TabIndex = 151;
+            this.pictureTunnelViewer.Visible = false;
+            this.pictureTunnelViewer.MouseEnter += this.pictureTunnelViewer_MouseEnter;
+            // 
             // Form_LvlEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(55, 55, 55);
             this.ClientSize = new Size(707, 506);
+            this.Controls.Add(this.pictureTunnelViewer);
             this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
             this.ForeColor = Color.FromArgb(150, 150, 255);
@@ -819,5 +852,7 @@
         private DataGridViewTextBoxColumn BeatsPerLoop;
         private SplitContainer splitContainer3;
         public Button btnLvlSequencer;
+        public Label pictureTunnelViewer;
+        private ToolStripButton btnLvlPathView;
     }
 }

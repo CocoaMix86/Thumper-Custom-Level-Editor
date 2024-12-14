@@ -150,7 +150,6 @@
             this.toolstripOpenPanels = new ToolStripMenuItem();
             this.toolstripAddScene = new ToolStripButton();
             this.panelFill = new Panel();
-            this.pictureTunnelViewer = new Label();
             this.contextmenuTabClick = new ContextMenuStrip(this.components);
             this.toolstripTabSave = new ToolStripMenuItem();
             this.toolstripTabClose = new ToolStripMenuItem();
@@ -1343,26 +1342,12 @@
             // 
             this.panelFill.AutoScroll = true;
             this.panelFill.BackColor = Color.FromArgb(45, 45, 48);
-            this.panelFill.Controls.Add(this.pictureTunnelViewer);
             this.panelFill.Controls.Add(this.dockMain);
             this.panelFill.Dock = DockStyle.Fill;
             this.panelFill.Location = new Point(0, 56);
             this.panelFill.Name = "panelFill";
             this.panelFill.Size = new Size(984, 444);
             this.panelFill.TabIndex = 153;
-            // 
-            // pictureTunnelViewer
-            // 
-            this.pictureTunnelViewer.AutoSize = true;
-            this.pictureTunnelViewer.BackColor = Color.FromArgb(10, 10, 10);
-            this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.pictureTunnelViewer.ForeColor = Color.White;
-            this.pictureTunnelViewer.Location = new Point(663, 3);
-            this.pictureTunnelViewer.Margin = new Padding(4, 0, 4, 0);
-            this.pictureTunnelViewer.MinimumSize = new Size(300, 300);
-            this.pictureTunnelViewer.Name = "pictureTunnelViewer";
-            this.pictureTunnelViewer.Size = new Size(300, 300);
-            this.pictureTunnelViewer.TabIndex = 148;
             // 
             // contextmenuTabClick
             // 
@@ -1507,7 +1492,6 @@
             this.toolStripTitle.ResumeLayout(false);
             this.toolStripTitle.PerformLayout();
             this.panelFill.ResumeLayout(false);
-            this.panelFill.PerformLayout();
             this.contextmenuTabClick.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1639,7 +1623,6 @@
         private ToolStripMenuItem toolstripTabFloat;
         private ToolStripMenuItem toolstripTabFloatAll;
         private ToolStripButton toolstripAddScene;
-        public Label pictureTunnelViewer;
     }
 }
 

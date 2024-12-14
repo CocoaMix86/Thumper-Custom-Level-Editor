@@ -38,7 +38,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
-        public static FileInfo LoadedLvl;
+        public FileInfo LoadedLvl;
         public LvlProperties lvlProperties
         {
             get { return LvlProperties; }
@@ -47,7 +47,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LvlProperties = value;
             }
         }
-        private static LvlProperties LvlProperties;
+        private LvlProperties LvlProperties;
         private static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
         public ObservableCollection<LvlLeafData> LvlLeafs { get => LvlProperties.lvlleafs; set => LvlProperties.lvlleafs = value; }
         private static decimal BPM => TCLE.dockProjectProperties.BPM;
@@ -183,10 +183,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false);
         }
 
-        private void PathsComboBox_ListItemSelectionChanged(object sender, ListItemSelectionChangedEventArgs e)
-        {
-            TCLE.Instance.pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{e.ItemText.Replace(".path", "")}");
-        }
         /// DGV LVLLOOPTRACKS
         //Cell value changed
         private void lvlLoopTracks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -748,7 +744,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
                     r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
-                } catch (ArgumentOutOfRangeException) { }
+                }
+                catch (ArgumentOutOfRangeException) { }
             }
         }
 
@@ -850,22 +847,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #endregion
 
-        private void lvlLeafPaths_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            /*
-            Control combo = (Control)e.Control;
-            ComboBoxEx c2 = (ComboBoxEx)combo;
-            if (c2 != null) {
-                c2.ListItemSelectionChanged -= PathsComboBox_ListItemSelectionChanged;
-                c2.ListItemSelectionChanged += PathsComboBox_ListItemSelectionChanged;
-            }*/
-        }
-
         private void lvlLeafPaths_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
-            TCLE.Instance.pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
+            if (!btnLvlPathView.Checked)
+                return;
+            pictureTunnelViewer.Visible = true;
+            pictureTunnelViewer.Location = new Point(this.PointToClient(System.Windows.Forms.Cursor.Position).X + 50, this.Height - 300);
+            pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
         }
+
+        private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => pictureTunnelViewer.Visible = false;
+        private void lvlLeafPaths_MouseLeave(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
+        private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
     }
 }

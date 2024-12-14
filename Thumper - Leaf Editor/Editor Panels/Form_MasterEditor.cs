@@ -47,7 +47,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
-        private static FileInfo LoadedMaster;
+        private FileInfo LoadedMaster;
         private List<MasterLvlData> clipboardmaster = new();
         public ObservableCollection<MasterLvlData> MasterLvls { get { return masterproperties.masterlvls; } set { masterproperties.masterlvls = value; } }
         public MasterProperties masterproperties
@@ -58,7 +58,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MasterProperties = value;
             }
         }
-        public static MasterProperties MasterProperties;
+        public MasterProperties MasterProperties;
         public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 

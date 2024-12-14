@@ -40,7 +40,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
-        private static FileInfo LoadedGate;
+        private FileInfo LoadedGate;
         private static readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
         public static readonly List<BossData> bossdata = new() {
             new BossData() {boss_name = "Level 1 - circle", boss_spn = "boss_gate.spn", boss_ent = "boss_gate_pellet.ent"},
@@ -87,7 +87,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GateProperties = value;
             }
         }
-        private static GateProperties GateProperties;
+        private GateProperties GateProperties;
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
         public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
