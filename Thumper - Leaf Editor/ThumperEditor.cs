@@ -522,7 +522,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
 
-            List<Tuple<FileInfo, bool, string>> samplePacks = new() {
+            Tuple<FileInfo, bool, string>[] samplePacks = {
                 new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level1_320bpm.samp"), toolstripSampLevel1.Checked, Properties.Resources.samp_level1_320bpm),
                 new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level2_340bpm.samp"), toolstripSampLevel2.Checked, Properties.Resources.samp_level1_320bpm),
                 new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level3_360bpm.samp"), toolstripSampLevel3.Checked, Properties.Resources.samp_level1_320bpm),
