@@ -338,6 +338,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SampleIsPlaying = true;
                 sampleList.InvalidateCell(cell);
                 playingcells.Push(cell);
+                outputDevice.Volume = (float)trackVolume.Value / 100;
                 outputDevice.Play();
             }
             else {

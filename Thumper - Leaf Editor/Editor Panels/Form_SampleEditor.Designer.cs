@@ -1,4 +1,6 @@
-﻿namespace Thumper_Custom_Level_Editor.Editor_Panels
+﻿using NAudio.Gui;
+
+namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     partial class Form_SampleEditor
     {
@@ -34,6 +36,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SampleEditor));
             this.toolTip1 = new ToolTip(this.components);
+            this.trackVolume = new TrackBar();
             this.sampleList = new DataGridView();
             this.Columnplaybuttons = new DataGridViewButtonColumn();
             this.SampleName = new DataGridViewTextBoxColumn();
@@ -46,6 +49,7 @@
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
             this.splitContainer1 = new SplitContainer();
+            ((System.ComponentModel.ISupportInitialize)this.trackVolume).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.sampleList).BeginInit();
             this.sampleToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -53,6 +57,23 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // trackVolume
+            // 
+            this.trackVolume.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            this.trackVolume.AutoSize = false;
+            this.trackVolume.BackColor = Color.Black;
+            this.trackVolume.Cursor = Cursors.Hand;
+            this.trackVolume.LargeChange = 20;
+            this.trackVolume.Location = new Point(78, 492);
+            this.trackVolume.Margin = new Padding(0);
+            this.trackVolume.Maximum = 100;
+            this.trackVolume.Name = "trackVolume";
+            this.trackVolume.Size = new Size(117, 22);
+            this.trackVolume.TabIndex = 151;
+            this.trackVolume.TickStyle = TickStyle.None;
+            this.toolTip1.SetToolTip(this.trackVolume, "Playback volume (doesn't represent in-game volume)");
+            this.trackVolume.Value = 100;
             // 
             // sampleList
             // 
@@ -261,6 +282,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.trackVolume);
             this.splitContainer1.Panel1.Controls.Add(this.sampleList);
             this.splitContainer1.Panel1.Controls.Add(this.sampleToolStrip);
             this.splitContainer1.Panel1.Controls.Add(this.label54);
@@ -288,6 +310,7 @@
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_SampleEditor";
             this.Text = "Sample Editor";
+            ((System.ComponentModel.ISupportInitialize)this.trackVolume).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.sampleList).EndInit();
             this.sampleToolStrip.ResumeLayout(false);
             this.sampleToolStrip.PerformLayout();
@@ -313,5 +336,6 @@
         private SplitContainer splitContainer1;
         private DataGridViewButtonColumn Columnplaybuttons;
         private DataGridViewTextBoxColumn SampleName;
+        private TrackBar trackVolume;
     }
 }
