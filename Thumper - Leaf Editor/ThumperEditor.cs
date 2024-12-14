@@ -5,6 +5,8 @@ using System.Windows.Shell;
 using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Windows.Forms.VisualStyles;
+using System.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -614,14 +616,14 @@ namespace Thumper_Custom_Level_Editor
             ///create samp_ files if any boxes are checked
             foreach (Tuple<FileInfo, bool, string> pack in samplePacks) {
                 if (pack.Item2) {
-                    if (!Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Any()) {
+                    if (Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Length == 0) {
                         using (StreamWriter sw = pack.Item1.CreateText()) {
                             sw.Write(pack.Item3);
                         }
                     }
                 }
                 else {
-                    if (Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Any())
+                    if (Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Length != 0)
                         TCLE.DeleteFileLock(new FileInfo(Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).First()));
                 }
             }
@@ -632,19 +634,20 @@ namespace Thumper_Custom_Level_Editor
 
         private void contextmenuSampPacks_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            toolstripSampLevel1.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level1_320bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevel2.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level2_340bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevel3.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level3_360bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevel4.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level4_380bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevel5.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level5_400bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevel6.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level6_420bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevel7.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level7_440bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevel8.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level8_460bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevel9.Checked = Directory.GetFiles(WorkingFolder.FullName, $"level9_480bpm.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevelDiss.Checked = Directory.GetFiles(WorkingFolder.FullName, $"dissonant.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevelDrones.Checked = Directory.GetFiles(WorkingFolder.FullName, $"globaldrones.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevelRests.Checked = Directory.GetFiles(WorkingFolder.FullName, $"rests.samp", SearchOption.AllDirectories).Any();
-            toolstripSampLevelMisc.Checked = Directory.GetFiles(WorkingFolder.FullName, $"misc.samp", SearchOption.AllDirectories).Any();
+            string[] files = Directory.GetFiles(WorkingFolder.FullName, "*", SearchOption.AllDirectories).Select(x => Path.GetFileName(x)).ToArray();
+            toolstripSampLevel1.Checked = files.Contains($"level1_320bpm.samp");
+            toolstripSampLevel2.Checked = files.Contains($"level2_340bpm.samp");
+            toolstripSampLevel3.Checked = files.Contains($"level3_360bpm.samp");
+            toolstripSampLevel4.Checked = files.Contains($"level4_380bpm.samp");
+            toolstripSampLevel5.Checked = files.Contains($"level5_400bpm.samp");
+            toolstripSampLevel6.Checked = files.Contains($"level6_420bpm.samp");
+            toolstripSampLevel7.Checked = files.Contains($"level7_440bpm.samp");
+            toolstripSampLevel8.Checked = files.Contains($"level8_460bpm.samp");
+            toolstripSampLevel9.Checked = files.Contains($"level9_480bpm.samp");
+            toolstripSampLevelDiss.Checked = files.Contains($"dissonant.samp");
+            toolstripSampLevelDrones.Checked = files.Contains($"globaldrones.samp");
+            toolstripSampLevelRests.Checked = files.Contains($"rests.samp");
+            toolstripSampLevelMisc.Checked = files.Contains($"misc.samp");
         }
     }
 }
