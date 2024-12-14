@@ -535,13 +535,15 @@ namespace Thumper_Custom_Level_Editor
                 new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\dissonant.samp"), toolstripSampLevelDiss.Checked, Properties.Resources.samp_level1_320bpm),
                 new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\globaldrones.samp"), toolstripSampLevelDrones.Checked, Properties.Resources.samp_level1_320bpm),
                 new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\rests.samp"), toolstripSampLevelRests.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\misc.samp"), toolstripSampLevelMisc.Checked, Properties.Resources.samp_level1_320bpm)};
+                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\misc.samp"), toolstripSampLevelMisc.Checked, Properties.Resources.samp_level1_320bpm)
+            };
 
             bool filesupdates = false;
+            FileInfo[] files = WorkingFolder.GetFiles("*", SearchOption.AllDirectories);
             ///create samp_ files if any boxes are checked
             foreach (Tuple<FileInfo, bool, string> pack in samplePacks) {
                 if (pack.Item2) {
-                    if (Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Length == 0) {
+                    if (!files.Any(x => x.Name == pack.Item1.Name)) {
                         using (StreamWriter sw = pack.Item1.CreateText()) {
                             sw.Write(pack.Item3);
                         }
@@ -549,8 +551,8 @@ namespace Thumper_Custom_Level_Editor
                     }
                 }
                 else {
-                    if (Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).Length != 0) {
-                        TCLE.DeleteFileLock(new FileInfo(Directory.GetFiles(WorkingFolder.FullName, pack.Item1.Name, SearchOption.AllDirectories).First()));
+                    if (files.Any(x => x.Name == pack.Item1.Name)) {
+                        TCLE.DeleteFileLock(files.First(x => x.Name == pack.Item1.Name));
                         filesupdates = true;
                     }
                 }
