@@ -96,7 +96,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
-            if (isplaying && playingcells.Contains(sampleList[e.ColumnIndex, e.RowIndex]))
+            if (isplaying && playingcell == sampleList[e.ColumnIndex, e.RowIndex])
                 e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
             else
                 e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
@@ -288,19 +288,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //How to create an FSB
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
-        private WaveOutEvent outputDevice;
+        private WaveOutEvent outputDevice = new();
+        private VorbisWaveReader vorbis;
         private AudioFileReader audioFile;
-        private bool SampleIsPlaying = false;
-        private Stack<DataGridViewCell> playingcells = new();
+        private bool SampleIsPlaying;
+        private DataGridViewCell playingcell;
         private void OnPlaybackStopped(object sender, StoppedEventArgs args)
         {
             outputDevice.Dispose();
             outputDevice = null;
             audioFile?.Dispose();
             audioFile = null;
+            vorbis?.Dispose();
+            vorbis = null;
 
             SampleIsPlaying = false;
-            sampleList.InvalidateCell(playingcells.Pop());
+            sampleList.InvalidateCell(playingcell);
         }
         private void AudioPlayback(DataGridViewCell cell)
         {
@@ -319,31 +322,34 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (File.Exists($@"temp\{_samp.obj_name}.wav"))
                     _filetype = "wav";
 
+                outputDevice = new WaveOutEvent();
+                outputDevice.PlaybackStopped += OnPlaybackStopped;
+                outputDevice.Volume = volumeSlider1.Volume;
 
-                if (outputDevice == null) {
-                    outputDevice = new WaveOutEvent();
-                    outputDevice.PlaybackStopped += OnPlaybackStopped;
+                if (_filetype == "ogg") {
+                    vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
+                    vorbis.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
+                    outputDevice.Init(vorbis);
                 }
-                if (audioFile == null) {
-                    if (_filetype == "ogg") {
-                        VorbisWaveReader vorbis = new($@"temp\{_samp.obj_name}.{_filetype}");
-                        outputDevice.Init(vorbis);
-                    }
-                    else {
-                        audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
-                        outputDevice.Init(audioFile);
-                    }
+                else {
+                    audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
+                    audioFile.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
+                    outputDevice.Init(audioFile);
                 }
 
                 SampleIsPlaying = true;
                 sampleList.InvalidateCell(cell);
-                playingcells.Push(cell);
-                outputDevice.Volume = (float)trackVolume.Value / 100;
+                playingcell = cell;
                 outputDevice.Play();
             }
             else {
                 outputDevice?.Stop();
             }
+        }
+
+        private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
+        {
+            outputDevice.Volume = volumeSlider1.Volume;
         }
 
         private void btnRevertSample_Click(object sender, EventArgs e)
@@ -577,5 +583,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             FSBtoSamp.Enabled = true;
         }
         #endregion
+
+        private void propertyGridSample_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

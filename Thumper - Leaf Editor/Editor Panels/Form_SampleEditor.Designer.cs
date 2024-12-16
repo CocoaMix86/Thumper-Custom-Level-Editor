@@ -36,7 +36,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SampleEditor));
             this.toolTip1 = new ToolTip(this.components);
-            this.trackVolume = new TrackBar();
+            this.volumeSlider1 = new VolumeSlider();
             this.sampleList = new DataGridView();
             this.Columnplaybuttons = new DataGridViewButtonColumn();
             this.SampleName = new DataGridViewTextBoxColumn();
@@ -49,7 +49,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
             this.splitContainer1 = new SplitContainer();
-            ((System.ComponentModel.ISupportInitialize)this.trackVolume).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.sampleList).BeginInit();
             this.sampleToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -58,22 +57,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // trackVolume
+            // volumeSlider1
             // 
-            this.trackVolume.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            this.trackVolume.AutoSize = false;
-            this.trackVolume.BackColor = Color.Black;
-            this.trackVolume.Cursor = Cursors.Hand;
-            this.trackVolume.LargeChange = 20;
-            this.trackVolume.Location = new Point(78, 492);
-            this.trackVolume.Margin = new Padding(0);
-            this.trackVolume.Maximum = 100;
-            this.trackVolume.Name = "trackVolume";
-            this.trackVolume.Size = new Size(117, 22);
-            this.trackVolume.TabIndex = 151;
-            this.trackVolume.TickStyle = TickStyle.None;
-            this.toolTip1.SetToolTip(this.trackVolume, "Playback volume (doesn't represent in-game volume)");
-            this.trackVolume.Value = 100;
+            this.volumeSlider1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            this.volumeSlider1.Cursor = Cursors.Hand;
+            this.volumeSlider1.Location = new Point(77, 494);
+            this.volumeSlider1.Name = "volumeSlider1";
+            this.volumeSlider1.Size = new Size(128, 20);
+            this.volumeSlider1.TabIndex = 152;
+            this.toolTip1.SetToolTip(this.volumeSlider1, "Alters volume of smaple playback. Does not go above 0dB.");
+            this.volumeSlider1.VolumeChanged += this.volumeSlider1_VolumeChanged;
             // 
             // sampleList
             // 
@@ -256,6 +249,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridSample.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridSample.ViewForeColor = Color.White;
+            this.propertyGridSample.Click += this.propertyGridSample_Click;
             // 
             // lblMasterlvllistHelp
             // 
@@ -282,7 +276,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.trackVolume);
+            this.splitContainer1.Panel1.Controls.Add(this.volumeSlider1);
             this.splitContainer1.Panel1.Controls.Add(this.sampleList);
             this.splitContainer1.Panel1.Controls.Add(this.sampleToolStrip);
             this.splitContainer1.Panel1.Controls.Add(this.label54);
@@ -310,7 +304,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_SampleEditor";
             this.Text = "Sample Editor";
-            ((System.ComponentModel.ISupportInitialize)this.trackVolume).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.sampleList).EndInit();
             this.sampleToolStrip.ResumeLayout(false);
             this.sampleToolStrip.PerformLayout();
@@ -336,6 +329,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private SplitContainer splitContainer1;
         private DataGridViewButtonColumn Columnplaybuttons;
         private DataGridViewTextBoxColumn SampleName;
-        private TrackBar trackVolume;
+        private VolumeSlider volumeSlider1;
     }
 }

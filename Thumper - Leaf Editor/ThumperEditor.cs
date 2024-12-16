@@ -7,6 +7,9 @@ using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Windows.Forms.VisualStyles;
 using System.Linq;
+using Fmod5Sharp.FmodTypes;
+using Fmod5Sharp;
+using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -558,8 +561,8 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
 
-            if (filesupdates) 
-                dockProjectExplorer.CreateTreeView();            
+            if (filesupdates)
+                dockProjectExplorer.CreateTreeView();
         }
 
         private void contextmenuSampPacks_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -654,6 +657,39 @@ namespace Thumper_Custom_Level_Editor
         {
             Form_DrawScene draw = new Form_DrawScene();
             draw.Show(dockMain, DockState.Document);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            foreach (FileInfo file in new DirectoryInfo($@"{Properties.Settings.Default.game_dir}\cache").GetFiles()) {
+                byte[] _bytes;
+                //read the .pc file as bytes, and skip the first 4 header bytes
+                _bytes = File.ReadAllBytes(file.FullName);
+                _bytes = _bytes.Skip(4).ToArray();
+
+                // credit to https://github.com/SamboyCoding/Fmod5Sharp
+                try {
+                    FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
+                    List<FmodSample> samples = bank.Samples;
+                    samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
+
+                    string audioname = "";
+                    for (int x = 0; x < _bytes.Length; x++) {
+                        if (_bytes[x] == 0x4 && _bytes[x + 1] == 0x0 && _bytes[x + 2] == 0x0 && _bytes[x + 3] == 0x0) {
+                            for (int _in = x + 4; _in < 500; _in++) {
+                                if (_bytes[_in] != 0x0)
+                                    audioname += (char)_bytes[_in];
+                                else
+                                    break;
+                            }
+                            break;
+                        }
+                    }
+                    File.WriteAllBytes($@"temp\{audioname} ({file.Name}).{fileExtension}", dataBytes);
+                } catch (Exception ex) {
+                    continue;
+                }
+            }
         }
     }
 }

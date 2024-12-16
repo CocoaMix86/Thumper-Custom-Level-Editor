@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor
         public decimal volume { get; set; }
         public decimal pitch { get; set; }
         public decimal pan { get; set; }
-        public decimal offset { get; set; }
+        public int offset { get; set; }
         public string channel_group { get; set; }
 
         public override string ToString()
@@ -54,7 +54,16 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sample Settings")]
         [DisplayName("Sample Name")]
         [Description("")]
-        public string name => sample.obj_name;
+        public string name
+        {
+            get => sample.obj_name;
+            set {
+                if (!value.EndsWith(".samp"))
+                    value += ".samp";
+                sample.obj_name = value;
+                parent._samplelist_CollectionChanged(null, null);
+            }
+        }
 
         [CategoryAttribute("Sample Settings")]
         [DisplayName("Volume")]
@@ -74,7 +83,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sample Settings")]
         [DisplayName("Offset")]
         [Description("0 is default. Offsets the playback start position, measured in milliseconds. Can't be negative.")]
-        public decimal offset
+        public int offset
         {
             get => sample.offset;
             set {
