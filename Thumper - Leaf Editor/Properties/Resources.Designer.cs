@@ -22,7 +22,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Thumper_Custom_Level_Editor.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -74,7 +74,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///turn_long_lft
         ///jumper_approach.
         /// </summary>
-        public static string audionames {
+        internal static string audionames {
             get {
                 return ResourceManager.GetString("audionames", resourceCulture);
             }
@@ -83,7 +83,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeble {
+        internal static System.Drawing.Bitmap beeble {
             get {
                 object obj = ResourceManager.GetObject("beeble", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beebleconfuse {
+        internal static System.Drawing.Bitmap beebleconfuse {
             get {
                 object obj = ResourceManager.GetObject("beebleconfuse", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblecool {
+        internal static System.Drawing.Bitmap beeblecool {
             get {
                 object obj = ResourceManager.GetObject("beeblecool", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beebledance {
+        internal static System.Drawing.Bitmap beebledance {
             get {
                 object obj = ResourceManager.GetObject("beebledance", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblederp {
+        internal static System.Drawing.Bitmap beeblederp {
             get {
                 object obj = ResourceManager.GetObject("beeblederp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beebleflesh {
+        internal static System.Drawing.Bitmap beebleflesh {
             get {
                 object obj = ResourceManager.GetObject("beebleflesh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblegold {
+        internal static System.Drawing.Bitmap beeblegold {
             get {
                 object obj = ResourceManager.GetObject("beeblegold", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblehappy {
+        internal static System.Drawing.Bitmap beeblehappy {
             get {
                 object obj = ResourceManager.GetObject("beeblehappy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblelaugh {
+        internal static System.Drawing.Bitmap beeblelaugh {
             get {
                 object obj = ResourceManager.GetObject("beeblelaugh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +173,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblelove {
+        internal static System.Drawing.Bitmap beeblelove {
             get {
                 object obj = ResourceManager.GetObject("beeblelove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +183,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblespin {
+        internal static System.Drawing.Bitmap beeblespin {
             get {
                 object obj = ResourceManager.GetObject("beeblespin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +193,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblestare {
+        internal static System.Drawing.Bitmap beeblestare {
             get {
                 object obj = ResourceManager.GetObject("beeblestare", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +203,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beeblethink {
+        internal static System.Drawing.Bitmap beeblethink {
             get {
                 object obj = ResourceManager.GetObject("beeblethink", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +213,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beebletiny {
+        internal static System.Drawing.Bitmap beebletiny {
             get {
                 object obj = ResourceManager.GetObject("beebletiny", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -223,43 +223,10 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap beebleuwu {
+        internal static System.Drawing.Bitmap beebleuwu {
             get {
                 object obj = ResourceManager.GetObject("beebleuwu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ==========2.2.1==========
-        ///BUG FIXES
-        ///✅ pasting in leaf editor doesn&apos;t save
-        ///✅ crash when pasting decimal in ktraitColor
-        ///
-        ///
-        ///==========2.2==========
-        ///I have setup a Ko-Fi for myself. Any amount of support is greatly appreciated!
-        ///https://ko-fi.com/cocoamix
-        ///
-        ///NEW
-        ///🌟 Undo on Leaf (Ctrl+Z)
-        ///🌟 Several buttons have new sound effects.
-        ///🌟 Right-click on application in taskbar to access and open Recent Levels.
-        ///🌟 Search button in the Working Folder tells you where a file is referenced.
-        ///🌟 Ctrl+X to cut cells [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string changelog {
-            get {
-                return ResourceManager.GetString("changelog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream coin_collect {
-            get {
-                return ResourceManager.GetStream("coin_collect", resourceCulture);
             }
         }
         
@@ -287,7 +254,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///samplesave;S, Alt, Shift
         ///samplesaveas; [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string defaultkeybinds {
+        internal static string defaultkeybinds {
             get {
                 return ResourceManager.GetString("defaultkeybinds", resourceCulture);
             }
@@ -296,7 +263,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap difficulty_D0 {
+        internal static System.Drawing.Bitmap difficulty_D0 {
             get {
                 object obj = ResourceManager.GetObject("difficulty_D0", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -306,7 +273,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap difficulty_D1 {
+        internal static System.Drawing.Bitmap difficulty_D1 {
             get {
                 object obj = ResourceManager.GetObject("difficulty_D1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -316,7 +283,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap difficulty_D2 {
+        internal static System.Drawing.Bitmap difficulty_D2 {
             get {
                 object obj = ResourceManager.GetObject("difficulty_D2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -326,7 +293,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap difficulty_D3 {
+        internal static System.Drawing.Bitmap difficulty_D3 {
             get {
                 object obj = ResourceManager.GetObject("difficulty_D3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -336,7 +303,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap difficulty_D4 {
+        internal static System.Drawing.Bitmap difficulty_D4 {
             get {
                 object obj = ResourceManager.GetObject("difficulty_D4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -346,7 +313,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap difficulty_D5 {
+        internal static System.Drawing.Bitmap difficulty_D5 {
             get {
                 object obj = ResourceManager.GetObject("difficulty_D5", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -356,7 +323,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap difficulty_D6 {
+        internal static System.Drawing.Bitmap difficulty_D6 {
             get {
                 object obj = ResourceManager.GetObject("difficulty_D6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -366,7 +333,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap difficulty_D7 {
+        internal static System.Drawing.Bitmap difficulty_D7 {
             get {
                 object obj = ResourceManager.GetObject("difficulty_D7", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -374,18 +341,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream ducker_ring_approach {
-            get {
-                return ResourceManager.GetStream("ducker_ring_approach", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap editor_gate {
+        internal static System.Drawing.Bitmap editor_gate {
             get {
                 object obj = ResourceManager.GetObject("editor_gate", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -395,7 +353,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap editor_leaf {
+        internal static System.Drawing.Bitmap editor_gate64 {
+            get {
+                object obj = ResourceManager.GetObject("editor_gate64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editor_leaf {
             get {
                 object obj = ResourceManager.GetObject("editor_leaf", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -405,7 +373,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap editor_lvl {
+        internal static System.Drawing.Bitmap editor_leaf64 {
+            get {
+                object obj = ResourceManager.GetObject("editor_leaf64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editor_lvl {
             get {
                 object obj = ResourceManager.GetObject("editor_lvl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -415,7 +393,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap editor_master {
+        internal static System.Drawing.Bitmap editor_master {
             get {
                 object obj = ResourceManager.GetObject("editor_master", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -425,7 +403,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap editor_sample {
+        internal static System.Drawing.Bitmap editor_sample {
             get {
                 object obj = ResourceManager.GetObject("editor_sample", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -435,7 +413,27 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap external_discord {
+        internal static System.Drawing.Bitmap editor_sample64 {
+            get {
+                object obj = ResourceManager.GetObject("editor_sample64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editor_workspace {
+            get {
+                object obj = ResourceManager.GetObject("editor_workspace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap external_discord {
             get {
                 object obj = ResourceManager.GetObject("external_discord", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -445,7 +443,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap external_github {
+        internal static System.Drawing.Bitmap external_github {
             get {
                 object obj = ResourceManager.GetObject("external_github", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -455,7 +453,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap external_kofi {
+        internal static System.Drawing.Bitmap external_kofi {
             get {
                 object obj = ResourceManager.GetObject("external_kofi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -463,27 +461,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream grindable_birth2 {
-            get {
-                return ResourceManager.GetStream("grindable_birth2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream hammer_two_handed_hit {
-            get {
-                return ResourceManager.GetStream("hammer_two_handed_hit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap help_bosssection {
+        internal static System.Drawing.Bitmap help_bosssection {
             get {
                 object obj = ResourceManager.GetObject("help_bosssection", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -493,7 +473,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap help_difficulty {
+        internal static System.Drawing.Bitmap help_difficulty {
             get {
                 object obj = ResourceManager.GetObject("help_difficulty", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -503,7 +483,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap help_railcolor {
+        internal static System.Drawing.Bitmap help_railcolor {
             get {
                 object obj = ResourceManager.GetObject("help_railcolor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -511,18 +491,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream high_jump {
-            get {
-                return ResourceManager.GetStream("high_jump", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon ico_folder {
+        internal static System.Drawing.Icon ico_folder {
             get {
                 object obj = ResourceManager.GetObject("ico_folder", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -532,7 +503,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon ico_gate {
+        internal static System.Drawing.Icon ico_gate {
             get {
                 object obj = ResourceManager.GetObject("ico_gate", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -542,7 +513,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon ico_leaf {
+        internal static System.Drawing.Icon ico_leaf {
             get {
                 object obj = ResourceManager.GetObject("ico_leaf", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -552,7 +523,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon ico_lvl {
+        internal static System.Drawing.Icon ico_lvl {
             get {
                 object obj = ResourceManager.GetObject("ico_lvl", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -562,7 +533,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon ico_master {
+        internal static System.Drawing.Icon ico_master {
             get {
                 object obj = ResourceManager.GetObject("ico_master", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -572,7 +543,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon ico_sample {
+        internal static System.Drawing.Icon ico_rawtext {
+            get {
+                object obj = ResourceManager.GetObject("ico_rawtext", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon ico_sample {
             get {
                 object obj = ResourceManager.GetObject("ico_sample", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
@@ -580,9 +561,19 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon ico_workspace {
+            get {
+                object obj = ResourceManager.GetObject("ico_workspace", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_add2 {
+        internal static System.Drawing.Bitmap icon_add2 {
             get {
                 object obj = ResourceManager.GetObject("icon_add2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -592,7 +583,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_addfile {
+        internal static System.Drawing.Bitmap icon_addfile {
             get {
                 object obj = ResourceManager.GetObject("icon_addfile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -602,7 +593,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_arrowdown2 {
+        internal static System.Drawing.Bitmap icon_arrowdown2 {
             get {
                 object obj = ResourceManager.GetObject("icon_arrowdown2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -612,7 +603,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_arrowup2 {
+        internal static System.Drawing.Bitmap icon_arrowup2 {
             get {
                 object obj = ResourceManager.GetObject("icon_arrowup2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -622,7 +613,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_arrowupdock {
+        internal static System.Drawing.Bitmap icon_arrowupdock {
             get {
                 object obj = ResourceManager.GetObject("icon_arrowupdock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -632,7 +623,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_back {
+        internal static System.Drawing.Bitmap icon_back {
             get {
                 object obj = ResourceManager.GetObject("icon_back", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -642,7 +633,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_calculator {
+        internal static System.Drawing.Bitmap icon_calculator {
             get {
                 object obj = ResourceManager.GetObject("icon_calculator", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -652,7 +643,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_check_16 {
+        internal static System.Drawing.Bitmap icon_check_16 {
             get {
                 object obj = ResourceManager.GetObject("icon_check_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -662,7 +653,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_check_32 {
+        internal static System.Drawing.Bitmap icon_check_32 {
             get {
                 object obj = ResourceManager.GetObject("icon_check_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -672,7 +663,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_clear_filters {
+        internal static System.Drawing.Bitmap icon_clear_filters {
             get {
                 object obj = ResourceManager.GetObject("icon_clear_filters", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -682,7 +673,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_close {
+        internal static System.Drawing.Bitmap icon_close {
             get {
                 object obj = ResourceManager.GetObject("icon_close", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -692,7 +683,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_closeblack {
+        internal static System.Drawing.Bitmap icon_closeblack {
             get {
                 object obj = ResourceManager.GetObject("icon_closeblack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -702,7 +693,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_collapse {
+        internal static System.Drawing.Bitmap icon_collapse {
             get {
                 object obj = ResourceManager.GetObject("icon_collapse", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -712,7 +703,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_color_wheel {
+        internal static System.Drawing.Bitmap icon_color_wheel {
             get {
                 object obj = ResourceManager.GetObject("icon_color_wheel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -722,7 +713,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_copy {
+        internal static System.Drawing.Bitmap icon_copy {
             get {
                 object obj = ResourceManager.GetObject("icon_copy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -732,7 +723,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_copy2 {
+        internal static System.Drawing.Bitmap icon_copy2 {
             get {
                 object obj = ResourceManager.GetObject("icon_copy2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -742,7 +733,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_cut {
+        internal static System.Drawing.Bitmap icon_cut {
             get {
                 object obj = ResourceManager.GetObject("icon_cut", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -752,7 +743,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_divider {
+        internal static System.Drawing.Bitmap icon_divider {
             get {
                 object obj = ResourceManager.GetObject("icon_divider", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -762,7 +753,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_editdetails {
+        internal static System.Drawing.Bitmap icon_editdetails {
             get {
                 object obj = ResourceManager.GetObject("icon_editdetails", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -772,7 +763,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_erase {
+        internal static System.Drawing.Bitmap icon_erase {
             get {
                 object obj = ResourceManager.GetObject("icon_erase", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -782,7 +773,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_exit {
+        internal static System.Drawing.Bitmap icon_exit {
             get {
                 object obj = ResourceManager.GetObject("icon_exit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -792,7 +783,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_expand {
+        internal static System.Drawing.Bitmap icon_expand {
             get {
                 object obj = ResourceManager.GetObject("icon_expand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -802,7 +793,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_explorer {
+        internal static System.Drawing.Bitmap icon_explorer {
             get {
                 object obj = ResourceManager.GetObject("icon_explorer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -812,7 +803,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_export {
+        internal static System.Drawing.Bitmap icon_export {
             get {
                 object obj = ResourceManager.GetObject("icon_export", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -822,7 +813,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_file {
+        internal static System.Drawing.Bitmap icon_feather {
+            get {
+                object obj = ResourceManager.GetObject("icon_feather", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_file {
             get {
                 object obj = ResourceManager.GetObject("icon_file", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -832,7 +833,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_filter {
+        internal static System.Drawing.Bitmap icon_filter {
             get {
                 object obj = ResourceManager.GetObject("icon_filter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -842,7 +843,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_folder {
+        internal static System.Drawing.Bitmap icon_folder {
             get {
                 object obj = ResourceManager.GetObject("icon_folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -852,7 +853,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_gear {
+        internal static System.Drawing.Bitmap icon_gear {
             get {
                 object obj = ResourceManager.GetObject("icon_gear", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -862,7 +863,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_graph {
+        internal static System.Drawing.Bitmap icon_graph {
             get {
                 object obj = ResourceManager.GetObject("icon_graph", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -872,7 +873,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_import {
+        internal static System.Drawing.Bitmap icon_import {
             get {
                 object obj = ResourceManager.GetObject("icon_import", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -882,7 +883,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_import2 {
+        internal static System.Drawing.Bitmap icon_import2 {
             get {
                 object obj = ResourceManager.GetObject("icon_import2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -892,7 +893,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_info {
+        internal static System.Drawing.Bitmap icon_info {
             get {
                 object obj = ResourceManager.GetObject("icon_info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -902,7 +903,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_leaftemplate {
+        internal static System.Drawing.Bitmap icon_leaftemplate {
             get {
                 object obj = ResourceManager.GetObject("icon_leaftemplate", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -912,7 +913,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_maximize {
+        internal static System.Drawing.Bitmap icon_maximize {
             get {
                 object obj = ResourceManager.GetObject("icon_maximize", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -922,7 +923,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_maximizeblack {
+        internal static System.Drawing.Bitmap icon_maximizeblack {
             get {
                 object obj = ResourceManager.GetObject("icon_maximizeblack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -932,7 +933,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_minimize {
+        internal static System.Drawing.Bitmap icon_minimize {
             get {
                 object obj = ResourceManager.GetObject("icon_minimize", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -942,7 +943,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_minimizeblack {
+        internal static System.Drawing.Bitmap icon_minimizeblack {
             get {
                 object obj = ResourceManager.GetObject("icon_minimizeblack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -952,7 +953,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_onefinger {
+        internal static System.Drawing.Bitmap icon_onefinger {
             get {
                 object obj = ResourceManager.GetObject("icon_onefinger", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -962,7 +963,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_openedfolders {
+        internal static System.Drawing.Bitmap icon_openedfolders {
             get {
                 object obj = ResourceManager.GetObject("icon_openedfolders", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -972,7 +973,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_openfile {
+        internal static System.Drawing.Bitmap icon_openfile {
             get {
                 object obj = ResourceManager.GetObject("icon_openfile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -982,7 +983,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_paste {
+        internal static System.Drawing.Bitmap icon_paste {
             get {
                 object obj = ResourceManager.GetObject("icon_paste", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -992,7 +993,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_paste2 {
+        internal static System.Drawing.Bitmap icon_paste2 {
             get {
                 object obj = ResourceManager.GetObject("icon_paste2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1002,7 +1003,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_pause16 {
+        internal static System.Drawing.Bitmap icon_pause16 {
             get {
                 object obj = ResourceManager.GetObject("icon_pause16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1012,7 +1013,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_pencil {
+        internal static System.Drawing.Bitmap icon_pencil {
             get {
                 object obj = ResourceManager.GetObject("icon_pencil", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1022,7 +1023,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_play {
+        internal static System.Drawing.Bitmap icon_play {
             get {
                 object obj = ResourceManager.GetObject("icon_play", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1032,7 +1033,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_play2 {
+        internal static System.Drawing.Bitmap icon_play2 {
             get {
                 object obj = ResourceManager.GetObject("icon_play2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1042,7 +1043,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_plus {
+        internal static System.Drawing.Bitmap icon_plus {
             get {
                 object obj = ResourceManager.GetObject("icon_plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1052,7 +1053,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_random {
+        internal static System.Drawing.Bitmap icon_random {
             get {
                 object obj = ResourceManager.GetObject("icon_random", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1062,7 +1063,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_randomize {
+        internal static System.Drawing.Bitmap icon_randomize {
             get {
                 object obj = ResourceManager.GetObject("icon_randomize", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1072,7 +1073,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_rawtext {
+        internal static System.Drawing.Bitmap icon_rawtext {
             get {
                 object obj = ResourceManager.GetObject("icon_rawtext", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1082,7 +1083,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_refresh2 {
+        internal static System.Drawing.Bitmap icon_refresh2 {
             get {
                 object obj = ResourceManager.GetObject("icon_refresh2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1092,7 +1093,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_remove2 {
+        internal static System.Drawing.Bitmap icon_remove2 {
             get {
                 object obj = ResourceManager.GetObject("icon_remove2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1102,7 +1103,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_restore {
+        internal static System.Drawing.Bitmap icon_restore {
             get {
                 object obj = ResourceManager.GetObject("icon_restore", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1112,7 +1113,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_restoreblack {
+        internal static System.Drawing.Bitmap icon_restoreblack {
             get {
                 object obj = ResourceManager.GetObject("icon_restoreblack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1122,7 +1123,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_save {
+        internal static System.Drawing.Bitmap icon_save {
             get {
                 object obj = ResourceManager.GetObject("icon_save", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1132,7 +1133,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_save_all {
+        internal static System.Drawing.Bitmap icon_save_all {
             get {
                 object obj = ResourceManager.GetObject("icon_save_all", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1142,7 +1143,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_save2 {
+        internal static System.Drawing.Bitmap icon_save2 {
             get {
                 object obj = ResourceManager.GetObject("icon_save2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1152,7 +1153,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_saveas {
+        internal static System.Drawing.Bitmap icon_saveas {
             get {
                 object obj = ResourceManager.GetObject("icon_saveas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1162,7 +1163,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_sling {
+        internal static System.Drawing.Bitmap icon_sling {
             get {
                 object obj = ResourceManager.GetObject("icon_sling", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1172,7 +1173,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_stop {
+        internal static System.Drawing.Bitmap icon_stop {
             get {
                 object obj = ResourceManager.GetObject("icon_stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1182,7 +1183,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_tcle {
+        internal static System.Drawing.Bitmap icon_tcle {
             get {
                 object obj = ResourceManager.GetObject("icon_tcle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1192,7 +1193,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_template {
+        internal static System.Drawing.Bitmap icon_template {
             get {
                 object obj = ResourceManager.GetObject("icon_template", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1202,7 +1203,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_trash {
+        internal static System.Drawing.Bitmap icon_trash {
             get {
                 object obj = ResourceManager.GetObject("icon_trash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1212,7 +1213,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_undo {
+        internal static System.Drawing.Bitmap icon_undo {
             get {
                 object obj = ResourceManager.GetObject("icon_undo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1222,7 +1223,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_view {
+        internal static System.Drawing.Bitmap icon_view {
             get {
                 object obj = ResourceManager.GetObject("icon_view", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1232,7 +1233,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap icon_zoom {
+        internal static System.Drawing.Bitmap icon_zoom {
             get {
                 object obj = ResourceManager.GetObject("icon_zoom", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1240,11 +1241,11 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_da [rest of string was truncated]&quot;;.
         /// </summary>
-        public static System.IO.UnmanagedMemoryStream jumper_approach {
+        internal static string leaf_multitrack {
             get {
-                return ResourceManager.GetStream("jumper_approach", resourceCulture);
+                return ResourceManager.GetString("leaf_multitrack", resourceCulture);
             }
         }
         
@@ -1270,18 +1271,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///    {
         ///      &quot;obj_name&quot;: &quot;m [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string leaf_multitrack {
+        internal static string leaf_multitrack_new {
             get {
-                return ResourceManager.GetString("leaf_multitrack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_da [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string leaf_multitrack_old {
-            get {
-                return ResourceManager.GetString("leaf_multitrack_old", resourceCulture);
+                return ResourceManager.GetString("leaf_multitrack_new", resourceCulture);
             }
         }
         
@@ -1307,7 +1299,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///    {
         ///      &quot;obj_n [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string leaf_multitrack_ring_bar {
+        internal static string leaf_multitrack_ring_bar {
             get {
                 return ResourceManager.GetString("leaf_multitrack_ring_bar", resourceCulture);
             }
@@ -1325,9 +1317,18 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///    &apos;data_points&apos;: {
         ///        0: 0.96875, 1: 0.96875, 2: 0.96875, 3: 0.96875, 4: 0.96875, 5: 0.96875, 6: 0.96875, 7: 0.96875, 8: 0.96875, 9: 0.96875, 10: 0.96875, 11: 0.96875, 12: 0.96875, 13: 0.96875, 14: 0.96875, 15: 0.96875, 16: 0.96875, 17: 0.96875, 18: 0.96875, 19: 0.96875, 20: 0.96875, 21: 0.96875, 22: 0.96875, 23: 0 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string leaf_pyramid_outro {
+        internal static string leaf_pyramid_outro {
             get {
                 return ResourceManager.GetString("leaf_pyramid_outro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string leaf_singletrack {
+            get {
+                return ResourceManager.GetString("leaf_singletrack", resourceCulture);
             }
         }
         
@@ -1353,18 +1354,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///    {
         ///      &quot;obj_name&quot;:  [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string leaf_singletrack {
+        internal static string leaf_singletrack_new {
             get {
-                return ResourceManager.GetString("leaf_singletrack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string leaf_singletrack_old {
-            get {
-                return ResourceManager.GetString("leaf_singletrack_old", resourceCulture);
+                return ResourceManager.GetString("leaf_singletrack_new", resourceCulture);
             }
         }
         
@@ -1396,9 +1388,1689 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///bar[double];-8388608
         ///bar[tri [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string objects_defaultcolors {
+        internal static string objects_defaultcolors {
             get {
                 return ResourceManager.GetString("objects_defaultcolors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_arms_deca {
+            get {
+                object obj = ResourceManager.GetObject("path_arms_deca", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_arms_diamond {
+            get {
+                object obj = ResourceManager.GetObject("path_arms_diamond", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_arms_hex {
+            get {
+                object obj = ResourceManager.GetObject("path_arms_hex", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_arms_oct {
+            get {
+                object obj = ResourceManager.GetObject("path_arms_oct", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_arms_pentagon {
+            get {
+                object obj = ResourceManager.GetObject("path_arms_pentagon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_arms_sept {
+            get {
+                object obj = ResourceManager.GetObject("path_arms_sept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_arms_square {
+            get {
+                object obj = ResourceManager.GetObject("path_arms_square", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_arms_triangle {
+            get {
+                object obj = ResourceManager.GetObject("path_arms_triangle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_black_tunnel {
+            get {
+                object obj = ResourceManager.GetObject("path_black_tunnel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_boss_bright_A {
+            get {
+                object obj = ResourceManager.GetObject("path_boss_bright_A", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_boss_bright_B {
+            get {
+                object obj = ResourceManager.GetObject("path_boss_bright_B", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_Boss_tube_path {
+            get {
+                object obj = ResourceManager.GetObject("path_Boss_tube_path", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_boss_tube_path_no_end {
+            get {
+                object obj = ResourceManager.GetObject("path_boss_tube_path_no_end", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_boss_tunnel_effect {
+            get {
+                object obj = ResourceManager.GetObject("path_boss_tunnel_effect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_dec_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_dec_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_dec_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_dec_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_diamond_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_diamond_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_diamond_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_diamond_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_diamond_chrome_ring {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_diamond_chrome_ring", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_diamond_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_diamond_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_hexagon_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_hexagon_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_hexagon_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_hexagon_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_octo_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_octo_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_octo_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_octo_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_octo_chrome_ring {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_octo_chrome_ring", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_octo_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_octo_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_pentagon_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_pentagon_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_pentagon_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_pentagon_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_pyramid_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_pyramid_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_pyramid_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_pyramid_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_sept_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_sept_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_sept_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_sept_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_square_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_square_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_cave_square_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_cave_square_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_checkpoint_exit {
+            get {
+                object obj = ResourceManager.GetObject("path_checkpoint_exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_dec_tunnel {
+            get {
+                object obj = ResourceManager.GetObject("path_dec_tunnel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_glass_deca {
+            get {
+                object obj = ResourceManager.GetObject("path_glass_deca", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_glass_diamond {
+            get {
+                object obj = ResourceManager.GetObject("path_glass_diamond", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_glass_hex {
+            get {
+                object obj = ResourceManager.GetObject("path_glass_hex", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_glass_oct {
+            get {
+                object obj = ResourceManager.GetObject("path_glass_oct", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_glass_pentagon {
+            get {
+                object obj = ResourceManager.GetObject("path_glass_pentagon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_glass_sept {
+            get {
+                object obj = ResourceManager.GetObject("path_glass_sept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_glass_square {
+            get {
+                object obj = ResourceManager.GetObject("path_glass_square", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_glass_triangle {
+            get {
+                object obj = ResourceManager.GetObject("path_glass_triangle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_Landscape01 {
+            get {
+                object obj = ResourceManager.GetObject("path_Landscape01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice_7_red {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice_7_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice1_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice1_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice1_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice1_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice1_red {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice1_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice2_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice2_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice2_blue2 {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice2_blue2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice2_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice2_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice2_green {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice2_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice2_green2 {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice2_green2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice2_purple {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice2_purple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice2_red {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice2_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice3_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice3_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice3_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice3_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice3_red {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice3_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice4_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice4_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice4_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice4_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice4_red {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice4_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice5_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice5_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice5_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice5_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice5_chrome_large {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice5_chrome_large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice5_red {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice5_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice6_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice6_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice6_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice6_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice6_red {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice6_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice7_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice7_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice7_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice7_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice8_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice8_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice8_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice8_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_lattice8_red {
+            get {
+                object obj = ResourceManager.GetObject("path_lattice8_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_level_arms_A {
+            get {
+                object obj = ResourceManager.GetObject("path_level_arms_A", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_ring_circle {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_ring_circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_ring_diamond {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_ring_diamond", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_ring_diamond2 {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_ring_diamond2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_ring_hex {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_ring_hex", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_ring_octagon {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_ring_octagon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_ring_pentagon {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_ring_pentagon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_ring_pentagon_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_ring_pentagon_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_ring_pentagon2 {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_ring_pentagon2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube_diamondoid {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube_diamondoid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube_horizontal {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube_horizontal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube01_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube01_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube01_psych {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube01_psych", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube01_purple {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube01_purple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube02_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube02_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube02_chrome_large {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube02_chrome_large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube02_psych {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube02_psych", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube02_purple {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube02_purple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube03_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube03_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube03_psych {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube03_psych", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube03_psych_BW {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube03_psych_BW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube03_purple {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube03_purple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube04_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube04_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube04_psych {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube04_psych", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube04_purple {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube04_purple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube05_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube05_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube05_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube05_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube05_purple_ {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube05_purple_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube06_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube06_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube06_psych {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube06_psych", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube06_purple {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube06_purple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube07_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube07_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube07_psych {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube07_psych", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_occlusion_tube07_purple {
+            get {
+                object obj = ResourceManager.GetObject("path_occlusion_tube07_purple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_hex {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_hex", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_hex_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_hex_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_hex_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_hex_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_hex_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_hex_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_pent_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_pent_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_pent_glass_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_pent_glass_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_pent_points {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_pent_points", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_triangle_lines {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_triangle_lines", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_triangle_lines_red {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_triangle_lines_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_scaffold_triangle_points {
+            get {
+                object obj = ResourceManager.GetObject("path_scaffold_triangle_points", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_spaceship {
+            get {
+                object obj = ResourceManager.GetObject("path_spaceship", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_spaceship2 {
+            get {
+                object obj = ResourceManager.GetObject("path_spaceship2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_spaceship3 {
+            get {
+                object obj = ResourceManager.GetObject("path_spaceship3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_spaceship3_blue {
+            get {
+                object obj = ResourceManager.GetObject("path_spaceship3_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_spaceship3_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_spaceship3_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_spaceship3_dark {
+            get {
+                object obj = ResourceManager.GetObject("path_spaceship3_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_spaceship3_no_end_cap {
+            get {
+                object obj = ResourceManager.GetObject("path_spaceship3_no_end_cap", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_spaceship3_no_start_cap {
+            get {
+                object obj = ResourceManager.GetObject("path_spaceship3_no_start_cap", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_triangle_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_triangle_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_triangle_glass_scaffold {
+            get {
+                object obj = ResourceManager.GetObject("path_triangle_glass_scaffold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_triangle_tunnel {
+            get {
+                object obj = ResourceManager.GetObject("path_triangle_tunnel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_dec_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_dec_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_dec_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_dec_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_diamond_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_diamond_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_diamond_bright_larg {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_diamond_bright_larg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_diamond_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_diamond_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_diamond_chrome_arms {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_diamond_chrome_arms", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_diamond_chrome_glass_add {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_diamond_chrome_glass_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_diamond_chrome_larg {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_diamond_chrome_larg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_diamond_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_diamond_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_hexagon_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_hexagon_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_hexagon_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_hexagon_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_octagon_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_octagon_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_octagon_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_octagon_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_pentagon_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_pentagon_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_pentagon_bright_red {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_pentagon_bright_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_pentagon_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_pentagon_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_pentagon_chrome_arm {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_pentagon_chrome_arm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_pentagon_chrome_red {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_pentagon_chrome_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_pentagon_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_pentagon_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_sept_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_sept_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_sept_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_sept_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_sept_chrome_arms {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_sept_chrome_arms", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_sept_glass {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_sept_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_square_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_square_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_square_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_square_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_triangle_black {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_triangle_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_triangle_black_large {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_triangle_black_large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_triangle_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_triangle_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_triangle_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_triangle_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_triangle_chrome2 {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_triangle_chrome2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_triangle_chrome2_large {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_triangle_chrome2_large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_triangle_flipped_bright {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_triangle_flipped_bright", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tube_triangle_flipped_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tube_triangle_flipped_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tunnel_chrome {
+            get {
+                object obj = ResourceManager.GetObject("path_tunnel_chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_tunnel_chrome_dark {
+            get {
+                object obj = ResourceManager.GetObject("path_tunnel_chrome_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_web {
+            get {
+                object obj = ResourceManager.GetObject("path_web", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap path_web_points {
+            get {
+                object obj = ResourceManager.GetObject("path_web_points", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1429,7 +3101,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///cave_octo_bright.path
         ///cave_octo_c [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string paths {
+        internal static string paths {
             get {
                 return ResourceManager.GetString("paths", resourceCulture);
             }
@@ -1438,7 +3110,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap pixel {
+        internal static System.Drawing.Bitmap pixel {
             get {
                 object obj = ResourceManager.GetObject("pixel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -1470,7 +3142,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;offset&apos;: 0.0,
         ///&apos;channel_group&apos;: &apos;sequi [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_default {
+        internal static string samp_default {
             get {
                 return ResourceManager.GetString("samp_default", resourceCulture);
             }
@@ -1504,7 +3176,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///{
         ///&apos;o [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_dissonant {
+        internal static string samp_dissonant {
             get {
                 return ResourceManager.GetString("samp_dissonant", resourceCulture);
             }
@@ -1515,7 +3187,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;items&apos;: [
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;global_drones-beneath_ice_pattern1.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;global_drones-beneath_ice_pattern1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/Levels/global_drones/beneath_ice_pattern1.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -1526,7 +3198,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;global_drones-beneath_ice_pattern2.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;global_drones-beneath_ice_pattern2.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/Levels/global_drones/beneath_ice_pattern2.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -1536,9 +3208,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;channel_group&apos;: &apos;&apos;
         ///},
         ///{
-        /// [rest of string was truncated]&quot;;.
+        ///&apos; [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_globaldrones {
+        internal static string samp_globaldrones {
             get {
                 return ResourceManager.GetString("samp_globaldrones", resourceCulture);
             }
@@ -1572,9 +3244,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;drums-level1-basic4_cymbal.wav&apos;,
-        ///&apos;mode&apos; [rest of string was truncated]&quot;;.
+        ///&apos;mode&apos;: &apos; [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level1_320bpm {
+        internal static string samp_level1_320bpm {
             get {
                 return ResourceManager.GetString("samp_level1_320bpm", resourceCulture);
             }
@@ -1608,7 +3280,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///{
         ///&apos;obj_type&apos;: &apos;S [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level2_340bpm {
+        internal static string samp_level2_340bpm {
             get {
                 return ResourceManager.GetString("samp_level2_340bpm", resourceCulture);
             }
@@ -1641,7 +3313,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level3_360bpm {
+        internal static string samp_level3_360bpm {
             get {
                 return ResourceManager.GetString("samp_level3_360bpm", resourceCulture);
             }
@@ -1675,7 +3347,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///{
         ///&apos;obj_type&apos;: &apos;S [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level4_380bpm {
+        internal static string samp_level4_380bpm {
             get {
                 return ResourceManager.GetString("samp_level4_380bpm", resourceCulture);
             }
@@ -1708,7 +3380,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level5_400bpm {
+        internal static string samp_level5_400bpm {
             get {
                 return ResourceManager.GetString("samp_level5_400bpm", resourceCulture);
             }
@@ -1742,7 +3414,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///{
         ///&apos;obj [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level6_420bpm {
+        internal static string samp_level6_420bpm {
             get {
                 return ResourceManager.GetString("samp_level6_420bpm", resourceCulture);
             }
@@ -1772,7 +3444,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;pan&apos;: 0.0,
         ///&apos;offset&apos;: 0 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level7_440bpm {
+        internal static string samp_level7_440bpm {
             get {
                 return ResourceManager.GetString("samp_level7_440bpm", resourceCulture);
             }
@@ -1805,7 +3477,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level8_460bpm {
+        internal static string samp_level8_460bpm {
             get {
                 return ResourceManager.GetString("samp_level8_460bpm", resourceCulture);
             }
@@ -1838,7 +3510,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         /// [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_level9_480bpm {
+        internal static string samp_level9_480bpm {
             get {
                 return ResourceManager.GetString("samp_level9_480bpm", resourceCulture);
             }
@@ -1873,7 +3545,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;misc- [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_misc {
+        internal static string samp_misc {
             get {
                 return ResourceManager.GetString("samp_misc", resourceCulture);
             }
@@ -1908,7 +3580,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
         ///&apos;obj_name&apos;: &apos;rests-rests_level9a.wav&apos;, [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samp_rests {
+        internal static string samp_rests {
             get {
                 return ResourceManager.GetString("samp_rests", resourceCulture);
             }
@@ -1930,18 +3602,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///level_2,drums,drums_long_pattern1.wav
         ///le [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string samples {
+        internal static string samples {
             get {
                 return ResourceManager.GetString("samples", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream silence {
-            get {
-                return ResourceManager.GetStream("silence", resourceCulture);
             }
         }
         
@@ -1971,43 +3634,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;rot_y&apos;: [0, 1, 0],
         ///&apos;rot_z&apos;: [0, 0, 1] [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string spn_default {
+        internal static string spn_default {
             get {
                 return ResourceManager.GetString("spn_default", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static string String1 {
+        internal static System.Drawing.Icon thumper_level_editor {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream thump_birth1 {
-            get {
-                return ResourceManager.GetStream("thump_birth1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream thump1b {
-            get {
-                return ResourceManager.GetStream("thump1b", resourceCulture);
+                object obj = ResourceManager.GetObject("thumper_level_editor", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Thumper_logo {
+        internal static System.Drawing.Bitmap Thumper_logo {
             get {
                 object obj = ResourceManager.GetObject("Thumper_logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2017,7 +3663,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap Thumper_Splash {
+        internal static System.Drawing.Bitmap Thumper_Splash {
             get {
                 object obj = ResourceManager.GetObject("Thumper_Splash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -2032,52 +3678,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///leafname;turn_auto;turn_auto;kTraitFloat;True;0;[4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
         ///leafname;scale_x;scale_x;kTraitFloat;True;1;[4 [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string track_objects {
+        internal static string track_objects {
             get {
                 return ResourceManager.GetString("track_objects", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream turn_birth {
-            get {
-                return ResourceManager.GetStream("turn_birth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream turn_birth_lft {
-            get {
-                return ResourceManager.GetStream("turn_birth_lft", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream turn_hit_perfect2 {
-            get {
-                return ResourceManager.GetStream("turn_hit_perfect2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream turn_long_lft {
-            get {
-                return ResourceManager.GetStream("turn_long_lft", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIaddrandom {
+        internal static byte[] UIaddrandom {
             get {
                 object obj = ResourceManager.GetObject("UIaddrandom", resourceCulture);
                 return ((byte[])(obj));
@@ -2087,7 +3697,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick1 {
+        internal static byte[] UIbeetleclick1 {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick1", resourceCulture);
                 return ((byte[])(obj));
@@ -2097,7 +3707,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick2 {
+        internal static byte[] UIbeetleclick2 {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick2", resourceCulture);
                 return ((byte[])(obj));
@@ -2107,7 +3717,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick3 {
+        internal static byte[] UIbeetleclick3 {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick3", resourceCulture);
                 return ((byte[])(obj));
@@ -2117,7 +3727,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick4 {
+        internal static byte[] UIbeetleclick4 {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick4", resourceCulture);
                 return ((byte[])(obj));
@@ -2127,7 +3737,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick5 {
+        internal static byte[] UIbeetleclick5 {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick5", resourceCulture);
                 return ((byte[])(obj));
@@ -2137,7 +3747,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick6 {
+        internal static byte[] UIbeetleclick6 {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick6", resourceCulture);
                 return ((byte[])(obj));
@@ -2147,7 +3757,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick7 {
+        internal static byte[] UIbeetleclick7 {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick7", resourceCulture);
                 return ((byte[])(obj));
@@ -2157,7 +3767,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclick8 {
+        internal static byte[] UIbeetleclick8 {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclick8", resourceCulture);
                 return ((byte[])(obj));
@@ -2167,7 +3777,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIbeetleclickGOLD {
+        internal static byte[] UIbeetleclickGOLD {
             get {
                 object obj = ResourceManager.GetObject("UIbeetleclickGOLD", resourceCulture);
                 return ((byte[])(obj));
@@ -2177,7 +3787,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIboot {
+        internal static byte[] UIboot {
             get {
                 object obj = ResourceManager.GetObject("UIboot", resourceCulture);
                 return ((byte[])(obj));
@@ -2187,7 +3797,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIcolorapply {
+        internal static byte[] UIcolorapply {
             get {
                 object obj = ResourceManager.GetObject("UIcolorapply", resourceCulture);
                 return ((byte[])(obj));
@@ -2197,7 +3807,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIcoloropen {
+        internal static byte[] UIcoloropen {
             get {
                 object obj = ResourceManager.GetObject("UIcoloropen", resourceCulture);
                 return ((byte[])(obj));
@@ -2207,7 +3817,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIdataerase {
+        internal static byte[] UIdataerase {
             get {
                 object obj = ResourceManager.GetObject("UIdataerase", resourceCulture);
                 return ((byte[])(obj));
@@ -2217,7 +3827,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIdelete {
+        internal static byte[] UIdelete {
             get {
                 object obj = ResourceManager.GetObject("UIdelete", resourceCulture);
                 return ((byte[])(obj));
@@ -2227,7 +3837,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIdock {
+        internal static byte[] UIdock {
             get {
                 object obj = ResourceManager.GetObject("UIdock", resourceCulture);
                 return ((byte[])(obj));
@@ -2237,7 +3847,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIdockun {
+        internal static byte[] UIdockun {
             get {
                 object obj = ResourceManager.GetObject("UIdockun", resourceCulture);
                 return ((byte[])(obj));
@@ -2247,7 +3857,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIfolderclose {
+        internal static byte[] UIfolderclose {
             get {
                 object obj = ResourceManager.GetObject("UIfolderclose", resourceCulture);
                 return ((byte[])(obj));
@@ -2257,7 +3867,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIfolderopen {
+        internal static byte[] UIfolderopen {
             get {
                 object obj = ResourceManager.GetObject("UIfolderopen", resourceCulture);
                 return ((byte[])(obj));
@@ -2267,7 +3877,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIinterpolate {
+        internal static byte[] UIinterpolate {
             get {
                 object obj = ResourceManager.GetObject("UIinterpolate", resourceCulture);
                 return ((byte[])(obj));
@@ -2277,7 +3887,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIinterpolatewindow {
+        internal static byte[] UIinterpolatewindow {
             get {
                 object obj = ResourceManager.GetObject("UIinterpolatewindow", resourceCulture);
                 return ((byte[])(obj));
@@ -2287,7 +3897,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIkcopy {
+        internal static byte[] UIkcopy {
             get {
                 object obj = ResourceManager.GetObject("UIkcopy", resourceCulture);
                 return ((byte[])(obj));
@@ -2297,7 +3907,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIkpaste {
+        internal static byte[] UIkpaste {
             get {
                 object obj = ResourceManager.GetObject("UIkpaste", resourceCulture);
                 return ((byte[])(obj));
@@ -2307,7 +3917,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIleafsplit {
+        internal static byte[] UIleafsplit {
             get {
                 object obj = ResourceManager.GetObject("UIleafsplit", resourceCulture);
                 return ((byte[])(obj));
@@ -2317,7 +3927,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIobjectadd {
+        internal static byte[] UIobjectadd {
             get {
                 object obj = ResourceManager.GetObject("UIobjectadd", resourceCulture);
                 return ((byte[])(obj));
@@ -2327,7 +3937,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIobjectremove {
+        internal static byte[] UIobjectremove {
             get {
                 object obj = ResourceManager.GetObject("UIobjectremove", resourceCulture);
                 return ((byte[])(obj));
@@ -2337,7 +3947,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIrefresh {
+        internal static byte[] UIrefresh {
             get {
                 object obj = ResourceManager.GetObject("UIrefresh", resourceCulture);
                 return ((byte[])(obj));
@@ -2347,7 +3957,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIrevertchanges {
+        internal static byte[] UIrevertchanges {
             get {
                 object obj = ResourceManager.GetObject("UIrevertchanges", resourceCulture);
                 return ((byte[])(obj));
@@ -2357,7 +3967,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIrevertnew {
+        internal static byte[] UIrevertnew {
             get {
                 object obj = ResourceManager.GetObject("UIrevertnew", resourceCulture);
                 return ((byte[])(obj));
@@ -2367,7 +3977,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIsave {
+        internal static byte[] UIsave {
             get {
                 object obj = ResourceManager.GetObject("UIsave", resourceCulture);
                 return ((byte[])(obj));
@@ -2377,7 +3987,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIselect {
+        internal static byte[] UIselect {
             get {
                 object obj = ResourceManager.GetObject("UIselect", resourceCulture);
                 return ((byte[])(obj));
@@ -2387,7 +3997,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UItunneladd {
+        internal static byte[] UItunneladd {
             get {
                 object obj = ResourceManager.GetObject("UItunneladd", resourceCulture);
                 return ((byte[])(obj));
@@ -2397,7 +4007,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UItunnelremove {
+        internal static byte[] UItunnelremove {
             get {
                 object obj = ResourceManager.GetObject("UItunnelremove", resourceCulture);
                 return ((byte[])(obj));
@@ -2407,7 +4017,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIwindowclose {
+        internal static byte[] UIwindowclose {
             get {
                 object obj = ResourceManager.GetObject("UIwindowclose", resourceCulture);
                 return ((byte[])(obj));
@@ -2417,7 +4027,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] UIwindowopen {
+        internal static byte[] UIwindowopen {
             get {
                 object obj = ResourceManager.GetObject("UIwindowopen", resourceCulture);
                 return ((byte[])(obj));
@@ -2436,7 +4046,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;scale&apos;: [1, 1, 1]
         ///}.
         /// </summary>
-        public static string xfm_default {
+        internal static string xfm_default {
             get {
                 return ResourceManager.GetString("xfm_default", resourceCulture);
             }

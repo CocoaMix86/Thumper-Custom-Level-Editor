@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Thumper Custom Level Editor": {
-      "commandName": "Project",
-      "nativeDebugging": true
-    }
-  }
-}

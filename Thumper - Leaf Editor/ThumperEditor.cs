@@ -115,6 +115,7 @@ namespace Thumper_Custom_Level_Editor
             contextmenuHelp.Renderer = new ContextMenuColors();
             contextmenuTabClick.Renderer = new ContextMenuColors();
             contextmenuSampPacks.Renderer = new ContextMenuColors();
+            contextmenuMoveWorkspace.Renderer = new ContextMenuColors();
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
@@ -428,7 +429,12 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Toolstrip Window
-        private void toolstripWindowFloat_Click(object sender, EventArgs e) => ActiveWorkspace.dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
+        private void toolstripWindowFloat_Click(object sender, EventArgs e)
+        {
+            if (GlobalActiveDocument.DockHandler.DockState != DockState.Float)
+                GlobalActiveDocument.DockHandler.DockState = DockState.Float;
+            //ActiveWorkspace.dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
+        }
         private void toolstripWindowFloatAll_Click(object sender, EventArgs e)
         {
             foreach (IDockContent dc in ActiveWorkspace.dockMain.Documents) {
@@ -452,7 +458,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void addNewWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_WorkSpace workspace1 = new();
+            Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
             workspace1.Show(dockMain, DockState.Document);
         }
         #endregion
@@ -659,8 +665,10 @@ namespace Thumper_Custom_Level_Editor
             draw.Show(dockMain, DockState.Document);
         }
 
+
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            /*
             foreach (FileInfo file in new DirectoryInfo($@"{Properties.Settings.Default.game_dir}\cache").GetFiles()) {
                 byte[] _bytes;
                 //read the .pc file as bytes, and skip the first 4 header bytes
@@ -669,6 +677,7 @@ namespace Thumper_Custom_Level_Editor
 
                 // credit to https://github.com/SamboyCoding/Fmod5Sharp
                 try {
+                    
                     FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
                     List<FmodSample> samples = bank.Samples;
                     samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
@@ -685,11 +694,27 @@ namespace Thumper_Custom_Level_Editor
                             break;
                         }
                     }
-                    File.WriteAllBytes($@"temp\{audioname} ({file.Name}).{fileExtension}", dataBytes);
+                    if (_bytes[0] == 'D' && _bytes[1] == 'D' && _bytes[2] == 'S')
+                        File.WriteAllBytes($@"temp\{file.Name}.dds", _bytes);
                 } catch (Exception ex) {
                     continue;
                 }
             }
+            */
+        }
+
+        private void contextmenuMoveWorkspace_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            contextmenuMoveWorkspace.Items.Clear();
+            foreach (IDockContent ws in Workspaces) {
+                contextmenuMoveWorkspace.Items.Add(ws.DockHandler.TabText, Properties.Resources.editor_workspace);
+            }
+        }
+
+        private void contextmenuMoveWorkspace_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            IDockContent workspace = Workspaces.First(x => x.DockHandler.TabText == e.ClickedItem.Text);
+            GlobalActiveDocument.DockHandler.DockPanel = workspace.DockHandler.DockPanel;
         }
     }
 }

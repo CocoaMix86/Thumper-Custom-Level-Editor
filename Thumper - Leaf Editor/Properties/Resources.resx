@@ -118,35 +118,53 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="turn_birth" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_birth.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="audionames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\audionames.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="UIbeetleclick2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick2.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="beeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UIboot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIboot.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="beebleconfuse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beebleconfuse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UIinterpolate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIinterpolate.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="beeblecool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblecool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="samp_level5_400bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level5_400bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  <data name="beebledance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beebledance.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UIaddrandom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIaddrandom.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="beeblederp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblederp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="leaf_pyramid_outro" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_pyramid_outro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  <data name="beebleflesh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beebleflesh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UIwindowclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIwindowclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="beeblegold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblegold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UIkcopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIkcopy.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="beeblehappy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblehappy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UIleafsplit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIleafsplit.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="beeblelaugh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblelaugh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblelove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblelove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblespin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblespin.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblestare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblestare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblethink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beeblethink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebletiny" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beebletiny.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebleuwu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\beeble\beebleuwu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="defaultkeybinds" xml:space="preserve">
     <value>leafnew;N, Control
@@ -201,360 +219,6 @@ showhidemaster;D4, Alt
 showhidefolder;D5, Alt
 showhidesample;D6, Alt</value>
   </data>
-  <data name="leaf_singletrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_singletrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="thump1b" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\thump1b.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_dissonant.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="UIbeetleclick8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick8.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_level2_340bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level2_340bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level8_460bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level8_460bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="coin_collect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\coin_collect.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="audionames" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\audionames.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="high_jump" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\high_jump.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclick3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick3.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ducker_ring_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\ducker_ring_approach.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIdelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIdelete.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="turn_hit_perfect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_hit_perfect2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIdockun" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIdockun.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_level4_380bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level4_380bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="grindable_birth2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\grindable_birth2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclickGOLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclickGOLD.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIrevertchanges" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIrevertchanges.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIrevertnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIrevertnew.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samples" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samples.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="xfm_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\xfm_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="leaf_singletrack_old" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="changelog" xml:space="preserve">
-    <value>==========2.2.1==========
-BUG FIXES
-✅ pasting in leaf editor doesn't save
-✅ crash when pasting decimal in ktraitColor
-
-
-==========2.2==========
-I have setup a Ko-Fi for myself. Any amount of support is greatly appreciated!
-https://ko-fi.com/cocoamix
-
-NEW
-🌟 Undo on Leaf (Ctrl+Z)
-🌟 Several buttons have new sound effects.
-🌟 Right-click on application in taskbar to access and open Recent Levels.
-🌟 Search button in the Working Folder tells you where a file is referenced.
-🌟 Ctrl+X to cut cells in leaf editor. Paste (an existing function) with Ctrl+V.
-🌟 Custom keybinds (Edit &gt; Preferences menu)
-🌟 View your level's total runtime in the Master panel
-🌟 Multiple new objects to use in leafs!
-🌟 New style Difficulty Badges, created by CaptainJul
-🌟 Added "file locks". You won't be able to edit/delete files open in the editor from file explorer.
-
-BUG FIXES
-✅ object list is collapsed to the left when loading a new leaf
-✅ renaming files now auto-updates all references to that file in the project
-✅ extreme lag when using the "clear" button
-✅ pasting cells doesn't mark leaf as unsaved
-✅ sample play button doesn't revert after playback stops. Stays as "stop" icon
-✅ multi-select delete doesn't do anything if the last selected cell doesn't contain a value
-✅ Raw data not updating when randomzing row values
-✅ Clear Row can't clear multiple tracks
-✅ Interpolator throws errors if fields are blank
-✅ Sample panel not visible on first launch
-✅ Golden beeble never shows up
-✅ The first lvl created of a new level has no loop tracks available until it is reloaded
-✅ Splitting a leaf doesn't visually update it until its reloaded
-✅ "Apply to Track" button is enabled on app load, when no tracks exist. Causes error when pressed
-✅ Switching between a gate with RANDOM enabled and any other gate does not update the boss field
-✅ Recent Levels list doesn't save if the app crashes
-✅ If you delete a leaf from a lvl, its tunnels remain showing and can be accidentally saved into the next leaf in the list
-✅ Making a change in any of the panels and then switching to another file doesn't clear the "unsaved" red color
-✅ unsaved dialog doesnt show for lvl, gate, sample when switching files
-✅ Pasting cells can be laggy
-✅ creating a new level folder saves any open file into itself, instead of starting blank
-✅ can play only 1 sample and the next crashes
-✅ Including a '#' in the Level's description would cause the Level Info to not load
-✅ unable to move with arrows or click a different cell when active cell is empty
-✅ Using the "refresh" button on the Master panel would disable the save button.
-✅ extras folder doesn't delete .pc file when a sample is deleted from the sample editor
-✅ Increasing approach beats of a lvl doesn't visually update the Volume Sequencer until reloading the lvl
-✅ duplicating files makes a duplicate of what you have open in the editor, not the file you right click on in the Working Folder
-✅ Making changes to a template file before saving it with a name breaks "TRACK EFFECT" objects on it next time it loads
-✅ beeblehappy never plays a noise when it shows up
-✅ Unable to open some older levels as they are missing data that was added in newer versions
-✅ custom colors don't save in color picker
-✅ Missing check for illegal characters when renaming/duplicating files
-✅ Duplicate File and Split Leaf do not check for existing file name
-✅ unable to navigate in volume sequencer using arrow keys
-✅ splitting leaf would load the new leaf, but saving it would save to the previous leaf
-✅ "copy all paths" button wouldn't enable when adding a path to a leaf in a lvl
-✅ Loop samples dropdown doesn't update to include newly added samp files
-✅ loading problems if you use "." in file names
-✅ Renaming a level just creates an empty new level
-✅ Renaming a level to an existing folder
-✅ Illegal characters in level name
-✅ Horizontal scrolling on leaf editor is really bad
-✅ "open level folder" button in the Woking Folder panel does not prompt to save
-✅ master unloads and can't be reopened if you make a new master but then cancel it
-✅ cell values don't change if the value you enter is the same as the last cell selected
-✅ Resizing cursor shows up in weird/wrong spots
-✅ Unable to change casing on level name when renaming it
-✅ double-clicking "file name" header in Working Folder panel tries to load non-existent file
-✅ error when renaming a file to another name that already exist
-✅ error when creating and saving a leaf with no open project
-✅ error when pressing "add random tunnel" when no leaf exists in the lvl
-✅ error when pressing "random values" with no track selected
-✅ error when pressing "load lvl" buttons for Intro, Checkpoint, and Rest in the master with no lvl set
-✅ error when renaming a lvl and no gate has been created
-✅ error when adding random tracks and you somehow have 0 samples loaded
-✅ error when adding a new sample with no open project
-✅ error when interpolating from newly set cells. Self-fixes if you would reload the leaf
-✅ error when selecting a level from the Recent list and it no longer exists
-✅ error when removing the bottom-most leaf in a lvl
-✅ error when setting time signature to not #/# format or using non-number characters
-✅ error when leaf editor too small to display any cells
-✅ error when trying to load a different level and the current level folder is deleted
-✅ error when loading lvl with samples that no longer exist
-✅ error when trying to load bad data in Raw import
-✅ error when trying to paste tracks to a blank leaf
-✅ error when moving or clearing a track with no set cells
-✅ error when opening a folder that is not a level folder
-
-SUGGESTED ADDITIONS/CHANGES
-⏺️ nickname the interpolation names in the editor to exclude the ktraitInterp prefix
-⏺️ allow right-click delete for loop track volume sequencer cells
-⏺️ dragging the mouse with right click to remove multiple beats in one swoop
-⏺️ added button to add random tunnels
-⏺️ added "open level folder" button to File menu
-⏺️ auto-dock panels on first launch
-⏺️ Moved LEVEL DETAILS button out of the Working folder file list and to its own dedicated button
-⏺️ Filter file buttons now has a "clear filters" button
-⏺️ Paths/Tunnels list now shows which leaf is currently active
-⏺️ Adjusted vertical scrollbar on track editor so it doesn't cover the row indicator arrow
-⏺️ various UI changes to make things more consistent
-⏺️ F3 and F4: next/previous leaf (you can change these keybinds)
-⏺️ F1 and F2: next/previous lvl (you can change these keybinds)
-⏺️ F6, 7, 8, 9, 10 all tied to leaf editor functions (you can change these keybinds)
-⏺️ All panels now have multi-select editing enabled. Copy/paste/move up/move down
-⏺️ Right-click delete should not delete highlighted cells if deleting a non-highlighted cell
-⏺️ "Open level folder" now opens 1 folder level up from where the workingfolder is
-⏺️ Undock a panel by double-clicking its title bar
-
-MISC
-👍 Decreased size of EXE a bunch
-👍 Improved load speed and performance
-👍 Minor UI changes
-👍 Added "open template" button to Leaf panel
-👍 All values in leaf editor limited to 3 decimal places (for my sanity, and better display for users)</value>
-  </data>
-  <data name="track_objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\track objects.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="samp_globaldrones" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_globaldrones.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="silence" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\silence.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\paths.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="leaf_multitrack_ring_bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack_ring&amp;bar.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="samp_level9_480bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level9_480bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="thump_birth1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\thump_birth1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIinterpolatewindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIinterpolatewindow.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIselect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIselect.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIcoloropen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIcoloropen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_level3_360bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level3_360bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="samp_level1_320bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level1_320bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="UIdataerase" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIdataerase.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_level7_440bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level7_440bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="UIbeetleclick5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick5.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="leaf_multitrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="UItunneladd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UItunneladd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIobjectadd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIobjectadd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="jumper_approach" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\jumper_approach.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_level6_420bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_level6_420bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="UIfolderopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIfolderopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_misc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_misc.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="UIbeetleclick7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick7.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="turn_long_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_long_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="leaf_multitrack_old" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="UIrefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIrefresh.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIobjectremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIobjectremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIfolderclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIfolderclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclick6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick6.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIcolorapply" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIcolorapply.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIwindowopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIwindowopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="samp_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="UIbeetleclick4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick4.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIsave" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIsave.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIdock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIdock.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="objects_defaultcolors" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\objects_defaultcolors.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="UIkpaste" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIkpaste.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UItunnelremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UItunnelremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="turn_birth_lft" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\turn_birth_lft.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="hammer_two_handed_hit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\hammer_two_handed_hit.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="UIbeetleclick1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\audio assets\UI sounds\UIbeetleclick1.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="beeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beebleconfuse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beebleconfuse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblecool" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblecool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beebledance" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beebledance.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblederp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblederp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblegold" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblegold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblehappy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblehappy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblelaugh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblelaugh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblelove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblelove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblespin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblespin.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblestare" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblestare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beeblethink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beeblethink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beebletiny" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beebletiny.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="difficulty_D0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\misc\difficulty-D0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -582,8 +246,14 @@ MISC
   <data name="editor_gate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-gate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="editor_gate64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\editors\editor-gate64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="editor_leaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-leaf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_leaf64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\editors\editor-leaf64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="editor_lvl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-lvl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -593,6 +263,12 @@ MISC
   </data>
   <data name="editor_sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-sample.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_sample64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\editors\editor-sample64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_workspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\editors\editor-workspace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="external_discord" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icons\external-discord.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -683,6 +359,9 @@ MISC
   </data>
   <data name="icon_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icons\icon-export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_feather" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\icon_feather.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icons\icon-file.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -825,35 +504,38 @@ MISC
   <data name="ico_master" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\ico\ico_master.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ico_rawtext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\ico\ico-rawtext.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ico_sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\ico\ico_sample.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pixel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\misc\pixel.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Thumper_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\misc\Thumper_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Thumper_Splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\misc\Thumper_Splash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beebleflesh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beebleflesh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beebleuwu" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\beeble\beebleuwu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="editor-leaf64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\editors\editor-leaf64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="thumper_level_editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\ico\thumper_level_editor.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="editor-workspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\editors\editor-workspace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ico_workspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\ico\ico_workspace.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leaf_multitrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="leaf_multitrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_multitrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="leaf_multitrack_ring_bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_multitrack_ring&amp;bar.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="leaf_pyramid_outro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_pyramid_outro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="leaf_singletrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="leaf_singletrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\leaf_singletrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="objects_defaultcolors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\objects_defaultcolors.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\paths.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="path_arms_deca" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\tunnels\path_arms_deca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1358,5 +1040,176 @@ MISC
   </data>
   <data name="path_web_points" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\tunnels\path_web_points.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pixel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\misc\pixel.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="samples" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samples.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="samp_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="samp_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_dissonant.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_globaldrones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_globaldrones.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level1_320bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level1_320bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level2_340bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level2_340bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level3_360bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level3_360bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level4_380bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level4_380bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level5_400bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level5_400bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level6_420bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level6_420bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level7_440bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level7_440bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level8_460bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level8_460bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level9_480bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_level9_480bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_misc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_misc.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="thumper_level_editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\ico\thumper_level_editor.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumper_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\misc\Thumper_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumper_Splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\misc\Thumper_Splash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="track_objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\track objects.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="UIaddrandom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIaddrandom.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick1.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick2.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick3.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick4.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick5.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick6.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick7.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclick8.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclickGOLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIbeetleclickGOLD.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIboot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIboot.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIcolorapply" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIcolorapply.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIcoloropen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIcoloropen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdataerase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdataerase.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdelete.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdock.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdockun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIdockun.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIfolderclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIfolderclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIfolderopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIfolderopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIinterpolate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIinterpolate.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIinterpolatewindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIinterpolatewindow.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIkcopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIkcopy.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIkpaste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIkpaste.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIleafsplit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIleafsplit.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIobjectadd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIobjectadd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIobjectremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIobjectremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIrefresh.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrevertchanges" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIrevertchanges.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrevertnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIrevertnew.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIsave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIsave.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIselect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIselect.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UItunneladd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UItunneladd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UItunnelremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UItunnelremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIwindowclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIwindowclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIwindowopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\UI sounds\UIwindowopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="xfm_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\xfm_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

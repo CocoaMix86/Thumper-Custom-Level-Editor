@@ -227,7 +227,7 @@ namespace Thumper_Custom_Level_Editor
         {
             panelChangelog.Visible = true;
             panelChangelog.BringToFront();
-            lblChangelog.Text = Properties.Resources.changelog;
+            //lblChangelog.Text = Properties.Resources.changelog;
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
 
