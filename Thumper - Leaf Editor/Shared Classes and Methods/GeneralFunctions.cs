@@ -1,4 +1,6 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Fmod5Sharp.FmodTypes;
+using Fmod5Sharp;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Vorbis;
 using NAudio.Wave;
 using Newtonsoft.Json;
@@ -375,6 +377,9 @@ namespace Thumper_Custom_Level_Editor
             foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp")) {
                 //parse file to JSON
                 dynamic _in = TCLE.LoadFileLock(sampfile.FullName);
+                //skip if somehow empty
+                if (_in == null || !_in.ContainsKey("items"))
+                    continue;
                 //iterate over items:[] list to get each sample and add names to list
                 foreach (dynamic _samp in _in["items"]) {
                     LvlSamples.Add(new SampleData {
@@ -403,6 +408,74 @@ namespace Thumper_Custom_Level_Editor
             }
             ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DropDownWidth = width + 20;
             */
+        }
+
+        public static string PCtoOGG(SampleData _samp)
+        {
+            //check if the gamedir has been set so the method can find the .pc files
+            if (Properties.Settings.Default.game_dir == "none") {
+                TCLE.Read_Config();
+            }
+
+            byte[] _bytes;
+            //get the hash of this filename. This will be used to locate the sample's .PC file
+            string _hashedname = "";
+            byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{_samp.path}"));
+            Array.Reverse(hashbytes);
+            foreach (byte b in hashbytes)
+                _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+            //if the hashed name starts with a '0', remove it
+            if (_hashedname[0] == '0')
+                _hashedname = _hashedname[1..];
+
+            //check if sample is custom or not. This changes where we load audio from
+            if (_samp.path.Contains("custom")) {
+                //attempt to locate file. But error and return safely if nothing found
+                try {
+                    //read the .pc file as bytes, and skip the first 4 header bytes
+                    _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
+                }
+                catch {
+                    MessageBox.Show($@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. Is the custom audio file in the extras folder?");
+                    return null;
+                }
+            }
+            else {
+                //attempt to locate file. But error and return safely if nothing found
+                try {
+                    //read the .pc file as bytes, and skip the first 4 header bytes
+                    _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
+                }
+                catch {
+                    MessageBox.Show($@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc to play sample. If you need to change your Game Directory, go to the the Help menu.");
+                    return null;
+                }
+            }
+            _bytes = _bytes.Skip(4).ToArray();
+
+            // credit to https://github.com/SamboyCoding/Fmod5Sharp
+            FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
+            List<FmodSample> samples = bank.Samples;
+            samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
+
+            File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
+            return fileExtension;
+        }
+
+        public static uint Hash32(string s)
+        {
+            //this hashes stuff. Don't know why it does it this why.
+            //this is ripped directly from the game's code
+            uint h = 0x811c9dc5;
+            foreach (char c in s)
+                h = ((h ^ c) * 0x1000193) & 0xffffffff;
+            h = (h * 0x2001) & 0xffffffff;
+            h = (h ^ (h >> 0x7)) & 0xffffffff;
+            h = (h * 0x9) & 0xffffffff;
+            h = (h ^ (h >> 0x11)) & 0xffffffff;
+            h = (h * 0x21) & 0xffffffff;
+
+            return h;
         }
 
         public static int CalculateSublevelRuntime(MasterLvlData _masterlvl)

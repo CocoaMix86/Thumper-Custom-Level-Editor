@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using NAudio.Gui;
+using NAudio.Vorbis;
+using NAudio.Wave;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -254,6 +257,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLoopTracks.RowCount = 0;
             foreach (LvlLoop loop in LvlProperties.lvlloops) {
                 lvlLoopTracks.Rows.Add(new object[] {
+                    null,
                     loop.sample,
                     loop.beats
                 });
@@ -594,7 +598,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///load loop track names and paths to lvlLoopTracks DGV
             TCLE.LvlReloadSamples();
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToList();
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToList();
             foreach (dynamic samp in _load["loops"]) {
                 lvlProperties.lvlloops.Add(new LvlLoop() {
                     sample = (string)samp["samp_name"],
@@ -870,5 +874,107 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => pictureTunnelViewer.Visible = false;
         private void lvlLeafPaths_MouseLeave(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
         private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
+
+
+
+        private void lvlLoopTracks_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            //button is in column 0, so that's where to draw the image
+            if (e.ColumnIndex == 0) {
+                CellPaint(e, SampleIsPlaying);
+            }
+        }
+        private void CellPaint(DataGridViewCellPaintingEventArgs e, bool isplaying)
+        {
+            e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            //get dimensions
+            int w = Properties.Resources.icon_play.Width;
+            int h = Properties.Resources.icon_play.Height;
+            int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+            int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
+            //paint the image
+            if (isplaying && playingcell == lvlLoopTracks[e.ColumnIndex, e.RowIndex])
+                e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
+            else
+                e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
+            e.Handled = true;
+        }
+
+        private void lvlLoopTracks_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                return;
+            if (e.ColumnIndex == 0) {
+                AudioPlayback(lvlLoopTracks[e.ColumnIndex, e.RowIndex]);
+            }
+        }
+
+        private WaveOutEvent outputDevice = new();
+        private VorbisWaveReader vorbis;
+        private AudioFileReader audioFile;
+        private bool SampleIsPlaying;
+        private DataGridViewCell playingcell;
+        private void OnPlaybackStopped(object sender, StoppedEventArgs args)
+        {
+            outputDevice.Dispose();
+            outputDevice = null;
+            audioFile?.Dispose();
+            audioFile = null;
+            vorbis?.Dispose();
+            vorbis = null;
+
+            SampleIsPlaying = false;
+            lvlLoopTracks.InvalidateCell(playingcell);
+        }
+        private void AudioPlayback(DataGridViewCell cell)
+        {
+            if (!SampleIsPlaying) {
+                SampleData _samp = TCLE.LvlSamples.FirstOrDefault(x => x.obj_name == cell.OwningRow.Cells[1].Value.ToString());
+                if (_samp == null)
+                    return;
+                string _filetype = "";
+                //check if sample exists in temp folder. If not, create it
+                if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
+                    string _result = TCLE.PCtoOGG(_samp);
+                    if (_result == null)
+                        return;
+                }
+                //check extension of the sample to play
+                if (File.Exists($@"temp\{_samp.obj_name}.ogg"))
+                    _filetype = "ogg";
+                if (File.Exists($@"temp\{_samp.obj_name}.wav"))
+                    _filetype = "wav";
+
+                outputDevice = new WaveOutEvent();
+                outputDevice.PlaybackStopped += OnPlaybackStopped;
+                outputDevice.Volume = volumeSlider1.Volume;
+
+                if (_filetype == "ogg") {
+                    vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
+                    vorbis.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
+                    outputDevice.Init(vorbis);
+                }
+                else {
+                    audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
+                    audioFile.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
+                    outputDevice.Init(audioFile);
+                }
+
+                SampleIsPlaying = true;
+                lvlLoopTracks.InvalidateCell(cell);
+                playingcell = cell;
+                outputDevice.Play();
+            }
+            else {
+                outputDevice?.Stop();
+            }
+        }
+
+        private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
+        {
+            outputDevice.Volume = volumeSlider1.Volume;
+        }
     }
 }

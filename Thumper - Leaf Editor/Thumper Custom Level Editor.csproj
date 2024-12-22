@@ -212,7 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Costura.Fody">
-      <Version>5.7.0</Version>
+      <Version>6.0.0</Version>
       <IncludeAssets>runtime; compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
       <TreatAsUsed>true</TreatAsUsed>
@@ -260,6 +260,8 @@
     <PackageReference Include="OggVorbisEncoder">
       <Version>1.2.2</Version>
     </PackageReference>
+    <PackageReference Include="SoundTouch.Net" Version="2.3.2" />
+    <PackageReference Include="SoundTouch.Net.NAudioSupport" Version="2.3.2" />
     <PackageReference Include="System.Collections.Immutable">
       <Version>9.0.0</Version>
     </PackageReference>

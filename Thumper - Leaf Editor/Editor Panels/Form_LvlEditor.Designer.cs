@@ -41,6 +41,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LvlEditor));
             this.toolTip1 = new ToolTip(this.components);
             this.lblLvlTunnels = new Label();
+            this.volumeSlider1 = new NAudio.Gui.VolumeSlider();
             this.lvlToolStrip = new ToolStrip();
             this.btnLvlLeafAdd = new ToolStripButton();
             this.btnLvlLeafDelete = new ToolStripButton();
@@ -72,6 +73,7 @@
             this.btnLvlRandomTunnel = new ToolStripButton();
             this.btnLvlPathView = new ToolStripButton();
             this.lvlLoopTracks = new DataGridView();
+            this.LvlLoopPlay = new DataGridViewButtonColumn();
             this.LoopSample = new DataGridViewComboBoxColumn();
             this.BeatsPerLoop = new DataGridViewTextBoxColumn();
             this.label22 = new Label();
@@ -113,6 +115,17 @@
             this.lblLvlTunnels.TabIndex = 161;
             this.lblLvlTunnels.Text = "Paths/Tunnels";
             this.toolTip1.SetToolTip(this.lblLvlTunnels, "Unique per leaf");
+            // 
+            // volumeSlider1
+            // 
+            this.volumeSlider1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            this.volumeSlider1.Cursor = Cursors.Hand;
+            this.volumeSlider1.Location = new Point(51, 176);
+            this.volumeSlider1.Name = "volumeSlider1";
+            this.volumeSlider1.Size = new Size(128, 20);
+            this.volumeSlider1.TabIndex = 164;
+            this.toolTip1.SetToolTip(this.volumeSlider1, "Alters volume of smaple playback. Does not go above 0dB.");
+            this.volumeSlider1.VolumeChanged += this.volumeSlider1_VolumeChanged;
             // 
             // lvlToolStrip
             // 
@@ -422,6 +435,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.AutoScroll = true;
+            this.splitContainer3.Panel2.Controls.Add(this.volumeSlider1);
             this.splitContainer3.Panel2.Controls.Add(this.lvlLoopTracks);
             this.splitContainer3.Panel2.Controls.Add(this.label22);
             this.splitContainer3.Panel2.Controls.Add(this.lvlLoopToolStrip);
@@ -647,7 +661,7 @@
             dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
             this.lvlLoopTracks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.lvlLoopTracks.ColumnHeadersHeight = 20;
-            this.lvlLoopTracks.Columns.AddRange(new DataGridViewColumn[] { this.LoopSample, this.BeatsPerLoop });
+            this.lvlLoopTracks.Columns.AddRange(new DataGridViewColumn[] { this.LvlLoopPlay, this.LoopSample, this.BeatsPerLoop });
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle9.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle9.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -682,8 +696,19 @@
             this.lvlLoopTracks.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.lvlLoopTracks.Size = new Size(452, 159);
             this.lvlLoopTracks.TabIndex = 161;
+            this.lvlLoopTracks.CellClick += this.lvlLoopTracks_CellClick;
+            this.lvlLoopTracks.CellPainting += this.lvlLoopTracks_CellPainting;
             this.lvlLoopTracks.CellValueChanged += this.lvlLoopTracks_CellValueChanged;
             this.lvlLoopTracks.DataError += this.lvlLoopTracks_DataError;
+            // 
+            // LvlLoopPlay
+            // 
+            this.LvlLoopPlay.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.LvlLoopPlay.HeaderText = "";
+            this.LvlLoopPlay.Name = "LvlLoopPlay";
+            this.LvlLoopPlay.ReadOnly = true;
+            this.LvlLoopPlay.Resizable = DataGridViewTriState.False;
+            this.LvlLoopPlay.Width = 5;
             // 
             // LoopSample
             // 
@@ -848,11 +873,13 @@
         private ToolStripButton chkTunnelCopy;
         private ToolStripButton btnLvlRandomTunnel;
         private Label lblLvlTunnels;
-        private DataGridViewComboBoxColumn LoopSample;
-        private DataGridViewTextBoxColumn BeatsPerLoop;
         private SplitContainer splitContainer3;
         public Button btnLvlSequencer;
         public Label pictureTunnelViewer;
         private ToolStripButton btnLvlPathView;
+        private DataGridViewButtonColumn LvlLoopPlay;
+        private DataGridViewComboBoxColumn LoopSample;
+        private DataGridViewTextBoxColumn BeatsPerLoop;
+        private NAudio.Gui.VolumeSlider volumeSlider1;
     }
 }
