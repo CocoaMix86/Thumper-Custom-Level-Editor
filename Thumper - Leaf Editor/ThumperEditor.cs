@@ -72,8 +72,7 @@ namespace Thumper_Custom_Level_Editor
                     toolstripLevelName.Text = ProjectJson["level_name"];
                     toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{ProjectJson["difficulty"]}");
                     //add to recent files
-                    if (Properties.Settings.Default.Recentfiles.Contains(WorkingFolder.FullName))
-                        Properties.Settings.Default.Recentfiles.Remove(WorkingFolder.FullName);
+                    Properties.Settings.Default.Recentfiles.Remove(WorkingFolder.FullName);
                     Properties.Settings.Default.Recentfiles.Insert(0, WorkingFolder.FullName);
                     JumpListUpdate();
                     panelRecentFiles.Visible = false;
@@ -205,9 +204,9 @@ namespace Thumper_Custom_Level_Editor
         ///EXIT APP
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
         ///FORM CLOSING - check if anything is unsaved
-        private void FormLeafEditor_FormClosing(object sender, FormClosingEventArgs e)
+        private void TCLE_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (/*!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample*/false) {
+            if (AnyUnsaved()) {
                 if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
@@ -353,7 +352,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileSaveAs_Click(object sender, EventArgs e)
         {
-
+            GlobalActiveDocument.GetType().GetMethod("SaveAs").Invoke(GlobalActiveDocument, null);
         }
 
         private void toolstripFileSaveAll_Click(object sender, EventArgs e)

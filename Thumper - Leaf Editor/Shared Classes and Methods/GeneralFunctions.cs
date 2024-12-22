@@ -289,6 +289,8 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CloseFileLock(FileInfo filetoclose)
         {
+            if (filetoclose == null)
+                return;
             if (lockedfiles.TryGetValue(filetoclose, out FileStream? value)) {
                 value.Close();
                 lockedfiles.Remove(filetoclose);
@@ -560,6 +562,16 @@ namespace Thumper_Custom_Level_Editor
             foreach (IDockContent document in TCLE.Documents.Where(x => x.GetType() == editor)) {
                 document.GetType().GetMethod(method).Invoke(document, null);
             }
+        }
+
+        public bool AnyUnsaved()
+        {
+            foreach (IDockContent document in TCLE.Documents) {
+                bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
+                if (!save)
+                    return true;
+            }
+            return false;
         }
     }
 }

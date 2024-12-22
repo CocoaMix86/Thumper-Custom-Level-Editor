@@ -232,32 +232,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
-        ///SAVE
-        public void Save()
-        {
-            //if LoadedMaster is somehow not set, force Save As instead
-            if (LoadedMaster == null)
-                SaveAs();
-            else
-                SaveCheckAndWrite(true, true);
-        }
-        ///SAVE AS
-        public void SaveAs()
-        {
-            using SaveFileDialog sfd = new();
-            //filter .txt only
-            sfd.Filter = "Thumper Master File (*.master)|*.master";
-            sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
-            if (sfd.ShowDialog() == DialogResult.OK) {
-                //separate path and filename
-                string storePath = Path.GetDirectoryName(sfd.FileName);
-                loadedmaster = new FileInfo($@"{storePath}\sequin.master");
-                SaveCheckAndWrite(true, true);
-                //after saving new file, refresh the project explorer
-                TCLE.dockProjectExplorer.CreateTreeView();
-            }
-        }
         #endregion
 
         #region Buttons
@@ -446,6 +420,38 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             dynamic _load = TCLE.LoadFileLock(LoadedMaster.FullName);
             LoadMaster(_load, LoadedMaster);
+        }
+
+        ///SAVE
+        public void Save()
+        {
+            //if LoadedMaster is somehow not set, force Save As instead
+            if (LoadedMaster == null)
+                SaveAs();
+            else
+                SaveCheckAndWrite(true, true);
+        }
+        ///SAVE AS
+        public void SaveAs()
+        {
+            using SaveFileDialog sfd = new();
+            //filter .txt only
+            sfd.Filter = "Thumper Master File (*.master)|*.master";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                //separate path and filename
+                string storePath = Path.GetDirectoryName(sfd.FileName);
+                loadedmaster = new FileInfo($@"{storePath}\sequin.master");
+                SaveCheckAndWrite(true, true);
+                //after saving new file, refresh the project explorer
+                TCLE.dockProjectExplorer.CreateTreeView();
+            }
+        }
+
+        public bool IsSaved()
+        {
+            return EditorIsSaved;
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)

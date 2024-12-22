@@ -146,31 +146,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
-        ///SAVE
-        private void Save()
-        {
-            //if _loadedgate is somehow not set, force Save As instead
-            if (loadedsample == null) {
-                SaveAs();
-            }
-            else
-                SaveCheckAndWrite(true, true);
-        }
-        ///SAVE AS
-        private void SaveAs()
-        {
-            using SaveFileDialog sfd = new();
-            //filter .txt only
-            sfd.Filter = "Thumper Sample File (*.samp)|*.samp";
-            sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
-            if (sfd.ShowDialog() == DialogResult.OK) {
-                loadedsample = new FileInfo(sfd.FileName);
-                SaveCheckAndWrite(true, true);
-                //after saving new file, refresh the project explorer
-                TCLE.dockProjectExplorer.CreateTreeView();
-            }
-        }
 
         ///Detect dragon-and-drop of files and then load them to Sample files
         private void sampleList_DragEnter(object sender, DragEventArgs e)
@@ -412,6 +387,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
             EditorLoading = false;
             EditorIsSaved = true;
+        }
+
+        ///SAVE
+        public void Save()
+        {
+            //if _loadedgate is somehow not set, force Save As instead
+            if (loadedsample == null) {
+                SaveAs();
+            }
+            else
+                SaveCheckAndWrite(true, true);
+        }
+        ///SAVE AS
+        public void SaveAs()
+        {
+            using SaveFileDialog sfd = new();
+            //filter .txt only
+            sfd.Filter = "Thumper Sample File (*.samp)|*.samp";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                loadedsample = new FileInfo(sfd.FileName);
+                SaveCheckAndWrite(true, true);
+                //after saving new file, refresh the project explorer
+                TCLE.dockProjectExplorer.CreateTreeView();
+            }
+        }
+
+        public bool IsSaved()
+        {
+            return EditorIsSaved;
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)

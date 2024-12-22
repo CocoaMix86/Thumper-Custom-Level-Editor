@@ -33,26 +33,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
         {
-            string filetoclose = "";
+            var DocClosing = e.Content;
+            FileInfo filetoclose = null;
             if (!TCLE.Instance.Disposing) {
-                if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_MasterEditor))
-                    filetoclose = (TCLE.GlobalActiveDocument as Form_MasterEditor).loadedmaster.Name;
-                else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_GateEditor))
-                    filetoclose = (TCLE.GlobalActiveDocument as Form_GateEditor).loadedgate.Name;
-                else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_LvlEditor))
-                    filetoclose = (TCLE.GlobalActiveDocument as Form_LvlEditor).loadedlvl.Name;
-                else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_SampleEditor))
-                    filetoclose = (TCLE.GlobalActiveDocument as Form_SampleEditor).loadedsample.Name;
-                else if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_RawText))
-                    filetoclose = (TCLE.GlobalActiveDocument as Form_RawText).loadedfile.Name;
+                if (DocClosing.GetType() == typeof(Form_MasterEditor))
+                    filetoclose = (DocClosing as Form_MasterEditor).loadedmaster;
+                else if (DocClosing.GetType() == typeof(Form_GateEditor))
+                    filetoclose = (DocClosing as Form_GateEditor).loadedgate;
+                else if (DocClosing.GetType() == typeof(Form_LvlEditor))
+                    filetoclose = (DocClosing as Form_LvlEditor).loadedlvl;
+                else if (DocClosing.GetType() == typeof(Form_SampleEditor))
+                    filetoclose = (DocClosing as Form_SampleEditor).loadedsample;
+                else if (DocClosing.GetType() == typeof(Form_RawText))
+                    filetoclose = (DocClosing as Form_RawText).loadedfile;
 
                 //check if any other tab is open that is the same file
                 //if it is, we don't want to close the file lock
-                foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(filetoclose))) {
+                foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(filetoclose.Name))) {
                     return;
                 }
 
-                TCLE.CloseFileLock(TCLE.dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{filetoclose}")).Value);
+                TCLE.CloseFileLock(filetoclose);
             }
         }
     }

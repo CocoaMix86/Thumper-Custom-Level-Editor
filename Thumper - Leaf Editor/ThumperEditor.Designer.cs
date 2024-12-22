@@ -414,7 +414,7 @@
             this.panelChangelog.BorderStyle = BorderStyle.Fixed3D;
             this.panelChangelog.Controls.Add(this.panel8);
             this.panelChangelog.Controls.Add(this.toolStripChangelog);
-            this.panelChangelog.Location = new Point(679, 0);
+            this.panelChangelog.Location = new Point(679, 80);
             this.panelChangelog.Name = "panelChangelog";
             this.panelChangelog.Size = new Size(555, 535);
             this.panelChangelog.TabIndex = 139;
@@ -565,7 +565,7 @@
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new Size(252, 198);
+            this.contextmenuFile.Size = new Size(252, 220);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
             // 
             // newToolStripMenuItem
@@ -1092,7 +1092,7 @@
             // toolstripWindowFloat
             // 
             this.toolstripWindowFloat.ForeColor = Color.White;
-            this.toolstripWindowFloat.Image = Properties.Resources.icon_gear;
+            this.toolstripWindowFloat.Image = Properties.Resources.icon_feather;
             this.toolstripWindowFloat.Name = "toolstripWindowFloat";
             this.toolstripWindowFloat.Size = new Size(194, 22);
             this.toolstripWindowFloat.Text = "Float Tab";
@@ -1101,7 +1101,7 @@
             // toolstripWindowFloatAll
             // 
             this.toolstripWindowFloatAll.ForeColor = Color.White;
-            this.toolstripWindowFloatAll.Image = Properties.Resources.icon_gear;
+            this.toolstripWindowFloatAll.Image = Properties.Resources.icon_feather;
             this.toolstripWindowFloatAll.Name = "toolstripWindowFloatAll";
             this.toolstripWindowFloatAll.Size = new Size(194, 22);
             this.toolstripWindowFloatAll.Text = "Float All Tabs";
@@ -1612,7 +1612,7 @@
             // 
             this.toolstripTabFloat.BackColor = Color.FromArgb(46, 46, 46);
             this.toolstripTabFloat.ForeColor = Color.White;
-            this.toolstripTabFloat.Image = Properties.Resources.icon_gear;
+            this.toolstripTabFloat.Image = Properties.Resources.icon_feather;
             this.toolstripTabFloat.Name = "toolstripTabFloat";
             this.toolstripTabFloat.Size = new Size(297, 22);
             this.toolstripTabFloat.Text = "Float";
@@ -1622,7 +1622,7 @@
             // 
             this.toolstripTabFloatAll.BackColor = Color.FromArgb(46, 46, 46);
             this.toolstripTabFloatAll.ForeColor = Color.White;
-            this.toolstripTabFloatAll.Image = Properties.Resources.icon_gear;
+            this.toolstripTabFloatAll.Image = Properties.Resources.icon_feather;
             this.toolstripTabFloatAll.Name = "toolstripTabFloatAll";
             this.toolstripTabFloatAll.Size = new Size(297, 22);
             this.toolstripTabFloatAll.Text = "Float All                                                            ";
@@ -1643,14 +1643,14 @@
             this.contextmenuMoveWorkspace.Name = "contextmenuHelp";
             this.contextmenuMoveWorkspace.OwnerItem = this.moveToWorkspaceToolStripMenuItem;
             this.contextmenuMoveWorkspace.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuMoveWorkspace.Size = new Size(181, 48);
+            this.contextmenuMoveWorkspace.Size = new Size(81, 26);
             this.contextmenuMoveWorkspace.Opening += this.contextmenuMoveWorkspace_Opening;
             this.contextmenuMoveWorkspace.ItemClicked += this.contextmenuMoveWorkspace_ItemClicked;
             // 
             // eToolStripMenuItem
             // 
             this.eToolStripMenuItem.Name = "eToolStripMenuItem";
-            this.eToolStripMenuItem.Size = new Size(180, 22);
+            this.eToolStripMenuItem.Size = new Size(80, 22);
             this.eToolStripMenuItem.Text = "e";
             // 
             // TCLE
@@ -1660,12 +1660,12 @@
             this.BackgroundImageLayout = ImageLayout.Center;
             this.ClientSize = new Size(984, 500);
             this.ControlBox = false;
+            this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.panelFill);
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.panelToolStrips);
             this.Controls.Add(this.toolStripTitle);
             this.Controls.Add(this.panelRecentFiles);
-            this.Controls.Add(this.panelChangelog);
             this.DoubleBuffered = true;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.KeyPreview = true;
@@ -1675,6 +1675,7 @@
             this.Name = "TCLE";
             this.ShowIcon = false;
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormClosing += this.TCLE_FormClosing;
             this.Load += this.FormLeafEditor_Load;
             this.Resize += this.TCLE_Resize;
             this.panelRecentFiles.ResumeLayout(false);

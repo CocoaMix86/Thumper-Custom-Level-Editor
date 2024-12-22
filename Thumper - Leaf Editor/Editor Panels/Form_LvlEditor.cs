@@ -268,31 +268,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveAs();
             }
         }
-        ///SAVE
-        public void Save()
-        {
-            //if _loadedlvl is somehow not set, force Save As instead
-            if (LoadedLvl == null) {
-                SaveAs();
-            }
-            else
-                SaveCheckAndWrite(true, true);
-        }
-        ///SAVE AS
-        public void SaveAs()
-        {
-            using SaveFileDialog sfd = new();
-            //filter .txt only
-            sfd.Filter = "Thumper Editor Lvl File (*.lvl)|*.lvl";
-            sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
-            if (sfd.ShowDialog() == DialogResult.OK) {
-                loadedlvl = new FileInfo(sfd.FileName);
-                SaveCheckAndWrite(true, true);
-                //after saving new file, refresh the project explorer
-                TCLE.dockProjectExplorer.CreateTreeView();
-            }
-        }
         /// LVL LOAD
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -699,6 +674,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
             btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
             //monke
+        }
+
+        ///SAVE
+        public void Save()
+        {
+            //if _loadedlvl is somehow not set, force Save As instead
+            if (LoadedLvl == null) {
+                SaveAs();
+            }
+            else
+                SaveCheckAndWrite(true, true);
+        }
+        ///SAVE AS
+        public void SaveAs()
+        {
+            using SaveFileDialog sfd = new();
+            //filter .txt only
+            sfd.Filter = "Thumper Editor Lvl File (*.lvl)|*.lvl";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                loadedlvl = new FileInfo(sfd.FileName);
+                SaveCheckAndWrite(true, true);
+                //after saving new file, refresh the project explorer
+                TCLE.dockProjectExplorer.CreateTreeView();
+            }
+        }
+
+        public bool IsSaved()
+        {
+            return EditorIsSaved;
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)

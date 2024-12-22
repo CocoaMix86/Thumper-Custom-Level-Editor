@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using ICSharpCode.TextEditor.Actions;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
@@ -32,9 +33,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get => LoadedGate;
             set {
                 if (LoadedGate != value) {
+                    TCLE.CloseFileLock(LoadedGate);
                     LoadedGate = value;
                     if (!LoadedGate.Exists) {
-                        LoadedGate.CreateText();
+                        using (StreamWriter sw = LoadedGate.CreateText()) {
+                            sw.Write(' ');
+                            sw.Close();
+                        }
                     }
                     TCLE.lockedfiles.Add(LoadedGate, new FileStream(LoadedGate.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }
@@ -258,29 +263,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
-        ///SAVE
-        public void Save()
-        {
-            //if LoadedGate is somehow not set, force Save As instead
-            if (LoadedGate == null)
-                SaveAs();
-            else
-                SaveCheckAndWrite(true, true);
-        }
-        ///SAVE AS
-        private void SaveAs()
-        {
-            using SaveFileDialog sfd = new();
-            sfd.Filter = "Thumper Gate File (*.gate)|*.gate";
-            sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
-            if (sfd.ShowDialog() == DialogResult.OK) {
-                loadedgate = new FileInfo(sfd.FileName);
-                SaveCheckAndWrite(true, true);
-                //after saving new file, refresh the project explorer
-                TCLE.dockProjectExplorer.CreateTreeView();
-            }
-        }
         #endregion
 
         #region Buttons
@@ -428,6 +410,35 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             dynamic _load = TCLE.LoadFileLock(LoadedGate.FullName);
             LoadGate(_load, LoadedGate);
+        }
+
+        ///SAVE
+        public void Save()
+        {
+            //if LoadedGate is somehow not set, force Save As instead
+            if (LoadedGate == null)
+                SaveAs();
+            else
+                SaveCheckAndWrite(true, true);
+        }
+        ///SAVE AS
+        public void SaveAs()
+        {
+            using SaveFileDialog sfd = new();
+            sfd.Filter = "Thumper Gate File (*.gate)|*.gate";
+            sfd.FilterIndex = 1;
+            sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
+            if (sfd.ShowDialog() == DialogResult.OK) {
+                loadedgate = new FileInfo(sfd.FileName);
+                SaveCheckAndWrite(true, true);
+                //after saving new file, refresh the project explorer
+                TCLE.dockProjectExplorer.CreateTreeView();
+            }
+        }
+
+        public bool IsSaved()
+        {
+            return EditorIsSaved;
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
