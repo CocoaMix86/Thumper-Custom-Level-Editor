@@ -1,4 +1,5 @@
 ﻿using NAudio.Gui;
+using NAudio;
 using NAudio.Vorbis;
 using NAudio.Wave;
 using Newtonsoft.Json.Linq;
@@ -918,7 +919,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private DataGridViewCell playingcell;
         private void OnPlaybackStopped(object sender, StoppedEventArgs args)
         {
-            outputDevice.Dispose();
+            outputDevice?.Dispose();
             outputDevice = null;
             audioFile?.Dispose();
             audioFile = null;
@@ -954,11 +955,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_filetype == "ogg") {
                     vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
                     vorbis.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
+                    SpeedAndPitch = new(vorbis);
                     outputDevice.Init(vorbis);
                 }
                 else {
                     audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
                     audioFile.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
+                    SpeedAndPitch = new(audioFile);
                     outputDevice.Init(audioFile);
                 }
 

@@ -260,8 +260,6 @@
     <PackageReference Include="OggVorbisEncoder">
       <Version>1.2.2</Version>
     </PackageReference>
-    <PackageReference Include="SoundTouch.Net" Version="2.3.2" />
-    <PackageReference Include="SoundTouch.Net.NAudioSupport" Version="2.3.2" />
     <PackageReference Include="System.Collections.Immutable">
       <Version>9.0.0</Version>
     </PackageReference>
