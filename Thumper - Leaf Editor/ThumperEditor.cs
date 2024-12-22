@@ -617,7 +617,7 @@ namespace Thumper_Custom_Level_Editor
             dockProjectExplorer.LoadProject(WorkingFolder.FullName);
             dockProjectProperties.LoadProjectProperties(ProjectJson);
 
-            Form_WorkSpace workspace1 = new();
+            Form_WorkSpace workspace1 = new() { Text = "Workspace 1"};
             workspace1.Show(dockMain, DockState.Document);
 
             toolstripAddScene.Enabled = true;
@@ -707,14 +707,20 @@ namespace Thumper_Custom_Level_Editor
         {
             contextmenuMoveWorkspace.Items.Clear();
             foreach (IDockContent ws in Workspaces) {
-                contextmenuMoveWorkspace.Items.Add(ws.DockHandler.TabText, Properties.Resources.editor_workspace);
+                ToolStripMenuItem item = new() {
+                    Text = ws.DockHandler.TabText,
+                    ForeColor = Color.White,
+                    Image = Properties.Resources.editor_workspace,
+                    Checked = ws == ActiveWorkspace
+                };
+                contextmenuMoveWorkspace.Items.Add(item);
             }
         }
 
         private void contextmenuMoveWorkspace_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            IDockContent workspace = Workspaces.First(x => x.DockHandler.TabText == e.ClickedItem.Text);
-            GlobalActiveDocument.DockHandler.DockPanel = workspace.DockHandler.DockPanel;
+            Form_WorkSpace workspace = Workspaces.First(x => x.DockHandler.TabText == e.ClickedItem.Text) as Form_WorkSpace;
+            (GlobalActiveDocument as DockContent).Show(workspace.dockMain, DockState.Document);
         }
     }
 }
