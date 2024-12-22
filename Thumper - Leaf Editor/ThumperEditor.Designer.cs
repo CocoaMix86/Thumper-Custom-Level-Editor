@@ -491,12 +491,12 @@
             this.dockMain.DockLeftPortion = 0.33D;
             this.dockMain.DockRightPortion = 0.15D;
             this.dockMain.DockTopPortion = 0.33D;
-            this.dockMain.Location = new Point(0, -4);
+            this.dockMain.Location = new Point(-4, -4);
             this.dockMain.Margin = new Padding(0);
             this.dockMain.Name = "dockMain";
             this.dockMain.ShowAutoHideContentOnHover = false;
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new Size(984, 452);
+            this.dockMain.Size = new Size(992, 452);
             this.dockMain.TabIndex = 147;
             this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
             // 
@@ -565,7 +565,7 @@
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new Size(252, 220);
+            this.contextmenuFile.Size = new Size(252, 198);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
             // 
             // newToolStripMenuItem

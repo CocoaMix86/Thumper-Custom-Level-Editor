@@ -31,7 +31,7 @@ namespace Thumper_Custom_Level_Editor
                 //check if `set` value is different than current stored value
                 if (WorkingFolder != value) {
                     //also only change workingfolders if user says yes to data loss
-                    if (/*!_saveleaf || !_savelvl || !_savemaster || !_savegate || !_savesample*/false) {
+                    if (AnyUnsaved()) {
                         if (MessageBox.Show("Some files are unsaved. Are you sure you want to change working folders?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                             return;
                         }
@@ -70,7 +70,7 @@ namespace Thumper_Custom_Level_Editor
                     //update working folder
                     WorkingFolder = value;
                     toolstripLevelName.Text = ProjectJson["level_name"];
-                    toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"{ProjectJson["difficulty"]}");
+                    toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{ProjectJson["difficulty"]}");
                     //add to recent files
                     Properties.Settings.Default.Recentfiles.Remove(WorkingFolder.FullName);
                     Properties.Settings.Default.Recentfiles.Insert(0, WorkingFolder.FullName);
