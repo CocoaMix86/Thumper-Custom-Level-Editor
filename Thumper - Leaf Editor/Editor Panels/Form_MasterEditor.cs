@@ -1,16 +1,6 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Collections.Generic;
 using System.Windows.Input;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -38,10 +28,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return LoadedMaster; }
             set {
                 if (LoadedMaster != value) {
+                    TCLE.CloseFileLock(LoadedMaster);
                     LoadedMaster = value;
-
                     if (!LoadedMaster.Exists) {
-                        LoadedMaster.CreateText();
+                        using (StreamWriter sw = LoadedMaster.CreateText()) {
+                            sw.Write(' ');
+                            sw.Close();
+                        }
                     }
                     TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }

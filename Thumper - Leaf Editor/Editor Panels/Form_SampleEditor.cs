@@ -31,9 +31,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return LoadedSample; }
             set {
                 if (LoadedSample != value) {
+                    TCLE.CloseFileLock(LoadedSample);
                     LoadedSample = value;
                     if (!LoadedSample.Exists) {
-                        LoadedSample.CreateText();
+                        using (StreamWriter sw = LoadedSample.CreateText()) {
+                            sw.Write(' ');
+                            sw.Close();
+                        }
                     }
                     TCLE.lockedfiles.Add(LoadedSample, new FileStream(LoadedSample.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }

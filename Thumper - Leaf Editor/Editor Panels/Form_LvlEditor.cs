@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using static Thumper_Custom_Level_Editor.ComboBoxEx;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -30,9 +29,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get => LoadedLvl;
             set {
                 if (LoadedLvl != value) {
+                    TCLE.CloseFileLock(LoadedLvl);
                     LoadedLvl = value;
                     if (!LoadedLvl.Exists) {
-                        LoadedLvl.CreateText();
+                        using (StreamWriter sw = LoadedLvl.CreateText()) {
+                            sw.Write(' ');
+                            sw.Close();
+                        }
                     }
                     TCLE.lockedfiles.Add(LoadedLvl, new FileStream(LoadedLvl.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 }

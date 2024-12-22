@@ -1,10 +1,6 @@
-﻿using ICSharpCode.TextEditor.Actions;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Eventing.Reader;
-using System.DirectoryServices.ActiveDirectory;
 using System.Windows.Input;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
