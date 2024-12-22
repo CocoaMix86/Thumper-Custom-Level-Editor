@@ -4,6 +4,7 @@ using Fmod5Sharp.FmodTypes;
 using Fmod5Sharp;
 using NAudio.Vorbis;
 using NAudio.Wave;
+using VarispeedDemo.SoundTouch;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -268,6 +269,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
         private WaveOutEvent outputDevice = new();
+        private VarispeedSampleProvider speedControl;
         private VorbisWaveReader vorbis;
         private AudioFileReader audioFile;
         private bool SampleIsPlaying;
@@ -308,12 +310,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_filetype == "ogg") {
                     vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
                     vorbis.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
-                    outputDevice.Init(vorbis);
+                    speedControl = new(vorbis, 100, new SoundTouchProfile(false, false));
+                    speedControl.PlaybackRate = (float)_samp.pitch;
+                    outputDevice.Init(speedControl);
                 }
                 else {
                     audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
                     audioFile.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
-                    outputDevice.Init(audioFile);
+                    speedControl = new(audioFile, 100, new SoundTouchProfile(false, false));
+                    speedControl.PlaybackRate = (float)_samp.pitch;
+                    outputDevice.Init(speedControl);
                 }
 
                 SampleIsPlaying = true;

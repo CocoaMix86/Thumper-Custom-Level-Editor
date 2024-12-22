@@ -5,6 +5,7 @@ using NAudio.Wave;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using VarispeedDemo.SoundTouch;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -913,6 +914,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private WaveOutEvent outputDevice = new();
+        private VarispeedSampleProvider speedControl;
         private VorbisWaveReader vorbis;
         private AudioFileReader audioFile;
         private bool SampleIsPlaying;
@@ -955,14 +957,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_filetype == "ogg") {
                     vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
                     vorbis.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
-                    SpeedAndPitch = new(vorbis);
-                    outputDevice.Init(vorbis);
+                    speedControl = new(vorbis, 100, new SoundTouchProfile(false, false));
+                    speedControl.PlaybackRate = (float)_samp.pitch;
+                    outputDevice.Init(speedControl);
                 }
                 else {
                     audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
                     audioFile.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
-                    SpeedAndPitch = new(audioFile);
-                    outputDevice.Init(audioFile);
+                    speedControl = new(audioFile, 100, new SoundTouchProfile(false, false));
+                    speedControl.PlaybackRate = (float)_samp.pitch;
+                    outputDevice.Init(speedControl);
                 }
 
                 SampleIsPlaying = true;

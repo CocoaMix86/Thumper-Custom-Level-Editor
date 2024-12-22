@@ -194,6 +194,12 @@
     <None Include="image assets\icon-undo.png" />
     <None Include="image assets\icon-editdetails.png" />
     <None Include="image assets\icon-clear-filters.png" />
+    <Content Include="dll\SoundTouch.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\SoundTouch_x64.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
     <Content Include="text assets\paths.txt" />
     <Content Include="text assets\track objects.txt" />
     <Content Include="image assets\ThumperIconEditor.ico" />
@@ -280,6 +286,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Utility Classes\PictureBoxEx.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="dll\SoundTouch.dll" />
+    <None Remove="dll\SoundTouch_x64.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Editor Panels\Form_DrawScene.cs">
