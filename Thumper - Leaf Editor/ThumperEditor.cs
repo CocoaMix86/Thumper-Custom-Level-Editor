@@ -723,10 +723,30 @@ namespace Thumper_Custom_Level_Editor
 
         private void TCLE_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.Tab) {
+            //tab switch forward
+            if (!e.Shift && e.Control && e.KeyCode == Keys.Tab) {
                 var docs = ActiveWorkspace.dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
                 docs[(docind + 1) % docs.Count].DockHandler.Activate();
+            }
+            //tab switch backward
+            if (e.Shift && e.Control && e.KeyCode == Keys.Tab) {
+                var docs = ActiveWorkspace.dockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
+                docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
+            }
+            //workspace switch forward
+            if (e.Control && e.KeyCode == Keys.PageUp) {
+                var docs = DockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace);
+                docs[(docind + 1) % docs.Count].DockHandler.Activate();
+            }
+            //workspace switch backward
+            if (e.Control && e.KeyCode == Keys.PageDown) {
+                var docs = dockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace);
+                //this mod handles negative
+                docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
             }
             e.Handled = true;
         }
