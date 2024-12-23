@@ -73,7 +73,14 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sample Settings")]
         [DisplayName("Pitch")]
         [Description("1 is default.")]
-        public decimal pitch { get => sample.pitch; set => sample.pitch = value; }
+        public decimal pitch { 
+            get => sample.pitch; 
+            set {
+                if (value <= 0) value = 1;
+                if (value > 100) value = 1;
+                sample.pitch = value;
+            } 
+        }
 
         [CategoryAttribute("Sample Settings")]
         [DisplayName("Pan")]

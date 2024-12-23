@@ -276,6 +276,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private DataGridViewCell playingcell;
         private void OnPlaybackStopped(object sender, StoppedEventArgs args)
         {
+            timerSample.Enabled = false;
             outputDevice.Dispose();
             outputDevice = null;
             audioFile?.Dispose();
@@ -303,33 +304,42 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (File.Exists($@"temp\{_samp.obj_name}.wav"))
                     _filetype = "wav";
 
+                //initialize the player and load the sample
                 outputDevice = new WaveOutEvent();
-                outputDevice.PlaybackStopped += OnPlaybackStopped;
-                outputDevice.Volume = volumeSlider1.Volume;
-
                 if (_filetype == "ogg") {
                     vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
                     vorbis.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
+                    timerSample.Interval = (int)((float)(vorbis.TotalTime.TotalMilliseconds - _samp.offset) / (float)_samp.pitch);
                     speedControl = new(vorbis, 100, new SoundTouchProfile(false, false));
-                    speedControl.PlaybackRate = (float)_samp.pitch;
-                    outputDevice.Init(speedControl);
                 }
                 else {
                     audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
                     audioFile.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
+                    timerSample.Interval = (int)((float)(audioFile.TotalTime.TotalMilliseconds - _samp.offset) / (float)_samp.pitch);
                     speedControl = new(audioFile, 100, new SoundTouchProfile(false, false));
-                    speedControl.PlaybackRate = (float)_samp.pitch;
-                    outputDevice.Init(speedControl);
                 }
-
+                //set playback rate equal to sample pitch
+                speedControl.PlaybackRate = (float)_samp.pitch;
+                outputDevice.Init(speedControl);
+                outputDevice.Volume = volumeSlider1.Volume;
+                outputDevice.PlaybackStopped += OnPlaybackStopped;
                 SampleIsPlaying = true;
+                //invalidate cell to repaint it. This will draw the stop icon
                 sampleList.InvalidateCell(cell);
+                //store cell for later reference
                 playingcell = cell;
                 outputDevice.Play();
+                timerSample.Enabled = true;
             }
             else {
                 outputDevice?.Stop();
             }
+        }
+
+        private void timerSample_Tick(object sender, EventArgs e)
+        {
+            outputDevice?.Stop();
+            timerSample.Enabled = false;
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)

@@ -49,6 +49,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
             this.splitContainer1 = new SplitContainer();
+            this.timerSample = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)this.sampleList).BeginInit();
             this.sampleToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -82,7 +83,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             this.sampleList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
@@ -289,6 +290,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
             // 
+            // timerSample
+            // 
+            this.timerSample.Tick += this.timerSample_Tick;
+            // 
             // Form_SampleEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -330,5 +335,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private DataGridViewButtonColumn Columnplaybuttons;
         private DataGridViewTextBoxColumn SampleName;
         private VolumeSlider volumeSlider1;
+        private System.Windows.Forms.Timer timerSample;
     }
 }
