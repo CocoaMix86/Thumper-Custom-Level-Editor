@@ -737,28 +737,30 @@ namespace Thumper_Custom_Level_Editor
                 docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
             }
             //move document to workspace forward
-            else if (e.Alt && e.Control && e.KeyCode == Keys.PageUp) {
+            else if (e.Alt && e.Control && e.KeyCode == Keys.Right) {
                 List<IDockContent> docs = DockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace);
+                GlobalActiveDocument.DockHandler.DockPanel = null;
                 (GlobalActiveDocument as DockContent).Show((docs[(docind + 1) % docs.Count] as Form_WorkSpace).dockMain, DockState.Document);
                 docs[(docind + 1) % docs.Count].DockHandler.Activate();
             }
             //move document to workspace backward
-            else if (e.Alt && e.Control && e.KeyCode == Keys.PageDown) {
+            else if (e.Alt && e.Control && e.KeyCode == Keys.Left) {
                 List<IDockContent> docs = dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace);
+                GlobalActiveDocument.DockHandler.DockPanel = null;
                 //this mod handles negative
                 (GlobalActiveDocument as DockContent).Show((docs[mod(docind - 1, docs.Count)] as Form_WorkSpace).dockMain, DockState.Document);
                 docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
             }
             //workspace switch forward
-            else if (e.Control && e.KeyCode == Keys.PageUp) {
+            else if (e.Control && e.KeyCode == Keys.Right) {
                 List<IDockContent> docs = DockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace);
                 docs[(docind + 1) % docs.Count].DockHandler.Activate();
             }
             //workspace switch backward
-            else if (e.Control && e.KeyCode == Keys.PageDown) {
+            else if (e.Control && e.KeyCode == Keys.Left) {
                 List<IDockContent> docs = dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace);
                 //this mod handles negative
