@@ -145,6 +145,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.SampleName.FillWeight = 8.913044F;
             this.SampleName.HeaderText = "Sample Name";
             this.SampleName.Name = "SampleName";
+            this.SampleName.ReadOnly = true;
             this.SampleName.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // label54
@@ -309,6 +310,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_SampleEditor";
             this.Text = "Sample Editor";
+            this.Shown += this.Form_SampleEditor_Shown;
             ((System.ComponentModel.ISupportInitialize)this.sampleList).EndInit();
             this.sampleToolStrip.ResumeLayout(false);
             this.sampleToolStrip.PerformLayout();
@@ -332,9 +334,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public PropertyGrid propertyGridSample;
         private Label lblMasterlvllistHelp;
         private SplitContainer splitContainer1;
-        private DataGridViewButtonColumn Columnplaybuttons;
-        private DataGridViewTextBoxColumn SampleName;
         private VolumeSlider volumeSlider1;
         private System.Windows.Forms.Timer timerSample;
+        private DataGridViewButtonColumn Columnplaybuttons;
+        private DataGridViewTextBoxColumn SampleName;
     }
 }

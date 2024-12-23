@@ -24,6 +24,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (load != null)
                 LoadLvl(load, filepath);
         }
+        private void Form_LvlEditor_Shown(object sender, EventArgs e)
+        {
+            propertyGridLvl.Focus();
+        }
         #endregion
 
         #region Variables
@@ -759,8 +763,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
                     r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
-                }
-                catch (ArgumentOutOfRangeException) { }
+                } catch (ArgumentOutOfRangeException) { }
             }
         }
 

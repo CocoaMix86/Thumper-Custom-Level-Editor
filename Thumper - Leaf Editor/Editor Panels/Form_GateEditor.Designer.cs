@@ -312,6 +312,7 @@
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_GateEditor";
             this.Text = "Gate Editor";
+            this.Shown += this.Form_GateEditor_Shown;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

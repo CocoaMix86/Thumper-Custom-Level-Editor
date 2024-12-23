@@ -812,6 +812,7 @@
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_LvlEditor";
             this.Text = "Lvl Editor";
+            this.Shown += this.Form_LvlEditor_Shown;
             this.lvlToolStrip.ResumeLayout(false);
             this.lvlToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).EndInit();

@@ -355,6 +355,7 @@
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_MasterEditor";
             this.Text = "Master Editor";
+            this.Shown += this.Form_MasterEditor_Shown;
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).EndInit();
             this.masterToolStrip.ResumeLayout(false);
             this.masterToolStrip.PerformLayout();

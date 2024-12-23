@@ -21,7 +21,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (load != null)
                 LoadSample(load, filepath);
             propertyGridSample.SelectedObject = SampleProperties;
-            propertyGridSample.Select();
+        }
+        private void Form_SampleEditor_Shown(object sender, EventArgs e)
+        {
+            propertyGridSample.Focus();
         }
         #endregion
 
@@ -364,7 +367,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeSampleStuff()
         {
-            sampleList.Columns[0].ValueType = typeof(string);
+            sampleList.Columns[1].ValueType = typeof(string);
         }
 
         public void LoadSample(dynamic _load, FileInfo filepath)

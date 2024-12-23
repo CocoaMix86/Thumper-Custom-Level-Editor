@@ -18,6 +18,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadGate(load, filepath);
             propertyGridGate.SelectedObject = GateProperties;
         }
+        private void Form_GateEditor_Shown(object sender, EventArgs e)
+        {
+            propertyGridGate.Focus();
+        }
         #endregion
 
         #region Variables
@@ -578,7 +582,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             for (int x = 0; x < _properties.gatelvls.Count; x++) {
                 JObject s = new() {
                     { "lvl_name", _properties.gatelvls[x].lvlname },
-					{ "sentry_type", $"{gatesentrynames[_properties.gatelvls[x].sentrytype]}"},
+                    { "sentry_type", $"{gatesentrynames[_properties.gatelvls[x].sentrytype]}"},
                     { "bucket_num", _properties.gatelvls[x].bucket }
                 };
                 //if using RANDOM, the buckets and hashes are all different per entry in each bucket
