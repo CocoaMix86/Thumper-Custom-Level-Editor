@@ -47,8 +47,7 @@ namespace Thumper_Custom_Level_Editor
                     try {
                         lockedfiles.Add(ProjectFile, new FileStream(ProjectFile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                         ClearFileLock();
-                    }
-                    catch (Exception) {
+                    } catch (Exception) {
                         MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Level cannot be opened");
                         return;
                     }
@@ -616,7 +615,7 @@ namespace Thumper_Custom_Level_Editor
             dockProjectExplorer.LoadProject(WorkingFolder.FullName);
             dockProjectProperties.LoadProjectProperties(ProjectJson);
 
-            Form_WorkSpace workspace1 = new() { Text = "Workspace 1"};
+            Form_WorkSpace workspace1 = new() { Text = "Workspace 1" };
             workspace1.Show(dockMain, DockState.Document);
 
             toolstripAddScene.Enabled = true;
@@ -720,6 +719,16 @@ namespace Thumper_Custom_Level_Editor
         {
             Form_WorkSpace workspace = Workspaces.First(x => x.DockHandler.TabText == e.ClickedItem.Text) as Form_WorkSpace;
             (GlobalActiveDocument as DockContent).Show(workspace.dockMain, DockState.Document);
+        }
+
+        private void TCLE_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.Tab) {
+                var docs = ActiveWorkspace.dockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
+                docs[(docind + 1) % docs.Count].DockHandler.Activate();
+            }
+            e.Handled = true;
         }
     }
 }

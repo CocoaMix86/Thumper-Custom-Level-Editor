@@ -58,8 +58,11 @@
             this.ClientSize = new Size(476, 423);
             this.Controls.Add(this.dockMain);
             this.Icon = (Icon)resources.GetObject("$this.Icon");
+            this.KeyPreview = true;
             this.Name = "Form_WorkSpace";
             this.Text = "Workspace";
+            this.Load += this.Form_WorkSpace_Load;
+            this.KeyDown += this.Form_WorkSpace_KeyDown;
             this.ResumeLayout(false);
         }
 

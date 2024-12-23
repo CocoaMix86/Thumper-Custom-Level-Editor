@@ -391,7 +391,7 @@
             this.propertyGridLvl.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridLvl.SelectedItemWithFocusForeColor = Color.White;
             this.propertyGridLvl.Size = new Size(352, 272);
-            this.propertyGridLvl.TabIndex = 149;
+            this.propertyGridLvl.TabIndex = 0;
             this.propertyGridLvl.ToolbarVisible = false;
             this.propertyGridLvl.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridLvl.ViewBorderColor = Color.FromArgb(61, 61, 61);
@@ -808,6 +808,7 @@
             this.ForeColor = Color.FromArgb(150, 150, 255);
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
+            this.KeyPreview = true;
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_LvlEditor";
             this.Text = "Lvl Editor";

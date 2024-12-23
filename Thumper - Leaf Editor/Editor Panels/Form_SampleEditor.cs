@@ -21,6 +21,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (load != null)
                 LoadSample(load, filepath);
             propertyGridSample.SelectedObject = SampleProperties;
+            propertyGridSample.Select();
         }
         #endregion
 
@@ -222,8 +223,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         File.Delete($@"{TCLE.AppLocation}\temp\{sd.obj_name}.ogg");
                     if (File.Exists($@"{TCLE.AppLocation}\temp\{sd.obj_name}.wav"))
                         File.Delete($@"{TCLE.AppLocation}\temp\{sd.obj_name}.wav");
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                     MessageBox.Show($"Unable to delete {TCLE.AppLocation}\\temp\\\\{SampleList[_in].obj_name}\n\n{ex}");
                 }
                 SampleList.Remove(sd);
@@ -535,6 +535,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void propertyGridSample_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void sampleList_KeyDown(object sender, KeyEventArgs e)
+        {
         }
     }
 }

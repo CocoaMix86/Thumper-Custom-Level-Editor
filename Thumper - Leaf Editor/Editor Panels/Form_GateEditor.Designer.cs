@@ -293,7 +293,7 @@
             this.propertyGridGate.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridGate.SelectedItemWithFocusForeColor = Color.White;
             this.propertyGridGate.Size = new Size(238, 364);
-            this.propertyGridGate.TabIndex = 148;
+            this.propertyGridGate.TabIndex = 0;
             this.propertyGridGate.ToolbarVisible = false;
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridGate.ViewBorderColor = Color.FromArgb(61, 61, 61);
@@ -308,6 +308,7 @@
             this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
+            this.KeyPreview = true;
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_GateEditor";
             this.Text = "Gate Editor";

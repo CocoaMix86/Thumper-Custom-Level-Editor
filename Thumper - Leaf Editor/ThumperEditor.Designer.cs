@@ -1087,7 +1087,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(195, 170);
+            this.contextmenuWindow.Size = new Size(195, 148);
             // 
             // toolstripWindowFloat
             // 
@@ -1677,6 +1677,7 @@
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += this.TCLE_FormClosing;
             this.Load += this.FormLeafEditor_Load;
+            this.KeyDown += this.TCLE_KeyDown;
             this.Resize += this.TCLE_Resize;
             this.panelRecentFiles.ResumeLayout(false);
             this.panelRecentFiles.PerformLayout();

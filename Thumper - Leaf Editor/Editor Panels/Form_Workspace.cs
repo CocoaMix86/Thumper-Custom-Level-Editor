@@ -56,5 +56,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.CloseFileLock(filetoclose);
             }
         }
+
+        private void Form_WorkSpace_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form_WorkSpace_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
     }
 }
