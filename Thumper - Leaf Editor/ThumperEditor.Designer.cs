@@ -1088,7 +1088,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(195, 148);
+            this.contextmenuWindow.Size = new Size(195, 170);
             // 
             // toolstripWindowFloat
             // 

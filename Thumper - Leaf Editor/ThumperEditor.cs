@@ -457,7 +457,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void addNewWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
+            Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
             workspace1.Show(dockMain, DockState.Document);
         }
         #endregion

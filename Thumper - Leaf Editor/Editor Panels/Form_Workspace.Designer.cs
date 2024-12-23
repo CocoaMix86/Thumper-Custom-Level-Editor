@@ -40,11 +40,11 @@
             this.dockMain.DockLeftPortion = 0.33D;
             this.dockMain.DockRightPortion = 0.15D;
             this.dockMain.DockTopPortion = 0.33D;
-            this.dockMain.Location = new Point(0, -3);
+            this.dockMain.Location = new Point(-4, -4);
             this.dockMain.Name = "dockMain";
             this.dockMain.ShowAutoHideContentOnHover = false;
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new Size(478, 432);
+            this.dockMain.Size = new Size(486, 432);
             this.dockMain.TabIndex = 148;
             this.dockMain.ContentAdded += this.dockMain_ContentAdded;
             this.dockMain.ContentRemoved += this.dockMain_ContentRemoved;
