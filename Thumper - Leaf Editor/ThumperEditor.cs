@@ -10,6 +10,7 @@ using System.Linq;
 using Fmod5Sharp.FmodTypes;
 using Fmod5Sharp;
 using Windows.Devices.Lights;
+using Windows.Web.AtomPub;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -725,25 +726,40 @@ namespace Thumper_Custom_Level_Editor
         {
             //tab switch forward
             if (!e.Shift && e.Control && e.KeyCode == Keys.Tab) {
-                var docs = ActiveWorkspace.dockMain.Documents.ToList();
+                List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
                 docs[(docind + 1) % docs.Count].DockHandler.Activate();
             }
             //tab switch backward
-            if (e.Shift && e.Control && e.KeyCode == Keys.Tab) {
-                var docs = ActiveWorkspace.dockMain.Documents.ToList();
+            else if (e.Shift && e.Control && e.KeyCode == Keys.Tab) {
+                List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
                 docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
             }
+            //move document to workspace forward
+            else if (e.Alt && e.Control && e.KeyCode == Keys.PageUp) {
+                List<IDockContent> docs = DockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace);
+                (GlobalActiveDocument as DockContent).Show((docs[(docind + 1) % docs.Count] as Form_WorkSpace).dockMain, DockState.Document);
+                docs[(docind + 1) % docs.Count].DockHandler.Activate();
+            }
+            //move document to workspace backward
+            else if (e.Alt && e.Control && e.KeyCode == Keys.PageDown) {
+                List<IDockContent> docs = dockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace);
+                //this mod handles negative
+                (GlobalActiveDocument as DockContent).Show((docs[mod(docind - 1, docs.Count)] as Form_WorkSpace).dockMain, DockState.Document);
+                docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
+            }
             //workspace switch forward
-            if (e.Control && e.KeyCode == Keys.PageUp) {
-                var docs = DockMain.Documents.ToList();
+            else if (e.Control && e.KeyCode == Keys.PageUp) {
+                List<IDockContent> docs = DockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace);
                 docs[(docind + 1) % docs.Count].DockHandler.Activate();
             }
             //workspace switch backward
-            if (e.Control && e.KeyCode == Keys.PageDown) {
-                var docs = dockMain.Documents.ToList();
+            else if (e.Control && e.KeyCode == Keys.PageDown) {
+                List<IDockContent> docs = dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace);
                 //this mod handles negative
                 docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
