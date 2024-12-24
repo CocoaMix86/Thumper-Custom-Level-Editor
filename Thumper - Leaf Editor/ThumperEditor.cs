@@ -628,6 +628,14 @@ namespace Thumper_Custom_Level_Editor
                 return;
             if (dockMain.ActiveDocument.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
                 ActiveWorkspace = dockMain.ActiveDocument as Form_WorkSpace;
+            //carry along all float windows to the new active workspace
+            //this allows them to be docked in the ws.
+            foreach (Form_WorkSpace work in Workspaces) {
+                foreach (FloatWindow fw in work.dockMain.FloatWindows) {
+                    fw.Visible = false;
+                    fw.Show(ActiveWorkspace);
+                }
+            }
         }
         #endregion
         #region Dock Tab Rightclick
@@ -720,18 +728,24 @@ namespace Thumper_Custom_Level_Editor
         {
             //tab switch next
             if (!e.Shift && e.Control && e.KeyCode == Keys.Tab) {
+                if (!ActiveWorkspace.dockMain.Documents.Any())
+                    return;
                 List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
                 docs[(docind + 1) % docs.Count].DockHandler.Activate();
             }
             //tab switch previous
             else if (e.Shift && e.Control && e.KeyCode == Keys.Tab) {
+                if (!ActiveWorkspace.dockMain.Documents.Any())
+                    return;
                 List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
                 docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
             }
             //move document to next/previous workspace
             else if (e.Alt && e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
+                if (GlobalActiveDocument == null || !ActiveWorkspace.dockMain.Documents.Any())
+                    return;
                 List<IDockContent> docs = DockMain.Documents.ToList();
                 //index of next workspace +1 or -1
                 int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);

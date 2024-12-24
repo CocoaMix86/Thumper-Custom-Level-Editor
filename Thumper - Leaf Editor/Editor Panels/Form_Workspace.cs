@@ -49,6 +49,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 //check if any other tab is open that is the same file
                 //if it is, we don't want to close the file lock
+                if (filetoclose == null)
+                    return;
                 foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(filetoclose.Name))) {
                     return;
                 }
