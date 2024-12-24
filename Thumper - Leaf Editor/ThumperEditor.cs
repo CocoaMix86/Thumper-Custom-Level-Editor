@@ -611,7 +611,7 @@ namespace Thumper_Custom_Level_Editor
             dockProjectExplorer.LoadProject(WorkingFolder.FullName);
             dockProjectProperties.LoadProjectProperties(ProjectJson);
 
-            Form_WorkSpace workspace1 = new() { Text = "Workspace 1" };
+            Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
             workspace1.Show(dockMain, DockState.Document);
 
             toolstripAddScene.Enabled = true;
@@ -632,8 +632,7 @@ namespace Thumper_Custom_Level_Editor
             //this allows them to be docked in the ws.
             foreach (Form_WorkSpace work in Workspaces) {
                 foreach (FloatWindow fw in work.dockMain.FloatWindows) {
-                    fw.Visible = false;
-                    fw.Show(ActiveWorkspace);
+                    fw.Owner = ActiveWorkspace;
                 }
             }
         }
