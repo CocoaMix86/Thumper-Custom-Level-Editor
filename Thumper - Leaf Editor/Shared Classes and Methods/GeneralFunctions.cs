@@ -12,7 +12,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class TCLE : Form
+    public partial class TCLE
     {
         public static void InitializeTracks(DataGridView grid, bool columnstyle)
         {

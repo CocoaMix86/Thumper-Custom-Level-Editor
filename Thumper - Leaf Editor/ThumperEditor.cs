@@ -724,47 +724,32 @@ namespace Thumper_Custom_Level_Editor
 
         private void TCLE_KeyDown(object sender, KeyEventArgs e)
         {
-            //tab switch forward
+            //tab switch next
             if (!e.Shift && e.Control && e.KeyCode == Keys.Tab) {
                 List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
                 docs[(docind + 1) % docs.Count].DockHandler.Activate();
             }
-            //tab switch backward
+            //tab switch previous
             else if (e.Shift && e.Control && e.KeyCode == Keys.Tab) {
                 List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
                 int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
                 docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
             }
-            //move document to workspace forward
-            else if (e.Alt && e.Control && e.KeyCode == Keys.Right) {
+            //move document to next/previous workspace
+            else if (e.Alt && e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
                 List<IDockContent> docs = DockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace);
-                GlobalActiveDocument.DockHandler.DockPanel = null;
-                (GlobalActiveDocument as DockContent).Show((docs[(docind + 1) % docs.Count] as Form_WorkSpace).dockMain, DockState.Document);
-                docs[(docind + 1) % docs.Count].DockHandler.Activate();
+                //index of next workspace +1 or -1
+                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
+                (GlobalActiveDocument as DockContent).Show((docs[mod(docind, docs.Count)] as Form_WorkSpace).dockMain, DockState.Document);
+                docs[mod(docind, docs.Count)].DockHandler.Activate();
+                docs[mod(docind, docs.Count)].DockHandler.Form.Focus();
             }
-            //move document to workspace backward
-            else if (e.Alt && e.Control && e.KeyCode == Keys.Left) {
-                List<IDockContent> docs = dockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace);
-                GlobalActiveDocument.DockHandler.DockPanel = null;
-                //this mod handles negative
-                (GlobalActiveDocument as DockContent).Show((docs[mod(docind - 1, docs.Count)] as Form_WorkSpace).dockMain, DockState.Document);
-                docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
-            }
-            //workspace switch forward
-            else if (e.Control && e.KeyCode == Keys.Right) {
+            //workspace switch next/previous
+            else if (e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
                 List<IDockContent> docs = DockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace);
-                docs[(docind + 1) % docs.Count].DockHandler.Activate();
-            }
-            //workspace switch backward
-            else if (e.Control && e.KeyCode == Keys.Left) {
-                List<IDockContent> docs = dockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace);
-                //this mod handles negative
-                docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
+                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
+                docs[mod(docind, docs.Count)].DockHandler.Activate();
             }
             e.Handled = true;
         }
