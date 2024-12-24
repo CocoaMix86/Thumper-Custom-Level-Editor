@@ -632,7 +632,7 @@ namespace Thumper_Custom_Level_Editor
             //this allows them to be docked there.
             foreach (Form_WorkSpace work in Workspaces) {
                 foreach (FloatWindow fw in work.dockMain.FloatWindows) {
-                    fw.DockTo(ActiveWorkspace.dockMain, DockStyle.Fill);
+                    //fw
                 }
             }
         }
