@@ -629,10 +629,10 @@ namespace Thumper_Custom_Level_Editor
             if (dockMain.ActiveDocument.DockHandler.TabText is not "Project Explorer" and not "Project Properties")
                 ActiveWorkspace = dockMain.ActiveDocument as Form_WorkSpace;
             //carry along all float windows to the new active workspace
-            //this allows them to be docked in the ws.
+            //this allows them to be docked there.
             foreach (Form_WorkSpace work in Workspaces) {
                 foreach (FloatWindow fw in work.dockMain.FloatWindows) {
-                    fw.Owner = ActiveWorkspace;
+                    fw.DockTo(ActiveWorkspace.dockMain, DockStyle.Fill);
                 }
             }
         }
