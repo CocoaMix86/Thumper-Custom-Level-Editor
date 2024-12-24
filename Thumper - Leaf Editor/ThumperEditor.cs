@@ -5,12 +5,6 @@ using System.Windows.Shell;
 using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
-using System.Windows.Forms.VisualStyles;
-using System.Linq;
-using Fmod5Sharp.FmodTypes;
-using Fmod5Sharp;
-using Windows.Devices.Lights;
-using Windows.Web.AtomPub;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -19,6 +13,7 @@ namespace Thumper_Custom_Level_Editor
         #region Variables
         public static TCLE Instance;
         public static DockPanel DockMain => Instance.dockMain;
+        public static Form_WorkSpace ActiveWorkspace;
         public static IEnumerable<IDockContent> Workspaces => Instance.dockMain.Documents;
         public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents);
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
@@ -627,7 +622,6 @@ namespace Thumper_Custom_Level_Editor
         }
         private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
 
-        public static Form_WorkSpace ActiveWorkspace;
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
             if (dockMain.ActiveDocument == null)
