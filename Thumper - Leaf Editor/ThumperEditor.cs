@@ -5,6 +5,7 @@ using System.Windows.Shell;
 using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using Windows.ApplicationModel.Search.Core;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -632,7 +633,13 @@ namespace Thumper_Custom_Level_Editor
             //this allows them to be docked there.
             foreach (Form_WorkSpace work in Workspaces) {
                 foreach (FloatWindow fw in work.dockMain.FloatWindows) {
-                    //fw
+                    /*
+                    fw.NestedPanes.
+                    List<IDockContent> floatdocs = fw.NestedPanes.SelectMany(x => x.Contents).ToList();
+                    foreach (IDockContent dc in floatdocs) {
+                        (dc as DockContent).Show(ActiveWorkspace.dockMain, DockState.Float);
+                    }
+                    */
                 }
             }
         }
