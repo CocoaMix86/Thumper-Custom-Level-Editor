@@ -701,6 +701,18 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        private void toolstripTabCopyPath_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value.FullName);
+        }
+
+        private void toolstripTabOpenFolder_Click(object sender, EventArgs e)
+        {
+            FileInfo foldertoopen = dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value;
+            if (foldertoopen.Directory.Exists)
+                Process.Start("explorer.exe", $@"/select, ""{foldertoopen.FullName}""");
+        }
+
         private void contextmenuMoveWorkspace_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             contextmenuMoveWorkspace.Items.Clear();
@@ -764,13 +776,6 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             */
-        }
-
-        private void toolstripTabOpenFolder_Click(object sender, EventArgs e)
-        {
-            FileInfo foldertoopen = dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value;
-            if (foldertoopen.Directory.Exists)
-                Process.Start("explorer.exe", $@"/select, ""{ foldertoopen.FullName}""");
         }
     }
 }

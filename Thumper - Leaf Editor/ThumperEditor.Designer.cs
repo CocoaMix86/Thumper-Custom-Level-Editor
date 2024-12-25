@@ -565,7 +565,7 @@
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new Size(252, 198);
+            this.contextmenuFile.Size = new Size(252, 220);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
             // 
             // newToolStripMenuItem
@@ -735,7 +735,6 @@
             this.contextmenuEdit.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuEdit.Items.AddRange(new ToolStripItem[] { this.toolstripEditUndo, this.toolStripSeparator10, this.toolstripEditCut, this.toolstripEditCopy, this.toolstripEditPaste, this.toolstripEditDelete, this.toolStripSeparator15, this.toolstripEditPreferences });
             this.contextmenuEdit.Name = "contextmenuEdit";
-            this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
             this.contextmenuEdit.Size = new Size(218, 148);
             // 
@@ -1086,7 +1085,6 @@
             this.contextmenuWindow.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuWindow.Items.AddRange(new ToolStripItem[] { this.toolstripWindowFloat, this.toolstripWindowFloatAll, this.toolstripWindowDock, this.toolStripSeparator11, this.toolstripWindowCloseAll, this.toolstripWindowCloseEditors, this.toolStripSeparator12, this.addNewWorkspaceToolStripMenuItem });
             this.contextmenuWindow.Name = "contextmenuEdit";
-            this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
             this.contextmenuWindow.Size = new Size(244, 148);
             // 
@@ -1171,7 +1169,6 @@
             this.contextmenuHelp.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuHelp.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem13, this.toolStripMenuItem18, this.toolStripSeparator16, this.toolstripHelpAbout, this.toolstripHelpDiscord, this.toolstripHelpGithub, this.toolstripHelpChangelog, this.toolstripHelpKofi });
             this.contextmenuHelp.Name = "contextmenuHelp";
-            this.contextmenuHelp.OwnerItem = this.toolstripHelp;
             this.contextmenuHelp.RenderMode = ToolStripRenderMode.System;
             this.contextmenuHelp.Size = new Size(201, 164);
             // 
@@ -1241,7 +1238,7 @@
             this.toolStripMenuItem6.Font = new Font("Arial Narrow", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             this.toolStripMenuItem6.ForeColor = Color.White;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new Size(159, 22);
+            this.toolStripMenuItem6.Size = new Size(180, 22);
             this.toolStripMenuItem6.Text = "credit to \"CocoaMix\"";
             // 
             // toolStripMenuItem18
@@ -1539,7 +1536,7 @@
             this.contextmenuTabClick.Items.AddRange(new ToolStripItem[] { this.toolstripTabSave, this.toolstripTabClose, this.toolstripTabCloseall, this.toolstripTabCloseOther, this.toolStripSeparator3, this.toolstripTabCopyPath, this.toolstripTabOpenFolder, this.toolStripSeparator17, this.toolstripTabFloat, this.toolstripTabFloatAll, this.moveToWorkspaceToolStripMenuItem });
             this.contextmenuTabClick.Name = "contextmenuHelp";
             this.contextmenuTabClick.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuTabClick.Size = new Size(298, 236);
+            this.contextmenuTabClick.Size = new Size(298, 214);
             this.contextmenuTabClick.Opening += this.contextmenuTabClick_Opening;
             // 
             // toolstripTabSave
@@ -1595,6 +1592,7 @@
             this.toolstripTabCopyPath.Name = "toolstripTabCopyPath";
             this.toolstripTabCopyPath.Size = new Size(297, 22);
             this.toolstripTabCopyPath.Text = "Copy Full Path";
+            this.toolstripTabCopyPath.Click += this.toolstripTabCopyPath_Click;
             // 
             // toolstripTabOpenFolder
             // 
