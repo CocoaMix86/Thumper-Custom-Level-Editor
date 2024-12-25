@@ -631,17 +631,14 @@ namespace Thumper_Custom_Level_Editor
                 ActiveWorkspace = dockMain.ActiveDocument as Form_WorkSpace;
             //carry along all float windows to the new active workspace
             //this allows them to be docked there.
+            /*
             foreach (Form_WorkSpace work in Workspaces) {
-                foreach (FloatWindow fw in work.dockMain.FloatWindows) {
-                    /*
-                    fw.NestedPanes.
-                    List<IDockContent> floatdocs = fw.NestedPanes.SelectMany(x => x.Contents).ToList();
-                    foreach (IDockContent dc in floatdocs) {
-                        (dc as DockContent).Show(ActiveWorkspace.dockMain, DockState.Float);
-                    }
-                    */
+                if (work.dockMain.FloatWindows.Count == 0) continue;
+                var floats = work.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(x => x.Contents).ToList();
+                for (int i = 0; i < floats.Count; i++) {
+                    (floats[i] as DockContent).Show(ActiveWorkspace.dockMain, DockState.Float);
                 }
-            }
+            }*/
         }
         #endregion
         #region Dock Tab Rightclick
