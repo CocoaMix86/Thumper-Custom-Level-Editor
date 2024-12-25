@@ -11,7 +11,6 @@
                 dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
             }
             dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
         private void dgvRecentFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -49,12 +48,12 @@
             string level = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
             //handle column 0 clicks only as that's where the button is
             if (e.ColumnIndex == 0) {
-                if (workingfolder.FullName == level) {
+                if (workingfolder?.FullName == level) {
                     panelRecentFiles.Visible = false;
                     return;
                 }
                 if (!Directory.Exists(level)) {
-                    if (MessageBox.Show($"Recent Level selected no longer exists at that location\n{level}\n\nDo you want to remove this entry?", "Level load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show($"Recent Level selected no longer exists at that location\n{level}\n\nDo you want to remove this entry?", "Level Custom Thumper Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         RemoveRecentLevel(e.RowIndex);
                     return;
                 }

@@ -175,6 +175,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.firstrun = false;
             Properties.Settings.Default.Save();
         }
+
         private static void JumpListUpdate()
         {
             if (Properties.Settings.Default.Recentfiles == null)
@@ -197,11 +198,10 @@ namespace Thumper_Custom_Level_Editor
             jml.Apply();
             Properties.Settings.Default.Save();
         }
-        ///EXIT APP
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) => this.Close();
-        ///FORM CLOSING - check if anything is unsaved
+
         private void TCLE_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //check for unsaved files, cancel closing
             if (AnyUnsaved()) {
                 if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
@@ -374,25 +374,9 @@ namespace Thumper_Custom_Level_Editor
 
         }
 
-        private void toolstripFileSave_Click(object sender, EventArgs e)
-        {
-            IDockContent _activedoc = dockMain.ActiveDocument;
-            if (_activedoc.GetType() == typeof(Form_MasterEditor)) {
-                ((Form_MasterEditor)_activedoc).Save();
-            }
-            else if (_activedoc.GetType() == typeof(Form_GateEditor)) {
-                ((Form_GateEditor)_activedoc).Save();
-            }
-        }
-
         private void toolstripFileSaveAs_Click(object sender, EventArgs e)
         {
             GlobalActiveDocument.GetType().GetMethod("SaveAs").Invoke(GlobalActiveDocument, null);
-        }
-
-        private void toolstripFileSaveAll_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void toolstripFileTemplateFolder_Click(object sender, EventArgs e)
@@ -632,7 +616,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripMainSaveAll_Click(object sender, EventArgs e)
         {
-            foreach (Form_WorkSpace workspace in DockMain.Documents.Cast<Form_WorkSpace>()) {
+            foreach (Form_WorkSpace workspace in Workspaces) {
                 foreach (IDockContent document in workspace.dockMain.Documents) {
                     FindEditorRunMethod(document.GetType(), "Save");
                 }
