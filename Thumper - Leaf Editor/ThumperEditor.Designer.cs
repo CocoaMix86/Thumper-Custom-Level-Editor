@@ -1088,7 +1088,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(244, 170);
+            this.contextmenuWindow.Size = new Size(244, 148);
             // 
             // toolstripWindowFloat
             // 
@@ -1539,7 +1539,7 @@
             this.contextmenuTabClick.Items.AddRange(new ToolStripItem[] { this.toolstripTabSave, this.toolstripTabClose, this.toolstripTabCloseall, this.toolstripTabCloseOther, this.toolStripSeparator3, this.toolstripTabCopyPath, this.toolstripTabOpenFolder, this.toolStripSeparator17, this.toolstripTabFloat, this.toolstripTabFloatAll, this.moveToWorkspaceToolStripMenuItem });
             this.contextmenuTabClick.Name = "contextmenuHelp";
             this.contextmenuTabClick.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuTabClick.Size = new Size(298, 214);
+            this.contextmenuTabClick.Size = new Size(298, 236);
             this.contextmenuTabClick.Opening += this.contextmenuTabClick_Opening;
             // 
             // toolstripTabSave
@@ -1604,6 +1604,7 @@
             this.toolstripTabOpenFolder.Name = "toolstripTabOpenFolder";
             this.toolstripTabOpenFolder.Size = new Size(297, 22);
             this.toolstripTabOpenFolder.Text = "Open Containing Folder";
+            this.toolstripTabOpenFolder.Click += this.toolstripTabOpenFolder_Click;
             // 
             // toolStripSeparator17
             // 

@@ -240,6 +240,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if ((sender as ToolStripItem).Text == "Cut")
                 cutfile = true;
         }
+
+        private void openContainingFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(projectfiles[selectedNodes[0].FullPath].FullName))
+                Process.Start("explorer.exe", $@"/select, ""{projectfiles[selectedNodes[0].FullPath].FullName}""");
+        }
         #region Rename Handling
         private void toolstripFileRename_Click(object sender, EventArgs e)
         {

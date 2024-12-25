@@ -5,7 +5,6 @@ using System.Windows.Shell;
 using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
-using Windows.ApplicationModel.Search.Core;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -44,7 +43,8 @@ namespace Thumper_Custom_Level_Editor
                     try {
                         lockedfiles.Add(ProjectFile, new FileStream(ProjectFile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                         ClearFileLock();
-                    } catch (Exception) {
+                    }
+                    catch (Exception) {
                         MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Level cannot be opened");
                         return;
                     }
@@ -293,6 +293,45 @@ namespace Thumper_Custom_Level_Editor
 
             if (this.WindowState == FormWindowState.Normal)
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
+        }
+        #endregion
+        #region Form Key Press
+        private void TCLE_KeyDown(object sender, KeyEventArgs e)
+        {
+            //tab switch next
+            if (!e.Shift && e.Control && e.KeyCode == Keys.Tab) {
+                if (!ActiveWorkspace.dockMain.Documents.Any())
+                    return;
+                List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
+                docs[(docind + 1) % docs.Count].DockHandler.Activate();
+            }
+            //tab switch previous
+            else if (e.Shift && e.Control && e.KeyCode == Keys.Tab) {
+                if (!ActiveWorkspace.dockMain.Documents.Any())
+                    return;
+                List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
+                docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
+            }
+            //move document to next/previous workspace
+            else if (e.Alt && e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
+                if (GlobalActiveDocument == null || !ActiveWorkspace.dockMain.Documents.Any())
+                    return;
+                List<IDockContent> docs = DockMain.Documents.ToList();
+                //index of next workspace +1 or -1
+                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
+                (GlobalActiveDocument as DockContent).Show((docs[mod(docind, docs.Count)] as Form_WorkSpace).dockMain, DockState.Document);
+                docs[mod(docind, docs.Count)].DockHandler.Activate();
+                docs[mod(docind, docs.Count)].DockHandler.Form.Focus();
+            }
+            //workspace switch next/previous
+            else if (e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
+                List<IDockContent> docs = DockMain.Documents.ToList();
+                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
+                docs[mod(docind, docs.Count)].DockHandler.Activate();
+            }
+            e.Handled = true;
         }
         #endregion
 
@@ -661,6 +700,26 @@ namespace Thumper_Custom_Level_Editor
                     document.DockHandler.Dispose();
             }
         }
+
+        private void contextmenuMoveWorkspace_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            contextmenuMoveWorkspace.Items.Clear();
+            foreach (IDockContent ws in Workspaces) {
+                ToolStripMenuItem item = new() {
+                    Text = ws.DockHandler.TabText,
+                    ForeColor = Color.White,
+                    Image = Properties.Resources.editor_workspace,
+                    Checked = ws == ActiveWorkspace
+                };
+                contextmenuMoveWorkspace.Items.Add(item);
+            }
+        }
+
+        private void contextmenuMoveWorkspace_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Form_WorkSpace workspace = Workspaces.First(x => x.DockHandler.TabText == e.ClickedItem.Text) as Form_WorkSpace;
+            (GlobalActiveDocument as DockContent).Show(workspace.dockMain, DockState.Document);
+        }
         #endregion
 
         private void toolstripAddScene_Click(object sender, EventArgs e)
@@ -707,62 +766,11 @@ namespace Thumper_Custom_Level_Editor
             */
         }
 
-        private void contextmenuMoveWorkspace_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void toolstripTabOpenFolder_Click(object sender, EventArgs e)
         {
-            contextmenuMoveWorkspace.Items.Clear();
-            foreach (IDockContent ws in Workspaces) {
-                ToolStripMenuItem item = new() {
-                    Text = ws.DockHandler.TabText,
-                    ForeColor = Color.White,
-                    Image = Properties.Resources.editor_workspace,
-                    Checked = ws == ActiveWorkspace
-                };
-                contextmenuMoveWorkspace.Items.Add(item);
-            }
-        }
-
-        private void contextmenuMoveWorkspace_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            Form_WorkSpace workspace = Workspaces.First(x => x.DockHandler.TabText == e.ClickedItem.Text) as Form_WorkSpace;
-            (GlobalActiveDocument as DockContent).Show(workspace.dockMain, DockState.Document);
-        }
-
-        private void TCLE_KeyDown(object sender, KeyEventArgs e)
-        {
-            //tab switch next
-            if (!e.Shift && e.Control && e.KeyCode == Keys.Tab) {
-                if (!ActiveWorkspace.dockMain.Documents.Any())
-                    return;
-                List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
-                docs[(docind + 1) % docs.Count].DockHandler.Activate();
-            }
-            //tab switch previous
-            else if (e.Shift && e.Control && e.KeyCode == Keys.Tab) {
-                if (!ActiveWorkspace.dockMain.Documents.Any())
-                    return;
-                List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
-                docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
-            }
-            //move document to next/previous workspace
-            else if (e.Alt && e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
-                if (GlobalActiveDocument == null || !ActiveWorkspace.dockMain.Documents.Any())
-                    return;
-                List<IDockContent> docs = DockMain.Documents.ToList();
-                //index of next workspace +1 or -1
-                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
-                (GlobalActiveDocument as DockContent).Show((docs[mod(docind, docs.Count)] as Form_WorkSpace).dockMain, DockState.Document);
-                docs[mod(docind, docs.Count)].DockHandler.Activate();
-                docs[mod(docind, docs.Count)].DockHandler.Form.Focus();
-            }
-            //workspace switch next/previous
-            else if (e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
-                List<IDockContent> docs = DockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
-                docs[mod(docind, docs.Count)].DockHandler.Activate();
-            }
-            e.Handled = true;
+            FileInfo foldertoopen = dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value;
+            if (foldertoopen.Directory.Exists)
+                Process.Start("explorer.exe", $@"/select, ""{ foldertoopen.FullName}""");
         }
     }
 }
