@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
     {
-        public static void InitializeTracks(DataGridView grid, bool columnstyle)
+        public static void DoubleBufferDGV(DataGridView grid, bool columnstyle)
         {
             //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
             //used to significantly improve rendering performance
@@ -23,16 +23,28 @@ namespace Thumper_Custom_Level_Editor
                 PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
                 pi.SetValue(grid, true, null);
             }
-
-            if (columnstyle)
-                GenerateColumnStyle(grid, grid.ColumnCount);
         }
 
-        public static void GenerateColumnStyle(DataGridView grid, int _cells)
+        public static void GenerateColumnStyle(List<DataGridViewColumn> columns, int offset = 0)
         {
+            foreach (DataGridViewColumn dgvc in columns) {
+                dgvc.Name = (dgvc.Index - offset).ToString();
+                dgvc.Resizable = DataGridViewTriState.False;
+                dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgvc.DividerWidth = 1;
+                dgvc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgvc.Frozen = false;
+                dgvc.MinimumWidth = 2;
+                dgvc.ReadOnly = false;
+                dgvc.ValueType = typeof(decimal?);
+                dgvc.DefaultCellStyle.Format = "0.###";
+                dgvc.FillWeight = 0.001F;
+                dgvc.DefaultCellStyle.Font = new Font("Consolas", 8);
+            }
             //stylize track grid/columns
-            for (int i = 0; i < _cells; i++) {
-                grid.Columns[i].Name = i.ToString();
+            /*
+            for (int i = offset; i < _cells; i++) {
+                grid.Columns[i].Name = (i - offset).ToString();
                 grid.Columns[i].Resizable = DataGridViewTriState.False;
                 grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 grid.Columns[i].DividerWidth = 1;
@@ -44,7 +56,7 @@ namespace Thumper_Custom_Level_Editor
                 grid.Columns[i].DefaultCellStyle.Format = "0.###";
                 grid.Columns[i].FillWeight = 0.001F;
                 grid.Columns[i].DefaultCellStyle.Font = new Font("Consolas", 8);
-            }
+            }*/
         }
 
         public static HashSet<Object_Params> LeafObjects = new();

@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             InitializeGateStuff();
             gateToolStrip.Renderer = new ToolStripOverride();
-            TCLE.InitializeTracks(gateLvlList, false);
+            TCLE.DoubleBufferDGV(gateLvlList, false);
 
             if (load != null)
                 LoadGate(load, filepath);

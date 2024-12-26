@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             InitializeMasterStuff();
             masterToolStrip.Renderer = new ToolStripOverride();
-            TCLE.InitializeTracks(masterLvlList, false);
+            TCLE.DoubleBufferDGV(masterLvlList, false);
 
             if (load != null)
                 LoadMaster(load, filepath);

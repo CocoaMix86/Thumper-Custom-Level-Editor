@@ -2,11 +2,6 @@
 {
     public partial class TCLE
     {
-        private void mastereditor_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            ((DataGridView)sender).CommitEdit(DataGridViewDataErrorContexts.Commit);
-        }
-
         private void combobox_DrawItem(object sender, DrawItemEventArgs e)
         {
             // By using Sender, one method could handle multiple ComboBoxes

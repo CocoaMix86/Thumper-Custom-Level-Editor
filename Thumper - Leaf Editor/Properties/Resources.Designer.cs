@@ -623,6 +623,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_audio {
+            get {
+                object obj = ResourceManager.GetObject("icon_audio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_audio_mute {
+            get {
+                object obj = ResourceManager.GetObject("icon_audio_mute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_back {
             get {
                 object obj = ResourceManager.GetObject("icon_back", resourceCulture);
@@ -896,6 +916,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static System.Drawing.Bitmap icon_info {
             get {
                 object obj = ResourceManager.GetObject("icon_info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_lanes {
+            get {
+                object obj = ResourceManager.GetObject("icon_lanes", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

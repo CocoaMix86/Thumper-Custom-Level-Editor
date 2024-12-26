@@ -16,7 +16,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             sampleToolStrip.Renderer = new ToolStripOverride();
             InitializeSampleStuff();
-            TCLE.InitializeTracks(sampleList, false);
+            TCLE.DoubleBufferDGV(sampleList, false);
 
             if (load != null)
                 LoadSample(load, filepath);

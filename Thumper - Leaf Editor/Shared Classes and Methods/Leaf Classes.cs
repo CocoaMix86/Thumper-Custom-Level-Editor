@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -40,5 +44,36 @@ namespace Thumper_Custom_Level_Editor
         {
             return (Sequencer_Object)MemberwiseClone();
         }
+    }
+
+    public class LeafProperties
+    {
+        [Browsable(false)]
+        public Form_LeafEditor parent;
+        [Browsable(false)]
+        public JObject revertPoint { get; set; }
+        [Browsable(false)]
+        public List<JObject> undoItems { get; set; }
+        [Browsable(false)]
+        public ObservableCollection<Sequencer_Object> seq_objs;
+        [Browsable(false)]
+        public Sequencer_Object selectedobj { get; set; }
+
+        public LeafProperties(Form_LeafEditor Parent, FileInfo path)
+        {
+            parent = Parent;
+            FilePath = path;
+            selectedobj = new();
+            undoItems = new();
+            seq_objs = new();
+            //seq_objs.CollectionChanged += parent.seqobjs_CollectionChanged;
+        }
+
+        [CategoryAttribute("General")]
+        [DisplayName("File Path")]
+        [Description("The full path to this file.")]
+        public string filepath => FilePath.FullName;
+        [Browsable(false)]
+        public FileInfo FilePath;
     }
 }

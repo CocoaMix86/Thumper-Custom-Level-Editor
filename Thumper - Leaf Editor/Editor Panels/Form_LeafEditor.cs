@@ -15,17 +15,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leafToolStrip.Renderer = new ToolStripOverride();
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             DropDownMenuScrollWheelHandler.Enable(true);
-            TCLE.InitializeTracks(trackEditor, true);
+            TCLE.DoubleBufferDGV(trackEditor, true);
 
-            if (load != null)
+            if (load != null) {
                 LoadLeaf(load, filepath);
+            }
         }
         #endregion
 
         #region Variables
         public bool EditorIsSaved = true;
 
-        private int _beats => (int)numericUpDown_LeafLength.Value;
+        private int _beats => (int)numericUpDown_LeafLength.Value + 2;
 
         private int _selecttrack = 0;
         public FileInfo loadedleaf
@@ -42,16 +43,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private static FileInfo LoadedLeaf;
+        private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= 2);
         private dynamic leafjson;
         private bool loadingleaf = false;
-        private bool controldown = false;
-        private bool shiftdown = false;
-        private bool altdown = false;
-        private bool rightclickdown = false;
+        private bool controldown;
+        private bool shiftdown;
+        private bool altdown;
         private int leafeditorcell = 0;
-        private bool randomizing = false;
-        private bool ismoving = false;
-        private int hscrollposition = 0;
+        private bool randomizing;
+        private bool ismoving;
 
         private List<Sequencer_Object> _tracks = new();
         private static HashSet<Object_Params> _objects => TCLE.LeafObjects;
@@ -63,20 +63,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<SaveState> _undolistleaf = new();
         #endregion
         #region EventHandlers
-        ///        ///
-        /// EVENTS ///
-        ///        ///
-
-        ///LEAF EDITOR PANEL LOCATION CHANGED
-        private void panelLeaf_LocationChanged(object sender, EventArgs e)
-        {
-            //stretches panel to fit window
-            panelLeaf.Size = new Size(this.Size.Width - panelLeaf.Location.X - 15, panelLeaf.Size.Height);
-        }
-
-        ///
-        ///TRACKBAR ZOOM AND SCROLLING
-        ///DETECT SCROLL
+        #region Scrollbars and Zoom
         private void trackEditor_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             vscrollbarTrackEditor_Resize();
@@ -96,15 +83,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void trackZoom_Scroll(object sender, EventArgs e)
         {
-            int display = trackEditor.FirstDisplayedScrollingColumnIndex;
-            if (display == -1)
-                return;
-            for (int i = 0; i < _beats; i++) {
-                trackEditor.Columns[i].Width = trackZoom.Value;
+            foreach (DataGridViewColumn dgvc in Columns) {
+                dgvc.Width = trackZoom.Value;
             }
-            //hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-            //hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
-            if (trackEditor.ColumnCount > 1) {
+            int display = trackEditor.FirstDisplayedScrollingColumnIndex;
+            if (trackEditor.ColumnCount > 1 && display != -1) {
                 trackEditor.Scroll -= trackEditor_Scroll;
                 trackEditor.FirstDisplayedScrollingColumnIndex = display + 1;
                 trackEditor.FirstDisplayedScrollingColumnIndex = display;
@@ -148,7 +131,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Width = panelLeaf.Width - trackEditor.Location.X - 5;
             }
         }
-
         private void trackEditor_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             trackEditor.Focus();
@@ -197,8 +179,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (trackEditor.FirstDisplayedScrollingRowIndex != -1)
                 trackEditor.FirstDisplayedScrollingRowIndex = e.NewValue;
         }
-        ///
-        /// 
+        #endregion
+
+        private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex != -1 && e.RowIndex != -1)
+                CellPaint(e);
+        }
+        private void CellPaint(DataGridViewCellPaintingEventArgs e)
+        {
+            e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            //get dimensions
+            int w = Properties.Resources.icon_play.Width;
+            int h = Properties.Resources.icon_play.Height;
+            int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+            int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
+            //paint the image
+            if (e.ColumnIndex == 0)
+                e.Graphics.DrawImage(Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
+            else if (e.ColumnIndex == 1)
+                e.Graphics.DrawImage(Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+            e.Handled = true;
+        }
 
         ///DATAGRIDVIEW - TRACK EDITOR
         private void trackEditor_SelectionChanged(object sender, EventArgs e)
@@ -362,8 +364,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leafeditorcell = e.ColumnIndex;
             if (e.ColumnIndex == -1 || e.RowIndex == -1)
                 return;
+
             DataGridView dgv = sender as DataGridView;
-            if (Control.MouseButtons == MouseButtons.Right) {
+            if (e.ColumnIndex == 0 || e.ColumnIndex == 1) {
+                dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(64, 53, 130);
+            }
+            else if (Control.MouseButtons == MouseButtons.Right) {
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], _tracks[e.RowIndex]);
@@ -375,6 +381,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     CellValueChanged(e.RowIndex, e.ColumnIndex, true);
                     //_undolistleaf.RemoveAt(1);
                 }
+            }
+        }
+
+        private void trackEditor_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == -1 || e.RowIndex == -1)
+                return;
+
+            DataGridView dgv = sender as DataGridView;
+            if (e.ColumnIndex == 0 || e.ColumnIndex == 1) {
+                dgv[e.ColumnIndex, e.RowIndex].Style = null;
             }
         }
         //Keypress Backspace - clear selected cells
@@ -393,7 +410,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             controldown = e.Control;
             shiftdown = e.Shift;
             altdown = e.Alt;
-            hscrollposition = trackEditor.HorizontalScrollingOffset;
             ///Keypress Delete - clear selected cellss
             //delete cell value if Delete key is pressed
             if (e.KeyCode == Keys.Delete) {
@@ -575,7 +591,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (_beats > trackEditor.ColumnCount) {
                 trackEditor.ColumnCount = _beats;
-                TCLE.GenerateColumnStyle(trackEditor, _beats);
+                TCLE.GenerateColumnStyle(trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= 2).ToList(), 2);
             }
             else
                 trackEditor.ColumnCount = _beats;
@@ -740,7 +756,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Text = LoadedLeaf.Name;
             //update beat counts in loaded lvl if need be
             ///if (_mainform._loadedlvl != null)
-                ///_mainform.btnLvlRefreshBeats_Click(null, null);
+            ///_mainform.btnLvlRefreshBeats_Click(null, null);
             if (clearundo)
                 ClearReloadUndo(_save);
         }
@@ -1287,7 +1303,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //update beat counts in loaded lvl if need be
             ///if (_mainform._loadedlvl != null)
-                ///_mainform.btnLvlRefreshBeats.PerformClick();
+            ///_mainform.btnLvlRefreshBeats.PerformClick();
         }
 
         private void btnLeafObjRefresh_Click(object sender, EventArgs e)
@@ -1456,7 +1472,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
                 try {
-                    r.Cells[int.Parse(data_point.Name)].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    r.Cells[int.Parse(data_point.Name) + 2].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                 }
                 catch (ArgumentOutOfRangeException) { }
             }
@@ -1494,9 +1510,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //tryparse to see if it fails.
             if (!int.TryParse(dropTimeSig.Text.Split('/')[0], out int timesigbeats))
                 return;
-            for (int i = 0; i < _beats; i++) {
+            for (int i = 2; i < _beats; i++) {
                 //whenever `i` is a multiple of the time sig, switch colors
-                if (i % timesigbeats == 0)
+                if ((i - 2) % timesigbeats == 0)
                     _switch = !_switch;
                 trackEditor.Columns[i].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(40, 40, 40) : Color.FromArgb(30, 30, 30);
             }
@@ -1567,7 +1583,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             loadingleaf = true;
             //clear existing tracks
             _tracks.Clear();
-            trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             //set beat_cnt and time_sig
             int _leaflength = (int?)_load["beat_cnt"] ?? 1;
             numericUpDown_LeafLength.Value = _leaflength > 0 ? (_leaflength > 255 ? 255 : _leaflength) : 1;
@@ -1604,7 +1619,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         Object_Params objmatch = _objects.First(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname"));
                         _s.friendly_param = objmatch.param_displayname ?? "";
                         _s.friendly_type = objmatch.category ?? "";
-                    } catch (Exception) {
+                    }
+                    catch (Exception) {
                         loadfail = true;
                         loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
                     }
@@ -1618,13 +1634,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _tracks.Add(_s);
             }
             //clear the DGV and prep for new data points
-            trackEditor.SuspendLayout();
             trackEditor.Rows.Clear();
             trackEditor.RowCount = _tracks.Count;
 
             trackEditor.RowHeadersVisible = true;
-            trackEditor.Resize -= trackEditor_Resize;
-            trackEditor.RowHeadersWidthChanged -= trackEditor_RowHeadersWidthChanged;
             //foreach row, import data points associated with it
             foreach (DataGridViewRow r in trackEditor.Rows) {
                 try {
@@ -1635,30 +1648,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 catch (Exception) { }
             }
-            trackEditor.Resize += trackEditor_Resize;
-            trackEditor.RowHeadersWidthChanged += trackEditor_RowHeadersWidthChanged;
-            trackEditor_RowHeadersWidthChanged(null, null);
             if (loadfail) {
                 MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
             }
-            trackEditor.ResumeLayout();
+            trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             //enable a bunch of elements now that a leaf is loaded.
             EnableLeafButtons(true);
             //re-set the zoom level
             trackZoom_Scroll(null, null);
             trackZoomVert_Scroll(null, null);
             //set scrollbar positions (if set last time this leaf was open)
-            trackEditor.RowHeadersWidth = trackEditor.RowHeadersWidth;
-            trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-            try {
-                trackEditor.Scroll -= trackEditor_Scroll;
-                trackEditor.FirstDisplayedScrollingRowIndex = 0;
-                trackEditor.FirstDisplayedScrollingColumnIndex = 0;
-                trackEditor.Scroll += trackEditor_Scroll;
-            }
-            catch {
-                trackEditor.Scroll += trackEditor_Scroll;
-            }
 
             loadingleaf = false;
             //clear undo list and reset the leafjson to the new leaf
