@@ -79,6 +79,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             vscrollbarTrackEditor_Resize();
         }
+
         private void trackEditor_Scroll(object sender, ScrollEventArgs e)
         {
             if (controldown) {
@@ -87,11 +88,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Scroll += trackEditor_Scroll;
             }
         }
+
         private void btnLeafZoom_Click(object sender, EventArgs e)
         {
             TCLE.PlaySound("UIselect");
             panelZoom.Visible = !panelZoom.Visible;
         }
+
         private void trackZoom_Scroll(object sender, EventArgs e)
         {
             foreach (DataGridViewColumn dgvc in Columns) {
@@ -105,6 +108,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Scroll += trackEditor_Scroll;
             }
         }
+
         private void trackZoomVert_Scroll(object sender, EventArgs e)
         {
             trackEditor.Scroll -= trackEditor_Scroll;
@@ -118,30 +122,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.FirstDisplayedScrollingRowIndex = display;
             trackEditor.Scroll += trackEditor_Scroll;
         }
+
         private void trackEditor_Resize(object sender, EventArgs e)
         {
             vscrollbarTrackEditor_Resize();
-            //hScrollBarTrackEditor.Visible = !(trackEditor.DisplayedColumnCount(false) == trackEditor.ColumnCount);
-            //hScrollBarTrackEditor.Maximum = (trackEditor.ColumnCount - trackEditor.DisplayedColumnCount(true) + 10);
         }
+
         private void vscrollbarTrackEditor_Resize()
         {
             vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
             vScrollBarTrackEditor.Maximum = trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10;
+            splitContainerLeafSide.Panel1.Refresh();
         }
-        private void vScrollBarTrackEditor_VisibleChanged(object sender, EventArgs e)
-        {
-            if (vScrollBarTrackEditor.Visible) {
-                trackEditor.Location = new Point(vScrollBarTrackEditor.Location.X + 15, trackEditor.Location.Y);
-                //trackEditor.Width -= 15;
-                trackEditor.Width = panelLeaf.Width - trackEditor.Location.X - 5;
-            }
-            else {
-                trackEditor.Location = new Point(vScrollBarTrackEditor.Location.X, trackEditor.Location.Y);
-                //trackEditor.Width += 15;
-                trackEditor.Width = panelLeaf.Width - trackEditor.Location.X - 5;
-            }
-        }
+
         private void trackEditor_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             trackEditor.Focus();
@@ -206,11 +199,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
-            if (e.ColumnIndex == 0)
-                e.Graphics.DrawImage(Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
-            else if (e.ColumnIndex == 1)
-                e.Graphics.DrawImage(Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+            if (e.ColumnIndex == 0) {
+                if (_tracks[e.RowIndex].mute)
+                    e.Graphics.DrawImage(Properties.Resources.icon_audio_mute, new Rectangle(x, y, w, h));
+                else
+                    e.Graphics.DrawImage(Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
+            }
+            else if (e.ColumnIndex == 1) {
+                if (_tracks[e.RowIndex].param_path.EndsWith(".ent"))
+                    e.Graphics.DrawImage(Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+            }
             e.Handled = true;
+        }
+
+        private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex is 1) {
+                trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide left and right lanes";
+            }
         }
 
         ///DATAGRIDVIEW - TRACK EDITOR
@@ -320,7 +326,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (changes) {
                     if (trackEditor.SelectedCells.Count > 1)
                         SaveCheckAndWrite(false);
-                        //SaveCheckAndWrite(false, $"{trackEditor.SelectedCells.Count} beats value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
+                    //SaveCheckAndWrite(false, $"{trackEditor.SelectedCells.Count} beats value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
                     else
                         SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, $"Beat {columnindex} value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
@@ -345,7 +351,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             DataGridView dgv = (DataGridView)sender;
             if (e.ColumnIndex is 0 or 1) {
+                if (e.ColumnIndex is 0)
+                    _tracks[e.RowIndex].mute = !_tracks[e.RowIndex].mute;
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                trackEditor.InvalidateCell(trackEditor[e.ColumnIndex, e.RowIndex]);
             }
             else if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
                 if (_tracks[e.RowIndex].trait_type is "kTraitBool" or "kTraitAction")

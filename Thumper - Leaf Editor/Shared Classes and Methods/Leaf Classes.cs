@@ -35,6 +35,7 @@ namespace Thumper_Custom_Level_Editor
         public float highlight_value { get; set; }
 
         public int id { get; set; }
+        public bool mute { get; set; }
 
         public Sequencer_Object()
         {
