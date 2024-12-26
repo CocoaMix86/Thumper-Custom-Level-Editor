@@ -75,5 +75,15 @@ namespace Thumper_Custom_Level_Editor
         public string filepath => FilePath.FullName;
         [Browsable(false)]
         public FileInfo FilePath;
+
+        [CategoryAttribute("Options")]
+        [DisplayName("Leaf Length")]
+        [Description("How many beats long this sequencer/leaf is.")]
+        public int beats { get; set; }
+
+        [CategoryAttribute("Options")]
+        [DisplayName("Time Signature")]
+        [Description("Editor only. Affects the column highlighting so you can see the measuers")]
+        public string timesignature { get; set; }
     }
 }

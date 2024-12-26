@@ -952,7 +952,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 401);
+            this.vScrollBarTrackEditor.Size = new Size(15, 392);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -1053,10 +1053,12 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(688, 401);
+            this.trackEditor.Size = new Size(688, 392);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
+            this.trackEditor.CellMouseClick += this.trackEditor_CellMouseClick;
+            this.trackEditor.CellMouseDown += this.trackEditor_CellMouseDown;
             this.trackEditor.CellMouseEnter += this.trackEditor_CellMouseEnter;
             this.trackEditor.CellMouseLeave += this.trackEditor_CellMouseLeave;
             this.trackEditor.CellPainting += this.trackEditor_CellPainting;
@@ -1097,7 +1099,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 401);
+            this.leafToolStrip.Size = new Size(25, 392);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -1402,7 +1404,7 @@
             this.splitContainerLeafSide.Panel1.Controls.Add(this.leafToolStrip);
             this.splitContainerLeafSide.Panel1.Controls.Add(this.splitContainerTopbar);
             this.splitContainerLeafSide.Size = new Size(728, 519);
-            this.splitContainerLeafSide.SplitterDistance = 431;
+            this.splitContainerLeafSide.SplitterDistance = 422;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
