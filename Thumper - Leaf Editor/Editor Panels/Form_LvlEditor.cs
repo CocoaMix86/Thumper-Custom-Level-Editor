@@ -584,7 +584,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             loadedlvl = filepath;
-            //set some visual elements
             this.Text = LoadedLvl.Name;
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
@@ -596,13 +595,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 tutorialtype = (string)_load["tutorial_type"]
             };
 
-            ///Clear DGVs so new data can load
+            //Clear DGVs so new data can load
             lvlLoopTracks.Rows.Clear();
             lvlLeafList.Rows.Clear();
             lvlLeafPaths.Rows.Clear();
             LvlLeafs.Clear();
 
-            ///load loop track names and paths to lvlLoopTracks DGV
+            //load loop track names and paths to lvlLoopTracks DGV
             TCLE.LvlReloadSamples();
             ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToList();
             foreach (dynamic samp in _load["loops"]) {

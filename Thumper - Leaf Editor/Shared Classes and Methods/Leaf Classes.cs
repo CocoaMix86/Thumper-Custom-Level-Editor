@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using ICSharpCode.TextEditor.Actions;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -80,7 +81,19 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("Leaf Length")]
         [Description("How many beats long this sequencer/leaf is.")]
-        public int beats { get; set; }
+        public int beats
+        {
+            get => Beats;
+            set {
+                if (value > 255)
+                    value = 255;
+                else if (value < 1)
+                    value = 1;
+                Beats = value;
+
+            }
+        }
+        private int Beats;
 
         [CategoryAttribute("Options")]
         [DisplayName("Time Signature")]

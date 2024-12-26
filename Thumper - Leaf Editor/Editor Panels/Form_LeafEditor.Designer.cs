@@ -29,10 +29,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             this.toolTip1 = new ToolTip(this.components);
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
@@ -42,9 +42,8 @@
             this.label46 = new Label();
             this.label8 = new Label();
             this.label9 = new Label();
-            this.panelLeaf = new Panel();
             this.btnRawImport = new Button();
-            this.richRawTrackData = new RichTextBox();
+            this.panelLeaf = new Panel();
             this.panel6 = new Panel();
             this.panel7 = new Panel();
             this.NUDquick9 = new NumericUpDown();
@@ -124,6 +123,7 @@
             this.splitContainerTopbar = new SplitContainer();
             this.label5 = new Label();
             this.label13 = new Label();
+            this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.panelLeaf.SuspendLayout();
@@ -160,6 +160,7 @@
             this.splitContainerTopbar.Panel1.SuspendLayout();
             this.splitContainerTopbar.Panel2.SuspendLayout();
             this.splitContainerTopbar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.textEditor).BeginInit();
             this.SuspendLayout();
             // 
             // trackZoomVert
@@ -275,6 +276,24 @@
             this.label9.Text = "Trait";
             this.toolTip1.SetToolTip(this.label9, "The data type of the object. Recommended to not edit.");
             // 
+            // btnRawImport
+            // 
+            this.btnRawImport.BackColor = Color.DarkGreen;
+            this.btnRawImport.Cursor = Cursors.Hand;
+            this.btnRawImport.Dock = DockStyle.Left;
+            this.btnRawImport.FlatStyle = FlatStyle.Flat;
+            this.btnRawImport.Image = Properties.Resources.icon_import;
+            this.btnRawImport.ImageAlign = ContentAlignment.TopCenter;
+            this.btnRawImport.Location = new Point(0, 0);
+            this.btnRawImport.Margin = new Padding(0);
+            this.btnRawImport.Name = "btnRawImport";
+            this.btnRawImport.Size = new Size(54, 94);
+            this.btnRawImport.TabIndex = 44;
+            this.btnRawImport.Text = "Import Raw";
+            this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.btnRawImport.UseVisualStyleBackColor = false;
+            this.btnRawImport.Click += this.btnRawImport_Click;
+            // 
             // panelLeaf
             // 
             this.panelLeaf.BackColor = Color.FromArgb(35, 35, 35);
@@ -287,38 +306,6 @@
             this.panelLeaf.Size = new Size(443, 317);
             this.panelLeaf.TabIndex = 46;
             this.panelLeaf.Tag = "editorpanel";
-            // 
-            // btnRawImport
-            // 
-            this.btnRawImport.BackColor = Color.DarkGreen;
-            this.btnRawImport.Cursor = Cursors.Hand;
-            this.btnRawImport.Dock = DockStyle.Left;
-            this.btnRawImport.FlatStyle = FlatStyle.Flat;
-            this.btnRawImport.Image = Properties.Resources.icon_import;
-            this.btnRawImport.ImageAlign = ContentAlignment.TopCenter;
-            this.btnRawImport.Location = new Point(0, 0);
-            this.btnRawImport.Margin = new Padding(0);
-            this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 84);
-            this.btnRawImport.TabIndex = 44;
-            this.btnRawImport.Text = "Import Raw";
-            this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
-            this.btnRawImport.UseVisualStyleBackColor = false;
-            // 
-            // richRawTrackData
-            // 
-            this.richRawTrackData.BackColor = Color.FromArgb(40, 40, 40);
-            this.richRawTrackData.BorderStyle = BorderStyle.FixedSingle;
-            this.richRawTrackData.DetectUrls = false;
-            this.richRawTrackData.Dock = DockStyle.Fill;
-            this.richRawTrackData.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.richRawTrackData.ForeColor = Color.White;
-            this.richRawTrackData.Location = new Point(54, 0);
-            this.richRawTrackData.Margin = new Padding(4, 3, 4, 3);
-            this.richRawTrackData.Name = "richRawTrackData";
-            this.richRawTrackData.Size = new Size(674, 84);
-            this.richRawTrackData.TabIndex = 26;
-            this.richRawTrackData.Text = "raw track data";
             // 
             // panel6
             // 
@@ -364,7 +351,7 @@
             this.panel7.Location = new Point(1, 428);
             this.panel7.Margin = new Padding(4, 3, 4, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new Size(210, 2);
+            this.panel7.Size = new Size(210, 1192);
             this.panel7.TabIndex = 111;
             // 
             // NUDquick9
@@ -923,7 +910,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 400);
+            this.vScrollBarTrackEditor.Size = new Size(15, 390);
             this.vScrollBarTrackEditor.TabIndex = 144;
             // 
             // panelZoom
@@ -979,27 +966,27 @@
             this.trackEditor.BorderStyle = BorderStyle.None;
             this.trackEditor.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle13.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle13.ForeColor = Color.White;
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.trackEditor.Columns.AddRange(new DataGridViewColumn[] { this.LeafAudio, this.LeafMultilane });
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle14.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle14.ForeColor = Color.White;
-            dataGridViewCellStyle14.Format = "0.###";
-            dataGridViewCellStyle14.NullValue = null;
-            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle2.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.Format = "0.###";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
             this.trackEditor.Dock = DockStyle.Fill;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = Color.Black;
@@ -1007,23 +994,23 @@
             this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle15.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle15.ForeColor = Color.White;
-            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.ScrollBars = ScrollBars.Horizontal;
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(688, 400);
+            this.trackEditor.Size = new Size(688, 390);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -1033,6 +1020,7 @@
             this.trackEditor.CellMouseEnter += this.trackEditor_CellMouseEnter;
             this.trackEditor.CellMouseLeave += this.trackEditor_CellMouseLeave;
             this.trackEditor.CellPainting += this.trackEditor_CellPainting;
+            this.trackEditor.RowEnter += this.trackEditor_RowEnter;
             this.trackEditor.RowsAdded += this.trackEditor_RowsAdded;
             this.trackEditor.Resize += this.trackEditor_Resize;
             // 
@@ -1072,7 +1060,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 400);
+            this.leafToolStrip.Size = new Size(25, 390);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -1379,10 +1367,10 @@
             // 
             // splitContainerLeafSide.Panel2
             // 
-            this.splitContainerLeafSide.Panel2.Controls.Add(this.richRawTrackData);
+            this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(728, 519);
-            this.splitContainerLeafSide.SplitterDistance = 430;
+            this.splitContainerLeafSide.SplitterDistance = 420;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -1455,6 +1443,54 @@
             this.label13.TabIndex = 95;
             this.label13.Text = "?";
             // 
+            // textEditor
+            // 
+            this.textEditor.AccessibleDescription = "Textbox control";
+            this.textEditor.AccessibleName = "Fast Colored Text Box";
+            this.textEditor.AccessibleRole = AccessibleRole.Text;
+            this.textEditor.AutoCompleteBracketsList = new char[]
+    {
+    '(',
+    ')',
+    '{',
+    '}',
+    '[',
+    ']',
+    '"',
+    '"',
+    '\'',
+    '\''
+    };
+            this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
+            this.textEditor.AutoScrollMinSize = new Size(195, 14);
+            this.textEditor.BackBrush = null;
+            this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
+            this.textEditor.CharHeight = 14;
+            this.textEditor.CharWidth = 8;
+            this.textEditor.DefaultMarkerSize = 8;
+            this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
+            this.textEditor.Dock = DockStyle.Fill;
+            this.textEditor.FindForm = null;
+            this.textEditor.FoldingHighlightColor = Color.LightGray;
+            this.textEditor.FoldingHighlightEnabled = false;
+            this.textEditor.Font = new Font("Courier New", 9.75F);
+            this.textEditor.ForeColor = Color.White;
+            this.textEditor.GoToForm = null;
+            this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
+            this.textEditor.IndentBackColor = Color.Black;
+            this.textEditor.IsReplaceMode = false;
+            this.textEditor.Location = new Point(54, 0);
+            this.textEditor.Name = "textEditor";
+            this.textEditor.Paddings = new Padding(0);
+            this.textEditor.ReplaceForm = null;
+            this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
+            this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
+            this.textEditor.Size = new Size(674, 94);
+            this.textEditor.TabIndex = 45;
+            this.textEditor.Text = "sequencer object data";
+            this.textEditor.ToolTipDelay = 100;
+            this.textEditor.Zoom = 100;
+            // 
             // Form_LeafEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1516,6 +1552,7 @@
             this.splitContainerTopbar.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).EndInit();
             this.splitContainerTopbar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.textEditor).EndInit();
             this.ResumeLayout(false);
         }
 
@@ -1542,7 +1579,6 @@
         private System.Windows.Forms.ToolStripButton btnTrackColorImport;
         private System.Windows.Forms.ToolStripButton btnLeafRandom;
         private System.Windows.Forms.Button btnRawImport;
-        private System.Windows.Forms.RichTextBox richRawTrackData;
         private System.Windows.Forms.ToolStrip leaftoolsToolStrip;
         private System.Windows.Forms.ToolStripButton btnLeafColors;
         private System.Windows.Forms.ToolStripButton btnLEafInterpLinear;
@@ -1616,5 +1652,6 @@
         private Label label13;
         private DataGridViewTextBoxColumn LeafAudio;
         private DataGridViewTextBoxColumn LeafMultilane;
+        private FastColoredTextBoxNS.FastColoredTextBox textEditor;
     }
 }
