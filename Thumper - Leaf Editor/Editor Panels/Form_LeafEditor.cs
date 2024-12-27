@@ -59,7 +59,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private dynamic leafjson;
         private int CurrentRow;
         private int MouseCurrentColumn;
-        private int LeafBeatLength => (int)numericUpDown_LeafLength.Value + 2;
+        private int FrozenColumnOffset = 2;
         private bool controldown;
         private bool shiftdown;
         private bool altdown;
@@ -617,25 +617,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             trackEditor_Resize(null, null);
         }
-        ///LEAF LENGTH
-        private void numericUpDown_LeafLength_ValueChanged(object sender, EventArgs e)
-        {
-            string data = trackEditor.ColumnCount.ToString();
 
-            if (LeafBeatLength > trackEditor.ColumnCount) {
-                trackEditor.ColumnCount = LeafBeatLength;
-                TCLE.GenerateColumnStyle(trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= 2).ToList(), 2);
-            }
-            else
-                trackEditor.ColumnCount = LeafBeatLength;
-            //set cell zoom
-            trackZoom_Scroll(null, null);
-            //make sure new cells follow the time sig
-            TrackTimeSigHighlighting();
-            //sets flag that leaf has unsaved changes
-            SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, "Leaf length", $"{data} -> {_beats}");
-        }
         ///DROPDOWN OBJECTS
         private void dropObjects_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -1008,11 +990,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     lastbeat = 1;
                 else
                     lastbeat = int.Parse(jj.Last().Name) + 1;
-                if (lastbeat > numericUpDown_LeafLength.Value) {
+                if (lastbeat > LeafProperties.beats) {
                     DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
                     //YES = extend the leaf and then paste
                     if (_paste == DialogResult.Yes)
-                        numericUpDown_LeafLength.Value = lastbeat;
+                        LeafProperties.beats = lastbeat;
                     //NO = do not extend leaf and then paste
                     //CANCEL = do nothing
                     else if (_paste == DialogResult.Cancel)
@@ -1286,7 +1268,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //set new beat count
             _leafsplitafter.Remove("beat_cnt");
-            _leafsplitafter.Add("beat_cnt", numericUpDown_LeafLength.Value - splitindex);
+            _leafsplitafter.Add("beat_cnt", LeafProperties.beats - splitindex);
             //write data back to file
             newfilename.CreateText().Write(JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
 
@@ -1430,12 +1412,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //clear the DGV and prep for new data
             trackEditor.Rows.Clear();
 
-            //set timesig for highlighting
-            if (!dropTimeSig.Items.Contains(LeafProperties.timesignature)) {
-                dropTimeSig.Items.Add(LeafProperties.timesignature);
-            }
-            dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(LeafProperties.timesignature);
-
             //each object in the seq_objs[] list becomes a track
             foreach (dynamic seq_obj in _load["seq_objs"]) {
                 Sequencer_Object _s = new() {
@@ -1497,7 +1473,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //re-set the zoom level
             trackZoom_Scroll(null, null);
             trackZoomVert_Scroll(null, null);
-            //set scrollbar positions (if set last time this leaf was open)
+
+            //set timesig for highlighting
+            if (!dropTimeSig.Items.Contains(LeafProperties.timesignature)) {
+                dropTimeSig.Items.Add(LeafProperties.timesignature);
+            }
+            dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(LeafProperties.timesignature);
 
             EditorIsLoading = false;
             //clear undo list and reset the leafjson to the new leaf
@@ -1569,6 +1550,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
             }
         }
+        ///LEAF LENGTH
+        public void LeafLengthChanged()
+        {
+            string data = trackEditor.ColumnCount.ToString();
+
+            if (LeafProperties.beats + FrozenColumnOffset > trackEditor.ColumnCount) {
+                trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
+                TCLE.GenerateColumnStyle(trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= 2).ToList(), 2);
+            }
+            else
+                trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
+            //set cell zoom
+            trackZoom_Scroll(null, null);
+            //make sure new cells follow the time sig
+            TrackTimeSigHighlighting();
+            //sets flag that leaf has unsaved changes
+            SaveCheckAndWrite(false);
+            //SaveCheckAndWrite(false, "Leaf length", $"{data} -> {_beats}");
+        }
 
         ///Import raw text from rich text box to selected row
         public void TrackRawImport(DataGridViewRow r, JObject _rawdata)
@@ -1582,7 +1582,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Ask the user if they want to expand the leaf to accomadate the data point
             if (data_points.Count > 0 && int.Parse((data_points.Last()).Name) >= r.Cells.Count) {
                 if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {r.HeaderCell.Value}\nData point: {data_points.Last()}", "Leaf too short", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    numericUpDown_LeafLength.Value = int.Parse((data_points.Last()).Name) + 1;
+                    LeafProperties.beats = int.Parse((data_points.Last()).Name) + 1;
             }
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
@@ -1628,11 +1628,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //tryparse to see if it fails.
             if (!int.TryParse(dropTimeSig.Text.Split('/')[0], out int timesigbeats))
                 return;
-            for (int i = 2; i < LeafBeatLength; i++) {
+            for (int i = 0; i < LeafProperties.beats; i++) {
                 //whenever `i` is a multiple of the time sig, switch colors
-                if ((i - 2) % timesigbeats == 0)
+                if ((i) % timesigbeats == 0)
                     _switch = !_switch;
-                trackEditor.Columns[i].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(40, 40, 40) : Color.FromArgb(30, 30, 30);
+                trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(40, 40, 40) : Color.FromArgb(30, 30, 30);
             }
         }
         ///Updates cell highlighting in the DGV

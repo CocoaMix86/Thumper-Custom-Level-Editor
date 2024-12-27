@@ -86,7 +86,6 @@
             this.dropTrackLane = new ComboBox();
             this.label11 = new Label();
             this.btnTrackApply = new Button();
-            this.numericUpDown_LeafLength = new NumericUpDown();
             this.vScrollBarTrackEditor = new VScrollBar();
             this.panelZoom = new Panel();
             this.label10 = new Label();
@@ -143,7 +142,6 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.txtDefault).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.numericUpDown_LeafLength).BeginInit();
             this.panelZoom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.trackEditor).BeginInit();
             this.leafToolStrip.SuspendLayout();
@@ -287,7 +285,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 94);
+            this.btnRawImport.Size = new Size(54, 96);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -316,7 +314,6 @@
             this.panel6.Controls.Add(this.panel4);
             this.panel6.Controls.Add(this.panel3);
             this.panel6.Controls.Add(this.panel2);
-            this.panel6.Controls.Add(this.numericUpDown_LeafLength);
             this.panel6.Location = new Point(0, 0);
             this.panel6.Margin = new Padding(4, 3, 4, 3);
             this.panel6.Name = "panel6";
@@ -351,7 +348,7 @@
             this.panel7.Location = new Point(1, 428);
             this.panel7.Margin = new Padding(4, 3, 4, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new Size(210, 1192);
+            this.panel7.Size = new Size(210, 1430);
             this.panel7.TabIndex = 111;
             // 
             // NUDquick9
@@ -890,27 +887,12 @@
             this.btnTrackApply.Text = "Apply to Track";
             this.btnTrackApply.UseVisualStyleBackColor = false;
             // 
-            // numericUpDown_LeafLength
-            // 
-            this.numericUpDown_LeafLength.BackColor = Color.FromArgb(40, 40, 40);
-            this.numericUpDown_LeafLength.ForeColor = Color.White;
-            this.numericUpDown_LeafLength.Location = new Point(108, 2);
-            this.numericUpDown_LeafLength.Margin = new Padding(4, 3, 4, 3);
-            this.numericUpDown_LeafLength.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
-            this.numericUpDown_LeafLength.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.numericUpDown_LeafLength.Name = "numericUpDown_LeafLength";
-            this.numericUpDown_LeafLength.Size = new Size(84, 23);
-            this.numericUpDown_LeafLength.TabIndex = 23;
-            this.numericUpDown_LeafLength.TextAlign = HorizontalAlignment.Center;
-            this.numericUpDown_LeafLength.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            this.numericUpDown_LeafLength.ValueChanged += this.numericUpDown_LeafLength_ValueChanged;
-            // 
             // vScrollBarTrackEditor
             // 
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 390);
+            this.vScrollBarTrackEditor.Size = new Size(15, 388);
             this.vScrollBarTrackEditor.TabIndex = 144;
             // 
             // panelZoom
@@ -1010,7 +992,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(688, 390);
+            this.trackEditor.Size = new Size(688, 388);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -1060,7 +1042,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 390);
+            this.leafToolStrip.Size = new Size(25, 388);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -1370,7 +1352,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(728, 519);
-            this.splitContainerLeafSide.SplitterDistance = 420;
+            this.splitContainerLeafSide.SplitterDistance = 418;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -1485,7 +1467,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(674, 94);
+            this.textEditor.Size = new Size(674, 96);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1529,7 +1511,6 @@
             ((System.ComponentModel.ISupportInitialize)this.txtDefault).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.numericUpDown_LeafLength).EndInit();
             this.panelZoom.ResumeLayout(false);
             this.panelZoom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.trackEditor).EndInit();
@@ -1634,7 +1615,6 @@
         private System.Windows.Forms.ComboBox dropTrackLane;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnTrackApply;
-        private System.Windows.Forms.NumericUpDown numericUpDown_LeafLength;
         public ComboBox dropObjects;
         public ComboBox dropParamPath;
         private SplitContainer splitContainer1;
