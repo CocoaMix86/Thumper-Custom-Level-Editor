@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
-    Microsoft ResX Schema
+    Microsoft ResX Schema 
 
     Version 2.0
 
@@ -48,7 +48,7 @@
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
@@ -152,11 +152,11 @@
   <data name="btnTrackDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADRSURBVDhPrZLBDoIwDIZ5E+/EhE29yzPghgd9/xBMvGqi
-        DPhZp1upepAvaUjX/T9dt2xRnKoLp4yhdAZq2ENpCgr3dXVp8vLptD3T8oteGdus7OOmq6vThx0te4J4
-        FPYIbhLEoT4zQWvxBoTPzREh1vhRRRO179q8RjfvNXRXmBPJUiSTOL6KA5OJn0Eq1mX3UwwwsFYyGI8z
-        fme3k8CnzePTFU9IYvyVH0c0+fsaxYcUDYz/AA+p39gtlT3JUxamHUxEcQAmSWsM1LCH0iXIsgGaEy/0
-        UfJyfQAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADSSURBVDhPrZLBDoIwDIZ5E+/EhE09mvAOuOFBH59wMfGq
+        iTLgZ51upepBvqQhXff/dN2yRXGqLpwyhtIZqGEPpSko3NfVpcn3T6ftmZZf9MrYZmUfN11dnT7saNkT
+        xKOwR3CTIA71mQlaizcgfG6OCLHGjyqaqLJr8xrdvNfQXWFOJEuRTOL4Kg5MJn4GqViX3U8xwMBayWA8
+        zvid3U4CnzaPT1c8IYnxV34c0eTvaxQfUjQw/gM8pH5jt1T2JE9ZmHYwEcUBmCStMVDDHkqXIMsGPF4v
+        RweFqkAAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnTrackUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -253,27 +253,27 @@ Playback speed is dependant on the Master BPM.</value>
   <data name="btnLeafColors.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="btnLEafInterpLinear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -296,8 +296,8 @@ Playback speed is dependant on the Master BPM.</value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACtSURBVEhLYxgFVAMb9h39D2WisKkGRi0gCKhqgfKUDypQ
         JhwQsgCbHqxAYcpHc5kJb19CuXBAyALFKZ/fKk77ZAvlYgfyUz8FKPZ8+qo47TOGAQQtAOoRmvbmh8LU
-        z+FQIVQAlMhXnHb3L0ghNoxuATY1YNxw95/i1M8NUKUIQE0LFKZ+KocqRQU0DSIYoCSSlaZ8soFy8QOa
-        JlNcgJAFFINRCwgCmlswUgEDAwCuV/saSfMK1QAAAABJRU5ErkJggg==
+        z+FQIVQAlMhXnHbzL0ghNoxuATY1YFx/85/i1M8NUKUIQE0LFKZ+KocqRQU0DSIYoCSSlaZ8soFy8QOa
+        JlNcgJAFFINRCwgCmlswUgEDAwBcyvsItlRhLwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnLeafRandomValues.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -318,24 +318,24 @@ Playback speed is dependant on the Master BPM.</value>
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFYSURBVDhPlZLBSsNAEIb35BPYgldNQQKCUhIQX6IH60OI
-        71BM6s3eBfHiI/gCglCbgqZFUW9asCcPRpPsHl33TyZ0Y9ZWB35oM/P9O7M7TI/tflJ3A951B2Lk9pM0
-        UyBC9c1HjsrM4Q5FeyvgsQKkSXmO71J5OQC7F5MvE1hSVvPDBK3pJ++Nhew9p/LsNZXHL6lsq/+6ycYl
-        /9y8imuEq9MxswafT9OSDh55ySAX9whnrHktxkUCJwPaf+ByZyhkKzTBmULCGXOCNCkSaBsGgLXiijAy
-        4Yzp8xcdtEa/npwJ90C4ugO8OSVwB+aZK5qNgCUxFMyVM+CHhFefcZHQfvMmXiY8DyzHnxZJyT79mK53
-        31YInQVM4G6CIOTsk3jS8CO55kVPRhNsGJbECcQtnjeX+q1mRtvWUVyz/OhursmiWO0k9YYX3cPE8t57
-        9Pl/ARPAdkcufQN9mREs7xUERgAAAABJRU5ErkJggg==
+        71BM6s3eBfHiA/gKglCbgqZFUS+igj15MJrs7tF1/2RCE7O2OvBDm5nv35ndYcXY7Cd1NxBddyBHbj/h
+        qQIZ6m8+clRmDnco2xuBiDWgTMpyYpvKywHYPXv8MoElpTU/TNBa8eSdsVS9J65OXrk6fOaqrf8XTdbO
+        xef6RVwjXJ+OmQvw6YSXtHcvSgaZhEc4Y81LOc4TOBnQ7p1QW0OpWqEJThUSzpgT8CRPoG0YAC4UV4SR
+        CWesOH/eQWv068mpcA+E6zvAm1MCd2CeuaLpCFgSQ8FMOQOxT3j1GecJ7Tev4kXCs8By/GmRtOzjj8lq
+        922J0GnABO4mCELOPopfGn6kVrzowWiCDcOSOIG8xvNm0r/1zGjbOohrlh/dzDSZF8udpN7woluYWN57
+        jz7/L2AC2O6ohW88rREUVYB/UwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnLeafAutoPlace.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF/SURBVDhPY6A7+Ldc1/PfEp3y//P1BaBC5IP/9QxMr6bo
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF/SURBVDhPY6A7+Ldc1/PfEp3y//P1BaBC5IP/9QxML6fo
         /fy/TO//v2V65lBh8sH/mcasIMMgBuqGQIXJB2gGFkCFyQfIBv5dqtsDFSYf/F+lxQY3cLHOjv/77Vmg
         UuQBoAu5YAaC8Pdleu+A9Kp/S/Xi/i0244MqIx6gG4iM3y/T+/53me7mf0v0kv8vNRaBasEP0A38OMvp
-        /868CXB8sroSLP53mV4XVAtu8H+pns3fJTp7kQ180Bv5PwvIhOFuj4vEGfhvubYyskEwTLaB/+fLc7xa
+        /868CXB8sroSLP53mV4XVAtu8H+pns3fJTp7kQ180Bv5PwvIhOFuj4vEGfhvubYyskEwTLaB/+fLczxb
         JvkL3cCfC83+P+oP+19p+Zo0A0EA6OUF6AbCcI3tM9IN/DdHnffPMr1j6IaBMFkGgsD/pbqC6IaBMFkG
         Wr1W57V6q7Ko+YrGf3Sc6wQxsCD4ApifeU/1svl71QSoVuzA5pOKqOV71f/YcKrrU7CBCRHnEeLvVGZD
-        tWIHxk8luYAKG7DhdKuPH0AGxrs8eQwTs3in4gvVSjrI0vv1EGRglt6f41AhKGBgAACvBqGKdXDTjQAA
+        tWIHxk8luYAKG7DhdKuPH0AGxrs8eQwTs3in4gvVSjrI0vv1EGRglt6f41AhKGBgAACfuaGFj8r1JgAA
         AABJRU5ErkJggg==
 </value>
   </data>

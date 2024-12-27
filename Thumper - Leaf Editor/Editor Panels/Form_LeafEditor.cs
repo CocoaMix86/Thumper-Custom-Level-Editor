@@ -70,7 +70,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
         private Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
         private List<string> lanenames = new() { "left", "center", "right" };
-        private Dictionary<string, string> kTraitTooltips = new() { { "kTraitBool", "BOOL: accepts values 1 (on) or 0 (off)." }, { "kTraitAction", "ACTION: accepts values 1 (activate)." }, { "kTraitFloat", "FLOAT: accepts decimal values from -32000.0000 to 32000.0000." }, { "kTraitInt", "INT: accepts integer (no decimal) values from -32000 to 32000." }, { "kTraitColor", "COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors." } };
         private List<Sequencer_Object> clipboardtracks = new();
         private List<SaveState> _undolistleaf = new();
         #endregion
@@ -652,7 +651,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                 return;
-            trackEditor.CurrentCell = trackEditor.Rows[e.RowIndex].Cells[trackEditor.FirstDisplayedScrollingColumnIndex];
+            trackEditor.CurrentCell = trackEditor.Rows[e.RowIndex].Cells[FrozenColumnOffset];
         }
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -1596,6 +1595,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             string allcellvalues = String.Join(",", dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.Value is not null or "").Select(x => $"{x.ColumnIndex}:{x.Value}"));
             textEditor.Text = allcellvalues;
+            textEditor.ClearUndo();
+            textEditor.SetSelectedLine(-1);
         }
         ///Updates column highlighting in the DGV based on time sig
         public void TrackTimeSigHighlighting()
