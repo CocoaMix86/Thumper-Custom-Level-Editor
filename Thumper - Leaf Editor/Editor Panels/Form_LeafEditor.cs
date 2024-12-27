@@ -217,8 +217,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (e.ColumnIndex == 0 && e.RowIndex == -1) {
+                trackEditor.Columns[0].HeaderCell.ToolTipText = "Global (un)mute";
+            }
             if (e.ColumnIndex is 1) {
-                trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide left and right lanes";
+                //only add tooltip if the object can have lanes
+                if (SequencerObjects[e.RowIndex].param_path.EndsWith(".ent"))
+                    trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide left and right lanes";
             }
         }
 
