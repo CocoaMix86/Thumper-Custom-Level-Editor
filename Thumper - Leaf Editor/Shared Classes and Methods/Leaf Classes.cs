@@ -131,12 +131,26 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Highlight Color")]
         [Description("When Highlight Value is met, color the cell this color")]
-        public Color highlightcolor { get => selectedobj.highlight_color; set => selectedobj.highlight_color = value; }
+        public Color highlightcolor
+        {
+            get => selectedobj.highlight_color;
+            set { 
+                selectedobj.highlight_color = value;
+                Form_LeafEditor.TrackUpdateHighlighting(parent.trackEditor.CurrentRow, selectedobj);
+            }
+        }
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Highlight Value")]
         [Description("When this value is met (+/-), color the cell the Highlight Color")]
-        public float highlightvalue { get => selectedobj.highlight_value; set => selectedobj.highlight_value = value; }
+        public float highlightvalue
+        {
+            get => selectedobj.highlight_value;
+            set {
+                selectedobj.highlight_value = value;
+                Form_LeafEditor.TrackUpdateHighlighting(parent.trackEditor.CurrentRow, selectedobj);
+            }
+        }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 0")]

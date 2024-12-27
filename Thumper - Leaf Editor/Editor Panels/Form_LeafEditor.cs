@@ -362,7 +362,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GlobalDisable = !GlobalDisable;
                 foreach (Sequencer_Object seq in SequencerObjects) {
                     seq.enabled = !GlobalDisable;
-                    RowReadOnly(trackEditor.Rows[SequencerObjects.IndexOf(seq)], GlobalDisable);
+                    RowReadOnly(trackEditor.Rows[SequencerObjects.IndexOf(seq)], GlobalDisable, seq);
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(0);
@@ -383,7 +383,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.ColumnIndex is 0 or 1 or 2) {
                 if (e.ColumnIndex is 0) {
                     SequencerObjects[e.RowIndex].enabled = !SequencerObjects[e.RowIndex].enabled;
-                    RowReadOnly(trackEditor.Rows[e.RowIndex], !SequencerObjects[e.RowIndex].enabled);
+                    RowReadOnly(trackEditor.Rows[e.RowIndex], !SequencerObjects[e.RowIndex].enabled, SequencerObjects[e.RowIndex]);
                 }
                 if (e.ColumnIndex is 1)
                     SequencerObjects[e.RowIndex].mute = !SequencerObjects[e.RowIndex].mute;
@@ -576,40 +576,44 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (trackEditor.CurrentCell != null) {
-                if (e.KeyData == TCLE.defaultkeybinds["quick1"]) {
-                    trackEditor.CurrentCell.Value = NUDquick1.Value;
+                if (e.KeyData == TCLE.defaultkeybinds["quick0"]) {
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue0;
+                    CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                }
+                else if (e.KeyData == TCLE.defaultkeybinds["quick1"]) {
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue1;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
                 else if (e.KeyData == TCLE.defaultkeybinds["quick2"]) {
-                    trackEditor.CurrentCell.Value = NUDquick2.Value;
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue2;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
                 else if (e.KeyData == TCLE.defaultkeybinds["quick3"]) {
-                    trackEditor.CurrentCell.Value = NUDquick3.Value;
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue3;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
                 else if (e.KeyData == TCLE.defaultkeybinds["quick4"]) {
-                    trackEditor.CurrentCell.Value = NUDquick4.Value;
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue4;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
                 else if (e.KeyData == TCLE.defaultkeybinds["quick5"]) {
-                    trackEditor.CurrentCell.Value = NUDquick5.Value;
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue5;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
                 else if (e.KeyData == TCLE.defaultkeybinds["quick6"]) {
-                    trackEditor.CurrentCell.Value = NUDquick6.Value;
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue6;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
                 else if (e.KeyData == TCLE.defaultkeybinds["quick7"]) {
-                    trackEditor.CurrentCell.Value = NUDquick7.Value;
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue7;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
                 else if (e.KeyData == TCLE.defaultkeybinds["quick8"]) {
-                    trackEditor.CurrentCell.Value = NUDquick8.Value;
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue8;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
                 else if (e.KeyData == TCLE.defaultkeybinds["quick9"]) {
-                    trackEditor.CurrentCell.Value = NUDquick9.Value;
+                    trackEditor.CurrentCell.Value = TCLE.LeafQuickValue9;
                     CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
                 }
             }
@@ -659,8 +663,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///DROPDOWN OBJECTS
         private void dropObjects_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (!panelLeaf.Enabled)
-                return;
             if (dropObjects.SelectedIndex == -1) {
                 dropParamPath.SelectedIndex = -1;
                 return;
@@ -673,14 +675,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropParamPath.Enabled = true;
 
             if ((string)dropObjects.SelectedValue == "PLAY SAMPLE") {
-                label11.Text = "Samples";
+                //label11.Text = "Samples";
                 TCLE.LvlReloadSamples();
                 dropTrackLane.DataSource = null;
                 dropTrackLane.DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToArray();
                 dropTrackLane.SelectedIndex = -1;
             }
             else {
-                label11.Text = "Lane";
+                //label11.Text = "Lane";
                 dropTrackLane.DataSource = new BindingSource(_tracklanefriendly, null);
                 dropTrackLane.ValueMember = "Key";
                 dropTrackLane.DisplayMember = "Value";
@@ -698,8 +700,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
-                //if (_tracks[trackEditor.CurrentRow?.Index ?? 0].highlight_color == null)
-                btnTrackColorDialog.BackColor = TCLE.ObjectColors.TryGetValue(dropParamPath.Text, out Color value) ? value : Color.Purple;
                 //if the param_path is .ent, enable lane choice
                 if (TCLE.LeafObjects.First(obj => obj.param_displayname == dropParamPath.Text).param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
                     dropTrackLane.Enabled = true;
@@ -739,17 +739,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 dropTimeSig.SelectedItem = s;
             }
-        }
-
-        ///NUMERIC_UPDOWN TRACK HIGHLIGHT VALUE
-        private void NUD_TrackHighlight_ValueChanged(object sender, EventArgs e)
-        {
-            string data = SequencerObjects[CurrentRow].highlight_value.ToString();
-            SequencerObjects[trackEditor.CurrentRow.Index].highlight_value = (float)NUD_TrackHighlight.Value;
-            TrackUpdateHighlighting(trackEditor.CurrentRow, SequencerObjects[CurrentRow]);
-            //sets flag that leaf has unsaved changes
-            SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, $"Track hilighting value {data} -> {NUD_TrackHighlight.Value}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
         }
 
         ///LEAF - NEW
@@ -844,8 +833,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dropObjects.Enabled = false;
                 dropParamPath.Enabled = false;
                 btnTrackApply.Enabled = false;
-                btnTrackColorDialog.Enabled = false;
-                NUD_TrackHighlight.Enabled = false;
 
                 btnTrackDelete.Enabled = false;
                 btnTrackUp.Enabled = false;
@@ -1062,12 +1049,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnTrackApply_Click(object sender, EventArgs e)
         {
             Object_Params objmatch = TCLE.LeafObjects.First(obj => obj.category == dropObjects.Text && obj.param_displayname == dropParamPath.Text);
-            //fill object properties on the form
-            txtTrait.Text = objmatch.trait_type;
-            toolTip1.SetToolTip(txtTrait, kTraitTooltips[txtTrait.Text]);
-            //enable track highlighting tools
-            btnTrackColorDialog.Enabled = true;
-            NUD_TrackHighlight.Enabled = true;
             //add track to list and populate with values
             SequencerObjects[CurrentRow] = new Sequencer_Object() {
                 obj_name = objmatch.obj_name,
@@ -1077,7 +1058,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 defaultvalue = float.Parse(objmatch.def),
                 step = objmatch.step,
                 trait_type = objmatch.trait_type,
-                highlight_color = btnTrackColorDialog.BackColor,
+                highlight_color = Color.Purple,
                 highlight_value = 1,
                 footer = objmatch.footer,
                 default_interp = "Linear"
@@ -1105,24 +1086,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //SaveCheckAndWrite(false, "Applied Object settings", $"{_seqobj.friendly_type} {_seqobj.friendly_param}");
             }
         }
-        ///Sets highlighting color of current track
-        private void btnTrackColorDialog_Click(object sender, EventArgs e)
-        {
-            TCLE.PlaySound("UIcoloropen");
-            TCLE.colorDialogNew.Color = btnTrackColorDialog.BackColor;
-            if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
-                Color selectedcolor = TCLE.colorDialogNew.Color;
-                btnTrackColorDialog.BackColor = selectedcolor;
-                trackEditor.CurrentRow.HeaderCell.Style.BackColor = TCLE.Blend(selectedcolor, Color.Black, 0.4);
-                SequencerObjects[CurrentRow].highlight_color = selectedcolor;
-                //sets flag that leaf has unsaved changes
-                TCLE.PlaySound("UIcolorapply");
-                SaveCheckAndWrite(false);
-                //SaveCheckAndWrite(false, "Changed track color", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
-            }
-            //call method to update coloring of track
-            TrackUpdateHighlighting(trackEditor.CurrentRow, SequencerObjects[CurrentRow]);
-        }
+
         /// This grabs the highlighting color from each track and then exports them into a file for use in later imports
         private void btnTrackColorExport_Click(object sender, EventArgs e)
         {
@@ -1474,6 +1438,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(LeafProperties.timesignature);
 
+            trackEditor.RowCount = SequencerObjects.Count;
             trackEditor.RowHeadersVisible = true;
             //foreach row, import data points associated with it
             foreach (DataGridViewRow r in trackEditor.Rows) {
@@ -1500,7 +1465,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsLoading = false;
             EditorIsSaved = true;
 
-            trackEditor.RowCount = SequencerObjects.Count;
             TrackTimeSigHighlighting();
         }
 
@@ -1600,7 +1564,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
                 try {
-                    r.Cells[int.Parse(data_point.Name) + 2].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    r.Cells[int.Parse(data_point.Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                 }
                 catch (ArgumentOutOfRangeException) { }
             }
@@ -1659,6 +1623,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             r.Cells[0].Style.BackColor = background;
             r.Cells[1].Style.BackColor = background;
+            r.Cells[2].Style.BackColor = background;
         }
         public static void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc, Sequencer_Object _seqobj)
         {
@@ -1684,7 +1649,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvc.Style.ForeColor = Color.Black;
         }
 
-        private static void RowReadOnly(DataGridViewRow dgvr, bool isreadonly)
+        private static void RowReadOnly(DataGridViewRow dgvr, bool isreadonly, Sequencer_Object seq)
         {
             if (isreadonly) {
                 dgvr.ReadOnly = true;
@@ -1698,6 +1663,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (DataGridViewCell dgvc in dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                     dgvc.Style = null;
                 }
+                TrackUpdateHighlighting(dgvr, seq);
             }
         }
 
@@ -1705,8 +1671,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             dropObjects.Enabled = enable;
             dropParamPath.Enabled = enable;
-            btnTrackColorDialog.Enabled = enable;
-            NUD_TrackHighlight.Enabled = enable;
             btnTrackDelete.Enabled = SequencerObjects.Count > 0;
             btnTrackUp.Enabled = SequencerObjects.Count > 1;
             btnTrackDown.Enabled = SequencerObjects.Count > 1;
@@ -1714,9 +1678,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackCopy.Enabled = SequencerObjects.Count > 0;
             btnTrackColorExport.Enabled = btnTrackColorImport.Enabled = SequencerObjects.Count > 0;
             if (!enable) {
-                txtDefault.Enabled = false;
-                dropLeafInterp.Enabled = false;
-                dropLeafStep.Enabled = false;
                 btnTrackApply.Enabled = false;
             }
         }
@@ -1775,11 +1736,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dropObjects.Enabled = dropParamPath.Enabled = btnTrackApply.Enabled = false;
             //
             SaveCheckAndWrite(true);
-        }
-
-        private void QuickValueChanged(object sender, EventArgs e)
-        {
-            File.WriteAllText($@"{TCLE.AppLocation}\templates\quickvalues.txt", $"{NUDquick1.Value}\n{NUDquick2.Value}\n{NUDquick3.Value}\n{NUDquick4.Value}\n{NUDquick5.Value}\n{NUDquick6.Value}\n{NUDquick7.Value}\n{NUDquick8.Value}\n{NUDquick9.Value}");
         }
 
         /// <summary>

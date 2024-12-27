@@ -36,21 +36,10 @@
             this.toolTip1 = new ToolTip(this.components);
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
-            this.label46 = new Label();
             this.btnRawImport = new Button();
-            this.panelLeaf = new Panel();
-            this.panel6 = new Panel();
-            this.panel3 = new Panel();
-            this.label3 = new Label();
-            this.dropLeafInterp = new ComboBox();
-            this.panel2 = new Panel();
             this.dropObjects = new ComboBox();
-            this.label19 = new Label();
-            this.label4 = new Label();
-            this.label6 = new Label();
             this.dropParamPath = new ComboBox();
             this.dropTrackLane = new ComboBox();
-            this.label11 = new Label();
             this.btnTrackApply = new Button();
             this.vScrollBarTrackEditor = new VScrollBar();
             this.panelZoom = new Panel();
@@ -92,10 +81,6 @@
             this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
-            this.panelLeaf.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panelZoom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.trackEditor).BeginInit();
             this.leafToolStrip.SuspendLayout();
@@ -148,19 +133,6 @@
             this.trackZoom.Value = 40;
             this.trackZoom.Scroll += this.trackZoom_Scroll;
             // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label46.ForeColor = Color.White;
-            this.label46.Location = new Point(12, 28);
-            this.label46.Margin = new Padding(4, 0, 4, 0);
-            this.label46.Name = "label46";
-            this.label46.Size = new Size(65, 13);
-            this.label46.TabIndex = 106;
-            this.label46.Text = "Interpolation";
-            this.toolTip1.SetToolTip(this.label46, resources.GetString("label46.ToolTip"));
-            // 
             // btnRawImport
             // 
             this.btnRawImport.BackColor = Color.DarkGreen;
@@ -172,93 +144,12 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 132);
+            this.btnRawImport.Size = new Size(54, 137);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
             this.btnRawImport.UseVisualStyleBackColor = false;
             this.btnRawImport.Click += this.btnRawImport_Click;
-            // 
-            // panelLeaf
-            // 
-            this.panelLeaf.BackColor = Color.FromArgb(35, 35, 35);
-            this.panelLeaf.BorderStyle = BorderStyle.FixedSingle;
-            this.panelLeaf.Controls.Add(this.panel6);
-            this.panelLeaf.Location = new Point(467, 199);
-            this.panelLeaf.Margin = new Padding(4, 3, 4, 3);
-            this.panelLeaf.MinimumSize = new Size(70, 69);
-            this.panelLeaf.Name = "panelLeaf";
-            this.panelLeaf.Size = new Size(443, 317);
-            this.panelLeaf.TabIndex = 46;
-            this.panelLeaf.Tag = "editorpanel";
-            // 
-            // panel6
-            // 
-            this.panel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            this.panel6.AutoScroll = true;
-            this.panel6.Controls.Add(this.panel3);
-            this.panel6.Controls.Add(this.panel2);
-            this.panel6.Location = new Point(17, 5);
-            this.panel6.Margin = new Padding(4, 3, 4, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new Size(233, 311);
-            this.panel6.TabIndex = 148;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.label46);
-            this.panel3.Controls.Add(this.dropLeafInterp);
-            this.panel3.Location = new Point(1, 202);
-            this.panel3.Margin = new Padding(4, 3, 4, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new Size(210, 62);
-            this.panel3.TabIndex = 109;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label3.ForeColor = Color.Silver;
-            this.label3.Location = new Point(27, 2);
-            this.label3.Margin = new Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new Size(133, 13);
-            this.label3.TabIndex = 108;
-            this.label3.Text = "══Object Properties══";
-            // 
-            // dropLeafInterp
-            // 
-            this.dropLeafInterp.BackColor = Color.Black;
-            this.dropLeafInterp.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.dropLeafInterp.Enabled = false;
-            this.dropLeafInterp.FlatStyle = FlatStyle.Flat;
-            this.dropLeafInterp.ForeColor = Color.LawnGreen;
-            this.dropLeafInterp.FormattingEnabled = true;
-            this.dropLeafInterp.Items.AddRange(new object[] { "Linear", "Quadratic", "Cubic", "Quartic", "Quintic", "Sine", "None", "Step" });
-            this.dropLeafInterp.Location = new Point(85, 18);
-            this.dropLeafInterp.Margin = new Padding(4, 3, 4, 3);
-            this.dropLeafInterp.Name = "dropLeafInterp";
-            this.dropLeafInterp.RightToLeft = RightToLeft.No;
-            this.dropLeafInterp.Size = new Size(111, 23);
-            this.dropLeafInterp.TabIndex = 105;
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.dropObjects);
-            this.panel2.Controls.Add(this.label19);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.dropParamPath);
-            this.panel2.Controls.Add(this.dropTrackLane);
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.btnTrackApply);
-            this.panel2.Location = new Point(1, 29);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new Size(210, 174);
-            this.panel2.TabIndex = 108;
             // 
             // dropObjects
             // 
@@ -269,48 +160,12 @@
             this.dropObjects.FlatStyle = FlatStyle.Flat;
             this.dropObjects.ForeColor = Color.White;
             this.dropObjects.FormattingEnabled = true;
-            this.dropObjects.Location = new Point(6, 38);
+            this.dropObjects.Location = new Point(4, 410);
             this.dropObjects.Margin = new Padding(4, 3, 4, 3);
             this.dropObjects.Name = "dropObjects";
             this.dropObjects.RightToLeft = RightToLeft.No;
             this.dropObjects.Size = new Size(190, 24);
             this.dropObjects.TabIndex = 30;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label19.ForeColor = Color.Silver;
-            this.label19.Location = new Point(34, 1);
-            this.label19.Margin = new Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new Size(115, 13);
-            this.label19.TabIndex = 61;
-            this.label19.Text = "══Track Objects══";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label4.ForeColor = Color.White;
-            this.label4.Location = new Point(1, 21);
-            this.label4.Margin = new Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new Size(75, 15);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Track Object";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label6.ForeColor = Color.White;
-            this.label6.Location = new Point(1, 65);
-            this.label6.Margin = new Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new Size(111, 15);
-            this.label6.TabIndex = 32;
-            this.label6.Text = "Type (param_path)";
             // 
             // dropParamPath
             // 
@@ -322,7 +177,7 @@
             this.dropParamPath.FlatStyle = FlatStyle.Flat;
             this.dropParamPath.ForeColor = Color.White;
             this.dropParamPath.FormattingEnabled = true;
-            this.dropParamPath.Location = new Point(6, 84);
+            this.dropParamPath.Location = new Point(4, 445);
             this.dropParamPath.Margin = new Padding(4, 3, 4, 3);
             this.dropParamPath.Name = "dropParamPath";
             this.dropParamPath.RightToLeft = RightToLeft.No;
@@ -338,26 +193,12 @@
             this.dropTrackLane.FlatStyle = FlatStyle.Flat;
             this.dropTrackLane.ForeColor = Color.White;
             this.dropTrackLane.FormattingEnabled = true;
-            this.dropTrackLane.Location = new Point(86, 111);
+            this.dropTrackLane.Location = new Point(13, 475);
             this.dropTrackLane.Margin = new Padding(4, 3, 4, 3);
             this.dropTrackLane.Name = "dropTrackLane";
             this.dropTrackLane.RightToLeft = RightToLeft.No;
             this.dropTrackLane.Size = new Size(109, 23);
             this.dropTrackLane.TabIndex = 65;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label11.ForeColor = Color.White;
-            this.label11.Location = new Point(21, 114);
-            this.label11.Margin = new Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.RightToLeft = RightToLeft.No;
-            this.label11.Size = new Size(56, 15);
-            this.label11.TabIndex = 66;
-            this.label11.Text = "Samples";
-            this.label11.TextAlign = ContentAlignment.MiddleRight;
             // 
             // btnTrackApply
             // 
@@ -367,7 +208,7 @@
             this.btnTrackApply.FlatStyle = FlatStyle.Flat;
             this.btnTrackApply.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Underline, GraphicsUnit.Point, 0);
             this.btnTrackApply.ForeColor = Color.White;
-            this.btnTrackApply.Location = new Point(85, 136);
+            this.btnTrackApply.Location = new Point(104, 488);
             this.btnTrackApply.Margin = new Padding(4, 3, 4, 3);
             this.btnTrackApply.Name = "btnTrackApply";
             this.btnTrackApply.Size = new Size(112, 28);
@@ -380,7 +221,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 352);
+            this.vScrollBarTrackEditor.Size = new Size(15, 347);
             this.vScrollBarTrackEditor.TabIndex = 144;
             // 
             // panelZoom
@@ -480,7 +321,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(668, 352);
+            this.trackEditor.Size = new Size(668, 347);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -509,6 +350,7 @@
             // LeafAudio
             // 
             this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafAudio.Frozen = true;
             this.LeafAudio.HeaderText = "";
             this.LeafAudio.MinimumWidth = 20;
             this.LeafAudio.Name = "LeafAudio";
@@ -521,6 +363,7 @@
             // LeafMultilane
             // 
             this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafMultilane.Frozen = true;
             this.LeafMultilane.HeaderText = "";
             this.LeafMultilane.MinimumWidth = 20;
             this.LeafMultilane.Name = "LeafMultilane";
@@ -543,7 +386,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 352);
+            this.leafToolStrip.Size = new Size(25, 347);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -775,6 +618,10 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnTrackApply);
+            this.splitContainer1.Panel1.Controls.Add(this.dropTrackLane);
+            this.splitContainer1.Panel1.Controls.Add(this.dropParamPath);
+            this.splitContainer1.Panel1.Controls.Add(this.dropObjects);
             this.splitContainer1.Panel1.Controls.Add(this.propertyGridLeaf);
             this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
             // 
@@ -840,7 +687,6 @@
             // splitContainerLeafSide.Panel1
             // 
             this.splitContainerLeafSide.Panel1.Controls.Add(this.panelZoom);
-            this.splitContainerLeafSide.Panel1.Controls.Add(this.panelLeaf);
             this.splitContainerLeafSide.Panel1.Controls.Add(this.label2);
             this.splitContainerLeafSide.Panel1.Controls.Add(this.trackEditor);
             this.splitContainerLeafSide.Panel1.Controls.Add(this.vScrollBarTrackEditor);
@@ -852,7 +698,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(708, 519);
-            this.splitContainerLeafSide.SplitterDistance = 382;
+            this.splitContainerLeafSide.SplitterDistance = 377;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -955,7 +801,6 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -967,7 +812,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(654, 132);
+            this.textEditor.Size = new Size(654, 137);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -989,12 +834,6 @@
             this.Text = "Leaf Editor";
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).EndInit();
-            this.panelLeaf.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panelZoom.ResumeLayout(false);
             this.panelZoom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.trackEditor).EndInit();
@@ -1023,14 +862,12 @@
 
         #endregion
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Panel panelLeaf;
         private System.Windows.Forms.Panel panelZoom;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.TrackBar trackZoomVert;
         private System.Windows.Forms.TrackBar trackZoom;
         private System.Windows.Forms.VScrollBar vScrollBarTrackEditor;
-        private System.Windows.Forms.DataGridView trackEditor;
         private System.Windows.Forms.ToolStrip leafToolStrip;
         private System.Windows.Forms.ToolStripButton btnTrackAdd;
         private System.Windows.Forms.ToolStripButton btnTrackDelete;
@@ -1053,17 +890,7 @@
         private System.Windows.Forms.ToolStripComboBox dropTimeSig;
         private System.Windows.Forms.ToolStripButton btnLeafZoom;
         private System.Windows.Forms.ToolStripButton btnLeafAutoPlace;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.ComboBox dropLeafInterp;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox dropTrackLane;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnTrackApply;
         public ComboBox dropObjects;
         public ComboBox dropParamPath;
@@ -1081,6 +908,7 @@
         private Label label5;
         private Label label13;
         private FastColoredTextBoxNS.FastColoredTextBox textEditor;
+        public DataGridView trackEditor;
         private DataGridViewTextBoxColumn LeafEnabled;
         private DataGridViewTextBoxColumn LeafAudio;
         private DataGridViewTextBoxColumn LeafMultilane;
