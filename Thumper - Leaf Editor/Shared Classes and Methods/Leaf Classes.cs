@@ -101,7 +101,31 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Time Signature")]
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         [TypeConverter(typeof(LeafTimeSignatures))]
-        public string timesignature { get; set; }
+        public string timesignature
+        {
+            get => TimeSignature; 
+            set {
+                TimeSignature = value;
+                if (!parent.EditorIsLoading)
+                    parent.TrackTimeSigHighlighting();
+            }
+        }
+        private string TimeSignature;
+
+        [Category​Attribute("Options")]
+        [DisplayName("Show Category Name")]
+        [Description("Shows/Hides the category names on the sequencer row headers.")]
+        public bool showcategory
+        {
+            get => ShowCategory; 
+            set {
+                ShowCategory = value;
+                foreach (DataGridViewRow dgvr in parent.trackEditor.Rows) {
+                    parent.ChangeTrackName(dgvr);
+                }
+            }
+        }
+        private bool ShowCategory;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]

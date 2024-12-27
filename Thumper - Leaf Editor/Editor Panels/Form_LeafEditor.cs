@@ -1382,7 +1382,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             leafProperties = new(this, filepath) {
                 beats = (int?)_load["beat_cnt"] ?? 1,
-                timesignature = (string)_load["time_sig"] ?? "4/4"
+                timesignature = (string)_load["time_sig"] ?? "4/4",
+                showcategory = true
             };
 
             //clear the DGV and prep for new data
@@ -1577,11 +1578,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             r.HeaderCell.Style.BackColor = background;
             r.Cells[0].Style.BackColor = background;
             r.Cells[1].Style.BackColor = background;
+            string ShowCategory = LeafProperties.showcategory ? $"[{SequencerObjects[r.Index].friendly_type}] " : "";
             if (SequencerObjects[r.Index].friendly_type == "PLAY SAMPLE")
                 //show the sample name instead
-                r.HeaderCell.Value = SequencerObjects[r.Index].friendly_type + " (" + SequencerObjects[r.Index].obj_name + ")";
+                r.HeaderCell.Value = $"{ShowCategory}{SequencerObjects[r.Index].obj_name.FirstCharToUpper()}";
             else
-                r.HeaderCell.Value = SequencerObjects[r.Index].friendly_type + " (" + SequencerObjects[r.Index].friendly_param + ")";
+                r.HeaderCell.Value = $"{ShowCategory}{SequencerObjects[r.Index].friendly_param.FirstCharToUpper()}";
         }
         ///Takes values in a row and puts in them in the rich text box, condensed
         public static void GenerateDataPoints(DataGridViewRow dgvr, Sequencer_Object _seqobj)
@@ -1604,7 +1606,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool _switch = true;
             //grab the first part of the time sig. This represents how many beats are in a bar
             //tryparse to see if it fails.
-            if (!int.TryParse(dropTimeSig.Text.Split('/')[0], out int timesigbeats))
+            if (!int.TryParse(LeafProperties.timesignature.Split('/')[0], out int timesigbeats))
                 return;
             for (int i = 0; i < LeafProperties.beats; i++) {
                 //whenever `i` is a multiple of the time sig, switch colors
