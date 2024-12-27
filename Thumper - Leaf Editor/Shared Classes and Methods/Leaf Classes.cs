@@ -90,7 +90,8 @@ namespace Thumper_Custom_Level_Editor
                 else if (value < 1)
                     value = 1;
                 Beats = value;
-                parent.LeafLengthChanged();
+                if (!parent.EditorIsLoading)
+                    parent.LeafLengthChanged();
             }
         }
         private int Beats;

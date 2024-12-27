@@ -1557,7 +1557,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (LeafProperties.beats + FrozenColumnOffset > trackEditor.ColumnCount) {
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
-                TCLE.GenerateColumnStyle(trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= 2).ToList(), 2);
+                TCLE.GenerateColumnStyle(trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset).ToList(), FrozenColumnOffset);
             }
             else
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
