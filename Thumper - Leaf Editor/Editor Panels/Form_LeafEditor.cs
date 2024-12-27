@@ -65,6 +65,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool randomizing;
         private bool ismoving;
         private bool LogUndo;
+        private bool GlobalMute;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
         private Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
         private List<string> lanenames = new() { "left", "center", "right" };
@@ -187,7 +188,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex != -1 && e.RowIndex != -1)
+            if ((e.ColumnIndex == 0 && e.RowIndex == -1) || (e.ColumnIndex != -1 && e.RowIndex != -1))
                 CellPaint(e);
         }
         private void CellPaint(DataGridViewCellPaintingEventArgs e)
@@ -200,10 +201,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
             if (e.ColumnIndex == 0) {
-                if (SequencerObjects[e.RowIndex].mute)
-                    e.Graphics.DrawImage(Properties.Resources.icon_audio_mute, new Rectangle(x, y, w, h));
-                else
-                    e.Graphics.DrawImage(Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
+                if (e.RowIndex == -1) {
+                    e.Graphics.DrawImage(GlobalMute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
+                }
+                else {
+                    e.Graphics.DrawImage(SequencerObjects[e.RowIndex].mute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
+                }
             }
             else if (e.ColumnIndex == 1) {
                 if (SequencerObjects[e.RowIndex].param_path.EndsWith(".ent"))
@@ -347,13 +350,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //Cell click, insert values if track is BOOL
         private void trackEditor_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.ColumnIndex == -1 || e.RowIndex == -1)
+            if (e.ColumnIndex == -1)
                 return;
             DataGridView dgv = (DataGridView)sender;
-            if (e.ColumnIndex is 0 or 1) {
+            //test if column header was clicked for global mute
+            if (e.RowIndex == -1 && e.ColumnIndex == 0) {
+                GlobalMute = !GlobalMute;
+                foreach (Sequencer_Object seq in SequencerObjects) {
+                    seq.mute = GlobalMute;
+                }
+                //invalidate the column to repaint it, so images update
+                trackEditor.InvalidateColumn(0);
+            }
+            //test for clicks in frozen columns 0 or 1
+            //unselect the cells afterwards to imitate button click
+            else if (e.ColumnIndex is 0 or 1) {
                 if (e.ColumnIndex is 0)
                     SequencerObjects[e.RowIndex].mute = !SequencerObjects[e.RowIndex].mute;
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                //invalidate cell to repaint it to update the images
                 trackEditor.InvalidateCell(trackEditor[e.ColumnIndex, e.RowIndex]);
             }
             else if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
@@ -369,7 +384,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex == -1 || e.RowIndex == -1)
                 return;
             DataGridView dgv = sender as DataGridView;
-            if (e.Button == MouseButtons.Right) {
+            if (e.ColumnIndex is 0 or 1) {
+                //do nothing
+            }
+            else if (e.Button == MouseButtons.Right) {
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], SequencerObjects[e.RowIndex]);
