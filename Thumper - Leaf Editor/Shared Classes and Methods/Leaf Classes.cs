@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor
         public string param_displayname { get; set; }
         public string param_path { get; set; }
         public string trait_type { get; set; }
-        public string step { get; set; }
+        public bool step { get; set; }
         public string def { get; set; }
         public string footer { get; set; }
     }
@@ -25,14 +25,14 @@ namespace Thumper_Custom_Level_Editor
         public string param_path { get; set; }
         public string trait_type { get; set; }
         public dynamic data_points { get; set; }
-        public string step { get; set; }
-        public float _default { get; set; }
+        public bool step { get; set; }
+        public float defaultvalue { get; set; }
         public string footer { get; set; }
         public string default_interp { get; set; }
 
         public string friendly_type { get; set; }
         public string friendly_param { get; set; }
-        public string highlight_color { get; set; }
+        public Color highlight_color { get; set; }
         public float highlight_value { get; set; }
 
         public int id { get; set; }
@@ -101,6 +101,31 @@ namespace Thumper_Custom_Level_Editor
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         [TypeConverter(typeof(LeafTimeSignatures))]
         public string timesignature { get; set; }
+
+        [CategoryAttribute("Sequencer Object")]
+        [DisplayName("Category")]
+        [Description("")]
+        public string category => selectedobj.friendly_type;
+
+        [CategoryAttribute("Sequencer Object")]
+        [DisplayName("Parameter")]
+        [Description("")]
+        public string parameter => selectedobj.friendly_param;
+
+        [CategoryAttribute("Sequencer Object")]
+        [DisplayName("Trait Type")]
+        [Description("Different types accept different sets of values.")]
+        public string traittype => selectedobj.trait_type;
+
+        [CategoryAttribute("Sequencer Object")]
+        [DisplayName("Step")]
+        [Description("TRUE: Blank cells use the last known set value. Some trait types will automatically interpolate between set values too. FALSE: Blank cells use the Default value")]
+        public bool step { get => selectedobj.step; set => selectedobj.step = value; }
+
+        [CategoryAttribute("Sequencer Object")]
+        [DisplayName("Default Value")]
+        [Description("If Step FALSE, blank cells will use this value")]
+        public float defaultvalue { get => selectedobj.defaultvalue; set => selectedobj.defaultvalue = value; }
 
         [CategoryAttribute("Quick Values")]
         [DisplayName("Quick 0")]

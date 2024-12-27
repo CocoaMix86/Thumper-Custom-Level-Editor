@@ -268,16 +268,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else //track lane only uses param[0]
                     dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[0]);
                 txtTrait.Text = SequencerObjects[CurrentRow].trait_type;
-                btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(SequencerObjects[CurrentRow].highlight_color));
+                btnTrackColorDialog.BackColor = SequencerObjects[CurrentRow].highlight_color;
                 //remove event handlers from a few controls so they don't trigger when their values change
-                NUD_TrackHighlight.ValueChanged -= NUD_TrackHighlight_ValueChanged;
-                txtDefault.ValueChanged -= txtDefault_ValueChanged;
-                dropLeafStep.SelectedIndexChanged -= dropLeafStep_SelectedIndexChanged;
-                dropLeafInterp.SelectedIndexChanged -= dropLeafInterp_SelectedIndexChanged;
                 //set values from _tracks
                 NUD_TrackHighlight.Value = (decimal)SequencerObjects[CurrentRow].highlight_value;
-                btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(SequencerObjects[CurrentRow].highlight_color));
-                txtDefault.Value = (decimal)SequencerObjects[CurrentRow]._default;
+                btnTrackColorDialog.BackColor = SequencerObjects[CurrentRow].highlight_color;
+                txtDefault.Value = (decimal)SequencerObjects[CurrentRow].defaultvalue;
                 dropLeafStep.SelectedItem = SequencerObjects[CurrentRow].step;
                 dropLeafInterp.SelectedItem = SequencerObjects[CurrentRow].default_interp;
                 txtDefault.Enabled = true;
@@ -285,10 +281,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dropLeafStep.Enabled = true;
                 btnTrackApply.Enabled = true;
                 //re-add event handlers
-                NUD_TrackHighlight.ValueChanged += NUD_TrackHighlight_ValueChanged;
-                txtDefault.ValueChanged += txtDefault_ValueChanged;
-                dropLeafStep.SelectedIndexChanged += dropLeafStep_SelectedIndexChanged;
-                dropLeafInterp.SelectedIndexChanged += dropLeafInterp_SelectedIndexChanged;
 
                 toolTip1.SetToolTip(txtTrait, kTraitTooltips[txtTrait.Text]);
             }
@@ -689,7 +681,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (dropParamPath.SelectedIndex != -1 && dropParamPath.Enabled) {
                 //if (_tracks[trackEditor.CurrentRow?.Index ?? 0].highlight_color == null)
-                btnTrackColorDialog.BackColor = Color.FromArgb(int.Parse(TCLE.ObjectColors.TryGetValue(dropParamPath.Text, out string value) ? value : "-8355585"));
+                btnTrackColorDialog.BackColor = TCLE.ObjectColors.TryGetValue(dropParamPath.Text, out Color value) ? value : Color.Purple;
                 //if the param_path is .ent, enable lane choice
                 if (TCLE.LeafObjects.First(obj => obj.param_displayname == dropParamPath.Text).param_path.EndsWith(".ent") || (string)dropObjects.SelectedValue == "PLAY SAMPLE") {
                     dropTrackLane.Enabled = true;
@@ -782,34 +774,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
-        ///DEFAULT TRACK VALUE CHANGED
-        private void txtDefault_ValueChanged(object sender, EventArgs e)
-        {
-            string data = $"{SequencerObjects[CurrentRow]._default}";
-            SequencerObjects[trackEditor.CurrentRow.Index]._default = (float)txtDefault.Value;
-            //sets flag that leaf has unsaved changes
-            if (!randomizing)
-                SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, $"Default value {data} -> {txtDefault.Value}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
-        }
-        ///STEP CHANGED
-        private void dropLeafStep_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string data = $"{SequencerObjects[CurrentRow].step}";
-            SequencerObjects[trackEditor.CurrentRow.Index].step = dropLeafStep.Text;
-            if (!randomizing)
-                SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, $"Step value {data} -> {dropLeafStep.Text}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
-        }
-        ///INTERP CHANGED
-        private void dropLeafInterp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string data = $"{SequencerObjects[CurrentRow].default_interp}";
-            SequencerObjects[trackEditor.CurrentRow.Index].default_interp = dropLeafInterp.Text;
-            if (!randomizing)
-                SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, $"Interp value {data} -> {dropLeafInterp.Text}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
-        }
         #endregion
 
         #region Buttons
@@ -881,7 +845,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackClear.Enabled = true;
 
             SequencerObjects.Add(new Sequencer_Object() {
-                highlight_color = null,
+                highlight_color = Color.Purple,
                 highlight_value = 1
             });
             trackEditor.Rows.Add(new DataGridViewRow() {
@@ -1090,17 +1054,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 friendly_type = objmatch.category,
                 param_path = objmatch.param_path,
                 friendly_param = objmatch.param_displayname,
-                _default = float.Parse(objmatch.def),
+                defaultvalue = float.Parse(objmatch.def),
                 step = objmatch.step,
                 trait_type = objmatch.trait_type,
-                highlight_color = $"{btnTrackColorDialog.BackColor.ToArgb()}",
+                highlight_color = btnTrackColorDialog.BackColor,
                 highlight_value = 1,
                 footer = objmatch.footer,
                 default_interp = "Linear"
             };
             Sequencer_Object _seqobj = SequencerObjects[CurrentRow];
             DataGridViewRow trackrowapplied = trackEditor.Rows[CurrentRow];
-            trackrowapplied.HeaderCell.Style.BackColor = TCLE.Blend(Color.FromArgb(int.Parse(_seqobj.highlight_color)), Color.Black, 0.4);
+            trackrowapplied.HeaderCell.Style.BackColor = TCLE.Blend(_seqobj.highlight_color, Color.Black, 0.4);
             trackrowapplied.ReadOnly = false;
             trackrowapplied.DefaultCellStyle = null;
             //alter the data if it's a sample object being added. Save the sample name instead
@@ -1130,7 +1094,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Color selectedcolor = TCLE.colorDialogNew.Color;
                 btnTrackColorDialog.BackColor = selectedcolor;
                 trackEditor.CurrentRow.HeaderCell.Style.BackColor = TCLE.Blend(selectedcolor, Color.Black, 0.4);
-                SequencerObjects[CurrentRow].highlight_color = selectedcolor.ToArgb().ToString();
+                SequencerObjects[CurrentRow].highlight_color = selectedcolor;
                 //sets flag that leaf has unsaved changes
                 TCLE.PlaySound("UIcolorapply");
                 SaveCheckAndWrite(false);
@@ -1168,7 +1132,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string[] _colors = File.ReadAllLines(ofd.FileName);
                 //then iterate over each track in the editor, applying the colors in the array in order
                 for (int x = 0; x < SequencerObjects.Count && x < _colors.Length; x++) {
-                    SequencerObjects[x].highlight_color = _colors[x];
+                    SequencerObjects[x].highlight_color = Color.FromArgb(int.Parse(_colors[x]));
                     //call this method to update the colors once the value has been assigned
                     TrackUpdateHighlighting(trackEditor.Rows[x], SequencerObjects[x]);
                 }
@@ -1447,8 +1411,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     obj_name = seq_obj["obj_name"],
                     trait_type = seq_obj["trait_type"],
                     data_points = seq_obj["data_points"],
-                    step = seq_obj["step"],
-                    _default = seq_obj["default"],
+                    step = (string)seq_obj["step"] == "True",
+                    defaultvalue = seq_obj["default"],
                     footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"],
@@ -1473,7 +1437,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
                     }
                 }
-                _s.highlight_color = /*(string)seq_obj["editor_data"]?[0] ??*/ TCLE.ObjectColors.TryGetValue(_s.friendly_param, out string value) ? value : "-8355585";
+                _s.highlight_color = TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple;
                 //if an object can be multi-lane, it will be an .ent. Check for "." to detect this
                 if (_s.param_path.Contains('.'))
                     //get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
@@ -1625,7 +1589,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Updates row headers to be the Object and Param_Path
         public void ChangeTrackName(DataGridViewRow r)
         {
-            Color background = TCLE.Blend(Color.FromArgb(int.Parse(SequencerObjects[r.Index].highlight_color)), Color.Black, 0.4);
+            Color background = TCLE.Blend(SequencerObjects[r.Index].highlight_color, Color.Black, 0.4);
             r.HeaderCell.Style.BackColor = background;
             r.Cells[0].Style.BackColor = background;
             r.Cells[1].Style.BackColor = background;
@@ -1666,7 +1630,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Updates cell highlighting in the DGV
         public static void TrackUpdateHighlighting(DataGridViewRow r, Sequencer_Object _seqobj)
         {
-            Color background = TCLE.Blend(Color.FromArgb(int.Parse(_seqobj.highlight_color)), Color.Black, 0.4);
+            Color background = TCLE.Blend(_seqobj.highlight_color, Color.Black, 0.4);
             r.HeaderCell.Style.BackColor = background;
             //iterate over all cells in the row
             foreach (DataGridViewCell dgvc in r.Cells) {
@@ -1689,7 +1653,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //if the cell value is greater than the criteria of the row, highlight it with that row's color
             if (Math.Abs(Decimal.Parse(dgvc.Value.ToString())) >= (decimal)_seqobj.highlight_value) {
-                dgvc.Style.BackColor = Color.FromArgb(int.Parse(_seqobj.highlight_color));
+                dgvc.Style.BackColor = _seqobj.highlight_color;
             }
             //change cell font color so text is readable on dark/light backgrounds
             Color _c = dgvc.Style.BackColor;
@@ -1747,10 +1711,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 s.Add("data_points", seq_obj.data_points);
                 ///end
                 //add the rest of the keys to this seq_obj
-                s.Add("step", seq_obj.step);
-                s.Add("default", seq_obj._default);
+                s.Add("step", seq_obj.step.ToString());
+                s.Add("default", seq_obj.defaultvalue);
                 s.Add("footer", seq_obj.footer);
-                s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color, seq_obj.highlight_value } });
+                s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToString(), seq_obj.highlight_value } });
 
                 seq_objs.Add(s);
             }

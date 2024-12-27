@@ -118,7 +118,7 @@ namespace Thumper_Custom_Level_Editor
                             param_displayname = import3[1],
                             param_path = import3[2],
                             trait_type = import3[3],
-                            step = import3[4],
+                            step = import3[4] == "True",
                             def = import3[5],
                             footer = import3[6].Replace("[", "").Replace("]", ""),
                         };
@@ -145,14 +145,14 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static Dictionary<string, string> ObjectColors = new();
+        public static Dictionary<string, Color> ObjectColors = new();
         public void ImportDefaultColors()
         {
             ObjectColors.Clear();
             if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors2.2.txt")) {
                 File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
             }
-            ObjectColors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]);
+            ObjectColors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));
 
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
         }
