@@ -58,7 +58,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private dynamic leafjson;
         private int CurrentRow;
         private int MouseCurrentColumn;
-        private int FrozenColumnOffset = 2;
+        private static int FrozenColumnOffset = 3;
         private bool controldown;
         private bool shiftdown;
         private bool altdown;
@@ -66,6 +66,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool ismoving;
         private bool LogUndo;
         private bool GlobalMute;
+        private bool GlobalDisable;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
         private Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
         private List<string> lanenames = new() { "left", "center", "right" };
@@ -188,19 +189,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if ((e.ColumnIndex == 0 && e.RowIndex == -1) || (e.ColumnIndex != -1 && e.RowIndex != -1))
-                CellPaint(e);
+            CellPaint(e);
         }
         private void CellPaint(DataGridViewCellPaintingEventArgs e)
         {
             e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             //get dimensions
-            int w = Properties.Resources.icon_play.Width;
-            int h = Properties.Resources.icon_play.Height;
+            int w = 16;
+            int h = 16;
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
             if (e.ColumnIndex == 0) {
+                if (e.RowIndex == -1) {
+                    e.Graphics.DrawImage(GlobalDisable ? Properties.Resources.icon_toggle_off : Properties.Resources.icon_toggle_on, new Rectangle(x, y, w, h));
+                }
+                else {
+                    e.Graphics.DrawImage(SequencerObjects[e.RowIndex].enabled ? Properties.Resources.icon_toggle_on : Properties.Resources.icon_toggle_off, new Rectangle(x, y, w, h));
+                    trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                }
+            }
+            else if (e.ColumnIndex == 1) {
                 if (e.RowIndex == -1) {
                     e.Graphics.DrawImage(GlobalMute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
                 }
@@ -209,7 +218,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 }
             }
-            else if (e.ColumnIndex == 1 && e.RowIndex != -1) {
+            else if (e.ColumnIndex == 2 && e.RowIndex != -1) {
                 if (SequencerObjects[e.RowIndex].param_path.EndsWith(".ent"))
                     e.Graphics.DrawImage(Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
@@ -222,12 +231,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
                 return;
             if (e.ColumnIndex is 0) {
-                trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Mute/Unmute";
+                trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Enable/Disable";
             }
             else if (e.ColumnIndex is 1) {
+                trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Mute/Unmute";
+            }
+            else if (e.ColumnIndex is 2) {
                 //only add tooltip if the object can have lanes
                 if (SequencerObjects[e.RowIndex].param_path.EndsWith(".ent"))
-                    trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide left and right lanes";
+                    trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide Lanes";
             }
         }
 
@@ -345,21 +357,35 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex == -1)
                 return;
             DataGridView dgv = (DataGridView)sender;
-            //test if column header was clicked for global mute
+            //test if column header was clicked for global disable
             if (e.RowIndex == -1 && e.ColumnIndex == 0) {
+                GlobalDisable = !GlobalDisable;
+                foreach (Sequencer_Object seq in SequencerObjects) {
+                    seq.enabled = !GlobalDisable;
+                    RowReadOnly(trackEditor.Rows[SequencerObjects.IndexOf(seq)], GlobalDisable);
+                }
+                //invalidate the column to repaint it, so images update
+                trackEditor.InvalidateColumn(0);
+            }
+            //test if column header was clicked for global mute
+            if (e.RowIndex == -1 && e.ColumnIndex == 1) {
                 GlobalMute = !GlobalMute;
                 foreach (Sequencer_Object seq in SequencerObjects) {
                     seq.mute = GlobalMute;
                 }
                 //invalidate the column to repaint it, so images update
-                trackEditor.InvalidateColumn(0);
+                trackEditor.InvalidateColumn(1);
             }
             else if (e.RowIndex == -1)
                 return;
             //test for clicks in frozen columns 0 or 1
             //unselect the cells afterwards to imitate button click
-            else if (e.ColumnIndex is 0 or 1) {
-                if (e.ColumnIndex is 0)
+            else if (e.ColumnIndex is 0 or 1 or 2) {
+                if (e.ColumnIndex is 0) {
+                    SequencerObjects[e.RowIndex].enabled = !SequencerObjects[e.RowIndex].enabled;
+                    RowReadOnly(trackEditor.Rows[e.RowIndex], !SequencerObjects[e.RowIndex].enabled);
+                }
+                if (e.ColumnIndex is 1)
                     SequencerObjects[e.RowIndex].mute = !SequencerObjects[e.RowIndex].mute;
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 //invalidate cell to repaint it to update the images
@@ -373,6 +399,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
             }
         }
+
         private void trackEditor_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.ColumnIndex == -1 || e.RowIndex == -1)
@@ -404,7 +431,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
 
             DataGridView dgv = sender as DataGridView;
-            if (e.ColumnIndex is 0 or 1) {
+            if (e.ColumnIndex is 0 or 1 or 2) {
                 dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(174, 161, 255);
             }
             else if (Control.MouseButtons == MouseButtons.Right) {
@@ -429,7 +456,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
 
             DataGridView dgv = sender as DataGridView;
-            if (e.ColumnIndex == 0 || e.ColumnIndex == 1) {
+            if (e.ColumnIndex is 0 or 1 or 2) {
                 dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = trackEditor.Rows[e.RowIndex].HeaderCell.Style.BackColor;
             }
         }
@@ -1411,7 +1438,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"],
                     highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1,
-                    default_interp = ((string)seq_obj["default_interp"]) != null ? ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") : "Linear"
+                    default_interp = ((string)seq_obj["default_interp"]) != null ? ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") : "Linear",
+                    enabled = ((string)seq_obj["enabled"] ?? "True") == "True"
                 };
                 //if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
                 if (_s.param_path == "play") {
@@ -1472,7 +1500,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsLoading = false;
             EditorIsSaved = true;
 
-            trackEditor.RowCount = 5;
+            trackEditor.RowCount = SequencerObjects.Count;
             TrackTimeSigHighlighting();
         }
 
@@ -1656,6 +1684,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvc.Style.ForeColor = Color.Black;
         }
 
+        private static void RowReadOnly(DataGridViewRow dgvr, bool isreadonly)
+        {
+            if (isreadonly) {
+                dgvr.ReadOnly = true;
+                foreach (DataGridViewCell dgvc in dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+                    dgvc.Style.BackColor = Color.Gray;
+                    dgvc.Style.SelectionBackColor = Color.Gray;
+                }
+            }
+            else {
+                dgvr.ReadOnly = false;
+                foreach (DataGridViewCell dgvc in dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+                    dgvc.Style = null;
+                }
+            }
+        }
+
         private void EnableLeafButtons(bool enable)
         {
             dropObjects.Enabled = enable;
@@ -1708,6 +1753,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 s.Add("default", seq_obj.defaultvalue);
                 s.Add("footer", seq_obj.footer);
                 s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToString(), seq_obj.highlight_value } });
+                s.Add("enabled", seq_obj.enabled.ToString());
 
                 seq_objs.Add(s);
             }

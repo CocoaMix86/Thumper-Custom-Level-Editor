@@ -618,6 +618,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (selectedNodes[0].FullPath == ProjectDirectory.Name)
                 return;
+            if (projectfolders.TryGetValue(selectedNodes[0].FullPath, out var value))
+                return;
             TCLE.OpenFile(_mainform, projectfiles[selectedNodes[0].FullPath]);
         }
 

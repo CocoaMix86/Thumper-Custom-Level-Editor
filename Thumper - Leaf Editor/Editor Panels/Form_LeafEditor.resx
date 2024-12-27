@@ -125,12 +125,19 @@
 but higher intensity calculation. Can decrease FPS.
 THIS AFFECTS IN-GAME ONLY. NOT THIS EDITOR'S INTERPOLATION CALC.</value>
   </data>
-  <data name="label8.ToolTip" xml:space="preserve">
-    <value>Whether the value changes every beat (step = TRUE)(utilizing default on empty beats),
-or interoplates between set data points (step = FALSE)
-
-Only useful for Trait types of kTraitFloat and kTraitColor</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnRawImport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAMdJREFUOE+lkDsOwjAQRN0ChUPFIcCioOECVE7uwM3Sg5KCm1DkDFQoLihjmexi
+        J8Y/WfCkkVazsyPZRBSlskUsUt608wyLlOftPGMk10NywyEPyQ17nih4bcxZvP7s5nA099icVj3lnTFh
+        Bs8tSOXIc11tBS1fIJjRHLELgGBuf1U49LQ6g9DUuAWAncNb1gzd4aaWuNWk/sVwvKgFa4c7Ya1Uu0Z+
+        LZPv1cAN3GIBDg6xfzFMd7ECIPQvhqyCFF7Br/qzQKo3ebpn03sgJdUAAAAASUVORK5CYII=
+</value>
   </data>
+  <metadata name="LeafEnabled.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="LeafAudio.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -140,6 +147,72 @@ Only useful for Trait types of kTraitFloat and kTraitColor</value>
   <metadata name="leafToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>112, 10</value>
   </metadata>
+  <data name="btnTrackAdd.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA1SURBVDhPY6AduNvxHwWTDEaaAeiKicVwgE2SGAwH2CSJ
+        wXCATZIYjBeQpBgbGDWASMDAAADLz+WB6NTuSgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnTrackDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADSSURBVDhPrZJBDsIgEEV7FbeNSUG9gj1AhbrQ+29MSHea
+        aKn9ZdAyjLqwL5k0w/B/h4FiUbxqK6+MoTQDNeyhNAWF27q5uLJ+eG3PtPxiUMa6lb1fdeO8PuxoORDF
+        o3BAcJMojvXMBK3NNyBCbo4IscaPKpqofd+VLbp5r6G7ypxIliKZzOOrODKZhBmkYl33P8UAA+skg/E4
+        4ze7nQQ+bR6frnhCEuOv/Diiyd/XKD6k2cD4D/CQho3dUjmQPGVh2tFEFEdgkrTGQA17KF2CongCFRAx
+        LgFmCI8AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnTrackUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABUSURBVDhPY8AHVJvfN6g2v+uAckkDEM3v/0MwiYagaibR
+        EOyaYZiAIUBFeDTDMA5DgJJEaIZhLIZgV4gbQ7UhADZF+DBUG25AsgZ0MGrA0DGAgQEA3lL3o9p33tYA
+        AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnTrackDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABbSURBVDhPY8AFVJvf/0fGUGHiwagBQ9IAdA2EMFQbAmBT
+        hA9DtSGAStP7cmwKsWGVpnf1UG2ogBhDcGqGAXyGENQMA9gMIVozDCAbQrJmGABqbgBhKBcLYGAAAO5J
+        9y75M0ZkAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnTrackCopy.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPY6AJMDvx7T8urD3j/XGoMtwAm0YYVm1+j2kI
+        SBAZY9MIwzA1KIYgawZhbBqxYah23AZgE0PGUO00NIAQhmqnUxggY/oZQAhDtdPAAFwYqhwTYFOMDUOV
+        UxMwMAAAy/TrOE6Y1c0AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnTrackPaste.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABxSURBVDhPY6Aa+L9M7z8MTw/1/F9iGYiCQWLIaqDaEABZ
+        8k6XGYYBIDFkNVBtCIAsSQyGakMAbIrwYag2BMCmyOzEN6w4cs4xygxQbX7/X3vG++NQrRBAqgEYhpBi
+        ADKGah81AAQG3gBsAJsGVPztPwBy0iUNMwCTOgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnTrackClear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACoSURBVDhPnZGxDoIwFEX7Qzj6Qy5qYhhxEzdmNyKD/AKj
+        /IBf5GACDxreC+VxbasnOUvTc9OkJsQhofy4IWILPo5Dxb+NfIlF/8g+6a4g0uKR8tTV4DKUk5n2Tnlb
+        Ed12ONByNiGxGB7pL5yu4/BIRCyuR5zYgiKtjNiv5WwGBcgypQcnS55Vn6HAdbyzfLbGNxKMBTRybj60
+        fb29cj7hjsTEVk7/xZgBfT/HSIVFbV0AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnTrackPlayback.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABdSURBVDhPtYxBCoAwDATzivpcrz6vP7IsppLSlSYNDuwl
+        ZEb+oR73s3LpJcgb2I0MgZ3IFIhGaADzRqjc54lQ0W4VoZJdOfXzAyr1rWRARcwjg5QMUjJIySAlhxBp
+        f+aYqgYPor4AAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="btnTrackPlayback.ToolTipText" xml:space="preserve">
     <value>***CURRENTLY BUGGY. SKIPS BEATS SOMETIMES***
 Click to playback the entire leaf. Plays these objects in time:
@@ -152,7 +225,14 @@ Click to playback the entire leaf. Plays these objects in time:
 
 Playback speed is dependant on the Master BPM.</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnTrackColorExport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACDSURBVDhPtYyxDYAwDAQ9DFmB9ZBIw2hMEzraQKIXfOBN
+        geClKyzd2T5ZP6/5CWj+VMRA86ciBpo/FTHQLMQlh5gmnOdUxEDDA/FERQw0enB5oqJW9sCTtw+6MQ3u
+        A6ZK+2RcpiIG2vGgictUxECrD25xmYoYaP5UxEDzpyIG2h8z2wAlQ5cGaY/+rAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="btnTrackColorImport.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -161,9 +241,109 @@ Playback speed is dependant on the Master BPM.</value>
         FiftCeYlLLQ2kx+qDjDTsMiKmYZFVsz+wLkLZ8eJXUD9F0sAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnLeafRandom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEMSURBVDhPY6A70PX6+1/X828HlEs6ABuAbMh71eP/kfDD
+        D6qnlBg2pzswbM38D8ZAtpbPfzlN99934ZqRDUEzAGyIS09zJMwA7ll9YVg1A7GO1596sCtA4J3SYbk3
+        isfuggxZ4b3iJcwAhfSLz8AaPH491PX+r4RVMxgAnWrXVx+2wmfFs7aUeRDnA7FkxZ7/MkmXX3JPmRQJ
+        UoNdMwhANRDEOAE2xdgwTgB0HijAQH4GORumAeQdUJiAAxaoBhRG71SPYaYD5KgC+RlmAChMYLEDimIo
+        G2EILFThGBja4ACDGgAKWFjsoGOwIeiaQVEFcirMABAbOYpRDFA5hiU2CACKNIMARZoxAQMDAJ8BRcIc
+        3bNaAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="leaftoolsToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>231, 10</value>
   </metadata>
+  <data name="btnLeafColors.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASjSURBVEhL3ZRrUFRlAIZP4+CPph9MI+nY2CAgQxCXWATF
+        vFSCRVJcXMALi6AQF0lUjEQrczQIiMUE4yoQJIJCwBLSrAbJRoi7gNwW2GVBkV1AQFrWXRZk3845HN3B
+        S45/fWeef+c8z3fmzHzEyz0hK8Sg22aHb7uVz6+tlt69jeYe0/fWuqsmNrh1jzm7nh9fvdkHluzFzOMv
+        tgGnIO8+h53SHrsd6LD2BRmA0NwDpBzjzlsw5rgZd1nvY9R2vXTEap0X89rzV0KwF912CuPecgpEnwMH
+        jwcek2PEyhkKCycMmbISwCYWMZpnj2tWl1i54ruZh4He1RxI3b6AxDcGvbuOYioyBpOBERjfup0MbKDl
+        cjMHDEUunVGXv8JlNE9fhk2Td5plA1JW1YH3TrL2tus+yINPYXDvScgCj6PX/xiU+77EZOhB3AvejwlO
+        GIYdXTAUvnRGU0mA4j6P8GR0C1di2bE421YkzbBuAhXJXPMPmnZfgCI0bkHgkTxwH8b9Q6E87QHNZSOo
+        ywiaqVJChhLiyR+f/26rb659K7LtRMi2F6IyQIwyTjsaAkrIz0/E8PfnID99HuqsAqjiUzARHAUl1xPT
+        gk3QXHsPqosGUBUTNFPFhA+j1S/Pvq0oj3UTVOTiJ12oDpaAF9SNir2dkKQIMJ5eCkVqMdSZ+VCdzYGG
+        F0fKP4amlgyQ3K9YialCUk6iLCQKGK1++ay23nyHNlARnr8ENSF9dKQhbhCin4fQk9pAByi5mpeImc7j
+        0ArDoeZvmqfaAcpcUk6RQ/QwWv24ti2afId2UJHLITLUfE5CRprTh9GaMUxHxGfqoS5PhLaVlFOIYnG/
+        mjw9iapqPf7NIh4yxWj1e9Wtauo1Lz4oPvpaCLdvRDQnzksRf1FGE1czhAZJHnSKdODuL8BoHjAQzXAI
+        6HIFxK6YbHHRMFr9DD35EkP2VVB8GCvEpydaaI7kS8GtGEQCfxgJNyZxpusyrskK6YhOngRdf9R8QBZB
+        BlzoyGznB2JGq98Sv9rCJdvrQOF4oAns+HaaAK4YP/BHaHlyi5IOpEn4qO/Pw6yYg7nePXRE1+PHBFww
+        1+X65E9e7i/wfZMjAMXKoAb4JYmxK7kbXpl92PabArF/T4B7U4nkDh5OtJchVHgORc2HydP6YK4nAA+a
+        WZhrW0cHdB0u2xitfqwQoYFxUKPUZG8jKJyiW8DO6Yf7JTk8yhXwrhoBu2YUO2tTwKlPxe7GdOwRZiGr
+        7pBOe90SM9dN8EBkg9nmNX3oeMYNaxEm8no7QgQKowiB1ix9AO5l8kdyP/7YgsDuGxnYWHcK31ZumZkW
+        GNGR2Wbrzxjd02d3sI1rtF+sNUzuw+s/ybA84xacioew9fe72P4nBRfetUlwuXISdtUxsP7jK9hePYrE
+        2o1ajWBJPKP5n7GxiJQnUHKjswNYRgaW5wxiRd4dGBfKYVoUDvNLkbAoPwCrquj5QOlR3dq/jvxYUsJ+
+        /nX9cG+k9XssS++XLJBfUDwlEC2xvXLMg3ntxcbKEBq8lXuHbVwgLyTl4lUF8mmTolCV6aWIbovyqALL
+        qsNsljDEgHn8pRxB/AfyEocSfN5zAwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnLEafInterpLinear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH4SURBVEhLtZXPSxtBFMcjpSi0Wj1YKlTbSxHxpjeRCj32
+        orT1qrf05K3+YncZnEl2NyalFSooeuihFVrw4MVrLx56yE6p/4aiZmc2eHJ9M3lEk11JYpIPDDvfN8N7
+        O2/mzSSKzJ1ItBNJnS/YbQ+S2b+KjL1A2XrEmr0VEtKFsvUE1Nm9pJlXKGMJPGvc98ys71k5P29MovlO
+        fL7aX+BGaW9VigKafqdFDCJvvBGeuRbmkw/D37MPJLc+QaD3OBxBeMYCzHd8z3itDbU2ucCtb2GY6ECp
+        ASeb2K3A59YUOP6IskRA7UOfuiMoI/jcjPxAnE0huOWGf6r2s9YKGgkQaxfMOQiYs4AyQtMB2r4CLLRB
+        lBGaDqDqAArtMcoITQdQlSxTqQGUFZz+JT1wptMoyzQUQDJnH9I0j7LMWX75ifCsnfN/5CWayjQW4HN6
+        T3BjO9pMFudc0VAAdUwLNDOMsi5iCwqAK+Qrdm+4z3sAV8K0aig1F8crfbEB1FUhmbuCsm6UM0jJB0hj
+        L962P4L/5DkO39DMiya5+VbtFQRLnhwtdqO5koDZPyVZf4ay9UChfT8npBel5mpjoxO7Zapt9czR3E4R
+        PDwz+sscepXNPlIvnaDuaMlm5/QX50iWXhIk+7RI3CEo1DE9VjVHAytIgkO3HU1SZ+4amTd/3Q0tAXMA
+        AAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnLeafSplit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACtSURBVEhLYxgFVAMb9h39D2WisKkGRi0gCKhqgfKUDypQ
+        JhwQsgCbHqxAYcpHc5kJb19CuXBAyALFKZ/fKk77ZAvlYgfyUz8FKPZ8+qo47TOGAQQtAOoRmvbmh8LU
+        z+FQIVQAlMhXnPb4L0ghNoxuATY1YNz2+J/i1M8NUKUIQE0LFKZ+KocqRQU0DSIYoCSSlaZ8soFy8QOa
+        JlNcgJAFFINRCwgCmlswUgEDAwBQePs+hGHjIAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnLeafRandomValues.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHjSURBVDhPzZRPKERBHMd/SP6tFA4OSspJ0T6sIrXt2r3I
+        wZ+3y0FRhOLs4GBzk9umuGkPm+Sgdm1KEkcXKTmLUoj1YrH+7fzMzHuz5mkttQ6+9Tm835v5NPPmNw/+
+        VSxh2LZswJTxmHksEUBGUQTmjBLADaBLRgNSbbxKHR9kU4GD4hJCkzQKiDIXENeugdjYO/R4ctDqdRFF
+        reGDEbLoxCVZJMOlX4WylCiecQq+1nedXbjdRelkBj7TlqksIKSXObHbuLVPY0JGYLjpQEzMC0GUHoYq
+        iXRZqtxAYokJnyqXuUjwaOvB2mAh5kVAKwgD/yQ/ykTuLMerxNqPZHQWcf8IMbzHpesDLS9CxvLrtkko
+        ni2+Mn8QeeLPSBq8+mqtqt0Y9rsQxdsrtolrW7qQhrSP8Nq70nPITt8Ynj5oH8x/U7pPhJC0DiCxD+k0
+        9uk1jjrGxkchsR0F8v2W3xvUmc9JlGk/YiDEIc7hZP2xrvuO2LrKREfQDvm8KazjBWdtrntZiCubiOdX
+        HNI5mawznqv8C0JokkpHj6fODtOkdDyU7iZlJqksdC+WY8d8RSw42DzBrtxXaCu5Y6U7G/fFR6jl3qYQ
+        Ep9py4ySEKT/OdDQa+kwbpZZlmn+VMbyY9tkHoAPVG7rDmtYSnkAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnLeafZoom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFYSURBVDhPlZLBSsNAEIb35BPYgldNQQKCUhIQX6IH60OI
+        71BM6s3eBfHiU3gThNoUNC2KelPB4sGD0WR3j677JxOamLXVgR/azHz/zuwOK8ZmP6m7gei6Azly+wlP
+        FchQf/ORozJzuEPZ3ghErAFlUpYT21ReDsDu2euXCSwprflhgtaKJ++Mpeo9cnXywtXhE1dt/b9osnYu
+        Ptcv4hrh+nTMXIBPJ7ykvXtRMsgkPMIZa17KcZ7AyYB274TaGkrVCk1wqpBwxpyAJ3kCbcMAcKG4IoxM
+        OGPF+fMOWqNfT06FeyBc3wHenBK4A/PMFU1HwJIYCmbKGYh9wqvPOE9ov3kVLxKeBZbjT4ukZR9/TFa7
+        b0uETgMmcDdBEHL2Ufzc8CO14kUPRhNsGJbECeQ1njeT/q1nRtvWQVyz/Ohmpsm8WO4k9YYX3cLE8t57
+        9Pl/ARPAdkctfAPe+xFQSSca8AAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnLeafAutoPlace.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF/SURBVDhPY6A7+Ldc1/PfEp3y//P1BaBC5IP/9QxMH6bp
+        /fy/TO//v2V65lBh8sH/mcasIMMgBuqGQIXJB2gGFkCFyQfIBv5dqtsDFSYf/F+lxQY3cLHOjv/77Vmg
+        UuQBoAu5YAaC8Pdleu+A9Kp/S/Xi/i0244MqIx6gG4iMPyzT+/53me7mf0v0kv8vNRaBasEP0A38OMvp
+        /868CXB8sroSLP53mV4XVAtu8H+pns3fJTp7kQ180Bv5PwvIhOFuj4vEGfhvubYyskEwTLaB/+fLc3xY
+        JvcL3cCfC83+P+oP+19p+Zo0A0EA6OUF6AbCcI3tM9IN/DdHnffPMr1j6IaBMFkGgsD/pbqC6IaBMFkG
+        Wr1W57V6q7Ko+YrGf3Sc6wQxsCD4ApifeU/1svl71QSoVuzA5pOKqOV71f/YcKrrU7CBCRHnEeLvVGZD
+        tWIHxk8luYAKG7DhdKuPH0AGxrs8eQwTs3in4gvVSjrI0vv1EGRglt6f41AhKGBgAAD52qGeqMszhwAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
   <data name="textEditor.Hotkeys" xml:space="preserve">
     <value>Tab=IndentIncrease, Escape=ClearHints, PgUp=GoPageUp, PgDn=GoPageDown, End=GoEnd, Home=GoHome, Left=GoLeft, Up=GoUp, Right=GoRight, Down=GoDown, Insert=ReplaceMode, Del=DeleteCharRight, F3=FindNext, Shift+Tab=IndentDecrease, Shift+PgUp=GoPageUpWithSelection, Shift+PgDn=GoPageDownWithSelection, Shift+End=GoEndWithSelection, Shift+Home=GoHomeWithSelection, Shift+Left=GoLeftWithSelection, Shift+Up=GoUpWithSelection, Shift+Right=GoRightWithSelection, Shift+Down=GoDownWithSelection, Shift+Insert=Paste, Shift+Del=Cut, Ctrl+Back=ClearWordLeft, Ctrl+Space=AutocompleteMenu, Ctrl+End=GoLastLine, Ctrl+Home=GoFirstLine, Ctrl+Left=GoWordLeft, Ctrl+Up=ScrollUp, Ctrl+Right=GoWordRight, Ctrl+Down=ScrollDown, Ctrl+Insert=Copy, Ctrl+Del=ClearWordRight, Ctrl+0=ZoomNormal, Ctrl+A=SelectAll, Ctrl+B=BookmarkLine, Ctrl+C=Copy, Ctrl+D=CloneLine, Ctrl+E=MacroExecute, Ctrl+F=FindDialog, Ctrl+G=GoToDialog, Ctrl+H=ReplaceDialog, Ctrl+I=AutoIndentChars, Ctrl+M=MacroRecord, Ctrl+N=GoNextBookmark, Ctrl+R=Redo, Ctrl+U=UpperCase, Ctrl+V=Paste, Ctrl+X=Cut, Ctrl+Z=Undo, Ctrl+Add=ZoomIn, Ctrl+Subtract=ZoomOut, Ctrl+OemMinus=NavigateBackward, Ctrl+Shift+End=GoLastLineWithSelection, Ctrl+Shift+Home=GoFirstLineWithSelection, Ctrl+Shift+Left=GoWordLeftWithSelection, Ctrl+Shift+Right=GoWordRightWithSelection, Ctrl+Shift+B=UnbookmarkLine, Ctrl+Shift+C=CommentSelected, Ctrl+Shift+N=GoPrevBookmark, Ctrl+Shift+U=LowerCase, Ctrl+Shift+OemMinus=NavigateForward, Alt+Back=Undo, Alt+Up=MoveSelectedLinesUp, Alt+Down=MoveSelectedLinesDown, Alt+F=FindChar, Alt+Shift+Left=GoLeft_ColumnSelectionMode, Alt+Shift+Up=GoUp_ColumnSelectionMode, Alt+Shift+Right=GoRight_ColumnSelectionMode, Alt+Shift+Down=GoDown_ColumnSelectionMode</value>
   </data>

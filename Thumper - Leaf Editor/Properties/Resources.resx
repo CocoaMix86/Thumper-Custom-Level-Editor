@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="audionames" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\audionames.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\audionames.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="beeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\beeble\beeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -486,6 +486,12 @@ showhidesample;D6, Alt</value>
   <data name="icon_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icons\icon-template.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_toggle_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\icon-toggle-off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_toggle_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\icon-toggle-on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_trash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icons\icon-trash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -523,25 +529,25 @@ showhidesample;D6, Alt</value>
     <value>..\image assets\ico\ico_workspace.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="leaf_multitrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="leaf_multitrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\leaf_multitrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="leaf_multitrack_ring_bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_multitrack_ring&amp;bar.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\leaf_multitrack_ring&amp;bar.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="leaf_pyramid_outro" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_pyramid_outro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\leaf_pyramid_outro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="leaf_singletrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="leaf_singletrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\leaf_singletrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\leaf_singletrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="objects_defaultcolors" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\objects_defaultcolors.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\objects_defaultcolors.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\paths.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -1057,7 +1063,7 @@ showhidesample;D6, Alt</value>
     <value>..\text assets\samples.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="samp_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="samp_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\samp_dissonant.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
@@ -1099,7 +1105,7 @@ showhidesample;D6, Alt</value>
     <value>..\text assets\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
   <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="thumper_level_editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\ico\thumper_level_editor.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1219,6 +1225,6 @@ showhidesample;D6, Alt</value>
     <value>..\audio assets\UI sounds\UIwindowopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="xfm_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\text assets\xfm_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\text assets\xfm_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
 </root>

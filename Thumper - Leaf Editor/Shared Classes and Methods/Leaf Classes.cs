@@ -34,6 +34,7 @@ namespace Thumper_Custom_Level_Editor
         public string friendly_param { get; set; }
         public Color highlight_color { get; set; }
         public float highlight_value { get; set; }
+        public bool enabled { get; set; }
 
         public int id { get; set; }
         public bool mute { get; set; }
@@ -115,7 +116,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Trait Type")]
         [Description("BOOL: accepts values 1 (on) or 0 (off); ACTION: accepts values 1 (activate); FLOAT: accepts float values; INT: accepts integer (no decimal) values; COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors.")]
-        public string traittype => selectedobj.trait_type.Replace("kTrait", "");
+        public string traittype => selectedobj.trait_type?.Replace("kTrait", "");
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Step")]
