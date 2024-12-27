@@ -91,6 +91,8 @@
             this.label10 = new Label();
             this.label57 = new Label();
             this.trackEditor = new DataGridView();
+            this.LeafAudio = new DataGridViewTextBoxColumn();
+            this.LeafMultilane = new DataGridViewTextBoxColumn();
             this.leafToolStrip = new ToolStrip();
             this.btnTrackAdd = new ToolStripButton();
             this.btnTrackDelete = new ToolStripButton();
@@ -121,8 +123,6 @@
             this.label5 = new Label();
             this.label13 = new Label();
             this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.LeafAudio = new DataGridViewTextBoxColumn();
-            this.LeafMultilane = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.panelLeaf.SuspendLayout();
@@ -285,7 +285,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 108);
+            this.btnRawImport.Size = new Size(54, 125);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -348,7 +348,7 @@
             this.panel7.Location = new Point(1, 428);
             this.panel7.Margin = new Padding(4, 3, 4, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new Size(210, 2858);
+            this.panel7.Size = new Size(210, 4881);
             this.panel7.TabIndex = 111;
             // 
             // NUDquick9
@@ -892,7 +892,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 376);
+            this.vScrollBarTrackEditor.Size = new Size(15, 359);
             this.vScrollBarTrackEditor.TabIndex = 144;
             // 
             // panelZoom
@@ -992,7 +992,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(688, 376);
+            this.trackEditor.Size = new Size(668, 359);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -1005,6 +1005,29 @@
             this.trackEditor.RowEnter += this.trackEditor_RowEnter;
             this.trackEditor.RowsAdded += this.trackEditor_RowsAdded;
             this.trackEditor.Resize += this.trackEditor_Resize;
+            // 
+            // LeafAudio
+            // 
+            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafAudio.Frozen = true;
+            this.LeafAudio.HeaderText = "";
+            this.LeafAudio.MinimumWidth = 20;
+            this.LeafAudio.Name = "LeafAudio";
+            this.LeafAudio.ReadOnly = true;
+            this.LeafAudio.Resizable = DataGridViewTriState.False;
+            this.LeafAudio.ToolTipText = "Mute/Unmute All";
+            this.LeafAudio.Width = 20;
+            // 
+            // LeafMultilane
+            // 
+            this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafMultilane.Frozen = true;
+            this.LeafMultilane.HeaderText = "";
+            this.LeafMultilane.MinimumWidth = 20;
+            this.LeafMultilane.Name = "LeafMultilane";
+            this.LeafMultilane.ReadOnly = true;
+            this.LeafMultilane.Resizable = DataGridViewTriState.False;
+            this.LeafMultilane.Width = 20;
             // 
             // leafToolStrip
             // 
@@ -1020,7 +1043,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 376);
+            this.leafToolStrip.Size = new Size(25, 359);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -1155,7 +1178,7 @@
             this.leaftoolsToolStrip.Name = "leaftoolsToolStrip";
             this.leaftoolsToolStrip.Padding = new Padding(0);
             this.leaftoolsToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leaftoolsToolStrip.Size = new Size(623, 30);
+            this.leaftoolsToolStrip.Size = new Size(603, 30);
             this.leaftoolsToolStrip.Stretch = true;
             this.leaftoolsToolStrip.TabIndex = 143;
             // 
@@ -1259,7 +1282,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainerLeafSide);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 200;
+            this.splitContainer1.SplitterDistance = 220;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 119;
             // 
@@ -1282,7 +1305,7 @@
             this.propertyGridLeaf.RightToLeft = RightToLeft.No;
             this.propertyGridLeaf.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridLeaf.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridLeaf.Size = new Size(200, 519);
+            this.propertyGridLeaf.Size = new Size(220, 519);
             this.propertyGridLeaf.TabIndex = 0;
             this.propertyGridLeaf.ToolbarVisible = false;
             this.propertyGridLeaf.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -1297,7 +1320,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(854, -3);
+            this.lblMasterlvllistHelp.Location = new Point(874, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -1328,8 +1351,8 @@
             // 
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
-            this.splitContainerLeafSide.Size = new Size(728, 519);
-            this.splitContainerLeafSide.SplitterDistance = 406;
+            this.splitContainerLeafSide.Size = new Size(708, 519);
+            this.splitContainerLeafSide.SplitterDistance = 389;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -1341,7 +1364,7 @@
             this.label2.Cursor = Cursors.Help;
             this.label2.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.label2.ForeColor = Color.DodgerBlue;
-            this.label2.Location = new Point(1532, -3);
+            this.label2.Location = new Point(1512, -3);
             this.label2.Margin = new Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new Size(15, 16);
@@ -1366,7 +1389,7 @@
             // splitContainerTopbar.Panel2
             // 
             this.splitContainerTopbar.Panel2.Controls.Add(this.leaftoolsToolStrip);
-            this.splitContainerTopbar.Size = new Size(728, 30);
+            this.splitContainerTopbar.Size = new Size(708, 30);
             this.splitContainerTopbar.SplitterDistance = 100;
             this.splitContainerTopbar.SplitterWidth = 5;
             this.splitContainerTopbar.TabIndex = 144;
@@ -1421,7 +1444,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(195, 14);
+            this.textEditor.AutoScrollMinSize = new Size(170, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -1432,7 +1455,6 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -1444,34 +1466,11 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(674, 108);
+            this.textEditor.Size = new Size(654, 125);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
             this.textEditor.Zoom = 100;
-            // 
-            // LeafAudio
-            // 
-            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.LeafAudio.Frozen = true;
-            this.LeafAudio.HeaderText = "";
-            this.LeafAudio.MinimumWidth = 20;
-            this.LeafAudio.Name = "LeafAudio";
-            this.LeafAudio.ReadOnly = true;
-            this.LeafAudio.Resizable = DataGridViewTriState.False;
-            this.LeafAudio.ToolTipText = "Mute/Unmute All";
-            this.LeafAudio.Width = 20;
-            // 
-            // LeafMultilane
-            // 
-            this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.LeafMultilane.Frozen = true;
-            this.LeafMultilane.HeaderText = "";
-            this.LeafMultilane.MinimumWidth = 20;
-            this.LeafMultilane.Name = "LeafMultilane";
-            this.LeafMultilane.ReadOnly = true;
-            this.LeafMultilane.Resizable = DataGridViewTriState.False;
-            this.LeafMultilane.Width = 20;
             // 
             // Form_LeafEditor
             // 

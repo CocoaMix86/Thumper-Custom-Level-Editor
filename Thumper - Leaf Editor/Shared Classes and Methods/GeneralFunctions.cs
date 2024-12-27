@@ -15,16 +15,16 @@ namespace Thumper_Custom_Level_Editor
     public partial class TCLE
     {
         public static List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
-        public static decimal LeafQuickValue0 = 1;
-        public static decimal LeafQuickValue1 = 1;
-        public static decimal LeafQuickValue2 = 1;
-        public static decimal LeafQuickValue3 = 1;
-        public static decimal LeafQuickValue4 = 1;
-        public static decimal LeafQuickValue5 = 1;
-        public static decimal LeafQuickValue6 = 1;
-        public static decimal LeafQuickValue7 = 1;
-        public static decimal LeafQuickValue8 = 1;
-        public static decimal LeafQuickValue9 = 1;
+        public static decimal LeafQuickValue0 = 1.000m;
+        public static decimal LeafQuickValue1 = 1.000m;
+        public static decimal LeafQuickValue2 = 1.000m;
+        public static decimal LeafQuickValue3 = 1.000m;
+        public static decimal LeafQuickValue4 = 1.000m;
+        public static decimal LeafQuickValue5 = 1.000m;
+        public static decimal LeafQuickValue6 = 1.000m;
+        public static decimal LeafQuickValue7 = 1.000m;
+        public static decimal LeafQuickValue8 = 1.000m;
+        public static decimal LeafQuickValue9 = 1.000m;
 
         private void LoadQuickValues()
         {
@@ -32,16 +32,16 @@ namespace Thumper_Custom_Level_Editor
                 return;
             string[] _load = File.ReadAllLines($@"{TCLE.AppLocation}\templates\quickvalues.txt");
 
-            LeafQuickValue0 = decimal.TryParse(_load[0], out decimal result) ? result : 1;
-            LeafQuickValue1 = decimal.TryParse(_load[1], out result) ? result : 1;
-            LeafQuickValue2 = decimal.TryParse(_load[2], out result) ? result : 1;
-            LeafQuickValue3 = decimal.TryParse(_load[3], out result) ? result : 1;
-            LeafQuickValue4 = decimal.TryParse(_load[4], out result) ? result : 1;
-            LeafQuickValue5 = decimal.TryParse(_load[5], out result) ? result : 1;
-            LeafQuickValue6 = decimal.TryParse(_load[6], out result) ? result : 1;
-            LeafQuickValue7 = decimal.TryParse(_load[7], out result) ? result : 1;
-            LeafQuickValue8 = decimal.TryParse(_load[8], out result) ? result : 1;
-            LeafQuickValue9 = decimal.TryParse(_load[9], out result) ? result : 1;
+            LeafQuickValue0 = decimal.TryParse(_load[0], out decimal result) ? result : 1.000m;
+            LeafQuickValue1 = decimal.TryParse(_load[1], out result) ? result : 1.000m;
+            LeafQuickValue2 = decimal.TryParse(_load[2], out result) ? result : 1.000m;
+            LeafQuickValue3 = decimal.TryParse(_load[3], out result) ? result : 1.000m;
+            LeafQuickValue4 = decimal.TryParse(_load[4], out result) ? result : 1.000m;
+            LeafQuickValue5 = decimal.TryParse(_load[5], out result) ? result : 1.000m;
+            LeafQuickValue6 = decimal.TryParse(_load[6], out result) ? result : 1.000m;
+            LeafQuickValue7 = decimal.TryParse(_load[7], out result) ? result : 1.000m;
+            LeafQuickValue8 = decimal.TryParse(_load[8], out result) ? result : 1.000m;
+            LeafQuickValue9 = decimal.TryParse(_load[9], out result) ? result : 1.000m;
         }
 
         public static void DoubleBufferDGV(DataGridView grid, bool columnstyle)
@@ -59,6 +59,7 @@ namespace Thumper_Custom_Level_Editor
         {
             foreach (DataGridViewColumn dgvc in columns) {
                 dgvc.Name = (dgvc.Index - offset).ToString();
+                dgvc.HeaderText = (dgvc.Index - offset).ToString();
                 dgvc.Resizable = DataGridViewTriState.False;
                 dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgvc.DividerWidth = 1;

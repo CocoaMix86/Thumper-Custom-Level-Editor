@@ -248,8 +248,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             CurrentRow = e.RowIndex;
             ShowRawTrackData(trackEditor.Rows[e.RowIndex]);
+            leafProperties.selectedobj = SequencerObjects[e.RowIndex];
+            propertyGridLeaf.Refresh();
+            /*
             List<string> _params;
-
             try {
                 //if track is a multi-lane object, split param_path from lane so both values can be used to update their dropdown boxes
                 if (lanenames.Any(x => SequencerObjects[CurrentRow].friendly_param.Contains(x))) {
@@ -267,24 +269,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[1]);
                 else //track lane only uses param[0]
                     dropTrackLane.SelectedIndex = dropTrackLane.FindStringExact(_params[0]);
-                txtTrait.Text = SequencerObjects[CurrentRow].trait_type;
-                btnTrackColorDialog.BackColor = SequencerObjects[CurrentRow].highlight_color;
                 //remove event handlers from a few controls so they don't trigger when their values change
-                //set values from _tracks
-                NUD_TrackHighlight.Value = (decimal)SequencerObjects[CurrentRow].highlight_value;
-                btnTrackColorDialog.BackColor = SequencerObjects[CurrentRow].highlight_color;
-                txtDefault.Value = (decimal)SequencerObjects[CurrentRow].defaultvalue;
-                dropLeafStep.SelectedItem = SequencerObjects[CurrentRow].step;
-                dropLeafInterp.SelectedItem = SequencerObjects[CurrentRow].default_interp;
-                txtDefault.Enabled = true;
-                dropLeafInterp.Enabled = true;
-                dropLeafStep.Enabled = true;
                 btnTrackApply.Enabled = true;
                 //re-add event handlers
 
                 toolTip1.SetToolTip(txtTrait, kTraitTooltips[txtTrait.Text]);
             }
-            catch { }
+            catch { }*/
         }
 
         //cell input sanitization
@@ -704,6 +695,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///DROPDOWN TIMESIGS
         private void dropTimeSig_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (EditorIsLoading)
+                return;
             TrackTimeSigHighlighting();
             //sets flag that leaf has unsaved changes
             SaveCheckAndWrite(false);
@@ -1404,6 +1397,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //clear the DGV and prep for new data
             trackEditor.Rows.Clear();
+            LeafLengthChanged();
 
             //each object in the seq_objs[] list becomes a track
             foreach (dynamic seq_obj in _load["seq_objs"]) {
@@ -1445,6 +1439,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //finally, add the completed seq_obj to tracks
                 leafProperties.seq_objs.Add(_s);
             }
+            //set timesig for highlighting
+            dropTimeSig.ComboBox.DataSource = TCLE.TimeSignatures;
+            if (!TCLE.TimeSignatures.Contains(LeafProperties.timesignature)) {
+                TCLE.TimeSignatures.Add(LeafProperties.timesignature);
+            }
+            dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(LeafProperties.timesignature);
 
             trackEditor.RowHeadersVisible = true;
             //foreach row, import data points associated with it
@@ -1467,20 +1467,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackZoom_Scroll(null, null);
             trackZoomVert_Scroll(null, null);
 
-            trackEditor.RowCount = 5;
-            trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
-            //set timesig for highlighting
-            dropTimeSig.ComboBox.DataSource = TCLE.TimeSignatures;
-            if (!TCLE.TimeSignatures.Contains(LeafProperties.timesignature)) {
-                TCLE.TimeSignatures.Add(LeafProperties.timesignature);
-            }
-            dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(LeafProperties.timesignature);
-
-
             propertyGridLeaf.SelectedObject = LeafProperties;
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             EditorIsSaved = true;
+
+            trackEditor.RowCount = 5;
+            TrackTimeSigHighlighting();
         }
 
         ///SAVE

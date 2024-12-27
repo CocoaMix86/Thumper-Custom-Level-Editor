@@ -96,7 +96,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private int Beats;
 
-        [CategoryAttribute("Options")]
+        [Category​Attribute("Options")]
         [DisplayName("Time Signature")]
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         [TypeConverter(typeof(LeafTimeSignatures))]
@@ -114,12 +114,12 @@ namespace Thumper_Custom_Level_Editor
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Trait Type")]
-        [Description("Different types accept different sets of values.")]
-        public string traittype => selectedobj.trait_type;
+        [Description("BOOL: accepts values 1 (on) or 0 (off); ACTION: accepts values 1 (activate); FLOAT: accepts float values; INT: accepts integer (no decimal) values; COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors.")]
+        public string traittype => selectedobj.trait_type.Replace("kTrait", "");
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Step")]
-        [Description("TRUE: Blank cells use the last known set value. Some trait types will automatically interpolate between set values too. FALSE: Blank cells use the Default value")]
+        [Description("FALSE: Blank cells use the last known set value. Some trait types will automatically interpolate between set values too. TRUE: Blank cells use the Default value")]
         public bool step { get => selectedobj.step; set => selectedobj.step = value; }
 
         [CategoryAttribute("Sequencer Object")]
@@ -127,52 +127,62 @@ namespace Thumper_Custom_Level_Editor
         [Description("If Step FALSE, blank cells will use this value")]
         public float defaultvalue { get => selectedobj.defaultvalue; set => selectedobj.defaultvalue = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Sequencer Object")]
+        [DisplayName("Highlight Color")]
+        [Description("When Highlight Value is met, color the cell this color")]
+        public Color highlightcolor { get => selectedobj.highlight_color; set => selectedobj.highlight_color = value; }
+
+        [CategoryAttribute("Sequencer Object")]
+        [DisplayName("Highlight Value")]
+        [Description("When this value is met (+/-), color the cell the Highlight Color")]
+        public float highlightvalue { get => selectedobj.highlight_value; set => selectedobj.highlight_value = value; }
+
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 0")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue0 { get => TCLE.LeafQuickValue0; set => TCLE.LeafQuickValue0 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 1")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue1 { get => TCLE.LeafQuickValue1; set => TCLE.LeafQuickValue1 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 2")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue2 { get => TCLE.LeafQuickValue2; set => TCLE.LeafQuickValue2 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 3")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue3 { get => TCLE.LeafQuickValue3; set => TCLE.LeafQuickValue3 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 4")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue4 { get => TCLE.LeafQuickValue4; set => TCLE.LeafQuickValue4 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 5")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue5 { get => TCLE.LeafQuickValue5; set => TCLE.LeafQuickValue5 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 6")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue6 { get => TCLE.LeafQuickValue6; set => TCLE.LeafQuickValue6 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 7")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue7 { get => TCLE.LeafQuickValue7; set => TCLE.LeafQuickValue7 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 8")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue8 { get => TCLE.LeafQuickValue8; set => TCLE.LeafQuickValue8 = value; }
 
-        [CategoryAttribute("Quick Values")]
+        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 9")]
         [Description("Use hotkey to insert this value into selected cells.")]
         public decimal quickvalue9 { get => TCLE.LeafQuickValue9; set => TCLE.LeafQuickValue9 = value; }
