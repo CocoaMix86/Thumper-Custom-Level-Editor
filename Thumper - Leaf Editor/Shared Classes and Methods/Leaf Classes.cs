@@ -99,6 +99,17 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("Time Signature")]
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
+        [TypeConverter(typeof(LeafTimeSignatures))]
         public string timesignature { get; set; }
+    }
+
+    public class LeafTimeSignatures : StringConverter
+    {
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
+        {
+            return new StandardValuesCollection(TCLE.TimeSignatures);
+        }
     }
 }

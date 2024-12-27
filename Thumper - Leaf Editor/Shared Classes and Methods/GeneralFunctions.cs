@@ -14,6 +14,8 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
     {
+        public static List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
+
         public static void DoubleBufferDGV(DataGridView grid, bool columnstyle)
         {
             //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx

@@ -694,8 +694,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.KeyCode == Keys.Enter) {
                 string s = dropTimeSig.Text;
                 // if item exists, select it. if it does not exist, add it.
-                if (!dropTimeSig.Items.Contains(s)) {
-                    dropTimeSig.Items.Add(s);
+                if (!TCLE.TimeSignatures.Contains(s)) {
+                    TCLE.TimeSignatures.Add(s);
                 }
                 dropTimeSig.SelectedItem = s;
             }
@@ -783,6 +783,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //SaveCheckAndWrite(false, $"Interp value {data} -> {dropLeafInterp.Text}", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
         }
         #endregion
+
         #region Buttons
         ///         ///
         /// BUTTONS ///
@@ -1475,20 +1476,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackZoomVert_Scroll(null, null);
 
             //set timesig for highlighting
-            if (!dropTimeSig.Items.Contains(LeafProperties.timesignature)) {
-                dropTimeSig.Items.Add(LeafProperties.timesignature);
+            dropTimeSig.ComboBox.DataSource = TCLE.TimeSignatures;
+            if (!TCLE.TimeSignatures.Contains(LeafProperties.timesignature)) {
+                TCLE.TimeSignatures.Add(LeafProperties.timesignature);
             }
             dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(LeafProperties.timesignature);
 
+            propertyGridLeaf.SelectedObject = LeafProperties;
+            //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
-            //clear undo list and reset the leafjson to the new leaf
-            if (resetundolist) {
-                ClearReloadUndo(_load);
-            }
-            else {
-                //set save flag to true, since it just barely loaded
-                //SaveCheckAndWriteColors(true, Color.Maroon);
-            }
+            EditorIsSaved = true;
         }
 
         ///SAVE
