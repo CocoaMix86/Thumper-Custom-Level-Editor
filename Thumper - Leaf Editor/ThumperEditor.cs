@@ -96,10 +96,6 @@ namespace Thumper_Custom_Level_Editor
             Instance = this;
             TabRightClickMenu = contextmenuTabClick;
 
-            //MaximizeScreenBounds();
-            ColorFormElements();
-            JumpListUpdate();
-
             //set custom renderer
             toolStripTitle.Renderer = new ToolStripMainForm();
             toolStripMain.Renderer = new ToolStripOverride();
@@ -114,27 +110,26 @@ namespace Thumper_Custom_Level_Editor
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
-            //event handler needed for dgv
             //
             LevelToLoad = LevelFromArg;
             //
-            //
-            //
-            ///Create directory for leaf templates and other default files
+            //Create directory for leaf templates and other default files
             if (!Directory.Exists($@"{AppLocation}\templates")) {
                 toolstripFileTemplateRegen_Click(null, null);
             }
             if (!Directory.Exists($@"{AppLocation}\temp")) {
                 Directory.CreateDirectory($@"{AppLocation}\temp");
             }
-            //setup datagrids with proper formatting
-            //call method that imports objects from track_objects.txt (for Leaf editing)
+            //call methods to initialize various aspects of the editors
             ImportObjects();
-            //write required audio files for playback
+            //MaximizeScreenBounds();
+            ColorFormElements();
+            JumpListUpdate();
+            LoadQuickValues();
             ///InitializeSounds();
-            //keybinds
+            //load keybinds
             SetKeyBinds();
-            //colors
+            //import default object colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //load recent levels 
             List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
@@ -149,6 +144,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
             }
 
+            //create Project Explorer and Project Property panels
             dockProjectExplorer = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProjectExplorer.Show(dockMain, DockState.DockRight);
             dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
@@ -212,7 +208,8 @@ namespace Thumper_Custom_Level_Editor
             ///Properties.Settings.Default.beebleloc = pictureBeeble.Location;
             //colors
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
-            //
+            //write quick values to file
+            File.WriteAllText($@"{TCLE.AppLocation}\templates\quickvalues.txt", $"{TCLE.LeafQuickValue0}\n{TCLE.LeafQuickValue1}\n{TCLE.LeafQuickValue2}\n{TCLE.LeafQuickValue3}\n{TCLE.LeafQuickValue4}\n{TCLE.LeafQuickValue5}\n{TCLE.LeafQuickValue6}\n{TCLE.LeafQuickValue7}\n{TCLE.LeafQuickValue8}\n{TCLE.LeafQuickValue9}");
             Properties.Settings.Default.Save();
         }
         private static void SetKeyBinds()

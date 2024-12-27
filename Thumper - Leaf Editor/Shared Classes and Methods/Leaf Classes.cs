@@ -101,6 +101,56 @@ namespace Thumper_Custom_Level_Editor
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         [TypeConverter(typeof(LeafTimeSignatures))]
         public string timesignature { get; set; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 0")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue0 { get => TCLE.LeafQuickValue0; set => TCLE.LeafQuickValue0 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 1")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue1 { get => TCLE.LeafQuickValue1; set => TCLE.LeafQuickValue1 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 2")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue2 { get => TCLE.LeafQuickValue2; set => TCLE.LeafQuickValue2 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 3")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue3 { get => TCLE.LeafQuickValue3; set => TCLE.LeafQuickValue3 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 4")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue4 { get => TCLE.LeafQuickValue4; set => TCLE.LeafQuickValue4 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 5")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue5 { get => TCLE.LeafQuickValue5; set => TCLE.LeafQuickValue5 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 6")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue6 { get => TCLE.LeafQuickValue6; set => TCLE.LeafQuickValue6 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 7")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue7 { get => TCLE.LeafQuickValue7; set => TCLE.LeafQuickValue7 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 8")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue8 { get => TCLE.LeafQuickValue8; set => TCLE.LeafQuickValue8 = value; }
+
+        [CategoryAttribute("Quick Values")]
+        [DisplayName("Quick 9")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        public decimal quickvalue9 { get => TCLE.LeafQuickValue9; set => TCLE.LeafQuickValue9 = value; }
     }
 
     public class LeafTimeSignatures : StringConverter
