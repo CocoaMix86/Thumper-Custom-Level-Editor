@@ -206,21 +206,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     e.Graphics.DrawImage(SequencerObjects[e.RowIndex].mute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
+                    trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 }
             }
-            else if (e.ColumnIndex == 1) {
+            else if (e.ColumnIndex == 1 && e.RowIndex != -1) {
                 if (SequencerObjects[e.RowIndex].param_path.EndsWith(".ent"))
                     e.Graphics.DrawImage(Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+                trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
             }
             e.Handled = true;
         }
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0 && e.RowIndex == -1) {
-                trackEditor.Columns[0].HeaderCell.ToolTipText = "Global (un)mute";
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                return;
+            if (e.ColumnIndex is 0) {
+                trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Mute/Unmute";
             }
-            if (e.ColumnIndex is 1) {
+            else if (e.ColumnIndex is 1) {
                 //only add tooltip if the object can have lanes
                 if (SequencerObjects[e.RowIndex].param_path.EndsWith(".ent"))
                     trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide left and right lanes";
@@ -367,6 +371,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(0);
             }
+            else if (e.RowIndex == -1)
+                return;
             //test for clicks in frozen columns 0 or 1
             //unselect the cells afterwards to imitate button click
             else if (e.ColumnIndex is 0 or 1) {
@@ -1497,12 +1503,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackZoom_Scroll(null, null);
             trackZoomVert_Scroll(null, null);
 
+            trackEditor.RowCount = 5;
+            trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
             //set timesig for highlighting
             dropTimeSig.ComboBox.DataSource = TCLE.TimeSignatures;
             if (!TCLE.TimeSignatures.Contains(LeafProperties.timesignature)) {
                 TCLE.TimeSignatures.Add(LeafProperties.timesignature);
             }
             dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(LeafProperties.timesignature);
+
 
             propertyGridLeaf.SelectedObject = LeafProperties;
             //mark that lvl is saved (just freshly loaded)
