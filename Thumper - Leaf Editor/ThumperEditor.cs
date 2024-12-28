@@ -71,6 +71,7 @@ namespace Thumper_Custom_Level_Editor
                     Properties.Settings.Default.Recentfiles.Remove(WorkingFolder.FullName);
                     Properties.Settings.Default.Recentfiles.Insert(0, WorkingFolder.FullName);
                     JumpListUpdate();
+                    LvlReloadSamples();
                     panelRecentFiles.Visible = false;
                 }
             }

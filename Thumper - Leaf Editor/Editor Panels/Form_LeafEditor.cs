@@ -1290,37 +1290,43 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLeafRandom_Click(object sender, EventArgs e)
         {
             randomizing = true;
-
+            //I pick category first rather than any object, as this gives Play Sample a higher chance of being picked
+            //And all the tentacles a lower chance
             List<string> categories = TCLE.LeafObjects.Select(x => x.category).Distinct().ToList();
+        beginrando:
             string category = categories[TCLE.rng.Next(0, categories.Count)];
             List<Object_Params> objects = TCLE.LeafObjects.Where(x => x.category == category).ToList();
             Object_Params obj = objects[TCLE.rng.Next(0, objects.Count)];
+            //check if the object exists in the leaf already. If so, pick a new one
+            if (SequencerObjects.Any(x => x.friendly_type == category && x.param_path == obj.param_path))
+                goto beginrando;
 
-
-            btnTrackAdd_Click(null, null);
-            bool rando = true;
-            while (rando) {
-                dropObjects.SelectedIndex = TCLE.rng.Next(0, dropObjects.Items.Count);
-                if (dropObjects.Text == "PLAY SAMPLE") {
-                    dropParamPath.SelectedIndex = 0;
-                    if (dropTrackLane.Items.Count > 0)
-                        dropTrackLane.SelectedIndex = TCLE.rng.Next(0, dropTrackLane.Items.Count);
-                }
-                else
-                    dropParamPath.SelectedIndex = TCLE.rng.Next(0, dropParamPath.Items.Count);
-                if (SequencerObjects.Any(x => (x.friendly_param ?? "").Split(',')[0] == dropParamPath.Text))
-                    rando = false;
-            }
-            btnTrackApply_Click(null, null);
+            Sequencer_Object seq = new() {
+                obj_name = category == "PLAY SAMPLE" ? TCLE.LvlSamples[TCLE.rng.Next(0, TCLE.LvlSamples.Count)].obj_name : obj.obj_name,
+                friendly_type = obj.category,
+                param_path = obj.param_path,
+                friendly_param = obj.param_displayname,
+                defaultvalue = float.Parse(obj.def),
+                step = obj.step,
+                trait_type = obj.trait_type,
+                highlight_color = TCLE.ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple,
+                highlight_value = 1,
+                footer = obj.footer,
+                default_interp = "Linear",
+                enabled = true
+            };
+            SequencerObjects.Add(seq);
+            //Add new row and assign random data
+            trackEditor.RowCount += 1;
+            DataGridViewRow RowToApply = trackEditor.Rows[^1];
+            ChangeTrackName(RowToApply);
+            do {
+                RandomizeRowValues(RowToApply, seq);
+            } while (!RowToApply.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
 
             TCLE.PlaySound("UIaddrandom");
-            do {
-                RandomizeRowValues(trackEditor.CurrentRow, SequencerObjects[CurrentRow]);
-            } while (!trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
-            ShowRawTrackData(trackEditor.CurrentRow);
             randomizing = false;
             SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, "Added random object", $"{_tracks.Last().friendly_type} {_tracks.Last().friendly_param}");
         }
 
         private void btnLeafRandomValues_Click(object sender, EventArgs e)
@@ -1856,7 +1862,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     randomtype = 6;
             }
-            foreach (DataGridViewCell dgvc in dgvr.Cells) {
+            foreach (DataGridViewCell dgvc in dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                 switch (randomtype) {
                     case 2:
                         valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
