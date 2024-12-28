@@ -144,7 +144,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 145);
+            this.btnRawImport.Size = new Size(54, 147);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -221,7 +221,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 339);
+            this.vScrollBarTrackEditor.Size = new Size(15, 337);
             this.vScrollBarTrackEditor.TabIndex = 144;
             // 
             // panelZoom
@@ -321,7 +321,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(668, 339);
+            this.trackEditor.Size = new Size(668, 337);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -389,7 +389,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 339);
+            this.leafToolStrip.Size = new Size(25, 337);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -701,7 +701,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(708, 519);
-            this.splitContainerLeafSide.SplitterDistance = 369;
+            this.splitContainerLeafSide.SplitterDistance = 367;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -793,7 +793,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(170, 14);
+            this.textEditor.AutoScrollMinSize = new Size(195, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -815,7 +815,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(654, 145);
+            this.textEditor.Size = new Size(654, 147);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;

@@ -1290,6 +1290,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLeafRandom_Click(object sender, EventArgs e)
         {
             randomizing = true;
+
+            List<string> categories = TCLE.LeafObjects.Select(x => x.category).Distinct().ToList();
+            string category = categories[TCLE.rng.Next(0, categories.Count)];
+            List<Object_Params> objects = TCLE.LeafObjects.Where(x => x.category == category).ToList();
+            Object_Params obj = objects[TCLE.rng.Next(0, objects.Count)];
+
+
             btnTrackAdd_Click(null, null);
             bool rando = true;
             while (rando) {
@@ -1309,7 +1316,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIaddrandom");
             do {
                 RandomizeRowValues(trackEditor.CurrentRow, SequencerObjects[CurrentRow]);
-            } while (trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Where(x => x.Value != null).ToList().Count == 0);
+            } while (!trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
             ShowRawTrackData(trackEditor.CurrentRow);
             randomizing = false;
             SaveCheckAndWrite(false);
@@ -1325,7 +1332,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.PlaySound("UIaddrandom");
                 do {
                     RandomizeRowValues(trackEditor.CurrentRow, SequencerObjects[CurrentRow]);
-                } while (trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Where(x => x.Value != null).ToList().Count == 0);
+                } while (!trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
                 ShowRawTrackData(trackEditor.CurrentRow);
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
