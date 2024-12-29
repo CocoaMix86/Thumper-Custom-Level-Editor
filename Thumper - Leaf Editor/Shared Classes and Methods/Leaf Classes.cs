@@ -23,6 +23,7 @@ namespace Thumper_Custom_Level_Editor
     {
         public string obj_name { get; set; }
         public string param_path { get; set; }
+        public string param_path_lane { get; set; }
         public string trait_type { get; set; }
         public dynamic data_points { get; set; }
         public bool step { get; set; }
@@ -30,7 +31,7 @@ namespace Thumper_Custom_Level_Editor
         public string footer { get; set; }
         public string default_interp { get; set; }
 
-        public string friendly_type { get; set; }
+        public string category { get; set; }
         public string friendly_param { get; set; }
         public Color highlight_color { get; set; }
         public float highlight_value { get; set; }
@@ -38,6 +39,8 @@ namespace Thumper_Custom_Level_Editor
 
         public int id { get; set; }
         public bool mute { get; set; }
+        public bool expandlanes { get; set; }
+        public string friendly_lane { get; set; }
 
         public Sequencer_Object()
         {
@@ -121,7 +124,7 @@ namespace Thumper_Custom_Level_Editor
             set {
                 ShowCategory = value;
                 foreach (DataGridViewRow dgvr in parent.trackEditor.Rows) {
-                    parent.ChangeTrackName(dgvr);
+                    parent.ChangeTrackName(dgvr, seq_objs[dgvr.Index]);
                 }
             }
         }
@@ -130,7 +133,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]
         [Description("")]
-        public string category => selectedobj.friendly_type;
+        public string category => selectedobj.category;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Parameter")]

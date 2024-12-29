@@ -68,7 +68,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool GlobalMute;
         private bool GlobalDisable;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
-        private Dictionary<string, string> _tracklanefriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" } };
+        private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none"} };
         private List<string> lanenames = new() { "left", "center", "right" };
         private List<Sequencer_Object> clipboardtracks = new();
         private List<SaveState> _undolistleaf = new();
@@ -218,7 +218,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             else if (e.ColumnIndex == 2 && e.RowIndex != -1) {
-                if (SequencerObjects[e.RowIndex].param_path.EndsWith(".ent"))
+                if (SequencerObjects[e.RowIndex].friendly_lane != "none")
                     e.Graphics.DrawImage(Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
             }
@@ -237,7 +237,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.ColumnIndex is 2) {
                 //only add tooltip if the object can have lanes
-                if (SequencerObjects[e.RowIndex].param_path.EndsWith(".ent"))
+                if (SequencerObjects[e.RowIndex].friendly_lane != "none")
                     trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide Lanes";
             }
         }
@@ -386,6 +386,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 if (e.ColumnIndex is 1)
                     SequencerObjects[e.RowIndex].mute = !SequencerObjects[e.RowIndex].mute;
+                if (e.ColumnIndex is 2) {
+                    SequencerObjects[e.RowIndex].expandlanes = !SequencerObjects[e.RowIndex].expandlanes;
+                    ChangeTrackName(trackEditor.Rows[e.RowIndex], SequencerObjects[e.RowIndex]);
+                }
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 //invalidate cell to repaint it to update the images
                 trackEditor.InvalidateCell(trackEditor[e.ColumnIndex, e.RowIndex]);
@@ -682,7 +686,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 //label11.Text = "Lane";
-                dropTrackLane.DataSource = new BindingSource(_tracklanefriendly, null);
+                dropTrackLane.DataSource = new BindingSource(TrackLaneFriendly, null);
                 dropTrackLane.ValueMember = "Key";
                 dropTrackLane.DisplayMember = "Value";
                 //set default lane to 'middle'
@@ -807,7 +811,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnTrackDelete_Click(object sender, EventArgs e)
         {
             bool _empty = true;
-            string data = $"{SequencerObjects[CurrentRow].friendly_type} {SequencerObjects[CurrentRow].friendly_param}";
+            string data = $"{SequencerObjects[CurrentRow].category} {SequencerObjects[CurrentRow].friendly_param}";
             List<DataGridViewRow> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
             //iterate over current row to see if any cells have data
             List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
@@ -1002,12 +1006,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //add copied Sequencer_Object to main _tracks list
                 foreach (Sequencer_Object _newtrack in clipboardtracks) {
                     _index++;
-                    SequencerObjects.Insert(_index, _newtrack.Clone());
+                    Sequencer_Object clone = _newtrack.Clone();
+                    SequencerObjects.Insert(_index, clone);
                     dgv.Rows.Insert(_index);
                     DataGridViewRow r = dgv.Rows[_index];
                     try {
                         //set the headercell names
-                        ChangeTrackName(r);
+                        ChangeTrackName(r, clone);
                         //pass _griddata per row to be imported to the DGV
                         TrackRawImport(r, _newtrack.data_points);
                     }
@@ -1051,7 +1056,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //add track to list and populate with values
             SequencerObjects[CurrentRow] = new Sequencer_Object() {
                 obj_name = objmatch.obj_name,
-                friendly_type = objmatch.category,
+                category = objmatch.category,
                 param_path = objmatch.param_path,
                 friendly_param = objmatch.param_displayname,
                 defaultvalue = float.Parse(objmatch.def),
@@ -1077,7 +1082,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //change row header to reflect what the track is
             GenerateDataPoints(trackrowapplied, _seqobj);
-            ChangeTrackName(trackrowapplied);
+            ChangeTrackName(trackrowapplied, _seqobj);
             if (!randomizing) {
                 TrackUpdateHighlighting(trackrowapplied, _seqobj);
                 TCLE.PlaySound("UIobjectadd");
@@ -1298,12 +1303,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<Object_Params> objects = TCLE.LeafObjects.Where(x => x.category == category).ToList();
             Object_Params obj = objects[TCLE.rng.Next(0, objects.Count)];
             //check if the object exists in the leaf already. If so, pick a new one
-            if (SequencerObjects.Any(x => x.friendly_type == category && x.param_path == obj.param_path))
+            if (SequencerObjects.Any(x => x.category == category && x.param_path == obj.param_path))
                 goto beginrando;
 
             Sequencer_Object seq = new() {
                 obj_name = category == "PLAY SAMPLE" ? TCLE.LvlSamples[TCLE.rng.Next(0, TCLE.LvlSamples.Count)].obj_name : obj.obj_name,
-                friendly_type = obj.category,
+                category = obj.category,
                 param_path = obj.param_path,
                 friendly_param = obj.param_displayname,
                 defaultvalue = float.Parse(obj.def),
@@ -1319,7 +1324,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Add new row and assign random data
             trackEditor.RowCount += 1;
             DataGridViewRow RowToApply = trackEditor.Rows[^1];
-            ChangeTrackName(RowToApply);
+            ChangeTrackName(RowToApply, seq);
             do {
                 RandomizeRowValues(RowToApply, seq);
             } while (!RowToApply.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
@@ -1413,23 +1418,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     defaultvalue = seq_obj["default"],
                     footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
                     //if the leaf has definitions for these, add them. If not, set to defaults
-                    param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : (string)seq_obj["param_path"],
+                    param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]).Split('.')[0],
                     highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1,
                     default_interp = ((string)seq_obj["default_interp"]) != null ? ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") : "Linear",
                     enabled = ((string)seq_obj["enabled"] ?? "True") == "True"
                 };
+                _s.param_path_lane = seq_obj.ContainsKey("param_path") && ((string)seq_obj["param_path"]).Contains('.') ? ((string)seq_obj["param_path"]).Split('.')[1] : "none";
+                _s.friendly_lane = TrackLaneFriendly[_s.param_path_lane];
                 //if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
                 if (_s.param_path == "play") {
-                    _s.friendly_type = "PLAY SAMPLE";
+                    _s.category = "PLAY SAMPLE";
                     _s.friendly_param = _s.param_path;
                 }
                 //otherwise, search _objects for the friendly names for display purposes
                 else {
                     try {
-                        string reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
-                        Object_Params objmatch = TCLE.LeafObjects.First(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace((string)_load["obj_name"], "leafname"));
+                        //string reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
+                        string reg_param = $"{_s.param_path}{(_s.param_path_lane != "none" ? ".ent" : "")}";
+                        Object_Params objmatch = TCLE.LeafObjects.First(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLeaf.Name, "leafname"));
                         _s.friendly_param = objmatch.param_displayname ?? "";
-                        _s.friendly_type = objmatch.category ?? "";
+                        _s.category = objmatch.category ?? "";
                     }
                     catch (Exception) {
                         loadfail = true;
@@ -1437,10 +1445,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                 }
                 _s.highlight_color = TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple;
+
                 //if an object can be multi-lane, it will be an .ent. Check for "." to detect this
-                if (_s.param_path.Contains('.'))
+                ///if (_s.param_path.Contains('.'))
                     //get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
-                    _s.friendly_param += $", {_tracklanefriendly[_s.param_path.Split('.')[1]]}";
+                    ///_s.friendly_param += $", {_tracklanefriendly[_s.param_path.Split('.')[1]]}";
                 //finally, add the completed seq_obj to tracks
                 leafProperties.seq_objs.Add(_s);
             }
@@ -1453,20 +1462,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             trackEditor.RowCount = SequencerObjects.Count;
             trackEditor.RowHeadersVisible = true;
+            trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             //foreach row, import data points associated with it
             foreach (DataGridViewRow r in trackEditor.Rows) {
                 try {
                     //set the headercell names
-                    ChangeTrackName(r);
+                    ChangeTrackName(r, SequencerObjects[r.Index]);
                     //pass _griddata per row to be imported to the DGV
                     TrackRawImport(r, SequencerObjects[r.Index].data_points);
                 }
                 catch (Exception) { }
             }
+
             if (loadfail) {
                 MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
             }
-            trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             //enable a bunch of elements now that a leaf is loaded.
             EnableLeafButtons(true);
             //re-set the zoom level
@@ -1585,18 +1595,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TrackUpdateHighlighting(r, SequencerObjects[r.Index]);
         }
         ///Updates row headers to be the Object and Param_Path
-        public void ChangeTrackName(DataGridViewRow r)
+        public void ChangeTrackName(DataGridViewRow r, Sequencer_Object seq)
         {
-            Color background = TCLE.Blend(SequencerObjects[r.Index].highlight_color, Color.Black, 0.4);
-            r.HeaderCell.Style.BackColor = background;
-            r.Cells[0].Style.BackColor = background;
-            r.Cells[1].Style.BackColor = background;
-            string ShowCategory = LeafProperties.showcategory ? $"[{SequencerObjects[r.Index].friendly_type}] " : "";
-            if (SequencerObjects[r.Index].friendly_type == "PLAY SAMPLE")
+            //Color background = TCLE.Blend(SequencerObjects[r.Index].highlight_color, Color.Black, 0.4);
+            //r.HeaderCell.Style.BackColor = background;
+            //r.Cells[0].Style.BackColor = background;
+            //r.Cells[1].Style.BackColor = background;
+            string ShowCategory = LeafProperties.showcategory ? $"[{seq.category}] " : "";
+            string ShowLane = seq.expandlanes ? $"{seq.friendly_param}, {seq.friendly_lane}" : seq.friendly_param;
+            if (seq.category == "PLAY SAMPLE")
                 //show the sample name instead
-                r.HeaderCell.Value = $"{ShowCategory}{SequencerObjects[r.Index].obj_name.FirstCharToUpper()}";
+                r.HeaderCell.Value = $"{ShowCategory}{seq.obj_name}";
             else
-                r.HeaderCell.Value = $"{ShowCategory}{SequencerObjects[r.Index].friendly_param.FirstCharToUpper()}";
+                r.HeaderCell.Value = $"{ShowCategory}{ShowLane}";
         }
         ///Takes values in a row and puts in them in the rich text box, condensed
         public static void GenerateDataPoints(DataGridViewRow dgvr, Sequencer_Object _seqobj)
@@ -1855,9 +1866,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     randomtype = 2;
                 else if (_seqobj.obj_name == "fade.pp")
                     randomtype = 3;
-                else if (_seqobj.friendly_type == "CAMERA")
+                else if (_seqobj.category == "CAMERA")
                     randomtype = 4;
-                else if (_seqobj.friendly_type == "GAMMA")
+                else if (_seqobj.category == "GAMMA")
                     randomtype = 5;
                 else
                     randomtype = 6;
