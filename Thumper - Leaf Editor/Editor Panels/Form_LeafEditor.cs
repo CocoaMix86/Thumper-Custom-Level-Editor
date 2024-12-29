@@ -133,7 +133,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
             vScrollBarTrackEditor.Maximum = trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10;
-            splitContainerLeafSide.Panel1.Refresh();
         }
 
         private void trackEditor_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -1462,24 +1461,31 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             trackEditor.RowCount = SequencerObjects.Count;
             trackEditor.RowHeadersVisible = true;
-            trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            int biggestheader = 0;
             //foreach row, import data points associated with it
             foreach (DataGridViewRow r in trackEditor.Rows) {
                 try {
                     //set the headercell names
                     ChangeTrackName(r, SequencerObjects[r.Index]);
-                    //pass _griddata per row to be imported to the DGV
+                    //populate the row with data points from the object
                     TrackRawImport(r, SequencerObjects[r.Index].data_points);
-                }
-                catch (Exception) { }
+                } catch (Exception) { }
+                //do this to find which header is the longest
+                int tempsize = TextRenderer.MeasureText(r.HeaderCell.Value.ToString(), r.HeaderCell.Style.Font).Width;
+                if (tempsize > biggestheader)
+                    biggestheader = tempsize;
             }
+            //set header width manually and allow resizing
+            trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            trackEditor.RowHeadersWidth = biggestheader;
 
             if (loadfail) {
                 MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
             }
-            //enable a bunch of elements now that a leaf is loaded.
+
+            //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
             EnableLeafButtons(true);
-            //re-set the zoom level
+            TrackTimeSigHighlighting();
             trackZoom_Scroll(null, null);
             trackZoomVert_Scroll(null, null);
 
@@ -1487,8 +1493,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             EditorIsSaved = true;
-
-            TrackTimeSigHighlighting();
         }
 
         ///SAVE
