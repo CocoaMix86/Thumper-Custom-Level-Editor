@@ -109,6 +109,8 @@ namespace Thumper_Custom_Level_Editor
             get => TimeSignature; 
             set {
                 TimeSignature = value;
+                if (!TCLE.TimeSignatures.Contains(value))
+                    TCLE.TimeSignatures.Add(value);
                 if (!parent.EditorIsLoading)
                     parent.TrackTimeSigHighlighting();
             }

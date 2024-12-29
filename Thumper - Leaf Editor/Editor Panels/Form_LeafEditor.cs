@@ -68,7 +68,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool GlobalMute;
         private bool GlobalDisable;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
-        private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none"} };
+        private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
         private List<string> lanenames = new() { "left", "center", "right" };
         private List<Sequencer_Object> clipboardtracks = new();
         private List<SaveState> _undolistleaf = new();
@@ -94,6 +94,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             TCLE.PlaySound("UIselect");
             panelZoom.Visible = !panelZoom.Visible;
+            panelZoom.BringToFront();
         }
 
         private void trackZoom_Scroll(object sender, EventArgs e)
@@ -719,27 +720,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if the the selected param path can be set to a lane, keep Apply button disabled until a lane is selected
             if (dropTrackLane.Enabled && dropTrackLane.SelectedIndex != -1) {
                 btnTrackApply.Enabled = true;
-            }
-        }
-        ///DROPDOWN TIMESIGS
-        private void dropTimeSig_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (EditorIsLoading)
-                return;
-            TrackTimeSigHighlighting();
-            //sets flag that leaf has unsaved changes
-            SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, "Time signature", "");
-        }
-        private void dropTimeSig_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) {
-                string s = dropTimeSig.Text;
-                // if item exists, select it. if it does not exist, add it.
-                if (!TCLE.TimeSignatures.Contains(s)) {
-                    TCLE.TimeSignatures.Add(s);
-                }
-                dropTimeSig.SelectedItem = s;
             }
         }
 
@@ -1447,17 +1427,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 //if an object can be multi-lane, it will be an .ent. Check for "." to detect this
                 ///if (_s.param_path.Contains('.'))
-                    //get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
-                    ///_s.friendly_param += $", {_tracklanefriendly[_s.param_path.Split('.')[1]]}";
+                //get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
+                ///_s.friendly_param += $", {_tracklanefriendly[_s.param_path.Split('.')[1]]}";
                 //finally, add the completed seq_obj to tracks
                 leafProperties.seq_objs.Add(_s);
             }
-            //set timesig for highlighting
-            dropTimeSig.ComboBox.DataSource = TCLE.TimeSignatures;
-            if (!TCLE.TimeSignatures.Contains(LeafProperties.timesignature)) {
-                TCLE.TimeSignatures.Add(LeafProperties.timesignature);
-            }
-            dropTimeSig.SelectedIndex = dropTimeSig.FindStringExact(LeafProperties.timesignature);
 
             trackEditor.RowCount = SequencerObjects.Count;
             trackEditor.RowHeadersVisible = true;
@@ -1469,7 +1443,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     ChangeTrackName(r, SequencerObjects[r.Index]);
                     //populate the row with data points from the object
                     TrackRawImport(r, SequencerObjects[r.Index].data_points);
-                } catch (Exception) { }
+                }
+                catch (Exception) { }
                 //do this to find which header is the longest
                 int tempsize = TextRenderer.MeasureText(r.HeaderCell.Value.ToString(), r.HeaderCell.Style.Font).Width;
                 if (tempsize > biggestheader)
@@ -1907,5 +1882,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             GenerateDataPoints(dgvr, _seqobj);
         }
         #endregion
+
+        private void Form_LeafEditor_Shown(object sender, EventArgs e)
+        {
+            vscrollbarTrackEditor_Resize();
+            trackEditor.BringToFront();
+        }
     }
 }
