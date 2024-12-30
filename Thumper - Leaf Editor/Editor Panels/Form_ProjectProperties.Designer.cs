@@ -75,7 +75,6 @@
         }
 
         #endregion
-        private Thumper_Custom_Level_Editor.TreeViewEx treeView1;
         private PropertyGrid propertyGridProject;
     }
 }
