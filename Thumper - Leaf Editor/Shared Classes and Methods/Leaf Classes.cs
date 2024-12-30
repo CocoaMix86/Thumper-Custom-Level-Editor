@@ -150,6 +150,19 @@ namespace Thumper_Custom_Level_Editor
         }
         private bool ShowCategory;
 
+        [Category​Attribute("Editor")]
+        [DisplayName("Show Grid")]
+        [Description("Shows/Hides beat column grid lines")]
+        public bool showgrid
+        {
+            get => ShowGrid;
+            set {
+                ShowGrid = value;
+                parent.trackEditor.Refresh();
+            }
+        }
+        private bool ShowGrid;
+
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]
         [Description("")]

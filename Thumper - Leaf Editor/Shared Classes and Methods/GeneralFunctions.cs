@@ -62,7 +62,7 @@ namespace Thumper_Custom_Level_Editor
                 dgvc.HeaderText = (dgvc.Index - offset).ToString();
                 dgvc.Resizable = DataGridViewTriState.False;
                 dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgvc.DividerWidth = 1;
+                dgvc.DividerWidth = 0;
                 dgvc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 dgvc.Frozen = false;
                 dgvc.MinimumWidth = 2;

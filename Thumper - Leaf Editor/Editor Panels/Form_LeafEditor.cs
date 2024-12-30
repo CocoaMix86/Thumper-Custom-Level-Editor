@@ -190,6 +190,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
+            if (e.RowIndex != -1)
+                e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+            if (e.ColumnIndex >= FrozenColumnOffset) {
+                e.AdvancedBorderStyle.Right = LeafProperties.showgrid ? DataGridViewAdvancedCellBorderStyle.Single : DataGridViewAdvancedCellBorderStyle.None;
+            }
             CellPaint(e);
         }
         private void CellPaint(DataGridViewCellPaintingEventArgs e)
@@ -363,6 +368,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(0);
+                TCLE.PlaySound("UIselect");
             }
             //test if column header was clicked for global mute
             if (e.RowIndex == -1 && e.ColumnIndex == 1) {
@@ -372,6 +378,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(1);
+                TCLE.PlaySound("UIselect");
             }
             else if (e.RowIndex == -1)
                 return;
@@ -382,8 +389,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects[e.RowIndex].enabled = !SequencerObjects[e.RowIndex].enabled;
                     RowReadOnly(!SequencerObjects[e.RowIndex].enabled, SequencerObjects[e.RowIndex]);
                 }
-                if (e.ColumnIndex is 1)
+                if (e.ColumnIndex is 1) {
                     SequencerObjects[e.RowIndex].mute = !SequencerObjects[e.RowIndex].mute;
+                }
                 if (e.ColumnIndex is 2) {
                     SequencerObjects[e.RowIndex].expandlanes = !SequencerObjects[e.RowIndex].expandlanes;
                     ChangeTrackName(SequencerObjects[e.RowIndex]);
@@ -391,6 +399,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 //invalidate cell to repaint it to update the images
                 trackEditor.InvalidateCell(trackEditor[e.ColumnIndex, e.RowIndex]);
+                TCLE.PlaySound("UIselect");
             }
             else if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
                 if (SequencerObjects[e.RowIndex].trait_type is "kTraitBool" or "kTraitAction")
@@ -411,7 +420,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex == -1 || e.RowIndex == -1)
                 return;
             DataGridView dgv = sender as DataGridView;
-            if (e.ColumnIndex is 0 or 1) {
+            if (e.ColumnIndex < FrozenColumnOffset) {
                 //do nothing
             }
             else if (e.Button == MouseButtons.Right) {
@@ -1379,7 +1388,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leafProperties = new(this, filepath) {
                 beats = (int?)_load["beat_cnt"] ?? 1,
                 timesignature = (string)_load["time_sig"] ?? "4/4",
-                showcategory = true
+                showcategory = true,
+                showgrid = true
             };
 
             //clear the DGV and prep for new data
