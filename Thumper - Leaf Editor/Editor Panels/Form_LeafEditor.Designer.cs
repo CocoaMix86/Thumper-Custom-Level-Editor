@@ -139,7 +139,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 168);
+            this.btnRawImport.Size = new Size(54, 173);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -216,7 +216,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 316);
+            this.vScrollBarTrackEditor.Size = new Size(15, 311);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -317,7 +317,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(668, 316);
+            this.trackEditor.Size = new Size(668, 311);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -327,10 +327,15 @@
             this.trackEditor.CellMouseEnter += this.trackEditor_CellMouseEnter;
             this.trackEditor.CellMouseLeave += this.trackEditor_CellMouseLeave;
             this.trackEditor.CellPainting += this.trackEditor_CellPainting;
+            this.trackEditor.CellParsing += this.trackEditor_CellParsing;
+            this.trackEditor.DataError += this.trackEditor_DataError;
             this.trackEditor.RowEnter += this.trackEditor_RowEnter;
             this.trackEditor.RowHeaderMouseClick += this.trackEditor_RowHeaderMouseClick;
             this.trackEditor.RowsAdded += this.trackEditor_RowsAdded;
             this.trackEditor.Click += this.trackEditor_Click;
+            this.trackEditor.KeyDown += this.trackEditor_KeyDown;
+            this.trackEditor.KeyPress += this.trackEditor_KeyPress;
+            this.trackEditor.KeyUp += this.trackEditor_KeyUp;
             this.trackEditor.Resize += this.trackEditor_Resize;
             // 
             // LeafEnabled
@@ -385,7 +390,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 316);
+            this.leafToolStrip.Size = new Size(25, 311);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -444,6 +449,7 @@
             this.btnTrackCopy.Name = "btnTrackCopy";
             this.btnTrackCopy.Size = new Size(24, 24);
             this.btnTrackCopy.ToolTipText = "Copy selected track";
+            this.btnTrackCopy.Click += this.btnTrackCopy_Click;
             // 
             // btnTrackPaste
             // 
@@ -454,6 +460,7 @@
             this.btnTrackPaste.Name = "btnTrackPaste";
             this.btnTrackPaste.Size = new Size(24, 24);
             this.btnTrackPaste.ToolTipText = "Paste the copied track";
+            this.btnTrackPaste.Click += this.btnTrackPaste_Click;
             // 
             // btnTrackClear
             // 
@@ -464,6 +471,7 @@
             this.btnTrackClear.Name = "btnTrackClear";
             this.btnTrackClear.Size = new Size(24, 24);
             this.btnTrackClear.ToolTipText = "Clear all values on selected track";
+            this.btnTrackClear.Click += this.btnTrackClear_Click;
             // 
             // btnTrackPlayback
             // 
@@ -658,7 +666,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(708, 519);
-            this.splitContainerLeafSide.SplitterDistance = 346;
+            this.splitContainerLeafSide.SplitterDistance = 341;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -719,7 +727,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(195, 14);
+            this.textEditor.AutoScrollMinSize = new Size(170, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -730,7 +738,6 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -742,7 +749,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(654, 168);
+            this.textEditor.Size = new Size(654, 173);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;

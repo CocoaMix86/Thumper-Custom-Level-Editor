@@ -963,7 +963,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 int _index = trackEditor.CurrentRow?.Index ?? -1;
                 //check if copied row is longer than the leaf beat length
-                int lastbeat = clipboardtracks[0].editor_row.Cells.Count;
+                int lastbeat = clipboardtracks[0].editor_row.Cells.Count - FrozenColumnOffset;
                 if (lastbeat > LeafProperties.beats) {
                     DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
                     //YES = extend the leaf and then paste
@@ -977,11 +977,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //add copied Sequencer_Object to main _tracks list
                 foreach (Sequencer_Object _newtrack in clipboardtracks) {
                     _index++;
+                    DataGridViewRow dgvr = new();
                     Sequencer_Object clone = _newtrack.Clone();
-                    dgv.Rows.Insert(_index);
-                    clone.editor_row = dgv.Rows[_index];
+                    clone.editor_row = dgvr;
                     SequencerObjects.Insert(_index, clone);
-                    DataGridViewRow r = dgv.Rows[_index];
+                    dgv.Rows.Insert(_index, dgvr);
                     try {
                         //set the headercell names
                         ChangeTrackName(clone);
@@ -1299,7 +1299,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ChangeTrackName(seq);
             do {
                 RandomizeRowValues(seq);
-            } while (!seq.data_points.Any(x => x is not null));
+            } while (!seq.data_points.Any(x => x.value is not null));
 
             TCLE.PlaySound("UIaddrandom");
             randomizing = false;
@@ -1545,7 +1545,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Import raw text from rich text box to selected row
         public void TrackRawImport(Sequencer_Object seq, List<SeqDataPoint> data_points)
         {
-            List<SeqDataPoint> DataNotNull = data_points.Where(x => x is not null && x.value is not null).ToList();
+            List<SeqDataPoint> DataNotNull = data_points.Where(x => x.value is not null).ToList();
             //check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
             //Ask the user if they want to expand the leaf to accomadate the data point
             if (DataNotNull.Count > 0 && DataNotNull.Last().beat >= LeafProperties.beats) {
@@ -1604,7 +1604,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void ShowRawTrackData(Sequencer_Object seq)
         {
-            string allcellvalues = String.Join(",", seq.data_points.Where(x => x is not null && x.value is not null).Select(x => $"{x.beat}:{x.value}"));
+            string allcellvalues = String.Join(",", seq.data_points.Where(x => x.value is not null).Select(x => $"{x.beat}:{x.value}"));
             textEditor.Text = allcellvalues;
             textEditor.ClearUndo();
             textEditor.SetSelectedLine(-1);
@@ -1723,7 +1723,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 s.Add("trait_type", seq_obj.trait_type);
                 s.Add("default_interp", $"kTraitInterp{seq_obj.default_interp}");
                 JArray datapoints = new();
-                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x is not null && x.value is not null)) {
+                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x.value is not null)) {
                     if (datapoint.value == null)
                         continue;
                     JObject d = new() {

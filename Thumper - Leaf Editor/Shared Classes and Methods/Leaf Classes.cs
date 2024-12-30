@@ -46,6 +46,9 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object()
         {
             data_points = new SeqDataPoint[255].ToList();
+            for (int x = 0; x < 255; x++) {
+                data_points[x] = new() { beat = x, value = null, interpolation = "Linear", ease = "EaseInOut" };
+            }
         }
 
         public Sequencer_Object Clone()
