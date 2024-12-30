@@ -71,23 +71,8 @@ namespace Thumper_Custom_Level_Editor
                 dgvc.DefaultCellStyle.Format = "0.###";
                 dgvc.FillWeight = 0.001F;
                 dgvc.DefaultCellStyle.Font = new Font("Consolas", 8);
+                dgvc.ReadOnly = false;
             }
-            //stylize track grid/columns
-            /*
-            for (int i = offset; i < _cells; i++) {
-                grid.Columns[i].Name = (i - offset).ToString();
-                grid.Columns[i].Resizable = DataGridViewTriState.False;
-                grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                grid.Columns[i].DividerWidth = 1;
-                grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                grid.Columns[i].Frozen = false;
-                grid.Columns[i].MinimumWidth = 2;
-                grid.Columns[i].ReadOnly = false;
-                grid.Columns[i].ValueType = typeof(decimal?);
-                grid.Columns[i].DefaultCellStyle.Format = "0.###";
-                grid.Columns[i].FillWeight = 0.001F;
-                grid.Columns[i].DefaultCellStyle.Font = new Font("Consolas", 8);
-            }*/
         }
 
         public static HashSet<Object_Params> LeafObjects = new();

@@ -253,27 +253,27 @@ Playback speed is dependant on the Master BPM.</value>
   <data name="btnLeafColors.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="btnLEafInterpLinear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -296,8 +296,8 @@ Playback speed is dependant on the Master BPM.</value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACtSURBVEhLYxgFVAMb9h39D2WisKkGRi0gCKhqgfKUDypQ
         JhwQsgCbHqxAYcpHc5kJb19CuXBAyALFKZ/fKk77ZAvlYgfyUz8FKPZ8+qo47TOGAQQtAOoRmvbmh8LU
-        z+FQIVQAlMhXnLb/L0ghNoxuATY1YFy/4p/i1M8NUKUIQE0LFKZ+KocqRQU0DSIYoCSSlaZ8soFy8QOa
-        JlNcgJAFFINRCwgCmlswUgEDAwC4/Ppyh02DKwAAAABJRU5ErkJggg==
+        z+FQIVQAlMhXnLb/L0ghNoxuATY1YFy/6J/i1M8NUKUIQE0LFKZ+KocqRQU0DSIYoCSSlaZ8soFy8QOa
+        JlNcgJAFFINRCwgCmlswUgEDAwCECvpmONxvTwAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnLeafRandomValues.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -318,12 +318,12 @@ Playback speed is dependant on the Master BPM.</value>
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFXSURBVDhPlZLBSsNAEIb35BPYgldNQQKCUhIQX6IH60OI
-        7xBM683eBfHi1YcQhNoUNC2KelPBnjyYmuzu0XX/ZEITs7Y68EObme/fmd1hxdjuJ3U3EF13IEduP+Gp
-        Ahnqbx3kqMwc7lC2twIRa0CZlOXELpWXA7DrXXyZwJLSmh8maK148t5Yqt4zV2dvXB2/cNXW/4smG5fi
-        c/MqrhGuT8fMBfh8wks6eBQlg0zCJ5yx5rUc5wmcDGj/QaidoVSt0ASnCglnzAl4kifQNgwAF4orwsiE
-        M1acP++gNfr15FS4B8L1HeDNKYE7MM9c0WwELImhYK6cgTgkvPqMi4T2mzfxMuFZYDn+tEha9ul0st59
-        XyF0FjCBuwmCkLNP4tdGJ1JrfvRkNMGGYUmcQN7ieTPp33pmtG0dxTWrE93NNVkUq15Sb/jRPUws/6NH
-        n/8XMAFse2rpGzFzD/Sc++u4AAAAAElFTkSuQmCC
+        7xBM683eBfEi+ByCUJuCpkVRbyrYkwdTk909uu6fTGhi1lYHfmgz8/07szusGNv9pO4GousO5MjtJzxV
+        IEP9rYMclZnDHcr2ViBiDSiTspzYpfJyAHa9iy8TWFJa88MErRVP3htL1Xvm6uyNq+MXrtr6f9Fk41J8
+        bl7FNcL16Zi5AJ9PeEkHj6JkkEn4hDPWvJbjPIGTAe0/CLUzlKoVmuBUIeGMOQFP8gTahgHgQnFFGJlw
+        xorz5x20Rr+enAr3QLi+A7w5JXAH5pkrmo2AJTEUzJUzEIeEV59xkdB+8yZeJjwLLMefFknLPp1O1rvv
+        K4TOAiZwN0EQcvZJ/NroRGrNj56MJtgwLIkTyFs8byb9W8+Mtq2juGZ1oru5Joti1UvqDT+6h4nlf/To
+        8/8CJoBtTy19AwDLD+KZPCBeAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnLeafAutoPlace.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
