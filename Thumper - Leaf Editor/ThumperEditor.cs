@@ -329,7 +329,7 @@ namespace Thumper_Custom_Level_Editor
                 int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
                 docs[mod(docind, docs.Count)].DockHandler.Activate();
             }
-            e.Handled = true;
+            //e.Handled = true;
         }
         #endregion
 

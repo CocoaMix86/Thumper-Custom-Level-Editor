@@ -411,6 +411,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.Button == MouseButtons.Right) {
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
+                    SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
                     TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], SequencerObjects[e.RowIndex]);
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
@@ -436,6 +437,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (Control.MouseButtons == MouseButtons.Right) {
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
+                    SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
                     TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], SequencerObjects[e.RowIndex]);
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
@@ -445,6 +447,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     CellValueChanged(e.RowIndex, e.ColumnIndex, true);
                     //_undolistleaf.RemoveAt(1);
                 }
+                ShowRawTrackData(SequencerObjects[CurrentRow]);
             }
         }
 

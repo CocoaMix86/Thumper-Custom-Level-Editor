@@ -203,6 +203,7 @@ interpolate;F7
 splitleaf;F8
 randomizerow;F9
 toggleautoplace;F10
+quick0;D0, Control
 quick1;D1, Control
 quick2;D2, Control
 quick3;D3, Control
