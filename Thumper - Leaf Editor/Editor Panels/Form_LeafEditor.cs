@@ -70,6 +70,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool GlobalDisable;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
         private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
+        private Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out"}, { "kEaseIn", "Ease In"}, { "kEaseOut", "Ease Out"} };
         private List<string> lanenames = new() { "left", "center", "right" };
         private List<Sequencer_Object> clipboardtracks = new();
         private List<SaveState> _undolistleaf = new();
@@ -397,6 +398,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         dgv[e.ColumnIndex, e.RowIndex].Value = 1m;
                         CellValueChanged(e.RowIndex, e.ColumnIndex);
                     }
+            }
+
+            if (e.ColumnIndex >= FrozenColumnOffset) {
+                leafProperties.selecteddatapoint = SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset];
+                propertyGridLeaf.Refresh();
             }
         }
 
@@ -1423,7 +1429,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         beat = dp["beat"],
                         value = dp["value"],
                         interpolation = ((string)dp["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
-                        ease = ((string)dp["ease"])?.Replace("k", "") ?? "EaseInOut"
+                        ease = Easings[(string)dp["ease"] ?? "kEaseInOut"]
                     };
                     _s.data_points[data.beat] = data;
                 }
@@ -1729,8 +1735,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     JObject d = new() {
                         { "beat", datapoint.beat },
                         { "value", decimal.Parse(datapoint.value.ToString()) },
-                        { "interp", datapoint.interpolation ?? "kTraitInterpLinear" },
-                        { "ease", datapoint.ease ?? "EaseInOut" }
+                        { "interp", $"kTraitInterp{datapoint.interpolation ?? "Linear"}" },
+                        { "ease", $"k{datapoint.ease?.Replace(" ", "") ?? "EaseInOut"}" }
                     };
 
                     datapoints.Add(d);

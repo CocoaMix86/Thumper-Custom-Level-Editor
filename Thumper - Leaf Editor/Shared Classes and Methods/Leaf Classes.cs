@@ -49,7 +49,7 @@ namespace Thumper_Custom_Level_Editor
         {
             data_points = new SeqDataPoint[255].ToList();
             for (int x = 0; x < 255; x++) {
-                data_points[x] = new() { beat = x, value = null, interpolation = "Linear", ease = "EaseInOut" };
+                data_points[x] = new() { beat = x, value = null, interpolation = "Linear", ease = "Ease In Out" };
             }
         }
 
@@ -199,6 +199,28 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        [CategoryAttribute("Sequencer Data Point")]
+        [DisplayName("Beat #")]
+        [Description("")]
+        public int datapointbeat => selecteddatapoint.beat;
+
+        [CategoryAttribute("Sequencer Data Point")]
+        [DisplayName("Value")]
+        [Description("")]
+        public object datapointvalue => selecteddatapoint.value;
+
+        [CategoryAttribute("Sequencer Data Point")]
+        [DisplayName("Interpolation")]
+        [Description("")]
+        [TypeConverter(typeof(LeafInterpolations))]
+        public string datapointinterp { get => selecteddatapoint.interpolation; set => selecteddatapoint.interpolation = value; }
+
+        [CategoryAttribute("Sequencer Data Point")]
+        [DisplayName("Easing")]
+        [Description("")]
+        [TypeConverter(typeof(LeafEasings))]
+        public string datapointease { get => selecteddatapoint.ease; set => selecteddatapoint.ease = value; }
+
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 0")]
         [Description("Use hotkey to insert this value into selected cells.")]
@@ -267,6 +289,30 @@ namespace Thumper_Custom_Level_Editor
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
         {
             return new StandardValuesCollection(TCLE.TimeSignatures);
+        }
+    }
+
+    public class LeafInterpolations : StringConverter
+    {
+        List<string> interpolations = new() { "Linear", "Quadratic", "Cubic", "Quartic", "Quintic", "Sine", "Step", "None" };
+
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
+        {
+            return new StandardValuesCollection(interpolations);
+        }
+    }
+
+    public class LeafEasings : StringConverter
+    {
+        List<string> easings = new() { "Ease In Out", "Ease In", "Ease Out" };
+
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
+        {
+            return new StandardValuesCollection(easings);
         }
     }
 
