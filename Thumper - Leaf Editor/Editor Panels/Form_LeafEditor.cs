@@ -422,6 +422,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     CellValueChanged(e.RowIndex, e.ColumnIndex, true);
                     //_undolistleaf.RemoveAt(1);
                 }
+                ShowRawTrackData(SequencerObjects[CurrentRow]);
             }
         }
         private void trackEditor_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
