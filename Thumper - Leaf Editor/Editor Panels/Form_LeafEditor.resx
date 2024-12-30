@@ -296,8 +296,8 @@ Playback speed is dependant on the Master BPM.</value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACtSURBVEhLYxgFVAMb9h39D2WisKkGRi0gCKhqgfKUDypQ
         JhwQsgCbHqxAYcpHc5kJb19CuXBAyALFKZ/fKk77ZAvlYgfyUz8FKPZ8+qo47TOGAQQtAOoRmvbmh8LU
-        z+FQIVQAlMhXnLb/L0ghNoxuATY1YFw/+5/i1M8NUKUIQE0LFKZ+KocqRQU0DSIYoCSSlaZ8soFy8QOa
-        JlNcgJAFFINRCwgCmlswUgEDAwBGRfpYScifGAAAAABJRU5ErkJggg==
+        z+FQIVQAlMhXnLb/L0ghNoxuATY1YFw/65/i1M8NUKUIQE0LFKZ+KocqRQU0DSIYoCSSlaZ8soFy8QOa
+        JlNcgJAFFINRCwgCmlswUgEDAwA9cvpWKEm2rAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnLeafRandomValues.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -317,13 +317,13 @@ Playback speed is dependant on the Master BPM.</value>
   <data name="btnLeafZoom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFWSURBVDhPlZLBSsNAEIb35BPYgldNQQKCUhIQX6IH60OI
-        7xBM683eBdGDLyIItSloWhT1poI9eTA12d2j6/7JhCZmbXXghzYz378zu8OKsd1P6m4guu5Ajtx+wlMF
-        MtTfOshRmTncoWxvBSLWgDIpy4ldKi8HYNc7/zKBJaU1P0zQWvHkvbFUvWeuzt64On7hqq3/F002LsXn
-        5lVcI1yfjpkL8MWEl3TwKEoGmYRPOGPNaznOEzgZ0P6DUDtDqVqhCU4VEs6YE/AkT6BtGAAuFFeEkQln
-        rDh/3kFr9OvJqXAPhOs7wJtTAndgnrmi2QhYEkPBXDkDcUh49RkXCe03b+JlwrPAcvxpkbTs0+lkvfu+
-        QugsYAJ3EwQhZ5/Er41OpNb86Mlogg3DkjiBvMXzZtK/9cxo2zqKa1YnuptrsihWvaTe8KN7mFj+R48+
-        /y9gAtj21NI3x/gPzcOq5iIAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFWSURBVDhPlZLBSsNAEIb35BPYgldNQQKCUhoQX6IH60OI
+        7xBM6s3eBenFFxGE2hQ0LYp6U8GePJia7O7Rdf9kQhOztjrwQ5uZ79+Z3WHF2B0kdScQXWcox84g4akC
+        GepvPnJUZg5nJDs7gYg1oEzKcmKfyssB2HH7XyawpLTmhwlaK558MJGq98xV/42r0xeuOvp/0WTrUnxu
+        X8U1wvXpmLkAX0x5SUePomSQSXiEM9a8lpM8gZMBHT4ItTeSqh2a4FQh4Yy1Ap7kCbQNA8CF4oowMuGM
+        FefPO2iPfz05Fe6BcH0HeHNK4A7MM1c0HwFLYihYqNZQHBNefcZlQvvNm3iV8CywHH9aJC37fDbd7L6v
+        EToPmMDdBEHI2Wfxa8OP1IYXPRlNsGFYklYgb/G8mfRvPTPatk7imuVHdwtNlsW6m9QbXnQPE8v76NHn
+        /wVMANuuWvkGv9wPypHX73oAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnLeafAutoPlace.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
