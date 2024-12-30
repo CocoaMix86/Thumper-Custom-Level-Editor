@@ -1284,7 +1284,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 highlight_value = 1,
                 footer = obj.footer,
                 default_interp = "Linear",
-                enabled = true
+                enabled = true,
+                param_path_lane = obj.param_path.EndsWith(".ent") ? "ent" : "none",
+                friendly_lane = obj.param_path.EndsWith(".ent") ? "lane center" : "none"
             };
             SequencerObjects.Add(seq);
             //Add new row and assign random data
