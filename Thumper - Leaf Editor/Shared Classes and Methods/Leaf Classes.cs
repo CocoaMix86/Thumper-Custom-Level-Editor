@@ -25,7 +25,7 @@ namespace Thumper_Custom_Level_Editor
         public string param_path { get; set; }
         public string param_path_lane { get; set; }
         public string trait_type { get; set; }
-        public dynamic data_points { get; set; }
+        public List<SeqDataPoint> data_points { get; set; }
         public bool step { get; set; }
         public float defaultvalue { get; set; }
         public string footer { get; set; }
@@ -41,15 +41,25 @@ namespace Thumper_Custom_Level_Editor
         public bool mute { get; set; }
         public bool expandlanes { get; set; }
         public string friendly_lane { get; set; }
+        public DataGridViewRow editor_row { get; set; }
 
         public Sequencer_Object()
         {
+            data_points = new SeqDataPoint[255].ToList();
         }
 
         public Sequencer_Object Clone()
         {
             return (Sequencer_Object)MemberwiseClone();
         }
+    }
+
+    public class SeqDataPoint
+    {
+        public int beat { get; set; }
+        public object value { get; set; }
+        public string interpolation { get; set; }
+        public string ease { get; set; }
     }
 
     public class LeafProperties
@@ -82,7 +92,7 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public FileInfo FilePath;
 
-        [CategoryAttribute("Options")]
+        [CategoryAttribute("Leaf Options")]
         [DisplayName("Leaf Length")]
         [Description("How many beats long this sequencer/leaf is.")]
         public int beats
@@ -100,7 +110,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private int Beats;
 
-        [Category​Attribute("Options")]
+        [Category​Attribute("Editor")]
         [DisplayName("Time Signature")]
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         [TypeConverter(typeof(LeafTimeSignatures))]
@@ -117,7 +127,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private string TimeSignature;
 
-        [Category​Attribute("Options")]
+        [Category​Attribute("Editor")]
         [DisplayName("Show Category Name")]
         [Description("Shows/Hides the category names on the sequencer row headers.")]
         public bool showcategory
@@ -125,8 +135,8 @@ namespace Thumper_Custom_Level_Editor
             get => ShowCategory; 
             set {
                 ShowCategory = value;
-                foreach (DataGridViewRow dgvr in parent.trackEditor.Rows) {
-                    parent.ChangeTrackName(dgvr, seq_objs[dgvr.Index]);
+                foreach (Sequencer_Object seq in seq_objs) {
+                    parent.ChangeTrackName(seq);
                 }
             }
         }
@@ -165,7 +175,7 @@ namespace Thumper_Custom_Level_Editor
             get => selectedobj.highlight_color;
             set { 
                 selectedobj.highlight_color = value;
-                Form_LeafEditor.TrackUpdateHighlighting(parent.trackEditor.CurrentRow, selectedobj);
+                Form_LeafEditor.TrackUpdateHighlighting(selectedobj);
             }
         }
 
@@ -177,7 +187,7 @@ namespace Thumper_Custom_Level_Editor
             get => selectedobj.highlight_value;
             set {
                 selectedobj.highlight_value = value;
-                Form_LeafEditor.TrackUpdateHighlighting(parent.trackEditor.CurrentRow, selectedobj);
+                Form_LeafEditor.TrackUpdateHighlighting(selectedobj);
             }
         }
 

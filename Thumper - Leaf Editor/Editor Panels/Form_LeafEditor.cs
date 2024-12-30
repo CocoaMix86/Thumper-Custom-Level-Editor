@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -258,7 +259,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ismoving)
                 return;
             CurrentRow = e.RowIndex;
-            ShowRawTrackData(trackEditor.Rows[e.RowIndex]);
+            ShowRawTrackData(SequencerObjects[e.RowIndex]);
             leafProperties.selectedobj = SequencerObjects[e.RowIndex];
             propertyGridLeaf.Refresh();
             /*
@@ -323,8 +324,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         changes = true;
                     }
 
-                    if (!edited.Contains(_cell.OwningRow))
-                        edited.Add(_cell.OwningRow);
+                    SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex].value = _val;
+
+                    ///if (!edited.Contains(_cell.OwningRow))
+                        ///edited.Add(_cell.OwningRow);
 
                     TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);
                 }
@@ -340,9 +343,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             catch { }
 
-            foreach (DataGridViewRow r in edited)
-                GenerateDataPoints(r, SequencerObjects[r.Index]);
-            ShowRawTrackData(trackEditor.Rows[rowindex]);
+            ///foreach (DataGridViewRow r in edited)
+                ///GenerateDataPoints(r, SequencerObjects[r.Index]);
+            ShowRawTrackData(SequencerObjects[rowindex]);
         }
 
         private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -361,7 +364,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GlobalDisable = !GlobalDisable;
                 foreach (Sequencer_Object seq in SequencerObjects) {
                     seq.enabled = !GlobalDisable;
-                    RowReadOnly(trackEditor.Rows[SequencerObjects.IndexOf(seq)], GlobalDisable, seq);
+                    RowReadOnly(GlobalDisable, seq);
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(0);
@@ -382,13 +385,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.ColumnIndex is 0 or 1 or 2) {
                 if (e.ColumnIndex is 0) {
                     SequencerObjects[e.RowIndex].enabled = !SequencerObjects[e.RowIndex].enabled;
-                    RowReadOnly(trackEditor.Rows[e.RowIndex], !SequencerObjects[e.RowIndex].enabled, SequencerObjects[e.RowIndex]);
+                    RowReadOnly(!SequencerObjects[e.RowIndex].enabled, SequencerObjects[e.RowIndex]);
                 }
                 if (e.ColumnIndex is 1)
                     SequencerObjects[e.RowIndex].mute = !SequencerObjects[e.RowIndex].mute;
                 if (e.ColumnIndex is 2) {
                     SequencerObjects[e.RowIndex].expandlanes = !SequencerObjects[e.RowIndex].expandlanes;
-                    ChangeTrackName(trackEditor.Rows[e.RowIndex], SequencerObjects[e.RowIndex]);
+                    ChangeTrackName(SequencerObjects[e.RowIndex]);
                 }
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 //invalidate cell to repaint it to update the images
@@ -415,7 +418,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], SequencerObjects[e.RowIndex]);
-                    GenerateDataPoints(dgv.Rows[e.RowIndex], SequencerObjects[e.RowIndex]);
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
                 }
@@ -441,7 +443,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], SequencerObjects[e.RowIndex]);
-                    GenerateDataPoints(dgv.Rows[e.RowIndex], SequencerObjects[e.RowIndex]);
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
                 }
@@ -529,14 +530,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             //don't paste if cell is blank
                             if (!string.IsNullOrEmpty(cells[i])) {
                                 trackEditor[col + i, row + _line].Value = decimal.Parse(cells[i]);
+                                SequencerObjects[row + _line].data_points[col + i].value = decimal.Parse(cells[i]);
                                 TrackUpdateHighlightingSingleCell(trackEditor[col + i, row + _line], SequencerObjects[row + _line]);
                             }
-                            if (!edited.Contains(trackEditor[col + i, row + _line].OwningRow))
-                                edited.Add(trackEditor[col + i, row + _line].OwningRow);
                         }
                     }
-                    foreach (DataGridViewRow r in edited)
-                        GenerateDataPoints(r, SequencerObjects[r.Index]);
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, $"Pasted cells", $"");
                 }
@@ -777,9 +775,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (loadedleaf == null)
                 return;
             try {
-                TrackRawImport(trackEditor.CurrentRow, JObject.Parse($"{{{textEditor.Text}}}"));
-                TrackUpdateHighlighting(trackEditor.CurrentRow, SequencerObjects[CurrentRow]);
-                GenerateDataPoints(trackEditor.CurrentRow, SequencerObjects[CurrentRow]);
+                TrackRawImport(SequencerObjects[CurrentRow], JObject.Parse($"{{{textEditor.Text}}}"));
+                TrackUpdateHighlighting(SequencerObjects[CurrentRow]);
             }
             catch (JsonReaderException ex) {
                 MessageBox.Show($"Invalid format or characters in imported data. Please fix.\n\n{ex.Message}", "Thumper Custom Editor Level");
@@ -966,12 +963,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 int _index = trackEditor.CurrentRow?.Index ?? -1;
                 //check if copied row is longer than the leaf beat length
-                int lastbeat;
-                List<JProperty> jj = ((JObject)clipboardtracks[0].data_points).Properties().ToList();
-                if (jj.Count <= 1)
+                int lastbeat = clipboardtracks[0].data_points.Count;
+                if (lastbeat <= 1)
                     lastbeat = 1;
                 else
-                    lastbeat = int.Parse(jj.Last().Name) + 1;
+                    lastbeat = clipboardtracks[0].data_points.Last(x => x.value is not null).beat + 1;
                 if (lastbeat > LeafProperties.beats) {
                     DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
                     //YES = extend the leaf and then paste
@@ -986,14 +982,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (Sequencer_Object _newtrack in clipboardtracks) {
                     _index++;
                     Sequencer_Object clone = _newtrack.Clone();
-                    SequencerObjects.Insert(_index, clone);
                     dgv.Rows.Insert(_index);
+                    clone.editor_row = dgv.Rows[_index];
+                    SequencerObjects.Insert(_index, clone);
                     DataGridViewRow r = dgv.Rows[_index];
                     try {
                         //set the headercell names
-                        ChangeTrackName(r, clone);
+                        ChangeTrackName(clone);
                         //pass _griddata per row to be imported to the DGV
-                        TrackRawImport(r, _newtrack.data_points);
+                        TrackRawImport(clone, _newtrack.data_points);
                     }
                     catch (Exception) { }
                 }
@@ -1060,10 +1057,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _seqobj.friendly_param += ", " + dropTrackLane.Text;
             }
             //change row header to reflect what the track is
-            GenerateDataPoints(trackrowapplied, _seqobj);
-            ChangeTrackName(trackrowapplied, _seqobj);
+            ChangeTrackName(_seqobj);
             if (!randomizing) {
-                TrackUpdateHighlighting(trackrowapplied, _seqobj);
+                TrackUpdateHighlighting(_seqobj);
                 TCLE.PlaySound("UIobjectadd");
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Applied Object settings", $"{_seqobj.friendly_type} {_seqobj.friendly_param}");
@@ -1101,7 +1097,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 for (int x = 0; x < SequencerObjects.Count && x < _colors.Length; x++) {
                     SequencerObjects[x].highlight_color = Color.FromArgb(int.Parse(_colors[x]));
                     //call this method to update the colors once the value has been assigned
-                    TrackUpdateHighlighting(trackEditor.Rows[x], SequencerObjects[x]);
+                    TrackUpdateHighlighting(SequencerObjects[x]);
                 }
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Imported colors", "");
@@ -1131,18 +1127,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             decimal _inc = _start;
             int _beats = _listcell[1].ColumnIndex - _listcell[0].ColumnIndex;
             decimal _diff = TCLE.TruncateDecimal((_end - _start) / _beats, 3);
+            Sequencer_Object interpobject = SequencerObjects[_listcell[0].RowIndex];
 
             for (int x = 1; x < _beats; x++) {
                 _inc += _diff;
                 //if interpolating for Color, remove the decimals
-                if (SequencerObjects[_listcell[0].RowIndex].trait_type == "kTraitColor")
+                if (interpobject.trait_type == "kTraitColor")
                     _inc = Math.Truncate(_inc);
-                trackEditor[_listcell[0].ColumnIndex + x, _listcell[0].RowIndex].Value = _inc;
+                interpobject.editor_row.Cells[_listcell[0].ColumnIndex + x].Value = _inc;
+                interpobject.data_points[_listcell[0].ColumnIndex + x - FrozenColumnOffset].value = _inc;
             }
             //recolor cells after populating
-            TrackUpdateHighlighting(trackEditor.Rows[_listcell[0].RowIndex], SequencerObjects[_listcell[0].RowIndex]);
-            GenerateDataPoints(trackEditor.Rows[_listcell[0].RowIndex], SequencerObjects[_listcell[0].RowIndex]);
-            ShowRawTrackData(trackEditor.Rows[_listcell[0].RowIndex]);
+            TrackUpdateHighlighting(SequencerObjects[_listcell[0].RowIndex]);
+            ShowRawTrackData(SequencerObjects[_listcell[0].RowIndex]);
             TCLE.PlaySound("UIinterpolate");
             SaveCheckAndWrite(false);
             //SaveCheckAndWrite(false, $"Interpolated cells {_listcell[0].ColumnIndex} -> {_listcell[1].ColumnIndex}", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
@@ -1302,11 +1299,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SequencerObjects.Add(seq);
             //Add new row and assign random data
             trackEditor.RowCount += 1;
-            DataGridViewRow RowToApply = trackEditor.Rows[^1];
-            ChangeTrackName(RowToApply, seq);
+            seq.editor_row = trackEditor.Rows[^1];
+            ChangeTrackName(seq);
             do {
-                RandomizeRowValues(RowToApply, seq);
-            } while (!RowToApply.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
+                RandomizeRowValues(seq);
+            } while (!seq.data_points.Any(x => x is not null));
 
             TCLE.PlaySound("UIaddrandom");
             randomizing = false;
@@ -1321,9 +1318,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (MessageBox.Show("Assign random values to the current selected track?", "Confirm randomization", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 TCLE.PlaySound("UIaddrandom");
                 do {
-                    RandomizeRowValues(trackEditor.CurrentRow, SequencerObjects[CurrentRow]);
+                    RandomizeRowValues(SequencerObjects[CurrentRow]);
                 } while (!trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
-                ShowRawTrackData(trackEditor.CurrentRow);
+                ShowRawTrackData(SequencerObjects[CurrentRow]);
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
             }
@@ -1386,13 +1383,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //clear the DGV and prep for new data
             trackEditor.Rows.Clear();
             LeafLengthChanged();
+            trackEditor.RowHeadersVisible = true;
+            int biggestheader = 0;
 
             //each object in the seq_objs[] list becomes a track
             foreach (dynamic seq_obj in _load["seq_objs"]) {
                 Sequencer_Object _s = new() {
                     obj_name = seq_obj["obj_name"],
                     trait_type = seq_obj["trait_type"],
-                    data_points = seq_obj["data_points"],
                     step = (string)seq_obj["step"] == "True",
                     defaultvalue = seq_obj["default"],
                     footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
@@ -1424,31 +1422,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                 }
                 _s.highlight_color = TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple;
-
-                //if an object can be multi-lane, it will be an .ent. Check for "." to detect this
-                ///if (_s.param_path.Contains('.'))
-                //get the index of the lane from _tracklane to get the item from dropTrackLane, and append that to the friendly_param
-                ///_s.friendly_param += $", {_tracklanefriendly[_s.param_path.Split('.')[1]]}";
-                //finally, add the completed seq_obj to tracks
-                leafProperties.seq_objs.Add(_s);
-            }
-
-            trackEditor.RowCount = SequencerObjects.Count;
-            trackEditor.RowHeadersVisible = true;
-            int biggestheader = 0;
-            //foreach row, import data points associated with it
-            foreach (DataGridViewRow r in trackEditor.Rows) {
-                try {
-                    //set the headercell names
-                    ChangeTrackName(r, SequencerObjects[r.Index]);
-                    //populate the row with data points from the object
-                    TrackRawImport(r, SequencerObjects[r.Index].data_points);
+                foreach (dynamic dp in seq_obj["data_points"]) {
+                    SeqDataPoint data = new() {
+                        beat = dp["beat"],
+                        value = dp["value"],
+                        interpolation = ((string)dp["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
+                        ease = ((string)dp["ease"])?.Replace("k", "") ?? "EaseInOut"
+                    };
+                    _s.data_points[data.beat] = data;
                 }
-                catch (Exception) { }
+                //attach the dgv row to the object
+                DataGridViewRow dgvr = new() { };
+                trackEditor.Rows.Add(dgvr);
+                _s.editor_row = trackEditor.Rows[^1];
+                ChangeTrackName(_s);
+                TrackRawImport(_s, _s.data_points);
                 //do this to find which header is the longest
-                int tempsize = TextRenderer.MeasureText(r.HeaderCell.Value.ToString(), r.HeaderCell.Style.Font).Width;
+                int tempsize = TextRenderer.MeasureText(_s.editor_row.HeaderCell.Value.ToString(), _s.editor_row.HeaderCell.Style.Font).Width;
                 if (tempsize > biggestheader)
                     biggestheader = tempsize;
+                //hide non center rows
+                if (_s.friendly_lane is not "none" and not "lane center")
+                    _s.editor_row.Visible = false;
+                //finally, add the completed seq_obj to tracks
+                leafProperties.seq_objs.Add(_s);
             }
             //set header width manually and allow resizing
             trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
@@ -1550,31 +1547,51 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Import raw text from rich text box to selected row
-        public void TrackRawImport(DataGridViewRow r, JObject _rawdata)
+        public void TrackRawImport(Sequencer_Object seq, List<SeqDataPoint> data_points)
         {
-            if (SequencerObjects.Count == 0)
-                return;
+            List<SeqDataPoint> DataNotNull = data_points.Where(x => x is not null && x.value is not null).ToList();
+            //check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
+            //Ask the user if they want to expand the leaf to accomadate the data point
+            if (DataNotNull.Count > 0 && DataNotNull.Last().beat >= LeafProperties.beats) {
+                if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {seq.editor_row.HeaderCell.Value}\nData point: {DataNotNull.Last()}", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    LeafProperties.beats = DataNotNull.Last().beat + 1;
+            }
+            //iterate over each data point, and fill cells
+            foreach (SeqDataPoint data_point in DataNotNull) {
+                try {
+                    seq.editor_row.Cells[data_point.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
+                    seq.data_points[data_point.beat].value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
+                }
+                catch (ArgumentOutOfRangeException) { }
+            }
+
+            TrackUpdateHighlighting(seq);
+        }
+        public void TrackRawImport(Sequencer_Object seq, JObject _rawdata)
+        {
             //_rawdata contains a list of all data points. By getting Properties() of it,
             //each point becomes its own index
             List<JProperty> data_points = _rawdata.Properties().ToList();
             //check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
             //Ask the user if they want to expand the leaf to accomadate the data point
-            if (data_points.Count > 0 && int.Parse((data_points.Last()).Name) >= r.Cells.Count) {
-                if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {r.HeaderCell.Value}\nData point: {data_points.Last()}", "Leaf too short", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (data_points.Count > 0 && int.Parse((data_points.Last()).Name) >= LeafProperties.beats) {
+                if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {seq.editor_row.HeaderCell.Value}\nData point: {data_points.Last()}", "Leaf too short", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     LeafProperties.beats = int.Parse((data_points.Last()).Name) + 1;
             }
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
                 try {
-                    r.Cells[int.Parse(data_point.Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    seq.editor_row.Cells[int.Parse(data_point.Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                 }
                 catch (ArgumentOutOfRangeException) { }
             }
 
-            TrackUpdateHighlighting(r, SequencerObjects[r.Index]);
+            TrackUpdateHighlighting(seq);
         }
+
         ///Updates row headers to be the Object and Param_Path
-        public void ChangeTrackName(DataGridViewRow r, Sequencer_Object seq)
+        public void ChangeTrackName(Sequencer_Object seq)
         {
             //Color background = TCLE.Blend(SequencerObjects[r.Index].highlight_color, Color.Black, 0.4);
             //r.HeaderCell.Style.BackColor = background;
@@ -1584,25 +1601,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string ShowLane = seq.expandlanes ? $"{seq.friendly_param}, {seq.friendly_lane}" : seq.friendly_param;
             if (seq.category == "PLAY SAMPLE")
                 //show the sample name instead
-                r.HeaderCell.Value = $"{ShowCategory}{seq.obj_name}";
+                seq.editor_row.HeaderCell.Value = $"{ShowCategory}{seq.obj_name}";
             else
-                r.HeaderCell.Value = $"{ShowCategory}{ShowLane}";
+                seq.editor_row.HeaderCell.Value = $"{ShowCategory}{ShowLane}";
         }
+
         ///Takes values in a row and puts in them in the rich text box, condensed
-        public static void GenerateDataPoints(DataGridViewRow dgvr, Sequencer_Object _seqobj)
+        /*public static void GenerateDataPoints(DataGridViewRow dgvr, Sequencer_Object _seqobj)
         {
             //iterate over each cell of the selected row
             string allcellvalues = String.Join(",", dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.Value is not null or "").Select(x => $"{x.ColumnIndex}:{x.Value}"));
             object jobj = JsonConvert.DeserializeObject($"{{{allcellvalues}}}");
             _seqobj.data_points = jobj;
-        }
-        public void ShowRawTrackData(DataGridViewRow dgvr)
+        }*/
+
+        public void ShowRawTrackData(Sequencer_Object seq)
         {
-            string allcellvalues = String.Join(",", dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.Value is not null or "").Select(x => $"{x.ColumnIndex}:{x.Value}"));
+            string allcellvalues = String.Join(",", seq.data_points.Where(x => x is not null && x.value is not null).Select(x => $"{x.beat}:{x.value}"));
             textEditor.Text = allcellvalues;
             textEditor.ClearUndo();
             textEditor.SetSelectedLine(-1);
         }
+
         ///Updates column highlighting in the DGV based on time sig
         public void TrackTimeSigHighlighting()
         {
@@ -1618,19 +1638,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(40, 40, 40) : Color.FromArgb(30, 30, 30);
             }
         }
+
         ///Updates cell highlighting in the DGV
-        public static void TrackUpdateHighlighting(DataGridViewRow r, Sequencer_Object _seqobj)
+        public static void TrackUpdateHighlighting(Sequencer_Object _seqobj)
         {
             Color background = TCLE.Blend(_seqobj.highlight_color, Color.Black, 0.4);
-            r.HeaderCell.Style.BackColor = background;
+            _seqobj.editor_row.HeaderCell.Style.BackColor = background;
             //iterate over all cells in the row
-            foreach (DataGridViewCell dgvc in r.Cells) {
+            foreach (DataGridViewCell dgvc in _seqobj.editor_row.Cells) {
                 TrackUpdateHighlightingSingleCell(dgvc, _seqobj);
             }
-            r.Cells[0].Style.BackColor = background;
-            r.Cells[1].Style.BackColor = background;
-            r.Cells[2].Style.BackColor = background;
+            _seqobj.editor_row.Cells[0].Style.BackColor = background;
+            _seqobj.editor_row.Cells[1].Style.BackColor = background;
+            _seqobj.editor_row.Cells[2].Style.BackColor = background;
         }
+
         public static void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc, Sequencer_Object _seqobj)
         {
             dgvc.Style = null;
@@ -1655,21 +1677,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvc.Style.ForeColor = Color.Black;
         }
 
-        private static void RowReadOnly(DataGridViewRow dgvr, bool isreadonly, Sequencer_Object seq)
+        private static void RowReadOnly(bool isreadonly, Sequencer_Object seq)
         {
             if (isreadonly) {
-                dgvr.ReadOnly = true;
-                foreach (DataGridViewCell dgvc in dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+                seq.editor_row.ReadOnly = true;
+                foreach (DataGridViewCell dgvc in seq.editor_row.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                     dgvc.Style.BackColor = Color.Gray;
                     dgvc.Style.SelectionBackColor = Color.Gray;
                 }
             }
             else {
-                dgvr.ReadOnly = false;
-                foreach (DataGridViewCell dgvc in dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+                seq.editor_row.ReadOnly = false;
+                foreach (DataGridViewCell dgvc in seq.editor_row.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                     dgvc.Style = null;
                 }
-                TrackUpdateHighlighting(dgvr, seq);
+                TrackUpdateHighlighting(seq);
             }
         }
 
@@ -1713,7 +1735,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     s.Add("param_path", seq_obj.param_path);
                 s.Add("trait_type", seq_obj.trait_type);
                 s.Add("default_interp", $"kTraitInterp{seq_obj.default_interp}");
-                s.Add("data_points", seq_obj.data_points);
+                JArray datapoints = new();
+                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x is not null)) {
+                    if (datapoint.value == null)
+                        continue;
+                    JObject d = new() {
+                        { "beat", datapoint.beat },
+                        { "value", decimal.Parse(datapoint.value.ToString()) },
+                        { "interp", datapoint.interpolation ?? "kTraitInterpLinear" },
+                        { "ease", datapoint.ease ?? "EaseInOut" }
+                    };
+
+                    datapoints.Add(d);
+                }
+                s.Add("data_points", datapoints);
                 ///end
                 //add the rest of the keys to this seq_obj
                 s.Add("step", seq_obj.step.ToString());
@@ -1816,7 +1851,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///
 
 
-        public static void RandomizeRowValues(DataGridViewRow dgvr, Sequencer_Object _seqobj)
+        public static void RandomizeRowValues(Sequencer_Object seq)
         {
             Random rng = new();
             int rngchance;
@@ -1824,16 +1859,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int randomtype = 0;
             decimal valueiftrue = 0;
 
-            if ((_seqobj.trait_type is "kTraitBool" or "kTraitAction") || (_seqobj.param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
+            if ((seq.trait_type is "kTraitBool" or "kTraitAction") || (seq.param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
                 valueiftrue = 1;
                 rngchance = 10;
                 rnglimit = 9;
-                if (_seqobj.obj_name == "sentry.spn") {
+                if (seq.obj_name == "sentry.spn") {
                     rngchance = 55;
                     rnglimit = 54;
                 }
             }
-            else if (_seqobj.trait_type == "kTraitColor") {
+            else if (seq.trait_type == "kTraitColor") {
                 randomtype = 7;
                 rngchance = 10;
                 rnglimit = 8;
@@ -1841,18 +1876,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 rngchance = 10;
                 rnglimit = 9;
-                if (_seqobj.param_path == "sequin_speed")
+                if (seq.param_path == "sequin_speed")
                     randomtype = 2;
-                else if (_seqobj.obj_name == "fade.pp")
+                else if (seq.obj_name == "fade.pp")
                     randomtype = 3;
-                else if (_seqobj.category == "CAMERA")
+                else if (seq.category == "CAMERA")
                     randomtype = 4;
-                else if (_seqobj.category == "GAMMA")
+                else if (seq.category == "GAMMA")
                     randomtype = 5;
                 else
                     randomtype = 6;
             }
-            foreach (DataGridViewCell dgvc in dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+            foreach (DataGridViewCell dgvc in seq.editor_row.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                 switch (randomtype) {
                     case 2:
                         valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
@@ -1876,10 +1911,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         break;
                 }
 
-                dgvc.Value = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
+                object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
+                dgvc.Value = _out;
+                seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { beat = dgvc.ColumnIndex - FrozenColumnOffset, value = _out };
             }
-            TrackUpdateHighlighting(dgvr, _seqobj);
-            GenerateDataPoints(dgvr, _seqobj);
+            TrackUpdateHighlighting(seq);
+            ///GenerateDataPoints(dgvr, seq);
         }
         #endregion
 
