@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
+using System.Drawing.Drawing2D;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -190,8 +189,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex != -1)
+            if (e.RowIndex != -1) {
                 e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+
+                if (e.ColumnIndex != -1 && SequencerObjects[e.RowIndex].trait_type == "kTraitBool") {
+                    if (e.Value != null) { 
+                        GraphicsPath path = new GraphicsPath();
+                        path.AddLine(e.CellBounds.Left, e.CellBounds.Height / 2, e.CellBounds.Width / 2, e.CellBounds.Top);
+                        path.AddLine(e.CellBounds.Width / 2, e.CellBounds.Top, e.CellBounds.Right, e.CellBounds.Height / 2);
+                        path.AddLine(e.CellBounds.Right, e.CellBounds.Height / 2, e.CellBounds.Width / 2, e.CellBounds.Bottom);
+                        path.AddLine(e.CellBounds.Width / 2, e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Height / 2);
+                        SolidBrush fill = new SolidBrush(SequencerObjects[e.RowIndex].highlight_color);
+                        e.Graphics.FillPath(fill, path);
+                    }
+                }
+            }
             if (e.ColumnIndex >= FrozenColumnOffset) {
                 e.AdvancedBorderStyle.Right = LeafProperties.showgrid ? DataGridViewAdvancedCellBorderStyle.Single : DataGridViewAdvancedCellBorderStyle.None;
             }
