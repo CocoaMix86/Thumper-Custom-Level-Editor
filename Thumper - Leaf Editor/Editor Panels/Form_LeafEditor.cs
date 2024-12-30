@@ -963,11 +963,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 int _index = trackEditor.CurrentRow?.Index ?? -1;
                 //check if copied row is longer than the leaf beat length
-                int lastbeat = clipboardtracks[0].data_points.Count;
-                if (lastbeat <= 1)
-                    lastbeat = 1;
-                else
-                    lastbeat = clipboardtracks[0].data_points.Last(x => x.value is not null).beat + 1;
+                int lastbeat = clipboardtracks[0].editor_row.Cells.Count;
                 if (lastbeat > LeafProperties.beats) {
                     DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
                     //YES = extend the leaf and then paste
@@ -1606,15 +1602,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 seq.editor_row.HeaderCell.Value = $"{ShowCategory}{ShowLane}";
         }
 
-        ///Takes values in a row and puts in them in the rich text box, condensed
-        /*public static void GenerateDataPoints(DataGridViewRow dgvr, Sequencer_Object _seqobj)
-        {
-            //iterate over each cell of the selected row
-            string allcellvalues = String.Join(",", dgvr.Cells.Cast<DataGridViewCell>().Where(x => x.Value is not null or "").Select(x => $"{x.ColumnIndex}:{x.Value}"));
-            object jobj = JsonConvert.DeserializeObject($"{{{allcellvalues}}}");
-            _seqobj.data_points = jobj;
-        }*/
-
         public void ShowRawTrackData(Sequencer_Object seq)
         {
             string allcellvalues = String.Join(",", seq.data_points.Where(x => x is not null && x.value is not null).Select(x => $"{x.beat}:{x.value}"));
@@ -1736,7 +1723,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 s.Add("trait_type", seq_obj.trait_type);
                 s.Add("default_interp", $"kTraitInterp{seq_obj.default_interp}");
                 JArray datapoints = new();
-                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x is not null)) {
+                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x is not null && x.value is not null)) {
                     if (datapoint.value == null)
                         continue;
                     JObject d = new() {
