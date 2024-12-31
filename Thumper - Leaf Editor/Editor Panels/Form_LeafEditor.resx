@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
-    Microsoft ResX Schema
+    Microsoft ResX Schema 
 
     Version 2.0
 
@@ -48,7 +48,7 @@
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
@@ -296,8 +296,8 @@ Playback speed is dependant on the Master BPM.</value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACtSURBVEhLYxgFVAMb9h39D2WisKkGRi0gCKhqgfKUDypQ
         JhwQsgCbHqxAYcpHc5kJb19CuXBAyALFKZ/fKk77ZAvlYgfyUz8FKPZ8+qo47TOGAQQtAOoRmvbmh8LU
-        z+FQIVQAlMhXnLb/L0ghNoxuATY1YFzf8E9x6ucGqFIEoKYFClM/lUOVogKaBhEMUBLJSlM+2UC5+AFN
-        kykuQMgCisGoBQQBzS0YqYCBAQBX9foiEWxXoQAAAABJRU5ErkJggg==
+        z+FQIVQAlMhXnLb/L0ghNoxuATY1YFxf/09x6ucGqFIEoKYFClM/lUOVogKaBhEMUBLJSlM+2UC5+AFN
+        kykuQMgCisGoBQQBzS0YqYCBAQBPIvogk1jmfAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnLeafRandomValues.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -319,11 +319,11 @@ Playback speed is dependant on the Master BPM.</value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFVSURBVDhPlZLBSsNAEIb35BPYgldNQQKCUhIQX6IH60OI
         7xBM6s3eBfHiiwhCbQqaFkW9qWBPHowm2T267p9M6MasrQ780Gbm+3dmd5ge24O06Ya85w7F2B2kWa5Q
-        ROpbgByVmcMdie5WyBMFSJOKHN+l8moAdr3gywRWlNf8MEFr+sl7EyH7T5k8e83k8XMmu+q/brJxwT83
+        ROpbgByVmcMdie5WyBMFSJOKHN+l8moAdj3vywRWlNf8MEFr+sl7EyH7T5k8e83k8XMmu+q/brJxwT83
         L5MG4ep0zKzB59OsooMHXjEoxH3CGWtfiUmZwMmA9u+53BkJ2YlMcK6IcMacMEvLBNqGAWCtuCaMTDhj
         +vxlB53xryfnwj0Qru4Ab04J3IF55ppmI2BJDAVz5Qz5IeH1Z1wktN++TpYJLwLL8adFUrJPP6brvbcV
         QmcBE7ibIAg5+yR5aQWxXPPjR6MJNgxL4oTiBs9bSP1WM6Nt6yhpWEF8O9dkUax6abPlx3cwsfz3Pn3+
-        X8AEsO3JpW/s9Q98p4NTlgAAAABJRU5ErkJggg==
+        X8AEsO3JpW/MhQ9wkCQeOgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnLeafAutoPlace.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

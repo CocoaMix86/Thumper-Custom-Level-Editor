@@ -189,27 +189,36 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex != -1) {
-                e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
-
-                if (e.ColumnIndex != -1 && SequencerObjects[e.RowIndex].trait_type == "kTraitBool") {
-                    if (e.Value != null) { 
-                        GraphicsPath path = new GraphicsPath();
-                        path.AddLine(e.CellBounds.Left, e.CellBounds.Height / 2, e.CellBounds.Width / 2, e.CellBounds.Top);
-                        path.AddLine(e.CellBounds.Width / 2, e.CellBounds.Top, e.CellBounds.Right, e.CellBounds.Height / 2);
-                        path.AddLine(e.CellBounds.Right, e.CellBounds.Height / 2, e.CellBounds.Width / 2, e.CellBounds.Bottom);
-                        path.AddLine(e.CellBounds.Width / 2, e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Height / 2);
-                        SolidBrush fill = new SolidBrush(SequencerObjects[e.RowIndex].highlight_color);
-                        e.Graphics.FillPath(fill, path);
-                    }
+            //check if previous cell is the same value. If so, hide it
+            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
+                if (e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                    e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
                 }
             }
-            if (e.ColumnIndex >= FrozenColumnOffset) {
-                e.AdvancedBorderStyle.Right = LeafProperties.showgrid ? DataGridViewAdvancedCellBorderStyle.Single : DataGridViewAdvancedCellBorderStyle.None;
+
+            if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
+                //if previous cell value is different than this cell, put in a divider
+                //otherwise remove left divider to make grid thinner
+                if (e.Value?.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Outset;
+                }
+                else
+                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+                //if next cell value is same as this cell, remove the border between them
+                if (LeafProperties.showgrid && e.ColumnIndex != trackEditor.ColumnCount - 1) {
+                    if (e.Value != null && e.Value.ToString() == trackEditor[e.ColumnIndex + 1, e.RowIndex].Value?.ToString()) {
+                        e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
+                    }
+                }
+                else {
+                    e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
+                }
             }
-            CellPaint(e);
+
+            CellPaintIcons(e);
         }
-        private void CellPaint(DataGridViewCellPaintingEventArgs e)
+
+        private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
         {
             e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             //get dimensions
@@ -1420,7 +1429,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]).Split('.')[0],
-                    highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 1,
+                    highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 0,
                     default_interp = ((string)seq_obj["default_interp"]) != null ? ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") : "Linear",
                     enabled = ((string)seq_obj["enabled"] ?? "True") == "True"
                 };
