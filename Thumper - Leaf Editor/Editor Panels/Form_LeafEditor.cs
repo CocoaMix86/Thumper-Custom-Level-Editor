@@ -69,7 +69,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool GlobalDisable;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
         private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
-        private Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out"}, { "kEaseIn", "Ease In"}, { "kEaseOut", "Ease Out"} };
+        private Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
         private List<string> lanenames = new() { "left", "center", "right" };
         private List<Sequencer_Object> clipboardtracks = new();
         private List<SaveState> _undolistleaf = new();
@@ -1321,7 +1321,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 step = obj.step,
                 trait_type = obj.trait_type,
                 highlight_color = TCLE.ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple,
-                highlight_value = 1,
+                highlight_value = 0,
                 footer = obj.footer,
                 default_interp = "Linear",
                 enabled = true,
@@ -1690,7 +1690,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             //if the cell value is greater than the criteria of the row, highlight it with that row's color
-            if (Math.Abs(Decimal.Parse(dgvc.Value.ToString())) >= (decimal)_seqobj.highlight_value) {
+            if ((decimal)_seqobj.highlight_value == 0 || Math.Abs(Decimal.Parse(dgvc.Value.ToString())) >= (decimal)_seqobj.highlight_value) {
                 dgvc.Style.BackColor = _seqobj.highlight_color;
             }
             //change cell font color so text is readable on dark/light backgrounds
@@ -1940,7 +1940,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { beat = dgvc.ColumnIndex - FrozenColumnOffset, value = _out };
             }
             TrackUpdateHighlighting(seq);
-            ///GenerateDataPoints(dgvr, seq);
         }
         #endregion
 
@@ -1948,6 +1947,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             vscrollbarTrackEditor_Resize();
             trackEditor.BringToFront();
+        }
+
+        private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            trackEditor.RowPostPaint -= trackEditor_RowPostPaint;
+            trackEditor.InvalidateRow(e.RowIndex);
+            trackEditor.RowPostPaint += trackEditor_RowPostPaint;
         }
     }
 }

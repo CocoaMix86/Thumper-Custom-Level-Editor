@@ -202,7 +202,7 @@ namespace Thumper_Custom_Level_Editor
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Highlight Value")]
-        [Description("When this value is met (+/-), color the cell the Highlight Color")]
+        [Description("When this value is met (+/-), color the cell the Highlight Color. Set to 0 to highlight all.")]
         public float highlightvalue
         {
             get => selectedobj.highlight_value;
