@@ -22,6 +22,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadLeaf(load, filepath);
             }
         }
+        private void Form_LeafEditor_Shown(object sender, EventArgs e)
+        {
+            vscrollbarTrackEditor_Resize();
+            trackEditor.BringToFront();
+        }
         #endregion
 
         #region Variables
@@ -54,7 +59,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private LeafProperties LeafProperties;
         private static decimal BPM => TCLE.dockProjectProperties.BPM;
-        private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= 2);
+        private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset);
         private dynamic leafjson;
         private int CurrentRow;
         private int MouseCurrentColumn;
@@ -73,6 +78,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<string> lanenames = new() { "left", "center", "right" };
         private List<Sequencer_Object> clipboardtracks = new();
         private List<SaveState> _undolistleaf = new();
+        public DataObject ClipBoardDataPoints = new();
         #endregion
 
         #region EventHandlers
@@ -114,16 +120,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackZoomVert_Scroll(object sender, EventArgs e)
         {
-            trackEditor.Scroll -= trackEditor_Scroll;
-            int display = trackEditor.FirstDisplayedScrollingRowIndex;
-            if (display == -1)
-                return;
-            for (int i = 0; i < trackEditor.Rows.Count; i++) {
-                trackEditor.Rows[i].Height = trackZoomVert.Value;
+            foreach (DataGridViewRow dgvr in trackEditor.Rows) {
+                dgvr.Height = trackZoomVert.Value;
             }
-            vscrollbarTrackEditor_Resize();
-            trackEditor.FirstDisplayedScrollingRowIndex = display;
-            trackEditor.Scroll += trackEditor_Scroll;
+            int display = trackEditor.FirstDisplayedScrollingRowIndex;
+            if (display != -1) {
+                trackEditor.Scroll -= trackEditor_Scroll;
+                vscrollbarTrackEditor_Resize();
+                trackEditor.FirstDisplayedScrollingRowIndex = display + 1;
+                trackEditor.FirstDisplayedScrollingRowIndex = display;
+                trackEditor.Scroll += trackEditor_Scroll;
+            }
         }
 
         private void trackEditor_Resize(object sender, EventArgs e)
@@ -546,53 +553,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //SaveCheckAndWrite(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
             }
             else if (controldown) {
-                ///copies selected cells
-                if (e.KeyCode == Keys.C) {
-                    DataObject d = trackEditor.GetClipboardContent();
-                    Clipboard.SetDataObject(d, true);
-                    e.Handled = true;
-                }
-                ///cut and copies selected cells
-                if (e.KeyCode == Keys.X) {
-                    DataObject d = trackEditor.GetClipboardContent();
-                    Clipboard.SetDataObject(d, true);
-                    LogUndo = false;
-                    CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
-                    e.Handled = true;
-                    LogUndo = true;
-                    SaveCheckAndWrite(false);
-                    //SaveCheckAndWrite(false, "Cut cells", $"");
-                }
-                ///pastes cell data from clipboard
-                if (e.KeyCode == Keys.V) {
-                    //get content on clipboard to string and then split it to rows
-                    string s = Clipboard.GetText().Replace("\r\n", "\n");
-                    string[] copiedrows = s.Split('\n');
-                    //set ints so we don't have to always call rowindex, columnindex
-                    int row = trackEditor.CurrentCell.RowIndex;
-                    int col = trackEditor.CurrentCell.ColumnIndex;
-                    List<DataGridViewRow> edited = new();
-                    for (int _line = 0; _line < copiedrows.Length; _line++) {
-                        //if paste will go outside grid bounds, skip
-                        if (row + _line >= trackEditor.RowCount)
-                            break;
-                        //split row into individual cells
-                        string[] cells = copiedrows[_line].Split('\t');
-                        for (int i = 0; i < cells.Length; i++) {
-                            //if paste will go outside grid bounds, skip
-                            if (col + i >= trackEditor.ColumnCount)
-                                break;
-                            //don't paste if cell is blank
-                            if (!string.IsNullOrEmpty(cells[i])) {
-                                trackEditor[col + i, row + _line].Value = decimal.Parse(cells[i]);
-                                SequencerObjects[row + _line].data_points[col + i].value = decimal.Parse(cells[i]);
-                                TrackUpdateHighlightingSingleCell(trackEditor[col + i, row + _line], SequencerObjects[row + _line]);
-                            }
-                        }
-                    }
-                    SaveCheckAndWrite(false);
-                    //SaveCheckAndWrite(false, $"Pasted cells", $"");
-                }
+                
             }
 
             else if (altdown) {
@@ -1825,9 +1786,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
         }
 
-        /// <summary>
-        /// UNDO FUNCTIONS
-        /// </summary>
+        #region Undo Functions
         private readonly ToolStripDropDownMenu undomenu = new() {
             BackColor = Color.FromArgb(40, 40, 40),
             ShowCheckMargin = false,
@@ -1892,10 +1851,54 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 savestate = leafjson
             });
         }
-        ///
-        ///
-        ///
+        #endregion
+        #region Cut Copy Paste
+        public void Copy()
+        {
+            ///copies selected cells
+            ClipBoardDataPoints = trackEditor.GetClipboardContent();
+            TCLE.Instance.toolstripEditPaste.Enabled = true;
+        }
 
+        public void Cut()
+        {
+            ///cut and copies selected cells
+            ClipBoardDataPoints = trackEditor.GetClipboardContent();
+            LogUndo = false;
+            CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
+            LogUndo = true;
+            SaveCheckAndWrite(false);
+            //SaveCheckAndWrite(false, "Cut cells", $"");
+        }
+
+        public void Paste()
+        {
+            //get content on clipboard to string and then split it to rows
+            string s = ClipBoardDataPoints.GetText().Replace("\r\n", "\n");
+            string[][] copiedcells = s.Split('\n').Select(x => x.Split('\t')).ToArray();
+            //set ints so we don't have to always call rowindex, columnindex
+            int pastingrow = trackEditor.CurrentCell.RowIndex;
+            int pastingcol = trackEditor.CurrentCell.ColumnIndex;
+            for (int rowindex = 0; rowindex < copiedcells.Length; rowindex++) {
+                //if paste will go outside grid bounds, skip
+                if (pastingrow + rowindex >= trackEditor.RowCount)
+                    break;
+                for (int cellindex = 0; cellindex < copiedcells[rowindex].Length; cellindex++) {
+                    //if paste will go outside grid bounds, skip
+                    if (pastingcol + cellindex >= trackEditor.ColumnCount)
+                        break;
+                    //don't paste if cell is blank
+                    if (string.IsNullOrEmpty(copiedcells[rowindex][cellindex]))
+                        continue;
+                    trackEditor[pastingcol + cellindex, pastingrow + rowindex].Value = decimal.Parse(copiedcells[rowindex][cellindex]);
+                    SequencerObjects[pastingrow + rowindex].data_points[pastingcol + cellindex].value = decimal.Parse(copiedcells[rowindex][cellindex]);
+                    TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex], SequencerObjects[pastingrow + rowindex]);
+                }
+            }
+            SaveCheckAndWrite(false);
+            //SaveCheckAndWrite(false, $"Pasted cells", $"");
+        }
+        #endregion
 
         public static void RandomizeRowValues(Sequencer_Object seq)
         {
@@ -1964,11 +1967,5 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TrackUpdateHighlighting(seq);
         }
         #endregion
-
-        private void Form_LeafEditor_Shown(object sender, EventArgs e)
-        {
-            vscrollbarTrackEditor_Resize();
-            trackEditor.BringToFront();
-        }
     }
 }

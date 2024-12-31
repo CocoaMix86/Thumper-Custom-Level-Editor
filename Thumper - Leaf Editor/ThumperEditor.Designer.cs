@@ -737,7 +737,7 @@
             this.contextmenuEdit.Name = "contextmenuEdit";
             this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuEdit.Size = new Size(218, 148);
+            this.contextmenuEdit.Size = new Size(218, 170);
             // 
             // toolstripEditUndo
             // 
@@ -1784,12 +1784,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem contextFormClose;
         private System.Windows.Forms.ContextMenuStrip contextmenuEdit;
-        private System.Windows.Forms.ToolStripMenuItem toolstripEditUndo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem toolstripEditCut;
-        private System.Windows.Forms.ToolStripMenuItem toolstripEditCopy;
-        private System.Windows.Forms.ToolStripMenuItem toolstripEditPaste;
-        private System.Windows.Forms.ToolStripMenuItem toolstripEditDelete;
         private System.Windows.Forms.ContextMenuStrip contextmenuWindow;
         private System.Windows.Forms.ToolStripMenuItem toolstripWindowFloat;
         private System.Windows.Forms.ToolStripMenuItem toolstripWindowFloatAll;
@@ -1859,6 +1854,11 @@
         private ToolStripMenuItem moveToWorkspaceToolStripMenuItem;
         private ContextMenuStrip contextmenuMoveWorkspace;
         private ToolStripMenuItem eToolStripMenuItem;
+        public ToolStripMenuItem toolstripEditUndo;
+        public ToolStripMenuItem toolstripEditCut;
+        public ToolStripMenuItem toolstripEditCopy;
+        public ToolStripMenuItem toolstripEditPaste;
+        public ToolStripMenuItem toolstripEditDelete;
     }
 }
 

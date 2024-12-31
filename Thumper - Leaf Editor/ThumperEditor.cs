@@ -414,17 +414,17 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripEditCut_Click(object sender, EventArgs e)
         {
-
+            GlobalActiveDocument.GetType().GetMethod("Cut").Invoke(GlobalActiveDocument, null);
         }
 
         private void toolstripEditCopy_Click(object sender, EventArgs e)
         {
-
+            GlobalActiveDocument.GetType().GetMethod("Copy").Invoke(GlobalActiveDocument, null);
         }
 
         private void toolstripEditPaste_Click(object sender, EventArgs e)
         {
-
+            GlobalActiveDocument.GetType().GetMethod("Paste").Invoke(GlobalActiveDocument, null);
         }
 
         private void toolstripEditDelete_Click(object sender, EventArgs e)
