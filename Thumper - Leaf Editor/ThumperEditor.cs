@@ -11,6 +11,7 @@ namespace Thumper_Custom_Level_Editor
     public partial class TCLE : Form
     {
         #region Variables
+        public static bool IsClosing;
         public static TCLE Instance;
         public static DockPanel DockMain => Instance.dockMain;
         public static Form_WorkSpace ActiveWorkspace;
@@ -199,9 +200,11 @@ namespace Thumper_Custom_Level_Editor
         private void TCLE_FormClosing(object sender, FormClosingEventArgs e)
         {
             //check for unsaved files, cancel closing
+            IsClosing = true;
             if (AnyUnsaved()) {
                 if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
+                    IsClosing = false;
                 }
             }
             //save panel sizes and locations

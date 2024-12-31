@@ -268,6 +268,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Handled = true;
         }
 
+        private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            //trackEditor.RowPostPaint -= trackEditor_RowPostPaint;
+            //trackEditor.InvalidateRow(e.RowIndex);
+            //trackEditor.RowPostPaint += trackEditor_RowPostPaint;
+        }
+
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
@@ -1962,13 +1969,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             vscrollbarTrackEditor_Resize();
             trackEditor.BringToFront();
-        }
-
-        private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            trackEditor.RowPostPaint -= trackEditor_RowPostPaint;
-            trackEditor.InvalidateRow(e.RowIndex);
-            trackEditor.RowPostPaint += trackEditor_RowPostPaint;
         }
     }
 }
