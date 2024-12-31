@@ -194,6 +194,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
                     e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
                 }
+                else {
+                    string cellText = e.Value.ToString();
+                    for (int fontSize = 1; fontSize < 25; fontSize++) {
+                        Font font = new("Consolas", fontSize);
+                        Size textSize = TextRenderer.MeasureText(cellText, font);
+                        if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
+                            if (fontSize - 1 != 0)
+                                font = new Font("Consolas", fontSize - 1);
+                            e.CellStyle.Font = font;
+                            e.Paint(e.ClipBounds, e.PaintParts);
+                            e.Handled = true;
+                            break;
+                        }
+                    }
+                }
             }
 
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {

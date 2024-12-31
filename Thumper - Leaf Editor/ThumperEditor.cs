@@ -200,7 +200,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //check for unsaved files, cancel closing
             if (AnyUnsaved()) {
-                if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
+                if (MessageBox.Show("Some files are unsaved. Are you sure you want to exit?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
             }
