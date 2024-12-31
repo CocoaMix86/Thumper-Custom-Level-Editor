@@ -1298,7 +1298,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Sequencer_Object seq = new() {
                 obj_name = category == "PLAY SAMPLE" ? TCLE.LvlSamples[TCLE.rng.Next(0, TCLE.LvlSamples.Count)].obj_name : obj.obj_name,
                 category = obj.category,
-                param_path = obj.param_path,
+                param_path = obj.param_path.Split('.')[0],
                 friendly_param = obj.param_displayname,
                 defaultvalue = float.Parse(obj.def),
                 step = obj.step,
@@ -1739,7 +1739,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (seq_obj.param_path.StartsWith("0x"))
                     s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
                 else
-                    s.Add("param_path", seq_obj.param_path);
+                    s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
                 s.Add("trait_type", seq_obj.trait_type);
                 s.Add("default_interp", $"kTraitInterp{seq_obj.default_interp}");
                 JArray datapoints = new();
@@ -1761,7 +1761,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 s.Add("step", seq_obj.step.ToString());
                 s.Add("default", seq_obj.defaultvalue);
                 s.Add("footer", seq_obj.footer);
-                s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToString(), seq_obj.highlight_value } });
+                s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
                 s.Add("enabled", seq_obj.enabled.ToString());
 
                 seq_objs.Add(s);
