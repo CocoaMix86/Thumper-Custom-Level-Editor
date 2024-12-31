@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Drawing.Drawing2D;
+using System.Drawing;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -198,7 +199,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                if (e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                if (LeafProperties.connectedcells && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
                     e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
                 }
                 else {
@@ -211,7 +212,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                                 font = new Font("Consolas", fontSize - 1);
                             e.CellStyle.Font = font;
                             e.Paint(e.ClipBounds, e.PaintParts);
-                            e.Handled = true;
                             break;
                         }
                     }
@@ -221,19 +221,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
                 //if previous cell value is different than this cell, put in a divider
                 //otherwise remove left divider to make grid thinner
-                if (e.Value?.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
-                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Outset;
-                }
-                else
-                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
-                //if next cell value is same as this cell, remove the border between them
-                if (LeafProperties.showgrid && e.ColumnIndex != trackEditor.ColumnCount - 1) {
-                    if (e.Value != null && e.Value.ToString() == trackEditor[e.ColumnIndex + 1, e.RowIndex].Value?.ToString()) {
+                if (LeafProperties.connectedcells) {
+                    if (e.Value?.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                        e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Outset;
+                    }
+                    else
+                        e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+                    //if next cell value is same as this cell, remove the border between them
+                    if (LeafProperties.showgrid && e.ColumnIndex != trackEditor.ColumnCount - 1) {
+                        if (e.Value != null && e.Value.ToString() == trackEditor[e.ColumnIndex + 1, e.RowIndex].Value?.ToString()) {
+                            e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
+                        }
+                    }
+                    else {
                         e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
                     }
-                }
-                else {
-                    e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
                 }
             }
 
@@ -243,6 +245,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
         {
             e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+            //paint notifier circles for changed interp and ease
+            if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
+                if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].interpolation != "Linear") {
+                    e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Right - (e.CellBounds.Width / 2) - 6, e.CellBounds.Top - 1, 7, 7);
+                    e.Graphics.FillEllipse(new SolidBrush(Color.Red), e.CellBounds.Right - (e.CellBounds.Width / 2) - 5, e.CellBounds.Top - 1, 5, 5);
+                }
+                if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].ease != "Ease In Out") {
+                    e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 7, 7);
+                    e.Graphics.FillEllipse(new SolidBrush(Color.Blue), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
+                }
+            }
             //get dimensions
             int w = 16;
             int h = 16;
@@ -1393,7 +1407,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 beats = (int?)_load["beat_cnt"] ?? 1,
                 timesignature = (string)_load["time_sig"] ?? "4/4",
                 showcategory = true,
-                showgrid = true
+                showgrid = true,
+                connectedcells = true
             };
 
             //clear the DGV and prep for new data

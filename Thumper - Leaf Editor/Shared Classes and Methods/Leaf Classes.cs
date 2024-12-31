@@ -163,6 +163,19 @@ namespace Thumper_Custom_Level_Editor
         }
         private bool ShowGrid;
 
+        [Category​Attribute("Editor")]
+        [DisplayName("Connected Bars")]
+        [Description("Consecutive cells with same values will be shown connected")]
+        public bool connectedcells
+        {
+            get => ConnectedCells;
+            set {
+                ConnectedCells = value;
+                parent.trackEditor.Refresh();
+            }
+        }
+        private bool ConnectedCells;
+
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]
         [Description("")]
