@@ -1991,7 +1991,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
                 dgvc.Value = _out;
-                seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { beat = dgvc.ColumnIndex - FrozenColumnOffset, value = _out };
+                seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { beat = dgvc.ColumnIndex - FrozenColumnOffset, value = _out, ease = "Ease In Out", interpolation = "Linear" };
             }
             TrackUpdateHighlighting(seq);
         }
