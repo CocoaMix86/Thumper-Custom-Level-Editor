@@ -236,7 +236,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
                     e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.Single;
                 }
-                else if (!LeafProperties.showgrid) {
+                else if (!LeafProperties.showgrid && LeafProperties.connectedcells) {
+                    if (e.Value != null && e.Value.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString())
+                        e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Outset;
+                    else
+                        e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+                    if (e.ColumnIndex != trackEditor.ColumnCount - 1 && e.Value != null && e.Value.ToString() != trackEditor[e.ColumnIndex + 1, e.RowIndex].Value?.ToString())
+                        e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.Outset;
+                    else
+                        e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
+                }
+                else if (!LeafProperties.showgrid && !LeafProperties.connectedcells) {
                     e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
                     e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Single;
                 }
