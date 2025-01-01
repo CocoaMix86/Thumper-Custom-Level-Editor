@@ -329,6 +329,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///DATAGRIDVIEW - TRACK EDITOR
         private void trackEditor_SelectionChanged(object sender, EventArgs e)
         {
+            leafProperties.selecteddatapoint = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex].data_points[trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset];
+            propertyGridLeaf.Refresh();
             bool enable = trackEditor.SelectedCells.Count > 0;
             btnTrackUp.Enabled = enable;
             btnTrackDown.Enabled = enable;

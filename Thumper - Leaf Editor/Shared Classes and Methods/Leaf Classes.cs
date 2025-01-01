@@ -390,10 +390,10 @@ namespace Thumper_Custom_Level_Editor
                 udControl.DecimalPlaces = 0;
                 udControl.Minimum = 1;
                 udControl.Maximum = 255;
-                udControl.Value = (decimal)value;
+                udControl.Value = Decimal.Parse(value.ToString());
                 udControl.Increment = 1;
                 editorService.DropDownControl(udControl);
-                value = (decimal)udControl.Value;
+                value = (int)udControl.Value;
             }
 
             return value;
