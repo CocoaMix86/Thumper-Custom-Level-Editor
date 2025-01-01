@@ -103,6 +103,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Leaf Options")]
         [DisplayName("Leaf Length")]
         [Description("How many beats long this sequencer/leaf is.")]
+        [Editor(typeof(LeafBeatLength), typeof(UITypeEditor))]
         public int beats
         {
             get => Beats;
@@ -111,7 +112,7 @@ namespace Thumper_Custom_Level_Editor
                     value = 255;
                 else if (value < 1)
                     value = 1;
-                Beats = value;
+                Beats = (int)value;
                 if (!parent.EditorIsLoading)
                     parent.LeafLengthChanged();
             }
@@ -362,6 +363,35 @@ namespace Thumper_Custom_Level_Editor
                 udControl.Minimum = decimal.MinValue;
                 udControl.Maximum = decimal.MaxValue;
                 udControl.Value = (decimal)value;
+                editorService.DropDownControl(udControl);
+                value = (decimal)udControl.Value;
+            }
+
+            return value;
+        }
+    }
+
+    public class LeafBeatLength : UITypeEditor
+    {
+        public override System.Drawing.Design.UITypeEditorEditStyle GetEditStyle(System.ComponentModel.ITypeDescriptorContext context)
+        {
+            return UITypeEditorEditStyle.DropDown;
+        }
+
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            IWindowsFormsEditorService editorService = null;
+            if (provider != null) {
+                editorService = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
+            }
+
+            if (editorService != null) {
+                NumericUpDown udControl = new NumericUpDown();
+                udControl.DecimalPlaces = 0;
+                udControl.Minimum = 1;
+                udControl.Maximum = 255;
+                udControl.Value = (decimal)value;
+                udControl.Increment = 1;
                 editorService.DropDownControl(udControl);
                 value = (decimal)udControl.Value;
             }
