@@ -737,7 +737,7 @@
             this.contextmenuEdit.Name = "contextmenuEdit";
             this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuEdit.Size = new Size(218, 170);
+            this.contextmenuEdit.Size = new Size(218, 148);
             // 
             // toolstripEditUndo
             // 

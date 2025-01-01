@@ -219,23 +219,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
-                //if previous cell value is different than this cell, put in a divider
-                //otherwise remove left divider to make grid thinner
-                if (LeafProperties.connectedcells) {
-                    if (e.Value?.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                if (LeafProperties.showgrid && LeafProperties.connectedcells) {
+                    //if previous cell value is different than this cell, put in a divider
+                    //otherwise remove left border to "merge" cells
+                    if (e.Value != null && e.Value.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString())
                         e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Outset;
-                    }
-                    else
+                    else if (e.Value != null)
                         e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
-                    //if next cell value is same as this cell, remove the border between them
-                    if (LeafProperties.showgrid && e.ColumnIndex != trackEditor.ColumnCount - 1) {
-                        if (e.Value != null && e.Value.ToString() == trackEditor[e.ColumnIndex + 1, e.RowIndex].Value?.ToString()) {
-                            e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
-                        }
-                    }
-                    else {
+                    //same for right border
+                    if (e.ColumnIndex != trackEditor.ColumnCount - 1 && e.Value != null && e.Value.ToString() != trackEditor[e.ColumnIndex + 1, e.RowIndex].Value?.ToString())
+                        e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.Outset;
+                    else if (e.Value != null)
                         e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
-                    }
+                }
+                else if (LeafProperties.showgrid && !LeafProperties.connectedcells) {
+                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+                    e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.Single;
+                }
+                else if (!LeafProperties.showgrid) {
+                    e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
+                    e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Single;
                 }
             }
 
@@ -1657,7 +1660,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //whenever `i` is a multiple of the time sig, switch colors
                 if ((i) % timesigbeats == 0)
                     _switch = !_switch;
-                trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(40, 40, 40) : Color.FromArgb(30, 30, 30);
+                trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(50, 50, 50) : Color.FromArgb(30, 30, 30);
+                trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Color.FromArgb(50, 50, 50) : Color.FromArgb(30, 30, 30);
             }
         }
 
