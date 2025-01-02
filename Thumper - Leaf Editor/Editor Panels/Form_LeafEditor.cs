@@ -1479,15 +1479,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (lookup == null) {
                         trackEditor.Rows.Add(5);
                         leafProperties.seq_objs.Add(_s.CloneAsDefault("a01", "lane left 2", trackEditor.Rows[^5]));
-                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
                         leafProperties.seq_objs.Add(_s.CloneAsDefault("a02", "lane left 1", trackEditor.Rows[^4]));
-                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
                         leafProperties.seq_objs.Add(_s.CloneAsDefault("ent", "lane center", trackEditor.Rows[^3]));
-                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
                         leafProperties.seq_objs.Add(_s.CloneAsDefault("z01", "lane right 1", trackEditor.Rows[^2]));
-                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
                         leafProperties.seq_objs.Add(_s.CloneAsDefault("z02", "lane right 2", trackEditor.Rows[^1]));
-                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
                     }
                     lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
                     _s.editor_row = lookup.editor_row;
@@ -1925,10 +1920,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set ints so we don't have to always call rowindex, columnindex
             int pastingrow = trackEditor.CurrentCell.RowIndex;
             int pastingcol = trackEditor.CurrentCell.ColumnIndex;
+            int offset = 0;
             for (int rowindex = 0; rowindex < copiedcells.Length; rowindex++) {
-                //if paste will go outside grid bounds, skip
-                if (pastingrow + rowindex >= trackEditor.RowCount)
+                if (pastingrow + rowindex + offset >= trackEditor.RowCount)
                     break;
+                //if paste will go outside grid bounds, skip
+                while (trackEditor.Rows[pastingrow + rowindex + offset].Visible == false) {
+                    offset += 1;
+                    if (pastingrow + rowindex + offset >= trackEditor.RowCount)
+                        break;
+                }
                 for (int cellindex = 0; cellindex < copiedcells[rowindex].Length; cellindex++) {
                     //if paste will go outside grid bounds, skip
                     if (pastingcol + cellindex >= trackEditor.ColumnCount)
@@ -1936,9 +1937,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //don't paste if cell is blank
                     if (string.IsNullOrEmpty(copiedcells[rowindex][cellindex]))
                         continue;
-                    trackEditor[pastingcol + cellindex, pastingrow + rowindex].Value = decimal.Parse(copiedcells[rowindex][cellindex]);
-                    SequencerObjects[pastingrow + rowindex].data_points[pastingcol + cellindex].value = decimal.Parse(copiedcells[rowindex][cellindex]);
-                    TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex], SequencerObjects[pastingrow + rowindex]);
+                    trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset].Value = decimal.Parse(copiedcells[rowindex][cellindex]);
+                    SequencerObjects[pastingrow + rowindex + offset].data_points[pastingcol + cellindex].value = decimal.Parse(copiedcells[rowindex][cellindex]);
+                    TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset], SequencerObjects[pastingrow + rowindex + offset]);
                 }
             }
             SaveCheckAndWrite(false);
