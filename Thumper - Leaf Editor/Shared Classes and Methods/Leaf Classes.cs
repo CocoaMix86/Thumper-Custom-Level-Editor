@@ -44,7 +44,8 @@ namespace Thumper_Custom_Level_Editor
         public DataGridViewRow editor_row { get; set; }
         public bool expandlanes
         {
-            get => ExpandLanes; set {
+            get => ExpandLanes;
+            set {
                 ExpandLanes = value;
                 if (this.friendly_lane != "lane center")
                     editor_row.Visible = value;
