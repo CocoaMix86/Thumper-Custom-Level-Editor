@@ -87,6 +87,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Scrollbars and Zoom
         private void trackEditor_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+            for (int x = e.RowIndex; x < e.RowIndex + e.RowCount; x++)
+                trackEditor.Rows[x].Height = trackZoomVert.Value;
             vscrollbarTrackEditor_Resize();
         }
 
@@ -165,10 +167,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //handle vertical scroll
                 else {
                     if (e.Delta > 0) {
-                        trackEditor.FirstDisplayedScrollingRowIndex = Math.Max(0, scollrowindex - scrollLines);
+                        int ind = Math.Max(0, scollrowindex - scrollLines);
+                        while (trackEditor.Rows[ind].Visible == false)
+                            ind -= 1;
+                        trackEditor.FirstDisplayedScrollingRowIndex = ind;
                     }
                     else if (e.Delta < 0) {
-                        trackEditor.FirstDisplayedScrollingRowIndex = Math.Min(trackEditor.RowCount - 1, scollrowindex + scrollLines);
+                        int ind = Math.Min(trackEditor.RowCount - 1, scollrowindex + scrollLines);
+                        while (trackEditor.Rows[ind].Visible == false)
+                            ind += 1;
+                        trackEditor.FirstDisplayedScrollingRowIndex = ind;
                     }
                     vScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingRowIndex;
                 }
@@ -861,7 +869,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackDown.Enabled = true;
             btnTrackClear.Enabled = true;
 
-            SequencerObjects.Add(new Sequencer_Object() {
+            SequencerObjects.Add(new Sequencer_Object(this) {
                 highlight_color = Color.Purple,
                 highlight_value = 1
             });
@@ -1015,7 +1023,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     dgv.Rows.Insert(_index, dgvr);
                     try {
                         //set the headercell names
-                        ChangeTrackName(clone, leafProperties.showcategory ? $"[{clone.category}]" : "");
+                        ChangeTrackName(clone, leafProperties.showcategory ? $"[{clone.category}] " : "");
                         //pass _griddata per row to be imported to the DGV
                         TrackRawImport(clone, _newtrack.data_points);
                     }
@@ -1057,7 +1065,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             Object_Params objmatch = TCLE.LeafObjects.First(obj => obj.category == dropObjects.Text && obj.param_displayname == dropParamPath.Text);
             //add track to list and populate with values
-            SequencerObjects[CurrentRow] = new Sequencer_Object() {
+            SequencerObjects[CurrentRow] = new Sequencer_Object(this) {
                 obj_name = objmatch.obj_name,
                 category = objmatch.category,
                 param_path = objmatch.param_path,
@@ -1083,7 +1091,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _seqobj.friendly_param += ", " + dropTrackLane.Text;
             }
             //change row header to reflect what the track is
-            ChangeTrackName(_seqobj, leafProperties.showcategory ? $"[{_seqobj.category}]" : "");
+            ChangeTrackName(_seqobj, leafProperties.showcategory ? $"[{_seqobj.category}] " : "");
             if (!randomizing) {
                 TrackUpdateHighlighting(_seqobj);
                 TCLE.PlaySound("UIobjectadd");
@@ -1308,7 +1316,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SequencerObjects.Any(x => x.category == category && x.param_path == obj.param_path))
                 goto beginrando;
 
-            Sequencer_Object seq = new() {
+            Sequencer_Object seq = new(this) {
                 obj_name = category == "PLAY SAMPLE" ? TCLE.LvlSamples[TCLE.rng.Next(0, TCLE.LvlSamples.Count)].obj_name : obj.obj_name,
                 category = obj.category,
                 param_path = obj.param_path.Split('.')[0],
@@ -1418,7 +1426,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //each object in the seq_objs[] list becomes a track
             foreach (dynamic seq_obj in _load["seq_objs"]) {
-                Sequencer_Object _s = new() {
+                Sequencer_Object _s = new(this) {
                     obj_name = seq_obj["obj_name"],
                     trait_type = seq_obj["trait_type"],
                     step = (string)seq_obj["step"] == "True",
@@ -1496,7 +1504,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //finally, add the completed seq_obj to tracks
                     leafProperties.seq_objs.Add(_s);
                 }
-                ChangeTrackName(_s, leafProperties.showcategory ? $"[{_s.category}]" : "");
+                ChangeTrackName(_s, leafProperties.showcategory ? $"[{_s.category}] " : "");
                 TrackRawImport(_s, _s.data_points);
                 //measure header and see if it's the biggest
                 int tempsize = TextRenderer.MeasureText(_s.editor_row.HeaderCell.Value.ToString(), _s.editor_row.HeaderCell.Style.Font).Width;
@@ -1516,7 +1524,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EnableLeafButtons(true);
             TrackTimeSigHighlighting();
             trackZoom_Scroll(null, null);
-            trackZoomVert_Scroll(null, null);
 
             propertyGridLeaf.SelectedObject = LeafProperties;
             //mark that lvl is saved (just freshly loaded)
@@ -1650,10 +1657,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Updates row headers to be the Object and Param_Path
         public static void ChangeTrackName(Sequencer_Object seq, string category = "")
         {
-            //Color background = TCLE.Blend(SequencerObjects[r.Index].highlight_color, Color.Black, 0.4);
-            //r.HeaderCell.Style.BackColor = background;
-            //r.Cells[0].Style.BackColor = background;
-            //r.Cells[1].Style.BackColor = background;
             string ShowCategory = category;
             string ShowLane = seq.expandlanes ? $"{seq.friendly_param}, {seq.friendly_lane}" : seq.friendly_param;
             if (seq.category == "PLAY SAMPLE")
@@ -1689,13 +1692,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Updates cell highlighting in the DGV
-        public static void TrackUpdateHighlighting(Sequencer_Object _seqobj)
+        public static void TrackUpdateHighlighting(Sequencer_Object _seqobj, bool titleonly = false)
         {
             Color background = TCLE.Blend(_seqobj.highlight_color, Color.Black, 0.4);
             _seqobj.editor_row.HeaderCell.Style.BackColor = background;
             //iterate over all cells in the row
-            foreach (DataGridViewCell dgvc in _seqobj.editor_row.Cells) {
-                TrackUpdateHighlightingSingleCell(dgvc, _seqobj);
+            if (!titleonly) {
+                foreach (DataGridViewCell dgvc in _seqobj.editor_row.Cells) {
+                    TrackUpdateHighlightingSingleCell(dgvc, _seqobj);
+                }
             }
             _seqobj.editor_row.Cells[0].Style.BackColor = background;
             _seqobj.editor_row.Cells[1].Style.BackColor = background;

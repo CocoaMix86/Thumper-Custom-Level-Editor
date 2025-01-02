@@ -23,6 +23,8 @@ namespace Thumper_Custom_Level_Editor
 
     public class Sequencer_Object
     {
+        public Form_LeafEditor parent;
+
         public string obj_name { get; set; }
         public string param_path { get; set; }
         public string param_path_lane { get; set; }
@@ -49,14 +51,16 @@ namespace Thumper_Custom_Level_Editor
                 ExpandLanes = value;
                 if (this.friendly_lane != "lane center")
                     editor_row.Visible = value;
-                Form_LeafEditor.ChangeTrackName(this);
+                Form_LeafEditor.ChangeTrackName(this, parent.leafProperties.showcategory ? $"[{this.category}] " : "");
+                Form_LeafEditor.TrackUpdateHighlighting(this, true);
             }
         }
         private bool ExpandLanes;
         public string friendly_lane { get; set; }
 
-        public Sequencer_Object()
+        public Sequencer_Object(Form_LeafEditor Parent)
         {
+            parent = Parent;
             data_points = new SeqDataPoint[255].ToList();
             for (int x = 0; x < 255; x++) {
                 data_points[x] = new() { beat = x, value = null, interpolation = "Linear", ease = "Ease In Out" };
@@ -70,7 +74,7 @@ namespace Thumper_Custom_Level_Editor
 
         public Sequencer_Object CloneAsDefault(string lane, string friendlylane, DataGridViewRow dgvr)
         {
-            Sequencer_Object clone = new() {
+            Sequencer_Object clone = new(this.parent) {
                 obj_name = this.obj_name,
                 param_path = this.param_path,
                 trait_type = this.trait_type,
@@ -122,7 +126,7 @@ namespace Thumper_Custom_Level_Editor
         {
             parent = Parent;
             FilePath = path;
-            selectedobj = new();
+            selectedobj = new(parent);
             selecteddatapoint = new();
             undoItems = new();
             seq_objs = new();
