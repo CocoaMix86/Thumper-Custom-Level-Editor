@@ -38,6 +38,7 @@ namespace Thumper_Custom_Level_Editor
         public Color highlight_color { get; set; }
         public float highlight_value { get; set; }
         public bool enabled { get; set; }
+        public bool isdefault { get; set; }
 
         public int id { get; set; }
         public bool mute { get; set; }
@@ -56,6 +57,30 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object Clone()
         {
             return (Sequencer_Object)MemberwiseClone();
+        }
+
+        public Sequencer_Object CloneAsDefault(string lane, string friendlylane)
+        {
+            Sequencer_Object clone = new() {
+                obj_name = this.obj_name,
+                param_path = this.param_path,
+                trait_type = this.trait_type,
+                //skip data points
+                step = this.step,
+                defaultvalue = this.defaultvalue,
+                category = this.category,
+                friendly_param = this.friendly_param,
+                highlight_color = this.highlight_color,
+                highlight_value = this.highlight_value,
+                enabled = true,
+                isdefault = true,
+                mute = false,
+                expandlanes = false,
+                id = TCLE.rng.Next(),
+                param_path_lane = lane,
+                friendly_lane = friendlylane
+            };
+            return clone;
         }
     }
 
