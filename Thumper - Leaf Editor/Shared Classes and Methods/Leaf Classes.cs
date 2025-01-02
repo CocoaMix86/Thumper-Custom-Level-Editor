@@ -59,7 +59,7 @@ namespace Thumper_Custom_Level_Editor
             return (Sequencer_Object)MemberwiseClone();
         }
 
-        public Sequencer_Object CloneAsDefault(string lane, string friendlylane)
+        public Sequencer_Object CloneAsDefault(string lane, string friendlylane, DataGridViewRow row)
         {
             Sequencer_Object clone = new() {
                 obj_name = this.obj_name,
@@ -78,8 +78,10 @@ namespace Thumper_Custom_Level_Editor
                 expandlanes = false,
                 id = TCLE.rng.Next(),
                 param_path_lane = lane,
-                friendly_lane = friendlylane
+                friendly_lane = friendlylane,
+                editor_row = row
             };
+            clone.editor_row.Visible = false;
             return clone;
         }
     }

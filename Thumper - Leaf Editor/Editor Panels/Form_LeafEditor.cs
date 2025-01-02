@@ -295,7 +295,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             else if (e.ColumnIndex == 2 && e.RowIndex != -1) {
-                if (SequencerObjects[e.RowIndex].friendly_lane != "none")
+                if (SequencerObjects[e.RowIndex].friendly_lane == "lane center")
                     e.Graphics.DrawImage(Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
             }
@@ -329,6 +329,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///DATAGRIDVIEW - TRACK EDITOR
         private void trackEditor_SelectionChanged(object sender, EventArgs e)
         {
+            //do nothing if the selection is inside the frozen columns
+            if (trackEditor.SelectedCells.Count == 0 || trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset < FrozenColumnOffset)
+                return;
             leafProperties.selecteddatapoint = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex].data_points[trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset];
             propertyGridLeaf.Refresh();
             bool enable = trackEditor.SelectedCells.Count > 0;
@@ -471,9 +474,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.ColumnIndex is 1) {
                     SequencerObjects[e.RowIndex].mute = !SequencerObjects[e.RowIndex].mute;
                 }
-                if (e.ColumnIndex is 2) {
+                if (e.ColumnIndex is 2 && SequencerObjects[e.RowIndex].friendly_lane == "lane center") {
                     SequencerObjects[e.RowIndex].expandlanes = !SequencerObjects[e.RowIndex].expandlanes;
+                    SequencerObjects[e.RowIndex -2].editor_row.Visible = SequencerObjects[e.RowIndex -2].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
+                    SequencerObjects[e.RowIndex -1].editor_row.Visible = SequencerObjects[e.RowIndex -1].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
+                    SequencerObjects[e.RowIndex +1].editor_row.Visible = SequencerObjects[e.RowIndex +1].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
+                    SequencerObjects[e.RowIndex +2].editor_row.Visible = SequencerObjects[e.RowIndex +2].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
+                    ChangeTrackName(SequencerObjects[e.RowIndex -2]);
+                    ChangeTrackName(SequencerObjects[e.RowIndex -1]);
                     ChangeTrackName(SequencerObjects[e.RowIndex]);
+                    ChangeTrackName(SequencerObjects[e.RowIndex +1]);
+                    ChangeTrackName(SequencerObjects[e.RowIndex +2]);
                 }
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 //invalidate cell to repaint it to update the images
@@ -1480,49 +1491,50 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _s.data_points[data.beat] = data;
                 }
 
-                if (_s.friendly_lane is not "lane center" and not "none") {
-                    ProcessOtherLanesLast.Add(_s);
+                //if object is multilane, we will add all 5 lanes at once, as defaults
+                //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
+                if (_s.friendly_lane is not "none") {
+                    //ProcessOtherLanesLast.Add(_s);
+                    Sequencer_Object lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
+                    //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
+                    if (lookup == null) {
+                        DataGridViewRow dgvr = new() { };
+                        trackEditor.Rows.Add(dgvr);
+                        trackEditor.Rows.AddCopies(trackEditor.RowCount - 1, 4);
+                        leafProperties.seq_objs.Add(_s.CloneAsDefault("a01", "lane left 2", trackEditor.Rows[^5]));
+                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
+                        leafProperties.seq_objs.Add(_s.CloneAsDefault("a02", "lane left 1", trackEditor.Rows[^4]));
+                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
+                        leafProperties.seq_objs.Add(_s.CloneAsDefault("ent", "lane center", trackEditor.Rows[^3]));
+                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
+                        leafProperties.seq_objs.Add(_s.CloneAsDefault("z01", "lane right 1", trackEditor.Rows[^2]));
+                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
+                        leafProperties.seq_objs.Add(_s.CloneAsDefault("z02", "lane right 2", trackEditor.Rows[^1]));
+                        TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
+                    }
+                    lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
+                    _s.editor_row = lookup.editor_row;
+                    _s.editor_row.Visible = _s.friendly_lane == "lane center";
+                    lookup = _s;
                 }
+                //else just add the object without needing extra lanes
                 else {
                     //attach the dgv row to the object
                     DataGridViewRow dgvr = new() { };
                     trackEditor.Rows.Add(dgvr);
                     _s.editor_row = trackEditor.Rows[^1];
-                    ChangeTrackName(_s);
-                    TrackRawImport(_s, _s.data_points);
                     //do this to find which header is the longest
-                    int tempsize = TextRenderer.MeasureText(_s.editor_row.HeaderCell.Value.ToString(), _s.editor_row.HeaderCell.Style.Font).Width;
-                    if (tempsize > biggestheader)
-                        biggestheader = tempsize;
                     //finally, add the completed seq_obj to tracks
-                    if (_s.friendly_lane is "none")
-                        leafProperties.seq_objs.Add(_s);
-                    else {
-                        //these "default" objects are for handling the lanes in the next section
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("a01", "lane left 2"));
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("a02", "lane left 1"));
-                        leafProperties.seq_objs.Add(_s);
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("z01", "lane right 1"));
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("z02", "lane right 2"));
-                    }
+                    leafProperties.seq_objs.Add(_s);
                 }
+                ChangeTrackName(_s);
+                TrackRawImport(_s, _s.data_points);
+                //measure header and see if it's the biggest
+                int tempsize = TextRenderer.MeasureText(_s.editor_row.HeaderCell.Value.ToString(), _s.editor_row.HeaderCell.Style.Font).Width;
+                if (tempsize > biggestheader)
+                    biggestheader = tempsize;
             }
-            //reorganize lanes properly and insert default rows if they don't exist
-            foreach (Sequencer_Object seq in ProcessOtherLanesLast) {
-                Sequencer_Object lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == seq.obj_name && x.param_path == seq.param_path && x.param_path_lane == seq.param_path_lane && x.isdefault == true);
-                //if null, there us no associated center lane for this object. We'll have to make it.
-                if (lookup == null) {
-                    //these "default" objects are for handling the lanes in the next section
-                    leafProperties.seq_objs.Add(seq.CloneAsDefault("a01", "lane left 2"));
-                    leafProperties.seq_objs.Add(seq.CloneAsDefault("a02", "lane left 1"));
-                    leafProperties.seq_objs.Add(seq.CloneAsDefault("ent", "lane center"));
-                    leafProperties.seq_objs.Add(seq.CloneAsDefault("z01", "lane right 1"));
-                    leafProperties.seq_objs.Add(seq.CloneAsDefault("z02", "lane right 2"));
-                }
-                //perform lookup again to find the proper track
-                lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == seq.obj_name && x.param_path == seq.param_path && x.param_path_lane == seq.param_path_lane && x.isdefault == true);
-                lookup = seq;
-            }
+
             //set header width manually and allow resizing
             trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             trackEditor.RowHeadersWidth = biggestheader;
