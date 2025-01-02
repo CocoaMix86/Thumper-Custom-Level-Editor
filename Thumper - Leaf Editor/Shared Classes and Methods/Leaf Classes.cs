@@ -31,7 +31,6 @@ namespace Thumper_Custom_Level_Editor
         public bool step { get; set; }
         public float defaultvalue { get; set; }
         public string footer { get; set; }
-        public string default_interp { get; set; }
 
         public string category { get; set; }
         public string friendly_param { get; set; }
@@ -42,9 +41,18 @@ namespace Thumper_Custom_Level_Editor
 
         public int id { get; set; }
         public bool mute { get; set; }
-        public bool expandlanes { get; set; }
-        public string friendly_lane { get; set; }
         public DataGridViewRow editor_row { get; set; }
+        public bool expandlanes
+        {
+            get => ExpandLanes; set {
+                ExpandLanes = value;
+                if (this.friendly_lane != "lane center")
+                    editor_row.Visible = value;
+                Form_LeafEditor.ChangeTrackName(this);
+            }
+        }
+        private bool ExpandLanes;
+        public string friendly_lane { get; set; }
 
         public Sequencer_Object()
         {
@@ -59,7 +67,7 @@ namespace Thumper_Custom_Level_Editor
             return (Sequencer_Object)MemberwiseClone();
         }
 
-        public Sequencer_Object CloneAsDefault(string lane, string friendlylane, DataGridViewRow row)
+        public Sequencer_Object CloneAsDefault(string lane, string friendlylane, DataGridViewRow dgvr)
         {
             Sequencer_Object clone = new() {
                 obj_name = this.obj_name,
@@ -68,6 +76,7 @@ namespace Thumper_Custom_Level_Editor
                 //skip data points
                 step = this.step,
                 defaultvalue = this.defaultvalue,
+                footer = this.footer,
                 category = this.category,
                 friendly_param = this.friendly_param,
                 highlight_color = this.highlight_color,
@@ -75,13 +84,12 @@ namespace Thumper_Custom_Level_Editor
                 enabled = true,
                 isdefault = true,
                 mute = false,
-                expandlanes = false,
                 id = TCLE.rng.Next(),
                 param_path_lane = lane,
                 friendly_lane = friendlylane,
-                editor_row = row
+                editor_row = dgvr,
+                expandlanes = false,
             };
-            clone.editor_row.Visible = false;
             return clone;
         }
     }
@@ -172,7 +180,7 @@ namespace Thumper_Custom_Level_Editor
             set {
                 ShowCategory = value;
                 foreach (Sequencer_Object seq in seq_objs) {
-                    parent.ChangeTrackName(seq);
+                    Form_LeafEditor.ChangeTrackName(seq, ShowCategory ? $"[{seq.category}] " : "");
                 }
             }
         }

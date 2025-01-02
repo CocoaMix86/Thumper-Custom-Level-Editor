@@ -31,25 +31,6 @@
             }
         }
 
-        private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                string cellText = e.Value.ToString();
-                for (int fontSize = 1; fontSize < 25; fontSize++) {
-                    Font font = new("Consolas", fontSize);
-                    Size textSize = TextRenderer.MeasureText(cellText, font);
-                    if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
-                        if (fontSize - 1 != 0)
-                            font = new Font("Consolas", fontSize - 1);
-                        e.CellStyle.Font = font;
-                        e.Paint(e.ClipBounds, e.PaintParts);
-                        e.Handled = true;
-                        break;
-                    }
-                }
-            }
-        }
-
         private void dropTrackLane_DataSourceChanged(object sender, EventArgs e)
         {
             ComboBox cb = (ComboBox)sender;

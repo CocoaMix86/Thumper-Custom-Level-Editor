@@ -475,16 +475,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects[e.RowIndex].mute = !SequencerObjects[e.RowIndex].mute;
                 }
                 if (e.ColumnIndex is 2 && SequencerObjects[e.RowIndex].friendly_lane == "lane center") {
+                    FindMissingLaneObjects(SequencerObjects[e.RowIndex]);
                     SequencerObjects[e.RowIndex].expandlanes = !SequencerObjects[e.RowIndex].expandlanes;
-                    SequencerObjects[e.RowIndex -2].editor_row.Visible = SequencerObjects[e.RowIndex -2].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
-                    SequencerObjects[e.RowIndex -1].editor_row.Visible = SequencerObjects[e.RowIndex -1].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
-                    SequencerObjects[e.RowIndex +1].editor_row.Visible = SequencerObjects[e.RowIndex +1].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
-                    SequencerObjects[e.RowIndex +2].editor_row.Visible = SequencerObjects[e.RowIndex +2].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
-                    ChangeTrackName(SequencerObjects[e.RowIndex -2]);
-                    ChangeTrackName(SequencerObjects[e.RowIndex -1]);
-                    ChangeTrackName(SequencerObjects[e.RowIndex]);
-                    ChangeTrackName(SequencerObjects[e.RowIndex +1]);
-                    ChangeTrackName(SequencerObjects[e.RowIndex +2]);
+                    SequencerObjects[e.RowIndex -2].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
+                    SequencerObjects[e.RowIndex -1].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
+                    SequencerObjects[e.RowIndex +1].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
+                    SequencerObjects[e.RowIndex +2].expandlanes = SequencerObjects[e.RowIndex].expandlanes;
                 }
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 //invalidate cell to repaint it to update the images
@@ -1093,8 +1089,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trait_type = objmatch.trait_type,
                 highlight_color = Color.Purple,
                 highlight_value = 1,
-                footer = objmatch.footer,
-                default_interp = "Linear"
+                footer = objmatch.footer
             };
             Sequencer_Object _seqobj = SequencerObjects[CurrentRow];
             DataGridViewRow trackrowapplied = trackEditor.Rows[CurrentRow];
@@ -1346,7 +1341,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 highlight_color = TCLE.ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple,
                 highlight_value = 0,
                 footer = obj.footer,
-                default_interp = "Linear",
                 enabled = true,
                 param_path_lane = obj.param_path.EndsWith(".ent") ? "ent" : "none",
                 friendly_lane = obj.param_path.EndsWith(".ent") ? "lane center" : "none"
@@ -1441,7 +1435,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Rows.Clear();
             LeafLengthChanged();
             trackEditor.RowHeadersVisible = true;
-            int biggestheader = 0;
+            int biggestheader = 50;
             List<Sequencer_Object> ProcessOtherLanesLast = new();
 
             //each object in the seq_objs[] list becomes a track
@@ -1455,7 +1449,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]).Split('.')[0],
                     highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 0,
-                    default_interp = ((string)seq_obj["default_interp"]) != null ? ((string)seq_obj["default_interp"]).Replace("kTraitInterp", "") : "Linear",
                     enabled = ((string)seq_obj["enabled"] ?? "True") == "True",
                     isdefault = false
                 };
@@ -1498,9 +1491,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Sequencer_Object lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
                     //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
                     if (lookup == null) {
-                        DataGridViewRow dgvr = new() { };
-                        trackEditor.Rows.Add(dgvr);
-                        trackEditor.Rows.AddCopies(trackEditor.RowCount - 1, 4);
+                        trackEditor.Rows.Add(5);
                         leafProperties.seq_objs.Add(_s.CloneAsDefault("a01", "lane left 2", trackEditor.Rows[^5]));
                         TrackUpdateHighlighting(leafProperties.seq_objs[^1]);
                         leafProperties.seq_objs.Add(_s.CloneAsDefault("a02", "lane left 1", trackEditor.Rows[^4]));
@@ -1679,13 +1670,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Updates row headers to be the Object and Param_Path
-        public void ChangeTrackName(Sequencer_Object seq)
+        public static void ChangeTrackName(Sequencer_Object seq, string category = "")
         {
             //Color background = TCLE.Blend(SequencerObjects[r.Index].highlight_color, Color.Black, 0.4);
             //r.HeaderCell.Style.BackColor = background;
             //r.Cells[0].Style.BackColor = background;
             //r.Cells[1].Style.BackColor = background;
-            string ShowCategory = LeafProperties.showcategory ? $"[{seq.category}] " : "";
+            string ShowCategory = category;
             string ShowLane = seq.expandlanes ? $"{seq.friendly_param}, {seq.friendly_lane}" : seq.friendly_param;
             if (seq.category == "PLAY SAMPLE")
                 //show the sample name instead
@@ -1814,7 +1805,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
                 s.Add("trait_type", seq_obj.trait_type);
-                s.Add("default_interp", $"kTraitInterp{seq_obj.default_interp}");
                 JArray datapoints = new();
                 foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x.value is not null)) {
                     if (datapoint.value == null)
@@ -2038,6 +2028,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { beat = dgvc.ColumnIndex - FrozenColumnOffset, value = _out, ease = "Ease In Out", interpolation = "Linear" };
             }
             TrackUpdateHighlighting(seq);
+        }
+
+        private void FindMissingLaneObjects(Sequencer_Object seq)
+        {
+            int indexofcenter = SequencerObjects.IndexOf(seq);
+            if (indexofcenter - 1 < 0 || (SequencerObjects[indexofcenter - 1].obj_name != seq.obj_name || SequencerObjects[indexofcenter - 1].param_path != seq.param_path)) {
+                trackEditor.Rows.Insert(indexofcenter, 1);
+                SequencerObjects.Insert(indexofcenter, seq.CloneAsDefault("a01", "lane left 2", trackEditor.Rows[indexofcenter]));
+                indexofcenter += 1;
+            }
+            if (indexofcenter - 2 < 0 || (SequencerObjects[indexofcenter - 2].obj_name != seq.obj_name || SequencerObjects[indexofcenter - 2].param_path != seq.param_path)) {
+                SequencerObjects.Insert(indexofcenter - 1, seq.CloneAsDefault("a02", "lane left 1", trackEditor.Rows[indexofcenter - 1]));
+                SequencerObjects.Insert(indexofcenter - 1, seq.CloneAsDefault("a01", "lane left 1"));
+                indexofcenter += 1;
+            }
+            if (indexofcenter + 1 > SequencerObjects.Count - 1 || (SequencerObjects[indexofcenter + 1].obj_name != seq.obj_name || SequencerObjects[indexofcenter + 1].param_path != seq.param_path)) {
+                SequencerObjects.Insert(indexofcenter + 1, seq.CloneAsDefault("z01", "lane right 1"));
+                trackEditor.Rows.Insert(indexofcenter + 1, SequencerObjects[indexofcenter + 1].editor_row);
+            }
+            if (indexofcenter - 2 > SequencerObjects.Count - 1 || (SequencerObjects[indexofcenter - 2].obj_name != seq.obj_name || SequencerObjects[indexofcenter - 2].param_path != seq.param_path)) {
+                SequencerObjects.Insert(indexofcenter + 2, seq.CloneAsDefault("z02", "lane left 2"));
+                trackEditor.Rows.Insert(indexofcenter + 2, SequencerObjects[indexofcenter + 2].editor_row);
+            }
         }
         #endregion
     }
