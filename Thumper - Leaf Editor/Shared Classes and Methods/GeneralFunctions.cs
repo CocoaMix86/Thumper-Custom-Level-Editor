@@ -584,7 +584,7 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
         }
 
-        public static void OpenFile(TCLE form, FileInfo filepath, bool openraw = false)
+        public static void OpenFile(FileInfo filepath, bool openraw = false)
         {
             if (filepath == null)
                 return;

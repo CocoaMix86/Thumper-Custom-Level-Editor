@@ -1265,7 +1265,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             TCLE.PlaySound("UIleafsplit");
             //load new leaf that was just split
-            TCLE.OpenFile(TCLE.Instance, newfilename);
+            TCLE.OpenFile(newfilename);
 
             //update beat counts in loaded lvl if need be
             ///if (_mainform._loadedlvl != null)

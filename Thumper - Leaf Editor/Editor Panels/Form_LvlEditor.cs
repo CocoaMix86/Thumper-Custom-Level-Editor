@@ -88,7 +88,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.Instance, TCLE.dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{LvlLeafs[e.RowIndex].leafname}")).Value);
+            TCLE.OpenFile(TCLE.dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{LvlLeafs[e.RowIndex].leafname}")).Value);
 
         }
         private Rectangle dragBoxFromMouseDown;
@@ -268,8 +268,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     loop.beats
                 });
             }
-            foreach (DataGridViewRow r in lvlLoopTracks.Rows)
+            foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
                 r.HeaderCell.Value = "Volume Track " + r.Index;
+                r.HeaderCell.ToolTipText = "Edit volume levels in Sequencer";
+            }
             btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
             SaveCheckAndWrite(false);
         }
@@ -560,7 +562,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 HeaderText = "Path Name",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
-                DisplayStyleForCurrentCellOnly = true
+                DisplayStyleForCurrentCellOnly = true,
+                FlatStyle = FlatStyle.Flat
             };
             lvlLeafPaths.Columns.Add(_dgvlvlpaths);
             ///

@@ -469,12 +469,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 sampleproperties.undoItems.Add(BuildSave(sampleproperties));
             }
             else {
-                /*
-                btnSaveCheckAndWrite.Enabled = false;
-                btnRevertSample.Enabled = false;
-                toolstripTitleSample.BackColor = Color.FromArgb(40, 40, 40);
-                */
+                this.Text = LoadedSample.Name;
+                //build the JSON to write to file
+                JObject _saveJSON = BuildSave(sampleproperties);
+                sampleproperties.revertPoint = _saveJSON;
+                //write JSON to file
+                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedSample], _saveJSON);
+
                 if (playsound) TCLE.PlaySound("UIsave");
+                TCLE.LvlReloadSamples();
             }
         }
 
