@@ -109,7 +109,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(400, 477);
+            this.masterLvlList.Size = new Size(349, 477);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
@@ -172,7 +172,7 @@
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new Padding(0);
             this.masterToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new Size(400, 29);
+            this.masterToolStrip.Size = new Size(349, 29);
             this.masterToolStrip.Stretch = true;
             this.masterToolStrip.TabIndex = 138;
             // 
@@ -268,7 +268,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(372, -3);
+            this.lblMasterlvllistHelp.Location = new Point(321, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -294,7 +294,7 @@
             this.propertyGridMaster.RightToLeft = RightToLeft.No;
             this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridMaster.Size = new Size(248, 519);
+            this.propertyGridMaster.Size = new Size(299, 519);
             this.propertyGridMaster.TabIndex = 0;
             this.propertyGridMaster.ToolbarVisible = false;
             this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -337,7 +337,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
             this.splitContainer1.Size = new Size(653, 519);
-            this.splitContainer1.SplitterDistance = 400;
+            this.splitContainer1.SplitterDistance = 349;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
             // 

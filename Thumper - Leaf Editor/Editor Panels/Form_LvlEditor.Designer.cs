@@ -351,7 +351,6 @@
             // 
             this.splitContainer2.BackColor = Color.FromArgb(55, 55, 55);
             this.splitContainer2.Dock = DockStyle.Fill;
-            this.splitContainer2.FixedPanel = FixedPanel.Panel2;
             this.splitContainer2.Location = new Point(0, 0);
             this.splitContainer2.Margin = new Padding(4, 3, 4, 3);
             this.splitContainer2.Name = "splitContainer2";
