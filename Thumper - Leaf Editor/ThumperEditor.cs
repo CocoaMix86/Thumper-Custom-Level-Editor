@@ -497,7 +497,7 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip Project
         private void toolstripProjectLeaf_Click(object sender, EventArgs e)
         {
-
+            OpenFile(this, new Form_LeafEditor().SaveAs());
         }
 
         private void toolstripProjectLvl_Click(object sender, EventArgs e)

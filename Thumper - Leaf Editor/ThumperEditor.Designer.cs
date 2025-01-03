@@ -836,7 +836,7 @@
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(203, 214);
+            this.contextMenuProject.Size = new Size(201, 236);
             // 
             // toolstripProjectLeaf
             // 
@@ -844,7 +844,7 @@
             this.toolstripProjectLeaf.ForeColor = Color.PaleGreen;
             this.toolstripProjectLeaf.Image = Properties.Resources.editor_leaf;
             this.toolstripProjectLeaf.Name = "toolstripProjectLeaf";
-            this.toolstripProjectLeaf.Size = new Size(202, 22);
+            this.toolstripProjectLeaf.Size = new Size(200, 22);
             this.toolstripProjectLeaf.Text = "Add Leaf...";
             this.toolstripProjectLeaf.Click += this.toolstripProjectLeaf_Click;
             // 
@@ -854,7 +854,7 @@
             this.toolstripProjectLvl.ForeColor = Color.Green;
             this.toolstripProjectLvl.Image = Properties.Resources.editor_lvl;
             this.toolstripProjectLvl.Name = "toolstripProjectLvl";
-            this.toolstripProjectLvl.Size = new Size(202, 22);
+            this.toolstripProjectLvl.Size = new Size(200, 22);
             this.toolstripProjectLvl.Text = "Add Lvl...";
             this.toolstripProjectLvl.Click += this.toolstripProjectLvl_Click;
             // 
@@ -864,7 +864,7 @@
             this.toolstripProjectGate.ForeColor = Color.Orange;
             this.toolstripProjectGate.Image = Properties.Resources.editor_gate;
             this.toolstripProjectGate.Name = "toolstripProjectGate";
-            this.toolstripProjectGate.Size = new Size(202, 22);
+            this.toolstripProjectGate.Size = new Size(200, 22);
             this.toolstripProjectGate.Text = "Add Gate...";
             this.toolstripProjectGate.Click += this.toolstripProjectGate_Click;
             // 
@@ -874,7 +874,7 @@
             this.toolstripProjectMaster.ForeColor = Color.FromArgb(150, 150, 255);
             this.toolstripProjectMaster.Image = Properties.Resources.editor_master;
             this.toolstripProjectMaster.Name = "toolstripProjectMaster";
-            this.toolstripProjectMaster.Size = new Size(202, 22);
+            this.toolstripProjectMaster.Size = new Size(200, 22);
             this.toolstripProjectMaster.Text = "Add Master...";
             this.toolstripProjectMaster.Click += this.toolstripProjectMaster_Click;
             // 
@@ -884,21 +884,21 @@
             this.toolstripProjectSample.ForeColor = Color.Turquoise;
             this.toolstripProjectSample.Image = Properties.Resources.editor_sample;
             this.toolstripProjectSample.Name = "toolstripProjectSample";
-            this.toolstripProjectSample.Size = new Size(202, 22);
+            this.toolstripProjectSample.Size = new Size(200, 22);
             this.toolstripProjectSample.Text = "Add Sample...";
             this.toolstripProjectSample.Click += this.toolstripProjectSample_Click;
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new Size(199, 6);
+            this.toolStripSeparator7.Size = new Size(197, 6);
             // 
             // toolstripProjectExisting
             // 
             this.toolstripProjectExisting.ForeColor = Color.White;
             this.toolstripProjectExisting.Image = Properties.Resources.icon_file;
             this.toolstripProjectExisting.Name = "toolstripProjectExisting";
-            this.toolstripProjectExisting.Size = new Size(202, 22);
+            this.toolstripProjectExisting.Size = new Size(200, 22);
             this.toolstripProjectExisting.Text = "Add Existing Item...";
             this.toolstripProjectExisting.Click += this.toolstripProjectExisting_Click;
             // 
@@ -906,22 +906,22 @@
             // 
             this.toolstripProjectRegen.ForeColor = Color.White;
             this.toolstripProjectRegen.Name = "toolstripProjectRegen";
-            this.toolstripProjectRegen.Size = new Size(202, 22);
+            this.toolstripProjectRegen.Size = new Size(200, 22);
             this.toolstripProjectRegen.Text = "Regenerate Default Files";
             this.toolstripProjectRegen.Click += this.toolstripProjectRegen_Click;
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new Size(199, 6);
+            this.toolStripSeparator8.Size = new Size(197, 6);
             // 
             // toolstripProjectProperties
             // 
             this.toolstripProjectProperties.ForeColor = Color.White;
             this.toolstripProjectProperties.Image = Properties.Resources.icon_gear;
             this.toolstripProjectProperties.Name = "toolstripProjectProperties";
-            this.toolstripProjectProperties.Size = new Size(202, 22);
-            this.toolstripProjectProperties.Text = "Custom Level Properties";
+            this.toolstripProjectProperties.Size = new Size(200, 22);
+            this.toolstripProjectProperties.Text = "Level Properties";
             this.toolstripProjectProperties.Click += this.toolstripProjectProperties_Click;
             // 
             // addSamplePackToolStripMenuItem1
@@ -929,7 +929,7 @@
             this.addSamplePackToolStripMenuItem1.DropDown = this.contextmenuSampPacks;
             this.addSamplePackToolStripMenuItem1.ForeColor = Color.White;
             this.addSamplePackToolStripMenuItem1.Name = "addSamplePackToolStripMenuItem1";
-            this.addSamplePackToolStripMenuItem1.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem1.Size = new Size(200, 22);
             this.addSamplePackToolStripMenuItem1.Text = "Add Sample Pack";
             // 
             // contextmenuSampPacks

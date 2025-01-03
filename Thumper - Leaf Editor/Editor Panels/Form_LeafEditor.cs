@@ -54,8 +54,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             get { return LeafProperties; }
             set {
-                SaveCheckAndWrite(false);
                 LeafProperties = value;
+                SaveCheckAndWrite(false);
             }
         }
         private LeafProperties LeafProperties;
@@ -1540,7 +1540,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        public void SaveAs()
+        public FileInfo SaveAs()
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -1549,10 +1549,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedleaf = new FileInfo(sfd.FileName);
+
+                if (LeafProperties == null) {
+                    leafProperties = new(this, loadedleaf) {
+                        beats = 32,
+                        timesignature = "4/4",
+                        showcategory = true,
+                        showgrid = true,
+                        connectedcells = true
+                    };
+                }
+                else
+                    leafProperties.FilePath = loadedleaf;
+
                 SaveCheckAndWrite(true, true);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();
             }
+            return loadedleaf;
         }
 
         public bool IsSaved()
@@ -1591,6 +1605,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///LEAF LENGTH
         public void LeafLengthChanged()
         {
+            if (LeafProperties == null)
+                return;
             string data = trackEditor.ColumnCount.ToString();
 
             if (LeafProperties.beats + FrozenColumnOffset > trackEditor.ColumnCount) {
@@ -1675,6 +1691,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Updates column highlighting in the DGV based on time sig
         public void TrackTimeSigHighlighting()
         {
+            if (LeafProperties == null)
+                return;
             bool _switch = true;
             //grab the first part of the time sig. This represents how many beats are in a bar
             //tryparse to see if it fails.
