@@ -55,8 +55,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             get { return LvlProperties; }
             set {
-                SaveCheckAndWrite(false);
                 LvlProperties = value;
+                SaveCheckAndWrite(false);
             }
         }
         private LvlProperties LvlProperties;
@@ -699,7 +699,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        public FileInfo SaveAs()
+        public FileInfo SaveAs(bool isnew = false)
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -719,6 +719,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
 
                 SaveCheckAndWrite(true, true);
+                if (isnew)
+                    TCLE.CloseFileLock(loadedlvl);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();
             }

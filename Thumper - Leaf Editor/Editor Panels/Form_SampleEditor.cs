@@ -5,6 +5,7 @@ using Fmod5Sharp;
 using NAudio.Vorbis;
 using NAudio.Wave;
 using VarispeedDemo.SoundTouch;
+using System.Collections.Generic;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -54,8 +55,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             get => SampleProperties;
             set {
-                SaveCheckAndWrite(false);
                 SampleProperties = value;
+                SaveCheckAndWrite(false);
             }
         }
         private SampleProperties SampleProperties;
@@ -423,7 +424,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        public FileInfo SaveAs()
+        public FileInfo SaveAs(bool isnew = false)
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -440,6 +441,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
 
                 SaveCheckAndWrite(true, true);
+                if (isnew)
+                    TCLE.CloseFileLock(loadedsample);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();
             }

@@ -497,27 +497,27 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip Project
         private void toolstripProjectLeaf_Click(object sender, EventArgs e)
         {
-            OpenFile(this, new Form_LeafEditor().SaveAs());
+            OpenFile(this, new Form_LeafEditor().SaveAs(true));
         }
 
         private void toolstripProjectLvl_Click(object sender, EventArgs e)
         {
-            OpenFile(this, new Form_LvlEditor().SaveAs());
+            OpenFile(this, new Form_LvlEditor().SaveAs(true));
         }
 
         private void toolstripProjectGate_Click(object sender, EventArgs e)
         {
-            OpenFile(this, new Form_GateEditor().SaveAs());
+            OpenFile(this, new Form_GateEditor().SaveAs(true));
         }
 
         private void toolstripProjectMaster_Click(object sender, EventArgs e)
         {
-            OpenFile(this, new Form_MasterEditor().SaveAs());
+            OpenFile(this, new Form_MasterEditor().SaveAs(true));
         }
 
         private void toolstripProjectSample_Click(object sender, EventArgs e)
         {
-            OpenFile(this, new Form_SampleEditor().SaveAs());
+            OpenFile(this, new Form_SampleEditor().SaveAs(true));
         }
 
         private void toolstripProjectExisting_Click(object sender, EventArgs e)

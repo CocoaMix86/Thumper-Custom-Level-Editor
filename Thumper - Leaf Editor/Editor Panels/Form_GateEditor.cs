@@ -88,8 +88,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             get { return GateProperties; }
             set {
-                SaveCheckAndWrite(false);
                 GateProperties = value;
+                SaveCheckAndWrite(false);
             }
         }
         private GateProperties GateProperties;
@@ -422,7 +422,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        public FileInfo SaveAs()
+        public FileInfo SaveAs(bool isnew = false)
         {
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Gate File (*.gate)|*.gate";
@@ -443,6 +443,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
 
                 SaveCheckAndWrite(true, true);
+                if (isnew)
+                    TCLE.CloseFileLock(loadedgate);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();
             }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -52,8 +53,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             get { return MasterProperties; }
             set {
-                SaveCheckAndWrite(false);
                 MasterProperties = value;
+                SaveCheckAndWrite(false);
             }
         }
         public MasterProperties MasterProperties;
@@ -430,7 +431,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        public FileInfo SaveAs()
+        public FileInfo SaveAs(bool isnew = false)
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -449,6 +450,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
 
                 SaveCheckAndWrite(true, true);
+                if (isnew)
+                    TCLE.CloseFileLock(loadedmaster);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();
             }
