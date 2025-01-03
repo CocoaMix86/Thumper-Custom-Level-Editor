@@ -84,7 +84,7 @@ namespace Thumper_Custom_Level_Editor
         public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
-        public static readonly Beeble MainBeeble = new() { Visible = false, Size = new Size(1, 1), Location = new Point(0, 0) };
+        public static Beeble MainBeeble = new() { Visible = false };
         #endregion
 
         #region Form Construction
@@ -172,6 +172,9 @@ namespace Thumper_Custom_Level_Editor
             //finish loading
             Properties.Settings.Default.firstrun = false;
             Properties.Settings.Default.Save();
+            //
+            MainBeeble.Size = Properties.Settings.Default.beeblesize;
+            MainBeeble.Location = Properties.Settings.Default.beebleloc;
         }
 
         private static void JumpListUpdate()
@@ -208,8 +211,8 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save panel sizes and locations
-            ///Properties.Settings.Default.beeblesize = pictureBeeble.Size;
-            ///Properties.Settings.Default.beebleloc = pictureBeeble.Location;
+            Properties.Settings.Default.beeblesize = MainBeeble.Size;
+            Properties.Settings.Default.beebleloc = MainBeeble.Location;
             //colors
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //write quick values to file

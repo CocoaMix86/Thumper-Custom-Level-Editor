@@ -54,7 +54,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.TopMost = true;
-            this.Load += this.Beeble_Load;
             this.MouseDown += this.Beeble_MouseDown;
             this.ResumeLayout(false);
         }

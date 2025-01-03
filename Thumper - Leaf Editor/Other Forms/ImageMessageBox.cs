@@ -49,8 +49,7 @@
         {
             tcle.MaximizeScreenBounds();
             TCLE.MainBeeble.Visible = true;
-            TCLE.MainBeeble.Location = new Point(200, 200);
-            TCLE.MainBeeble.Size = new Size(150, 120);
+            TCLE.MainBeeble.Location = Properties.Settings.Default.beebleloc;
             this.Close();
         }
     }
