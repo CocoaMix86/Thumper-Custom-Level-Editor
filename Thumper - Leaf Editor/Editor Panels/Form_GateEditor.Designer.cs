@@ -74,7 +74,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridGate);
             this.splitContainer1.Size = new Size(625, 364);
-            this.splitContainer1.SplitterDistance = 292;
+            this.splitContainer1.SplitterDistance = 289;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 118;
             // 
@@ -92,7 +92,7 @@
             this.gateToolStrip.Name = "gateToolStrip";
             this.gateToolStrip.Padding = new Padding(0);
             this.gateToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.gateToolStrip.Size = new Size(292, 29);
+            this.gateToolStrip.Size = new Size(289, 29);
             this.gateToolStrip.Stretch = true;
             this.gateToolStrip.TabIndex = 143;
             // 
@@ -195,7 +195,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.gateLvlList.Size = new Size(292, 351);
+            this.gateLvlList.Size = new Size(289, 351);
             this.gateLvlList.TabIndex = 118;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += this.gateLvlList_CellClick_1;
@@ -267,7 +267,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(614, -3);
+            this.lblMasterlvllistHelp.Location = new Point(611, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -293,7 +293,7 @@
             this.propertyGridGate.RightToLeft = RightToLeft.No;
             this.propertyGridGate.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridGate.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridGate.Size = new Size(328, 364);
+            this.propertyGridGate.Size = new Size(331, 364);
             this.propertyGridGate.TabIndex = 0;
             this.propertyGridGate.ToolbarVisible = false;
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -308,6 +308,7 @@
             this.ClientSize = new Size(625, 364);
             this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.KeyPreview = true;
             this.Margin = new Padding(4, 3, 4, 3);
