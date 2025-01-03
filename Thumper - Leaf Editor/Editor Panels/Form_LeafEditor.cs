@@ -1336,6 +1336,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.RowCount += 1;
             seq.editor_row = trackEditor.Rows[^1];
             ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
+            //measure header and see if it's the biggest
+            int tempsize = TextRenderer.MeasureText(seq.editor_row.HeaderCell.Value.ToString(), seq.editor_row.HeaderCell.Style.Font).Width;
+            if (tempsize > trackEditor.RowHeadersWidth)
+                trackEditor.RowHeadersWidth = tempsize;
+            //fill cells with random values
             do {
                 RandomizeRowValues(seq);
             } while (!seq.data_points.Any(x => x.value is not null));
@@ -2007,7 +2012,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
                 dgvc.Value = _out;
-                seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { beat = dgvc.ColumnIndex - FrozenColumnOffset, value = _out, ease = "Ease In Out", interpolation = "Linear" };
+                seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { Owner = seq, beat = dgvc.ColumnIndex - FrozenColumnOffset, value = _out, ease = "Ease In Out", interpolation = "Linear" };
             }
             TrackUpdateHighlighting(seq);
         }
