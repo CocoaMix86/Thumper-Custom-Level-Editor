@@ -1949,7 +1949,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 while (trackEditor.Rows[pastingrow + rowindex + offset].Visible == false) {
                     offset += 1;
                     if (pastingrow + rowindex + offset >= trackEditor.RowCount)
-                        break;
+                        goto exit;
                 }
                 for (int cellindex = 0; cellindex < copiedcells[rowindex].Length; cellindex++) {
                     //if paste will go outside grid bounds, skip
@@ -1963,6 +1963,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset], SequencerObjects[pastingrow + rowindex + offset]);
                 }
             }
+            exit:
             SaveCheckAndWrite(false);
             //SaveCheckAndWrite(false, $"Pasted cells", $"");
         }

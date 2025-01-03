@@ -699,7 +699,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        public void SaveAs()
+        public FileInfo SaveAs()
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -708,10 +708,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedlvl = new FileInfo(sfd.FileName);
+
+                if (lvlProperties == null) {
+                    lvlProperties = new(this, loadedlvl) {
+                        approachbeats = 16,
+                        volume = 1,
+                        allowinput = true,
+                        tutorialtype = "TUTORIAL_NONE"
+                    };
+                }
+
                 SaveCheckAndWrite(true, true);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();
             }
+            return loadedlvl;
         }
 
         public bool IsSaved()

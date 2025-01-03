@@ -423,7 +423,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        public void SaveAs()
+        public FileInfo SaveAs()
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -432,10 +432,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedsample = new FileInfo(sfd.FileName);
+
+                if (sampleproperties == null) {
+                    sampleproperties = new(this, loadedsample) {
+
+                    };
+                }
+
                 SaveCheckAndWrite(true, true);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();
             }
+            return loadedsample;
         }
 
         public bool IsSaved()

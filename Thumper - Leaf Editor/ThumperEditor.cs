@@ -502,22 +502,22 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripProjectLvl_Click(object sender, EventArgs e)
         {
-
+            OpenFile(this, new Form_LvlEditor().SaveAs());
         }
 
         private void toolstripProjectGate_Click(object sender, EventArgs e)
         {
-
+            OpenFile(this, new Form_GateEditor().SaveAs());
         }
 
         private void toolstripProjectMaster_Click(object sender, EventArgs e)
         {
-
+            OpenFile(this, new Form_MasterEditor().SaveAs());
         }
 
         private void toolstripProjectSample_Click(object sender, EventArgs e)
         {
-
+            OpenFile(this, new Form_SampleEditor().SaveAs());
         }
 
         private void toolstripProjectExisting_Click(object sender, EventArgs e)

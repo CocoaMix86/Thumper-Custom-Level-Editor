@@ -430,7 +430,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, true);
         }
         ///SAVE AS
-        public void SaveAs()
+        public FileInfo SaveAs()
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -438,13 +438,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                //separate path and filename
-                string storePath = Path.GetDirectoryName(sfd.FileName);
-                loadedmaster = new FileInfo($@"{storePath}\sequin.master");
+                loadedmaster = new FileInfo(sfd.FileName);
+
+                if (masterproperties == null) {
+                    masterproperties = new(this, loadedmaster) {
+                        skybox = "<none>",
+                        introlvl = "<none>",
+                        checkpointlvl = "<none>"
+                    };
+                }
+
                 SaveCheckAndWrite(true, true);
                 //after saving new file, refresh the project explorer
                 TCLE.dockProjectExplorer.CreateTreeView();
             }
+            return loadedmaster;
         }
 
         public bool IsSaved()
