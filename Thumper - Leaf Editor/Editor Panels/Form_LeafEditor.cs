@@ -1462,6 +1462,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _s.highlight_color = TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple;
                 foreach (dynamic dp in seq_obj["data_points"]) {
                     SeqDataPoint data = new() {
+                        Owner = _s,
                         beat = dp["beat"],
                         value = dp["value"],
                         interpolation = ((string)dp["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
@@ -1469,7 +1470,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     };
                     _s.data_points[data.beat] = data;
                 }
-
                 //if object is multilane, we will add all 5 lanes at once, as defaults
                 //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
                 if (_s.friendly_lane is not "none") {
@@ -1485,21 +1485,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         leafProperties.seq_objs.Add(_s.CloneAsDefault("z02", "lane right 2", trackEditor.Rows[^1]));
                     }
                     lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
+                    int index = leafProperties.seq_objs.IndexOf(lookup);
                     _s.editor_row = lookup.editor_row;
-                    _s.editor_row.Visible = _s.friendly_lane == "lane center";
-                    lookup = _s;
+                    leafProperties.seq_objs[index] = _s;
                 }
                 //else just add the object without needing extra lanes
                 else {
                     //attach the dgv row to the object
-                    DataGridViewRow dgvr = new() { };
-                    trackEditor.Rows.Add(dgvr);
+                    trackEditor.Rows.Add(1);
                     _s.editor_row = trackEditor.Rows[^1];
-                    //do this to find which header is the longest
+                    _s.expandlanes = true;
                     //finally, add the completed seq_obj to tracks
                     leafProperties.seq_objs.Add(_s);
                 }
-                ChangeTrackName(_s, leafProperties.showcategory ? $"[{_s.category}] " : "");
                 TrackRawImport(_s, _s.data_points);
                 //measure header and see if it's the biggest
                 int tempsize = TextRenderer.MeasureText(_s.editor_row.HeaderCell.Value.ToString(), _s.editor_row.HeaderCell.Style.Font).Width;
@@ -1768,7 +1766,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
 
             JArray seq_objs = new();
-            foreach (Sequencer_Object seq_obj in _properties.seq_objs) {
+            foreach (Sequencer_Object seq_obj in _properties.seq_objs.Where(x => !x.isdefault)) {
                 //skip blank tracks
                 if (seq_obj.friendly_param == null)
                     continue;

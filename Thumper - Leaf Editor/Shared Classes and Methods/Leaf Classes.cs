@@ -1,6 +1,4 @@
-﻿using ICSharpCode.TextEditor.Actions;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing.Design;
@@ -63,7 +61,7 @@ namespace Thumper_Custom_Level_Editor
             parent = Parent;
             data_points = new SeqDataPoint[255].ToList();
             for (int x = 0; x < 255; x++) {
-                data_points[x] = new() { beat = x, value = null, interpolation = "Linear", ease = "Ease In Out" };
+                data_points[x] = new() { Owner = this, beat = x, value = null, interpolation = "Linear", ease = "Ease In Out" };
             }
         }
 
@@ -101,8 +99,16 @@ namespace Thumper_Custom_Level_Editor
 
     public class SeqDataPoint
     {
+        public Sequencer_Object Owner { get; set; }
         public int beat { get; set; }
-        public object value { get; set; }
+        public object value
+        {
+            get => Value;
+            set { 
+                Value = value;
+                Owner.isdefault = false; }
+        }
+        private object Value;
         public string interpolation { get; set; }
         public string ease { get; set; }
     }

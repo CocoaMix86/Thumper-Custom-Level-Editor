@@ -43,7 +43,7 @@
         }
         private void dgvRecentFiles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex == -1)
                 return;
             string level = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
             //handle column 0 clicks only as that's where the button is
@@ -57,8 +57,10 @@
                         RemoveRecentLevel(e.RowIndex);
                     return;
                 }
+                txtFilePath.Text = level;
+                toolstripOpenPanels_Click(null, null);
                 //set working folder to the path
-                workingfolder = new DirectoryInfo(level);
+                ///workingfolder = new DirectoryInfo(level);
                 panelRecentFiles.Visible = false;
                 PlaySound("UIfolderclose");
             }
