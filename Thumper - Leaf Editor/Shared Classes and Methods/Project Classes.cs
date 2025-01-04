@@ -40,8 +40,7 @@ namespace Thumper_Custom_Level_Editor
         [Description("")]
         [DefaultValue("D0")]
         [TypeConverter(typeof(DifficultyOptions))]
-        public string difficulty { get { return _difficulty; } set { _difficulty = value; } }
-        private string _difficulty = null;
+        public string difficulty { get; set; }
 
         [Category("General Project Info")]
         [DisplayName("Description")]

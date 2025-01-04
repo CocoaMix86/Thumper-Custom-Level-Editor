@@ -404,6 +404,19 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
         }
 
+        private void contextMenuRecentProjects_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            contextMenuRecentProjects.Items.Clear();
+            foreach (IDockContent ws in Workspaces) {
+                ToolStripMenuItem item = new() {
+                    Text = ws.DockHandler.TabText,
+                    ForeColor = Color.White,
+                    Image = Properties.Resources.icon_tcle
+                };
+                contextmenuMoveWorkspace.Items.Add(item);
+            }
+        }
+
         private void toolstripFileExit_Click(object sender, EventArgs e)
         {
             this.Close();

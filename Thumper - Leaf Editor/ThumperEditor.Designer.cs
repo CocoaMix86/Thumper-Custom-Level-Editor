@@ -181,6 +181,8 @@
             this.moveToWorkspaceToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuMoveWorkspace = new ContextMenuStrip(this.components);
             this.eToolStripMenuItem = new ToolStripMenuItem();
+            this.contextMenuRecentProjects = new ContextMenuStrip(this.components);
+            this.toolStripMenuItem2 = new ToolStripMenuItem();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -200,6 +202,7 @@
             this.panelFill.SuspendLayout();
             this.contextmenuTabClick.SuspendLayout();
             this.contextmenuMoveWorkspace.SuspendLayout();
+            this.contextMenuRecentProjects.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenuItem1
@@ -836,7 +839,7 @@
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(201, 236);
+            this.contextMenuProject.Size = new Size(201, 214);
             // 
             // toolstripProjectLeaf
             // 
@@ -1657,6 +1660,21 @@
             this.eToolStripMenuItem.Size = new Size(80, 22);
             this.eToolStripMenuItem.Text = "e";
             // 
+            // contextMenuRecentProjects
+            // 
+            this.contextMenuRecentProjects.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuRecentProjects.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem2 });
+            this.contextMenuRecentProjects.Name = "contextmenuHelp";
+            this.contextMenuRecentProjects.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuRecentProjects.Size = new Size(81, 26);
+            this.contextMenuRecentProjects.Opening += this.contextMenuRecentProjects_Opening;
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new Size(80, 22);
+            this.toolStripMenuItem2.Text = "e";
+            // 
             // TCLE
             // 
             this.AutoScaleMode = AutoScaleMode.None;
@@ -1710,6 +1728,7 @@
             this.panelFill.ResumeLayout(false);
             this.contextmenuTabClick.ResumeLayout(false);
             this.contextmenuMoveWorkspace.ResumeLayout(false);
+            this.contextMenuRecentProjects.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -1860,6 +1879,8 @@
         public ToolStripMenuItem toolstripEditCopy;
         public ToolStripMenuItem toolstripEditPaste;
         public ToolStripMenuItem toolstripEditDelete;
+        private ContextMenuStrip contextMenuRecentProjects;
+        private ToolStripMenuItem toolStripMenuItem2;
     }
 }
 
