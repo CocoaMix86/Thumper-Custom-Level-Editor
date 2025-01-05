@@ -104,9 +104,16 @@ namespace Thumper_Custom_Level_Editor
         public object value
         {
             get => Value;
-            set { 
+            set {
                 Value = value;
-                Owner.isdefault = false; }
+                if (Owner != null && Owner.editor_row != null) {
+                    if (Owner.editor_row.Cells[beat + 3].Value != Value) {
+                        Owner.editor_row.Cells[beat + 3].Value = Value;
+                        Owner.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
+                    }
+                    Owner.isdefault = false;
+                }
+            }
         }
         private object Value;
         public string interpolation { get; set; }
@@ -280,7 +287,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Data Point")]
         [DisplayName("Value")]
         [Description("")]
-        public object datapointvalue => selecteddatapoint.value;
+        public decimal? datapointvalue { get => (decimal?)selecteddatapoint.value; set => selecteddatapoint.value = value; }
 
         [CategoryAttribute("Sequencer Data Point")]
         [DisplayName("Interpolation")]

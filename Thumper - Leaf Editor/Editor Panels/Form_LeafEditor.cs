@@ -376,7 +376,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (trackEditor.IsCurrentCellInEditMode)
                 CellValueChanged(e.RowIndex, e.ColumnIndex);
         }
-        private void CellValueChanged(int rowindex, int columnindex, bool setnull = false)
+        public void CellValueChanged(int rowindex, int columnindex, bool setnull = false)
         {
             List<DataGridViewRow> edited = new();
             try {
