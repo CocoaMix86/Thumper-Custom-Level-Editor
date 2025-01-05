@@ -387,6 +387,7 @@ namespace Thumper_Custom_Level_Editor
             //create a workspace
             Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
             workspace1.Show(dockMain, DockState.Document);
+            OpenFile(ProjectExplorer.projectfiles.FirstOrDefault(x => x.Value.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase)).Value);
 
             toolstripAddScene.Enabled = true;
             toolstripProject.Enabled = true;
