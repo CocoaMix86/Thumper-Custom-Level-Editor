@@ -8,7 +8,8 @@
             panelRecentFiles.Visible = true;
             panelRecentFiles.BringToFront();
             foreach (string level in recentfiles) {
-                dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
+                FileInfo tcl = new(level);
+                dgvRecentFiles.Rows.Add("", tcl.Name, level);
             }
             dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
@@ -45,22 +46,20 @@
         {
             if (e.RowIndex == -1)
                 return;
-            string level = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
+            FileInfo level = new(dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString());
             //handle column 0 clicks only as that's where the button is
             if (e.ColumnIndex == 0) {
-                if (WorkingFolder?.FullName == level) {
+                if (WorkingFolder?.FullName == level.DirectoryName) {
                     panelRecentFiles.Visible = false;
                     return;
                 }
-                if (!Directory.Exists(level)) {
-                    if (MessageBox.Show($"Recent Level selected no longer exists at that location\n{level}\n\nDo you want to remove this entry?", "Level Custom Thumper Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (!level.Exists) {
+                    if (MessageBox.Show($"Recent Level selected no longer exists at that location\n{level.FullName}\n\nDo you want to remove this entry?", "Level Custom Thumper Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         RemoveRecentLevel(e.RowIndex);
                     return;
                 }
-                txtFilePath.Text = level;
+                txtFilePath.Text = level.FullName;
                 toolstripOpenPanels_Click(null, null);
-                //set working folder to the path
-                ///workingfolder = new DirectoryInfo(level);
                 panelRecentFiles.Visible = false;
                 PlaySound("UIfolderclose");
             }

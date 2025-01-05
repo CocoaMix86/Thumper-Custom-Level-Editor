@@ -28,7 +28,8 @@ namespace Thumper_Custom_Level_Editor
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
         public static Beeble MainBeeble = new() { Visible = false };
-        public ProjectProperties projectProperties { 
+        public ProjectProperties projectProperties
+        {
             get => ProjectProperties;
             set => ProjectProperties = value;
         }
@@ -64,6 +65,7 @@ namespace Thumper_Custom_Level_Editor
             contextmenuTabClick.Renderer = new ContextMenuColors();
             contextmenuSampPacks.Renderer = new ContextMenuColors();
             contextmenuMoveWorkspace.Renderer = new ContextMenuColors();
+            contextMenuRecentProjects.Renderer = new ContextMenuColors();
             //
             if (AppSettings.Recentfiles == null)
                 AppSettings.Recentfiles = new List<string>();
@@ -137,10 +139,11 @@ namespace Thumper_Custom_Level_Editor
             };
 
             foreach (string file in AppSettings.Recentfiles) {
+                FileInfo tcl = new FileInfo(file);
                 JumpTask jmp = new() {
-                    Title = Path.GetFileName(file),
+                    Title = $"{tcl.Name}",
                     Arguments = file,
-                    Description = file,
+                    Description = $"{tcl.FullName}",
                     ApplicationPath = System.Reflection.Assembly.GetEntryAssembly().Location
                 };
                 jml.JumpItems.Add(jmp);
@@ -371,8 +374,8 @@ namespace Thumper_Custom_Level_Editor
             toolstripLevelName.Text = projectProperties.projectname;
             toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{projectProperties.difficulty}");
             //add to recent files
-            AppSettings.Recentfiles.Remove(WorkingFolder.FullName);
-            AppSettings.Recentfiles.Insert(0, WorkingFolder.FullName);
+            AppSettings.Recentfiles.Remove(TCL.FullName);
+            AppSettings.Recentfiles.Insert(0, TCL.FullName);
             JumpListUpdate();
             //load sample of the project
             LvlReloadSamples();
@@ -426,14 +429,21 @@ namespace Thumper_Custom_Level_Editor
         private void contextMenuRecentProjects_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             contextMenuRecentProjects.Items.Clear();
-            foreach (IDockContent ws in Workspaces) {
+            foreach (string path in AppSettings.Recentfiles) {
+                FileInfo tcl = new FileInfo(path);
                 ToolStripMenuItem item = new() {
-                    Text = ws.DockHandler.TabText,
+                    Text = $"{tcl.Name} ({tcl.FullName})",
                     ForeColor = Color.White,
                     Image = Properties.Resources.icon_tcle
                 };
-                contextmenuMoveWorkspace.Items.Add(item);
+                contextMenuRecentProjects.Items.Add(item);
             }
+        }
+
+        private void contextMenuRecentProjects_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            FileInfo tcl = new(e.ClickedItem.Text.Split('(')[1].TrimEnd(')'));
+            OpenProject(tcl);
         }
 
         private void toolstripFileExit_Click(object sender, EventArgs e)
@@ -514,6 +524,26 @@ namespace Thumper_Custom_Level_Editor
         {
             Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
             workspace1.Show(dockMain, DockState.Document);
+        }
+
+        private void contextmenuMoveWorkspace_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            contextmenuMoveWorkspace.Items.Clear();
+            foreach (IDockContent ws in Workspaces) {
+                ToolStripMenuItem item = new() {
+                    Text = ws.DockHandler.TabText,
+                    ForeColor = Color.White,
+                    Image = Properties.Resources.editor_workspace,
+                    Checked = ws == ActiveWorkspace
+                };
+                contextmenuMoveWorkspace.Items.Add(item);
+            }
+        }
+
+        private void contextmenuMoveWorkspace_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Form_WorkSpace workspace = Workspaces.First(x => x.DockHandler.TabText == e.ClickedItem.Text) as Form_WorkSpace;
+            (GlobalActiveDocument as DockContent).Show(workspace.dockMain, DockState.Document);
         }
         #endregion
         #region Toolstrip Help
@@ -671,7 +701,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
 
-            OpenProject(projecttoload);            
+            OpenProject(projecttoload);
         }
         private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
 
@@ -724,26 +754,6 @@ namespace Thumper_Custom_Level_Editor
             FileInfo foldertoopen = ProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value;
             if (foldertoopen.Directory.Exists)
                 Process.Start("explorer.exe", $@"/select, ""{foldertoopen.FullName}""");
-        }
-
-        private void contextmenuMoveWorkspace_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            contextmenuMoveWorkspace.Items.Clear();
-            foreach (IDockContent ws in Workspaces) {
-                ToolStripMenuItem item = new() {
-                    Text = ws.DockHandler.TabText,
-                    ForeColor = Color.White,
-                    Image = Properties.Resources.editor_workspace,
-                    Checked = ws == ActiveWorkspace
-                };
-                contextmenuMoveWorkspace.Items.Add(item);
-            }
-        }
-
-        private void contextmenuMoveWorkspace_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            Form_WorkSpace workspace = Workspaces.First(x => x.DockHandler.TabText == e.ClickedItem.Text) as Form_WorkSpace;
-            (GlobalActiveDocument as DockContent).Show(workspace.dockMain, DockState.Document);
         }
         #endregion
 
