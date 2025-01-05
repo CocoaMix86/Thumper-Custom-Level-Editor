@@ -381,6 +381,7 @@ namespace Thumper_Custom_Level_Editor
 
             //Load the project''s files into Explorer
             dockProjectExplorer.LoadProject();
+            dockProjectProperties.LoadProjectProperties();
             //create a workspace
             Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
             workspace1.Show(dockMain, DockState.Document);
