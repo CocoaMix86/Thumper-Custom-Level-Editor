@@ -74,7 +74,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridGate);
             this.splitContainer1.Size = new Size(625, 364);
-            this.splitContainer1.SplitterDistance = 289;
+            this.splitContainer1.SplitterDistance = 288;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 118;
             // 
@@ -82,17 +82,17 @@
             // 
             this.gateToolStrip.AutoSize = false;
             this.gateToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.gateToolStrip.Dock = DockStyle.Bottom;
+            this.gateToolStrip.Dock = DockStyle.Left;
             this.gateToolStrip.GripMargin = new Padding(0);
             this.gateToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.gateToolStrip.ImageScalingSize = new Size(20, 20);
             this.gateToolStrip.Items.AddRange(new ToolStripItem[] { this.btnGateLvlAdd, this.btnGateLvlDelete, this.btnGateLvlUp, this.btnGateLvlDown });
-            this.gateToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.gateToolStrip.Location = new Point(0, 335);
+            this.gateToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.gateToolStrip.Location = new Point(0, 13);
             this.gateToolStrip.Name = "gateToolStrip";
             this.gateToolStrip.Padding = new Padding(0);
             this.gateToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.gateToolStrip.Size = new Size(289, 29);
+            this.gateToolStrip.Size = new Size(24, 351);
             this.gateToolStrip.Stretch = true;
             this.gateToolStrip.TabIndex = 143;
             // 
@@ -105,7 +105,7 @@
             this.btnGateLvlAdd.ImageTransparentColor = Color.Magenta;
             this.btnGateLvlAdd.Margin = new Padding(0);
             this.btnGateLvlAdd.Name = "btnGateLvlAdd";
-            this.btnGateLvlAdd.Size = new Size(24, 29);
+            this.btnGateLvlAdd.Size = new Size(23, 24);
             this.btnGateLvlAdd.ToolTipText = "Add new phase";
             this.btnGateLvlAdd.Click += this.btnGateLvlAdd_Click;
             // 
@@ -117,7 +117,7 @@
             this.btnGateLvlDelete.ImageTransparentColor = Color.Magenta;
             this.btnGateLvlDelete.Margin = new Padding(0);
             this.btnGateLvlDelete.Name = "btnGateLvlDelete";
-            this.btnGateLvlDelete.Size = new Size(24, 29);
+            this.btnGateLvlDelete.Size = new Size(23, 24);
             this.btnGateLvlDelete.ToolTipText = "Delete selected phase";
             this.btnGateLvlDelete.Click += this.btnGateLvlDelete_Click;
             // 
@@ -129,7 +129,7 @@
             this.btnGateLvlUp.ImageTransparentColor = Color.Magenta;
             this.btnGateLvlUp.Margin = new Padding(0);
             this.btnGateLvlUp.Name = "btnGateLvlUp";
-            this.btnGateLvlUp.Size = new Size(24, 29);
+            this.btnGateLvlUp.Size = new Size(23, 24);
             this.btnGateLvlUp.ToolTipText = "Move selected phase up";
             this.btnGateLvlUp.Click += this.btnGateLvlUp_Click;
             // 
@@ -141,7 +141,7 @@
             this.btnGateLvlDown.ImageTransparentColor = Color.Magenta;
             this.btnGateLvlDown.Margin = new Padding(0);
             this.btnGateLvlDown.Name = "btnGateLvlDown";
-            this.btnGateLvlDown.Size = new Size(24, 29);
+            this.btnGateLvlDown.Size = new Size(23, 24);
             this.btnGateLvlDown.ToolTipText = "Move selected phase down";
             this.btnGateLvlDown.Click += this.btnGateLvlDown_Click;
             // 
@@ -195,7 +195,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.gateLvlList.Size = new Size(289, 351);
+            this.gateLvlList.Size = new Size(288, 351);
             this.gateLvlList.TabIndex = 118;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += this.gateLvlList_CellClick_1;
@@ -267,7 +267,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(611, -3);
+            this.lblMasterlvllistHelp.Location = new Point(610, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -293,7 +293,7 @@
             this.propertyGridGate.RightToLeft = RightToLeft.No;
             this.propertyGridGate.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridGate.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridGate.Size = new Size(331, 364);
+            this.propertyGridGate.Size = new Size(332, 364);
             this.propertyGridGate.TabIndex = 0;
             this.propertyGridGate.ToolbarVisible = false;
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);

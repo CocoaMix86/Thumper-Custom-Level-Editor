@@ -45,11 +45,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnSampleAdd = new ToolStripButton();
             this.btnSampleDelete = new ToolStripButton();
             this.FSBtoSamp = new ToolStripButton();
-            this.lblSampleFSBhelp = new ToolStripLabel();
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
             this.splitContainer1 = new SplitContainer();
             this.timerSample = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)this.sampleList).BeginInit();
             this.sampleToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -62,9 +62,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             this.volumeSlider1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             this.volumeSlider1.Cursor = Cursors.Hand;
-            this.volumeSlider1.Location = new Point(77, 494);
+            this.volumeSlider1.Location = new Point(141, 2);
             this.volumeSlider1.Name = "volumeSlider1";
-            this.volumeSlider1.Size = new Size(128, 20);
+            this.volumeSlider1.Size = new Size(135, 22);
             this.volumeSlider1.TabIndex = 152;
             this.toolTip1.SetToolTip(this.volumeSlider1, "Alters volume of smaple playback. Does not go above 0dB.");
             this.volumeSlider1.VolumeChanged += this.volumeSlider1_VolumeChanged;
@@ -103,7 +103,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.sampleList.Dock = DockStyle.Fill;
             this.sampleList.EnableHeadersVisualStyles = false;
             this.sampleList.GridColor = Color.Black;
-            this.sampleList.Location = new Point(0, 13);
+            this.sampleList.Location = new Point(24, 26);
             this.sampleList.Margin = new Padding(4, 3, 4, 3);
             this.sampleList.Name = "sampleList";
             this.sampleList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -120,7 +120,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.sampleList.Size = new Size(291, 477);
+            this.sampleList.Size = new Size(266, 493);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellClick += this.sampleList_CellClick;
@@ -166,17 +166,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             this.sampleToolStrip.AutoSize = false;
             this.sampleToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.sampleToolStrip.Dock = DockStyle.Bottom;
+            this.sampleToolStrip.Dock = DockStyle.Left;
             this.sampleToolStrip.GripMargin = new Padding(0);
             this.sampleToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.sampleToolStrip.ImageScalingSize = new Size(20, 20);
-            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp, this.lblSampleFSBhelp });
-            this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.sampleToolStrip.Location = new Point(0, 490);
+            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp });
+            this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.sampleToolStrip.Location = new Point(0, 13);
             this.sampleToolStrip.Name = "sampleToolStrip";
             this.sampleToolStrip.Padding = new Padding(0);
             this.sampleToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.sampleToolStrip.Size = new Size(291, 29);
+            this.sampleToolStrip.Size = new Size(24, 506);
             this.sampleToolStrip.Stretch = true;
             this.sampleToolStrip.TabIndex = 150;
             // 
@@ -189,7 +189,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnSampleAdd.ImageTransparentColor = Color.Magenta;
             this.btnSampleAdd.Margin = new Padding(0);
             this.btnSampleAdd.Name = "btnSampleAdd";
-            this.btnSampleAdd.Size = new Size(24, 29);
+            this.btnSampleAdd.Size = new Size(23, 24);
             this.btnSampleAdd.ToolTipText = "Add new sample";
             this.btnSampleAdd.Click += this.btnSampleAdd_Click;
             // 
@@ -201,7 +201,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnSampleDelete.ImageTransparentColor = Color.Magenta;
             this.btnSampleDelete.Margin = new Padding(0);
             this.btnSampleDelete.Name = "btnSampleDelete";
-            this.btnSampleDelete.Size = new Size(24, 29);
+            this.btnSampleDelete.Size = new Size(23, 24);
             this.btnSampleDelete.ToolTipText = "Delete selected phase";
             this.btnSampleDelete.Click += this.btnSampleDelete_Click;
             // 
@@ -212,19 +212,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.FSBtoSamp.Image = Properties.Resources.icon_import;
             this.FSBtoSamp.ImageTransparentColor = Color.Magenta;
             this.FSBtoSamp.Name = "FSBtoSamp";
-            this.FSBtoSamp.Size = new Size(24, 26);
+            this.FSBtoSamp.Size = new Size(23, 24);
             this.FSBtoSamp.ToolTipText = "Import FSB files to Sample format";
             this.FSBtoSamp.Click += this.FSBtoSamp_Click;
-            // 
-            // lblSampleFSBhelp
-            // 
-            this.lblSampleFSBhelp.Alignment = ToolStripItemAlignment.Right;
-            this.lblSampleFSBhelp.Font = new Font("Segoe UI", 9.75F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
-            this.lblSampleFSBhelp.ForeColor = Color.DodgerBlue;
-            this.lblSampleFSBhelp.Name = "lblSampleFSBhelp";
-            this.lblSampleFSBhelp.Size = new Size(161, 26);
-            this.lblSampleFSBhelp.Text = "How to get a .FSB audio file";
-            this.lblSampleFSBhelp.Click += this.lblSampleFSBhelp_Click;
             // 
             // propertyGridSample
             // 
@@ -245,7 +235,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample.RightToLeft = RightToLeft.No;
             this.propertyGridSample.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridSample.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSample.Size = new Size(637, 519);
+            this.propertyGridSample.Size = new Size(638, 519);
             this.propertyGridSample.TabIndex = 0;
             this.propertyGridSample.ToolbarVisible = false;
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -260,7 +250,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(945, -3);
+            this.lblMasterlvllistHelp.Location = new Point(944, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -278,8 +268,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.volumeSlider1);
             this.splitContainer1.Panel1.Controls.Add(this.sampleList);
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.volumeSlider1);
             this.splitContainer1.Panel1.Controls.Add(this.sampleToolStrip);
             this.splitContainer1.Panel1.Controls.Add(this.label54);
             this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
@@ -288,13 +279,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridSample);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 291;
+            this.splitContainer1.SplitterDistance = 290;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
             // 
             // timerSample
             // 
             this.timerSample.Tick += this.timerSample_Tick;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = Color.FromArgb(10, 10, 10);
+            this.label1.Dock = DockStyle.Top;
+            this.label1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            this.label1.ForeColor = SystemColors.Highlight;
+            this.label1.Location = new Point(24, 13);
+            this.label1.Margin = new Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new Size(104, 13);
+            this.label1.TabIndex = 153;
+            this.label1.Text = "How to get a .fsb file";
+            this.label1.Click += this.lblSampleFSBhelp_Click;
             // 
             // Form_SampleEditor
             // 
@@ -331,7 +337,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private System.Windows.Forms.ToolStripButton btnSampleAdd;
         private System.Windows.Forms.ToolStripButton btnSampleDelete;
         private System.Windows.Forms.ToolStripButton FSBtoSamp;
-        private System.Windows.Forms.ToolStripLabel lblSampleFSBhelp;
         public PropertyGrid propertyGridSample;
         private Label lblMasterlvllistHelp;
         private SplitContainer splitContainer1;
@@ -339,5 +344,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private System.Windows.Forms.Timer timerSample;
         private DataGridViewButtonColumn Columnplaybuttons;
         private DataGridViewTextBoxColumn SampleName;
+        private Label label1;
     }
 }

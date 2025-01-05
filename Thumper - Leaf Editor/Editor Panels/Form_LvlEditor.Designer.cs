@@ -120,7 +120,7 @@
             // 
             this.volumeSlider1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             this.volumeSlider1.Cursor = Cursors.Hand;
-            this.volumeSlider1.Location = new Point(51, 176);
+            this.volumeSlider1.Location = new Point(60, 15);
             this.volumeSlider1.Name = "volumeSlider1";
             this.volumeSlider1.Size = new Size(128, 20);
             this.volumeSlider1.TabIndex = 164;
@@ -131,17 +131,17 @@
             // 
             this.lvlToolStrip.AutoSize = false;
             this.lvlToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlToolStrip.Dock = DockStyle.Bottom;
+            this.lvlToolStrip.Dock = DockStyle.Left;
             this.lvlToolStrip.GripMargin = new Padding(0);
             this.lvlToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.lvlToolStrip.ImageScalingSize = new Size(20, 20);
             this.lvlToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLeafAdd, this.btnLvlLeafDelete, this.btnLvlLeafUp, this.btnLvlLeafDown, this.btnLvlLeafCopy, this.btnLvlLeafPaste, this.btnLvlLeafRandom });
-            this.lvlToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlToolStrip.Location = new Point(0, 271);
+            this.lvlToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.lvlToolStrip.Location = new Point(0, 13);
             this.lvlToolStrip.Name = "lvlToolStrip";
             this.lvlToolStrip.Padding = new Padding(0);
             this.lvlToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlToolStrip.Size = new Size(350, 29);
+            this.lvlToolStrip.Size = new Size(24, 287);
             this.lvlToolStrip.Stretch = true;
             this.lvlToolStrip.TabIndex = 141;
             // 
@@ -154,7 +154,7 @@
             this.btnLvlLeafAdd.ImageTransparentColor = Color.Magenta;
             this.btnLvlLeafAdd.Margin = new Padding(0);
             this.btnLvlLeafAdd.Name = "btnLvlLeafAdd";
-            this.btnLvlLeafAdd.Size = new Size(24, 29);
+            this.btnLvlLeafAdd.Size = new Size(23, 24);
             this.btnLvlLeafAdd.ToolTipText = "Add new sublevel to the list";
             // 
             // btnLvlLeafDelete
@@ -165,7 +165,7 @@
             this.btnLvlLeafDelete.ImageTransparentColor = Color.Magenta;
             this.btnLvlLeafDelete.Margin = new Padding(0);
             this.btnLvlLeafDelete.Name = "btnLvlLeafDelete";
-            this.btnLvlLeafDelete.Size = new Size(24, 29);
+            this.btnLvlLeafDelete.Size = new Size(23, 24);
             this.btnLvlLeafDelete.ToolTipText = "Delete selected sublevel from this list";
             // 
             // btnLvlLeafUp
@@ -176,7 +176,7 @@
             this.btnLvlLeafUp.ImageTransparentColor = Color.Magenta;
             this.btnLvlLeafUp.Margin = new Padding(0);
             this.btnLvlLeafUp.Name = "btnLvlLeafUp";
-            this.btnLvlLeafUp.Size = new Size(24, 29);
+            this.btnLvlLeafUp.Size = new Size(23, 24);
             this.btnLvlLeafUp.ToolTipText = "Move selected sublevel up";
             // 
             // btnLvlLeafDown
@@ -187,7 +187,7 @@
             this.btnLvlLeafDown.ImageTransparentColor = Color.Magenta;
             this.btnLvlLeafDown.Margin = new Padding(0);
             this.btnLvlLeafDown.Name = "btnLvlLeafDown";
-            this.btnLvlLeafDown.Size = new Size(24, 29);
+            this.btnLvlLeafDown.Size = new Size(23, 24);
             this.btnLvlLeafDown.ToolTipText = "Move selected sublevel down";
             // 
             // btnLvlLeafCopy
@@ -198,7 +198,7 @@
             this.btnLvlLeafCopy.ImageTransparentColor = Color.Magenta;
             this.btnLvlLeafCopy.Margin = new Padding(0);
             this.btnLvlLeafCopy.Name = "btnLvlLeafCopy";
-            this.btnLvlLeafCopy.Size = new Size(24, 29);
+            this.btnLvlLeafCopy.Size = new Size(23, 24);
             this.btnLvlLeafCopy.ToolTipText = "Copy selected sublevel";
             // 
             // btnLvlLeafPaste
@@ -208,7 +208,7 @@
             this.btnLvlLeafPaste.Image = Properties.Resources.icon_paste2;
             this.btnLvlLeafPaste.ImageTransparentColor = Color.Magenta;
             this.btnLvlLeafPaste.Name = "btnLvlLeafPaste";
-            this.btnLvlLeafPaste.Size = new Size(24, 26);
+            this.btnLvlLeafPaste.Size = new Size(23, 24);
             this.btnLvlLeafPaste.ToolTipText = "Paste the copied sublevel";
             // 
             // btnLvlLeafRandom
@@ -218,7 +218,7 @@
             this.btnLvlLeafRandom.Image = Properties.Resources.icon_random;
             this.btnLvlLeafRandom.ImageTransparentColor = Color.Magenta;
             this.btnLvlLeafRandom.Name = "btnLvlLeafRandom";
-            this.btnLvlLeafRandom.Size = new Size(24, 26);
+            this.btnLvlLeafRandom.Size = new Size(23, 24);
             this.btnLvlLeafRandom.ToolTipText = "Add a random leaf";
             // 
             // label29
@@ -268,7 +268,7 @@
             this.lvlLeafList.Dock = DockStyle.Fill;
             this.lvlLeafList.EnableHeadersVisualStyles = false;
             this.lvlLeafList.GridColor = Color.Black;
-            this.lvlLeafList.Location = new Point(0, 13);
+            this.lvlLeafList.Location = new Point(24, 13);
             this.lvlLeafList.Margin = new Padding(4, 3, 4, 3);
             this.lvlLeafList.Name = "lvlLeafList";
             this.lvlLeafList.ReadOnly = true;
@@ -285,7 +285,7 @@
             this.lvlLeafList.RowTemplate.Height = 20;
             this.lvlLeafList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafList.Size = new Size(350, 258);
+            this.lvlLeafList.Size = new Size(326, 287);
             this.lvlLeafList.TabIndex = 74;
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellClick += this.lvlLeafList_CellClick;
@@ -436,9 +436,9 @@
             // 
             this.splitContainer3.Panel2.AutoScroll = true;
             this.splitContainer3.Panel2.Controls.Add(this.volumeSlider1);
+            this.splitContainer3.Panel2.Controls.Add(this.lvlLoopToolStrip);
             this.splitContainer3.Panel2.Controls.Add(this.lvlLoopTracks);
             this.splitContainer3.Panel2.Controls.Add(this.label22);
-            this.splitContainer3.Panel2.Controls.Add(this.lvlLoopToolStrip);
             this.splitContainer3.Size = new Size(707, 201);
             this.splitContainer3.SplitterDistance = 250;
             this.splitContainer3.SplitterWidth = 5;
@@ -477,7 +477,7 @@
             this.lvlLeafPaths.Dock = DockStyle.Fill;
             this.lvlLeafPaths.EnableHeadersVisualStyles = false;
             this.lvlLeafPaths.GridColor = Color.Black;
-            this.lvlLeafPaths.Location = new Point(0, 13);
+            this.lvlLeafPaths.Location = new Point(0, 38);
             this.lvlLeafPaths.Margin = new Padding(4, 3, 4, 3);
             this.lvlLeafPaths.Name = "lvlLeafPaths";
             this.lvlLeafPaths.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -496,7 +496,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafPaths.Size = new Size(250, 159);
+            this.lvlLeafPaths.Size = new Size(250, 163);
             this.lvlLeafPaths.TabIndex = 160;
             this.lvlLeafPaths.CellMouseEnter += this.lvlLeafPaths_CellMouseEnter;
             this.lvlLeafPaths.CellMouseLeave += this.lvlLeafPaths_CellMouseLeave;
@@ -508,17 +508,16 @@
             // 
             this.lvlPathsToolStrip.AutoSize = false;
             this.lvlPathsToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlPathsToolStrip.Dock = DockStyle.Bottom;
             this.lvlPathsToolStrip.GripMargin = new Padding(0);
             this.lvlPathsToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.lvlPathsToolStrip.ImageScalingSize = new Size(20, 20);
             this.lvlPathsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlPathAdd, this.btnLvlPathDelete, this.btnLvlPathUp, this.btnLvlPathDown, this.btnLvlCopyTunnel, this.btnLvlPasteTunnel, this.btnLvlPathClear, this.chkTunnelCopy, this.btnLvlRandomTunnel, this.btnLvlPathView });
             this.lvlPathsToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlPathsToolStrip.Location = new Point(0, 172);
+            this.lvlPathsToolStrip.Location = new Point(0, 13);
             this.lvlPathsToolStrip.Name = "lvlPathsToolStrip";
             this.lvlPathsToolStrip.Padding = new Padding(0);
             this.lvlPathsToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlPathsToolStrip.Size = new Size(250, 29);
+            this.lvlPathsToolStrip.Size = new Size(250, 25);
             this.lvlPathsToolStrip.Stretch = true;
             this.lvlPathsToolStrip.TabIndex = 162;
             // 
@@ -532,7 +531,7 @@
             this.btnLvlPathAdd.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathAdd.Margin = new Padding(0);
             this.btnLvlPathAdd.Name = "btnLvlPathAdd";
-            this.btnLvlPathAdd.Size = new Size(24, 29);
+            this.btnLvlPathAdd.Size = new Size(24, 25);
             this.btnLvlPathAdd.ToolTipText = "Add new path/tunnel";
             this.btnLvlPathAdd.Click += this.btnLvlPathAdd_Click;
             // 
@@ -544,7 +543,7 @@
             this.btnLvlPathDelete.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathDelete.Margin = new Padding(0);
             this.btnLvlPathDelete.Name = "btnLvlPathDelete";
-            this.btnLvlPathDelete.Size = new Size(24, 29);
+            this.btnLvlPathDelete.Size = new Size(24, 25);
             this.btnLvlPathDelete.ToolTipText = "Delete selected path";
             this.btnLvlPathDelete.Click += this.btnLvlPathDelete_Click;
             // 
@@ -558,7 +557,7 @@
             this.btnLvlPathUp.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathUp.Margin = new Padding(0);
             this.btnLvlPathUp.Name = "btnLvlPathUp";
-            this.btnLvlPathUp.Size = new Size(24, 29);
+            this.btnLvlPathUp.Size = new Size(24, 25);
             this.btnLvlPathUp.ToolTipText = "Move selected tunnel up";
             this.btnLvlPathUp.Click += this.btnLvlPathUp_Click;
             // 
@@ -570,7 +569,7 @@
             this.btnLvlPathDown.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathDown.Margin = new Padding(0);
             this.btnLvlPathDown.Name = "btnLvlPathDown";
-            this.btnLvlPathDown.Size = new Size(24, 29);
+            this.btnLvlPathDown.Size = new Size(24, 25);
             this.btnLvlPathDown.ToolTipText = "Move selected tunnel down";
             this.btnLvlPathDown.Click += this.btnLvlPathDown_Click;
             // 
@@ -581,7 +580,7 @@
             this.btnLvlCopyTunnel.Image = Properties.Resources.icon_copy2;
             this.btnLvlCopyTunnel.ImageTransparentColor = Color.Magenta;
             this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
-            this.btnLvlCopyTunnel.Size = new Size(24, 26);
+            this.btnLvlCopyTunnel.Size = new Size(24, 22);
             this.btnLvlCopyTunnel.ToolTipText = "Copy all paths/tunnels";
             this.btnLvlCopyTunnel.Click += this.btnLvlCopyTunnel_Click;
             // 
@@ -592,7 +591,7 @@
             this.btnLvlPasteTunnel.Image = Properties.Resources.icon_paste2;
             this.btnLvlPasteTunnel.ImageTransparentColor = Color.Magenta;
             this.btnLvlPasteTunnel.Name = "btnLvlPasteTunnel";
-            this.btnLvlPasteTunnel.Size = new Size(24, 26);
+            this.btnLvlPasteTunnel.Size = new Size(24, 22);
             this.btnLvlPasteTunnel.ToolTipText = "Paste copied paths/tunnels";
             this.btnLvlPasteTunnel.Click += this.btnLvlPasteTunnel_Click;
             // 
@@ -603,7 +602,7 @@
             this.btnLvlPathClear.Image = Properties.Resources.icon_erase;
             this.btnLvlPathClear.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathClear.Name = "btnLvlPathClear";
-            this.btnLvlPathClear.Size = new Size(24, 26);
+            this.btnLvlPathClear.Size = new Size(24, 22);
             this.btnLvlPathClear.Text = "toolStripButton2";
             this.btnLvlPathClear.ToolTipText = "Clear all tunnels";
             this.btnLvlPathClear.Click += this.btnLvlPathClear_Click;
@@ -615,7 +614,7 @@
             this.chkTunnelCopy.Image = Properties.Resources.icon_sling;
             this.chkTunnelCopy.ImageTransparentColor = Color.Magenta;
             this.chkTunnelCopy.Name = "chkTunnelCopy";
-            this.chkTunnelCopy.Size = new Size(24, 26);
+            this.chkTunnelCopy.Size = new Size(24, 22);
             this.chkTunnelCopy.ToolTipText = "When enabled, new leafs added will copy the paths\r\nof the previous leaf.";
             // 
             // btnLvlRandomTunnel
@@ -625,7 +624,7 @@
             this.btnLvlRandomTunnel.Image = Properties.Resources.icon_random;
             this.btnLvlRandomTunnel.ImageTransparentColor = Color.Magenta;
             this.btnLvlRandomTunnel.Name = "btnLvlRandomTunnel";
-            this.btnLvlRandomTunnel.Size = new Size(24, 26);
+            this.btnLvlRandomTunnel.Size = new Size(24, 22);
             this.btnLvlRandomTunnel.ToolTipText = "Click to add a random tunnel";
             this.btnLvlRandomTunnel.Click += this.btnLvlRandomTunnel_Click;
             // 
@@ -638,7 +637,7 @@
             this.btnLvlPathView.Image = Properties.Resources.icon_view;
             this.btnLvlPathView.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathView.Name = "btnLvlPathView";
-            this.btnLvlPathView.Size = new Size(24, 26);
+            this.btnLvlPathView.Size = new Size(24, 22);
             this.btnLvlPathView.Text = "toolStripButton1";
             this.btnLvlPathView.ToolTipText = "Show/Hide tunnel preview";
             // 
@@ -694,7 +693,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new Size(452, 159);
+            this.lvlLoopTracks.Size = new Size(452, 188);
             this.lvlLoopTracks.TabIndex = 161;
             this.lvlLoopTracks.CellClick += this.lvlLoopTracks_CellClick;
             this.lvlLoopTracks.CellPainting += this.lvlLoopTracks_CellPainting;
@@ -743,17 +742,16 @@
             // 
             this.lvlLoopToolStrip.AutoSize = false;
             this.lvlLoopToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlLoopToolStrip.Dock = DockStyle.Bottom;
             this.lvlLoopToolStrip.GripMargin = new Padding(0);
             this.lvlLoopToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.lvlLoopToolStrip.ImageScalingSize = new Size(20, 20);
             this.lvlLoopToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLoopAdd, this.btnLvlLoopDelete });
             this.lvlLoopToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlLoopToolStrip.Location = new Point(0, 172);
+            this.lvlLoopToolStrip.Location = new Point(0, 13);
             this.lvlLoopToolStrip.Name = "lvlLoopToolStrip";
             this.lvlLoopToolStrip.Padding = new Padding(0);
             this.lvlLoopToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlLoopToolStrip.Size = new Size(452, 29);
+            this.lvlLoopToolStrip.Size = new Size(452, 25);
             this.lvlLoopToolStrip.Stretch = true;
             this.lvlLoopToolStrip.TabIndex = 163;
             // 
@@ -767,7 +765,7 @@
             this.btnLvlLoopAdd.ImageTransparentColor = Color.Magenta;
             this.btnLvlLoopAdd.Margin = new Padding(0);
             this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
-            this.btnLvlLoopAdd.Size = new Size(24, 29);
+            this.btnLvlLoopAdd.Size = new Size(24, 25);
             this.btnLvlLoopAdd.ToolTipText = "Add new loop track";
             // 
             // btnLvlLoopDelete
@@ -778,7 +776,7 @@
             this.btnLvlLoopDelete.ImageTransparentColor = Color.Magenta;
             this.btnLvlLoopDelete.Margin = new Padding(0);
             this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
-            this.btnLvlLoopDelete.Size = new Size(24, 29);
+            this.btnLvlLoopDelete.Size = new Size(24, 25);
             this.btnLvlLoopDelete.ToolTipText = "Delete selected loop track";
             // 
             // pictureTunnelViewer
@@ -787,7 +785,7 @@
             this.pictureTunnelViewer.BorderStyle = BorderStyle.Fixed3D;
             this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.pictureTunnelViewer.ForeColor = Color.White;
-            this.pictureTunnelViewer.Location = new Point(203, 103);
+            this.pictureTunnelViewer.Location = new Point(394, 47);
             this.pictureTunnelViewer.Margin = new Padding(4, 0, 4, 0);
             this.pictureTunnelViewer.MaximumSize = new Size(300, 300);
             this.pictureTunnelViewer.MinimumSize = new Size(300, 300);
