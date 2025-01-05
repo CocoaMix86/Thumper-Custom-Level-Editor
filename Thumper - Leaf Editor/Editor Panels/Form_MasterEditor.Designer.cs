@@ -46,10 +46,8 @@
             this.btnMasterLvlCopy = new ToolStripButton();
             this.btnMasterLvlPaste = new ToolStripButton();
             this.label30 = new Label();
-            this.lblMasterlvllistHelp = new Label();
             this.toolTip1 = new ToolTip(this.components);
             this.propertyGridMaster = new PropertyGrid();
-            this.lblConfigColorHelp = new Label();
             this.splitContainer1 = new SplitContainer();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
@@ -92,7 +90,7 @@
             this.masterLvlList.Dock = DockStyle.Fill;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = Color.Black;
-            this.masterLvlList.Location = new Point(0, 13);
+            this.masterLvlList.Location = new Point(24, 13);
             this.masterLvlList.Margin = new Padding(4, 3, 4, 3);
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -109,7 +107,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(349, 477);
+            this.masterLvlList.Size = new Size(322, 506);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
@@ -162,17 +160,17 @@
             // 
             this.masterToolStrip.AutoSize = false;
             this.masterToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.masterToolStrip.Dock = DockStyle.Bottom;
+            this.masterToolStrip.Dock = DockStyle.Left;
             this.masterToolStrip.GripMargin = new Padding(0);
             this.masterToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.masterToolStrip.ImageScalingSize = new Size(20, 20);
             this.masterToolStrip.Items.AddRange(new ToolStripItem[] { this.btnMasterLvlAdd, this.btnMasterLvlDelete, this.btnMasterLvlUp, this.btnMasterLvlDown, this.btnMasterLvlCopy, this.btnMasterLvlPaste });
-            this.masterToolStrip.LayoutStyle = ToolStripLayoutStyle.Flow;
-            this.masterToolStrip.Location = new Point(0, 490);
+            this.masterToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.masterToolStrip.Location = new Point(0, 13);
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new Padding(0);
             this.masterToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new Size(349, 29);
+            this.masterToolStrip.Size = new Size(24, 506);
             this.masterToolStrip.Stretch = true;
             this.masterToolStrip.TabIndex = 138;
             // 
@@ -185,7 +183,7 @@
             this.btnMasterLvlAdd.ImageTransparentColor = Color.Magenta;
             this.btnMasterLvlAdd.Margin = new Padding(0);
             this.btnMasterLvlAdd.Name = "btnMasterLvlAdd";
-            this.btnMasterLvlAdd.Size = new Size(24, 24);
+            this.btnMasterLvlAdd.Size = new Size(23, 24);
             this.btnMasterLvlAdd.ToolTipText = "Add new sublevel to the list";
             this.btnMasterLvlAdd.Click += this.btnMasterLvlAdd_Click;
             // 
@@ -197,7 +195,7 @@
             this.btnMasterLvlDelete.ImageTransparentColor = Color.Magenta;
             this.btnMasterLvlDelete.Margin = new Padding(0);
             this.btnMasterLvlDelete.Name = "btnMasterLvlDelete";
-            this.btnMasterLvlDelete.Size = new Size(24, 24);
+            this.btnMasterLvlDelete.Size = new Size(23, 24);
             this.btnMasterLvlDelete.ToolTipText = "Delete selected sublevel from this list";
             this.btnMasterLvlDelete.Click += this.btnMasterLvlDelete_Click;
             // 
@@ -209,7 +207,7 @@
             this.btnMasterLvlUp.ImageTransparentColor = Color.Magenta;
             this.btnMasterLvlUp.Margin = new Padding(0);
             this.btnMasterLvlUp.Name = "btnMasterLvlUp";
-            this.btnMasterLvlUp.Size = new Size(24, 24);
+            this.btnMasterLvlUp.Size = new Size(23, 24);
             this.btnMasterLvlUp.ToolTipText = "Move selected sublevel up";
             this.btnMasterLvlUp.Click += this.btnMasterLvlUp_Click;
             // 
@@ -221,7 +219,7 @@
             this.btnMasterLvlDown.ImageTransparentColor = Color.Magenta;
             this.btnMasterLvlDown.Margin = new Padding(0);
             this.btnMasterLvlDown.Name = "btnMasterLvlDown";
-            this.btnMasterLvlDown.Size = new Size(24, 24);
+            this.btnMasterLvlDown.Size = new Size(23, 24);
             this.btnMasterLvlDown.ToolTipText = "Move selected sublevel down";
             this.btnMasterLvlDown.Click += this.btnMasterLvlDown_Click;
             // 
@@ -233,7 +231,7 @@
             this.btnMasterLvlCopy.ImageTransparentColor = Color.Magenta;
             this.btnMasterLvlCopy.Margin = new Padding(0);
             this.btnMasterLvlCopy.Name = "btnMasterLvlCopy";
-            this.btnMasterLvlCopy.Size = new Size(24, 24);
+            this.btnMasterLvlCopy.Size = new Size(23, 24);
             this.btnMasterLvlCopy.ToolTipText = "Copy selected sublevel";
             // 
             // btnMasterLvlPaste
@@ -243,7 +241,7 @@
             this.btnMasterLvlPaste.Image = Properties.Resources.icon_paste2;
             this.btnMasterLvlPaste.ImageTransparentColor = Color.Magenta;
             this.btnMasterLvlPaste.Name = "btnMasterLvlPaste";
-            this.btnMasterLvlPaste.Size = new Size(24, 24);
+            this.btnMasterLvlPaste.Size = new Size(23, 24);
             this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
             // 
             // label30
@@ -259,21 +257,6 @@
             this.label30.Size = new Size(91, 13);
             this.label30.TabIndex = 94;
             this.label30.Text = "Sublevel Order";
-            // 
-            // lblMasterlvllistHelp
-            // 
-            this.lblMasterlvllistHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.lblMasterlvllistHelp.AutoSize = true;
-            this.lblMasterlvllistHelp.BackColor = Color.Transparent;
-            this.lblMasterlvllistHelp.Cursor = Cursors.Help;
-            this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(321, -3);
-            this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
-            this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
-            this.lblMasterlvllistHelp.Size = new Size(15, 16);
-            this.lblMasterlvllistHelp.TabIndex = 95;
-            this.lblMasterlvllistHelp.Text = "?";
             // 
             // propertyGridMaster
             // 
@@ -294,28 +277,13 @@
             this.propertyGridMaster.RightToLeft = RightToLeft.No;
             this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridMaster.Size = new Size(299, 519);
+            this.propertyGridMaster.Size = new Size(302, 519);
             this.propertyGridMaster.TabIndex = 0;
             this.propertyGridMaster.ToolbarVisible = false;
             this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridMaster.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridMaster.ViewForeColor = Color.White;
             this.propertyGridMaster.PropertyValueChanged += this.propertyGridMaster_PropertyValueChanged;
-            // 
-            // lblConfigColorHelp
-            // 
-            this.lblConfigColorHelp.AutoSize = true;
-            this.lblConfigColorHelp.BackColor = Color.Transparent;
-            this.lblConfigColorHelp.Cursor = Cursors.Help;
-            this.lblConfigColorHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            this.lblConfigColorHelp.ForeColor = Color.DodgerBlue;
-            this.lblConfigColorHelp.Location = new Point(183, -2);
-            this.lblConfigColorHelp.Margin = new Padding(4, 0, 4, 0);
-            this.lblConfigColorHelp.Name = "lblConfigColorHelp";
-            this.lblConfigColorHelp.Size = new Size(15, 16);
-            this.lblConfigColorHelp.TabIndex = 112;
-            this.lblConfigColorHelp.Text = "?";
-            this.lblConfigColorHelp.Click += this.lblConfigColorHelp_Click;
             // 
             // splitContainer1
             // 
@@ -329,15 +297,13 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.masterLvlList);
             this.splitContainer1.Panel1.Controls.Add(this.masterToolStrip);
-            this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
-            this.splitContainer1.Panel1.Controls.Add(this.lblConfigColorHelp);
             this.splitContainer1.Panel1.Controls.Add(this.label30);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
             this.splitContainer1.Size = new Size(653, 519);
-            this.splitContainer1.SplitterDistance = 349;
+            this.splitContainer1.SplitterDistance = 346;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
             // 
@@ -371,7 +337,6 @@
         #endregion
         private System.Windows.Forms.DataGridView masterLvlList;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label lblMasterlvllistHelp;
         private System.Windows.Forms.ToolStrip masterToolStrip;
         private System.Windows.Forms.ToolStripButton btnMasterLvlAdd;
         private System.Windows.Forms.ToolStripButton btnMasterLvlDelete;
@@ -380,7 +345,6 @@
         private System.Windows.Forms.ToolStripButton btnMasterLvlCopy;
         private System.Windows.Forms.ToolStripButton btnMasterLvlPaste;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label lblConfigColorHelp;
         private System.Windows.Forms.SplitContainer splitContainer1;
         public PropertyGrid propertyGridMaster;
         private DataGridViewTextBoxColumn SublevelNum;
