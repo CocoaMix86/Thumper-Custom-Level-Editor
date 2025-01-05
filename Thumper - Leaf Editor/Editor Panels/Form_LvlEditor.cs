@@ -87,7 +87,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.ProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{LvlLeafs[e.RowIndex].leafname}")).Value);
+            TCLE.OpenFile(TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{LvlLeafs[e.RowIndex].leafname}")).Value);
 
         }
         private Rectangle dragBoxFromMouseDown;
@@ -691,14 +691,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///SAVE
-        public void Save()
+        public void Save(bool playsound = true)
         {
             //if _loadedlvl is somehow not set, force Save As instead
             if (LoadedLvl == null) {
                 SaveAs();
             }
             else
-                SaveCheckAndWrite(true, true);
+                SaveCheckAndWrite(true, playsound);
         }
         ///SAVE AS
         public FileInfo SaveAs(bool isnew = false)

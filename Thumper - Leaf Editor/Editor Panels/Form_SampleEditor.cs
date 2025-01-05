@@ -413,14 +413,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///SAVE
-        public void Save()
+        public void Save(bool playsound = true)
         {
             //if _loadedgate is somehow not set, force Save As instead
             if (loadedsample == null) {
                 SaveAs();
             }
             else
-                SaveCheckAndWrite(true, true);
+                SaveCheckAndWrite(true, playsound);
         }
         ///SAVE AS
         public FileInfo SaveAs(bool isnew = false)

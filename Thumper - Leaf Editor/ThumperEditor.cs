@@ -346,6 +346,12 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Thumper Custom Level Editor");
                 return;
             }
+            //if this application already has a TCL loaded, open a new application and pass in the TCL name to load it
+            if (WorkingFolder != null) {
+                var info = new ProcessStartInfo(Application.ExecutablePath, TCL.FullName);
+                Process.Start(info);
+                return;
+            }
             //load the properties of the TCL and create projectProperties
             dynamic ProjectJson = LoadFileLock(TCL.FullName);
             projectProperties = new() {
@@ -680,16 +686,19 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip Toolbar
         private void toolstripMainSave_Click(object sender, EventArgs e)
         {
-            FindEditorRunMethod(GlobalActiveDocument.GetType(), "Save");
+            GlobalActiveDocument.GetType().GetMethod("Save").Invoke(GlobalActiveDocument, new object[] { true });
+            //FindEditorRunMethod(GlobalActiveDocument.GetType(), "Save");
         }
 
         private void toolstripMainSaveAll_Click(object sender, EventArgs e)
         {
             foreach (Form_WorkSpace workspace in Workspaces) {
                 foreach (IDockContent document in workspace.dockMain.Documents) {
-                    FindEditorRunMethod(document.GetType(), "Save");
+                    document.GetType().GetMethod("Save").Invoke(document, new object[] { false });
+                    //FindEditorRunMethod(document.GetType(), "Save");
                 }
             }
+            TCLE.PlaySound("UIsave");
         }
         #endregion
 

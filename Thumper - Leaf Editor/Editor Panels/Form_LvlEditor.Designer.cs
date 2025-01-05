@@ -644,7 +644,7 @@
             this.btnLvlPathView.Image = Properties.Resources.icon_view;
             this.btnLvlPathView.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathView.Name = "btnLvlPathView";
-            this.btnLvlPathView.Size = new Size(24, 24);
+            this.btnLvlPathView.Size = new Size(24, 22);
             this.btnLvlPathView.Text = "toolStripButton1";
             this.btnLvlPathView.ToolTipText = "Show/Hide tunnel preview";
             // 
@@ -677,6 +677,7 @@
             this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
             this.btnLvlLoopAdd.Size = new Size(24, 25);
             this.btnLvlLoopAdd.ToolTipText = "Add new loop track";
+            this.btnLvlLoopAdd.Click += this.btnLvlLoopAdd_Click;
             // 
             // btnLvlLoopDelete
             // 
@@ -688,6 +689,7 @@
             this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
             this.btnLvlLoopDelete.Size = new Size(24, 25);
             this.btnLvlLoopDelete.ToolTipText = "Delete selected loop track";
+            this.btnLvlLoopDelete.Click += this.btnLvlLoopDelete_Click;
             // 
             // lvlLoopTracks
             // 

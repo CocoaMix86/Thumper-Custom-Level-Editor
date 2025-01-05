@@ -38,6 +38,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get => LoadedLeaf;
             set {
                 if (LoadedLeaf != value) {
+                    if (LoadedLeaf != null)
+                        TCLE.CloseFileLock(LoadedLeaf);
                     LoadedLeaf = value;
                     if (!LoadedLeaf.Exists) {
                         using (StreamWriter sw = LoadedLeaf.CreateText()) {
@@ -1463,16 +1465,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
                     }
                 }
-                _s.highlight_color = TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple;
+                _s.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : (TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple);
                 foreach (dynamic dp in seq_obj["data_points"]) {
-                    SeqDataPoint data = new() {
-                        Owner = _s,
-                        beat = dp["beat"],
-                        value = dp["value"],
-                        interpolation = ((string)dp["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
-                        ease = Easings[(string)dp["ease"] ?? "kEaseInOut"]
-                    };
-                    _s.data_points[data.beat] = data;
+                    if (dp is JObject data_point) {
+                        SeqDataPoint data = new() {
+                            Owner = _s,
+                            beat = (int)data_point["beat"],
+                            value = data_point["value"],
+                            interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
+                            ease = Easings[(string)data_point["ease"] ?? "kEaseInOut"]
+                        };
+                        _s.data_points[data.beat] = data;
+                    }
+                    else {
+                        SeqDataPoint data = new() {
+                            Owner = _s,
+                            beat = int.Parse(((JProperty)dp).Name),
+                            value = TCLE.TruncateDecimal((decimal)((JProperty)dp).Value, 3),
+                            interpolation = "Linear",
+                            ease = Easings["kEaseInOut"]
+                        };
+                        _s.data_points[data.beat] = data;
+                    }
                 }
                 //if object is multilane, we will add all 5 lanes at once, as defaults
                 //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
@@ -1526,17 +1540,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             EditorIsSaved = true;
+            SaveCheckAndWrite(true);
         }
 
         ///SAVE
-        public void Save()
+        public void Save(bool playsound = true)
         {
             //if _loadedlvl is somehow not set, force Save As instead
             if (LoadedLeaf == null) {
                 SaveAs();
             }
             else
-                SaveCheckAndWrite(true, true);
+                SaveCheckAndWrite(true, playsound);
         }
         ///SAVE AS
         public FileInfo SaveAs(bool isnew = false)
@@ -1737,9 +1752,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             //if the cell value is greater than the criteria of the row, highlight it with that row's color
-            if ((decimal)_seqobj.highlight_value == 0 || Math.Abs(Decimal.Parse(dgvc.Value.ToString())) >= (decimal)_seqobj.highlight_value) {
+            //if ((decimal)_seqobj.highlight_value == 0 || Math.Abs(Decimal.Parse(dgvc.Value.ToString())) >= (decimal)_seqobj.highlight_value) {
                 dgvc.Style.BackColor = _seqobj.highlight_color;
-            }
+            //}
             //change cell font color so text is readable on dark/light backgrounds
             Color _c = dgvc.Style.BackColor;
             if (_c.R < 150 && _c.G < 150 && _c.B < 150)
@@ -1959,8 +1974,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //don't paste if cell is blank
                     if (string.IsNullOrEmpty(copiedcells[rowindex][cellindex]))
                         continue;
-                    trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset].Value = decimal.Parse(copiedcells[rowindex][cellindex]);
-                    SequencerObjects[pastingrow + rowindex + offset].data_points[pastingcol + cellindex].value = decimal.Parse(copiedcells[rowindex][cellindex]);
+                    //trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset].Value = decimal.Parse(copiedcells[rowindex][cellindex]);
+                    SequencerObjects[pastingrow + rowindex + offset].data_points[pastingcol + cellindex - FrozenColumnOffset].value = decimal.Parse(copiedcells[rowindex][cellindex]);
                     TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset], SequencerObjects[pastingrow + rowindex + offset]);
                 }
             }

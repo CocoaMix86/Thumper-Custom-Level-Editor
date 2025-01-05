@@ -10,7 +10,6 @@ namespace Thumper_Custom_Level_Editor
         public MasterLvlData() { }
 
         public string type { get; set; }
-        private string Name;
         public string name
         {
             get => $"{Name}.{type}";
@@ -19,6 +18,7 @@ namespace Thumper_Custom_Level_Editor
                 Name = idx != -1 ? value[..idx] : value;
             }
         }
+        private string Name;
         public string lvlname => $"{name}.lvl";
         public string gatename => $"{name}.gate";
         public bool playplus { get; set; }

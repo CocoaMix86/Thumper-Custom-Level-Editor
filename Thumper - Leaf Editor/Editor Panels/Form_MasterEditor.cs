@@ -421,13 +421,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///SAVE
-        public void Save()
+        public void Save(bool playsound = true)
         {
             //if LoadedMaster is somehow not set, force Save As instead
             if (LoadedMaster == null)
                 SaveAs();
             else
-                SaveCheckAndWrite(true, true);
+                SaveCheckAndWrite(true, playsound);
         }
         ///SAVE AS
         public FileInfo SaveAs(bool isnew = false)
@@ -524,8 +524,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JArray groupings = new();
             foreach (MasterLvlData group in _properties.masterlvls) {
                 JObject s = new() {
-                    { "lvl_name", (group.type == "lvl" ? group.lvlname : "") },
-                    { "gate_name", (group.type == "gate" ? group.gatename : "") },
+                    { "lvl_name", (group.type == "lvl" ? group.name : "") },
+                    { "gate_name", (group.type == "gate" ? group.name : "") },
                     { "checkpoint", group.checkpoint.ToString() },
                     { "checkpoint_leader_lvl_name", group.checkpoint_leader.Replace("<none>", "") ?? "" },
                     { "rest_lvl_name", group.rest.Replace("<none>", "") ?? "" },

@@ -48,8 +48,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
             this.splitContainer1 = new SplitContainer();
-            this.timerSample = new System.Windows.Forms.Timer(this.components);
             this.label1 = new Label();
+            this.timerSample = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)this.sampleList).BeginInit();
             this.sampleToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -120,7 +120,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.sampleList.Size = new Size(266, 493);
+            this.sampleList.Size = new Size(265, 493);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellClick += this.sampleList_CellClick;
@@ -235,7 +235,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample.RightToLeft = RightToLeft.No;
             this.propertyGridSample.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridSample.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSample.Size = new Size(638, 519);
+            this.propertyGridSample.Size = new Size(639, 519);
             this.propertyGridSample.TabIndex = 0;
             this.propertyGridSample.ToolbarVisible = false;
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -250,7 +250,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(944, -3);
+            this.lblMasterlvllistHelp.Location = new Point(943, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -279,13 +279,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridSample);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 290;
+            this.splitContainer1.SplitterDistance = 289;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
-            // 
-            // timerSample
-            // 
-            this.timerSample.Tick += this.timerSample_Tick;
             // 
             // label1
             // 
@@ -301,6 +297,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.label1.TabIndex = 153;
             this.label1.Text = "How to get a .fsb file";
             this.label1.Click += this.lblSampleFSBhelp_Click;
+            // 
+            // timerSample
+            // 
+            this.timerSample.Tick += this.timerSample_Tick;
             // 
             // Form_SampleEditor
             // 
