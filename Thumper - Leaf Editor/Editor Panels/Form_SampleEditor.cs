@@ -61,7 +61,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private SampleProperties SampleProperties;
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
-        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
         #region EventHandlers

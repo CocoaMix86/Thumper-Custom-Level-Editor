@@ -58,7 +58,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         public MasterProperties MasterProperties;
-        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
         #region EventHandlers
@@ -502,7 +501,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     beattotal += beats;
-                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                     masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].DefaultCellStyle = null;
                     masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
                 }

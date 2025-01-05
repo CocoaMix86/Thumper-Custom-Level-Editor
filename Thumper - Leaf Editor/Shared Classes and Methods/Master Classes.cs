@@ -92,7 +92,7 @@ namespace Thumper_Custom_Level_Editor
         public string runtime { 
             get {
                 parent.RecalculateRuntime();
-                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.dockProjectProperties.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
             }
         }
 

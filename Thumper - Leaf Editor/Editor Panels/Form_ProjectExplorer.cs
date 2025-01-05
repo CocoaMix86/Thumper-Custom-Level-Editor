@@ -5,10 +5,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_ProjectExplorer : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        private TCLE _mainform { get; set; }
-        public Form_ProjectExplorer(TCLE form, string _projectfolder = null)
+        public Form_ProjectExplorer()
         {
-            _mainform = form;
             InitializeComponent();
             //set custom renderer for some controls
             toolstripExplorer.Renderer = new ToolStripOverride();
@@ -21,14 +19,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;
             //populate treeview on first load
-            if (_projectfolder != null) {
-                ProjectDirectory = new DirectoryInfo(_projectfolder);
+            if (TCLE.WorkingFolder != null) {
                 CreateTreeView();
             }
         }
-        public void LoadProject(string folderpath)
+        public void LoadProject()
         {
-            ProjectDirectory = new DirectoryInfo(folderpath);
             CreateTreeView();
         }
         #endregion
@@ -41,7 +37,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private string renamefile;
         private string renamenode;
         private string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
-        private DirectoryInfo ProjectDirectory;
+        private DirectoryInfo ProjectDirectory => TCLE.WorkingFolder;
         private TreeNode previousNode;
         private List<TreeNode> filestocopy;
         private List<TreeNode> selectedNodes = new();

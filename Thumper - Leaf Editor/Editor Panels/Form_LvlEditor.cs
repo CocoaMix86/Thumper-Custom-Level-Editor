@@ -62,7 +62,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private LvlProperties LvlProperties;
         private static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
         public ObservableCollection<LvlLeafData> LvlLeafs { get => LvlProperties.lvlleafs; set => LvlProperties.lvlleafs = value; }
-        private static decimal BPM => TCLE.dockProjectProperties.BPM;
         private List<LvlLeafData> clipboardleaf = new();
         private List<string> clipboardpaths = new();
         #endregion
@@ -796,7 +795,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     beats = (int)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"];
                     beattotal += beats;
-                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle = null;
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"{beats} beats -- {time}";
                 }

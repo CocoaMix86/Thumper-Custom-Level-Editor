@@ -8,24 +8,17 @@ namespace Thumper_Custom_Level_Editor
 {
     public class ProjectProperties
     {
-        public ProjectProperties(dynamic _load)
+        public ProjectProperties()
         {
-            projectname = (string)_load["level_name"];
-            difficulty = (string)_load["difficulty"];
-            description = (string)_load["description"];
-            authornames = (string)_load["author"];
-            bpm = (decimal)_load["bpm"];
-            dynamic railcolor = _load["rails_color"];
-            rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
-            dynamic railglowcolor = _load["rails_glow_color"];
-            railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
-            dynamic pathcolor = _load["path_color"];
-            path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
+
         }
+
         [Category("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public static string filepath { get { return TCLE.WorkingFolder.FullName; } }
+        public string folder => WorkingFolder.FullName;
+        [Browsable(false)]
+        public DirectoryInfo WorkingFolder; 
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]

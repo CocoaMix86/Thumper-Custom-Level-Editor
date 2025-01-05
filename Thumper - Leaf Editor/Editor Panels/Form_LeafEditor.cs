@@ -59,7 +59,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private LeafProperties LeafProperties;
-        private static decimal BPM => TCLE.dockProjectProperties.BPM;
         private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset);
         private dynamic leafjson;
         private int CurrentRow;

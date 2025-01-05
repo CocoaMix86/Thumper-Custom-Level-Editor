@@ -8,20 +8,10 @@
             InitializeComponent();
         }
 
-        public void LoadProjectProperties(dynamic _load)
+        public void LoadProjectProperties()
         {
-            projectproperties = new ProjectProperties(_load);
-            propertyGridProject.SelectedObject = projectproperties;
+            propertyGridProject.SelectedObject = TCLE.ProjectProperties;
         }
-        #endregion
-        #region Variables
-        public ProjectProperties projectproperties {
-            get => ProjectProperties;
-            set => ProjectProperties = value; }
-        private static ProjectProperties ProjectProperties;
-        public decimal BPM => ProjectProperties.bpm;
-        #endregion
-        #region Methods
         #endregion
     }
 }

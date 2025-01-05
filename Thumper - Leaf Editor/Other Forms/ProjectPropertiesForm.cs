@@ -198,7 +198,7 @@ namespace Thumper_Custom_Level_Editor
                 TCLE.WriteFileLock(TCLE.lockedfiles[new FileInfo($@"{levelpath}\{txtCustomName.Text}.TCL")], level_details);
             //}
             TCLE.ProjectJson = level_details;
-            TCLE.WorkingFolder = new DirectoryInfo(levelpath);
+            ///TCLE.WorkingFolder = new DirectoryInfo(levelpath);
 
             ///
             ///create a default master file and open it

@@ -48,7 +48,7 @@
             string level = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
             //handle column 0 clicks only as that's where the button is
             if (e.ColumnIndex == 0) {
-                if (workingfolder?.FullName == level) {
+                if (WorkingFolder?.FullName == level) {
                     panelRecentFiles.Visible = false;
                     return;
                 }

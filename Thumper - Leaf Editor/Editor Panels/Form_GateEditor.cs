@@ -94,7 +94,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private GateProperties GateProperties;
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
-        public decimal BPM { get { return TCLE.dockProjectProperties.BPM; } }
         #endregion
 
         #region EventHandlers
@@ -563,7 +562,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         }
                         else
                             beattotal += beats;
-                        string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                        string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                         gateLvlList.Rows[_in].DefaultCellStyle = null;
                         gateLvlList.Rows[_in].Cells[3].Value = $"{beats} beats -- {time}";
                     }

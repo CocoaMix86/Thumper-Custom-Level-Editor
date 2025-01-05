@@ -19,72 +19,21 @@ namespace Thumper_Custom_Level_Editor
         public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents);
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
-        private Properties.Settings settings = Properties.Settings.Default;
+        private Properties.Settings AppSettings = Properties.Settings.Default;
         public static dynamic ProjectJson;
-        private DirectoryInfo workingfolder
-        {
-            get => WorkingFolder;
-            set {
-                //check if `set` value is different than current stored value
-                if (WorkingFolder != value) {
-                    //also only change workingfolders if user says yes to data loss
-                    if (AnyUnsaved()) {
-                        if (MessageBox.Show("Some files are unsaved. Are you sure you want to change working folders?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.No) {
-                            return;
-                        }
-                    }
-                    //check if the .TCL exists. If not, this is not a level folder
-                    FileInfo ProjectFile = value.GetFiles("*.TCL", SearchOption.AllDirectories).FirstOrDefault();
-                    if (ProjectFile == null) {
-                        MessageBox.Show("This folder does not appear to be a Custom Level project. The .TCL file is missing.\nProject not loaded.", "Thumper Custom Level Editor");
-                        return;
-                    }
-                    //Try locking the .TCL first. If it fails, the level is already open
-                    //in that case, return before doing anything
-                    try {
-                        lockedfiles.Add(ProjectFile, new FileStream(ProjectFile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-                        ClearFileLock();
-                    }
-                    catch (Exception) {
-                        MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Level cannot be opened");
-                        return;
-                    }
-                    //load Level Details into an object so it can be accessed later
-                    ProjectJson = LoadFileLock(ProjectFile.FullName);
-                    if (ProjectJson == null || !ProjectJson.ContainsKey("level_name") || !ProjectJson.ContainsKey("difficulty") || !ProjectJson.ContainsKey("description") || !ProjectJson.ContainsKey("author")) {
-                        DialogResult result = MessageBox.Show("The Project .TCL file is missing information or is corrupt.\nCreate new Project .TCL?", "Failed to load", MessageBoxButtons.YesNo);
-                        if (result == DialogResult.Yes) {
-                            JObject level_details = new() { { "level_name", $"{value.Name}" }, { "difficulty", "D0" }, { "description", "replace this text" }, { "author", "some guy" } };
-                            File.WriteAllText($@"{value.FullName}\{value.Name}.TCL", JsonConvert.SerializeObject(level_details, Formatting.Indented));
-                            ProjectJson = LoadFileLock($@"{value.FullName}\{value.Name}.TCL");
-                        }
-                        else if (result == DialogResult.No) {
-                            MessageBox.Show("Level Folder not loaded");
-                            return;
-                        }
-                    }
-                    ClearFileLock();
-                    //update working folder
-                    WorkingFolder = value;
-                    toolstripLevelName.Text = ProjectJson["level_name"];
-                    toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{ProjectJson["difficulty"]}");
-                    //add to recent files
-                    Properties.Settings.Default.Recentfiles.Remove(WorkingFolder.FullName);
-                    Properties.Settings.Default.Recentfiles.Insert(0, WorkingFolder.FullName);
-                    JumpListUpdate();
-                    LvlReloadSamples();
-                    panelRecentFiles.Visible = false;
-                }
-            }
-        }
-        public static DirectoryInfo WorkingFolder;
+        public static DirectoryInfo WorkingFolder => ProjectProperties.WorkingFolder;
+        public static decimal BPM => ProjectProperties.bpm;
         public static List<string> lvlsinworkfolder = new();
         public static Random rng = new();
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
-        public string LevelToLoad;
         public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
         public static Beeble MainBeeble = new() { Visible = false };
+        public ProjectProperties projectProperties { 
+            get => ProjectProperties;
+            set => ProjectProperties = value;
+        }
+        public static ProjectProperties ProjectProperties;
         #endregion
 
         #region Form Construction
@@ -97,6 +46,13 @@ namespace Thumper_Custom_Level_Editor
             dockMain.Theme = new VS2015DarkTheme();
             Instance = this;
             TabRightClickMenu = contextmenuTabClick;
+            projectProperties = new() {
+                projectname = "",
+                description = "",
+                authornames = "",
+                bpm = 0,
+                WorkingFolder = null
+            };
 
             //set custom renderer
             toolStripTitle.Renderer = new ToolStripMainForm();
@@ -112,8 +68,6 @@ namespace Thumper_Custom_Level_Editor
             //
             if (Properties.Settings.Default.Recentfiles == null)
                 Properties.Settings.Default.Recentfiles = new List<string>();
-            //
-            LevelToLoad = LevelFromArg;
             //
             //Create directory for leaf templates and other default files
             if (!Directory.Exists($@"{AppLocation}\templates")) {
@@ -133,24 +87,20 @@ namespace Thumper_Custom_Level_Editor
             SetKeyBinds();
             //import default object colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-            //load recent levels 
+            //load recent levels or the level from input arg
             List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
-            if (levellist.Count > 0 && LevelToLoad.Length < 2)
+            FileInfo LevelToLoad = new(string.IsNullOrEmpty(LevelFromArg) ? "e" : LevelFromArg);
+            if (levellist.Count > 0 && !LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase))
                 RecentFiles(levellist);
-            else if (LevelToLoad.Length > 2) {
-                if (Directory.Exists(LevelToLoad)) {
-                    workingfolder = new DirectoryInfo(LevelToLoad);
-                    panelRecentFiles.Visible = false;
-                }
-                else
-                    MessageBox.Show($"Recent Level selected no longer exists at that location\n{LevelToLoad}", "Level load error");
+            else if (LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase) && LevelToLoad.Exists) {
+                OpenProject(LevelToLoad);
             }
 
             //create Project Explorer and Project Property panels
-            dockProjectExplorer = new(this) { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            dockProjectExplorer = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
             dockProjectExplorer.Show(dockMain, DockState.DockRight);
             dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
-            dockProjectProperties.Show(dockProjectExplorer.Pane, DockAlignment.Bottom, 0.5);
+            dockProjectProperties.Show(dockProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
         }
         #endregion
         #region Form Loading Closing
@@ -370,7 +320,76 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileOpenProject_Click(object sender, EventArgs e)
         {
+            using OpenFileDialog ofd = new();
+            ofd.Filter = "Thumper Custom Levrl (*.TCL)|*.TCL";
+            ofd.FilterIndex = 1;
+            ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                FileInfo TCL = new FileInfo(ofd.FileName);
+                OpenProject(TCL);
+            }
+        }
 
+        private void OpenProject(FileInfo TCL)
+        {
+            if (TCL.DirectoryName == TCLE.WorkingFolder?.FullName)
+                return;
+            //Try locking the .TCL first. If it fails, the level is already open
+            //in that case, return before doing anything
+            try {
+                lockedfiles.Add(TCL, new FileStream(TCL.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                ClearFileLock();
+            }
+            catch (Exception) {
+                MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Thumper Custom Level Editor");
+                return;
+            }
+            //load the properties of the TCL and create projectProperties
+            ProjectJson = LoadFileLock(TCL.FullName);
+            projectProperties = new() {
+                projectname = (string)ProjectJson["level_name"] ?? "New Project",
+                difficulty = (string)ProjectJson["difficulty"] ?? "D0",
+                description = (string)ProjectJson["description"] ?? "Please add a description",
+                authornames = (string)ProjectJson["author"] ?? "a person",
+                bpm = (decimal?)ProjectJson["bpm"] ?? 400m,
+                WorkingFolder = TCL.Directory
+            };
+            //load colors, with failover to White
+            try {
+                dynamic railcolor = ProjectJson["rails_color"];
+                projectProperties.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
+                dynamic railglowcolor = ProjectJson["rails_glow_color"];
+                projectProperties.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
+                dynamic pathcolor = ProjectJson["path_color"];
+                projectProperties.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
+            }
+            catch (Exception) {
+                projectProperties.rail = Color.White;
+                projectProperties.railglow = Color.White;
+                projectProperties.path = Color.White;
+            }
+            //update some visual elements
+            toolstripLevelName.Text = projectProperties.projectname;
+            toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{projectProperties.difficulty}");
+            //add to recent files
+            Properties.Settings.Default.Recentfiles.Remove(WorkingFolder.FullName);
+            Properties.Settings.Default.Recentfiles.Insert(0, WorkingFolder.FullName);
+            JumpListUpdate();
+            //load sample of the project
+            LvlReloadSamples();
+            panelRecentFiles.Visible = false;
+
+            //Load the project''s files into Explorer
+            dockProjectExplorer.LoadProject();
+            //create a workspace
+            Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
+            workspace1.Show(dockMain, DockState.Document);
+
+            toolstripAddScene.Enabled = true;
+            toolstripProject.Enabled = true;
+
+            dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
+            dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
         }
 
         private void toolstripFileOpenFile_Click(object sender, EventArgs e)
@@ -541,8 +560,8 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripProjectRegen_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("This will overwrite the \"default\" files in the working folder. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                File.WriteAllText($@"{workingfolder}\spn_default.txt", Properties.Resources.spn_default);
-                File.WriteAllText($@"{workingfolder}\xfm_default.txt", Properties.Resources.xfm_default);
+                File.WriteAllText($@"{WorkingFolder}\spn_default.txt", Properties.Resources.spn_default);
+                File.WriteAllText($@"{WorkingFolder}\xfm_default.txt", Properties.Resources.xfm_default);
             }
         }
 
@@ -644,22 +663,13 @@ namespace Thumper_Custom_Level_Editor
         #region DockPanel
         private void toolstripOpenPanels_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists(txtFilePath.Text)) {
-                MessageBox.Show("that folder path doesn't exist");
+            FileInfo projecttoload = new(txtFilePath.Text);
+            if (!projecttoload.Exists || !projecttoload.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase)) {
+                MessageBox.Show("That TCL was not loaded or does not exist");
                 return;
             }
-            workingfolder = new DirectoryInfo(txtFilePath.Text);
-            dockProjectExplorer.LoadProject(WorkingFolder.FullName);
-            dockProjectProperties.LoadProjectProperties(ProjectJson);
 
-            Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
-            workspace1.Show(dockMain, DockState.Document);
-
-            toolstripAddScene.Enabled = true;
-            toolstripProject.Enabled = true;
-
-            dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
-            dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
+            OpenProject(projecttoload);            
         }
         private void DockPanelDocumentArea_Resize(object sender, EventArgs e) => dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
 
