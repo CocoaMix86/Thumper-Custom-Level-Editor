@@ -443,7 +443,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (isnew)
                     TCLE.CloseFileLock(loadedsample);
                 //after saving new file, refresh the project explorer
-                TCLE.dockProjectExplorer.CreateTreeView();
+                TCLE.ProjectExplorer.CreateTreeView();
             }
             return loadedsample;
         }

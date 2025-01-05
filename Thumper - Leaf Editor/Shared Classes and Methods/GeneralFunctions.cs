@@ -510,7 +510,7 @@ namespace Thumper_Custom_Level_Editor
         {
             int _beatcount = 0;
             if (_masterlvl.type == "lvl") {
-                KeyValuePair<string, FileInfo> lvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{_masterlvl.name}"));
+                KeyValuePair<string, FileInfo> lvl = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{_masterlvl.name}"));
                 if (lvl.Key != null) _beatcount += CalculateLvlRuntime(lvl.Value.FullName);
                 else return -1;
             }
@@ -522,7 +522,7 @@ namespace Thumper_Custom_Level_Editor
                 else
                     _beatcount += gatebeats;
             }
-            KeyValuePair<string, FileInfo> lvlrest = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{_masterlvl.rest}"));
+            KeyValuePair<string, FileInfo> lvlrest = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{_masterlvl.rest}"));
             if (lvlrest.Key != null) _beatcount += CalculateLvlRuntime(lvlrest.Value.FullName);
 
             return _beatcount;
@@ -535,7 +535,7 @@ namespace Thumper_Custom_Level_Editor
             List<int> bucketscounted = new();
             bool israndom;
             //load the gate to then loop through all lvls in it
-            KeyValuePair<string, FileInfo> gate = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{gatename}"));
+            KeyValuePair<string, FileInfo> gate = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{gatename}"));
             if (gate.Key != null) {
                 _load = TCLE.LoadFileLock(gate.Value.FullName);
                 //if gate not found, _load is null. Return -1 to denote this
@@ -546,7 +546,7 @@ namespace Thumper_Custom_Level_Editor
                 //loop through each lvl in gate
                 foreach (dynamic _lvl in _load["boss_patterns"]) {
                     //attempt to load lvl
-                    KeyValuePair<string, FileInfo> lvl = TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{(string)_lvl["lvl_name"]}"));
+                    KeyValuePair<string, FileInfo> lvl = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{(string)_lvl["lvl_name"]}"));
                     if (lvl.Key != null) {
                         //if random is enabled, count only the first entry in each bucket
                         if (israndom) {

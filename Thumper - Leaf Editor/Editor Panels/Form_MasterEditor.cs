@@ -82,7 +82,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.dockProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{MasterLvls[e.RowIndex].name}")).Value);
+            TCLE.OpenFile(TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{MasterLvls[e.RowIndex].name}")).Value);
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -276,7 +276,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
                         File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
-                        TCLE.dockProjectExplorer.CreateTreeView();
+                        TCLE.ProjectExplorer.CreateTreeView();
                     }
                     else
                         return;
@@ -452,7 +452,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (isnew)
                     TCLE.CloseFileLock(loadedmaster);
                 //after saving new file, refresh the project explorer
-                TCLE.dockProjectExplorer.CreateTreeView();
+                TCLE.ProjectExplorer.CreateTreeView();
             }
             return loadedmaster;
         }

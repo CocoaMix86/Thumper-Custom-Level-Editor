@@ -156,6 +156,7 @@
             this.btnLvlLeafAdd.Name = "btnLvlLeafAdd";
             this.btnLvlLeafAdd.Size = new Size(23, 24);
             this.btnLvlLeafAdd.ToolTipText = "Add new sublevel to the list";
+            this.btnLvlLeafAdd.Click += this.btnLvlLeafAdd_Click;
             // 
             // btnLvlLeafDelete
             // 
@@ -167,6 +168,7 @@
             this.btnLvlLeafDelete.Name = "btnLvlLeafDelete";
             this.btnLvlLeafDelete.Size = new Size(23, 24);
             this.btnLvlLeafDelete.ToolTipText = "Delete selected sublevel from this list";
+            this.btnLvlLeafDelete.Click += this.btnLvlLeafDelete_Click;
             // 
             // btnLvlLeafUp
             // 
@@ -178,6 +180,7 @@
             this.btnLvlLeafUp.Name = "btnLvlLeafUp";
             this.btnLvlLeafUp.Size = new Size(23, 24);
             this.btnLvlLeafUp.ToolTipText = "Move selected sublevel up";
+            this.btnLvlLeafUp.Click += this.btnLvlLeafUp_Click;
             // 
             // btnLvlLeafDown
             // 
@@ -189,6 +192,7 @@
             this.btnLvlLeafDown.Name = "btnLvlLeafDown";
             this.btnLvlLeafDown.Size = new Size(23, 24);
             this.btnLvlLeafDown.ToolTipText = "Move selected sublevel down";
+            this.btnLvlLeafDown.Click += this.btnLvlLeafDown_Click;
             // 
             // btnLvlLeafCopy
             // 
@@ -200,6 +204,7 @@
             this.btnLvlLeafCopy.Name = "btnLvlLeafCopy";
             this.btnLvlLeafCopy.Size = new Size(23, 24);
             this.btnLvlLeafCopy.ToolTipText = "Copy selected sublevel";
+            this.btnLvlLeafCopy.Click += this.btnLvlLeafCopy_Click;
             // 
             // btnLvlLeafPaste
             // 
@@ -210,6 +215,7 @@
             this.btnLvlLeafPaste.Name = "btnLvlLeafPaste";
             this.btnLvlLeafPaste.Size = new Size(23, 24);
             this.btnLvlLeafPaste.ToolTipText = "Paste the copied sublevel";
+            this.btnLvlLeafPaste.Click += this.btnLvlLeafPaste_Click;
             // 
             // btnLvlLeafRandom
             // 
@@ -220,6 +226,7 @@
             this.btnLvlLeafRandom.Name = "btnLvlLeafRandom";
             this.btnLvlLeafRandom.Size = new Size(23, 24);
             this.btnLvlLeafRandom.ToolTipText = "Add a random leaf";
+            this.btnLvlLeafRandom.Click += this.btnLvlLeafRandom_Click;
             // 
             // label29
             // 

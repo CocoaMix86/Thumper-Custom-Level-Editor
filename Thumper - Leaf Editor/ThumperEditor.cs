@@ -20,7 +20,6 @@ namespace Thumper_Custom_Level_Editor
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
         private Properties.Settings AppSettings = Properties.Settings.Default;
-        public static dynamic ProjectJson;
         public static DirectoryInfo WorkingFolder => ProjectProperties.WorkingFolder;
         public static decimal BPM => ProjectProperties.bpm;
         public static List<string> lvlsinworkfolder = new();
@@ -37,7 +36,7 @@ namespace Thumper_Custom_Level_Editor
         #endregion
 
         #region Form Construction
-        public static Form_ProjectExplorer dockProjectExplorer;
+        public static Form_ProjectExplorer ProjectExplorer;
         public static Form_ProjectProperties dockProjectProperties;
         public TCLE(string LevelFromArg)
         {
@@ -66,8 +65,8 @@ namespace Thumper_Custom_Level_Editor
             contextmenuSampPacks.Renderer = new ContextMenuColors();
             contextmenuMoveWorkspace.Renderer = new ContextMenuColors();
             //
-            if (Properties.Settings.Default.Recentfiles == null)
-                Properties.Settings.Default.Recentfiles = new List<string>();
+            if (AppSettings.Recentfiles == null)
+                AppSettings.Recentfiles = new List<string>();
             //
             //Create directory for leaf templates and other default files
             if (!Directory.Exists($@"{AppLocation}\templates")) {
@@ -86,9 +85,9 @@ namespace Thumper_Custom_Level_Editor
             //load keybinds
             SetKeyBinds();
             //import default object colors
-            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+            colorDialog1.CustomColors = AppSettings.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //load recent levels or the level from input arg
-            List<string> levellist = Properties.Settings.Default.Recentfiles ?? new List<string>();
+            List<string> levellist = AppSettings.Recentfiles ?? new List<string>();
             FileInfo LevelToLoad = new(string.IsNullOrEmpty(LevelFromArg) ? "e" : LevelFromArg);
             if (levellist.Count > 0 && !LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase))
                 RecentFiles(levellist);
@@ -97,10 +96,10 @@ namespace Thumper_Custom_Level_Editor
             }
 
             //create Project Explorer and Project Property panels
-            dockProjectExplorer = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
-            dockProjectExplorer.Show(dockMain, DockState.DockRight);
+            ProjectExplorer = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            ProjectExplorer.Show(dockMain, DockState.DockRight);
             dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
-            dockProjectProperties.Show(dockProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
+            dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
         }
         #endregion
         #region Form Loading Closing
@@ -110,26 +109,26 @@ namespace Thumper_Custom_Level_Editor
             //finalize boot
             PlaySound("UIboot");
             ///version check
-            if (Properties.Settings.Default.version != "2.2release1") {
+            if (AppSettings.version != "2.2release1") {
                 ShowChangelog();
                 if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     toolstripFileTemplateRegen_Click(null, null);
                 else
                     MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
-                Properties.Settings.Default.version = "2.2release1";
+                AppSettings.version = "2.2release1";
             }
 
             //finish loading
-            Properties.Settings.Default.firstrun = false;
-            Properties.Settings.Default.Save();
+            AppSettings.firstrun = false;
+            AppSettings.Save();
             //
-            MainBeeble.Size = Properties.Settings.Default.beeblesize;
-            MainBeeble.Location = Properties.Settings.Default.beebleloc;
+            MainBeeble.Size = AppSettings.beeblesize;
+            MainBeeble.Location = AppSettings.beebleloc;
         }
 
-        private static void JumpListUpdate()
+        private void JumpListUpdate()
         {
-            if (Properties.Settings.Default.Recentfiles == null)
+            if (AppSettings.Recentfiles == null)
                 return;
 
             JumpList jml = new() {
@@ -137,7 +136,7 @@ namespace Thumper_Custom_Level_Editor
                 ShowFrequentCategory = true
             };
 
-            foreach (string file in Properties.Settings.Default.Recentfiles) {
+            foreach (string file in AppSettings.Recentfiles) {
                 JumpTask jmp = new() {
                     Title = Path.GetFileName(file),
                     Arguments = file,
@@ -147,7 +146,7 @@ namespace Thumper_Custom_Level_Editor
                 jml.JumpItems.Add(jmp);
             }
             jml.Apply();
-            Properties.Settings.Default.Save();
+            AppSettings.Save();
         }
 
         private void TCLE_FormClosing(object sender, FormClosingEventArgs e)
@@ -161,13 +160,13 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save panel sizes and locations
-            Properties.Settings.Default.beeblesize = MainBeeble.Size;
-            Properties.Settings.Default.beebleloc = MainBeeble.Location;
+            AppSettings.beeblesize = MainBeeble.Size;
+            AppSettings.beebleloc = MainBeeble.Location;
             //colors
-            Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
+            AppSettings.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //write quick values to file
             File.WriteAllText($@"{TCLE.AppLocation}\templates\quickvalues.txt", $"{TCLE.LeafQuickValue0}\n{TCLE.LeafQuickValue1}\n{TCLE.LeafQuickValue2}\n{TCLE.LeafQuickValue3}\n{TCLE.LeafQuickValue4}\n{TCLE.LeafQuickValue5}\n{TCLE.LeafQuickValue6}\n{TCLE.LeafQuickValue7}\n{TCLE.LeafQuickValue8}\n{TCLE.LeafQuickValue9}");
-            Properties.Settings.Default.Save();
+            AppSettings.Save();
         }
         private static void SetKeyBinds()
         {
@@ -345,7 +344,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             //load the properties of the TCL and create projectProperties
-            ProjectJson = LoadFileLock(TCL.FullName);
+            dynamic ProjectJson = LoadFileLock(TCL.FullName);
             projectProperties = new() {
                 projectname = (string)ProjectJson["level_name"] ?? "New Project",
                 difficulty = (string)ProjectJson["difficulty"] ?? "D0",
@@ -372,15 +371,15 @@ namespace Thumper_Custom_Level_Editor
             toolstripLevelName.Text = projectProperties.projectname;
             toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{projectProperties.difficulty}");
             //add to recent files
-            Properties.Settings.Default.Recentfiles.Remove(WorkingFolder.FullName);
-            Properties.Settings.Default.Recentfiles.Insert(0, WorkingFolder.FullName);
+            AppSettings.Recentfiles.Remove(WorkingFolder.FullName);
+            AppSettings.Recentfiles.Insert(0, WorkingFolder.FullName);
             JumpListUpdate();
             //load sample of the project
             LvlReloadSamples();
             panelRecentFiles.Visible = false;
 
             //Load the project''s files into Explorer
-            dockProjectExplorer.LoadProject();
+            ProjectExplorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();
             //create a workspace
             Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
@@ -478,7 +477,7 @@ namespace Thumper_Custom_Level_Editor
                 ColorFormElements();
                 ImportDefaultColors();
                 SetKeyBinds();
-                Properties.Settings.Default.Save();
+                AppSettings.Save();
             }
             custom.Dispose();
         }
@@ -568,6 +567,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripProjectProperties_Click(object sender, EventArgs e)
         {
+            /*
             ProjectPropertiesForm customlevel = new(false);
             //set textboxes
             customlevel.txtCustomName.Text = ProjectJson["level_name"] ?? "LEVEL NAME";
@@ -576,6 +576,7 @@ namespace Thumper_Custom_Level_Editor
             customlevel.txtCustomAuthor.Text = ProjectJson["author"] ?? "SOME PERSON";
             //show the new level folder dialog box
             customlevel.ShowDialog();
+            */
         }
 
         private void contextmenuSampPacks_Closing(object sender, ToolStripDropDownClosingEventArgs e)
@@ -623,7 +624,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
             if (filesupdates)
-                dockProjectExplorer.CreateTreeView();
+                ProjectExplorer.CreateTreeView();
         }
 
         private void contextmenuSampPacks_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -715,12 +716,12 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripTabCopyPath_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value.FullName);
+            Clipboard.SetText(ProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value.FullName);
         }
 
         private void toolstripTabOpenFolder_Click(object sender, EventArgs e)
         {
-            FileInfo foldertoopen = dockProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value;
+            FileInfo foldertoopen = ProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value;
             if (foldertoopen.Directory.Exists)
                 Process.Start("explorer.exe", $@"/select, ""{foldertoopen.FullName}""");
         }
