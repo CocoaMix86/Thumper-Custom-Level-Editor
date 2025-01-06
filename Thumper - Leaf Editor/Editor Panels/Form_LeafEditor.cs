@@ -15,8 +15,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             BuildObjectTree();
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
+            contextMenuInterps.Renderer = new ContextMenuColors();
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
-            DropDownMenuScrollWheelHandler.Enable(true);
             TCLE.DoubleBufferDGV(trackEditor, true);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
 
@@ -1749,7 +1749,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
                     foreach (string file in TCLE.LvlSamples.Select(x => x.File).Distinct()) {
-                        if (file == "")
+                        if (string.IsNullOrEmpty(file))
                             continue;
                         TreeNode sampfile = new() {
                             Text = file,

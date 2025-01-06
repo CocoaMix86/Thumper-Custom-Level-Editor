@@ -61,7 +61,7 @@
             this.toolStripSeparator2 = new ToolStripSeparator();
             this.leaftoolsToolStrip = new ToolStrip();
             this.btnLeafColors = new ToolStripButton();
-            this.btnLEafInterpLinear = new ToolStripButton();
+            this.btnLeafInterpLinear = new ToolStripSplitButton();
             this.btnLeafSplit = new ToolStripButton();
             this.btnLeafRandomValues = new ToolStripButton();
             this.btnLeafZoom = new ToolStripButton();
@@ -74,6 +74,13 @@
             this.splitContainerTopbar = new SplitContainer();
             this.labelSequencer = new Label();
             this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.contextMenuInterps = new ContextMenuStrip(this.components);
+            this.linearToolStripMenuItem = new ToolStripMenuItem();
+            this.quadraticToolStripMenuItem = new ToolStripMenuItem();
+            this.cubicToolStripMenuItem = new ToolStripMenuItem();
+            this.quarticToolStripMenuItem = new ToolStripMenuItem();
+            this.quinticToolStripMenuItem = new ToolStripMenuItem();
+            this.sineToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.panelZoom.SuspendLayout();
@@ -97,6 +104,7 @@
             this.splitContainerTopbar.Panel2.SuspendLayout();
             this.splitContainerTopbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.textEditor).BeginInit();
+            this.contextMenuInterps.SuspendLayout();
             this.SuspendLayout();
             // 
             // trackZoomVert
@@ -143,7 +151,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 197);
+            this.btnRawImport.Size = new Size(54, 117);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -155,13 +163,13 @@
             this.treeObjects.AllowDrop = true;
             this.treeObjects.BackColor = Color.FromArgb(31, 31, 31);
             this.treeObjects.Dock = DockStyle.Fill;
-            this.treeObjects.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.treeObjects.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.treeObjects.ForeColor = Color.White;
             this.treeObjects.FullRowSelect = true;
             this.treeObjects.HideSelection = false;
             this.treeObjects.ImageIndex = 0;
             this.treeObjects.ImageList = this.imageList1;
-            this.treeObjects.ItemHeight = 20;
+            this.treeObjects.ItemHeight = 16;
             this.treeObjects.LabelEdit = true;
             this.treeObjects.LineColor = Color.White;
             this.treeObjects.Location = new Point(0, 13);
@@ -169,7 +177,7 @@
             this.treeObjects.Name = "treeObjects";
             this.treeObjects.SelectedImageIndex = 0;
             this.treeObjects.ShowPlusMinus = false;
-            this.treeObjects.Size = new Size(250, 187);
+            this.treeObjects.Size = new Size(250, 287);
             this.treeObjects.TabIndex = 1;
             this.toolTip1.SetToolTip(this.treeObjects, "Double-click to add object to Sequencer");
             this.treeObjects.NodeMouseDoubleClick += this.treeObjects_NodeMouseDoubleClick;
@@ -188,7 +196,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 287);
+            this.vScrollBarTrackEditor.Size = new Size(15, 367);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -288,7 +296,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(638, 287);
+            this.trackEditor.Size = new Size(638, 367);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -364,7 +372,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 287);
+            this.leafToolStrip.Size = new Size(25, 367);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -484,7 +492,7 @@
             this.leaftoolsToolStrip.GripMargin = new Padding(0);
             this.leaftoolsToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.leaftoolsToolStrip.ImageScalingSize = new Size(25, 25);
-            this.leaftoolsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLeafColors, this.btnLEafInterpLinear, this.btnLeafSplit, this.btnLeafRandomValues, this.btnLeafZoom, this.btnLeafAutoPlace });
+            this.leaftoolsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLeafColors, this.btnLeafInterpLinear, this.btnLeafSplit, this.btnLeafRandomValues, this.btnLeafZoom, this.btnLeafAutoPlace });
             this.leaftoolsToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.leaftoolsToolStrip.Location = new Point(0, 0);
             this.leaftoolsToolStrip.Name = "leaftoolsToolStrip";
@@ -504,15 +512,16 @@
             this.btnLeafColors.ToolTipText = "Insert color value into selected cells";
             this.btnLeafColors.Click += this.btnLeafColors_Click;
             // 
-            // btnLEafInterpLinear
+            // btnLeafInterpLinear
             // 
-            this.btnLEafInterpLinear.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLEafInterpLinear.Image = (Image)resources.GetObject("btnLEafInterpLinear.Image");
-            this.btnLEafInterpLinear.ImageTransparentColor = Color.Magenta;
-            this.btnLEafInterpLinear.Name = "btnLEafInterpLinear";
-            this.btnLEafInterpLinear.Size = new Size(29, 27);
-            this.btnLEafInterpLinear.ToolTipText = "Smoothly interpolate between 2 selected values.\r\nAutomatically fills in values.";
-            this.btnLEafInterpLinear.Click += this.btnLEafInterpLinear_Click;
+            this.btnLeafInterpLinear.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafInterpLinear.DropDown = this.contextMenuInterps;
+            this.btnLeafInterpLinear.Image = Properties.Resources.icon_graph;
+            this.btnLeafInterpLinear.ImageTransparentColor = Color.Magenta;
+            this.btnLeafInterpLinear.Name = "btnLeafInterpLinear";
+            this.btnLeafInterpLinear.Size = new Size(41, 27);
+            this.btnLeafInterpLinear.Text = "toolStripSplitButton1";
+            this.btnLeafInterpLinear.ButtonClick += this.btnLEafInterpLinear_Click;
             // 
             // btnLeafSplit
             // 
@@ -592,7 +601,7 @@
             // 
             this.splitContainerLeftSide.Panel2.Controls.Add(this.propertyGridLeaf);
             this.splitContainerLeftSide.Size = new Size(250, 519);
-            this.splitContainerLeftSide.SplitterDistance = 200;
+            this.splitContainerLeftSide.SplitterDistance = 300;
             this.splitContainerLeftSide.TabIndex = 66;
             // 
             // label1
@@ -630,7 +639,7 @@
             this.propertyGridLeaf.RightToLeft = RightToLeft.No;
             this.propertyGridLeaf.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridLeaf.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridLeaf.Size = new Size(250, 315);
+            this.propertyGridLeaf.Size = new Size(250, 215);
             this.propertyGridLeaf.TabIndex = 1;
             this.propertyGridLeaf.ToolbarVisible = false;
             this.propertyGridLeaf.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -660,7 +669,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(678, 519);
-            this.splitContainerLeafSide.SplitterDistance = 317;
+            this.splitContainerLeafSide.SplitterDistance = 397;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -721,7 +730,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(170, 14);
+            this.textEditor.AutoScrollMinSize = new Size(195, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -743,11 +752,62 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(624, 197);
+            this.textEditor.Size = new Size(624, 117);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
             this.textEditor.Zoom = 100;
+            // 
+            // contextMenuInterps
+            // 
+            this.contextMenuInterps.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuInterps.Items.AddRange(new ToolStripItem[] { this.linearToolStripMenuItem, this.quadraticToolStripMenuItem, this.cubicToolStripMenuItem, this.quarticToolStripMenuItem, this.quinticToolStripMenuItem, this.sineToolStripMenuItem });
+            this.contextMenuInterps.Name = "workingfolderRightClick";
+            this.contextMenuInterps.OwnerItem = this.btnLeafInterpLinear;
+            this.contextMenuInterps.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuInterps.Size = new Size(181, 158);
+            // 
+            // linearToolStripMenuItem
+            // 
+            this.linearToolStripMenuItem.ForeColor = Color.White;
+            this.linearToolStripMenuItem.Name = "linearToolStripMenuItem";
+            this.linearToolStripMenuItem.Size = new Size(180, 22);
+            this.linearToolStripMenuItem.Text = "Linear";
+            // 
+            // quadraticToolStripMenuItem
+            // 
+            this.quadraticToolStripMenuItem.ForeColor = Color.White;
+            this.quadraticToolStripMenuItem.Name = "quadraticToolStripMenuItem";
+            this.quadraticToolStripMenuItem.Size = new Size(180, 22);
+            this.quadraticToolStripMenuItem.Text = "Quadratic";
+            // 
+            // cubicToolStripMenuItem
+            // 
+            this.cubicToolStripMenuItem.ForeColor = Color.White;
+            this.cubicToolStripMenuItem.Name = "cubicToolStripMenuItem";
+            this.cubicToolStripMenuItem.Size = new Size(180, 22);
+            this.cubicToolStripMenuItem.Text = "Cubic";
+            // 
+            // quarticToolStripMenuItem
+            // 
+            this.quarticToolStripMenuItem.ForeColor = Color.White;
+            this.quarticToolStripMenuItem.Name = "quarticToolStripMenuItem";
+            this.quarticToolStripMenuItem.Size = new Size(180, 22);
+            this.quarticToolStripMenuItem.Text = "Quartic";
+            // 
+            // quinticToolStripMenuItem
+            // 
+            this.quinticToolStripMenuItem.ForeColor = Color.White;
+            this.quinticToolStripMenuItem.Name = "quinticToolStripMenuItem";
+            this.quinticToolStripMenuItem.Size = new Size(180, 22);
+            this.quinticToolStripMenuItem.Text = "Quintic";
+            // 
+            // sineToolStripMenuItem
+            // 
+            this.sineToolStripMenuItem.ForeColor = Color.White;
+            this.sineToolStripMenuItem.Name = "sineToolStripMenuItem";
+            this.sineToolStripMenuItem.Size = new Size(180, 22);
+            this.sineToolStripMenuItem.Text = "Sine";
             // 
             // Form_LeafEditor
             // 
@@ -793,6 +853,7 @@
             ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).EndInit();
             this.splitContainerTopbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.textEditor).EndInit();
+            this.contextMenuInterps.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
@@ -817,7 +878,6 @@
         private System.Windows.Forms.Button btnRawImport;
         private System.Windows.Forms.ToolStrip leaftoolsToolStrip;
         private System.Windows.Forms.ToolStripButton btnLeafColors;
-        private System.Windows.Forms.ToolStripButton btnLEafInterpLinear;
         private System.Windows.Forms.ToolStripButton btnLeafSplit;
         private System.Windows.Forms.ToolStripButton btnLeafRandomValues;
         private System.Windows.Forms.ToolStripButton btnLeafZoom;
@@ -839,5 +899,13 @@
         private Label label1;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
+        private ToolStripSplitButton btnLeafInterpLinear;
+        private ContextMenuStrip contextMenuInterps;
+        private ToolStripMenuItem linearToolStripMenuItem;
+        private ToolStripMenuItem quadraticToolStripMenuItem;
+        private ToolStripMenuItem cubicToolStripMenuItem;
+        private ToolStripMenuItem quarticToolStripMenuItem;
+        private ToolStripMenuItem quinticToolStripMenuItem;
+        private ToolStripMenuItem sineToolStripMenuItem;
     }
 }
