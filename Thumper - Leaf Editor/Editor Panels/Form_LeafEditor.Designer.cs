@@ -29,10 +29,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
             this.toolTip1 = new ToolTip(this.components);
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
@@ -69,11 +69,13 @@
             this.btnLeafZoom = new ToolStripButton();
             this.btnLeafAutoPlace = new ToolStripButton();
             this.splitContainer1 = new SplitContainer();
-            this.propertyGridLeaf = new PropertyGrid();
             this.splitContainerLeafSide = new SplitContainer();
             this.splitContainerTopbar = new SplitContainer();
             this.labelSequencer = new Label();
             this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.splitContainerLeftSide = new SplitContainer();
+            this.propertyGridLeaf = new PropertyGrid();
+            this.treeObjects = new TreeViewEx();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.panelZoom.SuspendLayout();
@@ -93,6 +95,10 @@
             this.splitContainerTopbar.Panel2.SuspendLayout();
             this.splitContainerTopbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.textEditor).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.splitContainerLeftSide).BeginInit();
+            this.splitContainerLeftSide.Panel1.SuspendLayout();
+            this.splitContainerLeftSide.Panel2.SuspendLayout();
+            this.splitContainerLeftSide.SuspendLayout();
             this.SuspendLayout();
             // 
             // trackZoomVert
@@ -139,7 +145,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 186);
+            this.btnRawImport.Size = new Size(54, 187);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -216,7 +222,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 298);
+            this.vScrollBarTrackEditor.Size = new Size(15, 297);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -272,27 +278,27 @@
             this.trackEditor.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.trackEditor.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle13.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.trackEditor.Columns.AddRange(new DataGridViewColumn[] { this.LeafEnabled, this.LeafAudio, this.LeafMultilane });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle2.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.Format = "0.###";
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle14.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.Format = "0.###";
+            dataGridViewCellStyle14.NullValue = null;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle14;
             this.trackEditor.Dock = DockStyle.Fill;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = Color.Black;
@@ -300,23 +306,23 @@
             this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle15.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle15.ForeColor = Color.White;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle16;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.ScrollBars = ScrollBars.Horizontal;
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(638, 298);
+            this.trackEditor.Size = new Size(638, 297);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -392,7 +398,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 298);
+            this.leafToolStrip.Size = new Size(25, 297);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -609,7 +615,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.dropTrackLane);
             this.splitContainer1.Panel1.Controls.Add(this.dropParamPath);
             this.splitContainer1.Panel1.Controls.Add(this.dropObjects);
-            this.splitContainer1.Panel1.Controls.Add(this.propertyGridLeaf);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainerLeftSide);
             // 
             // splitContainer1.Panel2
             // 
@@ -618,32 +624,6 @@
             this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 119;
-            // 
-            // propertyGridLeaf
-            // 
-            this.propertyGridLeaf.BackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridLeaf.CategoryForeColor = Color.White;
-            this.propertyGridLeaf.CategorySplitterColor = Color.FromArgb(46, 46, 46);
-            this.propertyGridLeaf.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
-            this.propertyGridLeaf.Dock = DockStyle.Fill;
-            this.propertyGridLeaf.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.propertyGridLeaf.HelpBackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridLeaf.HelpBorderColor = Color.FromArgb(61, 61, 61);
-            this.propertyGridLeaf.HelpForeColor = Color.White;
-            this.propertyGridLeaf.LineColor = Color.FromArgb(46, 46, 46);
-            this.propertyGridLeaf.Location = new Point(0, 0);
-            this.propertyGridLeaf.Margin = new Padding(4, 3, 4, 3);
-            this.propertyGridLeaf.Name = "propertyGridLeaf";
-            this.propertyGridLeaf.PropertySort = PropertySort.Categorized;
-            this.propertyGridLeaf.RightToLeft = RightToLeft.No;
-            this.propertyGridLeaf.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
-            this.propertyGridLeaf.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridLeaf.Size = new Size(250, 519);
-            this.propertyGridLeaf.TabIndex = 0;
-            this.propertyGridLeaf.ToolbarVisible = false;
-            this.propertyGridLeaf.ViewBackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridLeaf.ViewBorderColor = Color.FromArgb(61, 61, 61);
-            this.propertyGridLeaf.ViewForeColor = Color.White;
             // 
             // splitContainerLeafSide
             // 
@@ -668,7 +648,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(678, 519);
-            this.splitContainerLeafSide.SplitterDistance = 328;
+            this.splitContainerLeafSide.SplitterDistance = 327;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -729,7 +709,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(170, 14);
+            this.textEditor.AutoScrollMinSize = new Size(195, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -740,7 +720,6 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -752,11 +731,78 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(624, 186);
+            this.textEditor.Size = new Size(624, 187);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
             this.textEditor.Zoom = 100;
+            // 
+            // splitContainerLeftSide
+            // 
+            this.splitContainerLeftSide.Dock = DockStyle.Fill;
+            this.splitContainerLeftSide.FixedPanel = FixedPanel.Panel1;
+            this.splitContainerLeftSide.Location = new Point(0, 0);
+            this.splitContainerLeftSide.Name = "splitContainerLeftSide";
+            this.splitContainerLeftSide.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainerLeftSide.Panel1
+            // 
+            this.splitContainerLeftSide.Panel1.Controls.Add(this.treeObjects);
+            // 
+            // splitContainerLeftSide.Panel2
+            // 
+            this.splitContainerLeftSide.Panel2.Controls.Add(this.propertyGridLeaf);
+            this.splitContainerLeftSide.Size = new Size(250, 519);
+            this.splitContainerLeftSide.SplitterDistance = 200;
+            this.splitContainerLeftSide.TabIndex = 66;
+            // 
+            // propertyGridLeaf
+            // 
+            this.propertyGridLeaf.BackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLeaf.CategoryForeColor = Color.White;
+            this.propertyGridLeaf.CategorySplitterColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridLeaf.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
+            this.propertyGridLeaf.Dock = DockStyle.Fill;
+            this.propertyGridLeaf.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.propertyGridLeaf.HelpBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLeaf.HelpBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridLeaf.HelpForeColor = Color.White;
+            this.propertyGridLeaf.LineColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridLeaf.Location = new Point(0, 0);
+            this.propertyGridLeaf.Margin = new Padding(4, 3, 4, 3);
+            this.propertyGridLeaf.Name = "propertyGridLeaf";
+            this.propertyGridLeaf.PropertySort = PropertySort.Categorized;
+            this.propertyGridLeaf.RightToLeft = RightToLeft.No;
+            this.propertyGridLeaf.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
+            this.propertyGridLeaf.SelectedItemWithFocusForeColor = Color.White;
+            this.propertyGridLeaf.Size = new Size(250, 315);
+            this.propertyGridLeaf.TabIndex = 1;
+            this.propertyGridLeaf.ToolbarVisible = false;
+            this.propertyGridLeaf.ViewBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLeaf.ViewBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridLeaf.ViewForeColor = Color.White;
+            // 
+            // treeObjects
+            // 
+            this.treeObjects.AllowDrop = true;
+            this.treeObjects.BackColor = Color.FromArgb(31, 31, 31);
+            this.treeObjects.BorderStyle = BorderStyle.None;
+            this.treeObjects.Dock = DockStyle.Fill;
+            this.treeObjects.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.treeObjects.ForeColor = Color.White;
+            this.treeObjects.FullRowSelect = true;
+            this.treeObjects.HideSelection = false;
+            this.treeObjects.ImageKey = "other";
+            this.treeObjects.ItemHeight = 20;
+            this.treeObjects.LabelEdit = true;
+            this.treeObjects.LineColor = Color.White;
+            this.treeObjects.Location = new Point(0, 0);
+            this.treeObjects.Margin = new Padding(4, 3, 4, 3);
+            this.treeObjects.Name = "treeObjects";
+            this.treeObjects.SelectedImageKey = "other";
+            this.treeObjects.ShowLines = false;
+            this.treeObjects.Size = new Size(250, 200);
+            this.treeObjects.TabIndex = 1;
             // 
             // Form_LeafEditor
             // 
@@ -797,6 +843,10 @@
             ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).EndInit();
             this.splitContainerTopbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.textEditor).EndInit();
+            this.splitContainerLeftSide.Panel1.ResumeLayout(false);
+            this.splitContainerLeftSide.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.splitContainerLeftSide).EndInit();
+            this.splitContainerLeftSide.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
@@ -834,7 +884,6 @@
         public ComboBox dropParamPath;
         private SplitContainer splitContainer1;
         private ToolStrip gateToolStrip;
-        public PropertyGrid propertyGridLeaf;
         private SplitContainer splitContainerLeafSide;
         private SplitContainer splitContainerTopbar;
         private Label labelSequencer;
@@ -843,5 +892,8 @@
         private DataGridViewTextBoxColumn LeafEnabled;
         private DataGridViewTextBoxColumn LeafAudio;
         private DataGridViewTextBoxColumn LeafMultilane;
+        private SplitContainer splitContainerLeftSide;
+        public PropertyGrid propertyGridLeaf;
+        private TreeViewEx treeObjects;
     }
 }
