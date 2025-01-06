@@ -3168,6 +3168,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pixeltrans {
+            get {
+                object obj = ResourceManager.GetObject("pixeltrans", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///&apos;items&apos;: [
         ///{

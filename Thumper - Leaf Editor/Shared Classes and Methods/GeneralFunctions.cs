@@ -121,14 +121,6 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show(_errorlog);
                 _errorlog = "";
             }
-
-            //iterate over each open tab to find leafs. Update their object lists.
-            foreach (IDockContent? dc in dockMain.Documents.Where(x => x.DockHandler.TabText.EndsWith(".leaf"))) {
-                Form_LeafEditor fle = dc as Form_LeafEditor;
-                fle.dropObjects.DataSource = LeafObjects.Select(x => x.category).Distinct().ToList();
-                fle.dropObjects.SelectedIndex = -1;
-                fle.dropParamPath.Enabled = false;
-            }
         }
 
         public static Dictionary<string, Color> ObjectColors = new();
@@ -400,7 +392,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             LvlSamples.Clear();
             //add default empty sample
-            LvlSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
+            LvlSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = "" });
             //iterate over each file
             foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp")) {
                 //parse file to JSON
@@ -417,25 +409,12 @@ namespace Thumper_Custom_Level_Editor
                         pitch = _samp["pitch"],
                         pan = _samp["pan"],
                         offset = _samp["offset"],
-                        channel_group = _samp["channel_group"]
+                        channel_group = _samp["channel_group"],
+                        File = sampfile.Name
                     });
                 }
             }
             LvlSamples = LvlSamples.OrderBy(w => w.obj_name).ToList();
-            /*
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
-            //this is for adjusting the dropdown width so that the full item can display
-            int width = 0;
-            Graphics g = lvlLoopTracks.CreateGraphics();
-            Font font = lvlLoopTracks.DefaultCellStyle.Font;
-            foreach (SampleData s in _lvlsamples) {
-                int newWidth = (int)g.MeasureString(s.obj_name, font).Width;
-                if (width < newWidth) {
-                    width = newWidth;
-                }
-            }
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DropDownWidth = width + 20;
-            */
         }
 
         public static string PCtoOGG(SampleData _samp)
