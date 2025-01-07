@@ -17,6 +17,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leafToolStrip.Renderer = new ToolStripOverride();
             contextMenuInterps.Renderer = new ContextMenuColors();
             contextMenuFav.Renderer = new ContextMenuColors();
+            contextMenuFavClear.Renderer = new ContextMenuColors();
+            contextMenuFavRemove.Renderer = new ContextMenuColors();
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             TCLE.DoubleBufferDGV(trackEditor, true);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
@@ -743,6 +745,68 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     LoadLeaf(_load, new FileInfo("template"));
                 }
             }
+        }
+
+        private void treeObjects_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
+                return;
+            Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == e.Node.Text);
+            if (objmatch == null)
+                return;
+
+            Sequencer_Object seq = new(this) {
+                obj_name = objmatch.obj_name == "PLAY SAMPLE" ? e.Node.Text : objmatch.obj_name,
+                category = objmatch.category,
+                param_path = objmatch.param_path.Split('.')[0],
+                friendly_param = objmatch.param_displayname,
+                defaultvalue = float.Parse(objmatch.def),
+                step = objmatch.step,
+                trait_type = objmatch.trait_type,
+                highlight_color = TCLE.ObjectColors.TryGetValue(objmatch.param_displayname, out Color value) ? value : Color.Purple,
+                highlight_value = 0,
+                footer = objmatch.footer,
+                enabled = true,
+                param_path_lane = objmatch.param_path.EndsWith(".ent") ? "ent" : "none",
+                friendly_lane = objmatch.param_path.EndsWith(".ent") ? "lane center" : "none"
+            };
+            SequencerObjects.Add(seq);
+            //Add new row and assign random data
+            trackEditor.RowCount += 1;
+            seq.editor_row = trackEditor.Rows[^1];
+            ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
+            TrackUpdateHighlighting(seq);
+        }
+
+        private void treeObjects_MouseDown(object sender, MouseEventArgs e)
+        {
+            TreeNode currentNode = treeObjects.GetNodeAt(e.Location);
+            if (currentNode == null) return;
+
+            if (e.Button == MouseButtons.Right)
+                treeObjects.SelectedNode = currentNode;
+        }
+
+        private void toolStripFavAdd_Click(object sender, EventArgs e)
+        {
+            if (treeObjects.SelectedNode.ImageKey != "none")
+                return;
+            Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text && x.category.ToUpper() == treeObjects.SelectedNode.Parent.Text);
+            if (match != null && !TCLE.ObjectFavorites.Contains(match))
+                TCLE.ObjectFavorites.Add(match);
+            BuildTreeFavorites();
+        }
+
+        private void toolStripFavRemove_Click(object sender, EventArgs e)
+        {
+            TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == treeObjects.SelectedNode.Text);
+            treeObjects.SelectedNode.Remove();
+        }
+
+        private void toolStripFavClear_Click(object sender, EventArgs e)
+        {
+            TCLE.ObjectFavorites.Clear();
+            BuildTreeFavorites();
         }
         #endregion
 
@@ -1743,7 +1807,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TreeNode fav = new() {
                 Text = "*FAVORITES*",
                 ImageKey = "fav",
-                SelectedImageKey = "fav"
+                SelectedImageKey = "fav",
+                ContextMenuStrip = contextMenuFavClear
             };
             treeObjects.Nodes.Add(fav);
             BuildTreeFavorites();
@@ -1757,7 +1822,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 };
                 treeObjects.Nodes.Add(_node);
                 if (category == "PLAY SAMPLE") {
-                    _node.ContextMenuStrip = contextMenuFavClear;
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
                     foreach (string file in TCLE.LvlSamples.Select(x => x.File).Distinct()) {
@@ -1791,6 +1855,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         _node.Nodes.Add(_param);
                     }
                 }
+            }
+        }
+
+        private void BuildTreeFavorites()
+        {
+            treeObjects.Nodes[0].Nodes.Clear();
+            foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
+                TreeNode _param = new() {
+                    Text = obj,
+                    ImageKey = "none",
+                    SelectedImageKey = "none",
+                    ContextMenuStrip = contextMenuFavRemove
+                };
+                treeObjects.Nodes[0].Nodes.Add(_param);
             }
         }
 
@@ -2007,83 +2085,5 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             isfinding = false;
         }
         #endregion
-
-        private void treeObjects_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
-                return;
-            Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == e.Node.Text);
-            if (objmatch == null)
-                return;
-
-            Sequencer_Object seq = new(this) {
-                obj_name = objmatch.obj_name == "PLAY SAMPLE" ? e.Node.Text : objmatch.obj_name,
-                category = objmatch.category,
-                param_path = objmatch.param_path.Split('.')[0],
-                friendly_param = objmatch.param_displayname,
-                defaultvalue = float.Parse(objmatch.def),
-                step = objmatch.step,
-                trait_type = objmatch.trait_type,
-                highlight_color = TCLE.ObjectColors.TryGetValue(objmatch.param_displayname, out Color value) ? value : Color.Purple,
-                highlight_value = 0,
-                footer = objmatch.footer,
-                enabled = true,
-                param_path_lane = objmatch.param_path.EndsWith(".ent") ? "ent" : "none",
-                friendly_lane = objmatch.param_path.EndsWith(".ent") ? "lane center" : "none"
-            };
-            SequencerObjects.Add(seq);
-            //Add new row and assign random data
-            trackEditor.RowCount += 1;
-            seq.editor_row = trackEditor.Rows[^1];
-            ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
-            TrackUpdateHighlighting(seq);
-        }
-
-        private void treeObjects_MouseDown(object sender, MouseEventArgs e)
-        {
-            TreeNode currentNode = treeObjects.GetNodeAt(e.Location);
-            if (currentNode == null) return;
-
-            if (e.Button == MouseButtons.Right)
-                treeObjects.SelectedNode = currentNode;
-        }
-
-        private void toolStripFavAdd_Click(object sender, EventArgs e)
-        {
-            if (treeObjects.SelectedNode.ImageKey != "none")
-                return;
-
-            Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text && x.category.ToUpper() == treeObjects.SelectedNode.Parent.Text);
-            if (match != null && !TCLE.ObjectFavorites.Contains(match))
-                TCLE.ObjectFavorites.Add(match);
-
-            BuildTreeFavorites();
-        }
-
-        private void toolStripFavRemove_Click(object sender, EventArgs e)
-        {
-            TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == treeObjects.SelectedNode.Text);
-            treeObjects.SelectedNode.Remove();
-        }
-
-        private void toolStripFavClear_Click(object sender, EventArgs e)
-        {
-            TCLE.ObjectFavorites.Clear();
-            BuildTreeFavorites();
-        }
-
-        private void BuildTreeFavorites()
-        {
-            treeObjects.Nodes[0].Nodes.Clear();
-            foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
-                TreeNode _param = new() {
-                    Text = obj,
-                    ImageKey = "none",
-                    SelectedImageKey = "none",
-                    ContextMenuStrip = contextMenuFavRemove
-                };
-                treeObjects.Nodes[0].Nodes.Add(_param);
-            }
-        }
     }
 }
