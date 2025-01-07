@@ -814,19 +814,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private static TreeNode FindNode(string search, TreeNodeCollection nodes)
-        {
-            TreeNode foundnode = null;
-            foreach (TreeNode tn in nodes) {
-                if (tn.Text == search)
-                    return tn;
-                foundnode = FindNode(search, tn.Nodes);
-                if (foundnode != null)
-                    break;
-            }
-            return foundnode;
-        }
-
         private void toolStripFavClear_Click(object sender, EventArgs e)
         {
             TCLE.ObjectFavorites.Clear();
@@ -2035,6 +2022,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 };
                 treeObjects.Nodes[0].Nodes.Add(_param);
             }
+        }
+
+        private static TreeNode FindNode(string search, TreeNodeCollection nodes)
+        {
+            TreeNode foundnode = null;
+            foreach (TreeNode tn in nodes) {
+                if (tn.Text == search)
+                    return tn;
+                foundnode = FindNode(search, tn.Nodes);
+                if (foundnode != null)
+                    break;
+            }
+            return foundnode;
         }
 
         #region Undo Functions
