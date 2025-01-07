@@ -175,7 +175,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 132);
+            this.btnRawImport.Size = new Size(54, 133);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -237,7 +237,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 352);
+            this.vScrollBarTrackEditor.Size = new Size(15, 351);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -337,7 +337,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(638, 352);
+            this.trackEditor.Size = new Size(638, 351);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -413,7 +413,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 352);
+            this.leafToolStrip.Size = new Size(25, 351);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -561,7 +561,7 @@
             this.btnLeafInterpLinear.ImageTransparentColor = Color.Magenta;
             this.btnLeafInterpLinear.Name = "btnLeafInterpLinear";
             this.btnLeafInterpLinear.Size = new Size(41, 27);
-            this.btnLeafInterpLinear.Text = "toolStripSplitButton1";
+            this.btnLeafInterpLinear.TextAlign = ContentAlignment.MiddleRight;
             this.btnLeafInterpLinear.ButtonClick += this.btnLEafInterpLinear_Click;
             // 
             // contextMenuInterps
@@ -569,6 +569,7 @@
             this.contextMenuInterps.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuInterps.Items.AddRange(new ToolStripItem[] { this.linearToolStripMenuItem, this.toolStripSeparator4, this.quadraticToolStripMenuItem1, this.quadraticEaseOutToolStripMenuItem, this.quadraticEaseInOutToolStripMenuItem, this.toolStripSeparator3, this.cubicEaseInToolStripMenuItem, this.cubicEaseOutToolStripMenuItem, this.cubicEaseInOutToolStripMenuItem, this.toolStripSeparator5, this.quarticEaseInToolStripMenuItem, this.quarticEaseOutToolStripMenuItem, this.quarticEaseInOutToolStripMenuItem, this.toolStripSeparator6, this.quinticEaseInToolStripMenuItem, this.quinticEaseOutToolStripMenuItem, this.quinticEaseInOutToolStripMenuItem, this.toolStripSeparator7, this.sineEaseInToolStripMenuItem, this.sineEaseOutToolStripMenuItem, this.sineEaseInOutToolStripMenuItem });
             this.contextMenuInterps.Name = "workingfolderRightClick";
+            this.contextMenuInterps.OwnerItem = this.btnLeafInterpLinear;
             this.contextMenuInterps.RenderMode = ToolStripRenderMode.System;
             this.contextMenuInterps.Size = new Size(189, 408);
             this.contextMenuInterps.ItemClicked += this.contextMenuInterps_ItemClicked;
@@ -856,7 +857,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(678, 519);
-            this.splitContainerLeafSide.SplitterDistance = 382;
+            this.splitContainerLeafSide.SplitterDistance = 381;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -917,7 +918,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(170, 14);
+            this.textEditor.AutoScrollMinSize = new Size(195, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -928,7 +929,6 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -940,7 +940,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(624, 132);
+            this.textEditor.Size = new Size(624, 133);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
