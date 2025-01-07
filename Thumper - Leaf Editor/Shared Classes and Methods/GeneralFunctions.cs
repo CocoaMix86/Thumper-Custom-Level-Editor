@@ -76,6 +76,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static HashSet<Object_Params> LeafObjects = new();
+        public static HashSet<Object_Params> ObjectFavorites = new();
         private string _errorlog = "";
         public void ImportObjects()
         {

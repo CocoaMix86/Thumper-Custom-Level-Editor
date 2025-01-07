@@ -16,6 +16,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
             contextMenuInterps.Renderer = new ContextMenuColors();
+            contextMenuFav.Renderer = new ContextMenuColors();
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             TCLE.DoubleBufferDGV(trackEditor, true);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
@@ -412,7 +413,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, $"Beat {columnindex} value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
                 }
-            } catch { }
+            }
+            catch { }
             ShowRawTrackData(SequencerObjects[rowindex]);
         }
 
@@ -757,7 +759,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 TrackRawImport(SequencerObjects[CurrentRow], JObject.Parse($"{{{textEditor.Text}}}"));
                 TrackUpdateHighlighting(SequencerObjects[CurrentRow]);
-            } catch (JsonReaderException ex) {
+            }
+            catch (JsonReaderException ex) {
                 MessageBox.Show($"Invalid format or characters in imported data. Please fix.\n\n{ex.Message}", "Thumper Custom Editor Level");
             }
             TCLE.PlaySound("UIkpaste");
@@ -783,7 +786,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TCLE.PlaySound("UIobjectremove");
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, "Delete track", data);
-                } catch { }
+                }
+                catch { }
             }
             //disable elements if there are no tracks
             if (SequencerObjects.Count == 0) {
@@ -859,7 +863,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //sets flag that leaf has unsaved changes
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Move track up", $"{_tracks[_selectedtracks[0].Item3 - 1].friendly_type} {_tracks[_selectedtracks[0].Item3 - 1].friendly_param}");
-            } catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
+            }
+            catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
             ismoving = false;
         }
 
@@ -901,7 +906,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //sets flag that leaf has unsaved changes
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Move track down", $"{_tracks[_selectedtracks[0].Item3 + 1].friendly_type} {_tracks[_selectedtracks[0].Item3 + 1].friendly_param}");
-            } catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
+            }
+            catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
             ismoving = false;
         }
 
@@ -916,7 +922,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     clipboardtracks.Add(SequencerObjects[dgvr.Index].Clone());
                 }
                 btnTrackPaste.Enabled = true;
-            } catch (Exception ex) { MessageBox.Show("something went wrong with copying. Show this error to the dev.\n\n" + ex); }
+            }
+            catch (Exception ex) { MessageBox.Show("something went wrong with copying. Show this error to the dev.\n\n" + ex); }
             TCLE.PlaySound("UIkcopy");
         }
 
@@ -950,9 +957,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         ChangeTrackName(clone, leafProperties.showcategory ? $"[{clone.category}] " : "");
                         //pass _griddata per row to be imported to the DGV
                         TrackRawImport(clone, _newtrack.data_points);
-                    } catch (Exception) { }
+                    }
+                    catch (Exception) { }
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex);
             }
 
@@ -1341,7 +1350,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         Object_Params objmatch = TCLE.LeafObjects.First(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLeaf.Name, "leafname"));
                         _s.friendly_param = objmatch.param_displayname ?? "";
                         _s.category = objmatch.category ?? "";
-                    } catch (Exception) {
+                    }
+                    catch (Exception) {
                         loadfail = true;
                         loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
                     }
@@ -1536,7 +1546,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     seq.editor_row.Cells[data_point.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
                     seq.data_points[data_point.beat].value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
-                } catch (ArgumentOutOfRangeException) { }
+                }
+                catch (ArgumentOutOfRangeException) { }
             }
 
             TrackUpdateHighlighting(seq);
@@ -1557,7 +1568,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     seq.editor_row.Cells[int.Parse(data_point.Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                     seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
-                } catch (ArgumentOutOfRangeException) { }
+                }
+                catch (ArgumentOutOfRangeException) { }
             }
 
             TrackUpdateHighlighting(seq);
@@ -1737,8 +1749,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void BuildObjectTree()
         {
+            treeObjects.Nodes.Clear();
+            //Add Favorites right at the top
+            TreeNode fav = new() {
+                Text = "*FAVORITES*",
+                ImageKey = "fav",
+                SelectedImageKey = "fav"
+            };
+            foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
+                TreeNode _param = new() {
+                    Text = obj,
+                    ImageKey = "none",
+                    SelectedImageKey = "none"
+                };
+                fav.Nodes.Add(_param);
+            }
+            treeObjects.Nodes.Add(fav);
+
             //make each category of objects its own node
-            foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct()) {
+            foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct().Order()) {
                 TreeNode _node = new() {
                     Text = category.ToUpper(),
                     ImageKey = "category",
@@ -1773,7 +1802,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         TreeNode _param = new() {
                             Text = obj.param_displayname,
                             ImageKey = "none",
-                            SelectedImageKey = "none"
+                            SelectedImageKey = "none",
+                            ContextMenuStrip = contextMenuFav
                         };
                         _node.Nodes.Add(_param);
                     }
@@ -1999,7 +2029,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
                 return;
-            Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == e.Node.Text && x.category.ToUpper() == e.Node.Parent.Text);
+            Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == e.Node.Text);
             if (objmatch == null)
                 return;
 
@@ -2024,6 +2054,35 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             seq.editor_row = trackEditor.Rows[^1];
             ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
             TrackUpdateHighlighting(seq);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (treeObjects.SelectedNode.ImageKey != "none")
+                return;
+
+            Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text && x.category.ToUpper() == treeObjects.SelectedNode.Parent.Text);
+            if (match != null)
+                TCLE.ObjectFavorites.Add(match);
+
+            treeObjects.Nodes[0].Nodes.Clear();
+            foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
+                TreeNode _param = new() {
+                    Text = obj,
+                    ImageKey = "none",
+                    SelectedImageKey = "none"
+                };
+                treeObjects.Nodes[0].Nodes.Add(_param);
+            }
+        }
+
+        private void treeObjects_MouseDown(object sender, MouseEventArgs e)
+        {
+            TreeNode currentNode = treeObjects.GetNodeAt(e.Location);
+            if (currentNode == null) return;
+
+            if (e.Button == MouseButtons.Right)
+                treeObjects.SelectedNode = currentNode;
         }
     }
 }
