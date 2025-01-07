@@ -29,10 +29,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             this.toolTip1 = new ToolTip(this.components);
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
@@ -66,11 +66,26 @@
             this.btnLeafInterpLinear = new ToolStripSplitButton();
             this.contextMenuInterps = new ContextMenuStrip(this.components);
             this.linearToolStripMenuItem = new ToolStripMenuItem();
-            this.quadraticToolStripMenuItem = new ToolStripMenuItem();
-            this.cubicToolStripMenuItem = new ToolStripMenuItem();
-            this.quarticToolStripMenuItem = new ToolStripMenuItem();
-            this.quinticToolStripMenuItem = new ToolStripMenuItem();
-            this.sineToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator4 = new ToolStripSeparator();
+            this.quadraticToolStripMenuItem1 = new ToolStripMenuItem();
+            this.quadraticEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quadraticEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator3 = new ToolStripSeparator();
+            this.cubicEaseInToolStripMenuItem = new ToolStripMenuItem();
+            this.cubicEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.cubicEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator5 = new ToolStripSeparator();
+            this.quarticEaseInToolStripMenuItem = new ToolStripMenuItem();
+            this.quarticEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quarticEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator6 = new ToolStripSeparator();
+            this.quinticEaseInToolStripMenuItem = new ToolStripMenuItem();
+            this.quinticEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quinticEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator7 = new ToolStripSeparator();
+            this.sineEaseInToolStripMenuItem = new ToolStripMenuItem();
+            this.sineEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.sineEaseInOutToolStripMenuItem = new ToolStripMenuItem();
             this.btnLeafSplit = new ToolStripButton();
             this.btnLeafRandomValues = new ToolStripButton();
             this.btnLeafZoom = new ToolStripButton();
@@ -160,7 +175,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 129);
+            this.btnRawImport.Size = new Size(54, 132);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -222,7 +237,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 355);
+            this.vScrollBarTrackEditor.Size = new Size(15, 352);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -278,27 +293,27 @@
             this.trackEditor.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.trackEditor.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle9.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle9.ForeColor = Color.White;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.trackEditor.Columns.AddRange(new DataGridViewColumn[] { this.LeafEnabled, this.LeafAudio, this.LeafMultilane });
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle10.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle10.ForeColor = Color.White;
-            dataGridViewCellStyle10.Format = "0.###";
-            dataGridViewCellStyle10.NullValue = null;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle2.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.Format = "0.###";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
             this.trackEditor.Dock = DockStyle.Fill;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = Color.Black;
@@ -306,23 +321,23 @@
             this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle11.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.ScrollBars = ScrollBars.Horizontal;
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(638, 355);
+            this.trackEditor.Size = new Size(638, 352);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -398,7 +413,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 355);
+            this.leafToolStrip.Size = new Size(25, 352);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -552,53 +567,148 @@
             // contextMenuInterps
             // 
             this.contextMenuInterps.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuInterps.Items.AddRange(new ToolStripItem[] { this.linearToolStripMenuItem, this.quadraticToolStripMenuItem, this.cubicToolStripMenuItem, this.quarticToolStripMenuItem, this.quinticToolStripMenuItem, this.sineToolStripMenuItem });
+            this.contextMenuInterps.Items.AddRange(new ToolStripItem[] { this.linearToolStripMenuItem, this.toolStripSeparator4, this.quadraticToolStripMenuItem1, this.quadraticEaseOutToolStripMenuItem, this.quadraticEaseInOutToolStripMenuItem, this.toolStripSeparator3, this.cubicEaseInToolStripMenuItem, this.cubicEaseOutToolStripMenuItem, this.cubicEaseInOutToolStripMenuItem, this.toolStripSeparator5, this.quarticEaseInToolStripMenuItem, this.quarticEaseOutToolStripMenuItem, this.quarticEaseInOutToolStripMenuItem, this.toolStripSeparator6, this.quinticEaseInToolStripMenuItem, this.quinticEaseOutToolStripMenuItem, this.quinticEaseInOutToolStripMenuItem, this.toolStripSeparator7, this.sineEaseInToolStripMenuItem, this.sineEaseOutToolStripMenuItem, this.sineEaseInOutToolStripMenuItem });
             this.contextMenuInterps.Name = "workingfolderRightClick";
-            this.contextMenuInterps.OwnerItem = this.btnLeafInterpLinear;
             this.contextMenuInterps.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuInterps.Size = new Size(127, 136);
+            this.contextMenuInterps.Size = new Size(189, 408);
+            this.contextMenuInterps.ItemClicked += this.contextMenuInterps_ItemClicked;
             // 
             // linearToolStripMenuItem
             // 
-            this.linearToolStripMenuItem.ForeColor = Color.White;
+            this.linearToolStripMenuItem.ForeColor = Color.LimeGreen;
             this.linearToolStripMenuItem.Name = "linearToolStripMenuItem";
-            this.linearToolStripMenuItem.Size = new Size(126, 22);
+            this.linearToolStripMenuItem.Size = new Size(188, 22);
             this.linearToolStripMenuItem.Text = "Linear";
             // 
-            // quadraticToolStripMenuItem
+            // toolStripSeparator4
             // 
-            this.quadraticToolStripMenuItem.ForeColor = Color.White;
-            this.quadraticToolStripMenuItem.Name = "quadraticToolStripMenuItem";
-            this.quadraticToolStripMenuItem.Size = new Size(126, 22);
-            this.quadraticToolStripMenuItem.Text = "Quadratic";
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new Size(185, 6);
             // 
-            // cubicToolStripMenuItem
+            // quadraticToolStripMenuItem1
             // 
-            this.cubicToolStripMenuItem.ForeColor = Color.White;
-            this.cubicToolStripMenuItem.Name = "cubicToolStripMenuItem";
-            this.cubicToolStripMenuItem.Size = new Size(126, 22);
-            this.cubicToolStripMenuItem.Text = "Cubic";
+            this.quadraticToolStripMenuItem1.ForeColor = Color.MediumSlateBlue;
+            this.quadraticToolStripMenuItem1.Name = "quadraticToolStripMenuItem1";
+            this.quadraticToolStripMenuItem1.Size = new Size(188, 22);
+            this.quadraticToolStripMenuItem1.Text = "Quadratic Ease In";
             // 
-            // quarticToolStripMenuItem
+            // quadraticEaseOutToolStripMenuItem
             // 
-            this.quarticToolStripMenuItem.ForeColor = Color.White;
-            this.quarticToolStripMenuItem.Name = "quarticToolStripMenuItem";
-            this.quarticToolStripMenuItem.Size = new Size(126, 22);
-            this.quarticToolStripMenuItem.Text = "Quartic";
+            this.quadraticEaseOutToolStripMenuItem.ForeColor = Color.MediumSlateBlue;
+            this.quadraticEaseOutToolStripMenuItem.Name = "quadraticEaseOutToolStripMenuItem";
+            this.quadraticEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quadraticEaseOutToolStripMenuItem.Text = "Quadratic Ease Out";
             // 
-            // quinticToolStripMenuItem
+            // quadraticEaseInOutToolStripMenuItem
             // 
-            this.quinticToolStripMenuItem.ForeColor = Color.White;
-            this.quinticToolStripMenuItem.Name = "quinticToolStripMenuItem";
-            this.quinticToolStripMenuItem.Size = new Size(126, 22);
-            this.quinticToolStripMenuItem.Text = "Quintic";
+            this.quadraticEaseInOutToolStripMenuItem.ForeColor = Color.MediumSlateBlue;
+            this.quadraticEaseInOutToolStripMenuItem.Name = "quadraticEaseInOutToolStripMenuItem";
+            this.quadraticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quadraticEaseInOutToolStripMenuItem.Text = "Quadratic Ease In Out";
             // 
-            // sineToolStripMenuItem
+            // toolStripSeparator3
             // 
-            this.sineToolStripMenuItem.ForeColor = Color.White;
-            this.sineToolStripMenuItem.Name = "sineToolStripMenuItem";
-            this.sineToolStripMenuItem.Size = new Size(126, 22);
-            this.sineToolStripMenuItem.Text = "Sine";
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new Size(185, 6);
+            // 
+            // cubicEaseInToolStripMenuItem
+            // 
+            this.cubicEaseInToolStripMenuItem.ForeColor = Color.Orange;
+            this.cubicEaseInToolStripMenuItem.Name = "cubicEaseInToolStripMenuItem";
+            this.cubicEaseInToolStripMenuItem.Size = new Size(188, 22);
+            this.cubicEaseInToolStripMenuItem.Text = "Cubic Ease In";
+            // 
+            // cubicEaseOutToolStripMenuItem
+            // 
+            this.cubicEaseOutToolStripMenuItem.ForeColor = Color.Orange;
+            this.cubicEaseOutToolStripMenuItem.Name = "cubicEaseOutToolStripMenuItem";
+            this.cubicEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.cubicEaseOutToolStripMenuItem.Text = "Cubic Ease Out";
+            // 
+            // cubicEaseInOutToolStripMenuItem
+            // 
+            this.cubicEaseInOutToolStripMenuItem.ForeColor = Color.Orange;
+            this.cubicEaseInOutToolStripMenuItem.Name = "cubicEaseInOutToolStripMenuItem";
+            this.cubicEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.cubicEaseInOutToolStripMenuItem.Text = "Cubic Ease In Out";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new Size(185, 6);
+            // 
+            // quarticEaseInToolStripMenuItem
+            // 
+            this.quarticEaseInToolStripMenuItem.ForeColor = Color.Turquoise;
+            this.quarticEaseInToolStripMenuItem.Name = "quarticEaseInToolStripMenuItem";
+            this.quarticEaseInToolStripMenuItem.Size = new Size(188, 22);
+            this.quarticEaseInToolStripMenuItem.Text = "Quartic Ease In";
+            // 
+            // quarticEaseOutToolStripMenuItem
+            // 
+            this.quarticEaseOutToolStripMenuItem.ForeColor = Color.Turquoise;
+            this.quarticEaseOutToolStripMenuItem.Name = "quarticEaseOutToolStripMenuItem";
+            this.quarticEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quarticEaseOutToolStripMenuItem.Text = "Quartic Ease Out";
+            // 
+            // quarticEaseInOutToolStripMenuItem
+            // 
+            this.quarticEaseInOutToolStripMenuItem.ForeColor = Color.Turquoise;
+            this.quarticEaseInOutToolStripMenuItem.Name = "quarticEaseInOutToolStripMenuItem";
+            this.quarticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quarticEaseInOutToolStripMenuItem.Text = "Quartic Ease In Out";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new Size(185, 6);
+            // 
+            // quinticEaseInToolStripMenuItem
+            // 
+            this.quinticEaseInToolStripMenuItem.ForeColor = Color.Yellow;
+            this.quinticEaseInToolStripMenuItem.Name = "quinticEaseInToolStripMenuItem";
+            this.quinticEaseInToolStripMenuItem.Size = new Size(188, 22);
+            this.quinticEaseInToolStripMenuItem.Text = "Quintic Ease In";
+            // 
+            // quinticEaseOutToolStripMenuItem
+            // 
+            this.quinticEaseOutToolStripMenuItem.ForeColor = Color.Yellow;
+            this.quinticEaseOutToolStripMenuItem.Name = "quinticEaseOutToolStripMenuItem";
+            this.quinticEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quinticEaseOutToolStripMenuItem.Text = "Quintic Ease Out";
+            // 
+            // quinticEaseInOutToolStripMenuItem
+            // 
+            this.quinticEaseInOutToolStripMenuItem.ForeColor = Color.Yellow;
+            this.quinticEaseInOutToolStripMenuItem.Name = "quinticEaseInOutToolStripMenuItem";
+            this.quinticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quinticEaseInOutToolStripMenuItem.Text = "Quintic Ease In Out";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new Size(185, 6);
+            // 
+            // sineEaseInToolStripMenuItem
+            // 
+            this.sineEaseInToolStripMenuItem.ForeColor = Color.Red;
+            this.sineEaseInToolStripMenuItem.Name = "sineEaseInToolStripMenuItem";
+            this.sineEaseInToolStripMenuItem.Size = new Size(188, 22);
+            this.sineEaseInToolStripMenuItem.Text = "Sine Ease In";
+            // 
+            // sineEaseOutToolStripMenuItem
+            // 
+            this.sineEaseOutToolStripMenuItem.ForeColor = Color.Red;
+            this.sineEaseOutToolStripMenuItem.Name = "sineEaseOutToolStripMenuItem";
+            this.sineEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.sineEaseOutToolStripMenuItem.Text = "Sine Ease Out";
+            // 
+            // sineEaseInOutToolStripMenuItem
+            // 
+            this.sineEaseInOutToolStripMenuItem.ForeColor = Color.Red;
+            this.sineEaseInOutToolStripMenuItem.Name = "sineEaseInOutToolStripMenuItem";
+            this.sineEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.sineEaseInOutToolStripMenuItem.Text = "Sine Ease In Out";
             // 
             // btnLeafSplit
             // 
@@ -746,7 +856,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(678, 519);
-            this.splitContainerLeafSide.SplitterDistance = 385;
+            this.splitContainerLeafSide.SplitterDistance = 382;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -807,7 +917,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(195, 14);
+            this.textEditor.AutoScrollMinSize = new Size(170, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -818,6 +928,7 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
+            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -829,7 +940,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(624, 129);
+            this.textEditor.Size = new Size(624, 132);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -858,14 +969,14 @@
             this.contextMenuFavClear.Items.AddRange(new ToolStripItem[] { this.toolStripFavClear });
             this.contextMenuFavClear.Name = "workingfolderRightClick";
             this.contextMenuFavClear.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuFavClear.Size = new Size(181, 48);
+            this.contextMenuFavClear.Size = new Size(152, 26);
             // 
             // toolStripFavClear
             // 
             this.toolStripFavClear.ForeColor = Color.White;
             this.toolStripFavClear.Image = Properties.Resources.icon_remove2;
             this.toolStripFavClear.Name = "toolStripFavClear";
-            this.toolStripFavClear.Size = new Size(180, 22);
+            this.toolStripFavClear.Size = new Size(151, 22);
             this.toolStripFavClear.Text = "Clear Favorites";
             this.toolStripFavClear.Click += this.toolStripFavClear_Click;
             // 
@@ -964,17 +1075,32 @@
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSplitButton btnLeafInterpLinear;
         private ContextMenuStrip contextMenuInterps;
-        private ToolStripMenuItem linearToolStripMenuItem;
-        private ToolStripMenuItem quadraticToolStripMenuItem;
-        private ToolStripMenuItem cubicToolStripMenuItem;
-        private ToolStripMenuItem quarticToolStripMenuItem;
-        private ToolStripMenuItem quinticToolStripMenuItem;
-        private ToolStripMenuItem sineToolStripMenuItem;
         private ContextMenuStrip contextMenuFav;
         private ToolStripMenuItem toolStripFavAdd;
         private ContextMenuStrip contextMenuFavRemove;
         private ToolStripMenuItem toolStripFavRemove;
         private ContextMenuStrip contextMenuFavClear;
         private ToolStripMenuItem toolStripFavClear;
+        private ToolStripMenuItem linearToolStripMenuItem;
+        private ToolStripMenuItem quadraticToolStripMenuItem1;
+        private ToolStripMenuItem quadraticEaseOutToolStripMenuItem;
+        private ToolStripMenuItem quadraticEaseInOutToolStripMenuItem;
+        private ToolStripMenuItem cubicEaseInToolStripMenuItem;
+        private ToolStripMenuItem cubicEaseOutToolStripMenuItem;
+        private ToolStripMenuItem cubicEaseInOutToolStripMenuItem;
+        private ToolStripMenuItem quarticEaseInToolStripMenuItem;
+        private ToolStripMenuItem quarticEaseOutToolStripMenuItem;
+        private ToolStripMenuItem quarticEaseInOutToolStripMenuItem;
+        private ToolStripMenuItem quinticEaseInToolStripMenuItem;
+        private ToolStripMenuItem quinticEaseOutToolStripMenuItem;
+        private ToolStripMenuItem quinticEaseInOutToolStripMenuItem;
+        private ToolStripMenuItem sineEaseInToolStripMenuItem;
+        private ToolStripMenuItem sineEaseOutToolStripMenuItem;
+        private ToolStripMenuItem sineEaseInOutToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripSeparator toolStripSeparator7;
     }
 }

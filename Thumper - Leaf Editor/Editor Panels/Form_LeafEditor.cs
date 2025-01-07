@@ -79,6 +79,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool LogUndo;
         private bool GlobalMute;
         private bool GlobalDisable;
+        private bool IsInterpolating;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
         private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
         private Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
@@ -384,6 +385,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void CellValueChanged(int rowindex, int columnindex, bool setnull = false)
         {
+            if (IsInterpolating)
+                return;
             List<DataGridViewRow> edited = new();
             try {
                 bool changes = false;
@@ -1088,6 +1091,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLEafInterpLinear_Click(object sender, EventArgs e)
         {
+            /*
             DataGridViewSelectedCellCollection _cells = trackEditor.SelectedCells;
             //interpolation requires 2 cells only
             if (_cells.Count != 2) {
@@ -1125,6 +1129,140 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIinterpolate");
             SaveCheckAndWrite(false);
             //SaveCheckAndWrite(false, $"Interpolated cells {_listcell[0].ColumnIndex} -> {_listcell[1].ColumnIndex}", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
+            */
+        }
+
+        private void contextMenuInterps_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            DataGridViewSelectedCellCollection SelectedCells = trackEditor.SelectedCells;
+            //interpolation requires 2 cells only
+            if (SelectedCells.Count != 2) {
+                MessageBox.Show("Interpolation works with only 2 cells selected", "Interpolation error");
+                return;
+            }
+            //check if cells are in the same row
+            if (SelectedCells[0].RowIndex != SelectedCells[1].RowIndex) {
+                MessageBox.Show("Interpolation works only if selected cells are in the same row", "Interpolation error");
+                return;
+            }
+            //sort cells so they are in order according to column index
+            List<DataGridViewCell> InterpCells = new() { SelectedCells[0], SelectedCells[1] };
+            InterpCells.Sort((cell1, cell2) => cell1.ColumnIndex.CompareTo(cell2.ColumnIndex));
+            Sequencer_Object interpobject = SequencerObjects[SelectedCells[0].RowIndex];
+
+            //get start and end values, and how many beats separate them
+            double _start = (double)((decimal?)InterpCells[0].Value ?? 0);
+            double _end = (double)((decimal?)InterpCells[1].Value ?? 0);
+            double max = Math.Max(_start, _end);
+            double min = Math.Min(_start, _end);
+            int _beats = InterpCells[1].ColumnIndex - InterpCells[0].ColumnIndex + 1;
+            //initialize array = to beats, fill with linear values between 0 and 1
+            //these will be transformed by the formulas below
+            double[] interp = new double[_beats];
+            for (int x = 0; x < interp.Length; x++) {
+                interp[x] = (double)(x) / (double)(interp.Length - 1);
+            }
+
+            //depending on interp option chosen, run a different calculation per value in interp[]
+            switch (e.ClickedItem.Text) {
+                case "Linear":
+                    //no changes needed
+                    break;
+                case "Quadratic Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] * interp[x];
+                    }
+                    break;
+                case "Quadratic Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - (1 - interp[x]) * (1 - interp[x]);
+                    }
+                    break;
+                case "Quadratic Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] < 0.5 ? (2 * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 2) / 2));
+                    }
+                    break;
+                case "Cubic Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] * interp[x] * interp[x];
+                    }
+                    break;
+                case "Cubic Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - Math.Pow(1 - interp[x], 3);
+                    }
+                    break;
+                case "Cubic Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] < 0.5 ? (4 * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 3) / 2));
+                    }
+                    break;
+                case "Quartic Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] * interp[x] * interp[x] * interp[x];
+                    }
+                    break;
+                case "Quartic Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - Math.Pow(1 - interp[x], 4);
+                    }
+                    break;
+                case "Quartic Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] < 0.5 ? (8 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 4) / 2));
+                    }
+                    break;
+                case "Quintic Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] * interp[x] * interp[x] * interp[x] * interp[x];
+                    }
+                    break;
+                case "Quintic Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - Math.Pow(1 - interp[x], 5);
+                    }
+                    break;
+                case "Quintic Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] < 0.5 ? (16 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 5) / 2));
+                    }
+                    break;
+                case "Sine Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - Math.Cos((interp[x] * Math.PI) / 2);
+                    }
+                    break;
+                case "Sine Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = Math.Sin((interp[x] * Math.PI) / 2);
+                    }
+                    break;
+                case "Sine Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = -(Math.Cos(Math.PI * interp[x]) - 1) / 2;
+                    }
+                    break;
+            }
+
+            //convert interp[] range of 0 to 1 into range between selected beats
+            for (int x = 0; x < interp.Length; x++) {
+                interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
+            }
+            //assign new values back to the data points
+            IsInterpolating = true;
+            for (int x = 0; x < _beats; x++) {
+                //if interpolating for Color, remove the decimals
+                if (interpobject.trait_type == "kTraitColor")
+                    interp[x] = Math.Truncate(interp[x]);
+                interpobject.data_points[InterpCells[0].ColumnIndex + x - FrozenColumnOffset].value = TCLE.TruncateDecimal((decimal)interp[x], 3);
+            }
+            IsInterpolating = false;
+            //recolor cells after populating
+            TrackUpdateHighlighting(interpobject);
+            ShowRawTrackData(interpobject);
+            TCLE.PlaySound("UIinterpolate");
+            SaveCheckAndWrite(false);
         }
 
         private void btnLeafColors_Click(object sender, EventArgs e)
