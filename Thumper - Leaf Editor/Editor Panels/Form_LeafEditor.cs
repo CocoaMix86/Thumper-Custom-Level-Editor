@@ -1302,74 +1302,60 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //split leaf into 2 leafs
-            int splitindex = trackEditor.CurrentCell.ColumnIndex;
-            if (MessageBox.Show($"Split this leaf at beat {splitindex}?\nTHIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
+            int splitindex = trackEditor.CurrentCell.ColumnIndex - FrozenColumnOffset;
+            if (MessageBox.Show($"Split this leaf before beat {splitindex}?\nTHIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
             //create file renaming dialog and show it
-            FileInfo newfilename;
+            FileInfo SplitFile;
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                newfilename = new FileInfo(sfd.FileName);
-                newfilename.CreateText();
+                SplitFile = new FileInfo(sfd.FileName);
             }
             else
                 return;
 
-            ///SPLIT THAT LEAF
-            //build the leaf JSON so we can manipulate it
-            JObject _leafsplitbefore = BuildSave(LeafProperties);
-            //enumerate over each sequencer object and it's values to figure out which ones to keep
-            foreach (JObject seq_obj in _leafsplitbefore["seq_objs"].Cast<JObject>()) {
-                //data_points contains a list of all data points. By getting Properties() of it,
-                //each point becomes its own index
-                List<JProperty> data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
-                //iterate over each data point. If it's less than the splitindex, add it to a new list
-                JObject newdata = new();
-                foreach (JProperty data_point in data_points) {
-                    if (int.Parse(data_point.Name) < splitindex)
-                        newdata.Add(data_point.Name, data_point.Value);
+            //create a new LeafProperties with a copy of the split leaf's properties, so that both splits are identical
+            LeafProperties LeafSplitAfter = new(new Form_LeafEditor(), SplitFile) {
+                beats = LeafProperties.beats - splitindex,
+                timesignature = LeafProperties.timesignature,
+                showcategory = LeafProperties.showcategory,
+                showgrid = LeafProperties.showgrid,
+                connectedcells = LeafProperties.connectedcells
+            };
+            //copy objects to the new split
+            foreach (Sequencer_Object seq in LeafProperties.seq_objs) {
+                Sequencer_Object clone = seq.Clone();
+                clone.editor_row = null;
+                clone.data_points = new SeqDataPoint[255].ToList();
+                LeafSplitAfter.seq_objs.Add(clone);
+                //only copy datapoints after the split index
+                for (int x = splitindex; x < LeafProperties.beats; x++) {
+                    clone.data_points[x - splitindex] = new SeqDataPoint() {
+                        beat = seq.data_points[x].beat - splitindex,
+                        value = seq.data_points[x].value,
+                        ease = seq.data_points[x].ease,
+                        interpolation = seq.data_points[x].interpolation,
+                        Owner = clone
+                    };
+                    //after copying, set the value to null since this datapoint is "leaving"
+                    seq.data_points[x].value = null;
                 }
-                seq_obj.Remove("data_points");
-                seq_obj.Add("data_points", newdata);
             }
-            //set new beat count
-            _leafsplitbefore.Remove("beat_cnt");
-            _leafsplitbefore.Add("beat_cnt", splitindex);
-            //write data back to file
-            TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLeaf], _leafsplitbefore);
-
-            ///repeat all above for after split file
-            JObject _leafsplitafter = BuildSave(LeafProperties);
-            _leafsplitafter.Remove("obj_name");
-            _leafsplitafter.Add("obj_name", newfilename.Name);
-            foreach (JObject seq_obj in _leafsplitafter["seq_objs"].Cast<JObject>()) {
-                List<JProperty> data_points = ((JObject)seq_obj["data_points"]).Properties().ToList();
-                JObject newdata = new();
-                foreach (JProperty data_point in data_points) {
-                    if (int.Parse(data_point.Name) >= splitindex)
-                        //shift beats back to starting position
-                        newdata.Add((int.Parse(data_point.Name) - splitindex).ToString(), data_point.Value);
-                }
-                seq_obj.Remove("data_points");
-                seq_obj.Add("data_points", newdata);
+            //save the new split
+            JObject tosave = BuildSave(LeafSplitAfter);
+            using (StreamWriter sw = SplitFile.CreateText()) {
+                sw.Write(JsonConvert.SerializeObject(tosave, Formatting.Indented));
             }
-            //set new beat count
-            _leafsplitafter.Remove("beat_cnt");
-            _leafsplitafter.Add("beat_cnt", LeafProperties.beats - splitindex);
-            //write data back to file
-            newfilename.CreateText().Write(JsonConvert.SerializeObject(_leafsplitafter, Formatting.Indented));
-
+            //reduce beat count of the leaf that was just split and save it
+            LeafProperties.beats = splitindex;
+            SaveCheckAndWrite(true);
             TCLE.PlaySound("UIleafsplit");
             //load new leaf that was just split
-            TCLE.OpenFile(newfilename);
-
-            //update beat counts in loaded lvl if need be
-            ///if (_mainform._loadedlvl != null)
-            ///_mainform.btnLvlRefreshBeats.PerformClick();
+            TCLE.OpenFile(SplitFile);
         }
 
         private void btnLeafObjRefresh_Click(object sender, EventArgs e)
@@ -1911,9 +1897,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
                 s.Add("trait_type", seq_obj.trait_type);
                 JArray datapoints = new();
-                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x.value is not null)) {
-                    if (datapoint.value == null)
-                        continue;
+                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x != null && x.value is not null)) {
                     JObject d = new() {
                         { "beat", datapoint.beat },
                         { "value", decimal.Parse(datapoint.value.ToString()) },
