@@ -1245,13 +1245,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     break;
             }
 
+            //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
+            if (_start == max) {
+                for (int x = 0; x < interp.Length; x++)
+                    interp[x] = 1 - interp[x];
+            }
+
             //convert interp[] range of 0 to 1 into range between selected beats
             for (int x = 0; x < interp.Length; x++) {
                 interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
             }
-            //if the first cell is actually the maximum, the above coversion will have setup the interpolation backwards
-            if (_start == max)
-                interp = interp.Reverse().ToArray();
             //assign new values back to the data points
             IsInterpolating = true;
             for (int x = 0; x < _beats; x++) {
