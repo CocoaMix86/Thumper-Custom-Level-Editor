@@ -797,19 +797,40 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text && x.category.ToUpper() == treeObjects.SelectedNode.Parent.Text);
             if (match != null && !TCLE.ObjectFavorites.Contains(match))
                 TCLE.ObjectFavorites.Add(match);
+            treeObjects.SelectedNode.ImageKey = "fav";
+            treeObjects.SelectedNode.SelectedImageKey = "fav";
             BuildTreeFavorites();
         }
 
         private void toolStripFavRemove_Click(object sender, EventArgs e)
         {
-            TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == treeObjects.SelectedNode.Text);
+            string find = treeObjects.SelectedNode.Text;
+            TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
             treeObjects.SelectedNode.Remove();
+            TreeNode node = FindNode(find, treeObjects.Nodes);
+            if (node != null) {
+                node.SelectedImageKey = "none";
+                node.ImageKey = "none";
+            }
+        }
+
+        private static TreeNode FindNode(string search, TreeNodeCollection nodes)
+        {
+            TreeNode foundnode = null;
+            foreach (TreeNode tn in nodes) {
+                if (tn.Text == search)
+                    return tn;
+                foundnode = FindNode(search, tn.Nodes);
+                if (foundnode != null)
+                    break;
+            }
+            return foundnode;
         }
 
         private void toolStripFavClear_Click(object sender, EventArgs e)
         {
             TCLE.ObjectFavorites.Clear();
-            BuildTreeFavorites();
+            BuildObjectTree();
         }
         #endregion
 
@@ -1992,8 +2013,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.category == category)) {
                         TreeNode _param = new() {
                             Text = obj.param_displayname,
-                            ImageKey = "none",
-                            SelectedImageKey = "none",
+                            ImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
+                            SelectedImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
                             ContextMenuStrip = contextMenuFav
                         };
                         _node.Nodes.Add(_param);
