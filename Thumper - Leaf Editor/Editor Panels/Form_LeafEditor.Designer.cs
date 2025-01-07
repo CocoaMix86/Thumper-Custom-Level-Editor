@@ -29,10 +29,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             this.toolTip1 = new ToolTip(this.components);
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
@@ -40,7 +40,7 @@
             this.treeObjects = new TreeViewEx();
             this.imageList1 = new ImageList(this.components);
             this.contextMenuFav = new ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new ToolStripMenuItem();
+            this.toolStripFavAdd = new ToolStripMenuItem();
             this.vScrollBarTrackEditor = new VScrollBar();
             this.panelZoom = new Panel();
             this.labelScrollH = new Label();
@@ -83,6 +83,10 @@
             this.splitContainerTopbar = new SplitContainer();
             this.labelSequencer = new Label();
             this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.contextMenuFavRemove = new ContextMenuStrip(this.components);
+            this.toolStripFavRemove = new ToolStripMenuItem();
+            this.contextMenuFavClear = new ContextMenuStrip(this.components);
+            this.toolStripFavClear = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.contextMenuFav.SuspendLayout();
@@ -108,6 +112,8 @@
             this.splitContainerTopbar.Panel2.SuspendLayout();
             this.splitContainerTopbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.textEditor).BeginInit();
+            this.contextMenuFavRemove.SuspendLayout();
+            this.contextMenuFavClear.SuspendLayout();
             this.SuspendLayout();
             // 
             // trackZoomVert
@@ -154,7 +160,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 127);
+            this.btnRawImport.Size = new Size(54, 129);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -197,26 +203,26 @@
             // contextMenuFav
             // 
             this.contextMenuFav.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuFav.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem1 });
+            this.contextMenuFav.Items.AddRange(new ToolStripItem[] { this.toolStripFavAdd });
             this.contextMenuFav.Name = "workingfolderRightClick";
             this.contextMenuFav.RenderMode = ToolStripRenderMode.System;
             this.contextMenuFav.Size = new Size(162, 26);
             // 
-            // toolStripMenuItem1
+            // toolStripFavAdd
             // 
-            this.toolStripMenuItem1.ForeColor = Color.White;
-            this.toolStripMenuItem1.Image = Properties.Resources.icon_fav;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new Size(161, 22);
-            this.toolStripMenuItem1.Text = "Add To Favorites";
-            this.toolStripMenuItem1.Click += this.toolStripMenuItem1_Click;
+            this.toolStripFavAdd.ForeColor = Color.White;
+            this.toolStripFavAdd.Image = Properties.Resources.icon_fav;
+            this.toolStripFavAdd.Name = "toolStripFavAdd";
+            this.toolStripFavAdd.Size = new Size(161, 22);
+            this.toolStripFavAdd.Text = "Add To Favorites";
+            this.toolStripFavAdd.Click += this.toolStripFavAdd_Click;
             // 
             // vScrollBarTrackEditor
             // 
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 357);
+            this.vScrollBarTrackEditor.Size = new Size(15, 355);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -272,27 +278,27 @@
             this.trackEditor.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.trackEditor.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle9.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle9.ForeColor = Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.trackEditor.Columns.AddRange(new DataGridViewColumn[] { this.LeafEnabled, this.LeafAudio, this.LeafMultilane });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle2.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.Format = "0.###";
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle10.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle10.ForeColor = Color.White;
+            dataGridViewCellStyle10.Format = "0.###";
+            dataGridViewCellStyle10.NullValue = null;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle10;
             this.trackEditor.Dock = DockStyle.Fill;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = Color.Black;
@@ -300,23 +306,23 @@
             this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle11.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.ScrollBars = ScrollBars.Horizontal;
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(638, 357);
+            this.trackEditor.Size = new Size(638, 355);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -392,7 +398,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 357);
+            this.leafToolStrip.Size = new Size(25, 355);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -740,7 +746,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(678, 519);
-            this.splitContainerLeafSide.SplitterDistance = 387;
+            this.splitContainerLeafSide.SplitterDistance = 385;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -801,7 +807,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(170, 14);
+            this.textEditor.AutoScrollMinSize = new Size(195, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -823,11 +829,45 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(624, 127);
+            this.textEditor.Size = new Size(624, 129);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
             this.textEditor.Zoom = 100;
+            // 
+            // contextMenuFavRemove
+            // 
+            this.contextMenuFavRemove.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuFavRemove.Items.AddRange(new ToolStripItem[] { this.toolStripFavRemove });
+            this.contextMenuFavRemove.Name = "workingfolderRightClick";
+            this.contextMenuFavRemove.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuFavRemove.Size = new Size(199, 26);
+            // 
+            // toolStripFavRemove
+            // 
+            this.toolStripFavRemove.ForeColor = Color.White;
+            this.toolStripFavRemove.Image = Properties.Resources.icon_remove2;
+            this.toolStripFavRemove.Name = "toolStripFavRemove";
+            this.toolStripFavRemove.Size = new Size(198, 22);
+            this.toolStripFavRemove.Text = "Remove From Favorites";
+            this.toolStripFavRemove.Click += this.toolStripFavRemove_Click;
+            // 
+            // contextMenuFavClear
+            // 
+            this.contextMenuFavClear.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuFavClear.Items.AddRange(new ToolStripItem[] { this.toolStripFavClear });
+            this.contextMenuFavClear.Name = "workingfolderRightClick";
+            this.contextMenuFavClear.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuFavClear.Size = new Size(181, 48);
+            // 
+            // toolStripFavClear
+            // 
+            this.toolStripFavClear.ForeColor = Color.White;
+            this.toolStripFavClear.Image = Properties.Resources.icon_remove2;
+            this.toolStripFavClear.Name = "toolStripFavClear";
+            this.toolStripFavClear.Size = new Size(180, 22);
+            this.toolStripFavClear.Text = "Clear Favorites";
+            this.toolStripFavClear.Click += this.toolStripFavClear_Click;
             // 
             // Form_LeafEditor
             // 
@@ -875,6 +915,8 @@
             ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).EndInit();
             this.splitContainerTopbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.textEditor).EndInit();
+            this.contextMenuFavRemove.ResumeLayout(false);
+            this.contextMenuFavClear.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
@@ -929,6 +971,10 @@
         private ToolStripMenuItem quinticToolStripMenuItem;
         private ToolStripMenuItem sineToolStripMenuItem;
         private ContextMenuStrip contextMenuFav;
-        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem toolStripFavAdd;
+        private ContextMenuStrip contextMenuFavRemove;
+        private ToolStripMenuItem toolStripFavRemove;
+        private ContextMenuStrip contextMenuFavClear;
+        private ToolStripMenuItem toolStripFavClear;
     }
 }
