@@ -37,7 +37,6 @@
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
             this.btnRawImport = new Button();
-            this.treeObjects = new TreeViewEx();
             this.imageList1 = new ImageList(this.components);
             this.contextMenuFav = new ContextMenuStrip(this.components);
             this.toolStripFavAdd = new ToolStripMenuItem();
@@ -176,35 +175,12 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 145);
+            this.btnRawImport.Size = new Size(54, 149);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
             this.btnRawImport.UseVisualStyleBackColor = false;
             this.btnRawImport.Click += this.btnRawImport_Click;
-            // 
-            // treeObjects
-            // 
-            this.treeObjects.BackColor = Color.FromArgb(31, 31, 31);
-            this.treeObjects.Dock = DockStyle.Fill;
-            this.treeObjects.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.treeObjects.ForeColor = Color.White;
-            this.treeObjects.FullRowSelect = true;
-            this.treeObjects.HideSelection = false;
-            this.treeObjects.ImageIndex = 0;
-            this.treeObjects.ImageList = this.imageList1;
-            this.treeObjects.ItemHeight = 16;
-            this.treeObjects.LineColor = Color.White;
-            this.treeObjects.Location = new Point(0, 36);
-            this.treeObjects.Margin = new Padding(4, 3, 4, 3);
-            this.treeObjects.Name = "treeObjects";
-            this.treeObjects.SelectedImageIndex = 0;
-            this.treeObjects.ShowPlusMinus = false;
-            this.treeObjects.Size = new Size(250, 264);
-            this.treeObjects.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.treeObjects, "Double-click to add object to Sequencer");
-            this.treeObjects.NodeMouseDoubleClick += this.treeObjects_NodeMouseDoubleClick;
-            this.treeObjects.MouseDown += this.treeObjects_MouseDown;
             // 
             // imageList1
             // 
@@ -238,7 +214,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(25, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 339);
+            this.vScrollBarTrackEditor.Size = new Size(15, 335);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -338,7 +314,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(638, 339);
+            this.trackEditor.Size = new Size(638, 335);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -414,7 +390,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(25, 339);
+            this.leafToolStrip.Size = new Size(25, 335);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -563,7 +539,6 @@
             this.btnLeafInterpLinear.Name = "btnLeafInterpLinear";
             this.btnLeafInterpLinear.Size = new Size(41, 27);
             this.btnLeafInterpLinear.TextAlign = ContentAlignment.MiddleRight;
-            this.btnLeafInterpLinear.ButtonClick += this.btnLEafInterpLinear_Click;
             // 
             // contextMenuInterps
             // 
@@ -572,7 +547,7 @@
             this.contextMenuInterps.Name = "workingfolderRightClick";
             this.contextMenuInterps.OwnerItem = this.btnLeafInterpLinear;
             this.contextMenuInterps.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuInterps.Size = new Size(189, 386);
+            this.contextMenuInterps.Size = new Size(189, 408);
             this.contextMenuInterps.ItemClicked += this.contextMenuInterps_ItemClicked;
             // 
             // linearToolStripMenuItem
@@ -783,7 +758,6 @@
             // 
             // splitContainerLeftSide.Panel1
             // 
-            this.splitContainerLeftSide.Panel1.Controls.Add(this.treeObjects);
             this.splitContainerLeftSide.Panel1.Controls.Add(this.txtSearch);
             this.splitContainerLeftSide.Panel1.Controls.Add(this.label1);
             // 
@@ -873,7 +847,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(678, 519);
-            this.splitContainerLeafSide.SplitterDistance = 369;
+            this.splitContainerLeafSide.SplitterDistance = 365;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -956,7 +930,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(624, 145);
+            this.textEditor.Size = new Size(624, 149);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
