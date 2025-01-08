@@ -42,7 +42,7 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.BackColor = Color.FromArgb(64, 0, 0);
+            this.BackColor = Color.Black;
             this.BackgroundImageLayout = ImageLayout.Center;
             this.ClientSize = new Size(506, 309);
             this.FormBorderStyle = FormBorderStyle.None;
