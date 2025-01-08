@@ -418,7 +418,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, $"Beat {columnindex} value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
                 }
-            } catch { }
+            }
+            catch { }
             ShowRawTrackData(SequencerObjects[rowindex]);
         }
 
@@ -790,6 +791,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 treeObjects.SelectedNode = currentNode;
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            BuildObjectTree();
+        }
+
         private void toolStripFavAdd_Click(object sender, EventArgs e)
         {
             if (treeObjects.SelectedNode.ImageKey != "none")
@@ -799,18 +805,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.ObjectFavorites.Add(match);
             treeObjects.SelectedNode.ImageKey = "fav";
             treeObjects.SelectedNode.SelectedImageKey = "fav";
+            treeObjects.SelectedNode.ContextMenuStrip = contextMenuFavRemove;
             BuildTreeFavorites();
         }
 
         private void toolStripFavRemove_Click(object sender, EventArgs e)
         {
             string find = treeObjects.SelectedNode.Text;
-            TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
-            treeObjects.SelectedNode.Remove();
-            TreeNode node = FindNode(find, treeObjects.Nodes);
-            if (node != null) {
-                node.SelectedImageKey = "none";
-                node.ImageKey = "none";
+            if (treeObjects.SelectedNode.ImageKey == "fav") {
+                TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
+                treeObjects.SelectedNode.SelectedImageKey = "none";
+                treeObjects.SelectedNode.ImageKey = "none";
+                treeObjects.SelectedNode.ContextMenuStrip = contextMenuFav;
+                BuildTreeFavorites();
+            }
+            else {
+                TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
+                treeObjects.SelectedNode.Remove();
+                TreeNode node = FindNode(find, treeObjects.Nodes);
+                if (node != null) {
+                    node.SelectedImageKey = "none";
+                    node.ImageKey = "none";
+                    node.ContextMenuStrip = contextMenuFav;
+                }
             }
         }
 
@@ -833,7 +850,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 TrackRawImport(SequencerObjects[CurrentRow], JObject.Parse($"{{{textEditor.Text}}}"));
                 TrackUpdateHighlighting(SequencerObjects[CurrentRow]);
-            } catch (JsonReaderException ex) {
+            }
+            catch (JsonReaderException ex) {
                 MessageBox.Show($"Invalid format or characters in imported data. Please fix.\n\n{ex.Message}", "Thumper Custom Editor Level");
             }
             TCLE.PlaySound("UIkpaste");
@@ -859,7 +877,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TCLE.PlaySound("UIobjectremove");
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, "Delete track", data);
-                } catch { }
+                }
+                catch { }
             }
             //disable elements if there are no tracks
             if (SequencerObjects.Count == 0) {
@@ -935,7 +954,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //sets flag that leaf has unsaved changes
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Move track up", $"{_tracks[_selectedtracks[0].Item3 - 1].friendly_type} {_tracks[_selectedtracks[0].Item3 - 1].friendly_param}");
-            } catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
+            }
+            catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
             ismoving = false;
         }
 
@@ -977,7 +997,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //sets flag that leaf has unsaved changes
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Move track down", $"{_tracks[_selectedtracks[0].Item3 + 1].friendly_type} {_tracks[_selectedtracks[0].Item3 + 1].friendly_param}");
-            } catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
+            }
+            catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
             ismoving = false;
         }
 
@@ -992,7 +1013,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     clipboardtracks.Add(SequencerObjects[dgvr.Index].Clone());
                 }
                 btnTrackPaste.Enabled = true;
-            } catch (Exception ex) { MessageBox.Show("something went wrong with copying. Show this error to the dev.\n\n" + ex); }
+            }
+            catch (Exception ex) { MessageBox.Show("something went wrong with copying. Show this error to the dev.\n\n" + ex); }
             TCLE.PlaySound("UIkcopy");
         }
 
@@ -1026,9 +1048,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         ChangeTrackName(clone, leafProperties.showcategory ? $"[{clone.category}] " : "");
                         //pass _griddata per row to be imported to the DGV
                         TrackRawImport(clone, _newtrack.data_points);
-                    } catch (Exception) { }
+                    }
+                    catch (Exception) { }
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex);
             }
 
@@ -1544,7 +1568,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         Object_Params objmatch = TCLE.LeafObjects.First(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLeaf.Name, "leafname"));
                         _s.friendly_param = objmatch.param_displayname ?? "";
                         _s.category = objmatch.category ?? "";
-                    } catch (Exception) {
+                    }
+                    catch (Exception) {
                         loadfail = true;
                         loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
                     }
@@ -1739,7 +1764,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     seq.editor_row.Cells[data_point.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
                     seq.data_points[data_point.beat].value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
-                } catch (ArgumentOutOfRangeException) { }
+                }
+                catch (ArgumentOutOfRangeException) { }
             }
 
             TrackUpdateHighlighting(seq);
@@ -1760,7 +1786,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     seq.editor_row.Cells[int.Parse(data_point.Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                     seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
-                } catch (ArgumentOutOfRangeException) { }
+                }
+                catch (ArgumentOutOfRangeException) { }
             }
 
             TrackUpdateHighlighting(seq);
@@ -1938,6 +1965,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void BuildObjectTree()
         {
+            bool filtersearch = txtSearch.Text is not "" and not "Search Objects (Ctrl+;)";
+
             treeObjects.Nodes.Clear();
             //Add Favorites right at the top
             TreeNode fav = new() {
@@ -1948,6 +1977,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             treeObjects.Nodes.Add(fav);
             BuildTreeFavorites();
+            if (filtersearch && fav.Nodes.Count == 0)
+                fav.Remove();
 
             //make each category of objects its own node
             foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct().Order()) {
@@ -1956,7 +1987,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     ImageKey = "category",
                     SelectedImageKey = "category"
                 };
-                treeObjects.Nodes.Add(_node);
                 if (category == "PLAY SAMPLE") {
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
@@ -1974,9 +2004,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                                 ImageKey = "none",
                                 SelectedImageKey = "none"
                             };
-                            sampfile.Nodes.Add(_param);
+                            if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
+                                sampfile.Nodes.Add(_param);
                         }
-                        _node.Nodes.Add(sampfile);
+                        if ((filtersearch && sampfile.Nodes.Count != 0) || !filtersearch)
+                            _node.Nodes.Add(sampfile);
                     }
                 }
                 else {
@@ -1987,15 +2019,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             ImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
                             SelectedImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
                             ContextMenuStrip = contextMenuFav
-                        };
-                        _node.Nodes.Add(_param);
+                        }; 
+                        if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
+                            _node.Nodes.Add(_param);
                     }
                 }
+                if ((filtersearch && _node.Nodes.Count != 0) || !filtersearch)
+                    treeObjects.Nodes.Add(_node);
             }
+
+            if (filtersearch)
+                treeObjects.ExpandAll();
         }
 
         private void BuildTreeFavorites()
         {
+            bool filtersearch = txtSearch.Text is not "" and not "Search Project Explorer (Ctrl+;)";
+
             treeObjects.Nodes[0].Nodes.Clear();
             foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
                 TreeNode _param = new() {
@@ -2004,7 +2044,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SelectedImageKey = "none",
                     ContextMenuStrip = contextMenuFavRemove
                 };
-                treeObjects.Nodes[0].Nodes.Add(_param);
+                if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
+                    treeObjects.Nodes[0].Nodes.Add(_param);
             }
         }
 
