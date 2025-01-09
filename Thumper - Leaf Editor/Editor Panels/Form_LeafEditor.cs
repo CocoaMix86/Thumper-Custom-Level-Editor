@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Drawing.Drawing2D;
 using System.Drawing;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -583,7 +584,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //SaveCheckAndWrite(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
             }
             else if (controldown) {
-
+                if (e.KeyCode == Keys.OemSemicolon)
+                    txtSearch.Focus();
             }
 
             else if (altdown) {
@@ -794,6 +796,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             BuildObjectTree();
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "Search Objects (Ctrl+;)")
+                txtSearch.Text = "";
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "")
+                txtSearch.Text = "Search Objects (Ctrl+;)";
         }
 
         private void toolStripFavAdd_Click(object sender, EventArgs e)
@@ -1938,7 +1952,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             ImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
                             SelectedImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
                             ContextMenuStrip = contextMenuFav
-                        }; 
+                        };
                         if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
                             _node.Nodes.Add(_param);
                     }
@@ -1953,7 +1967,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void BuildTreeFavorites()
         {
-            bool filtersearch = txtSearch.Text is not "" and not "Search Project Explorer (Ctrl+;)";
+            bool filtersearch = txtSearch.Text is not "" and not "Search Objects (Ctrl+;)";
 
             treeObjects.Nodes[0].Nodes.Clear();
             foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
