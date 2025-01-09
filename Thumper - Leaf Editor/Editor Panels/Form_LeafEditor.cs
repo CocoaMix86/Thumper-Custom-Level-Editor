@@ -905,27 +905,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnTrackAdd_Click(object sender, EventArgs e)
         {
-            btnTrackDelete.Enabled = true;
-            btnTrackUp.Enabled = true;
-            btnTrackDown.Enabled = true;
-            btnTrackClear.Enabled = true;
+            if (treeObjects.SelectedNode.Nodes.Count > 0)
+                return;
+            Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text);
+            if (objmatch == null)
+                return;
 
-            SequencerObjects.Add(new Sequencer_Object(this) {
-                highlight_color = Color.Purple,
-                highlight_value = 1
-            });
-            trackEditor.Rows.Add(new DataGridViewRow() {
-                Height = trackZoomVert.Value,
-                ReadOnly = true,
-                HeaderCell = new DataGridViewRowHeaderCell() { Value = "(apply a track object)" },
-                DefaultCellStyle = new DataGridViewCellStyle() { SelectionBackColor = Color.FromArgb(40, 40, 40), SelectionForeColor = Color.Black }
-            });
-            trackEditor.CurrentCell = trackEditor.Rows[SequencerObjects.Count - 1].Cells[0];
-            //sets flag that leaf has unsaved changes
-            if (!randomizing) {
-                TCLE.PlaySound("UIobjectadd");
-                SaveCheckAndWrite(false);
-                //SaveCheckAndWrite(false, "Add new track", "");
+            Sequencer_Object _currentseq = SequencerObjects[CurrentRow];
+            Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
+            for (int x = 0; x < Lanes.Length; x++) {
+                Lanes[x].obj_name = objmatch.obj_name == "PLAY SAMPLE" ? treeObjects.SelectedNode.Text : objmatch.obj_name;
+                Lanes[x].category = objmatch.category;
+                Lanes[x].param_path = objmatch.param_path.Split('.')[0];
+                Lanes[x].friendly_param = objmatch.param_displayname;
+                Lanes[x].trait_type = objmatch.trait_type;
+                Lanes[x].footer = objmatch.footer;
+                //if the new object is not multilane, change each lane to "none"
+                if (!objmatch.param_path.EndsWith(".ent")) {
+                    Lanes[x].param_path_lane = "none";
+                    Lanes[x].friendly_lane = "none";
+                }
+                ChangeTrackName(Lanes[x], LeafProperties.showcategory ? $"[{Lanes[x].category}] " : "");
             }
         }
 
