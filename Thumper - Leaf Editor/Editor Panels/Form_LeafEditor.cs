@@ -896,6 +896,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //disable elements if there are no tracks
             if (SequencerObjects.Count == 0) {
+                btnTrackAdd.Enabled = false;
                 btnTrackDelete.Enabled = false;
                 btnTrackUp.Enabled = false;
                 btnTrackDown.Enabled = false;
@@ -927,6 +928,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 ChangeTrackName(Lanes[x], LeafProperties.showcategory ? $"[{Lanes[x].category}] " : "");
             }
+
+            SaveCheckAndWrite(false);
         }
 
         private void btnTrackUp_Click(object sender, EventArgs e)
