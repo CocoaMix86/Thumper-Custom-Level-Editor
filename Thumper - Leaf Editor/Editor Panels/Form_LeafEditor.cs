@@ -782,6 +782,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             seq.editor_row = trackEditor.Rows[^1];
             ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
             TrackUpdateHighlighting(seq);
+            TCLE.PlaySound("UIobjectadd");
         }
 
         private void treeObjects_MouseDown(object sender, MouseEventArgs e)
@@ -821,6 +822,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             treeObjects.SelectedNode.SelectedImageKey = "fav";
             treeObjects.SelectedNode.ContextMenuStrip = contextMenuFavRemove;
             BuildTreeFavorites();
+            TCLE.PlaySound("UIselect");
         }
 
         private void toolStripFavRemove_Click(object sender, EventArgs e)
@@ -843,6 +845,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     node.ContextMenuStrip = contextMenuFav;
                 }
             }
+            TCLE.PlaySound("UIselect");
         }
 
         private void toolStripFavClear_Click(object sender, EventArgs e)
@@ -873,27 +876,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnTrackDelete_Click(object sender, EventArgs e)
         {
-            bool _empty = true;
-            string data = $"{SequencerObjects[CurrentRow].category} {SequencerObjects[CurrentRow].friendly_param}";
-            List<DataGridViewRow> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-            //iterate over current row to see if any cells have data
-            List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
-            if (filledcells.Count > 0)
-                _empty = false;
-            //if row is not empty, show confirmation box. Otherwise just delete the row
-            if ((!_empty && MessageBox.Show("Some cells in the selected tracks have data. Are you sure you want to delete?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.Yes) || _empty) {
-                try {
-                    foreach (DataGridViewRow dgvr in selectedrows) {
-                        SequencerObjects.RemoveAt(dgvr.Index);
-                        trackEditor.Rows.Remove(dgvr);
-                    }
-                    //sets flag that leaf has unsaved changes
-                    TCLE.PlaySound("UIobjectremove");
-                    SaveCheckAndWrite(false);
-                    //SaveCheckAndWrite(false, "Delete track", data);
-                }
-                catch { }
+            if (CurrentRow < 0)
+                return;
+            Sequencer_Object _currentseq = SequencerObjects[CurrentRow];
+            Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
+            for (int x = 0; x < Lanes.Length; x++) {
+                trackEditor.Rows.Remove(Lanes[x].editor_row);
+                SequencerObjects.Remove(Lanes[x]);
             }
+            SaveCheckAndWrite(false);
+            TCLE.PlaySound("UIobjectremove");
+
             //disable elements if there are no tracks
             if (SequencerObjects.Count == 0) {
                 btnTrackAdd.Enabled = false;
@@ -930,6 +923,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             SaveCheckAndWrite(false);
+            TCLE.PlaySound("UIobjectadd");
         }
 
         private void btnTrackUp_Click(object sender, EventArgs e)
