@@ -807,7 +807,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void txtSearch_Leave(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "")
+            if (string.IsNullOrEmpty(txtSearch.Text))
                 txtSearch.Text = "Search Objects (Ctrl+;)";
         }
 
@@ -851,6 +851,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolStripFavClear_Click(object sender, EventArgs e)
         {
             TCLE.ObjectFavorites.Clear();
+            TCLE.PlaySound("UIdelete");
             BuildObjectTree();
         }
         #endregion
@@ -859,44 +860,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///         ///
         /// BUTTONS ///
         ///         ///
-
-        private void btnRawImport_Click(object sender, EventArgs e)
-        {
-            if (loadedleaf == null)
-                return;
-            try {
-                TrackRawImport(SequencerObjects[CurrentRow], JObject.Parse($"{{{textEditor.Text}}}"));
-                TrackUpdateHighlighting(SequencerObjects[CurrentRow]);
-            }
-            catch (JsonReaderException ex) {
-                MessageBox.Show($"Invalid format or characters in imported data. Please fix.\n\n{ex.Message}", "Thumper Custom Editor Level");
-            }
-            TCLE.PlaySound("UIkpaste");
-        }
-
-        private void btnTrackDelete_Click(object sender, EventArgs e)
-        {
-            if (CurrentRow < 0)
-                return;
-            Sequencer_Object _currentseq = SequencerObjects[CurrentRow];
-            Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
-            for (int x = 0; x < Lanes.Length; x++) {
-                trackEditor.Rows.Remove(Lanes[x].editor_row);
-                SequencerObjects.Remove(Lanes[x]);
-            }
-            SaveCheckAndWrite(false);
-            TCLE.PlaySound("UIobjectremove");
-
-            //disable elements if there are no tracks
-            if (SequencerObjects.Count == 0) {
-                btnTrackAdd.Enabled = false;
-                btnTrackDelete.Enabled = false;
-                btnTrackUp.Enabled = false;
-                btnTrackDown.Enabled = false;
-                btnTrackClear.Enabled = false;
-            }
-        }
-
         private void btnTrackAdd_Click(object sender, EventArgs e)
         {
             if (treeObjects.SelectedNode.Nodes.Count > 0)
@@ -926,8 +889,67 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIobjectadd");
         }
 
+        private void btnTrackDelete_Click(object sender, EventArgs e)
+        {
+            if (CurrentRow < 0)
+                return;
+            //If multiple rows are selected, get all of them in a list. Then loop over list, deleting each one
+            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => SequencerObjects[cell.RowIndex]).Distinct().ToList();
+            for (int objindex = 0; objindex < selectedrows.Count; objindex++) {
+                //if object is multilane, delete its other lanes too
+                Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == selectedrows[objindex].category && x.friendly_param == selectedrows[objindex].friendly_param).ToArray();
+                for (int x = 0; x < Lanes.Length; x++) {
+                    trackEditor.Rows.Remove(Lanes[x].editor_row);
+                    SequencerObjects.Remove(Lanes[x]);
+                    //this is especially useful regarding multilanes. If the multilanes were selected in selectedrows, they'll be deleted before the next loop.
+                    //by removing them from selectedrows, then the for loop objindex wont index to them
+                    selectedrows.Remove(Lanes[x]);
+                }
+            }
+            SaveCheckAndWrite(false);
+            TCLE.PlaySound("UIobjectremove");
+
+            //disable elements if there are no tracks
+            if (SequencerObjects.Count == 0) {
+                btnTrackAdd.Enabled = false;
+                btnTrackDelete.Enabled = false;
+                btnTrackUp.Enabled = false;
+                btnTrackDown.Enabled = false;
+                btnTrackClear.Enabled = false;
+            }
+        }
+
         private void btnTrackUp_Click(object sender, EventArgs e)
         {
+            //Get each sequencer object that is the same row index as the selected cells
+            //multiple cells may be selected in the same row, so we Distinct() it
+            //Then SelectManay to find the matching lanes for multilane objects (this will get 5 or 1 objects depending if multilane or not)
+            //now we have a well ordered list of objects to move
+            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => SequencerObjects[cell.RowIndex]).Distinct().SelectMany(seq => SequencerObjects.Where(x => x.category == seq.category && x.friendly_param == seq.friendly_param)).ToList();
+            selectedrows.Sort((row, row2) => row.editor_row.Index.CompareTo(row2.editor_row.Index));
+            List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
+            //if already at the top, do not move up
+            if (selectedrows[0].editor_row.Index == 0)
+                return;
+
+            for (int x = 0; x < selectedrows.Count; x++) {
+                int currentindex = selectedrows[x].editor_row.Index;
+                //get the object above, and any lanes with it. We will need to move above all of them.
+                Sequencer_Object ObjAbove = SequencerObjects[SequencerObjects.IndexOf(selectedrows[x]) - 1];
+                Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == ObjAbove.category && x.friendly_param == ObjAbove.friendly_param).ToArray();
+                //remove the row and object
+                trackEditor.Rows.Remove(selectedrows[x].editor_row);
+                SequencerObjects.Remove(selectedrows[x]);
+                //reinsert object and row at appropriate index
+                SequencerObjects.Insert(currentindex - Lanes.Length, selectedrows[x]);
+                trackEditor.Rows.Insert(currentindex - Lanes.Length, selectedrows[x].editor_row);
+            }
+
+            SaveCheckAndWrite(false);
+
+
+
+            /*
             ismoving = true;
             List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
             DataGridView dgv = trackEditor;
@@ -968,6 +990,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
             ismoving = false;
+            */
         }
 
         private void btnTrackDown_Click(object sender, EventArgs e)
@@ -1092,6 +1115,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIdataerase");
             SaveCheckAndWrite(false);
             //SaveCheckAndWrite(false, $"Cleared {selectedrows.Count} track(s)", $"");
+        }
+
+        private void btnRawImport_Click(object sender, EventArgs e)
+        {
+            if (loadedleaf == null)
+                return;
+            try {
+                TrackRawImport(SequencerObjects[CurrentRow], JObject.Parse($"{{{textEditor.Text}}}"));
+                TrackUpdateHighlighting(SequencerObjects[CurrentRow]);
+                TCLE.PlaySound("UIkpaste");
+            } catch (JsonReaderException ex) {
+                MessageBox.Show($"Invalid format or characters in imported data. Please fix.\n\n{ex.Message}", "Thumper Custom Editor Level");
+            }
         }
 
         private void contextMenuInterps_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
