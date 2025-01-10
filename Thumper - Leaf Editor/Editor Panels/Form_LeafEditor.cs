@@ -945,7 +945,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             for (int x = 0; x < RowsToMove.Count; x++) {
                 int currentindex = RowsToMove[x].editor_row.Index;
                 //get the object above, and any lanes with it. We will need to move above all of them.
-                Sequencer_Object ObjAbove = SequencerObjects[SequencerObjects.IndexOf(RowsToMove[x]) - 1];
+                Sequencer_Object ObjAbove = SequencerObjects[RowsToMove[x].editor_row.Index - 1];
                 int Lanes = ObjAbove.friendly_lane != "none" ? 5 : 1;
                 //remove the row and object
                 trackEditor.Rows.Remove(RowsToMove[x].editor_row);
@@ -1051,7 +1051,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             for (int x = 0; x < RowsToMove.Count; x++) {
                 int currentindex = RowsToMove[x].editor_row.Index;
                 //get the object above, and any lanes with it. We will need to move above all of them.
-                Sequencer_Object ObjBelow = SequencerObjects[SequencerObjects.IndexOf(RowsToMove[x]) + 1];
+                Sequencer_Object ObjBelow = SequencerObjects[RowsToMove[x].editor_row.Index + 1];
                 int Lanes = ObjBelow.friendly_lane != "none" ? 5 : 1;
                 //remove the row and object
                 trackEditor.Rows.Remove(RowsToMove[x].editor_row);
