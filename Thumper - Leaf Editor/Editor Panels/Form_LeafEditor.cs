@@ -925,115 +925,164 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //multiple cells may be selected in the same row, so we Distinct() it
             //Then SelectManay to find the matching lanes for multilane objects (this will get 5 or 1 objects depending if multilane or not)
             //now we have a well ordered list of objects to move
-            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => SequencerObjects[cell.RowIndex]).Distinct().SelectMany(seq => SequencerObjects.Where(x => x.category == seq.category && x.friendly_param == seq.friendly_param)).ToList();
-            selectedrows.Sort((row, row2) => row.editor_row.Index.CompareTo(row2.editor_row.Index));
-            List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
+            IEnumerable<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
+                .Select(cell => SequencerObjects[cell.RowIndex])
+                .Distinct().OrderBy(cell => cell.editor_row.Index);
+            ///.SelectMany(seq => SequencerObjects.Where(x => x.category == seq.category && x.friendly_param == seq.friendly_param))
+            ///.ToList();
+            List<Sequencer_Object> RowsToMove = new();
+            foreach (Sequencer_Object row in selectedrows) {
+                if (!RowsToMove.Contains(row))
+                    RowsToMove.AddRange(ReturnLanesFromName(row, row.friendly_lane));
+            }
+            RowsToMove = RowsToMove.Distinct().ToList();
             //if already at the top, do not move up
-            if (selectedrows[0].editor_row.Index == 0)
+            if (RowsToMove.FirstOrDefault().editor_row.Index == 0)
                 return;
 
-            for (int x = 0; x < selectedrows.Count; x++) {
-                int currentindex = selectedrows[x].editor_row.Index;
+            List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
+
+            for (int x = 0; x < RowsToMove.Count; x++) {
+                int currentindex = RowsToMove[x].editor_row.Index;
                 //get the object above, and any lanes with it. We will need to move above all of them.
-                Sequencer_Object ObjAbove = SequencerObjects[SequencerObjects.IndexOf(selectedrows[x]) - 1];
-                Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == ObjAbove.category && x.friendly_param == ObjAbove.friendly_param).ToArray();
+                Sequencer_Object ObjAbove = SequencerObjects[SequencerObjects.IndexOf(RowsToMove[x]) - 1];
+                int Lanes = ObjAbove.friendly_lane != "none" ? 5 : 1;
                 //remove the row and object
-                trackEditor.Rows.Remove(selectedrows[x].editor_row);
-                SequencerObjects.Remove(selectedrows[x]);
+                trackEditor.Rows.Remove(RowsToMove[x].editor_row);
+                SequencerObjects.Remove(RowsToMove[x]);
+                if (RowsToMove[x].friendly_lane != "none") {
+                    trackEditor.Rows.Remove(RowsToMove[x + 1].editor_row);
+                    SequencerObjects.Remove(RowsToMove[x + 1]);
+                    trackEditor.Rows.Remove(RowsToMove[x + 2].editor_row);
+                    SequencerObjects.Remove(RowsToMove[x + 2]);
+                    trackEditor.Rows.Remove(RowsToMove[x + 3].editor_row);
+                    SequencerObjects.Remove(RowsToMove[x + 3]);
+                    trackEditor.Rows.Remove(RowsToMove[x + 4].editor_row);
+                    SequencerObjects.Remove(RowsToMove[x + 4]);
+                }
                 //reinsert object and row at appropriate index
-                SequencerObjects.Insert(currentindex - Lanes.Length, selectedrows[x]);
-                trackEditor.Rows.Insert(currentindex - Lanes.Length, selectedrows[x].editor_row);
+                SequencerObjects.Insert(currentindex - Lanes, RowsToMove[x]);
+                trackEditor.Rows.Insert(currentindex - Lanes, RowsToMove[x].editor_row);
+                if (RowsToMove[x].friendly_lane != "none") {
+                    SequencerObjects.Insert(currentindex - Lanes + 1, RowsToMove[x + 1]);
+                    trackEditor.Rows.Insert(currentindex - Lanes + 1, RowsToMove[x + 1].editor_row);
+                    SequencerObjects.Insert(currentindex - Lanes + 2, RowsToMove[x + 2]);
+                    trackEditor.Rows.Insert(currentindex - Lanes + 2, RowsToMove[x + 2].editor_row);
+                    SequencerObjects.Insert(currentindex - Lanes + 3, RowsToMove[x + 3]);
+                    trackEditor.Rows.Insert(currentindex - Lanes + 3, RowsToMove[x + 3].editor_row);
+                    SequencerObjects.Insert(currentindex - Lanes + 4, RowsToMove[x + 4]);
+                    trackEditor.Rows.Insert(currentindex - Lanes + 4, RowsToMove[x + 4].editor_row);
+                    x += 4;
+                }
             }
 
             SaveCheckAndWrite(false);
+        }
 
-
-
-            /*
-            ismoving = true;
-            List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
-            DataGridView dgv = trackEditor;
-            try {
-                //finds each distinct row across all selected cells
-                List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-                selectedrows.Sort((row, row2) => row.Index.CompareTo(row2.Index));
-                List<DataGridViewCell> selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().ToList();
-
-                foreach (DataGridViewRow dgvr in selectedrows) {
-                    //check if one of the rows is the top row. If it is, stop
-                    if (dgvr.Index == 0)
-                        return;
-                    //this makes sure the row has at least 1 value in it. Otherwise the rowindex gets lost for somereason
-                    if (dgvr.Cells[0].Value == null)
-                        dgvr.Cells[0].Value = 1.907m;
-                    _selectedtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow, int>(SequencerObjects[dgvr.Index], dgvr, dgvr.Index));
-                }
-                //iterate over rows and shift them up 1 index
-                foreach (Tuple<Sequencer_Object, DataGridViewRow, int> _newtrack in _selectedtracks) {
-                    SequencerObjects.Remove(_newtrack.Item1);
-                    dgv.Rows.Remove(_newtrack.Item2);
-                    SequencerObjects.Insert(_newtrack.Item3 - 1, _newtrack.Item1);
-                    dgv.Rows.Insert(_newtrack.Item3 - 1, _newtrack.Item2);
-
-                    if ((decimal)_newtrack.Item2.Cells[0].Value == 1.907m)
-                        _newtrack.Item2.Cells[0].Value = null;
-                }
-                //clear selected cells and shift them up
-                dgv.CurrentCell = selectedrows[0].Cells[0];
-                dgv.ClearSelection();
-                foreach (DataGridViewCell cell in selectedcells) {
-                    dgv[cell.ColumnIndex, cell.RowIndex].Selected = true;
-                }
-                //sets flag that leaf has unsaved changes
-                SaveCheckAndWrite(false);
-                //SaveCheckAndWrite(false, "Move track up", $"{_tracks[_selectedtracks[0].Item3 - 1].friendly_type} {_tracks[_selectedtracks[0].Item3 - 1].friendly_param}");
+        private Sequencer_Object[] ReturnLanesFromName(Sequencer_Object row, string lane)
+        {
+            Sequencer_Object[] Lanes = new Sequencer_Object[5];
+            switch (lane) {
+                case "lane left 2":
+                    Lanes[0] = row;
+                    Lanes[1] = SequencerObjects[row.editor_row.Index + 1];
+                    Lanes[2] = SequencerObjects[row.editor_row.Index + 2];
+                    Lanes[3] = SequencerObjects[row.editor_row.Index + 3];
+                    Lanes[4] = SequencerObjects[row.editor_row.Index + 4];
+                    break;
+                case "lane left 1":
+                    Lanes[0] = SequencerObjects[row.editor_row.Index - 1];
+                    Lanes[1] = row;
+                    Lanes[2] = SequencerObjects[row.editor_row.Index + 1];
+                    Lanes[3] = SequencerObjects[row.editor_row.Index + 2];
+                    Lanes[4] = SequencerObjects[row.editor_row.Index + 3];
+                    break;
+                case "lane center":
+                    Lanes[0] = SequencerObjects[row.editor_row.Index - 2];
+                    Lanes[1] = SequencerObjects[row.editor_row.Index - 1];
+                    Lanes[2] = row;
+                    Lanes[3] = SequencerObjects[row.editor_row.Index + 1];
+                    Lanes[4] = SequencerObjects[row.editor_row.Index + 2];
+                    break;
+                case "lane right 1":
+                    Lanes[0] = SequencerObjects[row.editor_row.Index - 3];
+                    Lanes[1] = SequencerObjects[row.editor_row.Index - 2];
+                    Lanes[2] = SequencerObjects[row.editor_row.Index - 1];
+                    Lanes[3] = row;
+                    Lanes[4] = SequencerObjects[row.editor_row.Index + 1];
+                    break;
+                case "lane right 2":
+                    Lanes[0] = SequencerObjects[row.editor_row.Index - 4];
+                    Lanes[1] = SequencerObjects[row.editor_row.Index - 3];
+                    Lanes[2] = SequencerObjects[row.editor_row.Index - 2];
+                    Lanes[3] = SequencerObjects[row.editor_row.Index - 1];
+                    Lanes[4] = row;
+                    break;
+                case "none":
+                    Lanes = new Sequencer_Object[1] { row };
+                    break;
             }
-            catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
-            ismoving = false;
-            */
+            return Lanes;
         }
 
         private void btnTrackDown_Click(object sender, EventArgs e)
         {
-            ismoving = true;
-            List<Tuple<Sequencer_Object, DataGridViewRow, int>> _selectedtracks = new();
-            DataGridView dgv = trackEditor;
-            try {
-                //finds each distinct row across all selected cells
-                List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-                selectedrows.Sort((row, row2) => row2.Index.CompareTo(row.Index));
-                var selectedcells = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => new { cell.ColumnIndex, cell.RowIndex }).ToList();
-                foreach (DataGridViewRow dgvr in selectedrows) {
-                    //check if one of the rows is the top row. If it is, stop
-                    if (dgvr.Index >= dgv.RowCount - 1)
-                        return;
-                    //this makes sure the row has at least 1 value in it. Otherwise the rowindex gets lost for somereason
-                    if (dgvr.Cells[0].Value == null)
-                        dgvr.Cells[0].Value = 1.907m;
-                    _selectedtracks.Add(new Tuple<Sequencer_Object, DataGridViewRow, int>(SequencerObjects[dgvr.Index], dgvr, dgvr.Index));
-                }
-                //iterate over rows and shift them up 1 index
-                foreach (Tuple<Sequencer_Object, DataGridViewRow, int> _newtrack in _selectedtracks) {
-                    SequencerObjects.Remove(_newtrack.Item1);
-                    dgv.Rows.Remove(_newtrack.Item2);
-                    SequencerObjects.Insert(_newtrack.Item3 + 1, _newtrack.Item1);
-                    dgv.Rows.Insert(_newtrack.Item3 + 1, _newtrack.Item2);
-
-                    if ((decimal)_newtrack.Item2.Cells[0].Value == 1.907m)
-                        _newtrack.Item2.Cells[0].Value = null;
-                }
-                //clear selected cells and shift them up
-                dgv.CurrentCell = selectedrows[0].Cells[0];
-                dgv.ClearSelection();
-                foreach (var cell in selectedcells) {
-                    dgv[cell.ColumnIndex, cell.RowIndex + 1].Selected = true;
-                }
-                //sets flag that leaf has unsaved changes
-                SaveCheckAndWrite(false);
-                //SaveCheckAndWrite(false, "Move track down", $"{_tracks[_selectedtracks[0].Item3 + 1].friendly_type} {_tracks[_selectedtracks[0].Item3 + 1].friendly_param}");
+            //Get each sequencer object that is the same row index as the selected cells
+            //multiple cells may be selected in the same row, so we Distinct() it
+            //Then SelectManay to find the matching lanes for multilane objects (this will get 5 or 1 objects depending if multilane or not)
+            //now we have a well ordered list of objects to move
+            IEnumerable<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
+                .Select(cell => SequencerObjects[cell.RowIndex])
+                .Distinct().OrderBy(cell => cell.editor_row.Index);
+            ///.SelectMany(seq => SequencerObjects.Where(x => x.category == seq.category && x.friendly_param == seq.friendly_param))
+            ///.ToList();
+            List<Sequencer_Object> RowsToMove = new();
+            foreach (Sequencer_Object row in selectedrows) {
+                if (!RowsToMove.Contains(row))
+                    RowsToMove.AddRange(ReturnLanesFromName(row, row.friendly_lane));
             }
-            catch (Exception ex) { MessageBox.Show("Something unexpected happened. Show this error to the dev.\n" + ex, "Track move error"); }
-            ismoving = false;
+            RowsToMove = RowsToMove.Distinct().ToList();
+            //if already at the top, do not move up
+            if (RowsToMove.LastOrDefault().editor_row.Index == trackEditor.Rows.Count - 1)
+                return;
+
+            List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
+
+            for (int x = 0; x < RowsToMove.Count; x++) {
+                int currentindex = RowsToMove[x].editor_row.Index;
+                //get the object above, and any lanes with it. We will need to move above all of them.
+                Sequencer_Object ObjBelow = SequencerObjects[SequencerObjects.IndexOf(RowsToMove[x]) + 1];
+                int Lanes = ObjBelow.friendly_lane != "none" ? 5 : 1;
+                //remove the row and object
+                trackEditor.Rows.Remove(RowsToMove[x].editor_row);
+                SequencerObjects.Remove(RowsToMove[x]);
+                if (RowsToMove[x].friendly_lane != "none") {
+                    trackEditor.Rows.Remove(RowsToMove[x + 1].editor_row);
+                    SequencerObjects.Remove(RowsToMove[x + 1]);
+                    trackEditor.Rows.Remove(RowsToMove[x + 2].editor_row);
+                    SequencerObjects.Remove(RowsToMove[x + 2]);
+                    trackEditor.Rows.Remove(RowsToMove[x + 3].editor_row);
+                    SequencerObjects.Remove(RowsToMove[x + 3]);
+                    trackEditor.Rows.Remove(RowsToMove[x + 4].editor_row);
+                    SequencerObjects.Remove(RowsToMove[x + 4]);
+                }
+                //reinsert object and row at appropriate index
+                SequencerObjects.Insert(currentindex + Lanes, RowsToMove[x]);
+                trackEditor.Rows.Insert(currentindex + Lanes, RowsToMove[x].editor_row);
+                if (RowsToMove[x].friendly_lane != "none") {
+                    SequencerObjects.Insert(currentindex + Lanes + 1, RowsToMove[x + 1]);
+                    trackEditor.Rows.Insert(currentindex + Lanes + 1, RowsToMove[x + 1].editor_row);
+                    SequencerObjects.Insert(currentindex + Lanes + 2, RowsToMove[x + 2]);
+                    trackEditor.Rows.Insert(currentindex + Lanes + 2, RowsToMove[x + 2].editor_row);
+                    SequencerObjects.Insert(currentindex + Lanes + 3, RowsToMove[x + 3]);
+                    trackEditor.Rows.Insert(currentindex + Lanes + 3, RowsToMove[x + 3].editor_row);
+                    SequencerObjects.Insert(currentindex + Lanes + 4, RowsToMove[x + 4]);
+                    trackEditor.Rows.Insert(currentindex + Lanes + 4, RowsToMove[x + 4].editor_row);
+                    x += 4;
+                }
+            }
+
+            SaveCheckAndWrite(false);
         }
 
         private void btnTrackCopy_Click(object sender, EventArgs e)
