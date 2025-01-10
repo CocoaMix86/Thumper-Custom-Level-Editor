@@ -1033,7 +1033,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //now we have a well ordered list of objects to move
             IEnumerable<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => SequencerObjects[cell.RowIndex])
-                .Distinct().OrderBy(cell => cell.editor_row.Index);
+                .Distinct().OrderByDescending(cell => cell.editor_row.Index);
             ///.SelectMany(seq => SequencerObjects.Where(x => x.category == seq.category && x.friendly_param == seq.friendly_param))
             ///.ToList();
             List<Sequencer_Object> RowsToMove = new();
