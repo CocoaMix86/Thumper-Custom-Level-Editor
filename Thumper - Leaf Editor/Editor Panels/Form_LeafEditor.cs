@@ -940,7 +940,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (RowsToMove.FirstOrDefault().editor_row.Index == 0)
                 return;
 
-            List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
+            IEnumerable<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>();
 
             for (int x = 0; x < RowsToMove.Count; x++) {
                 int currentindex = RowsToMove[x].editor_row.Index;
@@ -974,6 +974,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackEditor.Rows.Insert(currentindex - Lanes + 4, RowsToMove[x + 4].editor_row);
                     x += 4;
                 }
+            }
+
+            trackEditor.ClearSelection();
+            foreach (DataGridViewCell dgvc in selectedcells) {
+                //int rowindextoselect = dgvc.RowIndex - 1;
+                //while (trackEditor.Rows[rowindextoselect].Visible == false)
+                    //rowindextoselect--;
+                trackEditor[dgvc.ColumnIndex, dgvc.RowIndex].Selected = true;
             }
 
             SaveCheckAndWrite(false);
@@ -1080,6 +1088,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackEditor.Rows.Insert(currentindex + Lanes + 4, RowsToMove[x + 4].editor_row);
                     x += 4;
                 }
+            }
+
+            trackEditor.ClearSelection();
+            foreach (DataGridViewCell dgvc in selectedcells) {
+                //int rowindextoselect = dgvc.RowIndex + 1;
+                //while (trackEditor.Rows[rowindextoselect].Visible == false)
+                    //rowindextoselect++;
+                trackEditor[dgvc.ColumnIndex, dgvc.RowIndex].Selected = true;
             }
 
             SaveCheckAndWrite(false);
