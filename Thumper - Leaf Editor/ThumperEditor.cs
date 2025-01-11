@@ -34,6 +34,7 @@ namespace Thumper_Custom_Level_Editor
             set => ProjectProperties = value;
         }
         public static ProjectProperties ProjectProperties;
+        public static IEnumerable<Sequencer_Object> ClipboardSequencer;
         #endregion
 
         #region Form Construction

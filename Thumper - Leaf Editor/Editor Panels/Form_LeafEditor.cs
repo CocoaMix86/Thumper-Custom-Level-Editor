@@ -77,6 +77,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool randomizing;
         private bool ismoving;
         private bool isfinding;
+        private bool ispasting;
         private bool LogUndo;
         private bool GlobalMute;
         private bool GlobalDisable;
@@ -85,7 +86,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
         private Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
         private List<string> lanenames = new() { "left", "center", "right" };
-        private List<Sequencer_Object> clipboardtracks = new();
         private List<SaveState> _undolistleaf = new();
         public DataObject ClipBoardDataPoints = new();
         #endregion
@@ -386,7 +386,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void CellValueChanged(int rowindex, int columnindex, bool setnull = false)
         {
-            if (IsInterpolating)
+            if (IsInterpolating || ispasting)
                 return;
             List<DataGridViewRow> edited = new();
             try {
@@ -978,9 +978,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             trackEditor.ClearSelection();
             foreach (DataGridViewCell dgvc in selectedcells) {
-                //int rowindextoselect = dgvc.RowIndex - 1;
-                //while (trackEditor.Rows[rowindextoselect].Visible == false)
-                    //rowindextoselect--;
                 trackEditor[dgvc.ColumnIndex, dgvc.RowIndex].Selected = true;
             }
 
@@ -1092,9 +1089,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             trackEditor.ClearSelection();
             foreach (DataGridViewCell dgvc in selectedcells) {
-                //int rowindextoselect = dgvc.RowIndex + 1;
-                //while (trackEditor.Rows[rowindextoselect].Visible == false)
-                    //rowindextoselect++;
                 trackEditor[dgvc.ColumnIndex, dgvc.RowIndex].Selected = true;
             }
 
@@ -1103,29 +1097,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnTrackCopy_Click(object sender, EventArgs e)
         {
-            DataGridView dgv = trackEditor;
-            clipboardtracks.Clear();
-            try {
-                List<DataGridViewRow> selectedrows = dgv.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
-                selectedrows.Sort((row, row2) => row.Index.CompareTo(row2.Index));
-                foreach (DataGridViewRow dgvr in selectedrows) {
-                    clipboardtracks.Add(SequencerObjects[dgvr.Index].Clone());
-                }
-                btnTrackPaste.Enabled = true;
-            }
-            catch (Exception ex) { MessageBox.Show("something went wrong with copying. Show this error to the dev.\n\n" + ex); }
+            TCLE.ClipboardSequencer = trackEditor.SelectedCells.Cast<DataGridViewCell>()
+                .Select(cell => SequencerObjects[cell.RowIndex])
+                .Distinct()
+                .OrderBy(cell => cell.editor_row.Index).Select(x => x.Clone());
+            btnTrackPaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
 
         private void btnTrackPaste_Click(object sender, EventArgs e)
         {
-            DataGridView dgv = trackEditor;
             try {
                 int _index = trackEditor.CurrentRow?.Index ?? -1;
                 //check if copied row is longer than the leaf beat length
-                int lastbeat = clipboardtracks[0].editor_row.Cells.Count - FrozenColumnOffset;
+                int lastbeat = TCLE.ClipboardSequencer.First().editor_row.Cells.Count - FrozenColumnOffset;
                 if (lastbeat > LeafProperties.beats) {
-                    DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "Pasting leaf track", MessageBoxButtons.YesNoCancel);
+                    DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "repmuhT motsuC leveL rotidE", MessageBoxButtons.YesNoCancel);
                     //YES = extend the leaf and then paste
                     if (_paste == DialogResult.Yes)
                         LeafProperties.beats = lastbeat;
@@ -1134,14 +1121,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else if (_paste == DialogResult.Cancel)
                         return;
                 }
+                ispasting = true;
                 //add copied Sequencer_Object to main _tracks list
-                foreach (Sequencer_Object _newtrack in clipboardtracks) {
+                foreach (Sequencer_Object _newtrack in TCLE.ClipboardSequencer) {
                     _index++;
                     DataGridViewRow dgvr = new();
                     Sequencer_Object clone = _newtrack.Clone();
                     clone.editor_row = dgvr;
                     SequencerObjects.Insert(_index, clone);
-                    dgv.Rows.Insert(_index, dgvr);
+                    trackEditor.Rows.Insert(_index, dgvr);
                     try {
                         //set the headercell names
                         ChangeTrackName(clone, leafProperties.showcategory ? $"[{clone.category}] " : "");
@@ -1155,6 +1143,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex);
             }
 
+            ispasting = false;
             TCLE.PlaySound("UIkpaste");
             SaveCheckAndWrite(false);
             //SaveCheckAndWrite(false, "Pasted tracks", "");
