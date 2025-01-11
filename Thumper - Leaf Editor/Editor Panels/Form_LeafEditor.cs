@@ -927,15 +927,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //now we have a well ordered list of objects to move
             IEnumerable<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => SequencerObjects[cell.RowIndex])
-                .Distinct().OrderBy(cell => cell.editor_row.Index);
-            ///.SelectMany(seq => SequencerObjects.Where(x => x.category == seq.category && x.friendly_param == seq.friendly_param))
-            ///.ToList();
+                .Distinct()
+                .OrderBy(cell => cell.editor_row.Index);
             List<Sequencer_Object> RowsToMove = new();
             foreach (Sequencer_Object row in selectedrows) {
                 if (!RowsToMove.Contains(row))
                     RowsToMove.AddRange(ReturnLanesFromName(row, row.friendly_lane));
             }
-            RowsToMove = RowsToMove.Distinct().ToList();
             //if already at the top, do not move up
             if (RowsToMove.FirstOrDefault().editor_row.Index == 0)
                 return;
@@ -948,9 +946,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object ObjAbove = SequencerObjects[RowsToMove[x].editor_row.Index - 1];
                 int Lanes = ObjAbove.friendly_lane != "none" ? 5 : 1;
                 //remove the row and object
+                trackEditor.SuspendLayout();
                 trackEditor.Rows.Remove(RowsToMove[x].editor_row);
                 SequencerObjects.Remove(RowsToMove[x]);
-                if (RowsToMove[x].friendly_lane != "none") {
+                if (Lanes == 5) {
                     trackEditor.Rows.Remove(RowsToMove[x + 1].editor_row);
                     SequencerObjects.Remove(RowsToMove[x + 1]);
                     trackEditor.Rows.Remove(RowsToMove[x + 2].editor_row);
@@ -963,7 +962,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //reinsert object and row at appropriate index
                 SequencerObjects.Insert(currentindex - Lanes, RowsToMove[x]);
                 trackEditor.Rows.Insert(currentindex - Lanes, RowsToMove[x].editor_row);
-                if (RowsToMove[x].friendly_lane != "none") {
+                if (Lanes == 5) {
                     SequencerObjects.Insert(currentindex - Lanes + 1, RowsToMove[x + 1]);
                     trackEditor.Rows.Insert(currentindex - Lanes + 1, RowsToMove[x + 1].editor_row);
                     SequencerObjects.Insert(currentindex - Lanes + 2, RowsToMove[x + 2]);
@@ -980,6 +979,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (DataGridViewCell dgvc in selectedcells) {
                 trackEditor[dgvc.ColumnIndex, dgvc.RowIndex].Selected = true;
             }
+            trackEditor.ResumeLayout();
 
             SaveCheckAndWrite(false);
         }
@@ -1038,17 +1038,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //now we have a well ordered list of objects to move
             IEnumerable<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => SequencerObjects[cell.RowIndex])
-                .Distinct().OrderByDescending(cell => cell.editor_row.Index);
-            ///.SelectMany(seq => SequencerObjects.Where(x => x.category == seq.category && x.friendly_param == seq.friendly_param))
-            ///.ToList();
+                .Distinct();
             List<Sequencer_Object> RowsToMove = new();
             foreach (Sequencer_Object row in selectedrows) {
                 if (!RowsToMove.Contains(row))
                     RowsToMove.AddRange(ReturnLanesFromName(row, row.friendly_lane));
             }
-            RowsToMove = RowsToMove.Distinct().ToList();
+            RowsToMove = RowsToMove.OrderByDescending(cell => cell.editor_row.Index).ToList();
             //if already at the top, do not move up
-            if (RowsToMove.LastOrDefault().editor_row.Index == trackEditor.Rows.Count - 1)
+            if (RowsToMove.First().editor_row.Index >= trackEditor.Rows.Count - 1)
                 return;
 
             List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
@@ -1061,7 +1059,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //remove the row and object
                 trackEditor.Rows.Remove(RowsToMove[x].editor_row);
                 SequencerObjects.Remove(RowsToMove[x]);
-                if (RowsToMove[x].friendly_lane != "none") {
+                if (Lanes == 5) {
                     trackEditor.Rows.Remove(RowsToMove[x + 1].editor_row);
                     SequencerObjects.Remove(RowsToMove[x + 1]);
                     trackEditor.Rows.Remove(RowsToMove[x + 2].editor_row);
@@ -1074,7 +1072,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //reinsert object and row at appropriate index
                 SequencerObjects.Insert(currentindex + Lanes, RowsToMove[x]);
                 trackEditor.Rows.Insert(currentindex + Lanes, RowsToMove[x].editor_row);
-                if (RowsToMove[x].friendly_lane != "none") {
+                if (Lanes == 5) {
                     SequencerObjects.Insert(currentindex + Lanes + 1, RowsToMove[x + 1]);
                     trackEditor.Rows.Insert(currentindex + Lanes + 1, RowsToMove[x + 1].editor_row);
                     SequencerObjects.Insert(currentindex + Lanes + 2, RowsToMove[x + 2]);
