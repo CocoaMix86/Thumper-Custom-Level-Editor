@@ -943,6 +943,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_lanesgray {
+            get {
+                object obj = ResourceManager.GetObject("icon_lanesgray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_leaftemplate {
             get {
                 object obj = ResourceManager.GetObject("icon_leaftemplate", resourceCulture);

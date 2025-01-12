@@ -47,7 +47,7 @@ namespace Thumper_Custom_Level_Editor
             get => ExpandLanes;
             set {
                 ExpandLanes = value;
-                if (this.friendly_lane != "lane center")
+                if (this.friendly_lane is not "lane center" and not "none")
                     editor_row.Visible = value;
                 Form_LeafEditor.ChangeTrackName(this, parent.leafProperties.showcategory ? $"[{this.category}] " : "");
                 Form_LeafEditor.TrackUpdateHighlighting(this, true);
@@ -229,6 +229,23 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private bool ConnectedCells;
+
+        [Category​Attribute("Editor")]
+        [DisplayName("Always Show Lanes")]
+        [Description("")]
+        public bool showlanes
+        {
+            get => ShowLanes;
+            set {
+                ShowLanes = value;
+                if (ShowLanes) {
+                    foreach (Sequencer_Object seq in seq_objs)
+                        seq.expandlanes = true;
+                }
+                parent.trackEditor.Invalidate();
+            }
+        }
+        private bool ShowLanes;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]

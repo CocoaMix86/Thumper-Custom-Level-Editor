@@ -71,9 +71,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int CurrentRow;
         private int MouseCurrentColumn;
         private static int FrozenColumnOffset = 3;
-        //private bool controldown;
-        //private bool shiftdown;
-        //private bool altdown;
         private bool randomizing;
         private bool ismoving;
         private bool isfinding;
@@ -81,6 +78,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool LogUndo;
         private bool GlobalMute;
         private bool GlobalDisable;
+        private bool GlobalExpand;
         private bool IsInterpolating;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
         private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
@@ -292,6 +290,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
+            //Object Toggle
             if (e.ColumnIndex == 0) {
                 if (e.RowIndex == -1) {
                     e.Graphics.DrawImage(GlobalDisable ? Properties.Resources.icon_toggle_off : Properties.Resources.icon_toggle_on, new Rectangle(x, y, w, h));
@@ -301,6 +300,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 }
             }
+            //Audio Mute/Unmute
             else if (e.ColumnIndex == 1) {
                 if (e.RowIndex == -1) {
                     e.Graphics.DrawImage(GlobalMute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
@@ -310,10 +310,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 }
             }
-            else if (e.ColumnIndex == 2 && e.RowIndex != -1) {
-                if (SequencerObjects[e.RowIndex].friendly_lane == "lane center")
-                    e.Graphics.DrawImage(Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
-                trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+            //Lane Expand
+            else if (e.ColumnIndex == 2) {
+                if (e.RowIndex == -1)
+                    e.Graphics.DrawImage(LeafProperties.showlanes ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+                else if (SequencerObjects[e.RowIndex].friendly_lane == "lane center") {
+                    e.Graphics.DrawImage(LeafProperties.showlanes ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+                    trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                }
             }
             e.Handled = true;
         }
@@ -456,6 +460,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.InvalidateColumn(1);
                 TCLE.PlaySound("UIselect");
             }
+            //test if column header was clicked for global expand
+            if (e.RowIndex == -1 && e.ColumnIndex == 2) {
+                //if ShowLanes, don't alter lane visibility
+                if (LeafProperties.showlanes)
+                    return;
+                GlobalExpand = !GlobalExpand;
+                foreach (Sequencer_Object seq in SequencerObjects) {
+                    seq.expandlanes = GlobalExpand;
+                }
+                //invalidate the column to repaint it, so images update
+                trackEditor.InvalidateColumn(2);
+                TCLE.PlaySound("UIselect");
+            }
             else if (e.RowIndex == -1)
                 return;
             //test for clicks in frozen columns 0 or 1
@@ -470,6 +487,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     seq.mute = !seq.mute;
                 }
                 if (e.ColumnIndex is 2 && seq.friendly_lane == "lane center") {
+                    //if ShowLanes, don't alter lane visibility
+                    if (LeafProperties.showlanes)
+                        return;
                     FindMissingLaneObjects(seq);
                     seq.expandlanes = !seq.expandlanes;
                     SequencerObjects[seq.editor_row.Index - 2].expandlanes = seq.expandlanes;
@@ -571,10 +591,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void trackEditor_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            //controldown = e.Control;
-            //shiftdown = e.Shift;
-            //altdown = e.Alt;
-            ///Keypress Delete - clear selected cellss
             //delete cell value if Delete key is pressed
             if (e.KeyCode == Keys.Delete) {
                 LogUndo = false;
@@ -867,8 +883,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text);
             if (objmatch == null)
                 return;
-
             Sequencer_Object _currentseq = SequencerObjects[CurrentRow];
+            if (!objmatch.param_path.EndsWith(".ent") && _currentseq.friendly_lane != "none") {
+                MessageBox.Show("Due to reasons, you cannot change a multi-lane object into a non-multi-lane object. Please just add a new object.", "Thumper Custom Level Editor");
+                return;
+            }
             Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
             for (int x = 0; x < Lanes.Length; x++) {
                 Lanes[x].obj_name = objmatch.obj_name == "PLAY SAMPLE" ? treeObjects.SelectedNode.Text : objmatch.obj_name;
@@ -882,8 +901,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Lanes[x].param_path_lane = "none";
                     Lanes[x].friendly_lane = "none";
                 }
+                else if (Lanes[x].friendly_lane == "none") {
+                    Lanes[x].param_path_lane = "ent";
+                    Lanes[x].friendly_lane = "lane center";
+                    Lanes[x].expandlanes = LeafProperties.showlanes;
+                }
                 ChangeTrackName(Lanes[x], LeafProperties.showcategory ? $"[{Lanes[x].category}] " : "");
+                TrackUpdateHighlighting(Lanes[x]);
             }
+            FindMissingLaneObjects(SequencerObjects[CurrentRow]);
+            trackEditor.InvalidateRow(_currentseq.editor_row.Index);
 
             SaveCheckAndWrite(false);
             TCLE.PlaySound("UIobjectadd");
@@ -1815,7 +1842,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static void ChangeTrackName(Sequencer_Object seq, string category = "")
         {
             string ShowCategory = category;
-            string ShowLane = seq.expandlanes ? $"{seq.friendly_param}, {seq.friendly_lane}" : seq.friendly_param;
+            string ShowLane = (seq.expandlanes && seq.friendly_lane != "none") ? $"{seq.friendly_param}, {seq.friendly_lane}" : seq.friendly_param;
             if (seq.category == "PLAY SAMPLE")
                 //show the sample name instead
                 seq.editor_row.HeaderCell.Value = $"{ShowCategory}{seq.obj_name}";
@@ -2270,25 +2297,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void FindMissingLaneObjects(Sequencer_Object seq)
         {
+            //don't need to find lanes for non-multi-lanes
+            if (seq.friendly_lane == "none")
+                return;
             isfinding = true;
             int indexofcenter = SequencerObjects.IndexOf(seq);
             if (indexofcenter - 1 < 0 || (SequencerObjects[indexofcenter - 1].obj_name != seq.obj_name || SequencerObjects[indexofcenter - 1].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter, 1);
                 SequencerObjects.Insert(indexofcenter, seq.CloneAsDefault("a02", "lane left 1", trackEditor.Rows[indexofcenter]));
+                SequencerObjects[indexofcenter].expandlanes = LeafProperties.showlanes;
                 indexofcenter += 1;
             }
             if (indexofcenter - 2 < 0 || (SequencerObjects[indexofcenter - 2].obj_name != seq.obj_name || SequencerObjects[indexofcenter - 2].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter - 1, 1);
                 SequencerObjects.Insert(indexofcenter - 1, seq.CloneAsDefault("a01", "lane left 2", trackEditor.Rows[indexofcenter - 1]));
+                SequencerObjects[indexofcenter - 1].expandlanes = LeafProperties.showlanes;
                 indexofcenter += 1;
             }
             if (indexofcenter + 1 > SequencerObjects.Count - 1 || (SequencerObjects[indexofcenter + 1].obj_name != seq.obj_name || SequencerObjects[indexofcenter + 1].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter + 1, 1);
                 SequencerObjects.Insert(indexofcenter + 1, seq.CloneAsDefault("z01", "lane right 1", trackEditor.Rows[indexofcenter + 1]));
+                SequencerObjects[indexofcenter + 1].expandlanes = LeafProperties.showlanes;
             }
             if (indexofcenter + 2 > SequencerObjects.Count - 1 || (SequencerObjects[indexofcenter + 2].obj_name != seq.obj_name || SequencerObjects[indexofcenter + 2].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter + 2, 1);
                 SequencerObjects.Insert(indexofcenter + 2, seq.CloneAsDefault("z02", "lane left 2", trackEditor.Rows[indexofcenter + 2]));
+                SequencerObjects[indexofcenter + 2].expandlanes = LeafProperties.showlanes;
             }
             isfinding = false;
         }
