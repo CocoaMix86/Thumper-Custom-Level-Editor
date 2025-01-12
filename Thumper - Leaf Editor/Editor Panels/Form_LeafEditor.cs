@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.Drawing.Drawing2D;
-using System.Drawing;
-using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -790,14 +787,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 footer = objmatch.footer,
                 enabled = true,
                 param_path_lane = objmatch.param_path.EndsWith(".ent") ? "ent" : "none",
-                friendly_lane = objmatch.param_path.EndsWith(".ent") ? "lane center" : "none"
+                friendly_lane = objmatch.param_path.EndsWith(".ent") ? "lane center" : "none",
+                editor_row = new DataGridViewRow()
             };
+            seq.expandlanes = seq.friendly_lane == "none" ? true : (LeafProperties.showlanes ? true : false);
             SequencerObjects.Add(seq);
-            //Add new row and assign random data
-            trackEditor.RowCount += 1;
-            seq.editor_row = trackEditor.Rows[^1];
+            trackEditor.Rows.Add(seq.editor_row);
             ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
             TrackUpdateHighlighting(seq);
+            FindMissingLaneObjects(seq);
             TCLE.PlaySound("UIobjectadd");
         }
 
