@@ -1122,10 +1122,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnTrackCopy_Click(object sender, EventArgs e)
         {
-            TCLE.ClipboardSequencer = trackEditor.SelectedCells.Cast<DataGridViewCell>()
+            IEnumerable<Sequencer_Object> Copied = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => SequencerObjects[cell.RowIndex])
                 .Distinct()
                 .OrderBy(cell => cell.editor_row.Index).Select(x => x.Clone());
+
+            TCLE.ClipboardSequencer = new();
+            foreach (Sequencer_Object copyseq in Copied) {
+                if (copyseq.friendly_lane is not "none") {
+                    Sequencer_Object lookup = TCLE.ClipboardSequencer.FirstOrDefault(x => x.obj_name == copyseq.obj_name && x.param_path == copyseq.param_path && x.param_path_lane == copyseq.param_path_lane && x.isdefault == true);
+                    //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
+                    if (lookup == null) {
+                        TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("a01", "lane left 2", new DataGridViewRow()));
+                        TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("a02", "lane left 1", new DataGridViewRow()));
+                        TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("ent", "lane center", new DataGridViewRow()));
+                        TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("z01", "lane right 1", new DataGridViewRow()));
+                        TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("z02", "lane right 2", new DataGridViewRow()));
+                    }
+                    lookup = TCLE.ClipboardSequencer.FirstOrDefault(x => x.obj_name == copyseq.obj_name && x.param_path == copyseq.param_path && x.param_path_lane == copyseq.param_path_lane && x.isdefault == true);
+                    int index = TCLE.ClipboardSequencer.IndexOf(lookup);
+                    TCLE.ClipboardSequencer[index] = copyseq;
+                }
+                //else just add the object without needing extra lanes
+                else {
+                    TCLE.ClipboardSequencer.Add(copyseq);
+                }
+            }
+
             btnTrackPaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
@@ -1878,19 +1901,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Updates cell highlighting in the DGV
-        public static void TrackUpdateHighlighting(Sequencer_Object _seqobj, bool titleonly = false)
+        public static void TrackUpdateHighlighting(Sequencer_Object seq, bool titleonly = false)
         {
-            Color background = TCLE.Blend(_seqobj.highlight_color, Color.Black, 0.4);
-            _seqobj.editor_row.HeaderCell.Style.BackColor = background;
+            Color background = TCLE.Blend(seq.highlight_color, Color.Black, 0.4);
+            seq.editor_row.HeaderCell.Style.BackColor = background;
             //iterate over all cells in the row
             if (!titleonly) {
-                foreach (DataGridViewCell dgvc in _seqobj.editor_row.Cells) {
-                    TrackUpdateHighlightingSingleCell(dgvc, _seqobj);
+                foreach (DataGridViewCell dgvc in seq.editor_row.Cells) {
+                    TrackUpdateHighlightingSingleCell(dgvc, seq);
                 }
             }
-            _seqobj.editor_row.Cells[0].Style.BackColor = background;
-            _seqobj.editor_row.Cells[1].Style.BackColor = background;
-            _seqobj.editor_row.Cells[2].Style.BackColor = background;
+            if (seq.editor_row.Cells.Count >= 3) {
+                seq.editor_row.Cells[0].Style.BackColor = background;
+                seq.editor_row.Cells[1].Style.BackColor = background;
+                seq.editor_row.Cells[2].Style.BackColor = background;
+            }
         }
 
         public static void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc, Sequencer_Object _seqobj)
