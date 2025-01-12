@@ -71,9 +71,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int CurrentRow;
         private int MouseCurrentColumn;
         private static int FrozenColumnOffset = 3;
-        private bool controldown;
-        private bool shiftdown;
-        private bool altdown;
+        //private bool controldown;
+        //private bool shiftdown;
+        //private bool altdown;
         private bool randomizing;
         private bool ismoving;
         private bool isfinding;
@@ -101,7 +101,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_Scroll(object sender, ScrollEventArgs e)
         {
-            if (controldown) {
+            if (ModifierKeys is Keys.Control) {
                 trackEditor.Scroll -= trackEditor_Scroll;
                 trackEditor.HorizontalScrollingOffset = e.OldValue;
                 trackEditor.Scroll += trackEditor_Scroll;
@@ -164,7 +164,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int scrollLines = SystemInformation.MouseWheelScrollLines;
 
             //handle horizontal and vertical scroll
-            if (!controldown && !shiftdown) {
+            if (ModifierKeys is not Keys.Control and not Keys.Shift) {
                 if (trackEditor.FirstDisplayedScrollingRowIndex == -1 || trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                     return;
                 //handle horizontal scroll
@@ -190,16 +190,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //handle zoom scroll
             else {
-                if (controldown && e.Delta < 0) {
+                if (ModifierKeys is Keys.Control && e.Delta < 0) {
                     trackZoom.Value = Math.Max(1, horiz - scrollLines);
                 }
-                else if (controldown && e.Delta > 0) {
+                else if (ModifierKeys is Keys.Control && e.Delta > 0) {
                     trackZoom.Value = Math.Min(100, horiz + scrollLines);
                 }
-                if (shiftdown && e.Delta < 0) {
+                if (ModifierKeys is Keys.Shift && e.Delta < 0) {
                     trackZoomVert.Value = Math.Max(1, vert - scrollLines);
                 }
-                else if (shiftdown && e.Delta > 0) {
+                else if (ModifierKeys is Keys.Shift && e.Delta > 0) {
                     trackZoomVert.Value = Math.Min(100, vert + scrollLines);
                 }
             }
@@ -571,9 +571,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void trackEditor_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            controldown = e.Control;
-            shiftdown = e.Shift;
-            altdown = e.Alt;
+            //controldown = e.Control;
+            //shiftdown = e.Shift;
+            //altdown = e.Alt;
             ///Keypress Delete - clear selected cellss
             //delete cell value if Delete key is pressed
             if (e.KeyCode == Keys.Delete) {
@@ -583,12 +583,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
             }
-            else if (controldown) {
+            else if (e.Control) {
                 if (e.KeyCode == Keys.OemSemicolon)
                     txtSearch.Focus();
             }
 
-            else if (altdown) {
+            else if (e.Alt) {
                 if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
                     e.Handled = true;
                     //this is used for indexing if shifting left/down or right/up
@@ -668,9 +668,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            controldown = e.Control;
-            shiftdown = e.Shift;
-            altdown = e.Alt;
+            //controldown = e.Control;
+            //shiftdown = e.Shift;
+            //altdown = e.Alt;
         }
 
         private void AllowArrowMovement(object sender, PreviewKeyDownEventArgs e)
