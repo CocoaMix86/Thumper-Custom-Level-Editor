@@ -407,7 +407,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         changes = true;
                     }
 
-                    SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _val;
+                    if (_val == null)
+                        SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                            beat = _cell.ColumnIndex - FrozenColumnOffset,
+                            value = null,
+                            ease = "Ease In Out",
+                            interpolation = "Linear"
+                        };
+                    else
+                        SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _val;
 
                     TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);
                 }
