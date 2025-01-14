@@ -281,21 +281,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.FillEllipse(new SolidBrush(Color.Blue), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
                 }
                 if (SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
-                    if (SequencerObjects[e.RowIndex - 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
+                    if (SequencerObjects[e.RowIndex - 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null || SequencerObjects[e.RowIndex - 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null || SequencerObjects[e.RowIndex + 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null || SequencerObjects[e.RowIndex + 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
                         e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Left, e.CellBounds.Top, 7, 7);
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Green), e.CellBounds.Left + 2, e.CellBounds.Top, 5, 5);
-                    }
-                    if (SequencerObjects[e.RowIndex - 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Left, e.CellBounds.Top + ((e.CellBounds.Height / 4)), 7, 7);
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Green), e.CellBounds.Left + 2, e.CellBounds.Top + ((e.CellBounds.Height / 4)), 5, 5);
-                    }
-                    if (SequencerObjects[e.RowIndex + 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Left, e.CellBounds.Top + ((e.CellBounds.Height / 4) * 2), 7, 7);
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Green), e.CellBounds.Left + 2, e.CellBounds.Top + ((e.CellBounds.Height / 4) * 2), 5, 5);
-                    }
-                    if (SequencerObjects[e.RowIndex + 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Left, e.CellBounds.Top + ((e.CellBounds.Height / 4) * 3), 7, 7);
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Green), e.CellBounds.Left + 2, e.CellBounds.Top + ((e.CellBounds.Height / 4) * 3), 5, 5);
+                        e.Graphics.FillEllipse(new SolidBrush(Color.Green), e.CellBounds.Left + 1, e.CellBounds.Top + 1, 5, 5);
                     }
                 }
             }
