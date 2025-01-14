@@ -669,6 +669,87 @@ namespace Thumper_Custom_Level_Editor
             int r = x % m;
             return r < 0 ? r + m : r;
         }
+
+        public void ConvertProjectToNew()
+        {
+            FileInfo LevelDetails = null;
+            FileInfo ConfigFile = null;
+            using OpenFileDialog ofd = new();
+            ofd.Filter = "Find a LEVEL DETAILS.txt file (LEVEL DETAILS.txt)|LEVEL DETAILS.txt";
+            ofd.FilterIndex = 1;
+            ofd.InitialDirectory = Application.StartupPath;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                LevelDetails = new FileInfo(ofd.FileName);
+                if (LevelDetails.Name.ToUpper() != "LEVEL DETAILS.TXT") {
+                    MessageBox.Show("That's not the level details file");
+                    return;
+                }
+            }
+
+            if (MessageBox.Show("This will convert the project to the new TCLE 3.0 format. This change CANNOT be undone.\nPlease make a backup of your project before continuing.", "WARNING", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                return;
+            bool sort = MessageBox.Show("Sort files into subfolders?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes;
+
+            //load the properties of the TCL and create projectProperties
+            dynamic ProjectJson = LoadFileLock(LevelDetails.FullName);
+            ProjectProperties Convert = new() {
+                projectname = (string)ProjectJson["level_name"] ?? "New Project",
+                difficulty = (string)ProjectJson["difficulty"] ?? "D0",
+                description = (string)ProjectJson["description"] ?? "Please add a description",
+                authornames = (string)ProjectJson["author"] ?? "a person",
+                bpm = (decimal?)ProjectJson["bpm"] ?? 400m
+            };
+            ConfigFile = new($@"{LevelDetails.DirectoryName}\config_{Convert.projectname}.txt");
+            dynamic ProjectConfig = LoadFileLock(ConfigFile.FullName);
+            //load colors, with failover to White
+            try {
+                Convert.bpm = (decimal?)ProjectConfig["bpm"] ?? 400m;
+                dynamic railcolor = ProjectConfig["rails_color"];
+                Convert.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
+                dynamic railglowcolor = ProjectConfig["rails_glow_color"];
+                Convert.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
+                dynamic pathcolor = ProjectConfig["path_color"];
+                Convert.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
+            } catch (Exception) {
+                Convert.rail = Color.White;
+                Convert.railglow = Color.White;
+                Convert.path = Color.White;
+            }
+
+            foreach (FileInfo file in LevelDetails.Directory.GetFiles("*", SearchOption.AllDirectories)) {
+                if (file.Name.ToUpper() == "LEVEL DETAILS.TXT" || file.Name.ToLower().StartsWith("config_")) {
+                    file.Delete();
+                    continue;
+                }
+                string[] splitextension = file.Name.Replace(".txt", "").Split('_', 2);
+                if (sort)
+                    Directory.CreateDirectory($@"{file.DirectoryName}\{splitextension[0]}");                
+                File.Move(file.FullName, $@"{file.DirectoryName}\{(sort ? splitextension[0] + "\\" : "")}{splitextension[1]}.{splitextension[0].ToLower()}");
+            }
+            //build the JSON to write to file
+            JObject _saveJSON = BuildSave(Convert);
+            //write JSON to file
+            File.WriteAllText($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+
+            OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL"));
+        }
+
+        public static JObject BuildSave(ProjectProperties _properties)
+        {
+            JObject _save = new() {
+                { "level_name", _properties.projectname },
+                { "difficulty", _properties.difficulty },
+                { "description", _properties.description },
+                {"author", _properties.authornames },
+                { "bpm", _properties.bpm },
+                { "level_sections", new JArray() {} },
+                { "rails_color", new JArray() { _properties.rail.R / 255, _properties.rail.G / 255, _properties.rail.B / 255, 1 } },
+                { "rails_glow_color", new JArray() { _properties.railglow.R / 255, _properties.railglow.G / 255, _properties.railglow.B / 255, 1}},
+                { "path_color", new JArray() { _properties.path.R / 255, _properties.path.G / 255, _properties.path.B / 255, 1 }},
+                { "joy_color", new JArray() { 1, 1, 1, 1 } }
+            };
+            return _save;
+        }
     }
 
     public static class StringExtensions
