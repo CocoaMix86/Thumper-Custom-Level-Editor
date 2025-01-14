@@ -685,6 +685,8 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 }
             }
+            else
+                return;
 
             if (MessageBox.Show("This will convert the project to the new TCLE 3.0 format. This change CANNOT be undone.\nPlease make a backup of your project before continuing.", "WARNING", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                 return;
