@@ -56,6 +56,7 @@
             this.propertyGridProject.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridProject.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridProject.ViewForeColor = Color.White;
+            this.propertyGridProject.PropertyValueChanged += this.propertyGridProject_PropertyValueChanged;
             // 
             // Form_ProjectProperties
             // 

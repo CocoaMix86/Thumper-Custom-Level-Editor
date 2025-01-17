@@ -66,12 +66,8 @@
             this.toolStripSeparator9 = new ToolStripSeparator();
             this.contextFormClose = new ToolStripMenuItem();
             this.contextmenuFile = new ContextMenuStrip(this.components);
-            this.newToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripFileNewProject = new ToolStripMenuItem();
-            this.toolstripFileNewFile = new ToolStripMenuItem();
-            this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripFileOpenProject = new ToolStripMenuItem();
-            this.toolstripFileOpenFile = new ToolStripMenuItem();
             this.toolstripFileConvert = new ToolStripMenuItem();
             this.toolStripSeparator2 = new ToolStripSeparator();
             this.toolstripFileSave = new ToolStripMenuItem();
@@ -134,7 +130,7 @@
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
             this.toolStripSeparator12 = new ToolStripSeparator();
             this.addNewWorkspaceToolStripMenuItem = new ToolStripMenuItem();
-            this.toolStripMenuItem3 = new ToolStripMenuItem();
+            this.toolstripWindow = new ToolStripMenuItem();
             this.contextmenuHelp = new ContextMenuStrip(this.components);
             this.toolStripMenuItem13 = new ToolStripMenuItem();
             this.toolstripHelpTentacles = new ToolStripMenuItem();
@@ -565,83 +561,43 @@
             // contextmenuFile
             // 
             this.contextmenuFile.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.newToolStripMenuItem, this.toolStripMenuItem4, this.toolstripFileConvert, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolStripMenuItem5, this.toolStripMenuItem63, this.toolStripSeparator4, this.toolstripFileExit });
+            this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.toolstripFileNewProject, this.toolstripFileOpenProject, this.toolstripFileConvert, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolStripMenuItem5, this.toolStripMenuItem63, this.toolStripSeparator4, this.toolstripFileExit });
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new Size(252, 242);
+            this.contextmenuFile.Size = new Size(197, 220);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.toolstripFileNewProject, this.toolstripFileNewFile });
-            this.newToolStripMenuItem.ForeColor = Color.White;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new Size(251, 22);
-            this.newToolStripMenuItem.Text = "New                                                   ";
             // 
             // toolstripFileNewProject
             // 
-            this.toolstripFileNewProject.BackColor = Color.FromArgb(46, 46, 46);
             this.toolstripFileNewProject.ForeColor = Color.White;
             this.toolstripFileNewProject.Image = Properties.Resources.icon_tcle;
             this.toolstripFileNewProject.Name = "toolstripFileNewProject";
-            this.toolstripFileNewProject.Size = new Size(111, 22);
-            this.toolstripFileNewProject.Text = "Project";
-            this.toolstripFileNewProject.Click += this.toolstripFileNewProject_Click;
-            // 
-            // toolstripFileNewFile
-            // 
-            this.toolstripFileNewFile.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripFileNewFile.ForeColor = Color.White;
-            this.toolstripFileNewFile.Image = Properties.Resources.icon_file;
-            this.toolstripFileNewFile.Name = "toolstripFileNewFile";
-            this.toolstripFileNewFile.Size = new Size(111, 22);
-            this.toolstripFileNewFile.Text = "File";
-            this.toolstripFileNewFile.Click += this.toolstripFileNewFile_Click;
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem4.DropDownItems.AddRange(new ToolStripItem[] { this.toolstripFileOpenProject, this.toolstripFileOpenFile });
-            this.toolStripMenuItem4.ForeColor = Color.White;
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new Size(251, 22);
-            this.toolStripMenuItem4.Text = "Open";
+            this.toolstripFileNewProject.Size = new Size(196, 22);
+            this.toolstripFileNewProject.Text = "New Project";
             // 
             // toolstripFileOpenProject
             // 
-            this.toolstripFileOpenProject.BackColor = Color.FromArgb(46, 46, 46);
             this.toolstripFileOpenProject.ForeColor = Color.White;
             this.toolstripFileOpenProject.Image = Properties.Resources.icon_tcle;
             this.toolstripFileOpenProject.Name = "toolstripFileOpenProject";
-            this.toolstripFileOpenProject.Size = new Size(111, 22);
-            this.toolstripFileOpenProject.Text = "Project";
+            this.toolstripFileOpenProject.Size = new Size(196, 22);
+            this.toolstripFileOpenProject.Text = "Open Project";
             this.toolstripFileOpenProject.Click += this.toolstripFileOpenProject_Click;
-            // 
-            // toolstripFileOpenFile
-            // 
-            this.toolstripFileOpenFile.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripFileOpenFile.ForeColor = Color.White;
-            this.toolstripFileOpenFile.Image = Properties.Resources.icon_file;
-            this.toolstripFileOpenFile.Name = "toolstripFileOpenFile";
-            this.toolstripFileOpenFile.Size = new Size(111, 22);
-            this.toolstripFileOpenFile.Text = "File";
-            this.toolstripFileOpenFile.Click += this.toolstripFileOpenFile_Click;
             // 
             // toolstripFileConvert
             // 
             this.toolstripFileConvert.ForeColor = Color.White;
             this.toolstripFileConvert.Image = Properties.Resources.icon_import;
             this.toolstripFileConvert.Name = "toolstripFileConvert";
-            this.toolstripFileConvert.Size = new Size(251, 22);
+            this.toolstripFileConvert.Size = new Size(196, 22);
             this.toolstripFileConvert.Text = "Convert Old Project";
             this.toolstripFileConvert.Click += this.toolstripFileConvert_Click;
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new Size(248, 6);
+            this.toolStripSeparator2.Size = new Size(193, 6);
             // 
             // toolstripFileSave
             // 
@@ -649,7 +605,7 @@
             this.toolstripFileSave.Image = Properties.Resources.icon_save;
             this.toolstripFileSave.Name = "toolstripFileSave";
             this.toolstripFileSave.ShortcutKeys = Keys.Control | Keys.S;
-            this.toolstripFileSave.Size = new Size(251, 22);
+            this.toolstripFileSave.Size = new Size(196, 22);
             this.toolstripFileSave.Text = "Save";
             this.toolstripFileSave.Click += this.toolstripMainSave_Click;
             // 
@@ -657,7 +613,7 @@
             // 
             this.toolstripFileSaveAs.ForeColor = Color.White;
             this.toolstripFileSaveAs.Name = "toolstripFileSaveAs";
-            this.toolstripFileSaveAs.Size = new Size(251, 22);
+            this.toolstripFileSaveAs.Size = new Size(196, 22);
             this.toolstripFileSaveAs.Text = "Save [] As...";
             this.toolstripFileSaveAs.Click += this.toolstripFileSaveAs_Click;
             // 
@@ -668,7 +624,7 @@
             this.toolstripFileSaveAll.Image = Properties.Resources.icon_save_all;
             this.toolstripFileSaveAll.Name = "toolstripFileSaveAll";
             this.toolstripFileSaveAll.ShortcutKeys = Keys.Control | Keys.Shift | Keys.S;
-            this.toolstripFileSaveAll.Size = new Size(251, 22);
+            this.toolstripFileSaveAll.Size = new Size(196, 22);
             this.toolstripFileSaveAll.Text = "Save All";
             this.toolstripFileSaveAll.Click += this.toolstripMainSaveAll_Click;
             // 
@@ -677,7 +633,7 @@
             this.toolStripSeparator1.BackColor = Color.FromArgb(46, 46, 46);
             this.toolStripSeparator1.ForeColor = Color.Black;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new Size(248, 6);
+            this.toolStripSeparator1.Size = new Size(193, 6);
             // 
             // toolStripMenuItem5
             // 
@@ -685,7 +641,7 @@
             this.toolStripMenuItem5.DropDown = this.contextMenuRecentProjects;
             this.toolStripMenuItem5.ForeColor = Color.White;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new Size(251, 22);
+            this.toolStripMenuItem5.Size = new Size(196, 22);
             this.toolStripMenuItem5.Text = "Open Recent Projects...";
             // 
             // contextMenuRecentProjects
@@ -711,7 +667,7 @@
             this.toolStripMenuItem63.DropDownItems.AddRange(new ToolStripItem[] { this.toolstripFileTemplateFolder, this.toolstripFileTemplateRegen });
             this.toolStripMenuItem63.ForeColor = Color.White;
             this.toolStripMenuItem63.Name = "toolStripMenuItem63";
-            this.toolStripMenuItem63.Size = new Size(251, 22);
+            this.toolStripMenuItem63.Size = new Size(196, 22);
             this.toolStripMenuItem63.Text = "Template Files...";
             // 
             // toolstripFileTemplateFolder
@@ -737,7 +693,7 @@
             this.toolStripSeparator4.BackColor = Color.FromArgb(46, 46, 46);
             this.toolStripSeparator4.ForeColor = Color.Black;
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new Size(248, 6);
+            this.toolStripSeparator4.Size = new Size(193, 6);
             // 
             // toolstripFileExit
             // 
@@ -746,7 +702,7 @@
             this.toolstripFileExit.Image = Properties.Resources.icon_exit;
             this.toolstripFileExit.Name = "toolstripFileExit";
             this.toolstripFileExit.ShortcutKeys = Keys.Alt | Keys.F4;
-            this.toolstripFileExit.Size = new Size(251, 22);
+            this.toolstripFileExit.Size = new Size(196, 22);
             this.toolstripFileExit.Text = "Exit";
             this.toolstripFileExit.Click += this.toolstripFileExit_Click;
             // 
@@ -852,6 +808,7 @@
             // toolstripEdit
             // 
             this.toolstripEdit.DropDown = this.contextmenuEdit;
+            this.toolstripEdit.Enabled = false;
             this.toolstripEdit.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.toolstripEdit.ForeColor = Color.White;
             this.toolstripEdit.Margin = new Padding(0, 5, 0, 5);
@@ -1117,7 +1074,7 @@
             this.contextmenuWindow.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuWindow.Items.AddRange(new ToolStripItem[] { this.toolstripWindowFloat, this.toolstripWindowFloatAll, this.toolstripWindowDock, this.toolStripSeparator11, this.toolstripWindowCloseAll, this.toolstripWindowCloseEditors, this.toolStripSeparator12, this.addNewWorkspaceToolStripMenuItem });
             this.contextmenuWindow.Name = "contextmenuEdit";
-            this.contextmenuWindow.OwnerItem = this.toolStripMenuItem3;
+            this.contextmenuWindow.OwnerItem = this.toolstripWindow;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
             this.contextmenuWindow.Size = new Size(244, 148);
             // 
@@ -1186,16 +1143,17 @@
             this.addNewWorkspaceToolStripMenuItem.Text = "Add New Workspace";
             this.addNewWorkspaceToolStripMenuItem.Click += this.addNewWorkspaceToolStripMenuItem_Click;
             // 
-            // toolStripMenuItem3
+            // toolstripWindow
             // 
-            this.toolStripMenuItem3.DropDown = this.contextmenuWindow;
-            this.toolStripMenuItem3.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.toolStripMenuItem3.ForeColor = Color.White;
-            this.toolStripMenuItem3.Margin = new Padding(0, 5, 0, 5);
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Padding = new Padding(3, 0, 3, 0);
-            this.toolStripMenuItem3.Size = new Size(64, 21);
-            this.toolStripMenuItem3.Text = "&Window";
+            this.toolstripWindow.DropDown = this.contextmenuWindow;
+            this.toolstripWindow.Enabled = false;
+            this.toolstripWindow.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolstripWindow.ForeColor = Color.White;
+            this.toolstripWindow.Margin = new Padding(0, 5, 0, 5);
+            this.toolstripWindow.Name = "toolstripWindow";
+            this.toolstripWindow.Padding = new Padding(3, 0, 3, 0);
+            this.toolstripWindow.Size = new Size(64, 21);
+            this.toolstripWindow.Text = "&Window";
             // 
             // contextmenuHelp
             // 
@@ -1442,7 +1400,7 @@
             this.toolStripTitle.ContextMenuStrip = this.contextMenuFormRightClick;
             this.toolStripTitle.GripMargin = new Padding(0);
             this.toolStripTitle.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolstripProject, this.toolStripMenuItem3, this.toolstripHelp, this.toolstripLevelName, this.toolstripOpenPanels, this.toolstripAddScene, this.toolStripButton1 });
+            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolstripLevelName, this.toolstripOpenPanels, this.toolstripAddScene, this.toolStripButton1 });
             this.toolStripTitle.Location = new Point(0, 0);
             this.toolStripTitle.MaximumSize = new Size(0, 31);
             this.toolStripTitle.MinimumSize = new Size(0, 31);
@@ -1777,7 +1735,6 @@
         private System.Windows.Forms.ToolStripLabel toolstripFormIcon;
         private System.Windows.Forms.ContextMenuStrip contextmenuFile;
         public System.Windows.Forms.ToolStripMenuItem toolstripFileSaveAll;
-        public System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         public System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem63;
@@ -1785,7 +1742,7 @@
         public System.Windows.Forms.ToolStripMenuItem toolstripFileTemplateRegen;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem toolstripFileExit;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolstripWindow;
         private System.Windows.Forms.ContextMenuStrip contextMenuProject;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectLeaf;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectLvl;
@@ -1842,13 +1799,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolstripFileSave;
         private System.Windows.Forms.ToolStripMenuItem toolstripFileSaveAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolstripHelpAudio;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem toolstripFileNewProject;
-        private System.Windows.Forms.ToolStripMenuItem toolstripFileNewFile;
-        private System.Windows.Forms.ToolStripMenuItem toolstripFileOpenProject;
-        private System.Windows.Forms.ToolStripMenuItem toolstripFileOpenFile;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectRegen;
         public WeifenLuo.WinFormsUI.Docking.DockPanel dockMain;
         private ToolStripMenuItem addNewWorkspaceToolStripMenuItem;
@@ -1893,6 +1845,8 @@
         private ContextMenuStrip contextMenuRecentProjects;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem toolstripFileConvert;
+        private ToolStripMenuItem toolstripFileNewProject;
+        private ToolStripMenuItem toolstripFileOpenProject;
     }
 }
 

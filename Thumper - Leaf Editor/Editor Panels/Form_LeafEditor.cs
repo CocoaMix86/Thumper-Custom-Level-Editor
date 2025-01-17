@@ -83,6 +83,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<string> lanenames = new() { "left", "center", "right" };
         private List<SaveState> _undolistleaf = new();
         public DataObject ClipBoardDataPoints = new();
+        private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         #endregion
 
         #region EventHandlers
@@ -208,27 +209,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            //check if previous cell is the same value. If so, hide it
-            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                if (LeafProperties.connectedcells && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
-                    e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
-                }
-                else {
-                    string cellText = e.Value.ToString();
-                    for (int fontSize = 1; fontSize < 25; fontSize++) {
-                        Font font = new("Consolas", fontSize);
-                        Size textSize = TextRenderer.MeasureText(cellText, font);
-                        if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
-                            if (fontSize - 1 != 0)
-                                font = new Font("Consolas", fontSize - 1);
-                            e.CellStyle.Font = font;
-                            e.Paint(e.ClipBounds, e.PaintParts);
-                            break;
-                        }
-                    }
-                }
-            }
-
+            //e.Graphics.Clear(Color.Black);
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
                 if (LeafProperties.showgrid && LeafProperties.connectedcells) {
                     //if previous cell value is different than this cell, put in a divider
@@ -259,19 +240,38 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else if (!LeafProperties.showgrid && !LeafProperties.connectedcells) {
                     e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
-                    e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Single;
                 }
+                e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
             }
 
-            CellPaintIcons(e);
-        }
-
-        private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
-        {
-            e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            if (e.RowIndex != -1 && e.ColumnIndex != -1)
+                e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground);
 
             //paint notifier circles for changed interp and ease
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
+                if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
+
+                }
+                else if (SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
+                    if (SequencerObjects[e.RowIndex - 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                        e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height / 5);
+                    if (SequencerObjects[e.RowIndex - 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                        e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top + e.CellBounds.Height / 5, e.CellBounds.Width, e.CellBounds.Height / 5);
+                    if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                        e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 2), e.CellBounds.Width, e.CellBounds.Height / 5);
+                    if (SequencerObjects[e.RowIndex + 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                        e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 3), e.CellBounds.Width, e.CellBounds.Height / 5);
+                    if (SequencerObjects[e.RowIndex + 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
+                        e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
+                        //e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Left, e.CellBounds.Top, 7, 7);
+                        //e.Graphics.FillEllipse(new SolidBrush(Color.Green), e.CellBounds.Left + 1, e.CellBounds.Top + 1, 5, 5);
+                    }
+                }
+                else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                    e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds);
+                else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(int.Parse(SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value.ToString()))), e.CellBounds);
+
                 if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].interpolation != "Linear") {
                     e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Right - (e.CellBounds.Width / 2) - 6, e.CellBounds.Top - 1, 7, 7);
                     e.Graphics.FillEllipse(new SolidBrush(Color.Red), e.CellBounds.Right - (e.CellBounds.Width / 2) - 5, e.CellBounds.Top - 1, 5, 5);
@@ -280,13 +280,46 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 7, 7);
                     e.Graphics.FillEllipse(new SolidBrush(Color.Blue), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
                 }
-                if (SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
-                    if (SequencerObjects[e.RowIndex - 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null || SequencerObjects[e.RowIndex - 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null || SequencerObjects[e.RowIndex + 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null || SequencerObjects[e.RowIndex + 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Left, e.CellBounds.Top, 7, 7);
-                        e.Graphics.FillEllipse(new SolidBrush(Color.Green), e.CellBounds.Left + 1, e.CellBounds.Top + 1, 5, 5);
+            }
+
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            else {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
+                e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
+            }
+
+            //check if previous cell is the same value. If so, hide it
+            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
+                if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" || (SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) || LeafProperties.connectedcells && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                    //e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
+                }
+                else {
+                    Color _c = SequencerObjects[e.RowIndex].highlight_color;
+                    if (_c.R < 150 && _c.G < 150 && _c.B < 150)
+                        e.CellStyle.ForeColor = Color.White;
+                    else
+                        e.CellStyle.ForeColor = Color.Black;
+                    string cellText = e.Value.ToString();
+                    for (int fontSize = 1; fontSize < 25; fontSize++) {
+                        Font font = new("Consolas", fontSize);
+                        Size textSize = TextRenderer.MeasureText(cellText, font);
+                        if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
+                            if (fontSize - 1 != 0)
+                                font = new Font("Consolas", fontSize - 1);
+                            e.CellStyle.Font = font;
+                            e.Graphics.DrawString(cellText, font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
+                            break;
+                        }
                     }
                 }
             }
+
+            CellPaintIcons(e);
+        }
+
+        private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
+        {
             //get dimensions
             int w = 16;
             int h = 16;
@@ -327,9 +360,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            //trackEditor.RowPostPaint -= trackEditor_RowPostPaint;
-            //trackEditor.InvalidateRow(e.RowIndex);
-            //trackEditor.RowPostPaint += trackEditor_RowPostPaint;
+            //TrackUpdateHighlighting(SequencerObjects[e.RowIndex]);
         }
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -1932,6 +1963,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public static void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc, Sequencer_Object _seqobj)
         {
+            return;
             dgvc.Style = null;
             if (dgvc.Value == null)
                 return;
@@ -1944,7 +1976,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //if the cell value is greater than the criteria of the row, highlight it with that row's color
             //if ((decimal)_seqobj.highlight_value == 0 || Math.Abs(Decimal.Parse(dgvc.Value.ToString())) >= (decimal)_seqobj.highlight_value) {
-            dgvc.Style.BackColor = _seqobj.highlight_color;
+            ///dgvc.Style.BackColor = _seqobj.highlight_color;
             //}
             //change cell font color so text is readable on dark/light backgrounds
             Color _c = dgvc.Style.BackColor;

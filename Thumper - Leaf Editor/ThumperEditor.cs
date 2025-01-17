@@ -324,7 +324,8 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripFileOpenProject_Click(object sender, EventArgs e)
         {
             using OpenFileDialog ofd = new();
-            ofd.Filter = "Thumper Custom Levrl (*.TCL)|*.TCL";
+            ofd.Title = "Open Project";
+            ofd.Filter = "Thumper Custom Level (*.TCL)|*.TCL";
             ofd.FilterIndex = 1;
             ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
@@ -360,7 +361,8 @@ namespace Thumper_Custom_Level_Editor
                 description = (string)ProjectJson["description"] ?? "Please add a description",
                 authornames = (string)ProjectJson["author"] ?? "a person",
                 bpm = (decimal?)ProjectJson["bpm"] ?? 400m,
-                WorkingFolder = TCL.Directory
+                WorkingFolder = TCL.Directory,
+                TCL = TCL
             };
             //load colors, with failover to White
             try {
@@ -396,6 +398,8 @@ namespace Thumper_Custom_Level_Editor
 
             toolstripAddScene.Enabled = true;
             toolstripProject.Enabled = true;
+            toolstripEdit.Enabled = true;
+            toolstripWindow.Enabled = true;
 
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;

@@ -176,7 +176,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 65);
+            this.btnRawImport.Size = new Size(54, 91);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -213,9 +213,9 @@
             // vScrollBarTrackEditor
             // 
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
-            this.vScrollBarTrackEditor.Location = new Point(20, 30);
+            this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 419);
+            this.vScrollBarTrackEditor.Size = new Size(15, 393);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -295,7 +295,7 @@
             this.trackEditor.Dock = DockStyle.Fill;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = Color.Black;
-            this.trackEditor.Location = new Point(35, 30);
+            this.trackEditor.Location = new Point(39, 30);
             this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -315,7 +315,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(643, 419);
+            this.trackEditor.Size = new Size(639, 393);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -392,7 +392,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(20, 419);
+            this.leafToolStrip.Size = new Size(24, 393);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -405,7 +405,7 @@
             this.btnTrackAdd.ImageTransparentColor = Color.Magenta;
             this.btnTrackAdd.Margin = new Padding(0);
             this.btnTrackAdd.Name = "btnTrackAdd";
-            this.btnTrackAdd.Size = new Size(19, 24);
+            this.btnTrackAdd.Size = new Size(23, 24);
             this.btnTrackAdd.ToolTipText = "Change the current sequencer track object\r\ninto the current selected object in the list.\r\nThis affects all lanes of the object.";
             this.btnTrackAdd.Click += this.btnTrackAdd_Click;
             // 
@@ -417,7 +417,7 @@
             this.btnTrackDelete.ImageTransparentColor = Color.Magenta;
             this.btnTrackDelete.Margin = new Padding(0);
             this.btnTrackDelete.Name = "btnTrackDelete";
-            this.btnTrackDelete.Size = new Size(19, 24);
+            this.btnTrackDelete.Size = new Size(23, 24);
             this.btnTrackDelete.ToolTipText = "Delete selected track";
             this.btnTrackDelete.Click += this.btnTrackDelete_Click;
             // 
@@ -429,7 +429,7 @@
             this.btnTrackUp.ImageTransparentColor = Color.Magenta;
             this.btnTrackUp.Margin = new Padding(0);
             this.btnTrackUp.Name = "btnTrackUp";
-            this.btnTrackUp.Size = new Size(19, 24);
+            this.btnTrackUp.Size = new Size(23, 24);
             this.btnTrackUp.ToolTipText = "Move selected tracks up";
             this.btnTrackUp.Click += this.btnTrackUp_Click;
             // 
@@ -441,7 +441,7 @@
             this.btnTrackDown.ImageTransparentColor = Color.Magenta;
             this.btnTrackDown.Margin = new Padding(0);
             this.btnTrackDown.Name = "btnTrackDown";
-            this.btnTrackDown.Size = new Size(19, 24);
+            this.btnTrackDown.Size = new Size(23, 24);
             this.btnTrackDown.ToolTipText = "Move selected tracks down";
             this.btnTrackDown.Click += this.btnTrackDown_Click;
             // 
@@ -453,7 +453,7 @@
             this.btnTrackCopy.ImageTransparentColor = Color.Magenta;
             this.btnTrackCopy.Margin = new Padding(0);
             this.btnTrackCopy.Name = "btnTrackCopy";
-            this.btnTrackCopy.Size = new Size(19, 24);
+            this.btnTrackCopy.Size = new Size(23, 24);
             this.btnTrackCopy.ToolTipText = "Copy selected track";
             this.btnTrackCopy.Click += this.btnTrackCopy_Click;
             // 
@@ -464,7 +464,7 @@
             this.btnTrackPaste.Image = (Image)resources.GetObject("btnTrackPaste.Image");
             this.btnTrackPaste.ImageTransparentColor = Color.Magenta;
             this.btnTrackPaste.Name = "btnTrackPaste";
-            this.btnTrackPaste.Size = new Size(19, 24);
+            this.btnTrackPaste.Size = new Size(23, 24);
             this.btnTrackPaste.ToolTipText = "Paste the copied track";
             this.btnTrackPaste.Click += this.btnTrackPaste_Click;
             // 
@@ -475,7 +475,7 @@
             this.btnTrackClear.Image = (Image)resources.GetObject("btnTrackClear.Image");
             this.btnTrackClear.ImageTransparentColor = Color.Magenta;
             this.btnTrackClear.Name = "btnTrackClear";
-            this.btnTrackClear.Size = new Size(19, 24);
+            this.btnTrackClear.Size = new Size(23, 24);
             this.btnTrackClear.ToolTipText = "Clear all values on selected track";
             this.btnTrackClear.Click += this.btnTrackClear_Click;
             // 
@@ -486,7 +486,7 @@
             this.btnTrackPlayback.Image = (Image)resources.GetObject("btnTrackPlayback.Image");
             this.btnTrackPlayback.ImageTransparentColor = Color.Magenta;
             this.btnTrackPlayback.Name = "btnTrackPlayback";
-            this.btnTrackPlayback.Size = new Size(19, 24);
+            this.btnTrackPlayback.Size = new Size(23, 24);
             this.btnTrackPlayback.ToolTipText = resources.GetString("btnTrackPlayback.ToolTipText");
             // 
             // btnLeafRandom
@@ -495,19 +495,19 @@
             this.btnLeafRandom.Image = (Image)resources.GetObject("btnLeafRandom.Image");
             this.btnLeafRandom.ImageTransparentColor = Color.Magenta;
             this.btnLeafRandom.Name = "btnLeafRandom";
-            this.btnLeafRandom.Size = new Size(19, 24);
+            this.btnLeafRandom.Size = new Size(23, 24);
             this.btnLeafRandom.ToolTipText = "Click to add a random object + values to the leaf";
             this.btnLeafRandom.Click += this.btnLeafRandom_Click;
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new Size(19, 6);
+            this.toolStripSeparator1.Size = new Size(23, 6);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new Size(19, 6);
+            this.toolStripSeparator2.Size = new Size(23, 6);
             // 
             // leaftoolsToolStrip
             // 
@@ -515,14 +515,14 @@
             this.leaftoolsToolStrip.BackColor = Color.Black;
             this.leaftoolsToolStrip.GripMargin = new Padding(0);
             this.leaftoolsToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            this.leaftoolsToolStrip.ImageScalingSize = new Size(20, 20);
+            this.leaftoolsToolStrip.ImageScalingSize = new Size(24, 24);
             this.leaftoolsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLeafColors, this.btnLeafInterpLinear, this.btnLeafSplit, this.btnLeafRandomValues, this.btnLeafZoom, this.btnLeafAutoPlace });
             this.leaftoolsToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.leaftoolsToolStrip.Location = new Point(0, 0);
             this.leaftoolsToolStrip.Name = "leaftoolsToolStrip";
             this.leaftoolsToolStrip.Padding = new Padding(0);
             this.leaftoolsToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leaftoolsToolStrip.Size = new Size(573, 20);
+            this.leaftoolsToolStrip.Size = new Size(573, 30);
             this.leaftoolsToolStrip.Stretch = true;
             this.leaftoolsToolStrip.TabIndex = 143;
             // 
@@ -532,7 +532,7 @@
             this.btnLeafColors.Image = (Image)resources.GetObject("btnLeafColors.Image");
             this.btnLeafColors.ImageTransparentColor = Color.Magenta;
             this.btnLeafColors.Name = "btnLeafColors";
-            this.btnLeafColors.Size = new Size(24, 17);
+            this.btnLeafColors.Size = new Size(28, 27);
             this.btnLeafColors.ToolTipText = "Insert color value into selected cells";
             this.btnLeafColors.Click += this.btnLeafColors_Click;
             // 
@@ -543,7 +543,7 @@
             this.btnLeafInterpLinear.Image = Properties.Resources.icon_graph;
             this.btnLeafInterpLinear.ImageTransparentColor = Color.Magenta;
             this.btnLeafInterpLinear.Name = "btnLeafInterpLinear";
-            this.btnLeafInterpLinear.Size = new Size(36, 17);
+            this.btnLeafInterpLinear.Size = new Size(40, 27);
             this.btnLeafInterpLinear.TextAlign = ContentAlignment.MiddleRight;
             // 
             // contextMenuInterps
@@ -699,7 +699,7 @@
             this.btnLeafSplit.Image = (Image)resources.GetObject("btnLeafSplit.Image");
             this.btnLeafSplit.ImageTransparentColor = Color.Magenta;
             this.btnLeafSplit.Name = "btnLeafSplit";
-            this.btnLeafSplit.Size = new Size(24, 17);
+            this.btnLeafSplit.Size = new Size(28, 27);
             this.btnLeafSplit.ToolTipText = "Split leaf at selected beat.\r\nCreates a new file.";
             this.btnLeafSplit.Click += this.btnLeafSplit_Click;
             // 
@@ -709,7 +709,7 @@
             this.btnLeafRandomValues.Image = (Image)resources.GetObject("btnLeafRandomValues.Image");
             this.btnLeafRandomValues.ImageTransparentColor = Color.Magenta;
             this.btnLeafRandomValues.Name = "btnLeafRandomValues";
-            this.btnLeafRandomValues.Size = new Size(24, 17);
+            this.btnLeafRandomValues.Size = new Size(28, 27);
             this.btnLeafRandomValues.ToolTipText = "Clears the current track and sets random values.";
             this.btnLeafRandomValues.Click += this.btnLeafRandomValues_Click;
             // 
@@ -719,7 +719,7 @@
             this.btnLeafZoom.Image = (Image)resources.GetObject("btnLeafZoom.Image");
             this.btnLeafZoom.ImageTransparentColor = Color.Magenta;
             this.btnLeafZoom.Name = "btnLeafZoom";
-            this.btnLeafZoom.Size = new Size(24, 17);
+            this.btnLeafZoom.Size = new Size(28, 27);
             this.btnLeafZoom.ToolTipText = "Click to show zoom.\r\nCTRL+scroll = horizontal\r\nSHIFT+scroll = vertical";
             this.btnLeafZoom.Click += this.btnLeafZoom_Click;
             // 
@@ -730,7 +730,7 @@
             this.btnLeafAutoPlace.Image = (Image)resources.GetObject("btnLeafAutoPlace.Image");
             this.btnLeafAutoPlace.ImageTransparentColor = Color.Magenta;
             this.btnLeafAutoPlace.Name = "btnLeafAutoPlace";
-            this.btnLeafAutoPlace.Size = new Size(24, 17);
+            this.btnLeafAutoPlace.Size = new Size(28, 27);
             this.btnLeafAutoPlace.ToolTipText = "Enable auto-insert on click\r\n(inserts \"1\" on kTraitBool and kTraitAction objects)";
             // 
             // splitContainer1
@@ -878,7 +878,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(678, 519);
-            this.splitContainerLeafSide.SplitterDistance = 449;
+            this.splitContainerLeafSide.SplitterDistance = 423;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -939,7 +939,7 @@
     '\''
     };
             this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            this.textEditor.AutoScrollMinSize = new Size(195, 14);
+            this.textEditor.AutoScrollMinSize = new Size(170, 14);
             this.textEditor.BackBrush = null;
             this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
             this.textEditor.CharHeight = 14;
@@ -961,7 +961,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(624, 65);
+            this.textEditor.Size = new Size(624, 91);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;

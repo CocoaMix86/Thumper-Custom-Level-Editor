@@ -8,6 +8,9 @@ namespace Thumper_Custom_Level_Editor
 {
     public class ProjectProperties
     {
+        [Browsable(false)]
+        public FileInfo TCL;
+
         public ProjectProperties()
         {
 

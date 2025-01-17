@@ -675,7 +675,8 @@ namespace Thumper_Custom_Level_Editor
             FileInfo LevelDetails = null;
             FileInfo ConfigFile = null;
             using OpenFileDialog ofd = new();
-            ofd.Filter = "Find a LEVEL DETAILS.txt file (LEVEL DETAILS.txt)|LEVEL DETAILS.txt";
+            ofd.Title = "Find a LEVEL DETAILS.txt file";
+            ofd.Filter = "LEVEL DETAILS.txt|LEVEL DETAILS.txt";
             ofd.FilterIndex = 1;
             ofd.InitialDirectory = Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
@@ -723,6 +724,8 @@ namespace Thumper_Custom_Level_Editor
                     file.Delete();
                     continue;
                 }
+                else if (file.Directory.Name.ToLower() is "extras")
+                    continue;
                 string[] splitextension = file.Name.Replace(".txt", "").Split('_', 2);
                 if (sort)
                     Directory.CreateDirectory($@"{file.DirectoryName}\{splitextension[0]}");                
@@ -745,10 +748,10 @@ namespace Thumper_Custom_Level_Editor
                 {"author", _properties.authornames },
                 { "bpm", _properties.bpm },
                 { "level_sections", new JArray() {} },
-                { "rails_color", new JArray() { _properties.rail.R / 255, _properties.rail.G / 255, _properties.rail.B / 255, 1 } },
-                { "rails_glow_color", new JArray() { _properties.railglow.R / 255, _properties.railglow.G / 255, _properties.railglow.B / 255, 1}},
-                { "path_color", new JArray() { _properties.path.R / 255, _properties.path.G / 255, _properties.path.B / 255, 1 }},
-                { "joy_color", new JArray() { 1, 1, 1, 1 } }
+                { "rails_color", new JArray() { (float)_properties.rail.R / 255, (float)_properties.rail.G / 255, (float)_properties.rail.B / 255, 1 } },
+                { "rails_glow_color", new JArray() { (float)_properties.railglow.R / 255, (float)_properties.railglow.G / 255, (float)_properties.railglow.B / 255, 1}},
+                { "path_color", new JArray() { (float)_properties.path.R / 255, (float)_properties.path.G / 255, (float)_properties.path.B / 255, 1 }},
+                { "joy_color", new JArray() { 1f, 1f, 1f, 1f } }
             };
             return _save;
         }
