@@ -209,7 +209,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            //e.Graphics.Clear(Color.Black);
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
                 if (LeafProperties.showgrid && LeafProperties.connectedcells) {
                     //if previous cell value is different than this cell, put in a divider
@@ -241,7 +240,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (!LeafProperties.showgrid && !LeafProperties.connectedcells) {
                     e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
                 }
-                e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
+
+                if (SequencerObjects[e.RowIndex].friendly_lane is "lane left 2") {
+                    e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.InsetDouble;
+                    e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
+                }
+                else if (SequencerObjects[e.RowIndex].friendly_lane is "lane right 2") {
+                    e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.InsetDouble;
+                }
+                else
+                    e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
             }
 
             if (e.RowIndex != -1 && e.ColumnIndex != -1)
@@ -263,8 +271,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 3), e.CellBounds.Width, e.CellBounds.Height / 5);
                     if (SequencerObjects[e.RowIndex + 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
                         e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
-                        //e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Left, e.CellBounds.Top, 7, 7);
-                        //e.Graphics.FillEllipse(new SolidBrush(Color.Green), e.CellBounds.Left + 1, e.CellBounds.Top + 1, 5, 5);
                     }
                 }
                 else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
@@ -436,7 +442,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _val = TCLE.TruncateDecimal(_valtoset, 3);
                 //iterate over each cell in the selection
                 foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
-                    if (_cell.ReadOnly)
+                    if (_cell.ReadOnly || !_cell.OwningRow.Visible)
                         continue;
                     //if cell does not have the value, set it
                     if (_cell.Value != _val) {
@@ -454,7 +460,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else
                         SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _val;
 
-                    TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);
+                    ///TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);
                 }
                 //sets flag that leaf has unsaved changes
                 if (changes) {
@@ -570,7 +576,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
-                    TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], SequencerObjects[e.RowIndex]);
+                    trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
+                    trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
                 }
@@ -597,7 +604,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
-                    TrackUpdateHighlightingSingleCell(dgv[e.ColumnIndex, e.RowIndex], SequencerObjects[e.RowIndex]);
+                    trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
+                    trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
                     SaveCheckAndWrite(false);
                     //SaveCheckAndWrite(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
                 }
@@ -665,10 +673,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Value = dgvc.Value;
                             //select the newly moved cell
                             trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Selected = true;
-                            TrackUpdateHighlightingSingleCell(trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)], SequencerObjects[dgvc.RowIndex + (!leftright ? indexdirection : 0)]);
+                            ///TrackUpdateHighlightingSingleCell(trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)], SequencerObjects[dgvc.RowIndex + (!leftright ? indexdirection : 0)]);
                             //clear the current cell since it moved
                             dgvc.Value = null;
-                            TrackUpdateHighlightingSingleCell(dgvc, SequencerObjects[dgvc.RowIndex]);
+                            ///TrackUpdateHighlightingSingleCell(dgvc, SequencerObjects[dgvc.RowIndex]);
                         }
                         else {
                             foreach (DataGridViewCell dgvcell in dgvcc)
@@ -1550,20 +1558,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 footer = obj.footer,
                 enabled = true,
                 param_path_lane = obj.param_path.EndsWith(".ent") ? "ent" : "none",
-                friendly_lane = obj.param_path.EndsWith(".ent") ? "lane center" : "none"
+                friendly_lane = obj.param_path.EndsWith(".ent") ? "lane center" : "none",
+                editor_row = new DataGridViewRow()
             };
             SequencerObjects.Add(seq);
-            //Add new row and assign random data
-            trackEditor.RowCount += 1;
-            seq.editor_row = trackEditor.Rows[^1];
+            trackEditor.Rows.Add(seq.editor_row);
             ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
+            TrackUpdateHighlighting(seq);
+            FindMissingLaneObjects(seq);
             //measure header and see if it's the biggest
             int tempsize = TextRenderer.MeasureText(seq.editor_row.HeaderCell.Value.ToString(), seq.editor_row.HeaderCell.Style.Font).Width;
             if (tempsize > trackEditor.RowHeadersWidth)
                 trackEditor.RowHeadersWidth = tempsize;
             //fill cells with random values
             do {
-                RandomizeRowValues(seq);
+                if (seq.friendly_lane == "lane center") {
+                    RandomizeRowValues(SequencerObjects[^5]);
+                    RandomizeRowValues(SequencerObjects[^4]);
+                    RandomizeRowValues(seq);
+                    RandomizeRowValues(SequencerObjects[^2]);
+                    RandomizeRowValues(SequencerObjects[^1]);
+                }
+                else
+                    RandomizeRowValues(seq);
             } while (!seq.data_points.Any(x => x.value is not null));
 
             TCLE.PlaySound("UIaddrandom");
@@ -1949,21 +1966,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Color background = TCLE.Blend(seq.highlight_color, Color.Black, 0.4);
             seq.editor_row.HeaderCell.Style.BackColor = background;
             //iterate over all cells in the row
+            /*
             if (!titleonly) {
                 foreach (DataGridViewCell dgvc in seq.editor_row.Cells) {
                     TrackUpdateHighlightingSingleCell(dgvc, seq);
                 }
-            }
+            }*/
             if (seq.editor_row.Cells.Count >= 3) {
                 seq.editor_row.Cells[0].Style.BackColor = background;
                 seq.editor_row.Cells[1].Style.BackColor = background;
                 seq.editor_row.Cells[2].Style.BackColor = background;
             }
         }
-
+        /*
         public static void TrackUpdateHighlightingSingleCell(DataGridViewCell dgvc, Sequencer_Object _seqobj)
         {
-            return;
             dgvc.Style = null;
             if (dgvc.Value == null)
                 return;
@@ -1985,7 +2002,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else
                 dgvc.Style.ForeColor = Color.Black;
         }
-
+        */
         private static void RowReadOnly(bool isreadonly, Sequencer_Object seq)
         {
             if (isreadonly) {
@@ -2288,7 +2305,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         continue;
                     //trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset].Value = decimal.Parse(copiedcells[rowindex][cellindex]);
                     SequencerObjects[pastingrow + rowindex + offset].data_points[pastingcol + cellindex - FrozenColumnOffset].value = decimal.Parse(copiedcells[rowindex][cellindex]);
-                    TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset], SequencerObjects[pastingrow + rowindex + offset]);
+                    ///TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset], SequencerObjects[pastingrow + rowindex + offset]);
                 }
             }
         exit:
