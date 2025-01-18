@@ -48,6 +48,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
             this.splitContainer1 = new SplitContainer();
+            this.labelCollapsePanel = new Label();
             this.label1 = new Label();
             this.timerSample = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)this.sampleList).BeginInit();
@@ -62,7 +63,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             this.volumeSlider1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             this.volumeSlider1.Cursor = Cursors.Hand;
-            this.volumeSlider1.Location = new Point(141, 2);
+            this.volumeSlider1.Location = new Point(132, 2);
             this.volumeSlider1.Name = "volumeSlider1";
             this.volumeSlider1.Size = new Size(135, 22);
             this.volumeSlider1.TabIndex = 152;
@@ -120,7 +121,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.sampleList.Size = new Size(265, 493);
+            this.sampleList.Size = new Size(263, 493);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellClick += this.sampleList_CellClick;
@@ -235,7 +236,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample.RightToLeft = RightToLeft.No;
             this.propertyGridSample.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridSample.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSample.Size = new Size(639, 519);
+            this.propertyGridSample.Size = new Size(641, 519);
             this.propertyGridSample.TabIndex = 0;
             this.propertyGridSample.ToolbarVisible = false;
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -250,7 +251,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(943, -3);
+            this.lblMasterlvllistHelp.Location = new Point(941, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -268,9 +269,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.labelCollapsePanel);
+            this.splitContainer1.Panel1.Controls.Add(this.volumeSlider1);
             this.splitContainer1.Panel1.Controls.Add(this.sampleList);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.volumeSlider1);
             this.splitContainer1.Panel1.Controls.Add(this.sampleToolStrip);
             this.splitContainer1.Panel1.Controls.Add(this.label54);
             this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
@@ -279,9 +281,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridSample);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 289;
+            this.splitContainer1.SplitterDistance = 287;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
+            // 
+            // labelCollapsePanel
+            // 
+            this.labelCollapsePanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.labelCollapsePanel.BackColor = Color.Gray;
+            this.labelCollapsePanel.BorderStyle = BorderStyle.FixedSingle;
+            this.labelCollapsePanel.Cursor = Cursors.Hand;
+            this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
+            this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.labelCollapsePanel.ForeColor = Color.White;
+            this.labelCollapsePanel.Location = new Point(271, 0);
+            this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
+            this.labelCollapsePanel.MaximumSize = new Size(16, 16);
+            this.labelCollapsePanel.MinimumSize = new Size(16, 16);
+            this.labelCollapsePanel.Name = "labelCollapsePanel";
+            this.labelCollapsePanel.Size = new Size(16, 16);
+            this.labelCollapsePanel.TabIndex = 154;
+            this.labelCollapsePanel.Text = ">";
+            this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
             // 
             // label1
             // 
@@ -345,5 +366,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private DataGridViewButtonColumn Columnplaybuttons;
         private DataGridViewTextBoxColumn SampleName;
         private Label label1;
+        private Label labelCollapsePanel;
     }
 }

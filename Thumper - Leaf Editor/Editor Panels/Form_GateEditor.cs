@@ -649,5 +649,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             new ImageMessageBox("bosssectionhelp").Show();
         }
+
+        private void labelCollapsePanel_Click(object sender, EventArgs e)
+        {
+            splitContainer1.Panel2Collapsed = !splitContainer1.Panel2Collapsed;
+            labelCollapsePanel.Text = splitContainer1.Panel2Collapsed ? "<" : ">";
+        }
     }
 }

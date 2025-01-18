@@ -57,6 +57,7 @@
             this.Beats = new DataGridViewTextBoxColumn();
             this.splitContainer1 = new SplitContainer();
             this.splitContainer2 = new SplitContainer();
+            this.labelCollapsePanel = new Label();
             this.propertyGridLvl = new PropertyGrid();
             this.btnLvlSequencer = new Button();
             this.splitContainer3 = new SplitContainer();
@@ -367,6 +368,7 @@
             this.splitContainer2.Panel1.Controls.Add(this.lvlLeafList);
             this.splitContainer2.Panel1.Controls.Add(this.lvlToolStrip);
             this.splitContainer2.Panel1.Controls.Add(this.label29);
+            this.splitContainer2.Panel1.Controls.Add(this.labelCollapsePanel);
             // 
             // splitContainer2.Panel2
             // 
@@ -377,6 +379,25 @@
             this.splitContainer2.SplitterDistance = 350;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 161;
+            // 
+            // labelCollapsePanel
+            // 
+            this.labelCollapsePanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.labelCollapsePanel.BackColor = Color.Gray;
+            this.labelCollapsePanel.BorderStyle = BorderStyle.FixedSingle;
+            this.labelCollapsePanel.Cursor = Cursors.Hand;
+            this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
+            this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.labelCollapsePanel.ForeColor = Color.White;
+            this.labelCollapsePanel.Location = new Point(334, -2);
+            this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
+            this.labelCollapsePanel.MaximumSize = new Size(16, 16);
+            this.labelCollapsePanel.MinimumSize = new Size(16, 16);
+            this.labelCollapsePanel.Name = "labelCollapsePanel";
+            this.labelCollapsePanel.Size = new Size(16, 16);
+            this.labelCollapsePanel.TabIndex = 145;
+            this.labelCollapsePanel.Text = ">";
+            this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
             // 
             // propertyGridLvl
             // 
@@ -891,5 +912,6 @@
         private DataGridViewButtonColumn LvlLoopPlay;
         private DataGridViewComboBoxColumn LoopSample;
         private DataGridViewTextBoxColumn BeatsPerLoop;
+        private Label labelCollapsePanel;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -611,9 +612,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
 
-        private void lblConfigColorHelp_Click(object sender, EventArgs e)
+        private void labelCollapsePanel_Click(object sender, EventArgs e)
         {
-            new ImageMessageBox("railcolorhelp").Show();
+            splitContainer1.Panel2Collapsed = !splitContainer1.Panel2Collapsed;
+            labelCollapsePanel.Text = splitContainer1.Panel2Collapsed ? "<" : ">";
         }
     }
 }

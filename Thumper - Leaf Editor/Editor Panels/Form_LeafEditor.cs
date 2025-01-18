@@ -1280,7 +1280,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TrackRawImport(SequencerObjects[CurrentRow], JObject.Parse($"{{{textEditor.Text}}}"));
                 TrackUpdateHighlighting(SequencerObjects[CurrentRow]);
                 TCLE.PlaySound("UIkpaste");
-            } catch (JsonReaderException ex) {
+            }
+            catch (JsonReaderException ex) {
                 MessageBox.Show($"Invalid format or characters in imported data. Please fix.\n\n{ex.Message}", "Thumper Custom Editor Level");
             }
         }
@@ -1631,6 +1632,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLeafPanelTemplate_Click(object sender, EventArgs e)
         {
             ///_mainform.toolstripLeafTemplate.PerformClick();
+        }
+
+        private void labelCollapsePanel_Click(object sender, EventArgs e)
+        {
+            splitContainer1.Panel1Collapsed = !splitContainer1.Panel1Collapsed;
+            labelCollapsePanel.Text = splitContainer1.Panel1Collapsed ? ">" : "<";
         }
         #endregion
 

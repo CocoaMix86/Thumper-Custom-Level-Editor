@@ -1001,5 +1001,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             outputDevice.Volume = volumeSlider1.Volume;
         }
+
+        private void labelCollapsePanel_Click(object sender, EventArgs e)
+        {
+            splitContainer2.Panel2Collapsed = !splitContainer2.Panel2Collapsed;
+            labelCollapsePanel.Text = splitContainer2.Panel2Collapsed ? "<" : ">";
+        }
     }
 }
