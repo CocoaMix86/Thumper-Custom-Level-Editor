@@ -80,6 +80,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dock in TCLE.Instance.dockMain.Documents) {
                 if (dock.GetType() == typeof(Form_MasterEditor)) (dock as Form_MasterEditor).RecalculateRuntime();
                 if (dock.GetType() == typeof(Form_LvlEditor)) (dock as Form_LvlEditor).RecalculateRuntime();
+                if (dock.GetType() == typeof(Form_GateEditor)) (dock as Form_GateEditor).RecalculateRuntime();
             }
         }
         private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
@@ -103,8 +104,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //add each file inside the folder to the tree
             foreach (FileInfo file in directoryInfo.GetFiles()) {
-                dynamic _load = TCLE.LoadFileLock(file.FullName);
-                if (_load == null || file.Extension is ".TCL") continue;
+                if (file.Extension is ".TCL") 
+                    continue;
                 TreeNode _tn = new() {
                     Text = file.Name,
                     Name = file.Name,
@@ -219,12 +220,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             foreach (TreeNode tn in selectedNodes) {
-                string source = projectfiles[tn.FullPath].FullName;
-                if (tn.ImageKey == "folder" && Directory.Exists(source)) {
-                    Directory.Delete(source, true);
+                if (tn.ImageKey == "folder") {
+                    string source = projectfolders[tn.FullPath].FullName;
+                    if (Directory.Exists(source))
+                        Directory.Delete(source, true);
                 }
-                else if (File.Exists(source))
-                    File.Delete(source);
+                else {
+                    string source = projectfiles[tn.FullPath].FullName;
+                    if (File.Exists(source))
+                        File.Delete(source);
+                }
                 tn.Remove();
             }
         }
@@ -649,6 +654,43 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     tn.Expand();
                 RecurseNodesFindExpanded(tn.Nodes);
             }
+        }
+
+        private void toolstripProjectAddLeaf_Click(object sender, EventArgs e)
+        {
+            TCLE.OpenFile(new Form_LeafEditor().SaveAs(true));
+            CreateTreeView();
+        }
+
+        private void toolstripProjectAddLvl_Click(object sender, EventArgs e)
+        {
+            TCLE.OpenFile(new Form_LvlEditor().SaveAs(true));
+            CreateTreeView();
+        }
+
+        private void toolstripProjectAddGate_Click(object sender, EventArgs e)
+        {
+            TCLE.OpenFile(new Form_GateEditor().SaveAs(true));
+            CreateTreeView();
+        }
+
+        private void toolstripProjectAddMaster_Click(object sender, EventArgs e)
+        {
+            TCLE.OpenFile(new Form_MasterEditor().SaveAs(true));
+            CreateTreeView();
+        }
+
+        private void toolstripProjectAddSample_Click(object sender, EventArgs e)
+        {
+            TCLE.OpenFile(new Form_SampleEditor().SaveAs(true));
+            CreateTreeView();
+        }
+
+        private void folderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int newfolders = projectfolders.Where(x => x.Value.Name.Contains("New Folder")).Count();
+            TCLE.WorkingFolder.CreateSubdirectory($"New Folder{(newfolders > 1 ? $" {newfolders}" : "")}");
+            CreateTreeView();
         }
     }
 }

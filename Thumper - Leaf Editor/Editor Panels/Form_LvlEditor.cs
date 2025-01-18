@@ -304,10 +304,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Buttons
-        ///         ///
-        /// BUTTONS ///
-        ///         ///
-
         private void btnLvlLeafDelete_Click(object sender, EventArgs e)
         {
             List<LvlLeafData> todelete = new();
@@ -535,11 +531,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
             LoadLvl(lvlProperties.revertPoint, LoadedLvl);
             TCLE.PlaySound("UIrevertchanges");
-        }
-
-        private void btnlvlPanelNew_Click(object sender, EventArgs e)
-        {
-            ///_mainform.toolstripLvlNew.PerformClick();
         }
         #endregion
 

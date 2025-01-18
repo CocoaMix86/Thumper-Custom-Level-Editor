@@ -346,12 +346,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadGate(gatejson, LoadedGate);
             TCLE.PlaySound("UIrevertchanges");
         }
-
-        //buttons that click other buttons
-        private void btnGatePanelNew_Click(object sender, EventArgs e)
-        {
-            ///_mainform.toolstripGateNew.PerformClick();
-        }
         #endregion
 
         #region Methods

@@ -356,13 +356,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadMaster(masterproperties.revertPoint, LoadedMaster);
             TCLE.PlaySound("UIrevertchanges");
         }
-
-        //buttons that click other buttons
-        private void btnMasterPanelNew_Click(object sender, EventArgs e)
-        {
-            ///_mainform.toolstripMasterNew.PerformClick();
-        }
-
         #endregion
 
         #region Methods
