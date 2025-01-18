@@ -11,16 +11,7 @@ namespace Thumper_Custom_Level_Editor
         public CustomizeWorkspace()
         {
             InitializeComponent();
-            this.BackColor = Properties.Settings.Default.custom_bgcolor;
             //set button back colors to the set settings
-            btnBGColor.BackColor = Properties.Settings.Default.custom_bgcolor;
-            btnMenuColor.BackColor = Properties.Settings.Default.custom_menucolor;
-            btnMasterColor.BackColor = Properties.Settings.Default.custom_mastercolor;
-            btnGateColor.BackColor = Properties.Settings.Default.custom_gatecolor;
-            btnLvlColor.BackColor = Properties.Settings.Default.custom_lvlcolor;
-            btnLeafColor.BackColor = Properties.Settings.Default.custom_leafcolor;
-            btnSampleColor.BackColor = Properties.Settings.Default.custom_samplecolor;
-            btnActiveColor.BackColor = Properties.Settings.Default.custom_activecolor;
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //
             toolstripCustomize.Renderer = new ToolStripOverride();
@@ -60,14 +51,6 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", objectcolors.Select(x => $"{x.Key};{x.Value}"));
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //set and save properties
-            Properties.Settings.Default.custom_bgcolor = btnBGColor.BackColor;
-            Properties.Settings.Default.custom_menucolor = btnMenuColor.BackColor;
-            Properties.Settings.Default.custom_mastercolor = btnMasterColor.BackColor;
-            Properties.Settings.Default.custom_gatecolor = btnGateColor.BackColor;
-            Properties.Settings.Default.custom_lvlcolor = btnLvlColor.BackColor;
-            Properties.Settings.Default.custom_leafcolor = btnLeafColor.BackColor;
-            Properties.Settings.Default.custom_samplecolor = btnSampleColor.BackColor;
-            Properties.Settings.Default.custom_activecolor = btnActiveColor.BackColor;
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
 
             File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");

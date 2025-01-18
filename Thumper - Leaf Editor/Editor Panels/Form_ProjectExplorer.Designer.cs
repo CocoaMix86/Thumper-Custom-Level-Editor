@@ -60,6 +60,7 @@
             this.toolstripFileRename = new ToolStripMenuItem();
             this.toolStripSeparator4 = new ToolStripSeparator();
             this.toolstripFileCopyPath = new ToolStripMenuItem();
+            this.openContainingFolderToolStripMenuItem = new ToolStripMenuItem();
             this.contextMenuFolderClick = new ContextMenuStrip(this.components);
             this.toolstripFolderNew = new ToolStripMenuItem();
             this.contextMenuAddFile = new ContextMenuStrip(this.components);
@@ -92,7 +93,6 @@
             this.toolStripSeparator9 = new ToolStripSeparator();
             this.toolStripMenuItem12 = new ToolStripMenuItem();
             this.toolStripMenuItem13 = new ToolStripMenuItem();
-            this.openContainingFolderToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripExplorer.SuspendLayout();
             this.contextMenuFilters.SuspendLayout();
             this.contextMenuFileClick.SuspendLayout();
@@ -114,7 +114,7 @@
             this.treeView1.HideSelection = false;
             this.treeView1.ImageKey = "other";
             this.treeView1.ImageList = this.imageList1;
-            this.treeView1.ItemHeight = 20;
+            this.treeView1.ItemHeight = 18;
             this.treeView1.LabelEdit = true;
             this.treeView1.LineColor = Color.White;
             this.treeView1.Location = new Point(0, 48);
@@ -324,7 +324,7 @@
             this.contextMenuFileClick.Items.AddRange(new ToolStripItem[] { this.toolstripFileOpen, this.toolstripFileRaw, this.toolstripFileExternal, this.toolStripSeparator3, this.toolstripFileSearch, this.toolStripSeparator10, this.toolstripFileCut, this.toolstripFileCopy, this.toolstripFileDelete, this.toolstripFileRename, this.toolStripSeparator4, this.toolstripFileCopyPath, this.openContainingFolderToolStripMenuItem });
             this.contextMenuFileClick.Name = "contextMenuFileClick";
             this.contextMenuFileClick.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuFileClick.Size = new Size(202, 264);
+            this.contextMenuFileClick.Size = new Size(202, 242);
             this.contextMenuFileClick.Opening += this.contextMenuFileClick_Opening;
             // 
             // toolstripFileOpen
@@ -436,6 +436,15 @@
             this.toolstripFileCopyPath.Size = new Size(201, 22);
             this.toolstripFileCopyPath.Text = "Copy File Path";
             this.toolstripFileCopyPath.Click += this.copyFilePathToolStripMenuItem1_Click;
+            // 
+            // openContainingFolderToolStripMenuItem
+            // 
+            this.openContainingFolderToolStripMenuItem.ForeColor = Color.White;
+            this.openContainingFolderToolStripMenuItem.Image = Properties.Resources.icon_folder;
+            this.openContainingFolderToolStripMenuItem.Name = "openContainingFolderToolStripMenuItem";
+            this.openContainingFolderToolStripMenuItem.Size = new Size(201, 22);
+            this.openContainingFolderToolStripMenuItem.Text = "Open Containing Folder";
+            this.openContainingFolderToolStripMenuItem.Click += this.openContainingFolderToolStripMenuItem_Click;
             // 
             // contextMenuFolderClick
             // 
@@ -729,15 +738,6 @@
             this.toolStripMenuItem13.Size = new Size(162, 22);
             this.toolStripMenuItem13.Text = "Open In Explorer";
             this.toolStripMenuItem13.Click += this.toolstripFolderExplorer_Click;
-            // 
-            // openContainingFolderToolStripMenuItem
-            // 
-            this.openContainingFolderToolStripMenuItem.ForeColor = Color.White;
-            this.openContainingFolderToolStripMenuItem.Image = Properties.Resources.icon_folder;
-            this.openContainingFolderToolStripMenuItem.Name = "openContainingFolderToolStripMenuItem";
-            this.openContainingFolderToolStripMenuItem.Size = new Size(201, 22);
-            this.openContainingFolderToolStripMenuItem.Text = "Open Containing Folder";
-            this.openContainingFolderToolStripMenuItem.Click += this.openContainingFolderToolStripMenuItem_Click;
             // 
             // Form_ProjectExplorer
             // 
