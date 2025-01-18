@@ -271,5 +271,77 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["colordialogcustomcolors"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionShowCategory {
+            get {
+                return ((bool)(this["LeafOptionShowCategory"]));
+            }
+            set {
+                this["LeafOptionShowCategory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionShowGrid {
+            get {
+                return ((bool)(this["LeafOptionShowGrid"]));
+            }
+            set {
+                this["LeafOptionShowGrid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionConnectBars {
+            get {
+                return ((bool)(this["LeafOptionConnectBars"]));
+            }
+            set {
+                this["LeafOptionConnectBars"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LeafOptionShowLane {
+            get {
+                return ((bool)(this["LeafOptionShowLane"]));
+            }
+            set {
+                this["LeafOptionShowLane"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionEaseDots {
+            get {
+                return ((bool)(this["LeafOptionEaseDots"]));
+            }
+            set {
+                this["LeafOptionEaseDots"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionThinBars {
+            get {
+                return ((bool)(this["LeafOptionThinBars"]));
+            }
+            set {
+                this["LeafOptionThinBars"] = value;
+            }
+        }
     }
 }

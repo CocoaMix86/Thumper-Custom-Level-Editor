@@ -58,10 +58,9 @@
                         RemoveRecentLevel(e.RowIndex);
                     return;
                 }
-                txtFilePath.Text = level.FullName;
-                toolstripOpenPanels_Click(null, null);
                 panelRecentFiles.Visible = false;
                 PlaySound("UIfolderclose");
+                OpenProject(level);
             }
             //if remove column button clicked, run this
             if (e.ColumnIndex == 3) {

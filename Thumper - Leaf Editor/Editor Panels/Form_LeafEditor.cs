@@ -210,7 +210,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
-                if (LeafProperties.showgrid && LeafProperties.connectedcells) {
+                if (Properties.Settings.Default.LeafOptionShowGrid && Properties.Settings.Default.LeafOptionConnectBars) {
                     //if previous cell value is different than this cell, put in a divider
                     //otherwise remove left border to "merge" cells
                     if (e.Value != null && e.Value.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString())
@@ -223,11 +223,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else if (e.Value != null)
                         e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
                 }
-                else if (LeafProperties.showgrid && !LeafProperties.connectedcells) {
+                else if (Properties.Settings.Default.LeafOptionShowGrid && !Properties.Settings.Default.LeafOptionConnectBars) {
                     e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
                     e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.Single;
                 }
-                else if (!LeafProperties.showgrid && LeafProperties.connectedcells) {
+                else if (!Properties.Settings.Default.LeafOptionShowGrid && Properties.Settings.Default.LeafOptionConnectBars) {
                     if (e.Value != null && e.Value.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString())
                         e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Outset;
                     else
@@ -237,7 +237,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else
                         e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
                 }
-                else if (!LeafProperties.showgrid && !LeafProperties.connectedcells) {
+                else if (!Properties.Settings.Default.LeafOptionShowGrid && !Properties.Settings.Default.LeafOptionConnectBars) {
                     e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
                 }
 
@@ -260,7 +260,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
 
                 }
-                else if (SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
+                else if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
                     if (SequencerObjects[e.RowIndex - 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                         e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height / 5);
                     if (SequencerObjects[e.RowIndex - 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
@@ -278,13 +278,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                     e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(int.Parse(SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value.ToString()))), e.CellBounds);
 
-                if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].interpolation != "Linear") {
-                    e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Right - (e.CellBounds.Width / 2) - 6, e.CellBounds.Top - 1, 7, 7);
-                    e.Graphics.FillEllipse(new SolidBrush(Color.Red), e.CellBounds.Right - (e.CellBounds.Width / 2) - 5, e.CellBounds.Top - 1, 5, 5);
-                }
-                if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].ease != "Ease In Out") {
-                    e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 7, 7);
-                    e.Graphics.FillEllipse(new SolidBrush(Color.Blue), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
+                if (Properties.Settings.Default.LeafOptionEaseDots) {
+                    if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].interpolation != "Linear") {
+                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Right - (e.CellBounds.Width / 2) - 6, e.CellBounds.Top - 1, 7, 7);
+                        e.Graphics.FillEllipse(new SolidBrush(Color.Red), e.CellBounds.Right - (e.CellBounds.Width / 2) - 5, e.CellBounds.Top - 1, 5, 5);
+                    }
+                    if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].ease != "Ease In Out") {
+                        e.Graphics.FillEllipse(new SolidBrush(Color.Black), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 7, 7);
+                        e.Graphics.FillEllipse(new SolidBrush(Color.Blue), e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
+                    }
                 }
             }
 
@@ -297,7 +299,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" || (SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) || LeafProperties.connectedcells && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" || (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) || Properties.Settings.Default.LeafOptionConnectBars && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
                     //e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
                 }
                 else {
@@ -355,9 +357,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Lane Expand
             else if (e.ColumnIndex == 2) {
                 if (e.RowIndex == -1)
-                    e.Graphics.DrawImage(LeafProperties.showlanes ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
                 else if (SequencerObjects[e.RowIndex].friendly_lane == "lane center") {
-                    e.Graphics.DrawImage(LeafProperties.showlanes ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
                     trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 }
             }
@@ -511,7 +513,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //test if column header was clicked for global expand
             if (e.RowIndex == -1 && e.ColumnIndex == 2) {
                 //if ShowLanes, don't alter lane visibility
-                if (LeafProperties.showlanes)
+                if (Properties.Settings.Default.LeafOptionShowLane)
                     return;
                 GlobalExpand = !GlobalExpand;
                 foreach (Sequencer_Object seq in SequencerObjects) {
@@ -536,7 +538,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 if (e.ColumnIndex is 2 && seq.friendly_lane == "lane center") {
                     //if ShowLanes, don't alter lane visibility
-                    if (LeafProperties.showlanes)
+                    if (Properties.Settings.Default.LeafOptionShowLane)
                         return;
                     FindMissingLaneObjects(seq);
                     seq.expandlanes = !seq.expandlanes;
@@ -843,10 +845,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 friendly_lane = objmatch.param_path.EndsWith(".ent") ? "lane center" : "none",
                 editor_row = new DataGridViewRow()
             };
-            seq.expandlanes = seq.friendly_lane == "none" ? true : (LeafProperties.showlanes ? true : false);
+            seq.expandlanes = seq.friendly_lane == "none" ? true : (Properties.Settings.Default.LeafOptionShowLane ? true : false);
             SequencerObjects.Add(seq);
             trackEditor.Rows.Add(seq.editor_row);
-            ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
+            ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
             TrackUpdateHighlighting(seq);
             FindMissingLaneObjects(seq);
             TCLE.PlaySound("UIobjectadd");
@@ -955,9 +957,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (Lanes[x].friendly_lane == "none") {
                     Lanes[x].param_path_lane = "ent";
                     Lanes[x].friendly_lane = "lane center";
-                    Lanes[x].expandlanes = LeafProperties.showlanes;
+                    Lanes[x].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 }
-                ChangeTrackName(Lanes[x], LeafProperties.showcategory ? $"[{Lanes[x].category}] " : "");
+                ChangeTrackName(Lanes[x], Properties.Settings.Default.LeafOptionShowCategory ? $"[{Lanes[x].category}] " : "");
                 TrackUpdateHighlighting(Lanes[x]);
             }
             FindMissingLaneObjects(SequencerObjects[CurrentRow]);
@@ -1231,7 +1233,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackEditor.Rows.Insert(_index, dgvr);
                     try {
                         //set the headercell names
-                        ChangeTrackName(clone, leafProperties.showcategory ? $"[{clone.category}] " : "");
+                        ChangeTrackName(clone, Properties.Settings.Default.LeafOptionShowCategory ? $"[{clone.category}] " : "");
                         //pass _griddata per row to be imported to the DGV
                         TrackRawImport(clone, _newtrack.data_points);
                     }
@@ -1464,10 +1466,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //create a new LeafProperties with a copy of the split leaf's properties, so that both splits are identical
             LeafProperties LeafSplitAfter = new(new Form_LeafEditor(), SplitFile) {
                 beats = LeafProperties.beats - splitindex,
-                timesignature = LeafProperties.timesignature,
-                showcategory = LeafProperties.showcategory,
-                showgrid = LeafProperties.showgrid,
-                connectedcells = LeafProperties.connectedcells
+                timesignature = LeafProperties.timesignature
             };
             //copy objects to the new split
             foreach (Sequencer_Object seq in LeafProperties.seq_objs) {
@@ -1559,11 +1558,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 enabled = true,
                 param_path_lane = obj.param_path.EndsWith(".ent") ? "ent" : "none",
                 friendly_lane = obj.param_path.EndsWith(".ent") ? "lane center" : "none",
-                editor_row = new DataGridViewRow()
+                editor_row = new DataGridViewRow(),
+                expandlanes = Properties.Settings.Default.LeafOptionShowLane
             };
             SequencerObjects.Add(seq);
             trackEditor.Rows.Add(seq.editor_row);
-            ChangeTrackName(seq, leafProperties.showcategory ? $"[{seq.category}] " : "");
+            ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
             TrackUpdateHighlighting(seq);
             FindMissingLaneObjects(seq);
             //measure header and see if it's the biggest
@@ -1593,12 +1593,31 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (trackEditor.CurrentRow?.Index is -1 or null)
                 return;
 
-            if (MessageBox.Show("Assign random values to the current selected track?", "Confirm randomization", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                TCLE.PlaySound("UIaddrandom");
-                do {
-                    RandomizeRowValues(SequencerObjects[CurrentRow]);
-                } while (!trackEditor.CurrentRow.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
+
+            IEnumerable<Sequencer_Object> SelectedSeq = trackEditor.SelectedCells.Cast<DataGridViewCell>()
+                .Select(cell => SequencerObjects[cell.RowIndex])
+                .Distinct()
+                .Where(x => x.friendly_lane is "none" or "lane center");
+
+            if (MessageBox.Show("Assign random values to the current selected Objects?", "TELdCiethovrueulsmtpoemr", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                randomizing = true;
+                foreach (Sequencer_Object seq in SelectedSeq) {
+                    do {
+                        if (seq.friendly_lane == "lane center") {
+                            RandomizeRowValues(SequencerObjects[seq.editor_row.Index - 2]);
+                            RandomizeRowValues(SequencerObjects[seq.editor_row.Index - 1]);
+                            RandomizeRowValues(seq);
+                            RandomizeRowValues(SequencerObjects[seq.editor_row.Index + 1]);
+                            RandomizeRowValues(SequencerObjects[seq.editor_row.Index + 2]);
+                        }
+                        else
+                            RandomizeRowValues(seq);
+                    } while (!seq.editor_row.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
+                }
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
+
+                TCLE.PlaySound("UIaddrandom");
+                randomizing = false;
                 SaveCheckAndWrite(false);
                 //SaveCheckAndWrite(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
             }
@@ -1654,10 +1673,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             leafProperties = new(this, filepath) {
                 beats = (int?)_load["beat_cnt"] ?? 1,
-                timesignature = (string)_load["time_sig"] ?? "4/4",
-                showcategory = true,
-                showgrid = true,
-                connectedcells = true
+                timesignature = (string)_load["time_sig"] ?? "4/4"
             };
 
             //clear the DGV and prep for new data
@@ -1804,10 +1820,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (LeafProperties == null) {
                     leafProperties = new(this, loadedleaf) {
                         beats = 32,
-                        timesignature = "4/4",
-                        showcategory = true,
-                        showgrid = true,
-                        connectedcells = true
+                        timesignature = "4/4"
                     };
                 }
                 else
@@ -2391,24 +2404,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (indexofcenter - 1 < 0 || (SequencerObjects[indexofcenter - 1].obj_name != seq.obj_name || SequencerObjects[indexofcenter - 1].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter, 1);
                 SequencerObjects.Insert(indexofcenter, seq.CloneAsDefault("a02", "lane left 1", trackEditor.Rows[indexofcenter]));
-                SequencerObjects[indexofcenter].expandlanes = LeafProperties.showlanes;
+                SequencerObjects[indexofcenter].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 indexofcenter += 1;
             }
             if (indexofcenter - 2 < 0 || (SequencerObjects[indexofcenter - 2].obj_name != seq.obj_name || SequencerObjects[indexofcenter - 2].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter - 1, 1);
                 SequencerObjects.Insert(indexofcenter - 1, seq.CloneAsDefault("a01", "lane left 2", trackEditor.Rows[indexofcenter - 1]));
-                SequencerObjects[indexofcenter - 1].expandlanes = LeafProperties.showlanes;
+                SequencerObjects[indexofcenter - 1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 indexofcenter += 1;
             }
             if (indexofcenter + 1 > SequencerObjects.Count - 1 || (SequencerObjects[indexofcenter + 1].obj_name != seq.obj_name || SequencerObjects[indexofcenter + 1].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter + 1, 1);
                 SequencerObjects.Insert(indexofcenter + 1, seq.CloneAsDefault("z01", "lane right 1", trackEditor.Rows[indexofcenter + 1]));
-                SequencerObjects[indexofcenter + 1].expandlanes = LeafProperties.showlanes;
+                SequencerObjects[indexofcenter + 1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
             }
             if (indexofcenter + 2 > SequencerObjects.Count - 1 || (SequencerObjects[indexofcenter + 2].obj_name != seq.obj_name || SequencerObjects[indexofcenter + 2].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter + 2, 1);
-                SequencerObjects.Insert(indexofcenter + 2, seq.CloneAsDefault("z02", "lane left 2", trackEditor.Rows[indexofcenter + 2]));
-                SequencerObjects[indexofcenter + 2].expandlanes = LeafProperties.showlanes;
+                SequencerObjects.Insert(indexofcenter + 2, seq.CloneAsDefault("z02", "lane right 2", trackEditor.Rows[indexofcenter + 2]));
+                SequencerObjects[indexofcenter + 2].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
             }
             isfinding = false;
         }

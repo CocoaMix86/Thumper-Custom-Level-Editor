@@ -58,7 +58,6 @@
             this.toolStripLabel4 = new ToolStripLabel();
             this.lblChangelogClose = new ToolStripButton();
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.txtFilePath = new TextBox();
             this.contextMenuFormRightClick = new ContextMenuStrip(this.components);
             this.contextFormRestore = new ToolStripMenuItem();
             this.contextFormMin = new ToolStripMenuItem();
@@ -161,8 +160,16 @@
             this.toolstripFormClose = new ToolStripButton();
             this.toolstripFormRestore = new ToolStripButton();
             this.toolstripFormMinimize = new ToolStripButton();
+            this.toolStripMenuItem3 = new ToolStripMenuItem();
+            this.contextmenuView = new ContextMenuStrip(this.components);
+            this.toolStripMenuItem11 = new ToolStripMenuItem();
+            this.leafoptionShowCategory = new ToolStripMenuItem();
+            this.leafoptionShowGrid = new ToolStripMenuItem();
+            this.leafoptionConnectBars = new ToolStripMenuItem();
+            this.leafoptionShowLanes = new ToolStripMenuItem();
+            this.leafoptionEaseDots = new ToolStripMenuItem();
+            this.leafoptionThinValues = new ToolStripMenuItem();
             this.toolstripLevelName = new ToolStripMenuItem();
-            this.toolstripOpenPanels = new ToolStripMenuItem();
             this.toolstripAddScene = new ToolStripButton();
             this.toolStripButton1 = new ToolStripButton();
             this.panelFill = new Panel();
@@ -197,6 +204,7 @@
             this.toolStripMain.SuspendLayout();
             this.panelToolStrips.SuspendLayout();
             this.toolStripTitle.SuspendLayout();
+            this.contextmenuView.SuspendLayout();
             this.panelFill.SuspendLayout();
             this.contextmenuTabClick.SuspendLayout();
             this.contextmenuMoveWorkspace.SuspendLayout();
@@ -499,14 +507,6 @@
             this.dockMain.Size = new Size(992, 452);
             this.dockMain.TabIndex = 147;
             this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
-            // 
-            // txtFilePath
-            // 
-            this.txtFilePath.Location = new Point(355, 33);
-            this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new Size(403, 23);
-            this.txtFilePath.TabIndex = 148;
-            this.txtFilePath.Text = "X:\\Thumper\\levels\\Basics3\\Basics3.TCL";
             // 
             // contextMenuFormRightClick
             // 
@@ -1400,7 +1400,7 @@
             this.toolStripTitle.ContextMenuStrip = this.contextMenuFormRightClick;
             this.toolStripTitle.GripMargin = new Padding(0);
             this.toolStripTitle.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolstripLevelName, this.toolstripOpenPanels, this.toolstripAddScene, this.toolStripButton1 });
+            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolStripMenuItem3, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolstripLevelName, this.toolstripAddScene, this.toolStripButton1 });
             this.toolStripTitle.Location = new Point(0, 0);
             this.toolStripTitle.MaximumSize = new Size(0, 31);
             this.toolStripTitle.MinimumSize = new Size(0, 31);
@@ -1469,6 +1469,105 @@
             this.toolstripFormMinimize.ToolTipText = "Minimize";
             this.toolstripFormMinimize.Click += this.toolstripFormMinimize_Click;
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.DropDown = this.contextmenuView;
+            this.toolStripMenuItem3.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolStripMenuItem3.ForeColor = Color.White;
+            this.toolStripMenuItem3.Margin = new Padding(0, 5, 0, 5);
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Padding = new Padding(3, 0, 3, 0);
+            this.toolStripMenuItem3.Size = new Size(44, 21);
+            this.toolStripMenuItem3.Text = "&View";
+            // 
+            // contextmenuView
+            // 
+            this.contextmenuView.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextmenuView.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem11 });
+            this.contextmenuView.Name = "contextmenuEdit";
+            this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
+            this.contextmenuView.RenderMode = ToolStripRenderMode.System;
+            this.contextmenuView.Size = new Size(176, 26);
+            // 
+            // toolStripMenuItem11
+            // 
+            this.toolStripMenuItem11.DropDownItems.AddRange(new ToolStripItem[] { this.leafoptionShowCategory, this.leafoptionShowGrid, this.leafoptionConnectBars, this.leafoptionShowLanes, this.leafoptionEaseDots, this.leafoptionThinValues });
+            this.toolStripMenuItem11.ForeColor = Color.White;
+            this.toolStripMenuItem11.Image = Properties.Resources.editor_leaf64;
+            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+            this.toolStripMenuItem11.Size = new Size(175, 22);
+            this.toolStripMenuItem11.Text = "Leaf Editor Options";
+            // 
+            // leafoptionShowCategory
+            // 
+            this.leafoptionShowCategory.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionShowCategory.Checked = true;
+            this.leafoptionShowCategory.CheckOnClick = true;
+            this.leafoptionShowCategory.CheckState = CheckState.Checked;
+            this.leafoptionShowCategory.ForeColor = Color.White;
+            this.leafoptionShowCategory.Name = "leafoptionShowCategory";
+            this.leafoptionShowCategory.Size = new Size(254, 22);
+            this.leafoptionShowCategory.Text = "Show Category";
+            this.leafoptionShowCategory.CheckedChanged += this.leafoptionShowCategory_CheckedChanged;
+            // 
+            // leafoptionShowGrid
+            // 
+            this.leafoptionShowGrid.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionShowGrid.Checked = true;
+            this.leafoptionShowGrid.CheckOnClick = true;
+            this.leafoptionShowGrid.CheckState = CheckState.Checked;
+            this.leafoptionShowGrid.ForeColor = Color.White;
+            this.leafoptionShowGrid.Name = "leafoptionShowGrid";
+            this.leafoptionShowGrid.Size = new Size(254, 22);
+            this.leafoptionShowGrid.Text = "Show Grid";
+            this.leafoptionShowGrid.CheckedChanged += this.leafoptionShowGrid_CheckedChanged;
+            // 
+            // leafoptionConnectBars
+            // 
+            this.leafoptionConnectBars.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionConnectBars.Checked = true;
+            this.leafoptionConnectBars.CheckOnClick = true;
+            this.leafoptionConnectBars.CheckState = CheckState.Checked;
+            this.leafoptionConnectBars.ForeColor = Color.White;
+            this.leafoptionConnectBars.Name = "leafoptionConnectBars";
+            this.leafoptionConnectBars.Size = new Size(254, 22);
+            this.leafoptionConnectBars.Text = "Connected Bars";
+            this.leafoptionConnectBars.CheckedChanged += this.leafoptionConnectBars_CheckedChanged;
+            // 
+            // leafoptionShowLanes
+            // 
+            this.leafoptionShowLanes.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionShowLanes.CheckOnClick = true;
+            this.leafoptionShowLanes.ForeColor = Color.White;
+            this.leafoptionShowLanes.Name = "leafoptionShowLanes";
+            this.leafoptionShowLanes.Size = new Size(254, 22);
+            this.leafoptionShowLanes.Text = "Always Show Lanes";
+            this.leafoptionShowLanes.CheckedChanged += this.leafoptionShowLanes_CheckedChanged;
+            // 
+            // leafoptionEaseDots
+            // 
+            this.leafoptionEaseDots.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionEaseDots.Checked = true;
+            this.leafoptionEaseDots.CheckOnClick = true;
+            this.leafoptionEaseDots.CheckState = CheckState.Checked;
+            this.leafoptionEaseDots.ForeColor = Color.White;
+            this.leafoptionEaseDots.Name = "leafoptionEaseDots";
+            this.leafoptionEaseDots.Size = new Size(254, 22);
+            this.leafoptionEaseDots.Text = "Easing and Interplation Dots";
+            this.leafoptionEaseDots.CheckedChanged += this.leafoptionEaseDots_CheckedChanged;
+            // 
+            // leafoptionThinValues
+            // 
+            this.leafoptionThinValues.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionThinValues.Checked = true;
+            this.leafoptionThinValues.CheckOnClick = true;
+            this.leafoptionThinValues.CheckState = CheckState.Checked;
+            this.leafoptionThinValues.ForeColor = Color.White;
+            this.leafoptionThinValues.Name = "leafoptionThinValues";
+            this.leafoptionThinValues.Size = new Size(254, 22);
+            this.leafoptionThinValues.Text = "Show Values on Lanes as Thin Bars";
+            this.leafoptionThinValues.CheckedChanged += this.leafoptionThinValues_CheckedChanged;
+            // 
             // toolstripLevelName
             // 
             this.toolstripLevelName.BackColor = Color.FromArgb(110, 110, 110);
@@ -1481,14 +1580,6 @@
             this.toolstripLevelName.Name = "toolstripLevelName";
             this.toolstripLevelName.Size = new Size(144, 21);
             this.toolstripLevelName.Text = "<no level loaded>";
-            // 
-            // toolstripOpenPanels
-            // 
-            this.toolstripOpenPanels.ForeColor = Color.White;
-            this.toolstripOpenPanels.Name = "toolstripOpenPanels";
-            this.toolstripOpenPanels.Size = new Size(94, 31);
-            this.toolstripOpenPanels.Text = "OPEN PANELS";
-            this.toolstripOpenPanels.Click += this.toolstripOpenPanels_Click;
             // 
             // toolstripAddScene
             // 
@@ -1653,7 +1744,6 @@
             this.ControlBox = false;
             this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.panelFill);
-            this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.panelToolStrips);
             this.Controls.Add(this.toolStripTitle);
             this.Controls.Add(this.panelRecentFiles);
@@ -1695,6 +1785,7 @@
             this.panelToolStrips.PerformLayout();
             this.toolStripTitle.ResumeLayout(false);
             this.toolStripTitle.PerformLayout();
+            this.contextmenuView.ResumeLayout(false);
             this.panelFill.ResumeLayout(false);
             this.contextmenuTabClick.ResumeLayout(false);
             this.contextmenuMoveWorkspace.ResumeLayout(false);
@@ -1724,14 +1815,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewButtonColumn closerecent;
-        private System.Windows.Forms.TextBox txtFilePath;
         private Thumper_Custom_Level_Editor.ToolStripEx toolStripTitle;
         private System.Windows.Forms.ToolStripMenuItem toolstripFile;
         private System.Windows.Forms.ToolStripMenuItem toolstripEdit;
         private System.Windows.Forms.ToolStripMenuItem toolstripProject;
         private System.Windows.Forms.ToolStripMenuItem toolstripHelp;
         public System.Windows.Forms.ToolStripMenuItem toolstripLevelName;
-        private System.Windows.Forms.ToolStripMenuItem toolstripOpenPanels;
         private System.Windows.Forms.ToolStripLabel toolstripFormIcon;
         private System.Windows.Forms.ContextMenuStrip contextmenuFile;
         public System.Windows.Forms.ToolStripMenuItem toolstripFileSaveAll;
@@ -1847,6 +1936,16 @@
         private ToolStripMenuItem toolstripFileConvert;
         private ToolStripMenuItem toolstripFileNewProject;
         private ToolStripMenuItem toolstripFileOpenProject;
+        private ToolStripMenuItem toolStripMenuItem3;
+        private ContextMenuStrip contextmenuView;
+        private ToolStripMenuItem toolStripMenuItem11;
+        public ToolStripMenuItem leafoptionShowCategory;
+        public ToolStripMenuItem leafoptionShowGrid;
+        public ToolStripMenuItem leafoptionConnectBars;
+        public ToolStripMenuItem leafoptionShowLanes;
+        public ToolStripMenuItem leafoptionEaseDots;
+        public ToolStripMenuItem leafoptionThinValues;
+        private ToolStripMenuItem showGridToolStripMenuItem;
     }
 }
 

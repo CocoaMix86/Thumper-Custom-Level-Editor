@@ -49,7 +49,7 @@ namespace Thumper_Custom_Level_Editor
                 ExpandLanes = value;
                 if (this.friendly_lane is not "lane center" and not "none")
                     editor_row.Visible = value;
-                Form_LeafEditor.ChangeTrackName(this, parent.leafProperties.showcategory ? $"[{this.category}] " : "");
+                Form_LeafEditor.ChangeTrackName(this, Properties.Settings.Default.LeafOptionShowCategory ? $"[{this.category}] " : "");
                 Form_LeafEditor.TrackUpdateHighlighting(this, true);
             }
         }
@@ -188,64 +188,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private string TimeSignature;
-
-        [Category​Attribute("Editor")]
-        [DisplayName("Show Category Name")]
-        [Description("Shows/Hides the category names on the sequencer row headers.")]
-        public bool showcategory
-        {
-            get => ShowCategory; 
-            set {
-                ShowCategory = value;
-                foreach (Sequencer_Object seq in seq_objs) {
-                    Form_LeafEditor.ChangeTrackName(seq, ShowCategory ? $"[{seq.category}] " : "");
-                }
-            }
-        }
-        private bool ShowCategory;
-
-        [Category​Attribute("Editor")]
-        [DisplayName("Show Grid")]
-        [Description("Shows/Hides beat column grid lines")]
-        public bool showgrid
-        {
-            get => ShowGrid;
-            set {
-                ShowGrid = value;
-                parent.trackEditor.Refresh();
-            }
-        }
-        private bool ShowGrid;
-
-        [Category​Attribute("Editor")]
-        [DisplayName("Connected Bars")]
-        [Description("Consecutive cells with same values will be shown connected")]
-        public bool connectedcells
-        {
-            get => ConnectedCells;
-            set {
-                ConnectedCells = value;
-                parent.trackEditor.Refresh();
-            }
-        }
-        private bool ConnectedCells;
-
-        [Category​Attribute("Editor")]
-        [DisplayName("Always Show Lanes")]
-        [Description("")]
-        public bool showlanes
-        {
-            get => ShowLanes;
-            set {
-                ShowLanes = value;
-                if (ShowLanes) {
-                    foreach (Sequencer_Object seq in seq_objs)
-                        seq.expandlanes = true;
-                }
-                parent.trackEditor.Invalidate();
-            }
-        }
-        private bool ShowLanes;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]
