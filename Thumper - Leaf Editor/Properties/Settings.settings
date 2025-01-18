@@ -2,27 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Thumper_Custom_Level_Editor.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="custom_bgcolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">64, 0, 0</Value>
-    </Setting>
-    <Setting Name="custom_menucolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">80, 0, 0</Value>
-    </Setting>
-    <Setting Name="custom_mastercolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">55, 55, 55</Value>
-    </Setting>
-    <Setting Name="custom_gatecolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">55, 55, 55</Value>
-    </Setting>
-    <Setting Name="custom_lvlcolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">55, 55, 55</Value>
-    </Setting>
-    <Setting Name="custom_leafcolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">55, 55, 55</Value>
-    </Setting>
-    <Setting Name="custom_samplecolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">55, 55, 55</Value>
-    </Setting>
     <Setting Name="game_dir" Type="System.String" Scope="User">
       <Value Profile="(Default)">none</Value>
     </Setting>
@@ -31,9 +10,6 @@
     </Setting>
     <Setting Name="beebleloc" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">620, 1</Value>
-    </Setting>
-    <Setting Name="custom_activecolor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">CornflowerBlue</Value>
     </Setting>
     <Setting Name="leafzoom" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">40</Value>

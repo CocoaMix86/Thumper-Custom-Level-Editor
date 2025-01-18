@@ -88,12 +88,9 @@ namespace Thumper_Custom_Level_Editor
             }
             //call methods to initialize various aspects of the editors
             ImportObjects();
-            //MaximizeScreenBounds();
             ColorFormElements();
             JumpListUpdate();
             LoadQuickValues();
-            ///InitializeSounds();
-            //load keybinds
             SetKeyBinds();
             //import default object colors
             colorDialog1.CustomColors = AppSettings.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
@@ -517,6 +514,64 @@ namespace Thumper_Custom_Level_Editor
             custom.Dispose();
         }
         #endregion
+        #region Toolstrip View
+        private void leafoptionShowCategory_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionShowCategory = leafoptionShowCategory.Checked;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                foreach (Sequencer_Object seq in leaf.leafProperties.seq_objs) {
+                    Form_LeafEditor.ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
+                }
+            }
+        }
+
+        private void leafoptionShowGrid_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionShowGrid = leafoptionShowGrid.Checked;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                leaf.trackEditor.Refresh();
+            }
+        }
+
+        private void leafoptionConnectBars_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionConnectBars = leafoptionConnectBars.Checked;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                leaf.trackEditor.Refresh();
+            }
+        }
+
+        private void leafoptionShowLanes_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionShowLane = leafoptionShowLanes.Checked;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                if (Properties.Settings.Default.LeafOptionShowLane) {
+                    foreach (Sequencer_Object seq in leaf.leafProperties.seq_objs) {
+                        seq.expandlanes = true;
+                    }
+                    leaf.trackEditor.Invalidate();
+                }
+                else
+                    leaf.trackEditor.InvalidateColumn(2);
+            }
+        }
+
+        private void leafoptionEaseDots_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionEaseDots = leafoptionEaseDots.Checked;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                leaf.trackEditor.Refresh();
+            }
+        }
+
+        private void leafoptionThinValues_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionThinBars = leafoptionThinValues.Checked;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                leaf.trackEditor.Refresh();
+            }
+        }
+        #endregion
         #region Toolstrip Window
         private void toolstripWindowFloat_Click(object sender, EventArgs e)
         {
@@ -817,63 +872,6 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             */
-        }
-
-        private void leafoptionShowCategory_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.LeafOptionShowCategory = leafoptionShowCategory.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                foreach (Sequencer_Object seq in leaf.leafProperties.seq_objs) {
-                    Form_LeafEditor.ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
-                }
-            }
-        }
-
-        private void leafoptionShowGrid_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.LeafOptionShowGrid = leafoptionShowGrid.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
-            }
-        }
-
-        private void leafoptionConnectBars_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.LeafOptionConnectBars = leafoptionConnectBars.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
-            }
-        }
-
-        private void leafoptionShowLanes_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.LeafOptionShowLane = leafoptionShowLanes.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                if (Properties.Settings.Default.LeafOptionShowLane) {
-                    foreach (Sequencer_Object seq in leaf.leafProperties.seq_objs) {
-                        seq.expandlanes = true;
-                    }
-                    leaf.trackEditor.Invalidate();
-                }
-                else
-                    leaf.trackEditor.InvalidateColumn(2);
-            }
-        }
-
-        private void leafoptionEaseDots_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.LeafOptionEaseDots = leafoptionEaseDots.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
-            }
-        }
-
-        private void leafoptionThinValues_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.LeafOptionThinBars = leafoptionThinValues.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
-            }
         }
     }
 }
