@@ -397,6 +397,7 @@
             this.labelCollapsePanel.Size = new Size(16, 16);
             this.labelCollapsePanel.TabIndex = 145;
             this.labelCollapsePanel.Text = ">";
+            this.toolTip1.SetToolTip(this.labelCollapsePanel, "Hide/Reveal right panel");
             this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
             // 
             // propertyGridLvl

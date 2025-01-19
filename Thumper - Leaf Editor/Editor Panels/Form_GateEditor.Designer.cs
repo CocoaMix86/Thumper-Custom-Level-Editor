@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
@@ -47,6 +48,7 @@
             this.label1 = new Label();
             this.lblMasterlvllistHelp = new Label();
             this.propertyGridGate = new PropertyGrid();
+            this.toolTip1 = new ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -76,7 +78,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridGate);
             this.splitContainer1.Size = new Size(625, 364);
-            this.splitContainer1.SplitterDistance = 278;
+            this.splitContainer1.SplitterDistance = 275;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 118;
             // 
@@ -89,7 +91,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(263, -2);
+            this.labelCollapsePanel.Location = new Point(259, -2);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -97,6 +99,7 @@
             this.labelCollapsePanel.Size = new Size(16, 16);
             this.labelCollapsePanel.TabIndex = 144;
             this.labelCollapsePanel.Text = ">";
+            this.toolTip1.SetToolTip(this.labelCollapsePanel, "Hide/Reveal right panel");
             this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
             // 
             // gateLvlList
@@ -149,7 +152,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.gateLvlList.Size = new Size(254, 351);
+            this.gateLvlList.Size = new Size(251, 351);
             this.gateLvlList.TabIndex = 118;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += this.gateLvlList_CellClick_1;
@@ -288,7 +291,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(600, -3);
+            this.lblMasterlvllistHelp.Location = new Point(597, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -314,7 +317,7 @@
             this.propertyGridGate.RightToLeft = RightToLeft.No;
             this.propertyGridGate.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridGate.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridGate.Size = new Size(342, 364);
+            this.propertyGridGate.Size = new Size(345, 364);
             this.propertyGridGate.TabIndex = 0;
             this.propertyGridGate.ToolbarVisible = false;
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -363,5 +366,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn GateLvlRuntime;
         private Label labelCollapsePanel;
+        private ToolTip toolTip1;
     }
 }
