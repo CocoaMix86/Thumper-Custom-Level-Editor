@@ -102,12 +102,6 @@ namespace Thumper_Custom_Level_Editor
             else if (LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase) && LevelToLoad.Exists) {
                 OpenProject(LevelToLoad);
             }
-
-            //create Project Explorer and Project Property panels
-            ProjectExplorer = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
-            ProjectExplorer.Show(dockMain, DockState.DockRight);
-            dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
-            dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
         }
         #endregion
         #region Form Loading Closing
@@ -390,6 +384,11 @@ namespace Thumper_Custom_Level_Editor
             LvlReloadSamples();
             panelRecentFiles.Visible = false;
 
+            //create Project Explorer and Project Property panels
+            ProjectExplorer = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            ProjectExplorer.Show(dockMain, DockState.DockRight);
+            dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
             //Load the project''s files into Explorer
             ProjectExplorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();
@@ -687,20 +686,6 @@ namespace Thumper_Custom_Level_Editor
                 File.WriteAllText($@"{WorkingFolder}\spn_default.txt", Properties.Resources.spn_default);
                 File.WriteAllText($@"{WorkingFolder}\xfm_default.txt", Properties.Resources.xfm_default);
             }
-        }
-
-        private void toolstripProjectProperties_Click(object sender, EventArgs e)
-        {
-            /*
-            ProjectPropertiesForm customlevel = new(false);
-            //set textboxes
-            customlevel.txtCustomName.Text = ProjectJson["level_name"] ?? "LEVEL NAME";
-            customlevel.txtCustomDiff.Text = ProjectJson["difficulty"] ?? "d0";
-            customlevel.txtDesc.Text = ProjectJson["description"] ?? "ADD A DESCRIPTION";
-            customlevel.txtCustomAuthor.Text = ProjectJson["author"] ?? "SOME PERSON";
-            //show the new level folder dialog box
-            customlevel.ShowDialog();
-            */
         }
 
         private void contextmenuSampPacks_Closing(object sender, ToolStripDropDownClosingEventArgs e)

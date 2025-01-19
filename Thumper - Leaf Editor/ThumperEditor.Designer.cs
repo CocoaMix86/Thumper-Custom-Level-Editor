@@ -102,7 +102,6 @@
             this.toolstripProjectExisting = new ToolStripMenuItem();
             this.toolstripProjectRegen = new ToolStripMenuItem();
             this.toolStripSeparator8 = new ToolStripSeparator();
-            this.toolstripProjectProperties = new ToolStripMenuItem();
             this.addSamplePackToolStripMenuItem1 = new ToolStripMenuItem();
             this.contextmenuSampPacks = new ContextMenuStrip(this.components);
             this.toolstripSampLevel1 = new ToolStripMenuItem();
@@ -169,6 +168,11 @@
             this.leafoptionShowLanes = new ToolStripMenuItem();
             this.leafoptionEaseDots = new ToolStripMenuItem();
             this.leafoptionThinValues = new ToolStripMenuItem();
+            this.toolStripSeparator19 = new ToolStripSeparator();
+            this.toolStripMenuItem7 = new ToolStripMenuItem();
+            this.toolStripMenuItem8 = new ToolStripMenuItem();
+            this.toolStripSeparator18 = new ToolStripSeparator();
+            this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripLevelName = new ToolStripMenuItem();
             this.toolstripAddScene = new ToolStripButton();
             this.toolStripButton1 = new ToolStripButton();
@@ -820,11 +824,11 @@
             // contextMenuProject
             // 
             this.contextMenuProject.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolstripProjectLeaf, this.toolstripProjectLvl, this.toolstripProjectGate, this.toolstripProjectMaster, this.toolstripProjectSample, this.toolStripSeparator7, this.toolstripProjectExisting, this.toolstripProjectRegen, this.toolStripSeparator8, this.toolstripProjectProperties, this.addSamplePackToolStripMenuItem1 });
+            this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolstripProjectLeaf, this.toolstripProjectLvl, this.toolstripProjectGate, this.toolstripProjectMaster, this.toolstripProjectSample, this.toolStripSeparator7, this.toolstripProjectExisting, this.toolstripProjectRegen, this.toolStripSeparator8, this.addSamplePackToolStripMenuItem1 });
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(201, 236);
+            this.contextMenuProject.Size = new Size(201, 192);
             // 
             // toolstripProjectLeaf
             // 
@@ -902,15 +906,6 @@
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new Size(197, 6);
-            // 
-            // toolstripProjectProperties
-            // 
-            this.toolstripProjectProperties.ForeColor = Color.White;
-            this.toolstripProjectProperties.Image = Properties.Resources.icon_gear;
-            this.toolstripProjectProperties.Name = "toolstripProjectProperties";
-            this.toolstripProjectProperties.Size = new Size(200, 22);
-            this.toolstripProjectProperties.Text = "Level Properties";
-            this.toolstripProjectProperties.Click += this.toolstripProjectProperties_Click;
             // 
             // addSamplePackToolStripMenuItem1
             // 
@@ -1482,11 +1477,11 @@
             // contextmenuView
             // 
             this.contextmenuView.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextmenuView.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem11 });
+            this.contextmenuView.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem11, this.toolStripSeparator19, this.toolStripMenuItem7, this.toolStripMenuItem8, this.toolStripSeparator18, this.toolStripMenuItem4 });
             this.contextmenuView.Name = "contextmenuEdit";
             this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuView.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuView.Size = new Size(176, 26);
+            this.contextmenuView.Size = new Size(176, 104);
             // 
             // toolStripMenuItem11
             // 
@@ -1566,6 +1561,40 @@
             this.leafoptionThinValues.Size = new Size(254, 22);
             this.leafoptionThinValues.Text = "Show Values on Lanes as Thin Bars";
             this.leafoptionThinValues.CheckedChanged += this.leafoptionThinValues_CheckedChanged;
+            // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            this.toolStripSeparator19.Size = new Size(172, 6);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.ForeColor = Color.White;
+            this.toolStripMenuItem7.Image = Properties.Resources.icon_folder;
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new Size(175, 22);
+            this.toolStripMenuItem7.Text = "Project Explorer";
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.ForeColor = Color.White;
+            this.toolStripMenuItem8.Image = Properties.Resources.icon_gear;
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new Size(175, 22);
+            this.toolStripMenuItem8.Text = "Project Properties";
+            // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new Size(172, 6);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.ForeColor = Color.White;
+            this.toolStripMenuItem4.Image = Properties.Resources.icon_expand;
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new Size(175, 22);
+            this.toolStripMenuItem4.Text = "Full Screen";
             // 
             // toolstripLevelName
             // 
@@ -1840,7 +1869,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectExisting;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripMenuItem toolstripProjectProperties;
         private System.Windows.Forms.ToolStripButton toolstripFormClose;
         private ToolStripEx toolStripMain;
         private System.Windows.Forms.ToolStripButton toolstripMainOpenProject;
@@ -1945,6 +1973,11 @@
         public ToolStripMenuItem leafoptionEaseDots;
         public ToolStripMenuItem leafoptionThinValues;
         private ToolStripMenuItem showGridToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator18;
+        private ToolStripMenuItem toolStripMenuItem4;
+        private ToolStripSeparator toolStripSeparator19;
+        private ToolStripMenuItem toolStripMenuItem7;
+        private ToolStripMenuItem toolStripMenuItem8;
     }
 }
 
