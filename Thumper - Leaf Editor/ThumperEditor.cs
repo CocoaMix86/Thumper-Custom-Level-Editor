@@ -385,9 +385,9 @@ namespace Thumper_Custom_Level_Editor
             panelRecentFiles.Visible = false;
 
             //create Project Explorer and Project Property panels
-            ProjectExplorer = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            ProjectExplorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             ProjectExplorer.Show(dockMain, DockState.DockRight);
-            dockProjectProperties = new() { DockAreas = DockAreas.Document | DockAreas.DockRight | DockAreas.DockLeft };
+            dockProjectProperties = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
             //Load the project''s files into Explorer
             ProjectExplorer.LoadProject();
@@ -401,6 +401,8 @@ namespace Thumper_Custom_Level_Editor
             toolstripProject.Enabled = true;
             toolstripEdit.Enabled = true;
             toolstripWindow.Enabled = true;
+            toolstripViewExplorer.Enabled = true;
+            toolstripViewProperties.Enabled = true;
 
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
@@ -559,6 +561,25 @@ namespace Thumper_Custom_Level_Editor
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 leaf.trackEditor.Refresh();
             }
+        }
+
+        private void toolstripViewExplorer_Click(object sender, EventArgs e)
+        {
+            if (ProjectExplorer.IsDisposed) {
+                ProjectExplorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
+            }
+            ProjectExplorer.Show(dockMain, DockState.DockRight);
+        }
+
+        private void toolstripViewProperties_Click(object sender, EventArgs e)
+        {
+            if (dockProjectProperties.IsDisposed) {
+                dockProjectProperties = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
+                dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
+                dockProjectProperties.LoadProjectProperties();
+            }
+            else
+                dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
         }
         #endregion
         #region Toolstrip Window
