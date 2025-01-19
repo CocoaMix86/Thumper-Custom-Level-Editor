@@ -824,7 +824,7 @@
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(201, 214);
+            this.contextMenuProject.Size = new Size(201, 236);
             // 
             // toolstripProjectLeaf
             // 

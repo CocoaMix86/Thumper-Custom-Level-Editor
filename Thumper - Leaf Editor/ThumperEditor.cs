@@ -321,11 +321,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private void toolstripFileNewFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void toolstripFileOpenProject_Click(object sender, EventArgs e)
         {
             using OpenFileDialog ofd = new();
@@ -410,11 +405,6 @@ namespace Thumper_Custom_Level_Editor
 
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
-        }
-
-        private void toolstripFileOpenFile_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void toolstripFileConvert_Click(object sender, EventArgs e)
@@ -661,10 +651,34 @@ namespace Thumper_Custom_Level_Editor
         {
             OpenFile(new Form_SampleEditor().SaveAs(true));
         }
-
+        string[] fileextensions = new string[] { "leaf_", "lvl_", "gate_", "master_", "samp_", "xfm_", "spn_" };
         private void toolstripProjectExisting_Click(object sender, EventArgs e)
         {
+            using OpenFileDialog ofd = new();
+            ofd.Title = "Copy Existing File to Project";
+            ofd.Filter = "All Files (*.*)|*.*";
+            ofd.FilterIndex = 1;
+            ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                FileInfo filetocopy = new(ofd.FileName);
+                if (File.Exists($"{WorkingFolder.FullName}\\{filetocopy.Name}")) {
+                    MessageBox.Show("A file with that name exists in the project folder already.", "Thumper Custom Level Editor");
+                    return;
+                }
+                FileInfo projectfile = new($"{WorkingFolder.FullName}\\{filetocopy.Name}");
+                File.Copy(ofd.FileName, projectfile.FullName);
 
+                if (fileextensions.Any(x => projectfile.Name.StartsWith(x))) {
+                    if (MessageBox.Show("This appears to be a file from an older version of the editor.\nConvert it to the new TCLE 3.0 format?", "Editor Custom Thumper Level", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                        string[] splitextension = projectfile.Name.Replace(".txt", "").Split('_', 2);
+                        File.Move(projectfile.FullName, $"{projectfile.DirectoryName}\\{splitextension[1]}.{splitextension[0]}");
+                        projectfile = new($"{projectfile.DirectoryName}\\{splitextension[1]}.{splitextension[0]}");
+                    }
+                }
+
+                TCLE.ProjectExplorer.CreateTreeView();
+                OpenFile(projectfile);
+            }
         }
 
         private void toolstripProjectRegen_Click(object sender, EventArgs e)
