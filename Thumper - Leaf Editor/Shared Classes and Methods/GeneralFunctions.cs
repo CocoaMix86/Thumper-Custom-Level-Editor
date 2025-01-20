@@ -272,6 +272,15 @@ namespace Thumper_Custom_Level_Editor
         ///
         /// File Lock read/write methods
         /// 
+        public static void AddFileLock(FileInfo file)
+        {
+            if (file == null)
+                return;
+            if (!TCLE.lockedfiles.ContainsKey(file)) {
+                lockedfiles.Add(file, new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+            }
+        }
+
         public static void WriteFileLock(FileStream fs, JObject _save)
         {
             string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
@@ -620,6 +629,23 @@ namespace Thumper_Custom_Level_Editor
             else {
                 openraw = true;
                 goto openraw;
+            }
+        }
+
+        public static void CloseFile(FileInfo filepath)
+        {
+            //check tabs in non float
+            IDockContent workspacehastab = TCLE.Workspaces.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents).FirstOrDefault(y => y.DockHandler.TabText.StartsWith(filepath.Name));
+            if (workspacehastab != null) {
+                (workspacehastab as DockContent).DockHandler.Dispose();
+            }
+            //check tabs in floats
+            var workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+            foreach (Form_WorkSpace ws in workspacewithfloats) {
+                IDockContent toclose = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).FirstOrDefault(z => z.DockHandler.TabText.StartsWith(filepath.Name));
+                if (toclose != null) {
+                    (toclose as DockContent).DockHandler.Dispose();
+                }
             }
         }
 

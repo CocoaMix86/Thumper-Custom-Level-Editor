@@ -691,8 +691,9 @@ namespace Thumper_Custom_Level_Editor
                 if (fileextensions.Any(x => projectfile.Name.StartsWith(x))) {
                     if (MessageBox.Show("This appears to be a file from an older version of the editor.\nConvert it to the new TCLE 3.0 format?", "Editor Custom Thumper Level", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                         string[] splitextension = projectfile.Name.Replace(".txt", "").Split('_', 2);
-                        File.Move(projectfile.FullName, $"{projectfile.DirectoryName}\\{splitextension[1]}.{splitextension[0]}");
-                        projectfile = new($"{projectfile.DirectoryName}\\{splitextension[1]}.{splitextension[0]}");
+                        projectfile.MoveTo($"{projectfile.DirectoryName}\\{splitextension[1]}.{splitextension[0]}");
+                        //File.Move(projectfile.FullName, $"{projectfile.DirectoryName}\\{splitextension[1]}.{splitextension[0]}");
+                        //projectfile = new($"{projectfile.DirectoryName}\\{splitextension[1]}.{splitextension[0]}");
                     }
                 }
 

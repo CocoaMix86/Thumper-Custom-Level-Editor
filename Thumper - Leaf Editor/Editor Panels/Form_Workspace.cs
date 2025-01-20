@@ -44,6 +44,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     filetoclose = (DocClosing as Form_LvlEditor).loadedlvl;
                 else if (DocClosing.GetType() == typeof(Form_SampleEditor))
                     filetoclose = (DocClosing as Form_SampleEditor).loadedsample;
+                else if (DocClosing.GetType() == typeof(Form_LeafEditor))
+                    filetoclose = (DocClosing as Form_LeafEditor).loadedleaf;
                 else if (DocClosing.GetType() == typeof(Form_RawText))
                     filetoclose = (DocClosing as Form_RawText).loadedfile;
 

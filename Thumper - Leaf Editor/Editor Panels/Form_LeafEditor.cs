@@ -49,11 +49,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             sw.Close();
                         }
                     }
-                    TCLE.lockedfiles.Add(loadedleaf, new FileStream(LoadedLeaf.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.AddFileLock(LoadedLeaf);
                 }
             }
         }
-        private static FileInfo LoadedLeaf;
+        private FileInfo LoadedLeaf;
         public LeafProperties leafProperties
         {
             get { return LeafProperties; }
@@ -276,7 +276,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                     e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds);
                 else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
-                    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(int.Parse(SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value.ToString()))), e.CellBounds);
+                    e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(Math.Floor((decimal)SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value)))), e.CellBounds);
 
                 if (Properties.Settings.Default.LeafOptionEaseDots) {
                     if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].interpolation != "Linear") {

@@ -22,7 +22,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
         #region Variables
         public bool EditorIsSaved = true;
-        public FileInfo loadedfile { get => LoadedFile; set => LoadedFile = value; }
+        public FileInfo loadedfile
+        {
+            get => LoadedFile;
+            set {
+                LoadedFile = value;
+                if (!LoadedFile.Exists) {
+                    using (StreamWriter sw = LoadedFile.CreateText()) {
+                        sw.Write(' ');
+                        sw.Close();
+                    }
+                }
+                TCLE.AddFileLock(LoadedFile);
+            }
+        }
         private static FileInfo LoadedFile;
         #endregion
         #region Event Handlers

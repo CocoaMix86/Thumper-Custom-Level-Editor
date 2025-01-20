@@ -43,7 +43,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             sw.Close();
                         }
                     }
-                    TCLE.lockedfiles.Add(LoadedMaster, new FileStream(LoadedMaster.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.AddFileLock(LoadedMaster);
                 }
             }
         }

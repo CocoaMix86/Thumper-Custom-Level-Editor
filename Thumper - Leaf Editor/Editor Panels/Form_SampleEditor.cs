@@ -45,7 +45,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             sw.Close();
                         }
                     }
-                    TCLE.lockedfiles.Add(LoadedSample, new FileStream(LoadedSample.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                    TCLE.AddFileLock(LoadedSample);
                 }
             }
         }

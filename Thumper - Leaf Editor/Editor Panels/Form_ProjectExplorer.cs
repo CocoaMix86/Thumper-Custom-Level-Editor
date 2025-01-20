@@ -221,14 +221,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             foreach (TreeNode tn in selectedNodes) {
                 if (tn.ImageKey == "folder") {
-                    string source = projectfolders[tn.FullPath].FullName;
-                    if (Directory.Exists(source))
-                        Directory.Delete(source, true);
+                    DirectoryInfo source = projectfolders[tn.FullPath];
+                    foreach (FileInfo file in source.GetFiles("*", SearchOption.AllDirectories)) {
+                        TCLE.CloseFile(file);
+                        TCLE.DeleteFileLock(file);
+                    }
+                    source.Delete(true);
                 }
                 else {
-                    string source = projectfiles[tn.FullPath].FullName;
-                    if (File.Exists(source))
-                        File.Delete(source);
+                    FileInfo source = projectfiles[tn.FullPath];
+                    TCLE.CloseFile(source);
+                    TCLE.DeleteFileLock(source);
                 }
                 tn.Remove();
             }
@@ -559,17 +562,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             //Finally, move each selected item to the destination
+            string errorlog = "";
             foreach (TreeNode tn in selectedNodes) {
                 string source = GetFileOrFolderPath(tn.FullPath).FullName;
                 string dest = $@"{projectfolders[targetNode.FullPath].FullName}\{GetFileOrFolderPath(tn.FullPath).Name}";
                 if (tn.ImageKey == "folder") {
-                    Directory.Move(source, dest);
+                    if (TCLE.lockedfiles.Any(x => x.Key.FullName.Contains(source)))
+                        errorlog += source + '\n';
+                    else
+                        Directory.Move(source, dest);
                 }
                 else {
-                    File.Move(source, dest);
+                    if (TCLE.lockedfiles.Any(x => x.Key.FullName == source))
+                        errorlog += source + '\n';
+                    else
+                        File.Move(source, dest);
                 }
 
             }
+            if (errorlog.Length > 1)
+                MessageBox.Show($"Could not move these files/folders as they are currently open in a tab.\n{errorlog}", "Grumper Gustom Gevel Geditor");
             CreateTreeView();
             // set destination folder backcolor back to normal to get rid of highlight
             targetNode.BackColor = treeView1.BackColor;
