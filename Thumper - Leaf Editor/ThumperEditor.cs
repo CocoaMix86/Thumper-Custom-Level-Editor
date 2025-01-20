@@ -35,6 +35,7 @@ namespace Thumper_Custom_Level_Editor
         }
         public static ProjectProperties ProjectProperties;
         public static List<Sequencer_Object> ClipboardSequencer = new();
+        public static bool Fullscreen;
         #endregion
 
         #region Form Construction
@@ -205,14 +206,20 @@ namespace Thumper_Custom_Level_Editor
         }
         public void MaximizeScreenBounds()
         {
-            Rectangle bounds = Screen.FromHandle(this.Handle).WorkingArea;
-            //Screen WorkingArea is shrunk a small bit compared to the actual display area
-            //so the following 4 lines increases the bounds to cover whole screen
-            bounds.X = -8;
-            bounds.Y = -8;
-            bounds.Width += 16;
-            bounds.Height += 16;
-            this.MaximizedBounds = bounds;
+            if (Fullscreen) {
+                this.MaximizedBounds = new Rectangle();
+            }
+            else {
+                Rectangle bounds = Screen.FromHandle(this.Handle).WorkingArea;
+                //Screen WorkingArea is shrunk a small bit compared to the actual display area
+                //so the following 4 lines increases the bounds to cover whole screen
+                bounds.X = -8;
+                bounds.Y = -8;
+                bounds.Width += 16;
+                bounds.Height += 16;
+                this.MaximizedBounds = bounds;
+            }
+            this.WindowState = FormWindowState.Normal;
             this.WindowState = FormWindowState.Maximized;
             this.Refresh();
             toolstripFormRestore.Image = Properties.Resources.icon_restore;
@@ -580,6 +587,20 @@ namespace Thumper_Custom_Level_Editor
             }
             else
                 dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
+        }
+
+        private void toolstripViewFullscreen_Click(object sender, EventArgs e)
+        {
+            Fullscreen = true;
+            MaximizeScreenBounds();
+            toolstripExitFullscreen.Visible = true;
+        }
+
+        private void toolstripExitFullscreen_Click(object sender, EventArgs e)
+        {
+            Fullscreen = false;
+            MaximizeScreenBounds();
+            toolstripExitFullscreen.Visible = false;
         }
         #endregion
         #region Toolstrip Window

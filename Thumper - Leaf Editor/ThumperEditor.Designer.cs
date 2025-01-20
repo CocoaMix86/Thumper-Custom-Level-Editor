@@ -172,10 +172,11 @@
             this.toolstripViewExplorer = new ToolStripMenuItem();
             this.toolstripViewProperties = new ToolStripMenuItem();
             this.toolStripSeparator18 = new ToolStripSeparator();
-            this.toolStripMenuItem4 = new ToolStripMenuItem();
+            this.toolstripViewFullscreen = new ToolStripMenuItem();
             this.toolstripLevelName = new ToolStripMenuItem();
             this.toolstripAddScene = new ToolStripButton();
             this.toolStripButton1 = new ToolStripButton();
+            this.toolstripExitFullscreen = new ToolStripButton();
             this.panelFill = new Panel();
             this.contextmenuTabClick = new ContextMenuStrip(this.components);
             this.toolstripTabSave = new ToolStripMenuItem();
@@ -1070,7 +1071,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolstripWindow;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(244, 170);
+            this.contextmenuWindow.Size = new Size(244, 148);
             // 
             // toolstripWindowFloat
             // 
@@ -1394,10 +1395,9 @@
             this.toolStripTitle.ContextMenuStrip = this.contextMenuFormRightClick;
             this.toolStripTitle.GripMargin = new Padding(0);
             this.toolStripTitle.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolStripMenuItem3, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolstripLevelName, this.toolstripAddScene, this.toolStripButton1 });
+            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolStripMenuItem3, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolstripLevelName, this.toolstripAddScene, this.toolStripButton1, this.toolstripExitFullscreen });
             this.toolStripTitle.Location = new Point(0, 0);
             this.toolStripTitle.MaximumSize = new Size(0, 31);
-            this.toolStripTitle.MinimumSize = new Size(0, 31);
             this.toolStripTitle.Name = "toolStripTitle";
             this.toolStripTitle.Padding = new Padding(0);
             this.toolStripTitle.RenderMode = ToolStripRenderMode.System;
@@ -1477,7 +1477,7 @@
             // contextmenuView
             // 
             this.contextmenuView.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextmenuView.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem11, this.toolStripSeparator19, this.toolstripViewExplorer, this.toolstripViewProperties, this.toolStripSeparator18, this.toolStripMenuItem4 });
+            this.contextmenuView.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem11, this.toolStripSeparator19, this.toolstripViewExplorer, this.toolstripViewProperties, this.toolStripSeparator18, this.toolstripViewFullscreen });
             this.contextmenuView.Name = "contextmenuEdit";
             this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuView.RenderMode = ToolStripRenderMode.System;
@@ -1592,13 +1592,14 @@
             this.toolStripSeparator18.Name = "toolStripSeparator18";
             this.toolStripSeparator18.Size = new Size(172, 6);
             // 
-            // toolStripMenuItem4
+            // toolstripViewFullscreen
             // 
-            this.toolStripMenuItem4.ForeColor = Color.White;
-            this.toolStripMenuItem4.Image = Properties.Resources.icon_expand;
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new Size(175, 22);
-            this.toolStripMenuItem4.Text = "Full Screen";
+            this.toolstripViewFullscreen.ForeColor = Color.White;
+            this.toolstripViewFullscreen.Image = Properties.Resources.icon_expand;
+            this.toolstripViewFullscreen.Name = "toolstripViewFullscreen";
+            this.toolstripViewFullscreen.Size = new Size(175, 22);
+            this.toolstripViewFullscreen.Text = "Full Screen";
+            this.toolstripViewFullscreen.Click += this.toolstripViewFullscreen_Click;
             // 
             // toolstripLevelName
             // 
@@ -1621,6 +1622,7 @@
             this.toolstripAddScene.Name = "toolstripAddScene";
             this.toolstripAddScene.Size = new Size(105, 28);
             this.toolstripAddScene.Text = "Add Scene Viewer";
+            this.toolstripAddScene.Visible = false;
             this.toolstripAddScene.Click += this.toolstripAddScene_Click;
             // 
             // toolStripButton1
@@ -1631,6 +1633,18 @@
             this.toolStripButton1.Size = new Size(23, 28);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += this.toolStripButton1_Click;
+            // 
+            // toolstripExitFullscreen
+            // 
+            this.toolstripExitFullscreen.BackColor = Color.Indigo;
+            this.toolstripExitFullscreen.ForeColor = Color.White;
+            this.toolstripExitFullscreen.Image = Properties.Resources.icon_collapse;
+            this.toolstripExitFullscreen.ImageTransparentColor = Color.Magenta;
+            this.toolstripExitFullscreen.Name = "toolstripExitFullscreen";
+            this.toolstripExitFullscreen.Size = new Size(102, 28);
+            this.toolstripExitFullscreen.Text = "Exit Fullscreen";
+            this.toolstripExitFullscreen.Visible = false;
+            this.toolstripExitFullscreen.Click += this.toolstripExitFullscreen_Click;
             // 
             // panelFill
             // 
@@ -1978,10 +1992,11 @@
         public ToolStripMenuItem leafoptionThinValues;
         private ToolStripMenuItem showGridToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator18;
-        private ToolStripMenuItem toolStripMenuItem4;
+        private ToolStripMenuItem toolstripViewFullscreen;
         private ToolStripSeparator toolStripSeparator19;
         private ToolStripMenuItem toolstripViewExplorer;
         private ToolStripMenuItem toolstripViewProperties;
+        private ToolStripButton toolstripExitFullscreen;
     }
 }
 
