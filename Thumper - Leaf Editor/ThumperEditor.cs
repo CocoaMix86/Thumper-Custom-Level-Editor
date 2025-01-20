@@ -316,10 +316,8 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripFileNewProject_Click(object sender, EventArgs e)
         {
             ProjectPropertiesForm customlevel = new();
-            //show the new level folder dialog box
-            if (customlevel.ShowDialog() == DialogResult.Yes) {
-                customlevel.Dispose();
-            }
+            customlevel.ShowDialog();
+            customlevel.Dispose();
         }
 
         private void toolstripFileOpenProject_Click(object sender, EventArgs e)
