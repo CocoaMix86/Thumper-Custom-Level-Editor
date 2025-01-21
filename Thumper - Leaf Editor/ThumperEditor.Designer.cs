@@ -117,8 +117,8 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
-            this.toolstripProject = new ToolStripMenuItem();
             this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
+            this.toolstripProject = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolstripWindowFloat = new ToolStripMenuItem();
             this.toolstripWindowFloatAll = new ToolStripMenuItem();
@@ -681,7 +681,7 @@
             this.toolstripFileTemplateFolder.BackColor = Color.FromArgb(46, 46, 46);
             this.toolstripFileTemplateFolder.ForeColor = Color.White;
             this.toolstripFileTemplateFolder.Name = "toolstripFileTemplateFolder";
-            this.toolstripFileTemplateFolder.Size = new Size(157, 22);
+            this.toolstripFileTemplateFolder.Size = new Size(180, 22);
             this.toolstripFileTemplateFolder.Text = "Open folder";
             this.toolstripFileTemplateFolder.Click += this.toolstripFileTemplateFolder_Click;
             // 
@@ -690,7 +690,7 @@
             this.toolstripFileTemplateRegen.BackColor = Color.FromArgb(46, 46, 46);
             this.toolstripFileTemplateRegen.ForeColor = Color.White;
             this.toolstripFileTemplateRegen.Name = "toolstripFileTemplateRegen";
-            this.toolstripFileTemplateRegen.Size = new Size(157, 22);
+            this.toolstripFileTemplateRegen.Size = new Size(180, 22);
             this.toolstripFileTemplateRegen.Text = "Regenerate files";
             this.toolstripFileTemplateRegen.Click += this.toolstripFileTemplateRegen_Click;
             // 
@@ -1046,6 +1046,14 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // toolstripProject
             // 
             this.toolstripProject.DropDown = this.contextMenuProject;
@@ -1057,14 +1065,6 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
-            // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 

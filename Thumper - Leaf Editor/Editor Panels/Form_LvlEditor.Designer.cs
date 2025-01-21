@@ -42,6 +42,7 @@
             this.toolTip1 = new ToolTip(this.components);
             this.lblLvlTunnels = new Label();
             this.volumeSlider1 = new NAudio.Gui.VolumeSlider();
+            this.labelCollapsePanel = new Label();
             this.lvlToolStrip = new ToolStrip();
             this.btnLvlLeafAdd = new ToolStripButton();
             this.btnLvlLeafDelete = new ToolStripButton();
@@ -57,7 +58,6 @@
             this.Beats = new DataGridViewTextBoxColumn();
             this.splitContainer1 = new SplitContainer();
             this.splitContainer2 = new SplitContainer();
-            this.labelCollapsePanel = new Label();
             this.propertyGridLvl = new PropertyGrid();
             this.btnLvlSequencer = new Button();
             this.splitContainer3 = new SplitContainer();
@@ -119,7 +119,6 @@
             // 
             // volumeSlider1
             // 
-            this.volumeSlider1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             this.volumeSlider1.Cursor = Cursors.Hand;
             this.volumeSlider1.Location = new Point(60, 15);
             this.volumeSlider1.Name = "volumeSlider1";
@@ -127,6 +126,26 @@
             this.volumeSlider1.TabIndex = 164;
             this.toolTip1.SetToolTip(this.volumeSlider1, "Alters volume of smaple playback. Does not go above 0dB.");
             this.volumeSlider1.VolumeChanged += this.volumeSlider1_VolumeChanged;
+            // 
+            // labelCollapsePanel
+            // 
+            this.labelCollapsePanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.labelCollapsePanel.BackColor = Color.Gray;
+            this.labelCollapsePanel.BorderStyle = BorderStyle.FixedSingle;
+            this.labelCollapsePanel.Cursor = Cursors.Hand;
+            this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
+            this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.labelCollapsePanel.ForeColor = Color.White;
+            this.labelCollapsePanel.Location = new Point(334, -2);
+            this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
+            this.labelCollapsePanel.MaximumSize = new Size(16, 16);
+            this.labelCollapsePanel.MinimumSize = new Size(16, 16);
+            this.labelCollapsePanel.Name = "labelCollapsePanel";
+            this.labelCollapsePanel.Size = new Size(16, 16);
+            this.labelCollapsePanel.TabIndex = 145;
+            this.labelCollapsePanel.Text = ">";
+            this.toolTip1.SetToolTip(this.labelCollapsePanel, "Hide/Reveal right panel");
+            this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
             // 
             // lvlToolStrip
             // 
@@ -380,26 +399,6 @@
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 161;
             // 
-            // labelCollapsePanel
-            // 
-            this.labelCollapsePanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.labelCollapsePanel.BackColor = Color.Gray;
-            this.labelCollapsePanel.BorderStyle = BorderStyle.FixedSingle;
-            this.labelCollapsePanel.Cursor = Cursors.Hand;
-            this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
-            this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(334, -2);
-            this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
-            this.labelCollapsePanel.MaximumSize = new Size(16, 16);
-            this.labelCollapsePanel.MinimumSize = new Size(16, 16);
-            this.labelCollapsePanel.Name = "labelCollapsePanel";
-            this.labelCollapsePanel.Size = new Size(16, 16);
-            this.labelCollapsePanel.TabIndex = 145;
-            this.labelCollapsePanel.Text = ">";
-            this.toolTip1.SetToolTip(this.labelCollapsePanel, "Hide/Reveal right panel");
-            this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
-            // 
             // propertyGridLvl
             // 
             this.propertyGridLvl.BackColor = Color.FromArgb(31, 31, 31);
@@ -465,8 +464,8 @@
             // 
             this.splitContainer3.Panel2.AutoScroll = true;
             this.splitContainer3.Panel2.Controls.Add(this.volumeSlider1);
-            this.splitContainer3.Panel2.Controls.Add(this.lvlLoopToolStrip);
             this.splitContainer3.Panel2.Controls.Add(this.lvlLoopTracks);
+            this.splitContainer3.Panel2.Controls.Add(this.lvlLoopToolStrip);
             this.splitContainer3.Panel2.Controls.Add(this.label22);
             this.splitContainer3.Size = new Size(707, 201);
             this.splitContainer3.SplitterDistance = 250;
@@ -746,7 +745,7 @@
             this.lvlLoopTracks.Dock = DockStyle.Fill;
             this.lvlLoopTracks.EnableHeadersVisualStyles = false;
             this.lvlLoopTracks.GridColor = Color.Black;
-            this.lvlLoopTracks.Location = new Point(0, 13);
+            this.lvlLoopTracks.Location = new Point(0, 38);
             this.lvlLoopTracks.Margin = new Padding(4, 3, 4, 3);
             this.lvlLoopTracks.MultiSelect = false;
             this.lvlLoopTracks.Name = "lvlLoopTracks";
@@ -765,7 +764,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new Size(452, 188);
+            this.lvlLoopTracks.Size = new Size(452, 163);
             this.lvlLoopTracks.TabIndex = 161;
             this.lvlLoopTracks.CellClick += this.lvlLoopTracks_CellClick;
             this.lvlLoopTracks.CellPainting += this.lvlLoopTracks_CellPainting;
