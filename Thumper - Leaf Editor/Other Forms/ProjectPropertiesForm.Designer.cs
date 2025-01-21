@@ -69,7 +69,7 @@ namespace Thumper_Custom_Level_Editor
             this.label1.AutoSize = true;
             this.label1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label1.ForeColor = Color.White;
-            this.label1.Location = new Point(14, 10);
+            this.label1.Location = new Point(14, 12);
             this.label1.Margin = new Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new Size(234, 13);
@@ -265,7 +265,7 @@ namespace Thumper_Custom_Level_Editor
             this.label8.Cursor = Cursors.Help;
             this.label8.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.label8.ForeColor = Color.DodgerBlue;
-            this.label8.Location = new Point(247, 8);
+            this.label8.Location = new Point(247, 10);
             this.label8.Margin = new Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new Size(15, 16);
