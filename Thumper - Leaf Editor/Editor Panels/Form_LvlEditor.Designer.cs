@@ -73,13 +73,13 @@
             this.chkTunnelCopy = new ToolStripButton();
             this.btnLvlRandomTunnel = new ToolStripButton();
             this.btnLvlPathView = new ToolStripButton();
-            this.lvlLoopToolStrip = new ToolStrip();
-            this.btnLvlLoopAdd = new ToolStripButton();
-            this.btnLvlLoopDelete = new ToolStripButton();
             this.lvlLoopTracks = new DataGridView();
             this.LvlLoopPlay = new DataGridViewButtonColumn();
             this.LoopSample = new DataGridViewComboBoxColumn();
             this.BeatsPerLoop = new DataGridViewTextBoxColumn();
+            this.lvlLoopToolStrip = new ToolStrip();
+            this.btnLvlLoopAdd = new ToolStripButton();
+            this.btnLvlLoopDelete = new ToolStripButton();
             this.label22 = new Label();
             this.pictureTunnelViewer = new Label();
             this.lvlToolStrip.SuspendLayout();
@@ -98,8 +98,8 @@
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).BeginInit();
             this.lvlPathsToolStrip.SuspendLayout();
-            this.lvlLoopToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).BeginInit();
+            this.lvlLoopToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLvlTunnels
@@ -670,49 +670,6 @@
             this.btnLvlPathView.Text = "toolStripButton1";
             this.btnLvlPathView.ToolTipText = "Show/Hide tunnel preview";
             // 
-            // lvlLoopToolStrip
-            // 
-            this.lvlLoopToolStrip.AutoSize = false;
-            this.lvlLoopToolStrip.BackColor = Color.FromArgb(10, 10, 10);
-            this.lvlLoopToolStrip.GripMargin = new Padding(0);
-            this.lvlLoopToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            this.lvlLoopToolStrip.ImageScalingSize = new Size(20, 20);
-            this.lvlLoopToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLoopAdd, this.btnLvlLoopDelete });
-            this.lvlLoopToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlLoopToolStrip.Location = new Point(0, 13);
-            this.lvlLoopToolStrip.Name = "lvlLoopToolStrip";
-            this.lvlLoopToolStrip.Padding = new Padding(0);
-            this.lvlLoopToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlLoopToolStrip.Size = new Size(452, 25);
-            this.lvlLoopToolStrip.Stretch = true;
-            this.lvlLoopToolStrip.TabIndex = 163;
-            // 
-            // btnLvlLoopAdd
-            // 
-            this.btnLvlLoopAdd.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlLoopAdd.Enabled = false;
-            this.btnLvlLoopAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.btnLvlLoopAdd.ForeColor = Color.White;
-            this.btnLvlLoopAdd.Image = Properties.Resources.icon_plus;
-            this.btnLvlLoopAdd.ImageTransparentColor = Color.Magenta;
-            this.btnLvlLoopAdd.Margin = new Padding(0);
-            this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
-            this.btnLvlLoopAdd.Size = new Size(24, 25);
-            this.btnLvlLoopAdd.ToolTipText = "Add new loop track";
-            this.btnLvlLoopAdd.Click += this.btnLvlLoopAdd_Click;
-            // 
-            // btnLvlLoopDelete
-            // 
-            this.btnLvlLoopDelete.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLvlLoopDelete.Enabled = false;
-            this.btnLvlLoopDelete.Image = Properties.Resources.icon_remove2;
-            this.btnLvlLoopDelete.ImageTransparentColor = Color.Magenta;
-            this.btnLvlLoopDelete.Margin = new Padding(0);
-            this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
-            this.btnLvlLoopDelete.Size = new Size(24, 25);
-            this.btnLvlLoopDelete.ToolTipText = "Delete selected loop track";
-            this.btnLvlLoopDelete.Click += this.btnLvlLoopDelete_Click;
-            // 
             // lvlLoopTracks
             // 
             this.lvlLoopTracks.AllowUserToAddRows = false;
@@ -796,6 +753,49 @@
             this.BeatsPerLoop.Name = "BeatsPerLoop";
             this.BeatsPerLoop.Width = 62;
             // 
+            // lvlLoopToolStrip
+            // 
+            this.lvlLoopToolStrip.AutoSize = false;
+            this.lvlLoopToolStrip.BackColor = Color.FromArgb(10, 10, 10);
+            this.lvlLoopToolStrip.GripMargin = new Padding(0);
+            this.lvlLoopToolStrip.GripStyle = ToolStripGripStyle.Hidden;
+            this.lvlLoopToolStrip.ImageScalingSize = new Size(20, 20);
+            this.lvlLoopToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLoopAdd, this.btnLvlLoopDelete });
+            this.lvlLoopToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.lvlLoopToolStrip.Location = new Point(0, 13);
+            this.lvlLoopToolStrip.Name = "lvlLoopToolStrip";
+            this.lvlLoopToolStrip.Padding = new Padding(0);
+            this.lvlLoopToolStrip.RenderMode = ToolStripRenderMode.System;
+            this.lvlLoopToolStrip.Size = new Size(452, 25);
+            this.lvlLoopToolStrip.Stretch = true;
+            this.lvlLoopToolStrip.TabIndex = 163;
+            // 
+            // btnLvlLoopAdd
+            // 
+            this.btnLvlLoopAdd.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLvlLoopAdd.Enabled = false;
+            this.btnLvlLoopAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.btnLvlLoopAdd.ForeColor = Color.White;
+            this.btnLvlLoopAdd.Image = Properties.Resources.icon_plus;
+            this.btnLvlLoopAdd.ImageTransparentColor = Color.Magenta;
+            this.btnLvlLoopAdd.Margin = new Padding(0);
+            this.btnLvlLoopAdd.Name = "btnLvlLoopAdd";
+            this.btnLvlLoopAdd.Size = new Size(24, 25);
+            this.btnLvlLoopAdd.ToolTipText = "Add new loop track";
+            this.btnLvlLoopAdd.Click += this.btnLvlLoopAdd_Click;
+            // 
+            // btnLvlLoopDelete
+            // 
+            this.btnLvlLoopDelete.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLvlLoopDelete.Enabled = false;
+            this.btnLvlLoopDelete.Image = Properties.Resources.icon_remove2;
+            this.btnLvlLoopDelete.ImageTransparentColor = Color.Magenta;
+            this.btnLvlLoopDelete.Margin = new Padding(0);
+            this.btnLvlLoopDelete.Name = "btnLvlLoopDelete";
+            this.btnLvlLoopDelete.Size = new Size(24, 25);
+            this.btnLvlLoopDelete.ToolTipText = "Delete selected loop track";
+            this.btnLvlLoopDelete.Click += this.btnLvlLoopDelete_Click;
+            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -864,9 +864,9 @@
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).EndInit();
             this.lvlPathsToolStrip.ResumeLayout(false);
             this.lvlPathsToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).EndInit();
             this.lvlLoopToolStrip.ResumeLayout(false);
             this.lvlLoopToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).EndInit();
             this.ResumeLayout(false);
         }
 

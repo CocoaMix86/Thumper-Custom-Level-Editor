@@ -25,6 +25,8 @@ namespace Thumper_Custom_Level_Editor
         public static decimal LeafQuickValue7 = 1.000m;
         public static decimal LeafQuickValue8 = 1.000m;
         public static decimal LeafQuickValue9 = 1.000m;
+        public static Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
+        public static Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
 
         private void LoadQuickValues()
         {

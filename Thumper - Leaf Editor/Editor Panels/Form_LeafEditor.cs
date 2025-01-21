@@ -78,8 +78,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool GlobalExpand;
         private bool IsInterpolating;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
-        private Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
-        private Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
         private List<SaveState> _undolistleaf = new();
         public DataObject ClipBoardDataPoints = new();
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
@@ -1704,7 +1702,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     isdefault = false
                 };
                 _s.param_path_lane = seq_obj.ContainsKey("param_path") && ((string)seq_obj["param_path"]).Contains('.') ? ((string)seq_obj["param_path"]).Split('.')[1] : "none";
-                _s.friendly_lane = TrackLaneFriendly[_s.param_path_lane];
+                _s.friendly_lane = TCLE.TrackLaneFriendly[_s.param_path_lane];
                 //if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
                 if (_s.param_path == "play") {
                     _s.category = "PLAY SAMPLE";
@@ -1715,9 +1713,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     try {
                         //string reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
                         string reg_param = $"{_s.param_path}{(_s.param_path_lane != "none" ? ".ent" : "")}";
-                        Object_Params objmatch = TCLE.LeafObjects.First(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLeaf.Name, "leafname"));
-                        _s.friendly_param = objmatch.param_displayname ?? "";
-                        _s.category = objmatch.category ?? "";
+                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLeaf.Name, "leafname"));
+                        _s.friendly_param = objmatch?.param_displayname ?? "";
+                        _s.category = objmatch?.category ?? "";
                     }
                     catch (Exception) {
                         loadfail = true;
@@ -1732,7 +1730,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             beat = (int)data_point["beat"],
                             value = data_point["value"],
                             interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
-                            ease = Easings[(string)data_point["ease"] ?? "kEaseInOut"]
+                            ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
                         };
                         _s.data_points[data.beat] = data;
                     }
@@ -1742,7 +1740,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             beat = int.Parse(((JProperty)dp).Name),
                             value = TCLE.TruncateDecimal((decimal)((JProperty)dp).Value, 3),
                             interpolation = "Linear",
-                            ease = Easings["kEaseInOut"]
+                            ease = TCLE.Easings["kEaseInOut"]
                         };
                         _s.data_points[data.beat] = data;
                     }

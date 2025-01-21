@@ -42,6 +42,8 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public ObservableCollection<LvlLeafData> lvlleafs;
         [Browsable(false)]
+        public List<Sequencer_Object> seq_objs;
+        [Browsable(false)]
         public ObservableCollection<LvlLoop> lvlloops { get; set; }
         [Browsable(false)]
         public LvlLeafData sublevel { get; set; }
@@ -52,6 +54,7 @@ namespace Thumper_Custom_Level_Editor
             FilePath = path;
             sublevel = new();
             undoItems = new();
+            seq_objs = new();
             lvlleafs = new();
             lvlleafs.CollectionChanged += parent.lvlleaf_CollectionChanged;
             lvlloops = new();
