@@ -274,33 +274,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
             SaveCheckAndWrite(false);
         }
-        /// LVL NEW
-        private void newToolStripMenuItem1_Click(object sender, EventArgs e)
+
+        private void lvlLeafPaths_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            //if LVL not saved, have user confirm if they want to continue
-            if ((!EditorIsSaved && MessageBox.Show("Current LVL is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                SaveAs();
-            }
+            if (e.RowIndex == -1)
+                return;
+            if (!btnLvlPathView.Checked)
+                return;
+            pictureTunnelViewer.Visible = true;
+            pictureTunnelViewer.Location = new Point(this.PointToClient(System.Windows.Forms.Cursor.Position).X + 50, this.Height - 300);
+            pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
         }
-        /// LVL LOAD
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if ((!EditorIsSaved && MessageBox.Show("Current lvl is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Editor Lvl File (*.txt)|lvl_*.txt";
-                ofd.Title = "Load a Thumper Lvl file";
-                ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
-                if (ofd.ShowDialog() == DialogResult.OK) {
-                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName));
-                    if (filepath == null)
-                        return;
-                    //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
-                    LoadLvl(_load, filepath);
-                }
-            }
-        }
+
+        private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => pictureTunnelViewer.Visible = false;
+        private void lvlLeafPaths_MouseLeave(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
+        private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
         #endregion
 
         #region Buttons
@@ -531,6 +519,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
             LoadLvl(lvlProperties.revertPoint, LoadedLvl);
             TCLE.PlaySound("UIrevertchanges");
+        }
+
+        private void btnLvlSequencer_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -870,23 +863,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         #endregion
-
-        private void lvlLeafPaths_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1)
-                return;
-            if (!btnLvlPathView.Checked)
-                return;
-            pictureTunnelViewer.Visible = true;
-            pictureTunnelViewer.Location = new Point(this.PointToClient(System.Windows.Forms.Cursor.Position).X + 50, this.Height - 300);
-            pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
-        }
-
-        private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => pictureTunnelViewer.Visible = false;
-        private void lvlLeafPaths_MouseLeave(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
-        private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
-
-
 
         private void lvlLoopTracks_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {

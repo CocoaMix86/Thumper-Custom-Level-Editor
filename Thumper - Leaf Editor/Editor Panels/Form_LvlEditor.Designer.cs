@@ -445,6 +445,7 @@
             this.btnLvlSequencer.TabIndex = 150;
             this.btnLvlSequencer.Text = "Open Sequencer";
             this.btnLvlSequencer.UseVisualStyleBackColor = false;
+            this.btnLvlSequencer.Click += this.btnLvlSequencer_Click;
             // 
             // splitContainer3
             // 
