@@ -603,93 +603,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next(0, 1000000)
                 });
             }
-            //each object in the seq_objs[] list
-            foreach (dynamic seq_obj in _load["seq_objs"]) {
-                Sequencer_Object _s = new(null) {
-                    obj_name = seq_obj["obj_name"],
-                    trait_type = seq_obj["trait_type"],
-                    step = (string)seq_obj["step"] == "True",
-                    defaultvalue = seq_obj["default"],
-                    footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
-                    //if the leaf has definitions for these, add them. If not, set to defaults
-                    param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]).Split('.')[0],
-                    highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 0,
-                    enabled = ((string)seq_obj["enabled"] ?? "True") == "True",
-                    isdefault = false
-                };
-                _s.param_path_lane = seq_obj.ContainsKey("param_path") && ((string)seq_obj["param_path"]).Contains('.') ? ((string)seq_obj["param_path"]).Split('.')[1] : "none";
-                _s.friendly_lane = TCLE.TrackLaneFriendly[_s.param_path_lane];
-                //if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
-                if (_s.param_path == "play") {
-                    _s.category = "PLAY SAMPLE";
-                    _s.friendly_param = _s.param_path;
-                }
-                //otherwise, search _objects for the friendly names for display purposes
-                else {
-                    try {
-                        string reg_param = $"{_s.param_path}{(_s.param_path_lane != "none" ? ".ent" : "")}";
-                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLvl.Name, "leafname"));
-                        _s.friendly_param = _s.param_path.StartsWith("layer_volume") ? $"Loop Track {_s.param_path.Split(',')[1]} Volume": (objmatch?.param_displayname ?? "");
-                        _s.category = _s.param_path.StartsWith("layer_volume") ? "AUDIO" : (objmatch?.category ?? "");
-                    }
-                    catch (Exception) { }
-                }
-                _s.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : (TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple);
-                foreach (dynamic dp in seq_obj["data_points"]) {
-                    if (dp is JObject data_point) {
-                        SeqDataPoint data = new() {
-                            Owner = _s,
-                            beat = (int)data_point["beat"],
-                            value = data_point["value"],
-                            interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
-                            ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
-                        };
-                        _s.data_points[data.beat] = data;
-                    }
-                    else {
-                        SeqDataPoint data = new() {
-                            Owner = _s,
-                            beat = int.Parse(((JProperty)dp).Name),
-                            value = TCLE.TruncateDecimal((decimal)((JProperty)dp).Value, 3),
-                            interpolation = "Linear",
-                            ease = TCLE.Easings["kEaseInOut"]
-                        };
-                        _s.data_points[data.beat] = data;
-                    }
-                }
-                //if object is multilane, we will add all 5 lanes at once, as defaults
-                //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
-                if (_s.friendly_lane is not "none") {
-                    //ProcessOtherLanesLast.Add(_s);
-                    Sequencer_Object lookup = LvlProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
-                    //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
-                    if (lookup == null) {
-                        LvlProperties.seq_objs.Add(_s.CloneAsDefault("a01", "lane left 2", new DataGridViewRow()));
-                        LvlProperties.seq_objs.Add(_s.CloneAsDefault("a02", "lane left 1", new DataGridViewRow()));
-                        LvlProperties.seq_objs.Add(_s.CloneAsDefault("ent", "lane center", new DataGridViewRow()));
-                        LvlProperties.seq_objs.Add(_s.CloneAsDefault("z01", "lane right 1", new DataGridViewRow()));
-                        LvlProperties.seq_objs.Add(_s.CloneAsDefault("z02", "lane right 2", new DataGridViewRow()));
-                    }
-                    lookup = LvlProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
-                    int index = LvlProperties.seq_objs.IndexOf(lookup);
-                    _s.editor_row = lookup.editor_row;
-                    LvlProperties.seq_objs[index] = _s;
-                }
-                //else just add the object without needing extra lanes
-                else {
-                    //attach the dgv row to the object
-                    _s.editor_row = new DataGridViewRow();
-                    _s.expandlanes = true;
-                    //finally, add the completed seq_obj to tracks
-                    LvlProperties.seq_objs.Add(_s);
-                }
-            }
 
             btnLvlLeafRandom.Enabled = true;
             propertyGridLvl.SelectedObject = lvlProperties;
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             EditorIsSaved = true;
+            btnLvlSequencer.Enabled = true;
             RecalculateRuntime();
         }
 

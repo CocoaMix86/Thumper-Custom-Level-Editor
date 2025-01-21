@@ -1684,12 +1684,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Rows.Clear();
             LeafLengthChanged();
             trackEditor.RowHeadersVisible = true;
-            int biggestheader = 50;
             List<Sequencer_Object> ProcessOtherLanesLast = new();
 
             //each object in the seq_objs[] list becomes a track
-            foreach (dynamic seq_obj in _load["seq_objs"]) {
-                Sequencer_Object _s = new(this) {
+            LoadSequencer(_load["seq_objs"], LeafProperties.seq_objs);
+
+            if (loadfail) {
+                MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
+            }
+
+            //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
+            EnableLeafButtons(true);
+            TrackTimeSigHighlighting();
+            trackZoom_Scroll(null, null);
+
+            propertyGridLeaf.SelectedObject = LeafProperties;
+            //mark that lvl is saved (just freshly loaded)
+            EditorIsLoading = false;
+            EditorIsSaved = true;
+            SaveCheckAndWrite(true);
+        }
+
+        public void LoadSequencer(dynamic seqJSON, ObservableCollection<Sequencer_Object> Seq_Objs)
+        {
+            int biggestheader = 50;
+            //each object in the seq_objs[] list
+            foreach (dynamic seq_obj in seqJSON) {
+                Sequencer_Object _s = new(null) {
                     obj_name = seq_obj["obj_name"],
                     trait_type = seq_obj["trait_type"],
                     step = (string)seq_obj["step"] == "True",
@@ -1711,16 +1732,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //otherwise, search _objects for the friendly names for display purposes
                 else {
                     try {
-                        //string reg_param = Regex.Replace(_s.param_path, "[.].*", ".ent");
                         string reg_param = $"{_s.param_path}{(_s.param_path_lane != "none" ? ".ent" : "")}";
-                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLeaf.Name, "leafname"));
-                        _s.friendly_param = objmatch?.param_displayname ?? "";
-                        _s.category = objmatch?.category ?? "";
+                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLvl.Name, "leafname"));
+                        _s.friendly_param = _s.param_path.StartsWith("layer_volume") ? $"Loop Track {_s.param_path.Split(',')[1]} Volume" : (objmatch?.param_displayname ?? "");
+                        _s.category = _s.param_path.StartsWith("layer_volume") ? "AUDIO" : (objmatch?.category ?? "");
                     }
-                    catch (Exception) {
-                        loadfail = true;
-                        loadfailmessage += $"{_s.obj_name} : {_s.param_path}\n";
-                    }
+                    catch (Exception) { }
                 }
                 _s.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : (TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple);
                 foreach (dynamic dp in seq_obj["data_points"]) {
@@ -1749,30 +1766,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
                 if (_s.friendly_lane is not "none") {
                     //ProcessOtherLanesLast.Add(_s);
-                    Sequencer_Object lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
+                    Sequencer_Object lookup = Seq_Objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
                     //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
                     if (lookup == null) {
-                        trackEditor.Rows.Add(5);
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("a01", "lane left 2", trackEditor.Rows[^5]));
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("a02", "lane left 1", trackEditor.Rows[^4]));
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("ent", "lane center", trackEditor.Rows[^3]));
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("z01", "lane right 1", trackEditor.Rows[^2]));
-                        leafProperties.seq_objs.Add(_s.CloneAsDefault("z02", "lane right 2", trackEditor.Rows[^1]));
+                        Seq_Objs.Add(_s.CloneAsDefault("a01", "lane left 2", new DataGridViewRow()));
+                        Seq_Objs.Add(_s.CloneAsDefault("a02", "lane left 1", new DataGridViewRow()));
+                        Seq_Objs.Add(_s.CloneAsDefault("ent", "lane center", new DataGridViewRow()));
+                        Seq_Objs.Add(_s.CloneAsDefault("z01", "lane right 1", new DataGridViewRow()));
+                        Seq_Objs.Add(_s.CloneAsDefault("z02", "lane right 2", new DataGridViewRow()));
                     }
-                    lookup = leafProperties.seq_objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
-                    int index = leafProperties.seq_objs.IndexOf(lookup);
+                    lookup = Seq_Objs.FirstOrDefault(x => x.obj_name == _s.obj_name && x.param_path == _s.param_path && x.param_path_lane == _s.param_path_lane && x.isdefault == true);
+                    int index = Seq_Objs.IndexOf(lookup);
                     _s.editor_row = lookup.editor_row;
-                    leafProperties.seq_objs[index] = _s;
+                    Seq_Objs[index] = _s;
                 }
                 //else just add the object without needing extra lanes
                 else {
                     //attach the dgv row to the object
-                    trackEditor.Rows.Add(1);
-                    _s.editor_row = trackEditor.Rows[^1];
+                    _s.editor_row = new DataGridViewRow();
                     _s.expandlanes = true;
                     //finally, add the completed seq_obj to tracks
-                    leafProperties.seq_objs.Add(_s);
+                    Seq_Objs.Add(_s);
                 }
+
                 TrackRawImport(_s, _s.data_points);
                 //measure header and see if it's the biggest
                 int tempsize = TextRenderer.MeasureText(_s.editor_row.HeaderCell.Value.ToString(), _s.editor_row.HeaderCell.Style.Font).Width;
@@ -1783,21 +1799,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set header width manually and allow resizing
             trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             trackEditor.RowHeadersWidth = biggestheader;
-
-            if (loadfail) {
-                MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
-            }
-
-            //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
-            EnableLeafButtons(true);
-            TrackTimeSigHighlighting();
-            trackZoom_Scroll(null, null);
-
-            propertyGridLeaf.SelectedObject = LeafProperties;
-            //mark that lvl is saved (just freshly loaded)
-            EditorIsLoading = false;
-            EditorIsSaved = true;
-            SaveCheckAndWrite(true);
         }
 
         ///SAVE
