@@ -7,6 +7,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_LeafEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
+        ///Load LEAF
         public Form_LeafEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
@@ -15,16 +16,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null) {
                 LoadLeaf(load, filepath);
+                //each object in the seq_objs[] list becomes a track
+                LeafProperties.seq_objs = LoadSequencer(load["seq_objs"], this);
+                LoadTracksFromSequencer(LeafProperties.seq_objs);
+                LoadEnd();
             }
         }
-        public Form_LeafEditor(dynamic objJSON, ObservableCollection<Sequencer_Object> Seq_Objs, FileInfo filepath)
+        ///Load LVL Sequencer
+        public Form_LeafEditor(LvlProperties toload)
         {
             InitializeComponent();
             BuildObjectTree();
             RenderForm();
 
-            if (Seq_Objs != null) {
-                LoadSequencer(objJSON);
+            if (toload != null) {
+                LoadLeaf(null, toload.FilePath, toload);
+                LeafProperties.seq_objs = LoadSequencer(toload.seqJSON, this);
+                LoadTracksFromSequencer(LeafProperties.seq_objs);
+                LoadEnd();
             }
         }
         private void RenderForm()
@@ -1659,44 +1668,59 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Update DGV from _tracks
-        public void LoadLeaf(dynamic _load, FileInfo filepath, bool resetundolist = true)
+        public void LoadLeaf(dynamic _load, FileInfo filepath, LvlProperties Lvl = null)
         {
-            if (_load == null)
-                return;
-            //reset flag in case it got stuck previously
-            EditorIsLoading = false;
-            //detect if file is actually Leaf or not
-            if ((string)_load["obj_type"] != "SequinLeaf") {
-                MessageBox.Show($"{filepath.Name} does not appear to be a leaf file.\n'obj_type' was not SequinLeaf.", "Thumper Custom Level Editor");
-                return;
-            }
-            //check if it has a name
-            //important for some leaf objects
-            if (_load["obj_name"] == null) {
-                MessageBox.Show("Leaf missing obj_name parameter. Please set it in the txt file and then reload.", "Thumper Custom Level Editor");
-                return;
+            //skip certain checks if we're loading a non-leaf sequencer
+            if (filepath.Extension == ".leaf") {
+                if (_load == null)
+                    return;
+                //reset flag in case it got stuck previously
+                EditorIsLoading = false;
+                //detect if file is actually Leaf or not
+                if ((string)_load["obj_type"] != "SequinLeaf") {
+                    MessageBox.Show($"{filepath.Name} does not appear to be a leaf file.\n'obj_type' was not SequinLeaf.", "Thumper Custom Level Editor");
+                    return;
+                }
+                //check if it has a name
+                //important for some leaf objects
+                if (_load["obj_name"] == null) {
+                    MessageBox.Show("Leaf missing obj_name parameter. Please set it in the txt file and then reload.", "Thumper Custom Level Editor");
+                    return;
+                }
             }
             //check for template or regular file
-            if (filepath.Name == "template") {
+            if (filepath.Name == "template")
                 loadedleaf = null;
-            }
-            else {
+            else
                 loadedleaf = filepath;
-            }
-            this.Text = LoadedLeaf.Name;
+
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
+            if (filepath.Extension == ".leaf") {
+                this.Text = LoadedLeaf.Name;
+                //
+                leafProperties = new(this, filepath) {
+                    SequencerType = filepath.Extension,
+                    beats = (int?)_load["beat_cnt"] ?? 1,
+                    timesignature = (string)_load["time_sig"] ?? "4/4"
+                };
+            }
+            else if (filepath.Extension == ".lvl") {
+                this.Text = $"{LoadedLeaf.Name} [Sequencer]";
+                //
+                leafProperties = new(this, filepath) {
+                    SequencerType = filepath.Extension,
+                    beats = Lvl.lvlleafs.Select(x => x.beats).Sum(),
+                    timesignature = "4/4"
+                };
+            }
 
-            leafProperties = new(this, filepath) {
-                SequencerType = filepath.Extension,
-                beats = (int?)_load["beat_cnt"] ?? 1,
-                timesignature = (string)_load["time_sig"] ?? "4/4"
-            };
 
             LeafLengthChanged();
-            //each object in the seq_objs[] list becomes a track
-            LeafProperties.seq_objs = LoadSequencer(_load["seq_objs"]);
+        }
 
+        public void LoadEnd()
+        {
             //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
             EnableLeafButtons(true);
             TrackTimeSigHighlighting();
@@ -1709,19 +1733,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
         }
 
-        public ObservableCollection<Sequencer_Object> LoadSequencer(dynamic seqJSON)
+        public static ObservableCollection<Sequencer_Object> LoadSequencer(dynamic seqJSON, Form_LeafEditor parent)
         {
             ObservableCollection<Sequencer_Object> Seq_Objs = new();
             bool loadfail = false;
             string loadfailmessage = "";
-            //clear the DGV and prep for new data
-            trackEditor.Rows.Clear();
-            trackEditor.RowHeadersVisible = true;
-            int biggestheader = 50;
 
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in seqJSON) {
-                Sequencer_Object _s = new(this) {
+                Sequencer_Object _s = new(parent) {
                     obj_name = seq_obj["obj_name"],
                     trait_type = seq_obj["trait_type"],
                     step = (string)seq_obj["step"] == "True",
@@ -1744,7 +1764,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     try {
                         string reg_param = $"{_s.param_path}{(_s.param_path_lane != "none" ? ".ent" : "")}";
-                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLeaf.Name, "leafname"));
+                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(parent.LoadedLeaf.Name, "leafname"));
                         _s.friendly_param = _s.param_path.StartsWith("layer_volume") ? $"Loop Track {_s.param_path.Split(',')[1]} Volume" : (objmatch?.param_displayname ?? "");
                         _s.category = _s.param_path.StartsWith("layer_volume") ? "AUDIO" : (objmatch?.category ?? "");
                     }
@@ -1799,13 +1819,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //finally, add the completed seq_obj to tracks
                     Seq_Objs.Add(_s);
                 }
+            }
 
+            if (loadfail) {
+                MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
+            }
+            return Seq_Objs;
+        }
+
+        public void LoadTracksFromSequencer(ObservableCollection<Sequencer_Object> Seq_Objs)
+        {
+            //clear the DGV and prep for new data
+            trackEditor.Rows.Clear();
+            trackEditor.RowHeadersVisible = true;
+            int biggestheader = 50;
+            foreach (Sequencer_Object seq in Seq_Objs) {
                 //measure header and see if it's the biggest
-                int tempsize = TextRenderer.MeasureText(_s.editor_row.HeaderCell.Value.ToString(), _s.editor_row.HeaderCell.Style.Font).Width;
+                int tempsize = TextRenderer.MeasureText(seq.editor_row.HeaderCell.Value.ToString(), seq.editor_row.HeaderCell.Style.Font).Width;
                 if (tempsize > biggestheader)
                     biggestheader = tempsize;
-            }
-            foreach (Sequencer_Object seq in Seq_Objs) {
+
                 trackEditor.Rows.Add(seq.editor_row);
                 TrackRawImport(seq, seq.data_points);
             }
@@ -1813,11 +1846,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set header width manually and allow resizing
             trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             trackEditor.RowHeadersWidth = biggestheader;
-
-            if (loadfail) {
-                MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
-            }
-            return Seq_Objs;
         }
 
         ///SAVE
@@ -1874,22 +1902,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsSaved = IsSaved;
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = LoadedLeaf.Name + "*";
+                this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}" + "*";
                 //add current JSON to the undo list
                 leafProperties.undoItems.Add(BuildSave(leafProperties));
             }
             else {
-                this.Text = LoadedLeaf.Name;
-                //build the JSON to write to file
-                JObject _saveJSON = BuildSave(leafProperties);
-                leafProperties.revertPoint = _saveJSON;
-                //write JSON to file
-                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLeaf], _saveJSON);
+                this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}";
+                //If leaf, build the JSON to write to file
+                if (LoadedLeaf.Extension == ".leaf") {
+                    JObject _saveJSON = BuildSave(leafProperties);
+                    leafProperties.revertPoint = _saveJSON;
+                    //write JSON to file
+                    TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLeaf], _saveJSON);
+                    TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
+                }
+                //else if a different sequencer, pass data back and force save
+                else {
+                    Form_LvlEditor Owner = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(LoadedLeaf.Name)) as Form_LvlEditor;
+                    if (Owner != null) {
+                        Owner.lvlProperties.seq_objs = LeafProperties.seq_objs;
+                        Owner.Save();
+                    }
+                }
 
                 if (playsound) TCLE.PlaySound("UIsave");
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(LoadedLeaf.Name);
-                TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
             }
         }
         ///LEAF LENGTH
@@ -2270,11 +2308,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void UndoFunction(int undoindex)
         {
             if (undoindex >= _undolistleaf.Count) {
-                LoadLeaf(_undolistleaf.Last().savestate, LoadedLeaf, false);
+                //LoadLeaf(_undolistleaf.Last().savestate, LoadedLeaf, false);
                 _undolistleaf.RemoveRange(0, _undolistleaf.Count - 1);
             }
             else {
-                LoadLeaf(_undolistleaf[undoindex].savestate, LoadedLeaf, false);
+                //LoadLeaf(_undolistleaf[undoindex].savestate, LoadedLeaf, false);
                 _undolistleaf.RemoveRange(0, undoindex);
             }
         }

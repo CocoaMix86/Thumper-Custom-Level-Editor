@@ -22,8 +22,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
             TCLE.DoubleBufferDGV(lvlLeafList, false);
 
-            if (load != null)
+            if (load != null) {
                 LoadLvl(load, filepath);
+            }
         }
         private void Form_LvlEditor_Shown(object sender, EventArgs e)
         {
@@ -524,7 +525,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlSequencer_Click(object sender, EventArgs e)
         {
-            Form_LeafEditor leaf = new(null, LvlProperties.seq_objs, LoadedLvl) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_LeafEditor leaf = new(LvlProperties) { DockAreas = DockAreas.Document | DockAreas.Float };
             leaf.Show(TCLE.ActiveWorkspace.dockMain, DockState.Document);
         }
         #endregion
@@ -578,7 +579,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 approachbeats = (int)_load["approach_beats"],
                 volume = (decimal)_load["volume"],
                 allowinput = (string)_load["input_allowed"] == "True",
-                tutorialtype = (string)_load["tutorial_type"]
+                tutorialtype = (string)_load["tutorial_type"],
+                seqJSON = _load["seq_objs"]
             };
 
             //Clear DGVs so new data can load

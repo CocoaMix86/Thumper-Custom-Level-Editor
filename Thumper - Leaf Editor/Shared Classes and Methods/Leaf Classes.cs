@@ -163,12 +163,12 @@ namespace Thumper_Custom_Level_Editor
         {
             get => Beats;
             set {
-                if (SequencerType == "lvl")
-                    return;
-                if (value > 255)
-                    value = 255;
-                else if (value < 1)
-                    value = 1;
+                if (SequencerType == ".leaf") {
+                    if (value > 255)
+                        value = 255;
+                    else if (value < 1)
+                        value = 1;
+                }
                 Beats = (int)value;
                 if (!parent.EditorIsLoading)
                     parent.LeafLengthChanged();
