@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using VarispeedDemo.SoundTouch;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -523,7 +524,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlSequencer_Click(object sender, EventArgs e)
         {
-
+            Form_LeafEditor leaf = new(null, LvlProperties.seq_objs, LoadedLvl) { DockAreas = DockAreas.Document | DockAreas.Float };
+            leaf.Show(TCLE.ActiveWorkspace.dockMain, DockState.Document);
         }
         #endregion
 

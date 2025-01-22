@@ -134,6 +134,8 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object selectedobj { get; set; }
         [Browsable(false)]
         public SeqDataPoint selecteddatapoint { get; set; }
+        [Browsable(false)]
+        public string SequencerType { get; set; }
 
         public LeafProperties(Form_LeafEditor Parent, FileInfo path)
         {
@@ -161,6 +163,8 @@ namespace Thumper_Custom_Level_Editor
         {
             get => Beats;
             set {
+                if (SequencerType == "lvl")
+                    return;
                 if (value > 255)
                     value = 255;
                 else if (value < 1)

@@ -922,9 +922,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;

@@ -42,7 +42,7 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public ObservableCollection<LvlLeafData> lvlleafs;
         [Browsable(false)]
-        public List<Sequencer_Object> seq_objs;
+        public ObservableCollection<Sequencer_Object> seq_objs;
         [Browsable(false)]
         public ObservableCollection<LvlLoop> lvlloops { get; set; }
         [Browsable(false)]

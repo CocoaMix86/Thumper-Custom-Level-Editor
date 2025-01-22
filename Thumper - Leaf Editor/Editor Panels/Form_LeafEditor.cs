@@ -11,6 +11,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             BuildObjectTree();
+            RenderForm();
+
+            if (load != null) {
+                LoadLeaf(load, filepath);
+            }
+        }
+        public Form_LeafEditor(dynamic objJSON, ObservableCollection<Sequencer_Object> Seq_Objs, FileInfo filepath)
+        {
+            InitializeComponent();
+            BuildObjectTree();
+            RenderForm();
+
+            if (Seq_Objs != null) {
+                LoadSequencer(objJSON);
+            }
+        }
+        private void RenderForm()
+        {
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
             contextMenuInterps.Renderer = new ContextMenuColors();
@@ -20,10 +38,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             TCLE.DoubleBufferDGV(trackEditor, true);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
-
-            if (load != null) {
-                LoadLeaf(load, filepath);
-            }
         }
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
         {
@@ -1651,8 +1665,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             //reset flag in case it got stuck previously
             EditorIsLoading = false;
-            bool loadfail = false;
-            string loadfailmessage = "";
             //detect if file is actually Leaf or not
             if ((string)_load["obj_type"] != "SequinLeaf") {
                 MessageBox.Show($"{filepath.Name} does not appear to be a leaf file.\n'obj_type' was not SequinLeaf.", "Thumper Custom Level Editor");
@@ -1676,22 +1688,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsLoading = true;
 
             leafProperties = new(this, filepath) {
+                SequencerType = filepath.Extension,
                 beats = (int?)_load["beat_cnt"] ?? 1,
                 timesignature = (string)_load["time_sig"] ?? "4/4"
             };
 
-            //clear the DGV and prep for new data
-            trackEditor.Rows.Clear();
             LeafLengthChanged();
-            trackEditor.RowHeadersVisible = true;
-            List<Sequencer_Object> ProcessOtherLanesLast = new();
-
             //each object in the seq_objs[] list becomes a track
-            LoadSequencer(_load["seq_objs"], LeafProperties.seq_objs);
-
-            if (loadfail) {
-                MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
-            }
+            LeafProperties.seq_objs = LoadSequencer(_load["seq_objs"]);
 
             //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
             EnableLeafButtons(true);
@@ -1705,12 +1709,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true);
         }
 
-        public void LoadSequencer(dynamic seqJSON, ObservableCollection<Sequencer_Object> Seq_Objs)
+        public ObservableCollection<Sequencer_Object> LoadSequencer(dynamic seqJSON)
         {
+            ObservableCollection<Sequencer_Object> Seq_Objs = new();
+            bool loadfail = false;
+            string loadfailmessage = "";
+            //clear the DGV and prep for new data
+            trackEditor.Rows.Clear();
+            trackEditor.RowHeadersVisible = true;
             int biggestheader = 50;
+
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in seqJSON) {
-                Sequencer_Object _s = new(null) {
+                Sequencer_Object _s = new(this) {
                     obj_name = seq_obj["obj_name"],
                     trait_type = seq_obj["trait_type"],
                     step = (string)seq_obj["step"] == "True",
@@ -1733,7 +1744,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     try {
                         string reg_param = $"{_s.param_path}{(_s.param_path_lane != "none" ? ".ent" : "")}";
-                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLvl.Name, "leafname"));
+                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(LoadedLeaf.Name, "leafname"));
                         _s.friendly_param = _s.param_path.StartsWith("layer_volume") ? $"Loop Track {_s.param_path.Split(',')[1]} Volume" : (objmatch?.param_displayname ?? "");
                         _s.category = _s.param_path.StartsWith("layer_volume") ? "AUDIO" : (objmatch?.category ?? "");
                     }
@@ -1745,7 +1756,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         SeqDataPoint data = new() {
                             Owner = _s,
                             beat = (int)data_point["beat"],
-                            value = data_point["value"],
+                            value = (decimal)data_point["value"],
                             interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
                             ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
                         };
@@ -1789,16 +1800,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Seq_Objs.Add(_s);
                 }
 
-                TrackRawImport(_s, _s.data_points);
                 //measure header and see if it's the biggest
                 int tempsize = TextRenderer.MeasureText(_s.editor_row.HeaderCell.Value.ToString(), _s.editor_row.HeaderCell.Style.Font).Width;
                 if (tempsize > biggestheader)
                     biggestheader = tempsize;
             }
+            foreach (Sequencer_Object seq in Seq_Objs) {
+                trackEditor.Rows.Add(seq.editor_row);
+                TrackRawImport(seq, seq.data_points);
+            }
 
             //set header width manually and allow resizing
             trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             trackEditor.RowHeadersWidth = biggestheader;
+
+            if (loadfail) {
+                MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
+            }
+            return Seq_Objs;
         }
 
         ///SAVE
@@ -1896,44 +1915,36 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Import raw text from rich text box to selected row
-        public void TrackRawImport(Sequencer_Object seq, List<SeqDataPoint> data_points)
+        public static void TrackRawImport(Sequencer_Object seq, List<SeqDataPoint> data_points)
         {
             List<SeqDataPoint> DataNotNull = data_points.Where(x => x.value is not null).ToList();
-            //check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
-            //Ask the user if they want to expand the leaf to accomadate the data point
-            if (DataNotNull.Count > 0 && DataNotNull.Last().beat >= LeafProperties.beats) {
-                if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {seq.editor_row.HeaderCell.Value}\nData point: {DataNotNull.Last()}", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    LeafProperties.beats = DataNotNull.Last().beat + 1;
-            }
             //iterate over each data point, and fill cells
             foreach (SeqDataPoint data_point in DataNotNull) {
                 try {
                     seq.editor_row.Cells[data_point.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
-                    seq.data_points[data_point.beat].value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
+                    //seq.data_points[data_point.beat].value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
                 }
-                catch (ArgumentOutOfRangeException) { }
+                catch (ArgumentOutOfRangeException ex) {
+                    break;
+                }
             }
 
             TrackUpdateHighlighting(seq);
         }
-        public void TrackRawImport(Sequencer_Object seq, JObject _rawdata)
+        public static void TrackRawImport(Sequencer_Object seq, JObject _rawdata)
         {
             //_rawdata contains a list of all data points. By getting Properties() of it,
             //each point becomes its own index
             List<JProperty> data_points = _rawdata.Properties().ToList();
-            //check if the last data point is beyond the beat count. If it is, it will crash or not be included in the track editor
-            //Ask the user if they want to expand the leaf to accomadate the data point
-            if (data_points.Count > 0 && int.Parse((data_points.Last()).Name) >= LeafProperties.beats) {
-                if (MessageBox.Show($"Your last data point is beyond the leaf's beat count. Do you want to lengthen the leaf? If you do not, the data point will be left out.\nObject: {seq.editor_row.HeaderCell.Value}\nData point: {data_points.Last()}", "Leaf too short", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    LeafProperties.beats = int.Parse((data_points.Last()).Name) + 1;
-            }
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
                 try {
                     seq.editor_row.Cells[int.Parse(data_point.Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
-                    seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    //seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                 }
-                catch (ArgumentOutOfRangeException) { }
+                catch (ArgumentOutOfRangeException) {
+                    break;
+                }
             }
 
             TrackUpdateHighlighting(seq);
