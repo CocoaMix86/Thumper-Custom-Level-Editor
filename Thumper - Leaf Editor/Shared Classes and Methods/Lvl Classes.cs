@@ -49,6 +49,16 @@ namespace Thumper_Custom_Level_Editor
         public ObservableCollection<LvlLoop> lvlloops { get; set; }
         [Browsable(false)]
         public LvlLeafData sublevel { get; set; }
+        [Browsable(false)]
+        public bool LeafReload
+        {
+            get => _leafreload; set {
+                if (value)
+                    lvlleafs.CollectionChanged -= parent.lvlleaf_CollectionChanged;
+                _leafreload = value;
+            }
+        }
+        private bool _leafreload;
 
         public LvlProperties(Form_LvlEditor Parent, FileInfo path)
         {

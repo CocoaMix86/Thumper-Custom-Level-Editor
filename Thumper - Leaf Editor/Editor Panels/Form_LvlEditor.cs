@@ -216,6 +216,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///_LVLLEAF - Triggers when the collection changes
         public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if (LvlProperties.LeafReload)
+                return;
             int _in = e.NewStartingIndex;
 
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
@@ -677,6 +679,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
             btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
             //monke
+        }
+
+        public void Reload()
+        {
+            dynamic _load = TCLE.LoadFileLock(LoadedLvl.FullName);
+            LoadLvl(_load, LoadedLvl);
         }
 
         ///SAVE

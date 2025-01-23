@@ -45,9 +45,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
         #region Methods
-        public void Save()
+        public bool IsSaved()
         {
-            SaveCheckAndWrite(true, true);
+            return EditorIsSaved;
+        }
+
+        public void Save(bool playsound = true)
+        {
+            SaveCheckAndWrite(true, playsound);
         }
 
         public void Reload()
@@ -92,10 +97,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (playsound) TCLE.PlaySound("UIsave");
 
                 foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(LoadedFile.Name))) {
-                    if (document.GetType() == typeof(Form_MasterEditor))
-                        (document as Form_MasterEditor).Reload();
-                    else if (document.GetType() == typeof(Form_GateEditor))
-                        (document as Form_GateEditor).Reload();
+                    document.GetType().GetMethod("Reload").Invoke(document, null);
                 }
 
             }

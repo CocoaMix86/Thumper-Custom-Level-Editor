@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ABI.Windows.ApplicationModel.Activation;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 
@@ -11,7 +12,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LeafEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
-            BuildObjectTree();
             RenderForm();
 
             if (load != null) {
@@ -26,7 +26,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LeafEditor(LvlProperties toload)
         {
             InitializeComponent();
-            BuildObjectTree();
             RenderForm();
 
             if (toload != null) {
@@ -48,6 +47,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             TCLE.DoubleBufferDGV(trackEditor, true);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
+            BuildObjectTree();
         }
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
         {
@@ -1845,6 +1845,36 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set header width manually and allow resizing
             trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             trackEditor.RowHeadersWidth = biggestheader;
+        }
+
+        public void Reload()
+        {
+            dynamic _load = TCLE.LoadFileLock(LoadedLeaf.FullName);
+            LvlProperties lvlProperties = null;
+            if (LoadedLeaf.Extension == ".lvl") {
+                lvlProperties = new(new Form_LvlEditor(), LoadedLeaf) {
+                    LeafReload = true,
+                    approachbeats = (int)_load["approach_beats"],
+                    volume = (decimal)_load["volume"],
+                    allowinput = (string)_load["input_allowed"] == "True",
+                    tutorialtype = (string)_load["tutorial_type"],
+                    seqJSON = _load["seq_objs"]
+                };
+                foreach (dynamic leaf in _load["leaf_seq"]) {
+                    lvlProperties.lvlleafs.Add(new LvlLeafData() {
+                        leafname = (string)leaf["leaf_name"],
+                        beats = (int)leaf["beat_cnt"],
+                        paths = leaf["sub_paths"].ToObject<List<string>>(),
+                        id = TCLE.rng.Next(0, 1000000)
+                    });
+                }
+            }
+
+            LoadLeaf(_load, LoadedLeaf, lvlProperties);
+            //each object in the seq_objs[] list becomes a track
+            LeafProperties.seq_objs = LoadSequencer(_load["seq_objs"], LeafProperties);
+            LoadTracksFromSequencer(LeafProperties.seq_objs);
+            LoadEnd();
         }
 
         ///SAVE
