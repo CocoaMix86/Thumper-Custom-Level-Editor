@@ -119,6 +119,16 @@ namespace Thumper_Custom_Level_Editor
                     }
                 }
             }
+            LeafObjects.Add(new Object_Params() {
+                category = "AUDIO",
+                obj_name = "leafname",
+                param_displayname = "Loop Track x Volume",
+                param_path = "layer_volume,x",
+                trait_type = "kTraitFloat",
+                step = false,
+                def = "0.0",
+                footer = "1,1,2,1,2,kIntensityScale,kIntensityScale,1,1,1,1,1,1,1,1,0,0,0"
+            });
             //show errors to user if any imports failed
             if (_errorlog.Length > 1) {
                 MessageBox.Show(_errorlog);

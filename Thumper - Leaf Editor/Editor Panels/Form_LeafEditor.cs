@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -867,6 +868,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 friendly_lane = objmatch.param_path.EndsWith(".ent") ? "lane center" : "none",
                 editor_row = new DataGridViewRow()
             };
+            if (seq.category == "AUDIO") {
+                int audiochannels = SequencerObjects.Count(x => x.category == "AUDIO");
+                seq.param_path = seq.param_path.Replace("x", $"{audiochannels}");
+                seq.friendly_param = seq.friendly_param.Replace("x", $"{audiochannels}");
+            }
             seq.expandlanes = seq.friendly_lane == "none" ? true : (Properties.Settings.Default.LeafOptionShowLane ? true : false);
             SequencerObjects.Add(seq);
             trackEditor.Rows.Add(seq.editor_row);
@@ -1752,6 +1758,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     enabled = ((string)seq_obj["enabled"] ?? "True") == "True",
                     isdefault = false
                 };
+                if (_s.param_path.StartsWith("layer_volume"))
+                    _s.param_path = "layer_volume,x";
                 _s.param_path_lane = seq_obj.ContainsKey("param_path") && ((string)seq_obj["param_path"]).Contains('.') ? ((string)seq_obj["param_path"]).Split('.')[1] : "none";
                 _s.friendly_lane = TCLE.TrackLaneFriendly[_s.param_path_lane];
                 //if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
@@ -1764,8 +1772,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     try {
                         string reg_param = $"{_s.param_path}{(_s.param_path_lane != "none" ? ".ent" : "")}";
                         Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == reg_param && obj.obj_name == _s.obj_name.Replace(parent.FilePath.Name, "leafname"));
-                        _s.friendly_param = _s.param_path.StartsWith("layer_volume") ? $"Loop Track {_s.param_path.Split(',')[1]} Volume" : (objmatch?.param_displayname ?? "");
-                        _s.category = _s.param_path.StartsWith("layer_volume") ? "AUDIO" : (objmatch?.category ?? "");
+                        _s.friendly_param = objmatch?.param_displayname ?? "";
+                        _s.category = objmatch?.category ?? "";
+                        //set audio channel numbers on load
+                        if (_s.category == "AUDIO") {
+                            int audiochannels = Seq_Objs.Count(x => x.category == "AUDIO");
+                            _s.param_path = _s.param_path.Replace("x", $"{audiochannels}");
+                            _s.friendly_param = _s.friendly_param.Replace("x", $"{audiochannels}");
+                        }
                     }
                     catch (Exception) { }
                 }
