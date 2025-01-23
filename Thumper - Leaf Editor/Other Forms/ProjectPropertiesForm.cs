@@ -9,6 +9,7 @@ namespace Thumper_Custom_Level_Editor
     {
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
         private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
+        public FileInfo ProjectToLoad;
 
         public ProjectPropertiesForm()
 		{
@@ -56,6 +57,7 @@ namespace Thumper_Custom_Level_Editor
                     var info = new ProcessStartInfo(Application.ExecutablePath, NewProject.FullName);
                     Process.Start(info);
                 }
+                ProjectToLoad = NewProject;
                 this.DialogResult = DialogResult.Yes;
                 this.Close();
             }
@@ -122,16 +124,12 @@ namespace Thumper_Custom_Level_Editor
             lblNameError.Visible = false;
             btnCustomSave.Enabled = false;
             bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
-            bool exists = Directory.Exists($@"{TCLE.WorkingFolder.Parent}\{txtCustomName.Text}") && txtCustomName.Text != TCLE.WorkingFolder.Name;
-            bool samefolder = $@"{txtCustomPath.Text.ToLower()}\{txtCustomName.Text.ToLower()}" == TCLE.WorkingFolder.FullName.ToLower();
+            bool exists = Directory.Exists($@"{txtCustomPath}\{txtCustomName.Text}") && txtCustomName.Text != TCLE.WorkingFolder.Name;
             bool endsindot = txtCustomName.Text.TrimEnd().EndsWith('.');
 
             if (illegal) {
-                lblNameError.Visible = true;
-                lblNameError.Text = "Illegal characters in name";
-            }
-            else if (samefolder) {
-                btnCustomSave.Enabled = true;
+                lblNameError.Visible = true; 
+                lblNameError.Text = "Illegal characters in name (\\, /, :, *, ?, <, >, |)";
             }
             else if (exists) {
                 lblNameError.Visible = true;
@@ -141,7 +139,7 @@ namespace Thumper_Custom_Level_Editor
                 lblNameError.Visible = true;
                 lblNameError.Text = "A level name cannot end with '.'";
             }
-            else if (txtCustomName.Text.Length + txtCustomPath.Text.Length > 240) {
+            else if (txtCustomName.Text.Length + txtCustomPath.Text.Length > 255) {
                 lblNameError.Visible = true;
                 lblNameError.Text = "The folder path + level name is longer than 256 characters (Windows limit).";
             }

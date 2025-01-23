@@ -317,6 +317,8 @@ namespace Thumper_Custom_Level_Editor
         {
             ProjectPropertiesForm customlevel = new();
             customlevel.ShowDialog();
+            if (customlevel.DialogResult == DialogResult.Yes)
+                OpenProject(customlevel.ProjectToLoad);
             customlevel.Dispose();
         }
 
@@ -333,7 +335,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private void OpenProject(FileInfo TCL)
+        public void OpenProject(FileInfo TCL)
         {
             if (TCL.DirectoryName == TCLE.WorkingFolder?.FullName)
                 return;
