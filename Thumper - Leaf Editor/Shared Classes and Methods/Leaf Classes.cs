@@ -21,7 +21,7 @@ namespace Thumper_Custom_Level_Editor
 
     public class Sequencer_Object
     {
-        public Form_LeafEditor parent;
+        public LeafProperties parent;
 
         public string obj_name { get; set; }
         public string param_path { get; set; }
@@ -56,11 +56,12 @@ namespace Thumper_Custom_Level_Editor
         private bool ExpandLanes;
         public string friendly_lane { get; set; }
 
-        public Sequencer_Object(Form_LeafEditor Parent)
+        public Sequencer_Object(LeafProperties Parent)
         {
             parent = Parent;
-            data_points = new SeqDataPoint[255].ToList();
-            for (int x = 0; x < 255; x++) {
+            int maxbeats = parent.SequencerType == ".leaf" ? 255 : parent.beats;
+            data_points = new SeqDataPoint[maxbeats].ToList();
+            for (int x = 0; x < maxbeats; x++) {
                 data_points[x] = new() { Owner = this, beat = x, value = null, interpolation = "Linear", ease = "Ease In Out" };
             }
         }
@@ -109,7 +110,7 @@ namespace Thumper_Custom_Level_Editor
                 if (Owner != null && Owner.editor_row != null) {
                     if (Owner.editor_row.Cells[beat + 3].Value != Value) {
                         Owner.editor_row.Cells[beat + 3].Value = Value;
-                        Owner.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
+                        Owner.parent.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
                     }
                     Owner.isdefault = false;
                 }
@@ -137,11 +138,12 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public string SequencerType { get; set; }
 
-        public LeafProperties(Form_LeafEditor Parent, FileInfo path)
+        public LeafProperties(Form_LeafEditor Parent, FileInfo path, int _beats)
         {
             parent = Parent;
             FilePath = path;
-            selectedobj = new(parent);
+            Beats = _beats;
+            selectedobj = new(this);
             selecteddatapoint = new();
             undoItems = new();
             seq_objs = new();
@@ -169,12 +171,16 @@ namespace Thumper_Custom_Level_Editor
                     else if (value < 1)
                         value = 1;
                 }
+                //cannot change beats if editing a non-leaf sequencer
+                else
+                    return;
                 Beats = (int)value;
                 if (!parent.EditorIsLoading)
                     parent.LeafLengthChanged();
             }
         }
-        private int Beats;
+        [Browsable(false)]
+        public int Beats;
 
         [Category​Attribute("Editor")]
         [DisplayName("Time Signature")]

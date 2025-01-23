@@ -742,6 +742,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //build the JSON to write to file
                 JObject _saveJSON = BuildSave(lvlProperties);
                 lvlProperties.revertPoint = _saveJSON;
+                lvlProperties.seqJSON = _saveJSON["seq_objs"];
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLvl], _saveJSON);
 
@@ -804,28 +805,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             //this section adds all colume sequencer controls
             JArray seq_objs = new();
-            /*
-            foreach (DataGridViewRow seq_obj in lvlSeqObjs.Rows) {
-                JObject s = new() {
-                    { "obj_name", $"{_lvlname}" },
-                    { "param_path", $"layer_volume,{seq_obj.Index}" },
-                    { "trait_type", "kTraitFloat" }
-                };
-
-                JObject data_points = new();
-                for (int x = 0; x < seq_obj.Cells.Count; x++) {
-                    if (!string.IsNullOrEmpty(seq_obj.Cells[x].Value?.ToString()))
-                        data_points.Add(x.ToString(), float.Parse(seq_obj.Cells[x].Value.ToString()));
-                }
-                s.Add("data_points", data_points);
-
-                s.Add("step", "False");
-                s.Add("default", "0");
-                s.Add("footer", "1,1,2,1,2,'kIntensityScale','kIntensityScale',1,1,1,1,1,1,1,1,0,0,0");
-
-                seq_objs.Add(s);
-            }
-            */
             foreach (Sequencer_Object seq_obj in _properties.seq_objs.Where(x => !x.isdefault)) {
                 //skip blank tracks
                 if (seq_obj.friendly_param == null)

@@ -278,7 +278,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (file == null)
                 return;
-            if (!TCLE.lockedfiles.ContainsKey(file)) {
+            if (!TCLE.lockedfiles.Any(x => x.Key.FullName == file.FullName)) {
                 lockedfiles.Add(file, new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
             }
         }
