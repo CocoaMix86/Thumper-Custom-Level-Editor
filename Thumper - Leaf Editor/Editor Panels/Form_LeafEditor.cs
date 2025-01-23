@@ -1,8 +1,6 @@
-﻿using ABI.Windows.ApplicationModel.Activation;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {

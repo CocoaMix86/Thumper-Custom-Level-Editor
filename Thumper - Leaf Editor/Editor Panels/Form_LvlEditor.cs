@@ -1,6 +1,4 @@
-﻿using NAudio.Gui;
-using NAudio;
-using NAudio.Vorbis;
+﻿using NAudio.Vorbis;
 using NAudio.Wave;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
