@@ -55,6 +55,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             vscrollbarTrackEditor_Resize();
             trackEditor.BringToFront();
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (!IsSaved()) {
+                if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    e.Cancel = true;
+                }
+            }
+        }
         #endregion
 
         #region Variables
@@ -2064,8 +2073,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //whenever `i` is a multiple of the time sig, switch colors
                 if ((i) % timesigbeats == 0)
                     _switch = !_switch;
-                trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(50, 50, 50) : Color.FromArgb(30, 30, 30);
-                trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Color.FromArgb(50, 50, 50) : Color.FromArgb(30, 30, 30);
+                trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(55, 55, 55) : Color.FromArgb(45, 45, 45);
+                trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Color.FromArgb(55, 55, 55) : Color.FromArgb(45, 45, 45);
             }
 
             if (LvlSequencer != null)

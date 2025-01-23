@@ -27,6 +27,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             propertyGridSample.Focus();
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (!IsSaved()) {
+                if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    e.Cancel = true;
+                }
+            }
+        }
         #endregion
 
         #region Variables
