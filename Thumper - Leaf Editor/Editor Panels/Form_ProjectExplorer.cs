@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO.Packaging;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -104,7 +105,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //add each file inside the folder to the tree
             foreach (FileInfo file in directoryInfo.GetFiles()) {
-                if (file.Extension is ".TCL") 
+                if (file.Extension is ".TCL")
                     continue;
                 TreeNode _tn = new() {
                     Text = file.Name,
@@ -182,6 +183,34 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnRefresh_Click(object sender, EventArgs e) => CreateTreeView();
         #endregion
         #region Context Menu File
+        private void existingItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using OpenFileDialog ofd = new();
+            ofd.Title = "Copy Existing File to Project";
+            ofd.Filter = "All Files (*.*)|*.*";
+            ofd.FilterIndex = 1;
+            ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                FileInfo filetocopy = new(ofd.FileName);
+                if (File.Exists($"{projectfolders[selectedNodes[0].FullPath].FullName}\\{filetocopy.Name}")) {
+                    MessageBox.Show($"A filed named {filetocopy.Name} already exists in folder {selectedNodes[0].Text}.", "Thumper Custom Level Editor");
+                    return;
+                }
+                FileInfo projectfile = new($"{projectfolders[selectedNodes[0].FullPath].FullName}\\{filetocopy.Name}");
+                File.Copy(ofd.FileName, projectfile.FullName);
+
+                if (TCLE.fileextensions.Any(x => projectfile.Name.StartsWith(x))) {
+                    if (MessageBox.Show("This appears to be a file from an older version of the editor.\nConvert it to the new TCLE 3.0 format?", "Editor Custom Thumper Level", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                        string[] splitextension = projectfile.Name.Replace(".txt", "").Split('_', 2);
+                        projectfile.MoveTo($"{projectfile.DirectoryName}\\{splitextension[1]}.{splitextension[0]}");
+                    }
+                }
+
+                CreateTreeView();
+                TCLE.OpenFile(projectfile);
+            }
+        }
+
         private void contextMenuFileClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //depending on number of items selected, alter the contextmenu

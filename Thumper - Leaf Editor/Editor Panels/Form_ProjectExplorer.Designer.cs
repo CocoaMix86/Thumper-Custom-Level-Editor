@@ -89,7 +89,6 @@
             this.contextMenuProject = new ContextMenuStrip(this.components);
             this.toolStripSeparator8 = new ToolStripSeparator();
             this.toolstripProjectPaste = new ToolStripMenuItem();
-            this.toolStripMenuItem11 = new ToolStripMenuItem();
             this.toolStripSeparator9 = new ToolStripSeparator();
             this.toolStripMenuItem12 = new ToolStripMenuItem();
             this.toolStripMenuItem13 = new ToolStripMenuItem();
@@ -469,7 +468,6 @@
             this.contextMenuAddFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuAddFile.Items.AddRange(new ToolStripItem[] { this.existingItemToolStripMenuItem, this.folderToolStripMenuItem, this.toolStripSeparator7, this.toolstripProjectAddLeaf, this.toolstripProjectAddLvl, this.toolstripProjectAddGate, this.toolstripProjectAddMaster, this.toolstripProjectAddSample });
             this.contextMenuAddFile.Name = "workingfolderRightClick";
-            this.contextMenuAddFile.OwnerItem = this.toolStripMenuItem1;
             this.contextMenuAddFile.RenderMode = ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new Size(181, 186);
             // 
@@ -479,6 +477,7 @@
             this.existingItemToolStripMenuItem.Name = "existingItemToolStripMenuItem";
             this.existingItemToolStripMenuItem.Size = new Size(180, 22);
             this.existingItemToolStripMenuItem.Text = "Existing Item...";
+            this.existingItemToolStripMenuItem.Click += this.existingItemToolStripMenuItem_Click;
             // 
             // folderToolStripMenuItem
             // 
@@ -551,7 +550,7 @@
             this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
             this.toolStripMenuItem1.ForeColor = Color.White;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new Size(180, 22);
+            this.toolStripMenuItem1.Size = new Size(162, 22);
             this.toolStripMenuItem1.Text = "Add";
             // 
             // toolStripSeparator5
@@ -686,10 +685,10 @@
             // contextMenuProject
             // 
             this.contextMenuProject.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem1, this.toolStripSeparator8, this.toolstripProjectPaste, this.toolStripMenuItem11, this.toolStripSeparator9, this.toolStripMenuItem12, this.toolStripMenuItem13 });
+            this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem1, this.toolStripSeparator8, this.toolstripProjectPaste, this.toolStripSeparator9, this.toolStripMenuItem12, this.toolStripMenuItem13 });
             this.contextMenuProject.Name = "contextMenuFolderClick";
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(181, 148);
+            this.contextMenuProject.Size = new Size(163, 104);
             // 
             // toolStripSeparator8
             // 
@@ -708,16 +707,6 @@
             this.toolstripProjectPaste.Size = new Size(180, 22);
             this.toolstripProjectPaste.Text = "Paste";
             this.toolstripProjectPaste.Click += this.toolstripFolderPaste_Click;
-            // 
-            // toolStripMenuItem11
-            // 
-            this.toolStripMenuItem11.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem11.ForeColor = Color.White;
-            this.toolStripMenuItem11.Image = Properties.Resources.icon_editdetails;
-            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.ShortcutKeys = Keys.F2;
-            this.toolStripMenuItem11.Size = new Size(180, 22);
-            this.toolStripMenuItem11.Text = "Rename";
             // 
             // toolStripSeparator9
             // 
@@ -831,7 +820,6 @@
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripMenuItem toolstripProjectPaste;
-        private ToolStripMenuItem toolStripMenuItem11;
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripMenuItem toolStripMenuItem12;
         private ToolStripMenuItem toolStripMenuItem13;

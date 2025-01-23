@@ -693,7 +693,7 @@ namespace Thumper_Custom_Level_Editor
         {
             OpenFile(new Form_SampleEditor().SaveAs(true));
         }
-        string[] fileextensions = new string[] { "leaf_", "lvl_", "gate_", "master_", "samp_", "xfm_", "spn_" };
+        public static string[] fileextensions = new string[] { "leaf_", "lvl_", "gate_", "master_", "samp_", "xfm_", "spn_" };
         private void toolstripProjectExisting_Click(object sender, EventArgs e)
         {
             using OpenFileDialog ofd = new();

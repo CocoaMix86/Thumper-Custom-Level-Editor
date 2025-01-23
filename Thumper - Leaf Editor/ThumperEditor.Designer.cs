@@ -570,7 +570,7 @@
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new Size(197, 242);
+            this.contextmenuFile.Size = new Size(197, 220);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
             // 
             // toolstripFileNewProject
@@ -681,7 +681,7 @@
             this.toolstripFileTemplateFolder.BackColor = Color.FromArgb(46, 46, 46);
             this.toolstripFileTemplateFolder.ForeColor = Color.White;
             this.toolstripFileTemplateFolder.Name = "toolstripFileTemplateFolder";
-            this.toolstripFileTemplateFolder.Size = new Size(180, 22);
+            this.toolstripFileTemplateFolder.Size = new Size(157, 22);
             this.toolstripFileTemplateFolder.Text = "Open folder";
             this.toolstripFileTemplateFolder.Click += this.toolstripFileTemplateFolder_Click;
             // 
@@ -690,7 +690,7 @@
             this.toolstripFileTemplateRegen.BackColor = Color.FromArgb(46, 46, 46);
             this.toolstripFileTemplateRegen.ForeColor = Color.White;
             this.toolstripFileTemplateRegen.Name = "toolstripFileTemplateRegen";
-            this.toolstripFileTemplateRegen.Size = new Size(180, 22);
+            this.toolstripFileTemplateRegen.Size = new Size(157, 22);
             this.toolstripFileTemplateRegen.Text = "Regenerate files";
             this.toolstripFileTemplateRegen.Click += this.toolstripFileTemplateRegen_Click;
             // 
@@ -830,7 +830,7 @@
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(201, 192);
+            this.contextMenuProject.Size = new Size(201, 214);
             // 
             // toolstripProjectLeaf
             // 
