@@ -492,8 +492,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 foreach (TreeNode tn in selectedNodes) {
-                    if (tn.ImageKey is "folder" or "project")
+                    if (tn.ImageKey is "folder")
                         tn.ContextMenuStrip = contextMenuFolderClick;
+                    else if (tn.ImageKey is "project")
+                        tn.ContextMenuStrip = contextMenuProject;
                     else
                         tn.ContextMenuStrip = contextMenuFileClick;
                 }
