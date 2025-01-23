@@ -16,6 +16,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             contextMenuFileClick.Renderer = new ContextMenuColors();
             contextMenuFolderClick.Renderer = new ContextMenuColors();
             contextMenuMulti.Renderer = new ContextMenuColors();
+            contextMenuProject.Renderer = new ContextMenuColors();
             //add events to some controls
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;
