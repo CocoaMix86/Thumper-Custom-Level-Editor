@@ -115,6 +115,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<SaveState> _undolistleaf = new();
         public DataObject ClipBoardDataPoints = new();
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+        private int LastRowEdit;
+        private bool ResetRowAfterEdit;
         #endregion
 
         #region EventHandlers
@@ -402,6 +404,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //TrackUpdateHighlighting(SequencerObjects[e.RowIndex]);
         }
 
+        private void trackEditor_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            LastRowEdit = e.RowIndex;
+            ResetRowAfterEdit = true;
+        }
+
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (isfinding)
@@ -427,6 +435,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //do nothing if the selection is inside the frozen columns
             if (trackEditor.SelectedCells.Count == 0 || trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset < FrozenColumnOffset)
                 return;
+            if (ResetRowAfterEdit) {
+                ResetRowAfterEdit = false;
+                trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex, LastRowEdit];
+            }
             leafProperties.selecteddatapoint = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex].data_points[trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset];
             propertyGridLeaf.Refresh();
             bool enable = trackEditor.SelectedCells.Count > 0;
