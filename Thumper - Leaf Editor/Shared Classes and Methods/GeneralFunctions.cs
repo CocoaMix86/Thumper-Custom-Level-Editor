@@ -591,6 +591,11 @@ namespace Thumper_Custom_Level_Editor
                 return;
 
             dynamic _load = LoadFileLock(filepath.FullName);
+            //if there are no workspaces, add one
+            if (!Workspaces.Any()) {
+                Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
+                workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
+            }
         //find if the document is loaded already in a tab
         //if so, make it activate
         openraw:
