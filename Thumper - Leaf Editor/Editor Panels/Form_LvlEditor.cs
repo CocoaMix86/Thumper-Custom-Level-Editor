@@ -209,11 +209,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.ColumnIndex == -1 || e.RowIndex == -1)
                 return;
-            LvlProperties.lvlloops[e.RowIndex] = new LvlLoop() {
-                sample = $"{lvlLoopTracks.Rows[e.RowIndex].Cells[0].Value}",
-                beats = decimal.Parse(lvlLoopTracks.Rows[e.RowIndex].Cells[1].Value.ToString())
-            };
-            lvlloop_CollectionChanged(null, null);
+            LvlProperties.lvlloops[e.RowIndex].sample = $"{lvlLoopTracks.Rows[e.RowIndex].Cells[1].Value}";
+            LvlProperties.lvlloops[e.RowIndex].beats = decimal.Parse(lvlLoopTracks.Rows[e.RowIndex].Cells[2].Value.ToString());
             SaveCheckAndWrite(false);
         }
         private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -279,8 +276,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
-                r.HeaderCell.Value = "Volume Track " + r.Index;
-                r.HeaderCell.ToolTipText = "Edit volume levels in Sequencer";
+                r.HeaderCell.Value = "Loop Track " + r.Index;
+                r.HeaderCell.ToolTipText = "Edit volume levels in Sequencer with an [AUDIO] object";
             }
             btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
             SaveCheckAndWrite(false);
@@ -499,27 +496,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlLoopAdd_Click(object sender, EventArgs e)
         {
-            lvlLoopTracks.RowCount++;
-            lvlLoopTracks.Rows[^1].HeaderCell.Value = "Volume Track " + (lvlLoopTracks.Rows.Count - 1);
-            lvlLoopTracks.Rows[^1].Cells[1].Value = 0;
-            lvlLoopTracks.Rows[^1].Cells[0].Value = "";
-            btnLvlLoopDelete.Enabled = true;
             LvlProperties.lvlloops.Add(new LvlLoop());
+            btnLvlLoopDelete.Enabled = true;
             TCLE.PlaySound("UIobjectadd");
         }
 
         private void btnLvlLoopDelete_Click(object sender, EventArgs e)
         {
-            lvlLoopTracks.Rows.RemoveAt(lvlLoopTracks.CurrentRow.Index);
             LvlProperties.lvlloops.RemoveAt(lvlLoopTracks.CurrentRow.Index);
             TCLE.PlaySound("UIobjectremove");
             //disable button if no more rows exist
             if (lvlLoopTracks.Rows.Count < 1)
                 btnLvlLoopDelete.Enabled = false;
-            //rename each header cell as the rows have moved and now are on different tracks
-            foreach (DataGridViewRow r in lvlLoopTracks.Rows) {
-                r.HeaderCell.Value = "Volume Track " + r.Index;
-            }
             SaveCheckAndWrite(false);
         }
 
@@ -563,8 +551,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///customize Loop Track list a bit
             //custom column containing comboboxes per cell
-            lvlLoopTracks.Columns[1].ValueType = typeof(decimal);
-            lvlLoopTracks.Columns[1].DefaultCellStyle.Format = "0.##";
+            lvlLoopTracks.Columns[2].ValueType = typeof(decimal);
+            lvlLoopTracks.Columns[2].DefaultCellStyle.Format = "0.##";
             ///
         }
 
@@ -600,7 +588,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //load loop track names and paths to lvlLoopTracks DGV
             TCLE.LvlReloadSamples();
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = TCLE.LvlSamples.Select(x => x.obj_name).ToList();
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
             foreach (dynamic samp in _load["loops"]) {
                 lvlProperties.lvlloops.Add(new LvlLoop() {
                     sample = (string)samp["samp_name"],
@@ -956,7 +944,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void AudioPlayback(DataGridViewCell cell)
         {
             if (!SampleIsPlaying) {
-                SampleData _samp = TCLE.LvlSamples.FirstOrDefault(x => x.obj_name == cell.OwningRow.Cells[1].Value.ToString());
+                SampleData _samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == cell.OwningRow.Cells[1].Value.ToString());
                 if (_samp == null)
                     return;
                 string _filetype = "";

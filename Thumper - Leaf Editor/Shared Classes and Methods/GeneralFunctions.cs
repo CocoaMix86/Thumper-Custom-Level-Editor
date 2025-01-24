@@ -407,14 +407,14 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static List<SampleData> LvlSamples = new();
+        public static List<SampleData> ProjectSamples = new();
         public static void LvlReloadSamples()
         {
             if (WorkingFolder == null)
                 return;
-            LvlSamples.Clear();
+            ProjectSamples.Clear();
             //add default empty sample
-            LvlSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = "" });
+            ProjectSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = "" });
             //iterate over each file
             foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp")) {
                 //parse file to JSON
@@ -424,7 +424,7 @@ namespace Thumper_Custom_Level_Editor
                     continue;
                 //iterate over items:[] list to get each sample and add names to list
                 foreach (dynamic _samp in _in["items"]) {
-                    LvlSamples.Add(new SampleData {
+                    ProjectSamples.Add(new SampleData {
                         obj_name = ((string)_samp["obj_name"]),
                         path = _samp["path"],
                         volume = _samp["volume"],
@@ -436,7 +436,7 @@ namespace Thumper_Custom_Level_Editor
                     });
                 }
             }
-            LvlSamples = LvlSamples.OrderBy(w => w.obj_name).ToList();
+            ProjectSamples = ProjectSamples.OrderBy(w => w.obj_name).ToList();
         }
 
         public static string PCtoOGG(SampleData _samp)

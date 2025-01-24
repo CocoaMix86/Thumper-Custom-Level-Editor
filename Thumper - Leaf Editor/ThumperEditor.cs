@@ -658,8 +658,7 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Toolstrip Help
-        private void toolstripHelpTentacles_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo
-    { FileName = "https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0", UseShellExecute = true });
+        private void toolstripHelpTentacles_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://docs.google.com/document/d/1dGkU9uqlr3Hp2oJiVFMHHpIKt8S_c0Vi27n47ZRD0_0", UseShellExecute = true });
         private void toolstripHelpObjects_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://docs.google.com/document/d/1JWk7TDn4ZuitclB-x7gOYxU-PsmGkooZuU9QEd_aw1A", UseShellExecute = true });
         private void toolstripHelpAudio_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q", UseShellExecute = true });
         private void toolstripHelpAbout_Click(object sender, EventArgs e) => new AboutThumperEditor().Show();
@@ -796,6 +795,13 @@ namespace Thumper_Custom_Level_Editor
             toolstripSampLevelDrones.Checked = files.Contains($"globaldrones.samp");
             toolstripSampLevelRests.Checked = files.Contains($"rests.samp");
             toolstripSampLevelMisc.Checked = files.Contains($"misc.samp");
+        }
+
+        private void toolstripProjectPreload_Click(object sender, EventArgs e)
+        {
+            foreach (SampleData samp in ProjectSamples) {
+                PCtoOGG(samp);
+            }
         }
         #endregion
 

@@ -459,12 +459,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridLeaf.Refresh();
         }
 
-        //cell input sanitization
-        private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            //e.CellStyle.Font = new Font("Consolas", 7);
-        }
-
         //Cell value changed
         private void trackEditor_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
@@ -1593,7 +1587,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 goto beginrando;
 
             Sequencer_Object seq = new(leafProperties) {
-                obj_name = category == "PLAY SAMPLE" ? TCLE.LvlSamples[TCLE.rng.Next(0, TCLE.LvlSamples.Count)].obj_name : obj.obj_name,
+                obj_name = category == "PLAY SAMPLE" ? TCLE.ProjectSamples[TCLE.rng.Next(0, TCLE.ProjectSamples.Count)].obj_name : obj.obj_name,
                 category = obj.category,
                 param_path = obj.param_path.Split('.')[0],
                 friendly_param = obj.param_displayname,
@@ -2270,7 +2264,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (category == "PLAY SAMPLE") {
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
-                    foreach (string file in TCLE.LvlSamples.Select(x => x.File).Distinct()) {
+                    foreach (string file in TCLE.ProjectSamples.Select(x => x.File).Distinct()) {
                         if (string.IsNullOrEmpty(file))
                             continue;
                         TreeNode sampfile = new() {
@@ -2278,7 +2272,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             ImageKey = "samp",
                             SelectedImageKey = "samp"
                         };
-                        foreach (SampleData samp in TCLE.LvlSamples.Where(x => x.File == file)) {
+                        foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.File == file)) {
                             TreeNode _param = new() {
                                 Text = samp.obj_name,
                                 ImageKey = "none",

@@ -740,11 +740,12 @@
             // 
             // LoopSample
             // 
-            this.LoopSample.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             this.LoopSample.FlatStyle = FlatStyle.Flat;
             this.LoopSample.HeaderText = "Sample Name";
             this.LoopSample.MaxDropDownItems = 20;
+            this.LoopSample.MinimumWidth = 50;
             this.LoopSample.Name = "LoopSample";
+            this.LoopSample.Width = 365;
             // 
             // BeatsPerLoop
             // 
@@ -910,9 +911,9 @@
         public Label pictureTunnelViewer;
         private ToolStripButton btnLvlPathView;
         private NAudio.Gui.VolumeSlider volumeSlider1;
+        private Label labelCollapsePanel;
         private DataGridViewButtonColumn LvlLoopPlay;
         private DataGridViewComboBoxColumn LoopSample;
         private DataGridViewTextBoxColumn BeatsPerLoop;
-        private Label labelCollapsePanel;
     }
 }
