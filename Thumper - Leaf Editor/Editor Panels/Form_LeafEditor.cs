@@ -26,6 +26,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             RenderForm();
+            this.Icon = Properties.Resources.ico_lvl;
 
             if (toload != null) {
                 LvlSequencer = toload;
