@@ -112,6 +112,7 @@ namespace Thumper_Custom_Level_Editor
             //finalize boot
             PlaySound("UIboot");
             ///version check
+            /*
             if (AppSettings.version != "2.2release1") {
                 ShowChangelog();
                 if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -120,7 +121,7 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
                 AppSettings.version = "2.2release1";
             }
-
+            */
             //finish loading
             AppSettings.firstrun = false;
             AppSettings.Save();
