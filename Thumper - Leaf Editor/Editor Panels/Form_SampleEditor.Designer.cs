@@ -83,7 +83,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(253, 0);
+            this.labelCollapsePanel.Location = new Point(251, 0);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -145,7 +145,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.sampleList.Size = new Size(245, 493);
+            this.sampleList.Size = new Size(243, 493);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellClick += this.sampleList_CellClick;
@@ -260,7 +260,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.propertyGridSample.RightToLeft = RightToLeft.No;
             this.propertyGridSample.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridSample.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSample.Size = new Size(659, 293);
+            this.propertyGridSample.Size = new Size(661, 293);
             this.propertyGridSample.TabIndex = 0;
             this.propertyGridSample.ToolbarVisible = false;
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -275,7 +275,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(923, -3);
+            this.lblMasterlvllistHelp.Location = new Point(921, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -309,7 +309,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainer1.Panel2.Controls.Add(this.pictureWave);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 269;
+            this.splitContainer1.SplitterDistance = 267;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
             // 
@@ -351,7 +351,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.pictureSpectrum.Location = new Point(0, 113);
             this.pictureSpectrum.Margin = new Padding(4, 3, 4, 3);
             this.pictureSpectrum.Name = "pictureSpectrum";
-            this.pictureSpectrum.Size = new Size(659, 100);
+            this.pictureSpectrum.Size = new Size(661, 100);
             this.pictureSpectrum.TabIndex = 150;
             this.pictureSpectrum.TabStop = false;
             // 
@@ -364,7 +364,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.pictureWave.Location = new Point(0, 13);
             this.pictureWave.Margin = new Padding(4, 3, 4, 3);
             this.pictureWave.Name = "pictureWave";
-            this.pictureWave.Size = new Size(659, 100);
+            this.pictureWave.Size = new Size(661, 100);
             this.pictureWave.TabIndex = 151;
             this.pictureWave.TabStop = false;
             // 

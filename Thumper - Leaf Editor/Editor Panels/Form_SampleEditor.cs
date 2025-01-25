@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Fx;
 using Un4seen.Bass.Misc;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -14,6 +15,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeComponent();
             // Initialize Sound library
             Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
+            _sync = new SYNCPROC(EndPosition);
             _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
             //
             sampleToolStrip.Renderer = new ToolStripOverride();
@@ -72,6 +74,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private SampleProperties SampleProperties;
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
+        private DataGridViewCell PlayThisCell;
+        private List<Tuple<DataGridViewCell, int>> PlayingChannels = new();
+        private Visuals _vis = new Visuals();
+        private int sampchannel;
+        private float initialfreq;
+        private SYNCPROC _sync = null;
+        private int _syncer = 0;
         #endregion
 
         #region EventHandlers
@@ -88,6 +97,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridSample.Refresh();
 
             if (e.ColumnIndex == 0) {
+                PlayThisCell = sampleList[e.ColumnIndex, e.RowIndex];
                 AudioPlayback(sampleList[e.ColumnIndex, e.RowIndex]);
             }
         }
@@ -104,10 +114,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             //button is in column 0, so that's where to draw the image
             if (e.ColumnIndex == 0) {
-                CellPaint(e, SampleIsPlaying);
+                CellPaint(e);
             }
         }
-        private void CellPaint(DataGridViewCellPaintingEventArgs e, bool isplaying)
+        private void CellPaint(DataGridViewCellPaintingEventArgs e)
         {
             e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             //get dimensions
@@ -116,7 +126,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
-            if (isplaying && playingcell == sampleList[e.ColumnIndex, e.RowIndex])
+            if (PlayingChannels.Any(x => x.Item1 == sampleList[e.ColumnIndex, e.RowIndex]))
                 e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
             else
                 e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
@@ -283,14 +293,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //How to create an FSB
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
-        private bool SampleIsPlaying;
-        private DataGridViewCell playingcell;
-        private Visuals _vis = new Visuals();
-        private int sampchannel;
-        private float initialfreq;
         private void AudioPlayback(DataGridViewCell cell)
         {
-            if (!SampleIsPlaying) {
+            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == PlayThisCell)?.Item2 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
                 SampleData _samp = sampleproperties.sample;
                 string _filetype = "";
                 //check if sample exists in temp folder. If not, create it
@@ -316,11 +321,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //play the sample
                 if (sampchannel != 0 && Bass.BASS_ChannelPlay(sampchannel, false)) {
                     _updateTimer.Start();
+                    PlayingChannels.Add(new Tuple<DataGridViewCell, int>(PlayThisCell, sampchannel));
+                    sampleList.InvalidateCell(PlayThisCell);
                 }
                 else {
                     //
                 }
             }
+            else {
+                Bass.BASS_ChannelStop(PlayingChannels.First(x => x.Item1 == PlayThisCell).Item2);
+                PlayingChannels.Remove(PlayingChannels.First(x => x.Item1 == PlayThisCell));
+                sampleList.InvalidateCell(PlayThisCell);
+            }
+        }
+
+        private void EndPosition(int handle, int channel, int data, IntPtr user)
+        {
+            Bass.BASS_ChannelStop(channel);
         }
 
         private void timerUpdate_Tick(object sender, EventArgs e)
