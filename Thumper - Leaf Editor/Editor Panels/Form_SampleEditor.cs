@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using Fmod5Sharp.FmodTypes;
-using Fmod5Sharp;
-using NAudio.Vorbis;
-using NAudio.Wave;
-using VarispeedDemo.SoundTouch;
-using System.Collections.Generic;
+using Un4seen.Bass;
+using Un4seen.Bass.AddOn.Fx;
+using Un4seen.Bass.Misc;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -15,6 +12,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_SampleEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
+            // Initialize Sound library
+            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
+            _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
+            //
             sampleToolStrip.Renderer = new ToolStripOverride();
             InitializeSampleStuff();
             TCLE.DoubleBufferDGV(sampleList, false);
@@ -39,6 +40,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
+        BASSTimer _updateTimer = new BASSTimer(50);
         public bool EditorIsSaved = true;
         public bool EditorLoading = false;
         public FileInfo loadedsample
@@ -206,7 +208,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             int _in = sampleList.CurrentRow.Index;
             bool customforcesave = false;
-            outputDevice?.Stop();
+            ///outputDevice?.Stop();
 
             if (todelete.Any(x => x.path.Contains("custom"))) {
                 if (MessageBox.Show("At least 1 sample selected is a custom sample and it will be removed from the \"extras\" folder. This deletion cannot be undone.\nContinue?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -281,25 +283,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //How to create an FSB
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
-        private WaveOutEvent outputDevice = new();
-        private VarispeedSampleProvider speedControl;
-        private VorbisWaveReader vorbis;
-        private AudioFileReader audioFile;
         private bool SampleIsPlaying;
         private DataGridViewCell playingcell;
-        private void OnPlaybackStopped(object sender, StoppedEventArgs args)
-        {
-            timerSample.Enabled = false;
-            outputDevice.Dispose();
-            outputDevice = null;
-            audioFile?.Dispose();
-            audioFile = null;
-            vorbis?.Dispose();
-            vorbis = null;
-
-            SampleIsPlaying = false;
-            sampleList.InvalidateCell(playingcell);
-        }
+        private Visuals _vis = new Visuals();
+        private int sampchannel;
+        private float initialfreq;
         private void AudioPlayback(DataGridViewCell cell)
         {
             if (!SampleIsPlaying) {
@@ -318,46 +306,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _filetype = "wav";
 
                 //initialize the player and load the sample
-                outputDevice = new WaveOutEvent();
-                if (_filetype == "ogg") {
-                    vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
-                    vorbis.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
-                    timerSample.Interval = (int)((float)(vorbis.TotalTime.TotalMilliseconds - _samp.offset) / (float)_samp.pitch);
-                    speedControl = new(vorbis, 100, new SoundTouchProfile(false, false));
+                sampchannel = Bass.BASS_StreamCreateFile($@"{TCLE.AppLocation}\temp\{_samp.obj_name}.{_filetype}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
+                //pitch shift and pan
+                Bass.BASS_ChannelGetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
+                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq*(float)_samp.pitch);
+                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
+                Bass.BASS_ChannelSetPosition(sampchannel, (double)_samp.offset/1000d);
+                var ee = Bass.BASS_ErrorGetCode();
+                //play the sample
+                if (sampchannel != 0 && Bass.BASS_ChannelPlay(sampchannel, false)) {
+                    _updateTimer.Start();
                 }
                 else {
-                    audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
-                    audioFile.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
-                    timerSample.Interval = (int)((float)(audioFile.TotalTime.TotalMilliseconds - _samp.offset) / (float)_samp.pitch);
-                    speedControl = new(audioFile, 100, new SoundTouchProfile(false, false));
+                    //
                 }
-                //set playback rate equal to sample pitch
-                speedControl.PlaybackRate = (float)_samp.pitch;
-                outputDevice.Init(speedControl);
-                outputDevice.Volume = volumeSlider1.Volume;
-                outputDevice.PlaybackStopped += OnPlaybackStopped;
-                SampleIsPlaying = true;
-                //invalidate cell to repaint it. This will draw the stop icon
-                sampleList.InvalidateCell(cell);
-                //store cell for later reference
-                playingcell = cell;
-                outputDevice.Play();
-                timerSample.Enabled = true;
-            }
-            else {
-                outputDevice?.Stop();
             }
         }
 
-        private void timerSample_Tick(object sender, EventArgs e)
+        private void timerUpdate_Tick(object sender, EventArgs e)
         {
-            outputDevice?.Stop();
-            timerSample.Enabled = false;
+            //these 2 show different spectrums visually while the sample plays
+            pictureSpectrum.Image = _vis.CreateSpectrumWave(sampchannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Black, 1, false, false, false);
+            pictureWave.Image = _vis.CreateWaveForm(sampchannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, false, true, false);
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
         {
-            outputDevice.Volume = volumeSlider1.Volume;
+            Bass.BASS_SetVolume(volumeSlider1.Volume);
         }
 
         private void btnRevertSample_Click(object sender, EventArgs e)
