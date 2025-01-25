@@ -1,6 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using NAudio.Wave.SampleProviders;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using Un4seen.Bass;
+using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -903,6 +906,47 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (e.Button == MouseButtons.Right)
                 treeObjects.SelectedNode = currentNode;
+        }
+
+        int sampchannel;
+        float initialfreq;
+        SampleData SamplePlaying = new();
+        private void treeObjects_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (treeObjects.SelectedNode.Parent.Text.EndsWith(".samp") && e.KeyCode == Keys.Space) {
+                SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == treeObjects.SelectedNode.Text);
+                if (SampToPlay == null || SamplePlaying == SampToPlay)
+                    return;
+
+                string SampleToPlay = TCLE.PCtoOGG(SampToPlay);
+                if (String.IsNullOrEmpty(SampleToPlay))
+                    return;
+
+                //initialize the player and load the sample
+                sampchannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
+                //pitch shift and pan
+                Bass.BASS_ChannelGetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
+                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)SampToPlay.pitch);
+                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_PAN, (float)SampToPlay.pan);
+                Bass.BASS_ChannelSetPosition(sampchannel, (double)SampToPlay.offset / 1000d);
+                //play the sample
+                if (sampchannel != 0 && Bass.BASS_ChannelPlay(sampchannel, false)) {
+                    SamplePlaying = SampToPlay;
+                    treeObjects.SelectedNode.ImageKey = "play";
+                    treeObjects.SelectedNode.SelectedImageKey = "play";
+                }
+            }
+        }
+
+        private void treeObjects_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space) {
+                Bass.BASS_ChannelStop(sampchannel);
+                Bass.BASS_ChannelFree(sampchannel);
+                SamplePlaying = null;
+                treeObjects.SelectedNode.ImageKey = "none";
+                treeObjects.SelectedNode.SelectedImageKey = "none";
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -2276,7 +2320,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             TreeNode _param = new() {
                                 Text = samp.obj_name,
                                 ImageKey = "none",
-                                SelectedImageKey = "none"
+                                SelectedImageKey = "none",
+                                ToolTipText = "Select sample and then hold SPACE to play it",
                             };
                             if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
                                 sampfile.Nodes.Add(_param);
