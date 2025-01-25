@@ -5,6 +5,7 @@ using System.Windows.Shell;
 using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using Un4seen.Bass;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -56,6 +57,8 @@ namespace Thumper_Custom_Level_Editor
                 WorkingFolder = null
             };
 
+            // Initialize Sound library
+            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
             //set custom renderer
             toolStripTitle.Renderer = new ToolStripMainForm();
             toolStripMain.Renderer = new ToolStripOverride();

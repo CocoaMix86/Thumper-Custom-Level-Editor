@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using NAudio.Wave.SampleProviders;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Fx;
@@ -13,9 +14,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_SampleEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
-            // Initialize Sound library
-            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
-            _sync = new SYNCPROC(EndPosition);
             _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
             //
             sampleToolStrip.Renderer = new ToolStripOverride();
@@ -42,7 +40,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        BASSTimer _updateTimer = new BASSTimer(50);
         public bool EditorIsSaved = true;
         public bool EditorLoading = false;
         public FileInfo loadedsample
@@ -74,13 +71,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private SampleProperties SampleProperties;
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
-        private DataGridViewCell PlayThisCell;
-        private List<Tuple<DataGridViewCell, int>> PlayingChannels = new();
-        private Visuals _vis = new Visuals();
-        private int sampchannel;
-        private float initialfreq;
-        private SYNCPROC _sync = null;
-        private int _syncer = 0;
+        BASSTimer _updateTimer = new BASSTimer(50);
+        public Visuals _vis = new Visuals();
+        public int SampChannel;
         #endregion
 
         #region EventHandlers
@@ -97,7 +90,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridSample.Refresh();
 
             if (e.ColumnIndex == 0) {
-                PlayThisCell = sampleList[e.ColumnIndex, e.RowIndex];
                 AudioPlayback(sampleList[e.ColumnIndex, e.RowIndex]);
             }
         }
@@ -126,7 +118,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
-            if (PlayingChannels.Any(x => x.Item1 == sampleList[e.ColumnIndex, e.RowIndex]))
+            if (TCLE.PlayingChannels.Any(x => x.Item1 == sampleList[e.ColumnIndex, e.RowIndex]))
                 e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
             else
                 e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
@@ -293,58 +285,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //How to create an FSB
         private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
 
-        private void AudioPlayback(DataGridViewCell cell)
+        private void AudioPlayback(DataGridViewCell CellToPlay)
         {
-            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == PlayThisCell)?.Item2 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
-                SampleData _samp = sampleproperties.sample;
-                string _filetype = "";
-                //check if sample exists in temp folder. If not, create it
-                if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
-                    string _result = TCLE.PCtoOGG(_samp);
-                    if (_result == null)
-                        return;
-                }
-                //check extension of the sample to play
-                if (File.Exists($@"temp\{_samp.obj_name}.ogg"))
-                    _filetype = "ogg";
-                if (File.Exists($@"temp\{_samp.obj_name}.wav"))
-                    _filetype = "wav";
-
-                //initialize the player and load the sample
-                sampchannel = Bass.BASS_StreamCreateFile($@"{TCLE.AppLocation}\temp\{_samp.obj_name}.{_filetype}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
-                //pitch shift and pan
-                Bass.BASS_ChannelGetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
-                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq*(float)_samp.pitch);
-                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
-                Bass.BASS_ChannelSetPosition(sampchannel, (double)_samp.offset/1000d);
-                var ee = Bass.BASS_ErrorGetCode();
-                //play the sample
-                if (sampchannel != 0 && Bass.BASS_ChannelPlay(sampchannel, false)) {
-                    _updateTimer.Start();
-                    PlayingChannels.Add(new Tuple<DataGridViewCell, int>(PlayThisCell, sampchannel));
-                    sampleList.InvalidateCell(PlayThisCell);
-                }
-                else {
-                    //
-                }
+            if (TCLE.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out SampChannel) != 0) {                
+                _updateTimer.Start();
+                sampleList.InvalidateCell(CellToPlay);
             }
             else {
-                Bass.BASS_ChannelStop(PlayingChannels.First(x => x.Item1 == PlayThisCell).Item2);
-                PlayingChannels.Remove(PlayingChannels.First(x => x.Item1 == PlayThisCell));
-                sampleList.InvalidateCell(PlayThisCell);
+                _updateTimer.Stop();
+                sampleList.InvalidateCell(CellToPlay);
             }
-        }
-
-        private void EndPosition(int handle, int channel, int data, IntPtr user)
-        {
-            Bass.BASS_ChannelStop(channel);
         }
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             //these 2 show different spectrums visually while the sample plays
-            pictureSpectrum.Image = _vis.CreateSpectrumWave(sampchannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Black, 1, false, false, false);
-            pictureWave.Image = _vis.CreateWaveForm(sampchannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, false, true, false);
+            pictureSpectrum.Image = _vis.CreateSpectrumWave(SampChannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Black, 1, false, false, false);
+            pictureWave.Image = _vis.CreateWaveForm(SampChannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, false, true, false);
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)

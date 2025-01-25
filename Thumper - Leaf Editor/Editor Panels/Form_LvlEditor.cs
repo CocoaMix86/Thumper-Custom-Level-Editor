@@ -1,8 +1,11 @@
 ﻿using NAudio.Vorbis;
 using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Un4seen.Bass.Misc;
+using Un4seen.Bass;
 using VarispeedDemo.SoundTouch;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -73,6 +76,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<LvlLeafData> LvlLeafs { get => LvlProperties.lvlleafs; set => LvlProperties.lvlleafs = value; }
         private List<LvlLeafData> clipboardleaf = new();
         private List<string> clipboardpaths = new();
+        public int SampChannel;
         #endregion
 
         #region EventHandlers
@@ -895,10 +899,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             //button is in column 0, so that's where to draw the image
             if (e.ColumnIndex == 0) {
-                CellPaint(e, SampleIsPlaying);
+                CellPaint(e);
             }
         }
-        private void CellPaint(DataGridViewCellPaintingEventArgs e, bool isplaying)
+        private void CellPaint(DataGridViewCellPaintingEventArgs e)
         {
             e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             //get dimensions
@@ -907,7 +911,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
-            if (isplaying && playingcell == lvlLoopTracks[e.ColumnIndex, e.RowIndex])
+            if (TCLE.PlayingChannels.Any(x => x.Item1 == lvlLoopTracks[e.ColumnIndex, e.RowIndex]))
                 e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
             else
                 e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
@@ -923,75 +927,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private WaveOutEvent outputDevice = new();
-        private VarispeedSampleProvider speedControl;
-        private VorbisWaveReader vorbis;
-        private AudioFileReader audioFile;
-        private bool SampleIsPlaying;
-        private DataGridViewCell playingcell;
-        private void OnPlaybackStopped(object sender, StoppedEventArgs args)
+        private void AudioPlayback(DataGridViewCell CellToPlay)
         {
-            outputDevice?.Dispose();
-            outputDevice = null;
-            audioFile?.Dispose();
-            audioFile = null;
-            vorbis?.Dispose();
-            vorbis = null;
-
-            SampleIsPlaying = false;
-            lvlLoopTracks.InvalidateCell(playingcell);
-        }
-        private void AudioPlayback(DataGridViewCell cell)
-        {
-            if (!SampleIsPlaying) {
-                SampleData _samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == cell.OwningRow.Cells[1].Value.ToString());
-                if (_samp == null)
-                    return;
-                string _filetype = "";
-                //check if sample exists in temp folder. If not, create it
-                if (!File.Exists($@"temp\{_samp.obj_name}.ogg") && !File.Exists($@"temp\{_samp.obj_name}.wav")) {
-                    string _result = TCLE.PCtoOGG(_samp);
-                    if (_result == null)
-                        return;
-                }
-                //check extension of the sample to play
-                if (File.Exists($@"temp\{_samp.obj_name}.ogg"))
-                    _filetype = "ogg";
-                if (File.Exists($@"temp\{_samp.obj_name}.wav"))
-                    _filetype = "wav";
-
-                outputDevice = new WaveOutEvent();
-                outputDevice.PlaybackStopped += OnPlaybackStopped;
-                outputDevice.Volume = volumeSlider1.Volume;
-
-                if (_filetype == "ogg") {
-                    vorbis = new VorbisWaveReader($@"temp\{_samp.obj_name}.{_filetype}");
-                    vorbis.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
-                    speedControl = new(vorbis, 100, new SoundTouchProfile(false, false));
-                    speedControl.PlaybackRate = (float)_samp.pitch;
-                    outputDevice.Init(speedControl);
-                }
-                else {
-                    audioFile = new AudioFileReader($@"temp\{_samp.obj_name}.{_filetype}");
-                    audioFile.CurrentTime = TimeSpan.FromMilliseconds(_samp.offset);
-                    speedControl = new(audioFile, 100, new SoundTouchProfile(false, false));
-                    speedControl.PlaybackRate = (float)_samp.pitch;
-                    outputDevice.Init(speedControl);
-                }
-
-                SampleIsPlaying = true;
-                lvlLoopTracks.InvalidateCell(cell);
-                playingcell = cell;
-                outputDevice.Play();
+            if (TCLE.PlaySampleOneOff(CellToPlay, TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == (string)CellToPlay.OwningRow.Cells[1].Value), out SampChannel) != 0) {
+                lvlLoopTracks.InvalidateCell(CellToPlay);
             }
             else {
-                outputDevice?.Stop();
+                lvlLoopTracks.InvalidateCell(CellToPlay);
             }
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
         {
-            outputDevice.Volume = volumeSlider1.Volume;
+            Bass.BASS_SetVolume(volumeSlider1.Volume);
         }
 
         private void labelCollapsePanel_Click(object sender, EventArgs e)

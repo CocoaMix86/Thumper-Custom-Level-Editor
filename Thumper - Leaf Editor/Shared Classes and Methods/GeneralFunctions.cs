@@ -9,6 +9,10 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using Un4seen.Bass.Misc;
+using Un4seen.Bass;
+using System.IO;
+using System.Threading.Channels;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -445,6 +449,10 @@ namespace Thumper_Custom_Level_Editor
             if (Properties.Settings.Default.game_dir == "none") {
                 TCLE.Read_Config();
             }
+            //check if file has been converted already. Ready the path if true
+            if (Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).Any()) {
+                return Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
+            }
 
             byte[] _bytes;
             //get the hash of this filename. This will be used to locate the sample's .PC file
@@ -488,7 +496,7 @@ namespace Thumper_Custom_Level_Editor
             samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
 
             File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
-            return fileExtension;
+            return $@"temp\{_samp.obj_name}.{fileExtension}";
         }
 
         public static uint Hash32(string s)
@@ -797,6 +805,51 @@ namespace Thumper_Custom_Level_Editor
                 { "joy_color", new JArray() { 1f, 1f, 1f, 1f } }
             };
             return _save;
+        }
+
+        public static List<Tuple<DataGridViewCell, int>> PlayingChannels = new();
+        public static int sampchannel;
+        public static float initialfreq;
+        public static int PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
+        {
+            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell)?.Item2 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
+                string SampleToPlay = TCLE.PCtoOGG(_samp);
+                if (String.IsNullOrEmpty(SampleToPlay))
+                    return SampChannel = 0;
+
+                //initialize the player and load the sample
+                sampchannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
+                Bass.BASS_ChannelSetSync(sampchannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), 0);
+                //pitch shift and pan
+                Bass.BASS_ChannelGetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
+                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
+                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
+                Bass.BASS_ChannelSetPosition(sampchannel, (double)_samp.offset / 1000d);
+                //play the sample
+                if (sampchannel != 0 && Bass.BASS_ChannelPlay(sampchannel, false)) {
+                    PlayingChannels.Add(new Tuple<DataGridViewCell, int>(cell, sampchannel));
+                    return SampChannel = sampchannel;
+                }
+                else {
+                    return SampChannel = 0;
+                }
+            }
+            else {
+                var ItemToRemove = PlayingChannels.First(x => x.Item1 == cell);
+                Bass.BASS_ChannelStop(ItemToRemove.Item2);
+                Bass.BASS_ChannelFree(ItemToRemove.Item2);
+                PlayingChannels.Remove(ItemToRemove);
+                return SampChannel = 0;
+            }
+        }
+
+        private static void OnEnding(int handle, int channel, int data, IntPtr user)
+        {
+            Bass.BASS_ChannelStop(channel);
+            Bass.BASS_ChannelFree(channel);
+            var ItemToRemove = PlayingChannels.First(x => x.Item2 == channel);
+            ItemToRemove.Item1.DataGridView.InvalidateCell(ItemToRemove.Item1);
+            PlayingChannels.Remove(ItemToRemove);
         }
     }
 
