@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Un4seen.Bass;
+using Un4seen.Bass.Misc;
 using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -170,8 +171,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (display != -1) {
                 trackEditor.Scroll -= trackEditor_Scroll;
                 vscrollbarTrackEditor_Resize();
-                trackEditor.FirstDisplayedScrollingRowIndex = display + 1;
-                trackEditor.FirstDisplayedScrollingRowIndex = display;
+                if (trackEditor.Rows[display + 1].Visible == true) {
+                    trackEditor.FirstDisplayedScrollingRowIndex = display + 1;
+                    trackEditor.FirstDisplayedScrollingRowIndex = display;
+                }
                 trackEditor.Scroll += trackEditor_Scroll;
             }
         }
@@ -309,6 +312,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
                     }
                 }
+                else if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
+                    Sequencer_Object seq = SequencerObjects[e.RowIndex];
+                    SampleData samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == seq.obj_name);
+                    if (samp != null) {
+                        string SampleToPlay = TCLE.PCtoOGG(samp);
+                        //initialize the player and load the sample
+                        sampchannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
+                        WaveForm wave = new($@"{TCLE.AppLocation}\{SampleToPlay}") {
+                            DrawWaveForm = WaveForm.WAVEFORMDRAWTYPE.DualMono,
+                            ColorBackground = seq.highlight_color,
+                            DrawMarker = WaveForm.MARKERDRAWTYPE.Line,
+                            ColorMarker = Color.Black,
+                            MarkerLength = 1.0f
+                        };
+                        long len = Bass.BASS_ChannelGetLength(sampchannel, BASSMode.BASS_POS_BYTE);
+                        double time = Bass.BASS_ChannelBytes2Seconds(sampchannel, len);
+                        double beats = (time / 60) * (double)TCLE.BPM;
+                        int cellwidth = trackZoom.Value;
+                        int cellheight = trackZoomVert.Value;
+                        wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
+                        wave.AddMarker("e", 0);
+                        wave.AddMarker("f", len);
+                        Bitmap WaveToDraw = wave.CreateBitmap((int)Math.Floor(cellwidth * beats), cellheight, -1, -1, true);
+                        //e.Graphics.DrawImage(WaveToDraw, e.CellBounds.Left, e.CellBounds.Top);
+                        
+                    }
+                }
                 else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                     e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds);
                 else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
@@ -335,7 +365,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" || (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) || Properties.Settings.Default.LeafOptionConnectBars && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" || SequencerObjects[e.RowIndex].trait_type is "kTraitColor" || (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) || Properties.Settings.Default.LeafOptionConnectBars && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
                     //e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
                 }
                 else {
@@ -866,11 +896,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
                 return;
             Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == e.Node.Text);
-            if (objmatch == null)
+            if (e.Node.Text.EndsWith(".samp")) 
+                objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.category == "PLAY SAMPLE");
+            
+            if (objmatch == null) 
                 return;
+            
 
             Sequencer_Object seq = new(leafProperties) {
-                obj_name = objmatch.obj_name == "PLAY SAMPLE" ? e.Node.Text : objmatch.obj_name,
+                obj_name = objmatch.category == "PLAY SAMPLE" ? e.Node.Text : objmatch.obj_name,
                 category = objmatch.category,
                 param_path = objmatch.param_path.Split('.')[0],
                 friendly_param = objmatch.param_displayname,
@@ -2321,7 +2355,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                                 Text = samp.obj_name,
                                 ImageKey = "none",
                                 SelectedImageKey = "none",
-                                ToolTipText = "Select sample and then hold SPACE to play it",
+                                ToolTipText = $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it",
                             };
                             if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
                                 sampfile.Nodes.Add(_param);
