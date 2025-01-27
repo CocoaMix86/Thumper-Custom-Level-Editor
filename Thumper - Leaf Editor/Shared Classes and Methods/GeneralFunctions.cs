@@ -1,8 +1,6 @@
 ﻿using Fmod5Sharp.FmodTypes;
 using Fmod5Sharp;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using NAudio.Vorbis;
-using NAudio.Wave;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
@@ -198,12 +196,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (Properties.Settings.Default.muteapplication)
                 return;
-            Stream stream = new MemoryStream((byte[])Properties.Resources.ResourceManager.GetObject(audiofile));
-            VorbisWaveReader vorbisStream = new(stream);
-            WaveOut waveOut = new();
-            waveOut.Init(vorbisStream);
-            waveOut.Volume = 1;
-            waveOut.Play();
+            PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out int sampchannel);
         }
 
         /// Used to allow only numbers and a single decimal during input
@@ -808,7 +801,6 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static List<Tuple<DataGridViewCell, int>> PlayingChannels = new();
-        public static int sampchannel;
         public static float initialfreq;
         public static int PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
         {
@@ -818,17 +810,17 @@ namespace Thumper_Custom_Level_Editor
                     return SampChannel = 0;
 
                 //initialize the player and load the sample
-                sampchannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
-                Bass.BASS_ChannelSetSync(sampchannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), 0);
+                SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
+                Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), 0);
                 //pitch shift and pan
-                Bass.BASS_ChannelGetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
-                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
-                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
-                Bass.BASS_ChannelSetPosition(sampchannel, (double)_samp.offset / 1000d);
+                Bass.BASS_ChannelGetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
+                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
+                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
+                Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.offset / 1000d);
                 //play the sample
-                if (sampchannel != 0 && Bass.BASS_ChannelPlay(sampchannel, false)) {
-                    PlayingChannels.Add(new Tuple<DataGridViewCell, int>(cell, sampchannel));
-                    return SampChannel = sampchannel;
+                if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
+                    PlayingChannels.Add(new Tuple<DataGridViewCell, int>(cell, SampChannel));
+                    return SampChannel;
                 }
                 else {
                     return SampChannel = 0;
@@ -842,14 +834,31 @@ namespace Thumper_Custom_Level_Editor
                 return SampChannel = 0;
             }
         }
+        public static int PlaySampleOneOff(string samplename, byte[] stream, out int SampChannel)
+        {
+            //initialize the player and load the sample
+            SampChannel = Bass.BASS_SampleLoad(stream, 0, stream.Length, 10, BASSFlag.BASS_SAMPLE_FLOAT);
+            SampChannel = Bass.BASS_SampleGetChannel(SampChannel, BASSFlag.BASS_SAMPLE_FLOAT);
+            Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), 0);
+            //play the sample
+            if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
+                return SampChannel;
+            }
+            else {
+                var ee = Bass.BASS_ErrorGetCode();
+                return SampChannel = 0;
+            }
+        }
 
         private static void OnEnding(int handle, int channel, int data, IntPtr user)
         {
             Bass.BASS_ChannelStop(channel);
             Bass.BASS_ChannelFree(channel);
-            var ItemToRemove = PlayingChannels.First(x => x.Item2 == channel);
-            ItemToRemove.Item1.DataGridView.InvalidateCell(ItemToRemove.Item1);
-            PlayingChannels.Remove(ItemToRemove);
+            var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item2 == channel);
+            if (ItemToRemove != null) {
+                ItemToRemove.Item1.DataGridView.InvalidateCell(ItemToRemove.Item1);
+                PlayingChannels.Remove(ItemToRemove);
+            }
         }
     }
 

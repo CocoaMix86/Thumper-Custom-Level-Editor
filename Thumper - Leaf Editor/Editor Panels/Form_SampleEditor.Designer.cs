@@ -1,6 +1,4 @@
-﻿using NAudio.Gui;
-
-namespace Thumper_Custom_Level_Editor.Editor_Panels
+﻿namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     partial class Form_SampleEditor
     {
@@ -36,7 +34,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SampleEditor));
             this.toolTip1 = new ToolTip(this.components);
-            this.volumeSlider1 = new VolumeSlider();
             this.labelCollapsePanel = new Label();
             this.sampleList = new DataGridView();
             this.Columnplaybuttons = new DataGridViewButtonColumn();
@@ -63,16 +60,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ((System.ComponentModel.ISupportInitialize)this.pictureSpectrum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.pictureWave).BeginInit();
             this.SuspendLayout();
-            // 
-            // volumeSlider1
-            // 
-            this.volumeSlider1.Cursor = Cursors.Hand;
-            this.volumeSlider1.Location = new Point(130, 4);
-            this.volumeSlider1.Name = "volumeSlider1";
-            this.volumeSlider1.Size = new Size(135, 22);
-            this.volumeSlider1.TabIndex = 152;
-            this.toolTip1.SetToolTip(this.volumeSlider1, "Alters volume of smaple playback. Does not go above 0dB.");
-            this.volumeSlider1.VolumeChanged += this.volumeSlider1_VolumeChanged;
             // 
             // labelCollapsePanel
             // 
@@ -294,7 +281,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.labelCollapsePanel);
-            this.splitContainer1.Panel1.Controls.Add(this.volumeSlider1);
             this.splitContainer1.Panel1.Controls.Add(this.sampleList);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.sampleToolStrip);
@@ -423,7 +409,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public PropertyGrid propertyGridSample;
         private Label lblMasterlvllistHelp;
         private SplitContainer splitContainer1;
-        private VolumeSlider volumeSlider1;
         private DataGridViewButtonColumn Columnplaybuttons;
         private DataGridViewTextBoxColumn SampleName;
         private Label label1;

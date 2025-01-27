@@ -41,7 +41,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LvlEditor));
             this.toolTip1 = new ToolTip(this.components);
             this.lblLvlTunnels = new Label();
-            this.volumeSlider1 = new NAudio.Gui.VolumeSlider();
             this.labelCollapsePanel = new Label();
             this.lvlToolStrip = new ToolStrip();
             this.btnLvlLeafAdd = new ToolStripButton();
@@ -116,16 +115,6 @@
             this.lblLvlTunnels.TabIndex = 161;
             this.lblLvlTunnels.Text = "Paths/Tunnels";
             this.toolTip1.SetToolTip(this.lblLvlTunnels, "Unique per leaf");
-            // 
-            // volumeSlider1
-            // 
-            this.volumeSlider1.Cursor = Cursors.Hand;
-            this.volumeSlider1.Location = new Point(60, 15);
-            this.volumeSlider1.Name = "volumeSlider1";
-            this.volumeSlider1.Size = new Size(128, 20);
-            this.volumeSlider1.TabIndex = 164;
-            this.toolTip1.SetToolTip(this.volumeSlider1, "Alters volume of smaple playback. Does not go above 0dB.");
-            this.volumeSlider1.VolumeChanged += this.volumeSlider1_VolumeChanged;
             // 
             // labelCollapsePanel
             // 
@@ -464,7 +453,6 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.AutoScroll = true;
-            this.splitContainer3.Panel2.Controls.Add(this.volumeSlider1);
             this.splitContainer3.Panel2.Controls.Add(this.lvlLoopTracks);
             this.splitContainer3.Panel2.Controls.Add(this.lvlLoopToolStrip);
             this.splitContainer3.Panel2.Controls.Add(this.label22);
@@ -910,7 +898,6 @@
         public Button btnLvlSequencer;
         public Label pictureTunnelViewer;
         private ToolStripButton btnLvlPathView;
-        private NAudio.Gui.VolumeSlider volumeSlider1;
         private Label labelCollapsePanel;
         private DataGridViewButtonColumn LvlLoopPlay;
         private DataGridViewComboBoxColumn LoopSample;

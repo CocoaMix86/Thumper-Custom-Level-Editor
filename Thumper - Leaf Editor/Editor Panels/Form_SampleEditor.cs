@@ -1,5 +1,4 @@
-﻿using NAudio.Wave.SampleProviders;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Fx;
@@ -306,7 +305,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
         {
-            Bass.BASS_SetVolume(volumeSlider1.Volume);
+            //Bass.BASS_SetVolume(volumeSlider1.Volume);
         }
 
         private void btnRevertSample_Click(object sender, EventArgs e)
