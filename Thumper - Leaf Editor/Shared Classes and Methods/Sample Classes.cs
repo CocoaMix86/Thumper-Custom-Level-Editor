@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Un4seen.Bass;
+using Un4seen.Bass.Misc;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -16,6 +18,10 @@ namespace Thumper_Custom_Level_Editor
         public decimal pan { get; set; }
         public int offset { get; set; }
         public string channel_group { get; set; }
+
+        public WaveForm wave { get; set; }
+        public double time { get; set; }
+        public double beats { get; set; }
 
         public override string ToString()
         {
