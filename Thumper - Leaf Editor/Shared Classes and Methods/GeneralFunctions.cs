@@ -1,5 +1,5 @@
-﻿//using Fmod5Sharp.FmodTypes;
-//using Fmod5Sharp;
+﻿using Fmod5Sharp.FmodTypes;
+using Fmod5Sharp;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
