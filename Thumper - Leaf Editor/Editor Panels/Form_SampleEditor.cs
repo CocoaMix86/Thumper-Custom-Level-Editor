@@ -471,14 +471,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             byte[] _header = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
             string _hashedname = "";
 
-            if (!filepath.EndsWith(".fsb")) {
+            if (!filepath.EndsWith(".wav")) {
                 string cachepath = TCLE.rng.Next(0, 1000).ToString();
+                string outputPath = $@"{TCLE.AppLocation}\temp\{cachepath}\sample.fsb";
                 Directory.CreateDirectory($@"{TCLE.AppLocation}\temp\{cachepath}");
-                Methods.FSBank_Init(FSBankInitFlags.Normal, $@"{TCLE.AppLocation}\temp", 2);
+                Methods.FSBank_Init(FSBankInitFlags.Normal, $@"{TCLE.AppLocation}\temp\{cachepath}", 2);
                 byte[] data = File.ReadAllBytes(filepath);
                 uint quality = 1;
-                Methods.FSBank_Build(data, FSBANK_FORMAT.FSBANK_FORMAT_VORBIS, FSBankBuildFlags.DisableSyncPoints, quality, outputPath);
+                Methods.FSBank_Build(data, FSBANK_FORMAT.FSBANK_FORMAT_VORBIS, FSBankBuildFlags.NoGuid, quality, outputPath);
                 Directory.Delete($@"{TCLE.AppLocation}\temp\{cachepath}", true);
+                FSBtoSAMP(outputPath);
             }
 
             //save relevant data of the chosen file
