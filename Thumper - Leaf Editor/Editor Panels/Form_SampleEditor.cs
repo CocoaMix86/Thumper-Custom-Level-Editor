@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Fmod5Sharp;
+using Fmod5Sharp.FmodTypes;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Un4seen.Bass;
-using Un4seen.Bass.AddOn.Fx;
 using Un4seen.Bass.Misc;
-using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
+using FSBank.V1;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -186,7 +187,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
             string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string dir in data) {
-                if (File.Exists(dir) && Path.GetExtension(dir) == ".fsb")
+                if (File.Exists(dir) && Path.GetExtension(dir) is ".fsb" or ".wav")
                     FSBtoSAMP(dir);
                 else
                     MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
@@ -276,8 +277,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             ofd.Multiselect = true;
             if (ofd.ShowDialog() == DialogResult.OK) {
-                foreach (string _file in ofd.FileNames)
-                    FSBtoSAMP(_file);
+                foreach (string _file in ofd.FileNames) {
+                    if (_file.EndsWith(".wav"))
+                        FSBtoSAMP(_file);
+                }
                 TCLE.PlaySound("UIobjectadd");
             }
         }
@@ -467,6 +470,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             byte[] _bytes;
             byte[] _header = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
             string _hashedname = "";
+
+            if (!filepath.EndsWith(".fsb")) {
+                string cachepath = TCLE.rng.Next(0, 1000).ToString();
+                Directory.CreateDirectory($@"{TCLE.AppLocation}\temp\{cachepath}");
+                Methods.FSBank_Init(FSBankInitFlags.Normal, $@"{TCLE.AppLocation}\temp", 2);
+                byte[] data = File.ReadAllBytes(filepath);
+                uint quality = 1;
+                Methods.FSBank_Build(data, FSBANK_FORMAT.FSBANK_FORMAT_VORBIS, FSBankBuildFlags.DisableSyncPoints, quality, outputPath);
+                Directory.Delete($@"{TCLE.AppLocation}\temp\{cachepath}", true);
+            }
 
             //save relevant data of the chosen file
             _filename = Path.GetFileNameWithoutExtension(filepath);
