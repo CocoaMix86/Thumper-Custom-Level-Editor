@@ -4,7 +4,9 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
-using FSBank.V1;
+using SupersonicSound;
+using SupersonicSound.Wrapper;
+using FMOD.Studio;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -471,16 +473,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             byte[] _header = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
             string _hashedname = "";
 
-            if (!filepath.EndsWith(".wav")) {
-                string cachepath = TCLE.rng.Next(0, 1000).ToString();
-                string outputPath = $@"{TCLE.AppLocation}\temp\{cachepath}\sample.fsb";
-                Directory.CreateDirectory($@"{TCLE.AppLocation}\temp\{cachepath}");
-                Methods.FSBank_Init(FSBankInitFlags.Normal, $@"{TCLE.AppLocation}\temp\{cachepath}", 2);
-                byte[] data = File.ReadAllBytes(filepath);
-                uint quality = 1;
-                Methods.FSBank_Build(data, FSBANK_FORMAT.FSBANK_FORMAT_VORBIS, FSBankBuildFlags.NoGuid, quality, outputPath);
-                Directory.Delete($@"{TCLE.AppLocation}\temp\{cachepath}", true);
-                FSBtoSAMP(outputPath);
+            if (filepath.EndsWith(".wav")) {
+                byte[] wavbytes = File.ReadAllBytes(filepath);
+                int indexofdata = TCLE.ByteSearch(wavbytes, new byte[] {(byte)'d', (byte)'a', (byte)'t', (byte)'a' });
+                indexofdata += 8;
+                wavbytes = wavbytes.AsSpan(indexofdata).ToArray();
             }
 
             //save relevant data of the chosen file
