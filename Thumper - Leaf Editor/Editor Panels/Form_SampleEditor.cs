@@ -4,9 +4,8 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
-using SupersonicSound;
-using SupersonicSound.Wrapper;
-using FMOD.Studio;
+using System.Text;
+using Windows.Devices.Bluetooth.Advertisement;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -120,7 +119,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
-            if (TCLE.PlayingChannels.Any(x => x.Item1 == sampleList[e.ColumnIndex, e.RowIndex]))
+            if (TCLE.PlayingChannels.Any(x => x.Item2 == sampleList[1, e.RowIndex].Value.ToString()))
                 e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
             else
                 e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
@@ -466,22 +465,74 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _save;
         }
 
+        private Dictionary<int, ulong> FrequencyID = new() { { 8000, 1 },
+            { 11_000, 2 },
+            { 11_025, 3 },
+            { 16_000, 4 },
+            { 22_050, 5 },
+            { 24_000, 6 },
+            { 32_000, 7 },
+            { 44_100, 8 },
+            { 48_000, 9 },
+            { 96_000, 10 }};
+        private byte[] nametable = new byte[] { 0x04, 0x00, 0x00, 0x00, 0x52, 0x54, 0x4C, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
         private void FSBtoSAMP(string filepath)
         {
-            string _filename;
+            string _filename = Path.GetFileNameWithoutExtension(filepath);
             byte[] _bytes;
             byte[] _header = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
             string _hashedname = "";
+            bool convertedwav = false;
 
             if (filepath.EndsWith(".wav")) {
-                byte[] wavbytes = File.ReadAllBytes(filepath);
+                int handle = Bass.BASS_StreamCreateFile(filepath, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
+                WAVEFORMATEXT wavformat = Bass.BASS_ChannelGetTagsWAVEFORMAT(handle);
+                int freq = wavformat.waveformatex.nSamplesPerSec;
+                ulong freqid = FrequencyID[freq];
+                byte[] wavbytes;
+
+                try {
+                    wavbytes = File.ReadAllBytes(filepath);
+                }
+                catch (Exception) {
+                    MessageBox.Show("File in use in another program. Import did not succeed.");
+                    return;
+                }
                 int indexofdata = TCLE.ByteSearch(wavbytes, new byte[] {(byte)'d', (byte)'a', (byte)'t', (byte)'a' });
                 indexofdata += 8;
                 wavbytes = wavbytes.AsSpan(indexofdata).ToArray();
+
+                using (BinaryWriter sw = new BinaryWriter(new FileStream($@"{TCLE.WorkingFolder}\extras\{_filename}.fsb", FileMode.OpenOrCreate))) {
+                    sw.Write(Encoding.UTF8.GetBytes("FSB5")); //fsb5
+                    sw.Write((UInt32)1); //version
+                    sw.Write((UInt32)1); //how many tracks in fsb
+                    sw.Write((UInt32)8); //size of sample header
+                    sw.Write((UInt32)0x1c); //size of header table
+                    sw.Write((UInt32)wavbytes.Length); //smaple bytes
+                    sw.Write((UInt32)2); //audio type
+                    sw.Write((UInt32)0); //always 0, unknown
+                    sw.Write((UInt32)0); //flags
+                    sw.Write((UInt64)0); //hash1
+                    sw.Write((UInt64)0); //hash2
+                    sw.Write((UInt64)0); //hash3
+
+                    UInt64 metadata = (UInt64)(wavbytes.Length / 4);//samples in audio (bytes div 4)
+                    metadata <<= 27; //make room for next item
+                    metadata |= 0; //data offset
+                    metadata <<= 2; //make room for next item
+                    metadata |= 1; //2^n channels in audio
+                    metadata <<= 4; //make room for next item
+                    metadata |= freqid; //frequency of audio
+                    metadata <<= 1; //make room for next item
+                    //the last bit of the metadata is always 0, so I don't need to manip it here.
+                    sw.Write(metadata);
+                    sw.Write(nametable, 0, nametable.Length);
+                    sw.Write(wavbytes, 0, wavbytes.Length);
+                }
+                filepath = $@"{TCLE.WorkingFolder}\extras\{_filename}.fsb";
+                convertedwav = true;
             }
 
-            //save relevant data of the chosen file
-            _filename = Path.GetFileNameWithoutExtension(filepath);
             _bytes = File.ReadAllBytes(filepath);
             //get the hash of the FSB filename. This will be used to name the final .PC file
             byte[] hashbytes = BitConverter.GetBytes(TCLE.Hash32($"Asamples/levels/custom/{_filename}.wav"));
@@ -514,6 +565,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SampleList.Add(newsample);
             int _index = SampleList.IndexOf(newsample);
             sampleList.Rows[_index].Cells[0].Selected = true;
+
+            if (convertedwav)
+                File.Delete(filepath);
         }
 
         private void ResetSample()

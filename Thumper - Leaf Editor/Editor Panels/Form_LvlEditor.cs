@@ -907,7 +907,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
-            if (TCLE.PlayingChannels.Any(x => x.Item1 == lvlLoopTracks[e.ColumnIndex, e.RowIndex]))
+            if (TCLE.PlayingChannels.Any(x => x.Item2 == lvlLoopTracks[1, e.RowIndex].Value.ToString()))
                 e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
             else
                 e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));

@@ -438,13 +438,11 @@ namespace Thumper_Custom_Level_Editor
 
         public static string PCtoOGG(SampleData _samp)
         {
+            if (_samp == null)
+                return null;
             //check if the gamedir has been set so the method can find the .pc files
             if (Properties.Settings.Default.game_dir == "none") {
                 TCLE.Read_Config();
-            }
-            //check if file has been converted already. Ready the path if true
-            if (Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).Any()) {
-                return Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
             }
 
             byte[] _bytes;
@@ -466,7 +464,7 @@ namespace Thumper_Custom_Level_Editor
                     _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
                 }
                 catch {
-                    MessageBox.Show($@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. Is the custom audio file in the extras folder?");
+                    MessageBox.Show($@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. Is the custom audio file in the extras folder? You may need to re-import the file.");
                     return null;
                 }
             }
@@ -480,6 +478,10 @@ namespace Thumper_Custom_Level_Editor
                     MessageBox.Show($@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc to play sample. If you need to change your Game Directory, go to the the Help menu.");
                     return null;
                 }
+            }
+            //check if file has been converted already. Ready the path if true
+            if (Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).Any()) {
+                return Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
             }
             _bytes = _bytes.Skip(4).ToArray();
 
@@ -816,11 +818,11 @@ namespace Thumper_Custom_Level_Editor
             return _save;
         }
 
-        public static List<Tuple<DataGridViewCell, int>> PlayingChannels = new();
+        public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
         public static float initialfreq;
         public static int PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
         {
-            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell)?.Item2 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
+            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString())?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
                 string SampleToPlay = TCLE.PCtoOGG(_samp);
                 if (String.IsNullOrEmpty(SampleToPlay))
                     return SampChannel = 0;
@@ -835,7 +837,7 @@ namespace Thumper_Custom_Level_Editor
                 Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.offset / 1000d);
                 //play the sample
                 if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
-                    PlayingChannels.Add(new Tuple<DataGridViewCell, int>(cell, SampChannel));
+                    PlayingChannels.Add(new Tuple<DataGridView, string, int>(cell.DataGridView, cell.DataGridView[1, cell.RowIndex].Value.ToString(), SampChannel));
                     return SampChannel;
                 }
                 else {
@@ -843,9 +845,9 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             else {
-                var ItemToRemove = PlayingChannels.First(x => x.Item1 == cell);
-                Bass.BASS_ChannelStop(ItemToRemove.Item2);
-                Bass.BASS_ChannelFree(ItemToRemove.Item2);
+                var ItemToRemove = PlayingChannels.First(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString());
+                Bass.BASS_ChannelStop(ItemToRemove.Item3);
+                Bass.BASS_ChannelFree(ItemToRemove.Item3);
                 PlayingChannels.Remove(ItemToRemove);
                 return SampChannel = 0;
             }
@@ -870,9 +872,9 @@ namespace Thumper_Custom_Level_Editor
         {
             Bass.BASS_ChannelStop(channel);
             Bass.BASS_ChannelFree(channel);
-            var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item2 == channel);
+            var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
             if (ItemToRemove != null) {
-                ItemToRemove.Item1.DataGridView.InvalidateCell(ItemToRemove.Item1);
+                ItemToRemove.Item1.InvalidateColumn(0);
                 PlayingChannels.Remove(ItemToRemove);
             }
         }
