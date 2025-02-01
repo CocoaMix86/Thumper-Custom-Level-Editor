@@ -826,7 +826,7 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripProjectPreload_Click(object sender, EventArgs e)
         {
             foreach (SampleData samp in ProjectSamples) {
-                PCtoOGG(samp);
+                PCtoAudioFile(samp);
             }
         }
         #endregion

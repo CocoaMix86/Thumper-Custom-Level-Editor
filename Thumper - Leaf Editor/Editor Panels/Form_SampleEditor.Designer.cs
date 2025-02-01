@@ -71,7 +71,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(331, 0);
+            this.labelCollapsePanel.Location = new Point(329, 0);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -133,7 +133,7 @@
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.sampleList.Size = new Size(323, 493);
+            this.sampleList.Size = new Size(321, 493);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellClick += this.sampleList_CellClick;
@@ -257,7 +257,7 @@
             this.propertyGridSample.RightToLeft = RightToLeft.No;
             this.propertyGridSample.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridSample.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSample.Size = new Size(581, 293);
+            this.propertyGridSample.Size = new Size(583, 293);
             this.propertyGridSample.TabIndex = 0;
             this.propertyGridSample.ToolbarVisible = false;
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -272,7 +272,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(1001, -3);
+            this.lblMasterlvllistHelp.Location = new Point(999, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -305,7 +305,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.pictureWave);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 347;
+            this.splitContainer1.SplitterDistance = 345;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
             // 
@@ -347,7 +347,7 @@
             this.pictureSpectrum.Location = new Point(0, 113);
             this.pictureSpectrum.Margin = new Padding(4, 3, 4, 3);
             this.pictureSpectrum.Name = "pictureSpectrum";
-            this.pictureSpectrum.Size = new Size(581, 100);
+            this.pictureSpectrum.Size = new Size(583, 100);
             this.pictureSpectrum.TabIndex = 150;
             this.pictureSpectrum.TabStop = false;
             // 
@@ -360,7 +360,7 @@
             this.pictureWave.Location = new Point(0, 13);
             this.pictureWave.Margin = new Padding(4, 3, 4, 3);
             this.pictureWave.Name = "pictureWave";
-            this.pictureWave.Size = new Size(581, 100);
+            this.pictureWave.Size = new Size(583, 100);
             this.pictureWave.TabIndex = 151;
             this.pictureWave.TabStop = false;
             // 

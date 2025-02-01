@@ -448,7 +448,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 currentlyrender = e.RowIndex;
                 //export pc file to playable file
                 if (samp.wave == null) {
-                    string SampleToPlay = TCLE.PCtoOGG(samp);
+                    TCLE.PCtoAudioFile(samp);
                     //initialize the player and load the sample
                     sampchannel = Bass.BASS_StreamCreateFile($@"{samp.TempFile}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
                     TCLE.GenerateSampWave(samp, sampchannel);
@@ -987,7 +987,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
 
                 if (SampToPlay.TempFile == null) {
-                    string SampleToPlay = TCLE.PCtoOGG(SampToPlay);
+                    string SampleToPlay = TCLE.PCtoAudioFile(SampToPlay);
                     if (String.IsNullOrEmpty(SampleToPlay))
                         return;
                 }

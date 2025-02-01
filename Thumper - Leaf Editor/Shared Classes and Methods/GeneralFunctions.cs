@@ -435,7 +435,7 @@ namespace Thumper_Custom_Level_Editor
             ProjectSamples = ProjectSamples.OrderBy(w => w.obj_name).ToList();
         }
 
-        public static string PCtoOGG(SampleData _samp)
+        public static string PCtoAudioFile(SampleData _samp)
         {
             if (_samp == null)
                 return null;
@@ -480,7 +480,8 @@ namespace Thumper_Custom_Level_Editor
             }
             //check if file has been converted already. Ready the path if true
             if (Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).Any()) {
-                return Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
+                _samp.TempFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
+                return _samp.TempFile;
             }
             _bytes = _bytes.Skip(4).ToArray();
 
@@ -824,7 +825,7 @@ namespace Thumper_Custom_Level_Editor
         public static int PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
         {
             if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString())?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
-                string SampleToPlay = TCLE.PCtoOGG(_samp);
+                string SampleToPlay = TCLE.PCtoAudioFile(_samp);
                 if (String.IsNullOrEmpty(SampleToPlay))
                     return SampChannel = 0;
 

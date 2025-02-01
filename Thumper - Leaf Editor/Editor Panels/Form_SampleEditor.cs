@@ -464,7 +464,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _save;
         }
 
-        private Dictionary<int, ulong> FrequencyID = new() { { 8000, 1 },
+        private Dictionary<int, ulong> FrequencyID = new() { 
+            { 8000, 1 },
             { 11_000, 2 },
             { 11_025, 3 },
             { 16_000, 4 },
@@ -568,7 +569,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 channel_group = "sequin.ch",
                 time = 0
             };
-            TCLE.PCtoOGG(newsample);
+            TCLE.PCtoAudioFile(newsample);
             int sampchannel = Bass.BASS_StreamCreateFile($@"{newsample.TempFile}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
             TCLE.GenerateSampWave(newsample, sampchannel);
             Bass.BASS_StreamFree(sampchannel);
