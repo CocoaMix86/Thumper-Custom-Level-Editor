@@ -10,6 +10,7 @@ namespace Thumper_Custom_Level_Editor
     public class SampleData
     {
         public string File { get; set; }
+        public string TempFile { get; set; }
 
         public string obj_name { get; set; }
         public string path { get; set; }

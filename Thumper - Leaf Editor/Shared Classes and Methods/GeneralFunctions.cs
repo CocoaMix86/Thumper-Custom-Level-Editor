@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
+using NAudio.Wave.SampleProviders;
+using Un4seen.Bass.Misc;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -402,7 +404,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static List<SampleData> ProjectSamples = new();
-        public static void LvlReloadSamples()
+        public static void ReloadProjectSamples()
         {
             if (WorkingFolder == null)
                 return;
@@ -487,8 +489,10 @@ namespace Thumper_Custom_Level_Editor
             List<FmodSample> samples = bank.Samples;
             samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
 
-            File.WriteAllBytes($@"temp\{_samp.obj_name}.{fileExtension}", dataBytes);
-            return $@"temp\{_samp.obj_name}.{fileExtension}";
+            string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
+            File.WriteAllBytes(finalfilename, dataBytes);
+            _samp.TempFile = finalfilename;
+            return finalfilename;
         }
 
         public static uint Hash32(string s)
@@ -825,13 +829,15 @@ namespace Thumper_Custom_Level_Editor
                     return SampChannel = 0;
 
                 //initialize the player and load the sample
-                SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
+                SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
                 Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), 0);
                 //pitch shift and pan
                 Bass.BASS_ChannelGetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
                 Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.offset / 1000d);
+                if (_samp.wave == null)
+                    TCLE.GenerateSampWave(_samp, SampChannel);
                 //play the sample
                 if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
                     PlayingChannels.Add(new Tuple<DataGridView, string, int>(cell.DataGridView, cell.DataGridView[1, cell.RowIndex].Value.ToString(), SampChannel));
@@ -874,6 +880,20 @@ namespace Thumper_Custom_Level_Editor
                 ItemToRemove.Item1.InvalidateColumn(0);
                 PlayingChannels.Remove(ItemToRemove);
             }
+        }
+
+        public static void GenerateSampWave(SampleData samp, int channel)
+        {
+            WaveForm wave = new(samp.TempFile) {
+                DrawWaveForm = WaveForm.WAVEFORMDRAWTYPE.DualMono
+            };
+            //math to figure out how long the sample is, in seconds and dimensions
+            long len = Bass.BASS_ChannelGetLength(channel, BASSMode.BASS_POS_BYTE);
+            samp.time = Bass.BASS_ChannelBytes2Seconds(channel, len);
+            samp.beats = (samp.time / 60) * (double)TCLE.BPM;
+            //render wave
+            wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
+            samp.wave = wave;
         }
     }
 

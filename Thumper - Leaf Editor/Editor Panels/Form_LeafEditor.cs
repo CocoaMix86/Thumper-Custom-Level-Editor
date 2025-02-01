@@ -450,18 +450,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (samp.wave == null) {
                     string SampleToPlay = TCLE.PCtoOGG(samp);
                     //initialize the player and load the sample
-                    sampchannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-                    WaveForm wave = new($@"{TCLE.AppLocation}\{SampleToPlay}") {
-                        DrawWaveForm = WaveForm.WAVEFORMDRAWTYPE.DualMono,
-                        ColorBackground = seqref.highlight_color
-                    };
-                    //math to figure out how long the sample is, in seconds and dimensions
-                    long len = Bass.BASS_ChannelGetLength(sampchannel, BASSMode.BASS_POS_BYTE);
-                    samp.time = Bass.BASS_ChannelBytes2Seconds(sampchannel, len);
-                    samp.beats = (samp.time / 60) * (double)TCLE.BPM;
-                    //render wave
-                    wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
-                    samp.wave = wave;
+                    sampchannel = Bass.BASS_StreamCreateFile($@"{samp.TempFile}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
+                    TCLE.GenerateSampWave(samp, sampchannel);
                 }
                 int cellwidth = trackZoom.Value;
                 Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
@@ -996,12 +986,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (SampToPlay == null || SamplePlaying == SampToPlay)
                     return;
 
-                string SampleToPlay = TCLE.PCtoOGG(SampToPlay);
-                if (String.IsNullOrEmpty(SampleToPlay))
-                    return;
+                if (SampToPlay.TempFile == null) {
+                    string SampleToPlay = TCLE.PCtoOGG(SampToPlay);
+                    if (String.IsNullOrEmpty(SampleToPlay))
+                        return;
+                }
 
                 //initialize the player and load the sample
-                sampchannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
+                sampchannel = Bass.BASS_StreamCreateFile($@"{SampToPlay.TempFile}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
                 //pitch shift and pan
                 Bass.BASS_ChannelGetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
                 Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)SampToPlay.pitch);

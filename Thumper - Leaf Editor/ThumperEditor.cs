@@ -414,7 +414,7 @@ namespace Thumper_Custom_Level_Editor
             AppSettings.Recentfiles.Insert(0, TCL.FullName);
             JumpListUpdate();
             //load sample of the project
-            LvlReloadSamples();
+            ReloadProjectSamples();
             panelRecentFiles.Visible = false;
 
             //create Project Explorer and Project Property panels

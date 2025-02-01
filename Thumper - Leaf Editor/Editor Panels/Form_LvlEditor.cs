@@ -585,7 +585,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlLeafs.Clear();
 
             //load loop track names and paths to lvlLoopTracks DGV
-            TCLE.LvlReloadSamples();
+            TCLE.ReloadProjectSamples();
             ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
             foreach (dynamic samp in _load["loops"]) {
                 lvlProperties.lvlloops.Add(new LvlLoop() {

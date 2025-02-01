@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using System.Text;
+using NAudio.Wave.SampleProviders;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -132,7 +133,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sampleList.RowCount = 0;
             //repopulate dgv from list
             foreach (SampleData _samp in SampleList) {
-                sampleList.Rows.Add(new object[] { null, _samp.obj_name });
+                sampleList.Rows.Add(new object[] { null, _samp.obj_name, (_samp.time != 0 ? TimeSpan.FromSeconds(_samp.time).ToString(@"hh\:mm\:ss\.fff") : "play sample to get time" )});
             }
             //enable certain buttons if there are enough items for them
             btnSampleAdd.Enabled = true;
@@ -186,7 +187,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string dir in data) {
                 if (File.Exists(dir) && Path.GetExtension(dir) is ".fsb" or ".wav")
-                    FSBtoSAMP(dir);
+                    ImportAudioToSamp(dir);
                 else
                     MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
             }
@@ -258,7 +259,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 pan = 0,
                 offset = 0,
                 path = "samples/levels/custom/new.wav",
-                channel_group = "sequin.ch"
+                channel_group = "sequin.ch",
+                time = 0
             };
             SampleList.Add(newsample);
             int _index = SampleList.IndexOf(newsample);
@@ -277,7 +279,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ofd.ShowDialog() == DialogResult.OK) {
                 foreach (string _file in ofd.FileNames) {
                     if (_file.EndsWith(".wav"))
-                        FSBtoSAMP(_file);
+                        ImportAudioToSamp(_file);
                 }
                 TCLE.PlaySound("UIobjectadd");
             }
@@ -435,7 +437,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedSample], _saveJSON);
 
                 if (playsound) TCLE.PlaySound("UIsave");
-                TCLE.LvlReloadSamples();
+                TCLE.ReloadProjectSamples();
             }
         }
 
@@ -473,7 +475,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             { 48_000, 9 },
             { 96_000, 10 }};
         private byte[] nametable = new byte[] { 0x04, 0x00, 0x00, 0x00, 0x52, 0x54, 0x4C, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
-        private void FSBtoSAMP(string filepath)
+        private void ImportAudioToSamp(string filepath)
         {
             string _filename = Path.GetFileNameWithoutExtension(filepath);
             byte[] _bytes;
@@ -481,12 +483,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string _hashedname = "";
             bool convertedwav = false;
 
+            if (TCLE.ProjectSamples.Any(x => x.obj_name == $"{_filename}.samp")) {
+                MessageBox.Show($"A sample with the name \"{_filename}\" already exists in {TCLE.ProjectSamples.First(x => x.obj_name == $"{_filename}.samp").File}", "Thumper Custom Level Editor");
+                return;
+            }
+
             if (filepath.EndsWith(".wav")) {
                 int handle = Bass.BASS_StreamCreateFile(filepath, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
                 WAVEFORMATEXT wavformat = Bass.BASS_ChannelGetTagsWAVEFORMAT(handle);
                 int freq = wavformat.waveformatex.nSamplesPerSec;
                 ulong freqid = FrequencyID[freq];
                 byte[] wavbytes;
+                Bass.BASS_StreamFree(handle);
 
                 try {
                     wavbytes = File.ReadAllBytes(filepath);
@@ -557,14 +565,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 pan = 0,
                 offset = 0,
                 path = $"samples/levels/custom/{_filename}.wav",
-                channel_group = "sequin.ch"
+                channel_group = "sequin.ch",
+                time = 0
             };
+            TCLE.PCtoOGG(newsample);
+            int sampchannel = Bass.BASS_StreamCreateFile($@"{newsample.TempFile}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
+            TCLE.GenerateSampWave(newsample, sampchannel);
+            Bass.BASS_StreamFree(sampchannel);
             SampleList.Add(newsample);
-            int _index = SampleList.IndexOf(newsample);
-            sampleList.Rows[_index].Cells[0].Selected = true;
 
             if (convertedwav)
                 File.Delete(filepath);
+
+            TCLE.ReloadProjectSamples();
         }
 
         private void ResetSample()

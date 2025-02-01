@@ -38,6 +38,7 @@
             this.sampleList = new DataGridView();
             this.Columnplaybuttons = new DataGridViewButtonColumn();
             this.SampleName = new DataGridViewTextBoxColumn();
+            this.sampleRuntime = new DataGridViewTextBoxColumn();
             this.label54 = new Label();
             this.sampleToolStrip = new ToolStrip();
             this.btnSampleAdd = new ToolStripButton();
@@ -70,7 +71,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(203, 0);
+            this.labelCollapsePanel.Location = new Point(331, 0);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -101,7 +102,7 @@
             this.sampleList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.sampleList.ColumnHeadersHeight = 20;
             this.sampleList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.sampleList.Columns.AddRange(new DataGridViewColumn[] { this.Columnplaybuttons, this.SampleName });
+            this.sampleList.Columns.AddRange(new DataGridViewColumn[] { this.Columnplaybuttons, this.SampleName, this.sampleRuntime });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -132,7 +133,7 @@
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.sampleList.Size = new Size(195, 493);
+            this.sampleList.Size = new Size(323, 493);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellClick += this.sampleList_CellClick;
@@ -159,6 +160,15 @@
             this.SampleName.Name = "SampleName";
             this.SampleName.ReadOnly = true;
             this.SampleName.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // sampleRuntime
+            // 
+            this.sampleRuntime.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.sampleRuntime.HeaderText = "Runtime";
+            this.sampleRuntime.Name = "sampleRuntime";
+            this.sampleRuntime.ReadOnly = true;
+            this.sampleRuntime.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.sampleRuntime.Width = 58;
             // 
             // label54
             // 
@@ -247,7 +257,7 @@
             this.propertyGridSample.RightToLeft = RightToLeft.No;
             this.propertyGridSample.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridSample.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSample.Size = new Size(709, 293);
+            this.propertyGridSample.Size = new Size(581, 293);
             this.propertyGridSample.TabIndex = 0;
             this.propertyGridSample.ToolbarVisible = false;
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -262,7 +272,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(873, -3);
+            this.lblMasterlvllistHelp.Location = new Point(1001, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -295,7 +305,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.pictureWave);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 219;
+            this.splitContainer1.SplitterDistance = 347;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
             // 
@@ -337,7 +347,7 @@
             this.pictureSpectrum.Location = new Point(0, 113);
             this.pictureSpectrum.Margin = new Padding(4, 3, 4, 3);
             this.pictureSpectrum.Name = "pictureSpectrum";
-            this.pictureSpectrum.Size = new Size(709, 100);
+            this.pictureSpectrum.Size = new Size(581, 100);
             this.pictureSpectrum.TabIndex = 150;
             this.pictureSpectrum.TabStop = false;
             // 
@@ -350,7 +360,7 @@
             this.pictureWave.Location = new Point(0, 13);
             this.pictureWave.Margin = new Padding(4, 3, 4, 3);
             this.pictureWave.Name = "pictureWave";
-            this.pictureWave.Size = new Size(709, 100);
+            this.pictureWave.Size = new Size(581, 100);
             this.pictureWave.TabIndex = 151;
             this.pictureWave.TabStop = false;
             // 
@@ -409,13 +419,14 @@
         public PropertyGrid propertyGridSample;
         private Label lblMasterlvllistHelp;
         private SplitContainer splitContainer1;
-        private DataGridViewButtonColumn Columnplaybuttons;
-        private DataGridViewTextBoxColumn SampleName;
         private Label label1;
         private Label labelCollapsePanel;
         private Label label4;
         private Label label2;
         private PictureBox pictureSpectrum;
         private PictureBox pictureWave;
+        private DataGridViewButtonColumn Columnplaybuttons;
+        private DataGridViewTextBoxColumn SampleName;
+        private DataGridViewTextBoxColumn sampleRuntime;
     }
 }
