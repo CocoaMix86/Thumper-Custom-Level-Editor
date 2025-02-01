@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using NAudio.Wave.SampleProviders;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
+using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -15,9 +17,33 @@ namespace Thumper_Custom_Level_Editor
         public string obj_name { get; set; }
         public string path { get; set; }
         public decimal volume { get; set; }
-        public decimal pitch { get; set; }
-        public decimal pan { get; set; }
-        public int offset { get; set; }
+        public decimal pitch
+        {
+            get => Pitch;
+            set {
+                Pitch = value;
+                CalculateRuntime();
+            }
+        }
+        private decimal Pitch;
+        public decimal pan
+        {
+            get => Pan;
+            set {
+                Pan = value;
+                CalculateRuntime();
+            }
+        }
+        private decimal Pan;
+        public int offset
+        {
+            get => Offset;
+            set {
+                Offset = value;
+                CalculateRuntime();
+            }
+        }
+        private int Offset;
         public string channel_group { get; set; }
 
         public WaveForm wave { get; set; }
@@ -27,6 +53,21 @@ namespace Thumper_Custom_Level_Editor
         public override string ToString()
         {
             return obj_name;
+        }
+
+        public void CalculateRuntime()
+        {
+            if (this.TempFile == null)
+                TCLE.PCtoAudioFile(this);
+            int channel = Bass.BASS_StreamCreateFile(this.TempFile, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
+            //pitch shift, pan, other fx
+            float initialfreq = 0;
+            Bass.BASS_ChannelGetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
+            Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)this.pitch);
+            Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_PAN, (float)this.pan);
+            Bass.BASS_ChannelSetPosition(channel, (double)this.offset / 1000d);
+            //after fx are done, generate the new wave and runtime
+            TCLE.GenerateSampWave(this, channel);
         }
     }
 
@@ -85,8 +126,8 @@ namespace Thumper_Custom_Level_Editor
         public decimal pitch { 
             get => sample.pitch; 
             set {
-                if (value <= 0) value = 1;
-                if (value > 100) value = 1;
+                if (value <= 0) value = 0.1m;
+                if (value > 10) value = 10.0m;
                 sample.pitch = value;
             } 
         }
@@ -94,7 +135,14 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sample Settings")]
         [DisplayName("Pan")]
         [Description("0 is default. Negative pans left, positive pans right.")]
-        public decimal pan { get => sample.pan; set => sample.pan = value; }
+        public decimal pan { 
+            get => sample.pan;
+            set {
+                if (value < -1) value = -1;
+                if (value > 1) value = 1;
+                sample.pan = value;
+            }
+        }
 
         [CategoryAttribute("Sample Settings")]
         [DisplayName("Offset")]
