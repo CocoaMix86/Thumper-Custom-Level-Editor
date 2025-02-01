@@ -1,11 +1,8 @@
-﻿using Fmod5Sharp;
-using Fmod5Sharp.FmodTypes;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using System.Text;
-using Windows.Devices.Bluetooth.Advertisement;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {

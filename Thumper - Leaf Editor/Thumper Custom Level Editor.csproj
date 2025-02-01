@@ -238,10 +238,6 @@
       <Version>3.0.1</Version>
     </PackageReference>
     <PackageReference Include="ICSharpCode.TextEditor" Version="3.2.1.6466" />
-    <PackageReference Include="IndexRange">
-      <Version>1.0.3</Version>
-      <TreatAsUsed>true</TreatAsUsed>
-    </PackageReference>
     <PackageReference Include="Microsoft-Windows10-APICodePack-Core">
       <Version>1.1.8</Version>
       <TreatAsUsed>true</TreatAsUsed>
@@ -253,7 +249,6 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
-    <PackageReference Include="SupersonicSound" Version="4.1.1" />
     <PackageReference Include="System.Collections.Immutable">
       <Version>9.0.1</Version>
     </PackageReference>

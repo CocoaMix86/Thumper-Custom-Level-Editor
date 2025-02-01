@@ -7,10 +7,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
-using Un4seen.Bass.Misc;
 using Un4seen.Bass;
-using System.IO;
-using System.Threading.Channels;
 
 namespace Thumper_Custom_Level_Editor
 {
