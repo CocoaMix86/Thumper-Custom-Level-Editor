@@ -923,7 +923,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void AudioPlayback(DataGridViewCell CellToPlay)
         {
-            if (TCLE.PlaySampleOneOff(CellToPlay, TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == (string)CellToPlay.OwningRow.Cells[1].Value), out SampChannel) != 0) {
+            if (TCLE.PlaySampleOneOff(CellToPlay, TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == (string)CellToPlay.OwningRow.Cells[1].Value), out SampChannel)) {
                 lvlLoopTracks.InvalidateCell(CellToPlay);
             }
             else {

@@ -822,12 +822,14 @@ namespace Thumper_Custom_Level_Editor
 
         public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
         public static float initialfreq;
-        public static int PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
+        public static bool PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
         {
             if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString())?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
                 string SampleToPlay = TCLE.PCtoAudioFile(_samp);
-                if (String.IsNullOrEmpty(SampleToPlay))
-                    return SampChannel = 0;
+                if (String.IsNullOrEmpty(SampleToPlay)) {
+                    SampChannel = 0;
+                    return false;
+                }
 
                 //initialize the player and load the sample
                 SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
@@ -842,18 +844,19 @@ namespace Thumper_Custom_Level_Editor
                 //play the sample
                 if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
                     PlayingChannels.Add(new Tuple<DataGridView, string, int>(cell.DataGridView, cell.DataGridView[1, cell.RowIndex].Value.ToString(), SampChannel));
-                    return SampChannel;
+                    return true;
                 }
                 else {
-                    return SampChannel = 0;
+                    return false;
                 }
             }
             else {
                 var ItemToRemove = PlayingChannels.First(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString());
+                SampChannel = ItemToRemove.Item3;
                 Bass.BASS_ChannelStop(ItemToRemove.Item3);
                 Bass.BASS_ChannelFree(ItemToRemove.Item3);
                 PlayingChannels.Remove(ItemToRemove);
-                return SampChannel = 0;
+                return false;
             }
         }
         public static int PlaySampleOneOff(string samplename, byte[] stream, out int SampChannel)
@@ -890,8 +893,7 @@ namespace Thumper_Custom_Level_Editor
             };
             //math to figure out how long the sample is, in seconds and dimensions
             long len = Bass.BASS_ChannelGetLength(channel, BASSMode.BASS_POS_BYTE);
-            samp.time = Bass.BASS_ChannelBytes2Seconds(channel, len) - ((double)samp.offset / 1000d);
-            samp.beats = (samp.time / 60) * (double)TCLE.BPM;
+            samp.time = (Bass.BASS_ChannelBytes2Seconds(channel, len) - ((double)samp.offset / 1000d)) / (double)samp.pitch;
             //render wave
             wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
             samp.wave = wave;

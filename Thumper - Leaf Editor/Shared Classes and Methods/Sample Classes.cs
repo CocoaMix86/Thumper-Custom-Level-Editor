@@ -4,6 +4,7 @@ using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
+using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -22,7 +23,7 @@ namespace Thumper_Custom_Level_Editor
             set {
                 Pitch = value;
                 if (Editor != null)
-                    CalculateRuntime();
+                    UpdateRuntime();
             }
         }
         private decimal Pitch;
@@ -40,15 +41,16 @@ namespace Thumper_Custom_Level_Editor
             set {
                 Offset = value;
                 if (Editor != null)
-                    CalculateRuntime();
+                    UpdateRuntime();
             }
         }
         private int Offset;
         public string channel_group { get; set; }
 
-        public WaveForm wave { get; set; }
-        public double time { get; set; }
-        public double beats { get; set; }
+        public WaveForm wave = null;
+        public double time = 0;
+        public double alteredtime => (this.time - ((double)this.offset / 1000d)) / (double)this.pitch;
+        public double beats => (this.alteredtime / 60) * (double)TCLE.BPM;
 
         public override string ToString()
         {
@@ -57,20 +59,23 @@ namespace Thumper_Custom_Level_Editor
 
         public void CalculateRuntime()
         {
-            if (this.TempFile == null)
-                TCLE.PCtoAudioFile(this);
-            int channel = Bass.BASS_StreamCreateFile(this.TempFile, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-            //pitch shift, pan, other fx
-            float initialfreq = 0;
-            Bass.BASS_ChannelGetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
-            Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)this.pitch);
-            //after fx are done, generate the new wave and runtime
-            TCLE.GenerateSampWave(this, channel);
-            Bass.BASS_ChannelFree(channel);
-            Bass.BASS_StreamFree(channel);
+                if (this.TempFile == null)
+                    TCLE.PCtoAudioFile(this);
+                int channel = Bass.BASS_StreamCreateFile(this.TempFile, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
+                //pitch shift, pan, other fx
+                float initialfreq = 0;
+                Bass.BASS_ChannelGetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
+                Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)this.pitch);
+                //after fx are done, generate the new wave and runtime
+                TCLE.GenerateSampWave(this, channel);
+                Bass.BASS_ChannelFree(channel);
+                Bass.BASS_StreamFree(channel);
+        }
 
+        public void UpdateRuntime()
+        {
             int rowindex = this.Editor.sampleproperties.samplelist.IndexOf(this);
-            this.Editor.sampleList.Rows[rowindex].Cells[2].Value = TimeSpan.FromSeconds(this.time).ToString(@"hh\:mm\:ss\.fff");
+            this.Editor.sampleList.Rows[rowindex].Cells[2].Value = $"{this.beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(this.alteredtime).ToString(@"hh\:mm\:ss\.fff")}";
         }
     }
 

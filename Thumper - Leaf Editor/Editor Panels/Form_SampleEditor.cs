@@ -73,7 +73,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
         BASSTimer _updateTimer = new BASSTimer(50);
         public Visuals _vis = new Visuals();
-        public int SampChannel;
+        public int LastChannel;
         #endregion
 
         #region EventHandlers
@@ -134,7 +134,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sampleList.RowCount = 0;
             //repopulate dgv from list
             foreach (SampleData _samp in SampleList) {
-                sampleList.Rows.Add(new object[] { null, _samp.obj_name, (_samp.time != 0 ? TimeSpan.FromSeconds(_samp.time).ToString(@"hh\:mm\:ss\.fff") : "play sample to get time" )});
+                sampleList.Rows.Add(new object[] { null, _samp.obj_name, (_samp.time != 0 ? $"{_samp.beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fff")}" : "play sample to get time" )});
             }
             //enable certain buttons if there are enough items for them
             btnSampleAdd.Enabled = true;
@@ -289,12 +289,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void AudioPlayback(DataGridViewCell CellToPlay)
         {
-            if (TCLE.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out SampChannel) != 0) {                
+            int SampChannel;
+            if (TCLE.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out SampChannel)) {
+                LastChannel = SampChannel;
                 _updateTimer.Start();
                 sampleList.InvalidateCell(CellToPlay);
             }
             else {
-                _updateTimer.Stop();
+                if (!TCLE.PlayingChannels.Any())
+                    _updateTimer.Stop();
+                else
+                    LastChannel = TCLE.PlayingChannels.Last().Item3;
                 sampleList.InvalidateCell(CellToPlay);
             }
         }
@@ -302,8 +307,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             //these 2 show different spectrums visually while the sample plays
-            pictureSpectrum.Image = _vis.CreateSpectrumWave(SampChannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Black, 1, false, false, false);
-            pictureWave.Image = _vis.CreateWaveForm(SampChannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, false, true, false);
+            pictureSpectrum.Image = _vis.CreateSpectrumWave(LastChannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Black, 1, false, false, false);
+            pictureWave.Image = _vis.CreateWaveForm(LastChannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, false, true, false);
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
@@ -490,11 +495,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             byte[] bytesFromFSB;
             string _hashedname = "";
             bool convertedwav = false;
+            //loading label
             lblLoading.Visible = true;
             lblLoading.Invalidate();
             lblLoading.Update();
             lblLoading.Refresh();
             Application.DoEvents();
+            //
             if (filepath.EndsWith(".wav")) {
                 byte[] wavbytes;
                 //see if file is in use and can be read
@@ -521,7 +528,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 uint freq = BitConverter.ToUInt32(wavbytes, 24);
                 ulong freqid = FrequencyID.TryGetValue((int)freq, out ulong value) ? value : 8;
-
+                //lookup where data starts and then remove header
                 int indexofdata = TCLE.ByteSearch(wavbytes, new byte[] {(byte)'d', (byte)'a', (byte)'t', (byte)'a' });
                 indexofdata += 8;
                 wavbytes = wavbytes.AsSpan(indexofdata).ToArray();
@@ -532,7 +539,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     sw.Write((UInt32)1); //how many tracks in fsb
                     sw.Write((UInt32)8); //size of sample header
                     sw.Write((UInt32)0x1c); //size of header table
-                    sw.Write((UInt32)wavbytes.Length); //smaple bytes
+                    sw.Write((UInt32)wavbytes.Length); //sample bytes
                     sw.Write((UInt32)2); //audio type
                     sw.Write((UInt32)0); //always 0, unknown
                     sw.Write((UInt32)0); //flags
@@ -588,8 +595,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 time = 0,
                 Editor = this
             };
-            SampleList.Add(newsample);
             newsample.CalculateRuntime();
+            SampleList.Add(newsample);
+            newsample.UpdateRuntime();
 
             if (convertedwav)
                 File.Delete(filepath);
