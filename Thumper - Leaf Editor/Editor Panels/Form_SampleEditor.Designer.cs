@@ -47,6 +47,7 @@
             this.propertyGridSample = new PropertyGrid();
             this.lblMasterlvllistHelp = new Label();
             this.splitContainer1 = new SplitContainer();
+            this.lblLoading = new Label();
             this.label1 = new Label();
             this.label4 = new Label();
             this.pictureSpectrum = new PictureBox();
@@ -71,7 +72,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(324, 0);
+            this.labelCollapsePanel.Location = new Point(313, 0);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -133,7 +134,7 @@
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.sampleList.Size = new Size(316, 493);
+            this.sampleList.Size = new Size(305, 493);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellClick += this.sampleList_CellClick;
@@ -257,7 +258,7 @@
             this.propertyGridSample.RightToLeft = RightToLeft.No;
             this.propertyGridSample.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridSample.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSample.Size = new Size(588, 293);
+            this.propertyGridSample.Size = new Size(599, 293);
             this.propertyGridSample.TabIndex = 0;
             this.propertyGridSample.ToolbarVisible = false;
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -272,7 +273,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(994, -3);
+            this.lblMasterlvllistHelp.Location = new Point(983, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -290,6 +291,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblLoading);
             this.splitContainer1.Panel1.Controls.Add(this.labelCollapsePanel);
             this.splitContainer1.Panel1.Controls.Add(this.sampleList);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
@@ -305,9 +307,28 @@
             this.splitContainer1.Panel2.Controls.Add(this.pictureWave);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 340;
+            this.splitContainer1.SplitterDistance = 329;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
+            // 
+            // lblLoading
+            // 
+            this.lblLoading.AutoSize = true;
+            this.lblLoading.BackColor = Color.FromArgb(10, 10, 10);
+            this.lblLoading.BorderStyle = BorderStyle.Fixed3D;
+            this.lblLoading.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.lblLoading.ForeColor = Color.White;
+            this.lblLoading.Image = Properties.Resources.beebledance;
+            this.lblLoading.ImageAlign = ContentAlignment.MiddleLeft;
+            this.lblLoading.Location = new Point(59, 166);
+            this.lblLoading.Margin = new Padding(4, 0, 4, 0);
+            this.lblLoading.MinimumSize = new Size(260, 60);
+            this.lblLoading.Name = "lblLoading";
+            this.lblLoading.Size = new Size(260, 60);
+            this.lblLoading.TabIndex = 152;
+            this.lblLoading.Text = "LOADING AUDIO";
+            this.lblLoading.TextAlign = ContentAlignment.MiddleRight;
+            this.lblLoading.Visible = false;
             // 
             // label1
             // 
@@ -347,7 +368,7 @@
             this.pictureSpectrum.Location = new Point(0, 113);
             this.pictureSpectrum.Margin = new Padding(4, 3, 4, 3);
             this.pictureSpectrum.Name = "pictureSpectrum";
-            this.pictureSpectrum.Size = new Size(588, 100);
+            this.pictureSpectrum.Size = new Size(599, 100);
             this.pictureSpectrum.TabIndex = 150;
             this.pictureSpectrum.TabStop = false;
             // 
@@ -360,7 +381,7 @@
             this.pictureWave.Location = new Point(0, 13);
             this.pictureWave.Margin = new Padding(4, 3, 4, 3);
             this.pictureWave.Name = "pictureWave";
-            this.pictureWave.Size = new Size(588, 100);
+            this.pictureWave.Size = new Size(599, 100);
             this.pictureWave.TabIndex = 151;
             this.pictureWave.TabStop = false;
             // 
@@ -428,5 +449,6 @@
         private DataGridViewTextBoxColumn SampleName;
         private DataGridViewTextBoxColumn sampleRuntime;
         public DataGridView sampleList;
+        private Label lblLoading;
     }
 }

@@ -4,6 +4,7 @@ using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using System.Text;
 using NAudio.Wave.SampleProviders;
+using Windows.Devices.Bluetooth.Advertisement;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -489,21 +490,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             byte[] bytesFromFSB;
             string _hashedname = "";
             bool convertedwav = false;
+            lblLoading.Visible = true;
+            lblLoading.Invalidate();
+            lblLoading.Update();
+            lblLoading.Refresh();
+            Application.DoEvents();
             if (filepath.EndsWith(".wav")) {
                 byte[] wavbytes;
+                //see if file is in use and can be read
                 try {
                     wavbytes = File.ReadAllBytes(filepath);
                 }
                 catch (Exception) {
                     MessageBox.Show("File in use in another program. Import did not succeed.");
+                    lblLoading.Visible = false;
                     return;
                 }
-                if (BitConverter.ToString(wavbytes, 0, 4) != "RIFF") {
+                //catch non-WAV files  that just happen to have the wav extension
+                if (Encoding.UTF8.GetString(wavbytes, 0, 4) != "RIFF") {
                     MessageBox.Show("This does not appear to be a proper .WAV file (header problems).", "Thumper Custom Level Editor");
+                    lblLoading.Visible = false;
                     return;
                 }
-                uint freq = BitConverter.ToUInt32(wavbytes, 25);
-                ulong freqid = FrequencyID[(int)freq];
+                //some WAV have a "JUNK" header. Need to bypass this
+                if (Encoding.UTF8.GetString(wavbytes, 12, 4) == "JUNK") {
+                    uint junktable = BitConverter.ToUInt32(wavbytes, 16);
+                    byte[] wavbefore = wavbytes[0..12];
+                    byte[] wavafter = wavbytes.AsSpan(20 + (int)junktable).ToArray();
+                    wavbytes = wavbefore.Concat(wavafter).ToArray();
+                }
+                uint freq = BitConverter.ToUInt32(wavbytes, 24);
+                ulong freqid = FrequencyID.TryGetValue((int)freq, out ulong value) ? value : 8;
 
                 int indexofdata = TCLE.ByteSearch(wavbytes, new byte[] {(byte)'d', (byte)'a', (byte)'t', (byte)'a' });
                 indexofdata += 8;
@@ -578,6 +595,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 File.Delete(filepath);
 
             TCLE.ReloadProjectSamples();
+            lblLoading.Visible = false;
         }
 
         private void ResetSample()
