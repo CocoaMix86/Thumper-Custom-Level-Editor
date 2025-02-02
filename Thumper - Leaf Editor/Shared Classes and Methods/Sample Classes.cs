@@ -1,16 +1,15 @@
-﻿using NAudio.Wave.SampleProviders;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
-using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor
 {
     public class SampleData
     {
+        public Form_SampleEditor Editor;
         public string File { get; set; }
         public string TempFile { get; set; }
 
@@ -22,7 +21,8 @@ namespace Thumper_Custom_Level_Editor
             get => Pitch;
             set {
                 Pitch = value;
-                CalculateRuntime();
+                if (Editor != null)
+                    CalculateRuntime();
             }
         }
         private decimal Pitch;
@@ -31,7 +31,6 @@ namespace Thumper_Custom_Level_Editor
             get => Pan;
             set {
                 Pan = value;
-                CalculateRuntime();
             }
         }
         private decimal Pan;
@@ -40,7 +39,8 @@ namespace Thumper_Custom_Level_Editor
             get => Offset;
             set {
                 Offset = value;
-                CalculateRuntime();
+                if (Editor != null)
+                    CalculateRuntime();
             }
         }
         private int Offset;
@@ -64,10 +64,13 @@ namespace Thumper_Custom_Level_Editor
             float initialfreq = 0;
             Bass.BASS_ChannelGetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
             Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)this.pitch);
-            Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_PAN, (float)this.pan);
-            Bass.BASS_ChannelSetPosition(channel, (double)this.offset / 1000d);
             //after fx are done, generate the new wave and runtime
             TCLE.GenerateSampWave(this, channel);
+            Bass.BASS_ChannelFree(channel);
+            Bass.BASS_StreamFree(channel);
+
+            int rowindex = this.Editor.sampleproperties.samplelist.IndexOf(this);
+            this.Editor.sampleList.Rows[rowindex].Cells[2].Value = TimeSpan.FromSeconds(this.time).ToString(@"hh\:mm\:ss\.fff");
         }
     }
 

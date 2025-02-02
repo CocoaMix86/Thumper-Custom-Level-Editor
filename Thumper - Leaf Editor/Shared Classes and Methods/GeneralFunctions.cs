@@ -493,7 +493,7 @@ namespace Thumper_Custom_Level_Editor
             string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
             File.WriteAllBytes(finalfilename, dataBytes);
             _samp.TempFile = finalfilename;
-            return finalfilename;
+            return _samp.TempFile;
         }
 
         public static uint Hash32(string s)
@@ -890,7 +890,7 @@ namespace Thumper_Custom_Level_Editor
             };
             //math to figure out how long the sample is, in seconds and dimensions
             long len = Bass.BASS_ChannelGetLength(channel, BASSMode.BASS_POS_BYTE);
-            samp.time = Bass.BASS_ChannelBytes2Seconds(channel, len);
+            samp.time = Bass.BASS_ChannelBytes2Seconds(channel, len) - ((double)samp.offset / 1000d);
             samp.beats = (samp.time / 60) * (double)TCLE.BPM;
             //render wave
             wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
