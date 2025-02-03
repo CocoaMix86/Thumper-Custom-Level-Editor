@@ -354,8 +354,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+            if (e.RowIndex == -1 || e.ColumnIndex == -1) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            }
             else {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
                 e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
@@ -430,21 +431,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Handled = true;
         }
 
-        private int? currentlyrender;
+        ///private int? currentlyrender;
+        private List<DataGridViewCellPaintingEventArgs> CellsToPaint = new();
         private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (currentlyrender != e.RowIndex && SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") {
+            if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") {
                 if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
                     return;
                 //setup variables to reference later when needed
-                int offsetportion = trackEditor.FirstDisplayedScrollingColumnHiddenWidth + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3);
-                int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + (trackEditor.FirstDisplayedScrollingColumnHiddenWidth > 0 ? 1 : 0);
+                int offsetportion = (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3);
+                int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + 1;
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
                 SampleData samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == seqref.obj_name);
                 if (samp == null) {
                     return;
                 }
-                currentlyrender = e.RowIndex;
+                ///currentlyrender = e.RowIndex;
                 //export pc file to playable file
                 if (samp.wave == null) {
                     samp.CalculateRuntime();
@@ -460,11 +462,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
                     //math to offset drawing the wave horizontally based on where the active beats are
                     e.Graphics.DrawImage(WaveToDraw, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2);
-                    //e.PaintCells(new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, WaveToDraw.Width, WaveToDraw.Height), DataGridViewPaintParts.None);
                 }
                 e.PaintHeader(true);
-                e.PaintCells(new Rectangle(trackEditor.RowHeadersWidth, e.RowBounds.Top, 55, e.RowBounds.Height), DataGridViewPaintParts.All);
-                currentlyrender = null;
+                e.PaintCells(new Rectangle(trackEditor.RowHeadersWidth, e.RowBounds.Top, 40, e.RowBounds.Height), DataGridViewPaintParts.All);
+                ///currentlyrender = null;
             }
         }
 
