@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             RenderForm();
-            
+
             if (load != null) {
                 LoadLeaf(load, filepath);
                 //each object in the seq_objs[] list becomes a track
@@ -441,19 +441,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + (trackEditor.FirstDisplayedScrollingColumnHiddenWidth > 0 ? 1 : 0);
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
                 SampleData samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == seqref.obj_name);
-                int sampchannel;
                 if (samp == null) {
                     return;
                 }
                 currentlyrender = e.RowIndex;
                 //export pc file to playable file
                 if (samp.wave == null) {
-                    TCLE.PCtoAudioFile(samp);
-                    //initialize the player and load the sample
-                    sampchannel = Bass.BASS_StreamCreateFile($@"{samp.TempFile}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-                    TCLE.GenerateSampWave(samp, sampchannel);
+                    samp.CalculateRuntime();
                 }
                 int cellwidth = trackZoom.Value;
+                samp.wave.ColorBackground = seqref.highlight_color;
                 Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
                 using (var graphics = Graphics.FromImage(WaveToDraw)) {
                     graphics.DrawLine(new Pen(Color.Black, 5), 0, 0, 0, WaveToDraw.Height);
@@ -466,9 +463,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //e.PaintCells(new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, WaveToDraw.Width, WaveToDraw.Height), DataGridViewPaintParts.None);
                 }
                 e.PaintHeader(true);
-                //e.PaintCells(new Rectangle(trackEditor.RowHeadersWidth, e.RowBounds.Top, 55, e.RowBounds.Height), DataGridViewPaintParts.All);
+                e.PaintCells(new Rectangle(trackEditor.RowHeadersWidth, e.RowBounds.Top, 55, e.RowBounds.Height), DataGridViewPaintParts.All);
                 currentlyrender = null;
             }
+        }
+
+        private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
         }
 
         private void trackEditor_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -930,12 +931,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
                 return;
             Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == e.Node.Text);
-            if (e.Node.Text.EndsWith(".samp")) 
+            if (e.Node.Text.EndsWith(".samp"))
                 objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.category == "PLAY SAMPLE");
-            
-            if (objmatch == null) 
+
+            if (objmatch == null)
                 return;
-            
+
 
             Sequencer_Object seq = new(leafProperties) {
                 obj_name = objmatch.category == "PLAY SAMPLE" ? e.Node.Text : objmatch.obj_name,

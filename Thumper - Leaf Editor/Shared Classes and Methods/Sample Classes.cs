@@ -57,19 +57,22 @@ namespace Thumper_Custom_Level_Editor
             return obj_name;
         }
 
-        public void CalculateRuntime()
+        public void CalculateRuntime(int channel = -1, bool free = true)
         {
-                if (this.TempFile == null)
-                    TCLE.PCtoAudioFile(this);
-                int channel = Bass.BASS_StreamCreateFile(this.TempFile, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-                //pitch shift, pan, other fx
-                float initialfreq = 0;
-                Bass.BASS_ChannelGetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
-                Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)this.pitch);
-                //after fx are done, generate the new wave and runtime
-                TCLE.GenerateSampWave(this, channel);
+            if (this.TempFile == null)
+                TCLE.PCtoAudioFile(this);
+            if (channel == -1) 
+                channel = Bass.BASS_StreamCreateFile(this.TempFile, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
+            //pitch shift, pan, other fx
+            float initialfreq = 0;
+            Bass.BASS_ChannelGetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
+            Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)this.pitch);
+            //after fx are done, generate the new wave and runtime
+            TCLE.GenerateSampWave(this, channel);
+            if (free) {
                 Bass.BASS_ChannelFree(channel);
                 Bass.BASS_StreamFree(channel);
+            }
         }
 
         public void UpdateRuntime()

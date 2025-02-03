@@ -73,7 +73,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
         BASSTimer _updateTimer = new BASSTimer(50);
         public Visuals _vis = new Visuals();
-        public int LastChannel;
         #endregion
 
         #region EventHandlers
@@ -187,8 +186,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
             string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string dir in data) {
-                if (File.Exists(dir) && Path.GetExtension(dir) is ".fsb" or ".wav")
+                if (File.Exists(dir) && Path.GetExtension(dir) is ".fsb" or ".wav") {
                     ImportAudioToSamp(dir);
+                    TCLE.alzheimer();
+                }
                 else
                     MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
             }
@@ -278,8 +279,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.Multiselect = true;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 foreach (string _file in ofd.FileNames) {
-                    if (_file.EndsWith(".wav"))
+                    if (_file.EndsWith(".wav") || _file.EndsWith(".fsb")) {
                         ImportAudioToSamp(_file);
+                        TCLE.alzheimer();
+                    }
                 }
                 TCLE.PlaySound("UIobjectadd");
             }
@@ -291,24 +294,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             int SampChannel;
             if (TCLE.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out SampChannel)) {
-                LastChannel = SampChannel;
+                TCLE.LastChannel = SampChannel;
                 _updateTimer.Start();
                 sampleList.InvalidateCell(CellToPlay);
             }
             else {
-                if (!TCLE.PlayingChannels.Any())
-                    _updateTimer.Stop();
-                else
-                    LastChannel = TCLE.PlayingChannels.Last().Item3;
                 sampleList.InvalidateCell(CellToPlay);
+                TCLE.alzheimer();
             }
         }
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
+            if (!TCLE.PlayingChannels.Any(x => x.Item1 == this.sampleList)) {
+                _updateTimer.Stop();
+                return;
+            }
             //these 2 show different spectrums visually while the sample plays
-            pictureSpectrum.Image = _vis.CreateSpectrumWave(LastChannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Black, 1, false, false, false);
-            pictureWave.Image = _vis.CreateWaveForm(LastChannel, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, false, true, false);
+            pictureSpectrum.Image = _vis.CreateSpectrumWave(TCLE.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Black, 1, false, false, false);
+            pictureWave.Image = _vis.CreateWaveForm(TCLE.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, false, true, false);
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
@@ -562,6 +566,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 filepath = $@"{TCLE.WorkingFolder}\extras\{_filename}.fsb";
                 convertedwav = true;
+                wavbytes = null;
             }
 
             bytesFromFSB = File.ReadAllBytes(filepath);
@@ -582,6 +587,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 f.Write(PCfileheader, 0, PCfileheader.Length);
                 f.Write(bytesFromFSB, 0, bytesFromFSB.Length);
             }
+            bytesFromFSB = null;
 
             //Add new sample entry to the loaded samp_ file
             SampleData newsample = new() {

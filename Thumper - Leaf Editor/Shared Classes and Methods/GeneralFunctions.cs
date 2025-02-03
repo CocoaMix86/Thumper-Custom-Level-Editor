@@ -196,6 +196,7 @@ namespace Thumper_Custom_Level_Editor
             if (Properties.Settings.Default.muteapplication)
                 return;
             PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out int sampchannel);
+            TCLE.alzheimer();
         }
 
         /// Used to allow only numbers and a single decimal during input
@@ -821,6 +822,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
+        public static int LastChannel;
         public static float initialfreq;
         public static bool PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
         {
@@ -839,8 +841,10 @@ namespace Thumper_Custom_Level_Editor
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
                 Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.offset / 1000d);
-                if (_samp.wave == null)
-                    TCLE.GenerateSampWave(_samp, SampChannel);
+                if (_samp.wave == null) {
+                    _samp.CalculateRuntime(SampChannel, false);
+                    _samp.UpdateRuntime();
+                }
                 //play the sample
                 if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
                     PlayingChannels.Add(new Tuple<DataGridView, string, int>(cell.DataGridView, cell.DataGridView[1, cell.RowIndex].Value.ToString(), SampChannel));
@@ -877,13 +881,16 @@ namespace Thumper_Custom_Level_Editor
 
         private static void OnEnding(int handle, int channel, int data, IntPtr user)
         {
-            Bass.BASS_ChannelStop(channel);
-            Bass.BASS_ChannelFree(channel);
+            bool free1 = Bass.BASS_ChannelStop(channel);
+            bool free2 = Bass.BASS_ChannelFree(channel);
             var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
             if (ItemToRemove != null) {
                 ItemToRemove.Item1.InvalidateColumn(0);
                 PlayingChannels.Remove(ItemToRemove);
+                if (TCLE.PlayingChannels.Count > 0)
+                    LastChannel = PlayingChannels.Last().Item3;
             }
+            TCLE.alzheimer();
         }
 
         public static void GenerateSampWave(SampleData samp, int channel)
