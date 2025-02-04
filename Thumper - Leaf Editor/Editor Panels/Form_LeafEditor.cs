@@ -443,6 +443,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 int cellwidth = trackZoom.Value;
                 samp.wave.ColorBackground = seqref.highlight_color;
+                //if object has no drawn wave, create it. Wave is null whenever cell sizes change
                 if (seqref.WaveBitmap == null) {
                     Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
                     using (var graphics = Graphics.FromImage(WaveToDraw)) {
