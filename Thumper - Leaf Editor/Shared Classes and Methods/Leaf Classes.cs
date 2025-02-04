@@ -39,6 +39,7 @@ namespace Thumper_Custom_Level_Editor
         public bool enabled { get; set; }
         public bool isdefault { get; set; }
 
+        public Bitmap WaveBitmap = null;
         public int id { get; set; }
         public bool mute { get; set; }
         public DataGridViewRow editor_row { get; set; }

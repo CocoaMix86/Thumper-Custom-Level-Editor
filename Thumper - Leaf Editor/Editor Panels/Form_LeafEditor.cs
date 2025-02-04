@@ -158,6 +158,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.FirstDisplayedScrollingColumnIndex = display;
                 trackEditor.Scroll += trackEditor_Scroll;
             }
+
+            foreach (Sequencer_Object seq in SequencerObjects)
+                seq.WaveBitmap = null;
         }
 
         private void trackZoomVert_Scroll(object sender, EventArgs e)
@@ -175,6 +178,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 trackEditor.Scroll += trackEditor_Scroll;
             }
+
+            foreach (Sequencer_Object seq in SequencerObjects)
+                seq.WaveBitmap = null;
         }
 
         private void trackEditor_Resize(object sender, EventArgs e)
@@ -289,12 +295,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
             }
 
-            if (e.RowIndex != -1 && e.ColumnIndex != -1)
-                e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground);
+            if ((e.RowIndex != -1 && e.ColumnIndex != -1)) {
+                if (SequencerObjects[e.RowIndex].category != "PLAY SAMPLE" || RowPrePainting)
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground);
+                else if (e.ColumnIndex is 0 or 1 or 2)
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.Border);
+            }
 
             //paint notifier circles for changed interp and ease
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
-                if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
+                if (trackEditor[e.ColumnIndex, e.RowIndex].Selected || SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") {
 
                 }
                 else if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
@@ -309,34 +319,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (SequencerObjects[e.RowIndex + 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
                         e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
                     }
-                }/*
-                else if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
-                    Sequencer_Object seq = SequencerObjects[e.RowIndex];
-                    SampleData samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == seq.obj_name);
-                    if (samp != null) {
-                        string SampleToPlay = TCLE.PCtoOGG(samp);
-                        //initialize the player and load the sample
-                        sampchannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-                        WaveForm wave = new($@"{TCLE.AppLocation}\{SampleToPlay}") {
-                            DrawWaveForm = WaveForm.WAVEFORMDRAWTYPE.DualMono,
-                            ColorBackground = seq.highlight_color,
-                            DrawMarker = WaveForm.MARKERDRAWTYPE.NamePositionBottom,
-                            ColorMarker = Color.Black,
-                            MarkerLength = 1.0f
-                        };
-                        long len = Bass.BASS_ChannelGetLength(sampchannel, BASSMode.BASS_POS_BYTE);
-                        double time = Bass.BASS_ChannelBytes2Seconds(sampchannel, len);
-                        double beats = (time / 60) * (double)TCLE.BPM;
-                        int cellwidth = trackZoom.Value;
-                        int cellheight = trackZoomVert.Value;
-                        wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
-                        wave.AddMarker("eeeeeeeeeeeeeeeeeeee", 0);
-                        wave.AddMarker("fffffffffffffffffff", len);
-                        Bitmap WaveToDraw = wave.CreateBitmap((int)Math.Floor(cellwidth * beats), cellheight, -1, -1, true);
-                        //e.Graphics.DrawImage(WaveToDraw, e.CellBounds.Left, e.CellBounds.Top);
-                        trackEditor.create
-                    }
-                }*/
+                }
                 else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                     e.Graphics.FillRectangle(new SolidBrush(SequencerObjects[e.RowIndex].highlight_color), e.CellBounds);
                 else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
@@ -357,7 +340,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex == -1 || e.ColumnIndex == -1) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             }
-            else {
+            else if (SequencerObjects[e.RowIndex].category != "PLAY SAMPLE" || RowPrePainting) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
                 e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
             }
@@ -435,7 +418,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<DataGridViewCellPaintingEventArgs> CellsToPaint = new();
         private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
+        }
+
+        private bool RowPrePainting;
+        private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
             if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") {
+                RowPrePainting = true;
+                e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
+                RowPrePainting = false;
                 if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
                     return;
                 //setup variables to reference later when needed
@@ -446,31 +437,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (samp == null) {
                     return;
                 }
-                ///currentlyrender = e.RowIndex;
                 //export pc file to playable file
                 if (samp.wave == null) {
                     samp.CalculateRuntime();
                 }
                 int cellwidth = trackZoom.Value;
                 samp.wave.ColorBackground = seqref.highlight_color;
-                Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
-                using (var graphics = Graphics.FromImage(WaveToDraw)) {
-                    graphics.DrawLine(new Pen(Color.Black, 5), 0, 0, 0, WaveToDraw.Height);
-                    graphics.DrawLine(new Pen(Color.Black, 5), WaveToDraw.Width, 0, WaveToDraw.Width, WaveToDraw.Height);
+                if (seqref.WaveBitmap == null) {
+                    Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
+                    using (var graphics = Graphics.FromImage(WaveToDraw)) {
+                        graphics.DrawLine(new Pen(Color.Black, 5), 0, 0, 0, WaveToDraw.Height);
+                        graphics.DrawLine(new Pen(Color.Black, 5), WaveToDraw.Width, 0, WaveToDraw.Width, WaveToDraw.Height);
+                    }
+                    seqref.WaveBitmap = WaveToDraw;
                 }
                 //once the bitmap is created, now we can do some funky stuff
                 foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
                     //math to offset drawing the wave horizontally based on where the active beats are
-                    e.Graphics.DrawImage(WaveToDraw, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2);
+                    e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2);
                 }
-                e.PaintHeader(true);
-                e.PaintCells(new Rectangle(trackEditor.RowHeadersWidth, e.RowBounds.Top, 40, e.RowBounds.Height), DataGridViewPaintParts.All);
-                ///currentlyrender = null;
             }
-        }
-
-        private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
         }
 
         private void trackEditor_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
