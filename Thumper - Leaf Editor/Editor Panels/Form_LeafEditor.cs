@@ -296,7 +296,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if ((e.RowIndex != -1 && e.ColumnIndex != -1)) {
-                if (SequencerObjects[e.RowIndex].category != "PLAY SAMPLE" || RowPrePainting)
+                if (SequencerObjects[e.RowIndex].category != "PLAY SAMPLE" || RowPrePainting || !TCLE.Instance.leafoptionShowWave.Checked)
                     e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground);
                 else if (e.ColumnIndex is 0 or 1 or 2)
                     e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.Border);
@@ -304,7 +304,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //paint notifier circles for changed interp and ease
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
-                if (trackEditor[e.ColumnIndex, e.RowIndex].Selected || SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") {
+                if (trackEditor[e.ColumnIndex, e.RowIndex].Selected || (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked)) {
 
                 }
                 else if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
@@ -340,14 +340,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex == -1 || e.ColumnIndex == -1) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             }
-            else if (SequencerObjects[e.RowIndex].category != "PLAY SAMPLE" || RowPrePainting) {
+            else if ((SequencerObjects[e.RowIndex].category != "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) || RowPrePainting) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
                 e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
             }
 
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" || SequencerObjects[e.RowIndex].trait_type is "kTraitColor" || (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) || Properties.Settings.Default.LeafOptionConnectBars && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                if ((SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) || SequencerObjects[e.RowIndex].trait_type is "kTraitColor" || (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) || Properties.Settings.Default.LeafOptionConnectBars && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
                     //e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
                 }
                 else {
@@ -414,19 +414,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Handled = true;
         }
 
-        ///private int? currentlyrender;
-        private List<DataGridViewCellPaintingEventArgs> CellsToPaint = new();
+        //Tuple<int rowindex, int column index, int number of cells>
+        private List<Tuple<int, int, int>> CellsToPaint = new();
         private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
+            /*
+            if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && CellsToPaint.FirstOrDefault(x => x.Item1 == e.RowIndex) is Tuple<int, int, int> numbers) {
+                RowPrePainting = true;
+                e.PaintCells(e.RowBounds, DataGridViewPaintParts.Border);
+                RowPrePainting = false;
+            }*/
         }
 
         private bool RowPrePainting;
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") {
+            if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) {
                 RowPrePainting = true;
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
                 RowPrePainting = false;
+
                 if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
                     return;
                 //setup variables to reference later when needed
@@ -454,8 +461,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //once the bitmap is created, now we can do some funky stuff
                 foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
+                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
+                        continue;
                     //math to offset drawing the wave horizontally based on where the active beats are
                     e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2);
+                    //CellsToPaint.Add(new Tuple<int, int, int>(e.RowIndex, (sdp.beat - columnindex) * cellwidth, (int)samp.beats));
                 }
             }
         }

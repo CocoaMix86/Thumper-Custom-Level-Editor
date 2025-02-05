@@ -100,6 +100,7 @@ namespace Thumper_Custom_Level_Editor
             leafoptionShowLanes.Checked = Properties.Settings.Default.LeafOptionShowLane;
             leafoptionEaseDots.Checked = Properties.Settings.Default.LeafOptionEaseDots;
             leafoptionThinValues.Checked = Properties.Settings.Default.LeafOptionThinBars;
+            leafoptionShowWave.Checked = Properties.Settings.Default.LeafOptionShowWave;
             //
             if (AppSettings.Recentfiles == null)
                 AppSettings.Recentfiles = new List<string>();
@@ -595,6 +596,14 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        private void leafoptionShowWave_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionShowWave = leafoptionShowWave.Checked;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                leaf.trackEditor.Refresh();
+            }
+        }
+
         private void toolstripViewExplorer_Click(object sender, EventArgs e)
         {
             if (ProjectExplorer.IsDisposed) {
@@ -910,44 +919,6 @@ namespace Thumper_Custom_Level_Editor
             draw.Show(dockMain, DockState.Document);
         }
 
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            /*
-            foreach (FileInfo file in new DirectoryInfo($@"{Properties.Settings.Default.game_dir}\cache").GetFiles()) {
-                byte[] _bytes;
-                //read the .pc file as bytes, and skip the first 4 header bytes
-                _bytes = File.ReadAllBytes(file.FullName);
-                _bytes = _bytes.Skip(4).ToArray();
-
-                // credit to https://github.com/SamboyCoding/Fmod5Sharp
-                try {
-                    
-                    FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
-                    List<FmodSample> samples = bank.Samples;
-                    samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
-
-                    string audioname = "";
-                    for (int x = 0; x < _bytes.Length; x++) {
-                        if (_bytes[x] == 0x4 && _bytes[x + 1] == 0x0 && _bytes[x + 2] == 0x0 && _bytes[x + 3] == 0x0) {
-                            for (int _in = x + 4; _in < 500; _in++) {
-                                if (_bytes[_in] != 0x0)
-                                    audioname += (char)_bytes[_in];
-                                else
-                                    break;
-                            }
-                            break;
-                        }
-                    }
-                    if (_bytes[0] == 'D' && _bytes[1] == 'D' && _bytes[2] == 'S')
-                        File.WriteAllBytes($@"temp\{file.Name}.dds", _bytes);
-                } catch (Exception ex) {
-                    continue;
-                }
-            }
-            */
-        }
-
         [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
         private static extern int SetProcessWorkingSetSize(IntPtr process, int minimumWorkingSetSize, int maximumWorkingSetSize);
         public static void alzheimer()
@@ -955,6 +926,21 @@ namespace Thumper_Custom_Level_Editor
             GC.Collect();
             GC.WaitForPendingFinalizers();
             SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+        }
+
+        private void toolstripStopAudio_Click(object sender, EventArgs e)
+        {
+            Bass.BASS_Free();
+            alzheimer();
+            TCLE.PlayingChannels.Clear();
+            foreach (Form_SampleEditor samp in TCLE.Documents.Where(x => x.GetType() == typeof(Form_SampleEditor))) {
+                samp.sampleList.Refresh();
+            }
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+                lvl.lvlLoopTracks.Refresh();
+            }
+            // Initialize Sound library
+            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
         }
     }
 }

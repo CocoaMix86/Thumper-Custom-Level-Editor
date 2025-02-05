@@ -247,5 +247,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["LeafOptionThinBars"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionShowWave {
+            get {
+                return ((bool)(this["LeafOptionShowWave"]));
+            }
+            set {
+                this["LeafOptionShowWave"] = value;
+            }
+        }
     }
 }

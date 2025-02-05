@@ -877,7 +877,6 @@
         private SplitContainer splitContainer1;
         public PropertyGrid propertyGridLvl;
         private SplitContainer splitContainer2;
-        private DataGridView lvlLoopTracks;
         private Label label22;
         private ToolStrip lvlLoopToolStrip;
         private ToolStripButton btnLvlLoopAdd;
@@ -902,5 +901,6 @@
         private DataGridViewButtonColumn LvlLoopPlay;
         private DataGridViewComboBoxColumn LoopSample;
         private DataGridViewTextBoxColumn BeatsPerLoop;
+        public DataGridView lvlLoopTracks;
     }
 }
