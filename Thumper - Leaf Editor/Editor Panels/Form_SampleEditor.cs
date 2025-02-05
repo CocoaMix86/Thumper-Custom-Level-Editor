@@ -591,7 +591,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //Add new sample entry to the loaded samp_ file
             SampleData newsample = new() {
-                obj_name = $"{_filename}",
+                obj_name = $"{_filename.Replace(" ", "")}.samp",
                 volume = 1,
                 pitch = 1,
                 pan = 0,

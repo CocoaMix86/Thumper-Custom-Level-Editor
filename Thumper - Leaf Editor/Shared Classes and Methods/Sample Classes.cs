@@ -121,6 +121,11 @@ namespace Thumper_Custom_Level_Editor
             set {
                 if (!value.EndsWith(".samp"))
                     value += ".samp";
+                //need to change the sample name in the playing channels
+                for (int x = 0; x < TCLE.PlayingChannels.Count; x++) {
+                    if (TCLE.PlayingChannels[x].Item2 == sample.obj_name)
+                        TCLE.PlayingChannels[x] = new Tuple<DataGridView, string, int>(TCLE.PlayingChannels[x].Item1, sample.obj_name, TCLE.PlayingChannels[x].Item3);
+                }
                 sample.obj_name = value;
                 parent._samplelist_CollectionChanged(null, null);
             }
