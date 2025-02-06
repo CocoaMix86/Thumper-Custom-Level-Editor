@@ -223,11 +223,14 @@ namespace Thumper_Custom_Level_Editor
                 MaximizeScreenBounds();
             }
             else {
+                this.LocationChanged -= TCLE_LocationChanged;
                 this.WindowState = FormWindowState.Normal;
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
                 this.Refresh();
                 contextFormMax.Enabled = true;
                 contextFormRestore.Enabled = false;
+                this.LocationChanged += TCLE_LocationChanged;
+                toolstripFormRestore.ToolTipText = "Maximize";
             }
         }
         public void MaximizeScreenBounds()
@@ -251,10 +254,11 @@ namespace Thumper_Custom_Level_Editor
             toolstripFormRestore.Image = Properties.Resources.icon_restore;
             contextFormMax.Enabled = false;
             contextFormRestore.Enabled = true;
+            toolstripFormRestore.ToolTipText = "Restore Down";
         }
         private void TCLE_LocationChanged(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal && this.Location.Y <= 0 && (Control.MouseButtons & MouseButtons.Left) == 0)
+            if (this.WindowState == FormWindowState.Normal && this.Location.Y == 0 && (Control.MouseButtons & MouseButtons.Left) == 0)
                 MaximizeScreenBounds();
         }
         private void toolstripFormMinimize_Click(object sender, EventArgs e)
