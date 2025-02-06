@@ -28,7 +28,18 @@ namespace Thumper_Custom_Level_Editor
     public class LvlLoop
     {
         public string sample { get; set; }
-        public decimal beats { get; set; }
+        public decimal beats
+        {
+            get => Beats;
+            set {
+                if (value < 1)
+                    value = 1;
+                if (value > 99999)
+                    value = 99999;
+                Beats = value;
+            }
+        }
+        private decimal Beats;
     }
 
     public class LvlProperties

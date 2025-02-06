@@ -51,7 +51,7 @@ namespace Thumper_Custom_Level_Editor
         {
             get { return Bpm; }
             set {
-                if (value < 0)
+                if (value < 1)
                     value = 1;
                 if (value > 99999.99m)
                     value = 99999.99m;
@@ -59,6 +59,9 @@ namespace Thumper_Custom_Level_Editor
                 foreach (IDockContent dc in TCLE.Instance.dockMain.Documents) {
                     if (dc.DockHandler.TabText.Contains(".master")) (dc as Form_MasterEditor).propertyGridMaster.Refresh();
                     if (dc.DockHandler.TabText.Contains(".lvl")) (dc as Form_LvlEditor).RecalculateRuntime();
+                }
+                foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.Editor != null)) {
+                    samp.UpdateRuntime();
                 }
             }
         }

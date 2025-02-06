@@ -252,6 +252,11 @@ namespace Thumper_Custom_Level_Editor
             contextFormMax.Enabled = false;
             contextFormRestore.Enabled = true;
         }
+        private void TCLE_LocationChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal && this.Location.Y <= 0 && (Control.MouseButtons & MouseButtons.Left) == 0)
+                MaximizeScreenBounds();
+        }
         private void toolstripFormMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;

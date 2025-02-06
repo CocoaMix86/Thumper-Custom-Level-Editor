@@ -77,8 +77,10 @@ namespace Thumper_Custom_Level_Editor
 
         public void UpdateRuntime()
         {
-            int rowindex = this.Editor.sampleproperties.samplelist.IndexOf(this);
-            this.Editor.sampleList.Rows[rowindex].Cells[2].Value = $"{this.beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(this.alteredtime).ToString(@"hh\:mm\:ss\.fff")}";
+            if (this.Editor != null) {
+                int rowindex = this.Editor.sampleproperties.samplelist.IndexOf(this);
+                this.Editor.sampleList.Rows[rowindex].Cells[2].Value = $"{this.beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(this.alteredtime).ToString(@"hh\:mm\:ss\.fff")}";
+            }
         }
     }
 
@@ -124,7 +126,7 @@ namespace Thumper_Custom_Level_Editor
                 //need to change the sample name in the playing channels
                 for (int x = 0; x < TCLE.PlayingChannels.Count; x++) {
                     if (TCLE.PlayingChannels[x].Item2 == sample.obj_name)
-                        TCLE.PlayingChannels[x] = new Tuple<DataGridView, string, int>(TCLE.PlayingChannels[x].Item1, sample.obj_name, TCLE.PlayingChannels[x].Item3);
+                        TCLE.PlayingChannels[x] = new Tuple<DataGridView, string, int>(TCLE.PlayingChannels[x].Item1, value, TCLE.PlayingChannels[x].Item3);
                 }
                 sample.obj_name = value;
                 parent._samplelist_CollectionChanged(null, null);

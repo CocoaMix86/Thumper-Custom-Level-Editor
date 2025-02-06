@@ -1501,7 +1501,7 @@
             this.contextmenuView.Name = "contextmenuEdit";
             this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuView.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuView.Size = new Size(181, 126);
+            this.contextmenuView.Size = new Size(176, 104);
             // 
             // toolStripMenuItem11
             // 
@@ -1509,7 +1509,7 @@
             this.toolStripMenuItem11.ForeColor = Color.White;
             this.toolStripMenuItem11.Image = Properties.Resources.editor_leaf64;
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new Size(180, 22);
+            this.toolStripMenuItem11.Size = new Size(175, 22);
             this.toolStripMenuItem11.Text = "Leaf Editor Options";
             // 
             // leafoptionShowCategory
@@ -1597,7 +1597,7 @@
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new Size(177, 6);
+            this.toolStripSeparator19.Size = new Size(172, 6);
             // 
             // toolstripViewExplorer
             // 
@@ -1605,7 +1605,7 @@
             this.toolstripViewExplorer.ForeColor = Color.White;
             this.toolstripViewExplorer.Image = Properties.Resources.icon_folder;
             this.toolstripViewExplorer.Name = "toolstripViewExplorer";
-            this.toolstripViewExplorer.Size = new Size(180, 22);
+            this.toolstripViewExplorer.Size = new Size(175, 22);
             this.toolstripViewExplorer.Text = "Project Explorer";
             this.toolstripViewExplorer.Click += this.toolstripViewExplorer_Click;
             // 
@@ -1615,21 +1615,21 @@
             this.toolstripViewProperties.ForeColor = Color.White;
             this.toolstripViewProperties.Image = Properties.Resources.icon_gear;
             this.toolstripViewProperties.Name = "toolstripViewProperties";
-            this.toolstripViewProperties.Size = new Size(180, 22);
+            this.toolstripViewProperties.Size = new Size(175, 22);
             this.toolstripViewProperties.Text = "Project Properties";
             this.toolstripViewProperties.Click += this.toolstripViewProperties_Click;
             // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new Size(177, 6);
+            this.toolStripSeparator18.Size = new Size(172, 6);
             // 
             // toolstripViewFullscreen
             // 
             this.toolstripViewFullscreen.ForeColor = Color.White;
             this.toolstripViewFullscreen.Image = Properties.Resources.icon_expand;
             this.toolstripViewFullscreen.Name = "toolstripViewFullscreen";
-            this.toolstripViewFullscreen.Size = new Size(180, 22);
+            this.toolstripViewFullscreen.Size = new Size(175, 22);
             this.toolstripViewFullscreen.Text = "Full Screen";
             this.toolstripViewFullscreen.Click += this.toolstripViewFullscreen_Click;
             // 
@@ -1845,6 +1845,7 @@
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += this.TCLE_FormClosing;
             this.Load += this.FormLeafEditor_Load;
+            this.LocationChanged += this.TCLE_LocationChanged;
             this.KeyDown += this.TCLE_KeyDown;
             this.Resize += this.TCLE_Resize;
             this.panelRecentFiles.ResumeLayout(false);

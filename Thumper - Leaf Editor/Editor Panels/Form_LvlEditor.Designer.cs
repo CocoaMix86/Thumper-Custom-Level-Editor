@@ -737,10 +737,12 @@
             // 
             // BeatsPerLoop
             // 
-            this.BeatsPerLoop.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.BeatsPerLoop.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             this.BeatsPerLoop.HeaderText = "Beats";
+            this.BeatsPerLoop.MaxInputLength = 6;
             this.BeatsPerLoop.Name = "BeatsPerLoop";
-            this.BeatsPerLoop.Width = 62;
+            this.BeatsPerLoop.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.BeatsPerLoop.Width = 43;
             // 
             // lvlLoopToolStrip
             // 
@@ -898,9 +900,9 @@
         public Label pictureTunnelViewer;
         private ToolStripButton btnLvlPathView;
         private Label labelCollapsePanel;
+        public DataGridView lvlLoopTracks;
         private DataGridViewButtonColumn LvlLoopPlay;
         private DataGridViewComboBoxColumn LoopSample;
         private DataGridViewTextBoxColumn BeatsPerLoop;
-        public DataGridView lvlLoopTracks;
     }
 }

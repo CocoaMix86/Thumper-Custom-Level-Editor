@@ -209,6 +209,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             LvlProperties.lvlloops[e.RowIndex].sample = $"{lvlLoopTracks.Rows[e.RowIndex].Cells[1].Value}";
             LvlProperties.lvlloops[e.RowIndex].beats = decimal.Parse(lvlLoopTracks.Rows[e.RowIndex].Cells[2].Value.ToString());
+            lvlLoopTracks.Rows[e.RowIndex].Cells[2].Value = LvlProperties.lvlloops[e.RowIndex].beats;
             SaveCheckAndWrite(false);
         }
         private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
