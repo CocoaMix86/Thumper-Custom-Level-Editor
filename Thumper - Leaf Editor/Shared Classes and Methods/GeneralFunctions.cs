@@ -88,8 +88,6 @@ namespace Thumper_Custom_Level_Editor
             if (!File.Exists($@"{AppLocation}\templates\track_objects2.2.txt")) {
                 File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
             }
-            //import default colors per object
-            ImportDefaultColors();
 
             ///import selectable objects from file and parse them into lists for manipulation
             //splits input at "###". Each section is a collection of param_paths
@@ -111,6 +109,7 @@ namespace Thumper_Custom_Level_Editor
                             step = import3[4] == "True",
                             def = import3[5],
                             footer = import3[6].Replace("[", "").Replace("]", ""),
+                            defaultcolor = Color.Purple
                         };
                         //finally, add complete object and values to list
                         LeafObjects.Add(objpar);
@@ -128,25 +127,37 @@ namespace Thumper_Custom_Level_Editor
                 trait_type = "kTraitFloat",
                 step = false,
                 def = "0.0",
-                footer = "1,1,2,1,2,kIntensityScale,kIntensityScale,1,1,1,1,1,1,1,1,0,0,0"
+                footer = "1,1,2,1,2,kIntensityScale,kIntensityScale,1,1,1,1,1,1,1,1,0,0,0",
+                defaultcolor = Color.DarkMagenta
             });
             //show errors to user if any imports failed
             if (_errorlog.Length > 1) {
                 MessageBox.Show(_errorlog);
                 _errorlog = "";
             }
+            //import default colors per object
+            ImportDefaultColors();
         }
 
-        public static Dictionary<string, Color> ObjectColors = new();
+        public static Dictionary<string, Bitmap> ColorIcons = new();
         public void ImportDefaultColors()
         {
-            ObjectColors.Clear();
+            Dictionary<string, Color> ObjectColors = new();
             if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors2.2.txt")) {
                 File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
             }
             ObjectColors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));
 
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+            //once all the colors are processed, assign them directly to the objects
+            foreach (Object_Params obj in LeafObjects) {
+                obj.defaultcolor = ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple;
+                Bitmap color = new(16, 16);
+                using (Graphics g = Graphics.FromImage(color)) {
+                    g.Clear(value);
+                }
+                ColorIcons.TryAdd(value.ToArgb().ToString(), color);
+            }
         }
 
         ///Color elements based on set properties

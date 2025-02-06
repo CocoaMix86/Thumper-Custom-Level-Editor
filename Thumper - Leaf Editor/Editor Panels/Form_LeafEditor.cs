@@ -944,7 +944,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 defaultvalue = float.Parse(objmatch.def),
                 step = objmatch.step,
                 trait_type = objmatch.trait_type,
-                highlight_color = TCLE.ObjectColors.TryGetValue(objmatch.param_displayname, out Color value) ? value : Color.Purple,
+                highlight_color = objmatch.defaultcolor,
                 highlight_value = 0,
                 footer = objmatch.footer,
                 enabled = true,
@@ -1707,7 +1707,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 defaultvalue = float.Parse(obj.def),
                 step = obj.step,
                 trait_type = obj.trait_type,
-                highlight_color = TCLE.ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple,
+                highlight_color = obj.defaultcolor,
                 highlight_value = 0,
                 footer = obj.footer,
                 enabled = true,
@@ -1910,7 +1910,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     catch (Exception) { }
                 }
-                _s.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : (TCLE.ObjectColors.TryGetValue(_s.friendly_param, out Color value) ? value : Color.Purple);
+                _s.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : (TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == _s.friendly_param)?.defaultcolor ?? Color.Purple);
                 foreach (dynamic dp in seq_obj["data_points"]) {
                     if (dp is JObject data_point) {
                         SeqDataPoint data = new() {

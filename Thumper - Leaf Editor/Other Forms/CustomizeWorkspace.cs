@@ -1,13 +1,15 @@
-﻿///using Cyotek.Windows.Forms;
+﻿using Cyotek.Windows.Forms;
+
 namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
-        private ColorDialog colorDialogNew = new(); //{ BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
+        #region Variables
+        private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
         private string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
-        private Dictionary<string, string> objectcolors = new();
-        private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
-
+        private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift | Keys.Control | Keys.Alt, Keys.Alt, Keys.Control, Keys.Control | Keys.Alt, Keys.Control | Keys.Shift, Keys.Alt | Keys.Shift };
+        #endregion
+        #region Form Construction and initialization
         public CustomizeWorkspace()
         {
             InitializeComponent();
@@ -16,14 +18,6 @@ namespace Thumper_Custom_Level_Editor
             //
             toolstripCustomize.Renderer = new ToolStripOverride();
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-            //
-            Dictionary<string, string> import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors2.2.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]): null;
-            foreach (Object_Params _obj in TCLE.LeafObjects) {
-                objectcolors.Add(_obj.param_displayname, import.TryGetValue(_obj.param_displayname, out string value) ? value : "-8355585");
-            }
-            //
-            dropObjects.DataSource = TCLE.LeafObjects.Select(x => x.category).Distinct().ToList();
-            dropParamPath.DataSource = TCLE.LeafObjects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
 
             //locate keybinds file. If not exist, create it from internal resource
             if (!File.Exists($@"{AppLoc}\templates\keybinds.txt"))
@@ -32,64 +26,11 @@ namespace Thumper_Custom_Level_Editor
             keybindfromfile = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
             LoadKeyBindInfo(keybindfromfile);
+            //setup Sequencer colors
+            foreach (var bmp in TCLE.ColorIcons)
+                imageList1.Images.Add(bmp.Key, bmp.Value);
+            BuildObjectTree();
         }
-
-        private void btnSetColor(object sender, EventArgs e)
-        {
-            TCLE.PlaySound("UIcoloropen");
-            Button btn = (Button)sender;
-            colorDialogNew.Color = btn.BackColor;
-            if (colorDialogNew.ShowDialog() == DialogResult.OK) {
-                TCLE.PlaySound("UIcolorapply");
-                btn.BackColor = colorDialogNew.Color;
-            }
-        }
-
-        private void btnCustomizeApply_Click(object sender, EventArgs e)
-        {
-            //colors
-            File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", objectcolors.Select(x => $"{x.Key};{x.Value}"));
-            Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
-            //set and save properties
-            Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
-
-            File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
-
-            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        private void dropObjects_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            dropParamPath.DataSource = TCLE.LeafObjects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
-        }
-
-        private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btnObjectColor.BackColor = Color.FromArgb(int.Parse(objectcolors.TryGetValue(dropParamPath.Text, out string value) ? value : "-8355585"));
-        }
-
-        private void btnObjectColor_Click(object sender, EventArgs e)
-        {
-            TCLE.PlaySound("UIcoloropen");
-            Button btn = (Button)sender;
-            colorDialogNew.Color = btn.BackColor;
-            if (colorDialogNew.ShowDialog() == DialogResult.OK) {
-                TCLE.PlaySound("UIcolorapply");
-                Color _c = colorDialogNew.Color;
-                btn.BackColor = colorDialogNew.Color;
-
-                if (!objectcolors.ContainsKey(dropParamPath.Text)) {
-                    objectcolors.Add(dropParamPath.Text, $"{_c.ToArgb()}");
-                }
-                else {
-                    objectcolors[dropParamPath.Text] = $"{_c.ToArgb()}";
-                }
-            }
-        }
-
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Set Border header  
@@ -101,12 +42,52 @@ namespace Thumper_Custom_Level_Editor
             //set  Tabcontrol border  
             Graphics g = e.Graphics;
             Pen p = new(Color.FromArgb(55, 55, 55), 10);
-            g.DrawRectangle(p, tabPage1.Bounds);
+            g.DrawRectangle(p, tabUIColors.Bounds);
+        }
+        #endregion
+        #region Form Closing
+        private void btnCustomizeApply_Click(object sender, EventArgs e)
+        {
+            //write files with settings
+            File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb}"));
+
+            File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
+
+            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+
+            //set and save properties
+            Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
+            Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        #endregion
+        #region UI colors
+        private void btnSetColor(object sender, EventArgs e)
+        {
+            TCLE.PlaySound("UIcoloropen");
+            Button btn = (Button)sender;
+            colorDialog.Color = btn.BackColor;
+            if (colorDialog.ShowDialog() == DialogResult.OK) {
+                TCLE.PlaySound("UIcolorapply");
+                btn.BackColor = colorDialog.Color;
+            }
         }
 
-        /// 
-        /// This is all for handling keybinds
-        ///
+        private void btnObjectColor_Click(object sender, EventArgs e)
+        {
+            TCLE.PlaySound("UIcoloropen");
+            Button btn = (Button)sender;
+            colorDialog.Color = btn.BackColor;
+            if (colorDialog.ShowDialog() == DialogResult.OK) {
+                TCLE.PlaySound("UIcolorapply");
+                Color _c = colorDialog.Color;
+                btn.BackColor = colorDialog.Color;
+            }
+        }
+        #endregion
+        #region Keybinds
         private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
         private Dictionary<string, Keys> keybindfromfile = new();
         private Keys lastpress;
@@ -217,12 +198,43 @@ namespace Thumper_Custom_Level_Editor
             btnSetKeybind.BackColor = Color.Gray;
             lastpress = Keys.None;
         }
+        #endregion
+        #region Sequencer object colors
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            BuildObjectTree();
+        }
 
-        /// 
-        /// This is all for handling keybinds
-        /// 
+        private void BuildObjectTree()
+        {
+            bool filtersearch = txtSearch.Text is not "" and not "Search Objects (Ctrl+;)";
 
+            treeObjects.Nodes.Clear();
+            //make each category of objects its own node
+            foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct().Order()) {
+                TreeNode _node = new() {
+                    Text = category.ToUpper(),
+                    ImageKey = "category",
+                    SelectedImageKey = "category"
+                };
+                //each object becomes its own node
+                foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.category == category)) {
+                    TreeNode _param = new() {
+                        Text = obj.param_displayname,
+                        ImageKey = obj.defaultcolor.ToArgb().ToString(),
+                        SelectedImageKey = obj.defaultcolor.ToArgb().ToString()
+                    };
+                    if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
+                        _node.Nodes.Add(_param);
+                }
 
+                if ((filtersearch && _node.Nodes.Count != 0) || !filtersearch)
+                    treeObjects.Nodes.Add(_node);
+            }
 
+            if (filtersearch)
+                treeObjects.ExpandAll();
+        }
+        #endregion
     }
 }

@@ -17,6 +17,7 @@ namespace Thumper_Custom_Level_Editor
         public bool step { get; set; }
         public string def { get; set; }
         public string footer { get; set; }
+        public Color defaultcolor { get; set; }
     }
 
     public class Sequencer_Object
