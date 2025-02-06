@@ -1,4 +1,5 @@
 ﻿using Cyotek.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -6,7 +7,6 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variables
         private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
-        private string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
         private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift | Keys.Control | Keys.Alt, Keys.Alt, Keys.Control, Keys.Control | Keys.Alt, Keys.Control | Keys.Shift, Keys.Alt | Keys.Shift };
         #endregion
         #region Form Construction and initialization
@@ -20,10 +20,10 @@ namespace Thumper_Custom_Level_Editor
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
 
             //locate keybinds file. If not exist, create it from internal resource
-            if (!File.Exists($@"{AppLoc}\templates\keybinds.txt"))
-                File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
+            if (!File.Exists($@"{TCLE.AppLocation}\templates\keybinds.txt"))
+                File.WriteAllText($@"{TCLE.AppLocation}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
             //read keybinds to a dictionary for easier lookup
-            keybindfromfile = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            keybindfromfile = File.ReadAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
             LoadKeyBindInfo(keybindfromfile);
             //setup Sequencer colors
@@ -49,11 +49,11 @@ namespace Thumper_Custom_Level_Editor
         private void btnCustomizeApply_Click(object sender, EventArgs e)
         {
             //write files with settings
-            File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb}"));
+            File.WriteAllLines($@"{TCLE.AppLocation}\templates\objects_defaultcolors2.2.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb()}"));
 
-            File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
+            File.WriteAllText($@"{TCLE.AppLocation}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
 
-            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            File.WriteAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
 
             //set and save properties
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
@@ -234,6 +234,30 @@ namespace Thumper_Custom_Level_Editor
 
             if (filtersearch)
                 treeObjects.ExpandAll();
+        }
+
+        private void treeObjects_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
+                return;
+
+            TCLE.PlaySound("UIcoloropen");
+            colorDialog.Color = Color.FromArgb(int.Parse(e.Node.ImageKey));
+            if (colorDialog.ShowDialog() == DialogResult.OK) {
+                TCLE.PlaySound("UIcolorapply");
+                //create color and store it in the bitmap dictionary
+                Bitmap color = new(16, 16);
+                using (Graphics g = Graphics.FromImage(color)) {
+                    g.Clear(colorDialog.Color);
+                }
+                string colorname = colorDialog.Color.ToArgb().ToString();
+                TCLE.ColorIcons.TryAdd(colorname, color);
+                imageList1.Images.Add(colorname, color);
+                //apply color to object
+                TCLE.LeafObjects.First(x => x.param_displayname == e.Node.Text).defaultcolor = colorDialog.Color;
+                e.Node.ImageKey = colorname;
+                e.Node.SelectedImageKey = colorname;
+            }
         }
         #endregion
     }

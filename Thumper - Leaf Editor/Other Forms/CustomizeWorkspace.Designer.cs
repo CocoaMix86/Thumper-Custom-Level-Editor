@@ -35,9 +35,6 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomizeApply = new ToolStripButton();
             this.tabControl1 = new TabControl();
             this.tabUIColors = new TabPage();
-            this.btnObjectColor = new Button();
-            this.label12 = new Label();
-            this.label11 = new Label();
             this.label8 = new Label();
             this.label7 = new Label();
             this.label6 = new Label();
@@ -186,9 +183,6 @@ namespace Thumper_Custom_Level_Editor
             // tabUIColors
             // 
             this.tabUIColors.BackColor = Color.FromArgb(55, 55, 55);
-            this.tabUIColors.Controls.Add(this.btnObjectColor);
-            this.tabUIColors.Controls.Add(this.label12);
-            this.tabUIColors.Controls.Add(this.label11);
             this.tabUIColors.Controls.Add(this.label8);
             this.tabUIColors.Controls.Add(this.label7);
             this.tabUIColors.Controls.Add(this.label6);
@@ -209,47 +203,9 @@ namespace Thumper_Custom_Level_Editor
             this.tabUIColors.Location = new Point(4, 22);
             this.tabUIColors.Name = "tabUIColors";
             this.tabUIColors.Padding = new Padding(3);
-            this.tabUIColors.Size = new Size(359, 344);
+            this.tabUIColors.Size = new Size(359, 319);
             this.tabUIColors.TabIndex = 0;
             this.tabUIColors.Text = "UI Colors";
-            // 
-            // btnObjectColor
-            // 
-            this.btnObjectColor.BackColor = Color.White;
-            this.btnObjectColor.Cursor = Cursors.Hand;
-            this.btnObjectColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnObjectColor.FlatAppearance.BorderSize = 4;
-            this.btnObjectColor.FlatStyle = FlatStyle.Flat;
-            this.btnObjectColor.ForeColor = Color.Black;
-            this.btnObjectColor.Location = new Point(306, 89);
-            this.btnObjectColor.Name = "btnObjectColor";
-            this.btnObjectColor.Size = new Size(53, 26);
-            this.btnObjectColor.TabIndex = 127;
-            this.btnObjectColor.Tag = "customcolorbutton";
-            this.btnObjectColor.UseMnemonic = false;
-            this.btnObjectColor.UseVisualStyleBackColor = false;
-            this.btnObjectColor.Click += this.btnObjectColor_Click;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label12.ForeColor = Color.White;
-            this.label12.Location = new Point(191, 94);
-            this.label12.Name = "label12";
-            this.label12.Size = new Size(116, 15);
-            this.label12.TabIndex = 128;
-            this.label12.Text = "Object Default Color";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BorderStyle = BorderStyle.Fixed3D;
-            this.label11.Location = new Point(186, 7);
-            this.label11.MinimumSize = new Size(0, 230);
-            this.label11.Name = "label11";
-            this.label11.Size = new Size(2, 230);
-            this.label11.TabIndex = 126;
             // 
             // label8
             // 
@@ -508,6 +464,7 @@ namespace Thumper_Custom_Level_Editor
             this.treeObjects.ShowRootLines = false;
             this.treeObjects.Size = new Size(359, 297);
             this.treeObjects.TabIndex = 101;
+            this.treeObjects.NodeMouseDoubleClick += this.treeObjects_NodeMouseDoubleClick;
             // 
             // imageList1
             // 
@@ -1697,9 +1654,6 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.CheckBox checkMuteApp;
-        private System.Windows.Forms.Label label11;
-        public System.Windows.Forms.Button btnObjectColor;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabKeybinds;
         private System.Windows.Forms.Panel panelSetKeybind;
         private System.Windows.Forms.Label labelKeybindName;
