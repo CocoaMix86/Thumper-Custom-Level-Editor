@@ -62,5 +62,74 @@
     <Setting Name="LeafOptionShowWave" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="ColorMainMenuBar" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">80, 0, 0</Value>
+    </Setting>
+    <Setting Name="ColorMainSubMenubar" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">31, 31, 31</Value>
+    </Setting>
+    <Setting Name="ColorMainBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">31, 31, 31</Value>
+    </Setting>
+    <Setting Name="ColorLeafBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="ColorLeafSeqBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">10, 10, 10</Value>
+    </Setting>
+    <Setting Name="ColorLeafTimeSig1" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="ColorLeafTimeSig2" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">45, 45, 45</Value>
+    </Setting>
+    <Setting Name="ColorLeafRawBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">31, 31, 31</Value>
+    </Setting>
+    <Setting Name="ColorLeafRawText" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ColorLvlBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="ColorLvlLeafBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">10, 10, 10</Value>
+    </Setting>
+    <Setting Name="ColorLvlTunnelBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">10, 10, 10</Value>
+    </Setting>
+    <Setting Name="ColorLvlLoopsBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">10, 10, 10</Value>
+    </Setting>
+    <Setting Name="ColorGateBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="ColorGateLvlBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">10, 10, 10</Value>
+    </Setting>
+    <Setting Name="ColorMasterBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="ColorMasterLvlBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">10, 10, 10</Value>
+    </Setting>
+    <Setting Name="ColorSampleBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="ColorSampleListBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">10, 10, 10</Value>
+    </Setting>
+    <Setting Name="ColorWaveformBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="ColorProjectExplorerBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">55, 55, 55</Value>
+    </Setting>
+    <Setting Name="ColorRawBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">31, 31, 31</Value>
+    </Setting>
+    <Setting Name="ColorRawText" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

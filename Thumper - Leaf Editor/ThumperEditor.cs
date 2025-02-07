@@ -19,7 +19,7 @@ namespace Thumper_Custom_Level_Editor
         public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents);
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
-        private Properties.Settings AppSettings = Properties.Settings.Default;
+        private static Properties.Settings AppSettings = Properties.Settings.Default;
         public static DirectoryInfo WorkingFolder => ProjectProperties.WorkingFolder;
         public static decimal BPM => ProjectProperties.bpm;
         public static List<string> lvlsinworkfolder = new();
@@ -34,6 +34,7 @@ namespace Thumper_Custom_Level_Editor
             set => ProjectProperties = value;
         }
         public static ProjectProperties ProjectProperties;
+        public static SettingsUITheme settingsUITheme = new();
         public static List<Sequencer_Object> ClipboardSequencer = new();
         public static bool Fullscreen;
         #endregion

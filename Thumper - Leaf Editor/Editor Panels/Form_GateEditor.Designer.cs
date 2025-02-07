@@ -78,7 +78,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridGate);
             this.splitContainer1.Size = new Size(625, 364);
-            this.splitContainer1.SplitterDistance = 272;
+            this.splitContainer1.SplitterDistance = 271;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 118;
             // 
@@ -91,7 +91,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(256, -2);
+            this.labelCollapsePanel.Location = new Point(255, -2);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -152,7 +152,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.gateLvlList.Size = new Size(248, 351);
+            this.gateLvlList.Size = new Size(247, 351);
             this.gateLvlList.TabIndex = 118;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += this.gateLvlList_CellClick_1;
@@ -291,7 +291,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(594, -3);
+            this.lblMasterlvllistHelp.Location = new Point(593, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -317,7 +317,7 @@
             this.propertyGridGate.RightToLeft = RightToLeft.No;
             this.propertyGridGate.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridGate.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridGate.Size = new Size(348, 364);
+            this.propertyGridGate.Size = new Size(349, 364);
             this.propertyGridGate.TabIndex = 0;
             this.propertyGridGate.ToolbarVisible = false;
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);

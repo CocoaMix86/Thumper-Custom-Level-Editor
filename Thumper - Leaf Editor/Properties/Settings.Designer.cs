@@ -259,5 +259,281 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["LeafOptionShowWave"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80, 0, 0")]
+        public global::System.Drawing.Color ColorMainMenuBar {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMainMenuBar"]));
+            }
+            set {
+                this["ColorMainMenuBar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorMainSubMenubar {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMainSubMenubar"]));
+            }
+            set {
+                this["ColorMainSubMenubar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorMainBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMainBG"]));
+            }
+            set {
+                this["ColorMainBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorLeafBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafBG"]));
+            }
+            set {
+                this["ColorLeafBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorLeafSeqBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafSeqBG"]));
+            }
+            set {
+                this["ColorLeafSeqBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorLeafTimeSig1 {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafTimeSig1"]));
+            }
+            set {
+                this["ColorLeafTimeSig1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("45, 45, 45")]
+        public global::System.Drawing.Color ColorLeafTimeSig2 {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafTimeSig2"]));
+            }
+            set {
+                this["ColorLeafTimeSig2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorLeafRawBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafRawBG"]));
+            }
+            set {
+                this["ColorLeafRawBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorLeafRawText {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafRawText"]));
+            }
+            set {
+                this["ColorLeafRawText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorLvlBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLvlBG"]));
+            }
+            set {
+                this["ColorLvlBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorLvlLeafBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLvlLeafBG"]));
+            }
+            set {
+                this["ColorLvlLeafBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorLvlTunnelBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLvlTunnelBG"]));
+            }
+            set {
+                this["ColorLvlTunnelBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorLvlLoopsBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLvlLoopsBG"]));
+            }
+            set {
+                this["ColorLvlLoopsBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorGateBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorGateBG"]));
+            }
+            set {
+                this["ColorGateBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorGateLvlBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorGateLvlBG"]));
+            }
+            set {
+                this["ColorGateLvlBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorMasterBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMasterBG"]));
+            }
+            set {
+                this["ColorMasterBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorMasterLvlBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMasterLvlBG"]));
+            }
+            set {
+                this["ColorMasterLvlBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorSampleBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorSampleBG"]));
+            }
+            set {
+                this["ColorSampleBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorSampleListBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorSampleListBG"]));
+            }
+            set {
+                this["ColorSampleListBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color ColorWaveformBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorWaveformBG"]));
+            }
+            set {
+                this["ColorWaveformBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorProjectExplorerBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorProjectExplorerBG"]));
+            }
+            set {
+                this["ColorProjectExplorerBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorRawBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorRawBG"]));
+            }
+            set {
+                this["ColorRawBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorRawText {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorRawText"]));
+            }
+            set {
+                this["ColorRawText"] = value;
+            }
+        }
     }
 }

@@ -13,12 +13,17 @@ namespace Thumper_Custom_Level_Editor
         public CustomizeWorkspace()
         {
             InitializeComponent();
-            //set button back colors to the set settings
-            checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
-            //
             toolstripCustomize.Renderer = new ToolStripOverride();
+            //load custom colors from previous
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-
+            //set propertygrid to the color settings
+            propertyGridUIColors.SelectedObject = TCLE.settingsUITheme;
+            //setup Sequencer colors
+            foreach (var bmp in TCLE.ColorIcons)
+                imageList1.Images.Add(bmp.Key, bmp.Value);
+            BuildObjectTree();
+            //set mute
+            checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //locate keybinds file. If not exist, create it from internal resource
             if (!File.Exists($@"{TCLE.AppLocation}\templates\keybinds.txt"))
                 File.WriteAllText($@"{TCLE.AppLocation}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
@@ -26,10 +31,6 @@ namespace Thumper_Custom_Level_Editor
             keybindfromfile = File.ReadAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
             LoadKeyBindInfo(keybindfromfile);
-            //setup Sequencer colors
-            foreach (var bmp in TCLE.ColorIcons)
-                imageList1.Images.Add(bmp.Key, bmp.Value);
-            BuildObjectTree();
         }
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -48,16 +49,17 @@ namespace Thumper_Custom_Level_Editor
         #region Form Closing
         private void btnCustomizeApply_Click(object sender, EventArgs e)
         {
-            //write files with settings
+            //save colors to settings
+            TCLE.settingsUITheme.SaveSettings();
+            //write sequencer colors to txt file
             File.WriteAllLines($@"{TCLE.AppLocation}\templates\objects_defaultcolors2.2.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb()}"));
-
-            File.WriteAllText($@"{TCLE.AppLocation}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
-
-            File.WriteAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
-
-            //set and save properties
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
+            //save mute to settings
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
+            //write keybinds to txt file
+            File.WriteAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            //save properties
+            Properties.Settings.Default.Save();
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -84,6 +86,14 @@ namespace Thumper_Custom_Level_Editor
                 TCLE.PlaySound("UIcolorapply");
                 Color _c = colorDialog.Color;
                 btn.BackColor = colorDialog.Color;
+            }
+        }
+        #endregion
+        #region Audio
+        private void checkMuteApp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkMuteApp.Checked) {
+                TCLE.PlaySound("UIselect");
             }
         }
         #endregion

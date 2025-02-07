@@ -35,22 +35,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomizeApply = new ToolStripButton();
             this.tabControl1 = new TabControl();
             this.tabUIColors = new TabPage();
-            this.label8 = new Label();
-            this.label7 = new Label();
-            this.label6 = new Label();
-            this.label5 = new Label();
-            this.label4 = new Label();
-            this.label3 = new Label();
-            this.label2 = new Label();
-            this.label1 = new Label();
-            this.btnActiveColor = new Button();
-            this.btnSampleColor = new Button();
-            this.btnLeafColor = new Button();
-            this.btnLvlColor = new Button();
-            this.btnGateColor = new Button();
-            this.btnMasterColor = new Button();
-            this.btnMenuColor = new Button();
-            this.btnBGColor = new Button();
+            this.propertyGridUIColors = new PropertyGrid();
             this.tabSeq = new TabPage();
             this.treeObjects = new TreeViewEx();
             this.imageList1 = new ImageList(this.components);
@@ -183,253 +168,41 @@ namespace Thumper_Custom_Level_Editor
             // tabUIColors
             // 
             this.tabUIColors.BackColor = Color.FromArgb(55, 55, 55);
-            this.tabUIColors.Controls.Add(this.label8);
-            this.tabUIColors.Controls.Add(this.label7);
-            this.tabUIColors.Controls.Add(this.label6);
-            this.tabUIColors.Controls.Add(this.label5);
-            this.tabUIColors.Controls.Add(this.label4);
-            this.tabUIColors.Controls.Add(this.label3);
-            this.tabUIColors.Controls.Add(this.label2);
-            this.tabUIColors.Controls.Add(this.label1);
-            this.tabUIColors.Controls.Add(this.btnActiveColor);
-            this.tabUIColors.Controls.Add(this.btnSampleColor);
-            this.tabUIColors.Controls.Add(this.btnLeafColor);
-            this.tabUIColors.Controls.Add(this.btnLvlColor);
-            this.tabUIColors.Controls.Add(this.btnGateColor);
-            this.tabUIColors.Controls.Add(this.btnMasterColor);
-            this.tabUIColors.Controls.Add(this.btnMenuColor);
-            this.tabUIColors.Controls.Add(this.btnBGColor);
+            this.tabUIColors.Controls.Add(this.propertyGridUIColors);
             this.tabUIColors.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.tabUIColors.Location = new Point(4, 22);
             this.tabUIColors.Name = "tabUIColors";
             this.tabUIColors.Padding = new Padding(3);
             this.tabUIColors.Size = new Size(359, 319);
             this.tabUIColors.TabIndex = 0;
-            this.tabUIColors.Text = "UI Colors";
+            this.tabUIColors.Text = "UI Theme";
             // 
-            // label8
+            // propertyGridUIColors
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label8.ForeColor = Color.White;
-            this.label8.Location = new Point(20, 138);
-            this.label8.Name = "label8";
-            this.label8.Size = new Size(98, 15);
-            this.label8.TabIndex = 121;
-            this.label8.Text = "Leaf Editor Color";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label7.ForeColor = Color.White;
-            this.label7.Location = new Point(18, 112);
-            this.label7.Name = "label7";
-            this.label7.Size = new Size(100, 15);
-            this.label7.TabIndex = 120;
-            this.label7.Text = "Gate Editor Color";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label6.ForeColor = Color.White;
-            this.label6.Location = new Point(6, 191);
-            this.label6.Name = "label6";
-            this.label6.Size = new Size(112, 15);
-            this.label6.TabIndex = 119;
-            this.label6.Text = "Background Colour";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label5.ForeColor = Color.White;
-            this.label5.Location = new Point(13, 165);
-            this.label5.Name = "label5";
-            this.label5.Size = new Size(105, 15);
-            this.label5.TabIndex = 118;
-            this.label5.Text = "Active Panel Color";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label4.ForeColor = Color.White;
-            this.label4.Location = new Point(1, 85);
-            this.label4.Name = "label4";
-            this.label4.Size = new Size(117, 15);
-            this.label4.TabIndex = 117;
-            this.label4.Text = "Sample Editor Color";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label3.ForeColor = Color.White;
-            this.label3.Location = new Point(29, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new Size(89, 15);
-            this.label3.TabIndex = 116;
-            this.label3.Text = "Lvl Editor Color";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label2.ForeColor = Color.White;
-            this.label2.Location = new Point(6, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new Size(112, 15);
-            this.label2.TabIndex = 115;
-            this.label2.Text = "Master Editor Color";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label1.ForeColor = Color.White;
-            this.label1.Location = new Point(40, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new Size(78, 15);
-            this.label1.TabIndex = 114;
-            this.label1.Text = "Menu Colour";
-            // 
-            // btnActiveColor
-            // 
-            this.btnActiveColor.BackColor = Color.White;
-            this.btnActiveColor.Cursor = Cursors.Hand;
-            this.btnActiveColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnActiveColor.FlatAppearance.BorderSize = 4;
-            this.btnActiveColor.FlatStyle = FlatStyle.Flat;
-            this.btnActiveColor.ForeColor = Color.Black;
-            this.btnActiveColor.Location = new Point(119, 163);
-            this.btnActiveColor.Name = "btnActiveColor";
-            this.btnActiveColor.Size = new Size(60, 20);
-            this.btnActiveColor.TabIndex = 113;
-            this.btnActiveColor.Tag = "customcolorbutton";
-            this.btnActiveColor.UseMnemonic = false;
-            this.btnActiveColor.UseVisualStyleBackColor = false;
-            this.btnActiveColor.Click += this.btnSetColor;
-            // 
-            // btnSampleColor
-            // 
-            this.btnSampleColor.BackColor = Color.White;
-            this.btnSampleColor.Cursor = Cursors.Hand;
-            this.btnSampleColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnSampleColor.FlatAppearance.BorderSize = 4;
-            this.btnSampleColor.FlatStyle = FlatStyle.Flat;
-            this.btnSampleColor.ForeColor = Color.Black;
-            this.btnSampleColor.Location = new Point(119, 83);
-            this.btnSampleColor.Name = "btnSampleColor";
-            this.btnSampleColor.Size = new Size(60, 20);
-            this.btnSampleColor.TabIndex = 112;
-            this.btnSampleColor.Tag = "customcolorbutton";
-            this.btnSampleColor.UseMnemonic = false;
-            this.btnSampleColor.UseVisualStyleBackColor = false;
-            this.btnSampleColor.Click += this.btnSetColor;
-            // 
-            // btnLeafColor
-            // 
-            this.btnLeafColor.BackColor = Color.White;
-            this.btnLeafColor.Cursor = Cursors.Hand;
-            this.btnLeafColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnLeafColor.FlatAppearance.BorderSize = 4;
-            this.btnLeafColor.FlatStyle = FlatStyle.Flat;
-            this.btnLeafColor.ForeColor = Color.Black;
-            this.btnLeafColor.Location = new Point(119, 136);
-            this.btnLeafColor.Name = "btnLeafColor";
-            this.btnLeafColor.Size = new Size(60, 20);
-            this.btnLeafColor.TabIndex = 111;
-            this.btnLeafColor.Tag = "customcolorbutton";
-            this.btnLeafColor.UseMnemonic = false;
-            this.btnLeafColor.UseVisualStyleBackColor = false;
-            this.btnLeafColor.Click += this.btnSetColor;
-            // 
-            // btnLvlColor
-            // 
-            this.btnLvlColor.BackColor = Color.White;
-            this.btnLvlColor.Cursor = Cursors.Hand;
-            this.btnLvlColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnLvlColor.FlatAppearance.BorderSize = 4;
-            this.btnLvlColor.FlatStyle = FlatStyle.Flat;
-            this.btnLvlColor.ForeColor = Color.Black;
-            this.btnLvlColor.Location = new Point(119, 57);
-            this.btnLvlColor.Name = "btnLvlColor";
-            this.btnLvlColor.Size = new Size(60, 20);
-            this.btnLvlColor.TabIndex = 110;
-            this.btnLvlColor.Tag = "customcolorbutton";
-            this.btnLvlColor.UseMnemonic = false;
-            this.btnLvlColor.UseVisualStyleBackColor = false;
-            this.btnLvlColor.Click += this.btnSetColor;
-            // 
-            // btnGateColor
-            // 
-            this.btnGateColor.BackColor = Color.White;
-            this.btnGateColor.Cursor = Cursors.Hand;
-            this.btnGateColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnGateColor.FlatAppearance.BorderSize = 4;
-            this.btnGateColor.FlatStyle = FlatStyle.Flat;
-            this.btnGateColor.ForeColor = Color.Black;
-            this.btnGateColor.Location = new Point(119, 110);
-            this.btnGateColor.Name = "btnGateColor";
-            this.btnGateColor.Size = new Size(60, 20);
-            this.btnGateColor.TabIndex = 109;
-            this.btnGateColor.Tag = "customcolorbutton";
-            this.btnGateColor.UseMnemonic = false;
-            this.btnGateColor.UseVisualStyleBackColor = false;
-            this.btnGateColor.Click += this.btnSetColor;
-            // 
-            // btnMasterColor
-            // 
-            this.btnMasterColor.BackColor = Color.White;
-            this.btnMasterColor.Cursor = Cursors.Hand;
-            this.btnMasterColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnMasterColor.FlatAppearance.BorderSize = 4;
-            this.btnMasterColor.FlatStyle = FlatStyle.Flat;
-            this.btnMasterColor.ForeColor = Color.Black;
-            this.btnMasterColor.Location = new Point(119, 31);
-            this.btnMasterColor.Name = "btnMasterColor";
-            this.btnMasterColor.Size = new Size(60, 20);
-            this.btnMasterColor.TabIndex = 108;
-            this.btnMasterColor.Tag = "customcolorbutton";
-            this.btnMasterColor.UseMnemonic = false;
-            this.btnMasterColor.UseVisualStyleBackColor = false;
-            this.btnMasterColor.Click += this.btnSetColor;
-            // 
-            // btnMenuColor
-            // 
-            this.btnMenuColor.BackColor = Color.White;
-            this.btnMenuColor.Cursor = Cursors.Hand;
-            this.btnMenuColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnMenuColor.FlatAppearance.BorderSize = 4;
-            this.btnMenuColor.FlatStyle = FlatStyle.Flat;
-            this.btnMenuColor.ForeColor = Color.Black;
-            this.btnMenuColor.Location = new Point(119, 5);
-            this.btnMenuColor.Name = "btnMenuColor";
-            this.btnMenuColor.Size = new Size(60, 20);
-            this.btnMenuColor.TabIndex = 107;
-            this.btnMenuColor.Tag = "customcolorbutton";
-            this.btnMenuColor.UseMnemonic = false;
-            this.btnMenuColor.UseVisualStyleBackColor = false;
-            this.btnMenuColor.Click += this.btnSetColor;
-            // 
-            // btnBGColor
-            // 
-            this.btnBGColor.BackColor = Color.White;
-            this.btnBGColor.Cursor = Cursors.Hand;
-            this.btnBGColor.FlatAppearance.BorderColor = Color.Black;
-            this.btnBGColor.FlatAppearance.BorderSize = 4;
-            this.btnBGColor.FlatStyle = FlatStyle.Flat;
-            this.btnBGColor.ForeColor = Color.Black;
-            this.btnBGColor.Location = new Point(119, 189);
-            this.btnBGColor.Name = "btnBGColor";
-            this.btnBGColor.Size = new Size(60, 20);
-            this.btnBGColor.TabIndex = 106;
-            this.btnBGColor.Tag = "customcolorbutton";
-            this.btnBGColor.UseMnemonic = false;
-            this.btnBGColor.UseVisualStyleBackColor = false;
-            this.btnBGColor.Click += this.btnSetColor;
+            this.propertyGridUIColors.BackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridUIColors.CategoryForeColor = Color.White;
+            this.propertyGridUIColors.CategorySplitterColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridUIColors.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
+            this.propertyGridUIColors.Dock = DockStyle.Fill;
+            this.propertyGridUIColors.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.propertyGridUIColors.HelpBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridUIColors.HelpBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridUIColors.HelpForeColor = Color.White;
+            this.propertyGridUIColors.HelpVisible = false;
+            this.propertyGridUIColors.LineColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridUIColors.Location = new Point(3, 3);
+            this.propertyGridUIColors.Margin = new Padding(4, 3, 4, 3);
+            this.propertyGridUIColors.Name = "propertyGridUIColors";
+            this.propertyGridUIColors.PropertySort = PropertySort.Categorized;
+            this.propertyGridUIColors.RightToLeft = RightToLeft.No;
+            this.propertyGridUIColors.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
+            this.propertyGridUIColors.SelectedItemWithFocusForeColor = Color.White;
+            this.propertyGridUIColors.Size = new Size(353, 313);
+            this.propertyGridUIColors.TabIndex = 122;
+            this.propertyGridUIColors.ToolbarVisible = false;
+            this.propertyGridUIColors.ViewBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridUIColors.ViewBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridUIColors.ViewForeColor = Color.White;
             // 
             // tabSeq
             // 
@@ -441,7 +214,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabSeq.Name = "tabSeq";
             this.tabSeq.Size = new Size(359, 319);
             this.tabSeq.TabIndex = 3;
-            this.tabSeq.Text = "Sequencer Objects";
+            this.tabSeq.Text = "Sequencer Colors";
             // 
             // treeObjects
             // 
@@ -496,7 +269,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabAudio.Location = new Point(4, 22);
             this.tabAudio.Name = "tabAudio";
             this.tabAudio.Padding = new Padding(3);
-            this.tabAudio.Size = new Size(359, 344);
+            this.tabAudio.Size = new Size(359, 319);
             this.tabAudio.TabIndex = 1;
             this.tabAudio.Text = "Audio";
             // 
@@ -507,10 +280,11 @@ namespace Thumper_Custom_Level_Editor
             this.checkMuteApp.ForeColor = Color.White;
             this.checkMuteApp.Location = new Point(40, 32);
             this.checkMuteApp.Name = "checkMuteApp";
-            this.checkMuteApp.Size = new Size(151, 19);
+            this.checkMuteApp.Size = new Size(192, 19);
             this.checkMuteApp.TabIndex = 0;
-            this.checkMuteApp.Text = "Mute application audio";
+            this.checkMuteApp.Text = "Mute application sound effects";
             this.checkMuteApp.UseVisualStyleBackColor = true;
+            this.checkMuteApp.CheckedChanged += this.checkMuteApp_CheckedChanged;
             // 
             // tabKeybinds
             // 
@@ -523,7 +297,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabKeybinds.Location = new Point(4, 22);
             this.tabKeybinds.Name = "tabKeybinds";
             this.tabKeybinds.Padding = new Padding(3);
-            this.tabKeybinds.Size = new Size(359, 344);
+            this.tabKeybinds.Size = new Size(359, 319);
             this.tabKeybinds.TabIndex = 2;
             this.tabKeybinds.Text = "Key Binds";
             // 
@@ -1614,7 +1388,6 @@ namespace Thumper_Custom_Level_Editor
             this.toolstripCustomize.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabUIColors.ResumeLayout(false);
-            this.tabUIColors.PerformLayout();
             this.tabSeq.ResumeLayout(false);
             this.tabSeq.PerformLayout();
             this.tabAudio.ResumeLayout(false);
@@ -1637,22 +1410,6 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabUIColors;
         private System.Windows.Forms.TabPage tabAudio;
-        public System.Windows.Forms.Button btnActiveColor;
-        public System.Windows.Forms.Button btnSampleColor;
-        public System.Windows.Forms.Button btnLeafColor;
-        public System.Windows.Forms.Button btnLvlColor;
-        public System.Windows.Forms.Button btnGateColor;
-        public System.Windows.Forms.Button btnMasterColor;
-        public System.Windows.Forms.Button btnMenuColor;
-        public System.Windows.Forms.Button btnBGColor;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         public System.Windows.Forms.CheckBox checkMuteApp;
         private System.Windows.Forms.TabPage tabKeybinds;
         private System.Windows.Forms.Panel panelSetKeybind;
@@ -1722,5 +1479,6 @@ namespace Thumper_Custom_Level_Editor
         private TreeViewEx treeObjects;
         private TextBox txtSearch;
         private ImageList imageList1;
+        public PropertyGrid propertyGridUIColors;
     }
 }

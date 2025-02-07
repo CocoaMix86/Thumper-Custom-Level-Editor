@@ -47,9 +47,9 @@
             this.btnMasterLvlPaste = new ToolStripButton();
             this.label30 = new Label();
             this.toolTip1 = new ToolTip(this.components);
+            this.labelCollapsePanel = new Label();
             this.propertyGridMaster = new PropertyGrid();
             this.splitContainer1 = new SplitContainer();
-            this.labelCollapsePanel = new Label();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
@@ -108,7 +108,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(316, 506);
+            this.masterLvlList.Size = new Size(315, 506);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
@@ -259,6 +259,26 @@
             this.label30.TabIndex = 94;
             this.label30.Text = "Sublevel Order";
             // 
+            // labelCollapsePanel
+            // 
+            this.labelCollapsePanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            this.labelCollapsePanel.BackColor = Color.Gray;
+            this.labelCollapsePanel.BorderStyle = BorderStyle.FixedSingle;
+            this.labelCollapsePanel.Cursor = Cursors.Hand;
+            this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
+            this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.labelCollapsePanel.ForeColor = Color.White;
+            this.labelCollapsePanel.Location = new Point(323, -2);
+            this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
+            this.labelCollapsePanel.MaximumSize = new Size(16, 16);
+            this.labelCollapsePanel.MinimumSize = new Size(16, 16);
+            this.labelCollapsePanel.Name = "labelCollapsePanel";
+            this.labelCollapsePanel.Size = new Size(16, 16);
+            this.labelCollapsePanel.TabIndex = 146;
+            this.labelCollapsePanel.Text = ">";
+            this.toolTip1.SetToolTip(this.labelCollapsePanel, "Hide/Reveal right panel");
+            this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
+            // 
             // propertyGridMaster
             // 
             this.propertyGridMaster.BackColor = Color.FromArgb(31, 31, 31);
@@ -278,7 +298,7 @@
             this.propertyGridMaster.RightToLeft = RightToLeft.No;
             this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridMaster.Size = new Size(308, 519);
+            this.propertyGridMaster.Size = new Size(309, 519);
             this.propertyGridMaster.TabIndex = 0;
             this.propertyGridMaster.ToolbarVisible = false;
             this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -305,29 +325,9 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
             this.splitContainer1.Size = new Size(653, 519);
-            this.splitContainer1.SplitterDistance = 340;
+            this.splitContainer1.SplitterDistance = 339;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
-            // 
-            // labelCollapsePanel
-            // 
-            this.labelCollapsePanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.labelCollapsePanel.BackColor = Color.Gray;
-            this.labelCollapsePanel.BorderStyle = BorderStyle.FixedSingle;
-            this.labelCollapsePanel.Cursor = Cursors.Hand;
-            this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
-            this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(324, -2);
-            this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
-            this.labelCollapsePanel.MaximumSize = new Size(16, 16);
-            this.labelCollapsePanel.MinimumSize = new Size(16, 16);
-            this.labelCollapsePanel.Name = "labelCollapsePanel";
-            this.labelCollapsePanel.Size = new Size(16, 16);
-            this.labelCollapsePanel.TabIndex = 146;
-            this.labelCollapsePanel.Text = ">";
-            this.toolTip1.SetToolTip(this.labelCollapsePanel, "Hide/Reveal right panel");
-            this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
             // 
             // Form_MasterEditor
             // 
