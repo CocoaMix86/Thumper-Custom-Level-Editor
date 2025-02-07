@@ -879,7 +879,7 @@ namespace Thumper_Custom_Level_Editor
             //initialize the player and load the sample
             SampChannel = Bass.BASS_SampleLoad(stream, 0, stream.Length, 10, BASSFlag.BASS_SAMPLE_FLOAT);
             SampChannel = Bass.BASS_SampleGetChannel(SampChannel, BASSFlag.BASS_SAMPLE_FLOAT);
-            Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), 0);
+            Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), IntPtr.Zero);
             //play the sample
             if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
                 return SampChannel;
@@ -892,16 +892,18 @@ namespace Thumper_Custom_Level_Editor
 
         private static void OnEnding(int handle, int channel, int data, IntPtr user)
         {
-            bool free1 = Bass.BASS_ChannelStop(channel);
-            bool free2 = Bass.BASS_ChannelFree(channel);
-            var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
-            if (ItemToRemove != null) {
-                ItemToRemove.Item1.InvalidateColumn(0);
-                PlayingChannels.Remove(ItemToRemove);
-                if (TCLE.PlayingChannels.Count > 0)
-                    LastChannel = PlayingChannels.Last().Item3;
-            }
-            TCLE.alzheimer();
+            try {
+                bool free1 = Bass.BASS_ChannelStop(channel);
+                bool free2 = Bass.BASS_ChannelFree(channel);
+                var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
+                if (ItemToRemove != null) {
+                    ItemToRemove.Item1.InvalidateColumn(0);
+                    PlayingChannels.Remove(ItemToRemove);
+                    if (TCLE.PlayingChannels.Count > 0)
+                        LastChannel = PlayingChannels.Last().Item3;
+                }
+                TCLE.alzheimer();
+            } catch (Exception ex) { }
         }
 
         public static void GenerateSampWave(SampleData samp, int channel)
