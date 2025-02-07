@@ -835,6 +835,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
         public static int LastChannel;
         public static float initialfreq;
+        public static SYNCPROC EndingProc = new SYNCPROC(OnEnding);
         public static bool PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
         {
             if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString())?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
@@ -846,7 +847,7 @@ namespace Thumper_Custom_Level_Editor
 
                 //initialize the player and load the sample
                 SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-                Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), 0);
+                Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
                 //pitch shift and pan
                 Bass.BASS_ChannelGetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
@@ -879,7 +880,7 @@ namespace Thumper_Custom_Level_Editor
             //initialize the player and load the sample
             SampChannel = Bass.BASS_SampleLoad(stream, 0, stream.Length, 10, BASSFlag.BASS_SAMPLE_FLOAT);
             SampChannel = Bass.BASS_SampleGetChannel(SampChannel, BASSFlag.BASS_SAMPLE_FLOAT);
-            Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(OnEnding), IntPtr.Zero);
+            Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
             //play the sample
             if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
                 return SampChannel;
@@ -892,18 +893,16 @@ namespace Thumper_Custom_Level_Editor
 
         private static void OnEnding(int handle, int channel, int data, IntPtr user)
         {
-            try {
-                bool free1 = Bass.BASS_ChannelStop(channel);
-                bool free2 = Bass.BASS_ChannelFree(channel);
-                var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
-                if (ItemToRemove != null) {
-                    ItemToRemove.Item1.InvalidateColumn(0);
-                    PlayingChannels.Remove(ItemToRemove);
-                    if (TCLE.PlayingChannels.Count > 0)
-                        LastChannel = PlayingChannels.Last().Item3;
-                }
-                TCLE.alzheimer();
-            } catch (Exception ex) { }
+            bool free1 = Bass.BASS_ChannelStop(channel);
+            bool free2 = Bass.BASS_ChannelFree(channel);
+            var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
+            if (ItemToRemove != null) {
+                ItemToRemove.Item1.InvalidateColumn(0);
+                PlayingChannels.Remove(ItemToRemove);
+                if (TCLE.PlayingChannels.Count > 0)
+                    LastChannel = PlayingChannels.Last().Item3;
+            }
+            TCLE.alzheimer();
         }
 
         public static void GenerateSampWave(SampleData samp, int channel)
