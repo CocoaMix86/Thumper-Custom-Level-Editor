@@ -795,43 +795,43 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            if (e.KeyData == TCLE.defaultkeybinds["quick0"]) {
+            if (e.KeyData == TCLE.Keybinds["quick0"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue0;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick1"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick1"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue1;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick2"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick2"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue2;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick3"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick3"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue3;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick4"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick4"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue4;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick5"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick5"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue5;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick6"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick6"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue6;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick7"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick7"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue7;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick8"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick8"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue8;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
-            else if (e.KeyData == TCLE.defaultkeybinds["quick9"]) {
+            else if (e.KeyData == TCLE.Keybinds["quick9"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue9;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }

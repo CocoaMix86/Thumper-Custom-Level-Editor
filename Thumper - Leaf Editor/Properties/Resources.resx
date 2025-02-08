@@ -166,59 +166,8 @@
   <data name="beebleuwu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\beeble\beebleuwu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defaultkeybinds" xml:space="preserve">
-    <value>leafnew;N, Control
-leafopen;O, Control
-leafsave;S, Control
-leafsaveas;A, Control
-leafundo;Z, Control
-templateopen;T, Control
-lvlnew;N, Alt
-lvlopen;O, Alt
-lvlsave;S, Alt
-lvlsaveas;A, Alt
-gatenew;N, Control, Shift
-gateopen;O, Control, Shift
-gatesave;S, Control, Shift
-gatesaveas;A, Control, Shift
-masternew;N, Control, Alt
-masteropen;O, Control, Alt
-mastersave;S, Control, Alt
-mastersaveas;A, Control, Alt
-samplenew;N, Alt, Shift
-sampleopen;O, Alt, Shift
-samplesave;S, Alt, Shift
-samplesaveas;A, Alt, Shift
-saveall;Q, Control
-levelnew;L, Control
-levelopen;P, Control
-levelrecent;R, Control
-levelexplorer;E, Control
-nextlvl;F1
-previouslvl;F2
-nextleaf;F3
-previousleaf;F4
-colordialog;F6
-interpolate;F7
-splitleaf;F8
-randomizerow;F9
-toggleautoplace;F10
-quick0;D0, Control
-quick1;D1, Control
-quick2;D2, Control
-quick3;D3, Control
-quick4;D4, Control
-quick5;D5, Control
-quick6;D6, Control
-quick7;D7, Control
-quick8;D8, Control
-quick9;D9, Control
-showhideleaf;D1, Alt
-showhidelvl;D2, Alt
-showhidegate;D3, Alt
-showhidemaster;D4, Alt
-showhidefolder;D5, Alt
-showhidesample;D6, Alt</value>
+  <data name="DefaultKeybinds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\DefaultKeybinds.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="difficulty_D0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\misc\difficulty-D0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1128,6 +1077,9 @@ showhidesample;D6, Alt</value>
   </data>
   <data name="track_objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\track objects.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TranslationTable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\TranslationTable.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="UIaddrandom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\audio assets\UI sounds\UIaddrandom.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

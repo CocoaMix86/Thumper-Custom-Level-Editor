@@ -25,7 +25,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<string> lvlsinworkfolder = new();
         public static Random rng = new();
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
-        public static Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
+        public static Dictionary<string, Keys> Keybinds = Properties.Resources.DefaultKeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
         public static Beeble MainBeeble = new() { Visible = false };
         public ProjectProperties projectProperties
@@ -42,30 +42,8 @@ namespace Thumper_Custom_Level_Editor
         #region Form Construction
         public static Form_ProjectExplorer ProjectExplorer;
         public static Form_ProjectProperties dockProjectProperties;
-        public static ulong Bits(ulong raw, int lowestBit, int numBits)
-        {
-            ulong mask = 1;
-            for (var i = 1; i < numBits; i++) {
-                mask = (mask << 1) | 1;
-            }
-
-            mask <<= lowestBit;
-
-            return (raw & mask) >> lowestBit;
-        }
         public TCLE(string LevelFromArg)
         {
-            BinaryReader bin = new(new MemoryStream(new byte[] { 0x30, 0x00, 0x00, 0x00, 0xB0, 0x35, 0x63, 0x00 }));
-            var encoded = bin.ReadUInt64();
-            bool HasAnyChunks = (encoded & 1) == 1; //Bit 0
-            uint FrequencyId = (uint)Bits(encoded, 1, 4); //Bits 1-4
-            var pow2 = (int)Bits(encoded, 5, 2); //Bits 5-6
-            int NumChannels = 1 << pow2;
-            bool IsStereo = NumChannels == 2;
-            ulong DataOffset = Bits(encoded, 7, 27) * 32;
-            ulong SampleCount = Bits(encoded, 34, 30);
-
-
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             dockMain.Theme = new VS2015DarkTheme();
@@ -199,12 +177,12 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllText($@"{TCLE.AppLocation}\templates\quickvalues.txt", $"{TCLE.LeafQuickValue0}\n{TCLE.LeafQuickValue1}\n{TCLE.LeafQuickValue2}\n{TCLE.LeafQuickValue3}\n{TCLE.LeafQuickValue4}\n{TCLE.LeafQuickValue5}\n{TCLE.LeafQuickValue6}\n{TCLE.LeafQuickValue7}\n{TCLE.LeafQuickValue8}\n{TCLE.LeafQuickValue9}");
             AppSettings.Save();
         }
-        private static void SetKeyBinds()
+        public static void SetKeyBinds()
         {
             if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
                 Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-                import = import.Concat(defaultkeybinds.Where(x => !import.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
-                defaultkeybinds = import;
+                import = import.Concat(Keybinds.Where(x => !import.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
+                Keybinds = import;
             }
             /*
             SaveAllToolStripMenuItem.ShortcutKeys = defaultkeybinds["saveall"];

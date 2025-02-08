@@ -231,32 +231,36 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to leafnew;N, Control
-        ///leafopen;O, Control
-        ///leafsave;S, Control
-        ///leafsaveas;A, Control
-        ///leafundo;Z, Control
+        ///   Looks up a localized string similar to newfile;N, Control
+        ///openfile;O, Control
+        ///savefile;S, Control
+        ///savefileas;A, Control
         ///templateopen;T, Control
-        ///lvlnew;N, Alt
-        ///lvlopen;O, Alt
-        ///lvlsave;S, Alt
-        ///lvlsaveas;A, Alt
-        ///gatenew;N, Control, Shift
-        ///gateopen;O, Control, Shift
-        ///gatesave;S, Control, Shift
-        ///gatesaveas;A, Control, Shift
-        ///masternew;N, Control, Alt
-        ///masteropen;O, Control, Alt
-        ///mastersave;S, Control, Alt
-        ///mastersaveas;A, Control, Alt
-        ///samplenew;N, Alt, Shift
-        ///sampleopen;O, Alt, Shift
-        ///samplesave;S, Alt, Shift
-        ///samplesaveas; [rest of string was truncated]&quot;;.
+        ///saveall;Q, Control
+        ///projectnew;L, Control
+        ///projectopen;P, Control
+        ///projectrecent;R, Control, Shift
+        ///colordialog;F6
+        ///interpolate;F7
+        ///splitleaf;F8
+        ///randomizerow;F9
+        ///toggleautoplace;F10
+        ///quick0;D0, Control
+        ///quick1;D1, Control
+        ///quick2;D2, Control
+        ///quick3;D3, Control
+        ///quick4;D4, Control
+        ///quick5;D5, Control
+        ///quick6;D6, Control
+        ///quick7;D7, Control
+        ///quick8;D8, Control
+        ///quick9;D9, Control
+        ///exit;F4, Alt
+        ///undo [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string defaultkeybinds {
+        internal static string DefaultKeybinds {
             get {
-                return ResourceManager.GetString("defaultkeybinds", resourceCulture);
+                return ResourceManager.GetString("DefaultKeybinds", resourceCulture);
             }
         }
         
@@ -3761,6 +3765,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string track_objects {
             get {
                 return ResourceManager.GetString("track_objects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&quot;keybindnewfile&quot;: &quot;New File&quot;
+        ///&quot;keybindopenfile&quot;: &quot;Open File&quot;
+        ///&quot;keybindsavefile&quot;: &quot;Save File&apos;
+        ///&quot;keybindsavefileas&quot;: &quot;Save File As&quot;
+        ///&quot;keybindsaveall&quot;: &quot;Save All&quot;
+        ///&quot;keybindtemplateopen&quot;: &quot;Open Template&quot;
+        ///&quot;keybindprojectnew&quot;: &quot;New Project&quot;
+        ///&quot;keybindprojectopen&quot;: &quot;Open Project&quot;
+        ///&quot;keybindprojectrecent&quot;: &quot;Recent Projects&quot;
+        ///&quot;keybindcolordialog&quot;: &quot;Insert Color Value&quot;
+        ///&quot;keybindinterpolate&quot;: &quot;Interpolate Cells&quot;
+        ///&quot;keybindsplitleaf&quot;: &quot;Split Leaf&quot;
+        ///&quot;keybindrandomizerow&quot;: &quot;Randomize Row Values&quot;
+        ///&quot;keybindtoggleautoplace [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TranslationTable {
+            get {
+                return ResourceManager.GetString("TranslationTable", resourceCulture);
             }
         }
         

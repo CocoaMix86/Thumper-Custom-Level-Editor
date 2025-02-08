@@ -8,7 +8,7 @@ namespace Thumper_Custom_Level_Editor
         #region Variables
         private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
         private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift | Keys.Control | Keys.Alt, Keys.Alt, Keys.Control, Keys.Control | Keys.Alt, Keys.Control | Keys.Shift, Keys.Alt | Keys.Shift };
-        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.DefaultKeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
         private Dictionary<string, Keys> keybindfromfile = new();
         private Keys lastpress;
         private Label currentlabel;
@@ -32,11 +32,10 @@ namespace Thumper_Custom_Level_Editor
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //locate keybinds file. If not exist, create it from internal resource
             if (!File.Exists($@"{TCLE.AppLocation}\templates\keybinds.txt"))
-                File.WriteAllText($@"{TCLE.AppLocation}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
+                File.WriteAllText($@"{TCLE.AppLocation}\templates\keybinds.txt", Properties.Resources.DefaultKeybinds);
             //read keybinds to a dictionary for easier lookup
             keybindfromfile = File.ReadAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
-            LoadKeyBindInfo(keybindfromfile);
             propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(keybindfromfile);
         }
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
@@ -65,6 +64,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
             //write keybinds to txt file
             File.WriteAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            TCLE.SetKeyBinds();
             //save properties
             Properties.Settings.Default.Save();
 
@@ -105,110 +105,6 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Keybinds
-        private void LoadKeyBindInfo(Dictionary<string, Keys> loadthesekeys)
-        {
-            //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
-            foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
-                //the "14" is a leftpad empty space
-                List<string> mod = loadthesekeys[(string)_lbl.Tag].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
-                mod.Reverse();
-                if (mod.Remove("Alt"))
-                    mod.Insert(0, "Alt");
-                if (mod.Remove("Control"))
-                    mod.Insert(0, "Control");
-                _lbl.Text = $"{_lbl.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
-            }
-        }
-        private void keybindLabel_Click(object sender, EventArgs e)
-        {
-            ///all keybind labels call this function
-            //storw which label was clicked
-            currentlabel = sender as Label;
-            currentlabel.Focus();
-            keybindname = (string)currentlabel.Tag;
-            string[] lbltxt = currentlabel.Text.Split('.');
-            //set to false so the KeyDown event can start picking up our key presses
-            ignorekeys = false;
-            //make the keybind setting panel show up
-            panelSetKeybind.Visible = true;
-            labelKeybindName.Text = $"Set Keybind - {lbltxt[0].Trim()}";
-            labelKeys.Text = lbltxt.Last();
-        }
-        private void CustomizeWorkspace_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (ignorekeys)
-                return;
-            //check if keydown is the same as last pressed. Don't process if it is
-            if (e.KeyData != lastpress) {
-                lblInvalid.Visible = false;
-                //store last press for when user accepts changes
-                bool cantusethiskey = false;
-                lastpress = e.KeyData;
-                if (keybindfromfile.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers)) || (e.KeyCode is Keys.ControlKey or Keys.ShiftKey or Keys.Menu)) {
-                    cantusethiskey = true;
-                    lblInvalid.Visible = true;
-                }
-                //check if the new keypress exists as a keybind
-                //if it is, disable controls so it can't be set
-                labelKeys.ForeColor = cantusethiskey ? Color.Red : Color.White;
-                btnSetKeybind.Enabled = !cantusethiskey;
-                btnSetKeybind.BackColor = cantusethiskey ? Color.Gray : Color.Green;
-                List<string> mod = e.Modifiers.ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
-
-                if (mod.Remove("Alt"))
-                    mod.Insert(0, "Alt");
-                if (mod.Last() == "Control" && mod.Count > 1) {
-                    mod.Remove("Control");
-                    mod.Insert(0, "Control");
-                }
-                labelKeys.Text = $"{string.Join(" + ", mod)} + {e.KeyCode}";
-            }
-        }
-        private void btnSetKeybind_Click(object sender, EventArgs e)
-        {
-            //when user accepts keybind change, store lastpress into the keybind dictionary
-            //using the saved "keybindname" stored from the Click function
-            keybindfromfile[keybindname] = lastpress;
-            //update the keybind label
-            //the "14" is a leftpad empty space
-            List<string> mod = keybindfromfile[keybindname].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
-            mod.Reverse();
-            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
-            panelSetKeybind.Visible = false;
-            ignorekeys = true;
-        }
-        private void txtKeybindSearch_Enter(object sender, EventArgs e)
-        {
-            txtKeybindSearch.Text = txtKeybindSearch.Text.Replace("search...", "");
-        }
-        private void txtKeybindSearch_TextChanged(object sender, EventArgs e)
-        {
-            foreach (Label _lbl in panel1.Controls.OfType<Label>())
-                _lbl.Visible = false;
-            //find all labels with text that matches the search. Since keybind name AND Keys are in the same string,
-            //the search can look up both at the same time
-            foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Text.ToLower().Contains(txtKeybindSearch.Text.ToLower())))
-                _lbl.Visible = true;
-        }
-        private void btnKeybindReset_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to reset all keybinds to default?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
-            LoadKeyBindInfo(defaultkeybinds);
-            keybindfromfile = defaultkeybinds;
-        }
-        private void btnSingleReset_Click(object sender, EventArgs e)
-        {
-            CustomizeWorkspace_KeyDown(null, new KeyEventArgs(defaultkeybinds[keybindname]));
-        }
-        private void btnCloseKeybind_Click(object sender, EventArgs e)
-        {
-            ignorekeys = true;
-            panelSetKeybind.Visible = false;
-            btnSetKeybind.Enabled = false;
-            btnSetKeybind.BackColor = Color.Gray;
-            lastpress = Keys.None;
-        }
         #endregion
         #region Sequencer object colors
         private void txtSearch_TextChanged(object sender, EventArgs e)

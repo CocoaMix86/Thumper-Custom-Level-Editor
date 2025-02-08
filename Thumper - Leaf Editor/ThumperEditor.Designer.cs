@@ -572,6 +572,7 @@
             this.contextmenuFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.toolstripFileNewProject, this.toolstripFileOpenProject, this.toolstripFileConvert, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolStripMenuItem5, this.toolStripMenuItem63, this.toolStripSeparator4, this.toolstripFileExit });
             this.contextmenuFile.Name = "contextmenuFile";
+            this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
             this.contextmenuFile.Size = new Size(197, 220);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
@@ -731,6 +732,7 @@
             this.contextmenuEdit.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuEdit.Items.AddRange(new ToolStripItem[] { this.toolstripEditUndo, this.toolStripSeparator10, this.toolstripEditCut, this.toolstripEditCopy, this.toolstripEditPaste, this.toolstripEditDelete, this.toolStripSeparator15, this.toolstripEditPreferences });
             this.contextmenuEdit.Name = "contextmenuEdit";
+            this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
             this.contextmenuEdit.Size = new Size(218, 148);
             // 
@@ -832,7 +834,7 @@
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(201, 236);
+            this.contextMenuProject.Size = new Size(201, 214);
             // 
             // toolstripProjectLeaf
             // 
@@ -1084,7 +1086,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolstripWindow;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(244, 148);
+            this.contextmenuWindow.Size = new Size(244, 170);
             // 
             // toolstripWindowFloat
             // 
@@ -1498,6 +1500,7 @@
             this.contextmenuView.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuView.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem11, this.toolStripSeparator19, this.toolstripViewExplorer, this.toolstripViewProperties, this.toolStripSeparator18, this.toolstripViewFullscreen });
             this.contextmenuView.Name = "contextmenuEdit";
+            this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuView.RenderMode = ToolStripRenderMode.System;
             this.contextmenuView.Size = new Size(176, 104);
             // 

@@ -278,7 +278,6 @@ namespace Thumper_Custom_Level_Editor
             this.SizeGripStyle = SizeGripStyle.Hide;
             this.Text = "Customize Workspace";
             this.TopMost = true;
-            this.KeyDown += this.CustomizeWorkspace_KeyDown;
             this.toolstripCustomize.ResumeLayout(false);
             this.toolstripCustomize.PerformLayout();
             this.tabControl1.ResumeLayout(false);

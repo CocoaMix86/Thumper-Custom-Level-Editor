@@ -1,0 +1,33 @@
+New File;N, Control
+Open File;O, Control
+Save File;S, Control
+Save File As;A, Control
+Open Template;T, Control
+Save All;Q, Control
+New Project;L, Control
+Open Project;P, Control
+Recent Projects;R, Control, Shift
+Insert Color Value;F6
+Interpolate Cells;F7
+Split Leaf;F8
+Randomize Row Values;F9
+Toggle Auto-Place;F10
+Quick Value 0;D0, Control
+Quick Value 1;D1, Control
+Quick Value 2;D2, Control
+Quick Value 3;D3, Control
+Quick Value 4;D4, Control
+Quick Value 5;D5, Control
+Quick Value 6;D6, Control
+Quick Value 7;D7, Control
+Quick Value 8;D8, Control
+Quick Value 9;D9, Control
+Close App;F4, Alt
+Undo;Z, Control
+Redo;R, Control
+Fullscreen;F11
+Emergency Stop Audio;E, Control, Alt
+Float Current Document;F, Control, Shift
+Float All Documents;F, Control, Alt
+Dock Floating Document;D, Control, Shift
+Add New Worksapce;Insert, Alt
