@@ -157,7 +157,7 @@ namespace Thumper_Custom_Level_Editor
             this.treeObjects.BackColor = Color.FromArgb(31, 31, 31);
             this.treeObjects.BorderStyle = BorderStyle.None;
             this.treeObjects.Dock = DockStyle.Fill;
-            this.treeObjects.Font = new Font("Liberation Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.treeObjects.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.treeObjects.ForeColor = Color.White;
             this.treeObjects.FullRowSelect = true;
             this.treeObjects.HideSelection = false;
