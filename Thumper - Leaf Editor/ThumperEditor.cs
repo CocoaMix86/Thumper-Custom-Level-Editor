@@ -232,6 +232,7 @@ namespace Thumper_Custom_Level_Editor
                 contextFormRestore.Enabled = false;
                 this.LocationChanged += TCLE_LocationChanged;
                 toolstripFormRestore.ToolTipText = "Maximize";
+                Fullscreen = false;
             }
         }
         public void MaximizeScreenBounds()

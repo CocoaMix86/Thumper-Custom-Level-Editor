@@ -117,9 +117,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolstripWindowFloat = new ToolStripMenuItem();
             this.toolstripWindowFloatAll = new ToolStripMenuItem();
@@ -572,7 +572,6 @@
             this.contextmenuFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.toolstripFileNewProject, this.toolstripFileOpenProject, this.toolstripFileConvert, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolStripMenuItem5, this.toolStripMenuItem63, this.toolStripSeparator4, this.toolstripFileExit });
             this.contextmenuFile.Name = "contextmenuFile";
-            this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
             this.contextmenuFile.Size = new Size(197, 220);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
@@ -732,7 +731,6 @@
             this.contextmenuEdit.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuEdit.Items.AddRange(new ToolStripItem[] { this.toolstripEditUndo, this.toolStripSeparator10, this.toolstripEditCut, this.toolstripEditCopy, this.toolstripEditPaste, this.toolstripEditDelete, this.toolStripSeparator15, this.toolstripEditPreferences });
             this.contextmenuEdit.Name = "contextmenuEdit";
-            this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
             this.contextmenuEdit.Size = new Size(218, 148);
             // 
@@ -834,7 +832,7 @@
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(201, 214);
+            this.contextMenuProject.Size = new Size(201, 236);
             // 
             // toolstripProjectLeaf
             // 
@@ -926,8 +924,9 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
+            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1049,14 +1048,6 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
-            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1077,6 +1068,14 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
+            // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -1499,7 +1498,6 @@
             this.contextmenuView.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuView.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem11, this.toolStripSeparator19, this.toolstripViewExplorer, this.toolstripViewProperties, this.toolStripSeparator18, this.toolstripViewFullscreen });
             this.contextmenuView.Name = "contextmenuEdit";
-            this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuView.RenderMode = ToolStripRenderMode.System;
             this.contextmenuView.Size = new Size(176, 104);
             // 
@@ -1629,6 +1627,7 @@
             this.toolstripViewFullscreen.ForeColor = Color.White;
             this.toolstripViewFullscreen.Image = Properties.Resources.icon_expand;
             this.toolstripViewFullscreen.Name = "toolstripViewFullscreen";
+            this.toolstripViewFullscreen.ShortcutKeys = Keys.F11;
             this.toolstripViewFullscreen.Size = new Size(175, 22);
             this.toolstripViewFullscreen.Text = "Full Screen";
             this.toolstripViewFullscreen.Click += this.toolstripViewFullscreen_Click;
