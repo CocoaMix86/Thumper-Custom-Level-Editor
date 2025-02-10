@@ -97,7 +97,7 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Raw Text Background")]
         public Color leafrawbg { get; set; }
 
-        [CategoryAttribute("Raw Text Editor")]
+        [CategoryAttribute("Leaf Editor")]
         [DisplayName("Raw Text")]
         public Color leafrawtext { get; set; }
         ///
