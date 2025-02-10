@@ -177,21 +177,31 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllText($@"{TCLE.AppLocation}\templates\quickvalues.txt", $"{TCLE.LeafQuickValue0}\n{TCLE.LeafQuickValue1}\n{TCLE.LeafQuickValue2}\n{TCLE.LeafQuickValue3}\n{TCLE.LeafQuickValue4}\n{TCLE.LeafQuickValue5}\n{TCLE.LeafQuickValue6}\n{TCLE.LeafQuickValue7}\n{TCLE.LeafQuickValue8}\n{TCLE.LeafQuickValue9}");
             AppSettings.Save();
         }
-        public static void SetKeyBinds()
+
+        public void SetKeyBinds()
         {
-            if (File.Exists($@"{AppLocation}\templates\keybinds.txt")) {
-                Dictionary<string, Keys> import = File.ReadAllLines($@"{AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            if (Properties.Settings.Default.UserKeybinds == null) {
+                Dictionary<string, Keys> import = Properties.Resources.defaultkeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
                 import = import.Concat(Keybinds.Where(x => !import.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
                 Keybinds = import;
             }
-            /*
-            SaveAllToolStripMenuItem.ShortcutKeys = defaultkeybinds["saveall"];
-            newLevelFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelnew"];
-            openLevelFolderToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelopen"];
-            recentLevelsToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelrecent"];
-            openLevelInExplorerToolStripMenuItem.ShortcutKeys = defaultkeybinds["levelexplorer"];
-            leafTemplateToolStripMenuItem.ShortcutKeys = defaultkeybinds["templateopen"];
-            */
+            ///
+            toolstripFileNewProject.ShortcutKeys = Keybinds["New Project"];
+            toolstripFileOpenProject.ShortcutKeys = Keybinds["Open Project"];
+            toolstripFileSave.ShortcutKeys = Keybinds["Save File"];
+            toolstripFileSaveAs.ShortcutKeys = Keybinds["Save File As"];
+            toolstripFileSaveAll.ShortcutKeys = Keybinds["Save All"];
+            toolstripFileExit.ShortcutKeys = Keybinds["Close App"];
+            ///
+            toolstripViewFullscreen.ShortcutKeys = Keybinds["Fullscreen"];
+            ///
+            toolstripWindowFloat.ShortcutKeys = Keybinds["Float Current Tab"];
+            toolstripWindowFloatAll.ShortcutKeys = Keybinds["Float All Tabs"];
+            toolstripWindowDock.ShortcutKeys = Keybinds["Dock Floating Tab"];
+            toolstripWindowWorkspace.ShortcutKeys = Keybinds["Add New Worksapce"];
+            ///
+            toolstripTabSave.ShortcutKeys = Keybinds["Save File"];
+            ///
             ///btnUndoLeaf.ToolTipText = $"Undo ({String.Join("+", defaultkeybinds["leafundo"].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList().Reverse<string>())})";
         }
         #endregion
@@ -277,7 +287,7 @@ namespace Thumper_Custom_Level_Editor
         private void TCLE_KeyDown(object sender, KeyEventArgs e)
         {
             //tab switch next
-            if (!e.Shift && e.Control && e.KeyCode == Keys.Tab) {
+            if (e.KeyData == Keybinds["Next Tab"]) {
                 if (!ActiveWorkspace.dockMain.Documents.Any())
                     return;
                 List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
@@ -285,7 +295,7 @@ namespace Thumper_Custom_Level_Editor
                 docs[(docind + 1) % docs.Count].DockHandler.Activate();
             }
             //tab switch previous
-            else if (e.Shift && e.Control && e.KeyCode == Keys.Tab) {
+            else if (e.KeyData == Keybinds["Previous Tab"]) {
                 if (!ActiveWorkspace.dockMain.Documents.Any())
                     return;
                 List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
@@ -293,20 +303,20 @@ namespace Thumper_Custom_Level_Editor
                 docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
             }
             //move document to next/previous workspace
-            else if (e.Alt && e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
+            else if (e.KeyData == Keybinds["Move Tab to Next Workspace"] || e.KeyData == Keybinds["Move Tab to Previous Workspace"]) {
                 if (GlobalActiveDocument == null || !ActiveWorkspace.dockMain.Documents.Any())
                     return;
                 List<IDockContent> docs = DockMain.Documents.ToList();
                 //index of next workspace +1 or -1
-                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
+                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyData == Keybinds["Move Tab to Next Workspace"] ? 1 : -1);
                 (GlobalActiveDocument as DockContent).Show((docs[mod(docind, docs.Count)] as Form_WorkSpace).dockMain, DockState.Document);
                 docs[mod(docind, docs.Count)].DockHandler.Activate();
                 docs[mod(docind, docs.Count)].DockHandler.Form.Focus();
             }
             //workspace switch next/previous
-            else if (e.Control && e.KeyCode is Keys.PageUp or Keys.PageDown) {
+            else if (e.KeyData == Keybinds["Next Workspace"] || e.KeyData == Keybinds["Previous Workspace"]) {
                 List<IDockContent> docs = DockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyCode == Keys.PageUp ? 1 : -1);
+                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyData == Keybinds["Next Workspace"] ? 1 : -1);
                 docs[mod(docind, docs.Count)].DockHandler.Activate();
             }
             //e.Handled = true;

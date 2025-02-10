@@ -27,7 +27,13 @@ Undo;Z, Control
 Redo;R, Control
 Fullscreen;F11
 Emergency Stop Audio;E, Control, Alt
-Float Current Document;F, Control, Shift
-Float All Documents;F, Control, Alt
-Dock Floating Document;D, Control, Shift
+Float Current Tab;F, Control, Shift
+Float All Tabs;F, Control, Alt
+Dock Floating Tab;D, Control, Shift
 Add New Worksapce;Insert, Alt
+Next Workspace;PageUp, Control
+Previous Workspace;PageDown, Control
+Move Tab to Next Workspace;PageUp, Control, Alt
+Move Tab to Prev Workspace;PageDown, Control, Alt
+Next Tab;Tab, Control
+Previous Tab;Tab, Control, Shift
