@@ -629,17 +629,22 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
         }
 
-        public static void OpenFile(FileInfo filepath, bool openraw = false)
+        public static bool OpenFile(FileInfo filepath, bool openraw = false)
         {
             if (filepath == null)
-                return;
+                return false;
 
             dynamic _load = LoadFileLock(filepath.FullName);
+            if (_load == null)
+                return false;
             //if there are no workspaces, add one
             if (!Workspaces.Any()) {
                 Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
                 workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
             }
+            //All methods below this point return true. So we can paint the node green to show it is loaded
+            TreeNode successNode = TCLE.ProjectExplorer.FindNode(filepath.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes);
+            successNode.ForeColor = Color.Green;
         //find if the document is loaded already in a tab
         //if so, make it activate
         openraw:
@@ -647,7 +652,7 @@ namespace Thumper_Custom_Level_Editor
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();
                 (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.StartsWith(filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
-                return;
+                return true;
             }
 
             var workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
@@ -655,36 +660,41 @@ namespace Thumper_Custom_Level_Editor
                 IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
                 if (activate != null) {
                     activate.DockHandler.Activate();
-                    return;
+                    return true;
                 }
             }
             //open document in raw viewer if that option was selected
             if (openraw) {
                 Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
                 rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return;
+                return true;
             }
             //otherwise, open a standard editor for the document type
             string filetype = filepath.Extension;
             if (filetype == ".master") {
                 Form_MasterEditor master = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
                 master.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return true;
             }
             else if (filetype == ".lvl") {
                 Form_LvlEditor lvl = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
                 lvl.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return true;
             }
             else if (filetype == ".gate") {
                 Form_GateEditor gate = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
                 gate.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return true;
             }
             else if (filetype == ".leaf") {
                 Form_LeafEditor leaf = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
                 leaf.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return true;
             }
             else if (filetype == ".samp") {
                 Form_SampleEditor sample = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
                 sample.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return true;
             }
             //if file type not supported, open raw
             else {

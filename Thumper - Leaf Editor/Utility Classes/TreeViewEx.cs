@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace Thumper_Custom_Level_Editor
 {
     [DesignerCategory("Code")]
-    internal partial class TreeViewEx : TreeView
+    public partial class TreeViewEx : TreeView
     {
         protected override void WndProc(ref Message m)
         {

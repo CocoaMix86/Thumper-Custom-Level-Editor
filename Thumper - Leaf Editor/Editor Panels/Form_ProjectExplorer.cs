@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO.Packaging;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -113,7 +114,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Name = file.Name,
                     ImageKey = file.Extension,
                     SelectedImageKey = file.Extension,
-                    ContextMenuStrip = contextMenuFileClick
+                    ContextMenuStrip = contextMenuFileClick,
+                    ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(file.Name)) ? Color.Green : Color.White
                 };
                 folder.Nodes.Add(_tn);
                 projectfiles.Add(_tn.FullPath, file);
@@ -671,7 +673,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (projectfolders.TryGetValue(selectedNodes[0].FullPath, out var value))
                 return;
-            TCLE.OpenFile(projectfiles[selectedNodes[0].FullPath]);
+            bool fileOpenSuccess = TCLE.OpenFile(projectfiles[selectedNodes[0].FullPath]);
         }
 
         private void treeView1_Click(object sender, EventArgs e)
@@ -704,6 +706,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     tn.Expand();
                 RecurseNodesFindExpanded(tn.Nodes);
             }
+        }
+
+        public TreeNode FindNode(string path, TreeNodeCollection treeNodeCollection)
+        {
+            TreeNode found = null;
+            foreach (TreeNode tn in treeNodeCollection) {
+                if (tn.Text == path) {
+                    found = tn;
+                    break;
+                }
+                else
+                    found = FindNode(path, tn.Nodes);
+                if (found != null)
+                    break;
+            }
+
+            return found;
         }
 
         private void toolstripProjectAddLeaf_Click(object sender, EventArgs e)
