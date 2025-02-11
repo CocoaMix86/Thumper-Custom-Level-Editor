@@ -70,7 +70,7 @@
         private void btnRecentClose_Click(object sender, EventArgs e)
         {
             PlaySound("UIfolderclose");
-            panelRecentFiles.Visible = false;
+            MenusVisible(true);
         }
 
         private void panelRecentClick(object sender, EventArgs e)

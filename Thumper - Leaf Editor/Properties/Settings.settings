@@ -131,5 +131,8 @@
     <Setting Name="ColorRawText" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
+    <Setting Name="UserKeybinds" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

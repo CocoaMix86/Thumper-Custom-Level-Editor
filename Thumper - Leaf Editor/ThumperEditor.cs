@@ -56,6 +56,7 @@ namespace Thumper_Custom_Level_Editor
                 bpm = 0,
                 WorkingFolder = null
             };
+            MenusVisible(false);
 
             // Initialize Sound library
             Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
@@ -90,6 +91,9 @@ namespace Thumper_Custom_Level_Editor
             }
             if (!Directory.Exists($@"{AppLocation}\temp")) {
                 Directory.CreateDirectory($@"{AppLocation}\temp");
+            }
+            if (!Directory.Exists($@"{AppLocation}\settings")) {
+                Directory.CreateDirectory($@"{AppLocation}\settings");
             }
             //call methods to initialize various aspects of the editors
             ImportObjects();
@@ -174,17 +178,17 @@ namespace Thumper_Custom_Level_Editor
             //colors
             AppSettings.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //write quick values to file
-            File.WriteAllText($@"{TCLE.AppLocation}\templates\quickvalues.txt", $"{TCLE.LeafQuickValue0}\n{TCLE.LeafQuickValue1}\n{TCLE.LeafQuickValue2}\n{TCLE.LeafQuickValue3}\n{TCLE.LeafQuickValue4}\n{TCLE.LeafQuickValue5}\n{TCLE.LeafQuickValue6}\n{TCLE.LeafQuickValue7}\n{TCLE.LeafQuickValue8}\n{TCLE.LeafQuickValue9}");
+            File.WriteAllText($@"{TCLE.AppLocation}\settings\quickvalues.txt", $"{TCLE.LeafQuickValue0}\n{TCLE.LeafQuickValue1}\n{TCLE.LeafQuickValue2}\n{TCLE.LeafQuickValue3}\n{TCLE.LeafQuickValue4}\n{TCLE.LeafQuickValue5}\n{TCLE.LeafQuickValue6}\n{TCLE.LeafQuickValue7}\n{TCLE.LeafQuickValue8}\n{TCLE.LeafQuickValue9}");
             AppSettings.Save();
         }
 
         public void SetKeyBinds()
         {
-            if (Properties.Settings.Default.UserKeybinds == null) {
-                Dictionary<string, Keys> import = Properties.Resources.defaultkeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-                import = import.Concat(Keybinds.Where(x => !import.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
-                Keybinds = import;
+            if (Properties.Settings.Default.UserKeybinds == "-") {
+                Keybinds = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             }
+            else
+                Keybinds = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             ///
             toolstripFileNewProject.ShortcutKeys = Keybinds["New Project"];
             toolstripFileOpenProject.ShortcutKeys = Keybinds["Open Project"];
@@ -303,7 +307,7 @@ namespace Thumper_Custom_Level_Editor
                 docs[mod(docind - 1, docs.Count)].DockHandler.Activate();
             }
             //move document to next/previous workspace
-            else if (e.KeyData == Keybinds["Move Tab to Next Workspace"] || e.KeyData == Keybinds["Move Tab to Previous Workspace"]) {
+            else if (e.KeyData == Keybinds["Move Tab to Next Workspace"] || e.KeyData == Keybinds["Move Tab to Prev Workspace"]) {
                 if (GlobalActiveDocument == null || !ActiveWorkspace.dockMain.Documents.Any())
                     return;
                 List<IDockContent> docs = DockMain.Documents.ToList();
@@ -391,6 +395,7 @@ namespace Thumper_Custom_Level_Editor
                 WorkingFolder = TCL.Directory,
                 TCL = TCL
             };
+            MenusVisible(true);
             //load colors, with failover to White
             try {
                 dynamic railcolor = ProjectJson["rails_color"];
@@ -428,6 +433,8 @@ namespace Thumper_Custom_Level_Editor
             Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
             workspace1.Show(dockMain, DockState.Document);
             OpenFile(ProjectExplorer.projectfiles.FirstOrDefault(x => x.Value.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase)).Value);
+            //this will be the loading sound :D
+            TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
 
             toolstripAddScene.Enabled = true;
             toolstripProject.Enabled = true;
@@ -469,6 +476,11 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
             File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
             File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
+        }
+
+        private void toolstripFileRecent_Click(object sender, EventArgs e)
+        {
+            MenusVisible(false);
         }
 
         private void contextMenuRecentProjects_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -624,9 +636,18 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripViewFullscreen_Click(object sender, EventArgs e)
         {
-            Fullscreen = true;
-            MaximizeScreenBounds();
-            toolstripExitFullscreen.Visible = true;
+            if (Fullscreen) {
+                Fullscreen = false;
+                MaximizeScreenBounds();
+                toolstripExitFullscreen.Visible = false;
+                toolstripViewFullscreen.Text = "Fullscreen";
+            }
+            else {
+                Fullscreen = true;
+                MaximizeScreenBounds();
+                toolstripExitFullscreen.Visible = true;
+                toolstripViewFullscreen.Text = "Exit Fullscreen";
+            }
         }
 
         private void toolstripExitFullscreen_Click(object sender, EventArgs e)

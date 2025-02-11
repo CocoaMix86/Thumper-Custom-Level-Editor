@@ -31,9 +31,9 @@ namespace Thumper_Custom_Level_Editor
 
         private void LoadQuickValues()
         {
-            if (!File.Exists($@"{TCLE.AppLocation}\templates\quickvalues.txt"))
+            if (!File.Exists($@"{TCLE.AppLocation}\settings\quickvalues.txt"))
                 return;
-            string[] _load = File.ReadAllLines($@"{TCLE.AppLocation}\templates\quickvalues.txt");
+            string[] _load = File.ReadAllLines($@"{TCLE.AppLocation}\settings\quickvalues.txt");
 
             LeafQuickValue0 = decimal.TryParse(_load[0], out decimal result) ? result : 1.000m;
             LeafQuickValue1 = decimal.TryParse(_load[1], out result) ? result : 1.000m;
@@ -86,7 +86,9 @@ namespace Thumper_Custom_Level_Editor
             LeafObjects.Clear();
             //check if the track_objects exists or not, but do not overwrite it
             if (!File.Exists($@"{AppLocation}\settings\track_objects_v3.txt")) {
-                File.WriteAllText($@"{AppLocation}\settings\track_objects_v3.txt", Properties.Resources.track_objects);
+                using (StreamWriter sw = File.CreateText($@"{AppLocation}\settings\track_objects_v3.txt")) {
+                    sw.Write(Properties.Resources.track_objects);
+                }
             }
 
             ///import selectable objects from file and parse them into lists for manipulation
@@ -202,14 +204,6 @@ namespace Thumper_Custom_Level_Editor
             return Color.FromArgb(r, g, b);
         }
 
-        public static void PlaySound(string audiofile)
-        {
-            if (Properties.Settings.Default.muteapplication)
-                return;
-            PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out int sampchannel);
-            TCLE.alzheimer();
-        }
-
         /// Used to allow only numbers and a single decimal during input
         public static void NumericInputSanitize(object sender, KeyPressEventArgs e)
         {
@@ -273,6 +267,23 @@ namespace Thumper_Custom_Level_Editor
             //lblChangelog.Text = Properties.Resources.changelog;
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
+
+        public void MenusVisible(bool visible)
+        {
+            panelRecentFiles.Visible = !visible;
+            if (WorkingFolder == null)
+                visible = false;
+            panelToolStrips.Visible = visible;
+            dockMain.Visible = visible;
+            foreach (var item in toolStripTitle.Items)
+                (item as ToolStripItem).Visible = visible;
+            toolstripFile.Visible = true;
+            toolstripHelp.Visible = true;
+            toolstripFormClose.Visible = true;
+            toolstripFormMinimize.Visible = true;
+            toolstripFormRestore.Visible = true;
+            toolstripFormIcon.Visible = true;
+        }
 
         /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947
         public static decimal TruncateDecimal(decimal d, byte decimals)
@@ -832,6 +843,14 @@ namespace Thumper_Custom_Level_Editor
             return _save;
         }
 
+
+        public static void PlaySound(string audiofile)
+        {
+            if (Properties.Settings.Default.muteapplication)
+                return;
+            PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out int sampchannel);
+            TCLE.alzheimer();
+        }
         public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
         public static int LastChannel;
         public static float initialfreq;

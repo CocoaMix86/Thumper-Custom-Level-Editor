@@ -31,11 +31,19 @@ namespace Thumper_Custom_Level_Editor
             //set mute
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //locate keybinds file. If not exist, create it from internal resource
-            if (!File.Exists($@"{TCLE.AppLocation}\settings\keybinds.txt"))
-                File.WriteAllText($@"{TCLE.AppLocation}\settings\keybinds.txt", Properties.Resources.DefaultKeybinds);
+
+            ///if (!File.Exists($@"{TCLE.AppLocation}\settings\keybinds.txt"))
+            ///File.WriteAllText($@"{TCLE.AppLocation}\settings\keybinds.txt", Properties.Resources.DefaultKeybinds);
             //read keybinds to a dictionary for easier lookup
-            keybindfromfile = File.ReadAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-            keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
+            ///keybindfromfile = File.ReadAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            ///keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
+            ///propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(keybindfromfile);
+            if (Properties.Settings.Default.UserKeybinds == "-") {
+                keybindfromfile = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+                //Properties.Settings.Default.UserKeybinds = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            }
+            else
+                keybindfromfile = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(keybindfromfile);
         }
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
@@ -63,8 +71,9 @@ namespace Thumper_Custom_Level_Editor
             //save mute to settings
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
             //write keybinds to txt file
-            File.WriteAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
-            TCLE.SetKeyBinds();
+            ///File.WriteAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            Properties.Settings.Default.UserKeybinds = string.Join('\n', keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            TCLE.Instance.SetKeyBinds();
             //save properties
             Properties.Settings.Default.Save();
 
