@@ -505,8 +505,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         tn.ContextMenuStrip = contextMenuFolderClick;
                     else if (tn.ImageKey is "project")
                         tn.ContextMenuStrip = contextMenuProject;
-                    else
+                    else {
                         tn.ContextMenuStrip = contextMenuFileClick;
+                    }
                 }
             }
         }
@@ -634,12 +635,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             foreach (TreeNode n in addedNodes) {
                 n.BackColor = Color.FromArgb(56, 56, 56);
-                n.ForeColor = Color.White;
+                //n.ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(n.Text)) ? Color.Green : Color.White;
                 selectedNodes.Add(n);
             }
             foreach (TreeNode n in removedNodes) {
                 n.BackColor = treeView1.BackColor;
-                n.ForeColor = treeView1.ForeColor;
+                //n.ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(n.Text)) ? Color.Green : Color.White;
                 selectedNodes.Remove(n);
             }
         }
