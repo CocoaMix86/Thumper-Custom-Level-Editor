@@ -85,13 +85,13 @@ namespace Thumper_Custom_Level_Editor
         {
             LeafObjects.Clear();
             //check if the track_objects exists or not, but do not overwrite it
-            if (!File.Exists($@"{AppLocation}\templates\track_objects2.2.txt")) {
-                File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
+            if (!File.Exists($@"{AppLocation}\settings\track_objects_v3.txt")) {
+                File.WriteAllText($@"{AppLocation}\settings\track_objects_v3.txt", Properties.Resources.track_objects);
             }
 
             ///import selectable objects from file and parse them into lists for manipulation
             //splits input at "###". Each section is a collection of param_paths
-            List<string> import = File.ReadAllText($@"{AppLocation}\templates\track_objects2.2.txt").Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
+            List<string> import = File.ReadAllText($@"{AppLocation}\settings\track_objects_v3.txt").Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
             for (int x = 0; x < import.Count; x++) {
                 //split each section into individual lines
                 List<string> import2 = import[x].Split('\n').ToList();
@@ -143,10 +143,10 @@ namespace Thumper_Custom_Level_Editor
         public void ImportDefaultColors()
         {
             Dictionary<string, Color> ObjectColors = new();
-            if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors2.2.txt")) {
-                File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
+            if (!File.Exists($@"{AppLocation}\settings\settings\objects_defaultcolors_v3.txt")) {
+                File.WriteAllText($@"{AppLocation}\settings\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
             }
-            ObjectColors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));
+            ObjectColors = File.ReadAllLines($@"{AppLocation}\settings\objects_defaultcolors_v3.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));
 
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //once all the colors are processed, assign them directly to the objects

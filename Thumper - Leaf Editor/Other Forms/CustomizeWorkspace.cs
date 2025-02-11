@@ -31,10 +31,10 @@ namespace Thumper_Custom_Level_Editor
             //set mute
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //locate keybinds file. If not exist, create it from internal resource
-            if (!File.Exists($@"{TCLE.AppLocation}\templates\keybinds.txt"))
-                File.WriteAllText($@"{TCLE.AppLocation}\templates\keybinds.txt", Properties.Resources.DefaultKeybinds);
+            if (!File.Exists($@"{TCLE.AppLocation}\settings\keybinds.txt"))
+                File.WriteAllText($@"{TCLE.AppLocation}\settings\keybinds.txt", Properties.Resources.DefaultKeybinds);
             //read keybinds to a dictionary for easier lookup
-            keybindfromfile = File.ReadAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            keybindfromfile = File.ReadAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
             propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(keybindfromfile);
         }
@@ -58,12 +58,12 @@ namespace Thumper_Custom_Level_Editor
             //save colors to settings
             TCLE.settingsUITheme.SaveSettings();
             //write sequencer colors to txt file
-            File.WriteAllLines($@"{TCLE.AppLocation}\templates\objects_defaultcolors2.2.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb()}"));
+            File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb()}"));
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //save mute to settings
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
             //write keybinds to txt file
-            File.WriteAllLines($@"{TCLE.AppLocation}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            File.WriteAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
             TCLE.SetKeyBinds();
             //save properties
             Properties.Settings.Default.Save();
