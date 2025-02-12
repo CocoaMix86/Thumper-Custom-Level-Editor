@@ -393,7 +393,8 @@ namespace Thumper_Custom_Level_Editor
                 authornames = (string)ProjectJson["author"] ?? "a person",
                 bpm = (decimal?)ProjectJson["bpm"] ?? 400m,
                 WorkingFolder = TCL.Directory,
-                TCL = TCL
+                TCL = TCL,
+                Thumbnail = File.Exists($@"{TCL.Directory}\thumbnail.png") ? Image.FromFile($@"{TCL.Directory}\thumbnail.png") : null
             };
             MenusVisible(true);
             //load colors, with failover to White
@@ -425,7 +426,7 @@ namespace Thumper_Custom_Level_Editor
             ProjectExplorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             ProjectExplorer.Show(dockMain, DockState.DockRight);
             dockProjectProperties = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
-            dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
+            dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.35);
             //Load the project''s files into Explorer
             ProjectExplorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing.Design;
+using System.Drawing.Imaging;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -42,6 +43,20 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Description")]
         [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
         public string description { get; set; }
+
+        [Category("General Project Info")]
+        [DisplayName("Thumbnail")]
+        [Description("The image to use in the mod loader when loading this level.")]
+        public Image thumbnail
+        {
+            get => Thumbnail;
+            set {
+                Thumbnail = value;
+                if (value != null)
+                    value.Save($@"{WorkingFolder}\thumbnail.png");
+            }
+        }
+        public Image Thumbnail;
 
         [Category("Level Properties")]
         [DisplayName("BPM")]
