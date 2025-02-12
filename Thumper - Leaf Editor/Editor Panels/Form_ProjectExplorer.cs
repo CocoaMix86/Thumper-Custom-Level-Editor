@@ -39,7 +39,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private string renametype;
         private string renamefile;
         private string renamenode;
-        private string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
+        private static string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
+        private static string[] imageextensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
         private DirectoryInfo ProjectDirectory => TCLE.WorkingFolder;
         private TreeNode previousNode;
         private List<TreeNode> filestocopy;
@@ -113,11 +114,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TreeNode _tn = new() {
                     Text = file.Name,
                     Name = file.Name,
-                    ImageKey = file.Extension,
-                    SelectedImageKey = file.Extension,
+                    ImageKey = imageextensions.Contains(file.Extension) ? "image" : file.Extension,
+                    SelectedImageKey = imageextensions.Contains(file.Extension) ? "image" : file.Extension,
                     ContextMenuStrip = contextMenuFileClick,
                     ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(file.Name)) ? Color.Green : Properties.Settings.Default.ColorProjExpText
                 };
+                //this part finds any node that has the same name and highlights them red
+                FindDuplicateFile(_tn, Color.Red);
+                //
                 folder.Nodes.Add(_tn);
                 projectfiles.Add(_tn.FullPath, file);
                 //check for various filters being used
@@ -242,6 +246,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     FileInfo source = projectfiles[tn.FullPath];
                     TCLE.CloseFile(source);
                     TCLE.DeleteFileLock(source);
+                    FindDuplicateFile(tn, Color.White);
                 }
                 tn.Remove();
             }
@@ -268,6 +273,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             selectedNodes[0].BeginEdit();
             treeView1.SelectedNode = null;
             dontcancelifrename = false;
+            //check for same name
+            FindDuplicateFile(selectedNodes[0], Color.Red);
         }
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
@@ -636,12 +643,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             foreach (TreeNode n in addedNodes) {
                 n.BackColor = Properties.Settings.Default.ColorProjExpHighlight;
-                //n.ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(n.Text)) ? Color.Green : Color.White;
                 selectedNodes.Add(n);
             }
             foreach (TreeNode n in removedNodes) {
                 n.BackColor = treeView1.BackColor;
-                //n.ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(n.Text)) ? Color.Green : Color.White;
                 selectedNodes.Remove(n);
             }
         }
@@ -725,6 +730,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             return found;
+        }
+
+        public void FindDuplicateFile(TreeNode firstnode, Color color)
+        {
+            //check for same name
+            TreeNode samename = FindNode(firstnode.Text, treeView1.Nodes[0].Nodes);
+            if (samename != null) {
+                samename.ForeColor = color;
+                firstnode.ForeColor = color;
+            }
         }
 
         private void toolstripProjectAddLeaf_Click(object sender, EventArgs e)

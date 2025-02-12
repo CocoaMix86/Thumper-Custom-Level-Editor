@@ -231,32 +231,27 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to newfile;N, Control
-        ///openfile;O, Control
-        ///savefile;S, Control
-        ///savefileas;A, Control
-        ///templateopen;T, Control
-        ///saveall;Q, Control
-        ///projectnew;L, Control
-        ///projectopen;P, Control
-        ///projectrecent;R, Control, Shift
-        ///colordialog;F6
-        ///interpolate;F7
-        ///splitleaf;F8
-        ///randomizerow;F9
-        ///toggleautoplace;F10
-        ///quick0;D0, Control
-        ///quick1;D1, Control
-        ///quick2;D2, Control
-        ///quick3;D3, Control
-        ///quick4;D4, Control
-        ///quick5;D5, Control
-        ///quick6;D6, Control
-        ///quick7;D7, Control
-        ///quick8;D8, Control
-        ///quick9;D9, Control
-        ///exit;F4, Alt
-        ///undo [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to New File;N, Control
+        ///Open File;O, Control
+        ///Save File;S, Control
+        ///Save File As;A, Control
+        ///Open Template;T, Control
+        ///Save All;Q, Control
+        ///New Project;L, Control
+        ///Open Project;P, Control
+        ///Recent Projects;R, Control, Shift
+        ///Insert Color Value;F6
+        ///Interpolate Cells;F7
+        ///Split Leaf;F8
+        ///Randomize Row Values;F9
+        ///Toggle Auto-Place;F10
+        ///Quick Value 0;D0, Control
+        ///Quick Value 1;D1, Control
+        ///Quick Value 2;D2, Control
+        ///Quick Value 3;D3, Control
+        ///Quick Value 4;D4, Control
+        ///Quick Value 5;D5, Control
+        ///Quick Value 6;D6, Con [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DefaultKeybinds {
             get {
@@ -900,6 +895,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static System.Drawing.Bitmap icon_graph {
             get {
                 object obj = ResourceManager.GetObject("icon_graph", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_image {
+            get {
+                object obj = ResourceManager.GetObject("icon_image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
