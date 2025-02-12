@@ -12,6 +12,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             InitializeLvlStuff();
+            ColorFormElements();
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
@@ -33,6 +34,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Cancel = true;
                 }
             }
+        }
+
+        public void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.ColorLvlBG;
+            lvlLeafList.BackgroundColor = Properties.Settings.Default.ColorLvlLeafBG;
+            lvlLeafPaths.BackgroundColor = Properties.Settings.Default.ColorLvlTunnelBG;
+            lvlLoopTracks.BackgroundColor = Properties.Settings.Default.ColorLvlLoopsBG;
         }
         #endregion
 

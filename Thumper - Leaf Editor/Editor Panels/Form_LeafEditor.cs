@@ -14,6 +14,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             RenderForm();
+            ColorFormElements();
 
             if (load != null) {
                 LoadLeaf(load, filepath);
@@ -64,6 +65,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Cancel = true;
                 }
             }
+        }
+
+        public void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.ColorLeafBG;
+            trackEditor.BackgroundColor = Properties.Settings.Default.ColorLeafSeqBG;
+            textEditor.BackColor = Properties.Settings.Default.ColorLeafRawBG;
+            textEditor.ForeColor = Properties.Settings.Default.ColorLeafRawText;
         }
         #endregion
 
@@ -2191,8 +2200,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //whenever `i` is a multiple of the time sig, switch colors
                 if ((i) % timesigbeats == 0)
                     _switch = !_switch;
-                trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Color.FromArgb(55, 55, 55) : Color.FromArgb(45, 45, 45);
-                trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Color.FromArgb(55, 55, 55) : Color.FromArgb(45, 45, 45);
+                trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
+                trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
             }
 
             if (LvlSequencer != null)

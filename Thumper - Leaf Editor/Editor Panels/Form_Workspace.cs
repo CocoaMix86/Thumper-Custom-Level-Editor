@@ -56,7 +56,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
 
                 TCLE.CloseFileLock(filetoclose);
-                TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Color.White;
+                TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Properties.Settings.Default.ColorProjExpText;
             }
         }
 

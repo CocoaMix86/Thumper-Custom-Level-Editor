@@ -30,17 +30,9 @@ namespace Thumper_Custom_Level_Editor
             BuildObjectTree();
             //set mute
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
-            //locate keybinds file. If not exist, create it from internal resource
-
-            ///if (!File.Exists($@"{TCLE.AppLocation}\settings\keybinds.txt"))
-            ///File.WriteAllText($@"{TCLE.AppLocation}\settings\keybinds.txt", Properties.Resources.DefaultKeybinds);
             //read keybinds to a dictionary for easier lookup
-            ///keybindfromfile = File.ReadAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-            ///keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.ContainsKey(x.Key))).ToDictionary(x => x.Key, x => x.Value);
-            ///propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(keybindfromfile);
             if (Properties.Settings.Default.UserKeybinds == "-") {
                 keybindfromfile = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-                //Properties.Settings.Default.UserKeybinds = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             }
             else
                 keybindfromfile = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
@@ -65,6 +57,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //save colors to settings
             TCLE.settingsUITheme.SaveSettings();
+            TCLE.Instance.ColorFormElements();
             //write sequencer colors to txt file
             File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb()}"));
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();

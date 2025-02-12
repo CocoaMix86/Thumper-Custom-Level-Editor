@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.DirectoryServices.ActiveDirectory;
-using System.Windows.Documents;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -13,6 +11,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             loadedfile = filepath;
             InitializeComponent();
+            ColorFormElements();
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
             textEditor.Text = JsonConvert.SerializeObject(_load, Formatting.Indented);
             textEditor.ClearUndo();
@@ -27,6 +26,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Cancel = true;
                 }
             }
+        }
+
+        public void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.ColorRawBG;
+            textEditor.BackColor = Properties.Settings.Default.ColorRawBG;
+            textEditor.ForeColor = Properties.Settings.Default.ColorRawText;
         }
         #endregion
         #region Variables

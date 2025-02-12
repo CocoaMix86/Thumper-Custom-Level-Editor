@@ -547,5 +547,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["UserKeybinds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("56, 56, 56")]
+        public global::System.Drawing.Color ColorProjExpHighlight {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorProjExpHighlight"]));
+            }
+            set {
+                this["ColorProjExpHighlight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorProjExpText {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorProjExpText"]));
+            }
+            set {
+                this["ColorProjExpText"] = value;
+            }
+        }
     }
 }

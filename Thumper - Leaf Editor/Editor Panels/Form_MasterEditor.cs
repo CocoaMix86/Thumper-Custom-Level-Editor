@@ -13,6 +13,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             InitializeMasterStuff();
+            ColorFormElements();
             masterToolStrip.Renderer = new ToolStripOverride();
             TCLE.DoubleBufferDGV(masterLvlList, false);
 
@@ -33,6 +34,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Cancel = true;
                 }
             }
+        }
+
+        public void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.ColorMasterBG;
+            masterLvlList.BackgroundColor = Properties.Settings.Default.ColorMasterLvlBG;
         }
         #endregion
 

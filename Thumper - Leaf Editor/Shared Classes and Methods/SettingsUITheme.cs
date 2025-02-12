@@ -59,6 +59,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.ColorSampleListBG = samplelistbg;
             Properties.Settings.Default.ColorWaveformBG = samplewaveformbg;
             Properties.Settings.Default.ColorProjectExplorerBG = projectexplorerbg;
+            Properties.Settings.Default.ColorProjExpHighlight = projectexplorerhighlight;
+            Properties.Settings.Default.ColorProjExpText = projectexplorertext;
             Properties.Settings.Default.ColorRawBG = rawbg;
             Properties.Settings.Default.ColorRawText = rawtext;
         }
@@ -153,6 +155,14 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Project Explorer")]
         [DisplayName("Background")]
         public Color projectexplorerbg { get; set; }
+
+        [CategoryAttribute("Project Explorer")]
+        [DisplayName("Text Color")]
+        public Color projectexplorertext { get; set; }
+
+        [CategoryAttribute("Project Explorer")]
+        [DisplayName("Highlight Color")]
+        public Color projectexplorerhighlight { get; set; }
         ///
         ///
         [CategoryAttribute("Raw Text Editor")]

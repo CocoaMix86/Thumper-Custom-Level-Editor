@@ -134,5 +134,11 @@
     <Setting Name="UserKeybinds" Type="System.String" Scope="User">
       <Value Profile="(Default)">-</Value>
     </Setting>
+    <Setting Name="ColorProjExpHighlight" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">56, 56, 56</Value>
+    </Setting>
+    <Setting Name="ColorProjExpText" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -14,6 +14,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_SampleEditor(dynamic load = null, FileInfo filepath = null)
         {
             InitializeComponent();
+            ColorFormElements();
             _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
             //
             sampleToolStrip.Renderer = new ToolStripOverride();
@@ -36,6 +37,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Cancel = true;
                 }
             }
+        }
+
+        public void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.ColorSampleBG;
+            sampleList.BackgroundColor = Properties.Settings.Default.ColorSampleListBG;
+            pictureSpectrum.BackColor = Properties.Settings.Default.ColorWaveformBG;
+            pictureWave.BackColor = Properties.Settings.Default.ColorWaveformBG;
         }
         #endregion
 
@@ -311,8 +320,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //these 2 show different spectrums visually while the sample plays
-            pictureSpectrum.Image = _vis.CreateSpectrumWave(TCLE.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Black, 1, false, false, false);
-            pictureWave.Image = _vis.CreateWaveForm(TCLE.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Color.Black, 1, false, true, false);
+            pictureSpectrum.Image = _vis.CreateSpectrumWave(TCLE.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Properties.Settings.Default.ColorWaveformBG, 1, false, false, false);
+            pictureWave.Image = _vis.CreateWaveForm(TCLE.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Properties.Settings.Default.ColorWaveformBG, 1, false, true, false);
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)

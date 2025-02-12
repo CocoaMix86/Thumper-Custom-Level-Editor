@@ -95,7 +95,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Name = directoryInfo.Name,
                 ImageKey = "folder",
                 SelectedImageKey = "folder",
-                ContextMenuStrip = contextMenuFolderClick
+                ContextMenuStrip = contextMenuFolderClick,
+                ForeColor = Properties.Settings.Default.ColorProjExpText
             };
             addInMe.Add(folder);
             projectfolders.Add(folder.FullPath, directoryInfo);
@@ -115,7 +116,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     ImageKey = file.Extension,
                     SelectedImageKey = file.Extension,
                     ContextMenuStrip = contextMenuFileClick,
-                    ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(file.Name)) ? Color.Green : Color.White
+                    ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(file.Name)) ? Color.Green : Properties.Settings.Default.ColorProjExpText
                 };
                 folder.Nodes.Add(_tn);
                 projectfiles.Add(_tn.FullPath, file);
@@ -634,7 +635,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void changeSelection(List<TreeNode> addedNodes, List<TreeNode> removedNodes)
         {
             foreach (TreeNode n in addedNodes) {
-                n.BackColor = Color.FromArgb(56, 56, 56);
+                n.BackColor = Properties.Settings.Default.ColorProjExpHighlight;
                 //n.ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(n.Text)) ? Color.Green : Color.White;
                 selectedNodes.Add(n);
             }
@@ -760,6 +761,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             int newfolders = projectfolders.Where(x => x.Value.Name.Contains("New Folder")).Count();
             TCLE.WorkingFolder.CreateSubdirectory($"New Folder{(newfolders > 1 ? $" {newfolders}" : "")}");
+            CreateTreeView();
+        }
+
+        public void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.ColorProjectExplorerBG;
+            toolstripExplorer.BackColor = Properties.Settings.Default.ColorProjectExplorerBG;
+            treeView1.BackColor = Properties.Settings.Default.ColorProjectExplorerBG;
             CreateTreeView();
         }
     }

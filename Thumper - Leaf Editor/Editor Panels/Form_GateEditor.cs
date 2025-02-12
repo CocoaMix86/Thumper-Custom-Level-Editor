@@ -31,6 +31,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
+
+        public void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.ColorGateBG;
+            gateLvlList.BackgroundColor = Properties.Settings.Default.ColorGateLvlBG;
+        }
         #endregion
 
         #region Variables
