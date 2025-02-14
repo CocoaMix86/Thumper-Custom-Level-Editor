@@ -10,6 +10,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
 using NAudio.Wave.SampleProviders;
 using Un4seen.Bass.Misc;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -854,7 +855,14 @@ namespace Thumper_Custom_Level_Editor
         {
             if (Properties.Settings.Default.muteapplication)
                 return;
-            PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out int sampchannel);
+            if (rng.Next(0, 1001) == 1000) {
+                var tempstream = new MemoryStream();
+                Properties.Resources.duck.CopyTo(tempstream);
+                byte[] duckbytes = tempstream.ToArray();
+                PlaySampleOneOff("duck", duckbytes, out int sampchannel);
+            }
+            else
+                PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out int sampchannel);
             TCLE.alzheimer();
         }
         public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
