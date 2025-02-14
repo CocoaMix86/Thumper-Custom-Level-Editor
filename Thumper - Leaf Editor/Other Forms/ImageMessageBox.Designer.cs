@@ -31,12 +31,27 @@ namespace Thumper_Custom_Level_Editor
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImageMessageBox));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblVersion = new Label();
             this.SuspendLayout();
             // 
             // timer1
             // 
             this.timer1.Interval = 2000;
             this.timer1.Tick += this.timer1_Tick;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.Dock = DockStyle.Bottom;
+            this.lblVersion.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.lblVersion.ForeColor = Color.White;
+            this.lblVersion.Location = new Point(0, 289);
+            this.lblVersion.Margin = new Padding(7, 0, 4, 0);
+            this.lblVersion.MaximumSize = new Size(0, 20);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new Size(506, 20);
+            this.lblVersion.TabIndex = 22;
+            this.lblVersion.Text = "Thumper Custom Level Editor -- v3.0.0";
+            this.lblVersion.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ImageMessageBox
             // 
@@ -45,6 +60,7 @@ namespace Thumper_Custom_Level_Editor
             this.BackColor = Color.Black;
             this.BackgroundImageLayout = ImageLayout.Center;
             this.ClientSize = new Size(506, 309);
+            this.Controls.Add(this.lblVersion);
             this.FormBorderStyle = FormBorderStyle.None;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.Margin = new Padding(4, 3, 4, 3);
@@ -61,5 +77,6 @@ namespace Thumper_Custom_Level_Editor
         #endregion
 
         private System.Windows.Forms.Timer timer1;
+        private Label lblVersion;
     }
 }

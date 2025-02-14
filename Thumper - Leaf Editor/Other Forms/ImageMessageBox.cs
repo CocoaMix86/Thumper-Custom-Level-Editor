@@ -14,6 +14,7 @@
         {
             InitializeComponent();
             tcle = _tcle;
+            lblVersion.Visible = false;
 
             if (path == "railcolorhelp") {
                 this.BackgroundImage = Properties.Resources.help_railcolor;
@@ -34,6 +35,7 @@
                 _size = this.BackgroundImage.Size;
             }
             if (path == "splashscreen") {
+                lblVersion.Visible = true;
                 this.BackgroundImage = Properties.Resources.Thumper_Splash;
                 this.BackgroundImageLayout = ImageLayout.Center;
                 this.Text = "";

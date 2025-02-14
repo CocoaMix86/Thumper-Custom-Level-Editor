@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
+using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -474,6 +475,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         continue;
                     //math to offset drawing the wave horizontally based on where the active beats are
                     e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2);
+                    //CellsToPaint.Add(new Tuple<int, int, int>(e.RowIndex, (sdp.beat - columnindex) * cellwidth, (int)samp.beats));
+                }
+            }
+            //HANDLE OBJECTS THAT LAST LONGER THAN 1 BEAT
+            else if (SequencerObjects[e.RowIndex].friendly_param.Contains('[')) {
+                RowPrePainting = true;
+                e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
+                RowPrePainting = false;
+
+                if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
+                    return;
+                bool success = int.TryParse(SequencerObjects[e.RowIndex].friendly_param.Split('[')[1].Split(' ')[0], out int beats);
+                if (!success)
+                    return;
+                int offsetportion = (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3);
+                int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + 1;
+                Sequencer_Object seqref = SequencerObjects[e.RowIndex];
+                int cellwidth = trackZoom.Value;
+
+                foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
+                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex)
+                        continue;
+                    e.Graphics.FillRectangle(new SolidBrush(seqref.highlight_color), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, beats * cellwidth, e.RowBounds.Height - 2);
                     //CellsToPaint.Add(new Tuple<int, int, int>(e.RowIndex, (sdp.beat - columnindex) * cellwidth, (int)samp.beats));
                 }
             }
