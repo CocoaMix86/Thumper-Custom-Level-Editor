@@ -120,7 +120,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(file.Name)) ? Color.Green : Properties.Settings.Default.ColorProjExpText
                 };
                 //this part finds any node that has the same name and highlights them red
-                FindDuplicateFile(_tn, Color.Red);
+                ///FindDuplicateFile(_tn, Color.Red);
                 //
                 folder.Nodes.Add(_tn);
                 projectfiles.Add(_tn.FullPath, file);
@@ -246,7 +246,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     FileInfo source = projectfiles[tn.FullPath];
                     TCLE.CloseFile(source);
                     TCLE.DeleteFileLock(source);
-                    FindDuplicateFile(tn, Color.White);
+                    ///FindDuplicateFile(tn, Color.White);
                 }
                 tn.Remove();
             }
@@ -274,7 +274,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             treeView1.SelectedNode = null;
             dontcancelifrename = false;
             //check for same name
-            FindDuplicateFile(selectedNodes[0], Color.Red);
+            ///FindDuplicateFile(selectedNodes[0], Color.Red);
         }
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {

@@ -639,8 +639,8 @@ namespace Thumper_Custom_Level_Editor
                 workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
             }
             //All methods below this point return true. So we can paint the node green to show it is loaded
-            TreeNode successNode = TCLE.ProjectExplorer.FindNode(filepath.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes);
-            successNode.ForeColor = Color.Green;
+            ///TreeNode successNode = TCLE.ProjectExplorer.FindNode(filepath.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes);
+            ///successNode.ForeColor = Color.Green;
         //find if the document is loaded already in a tab
         //if so, make it activate
         openraw:
