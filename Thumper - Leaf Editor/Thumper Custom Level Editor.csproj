@@ -49,7 +49,7 @@
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <SignAssembly>False</SignAssembly>
     <ErrorReport>none</ErrorReport>
-    <Version>3.0.0 alpha v3</Version>
+    <Version>3.0.0.3</Version>
     <Authors>CocoaMix</Authors>
     <Company>CocoaMix Inc.</Company>
     <Copyright>copyright 2082</Copyright>
