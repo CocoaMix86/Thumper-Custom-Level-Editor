@@ -388,6 +388,12 @@ namespace Thumper_Custom_Level_Editor
             }
             //load the properties of the TCL and create projectProperties
             dynamic ProjectJson = LoadFileLock(TCL.FullName);
+            Image Thumbnail = null;
+            if (File.Exists($@"{TCL.Directory}\thumbnail.png")) {
+                using (FileStream fs = new FileStream($@"{TCL.Directory}\thumbnail.png", FileMode.Open)) {
+                    Thumbnail = Image.FromStream(fs);
+                }
+            }
             projectProperties = new() {
                 projectname = (string)ProjectJson["level_name"] ?? "New Project",
                 difficulty = (string)ProjectJson["difficulty"] ?? "D0",
@@ -396,7 +402,7 @@ namespace Thumper_Custom_Level_Editor
                 bpm = (decimal?)ProjectJson["bpm"] ?? 400m,
                 WorkingFolder = TCL.Directory,
                 TCL = TCL,
-                Thumbnail = File.Exists($@"{TCL.Directory}\thumbnail.png") ? Image.FromFile($@"{TCL.Directory}\thumbnail.png") : null
+                Thumbnail = Thumbnail
             };
             MenusVisible(true);
             //load colors, with failover to White

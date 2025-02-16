@@ -52,8 +52,11 @@ namespace Thumper_Custom_Level_Editor
             get => Thumbnail;
             set {
                 Thumbnail = value;
-                if (value != null)
-                    value.Save($@"{WorkingFolder}\thumbnail.png");
+                if (value != null) {
+                    if (File.Exists($@"{WorkingFolder}\thumbnail.png"))
+                        File.Delete($@"{WorkingFolder}\thumbnail.png");
+                    value.Save($@"{WorkingFolder}\thumbnail.png", ImageFormat.Png);
+                }
             }
         }
         public Image Thumbnail;

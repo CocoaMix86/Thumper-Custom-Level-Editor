@@ -8,9 +8,8 @@ using System.Text.RegularExpressions;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
-using NAudio.Wave.SampleProviders;
 using Un4seen.Bass.Misc;
-using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
+using System.Drawing;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -634,7 +633,11 @@ namespace Thumper_Custom_Level_Editor
                 return false;
 
             if (ImageExtensions.Contains(filepath.Extension.ToLower())) {
-                ImageViewer image = new(System.Drawing.Image.FromFile(filepath.FullName)) { Text = filepath.Name};
+                Image theimage = null;
+                using (FileStream fs = new FileStream(filepath.FullName, FileMode.Open)) {
+                    theimage = Image.FromStream(fs);
+                }
+                ImageViewer image = new(theimage) { Text = filepath.Name};
                 image.Show();
                 return true;
             }
