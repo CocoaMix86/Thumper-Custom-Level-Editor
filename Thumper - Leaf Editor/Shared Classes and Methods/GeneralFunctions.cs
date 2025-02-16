@@ -281,6 +281,7 @@ namespace Thumper_Custom_Level_Editor
             toolstripFormMinimize.Visible = true;
             toolstripFormRestore.Visible = true;
             toolstripFormIcon.Visible = true;
+            toolstripExitFullscreen.Visible = TCLE.Fullscreen;
         }
 
         /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947

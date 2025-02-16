@@ -231,6 +231,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (Fullscreen) {
                 this.MaximizedBounds = new Rectangle();
+                toolstripExitFullscreen.Visible = true;
             }
             else {
                 Rectangle bounds = Screen.FromHandle(this.Handle).WorkingArea;
@@ -241,6 +242,7 @@ namespace Thumper_Custom_Level_Editor
                 bounds.Width += 16;
                 bounds.Height += 16;
                 this.MaximizedBounds = bounds;
+                toolstripExitFullscreen.Visible = false;
             }
             this.WindowState = FormWindowState.Normal;
             this.WindowState = FormWindowState.Maximized;
@@ -437,7 +439,6 @@ namespace Thumper_Custom_Level_Editor
             //this will be the loading sound :D
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
 
-            toolstripAddScene.Enabled = true;
             toolstripProject.Enabled = true;
             toolstripEdit.Enabled = true;
             toolstripWindow.Enabled = true;
