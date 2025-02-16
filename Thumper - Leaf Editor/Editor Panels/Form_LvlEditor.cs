@@ -789,14 +789,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (LvlLeafData _leaf in LvlLeafs) {
                 FileInfo leaffile = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Value.Name == _leaf.leafname).Value;
                 leaffile?.Refresh();
-                int beats = (leaffile != null && leaffile.Exists) ? _leaf.beats : -1;
+                int beats = (leaffile != null && leaffile.Exists) ? 0 : -1;
                 if (beats == -1) {
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle.BackColor = Color.Maroon;
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"file not found";
+                    _leaf.beats = 1;
                 }
                 else {
                     beats = (int)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"];
                     beattotal += beats;
+                    _leaf.beats = beats;
                     string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle = null;
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"{beats} beats -- {time}";

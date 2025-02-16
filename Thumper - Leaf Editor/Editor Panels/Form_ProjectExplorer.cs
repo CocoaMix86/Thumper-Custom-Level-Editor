@@ -117,7 +117,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     ImageKey = imageextensions.Contains(file.Extension) ? "image" : file.Extension,
                     SelectedImageKey = imageextensions.Contains(file.Extension) ? "image" : file.Extension,
                     ContextMenuStrip = contextMenuFileClick,
-                    ForeColor = TCLE.Documents.Any(x => x.DockHandler.TabText.StartsWith(file.Name)) ? Color.Green : Properties.Settings.Default.ColorProjExpText
+                    ForeColor = Properties.Settings.Default.ColorProjExpText
                 };
                 //this part finds any node that has the same name and highlights them red
                 ///FindDuplicateFile(_tn, Color.Red);
