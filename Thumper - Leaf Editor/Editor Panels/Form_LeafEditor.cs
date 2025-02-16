@@ -263,6 +263,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
+
+            if (RowPostPrePainting) {
+                if (e.ColumnIndex < FrozenColumnOffset) {
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                    CellPaintIcons(e);
+                }
+                return;
+            }
+
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
                 if (Properties.Settings.Default.LeafOptionShowGrid && Properties.Settings.Default.LeafOptionConnectBars) {
                     //if previous cell value is different than this cell, put in a divider
@@ -348,7 +357,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            if (e.RowIndex == -1 || e.ColumnIndex == -1) {
+            if (e.RowIndex == -1 || e.ColumnIndex < FrozenColumnOffset) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             }
             else {
@@ -430,17 +439,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private bool RowPrePainting;
+        private bool RowPostPrePainting;
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
             if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) {
                 RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
-                e.PaintHeader(true);
                 RowPrePainting = false;
 
                 if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null)) {
-                    return;
+                    goto paintheader;
                 }
                 //setup variables to reference later when needed
                 int offsetportion = (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3);
@@ -448,7 +457,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
                 SampleData samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == seqref.obj_name);
                 if (samp == null) {
-                    return;
+                    goto paintheader;
                 }
                 //export pc file to playable file
                 if (samp.wave == null) {
@@ -472,35 +481,68 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //math to offset drawing the wave horizontally based on where the active beats are
                     e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2);
                 }
+                RowPostPrePainting = true;
+                e.PaintCells(e.RowBounds, e.PaintParts);
+                RowPostPrePainting = false;
             }
             //HANDLE OBJECTS THAT LAST LONGER THAN 1 BEAT
             else if (SequencerObjects[e.RowIndex].friendly_param.Contains('[')) {
                 RowPrePainting = true;
-                e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
-                e.PaintHeader(true);
+                e.PaintCells(e.RowBounds, e.PaintParts);
                 RowPrePainting = false;
 
                 if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
-                    return;
+                    goto paintheader;
                 bool success = int.TryParse(SequencerObjects[e.RowIndex].friendly_param.Split('[')[1].Split(' ')[0], out int beats);
+                beats--;
                 if (!success)
-                    return;
+                    goto paintheader;
                 int offsetportion = (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3);
-                int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + 1;
+                int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + 1 - 1;
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
                 int cellwidth = trackZoom.Value;
                 Color alpha = seqref.highlight_color;
                 alpha = Color.FromArgb(160, alpha.R, alpha.G, alpha.B);
-                foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
-                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex)
-                        continue;
-                    e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, beats * cellwidth, e.RowBounds.Height - 4);
+                //
+                if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 2].data_points.Where(x => x.value != null)) {
+                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
+                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, beats * cellwidth, e.RowBounds.Height / 5);
+                    }
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 1].data_points.Where(x => x.value != null)) {
+                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
+                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5, beats * cellwidth, e.RowBounds.Height / 5);
+                    }
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex].data_points.Where(x => x.value != null)) {
+                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
+                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 2, beats * cellwidth, e.RowBounds.Height / 5);
+                    }
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 1].data_points.Where(x => x.value != null)) {
+                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
+                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 3, beats * cellwidth, e.RowBounds.Height / 5);
+                    }
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 2].data_points.Where(x => x.value != null)) {
+                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
+                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 4, beats * cellwidth, e.RowBounds.Height / 5);
+                    }
                 }
+                else {
+                    foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
+                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
+                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, beats * cellwidth, e.RowBounds.Height - 4);
+                    }
+                }
+                RowPostPrePainting = true;
+                e.PaintCells(e.RowBounds, e.PaintParts);
+                RowPostPrePainting = false;
             }
             else {
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
-                e.PaintHeader(true);
             }
+            paintheader:
+            RowPrePainting = true;
+            e.PaintHeader(true);
+            RowPrePainting = false;
         }
 
         private void trackEditor_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
