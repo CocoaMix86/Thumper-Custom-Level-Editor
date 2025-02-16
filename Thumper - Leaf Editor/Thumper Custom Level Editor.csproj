@@ -49,6 +49,14 @@
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <SignAssembly>False</SignAssembly>
     <ErrorReport>none</ErrorReport>
+    <Version>3.0.0 alpha v3</Version>
+    <Authors>CocoaMix</Authors>
+    <Company>CocoaMix Inc.</Company>
+    <Copyright>copyright 2082</Copyright>
+    <PackageProjectUrl>https://github.com/CocoaMix86/Thumper-Custom-Level-Editor</PackageProjectUrl>
+    <PackageIcon>icon-tcle.png</PackageIcon>
+    <Title>Thumper Custom Level Editor</Title>
+    <Description>A tool used to create custom levels for the video game THUMPER.</Description>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>
@@ -323,6 +331,10 @@
     </None>
     <None Update="dll\SoundTouch_x64.dll">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="image assets\icons\icon-tcle.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -1,4 +1,6 @@
-﻿namespace Thumper_Custom_Level_Editor
+﻿using System.Reflection;
+
+namespace Thumper_Custom_Level_Editor
 {
     public partial class ImageMessageBox : Form
     {
@@ -8,6 +10,7 @@
         public ImageMessageBox()
         {
             InitializeComponent();
+            lblVersion.Text = $"Thumper Custom Level Editor -- {Assembly.GetExecutingAssembly().GetName().Version}";
         }
 
         public ImageMessageBox(string path, TCLE _tcle = null)
