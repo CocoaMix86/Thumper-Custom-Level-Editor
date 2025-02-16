@@ -40,7 +40,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private string renamefile;
         private string renamenode;
         private static string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
-        private static string[] imageextensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
         private DirectoryInfo ProjectDirectory => TCLE.WorkingFolder;
         private TreeNode previousNode;
         private List<TreeNode> filestocopy;
@@ -114,8 +113,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TreeNode _tn = new() {
                     Text = file.Name,
                     Name = file.Name,
-                    ImageKey = imageextensions.Contains(file.Extension) ? "image" : file.Extension,
-                    SelectedImageKey = imageextensions.Contains(file.Extension) ? "image" : file.Extension,
+                    ImageKey = TCLE.ImageExtensions.Contains(file.Extension) ? "image" : file.Extension,
+                    SelectedImageKey = TCLE.ImageExtensions.Contains(file.Extension) ? "image" : file.Extension,
                     ContextMenuStrip = contextMenuFileClick,
                     ForeColor = Properties.Settings.Default.ColorProjExpText
                 };
