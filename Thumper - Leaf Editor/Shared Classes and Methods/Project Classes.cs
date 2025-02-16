@@ -74,9 +74,17 @@ namespace Thumper_Custom_Level_Editor
                 if (value > 99999.99m)
                     value = 99999.99m;
                 Bpm = value;
-                foreach (IDockContent dc in TCLE.Instance.dockMain.Documents) {
-                    if (dc.DockHandler.TabText.Contains(".master")) (dc as Form_MasterEditor).propertyGridMaster.Refresh();
+                foreach (IDockContent dc in TCLE.Documents) {
                     if (dc.DockHandler.TabText.Contains(".lvl")) (dc as Form_LvlEditor).RecalculateRuntime();
+                    else if (dc.DockHandler.TabText.Contains(".gate")) (dc as Form_GateEditor).RecalculateRuntime();
+                    else if (dc.DockHandler.TabText.Contains(".master")) (dc as Form_MasterEditor).RecalculateRuntime();
+                    else if (dc.DockHandler.TabText.Contains(".leaf")) {
+                        foreach (Sequencer_Object seq in (dc as Form_LeafEditor).leafProperties.seq_objs) {
+                            seq.WaveBitmap = null;
+                        }
+                        TCLE.alzheimer();
+                        (dc as Form_LeafEditor).trackEditor.Invalidate();
+                    }
                 }
                 foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.Editor != null)) {
                     samp.UpdateRuntime();

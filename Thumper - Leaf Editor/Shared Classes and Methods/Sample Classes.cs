@@ -14,7 +14,16 @@ namespace Thumper_Custom_Level_Editor
         public string File { get; set; }
         public string TempFile { get; set; }
 
-        public string obj_name { get; set; }
+        public string obj_name
+        {
+            get => Obj_Name;
+            set {
+                if (!value.EndsWith(".samp"))
+                    value += ".samp";
+                Obj_Name = value;
+            }
+        }
+        private string Obj_Name;
         public string path { get; set; }
         public decimal volume { get; set; }
         public decimal pitch

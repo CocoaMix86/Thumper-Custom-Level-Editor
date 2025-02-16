@@ -672,6 +672,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.ColumnIndex == -1)
                 return;
+            ResetRowAfterEdit = false;
             DataGridView dgv = (DataGridView)sender;
             //test if column header was clicked for global disable
             if (e.RowIndex == -1 && e.ColumnIndex == 0) {
@@ -685,7 +686,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.PlaySound("UIselect");
             }
             //test if column header was clicked for global mute
-            if (e.RowIndex == -1 && e.ColumnIndex == 1) {
+            else if (e.RowIndex == -1 && e.ColumnIndex == 1) {
                 GlobalMute = !GlobalMute;
                 foreach (Sequencer_Object seq in SequencerObjects) {
                     seq.mute = GlobalMute;
@@ -695,7 +696,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.PlaySound("UIselect");
             }
             //test if column header was clicked for global expand
-            if (e.RowIndex == -1 && e.ColumnIndex == 2) {
+            else if (e.RowIndex == -1 && e.ColumnIndex == 2) {
                 //if ShowLanes, don't alter lane visibility
                 if (Properties.Settings.Default.LeafOptionShowLane)
                     return;
