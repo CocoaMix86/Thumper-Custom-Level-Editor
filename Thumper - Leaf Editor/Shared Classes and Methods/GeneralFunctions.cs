@@ -29,6 +29,7 @@ namespace Thumper_Custom_Level_Editor
         public static Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
         public static Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
         public static string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
+        private static string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master" };
 
         private void LoadQuickValues()
         {
@@ -238,12 +239,11 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        private static List<string> extensions = new() { ".leaf", ".lvl", ".gate", ".master"};
         public static string SearchReferences(string searchreference)
         {
             string referencefiles = "";
             //search all files in the project folder
-            foreach (FileInfo file in WorkingFolder.GetFiles("*", SearchOption.AllDirectories).Where(x => extensions.Contains(x.Extension))) {
+            foreach (FileInfo file in WorkingFolder.GetFiles("*", SearchOption.AllDirectories).Where(x => ProjectExtensions.Contains(x.Extension))) {
                 //skip self to not include self
                 if (file.Name == searchreference)
                     continue;
