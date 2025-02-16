@@ -633,7 +633,7 @@ namespace Thumper_Custom_Level_Editor
                 return false;
 
             if (ImageExtensions.Contains(filepath.Extension.ToLower())) {
-                ImageViewer image = new(System.Drawing.Image.FromFile(filepath.FullName));
+                ImageViewer image = new(System.Drawing.Image.FromFile(filepath.FullName)) { Text = filepath.Name};
                 image.Show();
                 return true;
             }
