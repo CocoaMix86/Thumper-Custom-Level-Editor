@@ -23,6 +23,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafProperties.seq_objs = LoadSequencer(load["seq_objs"], LeafProperties);
                 LoadTracksFromSequencer(LeafProperties.seq_objs);
                 LoadEnd();
+                trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
+                trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
             }
         }
         ///Load LVL Sequencer
@@ -171,6 +173,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             foreach (Sequencer_Object seq in SequencerObjects)
                 seq.WaveBitmap = null;
+
+            Properties.Settings.Default.ZoomHoriz = trackZoom.Value;
         }
 
         private void trackZoomVert_Scroll(object sender, EventArgs e)
@@ -191,6 +195,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             foreach (Sequencer_Object seq in SequencerObjects)
                 seq.WaveBitmap = null;
+
+            Properties.Settings.Default.ZoomVert = trackZoomVert.Value;
         }
 
         private void trackEditor_Resize(object sender, EventArgs e)

@@ -571,5 +571,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["ColorProjExpText"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public int ZoomHoriz {
+            get {
+                return ((int)(this["ZoomHoriz"]));
+            }
+            set {
+                this["ZoomHoriz"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int ZoomVert {
+            get {
+                return ((int)(this["ZoomVert"]));
+            }
+            set {
+                this["ZoomVert"] = value;
+            }
+        }
     }
 }
