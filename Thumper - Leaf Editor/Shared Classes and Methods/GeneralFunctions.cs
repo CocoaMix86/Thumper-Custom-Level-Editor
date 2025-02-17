@@ -77,6 +77,7 @@ namespace Thumper_Custom_Level_Editor
                 dgvc.FillWeight = 0.001F;
                 dgvc.DefaultCellStyle.Font = new Font("Consolas", 8);
                 dgvc.ReadOnly = false;
+                dgvc.Width = Properties.Settings.Default.ZoomHoriz;
             }
         }
 

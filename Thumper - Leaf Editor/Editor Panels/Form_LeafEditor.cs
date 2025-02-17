@@ -23,8 +23,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafProperties.seq_objs = LoadSequencer(load["seq_objs"], LeafProperties);
                 LoadTracksFromSequencer(LeafProperties.seq_objs);
                 LoadEnd();
-                trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
-                trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
             }
         }
         ///Load LVL Sequencer
@@ -32,6 +30,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             RenderForm();
+            ColorFormElements();
             this.Icon = Properties.Resources.ico_lvl;
 
             if (toload != null) {
@@ -54,6 +53,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.DoubleBufferDGV(trackEditor, true);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
             BuildObjectTree();
+            trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
+            trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
         }
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
         {
@@ -125,7 +126,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool GlobalDisable;
         private bool GlobalExpand;
         private bool IsInterpolating;
-        private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties.seq_objs; set => LeafProperties.seq_objs = value; }
+        private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         private List<SaveState> _undolistleaf = new();
         public DataObject ClipBoardDataPoints = new();
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
@@ -156,10 +157,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIselect");
             panelZoom.Visible = !panelZoom.Visible;
             panelZoom.BringToFront();
+            if (!panelZoom.Visible && ZoomHasChanged) {
+                ZoomHasChanged = false;
+                foreach (Sequencer_Object seq in SequencerObjects)
+                    seq.WaveBitmap = null;
+            }
         }
 
+        public bool ZoomHasChanged;
         private void trackZoom_Scroll(object sender, EventArgs e)
         {
+            Properties.Settings.Default.ZoomHoriz = trackZoom.Value;
+            ZoomHasChanged = true;
             foreach (DataGridViewColumn dgvc in Columns) {
                 dgvc.Width = trackZoom.Value;
             }
@@ -170,15 +179,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.FirstDisplayedScrollingColumnIndex = display;
                 trackEditor.Scroll += trackEditor_Scroll;
             }
-
-            foreach (Sequencer_Object seq in SequencerObjects)
-                seq.WaveBitmap = null;
-
-            Properties.Settings.Default.ZoomHoriz = trackZoom.Value;
         }
 
         private void trackZoomVert_Scroll(object sender, EventArgs e)
         {
+            Properties.Settings.Default.ZoomVert = trackZoomVert.Value;
+            ZoomHasChanged = true;
             foreach (DataGridViewRow dgvr in trackEditor.Rows) {
                 dgvr.Height = trackZoomVert.Value;
             }
@@ -192,11 +198,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 trackEditor.Scroll += trackEditor_Scroll;
             }
-
-            foreach (Sequencer_Object seq in SequencerObjects)
-                seq.WaveBitmap = null;
-
-            Properties.Settings.Default.ZoomVert = trackZoomVert.Value;
         }
 
         private void trackEditor_Resize(object sender, EventArgs e)
@@ -485,7 +486,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
                         continue;
                     //math to offset drawing the wave horizontally based on where the active beats are
-                    e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2);
+                    e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, (int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4);
                 }
                 RowPostPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
@@ -936,9 +937,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            //controldown = e.Control;
-            //shiftdown = e.Shift;
-            //altdown = e.Alt;
+            if (ModifierKeys is not Keys.Control and not Keys.Shift && ZoomHasChanged) {
+                ZoomHasChanged = false;
+                foreach (Sequencer_Object seq in SequencerObjects)
+                    seq.WaveBitmap = null;
+            }
         }
 
         private void AllowArrowMovement(object sender, PreviewKeyDownEventArgs e)
