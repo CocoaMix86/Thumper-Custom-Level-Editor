@@ -1331,7 +1331,7 @@
             this.toolStripMain.Location = new Point(0, 0);
             this.toolStripMain.Name = "toolStripMain";
             this.toolStripMain.RenderMode = ToolStripRenderMode.System;
-            this.toolStripMain.Size = new Size(170, 25);
+            this.toolStripMain.Size = new Size(139, 25);
             this.toolStripMain.TabIndex = 151;
             this.toolStripMain.Text = "toolStripMain";
             // 
@@ -1393,6 +1393,7 @@
             this.toolstripMainUndo.Name = "toolstripMainUndo";
             this.toolstripMainUndo.Size = new Size(32, 22);
             this.toolstripMainUndo.Text = "toolStripSplitButton1";
+            this.toolstripMainUndo.ToolTipText = "Undo (Ctrl+Z)";
             this.toolstripMainUndo.ButtonClick += this.toolstripMainUndo_ButtonClick;
             this.toolstripMainUndo.DropDownOpening += this.toolstripMainUndo_DropDownOpening;
             this.toolstripMainUndo.DropDownOpened += this.toolstripMainUndo_DropDownOpened;
