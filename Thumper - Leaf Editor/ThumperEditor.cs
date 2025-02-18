@@ -325,6 +325,10 @@ namespace Thumper_Custom_Level_Editor
                 int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyData == Keybinds["Next Workspace"] ? 1 : -1);
                 docs[mod(docind, docs.Count)].DockHandler.Activate();
             }
+            //Undo
+            else if (e.KeyData == Keybinds["Undo"]) {
+                toolstripMainUndo.PerformClick();
+            }
             //e.Handled = true;
         }
         #endregion

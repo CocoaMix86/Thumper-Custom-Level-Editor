@@ -2111,6 +2111,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void PerformUndo(int undolistindex)
         {
             LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? LoadedLeaf, LvlSequencer);
+            LeafProperties.seq_objs = LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties);
+            LoadTracksFromSequencer(LeafProperties.seq_objs);
+            LoadEnd();
+            UndoList.RemoveRange(0, undolistindex);
         }
 
         ///SAVE

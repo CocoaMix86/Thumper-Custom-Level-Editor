@@ -33,6 +33,7 @@ namespace Thumper_Custom_Level_Editor
                 tmsi.ForeColor = Color.White;
                 undomenu.Items.Add(tmsi);
             }
+            undomenu.Items.RemoveAt(undomenu.Items.Count - 1);
             return undomenu;
         }
 
@@ -51,24 +52,13 @@ namespace Thumper_Custom_Level_Editor
         {
             ToolStripMenuItem tmsi = (ToolStripMenuItem)sender;
             int index = tmsi.Owner.Items.IndexOf(tmsi);
-
-            if (tmsi.Owner.Items.Count == 1 && tmsi.Owner.Items[0].Text.Contains("No changes"))
-                return;
-
             UndoFunction(index + 1);
             TCLE.PlaySound("UIrevertchanges");
         }
 
         public static void UndoFunction(int undoindex)
         {
-            if (undoindex >= UndoList.Count) {
-                //LoadLeaf(_undolistleaf.Last().savestate, LoadedLeaf, false);
-                UndoList.RemoveRange(0, UndoList.Count - 1);
-            }
-            else {
-                //LoadLeaf(_undolistleaf[undoindex].savestate, LoadedLeaf, false);
-                UndoList.RemoveRange(0, undoindex);
-            }
+            TCLE.GlobalActiveDocument.GetType().GetMethod("PerformUndo").Invoke(TCLE.GlobalActiveDocument, new object[] {undoindex});
         }
 
         public static void ClearReloadUndo(dynamic _load)
