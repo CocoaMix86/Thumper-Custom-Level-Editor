@@ -29,10 +29,6 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public Form_GateEditor parent;
         [Browsable(false)]
-        public JObject revertPoint { get; set; }
-        [Browsable(false)]
-        public List<JObject> undoItems { get; set; }
-        [Browsable(false)]
         public ObservableCollection<GateLvlData> gatelvls;
         [Browsable(false)]
         public GateLvlData sublevel { get; set; }
@@ -42,7 +38,6 @@ namespace Thumper_Custom_Level_Editor
             parent = Parent;
             FilePath = path;
             sublevel = new();
-            undoItems = new();
             gatelvls = new();
             gatelvls.CollectionChanged += parent.gatelvls_CollectionChanged;
         }

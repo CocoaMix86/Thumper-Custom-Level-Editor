@@ -40,10 +40,6 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public Form_MasterEditor parent;
         [Browsable(false)]
-        public JObject revertPoint { get; set; }
-        [Browsable(false)]
-        public List<JObject> undoItems { get; set; }
-        [Browsable(false)]
         public ObservableCollection<MasterLvlData> masterlvls;
         [Browsable(false)]
         public MasterLvlData sublevel { get; set; }
@@ -53,7 +49,6 @@ namespace Thumper_Custom_Level_Editor
             parent = Parent;
             FilePath = path;
             sublevel = new();
-            undoItems = new();
             masterlvls = new();
             masterlvls.CollectionChanged += parent.masterlvls_CollectionChanged;
         }

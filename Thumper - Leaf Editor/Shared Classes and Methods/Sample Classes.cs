@@ -98,10 +98,6 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public Form_SampleEditor parent;
         [Browsable(false)]
-        public JObject revertPoint { get; set; }
-        [Browsable(false)]
-        public List<JObject> undoItems { get; set; }
-        [Browsable(false)]
         public ObservableCollection<SampleData> samplelist;
         [Browsable(false)]
         public SampleData sample { get; set; }
@@ -111,7 +107,6 @@ namespace Thumper_Custom_Level_Editor
             parent = Parent;
             FilePath = path;
             sample = new();
-            undoItems = new();
             samplelist = new();
             samplelist.CollectionChanged += parent._samplelist_CollectionChanged;
         }

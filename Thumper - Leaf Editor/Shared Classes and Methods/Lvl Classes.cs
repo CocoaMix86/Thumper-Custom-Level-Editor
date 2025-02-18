@@ -47,10 +47,6 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public Form_LvlEditor parent;
         [Browsable(false)]
-        public JObject revertPoint { get; set; }
-        [Browsable(false)]
-        public List<JObject> undoItems { get; set; }
-        [Browsable(false)]
         public ObservableCollection<LvlLeafData> lvlleafs;
         [Browsable(false)]
         public dynamic seqJSON;
@@ -76,7 +72,6 @@ namespace Thumper_Custom_Level_Editor
             parent = Parent;
             FilePath = path;
             sublevel = new();
-            undoItems = new();
             seq_objs = new();
             lvlleafs = new();
             lvlleafs.CollectionChanged += parent.lvlleaf_CollectionChanged;

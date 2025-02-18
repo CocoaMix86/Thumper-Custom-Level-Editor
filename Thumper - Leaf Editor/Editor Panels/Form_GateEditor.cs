@@ -420,6 +420,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadGate(_load, LoadedGate);
         }
 
+        public List<SaveState> UndoList = new();
+        public List<SaveState> GetUndoList()
+        {
+            return UndoList;
+        }
+
+        public void PerformUndo(int undolistindex)
+        {
+            if (undolistindex > UndoList.Count - 1)
+                return;
+            LoadGate(UndoList[undolistindex].savestate, LoadedGate);
+            UndoList.RemoveRange(0, undolistindex);
+        }
+
         ///SAVE
         public void Save(bool playsound = true)
         {
