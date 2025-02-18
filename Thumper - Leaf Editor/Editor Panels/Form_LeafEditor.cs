@@ -23,6 +23,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafProperties.seq_objs = LoadSequencer(load["seq_objs"], LeafProperties);
                 LoadTracksFromSequencer(LeafProperties.seq_objs);
                 LoadEnd();
+                UndoList.Add(new SaveState() {
+                    reason = "",
+                    savestate = load
+                });
             }
         }
         ///Load LVL Sequencer
@@ -107,7 +111,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return LeafProperties; }
             set {
                 LeafProperties = value;
-                SaveCheckAndWrite(false);
+                SaveCheckAndWrite(false, "Leaf Property Change");
             }
         }
         private LeafProperties LeafProperties;
@@ -116,6 +120,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private dynamic leafjson;
         private int CurrentRow;
         private int MouseCurrentColumn;
+        private int LastRowEdit;
         private static int FrozenColumnOffset = 3;
         private bool randomizing;
         private bool ismoving;
@@ -126,12 +131,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool GlobalDisable;
         private bool GlobalExpand;
         private bool IsInterpolating;
+        private bool ZoomHasChanged;
+        private bool ResetRowAfterEdit;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
-        private List<SaveState> _undolistleaf = new();
         public DataObject ClipBoardDataPoints = new();
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
-        private int LastRowEdit;
-        private bool ResetRowAfterEdit;
+        public List<SaveState> UndoList = new();
         #endregion
 
         #region EventHandlers
@@ -164,7 +169,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public bool ZoomHasChanged;
         private void trackZoom_Scroll(object sender, EventArgs e)
         {
             Properties.Settings.Default.ZoomHoriz = trackZoom.Value;
@@ -657,12 +661,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //sets flag that leaf has unsaved changes
                 if (changes) {
-                    if (trackEditor.SelectedCells.Count > 1)
-                        SaveCheckAndWrite(false);
-                    //SaveCheckAndWrite(false, $"{trackEditor.SelectedCells.Count} beats value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
-                    else
-                        SaveCheckAndWrite(false);
-                    //SaveCheckAndWrite(false, $"Beat {columnindex} value set: {_val ?? "empty"}", $"{_tracks[rowindex].friendly_type} {_tracks[rowindex].friendly_param}");
+                    SaveCheckAndWrite(false, "Cell Value(s) Updated");
                 }
             }
             catch { }
@@ -772,14 +771,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
                     trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
                     trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
-                    SaveCheckAndWrite(false);
-                    //SaveCheckAndWrite(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+                    SaveCheckAndWrite(false, "Delete Single Cell Value");
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
                     if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
                         return;
                     CellValueChanged(e.RowIndex, e.ColumnIndex, true);
-                    //_undolistleaf.RemoveAt(1);
                 }
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
             }
@@ -800,13 +797,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
                     trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
                     trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
-                    SaveCheckAndWrite(false);
-                    //SaveCheckAndWrite(false, "Deleted single cell", $"{_tracks[e.RowIndex].friendly_type} {_tracks[e.RowIndex].friendly_param}");
+                    SaveCheckAndWrite(false, "Delete Single Cell Value");
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     CellValueChanged(e.RowIndex, e.ColumnIndex, true);
-                    //_undolistleaf.RemoveAt(1);
                 }
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
             }
@@ -838,8 +833,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LogUndo = false;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
                 LogUndo = true;
-                SaveCheckAndWrite(false);
-                //SaveCheckAndWrite(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+                SaveCheckAndWrite(false, "Delete Cell Values");
             }
         }
         private void trackEditor_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -849,8 +843,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LogUndo = false;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
                 LogUndo = true;
-                SaveCheckAndWrite(false);
-                //SaveCheckAndWrite(false, "Deleted cell values", $"{_tracks[_selecttrack].friendly_type} {_tracks[_selecttrack].friendly_param}");
+                SaveCheckAndWrite(false, "Delete Cell Values");
             }
             else if (e.Control) {
                 if (e.KeyCode == Keys.OemSemicolon)
@@ -888,7 +881,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         }
                     }
                     if (shifted)
-                        SaveCheckAndWrite(false);
+                        SaveCheckAndWrite(false, "Shift Cell Values");
                     //SaveCheckAndWrite(false, $"Shifted selected cells {(e.KeyCode == Keys.Left ? "left" : "right")}", $"");
                 }
             }
@@ -1063,6 +1056,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
             TrackUpdateHighlighting(seq);
             FindMissingLaneObjects(seq);
+            SaveCheckAndWrite(false, "Add Object");
             TCLE.PlaySound("UIobjectadd");
         }
 
@@ -1220,7 +1214,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             FindMissingLaneObjects(SequencerObjects[CurrentRow]);
             trackEditor.InvalidateRow(_currentseq.editor_row.Index);
 
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Add Object");
             TCLE.PlaySound("UIobjectadd");
         }
 
@@ -1241,7 +1235,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     selectedrows.Remove(Lanes[x]);
                 }
             }
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Delete Object");
             TCLE.PlaySound("UIobjectremove");
 
             //disable elements if there are no tracks
@@ -1316,7 +1310,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             trackEditor.ResumeLayout();
 
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Move Object(s) Up");
         }
 
         private Sequencer_Object[] ReturnLanesFromName(Sequencer_Object row, string lane)
@@ -1425,7 +1419,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor[dgvc.ColumnIndex, dgvc.RowIndex].Selected = true;
             }
 
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Move Object(s) Down");
         }
 
         private void btnTrackCopy_Click(object sender, EventArgs e)
@@ -1501,7 +1495,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ispasting = false;
             TCLE.PlaySound("UIkpaste");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Paste Objects");
             //SaveCheckAndWrite(false, "Pasted tracks", "");
         }
 
@@ -1523,7 +1517,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CellValueChanged(filledcells[0].RowIndex, filledcells[0].ColumnIndex, true);
 
             TCLE.PlaySound("UIdataerase");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Clear Object Values");
             //SaveCheckAndWrite(false, $"Cleared {selectedrows.Count} track(s)", $"");
         }
 
@@ -1677,7 +1671,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TrackUpdateHighlighting(interpobject);
             ShowRawTrackData(interpobject);
             TCLE.PlaySound("UIinterpolate");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Interpolated");
         }
 
         private void btnLeafColors_Click(object sender, EventArgs e)
@@ -1749,7 +1743,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //reduce beat count of the leaf that was just split and save it
             LeafProperties.beats = splitindex;
-            SaveCheckAndWrite(true);
+            SaveCheckAndWrite(true, "");
             TCLE.PlaySound("UIleafsplit");
             //load new leaf that was just split
             TCLE.OpenFile(SplitFile);
@@ -1765,19 +1759,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            SaveCheckAndWrite(true);
+            SaveCheckAndWrite(true, "");
             //SaveCheckAndWrite(true, "Revert to last save", "Revert");
             LoadLeaf(leafjson, LoadedLeaf);
             TCLE.PlaySound("UIrevertnew");
-        }
-
-        private void btnUndoLeaf_Click(object sender, EventArgs e)
-        {
-            UndoFunction(1);
-        }
-        private void btnUndoLeaf_DropDownOpening(object sender, EventArgs e)
-        {
-            ///btnUndoLeaf.DropDown = CreateUndoMenu(_undolistleaf);
         }
 
         private void btnLeafAutoPlace_Click(object sender, EventArgs e)
@@ -1840,7 +1825,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             TCLE.PlaySound("UIaddrandom");
             randomizing = false;
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Added Random Object");
         }
 
         private void btnLeafRandomValues_Click(object sender, EventArgs e)
@@ -1873,7 +1858,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 TCLE.PlaySound("UIaddrandom");
                 randomizing = false;
-                SaveCheckAndWrite(false);
+                SaveCheckAndWrite(false, "Set Random Values");
                 //SaveCheckAndWrite(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
             }
         }
@@ -1961,7 +1946,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             EditorIsSaved = true;
-            SaveCheckAndWrite(true);
+            SaveCheckAndWrite(true, "");
             TrackTimeSigHighlighting();
         }
 
@@ -2118,6 +2103,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadEnd();
         }
 
+        public List<SaveState> GetUndoList()
+        {
+            return UndoList;
+        }
+
+        public void PerformUndo(int undolistindex)
+        {
+            LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? LoadedLeaf, LvlSequencer);
+        }
+
         ///SAVE
         public void Save(bool playsound = true)
         {
@@ -2126,7 +2121,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveAs();
             }
             else
-                SaveCheckAndWrite(true, playsound);
+                SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
         public FileInfo SaveAs(bool isnew = false)
@@ -2147,7 +2142,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     leafProperties.FilePath = loadedleaf;
 
-                SaveCheckAndWrite(true, true);
+                SaveCheckAndWrite(true, "", true);
                 if (isnew)
                     TCLE.CloseFileLock(loadedleaf);
                 //after saving new file, refresh the project explorer
@@ -2161,7 +2156,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return EditorIsSaved;
         }
 
-        public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
+        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorIsLoading)
                 return;
@@ -2169,18 +2164,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.MainBeeble.MakeFace();
 
             EditorIsSaved = IsSaved;
+            JObject _saveJSON = BuildSave(leafProperties);
+            //
             if (!IsSaved) {
                 //denote editor tab is not saved
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}" + "*";
-                //add current JSON to the undo list
-                leafProperties.undoItems.Add(BuildSave(leafProperties));
+                //update the undo list
+                UndoList.Insert(0, new SaveState() {
+                    reason = Reason,
+                    savestate = _saveJSON
+                });
             }
             else {
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}";
+                leafProperties.revertPoint = _saveJSON;
                 //If leaf, build the JSON to write to file
                 if (LoadedLeaf.Extension == ".leaf") {
-                    JObject _saveJSON = BuildSave(leafProperties);
-                    leafProperties.revertPoint = _saveJSON;
                     //write JSON to file
                     TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLeaf], _saveJSON);
                     TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
@@ -2204,7 +2203,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (LeafProperties == null)
                 return;
-            string data = trackEditor.ColumnCount.ToString();
+            int data = trackEditor.ColumnCount - FrozenColumnOffset;
 
             if (LeafProperties.beats + FrozenColumnOffset > trackEditor.ColumnCount) {
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
@@ -2217,7 +2216,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make sure new cells follow the time sig
             TrackTimeSigHighlighting();
             //sets flag that leaf has unsaved changes
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, $"Leaf length changed {data} -> {LeafProperties.beats}");
             //SaveCheckAndWrite(false, "Leaf length", $"{data} -> {_beats}");
         }
 
@@ -2447,7 +2446,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SequencerObjects.Clear();
             trackEditor.Rows.Clear();
             this.Text = "Leaf Editor";
-            SaveCheckAndWrite(true);
+            SaveCheckAndWrite(true, "");
         }
 
         private void BuildObjectTree()
@@ -2549,73 +2548,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             return foundnode;
         }
-
-        #region Undo Functions
-        private readonly ToolStripDropDownMenu undomenu = new() {
-            BackColor = Color.FromArgb(40, 40, 40),
-            ShowCheckMargin = false,
-            ShowImageMargin = false,
-            ShowItemToolTips = false,
-            MaximumSize = new Size(2000, 500)
-        };
-        private ToolStripDropDown CreateUndoMenu(List<SaveState> undolist)
-        {
-            undomenu.Items.Clear();
-
-            foreach (SaveState s in undolist) {
-                ToolStripMenuItem tmsi = new() {
-                    Text = s.reason
-                };
-                tmsi.MouseEnter += undoMenu_MouseEnter;
-                tmsi.Click += undoItem_Click;
-                tmsi.BackColor = Color.FromArgb(40, 40, 40);
-                tmsi.ForeColor = Color.White;
-                undomenu.Items.Add(tmsi);
-            }
-            return undomenu;
-        }
-        private static void undoMenu_MouseEnter(object sender, EventArgs e)
-        {
-            Color backcolor = Color.FromArgb(40, 40, 40);
-            ToolStrip parent = ((ToolStripMenuItem)sender).Owner;
-            for (int x = parent.Items.Count - 1; x >= 0; x--) {
-                parent.Items[x].BackColor = backcolor;
-                if (parent.Items[x] == sender)
-                    backcolor = Color.Maroon;
-            }
-        }
-        private void undoItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem tmsi = (ToolStripMenuItem)sender;
-            int index = tmsi.Owner.Items.IndexOf(tmsi);
-
-            if (tmsi.Owner.Items.Count == 1 && tmsi.Owner.Items[0].Text.Contains("No changes"))
-                return;
-
-            UndoFunction(index + 1);
-            TCLE.PlaySound("UIrevertchanges");
-        }
-        private void UndoFunction(int undoindex)
-        {
-            if (undoindex >= _undolistleaf.Count) {
-                //LoadLeaf(_undolistleaf.Last().savestate, LoadedLeaf, false);
-                _undolistleaf.RemoveRange(0, _undolistleaf.Count - 1);
-            }
-            else {
-                //LoadLeaf(_undolistleaf[undoindex].savestate, LoadedLeaf, false);
-                _undolistleaf.RemoveRange(0, undoindex);
-            }
-        }
-        private void ClearReloadUndo(dynamic _load)
-        {
-            _undolistleaf.Clear();
-            leafjson = _load;
-            _undolistleaf.Insert(0, new SaveState() {
-                reason = $"No changes",
-                savestate = leafjson
-            });
-        }
-        #endregion
+                
         #region Cut Copy Paste
         public void Copy()
         {
@@ -2631,8 +2564,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LogUndo = false;
             CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
             LogUndo = true;
-            SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, "Cut cells", $"");
+            SaveCheckAndWrite(false, "Cut cells");
         }
 
         public void Paste()
@@ -2666,8 +2598,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         exit:
-            SaveCheckAndWrite(false);
-            //SaveCheckAndWrite(false, $"Pasted cells", $"");
+            SaveCheckAndWrite(false, "Pasted cells");
         }
         #endregion
 

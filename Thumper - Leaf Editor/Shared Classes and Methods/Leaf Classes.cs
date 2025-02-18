@@ -130,8 +130,6 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public JObject revertPoint { get; set; }
         [Browsable(false)]
-        public List<JObject> undoItems { get; set; }
-        [Browsable(false)]
         public ObservableCollection<Sequencer_Object> seq_objs;
         [Browsable(false)]
         public Sequencer_Object selectedobj { get; set; }
@@ -147,7 +145,6 @@ namespace Thumper_Custom_Level_Editor
             Beats = _beats;
             selectedobj = new(this);
             selecteddatapoint = new();
-            undoItems = new();
             seq_objs = new();
             //seq_objs.CollectionChanged += parent.seqobjs_CollectionChanged;
         }

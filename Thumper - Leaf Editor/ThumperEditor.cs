@@ -970,5 +970,21 @@ namespace Thumper_Custom_Level_Editor
             // Initialize Sound library
             Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
         }
+
+        #region Undo System
+        private void toolstripMainUndo_ButtonClick(object sender, EventArgs e)
+        {
+            UndoSystem.UndoFunction(1);
+        }
+
+        private void toolstripMainUndo_DropDownOpening(object sender, EventArgs e)
+        {
+            toolstripMainUndo.DropDown = UndoSystem.CreateUndoMenu((List<SaveState>)TCLE.GlobalActiveDocument.GetType().GetMethod("GetUndoList").Invoke(TCLE.GlobalActiveDocument, null));
+        }
+
+        private void toolstripMainUndo_DropDownOpened(object sender, EventArgs e)
+        {
+        }
+        #endregion
     }
 }
