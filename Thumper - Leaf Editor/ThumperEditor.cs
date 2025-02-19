@@ -327,7 +327,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //Undo
             else if (e.KeyData == Keybinds["Undo"]) {
-                toolstripMainUndo.PerformClick();
+                UndoSystem.UndoFunction(1);
             }
             //e.Handled = true;
         }

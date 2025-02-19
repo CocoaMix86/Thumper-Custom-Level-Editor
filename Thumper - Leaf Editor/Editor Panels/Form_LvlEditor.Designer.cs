@@ -413,6 +413,7 @@
             this.propertyGridLvl.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridLvl.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridLvl.ViewForeColor = Color.White;
+            this.propertyGridLvl.PropertyValueChanged += this.propertyGridLvl_PropertyValueChanged;
             // 
             // btnLvlSequencer
             // 

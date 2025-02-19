@@ -2117,6 +2117,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd();
             UndoList.RemoveRange(0, undolistindex);
+            propertyGridLeaf.Refresh();
         }
 
         ///SAVE

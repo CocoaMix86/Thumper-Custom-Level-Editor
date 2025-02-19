@@ -5,6 +5,8 @@ using Un4seen.Bass.Misc;
 using System.Text;
 using NAudio.Wave.SampleProviders;
 using Windows.Devices.Bluetooth.Advertisement;
+using System.Drawing;
+using Windows.Storage.Pickers.Provider;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -21,8 +23,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             InitializeSampleStuff();
             TCLE.DoubleBufferDGV(sampleList, false);
 
-            if (load != null)
+            if (load != null) {
                 LoadSample(load, filepath);
+                UndoList.Add(new SaveState() {
+                    reason = "",
+                    savestate = load
+                });
+            }
             propertyGridSample.SelectedObject = SampleProperties;
         }
         private void Form_SampleEditor_Shown(object sender, EventArgs e)
@@ -75,7 +82,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get => SampleProperties;
             set {
                 SampleProperties = value;
-                SaveCheckAndWrite(false);
+                SaveCheckAndWrite(false, "woooooooooooooooooow");
             }
         }
         private SampleProperties SampleProperties;
@@ -142,14 +149,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sampleList.RowCount = 0;
             //repopulate dgv from list
             foreach (SampleData _samp in SampleList) {
-                sampleList.Rows.Add(new object[] { null, _samp.obj_name, (_samp.time != 0 ? $"{_samp.beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fff")}" : "play sample to get time" )});
+                sampleList.Rows.Add(new object[] { null, _samp.obj_name, (_samp.time != 0 ? $"{_samp.beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fff")}" : "play sample to get time") });
             }
             //enable certain buttons if there are enough items for them
             btnSampleAdd.Enabled = true;
             btnSampleDelete.Enabled = SampleList.Count > 0;
-
-            //set lvl save flag to false
-            SaveCheckAndWrite(false);
         }
 
         private void SamplenewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -194,17 +198,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
             string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+            bool addedfile = false;
             foreach (string dir in data) {
                 if (File.Exists(dir) && Path.GetExtension(dir) is ".fsb" or ".wav") {
                     ImportAudioToSamp(dir);
                     TCLE.alzheimer();
+                    addedfile = true;
                 }
                 else
                     MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
             }
+            if (addedfile)
+                SaveCheckAndWrite(false, "Add Sample");
             TCLE.PlaySound("UIobjectadd");
         }
 
+        private void propertyGridSample_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            SaveCheckAndWrite(false, "Change Sample Property");
+        }
         #endregion
 
         #region Buttons
@@ -257,8 +269,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (customforcesave)
-                //force save as this cannot be undone
-                SaveCheckAndWrite(true);
+                SaveCheckAndWrite(true, "");
+            else
+                SaveCheckAndWrite(false, "Remove Sample");
+            //force save as this cannot be undone
             TCLE.PlaySound("UIobjectremove");
         }
         private void btnSampleAdd_Click(object sender, EventArgs e)
@@ -275,6 +289,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Editor = this
             };
             SampleList.Add(newsample);
+            SaveCheckAndWrite(false, "Add Sample");
             TCLE.PlaySound("UIobjectadd");
         }
 
@@ -287,12 +302,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             ofd.Multiselect = true;
             if (ofd.ShowDialog() == DialogResult.OK) {
+                bool addedfile = false;
                 foreach (string _file in ofd.FileNames) {
                     if (_file.EndsWith(".wav") || _file.EndsWith(".fsb")) {
                         ImportAudioToSamp(_file);
                         TCLE.alzheimer();
+                        addedfile = true;
                     }
                 }
+                if (addedfile)
+                    SaveCheckAndWrite(false, "Add Sample");
                 TCLE.PlaySound("UIobjectadd");
             }
         }
@@ -333,7 +352,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            SaveCheckAndWrite(true);
+            //SaveCheckAndWrite(true);
             LoadSample(samplejson, loadedsample);
             TCLE.PlaySound("UIrevertchanges");
         }
@@ -365,6 +384,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorLoading = true;
 
             sampleproperties = new(this, filepath);
+            propertyGridSample.SelectedObject = sampleproperties;
 
             ///Clear form elements so new data can load
             SampleList.CollectionChanged -= _samplelist_CollectionChanged;
@@ -387,7 +407,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             FSBtoSamp.Enabled = true;
 
             ///set save flag (samples just loaded, has no changes)
-            SaveCheckAndWrite(true);
+            SaveCheckAndWrite(true, "");
             EditorLoading = false;
             EditorIsSaved = true;
         }
@@ -404,6 +424,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             LoadSample(UndoList[undolistindex].savestate, LoadedSample);
             UndoList.RemoveRange(0, undolistindex);
+            propertyGridSample.Refresh();
         }
 
         ///SAVE
@@ -414,7 +435,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveAs();
             }
             else
-                SaveCheckAndWrite(true, playsound);
+                SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
         public FileInfo SaveAs(bool isnew = false)
@@ -433,7 +454,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     };
                 }
 
-                SaveCheckAndWrite(true, true);
+                SaveCheckAndWrite(true, "", true);
                 if (isnew)
                     TCLE.CloseFileLock(loadedsample);
                 //after saving new file, refresh the project explorer
@@ -447,7 +468,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return EditorIsSaved;
         }
 
-        public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
+        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorLoading)
                 return;
@@ -455,22 +476,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.MainBeeble.MakeFace();
 
             EditorIsSaved = IsSaved;
+            JObject _saveJSON = BuildSave(SampleProperties);
+            //
             if (!IsSaved) {
                 //denote editor tab is not saved
                 this.Text = LoadedSample.Name + "*";
-                //add current JSON to the undo list
-                sampleproperties.undoItems.Add(BuildSave(sampleproperties));
+                //update the undo list
+                UndoList.Insert(0, new SaveState() {
+                    reason = Reason,
+                    savestate = _saveJSON
+                });
             }
             else {
                 this.Text = LoadedSample.Name;
-                //build the JSON to write to file
-                JObject _saveJSON = BuildSave(sampleproperties);
-                sampleproperties.revertPoint = _saveJSON;
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedSample], _saveJSON);
-
-                if (playsound) TCLE.PlaySound("UIsave");
                 TCLE.ReloadProjectSamples();
+                if (playsound) TCLE.PlaySound("UIsave");
             }
         }
 
@@ -497,7 +519,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _save;
         }
 
-        private Dictionary<int, ulong> FrequencyID = new() { 
+        private Dictionary<int, ulong> FrequencyID = new() {
             { 8000, 1 },
             { 11_000, 2 },
             { 11_025, 3 },
@@ -556,7 +578,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 uint freq = BitConverter.ToUInt32(wavbytes, 24);
                 ulong freqid = FrequencyID.TryGetValue((int)freq, out ulong value) ? value : 8;
                 //lookup where data starts and then remove header
-                int indexofdata = TCLE.ByteSearch(wavbytes, new byte[] {(byte)'d', (byte)'a', (byte)'t', (byte)'a' });
+                int indexofdata = TCLE.ByteSearch(wavbytes, new byte[] { (byte)'d', (byte)'a', (byte)'t', (byte)'a' });
                 indexofdata += 8;
                 wavbytes = wavbytes.AsSpan(indexofdata).ToArray();
 
@@ -642,7 +664,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SampleList.Clear();
             this.Text = "Sample Editor";
             //set saved flag to true, because nothing is loaded
-            SaveCheckAndWrite(true);
+            SaveCheckAndWrite(true, "");
             FSBtoSamp.Enabled = true;
         }
         #endregion

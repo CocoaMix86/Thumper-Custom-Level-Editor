@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Windows.Input;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -20,6 +21,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null) {
                 LoadLvl(load, filepath);
+                UndoList.Add(new SaveState() {
+                    reason = "",
+                    savestate = load
+                });
             }
         }
         private void Form_LvlEditor_Shown(object sender, EventArgs e)
@@ -71,7 +76,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return LvlProperties; }
             set {
                 LvlProperties = value;
-                SaveCheckAndWrite(false);
+                SaveCheckAndWrite(false, "uuuuuhhhhhhhhhhhhhh");
             }
         }
         private LvlProperties LvlProperties;
@@ -180,6 +185,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     LvlLeafData tomove = LvlLeafs[rowToMove.Index];
                     LvlLeafs.RemoveAt(rowIndexFromMouseDown);
                     LvlLeafs.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                    SaveCheckAndWrite(false, "Reorder Leafs");
                 }
                 if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
                     AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
@@ -207,7 +213,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathDown.Enabled = lvlLeafPaths.Rows.Count > 1;
             btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
             //set lvl save flag to false
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Tunnels Changed");
         }
 
         /// DGV LVLLOOPTRACKS
@@ -219,7 +225,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlProperties.lvlloops[e.RowIndex].sample = $"{lvlLoopTracks.Rows[e.RowIndex].Cells[1].Value}";
             LvlProperties.lvlloops[e.RowIndex].beats = decimal.Parse(lvlLoopTracks.Rows[e.RowIndex].Cells[2].Value.ToString());
             lvlLoopTracks.Rows[e.RowIndex].Cells[2].Value = LvlProperties.lvlloops[e.RowIndex].beats;
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Loop Track Sample/Beats Changed");
         }
         private void lvlLoopTracks_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
@@ -269,9 +275,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlLoopAdd.Enabled = LvlLeafs.Count > 0;
             if (btnLvlLoopAdd.Enabled == false) btnLvlLoopDelete.Enabled = false;
             //
-            if (!EditorIsLoading) {
-                SaveCheckAndWrite(false);
-            }
         }
         public void lvlloop_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -288,7 +291,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 r.HeaderCell.ToolTipText = "Edit volume levels in Sequencer with an [AUDIO] object";
             }
             btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
-            SaveCheckAndWrite(false);
         }
 
         private void lvlLeafPaths_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -305,6 +307,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => pictureTunnelViewer.Visible = false;
         private void lvlLeafPaths_MouseLeave(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
         private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
+
+        private void propertyGridLvl_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            SaveCheckAndWrite(false, "Change Lvl Property");
+        }
         #endregion
 
         #region Buttons
@@ -319,6 +326,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (LvlLeafData lvd in todelete)
                 LvlLeafs.Remove(lvd);
             TCLE.PlaySound("UIobjectremove");
+            SaveCheckAndWrite(false, "Remove Leaf");
             lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= LvlLeafs.Count ? _in - 1 : _in));
         }
         private void btnLvlLeafAdd_Click(object sender, EventArgs e)
@@ -350,7 +358,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 lvlLeafList.Rows[dgvr - 1].Selected = true;
             }
             EditorIsLoading = false;
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Move Leaf Up");
         }
 
         private void btnLvlLeafDown_Click(object sender, EventArgs e)
@@ -370,7 +378,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 lvlLeafList.Rows[dgvr + 1].Selected = true;
             }
             EditorIsLoading = false;
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Move Leaf Down");
         }
 
         ///COPY PASTE of leaf
@@ -390,13 +398,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (LvlLeafData lld in clipboardleaf)
                 LvlLeafs.Insert(_in, lld.Clone());
             TCLE.PlaySound("UIkpaste");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Paste Leaf");
         }
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
             var leafs = TCLE.ProjectExplorer.projectfiles.Where(x => x.Value.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)).ToList();
             AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].Value.FullName);
+            SaveCheckAndWrite(false, "Add Random Leaf");
         }
 
         private void btnLvlPathDelete_Click(object sender, EventArgs e)
@@ -409,7 +418,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LvlLeafs[lvlLeafList.CurrentRow.Index].paths.Remove(s);
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
             TCLE.PlaySound("UItunnelremove");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Remove Tunnel");
         }
 
         private void btnLvlPathAdd_Click(object sender, EventArgs e)
@@ -418,7 +427,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
             btnLvlPathDelete.Enabled = true;
             TCLE.PlaySound("UItunneladd");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Add Tunnel");
         }
 
         private void btnLvlPathUp_Click(object sender, EventArgs e)
@@ -438,7 +447,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 lvlLeafPaths.Rows[dgvr - 1].Cells[0].Selected = true;
             }
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Move Tunnel Up");
         }
 
         private void btnLvlPathDown_Click(object sender, EventArgs e)
@@ -458,7 +467,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 lvlLeafPaths.Rows[dgvr + 1].Cells[0].Selected = true;
             }
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Move Tunnel Down");
         }
 
         private void btnLvlPathClear_Click(object sender, EventArgs e)
@@ -471,7 +480,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlLeafs[idx].paths.Clear();
             LvlUpdatePaths(idx);
             TCLE.PlaySound("UIdataerase");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Clear Tunnels on Leaf");
         }
 
         private void btnLvlRandomTunnel_Click(object sender, EventArgs e)
@@ -482,7 +491,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLeafPaths.Rows[^1].Cells[0].Value = LvlPaths[TCLE.rng.Next(1, LvlPaths.Count)];
             btnLvlPathDelete.Enabled = true;
             TCLE.PlaySound("UItunneladd");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Add Random Tunnel to Leaf");
         }
 
         private void btnLvlCopyTunnel_Click(object sender, EventArgs e)
@@ -499,7 +508,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlLeafs[lvlLeafList.CurrentRow.Index].paths.AddRange(new List<string>(clipboardpaths));
             LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
             TCLE.PlaySound("UIkpaste");
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Paste Tunnels");
         }
 
         private void btnLvlLoopAdd_Click(object sender, EventArgs e)
@@ -507,6 +516,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlProperties.lvlloops.Add(new LvlLoop());
             btnLvlLoopDelete.Enabled = true;
             TCLE.PlaySound("UIobjectadd");
+            SaveCheckAndWrite(false, "Add New Loop Track");
         }
 
         private void btnLvlLoopDelete_Click(object sender, EventArgs e)
@@ -516,15 +526,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //disable button if no more rows exist
             if (lvlLoopTracks.Rows.Count < 1)
                 btnLvlLoopDelete.Enabled = false;
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Delete Loop Track");
         }
 
         private void btnRevertLvl_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            SaveCheckAndWrite(true);
-            LoadLvl(lvlProperties.revertPoint, LoadedLvl);
+            SaveCheckAndWrite(true, "");
+            //LoadLvl(lvlProperties.revertPoint, LoadedLvl);
             TCLE.PlaySound("UIrevertchanges");
         }
 
@@ -587,6 +597,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 tutorialtype = (string)_load["tutorial_type"],
                 seqJSON = _load["seq_objs"]
             };
+            propertyGridLvl.SelectedObject = lvlProperties;
 
             //Clear DGVs so new data can load
             lvlLoopTracks.Rows.Clear();
@@ -658,6 +669,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 paths = new List<string>(copytunnels),
                 id = TCLE.rng.Next()
             });
+            SaveCheckAndWrite(false, "Add New Leaf");
             propertyGridLvl.Refresh();
         }
 
@@ -702,6 +714,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             LoadLvl(UndoList[undolistindex].savestate, LoadedLvl);
             UndoList.RemoveRange(0, undolistindex);
+            propertyGridLvl.Refresh();
         }
 
         ///SAVE
@@ -712,7 +725,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveAs();
             }
             else
-                SaveCheckAndWrite(true, playsound);
+                SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
         public FileInfo SaveAs(bool isnew = false)
@@ -734,7 +747,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     };
                 }
 
-                SaveCheckAndWrite(true, true);
+                SaveCheckAndWrite(true, "", true);
                 if (isnew)
                     TCLE.CloseFileLock(loadedlvl);
                 //after saving new file, refresh the project explorer
@@ -748,7 +761,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return EditorIsSaved;
         }
 
-        public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
+        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorIsLoading)
                 return;
@@ -756,26 +769,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.MainBeeble.MakeFace();
 
             EditorIsSaved = IsSaved;
+            JObject _saveJSON = BuildSave(LvlProperties);
+            //
             if (!IsSaved) {
                 //denote editor tab is not saved
                 this.Text = LoadedLvl.Name + "*";
-                //add current JSON to the undo list
-                lvlProperties.undoItems.Add(BuildSave(lvlProperties));
+                //update the undo list
+                UndoList.Insert(0, new SaveState() {
+                    reason = Reason,
+                    savestate = _saveJSON
+                });
             }
             else {
                 this.Text = LoadedLvl.Name;
-                //build the JSON to write to file
-                JObject _saveJSON = BuildSave(lvlProperties);
-                lvlProperties.revertPoint = _saveJSON;
                 lvlProperties.seqJSON = _saveJSON["seq_objs"];
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLvl], _saveJSON);
-
-                if (playsound) TCLE.PlaySound("UIsave");
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(LoadedLvl.Name);
                 TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
                 TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
+                if (playsound) TCLE.PlaySound("UIsave");
             }
         }
 

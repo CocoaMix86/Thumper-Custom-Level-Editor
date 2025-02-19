@@ -14,8 +14,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             gateToolStrip.Renderer = new ToolStripOverride();
             TCLE.DoubleBufferDGV(gateLvlList, false);
 
-            if (load != null)
+            if (load != null) {
                 LoadGate(load, filepath);
+                UndoList.Add(new SaveState() {
+                    reason = "",
+                    savestate = load
+                });
+            }
             propertyGridGate.SelectedObject = GateProperties;
         }
         private void Form_GateEditor_Shown(object sender, EventArgs e)
@@ -104,7 +109,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             get { return GateProperties; }
             set {
                 GateProperties = value;
-                SaveCheckAndWrite(false);
+                SaveCheckAndWrite(false, "Unsure what this one tracks");
             }
         }
         private GateProperties GateProperties;
@@ -209,6 +214,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     GateLvlData tomove = GateLvls[rowToMove.Index];
                     GateLvls.RemoveAt(rowIndexFromMouseDown);
                     GateLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                    SaveCheckAndWrite(false, "Change Phase Order");
                 }
                 if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
                     if (IsAllowedToAddLvl)
@@ -242,14 +248,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //limit how many phases can be added
             btnGateLvlAdd.Enabled = IsAllowedToAddLvl;
-
-            //set lvl save flag to false
-            SaveCheckAndWrite(false);
         }
 
         private void propertyGridGate_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Change Gate Property");
         }
 
         private void gatenewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -291,6 +294,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             foreach (GateLvlData gld in todelete)
                 GateProperties.gatelvls.Remove(gld);
+            SaveCheckAndWrite(false, "Remove Phase");
             TCLE.PlaySound("UIobjectremove");
         }
 
@@ -316,6 +320,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     bucket = 0
                 });
                 TCLE.PlaySound("UIobjectadd");
+                SaveCheckAndWrite(false, "Add New Phase");
             }
         }
 
@@ -333,7 +338,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 gateLvlList.Rows[dgvr - 1].Cells[1].Selected = true;
             }
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Move Lvl Up");
         }
 
         private void btnGateLvlDown_Click(object sender, EventArgs e)
@@ -350,14 +355,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 gateLvlList.Rows[dgvr + 1].Cells[1].Selected = true;
             }
-            SaveCheckAndWrite(false);
+            SaveCheckAndWrite(false, "Move Lvl Down");
         }
 
         private void btnRevertGate_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            SaveCheckAndWrite(true);
+            SaveCheckAndWrite(true, "");
             LoadGate(gatejson, LoadedGate);
             TCLE.PlaySound("UIrevertchanges");
         }
@@ -396,6 +401,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 sectiontype = gatesectiontypes.First(x => x.Key == (string)_load["section_type"]).Value,
                 random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
             };
+            propertyGridGate.SelectedObject = gateproperties;
 
             ///Clear form elements so new data can load
             GateLvls.Clear();
@@ -432,6 +438,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             LoadGate(UndoList[undolistindex].savestate, LoadedGate);
             UndoList.RemoveRange(0, undolistindex);
+            propertyGridGate.Refresh();
         }
 
         ///SAVE
@@ -441,7 +448,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (LoadedGate == null)
                 SaveAs();
             else
-                SaveCheckAndWrite(true, playsound);
+                SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
         public FileInfo SaveAs(bool isnew = false)
@@ -464,7 +471,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     };
                 }
 
-                SaveCheckAndWrite(true, true);
+                SaveCheckAndWrite(true, "", true);
                 if (isnew)
                     TCLE.CloseFileLock(loadedgate);
                 //after saving new file, refresh the project explorer
@@ -478,7 +485,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return EditorIsSaved;
         }
 
-        public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
+        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorLoading)
                 return;
@@ -486,24 +493,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.MainBeeble.MakeFace();
 
             EditorIsSaved = IsSaved;
+            JObject _saveJSON = BuildSave(gateproperties);
+            //
             if (!IsSaved) {
                 //denote editor tab is not saved
                 this.Text = LoadedGate.Name + "*";
-                //add current JSON to the undo list
-                gateproperties.undoItems.Add(BuildSave(gateproperties));
+                //update the undo list
+                UndoList.Insert(0, new SaveState() {
+                    reason = Reason,
+                    savestate = _saveJSON
+                });
             }
             else {
                 this.Text = LoadedGate.Name;
-                //build the JSON to write to file
-                JObject _saveJSON = BuildSave(gateproperties);
-                gateproperties.revertPoint = _saveJSON;
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedGate], _saveJSON);
 
-                if (playsound) TCLE.PlaySound("UIsave");
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(LoadedGate.Name);
                 TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
+                if (playsound) TCLE.PlaySound("UIsave");
             }
         }
 
@@ -535,6 +544,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 sentrytype = "None",
                 bucket = 0
             });
+            SaveCheckAndWrite(false, "Add New Phase");
             propertyGridGate.Refresh();
         }
 
