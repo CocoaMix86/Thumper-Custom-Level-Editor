@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -274,7 +275,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnMasterLvlAdd_Click(object sender, EventArgs e)
         {
             using OpenFileDialog ofd = new();
-            ofd.Filter = "Thumper Lvl/Gate File (*.txt)|*.txt";
+            ofd.Filter = "Thumper Lvl/Gate File|*.lvl;*.gate";
             ofd.Title = "Load a Thumper Lvl/Gate file";
             ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
@@ -520,6 +521,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(LoadedMaster.Name);
+                //update level sections
+                TCLE.LevelSections = new();
+                foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
+                    TCLE.LevelSections.Add("SECTION_LINEAR");
+                }
+                dynamic _saveTCL = TCLE.BuildSave(TCLE.ProjectProperties);
+                File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveTCL, Formatting.Indented));
+                //
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }

@@ -1801,6 +1801,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 editor_row = new DataGridViewRow(),
                 expandlanes = Properties.Settings.Default.LeafOptionShowLane
             };
+            if (seq.category == "AUDIO") {
+                int audiochannels = SequencerObjects.Count(x => x.category == "AUDIO");
+                seq.param_path = seq.param_path.Replace("x", $"{audiochannels}");
+                seq.friendly_param = seq.friendly_param.Replace("x", $"{audiochannels}");
+            }
             SequencerObjects.Add(seq);
             trackEditor.Rows.Add(seq.editor_row);
             ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
@@ -2167,6 +2172,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (EditorIsLoading)
                 return;
+            EnableLeafButtons(true);
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 

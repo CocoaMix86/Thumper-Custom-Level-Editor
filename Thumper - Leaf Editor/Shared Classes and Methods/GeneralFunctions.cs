@@ -845,6 +845,7 @@ namespace Thumper_Custom_Level_Editor
             OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL"));
         }
 
+        public static List<string> LevelSections;
         public static JObject BuildSave(ProjectProperties _properties)
         {
             JObject _save = new() {
@@ -853,7 +854,7 @@ namespace Thumper_Custom_Level_Editor
                 { "description", _properties.description },
                 {"author", _properties.authornames },
                 { "bpm", _properties.bpm },
-                { "level_sections", new JArray() {} },
+                { "level_sections", new JArray() {LevelSections} },
                 { "rails_color", new JArray() { (float)_properties.rail.R / 255, (float)_properties.rail.G / 255, (float)_properties.rail.B / 255, 1 } },
                 { "rails_glow_color", new JArray() { (float)_properties.railglow.R / 255, (float)_properties.railglow.G / 255, (float)_properties.railglow.B / 255, 1}},
                 { "path_color", new JArray() { (float)_properties.path.R / 255, (float)_properties.path.G / 255, (float)_properties.path.B / 255, 1 }},

@@ -1588,7 +1588,7 @@
 },
 {
 'obj_type': 'EntitySpawner',
-'obj_name': 'ring_pulse.spn',
+'obj_name': 'ring_pulse_decorator.spn',
 'xfm_name': '',
 'constraint': 'kConstraintParent',
 'pos': [0, 0, 0],
