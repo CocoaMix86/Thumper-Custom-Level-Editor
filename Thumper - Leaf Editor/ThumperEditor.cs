@@ -483,11 +483,14 @@ namespace Thumper_Custom_Level_Editor
             if (!Directory.Exists($@"{AppLocation}\templates")) {
                 Directory.CreateDirectory($@"{AppLocation}\templates");
             }
+            if (!Directory.Exists($@"{AppLocation}\settings")) {
+                Directory.CreateDirectory($@"{AppLocation}\settings");
+            }
             File.WriteAllText($@"{AppLocation}\templates\singletrack.leaf", Properties.Resources.leaf_singletrack);
             File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack.leaf", Properties.Resources.leaf_multitrack);
             File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
-            File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
-            File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
+            File.WriteAllText($@"{AppLocation}\settings\track_objects_v3.txt", Properties.Resources.track_objects);
+            File.WriteAllText($@"{AppLocation}\settings\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
         }
 
         private void toolstripFileRecent_Click(object sender, EventArgs e)
