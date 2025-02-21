@@ -841,6 +841,7 @@ namespace Thumper_Custom_Level_Editor
             JObject _saveJSON = BuildSave(Convert);
             //write JSON to file
             File.WriteAllText($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+            File.WriteAllText($@"{LevelDetails.DirectoryName}\pyramid_outro.leaf", Properties.Resources.leaf_pyramid_outro);
 
             OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL"));
         }
