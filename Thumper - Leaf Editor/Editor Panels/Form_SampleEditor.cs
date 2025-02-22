@@ -582,6 +582,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 indexofdata += 8;
                 wavbytes = wavbytes.AsSpan(indexofdata).ToArray();
 
+                if (!Directory.Exists($@"{TCLE.WorkingFolder}\extras"))
+                    Directory.CreateDirectory($@"{TCLE.WorkingFolder}\extras");
                 using (BinaryWriter sw = new BinaryWriter(new FileStream($@"{TCLE.WorkingFolder}\extras\{_filename}.fsb", FileMode.OpenOrCreate))) {
                     sw.Write(Encoding.UTF8.GetBytes("FSB5")); //fsb5
                     sw.Write((UInt32)1); //version
