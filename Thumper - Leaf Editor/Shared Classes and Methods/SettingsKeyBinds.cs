@@ -74,12 +74,12 @@ namespace Thumper_Custom_Level_Editor
         PropertyDescriptorCollection
             System.ComponentModel.ICustomTypeDescriptor.GetProperties()
         {
-            return ((ICustomTypeDescriptor)this).GetProperties(new Attribute[0]);
+            return ((ICustomTypeDescriptor)this).GetProperties(Array.Empty<Attribute>());
         }
 
         public PropertyDescriptorCollection GetProperties(Attribute[] attributes)
         {
-            ArrayList properties = new ArrayList();
+            ArrayList properties = new();
             foreach (DictionaryEntry e in _dictionary) {
                 properties.Add(new DictionaryPropertyDescriptor(_dictionary, e.Key));
             }

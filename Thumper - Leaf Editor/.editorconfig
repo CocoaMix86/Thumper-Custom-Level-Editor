@@ -129,6 +129,15 @@ dotnet_diagnostic.CA1515.severity = none
 # CA1031: Do not catch general exception types
 dotnet_diagnostic.CA1031.severity = none
 
+# CA1051: Do not declare visible instance fields
+dotnet_diagnostic.CA1051.severity = none
+
+# CA1708: Identifiers should differ by more than case
+dotnet_diagnostic.CA1708.severity = none
+
+# CA1002: Do not expose generic lists
+dotnet_diagnostic.CA1002.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 

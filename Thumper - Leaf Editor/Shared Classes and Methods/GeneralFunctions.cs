@@ -10,12 +10,14 @@ using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using System.Drawing;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
     {
-        public static List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
+        public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
         public static decimal LeafQuickValue0 = 1.000m;
         public static decimal LeafQuickValue1 = 1.000m;
         public static decimal LeafQuickValue2 = 1.000m;
@@ -26,12 +28,12 @@ namespace Thumper_Custom_Level_Editor
         public static decimal LeafQuickValue7 = 1.000m;
         public static decimal LeafQuickValue8 = 1.000m;
         public static decimal LeafQuickValue9 = 1.000m;
-        public static Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
-        public static Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
-        public static string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
-        private static string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master" };
+        public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
+        public static readonly Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
+        public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
+        private static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master" };
 
-        private void LoadQuickValues()
+        private static void LoadQuickValues()
         {
             if (!File.Exists($@"{TCLE.AppLocation}\settings\quickvalues.txt"))
                 return;
@@ -172,8 +174,7 @@ namespace Thumper_Custom_Level_Editor
             panelToolStrips.BackColor = AppSettings.ColorMainSubMenubar;
             dockMain.BackColor = AppSettings.ColorMainBG;
 
-            if (TCLE.ProjectExplorer != null)
-                TCLE.ProjectExplorer.ColorFormElements();
+            TCLE.ProjectExplorer?.ColorFormElements();
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 leaf.ColorFormElements();
@@ -273,7 +274,7 @@ namespace Thumper_Custom_Level_Editor
                 visible = false;
             panelToolStrips.Visible = visible;
             dockMain.Visible = visible;
-            foreach (var item in toolStripTitle.Items)
+            foreach (object? item in toolStripTitle.Items)
                 (item as ToolStripItem).Visible = visible;
             toolstripFile.Visible = true;
             toolstripHelp.Visible = true;
@@ -635,7 +636,7 @@ namespace Thumper_Custom_Level_Editor
 
             if (ImageExtensions.Contains(filepath.Extension.ToLower())) {
                 Image theimage = null;
-                using (FileStream fs = new FileStream(filepath.FullName, FileMode.Open)) {
+                using (FileStream fs = new(filepath.FullName, FileMode.Open)) {
                     theimage = Image.FromStream(fs);
                 }
                 ImageViewer image = new(theimage) { Text = filepath.Name};
@@ -664,7 +665,7 @@ namespace Thumper_Custom_Level_Editor
                 return true;
             }
 
-            var workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+            IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
             foreach(Form_WorkSpace ws in workspacewithfloats) {
                 IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
                 if (activate != null) {
@@ -720,7 +721,7 @@ namespace Thumper_Custom_Level_Editor
                 (workspacehastab as DockContent).DockHandler.Dispose();
             }
             //check tabs in floats
-            var workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+            IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
             foreach (Form_WorkSpace ws in workspacewithfloats) {
                 IDockContent toclose = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).FirstOrDefault(z => z.DockHandler.TabText.StartsWith(filepath.Name));
                 if (toclose != null) {
@@ -760,7 +761,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public bool AnyUnsaved()
+        public static bool AnyUnsaved()
         {
             foreach (IDockContent document in TCLE.Documents) {
                 bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
@@ -770,7 +771,7 @@ namespace Thumper_Custom_Level_Editor
             return false;
         }
 
-        public int mod(int x, int m)
+        public static int mod(int x, int m)
         {
             int r = x % m;
             return r < 0 ? r + m : r;
@@ -778,8 +779,8 @@ namespace Thumper_Custom_Level_Editor
 
         public void ConvertProjectToNew()
         {
-            FileInfo LevelDetails = null;
-            FileInfo ConfigFile = null;
+            FileInfo LevelDetails;
+            FileInfo ConfigFile;
             using OpenFileDialog ofd = new();
             ofd.Title = "Find a LEVEL DETAILS.txt file";
             ofd.Filter = "LEVEL DETAILS.txt|LEVEL DETAILS.txt";
@@ -826,7 +827,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
             foreach (FileInfo file in LevelDetails.Directory.GetFiles("*", SearchOption.AllDirectories)) {
-                if (file.Name.ToUpper() == "LEVEL DETAILS.TXT" || file.Name.ToLower().StartsWith("config_")) {
+                if (file.Name.Equals("LEVEL DETAILS.TXT", StringComparison.OrdinalIgnoreCase) || file.Name.StartsWith("config_", StringComparison.OrdinalIgnoreCase)) {
                     file.Delete();
                     continue;
                 }
@@ -875,19 +876,19 @@ namespace Thumper_Custom_Level_Editor
             if (Properties.Settings.Default.muteapplication)
                 return;
             if (rng.Next(0, 1001) == 1000) {
-                var tempstream = new MemoryStream();
+                MemoryStream tempstream = new();
                 Properties.Resources.duck.CopyTo(tempstream);
                 byte[] duckbytes = tempstream.ToArray();
-                PlaySampleOneOff("duck", duckbytes, out int sampchannel);
+                PlaySampleOneOff("duck", duckbytes, out _);
             }
             else
-                PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out int sampchannel);
+                PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out _);
             TCLE.alzheimer();
         }
         public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
         public static int LastChannel;
         public static float initialfreq;
-        public static SYNCPROC EndingProc = new SYNCPROC(OnEnding);
+        public static SYNCPROC EndingProc = new(OnEnding);
         public static bool PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
         {
             if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString())?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
@@ -899,7 +900,7 @@ namespace Thumper_Custom_Level_Editor
 
                 //initialize the player and load the sample
                 SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-                Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
+                _ = Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
                 //pitch shift and pan
                 Bass.BASS_ChannelGetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
@@ -919,7 +920,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             else {
-                var ItemToRemove = PlayingChannels.First(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString());
+                Tuple<DataGridView, string, int> ItemToRemove = PlayingChannels.First(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString());
                 SampChannel = ItemToRemove.Item3;
                 Bass.BASS_ChannelStop(ItemToRemove.Item3);
                 Bass.BASS_ChannelFree(ItemToRemove.Item3);
@@ -932,13 +933,12 @@ namespace Thumper_Custom_Level_Editor
             //initialize the player and load the sample
             SampChannel = Bass.BASS_SampleLoad(stream, 0, stream.Length, 10, BASSFlag.BASS_SAMPLE_FLOAT);
             SampChannel = Bass.BASS_SampleGetChannel(SampChannel, BASSFlag.BASS_SAMPLE_FLOAT);
-            Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
+            _ = Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
             //play the sample
             if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
                 return SampChannel;
             }
             else {
-                var ee = Bass.BASS_ErrorGetCode();
                 return SampChannel = 0;
             }
         }
@@ -947,7 +947,7 @@ namespace Thumper_Custom_Level_Editor
         {
             bool free1 = Bass.BASS_ChannelStop(channel);
             bool free2 = Bass.BASS_ChannelFree(channel);
-            var ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
+            Tuple<DataGridView, string, int>? ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
             if (ItemToRemove != null) {
                 ItemToRemove.Item1.InvalidateColumn(0);
                 PlayingChannels.Remove(ItemToRemove);

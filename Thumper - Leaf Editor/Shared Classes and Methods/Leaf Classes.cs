@@ -40,7 +40,7 @@ namespace Thumper_Custom_Level_Editor
         public bool enabled { get; set; }
         public bool isdefault { get; set; }
 
-        public Bitmap WaveBitmap = null;
+        public Bitmap WaveBitmap;
         public int id { get; set; }
         public bool mute { get; set; }
         public DataGridViewRow editor_row { get; set; }
@@ -52,7 +52,7 @@ namespace Thumper_Custom_Level_Editor
                 if (this.friendly_lane is not "lane center" and not "none")
                     editor_row.Visible = value;
                 Form_LeafEditor.ChangeTrackName(this, Properties.Settings.Default.LeafOptionShowCategory ? $"[{this.category}] " : "");
-                Form_LeafEditor.TrackUpdateHighlighting(this, true);
+                Form_LeafEditor.TrackUpdateHighlighting(this);
             }
         }
         private bool ExpandLanes;
@@ -273,61 +273,61 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Quick 0")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue0 { get => TCLE.LeafQuickValue0; set => TCLE.LeafQuickValue0 = value; }
+        public static decimal quickvalue0 { get => TCLE.LeafQuickValue0; set => TCLE.LeafQuickValue0 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 1")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue1 { get => TCLE.LeafQuickValue1; set => TCLE.LeafQuickValue1 = value; }
+        public static decimal quickvalue1 { get => TCLE.LeafQuickValue1; set => TCLE.LeafQuickValue1 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 2")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue2 { get => TCLE.LeafQuickValue2; set => TCLE.LeafQuickValue2 = value; }
+        public static decimal quickvalue2 { get => TCLE.LeafQuickValue2; set => TCLE.LeafQuickValue2 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 3")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue3 { get => TCLE.LeafQuickValue3; set => TCLE.LeafQuickValue3 = value; }
+        public static decimal quickvalue3 { get => TCLE.LeafQuickValue3; set => TCLE.LeafQuickValue3 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 4")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue4 { get => TCLE.LeafQuickValue4; set => TCLE.LeafQuickValue4 = value; }
+        public static decimal quickvalue4 { get => TCLE.LeafQuickValue4; set => TCLE.LeafQuickValue4 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 5")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue5 { get => TCLE.LeafQuickValue5; set => TCLE.LeafQuickValue5 = value; }
+        public static decimal quickvalue5 { get => TCLE.LeafQuickValue5; set => TCLE.LeafQuickValue5 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 6")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue6 { get => TCLE.LeafQuickValue6; set => TCLE.LeafQuickValue6 = value; }
+        public static decimal quickvalue6 { get => TCLE.LeafQuickValue6; set => TCLE.LeafQuickValue6 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 7")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue7 { get => TCLE.LeafQuickValue7; set => TCLE.LeafQuickValue7 = value; }
+        public static decimal quickvalue7 { get => TCLE.LeafQuickValue7; set => TCLE.LeafQuickValue7 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 8")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue8 { get => TCLE.LeafQuickValue8; set => TCLE.LeafQuickValue8 = value; }
+        public static decimal quickvalue8 { get => TCLE.LeafQuickValue8; set => TCLE.LeafQuickValue8 = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 9")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue9 { get => TCLE.LeafQuickValue9; set => TCLE.LeafQuickValue9 = value; }
+        public static decimal quickvalue9 { get => TCLE.LeafQuickValue9; set => TCLE.LeafQuickValue9 = value; }
     }
 
     public class LeafTimeSignatures : StringConverter
@@ -379,11 +379,12 @@ namespace Thumper_Custom_Level_Editor
             }
 
             if (editorService != null) {
-                NumericUpDown udControl = new NumericUpDown();
-                udControl.DecimalPlaces = 3;
-                udControl.Minimum = decimal.MinValue;
-                udControl.Maximum = decimal.MaxValue;
-                udControl.Value = (decimal)value;
+                NumericUpDown udControl = new() {
+                    DecimalPlaces = 3,
+                    Minimum = decimal.MinValue,
+                    Maximum = decimal.MaxValue,
+                    Value = (decimal)value
+                };
                 editorService.DropDownControl(udControl);
                 value = (decimal)udControl.Value;
             }
@@ -407,7 +408,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
             if (editorService != null) {
-                NumericUpDown udControl = new NumericUpDown();
+                NumericUpDown udControl = new();
                 udControl.DecimalPlaces = 0;
                 udControl.Minimum = 1;
                 udControl.Maximum = 255;

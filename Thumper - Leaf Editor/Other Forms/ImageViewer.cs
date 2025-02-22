@@ -20,7 +20,7 @@
         {
             if (e.Button == MouseButtons.Left) {
                 ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                _ = SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
 

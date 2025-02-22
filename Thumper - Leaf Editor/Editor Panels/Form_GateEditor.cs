@@ -46,7 +46,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        public bool EditorLoading = false;
+        public bool EditorLoading;
         public bool IsAllowedToAddLvl => !((GateProperties.gatelvls.Count >= 4 && GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.boss == "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.random));
         public FileInfo loadedgate
         {
@@ -373,7 +373,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// Methods ///
         ///         ///
 
-        public void InitializeGateStuff()
+        public static void InitializeGateStuff()
         {
             //GateProperties.gatelvls.CollectionChanged += gatelvls_CollectionChanged;
         }
@@ -410,7 +410,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GateProperties.gatelvls.Add(new GateLvlData() {
                     lvlname = _lvl["lvl_name"],
                     sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
-                    bucket = (int)_lvl["bucket_num"] < 0 || (int)_lvl["bucket_num"] > 3 ? 0 : (int)_lvl["bucket_num"]
+                    bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
                 });
             }
 
@@ -460,8 +460,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedgate = new FileInfo(sfd.FileName);
 
-                if (gateproperties == null) {
-                    gateproperties = new(this, loadedgate) {
+                gateproperties ??= new(this, loadedgate) {
                         boss = "Level 1 - circle",
                         prelvl = "<none>",
                         postlvl = "<none>",
@@ -469,7 +468,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         sectiontype = "None",
                         random = false,
                     };
-                }
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)

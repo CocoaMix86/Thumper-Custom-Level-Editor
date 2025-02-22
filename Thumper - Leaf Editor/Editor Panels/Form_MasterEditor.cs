@@ -52,7 +52,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        public bool EditorLoading = false;
+        public bool EditorLoading;
         public FileInfo loadedmaster
         {
             get { return LoadedMaster; }
@@ -218,7 +218,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnMasterLvlCopy.Enabled = MasterLvls.Count > 0;
 
             foreach (DataGridViewRow dgvr in masterLvlList.Rows) {
-                string levelnum = "";
+                string levelnum;
                 if (MasterLvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL")
                     levelnum = "Ω";
                 else if (MasterLvls[dgvr.Index].gatesectiontype is "SECTION_BOSS_PYRAMID")
@@ -387,7 +387,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// METHODS ///
         ///         ///
 
-        public void InitializeMasterStuff()
+        public static void InitializeMasterStuff()
         {
             //_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
         }
@@ -474,13 +474,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedmaster = new FileInfo(sfd.FileName);
 
-                if (masterproperties == null) {
-                    masterproperties = new(this, loadedmaster) {
+                masterproperties ??= new(this, loadedmaster) {
                         skybox = "<none>",
                         introlvl = "<none>",
                         checkpointlvl = "<none>"
                     };
-                }
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)

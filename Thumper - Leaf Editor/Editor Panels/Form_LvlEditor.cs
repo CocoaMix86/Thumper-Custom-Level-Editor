@@ -52,7 +52,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        private bool EditorIsLoading = false;
+        private bool EditorIsLoading;
         public FileInfo loadedlvl
         {
             get => LoadedLvl;
@@ -403,7 +403,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
-            var leafs = TCLE.ProjectExplorer.projectfiles.Where(x => x.Value.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)).ToList();
+            List<KeyValuePair<string, FileInfo>> leafs = TCLE.ProjectExplorer.projectfiles.Where(x => x.Value.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)).ToList();
             AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].Value.FullName);
             SaveCheckAndWrite(false, "Add Random Leaf");
         }
@@ -738,14 +738,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedlvl = new FileInfo(sfd.FileName);
 
-                if (lvlProperties == null) {
-                    lvlProperties = new(this, loadedlvl) {
+                lvlProperties ??= new(this, loadedlvl) {
                         approachbeats = 16,
                         volume = 1,
                         allowinput = true,
                         tutorialtype = "TUTORIAL_NONE"
                     };
-                }
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)

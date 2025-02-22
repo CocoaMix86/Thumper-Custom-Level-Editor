@@ -33,14 +33,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
         #region Variables
         private bool cutfile;
-        private bool dontcancelifrename = false;
-        private bool filterenabled = false;
-        private bool filtersearch = false;
+        private bool dontcancelifrename;
+        private bool filterenabled;
+        private bool filtersearch;
         private string renametype;
         private string renamefile;
         private string renamenode;
         private static string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
-        private DirectoryInfo ProjectDirectory => TCLE.WorkingFolder;
+        private static DirectoryInfo ProjectDirectory => TCLE.WorkingFolder;
         private TreeNode previousNode;
         private List<TreeNode> filestocopy;
         private List<TreeNode> selectedNodes = new();
@@ -551,7 +551,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e) => DoDragDrop(e.Item, DragDropEffects.Move);
         private void treeView1_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
 
-        private TreeNode previousDragOver = null;
+        private TreeNode previousDragOver;
         private void treeView1_DragOver(object sender, DragEventArgs e)
         {
             // Retrieve the client coordinates of the drop location.
@@ -677,7 +677,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (selectedNodes[0].FullPath == ProjectDirectory.Name)
                 return;
-            if (projectfolders.TryGetValue(selectedNodes[0].FullPath, out var value))
+            if (projectfolders.TryGetValue(selectedNodes[0].FullPath, out _))
                 return;
             bool fileOpenSuccess = TCLE.OpenFile(projectfiles[selectedNodes[0].FullPath]);
         }
@@ -690,10 +690,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private FileInfo GetFileOrFolderPath(string name)
         {
-            return projectfiles.TryGetValue(name, out FileInfo file) ? projectfiles[name] : new FileInfo(projectfolders[name].FullName);
+            return projectfiles.TryGetValue(name, out FileInfo file) ? file : new FileInfo(projectfolders[name].FullName);
         }
 
-        private List<string> GetExpandedNodes(TreeNodeCollection treeNodeCollection)
+        private static List<string> GetExpandedNodes(TreeNodeCollection treeNodeCollection)
         {
             List<string> expandednodes = new();
             foreach (TreeNode tn in treeNodeCollection) {
@@ -714,7 +714,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public TreeNode FindNode(string path, TreeNodeCollection treeNodeCollection)
+        public static TreeNode FindNode(string path, TreeNodeCollection treeNodeCollection)
         {
             TreeNode found = null;
             foreach (TreeNode tn in treeNodeCollection) {

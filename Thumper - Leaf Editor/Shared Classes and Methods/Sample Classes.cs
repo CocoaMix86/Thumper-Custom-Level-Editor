@@ -56,8 +56,8 @@ namespace Thumper_Custom_Level_Editor
         private int Offset;
         public string channel_group { get; set; }
 
-        public WaveForm wave = null;
-        public double time = 0;
+        public WaveForm wave;
+        public double time;
         public double alteredtime => (this.time - ((double)this.offset / 1000d)) / (double)this.pitch;
         public double beats => (this.alteredtime / 60) * (double)TCLE.BPM;
 

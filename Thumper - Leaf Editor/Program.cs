@@ -27,7 +27,7 @@ namespace Thumper_Custom_Level_Editor
                 Application.SetCompatibleTextRenderingDefault(false);
                 AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 
-                TCLE tcle = new TCLE(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
+                TCLE tcle = new(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
                 ImageMessageBox splash = new("splashscreen", tcle) { TopMost = true, TopLevel = true };
                 splash.Show();
                 tcle.Location = new Point(splash.Location.X, splash.Location.Y);

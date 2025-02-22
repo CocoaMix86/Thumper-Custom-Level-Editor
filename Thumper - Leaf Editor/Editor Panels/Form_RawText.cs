@@ -41,17 +41,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             get => LoadedFile;
             set {
-                LoadedFile = value;
-                if (!LoadedFile.Exists) {
-                    using (StreamWriter sw = LoadedFile.CreateText()) {
-                        sw.Write(' ');
-                        sw.Close();
+                if (LoadedFile != value) {
+                    if (LoadedFile != null)
+                        TCLE.CloseFileLock(LoadedFile);
+                    LoadedFile = value;
+                    if (!LoadedFile.Exists) {
+                        using (StreamWriter sw = LoadedFile.CreateText()) {
+                            sw.Write(' ');
+                            sw.Close();
+                        }
                     }
+                    TCLE.AddFileLock(LoadedFile);
                 }
-                TCLE.AddFileLock(LoadedFile);
             }
         }
-        private static FileInfo LoadedFile;
+        private FileInfo LoadedFile;
         #endregion
         #region Event Handlers
         private void textEditor_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
@@ -100,7 +104,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _saveJSON = JObject.Parse(textEditor.Text);
                 }
                 catch (Exception ex) {
-                    MessageBox.Show("JSON failed to parse in file. Changes not saved.", "Thumper Custom Level Editor");
+                    MessageBox.Show($"JSON failed to parse in file. Changes not saved.\n\n{ex}", "Thumper Custom Level Editor");
                     return;
                 }
                 //denote editor tab is not saved

@@ -31,7 +31,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
         {
-            var DocClosing = e.Content;
+            IDockContent DocClosing = e.Content;
             FileInfo filetoclose = null;
             if (!TCLE.Instance.Disposing) {
                 if (DocClosing.GetType() == typeof(Form_MasterEditor))

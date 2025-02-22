@@ -28,7 +28,7 @@ namespace Thumper_Custom_Level_Editor
         public static Dictionary<string, Keys> Keybinds = Properties.Resources.DefaultKeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
         public static Beeble MainBeeble = new() { Visible = false };
-        public ProjectProperties projectProperties
+        public static ProjectProperties projectProperties
         {
             get => ProjectProperties;
             set => ProjectProperties = value;
@@ -82,8 +82,7 @@ namespace Thumper_Custom_Level_Editor
             leafoptionThinValues.Checked = Properties.Settings.Default.LeafOptionThinBars;
             leafoptionShowWave.Checked = Properties.Settings.Default.LeafOptionShowWave;
             //
-            if (AppSettings.Recentfiles == null)
-                AppSettings.Recentfiles = new List<string>();
+            AppSettings.Recentfiles ??= new List<string>();
             //
             //Create directory for leaf templates and other default files
             if (!Directory.Exists($@"{AppLocation}\templates")) {
@@ -138,7 +137,7 @@ namespace Thumper_Custom_Level_Editor
             MainBeeble.Location = AppSettings.beebleloc;
         }
 
-        private void JumpListUpdate()
+        private static void JumpListUpdate()
         {
             if (AppSettings.Recentfiles == null)
                 return;
@@ -149,7 +148,7 @@ namespace Thumper_Custom_Level_Editor
             };
 
             foreach (string file in AppSettings.Recentfiles) {
-                FileInfo tcl = new FileInfo(file);
+                FileInfo tcl = new(file);
                 JumpTask jmp = new() {
                     Title = $"{tcl.Name}",
                     Arguments = file,
@@ -273,7 +272,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (e.Button == MouseButtons.Left) {
                 ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                _ = SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
         private void TCLE_Resize(object sender, EventArgs e)
@@ -365,7 +364,7 @@ namespace Thumper_Custom_Level_Editor
             ofd.FilterIndex = 1;
             ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
-                FileInfo TCL = new FileInfo(ofd.FileName);
+                FileInfo TCL = new(ofd.FileName);
                 OpenProject(TCL);
             }
         }
@@ -386,7 +385,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //if this application already has a TCL loaded, open a new application and pass in the TCL name to load it
             if (WorkingFolder != null) {
-                var info = new ProcessStartInfo(Application.ExecutablePath, TCL.FullName);
+                ProcessStartInfo info = new(Application.ExecutablePath, TCL.FullName);
                 Process.Start(info);
                 return;
             }
@@ -394,7 +393,7 @@ namespace Thumper_Custom_Level_Editor
             dynamic ProjectJson = LoadFileLock(TCL.FullName);
             Image Thumbnail = null;
             if (File.Exists($@"{TCL.Directory}\thumbnail.png")) {
-                using (FileStream fs = new FileStream($@"{TCL.Directory}\thumbnail.png", FileMode.Open)) {
+                using (FileStream fs = new($@"{TCL.Directory}\thumbnail.png", FileMode.Open)) {
                     Thumbnail = Image.FromStream(fs);
                 }
             }
@@ -502,7 +501,7 @@ namespace Thumper_Custom_Level_Editor
         {
             contextMenuRecentProjects.Items.Clear();
             foreach (string path in AppSettings.Recentfiles) {
-                FileInfo tcl = new FileInfo(path);
+                FileInfo tcl = new(path);
                 ToolStripMenuItem item = new() {
                     Text = $"{tcl.Name} ({tcl.FullName})",
                     ForeColor = Color.White,
@@ -809,19 +808,19 @@ namespace Thumper_Custom_Level_Editor
             }
 
             Tuple<FileInfo, bool, string>[] samplePacks = {
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level1_320bpm.samp"), toolstripSampLevel1.Checked, Properties.Resources.samp_level1_320bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level2_340bpm.samp"), toolstripSampLevel2.Checked, Properties.Resources.samp_level2_340bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level3_360bpm.samp"), toolstripSampLevel3.Checked, Properties.Resources.samp_level3_360bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level4_380bpm.samp"), toolstripSampLevel4.Checked, Properties.Resources.samp_level4_380bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level5_400bpm.samp"), toolstripSampLevel5.Checked, Properties.Resources.samp_level5_400bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level6_420bpm.samp"), toolstripSampLevel6.Checked, Properties.Resources.samp_level6_420bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level7_440bpm.samp"), toolstripSampLevel7.Checked, Properties.Resources.samp_level7_440bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level8_460bpm.samp"), toolstripSampLevel8.Checked, Properties.Resources.samp_level8_460bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\level9_480bpm.samp"), toolstripSampLevel9.Checked, Properties.Resources.samp_level9_480bpm),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\dissonant.samp"), toolstripSampLevelDiss.Checked, Properties.Resources.samp_dissonant),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\globaldrones.samp"), toolstripSampLevelDrones.Checked, Properties.Resources.samp_globaldrones),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\rests.samp"), toolstripSampLevelRests.Checked, Properties.Resources.samp_rests),
-                new Tuple<FileInfo, bool, string>(new FileInfo($@"{WorkingFolder}\misc.samp"), toolstripSampLevelMisc.Checked, Properties.Resources.samp_misc)
+                new(new FileInfo($@"{WorkingFolder}\level1_320bpm.samp"), toolstripSampLevel1.Checked, Properties.Resources.samp_level1_320bpm),
+                new(new FileInfo($@"{WorkingFolder}\level2_340bpm.samp"), toolstripSampLevel2.Checked, Properties.Resources.samp_level2_340bpm),
+                new(new FileInfo($@"{WorkingFolder}\level3_360bpm.samp"), toolstripSampLevel3.Checked, Properties.Resources.samp_level3_360bpm),
+                new(new FileInfo($@"{WorkingFolder}\level4_380bpm.samp"), toolstripSampLevel4.Checked, Properties.Resources.samp_level4_380bpm),
+                new(new FileInfo($@"{WorkingFolder}\level5_400bpm.samp"), toolstripSampLevel5.Checked, Properties.Resources.samp_level5_400bpm),
+                new(new FileInfo($@"{WorkingFolder}\level6_420bpm.samp"), toolstripSampLevel6.Checked, Properties.Resources.samp_level6_420bpm),
+                new(new FileInfo($@"{WorkingFolder}\level7_440bpm.samp"), toolstripSampLevel7.Checked, Properties.Resources.samp_level7_440bpm),
+                new(new FileInfo($@"{WorkingFolder}\level8_460bpm.samp"), toolstripSampLevel8.Checked, Properties.Resources.samp_level8_460bpm),
+                new(new FileInfo($@"{WorkingFolder}\level9_480bpm.samp"), toolstripSampLevel9.Checked, Properties.Resources.samp_level9_480bpm),
+                new(new FileInfo($@"{WorkingFolder}\dissonant.samp"), toolstripSampLevelDiss.Checked, Properties.Resources.samp_dissonant),
+                new(new FileInfo($@"{WorkingFolder}\globaldrones.samp"), toolstripSampLevelDrones.Checked, Properties.Resources.samp_globaldrones),
+                new(new FileInfo($@"{WorkingFolder}\rests.samp"), toolstripSampLevelRests.Checked, Properties.Resources.samp_rests),
+                new(new FileInfo($@"{WorkingFolder}\misc.samp"), toolstripSampLevelMisc.Checked, Properties.Resources.samp_misc)
             };
 
             bool filesupdates = false;
@@ -950,7 +949,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripAddScene_Click(object sender, EventArgs e)
         {
-            Form_DrawScene draw = new Form_DrawScene();
+            Form_DrawScene draw = new();
             draw.Show(dockMain, DockState.Document);
         }
 
@@ -960,7 +959,7 @@ namespace Thumper_Custom_Level_Editor
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();
-            SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            _ = SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
         }
 
         private void toolstripStopAudio_Click(object sender, EventArgs e)

@@ -54,7 +54,7 @@ namespace Thumper_Custom_Level_Editor
             if (NewProject != null) {
                 //if this application already has a TCL loaded, open a new application and pass in the TCL name to load it
                 if (TCLE.WorkingFolder != null) {
-                    var info = new ProcessStartInfo(Application.ExecutablePath, NewProject.FullName);
+                    ProcessStartInfo info = new(Application.ExecutablePath, NewProject.FullName);
                     Process.Start(info);
                 }
                 ProjectToLoad = NewProject;

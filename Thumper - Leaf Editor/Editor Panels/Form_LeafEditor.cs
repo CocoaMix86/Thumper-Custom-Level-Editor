@@ -116,7 +116,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private LeafProperties LeafProperties;
         private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset);
-        public LvlProperties LvlSequencer = null;
+        public LvlProperties LvlSequencer;
         private dynamic leafjson;
         private int CurrentRow;
         private int MouseCurrentColumn;
@@ -479,7 +479,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //if object has no drawn wave, create it. Wave is null whenever cell sizes change
                 if (seqref.WaveBitmap == null) {
                     Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
-                    using (var graphics = Graphics.FromImage(WaveToDraw)) {
+                    using (Graphics graphics = Graphics.FromImage(WaveToDraw)) {
                         graphics.DrawLine(new Pen(Color.Black, 5), 0, 0, 0, WaveToDraw.Height);
                         graphics.DrawLine(new Pen(Color.Black, 5), WaveToDraw.Width, 0, WaveToDraw.Width, WaveToDraw.Height);
                     }
@@ -629,7 +629,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (IsInterpolating || ispasting)
                 return;
-            List<DataGridViewRow> edited = new();
             try {
                 bool changes = false;
                 object _val = null;
@@ -859,7 +858,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     bool shifted = false;
                     //sort cells in selection based on column. depends on direction, reverse collection.
                     //this processing order is important so cells dont overwrite each other when moving
-                    IOrderedEnumerable<DataGridViewCell> dgvcc = (indexdirection == -1) ? trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex) : trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);
+                    IOrderedEnumerable<DataGridViewCell> dgvcc;
+                    if (indexdirection == -1) 
+                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex);                    
+                    else 
+                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);                    
+
                     trackEditor.ClearSelection();
                     //iterate over each in the selection
                     foreach (DataGridViewCell dgvc in dgvcc) {
@@ -1050,7 +1054,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 seq.param_path = seq.param_path.Replace("x", $"{audiochannels}");
                 seq.friendly_param = seq.friendly_param.Replace("x", $"{audiochannels}");
             }
-            seq.expandlanes = seq.friendly_lane == "none" ? true : (Properties.Settings.Default.LeafOptionShowLane ? true : false);
+            seq.expandlanes = seq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
             SequencerObjects.Add(seq);
             trackEditor.Rows.Add(seq.editor_row);
             ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
@@ -1886,7 +1890,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Methods
-        public void InitializeLeafStuff()
+        public static void InitializeLeafStuff()
         {
             //meh
         }
@@ -1944,7 +1948,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LoadEnd()
         {
             //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
-            EnableLeafButtons(true);
+            EnableLeafButtons();
             trackZoom_Scroll(null, null);
 
             propertyGridLeaf.SelectedObject = LeafProperties;
@@ -2172,7 +2176,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (EditorIsLoading)
                 return;
-            EnableLeafButtons(true);
+            EnableLeafButtons();
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
@@ -2200,8 +2204,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //else if a different sequencer, pass data back and force save
                 else {
-                    Form_LvlEditor Owner = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(LoadedLeaf.Name)) as Form_LvlEditor;
-                    if (Owner != null) {
+                    if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(LoadedLeaf.Name)) is Form_LvlEditor Owner) {
                         Owner.lvlProperties.seq_objs = LeafProperties.seq_objs;
                         Owner.Save();
                     }
@@ -2243,7 +2246,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     seq.editor_row.Cells[data_point.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
                     //seq.data_points[data_point.beat].value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
                 }
-                catch (ArgumentOutOfRangeException ex) {
+                catch (Exception ex) {
+                    MessageBox.Show($"Failed to entirely parse raw text.\n\n{ex}", "Thumper Custom Level Editor");
                     break;
                 }
             }
@@ -2329,17 +2333,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Updates cell highlighting in the DGV
-        public static void TrackUpdateHighlighting(Sequencer_Object seq, bool titleonly = false)
+        public static void TrackUpdateHighlighting(Sequencer_Object seq)
         {
             Color background = TCLE.Blend(seq.highlight_color, Color.Black, 0.4);
             seq.editor_row.HeaderCell.Style.BackColor = background;
-            //iterate over all cells in the row
-            /*
-            if (!titleonly) {
-                foreach (DataGridViewCell dgvc in seq.editor_row.Cells) {
-                    TrackUpdateHighlightingSingleCell(dgvc, seq);
-                }
-            }*/
+
             if (seq.editor_row.Cells.Count >= 3) {
                 seq.editor_row.Cells[0].Style.BackColor = background;
                 seq.editor_row.Cells[1].Style.BackColor = background;
@@ -2389,7 +2387,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private void EnableLeafButtons(bool enable)
+        private void EnableLeafButtons()
         {
             btnTrackDelete.Enabled = SequencerObjects.Count > 0;
             btnTrackUp.Enabled = SequencerObjects.Count > 1;

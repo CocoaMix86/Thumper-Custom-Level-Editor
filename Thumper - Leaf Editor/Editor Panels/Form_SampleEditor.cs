@@ -57,7 +57,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        public bool EditorLoading = false;
+        public bool EditorLoading;
         public FileInfo loadedsample
         {
             get { return LoadedSample; }
@@ -87,8 +87,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private SampleProperties SampleProperties;
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
-        BASSTimer _updateTimer = new BASSTimer(50);
-        public Visuals _vis = new Visuals();
+        BASSTimer _updateTimer = new(50);
+        public Visuals _vis = new();
         #endregion
 
         #region EventHandlers
@@ -320,8 +320,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void AudioPlayback(DataGridViewCell CellToPlay)
         {
-            int SampChannel;
-            if (TCLE.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out SampChannel)) {
+            if (TCLE.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out int SampChannel)) {
                 TCLE.LastChannel = SampChannel;
                 _updateTimer.Start();
                 sampleList.InvalidateCell(CellToPlay);
@@ -448,11 +447,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedsample = new FileInfo(sfd.FileName);
 
-                if (sampleproperties == null) {
-                    sampleproperties = new(this, loadedsample) {
+                sampleproperties ??= new(this, loadedsample) {
 
                     };
-                }
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)
@@ -584,7 +581,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 if (!Directory.Exists($@"{TCLE.WorkingFolder}\extras"))
                     Directory.CreateDirectory($@"{TCLE.WorkingFolder}\extras");
-                using (BinaryWriter sw = new BinaryWriter(new FileStream($@"{TCLE.WorkingFolder}\extras\{_filename}.fsb", FileMode.OpenOrCreate))) {
+                using (BinaryWriter sw = new(new FileStream($@"{TCLE.WorkingFolder}\extras\{_filename}.fsb", FileMode.OpenOrCreate))) {
                     sw.Write(Encoding.UTF8.GetBytes("FSB5")); //fsb5
                     sw.Write((UInt32)1); //version
                     sw.Write((UInt32)1); //how many tracks in fsb

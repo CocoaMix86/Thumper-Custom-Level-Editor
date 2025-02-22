@@ -17,8 +17,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         // Creating multiple instances of this panel causes a double free situation
         // which is likely to trigger a crash
-        private void DoDraw()
-        {
+        private static void DoDraw()
+        {/*
             int targetWidth = this.panel1.Width;
             int targetHeight = this.panel1.Height;
 
@@ -28,6 +28,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             this.panel1.BackgroundImage?.Dispose();
             //this.panel1.BackgroundImage = Native.tcle_native_bitmap(targetWidth, targetHeight);
+            */
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -7,13 +7,7 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variables
         private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
-        private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift | Keys.Control | Keys.Alt, Keys.Alt, Keys.Control, Keys.Control | Keys.Alt, Keys.Control | Keys.Shift, Keys.Alt | Keys.Shift };
-        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.DefaultKeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
         private Dictionary<string, Keys> keybindfromfile = new();
-        private Keys lastpress;
-        private Label currentlabel;
-        private bool ignorekeys = true;
-        private string keybindname;
         #endregion
         #region Form Construction and initialization
         public CustomizeWorkspace()
@@ -25,7 +19,7 @@ namespace Thumper_Custom_Level_Editor
             //set propertygrid to the color settings
             propertyGridUIColors.SelectedObject = TCLE.settingsUITheme;
             //setup Sequencer colors
-            foreach (var bmp in TCLE.ColorIcons)
+            foreach (KeyValuePair<string, Bitmap> bmp in TCLE.ColorIcons)
                 imageList1.Images.Add(bmp.Key, bmp.Value);
             BuildObjectTree();
             //set mute
@@ -93,7 +87,6 @@ namespace Thumper_Custom_Level_Editor
             colorDialog.Color = btn.BackColor;
             if (colorDialog.ShowDialog() == DialogResult.OK) {
                 TCLE.PlaySound("UIcolorapply");
-                Color _c = colorDialog.Color;
                 btn.BackColor = colorDialog.Color;
             }
         }
