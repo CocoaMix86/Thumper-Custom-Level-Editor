@@ -835,8 +835,21 @@ namespace Thumper_Custom_Level_Editor
                     continue;
                 string[] splitextension = file.Name.Replace(".txt", "").Split('_', 2);
                 if (sort)
-                    Directory.CreateDirectory($@"{file.DirectoryName}\{splitextension[0]}");                
-                File.Move(file.FullName, $@"{file.DirectoryName}\{(sort ? splitextension[0] + "\\" : "")}{splitextension[1]}.{splitextension[0].ToLower()}");
+                    Directory.CreateDirectory($@"{file.DirectoryName}\{splitextension[0]}");
+
+                FileInfo newfile = new($@"{file.DirectoryName}\{(sort ? splitextension[0] + "\\" : "")}{splitextension[1]}.{splitextension[0].ToLower()}");
+                File.Move(file.FullName, newfile.FullName);
+                //resave leafs and lvls to properly convert the datapoints
+                if (newfile.Extension == ".leaf") {
+                    dynamic _load = LoadFileLock(newfile.FullName);
+                    Form_LeafEditor _leaf = new(_load, newfile);
+                    _leaf.SaveCheckAndWrite(true, "");
+                }
+                else if (newfile.Extension == ".lvl") {
+                    dynamic _load = LoadFileLock(newfile.FullName);
+                    Form_LvlEditor _lvl = new(_load, newfile);
+                    _lvl.SaveCheckAndWrite(true, "");
+                }
             }
             //build the JSON to write to file
             JObject _saveJSON = BuildSave(Convert);

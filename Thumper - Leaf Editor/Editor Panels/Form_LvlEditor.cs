@@ -589,7 +589,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Text = LoadedLvl.Name;
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
-
+            
             lvlProperties = new(this, filepath) {
                 approachbeats = (int)_load["approach_beats"],
                 volume = (decimal)_load["volume"],
@@ -615,6 +615,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             ///load leafs associated with this lvl
+            lvlProperties.lvlleafs.CollectionChanged -= lvlleaf_CollectionChanged;
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData() {
                     leafname = (string)leaf["leaf_name"],
@@ -623,6 +624,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next(0, 1000000)
                 });
             }
+            lvlProperties.lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
 
             btnLvlLeafRandom.Enabled = true;
             propertyGridLvl.SelectedObject = lvlProperties;
