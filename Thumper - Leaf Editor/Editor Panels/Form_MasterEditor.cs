@@ -528,8 +528,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
                     TCLE.LevelSections.Add("SECTION_LINEAR");
                 }
-                dynamic _saveTCL = TCLE.BuildSave(TCLE.ProjectProperties);
-                File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveTCL, Formatting.Indented));
+                if (!SaveOnlyNoLoad) {
+                    dynamic _saveTCL = TCLE.BuildSave(TCLE.ProjectProperties);
+                    File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveTCL, Formatting.Indented));
+                }
                 //
                 if (playsound) TCLE.PlaySound("UIsave");
             }
