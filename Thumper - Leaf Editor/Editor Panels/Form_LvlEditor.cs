@@ -240,6 +240,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             ///int _in = e.NewStartingIndex;
 
+            lvlLeafList.Rows.Clear();
             foreach (LvlLeafData leaf in LvlLeafs) {
                 lvlLeafList.Rows.Add(new object[] {
                     Properties.Resources.editor_leaf,
