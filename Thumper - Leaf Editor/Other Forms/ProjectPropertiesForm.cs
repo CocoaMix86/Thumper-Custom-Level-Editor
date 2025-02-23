@@ -86,8 +86,7 @@ namespace Thumper_Custom_Level_Editor
             Dictionary<string, FileInfo> defaultFiles = new() {
                 {"defaultsamp", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.samp")},
                 {"defaultspn", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.spn")},
-                {"defaultxfm", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.xfm")},
-                {"pyramidoutro", new FileInfo($@"{NewProjectProperties.WorkingFolder}\pyramid_outro.leaf")}
+                {"defaultxfm", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.xfm")}
             };
             
             ///these 4 files below are required defaults of new levels.
@@ -105,11 +104,6 @@ namespace Thumper_Custom_Level_Editor
             if (!NewProjectProperties.WorkingFolder.GetFiles(defaultFiles["defaultxfm"].Name, SearchOption.AllDirectories).Any()) {
                 using (StreamWriter sw = defaultFiles["defaultxfm"].CreateText()) {
                     sw.Write(Properties.Resources.xfm_default);
-                }
-            }
-            if (!NewProjectProperties.WorkingFolder.GetFiles(defaultFiles["pyramidoutro"].Name, SearchOption.AllDirectories).Any()) {
-                using (StreamWriter sw = defaultFiles["pyramidoutro"].CreateText()) {
-                    sw.Write(Properties.Resources.leaf_pyramid_outro);
                 }
             }
 

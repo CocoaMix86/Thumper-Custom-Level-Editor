@@ -798,7 +798,13 @@ namespace Thumper_Custom_Level_Editor
 
             if (MessageBox.Show("This will convert the project to the new TCLE 3.0 format. This change CANNOT be undone.\nPlease make a backup of your project before continuing.", "WARNING", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                 return;
-            bool sort = MessageBox.Show("Sort files into subfolders?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes;
+
+            int countleaf = LevelDetails.Directory.GetFiles("leaf_*.txt", SearchOption.AllDirectories).Length;
+            int countlvl = LevelDetails.Directory.GetFiles("lvl_*.txt", SearchOption.AllDirectories).Length;
+            int countgate = LevelDetails.Directory.GetFiles("gate_*.txt", SearchOption.AllDirectories).Length;
+            int countsamp = LevelDetails.Directory.GetFiles("samp_*.txt", SearchOption.AllDirectories).Length;
+            int countmaster = LevelDetails.Directory.GetFiles("master_*.txt", SearchOption.AllDirectories).Length;
+            bool sort = MessageBox.Show($"Sort files into subfolders?\n{countleaf} leaf files\n{countlvl} lvl files\n{countgate} gate files\n{countsamp} samp files\n{countmaster} master files", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes;
 
             //load the properties of the TCL and create projectProperties
             dynamic ProjectJson = LoadFileLock(LevelDetails.FullName);
@@ -842,13 +848,21 @@ namespace Thumper_Custom_Level_Editor
                 //resave leafs and lvls to properly convert the datapoints
                 if (newfile.Extension == ".leaf") {
                     dynamic _load = LoadFileLock(newfile.FullName);
-                    Form_LeafEditor _leaf = new(_load, newfile);
+                    Form_LeafEditor _leaf = new(_load, newfile, true);
                     _leaf.SaveCheckAndWrite(true, "");
+                    CloseFileLock(newfile);
                 }
                 else if (newfile.Extension == ".lvl") {
                     dynamic _load = LoadFileLock(newfile.FullName);
-                    Form_LvlEditor _lvl = new(_load, newfile);
+                    Form_LvlEditor _lvl = new(_load, newfile, true);
                     _lvl.SaveCheckAndWrite(true, "");
+                    CloseFileLock(newfile);
+                }
+                else if (newfile.Extension == ".master") {
+                    dynamic _load = LoadFileLock(newfile.FullName);
+                    Form_MasterEditor _master = new(_load, newfile, true);
+                    _master.SaveCheckAndWrite(true, "");
+                    CloseFileLock(newfile);
                 }
             }
             //build the JSON to write to file
@@ -856,7 +870,7 @@ namespace Thumper_Custom_Level_Editor
             //write JSON to file
             File.WriteAllText($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
             //locate pyramid_outro
-            FileInfo pyramid = LevelDetails.Directory.GetFiles("*.*", SearchOption.AllDirectories).FirstOrDefault();
+            FileInfo pyramid = LevelDetails.Directory.GetFiles("pyramid_outro.leaf", SearchOption.AllDirectories).FirstOrDefault();
             if (pyramid != null)
                 File.WriteAllText($@"{pyramid.FullName}", Properties.Resources.leaf_pyramid_outro);
             else

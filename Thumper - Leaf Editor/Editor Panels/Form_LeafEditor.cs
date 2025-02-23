@@ -11,22 +11,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     {
         #region Form Construction
         ///Load LEAF
-        public Form_LeafEditor(dynamic load = null, FileInfo filepath = null)
+        public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             InitializeComponent();
             RenderForm();
             ColorFormElements();
+            SaveOnlyNoLoad = saveonlynoload;
 
             if (load != null) {
                 LoadLeaf(load, filepath);
                 //each object in the seq_objs[] list becomes a track
                 LeafProperties.seq_objs = LoadSequencer(load["seq_objs"], LeafProperties);
-                LoadTracksFromSequencer(LeafProperties.seq_objs);
-                LoadEnd();
-                UndoList.Add(new SaveState() {
-                    reason = "",
-                    savestate = load
-                });
+                if (!SaveOnlyNoLoad) {
+                    LoadTracksFromSequencer(LeafProperties.seq_objs);
+                    LoadEnd();
+                    UndoList.Add(new SaveState() {
+                        reason = "",
+                        savestate = load
+                    });
+                }
+                else {
+                    EditorIsLoading = false;
+                }
             }
         }
         ///Load LVL Sequencer
@@ -87,6 +93,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         public bool EditorIsLoading;
+        private bool SaveOnlyNoLoad;
         public FileInfo loadedleaf
         {
             get => LoadedLeaf;
@@ -2217,7 +2224,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///LEAF LENGTH
         public void LeafLengthChanged()
         {
-            if (LeafProperties == null)
+            if (LeafProperties == null || SaveOnlyNoLoad)
                 return;
             int data = trackEditor.ColumnCount - FrozenColumnOffset;
 

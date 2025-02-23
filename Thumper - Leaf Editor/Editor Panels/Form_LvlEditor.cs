@@ -9,11 +9,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_LvlEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_LvlEditor(dynamic load = null, FileInfo filepath = null)
+        public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             InitializeComponent();
             InitializeLvlStuff();
             ColorFormElements();
+            SaveOnlyNoLoad = saveonlynoload;
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
@@ -53,6 +54,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         private bool EditorIsLoading;
+        private bool SaveOnlyNoLoad;
         public FileInfo loadedlvl
         {
             get => LoadedLvl;
@@ -236,8 +238,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (LvlProperties.LeafReload)
                 return;
-            int _in = e.NewStartingIndex;
+            ///int _in = e.NewStartingIndex;
 
+            foreach (LvlLeafData leaf in LvlLeafs) {
+                lvlLeafList.Rows.Add(new object[] {
+                    Properties.Resources.editor_leaf,
+                    leaf.leafname,
+                    0 });
+            }
+            /*
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 lvlLeafList.RowCount = 0;
             }
@@ -253,7 +262,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
             }
-
+            */
             RecalculateRuntime();
 
             //enable certain buttons if there are enough items for them
@@ -606,7 +615,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlLeafs.Clear();
 
             //load loop track names and paths to lvlLoopTracks DGV
-            TCLE.ReloadProjectSamples();
             ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
             foreach (dynamic samp in _load["loops"]) {
                 lvlProperties.lvlloops.Add(new LvlLoop() {
@@ -625,6 +633,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             lvlProperties.lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
+            lvlleaf_CollectionChanged(null, null);
 
             btnLvlLeafRandom.Enabled = true;
             propertyGridLvl.SelectedObject = lvlProperties;
@@ -813,9 +822,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntime()
         {
+            if (EditorIsLoading || SaveOnlyNoLoad)
+                return 0;
             int beattotal = 0;
             foreach (LvlLeafData _leaf in LvlLeafs) {
-                FileInfo leaffile = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Value.Name == _leaf.leafname).Value;
+                FileInfo leaffile = TCLE.ProjectExplorer?.projectfiles.FirstOrDefault(x => x.Value.Name == _leaf.leafname).Value;
                 leaffile?.Refresh();
                 int beats = (leaffile != null && leaffile.Exists) ? 0 : -1;
                 if (beats == -1) {

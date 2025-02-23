@@ -794,8 +794,18 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripProjectRegen_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("This will overwrite the \"default\" files in the working folder. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                File.WriteAllText($@"{WorkingFolder}\spn_default.txt", Properties.Resources.spn_default);
-                File.WriteAllText($@"{WorkingFolder}\xfm_default.txt", Properties.Resources.xfm_default);
+                //spn
+                FileInfo _locatespn = WorkingFolder.GetFiles("default.spn", SearchOption.AllDirectories).FirstOrDefault();
+                if (_locatespn != null)
+                    File.WriteAllText(_locatespn.FullName, Properties.Resources.spn_default);
+                else
+                    File.WriteAllText($@"{WorkingFolder}\default.spn", Properties.Resources.spn_default);
+                //xfm
+                FileInfo _locatexfm = WorkingFolder.GetFiles("default.xfm", SearchOption.AllDirectories).FirstOrDefault();
+                if (_locatexfm != null)
+                    File.WriteAllText(_locatexfm.FullName, Properties.Resources.xfm_default);
+                else
+                    File.WriteAllText($@"{WorkingFolder}\default.xfm", Properties.Resources.xfm_default);
             }
         }
 

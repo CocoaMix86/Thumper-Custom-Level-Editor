@@ -11,11 +11,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_MasterEditor : WeifenLuo.WinFormsUI.Docking.DockContent
     {
         #region Form Construction
-        public Form_MasterEditor(dynamic load = null, FileInfo filepath = null)
+        public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             InitializeComponent();
             InitializeMasterStuff();
             ColorFormElements();
+            SaveOnlyNoLoad = saveonlynoload;
             masterToolStrip.Renderer = new ToolStripOverride();
             TCLE.DoubleBufferDGV(masterLvlList, false);
 
@@ -53,6 +54,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         public bool EditorLoading;
+        private bool SaveOnlyNoLoad;
         public FileInfo loadedmaster
         {
             get { return LoadedMaster; }
@@ -191,6 +193,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if (SaveOnlyNoLoad)
+                return;
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 masterLvlList.RowCount = 0;
             }
@@ -533,6 +537,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntime()
         {
+            if (SaveOnlyNoLoad)
+                return 0;
             int beattotal = 0;
             foreach (MasterLvlData _lvl in MasterLvls) {
                 int beats = TCLE.CalculateSublevelRuntime(_lvl);
