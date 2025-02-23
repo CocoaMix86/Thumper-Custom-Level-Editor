@@ -571,6 +571,7 @@ namespace Thumper_Custom_Level_Editor
                 foreach (Sequencer_Object seq in leaf.leafProperties.seq_objs) {
                     Form_LeafEditor.ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
                 }
+                leaf.ResizeHeaders();
             }
         }
 

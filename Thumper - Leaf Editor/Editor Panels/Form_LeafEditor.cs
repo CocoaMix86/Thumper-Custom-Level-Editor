@@ -94,6 +94,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorIsSaved = true;
         public bool EditorIsLoading;
         private bool SaveOnlyNoLoad;
+        private bool TrackUndo = true;
         public FileInfo loadedleaf
         {
             get => LoadedLeaf;
@@ -2073,17 +2074,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //clear the DGV and prep for new data
             trackEditor.Rows.Clear();
             trackEditor.RowHeadersVisible = true;
-            int biggestheader = 50;
             foreach (Sequencer_Object seq in Seq_Objs) {
+                trackEditor.Rows.Add(seq.editor_row);
+                TrackRawImport(seq, seq.data_points);
+            }
+            ResizeHeaders();
+        }
+
+        public void ResizeHeaders()
+        {
+            int biggestheader = 50;
+            foreach (Sequencer_Object seq in SequencerObjects) {
                 //measure header and see if it's the biggest
                 int tempsize = TextRenderer.MeasureText(seq.editor_row.HeaderCell.Value.ToString(), seq.editor_row.HeaderCell.Style.Font).Width;
                 if (tempsize > biggestheader)
                     biggestheader = tempsize;
-
-                trackEditor.Rows.Add(seq.editor_row);
-                TrackRawImport(seq, seq.data_points);
             }
-
             //set header width manually and allow resizing
             trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             trackEditor.RowHeadersWidth = biggestheader;
@@ -2194,10 +2200,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //denote editor tab is not saved
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}" + "*";
                 //update the undo list
-                UndoList.Insert(0, new SaveState() {
-                    reason = Reason,
-                    savestate = _saveJSON
-                });
+                if (TrackUndo) {
+                    UndoList.Insert(0, new SaveState() {
+                        reason = Reason,
+                        savestate = _saveJSON
+                    });
+                }
             }
             else {
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}";
@@ -2594,6 +2602,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int pastingrow = trackEditor.CurrentCell.RowIndex;
             int pastingcol = trackEditor.CurrentCell.ColumnIndex;
             int offset = 0;
+            TrackUndo = false;
             for (int rowindex = 0; rowindex < copiedcells.Length; rowindex++) {
                 if (pastingrow + rowindex + offset >= trackEditor.RowCount)
                     break;
@@ -2616,6 +2625,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         exit:
+            TrackUndo = true;
             SaveCheckAndWrite(false, "Pasted cells");
         }
         #endregion
