@@ -49,6 +49,7 @@ namespace Thumper_Custom_Level_Editor
             dockMain.Theme = new VS2015DarkTheme();
             Instance = this;
             TabRightClickMenu = contextmenuTabClick;
+            MainBeeble.Owner = this;
             projectProperties = new() {
                 projectname = "",
                 description = "",

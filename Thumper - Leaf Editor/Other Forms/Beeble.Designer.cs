@@ -53,7 +53,6 @@
             this.Name = "Beeble";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.TopMost = true;
             this.MouseDown += this.Beeble_MouseDown;
             this.ResumeLayout(false);
         }
