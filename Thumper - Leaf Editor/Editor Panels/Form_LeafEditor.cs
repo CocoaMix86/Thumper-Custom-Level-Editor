@@ -94,7 +94,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorIsSaved = true;
         public bool EditorIsLoading;
         private bool SaveOnlyNoLoad;
-        private bool TrackUndo = true;
         public FileInfo loadedleaf
         {
             get => LoadedLeaf;
@@ -134,7 +133,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool ismoving;
         private bool isfinding;
         private bool ispasting;
-        private bool LogUndo;
+        private bool LogUndo = true;
         private bool GlobalMute;
         private bool GlobalDisable;
         private bool GlobalExpand;
@@ -2200,7 +2199,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //denote editor tab is not saved
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}" + "*";
                 //update the undo list
-                if (TrackUndo) {
+                if (LogUndo) {
                     UndoList.Insert(0, new SaveState() {
                         reason = Reason,
                         savestate = _saveJSON
@@ -2602,7 +2601,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int pastingrow = trackEditor.CurrentCell.RowIndex;
             int pastingcol = trackEditor.CurrentCell.ColumnIndex;
             int offset = 0;
-            TrackUndo = false;
+            LogUndo = false;
             for (int rowindex = 0; rowindex < copiedcells.Length; rowindex++) {
                 if (pastingrow + rowindex + offset >= trackEditor.RowCount)
                     break;
@@ -2625,7 +2624,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         exit:
-            TrackUndo = true;
+            LogUndo = true;
             SaveCheckAndWrite(false, "Pasted cells");
         }
         #endregion

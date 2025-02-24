@@ -681,29 +681,48 @@ namespace Thumper_Custom_Level_Editor
             }
             //otherwise, open a standard editor for the document type
             string filetype = filepath.Extension;
+            //this finds a pane in the active workspace that has matching extensions already open on it
+            var Panes = ActiveWorkspace.dockMain.Panes;
+            DockPane OpenHere = Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filetype)).Any());
+
             if (filetype == ".master") {
                 Form_MasterEditor master = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                master.Show(ActiveWorkspace.dockMain, DockState.Document);
+                if (OpenHere != null)
+                    master.Show(OpenHere, null);
+                else
+                    master.Show(ActiveWorkspace.dockMain, DockState.Document);
                 return true;
             }
             else if (filetype == ".lvl") {
                 Form_LvlEditor lvl = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                lvl.Show(ActiveWorkspace.dockMain, DockState.Document);
+                if (OpenHere != null)
+                    lvl.Show(OpenHere, null);
+                else
+                    lvl.Show(ActiveWorkspace.dockMain, DockState.Document);
                 return true;
             }
             else if (filetype == ".gate") {
                 Form_GateEditor gate = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                gate.Show(ActiveWorkspace.dockMain, DockState.Document);
+                if (OpenHere != null)
+                    gate.Show(OpenHere, null);
+                else
+                    gate.Show(ActiveWorkspace.dockMain, DockState.Document);
                 return true;
             }
             else if (filetype == ".leaf") {
                 Form_LeafEditor leaf = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                leaf.Show(ActiveWorkspace.dockMain, DockState.Document);
+                if (OpenHere != null)
+                    leaf.Show(OpenHere, null);
+                else
+                    leaf.Show(ActiveWorkspace.dockMain, DockState.Document);
                 return true;
             }
             else if (filetype == ".samp") {
                 Form_SampleEditor sample = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                sample.Show(ActiveWorkspace.dockMain, DockState.Document);
+                if (OpenHere != null)
+                    sample.Show(OpenHere, null);
+                else
+                    sample.Show(ActiveWorkspace.dockMain, DockState.Document);
                 return true;
             }
             //if file type not supported, open raw
