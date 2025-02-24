@@ -1533,6 +1533,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //then set a single one to null. The "cellvaluechanged" event will handle the rest
             CellValueChanged(filledcells[0].RowIndex, filledcells[0].ColumnIndex, true);
+            UndoList.RemoveAt(0);
 
             TCLE.PlaySound("UIdataerase");
             SaveCheckAndWrite(false, "Clear Object Values");
