@@ -310,7 +310,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!btnLvlPathView.Checked)
                 return;
             pictureTunnelViewer.Visible = true;
-            pictureTunnelViewer.Location = new Point(this.PointToClient(System.Windows.Forms.Cursor.Position).X + 50, this.Height - 300);
+            Point mouse = this.PointToClient(System.Windows.Forms.Cursor.Position);
+            pictureTunnelViewer.Location = new Point(mouse.X + 50, (mouse.Y + 150 > this.Height) ? this.Height - 300 : mouse.Y - 150);
             pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
         }
 
