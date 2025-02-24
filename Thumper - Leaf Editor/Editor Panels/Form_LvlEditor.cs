@@ -312,7 +312,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             pictureTunnelViewer.Visible = true;
             Point mouse = this.PointToClient(System.Windows.Forms.Cursor.Position);
             pictureTunnelViewer.Location = new Point(mouse.X + 50, (mouse.Y + 150 > this.Height) ? this.Height - 300 : mouse.Y - 150);
-            pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
+
+            string pathname = (string)lvlLeafPaths.Rows[e.RowIndex].Cells[0].GetEditedFormattedValue(e.RowIndex, DataGridViewDataErrorContexts.Commit);
+            pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{pathname.Replace(".path", "")}");
+            //pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
         }
 
         private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => pictureTunnelViewer.Visible = false;
