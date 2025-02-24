@@ -1554,10 +1554,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        private string InterpLastUsed;
+        private void btnLeafInterpLinear_ButtonClick(object sender, EventArgs e)
+        {
+            Interpolate(InterpLastUsed);
+        }
+
         private void contextMenuInterps_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem.Text == "Examples (web link)")
                 return;
+            Interpolate(e.ClickedItem.Text);
+        }
+
+        private void Interpolate(string interpOption)
+        {
+            InterpLastUsed = interpOption;
             DataGridViewSelectedCellCollection SelectedCells = trackEditor.SelectedCells;
             //interpolation requires 2 cells only
             if (SelectedCells.Count != 2) {
@@ -1575,8 +1587,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Sequencer_Object interpobject = SequencerObjects[SelectedCells[0].RowIndex];
 
             //get start and end values, and how many beats separate them
-            double _start = (double)((decimal?)InterpCells[0].Value ?? 0);
-            double _end = (double)((decimal?)InterpCells[1].Value ?? 0);
+            double _start = (double)((decimal?)InterpCells[0].Value ?? (decimal)interpobject.defaultvalue);
+            double _end = (double)((decimal?)InterpCells[1].Value ?? (decimal)interpobject.defaultvalue);
             double max = Math.Max(_start, _end);
             double min = Math.Min(_start, _end);
             int _beats = InterpCells[1].ColumnIndex - InterpCells[0].ColumnIndex + 1;
@@ -1588,7 +1600,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             //depending on interp option chosen, run a different calculation per value in interp[]
-            switch (e.ClickedItem.Text) {
+            switch (interpOption) {
                 case "Linear":
                     //no changes needed
                     break;
