@@ -184,11 +184,13 @@ namespace Thumper_Custom_Level_Editor
 
         public void SetKeyBinds()
         {
-            if (Properties.Settings.Default.UserKeybinds == "-") {
-                Keybinds = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            Dictionary<string, Keys> _default = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            if (Properties.Settings.Default.UserKeybinds != "-") {
+                Dictionary<string, Keys> _user = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+
+                _user.ToList().ForEach(x => _default[x.Key] = x.Value);
             }
-            else
-                Keybinds = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            Keybinds = _default;
             ///
             toolstripFileNewProject.ShortcutKeys = Keybinds["New Project"];
             toolstripFileOpenProject.ShortcutKeys = Keybinds["Open Project"];
@@ -198,6 +200,12 @@ namespace Thumper_Custom_Level_Editor
             toolstripFileExit.ShortcutKeys = Keybinds["Close App"];
             ///
             toolstripViewFullscreen.ShortcutKeys = Keybinds["Fullscreen"];
+            ///
+            toolstripProjectLeaf.ShortcutKeys = Keybinds["New Leaf"];
+            toolstripProjectLvl.ShortcutKeys = Keybinds["New Lvl"];
+            toolstripProjectGate.ShortcutKeys = Keybinds["New Gate"];
+            toolstripProjectMaster.ShortcutKeys = Keybinds["New Master"];
+            toolstripProjectSample.ShortcutKeys = Keybinds["New Sample"];
             ///
             toolstripWindowFloat.ShortcutKeys = Keybinds["Float Current Tab"];
             toolstripWindowFloatAll.ShortcutKeys = Keybinds["Float All Tabs"];

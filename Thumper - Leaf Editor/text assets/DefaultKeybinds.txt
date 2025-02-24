@@ -1,4 +1,8 @@
-New File;N, Control
+New Leaf;D1, Alt
+New Lvl;D2, Alt
+New Gate;D3, Alt
+New Master;D4, Alt
+New Sample;D5, Alt
 Open File;O, Control
 Save File;S, Control
 Save File As;A, Control
