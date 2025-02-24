@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using Windows.Devices.Lights;
@@ -557,7 +558,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
             }
-            paintheader:
+        paintheader:
             RowPrePainting = true;
             e.PaintHeader(true);
             RowPrePainting = false;
@@ -866,10 +867,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //sort cells in selection based on column. depends on direction, reverse collection.
                     //this processing order is important so cells dont overwrite each other when moving
                     IOrderedEnumerable<DataGridViewCell> dgvcc;
-                    if (indexdirection == -1) 
-                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex);                    
-                    else 
-                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);                    
+                    if (indexdirection == -1)
+                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex);
+                    else
+                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);
 
                     trackEditor.ClearSelection();
                     //iterate over each in the selection
@@ -1130,14 +1131,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void txtSearch_Enter(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Search Objects (Ctrl+;)")
+            if (txtSearch.Text == "Search Objects (Ctrl+;)") {
+                txtSearch.TextChanged -= txtSearch_TextChanged;
                 txtSearch.Text = "";
+                txtSearch.TextChanged += txtSearch_TextChanged;
+            }
         }
 
         private void txtSearch_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtSearch.Text))
+            if (string.IsNullOrEmpty(txtSearch.Text)) {
+                txtSearch.TextChanged -= txtSearch_TextChanged;
                 txtSearch.Text = "Search Objects (Ctrl+;)";
+                txtSearch.TextChanged += txtSearch_TextChanged;
+            }
         }
 
         private void toolStripFavAdd_Click(object sender, EventArgs e)
@@ -1548,6 +1555,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void contextMenuInterps_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            if (e.ClickedItem.Text == "Examples (web link)")
+                return;
             DataGridViewSelectedCellCollection SelectedCells = trackEditor.SelectedCells;
             //interpolation requires 2 cells only
             if (SelectedCells.Count != 2) {
@@ -1683,6 +1692,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ShowRawTrackData(interpobject);
             TCLE.PlaySound("UIinterpolate");
             SaveCheckAndWrite(false, "Interpolated");
+        }
+
+        private void exampleswebLinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://easings.net/", UseShellExecute = true });
         }
 
         private void btnLeafColors_Click(object sender, EventArgs e)
@@ -2573,7 +2587,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             return foundnode;
         }
-                
+
         #region Cut Copy Paste
         public void Copy()
         {
