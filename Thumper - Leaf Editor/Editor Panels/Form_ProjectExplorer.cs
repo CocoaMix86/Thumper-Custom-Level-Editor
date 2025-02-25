@@ -169,14 +169,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void txtSearch_GotFocus(object sender, EventArgs e)
         {
-            if (txtSearch.Text == "Search Project Explorer (Ctrl+;)")
+            if (txtSearch.Text == "Search Project Explorer (Ctrl+;)") {
+                txtSearch.TextChanged -= txtSearch_TextChanged;
                 txtSearch.Text = "";
+                txtSearch.TextChanged += txtSearch_TextChanged;
+            }
         }
 
         private void txtSearch_LostFocus(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtSearch.Text))
+            if (string.IsNullOrEmpty(txtSearch.Text)) {
+                txtSearch.TextChanged -= txtSearch_TextChanged;
                 txtSearch.Text = "Search Project Explorer (Ctrl+;)";
+                txtSearch.TextChanged += txtSearch_TextChanged;
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -390,8 +396,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //check if each node exists at the destination and ask to overwrite it. If' No', skip this node.
                 if (targetnode.Nodes.Contains(tn)) {
+                    /*
                     if (MessageBox.Show($"Item '{tn.Name}' already exists at the destination. Overwrite it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No)
                         continue;
+                    */
+                    FileInfo fullname = new($@"{projectfolders[targetnode.FullPath].FullName}\{tn.Name}");
+                    string name = Path.GetFileNameWithoutExtension(fullname.Name)
+                    dest = $@"{projectfolders[targetnode.FullPath].FullName}\{tn.Name}"
                 }
 
                 if (cutfile) {
