@@ -40,28 +40,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private string renamefile;
         private string renamenode;
         private static string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
-        private static DirectoryInfo ProjectDirectory => TCLE.WorkingFolder;
         private TreeNode previousNode;
         private List<TreeNode> filestocopy;
         private List<TreeNode> selectedNodes = new();
         private List<string> expandednodes = new();
         //string is obj_name, FileInfo is file itself
-        public Dictionary<string, FileInfo> projectfiles = new();
-        public Dictionary<string, DirectoryInfo> projectfolders = new();
         #endregion
         #region Create Tree
         public void CreateTreeView()
         {
-            if (ProjectDirectory == null) return;
+            if (TCLE.WorkingFolder == null) return;
             expandednodes.Clear();
             expandednodes = GetExpandedNodes(treeView1.Nodes);
             //clear existing treeview
             treeView1.Nodes.Clear();
             projectfiles.Clear();
             projectfolders.Clear();
-            if (ProjectDirectory.Exists) {
+            if (TCLE.WorkingFolder.Exists) {
                 //Build the tree
-                BuildTree(ProjectDirectory, treeView1.Nodes);
+                BuildTree(TCLE.WorkingFolder, treeView1.Nodes);
                 //the root of the tree needs different properties
                 TreeNode ProjectRoot = treeView1.Nodes[0];
                 ProjectRoot.ImageKey = "project";
@@ -300,7 +297,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             string source = renametype == "folder" ? projectfolders[renamefile].FullName : projectfiles[renamefile].FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
-            string dest = $@"{Path.GetDirectoryName(ProjectDirectory.FullName)}\{node.FullPath}";
+            string dest = $@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{node.FullPath}";
             //check if same name
             if (renamefile == node.FullPath) {
                 return;
@@ -686,7 +683,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            if (selectedNodes[0].FullPath == ProjectDirectory.Name)
+            if (selectedNodes[0].FullPath == TCLE.WorkingFolder.Name)
                 return;
             if (projectfolders.TryGetValue(selectedNodes[0].FullPath, out _))
                 return;
