@@ -31,8 +31,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool cutfile;
         private bool dontcancelifrename;
         private string renametype;
-        private TreeNode renamefile;
-        private string renamenode;
+        private TreeNode NewNameNode;
+        private string OldName;
         private static string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
         private TreeNode previousNode;
         private List<TreeNode> filestocopy;
@@ -197,8 +197,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             ///renamefile = e.Node.FullPath;
-            renamefile = e.Node;
-            renamenode = e.Node.Name;
+            NewNameNode = e.Node;
+            OldName = e.Node.Name;
             renametype = e.Node.ImageKey == "folder" ? "folder" : "file";
         }
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
@@ -210,25 +210,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check for not allowed characters in file path
             if (notallowedchars.Any(c => node.Text.Contains(c)) || node.Text is "." or "..") {
                 MessageBox.Show($"File and Folder names cannot:\n- contain any of the following characters: / ? : & \\ * \" < > | # %\n- be '.' or '..'\n\nPlease enter a valid name.", "Thumper Custom Level Editor");
-                node.Text = renamenode;
+                node.Text = OldName;
                 return;
             }
-            string source = renametype == "folder" ? ProjectExplorer.Files[renamefile].Folder.FullName : ProjectExplorer.Files[renamefile].File.FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
+            string source = renametype == "folder" ? ProjectExplorer.Files[NewNameNode].Folder.FullName : ProjectExplorer.Files[NewNameNode].File.FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
             string dest = $@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{node.FullPath}";
             //check if same name
-            if (renamefile == node) {
+            if (NewNameNode.Text == OldName) {
                 return;
             }
             //check if name exists already
             if (File.Exists(dest) || Directory.Exists(dest)) {
                 MessageBox.Show($"A file or folder with the name '{node.Text}' already exists on\ndisk at this location. Please choose another name.", "Thumper Custom Level Editor");
-                node.Text = renamenode;
+                node.Text = OldName;
                 return;
             }
             //check for changing file extension
             if (node.ImageKey != "folder" && Path.GetExtension(source) != Path.GetExtension(dest)) {
                 if (MessageBox.Show("If you change a file name extension, the file may become\nunusable. Are you sure you want to change it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
-                    node.Text = renamenode;
+                    node.Text = OldName;
                     return;
                 }
             }
