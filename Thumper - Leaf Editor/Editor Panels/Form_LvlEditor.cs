@@ -110,7 +110,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{LvlLeafs[e.RowIndex].leafname}")).Value);
+            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"{LvlLeafs[e.RowIndex].leafname}")).Value?.File);
 
         }
         private Rectangle dragBoxFromMouseDown;
@@ -417,8 +417,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
-            List<KeyValuePair<string, FileInfo>> leafs = TCLE.ProjectExplorer.projectfiles.Where(x => x.Value.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)).ToList();
-            AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].Value.FullName);
+            List<FileInfo> leafs = ProjectExplorer.Files.Select(x => x.Value.File).Where(x => x.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)).ToList();
+            AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].FullName);
             SaveCheckAndWrite(false, "Add Random Leaf");
         }
 
@@ -665,7 +665,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
                         File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
-                        TCLE.ProjectExplorer.CreateTreeView();
+                        ProjectExplorer.CreateTreeView();
                     }
                     else {
                         MessageBox.Show($"A file with that name already exists in \"{TCLE.WorkingFolder.FullName}\". File not copied over.", "Thumper Custom Level Editor");
@@ -765,7 +765,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (isnew)
                     TCLE.CloseFileLock(loadedlvl);
                 //after saving new file, refresh the project explorer
-                TCLE.ProjectExplorer.CreateTreeView();
+                ProjectExplorer.CreateTreeView();
             }
             return loadedlvl;
         }
@@ -831,7 +831,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return 0;
             int beattotal = 0;
             foreach (LvlLeafData _leaf in LvlLeafs) {
-                FileInfo leaffile = TCLE.ProjectExplorer?.projectfiles.FirstOrDefault(x => x.Value.Name == _leaf.leafname).Value;
+                FileInfo leaffile = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{_leaf.leafname}")).Value?.File;
                 leaffile?.Refresh();
                 int beats = (leaffile != null && leaffile.Exists) ? 0 : -1;
                 if (beats == -1) {

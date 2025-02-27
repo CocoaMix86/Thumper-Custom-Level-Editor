@@ -40,7 +40,7 @@ namespace Thumper_Custom_Level_Editor
         #endregion
 
         #region Form Construction
-        public static Form_ProjectExplorer ProjectExplorer;
+        public static Form_ProjectExplorer Explorer;
         public static Form_ProjectProperties dockProjectProperties;
         public TCLE(string LevelFromArg)
         {
@@ -443,17 +443,17 @@ namespace Thumper_Custom_Level_Editor
             panelRecentFiles.Visible = false;
 
             //create Project Explorer and Project Property panels
-            ProjectExplorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
-            ProjectExplorer.Show(dockMain, DockState.DockRight);
+            Explorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
+            Explorer.Show(dockMain, DockState.DockRight);
             dockProjectProperties = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
-            dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.35);
+            dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
             //Load the project''s files into Explorer
-            ProjectExplorer.LoadProject();
+            Explorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();
             //create a workspace
             Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
             workspace1.Show(dockMain, DockState.Document);
-            OpenFile(ProjectExplorer.projectfiles.FirstOrDefault(x => x.Value.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase)).Value);
+            OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).Value.File);
             //this will be the loading sound :D
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
 
@@ -641,21 +641,21 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripViewExplorer_Click(object sender, EventArgs e)
         {
-            if (ProjectExplorer.IsDisposed) {
-                ProjectExplorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
+            if (Explorer.IsDisposed) {
+                Explorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             }
-            ProjectExplorer.Show(dockMain, DockState.DockRight);
+            Explorer.Show(dockMain, DockState.DockRight);
         }
 
         private void toolstripViewProperties_Click(object sender, EventArgs e)
         {
             if (dockProjectProperties.IsDisposed) {
                 dockProjectProperties = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
-                dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
+                dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.3);
                 dockProjectProperties.LoadProjectProperties();
             }
             else
-                dockProjectProperties.Show(ProjectExplorer.Pane, DockAlignment.Bottom, 0.3);
+                dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.3);
         }
 
         private void toolstripViewFullscreen_Click(object sender, EventArgs e)
@@ -796,7 +796,7 @@ namespace Thumper_Custom_Level_Editor
                     }
                 }
 
-                TCLE.ProjectExplorer.CreateTreeView();
+                ProjectExplorer.CreateTreeView();
                 OpenFile(projectfile);
             }
         }
@@ -956,13 +956,13 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripTabCopyPath_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(ProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value.FullName);
+            Clipboard.SetText(ProjectExplorer.Files.First(x => x.Value.File.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value.FullPath);
         }
 
         private void toolstripTabOpenFolder_Click(object sender, EventArgs e)
         {
-            FileInfo foldertoopen = ProjectExplorer.projectfiles.First(x => x.Key.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value;
-            if (foldertoopen.Directory.Exists)
+            FileInfo foldertoopen = ProjectExplorer.Files.Select(x => x.Value.File).FirstOrDefault(x => x.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}"));
+            if (foldertoopen != null && foldertoopen.Directory.Exists)
                 Process.Start("explorer.exe", $@"/select, ""{foldertoopen.FullName}""");
         }
         #endregion

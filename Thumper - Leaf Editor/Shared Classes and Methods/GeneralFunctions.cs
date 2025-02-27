@@ -174,7 +174,7 @@ namespace Thumper_Custom_Level_Editor
             panelToolStrips.BackColor = AppSettings.ColorMainSubMenubar;
             dockMain.BackColor = AppSettings.ColorMainBG;
 
-            TCLE.ProjectExplorer?.ColorFormElements();
+            TCLE.Explorer?.ColorFormElements();
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 leaf.ColorFormElements();
@@ -555,8 +555,8 @@ namespace Thumper_Custom_Level_Editor
         {
             int _beatcount = 0;
             if (_masterlvl.type == "lvl") {
-                KeyValuePair<string, FileInfo> lvl = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{_masterlvl.name}"));
-                if (lvl.Key != null) _beatcount += CalculateLvlRuntime(lvl.Value.FullName);
+                FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{_masterlvl.name}")).Value?.File;
+                if (lvl != null) _beatcount += CalculateLvlRuntime(lvl.FullName);
                 else return -1;
             }
             //this section handles gate
@@ -567,8 +567,8 @@ namespace Thumper_Custom_Level_Editor
                 else
                     _beatcount += gatebeats;
             }
-            KeyValuePair<string, FileInfo> lvlrest = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{_masterlvl.rest}"));
-            if (lvlrest.Key != null) _beatcount += CalculateLvlRuntime(lvlrest.Value.FullName);
+            FileInfo lvlrest = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{_masterlvl.rest}")).Value?.File;
+            if (lvlrest != null) _beatcount += CalculateLvlRuntime(lvlrest.FullName);
 
             return _beatcount;
         }
@@ -580,9 +580,9 @@ namespace Thumper_Custom_Level_Editor
             List<int> bucketscounted = new();
             bool israndom;
             //load the gate to then loop through all lvls in it
-            KeyValuePair<string, FileInfo> gate = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{gatename}"));
-            if (gate.Key != null) {
-                _load = TCLE.LoadFileLock(gate.Value.FullName);
+            FileInfo gate = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{gatename}")).Value?.File;
+            if (gate != null) {
+                _load = TCLE.LoadFileLock(gate.FullName);
                 //if gate not found, _load is null. Return -1 to denote this
                 if (_load == null)
                     return -1;
@@ -591,18 +591,18 @@ namespace Thumper_Custom_Level_Editor
                 //loop through each lvl in gate
                 foreach (dynamic _lvl in _load["boss_patterns"]) {
                     //attempt to load lvl
-                    KeyValuePair<string, FileInfo> lvl = TCLE.ProjectExplorer.projectfiles.FirstOrDefault(x => x.Key.EndsWith($@"\{(string)_lvl["lvl_name"]}"));
-                    if (lvl.Key != null) {
+                    FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{(string)_lvl["lvl_name"]}")).Value?.File;
+                    if (lvl != null) {
                         //if random is enabled, count only the first entry in each bucket
                         if (israndom) {
                             if (!bucketscounted.Contains((int)_lvl["bucket_num"])) {
                                 bucketscounted.Add((int)_lvl["bucket_num"]);
-                                _beatcount += CalculateLvlRuntime(lvl.Value.FullName);
+                                _beatcount += CalculateLvlRuntime(lvl.FullName);
                             }
                         }
                         //otherwise count each lvl
                         else
-                            _beatcount += CalculateLvlRuntime(lvl.Value.FullName);
+                            _beatcount += CalculateLvlRuntime(lvl.FullName);
                     }
                 }
 

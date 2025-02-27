@@ -21,117 +21,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //add events to some controls
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;
-            //populate treeview on first load
-            if (TCLE.WorkingFolder != null) {
-                CreateTreeView();
-            }
         }
         public void LoadProject()
         {
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
         #endregion
         #region Variables
         private bool cutfile;
         private bool dontcancelifrename;
-        private bool filterenabled;
-        private bool filtersearch;
         private string renametype;
-        private string renamefile;
+        private TreeNode renamefile;
         private string renamenode;
         private static string[] notallowedchars = new string[] { "/", "?", ":", "&", "\\", "*", "\"", "<", ">", "|", "#", "%" };
         private TreeNode previousNode;
         private List<TreeNode> filestocopy;
         private List<TreeNode> selectedNodes = new();
-        private List<string> expandednodes = new();
         //string is obj_name, FileInfo is file itself
-        #endregion
-        #region Create Tree
-        public void CreateTreeView()
-        {
-            if (TCLE.WorkingFolder == null) return;
-            expandednodes.Clear();
-            expandednodes = GetExpandedNodes(treeView1.Nodes);
-            //clear existing treeview
-            treeView1.Nodes.Clear();
-            projectfiles.Clear();
-            projectfolders.Clear();
-            if (TCLE.WorkingFolder.Exists) {
-                //Build the tree
-                BuildTree(TCLE.WorkingFolder, treeView1.Nodes);
-                //the root of the tree needs different properties
-                TreeNode ProjectRoot = treeView1.Nodes[0];
-                ProjectRoot.ImageKey = "project";
-                ProjectRoot.SelectedImageKey = "project";
-                ProjectRoot.NodeFont = new Font("Microsoft Sans Serif", 8, System.Drawing.FontStyle.Bold);
-                ProjectRoot.ContextMenuStrip = contextMenuProject;
-
-                TCLE.ReloadLvlsInProject();
-            }
-            //if using filters or search, expand all folders to show all results
-            if (filterenabled || filtersearch)
-                treeView1.ExpandAll();
-            //otherwise expand root only
-            else {
-                treeView1.Nodes[0].Expand();
-                RecurseNodesFindExpanded(treeView1.Nodes);
-            }
-            //force each master to recalc runtime in case tree has new files
-            foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dock in TCLE.Instance.dockMain.Documents) {
-                if (dock.GetType() == typeof(Form_MasterEditor)) (dock as Form_MasterEditor).RecalculateRuntime();
-                if (dock.GetType() == typeof(Form_LvlEditor)) (dock as Form_LvlEditor).RecalculateRuntime();
-                if (dock.GetType() == typeof(Form_GateEditor)) (dock as Form_GateEditor).RecalculateRuntime();
-            }
-        }
-        private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
-        {
-            ///BuildTree is a recursive function.
-            //the very first node every time this function is called is a folder.
-            TreeNode folder = new() {
-                Text = directoryInfo.Name,
-                Name = directoryInfo.Name,
-                ImageKey = "folder",
-                SelectedImageKey = "folder",
-                ContextMenuStrip = contextMenuFolderClick,
-                ForeColor = Properties.Settings.Default.ColorProjExpText
-            };
-            addInMe.Add(folder);
-            projectfolders.Add(folder.FullPath, directoryInfo);
-
-            //Build subtree for each folder inside this folder
-            foreach (DirectoryInfo subdir in directoryInfo.GetDirectories()) {
-                BuildTree(subdir, folder.Nodes);
-            }
-
-            //add each file inside the folder to the tree
-            foreach (FileInfo file in directoryInfo.GetFiles()) {
-                if (file.Extension is ".TCL")
-                    continue;
-                TreeNode _tn = new() {
-                    Text = file.Name,
-                    Name = file.Name,
-                    ImageKey = TCLE.ImageExtensions.Contains(file.Extension) ? "image" : file.Extension,
-                    SelectedImageKey = TCLE.ImageExtensions.Contains(file.Extension) ? "image" : file.Extension,
-                    ContextMenuStrip = contextMenuFileClick,
-                    ForeColor = Properties.Settings.Default.ColorProjExpText
-                };
-                //this part finds any node that has the same name and highlights them red
-                ///FindDuplicateFile(_tn, Color.Red);
-                //
-                folder.Nodes.Add(_tn);
-                projectfiles.Add(_tn.FullPath, file);
-                //check for various filters being used
-                if (filtersearch && !file.Name.Contains(txtSearch.Text)) {
-                    _tn.Remove();
-                }
-                else if (filterenabled) {
-                    _tn.Remove();
-                    if ((filterLeaf.Checked && file.Extension is ".leaf") || (filterLvl.Checked && file.Extension is ".lvl") || (filterGate.Checked && file.Extension is ".gate") || (filterMaster.Checked && file.Extension is ".master") || (filterSample.Checked && file.Extension is ".samp"))
-                        folder.Nodes.Add(_tn);
-                }
-
-            }
-        }
         #endregion
         #region Key press Handling
         private void treeView1_KeyDown(object sender, KeyEventArgs e)
@@ -147,14 +53,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
         #region Physical Controls
-        private void filter_CheckChanged(object sender, EventArgs e) => CreateTreeView();
+        private void filter_CheckChanged(object sender, EventArgs e)
+        {
+            ProjectExplorer.FilterLeaf = filterLeaf.Checked;
+            ProjectExplorer.FilterLvl = filterLvl.Checked;
+            ProjectExplorer.FilterGate = filterGate.Checked;
+            ProjectExplorer.FilterMaster = filterMaster.Checked;
+            ProjectExplorer.FilterSamp = filterSample.Checked;
+            ProjectExplorer.CreateTreeView();
+        }
+
         private void btnFilter_ButtonClick(object sender, EventArgs e)
         {
-            filterenabled = !filterenabled;
+            ProjectExplorer.filterenabled = !ProjectExplorer.filterenabled;
             //this style button doesn't have a Checked state, so we change its backcolor to show its enabled or not
-            btnFilter.BackColor = filterenabled ? Color.FromArgb(46, 46, 46) : Color.FromArgb(35, 35, 35);
+            btnFilter.BackColor = ProjectExplorer.filterenabled ? Color.FromArgb(46, 46, 46) : Color.FromArgb(35, 35, 35);
             //recreate the tree when filter state changes
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
 
         private void contextMenuFilters_Closing(object sender, ToolStripDropDownClosingEventArgs e)
@@ -184,31 +99,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            filtersearch = txtSearch.Text is not "" and not "Search Project Explorer (Ctrl+;)";
-            CreateTreeView();
+            ProjectExplorer.filtersearch = txtSearch.Text is not "" and not "Search Project Explorer (Ctrl+;)";
+            ProjectExplorer.SearchString = txtSearch.Text;
+            ProjectExplorer.CreateTreeView();
         }
 
         private void btnCollapse_Click(object sender, EventArgs e) => treeView1.CollapseAll();
         private void btnExpand_Click(object sender, EventArgs e) => treeView1.ExpandAll();
-        private void btnRefresh_Click(object sender, EventArgs e) => CreateTreeView();
+        private void btnRefresh_Click(object sender, EventArgs e) => ProjectExplorer.CreateTreeView();
         #endregion
         #region Context Menu File
         private void toolstripFileOpen_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(projectfiles[selectedNodes[0].FullPath]);
+            TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File);
         }
-        
+
         private void contextMenuFileClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //depending on number of items selected, alter the contextmenu
             toolstripFileRename.Enabled = selectedNodes.Count == 1;
             toolstripFileCopyPath.Visible = selectedNodes.Count == 1;
         }
-        private void copyFilePathToolStripMenuItem1_Click(object sender, EventArgs e) => Clipboard.SetText(projectfiles[selectedNodes[0].FullPath].FullName);
+        private void copyFilePathToolStripMenuItem1_Click(object sender, EventArgs e) => Clipboard.SetText(ProjectExplorer.Files[selectedNodes[0]].File.FullName);
 
         private void toolstripFileRaw_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(new FileInfo(projectfiles[selectedNodes[0].FullPath].FullName), true);
+            TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File, true);
         }
 
         private void toolstripFileSearch_Click(object sender, EventArgs e)
@@ -218,8 +134,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFileExternal_Click(object sender, EventArgs e)
         {
             foreach (TreeNode tn in selectedNodes) {
-                if (File.Exists(projectfiles[tn.FullPath].FullName))
-                    Process.Start(new ProcessStartInfo(projectfiles[tn.FullPath].FullName) { UseShellExecute = true });
+                if (File.Exists(ProjectExplorer.Files[tn].File.FullName))
+                    Process.Start(new ProcessStartInfo(ProjectExplorer.Files[tn].File.FullName) { UseShellExecute = true });
             }
         }
         private void toolstripFileDelete_Click(object sender, EventArgs e)
@@ -237,7 +153,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             foreach (TreeNode tn in selectedNodes) {
                 if (tn.ImageKey == "folder") {
-                    DirectoryInfo source = projectfolders[tn.FullPath];
+                    DirectoryInfo source = ProjectExplorer.Files[tn].Folder;
                     foreach (FileInfo file in source.GetFiles("*", SearchOption.AllDirectories)) {
                         TCLE.CloseFile(file);
                         TCLE.DeleteFileLock(file);
@@ -245,7 +161,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     source.Delete(true);
                 }
                 else {
-                    FileInfo source = projectfiles[tn.FullPath];
+                    FileInfo source = ProjectExplorer.Files[tn].File;
                     TCLE.CloseFile(source);
                     TCLE.DeleteFileLock(source);
                     ///FindDuplicateFile(tn, Color.White);
@@ -264,8 +180,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void openContainingFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists(projectfiles[selectedNodes[0].FullPath].FullName))
-                Process.Start("explorer.exe", $@"/select, ""{projectfiles[selectedNodes[0].FullPath].FullName}""");
+            if (File.Exists(ProjectExplorer.Files[selectedNodes[0]].File.FullName))
+                Process.Start("explorer.exe", $@"/select, ""{ProjectExplorer.Files[selectedNodes[0]].File.FullName}""");
         }
         #region Rename Handling
         private void toolstripFileRename_Click(object sender, EventArgs e)
@@ -280,7 +196,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-            renamefile = e.Node.FullPath;
+            ///renamefile = e.Node.FullPath;
+            renamefile = e.Node;
             renamenode = e.Node.Name;
             renametype = e.Node.ImageKey == "folder" ? "folder" : "file";
         }
@@ -296,10 +213,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 node.Text = renamenode;
                 return;
             }
-            string source = renametype == "folder" ? projectfolders[renamefile].FullName : projectfiles[renamefile].FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
+            string source = renametype == "folder" ? ProjectExplorer.Files[renamefile].Folder.FullName : ProjectExplorer.Files[renamefile].File.FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
             string dest = $@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{node.FullPath}";
             //check if same name
-            if (renamefile == node.FullPath) {
+            if (renamefile == node) {
                 return;
             }
             //check if name exists already
@@ -322,7 +239,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 File.Move(source, dest);
             }
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
         #endregion
         #endregion
@@ -337,8 +254,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFolderExplorer_Click(object sender, EventArgs e)
         {
             foreach (TreeNode tn in selectedNodes) {
-                if (Directory.Exists(projectfolders[tn.FullPath].FullName))
-                    Process.Start(new ProcessStartInfo(projectfolders[tn.FullPath].FullName) { UseShellExecute = true });
+                if (ProjectExplorer.Files[tn].Folder.Exists)
+                    Process.Start(new ProcessStartInfo(ProjectExplorer.Files[tn].Folder.FullName) { UseShellExecute = true });
             }
         }
 
@@ -351,11 +268,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 FileInfo filetocopy = new(ofd.FileName);
-                if (File.Exists($"{projectfolders[selectedNodes[0].FullPath].FullName}\\{filetocopy.Name}")) {
+                if (File.Exists($"{ProjectExplorer.Files[selectedNodes[0]].File.FullName}\\{filetocopy.Name}")) {
                     MessageBox.Show($"A filed named {filetocopy.Name} already exists in folder {selectedNodes[0].Text}.", "Thumper Custom Level Editor");
                     return;
                 }
-                FileInfo projectfile = new($"{projectfolders[selectedNodes[0].FullPath].FullName}\\{filetocopy.Name}");
+                FileInfo projectfile = new($"{ProjectExplorer.Files[selectedNodes[0]].File.FullName}\\{filetocopy.Name}");
                 File.Copy(ofd.FileName, projectfile.FullName);
 
                 if (TCLE.fileextensions.Any(x => projectfile.Name.StartsWith(x))) {
@@ -365,13 +282,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                 }
 
-                CreateTreeView();
+                ProjectExplorer.CreateTreeView();
                 TCLE.OpenFile(projectfile);
             }
         }
 
 
-        private void toolstripFolderCopyPath_Click(object sender, EventArgs e) => Clipboard.SetText(projectfolders[selectedNodes[0].Name].FullName);
+        private void toolstripFolderCopyPath_Click(object sender, EventArgs e) => Clipboard.SetText(ProjectExplorer.Files[selectedNodes[0]].Folder.FullName);
         #region Paste
         private void toolstripFolderPaste_Click(object sender, EventArgs e)
         {
@@ -384,8 +301,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             foreach (TreeNode tn in parentnodestocopy) {
-                string source = GetFileOrFolderPath(tn.FullPath).FullName;
-                string dest = $@"{projectfolders[targetnode.FullPath].FullName}\{tn.Name}";
+                string source = ProjectExplorer.Files[tn].FullPath;/* GetFileOrFolderPath(tn.FullPath).FullName;*/
+                string dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{tn.Name}";
                 //check if the destination is within the copied node. If it is, skip this node.
                 if (IsAChildOfOtherNodes(targetnode, tn)) {
                     MessageBox.Show($"Item '{tn.Name}' not pasted as it contains the destination.", "Thumper Custom Level Editor");
@@ -397,9 +314,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (MessageBox.Show($"Item '{tn.Name}' already exists at the destination. Overwrite it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No)
                         continue;
                     */
-                    FileInfo fullname = new($@"{projectfolders[targetnode.FullPath].FullName}\{tn.Name}");
-                    string name = Path.GetFileNameWithoutExtension(fullname.Name)
-                    dest = $@"{projectfolders[targetnode.FullPath].FullName}\{tn.Name}"
+                    FileInfo fullname = new($@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{tn.Name}");
+                    string name = Path.GetFileNameWithoutExtension(fullname.Name);
+                    int count = targetnode.Nodes.Cast<TreeNode>().Count(x => x.Name == tn.Name);
+                    dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{tn.Name}{(count > 0 ? count + 1 : "")}{fullname.Extension}";
                 }
 
                 if (cutfile) {
@@ -422,7 +340,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                 }
             }
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
         #endregion
         #endregion
@@ -610,7 +528,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if destination contains any of the moved items
             //if so, cancel the whole operation
             foreach (TreeNode tn in selectedNodes) {
-                string dest = $@"{projectfolders[targetNode.FullPath].FullName}\{GetFileOrFolderPath(tn.FullPath).Name}";
+                string dest = $@"{ProjectExplorer.Files[targetNode].Folder.FullName}\{ProjectExplorer.Files[tn].Name}";
                 if (File.Exists(dest) || Directory.Exists(dest)) {
                     MessageBox.Show($"Cannot move the item '{tn.Name}'. An item with that name already exists in the destination folder.", "Thumper Custom Level Editor");
                     targetNode.BackColor = Color.FromArgb(56, 56, 56);
@@ -620,8 +538,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Finally, move each selected item to the destination
             string errorlog = "";
             foreach (TreeNode tn in selectedNodes) {
-                string source = GetFileOrFolderPath(tn.FullPath).FullName;
-                string dest = $@"{projectfolders[targetNode.FullPath].FullName}\{GetFileOrFolderPath(tn.FullPath).Name}";
+                string source = ProjectExplorer.Files[tn].FullPath;
+                string dest = $@"{ProjectExplorer.Files[targetNode].Folder.FullName}\{ProjectExplorer.Files[tn].Name}";
                 if (tn.ImageKey == "folder") {
                     if (TCLE.lockedfiles.Any(x => x.Key.FullName.Contains(source)))
                         errorlog += source + '\n';
@@ -638,7 +556,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             if (errorlog.Length > 1)
                 MessageBox.Show($"Could not move these files/folders as they are currently open in a tab.\n{errorlog}", "Grumper Gustom Gevel Geditor");
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
             // set destination folder backcolor back to normal to get rid of highlight
             targetNode.BackColor = treeView1.BackColor;
         }
@@ -685,43 +603,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (selectedNodes[0].FullPath == TCLE.WorkingFolder.Name)
                 return;
-            if (projectfolders.TryGetValue(selectedNodes[0].FullPath, out _))
+            if (selectedNodes[0].ImageKey is "folder")
                 return;
-            bool fileOpenSuccess = TCLE.OpenFile(projectfiles[selectedNodes[0].FullPath]);
+            bool fileOpenSuccess = TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File);
+            ///bool fileOpenSuccess = TCLE.OpenFile(projectfiles[selectedNodes[0].FullPath]);
         }
 
         private void treeView1_Click(object sender, EventArgs e)
         {
             if (btnOpenOnClick.Checked)
-                TCLE.OpenFile(projectfiles[selectedNodes[0].FullPath]);
+                TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File);
         }
-
+        /*
         private FileInfo GetFileOrFolderPath(string name)
         {
             return projectfiles.TryGetValue(name, out FileInfo file) ? file : new FileInfo(projectfolders[name].FullName);
         }
-
-        private static List<string> GetExpandedNodes(TreeNodeCollection treeNodeCollection)
-        {
-            List<string> expandednodes = new();
-            foreach (TreeNode tn in treeNodeCollection) {
-                expandednodes.AddRange(GetExpandedNodes(tn.Nodes));
-                if (tn.IsExpanded)
-                    expandednodes.Add(tn.FullPath);
-            }
-
-            return expandednodes;
-        }
-
-        private void RecurseNodesFindExpanded(TreeNodeCollection treeNodeCollection)
-        {
-            foreach (TreeNode tn in treeNodeCollection) {
-                if (expandednodes.Contains(tn.FullPath))
-                    tn.Expand();
-                RecurseNodesFindExpanded(tn.Nodes);
-            }
-        }
-
+        */
         public static TreeNode FindNode(string path, TreeNodeCollection treeNodeCollection)
         {
             TreeNode found = null;
@@ -752,38 +650,38 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripProjectAddLeaf_Click(object sender, EventArgs e)
         {
             TCLE.OpenFile(new Form_LeafEditor().SaveAs(true));
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddLvl_Click(object sender, EventArgs e)
         {
             TCLE.OpenFile(new Form_LvlEditor().SaveAs(true));
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddGate_Click(object sender, EventArgs e)
         {
             TCLE.OpenFile(new Form_GateEditor().SaveAs(true));
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddMaster_Click(object sender, EventArgs e)
         {
             TCLE.OpenFile(new Form_MasterEditor().SaveAs(true));
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddSample_Click(object sender, EventArgs e)
         {
             TCLE.OpenFile(new Form_SampleEditor().SaveAs(true));
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
 
         private void folderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int newfolders = projectfolders.Where(x => x.Value.Name.Contains("New Folder")).Count();
+            int newfolders = ProjectExplorer.Files.Where(x => x.Key.Text.Contains("New Folder")).Count();
             TCLE.WorkingFolder.CreateSubdirectory($"New Folder{(newfolders > 1 ? $" {newfolders}" : "")}");
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
         }
 
         public void ColorFormElements()
@@ -791,7 +689,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.BackColor = Properties.Settings.Default.ColorProjectExplorerBG;
             toolstripExplorer.BackColor = Properties.Settings.Default.ColorProjectExplorerBG;
             treeView1.BackColor = Properties.Settings.Default.ColorProjectExplorerBG;
-            CreateTreeView();
+            ProjectExplorer.CreateTreeView();
+        }
+
+        private void filterLeaf_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

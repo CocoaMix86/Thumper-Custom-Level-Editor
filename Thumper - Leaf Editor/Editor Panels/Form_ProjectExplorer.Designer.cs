@@ -121,7 +121,7 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageKey = "other";
             this.treeView1.ShowLines = false;
-            this.treeView1.Size = new Size(416, 471);
+            this.treeView1.Size = new Size(416, 352);
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeLabelEdit += this.treeView1_BeforeLabelEdit;
             this.treeView1.AfterLabelEdit += this.treeView1_AfterLabelEdit;
@@ -203,7 +203,6 @@
             this.contextMenuFilters.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuFilters.Items.AddRange(new ToolStripItem[] { this.filterLeaf, this.filterLvl, this.filterGate, this.filterMaster, this.filterSample });
             this.contextMenuFilters.Name = "workingfolderRightClick";
-            this.contextMenuFilters.OwnerItem = this.btnFilter;
             this.contextMenuFilters.RenderMode = ToolStripRenderMode.System;
             this.contextMenuFilters.Size = new Size(114, 114);
             this.contextMenuFilters.Closing += this.contextMenuFilters_Closing;
@@ -215,9 +214,10 @@
             this.filterLeaf.ForeColor = Color.PaleGreen;
             this.filterLeaf.Image = Properties.Resources.editor_leaf;
             this.filterLeaf.Name = "filterLeaf";
-            this.filterLeaf.Size = new Size(113, 22);
+            this.filterLeaf.Size = new Size(180, 22);
             this.filterLeaf.Text = "Leaf";
             this.filterLeaf.CheckedChanged += this.filter_CheckChanged;
+            this.filterLeaf.Click += this.filterLeaf_Click;
             // 
             // filterLvl
             // 
@@ -226,7 +226,7 @@
             this.filterLvl.ForeColor = Color.Green;
             this.filterLvl.Image = Properties.Resources.editor_lvl;
             this.filterLvl.Name = "filterLvl";
-            this.filterLvl.Size = new Size(113, 22);
+            this.filterLvl.Size = new Size(180, 22);
             this.filterLvl.Text = "Lvl";
             this.filterLvl.CheckedChanged += this.filter_CheckChanged;
             // 
@@ -237,7 +237,7 @@
             this.filterGate.ForeColor = Color.Orange;
             this.filterGate.Image = Properties.Resources.editor_gate;
             this.filterGate.Name = "filterGate";
-            this.filterGate.Size = new Size(113, 22);
+            this.filterGate.Size = new Size(180, 22);
             this.filterGate.Text = "Gate";
             this.filterGate.CheckedChanged += this.filter_CheckChanged;
             // 
@@ -248,7 +248,7 @@
             this.filterMaster.ForeColor = Color.FromArgb(150, 150, 255);
             this.filterMaster.Image = Properties.Resources.editor_master;
             this.filterMaster.Name = "filterMaster";
-            this.filterMaster.Size = new Size(113, 22);
+            this.filterMaster.Size = new Size(180, 22);
             this.filterMaster.Text = "Master";
             this.filterMaster.CheckedChanged += this.filter_CheckChanged;
             // 
@@ -259,7 +259,7 @@
             this.filterSample.ForeColor = Color.Turquoise;
             this.filterSample.Image = Properties.Resources.editor_sample;
             this.filterSample.Name = "filterSample";
-            this.filterSample.Size = new Size(113, 22);
+            this.filterSample.Size = new Size(180, 22);
             this.filterSample.Text = "Sample";
             this.filterSample.CheckedChanged += this.filter_CheckChanged;
             // 
@@ -470,7 +470,6 @@
             this.contextMenuAddFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuAddFile.Items.AddRange(new ToolStripItem[] { this.existingItemToolStripMenuItem, this.folderToolStripMenuItem, this.toolStripSeparator7, this.toolstripProjectAddLeaf, this.toolstripProjectAddLvl, this.toolstripProjectAddGate, this.toolstripProjectAddMaster, this.toolstripProjectAddSample });
             this.contextMenuAddFile.Name = "workingfolderRightClick";
-            this.contextMenuAddFile.OwnerItem = this.toolStripMenuItem1;
             this.contextMenuAddFile.RenderMode = ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new Size(152, 164);
             // 
@@ -742,7 +741,7 @@
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(31, 31, 31);
-            this.ClientSize = new Size(416, 519);
+            this.ClientSize = new Size(416, 400);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.toolstripExplorer);
@@ -770,7 +769,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ToolStrip toolstripExplorer;
-        private System.Windows.Forms.ContextMenuStrip contextMenuFilters;
         private System.Windows.Forms.ToolStripMenuItem filterLeaf;
         private System.Windows.Forms.ToolStripMenuItem filterLvl;
         private System.Windows.Forms.ToolStripMenuItem filterGate;
@@ -783,7 +781,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton btnOpenOnClick;
-        private System.Windows.Forms.ContextMenuStrip contextMenuFileClick;
         private System.Windows.Forms.ToolStripMenuItem toolstripFileOpen;
         private System.Windows.Forms.ToolStripMenuItem toolstripFileExternal;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -794,7 +791,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem toolstripFileCopyPath;
         private System.Windows.Forms.ToolStripMenuItem toolstripFileRaw;
-        private System.Windows.Forms.ContextMenuStrip contextMenuFolderClick;
         private System.Windows.Forms.ToolStripMenuItem toolstripFolderNew;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem toolstripFolderCut;
@@ -805,20 +801,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem toolstripFolderCopyPath;
         private System.Windows.Forms.ToolStripMenuItem toolstripFolderExplorer;
-        private System.Windows.Forms.ContextMenuStrip contextMenuAddFile;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectAddLeaf;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectAddLvl;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectAddGate;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectAddMaster;
         private System.Windows.Forms.ToolStripMenuItem toolstripProjectAddSample;
         private System.Windows.Forms.ToolStripMenuItem folderToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuMulti;
         private System.Windows.Forms.ToolStripMenuItem toolStripMultiCut;
         private System.Windows.Forms.ToolStripMenuItem toolStripMultiCopy;
         private System.Windows.Forms.ToolStripMenuItem toolStripMultiDelete;
         private System.Windows.Forms.ToolStripMenuItem existingItemToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private ContextMenuStrip contextMenuProject;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripMenuItem toolstripProjectPaste;
@@ -829,5 +822,11 @@
         private ToolStripSeparator toolStripSeparator10;
         private ToolStripMenuItem openContainingFolderToolStripMenuItem;
         public TreeViewEx treeView1;
+        public ContextMenuStrip contextMenuFilters;
+        public ContextMenuStrip contextMenuFileClick;
+        public ContextMenuStrip contextMenuFolderClick;
+        public ContextMenuStrip contextMenuAddFile;
+        public ContextMenuStrip contextMenuMulti;
+        public ContextMenuStrip contextMenuProject;
     }
 }
