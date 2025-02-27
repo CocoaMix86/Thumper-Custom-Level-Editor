@@ -12,6 +12,7 @@ using Un4seen.Bass.Misc;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -621,7 +622,10 @@ namespace Thumper_Custom_Level_Editor
             if (_load == null)
                 return 0;
             foreach (dynamic leaf in _load["leaf_seq"]) {
-                _beatcount += (int)leaf["beat_cnt"];
+                FileInfo _leaf = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{(leaf["leaf_name"])}")).Value?.File;
+                if (_leaf != null)
+                    _beatcount += (int)TCLE.LoadFileLock(_leaf.FullName)["beat_cnt"];
+                ///_beatcount += (int)leaf["beat_cnt"];
             }
             //every lvl has an approach beats to consider too
             //_beatcount += (int)_load["approach_beats"];

@@ -841,9 +841,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     beats = (int)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"];
-                    beattotal += beats
-                        ///NEED TO FIX HOW LVL IS CALCULATED (FOR GATE AND MASTER)
-                    _leaf.beats = beats
+                    beattotal += beats;
+                    _leaf.beats = beats;
                     string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle = null;
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"{beats} beats -- {time}";
