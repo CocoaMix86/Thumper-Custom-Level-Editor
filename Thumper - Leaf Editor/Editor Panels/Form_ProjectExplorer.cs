@@ -309,15 +309,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     continue;
                 }
                 //check if each node exists at the destination and ask to overwrite it. If' No', skip this node.
-                if (targetnode.Nodes.Contains(tn)) {
+                if (targetnode.Nodes.ContainsKey(ProjectExplorer.Files[tn].Name)) {
                     /*
                     if (MessageBox.Show($"Item '{tn.Name}' already exists at the destination. Overwrite it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No)
                         continue;
                     */
                     FileInfo fullname = new($@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{tn.Name}");
                     string name = Path.GetFileNameWithoutExtension(fullname.Name);
-                    int count = targetnode.Nodes.Cast<TreeNode>().Count(x => x.Name == tn.Name);
-                    dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{tn.Name}{(count > 0 ? count + 1 : "")}{fullname.Extension}";
+                    ///int count = targetnode.Nodes.Cast<TreeNode>().Count(x => x.Name == tn.Name);
+                    int count = Directory.GetFiles($@"{ProjectExplorer.Files[targetnode].Folder.FullName}", $"{name} - Copy*{fullname.Extension}").Length + 1;
+                    dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{name}{(count > 0 ? $" - Copy ({count})" : "")}{fullname.Extension}";
                 }
 
                 if (cutfile) {
@@ -340,6 +341,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                 }
             }
+            ProjectExplorer.CreateTreeView();
+        }
+
+        private void toolstripFileDuplicate_Click(object sender, EventArgs e)
+        {
+            TreeNode targetnode = selectedNodes[0].Parent;
+            TreeNode sourcenode = selectedNodes[0];
+
+            string source = ProjectExplorer.Files[sourcenode].FullPath;/* GetFileOrFolderPath(tn.FullPath).FullName;*/
+            string dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{sourcenode.Name}";
+            //check if each node exists at the destination and ask to overwrite it. If' No', skip this node.
+            if (targetnode.Nodes.ContainsKey(ProjectExplorer.Files[sourcenode].Name)) {
+                //calculate how many copies exist and create new name appropriately
+                FileInfo fullname = new($@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{sourcenode.Name}");
+                string name = Path.GetFileNameWithoutExtension(fullname.Name);
+                int count = Directory.GetFiles($@"{ProjectExplorer.Files[targetnode].Folder.FullName}", $"{name} - Copy*{fullname.Extension}").Length + 1;
+                dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{name}{(count > 0 ? $" - Copy ({count})" : "")}{fullname.Extension}";
+            }
+
+            if (File.Exists(source)) {
+                File.Copy(source, dest);
+            }
+
             ProjectExplorer.CreateTreeView();
         }
         #endregion
