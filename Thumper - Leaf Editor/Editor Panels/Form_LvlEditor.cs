@@ -195,7 +195,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private static SolidBrush LvlLeafColor = new SolidBrush(Color.Green);
+        private static SolidBrush ClearColor = new SolidBrush(Color.Black);
         private static SolidBrush LvlLeafColorNotExist = new SolidBrush(Color.Maroon);
         private void lvlLeafList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -205,16 +205,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bounds.Y += 2;
             bounds.Width -= 4;
             bounds.Height -= 4;
-            e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 6);
+            e.Graphics.FillRectangle(ClearColor, e.RowBounds);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
             //e.Graphics.FillRoundedRectangle(LvlLeafs[e.RowIndex].NotFound ? LvlLeafColorNotExist : LvlLeafColor, bounds, 6);
-            e.Graphics.DrawImage(Properties.Resources.editor_leaf, bounds.X + 16, bounds.Y, 16, 16);
+            if (sender == lvlLeafList)
+                e.Graphics.DrawImage(Properties.Resources.editor_leaf, bounds.X + 16, bounds.Y, 16, 16);
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }
 
         private void lvlLeafList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
-            e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+            if (e.RowIndex == -1)
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            else {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+                //e.Paint(e.CellBounds, DataGridViewPaintParts.)
+            }
         }
         ///DGV LVLLEAFPATHS
         //Cell value changed
@@ -597,7 +604,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
                 DisplayStyleForCurrentCellOnly = true,
-                FlatStyle = FlatStyle.Flat
+                FlatStyle = FlatStyle.Flat,
+                DefaultCellStyle = new DataGridViewCellStyle() { BackColor = Color.DarkBlue, SelectionBackColor = Color.CornflowerBlue, ForeColor = Color.White }
             };
             lvlLeafPaths.Columns.Add(_dgvlvlpaths);
             ///
