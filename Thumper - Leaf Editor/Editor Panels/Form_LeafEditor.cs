@@ -219,7 +219,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void vscrollbarTrackEditor_Resize()
         {
-            vScrollBarTrackEditor.Visible = !(trackEditor.DisplayedRowCount(false) == trackEditor.RowCount);
+            vScrollBarTrackEditor.Visible = (trackEditor.DisplayedRowCount(false) < trackEditor.Rows.Cast<DataGridViewRow>().Where(x => x.Visible).Count());
             vScrollBarTrackEditor.Maximum = trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10;
         }
 
@@ -243,13 +243,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     if (e.Delta > 0) {
                         int ind = Math.Max(0, scollrowindex - scrollLines);
-                        while (trackEditor.Rows[ind].Visible == false)
+                        while (trackEditor.Rows[ind].Visible == false && ind > 1)
                             ind -= 1;
+                        if (ind == 0) {
+                            while (trackEditor.Rows[ind].Visible == false)
+                                ind += 1;
+                        }
                         trackEditor.FirstDisplayedScrollingRowIndex = ind;
                     }
                     else if (e.Delta < 0) {
                         int ind = Math.Min(trackEditor.RowCount - 1, scollrowindex + scrollLines);
-                        while (trackEditor.Rows[ind].Visible == false)
+                        while (trackEditor.Rows[ind].Visible == false && ind < trackEditor.RowCount)
                             ind += 1;
                         trackEditor.FirstDisplayedScrollingRowIndex = ind;
                     }
@@ -285,7 +289,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (RowPostPrePainting) {
                 if (e.ColumnIndex < FrozenColumnOffset) {
-                    e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                    //e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                    CellPaintFancy(e);
                     CellPaintIcons(e);
                 }
                 return;
@@ -336,7 +341,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if ((e.RowIndex != -1 && e.ColumnIndex != -1)) {
                 if (e.ColumnIndex is 0 or 1 or 2)
-                    e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.Border);
+                    CellPaintFancy(e);
                 else
                     e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground);
             }
@@ -345,6 +350,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
                 if (trackEditor[e.ColumnIndex, e.RowIndex].Selected || ((SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") && Properties.Settings.Default.LeafOptionShowWave)) {
 
+                }
+                else if (SequencerObjects[e.RowIndex].editor_row.ReadOnly) {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.Gray), e.CellBounds);
                 }
                 else if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
                     if (SequencerObjects[e.RowIndex - 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
@@ -376,8 +384,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            if (e.RowIndex == -1 || e.ColumnIndex < FrozenColumnOffset) {
-                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            if (e.RowIndex == -1 || e.ColumnIndex == -1/*< FrozenColumnOffset*/) {
+                if (e.RowIndex == -1)
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                else
+                    CellPaintFancy(e);
             }
             else {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
@@ -453,6 +464,43 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        SolidBrush CellPaintingPen = new SolidBrush(Color.FromArgb(60, 60, 60));
+        SolidBrush CellPaintingBlack = new SolidBrush(Color.Black);
+        SolidBrush CellPaintingColor = new SolidBrush(Color.Black);
+        private void CellPaintFancy(DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+            Rectangle bounds = e.CellBounds;
+            if (e.ColumnIndex is -1) {
+                CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.4);
+                bounds.X += 2;
+                bounds.Y += 2;
+                bounds.Width -= 4;
+                bounds.Height -= 4;
+                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
+                e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
+                e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+            }
+            else if (e.ColumnIndex is 0 or 1) {
+                bounds.X += 1;
+                bounds.Y += 1;
+                bounds.Width -= 2;
+                bounds.Height -= 2;
+                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
+                e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
+            }
+            else if (e.ColumnIndex is 2) {
+                bounds.X += 1;
+                bounds.Y += 1;
+                bounds.Width -= 6;
+                bounds.Height -= 2;
+                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
+                e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
+            }
+            //e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.Border);
+        }
+
         private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
         }
@@ -483,7 +531,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     samp.CalculateRuntime();
                 }
                 int cellwidth = trackZoom.Value;
-                samp.wave.ColorBackground = seqref.highlight_color;
+                samp.wave.ColorBackground = seqref.editor_row.ReadOnly ? Color.FromArgb(45, 45, 45) : seqref.highlight_color;
                 //if object has no drawn wave, create it. Wave is null whenever cell sizes change
                 if (seqref.WaveBitmap == null) {
                     Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
@@ -521,7 +569,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
                 int cellwidth = trackZoom.Value;
                 Color alpha = seqref.highlight_color;
-                alpha = Color.FromArgb(160, alpha.R, alpha.G, alpha.B);
+                alpha = seqref.editor_row.ReadOnly ? Color.Gray : Color.FromArgb(160, alpha.R, alpha.G, alpha.B);
                 //
                 if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
                     foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 2].data_points.Where(x => x.value != null)) {

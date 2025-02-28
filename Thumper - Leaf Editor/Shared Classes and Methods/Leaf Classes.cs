@@ -37,7 +37,16 @@ namespace Thumper_Custom_Level_Editor
         public string friendly_param { get; set; }
         public Color highlight_color { get; set; }
         public float highlight_value { get; set; }
-        public bool enabled { get; set; }
+        public bool enabled
+        {
+            get => Enabled;
+            set {
+                if (value != Enabled)
+                    WaveBitmap = null;
+                Enabled = value;
+            }
+        }
+        private bool Enabled;
         public bool isdefault { get; set; }
 
         public Bitmap WaveBitmap;
