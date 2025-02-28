@@ -397,9 +397,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null && e.ColumnIndex != -1 && e.RowIndex != -1) {
-                if ((SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave) || SequencerObjects[e.RowIndex].trait_type is "kTraitColor" || (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) || Properties.Settings.Default.LeafOptionConnectBars && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
-                    //e.CellStyle.ForeColor = SequencerObjects[e.RowIndex].highlight_color;
-                }
+                //
+                if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave) ;
+                else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor") ;
+                else if ((Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false)) ;
+                else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex >= FrozenColumnOffset && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) ;
                 else {
                     Color _c = SequencerObjects[e.RowIndex].highlight_color;
                     if (_c.R < 150 && _c.G < 150 && _c.B < 150)
@@ -2804,5 +2806,97 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             isfinding = false;
         }
         #endregion
+
+
+        private Rectangle dragBoxFromMouseDown;
+        private int columnIndexFromMouseDown;
+        private int rowIndexFromMouseDown;
+        private int rowIndexOfItemUnderMouseToDrop;
+        private int previousDragOver = -1;
+        private void trackEditor_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                // If the mouse moves outside the rectangle, start the drag.
+                if (dragBoxFromMouseDown != Rectangle.Empty &&
+                    !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+
+                    // Proceed with the drag and drop, passing in the list item.                    
+                    DragDropEffects dropEffect = trackEditor.DoDragDrop(trackEditor.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void trackEditor_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Get the index of the item the mouse is below.
+            columnIndexFromMouseDown = trackEditor.HitTest(e.X, e.Y).ColumnIndex;
+            rowIndexFromMouseDown = trackEditor.HitTest(e.X, e.Y).RowIndex;
+            if (columnIndexFromMouseDown == -1) {
+                // Remember the point where the mouse down occurred. 
+                // The DragSize indicates the size that the mouse can move 
+                // before a drag event should be started.                
+                Size dragSize = SystemInformation.DragSize;
+
+                // Create a rectangle using the DragSize, with the mouse position being
+                // at the center of the rectangle.
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+            }
+            else
+                // Reset the rectangle if the mouse is not over an item in the ListBox.
+                dragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+        private void trackEditor_DragDrop(object sender, DragEventArgs e)
+        {
+            // The mouse locations are relative to the screen, so they must be 
+            // converted to client coordinates.
+            Point clientPoint = trackEditor.PointToClient(new Point(e.X, e.Y));
+
+            // Get the row index of the item the mouse is below. 
+            rowIndexOfItemUnderMouseToDrop = trackEditor.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+
+            // If the drag operation was a move then remove and insert the row.
+            if (e.Effect == DragDropEffects.Move) {
+                if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                    if (rowIndexOfItemUnderMouseToDrop == -1)
+                        return;
+                    trackEditor.SuspendLayout();
+                    Sequencer_Object[] RowsToMove = ReturnLanesFromName(SequencerObjects[rowToMove.Index], SequencerObjects[rowToMove.Index].friendly_lane).Reverse().ToArray();
+                    foreach (Sequencer_Object seq in RowsToMove) {
+                        trackEditor.Rows.Remove(seq.editor_row);
+                        SequencerObjects.Remove(seq);
+                        SequencerObjects.Insert(rowIndexOfItemUnderMouseToDrop, seq);
+                        trackEditor.Rows.Insert(rowIndexOfItemUnderMouseToDrop, seq.editor_row);
+                    }
+                    trackEditor.ResumeLayout();
+                    //Sequencer_Object tomove = SequencerObjects[rowToMove.Index];
+                    //SequencerObjects.RemoveAt(columnIndexFromMouseDown);
+                    //SequencerObjects.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                    SaveCheckAndWrite(false, "Reorder Sequencer Objects");
+                }
+                /*
+                if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
+                    AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
+                }
+                */
+            }
+        }
+        private void trackEditor_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+        private void trackEditor_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = trackEditor.PointToClient(new Point(e.X, e.Y));
+            // Retrieve the node at the drop location.
+            int targetRow = trackEditor.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
+            //changing the hovered node backcolor to make it obvious where the destination will be
+            if (previousDragOver != targetRow && previousDragOver != -1) {
+                //trackEditor.Rows[previousDragOver].DefaultCellStyle = null;
+            }
+            if (targetRow != -1 && targetRow != previousDragOver) {
+                //trackEditor.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
+                previousDragOver = targetRow;
+            }
+        }
     }
 }

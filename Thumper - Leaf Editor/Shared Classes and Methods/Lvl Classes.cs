@@ -11,6 +11,7 @@ namespace Thumper_Custom_Level_Editor
         public int beats { get; set; }
         public List<string> paths { get; set; }
         public int id { get; set; }
+        public bool NotFound { get; set; }
 
         public LvlLeafData()
         {
