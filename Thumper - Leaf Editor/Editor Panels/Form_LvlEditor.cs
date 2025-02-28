@@ -125,7 +125,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     // Proceed with the drag and drop, passing in the list item.                    
                     ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
                     RowToMove = lvlLeafList.Rows[rowIndexFromMouseDown];
-                    RowToMove.DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
+                    RowToMove.DefaultCellStyle.BackColor = Color.FromArgb(199, 69, 255);
                     DragDropEffects dropEffect = lvlLeafList.DoDragDrop(LvlLeafs[rowIndexFromMouseDown], DragDropEffects.Move);
                 }
             }
