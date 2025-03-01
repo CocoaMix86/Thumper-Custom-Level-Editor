@@ -141,17 +141,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private Rectangle dragBoxFromMouseDown;
+        private DataGridViewRow RowToMove;
         private int rowIndexFromMouseDown;
         private int rowIndexOfItemUnderMouseToDrop;
         private void gateLvlList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
-                if (dragBoxFromMouseDown != Rectangle.Empty &&
-                    !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
-
+                if (RowToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.                    
-                    DragDropEffects dropEffect = gateLvlList.DoDragDrop(gateLvlList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                    ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                    RowToMove = gateLvlList.Rows[rowIndexFromMouseDown];
+                    gateLvlList.ClearSelection();
+                    //RowToMove.DefaultCellStyle.BackColor = SelectColor;
+                    DragDropEffects dropEffect = gateLvlList.DoDragDrop(GateLvls[rowIndexFromMouseDown], DragDropEffects.Move);
                 }
             }
         }
@@ -185,14 +188,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int targetRow = gateLvlList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
             //changing the hovered node backcolor to make it obvious where the destination will be
             if (previousDragOver != targetRow && previousDragOver != -1) {
+                /*
                 if (gateLvlList.Rows[previousDragOver].Cells[2].Value.ToString() == "file not found")
                     gateLvlList.Rows[previousDragOver].DefaultCellStyle.BackColor = Color.Maroon;
                 else
                     gateLvlList.Rows[previousDragOver].DefaultCellStyle = null;
+                */
             }
-            if (targetRow != -1 && targetRow != previousDragOver) {
-                gateLvlList.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
+            if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                gateLvlList.Rows.Remove(RowToMove);
+                gateLvlList.Rows.Insert(targetRow, RowToMove);
+                gateLvlList.ClearSelection();
                 previousDragOver = targetRow;
+                gateLvlList.Rows[targetRow].Selected = true;
             }
         }
 
@@ -208,13 +216,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
-                if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                if (e.Data.GetData(typeof(GateLvlData)) is GateLvlData rowToMove) {
                     if (rowIndexOfItemUnderMouseToDrop == -1)
                         return;
-                    GateLvlData tomove = GateLvls[rowToMove.Index];
-                    GateLvls.RemoveAt(rowIndexFromMouseDown);
-                    GateLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                    GateLvls.Remove(rowToMove);
+                    GateLvls.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+                    gateLvlList.ClearSelection();
+                    gateLvlList.Rows[rowIndexOfItemUnderMouseToDrop].Selected = true;
                     SaveCheckAndWrite(false, "Change Phase Order");
+                    RowToMove = null;
                 }
                 if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
                     if (IsAllowedToAddLvl)
@@ -223,6 +233,38 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         MessageBox.Show("Current gate configuration does not allow for more phases to be added.", "Thumper Custom Level Editor");
                 }
             }
+        }
+
+
+        private static SolidBrush ClearColor = new SolidBrush(Color.Black);
+        private static SolidBrush LvlLeafColorNotExist = new SolidBrush(Color.Maroon);
+        private static Color SelectColor = Color.FromArgb(199, 69, 255);
+        private static SolidBrush LvlLeafColorSelected = new SolidBrush(SelectColor);
+        private void gateLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            e.Handled = true;
+            if (e.RowIndex == -1)
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            else {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+                //e.Paint(e.CellBounds, DataGridViewPaintParts.)
+            }
+        }
+
+        private void gateLvlList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            e.Handled = true;
+            Rectangle bounds = e.RowBounds;
+            bounds.X += 2;
+            bounds.Y += 2;
+            bounds.Width -= 4;
+            bounds.Height -= 4;
+            e.Graphics.FillRectangle(ClearColor, e.RowBounds);
+            if (gateLvlList.Rows[e.RowIndex].Selected)
+                e.Graphics.FillRoundedRectangle(LvlLeafColorSelected, bounds, 8);
+            else
+                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+            e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }
 
         public void gatelvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -461,13 +503,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 loadedgate = new FileInfo(sfd.FileName);
 
                 gateproperties ??= new(this, loadedgate) {
-                        boss = "Level 1 - circle",
-                        prelvl = "<none>",
-                        postlvl = "<none>",
-                        restartlvl = "<none>",
-                        sectiontype = "None",
-                        random = false,
-                    };
+                    boss = "Level 1 - circle",
+                    prelvl = "<none>",
+                    postlvl = "<none>",
+                    restartlvl = "<none>",
+                    sectiontype = "None",
+                    random = false,
+                };
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)
