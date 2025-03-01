@@ -125,7 +125,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     // Proceed with the drag and drop, passing in the list item.                    
                     ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
                     RowToMove = lvlLeafList.Rows[rowIndexFromMouseDown];
-                    RowToMove.DefaultCellStyle.BackColor = Color.FromArgb(199, 69, 255);
+                    lvlLeafList.ClearSelection();
+                    //RowToMove.DefaultCellStyle.BackColor = SelectColor;
                     DragDropEffects dropEffect = lvlLeafList.DoDragDrop(LvlLeafs[rowIndexFromMouseDown], DragDropEffects.Move);
                 }
             }
@@ -170,7 +171,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
                 lvlLeafList.Rows.Remove(RowToMove);
                 lvlLeafList.Rows.Insert(targetRow, RowToMove);
+                lvlLeafList.ClearSelection();
                 previousDragOver = targetRow;
+                lvlLeafList.Rows[targetRow].Selected = true;
                 /*
                 lvlLeafList.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
                 previousDragOver = targetRow;
@@ -196,6 +199,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     ///LvlLeafData tomove = LvlLeafs[rowToMove.Index];
                     LvlLeafs.Remove(rowToMove);
                     LvlLeafs.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+                    lvlLeafList.ClearSelection();
+                    lvlLeafList.Rows[rowIndexOfItemUnderMouseToDrop].Selected = true;
                     SaveCheckAndWrite(false, "Reorder Leafs");
                     RowToMove = null;
                 }
@@ -207,6 +212,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private static SolidBrush ClearColor = new SolidBrush(Color.Black);
         private static SolidBrush LvlLeafColorNotExist = new SolidBrush(Color.Maroon);
+        private static Color SelectColor = Color.FromArgb(199, 69, 255);
+        private static SolidBrush LvlLeafColorSelected = new SolidBrush(SelectColor);
         private void lvlLeafList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
@@ -216,7 +223,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bounds.Width -= 4;
             bounds.Height -= 4;
             e.Graphics.FillRectangle(ClearColor, e.RowBounds);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+            if (lvlLeafList.Rows[e.RowIndex].Selected)
+                e.Graphics.FillRoundedRectangle(LvlLeafColorSelected, bounds, 8);
+            else
+                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
             //e.Graphics.FillRoundedRectangle(LvlLeafs[e.RowIndex].NotFound ? LvlLeafColorNotExist : LvlLeafColor, bounds, 6);
             if (sender == lvlLeafList)
                 e.Graphics.DrawImage(Properties.Resources.editor_leaf, bounds.X + 16, bounds.Y, 16, 16);
