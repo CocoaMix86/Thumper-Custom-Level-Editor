@@ -115,18 +115,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
         }
 
+        private static SolidBrush ClearColor = new SolidBrush(Color.Black);
+        private static SolidBrush SampColorNotExist = new SolidBrush(Color.Maroon);
+        private static Color SelectColor = Color.FromArgb(199, 69, 255);
+        private static SolidBrush SampColorSelected = new SolidBrush(SelectColor);
         private void sampleList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex == -1)
-                return;
+            e.Handled = true;
+            if (e.RowIndex is -1)
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             //button is in column 0, so that's where to draw the image
-            if (e.ColumnIndex == 0) {
-                CellPaint(e);
+            else if (e.ColumnIndex is 0) {
+                CellPaintIcons(e);
             }
+            else
+                e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
         }
-        private void CellPaint(DataGridViewCellPaintingEventArgs e)
+        private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
         {
-            e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            //e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             //get dimensions
             int w = Properties.Resources.icon_play.Width;
             int h = Properties.Resources.icon_play.Height;
@@ -137,14 +144,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
             else
                 e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
+        }
+
+        private void sampleList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
             e.Handled = true;
+            Rectangle bounds = e.RowBounds;
+            bounds.X += 2;
+            bounds.Y += 2;
+            bounds.Width -= 4;
+            bounds.Height -= 4;
+            e.Graphics.FillRectangle(ClearColor, e.RowBounds);
+            if (sampleList.Rows[e.RowIndex].Selected)
+                e.Graphics.FillRoundedRectangle(SampColorSelected, bounds, 8);
+            else
+                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+            e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }
 
         public void _samplelist_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //sort the list alphabetically
-            SampleList = new ObservableCollection<SampleData>(SampleList.OrderBy(x => x.obj_name).ToList());
-            SampleList.CollectionChanged += _samplelist_CollectionChanged;
+            ///SampleList = new ObservableCollection<SampleData>(SampleList.OrderBy(x => x.obj_name).ToList());
+            ///SampleList.CollectionChanged += _samplelist_CollectionChanged;
             //clear dgv
             sampleList.RowCount = 0;
             //repopulate dgv from list
@@ -181,6 +203,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        private Rectangle dragBoxFromMouseDown;
+        private DataGridViewRow RowToMove;
+        private int rowIndexFromMouseDown;
+        private int rowIndexOfItemUnderMouseToDrop;
+        private int previousDragOver = -1;
+        private void sampleList_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                // If the mouse moves outside the rectangle, start the drag.
+                if (RowToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+                    // Proceed with the drag and drop, passing in the list item.                    
+                    ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                    RowToMove = sampleList.Rows[rowIndexFromMouseDown];
+                    sampleList.ClearSelection();
+                    //RowToMove.DefaultCellStyle.BackColor = SelectColor;
+                    DragDropEffects dropEffect = sampleList.DoDragDrop(SampleList[rowIndexFromMouseDown], DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void sampleList_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Get the index of the item the mouse is below.
+            rowIndexFromMouseDown = sampleList.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndexFromMouseDown != -1) {           
+                Size dragSize = SystemInformation.DragSize;
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+            }
+            else
+                dragBoxFromMouseDown = Rectangle.Empty;
+        }
         ///Detect dragon-and-drop of files and then load them to Sample files
         private void sampleList_DragEnter(object sender, DragEventArgs e)
         {
@@ -191,26 +244,62 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
             }
-            e.Effect = DragDropEffects.None;
+            e.Effect = DragDropEffects.Move;
         }
         ///Detect dragon-and-drop of files and then load them to Sample files
         private void sampleList_DragDrop(object sender, DragEventArgs e)
         {
-            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
-            string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
-            bool addedfile = false;
-            foreach (string dir in data) {
-                if (File.Exists(dir) && Path.GetExtension(dir) is ".fsb" or ".wav") {
-                    ImportAudioToSamp(dir);
-                    TCLE.alzheimer();
-                    addedfile = true;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+                string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+                bool addedfile = false;
+                foreach (string dir in data) {
+                    if (File.Exists(dir) && Path.GetExtension(dir) is ".fsb" or ".wav") {
+                        ImportAudioToSamp(dir);
+                        TCLE.alzheimer();
+                        addedfile = true;
+                    }
+                    else
+                        MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
                 }
-                else
-                    MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
+                if (addedfile)
+                    SaveCheckAndWrite(false, "Add Sample");
+                TCLE.PlaySound("UIobjectadd");
             }
-            if (addedfile)
-                SaveCheckAndWrite(false, "Add Sample");
-            TCLE.PlaySound("UIobjectadd");
+            else {
+                Point clientPoint = sampleList.PointToClient(new Point(e.X, e.Y));
+                // Get the row index of the item the mouse is below. 
+                rowIndexOfItemUnderMouseToDrop = sampleList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+                // If the drag operation was a move then remove and insert the row.
+                if (e.Effect == DragDropEffects.Move) {
+                    if (e.Data.GetData(typeof(SampleData)) is SampleData rowToMove) {
+                        if (rowIndexOfItemUnderMouseToDrop == -1)
+                            return;
+                        SampleList.Remove(rowToMove);
+                        SampleList.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+                        sampleList.ClearSelection();
+                        sampleList.Rows[rowIndexOfItemUnderMouseToDrop].Selected = true;
+                        SaveCheckAndWrite(false, "Change Sample Order");
+                        RowToMove = null;
+                    }
+                }
+            }
+        }
+
+        private void sampleList_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = sampleList.PointToClient(new Point(e.X, e.Y));
+            // Retrieve the node at the drop location.
+            int targetRow = sampleList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
+
+            if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                sampleList.Rows.Remove(RowToMove);
+                sampleList.Rows.Insert(targetRow, RowToMove);
+                sampleList.ClearSelection();
+                previousDragOver = targetRow;
+                sampleList.Rows[targetRow].Selected = true;
+            }
         }
 
         private void propertyGridSample_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -449,7 +538,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 sampleproperties ??= new(this, loadedsample) {
 
-                    };
+                };
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)

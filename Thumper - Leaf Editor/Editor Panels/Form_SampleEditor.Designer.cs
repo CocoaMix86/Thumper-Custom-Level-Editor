@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_SampleEditor));
             this.toolTip1 = new ToolTip(this.components);
@@ -72,7 +73,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(246, 0);
+            this.labelCollapsePanel.Location = new Point(240, 0);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -105,7 +106,7 @@
             this.sampleList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.sampleList.Columns.AddRange(new DataGridViewColumn[] { this.Columnplaybuttons, this.SampleName, this.sampleRuntime });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle3.BackColor = Color.DarkBlue;
             dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle3.ForeColor = Color.White;
             dataGridViewCellStyle3.Format = "N2";
@@ -131,16 +132,27 @@
             this.sampleList.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.sampleList.RowHeadersVisible = false;
             this.sampleList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle5.BackColor = Color.DarkBlue;
+            dataGridViewCellStyle5.Font = new Font("Relay-Medium", 8.249999F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            this.sampleList.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.sampleList.RowTemplate.DefaultCellStyle.BackColor = Color.DarkBlue;
+            this.sampleList.RowTemplate.DefaultCellStyle.Font = new Font("Relay-Medium", 8.249999F);
+            this.sampleList.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
             this.sampleList.RowTemplate.Height = 20;
             this.sampleList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.sampleList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.sampleList.Size = new Size(238, 493);
+            this.sampleList.Size = new Size(232, 493);
             this.sampleList.TabIndex = 145;
             this.sampleList.Tag = "editorpaneldgv";
             this.sampleList.CellClick += this.sampleList_CellClick;
             this.sampleList.CellPainting += this.sampleList_CellPainting;
+            this.sampleList.RowPrePaint += this.sampleList_RowPrePaint;
             this.sampleList.DragDrop += this.sampleList_DragDrop;
             this.sampleList.DragEnter += this.sampleList_DragEnter;
+            this.sampleList.DragOver += this.sampleList_DragOver;
+            this.sampleList.MouseDown += this.sampleList_MouseDown;
+            this.sampleList.MouseMove += this.sampleList_MouseMove;
             // 
             // Columnplaybuttons
             // 
@@ -258,7 +270,7 @@
             this.propertyGridSample.RightToLeft = RightToLeft.No;
             this.propertyGridSample.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridSample.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridSample.Size = new Size(666, 293);
+            this.propertyGridSample.Size = new Size(672, 293);
             this.propertyGridSample.TabIndex = 0;
             this.propertyGridSample.ToolbarVisible = false;
             this.propertyGridSample.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -274,7 +286,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(916, -3);
+            this.lblMasterlvllistHelp.Location = new Point(910, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -308,7 +320,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.pictureWave);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new Size(933, 519);
-            this.splitContainer1.SplitterDistance = 262;
+            this.splitContainer1.SplitterDistance = 256;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 136;
             // 
@@ -369,7 +381,7 @@
             this.pictureSpectrum.Location = new Point(0, 113);
             this.pictureSpectrum.Margin = new Padding(4, 3, 4, 3);
             this.pictureSpectrum.Name = "pictureSpectrum";
-            this.pictureSpectrum.Size = new Size(666, 100);
+            this.pictureSpectrum.Size = new Size(672, 100);
             this.pictureSpectrum.TabIndex = 150;
             this.pictureSpectrum.TabStop = false;
             // 
@@ -382,7 +394,7 @@
             this.pictureWave.Location = new Point(0, 13);
             this.pictureWave.Margin = new Padding(4, 3, 4, 3);
             this.pictureWave.Name = "pictureWave";
-            this.pictureWave.Size = new Size(666, 100);
+            this.pictureWave.Size = new Size(672, 100);
             this.pictureWave.TabIndex = 151;
             this.pictureWave.TabStop = false;
             // 
