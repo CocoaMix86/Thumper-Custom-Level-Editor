@@ -2894,16 +2894,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Point targetPoint = trackEditor.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             int targetRow = trackEditor.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
+            if (targetRow == -1)
+                return;
             //check if target location exists inside the lane selection
             if (RowsToMove.Length == 5 && 
                 ((RowsToMove[0].friendly_lane == "lane right 2" && targetRow >= RowsToMove[4].editor_row.Index && targetRow <= RowsToMove[0].editor_row.Index) || 
                 (RowsToMove[0].friendly_lane == "lane left 2" && targetRow >= RowsToMove[0].editor_row.Index && targetRow <= RowsToMove[4].editor_row.Index)))
                 return;
 
+            if (SequencerObjects[targetRow].friendly_lane != "none" && SequencerObjects[targetRow].expandlanes) {
+                return;
+            }
+
             if (RowsToMove.Length == 5 && RowsToMove[0].friendly_lane == "lane left 2" && targetRow < RowsToMove[0].editor_row.Index)
                 RowsToMove = RowsToMove.Reverse().ToArray();
             else if (RowsToMove.Length == 5 && RowsToMove[0].friendly_lane == "lane right 2" && targetRow > RowsToMove[0].editor_row.Index)
                 RowsToMove = RowsToMove.Reverse().ToArray();
+
+            if (SequencerObjects[targetRow].friendly_lane == "lane center" && targetRow > RowsToMove[0].editor_row.Index)
+                targetRow += 2;
+            else if (SequencerObjects[targetRow].friendly_lane == "lane center" && targetRow < RowsToMove[0].editor_row.Index)
+                targetRow -= 2;
+
 
             if (RowsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
                 previousDragOver = targetRow;
