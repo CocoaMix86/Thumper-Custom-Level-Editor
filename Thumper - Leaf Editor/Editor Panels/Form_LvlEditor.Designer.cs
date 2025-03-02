@@ -310,8 +310,11 @@
             this.lvlLeafList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle6.BackColor = Color.Green;
             dataGridViewCellStyle6.Font = new Font("Relay-Medium", 8.249999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.White;
             this.lvlLeafList.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.lvlLeafList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
+            this.lvlLeafList.RowTemplate.DefaultCellStyle.Font = new Font("Relay-Medium", 8.249999F);
+            this.lvlLeafList.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
             this.lvlLeafList.RowTemplate.Height = 20;
             this.lvlLeafList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -694,7 +697,7 @@
             this.btnLvlPathView.Image = Properties.Resources.icon_view;
             this.btnLvlPathView.ImageTransparentColor = Color.Magenta;
             this.btnLvlPathView.Name = "btnLvlPathView";
-            this.btnLvlPathView.Size = new Size(24, 24);
+            this.btnLvlPathView.Size = new Size(24, 22);
             this.btnLvlPathView.Text = "toolStripButton1";
             this.btnLvlPathView.ToolTipText = "Show/Hide tunnel preview";
             // 

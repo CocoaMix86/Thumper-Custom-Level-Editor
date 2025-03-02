@@ -168,24 +168,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // Retrieve the node at the drop location.
             int targetRow = lvlLeafList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
             //changing the hovered node backcolor to make it obvious where the destination will be
-            if (previousDragOver != targetRow && previousDragOver != -1) {
-                /*
-                if (LvlLeafs[previousDragOver].NotFound)
-                    lvlLeafList.Rows[previousDragOver].DefaultCellStyle.BackColor = Color.Maroon;
-                else
-                    lvlLeafList.Rows[previousDragOver].DefaultCellStyle.BackColor = Color.Green;
-                */
-            }
+            if (previousDragOver != targetRow && previousDragOver != -1) { }
             if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
                 lvlLeafList.Rows.Remove(RowToMove);
                 lvlLeafList.Rows.Insert(targetRow, RowToMove);
                 lvlLeafList.ClearSelection();
                 previousDragOver = targetRow;
                 lvlLeafList.Rows[targetRow].Selected = true;
-                /*
-                lvlLeafList.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
-                previousDragOver = targetRow;
-                */
             }
         }
         private void lvlLeafList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;

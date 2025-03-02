@@ -112,36 +112,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private Rectangle dragBoxFromMouseDown;
+        private DataGridViewRow RowToMove;
         private int rowIndexFromMouseDown;
         private int rowIndexOfItemUnderMouseToDrop;
         private void masterLvlList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
-                if (dragBoxFromMouseDown != Rectangle.Empty &&
-                    !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
-
+                if (RowToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.                    
-                    DragDropEffects dropEffect = masterLvlList.DoDragDrop(masterLvlList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                    ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                    RowToMove = masterLvlList.Rows[rowIndexFromMouseDown];
+                    masterLvlList.ClearSelection();
+                    //RowToMove.DefaultCellStyle.BackColor = SelectColor;
+                    DragDropEffects dropEffect = masterLvlList.DoDragDrop(MasterLvls[rowIndexFromMouseDown], DragDropEffects.Move);
+                    RowToMove = null;
                 }
             }
         }
 
         private void masterLvlList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {// Get the index of the item the mouse is below.
+        {
             rowIndexFromMouseDown = masterLvlList.HitTest(e.X, e.Y).RowIndex;
             if (rowIndexFromMouseDown != -1) {
-                // Remember the point where the mouse down occurred. 
-                // The DragSize indicates the size that the mouse can move 
-                // before a drag event should be started.                
                 Size dragSize = SystemInformation.DragSize;
-
-                // Create a rectangle using the DragSize, with the mouse position being
-                // at the center of the rectangle.
                 dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
             }
             else
-                // Reset the rectangle if the mouse is not over an item in the ListBox.
                 dragBoxFromMouseDown = Rectangle.Empty;
         }
 
@@ -154,15 +151,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // Retrieve the node at the drop location.
             int targetRow = masterLvlList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
             //changing the hovered node backcolor to make it obvious where the destination will be
-            if (previousDragOver != targetRow && previousDragOver != -1) {
-                if (masterLvlList.Rows[previousDragOver].Cells[3].Value.ToString() == "file not found")
-                    masterLvlList.Rows[previousDragOver].DefaultCellStyle.BackColor = Color.Maroon;
-                else
-                    masterLvlList.Rows[previousDragOver].DefaultCellStyle = null;
-            }
-            if (targetRow != -1 && targetRow != previousDragOver) {
-                masterLvlList.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
+            if (previousDragOver != targetRow && previousDragOver != -1) { }
+            if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                masterLvlList.Rows.Remove(RowToMove);
+                masterLvlList.Rows.Insert(targetRow, RowToMove);
+                masterLvlList.ClearSelection();
                 previousDragOver = targetRow;
+                masterLvlList.Rows[targetRow].Selected = true;
             }
         }
         private void masterLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
@@ -177,13 +172,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
-                if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                if (e.Data.GetData(typeof(MasterLvlData)) is MasterLvlData rowToMove) {
                     if (rowIndexOfItemUnderMouseToDrop == -1)
                         return;
-                    MasterLvlData tomove = MasterLvls[rowToMove.Index];
-                    MasterLvls.RemoveAt(rowIndexFromMouseDown);
-                    MasterLvls.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
-                    SaveCheckAndWrite(false, "Reorder Lvls");
+                    MasterLvls.Remove(rowToMove);
+                    MasterLvls.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
+                    masterLvlList.ClearSelection();
+                    masterLvlList.Rows[rowIndexOfItemUnderMouseToDrop].Selected = true;
+                    SaveCheckAndWrite(false, "Reorder Leafs");
+                    RowToMove = null;
                 }
                 if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
                     AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
@@ -191,10 +188,51 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        private static SolidBrush ClearColor = new SolidBrush(Color.Black);
+        private static SolidBrush LvlColorNotExist = new SolidBrush(Color.Maroon);
+        private static Color SelectColor = Color.FromArgb(199, 69, 255);
+        private static SolidBrush LvlColorSelected = new SolidBrush(SelectColor);
+        private void masterLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            e.Handled = true;
+            if (e.RowIndex == -1)
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+            else {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+            }
+        }
+
+        private void masterLvlList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            e.Handled = true;
+            Rectangle bounds = e.RowBounds;
+            bounds.X += 2;
+            bounds.Y += 2;
+            bounds.Width -= 4;
+            bounds.Height -= 4;
+            e.Graphics.FillRectangle(ClearColor, e.RowBounds);
+            if ((sender as DataGridView).Rows[e.RowIndex].Selected)
+                e.Graphics.FillRoundedRectangle(LvlColorSelected, bounds, 8);
+            else
+                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+            e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
+        }
+
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (SaveOnlyNoLoad)
                 return;
+
+            masterLvlList.Rows.Clear();
+            foreach (MasterLvlData lvl in MasterLvls) {
+                masterLvlList.Rows.Add(new object[] {
+                    0,
+                    (lvl.type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
+                    lvl.name,
+                    0
+                });
+            }
+            /*
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 masterLvlList.RowCount = 0;
             }
@@ -213,7 +251,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if action REMOVE, remove row from the master DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 masterLvlList.Rows.RemoveAt(e.OldStartingIndex);
-            }
+            }*/
             RecalculateRuntime();
             //enable certain buttons if there are enough items for them
             btnMasterLvlDelete.Enabled = MasterLvls.Count > 0;
@@ -479,10 +517,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 loadedmaster = new FileInfo(sfd.FileName);
 
                 masterproperties ??= new(this, loadedmaster) {
-                        skybox = "<none>",
-                        introlvl = "<none>",
-                        checkpointlvl = "<none>"
-                    };
+                    skybox = "<none>",
+                    introlvl = "<none>",
+                    checkpointlvl = "<none>"
+                };
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)

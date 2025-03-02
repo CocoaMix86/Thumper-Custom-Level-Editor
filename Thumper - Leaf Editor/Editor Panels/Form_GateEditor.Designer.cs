@@ -79,7 +79,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridGate);
             this.splitContainer1.Size = new Size(625, 364);
-            this.splitContainer1.SplitterDistance = 228;
+            this.splitContainer1.SplitterDistance = 225;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 118;
             // 
@@ -92,7 +92,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(212, -2);
+            this.labelCollapsePanel.Location = new Point(209, -2);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -151,12 +151,16 @@
             this.gateLvlList.RowHeadersVisible = false;
             this.gateLvlList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle5.BackColor = Color.Green;
+            dataGridViewCellStyle5.Font = new Font("Relay-Medium", 8.249999F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
             this.gateLvlList.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.gateLvlList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
+            this.gateLvlList.RowTemplate.DefaultCellStyle.Font = new Font("Relay-Medium", 8.249999F);
+            this.gateLvlList.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.gateLvlList.Size = new Size(204, 351);
+            this.gateLvlList.Size = new Size(201, 351);
             this.gateLvlList.TabIndex = 118;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += this.gateLvlList_CellClick_1;
@@ -297,7 +301,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(550, -3);
+            this.lblMasterlvllistHelp.Location = new Point(547, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -323,7 +327,7 @@
             this.propertyGridGate.RightToLeft = RightToLeft.No;
             this.propertyGridGate.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridGate.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridGate.Size = new Size(392, 364);
+            this.propertyGridGate.Size = new Size(395, 364);
             this.propertyGridGate.TabIndex = 0;
             this.propertyGridGate.ToolbarVisible = false;
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);

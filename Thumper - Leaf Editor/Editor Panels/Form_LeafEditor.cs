@@ -1972,6 +1972,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             splitContainer1.Panel1Collapsed = !splitContainer1.Panel1Collapsed;
             labelCollapsePanel.Text = splitContainer1.Panel1Collapsed ? ">" : "<";
         }
+
+        private void labelCollapsePanel2_Click(object sender, EventArgs e)
+        {
+            splitContainerLeafSide.Panel2Collapsed = !splitContainerLeafSide.Panel2Collapsed;
+            labelCollapsePanel2.Text = splitContainerLeafSide.Panel2Collapsed ? "^" : "v";
+        }
         #endregion
 
         #region Methods
