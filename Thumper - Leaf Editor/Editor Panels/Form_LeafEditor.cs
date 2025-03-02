@@ -1033,6 +1033,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
         {
+            int width = trackEditor.RowHeadersWidth;
             trackEditor_Resize(null, null);
         }
 
@@ -2175,7 +2176,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //set header width manually and allow resizing
             trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-            trackEditor.RowHeadersWidth = biggestheader;
+            trackEditor.RowHeadersWidth = biggestheader + 15;
         }
 
         public void Reload()
