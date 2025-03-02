@@ -2782,6 +2782,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void FindMissingLaneObjects(Sequencer_Object seq)
         {
+            if (ismoving)
+                return;
             //don't need to find lanes for non-multi-lanes
             if (seq.friendly_lane == "none")
                 return;
@@ -2815,6 +2817,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
 
         private Rectangle dragBoxFromMouseDown;
+        Sequencer_Object[] RowsToMove;
+        Sequencer_Object CenterLane;
         private int columnIndexFromMouseDown;
         private int rowIndexFromMouseDown;
         private int rowIndexOfItemUnderMouseToDrop;
@@ -2823,11 +2827,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
-                if (dragBoxFromMouseDown != Rectangle.Empty &&
-                    !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
-
+                if (RowsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+                    RowsToMove = ReturnLanesFromName(SequencerObjects[rowIndexFromMouseDown], SequencerObjects[rowIndexFromMouseDown].friendly_lane);
+                    CenterLane = RowsToMove.Length == 5 ? RowsToMove[2] : RowsToMove[0];
+                    ismoving = true;
                     // Proceed with the drag and drop, passing in the list item.                    
-                    DragDropEffects dropEffect = trackEditor.DoDragDrop(trackEditor.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
+                    DragDropEffects dropEffect = trackEditor.DoDragDrop(CenterLane.editor_row, DragDropEffects.Move);
+                    RowsToMove = null;
+                    ismoving = false;
                 }
             }
         }
@@ -2842,7 +2849,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // The DragSize indicates the size that the mouse can move 
                 // before a drag event should be started.                
                 Size dragSize = SystemInformation.DragSize;
-
                 // Create a rectangle using the DragSize, with the mouse position being
                 // at the center of the rectangle.
                 dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
@@ -2857,7 +2863,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // The mouse locations are relative to the screen, so they must be 
             // converted to client coordinates.
             Point clientPoint = trackEditor.PointToClient(new Point(e.X, e.Y));
-
             // Get the row index of the item the mouse is below. 
             rowIndexOfItemUnderMouseToDrop = trackEditor.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
 
@@ -2866,6 +2871,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
                     if (rowIndexOfItemUnderMouseToDrop == -1)
                         return;
+                    /*
                     trackEditor.SuspendLayout();
                     Sequencer_Object[] RowsToMove = ReturnLanesFromName(SequencerObjects[rowToMove.Index], SequencerObjects[rowToMove.Index].friendly_lane).Reverse().ToArray();
                     foreach (Sequencer_Object seq in RowsToMove) {
@@ -2875,16 +2881,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         trackEditor.Rows.Insert(rowIndexOfItemUnderMouseToDrop, seq.editor_row);
                     }
                     trackEditor.ResumeLayout();
-                    //Sequencer_Object tomove = SequencerObjects[rowToMove.Index];
-                    //SequencerObjects.RemoveAt(columnIndexFromMouseDown);
-                    //SequencerObjects.Insert(rowIndexOfItemUnderMouseToDrop, tomove);
+                    */
                     SaveCheckAndWrite(false, "Reorder Sequencer Objects");
                 }
-                /*
-                if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
-                    AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
-                }
-                */
             }
         }
         private void trackEditor_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
@@ -2895,6 +2894,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Point targetPoint = trackEditor.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             int targetRow = trackEditor.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
+            //check if target location exists inside the lane selection
+            if (RowsToMove.Length == 5 && 
+                ((RowsToMove[0].friendly_lane == "lane right 2" && targetRow >= RowsToMove[4].editor_row.Index && targetRow <= RowsToMove[0].editor_row.Index) || 
+                (RowsToMove[0].friendly_lane == "lane left 2" && targetRow >= RowsToMove[0].editor_row.Index && targetRow <= RowsToMove[4].editor_row.Index)))
+                return;
+
+            if (RowsToMove.Length == 5 && RowsToMove[0].friendly_lane == "lane left 2" && targetRow < RowsToMove[0].editor_row.Index)
+                RowsToMove = RowsToMove.Reverse().ToArray();
+            else if (RowsToMove.Length == 5 && RowsToMove[0].friendly_lane == "lane right 2" && targetRow > RowsToMove[0].editor_row.Index)
+                RowsToMove = RowsToMove.Reverse().ToArray();
+
+            if (RowsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                previousDragOver = targetRow;
+                TCLE.Instance.toolstripLevelName.Text = $"{targetRow}";
+                trackEditor.SuspendLayout();
+                /*
+                trackEditor.Rows.Remove(CenterLane.editor_row);
+                SequencerObjects.Remove(CenterLane);
+                SequencerObjects.Insert(targetRow, CenterLane);
+                trackEditor.Rows.Insert(targetRow, CenterLane.editor_row);
+                */
+                foreach (Sequencer_Object seq in RowsToMove) {
+                    trackEditor.Rows.Remove(seq.editor_row);
+                    SequencerObjects.Remove(seq);
+                    SequencerObjects.Insert(targetRow, seq);
+                    trackEditor.Rows.Insert(targetRow, seq.editor_row);
+                }
+                
+                trackEditor.ResumeLayout();
+            }
+            /*
             //changing the hovered node backcolor to make it obvious where the destination will be
             if (previousDragOver != targetRow && previousDragOver != -1) {
                 //trackEditor.Rows[previousDragOver].DefaultCellStyle = null;
@@ -2903,6 +2933,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //trackEditor.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
                 previousDragOver = targetRow;
             }
+            */
         }
     }
 }
