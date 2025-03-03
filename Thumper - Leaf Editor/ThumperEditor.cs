@@ -985,17 +985,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripStopAudio_Click(object sender, EventArgs e)
         {
-            Bass.BASS_Free();
-            alzheimer();
-            TCLE.PlayingChannels.Clear();
-            foreach (Form_SampleEditor samp in TCLE.Documents.Where(x => x.GetType() == typeof(Form_SampleEditor))) {
-                samp.sampleList.Refresh();
-            }
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
-                lvl.lvlLoopTracks.Refresh();
-            }
-            // Initialize Sound library
-            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
+            StopAudio();
         }
 
         #region Undo System
