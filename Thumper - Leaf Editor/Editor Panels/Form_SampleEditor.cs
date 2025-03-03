@@ -487,7 +487,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     pan = _samp["pan"],
                     offset = _samp["offset"],
                     channel_group = _samp["channel_group"] == "" ? "sequin.ch" : _samp["channel_group"],
-                    Editor = this
+                    Editor = this,
+                    time = TCLE.ProjectSamples.First(x => x.obj_name == (string)_samp["obj_name"]).time
                 });
             }
             SampleList.CollectionChanged += _samplelist_CollectionChanged;
@@ -577,7 +578,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 this.Text = LoadedSample.Name;
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedSample], _saveJSON);
-                TCLE.ReloadProjectSamples();
+                TCLE.UpdateProjectSamplesFromFile(LoadedSample, true, out string _);
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
@@ -623,7 +624,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string _filename = Path.GetFileNameWithoutExtension(filepath);
 
             if (TCLE.ProjectSamples.Any(x => x.obj_name == $"{_filename}.samp")) {
-                MessageBox.Show($"A sample with the name \"{_filename}\" already exists in {TCLE.ProjectSamples.First(x => x.obj_name == $"{_filename}.samp").File}", "Thumper Custom Level Editor");
+                MessageBox.Show($"A sample with the name \"{_filename}\" already exists in {TCLE.ProjectSamples.First(x => x.obj_name == $"{_filename}.samp").File.FullName}", "Thumper Custom Level Editor");
                 return;
             }
 
@@ -731,7 +732,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 offset = 0,
                 path = $"samples/levels/custom/{_filename}.wav",
                 channel_group = "sequin.ch",
-                time = 0,
+                time = -1,
                 Editor = this
             };
             newsample.CalculateRuntime();
@@ -741,7 +742,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (convertedwav)
                 File.Delete(filepath);
 
-            TCLE.ReloadProjectSamples();
+            TCLE.UpdateProjectSamplesFromFile(LoadedSample, true, out string _);
             lblLoading.Visible = false;
         }
 

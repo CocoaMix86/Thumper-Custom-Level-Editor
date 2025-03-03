@@ -78,7 +78,7 @@ namespace Thumper_Custom_Level_Editor
 
             //add each file inside the folder to the tree
             foreach (FileInfo file in directoryInfo.GetFiles()) {
-                if (file.Extension is ".TCL")
+                if (file.Extension is ".TCL" || file.Name.Equals("default.samp", StringComparison.OrdinalIgnoreCase))
                     continue;
                 TreeNode _tn = new() {
                     Text = file.Name,

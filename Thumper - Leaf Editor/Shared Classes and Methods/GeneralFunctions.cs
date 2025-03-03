@@ -13,6 +13,10 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Windows.Devices.Lights;
+using System.Threading.Channels;
+using NAudio.Wave.SampleProviders;
+using System.IO;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -429,35 +433,104 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static List<SampleData> ProjectSamples = new();
+        public static Dictionary<string, double> ProjectSampleRuntimes = new();
         public static void ReloadProjectSamples()
         {
             if (WorkingFolder == null)
                 return;
             ProjectSamples.Clear();
             //add default empty sample
-            ProjectSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = "" });
+            ProjectSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = null });
+            string warning = "";
             //iterate over each file
             foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp")) {
-                //parse file to JSON
-                dynamic _in = TCLE.LoadFileLock(sampfile.FullName);
-                //skip if somehow empty
-                if (_in == null || !_in.ContainsKey("items"))
-                    continue;
-                //iterate over items:[] list to get each sample and add names to list
-                foreach (dynamic _samp in _in["items"]) {
-                    ProjectSamples.Add(new SampleData {
-                        obj_name = ((string)_samp["obj_name"]),
-                        path = _samp["path"],
-                        volume = _samp["volume"],
-                        pitch = _samp["pitch"],
-                        pan = _samp["pan"],
-                        offset = _samp["offset"],
-                        channel_group = _samp["channel_group"],
-                        File = sampfile.Name
-                    });
-                }
+                UpdateProjectSamplesFromFile(sampfile, false, out string _warning);
+                warning += _warning;
             }
+            if (warning.Length > 2)
+                MessageBox.Show($"Your sample files contain duplicate entries. These can break your level, and it is advised to rename 1 or both of them.\n\n{warning}", "Thumper Custom Level Editor");
             ProjectSamples = ProjectSamples.OrderBy(w => w.obj_name).ToList();
+            //
+            CalculateSampleRuntimes();
+            //File.WriteAllLines($@"{AppLocation}\templates\{TCLE.WorkingFolder.Name}_sample_runtimes.temp", ProjectSamples.Select(x => $"{x.obj_name};{x.time}"));
+        }
+
+        public static void UpdateProjectSamplesFromFile(FileInfo SampFile, bool preserveSamples, out string warning)
+        {
+            //parse file to JSON
+            dynamic _in = TCLE.LoadFileLock(SampFile.FullName);
+            warning = "";
+            //skip if somehow empty
+            if (_in == null || !_in.ContainsKey("items"))
+                return;
+            //iterate over items:[] list to get each sample and add names to list
+            foreach (dynamic _samp in _in["items"]) {
+                if (ProjectSamples.Any(x => x.obj_name == (string)_samp["obj_name"])) {
+                    if (!preserveSamples)
+                        warning += $"{_samp["obj_name"]} in {SampFile.FullName}\n{_samp["obj_name"]} in {ProjectSamples.First(x => x.obj_name == (string)_samp["obj_name"]).File.FullName}\n";
+                    else
+                        continue;
+                }
+                ProjectSamples.Add(new SampleData {
+                    obj_name = ((string)_samp["obj_name"]),
+                    path = _samp["path"],
+                    volume = _samp["volume"],
+                    pitch = _samp["pitch"],
+                    pan = _samp["pan"],
+                    offset = _samp["offset"],
+                    channel_group = _samp["channel_group"],
+                    File = SampFile,
+                    time = -1
+                });
+            }
+            return;
+        }
+
+        public static void CalculateSampleRuntimes()
+        {
+            foreach (SampleData samp in ProjectSamples.Where(x => x.time == -1)) {
+                byte[] _bytes;
+                //get the hash of this filename. This will be used to locate the sample's .PC file
+                string _hashedname = "";
+                byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{samp.path}"));
+                Array.Reverse(hashbytes);
+                foreach (byte b in hashbytes)
+                    _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+                //if the hashed name starts with a '0', remove it
+                if (_hashedname[0] == '0')
+                    _hashedname = _hashedname[1..];
+
+                //check if sample is custom or not. This changes where we load audio from
+                if (samp.path.Contains("custom")) {
+                    try {
+                        _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
+                    }
+                    catch {
+                        continue;
+                    }
+                }
+                else {
+                    try {
+                        _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
+                    }
+                    catch {
+                        continue;
+                    }
+                }
+
+                _bytes = _bytes.Skip(4).ToArray();
+                FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
+                List<FmodSample> samples = bank.Samples;
+                samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
+
+                //initialize the player and load the sample
+                int _chan = Bass.BASS_SampleLoad(dataBytes, 0, dataBytes.Length, 10, BASSFlag.BASS_SAMPLE_FLOAT);
+                _chan = Bass.BASS_SampleGetChannel(_chan, BASSFlag.BASS_SAMPLE_FLOAT);
+                //math to figure out how long the sample is, in seconds and dimensions
+                long len = Bass.BASS_ChannelGetLength(_chan, BASSMode.BASS_POS_BYTE);
+                samp.time = Bass.BASS_ChannelBytes2Seconds(_chan, len);
+                Bass.BASS_ChannelFree(_chan);
+            }
         }
 
         public static string PCtoAudioFile(SampleData _samp)
@@ -1015,7 +1088,7 @@ namespace Thumper_Custom_Level_Editor
             };
             //math to figure out how long the sample is, in seconds and dimensions
             long len = Bass.BASS_ChannelGetLength(channel, BASSMode.BASS_POS_BYTE);
-            samp.time = (Bass.BASS_ChannelBytes2Seconds(channel, len) - ((double)samp.offset / 1000d)) / (double)samp.pitch;
+            samp.time = Bass.BASS_ChannelBytes2Seconds(channel, len);/* - ((double)samp.offset / 1000d)) / (double)samp.pitch;*/
             //render wave
             wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
             samp.wave = wave;

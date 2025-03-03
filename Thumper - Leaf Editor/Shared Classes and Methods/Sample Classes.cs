@@ -11,7 +11,7 @@ namespace Thumper_Custom_Level_Editor
     public class SampleData
     {
         public Form_SampleEditor Editor;
-        public string File { get; set; }
+        public FileInfo File { get; set; }
         public string TempFile { get; set; }
 
         public string obj_name
@@ -57,7 +57,7 @@ namespace Thumper_Custom_Level_Editor
         public string channel_group { get; set; }
 
         public WaveForm wave;
-        public double time;
+        public double time = -1;
         public double alteredtime => (this.time - ((double)this.offset / 1000d)) / (double)this.pitch;
         public double beats => (this.alteredtime / 60) * (double)TCLE.BPM;
 
