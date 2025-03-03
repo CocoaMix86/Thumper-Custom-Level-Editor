@@ -108,6 +108,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafList_SelectionChanged(object sender, EventArgs e)
         {
+            if (lvlLeafList.RowCount < 1 || lvlLeafList.SelectedRows.Count == 0)
+                return;
             LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
             lvlProperties.sublevel = LvlLeafs[lvlLeafList.SelectedRows[^1].Index];
         }
