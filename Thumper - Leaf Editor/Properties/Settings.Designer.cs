@@ -595,5 +595,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["ZoomVert"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RuntimeAsk {
+            get {
+                return ((bool)(this["RuntimeAsk"]));
+            }
+            set {
+                this["RuntimeAsk"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RuntimeSkip {
+            get {
+                return ((bool)(this["RuntimeSkip"]));
+            }
+            set {
+                this["RuntimeSkip"] = value;
+            }
+        }
     }
 }

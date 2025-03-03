@@ -17,6 +17,7 @@ using Windows.Devices.Lights;
 using System.Threading.Channels;
 using NAudio.Wave.SampleProviders;
 using System.IO;
+using Thumper_Custom_Level_Editor.Other_Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -451,7 +452,19 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show($"Your sample files contain duplicate entries. These can break your level, and it is advised to rename 1 or both of them.\n\n{warning}", "Thumper Custom Level Editor");
             ProjectSamples = ProjectSamples.OrderBy(w => w.obj_name).ToList();
             //
-            CalculateSampleRuntimes();
+            if (Properties.Settings.Default.RuntimeAsk) {
+                CheckboxDialog Ask = new();
+                if (Ask.ShowDialog() == DialogResult.Yes) {
+                    Properties.Settings.Default.RuntimeSkip = false;
+                    Properties.Settings.Default.RuntimeAsk = !Ask.checkAsk.Checked;
+                }
+                else {
+                    Properties.Settings.Default.RuntimeSkip = true;
+                    Properties.Settings.Default.RuntimeAsk = !Ask.checkAsk.Checked;
+                }
+            }
+            if (!Properties.Settings.Default.RuntimeSkip)
+                CalculateSampleRuntimes();
             //File.WriteAllLines($@"{AppLocation}\templates\{TCLE.WorkingFolder.Name}_sample_runtimes.temp", ProjectSamples.Select(x => $"{x.obj_name};{x.time}"));
         }
 
@@ -480,7 +493,7 @@ namespace Thumper_Custom_Level_Editor
                     offset = _samp["offset"],
                     channel_group = _samp["channel_group"],
                     File = SampFile,
-                    time = -1
+                    time = 0
                 });
             }
             return;
@@ -488,7 +501,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CalculateSampleRuntimes()
         {
-            foreach (SampleData samp in ProjectSamples.Where(x => x.time == -1)) {
+            foreach (SampleData samp in ProjectSamples.Where(x => x.time == 0)) {
                 byte[] _bytes;
                 //get the hash of this filename. This will be used to locate the sample's .PC file
                 string _hashedname = "";

@@ -887,6 +887,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripProjectPreload_Click(object sender, EventArgs e)
         {
+            TCLE.CalculateSampleRuntimes();
             foreach (SampleData samp in ProjectSamples) {
                 PCtoAudioFile(samp);
             }
