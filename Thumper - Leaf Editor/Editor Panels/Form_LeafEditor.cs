@@ -66,6 +66,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             BuildObjectTree();
             trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
             trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
+            splitContainerLeafSide.SplitterDistance = splitContainerLeafSide.Height - 60;
+            splitContainerLeafSide.Panel2Collapsed = Properties.Settings.Default.LeafHideRaw;
         }
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
         {
@@ -1978,6 +1980,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             splitContainerLeafSide.Panel2Collapsed = !splitContainerLeafSide.Panel2Collapsed;
             labelCollapsePanel2.Text = splitContainerLeafSide.Panel2Collapsed ? "^" : "v";
+            Properties.Settings.Default.LeafHideRaw = splitContainerLeafSide.Panel2Collapsed;
         }
         #endregion
 

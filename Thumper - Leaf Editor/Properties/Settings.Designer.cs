@@ -619,5 +619,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["RuntimeSkip"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LeafHideRaw {
+            get {
+                return ((bool)(this["LeafHideRaw"]));
+            }
+            set {
+                this["LeafHideRaw"] = value;
+            }
+        }
     }
 }
