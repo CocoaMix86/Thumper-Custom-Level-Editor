@@ -463,8 +463,10 @@ namespace Thumper_Custom_Level_Editor
                     Properties.Settings.Default.RuntimeAsk = !Ask.checkAsk.Checked;
                 }
             }
-            if (!Properties.Settings.Default.RuntimeSkip)
+            if (!Properties.Settings.Default.RuntimeSkip) {
                 CalculateSampleRuntimes();
+                alzheimer();
+            }
             //File.WriteAllLines($@"{AppLocation}\templates\{TCLE.WorkingFolder.Name}_sample_runtimes.temp", ProjectSamples.Select(x => $"{x.obj_name};{x.time}"));
         }
 
