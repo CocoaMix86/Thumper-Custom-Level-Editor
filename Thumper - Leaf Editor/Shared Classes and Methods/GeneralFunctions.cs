@@ -465,8 +465,6 @@ namespace Thumper_Custom_Level_Editor
             }
             if (!Properties.Settings.Default.RuntimeSkip) {
                 CalculateSampleRuntimes();
-                alzheimer();
-            }
             //File.WriteAllLines($@"{AppLocation}\templates\{TCLE.WorkingFolder.Name}_sample_runtimes.temp", ProjectSamples.Select(x => $"{x.obj_name};{x.time}"));
         }
 
@@ -503,7 +501,8 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CalculateSampleRuntimes()
         {
-            foreach (SampleData samp in ProjectSamples.Where(x => x.time == 0)) {
+            //foreach (SampleData samp in ProjectSamples.Where(x => x.time == 0)) {
+            Parallel.ForEach(ProjectSamples, samp => {
                 byte[] _bytes;
                 //get the hash of this filename. This will be used to locate the sample's .PC file
                 string _hashedname = "";
@@ -521,7 +520,7 @@ namespace Thumper_Custom_Level_Editor
                         _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
                     }
                     catch {
-                        continue;
+                        return;
                     }
                 }
                 else {
@@ -529,7 +528,7 @@ namespace Thumper_Custom_Level_Editor
                         _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
                     }
                     catch {
-                        continue;
+                        return;
                     }
                 }
 
@@ -544,8 +543,22 @@ namespace Thumper_Custom_Level_Editor
                 //math to figure out how long the sample is, in seconds and dimensions
                 long len = Bass.BASS_ChannelGetLength(_chan, BASSMode.BASS_POS_BYTE);
                 samp.time = Bass.BASS_ChannelBytes2Seconds(_chan, len);
-                Bass.BASS_ChannelFree(_chan);
+            });
+        }
+
+        public static void StopAudio()
+        {
+            Bass.BASS_Free();
+            alzheimer();
+            TCLE.PlayingChannels.Clear();
+            foreach (Form_SampleEditor samp in TCLE.Documents.Where(x => x.GetType() == typeof(Form_SampleEditor))) {
+                samp.sampleList.Refresh();
             }
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+                lvl.lvlLoopTracks.Refresh();
+            }
+            // Initialize Sound library
+            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, TCLE.Instance.Handle);
         }
 
         public static string PCtoAudioFile(SampleData _samp)
