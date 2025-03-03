@@ -465,6 +465,8 @@ namespace Thumper_Custom_Level_Editor
             }
             if (!Properties.Settings.Default.RuntimeSkip) {
                 CalculateSampleRuntimes();
+                StopAudio();
+            }
             //File.WriteAllLines($@"{AppLocation}\templates\{TCLE.WorkingFolder.Name}_sample_runtimes.temp", ProjectSamples.Select(x => $"{x.obj_name};{x.time}"));
         }
 
