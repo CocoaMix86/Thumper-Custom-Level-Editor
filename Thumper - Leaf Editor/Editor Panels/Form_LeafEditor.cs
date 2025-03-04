@@ -2433,7 +2433,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Columns[index].HeaderCell.Style.BackColor = Color.LightGray;
                 trackEditor.Columns[index].HeaderCell.Style.ForeColor = Color.Black;
                 trackEditor.Columns[index].HeaderText = leaf.leafname;
-                trackEditor.Columns[index].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                //trackEditor.Columns[index].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
                 index += leaf.beats;
             }
         }
