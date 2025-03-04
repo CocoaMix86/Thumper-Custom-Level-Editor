@@ -144,7 +144,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool ZoomHasChanged;
         private bool ResetRowAfterEdit;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
-        public DataObject ClipBoardDataPoints = new();
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         public List<SaveState> UndoList = new();
         #endregion
@@ -1525,7 +1524,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            btnTrackPaste.Enabled = true;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(".leaf")))
+                leaf.btnTrackPaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
 
@@ -2669,14 +2669,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Copy()
         {
             ///copies selected cells
-            ClipBoardDataPoints = trackEditor.GetClipboardContent();
+            TCLE.ClipBoardDataPoints = trackEditor.GetClipboardContent();
             TCLE.Instance.toolstripEditPaste.Enabled = true;
         }
 
         public void Cut()
         {
             ///cut and copies selected cells
-            ClipBoardDataPoints = trackEditor.GetClipboardContent();
+            TCLE.ClipBoardDataPoints = trackEditor.GetClipboardContent();
             LogUndo = false;
             CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
             LogUndo = true;
@@ -2686,7 +2686,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Paste()
         {
             //get content on clipboard to string and then split it to rows
-            string s = ClipBoardDataPoints.GetText().Replace("\r\n", "\n");
+            string s = TCLE.ClipBoardDataPoints.GetText().Replace("\r\n", "\n");
             string[][] copiedcells = s.Split('\n').Select(x => x.Split('\t')).ToArray();
             //set ints so we don't have to always call rowindex, columnindex
             int pastingrow = trackEditor.CurrentCell.RowIndex;

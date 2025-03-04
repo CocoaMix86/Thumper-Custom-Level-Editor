@@ -43,6 +43,7 @@ namespace Thumper_Custom_Level_Editor
             { 9, 48_000 },
             { 10,96_000 }
         };
+        public static DataObject ClipBoardDataPoints = new();
 
         private static void LoadQuickValues()
         {
