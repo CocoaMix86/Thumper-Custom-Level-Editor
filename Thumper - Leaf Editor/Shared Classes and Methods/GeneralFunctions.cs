@@ -734,7 +734,7 @@ namespace Thumper_Custom_Level_Editor
                 return 0;
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 FileInfo _leaf = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{(leaf["leaf_name"])}")).Value?.File;
-                if (_leaf != null)
+                if (_leaf != null && _leaf.Exists)
                     _beatcount += (int)TCLE.LoadFileLock(_leaf.FullName)["beat_cnt"];
                 ///_beatcount += (int)leaf["beat_cnt"];
             }

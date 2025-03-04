@@ -1837,6 +1837,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafProperties.beats = splitindex;
             SaveCheckAndWrite(true, "");
             TCLE.PlaySound("UIleafsplit");
+            ProjectExplorer.CreateTreeView();
             //load new leaf that was just split
             TCLE.OpenFile(SplitFile);
         }

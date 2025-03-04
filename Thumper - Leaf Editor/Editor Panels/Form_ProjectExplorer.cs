@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Newtonsoft.Json;
+using System.Diagnostics;
 using System.IO.Packaging;
 using System.Windows.Forms;
 
@@ -237,7 +238,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Directory.Move(source, dest);
             }
             else {
-                File.Move(source, dest);
+                if (TCLE.lockedfiles.Any(x => x.Key.FullName == source))
+                    MessageBox.Show($"{source} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
+                else {
+                    File.Move(source, dest);
+                    dynamic towrite = TCLE.LoadFileLock(dest);
+                    File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
+                }
             }
             ProjectExplorer.CreateTreeView();
         }
@@ -337,7 +344,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         TCLE.CopyDirectory(source, dest, true);
                     }
                     else if (File.Exists(source)) {
-                        File.Copy(source, dest);
+                        //File.Copy(source, dest);
+                        dynamic towrite = TCLE.LoadFileLock(source);
+                        File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
                     }
                 }
             }
@@ -358,10 +367,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string name = Path.GetFileNameWithoutExtension(fullname.Name);
                 int count = Directory.GetFiles($@"{ProjectExplorer.Files[targetnode].Folder.FullName}", $"{name} - Copy*{fullname.Extension}").Length + 1;
                 dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{name}{(count > 0 ? $" - Copy ({count})" : "")}{fullname.Extension}";
-            }
+            }            
 
             if (File.Exists(source)) {
-                File.Copy(source, dest);
+                dynamic towrite = TCLE.LoadFileLock(source);
+                File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
             }
 
             ProjectExplorer.CreateTreeView();
