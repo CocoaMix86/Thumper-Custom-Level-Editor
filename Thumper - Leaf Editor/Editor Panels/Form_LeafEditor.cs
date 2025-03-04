@@ -2692,6 +2692,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int pastingrow = trackEditor.CurrentCell.RowIndex;
             int pastingcol = trackEditor.CurrentCell.ColumnIndex;
             int offset = 0;
+            ispasting = true;
             LogUndo = false;
             for (int rowindex = 0; rowindex < copiedcells.Length; rowindex++) {
                 if (pastingrow + rowindex + offset >= trackEditor.RowCount)
@@ -2713,8 +2714,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects[pastingrow + rowindex + offset].data_points[pastingcol + cellindex - FrozenColumnOffset].value = decimal.Parse(copiedcells[rowindex][cellindex]);
                     ///TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset], SequencerObjects[pastingrow + rowindex + offset]);
                 }
+                trackEditor.InvalidateRow(pastingrow + rowindex + offset);
             }
         exit:
+            ispasting = false;
             LogUndo = true;
             SaveCheckAndWrite(false, "Pasted cells");
         }
