@@ -1295,9 +1295,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             //If multiple rows are selected, get all of them in a list. Then loop over list, deleting each one
             List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => SequencerObjects[cell.RowIndex]).Distinct().ToList();
-            for (int objindex = 0; objindex < selectedrows.Count; objindex++) {
+            //for (int objindex = 0; objindex < selectedrows.Count; objindex++)
+            while (selectedrows.Count > 0) {
                 //if object is multilane, delete its other lanes too
-                Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == selectedrows[objindex].category && x.friendly_param == selectedrows[objindex].friendly_param).ToArray();
+                //Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == selectedrows[objindex].category && x.friendly_param == selectedrows[objindex].friendly_param).ToArray();
+                Sequencer_Object[] Lanes = ReturnLanesFromName(selectedrows[0], selectedrows[0].friendly_lane);
                 for (int x = 0; x < Lanes.Length; x++) {
                     trackEditor.Rows.Remove(Lanes[x].editor_row);
                     SequencerObjects.Remove(Lanes[x]);
