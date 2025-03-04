@@ -705,6 +705,8 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripWindowCloseEditors_Click(object sender, EventArgs e)
         {
             Form_WorkSpace fws = dockMain.ActiveDocument as Form_WorkSpace;
+            if (fws == null)
+                return;
             while (fws.dockMain.Documents.Any())
                 fws.dockMain.Documents.First().DockHandler.Dispose();
         }
