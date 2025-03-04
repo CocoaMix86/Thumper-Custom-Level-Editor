@@ -456,7 +456,7 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show($"Your sample files contain duplicate entries. These can break your level, and it is advised to rename 1 or both of them.\n\n{warning}", "Thumper Custom Level Editor");
             ProjectSamples = ProjectSamples.OrderBy(w => w.obj_name).ToList();
             //
-            if (true/*Properties.Settings.Default.RuntimeAsk*/) {
+            if (Properties.Settings.Default.RuntimeAsk) {
                 CheckboxDialog Ask = new();
                 if (Ask.ShowDialog() == DialogResult.Yes) {
                     Properties.Settings.Default.RuntimeSkip = false;
