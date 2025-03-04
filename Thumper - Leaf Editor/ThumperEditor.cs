@@ -453,7 +453,7 @@ namespace Thumper_Custom_Level_Editor
             //create a workspace
             Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
             workspace1.Show(dockMain, DockState.Document);
-            OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).Value.File);
+            OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).Value?.File);
             //this will be the loading sound :D
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
 
