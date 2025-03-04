@@ -535,7 +535,7 @@ namespace Thumper_Custom_Level_Editor
                         reader.ReadUInt32(); //size of sample header
                         reader.ReadUInt32(); //size of header table
                         uint sampbytes = reader.ReadUInt32(); //sample bytes
-                        reader.ReadUInt32(); //audio type
+                        uint type = reader.ReadUInt32(); //audio type
                         reader.ReadUInt32(); //unknown
                         reader.ReadUInt32(); //flags
                         reader.ReadUInt64(); //hash1
@@ -544,8 +544,9 @@ namespace Thumper_Custom_Level_Editor
                         UInt64 metadata = reader.ReadUInt64(); //metadata
 
                         UInt64 freqid = (metadata & 0b11110) >> 1;
+                        UInt64 samples = metadata >> 34;
                         int freq = Frequencys[(int)freqid];
-                        samp.time = (double)(sampbytes / 4) / (double)freq;
+                        samp.time = (double)(samples) / (double)freq;
                     }
                 }
                 catch (Exception ex) {
