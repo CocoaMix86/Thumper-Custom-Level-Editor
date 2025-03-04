@@ -9,14 +9,6 @@ using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
-using System.Drawing;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Windows.Devices.Lights;
-using System.Threading.Channels;
-using NAudio.Wave.SampleProviders;
-using System.IO;
 using Thumper_Custom_Level_Editor.Other_Forms;
 
 namespace Thumper_Custom_Level_Editor
@@ -39,6 +31,18 @@ namespace Thumper_Custom_Level_Editor
         public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
         public static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master" };
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
+        public static Dictionary<int, int> Frequencys = new() {
+            { 1, 8000 },
+            { 2, 11_000 },
+            { 3, 11_025 },
+            { 4, 16_000 },
+            { 5, 22_050 },
+            { 6, 24_000 },
+            { 7, 32_000 },
+            { 8, 44_100 },
+            { 9, 48_000 },
+            { 10,96_000 }
+        };
 
         private static void LoadQuickValues()
         {
@@ -452,7 +456,7 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show($"Your sample files contain duplicate entries. These can break your level, and it is advised to rename 1 or both of them.\n\n{warning}", "Thumper Custom Level Editor");
             ProjectSamples = ProjectSamples.OrderBy(w => w.obj_name).ToList();
             //
-            if (Properties.Settings.Default.RuntimeAsk) {
+            if (true/*Properties.Settings.Default.RuntimeAsk*/) {
                 CheckboxDialog Ask = new();
                 if (Ask.ShowDialog() == DialogResult.Yes) {
                     Properties.Settings.Default.RuntimeSkip = false;
@@ -503,8 +507,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CalculateSampleRuntimes()
         {
-            //foreach (SampleData samp in ProjectSamples.Where(x => x.time == 0)) {
-            Parallel.ForEach(ProjectSamples, samp => {
+            foreach (SampleData samp in ProjectSamples.Where(x => x.time == 0)) {
                 byte[] _bytes;
                 //get the hash of this filename. This will be used to locate the sample's .PC file
                 string _hashedname = "";
@@ -517,35 +520,38 @@ namespace Thumper_Custom_Level_Editor
                     _hashedname = _hashedname[1..];
 
                 //check if sample is custom or not. This changes where we load audio from
-                if (samp.path.Contains("custom")) {
-                    try {
-                        _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
-                    }
-                    catch {
-                        return;
+                string filetoread;
+                try {
+                    if (samp.path.Contains("custom"))
+                        filetoread = $@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc";
+                    else
+                        filetoread = $@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc";
+
+                    using (BinaryReader reader = new(new FileStream(filetoread, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read))) {
+                        reader.ReadUInt32(); //pc header
+                        reader.ReadUInt32(); //fsb5 header
+                        reader.ReadUInt32(); //version
+                        reader.ReadUInt32(); //# of tracks
+                        reader.ReadUInt32(); //size of sample header
+                        reader.ReadUInt32(); //size of header table
+                        uint sampbytes = reader.ReadUInt32(); //sample bytes
+                        reader.ReadUInt32(); //audio type
+                        reader.ReadUInt32(); //unknown
+                        reader.ReadUInt32(); //flags
+                        reader.ReadUInt64(); //hash1
+                        reader.ReadUInt64(); //hash2
+                        reader.ReadUInt64(); //hash3
+                        UInt64 metadata = reader.ReadUInt64(); //metadata
+
+                        UInt64 freqid = (metadata & 0b11110) >> 1;
+                        int freq = Frequencys[(int)freqid];
+                        samp.time = (double)(sampbytes / 4) / (double)freq;
                     }
                 }
-                else {
-                    try {
-                        _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
-                    }
-                    catch {
-                        return;
-                    }
+                catch (Exception ex) {
+                    samp.time = 0;
                 }
-
-                _bytes = _bytes.Skip(4).ToArray();
-                FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
-                List<FmodSample> samples = bank.Samples;
-                samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
-
-                //initialize the player and load the sample
-                int _chan = Bass.BASS_SampleLoad(dataBytes, 0, dataBytes.Length, 10, BASSFlag.BASS_SAMPLE_FLOAT);
-                _chan = Bass.BASS_SampleGetChannel(_chan, BASSFlag.BASS_SAMPLE_FLOAT);
-                //math to figure out how long the sample is, in seconds and dimensions
-                long len = Bass.BASS_ChannelGetLength(_chan, BASSMode.BASS_POS_BYTE);
-                samp.time = Bass.BASS_ChannelBytes2Seconds(_chan, len);
-            });
+            }
         }
 
         public static void StopAudio()
@@ -565,7 +571,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static string PCtoAudioFile(SampleData _samp)
         {
-            if (_samp == null)
+            if (_samp == null || _samp.obj_name == ".samp")
                 return null;
             //check if the gamedir has been set so the method can find the .pc files
             if (Properties.Settings.Default.game_dir == "none") {
