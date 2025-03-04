@@ -713,7 +713,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             interpolation = "Linear"
                         };
                         if (SequencerObjects[_cell.RowIndex].expandlanes == false && SequencerObjects[_cell.RowIndex].friendly_lane == "lane center") {
-
+                            SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                                beat = _cell.ColumnIndex - FrozenColumnOffset,
+                                value = null,
+                                ease = "Ease In Out",
+                                interpolation = "Linear"
+                            };
+                            SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                                beat = _cell.ColumnIndex - FrozenColumnOffset,
+                                value = null,
+                                ease = "Ease In Out",
+                                interpolation = "Linear"
+                            };
+                            SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                                beat = _cell.ColumnIndex - FrozenColumnOffset,
+                                value = null,
+                                ease = "Ease In Out",
+                                interpolation = "Linear"
+                            };
+                            SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                                beat = _cell.ColumnIndex - FrozenColumnOffset,
+                                value = null,
+                                ease = "Ease In Out",
+                                interpolation = "Linear"
+                            };
                         }
                     }
                     else
