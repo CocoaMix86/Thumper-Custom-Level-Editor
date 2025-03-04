@@ -40,6 +40,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Image diff = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{txtCustomDiff.Text}");
             pictureDifficulty.Image = diff;
+            SaveButtonCheck();
         }
 
         private void btnCustomCancel_Click(object sender, EventArgs e)
@@ -113,10 +114,12 @@ namespace Thumper_Custom_Level_Editor
             return NewProject;
         }
 
+        bool nameok;
         private void txtCustomName_TextChanged(object sender, EventArgs e)
         {
             lblNameError.Visible = false;
             btnCustomSave.Enabled = false;
+            nameok = false;
             bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
             bool exists = Directory.Exists($@"{txtCustomPath}\{txtCustomName.Text}") && txtCustomName.Text != TCLE.WorkingFolder.Name;
             bool endsindot = txtCustomName.Text.TrimEnd().EndsWith('.');
@@ -137,8 +140,18 @@ namespace Thumper_Custom_Level_Editor
                 lblNameError.Visible = true;
                 lblNameError.Text = "The folder path + level name is longer than 256 characters (Windows limit).";
             }
-            else
+            else {
+                nameok = true;
+                SaveButtonCheck();
+            }
+        }
+
+        private void SaveButtonCheck()
+        {
+            if (nameok && txtCustomDiff.Text.Length > 1)
                 btnCustomSave.Enabled = true;
+            else
+                btnCustomSave.Enabled = false;
         }
 
         private void combobox_DrawItem(object sender, DrawItemEventArgs e)
