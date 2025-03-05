@@ -1196,7 +1196,7 @@
             this.contextmenuHelp.Name = "contextmenuHelp";
             this.contextmenuHelp.OwnerItem = this.toolstripHelp;
             this.contextmenuHelp.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuHelp.Size = new Size(201, 164);
+            this.contextmenuHelp.Size = new Size(201, 186);
             // 
             // toolStripMenuItem13
             // 

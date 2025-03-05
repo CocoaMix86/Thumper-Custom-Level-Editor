@@ -3,10 +3,7 @@ using System.Collections.ObjectModel;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using System.Text;
-using NAudio.Wave.SampleProviders;
-using Windows.Devices.Bluetooth.Advertisement;
-using System.Drawing;
-using Windows.Storage.Pickers.Provider;
+using System.Diagnostics;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -405,7 +402,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         //How to create an FSB
-        private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start("https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q");
+        private void lblSampleFSBhelp_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://docs.google.com/document/d/14kSw3Hm-WKfADqOfuquf16lEUNKxtt9dpeWLWsX8y9Q", UseShellExecute = true });
 
         private void AudioPlayback(DataGridViewCell CellToPlay)
         {

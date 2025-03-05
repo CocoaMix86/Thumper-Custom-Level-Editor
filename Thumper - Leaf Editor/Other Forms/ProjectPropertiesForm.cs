@@ -149,7 +149,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void SaveButtonCheck()
         {
-            if (nameok && txtCustomDiff.SelectedIndex != -1)
+            if (nameok && txtCustomDiff.Text.Length > 1 && txtCustomPath.Text.Length > 1)
                 btnCustomSave.Enabled = true;
             else
                 btnCustomSave.Enabled = false;
