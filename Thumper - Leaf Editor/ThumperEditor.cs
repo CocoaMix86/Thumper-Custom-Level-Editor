@@ -853,8 +853,8 @@ namespace Thumper_Custom_Level_Editor
                     if (!files.Any(x => x.Name == pack.Item1.Name)) {
                         using (StreamWriter sw = pack.Item1.CreateText()) {
                             sw.Write(pack.Item3);
-                            UpdateProjectSamplesFromFile(pack.Item1, true, out string _);
                         }
+                        UpdateProjectSamplesFromFile(pack.Item1, true, out string _);
                         filesupdates = true;
                     }
                 }
