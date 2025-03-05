@@ -2863,6 +2863,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int previousDragOver = -1;
         private void trackEditor_MouseMove(object sender, MouseEventArgs e)
         {
+            if (rowIndexFromMouseDown == -1)
+                return;
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
                 if (RowsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
