@@ -503,6 +503,10 @@ namespace Thumper_Custom_Level_Editor
                     time = 0
                 });
             }
+
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(".leaf"))) {
+                leaf.BuildObjectTree();
+            }
             return;
         }
 

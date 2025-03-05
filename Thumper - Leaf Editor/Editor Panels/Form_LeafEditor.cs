@@ -2891,7 +2891,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(true, "");
         }
 
-        private void BuildObjectTree()
+        public void BuildObjectTree()
         {
             bool filtersearch = txtSearch.Text is not "" and not "Search Objects (Ctrl+;)";
 
