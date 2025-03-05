@@ -27,7 +27,8 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 }
                 txtCustomPath.Text = cfd_lvl.FileName;
-                btnCustomSave.Enabled = true;
+                txtCustomName_TextChanged(null, null);
+                SaveButtonCheck();
             }
         }
 
@@ -148,7 +149,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void SaveButtonCheck()
         {
-            if (nameok && txtCustomDiff.Text.Length > 1)
+            if (nameok && txtCustomDiff.SelectedIndex != -1)
                 btnCustomSave.Enabled = true;
             else
                 btnCustomSave.Enabled = false;
