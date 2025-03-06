@@ -88,7 +88,6 @@
             this.toolstripEditCut = new ToolStripMenuItem();
             this.toolstripEditCopy = new ToolStripMenuItem();
             this.toolstripEditPaste = new ToolStripMenuItem();
-            this.toolstripEditDelete = new ToolStripMenuItem();
             this.toolStripSeparator15 = new ToolStripSeparator();
             this.toolstripEditPreferences = new ToolStripMenuItem();
             this.toolstripEdit = new ToolStripMenuItem();
@@ -117,9 +116,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -734,7 +733,7 @@
             // contextmenuEdit
             // 
             this.contextmenuEdit.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextmenuEdit.Items.AddRange(new ToolStripItem[] { this.toolstripEditUndo, this.toolStripSeparator10, this.toolstripEditCut, this.toolstripEditCopy, this.toolstripEditPaste, this.toolstripEditDelete, this.toolStripSeparator15, this.toolstripEditPreferences });
+            this.contextmenuEdit.Items.AddRange(new ToolStripItem[] { this.toolstripEditUndo, this.toolStripSeparator10, this.toolstripEditCut, this.toolstripEditCopy, this.toolstripEditPaste, this.toolStripSeparator15, this.toolstripEditPreferences });
             this.contextmenuEdit.Name = "contextmenuEdit";
             this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
@@ -792,17 +791,6 @@
             this.toolstripEditPaste.Size = new Size(217, 22);
             this.toolstripEditPaste.Text = "Paste";
             this.toolstripEditPaste.Click += this.toolstripEditPaste_Click;
-            // 
-            // toolstripEditDelete
-            // 
-            this.toolstripEditDelete.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripEditDelete.ForeColor = Color.White;
-            this.toolstripEditDelete.Image = Properties.Resources.icon_remove2;
-            this.toolstripEditDelete.Name = "toolstripEditDelete";
-            this.toolstripEditDelete.ShortcutKeys = Keys.Delete;
-            this.toolstripEditDelete.Size = new Size(217, 22);
-            this.toolstripEditDelete.Text = "Delete";
-            this.toolstripEditDelete.Click += this.toolstripEditDelete_Click;
             // 
             // toolStripSeparator15
             // 
@@ -931,8 +919,9 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.Size = new Size(181, 312);
+            this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
             // 
@@ -942,7 +931,7 @@
             this.toolstripSampLevel1.ForeColor = Color.White;
             this.toolstripSampLevel1.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel1.Name = "toolstripSampLevel1";
-            this.toolstripSampLevel1.Size = new Size(180, 22);
+            this.toolstripSampLevel1.Size = new Size(164, 22);
             this.toolstripSampLevel1.Text = "Level 1 (320bpm)";
             // 
             // toolstripSampLevel2
@@ -951,7 +940,7 @@
             this.toolstripSampLevel2.ForeColor = Color.White;
             this.toolstripSampLevel2.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel2.Name = "toolstripSampLevel2";
-            this.toolstripSampLevel2.Size = new Size(180, 22);
+            this.toolstripSampLevel2.Size = new Size(164, 22);
             this.toolstripSampLevel2.Text = "Level 2 (340bpm)";
             // 
             // toolstripSampLevel3
@@ -960,7 +949,7 @@
             this.toolstripSampLevel3.ForeColor = Color.White;
             this.toolstripSampLevel3.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel3.Name = "toolstripSampLevel3";
-            this.toolstripSampLevel3.Size = new Size(180, 22);
+            this.toolstripSampLevel3.Size = new Size(164, 22);
             this.toolstripSampLevel3.Text = "Level 3 (360bpm)";
             // 
             // toolstripSampLevel4
@@ -969,7 +958,7 @@
             this.toolstripSampLevel4.ForeColor = Color.White;
             this.toolstripSampLevel4.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel4.Name = "toolstripSampLevel4";
-            this.toolstripSampLevel4.Size = new Size(180, 22);
+            this.toolstripSampLevel4.Size = new Size(164, 22);
             this.toolstripSampLevel4.Text = "Level 4 (380bpm)";
             // 
             // toolstripSampLevel5
@@ -978,7 +967,7 @@
             this.toolstripSampLevel5.ForeColor = Color.White;
             this.toolstripSampLevel5.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel5.Name = "toolstripSampLevel5";
-            this.toolstripSampLevel5.Size = new Size(180, 22);
+            this.toolstripSampLevel5.Size = new Size(164, 22);
             this.toolstripSampLevel5.Text = "Level 5 (400bpm)";
             // 
             // toolstripSampLevel6
@@ -987,7 +976,7 @@
             this.toolstripSampLevel6.ForeColor = Color.White;
             this.toolstripSampLevel6.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel6.Name = "toolstripSampLevel6";
-            this.toolstripSampLevel6.Size = new Size(180, 22);
+            this.toolstripSampLevel6.Size = new Size(164, 22);
             this.toolstripSampLevel6.Text = "Level 6 (420bpm)";
             // 
             // toolstripSampLevel7
@@ -996,7 +985,7 @@
             this.toolstripSampLevel7.ForeColor = Color.White;
             this.toolstripSampLevel7.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel7.Name = "toolstripSampLevel7";
-            this.toolstripSampLevel7.Size = new Size(180, 22);
+            this.toolstripSampLevel7.Size = new Size(164, 22);
             this.toolstripSampLevel7.Text = "Level 7 (440bpm)";
             // 
             // toolstripSampLevel8
@@ -1005,7 +994,7 @@
             this.toolstripSampLevel8.ForeColor = Color.White;
             this.toolstripSampLevel8.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel8.Name = "toolstripSampLevel8";
-            this.toolstripSampLevel8.Size = new Size(180, 22);
+            this.toolstripSampLevel8.Size = new Size(164, 22);
             this.toolstripSampLevel8.Text = "Level 8 (460bpm)";
             // 
             // toolstripSampLevel9
@@ -1014,7 +1003,7 @@
             this.toolstripSampLevel9.ForeColor = Color.White;
             this.toolstripSampLevel9.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel9.Name = "toolstripSampLevel9";
-            this.toolstripSampLevel9.Size = new Size(180, 22);
+            this.toolstripSampLevel9.Size = new Size(164, 22);
             this.toolstripSampLevel9.Text = "Level 9 (480bpm)";
             // 
             // toolstripSampLevelDiss
@@ -1023,7 +1012,7 @@
             this.toolstripSampLevelDiss.ForeColor = Color.White;
             this.toolstripSampLevelDiss.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevelDiss.Name = "toolstripSampLevelDiss";
-            this.toolstripSampLevelDiss.Size = new Size(180, 22);
+            this.toolstripSampLevelDiss.Size = new Size(164, 22);
             this.toolstripSampLevelDiss.Text = "Dissonance";
             // 
             // toolstripSampLevelDrones
@@ -1032,7 +1021,7 @@
             this.toolstripSampLevelDrones.ForeColor = Color.White;
             this.toolstripSampLevelDrones.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevelDrones.Name = "toolstripSampLevelDrones";
-            this.toolstripSampLevelDrones.Size = new Size(180, 22);
+            this.toolstripSampLevelDrones.Size = new Size(164, 22);
             this.toolstripSampLevelDrones.Text = "Drones";
             // 
             // toolstripSampLevelRests
@@ -1041,7 +1030,7 @@
             this.toolstripSampLevelRests.ForeColor = Color.White;
             this.toolstripSampLevelRests.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevelRests.Name = "toolstripSampLevelRests";
-            this.toolstripSampLevelRests.Size = new Size(180, 22);
+            this.toolstripSampLevelRests.Size = new Size(164, 22);
             this.toolstripSampLevelRests.Text = "Rests";
             // 
             // toolstripSampLevelMisc
@@ -1050,8 +1039,16 @@
             this.toolstripSampLevelMisc.ForeColor = Color.White;
             this.toolstripSampLevelMisc.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevelMisc.Name = "toolstripSampLevelMisc";
-            this.toolstripSampLevelMisc.Size = new Size(180, 22);
+            this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
+            // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // toolstripProjectPreload
             // 
@@ -1073,14 +1070,6 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
-            // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -2037,7 +2026,6 @@
         public ToolStripMenuItem toolstripEditCut;
         public ToolStripMenuItem toolstripEditCopy;
         public ToolStripMenuItem toolstripEditPaste;
-        public ToolStripMenuItem toolstripEditDelete;
         private ContextMenuStrip contextMenuRecentProjects;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem toolstripFileConvert;

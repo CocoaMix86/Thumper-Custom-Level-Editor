@@ -62,6 +62,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]
         [Description("")]
+        [TypeConverter(typeof(SkyboxList))]
         public string skybox { get; set; }
 
         [CategoryAttribute("Options")]
@@ -125,6 +126,18 @@ namespace Thumper_Custom_Level_Editor
         {
             TCLE.ReloadLvlsInProject();
             return new StandardValuesCollection(TCLE.lvlsinworkfolder);
+        }
+    }
+
+    public class SkyboxList : StringConverter
+    {
+        List<string> skyboxes = new() { "<none>", "skybox_cube" };
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) { return true; }
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext? context) { return true; }
+        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
+        {
+            TCLE.ReloadLvlsInProject();
+            return new StandardValuesCollection(skyboxes);
         }
     }
 }

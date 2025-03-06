@@ -812,44 +812,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                     if (_val == null)
                     {
-                        SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new()
-                        {
-                            beat = _cell.ColumnIndex - FrozenColumnOffset,
-                            value = null,
-                            ease = "Ease In Out",
-                            interpolation = "Linear"
-                        };
-                        if (SequencerObjects[_cell.RowIndex].expandlanes == false && SequencerObjects[_cell.RowIndex].friendly_lane == "lane center")
-                        {
-                            SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new()
-                            {
-                                beat = _cell.ColumnIndex - FrozenColumnOffset,
-                                value = null,
-                                ease = "Ease In Out",
-                                interpolation = "Linear"
-                            };
-                            SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new()
-                            {
-                                beat = _cell.ColumnIndex - FrozenColumnOffset,
-                                value = null,
-                                ease = "Ease In Out",
-                                interpolation = "Linear"
-                            };
-                            SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new()
-                            {
-                                beat = _cell.ColumnIndex - FrozenColumnOffset,
-                                value = null,
-                                ease = "Ease In Out",
-                                interpolation = "Linear"
-                            };
-                            SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new()
-                            {
-                                beat = _cell.ColumnIndex - FrozenColumnOffset,
-                                value = null,
-                                ease = "Ease In Out",
-                                interpolation = "Linear"
-                            };
-                        }
+                        CellValueNull(_cell);
                     }
                     else
                         SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _val;
@@ -865,6 +828,59 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             catch { }
             ShowRawTrackData(SequencerObjects[rowindex]);
+        }
+
+        private bool CellValueNull(DataGridViewCell _cell)
+        {
+            bool changes = false;
+            if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
+                SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                    beat = _cell.ColumnIndex - FrozenColumnOffset,
+                    value = null,
+                    ease = "Ease In Out",
+                    interpolation = "Linear"
+                };
+                changes = true;
+            }
+            if (SequencerObjects[_cell.RowIndex].expandlanes == false && SequencerObjects[_cell.RowIndex].friendly_lane == "lane center") {
+                if (SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
+                    SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                        beat = _cell.ColumnIndex - FrozenColumnOffset,
+                        value = null,
+                        ease = "Ease In Out",
+                        interpolation = "Linear"
+                    };
+                    changes = true;
+                }
+                if (SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
+                    SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                        beat = _cell.ColumnIndex - FrozenColumnOffset,
+                        value = null,
+                        ease = "Ease In Out",
+                        interpolation = "Linear"
+                    };
+                    changes = true;
+                }
+                if (SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
+                    SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                        beat = _cell.ColumnIndex - FrozenColumnOffset,
+                        value = null,
+                        ease = "Ease In Out",
+                        interpolation = "Linear"
+                    };
+                    changes = true;
+                }
+                if (SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
+                    SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
+                        beat = _cell.ColumnIndex - FrozenColumnOffset,
+                        value = null,
+                        ease = "Ease In Out",
+                        interpolation = "Linear"
+                    };
+                    changes = true;
+                }
+            }
+            return changes;
         }
 
         private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -980,13 +996,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.Button == MouseButtons.Right)
             {
-                if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null)
-                {
-                    dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
-                    trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
-                    trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
-                    SaveCheckAndWrite(false, "Delete Single Cell Value");
+                if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
+                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) {
+                        LogUndo = false;
+                        //dgv[e.ColumnIndex, e.RowIndex].Value = null;
+                        //SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
+                        trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
+                        trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
+                        LogUndo = true;
+                        SaveCheckAndWrite(false, "Delete Single Cell Value");
+                    }
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected)
                 {
@@ -1010,13 +1029,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (Control.MouseButtons == MouseButtons.Right)
             {
-                if (dgv[e.ColumnIndex, e.RowIndex].Selected == false && dgv[e.ColumnIndex, e.RowIndex].Value != null)
+                if (dgv[e.ColumnIndex, e.RowIndex].Selected == false)
                 {
-                    dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
-                    trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
-                    trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
-                    SaveCheckAndWrite(false, "Delete Single Cell Value");
+                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) {
+                        LogUndo = false;
+                        //dgv[e.ColumnIndex, e.RowIndex].Value = null;
+                        //SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
+                        trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
+                        trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
+                        LogUndo = true;
+                        SaveCheckAndWrite(false, "Delete Single Cell Value");
+                    }
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true)
                 {

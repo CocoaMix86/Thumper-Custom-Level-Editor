@@ -216,23 +216,6 @@ namespace Thumper_Custom_Level_Editor
             return Color.FromArgb(r, g, b);
         }
 
-        /// Used to allow only numbers and a single decimal during input
-        public static void NumericInputSanitize(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-') {
-                e.Handled = true;
-            }
-
-            //only allow `-` at beginning
-            if (e.KeyChar == '-' && (sender as TextBox).SelectionStart != 0)
-                e.Handled = true;
-
-            // only allow one decimal point
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1) {
-                e.Handled = true;
-            }
-        }
-
         public static void Read_Config()
         {
             CommonOpenFileDialog cfd_lvl = new() {
