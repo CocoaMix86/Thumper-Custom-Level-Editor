@@ -231,7 +231,11 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New File;N, Control
+        ///   Looks up a localized string similar to New Leaf;D1, Alt
+        ///New Lvl;D2, Alt
+        ///New Gate;D3, Alt
+        ///New Master;D4, Alt
+        ///New Sample;D5, Alt
         ///Open File;O, Control
         ///Save File;S, Control
         ///Save File As;A, Control
@@ -249,9 +253,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///Quick Value 1;D1, Control
         ///Quick Value 2;D2, Control
         ///Quick Value 3;D3, Control
-        ///Quick Value 4;D4, Control
-        ///Quick Value 5;D5, Control
-        ///Quick Value 6;D6, Con [rest of string was truncated]&quot;;.
+        ///Qui [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DefaultKeybinds {
             get {
@@ -1397,13 +1399,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///   Looks up a localized string similar to {
         ///&apos;obj_type&apos;: &apos;SequinLeaf&apos;,
         ///&apos;obj_name&apos;: &apos;pyramid_outro.leaf&apos;,
-        ///&apos;seq_objs&apos;: [
-        ///    {
-        ///    &apos;obj_name&apos;: &apos;pyramid_outro.leaf&apos;,
-        ///    &apos;param_path&apos;: &apos;pitch&apos;,
-        ///    &apos;trait_type&apos;: &apos;kTraitFloat&apos;,
-        ///    &apos;data_points&apos;: {
-        ///        0: 0.96875, 1: 0.96875, 2: 0.96875, 3: 0.96875, 4: 0.96875, 5: 0.96875, 6: 0.96875, 7: 0.96875, 8: 0.96875, 9: 0.96875, 10: 0.96875, 11: 0.96875, 12: 0.96875, 13: 0.96875, 14: 0.96875, 15: 0.96875, 16: 0.96875, 17: 0.96875, 18: 0.96875, 19: 0.96875, 20: 0.96875, 21: 0.96875, 22: 0.96875, 23: 0 [rest of string was truncated]&quot;;.
+        ///&apos;seq_objs&apos;: [ ],
+        ///&apos;beat_cnt&apos;: 32
+        ///}.
         /// </summary>
         internal static string leaf_pyramid_outro {
             get {
@@ -3251,7 +3249,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;items&apos;: [
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;dissonant-dissonant_additive_pad.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;dissonant-dissonant_additive_pad.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/dissonant/dissonant_additive_pad.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -3262,7 +3260,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;dissonant-dissonant_affecting_preciousness.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;dissonant-dissonant_affecting_preciousness.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/dissonant/dissonant_affecting_preciousness.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -3272,7 +3270,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;channel_group&apos;: &apos;&apos;
         ///},
         ///{
-        ///&apos;o [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string samp_dissonant {
             get {
@@ -3319,7 +3317,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;items&apos;: [
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;drums-level1-basic1.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;drums-level1-basic1.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/drums/level1/basic1.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -3330,7 +3328,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;drums-level1-basic4.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;drums-level1-basic4.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/drums/level1/basic4.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -3341,8 +3339,8 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;drums-level1-basic4_cymbal.wav&apos;,
-        ///&apos;mode&apos;: &apos; [rest of string was truncated]&quot;;.
+        ///&apos;obj_name&apos;: &apos;drums-level1-basic4_cymbal.samp&apos;,
+        ///&apos;mode&apos; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string samp_level1_320bpm {
             get {
@@ -3735,6 +3733,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string spn_default {
             get {
                 return ResourceManager.GetString("spn_default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] thump_birth1 {
+            get {
+                object obj = ResourceManager.GetObject("thump_birth1", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
