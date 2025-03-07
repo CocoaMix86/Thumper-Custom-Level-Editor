@@ -23,12 +23,20 @@ namespace Thumper_Custom_Level_Editor
             { "sentryclose", 0 },
             { "sentrywoomp", 0 }
             };
-        public static int MidiSoundfont;
+        public static int MidiSoundfontHandle;
+        public static BASS_MIDI_FONT[] MidiSoundFonts;
 
         public static void Initialize()
         {
+            //initialize midi stream
             MidiStream = BassMidi.BASS_MIDI_StreamCreate(128, BASSFlag.BASS_SAMPLE_FLOAT, (int)BPM);
-            //MidiSoundfont = BassMidi.
+            //load soundfont
+            if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer.sf2"))
+                File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer.sf2", Properties.Resources.Thumper_Sequencer);
+            MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
+            MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, -1, 0)};
+            //apply soundfont to stream
+            BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 1);
         }
 
         public static void CreatePlayback(List<Sequencer_Object> SeqObjs)
