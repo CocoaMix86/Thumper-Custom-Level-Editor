@@ -23,14 +23,12 @@ namespace Thumper_Custom_Level_Editor
             { "sentryclose", 0 },
             { "sentrywoomp", 0 }
             };
+        public static int MidiSoundfont;
 
         public static void Initialize()
         {
             MidiStream = BassMidi.BASS_MIDI_StreamCreate(128, BASSFlag.BASS_SAMPLE_FLOAT, (int)BPM);
-            // load default samples
-            byte[] _load = (byte[])Properties.Resources.thump_birth1;
-            PlaybackChannels["thump"] = Bass.BASS_SampleLoad(_load, 0, _load.Length, 1, BASSFlag.BASS_SAMPLE_FLOAT);
-            PlaybackChannels["thump"] = Bass.BASS_SampleGetChannel(PlaybackChannels["thump"], 0);
+            MidiSoundfont = BassMidi.
         }
 
         public static void CreatePlayback(List<Sequencer_Object> SeqObjs)
