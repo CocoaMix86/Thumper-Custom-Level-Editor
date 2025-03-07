@@ -53,9 +53,20 @@ namespace Thumper_Custom_Level_Editor
 
             for (byte x = 1; x < 44; x++)
             {
-                events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, x, 0, x * 100, 0));
-                events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord(x, 100), 0, x*100 + 1, 0));
+                if (x % 2 == 0)
+                    continue;
+                events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, 40, 0, x * 10, 0));
+                events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord(40, 100), 0, x*10 + 1, 0));
             }
+            events.Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, 0, 5000, 0));
+            for (byte x = 1; x < 44; x++)
+            {
+                if (x % 2 == 1)
+                    continue;
+                events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, 41, 1, x * 10, 0));
+                events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord(41, 100), 1, x * 10 + 1, 0));
+            }
+            events.Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, 0, 5000, 0));
 
             events.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, 5000, 0));
 
