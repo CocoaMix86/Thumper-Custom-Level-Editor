@@ -13,7 +13,8 @@ namespace Thumper_Custom_Level_Editor
 { 
     public static class Playback
     {
-        public static decimal BPM => TCLE.BPM;
+        public static double BPM => (double)TCLE.BPM;
+        public static double Microseconds => (60 / BPM) * 1_000_000;
         public static int MidiStream = -1;
         public static Dictionary<string, int> PlaybackChannels = new() {
             { "thump", 0 },
@@ -44,11 +45,8 @@ namespace Thumper_Custom_Level_Editor
         public static void CreatePlayback(List<Sequencer_Object> SeqObjs)
         {
             List<BASS_MIDI_EVENT> events = new() {
-                new(BASSMIDIEvent.MIDI_EVENT_TEMPO, 500000, 0, 0, 0), // set the tempo to 0.5 seconds per quarter note
+                new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)Microseconds, 0, 0, 0), // set the tempo to 0.5 seconds per quarter note
                 new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 0, 0, 0, 0), // select the first instrument in soundfont
-                //new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord(1, 100), 0, 0, 0), // press the key
-                //new (BASSMIDIEvent.MIDI_EVENT_NOTE, 1, 0, 400, 0), // release the key after 200 ticks
-                //new (BASSMIDIEvent.MIDI_EVENT_END, 0, 0, 500, 0) // end after 400 ticks
             };
 
             for (byte x = 1; x < 44; x++)
@@ -68,10 +66,27 @@ namespace Thumper_Custom_Level_Editor
             }
             events.Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, 0, 5000, 0));
 
+            int Channel = 0;
+            foreach (Sequencer_Object Seq in SeqObjs)
+            {
+                int Key = 0;
+                switch (Seq.obj_name)
+                {
+                    case "thump.spn":
+                        break;
+                }
+
+                foreach (SeqDataPoint sdp in Seq.data_points)
+                {
+
+                }
+                events.Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, Channel, 5000, 0));
+            }
+
             events.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, 5000, 0));
 
             //play the sequence
-            int stream = BassMidi.BASS_MIDI_StreamCreateEvents(events.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
+            int stream = BassMidi.BASS_MIDI_StreamCreateEvents(events.ToArray(), 1, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             BassMidi.BASS_MIDI_StreamSetFonts(stream, MidiSoundFonts, 1);
             Bass.BASS_ChannelPlay(stream, true);
 
