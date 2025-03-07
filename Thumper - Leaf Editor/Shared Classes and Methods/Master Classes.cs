@@ -1,7 +1,8 @@
-﻿using System.ComponentModel;
-using Thumper_Custom_Level_Editor.Editor_Panels;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Drawing.Design;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -99,16 +100,19 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Play Plus")]
         [Description("When True, the sublevel shows up in Play+. Useful to have a tutorial sublevel in Play and then have it not show up in Play+.")]
+        [Editor(typeof(MyBoolEditor), typeof(UITypeEditor))]
         public bool playplus { get => sublevel.playplus; set => sublevel.playplus = value; }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Checkpoint")]
         [Description("Enables the checkpoint that follows this sublevel.")]
+        [Editor(typeof(MyBoolEditor), typeof(UITypeEditor))]
         public bool checkpoint { get => sublevel.checkpoint; set => sublevel.checkpoint = value; }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Isolate")]
         [Description("If True, only isolated sublevels will play in game. Mainly used for testing your level.")]
+        [Editor(typeof(MyBoolEditor), typeof(UITypeEditor))]
         public bool isolate { get => sublevel.isolate; set => sublevel.isolate = value; }
 
         [CategoryAttribute("Sublevel Options")]
@@ -138,6 +142,19 @@ namespace Thumper_Custom_Level_Editor
         {
             TCLE.ReloadLvlsInProject();
             return new StandardValuesCollection(skyboxes);
+        }
+    }
+    public class MyBoolEditor : UITypeEditor
+    {
+        public override bool GetPaintValueSupported
+            (System.ComponentModel.ITypeDescriptorContext context)
+        { return true; }
+        public override void PaintValue(PaintValueEventArgs e)
+        {
+            var rect = e.Bounds;
+            rect.Inflate(1, 1);
+            ControlPaint.DrawCheckBox(e.Graphics, rect, ButtonState.Flat |
+                (((bool)e.Value) ? ButtonState.Checked : ButtonState.Normal));
         }
     }
 }

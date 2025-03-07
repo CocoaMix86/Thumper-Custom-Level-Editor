@@ -28,11 +28,12 @@ namespace Thumper_Custom_Level_Editor
         public static void Initialize()
         {
             MidiStream = BassMidi.BASS_MIDI_StreamCreate(128, BASSFlag.BASS_SAMPLE_FLOAT, (int)BPM);
-            MidiSoundfont = BassMidi.
+            //MidiSoundfont = BassMidi.
         }
 
         public static void CreatePlayback(List<Sequencer_Object> SeqObjs)
         {
+            /*
             BassMidi.
             int channel = 0;
             List<BASS_MIDI_EVENT> events;
@@ -43,6 +44,7 @@ namespace Thumper_Custom_Level_Editor
                     events.Add(new(,));
                 }
             }
+            */
         }
     }
 }
