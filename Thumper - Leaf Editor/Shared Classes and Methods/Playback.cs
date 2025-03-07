@@ -31,37 +31,37 @@ namespace Thumper_Custom_Level_Editor
             if (MidiStream != -1)
                 return;
             //initialize midi stream
-            MidiStream = BassMidi.BASS_MIDI_StreamCreate(128, BASSFlag.BASS_SAMPLE_FLOAT, 0);
+            //MidiStream = BassMidi.BASS_MIDI_StreamCreate(10, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             //load soundfont
             if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer.sf2"))
                 File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer.sf2", Properties.Resources.Thumper_Sequencer);
             MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, -1, 0)};
             //apply soundfont to stream
-            BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 1);
+            //BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 1);
         }
 
         public static void CreatePlayback(List<Sequencer_Object> SeqObjs)
         {
-            BASS_MIDI_EVENT[] events = new BASS_MIDI_EVENT[] {
+            List<BASS_MIDI_EVENT> events = new() {
                 new(BASSMIDIEvent.MIDI_EVENT_TEMPO, 500000, 0, 0, 0), // set the tempo to 0.5 seconds per quarter note
-                new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 40, 0, 0, 0), // select the violin preset
-                new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord(60, 100), 0, 0, 0), // press the key
-                new (BASSMIDIEvent.MIDI_EVENT_NOTE, 60, 0, 200, 0), // release the key after 200 ticks
-                new (BASSMIDIEvent.MIDI_EVENT_END, 0, 0, 400, 0) // end after 400 ticks
+                new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 0, 0, 0, 0), // select the first instrument in soundfont
+                //new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord(1, 100), 0, 0, 0), // press the key
+                //new (BASSMIDIEvent.MIDI_EVENT_NOTE, 1, 0, 400, 0), // release the key after 200 ticks
+                //new (BASSMIDIEvent.MIDI_EVENT_END, 0, 0, 500, 0) // end after 400 ticks
             };
-            /*
-            List<BASS_MIDI_EVENT> MidiEvents = new();
-            MidiEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)((60/(int)BPM) * 1_000_000), 0, 0, 0));
-            MidiEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 0, 0, 0, 0));
 
-            for (int x = 1; x < 44; x++) {
-                MidiEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, x, MidiStream, x*10, 0));
+            for (byte x = 1; x < 44; x++)
+            {
+                events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, x, 0, x * 100, 0));
+                events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord(x, 100), 0, x*100 + 1, 0));
             }
-            MidiEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, MidiStream, 440, 0));
-            */
+
+            events.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, 5000, 0));
+
             //play the sequence
-            int stream = BassMidi.BASS_MIDI_StreamCreateEvents(events, 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
+            int stream = BassMidi.BASS_MIDI_StreamCreateEvents(events.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
+            BassMidi.BASS_MIDI_StreamSetFonts(stream, MidiSoundFonts, 1);
             Bass.BASS_ChannelPlay(stream, true);
 
 
