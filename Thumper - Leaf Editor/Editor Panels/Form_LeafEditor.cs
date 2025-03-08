@@ -3038,6 +3038,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             Playback.Initialize();
             Playback.CreatePlayback(SequencerObjects.ToList());
+            Playback.Play();
         }
     }
 }

@@ -26,6 +26,8 @@ namespace Thumper_Custom_Level_Editor
             };
         public static int MidiSoundfontHandle = -1;
         public static BASS_MIDI_FONT[] MidiSoundFonts;
+        public static List<BASS_MIDI_EVENT>[] SequencerEvents = new List<BASS_MIDI_EVENT>[20];
+        private static int LastBeat;
 
         public static void Initialize()
         {
@@ -42,8 +44,34 @@ namespace Thumper_Custom_Level_Editor
             //BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 1);
         }
 
+        ///SOUNDFONT DETAILS
+        ///Keys
+        ///1 = bar appear
+        ///2 = millipede appear
+        ///3 = millipede full land
+        ///4 = millipede half land
+        ///5 = millipede quarter land
+        ///6 = mushroom (jump) appear
+        ///7 = ring appear
+        ///8 = thump hit
+        ///9 = turn 360 horn
+        ///10= turn appear left
+        ///11= turn long appear
+        ///12= turn appear right
+        ///13= turn perfect
+        ///14= sentry appear
+        ///15= sentry end
+        ///16= sentry thump
+        ///17= spike (jump) appear
+        ///18= thump appear
+        ///20-31= bar collect (rising semitons)
+        ///32-43= ring collect (rising semitones)
+
         public static void CreatePlayback(List<Sequencer_Object> SeqObjs)
         {
+            SequencerEvents = new List<BASS_MIDI_EVENT>[20];
+            LastBeat = 0;
+            /*
             List<BASS_MIDI_EVENT> events = new() {
                 new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)Microseconds, 0, 0, 0), // set the tempo to 0.5 seconds per quarter note
                 new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 0, 0, 0, 0), // select the first instrument in soundfont
@@ -65,47 +93,58 @@ namespace Thumper_Custom_Level_Editor
                 events.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord(41, 100), 1, x * 10 + 1, 0));
             }
             events.Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, 0, 5000, 0));
+            */
 
-            int Channel = 0;
             foreach (Sequencer_Object Seq in SeqObjs)
             {
                 int Key = 0;
+                int Channel = 0;
                 switch (Seq.obj_name)
                 {
                     case "thump.spn":
+                        Key = 8;
+                        Channel = 8;
                         break;
                 }
 
-                foreach (SeqDataPoint sdp in Seq.data_points)
-                {
-
+                foreach (SeqDataPoint sdp in Seq.data_points) {
+                    if (sdp.beat > LastBeat)
+                        LastBeat = sdp.beat;
+                    AddNoteToChannel(Channel, sdp.beat, Key);
                 }
-                events.Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, Channel, 5000, 0));
             }
+        }
 
-            events.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, 5000, 0));
+        public static void AddNoteToChannel(int channel, int beat, int key)
+        {
+            SequencerEvents[channel].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, 100), channel, beat, 0));
+        }
 
+        public static void ChannelEnd()
+        {
+            //cap off each channel with an END event
+            for (int x = 0; x < SequencerEvents.Length; x++) {
+                if (SequencerEvents[x].Count > 0)
+                    SequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, 5000, 0));
+            }
+        }
+
+        public static void Play()
+        {
+            ChannelEnd();
+            //merge all channels to a single array of events
+            List<BASS_MIDI_EVENT> events = SequencerEvents.SelectMany(x => x).ToList();
+            events.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, LastBeat, 0));
+            //set instrument to use and tempo [These need to be at tick 0]
+            events.Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 0, 0, 0, 0));
+            events.Insert(0, new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)Microseconds, 0, 0, 0));
             //play the sequence
             int stream = BassMidi.BASS_MIDI_StreamCreateEvents(events.ToArray(), 1, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             BassMidi.BASS_MIDI_StreamSetFonts(stream, MidiSoundFonts, 1);
             Bass.BASS_ChannelPlay(stream, true);
-
-
-            /*
-            BassMidi.
-            int channel = 0;
-            List<BASS_MIDI_EVENT> events;
-            foreach (Sequencer_Object Seq in SeqObjs) {
-                foreach (SeqDataPoint DataPoint in Seq.data_points) {
-                    if (DataPoint.value == null)
-                        continue;
-                    events.Add(new(,));
-                }
-            }
-            */
         }
 
-        public static uint MakeWord(byte low, byte high)
+        private static uint MakeWord(byte low, byte high)
         {
             return ((uint)high << 8) | low;
         }
