@@ -3036,9 +3036,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnTrackPlayback_Click(object sender, EventArgs e)
         {
-            Playback.Initialize();
-            Playback.CreatePlayback(SequencerObjects.ToList());
-            Playback.Play();
+            if (Playback.IsPlaying) {
+                Bass.BASS_ChannelFree(Playback.MidiStream);
+                TCLE.alzheimer();
+                btnTrackPlayback.Image = Properties.Resources.icon_play2;
+                Playback.IsPlaying = false;
+            }
+            else {
+                Playback.Initialize();
+                Playback.CreatePlaybackFromLeaf(LeafProperties);
+                Playback.Play();
+                if (Playback.IsPlaying)
+                    btnTrackPlayback.Image = Properties.Resources.icon_stop;
+                else {
+                    Bass.BASS_ChannelFree(Playback.MidiStream);
+                    TCLE.alzheimer();
+                    btnTrackPlayback.Image = Properties.Resources.icon_play2;
+                }
+            }
         }
     }
 }
