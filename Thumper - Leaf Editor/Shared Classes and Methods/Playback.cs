@@ -121,6 +121,30 @@ namespace Thumper_Custom_Level_Editor
                             Call = 0;
                             CallKey = 0;
                             break;
+                        case "millipede_quarter.spn":
+                            Key = 4;
+                            Call = 8;
+                            CallKey = 2;
+                            break;
+                        case "millipede_half.spn":
+                        case "millipede_half_decorative.spn":
+                        case "millipede_half_decorative_b.spn":
+                            Key = 5;
+                            Call = 8;
+                            CallKey = 2;
+                            break;
+                        case "jump.spn":
+                            Key = 0;
+                            Call = 8;
+                            CallKey = 6;
+                            break;
+                        case "jump_high.spn":
+                        case "jump_high_big_trees_set.spn":
+                        case "jump_high_spikes.spn":
+                            Key = 0;
+                            Call = 8;
+                            CallKey = 17;
+                            break;
                     }
 
                 if (Key == 0)
@@ -150,10 +174,12 @@ namespace Thumper_Custom_Level_Editor
                 SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, 50), callkey, beat - call, 0));
             }
 
-            SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, 100), key, beat, 0));
-            //bar collect also plays ring collect noise
-            if (key == 19)
-                SequencerEvents[20].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, 100), 20, beat, 0));
+            if (key > 0) {
+                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, 100), key, beat, 0));
+                //bar collect also plays ring collect noise
+                if (key == 19)
+                    SequencerEvents[20].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, 100), 20, beat, 0));
+            }
         }
 
         public static void PitchShiftingBarsRings(LeafProperties Leaf)
@@ -307,7 +333,8 @@ namespace Thumper_Custom_Level_Editor
             string path = $@"{TCLE.AppLocation}\temp\";
             string _out = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
             foreach (string sample in SamplesToPlay) {
-                _out += $"<region> sample={sample}.wav key={SamplesToPlay.IndexOf(sample) + 1}\r\n";
+                string FileName = TCLE.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == sample));
+                _out += $"<region> sample={Path.GetFileName(FileName)} key={SamplesToPlay.IndexOf(sample) + 1}\r\n";
             }
             _out += "\r\n\r\n";
             File.WriteAllText($@"{TCLE.AppLocation}\temp\SamplesSoundfont.sfz", _out);
