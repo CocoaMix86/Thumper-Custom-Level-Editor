@@ -144,6 +144,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool IsInterpolating;
         private bool ZoomHasChanged;
         private bool ResetRowAfterEdit;
+        private bool RightclickDown;
+        private bool RightclickChanges;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         public List<SaveState> UndoList = new();
@@ -743,49 +745,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             bool changes = false;
             if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
-                    beat = _cell.ColumnIndex - FrozenColumnOffset,
-                    value = null,
-                    ease = "Ease In Out",
-                    interpolation = "Linear"
-                };
+                SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
                 changes = true;
             }
             if (SequencerObjects[_cell.RowIndex].expandlanes == false && SequencerObjects[_cell.RowIndex].friendly_lane == "lane center") {
                 if (SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                    SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
-                        beat = _cell.ColumnIndex - FrozenColumnOffset,
-                        value = null,
-                        ease = "Ease In Out",
-                        interpolation = "Linear"
-                    };
+                    SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
                     changes = true;
                 }
                 if (SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                    SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
-                        beat = _cell.ColumnIndex - FrozenColumnOffset,
-                        value = null,
-                        ease = "Ease In Out",
-                        interpolation = "Linear"
-                    };
+                    SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
                     changes = true;
                 }
                 if (SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                    SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
-                        beat = _cell.ColumnIndex - FrozenColumnOffset,
-                        value = null,
-                        ease = "Ease In Out",
-                        interpolation = "Linear"
-                    };
+                    SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
                     changes = true;
                 }
                 if (SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                    SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset] = new() {
-                        beat = _cell.ColumnIndex - FrozenColumnOffset,
-                        value = null,
-                        ease = "Ease In Out",
-                        interpolation = "Linear"
-                    };
+                    SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
                     changes = true;
                 }
             }
@@ -890,15 +867,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //do nothing
             }
             else if (e.Button == MouseButtons.Right) {
+                RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
-                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) {
+                    if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                         LogUndo = false;
-                        //dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                        //SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
-                        trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
-                        trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
+                        RightclickChanges = CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);
                         LogUndo = true;
-                        SaveCheckAndWrite(false, "Delete Single Cell Value");
                     }
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
@@ -909,6 +883,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
             }
         }
+
+        private void trackEditor_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) {
+                RightclickDown = false;
+                if (RightclickChanges) {
+                    SaveCheckAndWrite(false, "Delete Cell Values via right-click");
+                }
+                RightclickChanges = false;
+            }
+        }
+
         private void trackEditor_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             MouseCurrentColumn = e.ColumnIndex;
@@ -920,22 +906,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(174, 161, 255);
             }
             else if (Control.MouseButtons == MouseButtons.Right) {
+                RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
-                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) {
+                    if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                         LogUndo = false;
-                        //dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                        //SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value = null;
-                        trackEditor.InvalidateCell(trackEditor[Math.Min(e.ColumnIndex + 1, trackEditor.ColumnCount - 1), e.RowIndex]);
-                        trackEditor.InvalidateCell(trackEditor[Math.Max(e.ColumnIndex - 1, 0), e.RowIndex]);
+                        RightclickChanges = CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);
                         LogUndo = true;
-                        SaveCheckAndWrite(false, "Delete Single Cell Value");
                     }
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     CellValueChanged(e.RowIndex, e.ColumnIndex, true);
                 }
-                ShowRawTrackData(SequencerObjects[CurrentRow]);
+                //ShowRawTrackData(SequencerObjects[CurrentRow]);
             }
         }
 

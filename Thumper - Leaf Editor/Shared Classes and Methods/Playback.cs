@@ -134,14 +134,14 @@ namespace Thumper_Custom_Level_Editor
                             CallKey = 2;
                             break;
                         case "jump.spn":
-                            Key = 0;
+                            Key = -1;
                             Call = 8;
                             CallKey = 6;
                             break;
                         case "jump_high.spn":
                         case "jump_high_big_trees_set.spn":
                         case "jump_high_spikes.spn":
-                            Key = 0;
+                            Key = -1;
                             Call = 8;
                             CallKey = 17;
                             break;
@@ -171,10 +171,10 @@ namespace Thumper_Custom_Level_Editor
             beat = (beat + CallOffset) * 100;
             call *= 100;
             if (call > 0) {
-                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, 50), callkey, beat - call, 0));
+                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(key == -1 ? 100 : 50)), callkey, beat - call, 0));
             }
 
-            if (key > 0) {
+            if (key != -1) {
                 SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, 100), key, beat, 0));
                 //bar collect also plays ring collect noise
                 if (key == 19)
