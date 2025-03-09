@@ -80,7 +80,7 @@ namespace Thumper_Custom_Level_Editor
             foreach (Sequencer_Object Seq in Leaf.seq_objs)
             {
                 //don't playback disabled items
-                if (Seq.enabled == false)
+                if (Seq.enabled == false || Seq.mute)
                     continue;
 
                 int Key = 0;

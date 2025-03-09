@@ -35,7 +35,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     EditorIsLoading = false;
                 }
             }
-            trackEditor.Invalidate();
         }
         ///Load LVL Sequencer
         public Form_LeafEditor(LvlProperties toload)
@@ -52,7 +51,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadTracksFromSequencer(LeafProperties.seq_objs);
                 LoadEnd();
             }
-            trackEditor.Invalidate();
         }
         private void RenderForm()
         {
@@ -2243,6 +2241,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (Sequencer_Object seq in Seq_Objs) {
                 trackEditor.Rows.Add(seq.editor_row);
                 TrackRawImport(seq, seq.data_points);
+                RowReadOnly(!seq.enabled, seq);
             }
             ResizeHeaders();
         }
