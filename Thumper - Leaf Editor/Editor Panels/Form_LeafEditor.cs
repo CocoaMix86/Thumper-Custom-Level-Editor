@@ -35,6 +35,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     EditorIsLoading = false;
                 }
             }
+            trackEditor.Invalidate();
         }
         ///Load LVL Sequencer
         public Form_LeafEditor(LvlProperties toload)
@@ -51,6 +52,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadTracksFromSequencer(LeafProperties.seq_objs);
                 LoadEnd();
             }
+            trackEditor.Invalidate();
         }
         private void RenderForm()
         {
