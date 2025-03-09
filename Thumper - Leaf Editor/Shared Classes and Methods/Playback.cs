@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave.SampleProviders;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<BASS_MIDI_EVENT>[] SequencerEvents = new List<BASS_MIDI_EVENT>[20];
         private static int LastBeat;
         private static BASSError Error;
+        public static System.Threading.Timer SyncTimer;
 
         public static void Initialize()
         {
@@ -387,13 +389,17 @@ namespace Thumper_Custom_Level_Editor
             List<BASS_MIDI_EVENT> _SampleEvents = Playback.SampleEvents.SelectMany(x => x).ToList();
             var AllEvents = _SequencerEvents.Concat(_SampleEvents).ToList();
             //the very last midi event needs to be EVENT_END
-            AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (LastBeat * 100) + 100, 0));
+            AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (LastBeat * 100) + 50, 0));
             //play the sequence
             MidiStream = BassMidi.BASS_MIDI_StreamCreateEvents(AllEvents.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             Error = Bass.BASS_ErrorGetCode();
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 2);
-            if (Bass.BASS_ChannelPlay(MidiStream, true))
+            _ = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
+            ColumnPlaybackHead = -9;
+            if (Bass.BASS_ChannelPlay(MidiStream, true)) {
+                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * 1000));
                 IsPlaying = true;
+            }
             else
                 Error = Bass.BASS_ErrorGetCode();
         }
@@ -401,6 +407,22 @@ namespace Thumper_Custom_Level_Editor
         private static uint MakeWord(byte low, byte high)
         {
             return ((uint)high << 8) | low;
+        }
+
+        public static SYNCPROC EndingProc = new(OnEnding);
+        private static void OnEnding(int handle, int channel, int data, IntPtr user)
+        {
+            IsPlaying = false;
+            SyncTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            bool free1 = Bass.BASS_ChannelStop(channel);
+            bool free2 = Bass.BASS_ChannelFree(channel);
+            TCLE.alzheimer();
+        }
+
+        public static int ColumnPlaybackHead;
+        private static void SyncTimer_Tick(object sender)
+        {
+            ColumnPlaybackHead++;
         }
     }
 }

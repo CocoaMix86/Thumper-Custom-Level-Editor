@@ -50,7 +50,7 @@ namespace Thumper_Custom_Level_Editor
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new Size(506, 20);
             this.lblVersion.TabIndex = 22;
-            this.lblVersion.Text = "Thumper Custom Level Editor -- v3.0.0";
+            this.lblVersion.Text = "Thumper Custom Level Editor -- v3.0.0alpha7\r\n";
             this.lblVersion.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ImageMessageBox

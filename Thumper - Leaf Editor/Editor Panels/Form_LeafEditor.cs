@@ -3016,13 +3016,35 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Playback.Initialize();
                 Playback.CreatePlaybackFromLeaf(LeafProperties);
                 Playback.Play();
-                if (Playback.IsPlaying)
+                if (Playback.IsPlaying) {
+                    timer1.Interval = (int)((60 / TCLE.BPM) * 1000);
+                    timer1.Enabled = true;
                     btnTrackPlayback.Image = Properties.Resources.icon_stop;
+                }
                 else {
                     Bass.BASS_ChannelFree(Playback.MidiStream);
                     TCLE.alzheimer();
                     btnTrackPlayback.Image = Properties.Resources.icon_play2;
                 }
+            }
+        }
+
+        private int PreviousSetColumn = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Playback.ColumnPlaybackHead < 0)
+                return;
+            if (Playback.IsPlaying && Playback.ColumnPlaybackHead + FrozenColumnOffset < trackEditor.ColumnCount) {
+                trackEditor.Columns[PreviousSetColumn].HeaderCell.Style = null;
+                trackEditor.Columns[PreviousSetColumn].DefaultCellStyle = null;
+                trackEditor.Columns[Playback.ColumnPlaybackHead + FrozenColumnOffset].HeaderCell.Style.BackColor = Color.CornflowerBlue;
+                trackEditor.Columns[Playback.ColumnPlaybackHead + FrozenColumnOffset].DefaultCellStyle.BackColor = Color.CornflowerBlue;
+                PreviousSetColumn = Playback.ColumnPlaybackHead + FrozenColumnOffset;
+            }
+            else {
+                timer1.Enabled = false;
+                btnTrackPlayback.Image = Properties.Resources.icon_play2;
+                PreviousSetColumn = 0;
             }
         }
     }

@@ -138,7 +138,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAEZTeXN0ZW0uV2luZG93cy5Gb3JtcywgQ3VsdHVyZT1uZXV0cmFs
         LCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BQEAAAAmU3lzdGVtLldpbmRvd3MuRm9ybXMu
         SW1hZ2VMaXN0U3RyZWFtZXIBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAEBEAAAJNU0Z0AUkBTAIBAQUB
-        AAFYARkBWAEZARABAAEQAQAE/wEhAQAI/wFCAU0BNgcAATYDAAEoAwABQAMAASADAAEBAQABIAYAASD/
+        AAHQARkB0AEZARABAAEQAQAE/wEhAQAI/wFCAU0BNgcAATYDAAEoAwABQAMAASADAAEBAQABIAYAASD/
         ABsAAw4BEgNeAdIDYgHhAzMBUPAAAzMBUAGiAeMBawH/AaAB3gFqAf8CawFaAfIBXwJcAcgDFgEd6AAD
         NQFVAaIB4wFrAf8BogHjAWsB/wGiAeMBawH/AZkBzQFjAf8CbAFhAesDTAGOAwIBA+AAAzUBVQGiAeMB
         awH/AaIB4wFrAf8BogHjAWsB/wGiAeMBawH/AaIB4wFrAf8CfgFZAfwCYQFbAd4DLAFD3AADNQFVAaIB
@@ -405,8 +405,11 @@
   <metadata name="contextMenuFavClear.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>648, 10</value>
   </metadata>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1139, 15</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>43</value>
+    <value>44</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
