@@ -269,7 +269,8 @@ namespace Thumper_Custom_Level_Editor
 
         public static void MidiEventsForSentry(LeafProperties Leaf)
         {
-            List<BASS_MIDI_EVENT> EventsToAdd = new();
+            List<BASS_MIDI_EVENT> EventsToAdd15 = new();
+            List<BASS_MIDI_EVENT> EventsToAdd16 = new();
             foreach (Sequencer_Object Seq in Leaf.seq_objs.Where(x => x.obj_name == "sentry.spn"))
             {
                 int length = 0;
@@ -299,14 +300,20 @@ namespace Thumper_Custom_Level_Editor
                     //find events that fall inside the sentry activation time
                     foreach (BASS_MIDI_EVENT _event in SequencerEvents[8].Where(x => x.tick > (sdp.beat*100)+400 && x.tick <= (sdp.beat + length)*100)) {
                         //if the sentry call event doesn't exist yet, add it (so we don't duplicate on sounds)
-                        if (!EventsToAdd.Any(x => x.tick == _event.tick - 400))
+                        if (!EventsToAdd15.Any(x => x.tick == _event.tick - 400)) {
                             //Sentry call happens 4 beats ahead (400 ticks)
-                            EventsToAdd.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, 100), 16, _event.tick - 400, 0));
+                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, 100), 16, _event.tick - 400, 0));
+                        }
+                    }
+                    if (sdp.beat + length < LastBeat) {
+                        EventsToAdd16.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)15, 100), 15, (sdp.beat + length + CallOffset) * 100, 0));
                     }
                 }
             }
 
-            SequencerEvents[16] = EventsToAdd;
+            SequencerEvents[15] = EventsToAdd15;
+            SequencerEvents[15].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
+            SequencerEvents[16] = EventsToAdd16;
             SequencerEvents[16].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
         }
 
