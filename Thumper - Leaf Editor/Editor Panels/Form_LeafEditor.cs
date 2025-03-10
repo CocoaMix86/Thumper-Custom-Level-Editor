@@ -908,13 +908,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        private int LastRow;
         private void trackEditor_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.RowIndex == LastRow)
+                return;
             if (e.ColumnIndex < 3 || e.RowIndex == -1)
                 return;
-            //Color color = trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor;
-            //trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(174, 161, 255);
-            //trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor = color;
+            Color color = trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor;
+            trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(174, 161, 255);
+            trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor = color;
+            LastRow = e.RowIndex;
         }
 
         private void trackEditor_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
