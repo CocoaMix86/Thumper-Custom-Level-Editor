@@ -460,6 +460,8 @@ namespace Thumper_Custom_Level_Editor
 
         public static void UpdateProjectSamplesFromFile(FileInfo SampFile, bool preserveSamples, out string warning)
         {
+            //remove samples that match the incoming sample file, so that they're rewritten
+            ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
             //parse file to JSON
             dynamic _in = TCLE.LoadFileLock(SampFile.FullName);
             warning = "";

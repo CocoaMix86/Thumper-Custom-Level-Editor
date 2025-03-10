@@ -332,8 +332,12 @@ namespace Thumper_Custom_Level_Editor
         {
             SamplesToPlay.Add(Seq.obj_name);
             SampleEvents.Add(new());
+            SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == Seq.obj_name);
+            int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
+            if (velocity > 127)
+                velocity = 127;
             foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.value != null)) {
-                SampleEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)SamplesToPlay.Count, 100), SequencerEvents.Length + SamplesToPlay.Count - 1, (sdp.beat + CallOffset) * 100, 0));
+                SampleEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)SamplesToPlay.Count, (byte)velocity), SequencerEvents.Length + SamplesToPlay.Count - 1, (sdp.beat + CallOffset) * 100, 0));
             }
         }
 
