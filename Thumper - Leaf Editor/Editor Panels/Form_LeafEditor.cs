@@ -3046,7 +3046,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
-                timer1.Interval = (int)((60 / TCLE.BPM) * 250);
+                timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize();
                 Playback.CreatePlaybackFromLeaf(LeafProperties);

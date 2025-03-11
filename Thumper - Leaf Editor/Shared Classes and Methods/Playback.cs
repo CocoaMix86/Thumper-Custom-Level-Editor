@@ -406,7 +406,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //play the sequence
             if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat > 0 ? false : true)) {
-                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * 250));
+                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
                 IsPlaying = true;
             }
             else
@@ -429,6 +429,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.alzheimer();
         }
 
+        public static int BeatSubdivisions = 4;
         public static int PlaybackBeat;
         public static double PlaybackTick;
         public static double PlaybackSubBeat;
