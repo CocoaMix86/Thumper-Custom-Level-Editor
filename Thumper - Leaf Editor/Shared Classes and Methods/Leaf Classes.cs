@@ -35,7 +35,16 @@ namespace Thumper_Custom_Level_Editor
 
         public string category { get; set; }
         public string friendly_param { get; set; }
-        public Color highlight_color { get; set; }
+        public Color highlight_color
+        {
+            get => HighCol;
+            set {
+                HighCol = value;
+                HighlightBrush = new(value);
+            }
+        }
+        private Color HighCol;
+        public SolidBrush HighlightBrush;
         public float highlight_value { get; set; }
         public bool enabled
         {

@@ -385,7 +385,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static void Play()
+        public static void Play(double StartTime)
         {
             ChannelEnd();
             //merge all channels to a single array of events
@@ -394,12 +394,19 @@ namespace Thumper_Custom_Level_Editor
             var AllEvents = _SequencerEvents.Concat(_SampleEvents).ToList();
             //the very last midi event needs to be EVENT_END
             AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (LastBeat * 100) + 50, 0));
-            //play the sequence
+            //create the stream
             MidiStream = BassMidi.BASS_MIDI_StreamCreateEvents(AllEvents.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             Error = Bass.BASS_ErrorGetCode();
+            //apply soundfonts
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 2);
+            //set ending sync to some events
             _ = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
             ColumnPlaybackHead = -9;
+            if (StartTime != -1) {
+                ColumnPlaybackHead = (int)StartTime;
+                Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * StartTime);
+            }
+            //play the sequence
             if (Bass.BASS_ChannelPlay(MidiStream, true)) {
                 SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * 1000));
                 IsPlaying = true;
