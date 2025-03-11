@@ -422,7 +422,7 @@ namespace Thumper_Custom_Level_Editor
         public static void OnEnding(int handle, int channel, int data, IntPtr user)
         {
             IsPlaying = false;
-            SyncTimer = null;
+            SyncTimer.Dispose();
             //SyncTimer.Change(Timeout.Infinite, Timeout.Infinite);
             bool free1 = Bass.BASS_ChannelStop(channel);
             bool free2 = Bass.BASS_ChannelFree(channel);
@@ -432,7 +432,8 @@ namespace Thumper_Custom_Level_Editor
         public static int ColumnPlaybackHead;
         private static void SyncTimer_Tick(object sender)
         {
-            ColumnPlaybackHead++;
+            ColumnPlaybackHead = (int)Math.Floor(Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK) / 100d) - 8;
+            //ColumnPlaybackHead++;
         }
     }
 }

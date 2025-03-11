@@ -3074,7 +3074,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Playback.IsPlaying = false;
                 Bass.BASS_ChannelStop(Playback.MidiStream);
                 var Error = Bass.BASS_ErrorGetCode();
-                Playback.SyncTimer = null;
+                Playback.SyncTimer.Dispose();
                 btnTrackPlayback.Image = Properties.Resources.icon_play2;
                 PreviousSetColumn = 0;
                 trackEditor.Invalidate();
