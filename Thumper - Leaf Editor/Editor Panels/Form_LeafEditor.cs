@@ -293,6 +293,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private SolidBrush BrushBlue = new(Color.Blue);
         private SolidBrush BrushBlack = new(Color.Black);
         private SolidBrush BrushCorn = new(Color.CornflowerBlue);
+        private Pen PenCorn = new(new SolidBrush(Color.CornflowerBlue), 3);
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -357,13 +358,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 if (e.RowIndex == -1) {
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                     if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset) {
-                        Point p1 = new Point((e.CellBounds.Width / 2) - 3, e.CellBounds.Top - 1);
-                        Point p2 = new Point((e.CellBounds.Width / 2) + 3, e.CellBounds.Top - 1);
-                        Point p3 = new Point(e.CellBounds.Width / 2, e.CellBounds.Top + 5);
+                        Point p1 = new Point((e.CellBounds.Left + (e.CellBounds.Width / 2)) - 6, e.CellBounds.Top);
+                        Point p2 = new Point((e.CellBounds.Left + (e.CellBounds.Width / 2)) + 6, e.CellBounds.Top);
+                        Point p3 = new Point(e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + 10);
                         e.Graphics.FillPolygon(BrushCorn, new[] { p1, p2, p3 });
+                        //e.Graphics.FillRectangle(BrushCorn, e.CellBounds);
                     }
-                    //e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                     return;
                 }
             }
@@ -409,6 +411,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
             e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
 
+            if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset) {
+                e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left + e.CellBounds.Width/2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
+            }
+
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null/* && e.ColumnIndex != -1 && e.RowIndex != -1*/) {
                 //
@@ -437,8 +443,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            if (e.ColumnIndex is 0 or 1 or 2)
-                CellPaintIcons(e);
+            //if (e.ColumnIndex is 0 or 1 or 2)
+                //CellPaintIcons(e);
         }
 
         int w = 16;
@@ -816,7 +822,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     PlaybackStart = -1;
                 else {
                     PlaybackStart = e.ColumnIndex - FrozenColumnOffset;
-                    trackEditor.InvalidateCell(PlaybackStart + FrozenColumnOffset, -1);
+                    trackEditor.Invalidate();
                 }
                 return;
             }
