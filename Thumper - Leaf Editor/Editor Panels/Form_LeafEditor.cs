@@ -413,8 +413,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset) {
                 e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left + e.CellBounds.Width/2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }
-            if (Playback.IsPlaying && e.ColumnIndex == Playback.ColumnPlaybackHead + FrozenColumnOffset) {
-                e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
+            if (Playback.IsPlaying && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset)
+            {
+                e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
+                //e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }
 
             //check if previous cell is the same value. If so, hide it
@@ -3044,7 +3046,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
-                timer1.Interval = (int)((60 / TCLE.BPM) * 500);
+                timer1.Interval = (int)((60 / TCLE.BPM) * 250);
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize();
                 Playback.CreatePlaybackFromLeaf(LeafProperties);
@@ -3063,12 +3065,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int PreviousSetColumn = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Playback.ColumnPlaybackHead < 0)
+            if (Playback.PlaybackBeat < 0)
                 return;
-            if (Playback.IsPlaying && Playback.ColumnPlaybackHead + FrozenColumnOffset < trackEditor.ColumnCount) {
+            if (Playback.IsPlaying && Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount) {
                 trackEditor.InvalidateColumn(PreviousSetColumn);
-                trackEditor.InvalidateColumn(Playback.ColumnPlaybackHead + FrozenColumnOffset);
-                PreviousSetColumn = Playback.ColumnPlaybackHead + FrozenColumnOffset;
+                trackEditor.InvalidateColumn(Playback.PlaybackBeat + FrozenColumnOffset);
+                PreviousSetColumn = Playback.PlaybackBeat + FrozenColumnOffset;
             }
             else {
                 timer1.Enabled = false;

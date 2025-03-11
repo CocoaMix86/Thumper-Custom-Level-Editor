@@ -398,15 +398,15 @@ namespace Thumper_Custom_Level_Editor
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 2);
             //set ending sync
             int ee = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
-            ColumnPlaybackHead = -9;
+            PlaybackBeat = -9;
             if (StartTime != 0) {
-                ColumnPlaybackHead = (int)StartTime;
+                PlaybackBeat = (int)StartTime;
                 Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (StartTime + 9));
                 Error = Bass.BASS_ErrorGetCode();
             }
             //play the sequence
-            if (Bass.BASS_ChannelPlay(MidiStream, ColumnPlaybackHead > 0 ? false : true)) {
-                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * 1000));
+            if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat > 0 ? false : true)) {
+                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * 250));
                 IsPlaying = true;
             }
             else
@@ -429,10 +429,14 @@ namespace Thumper_Custom_Level_Editor
             TCLE.alzheimer();
         }
 
-        public static int ColumnPlaybackHead;
+        public static int PlaybackBeat;
+        public static double PlaybackTick;
+        public static double PlaybackSubBeat;
         private static void SyncTimer_Tick(object sender)
         {
-            ColumnPlaybackHead = (int)Math.Floor(Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK) / 100d) - 8;
+            PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
+            PlaybackBeat = (int)(PlaybackTick / 100d) - 8;
+            PlaybackSubBeat = (PlaybackTick % 100) / 100;
             //ColumnPlaybackHead++;
         }
     }
