@@ -29,22 +29,19 @@ namespace Thumper_Custom_Level_Editor
 
         public static void Initialize()
         {
-            if (MidiStream != -1)
+            if (MidiSoundfontHandle != -1)
                 return;
-            //initialize midi stream
-            //MidiStream = BassMidi.BASS_MIDI_StreamCreate(10, BASSFlag.BASS_SAMPLE_FLOAT, 0);
-            //load soundfont
+            //write soundfont to file if it doesn't exist
             if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer.sf2"))
                 File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer.sf2", Properties.Resources.Thumper_Sequencer);
+            //load soundfont
             MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, -1, 0)};
-            //apply soundfont to stream
-            //BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 1);
         }
 
         ///SOUNDFONT DETAILS
         ///Keys
-        ///0 = 
+        ///0 = control stuff (non-instrument)
         ///1 = bar appear
         ///2 = millipede appear
         ///3 = millipede full land
@@ -399,16 +396,16 @@ namespace Thumper_Custom_Level_Editor
             Error = Bass.BASS_ErrorGetCode();
             //apply soundfonts
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 2);
-            //set ending sync to some events
-            _ = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
+            //set ending sync
+            int ee = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
             ColumnPlaybackHead = -9;
-            if (StartTime != -1) {
+            if (StartTime != 0) {
                 ColumnPlaybackHead = (int)StartTime;
                 Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (StartTime + 9));
                 Error = Bass.BASS_ErrorGetCode();
             }
             //play the sequence
-            if (Bass.BASS_ChannelPlay(MidiStream, false)) {
+            if (Bass.BASS_ChannelPlay(MidiStream, ColumnPlaybackHead > 0 ? false : true)) {
                 SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * 1000));
                 IsPlaying = true;
             }
@@ -422,7 +419,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static SYNCPROC EndingProc = new(OnEnding);
-        private static void OnEnding(int handle, int channel, int data, IntPtr user)
+        public static void OnEnding(int handle, int channel, int data, IntPtr user)
         {
             IsPlaying = false;
             SyncTimer = null;

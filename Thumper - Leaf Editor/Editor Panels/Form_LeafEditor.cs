@@ -3,8 +3,6 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Un4seen.Bass;
-using Un4seen.Bass.Misc;
-using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -3042,17 +3040,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (Playback.IsPlaying) {
                 Playback.IsPlaying = false;
-                Bass.BASS_ChannelStop(Playback.MidiStream);
-                Playback.SyncTimer = null;
             }
             else {
+                //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
+                timer1.Interval = (int)((60 / TCLE.BPM) * 500);
+                btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize();
                 Playback.CreatePlaybackFromLeaf(LeafProperties);
                 Playback.Play(PlaybackStart);
                 if (Playback.IsPlaying) {
-                    timer1.Interval = (int)((60 / TCLE.BPM) * 500);
                     timer1.Enabled = true;
-                    btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 }
                 else {
                     Bass.BASS_ChannelFree(Playback.MidiStream);
@@ -3074,6 +3071,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 timer1.Enabled = false;
+                Playback.IsPlaying = false;
+                Bass.BASS_ChannelStop(Playback.MidiStream);
+                var Error = Bass.BASS_ErrorGetCode();
+                Playback.SyncTimer = null;
                 btnTrackPlayback.Image = Properties.Resources.icon_play2;
                 PreviousSetColumn = 0;
                 trackEditor.Invalidate();
