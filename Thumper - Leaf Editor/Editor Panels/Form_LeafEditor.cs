@@ -292,6 +292,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private SolidBrush BrushBlack = new(Color.Black);
         private SolidBrush BrushCorn = new(Color.CornflowerBlue);
         private Pen PenCorn = new(new SolidBrush(Color.CornflowerBlue), 3);
+        private Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -413,7 +414,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left + e.CellBounds.Width/2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }
             if (Playback.IsPlaying && e.ColumnIndex == Playback.ColumnPlaybackHead + FrozenColumnOffset) {
-                e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
+                e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }
 
             //check if previous cell is the same value. If so, hide it
