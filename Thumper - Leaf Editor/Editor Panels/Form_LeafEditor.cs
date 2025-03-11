@@ -414,6 +414,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset) {
                 e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left + e.CellBounds.Width/2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }
+            if (Playback.IsPlaying && e.ColumnIndex == Playback.ColumnPlaybackHead + FrozenColumnOffset) {
+                e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
+            }
 
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null/* && e.ColumnIndex != -1 && e.RowIndex != -1*/) {
@@ -935,6 +938,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int LastCol;
         private void trackEditor_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (Playback.IsPlaying)
+                return;
             if (e.ColumnIndex < 3 || e.RowIndex == -1)
                 return;
             if (SequencerObjects[e.RowIndex].category != "PLAY SAMPLE")
@@ -3036,17 +3041,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnTrackPlayback_Click(object sender, EventArgs e)
         {
             if (Playback.IsPlaying) {
-                Bass.BASS_ChannelFree(Playback.MidiStream);
-                TCLE.alzheimer();
-                btnTrackPlayback.Image = Properties.Resources.icon_play2;
                 Playback.IsPlaying = false;
+                Bass.BASS_ChannelStop(Playback.MidiStream);
+                Playback.SyncTimer = null;
             }
             else {
                 Playback.Initialize();
                 Playback.CreatePlaybackFromLeaf(LeafProperties);
                 Playback.Play(PlaybackStart);
                 if (Playback.IsPlaying) {
-                    timer1.Interval = (int)((60 / TCLE.BPM) * 1000);
+                    timer1.Interval = (int)((60 / TCLE.BPM) * 500);
                     timer1.Enabled = true;
                     btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 }
@@ -3064,16 +3068,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Playback.ColumnPlaybackHead < 0)
                 return;
             if (Playback.IsPlaying && Playback.ColumnPlaybackHead + FrozenColumnOffset < trackEditor.ColumnCount) {
-                trackEditor.Columns[PreviousSetColumn].HeaderCell.Style = null;
-                trackEditor.Columns[PreviousSetColumn].DefaultCellStyle = null;
-                trackEditor.Columns[Playback.ColumnPlaybackHead + FrozenColumnOffset].HeaderCell.Style.BackColor = Color.CornflowerBlue;
-                trackEditor.Columns[Playback.ColumnPlaybackHead + FrozenColumnOffset].DefaultCellStyle.BackColor = Color.CornflowerBlue;
+                trackEditor.InvalidateColumn(PreviousSetColumn);
+                trackEditor.InvalidateColumn(Playback.ColumnPlaybackHead + FrozenColumnOffset);
                 PreviousSetColumn = Playback.ColumnPlaybackHead + FrozenColumnOffset;
             }
             else {
                 timer1.Enabled = false;
                 btnTrackPlayback.Image = Properties.Resources.icon_play2;
                 PreviousSetColumn = 0;
+                trackEditor.Invalidate();
             }
         }
     }

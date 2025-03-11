@@ -425,7 +425,8 @@ namespace Thumper_Custom_Level_Editor
         private static void OnEnding(int handle, int channel, int data, IntPtr user)
         {
             IsPlaying = false;
-            SyncTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            SyncTimer = null;
+            //SyncTimer.Change(Timeout.Infinite, Timeout.Infinite);
             bool free1 = Bass.BASS_ChannelStop(channel);
             bool free2 = Bass.BASS_ChannelFree(channel);
             TCLE.alzheimer();
