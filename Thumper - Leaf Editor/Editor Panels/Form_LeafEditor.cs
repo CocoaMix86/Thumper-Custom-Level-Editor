@@ -2412,6 +2412,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
+            //clear out data that exists beyond the beatcount
+            foreach (Sequencer_Object seq in SequencerObjects)
+            {
+                for (int x = LeafProperties.beats; x < 255; x++)
+                {
+                    seq.data_points[x] = new();
+                }
+            }
             //set cell zoom
             trackZoom_Scroll(null, null);
             //make sure new cells follow the time sig

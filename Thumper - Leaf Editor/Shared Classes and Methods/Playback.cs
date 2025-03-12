@@ -375,8 +375,8 @@ namespace Thumper_Custom_Level_Editor
         {
             ChannelEnd();
             //merge all channels to a single array of events
-            List<BASS_MIDI_EVENT> _SequencerEvents = Playback.SequencerEvents.SelectMany(x => x).ToList();
-            List<BASS_MIDI_EVENT> _SampleEvents = Playback.SampleEvents.SelectMany(x => x).ToList();
+            List<BASS_MIDI_EVENT> _SequencerEvents = Playback.SequencerEvents.SelectMany(x => x).Distinct().ToList();
+            List<BASS_MIDI_EVENT> _SampleEvents = Playback.SampleEvents.SelectMany(x => x).Distinct().ToList();
             var AllEvents = _SequencerEvents.Concat(_SampleEvents).ToList();
             //the very last midi event needs to be EVENT_END
             AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (LastBeat * 100) + 50, 0));
