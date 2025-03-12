@@ -33,9 +33,15 @@
             this.trackBar1 = new TrackBar();
             this.labelSequencer = new Label();
             this.panel1 = new Panel();
+            this.button1 = new Button();
+            this.btnVolReset1 = new Button();
             this.label8 = new Label();
             this.label7 = new Label();
             this.panel2 = new Panel();
+            this.button4 = new Button();
+            this.button5 = new Button();
+            this.button2 = new Button();
+            this.button3 = new Button();
             this.label12 = new Label();
             this.label11 = new Label();
             this.label10 = new Label();
@@ -46,6 +52,10 @@
             this.trackBar3 = new TrackBar();
             this.label1 = new Label();
             this.panel3 = new Panel();
+            this.button8 = new Button();
+            this.button9 = new Button();
+            this.button6 = new Button();
+            this.button7 = new Button();
             this.label16 = new Label();
             this.label15 = new Label();
             this.label14 = new Label();
@@ -56,6 +66,10 @@
             this.trackBar9 = new TrackBar();
             this.label2 = new Label();
             this.panel4 = new Panel();
+            this.button12 = new Button();
+            this.button13 = new Button();
+            this.button10 = new Button();
+            this.button11 = new Button();
             this.label17 = new Label();
             this.label18 = new Label();
             this.label19 = new Label();
@@ -66,12 +80,17 @@
             this.trackBar13 = new TrackBar();
             this.label3 = new Label();
             this.panel5 = new Panel();
+            this.button14 = new Button();
+            this.button15 = new Button();
             this.label21 = new Label();
             this.label22 = new Label();
             this.trackBar14 = new TrackBar();
             this.trackBar15 = new TrackBar();
             this.label4 = new Label();
             this.panel6 = new Panel();
+            this.button18 = new Button();
+            this.button16 = new Button();
+            this.button17 = new Button();
             this.label25 = new Label();
             this.label23 = new Label();
             this.label24 = new Label();
@@ -80,11 +99,13 @@
             this.trackBar19 = new TrackBar();
             this.label5 = new Label();
             this.panel7 = new Panel();
+            this.button19 = new Button();
             this.label26 = new Label();
             this.pictureWaveL = new PictureBox();
             this.trackMasterVolume = new TrackBar();
             this.label6 = new Label();
             this.toolTip1 = new ToolTip(this.components);
+            this.btnVolResetAll = new Button();
             ((System.ComponentModel.ISupportInitialize)this.trackMix1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar1).BeginInit();
             this.panel1.SuspendLayout();
@@ -174,6 +195,8 @@
             // 
             this.panel1.BackColor = Color.Black;
             this.panel1.BorderStyle = BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnVolReset1);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.trackMix1);
@@ -185,6 +208,38 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new Size(82, 210);
             this.panel1.TabIndex = 99;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = Color.Black;
+            this.button1.Cursor = Cursors.Hand;
+            this.button1.FlatStyle = FlatStyle.Flat;
+            this.button1.Image = Properties.Resources.icon_reset_8;
+            this.button1.Location = new Point(34, 167);
+            this.button1.Margin = new Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new Size(12, 12);
+            this.button1.TabIndex = 101;
+            this.button1.Tag = "18";
+            this.toolTip1.SetToolTip(this.button1, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += this.btnMixerReset_Click;
+            // 
+            // btnVolReset1
+            // 
+            this.btnVolReset1.BackColor = Color.Black;
+            this.btnVolReset1.Cursor = Cursors.Hand;
+            this.btnVolReset1.FlatStyle = FlatStyle.Flat;
+            this.btnVolReset1.Image = Properties.Resources.icon_reset_8;
+            this.btnVolReset1.Location = new Point(2, 167);
+            this.btnVolReset1.Margin = new Padding(0);
+            this.btnVolReset1.Name = "btnVolReset1";
+            this.btnVolReset1.Size = new Size(12, 12);
+            this.btnVolReset1.TabIndex = 100;
+            this.btnVolReset1.Tag = "8";
+            this.toolTip1.SetToolTip(this.btnVolReset1, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.btnVolReset1.UseVisualStyleBackColor = false;
+            this.btnVolReset1.Click += this.btnMixerReset_Click;
             // 
             // label8
             // 
@@ -220,6 +275,10 @@
             // 
             this.panel2.BackColor = Color.Black;
             this.panel2.BorderStyle = BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.button4);
+            this.panel2.Controls.Add(this.button5);
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.label10);
@@ -235,6 +294,70 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new Size(148, 210);
             this.panel2.TabIndex = 100;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = Color.Black;
+            this.button4.Cursor = Cursors.Hand;
+            this.button4.FlatStyle = FlatStyle.Flat;
+            this.button4.Image = Properties.Resources.icon_reset_8;
+            this.button4.Location = new Point(99, 167);
+            this.button4.Margin = new Padding(0);
+            this.button4.Name = "button4";
+            this.button4.Size = new Size(12, 12);
+            this.button4.TabIndex = 107;
+            this.button4.Tag = "20";
+            this.toolTip1.SetToolTip(this.button4, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += this.btnMixerReset_Click;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = Color.Black;
+            this.button5.Cursor = Cursors.Hand;
+            this.button5.FlatStyle = FlatStyle.Flat;
+            this.button5.Image = Properties.Resources.icon_reset_8;
+            this.button5.Location = new Point(67, 167);
+            this.button5.Margin = new Padding(0);
+            this.button5.Name = "button5";
+            this.button5.Size = new Size(12, 12);
+            this.button5.TabIndex = 106;
+            this.button5.Tag = "7";
+            this.toolTip1.SetToolTip(this.button5, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += this.btnMixerReset_Click;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = Color.Black;
+            this.button2.Cursor = Cursors.Hand;
+            this.button2.FlatStyle = FlatStyle.Flat;
+            this.button2.Image = Properties.Resources.icon_reset_8;
+            this.button2.Location = new Point(35, 167);
+            this.button2.Margin = new Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new Size(12, 12);
+            this.button2.TabIndex = 105;
+            this.button2.Tag = "19";
+            this.toolTip1.SetToolTip(this.button2, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += this.btnMixerReset_Click;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = Color.Black;
+            this.button3.Cursor = Cursors.Hand;
+            this.button3.FlatStyle = FlatStyle.Flat;
+            this.button3.Image = Properties.Resources.icon_reset_8;
+            this.button3.Location = new Point(3, 167);
+            this.button3.Margin = new Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new Size(12, 12);
+            this.button3.TabIndex = 104;
+            this.button3.Tag = "1";
+            this.toolTip1.SetToolTip(this.button3, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += this.btnMixerReset_Click;
             // 
             // label12
             // 
@@ -394,6 +517,10 @@
             // 
             this.panel3.BackColor = Color.Black;
             this.panel3.BorderStyle = BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.button8);
+            this.panel3.Controls.Add(this.button9);
+            this.panel3.Controls.Add(this.button6);
+            this.panel3.Controls.Add(this.button7);
             this.panel3.Controls.Add(this.label16);
             this.panel3.Controls.Add(this.label15);
             this.panel3.Controls.Add(this.label14);
@@ -409,6 +536,70 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new Size(148, 210);
             this.panel3.TabIndex = 101;
+            // 
+            // button8
+            // 
+            this.button8.BackColor = Color.Black;
+            this.button8.Cursor = Cursors.Hand;
+            this.button8.FlatStyle = FlatStyle.Flat;
+            this.button8.Image = Properties.Resources.icon_reset_8;
+            this.button8.Location = new Point(99, 167);
+            this.button8.Margin = new Padding(0);
+            this.button8.Name = "button8";
+            this.button8.Size = new Size(12, 12);
+            this.button8.TabIndex = 107;
+            this.button8.Tag = "13";
+            this.toolTip1.SetToolTip(this.button8, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += this.btnMixerReset_Click;
+            // 
+            // button9
+            // 
+            this.button9.BackColor = Color.Black;
+            this.button9.Cursor = Cursors.Hand;
+            this.button9.FlatStyle = FlatStyle.Flat;
+            this.button9.Image = Properties.Resources.icon_reset_8;
+            this.button9.Location = new Point(67, 167);
+            this.button9.Margin = new Padding(0);
+            this.button9.Name = "button9";
+            this.button9.Size = new Size(12, 12);
+            this.button9.TabIndex = 106;
+            this.button9.Tag = "11";
+            this.toolTip1.SetToolTip(this.button9, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += this.btnMixerReset_Click;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = Color.Black;
+            this.button6.Cursor = Cursors.Hand;
+            this.button6.FlatStyle = FlatStyle.Flat;
+            this.button6.Image = Properties.Resources.icon_reset_8;
+            this.button6.Location = new Point(35, 167);
+            this.button6.Margin = new Padding(0);
+            this.button6.Name = "button6";
+            this.button6.Size = new Size(12, 12);
+            this.button6.TabIndex = 105;
+            this.button6.Tag = "12";
+            this.toolTip1.SetToolTip(this.button6, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += this.btnMixerReset_Click;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = Color.Black;
+            this.button7.Cursor = Cursors.Hand;
+            this.button7.FlatStyle = FlatStyle.Flat;
+            this.button7.Image = Properties.Resources.icon_reset_8;
+            this.button7.Location = new Point(3, 167);
+            this.button7.Margin = new Padding(0);
+            this.button7.Name = "button7";
+            this.button7.Size = new Size(12, 12);
+            this.button7.TabIndex = 104;
+            this.button7.Tag = "10";
+            this.toolTip1.SetToolTip(this.button7, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += this.btnMixerReset_Click;
             // 
             // label16
             // 
@@ -568,6 +759,10 @@
             // 
             this.panel4.BackColor = Color.Black;
             this.panel4.BorderStyle = BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.button12);
+            this.panel4.Controls.Add(this.button13);
+            this.panel4.Controls.Add(this.button10);
+            this.panel4.Controls.Add(this.button11);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.label19);
@@ -583,6 +778,70 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new Size(148, 210);
             this.panel4.TabIndex = 102;
+            // 
+            // button12
+            // 
+            this.button12.BackColor = Color.Black;
+            this.button12.Cursor = Cursors.Hand;
+            this.button12.FlatStyle = FlatStyle.Flat;
+            this.button12.Image = Properties.Resources.icon_reset_8;
+            this.button12.Location = new Point(99, 167);
+            this.button12.Margin = new Padding(0);
+            this.button12.Name = "button12";
+            this.button12.Size = new Size(12, 12);
+            this.button12.TabIndex = 111;
+            this.button12.Tag = "5";
+            this.toolTip1.SetToolTip(this.button12, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button12.UseVisualStyleBackColor = false;
+            this.button12.Click += this.btnMixerReset_Click;
+            // 
+            // button13
+            // 
+            this.button13.BackColor = Color.Black;
+            this.button13.Cursor = Cursors.Hand;
+            this.button13.FlatStyle = FlatStyle.Flat;
+            this.button13.Image = Properties.Resources.icon_reset_8;
+            this.button13.Location = new Point(67, 167);
+            this.button13.Margin = new Padding(0);
+            this.button13.Name = "button13";
+            this.button13.Size = new Size(12, 12);
+            this.button13.TabIndex = 110;
+            this.button13.Tag = "4";
+            this.toolTip1.SetToolTip(this.button13, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += this.btnMixerReset_Click;
+            // 
+            // button10
+            // 
+            this.button10.BackColor = Color.Black;
+            this.button10.Cursor = Cursors.Hand;
+            this.button10.FlatStyle = FlatStyle.Flat;
+            this.button10.Image = Properties.Resources.icon_reset_8;
+            this.button10.Location = new Point(34, 167);
+            this.button10.Margin = new Padding(0);
+            this.button10.Name = "button10";
+            this.button10.Size = new Size(12, 12);
+            this.button10.TabIndex = 109;
+            this.button10.Tag = "3";
+            this.toolTip1.SetToolTip(this.button10, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += this.btnMixerReset_Click;
+            // 
+            // button11
+            // 
+            this.button11.BackColor = Color.Black;
+            this.button11.Cursor = Cursors.Hand;
+            this.button11.FlatStyle = FlatStyle.Flat;
+            this.button11.Image = Properties.Resources.icon_reset_8;
+            this.button11.Location = new Point(2, 167);
+            this.button11.Margin = new Padding(0);
+            this.button11.Name = "button11";
+            this.button11.Size = new Size(12, 12);
+            this.button11.TabIndex = 108;
+            this.button11.Tag = "2";
+            this.toolTip1.SetToolTip(this.button11, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += this.btnMixerReset_Click;
             // 
             // label17
             // 
@@ -742,6 +1001,8 @@
             // 
             this.panel5.BackColor = Color.Black;
             this.panel5.BorderStyle = BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.button14);
+            this.panel5.Controls.Add(this.button15);
             this.panel5.Controls.Add(this.label21);
             this.panel5.Controls.Add(this.label22);
             this.panel5.Controls.Add(this.trackBar14);
@@ -753,6 +1014,38 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new Size(82, 210);
             this.panel5.TabIndex = 103;
+            // 
+            // button14
+            // 
+            this.button14.BackColor = Color.Black;
+            this.button14.Cursor = Cursors.Hand;
+            this.button14.FlatStyle = FlatStyle.Flat;
+            this.button14.Image = Properties.Resources.icon_reset_8;
+            this.button14.Location = new Point(35, 167);
+            this.button14.Margin = new Padding(0);
+            this.button14.Name = "button14";
+            this.button14.Size = new Size(12, 12);
+            this.button14.TabIndex = 107;
+            this.button14.Tag = "17";
+            this.toolTip1.SetToolTip(this.button14, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += this.btnMixerReset_Click;
+            // 
+            // button15
+            // 
+            this.button15.BackColor = Color.Black;
+            this.button15.Cursor = Cursors.Hand;
+            this.button15.FlatStyle = FlatStyle.Flat;
+            this.button15.Image = Properties.Resources.icon_reset_8;
+            this.button15.Location = new Point(3, 167);
+            this.button15.Margin = new Padding(0);
+            this.button15.Name = "button15";
+            this.button15.Size = new Size(12, 12);
+            this.button15.TabIndex = 106;
+            this.button15.Tag = "6";
+            this.toolTip1.SetToolTip(this.button15, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button15.UseVisualStyleBackColor = false;
+            this.button15.Click += this.btnMixerReset_Click;
             // 
             // label21
             // 
@@ -842,6 +1135,9 @@
             // 
             this.panel6.BackColor = Color.Black;
             this.panel6.BorderStyle = BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.button18);
+            this.panel6.Controls.Add(this.button16);
+            this.panel6.Controls.Add(this.button17);
             this.panel6.Controls.Add(this.label25);
             this.panel6.Controls.Add(this.label23);
             this.panel6.Controls.Add(this.label24);
@@ -855,6 +1151,54 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new Size(118, 210);
             this.panel6.TabIndex = 104;
+            // 
+            // button18
+            // 
+            this.button18.BackColor = Color.Black;
+            this.button18.Cursor = Cursors.Hand;
+            this.button18.FlatStyle = FlatStyle.Flat;
+            this.button18.Image = Properties.Resources.icon_reset_8;
+            this.button18.Location = new Point(67, 167);
+            this.button18.Margin = new Padding(0);
+            this.button18.Name = "button18";
+            this.button18.Size = new Size(12, 12);
+            this.button18.TabIndex = 109;
+            this.button18.Tag = "16";
+            this.toolTip1.SetToolTip(this.button18, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += this.btnMixerReset_Click;
+            // 
+            // button16
+            // 
+            this.button16.BackColor = Color.Black;
+            this.button16.Cursor = Cursors.Hand;
+            this.button16.FlatStyle = FlatStyle.Flat;
+            this.button16.Image = Properties.Resources.icon_reset_8;
+            this.button16.Location = new Point(35, 167);
+            this.button16.Margin = new Padding(0);
+            this.button16.Name = "button16";
+            this.button16.Size = new Size(12, 12);
+            this.button16.TabIndex = 108;
+            this.button16.Tag = "15";
+            this.toolTip1.SetToolTip(this.button16, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button16.UseVisualStyleBackColor = false;
+            this.button16.Click += this.btnMixerReset_Click;
+            // 
+            // button17
+            // 
+            this.button17.BackColor = Color.Black;
+            this.button17.Cursor = Cursors.Hand;
+            this.button17.FlatStyle = FlatStyle.Flat;
+            this.button17.Image = Properties.Resources.icon_reset_8;
+            this.button17.Location = new Point(3, 167);
+            this.button17.Margin = new Padding(0);
+            this.button17.Name = "button17";
+            this.button17.Size = new Size(12, 12);
+            this.button17.TabIndex = 107;
+            this.button17.Tag = "14";
+            this.toolTip1.SetToolTip(this.button17, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button17.UseVisualStyleBackColor = false;
+            this.button17.Click += this.btnMixerReset_Click;
             // 
             // label25
             // 
@@ -979,6 +1323,7 @@
             // 
             this.panel7.BackColor = Color.Black;
             this.panel7.BorderStyle = BorderStyle.Fixed3D;
+            this.panel7.Controls.Add(this.button19);
             this.panel7.Controls.Add(this.label26);
             this.panel7.Controls.Add(this.pictureWaveL);
             this.panel7.Controls.Add(this.trackMasterVolume);
@@ -989,6 +1334,21 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new Size(160, 210);
             this.panel7.TabIndex = 105;
+            // 
+            // button19
+            // 
+            this.button19.BackColor = Color.Black;
+            this.button19.Cursor = Cursors.Hand;
+            this.button19.FlatStyle = FlatStyle.Flat;
+            this.button19.Image = Properties.Resources.icon_reset_8;
+            this.button19.Location = new Point(2, 167);
+            this.button19.Margin = new Padding(0);
+            this.button19.Name = "button19";
+            this.button19.Size = new Size(12, 12);
+            this.button19.TabIndex = 154;
+            this.button19.Tag = "100";
+            this.toolTip1.SetToolTip(this.button19, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button19.UseVisualStyleBackColor = false;
             // 
             // label26
             // 
@@ -1049,12 +1409,33 @@
             this.label6.Text = "MASTER";
             this.label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // btnVolResetAll
+            // 
+            this.btnVolResetAll.BackColor = Color.Black;
+            this.btnVolResetAll.Cursor = Cursors.Hand;
+            this.btnVolResetAll.FlatStyle = FlatStyle.Flat;
+            this.btnVolResetAll.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.btnVolResetAll.ForeColor = Color.White;
+            this.btnVolResetAll.Image = Properties.Resources.icon_reset_8;
+            this.btnVolResetAll.Location = new Point(694, 188);
+            this.btnVolResetAll.Margin = new Padding(0);
+            this.btnVolResetAll.Name = "btnVolResetAll";
+            this.btnVolResetAll.Size = new Size(74, 21);
+            this.btnVolResetAll.TabIndex = 155;
+            this.btnVolResetAll.Tag = "100";
+            this.btnVolResetAll.Text = "Reset All";
+            this.btnVolResetAll.TextImageRelation = TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.btnVolResetAll, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.btnVolResetAll.UseVisualStyleBackColor = false;
+            this.btnVolResetAll.Click += this.btnVolResetAll_Click;
+            // 
             // VolumeMaster
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(31, 31, 31);
             this.ClientSize = new Size(894, 210);
+            this.Controls.Add(this.btnVolResetAll);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -1062,6 +1443,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.Name = "VolumeMaster";
             this.Text = "Volume Mixer";
@@ -1161,5 +1543,26 @@
         private Label label24;
         private Label label26;
         private ToolTip toolTip1;
+        private Button btnVolReset1;
+        private Button button1;
+        private Button button4;
+        private Button button5;
+        private Button button2;
+        private Button button3;
+        private Button button8;
+        private Button button9;
+        private Button button6;
+        private Button button7;
+        private Button button12;
+        private Button button13;
+        private Button button10;
+        private Button button11;
+        private Button button14;
+        private Button button15;
+        private Button button18;
+        private Button button16;
+        private Button button17;
+        private Button button19;
+        private Button btnVolResetAll;
     }
 }

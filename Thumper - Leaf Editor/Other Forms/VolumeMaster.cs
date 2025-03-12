@@ -65,7 +65,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         private void VolumeChanged(object sender, EventArgs e)
         {
             TrackBar mixer = sender as TrackBar;
-            Label lblvol = mixer.Parent.Controls.Cast<Control>().First(x => x.Tag == mixer.Tag) as Label;
+            var lblvol = mixer.Parent.Controls.Cast<Control>().First(x => x.GetType() == typeof(Label) && x.Tag.ToString() == mixer.Tag.ToString());
             lblvol.Text = $"{mixer.Value}";
         }
 
@@ -76,6 +76,41 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             // Jump to the clicked location
             dblValue = ((double)e.Y / (double)mixer.Height) * (mixer.Maximum - mixer.Minimum);
             mixer.Value = mixer.Maximum - Convert.ToInt32(dblValue);
+        }
+
+        private void btnMixerReset_Click(object sender, EventArgs e)
+        {
+            Button resetbtn = sender as Button;
+            TrackBar mixer = resetbtn.Parent.Controls.Cast<Control>().First(x => x.GetType() == typeof(TrackBar) && x.Tag == resetbtn.Tag) as TrackBar;
+            int key = int.Parse((sender as Control).Tag.ToString());
+
+            //these keys are the call keys. Set to half volume by default
+            //can see the full key list in Playback.cs
+            if (key is 1 or 2 or 7 or 10 or 12)
+                mixer.Value = 50;
+            else
+                mixer.Value = 100;
+        }
+
+        private void btnVolResetAll_Click(object sender, EventArgs e)
+        {
+            foreach (TrackBar mixer in GetAll(this, typeof(TrackBar)))
+            {
+                int key = int.Parse(mixer.Tag.ToString());
+                if (key is 1 or 2 or 7 or 10 or 12)
+                    mixer.Value = 50;
+                else
+                    mixer.Value = 100;
+            }
+        }
+
+        public IEnumerable<Control> GetAll(Control control, Type type)
+        {
+            var controls = control.Controls.Cast<Control>();
+
+            return controls.SelectMany(ctrl => GetAll(ctrl, type))
+                                      .Concat(controls)
+                                      .Where(c => c.GetType() == type);
         }
     }
 }
