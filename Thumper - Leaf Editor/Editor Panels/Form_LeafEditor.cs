@@ -408,7 +408,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///}
 
             e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
-            e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
 
             if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset) {
                 e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left + e.CellBounds.Width/2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
@@ -418,6 +417,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
                 //e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }
+
+            e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
 
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null/* && e.ColumnIndex != -1 && e.RowIndex != -1*/) {

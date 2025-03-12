@@ -1,16 +1,5 @@
-﻿using NAudio.Wave.SampleProviders;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Input;
-using Un4seen.Bass;
+﻿using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
-using Windows.Devices.Bluetooth.Advertisement;
 
 namespace Thumper_Custom_Level_Editor
 { 

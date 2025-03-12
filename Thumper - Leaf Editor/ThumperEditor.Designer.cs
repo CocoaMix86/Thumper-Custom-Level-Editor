@@ -116,9 +116,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -181,6 +181,8 @@
             this.toolStripSeparator21 = new ToolStripSeparator();
             this.toolstripStopAudio = new ToolStripButton();
             this.toolstripExitFullscreen = new ToolStripButton();
+            this.toolStripSeparator22 = new ToolStripSeparator();
+            this.btnVolumeMixer = new ToolStripButton();
             this.panelFill = new Panel();
             this.contextmenuTabClick = new ContextMenuStrip(this.components);
             this.toolstripTabSave = new ToolStripMenuItem();
@@ -737,7 +739,7 @@
             this.contextmenuEdit.Name = "contextmenuEdit";
             this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuEdit.Size = new Size(218, 148);
+            this.contextmenuEdit.Size = new Size(218, 126);
             // 
             // toolstripEditUndo
             // 
@@ -919,9 +921,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1043,6 +1044,14 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1063,14 +1072,6 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
-            // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -1433,7 +1434,7 @@
             this.toolStripTitle.ContextMenuStrip = this.contextMenuFormRightClick;
             this.toolStripTitle.GripMargin = new Padding(0);
             this.toolStripTitle.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolStripMenuItem3, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolStripSeparator20, this.toolstripLevelName, this.toolStripSeparator21, this.toolstripStopAudio, this.toolstripExitFullscreen });
+            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolStripMenuItem3, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolStripSeparator20, this.toolstripLevelName, this.toolStripSeparator21, this.toolstripStopAudio, this.toolstripExitFullscreen, this.toolStripSeparator22, this.btnVolumeMixer });
             this.toolStripTitle.Location = new Point(0, 0);
             this.toolStripTitle.MaximumSize = new Size(0, 31);
             this.toolStripTitle.Name = "toolStripTitle";
@@ -1698,6 +1699,21 @@
             this.toolstripExitFullscreen.Text = "Exit Fullscreen";
             this.toolstripExitFullscreen.Visible = false;
             this.toolstripExitFullscreen.Click += this.toolstripExitFullscreen_Click;
+            // 
+            // toolStripSeparator22
+            // 
+            this.toolStripSeparator22.Name = "toolStripSeparator22";
+            this.toolStripSeparator22.Size = new Size(6, 31);
+            // 
+            // btnVolumeMixer
+            // 
+            this.btnVolumeMixer.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnVolumeMixer.Image = Properties.Resources.icon_audio;
+            this.btnVolumeMixer.ImageTransparentColor = Color.Magenta;
+            this.btnVolumeMixer.Name = "btnVolumeMixer";
+            this.btnVolumeMixer.Size = new Size(23, 28);
+            this.btnVolumeMixer.ToolTipText = "Mix volume levels for playback items";
+            this.btnVolumeMixer.Click += this.btnVolumeMixer_Click;
             // 
             // panelFill
             // 
@@ -2055,6 +2071,8 @@
         private ToolStripSeparator toolStripSeparator21;
         private ToolStripMenuItem toolStripMenuItem4;
         private ToolStripMenuItem toolStripMenuItem7;
+        private ToolStripSeparator toolStripSeparator22;
+        private ToolStripButton btnVolumeMixer;
     }
 }
 

@@ -5,6 +5,7 @@ using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
 using System.Runtime.InteropServices;
+using Thumper_Custom_Level_Editor.Other_Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -1006,5 +1007,11 @@ namespace Thumper_Custom_Level_Editor
         {
         }
         #endregion
+
+        private void btnVolumeMixer_Click(object sender, EventArgs e)
+        {
+            VolumeMaster volma = new VolumeMaster();
+            volma.ShowDialog();
+        }
     }
 }
