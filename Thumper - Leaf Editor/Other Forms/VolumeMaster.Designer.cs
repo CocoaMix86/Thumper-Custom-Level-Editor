@@ -27,42 +27,64 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VolumeMaster));
             this.trackMix1 = new TrackBar();
             this.trackBar1 = new TrackBar();
             this.labelSequencer = new Label();
             this.panel1 = new Panel();
+            this.label8 = new Label();
+            this.label7 = new Label();
             this.panel2 = new Panel();
+            this.label12 = new Label();
+            this.label11 = new Label();
+            this.label10 = new Label();
+            this.label9 = new Label();
             this.trackBar4 = new TrackBar();
             this.trackBar5 = new TrackBar();
             this.trackBar2 = new TrackBar();
             this.trackBar3 = new TrackBar();
             this.label1 = new Label();
             this.panel3 = new Panel();
+            this.label16 = new Label();
+            this.label15 = new Label();
+            this.label14 = new Label();
+            this.label13 = new Label();
             this.trackBar6 = new TrackBar();
             this.trackBar7 = new TrackBar();
             this.trackBar8 = new TrackBar();
             this.trackBar9 = new TrackBar();
             this.label2 = new Label();
             this.panel4 = new Panel();
+            this.label17 = new Label();
+            this.label18 = new Label();
+            this.label19 = new Label();
+            this.label20 = new Label();
             this.trackBar10 = new TrackBar();
             this.trackBar11 = new TrackBar();
             this.trackBar12 = new TrackBar();
             this.trackBar13 = new TrackBar();
             this.label3 = new Label();
             this.panel5 = new Panel();
+            this.label21 = new Label();
+            this.label22 = new Label();
             this.trackBar14 = new TrackBar();
             this.trackBar15 = new TrackBar();
             this.label4 = new Label();
             this.panel6 = new Panel();
+            this.label25 = new Label();
+            this.label23 = new Label();
+            this.label24 = new Label();
             this.trackBar16 = new TrackBar();
             this.trackBar18 = new TrackBar();
             this.trackBar19 = new TrackBar();
             this.label5 = new Label();
             this.panel7 = new Panel();
+            this.label26 = new Label();
             this.pictureWaveL = new PictureBox();
             this.trackMasterVolume = new TrackBar();
             this.label6 = new Label();
+            this.toolTip1 = new ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)this.trackMix1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar1).BeginInit();
             this.panel1.SuspendLayout();
@@ -96,6 +118,7 @@
             // trackMix1
             // 
             this.trackMix1.AutoSize = false;
+            this.trackMix1.BackColor = Color.Black;
             this.trackMix1.Cursor = Cursors.Hand;
             this.trackMix1.Location = new Point(11, -2);
             this.trackMix1.Margin = new Padding(5);
@@ -107,8 +130,10 @@
             this.trackMix1.Tag = "8";
             this.trackMix1.TickFrequency = 10;
             this.trackMix1.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackMix1, "Thump Hit");
             this.trackMix1.Value = 100;
-            this.trackMix1.MouseDown += this.trackMix1_MouseDown;
+            this.trackMix1.ValueChanged += this.VolumeChanged;
+            this.trackMix1.MouseDown += this.MouseDownJumpToValue;
             this.trackMix1.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar1
@@ -125,7 +150,10 @@
             this.trackBar1.Tag = "18";
             this.trackBar1.TickFrequency = 10;
             this.trackBar1.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar1, "Thump Call");
             this.trackBar1.Value = 100;
+            this.trackBar1.ValueChanged += this.VolumeChanged;
+            this.trackBar1.MouseDown += this.MouseDownJumpToValue;
             this.trackBar1.MouseUp += this.PlayKeyAtVolume;
             // 
             // labelSequencer
@@ -134,7 +162,7 @@
             this.labelSequencer.BackColor = Color.FromArgb(10, 10, 10);
             this.labelSequencer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelSequencer.ForeColor = Color.White;
-            this.labelSequencer.Location = new Point(10, 178);
+            this.labelSequencer.Location = new Point(10, 180);
             this.labelSequencer.Margin = new Padding(4, 0, 4, 0);
             this.labelSequencer.Name = "labelSequencer";
             this.labelSequencer.Size = new Size(59, 13);
@@ -146,6 +174,8 @@
             // 
             this.panel1.BackColor = Color.Black;
             this.panel1.BorderStyle = BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.trackMix1);
             this.panel1.Controls.Add(this.trackBar1);
             this.panel1.Controls.Add(this.labelSequencer);
@@ -156,10 +186,44 @@
             this.panel1.Size = new Size(82, 210);
             this.panel1.TabIndex = 99;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = Color.FromArgb(10, 10, 10);
+            this.label8.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label8.ForeColor = Color.White;
+            this.label8.Location = new Point(43, 167);
+            this.label8.Margin = new Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new Size(25, 13);
+            this.label8.TabIndex = 99;
+            this.label8.Tag = "18";
+            this.label8.Text = "100";
+            this.label8.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = Color.FromArgb(10, 10, 10);
+            this.label7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label7.ForeColor = Color.White;
+            this.label7.Location = new Point(11, 167);
+            this.label7.Margin = new Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new Size(25, 13);
+            this.label7.TabIndex = 98;
+            this.label7.Tag = "8";
+            this.label7.Text = "100";
+            this.label7.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // panel2
             // 
             this.panel2.BackColor = Color.Black;
             this.panel2.BorderStyle = BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.trackBar4);
             this.panel2.Controls.Add(this.trackBar5);
             this.panel2.Controls.Add(this.trackBar2);
@@ -171,6 +235,66 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new Size(148, 210);
             this.panel2.TabIndex = 100;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = Color.FromArgb(10, 10, 10);
+            this.label12.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label12.ForeColor = Color.White;
+            this.label12.Location = new Point(107, 167);
+            this.label12.Margin = new Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new Size(25, 13);
+            this.label12.TabIndex = 103;
+            this.label12.Tag = "20";
+            this.label12.Text = "100";
+            this.label12.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = Color.FromArgb(10, 10, 10);
+            this.label11.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label11.ForeColor = Color.White;
+            this.label11.Location = new Point(75, 167);
+            this.label11.Margin = new Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new Size(25, 13);
+            this.label11.TabIndex = 102;
+            this.label11.Tag = "7";
+            this.label11.Text = "100";
+            this.label11.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = Color.FromArgb(10, 10, 10);
+            this.label10.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label10.ForeColor = Color.White;
+            this.label10.Location = new Point(43, 167);
+            this.label10.Margin = new Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new Size(25, 13);
+            this.label10.TabIndex = 101;
+            this.label10.Tag = "19";
+            this.label10.Text = "100";
+            this.label10.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = Color.FromArgb(10, 10, 10);
+            this.label9.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label9.ForeColor = Color.White;
+            this.label9.Location = new Point(11, 167);
+            this.label9.Margin = new Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new Size(25, 13);
+            this.label9.TabIndex = 100;
+            this.label9.Tag = "1";
+            this.label9.Text = "100";
+            this.label9.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // trackBar4
             // 
@@ -186,7 +310,10 @@
             this.trackBar4.Tag = "7";
             this.trackBar4.TickFrequency = 10;
             this.trackBar4.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar4, "Ring Call");
             this.trackBar4.Value = 100;
+            this.trackBar4.ValueChanged += this.VolumeChanged;
+            this.trackBar4.MouseDown += this.MouseDownJumpToValue;
             this.trackBar4.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar5
@@ -203,7 +330,10 @@
             this.trackBar5.Tag = "20";
             this.trackBar5.TickFrequency = 10;
             this.trackBar5.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar5, "Ring Hit");
             this.trackBar5.Value = 100;
+            this.trackBar5.ValueChanged += this.VolumeChanged;
+            this.trackBar5.MouseDown += this.MouseDownJumpToValue;
             this.trackBar5.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar2
@@ -220,7 +350,10 @@
             this.trackBar2.Tag = "1";
             this.trackBar2.TickFrequency = 10;
             this.trackBar2.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar2, "Bar Call");
             this.trackBar2.Value = 100;
+            this.trackBar2.ValueChanged += this.VolumeChanged;
+            this.trackBar2.MouseDown += this.MouseDownJumpToValue;
             this.trackBar2.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar3
@@ -237,7 +370,10 @@
             this.trackBar3.Tag = "19";
             this.trackBar3.TickFrequency = 10;
             this.trackBar3.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar3, "Bar Hit");
             this.trackBar3.Value = 100;
+            this.trackBar3.ValueChanged += this.VolumeChanged;
+            this.trackBar3.MouseDown += this.MouseDownJumpToValue;
             this.trackBar3.MouseUp += this.PlayKeyAtVolume;
             // 
             // label1
@@ -246,7 +382,7 @@
             this.label1.BackColor = Color.FromArgb(10, 10, 10);
             this.label1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label1.ForeColor = Color.White;
-            this.label1.Location = new Point(33, 178);
+            this.label1.Location = new Point(33, 180);
             this.label1.Margin = new Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new Size(77, 13);
@@ -258,6 +394,10 @@
             // 
             this.panel3.BackColor = Color.Black;
             this.panel3.BorderStyle = BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.label14);
+            this.panel3.Controls.Add(this.label13);
             this.panel3.Controls.Add(this.trackBar6);
             this.panel3.Controls.Add(this.trackBar7);
             this.panel3.Controls.Add(this.trackBar8);
@@ -269,6 +409,66 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new Size(148, 210);
             this.panel3.TabIndex = 101;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = Color.FromArgb(10, 10, 10);
+            this.label16.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label16.ForeColor = Color.White;
+            this.label16.Location = new Point(107, 167);
+            this.label16.Margin = new Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new Size(25, 13);
+            this.label16.TabIndex = 103;
+            this.label16.Tag = "13";
+            this.label16.Text = "100";
+            this.label16.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = Color.FromArgb(10, 10, 10);
+            this.label15.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label15.ForeColor = Color.White;
+            this.label15.Location = new Point(75, 167);
+            this.label15.Margin = new Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new Size(25, 13);
+            this.label15.TabIndex = 102;
+            this.label15.Tag = "11";
+            this.label15.Text = "100";
+            this.label15.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = Color.FromArgb(10, 10, 10);
+            this.label14.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label14.ForeColor = Color.White;
+            this.label14.Location = new Point(43, 167);
+            this.label14.Margin = new Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new Size(25, 13);
+            this.label14.TabIndex = 101;
+            this.label14.Tag = "12";
+            this.label14.Text = "100";
+            this.label14.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = Color.FromArgb(10, 10, 10);
+            this.label13.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label13.ForeColor = Color.White;
+            this.label13.Location = new Point(11, 167);
+            this.label13.Margin = new Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new Size(25, 13);
+            this.label13.TabIndex = 100;
+            this.label13.Tag = "10";
+            this.label13.Text = "100";
+            this.label13.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // trackBar6
             // 
@@ -284,7 +484,10 @@
             this.trackBar6.Tag = "11";
             this.trackBar6.TickFrequency = 10;
             this.trackBar6.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar6, "Turn Long Call");
             this.trackBar6.Value = 100;
+            this.trackBar6.ValueChanged += this.VolumeChanged;
+            this.trackBar6.MouseDown += this.MouseDownJumpToValue;
             this.trackBar6.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar7
@@ -301,7 +504,10 @@
             this.trackBar7.Tag = "13";
             this.trackBar7.TickFrequency = 10;
             this.trackBar7.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar7, "Turn Hit");
             this.trackBar7.Value = 100;
+            this.trackBar7.ValueChanged += this.VolumeChanged;
+            this.trackBar7.MouseDown += this.MouseDownJumpToValue;
             this.trackBar7.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar8
@@ -318,7 +524,10 @@
             this.trackBar8.Tag = "10";
             this.trackBar8.TickFrequency = 10;
             this.trackBar8.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar8, "Turn Left Call");
             this.trackBar8.Value = 100;
+            this.trackBar8.ValueChanged += this.VolumeChanged;
+            this.trackBar8.MouseDown += this.MouseDownJumpToValue;
             this.trackBar8.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar9
@@ -335,7 +544,10 @@
             this.trackBar9.Tag = "12";
             this.trackBar9.TickFrequency = 10;
             this.trackBar9.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar9, "Turn Right Call");
             this.trackBar9.Value = 100;
+            this.trackBar9.ValueChanged += this.VolumeChanged;
+            this.trackBar9.MouseDown += this.MouseDownJumpToValue;
             this.trackBar9.MouseUp += this.PlayKeyAtVolume;
             // 
             // label2
@@ -344,7 +556,7 @@
             this.label2.BackColor = Color.FromArgb(10, 10, 10);
             this.label2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label2.ForeColor = Color.White;
-            this.label2.Location = new Point(49, 178);
+            this.label2.Location = new Point(49, 180);
             this.label2.Margin = new Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new Size(50, 13);
@@ -356,6 +568,10 @@
             // 
             this.panel4.BackColor = Color.Black;
             this.panel4.BorderStyle = BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.label18);
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.label20);
             this.panel4.Controls.Add(this.trackBar10);
             this.panel4.Controls.Add(this.trackBar11);
             this.panel4.Controls.Add(this.trackBar12);
@@ -367,6 +583,66 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new Size(148, 210);
             this.panel4.TabIndex = 102;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = Color.FromArgb(10, 10, 10);
+            this.label17.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label17.ForeColor = Color.White;
+            this.label17.Location = new Point(107, 167);
+            this.label17.Margin = new Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new Size(25, 13);
+            this.label17.TabIndex = 107;
+            this.label17.Tag = "5";
+            this.label17.Text = "100";
+            this.label17.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.BackColor = Color.FromArgb(10, 10, 10);
+            this.label18.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label18.ForeColor = Color.White;
+            this.label18.Location = new Point(75, 167);
+            this.label18.Margin = new Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new Size(25, 13);
+            this.label18.TabIndex = 106;
+            this.label18.Tag = "4";
+            this.label18.Text = "100";
+            this.label18.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.BackColor = Color.FromArgb(10, 10, 10);
+            this.label19.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label19.ForeColor = Color.White;
+            this.label19.Location = new Point(43, 167);
+            this.label19.Margin = new Padding(4, 0, 4, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new Size(25, 13);
+            this.label19.TabIndex = 105;
+            this.label19.Tag = "3";
+            this.label19.Text = "100";
+            this.label19.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.BackColor = Color.FromArgb(10, 10, 10);
+            this.label20.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label20.ForeColor = Color.White;
+            this.label20.Location = new Point(11, 167);
+            this.label20.Margin = new Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new Size(25, 13);
+            this.label20.TabIndex = 104;
+            this.label20.Tag = "2";
+            this.label20.Text = "100";
+            this.label20.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // trackBar10
             // 
@@ -382,7 +658,10 @@
             this.trackBar10.Tag = "4";
             this.trackBar10.TickFrequency = 10;
             this.trackBar10.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar10, "Millipede-Half Landing");
             this.trackBar10.Value = 100;
+            this.trackBar10.ValueChanged += this.VolumeChanged;
+            this.trackBar10.MouseDown += this.MouseDownJumpToValue;
             this.trackBar10.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar11
@@ -399,7 +678,10 @@
             this.trackBar11.Tag = "5";
             this.trackBar11.TickFrequency = 10;
             this.trackBar11.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar11, "Millipede-Quarter Landing");
             this.trackBar11.Value = 100;
+            this.trackBar11.ValueChanged += this.VolumeChanged;
+            this.trackBar11.MouseDown += this.MouseDownJumpToValue;
             this.trackBar11.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar12
@@ -416,7 +698,10 @@
             this.trackBar12.Tag = "2";
             this.trackBar12.TickFrequency = 10;
             this.trackBar12.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar12, "Millipede Call");
             this.trackBar12.Value = 100;
+            this.trackBar12.ValueChanged += this.VolumeChanged;
+            this.trackBar12.MouseDown += this.MouseDownJumpToValue;
             this.trackBar12.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar13
@@ -433,7 +718,10 @@
             this.trackBar13.Tag = "3";
             this.trackBar13.TickFrequency = 10;
             this.trackBar13.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar13, "Millipede-Full Landing");
             this.trackBar13.Value = 100;
+            this.trackBar13.ValueChanged += this.VolumeChanged;
+            this.trackBar13.MouseDown += this.MouseDownJumpToValue;
             this.trackBar13.MouseUp += this.PlayKeyAtVolume;
             // 
             // label3
@@ -442,7 +730,7 @@
             this.label3.BackColor = Color.FromArgb(10, 10, 10);
             this.label3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label3.ForeColor = Color.White;
-            this.label3.Location = new Point(35, 178);
+            this.label3.Location = new Point(35, 180);
             this.label3.Margin = new Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new Size(80, 13);
@@ -454,6 +742,8 @@
             // 
             this.panel5.BackColor = Color.Black;
             this.panel5.BorderStyle = BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.label21);
+            this.panel5.Controls.Add(this.label22);
             this.panel5.Controls.Add(this.trackBar14);
             this.panel5.Controls.Add(this.trackBar15);
             this.panel5.Controls.Add(this.label4);
@@ -463,6 +753,36 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new Size(82, 210);
             this.panel5.TabIndex = 103;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = Color.FromArgb(10, 10, 10);
+            this.label21.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label21.ForeColor = Color.White;
+            this.label21.Location = new Point(43, 167);
+            this.label21.Margin = new Padding(4, 0, 4, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new Size(25, 13);
+            this.label21.TabIndex = 105;
+            this.label21.Tag = "17";
+            this.label21.Text = "100";
+            this.label21.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.BackColor = Color.FromArgb(10, 10, 10);
+            this.label22.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label22.ForeColor = Color.White;
+            this.label22.Location = new Point(11, 167);
+            this.label22.Margin = new Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new Size(25, 13);
+            this.label22.TabIndex = 104;
+            this.label22.Tag = "6";
+            this.label22.Text = "100";
+            this.label22.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // trackBar14
             // 
@@ -478,7 +798,10 @@
             this.trackBar14.Tag = "6";
             this.trackBar14.TickFrequency = 10;
             this.trackBar14.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar14, "Mushroom Jump Call");
             this.trackBar14.Value = 100;
+            this.trackBar14.ValueChanged += this.VolumeChanged;
+            this.trackBar14.MouseDown += this.MouseDownJumpToValue;
             this.trackBar14.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar15
@@ -495,7 +818,10 @@
             this.trackBar15.Tag = "17";
             this.trackBar15.TickFrequency = 10;
             this.trackBar15.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar15, "Spike Jump Call");
             this.trackBar15.Value = 100;
+            this.trackBar15.ValueChanged += this.VolumeChanged;
+            this.trackBar15.MouseDown += this.MouseDownJumpToValue;
             this.trackBar15.MouseUp += this.PlayKeyAtVolume;
             // 
             // label4
@@ -504,7 +830,7 @@
             this.label4.BackColor = Color.FromArgb(10, 10, 10);
             this.label4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label4.ForeColor = Color.White;
-            this.label4.Location = new Point(16, 178);
+            this.label4.Location = new Point(16, 180);
             this.label4.Margin = new Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new Size(48, 13);
@@ -516,6 +842,9 @@
             // 
             this.panel6.BackColor = Color.Black;
             this.panel6.BorderStyle = BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.label25);
+            this.panel6.Controls.Add(this.label23);
+            this.panel6.Controls.Add(this.label24);
             this.panel6.Controls.Add(this.trackBar16);
             this.panel6.Controls.Add(this.trackBar18);
             this.panel6.Controls.Add(this.trackBar19);
@@ -526,6 +855,51 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new Size(118, 210);
             this.panel6.TabIndex = 104;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.BackColor = Color.FromArgb(10, 10, 10);
+            this.label25.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label25.ForeColor = Color.White;
+            this.label25.Location = new Point(75, 167);
+            this.label25.Margin = new Padding(4, 0, 4, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new Size(25, 13);
+            this.label25.TabIndex = 106;
+            this.label25.Tag = "16";
+            this.label25.Text = "100";
+            this.label25.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.BackColor = Color.FromArgb(10, 10, 10);
+            this.label23.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label23.ForeColor = Color.White;
+            this.label23.Location = new Point(43, 167);
+            this.label23.Margin = new Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new Size(25, 13);
+            this.label23.TabIndex = 105;
+            this.label23.Tag = "15";
+            this.label23.Text = "100";
+            this.label23.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.BackColor = Color.FromArgb(10, 10, 10);
+            this.label24.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label24.ForeColor = Color.White;
+            this.label24.Location = new Point(11, 167);
+            this.label24.Margin = new Padding(4, 0, 4, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new Size(25, 13);
+            this.label24.TabIndex = 104;
+            this.label24.Tag = "14";
+            this.label24.Text = "100";
+            this.label24.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // trackBar16
             // 
@@ -541,7 +915,10 @@
             this.trackBar16.Tag = "16";
             this.trackBar16.TickFrequency = 10;
             this.trackBar16.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar16, "Sentry Thump");
             this.trackBar16.Value = 100;
+            this.trackBar16.ValueChanged += this.VolumeChanged;
+            this.trackBar16.MouseDown += this.MouseDownJumpToValue;
             this.trackBar16.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar18
@@ -558,7 +935,10 @@
             this.trackBar18.Tag = "14";
             this.trackBar18.TickFrequency = 10;
             this.trackBar18.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar18, "Sentry Activate");
             this.trackBar18.Value = 100;
+            this.trackBar18.ValueChanged += this.VolumeChanged;
+            this.trackBar18.MouseDown += this.MouseDownJumpToValue;
             this.trackBar18.MouseUp += this.PlayKeyAtVolume;
             // 
             // trackBar19
@@ -575,7 +955,10 @@
             this.trackBar19.Tag = "15";
             this.trackBar19.TickFrequency = 10;
             this.trackBar19.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar19, "Sentry Deactivate");
             this.trackBar19.Value = 100;
+            this.trackBar19.ValueChanged += this.VolumeChanged;
+            this.trackBar19.MouseDown += this.MouseDownJumpToValue;
             this.trackBar19.MouseUp += this.PlayKeyAtVolume;
             // 
             // label5
@@ -584,7 +967,7 @@
             this.label5.BackColor = Color.FromArgb(10, 10, 10);
             this.label5.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label5.ForeColor = Color.White;
-            this.label5.Location = new Point(31, 178);
+            this.label5.Location = new Point(31, 180);
             this.label5.Margin = new Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new Size(57, 13);
@@ -596,6 +979,7 @@
             // 
             this.panel7.BackColor = Color.Black;
             this.panel7.BorderStyle = BorderStyle.Fixed3D;
+            this.panel7.Controls.Add(this.label26);
             this.panel7.Controls.Add(this.pictureWaveL);
             this.panel7.Controls.Add(this.trackMasterVolume);
             this.panel7.Controls.Add(this.label6);
@@ -605,6 +989,21 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new Size(160, 210);
             this.panel7.TabIndex = 105;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.BackColor = Color.FromArgb(10, 10, 10);
+            this.label26.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label26.ForeColor = Color.White;
+            this.label26.Location = new Point(11, 167);
+            this.label26.Margin = new Padding(4, 0, 4, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new Size(25, 13);
+            this.label26.TabIndex = 153;
+            this.label26.Tag = "100";
+            this.label26.Text = "100";
+            this.label26.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureWaveL
             // 
@@ -624,14 +1023,17 @@
             this.trackMasterVolume.Cursor = Cursors.Hand;
             this.trackMasterVolume.Location = new Point(11, -2);
             this.trackMasterVolume.Margin = new Padding(0);
-            this.trackMasterVolume.Maximum = 120;
+            this.trackMasterVolume.Maximum = 200;
             this.trackMasterVolume.Name = "trackMasterVolume";
             this.trackMasterVolume.Orientation = Orientation.Vertical;
             this.trackMasterVolume.Size = new Size(22, 176);
             this.trackMasterVolume.TabIndex = 44;
-            this.trackMasterVolume.TickFrequency = 10;
+            this.trackMasterVolume.Tag = "100";
+            this.trackMasterVolume.TickFrequency = 20;
             this.trackMasterVolume.TickStyle = TickStyle.TopLeft;
             this.trackMasterVolume.Value = 100;
+            this.trackMasterVolume.ValueChanged += this.VolumeChanged;
+            this.trackMasterVolume.MouseDown += this.MouseDownJumpToValue;
             // 
             // label6
             // 
@@ -738,5 +1140,26 @@
         private TrackBar trackMasterVolume;
         private Label label6;
         private PictureBox pictureWaveL;
+        private Label label8;
+        private Label label7;
+        private Label label12;
+        private Label label11;
+        private Label label10;
+        private Label label9;
+        private Label label16;
+        private Label label15;
+        private Label label14;
+        private Label label13;
+        private Label label17;
+        private Label label18;
+        private Label label19;
+        private Label label20;
+        private Label label21;
+        private Label label22;
+        private Label label25;
+        private Label label23;
+        private Label label24;
+        private Label label26;
+        private ToolTip toolTip1;
     }
 }

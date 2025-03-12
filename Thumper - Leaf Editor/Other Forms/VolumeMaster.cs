@@ -44,6 +44,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void PlayKeyAtVolume(object sender, MouseEventArgs e)
         {
+            _vis.ClearPeaks();
             TrackBar mixer = sender as TrackBar;
             int key = int.Parse((sender as Control).Tag.ToString());
             BassMidi.BASS_MIDI_StreamEvent(MidiStream, 0, BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)mixer.Value));
@@ -59,6 +60,22 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             //these 2 show different spectrums visually while the sample plays
             pictureWaveL.Image = _vis.CreateSpectrumLinePeak(MidiStream, pictureWaveL.Width, pictureWaveL.Height, Color.Green, Color.Red, Color.Red, Properties.Settings.Default.ColorWaveformBG, 2, 1, 1, 100000, false, false, false);
+        }
+
+        private void VolumeChanged(object sender, EventArgs e)
+        {
+            TrackBar mixer = sender as TrackBar;
+            Label lblvol = mixer.Parent.Controls.Cast<Control>().First(x => x.Tag == mixer.Tag) as Label;
+            lblvol.Text = $"{mixer.Value}";
+        }
+
+        private void MouseDownJumpToValue(object sender, MouseEventArgs e)
+        {
+            TrackBar mixer = sender as TrackBar;
+            double dblValue;
+            // Jump to the clicked location
+            dblValue = ((double)e.Y / (double)mixer.Height) * (mixer.Maximum - mixer.Minimum);
+            mixer.Value = mixer.Maximum - Convert.ToInt32(dblValue);
         }
     }
 }
