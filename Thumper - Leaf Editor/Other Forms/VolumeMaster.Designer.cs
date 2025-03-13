@@ -1447,6 +1447,7 @@
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.Name = "VolumeMaster";
             this.Text = "Volume Mixer";
+            this.FormClosing += this.VolumeMaster_FormClosing;
             ((System.ComponentModel.ISupportInitialize)this.trackMix1).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar1).EndInit();
             this.panel1.ResumeLayout(false);

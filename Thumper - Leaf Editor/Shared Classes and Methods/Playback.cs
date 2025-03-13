@@ -1,4 +1,6 @@
-﻿using Un4seen.Bass;
+﻿using System.Windows.Forms;
+using System.Windows.Input;
+using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
 
 namespace Thumper_Custom_Level_Editor
@@ -159,14 +161,14 @@ namespace Thumper_Custom_Level_Editor
             beat = (beat + CallOffset) * 100;
             call *= 100;
             if (call > 0) {
-                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(key == -1 ? 100 : 50)), callkey, beat - call, 0));
+                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)Properties.Settings.Default[$"VolKey{callkey}"]), callkey, beat - call, 0));
             }
 
             if (key != -1) {
-                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, 100), key, beat, 0));
+                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)Properties.Settings.Default[$"VolKey{key}"]), key, beat, 0));
                 //bar collect also plays ring collect noise
                 if (key == 19)
-                    SequencerEvents[20].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, 100), 20, beat, 0));
+                    SequencerEvents[20].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, (byte)Properties.Settings.Default[$"VolKey{key}"]), 20, beat, 0));
             }
         }
 
@@ -290,11 +292,11 @@ namespace Thumper_Custom_Level_Editor
                         //if the sentry call event doesn't exist yet, add it (so we don't duplicate on sounds)
                         if (!EventsToAdd15.Any(x => x.tick == _event.tick - 400)) {
                             //Sentry call happens 4 beats ahead (400 ticks)
-                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, 100), 16, _event.tick - 400, 0));
+                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, (byte)Properties.Settings.Default[$"VolKey16"]), 16, _event.tick - 400, 0));
                         }
                     }
                     if (sdp.beat + length < LastBeat) {
-                        EventsToAdd16.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)15, 100), 15, (sdp.beat + length + CallOffset) * 100, 0));
+                        EventsToAdd16.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)15, (byte)Properties.Settings.Default[$"VolKey15"]), 15, (sdp.beat + length + CallOffset) * 100, 0));
                     }
                 }
             }

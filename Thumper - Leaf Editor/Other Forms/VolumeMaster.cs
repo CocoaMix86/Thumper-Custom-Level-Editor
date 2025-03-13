@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 using Un4seen.Bass.AddOn.Midi;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
@@ -30,12 +22,30 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             //load soundfont
             MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0) };
-
+            //set volume levels according to user saved settings
+            foreach (TrackBar mixer in GetAll(this, typeof(TrackBar)))
+            {
+                int key = int.Parse(mixer.Tag.ToString());
+                mixer.Value = (int)Properties.Settings.Default[$"VolKey{key}"];
+            }
+            //create midi stream to accept and live play note events
             MidiStream = BassMidi.BASS_MIDI_StreamCreate(1, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 1);
+            //start streaming midi stream
             Bass.BASS_ChannelPlay(MidiStream, true);
             _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
             _updateTimer.Start();
+        }
+
+        private void VolumeMaster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //set volume levels according to user saved settings
+            foreach (TrackBar mixer in GetAll(this, typeof(TrackBar)))
+            {
+                int key = int.Parse(mixer.Tag.ToString());
+                Properties.Settings.Default[$"VolKey{key}"] = mixer.Value;
+            }
+            Properties.Settings.Default.Save();
         }
 
         private void trackMix1_MouseDown(object sender, MouseEventArgs e)
@@ -97,11 +107,12 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             foreach (TrackBar mixer in GetAll(this, typeof(TrackBar)))
             {
                 int key = int.Parse(mixer.Tag.ToString());
-                if (key is 1 or 2 or 7 or 10 or 12)
+                if (key is 1 or 2 or 6 or 7 or 10 or 11 or 12 or 17 or 18)
                     mixer.Value = 50;
-                else
+                else if (key is not 100)
                     mixer.Value = 100;
             }
+            trackMasterVolume.Value = 100;
         }
 
         public IEnumerable<Control> GetAll(Control control, Type type)
