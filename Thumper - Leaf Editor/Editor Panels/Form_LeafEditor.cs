@@ -148,6 +148,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         public List<SaveState> UndoList = new();
+        private List<int> SelectedRows = new();
         #endregion
 
         #region EventHandlers
@@ -493,6 +494,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         SolidBrush CellPaintingPen = new SolidBrush(Color.FromArgb(60, 60, 60));
         SolidBrush CellPaintingBlack = new SolidBrush(Color.Black);
+        SolidBrush CellPaintingWhite = new SolidBrush(Color.White);
         SolidBrush CellPaintingColor = new SolidBrush(Color.Black);
         private void CellPaintFancy(DataGridViewCellPaintingEventArgs e)
         {
@@ -500,12 +502,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             Rectangle bounds = e.CellBounds;
             if (e.ColumnIndex is -1) {
+                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
                 CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.4);
                 bounds.X += 2;
                 bounds.Y += 2;
                 bounds.Width -= 4;
                 bounds.Height -= 4;
-                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
+                //if row has a selected cell, highlight it
+                if (SelectedRows.Contains(e.RowIndex))
+                {
+                    e.Graphics.FillRoundedRectangle(CellPaintingWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
+                    CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.8);
+                }
                 e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
             }
@@ -675,7 +683,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_SelectionChanged(object sender, EventArgs e)
         {
             //do nothing if the selection is inside the frozen columns
-            if (trackEditor.SelectedCells.Count == 0 || trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset < FrozenColumnOffset)
+            if (trackEditor.SelectedCells.Count == 0 || trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset < 0)
                 return;
             if (ResetRowAfterEdit && trackEditor.CurrentCell.ColumnIndex == LastColumnEdit) {
                 ResetRowAfterEdit = false;
@@ -689,6 +697,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackCopy.Enabled = enable;
             btnTrackDelete.Enabled = enable;
             btnTrackClear.Enabled = enable;
+            //
+            SelectedRows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
+                .Select(cell => cell.RowIndex)
+                .Distinct().ToList();
+            trackEditor.InvalidateColumn(0);
         }
 
         private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
