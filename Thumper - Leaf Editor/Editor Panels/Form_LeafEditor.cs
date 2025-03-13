@@ -525,13 +525,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
                 e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
             }
-            else if (e.ColumnIndex is 2) {
+            else if (e.ColumnIndex is 2)
+            {
+                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
                 bounds.X += 1;
                 bounds.Y += 1;
                 bounds.Width -= 6;
                 bounds.Height -= 2;
-                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
-                e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
+                if (SequencerObjects[e.RowIndex].friendly_lane == "lane left 2") {
+                    bounds.Height += 4;
+                    e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
+                }
+                else if (SequencerObjects[e.RowIndex].friendly_lane == "lane right 2") {
+                    bounds.Y -= 2;
+                    e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
+                    e.Graphics.FillRectangle(CellPaintingPen, new Rectangle(bounds.X, bounds.Y, bounds.Width, 5));
+                }
+                else if (SequencerObjects[e.RowIndex].friendly_lane is "lane left 1" or "lane right 1" || (SequencerObjects[e.RowIndex].expandlanes && SequencerObjects[e.RowIndex].friendly_lane is "lane center")) {
+                    bounds.Height += 3;
+                    bounds.Y -= 3;
+                    e.Graphics.FillRectangle(CellPaintingPen, bounds);
+                }
+                else
+                    e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
             }
             //e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.Border);
         }
