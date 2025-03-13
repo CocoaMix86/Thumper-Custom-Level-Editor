@@ -161,14 +161,14 @@ namespace Thumper_Custom_Level_Editor
             beat = (beat + CallOffset) * 100;
             call *= 100;
             if (call > 0) {
-                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)Properties.Settings.Default[$"VolKey{callkey}"]), callkey, beat - call, 0));
+                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(int)Properties.Settings.Default[$"VolKey{callkey}"]), callkey, beat - call, 0));
             }
 
             if (key != -1) {
-                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)Properties.Settings.Default[$"VolKey{key}"]), key, beat, 0));
+                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), key, beat, 0));
                 //bar collect also plays ring collect noise
                 if (key == 19)
-                    SequencerEvents[20].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, (byte)Properties.Settings.Default[$"VolKey{key}"]), 20, beat, 0));
+                    SequencerEvents[20].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), 20, beat, 0));
             }
         }
 

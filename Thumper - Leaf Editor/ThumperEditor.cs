@@ -1011,7 +1011,7 @@ namespace Thumper_Custom_Level_Editor
         private void btnVolumeMixer_Click(object sender, EventArgs e)
         {
             VolumeMaster volma = new VolumeMaster();
-            volma.ShowDialog();
+            volma.Show();
         }
     }
 }

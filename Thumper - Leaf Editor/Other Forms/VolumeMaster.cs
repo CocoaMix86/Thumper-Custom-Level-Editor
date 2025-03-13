@@ -12,6 +12,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         public static int MidiStream;
         BASSTimer _updateTimer = new(50);
         public Visuals _vis = new();
+        bool IsResetting;
 
         public VolumeMaster()
         {
@@ -39,13 +40,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void VolumeMaster_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //set volume levels according to user saved settings
-            foreach (TrackBar mixer in GetAll(this, typeof(TrackBar)))
-            {
-                int key = int.Parse(mixer.Tag.ToString());
-                Properties.Settings.Default[$"VolKey{key}"] = mixer.Value;
-            }
-            Properties.Settings.Default.Save();
+            SaveVolumeLevels();
         }
 
         private void trackMix1_MouseDown(object sender, MouseEventArgs e)
@@ -61,11 +56,6 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             var error = Bass.BASS_ErrorGetCode();
         }
 
-        private static uint MakeWord(byte low, byte high)
-        {
-            return ((uint)high << 8) | low;
-        }
-
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             //these 2 show different spectrums visually while the sample plays
@@ -74,9 +64,13 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void VolumeChanged(object sender, EventArgs e)
         {
+            if (IsResetting)
+                return;
             TrackBar mixer = sender as TrackBar;
             var lblvol = mixer.Parent.Controls.Cast<Control>().First(x => x.GetType() == typeof(Label) && x.Tag.ToString() == mixer.Tag.ToString());
             lblvol.Text = $"{mixer.Value}";
+
+            SaveVolumeLevels();
         }
 
         private void MouseDownJumpToValue(object sender, MouseEventArgs e)
@@ -96,7 +90,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
             //these keys are the call keys. Set to half volume by default
             //can see the full key list in Playback.cs
-            if (key is 1 or 2 or 7 or 10 or 12)
+            if (key is 1 or 2 or 6 or 7 or 10 or 11 or 12 or 17 or 18)
                 mixer.Value = 50;
             else
                 mixer.Value = 100;
@@ -104,6 +98,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void btnVolResetAll_Click(object sender, EventArgs e)
         {
+            IsResetting = true;
             foreach (TrackBar mixer in GetAll(this, typeof(TrackBar)))
             {
                 int key = int.Parse(mixer.Tag.ToString());
@@ -113,6 +108,25 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                     mixer.Value = 100;
             }
             trackMasterVolume.Value = 100;
+            IsResetting = false;
+            SaveVolumeLevels();
+        }
+
+        public void SaveVolumeLevels()
+        {
+
+            //set volume levels according to user saved settings
+            foreach (TrackBar _mixer in GetAll(this, typeof(TrackBar)))
+            {
+                int key = int.Parse(_mixer.Tag.ToString());
+                Properties.Settings.Default[$"VolKey{key}"] = _mixer.Value;
+            }
+            Properties.Settings.Default.Save();
+        }
+
+        private static uint MakeWord(byte low, byte high)
+        {
+            return ((uint)high << 8) | low;
         }
 
         public IEnumerable<Control> GetAll(Control control, Type type)
