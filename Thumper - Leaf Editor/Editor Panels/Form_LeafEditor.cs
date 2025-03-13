@@ -539,6 +539,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (SequencerObjects[e.RowIndex].friendly_lane == "lane right 2") {
                     bounds.Y -= 2;
                     e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
+                    //this rectangle is needed to square off the top of the above rounded rectangle
                     e.Graphics.FillRectangle(CellPaintingPen, new Rectangle(bounds.X, bounds.Y, bounds.Width, 5));
                 }
                 else if (SequencerObjects[e.RowIndex].friendly_lane is "lane left 1" or "lane right 1" || (SequencerObjects[e.RowIndex].expandlanes && SequencerObjects[e.RowIndex].friendly_lane is "lane center")) {
