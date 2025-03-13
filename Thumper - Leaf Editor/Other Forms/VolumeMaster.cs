@@ -24,11 +24,13 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0) };
             //set volume levels according to user saved settings
+            IsResetting = true;
             foreach (TrackBar mixer in GetAll(this, typeof(TrackBar)))
             {
                 int key = int.Parse(mixer.Tag.ToString());
                 mixer.Value = (int)Properties.Settings.Default[$"VolKey{key}"];
             }
+            IsResetting = false;
             //create midi stream to accept and live play note events
             MidiStream = BassMidi.BASS_MIDI_StreamCreate(1, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 1);
@@ -64,12 +66,17 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void VolumeChanged(object sender, EventArgs e)
         {
-            if (IsResetting)
-                return;
             TrackBar mixer = sender as TrackBar;
             var lblvol = mixer.Parent.Controls.Cast<Control>().First(x => x.GetType() == typeof(Label) && x.Tag.ToString() == mixer.Tag.ToString());
             lblvol.Text = $"{mixer.Value}";
 
+            if (mixer.Tag.ToString() == "100")
+            {
+                Bass.BASS_ChannelSetAttribute(MidiStream, BASSAttribute.BASS_ATTRIB_VOL, (float)mixer.Value / 100f);
+            }
+
+            if (IsResetting)
+                return;
             SaveVolumeLevels();
         }
 

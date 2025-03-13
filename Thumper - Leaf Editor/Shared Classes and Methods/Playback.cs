@@ -389,6 +389,7 @@ namespace Thumper_Custom_Level_Editor
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 2);
             //set ending sync
             int ee = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
+            Bass.BASS_ChannelSetAttribute(MidiStream, BASSAttribute.BASS_ATTRIB_VOL, (int)Properties.Settings.Default.VolKey100 / 100f);
             PlaybackBeat = -9;
             if (StartTime != 0) {
                 PlaybackBeat = (int)StartTime;
