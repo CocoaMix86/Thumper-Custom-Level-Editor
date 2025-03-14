@@ -27,7 +27,7 @@ namespace Thumper_Custom_Level_Editor
                 File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer.sf2", Properties.Resources.Thumper_Sequencer);
             //load soundfont
             MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
-            MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, -1, 0)};
+            MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0)};
         }
 
         ///SOUNDFONT DETAILS
@@ -331,6 +331,10 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CreateSampleSoundfont()
         {
+            //skip this if there are no samples
+            if (SamplesToPlay.Count == 0)
+                return;
+
             string path = $@"{TCLE.AppLocation}\temp\";
             string _out = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
             foreach (string sample in SamplesToPlay) {
@@ -386,7 +390,7 @@ namespace Thumper_Custom_Level_Editor
             MidiStream = BassMidi.BASS_MIDI_StreamCreateEvents(AllEvents.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             Error = Bass.BASS_ErrorGetCode();
             //apply soundfonts
-            BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, 2);
+            BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, MidiSoundFonts.Length);
             //set ending sync
             int ee = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
             Bass.BASS_ChannelSetAttribute(MidiStream, BASSAttribute.BASS_ATTRIB_VOL, (int)Properties.Settings.Default.VolKey100 / 100f);
