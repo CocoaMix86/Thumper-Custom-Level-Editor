@@ -2357,7 +2357,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
-            sfd.Filter = "Thumper Editor Lvl File (*.leaf)|*.leaf";
+            sfd.Filter = "Thumper Editor Leaf File (*.leaf)|*.leaf";
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
