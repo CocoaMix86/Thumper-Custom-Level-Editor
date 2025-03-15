@@ -62,9 +62,11 @@ namespace Thumper_Custom_Level_Editor
             for (int x = 0; x < 21; x++) {
                 // +8 for lead time
                 SequencerEvents[x] = new(Leaf.beats + CallOffset);
+                if (x != 0)
+                    SequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
             }
-            SequencerEvents[19].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 12, 19, 2, 0));
-            SequencerEvents[20].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 12, 20, 2, 0));
+            //SequencerEvents[19].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 12, 19, 2, 0));
+            //SequencerEvents[20].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 12, 20, 2, 0));
             LastBeat = Leaf.beats + CallOffset;
 
             foreach (Sequencer_Object Seq in Leaf.seq_objs)
@@ -190,7 +192,7 @@ namespace Thumper_Custom_Level_Editor
                     //if found, pitch up next sound.
                     //add the pitch events to the lists.
                     if (Pitch < 15701) {
-                        Pitch += 682;
+                        Pitch += 136;
                         EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, ComboList[x].tick - 1, 0));
                         EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, ComboList[x].tick - 1, 0));
                     }
@@ -324,6 +326,12 @@ namespace Thumper_Custom_Level_Editor
                 foreach (var listevents in SampleEvents) {
                     listevents.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), SequencerEvents.Length + SampleEvents.IndexOf(listevents), ((sdp.beat + CallOffset) * 100) - 1, 0));
                 }
+                for (int x = 1; x < SequencerEvents.Length; x++) {
+                    //skip pitch shifting thumps
+                    if (x == 8)
+                        continue;
+                    SequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), x, ((sdp.beat + CallOffset) * 100) - 1, 0));
+                }
                 //SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_SPEED, (int)(10_000 * (decimal)sdp.value), 0, (sdp.beat + CallOffset) * 100, 0));
             }
         }
@@ -452,7 +460,7 @@ namespace Thumper_Custom_Level_Editor
         private static void SyncTimer_Tick(object sender)
         {
             PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
-            PlaybackBeat = (int)(PlaybackTick / 100d) - 8;
+            PlaybackBeat = (int)(PlaybackTick / 100d) - 9;
             PlaybackSubBeat = (PlaybackTick % 100) / 100;
             //ColumnPlaybackHead++;
         }
