@@ -106,6 +106,11 @@
             this.label6 = new Label();
             this.toolTip1 = new ToolTip(this.components);
             this.btnVolResetAll = new Button();
+            this.button21 = new Button();
+            this.trackBar17 = new TrackBar();
+            this.panel8 = new Panel();
+            this.label28 = new Label();
+            this.label29 = new Label();
             ((System.ComponentModel.ISupportInitialize)this.trackMix1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar1).BeginInit();
             this.panel1.SuspendLayout();
@@ -134,6 +139,8 @@
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.pictureWaveL).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackMasterVolume).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.trackBar17).BeginInit();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // trackMix1
@@ -1329,7 +1336,7 @@
             this.panel7.Controls.Add(this.trackMasterVolume);
             this.panel7.Controls.Add(this.label6);
             this.panel7.Dock = DockStyle.Right;
-            this.panel7.Location = new Point(734, 0);
+            this.panel7.Location = new Point(829, 0);
             this.panel7.Margin = new Padding(4, 3, 4, 3);
             this.panel7.Name = "panel7";
             this.panel7.Size = new Size(160, 210);
@@ -1411,13 +1418,14 @@
             // 
             // btnVolResetAll
             // 
+            this.btnVolResetAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             this.btnVolResetAll.BackColor = Color.Black;
             this.btnVolResetAll.Cursor = Cursors.Hand;
             this.btnVolResetAll.FlatStyle = FlatStyle.Flat;
             this.btnVolResetAll.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.btnVolResetAll.ForeColor = Color.White;
             this.btnVolResetAll.Image = Properties.Resources.icon_reset_8;
-            this.btnVolResetAll.Location = new Point(694, 188);
+            this.btnVolResetAll.Location = new Point(793, 188);
             this.btnVolResetAll.Margin = new Padding(0);
             this.btnVolResetAll.Name = "btnVolResetAll";
             this.btnVolResetAll.Size = new Size(74, 21);
@@ -1429,12 +1437,92 @@
             this.btnVolResetAll.UseVisualStyleBackColor = false;
             this.btnVolResetAll.Click += this.btnVolResetAll_Click;
             // 
+            // button21
+            // 
+            this.button21.BackColor = Color.Black;
+            this.button21.Cursor = Cursors.Hand;
+            this.button21.FlatStyle = FlatStyle.Flat;
+            this.button21.Image = Properties.Resources.icon_reset_8;
+            this.button21.Location = new Point(12, 167);
+            this.button21.Margin = new Padding(0);
+            this.button21.Name = "button21";
+            this.button21.Size = new Size(12, 12);
+            this.button21.TabIndex = 106;
+            this.button21.Tag = "99";
+            this.toolTip1.SetToolTip(this.button21, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button21.UseVisualStyleBackColor = false;
+            this.button21.Click += this.btnMixerReset_Click;
+            // 
+            // trackBar17
+            // 
+            this.trackBar17.AutoSize = false;
+            this.trackBar17.Cursor = Cursors.Hand;
+            this.trackBar17.Location = new Point(20, -2);
+            this.trackBar17.Margin = new Padding(5);
+            this.trackBar17.Maximum = 120;
+            this.trackBar17.Name = "trackBar17";
+            this.trackBar17.Orientation = Orientation.Vertical;
+            this.trackBar17.Size = new Size(22, 176);
+            this.trackBar17.TabIndex = 44;
+            this.trackBar17.Tag = "99";
+            this.trackBar17.TickFrequency = 10;
+            this.trackBar17.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar17, "Master Sample volume.\r\nYou can adjust individual sample volumes\r\nIn the .samp files.");
+            this.trackBar17.Value = 100;
+            this.trackBar17.ValueChanged += this.VolumeChanged;
+            this.trackBar17.MouseDown += this.MouseDownJumpToValue;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = Color.Black;
+            this.panel8.BorderStyle = BorderStyle.Fixed3D;
+            this.panel8.Controls.Add(this.button21);
+            this.panel8.Controls.Add(this.label28);
+            this.panel8.Controls.Add(this.trackBar17);
+            this.panel8.Controls.Add(this.label29);
+            this.panel8.Dock = DockStyle.Left;
+            this.panel8.Location = new Point(726, 0);
+            this.panel8.Margin = new Padding(4, 3, 4, 3);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new Size(67, 210);
+            this.panel8.TabIndex = 156;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.BackColor = Color.FromArgb(10, 10, 10);
+            this.label28.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label28.ForeColor = Color.White;
+            this.label28.Location = new Point(20, 167);
+            this.label28.Margin = new Padding(4, 0, 4, 0);
+            this.label28.Name = "label28";
+            this.label28.Size = new Size(25, 13);
+            this.label28.TabIndex = 104;
+            this.label28.Tag = "99";
+            this.label28.Text = "100";
+            this.label28.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.BackColor = Color.FromArgb(10, 10, 10);
+            this.label29.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.label29.ForeColor = Color.White;
+            this.label29.Location = new Point(-1, 180);
+            this.label29.Margin = new Padding(4, 0, 4, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new Size(64, 13);
+            this.label29.TabIndex = 97;
+            this.label29.Text = "SAMPLES";
+            this.label29.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // VolumeMaster
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(31, 31, 31);
-            this.ClientSize = new Size(894, 210);
+            this.ClientSize = new Size(989, 210);
+            this.Controls.Add(this.panel8);
             this.Controls.Add(this.btnVolResetAll);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
@@ -1483,6 +1571,9 @@
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.pictureWaveL).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.trackMasterVolume).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.trackBar17).EndInit();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
         }
 
@@ -1565,5 +1656,10 @@
         private Button button17;
         private Button button19;
         private Button btnVolResetAll;
+        private Panel panel8;
+        private Button button21;
+        private Label label28;
+        private TrackBar trackBar17;
+        private Label label29;
     }
 }

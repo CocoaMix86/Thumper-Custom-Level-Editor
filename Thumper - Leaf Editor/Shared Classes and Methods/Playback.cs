@@ -82,8 +82,9 @@ namespace Thumper_Custom_Level_Editor
                         MidiEventsForTurns(Seq);
                     }
                 }
-                else if (Seq.obj_name == "avatar.lib" && Seq.friendly_param == "speed")
-                    MidiEventsForSpeed(Seq);
+                else if (Seq.obj_name == "avatar.lib" && Seq.friendly_param == "speed") {                    
+                   // MidiEventsForSpeed(Seq);
+                }
                 else if (Seq.obj_name.EndsWith(".samp", StringComparison.OrdinalIgnoreCase)) {
                     MidiEventPlaySample(Seq);
                 }
@@ -137,18 +138,19 @@ namespace Thumper_Custom_Level_Editor
                             break;
                     }
 
-                if (Key == 0)
-                    continue;
+                    if (Key == 0)
+                        continue;
 
-                foreach (SeqDataPoint sdp in Seq.data_points) {
-                    if (sdp.value != null)
-                        AddNoteToChannel(sdp.beat, Key, Call, CallKey);
+                    foreach (SeqDataPoint sdp in Seq.data_points) {
+                        if (sdp.value != null)
+                            AddNoteToChannel(sdp.beat, Key, Call, CallKey);
                     }
                 }
             }
             PitchShiftingBarsRings(Leaf);
             MidiEventsForSentry(Leaf);
             CreateSampleSoundfont();
+            MidiEventsForSpeed(Leaf.seq_objs.FirstOrDefault(x => x.obj_name == "avatar.lib" && x.friendly_param == "speed"));
         }
 
         /// Key and Channel are the same thing
@@ -307,9 +309,21 @@ namespace Thumper_Custom_Level_Editor
             SequencerEvents[16].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
         }
 
+        private static int SpeedPitch = 8192;
         public static void MidiEventsForSpeed(Sequencer_Object Seq)
         {
+            if (Seq == null)
+                return;
+
             foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.value != null)) {
+                SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)(Microseconds / (double)(decimal)sdp.value), 0, (sdp.beat + CallOffset) * 100, 0));
+                //log 2 speed value to get octaves, times 12 for semitones
+                double semitones = Math.Log2((double)(decimal)sdp.value) * 12;
+                //each semitone takes 136.5 units on the pitchwheel
+                double pitchadjust = semitones * 136.5;
+                foreach (var listevents in SampleEvents) {
+                    listevents.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), SequencerEvents.Length + SampleEvents.IndexOf(listevents), ((sdp.beat + CallOffset) * 100) - 1, 0));
+                }
                 //SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_SPEED, (int)(10_000 * (decimal)sdp.value), 0, (sdp.beat + CallOffset) * 100, 0));
             }
         }
@@ -320,10 +334,13 @@ namespace Thumper_Custom_Level_Editor
         {
             SamplesToPlay.Add(Seq.obj_name);
             SampleEvents.Add(new());
+            //get the sampledata to calculate the volume it should be played at
             SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == Seq.obj_name);
             int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
+            velocity = (int)(velocity * (((float)(int)Properties.Settings.Default[$"VolKey99"]) / 100f));
             if (velocity > 127)
                 velocity = 127;
+            //write each data point as a sample event
             foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.value != null)) {
                 SampleEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)SamplesToPlay.Count, (byte)velocity), SequencerEvents.Length + SamplesToPlay.Count - 1, (sdp.beat + CallOffset) * 100, 0));
             }
@@ -365,9 +382,12 @@ namespace Thumper_Custom_Level_Editor
                 SequencerEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             }
 
+            //for sample play events, insert EVENT_PROGRAM at tick 0 so it uses the correct soundfont
             for (int x = 0; x < SampleEvents.Count; x++) {
                 int channeloffset = SequencerEvents.Length + x;
-                SampleEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 1, channeloffset, 0, 0));
+                SampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 1, channeloffset, 0, 0));
+                //add pitch range as first event to the sample channel
+                SampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
                 if (SampleEvents[x].Count > 0) {
                     int tickend = SampleEvents[x].Last().tick;
                     SampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (LastBeat * 100) + 100, 0));
