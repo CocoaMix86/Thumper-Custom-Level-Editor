@@ -895,5 +895,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["VolKey99"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<string> SequencerFavorites {
+            get {
+                return ((global::System.Collections.Generic.List<string>)(this["SequencerFavorites"]));
+            }
+            set {
+                this["SequencerFavorites"] = value;
+            }
+        }
     }
 }

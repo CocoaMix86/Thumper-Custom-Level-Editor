@@ -156,6 +156,9 @@ namespace Thumper_Custom_Level_Editor
             }
             //import default colors per object
             ImportDefaultColors();
+            //import favorites
+            if (AppSettings.SequencerFavorites != null)
+                ObjectFavorites = LeafObjects.Where(x => AppSettings.SequencerFavorites.Contains(x.param_displayname)).ToHashSet();
         }
 
         public static Dictionary<string, Bitmap> ColorIcons = new();
