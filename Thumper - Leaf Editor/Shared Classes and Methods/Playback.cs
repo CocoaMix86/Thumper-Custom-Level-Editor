@@ -78,7 +78,7 @@ namespace Thumper_Custom_Level_Editor
                 int Key = 0;
                 int Call = 0;
                 int CallKey = 0;
-                if (Seq.obj_name.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase))
+                if (Seq.obj_name.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) || Seq.obj_name == "leafname")
                 {
                     if (Seq.friendly_param == "turn") {
                         MidiEventsForTurns(Seq);
