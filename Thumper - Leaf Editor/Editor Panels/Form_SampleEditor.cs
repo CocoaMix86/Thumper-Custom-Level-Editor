@@ -663,8 +663,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ulong freqid = FrequencyID.TryGetValue((int)freq, out ulong value) ? value : 8;
                 //lookup where data starts and then remove header
                 int indexofdata = TCLE.ByteSearch(wavbytes, new byte[] { (byte)'d', (byte)'a', (byte)'t', (byte)'a' });
+                int datalength = BitConverter.ToInt32(wavbytes.AsSpan(indexofdata + 4, 4));
                 indexofdata += 8;
-                wavbytes = wavbytes.AsSpan(indexofdata).ToArray();
+                wavbytes = wavbytes.AsSpan(indexofdata, datalength).ToArray();
 
                 if (!Directory.Exists($@"{TCLE.WorkingFolder}\extras"))
                     Directory.CreateDirectory($@"{TCLE.WorkingFolder}\extras");
