@@ -1218,6 +1218,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 friendly_lane = objmatch.param_path.EndsWith(".ent") ? "lane center" : "none",
                 editor_row = new DataGridViewRow()
             };
+            if (seq.obj_name == "leafname")
+                seq.obj_name = LeafProperties.FilePath.Name;
             if (seq.category == "AUDIO") {
                 int audiochannels = SequencerObjects.Count(x => x.category == "AUDIO");
                 seq.param_path = seq.param_path.Replace("x", $"{audiochannels}");
@@ -1387,6 +1389,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Lanes[x].friendly_lane = "lane center";
                     Lanes[x].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 }
+                if (Lanes[x].obj_name == "leafname")
+                    Lanes[x].obj_name = LeafProperties.FilePath.Name;
                 ChangeTrackName(Lanes[x], Properties.Settings.Default.LeafOptionShowCategory ? $"[{Lanes[x].category}] " : "");
                 TrackUpdateHighlighting(Lanes[x]);
             }
@@ -2005,6 +2009,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 editor_row = new DataGridViewRow(),
                 expandlanes = Properties.Settings.Default.LeafOptionShowLane
             };
+            if (seq.obj_name == "leafname")
+                seq.obj_name = LeafProperties.FilePath.Name;
             if (seq.category == "AUDIO") {
                 int audiochannels = SequencerObjects.Count(x => x.category == "AUDIO");
                 seq.param_path = seq.param_path.Replace("x", $"{audiochannels}");
@@ -2635,6 +2641,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 JObject s = new();
                 //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
                 if (seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
+                    seq_obj.obj_name = (string)_save["obj_name"];
+                //also adjust default leafname to the actual leaf's name
+                if (seq_obj.obj_name == "leafname")
                     seq_obj.obj_name = (string)_save["obj_name"];
                 s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
                 //write param_path or param_path_hash
