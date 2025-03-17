@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Un4seen.Bass;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -750,8 +751,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
                 return;
-            if (trackEditor.IsCurrentCellInEditMode)
+            if (trackEditor.IsCurrentCellInEditMode) {
                 CellValueChanged(e.RowIndex, e.ColumnIndex);
+            }
         }
         public void CellValueChanged(int rowindex, int columnindex, bool setnull = false)
         {
@@ -766,19 +768,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _val = TCLE.TruncateDecimal(_valtoset, 3);
                 //iterate over each cell in the selection
                 foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
+                    object _tempval = _val;
+
                     if (_cell.ReadOnly || !_cell.OwningRow.Visible)
                         continue;
+
+                    //check if value to be set works with the objects type
+                    if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitBool") {
+                        if ((decimal)_tempval is not 1 or 0)
+                            _tempval = 1m;
+                    }
+                    else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitColor") {
+                        _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+                    }
+                    else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitAction") {
+                        if ((decimal)_tempval is not 1)
+                            _tempval = 1m;
+                    }
+                    else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitInt") {
+                        _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+                    }
                     //if cell does not have the value, set it
-                    if (_cell.Value != _val) {
-                        _cell.Value = _val;
+                    if (_cell.Value != _tempval) {
+                        _cell.Value = _tempval;
                         changes = true;
                     }
 
-                    if (_val == null) {
+                    if (_tempval == null) {
                         CellValueNull(_cell);
                     }
-                    else
-                        SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _val;
+                    else if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != _tempval)
+                        SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _tempval;
 
 
                     ///TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);

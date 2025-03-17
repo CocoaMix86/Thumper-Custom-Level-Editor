@@ -151,6 +151,7 @@ namespace Thumper_Custom_Level_Editor
             get => Value;
             set {
                 if (value != null) {
+                    /*
                     //standardize values based on the type
                     if (Owner.trait_type == "kTraitBool") {
                         if ((decimal)value is not 1 or 0)
@@ -166,6 +167,7 @@ namespace Thumper_Custom_Level_Editor
                     else if (Owner.trait_type == "kTraitInt") {
                         value = TCLE.TruncateDecimal((decimal)value, 0);
                     }
+                    */
                 }
                 Value = value;
 
