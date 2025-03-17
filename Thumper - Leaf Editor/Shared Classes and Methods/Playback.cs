@@ -144,9 +144,19 @@ namespace Thumper_Custom_Level_Editor
                     if (Key == 0)
                         continue;
 
-                    foreach (SeqDataPoint sdp in Seq.data_points) {
-                        if (sdp.value != null)
-                            AddNoteToChannel(sdp.beat, Key, Call, CallKey);
+                    //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
+                    //instead, check for any beat set to 0.
+                    if (Seq.trait_type is "kTraitBool" or "kTraitAction" && Seq.defaultvalue is 1) {
+                        foreach (SeqDataPoint sdp in Seq.data_points) {
+                            if ((decimal)sdp.value != 0)
+                                AddNoteToChannel(sdp.beat, Key, Call, CallKey);
+                        }
+                    }
+                    else {
+                        foreach (SeqDataPoint sdp in Seq.data_points) {
+                            if (sdp.value != null)
+                                AddNoteToChannel(sdp.beat, Key, Call, CallKey);
+                        }
                     }
                 }
             }
