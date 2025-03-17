@@ -716,6 +716,14 @@ namespace Thumper_Custom_Level_Editor
                 fws.dockMain.Documents.First().DockHandler.Dispose();
         }
 
+        private void toolstripWindowCloseFiletype_Click(object sender, EventArgs e)
+        {
+            foreach (IDockContent document in ActiveWorkspace.dockMain.Documents.ToList()) {
+                if (document != GlobalActiveDocument && document.GetType() == GlobalActiveDocument.GetType())
+                    document.DockHandler.Dispose();
+            }
+        }
+
         private void addNewWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
