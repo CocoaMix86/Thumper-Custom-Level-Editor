@@ -198,7 +198,7 @@ namespace Thumper_Custom_Level_Editor
                 if (ComboList[x].tick - ComboList[x - 1].tick is < 800 and not 0) {
                     //if found, pitch up next sound.
                     //add the pitch events to the lists.
-                    if (Pitch < 15701) {
+                    if (Pitch < 9824) {
                         Pitch += 136;
                         EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, ComboList[x].tick - 1, 0));
                         EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, ComboList[x].tick - 1, 0));
