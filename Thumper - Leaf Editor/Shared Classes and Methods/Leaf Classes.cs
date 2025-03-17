@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -30,7 +31,30 @@ namespace Thumper_Custom_Level_Editor
         public string trait_type { get; set; }
         public List<SeqDataPoint> data_points { get; set; }
         public bool step { get; set; }
-        public float defaultvalue { get; set; }
+        public float defaultvalue
+        {
+            get => DefVal;
+            set {
+                //standardize values based on the type
+                if (this.trait_type == "kTraitBool") {
+                    if ((decimal)value is not 1 or 0)
+                        value = 1;
+                }
+                else if (this.trait_type == "kTraitColor") {
+                    value = (float)Math.Truncate(value);
+                }
+                else if (this.trait_type == "kTraitAction") {
+                    if ((decimal)value is not 1)
+                        value = 1;
+                }
+                else if (this.trait_type == "kTraitInt") {
+                    value = (float)Math.Truncate(value);
+                }
+
+                DefVal = value;
+            }
+        }
+        private float DefVal;
         public string footer { get; set; }
 
         public string category { get; set; }
