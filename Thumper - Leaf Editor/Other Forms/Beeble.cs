@@ -8,6 +8,23 @@
         public Beeble()
         {
             InitializeComponent();
+            if (!Directory.Exists($@"{TCLE.AppLocation}\beeble") || Directory.GetFiles($@"{TCLE.AppLocation}\beeble").Length == 0) {
+                Directory.CreateDirectory($@"{TCLE.AppLocation}\beeble");
+                foreach (Image img in beebleimages)
+                    img.Save($@"{TCLE.AppLocation}\beeble\beeble{beebleimages.IndexOf(img)}.png");
+            }
+            else {
+                beebleimages.Clear();
+                foreach (string img in Directory.GetFiles($@"{TCLE.AppLocation}\beeble", "*.png")) {
+                    beebleimages.Add(Image.FromFile(img));
+                }
+                foreach (string img in Directory.GetFiles($@"{TCLE.AppLocation}\beeble", "*.jpg")) {
+                    beebleimages.Add(Image.FromFile(img));
+                }
+                foreach (string img in Directory.GetFiles($@"{TCLE.AppLocation}\beeble", "*.gif")) {
+                    beebleimages.Add(Image.FromFile(img));
+                }
+            }
         }
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -36,7 +53,7 @@
                 TCLE.PlaySound("UIbeetleclickGOLD");
             }
             else {
-                this.BackgroundImage = beebleimages[i % 12];
+                this.BackgroundImage = beebleimages[i % beebleimages.Count];
             }
             timerBeeble.Start();
         }
