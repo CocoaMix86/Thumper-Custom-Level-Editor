@@ -674,6 +674,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            object _tempval = trackEditor[e.ColumnIndex, e.RowIndex].Value;
+            //check if value to be set works with the objects type
+            if (SequencerObjects[e.RowIndex].trait_type == "kTraitBool") {
+                if ((decimal)_tempval is not 1 or 0)
+                    _tempval = 1m;
+            }
+            else if (SequencerObjects[e.RowIndex].trait_type == "kTraitColor") {
+                _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+            }
+            else if (SequencerObjects[e.RowIndex].trait_type == "kTraitAction") {
+                if ((decimal)_tempval is not 1)
+                    _tempval = 1m;
+            }
+            else if (SequencerObjects[e.RowIndex].trait_type == "kTraitInt") {
+                _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+            }
+
+            trackEditor[e.ColumnIndex, e.RowIndex].Value = _tempval;
         }
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
