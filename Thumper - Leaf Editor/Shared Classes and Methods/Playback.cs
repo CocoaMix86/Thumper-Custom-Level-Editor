@@ -230,9 +230,11 @@ namespace Thumper_Custom_Level_Editor
             int IsTurning = 0;
             for (int x = 0; x < Seq.data_points.Count; x++)
             {
+                //account for default value being +-15
+                decimal valuetotest = (decimal)Seq.data_points[x].value < 0 ? Math.Min((decimal)Seq.data_points[x].value, (decimal)Seq.defaultvalue) : Math.Max((decimal)Seq.data_points[x].value, (decimal)Seq.defaultvalue);
                 if (Seq.data_points[x].value != null)
                 {
-                    if ((decimal)Seq.data_points[x].value >= 15) {
+                    if (valuetotest >= 15) {
                         if (IsTurning == -1) {
                             AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 10);
                             IsTurning = 1;
@@ -244,7 +246,7 @@ namespace Thumper_Custom_Level_Editor
                         else if (IsTurning == 0)
                             IsTurning = 1;
                     }
-                    else if ((decimal)Seq.data_points[x].value <= -15) {
+                    else if (valuetotest <= -15) {
                         if (IsTurning == 1) {
                             AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 12);
                             IsTurning = -1;
