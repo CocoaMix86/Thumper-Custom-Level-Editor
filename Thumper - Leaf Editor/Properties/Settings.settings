@@ -224,5 +224,8 @@
     <Setting Name="SequencerFavorites" Type="System.Collections.Generic.List&lt;string&gt;" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="VolKey21" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

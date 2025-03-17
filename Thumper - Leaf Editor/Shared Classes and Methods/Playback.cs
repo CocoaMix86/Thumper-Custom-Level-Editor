@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-using System.Windows.Input;
-using Un4seen.Bass;
+﻿using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
 
 namespace Thumper_Custom_Level_Editor
@@ -20,8 +18,6 @@ namespace Thumper_Custom_Level_Editor
 
         public static void Initialize()
         {
-            if (MidiSoundfontHandle != -1)
-                return;
             //write soundfont to file if it doesn't exist
             if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer.sf2"))
                 File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer.sf2", Properties.Resources.Thumper_Sequencer);
@@ -82,7 +78,7 @@ namespace Thumper_Custom_Level_Editor
                         MidiEventsForTurns(Seq);
                     }
                     else if (Seq.friendly_param is "lane left 2" or "lane left 1" or "lane center" or "lane right 1" or "lane right 2") {
-                        ;
+                        MidiEventsForLanes(Seq);
                     }
                 }
                 else if (Seq.obj_name == "avatar.lib" && Seq.friendly_param == "speed") {                    
@@ -273,7 +269,22 @@ namespace Thumper_Custom_Level_Editor
 
         public static void MidiEventsForLanes(Sequencer_Object Seq)
         {
-
+            for (int x = 1; x < 255; x++)
+            {
+                decimal? value = (decimal?)Seq.data_points[x].value;
+                if (Seq.defaultvalue == 0) {
+                    if (value is 0 or null) {
+                        if ((decimal?)Seq.data_points[x - 1].value == 1)
+                            AddNoteToChannel(Seq.data_points[x].beat, -1, 8, 21);
+                    }
+                }
+                else if (Seq.defaultvalue == 1) {
+                    if (value is 0) {
+                        if ((decimal?)Seq.data_points[x - 1].value is 1 or null)
+                            AddNoteToChannel(Seq.data_points[x].beat, -1, 8, 21);
+                    }
+                }
+            }
         }
 
         public static void MidiEventsForSentry(LeafProperties Leaf)
