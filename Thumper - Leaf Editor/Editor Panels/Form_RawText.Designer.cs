@@ -38,6 +38,7 @@
             this.textEditor.AccessibleDescription = "Textbox control";
             this.textEditor.AccessibleName = "Fast Colored Text Box";
             this.textEditor.AccessibleRole = AccessibleRole.Text;
+            this.textEditor.AutoCompleteBrackets = true;
             this.textEditor.AutoCompleteBracketsList = new char[]
     {
     '(',
@@ -63,6 +64,7 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
+            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -85,6 +87,7 @@
             this.ClientSize = new Size(284, 261);
             this.Controls.Add(this.textEditor);
             this.Icon = (Icon)resources.GetObject("$this.Icon");
+            this.KeyPreview = true;
             this.Name = "Form_RawText";
             this.Text = "Raw Editor";
             ((System.ComponentModel.ISupportInitialize)this.textEditor).EndInit();

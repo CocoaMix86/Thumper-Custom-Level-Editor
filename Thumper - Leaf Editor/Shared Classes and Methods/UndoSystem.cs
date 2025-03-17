@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 { 
@@ -58,6 +59,8 @@ namespace Thumper_Custom_Level_Editor
 
         public static void UndoFunction(int undoindex)
         {
+            if (TCLE.GlobalActiveDocument is Form_RawText)
+                return;
             TCLE.GlobalActiveDocument.GetType().GetMethod("PerformUndo").Invoke(TCLE.GlobalActiveDocument, new object[] {undoindex});
         }
 

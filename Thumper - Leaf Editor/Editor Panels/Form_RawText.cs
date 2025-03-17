@@ -121,6 +121,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             }
         }
+
+        public void Copy()
+        {
+            Clipboard.SetText(textEditor.SelectedText);
+        }
+
+        public void Cut()
+        {
+            Clipboard.SetText(textEditor.SelectedText);
+            textEditor.SelectedText = "";
+        }
         #endregion
     }
 }

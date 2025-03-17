@@ -552,6 +552,8 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripEditPaste_Click(object sender, EventArgs e)
         {
+            if (GlobalActiveDocument is Form_RawText)
+                return;
             GlobalActiveDocument.GetType().GetMethod("Paste").Invoke(GlobalActiveDocument, null);
         }
 
@@ -997,11 +999,15 @@ namespace Thumper_Custom_Level_Editor
         #region Undo System
         private void toolstripMainUndo_ButtonClick(object sender, EventArgs e)
         {
+            if (GlobalActiveDocument is Form_RawText)
+                return;
             UndoSystem.UndoFunction(1);
         }
 
         private void toolstripMainUndo_DropDownOpening(object sender, EventArgs e)
         {
+            if (GlobalActiveDocument is Form_RawText)
+                return;
             toolstripMainUndo.DropDown = UndoSystem.CreateUndoMenu((List<SaveState>)TCLE.GlobalActiveDocument.GetType().GetMethod("GetUndoList").Invoke(TCLE.GlobalActiveDocument, null));
         }
 
