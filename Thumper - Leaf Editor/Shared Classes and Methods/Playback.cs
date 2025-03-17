@@ -188,7 +188,7 @@ namespace Thumper_Custom_Level_Editor
 
             for (int x = 1; x < ComboList.Count; x++) {
                 //test if the event behind current is within 500 ticks (5 beats) of the current event
-                if (ComboList[x].tick - ComboList[x - 1].tick is < 500 and not 0) {
+                if (ComboList[x].tick - ComboList[x - 1].tick is < 800 and not 0) {
                     //if found, pitch up next sound.
                     //add the pitch events to the lists.
                     if (Pitch < 15701) {
