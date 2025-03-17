@@ -2491,7 +2491,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             {
                 for (int x = LeafProperties.beats; x < 255; x++)
                 {
-                    seq.data_points[x] = new();
+                    seq.data_points[x] = new() { beat = x, interpolation = "Linear", ease = "Ease In Out" };
                 }
             }
             //set cell zoom
