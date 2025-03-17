@@ -126,12 +126,32 @@ namespace Thumper_Custom_Level_Editor
         {
             get => Value;
             set {
-                Value = value;
                 if (Owner != null && Owner.editor_row != null) {
+                    if (value != null) {
+                        //standardize values based on the type
+                        if (Owner.trait_type == "kTraitBool") {
+                            if ((decimal)value is not 1 or 0)
+                                value = 1;
+                        }
+                        else if (Owner.trait_type == "kTraitColor") {
+                            value = TCLE.TruncateDecimal((decimal)value, 0);
+                        }
+                        else if (Owner.trait_type == "kTraitAction") {
+                            if ((decimal)value is not 1)
+                                value = 1;
+                        }
+                        else if (Owner.trait_type == "kTraitInt") {
+                            value = TCLE.TruncateDecimal((decimal)value, 0);
+                        }
+                    }
+
+                    Value = value;
+
                     if (Owner.editor_row.Cells[beat + 3].Value != Value) {
                         Owner.editor_row.Cells[beat + 3].Value = Value;
                         Owner.parent.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
                     }
+
                     Owner.isdefault = false;
                 }
             }

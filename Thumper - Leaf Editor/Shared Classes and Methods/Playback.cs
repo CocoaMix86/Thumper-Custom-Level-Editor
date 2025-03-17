@@ -58,15 +58,13 @@ namespace Thumper_Custom_Level_Editor
         {
             SamplesToPlay = new();
             SampleEvents = new();
-            SequencerEvents = new List<BASS_MIDI_EVENT>[21];
-            for (int x = 0; x < 21; x++) {
+            SequencerEvents = new List<BASS_MIDI_EVENT>[22];
+            for (int x = 0; x < SequencerEvents.Length; x++) {
                 // +8 for lead time
                 SequencerEvents[x] = new(Leaf.beats + CallOffset);
                 if (x != 0)
                     SequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
             }
-            //SequencerEvents[19].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 12, 19, 2, 0));
-            //SequencerEvents[20].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 12, 20, 2, 0));
             LastBeat = Leaf.beats + CallOffset;
 
             foreach (Sequencer_Object Seq in Leaf.seq_objs)
@@ -82,6 +80,9 @@ namespace Thumper_Custom_Level_Editor
                 {
                     if (Seq.friendly_param == "turn") {
                         MidiEventsForTurns(Seq);
+                    }
+                    else if (Seq.friendly_param is "lane left 2" or "lane left 1" or "lane center" or "lane right 1" or "lane right 2") {
+                        ;
                     }
                 }
                 else if (Seq.obj_name == "avatar.lib" && Seq.friendly_param == "speed") {                    
@@ -259,6 +260,11 @@ namespace Thumper_Custom_Level_Editor
                 AddNoteToChannel(Seq.data_points[^1].beat - 1, 13, 8, 10);
             else if (IsTurning == 1)
                 AddNoteToChannel(Seq.data_points[^1].beat - 1, 13, 8, 12);
+        }
+
+        public static void MidiEventsForLanes(Sequencer_Object Seq)
+        {
+
         }
 
         public static void MidiEventsForSentry(LeafProperties Leaf)
