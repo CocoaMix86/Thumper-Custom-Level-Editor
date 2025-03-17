@@ -19,10 +19,10 @@ namespace Thumper_Custom_Level_Editor
         public static void Initialize()
         {
             //write soundfont to file if it doesn't exist
-            if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer.sf2"))
-                File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer.sf2", Properties.Resources.Thumper_Sequencer);
+            if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2"))
+                File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2", Properties.Resources.Thumper_Sequencer);
             //load soundfont
-            MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
+            MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0)};
         }
 
