@@ -802,33 +802,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (_cell.ReadOnly || !_cell.OwningRow.Visible)
                         continue;
 
-                    //check if value to be set works with the objects type
-                    if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitBool") {
-                        if ((decimal)_tempval is not 1 or 0)
-                            _tempval = 1m;
-                    }
-                    else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitColor") {
-                        _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
-                    }
-                    else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitAction") {
-                        if ((decimal)_tempval is not 1 or 0)
-                            _tempval = 1m;
-                    }
-                    else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitInt") {
-                        _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
-                    }
-                    //if cell does not have the value, set it
-                    if (_cell.Value != _tempval) {
-                        _cell.Value = _tempval;
-                        changes = true;
-                    }
-
                     if (_tempval == null) {
                         CellValueNull(_cell);
                     }
-                    else if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != _tempval)
-                        SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _tempval;
-
+                    else {
+                        //check if value to be set works with the objects type
+                        if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitBool") {
+                            if ((decimal)_tempval is not 1 or 0)
+                                _tempval = 1m;
+                        }
+                        else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitColor") {
+                            _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+                        }
+                        else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitAction") {
+                            if ((decimal)_tempval is not 1 or 0)
+                                _tempval = 1m;
+                        }
+                        else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitInt") {
+                            _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+                        }
+                        //if cell does not have the value, set it
+                        if (_cell.Value != _tempval) {
+                            _cell.Value = _tempval;
+                            SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _tempval;
+                            changes = true;
+                        }
+                    }
+                    ///else if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != _tempval)
 
                     ///TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);
                 }
