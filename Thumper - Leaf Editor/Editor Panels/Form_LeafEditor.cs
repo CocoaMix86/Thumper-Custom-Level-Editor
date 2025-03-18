@@ -811,7 +811,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
                     }
                     else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitAction") {
-                        if ((decimal)_tempval is not 1)
+                        if ((decimal)_tempval is not 1 or 0)
                             _tempval = 1m;
                     }
                     else if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitInt") {
