@@ -16,7 +16,7 @@ Interpolate Cells;F7
 Split Leaf;F8
 Randomize Row Values;F9
 Toggle Auto-Place;F10
-Leaf Playback;Space
+Leaf Playback;F2
 Quick Value 0;D0, Control
 Quick Value 1;D1, Control
 Quick Value 2;D2, Control
