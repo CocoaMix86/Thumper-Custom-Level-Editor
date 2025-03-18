@@ -145,7 +145,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool ResetRowAfterEdit;
         private bool RightclickDown;
         private bool RightclickChanges;
-        private int PlaybackStart;
+        private int PlaybackStart = -1;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         public List<SaveState> UndoList = new();
@@ -1098,7 +1098,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            if (e.KeyData == TCLE.Keybinds["Quick Value 0"]) {
+            if (e.KeyData == TCLE.Keybinds["Leaf Playback"]) {
+                btnTrackPlayback.PerformClick();
+            }
+            else if (e.KeyData == TCLE.Keybinds["Quick Value 0"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue0;
                 CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
             }
