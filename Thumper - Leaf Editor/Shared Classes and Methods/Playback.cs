@@ -52,12 +52,14 @@ namespace Thumper_Custom_Level_Editor
         ///18= thump appear
         ///19= bar collect (rising semitons)
         ///20= ring collect (rising semitones)
+        ///21= lane end
+        ///22= turn silent (for long turns)
 
         public static void CreatePlaybackFromLeaf(LeafProperties Leaf, int BeatStop = -1)
         {
             SamplesToPlay = new();
             SampleEvents = new();
-            SequencerEvents = new List<BASS_MIDI_EVENT>[22];
+            SequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < SequencerEvents.Length; x++) {
                 // +8 for lead time
                 SequencerEvents[x] = new(Leaf.beats + CallOffset);
@@ -174,7 +176,7 @@ namespace Thumper_Custom_Level_Editor
         /// Key and Channel are the same thing
         private static int Pitch = 8192;
         private static int CallOffset = 9;
-        public static void AddNoteToChannel(int beat, int key, int call, int callkey)
+        public static void AddNoteToChannel(int beat, int key, int call, int callkey, bool mute = false)
         {
             //beats land on multiples of 100 ticks.
             //to handle offsetting calls, increase beats by 8.
@@ -185,7 +187,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
             if (key != -1) {
-                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), key, beat, 0));
+                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), key, beat, 0));
                 //bar collect also plays ring collect noise
                 if (key == 19)
                     SequencerEvents[20].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), 20, beat, 0));
@@ -200,11 +202,17 @@ namespace Thumper_Custom_Level_Editor
             List<BASS_MIDI_EVENT> EventsToAdd20 = new();
             //combine ring and bar hit events to get a single track of events, in choronological order
             List<BASS_MIDI_EVENT> ComboList = SequencerEvents[20];/*.Concat(SequencerEvents[20]).ToList();*/
+            //concat turn and thump hits, as they contribute to keeping a combo going
+            ComboList = ComboList.Concat(SequencerEvents[8]).ToList();
+            ComboList = ComboList.Concat(SequencerEvents[13]).ToList();
+            ComboList = ComboList.Concat(SequencerEvents[22]).ToList();
             ComboList.Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
 
             for (int x = 1; x < ComboList.Count; x++) {
+                if (ComboList[x].chan is 8 or 13)
+                    continue;
                 //test if the event behind current is within 500 ticks (5 beats) of the current event
-                if (ComboList[x].tick - ComboList[x - 1].tick is < 800 and not 0) {
+                if (ComboList[x].tick - ComboList[x - 1].tick is < 300 and not 0) {
                     //if found, pitch up next sound.
                     //add the pitch events to the lists.
                     if (Pitch < 9824) {
@@ -246,6 +254,9 @@ namespace Thumper_Custom_Level_Editor
                         IsTurning = 2;
                         AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 11);
                     }
+                    else if (IsTurning == 2) {
+                        AddNoteToChannel(Seq.data_points[x].beat - 1, 22, 0, 0, true);
+                    }
                     else if (IsTurning == 0)
                         IsTurning = 1;
                 }
@@ -258,6 +269,9 @@ namespace Thumper_Custom_Level_Editor
                         IsTurning = -2;
                         AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 11);
                     }
+                    else if (IsTurning == -2) {
+                        AddNoteToChannel(Seq.data_points[x].beat - 1, 22, 0, 0, true);
+                    }
                     else if (IsTurning == 0)
                         IsTurning = -1;
                 }
@@ -266,6 +280,8 @@ namespace Thumper_Custom_Level_Editor
                         AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 10);
                     else if (IsTurning == 1)
                         AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 12);
+                    else if (IsTurning is 2 or -2)
+                        AddNoteToChannel(Seq.data_points[x].beat - 1, 22, 0, 0, true);
                     IsTurning = 0;
                 }
             }
@@ -274,6 +290,8 @@ namespace Thumper_Custom_Level_Editor
                 AddNoteToChannel(Seq.data_points[^1].beat - 1, 13, 8, 10);
             else if (IsTurning == 1)
                 AddNoteToChannel(Seq.data_points[^1].beat - 1, 13, 8, 12);
+            else if (IsTurning is 2 or -2)
+                AddNoteToChannel(Seq.data_points[^1].beat - 1, 22, 0, 0, true);
         }
 
         public static void MidiEventsForLanes(Sequencer_Object Seq)
