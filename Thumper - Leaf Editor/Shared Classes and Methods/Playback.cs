@@ -6,13 +6,16 @@ namespace Thumper_Custom_Level_Editor
     public static class Playback
     {
         public static bool IsPlaying;
+        public static bool IsLooping;
+        public static double LoopingStartTime;
         public static double BPM => (double)TCLE.BPM;
         public static double Microseconds => (60 / BPM) * 1_000_000;
         public static int MidiStream = -1;
         public static int MidiSoundfontHandle = -1;
         public static BASS_MIDI_FONT[] MidiSoundFonts;
         public static List<BASS_MIDI_EVENT>[] SequencerEvents = new List<BASS_MIDI_EVENT>[20];
-        private static int LastBeat;
+        private static int LastBeatWithCall;
+        private static int LeafLastBeat;
         private static BASSError Error;
         public static System.Threading.Timer SyncTimer;
 
@@ -50,7 +53,7 @@ namespace Thumper_Custom_Level_Editor
         ///19= bar collect (rising semitons)
         ///20= ring collect (rising semitones)
 
-        public static void CreatePlaybackFromLeaf(LeafProperties Leaf)
+        public static void CreatePlaybackFromLeaf(LeafProperties Leaf, int BeatStop = -1)
         {
             SamplesToPlay = new();
             SampleEvents = new();
@@ -61,7 +64,13 @@ namespace Thumper_Custom_Level_Editor
                 if (x != 0)
                     SequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
             }
-            LastBeat = Leaf.beats + CallOffset;
+
+            LastBeatWithCall = Leaf.beats + CallOffset;
+            LeafLastBeat = Leaf.beats;
+            if (BeatStop != -1) {
+                LeafLastBeat = Math.Min(Leaf.beats, BeatStop);
+                LastBeatWithCall = Math.Min(Leaf.beats, BeatStop) + CallOffset;
+            }
 
             foreach (Sequencer_Object Seq in Leaf.seq_objs)
             {
@@ -143,13 +152,13 @@ namespace Thumper_Custom_Level_Editor
                     //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
                     //instead, check for any beat set to 0.
                     if (Seq.trait_type is "kTraitBool" or "kTraitAction" && Seq.defaultvalue is 1) {
-                        for (int beat = 0; beat < Leaf.beats; beat++) {
+                        for (int beat = 0; beat < LeafLastBeat; beat++) {
                             if (Seq.data_points[beat].value == null || (Seq.data_points[beat].value != null && (decimal)Seq.data_points[beat].value != 0))
                                 AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey);
                         }
                     }
                     else {
-                        for (int beat = 0; beat < Leaf.beats; beat++) {
+                        for (int beat = 0; beat < LeafLastBeat; beat++) {
                             if (Seq.data_points[beat].value != null)
                                 AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey);
                         }
@@ -224,7 +233,7 @@ namespace Thumper_Custom_Level_Editor
         public static void MidiEventsForTurns(Sequencer_Object Seq)
         {
             int IsTurning = 0;
-            for (int x = 0; x < Seq.data_points.Count; x++)
+            for (int x = 0; x < LeafLastBeat; x++)
             {
                 //account for default value being +-15
                 decimal valuetotest = Seq.data_points[x].value == null ? (decimal)Seq.defaultvalue : (decimal)Seq.data_points[x].value;
@@ -269,7 +278,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void MidiEventsForLanes(Sequencer_Object Seq)
         {
-            for (int x = 1; x < 255; x++)
+            for (int x = 1; x < LeafLastBeat; x++)
             {
                 decimal? value = (decimal?)Seq.data_points[x].value;
                 if (Seq.defaultvalue == 0) {
@@ -316,7 +325,7 @@ namespace Thumper_Custom_Level_Editor
                         break;
                 }
 
-                foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.value != null)) {
+                foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.beat < LeafLastBeat && x.value != null)) {
                     //find events that fall inside the sentry activation time
                     foreach (BASS_MIDI_EVENT _event in SequencerEvents[8].Where(x => x.tick > (sdp.beat*100)+400 && x.tick <= (sdp.beat + length)*100)) {
                         //if the sentry call event doesn't exist yet, add it (so we don't duplicate on sounds)
@@ -325,7 +334,7 @@ namespace Thumper_Custom_Level_Editor
                             EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, (byte)Properties.Settings.Default[$"VolKey16"]), 16, _event.tick - 400, 0));
                         }
                     }
-                    if (sdp.beat + length < LastBeat) {
+                    if (sdp.beat + length < LeafLastBeat) {
                         EventsToAdd16.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)15, (byte)Properties.Settings.Default[$"VolKey15"]), 15, (sdp.beat + length + CallOffset) * 100, 0));
                     }
                 }
@@ -343,7 +352,7 @@ namespace Thumper_Custom_Level_Editor
             if (Seq == null)
                 return;
 
-            foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.value != null)) {
+            foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.beat < LeafLastBeat && x.value != null)) {
                 SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)(Microseconds / (double)(decimal)sdp.value), 0, (sdp.beat + CallOffset) * 100, 0));
                 //log 2 speed value to get octaves, times 12 for semitones
                 double semitones = Math.Log2((double)(decimal)sdp.value) * 12;
@@ -375,7 +384,7 @@ namespace Thumper_Custom_Level_Editor
             if (velocity > 127)
                 velocity = 127;
             //write each data point as a sample event
-            foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.value != null)) {
+            foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.beat < LeafLastBeat && x.value != null)) {
                 SampleEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)SamplesToPlay.Count, (byte)velocity), SequencerEvents.Length + SamplesToPlay.Count - 1, (sdp.beat + CallOffset) * 100, 0));
             }
         }
@@ -410,7 +419,7 @@ namespace Thumper_Custom_Level_Editor
             for (int x = 0; x < SequencerEvents.Length; x++) {
                 if (SequencerEvents[x].Count > 0) {
                     int tickend = SequencerEvents[x].Last().tick;
-                    SequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, (LastBeat * 100) + 100, 0));
+                    SequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, (LastBeatWithCall * 100), 0));
                 }
                 //make sure all events are in proper tick order
                 SequencerEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
@@ -424,14 +433,15 @@ namespace Thumper_Custom_Level_Editor
                 SampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
                 if (SampleEvents[x].Count > 0) {
                     int tickend = SampleEvents[x].Last().tick;
-                    SampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (LastBeat * 100) + 100, 0));
+                    SampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (LastBeatWithCall * 100), 0));
                 }
                 //make sure all events are in proper tick order
                 SampleEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             }
         }
 
-        public static void Play(double StartTime)
+        public static int channelsync;
+        public static void Play(double StartTime, bool Loop = false)
         {
             ChannelEnd();
             //merge all channels to a single array of events
@@ -439,15 +449,28 @@ namespace Thumper_Custom_Level_Editor
             List<BASS_MIDI_EVENT> _SampleEvents = Playback.SampleEvents.SelectMany(x => x).Distinct().ToList();
             var AllEvents = _SequencerEvents.Concat(_SampleEvents).ToList();
             //the very last midi event needs to be EVENT_END
-            AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (LastBeat * 100) + 50, 0));
+            AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (LastBeatWithCall * 100), 0));
             //create the stream
             MidiStream = BassMidi.BASS_MIDI_StreamCreateEvents(AllEvents.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
+            channelsync = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
+            //setup channel for looping
+            if (Loop) {
+                Bass.BASS_ChannelFlags(MidiStream, BASSFlag.BASS_SAMPLE_LOOP, BASSFlag.BASS_SAMPLE_LOOP);
+                IsLooping = true;
+                if (StartTime != -1)
+                    LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime + 9);
+                else
+                    LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime);
+            }
+            else {
+                IsLooping = false;
+            }
             Error = Bass.BASS_ErrorGetCode();
             //apply soundfonts
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, MidiSoundFonts.Length);
             //set ending sync
-            int ee = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
             Bass.BASS_ChannelSetAttribute(MidiStream, BASSAttribute.BASS_ATTRIB_VOL, (int)Properties.Settings.Default.VolKey100 / 100f);
+            //calculate where playback should start
             PlaybackBeat = -9;
             if (StartTime != -1) {
                 PlaybackBeat = (int)StartTime;
@@ -471,12 +494,17 @@ namespace Thumper_Custom_Level_Editor
         public static SYNCPROC EndingProc = new(OnEnding);
         public static void OnEnding(int handle, int channel, int data, IntPtr user)
         {
-            IsPlaying = false;
-            SyncTimer.Dispose();
-            //SyncTimer.Change(Timeout.Infinite, Timeout.Infinite);
-            bool free1 = Bass.BASS_ChannelStop(channel);
-            bool free2 = Bass.BASS_ChannelFree(channel);
-            TCLE.alzheimer();
+            if (IsLooping) {
+                Bass.BASS_ChannelSetPosition(MidiStream, LoopingStartTime);
+            }
+            else {
+                IsPlaying = false;
+                SyncTimer.Dispose();
+                //SyncTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                bool free1 = Bass.BASS_ChannelStop(channel);
+                bool free2 = Bass.BASS_ChannelFree(channel);
+                //TCLE.alzheimer();
+            }
         }
 
         public static int BeatSubdivisions = 4;
