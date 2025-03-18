@@ -891,8 +891,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.PlaySound("UIselect");
             }
             else if (e.RowIndex == -1) {
-                if (PlaybackStart == e.ColumnIndex)
+                if (PlaybackStart == e.ColumnIndex - FrozenColumnOffset) {
                     PlaybackStart = -1;
+                    trackEditor.InvalidateColumn(e.ColumnIndex);
+                }
                 else {
                     PlaybackStart = e.ColumnIndex - FrozenColumnOffset;
                     trackEditor.Invalidate();

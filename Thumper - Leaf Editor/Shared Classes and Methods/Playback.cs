@@ -449,13 +449,13 @@ namespace Thumper_Custom_Level_Editor
             int ee = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
             Bass.BASS_ChannelSetAttribute(MidiStream, BASSAttribute.BASS_ATTRIB_VOL, (int)Properties.Settings.Default.VolKey100 / 100f);
             PlaybackBeat = -9;
-            if (StartTime != 0) {
+            if (StartTime != -1) {
                 PlaybackBeat = (int)StartTime;
                 Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (StartTime + 9));
                 Error = Bass.BASS_ErrorGetCode();
             }
             //play the sequence
-            if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat > 0 ? false : true)) {
+            if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat >= 0 ? false : true)) {
                 SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
                 IsPlaying = true;
             }

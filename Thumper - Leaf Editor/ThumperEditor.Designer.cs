@@ -116,9 +116,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -190,6 +190,7 @@
             this.toolstripTabClose = new ToolStripMenuItem();
             this.toolstripTabCloseall = new ToolStripMenuItem();
             this.toolstripTabCloseOther = new ToolStripMenuItem();
+            this.toolStripMenuItem5 = new ToolStripMenuItem();
             this.toolStripSeparator3 = new ToolStripSeparator();
             this.toolstripTabCopyPath = new ToolStripMenuItem();
             this.toolstripTabOpenFolder = new ToolStripMenuItem();
@@ -922,8 +923,9 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
+            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1045,14 +1047,6 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
-            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1074,6 +1068,14 @@
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // contextmenuWindow
             // 
             this.contextmenuWindow.BackColor = Color.FromArgb(46, 46, 46);
@@ -1081,7 +1083,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolstripWindow;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(294, 236);
+            this.contextmenuWindow.Size = new Size(294, 214);
             // 
             // toolStripMenuItem4
             // 
@@ -1739,10 +1741,10 @@
             // contextmenuTabClick
             // 
             this.contextmenuTabClick.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextmenuTabClick.Items.AddRange(new ToolStripItem[] { this.toolstripTabSave, this.toolstripTabClose, this.toolstripTabCloseall, this.toolstripTabCloseOther, this.toolStripSeparator3, this.toolstripTabCopyPath, this.toolstripTabOpenFolder, this.toolStripSeparator17, this.toolstripTabFloat, this.toolstripTabFloatAll, this.moveToWorkspaceToolStripMenuItem });
+            this.contextmenuTabClick.Items.AddRange(new ToolStripItem[] { this.toolstripTabSave, this.toolstripTabClose, this.toolstripTabCloseall, this.toolstripTabCloseOther, this.toolStripMenuItem5, this.toolStripSeparator3, this.toolstripTabCopyPath, this.toolstripTabOpenFolder, this.toolStripSeparator17, this.toolstripTabFloat, this.toolstripTabFloatAll, this.moveToWorkspaceToolStripMenuItem });
             this.contextmenuTabClick.Name = "contextmenuHelp";
             this.contextmenuTabClick.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuTabClick.Size = new Size(298, 214);
+            this.contextmenuTabClick.Size = new Size(298, 236);
             this.contextmenuTabClick.Opening += this.contextmenuTabClick_Opening;
             // 
             // toolstripTabSave
@@ -1784,6 +1786,15 @@
             this.toolstripTabCloseOther.Size = new Size(297, 22);
             this.toolstripTabCloseOther.Text = "Close Other Tabs in Workspace";
             this.toolstripTabCloseOther.Click += this.toolstripTabCloseOther_Click;
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.ForeColor = Color.White;
+            this.toolStripMenuItem5.Image = Properties.Resources.icon_remove2;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new Size(297, 22);
+            this.toolStripMenuItem5.Text = "Close Others of Same File Type";
+            this.toolStripMenuItem5.Click += this.toolstripWindowCloseFiletype_Click;
             // 
             // toolStripSeparator3
             // 
@@ -2084,6 +2095,7 @@
         private ToolStripSeparator toolStripSeparator22;
         private ToolStripButton btnVolumeMixer;
         private ToolStripMenuItem toolstripWindowCloseFiletype;
+        private ToolStripMenuItem toolStripMenuItem5;
     }
 }
 

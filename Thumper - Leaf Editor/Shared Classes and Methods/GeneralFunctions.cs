@@ -1059,6 +1059,7 @@ namespace Thumper_Custom_Level_Editor
                 Bass.BASS_ChannelGetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
+                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_VOL, (float)Properties.Settings.Default.VolKey99 / 100f);
                 Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.offset / 1000d);
                 if (_samp.wave == null) {
                     _samp.CalculateRuntime(SampChannel, false);
